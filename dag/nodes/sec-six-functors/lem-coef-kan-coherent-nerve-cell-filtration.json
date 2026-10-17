@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-category-of-spaces"
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-simplicial-interval-lifting"
  ],
  "proof": [
   {
@@ -266,5 +267,24 @@
   "group": "Q104",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-bc49e7fd1 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full: def-cbc-enhanced-diagrams-cones, def-coef-infinity-category-of-spaces, def-weil-pbc-category-colimit, lem-coef-infinity-right-prism-boundary, plus the parent's step 1. The statement is unchanged, gives exactly what the parent uses (horn filling via Kan mapping sets, outer horns allowed) and is not weakened. Step 1: the interval factorization is unique, so each degree of C[Δ^n] is a free category. Step 2: the colimit can be taken over the face poset, generator sets combine by union, and the free-category argument gives the enriched universal property. Step 3: the support predicate is right, and n=2 gives the composite point. Step 4: A=({1}×B)∪(Δ^1×∂B); simplices of the nerve are embedded and determined by their vertex sets, and B=Δ^0 is handled. Step 5: the preimage is X_0 of the prism node and X_{q+1}∩P_{ℓ-1}⊆X_q. I re-checked the prism node by hand for k=0 and k=1, and the horn counts 1,2,8,44 match the report. Steps 6 and 7: interior-vertex composites land in A, any composite with a (0,n) input pairs it with an identity, and the U-pushout universal property holds, including F0=Fn. No new nodes. The prism lemma is in the same unit, and no SGA, cycle or tool_uses are involved. The Kerodon sources are not in literature/; this is recorded as WANTED, with proof_origin agent. No changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-18555c038",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Read the item node, its 3 statement deps, the source tags (Kerodon 00LR/00LS/00LT/00LV/00TH), the snapshot module and node, and the exact declarations Pinched.rigidification/vertex/coherentSimplex, SCat/sCatCategory, Bergner.U/uHom/uCompose/uMap/bundle/bundleMap and exists_right_prism_boundary_filtration. Every clause matches: the finite ComposableArrows chain composes to rigidification.map (horn n i).ι via eqToHom; each step is an IsPushout in SCat of Sigma.map of bundleMap(uMap horn.ι) with m>=1 and j in Fin(m+1), orientation correct; common Fin(n+1) labels are fixed by Pinched.vertex at both ends and preserved by every step; hypotheses are exactly n>=2 and 0<i<n. Cannot be met trivially (N=0 or r=0 would make the inclusion an iso). Edge cases n=2 i=1, m=1 outer horns, endpoints identified, arbitrary universe u: all covered. Only node change besides lean is the added stmt_dep lem-coef-simplicial-interval-lifting (landed, no cycle). No new definitions, one sorry, docstrings ok, statement verbatim, both report sections present. nt_compile.py of the snapshot file against the side overlay: exit 0, no errors or warnings (warn.sorry off), 2.4 s."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoherentNerveCellFiltration",
+  "declaration": "SSet.exists_coherent_nerve_cell_filtration",
+  "file": "lean/Sheaf/CategoryTheory/CoherentNerveCellFiltration.lean",
+  "statement": "theorem exists_coherent_nerve_cell_filtration (n : ℕ) (i : Fin (n + 1)) (hn : 2 ≤ n) (hi : 0 < i.val) (hin : i.val < n) : ∃ (N : ℕ) (F : ComposableArrows SCat.{u} N) (e : ∀ l : Fin (N + 1), (F.obj l : Type u) ≃ Fin (n + 1)) (h₀ : F.left = Pinched.rigidification.obj (horn n i)) (hN : F.right = Pinched.rigidification.obj (Δ[n])), F.hom = eqToHom h₀ ≫ Pinched.rigidification.map (horn n i).ι ≫ eqToHom hN.symm ∧ (∀ x : (horn n i).toSSet _⦋0⦌, e 0 ((eqToHom h₀.symm).obj (Pinched.vertex (horn n i) x)) = stdSimplex.obj₀Equiv ((horn n i).ι.app (op ⦋0⦌) x)) ∧ (∀ j : Fin (n + 1), e (Fin.last N) ((eqToHom hN.symm).obj (Pinched.vertex Δ[n] (stdSimplex.obj₀Equiv.symm j))) = j) ∧ (∀ l : Fin N, ∀ x : F.obj l.castSucc, e l.succ ((F.map' l.val (l.val + 1)).obj x) = e l.castSucc x) ∧ (∀ l : Fin N, ∃ (r : ℕ) (m : Fin r → ℕ) (j : ∀ t : Fin r, Fin (m t + 1)), (∀ t : Fin r, 1 ≤ m t) ∧ ∃ (p : (∐ fun t : Fin r ↦ Bergner.bundle (Bergner.U.{u} (horn (m t) (j t)))) ⟶ F.obj l.castSucc) (q : (∐ fun t : Fin r ↦ Bergner.bundle (Bergner.U.{u} Δ[m t])) ⟶ F.obj l.succ), IsPushout (Limits.Sigma.map (C := SCat.{u}) (fun t : Fin r ↦ Bergner.bundleMap.{u} (Bergner.uMap.{u} (horn (m t) (j t)).ι))) p q (F.map' l.val (l.val + 1)))",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Finite chains and finite coproduct enriched pushouts are stated explicitly. Reuses Pinched.rigidification and Bergner.U/uMap/bundle/bundleMap; canonical vertex labels express the common object set. Added the already-landed interval-lifting node to stmt_deps for its U construction. One theorem with sorry; no new definitions or dependency repairs."
  }
 }
