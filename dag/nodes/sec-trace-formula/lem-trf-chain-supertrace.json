@@ -139,11 +139,56 @@
    }
   },
   {
-   "text": "Finally verify the duality transport, so the preceding value agrees with the specified categorical trace, not just with some scalar function. For a chain map $f:P\\to R$, its dual is $f^\\vee(\\varphi)=\\varphi f$; it commutes with the displayed dual differentials. Frame expansion gives the two identities\n$$(f\\otimes1)\\operatorname{coev}_P=(1\\otimes f^\\vee)\\operatorname{coev}_R,\\qquad \\operatorname{ev}_R(1\\otimes f)=\\operatorname{ev}_P(f^\\vee\\otimes1).$$\nFor the first, both tensors are $\\sum_{i,a,b} e^R_{i,b}\\otimes\\epsilon^P_{i,a}\\,\\epsilon^R_{i,b}(f(e^P_{i,a}))$; the second is equality after evaluation on $\\varphi\\otimes x$. Dualization preserves chain homotopy: if $f-f'=dh+hd$, the dual homotopy on a degree-$j$ functional is $\\varphi\\mapsto(-1)^j\\varphi h$, indeed $d^\\vee(t\\varphi)=\\varphi h d_P$ and $t(d^\\vee\\varphi)=\\varphi d_R h$, because each coefficient is the product of two equal powers of $-1$. Their sum is precomposition by $d_Rh+hd_P$. Thus for the $f,g$ of step 11, $Q(f^\\vee)$ and $Q(g^\\vee)$ are inverse. Write $U=Q(P)$, $V=Q(R)$, $w=Q(f):U\\to V$ and $z=Q(f^\\vee):V^\\vee\\to U^\\vee$. The two identities give\n$$\\operatorname{coev}_V=(w\\otimes z^{-1})\\operatorname{coev}_U,\\qquad \\operatorname{ev}_V=\\operatorname{ev}_U(z\\otimes w^{-1}).$$\nFor $v:U\\to U$ and $v_V=wvw^{-1}$, naturality of the symmetry, verified in step 4, makes the transported trace composite\n$$\\begin{aligned}\n\\operatorname{ev}_V c_{V,V^\\vee}(v_V\\otimes1)\\operatorname{coev}_V\n&=\\operatorname{ev}_U(z\\otimes w^{-1})(z^{-1}\\otimes w)c_{U,U^\\vee}(v\\otimes1)\\operatorname{coev}_U\\\\\n&=\\operatorname{ev}_U c_{U,U^\\vee}(v\\otimes1)\\operatorname{coev}_U.\n\\end{aligned}$$\nHere $zz^{-1}=1$ and $w^{-1}w=1$ cancel the two tensor factors. The triangle composite on $V$ becomes $w[(1_U\\otimes\\operatorname{ev}_U)(\\operatorname{coev}_U\\otimes1_U)]w^{-1}=1_V$, since the intervening dual factors are $zz^{-1}=1$. The triangle on $V^\\vee$ becomes $z^{-1}[(\\operatorname{ev}_U\\otimes1)(1\\otimes\\operatorname{coev}_U)]z=1_{V^\\vee}$, since the intervening ordinary factors are $w^{-1}w=1$. Thus both the duality maps and the trace have the required transport formulas. For the finite-coefficient rings, [def-trf-categorical-trace] specifies these very frame maps, transport formulas and the unit-Hom bijection of step 10, so its trace coincides with ours. No finite-coefficient assumption was imposed in the general calculation.",
+   "text": "Apply [lem-trf-frame-dual-mate] to $f:P\\to R$ from step 11. Steps 5–7 supply its chain-map and triangle hypotheses for both bounded projective models. It identifies precomposition $f^\\vee$ with the dual mate and gives\n$$(f\\otimes1)\\operatorname{coev}_P=(1\\otimes f^\\vee)\\operatorname{coev}_R,\\qquad \\operatorname{ev}_R(1\\otimes f)=\\operatorname{ev}_P(f^\\vee\\otimes1).$$",
+   "uses": [
+    "lem-trf-frame-dual-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
+    "place": "Step 5 and unit proof, evaluation composite unchanged when duality is transported along an isomorphism"
+   }
+  },
+  {
+   "text": "By [lem-trf-hom-dual-preserves-homotopies], applied with target $A[0]$, the homotopy inverse maps $f,g$ of step 11 dualize to homotopy inverses $f^\\vee,g^\\vee$. Homotopic maps have equal images in $D(A)$ by [def-weil-abstract-derived-category]. Thus, writing $U=Q(P)$, $V=Q(R)$ and $w=Q(f)$, the map $z=Q(f^\\vee):V^\\vee\\to U^\\vee$ is an isomorphism with inverse $Q(g^\\vee)$. This supplies the inverse dual map used in transport.",
+   "uses": [
+    "lem-trf-hom-dual-preserves-homotopies",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
+    "place": "Step 5 and unit proof, evaluation composite unchanged when duality is transported along an isomorphism"
+   }
+  },
+  {
+   "text": "Take the two identities of step 12 into $D(A)$ using the tensor comparison of step 10. Compose the coevaluation identity with $1_V\\otimes z^{-1}$ and the evaluation identity with $1_{V^\\vee}\\otimes w^{-1}$. The inverse identities give\n$$\\operatorname{coev}_V=(w\\otimes z^{-1})\\operatorname{coev}_U,\\qquad \\operatorname{ev}_V=\\operatorname{ev}_U(z\\otimes w^{-1}).$$\nApply [lem-trf-exact-pairing-iso-transport] to the dual pair of step 7: these transported maps satisfy both triangles on $V,V^\\vee$. The same lemma transports the duality to any perfect object isomorphic to $U$, without requiring a chosen chain model for that object.",
+   "uses": [
+    "lem-trf-exact-pairing-iso-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
+    "place": "Step 5 and unit proof, evaluation composite unchanged when duality is transported along an isomorphism"
+   }
+  },
+  {
+   "text": "For $v:U\\to U$ put $v_V=wvw^{-1}$. Substitute the transport formulas of step 14 into the defining trace composite of [sk-d-trace]. The symmetry naturality checked in step 4 gives\n$$\\begin{aligned}\n\\operatorname{ev}_V c_{V,V^\\vee}(v_V\\otimes1)\\operatorname{coev}_V\n&=\\operatorname{ev}_U(z\\otimes w^{-1})(z^{-1}\\otimes w)c_{U,U^\\vee}(v\\otimes1)\\operatorname{coev}_U\\\\\n&=\\operatorname{ev}_U c_{U,U^\\vee}(v\\otimes1)\\operatorname{coev}_U.\n\\end{aligned}$$\nThe second equality cancels $zz^{-1}=1$ and $w^{-1}w=1$ in the two tensor factors. This calculation also applies to any isomorphic perfect object with its transported duality.",
+   "uses": [
+    "sk-d-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
+    "place": "Step 5 and unit proof, evaluation composite unchanged when duality is transported along an isomorphism"
+   }
+  },
+  {
+   "text": "For $A=A_{E,n}$, [def-trf-categorical-trace] defines the maps by precisely the finite frames of steps 1–7, the transport formulas of step 14, and the unit-Hom bijection of step 10. Therefore the trace composite of step 15 is its specified trace, with the same scalar identification. Step 11 proves independence of the projective representative; steps 12–15 verify that this independence identifies the transported duality maps as well. No finite-coefficient hypothesis was needed in the preceding calculations.",
    "uses": [
     "def-trf-categorical-trace"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
     "place": "Step 5 and unit proof, evaluation composite unchanged when duality is transported along an isomorphism"
@@ -162,6 +207,9 @@
   "lem-weil-pbc-derived-single-fully-faithful",
   "lem-pc-ring-derived-map-representative",
   "def-weil-abstract-derived-category",
+  "lem-trf-frame-dual-mate",
+  "lem-trf-hom-dual-preserves-homotopies",
+  "lem-trf-exact-pairing-iso-transport",
   "def-trf-categorical-trace"
  ],
  "proof_origin": {
@@ -270,7 +318,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps"
@@ -300,8 +348,8 @@
   "date": "2026-10-17",
   "item": "lem-trf-chain-supertrace",
   "worker": "stage1",
-  "summary": "STATEMENT-DISPUTED: replaced the nonexistent basis of an arbitrary finite projective module by finite dual frames, canonical tensor associators for literal identities, and ambiguous constant rank by its scalar projective trace. Kept the general commutative-ring conclusion and identified its finite-coefficient specialization with the current trace definition. Wrote the frame, sign, cyclicity, homotopy, K-flat-model and homotopy-to-derived arguments explicitly. Reused existing nodes; no new nodes and no Lean changes.",
-  "blueprint": "Realizes the opening derived-model/scalar paragraph and Steps 1–5 of lem-trf-chain-supertrace.proof.md, and all of the unit sk-p-trace dual-frame/triangle/sign/transport paragraph. The current unit already uses dual frames, so no unit route change is required.",
+  "summary": "Repair of the human return on step 12: kept the statement, Lean record and first eleven steps unchanged; extracted the dual-mate comparison and total-Hom homotopy compatibility as two statement-only lemmas, and the two-isomorphism triangle transport as a Mathlib leaf. Replaced the 2400-character step by five short steps, retaining explicit symmetry naturality and inverse cancellation. Preserved the previous dual-frame/rank corrections and proof route.",
+  "blueprint": "Realizes the opening derived-model/scalar paragraph and Steps 1–5 of lem-trf-chain-supertrace.proof.md, and all of the unit sk-p-trace dual-frame/triangle/sign/transport paragraph. The current unit already uses dual frames, so no unit route change is required. Returned step 12 is now steps 12–16, refining the final two sentences of sk-p-trace.proof.md on transport and conjugacy.",
   "tool_uses": [
    {
     "node": "lem-pc-module-bounded-flat-kflat",
@@ -320,10 +368,10 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q76-4bc877df0",
-  "group": "Q76",
+  "reviewer": "NT-cc-NV-b7dca3bf0",
+  "group": "NV",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-4bc877df0 (reviewer sub-agent of L); spot-checked: Read the item, all 12 steps, the unit sk-p-trace (the record and main-20261015 sk-p-trace.proof.md), the master and main-20261015 lemma statement and proof, and the full statements of all 13 cited nodes. STATEMENT-DISPUTED is correct: over A=k×k, M=k×0 is finite projective with no basis, and the frame trace of 1_M is (1,0), not an integer multiple of 1_A. The repair with dual frames is the unit's own route and the model of def-trf-categorical-trace. The general commutative ring is kept, which thm-trf-trace-formula-e needs over R and E, and no clause is weakened. Signs checked against the cited definitions: def-sc-module-total-hom-complex gives d^∨φ=(−1)^{j+1}φd, and def-pc-tensor-complex-sheaves gives the total tensor differential. I verified (d^∨)^2=0, that the Koszul symmetry is a chain map, ev in degree −1, the coev sign −1 in P^{i+1}⊗(P^i)^* with the double-sum cancellation, both triangle identities, the sk-d-trace composite with sign (−1)^{−i^2}=(−1)^i, rectangular cyclicity, and the homotopy cancellation after j=i−1 (this fixes the source's stray minus). Step 10's flat, K-flat, derived-tensor (identity A→A) and fully-faithful statements say what is used. Step 11's Hom bijection for bounded-above projectives gives derived invariance. In step 12 I checked the dual homotopy (−1)^jφh, the coev/ev naturality by frame expansion, and the transport, which matches def-trf-categorical-trace's α-formulas. The DAG has no cycle (the definition only holds a pointer to the item), there are no duplicates, there are no new nodes, and no SGA is cited. I accept the declared tool uses lem-pc-module-bounded-flat-kflat and lem-pc-derived-tensor-second-factor-functor. Edge cases tested: zero ring, zero complex, A[0], rank one in degree ±1, contractible A→A, k×0 over k×k. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-b7dca3bf0 (reviewer sub-agent of L); spot-checked: I read the item, all 16 steps (12–16 are new) and the three new nodes in full, against the cited statements, sk-p-trace.proof.md and lem-trf-chain-supertrace.proof.md (main-20261015), and Mathlib Rigid/Basic.lean 77–95 and 590–669. Steps 12–15 carry the unit's last sentence (transport of the duality along an isomorphism, then conjugacy invariance). Step 14's transport formulas, coev_V=(w⊗z^{-1})coev_U and ev_V=ev_U(z⊗w^{-1}), are exactly def-trf-categorical-trace's formulas with w=α, z=α^∨. I recomputed step 15's symmetry naturality and cancellation. lem-trf-frame-dual-mate is true: f^∨ is a chain map; ev_P(φf⊗p)=φ(fp) with uniqueness; both coev sides equal Σ ε^R_b(f e^P_a) e^R_b⊗ε^P_a. Its chain-map/triangle hypothesis is redundant but harmless. lem-trf-hom-dual-preserves-homotopies is true: with Dφ=d_Tφ−(−1)^jφd, the two terms DS_h+S_hD sum to φ(hd+dh), checked for j=0,±1 and characteristic 2. The leaf exactPairingCongr w.symm z (Basic.lean:666, built from 608/637) gives exactly η′=(w⊗z^{-1})η and ε′=ε(z⊗w^{-1}), and its triangle fields have the node's forms. No new node restates a clause of the item. rg over dag/nodes found no duplicate (closest: lem-trf-adjoint-mate, lem-sfb-dual-tensor-adjunctions). proof_deps equals the union of step uses, every citation exists and is unmerged, and the item has no cycle. There is no SGA, the statement is unchanged and not weakened, and the accepted tool uses (bounded-flat-kflat, derived-tensor-second-factor-functor) are unchanged. One reliance remains: passing the chain triangles to D(A) uses the monoidal compatibility of step 10's K-flat comparison. Step 10 was accepted before, so this is not a new gap. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",

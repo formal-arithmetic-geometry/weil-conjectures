@@ -1,0 +1,70 @@
+{
+ "id": "lem-trf-exact-pairing-iso-transport",
+ "kind": "statement",
+ "title": "Transport of an exact pairing along two isomorphisms",
+ "statement": "Let $(\\mathcal C,\\otimes,\\mathbf1)$ be a monoidal category [def-sfb-monoidal-category]. Let $U,D$ be objects with maps $\\eta:\\mathbf1\\to U\\otimes D$ and $\\varepsilon:D\\otimes U\\to\\mathbf1$ satisfying the two triangle identities\n$$(1_U\\otimes\\varepsilon)\\circ(\\eta\\otimes1_U)=1_U,\\qquad(\\varepsilon\\otimes1_D)\\circ(1_D\\otimes\\eta)=1_D,$$\nwhere canonical associators and unitors are inserted. Given objects $V,E$ and isomorphisms $w:U\\xrightarrow{\\sim}V$ and $z:E\\xrightarrow{\\sim}D$, put\n$$\\eta'=(w\\otimes z^{-1})\\circ\\eta,\\qquad\\varepsilon'=\\varepsilon\\circ(z\\otimes w^{-1}).$$\nThen $\\eta':\\mathbf1\\to V\\otimes E$ and $\\varepsilon':E\\otimes V\\to\\mathbf1$ satisfy both triangle identities for $V,E$. No braiding is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/sk-p-trace.proof.md",
+  "place": "Final two sentences: the triangle identities remain valid when the duality maps are transported along an isomorphism."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport of evaluation and coevaluation along isomorphisms in a symmetric monoidal category preserves the triangle identities and categorical trace",
+   "results": "Hits read: CategoryTheory.exactPairingCongrLeft, CategoryTheory.exactPairingCongrRight, CategoryTheory.exactPairingCongr, CategoryTheory.leftDualIso, CategoryTheory.rightDualIso, CategoryTheory.rigidCategoryOfEquivalence, CategoryTheory.ExactPairing.evaluation_coevaluation'', CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ExactPairing",
+   "results": "Hits read: CategoryTheory.ExactPairing, CategoryTheory.HasLeftDual.mk, CategoryTheory.HasRightDual.mk, CategoryTheory.HasLeftDual.exact, CategoryTheory.HasRightDual.exact, CategoryTheory.exactPairingUnit, CategoryTheory.exactPairingCongrLeft, CategoryTheory.exactPairingCongrRight",
+   "date": "2026-10-17",
+   "verdict": "match: exactPairingCongr for triangle transport; no trace assertion needed"
+  },
+  {
+   "tool": "grep",
+   "query": "trace|exactPairingCongr",
+   "results": "Hits read: Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "match: exactPairingCongr for triangle transport; no trace assertion needed"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact pairing can be transported along isomorphisms in both objects preserving triangle identities",
+   "results": "Hits read: CategoryTheory.exactPairingCongr, CategoryTheory.exactPairingCongrRight, CategoryTheory.exactPairingCongrLeft, CategoryTheory.Functor.Monoidal.coreMonoidalTransport, CategoryTheory.Functor.Monoidal.transport, CategoryTheory.leftDualIso, CategoryTheory.Grothendieck.transportIso, CategoryTheory.exactPairingOfFaithful",
+   "date": "2026-10-17",
+   "verdict": "match: exactPairingCongr for triangle transport; no trace assertion needed"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.exactPairingCongr",
+  "file": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+  "line": 666,
+  "how": "specializes in one line: exactPairingCongr w.symm z transports ExactPairing U D to ExactPairing V E. Basic.lean:666–669 composes exactPairingCongrRight (lines 637–662, evaluation z and coevaluation z⁻¹) and exactPairingCongrLeft (lines 608–633, evaluation w⁻¹ and coevaluation w). Their displayed fields are precisely η′ and ε′ by bifunctoriality; both triangle identities are fields of ExactPairing. No categorical trace clause is asserted by this leaf."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-chain-supertrace",
+  "date": "2026-10-17",
+  "group": "NV"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-p-trace",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-chain-supertrace",
+   "place": "Final two sentences: the triangle identities remain valid when the duality maps are transported along an isomorphism.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
