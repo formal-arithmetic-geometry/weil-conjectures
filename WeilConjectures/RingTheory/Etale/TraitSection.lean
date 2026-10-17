@@ -1,0 +1,72 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.RingTheory.Etale.Abhyankar
+public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurity
+
+/-!
+# Étaleness of the normalization near a section over a trait
+
+Let `R₀` be a Noetherian integrally closed domain with fraction field `K`, `q` a prime of `R₀` of
+height one (so that `(R₀)_q` is a discrete valuation ring), `B` a smooth `R₀`-algebra with an
+`R₀`-algebra section `ε : B → R₀`, `B_K` the localization of `B` at the nonzero elements of `R₀`,
+and `L` a finite étale `B_K`-algebra which is Galois with group `G` (`G` acts by `B_K`-algebra
+automorphisms, `L` has rank `|G|` everywhere and `L^G = B_K`), with `|G|` invertible in `R₀`.
+If `L` has `|G|` distinct ring maps to `K` over `ε` (the cover is split along the section), then
+the integral closure of `B` in `L` is étale over a neighbourhood of the prime `P = ε⁻¹(q)`
+(`Algebra.exists_etale_integralClosure_of_height_eq_one`).
+
+This is the trait case of the proof of [Stacks 0EYJ], a step of blueprint
+`sbc-thm-spreading-finite-etale-galois`. Proof: adjoin a primitive `n`-th root of unity
+(`n = |G|`, an étale extension `A₁` of `A = (R₀)_q`) and an `n`-th root `t` of a uniformizer
+(`A₂ = A₁[t]/(tⁿ - π)`, a discrete valuation ring). By Abhyankar's lemma
+(`IsDiscreteValuationRing.etale_integralClosure_adjoinRoot`) the normalization `T₂` of
+`B₂ = B ⊗ A₂` in `L ⊗ K₂` is étale at the generic points of the closed fibre, hence near the
+section by purity (`RingTheory.DepthTwo.exists_etale_integralClosure_of_smooth`). Along the
+section `T₂` is split, and the `|G|` points lift to the completion `R₂^` of the local ring at the
+section; by uniqueness of the lifts they are invariant under `Γ = Gal(K₂/K₁) ≅ μₙ`. Taking
+`Γ`-invariants (`n` is invertible) gives `R₁^ ⊗ T₁ ≅ (R₁^)^{|G|}` for the normalization `T₁` of
+`B ⊗ A₁`, so `T₁`, hence the normalization of `B`, is étale near the section.
+-/
+
+@[expose] public section
+
+universe u
+
+open TensorProduct
+
+namespace Algebra
+
+variable {R₀ B Bk L : Type u} [CommRing R₀] [IsDomain R₀] [IsIntegrallyClosed R₀]
+  [IsNoetherianRing R₀]
+  [CommRing B] [Algebra R₀ B] [Algebra.Smooth R₀ B] [IsNoetherianRing B]
+  [CommRing Bk] [Algebra B Bk]
+  [IsLocalization (Algebra.algebraMapSubmonoid B (nonZeroDivisors R₀)) Bk]
+  [CommRing L] [Algebra Bk L] [Algebra B L] [IsScalarTower B Bk L]
+  [Module.Finite Bk L] [Algebra.Etale Bk L]
+
+include Bk in
+/-- **Étaleness of the normalization near a section over a trait** (trait case of the proof of
+[Stacks 0EYJ], a step of blueprint `sbc-thm-spreading-finite-etale-galois`). See the module
+docstring. -/
+theorem exists_etale_integralClosure_of_height_eq_one (ε : B →ₐ[R₀] R₀) (q : Ideal R₀)
+    [q.IsPrime] (hq : q.height = 1) (G : Type*) [Group G] [Finite G]
+    [MulSemiringAction G L] [SMulCommClass G Bk L]
+    (hfix : ∀ x : L, (∀ g : G, g • x = x) → x ∈ Set.range (algebraMap Bk L))
+    (hrank : ∀ p, Module.rankAtStalk (R := Bk) L p = Nat.card G)
+    (hG : IsUnit (Nat.card G : R₀))
+    {K : Type u} [Field K] [Algebra R₀ K] [IsFractionRing R₀ K]
+    (φ : Fin (Nat.card G) → (L →+* K))
+    (hφ : ∀ j, (φ j).comp (algebraMap B L) = (algebraMap R₀ K).comp ε.toRingHom)
+    (hφinj : Function.Injective φ) :
+    ∃ g ∉ q.comap ε, ∀ (B' L' : Type u) [CommRing B'] [CommRing L'] [Algebra B B']
+      [IsLocalization.Away g B'] [Algebra L L'] [IsLocalization.Away (algebraMap B L g) L']
+      [Algebra B' L'] [Algebra B L'] [IsScalarTower B B' L'] [IsScalarTower B L L'],
+      Algebra.Etale B' (integralClosure B' L') := by
+  sorry
+
+end Algebra
