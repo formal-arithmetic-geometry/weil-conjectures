@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-constructible-module-objects-essentially-small",
+ "kind": "statement",
+ "title": "Constructible module objects form an essentially small class",
+ "statement": "Fix a universe u, a quasi-compact locally Noetherian scheme X in universe u, and a ring object R in abelian sheaves of universe u+1 on its small pro-etale site. The class of R-module objects which admit a finite scheme stratification and locally finite presentations on pro-etale covers of every stratum [def-sfb-constructible-module; def-sfb-locally-finitely-presented] is essentially small in universe u+1: a u+1-small family of modules contains an isomorphic representative of every such module.",
+ "stmt_deps": [
+  "def-sfb-constructible-module",
+  "def-sfb-locally-finitely-presented"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Smallness of the constructible heart, replacing descent data by subobjects of products; blueprint det-brown-hypotheses-small, steps 1-10."
+ },
+ "proof": [
+  {
+   "text": "Stratifications, covers, ranks and finite presentation matrices form data in universe u+1. A structure stores these data without expanding their dependent tuple types.",
+   "uses": [
+    "def-sfb-constructible-module",
+    "def-sfb-locally-finitely-presented"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For fixed data, compose the exact pullbacks to the cover members of all strata. Their adjunctions map a realizing module M into a fixed product of right adjoints of the prescribed local cokernels. The map is monic: pull back its kernel and use the local isomorphisms to make its kernel inclusion zero and monic. Joint zero detection is proved here for abelian sheaves. Cover pullback agrees with localization restriction, whose conservativity is already proved in the source library. For the finitely many quasi-compact stratum immersions, adapt the source-library local-vanishing argument: a section killed by every pullback vanishes on weakly etale neighborhoods above every stratum; the finite quasi-compact refinement criterion makes those neighborhoods a pro-etale cover, and sheaf separatedness kills the section. The strata are Noetherian as subspaces of a Noetherian scheme, so their immersions are quasi-compact.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The category of module objects is Grothendieck abelian by the proved source-library theorem CategoryTheory.Mod.isGrothendieckAbelian, hence well-powered. The essential image of the domains of monomorphisms into each fixed product is essentially small. The small union over local data contains every constructible module. The Lean proof uses Mathlib essentiallySmall_monoOver, ObjectProperty.map_top and the small-union API.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-constructible-module",
+  "def-sfb-locally-finitely-presented"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Smallness of the constructible heart, replacing descent data by subobjects of products; blueprint det-brown-hypotheses-small, steps 1-10."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves of finitely presented modules form an essentially small category",
+   "results": "8 hits: instEssentiallySmallFGModuleCat; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation; FGModuleRepr.instSmallCategory; SheafOfModules.isFinitePresentation; SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections; SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "date": "2026-10-17",
+   "verdict": "No matching theorem. The returned size, Hom, or representation APIs are components only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.WellPowered",
+   "results": "12 hits: CategoryTheory.WellPowered; CategoryTheory.wellPowered_of_smallCategory; CategoryTheory.small_subobject; CategoryTheory.WellPowered.subobject_small; CategoryTheory.WellPowered.mk; CategoryTheory.instWellPoweredShrinkHoms; CategoryTheory.wellPowered_of_equiv; CategoryTheory.wellPowered_congr",
+   "date": "2026-10-17",
+   "verdict": "No matching theorem. The returned size, Hom, or representation APIs are components only."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Ss]mall|[Ss]mall.*constructible",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "No matching theorem. The returned size, Hom, or representation APIs are components only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible sheaves of finitely presented module objects on a Noetherian scheme form an essentially small class",
+   "results": "8 hits: SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation.mk; SheafOfModules.QuasicoherentData.IsFinitePresentation.mk; AlgebraicGeometry.Scheme.Modules; SheafOfModules.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.IsFinitePresentation.rec; SheafOfModules.mk",
+   "date": "2026-10-17",
+   "verdict": "No match: only component APIs for size, localizations, finite presentation, or representability; no theorem with these hypotheses and conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EllAdicLocalizingCohomologicalRepresentability",
+  "date": "2026-10-17",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Brown step: Smallness of the constructible heart, replacing descent data by subobjects of products; blueprint det-brown-hypotheses-small, steps 1-10.",
+   "via": [
+    "lem-sfb-adic-localizing-cohomological-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleModuleObjectsEssentiallySmall",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleModuleObjectsEssentiallySmall.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.constructibleModuleObjects_essentiallySmall",
+  "statement": "theorem constructibleModuleObjects_essentiallySmall :\n    ObjectProperty.EssentiallySmall.{u + 1} (IsConstructibleModuleObject R)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-17"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-constructible-module-objects-essentially-small",
+  "worker": "stage3",
+  "summary": "Proved local-presentation smallness, including abelian-sheaf joint zero detection from the proved source-library section-vanishing and localization-restriction arguments.",
+  "blueprint": "The essential-smallness part of the Brown step.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261017T141635-L-3672669",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261017T141635-L-3672669",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

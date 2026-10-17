@@ -1,0 +1,129 @@
+{
+ "id": "lem-sfb-cohomological-solution-set-representability",
+ "kind": "statement",
+ "title": "A cohomological functor with a small solution set is representable",
+ "statement": "Let C be a locally small pretriangulated category with Hom sets in universe v, v-indexed coproducts, and split idempotents. Let H:C^op to Ab_v be cohomological and carry these coproducts to products. Suppose there is a v-small family of pairs (A_i,a_i in H(A_i)) such that every z in H(Z) is H(f)(a_i) for some f:Z to A_i. Then the underlying set-valued functor of H is representable.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Final solution-set-to-representation step of Brown; direct kernel-killing proof inspired by Stacks Project 0A8F, with idempotent splitting."
+ },
+ "proof": [
+  {
+   "text": "Take the coproduct G of the solution objects and its universal H-element x. Every element of H(Z) is the pullback of x along some Z to G. This uses preservation of products and the universal property of the coproduct.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Form the coproduct of all kernel endomorphisms of (G,x). Its cofiber p:G to Y kills them, and exactness lifts x to y in H(Y). Choose s:Y to G pulling x back to y; then psp=p because ps-id is a kernel endomorphism.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Every kernel map f:Z to G satisfies fp=0. Indeed, lift x along the cofiber of f, map that H-element back to (G,x), and obtain q:G to G with H(q)x=x and fq=0. Since (q-id)p=0, fp=fqp=0.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The endomorphism e=ps is idempotent and kills all kernel maps. Split it into i:E to G and r:G to E. The value H(i)x induces natural bijections Hom(Z,E) to H(Z). Surjectivity follows by mapping a lift Z to G onward along r. For injectivity apply kernel annihilation to the difference of two maps followed by i and then cancel the split monomorphism i. The natural bijections give Mathlib Functor.RepresentableBy.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+  "place": "Final solution-set-to-representation step of Brown; direct kernel-killing proof inspired by Stacks Project 0A8F, with idempotent splitting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "solution.?set|weakly.?universal|perfectly.?generated",
+   "results": "6 hits: Mathlib/NumberTheory/Pell.lean; Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean; Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean; Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean; Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean; Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean",
+   "date": "2026-10-17",
+   "verdict": "No matching theorem. The returned size, Hom, or representation APIs are components only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.RepresentableBy",
+   "results": "12 hits: CategoryTheory.Functor.RepresentableBy; CategoryTheory.Functor.RepresentableBy.isRepresentable; CategoryTheory.Functor.representableBy; CategoryTheory.Functor.IsRepresentable.has_representation; CategoryTheory.Functor.IsRepresentable.mk; CategoryTheory.Functor.RepresentableBy.ofIsoObj; CategoryTheory.Functor.RepresentableBy.uniqueUpToIso; CategoryTheory.Functor.RepresentableBy.equivOfIsoObj",
+   "date": "2026-10-17",
+   "verdict": "No matching theorem. The returned size, Hom, or representation APIs are components only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cohomological functor with a small solution set that takes coproducts to products is representable",
+   "results": "8 hits: CategoryTheory.RepresentablyCoflat; HomologicalComplex.instIsCorepresentableCompEvalObjOppositeFunctorTypeCoyonedaOp; HomologicalComplex.evalCompCoyonedaCorepresentable; HomologicalComplex.evalCompCoyonedaCorepresentableBySingle; CategoryTheory.hasExt_of_enoughInjectives; CochainComplex.IsKProjective; CategoryTheory.projective_of_preservesFiniteColimits_preadditiveCoyonedaObj; CategoryTheory.hasExt_of_enoughProjectives",
+   "date": "2026-10-17",
+   "verdict": "No matching theorem. The returned size, Hom, or representation APIs are components only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cohomological functor on an idempotent complete triangulated category with coproducts and a small solution set is representable",
+   "results": "8 hits: CategoryTheory.Functor.IsRepresentable.mk; CategoryTheory.Functor.IsRepresentable.iff_exists_isRepresentedBy; CategoryTheory.Functor.IsRepresentable; CategoryTheory.Functor.IsRepresentedBy.mk; CategoryTheory.Functor.RepresentableBy.isRepresentedBy; CategoryTheory.Functor.IsRepresentedBy; CategoryTheory.Functor.RepresentableBy.mk; CategoryTheory.Functor.IsRepresentedBy.rec",
+   "date": "2026-10-17",
+   "verdict": "No match: only component APIs for size, localizations, finite presentation, or representability; no theorem with these hypotheses and conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EllAdicLocalizingCohomologicalRepresentability",
+  "date": "2026-10-17",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Brown step: Final solution-set-to-representation step of Brown; direct kernel-killing proof inspired by Stacks Project 0A8F, with idempotent splitting.",
+   "via": [
+    "lem-sfb-adic-localizing-cohomological-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CohomologicalSolutionSetRepresentability",
+  "file": "lean/Sheaf/CategoryTheory/CohomologicalSolutionSetRepresentability.lean",
+  "declaration": "CategoryTheory.cohomological_isRepresentable_of_solutionSet",
+  "statement": "theorem cohomological_isRepresentable_of_solutionSet\n    (H : Cᵒᵖ ⥤ AddCommGrpCat.{v}) [H.IsHomological]\n    (hH : ∀ I : Type v, PreservesLimitsOfShape (Discrete I) H)\n    (hsol : ∃ (I : Type v) (A : I → C) (a : ∀ i, H.obj (op (A i))),\n      ∀ (Z : C) (z : H.obj (op Z)), ∃ (i : I) (f : Z ⟶ A i), H.map f.op (a i) = z) :\n    (H ⋙ forget AddCommGrpCat).IsRepresentable",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261017T141635-L-3672669",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261017T141635-L-3672669",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
