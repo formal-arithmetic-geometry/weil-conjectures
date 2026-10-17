@@ -518,10 +518,10 @@ the smooth purity orientation), and `K` perfect over `Λ_X`. Then the derived Po
 is perfect: its adjoint `RΓ(X, K^∨(d))[2d] ⟶ RΓ_c(X, K)^∨` is an isomorphism of the point
 category `D(Spec k_ét, Λ)`.
 
-isomorphisms at the point
-(`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_isSepClosed`),
-isomorphisms at the point (`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_isSepClosed`),
-and it holds there for every coefficient ring, the `Λ_s[r]` being dualizable
+It suffices that the projection formula holds at the shifted units `Λ_s[r]` of the point, so
+that the adjoint is detected by isomorphisms at the point
+(`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_isSepClosed`), and it holds
+there for every coefficient ring, the `Λ_s[r]` being dualizable
 (`AlgebraicGeometry.Etale.hasProjectionFormula_of_isDualizable`). So, unlike
 `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`, no finiteness of `Λ` is used: at
 `Λ = 𝒪_E` the only inputs are the right adjoint `Ra^!` and the purity isomorphism `γ` of the
