@@ -191,35 +191,6 @@ theorem AdicSheaf.isZero_of_isZero_adicUpperStar_of_isCompl
   AdicSheaf.isZero_of_isZero_X (isZero_of_isZero_upperStar_of_isCompl i j hij F.X
     ((AdicSheaf.forget Z).map_isZero hi) ((AdicSheaf.forget U).map_isZero hj))
 
-/-- Blueprint `lem-exc-proetale-closed-exact` for `ℓ`-adic sheaves: for a closed immersion `i`
-with quasi-compact open complement `j`, the pushforward `i_*` of sheaves of modules over the
-constant `ℓ`-adic sheaves is exact, as it is on the underlying sheaves
-(`AlgebraicGeometry.ProEtale.preservesFiniteColimits_lowerStar_of_isCompl`). -/
-theorem preservesFiniteColimits_adicLowerStar_of_isCompl
-    (hij : IsCompl (Set.range i.base) (Set.range j.base)) :
-    PreservesFiniteColimits (i)_*ᵃ[l] :=
-  have := preservesFiniteColimits_lowerStar_of_isCompl (R := ULift.{u + 1} (PadicAlgCl l)) i j hij
-  have : PreservesFiniteColimits ((i)_*ᵃ[l] ⋙ AdicSheaf.forget X) :=
-    inferInstanceAs (PreservesFiniteColimits (AdicSheaf.forget Z ⋙ (i)_*[WeilCoefficients.{u} l]))
-  preservesFiniteColimits_of_reflects_of_preserves _ (AdicSheaf.forget X)
-
-/-- Blueprint `lem-exc-proetale-closed-essential-image` for `ℓ`-adic sheaves: for a closed
-immersion `i` with quasi-compact open complement `j` and a sheaf `F` of `ℚ̄_ℓ,X`-modules with
-`j^* F = 0`, the unit `F ⟶ i_* i^* F` is an isomorphism. Its underlying map is the unit on the
-underlying sheaves
-(`AlgebraicGeometry.ProEtale.isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl`). -/
-theorem isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isCompl
-    (hij : IsCompl (Set.range i.base) (Set.range j.base)) (F : AdicSheaf l X)
-    (hF : IsZero ((j)^*ᵃ[l].obj F)) :
-    IsIso ((adicUpperStarLowerStarAdjunction l i).unit.app F) := by
-  have : IsIso ((adicUpperStarLowerStarAdjunction l i).unit.app F).hom := by
-    erw [adicUpperStarLowerStarAdjunction, Adjunction.modAdjunction_unit_app_hom]
-    exact isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl i j hij F.X
-      ((AdicSheaf.forget U).map_isZero hF)
-  have : IsIso ((AdicSheaf.forget X).map ((adicUpperStarLowerStarAdjunction l i).unit.app F)) :=
-    this
-  exact isIso_of_reflects_iso _ (AdicSheaf.forget X)
-
 /-- Blueprint `lem-exc-proetale-closed-essential-image` for `ℓ`-adic sheaves: a sheaf `F` of
 `ℚ̄_ℓ,X`-modules lies in the essential image of `i_*` if and only if `j^* F = 0`. -/
 theorem adicLowerStar_essImage_iff_of_isCompl
