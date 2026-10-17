@@ -1,0 +1,102 @@
+{
+ "id": "def-coef-enriched-coend",
+ "kind": "definition",
+ "title": "Enriched coend of simplicial modules",
+ "status": "split",
+ "statement": "Let $A$ be a small simplicial category, let $V:A^{\\mathrm{op}}\\to\\mathsf{sSet}$ be a right enriched module and let $H:A\\to\\mathsf{sSet}$ be a left enriched module. Define the enriched coend $V\\otimes_A H$ as the multicoequalizer of the two action maps from $V(b)\\times A(a,b)\\times H(a)$ to the coproduct of $V(a)\\times H(a)$ over all objects $a,b$ of $A$.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Appendix A.3.3.5, printed p. 871: the enriched coend formula."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "enriched coend of a right and left simplicial module as a multicoequalizer",
+   "results": "No exact declaration returned; hits concern ordinary enriched functors and model-category homotopy categories, not the balanced coend construction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coend\" \"EnrichedFunctor\" \"SSet\"",
+   "results": "0 exact hits for a simplicial enriched coend; Mathlib has multicoequalizers but no this module construction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coend|Coend|enrichedCoend in Mathlib, WeilConjectures and lean/Sheaf",
+   "results": "Mathlib has generic multicoequalizer/coend infrastructure; WeilConjectures and lean/Sheaf contain unrelated explicit bar and degreewise coends. No declaration of this balanced simplicial module coend.",
+   "date": "2026-10-17",
+   "verdict": "no existing notion"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-enriched-coend-homotopy-invariance",
+  "date": "2026-10-17",
+  "group": "NJ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the enriched coend construction underlying homotopy invariance of one projectively cofibrant variable.",
+   "via": [
+    "lem-coef-enriched-coend-homotopy-invariance",
+    "lem-coef-space-geometric-descent",
+    "lem-coef-algebroid-completion",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnrichedCoend",
+  "declaration": "CategoryTheory.enrichedCoend",
+  "declarations": [
+   "CategoryTheory.enrichedCoendIndex"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnrichedCoend.lean",
+  "statement": "def enrichedCoend {A : Type u} [Category.{u} A] [SimplicialCategory A] (V : EnrichedFunctor SSet.{u} Aᵒᵖ SSet) (H : EnrichedFunctor SSet.{u} A SSet) : SSet.{u}",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "stmt_deps": [],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-33507bc3f",
+  "group": "NJ",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-33507bc3f",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Delivered invariance clauses omitted the node's hypotheses 'H projectively cofibrant' / 'V projectively cofibrant' (H3; false as stated: A=BG, H=*, EG->* gives BG->*). Fix: complete replacement EnrichedCoendHomotopyInvariance.lean adding CategoryTheory.EnrichedProjectivelyCofibrant m F (F cofibrant in some ProjectiveSimplicialModelStructure over the Kan-Quillen m; choice-independent since all such P share objectwise trivial fibrations), adding it as a hypothesis to both clauses; lean-record.json adds the declaration; report.md gains a maintainer-fix section. Everything else checked: coend multicoequalizer is real with correct action maps and variance; cellular characterization for A and Aop with all b and k>=0 (single-generator pushouts give the same class); Kan-Quillen m pinned uniquely; single universe u; one sorry; source/blueprint docstrings present. nt_compile: delivered and fixed both rc 0 and clean; negative control errors."
+ }
+}

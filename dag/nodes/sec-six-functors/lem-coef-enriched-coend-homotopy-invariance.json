@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-simplicial-projective-model-calculus"
+  "lem-coef-simplicial-projective-model-calculus",
+  "def-coef-enriched-coend"
  ],
  "proof": [
   {
@@ -272,5 +273,29 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-c3b202e32 (reviewer sub-agent of L); spot-checked: I read the item, its 10 steps and every cited statement in full. Source: I fetched HTT and read printed pp. 870-871. Prop. A.3.3.2 gives the projective combinatorial model structure on A^C, and Rem. A.3.3.5 gives the free generators F^C_A(D)=A⊗Map_C(C,D). The coend-invariance clauses are correctly marked as agent-written. The statement is true and keeps the needed cofibrancy hypothesis: for A=BG with a trivial point module, V↦V/G is not invariant. The coefficient category is sSet with the Kan-Quillen model structure throughout, and nothing is weakened. Step 1: by adjunction, I_B^□ is exactly the objectwise trivial fibrations (boundary test including n=0). Step 2: the cellular factorization and split ps=1 give one direction; the explicit LLP of cell maps plus closure under retracts gives the other. Steps 3-4 are elementary colimit and co-Yoneda calculations ([z,f,k]↦(Z(f)z,k)), and I checked the variance. Step 5: Brown split factorization (all simplicial sets are cofibrant) and the pushout-product with ∅→K make K×i and K×s anodyne, so K×f is weak, with no fibrancy needed. Step 6: coproducts preserve weak homotopy equivalences via the realization quotient (acceptable as elementary). Step 7: the gluing lemma's mono leg is applied correctly to ∐Z(b)×∂Δ^k→∐Z(b)×Δ^k. Step 8: the directed-colimit clause applies to the predecessors of a limit ordinal. Step 9: arrow retract. Step 10: factor swap over A^op. proof_deps equals the union of the uses. Every cited statement is in unit sk-prop-sf-biduality-general except a definition node, so no tool_uses are needed. There is no cycle (213 ancestors traversed) and no duplicate in the DAG (searched coend, projectively cofibrant and ⊗_A). Step 4 of the parent lem-coef-space-geometric-descent uses exactly the stated clauses. There are no new nodes and no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-33507bc3f",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Delivered invariance clauses omitted the node's hypotheses 'H projectively cofibrant' / 'V projectively cofibrant' (H3; false as stated: A=BG, H=*, EG->* gives BG->*). Fix: complete replacement EnrichedCoendHomotopyInvariance.lean adding CategoryTheory.EnrichedProjectivelyCofibrant m F (F cofibrant in some ProjectiveSimplicialModelStructure over the Kan-Quillen m; choice-independent since all such P share objectwise trivial fibrations), adding it as a hypothesis to both clauses; lean-record.json adds the declaration; report.md gains a maintainer-fix section. Everything else checked: coend multicoequalizer is real with correct action maps and variance; cellular characterization for A and Aop with all b and k>=0 (single-generator pushouts give the same class); Kan-Quillen m pinned uniquely; single universe u; one sorry; source/blueprint docstrings present. nt_compile: delivered and fixed both rc 0 and clean; negative control errors."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnrichedCoendHomotopyInvariance",
+  "declaration": "CategoryTheory.enriched_coend_homotopy_invariance",
+  "declarations": [
+   "CategoryTheory.enrichedFreeBoundaryMaps",
+   "CategoryTheory.enrichedProjectiveCellCharacterization",
+   "CategoryTheory.EnrichedProjectivelyCofibrant"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnrichedCoendHomotopyInvariance.lean",
+  "statement": "theorem enriched_coend_homotopy_invariance : ∃ m : ModelCategory SSet.{u}, m.categoryWithFibrations = (inferInstance : CategoryWithFibrations SSet.{u}) ∧ m.categoryWithCofibrations = (inferInstance : CategoryWithCofibrations SSet.{u}) ∧ m.categoryWithWeakEquivalences = SSet.KanQuillen.weakEquivalenceStructure ∧ ∀ (A : Type u) [Category.{u} A] [SimplicialCategory A], (∀ (E : SimplicialDiagramEnrichment A SSet) (T : SimplicialTensorCotensor SSet) (P : @ProjectiveSimplicialModelStructure A SSet inferInstance inferInstance inferInstance m inferInstance T E) (F : E.Diagrams), ∃ hI : HasInitial E.Diagrams, enrichedProjectiveCellCharacterization E T m P F hI) ∧ (∀ (E : SimplicialDiagramEnrichment Aᵒᵖ SSet) (T : SimplicialTensorCotensor SSet) (P : @ProjectiveSimplicialModelStructure Aᵒᵖ SSet inferInstance inferInstance inferInstance m inferInstance T E) (F : E.Diagrams), ∃ hI : HasInitial E.Diagrams, enrichedProjectiveCellCharacterization E T m P F hI) ∧ (∀ (V V' : EnrichedFunctor SSet.{u} Aᵒᵖ SSet) (H : EnrichedFunctor SSet.{u} A SSet) (f : V ⟶ V'), EnrichedProjectivelyCofibrant m H → (∀ (a : A), SSet.Enhanced.IsWeakHomotopyEquivalence ((eHomEquiv SSet).symm (ForgetEnrichment.homTo SSet (f.out.app (op a))))) → ∃ (g : enrichedCoend V H ⟶ enrichedCoend V' H), (∀ (a : A), Multicoequalizer.π (enrichedCoendIndex V H) a ≫ g = ((eHomEquiv SSet).symm (ForgetEnrichment.homTo SSet (f.out.app (op a))) ⊗ₘ 𝟙 (H.obj a)) ≫ Multicoequalizer.π (enrichedCoendIndex V' H) a) ∧ SSet.Enhanced.IsWeakHomotopyEquivalence g) ∧ (∀ (V : EnrichedFunctor SSet.{u} Aᵒᵖ SSet) (H H' : EnrichedFunctor SSet.{u} A SSet) (f : H ⟶ H'), EnrichedProjectivelyCofibrant m V → (∀ (a : A), SSet.Enhanced.IsWeakHomotopyEquivalence ((eHomEquiv SSet).symm (ForgetEnrichment.homTo SSet (f.out.app a)))) → ∃ (g : enrichedCoend V H ⟶ enrichedCoend V H'), (∀ (a : A), Multicoequalizer.π (enrichedCoendIndex V H) a ≫ g = (𝟙 (V.obj (op a)) ⊗ₘ (eHomEquiv SSet).symm (ForgetEnrichment.homTo SSet (f.out.app a))) ≫ Multicoequalizer.π (enrichedCoendIndex V H') a) ∧ SSet.Enhanced.IsWeakHomotopyEquivalence g)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-33507bc3f"
  }
 }

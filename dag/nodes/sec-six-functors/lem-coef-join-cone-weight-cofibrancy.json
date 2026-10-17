@@ -9,7 +9,10 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-pinched-cube-latching"
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-unmarked-straightening-quillen",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-right-straightening-fiber-comparison"
  ],
  "proof": [
   {
@@ -208,5 +211,40 @@
   "group": "Q51",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-afa7be592 (reviewer sub-agent of L); spot-checked: I read the item and its six steps, the new node lem-coef-coherent-realization-relative-cells, and the statements of the cited nodes (def-cbc-enhanced-diagrams-cones, lem-coef-pinched-cube-latching, lem-coef-join-boundary-cubical-extension), all in full. I also read the parent's step that uses the item (lem-coef-space-geometric-descent step 2) and unit sk-prop-sf-biduality-general. I could not read the cited Riehl-Verity source: it is not archived and network access is blocked on this machine. So the source places and the claimed typo in Lemma 5.2.9 are not checked. The delivery already marks the proof as written by an agent (proof_origin.by=agent) and has a WANTED line, and I checked every step of the mathematics independently. New node: true (the relative-computad cell structure; injectivity on mapping sets also follows from bead-normal-form). It is statement-only and self-contained, with the searches recorded and the blueprint from/via fields correct. Small cases checked: X empty and Y=Delta^0; boundary of Delta^1 in Delta^1; boundary of Delta^2 in Delta^2 (one 1-cell); the horn Lambda^2_1 in Delta^2 (a 0-cell, then a 1-cell); X=Y. It is distinct from bead-normal-form, kan-coherent-nerve-cell-filtration, coherent-fixed-vertex-cofibrations (only a lifting property), fixed-object-simplicial-free-calculus, infinity-monomorphism-boundary-cells and cone-boundary-projective-cells, and it does not restate a clause of the item. Item: statement unchanged and variance correct; checked on K empty, a point and Delta^1. Step 1: the join inclusion is injective and bijective on vertices, and D_0 is 1 plus A. Step 2: the join node gives the full old part, D(b,b)=Delta^0 and D(a,b) empty, and with the new-top-simplex clause every cell has endpoints (b,a), including loop attaching maps. Steps 3 and 4: the objectwise pushout and the free-cell Yoneda bijection, with its inverse, are written out. Step 5: the limit stage at omega is continuous and V_omega=W^-. Step 6: taking opposites keeps the U(T) cell shapes and gives W^+ acting by precomposition on A^op. The route stays inside the unit, there are no tool uses or SGA citations, and no target is involved. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-21acb7e2d",
+  "group": "Q14",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: A=rigidification.obj K for any K:SSet.{u}; b and t are the new Δ⁰ vertices via orderedJoinInl/Inr; W⁻ is the restricted enriched representable; W⁺ is on Aᵒᵖ with precomposition action through the enriched opposite; arrows are full unit-graded enriched transformations (DiagramHom); RetractArrow f g has f retract of g; RelativeCellComplex over J:Type u with limit continuity and Type u coproduct indices; BoundaryCell fixes objects B(a,-)⊗∂Δ[r]→B(a,-)⊗Δ[r], free actions and the map 𝟙⊗ι; r=0 and K=∅ are covered; no Kan/finiteness hypothesis. Defs non-hollow (law obligations are named sorry theorems), docstrings complete, stmt_deps gained only landed nodes, lean.statement verbatim. nt_compile clean on the delivered and the fixed module. FIX: added the rule-7 import of the stated proof dependency Sheaf.AlgebraicTopology.JoinBoundaryCubicalExtension (landed e8e170c1da before base ed6759533e) and closed an unclosed backtick in the leftConeWeight docstring; signature and record unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.JoinConeWeightCofibrancy",
+  "declaration": "SSet.Enhanced.join_cone_weight_cofibrancy",
+  "declarations": [
+   "SSet.Enhanced.emptySSet",
+   "SSet.Enhanced.enrichedRepresentableMap",
+   "SSet.Enhanced.enrichedRepresentable_laws",
+   "SSet.Enhanced.enrichedRepresentable",
+   "SSet.Enhanced.restrictedRightWeightMap",
+   "SSet.Enhanced.restrictedRightWeight_laws",
+   "SSet.Enhanced.restrictedRightWeight",
+   "SSet.Enhanced.freeWeightAction",
+   "SSet.Enhanced.BoundaryCell",
+   "SSet.Enhanced.IsProjectivelyCofibrantWeight",
+   "SSet.Enhanced.leftConeWeight",
+   "SSet.Enhanced.rightConeWeight",
+   "SSet.Enhanced.join_cone_weight_cofibrancy"
+  ],
+  "file": "lean/Sheaf/SixFunctors/JoinConeWeightCofibrancy.lean",
+  "statement": "theorem join_cone_weight_cofibrancy : ∀ (K : SSet.{u}), IsProjectivelyCofibrantWeight (B := PinchedCube.rigidification.obj K) (leftConeWeight K) ∧ IsProjectivelyCofibrantWeight (B := (PinchedCube.rigidification.obj K)ᵒᵖ) (rightConeWeight K)",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing unit-graded enriched Diagram category for all cell pushouts and retractions. Free cells are normalized on object values, full composition actions and the canonical boundary inclusion; coproducts are small. The two helper law theorems are the unit/associativity obligations in the node's composition-defined enriched weights, with complete proof docstrings. No stage-1 statement correction.",
+  "fixed_by": "NT-stage2-cc-21acb7e2d"
  }
 }
