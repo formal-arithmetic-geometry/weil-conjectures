@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.BaseChangeField
+public import WeilConjectures.WeilSheaf.BaseChangeField.Cohomology
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.ZetaLinearAlgebra.TraceCup
@@ -133,7 +134,8 @@ theorem exists_linearEquiv_cohomology_baseChangeField
         ((adicConstant k₀ l X).cohomology i).carrier,
       ∀ x, e (((adicConstant k₀' l (X.baseChangeField k₀ k₀')).cohomology i).frobenius x) =
         (((adicConstant k₀ l X).cohomology i).frobeniusEnd ^ Module.finrank k₀ k₀') (e x) :=
-  sorry
+  haveI := fact_ringChar_ne_of_algebra (l := l) k₀ k₀'
+  exists_linearEquiv_cohomology_adicConstant_baseChangeField i
 
 end Ingredients
 

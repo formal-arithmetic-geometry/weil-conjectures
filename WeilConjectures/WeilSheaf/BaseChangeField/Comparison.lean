@@ -218,7 +218,8 @@ theorem lowerStar_obj_frobeniusPowIso (K : ProEtaleWeilSheaf k₀ l X) (m : ℕ)
   induction m with
   | zero =>
     ext1
-    rw [frobeniusPowIso_zero _ (by rw [pow_zero]; rfl), frobeniusPowIso_zero _ (by rw [pow_zero]; rfl)]
+    rw [frobeniusPowIso_zero _ (by rw [pow_zero]; rfl),
+      frobeniusPowIso_zero _ (by rw [pow_zero]; rfl)]
     simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
     exact (adicLowerStarSquareIso_id _ _ _ (by rw [pow_zero]; rfl) (by rw [pow_zero]; rfl) _
       K.carrier).symm
@@ -230,7 +231,8 @@ theorem lowerStar_obj_frobeniusPowIso (K : ProEtaleWeilSheaf k₀ l X) (m : ℕ)
     simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Functor.mapIso_hom, Functor.map_comp,
       Category.assoc]
     have nat := (adicLowerStarSquareIso l
-      (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ (comp_over φ _))).hom.naturality
+      (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ
+        (comp_over φ _))).hom.naturality
         (K.frobeniusPowIso m).hom
     simp only [Functor.comp_map] at nat
     rw [reassoc_of% nat]
@@ -326,7 +328,8 @@ variable (k₀ l) in
 lemma adicConstant_frobeniusPowIso (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
     (m : ℕ) :
     (adicConstant k₀ l X).frobeniusPowIso m =
-      adicLowerStarUnitIso l ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).symm := by
+      adicLowerStarUnitIso l
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).symm := by
   induction m with
   | zero =>
     have h0 : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).inv = 𝟙 _ := by
@@ -344,7 +347,7 @@ lemma adicConstant_frobeniusPowIso (X : Scheme.{u}) [X.Over (Spec (CommRingCat.o
           (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv := by
       rw [pow_succ, Aut.Aut_mul_def, Iso.trans_inv]
     rw [frobeniusPowIso_succ (adicConstant k₀ l X) m hs, ih, adicConstant_str]
-    simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc]
+    simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Functor.mapIso_hom]
     dsimp only [adicConstant_carrier]
     exact adicLowerStarUnitIso_comp_inv
       ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m)

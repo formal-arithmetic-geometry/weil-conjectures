@@ -44,8 +44,10 @@ variable {l : ℕ} [Fact l.Prime]
 pro-étale sheaf `G` with a morphism `φ : g_* G ⟶ G`. -/
 def globalSectionsStr {Z : Scheme.{u}} (g : Z ⟶ Z) {G : Sheaf (Scheme.ProEt.topology Z)
     (WeilCoefficients.{u} l)} (φ : (g)_*[WeilCoefficients.{u} l].obj G ⟶ G) :
-    (Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).obj G ⟶ (Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).obj G :=
-  (globalSectionsLowerStarIso _ g).inv.app G ≫ (Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).map φ
+    (Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).obj G ⟶
+      (Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).obj G :=
+  (globalSectionsLowerStarIso _ g).inv.app G ≫
+    (Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).map φ
 
 variable {Z : Scheme.{u}}
 
@@ -54,7 +56,9 @@ lemma globalSectionsStr_naturality (g : Z ⟶ Z) {G G' : Sheaf (Scheme.ProEt.top
     (WeilCoefficients.{u} l)} {φ : (g)_*[WeilCoefficients.{u} l].obj G ⟶ G}
     {φ' : (g)_*[WeilCoefficients.{u} l].obj G' ⟶ G'} (f : G ⟶ G')
     (hf : (g)_*[WeilCoefficients.{u} l].map f ≫ φ' = φ ≫ f) :
-    (Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).map f ≫ globalSectionsStr g φ' = globalSectionsStr g φ ≫ (Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).map f := by
+    (Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).map f ≫ globalSectionsStr g φ' =
+      globalSectionsStr g φ ≫
+        (Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).map f := by
   have n := (globalSectionsLowerStarIso (WeilCoefficients.{u} l) g).inv.naturality f
   simp only [Functor.comp_map] at n
   rw [globalSectionsStr, globalSectionsStr, reassoc_of% n, Category.assoc, ← Functor.map_comp,
