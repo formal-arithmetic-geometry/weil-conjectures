@@ -177,7 +177,7 @@ private theorem pullback_source_square
   simp only [eqToHom_trans]
 
 variable [∀ Z : Scheme.{u},
-  HasDerivedCategory.{w} (SheafOfModules (moduleRings Z.toRingedSpace))]
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
 private theorem baseChange_eq
     {X S X' S' : Scheme.{u}}
