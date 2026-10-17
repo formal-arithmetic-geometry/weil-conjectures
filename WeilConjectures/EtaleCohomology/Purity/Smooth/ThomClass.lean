@@ -276,6 +276,44 @@ theorem isIso_supportedClassMap_kummerBoundaryProduct_coord {k : Type u} [Field 
 
 end Model
 
+section Definitions
+
+omit [HasKummerClass Λ] in
+/-- Blueprint `pur9-def-supported-cohomology`: Cohomology supported on the zero section
+
+For a closed immersion `s : Y ⟶ X` (in the blueprint, the zero section of `𝔸¹_Y`), a complex
+`K` on `X` and `q ∈ ℤ`, the cohomology of `K` with supports in `s(Y)`:
+
+`H^q_{s(Y)}(X, K) := Hom(Λ_Y, Rs^! K[q])`.
+
+By `AlgebraicGeometry.Etale.supportedClassMap_bijective` it is also
+`Hom(Λ_X, Rs_! Rs^! K[q])`, the classes with supports in `s(Y)`. -/
+abbrev SupportedCohomology {X Y : Scheme.{u}} (s : Y ⟶ X)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (q : ℤ) :
+    Type (u + 1) :=
+  constantComplex Λ Y ⟶ (R(s)^![ModuleCat.{u + 1} Λ]).obj (K⟦q⟧)
+
+/-- Blueprint `pur9-def-thom-class-affine`: Thom class of affine space
+
+The Thom class `th_c : Λ_B ⟶ Rz_c^! Λ(c)[2c]` of the zero section `z_c` of `𝔸^c_B`, realised as
+the closed subscheme `V(t₁, …, t_c)` cut out by the coordinates (which the zero section
+identifies with `B`, `AlgebraicGeometry.AffineSpace.zeroSectionIsoZeroLocusSubscheme`): the
+adjoint of the cup product with supports `∂κ(t₁) ∪ ⋯ ∪ ∂κ(t_c)` of the Kummer boundaries of the
+coordinates. The blueprint defines `th_c` recursively as `th_{c-1}` followed by the rank-one
+orientation `pur_{s'}` of the last affine line; the cup product of Kummer boundaries is the
+same recursion (`AlgebraicGeometry.Etale.kummerBoundaryProduct`). It is an isomorphism over
+bases separated and locally of finite type over a field
+(`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundaryProduct_coord`). -/
+noncomputable def affineSpaceThomClass (c : ℕ) (B : Scheme.{u}) [HasInvertibleExponent Λ B] :
+    constantComplex Λ (𝔸(ULift.{u} (Fin c); B).zeroLocusSubscheme
+        (Set.range fun a : Fin c ↦ AffineSpace.coord B (ULift.up a))) ⟶
+      (R(𝔸(ULift.{u} (Fin c); B).zeroLocusSubschemeι
+        (Set.range fun a : Fin c ↦ AffineSpace.coord B (ULift.up a)))^![ModuleCat.{u + 1} Λ]).obj
+          ((tateObject Λ 𝔸(ULift.{u} (Fin c); B) c)⟦2 * (c : ℤ)⟧) :=
+  supportedClassMap Λ _ (kummerBoundaryProduct Λ fun a : Fin c ↦ AffineSpace.coord B (ULift.up a))
+
+end Definitions
+
 end Etale
 
 end AlgebraicGeometry

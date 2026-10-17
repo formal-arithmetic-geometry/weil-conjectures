@@ -69,8 +69,9 @@ lemma lowerStarComp_hom_app_unit_eq_unitComparison
     ((upperStarComp AddCommGrpCat.{u + 1} πj Dij πi h₁).inv.app Fi)
   simp only [Functor.comp_map] at hnat
   rw [unitComparison, Functor.map_comp, Functor.map_comp, Category.assoc, Category.assoc,
-    reassoc_of% hnat, ← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.comp_id,
-    ← reassoc_of% hassoc]
+    reassoc_of% hnat, ← Functor.map_comp, Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id]
+  rw [Category.comp_id, ← reassoc_of% hassoc]
   have hnat' := (lowerStarComp AddCommGrpCat.{u + 1} Dij gi gj h₂).hom.naturality
     ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} πj).unit.app
       ((upperStar AddCommGrpCat.{u + 1} Dij).obj Fi))

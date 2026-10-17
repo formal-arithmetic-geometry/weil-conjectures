@@ -47,6 +47,11 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X : Scheme.{u}) [HasCompactification (𝟙 X)]
 
+-- Search the braiding of `ModuleCat Λ` through its symmetric structure, as in the generic
+-- definitions of the derived tensor product.
+attribute [local instance high] SymmetricCategory.toBraidedCategory
+
+omit [Finite Λ] in
 /-- `R(𝟙)_! ≅ 𝟭`: the identity is proper, so `R(𝟙)_! ≅ R(𝟙)_*`
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`), and
 `(𝟙)_* ≅ 𝟭`. -/

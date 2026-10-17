@@ -182,6 +182,7 @@ section Thom
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
   [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ V]
+  {k : Type u} [Field k] (aS : S ⟶ Spec (.of k)) [IsSeparated aS] [LocallyOfFiniteType aS]
 
 attribute [local instance] HasInvertibleExponent.opens
 
@@ -190,6 +191,7 @@ noncomputable abbrev thomCoefficients : _root_.DerivedCategory
     (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   (tateObject Λ V d)⟦2 * (d : ℤ)⟧
 
+include aS in
 /-- The class of the frame of a chart, `∂κ(t₁) ∪ ⋯ ∪ ∂κ(t_d)`, generates: its adjoint
 `Λ_{U} ⟶ R(z_U)^! Λ(d)[2d]` is an isomorphism. The chart identifies it with the class of the
 zero section of `𝔸^d_U` (`sk-prop-an`,
@@ -200,7 +202,7 @@ theorem isIso_supportedClassMap_frameClass (i : E.ι) :
       (frameClass Λ (E.frame i))) := by
   have : HasInvertibleExponent Λ (π ⁻¹ᵁ E.U i).toScheme := .of_hom (π ⁻¹ᵁ E.U i).ι
   have : HasInvertibleExponent Λ (E.U i).toScheme := .of_hom (E.zeroRestrict i)
-  have hmodel := isIso_supportedClassMap_kummerBoundaryProduct_coord Λ d (E.U i)
+  have hmodel := isIso_supportedClassMap_kummerBoundaryProduct_coord Λ d (E.U i) ((E.U i).ι ≫ aS)
   have h₁ := restrictSupportedClass_kummerBoundaryProduct Λ (E.chart i).hom (E.affineCoord i)
     (E.coord i) (fun _ ↦ rfl) _ (E.isPullback_chart i)
   have hψ := isIso_supportedRestriction_of_etale Λ (E.chart i).hom _ _ _ (E.isPullback_chart i)
@@ -211,6 +213,7 @@ theorem isIso_supportedClassMap_frameClass (i : E.ι) :
   exact (isIso_supportedClassMap_restrictSupportedClass_iff Λ _ _ _ _ (E.isPullback_chart i) _ _
     _ _ hψ).2 inferInstance
 
+include aS in
 /-- `Rz_! Rz^! Λ_V(d)[2d]` is concentrated in degree zero: over the chart `π⁻¹ U`, it is the
 extension by zero of `Λ_U` along the zero section. -/
 theorem isZero_homology_thomTarget (n : ℤ) (hn : n ≠ 0) :
@@ -225,7 +228,7 @@ theorem isZero_homology_thomTarget (n : ℤ) (hn : n ≠ 0) :
     E.zero _ (E.frame i).toZ (E.frame i).isPullback _ _
     (leftDerivedUpperStarTateShiftIso Λ (E.frame i).e d)
   have hφ : IsIso (supportedClassMap Λ ((E.frame i).U.zeroLocusSubschemeι (Set.range (E.frame i).f))
-      (frameClass Λ (E.frame i))) := E.isIso_supportedClassMap_frameClass Λ i
+      (frameClass Λ (E.frame i))) := E.isIso_supportedClassMap_frameClass Λ aS i
   have : (constantComplex Λ ((E.frame i).U.zeroLocusSubscheme
       (Set.range (E.frame i).f))).IsGE 0 :=
     (_root_.DerivedCategory.isGE_iff _ 0).2 fun n hn ↦ isZero_homology_constantComplex Λ _ n hn.ne
@@ -238,6 +241,7 @@ theorem isZero_homology_thomTarget (n : ℤ) (hn : n ≠ 0) :
         (R(_)_![ModuleCat.{u + 1} Λ]).mapIso (asIso (supportedClassMap Λ _
           (frameClass Λ (E.frame i)))).symm))
 
+include aS in
 /-- Classes with supports in the zero section are sections of a sheaf:
 `Rz_! Rz^! Λ_V(d)[2d]` is a sheaf placed in degree zero. -/
 theorem exists_iso_singleFunctor_thomTarget :
@@ -247,7 +251,7 @@ theorem exists_iso_singleFunctor_thomTarget :
         (_root_.DerivedCategory.singleFunctor _ 0).obj G) := by
   set K := (R(E.zero)_![ModuleCat.{u + 1} Λ]).obj
     ((R(E.zero)^![ModuleCat.{u + 1} Λ]).obj (thomCoefficients Λ (d := d)))
-  have hK := E.isZero_homology_thomTarget Λ
+  have hK := E.isZero_homology_thomTarget Λ aS
   have : K.IsGE 0 := (_root_.DerivedCategory.isGE_iff K 0).2 fun n hn ↦ hK n hn.ne
   have : K.IsLE 0 := (_root_.DerivedCategory.isLE_iff K 0).2 fun n hn ↦ hK n hn.ne'
   exact _root_.DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE K 0
@@ -348,6 +352,7 @@ lemma isIso_supportedRestriction_frame (i : E.ι) :
       (E.frame i).isPullback _ _ (leftDerivedUpperStarTateShiftIso Λ (E.frame i).e d)) :=
   isIso_supportedRestriction_of_isOpenImmersion _ _ _ _ _ _ _ _ _
 
+include aS in
 /-- The frame classes of the charts glue: there is a class with supports in the zero section
 restricting to `∂κ(t₁) ∪ ⋯ ∪ ∂κ(t_d)` on every chart. By
 `AlgebraicGeometry.VectorBundle.exists_iso_singleFunctor_thomTarget` classes with supports in
@@ -358,7 +363,7 @@ theorem exists_thomClass :
     ∃ γ : constantComplex Λ V ⟶ (R(E.zero)_![ModuleCat.{u + 1} Λ]).obj
         ((R(E.zero)^![ModuleCat.{u + 1} Λ]).obj (thomCoefficients Λ (d := d))),
       ∀ i, frameRestriction Λ (E.frame i) γ = frameClass Λ (E.frame i) := by
-  obtain ⟨G, ⟨eM⟩⟩ := E.exists_iso_singleFunctor_thomTarget Λ
+  obtain ⟨G, ⟨eM⟩⟩ := E.exists_iso_singleFunctor_thomTarget Λ aS
   have hΨ := E.isIso_supportedRestriction_frame Λ
   let δ : ∀ i, (L(((E.frame i).e)^*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ V) ⟶
       (L(((E.frame i).e)^*[ModuleCat.{u + 1} Λ])).obj ((R(E.zero)_![ModuleCat.{u + 1} Λ]).obj
@@ -413,39 +418,43 @@ theorem exists_thomClass :
   simp only [frameRestriction, restrictSupportedClass, h, δ, Category.assoc, IsIso.inv_hom_id,
     Category.comp_id, Iso.inv_hom_id_assoc]
 
+include aS in
 /-- Blueprint `def-pur-vector-bundle-thom-class`: the *Thom class*
 `th(V) ∈ H^{2d}_{z(S)}(V, Λ(d))` of a vector bundle, the class with supports in the zero section
 restricting to `∂κ(t₁) ∪ ⋯ ∪ ∂κ(t_d)` on every chart
 (`AlgebraicGeometry.VectorBundle.frameRestriction_thomClass`). -/
 noncomputable def thomClass : constantComplex Λ V ⟶ (R(E.zero)_![ModuleCat.{u + 1} Λ]).obj
     ((R(E.zero)^![ModuleCat.{u + 1} Λ]).obj (thomCoefficients Λ (d := d))) :=
-  (E.exists_thomClass Λ).choose
+  (E.exists_thomClass Λ aS).choose
 
+include aS in
 /-- The Thom class restricts to the frame class on every chart. -/
 lemma frameRestriction_thomClass (i : E.ι) :
-    frameRestriction Λ (E.frame i) (E.thomClass Λ) = frameClass Λ (E.frame i) :=
-  (E.exists_thomClass Λ).choose_spec i
+    frameRestriction Λ (E.frame i) (E.thomClass Λ aS) = frameClass Λ (E.frame i) :=
+  (E.exists_thomClass Λ aS).choose_spec i
 
+include aS in
 /-- The adjoint `Λ_S ⟶ Rz^! (Λ_V(d)[2d])` of the Thom class. -/
 noncomputable def thomClassMap : constantComplex Λ S ⟶
     (R(E.zero)^![ModuleCat.{u + 1} Λ]).obj (thomCoefficients Λ (d := d)) :=
-  supportedClassMap Λ E.zero (E.thomClass Λ)
+  supportedClassMap Λ E.zero (E.thomClass Λ aS)
 
+include aS in
 /-- **The Thom isomorphism.** The adjoint `Λ_S ⟶ Rz^! (Λ_V(d)[2d])` of the Thom class is an
 isomorphism: over every chart it is the adjoint of the class of the zero section of `𝔸^d_U`
 (`AlgebraicGeometry.VectorBundle.isIso_supportedClassMap_frameClass`). -/
-theorem isIso_thomClassMap : IsIso (E.thomClassMap Λ) := by
+theorem isIso_thomClassMap : IsIso (E.thomClassMap Λ aS) := by
   refine isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective Λ
     (fun i ↦ (E.frame i).toZ) (fun s ↦ ?_) _ fun i ↦ ?_
   · obtain ⟨i, y, hy⟩ := E.mem_range_frame_toZ s
     exact ⟨i, y, hy⟩
   · refine (isIso_supportedClassMap_restrictSupportedClass_iff Λ (E.frame i).e E.zero _
-      (E.frame i).toZ (E.frame i).isPullback _ _ _ (E.thomClass Λ)
+      (E.frame i).toZ (E.frame i).isPullback _ _ _ (E.thomClass Λ aS)
       (E.isIso_supportedRestriction_frame Λ i)).1 ?_
-    have h := E.frameRestriction_thomClass Λ i
+    have h := E.frameRestriction_thomClass Λ aS i
     rw [frameRestriction] at h
     rw [h]
-    exact E.isIso_supportedClassMap_frameClass Λ i
+    exact E.isIso_supportedClassMap_frameClass Λ aS i
 
 end Thom
 

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Group.Int.Defs
+public import Mathlib.Algebra.Group.Int.Defs
 public import Mathlib.CategoryTheory.Shift.CommShift
 
 /-!
@@ -47,7 +48,7 @@ lemma isExact_id : NatTrans.IsExact (𝟙 Φ) :=
 
 /-- Morphisms of exact functors are stable under composition. -/
 lemma IsExact.comp {Θ : C ⥤ D} [Θ.CommShift ℤ] {α : Φ ⟶ Ψ} {β : Ψ ⟶ Θ} (hα : α.IsExact)
-    (hβ : β.IsExact) : (α ≫ β).IsExact := fun X ↦ by
+    (hβ : β.IsExact) : NatTrans.IsExact (α ≫ β) := fun X ↦ by
   simp only [NatTrans.comp_app, Category.assoc, hβ X, Functor.map_comp]
   rw [← Category.assoc, hα X, Category.assoc]
 

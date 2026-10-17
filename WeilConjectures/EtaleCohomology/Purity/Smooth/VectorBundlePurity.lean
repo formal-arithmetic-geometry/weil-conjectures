@@ -86,6 +86,7 @@ section SectionInvariant
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
   [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ V] [HasCompactification π]
+  {k : Type u} [Field k] (aS : S ⟶ Spec (.of k)) [IsSeparated aS] [LocallyOfFiniteType aS]
 
 /-- `Rz^! ω_π ≅ R(π ∘ z)^! Λ_S = Λ_S`. -/
 lemma nonempty_iso_rightDerivedUpperShriek_dualizingComplex :
@@ -99,6 +100,7 @@ lemma nonempty_iso_rightDerivedUpperShriek_dualizingComplex :
     (rightDerivedUpperShriekIsoOfIso _ (Iso.refl S)).app _ ≪≫
       leftDerivedUpperStarConstantComplexIso Λ (𝟙 S)⟩
 
+include aS in
 /-- Blueprint `sk-prop-an`: the *section invariant* of a vector bundle is the Tate twist,
 
 `𝒞(π, z) = Lz^* ω_π ≅ Λ_S(d)[2d]`.
@@ -114,7 +116,7 @@ theorem nonempty_iso_sectionInvariant :
   obtain ⟨Mω, ⟨eω'⟩, ⟨eω⟩⟩ := isInvertible_dualizingComplex Λ π (d := d)
   obtain ⟨MX, ⟨eX'⟩, ⟨eX⟩⟩ := (isInvertible_tateObject Λ V d).shift (2 * (d : ℤ))
   obtain ⟨ω₀⟩ := E.nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ
-  have := E.isIso_thomClassMap Λ
+  have := E.isIso_thomClassMap Λ aS
   let cX := (derivedTensorRightCompRightDerivedUpperShriekIso Λ E.zero _ MX eX eX').app
     (constantComplex Λ V)
   let cω := (derivedTensorRightCompRightDerivedUpperShriekIso Λ E.zero _ Mω eω eω').app
@@ -128,7 +130,7 @@ theorem nonempty_iso_sectionInvariant :
     ((derivedTensor (ModuleCat.{u + 1} Λ) S).obj N).mapIso
         (leftDerivedUpperStarTateShiftIso Λ E.zero d).symm ≪≫ cX.symm ≪≫
       (R(E.zero)^![ModuleCat.{u + 1} Λ]).mapIso (derivedTensorLeftUnitor _ V _) ≪≫
-        (asIso (E.thomClassMap Λ)).symm
+        (asIso (E.thomClassMap Λ aS)).symm
   obtain ⟨β⟩ := nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ) S
   exact nonempty_iso_of_derivedTensor_iso ((β.app _).app N ≪≫ e₁) e₂
 
@@ -325,7 +327,7 @@ theorem nonempty_iso_dualizingComplex :
       (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       (M⟦2 * (d : ℤ)⟧)⟦-(2 * (d : ℤ))⟧ ≅ M := fun M ↦
     (shiftFunctorCompIsoId _ (2 * (d : ℤ)) (-(2 * (d : ℤ))) (by ring)).app M
-  obtain ⟨σ⟩ := E.nonempty_iso_sectionInvariant Λ
+  obtain ⟨σ⟩ := E.nonempty_iso_sectionInvariant Λ aS
   obtain ⟨e⟩ := E.nonempty_iso_of_charts (Λ := Λ) (A := tateObject Λ V d)
     (B := ω⟦-(2 * (d : ℤ))⟧) eF ((shiftFunctor _ _).mapIso eG ≪≫ sh _)
     (isInvertible_tateObject Λ V d)

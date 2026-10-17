@@ -61,7 +61,9 @@ lemma homEquiv_whiskerRight_comp_projectionTensorMap
   rw [← cancel_epi (inv (π ω N)), ← cancel_mono (inv (π _ N))] at h
   simp only [IsIso.inv_hom_id_assoc, Category.assoc, IsIso.hom_inv_id, Category.comp_id] at h
   simp only [Category.assoc]
-  rw [← reassoc_of% h, ← comp_whiskerRight_assoc, ← homEquiv_counit, Equiv.symm_apply_apply]
+  have ht : L.map (adj.homEquiv _ _ t) ≫ adj.counit.app (𝟙_ D) = t := by
+    simp [Adjunction.homEquiv_unit]
+  rw [← reassoc_of% h, ← comp_whiskerRight_assoc, ht]
 
 /-- If the functor `N ↦ ω ⊗ F N` is right adjoint to `L` with the linear counit attached to
 `t : L ω ⟶ 𝟙`, that is, if every `L P ⟶ N` factors uniquely through the linear counit, then the
