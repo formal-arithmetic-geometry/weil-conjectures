@@ -1,0 +1,104 @@
+{
+ "id": "lem-trf-finite-base-cech-components",
+ "kind": "statement",
+ "title": "Finite-cover Cech fibres have the same component labels after base change",
+ "statement": "Let $p:Z\\to S$ be finite [def-weil-finite-integral-morphism], let $h:U\\to S$ be any scheme morphism, and let $b_U$ be a geometric point of $U$ with image $b$ in $S$ [def-weil-geometric-point]. Put $Z_U=U\\times_SZ$ [def-pc-fibre-product]. Projection induces a bijection $\\pi_0((Z_U)_{b_U})\\xrightarrow{\\sim}\\pi_0(Z_b)$ between the sets of connected components of the two geometric fibres. In particular this applies to every finite iterated fibre product $Z^{(q)}=Z^{\\times_S(q+1)}$, $q\\ge0$.",
+ "source": {
+  "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+  "place": "Lemma 2.6.1, printed p. 5: the canonical component bijection; no additional Cech or arbitrary-map compatibility is asserted.",
+  "url": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-geometric-point",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite surjective base change S' to S and a geometric point t over s, connected components of the geometric fibre T times_S S' over t equal those over s",
+   "results": "AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.Hom.discrete_fiber; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; no declaration of the stated component-bijection theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match; finite-fibre and base-change stability results are weaker"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme connected components finite surjective base change, IsFinite, Surjective",
+   "results": "0 hits; unknown identifier Scheme",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "connected.*components|finite.*surjective.*base.change",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean:88-98 connectedComponents functions; Mathlib/AlgebraicGeometry/Geometrically/Connected.lean:84-89 connectedComponentsHomeomorph under geometrically connected and open-map hypotheses; no stated finite-cover fibre component result.",
+   "date": "2026-10-18",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite surjective base change S' to S and a geometric point t over s, connected components of the geometric fibre T times_S S' over t equal those over s",
+   "results": "AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.Hom.fiber; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange; AlgebraicGeometry.IsFinite.finite_preimage_singleton; no component-bijection theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connected components of the geometric fibre of a finite scheme morphism are unchanged by extension of separably closed fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.connected_component_unique\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] {X A B : C}\\n  [CategoryTheory.PreGaloisCategory.IsConnected A] [CategoryTheory.PreGaloisCategory.IsConn\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ equipped with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, if $A$ and $B$ are connected objects, and there exist monomorphisms $i : A \\\\to X$ and $j :\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.fiber_in_connected_component\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  (x : (F.obj X).carrier),\\n  ∃ Y i y,\\n    (CategoryTheory.ConcreteCategory.hom (F.map i)) y = x\", \"doc\": \"For any object $X$ in a pre-Galois category $\\\\mathcal{C}$ and any element $x$ in $F(X)$, where $F$ is a fiber functor from $\\\\mathcal{C}$ to the category of finite types, there exists a connected objec\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  JacobsonSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → ↥Y → AlgebraicGeometry.Scheme\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and a point $y \\\\in Y$, the fiber of $f$ over $y$ is the scheme obtained by taking the fiber product (pullback) of $f$ with the canonical morphism $\\\\operatornam\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.card_hom_le_card_fiber_of_connected\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.PreGaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F] (A X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected A], Nat.card (A ⟶ X) ≤ Nat.card (F.obj X).\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, for any connected object $A$ and object $X$, the cardinality of the hom-set $\\\\text{Hom}(A, X)$ is less\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures are component/finiteness infrastructure, ordinary Cech nerves, homological bounds or mapping-cone infrastructure, not this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, \"fiber\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsFiniteFiberToSpecResidueFieldOfLocallyQuasiFiniteOfQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyQuasiFinite f] [AlgebraicGeometry.QuasiCompact f] (x : ↥Y) : AlgebraicGeometry.IsFinite (AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField f x)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff_isFinite_fiber\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.QuasiCompact f] : AlgebraicGeometry.LocallyQuasiFinite f ↔ ∀ (x : ↥Y), AlgebraicGeometry.IsFinite (AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField f x)\", \"doc\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures are component/finiteness infrastructure, ordinary Cech nerves, homological bounds or mapping-cone infrastructure, not this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "connectedComponents|connected_components",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"87\", \"text\": \"def Scheme.Hom.connectedComponentsHomeomorph [GeometricallyConnected f] (hf : IsOpenMap f) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"88\", \"text\": \"    ConnectedComponents X ≃ₜ ConnectedComponents S :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"89\", \"text\": \"  (hf.isQuotientMap f.continuous f.surjective).isCoinducing.connectedComponentsHomeomorph\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"line\": \"88\", \"text\": \"/-- `continuousMapPresheaf` is `U ↦ C(ConnectedComponents U, T)` if `T` is totally\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"line\": \"92\", \"text\": \"    (continuousMapPresheaf T).obj (.op U) ≃ C(ConnectedComponents U, T) where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"line\": \"93\", \"text\": \"  toFun f := ⟨f.continuous.connectedComponentsLift, f.continuous.connectedComponentsLift_continuous⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"line\": \"94\", \"text\": \"  invFun f := .comp f ⟨ConnectedComponents.mk, ConnectedComponents.continuous_coe⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"line\": \"98\", \"text\": \"    exact (Continuous.connectedComponentsLift_unique _ _ (by simp)).symm\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures are component/finiteness infrastructure, ordinary Cech nerves, homological bounds or mapping-cone infrastructure, not this statement",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite schemes over a separably closed field have the same connected components after any separably closed field extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsStableUnderBaseChange @IsFinite\", \"doc\": \"The property of being a finite morphism of schemes is stable under base change. That is, if $ f : X \\to Y $ is a finite morphism of schemes and $ Y' \\to Y $ is any morphism of schemes, then the base cha\"}\n  {\"name\": \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsNoetherian X] : (irreducibleComponents X).Finite\", \"doc\": \"If $ X $ is a Noetherian scheme, then the set of its irreducible components is finite.\"}\n  {\"name\": \"IsSepClosed.casesOn\", \"module\": \"Mathlib.FieldTheory.IsSepClosed\", \"type\": \"{k : Type u} →\\n  [inst : Field k] →\\n    {motive : IsSepClosed k → Sort u_1} →\\n      (t : IsSepClosed k) → ((splits_of_separable : ∀ (p : Polynomial k), p.Separable → p.Splits) → motive ⋯) → motive t\", \"doc\": \"A field $ k $ is separably closed if every separable polynomial over $ k $ splits into linear factors.\"}\n  {\"name\": \"IsSepClosure.recOn\", \"module\": \"Mathlib.FieldTheory.IsSepClosed\", \"type\": \"{k : Type u} →\\n  [inst : Field k] →\\n    {K : Type v} →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra k K] →\\n          {motive : IsSepClosure k K → Sort u_1} →\\n            (t : IsSepClosure k K) →\\n              ((sep_closed : IsSepClosed K) → (separable : Algebra.IsSeparable k K) → motive ⋯) →\", \"doc\": \"The proposition that a field extension $ K $ of $ k $ is a separable closure, meaning $ K $ is an algebraic extension of $ k $ that is separably closed (has no nontrivial finite separable extensions) \"}\n  {\"name\": \"separableClosure\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \": IntermediateField F E\", \"doc\": \"The separable closure of a field $ F $ in an extension field $ E $ is the intermediate field consisting of all elements of $ E $ that are separable over $ F $. An element is separable over $ F $ if it\"}\n  {\"name\": \"SeparableClosure.isSepClosed\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \": IsSepClosed (SeparableClosure F)\", \"doc\": \"The separable closure of a field $ F $ is separably closed, meaning it has no nontrivial finite separable field extensions.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : Finite (f.fiber y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"IsSepClosure.sep_closed\", \"module\": \"Mathlib.FieldTheory.IsSepClosed\", \"type\": \"∀ (k : Type u) {inst : Field k} {K : Type v} {inst_1 : Field K} {inst_2 : Algebra k K} [self : IsSepClosure k K],\\n  IsSepClosed K\", \"doc\": \"If $ K $ is a separable closure of a field $ k $, then $ K $ is a separably closed field.\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures are component/finiteness infrastructure, ordinary Cech nerves, homological bounds or mapping-cone infrastructure, not this statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nearby-finite-base-descent",
+  "date": "2026-10-18",
+  "group": "Q76"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Normal-cone specialization input to lem-trf-local-term-locality, through trace-specialization, specialization-external-product, trait-nearby-base-change and orgogozo-good-modification: the finite-surjective descent argument of Orgogozo Lemma 2.6. This is supporting literature, not the statement or a separate realization of sk-i-curve-zero. Supporting input: Finite-cover Cech fibres have the same component labels after base change.",
+   "via": [
+    "lem-trf-nearby-finite-base-descent",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

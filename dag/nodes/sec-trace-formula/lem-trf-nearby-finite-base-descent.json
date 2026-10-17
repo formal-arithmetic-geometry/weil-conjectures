@@ -2,7 +2,7 @@
  "id": "lem-trf-nearby-finite-base-descent",
  "kind": "statement",
  "title": "Finite surjective descent of truncated nearby-cycle comparison",
- "statement": "Let $S$ be Noetherian, $f:X\\to S$ finite type [def-weil-finite-type-morphism], $\\Lambda$ a finite commutative ring killed by an integer invertible on $S$, and $K\\in D^b_c(X_{\\mathrm{Et}},\\Lambda)$ [def-weil-pbc-etale-constructible-sheaf]. Let $p:T\\to S$ be finite surjective [def-weil-finite-integral-morphism]. For every integer $r$, $P_r(f_T,K_T)$ implies $P_r(f,K)$, with $P_r$ as in [def-trf-orgogozo-induction-data]. The corresponding implication also holds for full $\\Psi$-goodness [def-trf-oriented-nearby-cycles].",
+ "statement": "Let $S$ be Noetherian (quasi-compact and locally Noetherian [pqf-def-locnoeth]), $f:X\\to S$ finite type [def-weil-finite-type-morphism], $\\Lambda$ a finite commutative ring killed by an integer invertible on $S$, and $K\\in D^b_c(X_{\\mathrm{Et}},\\Lambda)$ [def-weil-pbc-etale-constructible-sheaf]. Let $p:T\\to S$ be finite surjective [def-weil-finite-integral-morphism, def-weil-surjective-morphism]. For every integer $r$, $P_r(f_T,K_T)$ implies $P_r(f,K)$, with $P_r$ as in [def-trf-orgogozo-induction-data]. The corresponding implication also holds for full $\\Psi$-goodness [def-trf-oriented-nearby-cycles].",
  "source": {
   "document": "literature/orgogozo-modifications-cycles-proches.pdf",
   "place": "Lemma 2.6 and its Cech-nerve proof, pp. 4--5; truncated universal variant by the same bounded-below descent spectral sequence. Local archival PDF WANTED; author PDF read online.",
@@ -13,11 +13,121 @@
   "def-trf-oriented-nearby-cycles",
   "def-weil-finite-type-morphism",
   "def-weil-pbc-etale-constructible-sheaf",
-  "def-weil-finite-integral-morphism"
+  "def-weil-finite-integral-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-surjective-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $U\\to S$, $g:U'\\to U$ and a geometric specialization $z'$ of $V_{f_{U'}}$. Work throughout with constant-$\\Lambda$ module sheaves on small etale topoi and the ordinary comparison $\\beta_g:v_g^*R\\Psi_{f_U}K_U\\to R\\Psi_{f_{U'}}K_{U'}$ of [def-trf-oriented-nearby-cycles]. The tube-comparison lemma identifies its stalk with $u:R\\Gamma(M,K_U)\\to R\\Gamma(N,K_{U'})$. Choose $a$ with $K\\in D^{\\ge a}$. Exact inverse image and right derived sections give the common lower bound $a$ on both tube complexes. It suffices to prove $H^i\\operatorname{Cone}(u)=0$ for $i\\le r$ for all these choices: stalk inverse image is exact and the geometric specialization points are conservative on the cohomology module sheaves.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "def-trf-oriented-nearby-cycles",
+    "lem-trf-finite-cover-tube-comparison",
+    "lem-trf-oriented-product-points-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 2.6, printed pp. 4--5, and the explicit bounded-below cone refinement in report.md."
+   }
+  },
+  {
+   "text": "Let $S_0=U_{(f_U(x))}$ and $U_0=U'_{(f_{U'}(x'))}$ for the chosen points. Pull back the given finite cover to $P=T\\times_SS_0\\to S_0$. Form $P_q=P^{\\times_{S_0}(q+1)}$ and $Q_q=U_0\\times_{S_0}P_q$. The tube-comparison lemma supplies the augmented diagrams $A_q=R\\Gamma(M\\times_{S_0}P_q,K)$ and $B_q=R\\Gamma(N\\times_{U_0}Q_q,K)$, their restriction maps and their decomposition into the local tubes of $f_{P_q}$ and $f_{Q_q}$. Finiteness and surjectivity of these covers follow from the cited arbitrary-base-change stability lemmas; their iterated products are finite by composition. Each is the Cech nerve of that finite surjective map.",
+   "uses": [
+    "lem-trf-finite-cover-tube-comparison",
+    "def-weil-finite-integral-morphism",
+    "def-pc-fibre-product",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 2.6, printed pp. 4--5, and the explicit bounded-below cone refinement in report.md."
+   }
+  },
+  {
+   "text": "Apply the component lemma with finite morphism $P_q\\to S_0$ and base change $U_0\\to S_0$. Thus $J_q\\to I_q$ is bijective. These are projection-induced maps: for any face or degeneracy, the two composites to $P_q$ agree by the fibre-product equations, so the induced maps on components commute. No separate compatibility theorem or identification of cohomology groups is inferred from the bijection. By the tube-comparison lemma, the column map $u_q:A_q\\to B_q$ is the product of the actual ordinary comparison stalks for $Q_q\\to P_q$.",
+   "uses": [
+    "lem-trf-finite-base-cech-components",
+    "lem-trf-finite-cover-tube-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 2.6, printed pp. 4--5, and the explicit bounded-below cone refinement in report.md."
+   }
+  },
+  {
+   "text": "Every $P_q$ maps to $T$ by its first cover projection. Consequently $P_r(f_T,K_T)$ applies with preliminary base change $P_q\\to T$ and further base change $Q_q\\to P_q$. It gives zero cohomology through degree $r$ for each factor cone in Step 3. Finite products of module complexes are termwise finite direct sums: kernels, images and quotients are componentwise, and the cone differential is componentwise. Hence $H^j\\operatorname{Cone}(u_q)=0$ for $j\\le r$. This conclusion concerns the actual ordinary cochain cones, so no conversion to a truncated-isomorphism assertion, and no edge-surjectivity inference, is needed.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "lem-trf-finite-cover-tube-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 2.6, printed pp. 4--5, and the explicit bounded-below cone refinement in report.md."
+   }
+  },
+  {
+   "text": "The projection $M\\times_{S_0}P\\to M$ is finite surjective by the cited base-change stability of finite and of surjective morphisms. Apply finite-cover hypercohomology descent to $M$ with this cover and to its pullback over $N$, whose $q$-th terms are $M\\times_{S_0}P_q$ and $N\\times_{S_0}P_q=N\\times_{U_0}Q_q$. Both use the same constant ring $\\Lambda$ and lower bound $a$. It provides compatible resolved diagrams for $u_q$, quasi-isomorphisms $R\\Gamma(M,K)\\simeq\\operatorname{Tot}(A_\\bullet)$ and $R\\Gamma(N,K)\\simeq\\operatorname{Tot}(B_\\bullet)$, and a commuting augmentation square whose top map is $u$. Apply the bounded-below column-cone comparison lemma: its $E_1^{q,j}$ is $H^j\\operatorname{Cone}(u_q)$, with $q\\ge0$, $j\\ge a-1$. For total degree $n\\le r$ every term on that diagonal has $j=n-q\\le r$ and hence is zero. The lemma's finite convergence gives $H^n\\operatorname{Cone}(u)=0$ for $n\\le r$. This uses the cone spectral sequence rather than comparing two pages at the truncation edge.",
+   "uses": [
+    "lem-trf-finite-base-cech-hypercohomology",
+    "lem-trf-bounded-below-cech-cone-comparison",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 2.6, printed pp. 4--5, and the explicit bounded-below cone refinement in report.md."
+   }
+  },
+  {
+   "text": "Since $U$, $g$ and $z'$ were arbitrary, exact stalks and conservativity give the required vanishing of the cohomology sheaves of the comparison cone. The double quantifier in the definition is therefore satisfied, proving $P_r(f,K)$.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "lem-trf-oriented-product-points-conservative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 2.6, printed pp. 4--5, and the explicit bounded-below cone refinement in report.md."
+   }
+  },
+  {
+   "text": "For the full assertion, first note directly from the adjoint definition that ordinary comparisons compose: for $V'\\xrightarrow{h}V\\xrightarrow{g}T$, $\\beta_{gh}=\\beta_h\\circ v_h^*\\beta_g$. Indeed, transposing the right-hand composite gives $h^*g^*\\varepsilon$ by counit naturality and the adjunction triangle identity, which is the transpose defining $\\beta_{gh}$. If $(f_T,K_T)$ is $\\Psi$-good, both $\\beta_g$ and $\\beta_{gh}$ are invertible, so $\\beta_h$ is invertible. Hence $(f_V,K_V)$ is $\\Psi$-good for every $V\\to T$, and $P_r(f_T,K_T)$ holds for every integer $r$. Apply Steps 1--6 for every $r$. In particular the comparison for each $U'\\to S$ has an acyclic cone, and is an isomorphism. This is full $\\Psi$-goodness for $(f,K)$.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "def-trf-orgogozo-induction-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 2.6, printed pp. 4--5, and the explicit bounded-below cone refinement in report.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-orgogozo-induction-data",
+  "def-trf-oriented-nearby-cycles",
+  "def-weil-finite-integral-morphism",
+  "lem-trf-bounded-below-cech-cone-comparison",
+  "lem-trf-finite-base-cech-components",
+  "lem-trf-finite-base-cech-hypercohomology",
+  "lem-trf-finite-cover-tube-comparison",
+  "lem-trf-finite-radicial-basechange",
+  "lem-trf-oriented-product-points-conservative",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+  "place": "Orgogozo Lemma 2.6, pp. 4--5, with derived finite-cover descent from Stacks 09Z2 and a column-cone refinement for the universal truncated assertion. Generalizations and proofs are detailed in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,7 +166,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-orgogozo-good-modification",
@@ -68,7 +178,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof of (1) and (2), normal-cone specialization: the Orgogozo modification input to the trait nearby-cycle comparison; supporting argument Lemma 2.6 and its Cech-nerve proof, pp. 4--5; truncated universal variant by the same bounded-below descent spectral sequence.",
+   "place": "Normal-cone specialization input to lem-trf-local-term-locality, through trace-specialization, specialization-external-product, trait-nearby-base-change and orgogozo-good-modification: the finite-surjective descent argument of Orgogozo Lemma 2.6. This is supporting literature, not the statement or a separate realization of sk-i-curve-zero.",
    "via": [
     "lem-trf-orgogozo-good-modification",
     "lem-trf-trait-nearby-base-change",
@@ -78,5 +188,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nearby-finite-base-descent",
+  "worker": "stage1",
+  "summary": "Repair of a986f46e0a: replace the false first-quadrant and E1-isomorphism argument by bounded-below finite-cover descent (Stacks 09Z2 extended to bounded-below constant-Lambda complexes) and a spectral sequence of column cones; specify constant-Lambda modules, actual beta stalk maps and conservative points; remove unsupported component compatibility claims. The item and its four supporting nodes keep the inherited unit sk-i-curve-zero as supporting literature of the Orgogozo good-modification chain; they claim no realization of that unit. Maintainer review (2026-10-18): added citations for Noetherian and surjective in the statement, the cover-of-M base-change citations in Step 5, and removed the stale do-not-push note.",
+  "blueprint": "Normal-cone specialization input to lem-trf-local-term-locality, through trace-specialization, specialization-external-product, trait-nearby-base-change and orgogozo-good-modification: the finite-surjective descent argument of Orgogozo Lemma 2.6. This is supporting literature, not the statement or a separate realization of sk-i-curve-zero.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic scheme-theoretic stability of surjectivity used for the finite Cech covers, independent of the trace/local-term unit."
+   },
+   {
+    "node": "lem-trf-finite-radicial-basechange",
+    "why": "Only its first, general clause is used: finite morphisms are stable under arbitrary base change and composition. No radicial hypothesis is imposed on the cover."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-surjective-base-change",
+  "lem-trf-finite-radicial-basechange"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-2b676d1d1",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-2b676d1d1 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes, every cited statement and the parent good-modification steps that use the item (1, 6 and 11). Orgogozo has no local copy (WANTED); I fetched the author PDF read-only and read Thm 1.1/(1.1.a) and Lemmas 2.6 and 2.6.1 on pp. 4-5. I also read Stacks 09Z2 in full (statement and proof) and Tags 0130/0132. The route follows Orgogozo 2.6: Cech nerve of the finite cover over strictly local bases, decomposition into tubes indexed by pi0((P_q)_b) via 2.6.1, and a factorwise comparison, written with column cones so the truncation endpoint is handled. I agree with the report's counterexample to the old endpoint argument (A in degree r+1 mapping to 0). beta is the ordinary comparison of def-trf-oriented-nearby-cycles with constant-Lambda module coefficients on small etale topoi, matching Orgogozo's (1.1.a); the double quantifier of P_r is kept and nothing is weakened. Steps 1-7 are each checked in review.md. I verified the tube decomposition independently (local pieces of P_q over strictly local S_0 are radicial, so the products are strictly local), as well as Cone(u) iso Cone(Tot u), the diagonal vanishing for q>=0 and j>=a-1, and the beta composition formula. New nodes: the components node is true (finite schemes over separably closed fields; checked on the empty, nonreduced and purely inseparable cases); the hypercohomology node is a correct bounded-below constant-Lambda extension of 09Z2 with natural restriction (tested on K=F[1], the identity cover and the zero complex); the tube-comparison and cone-comparison nodes are true. None restates the item, and no cycle was found. lem-sp-first-quadrant-vertical-cone-filtration is a generalization candidate for the cone node: after a shift it gives the node in a few lines, so the cone node's later split should cite it; this is not a fault. lem-trf-oriented-nearby-strict-local-description is related to the tube node but not a duplicate. The two tool_uses (finite-radicial-basechange, surjective-base-change) are Mathlib leaves; I accept them. The inherited unit sk-i-curve-zero follows the inheritance rule. No SGA source is cited. Three fixes to the item, written as fixes/dag/nodes/sec-trace-formula/lem-trf-nearby-finite-base-descent.json: (1) the statement and stmt_deps now cite pqf-def-locnoeth for Noetherian and def-weil-surjective-morphism for surjective; (2) Step 5 now cites both base-change lemmas for the cover M x_{S_0} P -> M and writes out its pulled-back nerve; (3) removed the stale 'unit to null / do not push' text from split_report.summary.; 1 file(s) fixed by the reviewer"
  }
 }
