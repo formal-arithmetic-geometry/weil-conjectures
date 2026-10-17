@@ -17,9 +17,72 @@
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the square of ringed topoi with top row $\\nu_{\\bar X}:\\bar X_{\\mathrm{proet}}\\to\\bar X_{\\mathrm{et}}$, bottom row $\\nu_Y$, and vertical maps $p_{\\mathrm{proet}}$ and $p_{\\mathrm{et}}$. The ring at each corner is the ordinary constant sheaf $A$. The site comparison is a geometric morphism [def-weil-pbc-site-comparison-morphism]; its commutation with inverse image is the canonical comparison [lem-weil-pbc-comparison-pullback]. The structure-ring identifications are the constant-section-preserving ones of [prop-weil-pbc-proetale-constant-ring-map] and those stipulated for $\\nu$ in the statement, so this is a square of ringed topoi, not just of underlying categories. Put $C=\\nu_Y^*$, $D=\\nu_{\\bar X}^*$, $l=p_{\\mathrm{et}}^{-1}$, $r=Rp_{\\mathrm{et},*}$, $L=p_{\\mathrm{proet}}^*$, $R=Rp_*$, and $Q=B_{Y,\\mathrm{et}}[0]$. The canonical comparison $a:Dl\\simeq LC$ is the one in [lem-weil-pbc-comparison-direct-image-canonical-mate]. The exchange map for this square is the mate of $a^{-1}$: its transpose at $J$ is $D(\\varepsilon^e_J)a_{rJ}^{-1}$. Thus on $J=K,H$ it is exactly $\\beta_J$, by that node's definition and normalization; this identifies the named maps, without choosing an arbitrary isomorphism. Both $K$ and $H$ satisfy its $D^+$ domain by hypothesis.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-comparison-pullback",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram; equation-projection-formula-map, with Tag 07A4, lemma-pullback-tensor-product"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to this square, with its $f=p_{\\mathrm{et}}$, $f'=p_{\\mathrm{proet}}$, $g=\\nu_Y$, $g'=\\nu_{\\bar X}$, $E=K$ and coefficient object $Q$. This theorem permits a commutative ringed square without cartesianness, on unbounded module derived categories, so it applies to these small sites and ordinary constant-ring modules. Its tensor identifications are those of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], exactly the identifications fixed in the statement. Let $\\Pi:RN\\otimes_A^{\\mathbf L}B_Y\\to R(N\\otimes_A^{\\mathbf L}B_{\\bar X})$ denote the pro-etale projection map defined in the coherence theorem as the adjunct of the tensor counit. The etale projection there is $\\pi_K$ by [def-kun-projection-formula-map]. Since $lQ=B_{\\bar X,\\mathrm{et}}$ and $CQ=B_Y$, the theorem's equality, after its specified tensor and composition identifications and Step 1's identification of exchange components, reads\n$$\\beta_H\\circ C(\\pi_K)=\\Pi\\circ(\\beta_K\\otimes_A^{\\mathbf L}1).$$\nThe target identification includes $R(DH)\\simeq R(N\\otimes_A^{\\mathbf L}B_{\\bar X})$, so both sides have exactly that common target.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram; equation-projection-formula-map, with Tag 07A4, lemma-pullback-tensor-product"
+   }
+  },
+  {
+   "text": "Precompose Step 2's equality by $\\beta_K^{-1}\\otimes_A^{\\mathbf L}1$. Tensor is a bifunctor, so $(\\beta_K\\otimes1)(\\beta_K^{-1}\\otimes1)=1$. The resulting left side is the specified $t$ and the right side is $\\Pi$. By the definition of $\\Pi$ in [lem-weil-pbc-ringed-exchange-tensor-coherence], its transpose is\n$$\\varepsilon^p_{N\\otimes^{\\mathbf L}B_{\\bar X}}\\circ L(t)\n =(\\varepsilon^p_N\\otimes^{\\mathbf L}1)\\circ c_{RN,B_Y},$$\nwhere $c_{RN,B_Y}:L(RN\\otimes^{\\mathbf L}B_Y)\\xrightarrow{\\sim}LRN\\otimes^{\\mathbf L}B_{\\bar X}$ is the tensor-pullback identification of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. In particular, precomposing this transpose by $c_{RN,B_Y}^{-1}$ gives exactly $\\varepsilon^p_N\\otimes^{\\mathbf L}1$, as claimed.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram; equation-projection-formula-map, with Tag 07A4, lemma-pullback-tensor-product"
+   }
+  },
+  {
+   "text": "If $\\pi_K$ is invertible, the inverse of $t$, in the same tensor identifications, is\n$$(\\beta_K\\otimes^{\\mathbf L}1)\\circ C(\\pi_K^{-1})\\circ\\beta_H^{-1}.$$\nIndeed each composite with $t$ reduces to an identity by functoriality of $C$ and of tensor, followed by the two inverse identities for each $\\beta$ and for $\\pi_K$. The comparison components are invertible by [lem-weil-pbc-comparison-direct-image-canonical-mate] on the two bounded-below objects $K,H$. No assertion that $\\pi_K$ is always invertible has been used.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram; equation-projection-formula-map, with Tag 07A4, lemma-pullback-tensor-product"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-comparison-pullback",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-kun-projection-formula-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Specialization of Tag 0E48 (whose verification is omitted in Stacks and is supplied by the existing ringed-exchange-tensor-coherence node), to blueprint det-sp-reduction-direct-image.proof.md Step 1; explicit cancellation and transpose."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -76,10 +139,45 @@
    "results": "25 generic CategoryTheory hits (FiberedCategory, Localization, Endofunctor); none states the target",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|rightAdjointProjectionMap|comparisonUpperStar",
+   "results": "0 hits: ; subdirectory CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: generic adjunction or etale-scheme statements do not give the normalized derived site projection comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoint transpose of the etale projection formula after comparison to the pro-etale direct image is counit tensor identity",
+   "results": "8 hits: CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.CoreUnitCounit.counit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, TopCat.Presheaf.pushforwardToOfIso, CategoryTheory.Adjunction.homEquiv_symm_id, CategoryTheory.Adjunction.mkOfHomEquiv_counit_app, CategoryTheory.Adjunction.counitAsIsoOfIso, CategoryTheory.Adjunction.id_counit",
+   "date": "2026-10-17",
+   "verdict": "no match: generic adjunction or etale-scheme statements do not give the normalized derived site projection comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mateEquiv, CategoryTheory.Adjunction.rightAdjointProjectionMap",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Adjunction.mateEquiv'",
+   "date": "2026-10-17",
+   "verdict": "no match: generic adjunction or etale-scheme statements do not give the normalized derived site projection comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "comparison of etale and pro-etale derived direct image projection formula",
+   "results": "8 hits: StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, StandardEtalePair.homEquiv_symm_apply, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.Etale.comp, StandardEtalePair.HasMap.map",
+   "date": "2026-10-17",
+   "verdict": "no match: generic adjunction or etale-scheme statements do not give the normalized derived site projection comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap|mateEquiv|projectionMap",
+   "results": "20 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean; subdirectory CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: generic adjunction or etale-scheme statements do not give the normalized derived site projection comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sp-reduction-direct-image",
@@ -96,5 +194,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sp-direct-image-etale-mate-isomorphism",
+  "worker": "stage1",
+  "summary": "Four proof steps reuse the existing general ringed-topos projection/exchange coherence theorem, identify its named exchange maps using the normalized counit comparison, cancel beta_K, and give the inverse when the etale projection is invertible. Statement and bounded-below hypotheses retained; no new nodes, no Lean writes or compilers.",
+  "blueprint": "det-sp-reduction-direct-image.proof.md Step 1, counit-tensor definition of the proper projection map; identifies its etale finite-window counterpart used in the parent split Step 7.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic compatibility of the etale/pro-etale comparison with inverse image; this unit does not reconstruct the comparison morphism."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Canonical constant-section-preserving structure-ring comparison, used to specify the ordinary ringed square."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Existing normalized comparison at K and H, with the exact counit transpose identifying the named exchange maps."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic ringed-topos projection/exchange identity, used in the same mate calculation as blueprint Step 1; no geometric purity route is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic natural derived tensor comparison, with the same specified identifications on the four sites."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-comparison-pullback",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NO-c2cd770a7",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-c2cd770a7 (reviewer sub-agent of L); spot-checked: I read the item, all four steps, every cited statement, the parent det-sp-reduction-direct-image (Steps 3, 5, 6, 7), the main-20261015 blueprint proof Steps 1-4, unit sk-lem-sp-reduction, and Stacks sites-cohomology remark-compatible-with-diagram (0E48, l.13715-13755) and 07A4. No new nodes, and proof_deps equals the union of the step uses. No SGA. No cycle: only the item and its parent cite it. Coefficients are the ordinary uncompleted constant-ring categories, the same as the parent's. p is proper, hence qcqs, as the canonical-mate node needs. The hypothesis K,H in D+ is necessary (A=Z/l^2, B=K=F_l gives an unbounded-below H), and the parent's Step 3 supplies it. Step 1: theta = a^{-1}, and the mate's transpose D(eps^e)a^{-1}_r equals q_{u,K}, so Ex_K=beta_K and Ex_H=beta_H. a preserves constant sections, so the square is a ringed square. Step 2: the substitution into lem-weil-pbc-ringed-exchange-tensor-coherence (no cartesianness, unbounded categories) is correct. Both projection definitions use the 07A4 comparison, so the coherence node's pi_f is the same map as def-kun-projection-formula-map. Stacks' identification c, applied to the constant B, agrees with the item's tensor identifications. Steps 3 (cancel beta_K, transpose of Pi from its definition) and 4 (explicit inverse) are elementary. The transpose clause is correctly typed as tau∘c^{-1} = eps_N⊗1. Edge cases checked: p=id, K=0, empty X̄, B=A, B=0. No duplicate among the projection/exchange nodes of proper-base-change and six-functors. The five off-unit tool_uses are generic comparison and ringed-topos lemmas used as black boxes, and I accept them. No changes."
  }
 }
