@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+public import WeilConjectures.CategoryTheory.Sites.SectionsWithSupport
 
 /-!
 # Cohomology with support
@@ -46,41 +47,6 @@ site (`AlgebraicGeometry.ProEtale.sectionsWithSupport`), where `U` is the open c
 universe u' u v w
 
 open CategoryTheory Limits Opposite
-
-namespace CategoryTheory
-
-variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
-  (A : Type u') [Category.{w} A] [Abelian A] [HasSheafify J A] [HasGlobalSectionsFunctor J A]
-
-/-- The sections with support away from an object `U` of the site: the kernel
-`F ↦ ker (Γ(F) ⟶ F(U))` of the restriction from the global sections to the sections on `U`.
-For `U` the open complement of a closed subscheme `Z` this is the functor `Γ_Z` of sections
-with support in `Z`. -/
-noncomputable def Sheaf.ΓSupport (U : Cᵒᵖ) : Sheaf J A ⥤ A :=
-  kernel (Sheaf.natTransΓRes J A U)
-
-/-- The inclusion `Γ_Z(F) ⟶ Γ(F)` of the sections with support. -/
-noncomputable def Sheaf.ΓSupportι (U : Cᵒᵖ) : Sheaf.ΓSupport J A U ⟶ Sheaf.Γ J A :=
-  kernel.ι _
-
-instance (U : Cᵒᵖ) (F : Sheaf J A) : Mono ((Sheaf.ΓSupportι J A U).app F) := by
-  have : Mono (Sheaf.ΓSupportι J A U) := by dsimp [Sheaf.ΓSupportι]; infer_instance
-  infer_instance
-
-@[reassoc (attr := simp)]
-lemma Sheaf.ΓSupportι_app_comp_ΓRes (U : Cᵒᵖ) (F : Sheaf J A) :
-    (Sheaf.ΓSupportι J A U).app F ≫ Sheaf.ΓRes F U = 0 := by
-  have := congr_app (kernel.condition (Sheaf.natTransΓRes J A U)) F
-  rw [NatTrans.comp_app, NatTrans.app_zero] at this
-  exact this
-
-instance (U : Cᵒᵖ) : (Sheaf.ΓSupport J A U).Additive where
-  map_add {F G f g} := by
-    rw [← cancel_mono ((Sheaf.ΓSupportι J A U).app G)]
-    simp only [Preadditive.add_comp, NatTrans.naturality, Functor.map_add,
-      Preadditive.comp_add]
-
-end CategoryTheory
 
 namespace AlgebraicGeometry
 

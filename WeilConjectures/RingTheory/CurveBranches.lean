@@ -12,6 +12,7 @@ public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import WeilConjectures.RingTheory.HenselianDVRExtension
+public import WeilConjectures.RingTheory.NagataRing
 
 /-!
 # Branches of a one-dimensional local ring
@@ -21,10 +22,12 @@ For a reduced one-dimensional Noetherian local ring `R` with minimal primes `p�
 `Frac(R/pₐ)` (blueprint `def-exc-local-curve-branches`).
 
 If `R` is moreover henselian with algebraically closed residue field and its normalization is
-finite, then every branch `B(R)ₐ` is a henselian discrete valuation ring with fraction field
-`Frac(R/pₐ)` and the same residue field as `R`, and the punctured spectrum of `R` is the
-spectrum of `Q(R)`: there is `f` in the maximal ideal, outside every minimal prime, such that
-`D(f) = Spec R ∖ {𝔪}` and `R_f = Q(R)` (blueprint `lem-exc-punctured-curve-branches`).
+finite (e.g. `R` is Nagata), then every branch `B(R)ₐ` is a henselian discrete valuation ring
+with fraction field `Frac(R/pₐ)` and the same residue field as `R`, and the punctured spectrum
+of `R` is the spectrum of `Q(R)`: there is `f` in the maximal ideal, outside every minimal
+prime, such that `D(f) = Spec R ∖ {𝔪}` and `R_f = Q(R)` (blueprint
+`lem-exc-punctured-curve-branches`; the scheme-level form is
+`AlgebraicGeometry.puncturedSpectrum_branches`).
 
 ## Main definitions and statements
 
@@ -33,7 +36,10 @@ spectrum of `Q(R)`: there is `f` in the maximal ideal, outside every minimal pri
 - `IsLocalRing.isDiscreteValuationRing_branch`, `IsLocalRing.henselianLocalRing_branch`,
   `IsLocalRing.isAlgClosed_residueField_branch`: the branches are henselian DVRs with
   algebraically closed residue field.
-- `IsLocalRing.exists_isLocalization_away_branchFractionRing`: the punctured spectrum.
+- `IsLocalRing.isLocalization_away_branchFractionRing`: the punctured spectrum is `Spec Q(R)`.
+- `IsLocalRing.finite_branch`: the branches of a Nagata ring are finite.
+- `IsLocalRing.branches_and_punctured_spectrum`: the algebraic form of the blueprint lemma
+  for a reduced one-dimensional strictly henselian Nagata local ring.
 -/
 
 @[expose] public section
@@ -499,40 +505,51 @@ theorem isLocalization_away_branchFractionRing [IsReduced R] {f : R}
     rw [hx, hd, Nat.add_sub_cancel_left, pow_add, map_mul, map_mul, ← mul_assoc, hak',
       map_mul, map_mul]
 
-/-- Blueprint `lem-exc-punctured-curve-branches`: The punctured strictly local curve has DVR
-branches.
+end punctured
 
-Let `R` be a reduced one-dimensional Noetherian local ring which is henselian with
-algebraically closed residue field, and whose normalization is finite: each branch
-`B(R)ₐ = \overline{R/pₐ}` (`IsLocalRing.branch`) is a finite `R/pₐ`-module. Then:
-* each branch is a henselian discrete valuation ring with fraction field `Frac(R/pₐ)` and with
-  the same (algebraically closed) residue field as `R`;
+section nagata
+
+variable {R} [IsNagataRing R]
+
+/-- The normalization of a Nagata ring is finite: each branch `B(R)ₐ` is a finite
+`R / pₐ`-module. -/
+theorem finite_branch (p : minimalPrimes R) : Module.Finite (R ⧸ p.1) (branch R p) :=
+  IsNagataRing.finite_integralClosure_quotient p.1
+
+variable [HenselianLocalRing R] (hdim : ringKrullDim R = 1)
+include hdim
+
+/-- Lemma `lem-exc-punctured-curve-branches`, algebraic form (the scheme-level statement is
+`AlgebraicGeometry.puncturedSpectrum_branches`).
+
+Let `R` be a reduced one-dimensional Nagata local ring which is henselian with algebraically
+closed residue field (i.e. strictly henselian). Then:
+* each branch `B(R)ₐ = \overline{R/pₐ}` (`IsLocalRing.branch`) is a finite `R / pₐ`-module, and
+  is a henselian discrete valuation ring with fraction field `Frac(R/pₐ)` and with the same
+  (algebraically closed) residue field as `R`;
 * there is `f` in the maximal ideal such that `D(f)` is the punctured spectrum
-  `Spec R ∖ {𝔪}` and `R_f = Q(R) = ∏ₐ Frac(R/pₐ)` (`IsLocalization.Away`); hence the punctured
-  spectrum is the finite disjoint union of the spectra of the branch fields.
+  `Spec R ∖ {𝔪}` and `R_f = Q(R) = ∏ₐ Frac(R/pₐ)` (`IsLocalization.Away`).
 
-The blueprint assumes `R` excellent; excellence is only used for the finiteness of the
-normalization (excellent rings are Nagata), which we take as hypothesis since excellence is not
-available in Mathlib: the finiteness hypothesis `hfin` replaces the Nagata step. For the same
-reason the blueprint's clause that the branches are excellent is omitted. Strict henselianity
-is `HenselianLocalRing R` with algebraically closed residue field. -/
-theorem branches_and_punctured_spectrum [IsReduced R] [IsAlgClosed (ResidueField R)]
-    (hfin : ∀ p : minimalPrimes R, Module.Finite (R ⧸ p.1) (branch R p)) :
-    (∀ p : minimalPrimes R, IsDiscreteValuationRing (branch R p) ∧
-      HenselianLocalRing (branch R p) ∧
+The blueprint assumes `R` excellent. Excellence is only used through the finiteness of the
+normalization, via "excellent rings are Nagata" ([Stacks, Tag 07QV]); we assume the (weaker)
+Nagata property `IsNagataRing` directly, so the lemma implies the blueprint statement.
+Excellence itself is not defined here (it needs geometric regularity of formal fibres). -/
+theorem branches_and_punctured_spectrum [IsReduced R] [IsAlgClosed (ResidueField R)] :
+    (∀ p : minimalPrimes R, Module.Finite (R ⧸ p.1) (branch R p) ∧
+      IsDiscreteValuationRing (branch R p) ∧ HenselianLocalRing (branch R p) ∧
       IsFractionRing (branch R p) (FractionRing (R ⧸ p.1)) ∧
       (letI := isLocalRing_branch p;
         IsAlgClosed (ResidueField (branch R p)) ∧
           ∀ b : branch R p, ∃ r : R, b - algebraMap R (branch R p) r ∈ maximalIdeal _)) ∧
     ∃ f ∈ maximalIdeal R, (∀ q : Ideal R, q.IsPrime → (f ∉ q ↔ q ≠ maximalIdeal R)) ∧
       IsLocalization.Away f (branchFractionRing R) := by
-  refine ⟨fun p ↦ ⟨isDiscreteValuationRing_branch p hdim (hfin p),
-    henselianLocalRing_branch p (hfin p), inferInstance,
+  refine ⟨fun p ↦ ⟨finite_branch p, isDiscreteValuationRing_branch p hdim (finite_branch p),
+    henselianLocalRing_branch p (finite_branch p), inferInstance,
     isAlgClosed_residueField_branch p⟩, ?_⟩
   obtain ⟨f, hfm, hf⟩ := exists_mem_maximalIdeal_forall_notMem hdim
   exact ⟨f, hfm, fun q _ ↦ notMem_iff_ne_maximalIdeal hdim hfm hf q,
     isLocalization_away_branchFractionRing hdim hfm hf⟩
 
-end punctured
+end nagata
 
 end IsLocalRing
