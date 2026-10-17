@@ -13,11 +13,86 @@
   "def-weil-geometric-point",
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-derived-categories",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-strict-henselization-functoriality"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an arbitrary morphism $Y'\\to Y$ and put $g':X'=X\\times_Y Y'\\to Y'$. By [lem-weil-pbc-lft-base-change], $g'$ is locally of finite type; this statement imposes no quasi-compactness or Noetherian hypothesis on $Y'$. For each point of $X'$ choose an affine open $V\\subset Y'$ containing its image and an affine open $U\\subset g'^{-1}(V)$ containing the point. Such $U$ form an open covering of $X'$. The restriction $h:U\\to V$ is locally of finite type: every affine pair in $U,V$ is an affine pair in $X',Y'$, so apply both directions of [lem-weil-pbc-lft-affine-pairs].",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-kunneth-nearby-cycles-appendix.pdf",
+    "place": "Stacks Tags 01T4 (lemma-base-change-finite-type), 01T2 (lemma-locally-finite-type-characterize); Zheng Definition A.1"
+   }
+  },
+  {
+   "text": "The map $h:U\\to V$ between affine schemes is quasi-compact. Explicitly write $V=\\operatorname{Spec}A$, $U=\\operatorname{Spec}B$. The inverse image of a distinguished open $D(a)$ is $\\operatorname{Spec}B_{h^\\#(a)}$; every affine open of $V$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], hence has a finite distinguished-open cover, whose inverse images are again quasi-compact by the same node. A finite union of quasi-compact spaces is quasi-compact, proving the assertion. Thus $h$ is of finite type by [def-weil-finite-type-morphism]. Also $V$ is quasi-compact by the affine-scheme node. Apply [lem-fin-finite-type-fibre-dimension-bound] to obtain $d_U\\ge0$ with every fibre of $h$ of dimension at most $d_U$. The bound is allowed to depend on the chart.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-finite-type-morphism",
+    "lem-fin-finite-type-fibre-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Stacks Tag 0A3V (lemma-morphism-finite-type-bounded-dimension); elementary distinguished-open calculation for quasi-compactness"
+   }
+  },
+  {
+   "text": "Fix a geometric point $x'$ of $U$ and let $y'=g'(x')\\in V$. The strict localizations $U_{(x')}$ and $X'_{(x')}$ are canonically the same, and likewise $V_{(y')}$ and $Y'_{(y')}$. To check this directly from [def-weil-pbc-strict-henselization-limit], a pointed etale neighbourhood of $x'$ in $X'$ can be restricted to its inverse image of $U$ and then to an affine open containing its distinguished point. This is a pointed etale neighbourhood in $U$ mapping to the original neighbourhood. These neighbourhoods form a full subcategory of the affine pointed neighbourhoods in the defining colimit. That indexing category is cofiltered as stated in the strict-localization definition. The preceding refinement verifies the hypothesis of [lem-weil-pbc-colimit-initial-full-subcategory](1), so its colimit is unchanged. The identical argument applies to $V\\subset Y'$. The induced morphisms agree: compatibility with these neighbourhood maps is clause (4) of [lem-weil-pbc-strict-henselization-functoriality], so under these identifications $h_{(x')}=g'_{(x')}$.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Strict-localization definition; restriction to an open neighbourhood and functoriality"
+   }
+  },
+  {
+   "text": "The equation $m\\Lambda=0$ makes $\\Lambda$ a $\\mathbf Z/m\\mathbf Z$-algebra: the unit map $\\mathbf Z\\to\\Lambda$ factors through the quotient, since multiples of $m$ map to zero. For the fixed chart $h$ in step 2, [lem-trf-gabber-strict-local-torsion-bound] now applies with $N=d_U$. It gives $R^q h_{(x')*}F=0$ for every sheaf $F$ of $\\Lambda$-modules on $U_{(x')}$ and every $q>2d_U$, as a sheaf on $V_{(y')}$. By step 3 this is exactly $R^q g'_{(x')*}F=0$ on $Y'_{(y')}$ for every $F$ on $X'_{(x')}$.",
+   "uses": [
+    "lem-trf-gabber-strict-local-torsion-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/Illusie-nearby-cycles28.pdf",
+    "place": "Illusie Corollary 1.15, under Theorem 1.14; Zheng sentence preceding Remark A.2"
+   }
+  },
+  {
+   "text": "Set $N_U=2d_U\\ge0$ for each chart of the open cover chosen in step 1. Step 4 proves the required vanishing uniformly for all geometric points of that chart, all sheaves and all $q>N_U$. This is exactly condition (*) as expanded in the statement. The morphism $Y'\\to Y$ was arbitrary, so the assertion holds universally. If $X'$ is empty the empty covering satisfies the assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-kunneth-nearby-cycles-appendix.pdf",
+    "place": "Zheng Definition A.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-finite-type-morphism",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-trf-gabber-strict-local-torsion-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-kunneth-nearby-cycles-appendix.pdf",
+  "place": "Definition A.1 and sentence preceding Remark A.2, p. 1; expanded affine-chart argument using Illusie Corollary 1.15; local PDFs WANTED, both read online"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,7 +145,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-good-oriented-nearby-kunneth",
@@ -91,5 +166,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-finite-type-torsion-universal-star",
+  "worker": "stage1",
+  "summary": "Completed the arbitrary-base-change and affine-chart reduction to a uniform fibre bound and the fixed-morphism strict-local Gabber corollary. Wrote the open-neighbourhood identification, checked coefficients and sheaf-valued vanishing, retained the statement and previous searches, and added one statement-only dependency.",
+  "blueprint": "Serves the external-product comparison in the specialization-to-the-normal-cone proof of lem-trf-local-term-locality, via lem-trf-trace-specialization, lem-trf-specialization-external-product and lem-trf-good-oriented-nearby-kunneth; supplies its universal (*) input.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Uniform dimension bound for a finite-type affine chart, a generic geometric tool; this unit has no dimension-boundedness statement."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Canonical compatibility of strict-local morphisms with neighbourhood maps, a generic strict-localization tool absent from this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-e2c675dbc",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-e2c675dbc (reviewer sub-agent of L); spot-checked: Neither source is in the local literature mirror (WANTED is correct), so I read both online. Zheng's Künneth appendix, Def. A.1 and the next sentence: a torsion Λ (equivalent to mΛ=0) and f locally of finite type give condition (*) universally; the item states this exactly, with the same Λ-module coefficient category on strict localizations. Illusie, Around Thom–Sebastiani, Cor. 1.15 (pp. 15–16), with the hypotheses of Thm 1.14 (Gabber/Orgogozo 3.1): no noetherian or invertibility hypothesis; the new node lem-trf-gabber-strict-local-torsion-bound states the same hypotheses and conclusion (Z/mZ-algebra, locally of finite type, fibre dimension ≤ N, any geometric point and any Λ-sheaf G, R^q f_(x)* G = 0 for q > 2N) and is statement-only. Step 1 uses the base-change and affine-pair Mathlib leaves with no hypothesis on Y'. Step 2 checks quasi-compactness of the affine chart through distinguished opens and applies the fibre-bound node, whose hypotheses (finite type, quasi-compact target) hold. Step 3: neighbourhoods in U form a full subcategory because U→X' is a monomorphism, refinement gives the hypothesis of colimit-initial (1), and clause (4) of functoriality (or uniqueness in (3)) gives equality of the induced maps. Step 4 checks the coefficient factorisation and applies the new node with N=d_U. Step 5 closes the quantifiers with N_U=2d_U and the empty cover. The new node is strictly smaller than the item (fixed morphism, global bound; it is the source's own named input). rg over the DAG and a blueprint grep found no duplicate. Small cases checked: identity with N=0, A^1 over an algebraically closed field, p-torsion Λ over Z, m=1, empty fibres. I accept both declared tool uses (fibre-dimension bound, strict-henselization functoriality) as generic black boxes. No fixes."
  }
 }

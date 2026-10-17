@@ -11,9 +11,91 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $d$, write $y=g(d)$ and $c=c_d$. Specify the comparison space $T$ by the right-pinched coherent-triangle model: an $n$-simplex is a map $\\sigma:\\Delta^{n+2}\\to E$, with vertices ordered $0,\\ldots,n,y,d$, whose initial $\\Delta^n$ is constant at $x$, whose last edge is $c$, and whose face omitting $y$ is the pullback of $e$ along the monotone map $[n+1]\\to[1]$ taking the first $n+1$ vertices to $0$ and the last to $1$. Require its image under $u$ to be the simplex with vertex sequence $(0,\\ldots,0,0,1)$. Operators apply a monotone map to the initial block and fix the two last vertices; the restrictions are preserved. Its vertices are exactly triangles with edges $h:x\\to y$, $c$ and $e$ over $(0,0,1)$; its higher simplices retain those fixed-edge compatibilities. This is the right-pinched model of the space in the statement, rather than the set of triangle fillers. The edge $h$ lies in $P$ since its whole image in $\\Delta^1$ is constant at $0$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 2.4.1.9 and the strict slice calculation preceding Proposition 2.4.4.2; explicit right-pinched comparison model."
+   }
+  },
+  {
+   "text": "A boundary $\\partial\\Delta^n\\to T$ prescribes, in $\\Delta^{n+2}$, the faces omitting each of $0,\\ldots,n$. The fixed $e$ prescribes the face omitting $y$; its subfaces prescribe the constant initial face and the required endpoints. Together these are precisely $\\Lambda_{n+2}^{n+2}$, the union of every face except the one omitting $d$. Their intersections agree by the simplicial compatibility and the fixed restrictions in Step 1. The final edge is $c$ and the base simplex is $(0,\\ldots,0,0,1)$. The horn-Cartesian definition of $c$ therefore gives a filler over that exact base simplex, hence a simplex of $T$ filling the boundary. When $n=0$, the domain is $\\Lambda_2^2$, consisting of $c$ and $e$, and this proves nonemptiness as well. Thus $T\\to\\Delta^0$ lifts all boundaries. It also lifts every horn: first fill the boundary of the missing face (using the boundary result one dimension lower), then fill the resulting full boundary. For a one-dimensional horn first choose the missing vertex by the dimension-zero result. Hence $T$ is Kan.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 2.4.1.1 and Remark 2.4.1.4, horn formulation; direct boundary-to-outer-horn calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-kan-fibration-fiber-criterion] to the Kan fibration $T\\to\\Delta^0$. Step 2 makes this a trivial Kan fibration, including the dimension-zero boundary. The cited equivalence between triviality and contractible vertex fibers says that its sole fiber, namely $T$, is contractible. This proves the full space assertion, without first assuming that the edge $e$ is Cartesian; only $c$ was used so far.",
+   "uses": [
+    "lem-cbc-kan-fibration-fiber-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 2.4.1.9 and Proposition 2.4.4.3: contractibility of the strict factorization space; Kan-fibration criterion supplied by the cited node."
+   }
+  },
+  {
+   "text": "We now use that $e$ is Cartesian too. For each vertex $z\\in P$, apply [lem-coef-infinity-cartesian-mapping-criterion] to $c:y\\to d$ and $e:x\\to d$. Both lower horizontal arrows are $\\operatorname{Map}_{\\Delta^1}(0,0)\\to\\operatorname{Map}_{\\Delta^1}(0,1)$, a map between one-point simplicial sets: a simplex in either mapping space is the unique monotone map with the prescribed endpoints. Thus the path-space homotopy pullback in that criterion is just the upper-right mapping space. Also $\\operatorname{Map}_E(z,y)=\\operatorname{Map}_P(z,y)$ and $\\operatorname{Map}_E(z,x)=\\operatorname{Map}_P(z,x)$ degreewise: every base simplex all of whose vertices are $0$ is constant. Consequently postcomposition gives weak equivalences $c_*:\\operatorname{Map}_P(z,y)\\to\\operatorname{Map}_E(z,d)$ and $e_*:\\operatorname{Map}_P(z,x)\\to\\operatorname{Map}_E(z,d)$, in particular bijections on components. The endpoint fibers are quasicategories: an inner horn in a fiber lifts against $u$ with constant base simplex and stays in that fiber.",
+   "uses": [
+    "lem-coef-infinity-cartesian-mapping-criterion",
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, specialized to the interval; Remark 2.4.1.9."
+   }
+  },
+  {
+   "text": "For any vertex $(h,\\tau)$ of $T$, its triangle gives $[c][h]=[e]$ by [lem-coef-infinity-mapping-composition]. Surjectivity of $e_*$ at $z=y$ supplies an edge $k:y\\to x$ in $P$ with $[e][k]=[c]$. Associativity gives $[c][h][k]=[c]$ and $[e][k][h]=[e]$. Injectivity of $c_*$ at $z=y$ gives $[h][k]=[1_y]$, and injectivity of $e_*$ at $z=x$ gives $[k][h]=[1_x]$. These equalities are in the homotopy category of $P$: its composition is the restriction of the same canonical composition, since triangles whose vertices lie over $0$ lie wholly in $P$. The cited composition theorem identifies invertible component classes with edges admitting the two inverse-triangle witnesses. Therefore every such $h$ is an equivalence in $P$, for every choice of the coherent triangle.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 2.4.1.9; explicit cancellation on mapping-space components, using the criterion in Step 4."
+   }
+  },
+  {
+   "text": "Finally let $a:v\\to w$ be $u$-Cartesian over the identity of $i\\in\\{0,1\\}$. For every $z\\in E_i$, the Cartesian mapping criterion has lower row $\\operatorname{Map}_{\\Delta^1}(i,i)\\to\\operatorname{Map}_{\\Delta^1}(i,i)$, the identity of a point. Every mapping simplex between these endpoint objects lies in $E_i$, as in Step 4. Thus $a_*:\\operatorname{Map}_{E_i}(z,v)\\to\\operatorname{Map}_{E_i}(z,w)$ is a weak equivalence. At $z=w$, surjectivity on components gives $b:w\\to v$ in $E_i$ with $[a][b]=[1_w]$. At $z=v$, injectivity and $[a][b][a]=[a]$ give $[b][a]=[1_v]$. The composition theorem supplies the inverse triangles inside $E_i$, so $a$ is an equivalence in its endpoint fiber. This proves the final clause for both endpoints, without assuming that all edges in an endpoint fiber are Cartesian.",
+   "uses": [
+    "lem-coef-infinity-cartesian-mapping-criterion",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.1.5, restricted to an identity base edge; direct derivation from Proposition 2.4.4.3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-coef-infinity-cartesian-mapping-criterion",
+  "lem-coef-infinity-mapping-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived coefficient adjunction infrastructure; agent expansion of the Cartesian-edge comparison supporting HA Theorem 2.3.3.23(1), using HTT Remark 2.4.1.9, Proposition 2.4.1.5 and Proposition 2.4.4.3 read online. Archival copies WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +124,45 @@
    "results": "{\"t\": \"2026-10-17T09:26:22Z\", \"tool\": \"leansearch\", \"query\": \"Two cartesian lifts of the same base arrow with the same target differ by an equivalence in the fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso_hom_isHomLift\", \"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso.congr_simp\", \"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso\", \"CategoryTheory.Functor.IsCartesian.ext\", \"CategoryTheory.Functor.IsCartesian.map_uniq\", \"CategoryTheory.Functor.IsCartesian.fac\", \"CategoryTheory.Functor.IsStronglyCartesian.map.congr_simp\", \"CategoryTheory.Functor.IsCocartesian.map.congr_simp\"], \"digest\": \"11eee6d2a233b37d\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary-category Cartesian-lift isomorphisms do not state the quasicategorical coherent factorization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a quasicategory a Cartesian lift of an arrow with fixed target is unique up to a contractible space of equivalences in the fiber",
+   "results": "{\"t\": \"2026-10-17T12:10:10Z\", \"tool\": \"leanfinder\", \"query\": \"In a quasicategory a Cartesian lift of an arrow with fixed target is unique up to a contractible space of equivalences in the fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCartesian.ext\", \"CategoryTheory.Functor.IsCartesian.map_uniq\", \"CategoryTheory.Functor.IsCartesian.universal_property\", \"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso\", \"CategoryTheory.Functor.IsCocartesian.ext\", \"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso_inv_isHomLift\", \"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso_hom_isHomLift\", \"CategoryTheory.Functor.IsStronglyCartesian.universal_property'\"], \"digest\": \"ea190bdb9e6f5256\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean:55–110,141–158. IsCartesian and domainUniqueUpToIso concern ordinary categories and strict unique factorization, not quasicategories, coherent triangle spaces or their contractibility. Quasicategory grep found only a future-work comment in StrictBicategory.lean:28. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian|Cartesian",
+   "results": "{\"t\": \"2026-10-17T12:10:51Z\", \"tool\": \"grep\", \"query\": \"cartesian|Cartesian\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\"], \"digest\": \"16b6bbd98402e776\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean:55–110,141–158. IsCartesian and domainUniqueUpToIso concern ordinary categories and strict unique factorization, not quasicategories, coherent triangle spaces or their contractibility. Quasicategory grep found only a future-work comment in StrictBicategory.lean:28. No exact match or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The space of factorizations through a cartesian edge in an infinity category is contractible",
+   "results": "{\"t\": \"2026-10-17T12:10:52Z\", \"tool\": \"leansearch\", \"query\": \"The space of factorizations through a cartesian edge in an infinity category is contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCartesian.fac\", \"CategoryTheory.Factorisation\", \"CategoryTheory.Factorisation.instHasTerminal\", \"CategoryTheory.Factorisation.instHasInitial\", \"HasFibers.fiber_factorization\", \"CategoryTheory.Functor.IsCartesian.fac_assoc\", \"CategoryTheory.Functor.IsStronglyCartesian.fac\", \"CategoryTheory.Limits.MonoFactorisation\"], \"digest\": \"f309defef3a6e63f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean:55–110,141–158. IsCartesian and domainUniqueUpToIso concern ordinary categories and strict unique factorization, not quasicategories, coherent triangle spaces or their contractibility. Quasicategory grep found only a future-work comment in StrictBicategory.lean:28. No exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCartesian\"",
+   "results": "{\"t\": \"2026-10-17T12:10:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsCartesianDistributive\", \"CategoryTheory.IsCartesianDistributive.monoCoprod\", \"CategoryTheory.IsCartesianDistributive.of_isMonoidalLeftDistrib\", \"CategoryTheory.Functor.IsCartesian\", \"CategoryTheory.Functor.IsCartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCartesian.isCartesian_of_isStronglyCartesian\", \"CategoryTheory.Functor.IsCartesian.domainUniqueUpToIso\", \"CategoryTheory.Functor.IsCartesian.map\"], \"digest\": \"ee60ea7ef3b44b3d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean:55–110,141–158. IsCartesian and domainUniqueUpToIso concern ordinary categories and strict unique factorization, not quasicategories, coherent triangle spaces or their contractibility. Quasicategory grep found only a future-work comment in StrictBicategory.lean:28. No exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "domainUniqueUpToIso|theorem fac|class IsCartesian",
+   "results": "{\"t\": \"2026-10-17T12:12:41Z\", \"tool\": \"grep\", \"query\": \"domainUniqueUpToIso|theorem fac|class IsCartesian\", \"sub\": \"CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\"], \"digest\": \"a72aa4d64aaa10a9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean:55–110,141–158. IsCartesian and domainUniqueUpToIso concern ordinary categories and strict unique factorization, not quasicategories, coherent triangle spaces or their contractibility. Quasicategory grep found only a future-work comment in StrictBicategory.lean:28. No exact match or one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-weak-approximation-algebras",
@@ -73,5 +190,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-symmetric-cartesian-cylinder-edge-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed the coherent comparison space explicitly and proved its boundary lifting by a single Cartesian outer-horn calculation; deduced contractibility from the existing Kan-fibration criterion. Derived equivalence of each comparison edge and of each vertical Cartesian edge by the existing Cartesian mapping criterion and explicit inverse/cancellation equations. No new nodes.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2, middle derived coefficient adjunction comparison: supporting operadic restriction infrastructure, HA 2.3.3.23(1) condition (ii), passage from chosen Cartesian cylinder edges to all Cartesian edges. Steps 1–3 establish coherent uniqueness, steps 4–5 the fiber equivalence, step 6 the degenerate-base-edge case.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-kan-fibration-fiber-criterion",
+    "why": "Generic Kan-fibration criterion converting the directly proved boundary lifting to contractibility; no node of this unit supplies this elementary homotopy-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-kan-fibration-fiber-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-05ac9408a",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-05ac9408a (reviewer sub-agent of L); spot-checked: I read the whole delivery, which is the item only (no new nodes). I also read the full statements of def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, lem-cbc-kan-fibration-fiber-criterion, lem-coef-infinity-cartesian-mapping-criterion and lem-coef-infinity-mapping-composition, and the only citer, step 10 of lem-coef-symmetric-weak-approximation-algebras. Step 1: T is a valid simplicial set, the fibre of E/c -> E/d over e. Step 2: a boundary in degree n together with the fixed degenerate e is exactly the outer horn Lambda^{n+2}_{n+2} with last edge c over the base simplex (0..0,1), so the horn-Cartesian property of c fills it; n=0 gives nonemptiness, and horn lifting follows from boundary lifting. Step 3 applies the Kan-fibration criterion to T -> point. Step 4: in the Cartesian mapping criterion the corner mapping spaces of Delta^1 are points, so c_* and e_* are weak equivalences, and Map_E(z,-)=Map_P(z,-) degreewise. Step 5: the inverse equations [h][k]=1 and [k][h]=1 follow from injectivity of c_* at y and of e_* at x, with k from surjectivity of e_* at y, all in hP. Step 6: the same argument gives HTT 2.4.1.5 for an identity base edge. I tested N([1]) with u=id, C x Delta^1 and a noninvertible vertical arrow; all agree with the statement. No duplicate found in dag/nodes or the main-20261015 blueprint (same_as=[] correct). HTT 2.4.4.3, 2.4.1.5, 2.4.1.9 and HA 2.3.3.23 are not archived; the WANTED request is recorded and the proof is marked agent-written. I checked the cited places from knowledge of HTT. No SGA source. Mathlib: all three search kinds recorded, no match. Accepted tool use: lem-cbc-kan-fibration-fiber-criterion, a generic Kan-complex criterion. Minor: the statement does not give the triangle space a formal model; Step 1 fixes the standard one, and I accepted this without change. No changes made."
  }
 }
