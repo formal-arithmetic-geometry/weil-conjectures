@@ -73,31 +73,37 @@ variable {i j : I} (h : i ≤ j) (T : Triangle (C i))
 lemma ιMapTriangleTransIso_hom_app_hom₁ :
     ((S.ιMapTriangleTransIso h).hom.app T).hom₁ = (S.transIso h).hom.app T.obj₁ := by
   simp [ιMapTriangleTransIso]
+  first | erw [Category.id_comp] | erw [Category.comp_id]
 
 @[simp]
 lemma ιMapTriangleTransIso_hom_app_hom₂ :
     ((S.ιMapTriangleTransIso h).hom.app T).hom₂ = (S.transIso h).hom.app T.obj₂ := by
   simp [ιMapTriangleTransIso]
+  first | erw [Category.id_comp] | erw [Category.comp_id]
 
 @[simp]
 lemma ιMapTriangleTransIso_hom_app_hom₃ :
     ((S.ιMapTriangleTransIso h).hom.app T).hom₃ = (S.transIso h).hom.app T.obj₃ := by
   simp [ιMapTriangleTransIso]
+  first | erw [Category.id_comp] | erw [Category.comp_id]
 
 @[simp]
 lemma ιMapTriangleTransIso_inv_app_hom₁ :
     ((S.ιMapTriangleTransIso h).inv.app T).hom₁ = (S.transIso h).inv.app T.obj₁ := by
   simp [ιMapTriangleTransIso]
+  first | erw [Category.id_comp] | erw [Category.comp_id]
 
 @[simp]
 lemma ιMapTriangleTransIso_inv_app_hom₂ :
     ((S.ιMapTriangleTransIso h).inv.app T).hom₂ = (S.transIso h).inv.app T.obj₂ := by
   simp [ιMapTriangleTransIso]
+  first | erw [Category.id_comp] | erw [Category.comp_id]
 
 @[simp]
 lemma ιMapTriangleTransIso_inv_app_hom₃ :
     ((S.ιMapTriangleTransIso h).inv.app T).hom₃ = (S.transIso h).inv.app T.obj₃ := by
   simp [ιMapTriangleTransIso]
+  first | erw [Category.id_comp] | erw [Category.comp_id]
 
 end
 

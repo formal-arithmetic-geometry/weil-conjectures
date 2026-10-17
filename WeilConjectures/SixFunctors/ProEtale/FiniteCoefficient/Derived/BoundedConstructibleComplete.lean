@@ -88,6 +88,11 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {R : Type (u + 1)} [CommRing R] (I : Ideal R) (T : Scheme.{u})
 
+/-- Membership in `D_c^[a, b](T, R)` is invariant under isomorphism. -/
+instance DerivedCategory.isClosedUnderIsomorphisms_constructibleIn (a b : ℤ) :
+    (DerivedCategory.constructibleIn (ModuleCat.{u + 1} R) T a b).IsClosedUnderIsomorphisms :=
+  inferInstanceAs (_ ⊓ _ : ObjectProperty _).IsClosedUnderIsomorphisms
+
 /-- Blueprint `def-weil-pbc-bounded-constructible-complete`: Bounded constructible complete
 category.
 

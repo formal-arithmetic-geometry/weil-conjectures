@@ -47,6 +47,24 @@ lemma IsTorsion.isZero_colimit_rationalizationDiagram {F : Sheaf J (ModuleCat.{w
   have hdvd : N ∣ (k + 1).ascFactorial N :=
     (Nat.dvd_factorial hN le_rfl).trans (Nat.factorial_dvd_ascFactorial _ _)
   obtain ⟨m, hm⟩ := hdvd
-  sorry
+  have hx0 : (N * m) • (F.obj.map f.op).hom x = 0 := by
+    rw [mul_comm, mul_smul]
+    exact (congr_arg (m • ·) hNx).trans (smul_zero _)
+  have hnat := ConcreteCategory.congr_hom
+    ((colimit.ι (rationalizationDiagram F) k).hom.naturality f.op) x
+  have hnat' := ConcreteCategory.congr_hom
+    ((0 : (rationalizationDiagram F).obj k ⟶ colimit (rationalizationDiagram F)).hom.naturality
+      f.op) x
+  refine (hnat.symm.trans ?_).trans hnat'
+  rw [hι, hm]
+  have hs : ((N * m) • colimit.ι (rationalizationDiagram F) (k + N)).hom.app (op V) =
+      (N * m) • (colimit.ι (rationalizationDiagram F) (k + N)).hom.app (op V) := by
+    rw [← NatTrans.app_nsmul]; rfl
+  have h0 : (0 : (rationalizationDiagram F).obj k ⟶ colimit (rationalizationDiagram F)).hom.app
+      (op V) = 0 := rfl
+  rw [hs, h0, ConcreteCategory.comp_apply, ConcreteCategory.comp_apply]
+  simp only [ModuleCat.hom_nsmul, LinearMap.smul_apply]
+  rw [← map_nsmul]
+  exact (congr_arg _ hx0).trans (map_zero _)
 
 end CategoryTheory.Sheaf

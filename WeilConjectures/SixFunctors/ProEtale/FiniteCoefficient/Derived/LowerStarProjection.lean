@@ -112,7 +112,8 @@ variable [ProEtale.UpperStarPreservesFlat A]
 `p : X ⟶ Y`, as a natural transformation of bifunctors `D(X_proét) ⥤ D(Y_proét) ⥤ D(Y_proét)`.
 It is `CategoryTheory.Adjunction.rightAdjointProjectionMap` for the adjunction
 `AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunction` and the comparison
-`AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison`. -/
+`AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison`. This is blueprint
+`def-weil-pbc-projection-formula-map`. -/
 noncomputable def rightDerivedLowerStarProjectionMap :
     derivedTensorRightDerivedLowerStar A p ⟶
       rightDerivedLowerStarDerivedTensorLeftDerivedUpperStar A p :=

@@ -42,11 +42,11 @@ lemma Scheme.IsTorsionModuleSheaf.of_isZero_colimit_rationalizationDiagram
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hF : IsZero (colimit (rationalizationDiagram F))) : IsTorsionModuleSheaf F where
   isTorsion_sheafFiber Ω _ _ s := by
-    have : (pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ) |>.Additive :=
-      (pointSmallEtale s).sheafFiber_additive
-    have : PreservesColimitsOfSize.{0, 0} ((pointSmallEtale s).sheafFiber
-        (A := ModuleCat.{u + 1} Λ)) :=
-      preservesColimitsOfSize_shrink.{0, 0, u, u} _
+    have : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+      hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
+    have := (pointSmallEtale s).sheafFiber_additive (A := ModuleCat.{u + 1} Λ)
+    have :=
+      ((pointSmallEtale s).skyscraperSheafAdjunction (A := ModuleCat.{u + 1} Λ)).isLeftAdjoint
     have hZ : IsZero (colimit (rationalizationDiagram
         ((pointSmallEtale s).sheafFiber.obj F))) :=
       IsZero.of_iso ((pointSmallEtale s).sheafFiber.map_isZero hF)
@@ -54,12 +54,15 @@ lemma Scheme.IsTorsionModuleSheaf.of_isZero_colimit_rationalizationDiagram
           ((pointSmallEtale s).sheafFiber.mapRationalizationDiagramIso F)).symm ≪≫
           (preservesColimitIso (pointSmallEtale s).sheafFiber _).symm)
     intro x
-    obtain ⟨n, i, hn⟩ := Concrete.colimit_rep_eq_zero
+    have : PreservesFilteredColimitsOfSize.{0, 0} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+      preservesFilteredColimitsOfSize_shrink.{0, u + 1, 0, u + 1} _
+    obtain ⟨n, i, hn⟩ := Concrete.colimit_rep_eq_zero Λ
       (rationalizationDiagram ((pointSmallEtale s).sheafFiber.obj F)) 0 x
       (by rw [hZ.eq_of_tgt (colimit.ι _ 0) 0]; rfl)
     rw [rationalizationDiagram_map] at hn
     refine isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨_, Nat.ascFactorial_pos 0 (n - 0), ?_⟩
-    simpa using hn
+    rw [ModuleCat.hom_nsmul, LinearMap.smul_apply] at hn
+    exact hn
 
 /-- An étale sheaf of `Λ`-modules is torsion if its pullback `ν^* F` to the pro-étale site has
 torsion underlying abelian sheaf. -/
@@ -67,18 +70,18 @@ lemma Scheme.IsTorsionModuleSheaf.of_isTorsion_comparisonUpperStar
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hF : ((sheafCompose (ProEt.topology X)
       (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
-        ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj F)).IsTorsion) :
+        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj F)).IsTorsion) :
     IsTorsionModuleSheaf F := by
   refine .of_isZero_colimit_rationalizationDiagram F ?_
-  have h : IsZero ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj
+  have h : IsZero ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj
       (colimit (rationalizationDiagram F))) :=
     IsZero.of_iso hF.isZero_colimit_rationalizationDiagram
-      (preservesColimitIso (comparisonUpperStar (ModuleCat.{u + 1} Λ) X) _ ≪≫
+      (preservesColimitIso (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X) _ ≪≫
         HasColimit.isoOfNatIso
-          ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapRationalizationDiagramIso F))
+          ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapRationalizationDiagramIso F))
   rw [IsZero.iff_id_eq_zero]
-  refine (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).map_injective ?_
-  rw [Functor.map_id, Functor.map_zero]
+  refine (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X).map_injective ?_
+  rw [CategoryTheory.Functor.map_id, Functor.map_zero]
   exact h.eq_of_src _ _
 
 end AlgebraicGeometry

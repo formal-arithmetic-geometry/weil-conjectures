@@ -84,7 +84,7 @@ noncomputable def shiftMorphismZero : Morphism.Hom (S.shiftMorphism A 0) (Morphi
     erw [Iso.inv_hom_id_app]
     rfl
 
-omit [S.ShiftCompatible A] [∀ ⦃i j : I⦄ (h : i ≤ j), (S.T h).CommShift A] in
+omit [Preorder I] [S.ShiftCompatible A] [∀ ⦃i j : I⦄ (h : i ≤ j), (S.T h).CommShift A] in
 /-- The compatibility of the shift comparison of a functor with `shiftFunctorAdd`. -/
 lemma commShiftIso_add_comm {i j : I} (F : C i ⥤ C j) [F.CommShift A] (a b : A) (x : C i) :
     F.map ((shiftFunctorAdd (C i) a b).hom.app x) ≫
@@ -176,7 +176,6 @@ noncomputable def shiftMkCore : ShiftMkCore S.PairCategory A where
     rw [eqToHom_shift X (add_assoc m₁ m₂ m₃)]
     simp only [shiftAddIso_hom_app, shiftMorphism_functor_map_ι]
     simp only [← Functor.map_comp]
-    congr 1
     rw [shiftFunctorAdd_assoc_hom_app (C := C X.stage) m₁ m₂ m₃ X.obj]
     simp [shiftFunctorAdd']
     rfl
@@ -294,13 +293,10 @@ instance commShift_transIso_hom {i j : I} (h : i ≤ j) :
     congr 1
     have e := NatTrans.shift_app_comm (S.assoc h (le_refl j)).hom a K
     rw [Functor.commShiftIso_comp_hom_app] at e
-    rw [← cancel_epi (((S.assoc h le_rfl).hom.app K)⟦a⟧')]
-    simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, id_comp]
-    rw [← cancel_epi ((S.T (le_refl j)).map (((S.T h).commShiftIso a).hom.app K) ≫
-      ((S.T (le_refl j)).commShiftIso a).hom.app ((S.T h).obj K))]
-    simp only [Category.assoc] at e
-    rw [reassoc_of% e]
-    simp [← Functor.map_comp_assoc]
+    have e' := e =≫ ((S.T h).commShiftIso a).inv.app K
+    simp only [Category.assoc, Iso.hom_inv_id_app] at e'
+    erw [Category.comp_id] at e'
+    exact e'
 
 end StageSystem
 

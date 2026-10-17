@@ -122,7 +122,8 @@ theorem directImageFiniteness_of_isProper {X Y : Scheme.{u}} (f : X ⟶ Y) [IsPr
   refine ⟨?_, fun hq ↦ ?_⟩
   · exact (Etale.boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType Λ f (f ≫ aY)
       aY rfl _ (Etale.DerivedCategory.boundedConstructible_singleFunctor_obj F' 0)).2 q
-  · exact (Etale.isZero_homology_rightDerivedLowerShriek_singleFunctor Λ f (f ≫ aY) aY rfl e he
+  · have : HasInvertibleExponent Λ Y := .of_hom aY
+    exact (Etale.isZero_homology_rightDerivedLowerShriek_singleFunctor Λ f (f ≫ aY) aY rfl e he
       F' q (by lia)).of_iso
       ((_root_.DerivedCategory.homologyFunctor _ q).mapIso
         ((Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) f).app

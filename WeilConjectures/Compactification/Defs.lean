@@ -86,7 +86,8 @@ namespace Compactification
 
 variable {X Y : Scheme.{u}}
 
-/-- A proper morphism is a compactification of itself. -/
+/-- A proper morphism is a compactification of itself, its *identity compactification*
+`(1_X, f)` (blueprint `def-weil-pbc-projection-compactification`). -/
 def ofIsProper (f : X ⟶ Y) [IsProper f] : Compactification f where
   Z := X
   g := f

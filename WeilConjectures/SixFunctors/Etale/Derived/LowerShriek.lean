@@ -92,7 +92,10 @@ by the total right derived pushforward `Rg_*`.
 Warning: It is deliberately *not* the total right derived functor of the composite
 `i_! ⋙ g_* = Etale.lowerShriek`. In general, `i_!` does not sends injective sheaves to
 `g_*`-acyclic ones, and `Rf_!` is not the derived functor of `f_!`, through its zeroth
-homology is `f_!`. Deligne made explicit calculations on $A^1$, see SGA. -/
+homology is `f_!`. Deligne made explicit calculations on $A^1$, see SGA.
+
+This is blueprint `def-weil-pbc-projection-compactification` (`Rf_!^{(j,p)} = Rp_* j_!`); the
+identity compactification of a proper `f` is `AlgebraicGeometry.Compactification.ofIsProper`. -/
 noncomputable abbrev rightDerivedLowerShriekOfCompactification :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf Y.smallEtaleTopology A) :=
