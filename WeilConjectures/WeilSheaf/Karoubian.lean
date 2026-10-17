@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Triangulated.TStructure.Induced
 public import WeilConjectures.CategoryTheory.Idempotents.TStructure
 public import WeilConjectures.WeilSheaf.Category
+public import WeilConjectures.WeilSheaf.VerdierDualFinite
 
 /-!
 # Weil complexes form an idempotent complete category
@@ -49,35 +50,11 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fa
   (Y : Scheme.{u}) [Y.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
 
-instance : (_root_.DerivedCategory.homologyProperty
-    (WeilSheaf.objectProperty k₀ l Y)).HasInducedTStructure
-      _root_.DerivedCategory.TStructure.t :=
-  .mk' fun _ hX n ↦ ⟨_root_.DerivedCategory.homologyProperty_truncLE hX n,
-    _root_.DerivedCategory.homologyProperty_truncGE hX n⟩
-
-instance : (objectProperty k₀ l Y).HasInducedTStructure _root_.DerivedCategory.TStructure.t := by
-  have : (_root_.DerivedCategory.homologyProperty
-      (WeilSheaf.objectProperty k₀ l Y)).IsTriangulated := inferInstance
-  have : (_root_.DerivedCategory.TStructure.t
-      (C := ProEtaleWeilSheaf k₀ l Y)).bounded.IsTriangulated := inferInstance
-  have : (_root_.DerivedCategory.homologyProperty
-      (WeilSheaf.objectProperty k₀ l Y)).IsClosedUnderIsomorphisms := inferInstance
-  have : (_root_.DerivedCategory.TStructure.t
-      (C := ProEtaleWeilSheaf k₀ l Y)).bounded.HasInducedTStructure
-        _root_.DerivedCategory.TStructure.t := inferInstance
-  exact inferInstanceAs (ObjectProperty.HasInducedTStructure (_ ⊓ _) _)
-
-/-- The standard t-structure on the Weil complexes, induced by the standard t-structure of the
-derived category of pro-étale Weil sheaves: the truncations of a Weil complex are Weil
-complexes. -/
-noncomputable def tStructure : TStructure (WeilComplex k₀ l Y) :=
-  (objectProperty k₀ l Y).tStructure _root_.DerivedCategory.TStructure.t
-
 /-- The standard t-structure on the Weil complexes is bounded. -/
 lemma tStructure_bounded (K : WeilComplex k₀ l Y) : (tStructure k₀ l Y).bounded K := by
   obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := K.property.1
-  exact ⟨⟨a, ((objectProperty k₀ l Y).tStructure_isGE_iff _ K a).2 ha⟩,
-    ⟨b, ((objectProperty k₀ l Y).tStructure_isLE_iff _ K b).2 hb⟩⟩
+  exact ⟨⟨a, (tStructure_isGE_iff K a).2 ha⟩,
+    ⟨b, (tStructure_isLE_iff K b).2 hb⟩⟩
 
 /-- Blueprint `lem-weil-weil-complex-qbar-idempotent-complete`: Idempotent completeness of the
 common-stage Weil category

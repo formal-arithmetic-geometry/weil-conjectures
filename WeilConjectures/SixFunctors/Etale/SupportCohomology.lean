@@ -136,25 +136,25 @@ variable {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 The functor `Γ_Z(X, -)` of sections with support in the closed subscheme `i : Z ⟶ X` of
 sheaves on the small pro-étale site of `X`: `Γ_Z(X, F) = ker (Γ(X, F) ⟶ F(U))` for the open
 complement `U` of `Z`. -/
-noncomputable def sectionsWithSupport : Sheaf (Scheme.ProEt.topology X) A ⥤ A :=
+noncomputable def globalSectionsWithSupport : Sheaf (Scheme.ProEt.topology X) A ⥤ A :=
   Sheaf.ΓSupport (Scheme.ProEt.topology X) A (op (Scheme.ProEt.mk i.openComplement.ι))
 
-instance : (sectionsWithSupport A i).Additive := by
-  dsimp [sectionsWithSupport]; infer_instance
+instance : (globalSectionsWithSupport A i).Additive := by
+  dsimp [globalSectionsWithSupport]; infer_instance
 
 /-- Blueprint `def-pur-support-cohomology`: Cohomology with support.
 
 The cohomology with support `H^q_Z(X, F)` of a pro-étale sheaf `F` on `X`: the `q`-th right
 derived functor of the sections with support in `Z`. -/
 noncomputable def supportCohomology (q : ℕ) : Sheaf (Scheme.ProEt.topology X) A ⥤ A :=
-  (sectionsWithSupport A i).rightDerived q
+  (globalSectionsWithSupport A i).rightDerived q
 
 /-- Blueprint `def-pur-support-cohomology`: Cohomology with support.
 
 The derived sections with support `RΓ_Z(X, -) : D(X_proét) ⥤ D(A)`. -/
 noncomputable def rightDerivedSectionsWithSupport :
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤ DerivedCategory A :=
-  (sectionsWithSupport A i).rightDerivedFunctor
+  (globalSectionsWithSupport A i).rightDerivedFunctor
 
 /-- Blueprint `def-pur-support-cohomology`: Cohomology with support.
 
