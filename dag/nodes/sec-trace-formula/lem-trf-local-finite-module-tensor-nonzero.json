@@ -2,49 +2,113 @@
  "id": "lem-trf-local-finite-module-tensor-nonzero",
  "kind": "statement",
  "title": "Nonzero tensor product of finite modules over a local ring",
- "statement": "Let $(R,\\mathfrak m)$ be a commutative local ring with residue field $\\kappa=R/\\mathfrak m$. If $M$ and $N$ are nonzero finitely generated $R$-modules [def-weil-finitely-generated-module], then $M\\otimes_RN\\ne0$.",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative local ring with residue field $\\kappa=R/\\mathfrak m$. If $M$ and $N$ are nonzero finitely generated $R$-modules [def-weil-finitely-generated-module], then $M\\otimes_RN\\ne0$ [def-weil-pbc-module-tensor-product].",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tag 00DV (Nakayama lemma), together with the tensor-product base-change isomorphism of Section 010Z"
  },
  "stmt_deps": [
-  "def-weil-finitely-generated-module"
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\overline M=M/\\mathfrak mM$ and $\\overline N=N/\\mathfrak mN$. They are $\\kappa$-vector spaces, with $[r][x]=[rx]$: the formula is well-defined since $\\mathfrak m$ kills each quotient. If $\\overline M=0$, the image of the zero submodule of $M$ is all of $M/\\mathfrak mM$; the final assertion of [lem-weil-pbc-nakayama-local-generators] then gives $M=0$, a contradiction. Its hypotheses hold because $R$ is local and $M$ is finitely generated. The identical application to the finite module $N$ proves $\\overline N\\ne0$. Thus both residue quotients are nonzero.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DV, lemma-NAK, parts (2) and (4), applied to the zero submodule and the maximal ideal."
+   }
+  },
+  {
+   "text": "The residue ring $\\kappa$ is a field by the hypothesis that $\\mathfrak m$ is maximal. Apply [lem-pur-field-vector-space-tensor-nontrivial] to the two nonzero $\\kappa$-modules from Step 1. It gives $T=\\overline M\\otimes_\\kappa\\overline N\\ne0$. No freeness or flatness over $R$ is required.",
+   "uses": [
+    "lem-pur-field-vector-space-tensor-nontrivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean",
+    "place": "Module.FaithfullyFlat.lTensor_nontrivial, lines 114-117, with the nontrivial-free faithfully-flat instance at line 209 and Module.Free.of_divisionRing (Basis/VectorSpace.lean:156)."
+   }
+  },
+  {
+   "text": "Regard $T$ as an $R$-module through $R\\to\\kappa$. The map $\\beta:M\\times N\\to T$, $(x,y)\\mapsto[x]\\otimes[y]$, is $R$-bilinear: additivity follows from the quotient maps and tensor relations, and $[rx]\\otimes[y]=[r]([x]\\otimes[y])=[x]\\otimes[ry]$. By the universal property in [def-weil-pbc-module-tensor-product], it induces $q:M\\otimes_RN\\to T$ sending $x\\otimes y$ to $[x]\\otimes[y]$. This map is surjective: every element of $T$ is a finite sum of pure tensors after absorbing scalar coefficients into the first factor, and every such pure tensor lifts by choosing representatives in $M$ and $N$. If $M\\otimes_RN=0$, this surjection would give $T=0$, contradicting Step 2. Hence $M\\otimes_RN\\ne0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX, lemma-tensor-product, universal property and generation by pure tensors in its proof; the quotient bilinear map and its surjectivity are written out here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-pur-field-vector-space-tensor-nontrivial",
+  "lem-weil-pbc-nakayama-local-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent corollary of Tag 00DV (lemma-NAK) and Tag 00CX (lemma-tensor-product), using the existing field-vector-space tensor nonvanishing Mathlib leaf."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Tensor product of two nonzero finite modules over a commutative local ring is nonzero",
-   "results": "IsLocalRing.subsingleton_tensorProduct and Module.mem_support_iff_nontrivial_residueField_tensorProduct; no arbitrary two-factor theorem",
+   "query": "Tensor product of two nonzero finitely generated modules over a commutative local ring is nonzero",
+   "results": "{\"t\": \"2026-10-17T23:50:12Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor product of two nonzero finitely generated modules over a commutative local ring is nonzero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instNontrivialTensorProduct\", \"Module.FaithfullyFlat.rTensor_nontrivial\", \"Module.FaithfullyFlat.lTensor_nontrivial\", \"Module.mem_support_iff_nontrivial_residueField_tensorProduct\", \"Module.FaithfullyFlat.nontrivial_tensorProduct_iff_left\", \"Module.FaithfullyFlat.nontrivial_tensorProduct_iff_right\", \"TensorProduct.nontrivial_of_linearMap_injective_of_flat_right\", \"TensorProduct.nontrivial_of_linearMap_injective_of_flat_left\"], \"digest\": \"0d6fc2eb500d67ec\"}",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "no match: inspected the hits; IsLocalRing.subsingleton_tensorProduct has a residue-field factor, instNontrivialTensorProduct only covers M tensor M, and the faithfully-flat results require a hypothesis absent here. The support criterion is a residue-field test, not the arbitrary two-factor assertion."
   },
   {
    "tool": "loogle",
-   "query": "TensorProduct, IsLocalRing, PseudoCoherent",
-   "results": "unknown identifier PseudoCoherent; IsLocalRing.subsingleton_tensorProduct hit only",
+   "query": "TensorProduct, IsLocalRing, Module.Finite",
+   "results": "{\"t\": \"2026-10-17T23:50:32Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, IsLocalRing, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"IsLocalRing.subsingleton_tensorProduct\", \"IsLocalRing.span_eq_top_of_tmul_eq_basis\", \"IsLocalRing.split_injective_iff_lTensor_residueField_injective\", \"Module.free_of_lTensor_residueField_injective\", \"IsLocalRing.map_tensorProduct_mk_eq_top\", \"Module.IsLocalRing.linearCombination_bijective_of_flat\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\"], \"digest\": \"53495e3748407bde\"}",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "no match: inspected the hits; IsLocalRing.subsingleton_tensorProduct has a residue-field factor, instNontrivialTensorProduct only covers M tensor M, and the faithfully-flat results require a hypothesis absent here. The support criterion is a residue-field test, not the arbitrary two-factor assertion."
   },
   {
    "tool": "grep",
-   "query": "tensor.*cohomology|pseudo.?coherent|tensor.*nonzero",
-   "results": "0 hits for the requested statement",
+   "query": "subsingleton_tensorProduct|nontrivial.*[Tt]ensor|tensorProduct.*[Nn]ontrivial|support_tensorProduct",
+   "results": "{\"t\": \"2026-10-17T23:50:32Z\", \"tool\": \"grep\", \"query\": \"subsingleton_tensorProduct|nontrivial.*[Tt]ensor|tensorProduct.*[Nn]ontrivial|support_tensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorAlgebra/Basic.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Unramified/Field.lean\"], \"digest\": \"2fd97c4247eab513\"}",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "no match: inspected the hits; IsLocalRing.subsingleton_tensorProduct has a residue-field factor, instNontrivialTensorProduct only covers M tensor M, and the faithfully-flat results require a hypothesis absent here. The support criterion is a residue-field test, not the arbitrary two-factor assertion."
   },
   {
    "tool": "leansearch",
-   "query": "Tensor product of two nonzero finite modules over a commutative local ring is nonzero",
-   "results": "Module.FaithfullyFlat tensor lemmas and IsLocalRing.subsingleton_tensorProduct; no exact theorem",
+   "query": "Tensor product of two nonzero finitely generated modules over a commutative local ring is nonzero",
+   "results": "{\"t\": \"2026-10-17T23:50:32Z\", \"tool\": \"leansearch\", \"query\": \"Tensor product of two nonzero finitely generated modules over a commutative local ring is nonzero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.nontrivial_tensorProduct_iff_right\", \"instNontrivialTensorProduct\", \"Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left\", \"Module.FaithfullyFlat.rTensor_nontrivial\", \"TensorProduct.uniqueLeft\", \"Module.FaithfullyFlat.lTensor_nontrivial\", \"Module.FaithfullyFlat.nontrivial_tensorProduct_iff_left\", \"Module.Finite.tensorProduct\"], \"digest\": \"f0d9e64f44aa61e0\"}",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "no match: inspected the hits; IsLocalRing.subsingleton_tensorProduct has a residue-field factor, instNontrivialTensorProduct only covers M tensor M, and the faithfully-flat results require a hypothesis absent here. The support criterion is a residue-field test, not the arbitrary two-factor assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a local ring the tensor product of finite modules vanishes only when one factor is zero",
+   "results": "{\"t\": \"2026-10-17T23:50:59Z\", \"tool\": \"leanfinder\", \"query\": \"Over a local ring the tensor product of finite modules vanishes only when one factor is zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.subsingleton_tensorProduct\", \"Module.free_of_lTensor_residueField_injective\", \"Module.FaithfullyFlat.subsingleton_tensorProduct_iff_left\", \"IsLocalRing.split_injective_iff_lTensor_residueField_injective\", \"Module.FaithfullyFlat.subsingleton_tensorProduct_iff_right\", \"Module.FaithfullyFlat.lTensor_reflects_triviality\", \"Module.FaithfullyFlat.rTensor_reflects_triviality\", \"Module.FaithfullyFlat.nontrivial_tensorProduct_iff_left\"], \"digest\": \"28389681cfe27413\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the hits; IsLocalRing.subsingleton_tensorProduct has a residue-field factor, instNontrivialTensorProduct only covers M tensor M, and the faithfully-flat results require a hypothesis absent here. The support criterion is a residue-field test, not the arbitrary two-factor assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Subsingleton, Module.Finite",
+   "results": "{\"t\": \"2026-10-17T23:51:00Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, Subsingleton, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsLocalRing.subsingleton_tensorProduct\"], \"digest\": \"fbafc6596a1c222d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the hits; IsLocalRing.subsingleton_tensorProduct has a residue-field factor, instNontrivialTensorProduct only covers M tensor M, and the faithfully-flat results require a hypothesis absent here. The support criterion is a residue-field test, not the arbitrary two-factor assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "support.*tensorProduct|tensorProduct.*support|subsingleton.*[Tt]ensor|[Tt]ensor.*subsingleton",
+   "results": "{\"t\": \"2026-10-17T23:51:00Z\", \"tool\": \"grep\", \"query\": \"support.*tensorProduct|tensorProduct.*support|subsingleton.*[Tt]ensor|[Tt]ensor.*subsingleton\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/TensorProduct/Basic.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\"], \"digest\": \"901540e8400aa4b7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the hits; IsLocalRing.subsingleton_tensorProduct has a residue-field factor, instNontrivialTensorProduct only covers M tensor M, and the faithfully-flat results require a hypothesis absent here. The support criterion is a residue-field test, not the arbitrary two-factor assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-derived-tensor-nonvanishing",
@@ -77,5 +141,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-local-finite-module-tensor-nonzero",
+  "worker": "stage1",
+  "summary": "Kept the mathematical statement and all hypotheses, adding the missing tensor-definition reference. Split into residue-quotient nonvanishing by the existing Nakayama leaf, tensor nonvanishing over the residue field by the existing field leaf, and the explicit surjection from the original tensor using its universal property. No new nodes. Re-ran and recorded seven item-specific Mathlib searches with two formulations and inspected the close candidates. The inherited source incorrectly calls 010Z a tensor section; report.md identifies the correct 00CX/00CV tags without changing the maintainer-owned source field.",
+  "blueprint": "This item supplies exactly the Nakayama step of lem-trf-local-derived-tensor-nonvanishing, Step 5: its two nonzero finite top cohomology modules have nonzero ordinary tensor. Steps 1-3 give this auxiliary local-algebra argument below the inherited lem-trf-local-term-locality ancestry. The current main-20261015 ancestor update and unit sk-i-curve-zero were read; no unit or chapter route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-38c7b73ec",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-38c7b73ec (reviewer sub-agent of L); spot-checked: I read the item in full, its 4 cited leaves (Nakayama: IsLocalRing.map_mkQ_eq_top; field tensor nontrivial: lTensor_nontrivial + Free.of_divisionRing + faithfully-flat instance at Basic.lean:209; tensor-product def; finitely-generated def), Stacks 00DV (lemma-NAK, items 1-7) and 00CX (lemma-tensor-product), the consumer lem-trf-local-derived-tensor-nonvanishing Step 5 and unit sk-i-curve-zero. The statement is unchanged apart from the correct added def-weil-pbc-module-tensor-product citation, and it is true. Small cases: a field; Z_(p) with Z/p; k[e]/e^2 with k; R/m^2 with R/m. Each hypothesis is needed: Z/2 tensor Z/3=0 over the non-local ring Z, and Q tensor Z/p=0 over Z_(p) without finite generation. Step 1: the Nakayama leaf applied to the zero submodule gives nonzero residue quotients. Step 2: the field leaf applies verbatim over kappa. Step 3: a correct elementary R-bilinear map M x N to M/mM tensor_kappa N/mN, surjective by generation by pure tensors (part of the definition node's statement). There are no new nodes. My searches of the DAG and the main-20261015 blueprint found no duplicate; same_as [] is correct. Mathlib has no two-factor lemma, so the split is right. Route respected, no SGA, no tool_uses, not a target node. One fault, which I could not fix: the maintainer-owned top-level source.place cites 'Section 010Z', but tags/tags gives 010Z = homology-definition-quasi-isomorphism. The maintainer should change it to 00DV + 00CX/00CV; the steps and proof_origin already use these. No fix files written."
  }
 }

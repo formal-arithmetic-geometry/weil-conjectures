@@ -13,11 +13,78 @@
   "def-weil-finite-type-morphism",
   "def-pc-scheme-fibre",
   "def-weil-residue-field",
-  "def-kun-topological-krull-dimension"
+  "def-kun-topological-krull-dimension",
+  "def-sc-generic-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $s\\in S$ and an irreducible component $C$ of $Y_s$. By [lem-sc-scheme-sober], choose its generic point $x$. Regard $x$ as a point of $Y$ using the fibre homeomorphism of [def-pc-scheme-fibre]. Since $\\eta$ is generic in the integral scheme $S$, it specializes to $s=f(x)$: $\\overline{\\{\\eta\\}}=S$. Apply [lem-weil-pbc-flat-generalizations-lift] to the flat map $f$ and this specialization. It gives a point $y\\in Y$ specializing to $x$ with $f(y)=\\eta$, so $y$ is a point of $Y_\\eta$. This argument requires neither finite presentation nor Noetherianity of $S$.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "def-pc-scheme-fibre",
+    "def-sc-generic-point",
+    "lem-weil-pbc-flat-generalizations-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0H3X (lemma-relative-dimension-support-flat), proof with the structure sheaf; component-dimension input Tags 0GSI and 0GSJ."
+   }
+  },
+  {
+   "text": "By [lem-sc-irreducible-components-cover], choose an irreducible component $B$ of $Y_\\eta$ containing $y$, and by [lem-sc-scheme-sober] let $z$ be its generic point. In $Y_\\eta$ the point $z$ specializes to $y$; the continuous fibre inclusion and the specialization $y\\leadsto x$ imply $z\\leadsto x$ in $Y$. Put $Z=\\overline{\\{z\\}}\\subseteq Y$ and $Z_s=Z\\cap f^{-1}(s)$ with the subspace topology. The fibre homeomorphism makes $Z_s$ a closed subset of $Y_s$ containing $x$, hence containing $C=\\overline{\\{x\\}}$ in that fibre. The set $C$ is irreducible in $Z_s$; any irreducible subset of $Z_s$ properly containing it would be irreducible in $Y_s$, contradicting the maximality of $C$. Thus $C$ is an irreducible component of $Z_s$.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober",
+    "def-pc-scheme-fibre",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0H3X (lemma-relative-dimension-support-flat), proof with the structure sheaf; component-dimension input Tags 0GSI and 0GSJ."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-flat-fibre-component-closure-dimension] with $X=Y$, $t=\\eta$, the generic point $z$ of $B$, and the component $D=C$ of $Z_s$ found in step 2. Its hypotheses are exactly the given flatness and local finite type, together with these component choices. It gives $\\dim C=\\dim B$. The set $B$ is closed in $Y_\\eta$, so each chain of irreducible closed subsets of $B$ is also such a chain in $Y_\\eta$; hence $\\dim B\\leq\\dim Y_\\eta\\leq r$ by the chain definition of Krull dimension. Therefore $\\dim C\\leq r$. In particular no flatness of the reduced closure of $z$ has been assumed.",
+   "uses": [
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0H3X (lemma-relative-dimension-support-flat), proof with the structure sheaf; component-dimension input Tags 0GSI and 0GSJ."
+   }
+  },
+  {
+   "text": "We have bounded every irreducible component of $Y_s$. To pass to the dimension of the whole fibre, take any finite strict chain $D_0\\subsetneq\\cdots\\subsetneq D_n$ of irreducible closed subsets of $Y_s$. By [lem-sc-irreducible-components-cover], its largest member $D_n$ is contained in an irreducible component $C$. Each $D_i$ is closed and irreducible in $C$ with its subspace topology, and strict inclusions remain strict. Thus $n\\leq\\dim C\\leq r$ by step 3. Taking the supremum over these chains gives $\\dim Y_s\\leq r$. If $Y_s$ is empty there is no such chain and its dimension is $-\\infty\\leq r$. Since $s$ was arbitrary this proves the conclusion. If the generic fibre is empty, step 1 shows that every fibre must be empty as well.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0H3X (lemma-relative-dimension-support-flat), proof with the structure sheaf; component-dimension input Tags 0GSI and 0GSJ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-scheme-fibre",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "lem-trf-flat-fibre-component-closure-dimension",
+  "lem-weil-pbc-flat-generalizations-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0H3X (lemma-relative-dimension-support-flat), proof with the structure sheaf; component-dimension input Tags 0GSI and 0GSJ."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +120,45 @@
    "results": "{\"t\": \"2026-10-17T16:07:08Z\", \"tool\": \"leanfinder\", \"query\": \"Dimension of fibres of a flat finitely presented scheme over an irreducible base is bounded above by generic dimension.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"AlgebraicGeometry.Flat\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.HasGoingDown.of_flat\", \"Module.rankAtStalk_eq\"], \"digest\": \"dcada589fa145726\"}",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, topologicalKrullDim",
+   "results": "{\"t\": \"2026-10-17T23:49:46Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, topologicalKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned flatness, generalization lifting, finite fibres or smooth relative-dimension facts, but no bound on dimensions of fibres by the generic fibre"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*[Dd]im|[Dd]im.*flat|generic.*[Dd]im|[Dd]im.*generic",
+   "results": "{\"t\": \"2026-10-17T23:49:46Z\", \"tool\": \"grep\", \"query\": \"flat.*[Dd]im|[Dd]im.*flat|generic.*[Dd]im|[Dd]im.*generic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned flatness, generalization lifting, finite fibres or smooth relative-dimension facts, but no bound on dimensions of fibres by the generic fibre"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dimensions of all fibres of a flat locally finite type morphism over an integral base are at most the generic fibre dimension.",
+   "results": "{\"t\": \"2026-10-17T23:49:46Z\", \"tool\": \"leansearch\", \"query\": \"The dimensions of all fibres of a flat locally finite type morphism over an integral base are at most the generic fibre dimension.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.stalkMap\", \"Module.isLocallyConstant_rankAtStalk\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"AlgebraicGeometry.Flat.comp\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\"], \"digest\": \"e9f6df851c763a51\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned flatness, generalization lifting, finite fibres or smooth relative-dimension facts, but no bound on dimensions of fibres by the generic fibre"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat morphism locally of finite type to an integral scheme, the dimension of every fibre is bounded by the dimension of the generic fibre.",
+   "results": "{\"t\": \"2026-10-17T23:49:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat morphism locally of finite type to an integral scheme, the dimension of every fibre is bounded by the dimension of the generic fibre.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"RingHom.Flat.generalizingMap_comap\", \"Algebra.HasGoingDown.of_flat\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\"], \"digest\": \"9cded254b5f1ed6e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned flatness, generalization lifting, finite fibres or smooth relative-dimension facts, but no bound on dimensions of fibres by the generic fibre"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a flat family of schemes over an irreducible base, every special fibre component has dimension at most the largest generic fibre component.",
+   "results": "{\"t\": \"2026-10-17T23:50:11Z\", \"tool\": \"leanfinder\", \"query\": \"In a flat family of schemes over an irreducible base, every special fibre component has dimension at most the largest generic fibre component.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"RingHom.Flat.generalizingMap_comap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.Flat.instFstScheme\", \"Algebra.HasGoingDown.of_flat\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\"], \"digest\": \"21eff18775d1775c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned flatness, generalization lifting, finite fibres or smooth relative-dimension facts, but no bound on dimensions of fibres by the generic fibre"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-geometric-duality-uniform-range",
@@ -78,5 +180,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-flat-family-generic-dimension-bound",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and split the structure-sheaf case of Stacks 0H3X into four steps. Reused the existing flat generalization lift and fibre-component-closure dimension theorem. Wrote out the two component-maximality and chain-dimension arguments; created no new nodes. Added the definition dependency for the generic point already named in the statement.",
+  "blueprint": "The ancestor lem-trf-local-term-locality, proof (1)--(2), nearby-cycle-duality input, through lem-trf-geometric-duality-uniform-range: the dimension of a special fibre of the flat horizontal closure is at most the generic-fibre dimension. The item implements only this algebraic-geometric input; it does not change the contracting-local-terms unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NH-bda317d87",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-bda317d87 (reviewer sub-agent of L); spot-checked: Read Stacks more-morphisms 0H3X (l.5255-5273), 0GSI (l.5166) and 0GSJ (l.5275). Only the item JSON and the report changed, as one commit; the statement is byte-identical to the base, and stmt_deps gains only def-sc-generic-point, which is correct because the statement names eta. The item is 0H3X with F=O_Y, so Supp(F_s)=Y_s; integral S implies the source's irreducible S, so nothing is weakened. Step 1 uses the 03HV flat generalization lift (Mathlib Flat.generalizingMap, no finiteness needed), plus sobriety and the fibre homeomorphism, to get y over eta with y specializing to x. Step 2 is elementary and correct: z, the generic point of a component B of Y_eta containing y, specializes to x, so C lies in Z_s and is a component of Z_s by maximality. Step 3 cites lem-trf-flat-fibre-component-closure-dimension, which is in the same unit sk-i-curve-zero and was reviewed on 2026-10-17. Its hypotheses hold exactly here (flat, locally of finite type, D=C a component of Z_s), it agrees with 0GSI/0GSJ, and it gives dim C=dim B<=dim Y_eta<=r; there is no cycle. Step 4 is elementary: every chain lies in a component, so the bound needs no quasi-compactness, and the empty fibre has dimension -infinity. proof_deps equals the union of the step uses; every dependency outside the unit is a definition or a Mathlib leaf; no tool_uses are needed; no SGA is cited; there are no new nodes. The duplicate search (0H3X, generic-fibre dimension nodes: pure-dimension, open neighbourhood, valuation-domain, lower bound) found no duplicate. The citer geometric-duality-uniform-range uses the item over an integral trait, as stated. Edge cases checked: empty Y, empty generic fibre, open immersion, r=0, S a field, A^2 disjoint union A^1 over A^1, the non-flat blow-up (consistent), non-Noetherian S. No fixes."
  }
 }

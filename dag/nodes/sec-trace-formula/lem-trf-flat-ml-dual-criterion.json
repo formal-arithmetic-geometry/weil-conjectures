@@ -12,9 +12,65 @@
   "def-trf-mittag-leffler-module",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $i\\in I$, and choose $j\\ge i$ by the dual Mittag-Leffler hypothesis. Choose a finite basis $(e_a)_{a=1}^n$ of $M_j$ with coordinate maps $\\epsilon_a:M_j\\to R$. For each $k\\ge j$, the map $\\epsilon_a\\circ f_{ij}$ belongs to the image of $\\operatorname{Hom}_R(M_j,R)\\to\\operatorname{Hom}_R(M_i,R)$, hence by the chosen image equality there is $\\lambda_{a,k}:M_k\\to R$ with $\\lambda_{a,k}\\circ f_{ik}=\\epsilon_a\\circ f_{ij}$. Define the linear map $h_k:M_k\\to M_j$ by $h_k(y)=\\sum_{a=1}^n\\lambda_{a,k}(y)e_a$. For every $x\\in M_i$ the basis expansion gives $h_k(f_{ik}(x))=\\sum_a\\epsilon_a(f_{ij}(x))e_a=f_{ij}(x)$, so $h_k\\circ f_{ik}=f_{ij}$. For $n=0$ this is the zero map into $M_j=0$. Thus a single $j$, chosen before any tensor test module, gives these factorizations for every $k\\ge j$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059G (remark-flat-ML), finite-free dual argument expanded in coordinates; Tag 059E (proposition-ML-characterization), factorization condition (3)."
+   }
+  },
+  {
+   "text": "Let $L$ be any $R$-module and $z\\in\\ker(f_i\\otimes_R\\mathrm{id}_L)$. By [lem-weil-pbc-tensor-commutes-with-colimits], the maps $f_s\\otimes_R\\mathrm{id}_L$ exhibit $M\\otimes_R L$ as the colimit of the directed system $M_s\\otimes_R L$. Apply the zero criterion of [lem-weil-pbc-filtered-colimit-modules-elementwise] to $z$ at stage $i$: there is $k_0\\ge i$ with $(f_{ik_0}\\otimes_R\\mathrm{id}_L)(z)=0$. Choose a common upper bound $k\\ge k_0,j$. Then $f_{ik}=f_{k_0k}\\circ f_{ik_0}$, so tensor functoriality [def-weil-pbc-module-tensor-product] gives $(f_{ik}\\otimes_R\\mathrm{id}_L)(z)=0$. Smallness, nonemptiness and directedness are exactly those in the given system; tensoring does not change its index set.",
+   "uses": [
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059E (proposition-ML-characterization), proof of (3) implies (2); Tag 00DD (lemma-tensor-products-commute-with-limits); Tag 00D7 (lemma-zero-directed-limit)."
+   }
+  },
+  {
+   "text": "For this $k\\ge j$, Step 1 and the composition identity in [def-weil-pbc-module-tensor-product] give $(f_{ij}\\otimes_R\\mathrm{id}_L)(z)=(h_k\\otimes_R\\mathrm{id}_L)((f_{ik}\\otimes_R\\mathrm{id}_L)(z))=0$. Therefore $\\ker(f_i\\otimes_R\\mathrm{id}_L)\\subseteq\\ker(f_{ij}\\otimes_R\\mathrm{id}_L)$ for every $L$. The index $j$ depends only on $i$; the auxiliary $k$ may depend on $L,z$. This is precisely domination of $f_i$ by $f_{ij}$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059E (proposition-ML-characterization), proof of (3) implies (2), tensor-kernel inclusion."
+   }
+  },
+  {
+   "text": "Each $M_s$ is finitely presented [def-sc-finitely-presented-module]: a chosen isomorphism $R^{n_s}\\to M_s$ gives the finite presentation $R^0\\to R^{n_s}\\to M_s\\to0$. Apply [lem-trf-mittag-leffler-eventual-domination] to the given directed colimit of these finitely presented modules. Steps 1--3 give exactly its condition that for every $i$ some $j\\ge i$ makes $f_{ij}$ dominate $f_i$. Its reverse implication concludes that $M$ is Mittag-Leffler in the tensor-product sense, as required. The assumed flatness is retained in the statement; the proof needs only the supplied finite-free colimit presentation.",
+   "uses": [
+    "def-sc-finitely-presented-module",
+    "lem-trf-mittag-leffler-eventual-domination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 059E (proposition-ML-characterization), condition (2), and 059M (proposition-ML-tensor), tensor-product characterization; Tag 059G (remark-flat-ML)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "def-weil-pbc-module-tensor-product",
+  "def-sc-finitely-presented-module",
+  "lem-trf-mittag-leffler-eventual-domination"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit coordinate expansion of Tag 059G (remark-flat-ML), followed by the (3) implies (2) argument of Tag 059E (proposition-ML-characterization) and the existing tensor-product eventual-domination criterion (Tags 059E/059M)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +99,52 @@
    "results": "{\"t\": \"2026-10-17T22:21:59Z\", \"tool\": \"leansearch\", \"query\": \"flat module Mittag Leffler Hom dual finite free directed system\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.mk\", \"Module.DirectLimit.inhabited\", \"Module.Flat.tfae_equational_criterion\", \"ModuleCat.directLimitCocone\", \"Module.IsReflexive.of_finite_of_free\", \"Module.fgSystem.instDirectedSystemSubtypeSubmoduleFGMemValCoeLinearMapId\", \"Module.dual_free\", \"Module.Flat\"], \"digest\": \"fcecf13eb2a75951\"}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Mittag|mittag|dual.*stabili|stabili.*dual",
+   "results": "{\"t\": \"2026-10-17T23:50:27Z\", \"tool\": \"grep\", \"query\": \"Mittag|mittag|dual.*stabili|stabili.*dual\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/AdicCompletion/Exactness.lean\"], \"digest\": \"c9765aab814da237\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.dualMap",
+   "results": "{\"t\": \"2026-10-17T23:50:27Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.dualMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LinearMap.dualMap\", \"LinearMap.dualMap_eq_lcomp\", \"LinearMap.dualMap_id\", \"Submodule.dualRestrict_def\", \"LinearMap.ker_dualMap_eq_dualAnnihilator_range\", \"LinearMap.range_dualMap_dual_eq_span_singleton\", \"LinearMap.dualMap_injective_of_surjective\", \"LinearMap.dualMap_apply'\"], \"digest\": \"e951da1b7d55de5b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A module given by a directed colimit of finite free modules is Mittag Leffler if the images of the dual transition maps stabilize",
+   "results": "{\"t\": \"2026-10-17T23:50:27Z\", \"tool\": \"leansearch\", \"query\": \"A module given by a directed colimit of finite free modules is Mittag Leffler if the images of the dual transition maps stabilize\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.directLimitIsColimit\", \"Module.DirectLimit.inhabited\", \"DirectLimit.instModule\", \"Module.DirectLimit.induction_on\", \"ModuleCat.directLimitIsColimit_desc\", \"DirectLimit.Module.lift\", \"Module.DirectLimit\", \"ModuleCat.directLimitCocone\"], \"digest\": \"bdf2098eab67984c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed colimit of finite free modules is Mittag Leffler if the inverse system of linear duals has eventually constant images",
+   "results": "{\"t\": \"2026-10-17T23:50:37Z\", \"tool\": \"leanfinder\", \"query\": \"A directed colimit of finite free modules is Mittag Leffler if the inverse system of linear duals has eventually constant images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.fgSystem.instDirectedSystemSubtypeSubmoduleFGMemValCoeLinearMapId\", \"Module.DirectLimit.exists_of₂\", \"Submodule.FG.directLimit\", \"Module.DirectLimit.exists_of\", \"localCohomology.ofDiagram\", \"Module.DirectLimit.of.zero_exact\", \"Submodule.FG.directedSystem\", \"CategoryTheory.Functor.isMittagLeffler_of_exists_finite_range\"], \"digest\": \"a9ff123b21d5f6c0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Mittag|mittag|range_dualMap|dualMap.*range",
+   "results": "{\"t\": \"2026-10-17T23:50:54Z\", \"tool\": \"grep\", \"query\": \"Mittag|mittag|range_dualMap|dualMap.*range\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Reflection.lean\", \"Mathlib/LinearAlgebra/Reflection.lean\", \"Mathlib/LinearAlgebra/Matrix/Rank.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\"], \"digest\": \"8c37eb4b03eceb07\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud Gruson Mittag Leffler module finite free presentation inverse dual system criterion tensor product injective into products",
+   "results": "{\"t\": \"2026-10-17T23:51:03Z\", \"tool\": \"leanfinder\", \"query\": \"Raynaud Gruson Mittag Leffler module finite free presentation inverse dual system criterion tensor product injective into products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_maximalIdeal_rTensor_injective\", \"TensorProduct.forall_vanishesTrivially_iff_forall_fg_rTensor_injective\", \"Module.Flat.tfae_equational_criterion\", \"Module.free_of_lTensor_residueField_injective\", \"TensorProduct.rTensor_injective_of_forall_fg_rTensor_injective\", \"TensorProduct.forall_vanishesTrivially_iff_forall_rTensor_injective\", \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"Module.flat_iff\"], \"digest\": \"1fe92ddd0bd8797f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flat-mittag-leffler-criterion",
@@ -80,5 +178,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-flat-ml-dual-criterion",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Expanded the finite-free dual argument into coordinatewise lifts giving transition-map factorizations, proved the resulting tensor-kernel domination using the existing tensor-colimit and elementwise-colimit nodes, and applied the existing eventual-domination criterion. No new nodes or Mathlib leaves. No exact project attachment or Mathlib match found.",
+  "blueprint": "Supporting flat Mittag-Leffler algebra below lem-trf-local-term-locality: realizes the existing from.place, namely the dual Hom-system criterion invoked by lem-trf-flat-mittag-leffler-criterion after stabilization of images. The finite-basis calculation makes the 059G argument explicit, without changing the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-tensor-commutes-with-colimits",
+    "why": "Generic module tensor-colimit compatibility used for the supplied small directed system; no geometric route is changed."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "why": "Generic zero-at-a-stage criterion for a small filtered module colimit, used after tensoring; no geometric route is changed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-4d3e7072b",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-4d3e7072b (reviewer sub-agent of L); spot-checked: PASS. I read the whole item and checked it against Stacks algebra.tex: Tag 059G remark-flat-ML (l.21117), Tag 0595 definition-ML-system and the proof of (3)=>(2) of Tag 059E. The statement matches 059G hypothesis by hypothesis and is unchanged; the redundant flatness is kept as in the source. Step 1 is correct: the coordinate lifts lambda_{a,k} with lambda∘f_ik = eps_a∘f_ij give h_k∘f_ik = f_ij for every k>=j, and the rank-0 case works. Steps 2-3 give ker(f_i⊗L) ⊆ ker(f_ij⊗L), using the stated colimit cocone of tensor-commutes-with-colimits, clause (2) of filtered-colimit-elementwise (a nonempty directed poset is filtered) and tensor functoriality. This kernel inclusion is exactly the domination direction defined in lem-trf-mittag-leffler-eventual-domination. Step 4 notes that finite free modules are finitely presented and applies that same-unit equivalence. The dependency closure has 21 nodes and no cycle. The parent's last step supplies exactly the item's hypotheses (Lazard presentation plus stabilised dual images). There are no new nodes. The only DAG hits for 059G are the item and its parent, and the 059E/059M neighbours (hom-systems is the converse; eventual-domination and tensor-kernel-factorization state other facts) are not duplicates. Mathlib has no module Mittag-Leffler notion. The declared tool_uses of the two pbc Mathlib-status lemmas are accepted. No SGA is cited. Small cases checked: Z[1/2] (dual images 2^k Z do not stabilise), Z^(N) (surjective duals, free module), a singleton index, all stages zero, and an uncountable index. No fixes."
  }
 }

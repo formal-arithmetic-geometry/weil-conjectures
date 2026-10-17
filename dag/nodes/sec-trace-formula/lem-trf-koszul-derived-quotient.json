@@ -2,18 +2,92 @@
  "id": "lem-trf-koszul-derived-quotient",
  "kind": "statement",
  "title": "Koszul-regular quotient as a derived tensor product",
- "statement": "Let $R$ be a commutative ring, let $r\\geq0$, and let $f_1,\\ldots,f_r\\in R$ be Koszul-regular in the sense of [def-weil-pbc-koszul-regular-sequence]. Let $P=\\mathbf Z[x_1,\\ldots,x_r]$ map to $R$ by $x_i\\mapsto f_i$, let $J=(x_1,\\ldots,x_r)\\subset P$, let $B=R/(f_1,\\ldots,f_r)$, and let $\\mathbf Z=P/J$. Then the canonical map $R\\otimes_P^{\\mathbf L}\\mathbf Z\\to B[0]$ is an isomorphism.",
+ "statement": "Let $R$ be a commutative ring, let $r\\geq0$, and let $f_1,\\ldots,f_r\\in R$ be Koszul-regular in the sense of [def-weil-pbc-koszul-regular-sequence]. Let $P=\\mathbf Z[x_1,\\ldots,x_r]$ map to $R$ by $x_i\\mapsto f_i$, let $J=(x_1,\\ldots,x_r)\\subset P$, let $B=R/(f_1,\\ldots,f_r)$, and let $\\mathbf Z=P/J$. Then the canonical map $R\\otimes_P^{\\mathbf L}\\mathbf Z\\to B[0]$ is an isomorphism. Here the derived tensor is taken in $D(R)$ [def-weil-abstract-derived-category]: it is the derived extension of scalars of $\\mathbf Z[0]$ along $P\\to R$, computed by a K-flat resolution of $\\mathbf Z[0]$ over $P$ as in [lem-pc-derived-tensor-second-factor-functor].",
  "source": {
   "document": "literature/stacks-project/cotangent.tex",
   "place": "Tag 08SJ (lemma-mod-regular-sequence), proof: the Koszul resolution of $\\mathbf Z$ over $P$ and the Koszul-regularity hypothesis after tensoring with $R$."
  },
  "stmt_deps": [
   "def-weil-pbc-koszul-regular-sequence",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "lem-pc-derived-tensor-second-factor-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $0\\leq i\\leq r$, setting $x_1,\\ldots,x_i$ equal to zero gives $P/(x_1,\\ldots,x_i)\\simeq\\mathbf Z[x_{i+1},\\ldots,x_r]$: the discarded monomials are exactly those divisible by one of $x_1,\\ldots,x_i$. For $i<r$, multiplication by $x_{i+1}$ on this quotient is injective, since it shifts the exponent of $x_{i+1}$ in the unique monomial expansion. At $i=r$ the quotient is $\\mathbf Z$. Thus the successive multiplication-injectivity hypotheses needed in step 2 hold, also when the sequence is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SJ (lemma-mod-regular-sequence), polynomial regular-sequence sentence; explicit coefficient verification"
+   }
+  },
+  {
+   "text": "Let $K_P=K_\\bullet(P,x_1,\\ldots,x_r)$ of [def-weil-pbc-koszul-complex]. By [lem-weil-pbc-regular-sequence-koszul-regular], with module $M=P$, step 1 gives $H_q(K_P)=0$ for $q>0$ (the tensor with $P$ is the identity). In degree zero, $d_1(e_i)=x_i$, so its image is $J$ and $H_0(K_P)=P/J=\\mathbf Z$. The map $\\epsilon:K_P\\to\\mathbf Z[0]$, quotient in degree zero and zero in positive chain degrees, is therefore a quasi-isomorphism. Place chain degree $q$ in cochain degree $-q$, using [def-weil-abstract-derived-category]. The same Koszul-complex statement gives finite free terms and support in cochain degrees $[-r,0]$.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "lem-weil-pbc-regular-sequence-koszul-regular",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0623 (definition-koszul-complex), 062F (lemma-regular-koszul-regular); their application in cotangent.tex Tag 08SJ"
+   }
+  },
+  {
+   "text": "The terms of $K_P$ are flat: tensoring a finite free module with an exact sequence gives a finite direct sum of that sequence, which is exact coordinatewise. Thus [lem-pc-module-bounded-flat-kflat] applies to the bounded-above complex from step 2 and makes $K_P$ K-flat over $P$. Apply clause (2) of [lem-pc-derived-tensor-second-factor-functor] with its base ring $P$, its algebra $R$, its complex $N=R[0]$, and the resolution $\\epsilon:K_P\\to\\mathbf Z[0]$. It identifies $R\\otimes_P^{\\mathbf L}\\mathbf Z$ in $D(R)$ with $C=\\operatorname{Tot}(K_P\\otimes_P R[0])$. The canonical derived-to-ordinary comparison is represented on this resolution by $\\epsilon\\otimes1_R:C\\to(\\mathbf Z\\otimes_P R)[0]$, by the left-derived-functor comparison in that same clause. No flatness of $R$ over $P$ is required.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 064K (lemma-derived-tor-quasi-isomorphism), 06Y6 (lemma-derived-base-change), construction preceding 06Y6; cotangent.tex Tag 08SJ"
+   }
+  },
+  {
+   "text": "By [lem-sc-koszul-base-change-iso] for $P\\to R$, the complex $C$ is $K_R=K_\\bullet(R,f_1,\\ldots,f_r)$ placed in negative cochain degrees. The identification sends $(e_{i_1}\\wedge\\cdots\\wedge e_{i_q})\\otimes a$ to $a(e_{i_1}\\wedge\\cdots\\wedge e_{i_q})$; the formula in [def-weil-pbc-koszul-complex] shows that its differential replaces each $x_i$ by $f_i$, with the same alternating signs. The ordinary target identifies with $B$ by $z\\otimes a\\mapsto z\\bar a$, with inverse $\\bar a\\mapsto1\\otimes a$: this is well defined since $1\\otimes f_i=x_i\\cdot1\\otimes1=0$ in $\\mathbf Z\\otimes_P R$. The composites are the identity by balancing and integer linearity. Under these identifications $\\epsilon\\otimes1_R$ is exactly the quotient $R\\to B$ in degree zero and zero in all negative cochain degrees. Hence the canonical map in the item is the Koszul augmentation $K_R\\to B[0]$.",
+   "uses": [
+    "lem-sc-koszul-base-change-iso",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 062H (lemma-koszul-regular-flat-base-change), first complex identification in its proof (which needs no flatness); differential in Tags 0622/0623; cotangent.tex Tag 08SJ"
+   }
+  },
+  {
+   "text": "The assumed Koszul-regularity [def-weil-pbc-koszul-regular-sequence] gives $H_q(K_R)=0$ for every $q\\ne0$. By the differential formula in [def-weil-pbc-koszul-complex], $H_0(K_R)=\\operatorname{coker}(R^{\\oplus r}\\xrightarrow{(f_i)}R)=R/(f_1,\\ldots,f_r)=B$, and the augmentation induces the identity on this quotient. It induces isomorphisms on every cohomology module, so it is a quasi-isomorphism and becomes invertible in the localization defining $D(R)$ [def-weil-abstract-derived-category]. Combined with steps 3 and 4, this proves invertibility of the specified canonical map. For $r=0$ the complex is $R[0]$, the ideal is zero, and the augmentation is the identity.",
+   "uses": [
+    "def-weil-pbc-koszul-regular-sequence",
+    "def-weil-pbc-koszul-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SJ (lemma-mod-regular-sequence), sentence identifying the Koszul-regularity hypothesis with derived tensor equality; more-algebra.tex Tag 062E (definition-koszul-regular-sequence)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "def-weil-abstract-derived-category",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-sc-koszul-base-change-iso",
+  "def-weil-pbc-koszul-regular-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08SJ (lemma-mod-regular-sequence), first paragraph of proof; its Koszul resolution and derived base-change calculation, expanded using Tags 0623, 062E, 062F, 062H, 064K and 06Y6 in more-algebra.tex"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +116,52 @@
    "results": "8 hits; top=['HomologicalComplex.Acyclic', 'HomologicalComplex.acyclic_of_isZero', 'HomologicalComplex.acyclic_iff', 'AffineBasis.ind', 'derivationOfSectionOfKerSqZero', 'Polynomial.Sequence.linearIndependent', 'instFreeMvPolynomialKaehlerDifferential', 'Algebra.Presentation.differentialsRelations_R']; note=; digest=8e766719d3e94c23. Returned abstract HomologicalComplex acyclicity, affine bases and Kähler differential modules. No result identifies this derived tensor product or its canonical conormal map.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Koszul complex of a Koszul regular sequence computes the derived tensor product with the polynomial zero section",
+   "results": "8 hits; top=['Algebra.Extension.cotangentComplex_mk', 'KaehlerDifferential.cotangentComplexBaseChange_tmul', 'KaehlerDifferential.D_tensorProductTo', 'KaehlerDifferential.tensorKaehlerEquivBase', 'Algebra.Generators.toKaehler_tmul_D', 'tensorKaehlerQuotKerSqEquiv_tmul_D', 'KaehlerDifferential.kerToTensor_apply', 'sectionOfRetractionKerToTensorAux']; ; digest=a773eccec72807f2. Read the hits: these concern naive cotangent/Kahler modules, ordinary regularity or unrelated mentions; none gives the derived Koszul quotient comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": "0 hits; top=[]; ; digest=4f53cda18c2baa0c. Read the hits: these concern naive cotangent/Kahler modules, ordinary regularity or unrelated mentions; none gives the derived Koszul quotient comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul|derivedTensor|derived.*tensor",
+   "results": "1 hits; top=['Mathlib/RingTheory/Regular/RegularSequence.lean']; ; digest=e93f847680f4c3f4. Read the hits: these concern naive cotangent/Kahler modules, ordinary regularity or unrelated mentions; none gives the derived Koszul quotient comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor independence of a Koszul regular quotient and the zero section of an integer polynomial ring",
+   "results": "8 hits; top=['IsRegular.subsingleton', 'Ideal.Quotient.factor_eq', 'isQuasiregular_zero', 'isIntegral_zero', 'IdealFilter.IsTorsionQuot', 'Ideal.Quotient.noZeroDivisors', 'ringKrullDim_quotient', 'algebraicIndependent_iff_ker_eq_bot']; ; digest=5ac63545eabd30fb. Read the hits: these concern naive cotangent/Kahler modules, ordinary regularity or unrelated mentions; none gives the derived Koszul quotient comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of positive Koszul homology identifies a quotient ring with a derived base change along Z variables to Z",
+   "results": "8 hits; top=['Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff', 'KaehlerDifferential.quotientCotangentIdeal', 'KaehlerDifferential.End_equiv_aux', 'Algebra.Generators.CotangentSpace.exact', 'KaehlerDifferential.endEquivAuxEquiv', 'retractionKerCotangentToTensorEquivSection', 'KaehlerDifferential.quotientCotangentIdealRingEquiv', 'Algebra.Generators.CotangentSpace.compEquiv_symm_zero']; ; digest=b773760f9a8ea092. Read the hits: these concern naive cotangent/Kahler modules, ordinary regularity or unrelated mentions; none gives the derived Koszul quotient comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszulComplex|derivedTensorProduct|tensorProduct.*[Rr]esolution",
+   "results": "3 hits; top=['Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean', 'Mathlib/Algebra/Homology/LocalCohomology.lean', 'Mathlib/RingTheory/Regular/RegularSequence.lean']; ; digest=1be0dcfcdad1f87f. Read the hits: these concern naive cotangent/Kahler modules, ordinary regularity or unrelated mentions; none gives the derived Koszul quotient comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-koszul-quotient-cotangent-vanishing",
@@ -75,5 +191,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-koszul-derived-quotient",
+  "worker": "stage1",
+  "summary": "Expanded the 08SJ derived-quotient calculation into five steps. Reused the existing regular-to-Koszul, bounded-flat K-flat, mixed derived-tensor and Koszul-base-change statements. Wrote the polynomial injectivity, degree-zero cokernels and canonical augmentation identifications explicitly. Statement gains only a category/computation convention and its citation; hypotheses and conclusion are unchanged. No new nodes and no Lean work.",
+  "blueprint": "Realizes the supporting ring calculation in blueprint.from.place: the Koszul resolution and derived polynomial augmentation beneath the cotangent-quotient input in the semistable-alteration branch of lem-trf-local-term-locality, proof (1)--(2). Does not change the unit route or its geometry.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-sequence-koszul-regular",
+    "why": "Generic commutative-algebra acyclicity input for the polynomial variables; no node of sk-i-curve-zero gives it. This supplies the resolution used by the existing 08SJ route."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic ordinary-module bounded-flat criterion, applied to the polynomial Koszul resolution; it does not replace any geometric step of the unit."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Generic mixed derived-tensor computation in D(R) along P to R; needed to compute the canonical comparison without assuming P-flatness of R."
+   },
+   {
+    "node": "lem-sc-koszul-base-change-iso",
+    "why": "Generic Koszul complex base change with no flatness hypothesis, used for the polynomial resolution after tensoring with R."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-sc-koszul-base-change-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-82b23e30c",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-82b23e30c (reviewer sub-agent of L); spot-checked: I read the full item, all five steps, every cited node statement and the Stacks sources: 08SJ (cotangent.tex, lemma-mod-regular-sequence proof), 062E, 062F, 062H (the first identity in its proof, lines 7351-7356, which holds for any ring map) and 064K. There are no new nodes and no SGA citations. The hypotheses and conclusion of the statement are unchanged. The only addition says that the derived tensor is Z[0] ⊗^L_P R[0] in D(R), via clause (2) of lem-pc-derived-tensor-second-factor-functor. This matches its only user, step 2 of lem-trf-koszul-quotient-cotangent-vanishing, which feeds mu: Z ⊗^L_P R -> B[0] in D(A')=D(R) into lem-trf-cotangent-flat-base-change. The category, the order of the factors and the canonical map all agree. Steps: (1) The polynomial successive-injectivity check is correct and elementary. (2) 062F is applied over P with M=P and its hypothesis matches exactly; H_0 = P/J follows from d_1(e_i)=x_i. (3) Finite free terms are flat, and 064K applies because the complex is bounded above in cochain degrees [-r,0]. Clause (2) then computes the derived tensor in D(R) with no flatness of R over P. (4) Koszul base change without flatness; the step writes the isomorphism explicitly and checks it, and Z ⊗_P R ≅ B by mutually inverse maps, so the canonical map is the augmentation. (5) Koszul-regularity clause (3) together with H_0 = B gives a quasi-isomorphism. proof_deps equals the union of the step uses, and the 80-node dependency closure has no cycle. I accept the four declared generic tool_uses: lem-weil-pbc-regular-sequence-koszul-regular, lem-pc-module-bounded-flat-kflat, lem-pc-derived-tensor-second-factor-functor and lem-sc-koszul-base-change-iso. Duplicate search (grep of dag/nodes and blueprint_refs search): the nearest node, new-j3-koszul-projective-resolution, does not state the derived identification, so same_as [] is right. Mathlib has no Koszul complex (the only hits are a TODO in RegularSequence.lean, LocalCohomology and an unrelated differential-geometric Koszul connection). Small cases checked: r=0; Z with (2); Z/4 with (2), where Koszul-regularity fails and the conclusion fails too; a unit in the sequence; R=0. One cosmetic point needs no change: some recorded zero-hit searches carry boilerplate text. No fixes; details are in review.md."
  }
 }
