@@ -12,9 +12,39 @@
   "def-weil-pbc-module-tensor-product",
   "def-weil-algebraic-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the algebraic-closure uniqueness statement [lem-pc-algebraic-closure-exists-unique] (Stacks Tag 09GV), the given algebraic closure $\\bar k$ and Mathlib's canonical algebraic closure $\\operatorname{AlgebraicClosure}(k)$ are isomorphic as field extensions of $k$. Thus choose a $k$-algebra equivalence $e:\\bar k\\simeq_k\\operatorname{AlgebraicClosure}(k)$; its commutation with the structure maps is exactly the over-$k$ condition.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GV (fields-lemma-algebraic-closures-isomorphic)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-reducedness-tensor-alg-equiv] to the $k$-algebra equivalence $e$ and the identity equivalence of $A$. Its stated conclusion is exactly that $A\\otimes_k\\bar k$ is reduced if and only if $A\\otimes_k\\operatorname{AlgebraicClosure}(k)$ is reduced. The underlying transport is the ring equivalence induced by `Algebra.TensorProduct.congr`; the equivalence and its inverse are injective, so `isReduced_of_injective` gives the two implications. Therefore the required equivalence holds.",
+   "uses": [
+    "lem-trf-reducedness-tensor-alg-equiv"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tensor-product transport along an algebra equivalence; Tags 00CX and 05G3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-trf-reducedness-tensor-alg-equiv"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09GV, with tensor-product transport of reducedness"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -43,10 +73,39 @@
    "results": "{\"n_hits\": 8, \"top\": [\"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsAlgebraic.tensorProduct\", \"Algebra.TensorProduct.isField_of_isAlgebraic\", \"IsAlgebraic.tmul\", \"Algebra.TensorProduct.isAlgebraic_of_isField\", \"IntermediateField.LinearDisjoint.isDomain'\"], \"note\": \"\", \"sub\": \"\"}",
    "date": "2026-10-18",
    "verdict": "no match; use IsAlgClosure.equiv and TensorProduct congruence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reducedness after tensoring a k-algebra with two algebraic closures of k is equivalent",
+   "results": "8 hits; top: Algebra.isGeometricallyReduced_iff, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, Algebra.TensorProduct.isField_of_isAlgebraic, IntermediateField.LinearDisjoint.isDomain'; no exact chosen-closure equivalence.",
+   "date": "2026-10-18",
+   "verdict": "no match; ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosure.equiv, TensorProduct.congr, isReduced_of_injective",
+   "results": "0 hits; application type mismatch / no direct combined theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAlgClosure.equiv|TensorProduct.congr|isReduced_of_injective",
+   "results": "11 hits; IsAlgClosure.equiv in Mathlib/FieldTheory/IsAlgClosed/Basic.lean, TensorProduct.congr in Mathlib/RingTheory/TensorProduct/Maps.lean, and no single theorem for the target.",
+   "date": "2026-10-18",
+   "verdict": "no match; use the three ingredients",
+   "subdirectory": "FieldTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reducedness after tensoring a fixed algebra with one algebraic closure is equivalent to another algebraic closure",
+   "results": "8 hits; Algebra.isGeometricallyReduced_iff and related geometric-reducedness declarations, but no theorem comparing two arbitrary closures.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-geometric-reducedness-algebraic-closure-test",
@@ -58,7 +117,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The chosen algebraic closure in the item can replace Mathlib’s canonical algebraic closure in the affine tensor criterion.",
+   "place": "The chosen algebraic closure in the item can replace Mathlib’s canonical algebraic closure in the affine tensor criterion: identify the two closures over k and transport reducedness across the induced tensor equivalence.",
    "via": [
     "lem-trf-geometric-reducedness-algebraic-closure-test",
     "lem-trf-geometric-reduced-fibre-locus-constructible",
@@ -78,5 +137,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-reducedness-tensor-chosen-algebraic-closure",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against Stacks Tag 09GV and the affine tensor criterion used downstream. The statement is unchanged: an arbitrary chosen algebraic closure and Mathlib’s canonical closure are compared over the same base field. The split uses the existing algebraic-closure uniqueness leaf and a new general tensor-transport lemma; the tensor equivalence is induced by Algebra.TensorProduct.congr and reducedness is reflected by injectivity in both directions. No Lean declaration in the project states this item exactly.",
+  "blueprint": "Realizes the ancestor blueprint clause that replaces the chosen algebraic closure by Mathlib’s canonical algebraic closure in the affine reducedness criterion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q70-ea90bc9e1",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q70-ea90bc9e1 (reviewer sub-agent of L); spot-checked: Step 2 cited the new node for an induced tensor equivalence that its statement does not assert. Corrected DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-reducedness-tensor-chosen-algebraic-closure.json; it now cites only the stated reducedness equivalence and explains the tensor transport separately. Full source, hypothesis, edge-case, duplicate, and route checks passed.; 1 file(s) fixed by the reviewer"
  }
 }

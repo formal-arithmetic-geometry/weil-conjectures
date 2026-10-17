@@ -13,9 +13,203 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-normal-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First $\\operatorname{Frac}(N)=K$: both inclusions follow from $R\\subseteq N\\subseteq K=\\operatorname{Frac}(R)$. For a height-one prime $Q\\subset N$, [lem-trf-normalization-finite-local-model] gives a Noetherian local domain $C_p\\subset K$ of dimension one whose integral closure in $K$ is $N_Q$. Its fraction field is $K$, because $R\\subseteq C_p\\subseteq K$. Apply [lem-sc-krull-akizuki-noetherian] with base $C_p$, extension $K/K$ of degree one, and intermediate ring $N_Q$; this proves $N_Q$ Noetherian. Apply [lem-sbc-integral-closure-finite-normal-product] to $R\\to K$, viewing the field $K$ as the single normal factor. It gives normality of every $N_Q$. This proves clause (i).",
+   "uses": [
+    "lem-trf-normalization-finite-local-model",
+    "lem-sc-krull-akizuki-noetherian",
+    "lem-sbc-integral-closure-finite-normal-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Lemma 4.9.4 and Theorem 4.10.5, first domain paragraph, printed pp. 88, 90; author-hosted text read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "For $0\\ne x\\in N$, write $x=a/d$ with $0\\ne a,d\\in R$. If a height-one prime $Q$ contains $x$, then $a=dx\\in Q\\cap R$. By [lem-trf-normalization-height-one-associated-contraction], $Q\\cap R$ belongs to $\\operatorname{Ass}_R(R/aR)$. This is finite by [lem-weil-pbc-noetherian-associated-primes-finite], since $R/aR$ is generated as an $R$-module by $1$. Over each of these finitely many contractions there are only finitely many primes of $N$, by [lem-trf-normalization-finite-prime-fibres]. Their finite union contains all the height-one primes containing $x$. This proves clause (iii), globally, before proving the intersection assertion.",
+   "uses": [
+    "lem-trf-normalization-height-one-associated-contraction",
+    "lem-weil-pbc-noetherian-associated-primes-finite",
+    "lem-trf-normalization-finite-prime-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.5 proof, printed p. 90, finite-character paragraph; author-hosted text read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "For clause (ii) it suffices to prove the assertion when $R$ is local. Indeed, for each maximal ideal $m\\subset R$, put $S=R\\setminus m$. The ring $R_m$ is Noetherian: every ideal of $R_m$ is the extension of its contraction to $R$, whose finite generators also generate the localized ideal. By [lem-weil-pbc-integral-closure-commutes-localization], $S^{-1}N$ is its integral closure in $K$. The prime correspondence for localization sends its height-one primes to height-one primes $Q$ of $N$ disjoint from $S$: every prime below $Q$ is also disjoint from $S$, so the strict prime chains below $Q$ are unchanged. The further localizations are $N_Q$, directly from their fractions. Thus an element in all global height-one localizations belongs to every $S^{-1}N$ once the local assertion is proved. The final step below will recover $N$. For Steps 4-15 now assume $R$ local; Steps 1-2 still apply.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.5 proof, printed pp. 90-91, reduction to the local case; author-hosted text read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Use [lem-trf-normalization-completed-product-comparison] for this local $R$. In its notation the complete Noetherian local domains $B_i=\\widehat R/q_i$ have fraction fields $L_i$ and normalizations $T_i$, and there are compatible embeddings $j_i:K\\hookrightarrow L_i$ with $N=\\{x\\in K:j_i(x)\\in T_i\\ \\forall i\\}$. Each $B_i$ is Nagata by [lem-weil-pbc-complete-local-nagata]. Its prime $(0)$ therefore has Japanese quotient $B_i$; [def-weil-pbc-japanese-domain], with the degree-one extension $L_i/L_i$, says that $T_i$ is a finite $B_i$-module. Module generators also generate it as a $B_i$-algebra, since every element is a linear combination of them. Hence [lem-weil-pbc-finite-type-algebra-noetherian] makes $T_i$ Noetherian. This obtains exactly the finiteness input of Theorem 4.3.4 from existing DAG nodes.",
+   "uses": [
+    "lem-trf-normalization-completed-product-comparison",
+    "lem-weil-pbc-complete-local-nagata",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.5 proof, printed p. 91; Proposition 4.7.3; Theorem 4.3.4, finite-normalization consequence (existing Stacks 032W and 032F route); author-hosted text read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-integral-closure-finite-normal-product] to $B_i\\to L_i$: every prime localization of $T_i$ is a normal domain. Then [lem-weil-pbc-normal-domain-of-local-normal] gives normality of $T_i$ itself. For $0\\ne b\\in T_i$ and $a\\in T_i$, [lem-weil-pbc-normal-domain-principal-quotient-associated-height] puts every associated prime of $T_i/bT_i$ in height one. If $a/b$ belongs to every height-one localization, then for each such associated prime $Q$ some $s\\notin Q$ has $sa\\in bT_i$, so the class of $a$ vanishes at $Q$. The injectivity in [lem-weil-pbc-module-injects-localizations-associated-primes] makes that class zero. Thus $T_i=\\bigcap_{\\operatorname{ht}Q=1}(T_i)_Q$ inside $L_i$. Each $(T_i)_Q$ is Noetherian by the finite-generation argument for localized ideals in Step 3, normal as above, local, and one-dimensional by the prime-chain definition of height; [lem-sc-normal-dim1-dvr] makes it a DVR.",
+   "uses": [
+    "lem-sbc-integral-closure-finite-normal-product",
+    "lem-weil-pbc-normal-domain-of-local-normal",
+    "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+    "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "lem-sc-normal-dim1-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Proposition 4.10.4 and its use in Theorem 4.10.5, printed pp. 90-91; the intersection proof is also Stacks 031T(1)-(2), via 0311; author-hosted text read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "For each pair $(i,Q)$ from Step 5, take the integer-valued valuation $v_{i,Q}:L_i^\\times\\to\\mathbf Z$ of the DVR $(T_i)_Q$, as in [def-sc-discrete-valuation-ring], and restrict it along $j_i$ to $K^\\times$. Write these restricted valuations as $v_\\lambda$. Steps 4-5 give $N=\\{0\\}\\cup\\{x\\in K^\\times:v_\\lambda(x)\\ge0\\ \\forall\\lambda\\}$. For each $0\\ne a\\in N$, only finitely many $\\lambda$ have $v_\\lambda(a)>0$: there are finitely many factors $i$, and in each $T_i$ a height-one prime containing the nonzero $j_i(a)$ is minimal over $j_i(a)T_i$, since no nonzero prime lies strictly below it. Now apply [lem-sc-finite-minimal-primes-over-ideal] to the Noetherian $T_i$. Discard valuations trivial on $K^\\times$, since their inequalities impose no condition. For each remaining valuation its centre $p_\\lambda=\\{0\\}\\cup\\{a\\in N\\setminus\\{0\\}:v_\\lambda(a)>0\\}$ is a nonzero prime: primality follows by additivity and nonnegativity; to see nonzeroness write an element of positive value in $K=\\operatorname{Frac}(N)$ as $c/d$, so $v_\\lambda(c)>v_\\lambda(d)\\ge0$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-sc-finite-minimal-primes-over-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.5 proof, printed p. 91, normalized completed branches; integer valuations are Proposition 4.1.3/Stacks 00PD; author-hosted text read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "The representation just obtained localizes as follows. For any multiplicative subset $S\\subset N\\setminus\\{0\\}$, keep the indices $\\lambda$ for which $v_\\lambda(s)=0$ for every $s\\in S$. Then $S^{-1}N$ is exactly the intersection of the nonnegative valuation rings for these indices. One inclusion is immediate. For the other, write $x=a/b\\in K^\\times$ with $a,b\\in N\\setminus\\{0\\}$. Only finitely many indices have $v_\\lambda(x)<0$, because each has $v_\\lambda(b)>0$. None is kept, so choose $s_\\lambda\\in S$ of positive value for each of these indices, and a positive integer $n_\\lambda$ with $n_\\lambda v_\\lambda(s_\\lambda)+v_\\lambda(x)\\ge0$. For $s=\\prod s_\\lambda^{n_\\lambda}\\in S$, every valuation of $sx$ is nonnegative: the other factors all lie in $N$ and cannot lower any value. Thus $sx\\in N$ and $x\\in S^{-1}N$. Zero is automatic. In particular for $S=N\\setminus P$ the kept indices are exactly those with $p_\\lambda\\subseteq P$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Exercise 4.30, printed p. 96; explicit denominator-clearing argument used in Theorem 4.10.5, printed pp. 91-92; author-hosted text read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Fix $0\\ne b\\in N$. Let $F=\\{\\lambda:v_\\lambda(b)>0\\}$, which is finite by Step 6. For $\\lambda\\in F$, put $J_\\lambda=\\{0\\}\\cup\\{a\\in N\\setminus\\{0\\}:v_\\lambda(a)\\ge v_\\lambda(b)\\}$. The valuation representation gives $bN=\\bigcap_{\\lambda\\in F}J_\\lambda$: if $a$ belongs to the right side, then every valuation of $a/b$ is nonnegative, including the indices outside $F$ where $v_\\lambda(b)=0$. Hence $a/b\\in N$. The reverse inclusion follows by additivity. If $F$ is empty this says $bN=N$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.5 proof, printed p. 91, finite primary decomposition of bN from the completed branches; author-hosted text read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Each $J_\\lambda$ is an ideal by the valuation inequalities, has radical $p_\\lambda$, and is $p_\\lambda$-primary: if $ac\\in J_\\lambda$ with $a\\notin p_\\lambda$, then $v_\\lambda(a)=0$ and $c\\in J_\\lambda$. A positive-valued element has a power of value at least $v_\\lambda(b)$, proving the radical assertion. Moreover $p_\\lambda^{e_\\lambda}\\subseteq J_\\lambda$ for $e_\\lambda=v_\\lambda(b)\\ge1$, since a product of $e_\\lambda$ positive integer values has sum at least $e_\\lambda$, and sums preserve the lower bound. Merge the finitely many ideals with the same radical, then delete redundant terms. Intersections of primary ideals with the same radical are primary by the displayed test, and taking the maximum of their power bounds retains a power bound. We obtain an irredundant expression $bN=J_1\\cap\\cdots\\cap J_t$ with distinct prime radicals $p_j$ and $p_j^{e_j}\\subseteq J_j$; every $p_j$ is the centre of at least one retained valuation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.5 proof, printed pp. 91-92; explicit primary and prime-power calculations in the DVRs; author-hosted text read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "The smaller principal-height subclaim [lem-trf-normalization-principal-height-one-refinement] applies to the present local Noetherian base $R$ and its normalization $N$. Thus every prime $P$ containing a nonzero $c\\in N$ contains a height-one prime containing $c$. We use only this refinement, not any finiteness or height-one intersection assertion from that node. The remaining steps prove that the primary radicals of Step 9 must have height one.",
+   "uses": [
+    "lem-trf-normalization-principal-height-one-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.5 proof, printed p. 91, paragraph beginning We next prove that for any non-zero element b; author-hosted text read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Suppose, to get a contradiction, that one radical $p_1$ in Step 9 is not height one. It is nonzero since it contains $b$. There must be a retained index $\\mu$ with $p_\\mu\\subseteq p_1$ and $v_\\mu(b)=0$. Otherwise Step 7, for the multiplicative subset generated by $N\\setminus p_1$ and $b$, gives $N_{p_1}[1/b]=K$ (no index remains). Every nonzero prime of $N_{p_1}$ would then contain $b$: for $0\\ne h$ in it, write $h^{-1}=a/b^n$ in $N_{p_1}[1/b]$, so $b^n=ha$ belongs to it. In particular all height-one primes below $p_1$ contain $b$, and there are finitely many by Step 2 and the prime-chain correspondence of Step 3.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.5 proof, printed pp. 91-92, contradiction if all relevant completed-branch primes contain b; author-hosted text read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Continue the hypothetical case in Step 11. Write $H_1,\\ldots,H_r$ for those height-one primes of $N$ below $p_1$. Each is strictly smaller than $p_1$. If the list is empty choose any $0\\ne x\\in p_1$. Otherwise choose $a_i\\in p_1\\setminus H_i$ and, for $i\\ne j$, $t_{ij}\\in H_j\\setminus H_i$ (distinct height-one primes are incomparable). Put $x=\\sum_i a_i\\prod_{j\\ne i}t_{ij}$. For each $i$ its $i$th term is outside $H_i$ and all other terms lie in $H_i$, so $x\\in p_1$ lies outside every $H_i$, and in particular $x\\ne0$. Step 10 supplies a height-one prime containing $x$ below $p_1$, a contradiction. Thus the index $\\mu$ asserted in Step 11 exists. Set $P=p_\\mu$; this is a nonzero prime by Step 6, and $b\\notin P$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.5 proof, printed pp. 91-92, finite prime-avoidance argument (A.1.1) written out; author-hosted text read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Choose the least positive integer $h$ for which $p_1^h\\cap J_2\\cap\\cdots\\cap J_t\\subseteq bN$. It exists by the prime-power bound for $J_1$. There is $c\\in p_1^{h-1}\\cap J_2\\cap\\cdots\\cap J_t$ outside $bN$: for $h>1$ this is minimality, and for $h=1$ it is irredundancy of the decomposition (with $p_1^0=N$). Then $cp_1\\subseteq bN$, since multiplication puts the result in $p_1^h$ while preserving all other $J_j$. In particular $c\\ne0$. Put $z=c/b\\in K\\setminus N$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.5 proof, printed p. 92, minimal prime-power exponent and the choice of c; author-hosted text read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "For $d\\in P$, one has $zd\\in N$ by $cP\\subseteq cp_1\\subseteq bN$. If $d\\ne0$, then $v_\\mu(zd)=v_\\mu(c)+v_\\mu(d)-v_\\mu(b)>0$, since $c\\in N$ and $v_\\mu(b)=0$. Thus $zP\\subseteq P$. Choose $0\\ne d\\in P$, possible because trivial restricted valuations were discarded in Step 6. Inductively $z^nd\\in P\\subseteq N$ for every $n\\ge1$. For every index $\\lambda$, $nv_\\lambda(z)+v_\\lambda(d)\\ge0$ for all $n$; the values are integers, so $v_\\lambda(z)\\ge0$. The representation of Step 6 forces $z\\in N$, contradicting Step 13. Therefore every radical $p_j$ in Step 9 has height one.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.5 proof, printed p. 92, valuation argument excluding embedded primary components; zero-centre valuations explicitly removed; author-hosted text read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Distinct $p_j$ are now incomparable. Localizing $bN=\\bigcap_jJ_j$ at $p_i$ kills every $J_j$ with $j\\ne i$: choose $s\\in p_j\\setminus p_i$ and a power of $s$ in $J_j$. Hence $bN_{p_i}=(J_i)_{p_i}$. Also $J_i=N\\cap(J_i)_{p_i}$, since $sa\\in J_i$ with $s\\notin p_i$ implies $a\\in J_i$ by primarity. Finite intersections localize by multiplying the finitely many witnessing denominators. If $x=a/b\\in K$ belongs to every height-one localization of $N$, then $a\\in bN_{p_i}$ and therefore $a\\in J_i$ for every $i$. Thus $a\\in bN$ and $x\\in N$. This proves clause (ii) for local $R$. Empty decompositions give $bN=N$, so the same reasoning covers units and fields.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.5 proof, printed p. 92, final paragraph; author-hosted text read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Return to arbitrary $R$ as in Step 3. Let $x\\in K$ belong to all height-one localizations $N_Q$. For every maximal ideal $m\\subset R$, the local case just proved applied to $R_m$ gives $x\\in (R\\setminus m)^{-1}N$. The ideal $I=\\{r\\in R:rx\\in N\\}$ therefore contains an element outside every maximal ideal. It cannot be proper, since every proper ideal lies in a maximal ideal; hence $1\\in I$ and $x\\in N$. The reverse inclusion into every $N_Q$ is immediate. Together with Steps 1-2 this proves all three Krull clauses. If there are no height-one primes, the intersection is $K$ and this argument shows $N=K$, agreeing with the stated empty-intersection convention.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Theorem 4.10.5 proof, printed pp. 90-91, completion of the local-to-global reduction; author-hosted text read online; local PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-normalization-finite-local-model",
+  "lem-sc-krull-akizuki-noetherian",
+  "lem-sbc-integral-closure-finite-normal-product",
+  "lem-trf-normalization-height-one-associated-contraction",
+  "lem-weil-pbc-noetherian-associated-primes-finite",
+  "lem-trf-normalization-finite-prime-fibres",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-trf-normalization-completed-product-comparison",
+  "lem-weil-pbc-complete-local-nagata",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+  "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "lem-sc-normal-dim1-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-trf-normalization-principal-height-one-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/swanson-huneke-integral-closure.pdf",
+  "place": "Repair by NO following the author-hosted Swanson-Huneke Theorem 4.10.5 proof, printed pp. 90-92, read online in full. Local PDF WANTED. Existing Stacks 032W/032F replaces Theorem 4.3.4 only as the generic finiteness input; existing 031T(1)/0311 expands Proposition 4.10.4. Finite denominator clearing, prime avoidance and valuation calculations are written explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +245,38 @@
    "results": "{\"t\": \"2026-10-17T21:23:31Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization without finite generation is a locally Noetherian height one finite-character intersection of normal local domains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isDedekindRing_iff\", \"isDedekindDomain_iff\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"IsDedekindRing.toIsNoetherian\", \"IsDedekindDomainDvr.toIsNoetherian\", \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"integralClosure.isNoetherianRing\", \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\"], \"digest\": \"f6802aeb3d5f9796\"}",
    "date": "2026-10-18",
    "verdict": "no match: the hits concern Dedekind domains, dimension-one hypotheses, or integral-closure Noetherianity over an already integrally closed base (with separability). Read DedekindDomain/IntegralClosure.lean:145–175; it does not prove Mori–Nagata for a general Noetherian domain. The grep hits for Mori are Morita and for Nagata are Noether normalization, neither this theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "KrullDomain|Mori|Nagata",
+   "results": "{\"t\": \"2026-10-17T21:36:09Z\", \"tool\": \"grep\", \"query\": \"KrullDomain|Mori|Nagata\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Morita/Basic.lean\", \"Mathlib/RingTheory/Morita/Basic.lean\", \"Mathlib/RingTheory/Morita/Basic.lean\", \"Mathlib/RingTheory/Morita/Basic.lean\", \"Mathlib/RingTheory/Morita/Basic.lean\", \"Mathlib/RingTheory/Morita/Matrix.lean\", \"Mathlib/RingTheory/Morita/Matrix.lean\", \"Mathlib/RingTheory/Morita/Matrix.lean\"], \"digest\": \"41a18a89bf28ff4f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Dedekind or already-normal Noetherian integral-closure results do not prove the general Mori-Nagata theorem; Loogle unknown identifier KrullDomain is inconclusive."
+  },
+  {
+   "tool": "leansearch",
+   "query": "normalization of a Noetherian domain is Krull",
+   "results": "{\"t\": \"2026-10-17T21:36:09Z\", \"tool\": \"leansearch\", \"query\": \"normalization of a Noetherian domain is Krull\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_integral_inj_algHom_of_fg\", \"isArtinianRing_iff_isNoetherianRing_krullDimLE_zero\", \"IsDedekindDomainInv.dimensionLEOne\", \"isArtinianRing_iff_krullDimLE_zero\", \"Polynomial.ringKrullDim_of_isNoetherianRing\", \"isDedekindRing_iff\", \"IsDedekindRing.casesOn\", \"IsPrincipalIdealRing.ringKrullDim_eq_one\"], \"digest\": \"5173f7d3e827628a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Dedekind or already-normal Noetherian integral-closure results do not prove the general Mori-Nagata theorem; Loogle unknown identifier KrullDomain is inconclusive."
+  },
+  {
+   "tool": "loogle",
+   "query": "integralClosure KrullDomain",
+   "results": "{\"t\": \"2026-10-17T21:36:09Z\", \"tool\": \"loogle\", \"query\": \"integralClosure KrullDomain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `KrullDomain`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Dedekind or already-normal Noetherian integral-closure results do not prove the general Mori-Nagata theorem; Loogle unknown identifier KrullDomain is inconclusive."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mori Nagata theorem integral closure of Noetherian domain in fraction field is Krull domain",
+   "results": "{\"t\": \"2026-10-17T21:36:12Z\", \"tool\": \"leanfinder\", \"query\": \"Mori Nagata theorem integral closure of Noetherian domain in fraction field is Krull domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isDedekindDomain_iff\", \"isDedekindRing_iff\", \"IsIntegralClosure.isNoetherianRing\", \"IsIntegralClosure.isNoetherian\", \"integralClosure.isNoetherianRing\", \"Ring.DimensionLEOne.integralClosure\", \"integralClosure.isDedekindDomain_fractionRing\", \"IsDedekindRing.toIsIntegralClosure\"], \"digest\": \"aa8817a0b093299b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Dedekind or already-normal Noetherian integral-closure results do not prove the general Mori-Nagata theorem; Loogle unknown identifier KrullDomain is inconclusive."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-normalization-principal-minimal-primes",
@@ -66,7 +288,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Orgogozo Lemma 8.3.2 proof, final finite-type alternative: Heinzer’s Corollary for the normalization of a Noetherian integral domain supplies the Noetherian normalization spectrum. Algebraic input for the Noetherian induction proving the Heinzer normalization assertion. Specifically: the Mori–Nagata theorem for the normalization of a Noetherian domain in its own fraction field, used after constructing a finite integral model of the finite field extension.",
+   "place": "Historical dependency ancestry, not a verbatim Orgogozo/Heinzer sentence: the current ancestor DAG proof Step 3 invokes lem-trf-specialization-zero-section for fixed-locus specialization; the main-20261015 blueprint proof, paragraph (1) and (2), says Varshavsky’s theorem is proved by specialization to the normal cone. The intermediate normalization branch recorded in from.via was created below that specialization input. The present node supplies commutative algebra for that historical descendant branch. The current blueprint has no Orgogozo/Heinzer normalization sentence.",
    "via": [
     "lem-trf-normalization-principal-minimal-primes",
     "lem-trf-integral-extension-noetherian-spectrum",
@@ -82,5 +304,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-normalization-integral-closure-krull",
+  "worker": "stage1",
+  "summary": "Repaired returned C1/C2: replaced the direct elementary invocation of Mori-Nagata by sixteen proof steps following the complete proof through printed p. 92. Five new statement-only input lemmas; no new Mathlib leaves. Reused existing complete-local Nagata, Krull-Akizuki, associated-prime and localization nodes. Wrote out finite-character valuation localization, primary decomposition, prime avoidance, and the valuation contradiction; explicitly discarded valuations trivial on K. The mathematical statement is unchanged.",
+  "blueprint": "Historical dependency ancestry, not a verbatim Orgogozo/Heinzer sentence: the current ancestor DAG proof Step 3 invokes lem-trf-specialization-zero-section for fixed-locus specialization; the main-20261015 blueprint proof, paragraph (1) and (2), says Varshavsky’s theorem is proved by specialization to the normal cone. The intermediate normalization branch recorded in from.via was created below that specialization input. The present node supplies commutative algebra for that historical descendant branch. The current blueprint has no Orgogozo/Heinzer normalization sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-krull-akizuki-noetherian",
+    "why": "Generic commutative algebra input used exactly as stated in the proof; the trace-formula unit supplies no theorem for this normalization/associated-prime/complete-ring calculation. It does not replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-sbc-integral-closure-finite-normal-product",
+    "why": "Generic commutative algebra input used exactly as stated in the proof; the trace-formula unit supplies no theorem for this normalization/associated-prime/complete-ring calculation. It does not replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-nagata",
+    "why": "Generic commutative algebra input used exactly as stated in the proof; the trace-formula unit supplies no theorem for this normalization/associated-prime/complete-ring calculation. It does not replace a geometric step of the unit."
+   },
+   {
+    "node": "def-weil-pbc-japanese-domain",
+    "why": "Generic commutative algebra input used exactly as stated in the proof; the trace-formula unit supplies no theorem for this normalization/associated-prime/complete-ring calculation. It does not replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+    "why": "Generic commutative algebra input used exactly as stated in the proof; the trace-formula unit supplies no theorem for this normalization/associated-prime/complete-ring calculation. It does not replace a geometric step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "why": "Generic commutative algebra input used exactly as stated in the proof; the trace-formula unit supplies no theorem for this normalization/associated-prime/complete-ring calculation. It does not replace a geometric step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-krull-akizuki-noetherian",
+  "lem-sbc-integral-closure-finite-normal-product",
+  "lem-weil-pbc-complete-local-nagata",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+  "lem-weil-pbc-module-injects-localizations-associated-primes"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-ca9d8c528",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-ca9d8c528 (reviewer sub-agent of L); spot-checked: Read all required coordination files, the item, five new nodes, cited DAG statements, unit route, and Swanson–Huneke Theorem 4.10.5 through printed p. 92. Verified all 16 proof steps, hypotheses, fraction-field/base-change identifications, edge cases, finite-character and valuation arguments, no circularity or duplicate restatement, recorded Mathlib searches, and route-pivot/SGA compliance. Review written to review.md."
  }
 }

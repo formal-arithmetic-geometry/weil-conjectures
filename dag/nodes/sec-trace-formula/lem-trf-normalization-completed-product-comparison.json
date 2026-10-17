@@ -1,0 +1,86 @@
+{
+ "id": "lem-trf-normalization-completed-product-comparison",
+ "kind": "statement",
+ "title": "Recover normalization by intersection with normalized completed branches",
+ "statement": "Let $R$ be a commutative Noetherian integral domain [def-weil-pbc-noetherian-ring], where an integral domain is a nonzero commutative ring without zero divisors. Let $K=\\operatorname{Frac}(R)$ be its field of fractions and $N\\subseteq K$ its integral closure [def-weil-pbc-integral-closure]. Assume $R$ is local, with unique maximal ideal $m$, and put $H=\\varprojlim_{n\\ge1}R/m^n$ [def-weil-pbc-adically-complete-ring]. There are finitely many minimal prime ideals $q_1,\\ldots,q_s$ of $H$. Put $B_i=H/q_i$, $L_i=\\operatorname{Frac}(B_i)$, and let $T_i\\subseteq L_i$ be the integral closure of $B_i$ in $L_i$ [def-weil-pbc-integral-closure]. Each $B_i$ is a complete Noetherian local domain. The canonical map $R\\to B_i$ is injective and induces an embedding $j_i:K\\hookrightarrow L_i$. For every $x\\in K$, one has $x\\in N$ if and only if $j_i(x)\\in T_i$ for every $i$. Equivalently, inside $\\prod_iL_i$ one has $N=K\\cap\\prod_iT_i$, using the diagonal embedding $x\\mapsto(j_i(x))_i$.",
+ "source": {
+  "document": "literature/swanson-huneke-integral-closure.pdf",
+  "place": "Swanson–Huneke, Integral Closure of Ideals, Rings, and Modules. Proposition 4.7.3, printed pp. 81-82 (PDF pp. 95-96), first assertion and component construction in its proof; used in Theorem 4.10.5, printed p. 91. The component quotients and their fraction fields are taken before normalization. Author-hosted PDF read online at https://www.math.purdue.edu/~iswanso/book/SwansonHuneke.pdf; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The normalization of a Noetherian local domain is the intersection of its fraction field with the product of normalizations of the minimal prime quotients of its completion",
+   "results": "{\"t\": \"2026-10-17T22:01:32Z\", \"tool\": \"leanfinder\", \"query\": \"The normalization of a Noetherian local domain is the intersection of its fraction field with the product of normalizations of the minimal prime quotients of its completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"completeIntegralClosure_eq_integralClosure\", \"Algebra.intNorm_eq_of_isLocalization\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsDedekindRing.toIsIntegralClosure\", \"IsDedekindDomain.HeightOneSpectrum.coe_algebraMap_mem\", \"isDedekindDomain_iff\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers\", \"IsDedekindDomainDvr.isIntegrallyClosed\"], \"digest\": \"b14362362dbdf32e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: completeIntegralClosure_eq_integralClosure is about almost-integral elements, not adic completion. Scheme normalization factorization and Dedekind adic-completion declarations do not give this diagonal intersection comparison. Grep in RingTheory/AdicCompletion returned no integral-closure comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"AdicCompletion\"",
+   "results": "{\"t\": \"2026-10-17T22:01:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"AdicCompletion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: completeIntegralClosure_eq_integralClosure is about almost-integral elements, not adic completion. Scheme normalization factorization and Dedekind adic-completion declarations do not give this diagonal intersection comparison. Grep in RingTheory/AdicCompletion returned no integral-closure comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure|IsIntegralClosure",
+   "results": "{\"t\": \"2026-10-17T22:01:29Z\", \"tool\": \"grep\", \"query\": \"integralClosure|IsIntegralClosure\", \"sub\": \"RingTheory/AdicCompletion\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: completeIntegralClosure_eq_integralClosure is about almost-integral elements, not adic completion. Scheme normalization factorization and Dedekind adic-completion declarations do not give this diagonal intersection comparison. Grep in RingTheory/AdicCompletion returned no integral-closure comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization embeds in the product of normalized complete branches and is recovered by intersecting with the original fraction field",
+   "results": "{\"t\": \"2026-10-17T22:01:30Z\", \"tool\": \"leansearch\", \"query\": \"Normalization embeds in the product of normalized complete branches and is recovered by intersecting with the original fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UniqueFactorizationMonoid.normalizationMonoid\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\"], \"digest\": \"7574410f76511281\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: completeIntegralClosure_eq_integralClosure is about almost-integral elements, not adic completion. Scheme normalization factorization and Dedekind adic-completion declarations do not give this diagonal intersection comparison. Grep in RingTheory/AdicCompletion returned no integral-closure comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure descends from the reduced completion by intersection with the total fraction ring",
+   "results": "{\"t\": \"2026-10-17T22:01:35Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure descends from the reduced completion by intersection with the total fraction ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"integralClosure_le_completeIntegralClosure\", \"completeIntegralClosure_eq_integralClosure\", \"IsIntegrallyClosed.instIsIntegralClosure\", \"IsDedekindRing.toIsIntegralClosure\", \"IsLocalization.Away.integralClosure\", \"mem_completeIntegralClosure\", \"integralClosure.isFractionRing_of_algebraic\", \"IsIntegralClosure.isLocalization\"], \"digest\": \"9aacff1097b095e3\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: completeIntegralClosure_eq_integralClosure is about almost-integral elements, not adic completion. Scheme normalization factorization and Dedekind adic-completion declarations do not give this diagonal intersection comparison. Grep in RingTheory/AdicCompletion returned no integral-closure comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-normalization-integral-closure-krull",
+  "date": "2026-10-18",
+  "group": "NO"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical dependency ancestry, not a verbatim Orgogozo/Heinzer sentence: the current ancestor DAG proof Step 3 invokes lem-trf-specialization-zero-section for fixed-locus specialization; the main-20261015 blueprint proof, paragraph (1) and (2), says Varshavsky’s theorem is proved by specialization to the normal cone. The intermediate normalization branch recorded in from.via was created below that specialization input. The present node supplies commutative algebra for that historical descendant branch. The current blueprint has no Orgogozo/Heinzer normalization sentence.",
+   "via": [
+    "lem-trf-normalization-integral-closure-krull",
+    "lem-trf-normalization-principal-minimal-primes",
+    "lem-trf-integral-extension-noetherian-spectrum",
+    "lem-trf-normalized-base-change-noetherian-topology",
+    "lem-trf-oriented-maximal-point-finiteness",
+    "lem-trf-oriented-constructible-subquotients",
+    "lem-trf-psi-proper-surjective-constructibility",
+    "lem-trf-psi-good-oriented-cohomology-strata",
+    "lem-trf-nearby-cycle-sheaf-finiteness",
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "lem-trf-specialization-zero-section"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
