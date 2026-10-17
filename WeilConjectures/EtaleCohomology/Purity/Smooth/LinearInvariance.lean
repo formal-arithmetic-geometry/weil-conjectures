@@ -71,12 +71,38 @@ end AffineSpace
 
 namespace Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ] {S : Scheme.{u}}
-  [HasInvertibleExponent Λ S] {d : ℕ}
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
+  [HasKummerClass.IsNormalized Λ] {S : Scheme.{u}} [HasInvertibleExponent Λ S] {d : ℕ}
+  {k : Type u} [Field k]
 
 local instance (S : Scheme.{u}) [HasInvertibleExponent Λ S] (n : Type u) :
     HasInvertibleExponent Λ 𝔸(n; S) :=
   .of_hom (𝔸(n; S) ↘ S)
+
+/-- A self-map `φ` of a scheme `U` pulling the functions `t` back to `M t`, for an invertible
+matrix `M`, preserves the class `∂κ(t₁) ∪ ⋯ ∪ ∂κ(t_d)`. -/
+theorem restrictSupportedClass_kummerBoundaryProduct_of_mulVec {U : Scheme.{u}}
+    [HasInvertibleExponent Λ U] (aU : U ⟶ Spec (.of k)) (φ : U ⟶ U) (t : Fin d → Γ(U, ⊤))
+    (M : Matrix (Fin d) (Fin d) Γ(U, ⊤)) (hM : IsUnit M.det)
+    (hφ : ∀ a, φ.appTop (t a) = M.mulVec t a)
+    (g' : U.zeroLocusSubscheme (Set.range t) ⟶ U.zeroLocusSubscheme (Set.range t))
+    (hg' : IsPullback g' (U.zeroLocusSubschemeι (Set.range t))
+      (U.zeroLocusSubschemeι (Set.range t)) φ) :
+    restrictSupportedClass (ModuleCat.{u + 1} Λ) φ _ _ g' hg'
+        (leftDerivedUpperStarConstantComplexIso Λ _).inv
+        (leftDerivedUpperStarTateShiftIso Λ _ d) (kummerBoundaryProduct Λ t) =
+      kummerBoundaryProduct Λ t := by
+  obtain ⟨gφ, hgφ⟩ : ∃ g, IsPullback g _ _ _ :=
+    ⟨_, isPullback_zeroLocusSubschemeι φ (Set.range t) (Set.range (M.mulVec t)) (by
+        rw [← Set.range_comp]
+        exact congrArg Set.range (funext hφ))⟩
+  obtain ⟨g₀, hg₀⟩ := Scheme.exists_isPullback_zeroLocusSubschemeι_of_span_eq
+    (U := U) (s := Set.range (M.mulVec t)) (s' := Set.range t)
+    (Ideal.span_range_mulVec_of_isUnit_det _ hM _)
+  rw [restrictSupportedClass_comp_tateShift Λ (𝟙 _) φ _ (Category.id_comp _).symm _ _ _
+      gφ hgφ g₀ hg₀ g' hg',
+    restrictSupportedClass_kummerBoundaryProduct Λ φ t (M.mulVec t) hφ gφ hgφ]
+  exact restrictSupportedClass_kummerBoundaryProduct_mulVec Λ aU t M hM g₀ hg₀
 
 /-- Blueprint `lem-amb-linear-trace-invariance`: Linear changes of coordinates preserve
 integration
@@ -93,7 +119,7 @@ The class is the one whose adjoint is the affine-space purity isomorphism and wh
 the affine-space integration `t_{p_d}`; the integration map itself is not constructed in this
 repository (see `AlgebraicGeometry.VectorBundle.integration`), so the invariance is stated for the
 class. -/
-theorem restrictSupportedClass_kummerBoundaryProduct_linearMap
+theorem restrictSupportedClass_kummerBoundaryProduct_linearMap (aS : S ⟶ Spec (.of k))
     (g : Matrix (Fin d) (Fin d) Γ(S, ⊤)) (hg : IsUnit g.det)
     (g' : 𝔸(ULift.{u} (Fin d); S).zeroLocusSubscheme (Set.range (AffineSpace.coordFin S d)) ⟶
       𝔸(ULift.{u} (Fin d); S).zeroLocusSubscheme (Set.range (AffineSpace.coordFin S d)))
@@ -106,23 +132,12 @@ theorem restrictSupportedClass_kummerBoundaryProduct_linearMap
         (leftDerivedUpperStarTateShiftIso Λ _ d)
         (kummerBoundaryProduct Λ (AffineSpace.coordFin S d)) =
       kummerBoundaryProduct Λ (AffineSpace.coordFin S d) := by
-  have hM : IsUnit (g.map (𝔸(ULift.{u} (Fin d); S) ↘ S).appTop.hom).det := by
-    have h := hg.map (𝔸(ULift.{u} (Fin d); S) ↘ S).appTop.hom
-    rw [RingHom.map_det] at h
-    exact h
-  obtain ⟨gφ, hgφ⟩ : ∃ g, IsPullback g _ _ _ :=
-    ⟨_, isPullback_zeroLocusSubschemeι (AffineSpace.linearMap g) (Set.range (AffineSpace.coordFin S d))
-      (Set.range ((g.map (𝔸(ULift.{u} (Fin d); S) ↘ S).appTop.hom).mulVec (AffineSpace.coordFin S d))) (by
-        rw [← Set.range_comp]
-        exact congrArg Set.range (funext (AffineSpace.linearMap_appTop_coordFin g)))⟩
-  obtain ⟨g₀, hg₀⟩ := Scheme.exists_isPullback_zeroLocusSubschemeι_of_span_eq
-    (U := 𝔸(ULift.{u} (Fin d); S)) (s := Set.range ((g.map (𝔸(ULift.{u} (Fin d); S) ↘ S).appTop.hom).mulVec (AffineSpace.coordFin S d))) (s' := Set.range t)
-    (Ideal.span_range_mulVec_of_isUnit_det _ hM)
-  rw [restrictSupportedClass_comp_tateShift Λ (𝟙 _) (AffineSpace.linearMap g) _
-      (Category.id_comp _).symm _ _ _ gφ hgφ g₀ hg₀ g' hg',
-    restrictSupportedClass_kummerBoundaryProduct Λ (AffineSpace.linearMap g) (AffineSpace.coordFin S d) ((g.map (𝔸(ULift.{u} (Fin d); S) ↘ S).appTop.hom).mulVec (AffineSpace.coordFin S d))
-      (AffineSpace.linearMap_appTop_coordFin g) gφ hgφ]
-  exact restrictSupportedClass_kummerBoundaryProduct_mulVec Λ (AffineSpace.coordFin S d) _ hM g₀ hg₀
+  refine restrictSupportedClass_kummerBoundaryProduct_of_mulVec Λ
+    (𝔸(ULift.{u} (Fin d); S) ↘ S ≫ aS) _ _ _ ?_
+    (AffineSpace.linearMap_appTop_coordFin g) g' hg'
+  have h := hg.map (𝔸(ULift.{u} (Fin d); S) ↘ S).appTop.hom
+  rw [RingHom.map_det] at h
+  exact h
 
 /-- Blueprint `prop-pur-affine-space-purity-compatibilities`: Symmetry and compatibilities of
 affine-space purity
@@ -133,7 +148,8 @@ the restriction of supports along the permutation of coordinates `t ↦ (t_{σ a
 itself. This is the case of a permutation matrix of
 `AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_linearMap`; the Koszul sign
 is `+1`, all classes being of even degree. -/
-theorem restrictSupportedClass_kummerBoundaryProduct_permutation (σ : Equiv.Perm (Fin d))
+theorem restrictSupportedClass_kummerBoundaryProduct_permutation (aS : S ⟶ Spec (.of k))
+    (σ : Equiv.Perm (Fin d))
     (g' : 𝔸(ULift.{u} (Fin d); S).zeroLocusSubscheme (Set.range (AffineSpace.coordFin S d)) ⟶
       𝔸(ULift.{u} (Fin d); S).zeroLocusSubscheme (Set.range (AffineSpace.coordFin S d)))
     (hg' : IsPullback g' (𝔸(ULift.{u} (Fin d); S).zeroLocusSubschemeι
@@ -145,7 +161,7 @@ theorem restrictSupportedClass_kummerBoundaryProduct_permutation (σ : Equiv.Per
         (leftDerivedUpperStarTateShiftIso Λ _ d)
         (kummerBoundaryProduct Λ (AffineSpace.coordFin S d)) =
       kummerBoundaryProduct Λ (AffineSpace.coordFin S d) :=
-  restrictSupportedClass_kummerBoundaryProduct_linearMap Λ _
+  restrictSupportedClass_kummerBoundaryProduct_linearMap Λ aS _
     (by rw [Matrix.det_permutation]; exact (Units.isUnit _).map (Int.castRingHom _)) g' hg'
 
 /-- Blueprint `prop-pur-affine-space-purity-compatibilities`: Symmetry and compatibilities of

@@ -214,6 +214,93 @@ lemma exists_totAug_eq_of_suppLE_zero (n : ℕ) (x : ToType (U.totObj L n))
     rw [totπ_zero_totAug U L hA, hz]
   · rw [totπ_totAug_ne U L hA n p r hpr (by omega), hx p r hpr (by omega)]
 
+
+variable (hrow : ∀ p r (s : ToType (U.dObj L (p + 1) r)), U.dHor L (p + 1) r s = 0 →
+  ∃ t, U.dHor L p r t = s)
+
+include hrow0 hrow1 hrow in
+/-- If the augmented rows of the double complex are exact, the augmentation
+`Γ(X, L) ⟶ Tot(U, L)` induces isomorphisms on cohomology. -/
+theorem isIso_homologyMap_totAug (n : ℕ) :
+    IsIso (HomologicalComplex.homologyMap (U.totAug L) n) := by
+  apply hA.isIso_of_bijective
+  constructor
+  · rw [injective_iff_map_eq_zero]
+    intro y hy
+    obtain ⟨z, hz⟩ := HomologicalComplex.exists_isCls hA (gammaComplex L) n y
+    have hz' := HomologicalComplex.IsCls.map _ (U.totAug L) hz
+    rw [hy] at hz'
+    cases n with
+    | zero =>
+      obtain ⟨w, hw⟩ := (HomologicalComplex.IsCls.eq_zero_iff hA _ 0 0 (by simp) hz').1 rfl
+      have hw0 : (U.totAug L).f 0 z = 0 := by
+        rw [← hw, HomologicalComplex.shape _ _ _ (by simp)]
+        exact hA.zero_apply w
+      have hz0 : z = 0 := hrow0 0 (by
+        rw [map_zero, ← totπ_zero_totAug U L hA, hw0, map_zero])
+      subst hz0
+      exact (HomologicalComplex.IsCls.eq_zero_iff hA _ 0 0 (by simp) hz).2 ⟨0, map_zero _⟩
+    | succ m =>
+      obtain ⟨w, hw⟩ :=
+        (HomologicalComplex.IsCls.eq_zero_iff hA _ m (m + 1) (by simp) hz').1 rfl
+      obtain ⟨w', hw'supp, hw'd⟩ : ∃ w' : ToType (U.totObj L m), U.SuppLE L m 0 w' ∧
+          U.totD L m w' = (U.totAug L).f (m + 1) z := by
+        cases m with
+        | zero => exact ⟨w, U.suppLE_of_le L 0 w, by rw [← totComplex_d]; exact hw⟩
+        | succ m' =>
+          obtain ⟨y0, hy0⟩ := U.exists_suppLE_zero L hA hrow m' w (fun p r h hp ↦ by
+            rw [← totComplex_d]
+            erw [hw]
+            exact totπ_totAug_ne U L hA _ p r h hp z)
+          refine ⟨(show ToType (U.totObj L (m' + 1)) from w) - U.totD L m' y0, hy0, ?_⟩
+          rw [map_sub, U.totD_totD_apply L hA, sub_zero, ← totComplex_d]
+          exact hw
+      obtain ⟨g, hg⟩ := U.exists_totAug_eq_of_suppLE_zero L hA hrow1 m w' hw'supp (by
+        rw [hw'd]
+        exact totπ_totAug_ne U L hA _ 1 m _ le_rfl z)
+      have key : U.resTop (L.X (m + 1)) 0 ((L.d m (m + 1)).hom.app (op (⊤_ X.Etale)) g) =
+          U.resTop (L.X (m + 1)) 0 z := by
+        rw [← resTop_dVert_apply, ← totπ_zero_totAug U L hA m g, hg,
+          ← totπ_totD_zero_apply U L hA m w', hw'd, totπ_zero_totAug U L hA]
+      exact (HomologicalComplex.IsCls.eq_zero_iff hA _ m (m + 1) (by simp) hz).2 ⟨g, hrow0 _ key⟩
+  · intro y
+    obtain ⟨x, hx⟩ := HomologicalComplex.exists_isCls hA (U.totComplex L) n y
+    have hdx : U.totD L n x = 0 := by
+      have := HomologicalComplex.IsCls.d_eq_zero hA _ (n + 1) hx
+      rwa [totComplex_d] at this
+    obtain ⟨x', hx'supp, hx'd, hcls⟩ : ∃ x', U.SuppLE L n 0 x' ∧ U.totD L n x' = 0 ∧
+        (U.totComplex L).IsCls n y x' := by
+      cases n with
+      | zero => exact ⟨x, U.suppLE_of_le L 0 x, hdx, hx⟩
+      | succ m =>
+        obtain ⟨y0, hy0⟩ := U.exists_suppLE_zero L hA hrow m x (fun p r h _ ↦ by
+          rw [hdx, map_zero])
+        refine ⟨(show ToType (U.totObj L (m + 1)) from x) - U.totD L m y0, hy0,
+          by rw [map_sub, hdx, U.totD_totD_apply L hA, sub_zero],
+          ?_⟩
+        obtain ⟨c, hc⟩ := HomologicalComplex.exists_isCls_of_d_eq_zero hA (U.totComplex L)
+          (m + 1) (m + 2) (by simp) ((U.totComplex L).d m (m + 1) y0) (by
+            rw [totComplex_d, totComplex_d]
+            exact U.totD_totD_apply L hA _ y0)
+        have hc0 : c = 0 := (HomologicalComplex.IsCls.eq_zero_iff hA _ m (m + 1) (by simp) hc).2
+          ⟨y0, rfl⟩
+        subst hc0
+        have := HomologicalComplex.IsCls.sub (U.totComplex L) hx hc
+        rwa [sub_zero, totComplex_d] at this
+    obtain ⟨z, hz⟩ := U.exists_totAug_eq_of_suppLE_zero L hA hrow1 n x' hx'supp (by
+      rw [hx'd]
+      exact map_zero _)
+    have hdz : (L.d n (n + 1)).hom.app (op (⊤_ X.Etale)) z = 0 := hrow0 (n + 1) (by
+      rw [map_zero, ← resTop_dVert_apply, ← totπ_zero_totAug U L hA n z, hz,
+        ← totπ_totD_zero_apply U L hA n x', hx'd, map_zero])
+    obtain ⟨yz, hyz⟩ := HomologicalComplex.exists_isCls_of_d_eq_zero hA (gammaComplex L) n
+      (n + 1) (by simp) z hdz
+    refine ⟨yz, ?_⟩
+    have := HomologicalComplex.IsCls.map _ (U.totAug L) hyz
+    rw [hz] at this
+    exact (HomologicalComplex.IsCls.eq_iff hA _ _ n rfl this hcls).2 ⟨0, by
+      rw [map_zero, sub_self]⟩
+
 end Aug
 
 end AlgebraicGeometry.SplitEtaleHypercover
