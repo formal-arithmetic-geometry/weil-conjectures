@@ -2,7 +2,7 @@
  "id": "lem-trf-bounded-below-derived-mate-model",
  "kind": "statement",
  "title": "Bounded-below derived mates are computed by underived mates and comparison units",
- "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal A',\\mathcal B'$ be abelian categories [def-sp-abelian] in a common universe [def-weil-size-convention], with derived localizations [def-weil-abstract-derived-category] and bounded-below categories $D^+(-)$ [def-weil-pbc-bounded-derived-subcategories]. Assume $\\mathcal A$ and $\\mathcal A'$ have enough injectives, meaning that every object embeds into an injective object [def-sp-injective-resolutions]. Give additive adjunctions $L:\\mathcal B\\rightleftarrows\\mathcal A:R$ and $L':\\mathcal B'\\rightleftarrows\\mathcal A':R'$ with $L,L'$ exact. Let $G:\\mathcal B\\to\\mathcal B'$ and $H:\\mathcal A\\to\\mathcal A'$ be exact additive functors. Write $C(F)$ for termwise application of an additive functor to bounded-below complexes, $D(F)$ for the descent of an exact functor [lem-weil-pbc-exact-functor-derived-factorization], and $Q$ for localization. Use the canonical bounded-below derived adjunctions $D(L)\\dashv\\mathbf R R$ and $D(L')\\dashv\\mathbf R R'$, with the right-derived comparison units $\\alpha_P:Q C(R)P\\to(\\mathbf R R)(QP)$ and $\\alpha'_{P'}:Q C(R')P'\\to(\\mathbf R R')(QP')$ [lem-weil-pbc-right-derived-plus-injective]. For any natural transformation $\\sigma:L'G\\to HL$, let $b:GR\\to R'H$ be its underived mate and let $b^D:D(G)\\mathbf R R\\to(\\mathbf R R')D(H)$ be the mate of the termwise-derived transformation $D(\\sigma):D(L')D(G)\\to D(H)D(L)$ [def-weil-pbc-adjunction-mate]. Then for every bounded-below complex $P$ of $\\mathcal A$, under the canonical exact-functor localization identifications,\n$$b^D_{QP}\\circ D(G)(\\alpha_P)=\\alpha'_{C(H)P}\\circ Q(C(b)_P).$$\nThe natural transformation $\\sigma$ need not be invertible, and $H$ need not preserve injectives.",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal A',\\mathcal B'$ be abelian categories [def-sp-abelian] in a common universe [def-weil-size-convention], with derived localizations [def-weil-abstract-derived-category] and bounded-below categories $D^+(-)$ [def-weil-pbc-bounded-derived-subcategories]. Assume $\\mathcal A$ and $\\mathcal A'$ have enough injectives, meaning that every object embeds into an injective object [def-sp-injective-resolutions]. Give additive adjunctions $L:\\mathcal B\\rightleftarrows\\mathcal A:R$ and $L':\\mathcal B'\\rightleftarrows\\mathcal A':R'$ with $L,L'$ exact. Let $G:\\mathcal B\\to\\mathcal B'$ and $H:\\mathcal A\\to\\mathcal A'$ be exact additive functors. Write $C(F)$ for termwise application of an additive functor to bounded-below complexes, $D(F)$ for the descent of an exact functor [lem-weil-pbc-exact-functor-derived-factorization], and $Q$ for localization. Use the canonical bounded-below derived adjunctions [lem-trf-bounded-below-derived-adjunction] $D(L)\\dashv\\mathbf R R$ and $D(L')\\dashv\\mathbf R R'$, with the right-derived comparison units $\\alpha_P:Q C(R)P\\to(\\mathbf R R)(QP)$ and $\\alpha'_{P'}:Q C(R')P'\\to(\\mathbf R R')(QP')$ [lem-weil-pbc-right-derived-plus-injective]. For any natural transformation $\\sigma:L'G\\to HL$, let $b:GR\\to R'H$ be its underived mate and let $b^D:D(G)\\mathbf R R\\to(\\mathbf R R')D(H)$ be the mate of the termwise-derived transformation $D(\\sigma):D(L')D(G)\\to D(H)D(L)$ [def-weil-pbc-adjunction-mate]. Then for every bounded-below complex $P$ of $\\mathcal A$, under the canonical exact-functor localization identifications,\n$$b^D_{QP}\\circ D(G)(\\alpha_P)=\\alpha'_{C(H)P}\\circ Q(C(b)_P).$$\nThe natural transformation $\\sigma$ need not be invertible, and $H$ need not preserve injectives.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 07A7, remark-base-change (counit-transpose normalization); the general bounded-below comparison-unit factorization is the project theorem CategoryTheory.Adjunction.derivedPlus_mateEquiv_app_fac, WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean, current lines 419–484 (recorded sorry-map lines 411–484)."
@@ -15,11 +15,109 @@
   "def-sp-injective-resolutions",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-right-derived-plus-injective",
-  "def-weil-pbc-adjunction-mate"
+  "def-weil-pbc-adjunction-mate",
+  "lem-trf-bounded-below-derived-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on $K^+(-)$, the homotopy categories of bounded-below complexes, and write $q$ for their derived localization. Termwise application of an additive functor preserves lower bounds and chain homotopies: it sends a homotopy equation $f-g=dh+hd$ to the same equation after applying the functor. The termwise components $\\sigma_{N^n}$ form a chain map by naturality of $\\sigma$ with each differential, giving $\\sigma^K:K(L')K(G)\\to K(H)K(L)$. For the exact functors $F=L,L',G,H$, [lem-weil-pbc-exact-functor-derived-factorization] gives $\\phi_{F,N}:D(F)(qN)\\xrightarrow{\\sim}qK(F)N$, natural in $N$; termwise application preserves the zero terms below a lower bound, so these descend on the bounded-below localizations $D^+$. Put $E=D(L)$, $E'=D(L')$, $T=D(G)$ and $S=D(H)$. All comparison maps below are these fixed isomorphisms, not arbitrary identifications.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+    "place": "derivedPlus_mateEquiv_app_fac, lines 419–484; explicit comparison calculation"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-right-derived-plus-injective], $U=\\mathbf R R$ and $U'=\\mathbf R R'$ exist with natural comparison maps $\\alpha:qK(R)\\to Uq$ and $\\alpha':qK(R')\\to U'q$. Apply [lem-trf-bounded-below-derived-adjunction] to $L\\dashv R$ and $L'\\dashv R'$. Its hypotheses hold because $L,L'$ are exact and their target categories $\\mathcal A,\\mathcal A'$ have enough injectives. It supplies the specified adjunctions $E\\dashv U$ and $E'\\dashv U'$, units $\\eta^D,\\eta'^D$, counits $\\varepsilon^D,\\varepsilon'^D$, and both comparison identities in its statement. Use [lem-weil-pbc-termwise-adjunction-homotopy] for the termwise homotopy adjunctions and write $\\eta'^K,\\varepsilon^K$ for their unit and counit.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-trf-bounded-below-derived-adjunction",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+    "place": "derivedPlus_mateEquiv_app_fac, lines 419–484; explicit comparison calculation"
+   }
+  },
+  {
+   "text": "Construct the required derived square. For $N\\in K^+(\\mathcal B)$ set\n$$A_N=\\phi_{L',K(G)N}\\circ E'(\\phi_{G,N}),\\qquad B_N=\\phi_{H,K(L)N}\\circ S(\\phi_{L,N}).$$\nThese identify $E'T(qN)$ with $qK(L')K(G)N$ and $SE(qN)$ with $qK(H)K(L)N$, respectively. Both termwise composites invert quasi-isomorphisms by exactness. Apply clause (2) of [lem-weil-pbc-localization-universal-property] to $q:K^+(\\mathcal B)\\to D^+(\\mathcal B)$ and the natural transformation $q\\sigma^K$. It gives the unique $\\theta:E'T\\to SE$ satisfying\n$$\\theta_{qN}=B_N^{-1}\\circ q(\\sigma^K_N)\\circ A_N.$$\nThus $\\theta$ is precisely $D(\\sigma)$, a $\\mathrm{TwoSquare}(T,E,E',S)$, and multiplication by $B_N$ proves, for every bounded-below homotopy complex $N$,\n$$B_N\\circ\\theta_{qN}=q(\\sigma^K_N)\\circ\\phi_{L',K(G)N}\\circ E'(\\phi_{G,N}).\\tag{h\\theta}$$\nThis is exactly the factorization hypothesis of the source's mate theorem, with its comparison maps retained. The following steps prove its needed conclusion directly.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+    "place": "derivedPlus_mateEquiv_app_fac, lines 419–484; explicit comparison calculation"
+   }
+  },
+  {
+   "text": "Fix $P\\in K^+(\\mathcal A)$ and put $X=qP$, $N=K(R)P$, $Z=qK(G)N$, $W=qK(H)P$, $a=\\alpha_P$, $t=T(a)\\circ\\phi_{G,N}^{-1}:Z\\to TU(X)$ and $h=\\phi_{H,P}:S(X)\\to W$. By the component formula of [def-weil-pbc-adjunction-mate],\n$$b^D_X=U'(S(\\varepsilon^D_X)\\circ\\theta_{U(X)})\\circ\\eta'^D_{TU(X)}.$$\nNaturality of $\\eta'^D$ with $t$ and of $\\theta$ with $a:qN\\to U(X)$ gives\n$$U'(h)\\circ b^D_X\\circ t=U'\\!\\left(h\\circ S(\\varepsilon^D_X\\circ E(a))\\circ\\theta_{qN}\\circ E'(\\phi_{G,N}^{-1})\\right)\\circ\\eta'^D_Z.$$\nIndeed $\\eta'^D_{TU(X)}\\circ t=U'E'(t)\\circ\\eta'^D_Z$ and $\\theta_{U(X)}\\circ E'T(a)=SE(a)\\circ\\theta_{qN}$; substitute these two equalities and use functoriality. No derived comparison unit is canceled.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+    "place": "derivedPlus_mateEquiv_app_fac, lines 419–484; explicit comparison calculation"
+   }
+  },
+  {
+   "text": "The counit identity in [lem-trf-bounded-below-derived-adjunction] reads $\\varepsilon^D_X\\circ E(a)=q(\\varepsilon^K_P)\\circ\\phi_{L,N}$. Naturality of $\\phi_H$ with $\\varepsilon^K_P:K(L)N\\to P$ reads\n$$h\\circ S(q\\varepsilon^K_P)=q(K(H)(\\varepsilon^K_P))\\circ\\phi_{H,K(L)N}.$$\nSubstitute these into Step 4. Its argument of $U'$ becomes\n$$q(K(H)(\\varepsilon^K_P))\\circ B_N\\circ\\theta_{qN}\\circ E'(\\phi_{G,N}^{-1}).$$\nUsing $(h\\theta)$ from Step 3 cancels $E'(\\phi_{G,N})$ with its inverse and changes this to $q(d)\\circ\\phi_{L',K(G)N}$, where\n$$d=K(H)(\\varepsilon^K_P)\\circ\\sigma^K_N:K(L')K(G)N\\to K(H)P.$$\nConsequently $U'(h)\\circ b^D_X\\circ t=U'(q(d))\\circ U'(\\phi_{L',K(G)N})\\circ\\eta'^D_Z$.",
+   "uses": [
+    "lem-trf-bounded-below-derived-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+    "place": "derivedPlus_mateEquiv_app_fac, lines 419–484; explicit comparison calculation"
+   }
+  },
+  {
+   "text": "Apply the primed unit identity of [lem-trf-bounded-below-derived-adjunction] to $K(G)N$. It gives\n$$U'(\\phi_{L',K(G)N})\\circ\\eta'^D_Z=\\alpha'_{K(L')K(G)N}\\circ q(\\eta'^K_{K(G)N}).$$\nNaturality of the right-derived comparison $\\alpha'$ on the homotopy morphism $d$ from Step 5 is\n$$U'(q(d))\\circ\\alpha'_{K(L')K(G)N}=\\alpha'_{K(H)P}\\circ q(K(R')(d)).$$\nHence the last expression of Step 5 equals\n$$\\alpha'_{K(H)P}\\circ q\\!\\left(K(R')(d)\\circ\\eta'^K_{K(G)N}\\right).$$\nThe comparison is natural on every bounded-below homotopy complex, so this use needs no injectivity of $K(H)P$.",
+   "uses": [
+    "lem-trf-bounded-below-derived-adjunction",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+    "place": "derivedPlus_mateEquiv_app_fac, lines 419–484; explicit comparison calculation"
+   }
+  },
+  {
+   "text": "The termwise adjunction of [lem-weil-pbc-termwise-adjunction-homotopy] has exactly the termwise unit and counit. The mate component formula in [def-weil-pbc-adjunction-mate], applied in each degree, therefore gives\n$$K(R')(d)\\circ\\eta'^K_{K(G)N}=K(b)_P,$$\nsince its degree-$n$ map is $R'(H(\\varepsilon_{P^n}))\\circ R'(\\sigma_{R(P^n)})\\circ\\eta'_{G(R(P^n))}=b_{P^n}$. Step 6 becomes $U'(h)\\circ b^D_X\\circ t=\\alpha'_{K(H)P}\\circ q(K(b)_P)$. Inserting the definitions of $h$ and $t$, this is the precise equality\n$$U'(\\phi_{H,P})\\circ b^D_{qP}\\circ T(\\alpha_P)\\circ\\phi_{G,K(R)P}^{-1}=\\alpha'_{K(H)P}\\circ q(K(b)_P).$$\nPassing from a complex to its homotopy class identifies $qK(b)_P$ with $Q(C(b)_P)$. This is the displayed conclusion under the specified canonical localization identifications. Only the $\\phi$'s were inverted; $\\sigma$, $\\alpha$, $\\alpha'$ were never inverted, and nowhere was preservation of injectives by $H$ used.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+    "place": "derivedPlus_mateEquiv_app_fac, lines 419–484; explicit comparison calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adjunction-mate",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+  "place": "derivedPlus_mateEquiv_app_fac, lines 419–484; square constructed by the localization universal property and comparison calculation written out with all comparison isomorphisms"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,7 +163,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-big-small-etale-localization-derived-pushforward",
@@ -94,5 +192,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-bounded-below-derived-mate-model",
+  "worker": "stage1",
+  "summary": "Repair of returned delivery: cited the independent canonical bounded-below derived adjunction and its unit/counit formulas, attached to three existing sorry-free project declarations. Constructed the precise derived TwoSquare by localization and proved hθ for every bounded-below homotopy complex. Replaced the unchecked invocation of the project mate theorem by the explicit seven-step mate calculation, retaining comparison isomorphisms. Mathematical statement and hypotheses retained; only the structural adjunction citation was added.",
+  "blueprint": "The steps implement the imported route's derived-mate computation used for the first descent in lem-trf-local-term-locality: identify the canonical derived mate with the underived square on complexes and transport through right-derived comparison units.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic additive adjunction on complexes and homotopy categories with its explicit termwise unit/counit; no node of sk-i-curve-zero provides this categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q32-17480c2c2",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q32-17480c2c2 (reviewer sub-agent of L); spot-checked: Read the item, new adjunction node, all cited statements, source declarations, unit/chapter route, and delivery report. The repaired seven-step mate calculation checks all hypotheses and comparison morphisms, constructs the derived square explicitly, has no hidden long-step lemma, no route-pivot machinery or prohibited SGA citation, and passes edge-case and duplicate checks. Review written to review.md."
  }
 }
