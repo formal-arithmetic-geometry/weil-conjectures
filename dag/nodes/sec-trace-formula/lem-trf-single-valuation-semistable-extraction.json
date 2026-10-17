@@ -22,7 +22,9 @@
   "def-weil-irreducible-components",
   "def-weil-polynomial-ring",
   "def-weil-proper-morphism",
-  "def-weil-residue-field"
+  "def-weil-residue-field",
+  "def-trf-strict-semistable-curve",
+  "def-trf-modification"
  ],
  "proof": [
   {
@@ -262,5 +264,33 @@
   "group": "Q87",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-f2601a331 (reviewer sub-agent of L); spot-checked: Read in full: the item, its three new statement-only nodes, the statement of every cited node and the parent's use of the item. The Temkin source (Prop. 4.3.1) is not in the literature tree and network access is blocked, so it was not opened here; the delivery marks it WANTED with agent origin, as do 50 existing nodes. Every claim was checked mathematically instead. (1) residual-curve-value-group is true: Abhyankar makes Gamma_L/Gamma_K torsion; Gamma_K is divisible for separably closed K (Kummer for n prime to p, Artin-Schreier for p); torsion over a divisible subgroup of a torsion-free group is trivial. When the valuation is trivial on K, O=L. (2) rational-valuation-linear-residue is true: minimal-pair/Gauss form, density of K=K^sep in Kbar, delta in Gamma_K. The integral clause holds because kappa(R) is algebraically closed and w(t-a0)>0 forces a in R and pi in m_R. (3) elementary-semistable-chart-globalization: the preamble facts hold (V_s open; c nonzero via openness of etale maps and the smooth generic fibre). The chart rings and flat base change of blowups were checked. In the separated case, gluing follows from unique specializations. In the non-separated case it is true but substantive: a rank-2 doubled example needs an extra blowup at a second specialization x', which the statement allows since it fixes X' only over W. Future splitters must not route through cofinality or its ancestors, or a cycle results. Item steps 1-7 were each verified: O cap K=V_s; going-down plus the etale residue field give L finite separable over K(u) or K(t); the residue-algebraicity normalization; the value lemma gives pi with u/pi a unit and c/pi in R; both chart rings by substitution; the lifted centre lies in D(w), giving an etale A1 chart; Zariski shows the image is (m_R1, t-a); a transcendental residue gives a generic model centre, and the etale fibre is a product of fields, so the centre is generic; composition, eta openness and schematic density hold. No duplicates (rg for Abhyankar/value group/residual transcendence and the trf valuation nodes). Acyclic; proof_deps equal the step uses; blueprint from/via correct; no SGA. The 7 tool_uses are generic Mathlib leaves and are accepted. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-03a476007",
+  "group": "NI",
+  "result": "fix",
+  "note": "Mathematics and Lean statement pass; per-file compilation reproduced cleanly. H11 repaired with a complete replacement report under fixes/, preserving the Worker report and adding an independent second reading. Full findings recorded in review.md; snapshot and branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SingleValuationSemistableExtraction",
+  "declaration": "AlgebraicGeometry.exists_singleValuationSemistableExtraction",
+  "declarations": [
+   "AlgebraicGeometry.valuationRestrictionHom",
+   "AlgebraicGeometry.valuationBaseHom",
+   "AlgebraicGeometry.CenteredValuation",
+   "AlgebraicGeometry.CenteredValuation.residueMap",
+   "AlgebraicGeometry.CenteredValuation.residualTrdeg",
+   "AlgebraicGeometry.IsGenericValuationCentre",
+   "AlgebraicGeometry.exists_singleValuationSemistableExtraction"
+  ],
+  "statement": "theorem exists_singleValuationSemistableExtraction {K : Type u} [Field K] [IsSepClosed K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] (C : StrictSemistableCurve (Spec (.of V))) (hCη : Smooth (pullback.snd C.structureMap (Spec.map (CommRingCat.ofHom V.subtype)))) {L : Type u} [Field L] [Algebra K L] (ν : CenteredValuation V C L) (hν : ν.residualTrdeg = (1 : Cardinal.{u})) : ∃ (C' : StrictSemistableCurve (Spec (.of V))) (b : C'.Y ⟶ C.Y), C'.structureMap = b ≫ C.structureMap ∧ EtaModification (Spec.map (CommRingCat.ofHom V.subtype)) b C.structureMap ∧ IsGenericValuationCentre ν b",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/SingleValuationSemistableExtraction.lean",
+  "note": "Repair of 8a469de1babc: reuse published strict charts and schematic modifications; canonical restriction residue map and actual component-field identification. No natural-language statement change."
  }
 }

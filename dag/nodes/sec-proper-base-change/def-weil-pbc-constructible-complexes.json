@@ -139,23 +139,25 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "module": "Sheaf.TraceFormula.BoundedConstructibleTransport",
-  "declaration": "AlgebraicGeometry.OrientedNearbyCycles.IsBoundedConstructible",
-  "statement": "def IsBoundedConstructible (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (K : EtaleDerived X Λ) : Prop",
+  "module": "Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes",
+  "declaration": "AlgebraicGeometry.Etale.DerivedCategory.isBoundedConstructible",
+  "declarations": [
+   "AlgebraicGeometry.Etale.DerivedCategory.isBoundedConstructible",
+   "AlgebraicGeometry.Etale.BoundedConstructibleDerivedCategory"
+  ],
+  "statement": "def DerivedCategory.isBoundedConstructible (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    (T : Scheme.{u}) : ObjectProperty (DerivedCategoryModule Λ T)",
   "branch": "newtargets-dag",
-  "by": "Q73",
-  "date": "2026-10-18",
-  "existing": false,
-  "file": "lean/Sheaf/TraceFormula/BoundedConstructibleTransport.lean",
-  "note": "The recorded small-etale declaration cannot be applied to `EtaleDerived`, whose modules use the transported `etaleDatum`; this module states the same bounded-constructible notion with the canonical `orgogozoModuleSections` transport.",
-  "fixed_by": "NT-stage2-Codex-e59e1279d"
+  "by": "Q70",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Section 1(B), exact existing-declaration repair. The previous primary declaration AlgebraicGeometry.OrientedNearbyCycles.IsBoundedConstructible takes EtaleDerived on a transported etaleDatum site and cannot be applied to the ordinary DerivedCategoryModule in this item. Its public import already provides the original small-etale declaration recorded here: bounded cohomology and finite-value constructible cohomology sheaves, exactly the node statement. No declaration or mathematical predicate is redefined, and the transported declaration remains available in its existing module."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-e59e1279d",
-  "group": "Q73",
-  "result": "fix",
-  "note": "Review and complete fixes written. Reuse the landed canonical constructibility transport with --revert-nodes def-trf-oriented-constructible-sheaf; restore proof documentation and imports. The theorem signature is unchanged. All delivered and fixed files compile cleanly through scompile.py.; reverted the delivery's change of existing node(s) def-trf-oriented-constructible-sheaf (--revert-nodes; kept as on newtargets-dag)"
+  "reviewer": "NT-stage2-Codex-8c7272aad",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source, Lean module, docstrings, edge cases, route-pivot compliance, report sections, and scompile.py sandbox/library evidence; no findings or fixes required."
  }
 }

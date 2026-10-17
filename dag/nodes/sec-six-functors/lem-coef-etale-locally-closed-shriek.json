@@ -18,7 +18,9 @@
   "def-amb-etale-compact-support",
   "lem-pur-derived-change-of-rings",
   "lem-coef-finite-direct-image",
-  "lem-coef-etale-open-tensor"
+  "lem-coef-etale-open-tensor",
+  "lem-sf-reduction-flat-model",
+  "def-weil-finite-tor-amplitude"
  ],
  "proof": [
   {
@@ -379,5 +381,35 @@
   "group": "Q109",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-1b6321734 (reviewer sub-agent of L); spot-checked: Read all twelve steps of the item, every cited statement (26 proof deps, 11 stmt deps), unit sk-prop-sf-biduality-general and its transitive route, and master thm-coef-finite-hom proof paragraphs 3–4 (main-20261015 has the statement only). Statement and stmt_deps are unchanged from the side base. There are no new nodes, no SGA citations and no cycle; proof_deps equals the union of the step uses. Every off-route non-leaf citation is either declared in tool_uses (all 11 accepted as generic étale tools) or slopmaster2-closed (lemma-openclosed-stalk-lowerstar, lem-fin-extension-by-zero). Stacks tags 0A45 (etale-cohomology.tex line 14072), 0F10, 014A, 04CA and 04FX resolve to the cited labels. Hypotheses checked: Step 2 matches prop-exc-closed-tor exactly (all-module cohomological-dimension bound, constructible R^q u_*, quasi-compact complement, same ambient Rg^! as lem-exc-closed-ambient). Steps 1 and 5 satisfy lem-coef-finite-direct-image (B a finite A-algebra; u and g separated finite type). Steps 3 and 9 prove finite Tor for u^*M, j^*N and j_!P. I recomputed the Step 6 transpose and the Step 7 TR3 rotation sign, giving ε_B∘t=F_Xε_A. Step 8 identifies t with g_*b∘c through the fully-faithful-image Hom bijection of Step 4. I re-derived the Step 11 counit calculation (counit naturality, open coefficient-counit identity, c_g naturality, Step 8) and Step 12 (j=id). Not duplicated by lem-coef-finite-closed-shriek (pro-étale), lem-coef-finite-free-extension (finite free B) or the purity coefficient comparisons. Edge cases checked: S empty, Z=X, n=m, nonflat Z/ℓ^2→Z/ℓ. Minor, not repaired: Step 2 does not say why e≥1 (it holds since |ℓ|<1), and Step 3's 'or' for the scalar identification is loose but harmless."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8c7272aad",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source, Lean module, docstrings, edge cases, route-pivot compliance, report sections, and scompile.py sandbox/library evidence; no findings or fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleLocallyClosedShriek",
+  "declaration": "AlgebraicGeometry.Etale.etaleLocallyClosedShriekComparisons",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleShriekClosedExceptional",
+   "AlgebraicGeometry.Etale.etaleShriekClosedAdjunction",
+   "AlgebraicGeometry.Etale.etaleShriekLocallyClosedAdjunction",
+   "AlgebraicGeometry.Etale.etaleShriekDirectInverse",
+   "AlgebraicGeometry.Etale.etaleShriekClosedCoefficientMap",
+   "AlgebraicGeometry.Etale.etaleShriekLocallyClosedCoefficientMap",
+   "AlgebraicGeometry.Etale.etaleShriekLocallyClosedSupportMap",
+   "AlgebraicGeometry.Etale.EtaleLocallyClosedShriekComparisons",
+   "AlgebraicGeometry.Etale.etaleLocallyClosedShriekComparisons"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleLocallyClosedShriek.lean",
+  "statement": "theorem etaleLocallyClosedShriekComparisons (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n m : ℕ) (hmn : m ≤ n) (hm : 1 ≤ m) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] [IsSeparated (X ↘ Spec (CommRingCat.of D.k))] {Z S : Scheme.{u}} (g : Z ⟶ X) [IsClosedImmersion g] (j : S ⟶ Z) [IsOpenImmersion j] : @EtaleLocallyClosedShriekComparisons.{u} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) (ULift.{u + 1} (Padic.coefficientExtensionRing l E m)) inferInstance inferInstance (Equiv.ulift.finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n (hm.trans hmn))) (Equiv.ulift.finite_iff.mpr (Padic.finite_coefficientExtensionRing l E m hm)) (Scheme.flatModelReductionCoefficientMap l E m n hmn) (WeilConjectures.finiteTorConstructibleEtale l E n (hm.trans hmn)) S Z X g inferInstance j inferInstance",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Ordinary unbounded small-etale constant-module categories only. Canonical closed coefficient map is the exceptional adjunction transpose of the inverse of the recorded direct-image comparison followed by scalar extension of its counit. The inverse is extended by zero outside its isomorphism locus; the theorem explicitly asserts its invertibility on every input used. The full comparison predicate spells out the two finite-Tor constructibility assertions, the isomorphism assertions, naturality and the pasted counit equation. The added landed dependencies supply the existing quotient map between arbitrary coefficient stages and the already published ordinary-etale finite-Tor constructible predicate. No second D^b_ctf definition is made."
  }
 }
