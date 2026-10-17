@@ -1,0 +1,89 @@
+{
+ "id": "lem-coef-ordered-simplex-cone-evaluation",
+ "kind": "statement",
+ "title": "Ordered-simplex evaluation of the cone straightening",
+ "statement": "Use simplicial sets and ordinary nerves of [def-cbc-enhanced-diagrams-cones], the coherent realization and cosimplicial pinched cubes $Q^\\bullet$ of [lem-coef-pinched-cube-latching], and the cone adjunction and enriched diagram categories of [lem-coef-cone-presheaf-adjunction]. Work in fixed universes enlarged to contain all constructions. For $n\\geq0$, let $[n]$ be the ordinary category with objects $0,\\ldots,n$ and one arrow $i\\to j$ exactly when $i\\leq j$, regarded as a discrete simplicial category. Let $a:\\mathfrak C[\\Delta^n]^{\\mathrm{op}}\\to[n]^{\\mathrm{op}}$ be the identity on objects, collapsing every nonempty mapping simplicial set to a point. Write $a_!$ for enriched left Kan extension, the left adjoint of restriction $a^*$, as in [lem-coef-simplicial-projective-model-calculus]. Define $L^{\\mathrm{lin}}=a_!L_{\\Delta^n}$ and $U^{\\mathrm{lin}}=U_{\\Delta^n}a^*$; thus $L^{\\mathrm{lin}}\\dashv U^{\\mathrm{lin}}$ as ordinary functors. For any small simplicial set $K$, set $V(K)=\\int^{[m]}K_m\\times Q^m$, the quotient of $\\coprod_mK_m\\times Q^m$ by $(K(\\alpha)z,q)\\sim(z,Q(\\alpha)q)$ for $\\alpha:[r]\\to[m]$, $z\\in K_m$, $q\\in Q^r$. Set $(\\operatorname{Sing}_Q B)_m=\\operatorname{Hom}(Q^m,B)$, so that $V\\dashv\\operatorname{Sing}_Q$.\n\nFor every map $p:X\\to\\Delta^n$ and every $0\\leq j\\leq n$, put $X_{\\geq j}=X\\times_{\\Delta^n}\\Delta^{\\{j,\\ldots,n\\}}$ and $X_j=X\\times_{\\Delta^n}\\{j\\}$. There is a natural isomorphism\n$$L^{\\mathrm{lin}}(X)(j)\\cong V(X_{\\geq j}).$$\nIt is natural in $X$ over $\\Delta^n$. For $j\\leq k$, the diagram map $L^{\\mathrm{lin}}(X)(k)\\to L^{\\mathrm{lin}}(X)(j)$ is the map $V(X_{\\geq k})\\to V(X_{\\geq j})$ induced by inclusion. For any strict diagram $H:[n]^{\\mathrm{op}}\\to\\mathrm{sSet}$, the canonical fiber isomorphism $(U^{\\mathrm{lin}}H)_j\\cong\\operatorname{Sing}_Q H(j)$ identifies the restriction to $X_j$ of the adjoint of $b:L^{\\mathrm{lin}}X\\to H$ with the $V\\dashv\\operatorname{Sing}_Q$ adjoint of\n$$V(X_j)\\longrightarrow V(X_{\\geq j})\\cong L^{\\mathrm{lin}}X(j)\\xrightarrow{b_j}H(j).$$\nNo fibrancy hypothesis on $X,p,H$ is imposed.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemma 2.2.3.1, displayed tail-realization formula on printed p.79, and Lemma 2.2.3.7 on p.83; use the unreversed vertex labels j (HTT labels the diagram by i=n-j); HTT reading copy in sandbox, archival copy WANTED. No Stacks tag states this simplicial-homotopy result."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-cone-presheaf-adjunction",
+  "lem-coef-simplicial-projective-model-calculus"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "straighten|unstraighten|pinched|twisted.*realization|coherent.*simplex",
+   "results": "Available: ",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; pointed simplices, simplex operators, ordinary nerves, strict Segal right Kan extensions, balancedness, and cones in profinite categories do not compute enriched cone straightening by the pinched coend."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Straightening over the nerve of a finite linear order is given at vertex j by the twisted realization of the inverse image of vertices j through n",
+   "results": "Available: CategoryTheory.SimplicialNerve, SSet.stdSimplex.isoNerve_inv_app_apply, PartialOrder.mem_nerve_nonDegenerate_iff_strictMono, CategoryTheory.Nerve.strictSegal, CategoryTheory.nerve, CategoryTheory.nerve.representableBy, CategoryTheory.nerve.σ_obj, CategoryTheory.SimplicialThickening.functor_map",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; pointed simplices, simplex operators, ordinary nerves, strict Segal right Kan extensions, balancedness, and cones in profinite categories do not compute enriched cone straightening by the pinched coend."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Lan\"",
+   "results": "Available: SSet.instBalanced",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; pointed simplices, simplex operators, ordinary nerves, strict Segal right Kan extensions, balancedness, and cones in profinite categories do not compute enriched cone straightening by the pinched coend."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enriched left Kan extension of the cone presheaf along the augmentation from the coherent simplex category to the ordered category computes tail inverse images by a coend",
+   "results": "Available: LightProfinite.Extend.functor_obj, LightProfinite.Extend.functorOp_map, LightProfinite.Extend.functor, LightProfinite.Extend.functor_map, LightProfinite.Extend.functorOp_obj, SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂, Alexandrov.lowerCone_π_app, LightProfinite.Extend.functorOp",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; pointed simplices, simplex operators, ordinary nerves, strict Segal right Kan extensions, balancedness, and cones in profinite categories do not compute enriched cone straightening by the pinched coend."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Straightening a simplicial set over the standard n simplex into a strict contravariant diagram evaluates at a vertex as the pinched cosimplicial realization of the inverse image of the terminal interval",
+   "results": "Available: SSet.PtSimplex, SSet.stdSimplex.isoNerve_hom_app_apply, SSet.stdSimplex.map_apply, SSet.stdSimplex.objMk, SSet.S.toN, SSet.Augmented.stdSimplex_obj_hom_app, SSet.S.simplex, SSet.stdSimplex",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; pointed simplices, simplex operators, ordinary nerves, strict Segal right Kan extensions, balancedness, and cones in profinite categories do not compute enriched cone straightening by the pinched coend."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-unstraightening-simplex-dk-equivalence",
+  "date": "2026-10-17",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient-adjunction and inverse-limit comparison: independent coherent-diagram foundation used below the inherited realization chain. The present auxiliary calculation supplies the ordered-simplex evaluation in the simplex base case below that foundation.",
+   "via": [
+    "lem-coef-unstraightening-simplex-dk-equivalence",
+    "lem-coef-unstraightening-homotopy-descent",
+    "lem-coef-contravariant-slice-model",
+    "lem-coef-right-straightening-fiber-comparison",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

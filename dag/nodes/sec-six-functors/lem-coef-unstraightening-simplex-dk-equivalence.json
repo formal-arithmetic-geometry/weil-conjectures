@@ -13,9 +13,203 @@
   "lem-coef-cone-presheaf-adjunction",
   "lem-coef-pinched-cube-latching"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $V(K)=\\int^{[m]}K_m\\times Q^m$ and $W(B)=\\operatorname{Sing}_Q B$. The coend universal property gives $V\\dashv W$. Its map on a boundary is $L_mQ\\to Q^m$, a monomorphism by [lem-coef-pinched-cube-latching]; hence the boundary-collapse test makes $V$ preserve monomorphisms. The natural map $q_K:V(K)\\to K$ comes from $Q^\\bullet\\to\\Delta^\\bullet$. It is a weak equivalence on each simplex, since $Q^m$ and $\\Delta^m$ are contractible (the latter by linear contraction of its realization). Prove it for the boundaries and finite skeleta by induction on dimension: the cell-attachment square for $K$ maps under $V$ to the corresponding pushout with the monomorphism $V(\\partial\\Delta^m)\\to Q^m$; coproducts of the simplex comparisons are weak equivalences since realizations and homotopy groups split by components. Apply the pushout comparison and then its filtered-colimit clause to pass through the skeleta. Thus $q_K$ is a weak equivalence for every $K$, including the empty set. Naturality and two-out-of-three make $V$ preserve all weak equivalences. It is therefore left Quillen and its derived functor is naturally isomorphic to the identity via $q$. The derived-counit criterion, all simplicial sets being cofibrant, gives that $c_B:VWB\\to B$ is a weak equivalence whenever $B$ is Kan.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-simplicial-boundary-collapse-test",
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-sset-gluing-filtered-equivalences",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-quillen-derived-counit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Propositions 2.2.2.7 and 2.2.2.9, Corollary 2.2.2.10, printed pp.76-77; skeletal argument written explicitly; HTT reading copy in sandbox, archival copy WANTED. No Stacks tag states this simplicial-homotopy result."
+   }
+  },
+  {
+   "text": "Write $L=L_{\\Delta^n}$, $U=U_{\\Delta^n}$ and $\\mathcal P=\\mathcal P_{\\Delta^n}$. More generally the following observation applies to every base. Adjunction turns a right-horn problem for $UF\\to S$ into an extension problem across $L_S(\\Lambda_i^m)\\to L_S(\\Delta^m)$. The cone-adjunction statement makes this a projective cofibration, and the simplex-pointwise statement makes it a projective weak equivalence. A projectively fibrant $F$ lifts against this map, proving that $UF$ is a right fibration. The same statement identifies $(UF)_j=WF(j)$, with its natural weak equivalence from the Kan complex $F(j)$. Consequently $U$ sends objectwise weak equivalences between fibrant diagrams to vertex-fiber weak equivalences, and the right-fibration gluing statement makes those maps simplicial homotopy equivalences over the base. We use also its assertion that all mapping simplicial sets into right fibrations are Kan.",
+   "uses": [
+    "lem-coef-cone-presheaf-adjunction",
+    "lem-coef-unstraightening-simplex-pointwise",
+    "def-coef-infinity-fibrations",
+    "lem-coef-unstraightening-homotopy-descent-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.1.2, horn-preservation part only; Remark 2.2.2.11 and Lemmas 2.2.3.4, 2.2.3.6; HTT reading copy in sandbox, archival copy WANTED. No Stacks tag states this simplicial-homotopy result."
+   }
+  },
+  {
+   "text": "Construct the stipulated enrichment directly. For a diagram $F$, adjoin one last object $v$ to $\\mathfrak C[S]$, with mixed mapping objects $F(s)$, empty maps out of $v$ to old objects and $\\operatorname{Map}(v,v)=\\Delta^0$. Composition into $v$ is the action of $F$. By the cone pushout universal property an $m$-simplex of $UF$ is a functor from $\\mathfrak C[\\Delta^m\\star\\Delta^0]$ to this category, fixed on its initial face. For $F\\times K$ the mixed maps separate into the maps for $F$ and maps into $K$ constant on the old category. The latter factor through $J^m$ and are maps $Q^m\\to K$. Pairing and projection give $U(F\\times K)\\cong UF\\times WK$, compatible with simplex operators and iterated products. Precompose with $K\\to WK$ to obtain $UF\\times K\\to U(F\\times K)$. Apply $U$ to $F\\times K\\to G$. Naturality in $K$ gives the map of mapping simplicial sets. The construction preserves identities and composition: identities use the terminal parameter, and both composites pair parameter maps and then use their diagonal. In particular it is a simplicial functor, with exactly the enrichment in the statement.",
+   "uses": [
+    "lem-coef-cone-presheaf-adjunction",
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 2.2.2.12, printed p.78; cone pushout calculation; HTT reading copy in sandbox, archival copy WANTED. No Stacks tag states this simplicial-homotopy result."
+   }
+  },
+  {
+   "text": "Let $p:E\\to\\Delta^n$ be a right fibration. For each $j$, the inclusion $E_j\\to E_{\\geq j}$ is a simplicial deformation retract. Indeed the ordered map $h:\\Delta^{\\{j,\\ldots,n\\}}\\times\\Delta^1\\to\\Delta^{\\{j,\\ldots,n\\}}$, $h(t,0)=j$, $h(t,1)=t$, is induced by the monotone functor on ordered sets. Prescribe the identity on $E_{\\geq j}\\times\\{1\\}$ and the constant-in-parameter map on $E_j\\times\\Delta^1$. The inclusion of their union into $E_{\\geq j}\\times\\Delta^1$ is the pushout-product of $\\{1\\}\\to\\Delta^1=\\Lambda_1^1\\to\\Delta^1$ with $E_j\\to E_{\\geq j}$, hence right anodyne. The right-fibration lifting property extends this prescribed map over $h(p(-),-)$. Its zero endpoint lands in $E_j$, its one endpoint is the identity, and it fixes $E_j$ throughout. The simplicial homotopy-equivalence lemma makes the inclusion a weak equivalence. Thus Step 1 makes $V(E_j)\\to V(E_{\\geq j})$ a weak equivalence. In particular a vertex-fiber weak equivalence of right fibrations induces weak equivalences on these $V$-realized tails, by the commutative squares with their fiber inclusions and two-out-of-three.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-right-anodyne-product",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Deformation retract argument of Lemmas 2.2.3.1 and 2.2.3.7, with its relative lift written out; HTT reading copy in sandbox, archival copy WANTED. No Stacks tag states this simplicial-homotopy result."
+   }
+  },
+  {
+   "text": "Let $a:\\mathfrak C[\\Delta^n]^{\\mathrm{op}}\\to[n]^{\\mathrm{op}}$ collapse its nonempty mapping objects. It is a Dwyer--Kan equivalence: each nonempty mapping object is the nerve of the subset-poset in the pinched-cube statement, which has the full interval as a terminal object. Its nerve contracts to that object by the natural transformation from the identity functor to the constant functor; on each nerve simplex the contraction appends that terminal object, giving the required simplicial homotopy. The map to a point is therefore a weak equivalence by the simplicial homotopy-equivalence lemma. Empty mapping objects map identically to empty ones, and the component category is $[n]^{\\mathrm{op}}$. The enriched projective-model statement supplies a simplicial Quillen equivalence $a_!\\dashv a^*$. Put $L^{\\mathrm{lin}}=a_!L$ and $U^{\\mathrm{lin}}=Ua^*$. Composition of the two ordinary adjunction bijections proves $L^{\\mathrm{lin}}\\dashv U^{\\mathrm{lin}}$. The ordered-simplex evaluation lemma gives $L^{\\mathrm{lin}}(X)(j)=V(X_{\\geq j})$ and identifies restriction of adjuncts to $X_j$ with the adjuncts of the maps from $V(X_j)$. This is the only new auxiliary calculation used in the split.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-cone-presheaf-adjunction",
+    "lem-coef-ordered-simplex-cone-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 2.2.3.1, displayed evaluation formula; Proposition A.3.3.8 (projective change of index); HTT reading copy in sandbox, archival copy WANTED. No Stacks tag states this simplicial-homotopy result."
+   }
+  },
+  {
+   "text": "For a fibrant strict diagram $H:[n]^{\\mathrm{op}}\\to\\mathrm{sSet}$, Step 2 makes $U^{\\mathrm{lin}}H$ a right fibration, with fiber $WH(j)$. The component at $j$ of the counit $L^{\\mathrm{lin}}U^{\\mathrm{lin}}H\\to H$ restricts, under the evaluation lemma, to $c_{H(j)}:VWH(j)\\to H(j)$. Step 1 makes this restricted map a weak equivalence, and Step 4 makes the map from its source to $V((U^{\\mathrm{lin}}H)_{\\geq j})$ a weak equivalence. Two-out-of-three proves that the strict-diagram counit is an objectwise weak equivalence. Further, if $E\\to\\Delta^n$ is a right fibration and $b:L^{\\mathrm{lin}}E\\to H$ is an objectwise weak equivalence with $H$ fibrant, its adjunct $e:E\\to U^{\\mathrm{lin}}H$ is a vertex-fiber weak equivalence. At $j$, the map $V(E_j)\\to H(j)$ is a weak equivalence by Step 4 and $b$. It equals $c_{H(j)}V(e_j)$ by adjunction and the evaluation lemma. Both $c_{H(j)}$ and $q$ from Step 1 are weak equivalences. Hence $V(e_j)$, and then $e_j$ itself by naturality of $q$, are weak equivalences.",
+   "uses": [
+    "lem-coef-ordered-simplex-cone-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemmas 2.2.3.1 and 2.2.3.7; counit and fiber-adjunct calculation from preceding steps; HTT reading copy in sandbox, archival copy WANTED. No Stacks tag states this simplicial-homotopy result."
+   }
+  },
+  {
+   "text": "We next prove the coherent counit $\\epsilon_F:LUF\\to F$ is a weak equivalence for every projectively cofibrant fibrant $F$. Choose a trivial cofibration $a_!F\\to H$ with $H$ projectively fibrant. Its adjunct $h:F\\to a^*H$ is a weak equivalence by the projective Quillen-equivalence criterion, since $F$ is cofibrant and $H$ fibrant. Both diagrams in $h$ are fibrant. Thus $Uh:UF\\to U^{\\mathrm{lin}}H$ is a vertex-fiber weak equivalence by Step 2, and Step 4 and the evaluation lemma imply $L^{\\mathrm{lin}}(Uh)$ is an objectwise weak equivalence. Composing with the strict counit of Step 6 gives a weak equivalence $L^{\\mathrm{lin}}UF\\to H$. By the adjunction identities this composite is $(a_!F\\to H)\\,a_!(\\epsilon_F)$: both have adjunct $Uh$. Its adjunct under $a_!\\dashv a^*$ is therefore $h\\epsilon_F$. The object $LUF$ is projectively cofibrant since $L$ sends the monomorphism $\\varnothing\\to UF$ to a cofibration. The same Quillen-equivalence criterion makes $h\\epsilon_F$ a weak equivalence; two-out-of-three with $h$ proves the assertion about $\\epsilon_F$.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-cone-presheaf-adjunction",
+    "lem-coef-ordered-simplex-cone-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 2.2.3.10, reduction along the ordered-simplex augmentation; counit argument expanded without a slice model structure; HTT reading copy in sandbox, archival copy WANTED. No Stacks tag states this simplicial-homotopy result."
+   }
+  },
+  {
+   "text": "Here is the mapping-space comparison without a slice model structure. Fix any $X\\to\\Delta^n$. The functor $L$ sends every right anodyne map over the base to a projective trivial cofibration: this holds for right horns by Step 2, and then for their pushouts, transfinite composites and retracts because $L$ preserves colimits and the left class of a weak factorization system is closed under those operations. The terminal vertex inclusion $\\{m\\}\\to\\Delta^m$ is right anodyne. An explicit filtration attaches, in increasing dimension, each face $\\sigma$ not containing $m$ together with $\\sigma\\cup\\{m\\}$ along the last horn of $\\sigma\\cup\\{m\\}$; all other faces are already present. For $m=0$ it is the identity. The right-anodyne product statement now makes $X\\times\\{m\\}\\to X\\times\\Delta^m$ right anodyne. Since its composite with the projection is the identity, $L(X\\times\\Delta^m)\\to LX$ is a weak equivalence. The functor $T_X(K)=L(X\\times K)$ preserves colimits and takes boundaries to cofibrations; the boundary-collapse test consequently makes it left Quillen from Kan-model simplicial sets to $\\mathcal P$. Its ordinary right adjoint is $R_X(G)=\\operatorname{Fun}_{/\\Delta^n}(X,UG)$, by the two adjunction bijections. In particular $R_X(G)$ is Kan for fibrant $G$.",
+   "uses": [
+    "lem-coef-cone-presheaf-adjunction",
+    "lem-coef-unstraightening-simplex-pointwise",
+    "lem-coef-infinity-right-anodyne-product",
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 2.2.2.12 and the tensor comparison underlying Remark A.3.1.9; explicit right-horn cylinder argument; HTT reading copy in sandbox, archival copy WANTED. No Stacks tag states this simplicial-homotopy result."
+   }
+  },
+  {
+   "text": "The projective simplicial-model axiom and cofibrancy of $LX$ make $A_X(K)=LX\\times K$ another left Quillen functor. Its right adjoint is $B_X(G)=\\underline{\\operatorname{Nat}}(LX,G)$. The enrichment from Step 3 has the ordinary adjoint colax tensor mate $\\beta_{X,K}:L(X\\times K)\\to LX\\times K$. Explicitly, apply the Step 3 map $ULX\\times K\\to U(LX\\times K)$, precompose with the unit $X\\to ULX$ on the first factor, and transpose under $L\\dashv U$. For $K=\\Delta^0$ the triangle identity gives $\\beta_{X,\\Delta^0}=1_{LX}$. Naturality with $\\Delta^m\\to\\Delta^0$ makes the composite of $\\beta_{X,\\Delta^m}$ with the projection $LX\\times\\Delta^m\\to LX$ equal to $L$ of the projection $X\\times\\Delta^m\\to X$. The former projection is a weak equivalence: the endpoint inclusion $\\Delta^0\\to\\Delta^m$ is a trivial cofibration in the Kan model, so its image under the left Quillen functor $A_X$ is a weak equivalence, and the projection is its retraction. Two-out-of-three with their identity composite proves the claim. Step 8 and two-out-of-three imply that $\\beta_{X,\\Delta^m}$ is a weak equivalence. The pushout and filtered-colimit comparison, applied objectwise to the two colimit-preserving left Quillen functors and the skeletal boundary attachments as in Step 1, proves $\\beta_{X,K}$ is an objectwise weak equivalence for every $K$.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-simplicial-boundary-collapse-test",
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-sset-gluing-filtered-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.3.1.9, tensor mate; skeletal proof with the concrete cone adjunction; HTT reading copy in sandbox, archival copy WANTED. No Stacks tag states this simplicial-homotopy result."
+   }
+  },
+  {
+   "text": "For fibrant $G$, the right mate of $\\beta$ is a weak equivalence\n$$\\theta_{X,G}:\\underline{\\operatorname{Nat}}(LX,G)\\longrightarrow\\operatorname{Fun}_{/\\Delta^n}(X,UG).$$\nTo justify this inference, use the ordinary derived adjunctions for the two left Quillen functors of Steps 8 and 9. For every simplicial set $K$ the map induced by $\\theta$ on morphisms out of $K$ in the Kan homotopy category identifies with precomposition by $\\beta_{X,K}$ on morphisms into $G$ in $\\operatorname{Ho}(\\mathcal P)$. It is bijective since $\\beta_{X,K}$ is a weak equivalence. Both targets of $\\theta$ are Kan by the right Quillen properties. Taking $K$ to be these two targets, the bijections give a two-sided inverse in the Kan homotopy category. Represent the inverse by an actual map, using the localization-map-surjectivity statement (all simplicial sets are cofibrant). The equality criterion for the good cylinders $K\\times\\Delta^1$ turns the two inverse identities into simplicial homotopies. The simplicial homotopy-equivalence lemma proves $\\theta$ is a weak homotopy equivalence. This argument uses only ordinary derived adjunctions, not the infinity-localization or coherent-nerve comparison.",
+   "uses": [
+    "lem-coef-quillen-derived-counit-criterion",
+    "lem-coef-model-localization-map-surjective",
+    "lem-coef-localized-good-homotopy-test",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition A.3.1.10, mapping-space comparison, expressed using the two explicit left Quillen functors; HTT reading copy in sandbox, archival copy WANTED. No Stacks tag states this simplicial-homotopy result."
+   }
+  },
+  {
+   "text": "For bifibrant $F,G$, factor the induced enriched map as\n$$\\underline{\\operatorname{Nat}}(F,G)\\xrightarrow{\\epsilon_F^*}\\underline{\\operatorname{Nat}}(LUF,G)\\xrightarrow{\\theta_{UF,G}}\\operatorname{Fun}_{/\\Delta^n}(UF,UG).$$\nThe equality with the prescribed enriched map is the mate identity: the adjunct of the parameterized composite with $\\epsilon_F$ is obtained by applying $U$ to $F\\times K\\to G$ and precomposing with $UF\\times K\\to U(F\\times K)$. The second arrow is a weak equivalence by Step 10. For completeness the first is one as well. Step 7 gives the weak equivalence $\\epsilon_F$ between cofibrant objects. The Brown split-factorization statement factors it as $A\\xrightarrow{i}Z\\xrightarrow{p}F$, with $i$ a cofibration, $p$ a trivial fibration, and a cofibration section $s:F\\to Z$ of $p$. Two-out-of-three makes $i$ and $s$ trivial cofibrations. By the simplicial projective-model axiom $i^*$ and $s^*$ on mapping sets into fibrant $G$ are trivial Kan fibrations. Since $s^*p^*=1$, two-out-of-three makes $p^*$ a weak equivalence, and hence $\\epsilon_F^*=i^*p^*$ one. This proves weak equivalences on every mapping simplicial set.",
+   "uses": [
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.1.10, full faithfulness argument; naturality of the tensor mate; HTT reading copy in sandbox, archival copy WANTED. No Stacks tag states this simplicial-homotopy result."
+   }
+  },
+  {
+   "text": "Let $E\\to\\Delta^n$ be any right fibration. Choose a trivial cofibration $b:LE\\to F$ with $F$ projectively fibrant. Since $LE$ is cofibrant, so is $F$. Choose a trivial cofibration $a_!F\\to H$ with $H$ fibrant, and let $h:F\\to a^*H$ be its weak-equivalence adjunct as in Step 7. The left Quillen functor $a_!$ takes $b$ to a trivial cofibration. Hence $L^{\\mathrm{lin}}E=a_!LE\\to a_!F\\to H$ is a weak equivalence. Step 6 says its adjunct $E\\to U^{\\mathrm{lin}}H$ is a vertex-fiber weak equivalence. By the adjunction identities it factors as $E\\xrightarrow{e}UF\\xrightarrow{Uh}U^{\\mathrm{lin}}H$, where $e$ is the adjunct of $b$. Step 2 makes $Uh$ a vertex-fiber weak equivalence. Two-out-of-three on each fiber makes $e$ one as well. The gluing lemma supplies an inverse up to simplicial homotopies over $\\Delta^n$. Thus every object of $\\operatorname{RFib}(\\Delta^n)$ is equivalent to one in the image of $U:\\mathcal P^{cf}\\to\\operatorname{RFib}(\\Delta^n)$.",
+   "uses": [
+    "lem-coef-cone-presheaf-adjunction",
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-unstraightening-homotopy-descent-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemmas 2.2.3.7 and 2.2.3.9; replace the slice-fibrant replacement by the explicit projective replacements; HTT reading copy in sandbox, archival copy WANTED. No Stacks tag states this simplicial-homotopy result."
+   }
+  },
+  {
+   "text": "Step 11 gives bijections on path components of mapping simplicial sets, compatible with units and composition by Step 3. It therefore makes $\\pi_0U$ fully faithful. Step 12 makes it essentially surjective, hence an equivalence of categories (choose one representative and one isomorphism per object to construct its inverse). These are precisely the two Dwyer--Kan conditions. All arguments include $n=0$: then $a$ is the identity, every tail is the sole fiber, and the comparison reduces to $V\\dashv W$; empty fibers are allowed throughout. No model structure on a slice over any base has been invoked.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 2.2.3.10, conclusion from the two Dwyer--Kan conditions; HTT reading copy in sandbox, archival copy WANTED. No Stacks tag states this simplicial-homotopy result."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-cone-presheaf-adjunction",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-right-anodyne-product",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-localized-good-homotopy-test",
+  "lem-coef-model-localization-map-surjective",
+  "lem-coef-ordered-simplex-cone-evaluation",
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-quillen-derived-counit-criterion",
+  "lem-coef-simplicial-boundary-collapse-test",
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-sset-gluing-filtered-equivalences",
+  "lem-coef-unstraightening-homotopy-descent-gluing",
+  "lem-coef-unstraightening-simplex-pointwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemmas 2.2.3.1, 2.2.3.7 and 2.2.3.10 and Remarks 2.2.2.12, A.3.1.9; direct counit and two-left-Quillen-functor argument avoiding the circular general slice-model comparison"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,7 +255,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-unstraightening-homotopy-descent",
@@ -91,5 +285,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-unstraightening-simplex-dk-equivalence",
+  "worker": "stage1",
+  "summary": "Read HTT simplex and enriched comparison arguments, searched both Lean reference trees and the whole DAG/blueprint. Added one strict ordered-simplex coend-evaluation lemma. Proved the Q-realization comparison, tail retractions, strict and coherent counits, mapping-space comparison by two left Quillen functors, and essential surjectivity directly, without the general slice model or any cyclic infinity-localization statement. Original statement retained.",
+  "blueprint": "Realizes the independent coherent-diagram foundation in proof paragraph 2 of prop-coef-integral-exceptional-adjoint (displayed derived coefficient adjunction and inverse-limit comparison), through the inherited realization chain and the standard-simplex base case of lem-coef-unstraightening-homotopy-descent.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic simplicial/model-category tool for the independent coherent-diagram foundation; used only for the explicit property in its statement, not as a replacement for the unit geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-692e3ead6",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-692e3ead6 (reviewer sub-agent of L); spot-checked: I read the item, all 13 steps, the one new node, every cited node's statement and HTT pp.78-83 (Remark 2.2.2.12, Lemmas 2.2.3.1, 2.2.3.4-2.2.3.7, 2.2.3.9 and 2.2.3.10). The item statement is unchanged from the side tree and matches HTT 2.2.3.10, with the 2.2.2.12 enrichment. The steps hold. Step 1: V(boundary)=L_mQ is mono, so q:V->id is a weak equivalence, and the derived-counit criterion gives c_B weak for Kan B. Step 2: right-horn lifting via the pointwise lemma and Sing_Q fibers. Step 3: U(FxK)=UF x Sing_Q K, using that the conical colimit of the cone presheaf is C[J^m](x,y)=Q^m. Step 4: tail deformation retract by the pushout-product of Lambda^1_1 with E_j->E_{>=j}. Step 5: a is a DK equivalence because the mapping posets have a top element. Steps 6-7: strict and coherent counits, with the adjunct identities checked (adjunct = Uh). Steps 8-11: L(X x -) is left Quillen through the saturated right-anodyne class; beta is a weak equivalence for all K; theta is the mate, inverted through Ho(Kan) and good cylinders; Ken Brown gives epsilon^* weak. Steps 12-13: essential surjectivity and DK assembly. New node lem-coef-ordered-simplex-cone-evaluation is true: a_! is the colimit over the up-closed subcategory C[Delta^{j..n}], giving V(X_{>=j}), which is HTT p.79 relabelled i=n-j. I tested n=0, the empty set, a vertex at t and an edge crossing j. It is statement-only and self-contained, is not a duplicate of cone-boundary-projective-cells, right-straightening-fiber-comparison or simplex-pointwise, and does not restate a clause of the item. The dependency closure is acyclic. The tool_use lem-cbc-simplicial-homotopy-equivalence-weak is accepted as a generic tool. No fixes."
  }
 }
