@@ -14,9 +14,134 @@
   "def-pc-fibre-product",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $H=p_*p^{-1}G$ and $J=q_*q^{-1}G$ using [def-weil-pbc-direct-image]. For $i=1,2$, let $\\alpha_i:H\\to J$ be $p_*$ of the inverse-image unit for $r_i$, followed by $p_*r_{i,*}=q_*$ and $r_i^{-1}p^{-1}G\\cong q^{-1}G$. These identifications and units are those of [def-weil-pbc-sites-and-cohomology]. The unit $\\eta:G\\to H$ equalizes $\\alpha_1,\\alpha_2$: both composites are the unit for $q=p r_i$, since the unit of a composite adjunction is the first unit followed by direct image of the second unit. Let $E=\\ker(\\alpha_1-\\alpha_2)$ and $\\theta:G\\to E$ be the resulting factorization. This is an abelian sheaf: by [lem-weil-pbc-sheafification-exact](1) its value on an etale object $T\\to U$ is precisely $\\{z\\in H(T):\\alpha_1(z)=\\alpha_2(z)\\}$.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDW (lemma-describe-pullback-pi-ph), proof, the two direct-image maps and their sheaf equalizer; limits: sites.tex Tag 00W2 (lemma-limit-sheaf) and sites-modules.tex Tag 03CO(2)"
+   }
+  },
+  {
+   "text": "Each $r_i:Q\\to V$ is a base change of $p$, hence is proper by [lem-weil-pbc-proper-base-change]. Thus $q=p r_1$ is proper by [lem-weil-pbc-proper-composition]. For a geometric point $s:P=\\operatorname{Spec}k\\to U$ with $k$ algebraically closed, set $W=V\\times_U P$, with projections $v:W\\to V$ and $a:W\\to P$, and $R=Q\\times_U P$. The universal property in [def-pc-fibre-product] identifies $R$ with $W\\times_P W$, compatibly with its two maps $\\rho_i:R\\to W$ and its structure map $b=a\\rho_i:R\\to P$. No reducedness or connectedness of $W$ is assumed.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDW (lemma-describe-pullback-pi-ph), proof, geometric fibre of the double fibre product; properness: morphisms.tex Tags 01W4 (lemma-base-change-proper) and 01W3 (lemma-composition-proper)"
+   }
+  },
+  {
+   "text": "Put $L=s^{-1}G$ on $P_{\\mathrm{Et}}$. Apply [lem-weil-pbc-proper-geometric-point-exchange] with coefficient ring $\\mathbb Z$ to $p$ and the abelian sheaf $p^{-1}G$, and also to $q$ and $q^{-1}G$. The hypotheses are exactly the properness proved above and the two cartesian fibre squares. Taking sections over $P$ and using [lem-weil-pbc-geometric-point-pullback-stalk](2) gives isomorphisms\n$$H_s\\cong\\Gamma(W,a^{-1}L),\\qquad J_s\\cong\\Gamma(R,b^{-1}L),\\qquad G_s\\cong\\Gamma(P,L).$$\nHere the inverse-image composition identifications, e.g. $v^{-1}p^{-1}G\\cong a^{-1}s^{-1}G$, come from [def-weil-pbc-sites-and-cohomology]. The use of $\\mathbb Z$ introduces no restriction: every abelian sheaf has its unique integer-module structure, defined by repeated addition; the inverse and direct images preserve this structure. In particular neither exchange application requires torsion.",
+   "uses": [
+    "lem-weil-pbc-proper-geometric-point-exchange",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDW (lemma-describe-pullback-pi-ph), proof, stalk calculation using 0A3T (lemma-proper-pushforward-stalk); Tags 0A3U (lemma-proper-base-change-f-star), 04JN (remark-stalk-pullback), 04JQ (lemma-equivalence-abelian-sheaves-point)"
+   }
+  },
+  {
+   "text": "These isomorphisms identify $\\eta_s$ with $a^\\sharp:\\Gamma(P,L)\\to\\Gamma(W,a^{-1}L)$, and $(\\alpha_i)_s$ with pullback $\\rho_i^\\sharp$. Indeed a representative of $H_s$ is a section $z$ of $p^{-1}G$ on $V\\times_U T$, for a pointed etale neighbourhood $(T,t)$ of $s$. By the representative formula of [def-weil-pbc-underived-exchange], its image in $\\Gamma(W,a^{-1}L)$ is pullback along $W\\to V\\times_U T$ induced by $v$ and $t a$. Applying $\\alpha_i$ first pulls $z$ back along $Q\\times_U T\\to V\\times_U T$ induced by $r_i$. Restricting this to $R$ is the same pullback as restricting to $W$ first and then along $\\rho_i$, because these two composites to $V\\times_U T$ have the same two projections. Equality follows from [def-pc-fibre-product]. For a germ represented by $g\\in G(T)$, both constructions pull $g$ back along $W\\to T$; [lem-weil-pbc-inverse-image-stalk-germ] identifies the germ of its unit image with the original germ. Thus the identifications compare the specified arrows, as well as their source and target groups.",
+   "uses": [
+    "def-weil-pbc-underived-exchange",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-inverse-image-stalk-germ"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDW (lemma-describe-pullback-pi-ph), proof: the maps are projection pullbacks; Tag 0A3T canonical map and Tag 03Q1(3) (lemma-stalk-pullback), the colimit description of inverse image"
+   }
+  },
+  {
+   "text": "The map $a:W\\to P$ is surjective by [lem-weil-pbc-surjective-base-change], since $p$ is surjective. Therefore $W$ is nonempty. It is proper over $k$ by [lem-weil-pbc-proper-base-change], hence is of finite type by [def-weil-proper-morphism]. Apply [lem-sc-lft-over-field-jacobson-space] with the closed subset $Z=W$: closed points are dense, so there is a closed point $w$ (otherwise their closure is empty). By [lem-weil-pbc-closed-point-residue-field-base], the composite $c:\\operatorname{Spec}\\kappa(w)\\to W\\xrightarrow{a}P$ is an isomorphism. Consequently $e=(\\operatorname{Spec}\\kappa(w)\\to W)\\circ c^{-1}:P\\to W$ satisfies $ae=\\mathrm{id}_P$. This is a section on this one geometric fibre, not an etale-local section of the original proper surjection.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0478 (lemma-locally-finite-type-Jacobson), parts (1),(2); morphisms.tex Tags 01S1 (lemma-base-change-surjective), 01W4 (lemma-base-change-proper), 01W1 (definition-proper), 01TB (lemma-jacobson-finite-type-points); algebra.tex Tag 00FV (theorem-nullstellensatz)"
+   }
+  },
+  {
+   "text": "We now compute the equalizer on this fibre explicitly. If $z\\in\\Gamma(W,a^{-1}L)$ satisfies $\\rho_1^\\sharp z=\\rho_2^\\sharp z$, pull this equality back along $h=(\\mathrm{id}_W,e a):W\\to W\\times_P W$, which exists by [def-pc-fibre-product] since $ae=\\mathrm{id}_P$. The two composites are $\\rho_1h=\\mathrm{id}_W$ and $\\rho_2h=e a$, so functoriality of the units and composition of inverse images [def-weil-pbc-sites-and-cohomology] gives $z=a^\\sharp(e^\\sharp z)$. Conversely $a^\\sharp t$ equalizes the two pullbacks since $a\\rho_1=a\\rho_2$. Finally $e^\\sharp a^\\sharp t=t$, so $a^\\sharp$ is injective and the descending section is uniquely $t=e^\\sharp z$. This proves that $\\Gamma(P,L)$ is the equalizer of the two fibre-section maps. The calculation is valid for arbitrary $L$, including the zero sheaf, and for disconnected or nonreduced $W$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDW (lemma-describe-pullback-pi-ph), final paragraph: explicit verification of the equalizer on a nonempty geometric fibre using the rational point from the preceding step"
+   }
+  },
+  {
+   "text": "By [prop-weil-pbc-geometric-stalks-exact], taking a geometric stalk commutes with the kernel $E=\\ker(\\alpha_1-\\alpha_2)$. Steps 3, 4 and 6 therefore show that $\\theta_s:G_s\\to E_s$ is an isomorphism for every geometric point $s$. Hence $\\theta$ is an isomorphism by [lemma-weil-pbc-geometric-stalk-conservative]. If $U$ is empty, this same conservativity statement applies to the empty family of geometric points; equivalently all the displayed section groups are zero. No choice of a point on an empty fibre has been made.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDW (lemma-describe-pullback-pi-ph), reduction to geometric stalks; Tags 03PT(3) (lemma-stalk-exact), 03PU (theorem-exactness-stalks)"
+   }
+  },
+  {
+   "text": "Taking sections over the terminal object $U$ preserves this equalizer by [lem-weil-pbc-sheafification-exact](1): $E(U)=\\{z\\in H(U):\\alpha_1z=\\alpha_2z\\}$. By [def-weil-pbc-direct-image], $H(U)=\\Gamma(V,p^{-1}G)$ and $J(U)=\\Gamma(Q,q^{-1}G)$. Since $\\theta$ is an isomorphism and its composite with $E\\to H$ is the original unit $\\eta$, this is exactly the asserted equalizer of abelian groups with the specified projection pullbacks. Thus agreement on $Q$ is necessary and sufficient for unique descent to $G(U)$.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDW (lemma-describe-pullback-pi-ph), proof, first two global-section identifications and conclusion from the sheaf equalizer; sites-modules.tex Tag 03CO(2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-underived-exchange",
+  "def-weil-proper-morphism",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-proper-geometric-point-exchange",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-surjective-base-change",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DDW (lemma-describe-pullback-pi-ph), proper-surjection equalizer argument, using 0A3T/0A3U; final fibre calculation written explicitly using a rational point supplied by 0478/01TB instead of the terse constant-section argument."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +177,24 @@
    "results": "{\"t\": \"2026-10-17T19:08:36Z\", \"tool\": \"leanfinder\", \"query\": \"Small etale sheaves have unique gluing of pulled back sections along a proper surjective map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"TopCat.Sheaf.existsUnique_gluing'\", \"AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq\", \"TopCat.Sheaf.existsUnique_gluing\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V\"], \"digest\": \"8d268181c0ac981b\"}",
    "date": "2026-10-17",
    "verdict": "no match: regular-topology equalizer formulas assume the equalizer condition already; open-cover gluing and flat descent do not prove descent of small-etale pullback sections along a proper surjection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper surjective morphism descent equalizer of sections of inverse image small etale abelian sheaf",
+   "results": "{\"t\": \"2026-10-17T19:28:33Z\", \"tool\": \"leanfinder\", \"query\": \"Proper surjective morphism descent equalizer of sections of inverse image small etale abelian sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"CategoryTheory.coherentTopology.isLocallySurjective_iff\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\"], \"digest\": \"96823d742e38b1e6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern open-cover gluing, general sheaf epimorphisms, scheme limit sections, flat descent or generic equalizers; none asserts the small-etale inverse-image section equalizer for a proper surjection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper surjective descent for sections of a small etale abelian sheaf",
+   "results": "{\"t\": \"2026-10-17T19:28:44Z\", \"tool\": \"leansearch\", \"query\": \"Proper surjective descent for sections of a small etale abelian sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_surjective\", \"CategoryTheory.Presheaf.isLocallySurjective_of_surjective\", \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi'\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"CategoryTheory.Pseudofunctor.IsStack.essSurj_of_sieve\", \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi\", \"CategoryTheory.Sheaf.isLocallySurjective_iff_isIso\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\"], \"digest\": \"d9ab44908473ebc7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern open-cover gluing, general sheaf epimorphisms, scheme limit sections, flat descent or generic equalizers; none asserts the small-etale inverse-image section equalizer for a proper surjection."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-ph-etale-comparison-hypotheses",
@@ -82,5 +221,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-proper-surjection-etale-section-equalizer",
+  "worker": "stage1",
+  "summary": "Read Stacks 0DDW and 0A3T/0A3U. Proved the sheaf equalizer using the existing torsion-free geometric-point proper exchange, checked the specified unit and projection arrows on neighbourhood representatives, and computed the fibre equalizer by the explicit contraction (id,e a) after finding a rational point using the existing Jacobson and residue-field nodes. Applied exactness/conservativity of geometric stalks and sectionwise kernels. Statement unchanged. No new nodes; no Lean or builds.",
+  "blueprint": "Realizes the 0DDW proper-surjection section-equalizer subargument specified in blueprint.from.place, inside the ph/etale comparison chain supplying normal-cone specialization for lem-trf-local-term-locality. Preserves that route; only the final elementary fibre calculation is expanded. Current main-20261015 sk-i-curve-zero and lem-trf-local-term-locality.proof.md read.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Finds a closed point in the nonempty finite-type geometric fibre, expanding the final fibre calculation only. This unit has no internal statement providing this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Identifies that closed-point residue field with the algebraically closed base, giving a fibre section. This unit has no internal statement providing this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Identifies global sections after geometric-point inverse image with the stalk, with no derived input. This unit has no internal statement providing this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Identifies the actual unit-induced germ; used to check the arrows of the stalk diagram. This unit has no internal statement providing this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Properness of the projections and geometric fibre, needed for the 0DDW stalk calculation. This unit has no internal statement providing this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Properness of the double-fibre-product structure morphism q, needed for its stalk formula. This unit has no internal statement providing this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-geometric-point-exchange",
+    "why": "Generic degree-zero proper base change with arbitrary coefficients, applied only to compute the stalks in the prescribed 0DDW proof. This unit has no internal statement providing this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "Its clause (1) gives sectionwise kernels; no use is made of its sheafification clause. This unit has no internal statement providing this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Nonemptiness of the geometric fibre; stability of a morphism property, not a replacement for descent. This unit has no internal statement providing this general tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Detects the sheaf equalizer isomorphism from the computed stalks. This unit has no internal statement providing this general tool."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Preserves the equalizer kernel on stalks. This unit has no internal statement providing this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-proper-geometric-point-exchange",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-surjective-base-change",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-a1a443486",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-a1a443486 (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps, all 16 cited node statements and the 5 statement deps, plus Stacks 0DDW (lemma-describe-pullback-pi-ph, full proof) and 0A3T (lemma-proper-pushforward-stalk). The statement is unchanged and faithful to 0DDW's proper-surjection equalizer for any abelian G, with no torsion hypothesis; 0A3T has none either. Steps: (1) H, J, units and sectionwise kernel E, using sheafification-exact(1) and the composite-unit identity from sites-and-cohomology (3)-(4). (2) r_i and q proper by 01W4/01W3, and R=W×_P W. (3) Stalks from the torsion-free geometric-point exchange (0A3T, used with coefficient ring Z) and pullback-stalk(2). (4) The specified arrows checked on representatives with the underived-exchange formula and the stalk-germ compatibility (03Q1(3)). (5) A rational section e of the nonempty finite-type fibre over the algebraically closed k, from 01S1, 0478 and 01TB/00FV. (6) Contraction h=(id,e a) gives z=a^♯e^♯z and a^♯ is injective; this is a correct explicit replacement for 0DDW's last paragraph, which has a first/second typo. (7) Stalk exactness and conservativity give θ iso; empty U holds vacuously. (8) Global sections give the stated equalizer. Edge cases checked: empty U, disconnected fibre, nonreduced fibre, identity p, zero G. No new nodes; no duplicate of 0DDW elsewhere in the DAG. No cycle in the 2355-node closure. The parent's use matches the statement. All 11 off-unit tool_uses are accepted as generic tools. No SGA. No fixes."
  }
 }

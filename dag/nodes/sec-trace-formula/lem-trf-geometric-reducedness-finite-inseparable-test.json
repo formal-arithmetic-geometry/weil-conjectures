@@ -12,9 +12,81 @@
   "def-weil-pbc-finite-purely-inseparable-extension",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Condition (2) immediately gives (1): each finite purely inseparable extension $E/k$ is a field extension, so apply (2) with $K=E$. The trivial extension $k/k$ is finite purely inseparable by [def-weil-pbc-finite-purely-inseparable-extension] (degree one, and each element already belongs to $k$). This also confirms that (1) includes the reducedness of $C$ itself via $C\\otimes_kk\\cong C$.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030V, lemma-geometrically-reduced-finite-purely-inseparable-extension, immediate implication (5) to (1)."
+   }
+  },
+  {
+   "text": "Assume (1). First fix a finitely generated field extension $F/k$, meaning $F=k(a_1,\\ldots,a_r)$ for a finite list of elements. Apply [lem-weil-pbc-make-separably-generated] to obtain fields $E,F\\prime$ and a commutative square $k\\to E\\to F\\prime$, $k\\to F\\to F\\prime$, in which $E/k$ and $F\\prime/F$ are finite purely inseparable and $F\\prime/E$ is separably generated. In particular the two maps $k\\to F\\prime$ agree. Condition (1) applies to $E/k$, so $C\\otimes_kE$ is reduced.",
+   "uses": [
+    "lem-weil-pbc-make-separably-generated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030V, proof of (1) implies (5), the square supplied by Tag 04KM (lemma-make-separably-generated)."
+   }
+  },
+  {
+   "text": "Set $D=E\\otimes_kC$. Swapping tensor factors, $c\\otimes e\\mapsto e\\otimes c$, is a ring isomorphism with itself as inverse, so Step 2 makes $D$ reduced. Now [lem-weil-pbc-separably-generated-tensor-reduced], applied over the field $E$ to its reduced algebra $D$ and the separably generated extension $F\\prime/E$, makes $F\\prime\\otimes_ED$ reduced. By [lem-weil-pbc-tensor-cancel-base-change] with $R=k$, $S=E$, $A=F\\prime$, $B=C$, the ring isomorphism $F\\prime\\otimes_E(E\\otimes_kC)\\to F\\prime\\otimes_kC$ sends $f\\otimes(e\\otimes c)$ to $ef\\otimes c$, with inverse $f\\otimes c\\mapsto f\\otimes(1\\otimes c)$. Thus $F\\prime\\otimes_kC$ is reduced. The square in Step 2 ensures that its $k$-algebra structure is the one induced from $F\\to F\\prime$.",
+   "uses": [
+    "lem-weil-pbc-separably-generated-tensor-reduced",
+    "lem-weil-pbc-tensor-cancel-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030V, proof of (1) implies (5), application of Tag 030U (lemma-separable-extension-preserves-reducedness); tensor cancellation is Tag 00D2 (lemma-tensor-with-bimodule)."
+   }
+  },
+  {
+   "text": "The $k$-module $C$ is flat by [lem-weil-pbc-module-over-field-flat]. The field map $F\\to F\\prime$ is injective; hence the defining condition [def-weil-pbc-flat-ring-map] makes $F\\otimes_kC\\to F\\prime\\otimes_kC$, $f\\otimes c\\mapsto f\\otimes c$, injective. If $z^n=0$ in $F\\otimes_kC$ for $n\\ge1$, its image is zero by Step 3, and injectivity gives $z=0$. Therefore $F\\otimes_kC$ is reduced. Swapping the two factors gives reducedness of $C\\otimes_kF$ for every finitely generated field extension $F/k$.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030V, proof of (1) implies (5), descent from the square; injectivity spelled out using Tag 00HB (definition-flat)."
+   }
+  },
+  {
+   "text": "Let $K/k$ now be arbitrary and suppose $z^n=0$ in $C\\otimes_kK$, $n\\ge1$. By [def-weil-pbc-module-tensor-product], write $z=\\sum_{i=1}^r c_i\\otimes a_i$ and put $F=k(a_1,\\ldots,a_r)\\subseteq K$ (take $F=k$ if $r=0$). Lift this expression to $z_F=\\sum_i c_i\\otimes a_i$ in $C\\otimes_kF$. By [lem-weil-pbc-module-over-field-flat] and the injectivity condition in [def-weil-pbc-flat-ring-map], tensoring $F\\hookrightarrow K$ with $C$ is injective; swapping factors gives the injective ring map $j:C\\otimes_kF\\to C\\otimes_kK$. Since $j(z_F^n)=z^n=0$, injectivity gives $z_F^n=0$. Step 4 gives $z_F=0$, hence $z=0$. Thus $C\\otimes_kK$ is reduced for every field extension $K/k$, proving (2).",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-module-over-field-flat",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030V, proof of (1) implies (5), finite-generation reduction via Tag 00I3 (lemma-limit-argument), written directly for a finite tensor expression."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-make-separably-generated",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-separably-generated-tensor-reduced",
+  "lem-weil-pbc-tensor-cancel-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 030V (lemma-geometrically-reduced-finite-purely-inseparable-extension), proof of (1) implies (5), with the finite-generation reduction and injective descent written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,10 +122,45 @@
    "results": "{\"t\": \"2026-10-17T19:14:56Z\", \"tool\": \"leanfinder\", \"query\": \"Finite inseparable extension test for geometric reducedness of arbitrary commutative algebras over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.IsGeometricallyReduced.of_injective\", \"IsPurelyInseparable\"], \"digest\": \"7698bdea6605db42\"}",
    "date": "2026-10-18",
    "verdict": "no match: read Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:30-39,54-83. Its definition tests an algebraic closure and the file explicitly leaves the all-field-extensions comparison as a TODO; its scalar-extension instance assumes an algebraic extension. No finite purely inseparable test for arbitrary algebras is stated. The formally unramified result requires essentially finite type and formal unramifiedness; uniqueness of purely inseparable embeddings is unrelated."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPurelyInseparable.*[Rr]educ|[Rr]educ.*IsPurelyInseparable|isGeometricallyReduced",
+   "results": "{\"t\": \"2026-10-17T19:31:38Z\", \"tool\": \"grep\", \"query\": \"IsPurelyInseparable.*[Rr]educ|[Rr]educ.*IsPurelyInseparable|isGeometricallyReduced\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\"], \"digest\": \"d94bb59e6d82a5f0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the pinned Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:30-39,54-83. It tests algebraic closures, explicitly leaves reducedness after arbitrary field extension as a TODO, and its scalar-extension instance assumes an algebraic extension. None states the finite purely inseparable test. Algebra.FormallyUnramified.isReduced_of_field in Mathlib/RingTheory/Unramified/Field.lean:124 additionally requires FormallyUnramified and EssFiniteType (hypotheses at lines 60-61); it does not apply to an arbitrary algebra. The project perfect-field tensor results require PerfectField and do not state this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An arbitrary algebra over a field is geometrically reduced if its base changes to all finite purely inseparable extensions are reduced",
+   "results": "{\"t\": \"2026-10-17T19:31:39Z\", \"tool\": \"leansearch\", \"query\": \"An arbitrary algebra over a field is geometrically reduced if its base changes to all finite purely inseparable extensions are reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.mk\", \"Algebra.IsGeometricallyReduced.casesOn\", \"Algebra.IsGeometricallyReduced.rec\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\"], \"digest\": \"1c2d8946271faac2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the pinned Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:30-39,54-83. It tests algebraic closures, explicitly leaves reducedness after arbitrary field extension as a TODO, and its scalar-extension instance assumes an algebraic extension. None states the finite purely inseparable test. Algebra.FormallyUnramified.isReduced_of_field in Mathlib/RingTheory/Unramified/Field.lean:124 additionally requires FormallyUnramified and EssFiniteType (hypotheses at lines 60-61); it does not apply to an arbitrary algebra. The project perfect-field tensor results require PerfectField and do not state this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsGeometricallyReduced, IsPurelyInseparable",
+   "results": "{\"t\": \"2026-10-17T19:31:39Z\", \"tool\": \"loogle\", \"query\": \"Algebra.IsGeometricallyReduced, IsPurelyInseparable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the pinned Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:30-39,54-83. It tests algebraic closures, explicitly leaves reducedness after arbitrary field extension as a TODO, and its scalar-extension instance assumes an algebraic extension. None states the finite purely inseparable test. Algebra.FormallyUnramified.isReduced_of_field in Mathlib/RingTheory/Unramified/Field.lean:124 additionally requires FormallyUnramified and EssFiniteType (hypotheses at lines 60-61); it does not apply to an arbitrary algebra. The project perfect-field tensor results require PerfectField and do not state this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reducedness after every finite purely inseparable scalar extension implies reducedness after arbitrary field extensions",
+   "results": "{\"t\": \"2026-10-17T19:31:39Z\", \"tool\": \"leanfinder\", \"query\": \"Reducedness after every finite purely inseparable scalar extension implies reducedness after arbitrary field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"Algebra.IsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.IsGeometricallyReduced.of_injective\"], \"digest\": \"09c3918e38de535d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the pinned Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:30-39,54-83. It tests algebraic closures, explicitly leaves reducedness after arbitrary field extension as a TODO, and its scalar-extension instance assumes an algebraic extension. None states the finite purely inseparable test. Algebra.FormallyUnramified.isReduced_of_field in Mathlib/RingTheory/Unramified/Field.lean:124 additionally requires FormallyUnramified and EssFiniteType (hypotheses at lines 60-61); it does not apply to an arbitrary algebra. The project perfect-field tensor results require PerfectField and do not state this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebra over a field is reduced after all field extensions if it is reduced after finite purely inseparable extensions",
+   "results": "{\"t\": \"2026-10-17T19:32:07Z\", \"tool\": \"leanfinder\", \"query\": \"An algebra over a field is reduced after all field extensions if it is reduced after finite purely inseparable extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.of_injective\"], \"digest\": \"b47a76236f5cb37e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the pinned Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:30-39,54-83. It tests algebraic closures, explicitly leaves reducedness after arbitrary field extension as a TODO, and its scalar-extension instance assumes an algebraic extension. None states the finite purely inseparable test. Algebra.FormallyUnramified.isReduced_of_field in Mathlib/RingTheory/Unramified/Field.lean:124 additionally requires FormallyUnramified and EssFiniteType (hypotheses at lines 60-61); it does not apply to an arbitrary algebra. The project perfect-field tensor results require PerfectField and do not state this item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-geometric-reducedness-local-base-change",
@@ -81,5 +188,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-geometric-reducedness-finite-inseparable-test",
+  "worker": "stage1",
+  "summary": "Kept the statement of Stacks 030V (1) iff (5), including arbitrary and zero algebras. Wrote five proof steps along its finitely generated field-extension, finite purely inseparable square, and separably generated scalar-extension route. Reused existing 04KM and 030U nodes and tensor cancellation; made the finite tensor expression and injective descent arguments explicit using flatness over a field. No new nodes. Checked project declarations, the source statements of every citation, both tensor orders and scalar structures, and characteristic-zero and positive-characteristic edge cases.",
+  "blueprint": "Realizes the finite purely inseparable test in the ancestry of lem-trf-local-term-locality, in the descent of a reduced geometric singular point to a separable residue field (Curves 0C4D / Varieties 0384, through local geometric reducedness). It expands exactly the Algebra 030V invocation, without changing the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-make-separably-generated",
+    "why": "Generic field-theoretic tool: Stacks 04KM supplies the commutative square for a finitely generated extension in 030V; the local-term unit has no field-theoretic replacement."
+   },
+   {
+    "node": "lem-weil-pbc-separably-generated-tensor-reduced",
+    "why": "Generic commutative-algebra tool: Stacks 030U preserves reducedness under the separably generated upper extension in that square; the local-term unit has no such algebra lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-make-separably-generated",
+  "lem-weil-pbc-separably-generated-tensor-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-b44cafe7d",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-b44cafe7d (reviewer sub-agent of L); spot-checked: Read the item in full; the delivery has no new nodes. The statement is Stacks Algebra 030V (lemma-geometrically-reduced-finite-purely-inseparable-extension), (1)<=>(5), checked against algebra.tex with definition-geometrically-reduced expanded. No hypothesis is added or dropped, and arbitrary and zero algebras are allowed. Step 1 ((2)=>(1)) is elementary, and E=k is valid under def-weil-pbc-finite-purely-inseparable-extension. Step 2 uses lem-weil-pbc-make-separably-generated (04KM): the statement gives the square, F=k(a_i) is finitely generated, and (1) applies to E. Step 3: D=E⊗C is reduced; lem-weil-pbc-separably-generated-tensor-reduced (030U, separably generated case) needs a field E, a reduced commutative E-algebra and F'/E separably generated, and all hold. The Mathlib leaf cancelBaseChange (R=k, S=E, A=F', B=C) gives F'⊗_kC, and the k-structures agree because the square commutes. Step 4 reflects nilpotents along the injective map F⊗C->F'⊗C, using flatness over a field (Mathlib leaf) and the definition of flatness. Step 5 writes out Stacks lemma-limit-argument (1) by a finite tensor expression and an injective ring map; r=0 is handled. proof_deps equals the union of uses, and only cited statements are used. Edge cases: C=0, characteristic 0, k=F_p(t) with C=k[u]/(u^p-t), k[eps]/eps^2, and C not finitely generated. Duplicate search (rg for 030V, geometrically reduced and purely inseparable over dag/nodes, plus the main-20261015 blueprint): the candidates lem-pc-inseparable-tensor-nilpotent, lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable, lem-pur-finite-inseparable-geometric-reduction, lem-weil-pbc-finite-purely-inseparable-scalar-descent and lem-kun-geometric-reduced-perfect are all different statements. Read Mathlib GeometricallyReduced.lean: no match. The dependency closure has no cycle and there are no SGA citations. Accepted tool uses: lem-weil-pbc-make-separably-generated and lem-weil-pbc-separably-generated-tensor-reduced, as generic commutative-algebra black boxes that the Stacks proof invokes; the unit sk-i-curve-zero has no replacement. Not a target node, so the base-change and coefficient checks do not apply. No fixes."
  }
 }
