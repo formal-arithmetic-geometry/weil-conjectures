@@ -16,9 +16,68 @@
  "stmt_deps": [
   "lem-coef-enriched-projective-diagram-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-chain-interval-tensor-cylinder] to the given $\\mathcal N$ and cofibrant $X$. Its assumptions are precisely the completeness, cocompleteness, complex enrichment/tensor/cotensor adjunctions, functorial model factorizations and enriched model axiom in the present statement; no local presentability or cofibrant-generation hypothesis is needed. Obtain $J$ with $dh=e_1-e_0$, maps $i_0,i_1:X\\to J\\otimes X$, and a weak equivalence $p_X:J\\otimes X\\to X$ with $p_Xi_0=p_Xi_1=1_X$. We only use these endpoint and weak-equivalence properties of its good cylinder.",
+   "uses": [
+    "lem-coef-chain-interval-tensor-cylinder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, extracted mapping-complex foundation: apply the existing integral chain interval cylinder lemma."
+   }
+  },
+  {
+   "text": "Put $C=\\underline{\\operatorname{Hom}}(X,Y)$. Define the graded group map $\\phi:J\\to C$ by $\\phi(e_0)=a$, $\\phi(e_1)=b$, and $\\phi(h)=t$, zero on the other degrees. It is a chain map: on $e_0,e_1$ this is $da=db=0$, and on $h$ this is $dt=b-a=\\phi(dh)$. The complex tensor-Hom adjunction and the identification of ordinary maps with degree-zero cycles in [lem-coef-enriched-projective-diagram-model] turn this chain map into an ordinary map $H:J\\otimes X\\to Y$. Naturality of this adjunction in $j_i:\\mathbf Z[0]\\to J$ identifies $Hi_i$ with $\\phi j_i$, hence with $a$ for $i=0$ and $b$ for $i=1$. Only the stated enrichment conventions of that node are used, not its diagram-model theorem or its extra hypotheses.",
+   "uses": [
+    "lem-coef-enriched-projective-diagram-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, agent expansion of enriched chain homotopy: transpose the explicit three-generator chain map through the tensor-Hom adjunction."
+   }
+  },
+  {
+   "text": "Since $p_X$ is a weak equivalence, $\\gamma(p_X)$ is invertible by the defining property of the localization. Applying $\\gamma$ to $p_Xi_i=1_X$ and composing on the left by $\\gamma(p_X)^{-1}$ gives $\\gamma(i_0)=\\gamma(p_X)^{-1}=\\gamma(i_1)$. Therefore $\\gamma(a)=\\gamma(H)\\gamma(i_0)=\\gamma(H)\\gamma(i_1)=\\gamma(b)$. This is a cancellation with an invertible arrow, and uses no fibrancy of $Y$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, agent expansion: cancel the inverted cylinder projection using its two sections."
+   }
+  },
+  {
+   "text": "For cofibrant objects define a category $\\mathcal K$ with the same objects and morphisms $H^0\\underline{\\operatorname{Hom}}(X,Y)=Z^0C/d(C^{-1})$. Composition of cycles is a cycle. It descends to these quotients: for closed degree-zero $f,g$ and degree-minus-one $u,v$ of the appropriate types, the chain-map composition rule of [lem-coef-enriched-projective-diagram-model] gives $g\\,du=d(gu)$ and $(dv)f=d(vf)$. Thus changing either representative by a boundary changes its composite by a boundary. Associativity and identities descend from enriched composition. Define $\\bar\\gamma(X)=\\gamma(X)$ and $\\bar\\gamma([f])=\\gamma(f)$. Two representatives of the same class differ by $dt$ for some degree-minus-one $t$, so the equality already proved makes this well-defined. Functoriality is the functoriality of $\\gamma$ on representatives, and $\\gamma$ restricted to cofibrant objects equals $\\bar\\gamma$ composed with the zero-cycle quotient functor.",
+   "uses": [
+    "lem-coef-enriched-projective-diagram-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, agent expansion: the elementary degree-zero cohomology quotient and the descended localization functor."
+   }
+  },
+  {
+   "text": "Finally apply the equality just proved to the two closed endomorphisms $1_X,ba$ and the degree-minus-one $s$ with $ds=ba-1_X$; the source $X$ is cofibrant. It gives $\\gamma(b)\\gamma(a)=1_{\\gamma X}$. Apply it again to $1_Y,ab$ and $t$ with $dt=ab-1_Y$; here the source $Y$ is cofibrant. It gives $\\gamma(a)\\gamma(b)=1_{\\gamma Y}$. These are exactly the two inverse equations. Neither application requires a fibrant target.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, agent expansion: specialize the equality to the two homotopy inverse equations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-chain-interval-tensor-cylinder",
+  "lem-coef-enriched-projective-diagram-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, extracted dg-model foundation; explicit chain interval, endpoint cancellation, and H^0 quotient argument, using the existing cylinder node."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -75,10 +134,59 @@
    "results": "{\"t\": \"2026-10-17T08:02:49Z\", \"tool\": \"leanfinder\", \"query\": \"Chain homotopic maps from a cofibrant object are equal after localization in an enriched model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj_hom_ext\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.LeftHomotopyClass.mk_eq_mk_iff\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_mk\"], \"digest\": \"470037bc1e25dae6\"}",
    "date": "2026-10-17",
    "verdict": "no match: read LeftHomotopy.lean:195-215, especially HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization at line 207, and CofibrantObjectHomotopy.lean:55-105. They identify maps already known to be model-category homotopic. They do not identify a degree-minus-one enriched homotopy with such a homotopy, which requires constructing the chain-interval cylinder. DerivedCategory.Q_map_eq_of_homotopy applies only to actual complexes, not arbitrary complex-enriched model categories."
+  },
+  {
+   "tool": "grep",
+   "query": "enriched.*homotop|homotop.*enriched|chain.*homotop",
+   "results": "{\"t\": \"2026-10-17T09:12:05Z\", \"tool\": \"grep\", \"query\": \"enriched.*homotop|homotop.*enriched|chain.*homotop\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: LeftHomotopyRel.factorsThroughLocalization (LeftHomotopy.lean:207-218) starts from a supplied ordinary cylinder homotopy; CofibrantObjectHomotopy.lean:34-36,66-75,104-110 starts from ordinary right homotopy. DerivedCategory.Q_map_eq_of_homotopy (Basic.lean:302-304) and HomologicalComplex.cylinder.map_ι₀_eq_map_ι₁ (HomotopyCofiber.lean:713-718) concern actual homological complexes. None supplies the enriched interval adjunction for an arbitrary Ch(Z)-enriched model category, so the item is not an exact match or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A degree minus one enriched chain homotopy between maps from a cofibrant object is equal after localization in a Ch(Z)-enriched model category",
+   "results": "{\"t\": \"2026-10-17T09:12:05Z\", \"tool\": \"leansearch\", \"query\": \"A degree minus one enriched chain homotopy between maps from a cofibrant object is equal after localization in a Ch(Z)-enriched model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.Q_map_eq_of_homotopy\", \"ComplexShape.QFactorsThroughHomotopy.areEqualizedByLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionCompToLocalizationNatTrans\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"CochainComplex.HomComplex.Cochain.ofHomotopy\"], \"digest\": \"3ec4be1527ed1ebb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: LeftHomotopyRel.factorsThroughLocalization (LeftHomotopy.lean:207-218) starts from a supplied ordinary cylinder homotopy; CofibrantObjectHomotopy.lean:34-36,66-75,104-110 starts from ordinary right homotopy. DerivedCategory.Q_map_eq_of_homotopy (Basic.lean:302-304) and HomologicalComplex.cylinder.map_ι₀_eq_map_ι₁ (HomotopyCofiber.lean:713-718) concern actual homological complexes. None supplies the enriched interval adjunction for an arbitrary Ch(Z)-enriched model category, so the item is not an exact match or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.LeftHomotopyRel.iff_map_eq, HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization",
+   "results": "{\"t\": \"2026-10-17T09:12:05Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.LeftHomotopyRel.iff_map_eq, HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: LeftHomotopyRel.factorsThroughLocalization (LeftHomotopy.lean:207-218) starts from a supplied ordinary cylinder homotopy; CofibrantObjectHomotopy.lean:34-36,66-75,104-110 starts from ordinary right homotopy. DerivedCategory.Q_map_eq_of_homotopy (Basic.lean:302-304) and HomologicalComplex.cylinder.map_ι₀_eq_map_ι₁ (HomotopyCofiber.lean:713-718) concern actual homological complexes. None supplies the enriched interval adjunction for an arbitrary Ch(Z)-enriched model category, so the item is not an exact match or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enriched chain homotopy between maps from a cofibrant object becomes equality in the ordinary model localization without a fibrancy assumption on the target",
+   "results": "{\"t\": \"2026-10-17T09:12:06Z\", \"tool\": \"leanfinder\", \"query\": \"Enriched chain homotopy between maps from a cofibrant object becomes equality in the ordinary model localization without a fibrancy assumption on the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj_hom_ext\", \"HomotopicalAlgebra.CofibrantObject.homRel\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.LeftHomotopyRel.rightHomotopyRel\", \"HomotopicalAlgebra.LeftHomotopyClass.mk_eq_mk_iff\", \"HomotopicalAlgebra.CofibrantObject.homRel_iff_rightHomotopyRel\"], \"digest\": \"433099c41fd69b6e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: LeftHomotopyRel.factorsThroughLocalization (LeftHomotopy.lean:207-218) starts from a supplied ordinary cylinder homotopy; CofibrantObjectHomotopy.lean:34-36,66-75,104-110 starts from ordinary right homotopy. DerivedCategory.Q_map_eq_of_homotopy (Basic.lean:302-304) and HomologicalComplex.cylinder.map_ι₀_eq_map_ι₁ (HomotopyCofiber.lean:713-718) concern actual homological complexes. None supplies the enriched interval adjunction for an arbitrary Ch(Z)-enriched model category, so the item is not an exact match or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Q_map_eq_of_homotopy|factorsThroughLocalization",
+   "results": "{\"t\": \"2026-10-17T09:12:59Z\", \"tool\": \"grep\", \"query\": \"Q_map_eq_of_homotopy|factorsThroughLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\"], \"digest\": \"59cfb0b6e025e0b4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: LeftHomotopyRel.factorsThroughLocalization (LeftHomotopy.lean:207-218) starts from a supplied ordinary cylinder homotopy; CofibrantObjectHomotopy.lean:34-36,66-75,104-110 starts from ordinary right homotopy. DerivedCategory.Q_map_eq_of_homotopy (Basic.lean:302-304) and HomologicalComplex.cylinder.map_ι₀_eq_map_ι₁ (HomotopyCofiber.lean:713-718) concern actual homological complexes. None supplies the enriched interval adjunction for an arbitrary Ch(Z)-enriched model category, so the item is not an exact match or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"Cofibrant\"",
+   "results": "{\"t\": \"2026-10-17T09:13:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Homotopy\\\", \\\"Cofibrant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.homRel_iff_rightHomotopyRel\"], \"digest\": \"c74bec86dfb24cc1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: LeftHomotopyRel.factorsThroughLocalization (LeftHomotopy.lean:207-218) starts from a supplied ordinary cylinder homotopy; CofibrantObjectHomotopy.lean:34-36,66-75,104-110 starts from ordinary right homotopy. DerivedCategory.Q_map_eq_of_homotopy (Basic.lean:302-304) and HomologicalComplex.cylinder.map_ι₀_eq_map_ι₁ (HomotopyCofiber.lean:713-718) concern actual homological complexes. None supplies the enriched interval adjunction for an arbitrary Ch(Z)-enriched model category, so the item is not an exact match or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a category tensored over cochain complexes the interval dh=e1-e0 converts an enriched boundary b-a=dt to a cylinder homotopy and equality after inverting weak equivalences",
+   "results": "{\"t\": \"2026-10-17T09:13:01Z\", \"tool\": \"leanfinder\", \"query\": \"In a category tensored over cochain complexes the interval dh=e1-e0 converts an enriched boundary b-a=dt to a cylinder homotopy and equality after inverting weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.cylinder.map_ι₀_eq_map_ι₁\", \"HomologicalComplex.cylinder.homotopyEquiv\", \"HomologicalComplex.cylinder.homotopy₀₁\", \"HomologicalComplex.cylinder\", \"HomologicalComplex.cylinder.desc\", \"HomologicalComplex.cylinder.πCompι₀Homotopy\", \"HomologicalComplex.cylinder.πCompι₀Homotopy.nullHomotopicMap_eq\", \"HomologicalComplex.cylinder.πCompι₀Homotopy.inrX_nullHomotopy_f\"], \"digest\": \"ec9d4a38d9ee94b6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: LeftHomotopyRel.factorsThroughLocalization (LeftHomotopy.lean:207-218) starts from a supplied ordinary cylinder homotopy; CofibrantObjectHomotopy.lean:34-36,66-75,104-110 starts from ordinary right homotopy. DerivedCategory.Q_map_eq_of_homotopy (Basic.lean:302-304) and HomologicalComplex.cylinder.map_ι₀_eq_map_ι₁ (HomotopyCofiber.lean:713-718) concern actual homological complexes. None supplies the enriched interval adjunction for an arbitrary Ch(Z)-enriched model category, so the item is not an exact match or a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-locally-cofibrant-dg-restriction",
@@ -102,5 +210,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-homotopy-localization",
+  "worker": "stage1",
+  "summary": "Kept the statement and existing research. Reused the existing chain-interval tensor-cylinder lemma, transposed the explicit map e0 to a, e1 to b, h to t, cancelled the inverted cylinder projection without fibrancy, and checked composition on H^0 and both inverse equations. No new nodes. Searched the project Lean, all DAG/blueprint nodes and Mathlib; no exact project attachment or Mathlib leaf.",
+  "blueprint": "Realizes the extracted enriched-homotopy foundation beneath the middle finite mapping-complex comparison in paragraph 2 of prop-coef-integral-exceptional-adjoint; preserves the existing ancestry and unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-a5653161e",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-a5653161e (reviewer sub-agent of L); spot-checked: I read the item, the five steps, both cited statements (lem-coef-chain-interval-tensor-cylinder and lem-coef-enriched-projective-diagram-model, both in unit sk-prop-sf-biduality-general), the parent steps 6 and 8 that use it, and paragraph 2 of the main-20261015 prop-coef-integral-exceptional-adjoint proof. The blueprint does not state this foundation, and the agent origin is labelled honestly. The statement is unchanged; it is not a target and does not restate a clause of its parent. Its hypotheses are word for word those of the cylinder node. Step 1 cites the cylinder node for p_X in W with p_X i_0 = p_X i_1 = 1_X, and that node is plausibly true: j_0 is a trivial cofibration with a disk cokernel, the enriched axiom gives (j_0) tensor X trivial cofibration, and two-out-of-three finishes. Step 2: phi(e0,e1,h) = (a,b,t) is a chain map, because dphi = d_C phi - phi d_J vanishes on h when dt = b-a. The complex adjunction is an isomorphism, so it matches Z^0 with Z^0 and gives H, and naturality along j_i with the unit identification gives H i_i = a, b. Step 3 cancels the invertible gamma(p_X) and uses no fibrancy of Y. Step 4: the Leibniz rule for closed degree-0 maps (g du = d(gu), (dv)f = d(vf)) makes the H^0 composition well-defined, and gamma-bar is well-defined by step 3. Step 5 applies step 3 to (1_X, ba, s) and (1_Y, ab, t) with cofibrant sources. proof_deps equals the union of the uses; there is no cycle, no SGA, and no off-unit tool use. Edge cases checked: X = 0, a = b with t = 0 or t a nonzero cycle, the sign of dh against dt, and a non-fibrant Y. Duplicate search with rg over the DAG: dg-model-underlying-localization, fixed-cylinder-fibrant-target-detection, kprojective-derived-hom-bijection, dk-cofibrant-localization-comparison and dg-enrichment-rectification all state different facts. The Mathlib searches cover three kinds and match nothing. No fixes."
  }
 }
