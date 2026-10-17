@@ -273,7 +273,7 @@ variable (X) in
 /-- The identity isomorphism `R(𝟙 X)_* ≅ 𝟭` of the derived pushforward on bounded constructible
 complexes is, at the unit, the unit of `L(𝟙 X)^* ⊣ R(𝟙 X)_*` followed by the inverse of the unit
 comparison of `L(𝟙 X)^*`. -/
-lemma boundedConstructibleLowerStarId_inv_app_unit :
+lemma boundedConstructibleLowerStarId_inv_app_unit [IsFinitenessCoefficient ℓ Λ] :
     (boundedConstructibleLowerStarId Λ ℓ X).inv.app (𝟙_ _) =
       (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (𝟙 X)).unit.app (𝟙_ _) ≫
         (boundedConstructibleLowerStar Λ ℓ (𝟙 X)).map

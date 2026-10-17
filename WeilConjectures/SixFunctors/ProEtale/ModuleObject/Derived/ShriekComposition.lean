@@ -96,7 +96,7 @@ of the independence of the compactification
 `X ⟶[i ≫ i'] W ⟶[p' ≫ q] S`, of the composition isomorphisms of `j_!` and `Rf_*`, and of the
 inverse of the exchange isomorphism `Rp_* ⋙ j_! ≅ i'_! ⋙ Rp'_*`. -/
 @[no_expose]
-noncomputable def boundedConstructibleLowerShriekComp :
+noncomputable def boundedConstructibleLowerShriekComp [IsFinitenessCoefficient ℓ Λ] :
     boundedConstructibleLowerShriek (Profinite.continuousMapRingObj E) ℓ (f ≫ g) ≅
       boundedConstructibleLowerShriek (Profinite.continuousMapRingObj E) ℓ f ⋙
         boundedConstructibleLowerShriek (Profinite.continuousMapRingObj E) ℓ g :=

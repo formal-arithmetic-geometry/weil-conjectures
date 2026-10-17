@@ -93,7 +93,7 @@ include ℓ k
 
 section LowerShriek
 
-variable {X Y X' Y' : Over (Spec (.of k))}
+variable [IsFinitenessCoefficient ℓ Λ] {X Y X' Y' : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
@@ -109,7 +109,7 @@ the inverse of the extension-by-zero exchange of its open-immersion square,
 
 `i_! ⋙ Rp_* ⋙ Lg^* ⟶ i_! ⋙ Lḡ^* ⋙ Rp'_* ⟶ Lg'^* ⋙ i'_! ⋙ Rp'_*`. -/
 @[no_expose]
-noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
+noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChangePasting [IsFinitenessCoefficient ℓ Λ]
     (c : Compactification f.left) (sq : IsPullback g' f' f g) :
     boundedConstructibleLowerShriekOfCompactification Λ ℓ c ⋙
       boundedConstructibleUpperStar Λ ℓ g ⟶
@@ -125,7 +125,7 @@ noncomputable def boundedConstructibleLowerShriekOfCompactificationBaseChangePas
       (boundedConstructibleLowerStar Λ ℓ (c.ofIsPullback sq.overLeft).overG) ≫
     (Functor.associator _ _ _).hom
 
-lemma boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq
+lemma boundedConstructibleLowerShriekOfCompactificationBaseChangePasting_eq [IsFinitenessCoefficient ℓ Λ]
     (c : Compactification f.left) (sq : IsPullback g' f' f g) :
     boundedConstructibleLowerShriekOfCompactificationBaseChangePasting Λ ℓ c sq =
       (Functor.associator _ _ _).hom ≫
