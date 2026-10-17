@@ -29,9 +29,60 @@
   "def-coef-infinity-relative-cone",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the categories in the assertion. Apply [lem-coef-infinity-isofibration-exponentiation] to $\\varnothing\\subseteq C$ and $\\varnothing\\subseteq A$: postcomposition by $p$ on each functor category is an isofibration. Each strict fiber over $s$ or $sj$ is a quasicategory, since an inner horn in that fiber is filled by the inner-fibration lifting property over the constant simplex at the specified base diagram. Its filler remains in the fiber. The full subcategory $\\mathcal K$ is a quasicategory: $\\operatorname{Fun}(C,D)$ is one by [lem-cbc-enhanced-functor-cone-calculus], an inner horn in $\\mathcal K$ has a filler in the fiber $\\operatorname{Fun}_s(C,D)$ as just shown, and the filler has the same vertices, so lies in $\\mathcal K$ by fullness. Restriction preserves the defining strict base equation.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Preparations for Proposition 4.3.2.15; strict functor fibers and full subcategories"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-relative-right-kan-universal-restriction] to the same $A\\subseteq C$, $p:D\\to B$ and $s$; its $L_c$, $a_c$, $l_c$ are the item's $J_c$, the projection $J_c\\to A$, and $l_c$ (simplices starting at $c$, projected by their entire final face), and its $\\operatorname{Fun}_s(C,D)$ and $\\operatorname{Fun}_{s|_A}(A,D)$ are the item's degreewise fibers. Its full subcategory $R$ of pointwise $p$-right Kan extensions is exactly $\\mathcal K$. Its full subcategory $T$ is all of $\\operatorname{Fun}_{sj}(A,D)$: for a vertex $h$, the assumed extension $H$ with $Hj=h$ gives the cone $Hl_c:J_c^{\\triangleleft}\\to D$, which is a $p$-limit diagram, satisfies $Hl_c|_{J_c}=Hja_c=ha_c$ because $l_c|_{J_c}=ja_c$, and satisfies $pHl_c=sl_c$ because $pH=s$. A full subcategory on every object is the whole simplicial set. Hence that node's conclusion is that $j^*:\\mathcal K\\to\\operatorname{Fun}_{sj}(A,D)$ is a trivial Kan fibration, i.e. has the right lifting property for every $\\partial\\Delta^r\\hookrightarrow\\Delta^r$, $r\\geq0$; in dimension zero this lift is the assumed extension. Since $\\partial\\Delta^0$ is empty, the dimension-zero clause is surjectivity on vertices, so this is a trivial Kan fibration in the sense of [def-weil-pbc-trivial-kan-fibration]. In particular extensions of diagrams, transformations and higher simplices with prescribed compatible boundary exist exactly.",
+   "uses": [
+    "lem-coef-relative-right-kan-universal-restriction",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.3.2.15 and Remark 4.3.2.18 (right-hand dual), printed pp. 284-285, specialized to the case where every diagram on A admits the local relative limit cones"
+   }
+  },
+  {
+   "text": "Finally [lem-weil-pbc-trivial-kan-lifts-monomorphisms] shows that this restriction map lifts every degreewise injective map. The cofibrations in [lem-coef-joyal-model-structure] are exactly those maps; its weak factorization system therefore makes restriction a Joyal trivial fibration and hence a categorical equivalence. Both its source and target are quasicategories by step 1, so [lem-coef-joyal-quasicategory-characterizations], clause (2), makes it a functor equivalence. By [lem-cbc-enhanced-functor-cone-calculus] it induces equivalences on all mapping spaces. The map on these spaces is the one induced by restriction itself: composition with restriction commutes with restriction of simplices, so the comparison is natural in both arguments and retains the coherent composition data. Only the assumed extensions of objects, through the local cones they supply in step 2, have been used; no completeness hypothesis was added.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Consequence of Proposition 4.3.2.15 and Remark 4.3.2.18; categorical-equivalence interpretation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-relative-right-kan-universal-restriction",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Special case of the right-hand dual of HTT Proposition 4.3.2.15 (Remark 4.3.2.18), through the existing node lem-coef-relative-right-kan-universal-restriction, whose T is the whole fiber under the item's existence hypothesis; categorical-equivalence and mapping-space consequences through the Joyal model structure. Online source, not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,10 +139,87 @@
    "results": "{\"t\": \"2026-10-16T21:50:43Z\", \"tool\": \"grep\", \"query\": \"trivial.*[Ff]ibration|[Kk]an.*[Ee]xtension\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\"], \"digest\": \"96a7ad3c93f79d46\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:40-61 and CategoryTheory/Functor/KanExtension/Basic.lean:45-78; these describe ordinary set-valued right extensions and strict Segal objects, not relative Kan extensions of quasicategories or boundary lifting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inner fibration of quasicategories admits coherent relative limit cones extending a prescribed family on a simplicial subset containing every vertex",
+   "results": "{\"t\": \"2026-10-16T22:37:42Z\", \"tool\": \"leanfinder\", \"query\": \"An inner fibration of quasicategories admits coherent relative limit cones extending a prescribed family on a simplicial subset containing every vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.quasicategory_of_filler\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory\", \"SSet.Quasicategory.hornFilling\", \"SSet.KanComplex.hornFilling\"], \"digest\": \"8d621b78f0d1c8f5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:53-65,97-100 (evaluationJointlyReflectsLimits and combinedIsLimit), CategoryTheory/Functor/KanExtension/Basic.lean:45-78 (ordinary RightExtension and IsRightKanExtension), and AlgebraicTopology/Quasicategory/Basic.lean:34-59 (inner horn fillers). The ordinary categorical limit/Kan-extension results and the Quillen horn-fibration results do not state relative universality of quasicategorical cones or a relative exponential-corner criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightKanExtension",
+   "results": "{\"t\": \"2026-10-16T22:37:44Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsRightKanExtension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isRightKanExtensionId\", \"CategoryTheory.Functor.instIsRightKanExtensionRightKanExtensionRightKanExtensionCounit\", \"CategoryTheory.Functor.IsRightKanExtension\", \"CategoryTheory.Functor.HasRightKanExtension.mk\", \"CategoryTheory.Functor.coneOfIsRightKanExtension\", \"CategoryTheory.Functor.isRightKanExtensionAlongEquivalence\", \"CategoryTheory.Functor.isRightKanExtensionAlongEquivalence'\", \"CategoryTheory.Functor.limitIsoOfIsRightKanExtension\"], \"digest\": \"d9c61c132c77fbbf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:53-65,97-100 (evaluationJointlyReflectsLimits and combinedIsLimit), CategoryTheory/Functor/KanExtension/Basic.lean:45-78 (ordinary RightExtension and IsRightKanExtension), and AlgebraicTopology/Quasicategory/Basic.lean:34-59 (inner horn fillers). The ordinary categorical limit/Kan-extension results and the Quillen horn-fibration results do not state relative universality of quasicategorical cones or a relative exponential-corner criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*[Ll]imit|[Kk]an.*[Ee]xtension|[Qq]uasicategory",
+   "results": "{\"t\": \"2026-10-16T22:37:44Z\", \"tool\": \"grep\", \"query\": \"relative.*[Ll]imit|[Kk]an.*[Ee]xtension|[Qq]uasicategory\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"3f982b9c93f66910\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:53-65,97-100 (evaluationJointlyReflectsLimits and combinedIsLimit), CategoryTheory/Functor/KanExtension/Basic.lean:45-78 (ordinary RightExtension and IsRightKanExtension), and AlgebraicTopology/Quasicategory/Basic.lean:34-59 (inner horn fillers). The ordinary categorical limit/Kan-extension results and the Quillen horn-fibration results do not state relative universality of quasicategorical cones or a relative exponential-corner criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Limits relative to an inner fibration of infinity categories extend coherently over a parameter simplicial set with prescribed boundary",
+   "results": "{\"t\": \"2026-10-16T22:37:44Z\", \"tool\": \"leansearch\", \"query\": \"Limits relative to an inner fibration of infinity categories extend coherently over a parameter simplicial set with prescribed boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasLimits\", \"CategoryTheory.CosimplicialObject.instHasLimits\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.LiftsToLimit\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"CategoryTheory.SimplicialObject.instHasLimits\"], \"digest\": \"adafc9a0664a491e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:53-65,97-100 (evaluationJointlyReflectsLimits and combinedIsLimit), CategoryTheory/Functor/KanExtension/Basic.lean:45-78 (ordinary RightExtension and IsRightKanExtension), and AlgebraicTopology/Quasicategory/Basic.lean:34-59 (inner horn fillers). The ordinary categorical limit/Kan-extension results and the Quillen horn-fibration results do not state relative universality of quasicategorical cones or a relative exponential-corner criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*[Ll]imit|[Ll]imit.*relative|Quasicategory",
+   "results": "{\"t\": \"2026-10-16T22:37:50Z\", \"tool\": \"grep\", \"query\": \"relative.*[Ll]imit|[Ll]imit.*relative|Quasicategory\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"Mathlib/CategoryTheory/SmallObject/Basic.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\"], \"digest\": \"303f79c5d002b4f3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:53-65,97-100 (evaluationJointlyReflectsLimits and combinedIsLimit), CategoryTheory/Functor/KanExtension/Basic.lean:45-78 (ordinary RightExtension and IsRightKanExtension), and AlgebraicTopology/Quasicategory/Basic.lean:34-59 (inner horn fillers). The ordinary categorical limit/Kan-extension results and the Quillen horn-fibration results do not state relative universality of quasicategorical cones or a relative exponential-corner criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise relative limits in a functor infinity category are limits relative to the exponential corner map with prescribed boundary values",
+   "results": "{\"t\": \"2026-10-16T22:37:50Z\", \"tool\": \"leanfinder\", \"query\": \"Pointwise relative limits in a functor infinity category are limits relative to the exponential corner map with prescribed boundary values\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.combinedIsLimit\", \"LightDiagram.isLimit\", \"LightProfinite.Extend.isLimitCone\", \"CategoryTheory.Limits.evaluationJointlyReflectsLimits\", \"CategoryTheory.CechNerveTerminalFrom.wideCospan.limitCone\", \"Profinite.Extend.isLimitCone\", \"CategoryTheory.Limits.instHasIterationOfShapeFunctor\", \"CategoryTheory.Limits.SequentialProduct.isLimit\"], \"digest\": \"9ab58cf8ee459ad5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:53-65,97-100 (evaluationJointlyReflectsLimits and combinedIsLimit), CategoryTheory/Functor/KanExtension/Basic.lean:45-78 (ordinary RightExtension and IsRightKanExtension), and AlgebraicTopology/Quasicategory/Basic.lean:34-59 (inner horn fillers). The ordinary categorical limit/Kan-extension results and the Quillen horn-fibration results do not state relative universality of quasicategorical cones or a relative exponential-corner criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction from relative right Kan extension functors of quasicategories is a trivial Kan fibration when extensions exist",
+   "results": "{\"t\": \"2026-10-16T22:38:22Z\", \"tool\": \"leansearch\", \"query\": \"Restriction from relative right Kan extension functors of quasicategories is a trivial Kan fibration when extensions exist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.ran\", \"CategoryTheory.Functor.RightExtension.precomp\", \"CategoryTheory.Functor.rightKanExtension\", \"CategoryTheory.Functor.isPointwiseRightKanExtensionOfIsRightKanExtension\", \"CategoryTheory.Functor.liftOfIsRightKanExtension\", \"CategoryTheory.Functor.hasRightExtension_iff_postcomp₁\", \"CategoryTheory.Functor.hasRightExtension_iff_of_iso₁\", \"CategoryTheory.Functor.instHasRightKanExtension\"], \"digest\": \"48443a26f58cdfa4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:53-65,97-100 (evaluationJointlyReflectsLimits and combinedIsLimit), CategoryTheory/Functor/KanExtension/Basic.lean:45-78 (ordinary RightExtension and IsRightKanExtension), and AlgebraicTopology/Quasicategory/Basic.lean:34-59 (inner horn fillers). The ordinary categorical limit/Kan-extension results and the Quillen horn-fibration results do not state relative universality of quasicategorical cones or a relative exponential-corner criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsLimit, CategoryTheory.Functor",
+   "results": "{\"t\": \"2026-10-16T22:38:23Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.IsLimit, CategoryTheory.Functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsLimit\", \"CategoryTheory.Limits.IsLimit.subsingleton\", \"CategoryTheory.Limits.IsLimit.ofRepresentableBy\", \"CategoryTheory.Limits.IsLimit.representableBy\", \"CategoryTheory.Limits.IsLimit.lift\", \"CategoryTheory.Limits.IsLimit.ofIsoLimit\", \"CategoryTheory.Limits.IsLimit.uniqueUpToIso\", \"CategoryTheory.Limits.IsLimit.equivIsoLimit\"], \"digest\": \"76eaee93322da1d1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:53-65,97-100 (evaluationJointlyReflectsLimits and combinedIsLimit), CategoryTheory/Functor/KanExtension/Basic.lean:45-78 (ordinary RightExtension and IsRightKanExtension), and AlgebraicTopology/Quasicategory/Basic.lean:34-59 (inner horn fillers). The ordinary categorical limit/Kan-extension results and the Quillen horn-fibration results do not state relative universality of quasicategorical cones or a relative exponential-corner criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from relative right Kan extension functors of quasicategories is a trivial Kan fibration when extensions exist",
+   "results": "{\"t\": \"2026-10-16T22:38:27Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction from relative right Kan extension functors of quasicategories is a trivial Kan fibration when extensions exist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isRightKanExtension\", \"SSet.Truncated.rightExtensionInclusion\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\", \"CategoryTheory.SimplicialObject.instIsRightKanExtensionOppositeTruncatedSimplexCategoryObjCoskAppTruncatedCounitCoskAdjTruncation\"], \"digest\": \"34b3a2df46c37776\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:53-65,97-100 (evaluationJointlyReflectsLimits and combinedIsLimit), CategoryTheory/Functor/KanExtension/Basic.lean:45-78 (ordinary RightExtension and IsRightKanExtension), and AlgebraicTopology/Quasicategory/Basic.lean:34-59 (inner horn fillers). The ordinary categorical limit/Kan-extension results and the Quillen horn-fibration results do not state relative universality of quasicategorical cones or a relative exponential-corner criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluationJointlyReflectsLimits|combinedIsLimit",
+   "results": "{\"t\": \"2026-10-16T22:38:39Z\", \"tool\": \"grep\", \"query\": \"evaluationJointlyReflectsLimits|combinedIsLimit\", \"sub\": \"CategoryTheory/Limits/FunctorCategory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/FunctorCategory/BinaryBiproducts.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/Shapes/Pullbacks.lean\", \"Mathlib/CategoryTheory/Limits/FunctorCategory/Shapes/Terminal.lean\"], \"digest\": \"37be6d34837b7092\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:53-65,97-100 (evaluationJointlyReflectsLimits and combinedIsLimit), CategoryTheory/Functor/KanExtension/Basic.lean:45-78 (ordinary RightExtension and IsRightKanExtension), and AlgebraicTopology/Quasicategory/Basic.lean:34-59 (inner horn fillers). The ordinary categorical limit/Kan-extension results and the Quillen horn-fibration results do not state relative universality of quasicategorical cones or a relative exponential-corner criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A levelwise relative limit cone in a quasicategory valued functor category is limiting relative to restriction and postcomposition together",
+   "results": "{\"t\": \"2026-10-16T22:38:40Z\", \"tool\": \"leansearch\", \"query\": \"A levelwise relative limit cone in a quasicategory valued functor category is limiting relative to restriction and postcomposition together\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.limit.post\", \"CategoryTheory.Over.isLimitConePost\", \"CategoryTheory.Cat.HasLimits.limitConeIsLimit\", \"CategoryTheory.Cat.HasLimits.limitCone\", \"CategoryTheory.Limits.limit.cone\", \"CategoryTheory.Limits.combineCones\", \"CategoryTheory.Limits.isLimitOfPreserves\", \"CategoryTheory.Limits.Types.limitConeIsLimit\"], \"digest\": \"cf48b0278a020c49\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:53-65,97-100 (evaluationJointlyReflectsLimits and combinedIsLimit), CategoryTheory/Functor/KanExtension/Basic.lean:45-78 (ordinary RightExtension and IsRightKanExtension), and AlgebraicTopology/Quasicategory/Basic.lean:34-59 (inner horn fillers). The ordinary categorical limit/Kan-extension results and the Quillen horn-fibration results do not state relative universality of quasicategorical cones or a relative exponential-corner criterion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-free-extension",
@@ -111,5 +239,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-right-kan-restriction",
+  "worker": "stage1",
+  "summary": "The item is the special case of the existing reviewed node lem-coef-relative-right-kan-universal-restriction (same unit) in which every diagram on A has an exact relative right Kan extension, so that node's T is the whole fiber Fun_{sj}(A,D) and its R is K. Step 1 checks the quasicategories, step 2 specializes that node to obtain the trivial Kan fibration, step 3 derives the categorical equivalence and mapping-space equivalences. The worker's direct boundary-lifting proof and its new exponential-corner child were replaced by this citation at maintainer review (the child is dropped as unneeded). No statement change, no completeness assumption, no SGA.",
+  "blueprint": "Proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim: operadic free-algebra input, specifically the coherent classification of inert algebras by their color diagrams. The steps (through the cited universal-restriction node) supply the coherent transformations and higher simplices in that classification; current main-20261015 ancestor statement is unchanged, and its historical master proof paragraph 2 records the mapping-complex use."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NL-1b1f0644e",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-1b1f0644e (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item statement is unchanged and correct. All eight delivered steps are mathematically valid against the cited statements. I checked them as follows. Step 1: strict fibers of an inner fibration are quasicategories, and fullness gives the subcategory K. Steps 3-4: r_n v = uj holds exactly, t_c-finality of H_n l_c, and the final-vertex boundary filler for n>0. Step 5: a simplex outside the boundary is vertex-surjective with last vertex n. The new child is the correct opposite dual of Kerodon 02XK. I opened that page online: it is stated for a functor F, a simplicial subset A of B, and evaluation at sigma(0), with an F'-colimit conclusion. I tested the child on T=Delta^1 with P empty, the endpoints, or P=T. Steps 6-8 check against relative-kan-existence, 08NM and the Joyal nodes. Edge cases A empty, A=C, C empty and n=1 hold. Fault (C5, existing generalization): the snapshot DAG already contains lem-coef-relative-right-kan-universal-restriction, a reviewed split node in the same unit; its own reviewer noted that the item is a special case of it. It proves that R -> T is a trivial Kan fibration. Here R = K, and under the item's existence hypothesis T is the whole fiber Fun_sj(A,D): the cone H l_c restricts to h a_c and lies over s l_c. That node's dependency closure (376 nodes) does not contain the item, so there is no cycle. Fix: the item's proof now has three steps. Step 1 is the delivered step 1 with the fullness argument written out. Step 2 specializes universal-restriction and cites def-weil-pbc-trivial-kan-fibration for the r=0 clause. Step 3 is the delivered step 8, giving the categorical and mapping-space equivalences. proof_deps, proof_origin and split_report are updated. The child corner-limits node is now unused and is dropped; no other file cites it. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus (steps 1 and 3). No SGA source is used.; 1 file(s) fixed by the reviewer"
  }
 }
