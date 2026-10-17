@@ -15752,3 +15752,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:30 L: merged deliver/M2/Sheaf.AlgebraicGeometry.IdealPowerEvaluationAffineEventuallyZero (stage 3; reviewer PASS; after a return; landing 20261017T013051-L-4173817 (proof); batch 20261017T013048; modules 1; new nodes 0)
 
 - 09:35 L: batch 20261017T013048 dependency take-out
+- 01:37 L: returned deliver/A4/WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible (reviewer RETURN: (the landing tools, head 1de5b4ee2) the delivery did not land: lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/De)
