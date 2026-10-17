@@ -12,6 +12,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import Sheaf.AlgebraicGeometry.PadicIntegersBoundedTriangulated
 
 import Sheaf.Paper.ContinuousIntegralScalarExact
 import Sheaf.AlgebraicGeometry.BoundedConstructibleExtendScalars

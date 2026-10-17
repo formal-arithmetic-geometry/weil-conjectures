@@ -172,16 +172,5 @@ instance (priority := 2000) isTriangulated_boundedConstructible_of_serre
     DerivedCategory.homologyProperty (IsConstructibleModuleObject R)).IsTriangulated
   infer_instance
 
-/- STATEMENT-DISPUTED: noetherianity of X alone does not imply this for arbitrary R.
-The square-zero coefficient ring k ⊕ V with V infinite dimensional has a map between
-rank-one free modules whose kernel is V and is not finitely generated. The signature is
-retained verbatim; the valid closure-dependent theorem above is fully proved. The integral
-p-adic specialization is in Sheaf.AlgebraicGeometry.PadicIntegersBoundedTriangulated. -/
-/-- The bounded constructible complexes on a topologically noetherian scheme form a triangulated
-subcategory. -/
-instance isTriangulated_boundedConstructible [TopologicalSpace.NoetherianSpace X] :
-    (boundedConstructible R).IsTriangulated :=
-  sorry
-
 
 end AlgebraicGeometry.ProEtale
