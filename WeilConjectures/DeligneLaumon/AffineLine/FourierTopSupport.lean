@@ -166,7 +166,7 @@ theorem mor₂_ne_zero_of_mem_support {V : Scheme.{u}} [V.Over (Spec (CommRingCa
     (hT : Triangle.mk α β γ ∈ distTriang _) : β ≠ 0 := by
   intro hβ
   obtain ⟨r, hr⟩ := Triangle.coyoneda_exact₂ _ hT (𝟙 _) (by simp [hβ])
-  obtain ⟨eId⟩ := nonempty_derivedLowerShriekIdIso (k₀ := k₀) (l := l) (affineLine k₀)
+  obtain ⟨eId⟩ := nonempty_iso_derivedLowerShriek_id (k₀ := k₀) (l := l) (X := affineLine k₀)
   obtain ⟨eZ⟩ := nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion (l := l) j
     ((WeilSheaf.upperStar j).obj G)
   let H0 := homologySheaf (k₀ := k₀) (l := l) (X := affineLine k₀) 0
@@ -322,8 +322,8 @@ theorem exists_isNegCoordOver_ne_zero_of_mem_support (ψ : AddChar k₀ (PadicAl
   obtain ⟨α, β, γ, hT₀⟩ := WeilComplex.exists_distTriang_derivedLowerShriek_openClosed_comp V.ι
     i hi (𝟙 _) V.ι i (Category.comp_id _) (Category.comp_id _) KG
   have hβ := WeilComplex.mor₂_ne_zero_of_mem_support V.ι G x hx hxj α β γ hT₀
-  obtain ⟨eId⟩ := WeilComplex.nonempty_derivedLowerShriekIdIso (k₀ := k₀) (l := l)
-    (affineLine k₀)
+  obtain ⟨eId⟩ := WeilComplex.nonempty_iso_derivedLowerShriek_id (k₀ := k₀) (l := l)
+    (X := affineLine k₀)
   have hC : C.obj.IsGE 0 := WeilComplex.isGE_derivedLowerShriek_obj i
     (WeilComplex.isGE_upperStar_obj i (WeilComplex.isGE_toComplex_obj G))
   have hφ := WeilComplex.mor₂_comp_shift_map_ne_zero f g h hT (m + 1) (by simpa using hF₁) hC eG

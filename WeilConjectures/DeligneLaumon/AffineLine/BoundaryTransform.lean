@@ -9,6 +9,8 @@ public import WeilConjectures.DeligneLaumon.AffineLine.BoundaryWeights
 public import WeilConjectures.WeilSheaf.CurveEndpoints
 public import WeilConjectures.WeilSheaf.FiniteEtale
 public import WeilConjectures.WeilSheaf.HomologyShift
+public import WeilConjectures.WeilSheaf.FourierInversion.OtherSections
+public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
 public import WeilConjectures.WeilSheaf.LowerShriekPackage
 
 /-!
@@ -137,12 +139,15 @@ theorem nonempty_iso_fourierTransform_derivedLowerShriek_of_isPullback
     inferInstanceAs (QuasiSeparated (affinePlane.fst k₀ ≫ _))
   set K := (derivedLowerShriek k₀ l i).obj (WeilSheaf.toComplex.obj E)
   -- Step 2: base change, the projection formula and composition
-  obtain ⟨e₂⟩ := nonempty_upperStarDerivedLowerShriekIso_of_isPullback hP
-    (WeilSheaf.toComplex.obj E)
-  obtain ⟨e₃⟩ := nonempty_tensorLisseDerivedLowerShriekIso i' (fourierKernel ψ)
-    (isLisse_fourierKernel ψ) ((WeilComplex.upperStar q).obj (WeilSheaf.toComplex.obj E))
-  obtain ⟨eC⟩ := nonempty_derivedLowerShriekCompIso (k₀ := k₀) (l := l) i'
-    (affinePlane.snd k₀) π hπ
+  obtain ⟨eBC⟩ := nonempty_upperStar_derivedLowerShriek_iso (k₀ := k₀) (l := l) hP
+  let e₂ := eBC.app (WeilSheaf.toComplex.obj E)
+  obtain ⟨PF⟩ := nonempty_iso_derivedLowerShriek_tensorLisse (l := l) i' (fourierKernel ψ)
+    (isLisse_fourierKernel ψ)
+  let e₃ := PF.app ((WeilComplex.upperStar q).obj (WeilSheaf.toComplex.obj E))
+  obtain ⟨eC⟩ : Nonempty (derivedLowerShriek k₀ l π ≅
+      derivedLowerShriek k₀ l i' ⋙ derivedLowerShriek k₀ l (affinePlane.snd k₀)) := by
+    subst hπ
+    exact nonempty_derivedLowerShriek_comp_iso i' (affinePlane.snd k₀)
   let L : WeilSheaf k₀ l X' := (WeilSheaf.upperStar i').obj (fourierKernel ψ)
   have hL : L.IsLisse := ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_fourierKernel ψ)
   let E' : WeilSheaf k₀ l X' := (WeilSheaf.upperStar q).obj E
@@ -163,8 +168,7 @@ theorem nonempty_iso_fourierTransform_derivedLowerShriek_of_isPullback
     isZero_homologySheaf_derivedLowerShriek_toComplex_of_neg π G hr
   have hpos (r : ℕ) (hr : 0 < r) : IsZero ((homologySheaf r).obj Kπ) :=
     isZero_higherLowerShriek_of_quasiFinite π r hr G
-  obtain ⟨eP⟩ := nonempty_derivedLowerShriekIsoDerivedLowerStar (l := l) π
-    (WeilSheaf.toComplex.obj G)
+  let eP := derivedLowerShriekObjIsoDerivedLowerStar π (WeilSheaf.toComplex.obj G)
   let e₀ : (homologySheaf 0).obj Kπ ≅ (WeilSheaf.lowerStar π).obj G :=
     (homologySheaf 0).mapIso eP ≪≫ homologySheafZeroDerivedLowerStarIso π G
   have hFT (a : ℤ) (ha : a ≠ -1) :
@@ -220,7 +224,7 @@ theorem nonempty_iso_fourierTransform_toComplex_of_isPullback
     (derivedLowerShriek k₀ l j).map_isZero
       ((WeilSheaf.toComplex.map_isZero hF).of_iso ((toComplexCompUpperStarIso j).app F))
   have : IsIso β := (Triangle.isZero₁_iff_isIso₂ _ hT).1 h₁
-  obtain ⟨eId⟩ := nonempty_derivedLowerShriekIdIso (k₀ := k₀) (l := l) (affineLine k₀)
+  obtain ⟨eId⟩ := nonempty_iso_derivedLowerShriek_id (k₀ := k₀) (l := l) (X := affineLine k₀)
   let e₁ : K ≅ (derivedLowerShriek k₀ l i).obj ((WeilComplex.upperStar i).obj K) :=
     (eId.app K).symm ≪≫ asIso β
   exact ⟨(fourierTransform ψ).mapIso (e₁ ≪≫ (derivedLowerShriek k₀ l i).mapIso
