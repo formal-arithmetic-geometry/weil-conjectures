@@ -11,9 +11,65 @@
   "def-weil-regular-scheme",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-regular-local-ufd-boundary-factorization] with the empty parameter sublist ($r=0$ in that lemma). It says in particular that $A$ is a nonzero Noetherian integral domain and a UFD. The ideal $J$ is nonzero: if $J=0$, every $g_i=0$, so $0$ divides every $g_i$; the hypothesis would make $0$ a unit, contrary to $A\\ne0$. This also excludes an empty list of generators. If $J=A$ we have the first alternative; assume henceforth that $J\\ne A$.",
+   "uses": [
+    "lem-trf-regular-local-ufd-boundary-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C48, lemma-reduced-quotient-regular-ring-dim-2, proof lines 3829–3837."
+   }
+  },
+  {
+   "text": "In a local ring the elements outside $\\mathfrak n$ are units. Thus any proper ideal, in particular $J$ and any prime $\\mathfrak p$ containing $J$, is contained in $\\mathfrak n$: an element outside $\\mathfrak n$ in such an ideal would put $1$ in it. For any such prime, $\\mathfrak p\\ne0$ since $J\\ne0$. Suppose $\\mathfrak p\\ne\\mathfrak n$. If a prime $\\mathfrak q$ satisfied $0\\subsetneq\\mathfrak q\\subsetneq\\mathfrak p$, then $0\\subsetneq\\mathfrak q\\subsetneq\\mathfrak p\\subsetneq\\mathfrak n$ would be a prime chain of length $3$, contradicting $\\dim A=2$ by [def-weil-pbc-krull-dimension-ring]. Here $0$ is prime because $A$ is a domain, and $\\mathfrak n$ is prime because it is maximal. Consequently $\\mathfrak p$ has height one: it is nonzero and no prime lies strictly between $0$ and $\\mathfrak p$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C48, lemma-reduced-quotient-regular-ring-dim-2, proof lines 3829–3837."
+   }
+  },
+  {
+   "text": "For the hypothetical nonmaximal prime $\\mathfrak p$ in Step 2, apply the implication (i)$\\Rightarrow$(ii) of [lem-trf-ufd-height-one]. Its hypotheses hold because Step 1 gives a Noetherian UFD domain. Hence $\\mathfrak p=(a)$ for some $a\\in A$. Since $J\\subseteq\\mathfrak p$, each $g_i$ is a multiple of $a$, so the divisor hypothesis makes $a$ a unit. This gives $\\mathfrak p=A$, contradicting the properness of a prime ideal. Thus every prime containing $J$ is $\\mathfrak n$.",
+   "uses": [
+    "lem-trf-ufd-height-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C48, lemma-reduced-quotient-regular-ring-dim-2, proof lines 3829–3837."
+   }
+  },
+  {
+   "text": "We have $J\\subseteq\\mathfrak n$ by Step 2, so $\\mathfrak n$ itself is a prime containing $J$; Step 3 shows it is the only one. The radical/intersection formula in [lem-weil-pbc-zero-locus-eq-iff-radical-eq] therefore gives $\\sqrt J=\\bigcap_{\\mathfrak p\\supseteq J}\\mathfrak p=\\mathfrak n$. This is the second alternative, completing the dichotomy.",
+   "uses": [
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C48, lemma-reduced-quotient-regular-ring-dim-2, proof lines 3829–3837."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-trf-ufd-height-one",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C48, lemma-reduced-quotient-regular-ring-dim-2, proof lines 3829–3837."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +98,52 @@
    "results": "Ideal.uniqueFactorizationMonoid and Ideal.isCoprime_iff_gcd, plus dimension-zero maximality results; none states the requested regular-local surface dichotomy.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coprime|IsRelPrime|height_eq_one|height_le_one",
+   "results": "25 hits: Mathlib/RingTheory/Spectrum/Prime/LTSeries.lean, Mathlib/RingTheory/EuclideanDomain.lean, Mathlib/RingTheory/EuclideanDomain.lean, Mathlib/RingTheory/EuclideanDomain.lean, Mathlib/RingTheory/EuclideanDomain.lean, Mathlib/RingTheory/EuclideanDomain.lean, Mathlib/RingTheory/Spectrum/Maximal/Basic.lean, Mathlib/RingTheory/Spectrum/Maximal/Basic.lean. ",
+   "date": "2026-10-18",
+   "verdict": "no match: dimension-zero local-ring radical theorem and Dedekind-domain statements do not prove the dimension-two UFD assertion; the height criterion alone also does not supply the divisor argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ideal in a local UFD of Krull dimension two with no common nonunit divisor of its generators has maximal radical unless it is the whole ring",
+   "results": "8 hits: Ideal.isLocal_of_isMaximal_radical, Ideal.primeHeight_eq_ringKrullDim_iff, instIsMaximalOfIsPrimeOfKrullDimLEOfNatNat, Ideal.IsLocal.out, Ring.DimensionLEOne.maximalOfPrime, Ideal.isMaximal_iff_isPrime, Ring.KrullDimLE.radical_eq_maximalIdeal, IsLocalRing.jacobson_eq_maximalIdeal. ",
+   "date": "2026-10-18",
+   "verdict": "no match: dimension-zero local-ring radical theorem and Dedekind-domain statements do not prove the dimension-two UFD assertion; the height criterion alone also does not supply the divisor argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, Ideal.radical",
+   "results": "0 hits: . ",
+   "date": "2026-10-18",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a two dimensional local unique factorization domain an ideal whose finite generators have no common nonunit divisor is the unit ideal or has radical the maximal ideal",
+   "results": "8 hits: Ideal.uniqueFactorizationMonoid, Ideal.isPrime_iff_bot_or_prime, Ideal.Factors.isPrime, IsDedekindDomain.exists_eq_span_pair, exists_multiset_prod_cons_le_and_prod_not_le, IsDedekindDomain.HeightOneSpectrum.irreducible, IsDedekindRing.toDimensionLEOne, IsPrincipalIdealRing.of_finite_primes. ",
+   "date": "2026-10-18",
+   "verdict": "no match: dimension-zero local-ring radical theorem and Dedekind-domain statements do not prove the dimension-two UFD assertion; the height criterion alone also does not supply the divisor argument."
+  },
+  {
+   "tool": "grep",
+   "query": "radical_eq_maximalIdeal|primeHeight_eq_ringKrullDim_iff|iff_exists_prime_mem_of_isPrime",
+   "results": "9 hits: Mathlib/RingTheory/Ideal/UFD.lean, Mathlib/RingTheory/Ideal/Height.lean, Mathlib/RingTheory/PowerSeries/Ideal.lean, Mathlib/RingTheory/UniqueFactorizationDomain/Kaplansky.lean, Mathlib/RingTheory/UniqueFactorizationDomain/Kaplansky.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/KrullDimension/Zero.lean, Mathlib/RingTheory/KrullDimension/Zero.lean. ",
+   "date": "2026-10-18",
+   "verdict": "no match: dimension-zero local-ring radical theorem and Dedekind-domain statements do not prove the dimension-two UFD assertion; the height criterion alone also does not supply the divisor argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a local factorial domain of dimension two a proper ideal not contained in any principal prime ideal has maximal radical",
+   "results": "8 hits: Ideal.isPrimary_of_isMaximal_radical, Ring.KrullDimLE.radical_eq_maximalIdeal, Ideal.isLocal_of_isMaximal_radical, ringKrullDim_eq_one_iff_of_isLocalRing_isDomain, IsDedekindDomain.HeightOneSpectrum.isMaximal, IsDedekindRing.toDimensionLEOne, Ring.DimensionLEOne.maximalOfPrime, Ideal.IsPrime.isMaximal. ",
+   "date": "2026-10-18",
+   "verdict": "no match: dimension-zero local-ring radical theorem and Dedekind-domain statements do not prove the dimension-two UFD assertion; the height criterion alone also does not supply the divisor argument."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-regular-surface-depth-one-principal",
@@ -73,5 +171,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-coprime-generators-mprimary-or-unit",
+  "worker": "stage1",
+  "summary": "Expanded the gcd/height-one paragraph of Curves Tag 0C48 into four steps using only existing DAG nodes: regular-local UFD, elementary prime-chain argument in dimension two, height-one principality, and the radical/intersection formula. Explicitly ruled out J=0 including the empty generator list. Kept the statement and provenance unchanged; no new nodes.",
+  "blueprint": "Realizes the inherited Tag 0C48 principal-kernel subargument below lem-trf-local-term-locality: coprime residual generators have no height-one prime over them, so their proper ideal has singleton prime vanishing locus and maximal radical. The current blueprint ancestor proof concerns contraction; this algebra subargument is in its existing descendant route, not a replacement of the unit argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-eb4e3007a",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-eb4e3007a (reviewer sub-agent of L); spot-checked: I read the item, the source and every cited node in full. Source: Stacks curves.tex lines 3816–3849, lemma-reduced-quotient-regular-ring-dim-2; tags/tags line 15218 confirms it is Tag 0C48. The item states exactly the first paragraph of that proof: a regular local ring of dimension 2, generators whose only common divisors are units, and the conclusion J=A or sqrt J = n. It is not weakened and is unchanged from the base. Step 1 uses only the statement of lem-trf-regular-local-ufd-boundary-factorization with the empty sublist (r=0 is allowed); that statement gives a Noetherian UFD domain. The step also shows J is nonzero: an empty or all-zero list would make 0 a common divisor, hence a unit, which is impossible. Step 2 is genuinely elementary: a nonmaximal prime above J with a nonzero prime strictly below it would give a chain 0<q<p<n of length 3, contradicting the definition of dimension in def-weil-pbc-krull-dimension-ring; so the prime has height one in exactly the sense used by lem-trf-ufd-height-one. Step 3 applies the (i)=>(ii) direction of lem-trf-ufd-height-one (a Mathlib leaf, Stacks 0AFT); its Noetherian-domain hypotheses come from Step 1. The prime is then principal, its generator is a unit, and that is a contradiction. Step 4 applies lem-weil-pbc-zero-locus-eq-iff-radical-eq (a Mathlib leaf, Stacks 00E0(7)) to V(J)={n} to get sqrt J = n. proof_deps equals the union of the steps' uses. Route: the two statement citations are in the unit sk-i-curve-zero; the off-unit citations are two definition nodes and one Mathlib leaf. No tool_uses are needed and none were accepted; there is no SGA citation. The item's dependency closure (135 nodes) does not contain the item, so there is no cycle. The only citer, lem-trf-regular-surface-depth-one-principal, uses both alternatives consistently with the statement. A whole-DAG search for 0C48 and its label, 'height one prime', gcd and 'common divisor' found no duplicate or generalization. There are no new nodes. Small cases in k[[x,y]]: (x,y) and (x^2,y^2) have radical n, (x,1+y) is A, (x^2,xy) and a single nonunit break the hypothesis, and in dimension 3 the ideal (x,y) shows the dimension-2 hypothesis is needed. No fixes were made."
  }
 }
