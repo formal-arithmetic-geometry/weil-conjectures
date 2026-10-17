@@ -1,0 +1,123 @@
+{
+ "id": "new-integral-residue-tensor-route-calculation",
+ "kind": "statement",
+ "title": "Generic canonical tensor-route calculation and ordinary pullback braiding",
+ "statement": "For additive exact strong monoidal flat-preserving F between the monoidal Grothendieck abelian categories with functorial flat resolutions, assuming ordinary braiding compatibility, the canonical counit-normalized derived tensor presentation computes the explicit tensorModelMap for every homotopy complex, without flatness of the fixed coefficient or of that complex. Ordinary inverse image of the internal modules has the required braiding compatibility. The precise hypotheses are the two attached Lean signatures.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Remark 6.8.15; canonical tensor counit and balanced tensor presentations"
+ },
+ "stmt_deps": [
+  "new-integral-residue-tensor-model",
+  "new-integral-residue-tensor-presentation",
+  "new-integral-residue-ordinary-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Normalize the canonical tensor presentation using the left-derived counit identities. Move the single coefficient comparison by naturality; apply the derived tensor-comparison counit equation. Use homotopy braiding compatibility, cancel inverse braidings, and apply exact-functor counit naturality. Ordinary pullback braiding is checked on balanced tensor epimorphisms and transported along the coefficient isomorphism.",
+   "uses": [
+    "new-integral-residue-tensor-model",
+    "new-integral-residue-tensor-presentation",
+    "new-integral-residue-ordinary-monoidal",
+    "new-homotopy-functor-braiding"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-tensor-model",
+  "new-integral-residue-tensor-presentation",
+  "new-integral-residue-ordinary-monoidal",
+  "new-homotopy-functor-braiding"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Remark 6.8.15; canonical tensor counit and balanced tensor presentations",
+  "note": "A4: complete generic calculation; concrete interface specialization remains open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive braided monoidal functor induces a braiding compatible tensor comparison on homotopy categories of cochain complexes",
+   "date": "2026-10-17",
+   "results": "8 hits: CategoryTheory.Functor.Braided.toMonoidal, CategoryTheory.Functor.Braided, CategoryTheory.Functor.Braided.mk, CategoryTheory.Functor.LaxBraided.toLaxMonoidal, CategoryTheory.BraidedCategory.ofFaithful, CategoryTheory.BraidedCategory.ofFullyFaithful, CategoryTheory.Functor.mapHomotopyCategory, CategoryTheory.Monoidal.functorCategoryBraided",
+   "verdict": "Mathlib supplies the functor on homotopy categories but not this tensor-braiding identity. Reuse the existing proved source-library comparison without alteration."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomotopyCategory",
+   "date": "2026-10-17",
+   "results": "12 hits: CategoryTheory.Functor.mapHomotopyCategory, CategoryTheory.instAdditiveHomotopyCategoryMapHomotopyCategory, CategoryTheory.instFaithfulHomotopyCategoryMapHomotopyCategoryOfFull, CategoryTheory.instFullHomotopyCategoryMapHomotopyCategoryOfFaithful, CategoryTheory.instLinearHomotopyCategoryMapHomotopyCategory, CategoryTheory.NatIso.mapHomotopyCategory, CategoryTheory.NatTrans.mapHomotopyCategory, CategoryTheory.Functor.mapHomotopyCategoryCompIso",
+   "verdict": "Mathlib supplies the functor on homotopy categories but not this tensor-braiding identity. Reuse the existing proved source-library comparison without alteration."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyCategory.*braid|mapHomologicalComplex.*braid",
+   "date": "2026-10-17",
+   "results": "0 hits: ",
+   "verdict": "Mathlib supplies the functor on homotopy categories but not this tensor-braiding identity. Reuse the existing proved source-library comparison without alteration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueTensorRouteModel",
+  "date": "2026-10-17",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Tensor-route compatibility in the integral residue coefficient comparison: ordinary braiding compatibility descends to homotopy complexes.",
+   "via": [
+    "new-integral-residue-tensor-route-model",
+    "new-integral-residue-tensor-geometry",
+    "new-integral-residue-projection-normalization",
+    "lem-weil-pbc-integral-residue-comparisons",
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueTensorRouteModel",
+  "file": "lean/Sheaf/Paper/IntegralResidueTensorRouteModel.lean",
+  "declaration": "CategoryTheory.residueTensorRoute_generic",
+  "declarations": [
+   "CategoryTheory.residueTensorRoute_generic",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueOrdinaryPullBraid"
+  ],
+  "statement": "theorem residueTensorRoute_generic (F : C ⥤ D) [F.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F] [F.IsLeftAdjoint]\n    [F.Monoidal] [F.PreservesFlat]\n    (hF : ∀ K L : C, F.map (β_ K L).hom ≫ Functor.OplaxMonoidal.δ F L K =\n      Functor.OplaxMonoidal.δ F K L ≫ (β_ (F.obj K) (F.obj L)).hom)\n    (B : C) (H : DerivedCategory C ⥤ DerivedCategory C)\n    (ε : DerivedCategory.Qh ⋙ H ⟶\n      (tensorLeft B).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    [H.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso C (.up ℤ))]\n    (P : HomotopyCategory C (.up ℤ)) :\n    F.leftDerivedFunctor.map\n        ((derivedTensorPresentationIso B H ε).hom.app (DerivedCategory.Qh.obj P)) ≫\n      (F.leftDerivedTensorComparison.app (DerivedCategory.Qh.obj P)).app\n        ((DerivedCategory.singleFunctor C 0).obj B) ≫\n      Functor.tensorModelTarget F B P = Functor.tensorModelMap F B H ε P",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261017T144415-L-4152973",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261017T144415-L-4152973",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
