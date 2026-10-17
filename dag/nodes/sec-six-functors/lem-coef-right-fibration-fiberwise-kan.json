@@ -6,10 +6,129 @@
   "def-coef-infinity-fibrations",
   "lem-coef-infinity-right-fibration-fibers"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "status": "unsplit",
+ "proof": [
+  {
+   "text": "Put $S=B^{\\mathrm{op}}$, $T=E^{\\mathrm{op}}$, and $u=p^{\\mathrm{op}}:T\\to S$. Opposite simplicial sets reverse the ordered vertices, as specified in [lem-coef-simplicial-right-fibration-presentation]. Thus a right-horn lifting problem for $p$ becomes a left-horn problem for $u$: the index $i$ becomes $n-i$. In particular $u$ is a left fibration, with no restriction on empty fibers. The strict fibers of $p$ are Kan by [lem-coef-infinity-right-fibration-fibers]. Write $\\mathsf{RFib}(K)$ for the simplicial category of small right fibrations over $K$, with mapping complexes $\\operatorname{Fun}_{/K}$. By [lem-coef-cone-straightening-coherent-evaluation], there is an equivalence $\\Phi_K:N_{\\mathrm{hc}}\\mathsf{RFib}(K)\\simeq\\operatorname{Fun}(K^{\\mathrm{op}},\\mathcal S_{\\mathcal U})$, natural under base pullback and compatible with evaluation on fibers. Apply it with $K=T$ and choose $q:Y\\to T$ with $\\Phi_T(q)\\simeq G$. All total simplicial sets here are $\\mathcal U$-small; the categories of such objects are formed in a containing universe.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-right-fibration-fibers",
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-cone-straightening-coherent-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.1 and Proposition 2.2.3.11; the coherent-evaluation compatibility is the cited DAG theorem. Opposite horn calculation written explicitly."
+   }
+  },
+  {
+   "text": "Define a simplicial set $R$ over $S$ directly. Its $n$-simplices over $\\sigma:\\Delta^n\\to S$ are simplicial maps $h:T\\times_S\\Delta^n\\to Y$ over $T$. An operator $\\alpha:[m]\\to[n]$ sends $(\\sigma,h)$ to $(\\sigma\\alpha,h\\circ(\\mathrm{id}_T\\times\\Delta(\\alpha)))$. The identity and composition equations follow from those for precomposition, so this defines $r:R\\to S$. For any simplicial set $A\\to S$, currying gives an isomorphism\n$$\\operatorname{Fun}_{/S}(A,R)\\cong\\operatorname{Fun}_{/T}(A\\times_ST,Y).$$\nIn degree $m$, a map $A\\times\\Delta^m\\to R$ evaluates to a map $(A\\times_ST)\\times\\Delta^m\\to Y$; conversely restrict such a map along each simplex $\\Delta^n\\to A\\times\\Delta^m$. These operations are inverse and commute with all operators. Hence $R=\\Pi_uY$ is defined without choosing limits. Mapping sets, products and pullbacks use [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Section 4.4, the ordinary pullback/right-adjoint construction; its simplexwise data and currying are written here in full."
+   }
+  },
+  {
+   "text": "To fill a right horn $\\Lambda_i^n\\to R$ over $\\sigma:\\Delta^n\\to S$, curry its data as in the preceding step. The problem becomes extension of a map $T\\times_S\\Lambda_i^n\\to Y$ over $T$ across $T\\times_S\\Lambda_i^n\\hookrightarrow T\\times_S\\Delta^n$. The map $T\\times_S\\Delta^n\\to\\Delta^n$ is a left fibration, since its left-horn problems are the corresponding problems for $u$. By [lem-coef-left-fibration-right-anodyne-base-change], the displayed inclusion is right anodyne. A right fibration lifts against every such map: the class of maps with the left lifting property against $q$ contains the generating right horns and isomorphisms and is closed under pushouts, transfinite compositions and retracts, exactly the operations in [def-coef-infinity-right-anodyne]. Thus $q$ gives the extension and currying gives the required horn filler. This proves that $r$ is a right fibration, including the $n=1$ horns. Since $S$ is a quasicategory, an inner horn in $R$ is filled by first filling its image in $S$ and then using the inner-fibration part of $r$; hence $R$ is also a quasicategory.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-coef-infinity-right-anodyne",
+    "lem-coef-left-fibration-right-anodyne-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 4.4.11 and Proposition 4.4.4(iv); the dependent-product horn argument is written by the second reader from these lifting statements."
+   }
+  },
+  {
+   "text": "Pullback $u^*$ preserves right fibrations by the same lifting-square argument. The preceding construction is a simplicial functor $\\Pi_u:\\mathsf{RFib}(T)\\to\\mathsf{RFib}(S)$: a parameterized map $v:Y\\times\\Delta^m\\to Y'$ over $T$ sends $(h,t)$ to $v\\circ(h,t)$. It respects composition and identities by evaluation. Currying therefore restricts to an enriched adjunction\n$$\\operatorname{Fun}_{/S}(A,\\Pi_uY)\\cong\\operatorname{Fun}_{/T}(u^*A,Y)$$\nfor every right fibration $A\\to S$. Its counit $u^*\\Pi_uY\\to Y$ evaluates a section at its argument. Both mapping complexes are Kan by [lem-coef-simplicial-right-fibration-presentation]. The isomorphism is composition with this evaluation after pullback, since a map $a:A\\to\\Pi_uY$ evaluates as $(x,t)\\mapsto a(x)(t)$; the inverse sends a map $v$ to the section $t\\mapsto v(x,t)$. These equalities hold with the additional $\\Delta^m$ coordinate, so also for transformations and higher parameters.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Section 4.4 pullback/right-adjoint construction; explicit enriched currying and evaluation, with Kan mapping complexes from the cited presentation theorem."
+   }
+  },
+  {
+   "text": "The enriched adjunction gives an equivalence on the whole coherent-nerve mapping spaces, not only their components. Here is the comparison explicitly. For a locally Kan simplicial category $\\mathcal A$, an $n$-simplex of $\\operatorname{Map}^R_{N_{\\mathrm{hc}}\\mathcal A}(a,b)$ is an enriched functor $\\mathfrak C[J^n]\\to\\mathcal A$ with the entire initial face constant at $a$. Its only nonidentity datum is a map $Q^n\\to\\mathcal A(a,b)$, so this mapping space is $\\operatorname{Sing}_Q\\mathcal A(a,b)$. The maps $p_{\\operatorname{Sing}_Q M}$ and $e_M$ of [lem-coef-pinched-rigidification-resolution] give a natural weak-equivalence span\n$$\\operatorname{Sing}_Q M\\ \\leftarrow\\ |\\operatorname{Sing}_Q M|_Q\\ \\to M$$\nfor Kan $M$. Apply this to the two Kan mapping complexes in the enriched adjunction. Their isomorphism, the comparison span and its degree-zero evaluations are natural, so the resulting equivalence of coherent mapping spaces is the one induced by the evaluation counit. The coherent nerves are quasicategories by [lem-coef-kan-coherent-nerve-quasicategory].",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-kan-coherent-nerve-quasicategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2, Corollary 2.2.2.10 and Section 2.2.4; explicit right-pinched mapping-space comparison."
+   }
+  },
+  {
+   "text": "Set $L=\\Phi_S(r):B\\to\\mathcal S_{\\mathcal U}$. Naturality of $\\Phi$ under base pullback identifies $\\Phi_T(u^*r)$ with $Lp$; the evaluation counit therefore gives $\\eta:Lp\\to G$. At $b\\in B$, the defining formula for $R$ identifies its strict fiber with\n$$R_b=\\operatorname{Fun}_{/E_b^{\\mathrm{op}}}(E_b^{\\mathrm{op}},Y|_{E_b^{\\mathrm{op}}}).$$\nBy [lem-coef-right-fibration-section-limit] this section space, with its evaluation cone, is the limit of the fiber-transport functor on $(E_b^{\\mathrm{op}})^{\\mathrm{op}}=E_b$. By [lem-coef-cone-straightening-coherent-evaluation], that whole transport functor is equivalent to $G_b$, since $\\Phi$ commutes with restriction and identifies right-fibration transport with coherent evaluation. The same comparison identifies $L(b)$ with $R_b$ and the fiber restriction of $\\eta$ with this evaluation cone. Hence it is a limiting cone on precisely $G_b$. This checks the specified counit, not merely the equivalence class of the limit object.",
+   "uses": [
+    "lem-coef-cone-straightening-coherent-evaluation",
+    "lem-coef-right-fibration-section-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 3.3.3.4, opposite form, and Remark 3.3.3.5; coherent-evaluation and base-pullback compatibility from the cited DAG theorem."
+   }
+  },
+  {
+   "text": "For any $F:B\\to\\mathcal S_{\\mathcal U}$, use $\\Phi_S$ to represent it by $A\\to S$. Base-pullback compatibility represents $Fp$ by $u^*A$. Apply the mapping-space equivalence of Step 5 and the functor equivalences $\\Phi_S,\\Phi_T$ to obtain\n$$\\operatorname{Map}_{\\operatorname{Fun}(B,\\mathcal S_{\\mathcal U})}(F,L)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(E,\\mathcal S_{\\mathcal U})}(Fp,G).$$\nFunctor equivalences induce mapping-space equivalences by [lem-cbc-enhanced-functor-cone-calculus]. By the explicit counit calculation in Steps 4-6, the displayed map is composition with $\\eta$. The simplicial functor $\\Pi_u$, conjugated by $\\Phi_S$ and a coherent inverse of $\\Phi_T$, supplies $\\operatorname{Ran}_p$ as a coherent functor on all $G$. Currying and evaluation commute with maps in $A,Y$ and all parameter operators; the comparison spans and $\\Phi$ are coherent natural comparisons. Thus the equivalence is natural in $F,G$ and retains every higher parameter simplex, as required.",
+   "uses": [
+    "lem-coef-cone-straightening-coherent-evaluation",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0309",
+    "place": "Dual universal mapping-space conclusion; here deduced from the explicit enriched adjunction rather than the relative-join existence route."
+   }
+  },
+  {
+   "text": "If $E_b=\\varnothing$, the section formula has exactly one simplex in every degree, so $R_b=\\Delta^0$ and the cone of Step 6 is the terminal empty-diagram cone. If $E=\\varnothing$, the defining formula gives $R=S$, the terminal right fibration, and $L$ is terminal-valued. If $B=\\varnothing$, then $E=\\varnothing$ and both diagram categories have the unique empty diagram. If $p$ is the identity, the same formula gives $\\Pi_uY=Y$ and the evaluation counit is the identity. In general every degree of $R$ is a union, indexed by the small set $S_n$, of sets of maps between $\\mathcal U$-small simplicial sets. It is therefore still $\\mathcal U$-small. Only the categories of all such objects require a containing universe. No nonemptiness or extra completeness hypothesis was introduced; the construction in fact supplies the required fiber limits in spaces.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-category-of-spaces"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Size convention of Definition 1.2.16.1; empty and identity cases computed directly from the section formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-right-anodyne",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-cone-straightening-coherent-evaluation",
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-coef-kan-coherent-nerve-quasicategory",
+  "lem-coef-left-fibration-right-anodyne-base-change",
+  "lem-coef-pinched-rigidification-resolution",
+  "lem-coef-right-fibration-section-limit",
+  "lem-coef-simplicial-right-fibration-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Second-reader construction: simplexwise dependent product along the opposite left fibration, using Proposition 4.4.11 and existing coherent evaluation and section-limit theorems. The statement is checked against Kerodon 02ZL and 0309. This is not a transcription of their relative-join proof. Online sources read; archival copies WANTED in the report."
+ },
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-right-fibration-constant-right-kan",
@@ -44,6 +163,62 @@
    "results": "{\"t\": \"2026-10-17T04:09:27Z\", \"tool\": \"grep\", \"query\": \"right.*[Kk]an|[Cc]ocartesian|[Cc]artesian.*[Ff]ibration\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "No match in AlgebraicTopology/Quasicategory."
+  },
+  {
+   "tool": "grep",
+   "query": "right.*[Kk]an|[Cc]artesian.*[Ff]ibration|[Rr]ight[Ff]ibration",
+   "results": "{\"t\": \"2026-10-17T05:37:43Z\", \"tool\": \"grep\", \"query\": \"right.*[Kk]an|[Cc]artesian.*[Ff]ibration|[Rr]ight[Ff]ibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\"], \"digest\": \"137c2d483b232d6d\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The right Kan declarations found require ordinary CategoryTheory.Category instances and ordinary limits: read CategoryTheory/Functor/KanExtension/Pointwise.lean:709-725. The quasicategorical assertion retaining whole mapping spaces is not a specialization. AlgebraicTopology/SimplicialNerve.lean:25-32 still lists the infinity category of anima as future work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A right fibration between quasicategories has fiberwise pointwise right Kan extensions of space valued functors",
+   "results": "{\"t\": \"2026-10-17T05:37:43Z\", \"tool\": \"leansearch\", \"query\": \"A right fibration between quasicategories has fiberwise pointwise right Kan extensions of space valued functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.pointwiseRightKanExtension\", \"CategoryTheory.Functor.isPointwiseRightKanExtensionOfIsRightKanExtension\", \"CategoryTheory.Functor.pointwiseRightKanExtensionIsPointwiseRightKanExtension\", \"CategoryTheory.Functor.RightExtension.IsPointwiseRightKanExtension.hasPointwiseRightKanExtension\", \"CategoryTheory.Functor.RightExtension.IsPointwiseRightKanExtension\", \"CategoryTheory.Functor.RightExtension.precomp\", \"CategoryTheory.Functor.RightExtension.IsPointwiseRightKanExtension.isRightKanExtension\", \"CategoryTheory.Functor.RightExtension.isPointwiseRightKanExtensionAt\"], \"digest\": \"3c9a4743206bfb39\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The right Kan declarations found require ordinary CategoryTheory.Category instances and ordinary limits: read CategoryTheory/Functor/KanExtension/Pointwise.lean:709-725. The quasicategorical assertion retaining whole mapping spaces is not a specialization. AlgebraicTopology/SimplicialNerve.lean:25-32 still lists the infinity category of anima as future work."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RightKanExtension\"",
+   "results": "{\"t\": \"2026-10-17T05:37:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"RightKanExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.HasRightKanExtension\", \"CategoryTheory.Functor.rightKanExtension\", \"CategoryTheory.Functor.isRightKanExtensionId\", \"CategoryTheory.Functor.instIsRightKanExtensionRightKanExtensionRightKanExtensionCounit\", \"CategoryTheory.Functor.IsRightKanExtension\", \"CategoryTheory.Functor.rightKanExtensionCounit\", \"CategoryTheory.Functor.HasRightKanExtension.mk\", \"CategoryTheory.Functor.coneOfIsRightKanExtension\"], \"digest\": \"48a6feb2cfb8f98b\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The right Kan declarations found require ordinary CategoryTheory.Category instances and ordinary limits: read CategoryTheory/Functor/KanExtension/Pointwise.lean:709-725. The quasicategorical assertion retaining whole mapping spaces is not a specialization. AlgebraicTopology/SimplicialNerve.lean:25-32 still lists the infinity category of anima as future work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right Kan extension of a coherent space valued diagram along a right fibration is computed by limits over fibers",
+   "results": "{\"t\": \"2026-10-17T05:37:45Z\", \"tool\": \"leanfinder\", \"query\": \"Right Kan extension of a coherent space valued diagram along a right fibration is computed by limits over fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolidIsPointwiseRightKanExtension\", \"CategoryTheory.Functor.pointwiseRightKanExtension_obj\", \"CategoryTheory.Functor.ranObjObjIsoLimit\", \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\", \"CategoryTheory.Functor.RightExtension.IsPointwiseRightKanExtensionAt\", \"CategoryTheory.Functor.RightExtension.IsPointwiseRightKanExtension\", \"CategoryTheory.Functor.pointwiseRightKanExtensionIsPointwiseRightKanExtension\", \"Alexandrov.isLimit\"], \"digest\": \"e8230cc58e765ad2\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The right Kan declarations found require ordinary CategoryTheory.Category instances and ordinary limits: read CategoryTheory/Functor/KanExtension/Pointwise.lean:709-725. The quasicategorical assertion retaining whole mapping spaces is not a specialization. AlgebraicTopology/SimplicialNerve.lean:25-32 still lists the infinity category of anima as future work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of coherent functors along a right fibration has a right adjoint with values the homotopy limits over the Kan fibers",
+   "results": "{\"t\": \"2026-10-17T05:38:36Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of coherent functors along a right fibration has a right adjoint with values the homotopy limits over the Kan fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.LiftRightAdjoint.constructRightAdjointObj\", \"CategoryTheory.LiftRightAdjoint.constructRightAdjoint\", \"CategoryTheory.sheafToPresheaf_isRightAdjoint\", \"CategoryTheory.LiftRightAdjoint.constructRightAdjointEquiv\", \"CategoryTheory.Functor.ranAdjunction\", \"CategoryTheory.Adjunction.restrictFullyFaithful\", \"CategoryTheory.SimplicialObject.cechNerveAdjunction\"], \"digest\": \"e50df2b2eef07b1b\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The right Kan declarations found require ordinary CategoryTheory.Category instances and ordinary limits: read CategoryTheory/Functor/KanExtension/Pointwise.lean:709-725. The quasicategorical assertion retaining whole mapping spaces is not a specialization. AlgebraicTopology/SimplicialNerve.lean:25-32 still lists the infinity category of anima as future work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Initial functor between infinity categories restricts and reflects limit cones cartesian fibration undercategory",
+   "results": "{\"t\": \"2026-10-17T06:12:56Z\", \"tool\": \"leanfinder\", \"query\": \"Initial functor between infinity categories restricts and reflects limit cones cartesian fibration undercategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Initial.isLimitExtendConeEquiv\", \"CategoryTheory.Functor.Initial.compCreatesLimit\", \"CategoryTheory.Functor.Initial.limitConeOfComp\", \"CategoryTheory.Functor.Initial.limitConeComp_isLimit\", \"CategoryTheory.Functor.Initial.limit_cone_comp_aux\", \"CategoryTheory.Functor.Initial.limitConeOfComp_isLimit\", \"CategoryTheory.Functor.Initial.limitConeOfComp_cone\", \"CategoryTheory.Functor.Initial.limitConeComp_cone\"], \"digest\": \"770bc65ecdc13147\"}",
+   "date": "2026-10-17",
+   "verdict": "No quasicategorical match. The returned Initial.isLimitExtendConeEquiv and IsRightAdjoint declarations assume ordinary CategoryTheory.Category instances. Read CategoryTheory/Limits/Final.lean:630-665, Functor/KanExtension/Pointwise.lean:700-730, and Adjunction/Basic.lean definitions. They do not provide the right-fibration statement retaining whole coherent mapping spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "initial.*limit|isLimitWhiskerEquiv|rightKanExtension",
+   "results": "{\"t\": \"2026-10-17T06:13:21Z\", \"tool\": \"grep\", \"query\": \"initial.*limit|isLimitWhiskerEquiv|rightKanExtension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"Mathlib/Condensed/Solid.lean\", \"Mathlib/Condensed/Solid.lean\", \"Mathlib/Condensed/Solid.lean\", \"Mathlib/Condensed/Solid.lean\", \"Mathlib/Condensed/Solid.lean\"], \"digest\": \"523ea83abe41d4bf\"}",
+   "date": "2026-10-17",
+   "verdict": "No quasicategorical match. The returned Initial.isLimitExtendConeEquiv and IsRightAdjoint declarations assume ordinary CategoryTheory.Category instances. Read CategoryTheory/Limits/Final.lean:630-665, Functor/KanExtension/Pointwise.lean:700-730, and Adjunction/Basic.lean definitions. They do not provide the right-fibration statement retaining whole coherent mapping spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RightAdjoint\", \"Functor\"",
+   "results": "{\"t\": \"2026-10-17T06:15:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"RightAdjoint\\\", \\\"Functor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsRightAdjoint\", \"CategoryTheory.Equivalence.isRightAdjoint_functor\", \"CategoryTheory.Functor.rightAdjoint\", \"CategoryTheory.Functor.isRightAdjoint_of_isEquivalence\", \"CategoryTheory.Functor.IsLeftAdjoint.exists_rightAdjoint\", \"CategoryTheory.Functor.IsRightAdjoint.exists_leftAdjoint\", \"CategoryTheory.Functor.IsRightAdjoint.mk\", \"CategoryTheory.Functor.isRightAdjoint_of_iso\"], \"digest\": \"54ec2578109fb306\"}",
+   "date": "2026-10-17",
+   "verdict": "No quasicategorical match. The returned Initial.isLimitExtendConeEquiv and IsRightAdjoint declarations assume ordinary CategoryTheory.Category instances. Read CategoryTheory/Limits/Final.lean:630-665, Functor/KanExtension/Pointwise.lean:700-730, and Adjunction/Basic.lean definitions. They do not provide the right-fibration statement retaining whole coherent mapping spaces."
   }
  ],
  "mathlib_match": null,
@@ -75,5 +250,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-right-fibration-fiberwise-kan",
+  "worker": "stage1",
+  "summary": "Second reading replaces unsupported coherent assembly by an explicit simplexwise dependent product. Right horns fill by left-fibration/right-anodyne base change; enriched currying gives the adjunction and the section-limit theorem identifies its counit on every fiber. All cited dependency closures avoid the item. The unnecessary proposed coslice node is dropped; no new nodes remain. Statement, universes, chapter and unit unchanged.",
+  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint current blueprint proof has no right-fibration assertion, as the inherited blueprint.from.place already records. This is a general infinity-categorical tool for the imported ancestor route; the derived Hom-adjunction calculation itself is not replaced. No chapter, unit or imported blueprint field changed.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic fact that coherent functor equivalences induce equivalences of whole mapping spaces, used after the explicit enriched adjunction; no geometric biduality route is changed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-97891f143",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-97891f143 (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps, the statement of each of the 12 cited nodes, the unit and chapter records, and the report. The delivery has no new nodes: the coslice-test node is dropped and nothing cites it. Statement unchanged and correct: the right Kan extension along a right (hence cartesian) fibration is the fibrewise limit, because E_b is initial in E_{b/} by cartesian pullback. Dual of Kerodon 02ZL/0309, HTT 4.3.3. Checked on B=pt, p=id and E empty. Step 1: u=p^op is a left fibration by horn-index reversal; Phi_T is an equivalence, so q with Phi_T(q)≃G exists. Step 2: currying for R=Pi_uY verified degreewise. Step 3: lem-coef-left-fibration-right-anodyne-base-change (Cisinski 4.4.11) is applied with exactly its hypotheses. The pullback along the right fibration {0}->Delta^1 instead gives ∅->{0}, which is not right anodyne, so the left-fibration hypothesis is needed and is correctly used. Steps 4-5: enriched adjunction with Kan mapping complexes, and Map^R_{N_hc A}(a,b)=Sing_Q A(a,b) because C[J^n] has no y->x morphisms; the Q-resolution span comes from the pinched-resolution node. Step 6: R_b = Gamma(Y|E_b^op), and section-limit plus cone-straightening (Phi≃m_q, base pullback, fibre evaluation) identify the counit on each fibre with the limit cone on G_b. Steps 7-8: universal property, naturality, and the empty/identity/size cases. proof_deps equals the union of uses. A DFS shows no cited closure reaches the item. Duplicate search over the DAG found no node with the same statement. All references are HTT/Cisinski/Kerodon, online only and listed as WANTED; no SGA. Tool use accepted: lem-cbc-enhanced-functor-cone-calculus, a generic mapping-space fact from another unit. Recorded for maintenance: the blueprint ancestor mismatch on prop-coef-integral-exceptional-adjoint. No fixes."
  }
 }

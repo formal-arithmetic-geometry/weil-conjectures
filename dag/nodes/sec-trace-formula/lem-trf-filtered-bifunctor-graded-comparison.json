@@ -11,11 +11,95 @@
   "def-sp-abelian",
   "def-sp-filtration",
   "def-sp-filtered-complex-subquotients",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $M_{\\le j}=t_{<j+1}M$, $N_{\\le k}=t_{<k+1}N$, and $T_p=t_{\\ge p}t_{<p+1}$. These exact functors, their natural maps and triangles, and the exact graded functors are supplied by [lem-trf-filtered-unbounded-truncation]. Fix $j+k=i$. In the covariant case define $Q_{jk}(M,N)=\\operatorname{gr}^i\\widetilde G(M_{\\le j},N_{\\le k})$. Apply $\\operatorname{gr}^i\\widetilde G(M_{\\le j},-)$ to $T_kN\\to N_{\\le k}\\to N_{\\le k-1}\\to$. Its last unshifted term is zero: the interval bound places it in grades $\\le j+k-1=i-1$. The zero-cone criterion [lem-kun-distinguished-cone-zero] gives an isomorphism $\\operatorname{gr}^i\\widetilde G(M_{\\le j},T_kN)\\to Q_{jk}$. Apply the first-variable functor to $T_jM\\to M_{\\le j}\\to M_{\\le j-1}\\to$; its discarded output also has grades $\\le i-1$. Thus the natural composite $s_{jk}:\\operatorname{gr}^i\\widetilde G(T_jM,T_kN)\\to Q_{jk}$ is invertible. The pure output has only grade $i$; the pure-grade equivalence in the truncation node identifies its $\\operatorname{gr}^i$ with $\\omega$. Consequently $\\alpha_{jk}=\\phi_G(T_jM,T_kN)\\circ s_{jk}^{-1}$, with those pure-grade identifications, is the natural isomorphism $Q_{jk}\\to G(\\operatorname{gr}^jM,\\operatorname{gr}^kN)$. This comparison concerns the two cutoff inputs, not the original pair.",
+   "uses": [
+    "lem-trf-filtered-unbounded-truncation",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "proof of Lemma 5.1.4(i), first paragraph, p.40"
+   }
+  },
+  {
+   "text": "For the contravariant-first case, fix $j+k=i$, put $p=-j$, and instead define $Q_{jk}(M,N)=\\operatorname{gr}^i\\widetilde G(t_{\\ge p}M,N_{\\le k})$. The first input has grades $\\ge p$ and the second grades $\\le k$. In the triangle $T_kN\\to N_{\\le k}\\to N_{\\le k-1}\\to$, the discarded output has grades $\\le -p+k-1=i-1$, so it induces an isomorphism $\\operatorname{gr}^i\\widetilde G(t_{\\ge p}M,T_kN)\\to Q_{jk}$. Apply the contravariant first-variable functor to $t_{\\ge p+1}M\\to t_{\\ge p}M\\to T_pM\\to$. The resulting triangle starts $\\widetilde G(T_pM,T_kN)\\to\\widetilde G(t_{\\ge p}M,T_kN)\\to\\widetilde G(t_{\\ge p+1}M,T_kN)\\to$; its third term has grades $\\le -(p+1)+k=i-1$. Exactness and [lem-kun-distinguished-cone-zero] therefore give an invertible composite $s_{jk}:\\operatorname{gr}^i\\widetilde G(T_pM,T_kN)\\to Q_{jk}$. Its pure output has only grade $-p+k=i$. Define $\\alpha_{jk}=\\phi_G(T_pM,T_kN)\\circ s_{jk}^{-1}$ using the pure-grade identifications, obtaining $Q_{jk}\\xrightarrow{\\sim}G(\\operatorname{gr}^{-j}M,\\operatorname{gr}^kN)$. All half-line bounds used here follow by applying the stated finite interval bound to actual finite support intervals of the inputs.",
+   "uses": [
+    "lem-trf-filtered-unbounded-truncation",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.3(c), Lemma 5.1.4(i), pp.40–41; explicit contravariant-first argument"
+   }
+  },
+  {
+   "text": "Construct $\\beta:\\operatorname{gr}^i\\widetilde G(M,N)\\to\\bigoplus_{j+k=i}Q_{jk}(M,N)$ by its components. Covariantly use the quotient maps $M\\to M_{\\le j}$ and $N\\to N_{\\le k}$. Contravariantly use the inclusion $t_{\\ge -j}M\\to M$ (which reverses direction under $\\widetilde G$) and $N\\to N_{\\le k}$. Steps 1 and 2 show $Q_{jk}=0$ unless both corresponding input grades are nonzero. Thus all sums can be taken over finite support intervals. On any finite diagram choose common intervals for its inputs, so the same finite index set is used at every vertex; enlarging it only adds zero summands. Each cutoff map commutes with cochain shifts and with the cone triangles: on complexes it is the termwise inclusion or quotient, and the cone has the direct-sum filtration. Hence $\\beta$ is a morphism of distinguished triangles in each variable, before using $\\phi_G$ or $\\alpha_{jk}$. The target triangles are distinguished by [lem-weil-finite-sums-distinguished-triangles]. For pure inputs of grades $a,b$, all $Q_{jk}$ vanish except possibly $(j,k)=(a,b)$ covariantly and $(-a,b)$ contravariantly. The source also vanishes unless $i=a+b$ or $i=-a+b$, respectively. In the remaining case the cutoff maps are isomorphisms, so $\\beta$ is an isomorphism. First fix pure $M$ and induct on the support width of $N$: the triangle $T_dN\\to N\\to N_{\\le d-1}\\to$ splits off its highest grade $d$, and [lem-sf-triangle-morphism-iso] applied to $\\beta$ proves the middle component invertible from the two shorter cases. Next fix arbitrary $N$ and induct on the support width of $M$ using $T_bM\\to M\\to M_{\\le b-1}\\to$; in the contravariant case the image triangle has reversed order, and the same triangle-morphism lemma applies to its two known components. The zero-input case starts both inductions, and width one is the pure case. This proves $\\beta$ invertible for all finite-filtered pairs. Define the required comparison $\\Theta_G=(\\bigoplus\\alpha_{jk})\\circ\\beta$.",
+   "uses": [
+    "lem-trf-filtered-unbounded-truncation",
+    "lem-sf-triangle-morphism-iso",
+    "lem-weil-finite-sums-distinguished-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 5.1.4(i), equation (5.1) and finite-filtration reduction, pp.40–41"
+   }
+  },
+  {
+   "text": "For a compatible filtered lift $\\widetilde H:\\widetilde G_1\\to\\widetilde G_2$, naturality at the cutoff inclusions and quotients gives $\\beta_2\\circ\\operatorname{gr}^i\\widetilde H=(\\bigoplus\\operatorname{gr}^i\\widetilde H(\\text{cut inputs}))\\circ\\beta_1$. Naturality at the pure-to-cut maps in Steps 1 and 2 gives $\\operatorname{gr}^i\\widetilde H(\\text{cut inputs})\\circ s_{1,jk}=s_{2,jk}\\circ\\operatorname{gr}^i\\widetilde H(\\text{pure inputs})$. Multiply by the two inverses $s_{r,jk}^{-1}$ and use the assumed equation $\\phi_{G_2}\\circ\\omega\\widetilde H=H(\\omega,\\omega)\\circ\\phi_{G_1}$ on the pure pair. It gives $\\alpha_{2,jk}\\circ\\operatorname{gr}^i\\widetilde H(\\text{cut inputs})=H(\\operatorname{gr}^jM,\\operatorname{gr}^kN)\\circ\\alpha_{1,jk}$ covariantly, and the same equation with first grade $-j$ contravariantly. Substituting in the first equality proves $\\Theta_{G_2}\\circ\\operatorname{gr}^i\\widetilde H=(\\bigoplus H(\\operatorname{gr}^jM,\\operatorname{gr}^kN))\\circ\\Theta_{G_1}$, with $j$ replaced by $-j$ in the first slot contravariantly. This checks every component of the finite biproduct square directly; no induction on equality of transformations is needed.",
+   "uses": [
+    "lem-trf-filtered-unbounded-truncation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.3(e), Lemma 5.1.4(ii), pp.40–41"
+   }
+  },
+  {
+   "text": "If $H$ is an isomorphism, the finite direct sum in Step 4 is an isomorphism, so every $\\operatorname{gr}^i\\widetilde H(M,N)$ is invertible. Choose a distinguished cone triangle for this morphism. Exactness of each $\\operatorname{gr}^i$ from [lem-trf-filtered-unbounded-truncation] and [lem-kun-distinguished-cone-zero] imply that every graded object of its cone $C$ is zero in $D(\\mathcal C)$. Represent $C$ by a finite filtered complex $K$. Each $\\operatorname{gr}^iK$ is acyclic, so the chain map $K\\to0$ is a filtered quasi-isomorphism by the definition of the localization. Thus $C\\cong0$ in $DF(\\mathcal C)$, and the zero-cone criterion applied to the original triangle proves $\\widetilde H(M,N)$ invertible. The component inverses are natural: multiply the naturality equation for $\\widetilde H$ on each side by these inverses. They therefore form the inverse transformation.",
+   "uses": [
+    "lem-trf-filtered-unbounded-truncation",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 5.1.4(iii), p.41"
+   }
+  },
+  {
+   "text": "The bounded and one-sided variants are reduced to the unbounded statement. By [lem-trf-filtered-bounded-localization-comparison], the natural functors $D^bF$, $D^+F$, $D^-F\\to DF$ are fully faithful, also for every fixed filtration interval, with essential images the objects whose graded cohomology is bounded in the corresponding cochain directions. The filtrations, shifts and filtered mapping cones of bounded (resp. bounded-below, bounded-above) complexes are again such complexes, so the inclusion sends cone triangles to cone triangles and identifies each of these categories with a full triangulated subcategory of $DF$. Each such subcategory contains the cut and pure objects of its objects: $F^rK$, $K/F^rK$ and their subquotients preserve any strict cochain-degree bound on a representative, so the truncation functors and triangles of [lem-trf-filtered-unbounded-truncation] restrict to it. The induction is on finite filtration width, not cochain degree. Hence these variants are instances of the full-domain case. For the stated full triangulated domains, the assumed closure puts each cut and pure object used in Steps 1–4 inside the domain; triangulatedness gives its cone triangles and finite sums, and the range assumptions put every bifunctor value there. Fullness retains the constructed maps and their inverses; the Step 5 cone is zero in the ambient localization and hence in the full domain. These observations establish all restricted assertions under exactly the closure and range hypotheses in the statement. Throughout, a filtered transformation is given; no construction of a lift of an arbitrary ordinary transformation is used.",
+   "uses": [
+    "lem-trf-filtered-unbounded-truncation",
+    "lem-trf-filtered-bounded-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.1(e), Lemma 5.1.4(i)–(iii), pp.39–41"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-filtered-unbounded-truncation",
+  "lem-kun-distinguished-cone-zero",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-finite-sums-distinguished-triangles",
+  "lem-trf-filtered-bounded-localization-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§5.1.3(c)–(e), Lemma 5.1.4(i)–(iii), pp.39–41"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,10 +156,17 @@
    "results": "{\"t\": \"2026-10-17T05:32:28Z\", \"tool\": \"leanfinder\", \"query\": \"An exact bifunctor of filtered derived categories preserving sums of filtration intervals induces the direct sum formula on associated graded, including contravariant first argument\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapBifunctorHomologicalComplex_obj_obj_toGradedObject\", \"CategoryTheory.GradedObject.mapBifunctor_triangle\", \"HomologicalComplex.instHasMapProdObjGradedObjectFunctorMapBifunctorXMapBifunctorMapObjπ\", \"CategoryTheory.GradedObject.ι_mapBifunctorComp₁₂MapObjIso_hom\", \"CategoryTheory.GradedObject.ι_mapBifunctorComp₂₃MapObjIso_hom\", \"CategoryTheory.GradedObject.HasGoodTrifunctor₁₂Obj\", \"CategoryTheory.GradedObject.HasGoodTrifunctor₁₂Obj.hasMap\", \"CategoryTheory.GradedObject.mapBifunctorComp₁₂MapObjIso\"], \"digest\": \"fbf09f5c5b646c11\"}",
    "date": "2026-10-17",
    "verdict": "no match: mapBifunctorHomologicalComplex_obj_obj_toGradedObject (Algebra/Homology/Bifunctor.lean:97) forgets cochain differentials of a bicomplex; GradedObject.mapBifunctor and its coproduct constructions do not identify associated filtration quotients of supplied derived lifts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An interval preserving exact functor in two variables on finite filtered localizations has a canonical convolution formula for associated graded quotients",
+   "results": "{\"t\": \"2026-10-17T06:16:10Z\", \"tool\": \"leanfinder\", \"query\": \"An interval preserving exact functor in two variables on finite filtered localizations has a canonical convolution formula for associated graded quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GradedObject.HasGoodTrifunctor₂₃Obj\", \"CategoryTheory.GradedObject.HasGoodTrifunctor₁₂Obj\", \"CategoryTheory.GradedObject.HasGoodTrifunctor₁₂Obj.hasMap\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"localCohomology.diagram\", \"localCohomology.ofDiagram\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Tor\"], \"digest\": \"43347dae4046e720\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary cohomological truncation/fraction declarations and GradedObject/Bifunctor.lean:33–178; none constructs finite filtration cutoffs on the filtered localization or proves the associated filtration-graded comparison for a supplied lift."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-filtered-operations-hom",
@@ -94,5 +185,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-filtered-bifunctor-graded-comparison",
+  "worker": "stage1",
+  "summary": "Construct the pure-to-cut comparison separately in both variances, assemble the canonical cutoff maps, prove their finite sum invertible by explicit two-variable filtration induction, check transformation compatibility componentwise, detect filtered isomorphisms, and restrict to the stated domains. One unbounded truncation infrastructure node generalizes the existing bounded-below result; generic triangle-morphism and finite-sum Mathlib leaves are reused.",
+  "blueprint": "Realizes the Additivity paragraph of lem-trf-trace-triangle-compatibility where the trace map is a morphism of filtered bifunctors and the filtered origin supplies graded pieces.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-7ac052422",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-7ac052422 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, unit sk-i-additivity, the main-20261015 Additivity paragraph of lem-trf-trace-triangle-compatibility, and Varshavsky pp.39-41 (5.1.1-5.1.4 with the full proof). The item matches 5.1.3(c)-(e) and Lemma 5.1.4(i)-(iii): intervals [a+c,b+d] and [-b+c,-a+d], phi_G, sums with gr^{-j} contravariantly, the transformation lift and isomorphism detection. Nothing is weakened. Steps 1-5 are correct. Step 1 uses truncation triangles at k and j, discarded output <= i-1, and the cone-zero leaf. In Step 2 (contravariant) I checked p=-j and the bounds -p+k=i and -(p+1)+k=i-1. Step 3 (beta, pure base case, two-variable width induction, finite-sum and triangle-morphism leaves) is correct. Step 4's equations hold. Step 5 (graded-acyclic cone represented by K->0 in W) is correct. The source error is real: in 5.1.1(c) t_{>=a} is right adjoint and t_{<=b} left adjoint, F_2 example checked; no step uses the adjoint directions. The new node lem-trf-filtered-unbounded-truncation is true without cochain bounds: cone(F^r M->M)->M/F^r M is a graded quasi-isomorphism, and Hom(>=r,<r)=0 by replacing roofs with t_{>=r}. It is statement-only, searched three ways, has correct blueprint fields, and is not a duplicate: it strictly generalizes the DF^+ node lem-trf-filtered-truncation-triangle and is needed for the parent's DF(Ab). All cited proof nodes are Mathlib leaves or same-unit nodes, so no tool_uses; no cycle; no SGA. FIX 1 (C4/C1): Step 6 moved the unbounded truncation formalism to D^bF and D^±F with no cited statement saying so. It now cites the reviewed same-unit node lem-trf-filtered-bounded-localization-comparison (fully faithful D^*F->DF, with essential images) to reduce to the full-domain case; proof_deps updated, no cycle. FIX 2: the item's blueprint.from.via contained its own id; corrected to [lem-trf-filtered-operations-hom]. Statement unchanged; new node unchanged. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

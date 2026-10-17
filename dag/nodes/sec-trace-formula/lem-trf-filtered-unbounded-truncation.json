@@ -1,0 +1,93 @@
+{
+ "id": "lem-trf-filtered-unbounded-truncation",
+ "kind": "statement",
+ "title": "Truncation triangles in the unbounded finite-filtered localization",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian], and let $DF(\\mathcal C)$ be the localization of all cochain complexes with a uniformly finite decreasing filtration by subcomplexes [def-sp-filtration, def-sp-filtered-complex-subquotients] at maps that are quasi-isomorphisms on every graded complex, with localizations in a common larger universe. The localization has the triangulated structure [def-weil-triangulated-category] induced by filtered mapping cones. Forgetting the filtration $\\omega:DF(\\mathcal C)\\to D(\\mathcal C)$ [def-weil-abstract-derived-category] and each graded-piece functor $\\operatorname{gr}^p:DF(\\mathcal C)\\to D(\\mathcal C)$ are exact. An object is supported in an interval when its graded objects outside that interval vanish in $D(\\mathcal C)$. For every integer $r$, the subcomplex and quotient constructions $t_{\\ge r}M=F^rM$ and $t_{<r}M=M/F^rM$ descend to exact functors on $DF(\\mathcal C)$; their graded pieces are respectively $\\operatorname{gr}^pM$ for $p\\ge r$ and $p<r$, and zero otherwise. They form a natural distinguished triangle $t_{\\ge r}M\\to M\\to t_{<r}M\\to(t_{\\ge r}M)[1]$. This triangle is unique up to the unique isomorphism inducing the identity on $M$ among distinguished triangles whose first term has grades only in indices $\\ge r$ and whose third term has grades only in indices $<r$. For $L$ supported in grades $\\ge r$ and $R$ supported in grades $<r$, composition with the canonical inclusion and quotient gives natural bijections $\\operatorname{Hom}(L,t_{\\ge r}M)\\xrightarrow{\\sim}\\operatorname{Hom}(L,M)$ and $\\operatorname{Hom}(t_{<r}M,R)\\xrightarrow{\\sim}\\operatorname{Hom}(M,R)$. Thus $t_{\\ge r}$ is right adjoint to the inclusion of the first support subcategory, and $t_{<r}$ is left adjoint to the inclusion of the second. Consequently $T_p=t_{\\ge p}t_{<p+1}$ has only grade $p$, and $\\omega T_p=\\operatorname{gr}^p$ naturally; on objects with only grade $p$, $T_p$ is the identity and forgetting the filtration is an equivalence with the ordinary derived category.",
+ "source": {
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§5.1.1(a)–(d), §5.1.2(a)–(c), pp.39–40; the adjoint directions printed in §5.1.1(c) are reversed (see Source error in report.md)."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "unbounded filtered derived category truncation triangle associated graded",
+   "results": "8 hits: CategoryTheory.Triangulated.TStructure.triangleLTGE, CategoryTheory.Triangulated.TStructure.triangleLTGE_obj_obj₁, DerivedCategory.TStructure.t, DerivedCategory.IsGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.IsLE, CategoryTheory.Triangulated.TStructure.truncLT, CategoryTheory.Triangulated.TStructure.truncGE; ordinary t-structure results do not mention finite filtered localizations.",
+   "date": "2026-10-17",
+   "verdict": "no match: no finite-filtered localization truncation statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Truncation filtered derived localization",
+   "results": "0 hits: loogle: Unknown identifier `CategoryTheory.Truncation`",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*quasi.isomorphism|truncation.*filtration",
+   "results": "0 hits in Mathlib/",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib has ordinary complex truncations but no finite-filtered derived localization theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite filtered complexes localization truncation distinguished triangle",
+   "results": "8 hits: CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished, HomotopyCategory.Pretriangulated.distinguishedTriangles, CategoryTheory.ShortComplex.ShortExact.singleTriangle, DerivedCategory.triangleOfSES, CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished, DerivedCategory.triangleOfSES_distinguished, CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, DerivedCategory.mem_distTriang_iff; none concerns finite-filtered localization.",
+   "date": "2026-10-17",
+   "verdict": "no match: only ordinary complex or derived-category triangles"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical truncation functors for filtered derived categories",
+   "results": "8 hits: ComplexShape.Embedding.truncGEFunctor, ComplexShape.Embedding.truncLEFunctor, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.Q, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.IsGE, HasDerivedCategory.standard; these are ordinary homological-complex truncations.",
+   "date": "2026-10-17",
+   "verdict": "no match: no finite-filtered derived category truncations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of complexes with finite decreasing flags has exact filtration cutoff functors and semiorthogonal truncation triangles",
+   "results": "{\"t\": \"2026-10-17T06:15:36Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of complexes with finite decreasing flags has exact filtration cutoff functors and semiorthogonal truncation triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.TStructure.t\", \"DerivedCategory.IsGE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.IsLE\"], \"digest\": \"7ba7f85c463b96b2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary cohomological truncation/fraction declarations and GradedObject/Bifunctor.lean:33–178; none constructs finite filtration cutoffs on the filtered localization or proves the associated filtration-graded comparison for a supplied lift."
+  },
+  {
+   "tool": "grep",
+   "query": "FilteredDerived|FilteredComplex|filtration.*localization|localization.*filtration",
+   "results": "{\"t\": \"2026-10-17T06:15:34Z\", \"tool\": \"grep\", \"query\": \"FilteredDerived|FilteredComplex|filtration.*localization|localization.*filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ordinary cohomological truncation/fraction declarations and GradedObject/Bifunctor.lean:33–178; none constructs finite filtration cutoffs on the filtered localization or proves the associated filtration-graded comparison for a supplied lift."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-filtered-bifunctor-graded-comparison",
+  "date": "2026-10-17",
+  "group": "Q28"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-additivity",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-trace-triangle-compatibility",
+   "place": "Proof paragraph Additivity: the trace map is a morphism of filtered bifunctors; the filtered derived category and its truncation triangles supply the graded-piece decomposition.",
+   "via": [
+    "lem-trf-filtered-bifunctor-graded-comparison",
+    "lem-trf-filtered-operations-hom"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

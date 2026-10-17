@@ -11,9 +11,69 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-universally-localizing-simplicial-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The cocone hypothesis makes $I$ filtered: the empty diagram gives nonemptiness, a two-object discrete diagram gives a common target, and a parallel-pair diagram gives a postcomposition making the two arrows equal. Put $T_i=p_i(V_i)$. For each transition, $y_a(T_i)=p_jx_a(V_i)\\subseteq T_j$. Apply [lem-coef-simplicial-localization-existence] to the strict diagrams of pairs $(X_i,V_i)$ and $(Y_i,T_i)$. Write $L_i=X_i[V_i^{-1}]$, $M_i=Y_i[T_i^{-1}]$, with localization maps $u_i:X_i\\to L_i$ and $v_i:Y_i\\to M_i$ in the sense of [def-coef-universally-localizing-simplicial-map]. Strict functoriality supplies a natural transformation $q_i:L_i\\to M_i$ satisfying $v_ip_i=q_iu_i$. These squares form a strict diagram; no quasi-inverses have been chosen.",
+   "uses": [
+    "lem-coef-simplicial-localization-existence",
+    "def-coef-universally-localizing-simplicial-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZQ",
+    "place": "Corollary 6.3.2.12, first displayed square, and Proposition 6.3.2.11."
+   }
+  },
+  {
+   "text": "Fix $i$ and any test quasicategory $\\mathcal E$ in a sufficiently large universe. Write $\\operatorname{Fun}_{V_i}(X_i,\\mathcal E)$ for the full subcategory on $V_i$-inverting diagrams, and define $\\operatorname{Fun}_{T_i}(Y_i,\\mathcal E)$ likewise. For every $H:Y_i\\to\\mathcal E$, the localization hypothesis on $p_i$ says that $Hp_i$ inverts $V_i$. Thus $H$ inverts every edge of $T_i=p_i(V_i)$, so $\\operatorname{Fun}_{T_i}(Y_i,\\mathcal E)=\\operatorname{Fun}(Y_i,\\mathcal E)$ as full simplicial subcategories. The universal property of $v_i$ therefore makes $v_i^*:\\operatorname{Fun}(M_i,\\mathcal E)\\to\\operatorname{Fun}(Y_i,\\mathcal E)$ a coherent functor equivalence. By [lem-coef-joyal-functor-equivalence-test], $v_i$ is a categorical equivalence. The universal properties of $u_i$ and $p_i$ make their restriction maps equivalences onto the same full subcategory $\\operatorname{Fun}_{V_i}(X_i,\\mathcal E)$. The strict equation $u_i^*q_i^*=p_i^*v_i^*$ consequently makes $q_i^*$ an equivalence: compose quasi-inverses to $u_i^*$, $p_i^*$ and $v_i^*$; the inverse equations are the whiskered inverse equations for those three maps. The same test shows that $q_i$ is a categorical equivalence. This argument is for the actual functorial $v_i,q_i$ of Step 1, so their naturality comes from that construction, not from choices of inverses.",
+   "uses": [
+    "lem-coef-simplicial-localization-existence",
+    "def-coef-universally-localizing-simplicial-map",
+    "lem-coef-joyal-functor-equivalence-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZQ",
+    "place": "Corollary 6.3.2.12, assertion that both the lower horizontal and right vertical maps are categorical equivalences; expanded using the coherent functor-category universal property."
+   }
+  },
+  {
+   "text": "Let $k_i:Y_i\\to Y$ be the colimit maps, put $V=\\bigcup_i j_i(V_i)$ and $T=\\bigcup_i k_i(T_i)$. The equations $k_ip_i=pj_i$ give $T=p(V)$ by taking images of each representative. Filtered-colimit compatibility in [lem-coef-simplicial-localization-existence] identifies $\\operatorname{colim}_i L_i$ with $L=X[V^{-1}]$, $\\operatorname{colim}_i M_i$ with $M=Y[T^{-1}]$, and the colimits of $u_i,v_i,q_i$ with the actual maps $u:X\\to L$, $v:Y\\to M$, $q:L\\to M$, satisfying $vp=qu$. Apply [lem-coef-joyal-filtered-equivalences] separately to the natural transformations $(v_i:Y_i\\to M_i)$ and $(q_i:L_i\\to M_i)$ of Step 2. It yields categorical equivalences $v$ and $q$. Its hypotheses allow arbitrary simplicial sets and arbitrary, possibly non-injective, transition maps.",
+   "uses": [
+    "lem-coef-simplicial-localization-existence",
+    "lem-coef-joyal-filtered-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZQ",
+    "place": "Corollary 6.3.2.12, second displayed square, with both applications of Corollary 4.8.8.11."
+   }
+  },
+  {
+   "text": "For any test quasicategory $\\mathcal E$, restriction by $u$ induces an equivalence $u^*:\\operatorname{Fun}(L,\\mathcal E)\\to\\operatorname{Fun}_V(X,\\mathcal E)$ by [lem-coef-simplicial-localization-existence] and [def-coef-universally-localizing-simplicial-map]. The categorical equivalences $v,q$ induce coherent functor equivalences $v^*:\\operatorname{Fun}(M,\\mathcal E)\\to\\operatorname{Fun}(Y,\\mathcal E)$ and $q^*:\\operatorname{Fun}(M,\\mathcal E)\\to\\operatorname{Fun}(L,\\mathcal E)$ by [lem-coef-joyal-functor-equivalence-test]. Restriction by $p$ factors through $\\operatorname{Fun}_V(X,\\mathcal E)$: for $H:Y\\to\\mathcal E$ and $w=j_i(w_i)$ with $w_i\\in V_i$, one has $Hp(w)=Hk_ip_i(w_i)$, an equivalence because $p_i$ is a localization and $Hk_i$ is a test diagram. The full-subcategory definition makes this a factorization in every simplicial degree. The square gives $p^*v^*=u^*q^*$ with this codomain. If $r$ is a coherent quasi-inverse of $v^*$, then $p^*\\simeq u^*q^*r$; whiskering the unit and counit of $v^*$ gives this natural equivalence. A quasi-inverse is $v^*(q^*)^{-1}(u^*)^{-1}$, with inverse equations obtained by composing the three specified unit and counit equivalences. Thus $p^*$ is the required coherent functor equivalence onto $\\operatorname{Fun}_V(X,\\mathcal E)$ for every $\\mathcal E$, which is exactly the asserted localization.",
+   "uses": [
+    "lem-coef-simplicial-localization-existence",
+    "def-coef-universally-localizing-simplicial-map",
+    "lem-coef-joyal-functor-equivalence-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05ZQ",
+    "place": "Corollary 6.3.2.12, final inference from the square; expanded in coherent functor categories, including the right vertical equivalence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-universally-localizing-simplicial-map",
+  "lem-coef-joyal-filtered-equivalences",
+  "lem-coef-joyal-functor-equivalence-test",
+  "lem-coef-simplicial-localization-existence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://kerodon.net/tag/05ZQ",
+  "place": "Corollary 6.3.2.12, proof, using Proposition 6.3.2.11 and Corollary 4.8.8.11."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,7 +126,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-universal-localization-degenerate-edges",
@@ -100,5 +160,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-localization-filtered-colimit",
+  "worker": "stage1",
+  "summary": "Four-step proof of Kerodon 05ZQ, with both comparison maps proved categorically equivalent by explicit restriction squares and passed separately through the filtered colimit. One independent 05ZP prerequisite; existing whole-functor-category equivalence test and Joyal colimit theorem reused. Item statement unchanged.",
+  "blueprint": "Realizes the ancestor proof’s supporting filtered-union input: Kerodon Proposition 6.3.2.11 (05ZP) and Corollary 6.3.2.12 (05ZQ), with the explicit functor-category universal-property square.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NA-4e1c88c4f",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-4e1c88c4f (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-simplicial-localization-existence and the full statements of all cited nodes (def-coef-universally-localizing-simplicial-map, def-cbc-enhanced-diagrams-cones, lem-coef-joyal-filtered-equivalences, lem-coef-joyal-functor-equivalence-test). I also read the unit, the citer lem-coef-universal-localization-degenerate-edges, and Kerodon 05ZP and 05ZQ online. The item matches 05ZQ hypothesis by hypothesis, and its statement is unchanged. The cocone condition is equivalent to filtered. V as the union of images equals colim V_i, because filtered colimits of sets preserve monos. Step 1: the 05ZP functoriality gives q_i=L(p_i) with v_i p_i=q_i u_i. Step 2: every H on Y_i inverts T_i=p_i(V_i), so v_i^* is an equivalence. 2-out-of-3 with u_i^* q_i^*=p_i^* v_i^* makes q_i^* one, and the test lemma (ii)=>(i) gives Joyal equivalences. Step 3: T=p(V), and q=colim q_i by functoriality of L. The Joyal filtered-colimit node applies to v and q. Step 4: p^* lands in Fun_V because H p j_i = H k_i p_i, and p^* v^* = u^* q^* gives the localization equivalence for every E. The new node faithfully states 05ZP (functorial, commutes with filtered colimits via the small-object construction of Kerodon Prop. 4.1.3.2). It passes B1-B7, has three kinds of recorded Mathlib search, and is not a restatement of the item. I tested it on small cases (W empty, Delta^1 with its edge, C empty, one-object I) and on non-injective transitions. No duplicates: rg for 05ZP/05ZQ finds only these nodes and the citer. system-localization-universal and simplicial-inversion-universal-property differ, and the blueprint has no matching node. The graph has no cycle, all uses are in unit sk-prop-sf-biduality-general, tool_uses is empty, no SGA source is used, and this is not a target node. I confirm the noted 05ZQ notation typo (U=G(T)). No fixes."
  }
 }
