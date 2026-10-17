@@ -223,5 +223,31 @@
   "group": "Q99",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-c66f142f6 (reviewer sub-agent of L); spot-checked: I read the full item (statement and all six steps), the statement of every cited node, the unit sk-prop-sf-biduality-general, the blueprint ancestor prop-coef-integral-exceptional-adjoint (proof paragraph 2) and the only citer, lem-coef-monoidal-yoneda-embedding (steps 9 and 10). The delivery is one commit containing the item and its report. It adds no new nodes and changes neither statement nor stmt_deps. proof_deps equals the union of the uses, there is no cycle, nothing cites a merged node and nothing cites SGA. Steps 1 and 2 are elementary and correct: for n>=2 every horn Λ^n_i contains all vertices, so by fullness the inner-horn and Λ^n_0 fillers stay in R. Step 3 is correct. Both u and e are initial lifts in L_q(x,α), and the cited composition-initiality statement gives the comparison 2-simplex (u,v,e) with v over 1_b and v an equivalence in the fiber, so v is also an equivalence in E. The relative outer-horn lemma then makes v p-cocartesian, and the composition clause applied to p makes e p-cocartesian. Step 4 is correct: the pushout-product Mathlib leaf with Λ^n_i→Δ^n and ∅→K shows Fun(K,Z)→Fun(K,S) is an inner fibration, and the constant base simplex makes each strict fiber a quasicategory for any small K. Steps 5 and 6 are correct: the vertices of K×Δ^n are pairs (k,i), so T_R is exactly the full subcategory of R-valued diagrams; the pinched mapping simplices have only b or c as vertices, so the mapping sets are equal; precomposition commutes with all of this; and K=∅ gives point fibers. Edge cases tested: R empty, R=E, S a point, nerves, identity base edges, K empty and K a point. Repleteness is retained but unused; nothing is weakened. The outer-horn lemma assumes small quasicategories, but the argument does not depend on size, so this is a remark, not a fault. HTT is not archived; it is listed as WANTED and the proof is marked as agent-written. I checked 2.4.1.5, 2.4.1.7, 2.3.2.4 and 3.1.2.1 from memory and they fit. The duplicate search turned up only the sk-prop-sf-cbc outer-horn pair, of which the relative one is the node cited, and the mapping-space-based pointwise-transport node, which uses a different notion and is not a duplicate. Accepted tool_use: lem-cbc-inner-fibration-equivalence-outer-horn-lift in step 3 only, as generic relative outer-horn filling along an equivalence. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ee275fa61",
+  "group": "Q148",
+  "result": "fix",
+  "note": "Wrote review.md and complete replacements under fixes/. Repaired the placeholder second reading, inline compatibility proofs, proof docstring, and import conventions. Main signature unchanged; original and replacement modules compile cleanly through scompile.py. No substantive mathematical fault found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CocartesianFullRestriction",
+  "declaration": "SSet.Enhanced.cocartesian_full_restriction",
+  "declarations": [
+   "SSet.Enhanced.relativeFunctorFiber",
+   "SSet.Enhanced.relativeFunctorInclusion_squares",
+   "SSet.Enhanced.relativeFunctorInclusion",
+   "SSet.Enhanced.relativeDiagramInFull",
+   "SSet.Enhanced.cocartesian_full_restriction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CocartesianFullRestriction.lean",
+  "statement": "theorem cocartesian_full_restriction {E B : SSet.{u}} (p : E ⟶ B) [Quasicategory E] [Quasicategory B] (hp : cocartesianFibrationOver p) (R : E.Subcomplex) (hfull : R = fullSubcomplex E (fun x ↦ x ∈ R.obj (op ⦋0⦌))) (hreplete : ∀ (e : E _⦋1⦌), IsEquivalenceEdge E e → E.δ 1 e ∈ R.obj (op ⦋0⦌) → E.δ 0 e ∈ R.obj (op ⦋0⦌)) (htransport : ∀ (x : E _⦋0⦌) (b : B _⦋0⦌) (α : B _⦋1⦌), x ∈ R.obj (op ⦋0⦌) → B.δ 1 α = p.app (op ⦋0⦌) x → B.δ 0 α = b → ∃ e : E _⦋1⦌, E.δ 1 e = x ∧ E.δ 0 e ∈ R.obj (op ⦋0⦌) ∧ p.app (op ⦋1⦌) e = α ∧ IsCocartesianEdge p (SSet.yonedaEquiv.symm e)) : Quasicategory (R : SSet) ∧ cocartesianFibrationOver (R.ι ≫ p) ∧ (∀ e : Δ[1] ⟶ (R : SSet), IsCocartesianEdge (R.ι ≫ p) e ↔ IsCocartesianEdge p (e ≫ R.ι)) ∧ ∀ (K : SSet.{u}) (a : K ⟶ B), Quasicategory (relativeFunctorFiber (R.ι ≫ p) a) ∧ Quasicategory (relativeFunctorFiber p a) ∧ (∀ (n : SimplexCategory) (z : (relativeFunctorFiber p a).obj (op n)), (∃ w : (relativeFunctorFiber (R.ι ≫ p) a).obj (op n), (relativeFunctorInclusion R p a).app (op n) w = z) ↔ relativeDiagramInFull R p a n z) ∧ (∀ (b c : (relativeFunctorFiber (R.ι ≫ p) a).obj (op ⦋0⦌)) (n : SimplexCategory), Function.Bijective ((mappingSpaceMap (relativeFunctorInclusion R p a) b c).app (op n))) ∧ (∀ (L : SSet.{u}) (t : L ⟶ K) (n : SimplexCategory) (r : ((ihom K).obj (R : SSet)).obj (op n)), ∃ r' : ((ihom L).obj (R : SSet)).obj (op n), ((ihom L).map R.ι).app (op n) r' = ((MonoidalClosed.pre t).app E).app (op n) (((ihom K).map R.ι).app (op n) r))",
+  "by": "Q148",
+  "date": "2026-10-17",
+  "existing": false,
+  "branch": "newtargets-dag",
+  "fixed_by": "NT-stage2-Codex-ee275fa61"
  }
 }

@@ -36,7 +36,10 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "lem-coef-associative-algebra-model-transfer"
+  "lem-coef-associative-algebra-model-transfer",
+  "lem-coef-infinity-sifted-colimit-calculus",
+  "def-coef-coherent-localization-interface",
+  "def-coef-infinity-category-of-spaces"
  ],
  "proof": [
   {
@@ -192,5 +195,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-814d45512",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, universes, edge cases, docstrings, report sections, and compiler evidence checked; no substantive or mechanical issues found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AssociativeAlgebraSiftedLocalization",
+  "declaration": "HomotopicalAlgebra.associativeAlgebraSiftedLocalization",
+  "file": "lean/Sheaf/CategoryTheory/AssociativeAlgebraSiftedLocalization.lean",
+  "statement": "theorem associativeAlgebraSiftedLocalization {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] [MonoidalCategory M] (_hM : CombinatorialModelCategory.{u, v, v} M) (_leftAdj : ∀ X : M, ((tensoringLeft M).obj X).IsLeftAdjoint) (_rightAdj : ∀ X : M, ((tensoringRight M).obj X).IsLeftAdjoint) (_unit : IsCofibrant (𝟙_ M)) (_pushoutProduct : ∀ (f g : Arrow M), Cofibration f.hom → Cofibration g.hom → Cofibration ((MonoidalCategory.Arrow.pushoutProduct.obj f).obj g).hom ∧ (WeakEquivalence f.hom ∨ WeakEquivalence g.hom → WeakEquivalence ((MonoidalCategory.Arrow.pushoutProduct.obj f).obj g).hom)) (_monoidAxiom : NonsymmetricMonoidAxiom M) (W : AssociativeWordFiltration.Construction M) (_transfer : AssociativeAlgebraTransfer W) (_leftProper : (weakEquivalences M).IsStableUnderCobaseChangeAgainst (cofibrations M)) (_tractable : ∃ (J : Type v) (j : J → Arrow M), (MorphismProperty.ofHoms (fun s ↦ (j s).hom)).rlp = trivialFibrations M ∧ ∀ s : J, IsCofibrant (j s).left ∧ IsCofibrant (j s).right) (A C : SSet.{max u v t}) (qA : FiniteReedy.largeNerve.{max u v, v, max u v t} (Mon M) ⟶ A) (qM : FiniteReedy.largeNerve.{u, v, max u v t} M ⟶ C) (_hqA : FiniteReedy.IsLocalization.{max u v, v, max u v t} ((weakEquivalences M).inverseImage (Mon.forget M)) qA) (_hqM : FiniteReedy.IsLocalization.{u, v, max u v t} (weakEquivalences M) qM) : ∃ U : A ⟶ C, AreNaturallyEquivalent (qA ≫ U) (frameLargeNerveMap.{max u v, v, max u v t, u, v} (Mon.forget M) ≫ qM) ∧ (∀ (I : Type v) [SmallCategory I], IsInfinitySifted (nerve I) → ∀ (F : FiniteReedy.largeNerve.{v, v, max u v t} I ⟶ A) (c : (coconeCategory F) _⦋0⦌), IsColimiting F c → IsColimiting (F ≫ U) (Spaces.mappedCocone U F c)) ∧ IsInfinitySifted (nerve SimplexCategoryᵒᵖ) ∧ (∀ (F : SSet.uliftFunctor.{max u v t}.obj (nerve SimplexCategoryᵒᵖ) ⟶ A) (c : (coconeCategory F) _⦋0⦌), IsColimiting F c → IsColimiting (F ≫ U) (Spaces.mappedCocone U F c))",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Arbitrary coherent localization presentations; the induced forgetful functor is pinned by its full nerve comparison. Uses homotopy siftedness and the actual mapped coherent cocone. Tractability is expanded as a small generating cofibration family with cofibrant endpoints. Three already-landed interface nodes are added to stmt_deps. No statement correction."
  }
 }

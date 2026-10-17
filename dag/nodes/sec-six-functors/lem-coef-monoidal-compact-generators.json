@@ -26,7 +26,10 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "def-coef-presentable-infinity-category"
+  "def-coef-presentable-infinity-category",
+  "lem-coef-ind-kappa-presentability",
+  "lem-coef-infinity-presheaf-ind-criterion",
+  "lem-coef-infinity-yoneda-evaluation"
  ],
  "proof": [
   {
@@ -293,5 +296,23 @@
   "group": "N2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-920987458 (reviewer sub-agent of L); spot-checked: Read the full item (7 steps), the new node lem-coef-small-monoidal-full-subcategory, all 18 cited statements, the old step 5 in the side DAG (read only), and Chu–Haugseng arXiv 2006.08269v2 §7 online (Prop 7.15, Cor 7.16, Rem 7.17). The new lemma is the general form of 7.15's closing line 'inherits cocartesian morphisms', plus the small model of 7.17. It is true: the transport along α tensors blocks, including empty blocks (the unit), so binary closure, the unit and repleteness give closure under every n-ary tensor. Segal and relative-limit conditions restrict to a full subcategory, and essential smallness gives a small model through infinity-small-full-subcategory and straightening. Small cases checked: D=V with V small, D={objects equivalent to 1}, the terminal category, the point fiber over [0]; empty D is excluded by the unit hypothesis. B1–B9 hold: statement only, self-contained, definitions cited, real searches recorded (Mathlib's fullMonoidalSubcategory is for ordinary categories only), correct ancestor and via. It is not a clause of the parent and duplicates no existing node (checked monoidal-yoneda-embedding, associative-reflective-localization, operadic-day-convolution, infinity-small-full-subcategory, cocartesian-straightening). Step 5 checks every hypothesis of the lemma. Steps 1–4, 6 and 7 are re-verified: lambda << kappa=(2^theta)^+ via square-power; rho-compact implies kappa-compact in the right direction; two uses of compact-small-colimits on kappa-small shapes; the retract inverse r_A g^-1 i_B; the restricted Yoneda functor is computed objectwise, with the universe comparison; the Ind-extension hypotheses hold for both V and P(C), so RF ≃ i. The tool use of lem-cbc-enhanced-functor-cone-calculus is accepted. No SGA is used. No changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6d2611bd6",
+  "group": "Q156",
+  "result": "pass",
+  "note": "Immutable Q156 delivery matches the node, has required documentation and report sections, dependencies are coherent, and per-file scompile passed locally with server confirmation."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MonoidalCompactGenerators",
+  "declaration": "SSet.Enhanced.Algebroid.monoidalCompactGenerators",
+  "file": "lean/Sheaf/CategoryTheory/MonoidalCompactGenerators.lean",
+  "statement": "theorem monoidalCompactGenerators {E : SSet.{max (u + 1) v}} [SSet.Quasicategory E] (p : E ⟶ monoidalSimplexBase) (hp : @IsPresentablyMonoidal.{u, v} E _ p) : ∃ (κ : Cardinal.{u}), κ.IsRegular ∧ ∃ (hV : SSet.Quasicategory (monoidalUnderlying p)), @SSet.Presentability.IsKappaAccessible.{u, max (u + 1) v} (monoidalUnderlying p) hV κ ∧ ∃ (C : SSet.{u}) (q : SSet.uliftFunctor.{max (u + 1) v, u}.obj C ⟶ monoidalSimplexBase.{max (u + 1) v}) (J : SSet.uliftFunctor.{max (u + 1) v, u}.obj C ⟶ E) (ι : SSet.uliftFunctor.{max (u + 1) v, u}.obj C ⟶ fiber q (monoidalBaseVertex 1)) (j : fiber q (monoidalBaseVertex 1) ⟶ fiber p (monoidalBaseVertex 1)), SSet.Presentability.IsSmall.{u, u} C ∧ ∃ (hC : SSet.Quasicategory (SSet.uliftFunctor.{max (u + 1) v, u}.obj C)), @IsMonoidalInfinityCategory _ hC q ∧ IsStrongMonoidalInfinityFunctor q p J ∧ SSet.Enhanced.IsFunctorEquivalence ι ∧ j ≫ monoidalFiberInclusion p 1 = monoidalFiberInclusion q 1 ≫ J ∧ SSet.Enhanced.IsFullyFaithful J ∧ SSet.Enhanced.IsFullyFaithful j ∧ (∀ c : (fiber q (monoidalBaseVertex 1)) _⦋0⦌, @SSet.Presentability.IsKappaCompact.{u, max (u + 1) v} (monoidalUnderlying p) hV κ (j.app _ c)) ∧ (∀ x : (monoidalUnderlying p) _⦋0⦌, @SSet.Presentability.IsKappaCompact.{u, max (u + 1) v} (monoidalUnderlying p) hV κ x → ∃ c : (fiber q (monoidalBaseVertex 1)) _⦋0⦌, ∃ e : Δ[1] ⟶ monoidalUnderlying p, IsEquivalenceEdge (monoidalUnderlying p) (SSet.yonedaEquiv e) ∧ e.app (op ⦋0⦌) (stdSimplex.obj₀Equiv.symm 0) = j.app _ c ∧ e.app (op ⦋0⦌) (stdSimplex.obj₀Equiv.symm 1) = x) ∧ (∃ U : (monoidalUnderlying p) _⦋0⦌, IsMonoidalTensorUnit p U ∧ @SSet.Presentability.IsKappaCompact.{u, max (u + 1) v} (monoidalUnderlying p) hV κ U) ∧ (∀ (tensor : (∏ᶜ (fun _ : Fin 2 ↦ monoidalUnderlying p)) ⟶ monoidalUnderlying p), IsMonoidalTensorOperation p 2 tensor → ∀ z : (∏ᶜ (fun _ : Fin 2 ↦ monoidalUnderlying p)) _⦋0⦌, (∀ i : Fin 2, @SSet.Presentability.IsKappaCompact.{u, max (u + 1) v} (monoidalUnderlying p) hV κ ((Pi.π (fun _ : Fin 2 => monoidalUnderlying p) i).app _ z)) → @SSet.Presentability.IsKappaCompact.{u, max (u + 1) v} (monoidalUnderlying p) hV κ (tensor.app _ z)) ∧ ∃ (R : monoidalUnderlying p ⟶ SSet.Enhanced.Yoneda.presheaves.{u, v} C), SSet.Enhanced.IsFullyFaithful R ∧ SSet.Presentability.PreservesColimitsIn R (fun I _ _ ↦ ∃ (hI : SSet.Quasicategory I), SSet.Presentability.IsSmall.{u, max (u + 1) v} I ∧ @SSet.Presentability.IsKappaFiltered.{u, max (u + 1) v} κ I hI) ∧ (∀ x : (monoidalUnderlying p) _⦋0⦌, SSet.Presentability.IsIndKappaObject C κ (ULift.down (R.app _ x))) ∧ (∀ X : (SSet.Enhanced.Yoneda.presheaves.{u, v} C) _⦋0⦌, SSet.Presentability.IsIndKappaObject C κ (ULift.down X) → ∃ x : (monoidalUnderlying p) _⦋0⦌, ∃ e : (SSet.Enhanced.Yoneda.presheaves.{u, v} C) _⦋1⦌, IsEquivalenceEdge (SSet.Enhanced.Yoneda.presheaves.{u, v} C) e ∧ (SSet.Enhanced.Yoneda.presheaves.{u, v} C).δ 1 e = X ∧ (SSet.Enhanced.Yoneda.presheaves.{u, v} C).δ 0 e = R.app _ x) ∧ (∀ (x : (monoidalUnderlying p) _⦋0⦌) (c : C _⦋0⦌), SSet.uliftFunctor.{max (u + 1) v, u}.obj (CategoryTheory.Spaces.presheafValue (ULift.down (R.app _ x)) c) = SSet.Enhanced.mappingSpace (monoidalUnderlying p) (j.app _ (ι.app _ (ULift.up c))) x)",
+  "branch": "newtargets-dag",
+  "by": "Q156",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
