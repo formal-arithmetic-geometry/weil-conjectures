@@ -14,9 +14,163 @@
   "def-weil-pbc-quasi-compact-scheme",
   "def-weil-pbc-scheme-conventions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First establish the ambient finiteness needed below. Finite presentation implies finite type (a finite algebra presentation supplies finite generators), so [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. Both $X$ and $S$ are quasi-compact and, by [lem-weil-pbc-locally-noetherian-quasi-separated], quasi-separated; $f$ is quasi-compact and quasi-separated by its finite-presentation hypothesis. Apply [lem-trf-qcqs-oriented-triple-presentation] to $X\\to S\\leftarrow S$, and then [lem-trf-finitary-site-coherent-generators] and [lem-trf-finitary-site-enough-points]. Thus $V_f$ is coherent and its points jointly detect isomorphisms. These statements apply equally to the finite-presentation maps over closed subschemes of $S$ occurring below.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "def-weil-pbc-scheme-conventions",
+    "lem-trf-qcqs-oriented-triple-presentation",
+    "lem-trf-finitary-site-coherent-generators",
+    "lem-trf-finitary-site-enough-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Section 8.1 and the opening of 8.2, printed pp. 17–18; the finite-cover site gives coherence and enough points."
+   }
+  },
+  {
+   "text": "We prove an auxiliary ascending-chain assertion for finite-set sheaves. For closed subschemes $Z\\subseteq X$, $T\\subseteq S$ with their reduced structures put $E_{Z,T}=Z_{\\mathrm{Et}}\\overleftarrow\\times_{S_{\\mathrm{Et}}}T_{\\mathrm{Et}}$. Say that a sheaf of sets on this topos is constructible when finite constructible locally closed partitions of $Z,T$ make it locally constant finite on each rectangular oriented product. The claim is that every increasing sequence $A_0\\subseteq A_1\\subseteq\\cdots\\subseteq F$ of constructible set sheaves with constructible $F$ stabilizes. Induct on the pair of closed subsets $(Z,T)$, ordered by inclusion in both coordinates with at least one strict inclusion. This is well founded by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]: first minimize one coordinate of any nonempty family of pairs, then the other among that coordinate's fibre. If either coordinate is empty the topos has only its empty point support and all its sheaves are isomorphic, so the claim holds. By [lem-trf-oriented-closed-base-restriction], $E_{Z,T}\\simeq V_{Z_T/T}$, preserving precisely this constructibility. Closed immersions have affine presentations $R\\to R/I$ by [def-weil-closed-immersion]; over a Noetherian affine every $I$ has finite generators by [def-weil-pbc-noetherian-ring], so they are of finite presentation. Thus $T,Z,Z_T$ are Noetherian by the finite-type argument of Step 1. Base change preserves finite presentation by [lem-weil-pbc-qcqs-morphism-permanence]; composition with the closed immersion $Z_T\\to X_T$ preserves it by [lem-weil-pbc-proper-fp-permanence](d). Hence Step 1 and [lem-trf-oriented-maximal-point-finiteness] apply to this topos. Assume the ascending-chain assertion for all strictly smaller closed pairs.",
+   "uses": [
+    "lem-trf-oriented-closed-base-restriction",
+    "lem-trf-oriented-maximal-point-finiteness",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-constructible-stratification",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Proof of Lemma 8.3.3, first paragraph, printed p. 19: Noetherian induction on the two closed coordinates; Lemma 8.3.1 identifies the closed-base pieces."
+   }
+  },
+  {
+   "text": "First choose dense opens $U_0\\subseteq Z$, $V_0\\subseteq T$ on whose rectangle $E'_0=U_{0,\\mathrm{Et}}\\overleftarrow\\times_{S_{\\mathrm{Et}}}V_{0,\\mathrm{Et}}$ the sheaf $F$ is locally constant with finite values. There are finitely many irreducible components by [lem-weil-pbc-noetherian-finitely-many-components]. For a generic point $\\eta$ of $Z$, the stratum of the witnessing finite partition containing $\\eta$ is $O\\cap C$ with $O$ open and $C\\supseteq\\overline{\\{\\eta\\}}$ closed, so $W_\\eta=O$ minus the other components is an open neighbourhood of $\\eta$ inside that stratum; the $W_\\eta$ are disjoint and their union $U_0$ is dense. Do the same in $T$. By [lem-trf-oriented-maximal-point-finiteness] there are finitely many maximal point classes of $E_{Z,T}$; let $p_1,\\ldots,p_r$ be those lying in $E'_0$, i.e. at which the subterminal of $E'_0$ has nonempty stalk. Each $F_{p_i}$ is finite: some member $U_k$ of a trivializing covering has an element at $p_i$, and on $E'_0/U_k$ the sheaf $F$ is constant on a finite set, whose stalk is that set. The $(A_n)_{p_i}$ increase inside $F_{p_i}$, so choose $N$ with $(A_n)_{p_i}=(A_N)_{p_i}$ for all $i$ and $n\\geq N$. Then apply the same construction to $F$ and $A_N$ together, taking each $W_\\eta$ inside the strata of both partitions and inside $U_0$ (resp. $V_0$): this gives dense opens $U\\subseteq U_0$, $V\\subseteq V_0$ on whose rectangle $E'=U_{\\mathrm{Et}}\\overleftarrow\\times_{S_{\\mathrm{Et}}}V_{\\mathrm{Et}}$ both $A_N$ and $F$ are locally constant with finite values. The rectangles are open subtopoi of $E_{Z,T}$: by the projection formulas of [lem-trf-oriented-product-universal] the subterminal $p_1^{-1}U\\times p_2^{-1}V$ is the sheaf associated with the triple $(U\\to S\\leftarrow V)$, and by [lem-trf-oriented-slice-localization] the slice over it is $U_{\\mathrm{Et}}\\overleftarrow\\times_{S_{\\mathrm{Et}}}V_{\\mathrm{Et}}$; likewise for $E'_0$.",
+   "uses": [
+    "lem-trf-oriented-maximal-point-finiteness",
+    "lem-trf-oriented-product-universal",
+    "lem-trf-oriented-slice-localization",
+    "def-constructible-stratification",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Proof of Lemma 8.3.3, first paragraph, printed p. 19: uniform index at maximal points and generic rectangular local constancy."
+   }
+  },
+  {
+   "text": "Fix $n\\geq N$ and a point $p$ of $E'$. Choose a maximal generization $q$ of $p$ using [lem-trf-oriented-maximal-point-finiteness]. It lies in $E'$: the transformation $p^{-1}\\Rightarrow q^{-1}$ carries the unique element of the open subterminal at $p$ to an element at $q$. Since $E'\\subseteq E'_0$, the class of $q$ is one of $p_1,\\ldots,p_r$ of Step 3. On a locally constant sheaf this transformation is a bijection on stalks. Indeed, choose a trivializing covering object with an element at $p$; its image supplies a lift at $q$, and on this slice the transformation on a constant set is the identity. Apply this to $A_N$ and $F$. Naturality identifies the inclusion $(A_N)_p\\subseteq F_p$ with $(A_N)_q\\subseteq F_q$. Any element of $(A_n)_p$ maps into $(A_n)_q=(A_N)_q$, so its image in $F_p$ belongs to $(A_N)_p$. Thus $(A_n)_p=(A_N)_p$. The points are conservative by Step 1 (also on an open subtopos, whose points are just the points where its subterminal is inhabited), so $A_n=A_N$ on $E'$. This argument does not assume that all the $A_n$ are locally constant on one common open, nor that the maximal points excluded by $E'$ remain in it.",
+   "uses": [
+    "lem-trf-oriented-maximal-point-finiteness",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Proof of Lemma 8.3.3, first paragraph, printed p. 19: why generic equality forces equality on the chosen open rectangle."
+   }
+  },
+  {
+   "text": "The remaining points of $E_{Z,T}$ lie on $E_{Z\\setminus U,T}$ or $E_{Z,T\\setminus V}$. For the first piece this is the closed complement assertion of [lem-trf-oriented-source-localization] after the identification with $V_{Z_T/T}$; for the second it is [lem-trf-oriented-closed-base-restriction]. Restricting a finite-stratification constructible set sheaf to either piece preserves constructibility: intersect its witnessing strata with the closed subsets, and pull back its local constant trivializations. Both pairs are strictly smaller, so the induction hypothesis supplies stabilization indices on these two pieces. The maximum of these indices and $N$ gives equality on every point of the whole topos, hence equality by Step 1. This closes the induction and proves the ascending-chain assertion at $(X,S)$.",
+   "uses": [
+    "lem-trf-oriented-source-localization",
+    "lem-trf-oriented-closed-base-restriction",
+    "def-constructible-stratification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Proof of Lemma 8.3.3, first paragraph, printed p. 19: closing the two-coordinate Noetherian induction on the complement of the open rectangle."
+   }
+  },
+  {
+   "text": "Let $G\\subseteq F$ now be any subsheaf of sets, where $F$ is constructible. By [lem-trf-coherent-set-criterion], $F$ is coherent. Step 1 and [lem-trf-coherent-object-approximation] give $G\\simeq\\operatorname{colim}_i C_i$ with coherent $C_i$. The images $B_i=\\operatorname{im}(C_i\\to G\\to F)$ are coherent, and so constructible by the same criterion. They form a directed family of subobjects with union $G$: every local section of the colimit comes locally from some $C_i$, and a common target for any two indices contains both images. If this family had no maximal member, recursively choosing a strictly larger member would give a nonstationary increasing sequence of constructible subsheaves of $F$, contrary to Step 5. A maximal member $B$ contains every $B_i$, because directedness gives a member containing both and maximality makes it equal to $B$. Thus $G=B$ is constructible. All diagrams and subobject families are small in [def-weil-size-convention]; this argument is about set-valued images, not images of an unspecified module approximation.",
+   "uses": [
+    "lem-trf-coherent-set-criterion",
+    "lem-trf-coherent-object-approximation",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Proof of Lemma 8.3.3, second paragraph, printed p. 19, using the filtered coherent approximation of Section 8.1."
+   }
+  },
+  {
+   "text": "For a constructible $\\Lambda$-module sheaf $B$ and any module subsheaf $A\\subseteq B$, [lem-trf-oriented-constructible-coherent] makes $|B|$ coherent, hence constructible as a set sheaf by [lem-trf-coherent-set-criterion]. The underlying map $|A|\\to|B|$ is a monomorphism of set sheaves. Step 6 makes $|A|$ constructible, so the set criterion makes it coherent, and the converse direction of [lem-trf-oriented-constructible-coherent] makes $A$ constructible as a module sheaf. The finite coefficient ring is unchanged throughout. This proves the arbitrary-subobject clause without replacing module constructibility by an unproved set-valued identification.",
+   "uses": [
+    "lem-trf-oriented-constructible-coherent",
+    "lem-trf-coherent-set-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Lemma 8.3.3(1), finite-module variant using Section 8.1; set-to-module constructibility is the existing coherent criterion."
+   }
+  },
+  {
+   "text": "On any rectangular stratum, [lem-weil-pbc-locally-constant-derived-serre] applies to its small defining site and to $\\Lambda$. This ring is Noetherian since each ideal is a finite set and is generated by that finite list, as required by [def-weil-pbc-noetherian-ring]; a finite $\\Lambda$-module is finitely generated, and a finitely generated module over finite $\\Lambda$ is a quotient of a finite set $\\Lambda^d$, hence finite. Thus the cited theorem gives finite locally constant kernels, cokernels and extensions on the stratum. Inverse image along its geometric morphism preserves exact sequences of constant-$\\Lambda$ module sheaves: it preserves finite limits and, being a left adjoint, colimits, with $u^{-1}\\Lambda=\\Lambda$. For two constructible sheaves take the finite common refinements of their partitions of $X$ and of $S$, formed by intersections of locally closed strata; their pullbacks preserve the constant trivializations. Applying the cited theorem on every refined rectangle proves closure under kernels and cokernels of morphisms between constructible sheaves, and constructibility of the middle term of an extension whose outer terms are constructible.",
+   "uses": [
+    "lem-weil-pbc-locally-constant-derived-serre",
+    "def-trf-geometric-morphism",
+    "def-trf-oriented-constructible-sheaf",
+    "def-constructible-stratification",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Section 8.1 and the closure under kernels, cokernels and extensions used in the proof of Proposition 9.1.2, printed p. 20; the local exact-sequence input is the existing theorem for every small site."
+   }
+  },
+  {
+   "text": "For an arbitrary quotient $B\\twoheadrightarrow C$ with $B$ constructible, its kernel $A\\subseteq B$ is constructible by Step 7. Apply Step 8 to the morphism $A\\to B$ between constructible sheaves: its cokernel is $C$, so $C$ is constructible. Images are subobjects of their constructible target (Step 7), or cokernels of constructible kernels (Step 8). Iterating the extension clause handles every finite extension. These give all clauses of the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Lemma 8.3.3 and the exact-sequence closure used in Proposition 9.1.2; final elementary abelian-category deduction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "def-weil-pbc-scheme-conventions",
+  "lem-trf-qcqs-oriented-triple-presentation",
+  "lem-trf-finitary-site-coherent-generators",
+  "lem-trf-finitary-site-enough-points",
+  "lem-trf-oriented-closed-base-restriction",
+  "lem-trf-oriented-maximal-point-finiteness",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-constructible-stratification",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-trf-oriented-product-universal",
+  "lem-trf-oriented-slice-localization",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "def-trf-geometric-morphism",
+  "lem-trf-oriented-source-localization",
+  "lem-trf-coherent-set-criterion",
+  "lem-trf-coherent-object-approximation",
+  "def-weil-size-convention",
+  "lem-trf-oriented-constructible-coherent",
+  "lem-weil-pbc-locally-constant-derived-serre",
+  "def-trf-oriented-constructible-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+  "place": "Agent-written expansion following the author draft, Section 8.1, Lemmas 8.3.1-8.3.3 and the closure invoked in the proof of Proposition 9.1.2 (printed pp. 17-20), read online by the worker; no local archival copy in literature/ (WANTED filed in the report)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -87,10 +241,38 @@
    "results": "{\"t\": \"2026-10-17T18:20:07Z\", \"tool\": \"grep\", \"query\": \"nearby.?cycle|vanishing.?topos|oriented.?product\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned signatures; ordinary scheme morphisms, ordinary module sheaves, condensed modules and chain complexes do not state this assertion about vanishing topoi."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible finite module sheaves on a Noetherian vanishing topos are closed under arbitrary subobjects quotients and extensions",
+   "results": "{\"t\": \"2026-10-17T18:42:22Z\", \"tool\": \"leanfinder\", \"query\": \"Constructible finite module sheaves on a Noetherian vanishing topos are closed under arbitrary subobjects quotients and extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.instAB5CondensedMod\", \"Condensed.instAB4CondensedMod\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"instAbelianCondensedMod\", \"CondensedMod.IsSolid\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.IsFinitePresentation\"], \"digest\": \"bc19331894ca678b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; these do not state the indicated theorem about Grothendieck topoi or oriented etale products."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-17T18:42:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Constructible\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; these do not state the indicated theorem about Grothendieck topoi or oriented etale products."
+  },
+  {
+   "tool": "grep",
+   "query": "nearby.?cycle|vanishing.?topos|oriented.?product",
+   "results": "{\"t\": \"2026-10-17T18:42:49Z\", \"tool\": \"grep\", \"query\": \"nearby.?cycle|vanishing.?topos|oriented.?product\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; these do not state the indicated theorem about Grothendieck topoi or oriented etale products."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient sheaves on the oriented product of etale topoi have constructible submodules and constructible extensions",
+   "results": "{\"t\": \"2026-10-17T18:42:50Z\", \"tool\": \"leansearch\", \"query\": \"Finite coefficient sheaves on the oriented product of etale topoi have constructible submodules and constructible extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFiniteType\", \"SheafOfModules.IsFiniteType.mk\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"SheafOfModules.GeneratingSections.IsFiniteType.mk\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.Finite.hasFiniteLimits\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.mk\", \"SheafOfModules.IsFinitePresentation.mk\"], \"digest\": \"6ed4510531b97007\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; these do not state the indicated theorem about Grothendieck topoi or oriented etale products."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-psi-proper-surjective-constructibility",
@@ -113,5 +295,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-oriented-constructible-subquotients",
+  "worker": "stage1",
+  "summary": "Read Orgogozo author draft Sections 8.1–8.3 and 9.1 online. Kept the statement; expanded the maximal-point and two-coordinate Noetherian-induction proof before coherent approximation, then used the existing arbitrary-site locally constant module Serre theorem on common rectangular refinements. Added three statement-only supporting lemmas, not copies of the closure clauses. No Lean attachment was found.",
+  "blueprint": "Realizes the nearby-cycle constructibility input in the proof of lem-trf-local-term-locality (1),(2), normal-cone specialization, through the existing source-reduction and semistable-curve descent ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme finiteness tool ensuring the source of the finite-presentation map is Noetherian."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic scheme tool verifying the finite-cover triple-site hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic base-change permanence of finite presentation in the closed-pair induction."
+   },
+   {
+    "node": "lem-weil-pbc-locally-constant-derived-serre",
+    "why": "Generic small-site local-system theorem applied on the oriented strata; the ordinary etale constructible Serre theorem does not apply to these strata."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic well-foundedness tool for the two-coordinate Noetherian induction."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic composition permanence of finite presentation for the closed source pieces."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Generic scheme topological finiteness needed to take dense generic strata."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-locally-constant-derived-serre",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-noetherian-finitely-many-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-3d4ef5215",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-3d4ef5215 (reviewer sub-agent of L); spot-checked: I read the item (steps 1-9), the three new nodes, every cited statement, unit sk-i-curve-zero and the citers in lem-trf-psi-proper-surjective-constructibility. The Orgogozo author draft is not in literature/ and network access is blocked, so I could not read §8.1, 8.3.1-8.3.3 or 9.1.2. Instead I read ILO Travaux de Gabber XI 2.4-2.5, 3.3-3.4 and 4.1-4.d locally; they support the coherence input and the closed-subtopos identification. The WANTED line stands. The statement is unchanged and not weakened, and this is not a target node. I tested it on X or S empty, Lambda=0, Spec k, and j_!Lambda in Lambda on a trait. The proof is correct: well-founded induction on pairs of closed subsets, generic stabilization on an open rectangle at maximal points, induction on the two closed complements, filtered coherent images giving the arbitrary-subobject clause, and Serre closure on common refinements. The new nodes are true or source-backed, are not duplicates and do not restate the item (D1/D2 fine). closed-base-restriction checks out pointwise and against XI 4.c-4.d. coherent-object-approximation is standard coherent-topos theory. For maximal-point-finiteness I proved domination myself and tested f=id, a branch inside crossing lines, and a nodal curve. Finiteness over a non-excellent Noetherian base rests on the worker's reading of 8.3.2; I flag it in review.md. I accept all declared tool_uses: six are Mathlib leaves, and locally-constant-derived-serre is a generic small-site Serre tool. No SGA is cited. I fixed three faults in the item file. (1) Form: proof_origin was 'document' with a source not in literature/; it is now 'agent' (brief §4). (2) E5, step 3: finiteness of F at every maximal point was asserted without justification. N is now chosen from the maximal points inside a first rectangle where F is locally constant, with that finiteness shown, and step 4 notes that q is among them. (3) C1/C4, step 3: openness of the rectangle needs lem-trf-oriented-slice-localization, which is now cited and added to proof_deps.; 1 file(s) fixed by the reviewer"
  }
 }
