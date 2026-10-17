@@ -100,7 +100,7 @@ theorem IsIrreducibleLisse.map_equivalence (E : WeilSheaf k₀ l X ≌ WeilSheaf
     ((hE G).2 hG)
   · exact Or.inl ((E.functor.map_isZero h').of_iso (E.counitIso.app G).symm)
   · have : IsIso (E.inverse.map i) := IsIso.of_isIso_comp_right _ (E.unitInv.app F)
-    exact Or.inr (isIso_of_reflects_iso i E.inverse)
+    exact Or.inr (E.fullyFaithfulInverse.isIso_of_isIso_map i)
 
 /-- The constant twist of an irreducible lisse Weil sheaf is irreducible lisse: the twist is
 an autoequivalence of Weil sheaves which does not change underlying sheaves. -/
