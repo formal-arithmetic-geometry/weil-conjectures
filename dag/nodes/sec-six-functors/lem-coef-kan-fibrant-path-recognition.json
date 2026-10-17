@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-kan-quillen-model-right-proper-core"
+  "lem-coef-kan-quillen-model-right-proper-core",
+  "def-coef-infinity-relative-cone"
  ],
  "proof": [
   {
@@ -217,5 +218,24 @@
   "group": "Q133",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-c1be1ad36 (reviewer sub-agent of L); spot-checked: I read the whole item, all six steps and the full statements of the five cited nodes. The statement is true and not weakened. Rezk's existential two-leg definition holds iff Q→K×_Z L is a weak equivalence, iff RQ→U×_C V is one, iff RQ→P_R is one. I checked the edge cases Z empty (it forces RZ, RQ and P_R empty) and X empty with Z nonempty, and no step picks a point. Step 1: K→U is the pullback of r_Z along the fibration p, so right properness applies, and s_X is well defined by naturality (pα r_X = r_Z f). Step 2: lifts along trivial cofibrations against X_f→Z and k. The strict-pullback invariance node's hypotheses hold, with fibration legs T→Z, X_f→Z and k, and all components weak equivalences. The maps from Q commute. Step 3: w c_0 = d r_Q holds exactly. Step 4: the Mathlib leaf SSet.fibration_pullbackObjObjπ (PushoutProduct.lean:70-93) applied to ∂Δ¹↪Δ¹ and C→Δ⁰ makes (e0,e1) a fibration; E_B→C and E_V→V are fibrations as pullbacks and composites. Step 5: E_V×_V B = E_B, so right properness gives a weak equivalence, and the invariance node gives φ:P_R→P(p,q) with the right endpoint orientation. Step 6: the path-comparison node's Kan and fibration hypotheses hold, and φc = ψd holds strictly. There is no cycle over the 72 nodes the item reaches; the invariance and fibration-criterion nodes, which depend on the item, are not cited. Route: three cited nodes are in the same unit, plus one definition and one Mathlib leaf. No duplicate: lem-coef-kan-nerve-pullback-recognition needs Kan corners and uses ∞-cartesianness. No new nodes, no SGA, ten search records of all three kinds. Rezk and Kerodon are not in the literature folder; the report lists them as WANTED and proof_origin is agent. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanFibrantPathRecognition",
+  "declaration": "SSet.Enhanced.kan_fibrant_path_recognition",
+  "file": "lean/Sheaf/AlgebraicTopology/KanFibrantPathRecognition.lean",
+  "statement": "theorem kan_fibrant_path_recognition {Q X Y Z : SSet.{u}} (a : Q ⟶ X) (b : Q ⟶ Y) (f : X ⟶ Z) (g : Y ⟶ Z) (h : a ≫ f = b ≫ g) (R : SSet.{u} ⥤ SSet.{u}) (r : 𝟭 SSet.{u} ⟶ R) (hr : ∀ T : SSet.{u}, Mono (r.app T) ∧ IsWeakHomotopyEquivalence (r.app T)) (hR : ∀ T : SSet.{u}, Fibration (stdSimplex.isTerminalObj₀.from (R.obj T))) : (∃ (Xf Yf : SSet.{u}) (i : X ⟶ Xf) (j : Y ⟶ Yf) (ff : Xf ⟶ Z) (gf : Yf ⟶ Z), i ≫ ff = f ∧ j ≫ gf = g ∧ IsWeakHomotopyEquivalence i ∧ IsWeakHomotopyEquivalence j ∧ Fibration ff ∧ Fibration gf ∧ ∃ c : Q ⟶ pullback ff gf, c ≫ pullback.fst ff gf = a ≫ i ∧ c ≫ pullback.snd ff gf = b ≫ j ∧ IsWeakHomotopyEquivalence c) ↔ IsWeakHomotopyEquivalence (homotopyPullbackComparison (R.map a) (R.map b) (R.map f) (R.map g) ((R.map_comp a f).symm.trans ((congrArg R.map h).trans (R.map_comp b g))))",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the canonical homotopyPullbackComparison from the landed relative-cone node, added to stmt_deps. The two-leg condition is expanded in the statement to avoid importing downstream SharpPullbackCalculus, which uses this recognition theorem; no duplicate predicate is defined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-275d50965",
+  "group": "Q35",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes, edge cases, and verbatim Lean signature checked; per-file compilation passed cleanly. Repaired H11 second-reading placeholder with a complete replacement report in fixes/lem-coef-kan-fibrant-path-recognition.report.md. Full findings in review.md; snapshot and branch head unchanged."
  }
 }
