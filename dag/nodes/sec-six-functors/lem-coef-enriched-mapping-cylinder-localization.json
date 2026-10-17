@@ -10,9 +10,74 @@
  "stmt_deps": [
   "lem-coef-simplicial-arrow-attachment-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $M=M_f$ and let $i:D\\to M$ be inclusion of the second summand. Its mapping maps are identities and $ji=1_D$. Define $\\alpha:1_M\\Rightarrow ij$ by $\\alpha_x=(1_{fx}:x\\to fx)$ for $x\\in C$ and $\\alpha_d=1_d$ for $d\\in D$. This is an enriched natural transformation: on $C(x,x\\prime)$ the two composites $\\alpha_{x\\prime}a$ and $f(a)\\alpha_x$ both equal the cross simplex $f(a)$; on $D(d,d\\prime)$ both equal the given simplex; on $M(x,d)=D(fx,d)$ both equal that cross simplex. For maps from the second summand to the first the domain is empty, so the naturality equation is unique. These are equalities in every simplicial degree, not merely equalities of vertex arrows. Associativity, units and commutation with simplex operators for $i,j$ and this family follow from the displayed composition formulas of the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.5.6, printed pp.893–894; the bridge natural transformation is explicit here. HTT read online at the IAS mirror, not archived in literature/."
+   }
+  },
+  {
+   "text": "Put $E=\\Gamma(M,V)$ and denote its structure map by $q:M\\to E$. The strict attachment theorem identifies $q$ with the derived localization map in $h\\mathrm{sCat}$ and supplies exactly the identity-collapse extension $\\bar j:E\\to D$ of the statement, with $\\bar j q=j$. The induced functor $\\pi_0q$ inverts every labelled arrow: apply the image assertion of the localization universal property to $1_E$ and restrict it along $q$. In particular it inverts each $\\alpha_x$ in the first summand, because the hypothesis puts that bridge in $V$; in the second summand $q(\\alpha_d)$ is an identity. Extra labels and repeated labels impose no additional requirement here.",
+   "uses": [
+    "lem-coef-simplicial-arrow-attachment-localization",
+    "lem-coef-simplicial-inversion-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.5.6, printed pp.893–894; the bridge natural transformation is explicit here. HTT read online at the IAS mirror, not archived in literature/."
+   }
+  },
+  {
+   "text": "Postcompose the enriched naturality equations of Step 1 with $q$. They give a family $q(\\alpha_m):q(m)\\to qij(m)$ between the simplicial functors $q,qij:M\\to E$. Step 2 verifies that every component is invertible in $\\pi_0E$. Applying [lem-coef-simplicial-natural-equivalence-homotopy] to $A=M$, $B=E$, $F=q$ and $G=qij$ gives $[q]=[qij]$ in $\\operatorname{Hom}_{h\\mathrm{sCat}}(M,E)$. This application uses neither a Kan condition on $E$ nor a cofibrancy condition on $M$.",
+   "uses": [
+    "lem-coef-simplicial-natural-equivalence-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.5.6, printed pp.893–894; the bridge natural transformation is explicit here. HTT read online at the IAS mirror, not archived in literature/."
+   }
+  },
+  {
+   "text": "Define $s=qi:D\\to E$. Strictly, $\\bar j s=\\bar jqi=ji=1_D$. To prove the other inverse identity in $h\\mathrm{sCat}$, restrict both $s\\bar j$ and $1_E$ along $q$. The resulting classes are $[qi\\bar jq]=[qij]$ and $[q]$, equal by Step 3. The localization universal property, transported along the under-$M$ identification of the strict attachment theorem, says that this restriction on $\\operatorname{Hom}_{h\\mathrm{sCat}}(E,E)$ is injective. Hence $[s\\bar j]=[1_E]$. Thus $[s]$ is a two-sided inverse of the class of the specified $\\bar j$.",
+   "uses": [
+    "lem-coef-simplicial-arrow-attachment-localization",
+    "lem-coef-simplicial-inversion-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.5.6, printed pp.893–894; the bridge natural transformation is explicit here. HTT read online at the IAS mirror, not archived in literature/."
+   }
+  },
+  {
+   "text": "The last assertion of [lem-coef-simplicial-model-target-test] says that an actual simplicial functor representing such an isomorphism is a Dwyer--Kan equivalence, without local Kan or cofibrancy assumptions on its endpoints. Apply it to the isomorphism $[\\bar j]$ just proved. Its essential-surjectivity condition also holds directly: every $d\\in D$ is the image of $s(d)$, since $\\bar j s=1_D$. This proves the required assertion about the actual identity-collapse extension. If $C$ is empty, the bridge family is empty and the same restriction argument applies with $M=D$. If $D$ is empty and $f$ exists, $C$ is empty too; no labelled vertex arrows then exist, the attaching coproduct is empty and both sides are the empty simplicial category.",
+   "uses": [
+    "lem-coef-simplicial-model-target-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma A.3.5.6, printed pp.893–894; the bridge natural transformation is explicit here. HTT read online at the IAS mirror, not archived in literature/."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-arrow-attachment-localization",
+  "lem-coef-simplicial-inversion-universal-property",
+  "lem-coef-simplicial-natural-equivalence-homotopy",
+  "lem-coef-simplicial-model-target-test"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemma A.3.5.6, printed pp.893–894. Agent expansion using the general enriched natural-equivalence homotopy lemma; the latter admits an independent proof from A.3.5.14. HTT is online only, WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -48,10 +113,31 @@
    "results": "[loogle] OK 9 hit(s); returned names/files: CategoryTheory.Localization.equivalenceFromModel, CategoryTheory.Localization.uniq, CategoryTheory.Localization.functorEquivalence, CategoryTheory.Functor.IsLocalization.of_equivalence_target, CategoryTheory.Localization.uniq_symm, CategoryTheory.Localization.equivalence, CategoryTheory.Functor.IsLocalization.of_equivalence_source, CategoryTheory.Functor.IsLocalization.of_equivalences; digest ee3b858562afbbb1",
    "date": "2026-10-17",
    "verdict": "no match: source signatures distinguish ordinary category localizations and model-category cylinder objects from the enriched categorical mapping cylinder and its Dwyer--Kan localization retraction."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCylinder|mapping.cylinder|Dwyer|Bergner",
+   "results": "{\"t\": \"2026-10-17T08:41:40Z\", \"tool\": \"grep\", \"query\": \"mappingCylinder|mapping.cylinder|Dwyer|Bergner\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary localization equivalences in CategoryTheory/Localization/Predicate.lean do not prove a Dwyer--Kan equivalence on simplicial mapping sets. Enriched/Basic.lean only constructs ordinary enriched functor isomorphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of the enriched categorical mapping cylinder of any simplicial functor at its bridge arrows is Dwyer Kan equivalent to its target",
+   "results": "{\"t\": \"2026-10-17T08:41:40Z\", \"tool\": \"leansearch\", \"query\": \"Localization of the enriched categorical mapping cylinder of any simplicial functor at its bridge arrows is Dwyer Kan equivalent to its target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.mk\", \"CategoryTheory.Functor.IsLocalization.isEquivalence\", \"CategoryTheory.Localization.Construction.objEquiv\", \"CategoryTheory.Functor.IsLocalization.of_equivalence_target\", \"CategoryTheory.Localization.instIsEquivalenceLocalizationLift\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk\", \"CategoryTheory.Functor.q_isLocalization\", \"CategoryTheory.Localization.isEquivalence\"], \"digest\": \"b8791cd04b2a80da\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary localization equivalences in CategoryTheory/Localization/Predicate.lean do not prove a Dwyer--Kan equivalence on simplicial mapping sets. Enriched/Basic.lean only constructs ordinary enriched functor isomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLocalization, CategoryTheory.Equivalence",
+   "results": "{\"t\": \"2026-10-17T08:41:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsLocalization, CategoryTheory.Equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.equivalenceFromModel\", \"CategoryTheory.Localization.uniq\", \"CategoryTheory.Localization.functorEquivalence\", \"CategoryTheory.Functor.IsLocalization.of_equivalence_target\", \"CategoryTheory.Localization.uniq_symm\", \"CategoryTheory.Localization.equivalence\", \"CategoryTheory.Functor.IsLocalization.of_equivalence_source\", \"CategoryTheory.Functor.IsLocalization.of_equivalences\"], \"digest\": \"ee3b858562afbbb1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary localization equivalences in CategoryTheory/Localization/Predicate.lean do not prove a Dwyer--Kan equivalence on simplicial mapping sets. Enriched/Basic.lean only constructs ordinary enriched functor isomorphisms."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-grothendieck-hocolimit",
@@ -84,5 +170,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-mapping-cylinder-localization",
+  "worker": "stage1",
+  "summary": "Constructed the enriched bridge transformation and checked its equations on all four types of mapping simplicial set; used localization to invert its components and injectivity to prove a two-sided inverse for the specified identity-collapse extension. One new statement-only general natural-equivalence homotopy lemma, with logged Mathlib searches; no change of statement or extra cofibrancy/Kan assumptions. Empty and repeated-label cases checked.",
+  "blueprint": "Realizes the inherited mapping-cylinder input to the simplicial Grothendieck homotopy-colimit foundation of prop-coef-integral-exceptional-adjoint, current main-20261015 proof paragraph 2 and the derived coefficient-adjunction/inverse-limit display. No unit or chapter route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N1-602bf3615",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-602bf3615 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-coef-simplicial-natural-equivalence-homotopy and the full statements of every cited node (arrow-attachment-localization, inversion-universal-property, model-target-test, inversion-product-parameter). Checked them against HTT (2017) from the local copy /tmp/q72htt/htt.pdf: Notation A.3.5.1, Proposition A.3.5.5 and Lemma A.3.5.6 on printed pp.891-894, and Lemma A.3.5.14 on p.896. The cited pages are correct. The item statement is exactly A.3.5.6 for S=sSet: mapping cylinder M, retraction j, conditions (i) and (ii), and the collapse extension over the fixed K=E pushout. The statement is unchanged and nothing is weakened. This is not a target node, so no base change or coefficient category is involved. Step 1: I recomputed alpha's strict naturality on the C, D, cross and empty mapping sets. Step 2: pi0(q) inverts V by the image clause, and condition (ii) puts the bridge arrows in V. Step 3: the new lemma's hypotheses hold. Step 4: j-bar q i = ji = 1_D strictly, and injectivity of q* with T=E gives [q i j-bar]=[1_E]. Step 5: the DK clause of model-target-test applies, essential surjectivity holds via s, and the empty cases work. New node: I proved it independently. H:[1]xA->B is well defined by naturality; it extends over L([1]xA), which is L[1]xA = KxA ~ JxA by the product lemma A.3.5.14; the two endpoint sections of the DK projection have equal classes. Tested on empty A, A a point, discrete B and a non-invertible eta. It is statement-only, self-contained, searched with real results, and its blueprint from/via are correct. No duplicate among the closest DAG nodes (nerve-natural-homotopy-equivalence, diagram-equivalence-classes, hammock/zigzag invariance, enriched-completion-localization), and blueprint_refs search found none. It does not restate a clause of the item. Closures of all cited nodes (215-237 nodes) do not contain the item, so there is no cycle. All citations are in unit sk-prop-sf-biduality-general and tool_uses=[] is correct. No SGA. No changes made."
  }
 }

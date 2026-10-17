@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "Finite reduction of the completed map",
- "statement": "For every $n$, reduction of $\\Ex^{\\mathrm{comp}}_{\\square,K}$ of\n[def-weil-pbc-completed-base-change-map] modulo $I^n$, conjugated by\nthe canonical reduction isomorphisms, is exactly\n$$\n \\Ex_{\\square,K_n}:Lg_n^*Rf_*K_n\n \\xrightarrow{\\sim}Rf'_*Lg_n'^*K_n.\n$$\nThese reduction squares commute with $n+1\\to n$ and with compatible\nendomorphisms.",
+ "statement": "Use the adic datum, proper Cartesian square, derived complete $K$, and specified finite-level etale-origin witnesses of [def-weil-pbc-completed-base-change-map]. Use the named edges of [def-weil-pbc-completed-reduction-square], and let $n\\geq1$. For the final Frobenius assertion use the coherent Frobenius tower datum and the directly defined quotient-coefficient Weil structures of [def-weil-pbc-quotient-corner-frobenius-structures]. All four finite vertices and their Weil structures are in $D(Y'_{\\mathrm{proet}},P_n)$; the completed vertices and their structures are over $A_{Y'}$.\n\nFor every $n$, the diagram\n\n$$\n\\begin{CD}\nS\\otimes^LP_n @>{\\overline\\xi_n}>> T\\otimes^LP_n\\\\\n@V{\\alpha_n}V{\\sim}V @VV{\\delta_n}V{\\sim}\\\\\nB_n @>{v'_n}>> D_n\n\\end{CD}\n$$\n\ncommutes. Hence reduction of\n$\\operatorname{Ex}^{\\mathrm{comp}}_{\\square,K}$ of\n[def-weil-pbc-completed-base-change-map] modulo $I^n$, conjugated\nby the displayed canonical reduction isomorphisms, is exactly the S8\ntransported finite-level exchange map $v'_n=\\operatorname{Ex}_{\\square,K_n}$.\nThe squares for $n+1\\to n$ commute, and the assertion is natural for\ncompatible tower endomorphisms. Under a Frobenius-equivariant datum, use\n$\\Phi_{Y'}P_n=P_n$ to give the two reductions their induced Weil structures.\nThen\n\n$$\n\\begin{aligned}\n\\alpha_n(\\Theta_S\\otimes1)\n&=\\Theta_{B,n}\\Phi_{Y'}(\\alpha_n),\\\\\n\\delta_n(\\Theta_T\\otimes1)\n&=\\Theta_{D,n}\\Phi_{Y'}(\\delta_n),\n\\end{aligned}\n$$\n\nand the displayed reduction square is a square of Weil objects.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-map-reduction.md",
   "place": "node lemma-weil-pbc-completed-map-reduction, order 1347",
@@ -23,107 +23,253 @@
  },
  "stmt_deps": [
   "def-weil-pbc-completed-base-change-map",
-  "def-weil-pbc-completed-reduction-square"
+  "def-weil-pbc-completed-reduction-square",
+  "def-weil-pbc-quotient-corner-frobenius-structures"
  ],
  "proof": [
   {
-   "text": "Use the datum of [def-weil-pbc-completed-base-change-map], with $n\\geq1$, and its first identification $s_A:S\\xrightarrow{\\sim}A_\\infty$ before $H$, its direct-image comparison $d:T\\xrightarrow{\\sim}D_\\infty$, and $\\xi=\\Ex^{\\mathrm{comp}}_{\\square,K}$. Thus $d\\xi=V'Hs_A$. Write $c:C_\\infty\\xrightarrow{\\sim}T$ for the ordered map $\\chi$ of [def-weil-pbc-completed-reduction-square]. To justify its reduction edges without assuming completeness of ordinary pullback, put $N=Lg^*Rf_*K$ and $M=Rf'_*Lg'^*K$. By [def-weil-pbc-four-corners] the towers $A_\\bullet,C_\\bullet$ are the strict reduction towers of $N,M$, with the canonical pullback/tensor identifications on $A_\\bullet$. For ANY $Z\\in D(\\operatorname{Mod}(A_{Y'}))$, set $Z_n=Z\\otimes^L_{A_{Y'}}(P_n)_{Y'}$ and $\\widehat Z=\\Rlim Z_\\bullet$. Apply [lem-weil-pbc-constant-completion-equivalence] to $\\operatorname{Sh}(Y'_{\\Proet})$. It identifies $\\operatorname{Res}(Z)_n$ with $Z_n$, identifies their derived limits and completion units, and identifies the two finite reductions of $\\widehat Z$. Now apply [lemma-weil-pbc-adic-completion-reduction] to the arbitrary constant-coefficient complex $\\operatorname{Res}(Z)$ with $\\Lambda=A$, in [def-weil-pbc-complete-coefficient-datum]. Noetherianity, finite generation of $I$, torsion $A/I$, and perfection of $P_n$ follow from our adic datum. Transport its projection-induced functorial isomorphism through the preceding canonical comparisons to obtain\n$$\\rho_{Z,n}:\\widehat Z\\otimes^L_{A_{Y'}}(P_n)_{Y'}\\xrightarrow{\\sim}Z_n.$$\nThe projection to $Z_n$ is preserved by the limit comparison, so this is precisely the projection-induced reduction map, not an arbitrary isomorphism. In particular $q_{C,n}=\\rho_{M,n}$ exists for the possibly incomplete $M$. The same construction on $N$ gives $q_{A,n}$; under $s_A$ this is the canonical finite reduction of [lemma-weil-pbc-completed-pullback-reduction], since both are induced by evaluation to $A_n$. Consequently the prescribed edges of [def-weil-pbc-completed-reduction-square] are $\\sigma_n=q_{A,n}(s_A\\otimes1)$, $\\tau_n=q_{C,n}(c^{-1}\\otimes1)$, $\\alpha_n=h_n\\sigma_n$, and $\\delta_n=h'_n\\tau_n$. This repairs that definition's attribution of $\\rho_{M,n}$ to a complete-input reconstruction lemma: we prove its existence using the arbitrary-input reduction theorem instead.",
+   "text": "First justify reduction for a possibly incomplete input. For $Z\\in D(\\operatorname{Mod}(Y'_{\\Proet},A_{Y'}))$, set $Z_n=Z\\otimes^L_{A_{Y'}}(P_n)_{Y'}$ and $\\widehat Z=\\Rlim Z_\\bullet$. Apply [lem-weil-pbc-constant-completion-equivalence] on the small site $Y'_{\\Proet}$. Its canonical finite-reduction comparison identifies the strict reduction towers of $\\operatorname{Res}(Z)$ and $Z$, and its derived-limit comparison respects the completion units and evaluations. Apply [lemma-weil-pbc-adic-completion-reduction] to $\\operatorname{Res}(Z)$ with constant ring $\\Lambda=A$. The hypotheses in [def-weil-pbc-complete-coefficient-datum] hold by [def-weil-pbc-adic-coefficient-datum]: $A$ is Noetherian, $I$ is finitely generated, $A/I$ is additive torsion, and all $P_n$ are perfect. Transport its functorial, projection-adjoint isomorphism through the coefficient comparisons to obtain\n$$q_{Z,n}:\\widehat Z\\otimes^L_{A_{Y'}}(P_n)_{Y'}\\xrightarrow{\\sim}Z_n.$$\nIt is the adjoint of evaluation to $Z_n$, natural in $Z$. This uses no completeness hypothesis on $Z$; in particular it does not apply the complete-input reconstruction theorem to an incomplete object.",
    "uses": [
-    "def-weil-pbc-completed-base-change-map",
-    "def-weil-pbc-completed-reduction-square",
-    "def-weil-pbc-four-corners",
     "lem-weil-pbc-constant-completion-equivalence",
     "lemma-weil-pbc-adic-completion-reduction",
     "def-weil-pbc-complete-coefficient-datum",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-map-reduction.proof.md",
+    "place": "Paragraph 1, functorial finite reduction; supplies the arbitrary-input reduction needed by the right edge"
+   }
+  },
+  {
+   "text": "Use $S,T,\\xi=\\operatorname{Ex}^{\\mathrm{comp}}_{\\square,K}$ of [def-weil-pbc-completed-base-change-map], and denote its first identification before $H$ by $s_A:S\\xrightarrow{\\sim}A_\\infty$ and its direct-image comparison by $d:T\\xrightarrow{\\sim}D_\\infty$. Thus $d\\xi=V'Hs_A$. Put $N=Lg^*Rf_*K$ and $M=Rf'_*Lg'^*K$. Under [def-weil-pbc-four-corners] and the pullback/tensor comparisons specified in [def-weil-pbc-four-arrows], $A_\\bullet,C_\\bullet$ are their strict reduction towers. Write $q_{A,n}=q_{N,n}$ and $q_{C,n}=q_{M,n}$. Let $c:C_\\infty\\xrightarrow{\\sim}T$ be the ordered map $\\chi$ of [def-weil-pbc-completed-reduction-square]. Both the prescribed completed-pullback reduction and $q_{A,n}(s_A\\otimes1)$ are adjoints of the same evaluation map; hence they coincide. The named edges are therefore\n$$\\sigma_n=q_{A,n}(s_A\\otimes1),\\quad \\tau_n=q_{C,n}(c^{-1}\\otimes1),\\quad \\alpha_n=h_n\\sigma_n,\\quad\\delta_n=h'_n\\tau_n.$$\nStep 1 justifies the prescribed projection-induced reduction on $M$, even if $M$ is not complete. The use of completed-pullback reduction on $Rf_*K$ is legitimate: [prop-weil-pbc-direct-image-limits] says that this input is derived complete, as required by [lemma-weil-pbc-completed-pullback-reduction].",
+   "uses": [
+    "def-weil-pbc-completed-base-change-map",
+    "def-weil-pbc-four-corners",
+    "def-weil-pbc-four-arrows",
+    "def-weil-pbc-completed-reduction-square",
+    "prop-weil-pbc-direct-image-limits",
     "lemma-weil-pbc-completed-pullback-reduction"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-map-reduction.md",
-    "place": "First Proof, paragraph 1; Detailed form Proof, finite-reduction identifications"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-map-reduction.proof.md",
+    "place": "Paragraph 1, the identifications S=A_infinity and T=C_infinity, and the named reduction edges"
    }
   },
   {
-   "text": "The ordered composite defining $c=\\chi$ in [def-weil-pbc-completed-reduction-square] is $c=\\lambda_E^{-1}\\Rlim_m(\\pi_{f',E,P_m})$, where $E=Lg'^*K$. Under the level identifications of [def-weil-pbc-four-corners], the maps $\\pi_{f',E,P_m}$ are precisely $h'_m$ of [def-weil-pbc-four-arrows]. Their tower morphism is supplied by [lem-weil-pbc-tower-compatibility]. The comparison $\\lambda_E$ is the very comparison $d$ specified in [def-weil-pbc-completed-base-change-map], since both use the tower $E\\otimes^LP_m=Lg_m'^*K_m$ and the canonical comparison of [prop-weil-pbc-direct-image-limits]. Therefore $c=d^{-1}H'$ and $dc=dd^{-1}H'=H'$. This is an identity of ordered composites, not uniqueness of a triangle filler. Now [lem-weil-pbc-rectangle-derived-limit] gives $V'H=H'V$, so $d\\xi=H'Vs_A=dcVs_A$. Cancelling the specified isomorphism $d$ gives $\\xi=cVs_A$.",
+   "text": "The ordered composite for $c$ in [def-weil-pbc-completed-reduction-square] is $\\lambda_E^{-1}\\Rlim(\\pi_{f',E,P_m})$, for $E=Lg'^*K$. The canonical comparison $E\\otimes^LP_m\\simeq Lg_m'^*K_m$ in [def-weil-pbc-four-corners] identifies these projection-formula arrows with $h'_m$ of [def-weil-pbc-four-arrows]. They form the tower map of [lem-weil-pbc-tower-compatibility]. The comparison $\\lambda_E$ is $d$: both are the specified direct-image/derived-limit comparison of [prop-weil-pbc-direct-image-limits] on that same tower. Consequently $c=d^{-1}H'$, and $dc=H'$. The limit rectangle of [lem-weil-pbc-rectangle-derived-limit] gives $V'H=H'V$. Substituting in $d\\xi=V'Hs_A$ and cancelling $d$ proves\n$$\\xi=cVs_A.$$\nThe comparison $dc=H'$ is an equality of the specified ordered composites, so no choice of a triangle filler enters it.",
    "uses": [
     "def-weil-pbc-completed-reduction-square",
     "def-weil-pbc-four-corners",
     "def-weil-pbc-four-arrows",
     "lem-weil-pbc-tower-compatibility",
-    "def-weil-pbc-completed-base-change-map",
     "prop-weil-pbc-direct-image-limits",
     "lem-weil-pbc-rectangle-derived-limit"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-map-reduction.md",
-    "place": "First Proof, paragraph 1, equations dc=H′ and V′H=H′V"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-map-reduction.proof.md",
+    "place": "Paragraph 1, dc=H-prime and the limit rectangle"
    }
   },
   {
-   "text": "Let $e:N\\to M$ be the ambient exchange map. By [def-weil-pbc-four-arrows], $v_n$ is exactly $e\\otimes1$ under the canonical identification of $N_n$ with $A_n$. By [lem-weil-pbc-tower-compatibility] these are its compatible reduction-tower maps, and their image under [prop-weil-pbc-rlim-functoriality] is $V:A_\\infty\\to C_\\infty$. The arbitrary-input projection-induced isomorphisms of [lemma-weil-pbc-adic-completion-reduction] are functorial in the input complex. The scalar comparison of [lem-weil-pbc-constant-completion-equivalence] is canonical and preserves the towers, finite reductions and units. Apply that functoriality to $\\operatorname{Res}(e)$ and identify the two sides through those comparisons. This gives\n$$q_{C,n}(V\\otimes1)=v_nq_{A,n}.$$\nIn particular this use of functoriality has no completeness hypothesis on $M$ or $N$. Tensoring step 2 and substituting step 1 now gives\n$$\\tau_n\\overline\\xi_n=q_{C,n}(c^{-1}\\otimes1)(c\\otimes1)(V\\otimes1)(s_A\\otimes1)=v_nq_{A,n}(s_A\\otimes1)=v_n\\sigma_n.$$\nThe finite equality in [lem-weil-pbc-rectangle-derived-limit] is $h'_nv_n=v'_nh_n$, whence\n$$\\delta_n\\overline\\xi_n=h'_nv_n\\sigma_n=v'_nh_n\\sigma_n=v'_n\\alpha_n.$$\nThe maps $\\sigma_n,\\tau_n$ are isomorphisms by step 1, and $h_n,h'_n$ are the specified projection-formula isomorphisms of [def-weil-pbc-four-arrows]. Therefore $\\delta_n\\overline\\xi_n\\alpha_n^{-1}=v'_n$, precisely the specified finite-level exchange isomorphism.",
+   "text": "Let $e:N\\to M$ be the ambient exchange. By [def-weil-pbc-four-arrows], $v_n$ is its reduction, with the prescribed pullback/tensor comparison; [lem-weil-pbc-tower-compatibility] supplies the associated tower map, whose derived limit is $V$ by [prop-weil-pbc-rlim-functoriality]. Apply the functorial reduction of [lemma-weil-pbc-adic-completion-reduction] to $\\operatorname{Res}(e)$ and use [lem-weil-pbc-constant-completion-equivalence] to identify the towers and reductions. It gives\n$$q_{C,n}(V\\otimes1)=v_nq_{A,n}.$$\nTensoring step 3 and using step 2 now gives\n$$\\tau_n\\overline\\xi_n=q_{C,n}(c^{-1}\\otimes1)(c\\otimes1)(V\\otimes1)(s_A\\otimes1)=v_n\\sigma_n.$$\nThe equality $h'_nv_n=v'_nh_n$ is exactly [lem-weil-pbc-finite-level-rectangle]. Therefore\n$$\\delta_n\\overline\\xi_n=h'_nv_n\\sigma_n=v'_nh_n\\sigma_n=v'_n\\alpha_n.$$\nAll four named reduction and projection-formula identifications are isomorphisms by steps 1--2 and [def-weil-pbc-four-arrows]. Thus $\\delta_n\\overline\\xi_n\\alpha_n^{-1}=v'_n$, the specified finite exchange, not an unspecified isomorphism.",
    "uses": [
     "def-weil-pbc-four-arrows",
     "lem-weil-pbc-tower-compatibility",
     "prop-weil-pbc-rlim-functoriality",
     "lemma-weil-pbc-adic-completion-reduction",
     "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-rectangle-derived-limit"
+    "lem-weil-pbc-finite-level-rectangle"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-map-reduction.md",
-    "place": "First Proof, paragraphs 1-2; Detailed form Proof, nth component"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-map-reduction.proof.md",
+    "place": "Paragraphs 1--2, finite conjugation and commutativity"
    }
   },
   {
-   "text": "Let $r^S_{n+1,n}=1_S\\otimes(P_{n+1}\\to P_n)$ and $r^T_{n+1,n}=1_T\\otimes(P_{n+1}\\to P_n)$, viewed in the ambient $A$-coefficient category. For either $Z=N,M$ the quotient-tower completion unit $\\eta_Z:Z\\to\\widehat Z$ has projection to $Z_n$ equal to the scalar-extension unit. Hence the projection-induced $\\rho_{Z,n}$ of [lemma-weil-pbc-adic-completion-reduction], transported through the unit-preserving comparisons of [lem-weil-pbc-constant-completion-equivalence], satisfies $\\rho_{Z,n}(\\eta_Z\\otimes1)=1_{Z_n}$. Since $\\rho_{Z,n}$ is an isomorphism by step 1, $\\eta_Z\\otimes1=\\rho_{Z,n}^{-1}$. Naturality of tensoring the fixed map $\\eta_Z$ with the quotient map gives $r^{\\widehat Z}_{n+1,n}(\\eta_Z\\otimes1_{P_{n+1}})=(\\eta_Z\\otimes1_{P_n})r^Z_{n+1,n}$. Multiplying by the two inverses gives $r^Z_{n+1,n}\\rho_{Z,n+1}=\\rho_{Z,n}r^{\\widehat Z}_{n+1,n}$. For $Z=N$ compose with $s_A\\otimes1$, and for $Z=M$ compose with $c^{-1}\\otimes1$; tensor naturality of these fixed maps gives $a_{n+1,n}\\sigma_{n+1}=\\sigma_nr^S_{n+1,n}$ and $c_{n+1,n}\\tau_{n+1}=\\tau_nr^T_{n+1,n}$. By [lem-weil-pbc-tower-compatibility], $b_{n+1,n}h_{n+1}=h_na_{n+1,n}$, $d_{n+1,n}h'_{n+1}=h'_nc_{n+1,n}$ and $d_{n+1,n}v'_{n+1}=v'_nb_{n+1,n}$. Substitution gives\n$$\n b_{n+1,n}\\alpha_{n+1}=\\alpha_nr^S_{n+1,n},\\qquad\n d_{n+1,n}\\delta_{n+1}=\\delta_nr^T_{n+1,n}.\n$$\nFinally, tensor functoriality gives $r^T_{n+1,n}\\overline\\xi_{n+1}=\\overline\\xi_nr^S_{n+1,n}$. These three equations and the equation for $v'$ exhibit the compatibility on every edge of the two reduction squares. This is ambient transition compatibility, not an assertion that tensoring over $A$ with $P_n$ is the same as normalized reduction over $P_{n+1}$.",
+   "text": "For $Z=N,M$, let $\\eta_Z:Z\\to\\widehat Z$ be its quotient-tower completion unit and $r^Z_{n+1,n}=1_Z\\otimes(P_{n+1}\\to P_n)$. Its projection to $Z_n$ is the scalar-extension unit. Since $q_{Z,n}$ is the adjoint of that projection, naturality and the triangle identity of extension/restriction adjunction give $q_{Z,n}(\\eta_Z\\otimes1)=1_{Z_n}$. Step 1 then gives $\\eta_Z\\otimes1=q_{Z,n}^{-1}$. These are the same units under [lem-weil-pbc-constant-completion-equivalence], and the projection-adjoint property is [lemma-weil-pbc-adic-completion-reduction]. Tensor naturality for the fixed morphism $\\eta_Z$ says\n$$r^{\\widehat Z}_{n+1,n}(\\eta_Z\\otimes1_{P_{n+1}})=(\\eta_Z\\otimes1_{P_n})r^Z_{n+1,n}.$$\nMultiplying by the two inverses proves $r^Z_{n+1,n}q_{Z,n+1}=q_{Z,n}r^{\\widehat Z}_{n+1,n}$. Composing with $s_A\\otimes1$ and $c^{-1}\\otimes1$ and using tensor naturality for these fixed maps gives\n$$a_{n+1,n}\\sigma_{n+1}=\\sigma_nr^S_{n+1,n},\\quad c_{n+1,n}\\tau_{n+1}=\\tau_nr^T_{n+1,n}.$$\nHere every transition is in the ambient $A$-coefficient category; none is normalized tensor over $P_{n+1}$.",
    "uses": [
-    "lemma-weil-pbc-adic-completion-reduction",
     "lem-weil-pbc-constant-completion-equivalence",
+    "lemma-weil-pbc-adic-completion-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-map-reduction.proof.md",
+    "place": "Paragraph 3, naturality of the reduction edges for consecutive quotient maps"
+   }
+  },
+  {
+   "text": "The tower-map equations in [lem-weil-pbc-tower-compatibility] are\n$$b_{n+1,n}h_{n+1}=h_na_{n+1,n},\\quad d_{n+1,n}h'_{n+1}=h'_nc_{n+1,n},\\quad d_{n+1,n}v'_{n+1}=v'_nb_{n+1,n}.$$\nSubstituting step 5 into the first two gives\n$$b_{n+1,n}\\alpha_{n+1}=\\alpha_nr^S_{n+1,n},\\qquad d_{n+1,n}\\delta_{n+1}=\\delta_nr^T_{n+1,n}.$$\nFinally, since $\\overline\\xi_n=\\xi\\otimes1_{P_n}$, tensor naturality gives $r^T_{n+1,n}\\overline\\xi_{n+1}=\\overline\\xi_nr^S_{n+1,n}$. These identities and the displayed equation for $v'$ give every edge of the transition between the two reduction squares.",
+   "uses": [
     "lem-weil-pbc-tower-compatibility"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-map-reduction.md",
-    "place": "First Proof, paragraph 3, transition compatibilities"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-map-reduction.proof.md",
+    "place": "Paragraph 3, all four transition equations"
    }
   },
   {
-   "text": "For a compatible endomorphism of $K$, use its induced corner maps $u_{A,n},u_{B,n},u_{C,n},u_{D,n}$ and their limits $u_{A,\\infty},u_{B,\\infty},u_{C,\\infty},u_{D,\\infty}$. The finite operator equations of [lem-weil-pbc-tower-compatibility] include $h_nu_{A,n}=u_{B,n}h_n$, $h'_nu_{C,n}=u_{D,n}h'_n$, $v'_nu_{B,n}=u_{D,n}v'_n$ and $v_nu_{A,n}=u_{C,n}v_n$. Applying [prop-weil-pbc-rlim-functoriality] gives $Hu_{A,\\infty}=u_{B,\\infty}H$, $H'u_{C,\\infty}=u_{D,\\infty}H'$, $V'u_{B,\\infty}=u_{D,\\infty}V'$ and $Vu_{A,\\infty}=u_{C,\\infty}V$. Functoriality of completed pullback [lemma-weil-pbc-completed-pullback-reduction] identifies $s_Au_S=u_{A,\\infty}s_A$; the canonical comparison of [prop-weil-pbc-direct-image-limits] gives $du_T=u_{D,\\infty}d$. Since $c=d^{-1}H'$, it follows that $cu_{C,\\infty}=u_Tc$. Apply the arbitrary-input functorial reduction of [lemma-weil-pbc-adic-completion-reduction], with the canonical coefficient comparisons of [lem-weil-pbc-constant-completion-equivalence], to the induced endomorphisms of $N$ and $M$. Their quotient towers give $u_{A,n}$ and $u_{C,n}$, and their limits give $u_{A,\\infty}$ and $u_{C,\\infty}$. Thus $q_{A,n}(u_{A,\\infty}\\otimes1)=u_{A,n}q_{A,n}$ and $q_{C,n}(u_{C,\\infty}\\otimes1)=u_{C,n}q_{C,n}$, without a completeness assumption on $M$. Substitution gives $\\sigma_n(u_S\\otimes1)=u_{A,n}\\sigma_n$ and $\\tau_n(u_T\\otimes1)=u_{C,n}\\tau_n$, hence $\\alpha_n(u_S\\otimes1)=u_{B,n}\\alpha_n$ and $\\delta_n(u_T\\otimes1)=u_{D,n}\\delta_n$. Finally step 2 gives $\\xi u_S=cVu_{A,\\infty}s_A=cu_{C,\\infty}Vs_A=u_T\\xi$. Tensoring this equality gives $\\overline\\xi_n(u_S\\otimes1)=(u_T\\otimes1)\\overline\\xi_n$; the lower-edge equation is $v'_nu_{B,n}=u_{D,n}v'_n$. These four edge equations prove operator compatibility of the square.",
+   "text": "For a compatible tower endomorphism of $K_\\bullet$, first define $u_K=\\eta_K^{-1}\\Rlim(u_\\bullet)\\eta_K$ using the completeness identification $\\eta_K:K\\xrightarrow{\\sim}\\Rlim K_\\bullet$ of [def-weil-pbc-completed-base-change-map]. Naturality of the evaluation maps in [prop-weil-pbc-roos-triangle], followed by their scalar-extension adjuncts, identifies its reduction with the given $u_n$. Thus it suffices to use an endomorphism of $K$. For a compatible endomorphism of $K$, write $u_{Z,n}$ and $u_{Z,\\infty}$ for its induced maps on each corner tower and limit, and $u_S,u_T$ for the completed objects. By [lem-weil-pbc-tower-compatibility], all four finite edges intertwine these maps. Applying the functor [prop-weil-pbc-rlim-functoriality] gives the same identities for $H,V,H',V'$. Functoriality of completed-pullback reduction [lemma-weil-pbc-completed-pullback-reduction] and of the canonical comparison [prop-weil-pbc-direct-image-limits] gives\n$$s_Au_S=u_{A,\\infty}s_A,\\qquad du_T=u_{D,\\infty}d.$$\nSince $c=d^{-1}H'$, these imply $cu_{C,\\infty}=u_Tc$. Step 1's functoriality, namely [lemma-weil-pbc-adic-completion-reduction] through [lem-weil-pbc-constant-completion-equivalence], gives\n$$q_{A,n}(u_{A,\\infty}\\otimes1)=u_{A,n}q_{A,n},\\quad q_{C,n}(u_{C,\\infty}\\otimes1)=u_{C,n}q_{C,n}.$$\nSubstitution in step 2 proves $\\alpha_n(u_S\\otimes1)=u_{B,n}\\alpha_n$ and $\\delta_n(u_T\\otimes1)=u_{D,n}\\delta_n$. Step 3 gives $\\xi u_S=cVu_{A,\\infty}s_A=cu_{C,\\infty}Vs_A=u_T\\xi$; tensoring gives the upper-edge identity. The lower-edge identity is $v'_nu_{B,n}=u_{D,n}v'_n$. This proves the endomorphism clause on every edge.",
    "uses": [
     "lem-weil-pbc-tower-compatibility",
     "prop-weil-pbc-rlim-functoriality",
     "lemma-weil-pbc-completed-pullback-reduction",
     "prop-weil-pbc-direct-image-limits",
     "lemma-weil-pbc-adic-completion-reduction",
-    "lem-weil-pbc-constant-completion-equivalence"
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-completed-base-change-map",
+    "prop-weil-pbc-roos-triangle"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-map-reduction.md",
-    "place": "First Proof, paragraph 3, compatible endomorphisms; Detailed form conclusion"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-map-reduction.proof.md",
+    "place": "Paragraph 3, compatible endomorphisms"
+   }
+  },
+  {
+   "text": "Use [def-weil-pbc-quotient-corner-frobenius-structures] from now on. Its coefficient maps for $F_T$ and all square edges commute with $A_T\\to(P_n)_T$ by [lem-weil-pbc-profinite-coefficient-inverse-image]. Thus every Frobenius face is a square of ringed topoi at both coefficient levels. Its $\\beta$ is an isomorphism: paste that face with the face for the inverse automorphisms. By the two pasting identities and identity case of [lem-weil-pbc-mate-pasting], the composites of their exchange maps, with the inverse-image composition identifications inserted, are identity transformations. These are two-sided inverses. The same argument works on the ringed diagram sites of [lem-weil-pbc-diagram-site-realization]. The $\\kappa$ maps are the specified invertible pullback-composition comparisons. Hence the displayed composites defining $\\Theta_B,\\Theta_D$, and their finite/ambient strict transports defining $\\Theta_A,\\Theta_C$, are isomorphisms.",
+   "uses": [
+    "def-weil-pbc-quotient-corner-frobenius-structures",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-diagram-site-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-map-reduction.proof.md",
+    "place": "Paragraph 4: actual coefficient categories, invertibility and normalization"
+   }
+  },
+  {
+   "text": "At level $n$, [lem-weil-pbc-ring-sheaf-change-adjunction] compares finite and ambient adjuncts for $A_T\\to(P_n)_T$. On the diagram sites use the two factorizations of the same ringed morphism through $(\\mathcal T_U,\\Delta A_U)$ and $(\\mathcal T_V,Q_V)$. [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] gives $r_VRu_{*,Q}\\simeq Ru_{*,\\Delta A}r_U$, since restriction $r$ is exact by [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Identified inverse image commutes with $r$ termwise: the underlying inverse-image section and its restricted action agree. The module adjunction [lem-weil-pbc-ringed-topoi-module-adjunction] identifies the underlying adjuncts; [lem-pc-pre-derived-adjoint-functors-general] preserves this identity on fraction representatives. Hence these derived comparisons respect exchange mates. Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] on the $\\Delta A$ diagram sites with quotient diagram $Q$, input $\\Delta K$, and ambient exchange $e$. Its two composite equality, with these coefficient adjunct comparisons, is\n$$r(\\operatorname{Ex}^{Q}_{K_\\bullet})H=H'\\mathcal R(e).$$\nHere $\\mathcal R(F)=\\Delta F\\otimes^LQ$. Both $H,H'$ and $\\mathcal R(e)$ are precisely the strict realizations in [lem-weil-pbc-strict-tower-exchange-mate-normalization]. Cancel $H$ to obtain $r(\\operatorname{Ex}^{Q}_{K_\\bullet})=H'\\mathcal R(e)H^{-1}=v'_\\bullet$. This proves equality in the actual ambient derived strict-tower category without inferring it from constant-coefficient restrictions or evaluated arrows.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-map-reduction.proof.md",
+    "place": "Paragraph 4: coefficient and adjunct normalizations on the diagram sites"
+   }
+  },
+  {
+   "text": "Prove the finite bottom-edge equation directly in the quotient-coefficient category. Abbreviate $G=Lg_n^*$, $G'=Lg_n'^*$, $R=Rf_{*,n}$, $J=Rf'_{*,n}$, $x=v'_n$, and $\\Phi=\\Phi_{Y'}$. The two pastings of pullback squares around the specified Frobenius cube agree, because its commutation identifications are coherent. Taking their mates using [lem-weil-pbc-mate-pasting], including its change-of-adjunction clause, and [lem-weil-pbc-mate-whisker], gives the typed identity\n$$x_{\\Phi_XK_n}G(\\beta_{f,K_n})\\kappa_{g,RK_n}\n=J(\\kappa_{g',K_n})\\beta_{f',G'K_n}\\Phi(x_{K_n}).$$\nBoth sides map $\\Phi GRK_n$ to $JG'\\Phi_XK_n$. Postcompose with $JG'(\\vartheta_n)$. Naturality $x_{K_n}GR(\\vartheta_n)=JG'(\\vartheta_n)x_{\\Phi_XK_n}$, from the ambient natural transformation [def-weil-pbc-ambient-ringed-exchange], and the defining formulas of [def-weil-pbc-quotient-corner-frobenius-structures] then give\n$$v'_n\\Theta_{B,n}=\\Theta_{D,n}\\Phi(v'_n).$$\nThis applies the generic mate identities to the actual ringed cube; it does not apply the constant-coefficient finite-Weil-rectangle node to these arrows.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-mate-whisker",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "def-weil-pbc-quotient-corner-frobenius-structures"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-map-reduction.proof.md",
+    "place": "Paragraph 4: finite bottom edge"
+   }
+  },
+  {
+   "text": "The mate calculation of step 10 also takes place on the small ringed diagram sites of [lem-weil-pbc-diagram-site-realization]. Apply it there with $\\vartheta_\\bullet$, the coherent isomorphism in [def-weil-pbc-quotient-corner-frobenius-structures]. Restrict the resulting equation to $\\Delta A$. Step 9, which rests on the strict realization of [lem-weil-pbc-strict-tower-exchange-mate-normalization], identifies its restricted exchange with the specified $v'_\\bullet$, so the restricted equation gives $v'_\\bullet\\Theta_{B,\\bullet}=\\Theta_{D,\\bullet}\\Phi(v'_\\bullet)$ as an equality of derived strict-tower morphisms. The two transport definitions give $H\\Theta_{A,\\bullet}=\\Theta_{B,\\bullet}\\Phi(H)$ and $H'\\Theta_{C,\\bullet}=\\Theta_{D,\\bullet}\\Phi(H')$. In particular $w=v'_\\bullet H$ satisfies $w\\Theta_{A,\\bullet}=\\Theta_{D,\\bullet}\\Phi(w)$. Evaluation gives all consecutive transition equations for the defined structures, since these are actual morphisms on the quotient diagram. No lift is inferred merely from a commuting family of evaluated derived arrows.",
+   "uses": [
+    "def-weil-pbc-quotient-corner-frobenius-structures",
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-mate-whisker",
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-map-reduction.proof.md",
+    "place": "Paragraph 4: strict tower equation, before taking limits"
+   }
+  },
+  {
+   "text": "The inverse automorphism induces the inverse equivalence on ringed module sheaves: the formulas of [def-weil-pbc-proetale-operations] and the coefficient composition identities of [lem-weil-pbc-profinite-coefficient-inverse-image] identify $(F_{Y'}^{-1})_*$ with $F_{Y'}^*$. Both inverse composites are the identity, and this is an exact equivalence, also termwise on towers. Therefore [lem-weil-ringed-tower-pushforward-limit-comparison] supplies the canonical natural isomorphism $j_Z$ used in [def-weil-pbc-quotient-corner-frobenius-structures], with its stated projection identity. In particular\n$$\\operatorname{pr}_{Z,n}\\Theta_{Z,\\infty}=\\Theta_{Z,n}\\Phi(\\operatorname{pr}_{Z,n}).$$\nHere the derived limit is the total derived functor on $\\operatorname{Tow}_{A_{Y'}}$. Its functoriality [prop-weil-pbc-rlim-functoriality] and naturality of $j$ take the strict equation for $w$ to\n$$W\\Theta_{A,\\infty}=\\Theta_{D,\\infty}\\Phi(W),\\qquad W=R\\lim(w)=V'H.$$\nEvery limit structure is invertible, since $j$ and the strict structures are invertible. With the definitions of $\\Theta_S,\\Theta_T$ and the ordered identity $\\xi=d^{-1}Ws_A$ from step 2, cancellation gives\n$$\\xi\\Theta_S=d^{-1}W\\Theta_{A,\\infty}\\Phi(s_A)=\\Theta_T\\Phi(\\xi).$$\nThis uses neither chosen constant-coefficient triangles nor a uniqueness assertion for triangulated cone fillers.",
+   "uses": [
+    "def-weil-pbc-quotient-corner-frobenius-structures",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "prop-weil-pbc-rlim-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-map-reduction.proof.md",
+    "place": "Paragraph 4: canonical strict-limit structures and completed exchange"
+   }
+  },
+  {
+   "text": "We check the two actual reduction edges by adjunction. For a map $p:L\\to Z_n$, with $Z_n$ a $P_n$-object, its scalar-extension adjunct is $\\widetilde p=\\varepsilon_{Z_n}(p\\otimes1)$ by [lem-pur-sheaf-ring-derived-coefficient-adjunction]. If $p\\Theta_L=\\Theta_{Z,n}\\Phi(p)$, then naturality of the counit and the pullback/tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] give\n$$\\widetilde p(\\Theta_L\\otimes1)=\\varepsilon((p\\Theta_L)\\otimes1)\n=\\varepsilon(\\Theta_{Z,n}\\otimes1)(\\Phi(p)\\otimes1)\n=\\Theta_{Z,n}\\Phi(\\widetilde p).$$\nThe coefficient comparison is the one from [def-weil-pbc-quotient-corner-frobenius-structures], so all adjuncts retain their $P_n$-linear actions. For $p=\\operatorname{pr}_{A,n}s_A$, the limit projection equation and the transport definition imply the premise; its adjunct is $\\sigma_n$ by step 2. Since $\\alpha_n=h_n\\sigma_n$ and $h_n\\Theta_{A,n}=\\Theta_{B,n}\\Phi(h_n)$ by the transport definition, this proves\n$$\\alpha_n(\\Theta_S\\otimes1)=\\Theta_{B,n}\\Phi(\\alpha_n).$$",
+   "uses": [
+    "def-weil-pbc-quotient-corner-frobenius-structures",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-map-reduction.proof.md",
+    "place": "Paragraph 4: adjunct calculation and left reduction edge"
+   }
+  },
+  {
+   "text": "For the right edge use $p=\\operatorname{pr}_{D,n}d$. The projection equation from step 12 and $d\\Theta_T=\\Theta_{D,\\infty}\\Phi(d)$ give its equivariance premise. Its adjunct is exactly $\\delta_n$: naturality of the canonical Roos projections [prop-weil-pbc-roos-triangle] gives $\\operatorname{pr}_{D,n}H'=h'_n\\operatorname{pr}_{C,n}$; step 3 gives $d=H'c^{-1}$. Thus taking adjuncts yields $h'_nq_{C,n}(c^{-1}\\otimes1)=h'_n\\tau_n=\\delta_n$, using step 2. The calculation in step 13 therefore gives\n$$\\delta_n(\\Theta_T\\otimes1)=\\Theta_{D,n}\\Phi(\\delta_n).$$\nTensor the completed equation of step 12 with $P_n$, using the tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; it makes $\\overline\\xi_n$ a Weil morphism. Step 10 makes $v'_n$ a Weil morphism. Together with the two proved vertical equations and step 4, this is precisely the claimed square of Weil objects. The transition equations of step 6 respect these structures: on $B,D$ the structures are evaluations of the coherent tower morphisms of [def-weil-pbc-quotient-corner-frobenius-structures], and on the top vertices tensor naturality for the fixed $\\Theta_S,\\Theta_T$ applies. For identity Frobenius all these equations specialize to ordinary operator equations; for other Frobenius their source remains $\\Phi$ of the relevant vertex.",
+   "uses": [
+    "def-weil-pbc-quotient-corner-frobenius-structures",
+    "prop-weil-pbc-roos-triangle",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-map-reduction.proof.md",
+    "place": "Paragraph 4: right edge and the square of Weil objects"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-completed-base-change-map",
-  "def-weil-pbc-completed-reduction-square",
-  "def-weil-pbc-four-corners",
   "lem-weil-pbc-constant-completion-equivalence",
   "lemma-weil-pbc-adic-completion-reduction",
   "def-weil-pbc-complete-coefficient-datum",
-  "lemma-weil-pbc-completed-pullback-reduction",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-base-change-map",
+  "def-weil-pbc-four-corners",
   "def-weil-pbc-four-arrows",
-  "lem-weil-pbc-tower-compatibility",
+  "def-weil-pbc-completed-reduction-square",
   "prop-weil-pbc-direct-image-limits",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "lem-weil-pbc-tower-compatibility",
   "lem-weil-pbc-rectangle-derived-limit",
-  "prop-weil-pbc-rlim-functoriality"
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-weil-pbc-finite-level-rectangle",
+  "prop-weil-pbc-roos-triangle",
+  "def-weil-pbc-quotient-corner-frobenius-structures",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-mate-whisker",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-map-reduction.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-map-reduction.proof.md",
+  "place": "Paragraphs 1–4; direct ringed-cube mate calculation and strict-tower completion implement the Frobenius paragraph in its actual quotient coefficients"
  },
  "mathlib_searches": [
   {
@@ -202,10 +348,52 @@
    "results": "12 hits: AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductInvOfPiFintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProduct_tmul",
    "date": "2026-10-14",
    "verdict": "no match: ordinary module completion is not derived completion of sheaf complexes; reuse the existing DAG reduction and coefficient-comparison statements"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*base.?change|base.?change.*complet|completed.*pullback",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module completion, underived sheaf limits, or generic naturality does not state this derived completed exchange reduction and its Frobenius compatibilities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adic completion proper base change morphism finite reduction and Frobenius equivariance",
+   "results": "8 hits: AdicCompletion.map_val_apply, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.congr, Padic.adicCompletionEquiv, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AlgebraicGeometry.IsProper.isStableUnderBaseChange",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module completion, underived sheaf limits, or generic naturality does not state this derived completed exchange reduction and its Frobenius compatibilities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module completion, underived sheaf limits, or generic naturality does not state this derived completed exchange reduction and its Frobenius compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction of a completed proper base change exchange map modulo powers of an ideal is the finite coefficient exchange map, compatible with Frobenius and tower transitions",
+   "results": "8 hits: PreTilt.untiltAux_smodEq_untiltFun, PreTilt.mk_comp_untilt_eq_coeff_zero, AdicCompletion.transitionMap_comp_reduceModIdeal, WittVector.factorPowSucc_comp_fontaineThetaModPPow, AdicCompletion.transitionMap_map_pow, AdicCompletion.transitionMap_ideal_mk, WittVector.factorPowSucc_fontaineThetaModPPow_eq, AdicCompletion.map_val_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module completion, underived sheaf limits, or generic naturality does not state this derived completed exchange reduction and its Frobenius compatibilities"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*complet|complet.*derived|proetale",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module completion, underived sheaf limits, or generic naturality does not state this derived completed exchange reduction and its Frobenius compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived inverse limit evaluation after extension of scalars to a quotient ring for sheaves of modules",
+   "results": "8 hits: SheafOfModules.evaluationPreservesLimit, SheafOfModules.Presentation.map_π_eq, PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap, PresheafOfModules.evaluationJointlyReflectsLimits, AdicCompletion.eval_lift, SheafOfModules.evaluationPreservesLimitsOfShape, LightCondMod.hom_naturality_apply, PresheafOfModules.limitPresheafOfModules_map",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module completion, underived sheaf limits, or generic naturality does not state this derived completed exchange reduction and its Frobenius compatibilities"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form",
@@ -263,19 +451,29 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lemma-weil-pbc-completed-map-reduction",
   "worker": "stage1",
-  "summary": "Repair E1/C4 in the actual proof: obtain projection-induced reduction for arbitrary completed-coefficient inputs by the existing constant-coefficient adic-completion reduction theorem and the reviewed constant-to-completed comparison. Apply to N and M, to their ambient exchange morphism and to their endomorphisms. Derive transition compatibility from the completion unit explicitly. No extra hypothesis, no statement change, no new node.",
-  "blueprint": "First proof: dc=H′ and limit rectangle; finite-reduction equality, transition and operator paragraphs. Detailed proof: finite-reduction identifications justified for incomplete ordinary pullback/direct-image inputs via existing arbitrary-input constant reduction and canonical coefficient comparison."
+  "summary": "Repair of returned coefficient-category error: retained the accepted reduction/transition/operator proof (steps 1–7); defined Frobenius structures directly on quotient-coefficient corners and their derived strict towers in one new definition node. Proved finite and strict Frobenius equations from generic mate pasting, then canonical strict-limit projection and adjunct equations. No identification with the constant-coefficient level-map family. The coherent datum/category binding is an explicit STATEMENT-DISPUTED correction reported for maintenance, including the stale stage-2 record.",
+  "blueprint": "main-20261015: first three paragraphs are steps 1–7, retained from the returned split; Frobenius paragraph is steps 8–14 with direct quotient-coefficient structures. Chapter and unit route unchanged. Historical constant-coefficient Frobenius nodes are not used on the quotient family.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Canonical projection-compatible derived strict-limit comparison for the inverse Frobenius automorphism; the local product-cone node has constant coefficients and does not state this comparison."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic scalar-extension/restriction adjunction with its explicit unit and counit; applies to arbitrary A_T→(P_n)_T and diagram coefficient rings, while the local change-of-rings node only constructs the functor."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-13",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NB-0c7125668",
-  "group": "NB",
+  "reviewer": "NT-cc-Q05-fd60dfd57",
+  "group": "Q05",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-0c7125668 (reviewer sub-agent of L); spot-checked: Reviewed the item, all five proof steps, twelve cited nodes, unit/chapter route, blueprint forms, Stacks 099M/099N sources, edge cases, coefficient categories, transition maps, operator naturality, duplicates, and recorded searches. The arbitrary-input reduction repair correctly handles possibly incomplete M; no new nodes or mathematical gaps remain."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-fd60dfd57 (reviewer sub-agent of L); spot-checked: I read all 14 steps, the new definition and every cited statement, plus blueprint main-20261015 (the item, its proof, frobenius-corner-structures, completed-frobenius-structures, level-map-corners) and Stacks 0A07 (lemma-Rf-commutes-with-Rlim and its proof) and 0E46 (remark-compose-base-change). Steps 1-7 are byte-identical to the version the previous reader found sound, and they still check. The STATEMENT-DISPUTED claim is correct: in the DAG the level-map B_n lives in D(Y',Lambda) and the four-corners B_n in D(Y',P_n), so the old Theta does not compose with alpha_n. Rebinding the blueprint's formulas to the four-corners objects is option (b) of the previous return and is faithful to the blueprint, which does not tell the two families apart. The coherent tower datum is a stronger hypothesis than the evaluated datum, but only for the Frobenius clause. It makes Theta_inf=Rlim(Theta_bullet)j canonical instead of a product-cone filler, no citer uses that clause, and the report declares the change. I checked the algebra of each new step. Step 8: beta is invertible by pasting with the face of F^-1 (mate-pasting clauses 1 and 4). Step 9: tensor-coherence with E=Delta K and Q=Q_Y gives r(Ex^Q)H=H'R(e), hence r(Ex^Q)=v'_bullet. Step 10: the typed cube identity, both sides Phi G R K_n -> J G' Phi_X K_n, then naturality gives v'_n Theta_B=Theta_D Phi(v'_n). Step 12: j comes from the generic tower comparison applied to F^-1, and xi Theta_S=Theta_T Phi(xi) follows by cancellation using xi=d^-1 V'H s_A. Steps 13-14: the counit adjunct of pr s_A is sigma_n and that of pr d is delta_n. The new node is statement-only and assumes none of the equations it serves, and no Frobenius structure on the four-corners objects exists elsewhere in the DAG. I accept both declared tool uses (ringed-tower-pushforward-limit-comparison, pur-sheaf-ring-derived-coefficient-adjunction); every other citation is on the unit's route, and nothing cites SGA. Three fixes: (1) the new definition now states the identification between restricted Q-linear corners and the ambient B_bullet, D_bullet, which it previously took silently; (2) the new definition now cites prop-weil-pbc-rlim-functoriality for Rlim, and its blueprint.same_as lists the two blueprint Frobenius definitions; (3) item step 11 now credits r(Ex^Q)=v'_bullet to step 9 rather than to the strict normalization lemma alone. For the maintainer: the stage-2 Lean record no longer covers the item's Frobenius clause; the blueprint now files the item under unit sk-prop-pbc-complete while the DAG keeps sk-thm-properbasechange; and completed-frobenius-structures still mixes the two coefficient families.; 2 file(s) fixed by the reviewer"
  },
  "blueprint_update": {
   "snapshot": "main-20261015",
@@ -343,5 +541,9 @@
   "group": "N4",
   "result": "pass",
   "note": "Reviewed immutable statements, dependencies, sources, canonical constructions, hypotheses, universes, edge cases and report sections. Signature matches verbatim; per-file scompile.py passed cleanly. No fixes needed. Findings recorded in review.md; branch unchanged."
- }
+ },
+ "tool_uses": [
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ]
 }

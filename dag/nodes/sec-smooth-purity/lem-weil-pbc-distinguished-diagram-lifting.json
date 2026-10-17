@@ -28,9 +28,97 @@
   "lem-weil-linear-scalar-localization-triangulated",
   "def-weil-pbc-rational-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each selected row $R=(X,Y,Z,f,i,p)$ choose a witnessing common-stage cone triangle $Q$ and an isomorphism $e:Q\\to R$, using [def-weil-pbc-common-stage-cones]. If the defining witness has the opposite orientation, take its inverse. By [def-weil-pbc-triangles-with-shift], this consists of three component arrows $a,b,c$ and their inverse arrows, with six inverse identities and the three equations $bf_Q=fa$, $ci_Q=ib$, $a[1]p_Q=pc$. Add these objects, arrows, inverses and equations to the original finite data, together with the specified representatives of the arrows of each witness cone triangle at its defining field. Only finitely many data have been added. No axiom for distinguished triangles in $\\mathcal P_T$ has been used: the witnesses exist by its definition of distinguishedness.",
+   "uses": [
+    "def-weil-pbc-common-stage-cones",
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-weil-pbc-verdier-axioms.proof.md",
+    "place": "TR2--TR4 common-stage-representation sentences; expanded witness argument, step 1"
+   }
+  },
+  {
+   "text": "Choose representatives for all remaining arrows of this enlarged finite configuration. By [def-weil-pbc-finite-stage-pair-category], each representative is a map at a finite overfield of its endpoint fields. Take the compositum $L$ of their finitely many fields, all witness fields, all vertex fields and $M_0$. The directedness stated in that definition makes $L$ a finite intermediate extension. Transport each chosen representative by $u_L=a_{L,N,E_Y}T_{L/N}(u)a_{L,N,E_X}^{-1}$. Thus each vertex has the single lift $X_L=T_{L/E_X}K_X$, also when it occurs in multiple rows. This procedure retains the chosen cone representatives rather than choosing unrelated representatives for their arrow classes.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-weil-pbc-verdier-axioms.proof.md",
+    "place": "TR2--TR4 common-stage-representation sentences; expanded witness argument, step 2"
+   }
+  },
+  {
+   "text": "Expressions in the finite data have compatible stage representatives. For identities, composition and addition this is the common-stage operation formula and additive transport in [prop-weil-pbc-common-stage-calculus]; zero and negatives follow by additivity. For a shifted map, its representative is $\\sigma_Y^{-1}u[1]\\sigma_X$. Identifying its source and target by $\\sigma_X,\\sigma_Y$ gives exactly $u[1]$, since $\\sigma_Y(\\sigma_Y^{-1}u[1]\\sigma_X)\\sigma_X^{-1}=u[1]$. Repeat this calculation for the finitely many nested shifts and use the associator compatibility of [prop-weil-pbc-scalar-extension]. Structural induction on each expression now gives a representative for both sides of every prescribed equation. Each equality of their classes holds after some further field by the eventual-equality clause of the calculus. Take a common overfield $M$ for these finitely many equality witnesses and $L$. Transitivity of transport preserves all those equalities at $M$, including the witness inverse identities and the three triangle equations.",
+   "uses": [
+    "prop-weil-pbc-common-stage-calculus",
+    "prop-weil-pbc-scalar-extension",
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-weil-pbc-verdier-axioms.proof.md",
+    "place": "TR2--TR4 common-stage-representation sentences; expanded witness argument, step 3"
+   }
+  },
+  {
+   "text": "A witness cone triangle chosen at $N\\subseteq M$ is distinguished at $N$ in the triangulated structure specified in the hypotheses. By exactness in [prop-weil-pbc-scalar-extension] and [def-weil-triangulated-category], applying $T_{M/N}$ gives a distinguished triangle whose last arrow is $\\sigma_{M/N,U}T_{M/N}(p_Q^{\\mathrm{stage}})$, where $U=T_{N/E_X}K_X$. Identify its first two vertices with $T_{M/E_X}K_X,T_{M/E_Y}K_Y$ using the associators; its third vertex is $T_{M/N}C$. The first two arrows are the transports from Step 2. For the last arrow the formula in [def-weil-pbc-common-stage-cones] starts with $\\sigma_{N/E_X,K_X}^{-1}p_Q^{\\mathrm{stage}}$. Compatibility of $\\sigma$ with the associators gives\n$$\\sigma_{M/E_X,K_X}\\,a_{M,N,E_X,K_X[1]}\\,T_{M/N}(\\sigma_{N/E_X,K_X}^{-1}p_Q^{\\mathrm{stage}})=a_{M,N,E_X,K_X}[1]\\,\\sigma_{M/N,U}\\,T_{M/N}(p_Q^{\\mathrm{stage}}).$$\nThus the corrected transported witness row is isomorphic to that distinguished triangle, so is distinguished by finite-stage TR1. This uses the prescribed finite-stage structures, not a triangulation of the pair category.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "def-weil-triangulated-category",
+    "def-weil-pbc-common-stage-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-weil-pbc-verdier-axioms.proof.md",
+    "place": "TR2--TR4 common-stage-representation sentences; expanded witness argument, step 4"
+   }
+  },
+  {
+   "text": "The lifted $a_M,b_M,c_M$ for $e:Q\\to R$ are isomorphisms: their chosen inverse representatives satisfy both inverse identities at $M$ by Step 3. The first two triangle equations hold there too. For the third, write $v_Q,v_R$ for the raw representatives of $p_Q,p$ with targets $T_{M/E_{Q_1}}(K_{Q_1}[1])$ and $T_{M/E_X}(K_X[1])$. Step 3 gives\n$$(\\sigma_X^{-1}a_M[1]\\sigma_{Q_1})v_Q=v_Rc_M.$$\nMultiplication by $\\sigma_X$ changes this to\n$$a_M[1](\\sigma_{Q_1}v_Q)=(\\sigma_Xv_R)c_M.$$\nThese are exactly the corrected last arrows of the two stage rows. By [def-weil-pbc-triangles-with-shift] the three components therefore form an isomorphism of those triangles. The corrected witness row is distinguished by Step 4, so finite-stage TR1 in [def-weil-triangulated-category] makes the corrected row $R_M$ distinguished. The same $M$ works for every selected row.",
+   "uses": [
+    "prop-weil-pbc-common-stage-calculus",
+    "def-weil-pbc-triangles-with-shift",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-weil-pbc-verdier-axioms.proof.md",
+    "place": "TR2--TR4 common-stage-representation sentences; expanded witness argument, step 5"
+   }
+  },
+  {
+   "text": "For $X=(E_X,K_X)$ the arrows $\\rho_X:X\\to(M,X_M)$ and $\\rho_X^{-1}$ represented at $M$ by $\\mathrm{id}_{X_M}$ compose to the identity by [def-weil-pbc-finite-stage-pair-category]. For any represented $u:X\\to Y$, both $\\rho_Yu$ and $j_M(u_M)\\rho_X$ have representative $u_M$. The shift formula of [prop-weil-pbc-common-stage-calculus] gives $\\rho_X[1]=j_M(\\sigma_X)\\rho_{X[1]}$, using the normalized identity transition and its compatible shift comparison of [prop-weil-pbc-scalar-extension]. Hence the last-arrow equation for recovery of a row is $\\rho_X[1]p=j_M(\\sigma_Xp_M)\\rho_Z$. Equivalently its image is the raw representative $p_M$, because the common-stage cone formula multiplies the corrected arrow by $\\sigma_X^{-1}$. Composition, addition and the calculation in Step 3 recover all equations and all iterated shifted arrows. The same lift $X_M$ is used at every occurrence and $M\\supseteq M_0$, as required.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "prop-weil-pbc-common-stage-calculus",
+    "prop-weil-pbc-scalar-extension",
+    "def-weil-pbc-common-stage-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-weil-pbc-verdier-axioms.proof.md",
+    "place": "TR2--TR4 common-stage-representation sentences; expanded witness argument, step 6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-common-stage-cones",
+  "def-weil-pbc-triangles-with-shift",
+  "def-weil-pbc-finite-stage-pair-category",
+  "prop-weil-pbc-common-stage-calculus",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-weil-pbc-verdier-axioms.proof.md",
+  "place": "TR2--TR4 common-stage-representation sentences"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -80,10 +168,17 @@
    "results": "5 hits: Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean. ",
    "date": "2026-10-17",
    "verdict": "no match: these are localization, individual-triangle or filtered set-colimit results, not simultaneous lifting of distinguished rows in this pair category"
+  },
+  {
+   "tool": "grep",
+   "query": "complete_distinguished_essImageDistTriang_morphism|mem_mapTriangle_essImage_of_distinguished|map_distinguished_iff|distinguished_cocone_triangle",
+   "results": "25 hits in Mathlib/CategoryTheory; read Functor.lean lines 252--299 and Localization/Triangulated.lean lines 88--102, 135--150. map_distinguished_iff assumes full faithfulness, and the other hits concern individual localization triangles, not simultaneous filtered-stage lifting.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-weil-pbc-verdier-axioms",
@@ -98,5 +193,34 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-distinguished-diagram-lifting",
+  "worker": "stage1",
+  "summary": "Expanded the finite witness-isomorphism argument in six steps: select witnesses, fix all arrow representatives, realize all finite expression equations, extend each native cone triangle exactly, check the three triangle-isomorphism equations with the sigma correction, and recover the original data. Reused existing nodes throughout; created no nodes. The statement is unchanged.",
+  "blueprint": "Realizes the TR2 and TR3 common-stage-representation sentences and the TR4 common-stage representation with cone independence; the finite witness-isomorphism and sigma-correction details are made explicit here.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-common-stage-calculus",
+    "why": "Generic common-stage representation and eventual equality for this already-defined pair category; this supplies the finite diagram mechanism implicit in the ancestor proof."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Generic exact coefficient transition functors and coherent associator/shift comparisons; required to transport the finite-stage distinguished witnesses without changing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-common-stage-calculus",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-113947b8d",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-113947b8d (reviewer sub-agent of L); spot-checked: I read all six steps, the statement of every cited node (including the blueprint_update of prop-weil-pbc-scalar-extension) and the source thm-weil-pbc-verdier-axioms.proof.md (main-20261015). Its TR2-TR4 'represent over one common finite field' sentences are what this item makes precise, and from.place points at them correctly. The statement holds and is not weakened. The coefficient categories are the raw scalar localizations D^b_c(T,O_E)[1/ϖ] with the triangulation of lem-weil-linear-scalar-localization-triangulated, the same structure common-stage-cones uses. Small cases tested: a native cone row at its own stage (σσ^{-1}p_u=p_u), empty data, a zero object, a row together with its rotation (consistent via (id,id,σ_X)), and a shifted object specified alongside X. Step 4: I checked the identity σ_{M/E}a_{K[1]}T(σ_{N/E}^{-1})=a_K[1]σ_{M/N,U}; it follows from σ commuting with the associators (a is exact). It needs σ to be the exact-structure comparison, which the current blueprint statement of scalar-extension asserts ('Exactness supplies σ') and the item statement fixes. Step 5: I checked the σ_X multiplication for the third square and the inverse identities at M; finite-stage TR1 then makes each row distinguished, with no circular use of the P_T axioms. Step 6: ρ_X[1]=j_M(σ_X)ρ_{X[1]} holds, using σ_{M/M}=id from the unit equations. Steps 3 and 6 use eventual equality and transport from the calculus statement, not its proof. No cycle (DFS of the deps reaches neither the item nor the ancestor). No duplicate: cone-independence and filtered-colimit-category-finite-lift state different things. No new nodes, no SGA. Accepted tool_uses: prop-weil-pbc-common-stage-calculus and prop-weil-pbc-scalar-extension, generic black boxes for the pair category, used the same way by the ancestor. No changes made."
  }
 }

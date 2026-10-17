@@ -61,7 +61,8 @@
     "lem-weil-pbc-affine-scheme-qcqs",
     "def-weil-pbc-noetherian-ring",
     "pqf-def-locnoeth",
-    "lem-weil-pbc-finite-type-over-noetherian"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "det-ind-heart-full-faithfulness"
    ],
    "elementary": false,
    "source": {
@@ -93,31 +94,58 @@
    }
   },
   {
-   "text": "Let $M\\in\\IndCons(X,\\Lambda)$. Use the fixed size convention of the statement and the Noetherianity of $X$ and $Y$ established in step 1. Clause (2) of [det-ind-heart-full-faithfulness] identifies it with an ambient filtered colimit $M\\cong\\varinjlim_{\\alpha\\in I}C_\\alpha$ of constructible sheaves, for a small filtered index category $I$. Apply [det-proper-heart-continuity-direct-image] with the sheaf of rings $A=\\Lambda_X$; step 1 verifies the qcqs hypothesis. That statement is about sectionwise sheaves of $A$-modules, while $R^qp_*$ here is formed from module objects. The two are identified by [def-weil-pbc-internal-abelian-sheaf-module-equivalence]: the ring object $\\Lambda_X$ gives the section-ring sheaf $A$, and the equivalence from $\\Mod_{\\Lambda_X}$ to sheaves of $A$-modules is the identity on underlying abelian sheaves, sections and restriction maps; the same holds on $Y$ for $\\Lambda_Y$ and for $p_*A$. An equivalence preserves filtered colimits, direct sums and K-injective complexes. By [sk-def-sfb-module-derived-pushpull], $Rp_*$ is computed on a K-injective resolution $I$ in $\\Mod_{\\Lambda_X}$ by applying $p_*$ of abelian sheaves termwise and restricting scalars along $\\Lambda_Y\\to p_*\\Lambda_X$. Kernels and cokernels of module objects are those of the underlying abelian sheaves, so $R^qp_*M$ here and in the continuity statement have the same underlying abelian sheaf $\\mathcal H^q(p_*I)$. The comparison maps are also the same maps of abelian sheaves. A linear map that is bijective on underlying abelian sheaves is an isomorphism of modules. For every $q$ its canonical comparison gives\n$$R^qp_*M\\cong\\varinjlim_{\\alpha\\in I}R^qp_*C_\\alpha.$$\nBy step 3 each term is constructible on $Y$, so this is an object of $\\IndCons(Y,\\Lambda)$ by the defining essential-image statement of [det-ind-heart-full-faithfulness] applied on $Y$. For $q>2d+1$ every term is zero by step 2, so the colimit is zero. The last inference follows directly from the universal property of the colimit of a zero diagram.",
+   "text": "Apply [def-weil-pbc-internal-abelian-sheaf-module-equivalence] on $X$ and $Y$, and also to the ring object $p_*\\Lambda_X$ on $Y$. The size convention is that of the statement; abelian sheafification and its monoidal structure are supplied by [sk-def-sfb-sheaf-tensor]. Denote the resulting section-ring sheaves by $A=\\Lambda_X$, $B=\\Lambda_Y$ and $p_*A$, retaining their non-discrete coefficient meaning. The equivalences are additive because they are the identity on underlying sheaves and maps, so addition of maps is unchanged. By [lem-weil-pbc-equivalence-injective-resolutions] they preserve kernels, cokernels, all small colimits, and injective resolutions. By [lem-weil-pbc-module-sheaves-colimits-forgetful], forgetting the sectionwise module structure is faithful and exact and preserves small colimits. In particular restriction along $B\\to p_*A$ preserves cohomology and small colimits: the canonical comparisons become identities of the corresponding underlying abelian sheaves. A bijective linear sheaf map has a linear inverse, since $u(rv)=ru(v)$ implies $u^{-1}(rw)=ru^{-1}(w)$. These observations also show that such comparisons are isomorphisms of modules, not just abelian sheaves.",
    "uses": [
-    "det-ind-heart-full-faithfulness",
-    "det-proper-heart-continuity-direct-image",
     "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "sk-def-sfb-module-derived-pushpull"
+    "sk-def-sfb-sheaf-tensor",
+    "lem-weil-pbc-equivalence-injective-resolutions",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound.proof.md",
-    "place": "Final paragraph, second sentence: filtered-colimit presentation and continuity; the membership and vanishing conclusions."
+    "place": "Final paragraph: coefficient-category and scalar-restriction bookkeeping for applying continuity; Stacks 00YV, 015Z, 03DA, 03DB."
    }
   },
   {
-   "text": "Let $(M_s)_{s\\in S}$ be an arbitrary small family in $\\IndCons(X,\\Lambda)$. By [det-ind-heart-filtered-colimits], the sum $\\bigoplus_sM_s$ computed in the ambient module category lies in $\\IndCons(X,\\Lambda)$, and the corresponding statement holds on $Y$ for the family $(R^qp_*M_s)_s$ from step 4. Applying the direct-sum clause of [det-proper-heart-continuity-direct-image], transported through [def-weil-pbc-internal-abelian-sheaf-module-equivalence] exactly as in step 4 (the equivalence preserves direct sums and underlying abelian sheaves), gives the canonical isomorphism\n$$\\bigoplus_{s\\in S}R^qp_*M_s\\xrightarrow{\\sim}R^qp_*\\left(\\bigoplus_{s\\in S}M_s\\right).$$\nBoth categories $\\IndCons$ are full subcategories of their ambient module categories by clause (2) of [det-ind-heart-full-faithfulness]; therefore an ambient sum which belongs to $\\IndCons$ also has the coproduct universal property there. The displayed isomorphism proves preservation of arbitrary direct sums by the restricted functor.",
+   "text": "For a module object $N$ on $X$, choose a bounded-below injective resolution $\\Phi_XN[0]\\to J$ in sectionwise $A$-modules by [lem-sc-bounded-below-injective-resolution]. Transport it back through the additive equivalence of step 4. By [lem-weil-pbc-equivalence-injective-resolutions] this gives a bounded-below complex $I$ of injective internal modules resolving $N[0]$. There are enough injectives internally because the equivalence transports the resolutions that exist for every sectionwise module. Thus $I$ is K-injective by clause (2) of [lem-weil-pbc-dplus-injective-representative]. The sectionwise complex $J$ is K-injective by the resolution statement itself. Now [sk-def-sfb-module-derived-pushpull] computes $Rp_*N[0]$ on $I$. Its underived functor is the composite in [sk-def-sfb-module-pushforward-pullback]: its underlying complex is $p_*^{\\mathrm{Ab}}I$, with action restricted along $B\\to p_*A$. The sectionwise direct image in [det-proper-heart-continuity-direct-image] computes on $J$ and has underlying complex $p_*^{\\mathrm{Ab}}J$. The equivalence identifies these complexes and their differentials. Exactness from step 4 therefore identifies their cohomology after scalar restriction. This identification is natural: the resolution-transport statement also transports lifts of morphisms and homotopies. It consequently identifies the legs, and hence the universal comparison maps, for filtered colimits and sums. We may apply both continuity assertions to the module-object $R^qp_*$ used here.",
    "uses": [
-    "det-ind-heart-filtered-colimits",
-    "det-proper-heart-continuity-direct-image",
-    "det-ind-heart-full-faithfulness",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+    "lem-sc-bounded-below-injective-resolution",
+    "lem-weil-pbc-equivalence-injective-resolutions",
+    "lem-weil-pbc-dplus-injective-representative",
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-sfb-module-pushforward-pullback",
+    "det-proper-heart-continuity-direct-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound.proof.md",
-    "place": "Final paragraph, direct-sum assertion, with the ambient versus IndCons coproducts identified."
+    "place": "Final paragraph: identifying the two derived direct images before applying continuity; Stacks 07A5, 079P, 015Z, 070J."
+   }
+  },
+  {
+   "text": "Let $M\\in\\IndCons(X,\\Lambda)$. The Noetherianity of $X$ and $Y$ was verified in step 1, and all diagrams are small in the stated size convention. Clause (2) of [det-ind-heart-full-faithfulness] supplies a small filtered diagram $(C_\\alpha)_{\\alpha\\in I}$ of constructible sheaves with $M\\cong\\varinjlim_\\alpha C_\\alpha$ in the ambient module category. Apply [det-proper-heart-continuity-direct-image], using the qcqs hypothesis from step 1 and the comparison in steps 4–5. For every $q$ this gives the canonical isomorphism\n$$R^qp_*M\\cong\\varinjlim_{\\alpha\\in I}R^qp_*C_\\alpha.$$\nEach term on the right is constructible by step 3; clause (2) of [det-ind-heart-full-faithfulness] on $Y$ therefore makes this colimit an object of $\\IndCons(Y,\\Lambda)$. If $q>2d+1$, every term is zero by step 2. The universal property of the colimit of a zero diagram gives a zero object, proving the required vanishing.",
+   "uses": [
+    "det-ind-heart-full-faithfulness",
+    "det-proper-heart-continuity-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound.proof.md",
+    "place": "Final paragraph, second sentence: filtered-colimit passage to IndCons, including membership and vanishing."
+   }
+  },
+  {
+   "text": "Let $(M_s)_{s\\in S}$ be any small family in $\\IndCons(X,\\Lambda)$. The ambient sum $\\bigoplus_sM_s$ belongs to $\\IndCons(X,\\Lambda)$ by [det-ind-heart-filtered-colimits]. Step 6 puts each $R^qp_*M_s$ and $R^qp_*(\\bigoplus_sM_s)$ in $\\IndCons(Y,\\Lambda)$; the same closure statement on $Y$ puts $\\bigoplus_sR^qp_*M_s$ there. The direct-sum assertion of [det-proper-heart-continuity-direct-image], with qcqs from step 1 and the comparison of steps 4–5, gives\n$$\\bigoplus_{s\\in S}R^qp_*M_s\\xrightarrow{\\sim}R^qp_*\\left(\\bigoplus_{s\\in S}M_s\\right).$$\nBy clause (2) of [det-ind-heart-full-faithfulness], each $\\IndCons$ is full and replete in its ambient module category. Hence the displayed ambient isomorphism and its inverse are morphisms in $\\IndCons$. An ambient sum belonging to this full subcategory satisfies its coproduct universal property there: a family of maps into an object of the subcategory extends uniquely in the ambient category, and fullness keeps that extension in the subcategory. This proves preservation of arbitrary direct sums by the restricted $R^qp_*$, including the empty sum.",
+   "uses": [
+    "det-ind-heart-filtered-colimits",
+    "det-proper-heart-continuity-direct-image",
+    "det-ind-heart-full-faithfulness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound.proof.md",
+    "place": "Final paragraph, final sentence: arbitrary direct sums and the full-subcategory coproduct property."
    }
   }
  ],
@@ -130,19 +158,25 @@
   "def-weil-pbc-noetherian-ring",
   "pqf-def-locnoeth",
   "lem-weil-pbc-finite-type-over-noetherian",
+  "det-ind-heart-full-faithfulness",
   "det-proper-heart-bound-rational",
   "sk-def-sfb-constructible",
   "det-thm-sfb-proper-base-change-rational",
-  "det-ind-heart-full-faithfulness",
-  "det-proper-heart-continuity-direct-image",
   "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-dplus-injective-representative",
   "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-module-pushforward-pullback",
+  "det-proper-heart-continuity-direct-image",
   "det-ind-heart-filtered-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound.proof.md",
-  "place": "First five paragraphs through existing same-unit intermediate; final paragraph expanded with actual detailed DAG citations."
+  "place": "Unit steps 1–5 via the existing constructible bound; final paragraph expanded with an explicit injective-resolution comparison of coefficient categories and the IndCons argument."
  },
  "mathlib_searches": [
   {
@@ -200,10 +234,87 @@
    "date": "2026-10-16",
    "results": "Five substring hits, all in Mathlib/Lean/Environment.lean:25,29,35,40,46, for findConstValWithKind?, findConstValOfKind?, and findTheoremConstVal?. Read lines 18–52: these inspect Lean declaration metadata and say nothing about IndCons or geometric direct images.",
    "verdict": "no match; source grep over the complete Mathlib root"
+  },
+  {
+   "tool": "grep",
+   "query": "heart.*bound|proper.*heart",
+   "results": "0 hits; logged results: none; Mathlib subdirectory Mathlib",
+   "date": "2026-10-17",
+   "verdict": "invalid duplicated Mathlib directory; no conclusion of absence; corrected grep also logged"
+  },
+  {
+   "tool": "loogle",
+   "query": "Proper, Heart, t-structure, bounded",
+   "results": "0 hits; logged results: none; loogle: <input>:1:17: expected term",
+   "date": "2026-10-17",
+   "verdict": "invalid query; no conclusion of absence from this attempt"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper heart bound t-structure bounded constructible",
+   "results": "8 hits; logged results: CategoryTheory.Triangulated.TStructure.IsGE, DerivedCategory.IsGE, CategoryTheory.Triangulated.TStructure.le, CategoryTheory.Triangulated.TStructure.ge, DerivedCategory.TStructure.t, CategoryTheory.Triangulated.TStructure.IsLE, DerivedCategory.IsLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not state higher direct image bounds and IndCons preservation for rational pro-etale coefficients"
+  },
+  {
+   "tool": "grep",
+   "query": "CategoryTheory.Triangulated.TStructure|DerivedCategory.TStructure",
+   "results": "19 hits; logged results: Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean, Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean, Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean, Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not state higher direct image bounds and IndCons preservation for rational pro-etale coefficients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher direct images proper morphism vanish above twice fibre dimension plus one preserve filtered colimits direct sums",
+   "results": "8 hits; logged results: CategoryTheory.Limits.PreservesFilteredColimits, CategoryTheory.Limits.PreservesFilteredColimitsOfSize.preserves_filtered_colimits, CategoryTheory.Limits.PreservesFilteredColimitsOfSize, CategoryTheory.Limits.comp_preservesFilteredColimits, CategoryTheory.Limits.PreservesFilteredColimitsOfSize.mk, CategoryTheory.Limits.colimitLimitIso, CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits, CategoryTheory.Limits.ReflectsFilteredColimitsOfSize",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not state higher direct image bounds and IndCons preservation for rational pro-etale coefficients"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure.IsGE",
+   "results": "12 hits; logged results: CategoryTheory.Triangulated.TStructure.IsGE, CategoryTheory.Triangulated.TStructure.ge_of_isGE, CategoryTheory.Triangulated.TStructure.IsGE.ge, CategoryTheory.Triangulated.TStructure.IsGE.mk, CategoryTheory.Triangulated.TStructure.ge_iff_isGE, CategoryTheory.Triangulated.TStructure.isGE_of_iso, CategoryTheory.Triangulated.TStructure.isGE_of_ge, CategoryTheory.Triangulated.TStructure.isZero",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not state higher direct image bounds and IndCons preservation for rational pro-etale coefficients"
+  },
+  {
+   "tool": "grep",
+   "query": "IndCons|ind.constructible|cohomologicalDimension|higherDirectImage",
+   "results": "0 hits; logged results: none; Mathlib subdirectory AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not state higher direct image bounds and IndCons preservation for rational pro-etale coefficients"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper",
+   "results": "12 hits; logged results: AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.IsProper.instRespectsIsoScheme, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsProper.stableUnderComposition, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated, AlgebraicGeometry.IsProper, AlgebraicGeometry.instIsProperOfIsFinite",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not state higher direct image bounds and IndCons preservation for rational pro-etale coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of a proper morphism on ind constructible pro etale rational sheaves vanish above twice fibre dimension plus one and preserve direct sums",
+   "results": "8 hits; logged results: LightCondensed.instIsGrothendieckAbelianLightCondMod, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.isZero_of_isGE, DerivedCategory.isZero_of_isLE",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not state higher direct image bounds and IndCons preservation for rational pro-etale coefficients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a proper morphism of schemes and ind constructible l adic sheaves the higher pushforward vanishes above 2d+1 and commutes with coproducts",
+   "results": "8 hits; logged results: AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper.mk, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Modules.instFullPushforward",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not state higher direct image bounds and IndCons preservation for rational pro-etale coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper scheme map with geometric fibres of dimension at most d has cohomological dimension at most 2d+1 on constructible E and algebraic closure of Q l coefficient sheaves",
+   "results": "8 hits; logged results: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not state higher direct image bounds and IndCons preservation for rational pro-etale coefficients"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -227,25 +338,60 @@
   "date": "2026-10-17",
   "item": "sk-lem-proper-heart-bound",
   "worker": "stage1",
-  "summary": "Made the inherited setting and coefficient/sheaf notions explicit and replaced the missing sk-prop-ind-heart section label with the actual defining detailed node. Reused the existing constructible bound (with its lattice/torsion/Milnor dependency route), then proved the IndCons membership, vanishing, and direct-sum conclusions through the existing rational proper-image, filtered-colimit, and sum statements. Removed dangling section-label citations and proof-only facts from the parent steps. No new nodes. The existing exact restatement det-proper-heart-bound-indcons is recorded in same_as rather than used to prove the item. Repair of the returned citation: revalidated the current ind-realization statement including its explicit Noetherian and size hypotheses; added the existing finite-type-over-Noetherian Mathlib leaf to establish those hypotheses from the unchanged standing setting.",
-  "blueprint": "Unit steps 1–5 remain realized by existing det-proper-heart-bound-reduction, det-proper-heart-bound-lattice (completeness and Milnor), det-proper-heart-bound-torsion, and det-proper-heart-bound-rational, reached through proof step 2. Unit step 6 is expanded in proof steps 1 and 3–5. The unit realized fields map these existing nodes and the item explicitly.",
+  "summary": "Retained the existing statement and constructible-bound route. Rechecked every cited statement and the Noetherian/qcqs hypotheses. Replaced the long internal-versus-sectionwise module comparison with explicit steps using existing resolution-transport and K-injective facts and exact underlying-sheaf/colimit computations. Derived continuity now applies with its actual coefficient category accounted for. Reused all existing nodes, with no new nodes or new Mathlib leaves. Recorded the genuine Q143 Mathlib searches and verbatim citation evidence.",
+  "blueprint": "The six unit steps are unchanged: steps 1–5 remain realized by det-proper-heart-bound-reduction, det-proper-heart-bound-lattice, det-proper-heart-bound-torsion and det-proper-heart-bound-rational; item step 2 uses the last of these. The final unit step is realized by item steps 1 and 3–7. same_as retains the existing restatement det-proper-heart-bound-indcons, which is not used as a proof dependency.",
   "tool_uses": [
    {
     "node": "det-thm-sfb-proper-base-change-rational",
     "why": "Its clause (2) is exactly the bounded-constructible preservation input explicitly used in the final paragraph of this unit; it is a black box, not a replacement of the lattice route."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Identifies the internal module coefficients of this unit with the sectionwise module coefficients of its continuity input; the equivalence preserves underlying sheaves literally."
+   },
+   {
+    "node": "sk-def-sfb-sheaf-tensor",
+    "why": "Supplies the monoidal abelian sheafification hypotheses of that coefficient equivalence on the small pro-etale sites."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Gives faithful exact underlying abelian sheaves and their small colimits, needed to restrict the continuity statement from p_*Lambda_X to Lambda_Y."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Supplies actual bounded-below injective resolutions of module sheaves; the unit does not itself prove this general homological-algebra tool."
+   },
+   {
+    "node": "det-proper-heart-continuity-direct-image",
+    "why": "The unit explicitly invokes the bounded-continuity unit; this detailed statement supplies its higher-direct-image filtered-colimit and direct-sum assertions."
+   },
+   {
+    "node": "det-ind-heart-full-faithfulness",
+    "why": "The unit explicitly uses the ind-heart unit; clause (2) supplies the ambient small filtered-colimit presentation and fullness."
+   },
+   {
+    "node": "det-ind-heart-filtered-colimits",
+    "why": "The unit explicitly uses the ind-heart unit; this statement supplies closure under arbitrary small ambient sums."
    }
   ]
  },
  "tool_uses": [
-  "det-thm-sfb-proper-base-change-rational"
+  "det-thm-sfb-proper-base-change-rational",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sc-bounded-below-injective-resolution",
+  "det-proper-heart-continuity-direct-image",
+  "det-ind-heart-full-faithfulness",
+  "det-ind-heart-filtered-colimits"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q66-53ad1a2f3",
-  "group": "Q66",
+  "reviewer": "NT-cc-Q143-290f06d56",
+  "group": "Q143",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-53ad1a2f3 (reviewer sub-agent of L); spot-checked: FIX: I read all of the mathematics. The statement matches the main-20261015 blueprint, with the same coefficient alternatives, proper map, fibre bound d, and the three conclusions with the 2d+1 threshold. Edge cases checked: X empty, d=-1, d=0 for identity/finite maps, empty family; q=2d+1 is not claimed. There are no new nodes. Step 1: properness gives qcqs (via def-weil-proper-morphism, finite-type, closed-immersion, quasi-separated and lem-weil-pbc-affine-scheme-qcqs), and X, Y are Noetherian via lem-weil-pbc-finite-type-over-noetherian, as the current det-ind-heart-full-faithfulness requires. Step 2: det-proper-heart-bound-rational is in the same unit and states exactly the constructible bound used. Step 3: clause (2) of det-thm-sfb-proper-base-change-rational gives constructible higher images. I accept this tool use: the unit's own step 6 cites sk-thm-sfb-proper-base-change. Steps 4-5 use clause (2) of det-ind-heart-full-faithfulness, the continuity node and det-ind-heart-filtered-colimits; these are correct. One C1/E6 gap, repaired in fixes/dag/nodes/sec-six-functors-basics/sk-lem-proper-heart-bound.json: steps 4 and 5 applied det-proper-heart-continuity-direct-image (sectionwise A-module sheaves) to R^qp_* built from internal module objects (sk-def-sfb-module-derived-pushpull) without the identification. I added the transport through the existing def-weil-pbc-internal-abelian-sheaf-module-equivalence, which is already in the closure, so there is no cycle. The text, uses and proof_deps are updated; the statement and unit are unchanged. Sources checked locally: 0991 is proetale-section-points, not the weakly-contractible exactness, which is 0946 lemma-w-contractible (1), with 098H for affine w-contractible schemes; 095U, 09BM, 09BP and 09A6 match. For the maintainer: the item's source.external still lists 0991, because source is a maintainer field; replace it with 0946/098H. The item duplicates the reviewed det-proper-heart-bound-indcons, so they should be merged; that node has the same identification gap. No SGA is used.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-290f06d56 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the item, all 34 cited statements, the unit record, the main-20261015 blueprint unit and proof, and the Stacks sources 01T6, 070J, 015Z, 03DA/03DB, 095U and 09A6. The statement is word for word the blueprint's: Λ=E or Q̄_ℓ, p proper, fibre bound d, vanishing for q>2d+1, R^q p_* in IndCons, and preservation of direct sums. Edge cases hold: d<0 forces X empty, d=0 gives an upper bound only, q=2d+1 is not claimed, and the empty sum is fine. Step 1: qcqs follows from the proper, finite-type, closed-immersion and affine-qcqs nodes. X and Y are Noetherian by Stacks 01T6, as det-ind-heart-full-faithfulness requires. Step 2 uses only the statement of the same-unit node det-proper-heart-bound-rational. Step 3 uses clause (2) of det-thm-sfb-proper-base-change-rational, the blueprint's own step-6 input. I accept that tool use and found no DAG cycle in the full transitive closure. Steps 4–5 correctly identify internal Λ_X-modules with the sectionwise A-modules of det-proper-heart-continuity-direct-image. They use the internal/sectionwise equivalence, which is the identity on underlying sheaves, injective-resolution transport, bounded-below injective complexes being K-injective (Stacks 070J), and the exact, colimit-preserving forgetful functor. Restriction along Λ_Y→p_*Λ_X is handled, and naturality comes from transported lifts. Steps 6–7 apply clause (2) of the ind-heart node, the continuity clauses and closure under sums, with the coproduct in the full subcategory written out. Accepted tool uses: det-thm-sfb-proper-base-change-rational, lem-sc-bounded-below-injective-resolution, lem-weil-pbc-module-sheaves-colimits-forgetful; the ind-heart and continuity nodes are on the unit route. There are no new nodes. The duplicate det-proper-heart-bound-indcons is correctly in same_as and not used as a dependency. Maintainer notes: source.external still lists Stacks 0991, which is the proetale-section-points tag; the right inputs are 0946/098H, and the proof does not use 0991. Merging det-proper-heart-bound-indcons into the item is a maintainer action. No SGA is used."
  },
  "lean_audit": {
   "master": {

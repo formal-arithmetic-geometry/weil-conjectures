@@ -14,9 +14,72 @@
   "def-weil-tower-transition-endomorphism",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $C(T)=\\operatorname{Roos}(T)$. Apply [lem-weil-strict-roos-comparison] to the given small ringed site: its exact-countable-product hypothesis is exactly the hypothesis of this item. The coordinate order here is (shifted target product, source product); the cone-and-shift convention of [def-weil-abstract-derived-category] gives $d(y,x)=(-dy-(1-s_T)x,dx)$ in this order, so its $\\mathsf C$ is this $C$. The identity $u_nt_n=t_n^Iu_{n+1}$ gives $P(u)s_X=s_IP(u)$ after each projection. Consequently $(y,x)\\mapsto(P(u)y,P(u)x)$ commutes with the displayed differential and is exactly $C(u)$. Evaluation is exact by [lem-weil-tower-category-levelwise-abelian], so $u$ is the quasi-isomorphism of tower complexes to which the descent-to-$D(\\operatorname{Tow}(\\mathcal A))$ clause of the comparison lemma applies. A functor sends an invertible morphism to an invertible morphism; thus $C(u)$ is invertible in $D(\\mathcal A)$. Applying cohomology shows that the chain map $C(u)$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-strict-roos-comparison",
+    "def-weil-abstract-derived-category",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07KC, lemma-products; Tag 08TC, definition-derived-limit; strict-cone functor supplied by the cited existing comparison lemma."
+   }
+  },
+  {
+   "text": "The index category $\\mathbf N_{\\geq1}^{\\mathrm{op}}$ is small, so [lem-weil-pbc-small-module-diagrams-grothendieck] makes $\\operatorname{Tow}(\\mathcal A)$ Grothendieck abelian. Apply [lem-pur-kinjective-degreewise-existence] in that category to obtain a quasi-isomorphism $v:I_\\bullet\\to J_\\bullet$, where $J_\\bullet$ is K-injective and every $J^r_\\bullet$ is an injective tower object. Both $I_\\bullet$ and $J_\\bullet$ are K-injective; hence [lem-weil-pbc-kinjective-hom-derived] says that $v$ is a homotopy equivalence in the category of tower complexes. Its inverse and its homotopies are tower maps, not merely unrelated maps at the individual levels. We use this replacement only to invoke the injective-term normalization of [lem-weil-strict-roos-comparison]: applied to $v$ as a resolution of $I_\\bullet$, it states that $\\eta_J:L_J=\\lim J_n\\to C(J)$, $z\\mapsto(0,z)$, is a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-small-module-diagrams-grothendieck",
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079P, theorem-K-injective-embedding-grothendieck; derived.tex Tag 070I, lemma-K-injective; sites-cohomology.tex Tag 0941, lemma-derived-limit-is-ok, injective-term computation."
+   }
+  },
+  {
+   "text": "Termwise limit sends a tower chain homotopy $h$ to the chain homotopy $\\lim h$: for each degree its components preserve compatible sequences, and applying this additive functor to $f-g=dh+hd$ gives the same equation on limits. Thus the homotopy inverse of $v$ from Step 2 gives a homotopy inverse of $L(v):L_I\\to L_J$, making $L(v)$ a quasi-isomorphism. The functor clause of [lem-weil-strict-roos-comparison] also makes $C(v)$ a quasi-isomorphism, as in Step 1. The formula $\\eta_I(z)=(0,z)$ is a chain map because $(1-s_I)z=0$. On the two coordinates one has the equality of chain maps\n$$C(v)\\eta_I=\\eta_JL(v).$$\nAfter cohomology, the three maps $C(v)$, $\\eta_J$, and $L(v)$ are isomorphisms; therefore so is $H^r(\\eta_I)=H^r(C(v))^{-1}H^r(\\eta_J)H^r(L(v))$ for every $r$. This proves that the specified inclusion $\\eta_I$ is a quasi-isomorphism even when $I$ does not have injective terms.",
+   "uses": [
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; explicit homotopy-equivalence and coordinate-square extension of sites-cohomology.tex Tag 0941."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-ringed-strict-tower-homotopy-limit], the given K-injective resolution computes the total right derived limit by $L_I$. Define $\\theta=\\eta_I^{-1}C(u):C(X)\\to L_I$ in $D(\\mathcal A)$; Steps 1 and 3 make it an isomorphism. Let $a_n^T:C(T)\\to T_n$ be $(y,x)\\mapsto\\mathrm{pr}_nx$, and let $p_n:L_I\\to I_n$ be the limit projection. These are chain maps: the second coordinate of the Roos differential is $dx$. Their formulas give\n$$a_n^I\\eta_I=p_n,\\qquad a_n^IC(u)=u_na_n^X.$$\nHence $p_n\\theta=a_n^IC(u)=u_na_n^X$ in the derived category. Exact evaluation from [lem-weil-tower-category-levelwise-abelian] makes $u_n$ a quasi-isomorphism, so $e_n=u_n^{-1}p_n$ is the evaluation specified in the statement, and $e_n\\theta=a_n^X$. This is the required compatibility for each $n$, for the actual displayed zigzag rather than an arbitrarily chosen isomorphism of Roos triangles.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940, section-derived-limits; Tag 0941, lemma-derived-limit-is-ok; explicit evaluation square for the strict comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940 and 0941 give the total-limit model; extension of the existing strict comparison from injective-term to arbitrary K-injective resolutions and the evaluation equations are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +115,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CochainComplex.mappingCone.quasiIso_descShortComplex\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  {S : CategoryTheory.ShortComplex (CochainComplex C ℤ)},\\n  S.ShortExact → QuasiIso (CochainComplex.mappingCone.descShortComplex S)\", \"doc\": \"The morphism from the mapping cone of the differential $ f: X_1 \\\\to X_2 $ in a short complex $ S $ to the third object $ X_3 $ is a quasi-isomorphism, meaning it induces isomorphisms on all homology g\"}\n  {\"name\": \"CochainComplex.mappingCone.mapTrianglehIso\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        [inst_2 : CategoryTheory.Preadditive C] →\\n          [inst_3 : CategoryTheory.Limits.HasBinaryBiproducts C] →\\n            [inst_4 : CategoryTheory.Pr\", \"doc\": \"Given preadditive categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with binary biproducts, and an additive functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, for any morphism $\\\\phi : K \\\\to L$ of cochain complexes i\"}\n  {\"name\": \"CochainComplex.cm5b.instQuasiIsoIntP\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ}, QuasiIso (CochainComplex.cm5b.p K L)\", \"doc\": \"The projection morphism $ p $ from the mapping cone of the identity morphism on an injective cochain complex $ I K $ (with zero differentials) and a cochain complex $ L $ to $ L $ is a quasi-isomorphi\"}\n  {\"name\": \"HomotopyCategory.spectralObjectMappingCone\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        [inst_3 : CategoryTheory.Limits.HasBinaryBiproducts C] →\\n          CategoryTheory.Triangulated.SpectralObject (HomotopyCat\", \"doc\": \"A spectral object in the homotopy category of integer-indexed cochain complexes, constructed using the composable arrows functor followed by the quotient to homotopy classes. The structure includes: (\"}\n  {\"name\": \"CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ} (n : ℤ) [K.IsStrictlyGE (n + 1)]\\n  [L.IsStrictlyGE n],\\n  (CochainComplex.mappingCone (CategoryTheory.CategoryStruct.id (Cochain\", \"doc\": \"In an abelian category with enough injectives, if $ K $ is a cochain complex strictly supported in degree $ n+1 $ and $ L $ is strictly supported in degree $ n $, then the biproduct of the mapping con\"}\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexXIso\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCone\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v', u_2} D] →\\n        [inst_2 : CategoryTheory.Preadditive C] →\\n          [inst_3 : CategoryTheory.Preadditive D] →\\n            {F G : CochainComplex C ℤ} →\\n              (φ\", \"doc\": \"For an additive functor $ H $ between preadditive categories and a morphism $ \\\\phi: F \\\\to G $ of cochain complexes, the mapping cone construction commutes with $ H $ up to isomorphism. Specifically, a\"}\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexXIso'\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCone\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v', u_2} D] →\\n        [inst_2 : CategoryTheory.Preadditive C] →\\n          [inst_3 : CategoryTheory.Preadditive D] →\\n            {F G : CochainComplex C ℤ} →\\n              (φ\", \"doc\": \"For an additive functor $ H $ between preadditive categories and a morphism $ \\\\phi: F \\\\to G $ of cochain complexes, the mapping cone construction commutes with $ H $ up to isomorphism. Specifically, a\"}\n  {\"name\": \"CochainComplex.mappingCone.mapHomologicalComplexIso\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCone\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v', u_2} D] →\\n        [inst_2 : CategoryTheory.Preadditive C] →\\n          [inst_3 : CategoryTheory.Preadditive D] →\\n            {F G : CochainComplex C ℤ} →\\n              (φ\", \"doc\": \"For an additive functor $ H $ between preadditive categories and a morphism $ \\\\phi: F \\\\to G $ of cochain complexes, the mapping cone construction commutes with $ H $ up to isomorphism. Specifically, t\"}",
    "date": "2026-10-17",
    "verdict": "no match: mapping cones and ordinary limits occur, but not a Roos comparison with total derived inverse limit and its evaluations for ringed-site towers"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]oos|homotopyLimit|derived.*[Ii]nverse.*[Ll]imit",
+   "results": "{\"t\": \"2026-10-17T08:08:20Z\", \"tool\": \"grep\", \"query\": \"[Rr]oos|homotopyLimit|derived.*[Ii]nverse.*[Ll]imit\", \"sub\": \"Mathlib/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary limits, individual mapping cones, or quasi-isomorphism calculus, not the strict total-derived-limit comparison with evaluations"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopyLimit, Roos, derived inverse limit",
+   "results": "{\"t\": \"2026-10-17T08:08:20Z\", \"tool\": \"loogle\", \"query\": \"HomotopyLimit, Roos, derived inverse limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'HomotopyLimit'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: invalid query (unknown identifier); this is not evidence of absence; the subsequent quoted mappingCone query succeeded"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict Roos cone computes total derived inverse limit and preserves evaluations",
+   "results": "{\"t\": \"2026-10-17T08:08:20Z\", \"tool\": \"leansearch\", \"query\": \"Strict Roos cone computes total derived inverse limit and preserves evaluations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.limit.isoLimitCone_inv_π\", \"HomologicalComplex.coneOfHasLimitEval\", \"PresheafOfModules.isLimitLimitCone\", \"CategoryTheory.Limits.isLimitOfPreserves\", \"Profinite.lim'\", \"PresheafOfModules.evaluation_preservesLimit\", \"HomologicalComplex.isLimitOfEval\", \"SheafOfModules.evaluationPreservesLimitsOfShape\"], \"digest\": \"fdb80ca53a91c57d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary limits, individual mapping cones, or quasi-isomorphism calculus, not the strict total-derived-limit comparison with evaluations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict Roos cone comparison with total derived inverse limit and evaluations",
+   "results": "{\"t\": \"2026-10-17T08:08:25Z\", \"tool\": \"leanfinder\", \"query\": \"Strict Roos cone comparison with total derived inverse limit and evaluations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.coneOfHasLimitEval_pt_d\", \"HomologicalComplex.coneOfHasLimitEval\", \"LightProfinite.isoMapCone\", \"HomologicalComplex.isLimitOfEval\", \"HomologicalComplex.coneOfHasLimitEval_π_app_f\", \"HomologicalComplex.coneOfHasLimitEval_pt_X\", \"HomologicalComplex.isLimitConeOfHasLimitEval\", \"CategoryTheory.GrothendieckTopology.coneCompEvaluationOfConeCompDiagramFunctorCompEvaluation_π_app\"], \"digest\": \"b09ad14e328196da\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary limits, individual mapping cones, or quasi-isomorphism calculus, not the strict total-derived-limit comparison with evaluations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi isomorphism of inverse systems induces a quasi isomorphism of product mapping fibers when countable products are exact",
+   "results": "{\"t\": \"2026-10-17T08:09:52Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi isomorphism of inverse systems induces a quasi isomorphism of product mapping fibers when countable products are exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HomologySequence.quasiIso_τ₃\", \"quasiIso_of_comp_left\", \"quasiIso_of_comp_right\", \"quasiIsoAt_iff_exactAt'\", \"HomologicalComplex.instIsMultiplicativeQuasiIso\", \"quasiIsoAt_iff'\", \"quasiIsoAt_iff_exactAt\", \"QuasiIsoAt.quasiIso\"], \"digest\": \"ba8f242aaa288a8a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary limits, individual mapping cones, or quasi-isomorphism calculus, not the strict total-derived-limit comparison with evaluations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\"",
+   "results": "{\"t\": \"2026-10-17T08:09:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"mappingCone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.fst\", \"CochainComplex.mappingCone.snd\", \"CochainComplex.mappingCone.inl\", \"CochainComplex.mappingCone\", \"CochainComplex.mappingCone.descCochain\", \"CochainComplex.mappingCone.liftCochain\", \"CochainComplex.mappingCone.liftCochain_snd\", \"CochainComplex.mappingCone.inl_descCochain\"], \"digest\": \"c635c86b913ff8c6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern ordinary limits, individual mapping cones, or quasi-isomorphism calculus, not the strict total-derived-limit comparison with evaluations"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-integral-scalar-extension-constructible",
@@ -74,5 +179,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-strict-roos-derived-limit-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused the existing natural strict Roos comparison instead of creating a duplicate. Proved its normalization for an arbitrary K-injective tower resolution by a second, injective-term K-injective replacement and an explicit commuting square; checked the signs and both evaluation identities. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the last paragraph of def-weil-rationalization-karoubi: completed scalar extension is built from its strict finite-level tensor tower. Steps 1-3 identify its signed Roos complex with total derived inverse limit, and Step 4 identifies the finite-level evaluation maps. No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Generic exact evaluation in an abelian functor category, needed to evaluate a quasi-isomorphism of strict tower complexes; the ambient six-operations unit does not prove functor-category algebra."
+   },
+   {
+    "node": "lem-weil-pbc-small-module-diagrams-grothendieck",
+    "why": "Generic small-diagram Grothendieck theorem, applied to the countable tower category so that the same-unit injective-term resolution theorem applies."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic K-injective Hom theorem, specifically its explicit homotopy-equivalence clause; needed to compare the arbitrary resolution to one with injective terms."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic total right derived inverse-limit model on strict ringed-site towers; fixes the meaning of L_I already present in the item statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-d89a9939d",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-d89a9939d (reviewer sub-agent of L); spot-checked: PASS with no fixes, no new nodes and nothing dropped. I read the item, all 4 steps and every cited statement: lem-weil-strict-roos-comparison, lem-weil-pbc-ringed-strict-tower-homotopy-limit, lem-weil-tower-category-levelwise-abelian, lem-weil-pbc-small-module-diagrams-grothendieck, lem-pur-kinjective-degreewise-existence, lem-weil-pbc-kinjective-hom-derived, and the defs. Statement: the sign convention (-dy-(1-s)x, dx) matches the cone/shift convention of def-weil-abstract-derived-category, and eta(z)=(0,z) is a chain map because lim = ker(1-s). The exact-countable-products hypothesis is genuinely needed (it is used for C(u)). Step 1 uses the functor clause of the existing comparison: a quasi-isomorphism u gives C(u) invertible in D, hence a quasi-isomorphism. It is also direct from Stacks 07KC. Step 2: Tow(A) is Grothendieck, so there is an injective-term K-injective replacement v:I->J; v is a homotopy equivalence by the K-injective Hom lemma, and the existing normalization makes eta_J a quasi-isomorphism. Step 3: lim preserves homotopies, the square C(v)eta_I = eta_J L(v) holds on coordinates, and 2-of-3 gives eta_I a quasi-isomorphism for an arbitrary K-injective I. This is the real content beyond the existing node. Step 4: L_I = R lim (ringed-tower node, consistent with Stacks 0941). From a_n^I eta_I = p_n and a_n^I C(u) = u_n a_n^X we get e_n theta = a_n^X. Small cases tested: zero transitions (1-s = id, R lim = 0), the constant identity tower (Roos complex = M), and u = id. Duplicate search: lem-weil-strict-roos-comparison is the nearest node, but it normalizes only injective-term resolutions; the item pre-existed (created by Q98) and its split cites that node rather than restating it. Route: unit sk-def-sf-operations cites no units. I accept the 4 declared tool_uses: two generic proper-base-change-unit lemmas and two Mathlib leaves. Not a target node, and no SGA is cited. Stacks tags 07KC, 08TC, 0940, 0941, 079P and 070I were checked against tags/tags and the .tex files. The blueprint place (last paragraph of def-weil-rationalization-karoubi, main-20261015) is correct."
  }
 }

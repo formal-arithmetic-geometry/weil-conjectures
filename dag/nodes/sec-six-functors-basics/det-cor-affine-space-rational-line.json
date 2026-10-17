@@ -28,23 +28,75 @@
  ],
  "proof": [
   {
-   "text": "The standard-chart theorem [lemma-nagata-relative-affine-space-open-immersion] identifies $j$ with $D_+(T_0)\\subset\\mathbf P^1_V$, over $V$, so $qj=p$. Properness [lemma-nagata-projective-space-base-change-proper], using the two homogeneous coordinates $\\{0,1\\}$ in [def-nagata-projective-space-base-change], gives that $q$ is proper. The chart description also checks quasi-compactness of $j$: above an affine $W=\\operatorname{Spec}R\\subset V$, its intersection with the $T_0$ chart is the whole $\\operatorname{Spec}R[t]$, and with the $T_1$ chart is the principal open $D(s)\\subset\\operatorname{Spec}R[s]$, where $s=T_0/T_1$; both are affine, hence quasi-compact. On each chart the restricted inclusion is respectively the identity or the principal-open immersion $\\operatorname{Spec}R[s,s^{-1}]\\to\\operatorname{Spec}R[s]$, hence an affine morphism and quasi-compact (inverse images of affine opens for a localization are affine). These charts cover $\\mathbf P^1_V$, so [lem-pc-quasi-compact-local-on-target] proves that $j$ is quasi-compact. Thus $(j,q)$ is a compactification by [sk-def-nagata-sketch-data]. All three schemes are qcqs: $V$ is quasi-compact by finite type and quasi-separated by separatedness; a finite affine cover of $V$ gives a finite affine cover of $\\mathbf A^1_V$ and, with two charts over each member, of $\\mathbf P^1_V$. The affine-line diagonal is cut out over each $W$ by $t_1-t_2$, so the affine line is separated over $V$; the projective line is separated over $V$ because $q$ is proper. For either $X=\\mathbf A^1_V$ or $X=\\mathbf P^1_V$, its diagonal over $k$ factors through $X\\times_VX$: the second map is the inverse image of the closed diagonal of $V/k$, and the first is its closed diagonal over $V$. Locally the two closed subscheme equations combine by adding their ideals, so the composite is closed. Thus both schemes are separated over $k$. Their polynomial charts give finite type over $k$: adjoining the single chart variable to any finite set of generators of an affine base algebra still gives a finite generating set. Hence they remain in the standing setting.",
+   "text": "The standard-chart theorem [lemma-nagata-relative-affine-space-open-immersion] gives the open immersion $j$ over $V$, hence $qj=p$. By [def-nagata-projective-space-base-change], the projective line has the finite homogeneous-coordinate set $\\{0,1\\}$. Apply [lemma-nagata-projective-space-base-change-proper] to that set and $S=V$: $q$ is proper. These are the same standard chart and proper projection as in the original compactification argument.",
    "uses": [
     "lemma-nagata-relative-affine-space-open-immersion",
-    "lemma-nagata-projective-space-base-change-proper",
     "def-nagata-projective-space-base-change",
-    "sk-def-nagata-sketch-data",
-    "def-weil-proper-morphism",
-    "lem-pc-quasi-compact-local-on-target"
+    "lemma-nagata-projective-space-base-change-proper"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md",
-    "place": "Proof (2): verify the standard compactification and the qcqs hypotheses used in (1)–(3)."
+    "place": "Proof (2): standard chart and proper projective-line projection."
    }
   },
   {
-   "text": "For $X=V,\\mathbf A^1_V,\\mathbf P^1_V$, apply [det-def-localizing-closure-ctf-equals-bc] to the qcqs scheme $X$ and $\\Lambda\\in\\{E,\\Qlb\\}$, obtaining $\\Dctf(X,\\Lambda)=\\Dbc(X,\\Lambda)$ and equality of their localizing closures. Clause 1 of [det-sf-mate-open-restriction], with the quasi-compact open $j$ and qcqs target verified in step 1, gives functors $j_!$ and $j^*$ between the corresponding $\\Loc(\\Dctf)$ categories and $j_!\\dashv j^*$. Replacing these full subcategories by the equal $\\Loc(\\Dbc)$ subcategories proves (1). Only clause 1 of that node is used.",
+   "text": "For every affine open $W=\\operatorname{Spec}R\\subset V$, [def-nagata-relative-affine-space] identifies $p^{-1}(W)$ with $\\operatorname{Spec}R[t]$. Therefore $p$ is affine by the definition [pqf-def-affine-morphism]. The single algebra generator $t$ gives a one-member affine cover of each preimage by a finitely generated $R$-algebra; by [def-weil-finite-type-morphism], $p$ is locally of finite type (indeed finite type). This is only the defining polynomial-chart calculation; no separatedness assertion is inferred from it.",
+   "uses": [
+    "def-nagata-relative-affine-space",
+    "pqf-def-affine-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M0 (definition-affine-n-space), following affine-chart description; morphisms.tex Tags 01S6 (definition-affine) and 01T1 (definition-finite-type)."
+   }
+  },
+  {
+   "text": "Apply clause (3) of [lem-weil-pbc-affine-morphism-permanence] to the affine map $p$ of step 2: it is quasi-compact and separated. The properness of $q$ in step 1, unpacked by [def-weil-proper-morphism], makes $q$ separated and of finite type, hence quasi-compact by [def-weil-finite-type-morphism]. Since $V$ is separated of finite type over the field $k$, [lem-weil-pbc-qcqs-over-affine] makes $V$ qcqs. Clause (2) of [lem-weil-pbc-qcqs-morphism-permanence], applied separately to the quasi-compact maps $p,q$ with quasi-compact target $V$, now makes both $\\mathbf A^1_V$ and $\\mathbf P^1_V$ quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01S7 (lemma-affine-separated), 01W1 (definition-proper); schemes.tex Tag 01K4 (lemma-quasi-compact-affine) and lemma-composition-quasi-compact, via the cited permanence nodes."
+   }
+  },
+  {
+   "text": "Write $a:V\\to\\operatorname{Spec}k$ for the structure map. For $r=p$ and $r=q$, both $r$ and $a$ are separated and locally of finite type by the preceding steps and the hypotheses on $V$. Clause (e) of [lem-weil-pbc-proper-fp-permanence] gives the same two properties for $ar$. The target $\\operatorname{Spec}k$ is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. The source of $ar$ is quasi-compact by step 3, so clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] makes $ar$ quasi-compact. Thus $ar$ is of finite type by [def-weil-finite-type-morphism]. Both total spaces are separated finite-type $k$-schemes, and [lem-weil-pbc-qcqs-over-affine] makes them qcqs. Their structure maps are $ap,aq$, and $qj=p$ ensures that all maps used here are $k$-morphisms.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-qcqs-over-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01KU (lemma-separated-permanence, composition), 03GI (lemma-quasi-compact-permanence), 01K4 (lemma-quasi-compact-affine); morphisms.tex Tag 01T3 (lemma-composition-finite-type), through clause (e) of the cited node."
+   }
+  },
+  {
+   "text": "The source $\\mathbf A^1_V$ is quasi-compact and the target $\\mathbf P^1_V$ is quasi-separated by steps 3–4. Clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] therefore proves that $j$ is quasi-compact. Together with its open-immersion property, properness of $q$, and $qj=p$ from step 1, this is precisely a compactification $c=(j,q)$ under [sk-def-nagata-sketch-data]. Thus all the geometry required below has been verified by cited statements, including the standing setting and qcqs hypotheses.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "sk-def-nagata-sketch-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md",
+    "place": "Proof (2): finish the standard compactification, using Stacks Tag 03GI as stated by the cited permanence node instead of an inline principal-open argument."
+   }
+  },
+  {
+   "text": "For $X=V,\\mathbf A^1_V,\\mathbf P^1_V$, apply [det-def-localizing-closure-ctf-equals-bc] to the qcqs scheme $X$ and $\\Lambda\\in\\{E,\\Qlb\\}$, obtaining $\\Dctf(X,\\Lambda)=\\Dbc(X,\\Lambda)$ and equality of their localizing closures. Clause 1 of [det-sf-mate-open-restriction], with the quasi-compact open $j$ and qcqs target verified in steps 1–5, gives functors $j_!$ and $j^*$ between the corresponding $\\Loc(\\Dctf)$ categories and $j_!\\dashv j^*$. Replacing these full subcategories by the equal $\\Loc(\\Dbc)$ subcategories proves (1). Only clause 1 of that node is used.",
    "uses": [
     "det-def-localizing-closure-ctf-equals-bc",
     "det-sf-mate-open-restriction"
@@ -56,7 +108,7 @@
    }
   },
   {
-   "text": "For the compactification $c=(j,q)$ of step 1, the definition [sk-def-sfb-module-derived-lower-shriek] gives $Rp_!^c=Rq_*D(j_!)$. The functor of [sk-prop-sf-existence] is defined using a chosen compactification $c_p$. Apply [det-sf-comp-coherence-cocycle] to $p$, $c_p$ and $c$; $p$ is separated of finite type and its target $V$ is qcqs, as checked in step 1. It gives a natural isomorphism $Rp_!^{c_p}\\simeq Rp_!^c$ on $\\Loc(\\Dctf)$. The equalities of categories in step 2 give $Rp_!\\simeq Rq_*j_!$ on the claimed $\\Loc(\\Dbc)$ categories, proving (2). Here $j_!$ denotes its exact levelwise derived functor.",
+   "text": "For the compactification $c=(j,q)$ of step 5, the definition [sk-def-sfb-module-derived-lower-shriek] gives $Rp_!^c=Rq_*D(j_!)$. The functor of [sk-prop-sf-existence] is defined using a chosen compactification $c_p$. Apply [det-sf-comp-coherence-cocycle] to $p$, $c_p$ and $c$; $p$ is separated of finite type and its target $V$ is qcqs, as checked in steps 1–4. It gives a natural isomorphism $Rp_!^{c_p}\\simeq Rp_!^c$ on $\\Loc(\\Dctf)$. The equalities of categories in step 6 give $Rp_!\\simeq Rq_*j_!$ on the claimed $\\Loc(\\Dbc)$ categories, proving (2). Here $j_!$ denotes its exact levelwise derived functor.",
    "uses": [
     "sk-def-sfb-module-derived-lower-shriek",
     "sk-prop-sf-existence",
@@ -83,7 +135,7 @@
    }
   },
   {
-   "text": "Use the adjunction $Rq_*\\dashv q^*(1)[2]$ explicitly asserted by [det-prop-p1-adjunction-rational-triangle], applied over $Y=V$ with the same rational coefficient $\\Lambda$. For $M\\in\\Loc(\\Dbc(\\mathbf A^1_V,\\Lambda))$ and $N\\in\\Loc(\\Dbc(V,\\Lambda))$, steps 2–4 give\n$$\n\\operatorname{Hom}(Rp_!M,N)\\simeq\\operatorname{Hom}(Rq_*j_!M,N)\\simeq\\operatorname{Hom}(j_!M,q^*N(1)[2])\\simeq\\operatorname{Hom}(M,j^*(q^*N(1)[2]))\\simeq\\operatorname{Hom}(M,p^*N(1)[2]).\n$$\nEvery bijection is natural in $M,N$: the first and last are induced by the natural isomorphisms of steps 3 and 4, and the middle two are the Hom bijections of the projective-line and open adjunctions. Their inverses in reverse order give the inverse composite. This exhibits $Rp_!\\dashv p^*(1)[2]$, including that the displayed right adjoint takes values in the required localizing category.",
+   "text": "Use the adjunction $Rq_*\\dashv q^*(1)[2]$ explicitly asserted by [det-prop-p1-adjunction-rational-triangle], applied over $Y=V$ with the same rational coefficient $\\Lambda$. For $M\\in\\Loc(\\Dbc(\\mathbf A^1_V,\\Lambda))$ and $N\\in\\Loc(\\Dbc(V,\\Lambda))$, steps 6–8 give\n$$\n\\operatorname{Hom}(Rp_!M,N)\\simeq\\operatorname{Hom}(Rq_*j_!M,N)\\simeq\\operatorname{Hom}(j_!M,q^*N(1)[2])\\simeq\\operatorname{Hom}(M,j^*(q^*N(1)[2]))\\simeq\\operatorname{Hom}(M,p^*N(1)[2]).\n$$\nEvery bijection is natural in $M,N$: the first and last are induced by the natural isomorphisms of steps 7 and 8, and the middle two are the Hom bijections of the projective-line and open adjunctions. Their inverses in reverse order give the inverse composite. This exhibits $Rp_!\\dashv p^*(1)[2]$, including that the displayed right adjoint takes values in the required localizing category.",
    "uses": [
     "det-prop-p1-adjunction-rational-triangle"
    ],
@@ -94,7 +146,7 @@
    }
   },
   {
-   "text": "By [sk-prop-sf-existence], $p^!$ is a right adjoint of this same $Rp_!$ on $\\Loc(\\Dctf)$, hence on the equal $\\Loc(\\Dbc)$ categories of step 2. Apply [det-sp-unique-right-adjoint] to $F=Rp_!$, $G=p^!$ and $J=p^*(1)[2]$, the latter adjunction being step 5. The $J$-transpose of the counit $Rp_!p^!N\\to N$ gives the component $p^!N\\to p^*N(1)[2]$; the cited statement makes these components natural, invertible and uniquely compatible with the counits. This proves the final assertion of (3).",
+   "text": "By [sk-prop-sf-existence], $p^!$ is a right adjoint of this same $Rp_!$ on $\\Loc(\\Dctf)$, hence on the equal $\\Loc(\\Dbc)$ categories of step 6. Apply [det-sp-unique-right-adjoint] to $F=Rp_!$, $G=p^!$ and $J=p^*(1)[2]$, the latter adjunction being step 9. The $J$-transpose of the counit $Rp_!p^!N\\to N$ gives the component $p^!N\\to p^*N(1)[2]$; the cited statement makes these components natural, invertible and uniquely compatible with the counits. This proves the final assertion of (3).",
    "uses": [
     "sk-prop-sf-existence",
     "det-sp-unique-right-adjoint"
@@ -108,11 +160,18 @@
  ],
  "proof_deps": [
   "lemma-nagata-relative-affine-space-open-immersion",
-  "lemma-nagata-projective-space-base-change-proper",
   "def-nagata-projective-space-base-change",
-  "sk-def-nagata-sketch-data",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-nagata-relative-affine-space",
+  "pqf-def-affine-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
   "def-weil-proper-morphism",
-  "lem-pc-quasi-compact-local-on-target",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "sk-def-nagata-sketch-data",
   "det-def-localizing-closure-ctf-equals-bc",
   "det-sf-mate-open-restriction",
   "sk-def-sfb-module-derived-lower-shriek",
@@ -128,7 +187,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md",
-  "place": "Proof (1)–(3), expanded into six steps; standard compactification comparison, category equality and natural Hom bijections made explicit."
+  "place": "Proof (1)–(3), the same standard-compactification/projective-line-adjunction route; original geometry step replaced by five short steps using existing geometry and Mathlib leaves. Remaining five steps retained, with numerical cross-references updated."
  },
  "mathlib_searches": [
   {
@@ -317,10 +376,528 @@
    },
    "date": "2026-10-16",
    "verdict": "no match: zero source hits in Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*(IsAffineHom|LocallyOfFinitePresentation).*𝔸",
+   "results": {
+    "t": "2026-10-17T08:23:42Z",
+    "tool": "grep",
+    "query": "instance.*(IsAffineHom|LocallyOfFinitePresentation).*𝔸",
+    "sub": "AlgebraicGeometry/AffineSpace.lean",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "374",
+     "384"
+    ],
+    "digest": "62a3e591f712c64b"
+   },
+   "date": "2026-10-17",
+   "verdict": "geometry match only: affine-space affine and locally finite-presentation instances, AffineSpace.lean:374,384; item’s rational exceptional adjunction is absent"
+  },
+  {
+   "tool": "grep",
+   "query": "stableUnderComposition|locallyOfFiniteType_comp|quasiCompact_comp",
+   "results": {
+    "t": "2026-10-17T08:23:42Z",
+    "tool": "grep",
+    "query": "stableUnderComposition|locallyOfFiniteType_comp|quasiCompact_comp",
+    "sub": "AlgebraicGeometry/Morphisms",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/Integral.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Integral.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Integral.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean"
+    ],
+    "digest": "76121e1aaf8cf347"
+   },
+   "date": "2026-10-17",
+   "verdict": "geometry matches represented by existing lem-weil-pbc-proper-fp-permanence and qcqs nodes; no need for a new leaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A composition of separated finite type scheme morphisms is separated and finite type",
+   "results": {
+    "t": "2026-10-17T08:23:43Z",
+    "tool": "leansearch",
+    "query": "A composition of separated finite type scheme morphisms is separated and finite type",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated",
+     "AlgebraicGeometry.IsSeparated.instCompScheme",
+     "AlgebraicGeometry.IsSeparated.stableUnderComposition",
+     "AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme",
+     "AlgebraicGeometry.IsFinite.instCompScheme",
+     "AlgebraicGeometry.IsFinite.of_comp",
+     "AlgebraicGeometry.quasiSeparated_comp",
+     "AlgebraicGeometry.IsSeparated.comp_iff"
+    ],
+    "digest": "82b7335a9e5e8a3a"
+   },
+   "date": "2026-10-17",
+   "verdict": "geometry matches represented by existing lem-weil-pbc-proper-fp-permanence and qcqs nodes; no need for a new leaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection of affine space over a scheme is affine and locally of finite presentation",
+   "results": {
+    "t": "2026-10-17T08:23:43Z",
+    "tool": "leansearch",
+    "query": "The projection of affine space over a scheme is affine and locally of finite presentation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsAffineHom.mk",
+     "AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+     "AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass",
+     "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "AlgebraicGeometry.AffineSpace.toSpecMvPoly",
+     "AlgebraicGeometry.instIsAffineFiberOfIsAffineHom",
+     "AlgebraicGeometry.IsAffineHom"
+    ],
+    "digest": "120b38a931d3873a"
+   },
+   "date": "2026-10-17",
+   "verdict": "geometry match only: affine-space affine and locally finite-presentation instances, AffineSpace.lean:374,384; item’s rational exceptional adjunction is absent"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.affineSpace, AlgebraicGeometry.IsAffineHom",
+   "results": {
+    "t": "2026-10-17T08:23:43Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.affineSpace, AlgebraicGeometry.IsAffineHom",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'AlgebraicGeometry.affineSpace'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the rational condensed-coefficient exceptional adjunction; geometric hits read and covered by existing nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support pushforward for the affine line is left adjoint to pullback Tate twisted by one shifted by two",
+   "results": {
+    "t": "2026-10-17T08:23:43Z",
+    "tool": "leansearch",
+    "query": "Compact support pushforward for the affine line is left adjoint to pullback Tate twisted by one shifted by two",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TopCat.Sheaf.instIsLeftAdjointPullback",
+     "CategoryTheory.Subobject.mapPullbackAdj",
+     "TopCat.Presheaf.pushforwardPullbackAdjunction",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+     "TopCat.Sheaf.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullbackPushforwardAdjunction"
+    ],
+    "digest": "35ee625470da1142"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the rational condensed-coefficient exceptional adjunction; geometric hits read and covered by existing nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": {
+    "t": "2026-10-17T08:23:43Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.LocallyOfFiniteType",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType",
+     "AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType",
+     "AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange",
+     "AlgebraicGeometry.LocallyOfFiniteType",
+     "AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType",
+     "AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion",
+     "AlgebraicGeometry.locallyOfFiniteType_of_comp",
+     "AlgebraicGeometry.locallyOfFiniteType_comp"
+    ],
+    "digest": "a4b948c6179367c2"
+   },
+   "date": "2026-10-17",
+   "verdict": "geometry matches represented by existing lem-weil-pbc-proper-fp-permanence and qcqs nodes; no need for a new leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composite of two separated morphisms of finite type between schemes is separated and of finite type",
+   "results": {
+    "t": "2026-10-17T08:23:44Z",
+    "tool": "leanfinder",
+    "query": "The composite of two separated morphisms of finite type between schemes is separated and of finite type",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated",
+     "AlgebraicGeometry.IsFinite.of_comp",
+     "AlgebraicGeometry.IsSeparated.stableUnderComposition",
+     "AlgebraicGeometry.IsSeparated.instCompScheme",
+     "AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme",
+     "AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme",
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty",
+     "AlgebraicGeometry.IsSeparated.comp_iff"
+    ],
+    "digest": "1bc4be8ae34085a5"
+   },
+   "date": "2026-10-17",
+   "verdict": "geometry matches represented by existing lem-weil-pbc-proper-fp-permanence and qcqs nodes; no need for a new leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection from affine space of finite dimension over an arbitrary scheme is separated and of finite type",
+   "results": {
+    "t": "2026-10-17T08:23:45Z",
+    "tool": "leanfinder",
+    "query": "The projection from affine space of finite dimension over an arbitrary scheme is separated and of finite type",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass",
+     "AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+     "AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass",
+     "AlgebraicGeometry.AffineSpace",
+     "AlgebraicGeometry.IsSeparated.hasAffineProperty",
+     "AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine",
+     "AlgebraicGeometry.Proj.isSeparated",
+     "AlgebraicGeometry.Proj.instIsSeparated"
+    ],
+    "digest": "54c5da7b0ddd4894"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the rational condensed-coefficient exceptional adjunction; geometric hits read and covered by existing nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image for affine line projection on rational l adic constructible localizing categories is twisted pullback shifted two",
+   "results": {
+    "t": "2026-10-17T08:23:47Z",
+    "tool": "leanfinder",
+    "query": "Exceptional inverse image for affine line projection on rational l adic constructible localizing categories is twisted pullback shifted two",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Shift.linear_of_localization",
+     "CategoryTheory.Functor.isHomological_of_localization",
+     "CategoryTheory.Shift.instLinearLocalization'ShiftFunctorOfCommShiftOfQ'",
+     "CategoryTheory.Functor.commShiftOfLocalization_iso_inv_app",
+     "CategoryTheory.Shift.instLinearLocalizationShiftFunctorOfCommShiftOfQ",
+     "CategoryTheory.Functor.commShiftOfLocalization.iso_inv_app",
+     "CategoryTheory.MorphismProperty.commShift_Q'",
+     "CategoryTheory.LocalizerMorphism.commShift"
+    ],
+    "digest": "60238213cc58c415"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the rational condensed-coefficient exceptional adjunction; geometric hits read and covered by existing nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "instance \\[IsSeparated f\\] \\[IsSeparated g\\]|IsAffineHom.*IsSeparated|instIsSeparatedOfIsAffineHom",
+   "results": {
+    "t": "2026-10-17T08:24:06Z",
+    "tool": "grep",
+    "query": "instance \\[IsSeparated f\\] \\[IsSeparated g\\]|IsAffineHom.*IsSeparated|instIsSeparatedOfIsAffineHom",
+    "sub": "AlgebraicGeometry/Morphisms",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean"
+    ],
+    "digest": "c340d8aa2c849e45"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the rational condensed-coefficient exceptional adjunction; geometric hits read and covered by existing nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyOfFiniteType_comp|quasiCompact_comp",
+   "results": {
+    "t": "2026-10-17T08:24:06Z",
+    "tool": "grep",
+    "query": "locallyOfFiniteType_comp|quasiCompact_comp",
+    "sub": "AlgebraicGeometry/Morphisms",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean"
+    ],
+    "digest": "9de6ff1f5bdc02a5"
+   },
+   "date": "2026-10-17",
+   "verdict": "geometry matches represented by existing lem-weil-pbc-proper-fp-permanence and qcqs nodes; no need for a new leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace",
+   "results": {
+    "t": "2026-10-17T08:24:07Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.AffineSpace",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.AffineSpace",
+     "AlgebraicGeometry.AffineSpace.over",
+     "AlgebraicGeometry.AffineSpace.instIsAffine",
+     "AlgebraicGeometry.AffineSpace.instIsIntegral",
+     "AlgebraicGeometry.AffineSpace.instIsReduced",
+     "AlgebraicGeometry.AffineSpace.reindex",
+     "AlgebraicGeometry.AffineSpace.map",
+     "AlgebraicGeometry.AffineSpace.reindex_id"
+    ],
+    "digest": "e4c22373538dc767"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the rational condensed-coefficient exceptional adjunction; geometric hits read and covered by existing nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational pro etale Poincare duality identifies the affine line exceptional right adjoint with pullback Tate twist and cohomological shift",
+   "results": {
+    "t": "2026-10-17T08:24:12Z",
+    "tool": "leanfinder",
+    "query": "Rational pro etale Poincare duality identifies the affine line exceptional right adjoint with pullback Tate twist and cohomological shift",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+     "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor",
+     "AlgebraicGeometry.AffineSpace"
+    ],
+    "digest": "98da99621696cf63"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the rational condensed-coefficient exceptional adjunction; geometric hits read and covered by existing nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The standard affine chart open immersion into the projective line over any scheme is quasi compact",
+   "results": {
+    "t": "2026-10-17T08:38:03Z",
+    "tool": "leanfinder",
+    "query": "The standard affine chart open immersion into the projective line over any scheme is quasi compact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion",
+     "AlgebraicGeometry.quasiCompact_iff_forall_affine",
+     "AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace",
+     "AlgebraicGeometry.instQuasiCompactOfIsAffineHom"
+    ],
+    "digest": "f4b0c25c68a7879b"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the rational condensed-coefficient exceptional adjunction; geometric hits read and covered by existing nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.QuasiCompact",
+   "results": {
+    "t": "2026-10-17T08:38:04Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.QuasiCompact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp",
+     "AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp",
+     "AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp_apply",
+     "AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion",
+     "AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact",
+     "AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact",
+     "AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion",
+     "AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'"
+    ],
+    "digest": "704d9ac90a7e2d3d"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the rational condensed-coefficient exceptional adjunction; geometric hits read and covered by existing nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "awayι.*[Qq]uasiCompact|[Qq]uasiCompact.*awayι|Proj.*[Qq]uasiCompact",
+   "results": {
+    "t": "2026-10-17T08:38:04Z",
+    "tool": "grep",
+    "query": "awayι.*[Qq]uasiCompact|[Qq]uasiCompact.*awayι|Proj.*[Qq]uasiCompact",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the rational condensed-coefficient exceptional adjunction; geometric hits read and covered by existing nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional affine space projection is affine and locally of finite presentation",
+   "results": {
+    "t": "2026-10-17T08:38:32Z",
+    "tool": "leanfinder",
+    "query": "A finite dimensional affine space projection is affine and locally of finite presentation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+     "AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE",
+     "AlgebraicGeometry.AffineSpace.toSpecMvPoly",
+     "AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE",
+     "AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass",
+     "AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset",
+     "AlgebraicGeometry.AffineSpace.instIsAffine",
+     "AlgebraicGeometry.locallyOfFinitePresentation_iff"
+    ],
+    "digest": "c97b8f974777688c"
+   },
+   "date": "2026-10-17",
+   "verdict": "geometry match only: affine-space affine and locally finite-presentation instances, AffineSpace.lean:374,384; item’s rational exceptional adjunction is absent"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated.stableUnderComposition",
+   "results": {
+    "t": "2026-10-17T08:39:07Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.IsSeparated.stableUnderComposition",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsSeparated.stableUnderComposition"
+    ],
+    "digest": "08464a92f63abdfe"
+   },
+   "date": "2026-10-17",
+   "verdict": "geometry matches represented by existing lem-weil-pbc-proper-fp-permanence and qcqs nodes; no need for a new leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "instance \\[IsSeparated f\\] \\[IsSeparated g\\]|locallyOfFiniteType_comp|quasiCompact_comp",
+   "results": {
+    "t": "2026-10-17T08:39:07Z",
+    "tool": "grep",
+    "query": "instance \\[IsSeparated f\\] \\[IsSeparated g\\]|locallyOfFiniteType_comp|quasiCompact_comp",
+    "sub": "AlgebraicGeometry/Morphisms",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean"
+    ],
+    "digest": "60cbd413b3cd311f"
+   },
+   "date": "2026-10-17",
+   "verdict": "geometry matches represented by existing lem-weil-pbc-proper-fp-permanence and qcqs nodes; no need for a new leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separated morphisms and finite type morphisms of schemes are closed under composition",
+   "results": {
+    "t": "2026-10-17T08:39:19Z",
+    "tool": "leanfinder",
+    "query": "Separated morphisms and finite type morphisms of schemes are closed under composition",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated",
+     "AlgebraicGeometry.IsFinite.of_comp",
+     "AlgebraicGeometry.IsSeparated.instCompScheme",
+     "AlgebraicGeometry.IsSeparated.comp_iff",
+     "AlgebraicGeometry.IsSeparated.of_comp",
+     "AlgebraicGeometry.IsSeparated.stableUnderComposition",
+     "AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme",
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty"
+    ],
+    "digest": "89598a94a0b1f8e8"
+   },
+   "date": "2026-10-17",
+   "verdict": "geometry matches represented by existing lem-weil-pbc-proper-fp-permanence and qcqs nodes; no need for a new leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": {
+    "t": "2026-10-17T08:41:57Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.AffineSpace, AlgebraicGeometry.LocallyOfFinitePresentation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-17",
+   "verdict": "geometry match only: affine-space affine and locally finite-presentation instances, AffineSpace.lean:374,384; item’s rational exceptional adjunction is absent"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -337,11 +914,11 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-cor-affine-space-rational",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "det-cor-affine-space-rational-line",
   "worker": "stage1",
-  "summary": "Restored the standing base and coefficient hypotheses omitted in the standalone import (STATEMENT-DISPUTED in report), retained all three conclusions, and split the standard-compactification/projective-line-adjunction argument into six complete steps using existing nodes only. Checked every cited statement, chosen-compactification independence, rational Dctf/Dbc equality, twist and shift compatibility, and counit uniqueness. No Lean attachment found; no new nodes.",
-  "blueprint": "The item realizes the d=1 argument of unit sk-cor-affine-space-rational, step 1. Item proof (1) is step 2 after the geometry in step 1; proof (2) is step 3; proof (3) is steps 4–6. The general-d induction and constructible restriction remain with the neighboring node. The illustrative finite-coefficient pointer cor-amb-affine-space-adjunction is not a proof dependency.",
+  "summary": "Q135 repair of the dedicated 2026-10-17 return: replaced original non-elementary geometry step by five short steps, exposing the polynomial-chart calculation and citing existing affine, composition and qcqs permanence nodes for every hidden geometric fact. No new nodes: the existing DAG already states the required lemmas. Statement, Lean record, and the five subsequent arguments are unchanged; only step references were renumbered. All cited statements read and quoted in citations.json.",
+  "blueprint": "Unit sk-cor-affine-space-rational step 1, d=1: item proof (1) is step 6; proof (2) is step 7, after the standard-compactification geometry of steps 1–5; proof (3) is steps 8–10. No change to the unit route or statement. The general-d induction stays with the neighboring node.",
   "tool_uses": [
    {
     "node": "lemma-nagata-relative-affine-space-open-immersion",
@@ -378,6 +955,26 @@
    {
     "node": "det-sp-unique-right-adjoint",
     "why": "Generic categorical uniqueness of right adjoints, with precisely the counit-compatible isomorphism required at the end."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic affine-morphism quasi-compactness and separatedness verifies the affine-line projection; no change to the unit’s adjunction route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic qcqs criterion for schemes separated of finite type over a field verifies the standing hypotheses of the open adjunction and category-equality nodes."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic inheritance of quasi-compactness and quasi-separatedness verifies the total spaces and the standard open immersion."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Only clause (e), composition of separated and locally finite-type morphisms, verifies the total spaces stay over the same field in the standing setting."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic qcqs property of the affine base Spec k used for the quasi-compactness test of the composite structure morphisms."
    }
   ]
  },
@@ -390,15 +987,20 @@
   "sk-prop-sfb-cartesian-coefficients",
   "det-prop-sfb-cartesian-coefficients-twists",
   "sk-prop-sf-existence",
-  "det-sp-unique-right-adjoint"
+  "det-sp-unique-right-adjoint",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q21-8ff9d78a7",
-  "group": "Q21",
+  "reviewer": "NT-cc-Q135-faf47d365",
+  "group": "Q135",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q21-8ff9d78a7 (reviewer sub-agent of L); spot-checked: Read the item, blueprint route, chapter/unit records, all 18 dependency statements and cited sources. Verified hypotheses, compactification, coefficient category, base-change maps, Tate twist, adjunction orientation, counit uniqueness, edge cases, route lock, and acyclicity. No new nodes or repairs are needed. Wrote review.md. The report mentions citations.json, absent from the snapshot; citations were independently checked directly."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-faf47d365 (reviewer sub-agent of L); spot-checked: I read the item, the unit and the blueprint text in full, plus the statement of all 24 cited nodes, the projective-line setting node (det-prop-p1-adjunction-rational-unit-counit) and the citer (the induction node). Compared with the side-DAG base, only status, proof, proof_deps, proof_origin, mathlib_searches and split_report changed. The statement, stmt_deps, blueprint, lean_audit, tool_uses and reviewed fields are identical. Old steps 2-6 are now steps 6-10 and differ only in renumbered step references. The return is repaired: the old inline geometry in step 1 is replaced by steps 1-5. Step 1 is the chart (blueprint_update target P({0,1};V)) and properness. Step 2 is the elementary Spec R[t] chart, which makes p affine and locally of finite type. Step 3 uses affine-morphism permanence (3) (Stacks 01S7, morphisms.tex l.1721), proper hence finite type hence quasi-compact, V qcqs from qcqs-over-affine, and permanence (2) to make the total spaces quasi-compact. Step 4 uses proper-fp-permanence (e) (01KU, 01T3), Spec k quasi-separated, and permanence (1) (03GI, schemes.tex l.4367) to make the structure maps of finite type and the total spaces qcqs, so the standing setting holds. Step 5 uses permanence (1) to make j quasi-compact, which gives a compactification in the sense of sk-def-nagata-sketch-data. Every hypothesis of the open-adjunction node (clause 1), the Dctf=Dbc node, the compactification-coherence node and the existence node is checked in steps 1-5. The coefficients are E or the finite-subextension condensed Qlb throughout, and q is the same P({0,1}) projection as in the triangle node. Edge cases checked: empty V, the zero ring, and non-affine or non-reduced V. There are no new nodes, no duplicates and no SGA citation. I accept the tool_uses, and the added geometry nodes have Mathlib status. Minor remarks, no change made: citations.json is named in the report but is not in the delivery, and the identification of the two projective-line definitions is pre-existing DAG design. review.md is written."
  },
  "lean_audit": {
   "master": {
