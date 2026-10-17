@@ -1,0 +1,65 @@
+{
+ "id": "def-coef-small-dg-category",
+ "kind": "definition",
+ "title": "Small cochain dg categories",
+ "statement": "A small cochain dg category over a commutative ring $R$ (over $\\mathbf Z$ when $R=\\mathbf Z$) consists of a set of objects, for each pair of objects $x,y$ a cochain complex of $R$-modules $\\mathcal A(x,y)$, a closed degree-zero identity $1_x\\in\\mathcal A(x,x)^0$, and $R$-bilinear right-to-left compositions $\\mathcal A(y,z)^p\\times\\mathcal A(x,y)^q\\to\\mathcal A(x,z)^{p+q}$ that are associative and unital and satisfy the graded Leibniz rule $d(ba)=d(b)a+(-1)^{p}b\\,d(a)$ for $b$ of degree $p$; equivalently, a category enriched over cochain complexes of $R$-modules with the Koszul-signed tensor product [def-pc-cochain-complex-modules]. A dg functor is an enriched functor: an object map with chain maps $\\mathcal A(x,y)\\to\\mathcal B(Fx,Fy)$ compatible with identities and composition. A closed degree-zero $u\\in\\mathcal A(x,y)^0$ is invertible in $H^0$ when there are a closed degree-zero $v$ and degree $-1$ elements $a,b$ with $d(a)=vu-1_x$ and $d(b)=uv-1_y$.",
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Section 'Differential graded categories' (Tag 09KZ) and situation ABC (Tag 09QJ)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "mathlib_match": null,
+ "mathlib_searches": [],
+ "created": {
+  "by": "L",
+  "item": "route pivot",
+  "date": "2026-10-18",
+  "note": "maintenance (the human, 2026-10-18): the plain dg-category definitions moved out of modules of dropped machinery nodes"
+ },
+ "blueprint": {
+  "is": null,
+  "from": null,
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "status": "split",
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "result": "pass",
+  "note": "maintenance definition node (route pivot): the existing Lean declarations, moved unchanged, define exactly this notion"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SmallDgCategory",
+  "declaration": "CategoryTheory.Dg.Cat",
+  "declarations": [
+   "CategoryTheory.Dg.Cat",
+   "CategoryTheory.Dg.Fun",
+   "CategoryTheory.Dg.fun_unit_laws",
+   "CategoryTheory.Dg.fun_assoc",
+   "CategoryTheory.Dg.catCategory",
+   "CategoryTheory.Dg.hom",
+   "CategoryTheory.Dg.objects",
+   "CategoryTheory.Dg.comp",
+   "CategoryTheory.Dg.unit",
+   "CategoryTheory.Dg.mul",
+   "CategoryTheory.Dg.mul_d",
+   "CategoryTheory.Dg.mulAt",
+   "CategoryTheory.Dg.mulAtDegree",
+   "CategoryTheory.Dg.IsH0Iso",
+   "CategoryTheory.IntegralDGCategory"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SmallDgCategory.lean",
+  "statement": "abbrev Cat := EnrichedCat.{u, u + 1, u} (CochainComplex (ModuleCat.{u} R) ℤ)",
+  "branch": "newtargets-dag",
+  "by": "L",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "declarations moved unchanged from DgCategoryFreeCellCalculus, DgCategoryEquivalenceCellCalculus and SemiFreeDGModule (route pivot)"
+ },
+ "unit": "sk-prop-sf-biduality-general"
+}
