@@ -45,21 +45,23 @@ variable {X S W : Scheme.{u}} (h : X ⟶ S)
 /-- Base change along `h : X ⟶ S`, as a functor `Over S ⥤ Over X` whose value at `Y ⟶ S` is
 `X ×_S Y` with structure morphism the *first* projection. -/
 @[simps]
-noncomputable def overPullbackFst : CategoryTheory.Over S ⥤ CategoryTheory.Over X where
+noncomputable def overPullbackFstFunctor : CategoryTheory.Over S ⥤ CategoryTheory.Over X where
   obj Y := CategoryTheory.Over.mk (pullback.fst h Y.hom)
   map {Y Z} g := CategoryTheory.Over.homMk
     (pullback.map h Y.hom h Z.hom (𝟙 X) g.left (𝟙 S) (by simp) (by simp)) (by simp)
   map_id Y := by ext; apply pullback.hom_ext <;> simp
   map_comp f g := by ext; apply pullback.hom_ext <;> simp
 
-/-- `overPullbackFst h` is isomorphic to Mathlib's base change functor `Over.pullback h`. -/
-noncomputable def overPullbackFstIso : overPullbackFst h ≅ CategoryTheory.Over.pullback h :=
+/-- `overPullbackFstFunctor h` is isomorphic to Mathlib's base change functor
+`Over.pullback h`. -/
+noncomputable def overPullbackFstFunctorIso :
+    overPullbackFstFunctor h ≅ CategoryTheory.Over.pullback h :=
   NatIso.ofComponents
     (fun Y ↦ CategoryTheory.Over.isoMk (pullbackSymmetry h Y.hom) (by simp; rfl))
     (fun g ↦ by ext; apply pullback.hom_ext <;> simp)
 
-instance : PreservesLimitsOfSize.{v, w} (overPullbackFst h) :=
-  preservesLimits_of_natIso (overPullbackFstIso h).symm
+instance : PreservesLimitsOfSize.{v, w} (overPullbackFstFunctor h) :=
+  preservesLimits_of_natIso (overPullbackFstFunctorIso h).symm
 
 variable (ι : W ⟶ S) {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ W)
 
@@ -105,12 +107,13 @@ theorem isZero_upperStar_rightDerived_lowerStar_of_subsingleton_H {X S W : Schem
   have hK : IsLimit K := isLimitOfReflects (CategoryTheory.Over.forget S)
     (isLimitOfPreserves (CategoryTheory.Over.forget W) (isLimitStrictLocalizationConeOver s))
   let D : I ⥤ CategoryTheory.Over X :=
-    Φ ⋙ (affineNeighborhoodDiagramOver s ⋙ CategoryTheory.Over.map ι) ⋙ overPullbackFst h
-  let cn : Cone D := ((overPullbackFst h).mapCone K).whisker Φ
+    Φ ⋙ (affineNeighborhoodDiagramOver s ⋙ CategoryTheory.Over.map ι) ⋙
+      overPullbackFstFunctor h
+  let cn : Cone D := ((overPullbackFstFunctor h).mapCone K).whisker Φ
   have hc : IsLimit ((CategoryTheory.Over.forget X).mapCone cn) :=
     (Functor.Initial.isLimitWhiskerEquiv Φ _).symm
       (isLimitOfPreserves (CategoryTheory.Over.forget X)
-        (isLimitOfPreserves (overPullbackFst h) hK))
+        (isLimitOfPreserves (overPullbackFstFunctor h) hK))
   have hA (i : I) : IsAffine ((𝟭 Scheme.{u}).obj (Φ.obj i).obj.1.left) := (Φ.obj i).2
   have (i : I) : CompactSpace (D.obj i).left := by
     have := hA i
