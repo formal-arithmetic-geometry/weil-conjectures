@@ -1,6 +1,6 @@
 # Work queue
 
-143 items; claim with `tools/claim.py next <group> [--stage N]`.
+144 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,12 +8,12 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (143)
+## Stage 3: modules to prove (144)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
-| `WeilConjectures.PoincareDuality.Poincare` | 0 | 1 | proof |
-| `WeilConjectures.PoincareDuality.ProjectionFormula` | 2 | 2 | proof |
+| `WeilConjectures.PoincareDuality.Poincare` | 0 | 1 | disputed |
+| `WeilConjectures.PoincareDuality.ProjectionFormula` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 3 | proof |
 | `WeilConjectures.ZetaFunction.TraceFormula` | 2 | 1 | proof |
 | `WeilConjectures.WeilSheaf.PoincareDuality` | 3 | 1 | proof |
@@ -66,7 +66,6 @@
 | `Sheaf.AlgebraicGeometry.SmoothGenericDirectImage` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift` | 11 | 1 | proof |
 | `Sheaf.Paper.ExchangeIdentityPasting` | 11 | 1 | proof |
-| `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
 | `WeilConjectures.ConstructibleSheaf.Presentation` | 11 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage` | 11 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality` | 11 | 3 | proof |
@@ -83,6 +82,8 @@
 | `Sheaf.AlgebraicGeometry.ProjectiveFiniteGeometricFibres` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap` | 12 | 2 | proof |
 | `Sheaf.CategoryTheory.MateIsoAlongEquivalences` | 12 | 1 | proof |
+| `Sheaf.Paper.IntegralResidueTensorRouteDescent` | 12 | 1 | proof |
+| `Sheaf.Paper.IntegralResidueTensorRouteKFlat` | 12 | 1 | proof |
 | `WeilConjectures.ConstructibleSheaf.FiniteMorphism` | 12 | 2 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne` | 12 | 2 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary` | 12 | 2 | proof |
