@@ -1,0 +1,78 @@
+{
+ "id": "lem-sfb-preserving-colimits-additive",
+ "kind": "statement",
+ "title": "Finite-colimit-preserving functors between abelian categories are additive",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian], and let $F:\\mathcal A\\to\\mathcal B$ be a functor preserving finite colimits [def-weil-pbc-category-colimit]. Then $F$ is additive: for all objects $X,Y$ and morphisms $f,g:X\\to Y$, one has $F(f+g)=F(f)+F(g)$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 010N, lemma-exact-functor, assertion (1), right-exact case; right exact means preserving finite colimits. Mathlib implementation: CategoryTheory.rightExactFunctor_le_additiveFunctor, Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean:330-334."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A functor between preadditive categories preserving finite colimits is additive",
+   "results": "8 hits include rightExactFunctor_le_additiveFunctor and AdditiveFunctor.ofRightExact; exact match after specializing to abelian categories.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor between preadditive categories preserving finite colimits is additive",
+   "results": "8 hits on additivity and binary biproducts; no direct finite-colimit formulation among these hits.",
+   "date": "2026-10-17",
+   "verdict": "related results"
+  },
+  {
+   "tool": "loogle",
+   "query": "rightExactFunctor_le_additiveFunctor, additive_of_preservesBinaryBiproducts",
+   "results": "Zero hits; unknown identifier rightExactFunctor_le_additiveFunctor in this unqualified pattern.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.rightExactFunctor_le_additiveFunctor",
+   "results": "One exact hit CategoryTheory.rightExactFunctor_le_additiveFunctor, Mathlib.CategoryTheory.Preadditive.AdditiveFunctor.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightExactFunctor_le_additiveFunctor|additive_of_preservesBinaryBiproducts",
+   "results": "Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean:330-334 is the exact finite-colimit-to-additivity result; :227 proves additivity from binary biproduct preservation.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.rightExactFunctor_le_additiveFunctor",
+  "file": "Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean",
+  "line": 330,
+  "how": "specializes in one line: rightExactFunctor_le_additiveFunctor A B applied to F and its PreservesFiniteColimits hypothesis. Abelian categories supply Preadditive, HasZeroObject and HasBinaryBiproducts. Read lines 316-334; rightExactFunctor is definitionally PreservesFiniteColimits (Limits/ExactFunctor.lean:65-71), and additiveFunctor is definitionally Functor.Additive (Preadditive/AdditiveFunctor.lean:262-266), whose map_add field is the displayed formula."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-extend-scalars-kflat",
+  "date": "2026-10-17",
+  "group": "Q122"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-derived-extension-of-scalars",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-extend-scalars-kflat",
+   "place": "Proof, sentence choosing a K-flat resolution Q to S: additivity of the relative tensor functors, formerly proved inline in item step 1 after the two adjunction/colimit arguments.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

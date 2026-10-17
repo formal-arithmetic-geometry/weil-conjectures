@@ -21,13 +21,9 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal A=\\operatorname{Mod}_{\\mathcal R}(\\mathcal C)$. By [lem-sfb-modobj-grothendieck] it is Grothendieck abelian, and [def-sfb-modobj-symmetric-tensor] gives its symmetric relative tensor structure. The hypotheses of both nodes hold: $\\mathcal C$ is closed symmetric monoidal, hence its tensor functors preserve colimits: if $X\\otimes-\\dashv[X,-]$, then for a small diagram $D$ the colimit universal property [def-weil-pbc-category-colimit] gives $\\operatorname{Hom}(X\\otimes\\operatorname{colim}D,Y)\\cong\\operatorname{Hom}(\\operatorname{colim}D,[X,Y])\\cong\\lim_i\\operatorname{Hom}(D_i,[X,Y])\\cong\\lim_i\\operatorname{Hom}(X\\otimes D_i,Y)$. Thus $X\\otimes\\operatorname{colim}D$ with the induced cocone has exactly the colimit universal property; symmetry gives the other variable. Also $\\mathcal R$ is commutative. By [def-sfb-modobj-internal-hom] the relative tensor structure on $\\mathcal A$ is closed. For a module $M$, write $[M,-]_{\\mathcal R}$ for this right adjoint. For every small diagram $D$ of modules, $\\operatorname{Hom}_{\\mathcal A}(M\\otimes_{\\mathcal R}\\operatorname{colim}D,N)\\cong\\operatorname{Hom}_{\\mathcal A}(\\operatorname{colim}D,[M,N]_{\\mathcal R})\\cong\\lim_i\\operatorname{Hom}_{\\mathcal A}(D_i,[M,N]_{\\mathcal R})\\cong\\lim_i\\operatorname{Hom}_{\\mathcal A}(M\\otimes_{\\mathcal R}D_i,N)$, proving preservation of colimits in that variable; the symmetry identifies the other fixed-factor tensor functor with this one. In particular they preserve the zero object and finite biproducts, and hence are additive: writing $f+g=\\nabla\\circ(f\\oplus g)\\circ\\Delta$, the functor sends this to the same formula for $F(f)+F(g)$, since the biproduct injections, projections, diagonal and codiagonal are determined by their identity/zero component equations. Thus the relative tensor is additive in both variables, as required below. By [lem-sfb-modobj-flat-resolutions] it has a functorial flat resolution. These are precisely the ambient hypotheses for the abstract K-flat resolution theorem used next; none asserts that $\\mathcal S$ is flat over $\\mathcal R$.",
+   "text": "For every $X\\in\\mathcal C$, closedness gives a right adjoint to $X\\otimes-$. Apply [lem-weil-pbc-left-adjoint-preserves-colimits] to this adjunction and each small diagram: $X\\otimes-$ preserves all small colimits. Symmetry gives the same assertion for $-\\otimes X$. Since $\\mathcal C$ is Grothendieck abelian, its coequalizers exist. Thus the ambient colimit hypotheses for the relative tensor structure are satisfied.",
    "uses": [
-    "lem-sfb-modobj-grothendieck",
-    "def-sfb-modobj-symmetric-tensor",
-    "def-sfb-modobj-internal-hom",
-    "lem-sfb-modobj-flat-resolutions",
-    "def-weil-pbc-category-colimit"
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
    ],
    "elementary": false,
    "source": {
@@ -36,7 +32,33 @@
    }
   },
   {
-   "text": "Let $S_{\\mathcal R}=\\operatorname{Res}_{\\varphi}(\\mathcal S)$ be the regular $\\mathcal S$-module restricted to $\\mathcal R$; its action is $\\mu_{\\mathcal S}\\circ(\\varphi\\otimes\\mathrm{id})$ by [sk-def-sfb-change-of-scalars]. Write $S_{\\mathcal R}[0]$ for the complex with this object in degree zero and zero elsewhere. Apply [lem-sfb-abstract-kflat-resolution] in $\\mathcal A$ to obtain a K-flat complex $Q$ and a quasi-isomorphism $q:Q\\to S_{\\mathcal R}[0]$. The complex $Q$ is an $\\mathcal R$-module complex, and no $\\mathcal S$-action on $Q$ is required.",
+   "text": "Put $\\mathcal A=\\operatorname{Mod}_{\\mathcal R}(\\mathcal C)$. The assumptions on $\\mathcal C$ and commutativity of $\\mathcal R$ give that $\\mathcal A$ is Grothendieck abelian by [lem-sfb-modobj-grothendieck]. By [def-sfb-modobj-symmetric-tensor] it is symmetric monoidal for $\\otimes_{\\mathcal R}$, and [def-sfb-modobj-internal-hom] gives a right adjoint to every $M\\otimes_{\\mathcal R}-$.",
+   "uses": [
+    "lem-sfb-modobj-grothendieck",
+    "def-sfb-modobj-symmetric-tensor",
+    "def-sfb-modobj-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/lem-sfb-extend-scalars-kflat.proof.md",
+    "place": "Sentence choosing a K-flat resolution: hypotheses in the module category, supplied by the module-category inheritance statements and def-sfb-modobj-internal-hom."
+   }
+  },
+  {
+   "text": "For each $M\\in\\mathcal A$, apply [lem-weil-pbc-left-adjoint-preserves-colimits] to its relative-tensor/internal-Hom adjunction from the preceding step. Both fixed-factor relative tensor functors preserve colimits, using symmetry for the other factor. They therefore preserve finite colimits and are additive by [lem-sfb-preserving-colimits-additive], applied between the abelian categories $\\mathcal A,\\mathcal A$. Finally [lem-sfb-modobj-flat-resolutions] supplies a functor $B:\\mathcal A\\to\\mathcal A$ with flat values and a natural epimorphism $B\\to\\mathrm{id}_{\\mathcal A}$. Hence all hypotheses of the abstract K-flat resolution theorem hold in $\\mathcal A$.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sfb-preserving-colimits-additive",
+    "lem-sfb-modobj-flat-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/lem-sfb-extend-scalars-kflat.proof.md",
+    "place": "Sentence choosing a K-flat resolution: hypotheses in the module category, supplied by the module-category inheritance statements and def-sfb-modobj-internal-hom."
+   }
+  },
+  {
+   "text": "Let $S_{\\mathcal R}=\\operatorname{Res}_{\\varphi}(\\mathcal S)$ be the regular $\\mathcal S$-module restricted to $\\mathcal R$; its action is $\\mu_{\\mathcal S}\\circ(\\varphi\\otimes\\mathrm{id})$ by [sk-def-sfb-change-of-scalars]. Write $S_{\\mathcal R}[0]$ for the complex with this object in degree zero and zero elsewhere. The functorial flat resolution supplied in step 3 is a functor $B$ with flat values and a natural epimorphism $B\\to\\mathrm{id}_{\\mathcal A}$, exactly the extra hypothesis of [lem-sfb-abstract-kflat-resolution]. Apply that node in $\\mathcal A$ to obtain a K-flat complex $Q$ and a quasi-isomorphism $q:Q\\to S_{\\mathcal R}[0]$. The complex $Q$ is an $\\mathcal R$-module complex, and no $\\mathcal S$-action on $Q$ is required.",
    "uses": [
     "sk-def-sfb-change-of-scalars",
     "lem-sfb-abstract-kflat-resolution"
@@ -83,7 +105,7 @@
    }
   },
   {
-   "text": "Restriction $U=\\operatorname{Res}_{\\varphi}$ is exact between the two abelian module categories by [sk-def-sfb-change-of-scalars], under the closedness, additivity and colimit hypotheses already verified. The natural cohomology comparison of [lem-weil-pbc-exact-functor-complex-cohomology] therefore identifies $H^n(U(T))$ with $U(H^n(T))$ up to conjugation by its specified isomorphisms. The former is invertible by steps 4 and 5, so $U(H^n(T))$ is invertible. Finally $U$ reflects isomorphisms, directly from its being the identity on underlying morphisms and the module-morphism equation of [sk-def-sfb-module-objects]: if $f\\gamma_M=\\gamma_N(\\mathcal S\\otimes f)$ has an inverse $g$ on underlying objects, multiplication by $g$ and $\\mathcal S\\otimes g$ gives $g\\gamma_N=\\gamma_M(\\mathcal S\\otimes g)$. Thus $g$ is $\\mathcal S$-linear. Each $H^n(T)$ is an isomorphism, so $T$ is the required quasi-isomorphism by [def-weil-abstract-derived-category].",
+   "text": "Restriction $U=\\operatorname{Res}_{\\varphi}$ is exact between the two abelian module categories by [sk-def-sfb-change-of-scalars], under the closedness, additivity and colimit hypotheses already verified in steps 1–3. The natural cohomology comparison of [lem-weil-pbc-exact-functor-complex-cohomology] therefore identifies $H^n(U(T))$ with $U(H^n(T))$ up to conjugation by its specified isomorphisms. The former is invertible by steps 6 and 7, so $U(H^n(T))$ is invertible. Finally $U$ reflects isomorphisms, directly from its being the identity on underlying morphisms and the module-morphism equation of [sk-def-sfb-module-objects]: if $f\\gamma_M=\\gamma_N(\\mathcal S\\otimes f)$ has an inverse $g$ on underlying objects, multiplication by $g$ and $\\mathcal S\\otimes g$ gives $g\\gamma_N=\\gamma_M(\\mathcal S\\otimes g)$. Thus $g$ is $\\mathcal S$-linear. Each $H^n(T)$ is an isomorphism, so $T$ is the required quasi-isomorphism by [def-weil-abstract-derived-category].",
    "uses": [
     "sk-def-sfb-change-of-scalars",
     "lem-weil-pbc-exact-functor-complex-cohomology",
@@ -98,11 +120,12 @@
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
   "lem-sfb-modobj-grothendieck",
   "def-sfb-modobj-symmetric-tensor",
   "def-sfb-modobj-internal-hom",
+  "lem-sfb-preserving-colimits-additive",
   "lem-sfb-modobj-flat-resolutions",
-  "def-weil-pbc-category-colimit",
   "sk-def-sfb-change-of-scalars",
   "lem-sfb-abstract-kflat-resolution",
   "def-sfb-preserves-kflat-quasi-iso",
@@ -168,7 +191,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -191,19 +214,19 @@
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-derived-extension-of-scalars",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-sfb-extend-scalars-kflat",
   "worker": "stage1",
-  "summary": "Kept the statement unchanged. Expanded the coefficient-resolution argument, replacing the cone packaging by an explicit tensor square and inverse formula on cohomology. Reused module-category infrastructure, relative-tensor definitions and the exact-functor cohomology Mathlib leaf. Created one statement-only abstract K-flat resolution node; the existing project theorem is reported for attachment. No new Mathlib leaf. Independent second reading reuses the local internal-Hom definition for module-category closedness and reports the archived sorry-free resolution attachment through lean_candidates.",
-  "blueprint": "The first part of the blueprint proof is realized by steps 5-6 (restriction and detection); its choice of Q is steps 1-2; its two uses of K-flatness and acyclicity conclusion are steps 3-4, expressed without a cone. This stays within the parent unit's K-flat-resolution construction of derived extension."
+  "summary": "Repaired the returned 2075-character step without changing the statement or Lean record. Replaced its two inline adjunction/colimit proofs with citations of the existing Mathlib leaf lem-weil-pbc-left-adjoint-preserves-colimits, and its inline biproduct/additivity argument with a new Mathlib leaf lem-sfb-preserving-colimits-additive (Stacks 010N(1)). The former step is now three short steps establishing precisely the module-category hypotheses. Retained all subsequent proof arguments and corrected their step-number references. Regenerated the complete verbatim citation coverage, including the previously missing extension-of-scalars quote.",
+  "blueprint": "Steps 1–4 realize the blueprint sentence choosing a K-flat resolution of S: steps 1–3 verify the module-category hypotheses using cited results; step 4 chooses Q. Original remaining steps survive as steps 5–8: the two K-flatness applications, cohomology square, restriction/tensor identification, and detection of quasi-isomorphisms."
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q03-7dd6f561a",
-  "group": "Q03",
+  "reviewer": "NT-cc-Q122-15ef00deb",
+  "group": "Q122",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q03-7dd6f561a (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements and source passages in full. All six steps preserve the exact hypotheses and S-module conclusion. The abstract K-flat resolution theorem matches the cited project source and is not a duplicate or parent restatement. Checked nonflat and degenerate cases; 205 reachable nodes have no missing dependencies or cycles. No SGA, repairs, or off-route tool uses. Detailed review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-15ef00deb (reviewer sub-agent of L); spot-checked: I read the whole delivery and made no fixes. The item's statement is still the blueprint's (main-20261015) word for word, and its proof follows the blueprint route: S is replaced by a K-flat Q, K-flatness is used twice, and restriction detects quasi-isomorphisms. The delivery writes the cone argument as a commutative square on s. Steps 1–3 now cite lem-weil-pbc-left-adjoint-preserves-colimits (a Mathlib leaf) and the new leaf instead of proving them inline, and they establish every hypothesis of lem-sfb-abstract-kflat-resolution in Mod_R. The cited nodes are lem-sfb-modobj-grothendieck, the symmetric-tensor and internal-Hom definitions, and lem-sfb-modobj-flat-resolutions; flatness is defined the same way in the flat-resolutions node and the resolution node. I checked step 7 by computing the balancing arrows: γ_{S_R}β = μ_S(S⊗φ) by naturality of the braiding and commutativity of S. The R-actions agree, and only the (0,n) summand survives, with sign +1. I checked the inverse formula in step 6 and the reflection calculation in step 8. The exactness of Res comes from clause 4 of the change-of-scalars node, whose hypotheses all hold. The new node lem-sfb-preserving-colimits-additive is true: Stacks 010N(1) (homology.tex line 1549) states it, and Mathlib AdditiveFunctor.lean lines 330–334 (rightExactFunctor_le_additiveFunctor) give it as a one-line specialization once abelian categories supply the needed instances. I searched the DAG for duplicates by statement regex and by Mathlib declaration; the closest existing node, lem-sfb-kernel-cokernel-finite-exactness, assumes additivity and goes the other way. The new node does not restate a clause of the item, and all three kinds of Mathlib search are recorded. The unit route reaches sk-prop-sfb-module-category, so no tool_uses are needed. proof_deps equals the union of the step uses and there is no cycle. Edge cases checked: φ = id, Z→Z/2 (where dropping K-flatness gives a counterexample), zero objects, unbounded complexes, and zero or constant functors for the new leaf. No SGA source is used."
  },
  "lean_audit": {
   "master": {

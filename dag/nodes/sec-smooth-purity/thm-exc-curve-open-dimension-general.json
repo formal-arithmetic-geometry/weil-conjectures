@@ -95,22 +95,48 @@
    }
   },
   {
-   "text": "For each $a\\in J$, restrict the $A$-module sheaf to $\\operatorname{Spec}K_a$. When using the module-valued encoding, apply [lem-weil-pbc-module-sheaf-constant-ring-equivalence] on this field spectrum: it gives an equivalence with modules over the constant ring sheaf and retains exactly the underlying abelian sheaf. An equivalence of abelian categories preserves kernels and cokernels and is exact. The natural isomorphism on underlying additive sheaves identifies their sections on the final object, hence identifies the underlying abelian groups of their module-section functors. Its inverse gives the same identification in the opposite direction. Applying this exact equivalence to an injective resolution computes the same section-cohomology groups in either encoding: injectivity is preserved by the lifting argument below, and the section complexes are identified term by term. This is only a comparison on the fixed field spectrum; no compatibility of an arbitrary chosen encoding equivalence with scheme pushforwards is assumed. By [lem-exc-field-discrete-modules], the geometric fibre functor is an exact equivalence from these module sheaves to discrete continuous $A[G_a]$-modules, compatible with global sections and invariants, where $G_a=\\operatorname{Gal}(K_a^{\\mathrm{sep}}/K_a)$. An exact equivalence preserves injectives: a lifting problem transports to its exact inverse, is solved there, and transports back. Applying the equivalence to an injective resolution therefore identifies module-sheaf cohomology with the derived invariants defining $H^q(G_a,N_a)$ in [def-exc-continuous-cohomology]. By [lem-weil-pbc-etale-module-cohomology-forget], forgetting scalars identifies the former groups with the abelian-sheaf groups $H^q(\\operatorname{Spec}K_a,F_0|_{K_a})$ being used here. The prime $\\ell$ differs from $p$ because it is invertible on the nonempty $T$, and $A$ is finite and killed by a power of $\\ell$. Thus [lem-exc-dvr-galois] applies to every $N_a$, without a finiteness assumption on $N_a$, and makes all these groups zero for $q>1$.",
+   "text": "Fix $a\\in J$ and put $X_a=\\operatorname{Spec}K_a$. Let $M_a$ be the restriction of the pulled-back $A$-module sheaf to $X_a$, with underlying abelian sheaf $F_a=F_0|_{X_a}$. By [lem-weil-pbc-module-sheaf-constant-ring-equivalence], choose an equivalence $E_a$ from module-valued sheaves to modules over the constant ring sheaf, retaining the underlying additive sheaf. Evaluating its natural isomorphism at the final etale object $X_a$ gives a natural isomorphism of additive section functors. The equivalence is additive because it preserves finite biproducts, and is exact and carries injective resolutions to injective resolutions by [lem-weil-pbc-equivalence-injective-resolutions]. The constant-ring-sheaf module category has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]; the inverse equivalence and the same resolution lemma give enough injectives in the module-valued category. Apply [lem-exc-equivalence-derived-sections] to these section functors, valued in abelian groups. Thus the underlying section-cohomology groups in the two encodings agree in every degree. This uses only a fixed field spectrum.",
    "uses": [
     "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
+    "lem-weil-pbc-equivalence-injective-resolutions",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-exc-equivalence-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015M, lemma-compose-derived-functors, exact-equivalence case; blueprint Proof paragraph 3, first sentence"
+   }
+  },
+  {
+   "text": "Put $G_a=\\operatorname{Gal}(K_a^{\\mathrm{sep}}/K_a)$ and let $N_a$ be the geometric fibre of the module sheaf on $X_a$. By [lem-exc-field-discrete-modules], geometric fibre is an exact equivalence to discrete continuous $A[G_a]$-modules and carries sections to invariants. These categories have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives] and [lem-exc-discrete-modules-abelian]. Apply [lem-exc-equivalence-derived-sections] to sections and invariants, with values in $\\operatorname{Mod}(A)$. By [def-exc-continuous-cohomology], the latter derived functors are $H^q(G_a,N_a)$. Combining this comparison with the preceding encoding comparison and [lem-weil-pbc-etale-module-cohomology-forget] identifies the underlying additive group of $H^q(G_a,N_a)$ with $H^q(X_a,F_a)$. No finiteness assumption on the module $N_a$ has been introduced.",
+   "uses": [
     "lem-exc-field-discrete-modules",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-exc-discrete-modules-abelian",
+    "lem-exc-equivalence-derived-sections",
     "def-exc-continuous-cohomology",
-    "lem-weil-pbc-etale-module-cohomology-forget",
+    "lem-weil-pbc-etale-module-cohomology-forget"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015M, lemma-compose-derived-functors, exact-equivalence case; blueprint Proof paragraph 3, first sentence"
+   }
+  },
+  {
+   "text": "Each $K_a$ is the fraction field of an excellent strictly henselian DVR with algebraically closed residue field of characteristic $p$, by step 6. In this remaining case $t\\in T$, so $T$ is nonempty. Invertibility of $\\ell$ on $T$ implies $\\ell\\ne p$, since its image in $\\kappa(t)$ is a unit. The ring $A$ is finite and killed by a power of $\\ell$. Hence [lem-exc-dvr-galois] gives $H^q(G_a,N_a)=0$ for $q>1$ and every $a\\in J$. The comparison of the preceding step yields $H^q(X_a,F_a)=0$.",
+   "uses": [
     "lem-exc-dvr-galois"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-exc-curve-open-dimension-general.md",
-    "place": "Proof, third paragraph, first two sentences; etale-cohomology.tex Tags 03QT, 03QU; sites-cohomology.tex Tag 03FD; valuation input as in the cited DVR lemma"
+    "place": "Proof paragraph 3, second sentence: apply the DVR computation to each branch field"
    }
   },
   {
-   "text": "By [lem-weil-pbc-finite-coproduct-cohomology-assembly], $H^q(V_0,F_0)$ is the finite product of the zero groups from step 7, hence zero (including the empty product). Steps 3–7 give $H^q(V,F_V)=0$ at every geometric point. The stalk isomorphism in step 2 therefore shows that all geometric stalks of $R^qj_*F$ vanish. Apply [lemma-weil-pbc-geometric-stalk-conservative] to its morphism to the zero sheaf to conclude $R^qj_*F=0$. The scalar-forgetting comparison in step 1 now gives $R^qj_*M=0$, since a module sheaf with zero underlying abelian sheaf is zero. If $T$ is empty, its only module sheaf is zero and this last conclusion already holds.",
+   "text": "By [lem-weil-pbc-finite-coproduct-cohomology-assembly], $H^q(V_0,F_0)$ is the finite product of the zero groups from step 9, hence zero (including the empty product). Steps 3–9 give $H^q(V,F_V)=0$ at every geometric point. The stalk isomorphism in step 2 therefore shows that all geometric stalks of $R^qj_*F$ vanish. Apply [lemma-weil-pbc-geometric-stalk-conservative] to its morphism to the zero sheaf to conclude $R^qj_*F=0$. The scalar-forgetting comparison in step 1 now gives $R^qj_*M=0$, since a module sheaf with zero underlying abelian sheaf is zero. If $T$ is empty, its only module sheaf is zero and this last conclusion already holds.",
    "uses": [
     "lem-weil-pbc-finite-coproduct-cohomology-assembly",
     "lemma-weil-pbc-geometric-stalk-conservative"
@@ -139,7 +165,11 @@
   "thm-weil-pbc-universal-homeomorphism-invariance",
   "lem-exc-punctured-curve-branches",
   "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-exc-equivalence-derived-sections",
   "lem-exc-field-discrete-modules",
+  "lem-exc-discrete-modules-abelian",
   "def-exc-continuous-cohomology",
   "lem-weil-pbc-etale-module-cohomology-forget",
   "lem-exc-dvr-galois",
@@ -196,7 +226,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -230,11 +260,11 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "thm-exc-curve-open-dimension-general",
   "worker": "stage1",
-  "summary": "Expanded the three imported paragraphs into eight steps. Kept the theorem and branch/DVR route; supplied qcqs, scalar-forgetting, affine-chart residue-triples identification, dimension-zero and closed-point arguments, reduced strict henselian hypotheses, derived Galois comparison, and finite-coproduct assembly. One statement-only algebra node isolates excellence of strict henselizations of finite-type field local rings; its missing textbook reference is requested in report.md. No Lean or builds.",
-  "blueprint": "Paragraph 1 is realized by steps 1–4; paragraph 2 by steps 2, 4–6; paragraph 3 by steps 7–8. The sk-prop-a1-kummer route is unchanged.",
+  "summary": "Repair of the returned step 7: retain the statement, Lean record, branch/DVR route and other steps. Replace the inline equivalence and derived-cohomology arguments by three short steps, citing the existing equivalence/injective-resolutions Mathlib leaf and a new statement-only comparison lemma. Explicitly verify enough injectives for both encodings and the discrete module category. Update only the final step references.",
+  "blueprint": "Proof paragraphs 1 and 2 remain steps 1–6. Paragraph 3 first sentence is now steps 7–8, with encoding and derived-sections comparison isolated; its DVR sentence is step 9, and its finite-coproduct and conservative-stalk conclusion is step 10.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-exchange-forget-coefficients",
@@ -303,6 +333,14 @@
    {
     "node": "lemma-weil-pbc-geometric-stalk-conservative",
     "why": "Generic structural tool for the strict-local stalk proof: Conservativity of geometric stalks. Its stated comparison or permanence property is used without changing the punctured-branch / DVR route; sk-prop-a1-kummer contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Enough injectives for section functors in the two coefficient encodings; generic tool needed for the unchanged field-cohomology route."
+   },
+   {
+    "node": "lem-exc-discrete-modules-abelian",
+    "why": "Enough injectives for discrete continuous A[G]-modules when applying the derived comparison; generic structural tool, not an alternate route."
    }
   ]
  },
@@ -323,15 +361,17 @@
   "lem-exc-field-discrete-modules",
   "lem-weil-pbc-etale-module-cohomology-forget",
   "lem-weil-pbc-finite-coproduct-cohomology-assembly",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-exc-discrete-modules-abelian"
  ],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-N5-48805cd70",
-  "group": "N5",
+  "reviewer": "NT-cc-Q33-4243d9498",
+  "group": "Q33",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-48805cd70 (reviewer sub-agent of L); spot-checked: Read the item, sole new node, cited statements, sources, and unit/chapter route. Checked all eight steps, coefficient comparisons, edge cases, duplicates, and cycles. No repairs needed. The unavailable strict-henselization reference is explicitly WANTED for the unsplit algebra lemma. Full findings are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-4243d9498 (reviewer sub-agent of L); spot-checked: I read the item in full: all 10 steps, the blueprint statement and route in both the master and main-20261015 snapshots, the unit route, the statement of every cited node, and Stacks 015M lemma-compose-derived-functors. The statement is unchanged; the coefficient category is modules over the constant ring sheaf. Steps 1–6 check out. Step 1: forgetting coefficients on the cartesian (j,j,id,id) square, and j is qcqs from the Noetherian hypothesis. Step 2: the stalk formula, R identified with (B_p)^sh, dim R ≤ 1. Step 3: an open containing the closed point is the whole spectrum, then 03QO. Step 4: dim 0 gives V empty; dim 1 forces t closed by the chain argument. Step 5: the separable closure of κ(t) is algebraically closed, R and R_red are excellent, henselian quotient, universal-homeomorphism invariance. Step 6: every hypothesis of the branch lemma holds, and V_0 is a sub-coproduct (J may be empty). Repaired steps 7–9 now cite their lemmas instead of hiding them: the constant-ring equivalence, the 015Z equivalence-injectives leaf, enough injectives in both encodings and for discrete modules, and the new comparison node. Its target is derived invariants, which is H^q(G,N) by the definition, followed by forgetting coefficients and the DVR lemma (ℓ≠p checked; arbitrary module). Step 10 uses the finite product and stalk conservativity. Edge cases checked: T, U and J empty; isolated points; A=0. The new node lem-exc-equivalence-derived-sections is true (E(I) is an injective resolution and α_I is an isomorphism of complexes; small cases are the identity, q=0 and the zero functor). It is the special case F=E exact of 015M, not a restatement of the item and not a duplicate (checked against lem-sc-discrete-invariants-continuous-comparison, lem-sp-kinjective-computes and the Leray/Grothendieck nodes). FIX: the new node lacked the required lean_audit field; the corrected whole file is in fixes/dag/nodes/sec-smooth-purity/. Accepted the new tool_use lem-weil-pbc-module-sheaves-enough-injectives (sk-thm-reduction) as a generic enough-injectives tool. No SGA source is cited.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.CurveOpenDimensionGeneral",

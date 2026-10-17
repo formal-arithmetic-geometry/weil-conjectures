@@ -11,9 +11,107 @@
   "lem-coef-simplicial-inversion-universal-property",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $O=\\operatorname{Ob}C$, with its given grading $d$, and work with identity-on-$O$ functors. The fixed-object category $\\mathrm{sCat}_O$ exists and is cocomplete by [lem-coef-simplicial-interval-lifting]. Its initial object $D_0$ has just the identity arrows. For each $x,y\\in O$ with $d(x)\\leq d(y)$ and each $n\\geq0$, take the map $F^O_{x,y}(\\partial\\Delta^n)\\to F^O_{x,y}(\\Delta^n)$, using the free-arrow adjunction [lem-coef-fixed-object-free-arrow-adjunction]. These maps form a small set $I_d$. Start with the identity-preserving map $D_0\\to C$.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-fixed-object-free-arrow-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition A.3.5.7 and Lemma A.3.5.9; explicit fixed-object boundary-cell argument by the worker, using the cited DAG statements. Archival HTT WANTED."
+   }
+  },
+  {
+   "text": "The domains of $I_d$ are small for the countable cell construction. Indeed, along a chain of identity-on-$O$ enriched functors, take the colimit of each mapping simplicial set. Composition of two representatives is computed at a common stage; associativity, units, and the equality criterion are checked at a later common stage. This gives the colimit in $\\mathrm{sCat}_O$. By the free-arrow adjunction, a map from a domain of $I_d$ into that colimit is just a map from $\\partial\\Delta^n$ to one mapping set. For $n>0$ a map from the boundary is specified by its $n+1$ face simplices of dimension $n-1$, with the finitely many equations on their pairwise intersections (for $n=1$ the two vertices have empty intersection). Thus these face images and equations occur at one finite stage; equalities of two such maps likewise occur at one later stage. For $n=0$ the domain boundary is empty and this assertion is immediate. Thus these Hom functors preserve the colimits of the countable chains in question, exactly the $\\kappa=\\aleph_0$ hypothesis of [lem-coef-small-object-cell-factorization].",
+   "uses": [
+    "lem-coef-fixed-object-free-arrow-adjunction",
+    "lem-coef-small-object-cell-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition A.3.5.7 and Lemma A.3.5.9; explicit fixed-object boundary-cell argument by the worker, using the cited DAG statements. Archival HTT WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-small-object-cell-factorization] to $D_0\\to C$ and $I_d$. Concretely, at stage $m+1$ attach one free $n$-simplex for every commutative square $\\partial\\Delta^n\\to D_m(x,y)$ over $\\Delta^n\\to C(x,y)$ with $d(x)\\leq d(y)$, and take the colimit at $\\omega$. All squares at a stage form a small set. Write $C'=D_\\omega$ and $f:C'\\to C$. All stages have object set $O$ and $f$ is identity on $O$. By [lem-coef-scat-fixed-object-pushout-comparison], each fixed-object attachment is also the pushout along $U(\\partial\\Delta^n)\\to U(\\Delta^n)$ in variable-object simplicial categories, including when $x=y$. Coproduct attachments can be ordered as a small sequence of single attachments, whose universal property is the same.",
+   "uses": [
+    "lem-coef-small-object-cell-factorization",
+    "lem-coef-scat-fixed-object-pushout-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition A.3.5.7 and Lemma A.3.5.9; explicit fixed-object boundary-cell argument by the worker, using the cited DAG statements. Archival HTT WANTED."
+   }
+  },
+  {
+   "text": "At every stage $D_m(w,z)=\\varnothing$ if $d(w)\\nleq d(z)$. This holds for $D_0$. For a single attachment from $x$ to $y$, use the word presentation in [lem-coef-scat-arrow-cell-word-filtration]: each old letter goes between nondecreasing grades, and the new letter has $d(x)\\leq d(y)$. Hence every nonempty word goes from a grade to a greater or equal grade. The reduction relations preserve endpoints. The same assertion survives successive attachments and the mapping-set colimits described in Step 2. The right factor from Step 3 has the right lifting property against $I_d$; by the free-arrow adjunction this gives the boundary lifting property for $C'(x,y)\\to C(x,y)$ whenever $d(x)\\leq d(y)$. By [lem-coef-kan-quillen-right-proper] these are trivial Kan fibrations. For the remaining pairs both mapping sets are empty, so the map is an isomorphism and also a trivial Kan fibration.",
+   "uses": [
+    "lem-coef-scat-arrow-cell-word-filtration",
+    "lem-coef-fixed-object-free-arrow-adjunction",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition A.3.5.7 and Lemma A.3.5.9; explicit fixed-object boundary-cell argument by the worker, using the cited DAG statements. Archival HTT WANTED."
+   }
+  },
+  {
+   "text": "Fix $a\\in A$. In the same word formula, a word whose target has grade at most $a$ has every intermediate object of grade at most $a$, since its grades are nondecreasing. Thus an attachment from $x$ to $y$ affects the full subcategory on grades at most $a$ exactly by that same free attachment if $d(y)\\leq a$; if $d(y)\\nleq a$, it leaves every mapping set between these objects unchanged. In the first case $d(x)\\leq a$ too. Relations in the word presentation also stay within these objects, so they introduce no extra identifications from outside the subcategory. Consequently $a\\mapsto D_m{}_{\\leq a}$ is built from the discrete-object diagram by cells each present precisely at $a\\geq d(y)$. This description commutes with limit stages by the mapping-set colimit construction of Step 2. It is a direct restriction of the cited word formula, requiring no well-ordering of $A$.",
+   "uses": [
+    "lem-coef-scat-arrow-cell-word-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition A.3.5.7 and Lemma A.3.5.9; explicit fixed-object boundary-cell argument by the worker, using the cited DAG statements. Archival HTT WANTED."
+   }
+  },
+  {
+   "text": "To prove projective cofibrancy, let $p:X\\to Y$ be an objectwise trivial fibration of $A$-diagrams and let $g:(a\\mapsto C'_{\\leq a})\\to Y$ be a natural transformation. In the Dwyer--Kan structure the generating cofibrations are $\\varnothing\\to\\{0\\}$ and $U(\\partial\\Delta^n)\\to U(\\Delta^n)$ by [lem-coef-simplicial-interval-lifting] and [lem-coef-simplicial-inversion-universal-property]; hence each $p_a$ lifts against these maps. For each $x\\in O$, lift $g_{d(x)}(x)$ to an object of $X_{d(x)}$ using the first generator. At every $a\\geq d(x)$ take its image under the transition functor. Naturality of $g$ makes these choices a lift on the discrete-object diagram. Suppose a compatible lift is defined at an earlier cellular stage. A cell $\\partial\\Delta^n\\to\\Delta^n$ from $x$ to $y$ first occurs at $b=d(y)$ by Step 5. Its boundary already maps to $X_b$, its whole simplex maps to $Y_b$, and the two agree after $p_b$. Lift the corresponding $U$-square at $b$; send the chosen simplex at every $a\\geq b$ to its image under $X_b\\to X_a$. By Step 5 and [lem-coef-scat-fixed-object-pushout-comparison], at each $a\\geq b$ the attachment is the pushout along $U(\\partial\\Delta^n)\\to U(\\Delta^n)$ in variable-object simplicial categories, so functors out of it into $X_a$ are the old functor plus a compatible simplex; this extends the lift, and makes it natural. At a limit take the compatible colimit map. This constructs a natural lift against every $p$, proving the asserted left lifting property.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-simplicial-inversion-universal-property",
+    "lem-coef-fixed-object-free-arrow-adjunction",
+    "lem-coef-scat-fixed-object-pushout-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition A.3.5.7 and Lemma A.3.5.9; explicit fixed-object boundary-cell argument by the worker, using the cited DAG statements. Archival HTT WANTED."
+   }
+  },
+  {
+   "text": "Each restriction $C'_{\\leq a}\\to C_{\\leq a}$ is identity on its object set and a weak homotopy equivalence on every mapping set by Step 4, just as $f$ is. These maps therefore induce fully faithful and bijective-on-objects functors on the categories of path components, hence equivalences. The definition in [lem-coef-simplicial-inversion-universal-property] now gives all the claimed Dwyer--Kan equivalences. If $A$ is empty then $O$ is empty and every construction is the empty category or empty diagram. An empty lower subcategory causes no cells or choices at that index. Loops and objects of equal grade are already allowed by the free-arrow and pushout comparison statements. No directedness, well-foundedness, or largest element was used.",
+   "uses": [
+    "lem-coef-simplicial-inversion-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition A.3.5.7 and Lemma A.3.5.9; explicit fixed-object boundary-cell argument by the worker, using the cited DAG statements. Archival HTT WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-fixed-object-free-arrow-adjunction",
+  "lem-coef-small-object-cell-factorization",
+  "lem-coef-scat-fixed-object-pushout-comparison",
+  "lem-coef-scat-arrow-cell-word-filtration",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-inversion-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Supporting simplicial-diagram foundation: explicit fixed-object small-object construction for HTT A.3.5.9; HTT archival copy unavailable."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -42,10 +140,73 @@
    "results": "[leanfinder] OK 8 hit(s); returned names/files: SSet.modelCategoryQuillen.instCategoryWithCofibrations, HomotopicalAlgebra.CofibrantObject.mk_surjective, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj, HomotopicalAlgebra.cofibrantObjects, HomotopicalAlgebra.bifibrantObjects_le_cofibrantObject, HomotopicalAlgebra.IsCofibrant, HomotopicalAlgebra.CofibrantObject, HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj; digest 343061d19cdcee84",
    "date": "2026-10-17",
    "verdict": "no match: returned generic cofibrant replacements and simplicial-category definitions do not preserve the exact object set and poset grading while making all initial segments jointly projectively cofibrant."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "simplicial category poset filtered cofibrant resolution same objects trivial Kan fibration",
+   "results": "{\"t\": \"2026-10-17T08:14:41Z\", \"tool\": \"leanfinder\", \"query\": \"simplicial category poset filtered cofibrant resolution same objects trivial Kan fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.cosk\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"CategoryTheory.SimplicialObject.IsCoskeletal\", \"CategoryTheory.SimplicialObject.cosk\", \"CategoryTheory.SimplicialThickening.instSimplicialCategory\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"CategoryTheory.SimplicialObject.sk\", \"CategoryTheory.SimplicialCategory\"], \"digest\": \"9abbb6b4c06fefb9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern generic model-category replacements or simplicial enrichment; none gives a fixed-object graded resolution with jointly projectively cofibrant lower subcategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialCategory, HomotopicalAlgebra.CofibrantObject, projective model structure",
+   "results": "{\"t\": \"2026-10-17T08:14:42Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialCategory, HomotopicalAlgebra.CofibrantObject, projective model structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: <input>:1:88: expected end of input\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*cofibrant|cofibrant.*filtrat|Bergner",
+   "results": "{\"t\": \"2026-10-17T08:14:42Z\", \"tool\": \"grep\", \"query\": \"projective.*cofibrant|cofibrant.*filtrat|Bergner\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern generic model-category replacements or simplicial enrichment; none gives a fixed-object graded resolution with jointly projectively cofibrant lower subcategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "a simplicial category graded by a poset has a same-object cofibrant replacement preserving all lower subcategories",
+   "results": "{\"t\": \"2026-10-17T08:14:42Z\", \"tool\": \"leansearch\", \"query\": \"a simplicial category graded by a poset has a same-object cofibrant replacement preserving all lower subcategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution\", \"CategoryTheory.SimplicialCategory\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"CategoryTheory.SimplicialObject\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\", \"HomotopicalAlgebra.CofibrantObject\"], \"digest\": \"cb8ffb2db1d8fbf9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern generic model-category replacements or simplicial enrichment; none gives a fixed-object graded resolution with jointly projectively cofibrant lower subcategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.CofibrantObject",
+   "results": "{\"t\": \"2026-10-17T08:14:49Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.CofibrantObject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject\", \"HomotopicalAlgebra.CofibrantObject.mk\", \"HomotopicalAlgebra.CofibrantObject.ι\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjCofibrantObjects\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjι\", \"HomotopicalAlgebra.CofibrantObject.mk_surjective\", \"HomotopicalAlgebra.BifibrantObject.ιCofibrantObject\", \"HomotopicalAlgebra.CofibrantObject.homMk\"], \"digest\": \"3946396c281ba0b3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern generic model-category replacements or simplicial enrichment; none gives a fixed-object graded resolution with jointly projectively cofibrant lower subcategories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "projective cofibrant replacement of a diagram of simplicial categories",
+   "results": "{\"t\": \"2026-10-17T08:14:50Z\", \"tool\": \"leansearch\", \"query\": \"projective cofibrant replacement of a diagram of simplicial categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.HoCat.exists_resolution_map\", \"HomotopicalAlgebra.CofibrantObject\"], \"digest\": \"8011b05a251e799c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern generic model-category replacements or simplicial enrichment; none gives a fixed-object graded resolution with jointly projectively cofibrant lower subcategories."
+  },
+  {
+   "tool": "grep",
+   "query": "cofibrant.*replacement|projective.*model",
+   "results": "{\"t\": \"2026-10-17T08:20:11Z\", \"tool\": \"grep\", \"query\": \"cofibrant.*replacement|projective.*model\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern generic model-category replacements or simplicial enrichment; none gives a fixed-object graded resolution with jointly projectively cofibrant lower subcategories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialCategory",
+   "results": "{\"t\": \"2026-10-17T08:20:12Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory\", \"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"CategoryTheory.SimplicialCategory.sHomComp\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"CategoryTheory.SimplicialNerve\"], \"digest\": \"b4aa0974aa465809\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern generic model-category replacements or simplicial enrichment; none gives a fixed-object graded resolution with jointly projectively cofibrant lower subcategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "poset graded simplicial category cofibrant replacement same objects lower subcategories projectively cofibrant",
+   "results": "{\"t\": \"2026-10-17T08:20:12Z\", \"tool\": \"leanfinder\", \"query\": \"poset graded simplicial category cofibrant replacement same objects lower subcategories projectively cofibrant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.instSimplicialCategory\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"CategoryTheory.SimplicialCategory\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"HomotopicalAlgebra.bifibrantObjects_le_cofibrantObject\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjι\", \"SSet.sk\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\"], \"digest\": \"df2baf81aed7d027\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern generic model-category replacements or simplicial enrichment; none gives a fixed-object graded resolution with jointly projectively cofibrant lower subcategories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-grothendieck-hocolimit",
@@ -78,5 +239,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-poset-filtered-cofibrant-resolution",
+  "worker": "stage1",
+  "summary": "Kept the statement, proved the same-object graded resolution by explicit boundary cells, verified finite boundary smallness, downward restriction via the existing word presentation, and simultaneous projective lifting. Reused existing DAG inputs; no new nodes. No Lean declaration found.",
+  "blueprint": "Supports the second paragraph and derived coefficient-adjunction/inverse-limit calculation of prop-coef-integral-exceptional-adjoint.proof.md through the inherited Grothendieck homotopy-colimit foundation; realizes the poset-filtered replacement input HTT A.3.5.9.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-1a9005ea4",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-1a9005ea4 (reviewer sub-agent of L); spot-checked: I read the item, all seven cited statements, and the parent's step that uses the item (lem-coef-simplicial-grothendieck-hocolimit). Source: HTT Definition A.3.5.7 and Lemma A.3.5.9. HTT is not in literature/; the worker recorded WANTED and set proof_origin to agent. The statement matches A.3.5.9 and is not weakened: A-filtration, a functor f bijective on objects that preserves the filtration, a trivial Kan fibration on every mapping set, and a projectively cofibrant diagram of lower subcategories. Small cases tested: A empty, a loop, equal grades in both directions, no largest element, and pairs with empty mapping sets. Duplicate search over dag/nodes (A.3.5.9, projectively cofibrant, bijective on objects with trivial Kan fibration) found only the parent. All cited nodes are in the item's unit, so the route is fine and no tool use is needed. Step 2 checks the smallness hypothesis of the small-object node with kappa = aleph_0, since the boundary of a simplex is finite. Step 3: the pushout-comparison node identifies the fixed-object and variable-object attachments. Step 4: in the word formula grades go up along every word, so the grading survives each attachment; lifting against I_d plus the Kan-Quillen node gives trivial fibrations. Step 5 (elementary): restricting to grades at most a is a direct reading of the word formula. Step 6: the direct lift is correct. Step 7: the definition of Dwyer-Kan equivalence gives the conclusion. FIX, fault C1/C3 in Step 6: the text cited lem-coef-simplicial-inversion-universal-property but left it out of uses. The step also extended lifts into X_a, whose objects can vary, by the free-arrow property, which only covers fixed-object targets. I added lem-coef-simplicial-inversion-universal-property and lem-coef-scat-fixed-object-pushout-comparison to Step 6's uses and rewrote that sentence; the set of proof_deps is unchanged. The corrected node is fixes/dag/nodes/sec-six-functors/lem-coef-poset-filtered-cofibrant-resolution.json, and the full checks are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

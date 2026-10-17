@@ -13,9 +13,137 @@
   "sk-def-sfb-change-of-scalars",
   "sk-def-sfb-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal H=\\Sh(\\mathcal S,\\Ab)$. By [lem-weil-pbc-sheaf-tensor-closed], $\\mathcal H$ is Grothendieck abelian, has the sheafified tensor of the statement, and tensoring on either side preserves colimits. Thus its coequalizers exist and the extension construction of [sk-def-sfb-change-of-scalars] applies to every map and composite in the tower. Write $U_{A,B}:\\Mod_B\\to\\Mod_A$ for restriction. All calculations below are in these internal module categories, rather than in modules over the rings of global sections.",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0GMW (lemma-sheafification-tensor) and 03EO (lemma-internal-hom-adjoint-tensor); apply to abelian sheaves"
+   }
+  },
+  {
+   "text": "For each map use the natural adjunction bijection of [def-sfb-modobj-extend-restrict-adjunction], whose unit is $u_{A,B,M}:m\\mapsto1\\otimes m$. Restriction along a composite is canonically the successive restriction: the action is obtained by substituting the composite ring map, and the underlying objects and arrows are unchanged ([sk-def-sfb-change-of-scalars], clause 1). Composing the two bijections gives, naturally in $M,N$,\n$$\\Hom_C(T_{B,C}T_{A,B}M,N)\\cong\\Hom_B(T_{A,B}M,U_{B,C}N)\\cong\\Hom_A(M,U_{A,C}N).$$\nMore explicitly, a map $h$ is sent to the underlying $A$-linear map $h\\circ w_{A,B,C,M}$, where $w_{A,B,C,M}=u_{B,C,T_{A,B}M}\\circ u_{A,B,M}$ and restrictions on the units are understood. This follows by substituting the formula for each bijection. Hence successive extension and direct extension are left adjoints of the same restriction, with units $w_{A,B,C}$ and $u_{A,C}$.",
+   "uses": [
+    "def-sfb-modobj-extend-restrict-adjunction",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, lemma-adjointness-tensor-restrict; compose the two natural bijections explicitly"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-conjugate-iso-unit-equation] to these two adjunctions and the canonical identity-on-underlying-objects comparison of their right adjoints. It gives a unique natural isomorphism $a_{A,B,C}:T_{B,C}T_{A,B}\\to T_{A,C}$ satisfying\n$$a_{A,B,C,M}\\circ w_{A,B,C,M}=u_{A,C,M}.$$\nInverting this equality gives $a_{A,B,C,M}^{-1}\\circ u_{A,C,M}=w_{A,B,C,M}$. This specifies the comparisons independently of choices of presentations. The same construction applies to every sub-tower.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; unit normalization as in the cited Mathlib leaf"
+   }
+  },
+  {
+   "text": "The construction has the claimed tensor formulas. Indeed the $B$-balancing relation in the outer coequalizer gives\n$$c\\otimes(b\\otimes m)=c\\psi(b)\\otimes(1\\otimes m),$$\nwhere $\\psi:B\\to C$. The normalization of step 3, followed by $C$-linearity, therefore gives\n$$a(c\\otimes(b\\otimes m))=c\\psi(b)\\,a(1\\otimes(1\\otimes m))=c\\psi(b)\\otimes m.$$\nLikewise $C$-linearity of the inverse gives\n$$a^{-1}(c\\otimes m)=c\\,a^{-1}(1\\otimes m)=c\\otimes(1\\otimes m).$$\nThese are calculations with the quotient maps and actions defining extension in [sk-def-sfb-change-of-scalars], not an assertion that all sections of a sheaf tensor are pure. They also describe local pure tensors, since the sheaf tensor is sheafified objectwise tensor by [sk-def-sfb-ring-object]. Naturality in $M$ is already part of step 3; concretely both formulas commute with $m\\mapsto f(m)$.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-ring-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, the preceding sheafified tensor construction; explicit balancing computation"
+   }
+  },
+  {
+   "text": "For coherence compose three of the Hom bijections in [def-sfb-modobj-extend-restrict-adjunction]. An $R$-linear map out of $T_{C,R}T_{B,C}T_{A,B}M$ is uniquely determined by its composite with\n$$v=u_{C,R,T_{B,C}T_{A,B}M}\\circ u_{B,C,T_{A,B}M}\\circ u_{A,B,M}.$$\nLet $L=a_{A,C,R,M}\\circ T_{C,R}(a_{A,B,C,M})$ and $P=a_{A,B,R,M}\\circ a_{B,C,R,T_{A,B}M}$. Naturality of $u_{C,R}$ moves $T_{C,R}(a_{A,B,C,M})$ past the first unit in $v$. Thus the normalization of step 3 first replaces $a_{A,B,C}w_{A,B,C}$ by $u_{A,C}$ and then replaces $a_{A,C,R}w_{A,C,R}$ by $u_{A,R}$, giving $Lv=u_{A,R,M}$. For $Pv$, normalization for $(B,C,R)$ at $T_{A,B}M$ replaces the first two units by $u_{B,R,T_{A,B}M}$; normalization for $(A,B,R)$ then gives $Pv=u_{A,R,M}$. Injectivity of the composed Hom bijection implies $L=P$. The functor associators merely identify the two parenthesizations of this same triple composite.",
+   "uses": [
+    "def-sfb-modobj-extend-restrict-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, iterated adjunction bijections; explicit tower normalization calculation"
+   }
+  },
+  {
+   "text": "For the identity ring map, the module action factors through $A\\otimes_A M$ because its two composites from $A\\otimes A\\otimes M$ agree by the module associativity axiom ([sk-def-sfb-module-objects]). Denote the resulting $A$-linear map by $\\lambda_M:A\\otimes_A M\\to M$. Its composite with $u_{A,A,M}$ is the identity by the unit axiom. Under the bijection of [def-sfb-modobj-extend-restrict-adjunction], $u_{A,A,M}\\lambda_M$ and the identity have the same composite with $u_{A,A,M}$, so they are equal. Thus $\\lambda$ is a natural isomorphism with inverse $u_{A,A}$. For a map $\\varphi:A\\to B$, both $a_{A,A,B,M}$ and $T_{A,B}(\\lambda_M)$ send the composite unit $w_{A,A,B,M}$ to $u_{A,B,M}$, by naturality of $u_{A,B}$ and $\\lambda_Mu_{A,A,M}=1$. Likewise $a_{A,B,B,M}$ and $\\lambda_{T_{A,B}M}$ both send $w_{A,B,B,M}$ to $u_{A,B,M}$. The same injective bijections as in step 2 identify each pair. These are exactly the identity compatibilities, including when every map is an identity.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-modobj-extend-restrict-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ; action and unit calculation for the identity ring morphism"
+   }
+  },
+  {
+   "text": "Now assume the additional abelian and exactness hypotheses of the statement. For each $T_{A,B}$, including each composite ring map, [lem-weil-pbc-exact-functor-derived-factorization] says that its termwise functor on unbounded complexes preserves quasi-isomorphisms and factors through the derived localization. Use this factorization for $\\mathbb T_{A,B}$. No boundedness or existence of a special resolution is required. For successive functors the factorization comparisons identify $\\mathbb T_{B,C}\\mathbb T_{A,B}Q_A$ with $Q_C C(T_{B,C})C(T_{A,B})$, by applying the two comparisons successively.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; termwise exact-functor factorization on unbounded complexes"
+   }
+  },
+  {
+   "text": "For a complex $K$, take $a_{A,B,C,K^n}$ in degree $n$. Naturality of $a$ for $d^n:K^n\\to K^{n+1}$ says precisely that these components commute with the differentials of the two termwise complexes. The inverse components do as well. They form a natural isomorphism of functors on complexes. The tower and unit equalities hold in each degree by steps 5 and 6, hence as equalities of chain maps by the definition in [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU, definition-derived-category; degreewise application of the already proved naturality and equalities"
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-weil-pbc-localization-universal-property] with $L=Q_A$, target $D(\\Mod_C)$, and the natural isomorphism $Q_C C(a)$ of step 8. Step 7 supplies its two factorizations through $Q_A$. We obtain the required $\\mathbb a$. Its components at $Q_AK$ are the localized termwise maps conjugated by those factorization comparisons. For the two sides of the four-ring tower equation, precomposition with $Q_A$ identifies their components with the images under $Q_R$ of the two chain maps from step 8: functoriality cancels the intermediate factorization comparisons. These chain maps agree degreewise. Clause (3) of the same node therefore gives equality of the derived natural transformations. The identical argument with the unit maps proves both derived identity compatibilities. This explicitly uses faithfulness on natural transformations, rather than treating localization as faithful on arbitrary morphisms of complexes.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural transformation extension and equality detection from the cited Mathlib leaf, Localization/Predicate.lean:278-357"
+   }
+  },
+  {
+   "text": "Finally let full subcategories of the module categories, or of their derived categories, be preserved by the functors under consideration. At every object of such a source both endpoints of each comparison lie in the designated target full subcategory. Fullness puts its component and inverse in that subcategory. The same components are natural there, and the inclusion is faithful, so all equalities just proved hold after restriction. This proves the final clause without assuming any extra closure under resolutions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-thm-sfb-qlbar-two-colimit.proof.md",
+    "place": "proof (4) and final cocone paragraph: restrict the comparisons to the preserved full constructible subcategories"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-thm-sfb-qlbar-two-colimit.proof.md",
+  "place": "proof (4) and final cocone paragraph; explicit unit-normalized tensor coherence and exact localization argument, using Stacks 03CZ, 0B65, 015F and 04VG and the cited existing nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,6 +193,34 @@
    "results": "CategoryTheory.Mod_.assoc_flip; CategoryTheory.ModObj.assoc_flip; ModuleCat.extendScalars_assoc'; ModuleCat.extendScalars_assoc; ModuleCat.extendScalars_assoc_assoc; ModuleCat.extendScalars_comp_id_assoc; ModuleCat.hom_hom_associator; Bimod.triangle_bimod; ordinary-module associativity or exact-functor infrastructure, not the sheaf module-object and derived tower statement.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|extendScalars_assoc|mapDerivedCategory.*(Nat|Iso)|natTrans.*[Ll]ocal",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/AlgebraicGeometry/RelativeGluing.lean, Mathlib/AlgebraicGeometry/RelativeGluing.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-module tensor transitivity, presheaf monoidal structure, scalar restriction, or general localization tools do not state the whole internal-sheaf-module and derived tower result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical tensor transitivity for module objects in sheaves satisfies the associativity identity and descends to derived categories",
+   "results": "TensorProduct.leftComm, TensorProduct.assoc, TensorProduct.AlgebraTensorModule.assoc, PresheafOfModules.monoidalCategoryStruct, SemimoduleCat.MonoidalCategory.associator, TensorProduct.assoc_tensor'', ModuleCat.MonoidalCategory.associator_def, PresheafOfModules.monoidalCategory; ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-module tensor transitivity, presheaf monoidal structure, scalar restriction, or general localization tools do not state the whole internal-sheaf-module and derived tower result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associativity coherence of extension of scalars for sheaf module objects over a tower of commutative ring sheaves, also on unbounded derived categories for exact scalar extension",
+   "results": "ModuleCat.extendScalars_assoc', ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc_assoc, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.pushforward_assoc, ModuleCat.extendScalars_id_comp_assoc, CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp, SheafOfModules.ιFree_mapFree_inv_assoc; ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-module tensor transitivity, presheaf monoidal structure, scalar restriction, or general localization tools do not state the whole internal-sheaf-module and derived tower result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars for internal modules in a symmetric monoidal category: tensor comparison, unit, and coherent composition",
+   "results": "CategoryTheory.Mod_.scalarRestriction, CategoryTheory.Mod_.instCategory, CategoryTheory.Mod_, CategoryTheory.Mod_.regular, ModuleCat.MonoidalCategory.instMonoidalCategoryStruct, ModuleCat.extendScalars_comp_id, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.instMonoidalLinear; ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-module tensor transitivity, presheaf monoidal structure, scalar restriction, or general localization tools do not state the whole internal-sheaf-module and derived tower result"
   }
  ],
  "mathlib_match": null,
@@ -73,7 +229,7 @@
   "file": "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
   "how": "Lines 1015-1031 establish the ordinary-module coherence identity; extension to sheaf module objects and localization is additional work, so this is not a Mathlib leaf."
  },
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-sfb-qlbar-two-colimit",
@@ -90,5 +246,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-flat-scalar-tower-coherence",
+  "worker": "stage1",
+  "summary": "Preserved the entire statement. Constructed tensor transitivity by the extension/restriction Hom bijections and uniqueness of left adjoints, calculated both tensor formulas and all unit/tower equations, then localized termwise using existing exact-functor and localization leaves. No new nodes or Lean files. All cited statements were opened and matched, including the fully faithful natural-transformation clause needed for derived coherence.",
+  "blueprint": "Realizes the implicit tensor reassociation in proof (4), transport between a common finite field and a larger stage, and the final cocone paragraph of sk-thm-sfb-qlbar-two-colimit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic sheaf tensor and colimit infrastructure ensures the internal coequalizer extension hypotheses; no descent or finite-stage route is replaced."
+   },
+   {
+    "node": "def-sfb-modobj-extend-restrict-adjunction",
+    "why": "Generic internal module adjunction with its explicit unit and Hom bijection, required to normalize the tensor comparison and test equality; the descent unit has no such generic statement."
+   },
+   {
+    "node": "sk-def-sfb-change-of-scalars",
+    "why": "Generic restriction and coequalizer extension of internal modules underlying the already chosen tensor route; no replacement of the unit proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "sk-def-sfb-change-of-scalars"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-c0e5f3577",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-c0e5f3577 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 10 steps and every cited statement (lem-weil-pbc-sheaf-tensor-closed, sk-def-sfb-change-of-scalars, def-sfb-modobj-extend-restrict-adjunction, def-sfb-modobj-extension, lem-weil-pbc-conjugate-iso-unit-equation, sk-def-sfb-ring-object, sk-def-sfb-module-objects, lem-weil-pbc-exact-functor-derived-factorization, def-weil-abstract-derived-category, lem-weil-pbc-localization-universal-property, sk-def-sfb-derived-categories), plus the unit record, blueprint main-20261015 proof (4) with its cocone paragraph, and Stacks 03CZ (sites-modules.tex:933). Shape: one commit touching only the item and its report; compared with the side DAG, only split-owned fields changed and the statement, stmt_deps, source, blueprint and unit are unchanged, so the target is not weakened. Steps 2-6 hold: composite restriction is an equality; the conjugate-iso node with delta=id gives a with a∘w=u; the tensor formulas follow from the balancing relation plus C-linearity; I redid the tower equation by hand (Lv=Pv=u_{AR}, then injectivity of h↦h∘v) and both identity compatibilities (λ from module associativity, inverse u). Steps 7-9: exact factorization on unbounded complexes, degreewise chain maps, then localization clauses (2) and (3). I expanded both sides at Q_A K. On the right side the naturality move of 𝕒_{BCR} at 𝕋_{AB}Q_AK, which is not of the form Q_B(-), is compressed into 'functoriality cancels', but it is a correct two-line argument. Step 10 is elementary. Small cases checked: one-object site (Mathlib's ModuleCat.extendScalars_assoc), all identities, zero ring, complexes in one degree. Duplicates: rg over the DAG found only def-sfb-derived-extend-comp-iso and def-sfb-constructible-extend-comp-iso, which are specific E≤F⊂Q̄_ℓ comparisons with no tower equation, so not duplicates. No new nodes, no cycle, no SGA. tool_uses accepted: lem-weil-pbc-sheaf-tensor-closed as a generic black box for colimits and the braided monoidal structure; the other two declared nodes are definitions, so the declarations are harmless. No fixes."
  }
 }

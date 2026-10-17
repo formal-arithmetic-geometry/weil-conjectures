@@ -45,11 +45,35 @@
    }
   },
   {
-   "text": "Complete $P$ under all inner horns by repeatedly attaching one simplex for every inner-horn map, and take the countable union $P\\hookrightarrow L$. Every inner horn is finite, so a map from it into the union factors through a finite stage and is filled at the next stage; hence $L$ is a small quasicategory. For each boundary lifting problem for $\\operatorname{Fun}(L,E)\\to\\operatorname{Fun}(P,E)$, the exponential adjunction turns the problem over one attached inner horn into a lifting problem against its pushout-product with that boundary. This is inner anodyne by [lem-coef-inner-anodyne-pushout-product], so the inner-fibrancy of $E$ provides a lift. Extend stage by stage and pass to the union. Thus restriction is a trivial Kan fibration, and so is its composite with step 1. Such a boundary-lifting map has a simplicial section and a homotopy inverse: lift the identity of its base to obtain the section and lift along $X\\times\\partial\\Delta^1\\subseteq X\\times\\Delta^1$ to contract the other composite over the base. Boundary lifting implies lifting against all monomorphisms by adjoining nondegenerate simplices in dimension order. For quasicategory source and target the resulting transformations over identities are equivalences (they lie in the contractible Kan fibers); the pointwise criterion therefore makes restriction an equivalence of the full functor quasicategories. The full $W$-inverting subcategory is a quasicategory by the functor-cone calculus. Set $q:N\\mathcal A\\to P\\to L$. The inner-horn attachments of this step add no vertices, but $S$, and hence $P$, may contain vertices not coming from $\\mathcal A$ (the attachments along $\\Lambda^1_i=\\Delta^0$ in the horn completion add vertices); so essential surjectivity of $q$ is not read off from vertices here and is proved in step 3 from the universal property. It inverts $W$ since $NW$ factors through the Kan complex $S$, and the preceding equivalence is exactly the required universal property, including all transformations.",
+   "text": "Complete $P$ under inner horns using [lem-coef-filtered-inner-horn-factorization] on $P\\to\\Delta^0$: write its factorization as $P\\xrightarrow{i}L\\to\\Delta^0$. The cited statement gives smallness, inner anodyneness of $i$, and the inner-fibration condition on $L\\to\\Delta^0$, which says exactly that $L$ is a quasicategory. This is the same inner-horn-completion route as the inherited proof.",
+   "uses": [
+    "lem-coef-filtered-inner-horn-factorization",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01BP",
+    "place": "Proposition 4.1.3.2; apply the inner-horn factorization to P mapping to the terminal simplicial set."
+   }
+  },
+  {
+   "text": "For a quasicategory $E$, a boundary lifting problem for $i^*:\\operatorname{Fun}(L,E)\\to\\operatorname{Fun}(P,E)$ is, by the definition of the internal functor object, precisely an extension from $(P\\times\\Delta^n)\\amalg_{P\\times\\partial\\Delta^n}(L\\times\\partial\\Delta^n)$ to $L\\times\\Delta^n$. Its inclusion is inner anodyne by [lem-coef-inner-anodyne-pushout-product], since $i$ is inner anodyne and the boundary inclusion is degreewise injective. The map $E\\to\\Delta^0$ is an inner fibration, so the defining left lifting property supplies the extension. Thus $i^*$ has all boundary lifts. Its composite with the map of step 1 has the same property: lift first through step 1, then through $i^*$.",
    "uses": [
     "lem-coef-inner-anodyne-pushout-product",
-    "def-cbc-enhanced-diagrams-cones",
-    "lem-cbc-enhanced-functor-cone-calculus"
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.1.3 and Remark 7.1.4; inner-horn completion and the boundary-cell lifting argument"
+   }
+  },
+  {
+   "text": "The functor-cone calculus makes $\\operatorname{Fun}(L,E)$ and the full $W$-inverting subcategory of $\\operatorname{Fun}(N\\mathcal A,E)$ quasicategories. Apply [lem-coef-boundary-lifting-quasicategory-equivalence] to the composite restriction map of the preceding step. It is a coherent equivalence retaining all transformations. Set $q:N\\mathcal A\\to P\\to L$. It inverts $W$ because $NW\\to L$ factors through the Kan complex $S$, whose edges have inverse-triangle witnesses. The equivalence just proved is exactly the required coherent localization universal property. The horn completion $S$, hence $P$, may add vertices, so essential surjectivity is proved next from this universal property, rather than inferred from the vertices of the construction.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-boundary-lifting-quasicategory-equivalence",
+    "def-cbc-enhanced-diagrams-cones"
    ],
    "elementary": false,
    "source": {
@@ -82,7 +106,7 @@
    }
   },
   {
-   "text": "For $v:y'\\to y$ in $T$, let $v_*:R_T(x,y')\\to R_T(x,y)$ postcompose the right leg. For $(t:u\\to x,f:u\\to y)$, choose a pullback $u'=u\\times_y y'$ with projections $a:u'\\to u$ and $b:u'\\to y'$. The new span is $(ta,b)$: $a$ is a pullback of $v$, so $a\\in T$ and $ta\\in T$. On morphisms the unique induced map of pullbacks defines a functor $v^*$. This choice is only for the single fixed arrow $v$ and its small set of span objects. A span map from $(t_0,f_0)$ to $v^*(t,f)$ amounts uniquely to a map $k:u_0\\to u$ with $tk=t_0$ and $fk=vf_0$, by the pullback universal property. This is exactly a span map $v_*(t_0,f_0)\\to(t,f)$. These bijections commute with both variables, giving $v_*\\dashv v^*$. The unit and counit give $1\\to v^*v_*$ and $v_*v^*\\to1$, so [lem-coef-nerve-natural-homotopy-equivalence] proves that $Nv_*$ is a weak homotopy equivalence. Now write $B_x(y)=(NR_T(x,y))^{\\mathrm{horn}}$. Functoriality and the natural weak equivalences $NR_T(x,y)\\to B_x(y)$ show that $B_x(v)$ is a weak equivalence. For $w=rs$ and $ps=1$ as in the hypotheses, $B_x(p)B_x(s)=1$. Since $B_x(p)$ is a weak equivalence, $B_x(s)$ induces inverse bijections on components and inverse homotopy-group maps to those of $B_x(p)$, at every source basepoint; hence it too is a weak equivalence. Since $B_x(r)$ is a weak equivalence, so is $B_x(w)=B_x(r)B_x(s)$. Finally the natural completion maps show that $NR_T(x,w)$ is a weak homotopy equivalence. Thus the comma nerves of step 4 are invariant under all of $W$. Only pullbacks of $T$-arrows and their composition closure were used; no functorial splitting of $w$ is required.",
+   "text": "For $v:y'\\to y$ in $T$, let $v_*:R_T(x,y')\\to R_T(x,y)$ postcompose the right leg. For $(t:u\\to x,f:u\\to y)$, choose a pullback $u'=u\\times_y y'$ with projections $a:u'\\to u$ and $b:u'\\to y'$. The new span is $(ta,b)$: $a$ is a pullback of $v$, so $a\\in T$ and $ta\\in T$. On morphisms the unique induced map of pullbacks defines a functor $v^*$. This choice is only for the single fixed arrow $v$ and its small set of span objects. A span map from $(t_0,f_0)$ to $v^*(t,f)$ amounts uniquely to a map $k:u_0\\to u$ with $tk=t_0$ and $fk=vf_0$, by the pullback universal property. This is exactly a span map $v_*(t_0,f_0)\\to(t,f)$. These bijections commute with both variables, giving $v_*\\dashv v^*$. The unit and counit give $1\\to v^*v_*$ and $v_*v^*\\to1$, so [lem-coef-nerve-natural-homotopy-equivalence] proves that $Nv_*$ is a weak homotopy equivalence. Now write $B_x(y)=(NR_T(x,y))^{\\mathrm{horn}}$. Functoriality and the natural weak equivalences $NR_T(x,y)\\to B_x(y)$ show that $B_x(v)$ is a weak equivalence. For $w=rs$ and $ps=1$ as in the hypotheses, $B_x(p)B_x(s)=1$. Since $B_x(p)$ is a weak equivalence, $B_x(s)$ induces inverse bijections on components and inverse homotopy-group maps to those of $B_x(p)$, at every source basepoint; hence it too is a weak equivalence. Since $B_x(r)$ is a weak equivalence, so is $B_x(w)=B_x(r)B_x(s)$. Finally the natural completion maps show that $NR_T(x,w)$ is a weak homotopy equivalence. Thus the comma nerves of step 6 are invariant under all of $W$. Only pullbacks of $T$-arrows and their composition closure were used; no functorial splitting of $w$ is required.",
    "uses": [
     "lem-coef-nerve-natural-homotopy-equivalence",
     "lem-coef-horn-completion-point-colimit",
@@ -95,7 +119,7 @@
    }
   },
   {
-   "text": "Apply [lem-coef-terminal-local-kan-corepresentability] with $A=\\mathcal A$, $I=I_x$, $i_0=1_x$ and $\\pi=\\pi_x$, and with the coherent localization constructed in steps 1-3. The category $W$ is closed under composition by two-out-of-three and contains all isomorphisms, as required. Step 4 establishes smallness, terminality and the condition on the terminal cocone, and identifies the actual comma categories with $R_T(x,y)$. Step 5 verifies weak-equivalence invariance of their nerves. The criterion therefore gives the claimed equivalence $NR_T(x,y)\\simeq\\operatorname{Map}_L(qx,qy)$ with the right-pinched mapping-space convention of the item. Its component formula sends $(t,f)$ to $q(f)q(t)^{-1}$. Surjectivity on components gives a fraction representative for every mapping-space component; by the stated convention for $hL$, equality in that component is homotopy of arrows relative to their endpoints.",
+   "text": "Apply [lem-coef-terminal-local-kan-corepresentability] with $A=\\mathcal A$, $I=I_x$, $i_0=1_x$ and $\\pi=\\pi_x$, and with the coherent localization constructed in steps 1-5. The category $W$ is closed under composition by two-out-of-three and contains all isomorphisms, as required. Step 6 establishes smallness, terminality and the condition on the terminal cocone, and identifies the actual comma categories with $R_T(x,y)$. Step 7 verifies weak-equivalence invariance of their nerves. The criterion therefore gives the claimed equivalence $NR_T(x,y)\\simeq\\operatorname{Map}_L(qx,qy)$ with the right-pinched mapping-space convention of the item. Its component formula sends $(t,f)$ to $q(f)q(t)^{-1}$. Surjectivity on components gives a fraction representative for every mapping-space component; by the stated convention for $hL$, equality in that component is homotopy of arrows relative to their endpoints.",
    "uses": [
     "lem-coef-terminal-local-kan-corepresentability",
     "def-cbc-enhanced-diagrams-cones"
@@ -107,7 +131,7 @@
    }
   },
   {
-   "text": "For a functor $U:(\\mathcal A,W,T)\\to(\\mathcal A',W',T')$, applying $U$ to both legs and all arrows defines $I_x\\to I'_{Ux}$ and $R_T(x,y)\\to R_{T'}(Ux,Uy)$. It sends $1_x$ to $1_{Ux}$, commutes with the domain functors, and sends every terminal-cocone arrow $t$ to $U(t)$. The localization universal property from steps 1-2 supplies the induced functor $L\\to L'$ and its comparison on $N\\mathcal A$. These are precisely maps of the data in [lem-coef-terminal-local-kan-corepresentability]. Its naturality assertion therefore identifies the maps on the comma-nerve weak homotopy types with the maps on localized mapping spaces. Its comparison is a comparison of coherent functors in $y$, so restriction along every coherent target diagram retains all its higher compatibility simplices. Postcomposition and composites of functors are covered by the same assertion. Preservation of chosen pullbacks is unnecessary: the comparison uses the comma functors, whereas the pullback choices were used only to prove locality in step 5.",
+   "text": "For a functor $U:(\\mathcal A,W,T)\\to(\\mathcal A',W',T')$, applying $U$ to both legs and all arrows defines $I_x\\to I'_{Ux}$ and $R_T(x,y)\\to R_{T'}(Ux,Uy)$. It sends $1_x$ to $1_{Ux}$, commutes with the domain functors, and sends every terminal-cocone arrow $t$ to $U(t)$. The localization universal property from steps 1-4 supplies the induced functor $L\\to L'$ and its comparison on $N\\mathcal A$. These are precisely maps of the data in [lem-coef-terminal-local-kan-corepresentability]. Its naturality assertion therefore identifies the maps on the comma-nerve weak homotopy types with the maps on localized mapping spaces. Its comparison is a comparison of coherent functors in $y$, so restriction along every coherent target diagram retains all its higher compatibility simplices. Postcomposition and composites of functors are covered by the same assertion. Preservation of chosen pullbacks is unnecessary: the comparison uses the comma functors, whereas the pullback choices were used only to prove locality in step 7.",
    "uses": [
     "lem-coef-terminal-local-kan-corepresentability",
     "def-cbc-enhanced-diagrams-cones"
@@ -123,8 +147,10 @@
   "lem-coef-horn-completion-point-colimit",
   "lem-coef-edge-inverting-anodyne-extension",
   "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-filtered-inner-horn-factorization",
   "lem-coef-inner-anodyne-pushout-product",
   "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-boundary-lifting-quasicategory-equivalence",
   "lem-coef-localization-homotopy-category",
   "lem-coef-nerve-natural-homotopy-equivalence",
   "lem-coef-terminal-local-kan-corepresentability"
@@ -172,7 +198,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-brown-fibrant-localization-pullbacks",
@@ -197,8 +223,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-trivial-fibration-fraction-model",
   "worker": "stage1",
-  "summary": "Rechecked the explicit horn localization and pullback-adjunction proof. Removed a newly cyclic citation of infinity-space-valued-pointwise-lan, whose current split returns through Kan-Quillen right properness to this item. The general input is now exactly the local-comma criterion for an arbitrary putative right calculus at one object; the parent explicitly constructs its terminal indexing category and proves all W-locality by pullbacks and split factorizations. Removed unused constant-point colimit content from the horn-completion input. Preserved the inherited creation stamp and all maintainer-owned metadata.",
-  "blueprint": "Integral exceptional-adjoint proof paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation; this is the coherent localization infrastructure below Brown fibrant localization, not a replacement for the six-functor route.",
+  "summary": "Repair of the 2026-10-17 return: replaced the 2006-character step 2 by three short steps, reusing the existing inner-horn factorization and pushout-product nodes, and introducing one statement-only lemma for coherent equivalence of boundary-lifting maps between quasicategories. Kept the pushout/horn-completion route and all other proof arguments; updated their numeric cross references only. Statement, stmt_deps, Lean record, imported fields and maintainer-owned metadata are unchanged.",
+  "blueprint": "Integral exceptional-adjoint proof paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation; this is the coherent localization infrastructure below Brown fibrant localization, not a replacement for the six-functor route. Repair serves precisely the inner-horn completion, parameter-boundary lifting and section/contraction arguments of inherited step 2.",
   "tool_uses": [
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
@@ -212,10 +238,10 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q105-1f3e067a6",
-  "group": "Q105",
+  "reviewer": "NT-cc-Q11-168173c2e",
+  "group": "Q11",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-1f3e067a6 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and the statement of every cited node in full, and checked the unit and chapter route. Cisinski CatLR is not archived locally and the service blocks network access, so I could not check the cited places in the book. All four nodes already record it as WANTED and the proof is marked agent-written; I checked every statement and step mathematically instead. One fault, repaired: item step 2 said that horn attachments add no vertices, so every vertex of L comes from A and q is essentially surjective. That is false, because the Kan completion S attaches Delta^1 along Lambda^1_i = Delta^0 and so adds vertices. The conclusion still holds: step 3 proves essential surjectivity correctly from lem-coef-localization-homotopy-category. I rewrote that sentence in fixes/dag/nodes/sec-six-functors/lem-coef-trivial-fibration-fraction-model.json (step 2 text only). The item statement keeps the base meaning; the pullback clause is only spelled out. Tested on [1] with W=T=all arrows (R_T(1,1) is contractible, L is a point), on discrete categories, and on T=W=isomorphisms. Step 1: the pushout gives a strict pullback of the trivial fibration H(S,E)->H(NW,E), and Fun(S,E)=H(S,E) because S is Kan. Step 2: inner pushout-products, and a trivial fibration between quasicategories is an equivalence. Step 3: ps=1, rs=w gives T-inverting = W-inverting. Step 4: 1_x is terminal in T/x and the comma category is R_T. Step 5: the pullback adjunction v_* -| v^* holds for v in T (the projection a is in T), and the split gives W-invariance. Steps 6-7: every hypothesis of the criterion is supplied, and U gives a map of data. New nodes: edge-inverting-anodyne is true (marked K^sharp, E^natural lifting) and is not covered by marked-anodyne-lifting-calculus (core only) or simplicial-groupoid-localization (equivalence only). Horn completion is a true small-object argument; the Ex^infty node lacks the anodyne property and is cyclic here. The terminal-local criterion is true (hocolim over I^op of corepresentables, q_!, contractible I, locality) and does not restate the item. No cycles. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-168173c2e (reviewer sub-agent of L); spot-checked: Read the whole repair: old step 2 split into steps 2-4, plus one new statement-only node, lem-coef-boundary-lifting-quasicategory-equivalence. I also read every cited statement in full and the unit and blueprint ancestor (prop-coef-integral-exceptional-adjoint, paragraph 2). The item's statement, Lean record and maintainer fields are unchanged. It is not a target, so no base-change morphism or coefficient category is involved, and no SGA is used. Step 1: S is Kan, so Fun(S,E)=H(S,E), and Fun(P,E)->Fun_W(NA,E) is a strict pullback of the trivial fibration from the edge-inverting node, so it lifts against every boundary. Step 2: the cited factorization node at P->Delta^0 gives u inner anodyne and smallness, and v an inner fibration, so L is a quasicategory; the filtered-colimit clause is not used. Step 3 is elementary: by the definition of Fun, a boundary lift is an extension along the pushout-product of i with the boundary inclusion, which the Mathlib leaf makes inner anodyne, and E->pt lifts against it. Lifts through the composite are done one after the other. Step 4: functor-cone calculus makes both sides quasicategories, and the new lemma then gives exactly the localization interface's coherent functor equivalence. q inverts W because NW->L factors through the Kan complex S. Essential surjectivity is correctly left to step 5, since S adds vertices. Steps 5-9 are unchanged apart from correct renumbering. proof_deps equals the union of uses, and the reachable graph from the item has no cycle. New node: true. It is Stacks 08NS (simplicial.tex, label lemma-trivial-kan-homotopy, read) using 08NM, plus fibre-wise invertibility of the components of eta and the pointwise criterion. Tested on empty X and Y, X empty with Y nonempty (excluded by the n=0 lift), the contractible two-object groupoid over a point, and N([1])->pt (correctly excluded). B1-B4, B7 and B9 are fine; the searches cover LeanSearch, LeanFinder, Loogle and grep. Duplicate search over all statements found nothing that states it: anodyne-factorization is the converse direction, joyal-model-structure is a different and heavier result, and 08NM/08NS give no invertibility. It does not restate any item clause. Accepted tool_use (unchanged): lem-cbc-enhanced-functor-cone-calculus. Cisinski and Kerodon 01BP are not archived locally; they are WANTED and proof_origin is agent. No fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.TrivialFibrationFractionModel",
