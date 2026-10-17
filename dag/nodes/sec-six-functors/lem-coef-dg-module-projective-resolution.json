@@ -28,7 +28,12 @@
  },
  "stmt_deps": [
   "def-weil-size-convention",
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "lem-coef-dg-semi-free-homotopically-projective",
+  "lem-coef-dgcat-free-cell-calculus",
+  "lem-cbc-dold-kan-homology",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-finite-reedy-localization"
  ],
  "proof": [
   {
@@ -228,5 +233,41 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-19c619263",
+  "group": "Q99",
+  "result": "fix",
+  "note": "Lean and node passed substantive review; scompile.py reproduced clean sandbox and library-path compiles. Repaired H11’s placeholder second reading with a complete replacement at fixes/lem-coef-dg-module-projective-resolution.report.md. Full findings are in review.md; snapshot and repository heads unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DGModuleProjectiveResolution",
+  "declaration": "CategoryTheory.DGModuleProjectiveResolution.exists_projective_enhancement",
+  "declarations": [
+   "CategoryTheory.DGModuleProjectiveResolution.Coeff",
+   "CategoryTheory.DGModuleProjectiveResolution.Complex",
+   "CategoryTheory.DGModuleProjectiveResolution.Ordinary",
+   "CategoryTheory.DGModuleProjectiveResolution.closedElement",
+   "CategoryTheory.DGModuleProjectiveResolution.postcompose",
+   "CategoryTheory.DGModuleProjectiveResolution.ModuleDGModel",
+   "CategoryTheory.DGModuleProjectiveResolution.ModuleDGModel.IsProjective",
+   "CategoryTheory.DGModuleProjectiveResolution.ModuleDGModel.weakEquivalences",
+   "CategoryTheory.DGModuleProjectiveResolution.ModuleDGModel.projectiveDG",
+   "CategoryTheory.DGModuleProjectiveResolution.ModuleDGModel.inclusion",
+   "CategoryTheory.DGModuleProjectiveResolution.ModuleDGModel.HasHomotopyInverse",
+   "CategoryTheory.DGModuleProjectiveResolution.ModuleDGModel.IsRealizationComparison",
+   "CategoryTheory.DGModuleProjectiveResolution.ModuleDGModel.localizationVertex",
+   "CategoryTheory.DGModuleProjectiveResolution.ModuleDGModel.PresentsEnhancedLocalization",
+   "CategoryTheory.DGModuleProjectiveResolution.exists_projective_enhancement"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DGModuleProjectiveResolution.lean",
+  "statement": "theorem exists_projective_enhancement (B : IntegralDGCategory.{u, v}) : ∃ D : ModuleDGModel.{u, v, w} B, (∀ M : Ordinary D.dg, ∃ (Q : Ordinary D.dg) (q : Q ⟶ M), D.IsProjective (ForgetEnrichment.to Complex.{max u v w + 1} Q) ∧ D.weakEquivalences q) ∧ (∀ (Q M N : Ordinary D.dg) (f : M ⟶ N), D.IsProjective (ForgetEnrichment.to Complex.{max u v w + 1} Q) → D.weakEquivalences f → QuasiIso (postcompose Q f)) ∧ (∀ (Q Q' : Ordinary D.dg) (q : Q ⟶ Q'), D.IsProjective (ForgetEnrichment.to Complex.{max u v w + 1} Q) → D.IsProjective (ForgetEnrichment.to Complex.{max u v w + 1} Q') → D.weakEquivalences q → D.HasHomotopyInverse q) ∧ D.PresentsEnhancedLocalization",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical full dg-module enrichment is specified in all integer degrees by bijections to the recorded graded-module maps, with exact differential, unit, composition and evaluation normalizations. Its literal full projective subcategory, the recorded Dold–Kan realization and coherent nerve, and the full coherent-functor localization property give a concrete dg presentation of the enhanced localization. The derived-Hom comparison is canonical postcomposition along replacement quasi-isomorphisms. Independent input universes are enlarged to a common bound, without flatness or boundedness assumptions. Added statement dependencies already have landed interfaces; the rectification theorem remains proof-only."
  }
 }

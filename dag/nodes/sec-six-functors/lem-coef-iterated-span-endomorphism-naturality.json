@@ -182,5 +182,29 @@
   "group": "Q69",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-ee422ba89 (reviewer sub-agent of L); spot-checked: I read the item's statement, all 5 steps and its deps in full, along with the statements of lem-coef-iterated-span-fixed-endomorphism, def-nagata-category and def-coef-iterated-span-completion-rule. I also read the citer lem-coef-homotopy-fractions-square-criterion (steps 5-8), the unit sk-prop-sf-biduality-general and the blueprint ancestor prop-coef-integral-exceptional-adjoint (.md and .proof.md, where paragraph 2 is only historical context). Dwyer-Kan Prop. 8.2 is not in the local literature, so the WANTED line and proof_origin=agent are correct; I checked the proof on its own. The statement is unchanged, self-contained and not weakened, and its hypotheses match exactly what square-criterion step 8 supplies (t0=t, a0=c, tu=ũc, tuv=ũṽt). Step 1 uses only the fixed-endomorphism node's statement, applied to both chains with all its hypotheses. Steps 2-3 set up the induction properly, and both span-map squares are checked from the inductive hypothesis and the chain-map hypothesis. Step 4 composes span maps componentwise and uses only S's composition law; nothing is cancelled. Step 5 proves functoriality from identities and composites. I checked the cases n=0, n=1, identity data and non-invertible idempotent e0. There are no new nodes, rg over dag/nodes found no duplicate, and there is no cycle. proof_deps equals the union of the uses lists. No SGA source, no target node and no tool_uses are involved. One minor point, left unchanged: the item defines the completion rule inline but does not list def-coef-iterated-span-completion-rule in stmt_deps, which the sibling node does; it could be added for consistency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-67f08b294",
+  "group": "Q147",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, Lean declarations, docstrings, edge cases, source, and report. scompile.py compiled the immutable module cleanly with no warnings; no substantive findings or fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Localization.IteratedSpanEndomorphismNaturality",
+  "declaration": "CategoryTheory.MorphismProperty.iteratedSpanEndomorphismNaturality",
+  "declarations": [
+   "CategoryTheory.MorphismProperty.IteratedSpanMapState",
+   "CategoryTheory.MorphismProperty.iteratedSpanMapStateNext",
+   "CategoryTheory.MorphismProperty.iteratedSpanMapStateAt",
+   "CategoryTheory.MorphismProperty.iteratedSpanEndomorphismNaturality"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Localization/IteratedSpanEndomorphismNaturality.lean",
+  "statement": "theorem iteratedSpanEndomorphismNaturality (W U : MorphismProperty C) [W.IsMultiplicative] [W.HasTwoOutOfThreeProperty] [U.IsMultiplicative] (hUW : U ≤ W) (rule : IteratedSpanCompletionRule U) (B B' : ℕ → C) (h : ∀ j : ℕ, B j ⟶ B (j + 1)) (h' : ∀ j : ℕ, B' j ⟶ B' (j + 1)) (s₀ : IteratedSpanState rule B h 0) (s₀' : IteratedSpanState rule B' h' 0) (x₀ : IteratedSpanFixedState rule s₀) (x₀' : IteratedSpanFixedState rule s₀') (a : ∀ j : ℕ, B j ⟶ B' j) (ha : ∀ j : ℕ, h j ≫ a (j + 1) = a j ≫ h' j) (t₀ : s₀.D ⟶ s₀'.D) (ht₀ : s₀.q ≫ t₀ = a 0 ≫ s₀'.q) (ht₀e : t₀ ≫ x₀'.e = x₀.e ≫ t₀) (n : ℕ) : (∀ j : ℕ, j ≤ n → (iteratedSpanStateAt s₀ j).q ≫ (iteratedSpanMapStateAt s₀ s₀' a ha t₀ ht₀ j).t = a j ≫ (iteratedSpanStateAt s₀' j).q) ∧ (∀ j : ℕ, j < n → (IteratedSpanState.transition (iteratedSpanStateAt s₀ j)) ≫ (iteratedSpanMapStateAt s₀ s₀' a ha t₀ ht₀ (j + 1)).t = (iteratedSpanMapStateAt s₀ s₀' a ha t₀ ht₀ j).t ≫ (IteratedSpanState.transition (iteratedSpanStateAt s₀' j))) ∧ (∀ j : ℕ, j ≤ n → (iteratedSpanMapStateAt s₀ s₀' a ha t₀ ht₀ j).t ≫ (iteratedSpanFixedStateAt x₀' j).e = (iteratedSpanFixedStateAt x₀ j).e ≫ (iteratedSpanMapStateAt s₀ s₀' a ha t₀ ht₀ j).t)",
+  "branch": "newtargets-dag",
+  "by": "Q147",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
