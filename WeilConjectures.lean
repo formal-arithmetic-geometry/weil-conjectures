@@ -3704,6 +3704,7 @@ public import WeilConjectures.RingTheory.Etale.TraitSection.Core
 public import WeilConjectures.RingTheory.Etale.TraitSection.KummerIntegralClosure
 public import WeilConjectures.RingTheory.Etale.TraitSection.Points
 public import WeilConjectures.RingTheory.Etale.TraitSection.Reduction
+public import WeilConjectures.RingTheory.Etale.TraitSection.ReductionProof
 public import WeilConjectures.RingTheory.Etale.TraitSection.Rigidity
 public import WeilConjectures.RingTheory.EtaleAlgebraLift
 public import WeilConjectures.RingTheory.EtaleAlgebraLiftEtaleFP
