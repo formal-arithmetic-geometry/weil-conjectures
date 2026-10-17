@@ -75,7 +75,7 @@ for S-modules, which also has a free-module left adjoint. The adjoint triangle
 theorem therefore supplies a left adjoint to restriction, using reflexive
 coequalizers in S-modules. This constructs the same balanced scalar extension
 by its universal property. The free modules allow generators in max uR vC. -/
-theorem restrictScalars_has_leftAdjoint (f : R →+* S) :
+theorem isRightAdjoint_restrictScalars (f : R →+* S) :
     (restrictScalars.{max uR vC} f).IsRightAdjoint := by
   have : (restrictScalars.{max uR vC} f ⋙
       forget (ModuleCat.{max uR vC} R)).IsRightAdjoint := by
@@ -98,7 +98,7 @@ Source: Stacks Project, Modules on Sites, Section 6.3
 (blueprint: def-pod-ring-scalar-extension). -/
 noncomputable def ringExtendScalars (f : R →+* S) :
     ModuleCat.{max uR vC} R ⥤ ModuleCat.{max uR vC} S :=
-  @Functor.leftAdjoint _ _ _ _ (restrictScalars f) (restrictScalars_has_leftAdjoint f)
+  @Functor.leftAdjoint _ _ _ _ (restrictScalars f) (isRightAdjoint_restrictScalars f)
 
 /-- The universal property of the balanced tensor.
 Source: Stacks Project, Modules on Sites, Section 6.3
@@ -106,7 +106,7 @@ Source: Stacks Project, Modules on Sites, Section 6.3
 noncomputable def ringExtendScalarsAdj (f : R →+* S) :
     ringExtendScalars.{uR, vC} f ⊣ restrictScalars f :=
   @Adjunction.ofIsRightAdjoint _ _ _ _ (restrictScalars f)
-    (restrictScalars_has_leftAdjoint f)
+    (isRightAdjoint_restrictScalars f)
 
 /-- The pure tensor s tensor m is s times the universal image of m.
 Source: Stacks Project, Modules on Sites, Section 6.3

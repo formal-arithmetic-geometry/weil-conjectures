@@ -76,12 +76,10 @@ the source arrow with mU.localizedComparison. The target identification
 comes from the K-flat computation above; naturality of the monoidal
 scalar-extension isomorphism identifies the rest of the arrow with the
 displayed homology map. These two identifications give an arrow
-isomorphism. No comparison is assumed invertible. Flatness of C allows
-extension of source cohomology to be computed before taking cohomology.
+isomorphism. No comparison is assumed invertible and no flatness of C is used.
 The construction works for unbounded and zero complexes and zero rings.
 (blueprint: lem-pc-localized-tensor-comparison-derived-arrow). -/
 theorem exists_localizedTensorComparison_derived_arrow
-    (hC : Module.Flat (A ⊗[R] B) C)
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) (i : ℤ) :
     ∃ H : DerivedCategory (ModuleCat.{u} A) ⥤ Arrow (ModuleCat.{u} C),

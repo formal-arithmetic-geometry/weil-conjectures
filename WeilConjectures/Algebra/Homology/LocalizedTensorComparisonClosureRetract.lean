@@ -53,13 +53,12 @@ K-flat representatives, all models and all degrees. This argument includes
 zero objects and identity retracts; no invertibility of t is assumed.
 (blueprint: lem-pc-localized-tensor-comparison-closure-retracts). -/
 theorem localizedTensorComparisonProperty_closure_retracts
-    (hC : Module.Flat (A ⊗[R] B) C)
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) :
     ∀ {X Y : DerivedCategory (ModuleCat.{u} A)}, Retract X Y →
       localizedTensorComparisonProperty R A B C Q N t Y →
       localizedTensorComparisonProperty R A B C Q N t X := by
   intro X Y hXY hY
-  exact localizedTensorComparisonProperty_retract_core R A B C Q N t hC hQ hXY hY
+  exact localizedTensorComparisonProperty_retract_core R A B C Q N t hQ hXY hY
 
 end ModuleCat

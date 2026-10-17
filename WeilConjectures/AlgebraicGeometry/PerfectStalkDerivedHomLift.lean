@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
 import WeilConjectures.AlgebraicGeometry.PerfectAffineMapRepresentative
 import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkDerivedHomDescent
-import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
+public import WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 
 /-! # Lifting a derived stalk morphism to a chain map between local perfect models
 
@@ -67,8 +67,11 @@ def perfectLocalModelStalkComparison
     (eP : (SheafOfModules.overFunctor.{u}
       (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj
         (DerivedCategory.Q.obj G) ≅ DerivedCategory.Q.obj P) :
-    DerivedCategory.Q.obj
-        (((openModuleStalkFunctor X U ⟨x, hx⟩).mapHomologicalComplex (.up ℤ)).obj P) ≅
+    let S : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤
+        ModuleCat.{u} (X.presheaf.stalk x) := openModuleStalkFunctor X U ⟨x, hx⟩
+    letI : S.PreservesZeroMorphisms :=
+      AlgebraicGeometry.openModuleStalkFunctor_preservesZeroMorphisms X U ⟨x, hx⟩
+    DerivedCategory.Q.obj ((S.mapHomologicalComplex (.up ℤ)).obj P) ≅
       DerivedCategory.Q.obj
         (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex
           (.up ℤ)).obj G) := by
@@ -210,6 +213,7 @@ theorem exists_affine_perfect_stalk_hom_lift
     simp
   rw [he, hg]
   simp only [Iso.trans_hom, Iso.trans_inv, Category.assoc]
+  rfl
 
 end
 end AlgebraicGeometry.Scheme
