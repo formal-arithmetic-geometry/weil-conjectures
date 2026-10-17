@@ -231,5 +231,41 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-0ae63767b (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, main-20261015 def-pur-scheme-geometric-frobenius (order 2579), Stacks 0CC8 (varieties lemma-frobenius, no hypotheses on X) and 0F6W (more-morphisms lemma-relative-frobenius-weakly-etale), and the Lean candidate IsFrobenius.isUniversalHomeomorphism (Morphisms/Frobenius.lean:149-168, no finiteness assumption, sorry map s:false ts:false). The worker's scope dispute is right: def-trf-scheme-frobenius, prop-trf-frobenius-factorization and prop-trf-scheme-galois-comparison all need finite-type X_0, but the item only makes f_0 finite type. The repair keeps the source's formulas: Phi = F_{T0}^(q) x id, the factorization is proved directly on affines (b⊗c -> b^q⊗c^q), and kappa = (tau^(a) Lg^*) composed with the pullback-composition isomorphism for Phi = g_gamma F. No hypothesis was added and nothing was weakened. The maps match the source exactly and the coefficient category is A = A_{E,n} on D(T_proet,A). Citers use this item's kappa, so none breaks. Every citation is on the sk-thm-sf-package route, and there is no SGA. Small cases (empty, nonreduced, infinite disjoint unions, b=0, u=id, Spec k_0 with a>1) pass. Neither new node is a duplicate, and neither restates a clause of the item. Two repairs, files in fixes/: (1) B2/E5 in lem-pur-frobenius-trivialization-pullback: tau^(b) was defined twice, and the closing sentence ('these equalities respect identities, composition of u and addition of exponents') could not be checked. tau^(b) is now defined once, through the relative Frobenius maps r^(b), and the closing sentence is replaced by the precise additivity tau^(b1+b2) = tau^(b2) ∘ tau^(b1)L(F^b2)^* ∘ c. (2) E5 in item step 5: the coherence of pullback-composition isomorphisms was hidden behind 'the identity and composition compatibilities are those in the same lemma'. Step 5 now gives it from the termwise description in lem-weil-pbc-proetale-derived-pullback-composition, cites that node, and has elementary=false. Accepted tool use: lem-weil-pbc-proetale-derived-pullback-composition (it is in fact on the route).; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9cf1d212b",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Statement matches node and source clause by clause: maps, factorization, both squares (second not Cartesian), κ composite, c_g/c_Φ, naturality equation. Hypotheses only on f₀, κ unrestricted. Witnesses picked by .choose are uniquely fixed by the dependency's normalizations, and the dependency's naturality uses the same terms. Nothing hollow, 3 sorrys all in theorem proofs, no universe restriction, docstrings and blueprint tags present, lean.statement verbatim. Edge cases checked. nt_compile.py: 29 modules, rc=0, clean, run twice. Non-blocking: one unused import."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.SchemeGeometricFrobenius",
+  "declaration": "WeilConjectures.PurityFiniteSetting.schemeGeometricFrobeniusComparison",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.frobeniusFiber",
+   "WeilConjectures.PurityFiniteSetting.frobeniusMap",
+   "WeilConjectures.PurityFiniteSetting.frobeniusGaloisMap",
+   "WeilConjectures.PurityFiniteSetting.frobeniusArithmeticMap",
+   "WeilConjectures.PurityFiniteSetting.frobeniusSchemeMap",
+   "WeilConjectures.PurityFiniteSetting.frobeniusAbsoluteMap",
+   "WeilConjectures.PurityFiniteSetting.schemeGeometricFrobenius_factorization",
+   "WeilConjectures.PurityFiniteSetting.frobeniusOrdinaryComposition",
+   "WeilConjectures.PurityFiniteSetting.frobeniusDerivedComposition",
+   "WeilConjectures.PurityFiniteSetting.frobeniusAbsoluteTrivialization",
+   "WeilConjectures.PurityFiniteSetting.schemeGeometricFrobeniusComparison",
+   "WeilConjectures.PurityFiniteSetting.schemeGeometricFrobenius_squares",
+   "WeilConjectures.PurityFiniteSetting.frobeniusGaloisSquareComparison",
+   "WeilConjectures.PurityFiniteSetting.frobeniusSchemeSquareComparison",
+   "WeilConjectures.PurityFiniteSetting.schemeGeometricFrobenius_naturality"
+  ],
+  "file": "lean/Sheaf/SixFunctors/SchemeGeometricFrobenius.lean",
+  "statement": "def schemeGeometricFrobeniusComparison (P : PurityFiniteSetting.{u}) (T₀ : Over (Spec (CommRingCat.of P.field.k₀))) : proEtaleConstantRingDerivedPullback P.Ring (P.frobeniusSchemeMap T₀) ≅ proEtaleConstantRingDerivedPullback P.Ring (P.frobeniusGaloisMap T₀)",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The main declaration constructs the specified kappa composite from the normalized relative-Frobenius trivialization and exact descended composition comparison. The listed helpers expose both actual base-changed schemes and maps, both arithmetic factorizations, both square identifications and the full equality of natural transformations. No absolute finite-type hypothesis is imposed."
  }
 }
