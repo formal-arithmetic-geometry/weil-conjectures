@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCounit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Coherence
 public import WeilConjectures.TraceFormula.Dualizing
 
 /-!
@@ -114,6 +116,77 @@ lemma integral_scalar_comp [IsProper X.hom]
     ← reassoc_of% hn]
 
 end Scalar
+
+end BorelMooreSection
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+
+namespace BorelMooreSection
+
+variable {X : Over (Spec (.of k))} [QuasiCompact X.hom]
+
+variable [LocallyOfFiniteType X.hom] [IsSeparated X.hom] in
+/-- The composition isomorphism `R(a_X)^! ω_s ≅ ω_X` of the dualizing complexes, followed by
+`ω_X = Ra_X^! ℚ̄_ℓ,s ≅ Ra_X^! ω_s` through `ω_s ≅ ℚ̄_ℓ,s`, is compatible with the counits:
+the counit of `Ra_{X!} ⊣ Ra_X^!` at `ω_s`, read through `ω_s ≅ ℚ̄_ℓ,s`, is the counit at
+`ℚ̄_ℓ,s`. This is the unit coherence of the composition isomorphisms of the exceptional
+functors, by conjugation from `boundedConstructibleLowerShriekComp_padicAlgCl_id_right`. -/
+lemma lowerShriek_map_dualizingComplexComp_inv_counit :
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+        (dualizingComplexComp ℓ (toPoint X)).inv ≫
+      (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        (toPoint X)).counit.app _ ≫ (dualizingComplexPointIso ℓ k).hom =
+    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        (toPoint X)).counit.app _ := by
+  have h := conjugateIsoEquiv_comp_unit_counit
+    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (toPoint X ≫ toPoint (point k)))
+    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))
+    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      (toPoint (point k)))
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (toPoint X) (toPoint (point k)))
+    (boundedConstructibleLowerShriekId ℓ (point k))
+    (eqToIso (congrArg (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ)
+      (comp_toPoint (toPoint X))))
+    (fun K ↦ by
+      rw [boundedConstructibleLowerShriekId, Iso.trans_hom, NatTrans.comp_app, eqToIso.hom,
+        eqToHom_app]
+      exact boundedConstructibleLowerShriekComp_padicAlgCl_id_right ℓ (toPoint X) K)
+    (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧))
+  rw [← boundedConstructibleUpperShriekComp_padicAlgCl.eq_1] at h
+  rw [dualizingComplexComp, Iso.trans_inv, eqToIso.inv, Iso.symm_inv, Iso.app_hom,
+    Functor.map_comp, Category.assoc]
+  refine Eq.trans (congrArg (_ ≫ ·) h) ?_
+  rw [eqToIso.inv, eqToHom_app]
+  exact Adjunction.counit_eqToHom_family
+    (fun m ↦ boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ m)
+    (fun m ↦ boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ m)
+    (fun m ↦ boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ m)
+    (comp_toPoint _) _
+
+instance isProper_toPoint_left [IsProper X.hom] : IsProper (toPoint X).left :=
+  inferInstanceAs (IsProper X.hom)
+
+/-- **Integration is pushforward to the point** (blueprint
+`lem-trf-integration-as-pushforward`): for `X` proper over `s`, the integral `∫_X α` is the
+pushforward `(a_X)_* α` along the structure morphism, read through `ω_s ≅ ℚ̄_ℓ,s`. -/
+theorem integral_eq_pushforward [IsProper X.hom] (α : BorelMooreSection ℓ X) :
+    α.integral = pushforward (toPoint X) α ≫ (dualizingComplexPointIso ℓ k).hom := by
+  rw [integral, pushforward, Adjunction.homEquiv_counit, Functor.map_comp]
+  simp only [Category.assoc]
+  rw [(boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ
+      (toPoint X)).inv.naturality_assoc α, lowerShriek_map_dualizingComplexComp_inv_counit]
+
+/-- **Integration is pushforward to the point**, in the form `∫_X α = ∫_s (a_X)_* α`
+(blueprint `lem-trf-integration-as-pushforward`). -/
+theorem integral_eq_integral_pushforward [IsProper X.hom] (α : BorelMooreSection ℓ X) :
+    α.integral = (pushforward (toPoint X) α).integral := by
+  rw [integral_point, integral_eq_pushforward]
 
 end BorelMooreSection
 
