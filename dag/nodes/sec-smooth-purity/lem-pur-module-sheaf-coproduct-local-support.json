@@ -262,5 +262,23 @@
   "group": "Q153",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-5dfa4c582 (reviewer sub-agent of L); spot-checked: I read the whole item and all 9 steps, the statements of all six cited nodes, Stacks sites-modules.tex lemma-limits-colimits (Tag 03DB) and the parent def-pur-flasque-support step 5, which cites this item. 03DB gives only that colimits exist, as the sheafified sectionwise colimit. The explicit description by tuples that have finite support locally is the agent's own construction, and proof_origin=agent says so. The statement is unchanged, is not a target and is not weakened. Step 1 gets P from the Mathlib leaf lem-weil-pbc-module-sheaves-limits-sectionwise: the diagram is discrete and I is small. Steps 2-8 compute directly from the site axioms of 00VH (identity cover, composite covers, base change by fibre products) and from semilinear module sheaves. The overlaps V_a x_V V_b with B_a union B_b, the independence of the witness, naturality and O-linearity all check, the last through the semilinear restriction in T. Uniqueness comes from h|V_a = sum over B_a of iota_i(h_i). Step 9 identifies the canonical map c as m composed with u, so it is a monomorphism with image S. Small cases: I empty, I finite, a discrete space with skyscraper sheaves (S = P = the product there, as expected), and empty coverings; all are consistent. No new nodes and no unit edits. rg found no duplicate: the existing colimits-forgetful lemma is the abstract existence result, and det-pe-sections-limits-colimits is about something else. No SGA, no cycle, and every cited node states what its step uses. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleSheafCoproductLocalSupport",
+  "declaration": "CategoryTheory.moduleSheaf_coproduct_localSupport",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleSheafCoproductLocalSupport.lean",
+  "statement": "theorem moduleSheaf_coproduct_localSupport {C : Type u} [SmallCategory C] (K : Precoverage C) (hK : K.IsSiteForCoverings) [HasPullbacks C] (R : Sheaf K.toGrothendieck RingCat.{r}) (hcomm : ∀ (V : Cᵒᵖ) (a b : R.obj.obj V), a * b = b * a) [HasSheafify K.toGrothendieck AddCommGrpCat.{u}] [K.toGrothendieck.WEqualsLocallyBijective AddCommGrpCat.{u}] (I : Type u) (H : I → ringedSiteModules.{u} R) : ∃ (S : ringedSiteModules.{u} R) (m : S ⟶ ∏ᶜ H) (ι : ∀ i : I, H i ⟶ S), Mono m ∧ (∀ V : Cᵒᵖ, Function.Injective (m.val.app V)) ∧ (∀ (V : C) (h : (∏ᶜ H).val.obj (op V)), h ∈ Set.range (m.val.app (op V)) ↔ ∃ (A : Type u) (U : A → C) (a : ∀ α : A, U α ⟶ V), Presieve.ofArrows U a ∈ K V ∧ ∃ B : A → Finset I, ∀ (α : A) (i : I), i ∉ B α → (H i).val.map (a α).op ((Pi.π H i).val.app (op V) h) = 0) ∧ (∀ i : I, ι i ≫ m ≫ Pi.π H i = 𝟙 (H i)) ∧ (∀ (i j : I), i ≠ j → ι i ≫ m ≫ Pi.π H j = 0) ∧ Nonempty (IsColimit (Cofan.mk S ι)) ∧ (∀ T : ringedSiteModules.{u} R, Function.Bijective (fun f : S ⟶ T ↦ fun i : I ↦ ι i ≫ f)) ∧ Mono (Sigma.desc (fun i : I ↦ ι i ≫ m)) ∧ (∀ V : Cᵒᵖ, Set.range ((Sigma.desc (fun i : I ↦ ι i ≫ m)).val.app V) = Set.range (m.val.app V))",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e4b3c3d1",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Read the node, the 5 statement dependencies (IsSiteForCoverings, ringedSiteModules, PresheafOfModules.sheafification, moduleSheaves_colimits_forgetful, colimit/IsColimit), Stacks 03DB, the module and the report. The commit touches only the report, the node's lean record and the module. The Lean matches every clause: sectionwise-injective m into ∏ᶜ H whose range is exactly the covering/finite-support predicate (A : Type u, empty covers allowed), diagonal/off-diagonal insertion equations, IsColimit cofan, Hom bijection in the right direction, Sigma.desc monic with range = range m. HasPullbacks is the node's own fibre-product hypothesis; hcomm is equivalent to commutative rings; HasSheafify/WEqualsLocallyBijective match the dependency API. pp.universes shows module universe = site universe u and an independent ring universe r. Edge cases checked: empty, finite and infinite I; empty covers; empty site. No definitions, proof is sorry only, both docstrings give source and blueprint, the theorem docstring has all 9 steps, lean.statement is verbatim. nt_compile.py: exit 0, 2.1 s, clean. Worker report substantive; second-reading section is the 2026-10-17 policy note, accepted as in prior reviews. No findings."
  }
 }

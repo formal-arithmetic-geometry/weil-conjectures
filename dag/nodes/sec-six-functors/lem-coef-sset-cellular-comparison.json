@@ -226,5 +226,23 @@
   "group": "Q32",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-7e5a55ce0 (reviewer sub-agent of L); spot-checked: I read all of the item and the statements of the six nodes it cites. The statement is unchanged from the base. It is a correct Kan-Quillen generalization of HTT Prop. 2.2.2.7 / Rem. 2.2.2.8, marked as agent-written with HTT listed as WANTED, and no target is weakened. Small cases I tested: -xK -> -xK' for a weak homotopy equivalence K->K'; the identity; the constant-empty functors; X empty. Step 1 is correct: P(empty) and Q(empty) are initial, so eta there is vacuously a weak homotopy equivalence. Step 2 is correct: both bases of the nested induction are stated, and the nondegenerate simplices of the boundary have dimension below d. Step 3 is correct: the conclusions of top-simplex-removal are exactly hypotheses (1)-(3) of glue-simplex, which I checked against Stacks 018R (simplicial.tex l.3084, tags/tags) and the 018S proof at l.3141. Step 4 is correct: the cube-lemma clause needs injective maps only on the boundary-to-simplex legs, which the preservation hypothesis gives, and the induced map is identified with eta_A. Step 5 is correct: finite simplicial subsets form a small directed poset and their union is the degreewise colimit. Step 6 is correct: it uses the filtered-colimit clause. The weak homotopy equivalence of lem-coef-kan-quillen-model-right-proper-core and that of def-cbc are the same definition, and monomorphisms are the degreewise injective maps. proof_deps equals the union of the uses, and there is no cycle. The unit route is respected, and I accept the declared tool_use of lem-weil-pbc-simplicial-set-glue-simplex as an ordinary combinatorial pushout; the nondegenerate decomposition is a Mathlib leaf. The duplicate search (rg for 2.2.2.7, 'cellular' and colimit+mono preservation) found no node stating this comparison. There are no new nodes and no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SSetCellularComparison",
+  "declaration": "SSet.cellular_weak_homotopy_comparison",
+  "file": "lean/Sheaf/AlgebraicTopology/SSetCellularComparison.lean",
+  "statement": "theorem cellular_weak_homotopy_comparison (P Q : SSet.{u} ⥤ SSet.{u}) [PreservesColimitsOfSize.{u, u} P] [PreservesColimitsOfSize.{u, u} Q] (hPMono : ∀ (A B : SSet.{u}) (f : A ⟶ B), (∀ n : ℕ, Function.Injective (f.app (Opposite.op ⦋n⦌))) → ∀ n : ℕ, Function.Injective ((P.map f).app (Opposite.op ⦋n⦌))) (hQMono : ∀ (A B : SSet.{u}) (f : A ⟶ B), (∀ n : ℕ, Function.Injective (f.app (Opposite.op ⦋n⦌))) → ∀ n : ℕ, Function.Injective ((Q.map f).app (Opposite.op ⦋n⦌))) (η : P ⟶ Q) (hSimplex : ∀ n : ℕ, Enhanced.IsWeakHomotopyEquivalence (η.app Δ[n])) (X : SSet.{u}) : Enhanced.IsWeakHomotopyEquivalence (η.app X)",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-160e9a068",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Clause-by-clause match: SSet.{u} single universe; PreservesColimitsOfSize.{u,u} for P,Q (all small shapes incl. empty); hPMono/hQMono degreewise injectivity for arbitrary f; η : P ⟶ Q; hSimplex for all n:ℕ incl. 0; conclusion for unrestricted X:SSet.{u}. Weak equivalence is the recorded SSet.Enhanced.IsWeakHomotopyEquivalence (realization π0 + based cubical πr), the def-cbc stmt dep's notion; no stronger assumption, no universe restriction; gluing_filtered dep takes I : Type u so proof typable. Not a duplicate of cellular_natural_equivalence (Joyal notion). Edge cases ∅, n=0, infinite X, identity, constant-empty ok. Gates: no definitions, sorry only, source/blueprint docstrings with all 6 proof steps, lean.statement verbatim once, lines ≤100, node changes only lean. nt_compile.py --json on snapshot: rc 0, no errors/warnings, 1.8 s. Minor: Second reading is an author self-check; garbled 'Proposition the project server' text in report."
  }
 }

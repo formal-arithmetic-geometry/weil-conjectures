@@ -202,5 +202,23 @@
   "group": "Q89",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-0ea8b12ca (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks derived.tex 093W (lemma-compute-colimit, l.10326), 0CRK (lemma-cohomology-of-hocolim, l.10378) and 094A (lemma-commutes-with-countable-sums, l.10406). Statement: no sign it was weakened, and it is self-contained. It keeps only the two coproduct comparisons the 0CRK five-term argument uses (for X_n and for X_n[1] via iota_n[1]), so it is a correct sequence-relative form of 094A and at least as strong. Small cases agree: K=0, all X_n=0, zero transitions, identity transitions, a non-injective u_0. Step 1: (1-s)_*beta = beta(1-sigma) on summands, and the same for the shifted family since shift is an additive functor. Step 2: injectivity of 1-sigma^+ by the coordinate recurrence g_0=0, g_{n+1}=u_n[1]g_n, with no condition on u_n. Step 3: I recomputed the TR2 rotations. Clause (i) of lem-weil-pbc-hom-into-triangle-exact (Mathlib leaf) on the second rotation gives a[1]q=0, so qh=0. Clause (ii) on the first rotation gives surjectivity of p_*, and on the original triangle gives ker p_* = im a_*. Steps 4-5: the 093W quotient is shown to be a colimit through its universal property, and the descended map is identified with [f] -> p iota_n f. Elementary flags are justified, proof_deps equals the union of uses, and there are no new nodes. Not duplicates: lem-pc-compact-hom-hocolim is a special case (compact K); lem-kun-functor-preserves-hocolim and lem-kun-complex-colimit-hocolim state different results. The unit route is respected, no tool uses, no SGA. The parent's step 6 (lisse-e-constructible-integral-lattice) uses the item consistently with its statement. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SequenceRelativeHomTelescope",
+  "declaration": "CategoryTheory.sequence_relative_hom_telescope",
+  "file": "lean/Sheaf/CategoryTheory/SequenceRelativeHomTelescope.lean",
+  "statement": "theorem sequence_relative_hom_telescope {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] (K : C) (X : ℕ ⥤ C) (B : C) (iota : ∀ n : ℕ, X.obj n ⟶ B) (hB : IsColimit (Cofan.mk B iota)) (s : B ⟶ B) (hs : ∀ n : ℕ, iota n ≫ s = X.map (homOfLE (Nat.le_succ n)) ≫ iota (n + 1)) (H : C) (p : B ⟶ H) (q : H ⟶ B⟦(1 : ℤ)⟧) (hT : Triangle.mk (𝟙 B - s) p q ∈ distTriang C) (hcomp : Function.Bijective (DirectSum.toAddMonoid (fun n : ℕ ↦ Preadditive.rightComp K (iota n)) : (⨁ n : ℕ, (K ⟶ X.obj n)) →+ (K ⟶ B))) (hcompShift : Function.Bijective (DirectSum.toAddMonoid (fun n : ℕ ↦ Preadditive.rightComp K ((iota n)⟦(1 : ℤ)⟧')) : (⨁ n : ℕ, (K ⟶ (X.obj n)⟦(1 : ℤ)⟧)) →+ (K ⟶ B⟦(1 : ℤ)⟧))) : ∃ phi : colimit (X ⋙ preadditiveCoyoneda.obj (op K)) ⟶ AddCommGrpCat.of (K ⟶ H), (∀ (n : ℕ) (f : K ⟶ X.obj n), phi (colimit.ι (X ⋙ preadditiveCoyoneda.obj (op K)) n f) = f ≫ iota n ≫ p) ∧ Function.Bijective phi",
+  "branch": "newtargets-dag",
+  "by": "Q156",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ace1ddf0",
+  "group": "Q156",
+  "result": "pass",
+  "note": "Statement matches node lem-weil-pbc-sequence-relative-hom-telescope clause by clause: Pretriangulated+IsTriangulated with independent u/v universes; X : ℕ ⥤ C with u_n = X.map (homOfLE (Nat.le_succ n)); IsColimit (Cofan.mk B iota) assumes only this coproduct; hs; hT = Triangle.mk (𝟙 B - s) p q distinguished; hcomp/hcompShift are DirectSum.toAddMonoid of rightComp K (iota n) and of (iota n)⟦1⟧' (direction checked by rfl); conclusion ∃ group hom from colimit (X ⋙ preadditiveCoyoneda.obj (op K)) with stage formula f ≫ iota n ≫ p (uniquely determines the canonical map) and Bijective. No extra assumptions; edge cases K=0, X_n=0, u_n=0/id, non-injective u_n, n=0 fine. Agrees with Stacks 093W/0CRK/094A and the citer lisse-e-constructible-integral-lattice step 3. No duplicate (compact_hom_hocolim, brownTelescopeAssembly, compactGenerator_telescope_isIso differ). lean.statement verbatim; node differs only in lean. No definitions, sorry only, source/blueprint docstrings with 5 proof steps, Mathlib imports only. Worker report real; second-reading section is the standard 2026-10-17 direct-delivery note, accepted. nt_compile.py --json on the snapshot file: EXIT 0, no errors or warnings."
  }
 }

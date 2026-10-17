@@ -190,5 +190,23 @@
   "group": "N4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-f149f0f60 (reviewer sub-agent of L); spot-checked: Read the item in full: statement unchanged, 4 steps, no new nodes. Read all four cited statements (def-weil-pbc-trivial-kan-fibration, lem-weil-pbc-trivial-kan-lifts-monomorphisms, def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus) and Stacks simplicial.tex 08NL l.5533, 08NM l.5550 and 08NS l.5642 with its proof square. Step 1: the n=0 boundary condition is p_0 surjective, so p is a trivial Kan fibration; lifting against the empty map into Y gives s with ps=id. Step 2: the 08NS square ∂Δ[1]×X→Δ[1]×X with top map (id, sp) and bottom map p·pr_X commutes because psp=p; it gives H with pH=p·pr_X. The 08NS node lacks this over-p identity, so rebuilding the square is needed. Step 3: the edge and the two ∂Δ[2] boundaries (H_x,g,id_x) and (g,H_x,id_spx) agree at their vertices and map to degenerate base simplices; the lifts are the inverse triangles of the equivalence-edge definition. Step 4: H is an edge of Fun(X,X)_1, and the componentwise criterion in the cone-calculus statement makes it an equivalence; pH is s_0(p). Edge cases checked: X=Y=∅; X=∅ with Y≠∅ ruled out by n=0; p=id; discrete nerves. No Kan or nonemptiness hypothesis is hidden. Dependency closure (129 nodes) is acyclic. No duplicate: the 08NS, Joyal, invertible-interval and anodyne-factorization nodes are different or weaker. Tool use lem-cbc-enhanced-functor-cone-calculus (generic pointwise criterion) is accepted; the sk-prop-h2 tool uses are Mathlib leaves. Agent proof origin with the main-20261015 blueprint ancestor, no SGA, not a target node. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BoundaryLiftingQuasicategoryEquivalence",
+  "declaration": "SSet.Enhanced.boundary_lifting_quasicategory_equivalence",
+  "file": "lean/Sheaf/CategoryTheory/BoundaryLiftingQuasicategoryEquivalence.lean",
+  "statement": "theorem boundary_lifting_quasicategory_equivalence {X Y : SSet.{u}} [Quasicategory X] [Quasicategory Y] (p : X ⟶ Y) (hp : ∀ n : ℕ, HasLiftingProperty (boundary.{u} n).ι p) : (∃ (s : Y ⟶ X) (η : ((ihom X).obj X) _⦋1⦌), s ≫ p = 𝟙 Y ∧ ((ihom X).obj X).δ 1 η = diagramVertex (𝟙 X) ∧ ((ihom X).obj X).δ 0 η = diagramVertex (p ≫ s) ∧ IsEquivalenceEdge ((ihom X).obj X) η ∧ ((ihom X).map p).app _ η = ((ihom X).obj Y).σ 0 (diagramVertex p)) ∧ IsFunctorEquivalence p",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e85dcbefb",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Read node, def-cbc-enhanced-diagrams-cones Lean defs (IsEquivalenceEdge, diagramVertex, AreNaturallyEquivalent, IsFunctorEquivalence), ComponentwiseEquivalence, Stacks 08NL/08NM/08NS. All clauses match: ∀ n:ℕ boundary lifting (n=0 empty boundary), Quasicategory X/Y, ∃ s with s≫p=𝟙, η with δ1=id and δ0=p≫s, IsEquivalenceEdge η, postcomposition of η by p equals σ0 of p's vertex, and IsFunctorEquivalence p. No Kan, nonempty or universe restriction. Edge cases checked (empty, X empty with Y nonempty excluded, identity, non-Kan). lean.statement is verbatim the file signature, docstrings carry source, blueprint tag and 4 proof steps, no definitions, sorry only. nt_compile --json with side overlay: rc 0, no errors or warnings. Second-reading section is the worker's own self-check (noted, not blocking). No fixes."
  }
 }

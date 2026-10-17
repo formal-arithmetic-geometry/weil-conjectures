@@ -388,5 +388,29 @@
   "group": "Q132",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-38af3d7f0 (reviewer sub-agent of L); spot-checked: I read the whole item and checked every step myself; all are correct. The delivery has no new nodes. The statement is unchanged and not weakened, and parent step 15 of lem-coef-derived-system-evaluation-calculus applies it word for word. Step 1: Theta(ev∘(z⊗1)) = z, using H(1,1) = 1. Step 2: the evaluation identity, from injectivity of Theta, where both transposes equal H(a,g). Step 3: I checked μ-naturality at (h,1) and at (1,a) and counit naturality (from the statement of lem-weil-pbc-adjunction-of-natural-bijection); sources and targets match (FA⊗FP' to N'). Step 4: applying Theta_D gives b'∘Fh = H_D(Fa,v)∘b. Step 5: unit naturality and functoriality of G give the equation for δ. No step uses associativity, symmetry or invertibility. Small cases I tested: identity adjunction on Set, the terminal category, empty objects, and a tensor with no coherence. Both cited nodes are Mathlib leaves, so no tool_uses are needed. Step sources and proof_origin cite Stacks Tag 0037, which I read at categories.tex:3344-3384, and it gives the unit/counit conventions used. The Mathlib searches cover all three kinds, and ihom.ev_naturality and expComparison are not one-line specializations. The sibling node lem-coef-monoidal-adjunction-parameter-composition and lem-pod-closed-uncurry-laws are different results, and an rg over dag/nodes found no duplicate. Maintainer note, not a delivery fault: the top-level source field still names derived.tex Tag 0FND. That field belongs to the maintainer, so the worker could not change it; I suggest setting it to categories.tex Tag 0037 (definition-adjoint). No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ClosedAdjunctionComparison",
+  "declaration": "CategoryTheory.ClosedAdjunctionComparison.naturality",
+  "declarations": [
+   "CategoryTheory.ClosedAdjunctionComparison.evaluation",
+   "CategoryTheory.ClosedAdjunctionComparison.comparison",
+   "CategoryTheory.ClosedAdjunctionComparison.adjointComparison",
+   "CategoryTheory.ClosedAdjunctionComparison.naturality"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ClosedAdjunctionComparison.lean",
+  "statement": "theorem naturality {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D] (tensorC : C × C ⥤ C) (tensorD : D × D ⥤ D) (HC : Cᵒᵖ × C ⥤ C) (HD : Dᵒᵖ × D ⥤ D) (θC : ∀ T X Y : C, (tensorC.obj (T, X) ⟶ Y) ≃ (T ⟶ HC.obj (op X, Y))) (θD : ∀ T X Y : D, (tensorD.obj (T, X) ⟶ Y) ≃ (T ⟶ HD.obj (op X, Y))) (F : C ⥤ D) (G : D ⥤ C) (μ : ∀ X Y : C, tensorD.obj (F.obj X, F.obj Y) ≅ F.obj (tensorC.obj (X, Y))) (adj : F ⊣ G) (hθC : ∀ (T T' X X' Y Y' : C) (k : tensorC.obj (T, X) ⟶ Y) (t : T' ⟶ T) (a : X' ⟶ X) (g : Y ⟶ Y'), θC T' X' Y' (tensorC.map (Prod.mkHom t a) ≫ k ≫ g) = t ≫ θC T X Y k ≫ HC.map (Prod.mkHom a.op g)) (hθD : ∀ (T T' X X' Y Y' : D) (k : tensorD.obj (T, X) ⟶ Y) (t : T' ⟶ T) (a : X' ⟶ X) (g : Y ⟶ Y'), θD T' X' Y' (tensorD.map (Prod.mkHom t a) ≫ k ≫ g) = t ≫ θD T X Y k ≫ HD.map (Prod.mkHom a.op g)) (hμ : ∀ (X X' Y Y' : C) (f : X ⟶ X') (g : Y ⟶ Y'), (μ X Y).hom ≫ F.map (tensorC.map (Prod.mkHom f g)) = tensorD.map (Prod.mkHom (F.map f) (F.map g)) ≫ (μ X' Y').hom) (P P' : C) (N N' : D) (a : P' ⟶ P) (v : N ⟶ N') : (F.map (HC.map (Prod.mkHom a.op (G.map v))) ≫ comparison tensorC tensorD HC HD θC θD F G μ adj P' N' = comparison tensorC tensorD HC HD θC θD F G μ adj P N ≫ HD.map (Prod.mkHom (F.map a).op v)) ∧ (HC.map (Prod.mkHom a.op (G.map v)) ≫ adjointComparison tensorC tensorD HC HD θC θD F G μ adj P' N' = adjointComparison tensorC tensorD HC HD θC θD F G μ adj P N ≫ G.map (HD.map (Prod.mkHom (F.map a).op v)))",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-42f6330e7",
+  "group": "NW",
+  "result": "pass",
+  "note": "Clause-by-clause match of the node to the Lean: bifunctors tensorC/tensorD and HC/HD (contravariant first argument via a.op), Equiv θ with three-variable naturality hθ, iso μ with naturality hμ, adj : F ⊣ G, comparison = θD(μ.hom ≫ F(ev) ≫ counit), adjointComparison = unit ≫ G(b), both conjuncts exactly the node's equations; no extra assumptions or universe equalities; lean.statement verbatim once; only the node's lean field changed. In a scratch copy the sorry was replaced by a full proof following the five DAG steps and it compiled with no sorry, so the statement is true and its directions are right. nt_compile of the delivered file is clean (1.2 s). Helper definitions build real maps and are listed in lean.declarations; source and blueprint docstrings present; only sorry in the proof; no duplicate (tensorParameterMate is a different notion; CoefficientRingedTensorHomModel and Mathlib MonoidalClosed need monoidal structure). Notes: the second reading was done by the same worker; the node's top-level source field still names Tag 0FND (maintainer field). No fixes."
  }
 }

@@ -225,5 +225,40 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-e72251296 (reviewer sub-agent of L); spot-checked: I read in full the item's statement and its 7 steps; the statement and all 8 steps of the cited lem-coef-simplicial-interval-lifting; the parent lem-coef-simplicial-interval-cell-stability (step 3 is the only use); the citer lem-coef-scat-fixed-object-pushout-comparison; and the blueprint ancestor prop-coef-integral-exceptional-adjoint (main-20261015, paragraph 2). The statement is true. In each degree an object-fixing functor out of the path category on K_n is determined by its values on the generators, and because faces and degeneracies act letter by letter, compatibility with them reduces to the generators. Small cases tested: K empty (discrete category, both Hom sets singletons); a=b with one object (free simplicial monoid); a≠b (no words of length 2 or more); K=Δ^0 with a=b (N); degenerate letters (word length is kept); O empty (excluded since a must be in O). Steps 1-7 (words and concatenation, the letterwise simplicial structure, functoriality, restriction, the recursive extension with a properly set-up induction, the inverse, and naturality with both triangle identities) are each correct and genuinely elementary. They use only the definitional sentence of interval-lifting's statement (same unit, no tool use). There is no cycle: interval-lifting's 197-node dependency closure contains neither the item nor the parent. Duplicate check: lem-coef-sorted-simplicial-algebra-model gives an abstract left adjoint F_s, but the identification of sCat_O with its algebras appears only in a proof step of interval-lifting and it gives no explicit word formula, so it is not a one-line specialization. def-coef-free-category-comonad, lem-coef-fixed-object-simplicial-free-calculus and lem-coef-categorical-algebra-free-monad are different statements. There are no new nodes. Source: Bergner arXiv math/0508152 is not in the literature tree; this is disclosed as WANTED, proof_origin is agent, and the proof does not rely on the article. No SGA is used, no base-change or coefficient-category issue arises for this non-target node, and no fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.FixedObjectFreeArrowAdjunction",
+  "declaration": "SSet.Bergner.fixed_object_free_arrow_adjunction",
+  "declarations": [
+   "SSet.Bergner.ArrowGraph",
+   "SSet.Bergner.arrowGraph",
+   "SSet.Bergner.ArrowWord",
+   "SSet.Bergner.arrowGraphMap",
+   "SSet.Bergner.freeArrowHom",
+   "SSet.Bergner.freeArrowId",
+   "SSet.Bergner.freeArrowComp",
+   "SSet.Bergner.freeArrow",
+   "SSet.Bergner.freeArrowMap",
+   "SSet.Bergner.freeArrowFunctor",
+   "SSet.Bergner.mappingSetEvaluation",
+   "SSet.Bergner.freeArrowGenerator",
+   "SSet.Bergner.freeArrowEdgeImage",
+   "SSet.Bergner.freeArrowWordImage",
+   "SSet.Bergner.fixed_object_free_arrow_adjunction"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/FixedObjectFreeArrowAdjunction.lean",
+  "statement": "theorem fixed_object_free_arrow_adjunction {O : Type u} (a b : O) : ∃ adj : freeArrowFunctor a b ⊣ mappingSetEvaluation a b, (∀ (K : SSet.{u}) (T : Fixed O) (G : freeArrow a b K ⟶ T), adj.homEquiv K T G = freeArrowGenerator a b K ≫ G.map a b) ∧ (∀ (K : SSet.{u}) (T : Fixed O) (f : K ⟶ T.Hom a b) (n : SimplexCategoryᵒᵖ) (x y : O) (w : ArrowWord a b (K.obj n) x y), (((adj.homEquiv K T).symm f).map x y).app n w = freeArrowWordImage T f n y w)",
+  "branch": "newtargets-dag",
+  "by": "Q147",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ffc49b18d",
+  "group": "Q147",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: O : Type u with any a,b (loops allowed, no distinctness/DecidableEq/Nonempty); one a->b edge per K_n simplex; words with no relations (Quiver.Path), nil = identity, concatenation = composition; letterwise simplicial operators; freeArrowFunctor substitutes letters; evaluation T |-> T.Hom a b; the existential adjunction is fixed by both formulas (forward = restriction to one-letter words; inverse = recursive word image, nil |-> identity, composition order forced by the types). Uses exact dependency declarations Fixed/FixedHom/fixedCategory; the single universe u comes from that interface. Edge cases checked: K empty, a=b, a!=b, degenerate letters. No duplicate in side Sheaf (FixedObjectSimplicialFreeCalculus, SortedSimplicialAlgebraModel and U are different) or Mathlib. Every definition has real data; only sorry is the theorem proof; source and blueprint docstrings present; the theorem docstring gives the 7 proof steps; node record differs from the clone only in lean, statement verbatim. nt_compile.py exit 0, no errors or warnings. The Second reading by Q147 section is self-authored and says so; the substance was verified independently here."
  }
 }

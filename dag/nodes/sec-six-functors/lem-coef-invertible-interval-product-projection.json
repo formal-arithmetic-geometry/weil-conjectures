@@ -186,5 +186,23 @@
   "group": "Q121",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-feccd5fcf (reviewer sub-agent of L); spot-checked: I read the whole item (4 steps, no new nodes), the full statements of def-cbc-enhanced-diagrams-cones, lem-coef-joyal-functor-equivalence-test and lem-coef-joyal-model-structure, steps 2-4 of the citer lem-coef-join-slice-cocone-comparison, and the unit record. The statement (R x N(0~1) -> R is a categorical equivalence for every small R) is true (HTT Cor. 2.2.5.4) and is exactly what the citer's step 3 uses. Edge cases checked: R empty, R = Delta^0, non-quasicategory R, empty C. Step 1: mu = coordinatewise min on {0,1}-strings is simplicial and gives the contraction with endpoints s*pi and 1. Step 2: the test node's first assertion gives that D and E are quasicategories, and QP = 1 holds strictly. Step 3: I checked kappa_t's compatibility with gamma and the parameter naturality (1 x alpha) o kappa_{t alpha} = kappa_t o (1 x alpha), so K is simplicial with endpoints PQ and 1. Step 4: the 2-simplices 010 and 101 have degenerate long edges and give both inverse witnesses, so P is a coherent functor equivalence; (ii) => (iii) of the test then gives the test-functor definition. No cycle (64-node traversal of the cited nodes). Both statement nodes are in the same unit and def-cbc is a notion, so no tool_uses are needed. Not a target node, so the base-change and coefficient checks do not apply. Duplicate candidates (quasicategory-invertible-interval, joyal-homotopy-exponentials, segal-categorical-equivalence-dk, coarse-nerve-gluing, the pushout-product nodes) state different things. Mathlib has no Joyal categorical-equivalence notion. HTT and Cisinski are not local; the worker recorded them as WANTED and marked the proof as agent-written. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.InvertibleIntervalProductProjection",
+  "declaration": "SSet.Enhanced.invertible_interval_product_projection",
+  "file": "lean/Sheaf/AlgebraicTopology/InvertibleIntervalProductProjection.lean",
+  "statement": "theorem invertible_interval_product_projection {R : SSet.{u}} : ∀ (C : SSet.{max u v}), C.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (SSet.uliftFunctor.{v, u}.map (CartesianMonoidalCategory.fst R SSet.coherentIso))).app C)).toFunctor).IsEquivalence",
+  "branch": "newtargets-dag",
+  "by": "Q157",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e90e6feb",
+  "group": "Q157",
+  "result": "fix",
+  "note": "Statement correct: R:SSet.{u} arbitrary (no quasicategory, nonemptiness or finiteness hypothesis), I = SSet.coherentIso = nerve of Codiscrete(ULift Bool), projection CartesianMonoidalCategory.fst R coherentIso. The conclusion is verbatim the weak-equivalence test of SSet.exists_joyal_model_structure (hoFunctor of MonoidalClosed.pre of uliftFunctor.{v,u}.map pi, for every quasicategory C : SSet.{max u v}); universes u and v free, checked with pp.universes. Edge cases R empty, R a point, empty C, u=v=0 all included. The citer join-slice-cocone step 3 uses exactly this form. Shape: only the item's lean field and the new module changed; lean.statement verbatim; Worker report and the standard Second-reading placeholder present. Gates: no defs, proof only sorry, source and blueprint docstrings, no line over 100 characters, no autoImplicit, no duplicate declaration. nt_compile.py --json: exit 0, no errors or warnings. FIX for H8: the theorem docstring was a summary, not the node's proof step by step. The fixes/ module adds the four steps; signature byte-identical, compiles clean."
  }
 }
