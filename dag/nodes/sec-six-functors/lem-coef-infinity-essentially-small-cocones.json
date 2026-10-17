@@ -259,5 +259,27 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-a91b505bb (reviewer sub-agent of L); spot-checked: Read in full: the item, all 11 cited statements, def-weil-size-convention, the unit record and the citer (lem-coef-accessible-compact-cocones step 6). Shape: one commit, item and report only, no new nodes. proof_deps equals the union of the step uses. The dependency closure (636 nodes) does not reach the item, so there is no cycle. Statement, unit and ancestry are unchanged and not weakened. Step 1: fullness of D makes a and b factor uniquely through D, since every vertex of K×Δ^n×Δ^1 maps to p(k) or a(i); this is a true simplicial isomorphism. Step 2: Map_D = Map_C by fullness, and the final clause of the spine-tower lemma gives local smallness of Fun(K,D) for any small K. Step 3: relative-coslice lemma with q:D→Δ^0 and K_0=∅ reduces to r:J_p→D, a left fibration. The join-slice comparison explicitly gives strict fibers ≃ Map(p,Δ_K d), essentially small by step 2. Step 4: pullback stability of left fibrations; r is cocartesian via the Λ^1_0 lift and the Λ^n_0 lifts for n≥2. Step 5: Joyal characterization (2) plus cocartesian base change with S=B=D, b=id, Z=J_p, u=e makes L→J_p an equivalence. Step 6: transport classification over the U-small base E gives a U-small representative M. The Fun_{/E} mapping-space formula gives u, v and paths whose components lie over identities. Equivalence reflection plus the pointwise criterion make these coherent equivalences. Step 7: M≃L≃J_p≃D_{p/}≅Q_D. Tested K=∅, D=∅, a two-object discrete D with no cocone, and a one-object groupoid. The cbc lemmas say 'small' relative to V of def-weil-size-convention and are universe-agnostic horn combinatorics, so applying them at U' is fine. Accepted tool_uses: lem-cbc-relative-coslice-left-fibration and lem-cbc-left-fibration-equivalence-lift, generic tools that replace no unit step. No duplicate found (relative-slice-sections, small-full-subcategory, size-calculus, compact-slice-density, compact-approximation compared). No SGA. HTT is WANTED and the proof is marked agent-written. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityEssentiallySmallCocones",
+  "declaration": "SSet.Enhanced.essentially_small_fixed_boundary_cocones",
+  "file": "lean/Sheaf/CategoryTheory/InfinityEssentiallySmallCocones.lean",
+  "statement": "theorem essentially_small_fixed_boundary_cocones (C : SSet.{max (u + 1) v}) [SSet.Quasicategory C] (P : C _⦋0⦌ → Prop) (hlocal : SSet.Presentability.IsLocallySmall.{u, max (u + 1) v} C) (hsmall : SSet.Presentability.IsEssentiallySmall.{u, max (u + 1) v} (fullSubcomplex C P).toSSet) (hreplete : ∀ (e : C _⦋1⦌), IsEquivalenceEdge C e → P (C.δ 1 e) → P (C.δ 0 e)) (K : SSet.{max (u + 1) v}) (hK : SSet.Presentability.IsSmall.{u, max (u + 1) v} K) (p : K ⟶ (fullSubcomplex C P).toSSet) : IsFunctorEquivalence (fixedBoundaryCoconeInclusion P p) ∧ SSet.Presentability.IsEssentiallySmall.{u, max (u + 1) v} (fullSubcomplex (coconeCategory (p ≫ (fullSubcomplex C P).ι)) (fun t ↦ P t.1.1)).toSSet",
+  "branch": "newtargets-dag",
+  "by": "Q112",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.fixedBoundaryCoconeInclusion",
+   "SSet.Enhanced.essentially_small_fixed_boundary_cocones"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3ea6f2787",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source, Lean declarations, edge cases, docstrings, searches, and report sections. scompile.py sandbox and library compiles succeeded with only expected sorry warning; no defects found."
  }
 }
