@@ -4,13 +4,126 @@
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-small-inner-horn-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The simplicial relative cone $D_0=A\\amalg_{E\\times\\{0\\}}(E\\times\\Delta^1)$ is a small simplicial set, since $A$ and $E$ are small; it is in general not a quasicategory (an edge $a'\\to p(e)$ of $A$ followed by the cylinder edge at $e$ is an inner horn with no filler in $D_0$ unless it lifts to $E$). By [lem-coef-small-inner-horn-completion] applied to $X=D_0$, $D=RD_0$ is a small quasicategory, $D_0\\to D$ is a degreewise monomorphism, and for every quasicategory $\\mathcal E$ in the containing universe restriction $\\operatorname{Fun}(D,\\mathcal E)\\to\\operatorname{Fun}(D_0,\\mathcal E)$ has the right lifting property against all monomorphisms. Taking $\\mathcal E=\\mathcal S^{\\mathrm{op}}$ and opposites, restriction $\\mathcal P(D)\\to\\mathcal P(D_0)$ is a trivial fibration, in particular an equivalence; so the mapping spaces $\\operatorname{Map}_D$ and representables $y_D$ are defined, and conditions (i) and (ii), which by definition are read on the restriction $\\phi|_{D_0}$, are the conditions of [lem-coef-ghn-ind-presheaf-cartesian-realization] for the presheaf $\\phi|_{D_0}$ on the small simplicial set $D_0=E_A^{\\triangleleft}$. That statement treats exactly this simplicial pushout with its coherent cylinder data: restriction along $j$ has fibers described by presheaves $\\Psi$ on $E$ with a coherent transformation $\\Psi\\to p^*X$, the cocartesian-edge condition is its pullback square (i), and the fiber condition is its double-cone condition (ii). All cylinder squares and cones below are simplices of $D_0$ composed into $D$; no ordinary homotopy category is used.",
+   "uses": [
+    "lem-coef-ghn-ind-presheaf-cartesian-realization",
+    "lem-coef-small-inner-horn-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Definition 9.1, Proposition 9.12 and Proposition 9.16: relative cone and presheaf fiber model"
+   }
+  },
+  {
+   "text": "For every small space $Z$, the coherent slice $\\mathcal S_{/Z}$ admits all small limits. Indeed [lem-coef-infinity-yoneda-presheaf-limits] supplies small limits in $\\mathcal S$; take opposites using [lem-coef-infinity-relative-cone-equivalence] and apply [lem-coef-infinity-coslice-colimit-formula] to $\\mathcal S^{\\mathrm{op}}$ and $Z$. Its coslice is $(\\mathcal S_{/Z})^{\\mathrm{op}}$. Explicitly, a diagram $Y:J\\to\\mathcal S$ with a coherent map to the constant $Z$ has slice limit with total space\n$$Z\\times_{\\lim_J\\Delta_J Z}\\lim_JY,$$\nwith the cone legs supplied by that dual formula. This includes $J=\\varnothing$, when both ordinary limits are points and the result is the identity $Z\\to Z$. No claim that the source projection creates disconnected limits is used.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-coslice-colimit-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Dual of the coslice formula; HTT Section 4.4.2 and coherent mapping-space universal properties"
+   }
+  },
+  {
+   "text": "Fix $a$ and put $T_a:E_a^{\\mathrm{op}}\\to\\mathcal S_{/X(a)}$. The domain admits $\\lambda$-small limits, since $E_a$ admits $\\lambda$-small colimits and taking opposites exchanges these notions by [lem-coef-infinity-relative-cone-equivalence]. Its target admits these limits by step 2. Apply [lem-coef-infinity-limits-products-pullbacks] with $\\kappa=\\lambda$, $\\mathcal C=E_a^{\\mathrm{op}}$ and $\\mathcal D=\\mathcal S_{/X(a)}$. Thus (ii) is equivalent to $T_a$ taking every fiber pushout to a slice pullback and every coproduct on fewer than $\\lambda$ summands to a slice product, including the empty product. This uses the bounded theorem, including its $\\lambda=\\aleph_0$ clause; it does not assume that $E_a$ has all small colimits.",
+   "uses": [
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-limits-products-pullbacks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 10.5 proof, reduction of fiber tests to pushouts and bounded coproducts"
+   }
+  },
+  {
+   "text": "For a cocartesian edge $u:e\\to f$ over $\\alpha:a\\to b$, the cylinder gives the coherent square in $D$ with initial vertex $j(a)$, adjacent vertices $j(b),e$, and final vertex $f$. Regard it as a cocone on the span $j(b)\\leftarrow j(a)\\to e$, with apex $f$. Applying $\\phi$ reverses the arrows. The resulting comparison is exactly\n$$\\Psi(f)\\longrightarrow X(b)\\times_{X(a)}\\Psi(e).$$\nIts being an equivalence says exactly that the square in (i), with its specified coherence, is a pullback. These are the first family of tests; they are not asserted to be colimits in $D$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 9.12 pullback-square condition and Proposition 10.5 first family"
+   }
+  },
+  {
+   "text": "Let $\\bar q:K^{\\triangleright}\\to E_a$ be one of the pushout or coproduct cocones of step 3, with apex $c$. Restricting the cylinder gives a coherent cone from $j(a)$ to the whole diagram $\\bar q$ in $D$. By the dual, fixed-apex form of [lem-coef-join-slice-cocone-comparison], using opposites from [lem-coef-infinity-relative-cone-equivalence], realize it as a diagram on $\\Delta^0\\star K\\star\\Delta^0$. Set $B=\\Delta^0\\star K$ and read this as a cocone $r:B^{\\triangleright}\\to D$, with initial added vertex $j(a)$ and final vertex $c$. The comparison theorem is natural under restriction of the indexing shape, so the diagram retains the prescribed fiber cocone and the cylinder compatibility, up to coherent equivalence. The equivalence invariance of limiting cones follows from the mapping-space cone criterion in [lem-cbc-enhanced-functor-cone-calculus]. In particular no literal join inclusion into $D_0$ is required.",
+   "uses": [
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Warning 9.2, Proposition 9.16 double-cone construction; join/comma comparison"
+   }
+  },
+  {
+   "text": "For this cocone, $\\phi r$ has apex $\\Psi(c)$ and base the diagram on $(K^{\\triangleleft})^{\\mathrm{op}}$ consisting of $\\Psi(q(k))\\to X(a)$. The double-cone/slice equivalence stated in [lem-coef-ghn-ind-presheaf-cartesian-realization] says precisely that this cone is limiting if and only if $T_a$ takes $\\bar q$ to a limit cone in the slice. Apply that equivalence to the restriction of $\\phi$ to the simplicial cylinder $D_0$; step 5 realizes its same coherent cone in $D$. For a discrete set $I$ the comparison is the product of the arrows $\\Psi(q(i))\\to X(a)$ in that slice, hence the limit of their common-base star. For $I=\\varnothing$ the base of $r$ is just $j(a)$ and the comparison is $\\Psi(0_a)\\to X(a)$. For the pushout span the comparison is the corresponding slice pullback. Together with step 3, the second family of tests is therefore equivalent to all of (ii), not just to its finite subfamily.",
+   "uses": [
+    "lem-coef-ghn-ind-presheaf-cartesian-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 9.16 coherent double-cone condition, and Proposition 10.5 fiber tests"
+   }
+  },
+  {
+   "text": "There is a small set of these cocones. The cocartesian edges form a subset of the small set $E_1$, and each supplies a fixed finite square. For coproducts take the discrete ordinal shapes $I=\\mu$ with $\\mu<\\lambda$ a cardinal, including $0$; these shapes form a small set because $\\lambda$ belongs to the smaller universe. For each $a$ and each such $I$, all maps $I^{\\triangleright}\\to E_a$ form a small set of simplicial maps; keep the colimiting ones. Do the same for the single finite pushout-span shape. Union over $a\\in A_0$ is still small. Adjoining the two cone vertices leaves every test shape small (indeed $\\lambda$-small). All realizations of each fixed shape in the small $D$ form a small set; choose representatives realizing the cylinder data of step 5. Relabeling any fewer-than-$\\lambda$ index set by its cardinal gives an isomorphic discrete shape, and coherent equivalence of test cones preserves the limit predicate by [lem-cbc-enhanced-functor-cone-calculus]. Thus these representatives test every required cocone. Only universe closure under small unions, products and subsets and the definition of $\\lambda$-smallness are used for the size count.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 10.5 proof, set-sized selection of cocartesian, pushout and coproduct tests"
+   }
+  },
+  {
+   "text": "For every chosen $r$, apply [lem-coef-infinity-presheaf-colimit-locality] with $C=D$, $K=B_r$, the coherent cocone $r$, and $X=\\phi$. Its hypotheses hold: $D$ is a small quasicategory by step 1 and $B_r$ is small by step 7. It gives the presheaf colimit and identifies precomposition with the actual map $s_r$ as\n$$\\phi(r(\\infty))\\longrightarrow\\lim_{b\\in B_r^{\\mathrm{op}}}\\phi(r(b)),$$\nincluding its cone legs and higher coherences. Consequently locality for this $s_r$ is exactly the limit test in steps 4 and 6. The image of the small set of cocones under $r\\mapsto s_r$ is a small set $S_0$. Steps 3, 4 and 6 show, in both directions, that its local objects are exactly the presheaves satisfying (i) and (ii).",
+   "uses": [
+    "lem-coef-infinity-presheaf-colimit-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Lemma 10.6 proof, representable locality maps; Proposition 10.5 conclusion about the test family"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-ghn-ind-presheaf-cartesian-realization",
+  "lem-coef-infinity-coslice-colimit-formula",
+  "lem-coef-infinity-limits-products-pullbacks",
+  "lem-coef-infinity-presheaf-colimit-locality",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-join-slice-cocone-comparison",
+  "lem-coef-small-inner-horn-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1501.02161v3",
+  "place": "Proposition 10.5 proof and Lemma 10.6, expanded using the existing bounded-limit, slice, completion and coherent-cone lemmas; sources read online, archival copies unavailable."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-ind-presheaf-fibration-accessibility",
@@ -20,7 +133,7 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "title": "Small locality generators for the relative Ind presheaf conditions",
- "statement": "Use universes, infinite regular cardinals and $\\lambda$-smallness from [def-coef-presentable-infinity-category], coherent functors, spaces and limits from [def-cbc-enhanced-diagrams-cones], and cocartesian fibrations from [def-coef-infinity-fibrations]. Fix an infinite regular cardinal $\\lambda$ in the smaller universe. Let $A$ be a small infinity category and $F_0:A\\to\\operatorname{Cat}^{\\mathrm{rex}(\\lambda)}_\\infty$ a coherent functor, where the target has small infinity categories admitting $\\lambda$-small colimits as objects and functors preserving those colimits as arrows. Let $p:E\\to A$ be its small cocartesian fibration, put $E_a=p^{-1}(a)$, and form the relative cone $D=A\\amalg_{E\\times\\{0\\}}(E\\times\\Delta^1)$, with inclusions $j:A\\to D$ and $E\\times\\{1\\}\\to D$. Write $-\\infty_a=j(a)$ and $\\mathcal P(D)=\\operatorname{Fun}(D^{\\mathrm{op}},\\mathcal S)$, with $\\mathcal S$ the infinity category of small spaces and $y_D(d)=\\operatorname{Map}_D(-,d)$.\nFor $\\phi\\in\\mathcal P(D)$ put $X=j^*\\phi$ and $\\Psi=\\phi|_{E\\times\\{1\\}}$. Its cylinder data define a coherent transformation $\\Psi\\to p^*X$. Consider the following two conditions: (i) for every cocartesian edge $e\\to\\alpha_!e$ above $\\alpha:a\\to b$, the induced square with rows $\\Psi(\\alpha_!e)\\to\\Psi(e)$ and $X(b)\\to X(a)$ is a pullback of spaces; (ii) the induced functor $E_a^{\\mathrm{op}}\\to\\mathcal S_{/X(a)}$ sends every $\\lambda$-small colimit cocone of $E_a$ to a limit cone in the coherent slice, for every $a$.\nThere is a small set of coherent cocones $r:B_r^{\\triangleright}\\to D$, indexed by representatives of the squares in (i) and the fiber pushout and less-than-$\\lambda$-indexed coproduct tests in (ii), with the common cone point included for the slice tests, such that the maps\n$$s_r:\\operatorname{colim}_{b\\in B_r}y_D(r(b))\\longrightarrow y_D(r(\\infty))$$\nform a small set $S_0$ whose local objects are exactly the presheaves satisfying (i) and (ii). Here $S_0$-local means that precomposition $\\operatorname{Map}(y_D(r(\\infty)),\\phi)\\to\\operatorname{Map}(\\operatorname{colim}_{b\\in B_r}y_D(r(b)),\\phi)$ is an equivalence for every $r$. Empty coproducts are included, so (ii) requires $\\Psi(0_a)\\to X(a)$ to be an equivalence for an initial object $0_a$ of $E_a$. All test diagrams and colimits are small relative to the smaller universe; the presheaf category is formed in a containing universe.",
+ "statement": "Use universes, infinite regular cardinals and $\\lambda$-smallness from [def-coef-presentable-infinity-category], coherent functors, spaces and limits from [def-cbc-enhanced-diagrams-cones], and cocartesian fibrations from [def-coef-infinity-fibrations]. Fix an infinite regular cardinal $\\lambda$ in the smaller universe. Let $A$ be a small infinity category and $F_0:A\\to\\operatorname{Cat}^{\\mathrm{rex}(\\lambda)}_\\infty$ a coherent functor, where the target has small infinity categories admitting $\\lambda$-small colimits as objects and functors preserving those colimits as arrows. Let $p:E\\to A$ be its small cocartesian fibration, put $E_a=p^{-1}(a)$, and form the small simplicial relative cone $D_0=A\\amalg_{E\\times\\{0\\}}(E\\times\\Delta^1)$. Put $D=R D_0$, the small quasicategorical completion constructed in [lem-coef-small-inner-horn-completion], and use the composite maps from the cylinder into $D$, with inclusions $j:A\\to D$ and $E\\times\\{1\\}\\to D$. Write $-\\infty_a=j(a)$ and $\\mathcal P(D)=\\operatorname{Fun}(D^{\\mathrm{op}},\\mathcal S)$, with $\\mathcal S$ the infinity category of small spaces and $y_D(d)=\\operatorname{Map}_D(-,d)$.\nFor $\\phi\\in\\mathcal P(D)$ put $X=j^*\\phi$ and $\\Psi=\\phi|_{E\\times\\{1\\}}$. Its cylinder data define a coherent transformation $\\Psi\\to p^*X$. Consider the following two conditions: (i) for every cocartesian edge $e\\to\\alpha_!e$ above $\\alpha:a\\to b$, the induced square with rows $\\Psi(\\alpha_!e)\\to\\Psi(e)$ and $X(b)\\to X(a)$ is a pullback of spaces; (ii) the induced functor $E_a^{\\mathrm{op}}\\to\\mathcal S_{/X(a)}$ sends every $\\lambda$-small colimit cocone of $E_a$ to a limit cone in the coherent slice, for every $a$.\nThere is a small set of coherent cocones $r:B_r^{\\triangleright}\\to D$, indexed by representatives of the squares in (i) and the fiber pushout and less-than-$\\lambda$-indexed coproduct tests in (ii), with the common cone point included for the slice tests, such that the maps\n$$s_r:\\operatorname{colim}_{b\\in B_r}y_D(r(b))\\longrightarrow y_D(r(\\infty))$$\nform a small set $S_0$ whose local objects are exactly the presheaves satisfying (i) and (ii). Here $S_0$-local means that precomposition $\\operatorname{Map}(y_D(r(\\infty)),\\phi)\\to\\operatorname{Map}(\\operatorname{colim}_{b\\in B_r}y_D(r(b)),\\phi)$ is an equivalence for every $r$. Empty coproducts are included, so (ii) requires $\\Psi(0_a)\\to X(a)$ to be an equivalence for an initial object $0_a$ of $E_a$. All test diagrams and colimits are small relative to the smaller universe; the presheaf category is formed in a containing universe. The completion is included because the simplicial mapping-cylinder pushout need not itself be a quasicategory; all representables and test cocones here are taken in $D$, while the cylinder data are their restrictions along $D_0\\to D$.",
  "source": {
   "document": "https://arxiv.org/html/1501.02161v3",
   "place": "Proposition 10.5 proof, the small family of cocartesian-edge and fiber pushout/coproduct tests; Lemma 10.6 proof, the displayed representable locality maps; Definition 9.15 and Proposition 9.16, relative slice interpretation. Read online 2026-10-17; archival copy WANTED. No Stacks tag states this quasicategorical result."
@@ -74,14 +187,55 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Presheaf.isLimit_iff_isSheafFor_presieve\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheaf\", \"type\": \": Nonempty (IsLimit (P.mapCone (generate R).arrows.cocone.op)) ↔ ∀ E : Aᵒᵖ, IsSheafFor (P ⋙ coyoneda.obj E) R\", \"doc\": \"For a presheaf $ P $ and a presieve $ R $ on an object $ X $, the non-emptiness of the limit of the cocone constructed from the generated sieve $ \\\\text{generate}(R) $ is equivalent to $ P $ satisfying\"}\n  {\"name\": \"CategoryTheory.Presheaf.isLimit_iff_isSheafFor\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheaf\", \"type\": \": Nonempty (IsLimit (P.mapCone S.arrows.cocone.op)) ↔ ∀ E : Aᵒᵖ, IsSheafFor (P ⋙ coyoneda.obj E) S.arrows\", \"doc\": \"The existence of a limit of the cocone obtained by mapping the cocone associated to $ S.\\text{arrows} $ through $ P $ is equivalent to the condition that for every object $ E $ in the opposite category\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_iff_isLimit\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheaf\", \"type\": \": IsSheaf J P ↔ ∀ ⦃X : C⦄ (S : Sieve X), S ∈ J X → Nonempty (IsLimit (P.mapCone S.arrows.cocone.op))\", \"doc\": \"A presheaf $ P $ on a category $ \\\\mathcal{C} $ is a sheaf with respect to a Grothendieck topology $ J $ if and only if, for every object $ X $ in $ \\\\mathcal{C} $ and every covering sieve $ S $ on $ X \"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_iff_isLimit_pretopology\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheaf\", \"type\": \"[HasPullbacks C] (K : Pretopology C) :\\n  IsSheaf K.toGrothendieck P ↔\\n    ∀ ⦃X : C⦄ (R : Presieve X), R ∈ K X → Nonempty (IsLimit (P.mapCone (generate R).arrows.cocone.op))\", \"doc\": \"A presheaf $ P $ is a sheaf with respect to the Grothendieck topology generated by a pretopology $ K $ if and only if, for every object $ X $ in the category and every covering presieve $ R $ on $ X $\"}\n  {\"name\": \"TopCat.Presheaf.IsSheafPreservesLimitPairwiseIntersections\", \"module\": \"Mathlib.Topology.Sheaves.SheafCondition.PairwiseIntersections\", \"type\": \"(F : Presheaf C X) : Prop\", \"doc\": \"A presheaf $ F $ satisfies the sheaf condition if, for every family of open subsets $ U_i $ of a topological space $ X $, the presheaf $ F $ preserves the limit of the diagram constructed from the pai\"}\n  {\"name\": \"PresheafOfModules.limitPresheafOfModules_map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {J : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} J] (F : CategoryTheory.Functor J (PresheafOfModules R))\\n  [inst_2 :\\n    ∀ (X : Cᵒᵖ),\\n      Small.{v, max u₂ v}\\n        ↑((F.comp (PresheafOf\", \"doc\": \"For a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $ and a diagram $ F : \\\\mathcal{J} \\\\to \\\\text{PresheafOfModules}(R) $, the morphism component of the limit presheaf $ \\\\lim F $ induced by a morp\"}\n  {\"name\": \"TopCat.instHasLimitsOfShapePresheaf\", \"module\": \"Mathlib.Topology.Sheaves.Limits\", \"type\": \"[HasLimitsOfShape J C] (X : TopCat.{t}) : HasLimitsOfShape J (Presheaf C X)\", \"doc\": \"For any topological space $X$ and category $\\\\mathcal{C}$, if $\\\\mathcal{C}$ has all limits of shape $J$, then the category of presheaves on $X$ with values in $\\\\mathcal{C}$ also has all limits of shape\"}\n  {\"name\": \"TopCat.Presheaf.isLimitOpensLeEquivGenerate₂\", \"module\": \"Mathlib.Topology.Sheaves.SheafCondition.OpensLeCover\", \"type\": \"(R : Presieve Y) (hR : Sieve.generate R ∈ Opens.grothendieckTopology X Y) :\\n  IsLimit (F.mapCone (opensLeCoverCocone (coveringOfPresieve Y R)).op) ≃\\n    IsLimit (F.mapCone (Sieve.generate R).arrows.cocone.op)\", \"doc\": \"Given a presieve $ R $ on an open set $ Y $ in a topological space $ X $, if the sieve generated by $ R $ belongs to the Grothendieck topology of $ X $, then the condition that a presheaf $ F $ satisf\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: read the returned types and Mathlib/CategoryTheory/ObjectProperty/Local.lean:32-52. These use an ordinary Category and Hom-set bijections; Sites/Sheaf statements concern ordinary categories and sieves. None supplies the coherent relative-cone test family, its smallness, or the space-valued slice condition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "small locality generators for space valued presheaves on an infinity category relative cone",
+   "date": "2026-10-17",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"CategoryTheory.PresheafIsGeneratedBy\", \"TopCat.Presheaf.whiskerIsoMapGenerateCocone\", \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"TopCat.Presheaf.isLimitOpensLeEquivGenerate₂\", \"CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall\", \"CategoryTheory.Presheaf.conesEquivSieveCompatibleFamily\", \"CategoryTheory.Presheaf.isLimit_iff_isSheafFor_presieve\", \"CategoryTheory.Presieve.FamilyOfElements.SieveCompatible.cone\"], \"note\": \"\"}",
+   "verdict": "no match: returned declarations concern ordinary categories, Type-valued presheaves, Hom-set locality, or presheafed topological spaces; they do not state the coherent space-valued relative-cone test-family assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.isLocal",
+   "date": "2026-10-17",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"top\": [\"CategoryTheory.MorphismProperty.isLocal\", \"CategoryTheory.MorphismProperty.instIsClosedUnderIsomorphismsIsLocal\", \"CategoryTheory.MorphismProperty.instIsClosedUnderLimitsOfShapeIsLocal\", \"CategoryTheory.MorphismProperty.isLocal_single_iff_bijective\", \"CategoryTheory.MorphismProperty.isLocal_iff\", \"CategoryTheory.MorphismProperty.isLocal_iSup\", \"CategoryTheory.MorphismProperty.isLocal_antitone\", \"CategoryTheory.ObjectProperty.le_isLocal_isLocal\"], \"note\": \"\"}",
+   "verdict": "no match: returned declarations concern ordinary categories, Type-valued presheaves, Hom-set locality, or presheafed topological spaces; they do not state the coherent space-valued relative-cone test-family assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocal|YonedaSheafCondition",
+   "date": "2026-10-17",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean\", \"Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean\", \"Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean\"], \"note\": \"\"}",
+   "verdict": "no match: returned declarations concern ordinary categories, Type-valued presheaves, Hom-set locality, or presheafed topological spaces; they do not state the coherent space-valued relative-cone test-family assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "space valued infinity presheaf small set of localization maps colimit cones",
+   "date": "2026-10-17",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"AlgebraicGeometry.PresheafedSpace.colimitCoconeIsColimit\", \"AlgebraicGeometry.PresheafedSpace.colimit\", \"AlgebraicGeometry.PresheafedSpace.ColimitCoconeIsColimit.descCApp\", \"AlgebraicGeometry.PresheafedSpace.colimitCocone\", \"AlgebraicGeometry.PresheafedSpace.colimitCocone_ι_app_c\", \"AlgebraicGeometry.PresheafedSpace.ColimitCoconeIsColimit.desc_c_naturality\", \"AlgebraicGeometry.PresheafedSpace.colimitCocone_pt\", \"PresheafOfModules.hasColimit\"], \"note\": \"\"}",
+   "verdict": "no match: returned declarations concern ordinary categories, Type-valued presheaves, Hom-set locality, or presheafed topological spaces; they do not state the coherent space-valued relative-cone test-family assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "infinity categorical Yoneda localization relative fiber colimits to limits in a slice category",
+   "date": "2026-10-17",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"CategoryTheory.Limits.fiberwiseColimitLimitIso\", \"CategoryTheory.Limits.fiberwiseColimitLimitIso_hom_app\", \"CategoryTheory.CostructuredArrow.toOverCompYonedaColimit\", \"CategoryTheory.Limits.colimitYonedaHomIsoLimit\", \"CategoryTheory.Limits.colimitYonedaHomIsoLimit'\", \"CategoryTheory.Limits.PreservesFiniteLimitsOfIsFilteredCostructuredArrowYonedaAux.iso\", \"CategoryTheory.Limits.colimitHomIsoLimitYoneda_hom_comp_π_assoc\", \"CategoryTheory.Limits.colimitHomIsoLimitYoneda'_inv_comp_π_assoc\"], \"note\": \"\"}",
+   "verdict": "no match: returned declarations concern ordinary categories, Type-valued presheaves, Hom-set locality, or presheafed topological spaces; they do not state the coherent space-valued relative-cone test-family assertion."
   }
  ],
  "split_report": {
   "date": "2026-10-17",
-  "item": "lem-coef-ind-presheaf-fibration-accessibility",
+  "item": "lem-coef-ind-presheaf-small-locality-generators",
   "worker": "stage1",
-  "summary": "Statement-only lemma extracted from returned step 4: small coherent test family and its exact representable-locality characterization, without the extension or accessibility conclusion.",
-  "blueprint": "Proposition 10.5 proof, Corollary 9.17 and Lemma 10.6"
+  "summary": "Constructed the two small families explicitly, reduced fibre colimits using the existing bounded product/pullback criterion, and used the existing representable locality theorem. No new nodes. The raw relative-cone simplicial pushout is used in the same coherent model as the cited GHN relative-cone and presheaf-fibre theorem; no extra completion was introduced. Empty coproducts and the lambda=aleph_0 case were checked. Maintainer-reader repair: the delivered statement replaces the raw relative cone by its small inner-horn completion D=RD_0 (needed for Map_D and the locality lemma, which require a quasicategory); step 1 now cites lem-coef-small-inner-horn-completion for this and for the equivalence P(D)->P(D_0), and the node is added to stmt_deps and proof_deps.",
+  "blueprint": "Ancestral integral-exceptional-adjoint proof paragraph 2; enhanced coefficient-category foundations; auxiliary realizes the small-locality-family subclaim extracted from GHN Proposition 10.5 and Lemma 10.6.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent cone/mapping-space calculus used for the stated locality tests; no geometric step or coefficient transport of the unit is replaced."
+   }
+  ]
  },
  "blueprint": {
   "from": {
@@ -101,5 +255,16 @@
   },
   "same_as": [],
   "is": null
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-7e82547fe",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-7e82547fe (reviewer sub-agent of L); spot-checked: Read in full: the item; the parent lem-coef-ind-presheaf-fibration-accessibility; every cited node statement; GHN arXiv:1501.02161v3 Props 9.16 and 10.5 and Lemma 10.6 (online HTML; not in literature/, WANTED still outstanding). GHN Prop 10.5 tests cocartesian edges plus pushouts and κ-small coproducts in the fibres; Lemma 10.6 uses locality for colim(y∘p|K)→y(∞) on a small ∞-category. The item follows this route. Fault (E7/C4): the delivery changed the statement from the raw relative cone to D=R D_0 citing lem-coef-small-inner-horn-completion, but that node was missing from stmt_deps and proof_deps. Step 1 also claimed no completion was made, step 8 relied on 'D quasicategory by step 1' without support, and the report falsely says the statement is unchanged. The change itself is correct and is not a weakening: the raw D_0 is not a quasicategory in general (a'→p(e) followed by the cylinder edge is an unfillable inner horn when the edge does not lift to E), so Map_D and the locality lemma need the completion; P(RD_0)→P(D_0) is a trivial fibration by the completion lemma with S^op. Repaired in fixes/: added the completion lemma to stmt_deps and proof_deps and rewrote step 1 to cite it for D being a small quasicategory and the equivalence P(D)≃P(D_0), with (i) and (ii) read on φ|D_0 as in the GHN realization node; statement kept as delivered. No cycle (the lemma's closure excludes the item); same unit. Steps 2-8 checked: the slice-limit formula Z×_{lim ΔZ} lim Y including J=∅; the bounded products-pullbacks criterion with κ=λ including ℵ0 and the empty product; the prism square in step 4 giving X(b)×_{X(a)}Ψ(e); the fat-join cone with B^op=(K^op)^▷; the discrete, empty and span comparisons; the size count; the colimit-locality hypotheses. No new nodes, no duplicates. Accepted tool_use lem-cbc-enhanced-functor-cone-calculus. Maintainer note: parent step 6 uses S_0 in P of the raw cone and must pass through P(RD_0)≃P(D_0) (item step 1) when next touched.; 1 file(s) fixed by the reviewer"
  }
 }

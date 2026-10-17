@@ -1,6 +1,6 @@
 {
  "kind": "statement",
- "status": "unsplit",
+ "status": "split",
  "mathlib_match": null,
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
@@ -14,15 +14,65 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
   "place": "Paragraph 2 (finite derived adjunction calculation); auxiliary exhaustive-filtration induction supplied by the worker for the semi-free unit argument of lem-coef-dg-module-base-change. Compare Toën, arXiv math/0408337, Section 3, proof of Proposition 3.2 (absent locally); not a verbatim statement there."
  },
- "proof": [],
- "proof_deps": [],
- "stmt_deps": [
-  "lem-coef-dgcat-model-structure"
+ "proof": [
+  {
+   "text": "For every $i$, the inclusions of subcomplexes give quotient complexes $P_{i+1}/P_i$ and $Q_{i+1}/Q_i$. Because each inclusion is split on the underlying graded abelian groups, the rows $0\\to P_i\\to P_{i+1}\\to P_{i+1}/P_i\\to0$ and $0\\to Q_i\\to Q_{i+1}\\to Q_{i+1}/Q_i\\to0$ are degreewise split exact. The condition $f(P_i)\\subseteq Q_i$ makes $f$ a morphism between these short exact rows, with third component the induced quotient map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "agent-written auxiliary to lem-coef-dg-module-base-change steps 6 and 10 (blueprint ancestor proof paragraph 2 has no explicit filtration argument): short exact filtration rows"
+   }
+  },
+  {
+   "text": "Apply the long exact cohomology sequence and its naturality to the two rows from Step 1. For each cohomological degree $n$, use the five consecutive terms $H^{n-1}(P_{i+1}/P_i)\\to H^n(P_i)\\to H^n(P_{i+1})\\to H^n(P_{i+1}/P_i)\\to H^{n+1}(P_i)$ and the corresponding $Q$ terms. The quotient map is a quasi-isomorphism by hypothesis. Starting with $P_0=Q_0=0$, induction on $i$ and the five lemma show that $H^n(P_i)\\to H^n(Q_i)$ is an isomorphism for every $i,n$: the four arrows surrounding the middle one are isomorphisms by the induction hypothesis and the quotient quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "agent-written auxiliary to lem-coef-dg-module-base-change steps 6 and 10: induction over finite stages by the long exact sequence and five lemma"
+   }
+  },
+  {
+   "text": "The unions are directed unions of subgroups in every degree. Therefore cycles and boundaries satisfy $Z^n(P)=\\bigcup_i Z^n(P_i)$ and $B^n(P)=\\bigcup_i B^n(P_i)$, and similarly for $Q$: a cycle or a boundary witness involves finitely many elements and hence lies in one stage. It follows directly that $\\varinjlim_i H^n(P_i)\\to H^n(P)$ and $\\varinjlim_i H^n(Q_i)\\to H^n(Q)$ are bijections: representatives, equalities, and a null-homology witness can all be moved to a common later stage. The isomorphisms from Step 2 thus induce an isomorphism $H^n(f):H^n(P)\\to H^n(Q)$ for every $n$, so $f$ is a quasi-isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "agent-written auxiliary to lem-coef-dg-module-base-change steps 6 and 10: passage from finite stages to the exhaustive union"
+   }
+  },
+  {
+   "text": "For dg modules, evaluate the filtrations and the map at each object of the small dg category. The hypotheses remain exactly those of the complex argument: the evaluated filtrations are exhaustive, graded-split filtrations by subcomplexes compatible with the evaluated map, and each quotient map is a quasi-isomorphism. Steps 1–3 therefore give a quasi-isomorphism at every object, which is precisely an objectwise quasi-isomorphism of dg modules.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "agent-written auxiliary to lem-coef-dg-module-base-change step 6: objectwise application to dg modules"
+   }
+  }
  ],
- "proof_origin": null,
+ "proof_deps": [
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-five-lemma"
+ ],
+ "stmt_deps": [
+  "lem-coef-dgcat-model-structure",
+  "lem-coef-dg-module-semi-free-replacement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, exhaustive-filtration induction showing the semi-free unit is a quasi-isomorphism"
+ },
  "id": "lem-coef-dg-filtered-quasi-iso",
  "title": "Quasi-isomorphism from exhaustive filtered graded pieces",
- "statement": "Use the cochain-complex and quasi-isomorphism conventions of [lem-coef-dgcat-model-structure]. Let $f:P\\to Q$ be a chain map of cochain complexes of abelian groups, and let $0=P_0\\subset P_1\\subset\\cdots$ and $0=Q_0\\subset Q_1\\subset\\cdots$ be increasing sequences of subcomplexes with $f(P_i)\\subseteq Q_i$ for every $i$, each inclusion split on the underlying graded abelian groups, and with $P=\\bigcup_iP_i$ and $Q=\\bigcup_iQ_i$. If every induced map on successive quotient complexes $P_{i+1}/P_i\\to Q_{i+1}/Q_i$ is a quasi-isomorphism, then $f$ is a quasi-isomorphism. Consequently, for a map of dg modules over a small dg category with such filtrations by dg submodules at every object, whose quotient maps are objectwise quasi-isomorphisms, the map is an objectwise quasi-isomorphism.",
+ "statement": "Use the cochain-complex and quasi-isomorphism conventions of [lem-coef-dgcat-model-structure]. Let $f:P\\to Q$ be a chain map of cochain complexes of abelian groups, and let $0=P_0\\subset P_1\\subset\\cdots$ and $0=Q_0\\subset Q_1\\subset\\cdots$ be increasing sequences of subcomplexes with $f(P_i)\\subseteq Q_i$ for every $i$, each inclusion split on the underlying graded abelian groups, and with $P=\\bigcup_iP_i$ and $Q=\\bigcup_iQ_i$. If every induced map on successive quotient complexes $P_{i+1}/P_i\\to Q_{i+1}/Q_i$ is a quasi-isomorphism, then $f$ is a quasi-isomorphism. Consequently, use right dg modules over a small dg category, dg submodules and objectwise quasi-isomorphisms as in [lem-coef-dg-module-semi-free-replacement] (covariant dg modules over $\\mathcal C$ being right dg modules over $\\mathcal C^{\\mathrm{op}}$): for a map $f:P\\to Q$ of such dg modules with increasing filtrations by dg submodules $0=P_0\\subset P_1\\subset\\cdots$, $0=Q_0\\subset Q_1\\subset\\cdots$ satisfying, at every object, all the hypotheses above (compatibility with $f$, graded splitting, exhaustiveness), and whose successive quotient maps are objectwise quasi-isomorphisms, $f$ is an objectwise quasi-isomorphism.",
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,5 +125,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dg-filtered-quasi-iso",
+  "worker": "stage1",
+  "summary": "Split the exhaustive filtered quasi-isomorphism criterion into the successive-quotient induction, the passage from directed unions to cohomology, and the objectwise dg-module consequence. No new nodes were needed; existing long-exact, naturality, and five-lemma leaves supply the non-elementary homological steps.",
+  "blueprint": "Realizes proof paragraph 2 of prop-coef-integral-exceptional-adjoint, specifically the exhaustive-filtration induction used for the semi-free unit argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "The induction uses the long exact cohomology sequence of each degreewise short exact filtration row; this generic homological tool is not supplied by the dg-category unit."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "why": "The comparison of the P and Q filtration rows requires naturality of connecting maps; no same-unit node states this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-five-lemma",
+    "why": "The middle cohomology map in each five-term comparison is obtained from the abelian-category five lemma; no same-unit node supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-five-lemma"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NB-2603b6833",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-2603b6833 (reviewer sub-agent of L); spot-checked: The mathematics is correct and I read all of it. The complex statement is true; I tested the all-zero source filtration (P=0, the case base-change step 10 uses), a single-stage filtration, and a filtration with all stages 0 under Q=Z[0], which shows exhaustiveness is needed. The splitting hypothesis is redundant but harmless. Step 2 is a properly set up induction from P_0=Q_0=0 over 5-term rows. It uses the Mathlib leaves lem-weil-pbc-complex-ses-homology-long-exact (homology_exact), lem-weil-pbc-complex-ses-long-exact-naturality (δ_naturality) and lem-weil-pbc-five-lemma, and each says what the step takes from it. Step 3 (Z^n and B^n of a directed union are the unions, so cohomology commutes with the union) and step 4 (evaluation at each object) are genuinely elementary. The statement matches its only citer, lem-coef-dg-module-base-change, at steps 6 and 10. I searched the whole DAG and found no duplicate: lem-sp-degreewise-filtered-acyclic, lem-pc-complex-hocolim-colimit, the lem-trf/lem-kun finite-filtration nodes and lem-coef-dg-semi-free-homotopically-projective all state different things. There are no new nodes. The three tool_uses cite Mathlib leaves and I accept them; no SGA is used. Fix 1 (B3): the dg-module clause used dg modules, dg submodules and objectwise quasi-isomorphisms without a defining node. It now cites lem-coef-dg-module-semi-free-replacement (same unit, no cycle; that node is added to stmt_deps), takes covariant modules over C as right modules over C^op, and spells out that the filtration hypotheses hold at every object; step 4's wording is aligned. Fix 2: the step source places claimed an 'exhaustive-filtration induction' in proof paragraph 2 of prop-coef-integral-exceptional-adjoint, but that paragraph is the derived-limit adjunction calculation and has no filtration argument. The places now name the steps as an agent-written auxiliary to base-change steps 6 and 10. Separately, the report mentions a citations.json that is not in the delivery; this is harmless.; 1 file(s) fixed by the reviewer"
  }
 }

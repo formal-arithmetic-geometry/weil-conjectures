@@ -10,9 +10,71 @@
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $i\\leq j$, the legs $\\lambda_{j,c}:F(c)\\to L_j$ for $c\\in C_i$ form a cocone on $F|_{C_i}$, because $C_i$ is full and $C_i\\subseteq C_j$. The universal property of the chosen colimit $L_i$ therefore gives a unique $u_{ij}:L_i\\to L_j$ with $u_{ij}\\lambda_{i,c}=\\lambda_{j,c}$. Comparing composites with all $\\lambda_{i,c}$ proves $u_{ii}=1$ and $u_{jk}u_{ij}=u_{ik}$ whenever $i\\leq j\\leq k$, so these maps form an $I$-diagram. The same universal property gives the unique $v_i:L_i\\to L$ with $v_i\\lambda_{i,c}=\\lambda_c$, and comparison on the same legs gives $v_ju_{ij}=v_i$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Definition 002F (label definition-colimit), universal property; directed-cover argument supplied here."
+   }
+  },
+  {
+   "text": "Given a compatible family of maps $f_i:L_i\\to H$ with $f_ju_{ij}=f_i$, define a map $g_c:F(c)\\to H$ by choosing $i$ with $c\\in C_i$ and setting $g_c=f_i\\lambda_{i,c}$. This is independent of the choice: for two such indices, choose an upper bound $k$; then both expressions equal $f_k\\lambda_{k,c}$ by compatibility and the definition of $u$. If $a:c\\to d$ is a morphism of $C$, choose one index containing $c$ and $d$; the finite-upper-bound hypothesis supplies it, and fullness puts $a$ in that $C_k$. The cocone equation for $\\lambda_{k,-}$ then gives $g_dF(a)=g_c$. Thus $(g_c)$ is a cocone on $F$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Definition 002F (label definition-colimit), universal property; directed-cover argument supplied here."
+   }
+  },
+  {
+   "text": "Conversely, let $(g_c:F(c)\\to H)$ be a cocone on $F$. For each $i$, its restriction to $C_i$ is a cocone on $F|_{C_i}$, so the colimit property gives a unique $f_i:L_i\\to H$ satisfying $f_i\\lambda_{i,c}=g_c$. For $i\\leq j$, the composites $f_ju_{ij}$ and $f_i$ agree after every leg $\\lambda_{i,c}$, hence are equal by uniqueness. These two constructions are inverse: starting with $(f_i)$ recovers each $f_i$ by uniqueness on the legs, and starting with $(g_c)$ recovers every $g_c$ by choosing an index containing $c$. Therefore compatible families $(f_i)$ are in bijection with cocones on $F$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Definition 002F (label definition-colimit), universal property; directed-cover argument supplied here."
+   }
+  },
+  {
+   "text": "The preceding bijection is natural in $H$. By the colimit universal property for the $I$-diagram $i\\mapsto L_i$, compatible families of maps $f_i:L_i\\to H$ are exactly maps from its colimit to $H$. Under the bijection, this family maps to the cocone $(g_c)$, and the corresponding arrow has composites $v_i$ on the $L_i$-legs because $v_i\\lambda_{i,c}=\\lambda_c$. Hence $(L,(v_i))$ itself satisfies the universal property of a colimit of the $I$-diagram. The canonical comparison from a chosen $\\operatorname{colim}_{i\\in I}L_i$ to $L$ is consequently an isomorphism, uniquely characterized by those legs.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Definition 002F (label definition-colimit), universal property; directed-cover argument supplied here."
+   }
+  },
+  {
+   "text": "If $C$ is empty, every $C_i$ is empty and the same argument says that all relevant colimit cocones are initial and the unique-family bijection is the singleton bijection. If some $C_i$ is empty, its colimit is likewise initial, but the constructions above use only the universal property and remain unchanged. Thus the stated empty cases require no extra hypothesis.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Definition 002F (label definition-colimit), universal property; directed-cover argument supplied here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Agent-written universal-property argument. The blueprint proof has no numbered steps; the argument serves its paragraph beginning 'For $K\\in D^b_c(X,R)$, use the reduction of integral compact supports ... and derived coefficient adjunction', through the via chain of blueprint.from, and expands the former Step 12 of the DAG node lem-coef-cellular-tree-presentable-approximations (colimit of the original restrictions on increasing supports is the original colimit on their union, with specified cocone legs) into the ordinary-category argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,7 +113,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cellular-tree-presentable-approximations",
@@ -82,5 +144,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-ordinary-directed-cover-colimit",
+  "worker": "stage1",
+  "summary": "Expanded the imported ordinary directed-cover colimit assertion into five complete universal-property steps. The existing colimit definition node supplies every non-elementary categorical fact; no duplicate or new lemma node is needed. The proof explicitly constructs transition and cocone maps, glues compatible families using finite upper bounds and fullness, proves the converse bijection, identifies the total colimit and comparison isomorphism, and checks empty cases.",
+  "blueprint": "The blueprint proof of prop-coef-integral-exceptional-adjoint has no numbered steps; Steps 1-5 serve its paragraph beginning 'For $K\\in D^b_c(X,R)$, use the reduction of integral compact supports ... and derived coefficient adjunction' through the via chain recorded in blueprint.from. Directly they realize the former Step 12 of the DAG node lem-coef-cellular-tree-presentable-approximations (now its Step 12): the colimit of the restrictions on increasing supports is the colimit on their union, with the prescribed cocone legs."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NY-a3be1f114",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-a3be1f114 (reviewer sub-agent of L); spot-checked: Read the item and all 5 steps in full. Read the cited def-weil-pbc-category-colimit (Mathlib leaf CategoryTheory.Limits.colimit) and Stacks categories.tex 1310-1329 (002F definition-colimit; the empty colimit is initial at 1332). Read the citer lem-coef-cellular-tree-presentable-approximations Steps 2 and 10-12: Q is a nonempty filtered subposet and the S_q^◁ are increasing, covering, full subposets, so the hypotheses match. The statement is unchanged against the side and live DAGs, and live is still unsplit. Only proof, proof_deps, proof_origin, status and split_report changed; proof_deps equals the union of uses. There are no new nodes, no cycle and no SGA citation. The only citation is a definition/Mathlib leaf, so no tool_use is needed. Math: Step 1 gets u_ij and v_i and their functoriality from uniqueness. Step 2 shows the choice of index does not matter and that the cocone equation holds, using an upper bound of two indices plus fullness, which also handles parallel arrows. Step 3 shows the two constructions are inverse. Step 4: I recomputed Hom(L,H) -> families as phi |-> (phi v_i), a bijection, so (L,(v_i)) is a colimit and the comparison is an iso. Step 5 (empty C, empty C_i) is genuinely elementary. Tested on singleton I, empty C, empty early stages, incomparable indices with a common bound, and parallel arrows. Duplicates checked: directed-cover-colimit-assembly, infinity-directed-union-local-colimits, infinity-directed-cone-cover, colimit-subdiagram-approximation and directed-cover-mixed-subset-cells are all simplicial/∞ statements, not this ordinary cocone bijection; blueprint search found 0 matches. FIX: proof_origin.place and split_report.blueprint attributed 'former Step 12' to prop-coef-integral-exceptional-adjoint.proof.md, which has no numbered steps. I rewrote both to name the blueprint paragraph served via the chain ('For K in D^b_c(X,R) ... derived coefficient adjunction') and Step 12 of the DAG node lem-coef-cellular-tree-presentable-approximations. Whole corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-ordinary-directed-cover-colimit.json.; 1 file(s) fixed by the reviewer"
  }
 }
