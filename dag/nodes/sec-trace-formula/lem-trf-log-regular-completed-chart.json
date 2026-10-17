@@ -15,7 +15,8 @@
   "def-weil-pbc-cohen-ring",
   "def-weil-pbc-adic-completion",
   "def-weil-geometric-point",
-  "def-weil-pbc-pointed-etale-neighbourhoods"
+  "def-weil-pbc-pointed-etale-neighbourhoods",
+  "lem-trf-log-regular-saturation-normality"
  ],
  "proof": [
   {
@@ -254,5 +255,30 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-ed5cc5b66 (reviewer sub-agent of L); spot-checked: Item statement checked against ILO VI 1.6 (printed p.70): monoid models k[[P]][[t]] and C(k)[[P]][[t]]/(f) with f congruent to p mod (P-{0},t_i), chart-compatible. No hypothesis added and nothing weakened; the log-regular definition matches ILO 1.2. Three repairable faults, all fixed in fixes/dag/nodes/sec-trace-formula/lem-trf-log-regular-completed-chart.json (only proof, proof_deps, proof_origin and split_report changed). (1) D1/C5: the new node lem-trf-log-regular-completed-model-dimension combines special cases of two existing same-unit nodes. lem-trf-formal-monoid-ring-dimension with D=L[[t]] gives Noetherian local domain, dimension and the nonzerodivisor/dimension-drop clause. lem-trf-log-regular-saturation-normality(ii) gives that B_C(P,n)/(theta) is a domain. The node is dropped and its two citations replaced. (2) E5: Step 4 (associated-graded injectivity justified only by 'independent directions') and Step 5 ('p-adic cancellation') were not arguments. They are replaced by a dimension argument. The model is a Noetherian local domain of dimension n+r and surjects onto the completion of A, which has dimension dim A=n+r by lem-weil-pbc-completion-dimension, so the kernel is zero. In mixed characteristic theta=p-j, with j in J and phi(j)=p, lies in the kernel. Its reduction is p modulo (t), in m_D minus m_D^2, so B/(theta) is a domain of dimension n+r. (3) C1: Step 2 used completion facts without citation. Now cited: Noetherian strict henselization, Noetherian/local/complete completion, dimension of the completion, and regularity of L[[t]]. The coefficient field in equal characteristic p is derived from the Cohen ring, and the surjectivity criterion's hypotheses are checked one by one. Small cases tested: Z_p with trivial log structure; Z_p[x,y]/(xy-p) with chart N^2; the A1 cone with theta=p-w; P=N, n=0; P=0, n=0. No cycle: transitive closure of the corrected deps (394 nodes) checked; the divisorial-structure node is not used. No SGA. Accepted tool_uses (off-unit generic algebra): cohen-power-series-presentation, complete-source-surjective-mod-ideal, sc-strict-henselization-noetherian, adic-completion-noetherian, completion-dimension, power-series-field-cohen-regular-complete. Kato 1994 Thm 3.2 remains WANTED. Details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0f692beb8",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Statement, dependencies, helpers, edge cases, docstrings, route-pivot constraints, and recorded compilation/preflight all checked; no substantive or mechanical defect found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogRegularCompletedChart",
+  "declaration": "AlgebraicGeometry.exists_completed_chart_of_logRegular",
+  "declarations": [
+   "AlgebraicGeometry.strictLocalRingStrictHenselizationIso",
+   "AlgebraicGeometry.EtaleLogStructure.sharpChartRingMap",
+   "AddMonoidAlgebra.completedLocalModelMonomial",
+   "AlgebraicGeometry.exists_completed_chart_of_logRegular"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LogRegularCompletedChart.lean",
+  "statement": "theorem exists_completed_chart_of_logRegular (X : FineSaturatedLogScheme.{u}) (_hX : X.IsLogRegular) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) (W : X.scheme.Etale) (w : (Scheme.pointSmallEtale t).fiber.obj W) (β : X.logStructure.characteristic t →* X.logStructure.monoidSheaf.obj.obj (op W)) (_hβ : X.logStructure.IsChart W β) (_hident : ∀ q : X.logStructure.characteristic t, Associates.mk (X.logStructure.toEtalePrelogStructure.germ t W w (β q)) = q) : ∃ (_ : IsLocalRing (Scheme.strictHenselizationRing t)) (W' : X.scheme.Etale) (w' : (Scheme.pointSmallEtale t).fiber.obj W') (β' : X.logStructure.characteristic t →* X.logStructure.monoidSheaf.obj.obj (op W')), IsAffine W'.left ∧ X.logStructure.IsChart W' β' ∧ (∀ q : X.logStructure.characteristic t, Associates.mk (X.logStructure.toEtalePrelogStructure.germ t W' w' (β' q)) = q) ∧ ∃ n : ℕ, ((∃ (K : Type u) (_ : Field K), Nonempty (K →+* Scheme.strictHenselizationRing t)) → ∃ e : AddMonoidAlgebra.CompletedLocalModel (IsLocalRing.ResidueField (Scheme.strictHenselizationRing t)) (Additive (X.logStructure.characteristic t)) n ≃+* AdicCompletion (IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing t)) (Scheme.strictHenselizationRing t), ∀ q : X.logStructure.characteristic t, e (AddMonoidAlgebra.completedLocalModelMonomial _ _ n (Additive.ofMul q)) = algebraMap _ _ (X.logStructure.sharpChartRingMap t W' w' β' q)) ∧ ((¬ ∃ (K : Type u) (_ : Field K), Nonempty (K →+* Scheme.strictHenselizationRing t)) → ∃ p : ℕ, Nat.Prime p ∧ CharP (IsLocalRing.ResidueField (Scheme.strictHenselizationRing t)) p ∧ CharZero (Scheme.strictHenselizationRing t) ∧ ∃ (C : Type u) (_ : CommRing C) (_ : IsLocalRing C), IsCohenRing p C ∧ Nonempty ((C ⧸ Ideal.span {(p : C)}) ≃+* IsLocalRing.ResidueField (Scheme.strictHenselizationRing t)) ∧ ∃ θ : AddMonoidAlgebra.CompletedLocalModel C (Additive (X.logStructure.characteristic t)) n, θ - (p : AddMonoidAlgebra.CompletedLocalModel C (Additive (X.logStructure.characteristic t)) n) ∈ AddMonoidAlgebra.completedLocalModelBoundaryIdeal C (Additive (X.logStructure.characteristic t)) n ∧ ∃ e : (AddMonoidAlgebra.CompletedLocalModel C (Additive (X.logStructure.characteristic t)) n ⧸ Ideal.span {θ}) ≃+* AdicCompletion (IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing t)) (Scheme.strictHenselizationRing t), ∀ q : X.logStructure.characteristic t, e (Ideal.Quotient.mk (Ideal.span {θ}) (AddMonoidAlgebra.completedLocalModelMonomial C _ n (Additive.ofMul q))) = algebraMap _ _ (X.logStructure.sharpChartRingMap t W' w' β' q))",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already-landed CompletedLocalModel and boundary ideal definitions from lem-trf-log-regular-saturation-normality, added to stmt_deps. Three explicit canonical helper maps connect the stalk chart to the actual affine-colimit strict henselization and its completed model monomials; no new ring construction or theorem is substituted."
  }
 }
