@@ -3666,6 +3666,7 @@ public import WeilConjectures.RingTheory.ConormalPolynomialInverse
 public import WeilConjectures.RingTheory.Dehomogenization
 public import WeilConjectures.RingTheory.Derivation.Localization
 public import WeilConjectures.RingTheory.DiscreteValuationRing.Dominating
+public import WeilConjectures.RingTheory.DiscreteValuationRing.EtaleRootsOfUnity
 public import WeilConjectures.RingTheory.DiscreteValuationRing.QuotientDuality
 public import WeilConjectures.RingTheory.DualContent
 public import WeilConjectures.RingTheory.Etale.Coordinates
