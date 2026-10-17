@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-category-of-spaces",
-  "lem-coef-infinity-space-valued-pointwise-lan"
+  "lem-coef-infinity-space-valued-pointwise-lan",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-parametric-universal-arrows"
  ],
  "proof": [
   {
@@ -265,5 +267,44 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-81dd296d6 (reviewer sub-agent of L); spot-checked: I read the whole item, the new node and the full statements of every cited node, plus the unit, the ancestor and the parent. Chu–Haugseng 6.10 is not archived and I could not open it here, so I checked the mathematics directly; proof_origin agent with WANTED is correct. The item statement is true and kept verbatim. Tested cases: empty input category, a single empty factor, a point mapped into Δ¹, and the zero-factor family. Steps 1, 4, 5 and 7 are correct. I repaired three faults. (1) Step 2 (C4/E4): it applied lem-coef-space-universal-colimits over B=* as if the slice base change were the product functor used in ⊠. No node identifies S_{/*} with S. The step now models the product as the degreewise product of Kan complexes. It gets cocontinuity of X×− from lem-coef-coherent-nerve-comparison, the exponential law, the parametric universal-arrow formula and the cocone criterion. (2) Fubini node (B2/C4): 'the cocones assemble to L' was ambiguous. It now applies to any (L,τ) that is pointwise colimiting, and step 3 checks this hypothesis. (3) Step 6 (E5): naturality in transformations of the h_i 'including higher simplices' had been attributed to the parametric formula, which holds only for a fixed functor. The step now makes the parameter K=∏P(A_i) explicit for presheaves. For the functors it argues through mate squares whose fillers, including the higher boundary fillers, are unique up to contractible choice by lem-cbc-kan-fibration-fiber-criterion. The new node is true (tested with J or K empty, Δ⁰ and Δ¹) and statement-only. It is not a duplicate of lem-pc-colimit-fubini, the sifted-colimit nodes or the Grothendieck/end formulas, and the blueprint search for Fubini found nothing. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-kan-fibration-fiber-criterion. The report wrongly said every tool was in the unit. After the fixes review_split passes on a copy, the graph is acyclic and no SGA source is used.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PresheafExternalProductKan",
+  "declaration": "SSet.Enhanced.ExternalKan.presheaf_external_product_kan",
+  "declarations": [
+   "SSet.Enhanced.ExternalKan.product",
+   "SSet.Enhanced.ExternalKan.projection",
+   "SSet.Enhanced.ExternalKan.tuple",
+   "SSet.Enhanced.ExternalKan.product_kan",
+   "SSet.Enhanced.ExternalKan.kanProduct",
+   "SSet.Enhanced.ExternalKan.productHom",
+   "SSet.Enhanced.ExternalKan.productSimplex_laws",
+   "SSet.Enhanced.ExternalKan.productSimplex",
+   "SSet.Enhanced.ExternalKan.productSimplex_naturality",
+   "SSet.Enhanced.ExternalKan.multiply",
+   "SSet.Enhanced.ExternalKan.parameterInclusion",
+   "SSet.Enhanced.ExternalKan.overParameter",
+   "SSet.Enhanced.ExternalKan.familyProduct",
+   "SSet.Enhanced.ExternalKan.familyIndex",
+   "SSet.Enhanced.ExternalKan.familyUnit",
+   "SSet.Enhanced.ExternalKan.IsLanUnit",
+   "SSet.Enhanced.ExternalKan.HasCoherentMateComparison",
+   "SSet.Enhanced.ExternalKan.presheaf_external_product_kan"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PresheafExternalProductKan.lean",
+  "statement": "theorem presheaf_external_product_kan (I : Type u) [Finite I] (A B : I → SSet.{u}) [∀ i, Quasicategory (A i)] [∀ i, Quasicategory (B i)] (K : SSet.{u + 1}) (v : ∀ i, A i ⟶ B i) (F : ∀ i, K ⊗ SSet.uliftFunctor.{u + 1, u}.obj (A i) ⟶ CategoryTheory.Spaces.infinityCategory.{u}) (L : ∀ i, K ⊗ SSet.uliftFunctor.{u + 1, u}.obj (B i) ⟶ CategoryTheory.Spaces.infinityCategory.{u}) (η : ∀ i, (K ⊗ SSet.uliftFunctor.{u + 1, u}.obj (A i)) ⊗ Δ[1] ⟶ CategoryTheory.Spaces.infinityCategory.{u}) (hη : ∀ i : I, ((ihom _).obj CategoryTheory.Spaces.infinityCategory.{u}).δ 1 (SSet.yonedaEquiv (MonoidalClosed.curry (η i))) = diagramVertex (F i) ∧ ((ihom _).obj CategoryTheory.Spaces.infinityCategory.{u}).δ 0 (SSet.yonedaEquiv (MonoidalClosed.curry (η i))) = diagramVertex ((𝟙 K ⊗ₘ SSet.uliftFunctor.{u + 1, u}.map (v i)) ≫ L i) ∧ ∀ k : K _⦋0⦌, IsLanUnit (SSet.uliftFunctor.{u + 1, u}.map (v i)) (parameterInclusion K _ k ≫ F i) (parameterInclusion K _ k ≫ L i) ((parameterInclusion K _ k ⊗ₘ 𝟙 Δ[1]) ≫ η i)) : IsLanUnit (familyIndex (fun i ↦ snd K _ ≫ SSet.uliftFunctor.{u + 1, u}.map (v i))) (familyProduct F) (familyProduct L) (familyUnit η) ∧ HasCoherentMateComparison (familyIndex (fun i ↦ snd K _ ≫ SSet.uliftFunctor.{u + 1, u}.map (v i))) (familyProduct F) (familyProduct L) (familyUnit η)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The finite-product Kan-unit comparison is stated through its universal mapping property, with the actual degreewise product and its full enriched simplex action. Arbitrary coherent presheaf parameters and contractible fibers of the specified mate map retain transformations and higher unit compatibilities. Opposite indexing categories are named A and B (v = h^op); no ordinary-category replacement is made. The two added already-landed statement dependencies supply the existing UniversalArrowAt predicate and the functor-quasicategory instance needed by the canonical mate map. Auxiliary well-definedness theorems implement the finite-product construction already part of this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7893fc39d",
+  "group": "NG",
+  "result": "pass",
+  "note": "Read item node, report, module and the dependency declarations (UniversalArrowAt with right=false is the left universal arrow; localAdjointComparison; mappingSpace; homotopyFiber; enhanced_functor_cone_calculus). Each clause matches: finite I, small quasicategories (A i = A_i^op, v = h^op), the actual coherent-nerve space values, the degreewise Kan product on whole enriched simplices, the specified Kan units with endpoints over all of K and universal at each parameter vertex; conclusion: the product unit is a Lan unit along id_K x prod v, plus a unique-up-to-contractible-choice, unit-preserving equivalence comparison. The parameter K gives naturality in presheaves and higher simplices. Naturality in the functors, regrouping and composition are expressed through the universal property (non-blocking remark). Edge cases I=0, K=0, empty factor, singleton checked; no extra hypotheses or universe restriction. Only lean and stmt_deps changed (two landed deps, allowed); statement verbatim; 18 declarations present; sorry helpers are true structural facts with docstrings. nt_compile --json side overlay rc=0, no errors or warnings; a broken control copy gave rc=1; #check matches the record. No fixes."
  }
 }
