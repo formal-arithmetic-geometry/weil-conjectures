@@ -125,7 +125,7 @@ theorem exists_affine_restriction_iso_of_perfect_stalk_iso
           (((SheafOfModules.overFunctor.{u}
             (moduleRings X.toRingedSpace) W).mapHomologicalComplex (.up ℤ)).obj H)) := by
   obtain ⟨O, hxO, P₀, hP₀, ⟨iG₀⟩⟩ := hlocal
-  obtain ⟨A, hA, hxA, hAO⟩ := exists_isAffineOpen_mem_and_subset (U := O ⊓ U) ⟨hxO, hxU⟩
+  obtain ⟨A, -, hxA, hAO⟩ := exists_isAffineOpen_mem_and_subset (U := O ⊓ U) ⟨hxO, hxU⟩
   have hAP : A ≤ O := hAO.trans inf_le_left
   have hAU : A ≤ U := hAO.trans inf_le_right
   let R := moduleRings X.toRingedSpace
@@ -139,8 +139,8 @@ theorem exists_affine_restriction_iso_of_perfect_stalk_iso
   obtain ⟨iG⟩ := restrict_model_for_stalk_spread X O A hAP (DerivedCategory.Q.obj G) P₀ iG₀
   obtain ⟨iH⟩ := restrict_model_for_stalk_spread X U A hAU (DerivedCategory.Q.obj H) H₀
     ((SheafOfModules.overFunctor.{u} R U).mapDerivedCategoryFactors.app H)
-  obtain ⟨V, hxV, hV, hVA, cG, cH, f, hf⟩ :=
-    exists_affine_perfect_stalk_hom_lift X x G H A hxA hA P Q hP hQ iG iH e.hom
+  obtain ⟨V, hxV, -, hVA, f, hf⟩ :=
+    exists_affine_perfect_stalk_hom_lift X x G H A hxA P Q hP hQ iG iH e.hom
   let N := SheafOfModules.overMap.{u} R (homOfLE hVA : V ⟶ A)
   let P' := (N.mapHomologicalComplex (.up ℤ)).obj P
   let Q' := (N.mapHomologicalComplex (.up ℤ)).obj Q
@@ -159,7 +159,7 @@ theorem exists_affine_restriction_iso_of_perfect_stalk_iso
     (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mp hfiso
   obtain ⟨W, hxW, hW, hWV, hfW⟩ :=
     exists_affine_restriction_quasiIso_of_perfect_stalk_quasiIso
-      X V x hxV hV P' Q' hP' hQ' f hfquasi
+      X V x hxV P' Q' hP' hQ' f hfquasi
   obtain ⟨iG'⟩ := restrict_model_for_stalk_spread X A V hVA (DerivedCategory.Q.obj G) P iG
   obtain ⟨iH'⟩ := restrict_model_for_stalk_spread X A V hVA (DerivedCategory.Q.obj H) Q iH
   obtain ⟨g⟩ := restrict_model_for_stalk_spread X V W hWV (DerivedCategory.Q.obj G) P' iG'

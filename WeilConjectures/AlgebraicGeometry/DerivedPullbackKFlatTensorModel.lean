@@ -207,7 +207,7 @@ private theorem counitModel_isIso {T X : Scheme.{uModel}} (g : T ⟶ X)
     CategoryTheory.Functor.ext hF (fun M N a ↦ hmap a)
   subst F
   obtain ⟨_, _, _, _, _, _, _, F, hF, hmap, hAdd, δ, hδ, _, hK⟩ :=
-    Classical.choose_spec (exists_derivedPullback.{uModel, wModel} g)
+    derivedPullback_spec.{uModel, wModel} g
   have hF' : F = Scheme.Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hF (fun M N a ↦ hmap a)
   subst F

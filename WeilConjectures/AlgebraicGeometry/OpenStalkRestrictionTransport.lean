@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
-import WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
+public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
 
 /-! # Transport of open-site stalk comparisons through further restriction
 
@@ -53,15 +53,12 @@ private theorem descend_iso
     ← G.map_comp, h, G.map_id]
   exact Category.comp_id _
 
-private theorem restriction_comp_iso
+private def restriction_comp_iso
     (X : Scheme.{u}) (U V W : X.Opens) (hVU : V ≤ U) (hWV : W ≤ V) (hWU : W ≤ U) :
-    Nonempty (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVU) ⋙
+    SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVU) ⋙
       SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWV) ≅
-      SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWU)) := by
-  refine ⟨NatIso.ofComponents (fun M ↦ ?_) ?_⟩
-  · exact Iso.refl _
-  · intro M N f
-    rfl
+      SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWU) :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem restriction_adjunction
@@ -85,8 +82,8 @@ private theorem restriction_adjunction
   have : P.Faithful := inferInstance
   exact ⟨P, adj, inferInstance⟩
 
-/-- Choose comparison coordinates before any module or map. An arbitrary comparison
-on an intermediate open can be transported through a further restriction.
+/-- An arbitrary comparison on an intermediate open can be transported through a further
+restriction to the canonical comparison `openModuleStalkRestrictionComparison`.
 
 Source: Stacks Project, Sheaves Tag 00A0 (3), (5), `lemma-restrict`, and Tag 0096,
 `lemma-adjoint-pullback-pushforward-modules` (open-immersion pushforward).
@@ -96,9 +93,9 @@ Proof: Use the slice/open-subspace equivalences. The final functor of neighbourh
 inside W gives the additive restriction-stalk isomorphism. Its germ formula,
 checked on a common neighbourhood for a scalar and a vector, makes it linear
 after the open-immersion stalk-ring scalar transports. The same formula proves
-naturality. These canonical isomorphisms define e for every W, independently of
-modules. The comparison c of two slice restrictions is the sectionwise identity;
-associativity of inclusions gives its naturality. The canonical W-to-V stalk
+naturality. These canonical isomorphisms e are
+`openModuleStalkRestrictionComparison`. Restricting from U to V and then to W is
+restricting from U to W, sectionwise. The canonical W-to-V stalk
 comparison d0 satisfies the displayed law for the canonical V-to-U comparison e0:
 both sides take a section germ to that same germ on U.
 
@@ -118,50 +115,44 @@ d is adjusted to a by the explicit adjunction construction above.
 -/
 theorem exists_openStalk_restriction_transport
     (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U) :
-    ∃ e : ∀ (W : X.Opens) (hxW : x ∈ W) (hWU : W ≤ U),
-      SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWU) ⋙
-        openModuleStalkFunctor X W ⟨x, hxW⟩ ≅ openModuleStalkFunctor X U ⟨x, hxU⟩,
-      ∀ (V : X.Opens) (hxV : x ∈ V) (hVU : V ≤ U)
-        (a : SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVU) ⋙
-          openModuleStalkFunctor X V ⟨x, hxV⟩ ≅ openModuleStalkFunctor X U ⟨x, hxU⟩)
-        (W : X.Opens) (hxW : x ∈ W) (hWV : W ≤ V) (hWU : W ≤ U),
-        let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
-          (homOfLE hVU)
-        let Q := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
-          (homOfLE hWV)
-        let P := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
-          (homOfLE hWU)
-        ∃ (c : R ⋙ Q ≅ P)
-          (d : Q ⋙ openModuleStalkFunctor X W ⟨x, hxW⟩ ≅
-            openModuleStalkFunctor X V ⟨x, hxV⟩),
-          ∀ M : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U),
-            (openModuleStalkFunctor X W ⟨x, hxW⟩).map (c.hom.app M) ≫
-                (e W hxW hWU).hom.app M =
-              d.hom.app (R.obj M) ≫ a.hom.app M := by
+    ∀ (V : X.Opens) (hxV : x ∈ V) (hVU : V ≤ U)
+      (a : SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVU) ⋙
+        openModuleStalkFunctor X V ⟨x, hxV⟩ ≅ openModuleStalkFunctor X U ⟨x, hxU⟩)
+      (W : X.Opens) (hxW : x ∈ W) (hWV : W ≤ V) (hWU : W ≤ U),
+      let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
+        (homOfLE hVU)
+      let Q := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
+        (homOfLE hWV)
+      ∃ d : Q ⋙ openModuleStalkFunctor X W ⟨x, hxW⟩ ≅
+          openModuleStalkFunctor X V ⟨x, hxV⟩,
+        ∀ M : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U),
+          (openModuleStalkRestrictionComparison X U W hWU x hxU hxW).hom.app M =
+            d.hom.app (R.obj M) ≫ a.hom.app M := by
   classical
   -- Any family of comparisons works: descend its composite with a.inv along restriction.
   -- This avoids a separate coherence theorem for canonical germ comparisons.
   let e := fun (W : X.Opens) (hxW : x ∈ W) (hWU : W ≤ U) ↦
-    (nonempty_openModuleStalkRestrictionComparison X U W hWU x hxU hxW).some
-  refine ⟨e, ?_⟩
+    openModuleStalkRestrictionComparison X U W hWU x hxU hxW
   intro V hxV hVU a W hxW hWV hWU
   dsimp only
   let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVU)
   let Q := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWV)
   let S := openModuleStalkFunctor X W ⟨x, hxW⟩
   let T := openModuleStalkFunctor X V ⟨x, hxV⟩
-  obtain ⟨c⟩ := restriction_comp_iso X U V W hVU hWV hWU
+  let c := restriction_comp_iso X U V W hVU hWV hWU
   obtain ⟨J, adj, h⟩ := restriction_adjunction X U V hVU
   let t : R ⋙ (Q ⋙ S) ≅ R ⋙ T :=
     (Functor.associator R Q S).symm ≪≫ Functor.isoWhiskerRight c S ≪≫
       e W hxW hWU ≪≫ a.symm
   obtain ⟨d, hd⟩ := descend_iso R J adj (Q ⋙ S) T t
-  refine ⟨c, d, ?_⟩
-  intro M
-  rw [hd M]
-  dsimp [t]
-  simp only [Category.id_comp, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
-  rfl
+  refine ⟨d, fun M ↦ ?_⟩
+  have hlaw : S.map (c.hom.app M) ≫ (e W hxW hWU).hom.app M =
+      d.hom.app (R.obj M) ≫ a.hom.app M := by
+    rw [hd M]
+    dsimp [t]
+    simp only [Category.id_comp, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    rfl
+  simpa [c, restriction_comp_iso] using hlaw
 
 end
 end AlgebraicGeometry.Scheme

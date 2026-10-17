@@ -14,7 +14,7 @@ Source: Stacks Project, Tag 00A0(3), stalks of restrictions to open subspaces.
 (blueprint: lem-sc-open-module-stalk-restriction-comparison).
 -/
 
-@[expose] public section
+public section
 
 set_option autoImplicit false
 universe u
@@ -153,13 +153,12 @@ of the two open-immersion stalk-ring maps is the ambient stalk-ring map, so afte
 restriction of scalars both sides are modules over the identical ring O_X,x.
 This supplies inverse linear maps and their naturality on every sheaf morphism.
 The construction also applies to V=W, when the comparison is the identity. -/
-theorem nonempty_openModuleStalkRestrictionComparison
+def openModuleStalkRestrictionComparison
     (X : Scheme.{u}) (W V : X.Opens) (hVW : V ≤ W)
     (x : X) (hxW : x ∈ W) (hxV : x ∈ V) :
-    Nonempty
-      (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
-          (homOfLE hVW : V ⟶ W) ⋙ openModuleStalkFunctor X V ⟨x, hxV⟩ ≅
-        openModuleStalkFunctor X W ⟨x, hxW⟩) := by
+    SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
+        (homOfLE hVW : V ⟶ W) ⋙ openModuleStalkFunctor X V ⟨x, hxV⟩ ≅
+      openModuleStalkFunctor X W ⟨x, hxW⟩ := by
   let j : V.toScheme ⟶ W.toScheme := (X.homOfLE hVW).copyBase
     (fun y ↦ ⟨y.1, hVW y.2⟩) (by
       ext y
@@ -191,7 +190,7 @@ theorem nonempty_openModuleStalkRestrictionComparison
   let e₂ : R ≅ Rj ⋙ Rw := ModuleCat.restrictScalarsComp' _ _ _ hρ
   let e₃ : (Modules.restrictFunctor j ⋙ S) ⋙ Rj ≅ T :=
     restrictionStalkLinearNatIso j v
-  have e : B ⋙ (C ⋙ S ⋙ R) ≅ A ⋙ (T ⋙ Rw) :=
+  let e : B ⋙ (C ⋙ S ⋙ R) ≅ A ⋙ (T ⋙ Rw) :=
     (Functor.associator B C (S ⋙ R)).symm ≪≫
       Functor.isoWhiskerRight e₁ (S ⋙ R) ≪≫
       Functor.associator A (Modules.restrictFunctor j) (S ⋙ R) ≪≫
@@ -200,7 +199,7 @@ theorem nonempty_openModuleStalkRestrictionComparison
         Functor.isoWhiskerLeft (Modules.restrictFunctor j ⋙ S) e₂ ≪≫
         (Functor.associator (Modules.restrictFunctor j ⋙ S) Rj Rw).symm ≪≫
         Functor.isoWhiskerRight e₃ Rw)
-  exact ⟨e⟩
+  exact e
 
 end
 end AlgebraicGeometry.Scheme

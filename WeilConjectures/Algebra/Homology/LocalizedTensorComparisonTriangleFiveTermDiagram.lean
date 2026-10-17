@@ -128,8 +128,8 @@ theorem exists_localizedTensorComparison_triangle_five_term_diagram
   obtain ⟨mP₂⟩ := nonempty_baseDerivedTensorCohomologyModel R A B (P₂ ⊗ Q) C
   obtain ⟨mP₃⟩ := nonempty_baseDerivedTensorCohomologyModel R A B (P₃ ⊗ Q) C
   obtain ⟨s₀, s₁, s₂, s₃, hS, w₀, w₁, w₂, w₃⟩ :=
-    exists_localizedTensorComparison_cone_rows R A B C Q N t hC hQ
-      P₁ P₂ f hP₁ hP₂ mP₁ mP₂ mP₃ i
+    exists_localizedTensorComparison_cone_rows R A B C Q N t hC
+      P₁ P₂ f mP₁ mP₂ mP₃ i
   let d₂ := CochainComplex.homologyδOfTriangle
     (tensorConeTriangle
       ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B))) f N) i (i + 1)

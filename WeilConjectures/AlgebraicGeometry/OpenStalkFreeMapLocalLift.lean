@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
 import WeilConjectures.AlgebraicGeometry.OpenStalkFreeMapOneLift
 import WeilConjectures.AlgebraicGeometry.OpenStalkRestrictionTransport
 
@@ -49,8 +50,8 @@ private theorem restriction_lift_stalk
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Restriction-stalk comparisons can be chosen independently of the modules, and
-one map from a finite free stalk lifts on every sufficiently small neighbourhood.
+/-- One map from a finite free stalk lifts on every sufficiently small neighbourhood,
+in the coordinates of the canonical comparisons `openModuleStalkRestrictionComparison`.
 
 Source: Stacks Project, Modules Tag 01CP, finite-generator lifting in
 `lemma-stalk-internal-hom`; Sheaves Tag 00A0 (3), `lemma-restrict`, restriction and stalks.
@@ -60,8 +61,8 @@ Proof: Identify the slice site over U with the open subscheme U. For each W insi
 U containing x, send a germ on W to the same germ on U, transporting scalars along
 the open-immersion stalk-ring maps. Neighbourhoods contained in W are cofinal, so
 this gives an isomorphism for every module. The germ formula commutes with every
-module morphism, hence gives the natural isomorphism e W. These comparisons are
-chosen before the source, target, and map. A finite free sheaf has finitely many
+module morphism, hence gives the natural isomorphism
+`openModuleStalkRestrictionComparison`. A finite free sheaf has finitely many
 basis germs. Apply t to these germs and represent their images by sections of N
 on neighbourhoods of x. Intersect the finitely many neighbourhoods with U to get
 V. For any W contained in V, restrict these sections and use the free sheaf
@@ -73,26 +74,23 @@ No finiteness of N or affineness of U is used. This is a single sheaf-map liftin
 statement; it contains neither complexes nor an infinite family of maps. -/
 theorem exists_open_stalk_free_map_local_lifts
     (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U) :
-    ∃ e : ∀ (W : X.Opens) (hxW : x ∈ W) (hWU : W ≤ U),
-      SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWU) ⋙
-        openModuleStalkFunctor X W ⟨x, hxW⟩ ≅ openModuleStalkFunctor X U ⟨x, hxU⟩,
-      ∀ (m : ℕ) (N : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-        (t : (openModuleStalkFunctor X U ⟨x, hxU⟩).obj
-          (SheafOfModules.free
-            (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin m))) ⟶
-          (openModuleStalkFunctor X U ⟨x, hxU⟩).obj N),
-        ∃ (V : X.Opens) (_hxV : x ∈ V) (_hVU : V ≤ U),
-          ∀ (W : X.Opens) (hxW : x ∈ W) (_hWV : W ≤ V) (hWU : W ≤ U),
-            let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
-              (homOfLE hWU)
-            ∃ g : R.obj (SheafOfModules.free
-                (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin m))) ⟶
-                R.obj N,
-              (openModuleStalkFunctor X W ⟨x, hxW⟩).map g =
-                (e W hxW hWU).hom.app _ ≫ t ≫ (e W hxW hWU).inv.app N := by
+    ∀ (m : ℕ) (N : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+      (t : (openModuleStalkFunctor X U ⟨x, hxU⟩).obj
+        (SheafOfModules.free
+          (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin m))) ⟶
+        (openModuleStalkFunctor X U ⟨x, hxU⟩).obj N),
+      ∃ (V : X.Opens) (_hxV : x ∈ V) (_hVU : V ≤ U),
+        ∀ (W : X.Opens) (hxW : x ∈ W) (_hWV : W ≤ V) (hWU : W ≤ U),
+          let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
+            (homOfLE hWU)
+          ∃ g : R.obj (SheafOfModules.free
+              (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin m))) ⟶
+              R.obj N,
+            (openModuleStalkFunctor X W ⟨x, hxW⟩).map g =
+              (openModuleStalkRestrictionComparison X U W hWU x hxU hxW).hom.app _ ≫ t ≫
+                (openModuleStalkRestrictionComparison X U W hWU x hxU hxW).inv.app N := by
   classical
-  obtain ⟨e, he⟩ := exists_openStalk_restriction_transport X U x hxU
-  refine ⟨e, ?_⟩
+  have he := exists_openStalk_restriction_transport X U x hxU
   intro m N t
   let F := SheafOfModules.free
     (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin m))
@@ -100,13 +98,16 @@ theorem exists_open_stalk_free_map_local_lifts
     X U x hxU m N t
   refine ⟨V, hxV, hVU, ?_⟩
   intro W hxW hWV hWU
-  obtain ⟨c, d, hc⟩ := he V hxV hVU a W hxW hWV hWU
+  obtain ⟨d, hd⟩ := he V hxV hVU a W hxW hWV hWU
+  let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVU)
   let Q := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWV)
-  let S := openModuleStalkFunctor X W ⟨x, hxW⟩
+  let P := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWU)
+  let c : R ⋙ Q ≅ P := NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)
   let g := c.inv.app F ≫ Q.map k ≫ c.hom.app N
   refine ⟨g, ?_⟩
-  exact restriction_lift_stalk c d a (e W hxW hWU) hc t k
-    hk
+  exact restriction_lift_stalk c d a
+    (openModuleStalkRestrictionComparison X U W hWU x hxU hxW)
+    (fun M ↦ by simpa [c] using hd M) t k hk
 
 end
 end AlgebraicGeometry.Scheme

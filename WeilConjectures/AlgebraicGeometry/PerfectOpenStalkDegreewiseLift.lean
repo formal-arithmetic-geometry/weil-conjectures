@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
+public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
 import WeilConjectures.AlgebraicGeometry.OpenStalkFreeMapLocalLift
 import Mathlib.Data.Int.Interval
 
@@ -26,7 +27,7 @@ namespace AlgebraicGeometry.Scheme
 noncomputable section
 
 /-- Degreewise stalk maps extend on a common affine neighbourhood, without any
-chain equations.
+chain equations, in the coordinates of the canonical restriction comparison.
 
 Source: Stacks Project, Tag 09RE, affine finite-presentation calculation, and
 Tag 01CP, finite-presentation internal-Hom stalk comparison.
@@ -41,8 +42,8 @@ use zero maps, since the source is zero.
 Intersect the finitely many neighbourhoods, then take an affine neighbourhood W
 of x inside the intersection. Restrict all representatives to W. Cofinality of
 neighbourhoods inside W and the open-immersion stalk-ring isomorphisms give a
-natural isomorphism between restriction followed by the W stalk and the U stalk;
-apply it termwise to obtain e. The germ formulas give the stated component
+natural isomorphism `openModuleStalkRestrictionComparison` between restriction
+followed by the W stalk and the U stalk; apply it termwise to obtain e. The germ formulas give the stated component
 identities. Empty source support intervals and zero ranks require no representatives
 and give the zero family. No perfectness assumption on Q or affineness
 assumption on U is needed. No differential compatibility is imposed or asserted. -/
@@ -59,14 +60,16 @@ theorem exists_affine_perfect_open_stalk_degreewise_lift
         (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)
       let S := (openModuleStalkFunctor X W ⟨x, hxW⟩).mapHomologicalComplex (.up ℤ)
       let T := (openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)
-      ∃ (e : R ⋙ S ≅ T) (g : ∀ n : ℤ, (R.obj P).X n ⟶ (R.obj Q).X n),
+      let e : R ⋙ S ≅ T := Functor.mapHomologicalComplexCompIso
+        (openModuleStalkRestrictionComparison X U W hWU x hxU hxW) (.up ℤ)
+      ∃ g : ∀ n : ℤ, (R.obj P).X n ⟶ (R.obj Q).X n,
         ∀ n : ℤ, (openModuleStalkFunctor X W ⟨x, hxW⟩).map (g n) =
           (e.app P).hom.f n ≫ t n ≫ (e.app Q).inv.f n := by
   classical
   obtain ⟨a, b, hzero⟩ := hP.1
   choose m ι π hιπ using hP.2
   let T := openModuleStalkFunctor X U ⟨x, hxU⟩
-  obtain ⟨e, he⟩ := exists_open_stalk_free_map_local_lifts X U x hxU
+  have he := exists_open_stalk_free_map_local_lifts X U x hxU
   have lifts (n : ℤ) := he (m n) (Q.X n) (T.map (π n) ≫ t n)
   choose V hxV hVU lift using lifts
   let I := {n : ℤ // n ∈ Finset.Icc a b}
@@ -82,12 +85,11 @@ theorem exists_affine_perfect_open_stalk_degreewise_lift
     le_trans hWD (inf_le_right.trans (iInf_le _ n))
   let R := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWU)
   let S := openModuleStalkFunctor X W ⟨x, hxW⟩
-  let eW := e W hxW hWU
+  let eW := openModuleStalkRestrictionComparison X U W hWU x hxU hxW
   choose f hf using (fun n : I ↦ lift n.val W hxW (hWV n) hWU)
   let g (n : ℤ) : R.obj (P.X n) ⟶ R.obj (Q.X n) :=
     if hn : n ∈ Finset.Icc a b then R.map (ι n) ≫ f ⟨n, hn⟩ else 0
-  refine ⟨W, hxW, hW, hWU,
-    Functor.mapHomologicalComplexCompIso eW (.up ℤ), g, ?_⟩
+  refine ⟨W, hxW, hW, hWU, g, ?_⟩
   intro n
   change S.map (g n) = eW.hom.app (P.X n) ≫ t n ≫ eW.inv.app (Q.X n)
   by_cases hn : n ∈ Finset.Icc a b
