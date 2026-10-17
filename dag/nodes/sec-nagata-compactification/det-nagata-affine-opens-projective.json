@@ -236,5 +236,23 @@
   "group": "Q95",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-da905fcdf (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, all 8 steps, and every cited node's stored statement and blueprint_update. Sources read: main-20261015 det-nagata-affine-opens-projective.md and .proof.md, the unit _section and its proof, the master lemma-nagata-finite-type-to-separated-target with its graph proof, Stacks 01RG (lemma-quasi-compact-immersion) and 01W8 (definition-projective). The statement is unchanged and keeps every hypothesis; no target is weakened. Removing def-nagata-affine-compactification from stmt_deps is correct, since the statement never names it. Step checks: (1) the chart lands in P({0}⊔n;S), the same base-change P that the properness lemma uses. (2) Composing open immersions is elementary. (3) π is proper, hence separated, and the stored statement of the cancellation lemma (finite type over a separated target; true by 01T8 and 01KV) makes κ finite type, hence quasi-compact. (4)-(5) The image-ideal lemma and the factor equality hold, and the open-in-image lemma for a quasi-compact immersion matches 01RG with no reducedness needed. (6) Lemma (b) on composing a closed immersion with a proper map applies. (7) This is the H-projective definition with quasi-compactness. (8) The compactification definition holds in both its stored and updated forms. Route: every cited statement is in the unit itself or the cited closure unit, or is a Mathlib leaf, so no tool_uses are needed. There are no new nodes and no duplicates (the affine-compactification def/prop only give existence). Edge cases n=0, U empty and nonreduced U are fine. Maintenance caveat: lemma-nagata-finite-type-to-separated-target's update and its attached Lean (locallyOfFiniteType_of_comp) give only the locally-finite-type version; applying that update must keep the separated-target finite-type clause this item cites. FIX: proof_origin wrongly said the current source has no proof section. It now cites det-nagata-affine-opens-projective.proof.md Steps 1-3 and notes the one deviation (cancellation lemma instead of the uncited Noetherian-source claim). The corrected item is in fixes/dag/nodes/sec-nagata-compactification/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataAffineOpensProjective",
+  "declaration": "AlgebraicGeometry.det_nagata_affine_opens_projective",
+  "statement": "theorem det_nagata_affine_opens_projective {S U : Scheme.{u}} (f : U ⟶ S) [IsNoetherian S] [IsAffine U] [LocallyOfFiniteType f] [QuasiCompact f] : ∃ c : Compactification f, c.Z = (f.affineSpaceImmersion ≫ AffineSpace.toRelativeProjectiveSpace (ULift.{u} (Fin f.affineSpaceImmersionDim)) S).image ∧ IsClosedImmersion ((f.affineSpaceImmersion ≫ AffineSpace.toRelativeProjectiveSpace (ULift.{u} (Fin f.affineSpaceImmersionDim)) S).imageι) ∧ HEq c.i ((f.affineSpaceImmersion ≫ AffineSpace.toRelativeProjectiveSpace (ULift.{u} (Fin f.affineSpaceImmersionDim)) S).toImage) ∧ HEq c.g ((f.affineSpaceImmersion ≫ AffineSpace.toRelativeProjectiveSpace (ULift.{u} (Fin f.affineSpaceImmersionDim)) S).imageι ≫ (ℙ(Option (ULift.{u} (Fin f.affineSpaceImmersionDim)); S) ↘ S)) ∧ IsOpenImmersion c.i ∧ QuasiCompact c.i ∧ IsSchemeTheoreticallyDominant c.i ∧ IsProper c.g ∧ IsProjective c.g ∧ c.i ≫ c.g = f",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataAffineOpensProjective.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fd06b150b",
+  "group": "Q104",
+  "result": "fix",
+  "note": "Complete report replacement at fixes/det-nagata-affine-opens-projective.report.md; substantive Lean delivery is correct and per-file compilation succeeds."
  }
 }

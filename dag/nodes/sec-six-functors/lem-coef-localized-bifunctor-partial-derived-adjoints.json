@@ -194,5 +194,33 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q74-19f574ebd (reviewer sub-agent of L); spot-checked: Reviewed item and all six steps, dependency statements, blueprint route, cited sources, hypotheses, edge cases, searches, duplicates, and long-step rule. No new nodes, mathematical gaps, circularity, restatement, SGA use, or repairs found. Wrote review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalizedBifunctorPartialDerivedAdjoints",
+  "declaration": "HomotopicalAlgebra.ModelInfinity.localizedBifunctorPartialDerivedAdjoints",
+  "declarations": [
+   "HomotopicalAlgebra.ModelInfinity.leftPartial",
+   "HomotopicalAlgebra.ModelInfinity.rightPartial",
+   "HomotopicalAlgebra.ModelInfinity.cofibrantPairLocalizationMap",
+   "HomotopicalAlgebra.ModelInfinity.cofibrantPairAtLeft",
+   "HomotopicalAlgebra.ModelInfinity.cofibrantPairAtRight",
+   "HomotopicalAlgebra.ModelInfinity.NormalizedPartialComparison",
+   "HomotopicalAlgebra.ModelInfinity.localizedBifunctorPartialDerivedAdjoints"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LocalizedBifunctorPartialDerivedAdjoints.lean",
+  "statement": "theorem localizedBifunctorPartialDerivedAdjoints {C D E : Type u} [Category.{v} C] [Category.{v} D] [Category.{v} E] [ModelCategory C] [ModelCategory D] [ModelCategory E] [HasLimits C] [HasColimits C] [HasLimits D] [HasColimits D] [HasLimits E] [HasColimits E] [(cofibrations C).HasFunctorialFactorization (trivialFibrations C)] [(trivialCofibrations C).HasFunctorialFactorization (fibrations C)] [(cofibrations D).HasFunctorialFactorization (trivialFibrations D)] [(trivialCofibrations D).HasFunctorialFactorization (fibrations D)] [(cofibrations E).HasFunctorialFactorization (trivialFibrations E)] [(trivialCofibrations E).HasFunctorialFactorization (fibrations E)] (M N P : SSet.{max u v w}) [SSet.Quasicategory M] [SSet.Quasicategory N] [SSet.Quasicategory P] (qM : FiniteReedy.largeNerve.{u, v, max u v w} C ⟶ M) (qN : FiniteReedy.largeNerve.{u, v, max u v w} D ⟶ N) (qP : FiniteReedy.largeNerve.{u, v, max u v w} E ⟶ P) (hM : FiniteReedy.IsLocalization.{u, v, max u v w} (weakEquivalences C) qM) (hN : FiniteReedy.IsLocalization.{u, v, max u v w} (weakEquivalences D) qN) (hP : FiniteReedy.IsLocalization.{u, v, max u v w} (weakEquivalences E) qP) (F : C ⥤ D ⥤ E) (hF₁ : ∀ (A : C), IsCofibrant A → ∃ (R : E ⥤ D), Nonempty (F.obj A ⊣ R) ∧ (∀ {X Y : D} (f : X ⟶ Y), cofibrations D f → cofibrations E ((F.obj A).map f)) ∧ (∀ {X Y : D} (f : X ⟶ Y), cofibrations D f → weakEquivalences D f → cofibrations E ((F.obj A).map f) ∧ weakEquivalences E ((F.obj A).map f))) (hF₂ : ∀ (D₀ : D), IsCofibrant D₀ → ∃ (R : E ⥤ C), Nonempty (F.flip.obj D₀ ⊣ R) ∧ (∀ {X Y : C} (f : X ⟶ Y), cofibrations C f → cofibrations E ((F.flip.obj D₀).map f)) ∧ (∀ {X Y : C} (f : X ⟶ Y), cofibrations C f → weakEquivalences C f → cofibrations E ((F.flip.obj D₀).map f) ∧ weakEquivalences E ((F.flip.obj D₀).map f))) (B : M ⨯ N ⟶ P) (gamma : SSet.Edge (SSet.Enhanced.diagramVertex (cofibrantPairLocalizationMap.{u, v, w} qM qN ≫ B)) (SSet.Enhanced.diagramVertex (frameLargeNerveMap.{u, v, max u v w, u, v} (CofibrantObject.ι (C := C) |>.prod CofibrantObject.ι) ≫ frameLargeNerveMap.{u, v, max u v w, u, v} (Functor.uncurry.obj F) ≫ qP))) (hgamma : SSet.Enhanced.IsEquivalenceEdge _ gamma.edge) : (∀ (A : C) (hA : IsCofibrant A), ∃ (R : E ⥤ D) (adj : F.obj A ⊣ R) (Q : D ⥤ D) (e : Q ⟶ 𝟭 D) (T : E ⥤ E) (t : 𝟭 E ⟶ T), (∀ X : D, IsCofibrant (Q.obj X) ∧ WeakEquivalence (e.app X)) ∧ (∀ Y : E, IsFibrant (T.obj Y) ∧ WeakEquivalence (t.app Y)) ∧ ∃ K : ReplacementAdjunction.{u, v, u, v, w} adj Q e T t qN qP, Nonempty (NormalizedPartialComparison.{u, v, w} K (leftPartial B (FiniteReedy.object.{u, v, max u v w} qM A)) (((MonoidalClosed.pre (frameLargeNerveMap.{u, v, max u v w, u, v} (cofibrantPairAtLeft (D := D) ⟨A, hA⟩))).app P).app _ gamma.edge))) ∧ (∀ (D₀ : D) (hD : IsCofibrant D₀), ∃ (R : E ⥤ C) (adj : F.flip.obj D₀ ⊣ R) (Q : C ⥤ C) (e : Q ⟶ 𝟭 C) (T : E ⥤ E) (t : 𝟭 E ⟶ T), (∀ X : C, IsCofibrant (Q.obj X) ∧ WeakEquivalence (e.app X)) ∧ (∀ Y : E, IsFibrant (T.obj Y) ∧ WeakEquivalence (t.app Y)) ∧ ∃ K : ReplacementAdjunction.{u, v, u, v, w} adj Q e T t qM qP, Nonempty (NormalizedPartialComparison.{u, v, w} K (rightPartial B (FiniteReedy.object.{u, v, max u v w} qN D₀)) (((MonoidalClosed.pre (frameLargeNerveMap.{u, v, max u v w, u, v} (cofibrantPairAtRight (C := C) ⟨D₀, hD⟩))).app P).app _ gamma.edge))) ∧ (∀ x : M _⦋0⦌, ∃ R : P ⟶ N, Nonempty (CoherentAdjunction (leftPartial B x) R)) ∧ (∀ y : N _⦋0⦌, ∃ R : P ⟶ M, Nonempty (CoherentAdjunction (rightPartial B y) R))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helpers define canonical partial restrictions and the cofibrant-product restriction maps. NormalizedPartialComparison records the extension of the specified coherent comparison via replacement weak equivalences, as an equality in the homotopy category of the full coherent functor category."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-830aaa266",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Statement and Lean audit passed; scompile server overlay returned exit code 0 with no errors."
  }
 }

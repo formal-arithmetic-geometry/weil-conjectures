@@ -264,17 +264,17 @@
   "file": "lean/Sheaf/AlgebraicGeometry/IndEtaleStrictLocalInvariance.lean",
   "statement": "theorem indEtale_strictLocal_invariance {S T : Scheme.{u}} (u : T ⟶ S) (hlocal : ∀ (t : T), ∃ (V : T.Opens) (U : S.Opens), t ∈ V ∧ IsAffine V.toScheme ∧ IsAffine U.toScheme ∧ ∃ e : V.toScheme ⟶ U.toScheme, e ≫ U.ι = V.ι ≫ u ∧ proAffineEtale e) : ∀ {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barT : Spec (.of Ω) ⟶ T) (barS : Spec (.of Ω) ⟶ S) (hbar : barS = barT ≫ u), ∃ e : strictHenselizationScheme barT ≅ strictHenselizationScheme barS, e.hom ≫ strictHenselizationStructuralMap barS = strictHenselizationStructuralMap barT ≫ u ∧ Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation barT)) ≫ e.hom = Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation barS)) ∧ (∀ (S' : Scheme.{u}) (g : S' ⟶ S) {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω'] (barT' : Spec (.of Ω') ⟶ pullback u g), ∃ e' : strictHenselizationScheme barT' ≅ strictHenselizationScheme (barT' ≫ pullback.snd u g), e'.hom ≫ strictHenselizationStructuralMap (barT' ≫ pullback.snd u g) = strictHenselizationStructuralMap barT' ≫ pullback.snd u g ∧ Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation barT')) ≫ e'.hom = Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation (barT' ≫ pullback.snd u g)))) ∧ IsIso (strictHenselizationMap (strictHenselizationStructuralMap barS) (Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation barS))))",
   "branch": "newtargets-dag",
-  "by": "Q135",
-  "date": "2026-10-17",
+  "by": "Q138",
+  "date": "2026-10-18",
   "existing": false,
   "fixed_by": "NT-stage2-cc-b4b3c0e55"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-b4b3c0e55",
-  "group": "Q135",
-  "result": "fix",
-  "note": "The mathematics is right; one clause was mis-nested. The hypotheses match the node: proAffineEtale on affine charts is ind-etale by proAffineEtale_Spec_iff, with no finite-presentation, separatedness or finiteness assumption added. The same-field geometric points match. The ∃-iso with the over-S and point-evaluation equations is the canonical map, because strictHenselizationMap_existsUnique characterizes it by exactly those equations. The base-change clause uses pullback.snd u g for every barT'. The localization-again clause is IsIso of strictHenselizationMap of the structural map at the canonical evaluation closed lift. Universes are all u, no definitions are added, the only proof is the theorem's sorry, docstrings and the source place (Tags 05WR and 0GIP) check out, and no pro-etale substitute is used. Finding F1: Lean binder scoping put the final IsIso clause inside the base-change clause (∀ S' g Ω' barT', ∃ e', … ∧ IsIso), not as a top-level conjunct of the ∃ e body as the indentation and report state. A compile probe printing the elaborated type confirmed this. The readings are logically equivalent but the shape is wrong for citers. The fix parenthesizes the base-change clause, with no other change: fixes/IndEtaleStrictLocalInvariance.lean. nt_compile is clean on the delivered file (6.7 s) and on the fixed file (7.8 s), and a probe confirms IsIso is now top-level."
+  "reviewer": "NT-stage2-Codex-fc600055d",
+  "group": "Q138",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical-map clauses, docstrings, edge cases, and compiler evidence checked; no substantive or mechanical findings."
  }
 }

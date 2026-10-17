@@ -10,7 +10,13 @@
  "stmt_deps": [
   "def-coef-categorical-pattern-fibrancy",
   "lem-coef-marked-point-cartesian-model",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "def-coef-infinity-marked-coanodyne",
+  "lem-coef-finite-inverse-tetrahedron",
+  "lem-coef-marked-endpoint-prism-generation",
+  "def-coef-infinity-left-anodyne",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-marked-triangle-cancellation"
  ],
  "proof": [
   {
@@ -347,5 +353,43 @@
   "group": "Q81",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-c5e0cfbc2 (reviewer sub-agent of L); spot-checked: I read every step, every new node and every cited statement in full and found no faults; no fixes were made. Source: HA is not in literature/ and the review guard blocked network access, so the printed HA B.1.9 and B.1.11-B.1.13 were not opened; I checked the mathematics directly instead, and the proofs are already marked agent-written with HA listed as WANTED. Item: statement, stmt_deps and blueprint are byte-identical to the live side DAG, so nothing is weakened. uses equals proof_deps, the graph is acyclic and avoids the parent lifting-products node, and the only off-unit citation, lem-cbc-initial-prism-horn-filtration in step 9, is accepted as a declared tool use. Steps 1-14 checked: the 7x2 generator/cofibration cases, including the order-reversed prism vertices and horn index m-q in step 8, the X0 match and marked first edge in step 9, the substitutions D, R and final vertex (n,m) or (v,m) with d>=1 in steps 11-12, the base maps over C for part (b), and the n=1, n=2 and n>2 horns for part (c). Join-prism node: union and intersection checked by hand, plus my own script on 102 finite cases (K = empty, a point, an edge, two points, the boundary of a 2-simplex, a 2-simplex; A = empty or boundary; m = 0 to 2); a greedy inner-horn filtration of D to Z succeeded in every case. Marking-cancellation node: clause (i) checked by a lifting argument (C0 makes edges cocartesian, B0 gives a marked lift, A1 marks fiber equivalences, A0 composes); clause (ii) checked semantically, including the empty cone. Inner-horn leaf: exact match at Mathlib Inner/Basic.lean:89-92, with :43 and InnerFibration.lean:64. No duplicates against the join-saturation, join-right-anodyne, marked or coanodyne, or small-object nodes, and no new node restates a clause of the item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.PatternGeneratorProductCells",
+  "declaration": "SSet.Enhanced.PatternCells.pattern_generator_product_cells",
+  "declarations": [
+   "SSet.Enhanced.PatternCells.markedMap",
+   "SSet.Enhanced.PatternCells.initialVertex",
+   "SSet.Enhanced.PatternCells.lastVertex",
+   "SSet.Enhanced.PatternCells.finalSubcone",
+   "SSet.Enhanced.PatternCells.coneTarget",
+   "SSet.Enhanced.PatternCells.joinBoundary",
+   "SSet.Enhanced.PatternCells.coneCell",
+   "SSet.Enhanced.PatternCells.IsDisplayedOver",
+   "SSet.Enhanced.PatternCells.generators",
+   "SSet.Enhanced.PatternCells.pointGenerators",
+   "SSet.Enhanced.PatternCells.anodyne",
+   "SSet.Enhanced.PatternCells.pointAnodyne",
+   "SSet.Enhanced.PatternCells.productObject",
+   "SSet.Enhanced.PatternCells.markedPushoutProduct",
+   "SSet.Enhanced.PatternCells.pushoutProductSource",
+   "SSet.Enhanced.PatternCells.pushoutProduct",
+   "SSet.Enhanced.PatternCells.pattern_generator_product_cells"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/PatternGeneratorProductCells.lean",
+  "statement": "theorem pattern_generator_product_cells (P : CategoricalPattern.{u}) : (∀ {X X' : P.Object} (j : X ⟶ X') {L L' : Marked.{u}} (v : L ⟶ L'), generators P j → Marked.cof v → anodyne P (pushoutProduct j v)) ∧ (∀ {X X' : P.Object} (f : X ⟶ X') {L L' : Marked.{u}} (h : L ⟶ L'), Marked.cof (markedMap f) → pointGenerators h → anodyne P (pushoutProduct f h)) ∧ (∀ {U V : SSet.{u}} (a : U ⟶ V), leftAnodyneExtensions a → pointAnodyne (Marked.sharpMap a))",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Seven generator families in the recorded CategoricalPattern.Object slice, with exact codomain structural maps and the C2 final-subcone equation. Canonical pushout products use the existing explicit marked pushout. Point generators and their saturation are independent of the input pattern. Added only already-landed statement dependencies owning the reused Q, marked constructors, pushout and left-anodyne definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e42304197",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Statement, dependencies, declarations, source alignment, edge cases, docstrings, report sections, and scompile.py evidence all checked; no findings."
  }
 }

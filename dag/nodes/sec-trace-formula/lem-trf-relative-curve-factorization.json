@@ -323,5 +323,23 @@
   "group": "Q92",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-2064c93d6 (reviewer sub-agent of L); spot-checked: I read the item, all 22 proof deps and 12 stmt deps (by their statements), the parent lem-trf-alteration-relative-curve-preparation (step 1, its only citer), and the source ILO Travaux de Gabber X Thm 3.5 Step 5, printed p.163 (PDF pp.168-170). The statement is the source's rational-map construction followed by the schematic image in X x Y. It has the parent's hypotheses (S a field or an excellent trait; X proper, dominant, finite type, integral; d = dim X_s >= 1) and gives exactly the clauses the parent uses: dim Y_s = d-1, X_0 and Y excellent, relative trdeg 1. Nothing is weakened and no SGA source is cited. Step checks: (1) dominance makes A\\{0} map to nonzero elements, so X_s is integral of finite type over k and the 0B1C node gives trdeg_k K = d. (2) Y = P^{d-1}_S is integral from its 01NG charts (nonempty overlaps), projective by def-kun-projective with the identity immersion, proper by the nagata node, and dim Y_s = d-1. (3) t_i = b_i/c_i; A[z] -> B[1/c] -> K is injective, so the generic point goes to the generic point of Y. (4) U is Noetherian, so j and gamma are quasi-compact; this is the hypothesis of the qc-kernel leaf and of the partial-section lemma, and Y/S is separated. (5) The image is irreducible as the closure of gamma(U), and each affine ideal is the kernel of a map into K, hence prime, so X_0 is integral. (6) Base change and closed-immersion (b) give a and g proper; both are dominant; a^{-1}U = U, so a is generically finite. (7) The trdeg tower gives relative degree 1, d=1 included. (8) 01T2 and 07QU give excellence. (9) The composites agree. Cases tested: d=1 (Y=S, X_0=X), X=P^d_S, the trait case P^1_A, and finite or imperfect k. There are no new nodes, and rg/blueprint search found no duplicate. Four tool_uses are needed and accepted: lem-sc-closed-irreducible-dimension-trdeg, lem-weil-pbc-projective-space-standard-charts, lem-exc-fields-excellent, lem-exc-finite-type-localization-excellent. The other declared entries are definitions, closed nodes or Mathlib leaves and need no tool_use. Minor: 'dominant' has no definition node anywhere in the DAG (the parent does the same). No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeCurveFactorization",
+  "declaration": "AlgebraicGeometry.exists_relativeCurveFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeCurveFactorization.lean",
+  "statement": "theorem exists_relativeCurveFactorization {S X : Scheme.{u}} (hS : (∃ (k : Type u) (_ : Field k), Nonempty (S ≅ Spec (.of k))) ∨ ∃ (R : Type u) (_ : CommRing R) (_ : IsDomain R) (_ : IsDiscreteValuationRing R), IsExcellent R ∧ Nonempty (S ≅ Spec (.of R))) (s : S) (hs : IsGenericPoint s Set.univ) (f : X ⟶ S) [IsProper f] [IsDominant f] [IsIntegral X] (hft : LocallyOfFiniteType f ∧ QuasiCompact f) (d : ℕ) (hd : 1 ≤ d) (hdim : topologicalKrullDim (f.fiber s) = (d : WithBot ℕ∞)) : ∃ (Y : Scheme.{u}) (q : Y ⟶ S) (X₀ : Scheme.{u}) (a : X₀ ⟶ X) (g : X₀ ⟶ Y), (∀ U : Y.Opens, IsAffineOpen U → IsExcellent Γ(Y, U)) ∧ IsIntegral Y ∧ IsHProjective q ∧ IsDominant q ∧ LocallyOfFiniteType q ∧ QuasiCompact q ∧ topologicalKrullDim (q.fiber s) = ((d - 1 : ℕ) : WithBot ℕ∞) ∧ (∀ U : X₀.Opens, IsAffineOpen U → IsExcellent Γ(X₀, U)) ∧ IsIntegral X₀ ∧ IsProper a ∧ IsDominant a ∧ (∃ U : X.Opens, Dense (U : Set X) ∧ IsFinite (a ∣_ U)) ∧ IsProper g ∧ IsDominant g ∧ a ≫ f = g ≫ q ∧ ∃ η : X₀, IsGenericPoint η Set.univ ∧ @Algebra.trdeg (Y.residueField (g η)) (X₀.residueField η) _ _ (g.residueFieldMap η).hom.toAlgebra = 1",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ef536c136",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, docstrings, edge cases, and exact Lean signature checked; per-file scompile passed with no errors."
  }
 }
