@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-colimit-gluing"
  ],
  "proof": [
   {
@@ -210,5 +211,24 @@
   "group": "Q32",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-23bf3d9c7 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement (def-cbc-enhanced-diagrams-cones, def-coef-presentable-infinity-category, cofinal-coslice-calculus, coslice-colimit-formula, isofibration-exponentiation, isofibration-pullback-limit, cofinal-comma-criterion), plus the unit and chapter records, the main-20261015 ancestor and the parent's step 7. HTT is not archived, so I checked its places (Thm 4.1.3.1 and the final step of 5.4.5.15) from my knowledge of the text; the worker's WANTED line stands. The statement is true and unchanged. I tested it on the poset omega with p=(1,3) and e=5, on K empty, on E=Delta^0, and on E empty (impossible, since the empty diagram needs a cocone). There are no new nodes. My duplicate search found nothing: I read coslice-calculus, filtered-cofinal-pullback, join-cocone-associativity, cat-infinity-filtered-finite-calculus, reflection-inverting-limit-restriction and the parent. Steps 1-5 are correct. Step 3 is a real degreewise isomorphism, Fun(K+Delta^0,E)=Fun(K,E)xE with (a,b,c) matching (a,(b,c)). Step 4 holds because adding one simplex keeps K kappa-small. Step 5 uses only the standalone sentence that kappa-filtered quasicategories are weakly contractible. One fault, C2/E5, in step 6: it says an equivalence lift along Fun(Delta^1,E)->ExE stays an equivalence in S_e, but the inverse and its witnesses need not lie over id_e, so that needs a non-elementary fact. Fixed in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-filtered-cocone-apex-cofinal.json. Step 6 now gets ev_1:S_e->E as a left fibration by applying lem-coef-infinity-arrow-target-right-fibration to E^op (elementary reversal, def-coef-infinity-fibrations), then an isofibration by lem-cbc-left-fibration-equivalence-lift, then applies pullback-limit to that leg and V. proof_deps is again the union of uses. Accepted tool_use, declared in split_report.tool_uses: lem-cbc-left-fibration-equivalence-lift (sk-prop-sf-cbc), a generic black-box lemma that no node of the unit states. No cycle: none of the cited nodes' closures contains the item. No SGA, the statement is not weakened, and no node was dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityFilteredCoconeApexCofinal",
+  "declaration": "SSet.Enhanced.infinity_filtered_cocone_apex_cofinal",
+  "file": "lean/Sheaf/CategoryTheory/InfinityFilteredCoconeApexCofinal.lean",
+  "statement": "theorem infinity_filtered_cocone_apex_cofinal (κ : Cardinal.{u}) (hκ : κ.IsRegular) (E : SSet.{max (u + 1) v}) [Quasicategory E] (hE : SSet.Presentability.IsSmall.{u} E) (hfiltered : SSet.Presentability.IsKappaFiltered κ E) (K : SSet.{max (u + 1) v}) (hK : SSet.Presentability.IsKappaSmall κ K) (p : K ⟶ E) : SSet.Presentability.IsSmall.{u} (coconeCategory p) ∧ ∃ hT : Quasicategory (coconeCategory p), @SSet.Presentability.IsKappaFiltered κ (coconeCategory p) hT ∧ ∀ e : E _⦋0⦌, ∃ hComma : Quasicategory (comma (coconeCategory p) E (gluingCoconeApex p) e false), (∃ f : comma (coconeCategory p) E (gluingCoconeApex p) e false ⟶ coconeCategory (coprod.desc p (SSet.const (X := Δ[0]) e)), IsFunctorEquivalence f ∧ f ≫ gluingCoconeApex (coprod.desc p (SSet.const (X := Δ[0]) e)) = (commaSubcomplex (coconeCategory p) E (gluingCoconeApex p) e false).ι ≫ fst _ _ ≫ gluingCoconeApex p) ∧ @SSet.Presentability.IsKappaFiltered κ (comma (coconeCategory p) E (gluingCoconeApex p) e false) hComma ∧ IsContractible (comma (coconeCategory p) E (gluingCoconeApex p) e false)",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The existing gluingCoconeApex is reused and its landed owner is added to stmt_deps. The comma uses false, hence arrows e to V(t). The equivalence commutes with apex projections. Quasicategory structures are conclusions, not extra hypotheses. The reviewed stage-1 split and natural-language statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5850f6ae5",
+  "group": "Q108",
+  "result": "fix",
+  "note": "Lean statement and node record are correct: coconeCategory p = E_{p/}; gluingCoconeApex is reused and its owner lem-coef-infinity-colimit-gluing is added to stmt_deps; comma ... e false gives arrows e -> V(t), the orientation of infinity_cofinal_comma_criterion's hf; the equivalence goes to coconeCategory(coprod.desc p (const e)) with apex compatibility as an equality of whole maps; quasicategory structures are conclusions; IsRegular includes infinite; universes are independent and follow the coslice-calculus convention; no colimit hypothesis; K empty allowed. Edge cases checked: K empty, E empty, E = Delta[0], kappa = aleph0, poset direction check. Gates pass: no definitions, one theorem with proof sorry, source and blueprint docstrings with the six proof steps, all imports exist, statement field verbatim. nt_compile --json with the side overlay is clean (item 2.5 s, 109 dependency modules). Only fix: fixes/lem-coef-infinity-filtered-cocone-apex-cofinal.report.md replaces the report, restoring HTT 5.3.1.20-21 / 5.4.5.15 / 4.1.3.1 in the source-check sentence where they had been replaced by 'the project server'."
  }
 }

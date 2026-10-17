@@ -12,7 +12,11 @@
   "def-coef-infinity-fibrations",
   "lem-coef-marked-point-cartesian-model",
   "lem-coef-joyal-model-structure",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-cbc-cocartesian-sections-limit",
+  "lem-coef-infinity-isofibration-pullback-limit"
  ],
  "proof": [
   {
@@ -222,5 +226,30 @@
   "group": "Q156",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-ae1300a56 (reviewer sub-agent of L); spot-checked: I read the item, all seven steps and every cited node's full statement. The delivery is one commit with no new nodes; the blueprint from/via fields match the parent. The statement is unchanged, true and matches what the parent lem-coef-pattern-fibered-edge-detection uses in its base case. Cases tested: identity over Δ^1 gives Δ^0; Δ^1×Δ^1 over Δ^1 gives a 3-point discrete core on both sides; an empty fibre and a two-point discrete E with no sections give empty sets on both sides. Step 1: equivalences in Δ^0 and Δ^1 are degenerate, so p is an isofibration; exponentiation along ∅↪B makes p_* an isofibration; the strict fibre over id_B is a quasicategory. Step 2: Sec is full in Fun(B,E) because maps into a poset nerve are determined by their vertices. Step 3: the pointwise criterion applies with K=B, and inverse witnesses lie in E_b. Step 4: the product marking gives marked edges (s_0 b, α), so the core and Map^♯_B are the same subset in every degree. Step 5: the characterization (2) quasi-inverse, whiskered and checked by the pointwise criterion twice, makes u_* a functor equivalence strictly over Fun(B,B), with no inverse assumed over B. Step 6: every hypothesis of isofibration-base-change holds at R=Δ^0, h=id_B, and the general clause of the core-equivalence node allows empty cases. Step 7: naturality and empty cases are fine. Every cited statement is in the unit's route and no SGA is cited. No duplicate after an rg search over Sec / Map^♯_B / B^♭ candidates. HA B.2.4(c) is online only and recorded as WANTED, with an agent proof_origin; I could not consult it, so I verified the proof independently against the cited statements. Minor: the stmt_dep lem-coef-kan-quillen-right-proper is not named in the text but is harmless. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PatternSectionCoreIdentification",
+  "declaration": "SSet.Enhanced.pattern_section_core_identification",
+  "declarations": [
+   "SSet.Enhanced.flatSectionBase",
+   "SSet.Enhanced.markedSectionTarget",
+   "SSet.Enhanced.sectionFunctorInclusion",
+   "SSet.Enhanced.pattern_section_core_identification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PatternSectionCoreIdentification.lean",
+  "statement": "theorem pattern_section_core_identification (k : ℕ) (hk : k = 0 ∨ k = 1) (E : Marked.{u}) [Quasicategory E.underlying] (p : E.underlying ⟶ (Δ[k] : SSet.{u})) [InnerFibration p] (hmark : ∀ e : E.underlying _⦋1⦌, e ∈ E.marking ↔ ∃ (b : (Δ[k] : SSet.{u}) _⦋0⦌) (a : (fiber p b) _⦋1⦌), IsEquivalenceEdge (fiber p b) a ∧ (pullback.snd (SSet.const (X := Δ[0]) b) p).app _ a = e) : Quasicategory (sectionSSet p) ∧ (∃ i : Marked.Over.mapSharp (flatSectionBase Δ[k]) (markedSectionTarget E p) ≅ (core (sectionSSet p)).toSSet, ∀ (n m : SimplexCategoryᵒᵖ) (f : (Marked.Over.mapSharp (flatSectionBase Δ[k]) (markedSectionTarget E p)).obj n) (x : (Δ[k] : SSet.{u}).obj m) (a : n ⟶ m), (((sectionFunctorInclusion p).app n ((i.hom.app n f).val)).app m a) x = f.left.val.app m (x, SSet.stdSimplex.objEquiv.symm a.unop)) ∧ (∀ (F : SSet.{u}) [Quasicategory F] (q : F ⟶ (Δ[k] : SSet.{u})) [InnerFibration q] (u : E.underlying ⟶ F) (comm : u ≫ q = p), (∀ (C : SSet.{max u v}), Quasicategory C → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map u)).app C)).toFunctor).IsEquivalence) → Quasicategory (sectionSSet q) ∧ (∀ (C : SSet.{max u v}), Quasicategory C → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map (sectionPostcomposition u comm))).app C)).toFunctor).IsEquivalence) ∧ IsWeakHomotopyEquivalence (coreMap (sectionPostcomposition u comm)))",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses sectionSSet, relative marked mapSharp, sectionPostcomposition and coreMap from four already-landed nodes added to stmt_deps. The given marked E and exact hmark equation encode the prescribed marking, not an extra fibration or inverse hypothesis. The normalized isomorphism is the identity on every underlying family; it accounts for the distinct library subtype encodings of the two simplicial sets."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd41e95d3",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node and the dependency declarations: B=Δ[k] with k=0∨1; Quasicategory and InnerFibration for E and F; hmark is an iff with IsEquivalenceEdge in the strict fibre (consistent with Marked.degenerate); sectionSSet, Marked.Over.mapSharp over sharp B (same maps as over flat B because the source marks only degenerate base edges and the target marks only vertical edges), core, sectionPostcomposition and coreMap are reused; the categorical-equivalence test is verbatim the exists_joyal_model_structure clause in the same universes; the identity is an iso whose formula pins it to the identity on families, so naturality follows. Edge cases k=0, identity, Δ1×Δ1, empty fibre, no sections and empty E are all covered. The three helpers carry real data with source and blueprint docstrings; the proof is only sorry. lean.statement matches the file verbatim; only lean and stmt_deps changed; the four added stmt_deps have Lean records and close no cycle. nt_compile (--json, side overlay): rc=0, no errors or warnings; a broken control copy errors as expected. Worker report and Second reading by Q02 are present (the second reading is the author's self-recheck under the direct-delivery instruction). No findings requiring change."
  }
 }

@@ -26,7 +26,10 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-infinity-sifted-colimit-calculus",
+  "lem-coef-infinity-split-augmentation-colimit"
  ],
  "proof": [
   {
@@ -231,5 +234,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AdjunctionFreeSimplicialResolution",
+  "declaration": "SSet.Enhanced.adjunction_free_simplicial_resolution",
+  "file": "lean/Sheaf/CategoryTheory/AdjunctionFreeSimplicialResolution.lean",
+  "statement": "theorem adjunction_free_simplicial_resolution {B X : SSet.{v}} [Quasicategory B] [Quasicategory X] (L : B ⟶ X) (R : X ⟶ B) (adj : HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L R) (hX : HasInfinityColimitsOfShape splitSimplicialIndex X) (hR : PreservesInfinityColimitsOfShape splitSimplicialIndex R) (hconservative : ∀ e : X _⦋1⦌, IsEquivalenceEdge B (R.app _ e) → IsEquivalenceEdge X e) : ∀ x : X _⦋0⦌, ∃ (P : splitSimplicialIndex.{v} ⟶ X) (p : (coconeCategory P) _⦋0⦌), p.1.1 = x ∧ IsColimiting P p ∧ ∀ n : ℕ, ∃ (b : B _⦋0⦌) (e : X _⦋1⦌), X.δ 1 e = P.app (op ⦋0⦌) (ULift.up (ComposableArrows.mk₀ (op ⦋n⦌))) ∧ X.δ 0 e = L.app _ b ∧ IsEquivalenceEdge X e",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already published coherent-adjunction, colimit-preservation and simplex-index definitions; the three owning nodes are added as landed statement dependencies. The conclusion is a vertex of the specified coherent comma cocone category with apex x and a separately chosen equivalence to a free object in each degree."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-581581416",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Every node clause matches the Lean. The coherent adjunction has the right orientation. The geometric-realization existence and preservation hypotheses are the published interfaces over splitSimplicialIndex, and conservativity is reflection of equivalence edges. The conclusion is a colimiting coconeCategory vertex with apex x (p.1.1, as in the published hocolim) and a separately chosen equivalence edge P_n -> L(b_n) for each n : ℕ. No extra hypothesis or universe restriction; the hypotheses are identical to infinity_monadic_bar. The node changes only in lean and three added landed stmt_deps (allowed by brief §5; no cycle). The lean.statement is verbatim in the file; dependency nodes are unchanged; there are no definitions; the proof is sorry; source/blueprint/proof-step docstrings are present. nt_compile --json side overlay: whole chain clean, module 2.4 s, exit 0, no errors or warnings. Cosmetic only: the worker report garbles the HA numbers, which are correct in the module and node."
  }
 }

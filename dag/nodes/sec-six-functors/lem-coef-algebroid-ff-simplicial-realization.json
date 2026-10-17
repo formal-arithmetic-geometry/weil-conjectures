@@ -24,7 +24,10 @@
   "place": "Theorem 5.6.2, proof paragraph on the Segal-presheaf model and its cartesian squares (generalized to arbitrary fully faithful simplicial diagrams); Theorem 4.5.3; HTT Theorem 6.1.3.9 (read online; not archived in literature/). No Stacks tag states this infinity-categorical fact."
  },
  "stmt_deps": [
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-infinity-final-index-colimit"
  ],
  "proof": [
   {
@@ -273,5 +276,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AlgebroidFullyFaithfulRealization",
+  "declaration": "SSet.Enhanced.Algebroid.fullyFaithful_simplicial_realization",
+  "declarations": [
+   "SSet.Enhanced.Algebroid.objectSpaceProjection",
+   "SSet.Enhanced.Algebroid.realizationLeg",
+   "SSet.Enhanced.Algebroid.fullyFaithful_simplicial_realization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AlgebroidFullyFaithfulRealization.lean",
+  "statement": "theorem fullyFaithful_simplicial_realization {E : SSet.{max (u + 1) v}} [Quasicategory E] (p : E ⟶ monoidalSimplexBase.{max (u + 1) v}) (hp : IsPresentablyMonoidal.{u, v} p) (D : uliftFunctor.{max (u + 1) v}.obj (nerve SimplexCategoryᵒᵖ) ⟶ total.{u, v} p) (hD : ∀ (m n : SimplexCategoryᵒᵖ) (f : m ⟶ n), IsFullyFaithful (D.app (op ⦋1⦌) (ULift.up (ComposableArrows.mk₁ f)))) : (∃ c : (coconeCategory D) _⦋0⦌, IsColimiting D c) ∧ ∀ c : (coconeCategory D) _⦋0⦌, IsColimiting D c → IsColimiting (D ≫ objectSpaceProjection p) (CategoryTheory.Spaces.mappedCocone (objectSpaceProjection p) D c) ∧ ∀ n : SimplexCategoryᵒᵖ, IsFullyFaithful (realizationLeg D c n)",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c56c0a4ec",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Read the node, the four stmt_deps modules (CompleteAlgebroid, EnhancedDiagramsCones, InfinityCategoryOfSpaces, FinalIndexColimit) and transportSpaces. Every clause matches the node: presentably monoidal is IsPresentablyMonoidal; Algd(V) is total p, not the complete algebroids; the diagram is a full simplicial map from the ulifted nerve of Delta^op; hD covers every arrow with the dependency's IsFullyFaithful; existence of the realization is the coherent IsColimiting; U(C)=|X_•| with compatibility is IsColimiting of the mappedCocone under objectSpaceProjection (literal a.val.space); mapping-object equivalences are IsFullyFaithful of realizationLeg, the actual coconeHomotopy edge (sigma0 n, id) from D(n) to the apex. No ess-surj, completeness or nonemptiness assumed; universes u,v independent; empty and n=0 cases covered. Helpers have real data and no duplicate; docstrings carry source and blueprint; only sorry; statement verbatim; stmt_deps acyclic and match imports; report sections present. nt_compile --json on the snapshot file exited 0 with no warnings (item 3.8 s). No findings."
  }
 }
