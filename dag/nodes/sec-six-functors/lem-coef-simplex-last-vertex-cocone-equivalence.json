@@ -10,9 +10,125 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $I=\\mathsf S(X)$ and define $F:I\\to\\mathrm{sSet}_{/X}$ by $F(\\tau:\\Delta^m\\to X)=(\\Delta^m,\\tau)$ and $F(\\alpha)=\\Delta(\\alpha)$. The arrow equation in the statement makes this a functor over $X$. All its sets are small: its objects are the countable union of the sets $X_m$, and arrows are subsets of the corresponding sets of finite monotone maps. Use the explicit construction in [lem-coef-decomposition-local-colimit-cocones] to form $H=X_F$, with inclusions $b:X\\hookrightarrow H$ and $a:N(I)\\hookrightarrow H$ and the specified maps $\\iota_\\tau:(\\Delta^m)^{\\triangleright}\\to H$. In a mixed $r$-simplex write its cut as $i$, its upper chain as $\\tau_{i+1}\\to\\cdots\\to\\tau_r$, with $\\tau_j:\\Delta^{m_j}\\to X$, and its compatible lifts as $u_j:[i]\\to[m_j]$. Thus the lower simplex is $\\tau_j\\Delta(u_j)$. The cases $i=-1$ and $i=r$ are respectively the pure nerve and pure $X$ cases.",
+   "uses": [
+    "lem-coef-decomposition-local-colimit-cocones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation 4.2.3.1, pp. 248-249, specialized as immediately before Lemma 4.2.3.13, p. 254."
+   }
+  },
+  {
+   "text": "Construct $r:H\\to X$. It is the identity on pure $X$ simplices. If an upper block is present, form $v:[r]\\to[m_r]$ by $v(k)=u_r(k)$ for $k\\leq i$ and, for $k>i$, by taking the image of $m_k$ under the tail composite $[m_k]\\to[m_r]$; set $r(e)=\\tau_r\\Delta(v)$. This is monotone: lower values are at most the image of $m_{i+1}$, and successive upper values increase because each monotone map sends its last vertex to a vertex at most the next last vertex. Here is the operator check, including the nontrivial case of removing the last object. For a monotone $\\theta:[s]\\to[r]$ retaining an upper vertex, let $c:[m_{\\theta(s)}]\\to[m_r]$ be the tail composite. The formula for the restricted simplex gives $cv'=v\\theta$, and its terminal structural simplex is $\\tau_{\\theta(s)}=\\tau_r\\Delta(c)$. If no upper vertex is retained, $v\\theta=u_r\\theta$ and the restricted simplex is exactly the lower simplex. If no lower vertex is retained, the same tail-composite formula applies without the $u_j$ terms. Repeated vertices use identity arrows, so the calculation also covers degeneracies. These equations prove that $r$ is simplicial. They also show $rb=\\mathrm{id}_X$, $ra=\\ell_X$ exactly, and that $r\\iota_\\tau:\\Delta^{m+1}\\to X$ is $\\tau$ composed with the order map $[m+1]\\to[m]$ fixing $0,\\ldots,m$ and repeating $m$ at the last vertex.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 4.2.3.13 and the definition of the cofinal map in Proposition 4.2.3.14, p. 254; operator check written out."
+   }
+  },
+  {
+   "text": "Fix $p:X\\to\\mathcal E$ and $T\\in\\mathcal E_0$, and put $q=pr$. For every $\\tau:\\Delta^m\\to X$, the preceding formula identifies $q\\iota_\\tau$ with the specified repeat-last-vertex cocone on $p\\tau$. By the standard-simplex clause of [lem-coef-infinity-final-index-colimit], this particular cocone is colimiting with vertex $p\\tau(m)$. Thus every hypothesis of [lem-coef-decomposition-local-colimit-cocones] holds for $F$ and $q$: the index is a small ordinary category, its maps to $X$ are allowed to be noninjective, and each of the required local colimits has just been produced. It gives an equivalence $b^*:C_H\\to C_X$, where $C_H=\\operatorname{Map}_{\\operatorname{Fun}(H,\\mathcal E)}(q,\\Delta_HT)$ and $C_X=\\operatorname{Map}_{\\operatorname{Fun}(X,\\mathcal E)}(p,\\Delta_XT)$. No colimit of $p$ itself was assumed or used.",
+   "uses": [
+    "lem-coef-infinity-final-index-colimit",
+    "lem-coef-decomposition-local-colimit-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.3.4, pp. 249-251, applied in the final paragraph of Proposition 4.2.3.14, p. 255."
+   }
+  },
+  {
+   "text": "Precomposition with $r$ defines $r^*:C_X\\to C_H$ because $q=pr$ and constant diagrams remain constant. The equation $rb=\\mathrm{id}_X$ gives $b^*r^*=\\mathrm{id}_{C_X}$ strictly, in every simplicial degree of the right-pinched mapping spaces. Since $b^*$ is an equivalence of Kan complexes by step 3, $r^*$ is an equivalence: the equation on components makes its component map the inverse bijection, and for every basepoint the same equation makes its homotopy-group maps inverse isomorphisms. This also covers empty cocone spaces, since the component bijection forces both spaces to be empty together.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.3.14, final paragraph, p. 255; the retraction argument in the precise fixed-apex mapping-space form."
+   }
+  },
+  {
+   "text": "We check the simplex-lift hypotheses of [lem-coef-decomposition-simplex-lift-right-anodyne]. For $z:\\Delta^n\\to X$, identify $I_z$ explicitly with the category of factorizations $z=\\tau\\Delta(s)$, with $s:[n]\\to[m]$, $\\tau:\\Delta^m\\to X$. Its arrows $(s,\\tau)\\to(s',\\tau')$ are monotone $\\alpha:[m]\\to[m']$ satisfying $s'=\\alpha s$ and $\\tau=\\tau'\\Delta(\\alpha)$. The object $(\\mathrm{id}_{[n]},z)$ is initial: its unique arrow to $(s,\\tau)$ is $s$. The unique arrows from it give a natural transformation from the constant functor at that object to the identity. By [lem-coef-nerve-natural-homotopy-equivalence], projection $N(I_z)\\to\\Delta^0$ is a homotopy equivalence on realization. In particular the contractibility condition holds for every nondegenerate $z$.",
+   "uses": [
+    "lem-coef-decomposition-simplex-lift-right-anodyne",
+    "lem-coef-nerve-natural-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.3.14, first part of proof, p. 254: the initial object of the simplex-factorization category."
+   }
+  },
+  {
+   "text": "Now suppose $z$ is degenerate. The lift of $z$ in the value $\\Delta^m$ is precisely the monotone map $s:[n]\\to[m]$, and it is degenerate if and only if $s$ is noninjective: factor $s=j_s q_s$ into its surjection onto its ordered image and the injection of that image; a proper surjection gives a degeneracy, whereas a map factoring through a proper surjection cannot be injective. Thus $D_z$ consists of factorizations with $s$ noninjective. Let $B_z\\subseteq D_z$ be the full subcategory where $s$ is also surjective. Define $R:D_z\\to B_z$ by $(s,\\tau)\\mapsto(q_s,\\tau\\Delta(j_s))$, keeping the canonical increasing enumeration of each finite image. For an arrow $\\alpha$ as above, $\\alpha$ maps the image of $s$ onto the image of $s'$; it induces a unique monotone $\\beta$ with $\\alpha j_s=j_{s'}\\beta$ and $\\beta q_s=q_{s'}$. This is the required arrow between the two images under $R$, since $\\tau\\Delta(j_s)=\\tau'\\Delta(j_{s'})\\Delta(\\beta)$. Uniqueness gives identity and composition laws. Writing $J:B_z\\hookrightarrow D_z$, one has $RJ=\\mathrm{id}$, and $j_s$ gives a natural transformation $JR\\Rightarrow\\mathrm{id}_{D_z}$. By [lem-coef-nerve-natural-homotopy-equivalence], $N(J)$ and $N(R)$ are inverse up to homotopy. This proves the deformation-retract assertion with its maps and arrow direction specified.",
+   "uses": [
+    "lem-coef-nerve-natural-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.3.14, p. 255: the subcategory denoted I-double-prime and its right-adjoint image-factorization retraction; details supplied."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-simplicial-set-nondegenerate-decomposition], write $z=\\bar z\\Delta(t)$ uniquely with $\\bar z:\\Delta^d\\to X$ nondegenerate and $t:[n]\\twoheadrightarrow[d]$ surjective. Since $z$ is degenerate, $d<n$, so $(t,\\bar z)$ belongs to $B_z$. It is terminal there. Indeed, for an object $(s,\\tau)$ with $s$ surjective, decompose $\\tau=\\rho\\Delta(u)$ with $u$ surjective and $\\rho$ nondegenerate. Uniqueness applied to $z=\\rho\\Delta(us)$ gives $\\rho=\\bar z$ and $us=t$. Thus $u$ defines an arrow $(s,\\tau)\\to(t,\\bar z)$. This arrow is unique because $s$ is surjective. The terminal-object arrows define a natural transformation from the identity of $B_z$ to its constant terminal functor; [lem-coef-nerve-natural-homotopy-equivalence] makes $N(B_z)$ weakly contractible. Together with step 6, $N(D_z)$ is weakly contractible. Step 5 also gives weak contractibility of $N(I_z)$. Therefore $N(D_z)\\hookrightarrow N(I_z)$ is a weak homotopy equivalence: both have one component and all their homotopy groups vanish, so the induced component and homotopy-group maps are isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "lem-coef-nerve-natural-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.3.14, p. 255: terminal nondegenerate factorization in I-double-prime; Eilenberg-Zilber uniqueness and the degenerate-lift comparison."
+   }
+  },
+  {
+   "text": "Steps 5-7 verify both hypotheses of [lem-coef-decomposition-simplex-lift-right-anodyne] for the actual diagram $F(\\tau)=(\\Delta^m,\\tau)$. Hence $a:N(I)\\hookrightarrow H$ is right anodyne. Apply [lem-coef-infinity-anodyne-cocones] with this inclusion, the quasicategory $\\mathcal E$, the diagram $q=pr$ and the fixed apex $T$. It gives an equivalence $a^*:C_H\\to C_I$, where $C_I=\\operatorname{Map}_{\\operatorname{Fun}(N(I),\\mathcal E)}(p\\ell_X,\\Delta_{N(I)}T)$, using $qa=pra=p\\ell_X$. The cited theorem permits an arbitrary simplicial target for the inclusion, so no quasicategory assertion about $H$ or $X$ has entered the proof.",
+   "uses": [
+    "lem-coef-decomposition-simplex-lift-right-anodyne",
+    "lem-coef-infinity-anodyne-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.3.8, p. 252, and Proposition 4.2.3.14, pp. 254-255; the fixed-apex restriction assertion uses Proposition 4.1.1.7, p. 226."
+   }
+  },
+  {
+   "text": "The strict equation $ra=\\ell_X$ gives $\\ell_X^*=a^*r^*$, with the mapping spaces and restricted diagrams exactly as in the statement. Step 4 proves $r^*$ an equivalence, and step 8 proves $a^*$ an equivalence; their composite is an equivalence on components and every based homotopy group. This proves the assertion for every $p,\\mathcal E,T$. If $X=\\varnothing$, its simplex category is empty and $H=\\varnothing$ by the explicit construction, so $\\ell_X$ and the displayed restriction are identity maps; the argument includes this case without requiring an object of the empty index category. Only the standard-simplex local colimits of step 3 were used, so no ambient colimit-existence assumption is added.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Conclusion of Proposition 4.2.3.14, with the natural fixed-apex comparisons of Proposition 4.1.1.7 and the join/cocone convention, pp. 226,254-255."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-decomposition-local-colimit-cocones",
+  "lem-coef-decomposition-simplex-lift-right-anodyne",
+  "lem-coef-infinity-anodyne-cocones",
+  "lem-coef-infinity-final-index-colimit",
+  "lem-coef-nerve-natural-homotopy-equivalence",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Proposition 4.2.3.14, using Lemma 4.2.3.13, Propositions 4.2.3.4 and 4.2.3.8, and Proposition 4.1.1.7, with explicit image-factorization and operator checks. Online source read 2026-10-17; not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -41,10 +157,45 @@
    "results": "No hits in Mathlib.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lastVertex|last.vertex|cofinal|category.of.simplices",
+   "results": "{\"t\": \"2026-10-17T03:35:59Z\", \"tool\": \"grep\", \"query\": \"lastVertex|last.vertex|cofinal|category.of.simplices\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Simplices.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Simplices.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Simplices.lean\"], \"digest\": \"6d4644d2ed121b90\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: nerve and standard-simplex definitions, homotopy-category adjunctions, or truncation/coskeleton constructions; none states last-vertex cofinality or the coherent cocone restriction theorem. Read Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:34-72 and Simplices.lean:13-21,42-45; the latter explicitly distinguishes the preorder of simplices from the full simplex category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The last vertex map from the nerve of the category of simplices of any simplicial set induces equivalences on coherent cocone mapping spaces",
+   "results": "{\"t\": \"2026-10-17T03:35:59Z\", \"tool\": \"leanfinder\", \"query\": \"The last vertex map from the nerve of the category of simplices of any simplicial set induces equivalences on coherent cocone mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex.isoNerve_hom_app_apply\", \"SSet.stdSimplex.isoNerve\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.nerve.functorOfNerveMap_obj\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_obj\", \"SSet.OneTruncation₂.nerveHomEquiv\"], \"digest\": \"bd3b21ec8c3a1ec1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: nerve and standard-simplex definitions, homotopy-category adjunctions, or truncation/coskeleton constructions; none states last-vertex cofinality or the coherent cocone restriction theorem. Read Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:34-72 and Simplices.lean:13-21,42-45; the latter explicitly distinguishes the preorder of simplices from the full simplex category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofinality of the last vertex map from the nerve of the simplex category of a simplicial set",
+   "results": "{\"t\": \"2026-10-17T03:35:59Z\", \"tool\": \"leansearch\", \"query\": \"Cofinality of the last vertex map from the nerve of the simplex category of a simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"CategoryTheory.nerveMap\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerveMap_app_mk₁\", \"CategoryTheory.nerve_obj\", \"CategoryTheory.CosimplicialObject.δ\", \"CategoryTheory.CosimplicialObject\"], \"digest\": \"4079080bc404eb63\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: nerve and standard-simplex definitions, homotopy-category adjunctions, or truncation/coskeleton constructions; none states last-vertex cofinality or the coherent cocone restriction theorem. Read Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:34-72 and Simplices.lean:13-21,42-45; the latter explicitly distinguishes the preorder of simplices from the full simplex category."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.nerve, SSet",
+   "results": "{\"t\": \"2026-10-17T03:36:00Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.nerve, SSet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.nerve\", \"CategoryTheory.nerveFunctor_obj\", \"PartOrd.nerveFunctor_obj\", \"CategoryTheory.nerveMap\", \"CategoryTheory.nerveFunctor_map\", \"PartOrd.nerveFunctor_map\", \"SSet.stdSimplex.isoNerve\", \"SSet.stdSimplex.isoNerve_hom_app_apply\"], \"digest\": \"c533cdc898426471\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: nerve and standard-simplex definitions, homotopy-category adjunctions, or truncation/coskeleton constructions; none states last-vertex cofinality or the coherent cocone restriction theorem. Read Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:34-72 and Simplices.lean:13-21,42-45; the latter explicitly distinguishes the preorder of simplices from the full simplex category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy final simplex category resolution of a simplicial set preserves spaces of natural transformations to constant diagrams",
+   "results": "{\"t\": \"2026-10-17T03:37:18Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy final simplex category resolution of a simplicial set preserves spaces of natural transformations to constant diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.descOfTruncation_obj_mk\", \"SSet.hoFunctor.unitHomEquiv\", \"SSet.cosk\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.hoFunctor.terminalIso\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.Truncated.HomotopyCategory.descOfTruncation\"], \"digest\": \"f2c67e35f6547477\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: nerve and standard-simplex definitions, homotopy-category adjunctions, or truncation/coskeleton constructions; none states last-vertex cofinality or the coherent cocone restriction theorem. Read Mathlib/AlgebraicTopology/SimplicialSet/Nerve.lean:34-72 and Simplices.lean:13-21,42-45; the latter explicitly distinguishes the preorder of simplices from the full simplex category."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-poset-nerve-cofinal-replacement",
@@ -75,5 +226,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplex-last-vertex-cocone-equivalence",
+  "worker": "stage1",
+  "summary": "Kept the entire statement, including arbitrary non-quasicategorical X, fixed apex, actual restriction and the empty case. Nine proof steps construct and check the decomposition retraction, use specified last-vertex local colimits, verify both simplex-lift conditions including the image retraction and unique nondegenerate terminal factorization, and compose the actual restriction equivalences. One new statement-only general decomposition criterion; no new Mathlib leaves.",
+  "blueprint": "Retains the inherited prop-coef-integral-exceptional-adjoint ancestry: paragraph 2 derived coefficient adjunction before R inverse limit, through the filtered-poset replacement chain and HTT Remark 5.3.1.12. Realizes the first last-vertex map of Variant 4.2.3.15 by the full proof of Proposition 4.2.3.14. No chapter or unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-ea679654b",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-ea679654b (reviewer sub-agent of L); spot-checked: I read the whole item and the new node, and checked every step by direct calculation; no fixes were made and no tool_uses are declared. HTT is not archived and network access is blocked, so I checked against my knowledge of HTT 4.2.3, not the open PDF. The report's WANTED line stands and proof_origin.by=agent is correct. Item statement (HTT 4.2.3.14 in fixed-apex form): S(X) includes degenerate simplices, l_X is monotone, there is no hypothesis on X or on colimits in E, X empty is included, and it matches what lem-coef-infinity-poset-nerve-cofinal-replacement uses. Step 2: I checked r is simplicial myself, using cv'=v theta and tau_{theta(s)}=tau_r Delta(c), plus the case with no upper vertex retained; r b=id and r a=l_X hold exactly, and r iota_tau repeats the last vertex. Step 3: the standard-simplex clause of lem-coef-infinity-final-index-colimit gives the local colimits that lem-coef-decomposition-local-colimit-cocones needs. Step 4: b*r*=id strictly, so r* is an equivalence. Step 5: (id,z) is initial in I_z. Step 6: the image retraction is J -| R with RJ=id and j_s giving JR=>id; I checked the induced arrow and the beta identities. Step 7: the Eilenberg-Zilber terminal object (t, nondegenerate z) lies in B_z because d<n. Steps 8-9: lem-coef-infinity-anodyne-cocones applies, and l_X*=a*r*. New node lem-coef-decomposition-simplex-lift-right-anodyne: it is the general HTT 4.2.3.8, statement only, self-contained, with LeanSearch, Loogle, LeanFinder and grep searches recorded. It does not restate a clause of the item. lem-coef-directed-decomposition-right-anodyne is its directed-cover special case, not a duplicate. I tested it on K=Delta^0 with K_a a point (gives the horn {1} in Delta^1), on two points over a point and on Delta^1 over a point (the hypotheses fail, as they must), and on nondegenerate z, where D_z is empty. All cited statements are in unit sk-prop-sf-biduality-general apart from a Mathlib leaf and a definition, so the route is respected; no SGA is used."
  }
 }

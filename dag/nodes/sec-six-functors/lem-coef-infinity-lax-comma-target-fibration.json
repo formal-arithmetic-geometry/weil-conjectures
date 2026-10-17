@@ -2,18 +2,104 @@
  "id": "lem-coef-infinity-lax-comma-target-fibration",
  "kind": "statement",
  "title": "Target evaluation of a quasicategorical lax comma construction",
- "statement": "Use quasicategories, coherent functor simplicial sets, spaces, composition and degreewise simplicial pullbacks of [def-cbc-enhanced-diagrams-cones], and inner and cocartesian fibrations of [def-coef-infinity-fibrations]. All objects fit in one fixed universe. Let $f:A\\to B$ be an inner fibration of quasicategories that lifts equivalence edges with specified source. Form\n$$T=A\\times_{f,B,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,B),\\qquad q=\\operatorname{ev}_1:T\\to B.$$\nThen $T$ is a quasicategory and $q$ is a cocartesian fibration. Its objects are $(a,u:f(a)\\to b)$. For $x=(a,u:f(a)\\to b)$ and $y=(a',v:f(a')\\to b')$ there is a natural equivalence of spaces\n$$\\operatorname{Map}_T(x,y)\\simeq\\operatorname{Map}_A(a,a')\\mathop{\\times}^{h}_{\\operatorname{Map}_B(f(a),b')}\\operatorname{Map}_B(b,b').$$\nThe two maps to the middle space are $h\\mapsto v f(h)$ and $k\\mapsto k u$, respectively. The homotopy pullback retains the path between these composites. Under this equivalence $q$ is projection to $k$, and precomposition and postcomposition agree with pasting coherent squares. Here $X\\times_Z^hY$ denotes the path-space pullback of spaces, with its paths and all higher simplices. These assertions remain valid when $A$ is empty; no limits, colimits or presentability of $A$ or $B$ are assumed.",
+ "statement": "Use quasicategories, coherent functor simplicial sets, spaces and degreewise simplicial pullbacks of [def-cbc-enhanced-diagrams-cones], composition of mapping spaces of [lem-coef-infinity-mapping-composition], and inner and cocartesian fibrations of [def-coef-infinity-fibrations]. All objects fit in one fixed universe. Let $f:A\\to B$ be an inner fibration of quasicategories that lifts equivalence edges with specified source. Form\n$$T=A\\times_{f,B,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,B),\\qquad q=\\operatorname{ev}_1:T\\to B.$$\nThen $T$ is a quasicategory and $q$ is a cocartesian fibration. Its objects are $(a,u:f(a)\\to b)$. For $x=(a,u:f(a)\\to b)$ and $y=(a',v:f(a')\\to b')$ there is a natural equivalence of spaces\n$$\\operatorname{Map}_T(x,y)\\simeq\\operatorname{Map}_A(a,a')\\mathop{\\times}^{h}_{\\operatorname{Map}_B(f(a),b')}\\operatorname{Map}_B(b,b').$$\nThe two maps to the middle space are $h\\mapsto v f(h)$ and $k\\mapsto k u$, respectively. The homotopy pullback retains the path between these composites. Under this equivalence $q$ is projection to $k$, and precomposition and postcomposition agree with pasting coherent squares. Here $X\\times_Z^hY$ denotes the path-space pullback of spaces, with its paths and all higher simplices. These assertions remain valid when $A$ is empty; no limits, colimits or presentability of $A$ or $B$ are assumed.",
  "source": {
   "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
   "place": "Corollary 2.4.7.12, printed p. 143 (PDF p. 161), dualized, for the cocartesian projection; Corollary 2.4.7.11 for endpoint evaluation. Mapping formula: oriented fiber product of Kerodon Subsection 4.6.4 (Kerodon 01KE), Definition 4.6.4.1 and Proposition 4.6.4.2, together with the coherent-square description of morphisms. WANTED archived HTT and Kerodon. No Stacks tag states this quasicategorical theorem."
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-mapping-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $E=\\operatorname{Fun}(\\Delta^1,B)$ and let $e=(\\operatorname{ev}_0,\\operatorname{ev}_1):E\\to B\\times B$. The exponential isofibration theorem applied to $\\partial\\Delta^1\\hookrightarrow\\Delta^1$ makes $e$ an isofibration between quasicategories. The map $(f,\\operatorname{id}_B):A\\times B\\to B\\times B$ therefore has degreewise pullback $T$, so the isofibration pullback theorem makes $T$ a quasicategory. The projection $A\\times B\\to B$ is an inner fibration by the horn definition (fill the $A$-coordinate while the $B$-coordinate is the prescribed simplex), and the pullback projection $T\\to A\\times B$ is an inner fibration; hence their composite $q=\\operatorname{ev}_1:T\\to B$ is an inner fibration.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F1",
+    "place": "Exponentiation for endpoint evaluation; the pullback/quasicategory conclusion is the cited isofibration pullback theorem."
+   }
+  },
+  {
+   "text": "Fix $x=(a,u:f(a)\\to b)$ and $y=(a',v:f(a')\\to b')$, and retain $E,e$ from Step 1. Write $U_C(c,d)$ for the arrow mapping space of the pinch-comparison statement, and $M_C(c,d)$ for the right-pinched mapping space. Internal functor simplicial sets and fibers commute with degreewise pullbacks, so there is a literal identification\n$$U_T(x,y)=(U_A(a,a')\\times U_B(b,b'))\\times_{U_B(f(a),f(a'))\\times U_B(b,b')}U_E(u,v).$$\nThe last map is induced by the inner fibration $e:E\\to B\\times B$, hence is a Kan fibration between Kan complexes by the last assertion of the exponentiation statement. The Kan pullback/path comparison therefore changes this strict pullback into a homotopy pullback. The natural right-pinch maps from $M_C$ to $U_C$ commute strictly with the maps of this cospan. Homotopy-pullback invariance and the pinch equivalences give\n$$M_T(x,y)\\simeq(H\\times K)\\times^h_{S\\times K}M_E(u,v),$$\nwhere $H=M_A(a,a')$, $S=M_B(f(a),f(a'))$, $K=M_B(b,b')$, and $H\\to S$ is induced by $f$. Put $Q=M_E(u,v)$ and $Z=M_B(f(a),b')$. The arrow-morphism-square statement says that the square with top row $Q\\to K$ and bottom row $S\\to Z$, whose vertical maps are source evaluation and $k\\mapsto ku$, is a homotopy pullback; its specified commutation path compares $vs$ and $ku$. Set $P=(H\\times K)\\times^h_{S\\times K}Q$. Here is the pasting calculation explicitly. The square with top row $H\\times K\\to S\\times K$ and bottom row $H\\to S$, and with vertical maps the first projections, is a strict pullback along the Kan fibration $S\\times K\\to S$: its horn lifts fill only the $K$-coordinate. The pullback/path comparison makes this square a homotopy pullback. Above it place the defining homotopy-pullback square for $P\\to Q$ over $H\\times K\\to S\\times K$. Vertical pasting gives a homotopy-pullback square with top row $P\\to Q$ and bottom row $H\\to S$. Paste this horizontally with the arrow-morphism square $Q\\to K$ over $S\\to Z$. The outer square $P\\to K$ over $H\\to Z$ is a homotopy pullback, so\n$$P\\simeq H\\times_Z^h K.$$\nEach use of pasting carries the concatenated specified commutation homotopy. Its two maps to $Z$ are therefore $h\\mapsto vf(h)$ and $k\\mapsto ku$, and its comparison records $(h,k,\\gamma)$ with $\\gamma:vf(h)\\simeq ku$, including all higher simplices. Combining this with the preceding pinch equivalences proves the displayed mapping formula and its projection to $k$.\n\nFor completeness the composition description is as follows. A square from $x_0=(a_0,u_0)$ to $x$ has components $(h_0,k_0,\\gamma_0)$ with $\\gamma_0:uf(h_0)\\simeq k_0u_0$. Precomposing $(h,k,\\gamma)$ with it gives components $(hh_0,kk_0)$; its path first applies $\\gamma f(h_0)$ and then $k\\gamma_0$, inserting the composition homotopies to run from $vf(hh_0)$ to $(kk_0)u_0$. A square from $y$ to $y_1=(a_1,v_1)$ has components $(h_1,k_1,\\gamma_1)$ with $\\gamma_1:v_1f(h_1)\\simeq k_1v$. Postcomposition gives $(h_1h,k_1k)$; its path applies $\\gamma_1f(h)$ and then $k_1\\gamma$, from $v_1f(h_1h)$ to $(k_1k)u$, with the composition homotopies inserted. These are the two gluings of coherent squares. Naturality in both arrows in the arrow-morphism-square statement, and naturality of the pinch maps and all projections used above, identify these gluings with actual precomposition and postcomposition, retaining their higher simplices. The mapping-composition statement supplies their composition and unit homotopies.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06BZ",
+    "place": "Theorem 8.3.7.1 specialized to the arrow category, then endpoint base change; path comparison 0329, invariance 032B, and pasting 0110 are cited as DAG statements."
+   }
+  },
+  {
+   "text": "Let $x=(a,u:f(a)\\to b)$ and let $k:b\\to b'$ be an edge of $B$. Fill the inner $2$-horn with consecutive edges $u,k$ in the quasicategory $B$; call its third edge $w:f(a)\\to b'$ and its $2$-simplex $\\sigma$. Triangulate $\\Delta^1\\times\\Delta^1$ by its diagonal from $(0,0)$ to $(1,1)$, with the first coordinate the transformation direction and the second the arrow direction. Send its four vertices $(0,0),(1,0),(0,1),(1,1)$ to $f(a),f(a),b,b'$. On the triangle $((0,0),(0,1),(1,1))$ use $\\sigma$, and on $((0,0),(1,0),(1,1))$ use the degenerate triangle with edges $1_{f(a)},w,w$. They agree on the diagonal, so define an edge $u\\to w$ in $E$, with source endpoint the constant edge at $f(a)$ and target endpoint exactly $k$. Together with the constant edge at $a$ this is an edge $s:x\\to y=(a,w)$ of the degreewise pullback $T$, and $q(s)=k$. The construction also covers degenerate $k$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.4.7.12, opposite-category dual; agent expansion by the explicit two-triangle square."
+   }
+  },
+  {
+   "text": "Fix $z=(a',v:f(a')\\to c)$. Put $H=\\operatorname{Map}_A(a,a')$, $Z=\\operatorname{Map}_B(f(a),c)$, $L'=\\operatorname{Map}_B(b',c)$, and $L=\\operatorname{Map}_B(b,c)$. Step 2 identifies $\\operatorname{Map}_T(y,z)$ with $H\\times_Z^h L'$ using precomposition by $w$, and $\\operatorname{Map}_T(x,z)$ with $H\\times_Z^h L$ using precomposition by $u$. In both cases $H\\to Z$ is $h\\mapsto vf(h)$. The triangle $\\sigma$ of Step 3 gives the specified commutation homotopy between precomposition by $w$ and the composite of precomposition by $k:L'\\to L$ with precomposition by $u:L\\to Z$. The two defining homotopy-pullback squares to $H\\to Z$ therefore form an adjacent diagram\n$(H\\times_Z^h L'\\longrightarrow H\\times_Z^h L\\longrightarrow H)$ over $(L'\\xrightarrow{k^*}L\\longrightarrow Z)$, with vertical maps the second projections and $H\\to Z$.\nThe right square and the outer rectangle are homotopy pullbacks by their path-space definitions. Homotopy-pullback pasting (with the homotopy supplied by $\\sigma$) proves that the left square is a homotopy pullback. On triples its top map sends $(h,\\ell,\\gamma)$ to $(h,\\ell k,\\gamma')$, where $\\gamma'$ pastes $\\gamma$ with the triangle comparing $\\ell w$ and $(\\ell k)u$. This is precomposition with the actual edge $s$ by the coherent-square compatibility of Step 2; its $A$-component is precomposition with the degenerate identity and hence the identity up to its specified unit homotopy. Thus the left square is exactly the mapping-space square for $s$ over $k$, including its specified commutation homotopy, not merely a square of homotopy classes. Applying the cocartesian mapping criterion to the inner fibration $q$ of Step 1 proves that $s$ is $q$-cocartesian.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0110",
+    "place": "Proposition 3.4.1.11 (specified-homotopy pasting), followed by the cited dual of HTT Proposition 2.4.4.3."
+   }
+  },
+  {
+   "text": "Step 1 gives that $q$ is an inner fibration between quasicategories, and Steps 3 and 4 supply a $q$-cocartesian lift of every edge $k:q(x)\\to b'$ with prescribed source $x$. By the definition of cocartesian fibration, $q$ is therefore a cocartesian fibration. The mapping formula of Step 2 and the coherent pasting description remain valid when $A$ is empty (there are then no vertices to test and all lifting assertions are vacuous); the pullback construction uses no limits, colimits, presentability, or nonemptiness assumptions.",
+   "uses": [
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.4.7.12, opposite-category dual; conclusion from the definition and the preceding construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-pullback-path-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Corollary 2.4.7.12, opposite-category dual, with the arrow mapping-space formula of Kerodon 06BZ; agent expansion through existing DAG statements. Online sources read; archived copies unavailable."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -77,10 +163,45 @@
    "results": "{\"t\": \"2026-10-17T02:17:48Z\", \"tool\": \"grep\", \"query\": \"quasicategor|quasi.category|infinity.operad|oriented.*(fiber|fibre)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "No match: source grep restricted to Mathlib/CategoryTheory returned zero hits. The semantic ordinary-comma hits were separately read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasicategorical lax comma category target evaluation cocartesian fibration mapping spaces homotopy pullback",
+   "results": "{\"t\": \"2026-10-17T02:53:20Z\", \"tool\": \"leanfinder\", \"query\": \"quasicategorical lax comma category target evaluation cocartesian fibration mapping spaces homotopy pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.domainCartesianLift\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.cartesianLift\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\"], \"digest\": \"3a9a82f3f6eb1c71\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary categories and their Hom-set lifts, not quasicategorical mapping spaces. Read Mathlib/CategoryTheory/Comma/Basic.lean:71-104 and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-75; other retained searches give the second phrasing."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Comma, CategoryTheory.Functor.IsCocartesian, CategoryTheory.FiberedCategory",
+   "results": "{\"t\": \"2026-10-17T02:53:21Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Comma, CategoryTheory.Functor.IsCocartesian, CategoryTheory.FiberedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.FiberedCategory'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: Loogle rejected this query because CategoryTheory.FiberedCategory is an unknown identifier; this search is not evidence of absence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "mapping spaces in an infinity categorical lax comma construction are homotopy pullbacks and target evaluation is cocartesian",
+   "results": "{\"t\": \"2026-10-17T02:53:22Z\", \"tool\": \"leansearch\", \"query\": \"mapping spaces in an infinity categorical lax comma construction are homotopy pullbacks and target evaluation is cocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comma.map_fst\", \"CategoryTheory.Functor.IsCocartesian.mk\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Comma.mapLeft_obj_hom\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Comma.map_obj_hom\", \"CategoryTheory.Comma.faithful_map\"], \"digest\": \"88c991a33d2fa21d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern ordinary categories and their Hom-set lifts, not quasicategorical mapping spaces. Read Mathlib/CategoryTheory/Comma/Basic.lean:71-104 and Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-75; other retained searches give the second phrasing."
+  },
+  {
+   "tool": "grep",
+   "query": "laxComma|lax_comma|comma.*[Cc]ocartesian|[Cc]ocartesian.*comma",
+   "results": "{\"t\": \"2026-10-17T02:53:21Z\", \"tool\": \"grep\", \"query\": \"laxComma|lax_comma|comma.*[Cc]ocartesian|[Cc]ocartesian.*comma\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the retained search in Mathlib/CategoryTheory returned no hits. Distinct search scope from the earlier same-pattern grep; ordinary Comma and IsCocartesian candidates from the semantic searches were read separately."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a simplicial infinity category the undercategory projects to the category by a left fibration and its relative comma construction is cocartesian",
+   "results": "{\"t\": \"2026-10-17T03:46:52Z\", \"tool\": \"leanfinder\", \"query\": \"For a simplicial infinity category the undercategory projects to the category by a left fibration and its relative comma construction is cocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsCocartesian.map\", \"HomotopicalAlgebra.trivialCofibrations_over_eq\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\"], \"digest\": \"dc2b40b80570ac86\"}",
+   "date": "2026-10-17",
+   "verdict": "Independent second-reader phrasing: no exact match. IsCocartesian and IsStronglyCocartesian in Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-75 express ordinary-category unique lifting of Hom-set morphisms; they do not provide quasicategorical mapping spaces or the homotopy-pullback formula. CommaMorphism in Mathlib/CategoryTheory/Comma/Basic.lean:96-104 uses equality of ordinary composites."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-active-operad-envelope-cocartesian",
@@ -92,7 +213,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent free-module criterion through active concatenation: HA Lemma 2.2.4.15(1)-(2), unrestricted arrow category before its active subcategory; HTT Corollary 2.4.7.12 and the mapping-space calculation used in the envelope proof.",
+   "place": "Infrastructure for the second proof paragraph of prop-coef-integral-exceptional-adjoint (the finite-coefficient mapping-complex adjunction before the derived inverse limit), through the recorded active-operad-envelope ancestry: the unrestricted arrow category, its target evaluation, and its coherent-square mapping calculation. These are auxiliary facts of the descendant split, not assertions written literally in that blueprint paragraph.",
    "via": [
     "lem-coef-active-operad-envelope-cocartesian",
     "lem-coef-active-operad-cocartesian-concatenation",
@@ -107,5 +228,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-lax-comma-target-fibration",
+  "worker": "stage1",
+  "summary": "Retained the earlier five-step split, searched-source records, citations and report; rechecked against current DAG statements and repaired the strict-to-homotopy mapping-space passage using unpinched mapping spaces, their Kan fibration, natural pinch equivalences, path comparison, invariance and pullback pasting. Expanded the actual two-triangle lift and used specified-homotopy pasting for its cocartesian test. No new nodes. Composition now cites its defining statement. Corrected source and blueprint-place descriptions without changing the mathematical assertion. Second reading expands Step 2 into two explicit pullback-pasting diagrams and both whiskered square-path compositions, and corrects the prime in Step 5.",
+  "blueprint": "Infrastructure for the second proof paragraph of prop-coef-integral-exceptional-adjoint (the finite-coefficient mapping-complex adjunction before the derived inverse limit), through the recorded active-operad-envelope ancestry: the unrestricted arrow category, its target evaluation, and its coherent-square mapping calculation. These are auxiliary facts of the descendant split, not assertions written literally in that blueprint paragraph."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NR-12e030487",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-12e030487 (reviewer sub-agent of L); spot-checked: I read the whole item: statement, 5 steps, proof_deps, blueprint record and split_report, plus the full statements of all 11 cited nodes, the citer lem-coef-active-operad-envelope-cocartesian and the unit sk-prop-sf-biduality-general. HTT and Kerodon are not in literature/; WANTED is declared and proof_origin is agent. I checked the item against HTT Cor. 2.4.7.12 (dual) and the Kerodon §4.6.4 oriented-fiber-product Hom formula: endpoint direction and the legs h↦vf(h), k↦ku agree. The isofibration hypothesis on f is inherited and stronger than the source needs; nothing was weakened. Small cases checked: B=Δ⁰ (T=A); A=Δ⁰ (coslice); A=Δ⁰, B=N[1]; f=id (reduces to arrow-morphism-square, not circular); A empty (vacuous). Step 1: e is an isofibration by the exponentiation 'in particular' clause, pullback-limit applies with g=(f,id), q=ev_1 is a composite of inner fibrations. Step 2: the U_T strict pullback identity is correct; the leg is a Kan fibration by the last clause of exponentiation; pinch naturality gives strictly commuting cospans, so invariance applies as stated; vertical and horizontal pasting orientations checked and P≃H×^h_Z K with the right legs. Step 3: both triangles checked explicitly (σ and s_0(w)); s lies in the strict pullback with q(s)=k; elementary. Step 4: the criterion's square matches p(x)=b, p(y)=b', p(z)=c; the pasting uses the specified-homotopy clause. One minor gloss, accepted: the outer rectangle being a homotopy pullback after replacing ℓ↦ℓw by the homotopic ℓ↦(ℓk)u (and transferring along the Step 2 equivalences) is a one-line path-concatenation fact. Step 5 follows from the definition and is elementary. Route: all statements cited are in the item's own unit; the only other-unit citation, def-cbc-enhanced-diagrams-cones, is a definition. No tool_uses, no SGA. proof_deps equals the union of uses; the blueprint via chain matches; same_as=[]. Duplicate search with rg over dag/nodes (relative-slice-sections, arrow-target-right-fibration, slice-arrow-equivalence, cocartesian-arrow-projection): different constructions, no duplicate. No new nodes, no fixes."
  }
 }
