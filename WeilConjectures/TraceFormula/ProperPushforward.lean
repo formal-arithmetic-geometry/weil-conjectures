@@ -123,6 +123,22 @@ variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 variable (c : Correspondence ℓ K) (Y : Over (Spec (.of k))) [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
+/-! ### The universal property of the fixed locus -/
+
+namespace FixedLocus
+
+variable {c} (F : c.FixedLocus)
+
+@[reassoc (attr := simp)]
+lemma lift_ι {W : Over (Spec (.of k))} (t : W ⟶ c.C) (h : t ≫ c.c₁ = t ≫ c.c₂) :
+    Fork.IsLimit.lift F.isLimit t h ≫ F.ι = t :=
+  Fork.IsLimit.lift_ι' _ _ _
+
+lemma hom_ext {W : Over (Spec (.of k))} {t t' : W ⟶ F.F} (h : t ≫ F.ι = t' ≫ F.ι) : t = t' :=
+  Fork.IsLimit.hom_ext F.isLimit h
+
+end FixedLocus
+
 /-- A *proper pushforward diagram* `(f, g) : (C, c) ⟶ (D, b)` of an endocorrespondence `c` of
 `(X, K)` to a scheme `Y` (blueprint `def-trf-coefficient-pushforward`): a proper morphism
 `f : X ⟶ Y`, a separated `k`-scheme of finite type `D` with morphisms `b₁, b₂ : D ⟶ Y`, and a
@@ -213,11 +229,139 @@ noncomputable def pushforwardCoeff :
 
 /-- The *proper pushforward* `(D, b₁, b₂, [f, g]_! u)` of the correspondence `c`, a
 correspondence of `(Y, Rf_* K)` (blueprint `def-trf-coefficient-pushforward`). -/
-noncomputable def pushforward : Correspondence ℓ P.coeff where
+noncomputable abbrev pushforward : Correspondence ℓ P.coeff where
   C := P.D
   c₁ := P.b₁
   c₂ := P.b₂
   u := P.pushforwardCoeff
+
+
+/-! ### The induced map of fixed loci -/
+
+lemma pushforward_c₁ : P.pushforward.c₁ = P.b₁ := rfl
+
+lemma pushforward_c₂ : P.pushforward.c₂ = P.b₂ := rfl
+
+variable (Fc : c.FixedLocus) (Fb : P.pushforward.FixedLocus)
+
+omit [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] in
+lemma fixedLocus_ι_comp_g_comp_b₁ :
+    (Fc.ι ≫ P.g) ≫ P.b₁ = (Fc.ι ≫ P.g) ≫ P.b₂ := by
+  rw [Category.assoc, Category.assoc, P.w₁, P.w₂, ← Category.assoc, Fc.w, Category.assoc]
+
+/-- The *induced map of fixed loci* `h : Fix(c) ⟶ Fix(b)` of a proper pushforward diagram, the
+restriction of `g` (blueprint `def-trf-coefficient-pushforward`, item 4): the factorization of
+`Fix(c) ⟶ C ⟶ D` through the equalizer `Fix(b) ⟶ D` of `b₁` and `b₂`. -/
+noncomputable def fixMap : Fc.F ⟶ Fb.F :=
+  Fork.IsLimit.lift Fb.isLimit (Fc.ι ≫ P.g) (P.fixedLocus_ι_comp_g_comp_b₁ Fc)
+
+/-- The induced map of fixed loci satisfies `i_b ∘ h = g ∘ i_c`. -/
+@[reassoc]
+lemma fixMap_ι : P.fixMap Fc Fb ≫ Fb.ι = Fc.ι ≫ P.g :=
+  Fb.lift_ι _ _
+
+/-- The induced map of fixed loci satisfies `d_b ∘ h = f ∘ d_c`. -/
+@[reassoc]
+lemma fixMap_ι_b₁ : P.fixMap Fc Fb ≫ Fb.ι ≫ P.b₁ = Fc.ι ≫ c.c₁ ≫ P.f := by
+  rw [fixMap_ι_assoc, P.w₁]
+
+/-- The first factor `κ = (i_c, h) : Fix(c) ⟶ C ×_D Fix(b)` of the induced map of fixed loci
+(blueprint `lem-trf-fixed-map-proper`). -/
+noncomputable def fixMapFactor : Fc.F ⟶ pullback P.g Fb.ι :=
+  pullback.lift Fc.ι (P.fixMap Fc Fb) (P.fixMap_ι Fc Fb).symm
+
+@[reassoc]
+lemma fixMapFactor_fst : P.fixMapFactor Fc Fb ≫ pullback.fst _ _ = Fc.ι :=
+  pullback.lift_fst _ _ _
+
+/-- The induced map of fixed loci factors as `h = π ∘ κ`, with `π : C ×_D Fix(b) ⟶ Fix(b)` the
+base change of `g` (blueprint `lem-trf-fixed-map-proper`, item 1). -/
+@[reassoc]
+lemma fixMapFactor_snd : P.fixMapFactor Fc Fb ≫ pullback.snd _ _ = P.fixMap Fc Fb :=
+  pullback.lift_snd _ _ _
+
+/-- The map `λ = (c₁, c₂) ∘ j : C ×_D Fix(b) ⟶ X ×_Y X`: on `C ×_D Fix(b)` the two legs agree
+after composing with `f`. -/
+noncomputable def fixMapFactorDiagonalLift : pullback P.g Fb.ι ⟶ pullback P.f P.f :=
+  pullback.lift (pullback.fst _ _ ≫ c.c₁) (pullback.fst _ _ ≫ c.c₂) (by
+    rw [Category.assoc, Category.assoc, ← P.w₁, ← P.w₂, pullback.condition_assoc,
+      pullback.condition_assoc]
+    exact pullback.snd _ _ ≫= Fb.w)
+
+@[reassoc]
+lemma fixMapFactorDiagonalLift_fst :
+    P.fixMapFactorDiagonalLift Fb ≫ pullback.fst _ _ = pullback.fst _ _ ≫ c.c₁ :=
+  pullback.lift_fst _ _ _
+
+@[reassoc]
+lemma fixMapFactorDiagonalLift_snd :
+    P.fixMapFactorDiagonalLift Fb ≫ pullback.snd _ _ = pullback.fst _ _ ≫ c.c₂ :=
+  pullback.lift_snd _ _ _
+
+/-- The first factor `κ` of the induced map of fixed loci is the base change of the relative
+diagonal `X ⟶ X ×_Y X` along `λ : C ×_D Fix(b) ⟶ X ×_Y X` (blueprint
+`lem-trf-fixed-map-proper`, item 1). -/
+lemma isPullback_fixMapFactor :
+    IsPullback (P.fixMapFactor Fc Fb) (Fc.ι ≫ c.c₁) (P.fixMapFactorDiagonalLift Fb)
+      (pullback.diagonal P.f) := by
+  have hs (s : PullbackCone (P.fixMapFactorDiagonalLift Fb) (pullback.diagonal P.f)) :
+      s.fst ≫ pullback.fst _ _ ≫ c.c₁ = s.snd ∧ s.fst ≫ pullback.fst _ _ ≫ c.c₂ = s.snd := by
+    have h₁ := s.condition =≫ pullback.fst P.f P.f
+    have h₂ := s.condition =≫ pullback.snd P.f P.f
+    rw [Category.assoc, Category.assoc, fixMapFactorDiagonalLift_fst, pullback.diagonal_fst,
+      Category.comp_id] at h₁
+    rw [Category.assoc, Category.assoc, fixMapFactorDiagonalLift_snd, pullback.diagonal_snd,
+      Category.comp_id] at h₂
+    exact ⟨h₁, h₂⟩
+  have hc (s : PullbackCone (P.fixMapFactorDiagonalLift Fb) (pullback.diagonal P.f)) :
+      (s.fst ≫ pullback.fst _ _) ≫ c.c₁ = (s.fst ≫ pullback.fst _ _) ≫ c.c₂ := by
+    rw [Category.assoc, Category.assoc, (hs s).1, (hs s).2]
+  have w : P.fixMapFactor Fc Fb ≫ P.fixMapFactorDiagonalLift Fb =
+      (Fc.ι ≫ c.c₁) ≫ pullback.diagonal P.f := by
+    apply pullback.hom_ext
+    · rw [Category.assoc, Category.assoc, fixMapFactorDiagonalLift_fst, fixMapFactor_fst_assoc,
+        pullback.diagonal_fst, Category.comp_id]
+    · rw [Category.assoc, Category.assoc, fixMapFactorDiagonalLift_snd, fixMapFactor_fst_assoc,
+        pullback.diagonal_snd, Category.comp_id, Fc.w]
+  refine IsPullback.of_isLimit (c := PullbackCone.mk _ _ w) (PullbackCone.IsLimit.mk w
+    (fun s ↦ Fork.IsLimit.lift Fc.isLimit (s.fst ≫ pullback.fst _ _) (hc s)) (fun s ↦ ?_)
+    (fun s ↦ ?_) (fun s m hm _ ↦ ?_))
+  · apply pullback.hom_ext
+    · rw [Category.assoc, fixMapFactor_fst, Fc.lift_ι]
+    · rw [Category.assoc, fixMapFactor_snd]
+      apply Fb.hom_ext
+      rw [Category.assoc, Category.assoc, fixMap_ι, Fc.lift_ι_assoc, Category.assoc,
+        pullback.condition]
+  · rw [Fc.lift_ι_assoc]
+    exact (hs s).1
+  · apply Fc.hom_ext
+    rw [Fc.lift_ι, ← hm, Category.assoc, fixMapFactor_fst]
+
+/-- The first factor `κ : Fix(c) ⟶ C ×_D Fix(b)` of the induced map of fixed loci is a closed
+immersion, as a base change of the relative diagonal of the separated morphism `f` (blueprint
+`lem-trf-fixed-map-proper`, item 1). -/
+instance isClosedImmersion_fixMapFactor : IsClosedImmersion (P.fixMapFactor Fc Fb).left :=
+  MorphismProperty.of_isPullback ((P.isPullback_fixMapFactor Fc Fb).map (Over.forget _)).flip
+    (inferInstanceAs (IsClosedImmersion (pullback.diagonal P.f).left))
+
+/-- The second factor `π : C ×_D Fix(b) ⟶ Fix(b)` of the induced map of fixed loci is proper, as
+the base change of the proper `g` along `i_b : Fix(b) ⟶ D` (blueprint
+`lem-trf-fixed-map-proper`, item 1). -/
+instance isProper_pullbackSnd_g : IsProper (pullback.snd P.g Fb.ι).left :=
+  MorphismProperty.of_isPullback ((IsPullback.of_hasPullback P.g Fb.ι).map (Over.forget _))
+    (inferInstanceAs (IsProper P.g.left))
+
+/-- **The induced map of fixed loci is proper** (blueprint `lem-trf-fixed-map-proper`,
+item 2): `h = π ∘ κ` is the composite of the closed immersion `κ` and the base change `π` of
+the proper `g`. -/
+instance isProper_fixMap : IsProper (P.fixMap Fc Fb).left := by
+  rw [← P.fixMapFactor_snd Fc Fb, Over.comp_left]
+  infer_instance
+
+/-- The product `q = f × f : X ×_k X ⟶ Y ×_k Y` of the proper `f` is proper (blueprint
+`lem-trf-fixed-map-proper`, item 2). -/
+instance isProper_prodMap : IsProper (prod.map P.f P.f).left :=
+  inferInstance
 
 end ProperPushforwardDiagram
 
