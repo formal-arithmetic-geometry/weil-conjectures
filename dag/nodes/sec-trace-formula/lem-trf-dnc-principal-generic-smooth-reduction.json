@@ -8,14 +8,158 @@
   "place": "Claim 3.2.3 proof, first paragraph: normality, shrinking to smooth Z_red, and choosing a smooth function cutting it out"
  },
  "stmt_deps": [
+  "def-sbc-affine-space",
+  "def-sbc-smooth-morphisms",
   "def-trf-coefficient-conventions",
   "def-weil-closed-immersion",
   "def-weil-finite-type-morphism",
-  "def-sbc-smooth-morphisms"
+  "def-weil-pbc-scheme-reduction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a finite-type affine chart $U=\\operatorname{Spec}B$ of $X$ containing $\\xi$, and let $\\mathfrak p\\subset B$ represent $\\xi$. The affine description of the closed subscheme identifies $Z\\cap U$ with $\\operatorname{Spec}(B/(f))$. The component/minimal-prime correspondence applied to $B/(f)$ says that $\\mathfrak p$ is minimal among primes of $B$ containing $f$. The Hilbert basis theorem and localization permanence make $B$ and $R=B_{\\mathfrak p}=\\mathcal O_{X,\\xi}$ Noetherian. By normality, $R$ is an integrally closed domain. The germ $f_\\xi$ is nonzero: a zero germ would make $f$ zero on an open neighbourhood of $\\xi$, and hence at the generic point of a component of $X$ containing $\\xi$, contradicting the hypothesis. Also $f_\\xi\\in\\mathfrak m_R$, since $\\xi\\in V(f)$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Claim 3.2.3, first paragraph; affine and Noetherian preliminaries: Stacks Tags 00ES, 00FN, 01HV"
+   }
+  },
+  {
+   "text": "By the prime correspondence for localization, the only prime of $R$ containing $f_\\xi$ is $\\mathfrak m_R$: its contraction is a prime between $(f)$ and $\\mathfrak p$, and minimality of $\\mathfrak p$ forces equality. Thus $R/(f_\\xi)$ has just one prime, of height zero. Apply the one-equation height bound to the Noetherian ring $R$, the ideal $(f_\\xi)$ and the prime $\\mathfrak m_R$. It gives $\\operatorname{ht}(\\mathfrak m_R)\\leq1$. Every prime of the local ring $R$ is contained in $\\mathfrak m_R$, so its dimension equals this height. As $R$ is a domain and $0\\neq f_\\xi\\in\\mathfrak m_R$, the chain $(0)\\subsetneq\\mathfrak m_R$ gives dimension at least one. Hence $R$ is one-dimensional, and the normal-local-domain criterion makes it a discrete valuation ring.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization",
+    "lem-weil-pbc-noetherian-height-quotient-bound",
+    "lem-sc-normal-dim1-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E3 (lemma-spec-localization), 00KW (lemma-one-equation), 00PD (lemma-characterize-dvr)"
+   }
+  },
+  {
+   "text": "Choose a uniformizer $\\pi$ of $R$, so $\\mathfrak m_R=(\\pi)$ and $\\pi\\neq0$. The DVR factorization gives $f_\\xi=v\\pi^r$ with $v\\in R^\\times$ and $r\\geq0$; membership of $f_\\xi$ in the maximal ideal excludes $r=0$. Represent $\\pi,v,v^{-1}$ by sections $g,u,w$ on a common basic affine neighbourhood of $\\xi$. This is possible by the fractions description of the germ map. The germs of $uw-1$ and $f-ug^r$ are zero. For each, the same description supplies a denominator outside $\\mathfrak p$ annihilating its numerator; invert both denominators. On the resulting affine neighbourhood, still written $\\operatorname{Spec}B$ with point $\\mathfrak p$, one has $uw=1$ and $f=ug^r$. Thus $u$ is a unit and $Z=V(g^r)$ there; the germ of $g$ remains $\\pi$. The new coordinate ring is still finite type over $k$: adjoin the inverses of the finitely many inverted elements to the old generators.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Claim 3.2.3, first paragraph, equation as a power; Stacks Tag 00PD and Tag 01HV for spreading germs"
+   }
+  },
+  {
+   "text": "Let $A=k[t]$ and give the current $B$ its $A$-algebra structure by $t\\mapsto g$. The same finite set of $k$-algebra generators of $B$ generates it over $A$. The ring $A$ is Noetherian by the finite-type Noetherian theorem, applied to $k\\to k[t]$, and consequently $B$ is finitely presented over $A$. The induced scheme map is the coordinate morphism $g:\\operatorname{Spec}B\\to\\mathbf A^1_k=\\operatorname{Spec}k[t]$. Its value at $\\xi$ is $0$: a polynomial in $g$ has residue its constant coefficient, so the prime of $A$ below $\\mathfrak p$ is exactly $(t)$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 00FP (lemma-Noetherian-finite-type-is-finite-presentation); affine coordinate construction"
+   }
+  },
+  {
+   "text": "The evaluation $A\\to R$, $t\\mapsto\\pi$, is injective. Indeed, if a nonzero polynomial vanished at $\\pi$, its factorization into linear factors over the algebraically closed field $k$, together with the domain property of $R$, would imply $\\pi=a$ for some $a\\in k$. A nonzero $a$ is a unit in $R$, whereas $\\pi$ is not; $a=0$ contradicts $\\pi\\neq0$. Hence $R$ is a torsion-free $k[t]$-module: a nonzero polynomial acts by multiplication by a nonzero element of the domain $R$. Since $k[t]$ is a PID, the torsion-free flatness theorem makes $R$ flat over $A$. Every polynomial outside $(t)$ evaluates to a unit of $R$, since its constant coefficient is nonzero. Thus $R$ is an $A_{(t)}$-module, and flatness over a localization gives flatness of the local map $A_{(t)}\\to R$.",
+   "uses": [
+    "lem-pur-polynomial-field-pid",
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "lem-weil-pbc-flat-over-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AUW (lemma-dedekind-torsion-free-flat), with Algebra Tags 030A and 00HT (lemma-flat-localization), clause (2)"
+   }
+  },
+  {
+   "text": "Put $C=B/(g)$ and $\\overline{\\mathfrak p}=\\mathfrak p/(g)$. Quotient/localization compatibility gives $C_{\\overline{\\mathfrak p}}=R/(\\pi)=\\kappa(\\mathfrak p)$, a field and therefore a regular local ring (its maximal ideal and its dimension are both zero). Its residue field is separable over $k$. To check the stated separability definition explicitly, take any finitely generated subextension $E/k$ of $\\kappa(\\mathfrak p)/k$. The algebraically closed field $k$ has characteristic zero or has a $p$th root for every element, so the perfect-field separating-basis lemma applies to $E/k$. It supplies the separating transcendence basis required by the definition; doing this for every $E$ proves separability. As $C$ is a finite-type $k$-algebra, the regular-local/separable-residue smoothness criterion now says that $k\\to C$ is smooth at $\\overline{\\mathfrak p}$. This is precisely smoothness at the point over $\\xi$ of the fibre of $g$ over $0$, since $B\\otimes_{k[t]} k=B/(g)$ by evaluation at $t=0$.",
+   "uses": [
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-perfect-field-separating-basis",
+    "def-weil-pbc-separable-field-extension",
+    "lem-weil-pbc-regular-local-separable-residue-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CT (proposition-localize-quotient), 030Z (lemma-perfect), 030O (definition-separable-field-extension), 00TV (lemma-separable-smooth)"
+   }
+  },
+  {
+   "text": "Apply the pointwise flat-and-smooth-fibre criterion to $A=k[t]\\to B$ at $\\mathfrak p$: finite presentation is Step 4, flatness of $A_{(t)}\\to B_{\\mathfrak p}$ is Step 5, and smoothness of the fibre at the corresponding prime is Step 6. Thus $A\\to B$ is smooth at $\\mathfrak p$. By the definition of smoothness at a prime there is $h\\notin\\mathfrak p$ such that $B_h$ is smooth over $A$. Set $W=\\operatorname{Spec}B_h$. The affine-local ring description of smooth scheme morphisms makes $g:W\\to\\mathbf A^1_k$ smooth. All restrictions preserve $f=ug^r$ and invertibility of $u$.",
+   "uses": [
+    "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+    "def-weil-pbc-singular-ideal",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TF (lemma-flat-fibre-smooth), Definition 00TB (definition-smooth-at-prime); scheme convention identified in Tag 02H6"
+   }
+  },
+  {
+   "text": "The fibre $g^{-1}(0)=V(g)\\subset W$ is smooth over $k$ by the smooth-fibre assertion of the smoothness criterion, and is reduced by geometric reducedness of smooth fibres. The unit equation gives the equality of ideals $(f)=(g^r)$, so $Z\\cap W=V(g^r)$ scheme-theoretically. Since $r\\geq1$, $\\sqrt{(g^r)}=\\sqrt{(g)}$, and reducedness of $V(g)$ makes $(g)$ radical. The affine description of reduction therefore identifies $Z_{\\mathrm{red}}\\cap W$ with $V(g)$ as closed subschemes, proving its smoothness. The same $W,g,r,u$ meet every asserted clause.",
+   "uses": [
+    "sbc-lem-smooth-criterion",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-weil-pbc-scheme-reduction",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Claim 3.2.3, first paragraph; smooth fibres and reducedness: Stacks Tags 01VB, 056T; reduction: Tag 01J4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space",
+  "def-sbc-smooth-morphisms",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-singular-ideal",
+  "lem-pur-polynomial-field-pid",
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-noetherian-height-quotient-bound",
+  "lem-weil-pbc-perfect-field-separating-basis",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-regular-local-separable-residue-smooth",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "sbc-lem-smooth-criterion",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Claim 3.2.3, first paragraph; local algebra and smoothness details expanded using the Stacks results cited in the steps"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,18 +187,53 @@
    "query": "normal|smooth|Cartier|genericPoint",
    "results": "25 hits; logged names/files: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean; directory Mathlib/AlgebraicGeometry",
    "date": "2026-10-17",
-   "verdict": "no match: read the hits; ordinary scheme specialization, normalization or smooth morphism declarations do not state the etale DNC assertion."
+   "verdict": "no match: the scheme-property and elliptic division-polynomial hits do not state a smooth coordinate near a generic principal divisor."
   },
   {
    "tool": "leanfinder",
    "query": "A height one prime of a normal variety over a perfect field has a neighborhood on which a generator of its ideal is a smooth map to the affine line.",
    "results": "8 hits: Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_smooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, Algebra.smoothLocus, Algebra.IsSmoothAt",
    "date": "2026-10-17",
-   "verdict": "no match: read the returned signatures; structure-sheaf specialization, smooth-locus charts, and condensed locally constant adjunctions do not state this etale geometric assertion."
+   "verdict": "no match: the returned smooth-locus and standard-smooth-chart declarations assume smoothness at the point; none deduces a smooth coordinate from normality at a generic principal divisor."
+  },
+  {
+   "tool": "grep",
+   "query": "uniformizer|isSmoothAt|smoothAt",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: the four occurrences in Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean do not give the asserted normal generic-divisor coordinate construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A uniformizer at a codimension one point of a normal variety over a perfect field defines a smooth map to the affine line near that point.",
+   "results": "8 hits: Valuation.IsUniformizer, Valuation.Uniformizer.mk.inj, Valuation.IsUniformizer.not_isUnit, AlgebraicGeometry.IsSmooth.recOn, Valuation.Uniformizer.ext, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmooth.mk, Valuation.Uniformizer.mk'",
+   "date": "2026-10-17",
+   "verdict": "no match: the uniformizer and smooth-morphism declarations do not construct a smooth coordinate near a generic principal divisor of a normal scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"IsIntegrallyClosed\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: no declarations returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a normal finite type scheme over an algebraically closed field, near a generic point of a principal divisor its equation is a unit times a power of a smooth coordinate.",
+   "results": "8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt', AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, PowerSeries.IsWeierstrassDivisorAt, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth",
+   "date": "2026-10-17",
+   "verdict": "no match: the affine-open power-multiplication lemmas concern restriction and localization of sections, and the Weierstrass and standard-smooth-chart results do not assert this generic-divisor coordinate construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal algebra of finite type over an algebraically closed field admits a smooth parameter at every height one prime, whose powers generate any principal ideal with that prime as a minimal prime.",
+   "results": "8 hits: Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Algebra.IsStandardSmooth, Algebra.IsSmoothAt, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.smoothLocus, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.IsEtaleAt",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned smooth-locus and standard-smooth-algebra results require a pre-existing smoothness hypothesis or define those notions; none produces a smooth parameter from a height-one normal local ring."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-dnc-generic-zero-section-vanishing",
@@ -74,5 +253,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-dnc-principal-generic-smooth-reduction",
+  "worker": "stage1",
+  "summary": "Expanded the normal generic-divisor reduction of Varshavsky Claim 3.2.3 into eight steps using existing DAG tools only. Proved the local dimension is one, spread a DVR factorization with its unit, checked local flatness and smoothness of the zero fibre separately, and applied the pointwise smoothness criterion before identifying the reduced divisor. No new nodes, no statement change, no SGA sources.",
+  "blueprint": "Supplies the geometric first paragraph of Varshavsky Claim 3.2.3 used by lem-trf-dnc-generic-zero-section-vanishing, in the normal-cone proof of lem-trf-local-term-locality (1),(2), unit sk-i-curve-zero.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Normal local dimension-one criterion for the generic divisor local ring; this is generic commutative algebra, not a replacement for the normal-cone route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+    "why": "Pointwise algebraic criterion turns local flatness and the smooth zero fibre into a smooth coordinate neighbourhood."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-separable-residue-smooth",
+    "why": "Tests smoothness of the zero fibre at its generic local ring; the trace-formula unit has no local algebra smoothness criterion."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Uses only the implication that a smooth morphism has smooth fibres to identify the reduced divisor as smooth."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Uses geometric reducedness of smooth fibres to identify the equation g with the reduced divisor."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+  "lem-weil-pbc-regular-local-separable-residue-smooth",
+  "sbc-lem-smooth-criterion",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-37338a270",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-37338a270 (reviewer sub-agent of L); spot-checked: Read the item, its 8 steps, the statements of all 26 cited nodes, the parent's citing steps, unit sk-i-curve-zero, Varshavsky Claim 3.2.3 proof first paragraph (printed pp. 23-24), and Stacks 00TF, 00TV, 00PD and 00KW in algebra.tex. The statement is unchanged and true; it matches the source, and the unit factorization f=ug^r is stronger than the source's power assertion and is proved. The f-not-zero-on-components hypothesis is needed and the parent handles the excluded case. Steps 1-8 are correct. Step 1: Krull plus minimality gives a one-dimensional normal Noetherian local domain, hence a DVR. Step 3: the germs are spread with real annihilators. Steps 4-7: finite presentation, local flatness over k[t]_(t) by torsion-freedom, a smooth zero fibre at xi from a field local ring with separable residue field (k perfect), then 00TF and 00TB. Step 8: smooth fibres are reduced, so (g) is radical and Z_red cap W = V(g). Edge cases checked: t^r with p dividing r, f a unit, dimension 0, disconnected X, singular normal ambient. No new nodes, no duplicate of the item found by grep, no cycle, no SGA source. The five off-unit tool lemmas requested in split_report.tool_uses (lem-sc-normal-dim1-dvr, lem-weil-pbc-flat-smooth-fibre-smooth-at-prime, lem-weil-pbc-regular-local-separable-residue-smooth, sbc-lem-smooth-criterion, sbc-lem-smooth-geometrically-reduced) are accepted as generic black-box tools. No fixes made."
  }
 }
