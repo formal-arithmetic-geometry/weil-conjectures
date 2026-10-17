@@ -1,143 +1,142 @@
 {
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "id": "lem-weil-pbc-finite-discrete-coefficient-square-coherence",
-  "kind": "statement",
-  "title": "Square coherence of the canonical coefficient pullback family",
-  "statement": "For the same fixed B, eR, G, hG, let p be exactly the canonical family of [def-weil-pbc-canonical-finite-discrete-pullback]. For any commutative square sq:CommSq g′ f′ f g and K in D+ of etale B-module sheaves, F_X′(theta_etale(sq)_K) followed by p_g′ at f^*K and g′^*(p_f at K) equals p_f′ at g^*K followed by f′^*(p_g at K) and theta_internal(sq) at F_Y(K). Here theta_internal is coefficientAmbientSquare of [def-weil-pbc-coefficient-derived-functor-api]. No assertion is made about arbitrary choices of pullback isomorphisms.",
-  "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 5.3.2 and Lemma 5.4.1; sectionwise coefficient encoding"
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-finite-discrete-coefficient-square-coherence",
+ "kind": "statement",
+ "title": "Square coherence of the canonical coefficient pullback family",
+ "statement": "For the same fixed B, eR, G, hG, let p be exactly the canonical family of [def-weil-pbc-canonical-finite-discrete-pullback]. For any commutative square sq:CommSq g′ f′ f g and K in D+ of etale B-module sheaves, F_X′(theta_etale(sq)_K) followed by p_g′ at f^*K and g′^*(p_f at K) equals p_f′ at g^*K followed by f′^*(p_g at K) and theta_internal(sq) at F_Y(K). Here theta_internal is coefficientAmbientSquare of [def-weil-pbc-coefficient-derived-functor-api]. No assertion is made about arbitrary choices of pullback isomorphisms.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 5.3.2 and Lemma 5.4.1; sectionwise coefficient encoding"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-common-finite-discrete-encoding",
+  "def-weil-pbc-coefficient-derived-functor-api",
+  "def-weil-pbc-canonical-finite-discrete-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use ordinary composition coherence of the specified sheaf comparison. Apply the proved mapDerivedCategorySquareIso_hom_app_comp theorem to the inverse comparisons and cancel their inverses to obtain exact-derived composition coherence.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-sheaf-pullback-composition"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-weil-pbc-common-finite-discrete-encoding",
-    "def-weil-pbc-coefficient-derived-functor-api",
-    "def-weil-pbc-canonical-finite-discrete-pullback"
-  ],
-  "proof": [
-    {
-      "text": "Use the proved normalized restriction-composition identity.",
-      "uses": [
-        "lem-weil-pbc-finite-discrete-restriction-composition"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Conjugate this restriction identity through the adjunctions and equivalences defining the canonical pullback family. The mate composition laws give ordinary pullback composition coherence, also for the etale/pro-etale comparison.",
-      "uses": [
-        "def-weil-pbc-canonical-finite-discrete-pullback"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Apply the composition and whiskering laws for mapDerivedCategoryNatIso and mapDerivedCategoryCompIso. Restrict along D+ inclusion, then cancel the exact-versus-left-derived comparisons. Transport the two composites along sq.w to obtain coefficientAmbientSquare.",
-      "uses": [
-        "def-weil-pbc-coefficient-derived-functor-api",
-        "def-weil-pbc-canonical-finite-discrete-pullback",
-        "lem-weil-pbc-derived-square-pasting"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-weil-pbc-finite-discrete-restriction-composition",
+  {
+   "text": "Normalize the canonical derived coefficient comparison as realization_combine at the source, the exact-derived ordinary square, the inverse realization_combine at the target, and the exact-versus-left-derived inverse. Normalize leftDerivedUpperStarComp by its defining composition. Apply the elementary transport_comp calculation to naturality and exact-derived composition coherence; the intermediate realization and derived replacement isomorphisms cancel. The D+ composition map is the restriction of its full-derived counterpart.",
+   "uses": [
     "def-weil-pbc-canonical-finite-discrete-pullback",
-    "def-weil-pbc-coefficient-derived-functor-api",
-    "lem-weil-pbc-derived-square-pasting"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 5.3.2 and Lemma 5.4.1; sectionwise coefficient encoding",
-    "note": "A4: explicit coefficient transport; remaining proof obligations are separate named statements."
+    "def-weil-pbc-coefficient-derived-functor-api"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "natural isomorphism constant coefficient module encoding commutes with sheaf inverse image and derived pullback",
-      "date": "2026-10-16",
-      "results": "8 hits: SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; ",
-      "verdict": "No complete transport theorem for this common internal-module encoding. Use the proved library adjunction, exact derivation and composition infrastructure."
-    },
-    {
-      "tool": "loogle",
-      "query": "conjugateIsoEquiv",
-      "date": "2026-10-16",
-      "results": "0 hits: ; loogle: unknown identifier 'conjugateIsoEquiv'",
-      "verdict": "No complete transport theorem for this common internal-module encoding. Use the proved library adjunction, exact derivation and composition infrastructure."
-    },
-    {
-      "tool": "grep",
-      "query": "mapDerivedCategorySquareIso|sheafEncoding|mapMod.*Comp",
-      "date": "2026-10-16",
-      "results": "0 hits: ; ",
-      "verdict": "No complete transport theorem for this common internal-module encoding. Use the proved library adjunction, exact derivation and composition infrastructure."
-    },
-    {
-      "tool": "leansearch",
-      "query": "A coefficient equivalence of module valued sheaves commutes coherently with inverse image and exact derived functors",
-      "date": "2026-10-16",
-      "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app, SheafOfModules.pushforwardNatIso_inv, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, SheafOfModules.sheafificationCompPullback, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm; ",
-      "verdict": "No complete transport theorem for this common internal-module encoding. Use the proved library adjunction, exact derivation and composition infrastructure."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.Paper.FiniteDiscreteCoefficientCoherentPullbacks",
-    "date": "2026-10-16",
-    "group": "A4"
-  },
-  "blueprint": {
-    "same_as": [],
-    "is": null,
-    "from": {
-      "node": "lem-weil-pbc-finite-discrete-coherent-pullbacks",
-      "place": "Square coherence of the canonical coefficient pullback family",
-      "via": []
-    }
-  },
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.Paper.FiniteDiscreteCoefficientSquareCoherence",
-    "file": "lean/Sheaf/Paper/FiniteDiscreteCoefficientSquareCoherence.lean",
-    "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteDiscreteCoefficientPullbackIso_square",
-    "statement": "theorem finiteDiscreteCoefficientPullbackIso_square\n    : CoefficientPullbackSquare B (Profinite.continuousMapRingObj B)\n      (fun T ↦ finiteDiscreteRealization B T\n        (finiteDiscreteCoefficientEquivalence B eR G hG T))\n      (finiteDiscreteCoefficientPullbackIso B eR G hG)",
-    "branch": "sheaf-dag",
-    "by": "A4",
-    "date": "2026-10-16"
-  },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "X-62b33",
-    "group": "A4",
-    "result": "pass",
-    "landing": "20261016T155153-L-839662",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "X-62b33",
-    "group": "A4",
-    "result": "pass",
-    "landing": "20261016T155153-L-839662",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered Lean constructions, remaining obligations, signatures and proof dependencies match their DAG nodes; compilation, importer and axiom checks pass."
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "For an arbitrary realization functor family and comparison family satisfying composition, compare the two composition equations. Equality elimination along the commutativity of the square identifies the canonical comparisons for the two composite scheme morphisms. Apply a generic categorical cancellation lemma, keeping both square comparison isomorphisms as parameters and identifying them with their specified three-factor compositions at the isomorphism level. This gives exactly the square equation, avoiding expansion of concrete derived-functor components.",
+   "uses": [
+    "def-weil-pbc-coefficient-derived-functor-api"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-discrete-sheaf-pullback-composition",
+  "def-weil-pbc-canonical-finite-discrete-pullback",
+  "def-weil-pbc-coefficient-derived-functor-api"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 5.3.2 and Lemma 5.4.1; sectionwise coefficient encoding",
+  "note": "B3: ordinary composition is fully proved in the new sheaf-composition module. The assigned module proves exact derivation, D+ compatibility, left-derived replacement and square transport; no new hole remains."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism constant coefficient module encoding commutes with sheaf inverse image and derived pullback",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; ",
+   "verdict": "No complete transport theorem for this common internal-module encoding. Use the proved library adjunction, exact derivation and composition infrastructure."
+  },
+  {
+   "tool": "loogle",
+   "query": "conjugateIsoEquiv",
+   "date": "2026-10-16",
+   "results": "0 hits: ; loogle: unknown identifier 'conjugateIsoEquiv'",
+   "verdict": "No complete transport theorem for this common internal-module encoding. Use the proved library adjunction, exact derivation and composition infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySquareIso|sheafEncoding|mapMod.*Comp",
+   "date": "2026-10-16",
+   "results": "0 hits: ; ",
+   "verdict": "No complete transport theorem for this common internal-module encoding. Use the proved library adjunction, exact derivation and composition infrastructure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coefficient equivalence of module valued sheaves commutes coherently with inverse image and exact derived functors",
+   "date": "2026-10-16",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app, SheafOfModules.pushforwardNatIso_inv, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, SheafOfModules.sheafificationCompPullback, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm; ",
+   "verdict": "No complete transport theorem for this common internal-module encoding. Use the proved library adjunction, exact derivation and composition infrastructure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDiscreteCoefficientCoherentPullbacks",
+  "date": "2026-10-16",
+  "group": "A4"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-discrete-coherent-pullbacks",
+   "place": "Square coherence of the canonical coefficient pullback family",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteDiscreteCoefficientSquareCoherence",
+  "file": "lean/Sheaf/Paper/FiniteDiscreteCoefficientSquareCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteDiscreteCoefficientPullbackIso_square",
+  "statement": "theorem finiteDiscreteCoefficientPullbackIso_square\n    : CoefficientPullbackSquare B (Profinite.continuousMapRingObj B)\n      (fun T ↦ finiteDiscreteRealization B T\n        (finiteDiscreteCoefficientEquivalence B eR G hG T))\n      (finiteDiscreteCoefficientPullbackIso B eR G hG)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-16",
+  "declarations": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-62b33",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261016T155153-L-839662",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "XREPAIR-af46747ed5a82c85",
+  "group": "XRaf46747ed5a82c85",
+  "result": "pass",
+  "landing": "20261017T095839-L-2856933",
+  "kind": "interface",
+  "note": "maintainer L-only: restored B3 delivery 22f176714e; unfold Etale.pullbackSquareComparison -> rw [Etale.pullbackSquareComparison_def]; each file compiles alone (11.7/7.9/14.6 s); gate AUTO"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }
