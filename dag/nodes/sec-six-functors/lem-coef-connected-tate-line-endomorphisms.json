@@ -189,5 +189,27 @@
   "group": "Q98",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-e6a7eba45 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement, the unit route, the parent lem-coef-finite-dualizing (steps 3 and 5), Stacks 06XS (derived.tex l.8713-8727) and 03P5 (etale-cohomology.tex l.2437-2456), and the blueprint master parent paragraph 'The Tate rank-one object' (l.47-58, and its main-20261015 copy). That paragraph does not contain the scalar argument, so the agent-written proof origin is correct. The statement is true: End(B_Y(r)[d]) = End of an invertible B_Y-module = Gamma(Y,B_Y), which is B on a connected Y. I tested B=0, N=1, r=0, d of both signs, Y=Spec k and Y=A^r. Connectedness and nonemptiness are both needed: two points give B x B, and the empty scheme breaks injectivity. In step 1 the local-basis gluing (a_j u_ij = u_ij a_i, so a_j = a_i) is correct. Step 2 is correct: the connected-sections node holds for any abelian group, and the module structure goes through the same constant-section map. Step 3 applies the already-proved first assertion on Spec k, so it is not circular. No duplicate exists: lem-pur-lisse-rank-one-aut covers only finite-stage pro-etale sheaves on separated finite-type schemes. No new nodes and no SGA. Three faults, all repaired in fixes/dag/nodes/sec-six-functors/lem-coef-connected-tate-line-endomorphisms.json. (1) B3/C4: the statement's b*1_L and 'B-linear functor' use the B-linear structure of the derived categories with no node for it. I added a citation to the on-route Mathlib leaf lem-weil-linear-abelian-derived-category (DerivedCategory.instLinear, instLinearShiftFunctorInt) and added it to stmt_deps; the meaning is unchanged. (2) C4: step 1 credited shift linearity to def-weil-abstract-derived-category, which says nothing about linearity. Steps 1 and 3 now cite the leaf, and proof_deps is updated. (3) C8: lem-asd-etale-finite-twist-pullback (unit sk-prop-sf-cbc, not on the route) was used without declaring it. I added it to split_report.tool_uses for its rank-one clause, as the parent already does. I accept that tool use. The declared tool use of lem-weil-pbc-constant-sheaf-sections-connected is on route through sk-thm-p1, so the declaration is harmless.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConnectedTateLineEndomorphisms",
+  "declaration": "AlgebraicGeometry.Scheme.connected_tate_line_endomorphisms",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.shiftedFiniteEtaleTateLine",
+   "AlgebraicGeometry.Scheme.connected_tate_line_endomorphisms"
+  ],
+  "file": "lean/Sheaf/Paper/ConnectedTateLineEndomorphisms.lean",
+  "statement": "theorem connected_tate_line_endomorphisms (k : Type u) [Field k] [IsAlgClosed k] (N : ℕ) (hN : 0 < N) (hInvertible : IsUnit (N : k)) (B : Type (u + 1)) [CommRing B] (hB : (N : B) = 0) (Y : Scheme.{u}) [Y.Over (Spec (.of k))] [ConnectedSpace Y] (r : ℕ) (d : ℤ) : Function.Bijective (fun b : B => b • 𝟙 (shiftedFiniteEtaleTateLine B N Y hB r d)) ∧ (∀ (G : Etale.DerivedCategoryModule B Y ⥤ Etale.DerivedCategoryModule B (Spec (.of k))) [G.Linear B], Nonempty (G.obj (shiftedFiniteEtaleTateLine B N Y hB r d) ≅ Etale.constantComplex B (Spec (.of k))) → ∀ v : shiftedFiniteEtaleTateLine B N Y hB r d ⟶ shiftedFiniteEtaleTateLine B N Y hB r d, IsIso (G.map v) → IsIso v)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7cedd99f1",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node: k alg. closed; N>=1 invertible in k; B comm ring with (N:B)=0 (the unique Z/N-algebra structure, via finiteEtaleTwistScalar); Y.Over Spec k with ConnectedSpace (nonempty+connected); L = shiftFunctor d of singleFunctor 0 of finiteEtaleTateSheaf B N Y hB r (r:N; ofNat branch = tensor powers, 0 = constant sheaf); Bijective (b ↦ b • 𝟙 L) using DerivedCategory.instLinear; ∀ G [G.Linear B] (map_smul only, as the node defines), Nonempty (G L ≅ constantComplex B (Spec k)) (unit sheaf in degree 0; conclusion independent of the iso), ∀ v, IsIso (G.map v) → IsIso v. B : Type (u+1) is the recorded DerivedCategoryModule encoding. Edge cases B=0, N=1, r=0, d of either sign, Y=Spec k covered; empty Y excluded as in the node. Helper has real data, only sorry proof, source/blueprint docstrings with the 4 proof steps, non-public proof-dep imports per stage-2 rule 7, lines <=91 chars, node changed only in lean, lean.statement verbatim, no name clash. nt_compile --json (local side overlay): rc 0, no diagnostics, 10.6 s. No findings beyond the cosmetic ones (redundant hN, no Main-declarations list)."
  }
 }

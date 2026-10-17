@@ -203,5 +203,30 @@
   "group": "Q32",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-784444d2a (reviewer sub-agent of L); spot-checked: I read all of the item, all five steps, the three cited statements (interval-lifting, free-arrow adjunction, colimit leaf), and parent step 3. I checked the source, Bergner math/0406507 (U on p.3; Lemma 3.4, horn case, pp.10-11), against the text I extracted with pdftotext. Bergner assumes the two endpoints are distinct (jx=x, jy=y) and uses O''∐U(V) in SC_O without proving it equals the variable-object pushout. The item proves that comparison for arbitrary i and for a=b, through the reindexed target T_f and the adjunction's stated naturality, so proof_origin=agent is correct. Each step is correct. Step 1: e_M is a functor even with loops, and j h_U = v e_L U(i). Step 2 is definitional. Step 3: the existence and uniqueness of the fixed-object extension use the adjunction's bijection and naturality in both variables. Step 4: functors U(L)->T are forced on objects, giving exactly the pairs (G,l). Step 5: naturality under postcomposition and change of object function. Edge cases tested: a=b with one object, K empty, L empty, i an identity, non-injective i or f, a target with no objects. No hidden lemma, no cycle, proof_deps equals the union of the steps' uses. There are no new nodes and the statement is not a relabelling. No duplicate found: word-filtration needs injective i, and the degreewise-colimit, fixed-vertex-cofibration and left-proper nodes are different statements. The route stays inside sk-prop-sf-biduality-general, so no tool_uses are needed. No SGA is cited. This is not a target, so the base-change checks do not apply. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.FixedObjectPushoutComparison",
+  "declaration": "SSet.Bergner.fixed_object_pushout_comparison",
+  "declarations": [
+   "SSet.Bergner.fixedArrowAdjunct",
+   "SSet.Bergner.uFunctor",
+   "SSet.Bergner.fixed_object_pushout_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/FixedObjectPushoutComparison.lean",
+  "statement": "theorem fixed_object_pushout_comparison {O : Type u} (a b : O) {K L : SSet.{u}} (i : K ⟶ L) (C : Fixed O) (h : K ⟶ C.Hom a b) : ∃ (P : Fixed O) (j : C ⟶ P) (v : freeArrow a b L ⟶ P) (comm : fixedArrowAdjunct a b h ≫ j = freeArrowMap a b i ≫ v), Nonempty (IsColimit (PushoutCocone.mk (f := fixedArrowAdjunct a b h) (g := freeArrowMap a b i) j v comm)) ∧ (∃ (commU : uFunctor a b h ≫ bundleMap j = bundleMap (uMap i) ≫ uFunctor a b (freeArrowGenerator a b L) ≫ bundleMap v), Nonempty (IsColimit (PushoutCocone.mk (f := uFunctor a b h) (g := bundleMap (uMap i)) (bundleMap j) (uFunctor a b (freeArrowGenerator a b L) ≫ bundleMap v) commU))) ∧ (∀ (T : SCat.{u}), (∀ (E : bundle P ⟶ T), i ≫ (freeArrowGenerator a b L ≫ (bundleMap v ≫ E).map a b) = h ≫ (bundleMap j ≫ E).map a b) ∧ (∀ (G : bundle C ⟶ T) (ell : L ⟶ hom T (G.obj a) (G.obj b)), i ≫ ell = h ≫ G.map a b → ∃! E : bundle P ⟶ T, bundleMap j ≫ E = G ∧ HEq (freeArrowGenerator a b L ≫ (bundleMap v ≫ E).map a b) ell) ∧ (∀ (T' : SCat.{u}) (S : T ⟶ T') (E : bundle P ⟶ T), bundleMap j ≫ (E ≫ S) = (bundleMap j ≫ E) ≫ S ∧ freeArrowGenerator a b L ≫ (bundleMap v ≫ (E ≫ S)).map a b = (freeArrowGenerator a b L ≫ (bundleMap v ≫ E).map a b) ≫ S.map (E.obj ((bundleMap v).obj a)) (E.obj ((bundleMap v).obj b))) ∧ (∀ (f : O → (T : Type u)) (G : bundle C ⟶ T) (ell : L ⟶ hom T (G.obj a) (G.obj b)), (∀ x : O, G.obj x = f x) → (i ≫ ell = h ≫ G.map a b → ∃! E : bundle P ⟶ T, (∀ x : O, E.obj x = f x) ∧ bundleMap j ≫ E = G ∧ HEq (freeArrowGenerator a b L ≫ (bundleMap v ≫ E).map a b) ell)))",
+  "branch": "newtargets-dag",
+  "by": "Q157",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper fixedArrowAdjunct is the adjunct supplied by fixed_object_free_arrow_adjunction, whose homEquiv is pinned to restriction to length-one words, so it is the node's canonical adjunct. Reviewer fix: the helper uFunctor (real data: objects 0,1 to a,b, arrow map h, identities, empty map on U(K)(1,0)) renders h_U and, applied to freeArrowGenerator, the canonical U(L) -> F(L); the theorem now also states the node's headline clause that (j, e_L v) exhibits P as the pushout of h_U and U(i) in SCat, alongside the pairs bijection, postcomposition naturality and prescribed-object-function clauses; the theorem docstring carries the node's five proof steps.",
+  "fixed_by": "NT-stage2-cc-c0b32ad6a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0b32ad6a",
+  "group": "Q157",
+  "result": "fix",
+  "note": "Read node (unchanged vs side clone except lean), deps (SimplicialIntervalLifting U/uMap/bundle/bundleMap, FreeArrowAdjunction with homEquiv pinned to generator restriction, so fixedArrowAdjunct is the canonical adjunct; SCat/hom), citers (interval-cell-stability step 3, poset-filtered-resolution steps 3/6, extreme-bimodule step 1). Hypotheses exact (a=b allowed, arbitrary i, no Kan/injectivity, single universe u from interface); pairs bijection, postcomposition and prescribed-object-function clauses correct (HEq harmless under j≫E=G). Defect: the node's headline clause, that (j, U(L)->F(L)->P) exhibits P as the pushout C ⊔_{U(K)} U(L) in SCat, was absent; it is needed by cell-stability, whose J-cells are SCat pushouts of bundleMap(uMap ι); theorem docstring lacked the proof steps (H8). Fix: fixes/FixedObjectPushoutComparison.lean adds real def SSet.Bergner.uFunctor (h_U, and e_L via freeArrowGenerator; functor laws proved) and the conjunct ∃ commU, Nonempty (IsColimit (PushoutCocone.mk (uFunctor a b h) (bundleMap (uMap i)) (bundleMap j) (uFunctor a b gen_L ≫ bundleMap v) commU)), plus a 5-step proof docstring; fixes/<item>.lean-record.json updates declarations and note (refit_record: no refusals, statement verbatim). nt_compile.py: delivered and fixed files exit 0, no errors or warnings. Gates fine: no hollow defs, single sorry, source/blueprint docstrings, both report sections, no pro-etale. Minor: SCat's infra node not in stmt_deps (inherited, not fixable in stage-2 fix)."
  }
 }
