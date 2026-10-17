@@ -223,4 +223,106 @@ lemma exists_pow_smul_eq_zero (hunit : ∀ r : R₀, r ≠ 0 → IsUnit (algebra
 
 end Torsion
 
+section Spread
+
+variable {R₀ B M : Type u} [CommRing R₀] [IsDomain R₀] [IsIntegrallyClosed R₀]
+  [IsNoetherianRing R₀] [CommRing B] [Algebra R₀ B] [Algebra.Smooth R₀ B]
+  [CommRing M] [Algebra B M] [Algebra R₀ M] [IsScalarTower R₀ B M]
+
+omit [IsDomain R₀] [IsIntegrallyClosed R₀] [IsNoetherianRing R₀] [Algebra.Smooth R₀ B] in
+/-- Finite étaleness of `B' ⊗_B X` for some localization `B'` of `B` away from `f` gives it for
+`Localization.Away f`. -/
+lemma etale_finite_away_of_isLocalizationAway {X : Type u} [CommRing X] [Algebra B X] (f : B)
+    (B' : Type u) [CommRing B'] [Algebra B B'] [IsLocalization.Away f B']
+    [Algebra.Etale B' (B' ⊗[B] X)] [Module.Finite B' (B' ⊗[B] X)] :
+    Algebra.Etale (Localization.Away f) (Localization.Away f ⊗[B] X) ∧
+      Module.Finite (Localization.Away f) (Localization.Away f ⊗[B] X) := by
+  let e : B' ≃ₐ[B] Localization.Away f := IsLocalization.algEquiv (Submonoid.powers f) _ _
+  let : Algebra B' (Localization.Away f) := e.toRingHom.toAlgebra
+  have : IsScalarTower B B' (Localization.Away f) := .of_algebraMap_eq fun b ↦ (e.commutes b).symm
+  let e' := Algebra.TensorProduct.cancelBaseChange B B' (Localization.Away f)
+    (Localization.Away f) X
+  exact ⟨.of_equiv e', .equiv e'.toLinearEquiv⟩
+
+/-- **Spreading out finite étaleness of a normal cover of a smooth algebra.** See the module
+docstring. -/
+theorem exists_etale_finite_away_of_localization
+    (hunit : ∀ r : R₀, r ≠ 0 → IsUnit (algebraMap R₀ M r)) (P : Ideal B) [P.IsPrime]
+    (hP0 : P.comap (algebraMap R₀ B) ≠ ⊥)
+    (H : ∀ Q : Ideal B, Q.IsPrime → Q < P →
+      ∃ h ∉ Q, Algebra.Etale (Localization.Away h) (Localization.Away h ⊗[B] integralClosure B M) ∧
+        Module.Finite (Localization.Away h) (Localization.Away h ⊗[B] integralClosure B M))
+    [Algebra.Etale (Localization.AtPrime P) (Localization.AtPrime P ⊗[B] integralClosure B M)]
+    [Module.Finite (Localization.AtPrime P) (Localization.AtPrime P ⊗[B] integralClosure B M)] :
+    ∃ h ∉ P, Algebra.Etale (Localization.Away h) (Localization.Away h ⊗[B] integralClosure B M) ∧
+      Module.Finite (Localization.Away h) (Localization.Away h ⊗[B] integralClosure B M) := by
+  classical
+  let T := integralClosure B M
+  let O := Localization.AtPrime P
+  have : IsNoetherianRing B := Algebra.FiniteType.isNoetherianRing R₀ B
+  have hdomB (Q : Ideal B) [Q.IsPrime] : IsDomain (Localization.AtPrime Q) :=
+    (Algebra.Smooth.isDomain_and_isIntegrallyClosed_localization R₀ B Q).1
+  have : IsReduced B := isReduced_ofLocalizationMaximal B fun J _ ↦ by
+    have := hdomB J
+    infer_instance
+  -- the neighbourhood `D(h)`
+  obtain ⟨h₀, hh₀P, hh₀⟩ := exists_forall_exists_not_mem _ P H
+  obtain ⟨h₁, hh₁P, hdom⟩ := exists_isDomain_away P
+  set h := h₀ * h₁ with hh
+  have hhP : h ∉ P := fun hm ↦ (Ideal.IsPrime.mem_or_mem inferInstance hm).elim hh₀P hh₁P
+  let Bh := Localization.Away h
+  have : IsDomain Bh := hdom h₀ hh₀P
+  have : Algebra.Smooth B Bh := inferInstance
+  have : Algebra.Smooth R₀ Bh := .comp R₀ B Bh
+  have : IsIntegrallyClosed Bh := IsIntegrallyClosed.of_localization_maximal fun p _ _ ↦
+    (Algebra.Smooth.isDomain_and_isIntegrallyClosed_localization R₀ Bh p).2
+  have : IsNoetherianRing Bh := IsLocalization.isNoetherianRing (Submonoid.powers h) Bh
+    inferInstance
+  have hgood (Q : Ideal B) (hQ : Q.IsPrime) (hhQ : h ∉ Q) (hQ0 : Q.comap (algebraMap R₀ B) = ⊥) :
+      ∃ h' ∉ Q, Algebra.Etale (Localization.Away h') (Localization.Away h' ⊗[B] T) ∧
+        Module.Finite (Localization.Away h') (Localization.Away h' ⊗[B] T) :=
+    hh₀ Q hQ (fun hm ↦ hhQ (Ideal.mul_mem_right _ _ hm))
+      fun hPQ ↦ hP0 (eq_bot_iff.2 (hQ0 ▸ Ideal.comap_mono hPQ))
+  -- elements nonzero in `B_h` stay nonzero in the local rings `B_Q`, `Q ∌ h`
+  have hloc (s : B) (hs : algebraMap B Bh s ≠ 0) (Q : Ideal B) [Q.IsPrime] (hQ : h ∉ Q) :
+      algebraMap B (Localization.AtPrime Q) s ≠ 0 := by
+    intro h0
+    obtain ⟨⟨w, hw⟩, hws⟩ := (IsLocalization.map_eq_zero_iff Q.primeCompl _ s).1 h0
+    have h1 : algebraMap B Bh w = 0 := by
+      have : algebraMap B Bh w * algebraMap B Bh s = 0 := by rw [← map_mul, hws, map_zero]
+      exact (mul_eq_zero.1 this).resolve_right hs
+    obtain ⟨⟨_, j, rfl⟩, hj⟩ := (IsLocalization.map_eq_zero_iff (Submonoid.powers h) _ w).1 h1
+    have : h ^ j * w ∈ Q := hj ▸ Q.zero_mem
+    rcases Ideal.IsPrime.mem_or_mem inferInstance this with h2 | h2
+    · exact hQ (Ideal.IsPrime.mem_of_pow_mem inferInstance j h2)
+    · exact hw h2
+  -- `B_h ⊗ T` is torsion free over `B_h`
+  let X := Bh ⊗[B] T
+  have htf (z : Bh) (hz : z ≠ 0) (x : X) (hzx : z • x = 0) : x = 0 := by
+    obtain ⟨⟨t, u⟩, hut⟩ := IsLocalizedModule.surj (Submonoid.powers h)
+      (TensorProduct.mk B Bh T 1) x
+    obtain ⟨⟨s, v⟩, hsv⟩ := IsLocalization.surj (Submonoid.powers h) z
+    dsimp only at hut hsv
+    have hs : algebraMap B Bh s ≠ 0 := by
+      rw [← hsv]
+      exact mul_ne_zero hz (IsLocalization.map_units Bh v).ne_zero
+    have hst : TensorProduct.mk B Bh T 1 (s • t) = 0 := by
+      rw [map_smul, ← hut, smul_comm, ← algebraMap_smul Bh s x, ← hsv, mul_comm, mul_smul,
+        hzx, smul_zero, smul_zero]
+    obtain ⟨⟨_, k, rfl⟩, hk⟩ := (IsLocalizedModule.eq_zero_iff (Submonoid.powers h)
+      (TensorProduct.mk B Bh T 1)).1 hst
+    rw [Submonoid.smul_def, smul_smul] at hk
+    obtain ⟨k', hk'⟩ := exists_pow_smul_eq_zero hunit h hgood (s := h ^ k * s)
+      (fun Q _ hQ ↦ hloc _ (by
+        rw [map_mul]
+        exact mul_ne_zero ((IsLocalization.map_units Bh (⟨h ^ k, k, rfl⟩ : Submonoid.powers h)).ne_zero) hs) Q hQ) hk
+    have h0 : TensorProduct.mk B Bh T 1 t = 0 := (IsLocalizedModule.eq_zero_iff
+      (Submonoid.powers h) (TensorProduct.mk B Bh T 1)).2
+      ⟨(⟨h ^ k', k', rfl⟩ : Submonoid.powers h), hk'⟩
+    rw [← hut, Submonoid.smul_def, ← algebraMap_smul Bh] at h0
+    exact ((IsLocalization.map_units Bh u).smul_eq_zero).1 h0
+  sorry
+
+end Spread
+
 end RingTheory.DepthTwo
