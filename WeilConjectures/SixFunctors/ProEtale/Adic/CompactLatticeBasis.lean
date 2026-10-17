@@ -171,6 +171,49 @@ lemma continuous_coord (Λ : CompactLattice l) (i : Λ.BasisIndex) : Continuous 
   rw [this]
   exact (continuous_apply i).comp h.symm.continuous
 
+/-- Multiplication `c ↦ c • e` by an element `e` of a compact lattice, as a continuous
+homomorphism `ℤ_ℓ ⟶ Λ`. -/
+noncomputable def mulHom (Λ : CompactLattice l) (e : PadicAlgCl l)
+    (he : e ∈ Λ.1) : ContinuousAddMonoidHom ℤ_[l] Λ.1 :=
+  ⟨{ toFun c := ⟨c • e, Λ.smul_mem c he⟩
+     map_zero' := Subtype.ext (zero_smul _ e)
+     map_add' c d := Subtype.ext (add_smul c d e) },
+    Continuous.subtype_mk (by
+      simp only [Algebra.smul_def]
+      exact continuous_algebraMap_padicInt.mul continuous_const) _⟩
+
+/-- The `i`-th coordinate of a compact lattice, as a continuous homomorphism `Λ ⟶ ℤ_ℓ`. -/
+noncomputable def coordHom (Λ : CompactLattice l) (i : Λ.BasisIndex) :
+    ContinuousAddMonoidHom Λ.1 ℤ_[l] :=
+  ⟨{ toFun := Λ.coord i
+     map_zero' := congrFun (map_zero Λ.basis.equivFun) i
+     map_add' x y := congrFun (map_add Λ.basis.equivFun ⟨x, x.2⟩ ⟨y, y.2⟩) i },
+    Λ.continuous_coord i⟩
+
+lemma coord_smul (Λ : CompactLattice l) (i : Λ.BasisIndex) (c : ℤ_[l])
+    (x : Λ.1) : Λ.coord i ⟨c • (x : PadicAlgCl l), Λ.smul_mem c x.2⟩ = c * Λ.coord i x :=
+  congrFun (map_smul Λ.basis.equivFun c ⟨x, x.2⟩) i
+
+lemma _root_.ContinuousAddMonoidHom.sum_apply {A B : Type} [TopologicalSpace A]
+    [AddCommGroup A] [IsTopologicalAddGroup A] [TopologicalSpace B] [AddCommGroup B]
+    [IsTopologicalAddGroup B] {ι : Type*} (s : Finset ι) (φ : ι → ContinuousAddMonoidHom A B)
+    (x : A) : (∑ i ∈ s, φ i) x = ∑ i ∈ s, φ i x := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => rfl
+  | insert a s ha ih =>
+    rw [Finset.sum_insert ha, Finset.sum_insert ha, ← ih]
+    rfl
+
+lemma sum_mulHom_comp_coordHom (Λ : CompactLattice l) :
+    ∑ i, (Λ.mulHom (Λ.basis i) (Λ.basis i).2).comp (Λ.coordHom i) =
+      ContinuousAddMonoidHom.id Λ.1 := by
+  refine ContinuousAddMonoidHom.ext fun x ↦ ?_
+  rw [ContinuousAddMonoidHom.sum_apply]
+  refine Subtype.ext (Eq.trans ?_ (Λ.sum_coord_smul x))
+  rw [AddSubgroup.val_finsetSum]
+  rfl
+
 end CompactLattice
 
 end PadicAlgCl
