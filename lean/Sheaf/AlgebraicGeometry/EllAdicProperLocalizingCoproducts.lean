@@ -8,6 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleLocalizingClosure
 public import Sheaf.AlgebraicGeometry.EllAdicCondensedCoefficient
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
+import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
+import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
+import Sheaf.Paper.CondensedQbarLfpLocalTriviality
+import Sheaf.Paper.IntegralLfpLocalTorsionCharts
+import Sheaf.Paper.IntegralLfpLocallyFreeResolution
 
 /-! # Proper adic direct image preserves coproducts on the constructible localizing hull
 

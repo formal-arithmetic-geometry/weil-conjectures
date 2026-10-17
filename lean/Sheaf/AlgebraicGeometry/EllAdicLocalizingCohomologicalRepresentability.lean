@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.BoundedConstructibleLocalizingClosure
 public import Sheaf.AlgebraicGeometry.EllAdicCondensedCoefficient
 public import Mathlib.CategoryTheory.Triangulated.HomologicalFunctor
 public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
+import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 
 /-! # Cohomological Brown representability on the constructible localizing hull
 
