@@ -14,6 +14,13 @@
 #   autoImplicit = false) are applied to every file except those of the adopted source library: a file under
 #   lean/WeilConjectures/ or lean/Comparator/, and a sandbox copy of one (a path with /WeilConjectures/ or a file
 #   name starting with WeilConjectures_, the name tools/compile_remote.sh and the merge give it).
+# - Which compiled file the mirror keeps is decided by source content, not by mtime (2026-10-17). A compile here
+#   records next to the .olean, in <module>.src, the git blob hash of the source it compiled. A refresh keeps the
+#   group's own files of a module when that hash is the hash of the module's current source in lean/ and differs from
+#   the module's source in the commit of the last published build (local/builds/published.json): the group has a
+#   newer source of its own, and the shared copy, however recent, was built from another one. Otherwise the shared
+#   copy replaces the group's when it is newer, as before. (A shared build of an older signature had replaced the
+#   group's SmoothPurity/Defs and broke the next compile of Poincare with an unrelated kernel error.)
 source "$(dirname "$0")/sheaf_env.sh"
 F=${1:?usage: tools/lean_file.sh <file.lean>}; [ -f "$F" ] || { echo "no such file: $F"; exit 2; }
 F=$(realpath "$F")
@@ -32,9 +39,24 @@ refresh_mirror() {
   # left the module missing from the mirror until the next publish (X-mir, 2026-10-11).
   [ ! -e "$M/.stamp" ] || [ "$SHEAF_BUILD" -nt "$M/.stamp" ] || return 0
   mkdir -p "$M"
+  local -A keep=(); local pub="" pfx="" r h cur
+  pub=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("commit") or "")' \
+        "$SHEAF_ROOT/local/builds/published.json" 2>/dev/null)
+  pfx=$(git -C "$SHEAF_LEAN" rev-parse --show-prefix 2>/dev/null)
   while IFS= read -r own; do
     s="$SHEAF_BUILD/${own#"$M"/}"
-    [ -e "$s" ] && [ "$s" -nt "$own" ] && ln -sf "$s" "$own"
+    [ -e "$s" ] && [ "$s" -nt "$own" ] || continue
+    r=${own#"$M"/}; r=${r%%.*}
+    if [ -z "${keep[$r]+x}" ]; then
+      keep[$r]=0
+      if [ -f "$M/$r.src" ] && [ -f "$SHEAF_LEAN/$r.lean" ]; then
+        h=$(cat "$M/$r.src"); cur=$(git hash-object "$SHEAF_LEAN/$r.lean" 2>/dev/null)
+        if [ -n "$h" ] && [ "$h" = "$cur" ] && { [ -z "$pub" ] || [ "$h" != "$(git -C "$SHEAF_LEAN" rev-parse -q --verify "$pub:$pfx$r.lean" 2>/dev/null)" ]; }; then
+          keep[$r]=1
+        fi
+      fi
+    fi
+    [ "${keep[$r]}" = 1 ] || ln -sf "$s" "$own"
   done < <(find "$M" -type f \( -name '*.olean' -o -name '*.olean.*' -o -name '*.ilean' -o -name '*.ir' -o -name '*.ir.sig' \) 2>/dev/null)
   while IFS= read -r l; do r=${l#"$M"/}; [ -e "$SHEAF_LEAN/${r%%.*}.lean" ] || rm -f "$l"; done \
     < <(find "$M" -xtype l 2>/dev/null)
@@ -48,14 +70,14 @@ if [ -n "${SHEAF_GROUP:-}" ]; then
   case "$F" in
     "$SHEAF_LEAN"/.sandbox/*) ;;
     "$SHEAF_LEAN"/*) R=${F#"$SHEAF_LEAN"/}; R=${R%.lean}; mkdir -p "$M/$(dirname "$R")"
-                     OUT=(-o "$M/$R.olean" -i "$M/$R.ilean"); PARTS=("$M/$R.olean" "$M/$R.ilean" "$M/$R.olean.server" "$M/$R.olean.private" "$M/$R.ir" "$M/$R.ir.sig");;
+                     OUT=(-o "$M/$R.olean" -i "$M/$R.ilean"); PARTS=("$M/$R.olean" "$M/$R.ilean" "$M/$R.olean.server" "$M/$R.olean.private" "$M/$R.ir" "$M/$R.ir.sig" "$M/$R.src");;
   esac
 fi
 compile() {
   local n=0
   while [ -e "$SHEAF_ROOT/local/PUBLISHING" ] && [ $n -lt 60 ]; do sleep 2; n=$((n + 1)); done
   [ -n "${SHEAF_GROUP:-}" ] && refresh_mirror
-  [ ${#OUT[@]} -gt 0 ] && rm -f "${PARTS[@]}"
+  [ ${#OUT[@]} -gt 0 ] && { rm -f "${PARTS[@]}"; git hash-object "$F" > "$M/$R.src" 2>/dev/null || rm -f "$M/$R.src"; }
   ( cd "$SHEAF_LEAN" && LEAN_PATH="$LP" timeout "${SHEAF_FILE_TIMEOUT:-60}" env LEAN_NUM_THREADS=2 nice -n 19 \
       lean "${OPTS[@]}" -R "$SHEAF_LEAN" "${OUT[@]}" "$F" )
 }
