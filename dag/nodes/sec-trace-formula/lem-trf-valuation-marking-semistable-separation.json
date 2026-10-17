@@ -24,9 +24,219 @@
   "def-weil-polynomial-ring",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the etale-fibre decomposition to $E_\\eta$: quasi-compactness makes the discrete union finite, and separable closedness identifies its finite separable residue extensions with $K$. Write its points $p_1,\\ldots,p_r$, allowing $r=0$. The horizontal-model statement applied to the identity says $Y$ is reduced and $E$ is the schematic closure of this generic marking. Also $\\eta$ is open in $T$: if $V\\ne K$, a nonzero element of the least nonzero prime has principal open $\\{\\eta\\}$. On every flat affine $T$-scheme its ring injects into its generic localization. Thus the generic fibre is a schematically dense open, and any proper generic-fibre isomorphism between reduced $T$-curves is an $\\eta$-modification.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-trf-valuation-horizontal-curve-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.3.2, first paragraph; finite-height schematic-density check expanded by the agent."
+   }
+  },
+  {
+   "text": "To separate the $p_i$, use finite-type closed approximations rather than assuming that the ideals of their schematic closures are finitely generated. On any current reduced modification $C\\to Y$, the horizontal-model statement makes $C$ a finitely presented $T$-curve, hence qcqs; $C_\\eta$ is a quasi-compact open. Each $p_i\\hookrightarrow C_\\eta$ is a finitely presented closed immersion: locally this is a surjection between finitely presented $K$-algebras. Extend its finite-type ideal to $C$ by the finite-type ideal-extension lemma. The resulting closed subscheme $A_i\\subseteq C$ has generic fibre exactly $p_i$. The same construction is made afresh on the current $C$ for each pair to be treated.",
+   "uses": [
+    "lem-trf-valuation-horizontal-curve-models",
+    "lemma-nagata-finite-type-ideal-extension-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.3.2, component separation; finite-type approximation makes the finiteness hypotheses explicit."
+   }
+  },
+  {
+   "text": "Run through the finitely many pairs $i<j$, starting with $C=Y$. For the current pair blow up the sum of the finite-type ideals of $A_i,A_j$. The separation lemma says their strict transforms are disjoint. Their generic fibres are disjoint, so the centre misses all of $C_\\eta$, and the complement theorem makes this blowup a generic-fibre isomorphism. It is proper by finite-type blowup properness. Its affine charts are subrings of localizations of the reduced affine rings of $C$, so the blowup is reduced. The horizontal-model statement now applies and again gives a $T$-curve. By the closure characterization, the closures of $p_i,p_j$ lie in those disjoint strict transforms. Earlier separations persist: the schematic closure of a generic point under any further modification maps into its previous closed closure, so inverse images of the two previously disjoint closures still contain the new closures and remain disjoint. Induction therefore separates every pair. All composites are proper by proper-composition permanence, and Step 1 checks schematic density. Denote the resulting modification by $C\\to Y$.",
+   "uses": [
+    "def-nagata-blowup-chart-ring",
+    "lem-trf-valuation-horizontal-curve-models",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lemma-nagata-homogeneous-away-to-chart",
+    "lemma-nagata-homogeneous-away-to-chart-injective",
+    "lemma-nagata-homogeneous-away-to-chart-surjective",
+    "lemma-nagata-rees-generators-cover-proj",
+    "lemma-nagata-separate-closed-subschemes",
+    "lemma-nagata-strict-transform-closure-characterization",
+    "prop-nagata-affine-blowup-chart",
+    "prop-nagata-global-blowup-cover-independent",
+    "thm-nagata-global-blowup-complement",
+    "thm-nagata-global-blowup-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.3.2, component-separation paragraph; current main-20261015 SepBl statement and finite pair induction."
+   }
+  },
+  {
+   "text": "Apply strict-semistable cofinality to $C\\to Y$ and obtain a strictly semistable $C_0\\to Y$ dominating $C$. Let $D$ be the generic marking's schematic closure in $C_0$. The horizontal-model statement makes $(C_0,D)\\to(Y,E)$ an $\\eta$-modification of multipointed curves. The preceding disjointness argument shows that the closures $D_i$ of the $p_i$ are pairwise disjoint; their union is $D$, because both are the schematic generic closure. Consequently each $D_i$ is an open-and-closed subscheme of $D$, flat and finitely presented over $T$, with generic fibre $\\operatorname{Spec}K$.",
+   "uses": [
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-horizontal-curve-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.3.2, application of Proposition 4.3.1."
+   }
+  },
+  {
+   "text": "Here is the local-section argument, without a domination or stalk-isomorphism theorem. For an affine open $\\operatorname{Spec}B\\subseteq D_i$, flatness embeds $B$ in its generic ring $K$. It is a finitely generated $V$-algebra. Choose generators $b_1,\\ldots,b_n\\in K$. For each generator outside $V$, the valuation property puts its inverse in $V$. Hence $B=V[1/c]$, where $c$ is the product of these inverses (the empty product is $1$). Thus this affine open is the principal open $D(c)\\subseteq T$. These opens cover $D$, so $D\\to T$ is a local isomorphism and in particular etale. This also gives a finite local-section cover of $D$ by quasi-compactness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.3.2, sentence that the separated marking is Zariski locally the valuation base; explicit elementary finite-generator argument."
+   }
+  },
+  {
+   "text": "Choose finitely many affine strict-semistable charts $Q_\\ell\\to M_\\ell$ covering $D$, on each of which its relevant piece is a section over an open $\\operatorname{Spec}R_\\ell\\subseteq T$. Every such base open may be taken principal, with $R_\\ell$ a localization of $V$. On a nodal model $M_\\ell=\\operatorname{Spec}R_\\ell[u,v]/(uv-a)$ the model section has coordinates $u=\\alpha_\\ell,v=\\beta_\\ell$, with $a=\\alpha_\\ell\\beta_\\ell$. At least one coordinate is nonzero since the generic marking lies on the smooth generic curve. Choose a nonzero coordinate $\\delta_\\ell$ dividing the other, using the valuation ordering; a zero coordinate is divisible by any nonzero one. Choose a nonzero numerator $d_\\ell\\in V$ of $\\delta_\\ell$ in the localization. Set $c=\\prod_\\ell d_\\ell\\ne0$, with no factor needed on affine-line charts. Then $c/\\delta_\\ell\\in R_\\ell$ for every nodal chart. The pullback of the model section to $Q_\\ell$ is separated etale over the base (the chart is affine); the marking section is open and closed in this pullback by the etale-section lemma. Shrinking around it therefore identifies its ideal with the pullback of $(u-\\alpha_\\ell,v-\\beta_\\ell)$. On an affine-line model translate its coordinate so that this ideal is $(t)$.",
+   "uses": [
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.3.2, local model; agent finite common-parameter construction. No chart is identified with its etale source."
+   }
+  },
+  {
+   "text": "Let $\\mathcal I_D$ be the global ideal of the closed immersion $D\\hookrightarrow C_0$ and put $\\mathcal J=\\mathcal I_D+c\\mathcal O_{C_0}$. This is a finite-type quasi-coherent ideal: $D$ and $C_0$ are finitely presented over $T$, so their closed immersion is finitely presented (on affine rings a finite presentation over $V$ is also a finite presentation over a finitely presented $V$-algebra). Define the single global blowup $b:W=\\operatorname{Bl}_{\\mathcal J}(C_0)\\to C_0$. It is proper, reduced by its affine chart subrings, and an isomorphism over $\\eta$, since $c$ is nonzero. Thus it is a modification and the horizontal-model statement makes $W$ a $T$-curve. On $D$ the extended ideal is $(c)$, invertible because $D$ is flat over $V$. The universal property gives a unique lift $\\widetilde D\\cong D\\to W$. This lift is a closed immersion: its graph is a section of the separated base change $W\\times_{C_0}D\\to D$, and $W\\times_{C_0}D\\to W$ is closed. Its generic fibre is the given marking, so schematic density of $D_\\eta$ makes it exactly the schematic closure of that marking in $W$.",
+   "uses": [
+    "def-nagata-blowup-chart-ring",
+    "lem-trf-valuation-horizontal-curve-models",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lemma-nagata-homogeneous-away-to-chart",
+    "lemma-nagata-homogeneous-away-to-chart-injective",
+    "lemma-nagata-homogeneous-away-to-chart-surjective",
+    "lemma-nagata-rees-generators-cover-proj",
+    "prop-nagata-affine-blowup-chart",
+    "prop-nagata-global-blowup-cover-independent",
+    "thm-nagata-blowup-universal-property",
+    "thm-nagata-global-blowup-complement",
+    "thm-nagata-global-blowup-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Agent repair of the omitted global construction in Lemma 4.3.2: the centre is a globally defined finite-type ideal."
+   }
+  },
+  {
+   "text": "The global affine restrictions and standard-open cover give the charts; the chart immersion and the injective and surjective map $\\theta_c$ identify their rings with the chart subalgebras. Check smoothness of $W/T$ along $\\widetilde D$ using the $c$-chart, which contains its lift since $\\mathcal J\\mathcal O_D=(c)$. For a nodal model set $s=(u-\\alpha)/c$, $t=(v-\\beta)/c$. The chart is the subalgebra generated by these fractions in the generic localization. Substituting in $uv=\\alpha\\beta$ and cancelling the nonzero factors $c$ and $\\delta$ gives\n$$ (c/\\delta)st+(\\beta/\\delta)s+(\\alpha/\\delta)t=0. $$\nOne of $\\alpha/\\delta,\\beta/\\delta$ is $1$. If $\\alpha/\\delta=1$, invert $1+(c/\\delta)s$, which is $1$ on the lifted section $s=t=0$, and solve $t=-(\\beta/\\delta)s/(1+(c/\\delta)s)$. The chart near the lift is therefore a localization of $R[s]$; the other case interchanges $s,t$. There is no additional torsion relation, because this polynomial localization embeds into its generic localization. For an affine-line chart the $c$-chart is simply $R[t/c]$. These are elementary ring calculations using the blowup-chart subalgebra definition. Flat base change of blowups applies to the actual etale maps $Q_\\ell\\to M_\\ell$. The strict-transform base-change statement applies too: after the shrinking in Step 6 the pulled-back model section is exactly the marking section, so its components dominate their base opens. Thus the calculated model lift is the actual marking lift. Its etale inverse image is smooth directly from the lifting definition: first lift the one polynomial coordinate across a square-zero thickening (localized units stay units), then use the etale lifting property; the composite is locally finitely presented by adjoining the two finite lists of generators and relations. This gives an open neighbourhood $U\\subseteq W$ of the entire $\\widetilde D$ on which $W/T$ is smooth.",
+   "uses": [
+    "def-nagata-blowup-chart-ring",
+    "def-sbc-smooth-morphisms",
+    "def-weil-etale-morphism",
+    "lem-trf-strict-transform-flat-etale-base-change",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lemma-nagata-homogeneous-away-to-chart",
+    "lemma-nagata-homogeneous-away-to-chart-injective",
+    "lemma-nagata-homogeneous-away-to-chart-surjective",
+    "lemma-nagata-rees-generators-cover-proj",
+    "prop-nagata-affine-blowup-chart",
+    "prop-nagata-global-blowup-cover-independent",
+    "thm-nagata-blowup-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Agent calculation repairing Lemma 4.3.2 globalization. Only a neighbourhood of the marking is asserted smooth; the rest of this blowup need not be semistable."
+   }
+  },
+  {
+   "text": "Apply strict-semistable cofinality to the modification $W\\to C_0$. It gives a strictly semistable $H$ and an $\\eta$-modification $H\\to W$. Apply semistable-to-stable contraction with the EMPTY marking to $(H,\\varnothing)\\to(W,\\varnothing)$; its hypotheses hold because $W$ is a $T$-curve with smooth generic fibre. Obtain a stable unmarked semistable $\\eta$-modification $h:Z\\to W$. We will prove that $h$ is an isomorphism over the smooth neighbourhood $U$ constructed in Step 8, by checking affine opens of $U$.",
+   "uses": [
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-semistable-stable-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Agent completion using independently available Proposition 4.4.6 with empty marking."
+   }
+  },
+  {
+   "text": "There is no positive-dimensional fibre of $h$ over $U$. Otherwise the exceptional-tree lemma gives a geometric fibre $B$ which is a finite tree of projective lines, attached to the rest of its geometric $T$-fibre at at most two points. If the tree has a single vertex, that component meets the rest of the fibre in at most two points. If it has at least two vertices, it has at least two leaves. As there are at most two boundary points in total, at least one leaf has at most one boundary point, and its unique internal edge gives at most two intersections with the whole remaining fibre. In either case there is a contracted $\\mathbf P^1$ meeting the other components in at most two points, contradicting the stability of the UNMARKED modification $h$. Thus every fibre over $U$ has dimension zero.",
+   "uses": [
+    "lem-trf-smooth-target-modification-exceptional-tree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.4.2, unmarked exceptional-tree consequence; elementary leaf-count argument written out."
+   }
+  },
+  {
+   "text": "On each affine open $U_0\\subseteq U$, the proper morphism $h^{-1}(U_0)\\to U_0$ is locally quasi-finite: on affine charts its finite-type ring maps have zero-dimensional fibre rings, and the zero-fibre-dimension criterion gives quasi-finiteness at each prime. The proper locally-quasi-finite theorem makes it finite. The valuation base $T$ is normal: if a fraction $z\\notin V$ were integral, then $z^{-1}$ would lie in the maximal ideal of $V$; dividing a monic equation by its highest power of $z$ would put $1$ in that ideal, a contradiction. The same applies to every localization of $V$. The smooth $T$-curve $U_0$ with empty marking is semistable, so the in-particular clause of the geometrically-reduced eta-normality lemma makes $U_0$ eta-normal. The finite generic-fibre isomorphism $h^{-1}(U_0)\\to U_0$ is a modification, using schematic density from flatness as in Step 1, and hence is an isomorphism. The affine opens cover $U$, so $h^{-1}(U)\\to U$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+    "pqf-def-quasifinite",
+    "pqf-lem-proper-lqf-finite",
+    "lem-trf-geometrically-reduced-eta-normal",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Agent isomorphism-over-smooth-open argument. Uses generic proper/quasi-finite/finite and eta-normality tools, not stable-modification uniqueness."
+   }
+  },
+  {
+   "text": "Transport $\\widetilde D\\subseteq U$ through $h^{-1}(U)\\cong U$ and call it $F\\subseteq Z$. Equivalently $F=Z\\times_W\\widetilde D$, so it is closed, and $F\\cong D$ is etale over $T$ and lies in the smooth locus of $Z/T$. Thus $(Z,F)$ is semistable. The composite $Z\\to W\\to C_0\\to Y$ is proper and a generic-fibre isomorphism; schematic density of the generic opens follows from flatness as in Step 1. The marking map identifies with the proper $D\\to E$ already supplied in Step 4, and the maps are compatible since $\\widetilde D\\to C_0$ is the original closed immersion $D\\hookrightarrow C_0$. This gives the required $\\eta$-modification of pairs. Empty marking and empty pair lists use the identity constructions.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Conclusion of the repaired global construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-blowup-chart-ring",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "lem-trf-geometrically-reduced-eta-normal",
+  "lem-trf-smooth-target-modification-exceptional-tree",
+  "lem-trf-strict-transform-flat-etale-base-change",
+  "lem-trf-valuation-horizontal-curve-models",
+  "lem-trf-valuation-semistable-stable-contraction",
+  "lem-trf-valuation-strict-semistable-cofinality",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lemma-nagata-finite-type-ideal-extension-exists",
+  "lemma-nagata-homogeneous-away-to-chart",
+  "lemma-nagata-homogeneous-away-to-chart-injective",
+  "lemma-nagata-homogeneous-away-to-chart-surjective",
+  "lemma-nagata-rees-generators-cover-proj",
+  "lemma-nagata-separate-closed-subschemes",
+  "lemma-nagata-strict-transform-closure-characterization",
+  "pqf-def-quasifinite",
+  "pqf-lem-proper-lqf-finite",
+  "prop-nagata-affine-blowup-chart",
+  "prop-nagata-global-blowup-cover-independent",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-blowup-universal-property",
+  "thm-nagata-global-blowup-complement",
+  "thm-nagata-global-blowup-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Lemma 4.3.2, pp. 29, with a global finite-type marking ideal; final semistabilization uses Proposition 4.3.1, Proposition 4.4.6 with EMPTY marking, and the exceptional-tree theorem of Lemma 4.4.2 and eta-normality. Local archival source WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +272,38 @@
    "results": "[grep] OK 0 hit(s) No hits. Read the returned signatures: none gives the asserted theorem for these schemes and morphisms.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict semistable model of a marked curve over a finite-height separably closed valuation ring after blowing up the marking",
+   "results": "[leanfinder] OK: unrelated WeierstrassCurve reduction declarations; no marked-curve blowup theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsSmooth",
+   "results": "[loogle] OK 0 hit(s): unknown identifier AlgebraicGeometry.IsEtale.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ordinary nodes|semistable curve|blowup (Mathlib/AlgebraicGeometry)",
+   "results": "[grep] OK 0 hit(s).",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "separate finite etale marked sections from singular locus of nodal family",
+   "results": "[leansearch] OK: etaleLocus declarations only; no theorem for this geometric construction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-stable-reduction",
@@ -77,7 +315,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Lemma 4.3.2, p. 29; retaining only semistability of the modified pair",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: Temkin stable-modification input, specifically Lemma 4.3.2, p. 29, retaining semistability of the modified pair.",
    "via": [
     "lem-trf-valuation-stable-reduction",
     "lem-trf-temkin-stable-modification",
@@ -92,5 +330,134 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-marking-semistable-separation",
+  "worker": "stage1",
+  "summary": "Repair: delete the false/duplicate component-separation node in favour of finite-type ideal approximation and existing SepBl; prove the local-section assertion directly by generators; construct one globally defined blowup smooth along the lifted marking and explicitly apply etale base-change comparisons; use independently available unmarked contraction to restore semistability without losing this smooth open. Statement unchanged. One new statement-only exceptional-fibre tree lemma, without a stability assumption; the smooth-locus isomorphism consequence is proved in the item.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Lemma 4.3.2, p. 29; retaining only semistability of the modified pair; same semistable-marking input, with agent repair of the local-to-global argument inside this auxiliary node.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-finite-type-ideal-extension-exists",
+    "why": "Extend the finitely generated ideals of the generic marked points from the quasi-compact generic open; this is a generic qcqs ideal-extension tool. The marking unit has no separate node for this generic fact."
+   },
+   {
+    "node": "lemma-nagata-separate-closed-subschemes",
+    "why": "Separate finite-type closed approximations of one pair of generic marking points by the existing SepBl theorem. The marking unit has no separate node for this generic fact."
+   },
+   {
+    "node": "lemma-nagata-strict-transform-closure-characterization",
+    "why": "Identify the generic closures contained in the disjoint strict transforms. The marking unit has no separate node for this generic fact."
+   },
+   {
+    "node": "def-nagata-blowup-chart-ring",
+    "why": "Read the actual blowup chart as a subring of a localization, so cancellation introduces no arbitrary extra torsion. The marking unit has no separate node for this generic fact."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Identify the generic-fibre isomorphism open of each globally defined finite-type blowup. The marking unit has no separate node for this generic fact."
+   },
+   {
+    "node": "thm-nagata-global-blowup-proper",
+    "why": "Properness for the finite-type centres used in separation and in the global marking blowup. The marking unit has no separate node for this generic fact."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Transfer the calculated model blowup along the actual etale chart morphism. The marking unit has no separate node for this generic fact."
+   },
+   {
+    "node": "thm-nagata-blowup-universal-property",
+    "why": "Lift the marking on which the global centre ideal becomes the invertible ideal (c). The marking unit has no separate node for this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Decompose the generic etale marking into spectra of finite separable extensions. The marking unit has no separate node for this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-section-clopen-immersion",
+    "why": "Split off the marking section in the separated etale pullback of the model section. The marking unit has no separate node for this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-section-separated-closed-immersion",
+    "why": "Show that the lifted marking is closed using the section of the separated base change. The marking unit has no separate node for this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic composition and base-change permanence of proper morphisms and closed immersions. The marking unit has no separate node for this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+    "why": "Convert zero-dimensional fibres into locally quasi-finite affine ring maps. The marking unit has no separate node for this generic fact."
+   },
+   {
+    "node": "pqf-def-quasifinite",
+    "why": "Identify the affine pointwise quasi-finiteness condition used by the proper locally-quasi-finite theorem. The marking unit has no separate node for this generic fact."
+   },
+   {
+    "node": "pqf-lem-proper-lqf-finite",
+    "why": "A proper locally quasi-finite morphism is finite, without a Noetherian hypothesis. The marking unit has no separate node for this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "The pullback of an etale model chart along its section or its blowup remains etale; this is the generic base-change assertion in clause 1."
+   },
+   {
+    "node": "prop-nagata-global-blowup-cover-independent",
+    "why": "Supply the global affine restrictions, covering charts, and identification of the degree-zero Rees charts with the subalgebras used in Steps 3, 7 and 8. This is a generic blowup interface, not a replacement of the marking route."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-chart",
+    "why": "Supply the global affine restrictions, covering charts, and identification of the degree-zero Rees charts with the subalgebras used in Steps 3, 7 and 8. This is a generic blowup interface, not a replacement of the marking route."
+   },
+   {
+    "node": "lemma-nagata-rees-generators-cover-proj",
+    "why": "Supply the global affine restrictions, covering charts, and identification of the degree-zero Rees charts with the subalgebras used in Steps 3, 7 and 8. This is a generic blowup interface, not a replacement of the marking route."
+   },
+   {
+    "node": "lemma-nagata-homogeneous-away-to-chart",
+    "why": "Supply the global affine restrictions, covering charts, and identification of the degree-zero Rees charts with the subalgebras used in Steps 3, 7 and 8. This is a generic blowup interface, not a replacement of the marking route."
+   },
+   {
+    "node": "lemma-nagata-homogeneous-away-to-chart-injective",
+    "why": "Supply the global affine restrictions, covering charts, and identification of the degree-zero Rees charts with the subalgebras used in Steps 3, 7 and 8. This is a generic blowup interface, not a replacement of the marking route."
+   },
+   {
+    "node": "lemma-nagata-homogeneous-away-to-chart-surjective",
+    "why": "Supply the global affine restrictions, covering charts, and identification of the degree-zero Rees charts with the subalgebras used in Steps 3, 7 and 8. This is a generic blowup interface, not a replacement of the marking route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-finite-type-ideal-extension-exists",
+  "lemma-nagata-separate-closed-subschemes",
+  "lemma-nagata-strict-transform-closure-characterization",
+  "def-nagata-blowup-chart-ring",
+  "thm-nagata-global-blowup-complement",
+  "thm-nagata-global-blowup-proper",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-blowup-universal-property",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+  "pqf-def-quasifinite",
+  "pqf-lem-proper-lqf-finite",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "prop-nagata-global-blowup-cover-independent",
+  "prop-nagata-affine-blowup-chart",
+  "lemma-nagata-rees-generators-cover-proj",
+  "lemma-nagata-homogeneous-away-to-chart",
+  "lemma-nagata-homogeneous-away-to-chart-injective",
+  "lemma-nagata-homogeneous-away-to-chart-surjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q37-2c21f6921",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-2c21f6921 (reviewer sub-agent of L); spot-checked: Read the mathematics and checked Temkin 4.3.2, 4.4.2, 4.4.6, Appendix B, current blueprint and Stacks sources. Repaired blowup-chart citations, missing definition references and new-node fields. Small cases and corrected dependency closure pass. Full checks and limitations are in review.md; corrected JSON files are under fixes/dag/nodes/.; 2 file(s) fixed by the reviewer"
  }
 }

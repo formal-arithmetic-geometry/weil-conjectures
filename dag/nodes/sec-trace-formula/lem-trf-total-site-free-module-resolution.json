@@ -14,9 +14,71 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The canonical constant-coefficient inverse images preserve the cocycle identifications. On each summand, the transition along $\\bigopluseta:[m]\\to[k]$ is the specified comparison $u_\\bigopluseta^{-1}a_m^{-1}G\\cong a_k^{-1}G$ followed by relabelling $\\alpha$ as $\\bigopluseta\\alpha$. The identity and composition cocycle laws make these transitions functorial, so they define total-module structures on $a^{-1}G$ and every $P_p(G)$. The same cocycle calculation shows each $d_i$ and the fold $\\epsilon$ commute with transitions.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 0D72 and 0D7C: ringed component construction and the direct-sum transition formula."
+   }
+  },
+  {
+   "text": "Fix $m$. The component of the augmented complex is the tensor of $a_m^{-1}G$ with the augmented complex whose degree-$p$ term is the direct sum over all monotone maps $[p]\\to[m]$, whose differential is the alternating face sum, and whose augmentation folds the degree-zero summands. By [lem-trf-total-site-simplex-free-resolution] this component complex is exact. By [lem-trf-total-site-component-restriction], total modules have componentwise kernels and images (the inverse-image functors are exact, as also supplied by [lem-pe-constant-left-module-inverse-image]). Therefore exactness at every component implies exactness in the category of total modules.",
+   "uses": [
+    "lem-trf-total-site-simplex-free-resolution",
+    "lem-trf-total-site-component-restriction",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7C, proof after restriction to a component, identifying the complex with a constant module tensored with the simplex resolution."
+   }
+  },
+  {
+   "text": "For a total module $I$, the universal property of the direct sum gives a morphism $P_p(G)\\to I$ exactly when one specifies maps from each $\\alpha:[p]\\to[m]$ summand. Total compatibility forces every such component map to be $I(\\alpha)\\circ u_\\alpha^{-1}f$, where $f$ is the map on the identity summand in component $p$; conversely these formulas satisfy the transition equations by the cocycle law. Thus restriction to the identity-labelled summand and the displayed extension formula are mutually inverse and natural.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D72, direct-sum formula for $g_{n!}$ and its adjunction."
+   }
+  },
+  {
+   "text": "The simplicial identities $\\delta_i\\delta_j=\\delta_{j-1}\\delta_i$ for $i<j$ imply cancellation of the two occurrences of every composite in the alternating sum, so the boundary squares to zero. The fold augmentation is compatible with transitions and is the identity on each degree-zero summand; under the identity-summand restriction bijection it corresponds to $1_{a^{-1}G}$ when $I=a^{-1}G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7C, specified face maps and augmentation; Tag 0D72, identity adjunction."
+   }
+  },
+  {
+   "text": "All constructions use only the fixed coherent comparison maps and direct-sum inclusions, hence are natural in $G$ and in morphisms of total modules $I$. The componentwise exactness and the identity-summand bijection therefore hold simultaneously for the entire augmented complex, proving every assertion.",
+   "uses": [
+    "lem-trf-total-site-simplex-free-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 0D72 and 0D7C, functoriality of the constructions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-trf-total-site-component-restriction",
+  "lem-trf-total-site-simplex-free-resolution"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tags 0D72 and 0D7C: direct-sum component construction, vertex-zero contraction, and restriction adjunction."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,7 +124,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-total-site-injective-cech-resolution",
@@ -74,8 +136,9 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Current main-20261015 lem-trf-local-term-locality proof, paragraph (1) and (2), final sentences: normal-cone specialization in Varshavsky §§1.3–1.4 and 2.1. Along the recorded nearby-cycle hypercover descent branch, this is specifically the free simplex module resolution of Stacks 0D7C used before Hom into an injective in 0D7D.",
+   "place": "Current main-20261015 lem-trf-local-term-locality proof, paragraph (2), final sentences: the free simplex module resolution of Stacks 0D7C used before Hom into an injective; this item realizes its total-module formulation.",
    "via": [
+    "lem-trf-total-site-free-module-resolution",
     "lem-trf-total-site-injective-cech-resolution",
     "lem-trf-total-site-augmentation-spectral-sequence",
     "lem-trf-oriented-nearby-hypercover-spectral-sequence",
@@ -88,5 +151,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-total-site-free-module-resolution",
+  "worker": "stage1",
+  "summary": "Split the total-site free module resolution into a componentwise simplex contraction node and an identity-summand Hom bijection node. Checked the direct-sum transition maps, alternating face signs, fold augmentation, and coherence against Stacks Tags 0D72 and 0D7C; no Lean declaration exists. Mathlib searches found only generic alternating-face and extra-degeneracy APIs, so both children remain unsplit statement nodes.",
+  "blueprint": "Steps 1–2 realize the component direct-sum construction and vertex-zero contraction in the blueprint proof branch; Steps 3–5 realize the restriction adjunction, face differential, fold augmentation, and naturality used before Hom into an injective."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-303323efe",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-303323efe (reviewer sub-agent of L); spot-checked: The mathematics is correct after two small repairs: cite lem-trf-total-site-component-restriction (and lem-pe-constant-left-module-inverse-image) for componentwise kernels/images and update proof_deps; correct the child lemma’s ordinary Λ-module coefficient wording. Corrected files are under fixes/dag/nodes/sec-trace-formula/. Sources, route, edge cases, and Mathlib searches were checked in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
