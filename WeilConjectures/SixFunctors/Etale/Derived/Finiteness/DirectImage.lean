@@ -544,9 +544,19 @@ theorem boundedConstructible_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactif
 invertible in `k` and `f : X ⟶ Y` separated of finite type between finite-type `k`-schemes,
 `Rf_!` carries `D^b_c(X, ℚ̄_ℓ)` into `D^b_c(Y, ℚ̄_ℓ)`.
 
-The blueprint deduces this from the finite-coefficient case
-`boundedConstructible_rightDerivedLowerShriek` by passing to the limit over the `ℤ/ℓⁿ` and
-inverting `ℓ`; that passage is not formalised.
+The coefficients here are *discrete*: this is étale cohomology with values in the
+`ℚ`-vector space `ℚ̄_ℓ`, not the `ℓ`-adic cohomology of the blueprint, which is obtained from
+the finite-coefficient case `boundedConstructible_rightDerivedLowerShriek` by passing to the
+limit over the `ℤ/ℓⁿ` and inverting `ℓ` (the pro-étale `Dᵇc(-)⟦padicAlgClRingObj ℓ⟧`). The two
+differ: for an elliptic curve `E` over an algebraically closed field, `H¹(E, ℚ̄_ℓ) = 0` with
+discrete coefficients. The statement is still true, but by a different argument: Galois
+cohomology with coefficients in a `ℚ`-vector space vanishes in positive degrees, so on a
+normal scheme the constant sheaf is `Rη_*` of its restriction to the generic points; this
+settles the proper normal case via Stein factorization, the general proper case follows by
+induction on the dimension from the normalization square, and constructible sheaves reduce to
+constant ones through finite étale covers trivializing their (finite) monodromy, the trace
+splitting them off. None of this, nor the stalk description of higher direct images it relies
+on, is formalised.
 
 As for `Rf_!` with finite coefficients, `Y` has to be quasi-compact: for the proper morphism
 `f : ⊔ₙ Xₙ ⟶ ⊔ₙ Spec k`, with `Xₙ` the union of the `n + 2` coordinate hyperplanes of `ℙⁿ⁺¹_k`,

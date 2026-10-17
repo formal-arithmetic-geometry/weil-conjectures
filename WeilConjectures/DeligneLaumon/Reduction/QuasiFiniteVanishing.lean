@@ -38,6 +38,8 @@ universe u
 
 open CategoryTheory Limits
 
+open scoped AlgebraicGeometry.ProEtale
+
 namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
@@ -104,20 +106,81 @@ theorem WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg (G : WeilSheaf 
 
 end LowerShriek
 
+/-- The pushforward of sheaves of modules over the constant `ℓ`-adic sheaf is exact as soon as
+the pushforward of the underlying sheaves of `ℚ̄_ℓ`-modules is: the forgetful functor reflects
+finite colimits and commutes with the pushforwards. -/
+theorem ProEtale.preservesFiniteColimits_adicLowerStar_of_preservesFiniteColimits
+    {X Y : Scheme.{u}} (g : X ⟶ Y)
+    [PreservesFiniteColimits ((g)_*[ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l))])] :
+    PreservesFiniteColimits (g)_*ᵃ[l] :=
+  have : PreservesFiniteColimits ((g)_*ᵃ[l] ⋙ ProEtale.AdicSheaf.forget Y) :=
+    inferInstanceAs (PreservesFiniteColimits
+      (ProEtale.AdicSheaf.forget X ⋙ (g)_*[WeilCoefficients.{u} l]))
+  preservesFiniteColimits_of_reflects_of_preserves _ (ProEtale.AdicSheaf.forget Y)
+
+/-- The higher direct images `Rʳp₀*G` (`r > 0`) of a Weil sheaf vanish along any morphism `p`
+whose base change `p̄` to the geometric fibres has an exact pushforward of `ℓ`-adic sheaves:
+then `p₀*` is exact on pro-étale Weil sheaves, so `Rp₀*` is `p₀*` applied levelwise
+(`CategoryTheory.Functor.rightDerivedFunctorIsoMapDerivedCategory`). -/
+theorem WeilSheaf.isZero_higherLowerStar_of_preservesFiniteColimits {T Y : Scheme.{u}}
+    [T.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (p : T ⟶ Y)
+    [p.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact p] [QuasiSeparated p]
+    [LocallyOfFiniteType p] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [PreservesFiniteColimits
+      ((Scheme.Hom.geometricFiberMap p (comp_over p (Spec (CommRingCat.of k₀))))_*ᵃ[l])]
+    (G : WeilSheaf k₀ l T) (r : ℕ) (hr : 0 < r) :
+    IsZero ((WeilSheaf.higherLowerStar p r).obj G) := by
+  have : PreservesFiniteColimits (ProEtaleWeilSheaf.lowerStar k₀ l p) :=
+    Endofunctor.IsoAlgebra.preservesFiniteColimits_mapOfNatIso _
+  change IsZero ((WeilComplex.homologySheaf r).obj _)
+  rw [WeilComplex.isZero_homologySheaf_obj_iff]
+  let F := ProEtaleWeilSheaf.lowerStar k₀ l p
+  let e := F.rightDerivedFunctorIsoMapDerivedCategory.app
+      ((DerivedCategory.singleFunctor _ 0).obj G.obj) ≪≫
+    (F.mapDerivedCategorySingleFunctor 0).app G.obj
+  exact (DerivedCategory.isZero_of_isLE ((DerivedCategory.singleFunctor _ 0).obj (F.obj G.obj))
+    0 r (by exact_mod_cast hr)).of_iso ((DerivedCategory.homologyFunctor _ r).mapIso e)
+
+/-- **Finite pushforward is exact on pro-étale sheaves of `ℚ̄_ℓ`-modules**: for a finite morphism
+`g : X ⟶ Y`, the direct image `g_*` of pro-étale sheaves of (discrete) `ℚ̄_ℓ`-modules preserves
+finite colimits. This is the pro-étale analogue of the exactness of finite direct images for
+étale sheaves (`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite`), and the
+input of the passage to `ℚ̄_ℓ`-coefficients of blueprint `def-weil-pbc-qbar-category`.
+
+It is not yet available: unlike for closed immersions, covers of `X ×_Y V` are not refined by
+base changes of covers of `V`, and a finite algebra over a w-contractible ring need not be
+w-contractible (its `π₀` need not be extremally disconnected), so the closed-immersion argument
+via henselian lifts does not apply directly. -/
+theorem ProEtale.preservesFiniteColimits_lowerStar_padicAlgCl_of_isFinite {X Y : Scheme.{u}}
+    (g : X ⟶ Y) [IsFinite g] :
+    PreservesFiniteColimits ((g)_*[ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l))]) :=
+  sorry
+
 /-- **Finite direct images are exact** for Weil sheaves (blueprint `def-weil-pbc-qbar-category`):
 for a finite morphism `p : T ⟶ Y` of `k₀`-schemes, the higher direct images `Rʳp₀*G` of a Weil
 sheaf vanish for `r > 0`.
 
 This is the passage to pro-étale `ℚ̄_ℓ`-coefficients of the exactness of finite direct images
 for étale sheaves, which is proved as
-`AlgebraicGeometry.Etale.isZero_homology_rightDerivedFunctor_lowerStar_of_isFinite`. -/
+`AlgebraicGeometry.Etale.isZero_homology_rightDerivedFunctor_lowerStar_of_isFinite`. By
+`AlgebraicGeometry.WeilSheaf.isZero_higherLowerStar_of_preservesFiniteColimits` it reduces to
+the exactness of the pushforward of pro-étale sheaves of `ℚ̄_ℓ`-modules along the finite
+morphism `p̄`, which is
+`AlgebraicGeometry.ProEtale.preservesFiniteColimits_lowerStar_padicAlgCl_of_isFinite`. -/
 theorem WeilSheaf.isZero_higherLowerStar_of_isFinite {T Y : Scheme.{u}}
     [T.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (p : T ⟶ Y)
     [IsFinite p] [p.IsOver (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l T) (r : ℕ) (hr : 0 < r) :
-    IsZero ((WeilSheaf.higherLowerStar p r).obj G) :=
-  sorry
+    IsZero ((WeilSheaf.higherLowerStar p r).obj G) := by
+  have : IsFinite (Scheme.Hom.geometricFiberMap p (comp_over p (Spec (CommRingCat.of k₀)))) :=
+    Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsFinite) p _ ‹_›
+  have := ProEtale.preservesFiniteColimits_lowerStar_padicAlgCl_of_isFinite (l := l)
+    (Scheme.Hom.geometricFiberMap p (comp_over p (Spec (CommRingCat.of k₀))))
+  have := ProEtale.preservesFiniteColimits_adicLowerStar_of_preservesFiniteColimits (l := l)
+    (Scheme.Hom.geometricFiberMap p (comp_over p (Spec (CommRingCat.of k₀))))
+  exact WeilSheaf.isZero_higherLowerStar_of_preservesFiniteColimits p G r hr
 
 section QuasiFinite
 
