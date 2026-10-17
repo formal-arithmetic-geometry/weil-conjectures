@@ -4120,6 +4120,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.HomShift
 public import WeilConjectures.SixFunctors.Etale.Derived.HomTriangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
+public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleLocal
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertiblePullback
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleSheafPowers
@@ -4481,6 +4482,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Truncation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TwistedSection
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitSection
+public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSite
 public import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSiteColimits
@@ -4501,6 +4503,18 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjointUniqueness
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Abelian
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstructibleHeart
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Extension
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.GeometricFrobenius
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Hom
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.InternalHom
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Module
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Ring
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.UnitMatrix
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClopenIdempotent
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedImmersion
@@ -4740,6 +4754,7 @@ public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.DualIrreducible
 public import WeilConjectures.WeilSheaf.EulerProduct
 public import WeilConjectures.WeilSheaf.ExtensionByZero
+public import WeilConjectures.WeilSheaf.FieldCoefficient
 public import WeilConjectures.WeilSheaf.FiniteEtale
 public import WeilConjectures.WeilSheaf.FiniteEtaleLisse
 public import WeilConjectures.WeilSheaf.FiniteLength
