@@ -8,7 +8,8 @@
   "place": "Section 5.8(iii), printed p.25: the finite-tree contraction, made explicit by leaf collapse on fixed-word diagram categories. This auxiliary formulation is agent supplied; no Stacks tag states it."
  },
  "stmt_deps": [
-  "def-coef-zigzag-homotopy-calculus"
+  "def-coef-zigzag-homotopy-calculus",
+  "lem-coef-fixed-hammock-graph-homotopy-invariance"
  ],
  "proof": [
   {
@@ -151,5 +152,31 @@
   "group": "Q90",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-26012c480 (reviewer sub-agent of L); spot-checked: I read the item in full, together with its only cited node def-coef-zigzag-homotopy-calculus, the parent lem-coef-free-factor-hammock-comparison (step 4 uses the item exactly as stated, with x=y≠l) and the neighbouring nodes. The source, Dwyer–Kan §5.8(iii), is not in literature/; it is recorded as WANTED, proof_origin=agent is correct, and I checked the statement directly. Statement: true, and no hypothesis was added or dropped. I tested the one-edge tree in both orientations, a three-vertex path with words +- and -+, the empty word, repeated l, and identity arrows at l. R_wI_w=1 holds strictly. x,y≠l is needed for the endpoint identities. A tree with a single vertex has no leaf, so that case does not arise. Steps 1, 2 and 5 are correct. Steps 3 and 4 had an argument gap that I repaired: step 3 (orientation l→a) never handled paths ending at l, and step 4 (orientation a→l) never handled paths starting at l; both left naturality in D (vertical arrows) implicit. Fix: fixes/dag/nodes/sec-six-functors/lem-coef-tree-leaf-zigzag-retraction.json changes only the texts of steps 3 and 4. Each now proves c: 1_{C_T}⇒ir (or ir⇒1_{C_T}) by a full four-case analysis on arrows, then applies the square to horizontal arrows and to vertical arrows. uses, the statement and all other fields are unchanged. There are no new nodes. My duplicate search over the whole DAG (tree/leaf with zigzag/free category) found only distinct siblings. The item does not restate its parent. The blueprint from/via is consistent with the parent. There are no off-unit uses or tool_uses, no SGA, and no target is involved.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Localization.TreeLeafZigzagRetraction",
+  "declaration": "CategoryTheory.RelativeZigzag.tree_leaf_zigzag_retraction",
+  "declarations": [
+   "CategoryTheory.RelativeZigzag.OrientedTree.deleteLeaf",
+   "CategoryTheory.RelativeZigzag.IsTreeLeafCollapse",
+   "CategoryTheory.RelativeZigzag.IsTreeLeafInduced",
+   "CategoryTheory.RelativeZigzag.tree_leaf_zigzag_retraction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Localization/TreeLeafZigzagRetraction.lean",
+  "statement": "theorem tree_leaf_zigzag_retraction {V : Type u} (T : OrientedTree V) (l a : V) (h_leaf : ∀ v : V, T.graph.Adj l v ↔ v = a) : ∃ (i : (T.deleteLeaf l a h_leaf).PathCategory ⥤ T.PathCategory) (r : T.PathCategory ⥤ (T.deleteLeaf l a h_leaf).PathCategory), IsTreeLeafCollapse T l a h_leaf i r ∧ i ⋙ r = 𝟭 _ ∧ ∀ (x y : (T.deleteLeaf l a h_leaf).Vertex) (w : List Bool), ∃ (I : Diagram (⊤ : MorphismProperty (T.deleteLeaf l a h_leaf).PathCategory) (OrientedTree.signedWord w) x y ⥤ Diagram (⊤ : MorphismProperty T.PathCategory) (OrientedTree.signedWord w) x.val y.val) (R : Diagram (⊤ : MorphismProperty T.PathCategory) (OrientedTree.signedWord w) x.val y.val ⥤ Diagram (⊤ : MorphismProperty (T.deleteLeaf l a h_leaf).PathCategory) (OrientedTree.signedWord w) x y), IsTreeLeafInduced i (OrientedTree.signedWord w) x y x.val y.val I ∧ IsTreeLeafInduced r (OrientedTree.signedWord w) x.val y.val x y R ∧ I ⋙ R = 𝟭 _ ∧ (∀ e : T.direction l a, ∃ η : 𝟭 _ ⟶ R ⋙ I, ∀ (d : Diagram (⊤ : MorphismProperty T.PathCategory) (OrientedTree.signedWord w) x.val y.val) (j : Vertex (OrientedTree.signedWord w)), (objectAt ⊤ d j = l → HEq ((η.app d).app j) (Quiver.Hom.toPath (V := T.Vertex) (a := l) (b := a) (ULift.up (PLift.up e)))) ∧ (objectAt ⊤ d j ≠ l → HEq ((η.app d).app j) (𝟙 (objectAt ⊤ d j)))) ∧ (∀ e : T.direction a l, ∃ η : R ⋙ I ⟶ 𝟭 _, ∀ (d : Diagram (⊤ : MorphismProperty T.PathCategory) (OrientedTree.signedWord w) x.val y.val) (j : Vertex (OrientedTree.signedWord w)), (objectAt ⊤ d j = l → HEq ((η.app d).app j) (Quiver.Hom.toPath (V := T.Vertex) (a := a) (b := l) (ULift.up (PLift.up e)))) ∧ (objectAt ⊤ d j ≠ l → HEq ((η.app d).app j) (𝟙 (objectAt ⊤ d j))))",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reviewer fix (H4): states the leaf collapse on the landed OrientedTree interface of def-coef-oriented-tree-subtree-zigzags (Sheaf.CategoryTheory.Localization.OrientedTreeZigzags: OrientedTree, Vertex, vertexQuiver, PathCategory, signedWord), which landed four minutes after this delivery and which the sibling lem-coef-tree-zigzag-finite-subtree-colimit already uses; the delivery's Digraph rendering (TreeLeafVertex, treeLeafQuiver, treeLeafDelete, h_orientation, h_tree) duplicated it. The deleted tree T' is the real construction OrientedTree.deleteLeaf (induced graph on the complement of the leaf, restricted directions; tree proof from Mathlib's Connected.induce_compl_singleton_of_degree_eq_one and IsAcyclic.induce). Canonical functors are specified on every vertex and generating edge, and induced functors on every diagram entry and vertical arrow; they are existentially quantified with these determining equations. Reuses FixedHammockGraph.DiagramImage from the added landed statement dependency. Only this node theorem is postponed. def-coef-oriented-tree-subtree-zigzags should be in the item's stmt_deps (the module imports it).",
+  "fixed_by": "NT-stage2-cc-c0513807b"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0513807b",
+  "group": "Q17",
+  "result": "fix",
+  "note": "Mathematics correct: every clause matches the node (tree with one direction per edge, free path category, leaf iff, x,y≠l, canonical i/r determined by generator equations, induced I/R determined by DiagramImage plus vertical components, strict I⋙R=𝟭 and i⋙r=𝟭, transformation 1⇒RI for l→a and RI⇒1 for a→l with edge components at l and identities elsewhere, endpoint identities enforced by Hom). Edge cases checked: singleton tree, one-edge tree both ways, infinite tree, empty word, repeated l; no universe restriction. Gates pass: no hollow definitions, the only sorry is the theorem, docstrings and 5-step proof present, lines ≤100, statement verbatim, report sections present, the added landed dependency fixed-hammock makes no cycle. Delivered file compiles clean (rc 0); a scratch error was reported. Finding H4: def-coef-oriented-tree-subtree-zigzags (OrientedTree, Vertex, vertexQuiver, PathCategory, signedWord) landed 4 minutes after the delivery, and the sibling finite-subtree-colimit lemma is stated on it; the Digraph rendering (TreeLeafVertex, treeLeafQuiver, treeLeafDelete, h_orientation, h_tree) duplicated it. FIX: complete module restated on OrientedTree, with T' the real construction OrientedTree.deleteLeaf (induced graph on {l}ᶜ, restricted directions, tree proof from Mathlib induce_compl_singleton_of_degree_eq_one and IsAcyclic.induce, no sorry); all clauses unchanged; compiles clean; a scratch check shows Paths.lift of the inclusion satisfies the i-clauses. Also in fixes: lean-record.json (declarations, verbatim statement, note) and report.md with a Maintainer fix section. The item's stmt_deps should also gain def-coef-oriented-tree-subtree-zigzags (landed, acyclic), recorded in lean.note."
  }
 }

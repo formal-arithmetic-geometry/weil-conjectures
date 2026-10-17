@@ -273,5 +273,36 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q82-3b979ba95 (reviewer sub-agent of L); spot-checked: Read all seven proof steps, cited node statements, sources, and unit/chapter route. Verified unbounded K-injective computations, counit orientation, inverse-germ normalization, edge cases, and exact master target coefficient categories. No duplicates, cycles, missing citations, or repairs found. Three generic tool uses accepted; details in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricPointDerivedSectionsAdjunction",
+  "declaration": "AlgebraicGeometry.Etale.geometricPoint_derivedSections_adjunction",
+  "declarations": [
+   "AlgebraicGeometry.Etale.geometricPointSectionsStalkAdditive",
+   "AlgebraicGeometry.Etale.geometricPointSectionsStalkAdjunction",
+   "AlgebraicGeometry.Etale.geometricPointSectionsConstantAdjunction",
+   "AlgebraicGeometry.Etale.geometricPointSectionsImageAdjunction",
+   "AlgebraicGeometry.Etale.geometricPointSectionsConstantsIso",
+   "AlgebraicGeometry.Etale.geometricPointDerivedSectionsIso",
+   "AlgebraicGeometry.Etale.geometricPointSectionsGerm",
+   "AlgebraicGeometry.Etale.geometricPointSectionsImageH0Iso",
+   "AlgebraicGeometry.Etale.geometricPointSectionsGlobalH0Iso",
+   "AlgebraicGeometry.Etale.geometricPoint_derivedSections_adjunction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricPointDerivedSectionsAdjunction.lean",
+  "statement": "theorem geometricPoint_derivedSections_adjunction (Ω : Type u) [Field Ω] [IsAlgClosed Ω] {Z : Scheme.{u}} (h : Z ⟶ Spec (.of Ω)) : (∀ E : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))), (geometricPointSectionsConstantsIso Ω h).hom.app (((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).rightDerivedFunctor ⋙ (geometricPointStalk Ω).mapDerivedCategory).obj E) ≫ (constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))).mapDerivedCategory.map ((geometricPointDerivedSectionsIso Ω h).hom.app E) ≫ (geometricPointSectionsConstantAdjunction Z).counit.app E = (upperStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).mapDerivedCategory.map ((geometricPointSectionsStalkAdjunction Ω).mapDerivedCategoryAdjunction.counit.app ((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).rightDerivedFunctor.obj E)) ≫ (geometricPointSectionsImageAdjunction Ω h).counit.app E) ∧ (∀ G : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)), geometricPointSectionsGerm Ω ((lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).obj G) ≫ (geometricPointSectionsImageH0Iso Ω h G).inv ≫ (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) 0).map ((geometricPointDerivedSectionsIso Ω h).hom.app ((DerivedCategory.singleFunctor _ 0).obj G)) ≫ (geometricPointSectionsGlobalH0Iso Z G).hom = (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).hom.app G)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "geometricPointDerivedSectionsIso constructs the natural right-adjoint isomorphism using the normalized dependency adjunction and the canonical pullback-of-constants comparison. The main theorem states both its explicit counit equation and its degree-zero normalization. The second equation precomposes the transported H⁰ map with the actual global-section-to-germ map; since the transported H⁰ map and the pushforward/sections comparison are isomorphisms, this is exactly the inverse-germ characterization. Canonical left-derived/exact-functor and H⁰ augmentation comparisons are named helpers, not extra hypotheses. Coefficients retain the dependency encoding ModuleCat over ULift ℤ."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-530cea5fa",
+  "group": "NO",
+  "result": "pass",
+  "note": "All clauses match the node via the recorded dependency declarations; no stronger hypotheses, and universes follow the dependencies' ModuleCat.{u+1}(ULift ℤ) encoding. β is rightAdjointUniq of the (stalk/constant ∘ inverse/direct-image) adjunction transported by the canonical upperStarConstantSheafIso comparison against the recorded constant/global-sections adjunction. The Classical.choice adjunction is uniquely determined because the dependency fixes its functors and unit. The degree-zero clause uses the real germ map and canonical H0 augmentation isos and is equivalent to H0β = inverse germ. Snapshot module compiled cleanly with nt_compile.py --json (12.5 s and 16.4 s, rc 0, no errors or warnings); a false probe showed errors are reported, and a probe proved the first conjunct from the definitions, confirming the counit orientation. One sorry; source and blueprint docstrings present; node changes only lean, statement verbatim; report sections present. No findings."
  }
 }

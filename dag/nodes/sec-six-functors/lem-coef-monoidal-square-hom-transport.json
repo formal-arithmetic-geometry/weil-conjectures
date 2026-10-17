@@ -265,5 +265,32 @@
   "group": "Q113",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q113-3477bc7c8 (reviewer sub-agent of L); spot-checked: Read the item, master/current blueprint sources, unit route, cited nodes, and categorical source locations. Verified all eleven typed calculations, hypotheses, endpoint map r_h=H(h_K^{-1},h_M), coefficient categories, edge cases, duplicate searches, and delivery rules. No repair is needed; review.md records the checks."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.CoefMonoidalSquareHomTransport",
+  "declaration": "CategoryTheory.coefMonoidalSquareHomTransport",
+  "declarations": [
+   "CategoryTheory.internalHomComparison",
+   "CategoryTheory.internalHomTransport",
+   "CategoryTheory.InternalHomComparisonLaws",
+   "CategoryTheory.InternalHomComparisonLawsAt",
+   "CategoryTheory.SuccessiveCoefficientHomTransport",
+   "CategoryTheory.coefMonoidalSquareHomTransport"
+  ],
+  "branch": "newtargets-dag",
+  "existing": false,
+  "file": "lean/Sheaf/SixFunctors/CoefMonoidalSquareHomTransport.lean",
+  "by": "N8",
+  "date": "2026-10-18",
+  "statement": "theorem coefMonoidalSquareHomTransport {CA : Type uCA} [Category.{vCA} CA] [MonoidalCategory CA] [BraidedCategory CA] {CB : Type uCB} [Category.{vCB} CB] [MonoidalCategory CB] [BraidedCategory CB] {DA : Type uDA} [Category.{vDA} DA] [MonoidalCategory DA] [BraidedCategory DA] {DB : Type uDB} [Category.{vDB} DB] [MonoidalCategory DB] [BraidedCategory DB] [MonoidalClosed CA] [MonoidalClosed CB] [MonoidalClosed DA] [MonoidalClosed DB] (F : CA ⥤ CB) (G : DA ⥤ DB) (UA : CA ⥤ DA) (UB : CB ⥤ DB) [F.Braided] [G.Braided] [UA.Braided] [UB.Braided] (h : F ⋙ UB ≅ UA ⋙ G) [NatTrans.IsMonoidal h.hom] (K M : CA) : h.hom.app (K ⟶[CA] M) ≫ G.map (internalHomComparison UA K M) ≫ internalHomComparison G (UA.obj K) (UA.obj M) = UB.map (internalHomComparison F K M) ≫ internalHomComparison UB (F.obj K) (F.obj M) ≫ internalHomTransport h K M ∧ (∀ [IsIso (internalHomComparison UA K M)] [IsIso (internalHomComparison UB (F.obj K) (F.obj M))], internalHomComparison G (UA.obj K) (UA.obj M) = G.map (inv (internalHomComparison UA K M)) ≫ h.inv.app (K ⟶[CA] M) ≫ UB.map (internalHomComparison F K M) ≫ internalHomComparison UB (F.obj K) (F.obj M) ≫ internalHomTransport h K M) ∧ (∀ {K M : CA} [IsIso (internalHomComparison UA K M)] [IsIso (internalHomComparison UB (F.obj K) (F.obj M))], InternalHomComparisonLawsAt F K M → InternalHomComparisonLawsAt G (UA.obj K) (UA.obj M)) ∧ SuccessiveCoefficientHomTransport F G UA UB h",
+  "fixed_by": "NT-stage2-cc-b293030e2"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b293030e2",
+  "group": "N8",
+  "result": "fix",
+  "note": "Delivered SuccessiveCoefficientHomTransport lacks the node's 'monoidal composite identifications': fComp/gComp are bare isos while FAC/GAC carry independent Braided structures, making conjunct 4 false (counterexample: ModuleCat ℚ, identity functors, FAC=GAC=𝟭 with μ=2•𝟙, ε=½•𝟙, all isos identity; conclusion 2•𝟙=𝟙). Fix adds [NatTrans.IsMonoidal fComp.hom] [NatTrans.IsMonoidal gComp.hom], the node's assumed F composition equation as hypothesis _hFComp, and Source lines on two docstrings; theorem signature/lean.statement unchanged. Checked internalHomComparison=curry(μ≫V ev), internalHomTransport=H(h_K⁻¹,h_M), square identity (S), conjugation with exact two IsIso guards, the four laws (types and truth), coherence equation, identity clause, universes, no hollow defs, sorry only, Mathlib search (expComparison is cartesian only). Delivered and fixed files both compile without errors via nt_compile.py --json; axioms propext, sorryAx, Classical.choice, Quot.sound."
  }
 }

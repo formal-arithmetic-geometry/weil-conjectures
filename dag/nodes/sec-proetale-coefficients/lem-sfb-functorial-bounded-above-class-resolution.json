@@ -232,5 +232,23 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-f9d56d718 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the parent lem-sfb-kflat-derivability, unit sk-def-sfb-derived-tensor-hom, the blueprint lem-sfb-derived-monoidal proof (first three sentences), FromJoel LeftResolution/CochainComplexMinus.lean l.1-140 and 200-275, and Mathlib LeftResolution/Reduced.lean l.1-160 and Basic.lean l.30-60. Both new statements are true. reduced-class is the Karoubi/reduced construction: C is the full subcategory on F, which is idempotent complete because F is closed under direct summands. bounded-minus is minusResolutionFunctor/NatTrans; I checked the upper bound (IsStrictlyLE instance, l.134), the quasi-isomorphism (l.202-224) and that the hypotheses match the Lean variables. Small cases: free abelian groups with P(M)=Z[M], where P(0)=Z is not 0 and the reduced Q(M)=Z[M]/Z[0]; L=0; M[0]; a map M[0]->N[1]. Neither node duplicates an existing one: subcategory-left-resolution, truncation-resolution-system, unbounded-kflat-existence and trf-finite-filtered were each read. The split is not a relabelling: step 1's zero-preserving reduction is real content and follows the source's own decomposition. Two faults repaired. (1) C4/C3/E1: step 2 concluded that the terms lie in F from the essential image of iota, but reduced-class only stated iota(QM) in F, so the step leaned on the construction remark rather than the statement. Fix: reduced-class now states iota(X) in F for every X in C (true for the full subcategory), and step 2 cites it with iso-closure; uses updated. (2) B1: reduced-class had a proof-sketch sentence in its statement; removed and moved into source.place. The item statement is unchanged; no tool_uses; no SGA.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FunctorialBoundedAboveClassResolution",
+  "declaration": "CochainComplex.exists_functorial_boundedAbove_class_resolution",
+  "file": "lean/Sheaf/Algebra/Homology/FunctorialBoundedAboveClassResolution.lean",
+  "statement": "theorem exists_functorial_boundedAbove_class_resolution {A : Type u} [Category.{v} A] [Abelian A] (F : ObjectProperty A) [F.ContainsZero] [F.IsClosedUnderIsomorphisms] (h_biproduct : ∀ (U V : A), F U → F V → F (U ⊞ V)) (h_summand : ∀ (U V : A), F (U ⊞ V) → F U ∧ F V) (P : A ⥤ A) (hP : ∀ (M : A), F (P.obj M)) (ε : P ⟶ 𝟭 A) (hε : ∀ (M : A), Epi (ε.app M)) : ∃ (S : CochainComplex.Minus A ⥤ CochainComplex A ℤ) (a : S ⟶ CochainComplex.Minus.ι A), (∀ (L : CochainComplex.Minus A), QuasiIso (a.app L)) ∧ (∀ (L : CochainComplex.Minus A) (i : ℤ), F ((S.obj L).X i)) ∧ (∀ (L : CochainComplex.Minus A) (b : ℤ), L.obj.IsStrictlyLE b → (S.obj L).IsStrictlyLE b)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fb9693251",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Read the node, both statement dependencies (def-sp-abelian: Mathlib Abelian; def-weil-abstract-derived-category), the blueprint source, upstream CochainComplex.Minus (an existential bound in a full subcategory), the FromJoel LeftResolution/CochainComplexMinus construction (bound instance l.134, quasi-iso l.202-224) and Mathlib LeftResolution/Reduced. Every clause matches: ContainsZero plus binary biproducts is equivalent to finite biproducts; the summand clause is verbatim; P has no additivity; ε has epi components; S : Minus A ⥤ CochainComplex A ℤ with a : S ⟶ Minus.ι; quasi-iso, termwise membership in F, and IsStrictlyLE b preserved for every b. There are no extra assumptions and the universes are independent. The statement is true via the full subcategory on F (idempotent complete by summand closure), the reduced LeftResolution and minusResolutionFunctor. Edge cases L=0, single-degree complexes, maps with unequal bounds and non-additive P(0)≠0 are covered. Only the node's lean field changed, and lean.statement is verbatim. Docstrings have the source, the blueprint ID and the proof steps; nothing hollow or proved; lines ≤89. nt_compile --json gave exit 0, no warnings, 2.0 s, and an injected error was caught. The second-reading section is an honest self-check that still goes through every clause; noted, not counted as a fault. No findings."
  }
 }

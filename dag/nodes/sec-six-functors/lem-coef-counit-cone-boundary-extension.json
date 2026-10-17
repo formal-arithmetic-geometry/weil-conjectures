@@ -8,7 +8,9 @@
   "place": "Riehl--Verity, Notation 4.2.6 and Observation 4.3.4, equivalently the absolute case of Proposition 4.3.6 with terminal target; pp. 835--844. Online source read; archival copy WANTED. No Stacks tag states this locally quasicategorical counit assertion."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-slice-right-fibration"
  ],
  "proof": [
   {
@@ -175,5 +177,33 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-f219a7a8f (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement (def-cbc-enhanced-diagrams-cones, def-coef-coherent-adjunction-data, lem-coef-infinity-adjunction-mapping-equivalence, lem-coef-infinity-slice-right-fibration, lem-coef-infinity-relative-initial-boundary), the consumer lem-coef-enriched-coherent-adjunction-extension, the unit and the ancestor. Riehl-Verity is not in the local literature, so proof_origin=agent and the WANTED line are correct, and I checked the mathematics directly. X^▷ equals X⋆Δ^0 in the slice node's join convention. A functor 3[X]→K is exactly the pair x, s with s|_X=L_z x. So T|∂ is a map a_T:∂Δ^m→E'_z=C_z×_{D_z}(D_z)_{/a} with last vertex (Ua,εa); join-slice works for disconnected ∂Δ^1 because the apex is fixed. The final clause of relative-initial-boundary over Δ^0 (Map_{Δ^0}=Δ^0) gives the filler for m≥1, and unpacking the pullback gives a strict 3[Δ^m] extension. Small case m=1 is the factorisation of α through the counit. The new node is true: E'_z→C_z is a pulled-back right fibration with fibres Map(Lb,a), and the mapping equivalence (L_z⊣U_z inherited via 2-functoriality of K(z,-)) makes (Ua,εa) represent it, hence terminal. It is not a duplicate: def-coef-coherent-adjunction-data has the fat comma only, mapping-equivalence is not terminality, represented-family-slice-fibration and terminal-boundary nodes differ. It does not restate an item clause. Repairs (B1/B3, two faults): (1) new node statement rewritten to remove proof language and the unused 'chosen witness β_L / dual witness exists coherently' clause, now fully self-contained (K, L, U, η, ε with triangle identities in homotopy categories, z, a, E'_z, Ua, ε_a; conclusion: quasicategory and contractible Map into (Ua,εa)); stmt_deps reduced to def-cbc-enhanced-diagrams-cones and lem-coef-infinity-slice-right-fibration; title and source place adjusted. (2) Item step 2 no longer appeals to the nonexistent β_L hypothesis or padding citations: it checks that the hypotheses match and that (Ua,ε_a) is a vertex of E'_z; uses = new node + slice node; proof_deps recomputed. No statement weakened; route stays inside sk-prop-sf-biduality-general; no tool_uses; no SGA.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CounitConeBoundaryExtension",
+  "declaration": "SSet.Enhanced.counit_cone_boundary_extension",
+  "declarations": [
+   "SSet.Enhanced.IsHomotopyIdentityComposite",
+   "SSet.Enhanced.IsCounitHomotopyAdjunction",
+   "SSet.Enhanced.ThreeFunctor",
+   "SSet.Enhanced.boundaryLastVertex",
+   "SSet.Enhanced.counitConeEdge",
+   "SSet.Enhanced.counitAt",
+   "SSet.Enhanced.counit_cone_boundary_extension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CounitConeBoundaryExtension.lean",
+  "statement": "theorem counit_cone_boundary_extension {C : Type u} [Category.{v} C] [SimplicialCategory C] (hquasi : ∀ (x y : C), Quasicategory (sHom x y)) (c d : C) (L : c ⟶ d) (U : d ⟶ c) (η : sHom c c _⦋1⦌) (ε : sHom d d _⦋1⦌) (hadj : IsCounitHomotopyAdjunction L U η ε) (z : C) (a : z ⟶ d) (m : ℕ) (hm : 1 ≤ m) (T : ThreeFunctor z c d L (∂Δ[m])) (hlast : T.map01.app _ (boundaryLastVertex m hm) = homEquiv' z c (a ≫ U)) (hapex : orderedJoinInr (∂Δ[m]) Δ[0] ≫ T.map02 = SSet.yonedaEquiv.symm (homEquiv' z d a)) (hedge : T.map02.app _ (counitConeEdge (boundaryLastVertex m hm)) = counitAt a ε) : ∃ (Tbar : ThreeFunctor z c d L (Δ[m])), (boundary m).ι ≫ Tbar.map01 = T.map01 ∧ orderedJoinFunctor.map ((boundary m).ι, 𝟙 (Δ[0] : SSet.{v})) ≫ Tbar.map02 = T.map02",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of all four returned points: actual homotopy-category triangle equations and unit/counit faces; full right-join cone hom maps with the strict composition square for both boundary and extension; prescribed apex and whiskered counit edge; equality of the entire two boundary hom maps. ThreeFunctor is precisely the complete component presentation in Riehl--Verity Notation 4.2.6, equation (4.2.7). Uses the landed right cone and join generators, not a private cone model."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d772b517",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Checked every clause against the node and Riehl-Verity 4.2.6/4.3.4/4.3.6. Endpoint orientation of eta/epsilon is correct (L≫U = UL, U≫L = LU); both triangle identities hold in the homotopy categories, with whiskering directions verified against Mathlib eHomWhiskerLeft (postcompose) and eHomWhiskerRight (precompose). ThreeFunctor is the full (4.2.7) data of a functor out of 3[X] over the landed rightJoinCone. hlast/hapex/hedge fix Ua, a and the edge eps a = eHomWhiskerRight a d eps; the conclusion requires exact equality of both variable hom maps on the boundary. Edge cases m=1 and m=0, universes u/v independent, no extra assumptions. Node diff is only lean plus two landed, reviewed, acyclic stmt_deps; lean.statement verbatim; docstrings carry source and blueprint; only sorry is the theorem proof. nt_compile.py --json on the snapshot at its project path: exit 0, 2.4 s, no errors or warnings. The second reading is an author self-check; cosmetic only."
  }
 }

@@ -250,5 +250,52 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-12555fa4b (reviewer sub-agent of L); spot-checked: I read the delivery in full. It is one commit with the item and its report and no new nodes. The item is not a target, so the base-change and coefficient check does not apply. No SGA is cited. Statement: I compared it with the pre-repair unsplit text. The conclusion is unchanged (coherent Y≃X∘N(r) with the stated components, coherent on every string of R; X defined on all of N(W), including leading-unit arrows outside the image of r; the comparison is in M only; no colimits). The changes only type the action operad π, the colour map g, the lift over g, the block-operator convention (the same as the Segal node's), R, W, the total contraction and U_AQ. Regularity is now a coherent equivalence with A∘c rather than a strict composite, which weakens the hypothesis. The parent's steps 1–2 construct exactly this target and lift, so its step 11 still applies. Steps: (1) ρ (a0,p↦a1) sends every allowed type to an allowed type, including nullary ones. Operation sets are singletons, inert maps are preserved, gρ=g, and ρ^⊗|_R=r. (2) Fρ|BM12=F and Fρ|BM01=F|Ass1∘c≃A∘c. The Segal node's stated relative restriction equivalence over a fixed g reflects the equivalence of triples to ε:F≃Fρ over g. (3) β_R=β_W∘N(r), because operators preserve endpoints and the BM operation is unique. (4)–(5) The transport-lemma hypotheses hold. The values are A^{⊗k}⊗U_AQ and A⊗A^{⊗n}⊗U_AQ. λ_W∘N(r) is cocartesian by the 'if' clause. (6) The u/v argument correctly gives vu≃1 and uv≃1 through the natural mapping-fiber equivalence. (7) Coherence on strings holds because this is an equivalence in Fun(K,M). (8) For h=(0,0,1,…,k+1) the first block is empty and the last block is q, so the arrow lies in W. Every arrow in the image of r has a nonempty first block. I checked k=0 and k=1, n=0, and closure of R and W under composition. Duplicates: I searched dag/nodes (Chain_2, the bar/word nodes, the leading-unit sibling) and found none. All cited statements are in the unit, def-cbc is only a definition, there are no tool_uses, and proof_deps equals the union of the uses. Higher Algebra and Higher Topos Theory are not archived; proof_origin is correctly 'agent' and the WANTED lines are recorded. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TwoSidedBarRegularWordIdentification",
+  "declaration": "SSet.Enhanced.two_sided_bar_regular_word_identification",
+  "declarations": [
+   "SSet.Enhanced.regularBarColour",
+   "SSet.Enhanced.regularBarColours",
+   "SSet.Enhanced.RegularBarWord",
+   "SSet.Enhanced.RegularBarArrow",
+   "SSet.Enhanced.regularBarWordCategory",
+   "SSet.Enhanced.regularBarInclusion",
+   "SSet.Enhanced.regularBarNerve",
+   "SSet.Enhanced.regularBarNerveMap",
+   "SSet.Enhanced.regularBarVertex",
+   "SSet.Enhanced.regularBarModuleWord",
+   "SSet.Enhanced.regularBarTerminalWord",
+   "SSet.Enhanced.IsRegularBarColourFunctor",
+   "SSet.Enhanced.IsRegularBarAlgebraCollapse",
+   "SSet.Enhanced.IsRegularBarRelabelling",
+   "SSet.Enhanced.regularBarEnd",
+   "SSet.Enhanced.IsRegularBarEquivalence",
+   "SSet.Enhanced.IsRegularBarContraction",
+   "SSet.Enhanced.IsRegularBarAction",
+   "SSet.Enhanced.IsRegularBarLift",
+   "SSet.Enhanced.IsRegularBarRegularity",
+   "SSet.Enhanced.IsRegularBarEvaluationWitness",
+   "SSet.Enhanced.IsRegularBarEvaluation",
+   "SSet.Enhanced.RegularBarComparison",
+   "SSet.Enhanced.IsRegularBarLeadingUnit",
+   "SSet.Enhanced.two_sided_bar_regular_word_identification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TwoSidedBarRegularWordIdentification.lean",
+  "statement": "theorem two_sided_bar_regular_word_identification : ∃ (g : ChainTwoWord chainTwoAll ⥤ ChainTwoWord chainTwoRight) (c : ChainTwoWord chainTwoLeft ⥤ ChainTwoWord chainTwoShared) (r : RegularBarWord true ⥤ RegularBarWord false) (βR : regularBarNerve.{u} (RegularBarWord true) ⊗ Δ[1] ⟶ chainTwoNerve.{u} chainTwoRight) (βW : regularBarNerve.{u} (RegularBarWord false) ⊗ Δ[1] ⟶ chainTwoNerve.{u} chainTwoRight), IsRegularBarColourFunctor g ∧ IsRegularBarAlgebraCollapse c ∧ IsRegularBarRelabelling r ∧ IsRegularBarContraction g true βR ∧ IsRegularBarContraction g false βW ∧ βR = (regularBarNerveMap r ⊗ₘ 𝟙 Δ[1]) ≫ βW ∧ (∀ k : ℕ, ∃ f : (⟨k⟩ : RegularBarWord false) ⟶ ⟨k + 1⟩, IsRegularBarLeadingUnit k f ∧ ∀ (x y : RegularBarWord true) (a : x ⟶ y) (hx : r.obj x = ⟨k⟩) (hy : r.obj y = ⟨k + 1⟩), eqToHom hx.symm ≫ r.map a ≫ eqToHom hy ≠ f) ∧ ∀ (E : SSet.{u}) [Quasicategory E] (π : E ⟶ chainTwoNerve.{u} chainTwoRight), IsRegularBarAction π → ∀ (F : chainTwoNerve.{u} chainTwoAll ⟶ E) (δ : chainTwoNerve.{u} chainTwoAll ⊗ Δ[1] ⟶ chainTwoNerve.{u} chainTwoRight), IsRegularBarLift π g F δ → ∀ (H : chainTwoNerve.{u} chainTwoLeft ⊗ Δ[1] ⟶ E) (D : (chainTwoNerve.{u} chainTwoLeft ⊗ Δ[1]) ⊗ Δ[1] ⟶ chainTwoNerve.{u} chainTwoRight), IsRegularBarRegularity π g c F δ H D → (∃ (Y : regularBarNerve.{u} (RegularBarWord true) ⟶ fiber π (regularBarVertex regularBarModuleWord)) (X : regularBarNerve.{u} (RegularBarWord false) ⟶ fiber π (regularBarVertex regularBarModuleWord)), IsRegularBarEvaluation π true F δ βR Y ∧ IsRegularBarEvaluation π false F δ βW X) ∧ ∀ (Y : regularBarNerve.{u} (RegularBarWord true) ⟶ fiber π (regularBarVertex regularBarModuleWord)) (X : regularBarNerve.{u} (RegularBarWord false) ⟶ fiber π (regularBarVertex regularBarModuleWord)), IsRegularBarEvaluation π true F δ βR Y → IsRegularBarEvaluation π false F δ βW X → AreNaturallyEquivalent Y (regularBarNerveMap r ≫ X) ∧ RegularBarComparison π g r F δ H βR βW Y X",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The BM operator category is the recorded right suboperad (a₁,q,a₂ renamed v,m,t). Exact object/cut-map normalizations determine the canonical functors. Regularity retains its base square and shared algebra. The comparison prism specifies the regular component identification and all operator strings. Only the main theorem is postponed; no data are chosen from a bare existence assertion.",
+  "fixed_by": "NT-stage2-cc-4fc488a76"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4fc488a76",
+  "group": "N2",
+  "result": "fix",
+  "note": "Substance correct: BM=chainTwoRight, the action (cocartesian over BM, operad, inert-preserving, contractible t-fiber), g/c/r normalized and unique, lift F over g with δ, and regularity H/D (strict on the shared a1, which is only an isofibration rectification) all match the node. Contraction β, the evaluation triangle and the comparison prism (J extends H and the identity; the corners check strictly) also match, as do the leading-unit cut h(0)=h(1)=0, h(j)=j-1, the M-fiber target and the absence of colimit hypotheses. Defect (H3): the clause 'not in image of r' was `¬ HEq (r.map a) f` over all R arrows. For pairs like W(k+1,k) vs W(k,k+1) (equal cardinality C(2k+1,k)) this cannot be proved in Lean. Fixed in fixes/TwoSidedBarRegularWordIdentification.lean to `∀ x y a (hx : r.obj x = ⟨k⟩) (hy : r.obj y = ⟨k+1⟩), eqToHom hx.symm ≫ r.map a ≫ eqToHom hy ≠ f`, with proof step 8 adjusted. nt_compile --json at the library path: snapshot clean, fix clean (4.8 s); a probe confirmed the wrapper reports errors."
  }
 }
