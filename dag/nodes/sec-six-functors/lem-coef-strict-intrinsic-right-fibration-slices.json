@@ -13,9 +13,158 @@
   "lem-coef-space-transport-classification",
   "lem-coef-coherent-nerve-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The section-mapping theorem [lem-coef-unstraightening-homotopy-descent-gluing] makes $\\mathsf R(D)$ locally Kan. Regard a quasicategory $A$ as an object of the locally Kan simplicial category with mapping complexes $\\operatorname{Fun}(A,B)^\\simeq$; its nerve is $\\operatorname{Cat}_{\\mathcal U}$ by [lem-coef-marked-point-cartesian-model]. A simplex of $\\operatorname{Fun}_{/D}(E,E')$ lies in this core: each edge in its parameter direction evaluates at $e\\in E$ to an edge of the Kan fiber $E'_{p(e)}$, hence an equivalence by [lem-coef-infinity-core-kan-fibration]; the pointwise criterion then applies. Thus forgetting the base is an enriched functor, equipped with the strictly enriched natural transformation to the constant object $D$ whose component is $p:E\\to D$. Concretely this is an enriched functor $\\mathsf R(D)\\times[1]\\to\\mathsf Q$, sending a cross-interval map to $p$; enriched naturality is precisely $p'f=p$. The coherent nerve preserves this product (a functor into a product is a pair of functors). It supplies a coherent transformation to the constant diagram $D$, hence a functor $J_D$ to the arrow-model slice of $\\operatorname{Cat}_{\\mathcal U}$. The slice-arrow equivalence identifies this with the intrinsic slice. On vertices and strict arrows it is the comparison in the statement.",
+   "uses": [
+    "lem-coef-unstraightening-homotopy-descent-gluing",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-infinity-right-fibration-fibers",
+    "lem-coef-infinity-core-kan-fibration",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-slice-arrow-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proposition 6.2, strict-arrow relative model; enriched comparison and its maps written explicitly"
+   }
+  },
+  {
+   "text": "A right fibration between quasicategories is an isofibration. Indeed take opposites, apply [lem-cbc-left-fibration-equivalence-lift], and take opposites back; [lem-coef-infinity-relative-cone-equivalence](4) preserves equivalences and isofibrations. The equivalence lift with prescribed target in the left-fibration statement supplies precisely the prescribed-source lift on the right-fibration side. Therefore exponentiation of $p':E'\\to D$ by $E$, followed by passage to cores, is a Kan fibration\n$$\\operatorname{Fun}(E,E')^\\simeq\\longrightarrow\\operatorname{Fun}(E,D)^\\simeq.$$\nIts strict fiber over $p$ is exactly $\\operatorname{Fun}_{/D}(E,E')$: the previous step checked that every relative simplex lies in the core. By [lem-coef-kan-pullback-path-comparison] insertion of the constant path identifies this strict fiber with the homotopy fiber over $p$.",
+   "uses": [
+    "lem-cbc-left-fibration-equivalence-lift",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-core-kan-fibration",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Isofibration exponential and core mapping-space test; right-fibration dual of equivalence lifting"
+   }
+  },
+  {
+   "text": "Apply the cone-category mapping formula [lem-cbc-enhanced-functor-cone-calculus] in $\\operatorname{Cat}_{\\mathcal U}$ with indexing shape $\\Delta^0$ and target $D$. The mapping space from $p:E\\to D$ to $p':E'\\to D$ is the homotopy fiber over $p$ of postcomposition by $p'$ on $\\operatorname{Map}_{\\operatorname{Cat}}(E,E')$. The marked-point model identifies these two mapping spaces with the cores in step 2. The constant-path comparison there is induced by $J_D$, since $p'f=p$ is its specified triangle. The coherent-nerve mapping comparison identifies the source mapping space with $\\operatorname{Fun}_{/D}(E,E')$, respecting composition. Thus $J_D$ is fully faithful. Its essential image is exactly $R_{\\mathrm{int}}(D)$ by that subcategory's definition. The full-essential-image theorem gives the asserted equivalence and the mapping-space identification, without using presheaf classification.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proposition 6.2, identification of the strict relative model with the intrinsic right-fibration fiber"
+   }
+  },
+  {
+   "text": "For $h:D\\to D'$ and $p':E'\\to D'$, degreewise pullback $D\\times_{D'}E'\\to D$ is a right fibration: compose a horn lifting problem with the projection to $E'$ and use its right-fibration filler, retaining the specified map to $D$. The total space is a quasicategory, since the same argument fills inner horns over the corresponding filler in $D$. Step 2 makes $p'$ an isofibration, so [lem-coef-infinity-isofibration-pullback-limit] identifies the displayed strict square with its infinity-categorical pullback. The construction on a relative $n$-simplex is $(d,e,t)\\mapsto(d,f(e,t))$; it commutes with every simplex operator and composition. Consequently it gives the family of limiting squares on the entire enriched category $\\mathsf R(D')$, identifying strict pullback with intrinsic base change under $J$. Pullback along an equivalence is an equivalence on intrinsic slices: compose with pullback along an inverse, and use the two inverse equivalences and the pullback universal property to identify the composites with the identity. It restricts to the full right-fibration images. With step 3 this proves that $h^*$ is an equivalence whenever $h$ is a categorical equivalence.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proposition 6.2, pullback stability and intrinsic cartesian transport; strict pullbacks compute the specified cones"
+   }
+  },
+  {
+   "text": "Let $\\mathcal B$ be the ordinary category of $\\mathcal U$-small quasicategories and simplicial maps, with $U$ the categorical equivalences. Its coherent localization is $\\operatorname{Cat}_{\\mathcal U}$. To verify this with the actual base map, equip every quasicategory with its equivalence marking. Every simplicial functor preserves these markings, so $\\mathcal B$ identifies with the ordinary fibrant subcategory of the marked-point model. All objects there are cofibrant; [lem-coef-simplicial-model-nerve-localization] identifies its ordinary localization with the coherent nerve of its fibrant simplicial category, and [lem-coef-marked-point-cartesian-model] identifies that nerve and its vertex map with $\\operatorname{Cat}_{\\mathcal U}$ and the usual inclusion. Work in a containing universe, since the collection of $\\mathcal U$-small objects is not itself $\\mathcal U$-small. On fibrant objects the marked weak-equivalence test is the core mapping test. Taking its target successively to be the source and target of a tested map gives an inverse and the two inverse homotopies; conversely such an inverse makes every core mapping test an equivalence. Thus its weak equivalences agree with $U$.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1311.4128v4",
+    "place": "Section 1.3, especially Propositions 1.3.4--1.3.5, applied to the marked-point model"
+   }
+  },
+  {
+   "text": "For each $D\\in\\mathcal B$, give the ordinary category $\\mathcal E_D$ of strict right fibrations over $D$ the weak equivalences $W_D$ detected by categorical equivalence of total quasicategories. These are exactly the fiberwise weak homotopy equivalences: one direction is [lem-coef-infinity-right-fibration-fibers], and the converse follows from the inverse over $D$ supplied by [lem-coef-unstraightening-homotopy-descent-gluing]. That inverse is a coherent quasi-inverse of total spaces; its simplicial homotopies are pointwise equivalences because the fibers are Kan. These are also precisely the contravariant model weak equivalences between fibrant objects by [lem-coef-simplicial-right-fibration-presentation]. That model has every object cofibrant and enrichment $\\operatorname{Fun}_{/D}$, so the simplicial model localization theorem gives a canonical equivalence\n$$L(\\mathcal E_D,W_D)\\simeq N_{\\mathrm{hc}}\\mathsf R(D).$$\nIt agrees with the vertex inclusion and enriched mapping spaces. Pullback preserves $W_D$, since it preserves the inverse and both relative homotopies (or simply uses the displayed fiberwise criterion). By step 4 it induces equivalences of these localizations for all $h\\in U$.",
+   "uses": [
+    "lem-coef-infinity-right-fibration-fibers",
+    "lem-coef-unstraightening-homotopy-descent-gluing",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proposition 6.2, relative categories of fibrant objects; GHN Appendix A, right-fibration variant"
+   }
+  },
+  {
+   "text": "Form the ordinary total category $\\mathcal E$: objects are strict right fibrations $E\\to D$ with $D\\in\\mathcal B$, and arrows are strictly commuting squares $(f,h)$. Projection to $D$ is a Grothendieck fibration. Its cartesian lift over $h:D\\to D'$ with target $E'\\to D'$ is the degreewise pullback square: a square over $hk$ factors uniquely by the pair of its top map and its map to $D$. Chosen iterated pullbacks have canonical associators given by reassociating tuples; both composites in the associativity condition send a tuple to the same tuple. Steps 4 and 6 verify all hypotheses of [lem-coef-relative-grothendieck-localization] with $U$ and $W_D$ above. Thus $L\\mathcal E\\to L\\mathcal B$ is an intrinsic cartesian family with fiber $N_{\\mathrm{hc}}\\mathsf R(D)$, and with transport the localization of strict pullback. In particular this is the descent of the strict-pullback assignment, with its coherent family structure.",
+   "uses": [
+    "lem-coef-relative-grothendieck-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1311.4128v4",
+    "place": "Proposition 2.1.4 and proof 2.2.2--2.2.6, cartesian dual; GHN Proposition A.30"
+   }
+  },
+  {
+   "text": "The intrinsic comparison family is the full subcategory $\\mathcal T\\subseteq\\operatorname{Arr}(\\operatorname{Cat}_{\\mathcal U})$ on arrows equivalent to strict right fibrations. The category $\\operatorname{Cat}_{\\mathcal U}$ has pullbacks by [lem-coef-cat-infinity-colimits-cartesian-closure]. By [lem-coef-arrow-target-cartesian-pullbacks], target evaluation on the whole arrow category is cartesian. Its lifts stay in $\\mathcal T$ by step 4 and invariance under equivalence, so its restriction is cartesian as well: the mapping-space universal property of such a lift is unchanged on restricting the test objects to a full subcategory. Its fiber is $R_{\\mathrm{int}}(D)$. Send a strict square in $\\mathcal E$ to the corresponding coherent square in $\\mathcal T$, using the base localization map of step 5. This is a coherent functor on $N\\mathcal E$, not a choice of separate comparison functors.",
+   "uses": [
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "lem-coef-arrow-target-cartesian-pullbacks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proposition 6.2, first paragraph and final paragraph: full right-fibration arrow category"
+   }
+  },
+  {
+   "text": "For a marked arrow of $\\mathcal E$ in step 7, its base map $h$ is in $U$, and its vertical factor is in $W_D$. The cartesian factor is an infinity-categorical pullback along an equivalence by step 4, hence also an equivalence on total objects. Thus both components of the resulting square are equivalences. The pointwise equivalence criterion in the arrow functor category makes this an equivalence in $\\mathcal T$. The entire-functor-category universal property of localization therefore factors the preceding coherent functor through $L\\mathcal E$. It preserves cartesian edges: images of ordinary cartesian lifts are the limiting squares of step 4, and [lem-coef-relative-grothendieck-localization] says these suffice. Its functor on each fiber is $J_D$ under step 6. Indeed both comparisons arise from the same strict structure arrows and strict commuting triangles; localization identifies their extensions including transformations. Apply Cartesian straightening (the opposite form of [lem-coef-cocartesian-straightening]) to this map of cartesian families. It gives a coherent natural transformation between their classifying functors on $\\operatorname{Cat}_{\\mathcal U}^{\\mathrm{op}}$. Its components are the equivalences of step 3, so the pointwise equivalence criterion makes it a natural equivalence. This constructs the comparison on every coherent base simplex, with all face and degeneracy compatibilities inherited from the map of families. It also identifies its transport along $h$ with the strict pullback already calculated, as required.",
+   "uses": [
+    "lem-coef-relative-grothendieck-localization",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1311.4128v4",
+    "place": "Proposition 2.1.4, proof 2.2.2 and 2.2.6; Chu--Haugseng Proposition 6.2, final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-left-fibration-equivalence-lift",
+  "lem-coef-arrow-target-cartesian-pullbacks",
+  "lem-coef-cat-infinity-colimits-cartesian-closure",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-relative-grothendieck-localization",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-simplicial-right-fibration-presentation",
+  "lem-coef-unstraightening-homotopy-descent-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/2006.08269",
+  "place": "Proposition 6.2, strict/intrinsic comparison in the final paragraph; expanded using the core mapping-space calculation and Hinich Proposition 2.1.4 (cartesian dual), GHN Appendix A. Online primary sources read; local archives WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +201,45 @@
    "results": "{\"t\": \"2026-10-17T05:56:47Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of strict right fibration slices agrees naturally with the intrinsic slice of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.Localization.structuredArrowEquiv\", \"CategoryTheory.Localization.instInhabitedStrictUniversalPropertyFixedTargetLocalizationQ\", \"CategoryTheory.Localization.structuredArrowEquiv_apply\", \"SSet.QCat.strictBicategory\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\"], \"digest\": \"d8ac901a1f730363\"}",
    "date": "2026-10-17",
    "verdict": "no match: StrictSegal.quasicategory concerns a simplicial set with unique composition, not an infinity slice comparison. Localization.structuredArrowEquiv (StructuredArrow.lean:27-52) compares structured-arrow objects of two ordinary localization functors. InnerFibration.lean:61-74 defines inner fibrations only; none provides the natural strict-to-intrinsic right-fibration comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?fibration|RFib|Hinich",
+   "results": "{\"t\": \"2026-10-17T06:23:55Z\", \"tool\": \"grep\", \"query\": \"right.?fibration|RFib|Hinich\", \"sub\": \"\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Logic/Equiv/Basic.lean\", \"Mathlib/Logic/Equiv/Basic.lean\", \"Mathlib/Logic/Equiv/Basic.lean\", \"Mathlib/Logic/Equiv/Basic.lean\", \"Mathlib/Logic/Equiv/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"d4f7c35fec9c2a15\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: QCat.strictBicategory is a strict bicategory (StrictBicategory.lean:49-70), not the localized infinity category; Over.iteratedSliceEquiv (Comma/Over/Basic.lean:380-387) compares iterated slices of an ordinary category; InnerFibration.lean:61-74 only defines inner fibrations. None identifies strict right-fibration mapping complexes with the intrinsic Cat infinity slice or supplies coherent base naturality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict right fibration mapping spaces equal homotopy fibers of mapping spaces in Cat infinity",
+   "results": "{\"t\": \"2026-10-17T06:23:55Z\", \"tool\": \"leansearch\", \"query\": \"Strict right fibration mapping spaces equal homotopy fibers of mapping spaces in Cat infinity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.fibration_iff\", \"HomotopicalAlgebra.fibrations\", \"HomotopicalAlgebra.cofibrations_rlp\", \"HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff\", \"HomotopicalAlgebra.fibrations_eq_unop\", \"HomotopicalAlgebra.CategoryWithFibrations.fibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.RightHomotopyClass\"], \"digest\": \"5288b7a6000d1d41\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: QCat.strictBicategory is a strict bicategory (StrictBicategory.lean:49-70), not the localized infinity category; Over.iteratedSliceEquiv (Comma/Over/Basic.lean:380-387) compares iterated slices of an ordinary category; InnerFibration.lean:61-74 only defines inner fibrations. None identifies strict right-fibration mapping complexes with the intrinsic Cat infinity slice or supplies coherent base naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Over\", \"iteratedSliceEquiv\"",
+   "results": "{\"t\": \"2026-10-17T06:23:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"Over\\\", \\\"iteratedSliceEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.Over.iteratedSliceEquiv\", \"CategoryTheory.Over.iteratedSliceEquiv_functor\", \"CategoryTheory.Over.iteratedSliceEquiv_inverse\", \"CategoryTheory.Over.iteratedSliceEquivOverMapIso\", \"CategoryTheory.Over.iteratedSliceEquiv_counitIso\", \"CategoryTheory.Over.iteratedSliceEquiv_unitIso\", \"CategoryTheory.Over.iteratedSliceEquivOverMapIso_hom_app_left_left\", \"CategoryTheory.Over.iteratedSliceEquivOverMapIso_inv_app_left_left\"], \"digest\": \"0a296e5885833a46\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: QCat.strictBicategory is a strict bicategory (StrictBicategory.lean:49-70), not the localized infinity category; Over.iteratedSliceEquiv (Comma/Over/Basic.lean:380-387) compares iterated slices of an ordinary category; InnerFibration.lean:61-74 only defines inner fibrations. None identifies strict right-fibration mapping complexes with the intrinsic Cat infinity slice or supplies coherent base naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict right fibrations over a quasicategory with strict maps model the full infinity categorical slice on right fibrations naturally in the base",
+   "results": "{\"t\": \"2026-10-17T06:23:56Z\", \"tool\": \"leanfinder\", \"query\": \"Strict right fibrations over a quasicategory with strict maps model the full infinity categorical slice on right fibrations naturally in the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.strictBicategory\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.StrictSegal.quasicategory'\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.StrictSegal.quasicategory\", \"SSet.StrictSegal.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\"], \"digest\": \"e6dc5c6e14237d2d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: QCat.strictBicategory is a strict bicategory (StrictBicategory.lean:49-70), not the localized infinity category; Over.iteratedSliceEquiv (Comma/Over/Basic.lean:380-387) compares iterated slices of an ordinary category; InnerFibration.lean:61-74 only defines inner fibrations. None identifies strict right-fibration mapping complexes with the intrinsic Cat infinity slice or supplies coherent base naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy coherent nerve of the simplicial category of right fibrations is equivalent to the intrinsic infinity category slice",
+   "results": "{\"t\": \"2026-10-17T06:23:57Z\", \"tool\": \"leanfinder\", \"query\": \"The homotopy coherent nerve of the simplicial category of right fibrations is equivalent to the intrinsic infinity category slice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"SSet.OneTruncation₂.nerveHomEquiv\"], \"digest\": \"ed8cb71cdd9f4f57\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: QCat.strictBicategory is a strict bicategory (StrictBicategory.lean:49-70), not the localized infinity category; Over.iteratedSliceEquiv (Comma/Over/Basic.lean:380-387) compares iterated slices of an ordinary category; InnerFibration.lean:61-74 only defines inner fibrations. None identifies strict right-fibration mapping complexes with the intrinsic Cat infinity slice or supplies coherent base naturality."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-day-relative-exponential-model",
@@ -82,5 +266,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-strict-intrinsic-right-fibration-slices",
+  "worker": "stage1",
+  "summary": "Statement retained. Constructed the actual enriched comparison; computed its mapping spaces by a strict-to-homotopy fiber calculation; proved strict pullbacks model intrinsic base change; then localized the ordinary Grothendieck family and compared it to the intrinsic full arrow family. Added one general family-localization theorem, with no right-fibration or slice-comparison clause, and reused all existing technical mapping/model results. Checked empty bases and fibers, equivalences of bases, size shifts and every cited statement.",
+  "blueprint": "Realizes the ancestor integral exceptional-adjoint proof paragraph 2 mapping-complex adjunction infrastructure, via the strict/intrinsic comparison requested by the day-relative-exponential-model repair input; current main-20261015 ancestor text and historical ancestry retained.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory mapping, core, slice or equivalence calculus used in the indicated proof steps; no statement of this unit replaces this foundational interface."
+   },
+   {
+    "node": "lem-cbc-left-fibration-equivalence-lift",
+    "why": "Generic quasicategory mapping, core, slice or equivalence calculus used in the indicated proof steps; no statement of this unit replaces this foundational interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-left-fibration-equivalence-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-ee5ff3249",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-ee5ff3249 (reviewer sub-agent of L); spot-checked: I read the whole item, all nine steps and the full statement of every cited node. I read both sources at the cited places, fetched into /tmp: Chu–Haugseng 2006.08269 Prop 6.2 and its final paragraph (pp. 12–13), and Hinich 1311.4128v4 Def 2.1.1, Prop 2.1.4 and proof 2.2.2–2.2.6 (pp. 17–21). The item statement is unchanged from the base and is not weakened. Small cases D=∅ and D=Δ⁰ hold, and empty fibers are allowed. Steps 1–9 each check against the cited statements: core containment of Fun_{/D} via the Kan fibers; prescribed-source lifts through the opposite left-fibration lift; strict fiber ≃ homotopy fiber through the path comparison; full faithfulness and the essential image; strict pullback ≃ ∞-pullback (isofibration-pullback-limit); L(sSet-qcat, equivalences) ≃ Cat∞ (marked-point model plus model localization); W_D equal to the fiberwise and contravariant weak equivalences; the new lemma's hypotheses; RFib inheriting cartesian edges (CH first paragraph); the map of families, then straightening and the pointwise criterion. In step 6, L(h*) being an equivalence follows from step 4's natural limiting squares plus the localization universal property. The new node lem-coef-relative-grothendieck-localization is the cartesian dual of Hinich 2.1.4: its V is Remark 2.1.2's generated marking, and the preserved cartesian lifts and the classifying functor come from 2.2.2. It is not a duplicate. lem-coef-grothendieck-fibre-localization needs model-category fibers with all-weak-equivalence-preserving transitions over a fixed base, which fails here: {1}⊂Δ¹ is right anodyne, but its fiber over 0 is ∅→Δ⁰. lem-coef-localization-cartesian-pullback gives only the base-localization half. The report missed both candidates. There is no cycle, and I accept both declared tool_uses (cbc cone calculus and left-fibration equivalence lift). One fix (B3): the new node used Cat∞ and 'classifying coherent functor' without citing a node. I added lem-coef-cocartesian-straightening to its stmt_deps and statement in fixes/dag/nodes/sec-six-functors/lem-coef-relative-grothendieck-localization.json. The item is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

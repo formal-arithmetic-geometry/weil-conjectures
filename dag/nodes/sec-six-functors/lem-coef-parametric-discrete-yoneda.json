@@ -13,9 +13,100 @@
   "def-coef-infinity-presheaf-yoneda",
   "lem-coef-twisted-arrow-left-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Restrict the concrete Hom pairing of [def-coef-infinity-presheaf-yoneda] along $c$ in its first variable. An arrow $l\\to l'$ gives $c(l')\\to c(l)$ and hence precomposition $\\operatorname{Map}_C(c(l),x)\\to\\operatorname{Map}_C(c(l'),x)$. Swapping the factors gives exactly the coherent functor $W_c:C\\times L\\to\\mathcal S_{\\mathcal V}$. Use the containing-universe conventions of [def-coef-infinity-category-of-spaces]. For an allowed equivalent weight $W'_c\\simeq W_c$, apply [lem-coef-infinity-mapping-composition] inside the functor quasicategory: precomposition by the equivalence edge and its inverse give maps of whole mapping spaces; associativity, the two inverse triangles and the unit homotopies show that their composites are homotopic to the identities. Thus it suffices to use the concrete weight, and its specified identity points are preserved.",
+   "uses": [
+    "def-coef-infinity-presheaf-yoneda",
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction (5.8.8.4), Theorem 5.8.9 and Theorem 5.8.13(ii), printed pp.257,259-261; agent expansion separating coherent evaluation from its pointwise invertibility."
+   }
+  },
+  {
+   "text": "Apply the product/Fubini clause of [lem-coef-coherent-end-twisted-arrow-formula] with first shape $C$, second shape $L$, target $\\mathcal S_{\\mathcal V}$, and $F=W_c$, $G=T$. It gives\n$$\\operatorname{Map}_{\\operatorname{Fun}(C\\times L,\\mathcal S_{\\mathcal V})}(W_c,T)\\simeq\\lim_{(l\\to l')\\in\\operatorname{Tw}(L)}\\operatorname{Map}_{\\operatorname{Fun}(C,\\mathcal S_{\\mathcal V})}(W_c(-,l),T(-,l')).$$\nThis is an equivalence of whole spaces with coherent indexed diagram, identity-component evaluation and a $\\mathcal V$-small Kan model, also for empty shapes.",
+   "uses": [
+    "lem-coef-coherent-end-twisted-arrow-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03P7",
+    "place": "Example 8.3.4.22; coherent-end formula and its product/Fubini consequence."
+   }
+  },
+  {
+   "text": "Let $\\mathcal F=\\operatorname{Fun}(C,\\mathcal S_{\\mathcal V})$ and $A:C^{\\mathrm{op}}\\to\\mathcal F$ be the exponential transpose of the concrete pairing in [def-coef-infinity-presheaf-yoneda], so $A(a)(x)=\\operatorname{Map}_C(a,x)$. The final compatibility clause of [lem-coef-cone-straightening-coherent-evaluation] expressly identifies this concrete pairing as the canonical rigidification model of the coherent Hom bifunctor, comparing it with right-pinched mapping spaces, their actions and all higher data, and preserving the underlying edge. Use that model and its identity comparison in the end theorem. Apply [lem-coef-coherent-end-twisted-arrow-formula] to $F=G=\\mathrm{id}_C:C\\to C$, using this coherent Hom model. The identity point of $\\operatorname{Map}_{\\operatorname{Fun}(C,C)}(\\mathrm{id}_C,\\mathrm{id}_C)$ gives a point of $\\lim_{\\operatorname{Tw}(C)}\\operatorname{Map}_C(s(-),t(-))$, equivalently a coherent section $\\xi:*\\to B_A\\circ(s,t)$. The component-evaluation clause and the identity comparison give $\\xi_a=1_a$ at each $1_a$, with the specified unit homotopy. All higher data are supplied by that one coherent section.",
+   "uses": [
+    "def-coef-infinity-presheaf-yoneda",
+    "lem-coef-coherent-end-twisted-arrow-formula",
+    "lem-coef-cone-straightening-coherent-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03P7",
+    "place": "Example 8.3.4.22; coherent-end formula and its product/Fubini consequence."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-dinatural-section-evaluation] to this $A$ and the coherent section $\\xi$ of Step 3. It supplies a single coherent transformation on $C\\times\\mathcal F$,\n$$e_{a,Q}:\\operatorname{Map}_{\\mathcal F}(A(a),Q)\\longrightarrow Q(a),\\qquad\\alpha\\longmapsto\\alpha_a(1_a).$$\nIts coherence in both $a$ and $Q$ is part of the cited statement. Restrict it along $(l,l')\\mapsto(c(l),T(-,l'))$ from $L^{\\mathrm{op}}\\times L$ to $C\\times\\mathcal F$, then along $(s,t):\\operatorname{Tw}(L)\\to L^{\\mathrm{op}}\\times L$. The source becomes the diagram of inner mapping spaces in Step 2 and the target becomes $D\\circ(s,t)$. Thus this construction supplies the actual transformation between the two twisted-arrow diagrams; Hom functoriality alone would not supply it.",
+   "uses": [
+    "lem-coef-dinatural-section-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03M4",
+    "place": "Agent-formulated coherent dinatural-section evaluation pairing, extending the fixed-object comparison of Kerodon Notation 8.3.1.2 (03M4) using coherent ends as in Example 8.3.4.22 (03P7). Cisinski, Higher Categories and Homotopical Algebra, construction (5.8.8.4), printed p.257, is the identity-element specialization. These sources do not state the arbitrary-family assertion verbatim. Read online 2026-10-17; archival copies WANTED. Kerodon identifiers, not Stacks tags; no Stacks tag states this quasicategorical assertion."
+   }
+  },
+  {
+   "text": "For every $a\\in C$ and $Q\\in\\mathcal F$, the covariant clause of [lem-coef-infinity-pointwise-yoneda-evaluation], with $\\mathcal E=C$ and the concrete corepresentable model $A(a)$, says that this very identity-evaluation map $e_{a,Q}$ is an equivalence of whole spaces, with inverse $q\\mapsto(f\\mapsto Q(f)(q))$. The small-category and small-mapping-space hypotheses hold in the universes of the item. Apply [lem-coef-infinity-pointwise-equivalences] to the coherent transformation constructed in Step 4, in a containing universe where $C\\times\\mathcal F$ is small. It is therefore an equivalence in its functor quasicategory; choose its inverse and two inverse triangles there, so they are coherent in both variables. Restricting preserves this inverse data. Write $e^L:M^L\\to D\\circ(s,t)$ for this restricted equivalence in $\\operatorname{Fun}(\\operatorname{Tw}(L),\\mathcal S_{\\mathcal V})$, where $M^L$ is the inner mapping-space diagram of Step 2. [lem-coef-coherent-end-twisted-arrow-formula] supplies a limiting cone $\\mu:\\Delta y\\to M^L$ with $\\mathcal V$-small apex $y$. The target $D\\circ(s,t)$ is not one of that theorem's mapping-space diagrams, so its limit is obtained by transport: put $\\mu'=e^L\\circ\\mu$. For every space $x$, the map $\\operatorname{Map}(x,y)\\to\\operatorname{Map}(\\Delta x,D\\circ(s,t))$, $a\\mapsto\\mu'\\circ\\Delta a$, is homotopic to $\\mu\\circ\\Delta(-)$ followed by postcomposition with $e^L$ (associativity in [lem-coef-infinity-mapping-composition]). The first map is an equivalence because $\\mu$ is limiting, and the second because $e^L$ is an equivalence edge with the inverse triangles chosen above ([lem-coef-infinity-mapping-composition]). By the mapping-space criterion of [lem-cbc-enhanced-functor-cone-calculus], $\\mu'$ is limiting. Hence $\\lim D\\circ(s,t)$ exists with the same $\\mathcal V$-small apex, and the induced map of limits is an equivalence carrying the chosen inverse homotopies. Composing with Step 2 proves the asserted formula.",
+   "uses": [
+    "lem-coef-infinity-pointwise-yoneda-evaluation",
+    "lem-coef-infinity-pointwise-equivalences",
+    "lem-coef-coherent-end-twisted-arrow-formula",
+    "lem-coef-infinity-mapping-composition",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction (5.8.8.4), Theorem 5.8.9 and Theorem 5.8.13(ii), printed pp.257,259-261; agent expansion separating coherent evaluation from its pointwise invertibility."
+   }
+  },
+  {
+   "text": "The identity-component clause of [lem-coef-coherent-end-twisted-arrow-formula] and the component of $e$ from Step 4 show that projection at $1_l$ is $\\tau\\mapsto\\tau_{c(l),l}(1_{c(l)})$. For a coherent limit point $z$, restrict the inverse equivalence of Step 5 to $1_l$. The inverse formula of [lem-coef-infinity-pointwise-yoneda-evaluation] gives\n$$\\tau_{x,l}(f)=T(f,1_l)(z_l).$$\nThe inverse triangles are those already chosen for a single coherent equivalence and carried through the limit, so this component formula includes the required higher transformation data. Naturality in $T$ and $c$ is obtained by restricting the same coherent evaluation transformation of [lem-coef-dinatural-section-evaluation] along the corresponding families $(c(l),T(-,l'))$; its coherent inverse in Step 5 restricts with it. Restriction of $L$ is precomposition of these diagrams and of their limit cones. The restriction and simplicial-parameter compatibility clauses of the end formula and of the evaluation construction make these comparisons commute with both maps and inverse triangles. The end formula also supplies the $\\mathcal V$-small limit model. If $L$ is empty its end and transformation space are terminal; if $C$ is empty, existence of $c$ forces $L$ empty.",
+   "uses": [
+    "lem-coef-coherent-end-twisted-arrow-formula",
+    "lem-coef-infinity-pointwise-yoneda-evaluation",
+    "lem-coef-dinatural-section-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Construction (5.8.8.4), Theorem 5.8.9 and Theorem 5.8.13(ii), printed pp.257,259-261; agent expansion separating coherent evaluation from its pointwise invertibility."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-infinity-presheaf-yoneda",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-coherent-end-twisted-arrow-formula",
+  "lem-coef-cone-straightening-coherent-evaluation",
+  "lem-coef-dinatural-section-evaluation",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-infinity-pointwise-yoneda-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Theorem 5.8.13(ii) and construction (5.8.8.4), with Kerodon 03P7; repaired expansion builds the identity section, constructs coherent evaluation by the smaller arbitrary-family dinatural-section lemma, then proves pointwise invertibility."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -117,7 +208,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-presheaf-right-kan-mapping-formula",
@@ -148,5 +239,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-parametric-discrete-yoneda",
+  "worker": "stage1",
+  "summary": "Repair of returned Q24 delivery: replaced the off-unit functor-calculus citation by in-unit mapping composition. Six steps now separate the Fubini end, the coherent identity section obtained from the end formula at id_C, the new arbitrary-family dinatural-section evaluation transformation, and its pointwise Yoneda invertibility. Pointwise equivalence detection and end invariance produce the required limit equivalence with natural inverse data. The cyclic full Yoneda-evaluation node is not cited. One new statement-only node, no Mathlib leaves; original statement and prior search records retained. Second reading cites the existing coherent-nerve/rigidification Hom-model compatibility explicitly in the identity-section step. Maintainer reader fix: Step 5 now transports the limiting cone along the coherent equivalence to D∘(s,t). It uses mapping composition and the cone mapping-space criterion of lem-cbc-enhanced-functor-cone-calculus, declared as a tool use, because the end theorem's invariance clause covers only its own mapping-space diagrams.",
+  "blueprint": "Realizes proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the coherent scalar mapping calculation and end-Yoneda step with an auxiliary indexing parameter, before identifying the remaining end with a transformation space.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Step 5 needs the generic mapping-space criterion for a limiting cone in an arbitrary quasicategory, so that a limit can be moved along the coherent equivalence e^L to D∘(s,t). This is not one of the end theorem's own diagrams. The in-unit candidate lem-coef-infinity-yoneda-presheaf-limits reaches this item and would close a cycle. No other in-unit node states the criterion for arbitrary shapes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-0296afd3f",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-0296afd3f (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-coef-dinatural-section-evaluation, every cited statement, the unit sk-prop-sf-biduality-general and the blueprint ancestor prop-coef-integral-exceptional-adjoint. Read online: Kerodon 03P7 (Tw-limit formula for transformation spaces) and 03M5 (corepresentable Yoneda); both match the end and pointwise-Yoneda nodes. Cisinski 5.8.13 is not archived and was not opened; the proof is agent-origin and the WANTED lines stand. No SGA is used. Dependency-closure check: nothing in the delivery reaches the item. The full Yoneda node and lem-coef-infinity-yoneda-presheaf-limits do reach the item, so they are rightly avoided. The item statement is unchanged; small cases L=pt, C=pt, discrete L, L=∅, C=∅ and the variance of W_c and D all check. Steps 1-4 and 6 are supported by their cited statements. In Step 3, cone-straightening's final clause fixes the concrete pairing as the H_C model. In Step 4 the restriction L^op×L→C×F is correctly typed. The new node is true: classically by dinaturality, and coherently via ξ ↦ y^op→A. Small cases: C=pt gives evaluation 4→2 points, so it is not an equivalence and not a restatement (D1); C=[1] confirms the variance. It is not a duplicate: rg over dag/nodes plus the six candidates. B1-B7 pass and the searches are real. FIX (C4, Step 5): the end node's invariance clause covers only its own mapping-space diagrams, so neither the existence of lim D∘(s,t) nor the transfer to it was supported. I repaired Step 5 by moving the limiting cone μ' = e^L∘μ along the equivalence, using associativity and inverse triangles from lem-coef-infinity-mapping-composition and the mapping-space limit criterion of lem-cbc-enhanced-functor-cone-calculus. I declared that node in split_report.tool_uses and accept it: no in-unit node states the criterion without a cycle, and it adds none. proof_deps updated; the step is 1982 characters. Corrected item: fixes/dag/nodes/sec-six-functors/lem-coef-parametric-discrete-yoneda.json. Full record: review.md.; 1 file(s) fixed by the reviewer"
  }
 }
