@@ -154,8 +154,8 @@ theorem postcomp {W' : SimplicialObject C} (f : W ⟶ W')
   refine ⟨hc.lift q, ?_, fun g hg ↦ hc.eq_lift ?_⟩
   · refine BoundaryCone.ext' fun Δ h θ ↦ ?_
     have := hf Δ h
-    have hq := congrArg (fun d ↦ d.π Δ h θ) (hc.precomp_lift q)
-    dsimp only [BoundaryCone.precomp_π, q] at hq
+    have hq : hc.lift q ≫ c.π Δ h θ = p.π Δ h θ ≫ inv (f.app (op Δ)) :=
+      congrArg (fun d ↦ d.π Δ h θ) (hc.precomp_lift q)
     rw [BoundaryCone.precomp_π, BoundaryCone.postcomp_π, ← Category.assoc, hq,
       Category.assoc, IsIso.inv_hom_id, Category.comp_id]
   · refine BoundaryCone.ext' fun Δ h θ ↦ ?_
@@ -269,14 +269,16 @@ def matchingObjCone (W : SimplicialObject C) : ∀ n : ℕ, BoundaryCone W n (ma
 @[simp]
 lemma matchingObjCone_one_π_δ (W : SimplicialObject C) (j : Fin 2) :
     (matchingObjCone W 1).π ⦋0⦌ (by simp) (SimplexCategory.δ j) =
-      Pi.π (fun _ : Fin 2 ↦ W _⦋0⦌) j :=
-  BoundaryCone.ofFaces_π_δ (n := 0) _ _ j
+      Pi.π (fun _ : Fin 2 ↦ W _⦋0⦌) j := by
+  rw [matchingObjCone]
+  exact BoundaryCone.ofFaces_π_δ (n := 0) _ _ j
 
 @[simp]
 lemma matchingObjCone_succ_succ_π_δ (W : SimplicialObject C) (n : ℕ) (j : Fin (n + 3)) :
     (matchingObjCone W (n + 2)).π ⦋n + 1⦌ (by simp) (SimplexCategory.δ j) =
-      Multiequalizer.ι (matchingBoundaryIndex W n) j :=
-  BoundaryCone.ofFaces_π_δ (n := n + 1) _ _ j
+      Multiequalizer.ι (matchingBoundaryIndex W n) j := by
+  rw [matchingObjCone]
+  exact BoundaryCone.ofFaces_π_δ (n := n + 1) _ _ j
 
 instance (n : ℕ) : FinCategory (WalkingMulticospan (matchingBoundaryShape n)) := by
   have : Fintype (matchingBoundaryShape n).L :=

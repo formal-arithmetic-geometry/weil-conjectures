@@ -125,15 +125,23 @@ lemma tower_map_succ (m : ℕ) :
     (tower step).map (homOfLE (Nat.le_succ m)) = (cells step m).cone.attachInl :=
   Functor.ofSequence_map_homOfLE_succ _ m
 
+lemma tower_map_comp {i j k : ℕ} (h₁ : i ≤ j) (h₂ : j ≤ k) :
+    (tower step).map (homOfLE (h₁.trans h₂)) =
+      (tower step).map (homOfLE h₁) ≫ (tower step).map (homOfLE h₂) := by
+  rw [← Functor.map_comp]
+  rfl
+
+lemma tower_map_refl (i : ℕ) (h : i ≤ i) : (tower step).map (homOfLE h) = 𝟙 _ :=
+  (tower step).map_id i
+
 lemma isIso_tower_map_app (k : SimplexCategoryᵒᵖ) {i j : ℕ} (hij : i ≤ j)
     (hi : k.unop.len < i) : IsIso (((tower step).map (homOfLE hij)).app k) := by
   induction j, hij using Nat.le_induction with
   | base =>
-    rw [homOfLE_refl, CategoryTheory.Functor.map_id]
+    rw [tower_map_refl]
     exact inferInstanceAs (IsIso (𝟙 _))
   | succ j hij ih =>
-    rw [← homOfLE_comp hij (Nat.le_succ j), Functor.map_comp, NatTrans.comp_app,
-      tower_map_succ]
+    rw [tower_map_comp step hij (Nat.le_succ j), NatTrans.comp_app, tower_map_succ]
     have := (cells step j).cone.isIso_attachInl_app k (by omega)
     infer_instance
 
@@ -141,10 +149,8 @@ lemma isEventuallyConstantFrom (k : SimplexCategoryᵒᵖ) :
     (tower step ⋙ (evaluation _ _).obj k).IsEventuallyConstantFrom (k.unop.len + 1) :=
   fun j f ↦ isIso_tower_map_app step k (leOfHom f) (Nat.lt_succ_self _)
 
-instance : HasColimit (tower step) := by
-  have : ∀ k, HasColimit ((tower step).flip.obj k) := fun k ↦
-    (isEventuallyConstantFrom step k).hasColimit
-  infer_instance
+instance (k : SimplexCategoryᵒᵖ) : HasColimit ((tower step).flip.obj k) :=
+  (isEventuallyConstantFrom step k).hasColimit
 
 /-- The colimit of the tower of stages. -/
 def W : SimplicialObject C := colimit (tower step)
@@ -169,6 +175,7 @@ lemma isIso_ι_app (m : ℕ) (k : SimplexCategoryᵒᵖ) (hk : k.unop.len < m) :
 def toY : W step ⟶ Y :=
   colimit.desc (tower step) (Cocone.mk Y (NatTrans.ofSequence (objToY step) fun m ↦ by
     simp only [tower_map_succ, Functor.const_obj_obj, Functor.const_obj_map, Category.comp_id]
+    rw [objToY_succ]
     exact (cells step m).cone.attachInl_attachDesc _ _ _))
 
 @[reassoc (attr := simp)]
@@ -205,17 +212,20 @@ lemma stageInj_succ_of_lt (m : ℕ) (Δ : SimplexCategoryᵒᵖ) (A : Splitting.
     stageInj step (m + 1) Δ ⟨A, Nat.lt_succ_of_lt hA⟩ =
       stageInj step m Δ ⟨A, hA⟩ ≫ (cells step m).cone.attachInl.app Δ := by
   simp only [stageInj, Category.assoc]
-  rw [← (cells step m).cone.attachInl.naturality, ← homOfLE_comp (Nat.succ_le_of_lt hA)
-    (Nat.le_succ m), Functor.map_comp, NatTrans.comp_app, tower_map_succ]
-  simp only [Category.assoc]
+  rw [(cells step m).cone.attachInl.naturality,
+    tower_map_comp step (Nat.succ_le_of_lt hA) (Nat.le_succ m), NatTrans.comp_app,
+    tower_map_succ, Category.assoc]
   rfl
 
 lemma stageInj_succ_mk (m : ℕ) (Δ : SimplexCategoryᵒᵖ) (s : Δ.unop ⟶ ⦋m⦌) [Epi s] :
     stageInj step (m + 1) Δ ⟨Splitting.IndexSet.mk s, Nat.lt_succ_self m⟩ =
       Sigma.ι (fun _ : Δ.unop ⟶ ⦋m⦌ ↦ (cells step m).N) s ≫
         (cells step m).cone.attachInr.app Δ := by
-  rw [BoundaryCone.ι_attachInr_app, stageInj, homOfLE_refl, CategoryTheory.Functor.map_id,
-    NatTrans.id_app, Category.id_comp]
+  rw [BoundaryCone.ι_attachInr_app]
+  change (cells step m).cone.attachι ≫ ((tower step).map (homOfLE (le_refl (m + 1)))).app _ ≫
+    (obj step (m + 1)).map s.op = _
+  rw [tower_map_refl, NatTrans.id_app]
+  erw [Category.id_comp]
   rfl
 
 /-- The `m`-th stage is, in each degree `Δ`, the coproduct of the cells of dimension `< m`
@@ -233,29 +243,38 @@ def isColimitStage (Δ : SimplexCategoryᵒᵖ) :
         (Sigma.desc fun s : {s : Δ.unop ⟶ ⦋m⦌ // Epi s} ↦
           t.inj ⟨⟨op ⦋m⦌, s.1, s.2⟩, Nat.lt_succ_self m⟩))) (fun t A ↦ ?_) (fun t g hg ↦ ?_)
     · obtain ⟨⟨⟨Δ'⟩, e, he⟩, hA⟩ := A
+      rw [cofan_mk_inj]
       rcases (Nat.lt_succ_iff_lt_or_eq.mp hA) with hA' | hA'
       · have := stageInj_succ_of_lt step m Δ ⟨⟨Δ'⟩, e, he⟩ hA'
         rw [this, Category.assoc]
         erw [hb.fac _ (.mk .left)]
         exact ih.fac _ ⟨⟨⟨⟨Δ'⟩, e, he⟩, hA'⟩⟩
-      · obtain rfl : Δ' = ⦋m⦌ := SimplexCategory.ext _ _ hA'
+      · obtain rfl : Δ' = ⦋m⦌ := SimplexCategory.ext hA'
         have := stageInj_succ_mk step m Δ e
-        erw [this, Category.assoc, hb.fac _ (.mk .right)]
+        have h' : Sigma.ι (fun _ : Δ.unop ⟶ ⦋m⦌ ↦ (cells step m).N) e ≫
+            (cells step m).cone.attachInr.app Δ =
+            Sigma.ι (fun _ : {s : Δ.unop ⟶ ⦋m⦌ // Epi s} ↦ (cells step m).N) ⟨e, he⟩ ≫
+              Sigma.desc (fun s : {s : Δ.unop ⟶ ⦋m⦌ // Epi s} ↦
+                Sigma.ι (fun _ ↦ (cells step m).N) s.1 ≫ (cells step m).cone.attachInr.app Δ) :=
+          by rw [Sigma.ι_desc]
+        erw [this, reassoc_of% h', hb.fac _ (.mk .right)]
         exact Sigma.ι_desc _ ⟨e, he⟩
     · refine BinaryCofan.IsColimit.hom_ext hb ?_ ?_
       · refine Cofan.IsColimit.hom_ext ih _ _ (fun A ↦ ?_)
         have h₁ := hg ⟨A.1, Nat.lt_succ_of_lt A.2⟩
-        rw [stageInj_succ_of_lt step m Δ A.1 A.2, Category.assoc] at h₁
-        erw [h₁]
-        erw [hb.fac _ (.mk .left), ← Category.assoc, ih.fac _ ⟨A⟩]
-        rfl
+        rw [cofan_mk_inj, stageInj_succ_of_lt step m Δ A.1 A.2, Category.assoc] at h₁
+        rw [cofan_mk_inj]
+        erw [h₁, hb.fac _ (.mk .left)]
+        exact (ih.fac (Cofan.mk t.pt fun A ↦ t.inj ⟨A.1, Nat.lt_succ_of_lt A.2⟩) ⟨A⟩).symm
       · refine Sigma.hom_ext _ _ (fun s ↦ ?_)
         have := s.2
         have h₂ := hg ⟨Splitting.IndexSet.mk s.1, Nat.lt_succ_self m⟩
-        rw [stageInj_succ_mk] at h₂
-        erw [← Category.assoc, Sigma.ι_desc, Category.assoc, h₂]
+        rw [cofan_mk_inj, stageInj_succ_mk] at h₂
         erw [hb.fac _ (.mk .right)]
-        exact (Sigma.ι_desc _ s).symm
+        rw [BinaryCofan.mk_inr, Sigma.ι_desc_assoc]
+        erw [h₂]
+        exact (Sigma.ι_desc (fun s : {s : Δ.unop ⟶ ⦋m⦌ // Epi s} ↦
+          t.inj ⟨⟨op ⦋m⦌, s.1, s.2⟩, Nat.lt_succ_self m⟩) s).symm
 
 /-- The colimit of the tower is split, with nondegenerate simplices the attached cells. -/
 def splitting : Splitting (W step) where
@@ -273,11 +292,10 @@ def splitting : Splitting (W step) where
       Equiv.subtypeUnivEquiv fun A ↦ Nat.lt_succ_of_le (SimplexCategory.len_le_of_epi A.e)
     refine (Cofan.isColimitEquivOfEquiv (ε := e) _).symm
       (IsColimit.ofIsoColimit h₂ (Cofan.ext (Iso.refl _) (fun A ↦ ?_)))
-    change stageInj step (Δ.unop.len + 1) Δ A ≫ (ι step (Δ.unop.len + 1)).app Δ ≫ 𝟙 _ =
+    change (stageInj step (Δ.unop.len + 1) Δ A ≫ (ι step (Δ.unop.len + 1)).app Δ) ≫ 𝟙 _ =
       cellι step A.1.1.unop.len ≫ (W step).map A.1.e.op
     rw [Category.comp_id, stageInj, cellι, Category.assoc, Category.assoc, Category.assoc,
       (ι step _).naturality, ← NatTrans.comp_app_assoc, tower_map_ι]
-    rfl
 
 @[simp]
 lemma splitting_N (m : ℕ) : (splitting step).N m = N step m := rfl

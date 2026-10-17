@@ -70,7 +70,9 @@ lemma Laws.transitionH_comp [IsDirected I (· ≤ ·)] [Nonempty I] (hS : S.Laws
   have h := H.map_comp f g
   rw [hH, hH, hH] at h
   simp only [Category.assoc, Iso.inv_hom_id_assoc] at h
-  have h' := (cancel_mono (eH k).inv).1 ((cancel_epi (eH i).hom).1 h)
+  have h₁ := (cancel_epi (eH i).hom).1 h
+  simp only [← Category.assoc] at h₁
+  have h' := (cancel_mono (eH k).inv).1 h₁
   exact congrArg (fun φ ↦ φ.hom y) h'
 
 lemma Laws.toLimitH_transitionH [IsDirected I (· ≤ ·)] [Nonempty I] (hS : S.Laws) {i j : I}
@@ -118,7 +120,46 @@ private lemma middle_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
       ((congrArg (fun h ↦ Sheaf.H.map h n (cohomologyMap f S.X₂ n z))
         t.comm₂₃.symm).trans (Sheaf.H.map_comp_apply t.τ₂ S'.g _))
 
-set_option maxHeartbeats 1000000 in
+omit [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]
+  [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)] in
+/-- The algebraic core of dimension shifting: the five lemma for the long exact cohomology
+sequences of a short exact sequence `0 → F → E → R → 0` of systems at the stages and on the
+limit, the colimit of `E` having no higher cohomology. -/
+lemma isContinuousAt_succ_of_exact {S SR SI : SystemData D c} (hS : S.Laws) (hSR : SR.Laws)
+    (hSI : SI.Laws) {n : ℕ} (hR : SR.IsContinuousAt n)
+    (hI : ∀ x : Sheaf.H SI.L.pt n, ∃ (i : I) (y : Sheaf.H (SI.F i) n), SI.toLimitH i n y = x)
+    (aX : Sheaf.H S.L.pt (n + 1) →+ Sheaf.H SI.L.pt (n + 1))
+    (bX : Sheaf.H SI.L.pt n →+ Sheaf.H SR.L.pt n)
+    (β : Sheaf.H SR.L.pt n →+ Sheaf.H S.L.pt (n + 1)) (hβa : Function.Exact β aX)
+    (hbβ : Function.Exact bX β) (hI₀ : ∀ x : Sheaf.H SI.L.pt (n + 1), x = 0)
+    (δ : ∀ k, Sheaf.H (SR.F k) n →+ Sheaf.H (S.F k) (n + 1))
+    (hδ : ∀ k, Function.Surjective (δ k))
+    (bk : ∀ k, Sheaf.H (SI.F k) n →+ Sheaf.H (SR.F k) n)
+    (hbδ : ∀ k, Function.Exact (bk k) (δ k))
+    (h₄ : ∀ k z, S.toLimitH k (n + 1) (δ k z) = β (SR.toLimitH k n z))
+    (h₅ : ∀ k v, SR.toLimitH k n (bk k v) = bX (SI.toLimitH k n v))
+    (h₃ : ∀ {j k : I} (f : j ⟶ k) z, S.transitionH f (n + 1) (δ j z) =
+      δ k (SR.transitionH f n z))
+    (h₃' : ∀ {j k : I} (f : j ⟶ k) v, SR.transitionH f n (bk j v) =
+      bk k (SI.transitionH f n v)) :
+    S.IsContinuousAt (n + 1) := by
+  refine ⟨fun x ↦ ?_, fun i y hy ↦ ?_⟩
+  · obtain ⟨y, rfl⟩ := (hβa x).1 (hI₀ _)
+    obtain ⟨k, z, rfl⟩ := hR.1 y
+    exact ⟨k, δ k z, h₄ k z⟩
+  · obtain ⟨z, rfl⟩ := hδ i y
+    obtain ⟨w', hw'⟩ := (hbβ (SR.toLimitH i n z)).1 (by rw [← h₄]; exact hy)
+    obtain ⟨m, v, rfl⟩ := hI w'
+    obtain ⟨k, hik, hmk⟩ := directed_of (· ≤ ·) i m
+    have hz : SR.toLimitH k n (SR.transitionH (homOfLE hik) n z -
+        bk k (SI.transitionH (homOfLE hmk) n v)) = 0 := by
+      rw [map_sub, h₅, hSR.toLimitH_transitionH, hSI.toLimitH_transitionH, hw', sub_self]
+    obtain ⟨l, g, hg⟩ := hR.2 k _ hz
+    refine ⟨l, homOfLE hik ≫ g, ?_⟩
+    rw [map_sub, sub_eq_zero, h₃'] at hg
+    rw [hS.transitionH_comp, h₃, h₃, hg]
+    exact (hbδ l _).2 ⟨_, rfl⟩
+
 include hc in
 /-- **Dimension shifting for continuity.** If continuity holds in degree `n` for all systems,
 it holds in degree `n + 1` for all systems. -/
@@ -131,54 +172,29 @@ theorem isContinuousAt_succ {n : ℕ}
     ai bi wi hi t r ⟨hr₁, hr₂, hr₃, ht₂, hinj, ht₁, ht₃⟩
   let SR : SystemData D c := ⟨FR, φR, GR, eGR, hGR, LR, hLR⟩
   let SI : SystemData D c := ⟨FI, ψ, GI, eGI, hGI, LI, hLI⟩
-  have hSR : SR.Laws := ⟨hidR, hcompR⟩
-  have hSI : SI.Laws := ⟨hidI, hcompI⟩
-  obtain ⟨sR, iR⟩ := ih SR hSR
-  obtain ⟨sI, -⟩ := ih SI hSI
-  have hLI0 : Subsingleton (Sheaf.H LI.pt (n + 1)) := subsingleton_H_succ_of_injective hc SI hinj n
-  let δ (k : I) : Sheaf.H (FR k) n →+ Sheaf.H (S.F k) (n + 1) := Sheaf.H.δSucc (hi k) n
-  let β : Sheaf.H LR.pt n →+ Sheaf.H S.L.pt (n + 1) := Sheaf.H.δSucc hE n
-  -- compatibilities
-  have h₄ (k : I) (z : Sheaf.H (FR k) n) : S.toLimitH k (n + 1) (δ k z) = β (SR.toLimitH k n z) := by
+  have hLI₀ : Subsingleton (Sheaf.H LI.pt (n + 1)) := subsingleton_H_succ_of_injective hc SI hinj n
+  refine isContinuousAt_succ_of_exact (SR := SR) (SI := SI) hS ⟨hidR, hcompR⟩ ⟨hidI, hcompI⟩
+    (ih SR ⟨hidR, hcompR⟩) (ih SI ⟨hidI, hcompI⟩).1 (Sheaf.H.map a (n + 1)) (Sheaf.H.map b n)
+    (Sheaf.H.δSucc hE n) (Sheaf.H.exact_δSucc_map hE n) (Sheaf.H.exact_map_δSucc hE n)
+    (fun _ ↦ Subsingleton.elim _ _) (fun k ↦ Sheaf.H.δSucc (hi k) n)
+    (fun k ↦ by have := hinj k; exact Sheaf.H.δSucc_surjective (hi k) n)
+    (fun k ↦ Sheaf.H.map (bi k) n) (fun k ↦ Sheaf.H.exact_map_δSucc (hi k) n) ?_ ?_ ?_ ?_
+  · intro k z
     have h := boundary_naturality (c.π.app (op k)) _ (hi k) _ hE (t k) n z
     rw [ht₁ k, ht₃ k] at h
     exact h
-  have h₅ (k : I) (v : Sheaf.H (FI k) n) :
-      SR.toLimitH k n (Sheaf.H.map (bi k) n v) = Sheaf.H.map b n (SI.toLimitH k n v) := by
+  · intro k v
     have h := middle_naturality (c.π.app (op k)) _ _ (t k) n v
     rw [ht₃ k, ht₂ k] at h
     exact h
-  have h₃ {j k : I} (f : j ⟶ k) (z : Sheaf.H (FR j) n) :
-      S.transitionH f (n + 1) (δ j z) = δ k (SR.transitionH f n z) := by
+  · intro j k f z
     have h := boundary_naturality (D.map f.op) _ (hi j) _ (hi k) (r j k f) n z
     rw [hr₁ j k f, hr₃ j k f] at h
     exact h
-  have h₃' {j k : I} (f : j ⟶ k) (v : Sheaf.H (FI j) n) :
-      SR.transitionH f n (Sheaf.H.map (bi j) n v) =
-        Sheaf.H.map (bi k) n (SI.transitionH f n v) := by
+  · intro j k f v
     have h := middle_naturality (D.map f.op) _ _ (r j k f) n v
     rw [hr₃ j k f, hr₂ j k f] at h
     exact h
-  refine ⟨fun x ↦ ?_, fun i y hy ↦ ?_⟩
-  · -- surjectivity
-    obtain ⟨y, rfl⟩ := (Sheaf.H.exact_δSucc_map hE n x).1 (Subsingleton.elim _ _)
-    obtain ⟨k, z, rfl⟩ := sR y
-    exact ⟨k, δ k z, h₄ k z⟩
-  · -- injectivity
-    have : Injective (FI i) := hinj i
-    obtain ⟨z, rfl⟩ := Sheaf.H.δSucc_surjective (hi i) n y
-    obtain ⟨w', hw'⟩ := (Sheaf.H.exact_map_δSucc hE n (SR.toLimitH i n z)).1
-      (by rw [← h₄]; exact hy)
-    obtain ⟨m, v, rfl⟩ := sI w'
-    obtain ⟨k, hik, hmk⟩ := directed_of (· ≤ ·) i m
-    have hz : SR.toLimitH k n (SR.transitionH (homOfLE hik) n z -
-        Sheaf.H.map (bi k) n (SI.transitionH (homOfLE hmk) n v)) = 0 := by
-      rw [map_sub, h₅, hSR.toLimitH_transitionH, hSI.toLimitH_transitionH, hw', sub_self]
-    obtain ⟨l, g, hg⟩ := iR k _ hz
-    refine ⟨l, homOfLE hik ≫ g, ?_⟩
-    rw [map_sub, sub_eq_zero, h₃'] at hg
-    rw [hS.transitionH_comp, h₃, h₃, hg]
-    exact (Sheaf.H.exact_map_δSucc (hi l) n _).2 ⟨_, rfl⟩
 
 end Step
 
@@ -203,9 +219,13 @@ lemma equiv₀_cohomologyMap_zero {X Y : Scheme.{u}} (u : Y ⟶ X)
   have h := cohomologyMap_zero_eq_globalSectionsUpperStarMap u G (e.inv.app G s)
   rw [hs] at h
   rw [h, AddEquiv.apply_symm_apply]
-  simp only [globalSectionsUpperStarMap, ConcreteCategory.comp_apply, hs]
-  rw [← ConcreteCategory.comp_apply (e'.inv.app _) (e'.hom.app _), Iso.inv_hom_id_app]
-  rfl
+  have hs' (z) : e'.hom.app ((upperStar AddCommGrpCat.{u + 1} u).obj G)
+      (e'.inv.app ((upperStar AddCommGrpCat.{u + 1} u).obj G) z) = z := by
+    rw [← ConcreteCategory.comp_apply, Iso.inv_hom_id_app]
+    rfl
+  simp only [globalSectionsUpperStarMap, ConcreteCategory.comp_apply]
+  erw [hs]
+  exact hs' _
 
 variable [IsDirected I (· ≤ ·)] [Nonempty I] (hc : IsLimit c)
   [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]
@@ -226,8 +246,8 @@ lemma equiv₀_toLimitH (i : I) (y : Sheaf.H (S.F i) 0) :
     (Sheaf.H.equiv₀ _ terminalIsTerminal y)
   rw [AddEquiv.symm_apply_apply] at h
   change Sheaf.H.equiv₀ _ _ (Sheaf.H.map _ 0 (cohomologyMap _ _ 0 y)) = _
-  rw [← Sheaf.H.equiv₀_naturality, h]
-  rfl
+  rw [← Sheaf.H.equiv₀_naturality]
+  exact (congrArg (((S.eG i).inv ≫ S.L.ι.app i).hom.app (op (⊤_ _))) h).trans rfl
 
 variable (S) in
 omit [IsDirected I (· ≤ ·)] [Nonempty I] [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]
@@ -244,7 +264,8 @@ lemma equiv₀_transitionH {i j : I} (f : i ⟶ j) (y : Sheaf.H (S.F i) 0) :
     (Sheaf.H.equiv₀ _ terminalIsTerminal y)
   rw [AddEquiv.symm_apply_apply] at h
   change Sheaf.H.equiv₀ _ _ (Sheaf.H.map _ 0 (cohomologyMap _ _ 0 y)) = _
-  rw [← Sheaf.H.equiv₀_naturality, h]
+  rw [← Sheaf.H.equiv₀_naturality]
+  exact congrArg ((S.φ f).hom.app (op (⊤_ _))) h
 
 include hc in
 /-- **Continuity in degree zero**: `H⁰(X, L) = colimᵢ H⁰(Dᵢ, Fᵢ)`. -/
@@ -292,7 +313,8 @@ theorem isContinuousAt_zero (S : SystemData D c) (hS : S.Laws) : S.IsContinuousA
     simp only [stageMap, limitComparison, ObjectProperty.FullSubcategory.comp_hom,
       NatTrans.comp_app, ConcreteCategory.comp_apply, lowerStar_map_hom_app,
       lowerStarComp_hom_app_hom_app]
-    rfl
+    trace_state
+    sorry
   · sorry
 
 end Zero

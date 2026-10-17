@@ -91,6 +91,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
   {d : ℕ} (f : X ⟶ Y) [IsSeparated f] [SmoothOfRelativeDimension d f] [HasCompactification f]
   [QuasiCompact f]
 
+include aY
+
 /-- The functor `K ↦ Lf^* K(d)[2d]` of a smooth `f` preserves `Dctf`: `Lf^* K(d)[2d]` is
 isomorphic to `Rf^! K` by smooth purity, and `Rf^!` preserves `Dctf`. -/
 lemma constructibleFiniteTor_twistShift_leftDerivedUpperStar
@@ -132,7 +134,7 @@ noncomputable def DerivedCategoryFiniteTor.rightDerivedUpperShriekCompatibility 
 noncomputable def DerivedCategoryFiniteTor.rightDerivedUpperShriekAdjunction :
     DerivedCategoryFiniteTor.rightDerivedLowerShriek Λ aY f ⊣
       DerivedCategoryFiniteTor.rightDerivedUpperShriek Λ aY f :=
-  (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).restrictFullyFaithful
+  (Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).restrictFullyFaithful
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
     (DerivedCategoryFiniteTor.rightDerivedLowerShriekCompatibility Λ aY f)
     (DerivedCategoryFiniteTor.rightDerivedUpperShriekCompatibility Λ aY f)
@@ -141,14 +143,15 @@ noncomputable def DerivedCategoryFiniteTor.rightDerivedUpperShriekAdjunction :
 lemma DerivedCategoryFiniteTor.rightDerivedUpperShriekAdjunction_counit_app
     (K : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) Y) :
     ((DerivedCategoryFiniteTor.rightDerivedUpperShriekAdjunction Λ aY f).counit.app K).hom =
-      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K.obj := by
+      (Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K.obj := by
   have := Adjunction.map_restrictFullyFaithful_counit_app
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f)
+    (Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f)
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
     (DerivedCategoryFiniteTor.rightDerivedLowerShriekCompatibility Λ aY f)
     (DerivedCategoryFiniteTor.rightDerivedUpperShriekCompatibility Λ aY f) K
-  simpa [DerivedCategoryFiniteTor.rightDerivedLowerShriekCompatibility,
-    DerivedCategoryFiniteTor.rightDerivedUpperShriekCompatibility] using this
+  refine this.trans ?_
+  show 𝟙 _ ≫ (R(f)_![ModuleCat.{u + 1} Λ]).map (𝟙 _) ≫ _ = _
+  rw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
 
 /-- The smooth purity isomorphism `γ_f : Lf^*(-)(d)[2d] ≅ Rf^!`
 (`AlgebraicGeometry.Etale.smoothPurityNatIso`, for an orientation `θ : ω_f ≅ Λ_X(d)[2d]`),
@@ -156,13 +159,13 @@ restricted to `Dctf(Y, Λ)`. -/
 noncomputable def DerivedCategoryFiniteTor.smoothPurityNatIso
     (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
       (twistShift Λ X d).obj (constantComplex Λ X)) :
-    DerivedCategoryFiniteTor.twistShiftPullback Λ aY f ≅
+    DerivedCategoryFiniteTor.twistShiftPullback Λ aY (d := d) f ≅
       DerivedCategoryFiniteTor.rightDerivedUpperShriek Λ aY f :=
   NatIso.ofComponents
-    (fun K ↦ ObjectProperty.isoMk _ ((Etale.smoothPurityNatIso Λ f θ).app K.obj))
+    (fun K ↦ ObjectProperty.isoMk _ ((Etale.smoothPurityNatIso Λ (d := d) f θ).app K.obj))
     (fun g ↦ by
-      ext
-      exact (Etale.smoothPurityNatIso Λ f θ).hom.naturality g.hom)
+      refine ObjectProperty.hom_ext ?_
+      exact (Etale.smoothPurityNatIso Λ (d := d) f θ).hom.naturality g.hom)
 
 /-- Blueprint `det-sp-comparison-brown-explicit`: The twisted inverse image is right adjoint to
 `Rf_!` (finite coefficients).
@@ -179,7 +182,7 @@ noncomputable def DerivedCategoryFiniteTor.twistShiftPullbackAdjunction
     (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
       (twistShift Λ X d).obj (constantComplex Λ X)) :
     DerivedCategoryFiniteTor.rightDerivedLowerShriek Λ aY f ⊣
-      DerivedCategoryFiniteTor.twistShiftPullback Λ aY f :=
+      DerivedCategoryFiniteTor.twistShiftPullback Λ aY (d := d) f :=
   (DerivedCategoryFiniteTor.rightDerivedUpperShriekAdjunction Λ aY f).ofNatIsoRight
     (DerivedCategoryFiniteTor.smoothPurityNatIso Λ aY f θ).symm
 
@@ -190,7 +193,7 @@ lemma DerivedCategoryFiniteTor.twistShiftPullbackAdjunction_counit_app
       (twistShift Λ X d).obj (constantComplex Λ X))
     (K : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) Y) :
     ((DerivedCategoryFiniteTor.twistShiftPullbackAdjunction Λ aY f θ).counit.app K).hom =
-      smoothPurityTrace Λ d f ((Etale.smoothPurityNatIso Λ f θ).app K.obj) := by
+      smoothPurityTrace Λ d f ((Etale.smoothPurityNatIso Λ (d := d) f θ).app K.obj) := by
   have h : (DerivedCategoryFiniteTor.twistShiftPullbackAdjunction Λ aY f θ).counit.app K =
       ((DerivedCategoryFiniteTor.twistShiftPullbackAdjunction Λ aY f θ).homEquiv _ _).symm
         (𝟙 _) := by
@@ -199,8 +202,8 @@ lemma DerivedCategoryFiniteTor.twistShiftPullbackAdjunction_counit_app
     Adjunction.homEquiv_ofNatIsoRight_symm_apply, Adjunction.homEquiv_counit,
     ObjectProperty.FullSubcategory.comp_hom,
     DerivedCategoryFiniteTor.rightDerivedUpperShriekAdjunction_counit_app, smoothPurityTrace]
-  simp [DerivedCategoryFiniteTor.smoothPurityNatIso,
-    DerivedCategoryFiniteTor.rightDerivedLowerShriek]
+  (try simp only [Category.id_comp])
+  rfl
 
 /-- Blueprint `det-sp-comparison-brown-explicit`: The twisted inverse image is right adjoint to
 `Rf_!` for every finite coefficient ring.
@@ -213,9 +216,9 @@ theorem DerivedCategoryFiniteTor.exists_twistShiftPullbackAdjunction :
     ∃ (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
         (twistShift Λ X d).obj (constantComplex Λ X))
       (adj : DerivedCategoryFiniteTor.rightDerivedLowerShriek Λ aY f ⊣
-        DerivedCategoryFiniteTor.twistShiftPullback Λ aY f),
+        DerivedCategoryFiniteTor.twistShiftPullback Λ aY (d := d) f),
       ∀ K : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) Y, (adj.counit.app K).hom =
-        smoothPurityTrace Λ d f ((Etale.smoothPurityNatIso Λ f θ).app K.obj) := by
+        smoothPurityTrace Λ d f ((Etale.smoothPurityNatIso Λ (d := d) f θ).app K.obj) := by
   obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f aY
   exact ⟨θ, _, DerivedCategoryFiniteTor.twistShiftPullbackAdjunction_counit_app Λ aY f θ⟩
 
@@ -231,8 +234,8 @@ of `det-sp-comparison-brown-explicit`, there is a unique isomorphism
 `Lf^*(-)(d)[2d] ≅ Rf^!` of functors on `Dctf(Y, Λ)` compatible with the counits. -/
 theorem DerivedCategoryFiniteTor.existsUnique_twistShiftPullbackIso_counit
     (adj : DerivedCategoryFiniteTor.rightDerivedLowerShriek Λ aY f ⊣
-      DerivedCategoryFiniteTor.twistShiftPullback Λ aY f) :
-    ∃! γ : DerivedCategoryFiniteTor.twistShiftPullback Λ aY f ≅
+      DerivedCategoryFiniteTor.twistShiftPullback Λ aY (d := d) f) :
+    ∃! γ : DerivedCategoryFiniteTor.twistShiftPullback Λ aY (d := d) f ≅
         DerivedCategoryFiniteTor.rightDerivedUpperShriek Λ aY f,
       ∀ K : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) Y,
         (DerivedCategoryFiniteTor.rightDerivedLowerShriek Λ aY f).map (γ.hom.app K) ≫

@@ -82,17 +82,21 @@ theorem nonempty_iso_of_distTriang_of_isIso_biprod_desc {X Y Z Z' N : C} (f : X 
   let E : N ⊞ Z' ⟶ Y := M ≫ biprod.desc s h
   have hE : E = biprod.desc (h - c ≫ s) s := by
     ext <;> simp [E, M, sub_eq_add_neg, Preadditive.add_comp]
+    abel
+  have hb : s ≫ g ≫ a = 𝟙 Z' := by
+    rw [← Category.assoc]
+    exact IsIso.hom_inv_id _
   have hEg : E ≫ g ≫ a = biprod.snd := by
     rw [hE]
     ext
-    · simp only [biprod.inl_desc_assoc, Preadditive.sub_comp, Category.assoc, ha,
-        Category.comp_id, biprod.inl_snd, c]
-      simp
-    · simp [ha]
+    · rw [biprod.inl_desc_assoc, biprod.inl_snd, Preadditive.sub_comp, Category.assoc, hb,
+        Category.comp_id]
+      exact sub_self _
+    · rw [biprod.inr_desc_assoc, biprod.inr_snd, hb]
   have hT₂ := rot_of_distTriang _ (binaryBiproductTriangle_distinguished N Z')
   have e := isoTriangleOfIso₁₂ _ _ (rot_of_distTriang _ hT) hT₂ (asIso E).symm (asIso a) (by
-    dsimp
-    rw [← hEg, asIso_inv, IsIso.inv_hom_id_assoc])
+    change g ≫ a = inv E ≫ biprod.snd
+    rw [← hEg, IsIso.inv_hom_id_assoc])
   exact ⟨(shiftFunctor C (1 : ℤ)).preimageIso (Triangle.π₃.mapIso e)⟩
 
 end Triangulated
@@ -125,12 +129,13 @@ statement records the existence of a second component `h`, the content being tha
 complement of the unit summand is `Λ_S(-1)[-2]`. -/
 theorem exists_isIso_biprod_desc_projectiveLine [HasTateTwist.IsNormalized Λ]
     (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
-    ∃ h : (tateObject Λ S (-1))⟦(-2 : ℤ)⟧ ⟶
+    ∃ h : (tateObject Λ S (-1))⟦2 * (-1 : ℤ)⟧ ⟶
         (R((ProjectiveLine S ↘ S)_*[ModuleCat.{u + 1} Λ])).obj
           (constantComplex Λ (ProjectiveLine S)),
       IsIso (biprod.desc (constantComplexUnit Λ (ProjectiveLine S ↘ S)) h) :=
   sorry
 
+omit [Finite Λ] [HasTateTwist Λ] in
 /-- The derived pullback along the identity is the identity. -/
 lemma nonempty_leftDerivedUpperStar_id_iso (S : Scheme.{u}) (h : S ⟶ S) (hh : h = 𝟙 S) :
     Nonempty (L((h)^*[ModuleCat.{u + 1} Λ]) ≅ 𝟭 _) := by
@@ -161,10 +166,11 @@ theorem isIso_constantComplexUnit_comp_map_unit {X S : Scheme.{u}} (q : X ⟶ S)
       ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app (constantComplex Λ X)) =
       adj.unit.app (constantComplex Λ S) ≫ (R((q)_*[A])).map ((R((i)_*[A])).map
         ((D((i)^*[A])).map (leftDerivedUpperStarConstantComplexIso Λ q).hom)) := by
-    simp only [constantComplexUnit, adj, Adjunction.comp_unit_app, Category.assoc,
-      ← Functor.map_comp]
-    congr 2
-    exact ((mapDerivedUpperStarLowerStarAdjunction A i).unit.naturality _)
+    simp only [constantComplexUnit, adj, Adjunction.comp_unit_app, Category.assoc]
+    congr 1
+    rw [← Functor.map_comp, ← Functor.map_comp]
+    congr 1
+    exact (mapDerivedUpperStarLowerStarAdjunction A i).unit.naturality _
   rw [key]
   infer_instance
 
@@ -179,7 +185,7 @@ scheme on which the exponent of `Λ` is invertible, `Rp_! Λ ≅ Λ_S(-1)[-2]`. 
 theorem nonempty_iso_rightDerivedLowerShriek_affineLine (S : Scheme.{u})
     [HasInvertibleExponent Λ S] :
     Nonempty ((R(𝔸(ULift.{u} (Fin 1); S) ↘ S)_![ModuleCat.{u + 1} Λ]).obj
-        (constantComplex Λ 𝔸(ULift.{u} (Fin 1); S)) ≅ (tateObject Λ S (-1))⟦(-2 : ℤ)⟧) := by
+        (constantComplex Λ 𝔸(ULift.{u} (Fin 1); S)) ≅ (tateObject Λ S (-1))⟦2 * (-1 : ℤ)⟧) := by
   set A := ModuleCat.{u + 1} Λ
   let c := ProjectiveLine.affineLineCompactification' S
   let j := c.i
@@ -187,11 +193,11 @@ theorem nonempty_iso_rightDerivedLowerShriek_affineLine (S : Scheme.{u})
   let i := ProjectiveLine.infinity S
   have hij : Set.range i.base = (Set.range j.base)ᶜ := by
     have h₁ := ProjectiveLine.range_infinity S
-    have h₂ : Set.range j.base = Set.range (ProjectiveLine.affineChart S).base := by
-      simp only [j, c, ProjectiveLine.affineLineCompactification'_i, Scheme.Hom.comp_base,
-        TopCat.hom_comp, ContinuousMap.coe_comp]
-      exact Set.range_comp_of_surjective _ _
-        (ConcreteCategory.bijective_of_isIso (ProjectiveLine.affineLineIso S).hom.base).2
+    have h₂ : (j.opensRange : Set c.Z) =
+        ((ProjectiveLine.affineChart S).opensRange : Set (ProjectiveLine S)) := by
+      simp only [j, c, ProjectiveLine.affineLineCompactification'_i,
+        Scheme.Hom.opensRange_comp_of_isIso]
+    change _ = ((j.opensRange : Set c.Z))ᶜ
     rw [h₂]
     exact h₁
   obtain ⟨w, hT⟩ := exists_distTriang_openClosed A j i hij (constantComplex Λ (ProjectiveLine S))
@@ -199,7 +205,12 @@ theorem nonempty_iso_rightDerivedLowerShriek_affineLine (S : Scheme.{u})
     (mapDerivedUpperStarLowerStarAdjunction A q).isTriangulated_rightAdjoint
   have hT' := (R((q)_*[A])).map_distinguished _ hT
   obtain ⟨h, hh⟩ := exists_isIso_biprod_desc_projectiveLine Λ S
-  have hs := isIso_constantComplexUnit_comp_map_unit Λ q i (ProjectiveLine.infinity_over S)
+  have hs := isIso_constantComplexUnit_comp_map_unit Λ q i (ProjectiveLine.infinity_over (S := S))
+  have : IsIso (constantComplexUnit Λ q ≫ (R((q)_*[A])).map
+      (Triangle.mk ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).counit.app
+        (constantComplex Λ (ProjectiveLine S)))
+        ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app
+          (constantComplex Λ (ProjectiveLine S))) w).mor₂) := hs
   obtain ⟨e⟩ := nonempty_iso_of_distTriang_of_isIso_biprod_desc _ _ _ hT'
     (constantComplexUnit Λ q) h
   -- `Rp_! Λ = Rq_* j_! Λ = Rq_* j_! j^* Λ`
@@ -208,6 +219,7 @@ theorem nonempty_iso_rightDerivedLowerShriek_affineLine (S : Scheme.{u})
       ((leftDerivedUpperStarConstantComplexIso Λ j).symm ≪≫
         (leftDerivedUpperStarIsoMapDerivedCategory A j).app _)) ≪≫ e⟩
 
+omit [HasTateTwist.IsNormalized Λ] in
 /-- `Rf_!(M(m)[2m]) ≅ (Rf_! M)(m)[2m]`, by the projection formula. -/
 theorem nonempty_iso_rightDerivedLowerShriek_obj_twistShift {X Y : Scheme.{u}}
     [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f]
@@ -247,6 +259,7 @@ lemma nonempty_iso_rightDerivedLowerShriek_of_eq {X Y : Scheme.{u}} {f f' : X �
 
 variable [HasTateTwist.IsNormalized Λ]
 
+omit [HasTateTwist.IsNormalized Λ] in
 /-- For an isomorphism of schemes `e : X ≅ Y`, `Re_! Λ_X ≅ Λ_Y`, compatibly with twists. -/
 theorem nonempty_iso_rightDerivedLowerShriek_twistShift_of_iso {X Y : Scheme.{u}}
     [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] (e : X ≅ Y)
@@ -304,7 +317,7 @@ theorem nonempty_iso_rightDerivedLowerShriek_twistShift_affineSpace_fin (d : ℕ
     obtain ⟨t₃⟩ := ih S
     exact ⟨heq.app _ ≪≫ c₁.app _ ≪≫ (R(q ≫ p)_![A]).mapIso t₀ ≪≫ c₂.app _ ≪≫
       (R(p)_![A]).mapIso ((R(q)_![A]).mapIso
-        ((twistShift Λ _ _).mapIso (eqToIso (by push_cast; rfl)) ≪≫
+        (eqToIso (by rw [show ((d + 1 : ℕ) : ℤ) = 1 + d by push_cast; ring]) ≪≫
           (twistShiftTwistShiftIso Λ _ 1 d _).symm) ≪≫ t₁ ≪≫ (twistShift Λ _ d).mapIso t₂) ≪≫ t₃⟩
 
 end AffineSpace

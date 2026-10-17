@@ -177,6 +177,50 @@ lemma derivedOpenImmersionLowerShriekToLowerStar_app_eq_of_refinement
     (D((d.i)_!open[A]).obj M)
   simp only [Functor.comp_map, Functor.id_map] at h1 h2 h3
   erw [reassoc_of% h1, reassoc_of% h2]
+  rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc, Category.assoc]
+  erw [h3, reassoc_of% h4]
+  simp only [y, Functor.map_comp, Category.assoc]
+  rw [map_derivedOpenImmersionLowerShriekToLowerStar_app_comp_counit]
+  have h6 := derivedUnit_comp_map_refinementLowerShriekBaseChangeDerivedIso A r hcart M
+  rw [← cancel_epi ((derivedOpenImmersionLowerShriekUpperStarAdjunction A d.i).unit.app M),
+    IsIso.hom_inv_id]
+  erw [← reassoc_of% h6]
+  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp, IsIso.hom_inv_id]
+  rfl
+
+omit [HasSmallSiteSheafify A] in
+lemma rightDerivedLowerStarCompHom_eq' {T S R : Scheme.{u}} (g₁ : T ⟶ S) (g₂ : S ⟶ R)
+    (g₁₂ : T ⟶ R) (hg : g₁₂ = g₁ ≫ g₂) :
+    rightDerivedLowerStarCompHom A g₁ g₂ g₁₂ hg = rightDerivedLowerStarCompHom' A g₁ g₂ g₁₂ hg :=
+  conjugateEquiv_leftDerivedUpperStarComp_hom A g₁ g₂ g₁₂ hg
+
+/-- The *forget-supports* map `ψ_c : Rf_!(c) = Rg_* D(i_!) ⟶ Rg_* Ri_* ⟶ Rf_*` of a
+compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`: `Rg_*` of the comparison `D(i_!) ⟶ Ri_*`,
+followed by the composition map `Rg_* Ri_* ⟶ Rf_*`. -/
+noncomputable def rightDerivedLowerShriekOfCompactificationToLowerStar (c : Compactification f) :
+    Rf_!(c)[A] ⟶ R((f)_*[A]) :=
+  Functor.whiskerRight (derivedOpenImmersionLowerShriekToLowerStar A c.i) R((c.g)_*[A]) ≫
+    rightDerivedLowerStarCompHom A c.i c.g f c.comm
+
+/-- **The forget-supports maps are compatible with refinements**: for a refinement `r` of
+compactifications of `f` with cartesian square over `X`, the comparison `Rf_!(d) ⟶ Rf_!(c)`
+followed by `ψ_c` is `ψ_d`. -/
+theorem rightDerivedLowerShriekOfCompactificationComparison_comp_toLowerStar
+    (hcart : IsPullback c.i (𝟙 X) r.hom d.i) :
+    rightDerivedLowerShriekOfCompactificationComparison A r hcart ≫
+        rightDerivedLowerShriekOfCompactificationToLowerStar A c =
+      rightDerivedLowerShriekOfCompactificationToLowerStar A d := by
+  ext M
+  have hQ := derivedOpenImmersionLowerShriekToLowerStar_app_eq_of_refinement A r hcart M
+  have hA := rightDerivedLowerStarCompHom_refinement_assoc A r M
+  have hn := (rightDerivedLowerStarCompHom' A r.hom d.g c.g r.hom_g.symm).naturality
+    ((derivedOpenImmersionLowerShriekToLowerStar A c.i).app M)
+  simp only [rightDerivedLowerStarCompHom_eq'] at hA
+  simp only [rightDerivedLowerShriekOfCompactificationToLowerStar,
+    rightDerivedLowerShriekOfCompactificationComparison, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc,
+    rightDerivedFunctorCompIso'_refinementLowerStarComp_hom, rightDerivedLowerStarCompHom_eq']
   done
 
 end Etale

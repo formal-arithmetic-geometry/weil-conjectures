@@ -96,7 +96,8 @@ lemma quasiSeparated_sigmaDesc {ι : Type} [Finite ι] {Y : ι → Scheme.{u}} {
   have hpre (i : ι) : Sigma.ι Y i ⁻¹' (Sigma.desc p ⁻¹ᵁ U.1 : Set (∐ Y :)) = p i ⁻¹' U := by
     ext y
     rw [Set.mem_preimage, SetLike.mem_coe, Scheme.Hom.mem_preimage, ← Scheme.Hom.comp_apply,
-      Sigma.ι_desc, Set.mem_preimage]
+      Sigma.ι_desc]
+    exact Iff.rfl
   refine (isQuasiSeparated_iff_quasiSeparatedSpace _ (Sigma.desc p ⁻¹ᵁ U.1).isOpen).mp ?_
   refine IsQuasiSeparated.of_isOpenEmbedding_cover (fun i ↦ Sigma.ι Y i)
     (fun i ↦ (Sigma.ι Y i).isOpenEmbedding) (fun i k hik ↦ ?_) exists_sigmaι_eq fun i ↦ ?_
@@ -170,8 +171,8 @@ lemma isQcqs_of_isColimit_cofan {ι : Type} [Finite ι] {Y : ι → X.Etale} (c 
 
 lemma isQcqs_of_isColimit_binaryCofan {Y Y' : X.Etale} (c : BinaryCofan Y Y')
     (hc : IsColimit c) (h : IsQcqs Y) (h' : IsQcqs Y') : IsQcqs c.pt := by
-  refine isQcqs_of_isColimit_cofan (Y := fun j : WalkingPair ↦ WalkingPair.casesOn (motive := fun _ ↦ X.Etale) j Y Y')
-    c hc ?_
+  refine isQcqs_of_isColimit_cofan (Y := fun j : WalkingPair ↦
+    WalkingPair.casesOn (motive := fun _ ↦ X.Etale) j Y Y') c hc ?_
   rintro (_ | _)
   · exact h
   · exact h'
@@ -182,7 +183,7 @@ lemma isEmpty_of_isInitial {Y : X.Etale} (h : IsInitial Y) : IsEmpty Y.left := b
   exact ⟨fun y ↦ isEmptyElim ((h.to (Etale.mk (Scheme.emptyTo X))).left y)⟩
 
 lemma isQcqs_of_isInitial {Y : X.Etale} (h : IsInitial Y) : IsQcqs Y := by
-  have := isEmpty_of_isInitial h
+  have : IsEmpty ((𝟭 Scheme).obj Y.left) := isEmpty_of_isInitial h
   have : IsOpenImmersion Y.hom := isOpenImmersion_of_isEmpty Y.hom
   exact ⟨⟨fun _ _ _ ↦ Set.subsingleton_of_subsingleton.isCompact⟩, inferInstance⟩
 
@@ -190,6 +191,7 @@ lemma isQcqs_of_isAffine [QuasiSeparatedSpace X] (Y : X.Etale) [IsAffine Y.left]
     IsQcqs Y := by
   have : QuasiSeparatedSpace ((Functor.fromPUnit X).obj Y.right) :=
     inferInstanceAs (QuasiSeparatedSpace X)
+  have : IsAffine ((𝟭 Scheme).obj Y.left) := ‹IsAffine Y.left›
   exact ⟨quasiCompact_of_compactSpace Y.hom, QuasiSeparated.of_quasiSeparatedSpace Y.hom⟩
 
 lemma compactSpace_of_isQcqs [CompactSpace X] {Y : X.Etale} (h : IsQcqs Y) :
@@ -252,11 +254,11 @@ lemma exists_finite_affine_of_mem_smallEtaleTopology {M : X.Etale} [CompactSpace
   let e := t.equivFin
   refine ⟨t.card, fun k ↦ V' (e.symm k), fun k ↦ ψ _ ≫ g _, fun k ↦ S.downward_closed (hg _) _,
     fun k ↦ inferInstanceAs (IsAffine ((Z _).left.affineCover.X _)), fun x ↦ ?_⟩
-  obtain ⟨a, ha, y, hy⟩ := Set.mem_iUnion₂.mp (ht (Set.mem_univ x))
-  refine ⟨e ⟨a, ha⟩, ?_⟩
-  dsimp only
-  rw [Equiv.symm_apply_apply]
-  exact ⟨y, hy⟩
+  obtain ⟨a, ha, hxa⟩ := Set.mem_iUnion₂.mp (ht (Set.mem_univ x))
+  obtain ⟨k, hk⟩ := e.symm.surjective ⟨a, ha⟩
+  have hxa' : x ∈ Set.range (ψ ↑(⟨a, ha⟩ : t) ≫ g ↑(⟨a, ha⟩ : t)).left := hxa
+  rw [← hk] at hxa'
+  exact ⟨k, hxa'⟩
 
 end Scheme.Etale
 

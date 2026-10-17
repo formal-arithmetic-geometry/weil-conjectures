@@ -138,11 +138,10 @@ theorem stageEventually_splitting :
     exact quasiSeparatedSpace_of_quasiSeparated (S.N x.1).hom
   obtain ⟨hW₁, hW₂⟩ := Scheme.compactSpace_quasiSeparatedSpace_of_isColimit (Sigma.ι Al)
     (coproductIsCoproduct Al)
+  have het : Etale W.hom := IsZariskiLocalAtSource.sigmaDesc fun x ↦ (S.hN x.1).1
   have hW : IsQcqsEtale W :=
-    ⟨IsZariskiLocalAtSource.sigmaDesc fun x ↦ (S.hN x.1).1, inferInstance,
-      @quasiCompact_of_compactSpace _ _ W.hom hW₁ _,
+    ⟨het, inferInstance, @quasiCompact_of_compactSpace _ _ W.hom hW₁ _,
       @QuasiSeparated.of_quasiSeparatedSpace _ _ W.hom hW₂⟩
-  -- the base change of `w` to the limit is an isomorphism
   have hP := (Over.nonempty_isColimit_pullback_cofan_left (c.π.app i) ℓ hs).some
   have hQ : IsColimit (Cofan.mk ((Over.pullback (c.π.app i)).obj (S.G.obj Δ)).left
       fun x : SplitIndex Δ ↦ ((Over.pullback (c.π.app i)).map (S.leg Δ x)).left) :=
@@ -155,9 +154,10 @@ theorem stageEventually_splitting :
     have := hP.comp_coconePointUniqueUpToIso_hom hQ ⟨x⟩
     simp only [Cofan.mk_pt, Cofan.mk_ι_app] at this
     change ((Over.pullback (c.π.app i)).map (ℓ x)).left ≫ _ = _
-    rw [this, ← Over.comp_left, ← Functor.map_comp, hℓw]
-  have : IsIso ((Over.pullback (c.π.app i)).map w).left := by
-    rw [hwl]
+    refine Eq.trans ?_ this.symm
+    rw [← Over.comp_left, ← Functor.map_comp, hℓw]
+  have : IsIso ((Over.forget _).map ((Over.pullback (c.π.app i)).map w)) := by
+    rw [Over.forget_map, hwl]
     infer_instance
   have : IsIso ((Over.pullback (c.π.app i)).map w) :=
     isIso_of_reflects_iso _ (Over.forget _)
@@ -208,8 +208,8 @@ theorem stageEventually_surjective (n : Fin (r + 1)) :
         z := by
       rw [← Scheme.Hom.comp_apply, ← Over.comp_left, Iso.inv_hom_id_app]
       rfl
-    rw [← Over.comp_left, key, Over.comp_left, Scheme.Hom.comp_apply, hz']
-    exact hz
+    rw [← Over.comp_left, key, Over.comp_left, Scheme.Hom.comp_apply]
+    exact (congrArg _ hz').trans hz
   obtain ⟨i₁, h₁, H⟩ := exists_stage_jointly_surjective D hc (Finset.univ : Finset Unit)
     (S.M n) (fun _ ↦ S.G.obj (op (truncTop n))) (fun _ ↦ S.mm n) (S.isQcqsEtale_M n)
     (fun _ ↦ S.hG _) fun x ↦ by
@@ -220,5 +220,83 @@ theorem stageEventually_surjective (n : Fin (r + 1)) :
   exact ⟨y, hy⟩
 
 end HypercoverStageData
+namespace HypercoverStageData
+
+variable [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)] {i : I}
+  (S : HypercoverStageData D c U i)
+
+/-- The truncated finite split étale hypercover at a stage where the splitting cofans are
+coproducts and the matching maps are surjective. -/
+noncomputable def toHypercover {j : I} (h : j ⟶ i)
+    (Hsplit : ∀ Δ : (SimplexCategory.Truncated r)ᵒᵖ,
+      Nonempty (IsColimit (Cofan.mk ((Over.pullback (D.map h)).obj (S.G.obj Δ)).left
+        fun x : SplitIndex Δ ↦ ((Over.pullback (D.map h)).map (S.leg Δ x)).left)))
+    (Hsurj : ∀ n, Surjective ((Over.pullback (D.map h)).map (S.mm n)).left) :
+    TruncatedFiniteSplitEtaleHypercover (D.obj j) r where
+  simplicial := MorphismProperty.Comma.lift (S.G ⋙ Over.pullback (D.map h))
+    (fun a ↦ ((S.hG a).overPullback (D.map h)).1) (fun _ ↦ trivial) (fun _ ↦ trivial)
+  N n := MorphismProperty.Over.mk ⊤ ((Over.pullback (D.map h)).obj (S.N n)).hom
+    ((S.hN n).overPullback (D.map h)).1
+  inclusion n := MorphismProperty.Over.homMk ((Over.pullback (D.map h)).map (S.ι n)).left
+    (Over.w _)
+  splitting Δ := Scheme.Etale.isColimitOfCofanLeft _ (Cofan.isColimitCongr
+    (fun x ↦ by rw [leg, Functor.map_comp, Over.comp_left]; rfl) (Hsplit Δ).some)
+  finite_each_degree n := by
+    obtain ⟨_, _, _, _⟩ := (S.hN n).overPullback (D.map h)
+    exact ⟨1, fun _ ↦ MorphismProperty.Over.mk ⊤ ((Over.pullback (D.map h)).obj (S.N n)).hom
+      ((S.hN n).overPullback (D.map h)).1, fun _ ↦ 𝟙 _, ⟨Cofan.isColimitId _⟩, fun _ ↦
+      ⟨QuasiCompact.compactSpace_of_compactSpace ((Over.pullback (D.map h)).obj (S.N n)).hom,
+        quasiSeparatedSpace_of_quasiSeparated ((Over.pullback (D.map h)).obj (S.N n)).hom,
+        ‹_›, ‹_›, ‹_›⟩⟩
+  matching n := MorphismProperty.Over.mk ⊤ ((Over.pullback (D.map h)).obj (S.M n)).hom
+    ((S.isQcqsEtale_M n).overPullback (D.map h)).1
+  projection n Δ hlt θ := MorphismProperty.Over.homMk
+    ((Over.pullback (D.map h)).map (S.proj n Δ hlt θ)).left (Over.w _)
+  projection_naturality n Δ Δ' hlt hlt' α θ := MorphismProperty.Over.Hom.ext (by
+    change ((Over.pullback (D.map h)).map (S.proj n Δ hlt θ)).left ≫
+      ((Over.pullback (D.map h)).map (S.G.map α.op)).left =
+        ((Over.pullback (D.map h)).map (S.proj n Δ' hlt' (α.hom ≫ θ))).left
+    rw [← Over.comp_left, ← Functor.map_comp, S.proj_nat])
+  matching_universal n T p hp := matchingCone_universal (K := S.G ⋙ Over.pullback (D.map h))
+    (M := (Over.pullback (D.map h)).obj (S.M n))
+    (proj := fun Δ hlt θ ↦ (Over.pullback (D.map h)).map (S.proj n Δ hlt θ))
+    (nat := fun Δ Δ' hlt hlt' α θ ↦ by
+      rw [Functor.comp_map, ← Functor.map_comp, S.proj_nat])
+    (isLimitOfPreserves (Over.pullback (D.map h)) (S.isLimitM n)) T p hp
+  matchingMap n := MorphismProperty.Over.homMk
+    ((Over.pullback (D.map h)).map (S.mm n)).left (Over.w _)
+  matchingMap_projection n Δ hlt θ := MorphismProperty.Over.Hom.ext (by
+    change ((Over.pullback (D.map h)).map (S.mm n)).left ≫
+      ((Over.pullback (D.map h)).map (S.proj n Δ hlt θ)).left =
+        ((Over.pullback (D.map h)).map (S.G.map (SimplexCategory.Truncated.Hom.tr θ Δ.property
+          (Nat.le_of_lt_succ n.isLt)).op)).left
+    rw [← Over.comp_left, ← Functor.map_comp, S.mm_proj])
+  matching_cover n := Hsurj n
+
+lemma isBaseChange_toHypercover {j : I} (h : j ⟶ i)
+    (Hsplit : ∀ Δ : (SimplexCategory.Truncated r)ᵒᵖ,
+      Nonempty (IsColimit (Cofan.mk ((Over.pullback (D.map h)).obj (S.G.obj Δ)).left
+        fun x : SplitIndex Δ ↦ ((Over.pullback (D.map h)).map (S.leg Δ x)).left)))
+    (Hsurj : ∀ n, Surjective ((Over.pullback (D.map h)).map (S.mm n)).left) :
+    (S.toHypercover h Hsplit Hsurj).IsBaseChange (c.π.app j) U :=
+  ⟨Functor.isoWhiskerLeft S.G (overPullbackStageIso D c h) ≪≫ S.e, fun n ↦
+    ⟨(overPullbackStageIso D c h).app (S.N n) ≪≫ S.a n, (S.transport h).hι n⟩⟩
+
+end HypercoverStageData
+
+variable [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
+  [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)] (hc : IsLimit c)
+
+include hc in
+/-- A truncated finite split étale hypercover of the limit of a cofiltered system of qcqs
+schemes with affine transition maps is the base change of one at some stage. -/
+theorem exists_truncatedFiniteSplitEtaleHypercover_isBaseChange
+    (U : TruncatedFiniteSplitEtaleHypercover c.pt r) :
+    ∃ (j : I) (Ui : TruncatedFiniteSplitEtaleHypercover (D.obj j) r),
+      Ui.IsBaseChange (c.π.app j) U := by
+  obtain ⟨i, ⟨S⟩⟩ := exists_hypercoverStageData D U hc
+  obtain ⟨j, h, Hsplit, Hsurj⟩ := ((S.stageEventually_splitting hc).and
+    (StageEventually.finite_forall fun n ↦ S.stageEventually_surjective hc n)).exists_hom
+  exact ⟨j, S.toHypercover h Hsplit Hsurj, S.isBaseChange_toHypercover h Hsplit Hsurj⟩
 
 end AlgebraicGeometry

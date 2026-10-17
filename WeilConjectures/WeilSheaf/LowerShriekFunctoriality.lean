@@ -26,9 +26,10 @@ the Deligne–Laumon reduction (`sec-deligne-laumon-general`) uses:
 - *base change* (clause 4): `h^* Rf₀! ≅ Rf'₀! g^*` for a cartesian square;
 
 as well as the open–closed triangle `j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶` of a Weil complex
-(`prop-sf-open-closed-triangle-all-stages`). These belong to the six-functor chapter and are
-stated here with `sorry`, each with the blueprint statement it renders. The identification of
-`Rf₀!` with `Rf₀*` for proper `f` is proved here.
+(`prop-sf-open-closed-triangle-all-stages`). The clauses of `prop-functor-package` belong to the
+six-functor chapter and are stated here with `sorry`, each with the blueprint statement it
+renders. The identification of `Rf₀!` with `Rf₀*` for proper `f` and the open–closed triangle
+are proved here.
 
 ## Main statements
 
@@ -124,6 +125,8 @@ theorem nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion (j : U ⟶ 
       WeilSheaf.toComplex.obj ((WeilSheaf.extensionByZero j).obj G)) :=
   sorry
 
+set_option maxHeartbeats 1000000 in
+-- the vertices of the triangle are identified through the chosen compactification of `j`
 /-- **The open–closed triangle** (blueprint: `prop-sf-open-closed-triangle-all-stages`): for a
 quasi-compact open immersion `j : U ⟶ X` with closed complement `i : Z ⟶ X` and a Weil complex `K`
 on `X`, the open counit and the closed unit extend to a distinguished triangle of Weil complexes
@@ -131,7 +134,14 @@ on `X`, the open counit and the closed unit extend to a distinguished triangle o
 
 This is a weakening of the blueprint node: the vertices of the triangle are only identified up
 to some isomorphism, and the first two arrows are not asserted to be the canonical counit and
-unit. -/
+unit.
+
+The direct image with compact support `Rj₀! = Rḡ_* ā_!` is computed on the chosen
+compactification `U ⟶[a] W ⟶[g] X` of `j`; it is the extension by zero `j_!`
+(`AlgebraicGeometry.ProEtaleWeilSheaf.nonempty_rightDerivedLowerStar_extensionByZero_iso`, by
+proper base change), and the triangle is the open–closed triangle of pro-étale Weil sheaves
+(`AlgebraicGeometry.ProEtaleWeilSheaf.exists_distTriang_openClosed`), whose vertices are Weil
+complexes. -/
 theorem exists_distTriang_openClosed (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
     [j.IsOver (Spec (CommRingCat.of k₀))] (i : Z ⟶ X) [IsClosedImmersion i]
     [i.IsOver (Spec (CommRingCat.of k₀))] (hij : IsCompl (Set.range j.base) (Set.range i.base))

@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentAux
+public import WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentObjects
 
 /-!
 # Blueprint statements
@@ -33,7 +33,9 @@ theorem finite_hypercover_descent_objects
           ∀ (j : Iᵒᵖ) (h : j ⟶ i) (n : Fin (r + 1)),
             Surjective ((Over.pullback (D.map h)).map
               ((Scheme.Etale.forget (D.obj i)).map (Ui.matchingMap n))).left := by
-  sorry
+  intro r U
+  obtain ⟨i, Ui, hUi⟩ := exists_truncatedFiniteSplitEtaleHypercover_isBaseChange hc U
+  exact ⟨i, Ui, hUi, fun j h n ↦ surjective_overPullback_map_left _ _ (Ui.matching_cover n)⟩
 
 /-- Blueprint: lemma-weil-pbc-finite-hypercover-descent-morphisms. -/
 theorem finite_hypercover_descent_morphisms

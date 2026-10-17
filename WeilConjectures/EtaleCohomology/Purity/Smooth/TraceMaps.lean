@@ -138,7 +138,7 @@ theorem nonempty_iso_rightDerivedLowerShriek_twistShift_affineSpace_succ (d : �
     ((twistShift Λ _ 1).obj (constantComplex Λ 𝔸(ULift.{u} (Fin 1); 𝔸(ULift.{u} (Fin d); S))))
   exact ⟨heq.app _ ≪≫ c₁.app _ ≪≫ (R(q ≫ p)_![A]).mapIso t₀ ≪≫ c₂.app _ ≪≫
     (R(p)_![A]).mapIso ((R(q)_![A]).mapIso
-      ((twistShift Λ _ _).mapIso (eqToIso (by push_cast; rfl)) ≪≫
+      (eqToIso (by rw [show ((d + 1 : ℕ) : ℤ) = 1 + d by push_cast; ring]) ≪≫
         (twistShiftTwistShiftIso Λ _ 1 d _).symm) ≪≫ t₁)⟩
 
 /-- The input of the traces over every base: a decomposition of the cohomology of the

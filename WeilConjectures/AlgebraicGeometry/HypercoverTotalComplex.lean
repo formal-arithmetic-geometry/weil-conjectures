@@ -162,7 +162,7 @@ noncomputable def totComplex : CochainComplex A ℕ :=
   CochainComplex.of (U.totObj L) (U.totD L) (U.totD_totD L)
 
 lemma totComplex_d (n : ℕ) : (U.totComplex L).d n (n + 1) = U.totD L n :=
-  CochainComplex.of_d _ _ _ n
+  CochainComplex.of_d _ _ n
 
 /-- The complex of global sections `Γ(X, L)`, computed as sections over the final object. -/
 noncomputable abbrev gammaComplex : CochainComplex A ℕ :=
@@ -177,10 +177,15 @@ noncomputable abbrev resTop (G : Sheaf X.smallEtaleTopology A) (p : ℕ) :
     G.obj.obj (op (⊤_ X.Etale)) ⟶ G.obj.obj (op (U.simplicial _⦋p⦌)) :=
   G.obj.map (terminal.from (U.simplicial _⦋p⦌)).op
 
+lemma secComplex_d (G : Sheaf X.smallEtaleTopology A) (n : ℕ) :
+    (U.secComplex G).d n (n + 1) =
+      AlgebraicTopology.AlternatingCofaceMapComplex.objD (U.simplicial.rightOp ⋙ G.obj) n := by
+  simp [secComplex, AlgebraicTopology.alternatingCofaceMapComplex,
+    AlgebraicTopology.AlternatingCofaceMapComplex.obj]
+
 lemma resTop_d (G : Sheaf X.smallEtaleTopology A) :
     U.resTop G 0 ≫ (U.secComplex G).d 0 1 = 0 := by
-  rw [show (U.secComplex G).d 0 1 = AlgebraicTopology.AlternatingCofaceMapComplex.objD
-    (U.simplicial.rightOp ⋙ G.obj) 0 from CochainComplex.of_d _ _ _ 0]
+  rw [U.secComplex_d G 0]
   rw [AlgebraicTopology.AlternatingCofaceMapComplex.objD, Fin.sum_univ_two]
   simp only [Fin.val_zero, pow_zero, one_smul, Fin.val_one, pow_one, neg_smul,
     Preadditive.comp_add, Preadditive.comp_neg, CosimplicialObject.δ, Functor.comp_map,
@@ -197,7 +202,7 @@ noncomputable def totAug : gammaComplex L ⟶ U.totComplex L :=
       rw [show U.resTop (L.X n) 0 ≫ U.dHor L 0 n = 0 from U.resTop_d (L.X n), zero_comp,
         zero_add]
       congr 1
-      exact ((L.d n (n + 1)).hom.naturality _).symm)
+      exact (L.d n (n + 1)).hom.naturality _)
 
 variable {L} in
 /-- The map `C(U, F) ⟶ Tot(U, L)` along the row `r = 0`, for `ι : F ⟶ L^0` killed by `d`. -/
@@ -215,6 +220,6 @@ noncomputable def totRow {F : Sheaf X.smallEtaleTopology A} (ι : F ⟶ L.X 0)
         zero_comp, smul_zero, add_zero]
       congr 1
       exact ((AlgebraicTopology.alternatingCofaceMapComplex A).map
-        (Functor.whiskerLeft U.simplicial.rightOp ι.hom)).comm n (n + 1) |>.symm)
+        (Functor.whiskerLeft U.simplicial.rightOp ι.hom)).comm n (n + 1))
 
 end AlgebraicGeometry.SplitEtaleHypercover

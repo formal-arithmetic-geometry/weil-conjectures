@@ -557,7 +557,8 @@ theorem exists_smoothPurityIso_baseChange_comp [HasTateTwist.IsNormalized Λ] {k
               (dualizingComplex (ModuleCat.{u + 1} Λ) f)))) := by
   obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f aY
   refine ⟨θ, fun K _ ↦ ⟨smoothPurityIso Λ f K θ (smoothTensorIso Λ (d := d) f K), rfl⟩,
-    fun {X' Y' g' f' v} sq _ ↦ ?_, fun g _ _ _ _ _ ↦ nonempty_iso_dualizingComplex_comp Λ f aY g⟩
+    fun {X' Y' g' f' v} sq _ ↦ ?_, fun {W e} g _ _ _ _ _ ↦
+      nonempty_iso_dualizingComplex_comp Λ (d := d) f aY (e := e) g⟩
   obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek Λ (d := d) f sq
   obtain ⟨ι⟩ := nonempty_iso_leftDerivedUpperStar_unit (ModuleCat.{u + 1} Λ) v
   exact ⟨e.app (𝟙_ _) ≪≫ (rightDerivedUpperShriek _ f').mapIso ι⟩

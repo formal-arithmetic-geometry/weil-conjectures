@@ -47,7 +47,6 @@ section Flat
 
 variable {X : Scheme.{u}}
 
-attribute [local instance] Sheaf.symmetricCategory
 
 /-- **Tensoring with a lisse sheaf preserves monomorphisms**: after pullback along a member `g`
 of a pro-étale cover trivialising `F`, it becomes tensoring with `ℚ̄_ℓⁿ`. -/
@@ -114,6 +113,8 @@ noncomputable def singleIsoMapDerivedCategoryTensorLeftSingleRegular :
   (DerivedCategory.singleFunctor (AdicSheaf l S) 0).mapIso
       (Mod.tensorLeftObjRegularIso L).symm ≪≫
     ((Mod.tensorLeft L).mapDerivedCategorySingleFunctor 0).symm.app _
+
+variable [PreservesFiniteColimits (i)_*ᵃ[l]]
 
 include hL in
 /-- Blueprint `det-lem-formal-closed-support-stratum-hom`: **morphisms out of an extension by zero
