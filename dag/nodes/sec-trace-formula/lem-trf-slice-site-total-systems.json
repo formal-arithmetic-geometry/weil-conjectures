@@ -2,7 +2,7 @@
  "id": "lem-trf-slice-site-total-systems",
  "kind": "statement",
  "title": "Compatible systems describe sheaves on the coherent total site",
- "statement": "Let $I$ be a small category, let $(\\mathcal C_i,u_\\alpha)$ be the coherent contravariant pseudofunctor of sites and let $\\mathcal C_{\\mathrm{tot}}$ be the generated-topology total site of [lem-trf-slice-site-total-pseudofunctor]. For each $\\alpha:i\\to j$, write $f_\\alpha:\\mathrm{Sh}(\\mathcal C_i)\\to\\mathrm{Sh}(\\mathcal C_j)$ for the geometric morphism induced by $u_\\alpha$. Then $\\mathrm{Sh}(\\mathcal C_{\\mathrm{tot}})$ is equivalent to the category of systems $(F_i,t_\\alpha)$ consisting of a sheaf $F_i$ on each $\\mathcal C_i$ and transition maps $t_\\alpha:f_\\alpha^{-1}F_j\\to F_i$ satisfying $t_{\\mathrm{id}}$ and the composition cocycle after inserting the unitors and compositors. Under this equivalence, restriction to a fibre is $F\\mapsto F_i$, and a morphism of systems is a family of component maps commuting with every $t_\\alpha$.",
+ "statement": "Let $I$ be a small category, let $(\\mathcal C_i,u_\\alpha)$ be the coherent contravariant pseudofunctor of sites and let $\\mathcal C_{\\mathrm{tot}}$ be the generated-topology total site of [lem-trf-slice-site-total-pseudofunctor]. Assume moreover that every $u_\\alpha$ defines a morphism of sites, that is, its left adjoint on sheaves of sets preserves finite limits. For each $\\alpha:i\\to j$, write $f_\\alpha:\\mathrm{Sh}(\\mathcal C_i)\\to\\mathrm{Sh}(\\mathcal C_j)$ for the geometric morphism induced by $u_\\alpha$. Then $\\mathrm{Sh}(\\mathcal C_{\\mathrm{tot}})$ is equivalent to the category of systems $(F_i,t_\\alpha)$ consisting of a sheaf $F_i$ on each $\\mathcal C_i$ and transition maps $t_\\alpha:f_\\alpha^{-1}F_j\\to F_i$ satisfying $t_{\\mathrm{id}}$ and the composition cocycle after inserting the unitors and compositors. Under this equivalence, restriction to a fibre is $F\\mapsto F_i$, and a morphism of systems is a family of component maps commuting with every $t_\\alpha$. The unitors and compositors of the inverse-image functors are the canonical adjunction-compatible comparisons induced by those of the $u_\\alpha$. The transition maps $t_\\alpha$ are not required to be isomorphisms.",
  "source": {
   "document": "literature/stacks-project/spaces-simplicial.tex",
   "place": "Tag 09WF, lemma-describe-sheaves-simplicial-site-site (the compatible-family description); coherence follows from Tag 09WC Case A"
@@ -12,9 +12,112 @@
   "def-weil-pbc-sites-and-cohomology",
   "lem-trf-slice-site-total-pseudofunctor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $e_i:u_{\\mathrm{id}_i}\\xrightarrow{\\sim}\\mathrm{id}$ and $c_{\\alpha,\\beta}:u_\\alpha u_\\beta\\xrightarrow{\\sim}u_{\\beta\\alpha}$ for the supplied coherence maps. Put $R_\\alpha F=F\\circ u_\\alpha$ and $L_\\alpha=(u_\\alpha)_s$. Continuity gives a sheaf $R_\\alpha F$, and the sheaf adjunction gives $L_\\alpha\\dashv R_\\alpha$. The compositor induces $d_{\\alpha,\\beta}:R_{\\beta\\alpha}\\xrightarrow{\\sim}R_\\beta R_\\alpha$, whose value at $F,V$ is $F(c_{\\alpha,\\beta,V})$; the unit gives $r_i:\\mathrm{id}\\xrightarrow{\\sim}R_{\\mathrm{id}_i}$, with value $F(e_{i,V})$. These satisfy coherence because $e,c$ do and $F$ is contravariant. The conjugate-isomorphism lemma applied to the composite adjunction gives the unit-compatible comparison $a_{\\alpha,\\beta}:L_\\alpha L_\\beta\\xrightarrow{\\sim}L_{\\beta\\alpha}$; comparing $L_{\\mathrm{id}}\\dashv R_{\\mathrm{id}}$ with the identity adjunction gives $l_i:L_{\\mathrm{id}_i}\\xrightarrow{\\sim}\\mathrm{id}$. The adjoint-composition coherence lemma supplies the associativity of $a$ from that of $d$; the two unit laws follow by the same uniqueness applied to a composite with the identity adjunction. Thus these are the specified inverse-image comparisons, without strictifying the diagram.",
+   "uses": [
+    "lem-trf-slice-site-total-pseudofunctor",
+    "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-trf-adjoint-composition-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 09WF, lemma-describe-sheaves-simplicial-site-site and its preceding discussion, Case A; with Tag 09WC, lemma-simplicial-site-site."
+   }
+  },
+  {
+   "text": "Transpose $t_\\alpha:L_\\alpha F_j\\to F_i$ under the sheaf adjunction to $s_\\alpha:F_j\\to R_\\alpha F_i$. With $\\gamma=\\beta\\alpha$, the transition cocycle $t_\\gamma a_{\\alpha,\\beta}=t_\\alpha L_\\alpha(t_\\beta)$ is equivalent to\n$$d_{\\alpha,\\beta,F_i}s_\\gamma=R_\\beta(s_\\alpha)s_\\beta.$$\nIndeed the composite-adjunction Hom bijection sends the right side of the first equality to $R_\\beta(s_\\alpha)s_\\beta$, using naturality of the first Hom bijection in $F_j$; the unit equation defining $a$ sends its left side to $d_{\\alpha,\\beta,F_i}s_\\gamma$. Both Hom bijections are injective, so this proves the equivalence in both directions. Similarly $t_{\\mathrm{id}_i}=l_{i,F_i}$ corresponds to $s_{\\mathrm{id}_i}=r_{i,F_i}$. Naturality of the Hom bijection also says that a family $h_i:F_i\\to G_i$ commutes with the $t$ maps exactly when $R_\\alpha(h_i)s^F_\\alpha=s^G_\\alpha h_j$. Hence it suffices to construct the equivalence with systems in the $s$ form.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 09WF, lemma-describe-sheaves-simplicial-site-site and its preceding discussion, Case A; with Tag 09WC, lemma-simplicial-site-site."
+   }
+  },
+  {
+   "text": "For a sheaf $F$ on the total site define $F_i(U)=F(i,U)$, restricting along the vertical embedding. A vertical arrow associated to $v:U\\to V$ is represented by $(\\mathrm{id}_i,e_{i,V}^{-1}v)$. Its composition law is the ordinary fibre composition by the unitor laws. A matching family on a fibre covering extends to its generated total sieve: at an arrow factoring through one covering member, restrict that member's section; independence follows by the total pullback of two covering members, which is their fibre pullback by the total-site lemma. The total sheaf condition gives a unique amalgamation, so $F_i$ is a sheaf. Covering sieves generated by vertical families are covering by the definition of the generated topology; the general precoverage criterion also applies with the identity pullback. This uses only covering pullbacks, not arbitrary fibre products in $I$ or in the total category.",
+   "uses": [
+    "lem-trf-slice-site-total-pseudofunctor",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-trf-generated-precoverage-sheaf-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 09WF, lemma-describe-sheaves-simplicial-site-site and its preceding discussion, Case A; with Tag 09WC, lemma-simplicial-site-site."
+   }
+  },
+  {
+   "text": "For $V\\in\\mathcal C_j$ let $k_{\\alpha,V}:(i,u_\\alpha V)\\to(j,V)$ be the arrow $(\\alpha,\\mathrm{id})$. Set $s_{\\alpha,V}=F(k_{\\alpha,V})$. For $v:V\\to W$ the equality of total arrows $k_{\\alpha,W}\\circ\\iota_i(u_\\alpha v)=\\iota_j(v)\\circ k_{\\alpha,V}$ proves naturality, so $s_\\alpha:F_j\\to R_\\alpha F_i$. The composition formula in the total category gives\n$$k_{\\beta,W}k_{\\alpha,u_\\beta W}=k_{\\beta\\alpha,W}\\,\\iota_i(c_{\\alpha,\\beta,W}).$$\nContravariance of $F$ therefore yields $R_\\beta(s_\\alpha)s_\\beta=d_{\\alpha,\\beta,F_i}s_{\\beta\\alpha}$. Also $k_{\\mathrm{id}_i,V}=\\iota_i(e_{i,V})$, so $s_{\\mathrm{id}_i,V}=F_i(e_{i,V})$. This is precisely the identity and composition law in step 2. All vertical embeddings here include the unitor; none is treated as a strict identity.",
+   "uses": [
+    "lem-trf-slice-site-total-pseudofunctor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 09WF, lemma-describe-sheaves-simplicial-site-site and its preceding discussion, Case A; with Tag 09WC, lemma-simplicial-site-site."
+   }
+  },
+  {
+   "text": "Conversely take a system in $s$ form and define a presheaf by $P(i,U)=F_i(U)$ and\n$$P(\\alpha,f)=F_i(f)\\,s_{\\alpha,V}:F_j(V)\\to F_i(U)\\quad(f:U\\to u_\\alpha V).$$\nFor $(\\alpha,f):(i,U)\\to(j,V)$ and $(\\beta,g):(j,V)\\to(k,W)$, naturality and the $s$ cocycle give\n$$F_i(f)s_{\\alpha,V}F_j(g)s_{\\beta,W}=F_i(f)F_i(u_\\alpha g)s_{\\alpha,u_\\beta W}s_{\\beta,W}=F_i(c_{\\alpha,\\beta,W}u_\\alpha(g)f)s_{\\beta\\alpha,W}.$$\nThe last expression is $P$ of the composite arrow by the total-site formula. The identity arrow is $(\\mathrm{id}_i,e_{i,U}^{-1})$, and its image is $F_i(e_{i,U}^{-1})F_i(e_{i,U})=\\mathrm{id}$. Thus $P$ is a presheaf. For a vertical arrow $\\iota_i(v)$ the same cancellation gives $P(\\iota_i(v))=F_i(v)$, so its fibre restriction is exactly $F_i$.",
+   "uses": [
+    "lem-trf-slice-site-total-pseudofunctor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 09WF, lemma-describe-sheaves-simplicial-site-site and its preceding discussion, Case A; with Tag 09WC, lemma-simplicial-site-site."
+   }
+  },
+  {
+   "text": "Let $J$ be the precoverage whose presieves are the sets of arrows of vertical covering families. To apply the generated-precoverage criterion, fix such a family $\\{V_b\\to V\\}$ in $\\mathcal C_j$ and $q=(\\alpha,f):(i,U)\\to(j,V)$. Its pulled-back generated sieve $S=q^*\\langle V_b\\to V\\rangle$ is generated by the vertical covering family $B_b=U\\times_{u_\\alpha V}u_\\alpha V_b\\to U$ of the total-site lemma: an arrow belongs to $S$ exactly when it factors through one of these projections, by the pullback universal property. Given a matching family $x$ on $S$, its values on these projections agree on their fibre pairwise pullbacks. Glue them uniquely in the sheaf $F_i$ to $z\\in F_i(U)=P(i,U)$. For any arrow $a:(h,T)\\to(i,U)$ in $S$, pull the $B_b$ covering back along $a$. This is a vertical covering of $T$ in $\\mathcal C_h$. On each of its members the equality $P(a)z=x_a$ follows from the matching-family identity and the already known values on $B_b$. Separatedness of $F_h$ gives the equality on $T$. Uniqueness follows from the covering $B_b\\to U$. Thus every such pullback sieve has a unique amalgamation, and the cited criterion proves that $P$ is a sheaf for the generated total topology. Empty covering families are included: their unique matching family glues because the corresponding fibre sheaf has one section on that object.",
+   "uses": [
+    "lem-trf-slice-site-total-pseudofunctor",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-trf-generated-precoverage-sheaf-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 09WF, lemma-describe-sheaves-simplicial-site-site and its preceding discussion, Case A; with Tag 09WC, lemma-simplicial-site-site."
+   }
+  },
+  {
+   "text": "A component family $h_i:F_i\\to G_i$ satisfying the $s$-compatibility defines $h_{(i,U)}=h_i(U)$. Naturality for $(\\alpha,f)$ follows from\n$$h_i(U)F_i(f)s^F_{\\alpha,V}=G_i(f)h_i(u_\\alpha V)s^F_{\\alpha,V}=G_i(f)s^G_{\\alpha,V}h_j(V).$$\nConversely any natural transformation of total sheaves restricts to $h_i$, and naturality at $k_{\\alpha,V}$ gives this compatibility. Thus these operations are inverse on morphisms and preserve identities and composition. On objects, reconstructing from a total sheaf recovers all values and all restriction maps, since every $(\\alpha,f)$ factors as $k_{\\alpha,V}\\circ\\iota_i(f)$. Restricting a reconstructed sheaf recovers $F_i$ by step 5 and $s_\\alpha$ by evaluation at $(\\alpha,\\mathrm{id})$. The adjunction bijections in step 2 recover the original $t_\\alpha$. These identifications are natural by the same component formula, so the two functors are quasi-inverse and give the claimed equivalence, with the stated fibre restriction and morphisms.",
+   "uses": [
+    "lem-trf-slice-site-total-pseudofunctor",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 09WF, lemma-describe-sheaves-simplicial-site-site and its preceding discussion, Case A; with Tag 09WC, lemma-simplicial-site-site."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-trf-adjoint-composition-coherence",
+  "lem-trf-generated-precoverage-sheaf-criterion",
+  "lem-trf-slice-site-total-pseudofunctor",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-site-continuous-pushforward-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 09WF and the explicit construction in the preceding discussion, using Tag 09WC Case A; coherence supplied by the cited adjunction lemmas, and generated-topology passage by the cited Mathlib criterion."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,10 +174,45 @@
    "results": "{\"hits\": [\"CategoryTheory.Sheaf\", \"TopCat.Sheaf\", \"CategoryTheory.Sheaf.instCategorySheaf\", \"TopCat.Presheaf.toType_isSheaf\", \"CategoryTheory.Sheaf.instInhabitedHom\", \"TopCat.Sheaf.forget\", \"TopCat.Presheaf.IsSheaf\", \"CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi\"], \"note\": \"\", \"sub\": \"\", \"digest\": \"9c04609ae6d20cc0\"}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "total.site|Grothendieck.*sheaf|sheaf.*Grothendieck",
+   "results": "{\"t\": \"2026-10-17T20:38:35Z\", \"tool\": \"grep\", \"query\": \"total.site|Grothendieck.*sheaf|sheaf.*Grothendieck\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Topos/Sheaf.lean\", \"Mathlib/CategoryTheory/Topos/Sheaf.lean\", \"Mathlib/CategoryTheory/Topos/Sheaf.lean\", \"Mathlib/CategoryTheory/MorphismProperty/LocalEpi.lean\", \"Mathlib/CategoryTheory/Abelian/FreydMitchell.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean\"], \"digest\": \"94165fd8a7d87438\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: general sheaf, stack, slice-pseudofunctor or sheaf-adjunction results, not the total-site systems equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaves on a total category of sites correspond to families of sheaves and compatible transition maps",
+   "results": "{\"t\": \"2026-10-17T20:38:36Z\", \"tool\": \"leansearch\", \"query\": \"sheaves on a total category of sites correspond to families of sheaves and compatible transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf\", \"CategoryTheory.Presheaf.IsSheaf\", \"TopCat.Sheaf\", \"TopCat.Presheaf.IsSheaf\", \"CategoryTheory.Sheaf.instCategorySheaf\", \"TopCat.Sheaf.forget\", \"CategoryTheory.Sheaf.instInhabitedHom\", \"CategoryTheory.Sheaf.mk\"], \"digest\": \"7f2a22162798b600\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: general sheaf, stack, slice-pseudofunctor or sheaf-adjunction results, not the total-site systems equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafPullback, CategoryTheory.Sheaf",
+   "results": "{\"t\": \"2026-10-17T20:38:36Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.sheafPullback, CategoryTheory.Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullback\", \"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso\", \"CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_hom_app\", \"CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_inv_app\"], \"digest\": \"65f0261132e8c6c2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: general sheaf, stack, slice-pseudofunctor or sheaf-adjunction results, not the total-site systems equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaves on the Grothendieck total site of a pseudofunctor of sites are systems of sheaves with noninvertible transition maps",
+   "results": "{\"t\": \"2026-10-17T20:38:37Z\", \"tool\": \"leanfinder\", \"query\": \"sheaves on the Grothendieck total site of a pseudofunctor of sites are systems of sheaves with noninvertible transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_obj_α\", \"CategoryTheory.GrothendieckTopology.pseudofunctorOver\", \"CategoryTheory.Pseudofunctor.IsPrestack.isSheaf\", \"CategoryTheory.Pseudofunctor.sheafHom\", \"CategoryTheory.Pseudofunctor.isStackFor'\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.isSheafFor'\", \"CategoryTheory.Pseudofunctor.IsPrestack\"], \"digest\": \"91be07ce5394dd3e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: general sheaf, stack, slice-pseudofunctor or sheaf-adjunction results, not the total-site systems equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lax sections of sheaf categories equivalence sheaves on fibred total site",
+   "results": "{\"t\": \"2026-10-17T20:38:38Z\", \"tool\": \"leanfinder\", \"query\": \"lax sections of sheaf categories equivalence sheaves on fibred total site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.evalEquiv\", \"CategoryTheory.Sheaf.ΓNatIsoSheafSections\", \"CategoryTheory.typeEquiv\", \"CategoryTheory.Sheaf.ΓNatIsoSectionsFunctor\", \"CategoryTheory.GrothendieckTopology.Point.presheafToSheafCompSheafFiber\", \"CategoryTheory.sheafSectionsNatIsoEvaluation\", \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor\", \"CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply\"], \"digest\": \"5c9062e6e6b7212d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: general sheaf, stack, slice-pseudofunctor or sheaf-adjunction results, not the total-site systems equivalence"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-slice-site-simplicial-augmentation",
@@ -86,7 +224,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Stacks 09WF, lemma-describe-sheaves-simplicial-site-site: sheaves on the total site are compatible systems of component sheaves with transition isomorphisms",
+   "place": "Normal-cone specialization / proper-hypercover comparison through the recorded ancestry; coherent slice total site, Stacks 09WF discussion: systems with arbitrary transition maps (not transition isomorphisms).",
    "via": [
     "lem-trf-slice-site-simplicial-augmentation",
     "lem-trf-simplicial-ph-etale-square",
@@ -100,5 +238,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-slice-site-total-systems",
+  "worker": "stage1",
+  "summary": "Constructed the equivalence explicitly using direct-image adjoint transitions, calculated the coherent cocycle and arbitrary-arrow restrictions, and proved the sheaf condition on every pullback of a generating sieve. Added only the general Mathlib precoverage criterion; reused the existing adjunction and non-strict coherence leaves. STATEMENT-DISPUTED: continuity alone does not induce a geometric morphism; made the missing morphism-of-sites condition explicit, exactly as in Stacks Case A.",
+  "blueprint": "The proper-hypercover/total-site comparison below the normal-cone specialization in lem-trf-local-term-locality, via the existing ancestry; realizes the compatible-system identification needed in lem-trf-slice-site-simplicial-augmentation. No chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "why": "Generic continuity-to-sheaf theorem needed for each transition; the unit has no replacement and no route step is changed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-continuous-pushforward-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q90-326a258f4",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q90-326a258f4 (reviewer sub-agent of L); spot-checked: Read the full item, new Mathlib leaf, cited nodes, Stacks 09WC/09WF and supporting source locations, unit/chapter route, and delivery instructions. Verified all seven proof steps, hypotheses, coherence maps, arbitrary transition maps, generated-topology sheaf criterion, edge cases, duplicate searches, route lock, and absence of forbidden machinery or batch-5 violations. Wrote review.md; no repairs required."
  }
 }

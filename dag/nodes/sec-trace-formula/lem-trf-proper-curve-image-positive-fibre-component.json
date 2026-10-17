@@ -18,9 +18,82 @@
   "def-pc-scheme-fibre",
   "def-weil-closed-points"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $G_y$ is a finite-type scheme over the field $\\kappa(y)$, it is Noetherian and has finitely many irreducible components. The hypothesis $\\dim G_y>0$ therefore gives an irreducible component $W\\subseteq G_y$ of positive dimension. Let $\\eta$ be the generic point of $W$ and choose a strict specialization $z$ of $\\eta$ in $W$; thus $\\eta\\leadsto z$ is a chain of length one and $p(z)=y$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-noetherian-finite-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2L, lemma-dimension-fibres-locally-algebraic, preliminary fibre and component facts"
+   }
+  },
+  {
+   "text": "The positive-dimensional fibre makes $G$ nonempty, and surjectivity of $r$ then makes $T$ nonempty. The finite-type scheme $T$ is Noetherian, and its dimension is the maximum of the dimensions of its finitely many irreducible components; hence $\\dim T=1$. Apply the image-dimension inequality in [lem-zl-finite-type-fibre-image-dimension-bounds] to $r:T\\to G$ to obtain $\\dim\\overline{r(T)}\\leq1$. The image $r(T)$ is closed because $r$ is proper, and it equals $G$ because $r$ is surjective. Consequently $\\dim G\\leq1$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-zl-finite-type-fibre-image-dimension-bounds",
+    "lem-weil-pbc-proper-closed-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2L, dimension/image argument; properness gives closed image"
+   }
+  },
+  {
+   "text": "We claim that $y$ is closed. If it were not, choose a strict specialization $y_0$ of $y$ in $Y$. Let $C=\\overline{\\{z\\}}\\subseteq G$ with its reduced closed-subscheme structure. The composite $C\\hookrightarrow G\\xrightarrow{p}Y$ is proper by [lem-weil-pbc-proper-fp-permanence](a),(c), so its image is closed by [lem-weil-pbc-proper-closed-image]. This image contains $y$ and therefore contains $y_0$. Choose $z_0\\in C$ with $p(z_0)=y_0$. Then $\\eta\\leadsto z\\leadsto z_0$ is a strict chain of specializations in $G$, contradicting $\\dim G\\leq1$. Thus $y$ is closed.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-proper-closed-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2L, component/dimension argument, with proper closed-image specialization"
+   }
+  },
+  {
+   "text": "Since $y$ is closed, $G_y$ is a closed subscheme of $G$, and its irreducible component $W$ is closed in $G$. Surjectivity of $r$ gives $x\\in T$ with $r(x)=\\eta$. Let $Z$ be an irreducible component of $T$ containing $x$, with its reduced induced closed-subscheme structure. The image $C=r(Z)$ is closed and irreducible, contains $W$, and satisfies $\\dim C\\leq\\dim Z=1$ by the same image-dimension inequality. Since $W$ has positive dimension and is contained in $C$, it has dimension one; if $C$ strictly contains $W$, the generic point of $C$ followed by $\\eta$ and then by a strict specialization in $W$ would give a chain of length two, again impossible. Hence $C=W$.",
+   "uses": [
+    "lem-trf-closed-point-residue-immersion",
+    "lem-zl-finite-type-fibre-image-dimension-bounds",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-proper-closed-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2L, component/dimension count on the proper image of a curve"
+   }
+  },
+  {
+   "text": "Finally $p(r(Z))=p(W)=\\{y\\}$ because $W\\subseteq G_y$. Therefore the irreducible component $Z$ of $T$ satisfies $(p\\circ r)(Z)=\\{y\\}$ and $\\dim r(Z)=\\dim W=1$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2L, component/dimension conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-trf-closed-point-residue-immersion",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-zl-finite-type-fibre-image-dimension-bounds"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2L, lemma-dimension-fibres-locally-algebraic, together with the proper closed-image and specialization argument; the statement is the extracted component/dimension consequence for a proper image of a pure one-dimensional finite-type scheme."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -80,7 +153,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-component-factorization",
@@ -94,6 +167,7 @@
    "node": "lem-trf-local-term-locality",
    "place": "Historical semistable-alteration input in proof (1)--(2): component/dimension count on a fibre of the generic graph closure in the common-model factorization argument.",
    "via": [
+    "lem-trf-proper-curve-image-positive-fibre-component",
     "lem-trf-valuation-component-factorization",
     "lem-trf-valuation-semistable-dominates-stable",
     "lem-trf-stable-modification-uniqueness-normal",
@@ -109,5 +183,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-proper-curve-image-positive-fibre-component",
+  "worker": "stage1",
+  "summary": "Split the imported component/dimension consequence without creating a duplicate helper. The proof first extracts a positive-dimensional fibre component, bounds the total image dimension by the existing finite-type image-dimension lemma, uses a proper closed-image specialization chain to show the base point is closed, and then lifts the fibre generic point through the proper surjection and identifies the resulting curve component image. The statement and hypotheses are unchanged.",
+  "blueprint": "Realizes the historical component/dimension count used in the common-model factorization argument in the ancestor lem-trf-local-term-locality proof, specifically the fibre component step of the semistable-alteration branch.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-finite-type-fibre-image-dimension-bounds",
+    "why": "Generic finite-type scheme image-dimension inequality used to bound the image of the one-dimensional source; the sk-i-curve-zero route has no replacement for this general dimension theorem."
+   },
+   {
+    "node": "lem-trf-closed-point-residue-immersion",
+    "why": "The generic scheme-theoretic fact that a closed point gives a closed residue-field immersion is used to make G_y a closed subscheme; the curve-zero unit has no replacement for this general scheme lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-finite-type-fibre-image-dimension-bounds",
+  "lem-trf-closed-point-residue-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q83-218d64548",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q83-218d64548 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, unit/chapter route, and cited sources. All five steps are valid after explicitly deriving T≠∅ before dim T=1. Corrected whole JSON and concrete checks are in fixes/ and review.md. No new nodes, cycle, dropped-route dependencies, or long steps; declared tool uses accepted.; 1 file(s) fixed by the reviewer"
  }
 }

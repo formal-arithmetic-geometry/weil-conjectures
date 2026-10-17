@@ -16,9 +16,132 @@
   "def-weil-pbc-essentially-finite-type-algebra",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First let $T\\ne0$ be a global complete intersection over $k$. Choose its presentation $T\\cong Q/(f_1,\\ldots,f_c)$, $Q=k[y_1,\\ldots,y_m]$, with $\\dim T=m-c$ from [def-weil-pbc-complete-intersection-over-field]. For a prime $\\mathfrak a$ of $T$, let $\\mathfrak b$ be its inverse image in $Q$. By [lem-weil-pbc-polynomial-ring-field-regular-ring], $Q_{\\mathfrak b}$ is regular local; it is essentially of finite type by [def-weil-pbc-essentially-finite-type-algebra]. By [lem-weil-pbc-global-complete-intersection-local-regular-sequence], the images $f_1/1,\\ldots,f_c/1$ form a regular sequence in $Q_{\\mathfrak b}$. They lie in its maximal ideal because $f_i\\in\\mathfrak b$. The map $Q_{\\mathfrak b}/(f_1,\\ldots,f_c)\\to T_{\\mathfrak a}$ sends the class of $r/s$ to $\\bar r/\\bar s$. It is bijective: lift numerator and denominator of a fraction in $T_{\\mathfrak a}$ to $Q$, and an element maps to zero exactly when some denominator outside $\\mathfrak b$ multiplies its numerator into $(f_1,\\ldots,f_c)$. Thus $T_{\\mathfrak a}$ is a quotient of a regular local $k$-algebra essentially of finite type by a finite regular sequence in its maximal ideal, and hence a complete-intersection local ring. The zero ring has no primes and contributes no local ring.",
+   "uses": [
+    "def-weil-pbc-complete-intersection-over-field",
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "lem-weil-pbc-global-complete-intersection-local-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00S9 (definition-lci-field), 00SB (lemma-lci-CM), 00SC (lemma-lci), last proof paragraph, and 00OQ (proposition-finite-gl-dim-polynomial-ring); this is the global-to-local direction used by 00SG."
+   }
+  },
+  {
+   "text": "Let $S$ be a finitely generated local-complete-intersection $k$-algebra and $\\mathfrak q$ a prime. The covering in [def-weil-pbc-complete-intersection-over-field] gives $h\\notin\\mathfrak q$ with $S_h$ global complete intersection. Put $\\mathfrak q_h=\\{a/h^j:a\\in\\mathfrak q\\}$. The canonical map $S_{\\mathfrak q}\\to(S_h)_{\\mathfrak q_h}$ is an isomorphism: its inverse sends $(a/h^i)/(b/h^j)$ to $ah^j/(h^ib)$, and the forward map sends $a/b$ to $(a/1)/(b/1)$. The fraction relations verify both composites are identities; the maps preserve $k$. Step 1 applied to $S_h$ proves that $S_{\\mathfrak q}$ is a complete-intersection local ring.",
+   "uses": [
+    "def-weil-pbc-complete-intersection-over-field",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00S9 and 00SG (lemma-lci-at-prime): direct use of the defining principal cover and iterated localization."
+   }
+  },
+  {
+   "text": "For the reverse direction at a fixed prime, let $S$ be any finitely generated $k$-algebra, $\\mathfrak q\\subset S$ a prime, and suppose $A=S_{\\mathfrak q}$ is isomorphic as a $k$-algebra to $R/(a_1,\\ldots,a_c)$, where $R$ is a regular local $k$-algebra essentially of finite type and $a_1,\\ldots,a_c$ is a finite regular sequence in its maximal ideal. Choose algebra generators $s_1,\\ldots,s_n$ of $S$. Evaluation gives a surjection $\\pi:P=k[x_1,\\ldots,x_n]\\to S$, with kernel $I$, and an isomorphism $P/I\\cong S$: evaluation on a polynomial class is well-defined, surjective by the generating property and injective by the definition of $I$. Put $\\mathfrak p=\\pi^{-1}(\\mathfrak q)$. The map $\\alpha:P_{\\mathfrak p}\\to A$, $r/t\\mapsto\\pi(r)/\\pi(t)$, is surjective, because numerator and denominator in $S_{\\mathfrak q}$ lift through $\\pi$, and a lifted denominator lies outside $\\mathfrak p$. Its kernel is $IP_{\\mathfrak p}$: $\\pi(r)/\\pi(t)=0$ precisely when some $s\\notin\\mathfrak q$ kills $\\pi(r)$; lifting $s$ gives $u\\notin\\mathfrak p$ with $ur\\in I$, hence $r/t=(ur)/(ut)\\in IP_{\\mathfrak p}$. The converse follows by applying $\\alpha$ to a generator of that ideal. The map is local since the inverse image of the maximal ideal $\\mathfrak qS_{\\mathfrak q}$ is $\\mathfrak pP_{\\mathfrak p}$. Both $P_{\\mathfrak p}$ and $A$ are essentially of finite type directly from the localization definition [def-weil-pbc-essentially-finite-type-algebra].",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SG, condition (4), polynomial presentation and the fraction calculation underlying lemma-lci-local (00SF)."
+   }
+  },
+  {
+   "text": "Continue with $P,I,S,\\mathfrak p,\\mathfrak q,A$ and $\\alpha$ from step 3. The polynomial regular-ring theorem [lem-weil-pbc-polynomial-ring-field-regular-ring] makes $P_{\\mathfrak p}$ regular local. The assumed local complete-intersection presentation of $A$ gives a regular local $k$-algebra $R$, essentially of finite type, and a surjective local $k$-algebra map $R\\to A$ whose kernel is generated by a finite regular sequence. Its kernel is proper since $A=S_{\\mathfrak q}$ is nonzero, so every element of this generating sequence lies in the maximal ideal of $R$. The two source rings $R$ and $P_{\\mathfrak p}$ and the common target $A$ meet every hypothesis of [lem-trf-essentially-finite-type-ci-kernel-invariance]. Applying it to these two surjections shows that $\\ker\\alpha=IP_{\\mathfrak p}$ is generated by a finite regular sequence in $P_{\\mathfrak p}$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-trf-essentially-finite-type-ci-kernel-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SF (lemma-lci-local), (1) implies (2), applied to the chosen polynomial-local presentation."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-lci-regular-sequence-global-complete-intersection] to $S=P/I$ using the regular-sequence generation of $IP_{\\mathfrak p}$ proved in step 4. Here $P$ is a finite-variable polynomial ring over the same field $k$, and $\\mathfrak p$ is exactly the inverse image of the prime $\\mathfrak q$ of $S$, as required. It gives $g\\in S\\setminus\\mathfrak q$ such that $S_g$ is a global complete intersection over $k$. Thus a complete-intersection local ring at any prime of a finitely generated algebra has a principal global-complete-intersection neighbourhood; this conclusion has been derived from the kernel calculation, rather than assumed as another criterion.",
+   "uses": [
+    "lem-weil-pbc-lci-regular-sequence-global-complete-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SC (lemma-lci), (5) implies (1), as used in Tag 00SG."
+   }
+  },
+  {
+   "text": "If every $S_{\\mathfrak q}$ is a complete-intersection local ring, steps 3--5 give a $g_{\\mathfrak q}\\notin\\mathfrak q$ for every prime $\\mathfrak q$ with $S_{g_{\\mathfrak q}}$ global complete intersection. The corresponding $D(g_{\\mathfrak q})$ cover $\\operatorname{Spec}S$, since $\\mathfrak q$ belongs to its own chosen open. This is precisely the definition of local complete intersection in [def-weil-pbc-complete-intersection-over-field]. Together with step 2 it proves the final algebra equivalence in the item. When $S=0$, there are no primes and the empty family covers the empty spectrum; the stipulated zero-ring convention gives the same conclusion.",
+   "uses": [
+    "def-weil-pbc-complete-intersection-over-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SH (lemma-lci-global), (1) equivalent to (2), with the principal-cover argument written out; no finite subcover is needed for the recorded definition."
+   }
+  },
+  {
+   "text": "For the scheme implication (1) implies (3), fix $x\\in X$ and choose a member $U=\\operatorname{Spec}S$ of the cover in (1) containing $x$. The coordinate algebra $S$ is finitely generated and a local complete intersection by that condition, so step 2 gives the complete-intersection property of $S_{\\mathfrak q}$ for the prime corresponding to $x$. By [lem-weil-pbc-affine-open-stalk-localization] this localization is $\\mathcal O_{X,x}$. The identification preserves $k$: it sends a fraction $r/s$ to $r_xs_x^{-1}$ and thus commutes with the structural map from $k$ to the section ring and then to its germs. Composing the regular-local quotient presentation with this $k$-algebra isomorphism proves (3).",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01UG (lemma-local-complete-intersection), (1) implies (3), using Algebra 00SH and the affine stalk identification."
+   }
+  },
+  {
+   "text": "For (3) implies (2), fix $x\\in X$. By the given local finite type hypothesis and [def-weil-finite-type-morphism], there is an affine open $U=\\operatorname{Spec}S$ containing $x$ with $S$ a finitely generated $k$-algebra: use the affine target $\\operatorname{Spec}k$ itself in that definition. By [lem-weil-pbc-affine-open-stalk-localization], its prime $\\mathfrak q$ at $x$ gives $S_{\\mathfrak q}\\cong\\mathcal O_{X,x}$ as $k$-algebras (the germ formula verifies the scalar compatibility as in step 7). Condition (3) therefore supplies the assumption of step 3. Steps 3--5 produce $g\\notin\\mathfrak q$ with $S_g$ global complete intersection. By [lem-weil-pbc-affine-open-section-vanishing-prime], $D_U(g)$ is an affine open of $X$ containing $x$, and its coordinate ring is $S_g$ through restriction of sections. This is a $k$-algebra identification, since the localization map extends the same structural map $k\\to S$. It is the neighbourhood required in (2).",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01UG (lemma-local-complete-intersection), (3) implies (2), using Algebra 00SG and Schemes Tags 01I3 (lemma-standard-open-affine) and 01HV (lemma-spec-sheaves)."
+   }
+  },
+  {
+   "text": "Finally (2) implies (1): the neighbourhoods in (2) cover $X$. A global-complete-intersection coordinate algebra $R$ is finitely generated and is also a local complete intersection by [def-weil-pbc-complete-intersection-over-field], taking the single element $1\\in R$ so that $D(1)=\\operatorname{Spec}R$ and $R_1\\cong R$. Thus these same neighbourhoods form the cover in (1). The three scheme conditions are equivalent by (1)$\\Rightarrow$(3)$\\Rightarrow$(2)$\\Rightarrow$(1). For $X=\\varnothing$, use the empty affine cover and the vacuous pointwise assertions; no zero ring is asserted to be a nonzero local ring.",
+   "uses": [
+    "def-weil-pbc-complete-intersection-over-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01UG (lemma-local-complete-intersection), (2) implies (1); Algebra Tag 00S9 including the zero-ring convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-complete-intersection-over-field",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+  "def-weil-pbc-localization-at-prime",
+  "lem-trf-essentially-finite-type-ci-kernel-invariance",
+  "lem-weil-pbc-lci-regular-sequence-global-complete-intersection",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-open-section-vanishing-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01UG (lemma-local-complete-intersection), expanded through Algebra Tags 00S9, 00SC, 00SF, 00SG and 00SH; the local-to-neighbourhood direction uses the polynomial-kernel form of 00SF and the existing 00SC node."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,10 +170,66 @@
    "results": "0 hits in Mathlib/AlgebraicGeometry.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CompleteIntersection|complete.intersection|IsLocalCompleteIntersection",
+   "results": "{\"t\": \"2026-10-17T20:40:47Z\", \"tool\": \"grep\", \"query\": \"CompleteIntersection|complete.intersection|IsLocalCompleteIntersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Presentation/Basic.lean\"], \"digest\": \"08e65e9beea7152f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits state smoothness, localization or finite type properties, not this complete-intersection criterion; the full-source grep hit is only a docstring on presentation dimension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CompleteIntersection\"",
+   "results": "{\"t\": \"2026-10-17T20:40:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"CompleteIntersection\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits state smoothness, localization or finite type properties, not this complete-intersection criterion; the full-source grep hit is only a docstring on presentation dimension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebra over a field is a local complete intersection if and only if all its local rings are complete intersections",
+   "results": "{\"t\": \"2026-10-17T20:40:48Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type algebra over a field is a local complete intersection if and only if all its local rings are complete intersections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsSmoothAt\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"Algebra.IsEtaleAt\"], \"digest\": \"c30c72d45385987a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits state smoothness, localization or finite type properties, not this complete-intersection criterion; the full-source grep hit is only a docstring on presentation dimension."
+  },
+  {
+   "tool": "grep",
+   "query": "CompleteIntersection|complete.intersection|regular.sequence|IsRegularLocalRing",
+   "results": "{\"t\": \"2026-10-17T20:41:19Z\", \"tool\": \"grep\", \"query\": \"CompleteIntersection|complete.intersection|regular.sequence|IsRegularLocalRing\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/Extension/Presentation/Basic.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\"], \"digest\": \"8e7af28cb97efccc\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern smooth presentations, finite generation of kernels, regular-sequence transport or localization; none states independence of regular-sequence kernels for two regular local presentations. The complete-intersection grep hit is a docstring on presentation dimension, not a theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Independence of regular local presentation for complete intersection local algebras essentially of finite type over a field",
+   "results": "{\"t\": \"2026-10-17T20:41:19Z\", \"tool\": \"leansearch\", \"query\": \"Independence of regular local presentation for complete intersection local algebras essentially of finite type over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FinitePresentation.iff_quotient_mvPolynomial'\", \"RingHom.finitePresentation_holdsForLocalizationAway\", \"Algebra.Smooth.finitePresentation\", \"Algebra.FinitePresentation.iff\", \"Algebra.Etale.finitePresentation\", \"Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway\", \"Algebra.FinitePresentation.of_span_eq_top_target\", \"IsLocalization.Away.finitePresentation\"], \"digest\": \"ae1808a068f9bcc0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern smooth presentations, finite generation of kernels, regular-sequence transport or localization; none states independence of regular-sequence kernels for two regular local presentations. The complete-intersection grep hit is a docstring on presentation dimension, not a theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, RingHom.ker",
+   "results": "{\"t\": \"2026-10-17T20:41:19Z\", \"tool\": \"loogle\", \"query\": \"IsRegularLocalRing, RingHom.ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern smooth presentations, finite generation of kernels, regular-sequence transport or localization; none states independence of regular-sequence kernels for two regular local presentations. The complete-intersection grep hit is a docstring on presentation dimension, not a theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two regular local algebras essentially of finite type over a field surjecting onto the same local algebra one kernel is generated by a regular sequence if and only if the other kernel is",
+   "results": "{\"t\": \"2026-10-17T20:41:28Z\", \"tool\": \"leanfinder\", \"query\": \"For two regular local algebras essentially of finite type over a field surjecting onto the same local algebra one kernel is generated by a regular sequence if and only if the other kernel is\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.ker_map_of_surjective\", \"RingTheory.Sequence.isWeaklyRegular_map_algebraMap_iff\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange\", \"Algebra.FinitePresentation.ker_fG_of_surjective\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\"], \"digest\": \"39f7f88e12635c7d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern smooth presentations, finite generation of kernels, regular-sequence transport or localization; none states independence of regular-sequence kernels for two regular local presentations. The complete-intersection grep hit is a docstring on presentation dimension, not a theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The property that the kernel of a surjective map from a regular local ring is generated by a regular sequence is independent of the chosen regular local presentation for an essentially finite type field algebra",
+   "results": "{\"t\": \"2026-10-17T20:42:10Z\", \"tool\": \"leanfinder\", \"query\": \"The property that the kernel of a surjective map from a regular local ring is generated by a regular sequence is independent of the chosen regular local presentation for an essentially finite type field algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"Algebra.IsStandardSmooth.out\", \"Algebra.IsStandardSmooth\", \"Algebra.FinitePresentation.ker_fG_of_surjective\", \"Algebra.IsStandardSmooth.finitePresentation\", \"Algebra.IsStandardSmoothOfRelativeDimension\"], \"digest\": \"c3fad8864c78612a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern smooth presentations, finite generation of kernels, regular-sequence transport or localization; none states independence of regular-sequence kernels for two regular local presentations. The complete-intersection grep hit is a docstring on presentation dimension, not a theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-lci-affine-open-locality",
@@ -80,5 +259,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-lci-pointwise-criterion",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the algebra equivalence by global regular-sequence presentations and an explicit fixed polynomial-local kernel calculation, using a new statement-only 00SF presentation-independence lemma and the existing 00SC local regular-sequence to global-neighbourhood theorem. The scheme equivalence follows on affine charts, with actual stalk and principal-open section identifications. Empty schemes, zero rings, empty sequences and imperfect base fields are retained. All existing searches are preserved and current searches are logged.",
+  "blueprint": "Realizes the historical affine-local complete-intersection input recorded in blueprint.from.place below the nodal chart in lem-trf-local-term-locality: 01UG and 00SH. Steps 1--6 supply the algebraic content referenced by 01UG, and steps 7--9 pass to affine neighbourhoods without using the citer lem-trf-lci-affine-open-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "why": "Generic polynomial-local regularity, needed to witness the local complete-intersection presentation and to apply kernel invariance; no statement of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+    "why": "Generic 00SB/00SC regularity of the equations of a global complete intersection at a prime; no statement of this unit supplies this algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-lci-regular-sequence-global-complete-intersection",
+    "why": "Generic 00SC (5) implies (1), which spreads the regular-sequence kernel in a fixed polynomial presentation to a principal global-complete-intersection neighbourhood; no statement of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+  "lem-weil-pbc-lci-regular-sequence-global-complete-intersection"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q97-e1576574f",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q97-e1576574f (reviewer sub-agent of L); spot-checked: Read the item, new node, cited DAG statements, Stacks Tags 00S9, 00SC, 00SD, 00SF, 00SG, 00SH, and 01UG, plus the required guidance and report. All nine steps are mathematically supported with hypotheses checked; edge cases, duplicate candidates, route restrictions, and Mathlib searches were reviewed. No repairs are needed. Review written to review.md."
  }
 }
