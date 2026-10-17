@@ -18,9 +18,171 @@
   "def-coef-infinity-presheaf-yoneda",
   "lem-coef-space-transport-classification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $T=\\mathfrak C[D]$ and choose the particular replacement $A=T^{\\mathrm{top}}$: its objects are those of $T$ and $A(x,y)=\\operatorname{Sing}|T(x,y)|$, with composition and units defined by the product comparison in the space-category definition. The realization finite-limit theorem gives that product comparison; its naturality makes the unit $v:T\\to A$ enriched. Each mapping set is Kan: adjoint a horn to a map from its realized horn, extend using the retraction of the realized simplex onto the horn, and adjoint back. The realization-singular unit theorem makes each $v_{x,y}$ a weak equivalence. Since $v$ fixes objects, it is a Dwyer--Kan equivalence. This supplies an actual locally Kan presentation, with the same Sing-realization Hom pairing used in the definition of $j$.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-realization-finite-limits",
+    "lem-cbc-realization-singular-unit-weak",
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Sections 1.1.5 and 5.1.3, printed pp. 320-321; explicit Sing-realization replacement."
+   }
+  },
+  {
+   "text": "Let $C=N_{\\mathrm{hc}}A$ and let $r:D\\to C$ be adjunct to $v$. The coherent-nerve theorem makes $C$ a quasicategory and its Quillen-equivalence criterion makes $r$ a categorical equivalence: $D$ is Joyal cofibrant, $A$ is Bergner fibrant, and its adjunct $v$ is a weak equivalence. Here categorical equivalence can be used as a coherent functor equivalence. Indeed its testing property with target $D$ gives $q:C\\to D$ and an isomorphism $qr\\cong\\mathrm{id}_D$ in $h\\operatorname{Fun}(D,D)$. With target $C$, full faithfulness of restriction along $r$ lifts the resulting isomorphism $rqr\\cong r$ to $rq\\cong\\mathrm{id}_C$. The functor-category calculus and the characterization of invertible components by equivalence edges turn these into coherent natural equivalences. Fix one such $q$ and write $e:rq\\simeq\\mathrm{id}_C$. No equality $q(a)=a$ is assumed.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-joyal-model-structure",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1, printed p. 89; categorical-equivalence testing property and inverse construction."
+   }
+  },
+  {
+   "text": "Apply the simplicial projective-model calculus to $I=A^{\\mathrm{op}}$ and to Kan-model simplicial sets, which are combinatorial and simplicial by the presheaf-model input. It gives $\\mathsf M$ with objectwise weak equivalences and fibrations, objectwise tensors, mapping ends, and free diagram $L_a(K)=A(-,a)\\times K$ left adjoint to evaluation. Evaluation preserves fibrations and trivial fibrations because they are objectwise. Adjointing lifting squares therefore shows that $L_a$ preserves cofibrations. As $\\varnothing\\to\\Delta^0$ is a Kan-model cofibration, $Y_a=L_a(\\Delta^0)$ is projectively cofibrant. It is fibrant since every $A(x,a)$ is Kan. Thus $Y_a\\in B=\\mathsf M^{cf}$. The simplicial model axiom, applied to the initial map of a cofibrant object and terminal map of a fibrant object, makes every mapping complex in $B$ Kan. Postcomposition in $A$ defines the enriched functor $Y:A\\to B$, with its identity and composition laws inherited from $A$.",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Appendix A.3.3, Proposition A.3.3.2 and Remarks A.3.3.4-A.3.3.5, printed pp. 870-871; free diagram adjunction."
+   }
+  },
+  {
+   "text": "There is a canonical reflection identification $\\mathfrak C[D^{\\mathrm{op}}]\\cong\\mathfrak C[D]^{\\mathrm{op}}$. On a simplex, reverse the vertices by $i\\mapsto n-i$ and reflect every endpoint-containing subset. Reflection preserves inclusion and union, reverses the endpoints of a composite, and commutes with images under the reversed ordinal maps. It therefore descends through the simplex-colimit definition, with its inverse given by the same reflection. Compose it with $v^{\\mathrm{op}}$ to obtain $u:\\mathfrak C[D^{\\mathrm{op}}]\\to A^{\\mathrm{op}}$. It fixes objects and is locally a weak equivalence, hence is Dwyer--Kan. The same reflection identifies $N_{\\mathrm{hc}}(A^{\\mathrm{op}})$ with $C^{\\mathrm{op}}$, and the adjunct of $u$ is $r^{\\mathrm{op}}$.",
+   "uses": [
+    "lem-coef-enriched-diagram-rectification",
+    "def-coef-infinity-presheaf-yoneda"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 1.1.5 and Section 5.1.3, opposite and subset-poset conventions."
+   }
+  },
+  {
+   "text": "Apply enriched diagram rectification with $K=D^{\\mathrm{op}}$, indexing category $A^{\\mathrm{op}}$, map $u$, and value model category $\\mathrm{sSet}$. The previous steps verify smallness, the Dwyer--Kan hypothesis and the projective simplicial model structure. Its target is $\\operatorname{Fun}(D^{\\mathrm{op}},N_{\\mathrm{hc}}\\mathbf{Kan}_{\\mathcal U})=\\mathcal P(D)$, since every simplicial set is cofibrant and its bifibrant objects are exactly the Kan complexes. Denote this enriched-evaluation comparison by $\\Theta$. Rectification gives a categorical equivalence, hence a coherent equivalence by the inverse argument of step 2. On vertices evaluation is $\\Theta(P)(d)=P(r(d))$, with the action and higher simplices induced by enriched evaluation and $u$. The bifibrant localization theorem models the source mapping spaces by the enriched complexes in $B$; the functor-equivalence calculus makes the maps induced by $\\Theta$ equivalences on those mapping spaces. The comparison thus preserves mapping spaces and composition and identities up to their specified coherent comparisons, rather than asserting literal equality of two different simplicial models.",
+   "uses": [
+    "lem-coef-enriched-diagram-rectification",
+    "lem-coef-kan-quillen-right-proper",
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.4.4 and Remark 4.2.4.5, printed p. 258; Section 5.1.3, printed p. 320."
+   }
+  },
+  {
+   "text": "Write $G=\\Theta\\circ N_{\\mathrm{hc}}Y:C\\to\\mathcal P(D)$. The exponential transpose of $G r$ is the nerve of the enriched pairing $(x,y)\\mapsto A(x,y)$ restricted along $r^{\\mathrm{op}}\\times r$. On a pair of $n$-simplices $(s,t)$ of $D^{\\mathrm{op}}\\times D$ it has vertices $\\operatorname{Sing}|T(s(n-i),t(i))|$ and its action is precomposition on the reflected subset paths and postcomposition on the original subset paths, after the unit $v$. These are precisely the formulas defining $j$; the equality holds on every enriched mapping input, not only on vertices. Hence $G r\\simeq j$ coherently (indeed with these explicit choices their defining formulas agree). Whisker this comparison by $q$. Applying $G$ to $e:rq\\simeq\\mathrm{id}_C$ gives $j q\\simeq G r q\\simeq G$. Inverting gives the required natural equivalence $\\rho:G\\simeq j q$, simultaneously for the entire enriched representable diagram.",
+   "uses": [
+    "def-coef-infinity-presheaf-yoneda",
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-enriched-diagram-rectification",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 5.1.3, the Hom pairing and the factorization used in Proposition 5.1.3.1, printed pp. 319-320; explicit comparison of formulas."
+   }
+  },
+  {
+   "text": "Here is the identity-point check, including the necessary change of evaluation object. Restriction along $e_a:rq(a)\\simeq a$ identifies $P(a)$ with $P(rq(a))=\\Theta(P)(q(a))$. For $P=Y_a$, it carries $1_a$ to the edge $e_a\\in A(rq(a),a)$ under the coherent-nerve mapping comparison. The comparison $\\rho_a$ is the inverse of postcomposition by that same $e_a$, since it was obtained from $G(e_a)$. It therefore carries this point to the identity of $rq(a)$: postcomposition by $e_a$ takes that identity back to $e_a$, with the unit homotopy. Under $G r=j$ this identity is the unit image of the identity of $\\mathfrak C[D](q(a),q(a))$, which is exactly the distinguished identity point of $j(q(a))(q(a))$. Thus the pointed comparison is the one required in the statement. This calculation uses the same counit on both sides and requires no additional triangle normalization of the chosen inverse.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "def-coef-infinity-presheaf-yoneda",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 5.1.3, printed p. 320; identity and whiskering calculation in the explicit Hom model."
+   }
+  },
+  {
+   "text": "Put $C_B=N_{\\mathrm{hc}}B$, a quasicategory as $B$ is locally Kan (step 3); work in the containing universe. Apply the enriched-Hom/twisted-arrow comparison to $B$: the twisted-arrow left fibration $\\lambda:\\operatorname{Tw}(C_B)\\to C_B^{\\mathrm{op}}\\times C_B$ is equivalent over the base to the pullback of $r:W\\to\\mathcal S$ along the nerve $H_B$ of $\\underline{\\operatorname{Map}}_B(-,-)$, respecting pre- and postcomposition and identity points. By the universal-left-fibration identity that pullback represents $H_B$, so $\\lambda$ represents $H_B$. The restrictions at $e$ of $H_{\\mathcal E}$ of transport classification classify the target- and source-fixed arrow fibrations, coherently in $e$ and fixing identities; the twisted-arrow node identifies these with the fibers of $\\lambda_{\\mathcal E}$ over $\\mathcal E^{\\mathrm{op}}\\times\\{e\\}$ and $\\{e\\}\\times\\mathcal E$. Hence $\\lambda_{\\mathcal E}$ represents $H_{\\mathcal E}$, and transport classification gives $H_B\\simeq H_{C_B}$ as bifunctors. $\\operatorname{Tw}$ is strictly functorial: $\\operatorname{Tw}(\\Theta)$ is a map of left fibrations $\\operatorname{Tw}(C_B)\\to(\\Theta^{\\mathrm{op}}\\times\\Theta)^*\\operatorname{Tw}(\\mathcal P)$ over $C_B^{\\mathrm{op}}\\times C_B$ fixing identity arrows. By the mapping-space formula and pullback compatibility of transport it is a coherent transformation $H_{C_B}\\to H_{\\mathcal P}\\circ(\\Theta^{\\mathrm{op}}\\times\\Theta)$ with component at $(x,y)$ the map of mapping spaces induced by $\\Theta$. As $\\Theta$ is a functor equivalence (step 5), the functor calculus makes every component, hence the transformation, an equivalence. Restrict the first variable along $N_{\\mathrm{hc}}Y$ and precompose with $\\rho^{-1}$ from step 6. This gives on $C^{\\mathrm{op}}\\times C_B$ a coherent equivalence from the nerve of $(a,P)\\mapsto\\underline{\\operatorname{Map}}_{\\mathsf M}(Y_a,P)$ to $(a,P)\\mapsto H_{\\mathcal P}(j(q(a)),\\Theta P)$, as bifunctors, not merely valuewise.",
+   "uses": [
+    "lem-coef-enriched-hom-twisted-arrow-comparison",
+    "lem-coef-universal-left-fibration-identity",
+    "lem-coef-twisted-arrow-left-fibration",
+    "lem-coef-space-transport-classification",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 5.1.3 and the coherent mapping-bifunctor comparison; transport through the equivalence of Proposition 4.2.4.4."
+   }
+  },
+  {
+   "text": "The existing enriched Yoneda evaluation lemma gives the simplicial isomorphism $\\varepsilon_{a,P}:\\underline{\\operatorname{Map}}_{\\mathsf M}(Y_a,P)\\cong P(a)$, $\\alpha\\mapsto\\alpha_a(1_a)$, on $A^{\\mathrm{op}}\\times B$, with inverse $p\\mapsto(f\\mapsto P(f)(p))$. It is enriched natural on whole mapping complexes. The enriched-nerve transformation lemma therefore turns it into a coherent equivalence of the two nerve bifunctors. By enriched evaluation defining $\\Theta$ and the equivalence $e$, the second bifunctor is coherently equivalent to $(a,P)\\mapsto\\Theta(P)(q(a))$. This is evaluation on $D^{\\mathrm{op}}\\times\\mathcal P(D)$ restricted along $q$ and $\\Theta$. To check the square with step 8 and evaluation at the distinguished identity, use enriched naturality of $\\alpha$ on $e_a$: it gives $\\alpha_{rq(a)}(e_a)=P(e_a)(\\alpha_a(1_a))$, with the same simplicial parameters on both sides. Step 7 identifies $\\rho_a(e_a)$ with the distinguished identity. The square consequently commutes coherently. Faces, degeneracies, composition and units are preserved because the displayed enriched equation and the evaluation isomorphism hold on full simplicial mapping complexes and the nerve-transformation construction preserves restriction and whiskering.",
+   "uses": [
+    "lem-coef-enriched-yoneda-evaluation",
+    "lem-coef-enriched-nerve-transformation",
+    "lem-coef-enriched-diagram-rectification",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 5.1.3, enriched Yoneda evaluation and its naturality on mapping complexes; Proposition 4.2.4.4."
+   }
+  },
+  {
+   "text": "All object and simplex sets of $T$ and $A$ are $\\mathcal U$-small: the simplex colimit is indexed by the simplices of the small $D$, and the Sing-realization construction uses sets within that universe. Each value $P(a)$ is a $\\mathcal U$-small simplicial set by the definition of $\\mathsf M$. For $P,Q$, each degree of the enriched end computing $\\underline{\\operatorname{Map}}_{\\mathsf M}(P,Q)$ is a subset of a product, indexed by the $\\mathcal U$-small object set of $A$, of sets of maps $P(a)\\times\\Delta^n\\to Q(a)$. Thus it too is $\\mathcal U$-small. The whole set of these diagrams, their morphisms, their nerves, $\\mathcal S_{\\mathcal U}$, and the internal functor category are formed in $\\mathcal U'$. Rectification allows that containing-universe interpretation of the full model category. No smallness of the collection of all $\\mathcal U$-small spaces inside $\\mathcal U$ is asserted. The argument also covers $D=\\varnothing$: there are no representables or evaluation clauses, and both diagram categories have the unique empty diagram.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-enriched-diagram-rectification",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.4.4 with its full-chunk convention; universe and enriched-end size check."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-infinity-presheaf-yoneda",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-enriched-diagram-rectification",
+  "lem-coef-enriched-hom-twisted-arrow-comparison",
+  "lem-coef-enriched-nerve-transformation",
+  "lem-coef-enriched-yoneda-evaluation",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-space-transport-classification",
+  "lem-coef-twisted-arrow-left-fibration",
+  "lem-coef-universal-left-fibration-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Theorem 2.2.5.1, Proposition 4.2.4.4, Section 5.1.3 and Appendix A.3.3, read online; explicit assembly from the existing DAG inputs, including pointed and bifunctor compatibilities. HTT is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +211,45 @@
    "results": "{\"t\": \"2026-10-17T09:42:00Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.BifibrantObject, CategoryTheory.SimplicialNerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected returned definitions; Enriched/Basic.lean:539 is restricted to Type-enriched functors, Sites/Monoidal.lean:51 concerns ordinary diagrams on an ordinary category, and SimplicialNerve supplies the nerve construction without the stated enriched interval or presheaf comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "enrichedYoneda|enriched.*yoneda|rectification|projective.*model|Bergner",
+   "results": "{\"t\": \"2026-10-17T10:59:01Z\", \"tool\": \"grep\", \"query\": \"enrichedYoneda|enriched.*yoneda|rectification|projective.*model|Bergner\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Monoidal.lean\", \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\"], \"digest\": \"8f2903562fcc562e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned nerve and ordinary/Type-enriched Yoneda constructions do not state the simplicial projective rectification or coherent pointed bifunctor comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialNerve, HomotopicalAlgebra.BifibrantObject",
+   "results": "{\"t\": \"2026-10-17T10:59:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialNerve, HomotopicalAlgebra.BifibrantObject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned nerve and ordinary/Type-enriched Yoneda constructions do not state the simplicial projective rectification or coherent pointed bifunctor comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy coherent nerve of cofibrant fibrant simplicial enriched presheaves is equivalent to the infinity category of space valued presheaves, coherently on representables and evaluation",
+   "results": "{\"t\": \"2026-10-17T10:59:03Z\", \"tool\": \"leanfinder\", \"query\": \"The homotopy coherent nerve of cofibrant fibrant simplicial enriched presheaves is equivalent to the infinity category of space valued presheaves, coherently on representables and evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.nerveAdjunction\", \"SSet.OneTruncation₂.nerveEquiv\", \"SSet.Truncated.nerve₂Adj\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.SimplicialNerve\"], \"digest\": \"cb07f28b0d3fbbbc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned nerve and ordinary/Type-enriched Yoneda constructions do not state the simplicial projective rectification or coherent pointed bifunctor comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The simplicial enriched Yoneda embedding and the equivalence between enriched presheaves and coherent space valued functors preserve evaluation and identities",
+   "results": "{\"t\": \"2026-10-17T10:59:04Z\", \"tool\": \"leansearch\", \"query\": \"The simplicial enriched Yoneda embedding and the equivalence between enriched presheaves and coherent space valued functors preserve evaluation and identities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.yonedaEquiv\", \"CategoryTheory.Yoneda.fullyFaithful\", \"CategoryTheory.yoneda'_map_val\", \"CategoryTheory.curriedYonedaLemma\", \"CategoryTheory.Yoneda.yoneda_full\", \"CategoryTheory.yoneda_preservesLimit\", \"CategoryTheory.yoneda'_obj_val\", \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv'\"], \"digest\": \"c80856c1cdde8f51\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned nerve and ordinary/Type-enriched Yoneda constructions do not state the simplicial projective rectification or coherent pointed bifunctor comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial enriched Yoneda lemma is an isomorphism of mapping complexes from a representable functor to a presheaf with its value at the representing object",
+   "results": "{\"t\": \"2026-10-17T11:00:23Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial enriched Yoneda lemma is an isomorphism of mapping complexes from a representable functor to a presheaf with its value at the representing object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv\", \"SSet.yonedaEquiv\", \"SSet.stdSimplex.yonedaEquiv_map\", \"SSet.stdSimplex.isoOfRepresentableBy\", \"CategoryTheory.enrichedNatTransYonedaTypeIsoYonedaNatTrans\", \"SSet.yonedaEquiv_comp\", \"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv_naturality\", \"CategoryTheory.SimplicialCategory.homEquiv'\"], \"digest\": \"c5fdbe882ea7745e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned nerve and ordinary/Type-enriched Yoneda constructions do not state the simplicial projective rectification or coherent pointed bifunctor comparisons."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-yoneda-evaluation",
@@ -78,5 +275,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-presheaf-rectification",
+  "worker": "stage1",
+  "summary": "Constructed the Sing-realization locally Kan presentation and rectification using existing projective-model inputs; checked the actual Yoneda Hom formula, counit-based identity comparison, and coherent bifunctor evaluation square. No statement change and no new nodes. Existing source declarations and Mathlib searches give no exact attachment or leaf.",
+  "blueprint": "Supports the current main-20261015 prop-coef-integral-exceptional-adjoint proof, paragraph For K in D^b_c(X,R), displayed Rlim adjunction chain and following coherent adjunction conclusion; realizes the presheaf-presentation/evaluation input reached through the item ancestry. The underlying blueprint does not itself state a rectification lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-realization-singular-unit-weak",
+    "why": "Generic realization-singular weak-equivalence theorem needed for the actual presentation; the unit has no alternate topological unit theorem."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic functor-category and mapping-space equivalence calculus, used to pass from categorical comparisons to coherent equivalences and preserve the comparison transformations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-33e5db177",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-33e5db177 (reviewer sub-agent of L); spot-checked: I read the whole item, all 18 cited statements, the parent lem-coef-infinity-yoneda-evaluation, the twisted-arrow and universal-left-fibration nodes, the unit record and the main-20261015 anchor paragraph. The statement is kept verbatim and is correct. I tested it on D empty, D a point and D=N(BG). The identity-point clause can only mean the identification through restriction along e_a, and step 7 proves exactly that. Step checks: step 1 builds A=C[D]^top and gets the weak equivalence from realization-singular-unit. In step 2, D is Joyal-cofibrant and A Bergner-fibrant, so r is an equivalence, and q comes from the h Fun argument. In step 3 the free diagram A(-,a)xK has the right variance, Y_a is cofibrant-fibrant, and mapping complexes are Kan by SM7. Step 4 is the subset reflection. In step 5 every hypothesis of HTT 4.2.4.4 holds (u Dwyer-Kan, sSet combinatorial simplicial, target S_U). In step 6 Gr=j holds formula by formula through C[K x N B] -> C[K] x C[N B]. Steps 7 and 9 give the identity point, and step 10 the universes. There is no cycle (the closure of the 17 proof_deps does not reach the item), and the parent is not cited. Accepted tool_uses: lem-cbc-realization-singular-unit-weak and lem-cbc-enhanced-functor-cone-calculus, both generic tools from the off-unit sk-prop-sf-cbc. HTT is absent from literature/, so the WANTED line and proof_origin agent are correct. Mathlib search kinds are complete. FIX (C4/E5, one fault): step 8 claimed the twisted-arrow comparison together with transport classification identifies the nerve of Map_B with H_{N_hc B}, and transported it along Theta 'on arrow families', without citing what carries the bridge. I rewrote step 8 and added two citations, lem-coef-universal-left-fibration-identity (F^*W represents F) and lem-coef-twisted-arrow-left-fibration (Tw strictly functorial, its fibers are slices). Both are in the same unit and acyclic with respect to the item. The rewritten argument: Tw represents both H_B and transport's H_E; Tw(Theta) is then a transformation by the mapping-space formula and pullback compatibility, and an equivalence by the functor calculus. proof_deps is recomputed, and the corrected file is under fixes/. For later: transport-classification is unsplit, and its split must deliver H_E as the transport of Tw coherently in e.; 1 file(s) fixed by the reviewer"
  }
 }

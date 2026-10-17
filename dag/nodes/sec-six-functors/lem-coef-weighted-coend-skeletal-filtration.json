@@ -9,11 +9,226 @@
  },
  "stmt_deps": [
   "def-weil-pbc-simplicial-set",
+  "lem-coef-reedy-model-structure",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Write $X*S=X\\odot_JS$. By its coproduct/coequalizer definition, a map $X*S\\to T$ is a family $t_{j,s}:X(j)\\to T$ such that $t_{j,S(a)s}=t_{j',s}X(a)$ for $a:j\\to j'$ and $s\\in S(j')$. This description also proves that $*$ preserves small colimits separately: a compatible family of maps from a colimit in $X$ is a family from its diagram objects; a family indexed by a colimit of sets in $S$ is a compatible family indexed by those sets. In both cases the displayed arrow equations are unchanged. Colimits of diagrams of set presheaves, and of $\\mathcal C$-valued diagrams, are computed objectwise: assemble the structure maps using their objectwise colimit property, and test the cocone equations objectwise. Thus this argument applies to the latching colimits and pushouts below. All indexing categories are small in the stated containing universes.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent calculation, copower and J-coend universal properties"
+   }
+  },
+  {
+   "text": "For $n\\ge0$, let $E_n(A,K)$ be the coproduct/coequalizer defining $E(A,K)$ restricted to simplex degrees at most $n$, and put $E_{-1}(A,K)=0$. A map $E_n(A,K)\\to T$ is exactly a family $t_r:A^r*K_r\\to T$, $0\\le r\\le n$, with\n$$t_b(A(\\alpha)*1)=t_a(1*K(\\alpha)):A^a*K_b\\to T\\quad(\\alpha:[a]\\to[b],\\ a,b\\le n).$$\nHere each $t_r$ already satisfies the $J$ relations of Step 1. Restriction of compatible families gives the truncation maps $E_{n-1}\\to E_n$. The coequalizer property proves this description directly; it invokes no enriched realization theorem.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent calculation, truncated coend presentation"
+   }
+  },
+  {
+   "text": "The summand maps give $\\operatorname{colim}_nE_n(A,K)\\cong E(A,K)$ with its specified comparison. Indeed every full-coend relation for $\\alpha:[a]\\to[b]$ occurs already in $E_{\\max(a,b)}$, so compatible maps out of the sequence are exactly families satisfying all full-coend relations. The two resulting comparison maps are inverse on every summand, hence inverse by coequalizer and sequential-colimit uniqueness. This also applies to $(A,L),(B,K),(B,L)$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent calculation, passage from finite truncations to the full coend"
+   }
+  },
+  {
+   "text": "Put $D=E(A,L)\\amalg_{E(A,K)}E(B,K)$, and denote its maps from the two coends by $a,b$. Define\n$$Q_n=E_n(A,L)\\amalg_{E_n(A,K)}E_n(B,K),\\qquad P_n=D\\amalg_{Q_n}E_n(B,L).$$\nThe map $Q_n\\to E_n(B,L)$ is induced by $f,i$; the map $Q_n\\to D$ is induced by the full coend maps. Use the same formulas at $n=-1$, where $Q_{-1}=E_{-1}(B,L)=0$ and $P_{-1}=D$. Naturality of the defining relations gives maps $P_{n-1}\\to P_n\\to E(B,L)$. Equivalently a map out of $P_n$ is a map out of $D$ and a family $t_r:B^r*L_r\\to T$, $r\\le n$, satisfying Step 2 and restricting along $f^r*1$ and $1*i_r$ to the prescribed maps from $D$. This is just the two pushout universal properties.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent calculation, construction of the relative filtration objects"
+   }
+  },
+  {
+   "text": "Fix $h:P_{n-1}\\to T$, and write $t_r$ for its degree-$r$ component when $r<n$. To extend $h$ to $P_n$ we must choose $g:B^n*L_n\\to T$. Its restrictions to $A^n*L_n$ and $B^n*K_n$ must equal those specified by $h|_D$. Its simplex relations with the lower degrees reduce to\n$$g(B(\\delta)*1)=t_r(1*L(\\delta))\\quad(\\delta:[r]\\hookrightarrow[n],\\ r<n),$$\n$$g(1*L(\\theta))=t_r(B(\\theta)*1)\\quad(\\theta:[n]\\twoheadrightarrow[r],\\ r<n).$$\nNecessity follows from Step 4. The next step checks that these equations suffice, including the nonidentity endomorphisms of $[n]$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent calculation, extension equations at one new degree"
+   }
+  },
+  {
+   "text": "Put $t_n=g$. Every monotone $\\alpha:[a]\\to[b]$ factors through its ordered image as $[a]\\xrightarrow{\\theta}[r]\\xrightarrow{\\delta}[b]$, with $\\theta$ surjective and $\\delta$ injective. If $a,b\\le n$, the relation for $\\theta$ is either a lower-degree relation, the proper-surjection equation of Step 5, or an identity; likewise for $\\delta$ with the injection equation. Substitution gives\n$$t_b(B(\\alpha)*1)=t_r(1*L(\\delta))(B(\\theta)*1)=t_a(1*L(\\alpha)),$$\nwhere the second equality interchanges the two bifunctor variables and then uses the relation for $\\theta$. In particular a nonidentity endomorphism of $[n]$ has image dimension less than $n$ and is covered. Thus the equations of Step 5 suffice for all the relations required by Step 4.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent calculation, image factorization checks all simplex relations"
+   }
+  },
+  {
+   "text": "For this degree abbreviate $Y=B^n$, $T_n=L_n$, $V=L_nB$, $W=L_nA$, $F=A^n$, $H=D_nL$, $G=D_nK$, and $N=K_n$. Thus $X=F\\amalg_WV$ and $S=N\\amalg_GH$ are the source diagrams of $\\lambda_nf:X\\to Y$ and $\\delta_ni:S\\to T_n$. Set\n$$U=(Y*S)\\amalg_{X*S}(X*T_n).$$\nBy definition the canonical arrow $U\\to Y*T_n$ is $\\lambda_nf\\square_J\\delta_ni$. The symbol $T_n$ here denotes a presheaf, distinct from the test object $T$ of Step 5. The remaining steps construct the upper attaching map $U\\to P_{n-1}$ explicitly.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent calculation, relative latching notation and the attaching corner"
+   }
+  },
+  {
+   "text": "There is a face map $V*T_n\\to P_{n-1}$. On the latching component indexed by $\\delta:[r]\\hookrightarrow[n]$, $r<n$, it is\n$$B^r*L_n\\xrightarrow{1*L(\\delta)}B^r*L_r\\longrightarrow E_{n-1}(B,L)\\longrightarrow P_{n-1}.$$\nFor a morphism between two proper injections, the two such composites agree by the lower-degree simplex relation of Step 2. Since $*$ preserves the latching colimit by Step 1, these components give a unique map from $V*T_n$. This uses only the proper-injection indexing category of the cosimplicial latching object.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent calculation, face part of the attaching map"
+   }
+  },
+  {
+   "text": "There is a degeneracy map $Y*H\\to P_{n-1}$. On the latching component indexed by $\\theta:[n]\\twoheadrightarrow[r]$, $r<n$, it is\n$$B^n*L_r\\xrightarrow{B(\\theta)*1}B^r*L_r\\longrightarrow E_{n-1}(B,L)\\longrightarrow P_{n-1}.$$\nFor $\\theta=\\rho\\theta'$ the two composites agree by the relation of Step 2 for $\\rho$ in degrees below $n$. Preservation of the set-presheaf latching colimit in Step 1 gives the unique map from $Y*H$. No identification of that colimit with a degenerate subset, and no injectivity assumption on $i$, is needed.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent calculation, degeneracy part of the attaching map"
+   }
+  },
+  {
+   "text": "The maps in Steps 8 and 9 agree on $V*H$. It is enough to check a proper injection $\\delta:[a]\\hookrightarrow[n]$ and a proper surjection $\\theta:[n]\\twoheadrightarrow[b]$. On $B^a*L_b$, the two routes are the lower-degree coend components preceded respectively by $1*L(\\theta\\delta)$ and $B(\\theta\\delta)*1$. They agree by the relation for $\\theta\\delta:[a]\\to[b]$ in $E_{n-1}(B,L)$, since $a,b<n$. Checking on these components suffices by preservation of both latching colimits. This verifies the mixed face/degeneracy overlap even when $\\theta\\delta$ is neither an injection nor a surjection.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent calculation, mixed latching compatibility"
+   }
+  },
+  {
+   "text": "Combine the prescribed map $F*T_n\\to E(A,L)\\to D\\to P_{n-1}$ with the face map $V*T_n\\to P_{n-1}$. They agree on $W*T_n$: on a component $A^r*L_n$ for $\\delta:[r]\\hookrightarrow[n]$, the first route uses $A(\\delta)$ and the coend relation in $E(A,L)$; the second uses $f^r$ and the lower-degree component in $E(B,L)$. That component equals its image from $D$ in $P_{n-1}$ by Step 4, and $f^nA(\\delta)=B(\\delta)f^r$. Hence Step 1 and the pushout $X=F\\amalg_WV$ give a map $X*T_n\\to P_{n-1}$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent calculation, compatibility with the A-side of the full corner"
+   }
+  },
+  {
+   "text": "Combine the prescribed map $Y*N\\to E(B,K)\\to D\\to P_{n-1}$ with the degeneracy map $Y*H\\to P_{n-1}$. They agree on $Y*G$: on the component $B^n*K_r$ for $\\theta:[n]\\twoheadrightarrow[r]$, the coend relation in $E(B,K)$ replaces $K(\\theta)$ by $B(\\theta)$, and $i_nK(\\theta)=L(\\theta)i_r$. Step 4 identifies the resulting lower-degree component with the prescribed map from $D$. Therefore the pushout $S=N\\amalg_GH$ and Step 1 give $Y*S\\to P_{n-1}$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent calculation, compatibility with the K-side of the full corner"
+   }
+  },
+  {
+   "text": "The maps of Steps 11 and 12 agree on $X*S$. Expanding the two defining pushouts using Step 1, it suffices to check $F*N,F*H,V*N,V*H$. On $F*N$ the agreement is exactly the common $E(A,K)$ map in $D$. On $F*H$ it is the coend degeneracy relation in $E(A,L)$, together with naturality of $f$ and the lower-degree identifications of Step 4. On $V*N$ it is the coend face relation in $E(B,K)$, together with naturality of $i$ and the same identifications. On $V*H$ it is Step 10. These are tests on maps from colimits, not assertions about intersections of subobjects. Thus the pushout defining $U$ gives a unique map $u_n:U\\to P_{n-1}$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent calculation, gluing the four corner restrictions"
+   }
+  },
+  {
+   "text": "For $h:P_{n-1}\\to T$ and $g:Y*T_n\\to T$, equality $hu_n=g|_U$ is equivalent to agreement on $Y*S$ and $X*T_n$. After expanding those two pushouts, these are precisely the four restrictions to $Y*N,Y*H,F*T_n,V*T_n$. The first and third say that $g$ has the prescribed $B^n*K_n$ and $A^n*L_n$ restrictions. The second and fourth say the proper-surjection and proper-injection equations of Step 5, respectively, because maps out of each latching colimit are tested on its components. There are no further conditions, by uniqueness in the pushouts. Step 6 therefore identifies this equality exactly with the condition for $g$ to extend $h$ to $P_n$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent calculation, attaching-corner equality is exactly the extension condition"
+   }
+  },
+  {
+   "text": "Consequently the square with top $u_n:U\\to P_{n-1}$, left $U\\to B^n*L_n$, bottom the degree-$n$ map to $P_n$, and right $P_{n-1}\\to P_n$ is a pushout. It commutes since the defining components of $u_n$ become the same coend components in $P_n$. For any compatible pair $h,g$, Steps 14 and 4 give the unique map $P_n\\to T$ extending them; uniqueness is tested on $D$ and all degree-$r$ summands for $r\\le n$. This proves that the degree-$n$ transition is the required pushout of $\\lambda_nf\\square_J\\delta_ni$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent calculation, pushout universal property of each transition"
+   }
+  },
+  {
+   "text": "A compatible family $P_n\\to T$ is, by Step 4, one map $D\\to T$ and a family of maps $B^r*L_r\\to T$ for every $r$, satisfying every simplex relation and the prescribed restrictions from $D$. By Step 3 the latter family gives $E(B,L)\\to T$. The restrictions force the map from $D$ to be the composite of the corner map with this map, so it is uniquely determined. Conversely any map $E(B,L)\\to T$ gives such a compatible family. The canonical comparison $\\operatorname{colim}_{n\\ge-1}P_n\\to E(B,L)$ is therefore an isomorphism, inverse on every summand. Its initial map is exactly the corner map of the statement because $P_{-1}=D$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent calculation, colimit and identification of the resulting corner map"
+   }
+  },
+  {
+   "text": "Every construction above uses the summand maps, $f,i$, simplex operators and universal colimit maps. A commuting morphism between two sets of such data preserves each component formula in Steps 8–13, so uniqueness on coproducts, coequalizers and pushouts gives commuting maps of the entire filtration and its comparison with $E(B,L)$. This proves naturality. At $n=0$ both latching indexing categories are empty, so $V=W=H=G=0$. Step 1 makes any product $0*S$ or $X*0$ initial, and then $X=A^0$, $S=K_0$, and $U=(B^0*K_0)\\amalg_{A^0*K_0}(A^0*L_0)$. Thus the same argument includes the degree-zero transition, with no missing simplex relations.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent calculation, naturality and the degree-zero case"
+   }
+  },
+  {
+   "text": "If $J=\\varnothing$, every weighted coend $X*S$ is an empty coproduct, hence initial. All $E_n,E,D,Q_n,P_n$ and both sides of each attaching arrow are initial, and every map in the filtration is the identity of the initial object up to its unique isomorphism. The preceding universal-property arguments thus cover this case as well. For general $J$ only cocompleteness and the stated smallness were used: no step used a model structure, an enrichment, a cofibrancy condition, a monomorphism, or a nonempty latching diagram.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent calculation, empty category and hypothesis audit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-simplicial-set",
   "lem-coef-reedy-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+  "place": "Explicit copower/coequalizer and relative-corner universal-property proof, Steps 1–18. Hirschhorn is contextual motivation, not an assertion that the exact generalized statement occurs there."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -133,10 +348,52 @@
    "results": "0 hits; ; ; digest 4f53cda18c2baa0c",
    "date": "2026-10-17",
    "verdict": "no match: inspected signatures and pinned source; ordinary coends, skeletal adjunctions, Cech constructions and cofibrant replacements do not give this relative filtration or framed bar comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "latching|coend|pushout",
+   "results": "0 hits; ; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; Cech conerves, skeleta, ordinary coends and Leibniz pushout definitions do not assert this relative weighted Reedy-coend filtration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "relative latching pushout product filtration for a weighted cosimplicial coend",
+   "results": "8 hits; ; CategoryTheory.MorphismProperty.exists_isPushout_of_isFiltered, CategoryTheory.Arrow.cechConerve, CategoryTheory.IsPushout.isColimit, CategoryTheory.Limits.Types.Pushout.cocone, CategoryTheory.Limits.pointwiseProductCompEvaluation, CategoryTheory.Limits.PushoutCocone.mk, CategoryTheory.Arrow.cechConerve_obj, CategoryTheory.IsPushout.cocone; digest d681c591f6768853",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; Cech conerves, skeleta, ordinary coends and Leibniz pushout definitions do not assert this relative weighted Reedy-coend filtration."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Coend latching pushout product cosimplicial simplicial",
+   "results": "0 hits; loogle: Unknown identifier `CategoryTheory.Coend`; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; Cech conerves, skeleta, ordinary coends and Leibniz pushout definitions do not assert this relative weighted Reedy-coend filtration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative skeletal filtration of a weighted coend of a cosimplicial diagram and simplicial presheaf via latching pushout products",
+   "results": "8 hits; ; CategoryTheory.CosimplicialObject.cechConerve, CategoryTheory.Arrow.cechConerve, CategoryTheory.CosimplicialObject.augmentedCechConerve, CategoryTheory.CosimplicialObject.cechConerve_obj, CategoryTheory.SimplicialObject.sk, CategoryTheory.Arrow.cechConerve_obj, CategoryTheory.Arrow.augmentedCechConerve, CategoryTheory.CosimplicialObject.augmentedCechConerve_obj; digest 23caa33b1b42a561",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; Cech conerves, skeleta, ordinary coends and Leibniz pushout definitions do not assert this relative weighted Reedy-coend filtration."
+  },
+  {
+   "tool": "grep",
+   "query": "latching|coend|Leibniz",
+   "results": "25 hits; ; Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean, Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean, Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean, Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean, Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean, Mathlib/CategoryTheory/Monoidal/Arrow.lean, Mathlib/CategoryTheory/Monoidal/Arrow.lean, Mathlib/CategoryTheory/Monoidal/Arrow.lean; digest b2a1549ae70cc3d3",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; Cech conerves, skeleta, ordinary coends and Leibniz pushout definitions do not assert this relative weighted Reedy-coend filtration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reedy tensor product truncation admits a cell decomposition given by the Leibniz product of relative latching maps",
+   "results": "8 hits; ; SSet.Truncated.Edge.tensor_surjective, SSet.Truncated.Edge.CompStruct.tensor, HomotopicalAlgebra.RelativeCellComplex.Cells.k, HomotopicalAlgebra.RelativeCellComplex.Cells.ι, HomotopicalAlgebra.RelativeCellComplex.attachCells, HomotopicalAlgebra.RelativeCellComplex, HomotopicalAlgebra.RelativeCellComplex.Cells, CategoryTheory.SmallObject.relativeCellComplexιObj; digest 75ebac05b8e2d61b",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures; Cech conerves, skeleta, ordinary coends and Leibniz pushout definitions do not assert this relative weighted Reedy-coend filtration."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-projective-frame-weighted-coend",
@@ -170,5 +427,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-weighted-coend-skeletal-filtration",
+  "worker": "stage1",
+  "summary": "Constructed P_n as the full corner domain pushed out along the finite truncated corner. Proved the relative latching attachment by explicit component tests, including all six overlap compatibilities and nonidentity simplex endomorphisms, and proved its colimit, naturality, n=0 and empty-J clauses. No new nodes and no mathematical statement change. Removed the inaccurate inherited source claim that a scan was retained in this sandbox.",
+  "blueprint": "Supports the displayed derived coefficient-adjunction and inverse-limit calculation in paragraph 2 of prop-coef-integral-exceptional-adjoint through the retained ancestry, specifically the weighted-coend lifting input of lem-coef-projective-frame-weighted-coend, Step 3. This is below the unit level; no unit step or route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-c4f4b46b1",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-c4f4b46b1 (reviewer sub-agent of L); spot-checked: I read all 18 steps by hand and they are correct. The statement is the standard relative skeletal filtration of a J-weighted Reedy coend: ⊙_J is cocontinuous in each variable, and the attaching maps are λ_nf □_J δ_ni, with Δ latching over injections and Δ^op latching over surjections, matching lem-coef-reedy-model-structure. Checks done: the substitution α=δθ in Step 6 covers every simplex relation, including nonidentity endomorphisms of [n]; the overlap tests in Steps 10–13 (V*H uses θδ in degrees below n; F*N, F*H, V*N) and the extension criterion in Step 14 match Step 5 exactly; Step 16 forces the map from D to be the corner map; the n=0 case, the J=∅ case, i=id (every transition an isomorphism) and A=K=0 (the absolute filtration) all hold. The parent lem-coef-projective-frame-weighted-coend uses the item in Step 3 exactly as stated. Duplicate search: tensor-coend-skeletal-pushouts, truncated-coend-skeleton-image, simplicial-latching-degenerate-subset, reedy-realization-prism, enriched-coend, pinched-cube-latching, bar-latching-decomposition and the Reedy comparison nodes; none is a duplicate or a one-line generalization. Mathlib has no latching (Reedy/Basic.lean lines 22–24 is a TODO), so 'no match' stands. There are no new nodes, no tool_uses, no SGA, and no target, base-change morphism or coefficient category is involved. Hirschhorn is not in literature/, the report lists it as WANTED, and proof_origin is agent, which is correct. For the maintainer (source is a maintainer field, so not repairable through fixes): source.place still falsely says the scan is retained in the sandbox, although the report claims that sentence was removed; please drop it. The unused word 'boundaries' in the statement is cosmetic. No fixes written."
  }
 }
