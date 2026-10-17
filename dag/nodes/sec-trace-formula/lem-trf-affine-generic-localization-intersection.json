@@ -228,5 +228,27 @@
   "group": "Q84",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-ebd7fba04 (reviewer sub-agent of L); spot-checked: I read the full item, all six steps and every cited statement, and checked them against Stacks flat.tex: Tag 0810 (lemma-helper-blowup-affine-space, final paragraph, the product inclusion S'_a ⊂ ∏ S'_q'' attributed to 05DH) and Tags 05DH (l.1907), 05FQ (l.1946) and 05FT (l.2247). The statement is unchanged and is not weaker than the source. The inverse image of the zero prime of the fibre equals pB, because B/pB is flat over R/p and so torsion-free. Step 1: the fibre ring is a nonzero domain, so q is a prime with contraction p and the map C→D exists. Step 2: the hypotheses of lem-trf-affine-geometrically-integral-projective (05FT) are exactly the item's, and the localized split gives C projective over A = R_p. Step 3: the flatness of D over A via T^{-1}(L⊗_R B) ≅ L⊗_A D checks out and is routine, so marking it elementary is acceptable. Step 4: the reduction map is F → F localized at nonzero elements of a domain, hence injective, with explicit inverses. Step 5: lem-trf-local-universal-injective-residue (05FQ) is used by its statement only, and taking L=A gives C→D injective. Step 6: the annihilator/maximal-ideal argument is correct, and R=0 is covered. proof_deps equals the union of uses. Both theorem inputs are unsplit nodes of the same unit sk-i-curve-zero with no dependency on the item, so there is no cycle and no off-route tool. No SGA source is used. Small cases tested: k[x]/k, Z[x]/Z, R[x] over R=k[ε]/ε² (nilpotents kept), a product of two fields, and R=0. The rg search over the DAG found no duplicate of the item. The worker's report that lem-trf-local-fibres-integral-projective duplicates lem-trf-affine-geometrically-integral-projective (05FT) is correct; that is a maintenance merge outside this delivery. There are no new nodes, no fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AffineGenericLocalizationIntersection",
+  "declaration": "AlgebraicGeometry.injective_to_pi_affineFiberGenericLocalization",
+  "declarations": [
+   "AlgebraicGeometry.affineFiberGenericPrime",
+   "AlgebraicGeometry.injective_to_pi_affineFiberGenericLocalization"
+  ],
+  "file": "lean/Sheaf/Paper/AffineGenericLocalizationIntersection.lean",
+  "statement": "theorem injective_to_pi_affineFiberGenericLocalization (R : Type u) [CommRing R] (B : Type v) [CommRing B] [Algebra R B] (hflat : RingHom.Flat (algebraMap R B)) [Algebra.FinitePresentation R B] (hgeom : ∀ (p : PrimeSpectrum R) (K : Type (max u v w)) [Field K] [Algebra p.asIdeal.ResidueField K] [Algebra R K] [IsScalarTower R p.asIdeal.ResidueField K], IsDomain (K ⊗[R] B)) : Function.Injective (fun b : B => fun p : PrimeSpectrum R => algebraMap B (Localization.AtPrime (affineFiberGenericPrime R B hgeom p).asIdeal) b)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-690a2f28f",
+  "group": "NC",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical helper, docstrings, edge cases, route-pivot constraints, and scompile evidence all checked; no findings."
  }
 }
