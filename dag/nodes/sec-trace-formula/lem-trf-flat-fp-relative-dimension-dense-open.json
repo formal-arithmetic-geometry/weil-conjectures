@@ -15,9 +15,116 @@
   "def-pc-scheme-fibre",
   "def-kun-topological-dimension-at-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First translate the hypothesis over $U$ into a statement about the original fibres: if $s\\in U$, then $(X_U)_s\\cong X_s$, preserving the point over each $x\\in X$ with $f(x)=s$. Indeed the open-subscheme stalk at $s$ is the same stalk as in $S$ (intersections with $U$ are cofinal among neighbourhoods), so its residue field is $\\kappa(s)$. Both schemes then represent pairs consisting of a map to $X$ and a map to $\\operatorname{Spec}\\kappa(s)$ agreeing in $S$; the intermediate map to $U$ is forced. The fibre-product universal property gives inverse isomorphisms. Their underlying homeomorphisms identify open neighbourhoods and chains of irreducible closed subsets, hence the defining local dimensions. Consequently $\\dim_xX_{f(x)}\\leq e$ whenever $f(x)\\in U$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01K0 (definition-fibre), 01JR (lemma-open-fibre-product); formal fibre-product identification over an open"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-flat-fibre-dimension-strata-core] to $f$ and the whole open $S\\subseteq S$. Its restriction hypotheses are precisely the given flatness and local finite presentation. Obtain opens $V_n\\subseteq X$, $n\\in\\mathbb N$, such that $W=\\bigcup_nV_n$ has dense inverse image in every fibre and $\\dim_yX_{f(y)}=n$ at every $y\\in V_n$. Put $W_s=(X_s\\to X)^{-1}(W)$; this is a dense open subset of $X_s$.",
+   "uses": [
+    "lem-sbc-flat-fibre-dimension-strata-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 054T, lemma-flat-finite-presentation-CM-pieces, and Tag 045U, lemma-flat-finite-presentation-CM-open; the dimension-piece construction invoked in Tag 081L"
+   }
+  },
+  {
+   "text": "For $n>e$, suppose $V_n$ is nonempty. By [lem-weil-pbc-flat-lfp-open], $f(V_n)$ is open in $S$, and it is nonempty because $V_n$ contains a point. Density of $U$ gives an $s\\in f(V_n)\\cap U$ and then a $y\\in V_n$ with $f(y)=s$. Step 2 gives $\\dim_yX_s=n$, whereas step 1 gives $\\dim_yX_s\\leq e$, a contradiction. Thus $V_n=\\varnothing$ for $n>e$. Every point of $W_s$ therefore has local dimension in $X_s$ at most $e$, for every $s\\in S$.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 081L, lemma-flat-finite-presentation-dimension-over-dense-open, proof of case (1): openness of f(U_d) and intersection with the dense open; openness is Tag 01UA, morphisms-lemma-fppf-open"
+   }
+  },
+  {
+   "text": "Fix an arbitrary $x\\in X$ and put $s=f(x)$ and $Y=X_s$. By [def-sbc-locally-finite-presentation], choose affine opens $x\\in V=\\operatorname{Spec}B\\subseteq X$ and $s\\in T=\\operatorname{Spec}R\\subseteq S$, with $f(V)\\subseteq T$ and $B\\cong R[t_1,\\ldots,t_r]/(g_1,\\ldots,g_m)$. Apply [lem-weil-pbc-affine-chart-base-change-iso] to $z=f$, $t:\\operatorname{Spec}\\kappa(s)\\to S$, these opens $T,V$, and the rings $R,B,\\kappa(s)$. Here $t^{-1}(T)$ is the whole residue-field spectrum since $s\\in T$. The lemma identifies the open $A=(Y\\to X)^{-1}(V)$, containing the point over $x$, with $\\operatorname{Spec}(\\kappa(s)\\otimes_R B)$. The tensor algebra is generated over $\\kappa(s)$ by the $1\\otimes t_i$: expand a simple tensor using the polynomial presentation of its second factor, and move coefficients from $R$ into $\\kappa(s)$ by the balancing relation. Thus $A$ is an affine scheme of finite type over $\\kappa(s)$ [def-weil-finite-type-morphism].",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-chart-base-change-iso",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4 (lemma-fibre-product-affine-schemes), 01JR (lemma-open-fibre-product); Morphisms Tag 01TP (definition-finite-presentation); elementary generation of the scalar-extended algebra"
+   }
+  },
+  {
+   "text": "Set $H=A\\cap W_s$, an open subscheme of $Y$ and of $A$. It is dense in $A$: any nonempty open of $A$ is open in $Y$ because $A$ is open, so it meets the dense subset $W_s$ and the intersection lies in $H$. For $h\\in H$, step 3 gives $\\dim_hY\\leq e$. Apply [lem-weil-pbc-dimension-at-point-open-subspace] to the open inclusion $H\\subseteq Y$ to obtain $\\dim_hH=\\dim_hY\\leq e$.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0055 (definition-Krull), item (4) and following neighbourhood discussion; dense open restriction in the fibre"
+   }
+  },
+  {
+   "text": "For each $h\\in H$, the minimum in [def-kun-topological-dimension-at-point] is attained, so choose an open neighbourhood $N_h\\subseteq H$ with $\\dim N_h=\\dim_hH\\leq e$. These opens cover $H$. By [lem-sc-scheme-sober], $H$ has unique generic points for irreducible closed subsets; this makes it quasi-sober and $T_0$ (points with equal singleton closures must be the same generic point). Apply [lem-weil-pbc-dimension-bound-open-cover] to conclude $\\dim H\\leq e$. If $H$ is empty, the same lemma applies to the empty cover and gives the same bound. This passage uses only the dimension definition and the cited open-cover theorem, not a bound on the dimensions of local rings.",
+   "uses": [
+    "def-kun-topological-dimension-at-point",
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-dimension-bound-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0055 (definition-Krull), item (4); Tag 0B7I (lemma-dimension-supremum-local-dimensions), open-cover consequence; Schemes Tag 01IS (lemma-scheme-sober)"
+   }
+  },
+  {
+   "text": "The scheme $A$ is of finite type over the field $\\kappa(s)$ by step 4, and $H\\hookrightarrow A$ is open dense by step 5. The dense-open clause of [lem-kun-dimension-extension] gives $\\dim A=\\dim H\\leq e$; the symbol $\\kundim$ in that node is the same topological Krull dimension by [def-kun-dimension]. At the point $\\widetilde x\\in A$ over $x$, the whole open $A$ is one of its own neighbourhoods, so [def-kun-topological-dimension-at-point] gives $\\dim_{\\widetilde x}A\\leq\\dim A$. Apply [lem-weil-pbc-dimension-at-point-open-subspace] to $A\\subseteq Y$ to conclude $\\dim_xX_s=\\dim_{\\widetilde x}Y=\\dim_{\\widetilde x}A\\leq e$. Since $x$ was arbitrary, this is the assertion. Empty $X$ has no such $x$ and is covered vacuously.",
+   "uses": [
+    "lem-kun-dimension-extension",
+    "def-kun-dimension",
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-dimension-at-point-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 081L, lemma-flat-finite-presentation-dimension-over-dense-open, case (1): expansion of the reduction to a fibrewise dense open; Varieties Tag 0A21 (lemma-dimension-locally-algebraic), (3), (8), and Topology Tag 0055"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-dimension",
+  "def-kun-topological-dimension-at-point",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "lem-kun-dimension-extension",
+  "lem-sbc-flat-fibre-dimension-strata-core",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-dimension-bound-open-cover",
+  "lem-weil-pbc-flat-lfp-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 081L, lemma-flat-finite-presentation-dimension-over-dense-open, proof of case (1), with its fibrewise dense-open sufficiency expanded using existing dimension nodes; supporting Tags 054T, 01UA, 01I4, 0A21 and 0B7I."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -46,10 +153,45 @@
    "results": "8 hits: AlgebraicGeometry.Flat.instResLE, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
    "date": "2026-10-18",
    "verdict": "no match: returned generic flatness, openness, or smooth-relative-dimension declarations, but no dense-open fibre-dimension theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat morphism locally of finite presentation has a fibre dimension bound everywhere if it holds over a dense open subset of the base",
+   "results": "8 hits: AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations give flatness, openness, or smooth relative dimension, not the dense-open fibre-dimension theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "12 hits: AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Etale.of_formallyUnramified_of_flat, AlgebraicGeometry.Etale.iff_flat_and_formallyUnramified, AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations give flatness, openness, or smooth relative dimension, not the dense-open fibre-dimension theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "flat finitely presented morphism dimension bound over dense open extends to all fibres",
+   "results": "8 hits: AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.Flat, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.stalkMap, Module.isLocallyConstant_rankAtStalk",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations give flatness, openness, or smooth relative dimension, not the dense-open fibre-dimension theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dimension strata on the source of a flat finitely presented scheme morphism show that the relative dimension bound on a dense open base holds everywhere",
+   "results": "8 hits: AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.Flat, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, Algebra.IsStandardSmoothOfRelativeDimension.out",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations give flatness, openness, or smooth relative dimension, not the dense-open fibre-dimension theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*dimension|dimension.*fiber|dimension.*fibre|dense.*dimension",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations give flatness, openness, or smooth relative dimension, not the dense-open fibre-dimension theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-proper-flat-finite-dense-open",
@@ -74,5 +216,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-flat-fp-relative-dimension-dense-open",
+  "worker": "stage1",
+  "summary": "Read Stacks 081L case (1), checked the imported pointwise statement against 02NJ, and replaced the empty proof by seven steps. Reuse existing 054T fibre-dimension opens and 01UA openness; spell out fibre restriction, finite-type affine fibre charts and the final dense-open dimension argument. No new nodes or statement change. Searches found no exact project attachment or Mathlib theorem.",
+  "blueprint": "Supports the inherited lem-trf-local-term-locality descendant chain through lem-trf-proper-flat-finite-dense-open: the precise Tag 081L dimension-bound input to its Tag 0B48 argument. Steps 2–3 realize the dimension pieces/openness argument of 081L case (1); steps 4–7 expand its assertion that the fibrewise dense open suffices.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-flat-fibre-dimension-strata-core",
+    "why": "Tag 054T dimension pieces are exactly the tool explicitly invoked by Tag 081L; the trace-formula unit contains no replacement dimension-piece theorem."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-open-subspace",
+    "why": "Local topological dimension is invariant under restricting to an open neighbourhood; needed for affine fibre and dense-open restrictions, independent of the trace-formula unit."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Sobriety supplies precisely the hypotheses of the dimension open-cover theorem on the open subscheme H; generic scheme topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-bound-open-cover",
+    "why": "The dimension bound on the dense open follows from its bounded-dimensional neighbourhood cover; generic topological dimension tool."
+   },
+   {
+    "node": "lem-kun-dimension-extension",
+    "why": "Only its finite-type dense-open dimension equality is used to expand the fibrewise density reduction in Tag 081L; no coefficient or Kunneth result is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-flat-fibre-dimension-strata-core",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-dimension-bound-open-cover",
+  "lem-kun-dimension-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-ee01f76f3",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-ee01f76f3 (reviewer sub-agent of L); spot-checked: The item agrees with Stacks 081L case (1) (flat.tex l.3020) together with 02NJ (morphisms.tex l.5564): flat and lfp is enough, since lfp implies lft, and the bound is the pointwise dim_x(X_{f(x)})<=e on both sides. The statement is unchanged, not weakened, and has no new nodes. Step 1: elementary universal-property identification (X_U)_s=X_s for s in U. Steps 2-3 follow the 081L proof. lem-sbc-flat-fibre-dimension-strata-core (054T, applied with U=S) gives V_n with local fibre dimension n and a union dense in every fibre. lem-weil-pbc-flat-lfp-open (UniversallyOpen.of_flat) makes f(V_n) open, so density of U gives V_n empty for n>e. Steps 4-7 expand the step 081L abbreviates: by the affine-chart base-change lemma, an affine fibre chart is Spec(kappa(s) tensor_R B), finite type over kappa(s). H=A meet W_s is dense open in A with local dimensions <=e (open-subspace lemma). Sobriety (unique generic points give quasi-sober and T0) and the open-cover lemma give dim H<=e. The dense-open clause of lem-kun-dimension-extension, whose proof I read, gives dim A=dim H<=e, hence dim_x X_s<=e. Every cited statement supports its step and every hypothesis is checked where it is used. Edge cases checked: empty X, S or U; e=0, as the parent uses it; H nonempty; non-equidimensional fibres; A^r_S. No duplicate: a search for 081L hits only the item and its parent. No cycle: the 384-node dependency closure does not contain the item. Accepted tool_uses: lem-sbc-flat-fibre-dimension-strata-core and lem-kun-dimension-extension. The other cross-unit nodes are Mathlib leaves or Lean-closed. No SGA. No fixes."
  }
 }
