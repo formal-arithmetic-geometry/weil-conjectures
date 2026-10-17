@@ -12,11 +12,134 @@
   "lem-trf-oriented-product-universal",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-henselian-terminology",
-  "def-weil-geometric-point"
+  "def-weil-geometric-point",
+  "def-weil-pbc-constant-sheaf",
+  "def-trf-geometric-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-sets-strictly-henselian-open-sections-stalk] with the whole scheme as the open, separately to $A$ and $S$. Thus $\\Gamma(A,G)\\to G_x$ and $\\Gamma(S,F)\\to F_s$ are natural bijections for all set sheaves. Choose compatible geometric closed points, so $ax=s$; the local hypothesis is precisely what permits this. Write $\\epsilon_S:S_{\\mathrm{Et}}\\to\\mathbf{Set}$ for the canonical morphism. The counit $\\epsilon_S^{-1}\\Gamma(S,F)\\to F$, after the second bijection, is a natural map $(s\\epsilon_S)^{-1}F\\to F$. It is the inverse-image mate of $c_s:1\\Rightarrow s\\epsilon_S$ by [def-trf-geometric-morphism]. Its restriction at $s$ is the identity: a constant global-section germ is that same section under $\\Gamma(S,F)\\cong F_s$.",
+   "uses": [
+    "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI 2.1 and 2.2, (2.a)--(2.b); locality of scheme topoi: Stacks 03QO, lemma-vanishing-etale-cohomology-strictly-henselian"
+   }
+  },
+  {
+   "text": "Pull this mate back by $b$ to get $b\\Rightarrow s\\epsilon$, since $\\epsilon_Sb=\\epsilon$. Apply [lem-trf-oriented-product-universal] to $x\\epsilon$, $1_{B_{\\mathrm{Et}}}$ and this $2$-morphism. It gives $\\sigma:B_{\\mathrm{Et}}\\to P$ and $p_2\\sigma\\cong1$. For constant coefficients use [lem-pe-constant-left-module-inverse-image]: the ring identifications and module units agree with these inverse-image units and commute with composition. Therefore $p_{2,*}\\sigma_*\\cong1$ on constant-$\\Lambda$ modules, and applying $p_{2,*}$ to $H\\to\\sigma_*\\sigma^*H$ gives the stated natural $\\Lambda$-linear map $\\gamma_H:p_{2,*}H\\to\\sigma^*H$.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI 2.2, (2.c)--(2.f); constant-coefficient lift: Stacks 00YV, proposition-functoriality-algebraic-structures-topoi"
+   }
+  },
+  {
+   "text": "Use the small triple site of [lem-trf-oriented-product-universal] and put $k(W)=(A\\to S\\leftarrow W)$ for $W\\in B_{\\mathrm{Et}}$. Its projection formula is $p_2^{-1}(h_W)=h_{k(W)}^\\#$, where the triple representable is sheafified. Indeed $h_W$ is a sheaf by [lem-weil-pbc-small-etale-representable-presheaf-sheaf]. The adjunction, the sheafification universal property [def-weil-pbc-sheafification] and [lem-galois-yoneda-hom-bijection] give\n$$(p_{2,*}H)(W)=\\operatorname{Hom}(h_W,p_{2,*}H)=\\operatorname{Hom}(h_{k(W)}^\\#,H)=H(k(W))$$\non underlying sets. This identification respects the module operations, which are defined on sections, so it is an identification of $\\Lambda$-modules, natural in $W,H$.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI 1.3 and the two colimit formulas in the proof of Proposition 2.3"
+   }
+  },
+  {
+   "text": "Fix a geometric point $y$ of $B$ and put $t=\\sigma y$. For a triple $Z=(U\\to V\\leftarrow W)$, the inverse-image formula of [lem-trf-oriented-product-universal], applied to $\\sigma$, shows that a lift of $t$ to $h_Z^\\#$ consists of $u\\in U_x$ and $w\\in W_y$ whose images in $(b^{-1}h_V)_y$ agree; the image of $u$ uses the mate of $c_s$. Here representable stalks are geometric lifts by [lem-galois-stalk-representable]. By step 1, $u$ extends uniquely to $\\widetilde u:A\\to U$. Its image in $V_s$ extends uniquely to $\\widetilde v:S\\to V$. These are actual scheme sections by [lem-weil-pbc-small-etale-representable-presheaf-sheaf]. Their images in $\\Gamma(A,a^{-1}h_V)$ agree, since their germs at $x$ agree and step 1 is injective. With [lem-galois-inverse-image-representable] this says that $\\widetilde u$ and $a^*\\widetilde v$ have exactly the compatibility required for the first two components of a triple morphism.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "lem-galois-stalk-representable",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-galois-inverse-image-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI Proposition 2.3, proof: explicit refinement underlying the asserted cofinality of neighbourhoods"
+   }
+  },
+  {
+   "text": "The section $\\widetilde v$ gives a section $v_B:B\\to B\\times_SV$. Form\n$$W_0=W\\times_{B\\times_SV}B,$$\nusing the structural map from $W$ and $v_B$. All three objects and maps are in $B_{\\mathrm{Et}}$ by [lem-galois-inverse-image-representable]; finite limits in this site are scheme fibre products by [def-weil-pbc-etale-site], so $W_0\\to B$ is an etale object. The equality at $y$ in step 4 gives a lift $w_0$ of $y$ to $W_0$, by the fibre universal property. The maps $\\widetilde u$, $\\widetilde v$, $W_0\\to W$ now define a morphism $k(W_0)\\to Z$ taking the lift $w_0$ to the chosen lift of $t$. Thus every pointed triple neighbourhood has a pointed refinement of the form $k(W_0)$. This constructs the refinement rather than assuming a cofinality assertion.",
+   "uses": [
+    "lem-galois-inverse-image-representable",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI Proposition 2.3, proof: the neighbourhoods with first two entries final are cofinal"
+   }
+  },
+  {
+   "text": "By [lem-trf-site-point-fibre], $H_t$ is the filtered colimit of $H(Z)$ over pointed triple neighbourhoods, while $(p_{2,*}H)_y$ is the filtered colimit of $H(k(W))$ over pointed etale neighbourhoods of $y$, using step 3. The functor $k$ gives a restriction map between these colimits. It is onto: every element has a representative by [lem-weil-pbc-filtered-colimit-modules-elementwise], and step 5 refines that representative to some $k(W_0)$. It is one-to-one: if representatives on $k(W_1)$ and $k(W_2)$ agree in $H_t$, that same elementwise lemma supplies a common pointed triple refinement $Z$ on which they agree. Refine $Z$ once more to $k(W_0)$ by step 5. A morphism $k(W_0)\\to k(W_i)$ is precisely a morphism $W_0\\to W_i$, since its $A$ and $S$ components are maps between final objects. The two representatives therefore already agree in the $y$-stalk colimit. This proves that the restriction map is bijective, hence a $\\Lambda$-module isomorphism.",
+   "uses": [
+    "lem-trf-site-point-fibre",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI Proposition 2.3, the two identical colimits and the natural restriction map; Stacks 00YA, 00D6--00D7"
+   }
+  },
+  {
+   "text": "Identify this restriction map with $\\gamma_{H,y}$. A section $h\\in H(k(W))$ is a map $h_{k(W)}^\\#\\to H$. Applying $\\sigma^*$ gives a section on $W$, because $\\sigma^*h_{k(W)}^\\#=h_W$ by $p_2\\sigma=1$ and the inverse-image formula of [lem-trf-oriented-product-universal]. Evaluating that section at the chosen lift of $y$ is exactly the image in the triple stalk described by [lem-trf-site-point-fibre]. On the other hand, the adjunction unit $H\\to\\sigma_*\\sigma^*H$ sends a map $h_{k(W)}^\\#\\to H$ to its pulled-back map under the adjunction, by the unit identity of [def-trf-geometric-morphism]; the same statement holds on modules by [lem-pe-constant-left-module-inverse-image]. Thus this image is precisely the germ of $\\gamma_H$ on the original section. Consequently step 6 proves that the specified canonical map, rather than just some abstract comparison, is invertible on every geometric stalk of $B$.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "lem-trf-site-point-fibre",
+    "def-trf-geometric-morphism",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI 2.2 (2.f) and Proposition 2.3, final sentence identifying gamma with natural restriction"
+   }
+  },
+  {
+   "text": "The conservative family of geometric stalks on $B_{\\mathrm{Et}}$ in [lemma-openclosed-point-ulift] now implies that $\\gamma_H$ is an isomorphism. This uses enough points on the target $B_{\\mathrm{Et}}$, with no quasi-compactness or coherence assumption on $B$. It is natural in $H$ because both the unit and all the restriction maps are natural. Finally [lem-pe-constant-left-module-inverse-image] says that $\\sigma^*$ on constant-$\\Lambda$ module sheaves is exact. Transporting a short exact sequence along the natural isomorphism $p_{2,*}\\cong\\sigma^*$ therefore proves exactness of $p_{2,*}$.",
+   "uses": [
+    "lemma-openclosed-point-ulift",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI Corollary 2.3.1, applied using the conservative geometric points of the second factor; Stacks 03PU, theorem-exactness-stalks, and 040S, remarks-enough-points"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sheafification",
+  "lem-galois-inverse-image-representable",
+  "lem-galois-stalk-representable",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-trf-oriented-product-universal",
+  "lem-trf-site-point-fibre",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lemma-openclosed-point-ulift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé XI 2.1--2.3.1, printed pp. 177--178; explicit scheme-theoretic expansion of the neighbourhood cofinality in Proposition 2.3"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +175,45 @@
    "results": "AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.pushforward_map_app; AlgebraicGeometry.Scheme.Modules.instFullPushforward; AlgebraicGeometry.Scheme.Modules.instAdditivePushforward; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward",
    "date": "2026-10-17",
    "verdict": "no match: the returned declarations do not state this oriented-topos or strict-henselization assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"oriented\"",
+   "results": "Std.OrientedOrd, Std.OrientedCmp, Fin.instOrientedOrd, Std.instReflCmpOfOrientedCmp, Std.TransCmp.toOrientedCmp, Std.OrientedOrd.opposite, Array.instOrientedOrd, List.instOrientedOrd",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state the oriented-product local projection comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a local morphism of strictly henselian local schemes the second projection of the oriented product has direct image equal to inverse image of its canonical section",
+   "results": "AlgebraicGeometry.IsOpenImmersion.range_pullbackSnd, AlgebraicGeometry.IsOpenImmersion.range_pullback_snd_of_left, AlgebraicGeometry.Scheme.Pullback.range_snd, AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, AlgebraicGeometry.Scheme.Pullback.range_snd_comp, AlgebraicGeometry.IsOpenImmersion.range_pullbackFst, AlgebraicGeometry.Scheme.Pullback.range_fst, AlgebraicGeometry.IsOpenImmersion.range_pullback_fst_of_right",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state the oriented-product local projection comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "oriented.?product|localTopos|canonicalSection",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state the oriented-product local projection comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gabber exactness of the local oriented product projection on sheaves of modules",
+   "results": "SheafOfModules.instAbelian, AlgebraicGeometry.Scheme.Modules.instAbelian, exact_of_localized_span, LocalizedModule.map_exact, SheafOfModules.LocalGeneratorsData.ctorIdx, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.LocalGeneratorsData, SheafOfModules.fullyFaithfulForget",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state the oriented-product local projection comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For local topoi the inverse image of the section is canonically the second direct image of the oriented fibre product",
+   "results": "CategoryTheory.GrothendieckTopology.overMapPullbackComp_inv_app_val_app, TopCat.Presheaf.pullbackObjObjOfImageOpen, TopCat.Sheaf.pullbackIso, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, CategoryTheory.GrothendieckTopology.overMapPullbackComp_hom_app_val_app, SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply, CategoryTheory.GrothendieckTopology.overMapPullbackComp",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state the oriented-product local projection comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-nearby-strict-local-description",
@@ -77,5 +235,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-local-oriented-projection-exact",
+  "worker": "stage1",
+  "summary": "Proved Gabber’s comparison using the canonical closed-point counit, explicit final-component triple refinements, the two stalk colimits, and identification of their map with the specified adjunction unit. No new nodes: all supporting facts already exist. Statement unchanged; corrected the enough-points variable in the source corollary inside the proof.",
+  "blueprint": "Realizes the strict-local exact-projection input to the normal-cone specialization / external-product comparison in the proof paragraph “(1) and (2)” of lem-trf-local-term-locality, through the existing ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-inverse-image-representable",
+    "why": "General representable base-change formula expresses the compatibility condition as a fibre product of etale B-schemes."
+   },
+   {
+    "node": "lem-galois-stalk-representable",
+    "why": "General representable-stalk evaluation identifies lifts to etale objects with stalk elements in the neighbourhood calculation."
+   },
+   {
+    "node": "lem-galois-yoneda-hom-bijection",
+    "why": "General Yoneda identifies projection sections from the inverse-image formula; this is a categorical tool."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "The general constant-coefficient lift of any geometric morphism supplies the exact module pullback and compatibility of its units; it does not replace the oriented-product argument."
+   },
+   {
+    "node": "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+    "why": "The general set-sheaf local-section theorem supplies locality of A and S, with the whole scheme as the open; this unit has no replacement for that scheme-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "General subcanonicity converts global sections of representable etale sheaves into actual sections used in the triple refinements."
+   },
+   {
+    "node": "lemma-openclosed-point-ulift",
+    "why": "The general conservative geometric-point family detects the comparison isomorphism on B, at the coefficient universe."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-inverse-image-representable",
+  "lem-galois-stalk-representable",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lemma-openclosed-point-ulift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q52-215b1e4cc",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q52-215b1e4cc (reviewer sub-agent of L); spot-checked: Read all eight steps and cited statements; checked ILO XI §§1–2.3.1 and supporting Stacks passages. Explicit refinements prove both stalk-colimit directions, and the unit calculation identifies the specified map. Constant-module coefficients and exactness are justified. Enough points is correctly used on B. No new nodes, duplicates, cycles, or target weakening found. Accepted all seven declared tool uses; detailed checks are in review.md."
  }
 }

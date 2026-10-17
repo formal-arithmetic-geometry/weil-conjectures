@@ -18,9 +18,134 @@
   "lem-kun-filtered-tensor-graded-comparison",
   "lem-pc-derived-tensor-second-factor-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For good filtered complexes $P,Q$, put $B(P,Q)=\\operatorname{Tot}(P\\otimes_R Q)$ with the convolution filtration in the statement. By [lem-kun-filtered-tensor-graded-comparison], this filtration is uniformly finite and its underlying, step and graded modules are flat and its underlying, step and graded complexes are K-flat. Thus $B(P,Q)$ is again good. For filtered chain maps $u,v$, set $B(u,v)(x\\otimes y)=u(x)\\otimes v(y)$. The same cited statement supplies filtration preservation and simultaneous naturality of the canonical graded comparisons. The tensor-map formula preserves identities and composition on generators, so this is a bifunctor on good filtered complexes before passing to homotopies.",
+   "uses": [
+    "lem-kun-filtered-tensor-graded-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H7Y (proposition-kunneth-filtered), convolution and graded comparison preceding Tag 0H7W (lemma-kunneth-converges)"
+   }
+  },
+  {
+   "text": "We check explicitly that this bifunctor passes to the homotopy classes of [def-kun-finite-filtered-module-homotopy]. If $u-u'=dh+hd$ is a filtered homotopy and $v$ is a filtered chain map, define $H(x\\otimes y)=h(x)\\otimes v(y)$. For $\\deg x=p$, the two mixed terms in $dH+Hd$ have coefficients $(-1)^{p-1}$ and $(-1)^p$ and cancel; the remaining terms give $(u-u')(x)\\otimes v(y)$. If $v-v'=dk+kd$, use $J(x\\otimes y)=(-1)^p u(x)\\otimes k(y)$: the terms involving $d_Px$ cancel and the remainder is $u(x)\\otimes(v-v')(y)$. These computations use precisely the signed differential of [def-pc-tensor-complex-sheaves]. Both homotopies preserve convolution filtration since $h,k,u,v$ preserve each factor's filtration step. Adding the two homotopies handles simultaneous changes of representatives. Hence $B$ induces a bifunctor $\\mathcal G_f(R)\\times\\mathcal G_f(R)\\to\\mathcal G_f(R)$, and the representative-level comparisons are still natural on these homotopy classes.",
+   "uses": [
+    "def-kun-finite-filtered-module-homotopy",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition 012Z (definition-associated-simple-complex); explicit signed tensor-homotopy calculation for the filtered homotopies in the discussion before Derived Categories Definition 05S2"
+   }
+  },
+  {
+   "text": "Write $L:\\mathcal G_f(R)\\to\\overline{\\mathcal G}=\\mathcal G_f(R)[W^{-1}]$. Graded quasi-isomorphisms contain identities. By [lem-kun-filtered-tensor-graded-comparison], if $u,v\\in W$ then $B(u,v)\\in W$; this includes $(u,1)$ and $(1,v)$. Thus $LB$ inverts every pair in $W\\times W$. Apply [lem-sfb-product-localization] to the two factors $L$: $L\\times L$ is a localization at $W\\times W$. Clause (1) of [lem-weil-pbc-localization-universal-property] now factors $LB$ through $L\\times L$, giving $\\overline B:\\overline{\\mathcal G}\\times\\overline{\\mathcal G}\\to\\overline{\\mathcal G}$ with its specified comparison to $LB$. In the formal-inversion model its value on $(Lu,Lv)$ is $L B(u,v)$, and on an inverse denominator it is the inverse of this map. No functorial choice of resolutions has been used.",
+   "uses": [
+    "lem-kun-filtered-tensor-graded-comparison",
+    "lem-sfb-product-localization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG (lemma-properties-left-localization), universal property; finite-product and natural-transformation extensions supplied by the cited Mathlib leaves"
+   }
+  },
+  {
+   "text": "By [lem-kun-finite-filtered-kflat-replacement] the inclusion induces an equivalence $E:\\overline{\\mathcal G}\\simeq\\mathcal D_f(R)$. Choose a quasi-inverse $S$ and its unit and counit. Define $U\\star V=E\\overline B(SU,SV)$ and define its maps by the same composite of functors. The unit of the equivalence identifies $(EP)\\star(EQ)$ with $E\\overline B(P,Q)$, naturally in localized good objects $P,Q$. This proves the asserted transport. A different quasi-inverse gives the same construction up to the natural isomorphism obtained by inserting the unit and counit; the statement requires a bifunctor, not a functorial free resolution.",
+   "uses": [
+    "lem-kun-finite-filtered-kflat-replacement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H7X (lemma-resolution-filtered-complex); use of the good-replacement equivalence stated in the cited node"
+   }
+  },
+  {
+   "text": "To descend forgetting the filtration, let $u:K\\to K'$ represent an element of $W$. Choose common finite bounds $a<b$ for the two filtrations. Descend from $r=b$, where both steps are zero. The short exact sequences $0\\to F^{r+1}K\\to F^rK\\to\\operatorname{gr}^rK\\to0$ and their primed analogues give natural long exact sequences by [lem-weil-pbc-complex-ses-homology-long-exact, lem-weil-pbc-complex-ses-long-exact-naturality]. Assuming $F^{r+1}u$ is a quasi-isomorphism, their five consecutive terms $A=H^{n-1}(\\operatorname{gr}^rK)$, $B=H^n(F^{r+1}K)$, $C=H^n(F^rK)$, $D=H^n(\\operatorname{gr}^rK)$, $E_0=H^{n+1}(F^{r+1}K)$ have bijective vertical maps except possibly at $C$. For injectivity, $c$ mapping to zero has zero image in $D$ and equals the image of some $b\\in B$. The image $b'$ lies in the image of $A'$; lift its preimage through $A\\simeq A'$ and subtract its image from $b$. The result maps to zero in $B'$, hence is zero, so $c=0$. For surjectivity, lift the image in $D'$ of $c'\\in C'$ through $D\\simeq D'$. Its image in $E_0$ is zero by injectivity there, so it lifts to $c\\in C$. The difference $c'-u(c)$ comes from $B'$ and can be corrected using $B\\simeq B'$. Thus $F^ru$ is a quasi-isomorphism. Finite induction reaches $F^aK=K$, proving that the underlying $u$ is a quasi-isomorphism, with no cochain-degree bound.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-complex-ses-long-exact-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S3 (lemma-filtered-derived-functors), forgetful-functor argument, specialized to uniform finite bounds; long exact sequence is Homology Tag 0117"
+   }
+  },
+  {
+   "text": "Forgetting a filtered homotopy gives an ordinary homotopy, and restricting it to a filtration step and then quotienting gives a homotopy on each associated graded complex [def-kun-finite-filtered-module-homotopy]. Consequently forgetting and each $\\operatorname{gr}^a$, followed by the ordinary derived quotient, define functors $\\mathcal H_f(R)\\to D(R)$. The first inverts $W$ by Step 5 and the latter do so by the definition of $W$. Clause (1) of [lem-weil-pbc-localization-universal-property] therefore produces $\\omega:\\mathcal D_f(R)\\to D(R)$ and $\\operatorname{gr}^a:\\mathcal D_f(R)\\to D(R)$ with their canonical representative identifications. Restricting these functors along $E$ gives the corresponding underlying and graded functors on $\\overline{\\mathcal G}$.",
+   "uses": [
+    "def-kun-finite-filtered-module-homotopy",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S2 (definition-filtered-derived) and Tag 05S3 (lemma-filtered-derived-functors)"
+   }
+  },
+  {
+   "text": "On good pairs, the underlying comparison of [lem-kun-filtered-tensor-graded-comparison] identifies the underlying $B(P,Q)$ with $P\\otimes_R^{\\mathbf L}Q$ in $D(R)$, naturally for both chain maps. Its ordinary derived tensor is the one in [lem-pc-derived-tensor-second-factor-functor] with $A=R$: the identity K-flat resolution of $P$ computes it, and the second-variable transformation is represented by $1_P\\otimes v$. Hence for a pair $u,v$ the resulting map is represented by $u\\otimes v$, by factoring the pair as $(u,1)$ followed by $(1,v)$. Step 2 shows invariance under homotopies. These are therefore a natural isomorphism between the two functors on $\\mathcal G_f(R)\\times\\mathcal G_f(R)$ obtained by restricting $\\omega E\\overline B$ and the ordinary derived tensor of the underlying objects. Both invert $W\\times W$. Apply clause (2) of [lem-weil-pbc-localization-universal-property] to the product localization of Step 3 to descend this natural isomorphism to all of $\\overline{\\mathcal G}\\times\\overline{\\mathcal G}$, with the same representative formula.",
+   "uses": [
+    "lem-kun-filtered-tensor-graded-comparison",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sfb-product-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Convolution construction before Tag 0H7W and Tag 0H7Y; ordinary K-flat tensor is Tag 06Y6 (lemma-derived-base-change) and lemma-derived-tor-quasi-isomorphism-other-side"
+   }
+  },
+  {
+   "text": "Fix $a$. On good representatives use the canonical comparison of [lem-kun-filtered-tensor-graded-comparison], oriented as $\\operatorname{gr}^a B(P,Q)\\simeq\\bigoplus_{i+j=a}\\operatorname{gr}^iP\\otimes_R^{\\mathbf L}\\operatorname{gr}^jQ$. Both sides are functors on the homotopy category: Step 2 and quotienting its filtered homotopies show this for the comparison. The right side is a finite biproduct on each pair of objects, because only the finite nonzero graded ranges can contribute. For a map between pairs, take the union of their finite supports and use the direct sum of the graded tensor maps, inserting zero summands as needed. Enlarging the finite support inserts only zero objects, so the resulting map is independent of it; componentwise composition gives the functor laws. For $u,v\\in W$, every summand map is an isomorphism, so this functor inverts $W\\times W$. The left side does too by Steps 3 and 6. The cited comparison is simultaneously natural on representatives. Clause (2) of [lem-weil-pbc-localization-universal-property] and [lem-sfb-product-localization] descend it to a natural isomorphism on both localized good variables. This includes morphisms whose source and target have different filtration bounds.",
+   "uses": [
+    "lem-kun-filtered-tensor-graded-comparison",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sfb-product-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Convolution graded comparison preceding Tag 0H7W (lemma-kunneth-converges), used in Tag 0H7Y (proposition-kunneth-filtered); localization as in Derived Categories Tag 05S2"
+   }
+  },
+  {
+   "text": "Apply the comparisons of Steps 7 and 8 to $(SU,SV)$ and use the counit $ES\\simeq1$ of [lem-kun-finite-filtered-kflat-replacement]. Naturality of $\\omega$ and $\\operatorname{gr}^i$ gives $\\omega ES\\simeq\\omega$ and $\\operatorname{gr}^i ES\\simeq\\operatorname{gr}^i$, producing exactly both displayed isomorphisms of the statement for $U\\star V$. Their formulas on good chain maps are those already fixed in Steps 7 and 8. To spell out naturality for denominators, an equation $F(w)\\eta_X=\\eta_YG(w)$ with $w\\in W$ implies $F(w)^{-1}\\eta_Y=\\eta_XG(w)^{-1}$ by multiplying by the two inverses. Thus the representative naturality squares also commute for inverse denominators and then for every composite word of ordinary maps and inverse denominators in either variable. Clause (3) of [lem-weil-pbc-localization-universal-property] ensures that these are the descended comparisons, independently of the word representing a morphism. In particular the underlying map for a pair between good representatives is the ordinary derived tensor of the underlying maps, and all identity and composition laws persist.",
+   "uses": [
+    "lem-kun-finite-filtered-kflat-replacement",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S2 (definition-filtered-derived); explicit transport and denominator naturality for the convolution comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-filtered-tensor-graded-comparison",
+  "def-kun-finite-filtered-module-homotopy",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sfb-product-localization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-kun-finite-filtered-kflat-replacement",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Explicit homotopy and localization extension of Tags 0H7X, 0H7Y and the convolution construction preceding 0H7W; Derived Categories Tags 05S2, 05S3."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +181,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Tor'_obj_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k j : C),\\n  ((CategoryTheory.Tor' C n).obj\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any objects $k, j \\\\in \\\\mathcal{C}$, the $n$-th Tor functor $\\\\mathrm{Tor}_n(k, j)$ is equal to the $n$-th left-derived f\"}\n  {\"name\": \"CategoryTheory.Tor'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"For a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n : \\\\mathcal{C} \\\\times \\\\mathcal{C} \\\\to \\\\mathcal{C}$ is the $n$-th left-derived functo\"}\n  {\"name\": \"CategoryTheory.Tor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"The $ n $-th left-derived functor of the tensor product operation in a monoidal abelian category, constructed by taking projective resolutions. For each object $ X $, $ \\\\mathrm{Tor}_n(X,-) $ is the $ \"}\n  {\"name\": \"CategoryTheory.Tor'_map_app\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y) (j : C),\\n  ((Category\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any natural number $n$, morphism $f: X \\\\to Y$, and object $j \\\\in \\\\mathcal{C}$, the application of the $n$-th Tor functo\"}\n  {\"name\": \"CategoryTheory.Tor_map\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y),\\n  (CategoryTheory.To\", \"doc\": \"In a monoidal abelian category with projective resolutions, for any morphism $f: X \\to Y$ and natural number $n$, the action of the $n$-th Tor functor on $f$ is equal to the $n$-th left-derived natural\"}\n  {\"name\": \"CategoryTheory.Tor'_obj_map\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k : C) {X Y : C} (f : X ⟶ Y),\\n  ((Category\", \"doc\": \"For any morphism $f: X \\to Y$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the object map of the $n$-th Tor functor $\\\\mathrm{Tor}_n(-, k)$ applied to $f$ equals the eval\"}\n  {\"name\": \"CategoryTheory.Tor_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (X : C),\\n  (CategoryTheory.Tor C n).obj X =\", \"doc\": \"For each object $X$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n(X,-)$ is defined as the $n$-th left-derived functor of the left \"}\n  {\"name\": \"HomologicalComplex.HasTensor\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [(CategoryTheory.MonoidalCategory.curriedTensor C).Additive] →\\n          [∀ (X₁ : C), ((CategoryTheory.MonoidalCategory.currie\", \"doc\": \"Given two homological complexes $K_1$ and $K_2$ in a category $\\\\mathcal{C}$ equipped with a monoidal structure via the curried tensor product bifunctor, this definition asserts the existence of a tens\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary tensor homotopies in BifunctorHomotopy.lean do not include finite filtrations or the localization at graded quasi-isomorphisms; Tor and ordinary derived-category declarations do not supply this bifunctor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"filtered\", \"tensor\"",
+   "results": "[loogle] OK 0 hit(s); returned names: none",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary total tensor or Tor of unfiltered modules, not convolution filtrations and graded-quasi-isomorphism localization."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*tensor.*local|filtered.*homotop|convolution.*filtr",
+   "results": "[grep] OK 0 hit(s); returned names: none",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary total tensor or Tor of unfiltered modules, not convolution filtrations and graded-quasi-isomorphism localization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor bifunctor on bounded filtration cochain complexes localized at associated graded quasi isomorphisms",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; returned names: none",
+   "date": "2026-10-17",
+   "verdict": "unavailable: service returned a rate-limit error, not a negative search result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product on finite filtered cochain complexes modulo filtration preserving homotopies descends after inverting graded quasi isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s); returned names: CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor_obj, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, CategoryTheory.Tor', HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary total tensor or Tor of unfiltered modules, not convolution filtrations and graded-quasi-isomorphism localization."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered|filtration|convolution",
+   "results": "[grep] OK 0 hit(s); returned names: none; Mathlib/Algebra/Homology/Monoidal.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary total tensor or Tor of unfiltered modules, not convolution filtrations and graded-quasi-isomorphism localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated graded of derived convolution tensor product is the direct sum of derived tensor products of graded pieces, natural in the filtered derived category",
+   "results": "[leanfinder] OK 8 hit(s); returned names: HomologicalComplex.instHasTensorXTensorUnit_1, CategoryTheory.Tor'_obj_obj, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, CategoryTheory.Tor, CategoryTheory.GradedObject.HasGoodTensor₁₂Tensor, CategoryTheory.Tor_obj, CategoryTheory.Tor'",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary total tensor or Tor of unfiltered modules, not convolution filtrations and graded-quasi-isomorphism localization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-kun-bounded-tensor-tor-spectral-sequence",
@@ -80,5 +247,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-kun-filtered-tensor-localization",
+  "worker": "stage1",
+  "summary": "Checked the Stacks convolution construction, uniform finite filtration hypotheses, and all cited node statements. Proved signed filtered-homotopy descent, localization in both variables, transport through good replacements, finite-induction descent of forgetting, and simultaneous naturality of the underlying and graded comparisons. Reused existing nodes throughout; no new nodes or statement changes.",
+  "blueprint": "lem-kun-0f0f: preliminary integral homological algebra for its tensor bound, through lem-kun-integral-derived-tensor-bounded-torsion, lem-kun-integral-bounded-kunneth-exact and lem-kun-bounded-tensor-tor-spectral-sequence; realizes the latter auxiliary proof step 7, descent of convolution tensor and underlying/graded comparisons. No change of the projection-formula route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Ordinary module K-flat derived tensor, first/second-variable functoriality, and canonical representative computation are generic algebraic tools not restated by this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q87-4216cbc4e",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q87-4216cbc4e (reviewer sub-agent of L); spot-checked: Read all nine steps, cited statements, unit/chapter route, and Stacks/Mathlib sources. Verified homotopy signs, product localization, replacement equivalence, finite-filtration induction, and naturality. Edge cases and duplicate/cycle checks passed. Accepted the ordinary derived-tensor tool use. No repairs; detailed checks are in review.md."
  }
 }

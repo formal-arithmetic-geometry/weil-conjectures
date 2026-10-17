@@ -51,22 +51,19 @@
    }
   },
   {
-   "text": "The base change $h_Q:T_Q\\to Y_Q$ is qcqs by [lem-weil-pbc-qcqs-morphism-permanence](3). Apply [lem-kun-0f1c-exchange] to $h_Q$ and the extension $L/Q$. It gives canonical abelian exchange from the ordinary generic fibre to the geometric generic fibre, with no separability assumption on $L/Q$. Compose with step 1. If $B$ is not affine, first restrict along $Y_V\\hookrightarrow Y$: the same [lem-kun-0f09] for the one-object system consisting of this smooth open immersion gives the needed restriction of $Rh_*E$. The map $\\operatorname{Spec}L\\to B$ factors through every such $V$, so this proves the comparison for the original $Y$. All open immersions here are qcqs: finite-type schemes over $F$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], and opens in them are quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]; intersections of these opens are again quasi-compact. Locally Noetherian schemes are quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]; hence every morphism between the finite-type $F$-schemes here is qcqs by [lem-weil-pbc-qcqs-morphism-permanence](1). Finite type of these schemes over $F$ follows by composing their finite-type structure maps: local finite type composes by [lem-weil-pbc-proper-fp-permanence](e), and a finite cover by affine charts of $B$ and of their preimages proves quasi-compactness from the definition of finite type. Finally [lem-kun-unbounded-abelian-exchange-comparison] identifies the forgotten module exchange with this abelian exchange through specified endpoint isomorphisms, and its forgetful functors reflect isomorphisms. Thus the actual constant-$A$ module comparison\n$$g_Y^*Rh_*E\\longrightarrow Rh_{\\bar\\eta,*}g_T^*E$$\nis invertible. The abelian horizontal pasting formula [lem-weil-pbc-exchange-identity-pasting](2) identifies the two-stage composite with the canonical exchange for $\\operatorname{Spec}L\\to B$. For the module maps the same conclusion follows through the specified endpoint comparisons of [lem-kun-unbounded-abelian-exchange-comparison]. Equivalently, composition here is composition of adjunction mates: substitute the two counits into the definition of the exchange for a composite inverse image; the middle unit and counit cancel by the adjunction triangle identity. Consequently the composite is the canonical exchange, not a chosen isomorphism of objects.",
+   "text": "Apply [lem-sf-etale-generic-direct-image-exchange] with the actual $F,B,N,A,L$ to complete the passage from step 1 to the geometric generic fibre. It gives canonical module exchange for every qcqs $h:T\\to Y$ of finite-type $B$-schemes and every bounded-below constant-$A$ input. The lemma includes passage through $Q=F(B)$, arbitrary (possibly inseparable) $L/Q$, restriction from a nonempty affine open of $B$, and identification of the composite with the canonical adjunction-mate map. No finite-field hypothesis enters. Finite type over $F$ follows from locally-finite-type composition [lem-weil-pbc-proper-fp-permanence](e) and finite affine covers. Such schemes are Noetherian [lem-weil-pbc-finite-type-over-noetherian], their opens are quasi-compact [lem-weil-pbc-noetherian-open-subscheme-noetherian], and they are quasi-separated [lem-weil-pbc-locally-noetherian-quasi-separated]. Hence morphisms between these schemes, including the stratum immersions below, are qcqs by [lem-weil-pbc-qcqs-morphism-permanence](1).",
    "uses": [
-    "lem-kun-0f1c-exchange",
-    "lem-kun-0f09",
+    "lem-sf-etale-generic-direct-image-exchange",
+    "lem-weil-pbc-proper-fp-permanence",
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-kun-unbounded-abelian-exchange-comparison",
-    "lem-weil-pbc-qcqs-morphism-permanence",
     "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-weil-pbc-proper-fp-permanence",
-    "lem-weil-pbc-exchange-identity-pasting"
+    "lem-weil-pbc-qcqs-morphism-permanence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1C (lemma-base-change-field-extension), and Tag 0F09; module comparison and composition of mates"
+    "place": "Tags 0F09 (lemma-smooth-base-change-general) and 0F1C (lemma-base-change-field-extension); agent geometric-generic specialization and constant-module transport."
    }
   },
   {
@@ -104,44 +101,37 @@
    }
   },
   {
-   "text": "For a finite locally perfect complex $P$ on any of the strata used below, establish internal-Hom exchange with any second input $N$ directly on its etale trivializing cover. Slice restriction of derived internal Hom is [lem-weil-pbc-ringed-internal-hom-exact-restriction]; the slice is the small etale site of the covering scheme by [lem-weil-pbc-etale-site-localization-open] and inverse image is restriction by [lem-weil-pbc-etale-inverse-image-restriction]. On such a slice $P$ is a bounded complex of constant finite projective $A$-modules. For one term $E$, the evaluation map $N\\otimes E^\\vee\\to\\mathcal Hom(E,N)$ is an isomorphism by [lem-pc-finite-projective-internal-hom-evaluation]. Hom from $E$ is exact since it is a direct summand of a finite power of the identity functor. For a bounded complex of these terms, the total Hom complex has in each degree only finitely many summands; a quasi-isomorphism in its second input remains a quasi-isomorphism, by induction on the finite number of nonzero terms using its degree filtration. Thus this ordinary total Hom computes derived Hom by [def-pur-derived-internal-hom]. Termwise dualization gives $R\\mathcal Hom(P,N)=P^\\vee\\otimes_A^LN$, with the signed differential $d(\\phi)=d_N\\phi-(-1)^{|\\phi|}\\phi d_P$. Pullback preserves finite sums and splittings by exactness, and preserves derived tensor by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The map on Hom complexes is consequently the identity on the corresponding finite sums and summands, with the same differential. It is the evaluation-adjoint comparison because both evaluations send $\\phi\\otimes p$ to $\\phi(p)$. These local isomorphisms prove the canonical comparison globally: apply [lem-weil-pbc-etale-cover-detects-iso] to each cohomology sheaf and [lem-weil-pbc-unbounded-derived-iso-cohomology]. For the stratum models in the common interval $[a,b]$ and $N$ with cohomology in $[c,d]$, this calculation gives Hom cohomology in $[c-b,d-a]$: each term in the finite Hom complex shifts the interval of $N$ by the negative of its degree. Vanishing of a cohomology sheaf is local on this cover, so this bound holds globally on the stratum. No constructibility descent theorem for this Hom is needed below.",
+   "text": "For a stratum restriction $P$ with the bounded local finite-projective models in degrees $[a,b]$ supplied below, apply [lem-sf-etale-generic-perfect-hom] to $g_S:S_{\\bar\\eta}\\to S$. For any bounded $N$ in degrees $[c,d]$, the lemma identifies the canonical evaluation-induced internal-Hom comparison as an isomorphism and bounds both Hom objects in $[c-b,d-a]$. It applies to arbitrary scheme pullback and finite commutative $A$, so in particular to the actual generic projection. Its evaluation identity specifies the map used later, not just the two objects.",
    "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-weil-pbc-etale-site-localization-open",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-pc-finite-projective-internal-hom-evaluation",
-    "def-pur-derived-internal-hom",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-etale-cover-detects-iso",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+    "lem-sf-etale-generic-perfect-hom"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09BI (lemma-connected-ctf-locally-constant), local finite-projective calculation; agent evaluation computation"
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08DM (lemma-Rhom-strictly-perfect) and 08DQ (lemma-dual-perfect-complex); agent constant-module ringed-site version and pullback evaluation/interval calculation."
    }
   },
   {
-   "text": "We may check the desired internal-Hom comparison after restricting $X$ to affine open subschemes: their inverse images cover $X_{\\bar\\eta}$, and the ringed-slice Hom restriction and etale-local isomorphism criteria in step 5 identify precisely these restrictions of the map. An affine open of $X$ is finite type over $F$: $X$ is Noetherian by step 2, its open is quasi-compact, and a finite affine cover in the definition of local finite type suffices. It is separated over $F$. This reduction also handles a possibly nonseparated smooth curve $B$; we have not silently assumed $X$ is separated over $F$. The Tor interval survives this open restriction: for a module sheaf $T$ on the open, extend it by exact $j_!$; then $j^*(K\\otimes^Lj_!T)=j^*K\\otimes^LT$ by derived tensor pullback and $j^*j_!T=T$ by the inside-open stalk formula [lem-weil-pbc-extension-by-zero-stalks]. Exact restriction carries the assumed vanishing to the open. On this affine scheme apply [lem-sf-etale-smooth-stratified-ctf] to $K$, with its actual finite Tor interval $[a,b]$. It supplies the finitely many locally closed $s_r:S_r\\hookrightarrow X$, restrictions $P_r=s_r^*K$ with the finite-projective models of step 5, and the finite sequence of localization triangles with pieces $Rs_{r!}P_r$. By [lem-sf-hom-triangulated] internal Hom takes these triangles to triangles contravariantly in $K$; exact inverse image does the same by [lem-sf-exact-functor-derived-triangulated]. The canonical comparisons form a morphism of these triangles: on cochain Hom models, pulled-back evaluation is natural in each cochain map and commutes with the signed shift differential, so its transpose commutes with the three triangle arrows and the shift identification. Starting at $F_m=0$ and descending through the supplied finite sequence, [lem-sf-triangle-morphism-iso] proves the comparison for $F_{r-1}$ from those for $F_r$ and $Rs_{r!}P_r$. Thus invertibility reduces to the pieces $Rs_{r!}P_r$. The zero-dimensional, empty-scheme, and zero-complex cases are included (the filtration can be empty).",
+   "text": "We may check the desired internal-Hom comparison after restricting $X$ to affine open subschemes: their inverse images cover $X_{\\bar\\eta}$, using ringed-slice Hom restriction and the etale-local cohomological isomorphism criteria cited here. Finite type composes by [lem-weil-pbc-proper-fp-permanence](e) and the finite affine-cover definition. Thus $X$ is Noetherian [lem-weil-pbc-finite-type-over-noetherian], its opens are quasi-compact [lem-weil-pbc-noetherian-open-subscheme-noetherian], and its affine opens are finite type over $F$. It is separated over $F$. This reduction also handles a possibly nonseparated smooth curve $B$; we have not silently assumed $X$ is separated over $F$. The Tor interval survives this open restriction: for a module sheaf $T$ on the open, extend it by exact $j_!$; then $j^*(K\\otimes^Lj_!T)=j^*K\\otimes^LT$ by derived tensor pullback and $j^*j_!T=T$ by the inside-open stalk formula [lem-weil-pbc-extension-by-zero-stalks]. Exact restriction carries the assumed vanishing to the open. On this affine scheme apply [lem-sf-etale-smooth-stratified-ctf] to $K$, with its actual finite Tor interval $[a,b]$. It supplies the finitely many locally closed $s_r:S_r\\hookrightarrow X$, restrictions $P_r=s_r^*K$ with the finite-projective models of step 5, and the finite sequence of localization triangles with pieces $Rs_{r!}P_r$.  The canonical comparisons form a morphism of these distinguished triangles by [lem-sf-etale-generic-hom-triangle]. Starting at $F_m=0$, where the comparison is the unique isomorphism $0\\to0$, descend through the finite filtration: the lemma makes $\\beta_{F_{r-1},M}$ an isomorphism once those for $F_r$ and $Rs_{r!}P_r$ are. Thus it suffices to prove the piece comparisons. The empty filtration is included.",
    "uses": [
     "lem-weil-pbc-ringed-internal-hom-exact-restriction",
     "lem-weil-pbc-etale-cover-detects-iso",
     "lem-weil-pbc-unbounded-derived-iso-cohomology",
     "lem-sf-etale-smooth-stratified-ctf",
-    "lem-sf-hom-triangulated",
     "prop-weil-pbc-inverse-image-modules-exact",
     "def-weil-finite-type-morphism",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "lem-weil-pbc-extension-by-zero-stalks",
     "lem-cbc-open-closed-recollement",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-sf-triangle-morphism-iso"
+    "lem-sf-etale-generic-hom-triangle",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09BI and the finite smooth-stratum devissage interface; agent finite induction"
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated); agent compatibility of the evaluation-induced comparison with signed triangle maps."
    }
   },
   {
@@ -159,32 +149,39 @@
    }
   },
   {
-   "text": "Check that the piecewise isomorphism just computed is the specified map $\\beta$, which is necessary to use the induction in step 6. To specify the ambient stratum-Hom isomorphism canonically, here is its adjunction calculation, independent of the choice of an unspecified natural isomorphism in [lem-weil-stratum-ambient-hom]. First the canonical projection map $i_*P\\otimes^LC\\to i_*(P\\otimes^Li^*C)$ is invertible: after $i^*$ it is the identity by [lem-kun-04ca] and derived tensor pullback; after restriction to the complementary open both sides vanish. These restrictions detect an isomorphism on every cohomology sheaf, by the support characterization of [lem-kun-04ca]. The open projection formula follows from [lem-weil-pbc-ringed-slice-extension-tensor]: choose a flat-term K-flat representative of $C$ by [lem-pc-kflat-resolution], whose open restriction remains K-flat by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and apply the sheaf formula termwise. The exact $j_!$ of [lem-cbc-open-closed-recollement] commutes with direct sums since it is a left adjoint; the identical summands and differentials therefore identify the total tensor complexes, which compute derived tensor by [lem-weil-pbc-site-derived-tensor-descent]. Combining the closed and open formulas gives the canonical projection isomorphism $C\\otimes^LRs_!P=Rs_!(s^*C\\otimes^LP)$.\n\nThe module adjunction for inverse/direct image is [prop-weil-pbc-inverse-image-modules-exact], and the open extension adjunction and exactness are in [lem-cbc-open-closed-recollement]. They give the corresponding derived adjunctions: choose a K-injective second argument [prop-pur-kinjective-resolutions-exist]; its right-adjoint image is K-injective by [lem-weil-pbc-right-adjoint-preserves-kinjective], and apply the homotopy adjunction [lem-weil-pbc-termwise-adjunction-homotopy] and [lem-weil-pbc-kinjective-hom-derived]. Together with the ambient closed adjunction [lem-exc-closed-ambient], this proves $s^*\\dashv Rs_*$ and $Rs_!\\dashv Rs^!$. For the canonical tensor-Hom bijection, choose a K-flat representative $L_0$ of the second tensor input and a K-injective $I$ of the output. The Hom complex $\\mathcal Hom^\\bullet(L_0,I)$ is K-injective by [lem-pur-hom-kflat-into-kinjective]. The explicit cochain currying [lem-sc-derived-hom-tensor-total] identifies $\\mathcal Hom^\\bullet(C,\\mathcal Hom^\\bullet(L_0,I))$ with $\\mathcal Hom^\\bullet(\\operatorname{Tot}(C\\otimes L_0),I)$; this is the map sending a local map $f$ to $(c\\otimes l\\mapsto f(c)(l))$. Taking $H^0R\\Gamma$ and using [lem-pur-rhom-global-sections] gives exactly the tensor-Hom transposition, with its evaluation map. The K-flat resolution and tensor descent statements already cited justify both models. For every test $C$ the resulting natural bijections are\n$$\\begin{aligned}\n\\operatorname{Hom}(C,R\\mathcal Hom_X(Rs_!P,M))\n&=\\operatorname{Hom}(C\\otimes^LRs_!P,M)\\\\\n&=\\operatorname{Hom}(Rs_!(s^*C\\otimes^LP),M)\\\\\n&=\\operatorname{Hom}(s^*C\\otimes^LP,Rs^!M)\\\\\n&=\\operatorname{Hom}(s^*C,R\\mathcal Hom_S(P,Rs^!M))\\\\\n&=\\operatorname{Hom}(C,Rs_*R\\mathcal Hom_S(P,Rs^!M)).\n\\end{aligned}$$\n[lem-galois-yoneda-fully-faithful] specifies the isomorphism used at the two ends of step 7. Every bijection is specified by its evaluation, projection map, unit and counit. More explicitly, write $H=R\\mathcal Hom_S(P,Rs^!M)$ and let $u:C\\to Rs_*H$ have adjoint $\\widetilde u:s^*C\\to H$. The corresponding tensor-adjoint arrow is exactly\n$$C\\otimes^LRs_!P\\xrightarrow{\\pi_s}Rs_!(s^*C\\otimes^LP)\\xrightarrow{Rs_!(\\widetilde u\\otimes1)}Rs_!(H\\otimes^LP)\\xrightarrow{Rs_!\\mathrm{ev}}Rs_!Rs^!M\\xrightarrow{\\varepsilon^!_{s,M}}M.$$\nHere $\\pi_s$ is the projection isomorphism constructed above. This follows by applying the five displayed bijections in reverse order, including their units and counits. For the step-7 composite, the defining mate equation for $\\operatorname{Ex}_s$ identifies its adjoint with $g_S^*\\widetilde u$ followed by the step-5 Hom comparison and the step-4 exceptional comparison. Step 5 says that evaluating this adjoint is pulled-back evaluation followed by that exceptional comparison. Step 4 gives $\\varepsilon^!_{s_{\\bar\\eta},g_X^*M}\\circ Rs_{\\bar\\eta,!}(a_s)=g_X^*\\varepsilon^!_{s,M}$ after the $s_!$ base-change identification of step 7; for the open factor this is ordinary restriction of the same counit. Finally $g_X^*\\pi_s=\\pi_{s_{\\bar\\eta}}$ under these identifications: for the closed factor both are the identity after closed restriction and zero off the support, and for the open factor the termwise tensor formula uses identical summands. Substituting these three identities into the four-arrow formula shows that the transpose of the step-7 composite is precisely $g_X^*\\mathrm{ev}_{Rs_!P,M}$. By the tensor-Hom adjunction [def-pur-derived-internal-hom] a map with this transpose is unique. Consequently the composite is the canonical $\\beta_{Rs_!P,M}$. It follows from step 6 that $\\beta_{K,M}$ itself is an isomorphism. Its defining transpose, using the tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], is exactly\n$$\\mathrm{ev}\\circ(\\beta_{K,M}\\otimes1)=g_X^*\\mathrm{ev}_{K,M}.$$\nThis proves the evaluation clause as an identity of arrows, including for $K$ not site-perfect on all of $X$.",
+   "text": "The immersion projection lemma [lem-sf-etale-generic-immersion-projection] gives $\\pi_s:C\\otimes_A^LRs_!P\\xrightarrow{\\sim}Rs_!(s^*C\\otimes_A^LP)$ for arbitrary ambient test objects $C$. Its hypotheses are exactly the chosen closed-then-open factorization of $s$ and the ordinary constant-$A$ derived categories used here. It also identifies the pullback of $\\pi_s$ with $\\pi_{s_{\\bar\\eta}}$ under extension-by-zero base change; this is the projection compatibility needed for the evaluation calculation.",
    "uses": [
-    "lem-weil-stratum-ambient-hom",
-    "lem-exc-closed-ambient",
-    "def-pur-derived-internal-hom",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-kun-04ca",
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-cbc-open-closed-recollement",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pur-rhom-global-sections",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-sc-derived-hom-tensor-total",
-    "lem-galois-yoneda-fully-faithful"
+    "lem-sf-etale-generic-immersion-projection"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Agent adjunction-mate and evaluation calculation for the canonical internal-Hom comparison"
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I (lemma-j-shriek-and-tensor); agent derived immersion projection formula and cartesian compatibility, with closed-support detection as in etale-cohomology.tex, Tag 0A45 (lemma-cohomology-with-support-triangle)."
+   }
+  },
+  {
+   "text": "Use the canonical isomorphism $\\theta_s$ of [lem-sf-etale-generic-stratum-mate] for the ambient stratum-Hom identifications in the displayed piecewise composite. For $H=R\\mathcal Hom_S(P,Rs^!M)$ and $u:C\\to Rs_*H$, its inverse has tensor transpose\n$$C\\otimes^LRs_!P\\xrightarrow{\\pi_s}Rs_!(s^*C\\otimes^LP)\\xrightarrow{Rs_!(\\widetilde u\\otimes1)}Rs_!(H\\otimes^LP)\\xrightarrow{Rs_!\\mathrm{ev}}Rs_!Rs^!M\\xrightarrow{\\varepsilon_s^!}M.$$\nHere $\\widetilde u$ is the ordinary inverse/direct-image adjoint of $u$. The statement supplies the exact evaluation normalization at both ends; no choice of an unspecified object isomorphism is used.",
+   "uses": [
+    "lem-sf-etale-generic-stratum-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (lemma-internal-hom); agent tensor-Hom transposition of the closed/open immersion adjunctions, normalizing lem-weil-stratum-ambient-hom by evaluation."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-etale-generic-evaluation-coherence] to the cartesian square for $s$ and $g_X$. The extension-by-zero map is the one just checked on stalks; direct-image exchange is the canonical mate from step 2. The perfect-Hom map has the evaluation identity of step 5. The exceptional comparison for the closed factor has the counit identity of step 4; for the open factor $j^! = j^*$, restriction of that identity is the same counit identity for $s=ji$. Projection compatibility is supplied by the immersion projection lemma above. Hence the piecewise composite has transpose $g_X^*\\mathrm{ev}_{Rs_!P,M}$ and equals $\\beta_{Rs_!P,M}$. Since every factor in that composite is an isomorphism, these are precisely the piece comparisons required for the descending filtration argument. It follows that $\\beta_{K,M}$ is invertible. Its defining transpose is the required evaluation equation, under the canonical inverse-image tensor identification.",
+   "uses": [
+    "lem-sf-etale-generic-evaluation-coherence",
+    "lem-sf-etale-generic-immersion-projection",
+    "lem-cbc-open-closed-recollement",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (lemma-internal-hom); agent cartesian mate calculation using the projection, evaluation and exceptional counit identities."
    }
   },
   {
@@ -204,7 +201,6 @@
   }
  ],
  "proof_deps": [
-  "def-pur-derived-internal-hom",
   "def-weil-finite-type-morphism",
   "def-weil-pbc-constructible-complexes",
   "lem-cbc-open-closed-recollement",
@@ -213,44 +209,33 @@
   "lem-galois-yoneda-fully-faithful",
   "lem-kun-04ca",
   "lem-kun-0f09",
-  "lem-kun-0f1c-exchange",
-  "lem-kun-unbounded-abelian-exchange-comparison",
-  "lem-pc-finite-projective-internal-hom-evaluation",
-  "lem-pc-kflat-resolution",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-pur-rhom-global-sections",
-  "lem-sc-derived-hom-tensor-total",
+  "lem-sf-etale-generic-direct-image-exchange",
+  "lem-sf-etale-generic-evaluation-coherence",
+  "lem-sf-etale-generic-hom-triangle",
+  "lem-sf-etale-generic-immersion-projection",
+  "lem-sf-etale-generic-perfect-hom",
+  "lem-sf-etale-generic-stratum-mate",
   "lem-sf-etale-smooth-stratified-ctf",
   "lem-sf-exact-functor-derived-triangulated",
-  "lem-sf-hom-triangulated",
   "lem-sf-triangle-morphism-iso",
   "lem-weil-pbc-affine-morphism-permanence",
   "lem-weil-pbc-etale-cover-detects-iso",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-site-localization-open",
   "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-  "lem-weil-pbc-exchange-identity-pasting",
   "lem-weil-pbc-extension-by-zero-stalks",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-kinjective-hom-derived",
   "lem-weil-pbc-localization-colimit-principal-localizations",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-weil-pbc-open-immersion-etale",
   "lem-weil-pbc-proper-fp-permanence",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-ringed-slice-extension-tensor",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-spec-small-colimit-limit",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
   "lem-weil-pbc-unbounded-derived-iso-cohomology",
   "lem-weil-stratum-ambient-hom",
   "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-pur-kinjective-resolutions-exist",
   "prop-weil-pbc-inverse-image-modules-exact",
   "thm-constructible-serre",
   "thm-dg-finite-type-constructibility"
@@ -467,7 +452,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-weil-etale-geometric-biduality",
   "by": "worker",
@@ -492,8 +477,8 @@
   "date": "2026-10-17",
   "item": "lem-sf-etale-generic-exchange-algclosed",
   "worker": "stage1",
-  "summary": "Nine-step ordinary-etale proof over arbitrary algebraically closed F, reusing existing general limit and field-extension base change, closed support, finite smooth devissage and ambient stratum Hom. No new nodes. Explicit boundedness checks and evaluation/counit calculations; covers nonseparated B by affine-local Hom reduction. Statement unchanged. Second reading cites affine/qcqs/finite-type permanence, uses the canonical 0F1C exchange node and horizontal pasting, and expands the evaluation calculation and the supported-module identification. Q46 repairs the released C1 finding by citing the existing two-isomorphisms criterion lem-sf-triangle-morphism-iso in steps 4 and 6, making the descending induction explicit, and renewing per-step statement quotations. No new node or statement change.",
-  "blueprint": "Realizes thm-weil-etale-geometric-biduality proof paragraph 4 generic restriction, using the smooth-limit, closed-support and stratified-Hom route of blueprint lem-weil-geometric-generic-exchange, with arbitrary F and ordinary finite coefficients.",
+  "summary": "Q57 repair of the human return: retain the existing proof route and item statement/Lean record; replace the hidden arguments of old steps 2, 5, 6 and 8 by six self-contained statement-only lemmas for generic direct image, locally finite-projective Hom exchange with interval bounds, canonical triangle compatibility, immersion projection, evaluation-normalized stratum adjunction, and cartesian evaluation coherence. Preserve the affine-local reduction and finite-stratification induction explicitly. Retain existing search evidence with actual per-query results; unavailable searches stay unavailable.",
+  "blueprint": "Realizes thm-weil-etale-geometric-biduality proof paragraph 4 generic restriction via the existing lem-weil-geometric-generic-exchange route: principal-open/field-extension direct image, closed support, local perfect Hom, finite smooth-stratum triangles, and the evaluation calculation.",
   "tool_uses": [
    {
     "node": "def-pur-derived-internal-hom",
@@ -686,6 +671,10 @@
    {
     "node": "thm-dg-finite-type-constructibility",
     "why": "Generic ordinary-etale or ringed-site tool: Bounded constructibility of every finite-type direct image. Supplies the statement quoted in citations.json; this unit has no replacement at this generality."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "General ordinary-etale or ringed-site tool used in the retained proof route; A morphism of distinguished triangles with two isomorphic components is an isomorphism. No result of the biduality unit supplies this generic interface."
    }
   ]
  },
@@ -737,15 +726,16 @@
   "prop-pur-kinjective-resolutions-exist",
   "prop-weil-pbc-inverse-image-modules-exact",
   "thm-constructible-serre",
-  "thm-dg-finite-type-constructibility"
+  "thm-dg-finite-type-constructibility",
+  "lem-sf-triangle-morphism-iso"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q46-dc98263dd",
-  "group": "Q46",
+  "reviewer": "NT-Codex-Q57-2ad6bea5e",
+  "group": "Q57",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-dc98263dd (reviewer sub-agent of L); spot-checked: I read the whole item. This delivery is a repair of an item that had already passed review: it only adds the existing Mathlib leaf lem-sf-triangle-morphism-iso (Stacks 014A; Mathlib Pretriangulated.lean, isIso₂_of_isIso₁₃ at line 479 and its two companions) to steps 4 and 6 and to proof_deps, and makes the descending induction of step 6 explicit (base F_m=0, F_{r-1} from F_r and Rs_{r!}P_r). Statement, stmt_deps, the other steps, blueprint, tool_uses and split_report.tool_uses are the same as the base copy. There are no new nodes or unit changes, proof_deps equals the union of the step uses, no cited node is missing or merged, and there is no cycle. Sources checked: Stacks 0F09 (smooth limit with affine transitions, qcqs f, torsion invertible on the base); 0F1C (any field extension, no separability, via perfect closures); 0A45; 09BI; 014A in derived.tex; and the blueprint main-20261015 texts of lem-weil-geometric-generic-exchange and thm-weil-etale-geometric-biduality, proof paragraph 4. The step hypotheses hold: R is a domain, the principal opens D(f) are affine smooth qcqs, N is invertible in F, the Rj_* constructibility is used over the actual field F, boundedness of Ri^!M comes before the exchange is applied to it, and affine opens are separated of finite type for the stratification node. The parent theorem uses the item with B=A^1_F, L the algebraic closure of F(t), and ordinary constant-A coefficients on small etale sites, so the coefficient category and the base-change map agree. Edge cases checked: N=1, empty X or Z, Z missing the generic fibre, a section of A^1_B (purity), inseparable L. Note for the maintainer: the imported lem-weil-geometric-generic-exchange (k the algebraic closure of F_q) is a special case of this item and a later merge candidate; that is not a fault of this delivery. No fixes were made and no new tool_uses were accepted."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q57-2ad6bea5e (reviewer sub-agent of L); spot-checked: Mathematics and all six new lemmas checked against Stacks and main-20261015; canonical maps, coefficients, bounds, and edge cases agree. Corrected one repeated ancestry error: all six blueprint.from.via lists now include the parent item. Whole JSON fixes and detailed review.md written; no mathematical statements changed.; 6 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-16",

@@ -10,11 +10,71 @@
  "stmt_deps": [
   "def-weil-punctual-weights",
   "def-weil-local-frobenius-trace",
-  "def-wf-constant-weil-twist"
+  "def-wf-constant-weil-twist",
+  "def-wf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\theta$ for the Weil isomorphism of $\\mathcal F$. In [def-wf-constant-weil-twist], the geometric sheaf of $\\mathcal B_b$ is the constant coefficient line, with distinguished vector $1$, and its one-step geometric Frobenius is multiplication by $b$. Under the tensor-unit identification $v\\otimes c\\mapsto cv$ (inverse $v\\mapsto v\\otimes1$), the underlying sheaf of $\\mathcal F\\otimes\\mathcal B_b$ is therefore $\\mathcal F$. The tensor Weil map of [def-wf-tensor-product] is $\\theta\\otimes(b\\,\\mathrm{id})$, hence is $b\\theta$ under this identification: on a pure tensor its value is $\\theta(v)\\otimes bc$, which maps to $bc\\theta(v)$. This unit calculation applies to a constructible sheaf without any lissity or connectedness assumption.",
+   "uses": [
+    "def-wf-constant-weil-twist",
+    "def-wf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-purity-rigidity.proof.md",
+    "place": "Step 1, constant-line twist and its Weil map"
+   }
+  },
+  {
+   "text": "Fix $m\\ge1$ and $y\\in X_0(\\mathbf F_{q^m})$. Use the same geometric point, point transport, and pullback-composition maps for the two sheaves, which have the same underlying sheaf by step 1. In the recurrence of [def-weil-local-frobenius-trace], replacing $\\theta$ by $b\\theta$ replaces $\\theta^{[m]}$ by $b^m\\theta^{[m]}$: for $m=1$ this is step 1, and the next composite is $(b^m\\theta^{[m]})\\circ L(g_X^m)^*(b\\theta)=b^{m+1}(\\theta^{[m]}\\circ L(g_X^m)^*\\theta)$. Pullbacks are coefficient-linear by the rational morphism convention of [def-weil-derived-pullback-tensor-hom], and the point-fiber functor is coefficient-linear by [def-weil-finite-coefficient-point]. For $\\Qlb$ these computations are read at a common finite coefficient field containing $b$ and the sheaf's data, then embedded in $\\Qlb$, as in those definitions. Thus the local operator becomes $b^m F_y^{(m)}$. If $A=(a_{ij})$ is its matrix on the finite-dimensional stalk of $\\mathcal F$, the twisted matrix is $(b^m a_{ij})$. Summing its diagonal entries by [def-weil-endomorphism-trace] gives $t_{\\mathcal F\\otimes\\mathcal B_b,m}(y)=b^m t_{\\mathcal F,m}(y)$. The exponent is $m$ because the local operator is the $m$-fold return; no assertion that the closed-point degree of $y$ equals $m$ is used.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-finite-coefficient-point",
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-purity-rigidity.proof.md",
+    "place": "Step 1, pointwise trace identity, expanded at rational points"
+   }
+  },
+  {
+   "text": "Put $z=\\iota(t_{\\mathcal F,m}(y))$. Since $\\iota$ preserves products, the identity of step 2 and multiplicativity of the complex absolute value give $|\\iota(t_{\\mathcal F\\otimes\\mathcal B_b,m}(y))|^2=|\\iota(b)|^{2m}|z|^2$. Here $q>1$ and the assumed equality $|\\iota(b)|=q^{-w/2}$ implies $|\\iota(b)|^{2m}=\\exp(2m(-w/2)\\log q)=\\exp(-mw\\log q)=q^{-mw}$. Consequently each summand in the twisted energy is $q^{-mw}$ times its untwisted summand.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-purity-rigidity.proof.md",
+    "place": "Step 1, squared absolute values and the normalization exponent"
+   }
+  },
+  {
+   "text": "The scheme $X_0$ is of finite type over $k_0$, and $\\mathbf F_{q^m}/k_0$ is a finite field extension. Thus [lem-weil-point-counts-finite](1) makes $X_0(\\mathbf F_{q^m})$ finite. Sum the equality in step 3 over this set. The factor $q^{-mw}$ is independent of $y$, so distributivity of a finite sum gives $S_m(\\mathcal F\\otimes\\mathcal B_b)=\\sum_y q^{-mw}|\\iota(t_{\\mathcal F,m}(y))|^2=q^{-mw}S_m(\\mathcal F)$. For an empty point set both sums are zero. Since $m\\ge1$ was arbitrary, this proves the statement.",
+   "uses": [
+    "lem-weil-point-counts-finite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-purity-rigidity.proof.md",
+    "place": "Step 1, finite summation of the pointwise identity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-endomorphism-trace",
+  "def-weil-finite-coefficient-point",
+  "def-weil-local-frobenius-trace",
+  "def-wf-constant-weil-twist",
+  "def-wf-tensor-product",
+  "lem-weil-point-counts-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/lem-wf-l2-purity-rigidity.proof.md",
+  "place": "Step 1, with the scalar-rescaling recurrence, matrix trace, norm and finite-sum calculations written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +103,52 @@
    "results": "No hits",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trace energy of a constructible Weil sheaf after tensoring a constant rank one Frobenius character scales by the absolute square of the character",
+   "results": "FiniteField.algebraMap_trace_eq_sum_pow; LinearMap.trace_baseChange; LinearMap.trace_tensorProduct'; LinearMap.trace_tensorProduct; FiniteField.trace_pow_card; FDRep.scalar_product_char_eq_finrank_equivariant; FDRep.char_tensor; Algebra.normalizedTrace_eq_of_finiteDimensional",
+   "date": "2026-10-17",
+   "verdict": "no match: field or ordinary linear-algebra trace results do not state the Weil-sheaf trace-energy identity"
+  },
+  {
+   "tool": "grep",
+   "query": "traceEnergy|constantTwist|WeilSheaf",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: field or ordinary linear-algebra trace results do not state the Weil-sheaf trace-energy identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Squared absolute values of Frobenius traces after twisting a constructible Weil sheaf by a constant character",
+   "results": "MulChar.IsQuadratic.gaussSum_frob; gaussSum_sq; quadraticChar_eq_pow_of_char_ne_two'; Char.card_pow_card; quadraticChar; Algebra.normalizedTrace.congr_simp; MulChar.IsQuadratic.sq_eq_one; quadraticChar_sq_one'",
+   "date": "2026-10-17",
+   "verdict": "no match: field or ordinary linear-algebra trace results do not state the Weil-sheaf trace-energy identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace, _ • _",
+   "results": "LieModule.trace_toEnd_genWeightSpace; LieModule.trace_comp_toEnd_genWeightSpace_eq; LieModule.trace_toEnd_genWeightSpaceChain_eq_zero",
+   "date": "2026-10-17",
+   "verdict": "no match: field or ordinary linear-algebra trace results do not state the Weil-sheaf trace-energy identity"
+  },
+  {
+   "tool": "grep",
+   "query": "trace_tensorProduct|trace_smul|char_tensor",
+   "results": "Mathlib/LinearAlgebra/Trace.lean; Mathlib/LinearAlgebra/Trace.lean; Mathlib/LinearAlgebra/Trace.lean; Mathlib/LinearAlgebra/Trace.lean; Mathlib/LinearAlgebra/Matrix/Trace.lean; Mathlib/LinearAlgebra/Matrix/Trace.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: field or ordinary linear-algebra trace results do not state the Weil-sheaf trace-energy identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite sum of squared norms of traces of local Frobenius endomorphisms rescaled by a scalar raised to the extension degree",
+   "results": "FiniteField.algebraMap_trace_eq_sum_pow; FiniteField.algebraMap_norm_eq_pow_sum; FiniteField.algebraMap_norm_eq_prod_pow; Algebra.normalizedTrace_eq_of_finiteDimensional; Algebra.normalizedTrace_eq_of_fininteDimensional; Algebra.normalizedTrace_eq_of_finiteDimensional_apply; Algebra.normalizedTrace_eq_of_fininteDimensional_apply; Algebra.normalizedTrace",
+   "date": "2026-10-17",
+   "verdict": "no match: field or ordinary linear-algebra trace results do not state the Weil-sheaf trace-energy identity"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-wf-l2-purity-rigidity",
@@ -71,5 +173,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-trace-energy-constant-twist",
+  "worker": "stage1",
+  "summary": "Expanded the twist-energy identity into the tensor-unit calculation, induction for the iterated Weil map, explicit matrix-trace scaling, the real exponent calculation, and finite summation. Reused existing definitions and point-count finiteness; created no nodes. Kept the statement unchanged and added the tensor definition to statement dependencies. The source Lean candidate contains sorry.",
+  "blueprint": "Realizes precisely Step 1 of lem-wf-l2-purity-rigidity up to the squared trace-energy identity, with rational-point Frobenius iterates instead of assuming every rational point has closed-point degree m."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-9ffe71dc7",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-9ffe71dc7 (reviewer sub-agent of L); spot-checked: Read the complete item, report, governance files, current blueprint route, every cited node statement, and cited source locations. Verified all hypotheses, coefficient-stage/common-stage handling, Frobenius iteration, tensor scalar, finite summation, edge cases, duplicate search, and route compliance. No new nodes or repairs are needed; review written to review.md."
  }
 }

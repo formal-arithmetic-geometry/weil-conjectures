@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-poincare-pairing",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Poincare duality and Frobenius similitude",
@@ -17,36 +17,54 @@
   "def-weil-finite-field-fiber",
   "def-weil-frobenius-detailed",
   "def-weil-geometric-hypotheses",
-  "def-weil-ordinary-compact-cohomology"
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-poincare-trace-cup",
+  "def-weil-global-geometric-frobenius"
  ],
  "proof": [
   {
-   "text": "1. **1.** The orientation and coefficient multiplication in\n[def-weil-poincare-trace-cup] identify the trace and pairing used here:\n$$\n\\langle x,y\\rangle_i=\\operatorname{tr}^{(-d)}_X(x\\smile y)\n\\quad\\text{in }\\Ql(-d),\n\\qquad\nx\\in H^i(X,\\Ql),\\ y\\in H^{2d-i}(X,\\Ql).\n$$\nThus the pairing in the proposition is the one to which the duality\ninterface applies, rather than an auxiliary bilinear form.",
+   "text": "Identify the maps. In the notation of [def-weil-poincare-trace-cup], put $V_i=H^i(X,\\Ql)$ and $L=\\Ql(-d)$. For $0\\leq i\\leq2d$, the pairing in this statement is precisely $\\beta_i(x,y)=\\operatorname{tr}^{(-d)}_X(x\\smile y)$, with $x\\in V_i$ and $y\\in V_{2d-i}$. Its trace is the same untwisted trace defined there for the proper structure morphism. Thus every occurrence of trace and pairing below refers to these specified maps.",
    "uses": [
     "def-weil-poincare-trace-cup"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-poincare-duality/prop-poincare-pairing.proof.md",
+    "place": "Step 1: identification of the specified trace–cup pairing"
+   }
   },
   {
-   "text": "1. **2.** The trace isomorphism and perfectness are supplied by\n[thm-weil-poincare-duality]. For each $0\\leq i\\leq2d$, perfectness\nmeans that the map\n$$\n\\Phi_i:H^{2d-i}(X,\\Ql)\\longrightarrow\nH^i(X,\\Ql)^\\vee(-d),\\qquad\ny\\longmapsto\\bigl(x\\longmapsto\\langle x,y\\rangle_i\\bigr)\n$$\nis an isomorphism, and the same interface gives\n$\\operatorname{tr}^{(-d)}_X:H^{2d}(X,\\Ql)\\xrightarrow{\\sim}\\Ql(-d)$.\nThis proves both the asserted perfect pairings and the displayed duality\nisomorphism.",
+   "text": "Apply [thm-weil-poincare-duality] to the given finite-field datum and $X_0$. Its hypotheses are exactly smoothness, properness, geometric connectedness, pure dimension $d\\geq0$, and $\\ell\\ne p$, all assumed here; no exceptional-adjoint admissibility hypothesis is required. Its Trace clause gives the asserted isomorphism $\\operatorname{tr}^{(-d)}_X:V_{2d}\\xrightarrow{\\sim}L$, and its Pairing clause gives perfectness of the same $\\beta_i$ for each $0\\leq i\\leq2d$. Explicitly, perfectness says that both induced linear maps to the $L$-valued duals are bijective. In particular $\\Phi_i:V_{2d-i}\\to\\operatorname{Hom}_{\\Ql}(V_i,L)$, $\\Phi_i(y)(x)=\\beta_i(x,y)$, is a linear isomorphism. Writing this line-valued dual as $V_i^\\vee(-d)$ gives the displayed isomorphism as a map of vector spaces; equivariance is checked next.",
    "uses": [
     "thm-weil-poincare-duality"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-poincare-duality/prop-poincare-pairing.proof.md",
+    "place": "Step 2: trace isomorphism and perfectness"
+   }
   },
   {
-   "text": "1. **3.** The Frobenius clause of\n[thm-weil-poincare-duality] says that the trace target has scalar\naction $q^d$ and that\n$$\n\\langle Fx,Fy\\rangle_i=q^d\\langle x,y\\rangle_i.\n$$\nEquivalently, under $\\Phi_i$, the operator on the second factor is\n$q^d(F^{-1})^\\vee$. This is precisely the Frobenius similitude asserted\nin the proposition.",
+   "text": "The Frobenius similitude clause of [thm-weil-poincare-duality] states both that $F_L=q^d\\operatorname{id}_L$ and that $\\beta_i(F_i x,F_{2d-i}y)=q^d\\beta_i(x,y)$, for the geometric Frobenius automorphisms $F_j$ of $V_j$. This is the claimed similitude. On $\\operatorname{Hom}_{\\Ql}(V_i,L)$ the dual-twist action is $\\psi\\mapsto F_L\\circ\\psi\\circ F_i^{-1}$. For every $x\\in V_i$ and $y\\in V_{2d-i}$, substituting $F_i^{-1}x$ into the similitude gives\n$$\n \\Phi_i(F_{2d-i}y)(x)=\\beta_i(x,F_{2d-i}y)\n =q^d\\beta_i(F_i^{-1}x,y)\n =(F_L\\circ\\Phi_i(y)\\circ F_i^{-1})(x).\n$$\nEquality for every $x$ proves that the specific isomorphism $\\Phi_i$ from step 2 is Frobenius-equivariant, with the required action $q^d(F_i^{-1})^\\vee$ on its target.",
    "uses": [
     "thm-weil-poincare-duality"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-poincare-duality/prop-poincare-pairing.proof.md",
+    "place": "Step 3: similitude and equivariance of the pairing-induced isomorphism"
+   }
   },
   {
-   "text": "1. **4.** The cup product in\n[def-weil-poincare-trace-cup] is graded-commutative. Taking degrees\n$i$ and $2d-i$ gives\n$$\ny\\smile x=(-1)^{i(2d-i)}x\\smile y=(-1)^i x\\smile y,\n$$\nbecause $2d$ is even. Applying the trace therefore yields\n$$\n\\langle y,x\\rangle_{2d-i}=(-1)^i\\langle x,y\\rangle_i.\n$$\nFor $i=d$ this is $(-1)^d$-symmetry, completing all the claims.",
+   "text": "Use the graded-commutativity formula in [def-weil-poincare-trace-cup] with degrees $i$ and $2d-i$:\n$$\n y\\smile x=(-1)^{i(2d-i)}x\\smile y.\n$$\nThe difference $i(2d-i)-i=2di-i(i+1)$ is even, since $i(i+1)$ is even. Hence the sign is $(-1)^i$. Applying the linear trace of step 1 gives\n$$\n \\beta_{2d-i}(y,x)=\\operatorname{tr}^{(-d)}_X(y\\smile x)\n =(-1)^i\\operatorname{tr}^{(-d)}_X(x\\smile y)=(-1)^i\\beta_i(x,y).\n$$\nAt $i=d$ the two spaces coincide and this is exactly $(-1)^d$-symmetry. This proves the last clause.",
    "uses": [
     "def-weil-poincare-trace-cup"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-poincare-duality/prop-poincare-pairing.proof.md",
+    "place": "Step 4: graded commutativity and the middle-degree sign"
+   }
   }
  ],
  "proof_deps": [
@@ -55,12 +73,69 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-poincare-duality/prop-poincare-pairing.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-poincare-duality/prop-poincare-pairing.proof.md",
+  "place": "Steps 1–4, with the pairing-induced equivariance and sign calculations written out"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Poincare|poincare|trace.*cup|cup.*trace|Frobenius.*pairing",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state the trace–cup Poincare duality, Frobenius similitude, or graded-commutativity theorem for these cohomology groups"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The trace cup product pairing on l-adic cohomology of a smooth proper variety is perfect and Frobenius equivariant",
+   "results": "8 hits: LinearMap.IsPerfPair.compl₁₂, LinearMap.IsPerfPair.of_injective, LinearMap.IsPerfPair.mk, LinearMap.IsPerfPair.congr, LinearMap.IsPerfPair, LinearMap.IsPerfectCompl, LinearMap.flip.instIsPerfPair, LinearEquiv.instIsPerfPair",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; general perfect-pairing linear algebra only. LinearMap.IsPerfPair was read at Mathlib/LinearAlgebra/PerfectPairing/Basic.lean:40–42; it defines bijectivity of the two adjoints but does not prove duality for etale cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, LinearMap.IsPerfPair, EtaleCohomology",
+   "results": "0 hits: none; loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-17",
+   "verdict": "query rejected: unknown identifier; retried with LinearMap.IsPerfPair"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare duality trace cup product pairing on l-adic cohomology of a smooth proper geometrically connected variety with Frobenius similitude and graded commutativity",
+   "results": "8 hits: groupCohomology.exists_mul_galRestrict_of_norm_eq_one, groupCohomology.Hilbert90.aux, groupCohomology.H1ofAutOnUnitsUnique, LinearMap.trace_eq_contract_apply, LinearMap.trace_eq_contract', Rep.FiniteCyclicGroup.groupCohomologyIsoEven, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, Rep.FiniteCyclicGroup.groupCohomologyπEven_eq_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state the trace–cup Poincare duality, Frobenius similitude, or graded-commutativity theorem for these cohomology groups"
+  },
+  {
+   "tool": "grep",
+   "query": "Poincare|poincare|TateTwist|tateTwist|Frobenius.*pair",
+   "results": "3 hits: Mathlib/Dynamics/Ergodic/Conservative.lean, Mathlib/NumberTheory/FrobeniusNumber.lean, Mathlib/NumberTheory/FrobeniusNumber.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state the trace–cup Poincare duality, Frobenius similitude, or graded-commutativity theorem for these cohomology groups"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.IsPerfPair",
+   "results": "12 hits: LinearMap.IsPerfPair, LinearMap.isPerfPair_of_subsingleton, Module.IsReflexive.of_isPerfPair, LinearMap.IsPerfectCompl, LinearMap.IsPerfPair.ext, LinearMap.IsPerfPair.ext_iff, LinearMap.IsPerfPair.dualEval, Module.finrank_of_isPerfPair",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; general perfect-pairing linear algebra only. LinearMap.IsPerfPair was read at Mathlib/LinearAlgebra/PerfectPairing/Basic.lean:40–42; it defines bijectivity of the two adjoints but does not prove duality for etale cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology Poincare duality gives a perfect bilinear pairing H^i and H^(2d-i) valued in the Tate twist Q_l(-d)",
+   "results": "8 hits: Algebra.etaleLocus_eq_compl_support, Rep.FiniteCyclicGroup.groupCohomologyIsoEven, Rep.FiniteCyclicGroup.groupCohomologyIsoOdd, FGModuleCat.exactPairing, groupCohomologyIsoExt, groupCohomology.isIso_δ_of_isZero, Rep.standardResolution.extIso, Rep.FiniteCyclicGroup.homResolutionIso",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state the trace–cup Poincare duality, Frobenius similitude, or graded-commutativity theorem for these cohomology groups"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsPerfPair|def IsPerfPair|toPerfPair|bijective_left|bijective_right",
+   "results": "5 hits: 40, 41, 42, 46, 47",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; general perfect-pairing linear algebra only. LinearMap.IsPerfPair was read at Mathlib/LinearAlgebra/PerfectPairing/Basic.lean:40–42; it defines bijectivity of the two adjoints but does not prove duality for etale cohomology."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -98,5 +173,21 @@
   }
  },
  "chapter": "sec-poincare-duality",
- "unit": "sk-thm-poincare-duality"
+ "unit": "sk-thm-poincare-duality",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-poincare-pairing",
+  "worker": "stage1",
+  "summary": "Kept the statement. Checked the current main-20261015 blueprint, the statements of the duality interface and trace–cup definition, and the tagged slopmaster2 declaration. The latter is not an exact attachment: algebraically closed coefficients and existential trace–cup data, with unfinished inputs. Reused the existing duality interface for trace, perfectness and similitude; wrote the pairing-induced equivariance and parity calculations explicitly. Added the specified pairing and global cohomological Frobenius as statement dependencies. All Mathlib searches were run and logged; no new nodes were needed.",
+  "blueprint": "Current main-20261015 prop-poincare-pairing.proof.md steps 1–4, respectively realized by steps 1–4 here. The unit route through thm-weil-poincare-duality is preserved; its proof is not re-split here.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q88-696b1e631",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q88-696b1e631 (reviewer sub-agent of L); spot-checked: Mathematics and split pass review, but the item source metadata points to the obsolete master blueprint path/order 2454 instead of the required main-20261015 proposition/order 2798. Corrected JSON is in fixes/dag/nodes/sec-poincare-duality/prop-poincare-pairing.json; full checks are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

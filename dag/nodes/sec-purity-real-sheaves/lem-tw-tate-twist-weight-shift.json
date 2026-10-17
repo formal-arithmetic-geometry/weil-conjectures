@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-tw-tate-twist-weight-shift",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Weight shift under a Tate twist",
@@ -20,30 +20,131 @@
  ],
  "proof": [
   {
-   "text": "At a closed point $y$ of degree $m$, the local Frobenius operator\n$F_y$ of [def-weil-punctual-weights] acts on the twist\nstalk $\\mathcal F(n)_{\\bar y}$ as $q^{-mn}$ times the operator on\n$\\mathcal F_{\\bar y}$, by the Frobenius-on-twists normalization of\n[def-weil-frobenius-coefficient-twists] (the local operator is the\n$m$-fold iterate of the global geometric Frobenius). Hence the\neigenvalues of $\\mathcal F(n)_{\\bar y}$ are the\n$q^{-mn}\\alpha$, $\\alpha$ running over the eigenvalues of\n$F_y$ on $\\mathcal F_{\\bar y}$, and by\n[lem-tw-multiplicativity] and $q_y=q^m$,\n\n$$\n|\\iota(q^{-mn}\\alpha)|=q^{-mn}q^{mw/2}=q_y^{(w-2n)/2},\n$$\n\nwhich is the punctual purity of weight $w-2n$ of\n[def-weil-punctual-weights]. For the mixed statement, apply the\npure statement to the graded pieces of a weight filtration of\n$\\mathcal F$ (the twist is exact and preserves the filtration by\n[def-weil-frobenius-module-weights] at the level of stalk modules)\nand use the same shift on each piece.",
+   "text": "Put $s=\\operatorname{Spec}k$ and $b=q^{-n}\\in\\Qlb^\\times$. Apply [lem-pur-twist-frobenius-scalar] with $\\Lambda=\\Qlb$ and twist index $n$: the Tate object on $s$ is concentrated in degree zero, its sections are one-dimensional, and its geometric Frobenius is $b$. By [lem-weil-point-fibre-equivalence], choosing a nonzero generator of those sections identifies the underlying object with the coefficient unit on $s$: the map from the unit determined by that generator becomes an isomorphism under the fully faithful fibre functor. Pull this identification back along $Y\\to s$. The comparison of [det-prop-sfb-cartesian-coefficients-twists] identifies this pullback with $\\Qlb(n)_Y$. This identification respects the canonical Weil structures: in [def-weil-frobenius-coefficient-twists] these are built from the same functorial maps on roots of unity, followed by limits, tensor powers and duals. Consequently, in the chosen geometric trivialization, the Weil structure of the Tate line is $b$ times the coefficient-unit structure. This also covers negative $n$, since the cited scalar theorem already includes every integer twist.",
    "uses": [
-    "def-weil-punctual-weights",
+    "lem-pur-twist-frobenius-scalar",
+    "lem-weil-point-fibre-equivalence",
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "def-weil-frobenius-coefficient-twists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-tw-tate-twist-weight-shift.proof.md",
+    "place": "first sentence: Frobenius-on-twists normalization; replace the definition-only scalar citation by its named theorem"
+   }
+  },
+  {
+   "text": "For any constructible Weil sheaf $\\mathcal G$, tensoring with the trivialized line of step 1 identifies the underlying object of $\\mathcal G(n)$ with $\\mathcal G$. The tensor formula for $\\theta_{K(n)}$ in [def-weil-frobenius-coefficient-twists] becomes $\\theta_{\\mathcal G(n)}=b\\theta_{\\mathcal G}$. The pullback-tensor comparison is natural and compatible with composition by [lem-pur-derived-pullback-tensor-iso], so these identifications can be used in the iterated pullbacks defining the local operator. At a closed point $y$ of degree $m\\geq1$, the definition [def-weil-local-frobenius-trace] composes exactly $m$ copies of the Weil structure, with the same point transport on the unchanged underlying object. Pullback and transport are linear over the coefficient field; the scalar $b$ is therefore unchanged in each copy. Thus $F_y(\\mathcal G(n))=b^m F_y(\\mathcal G)=q^{-mn}F_y(\\mathcal G)$ under this identification.",
+   "uses": [
     "def-weil-frobenius-coefficient-twists",
-    "lem-tw-multiplicativity",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-tw-tate-twist-weight-shift.proof.md",
+    "place": "first sentence and parenthesis: local operator is the m-fold iterate; write the scalar iteration explicitly"
+   }
+  },
+  {
+   "text": "Write $c=q^{-mn}\\ne0$ and $A=F_y(\\mathcal G)$. An eigenvector $v\\ne0$ of $A$ with eigenvalue $\\alpha$ satisfies $(cA)v=(c\\alpha)v$. Conversely $(cA)v=\\beta v$ implies $Av=(c^{-1}\\beta)v$. Hence the eigenvalues after twisting are exactly the $c\\alpha$. This uses the eigenvector definition recalled in [def-weil-frobenius-module-weights] and does not assume that $A$ is semisimple.",
+   "uses": [
     "def-weil-frobenius-module-weights"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-tw-tate-twist-weight-shift.proof.md",
+    "place": "second sentence: eigenvalue scaling, in both directions"
+   }
+  },
+  {
+   "text": "Suppose $\\mathcal G$ is punctually pure of real weight $u$. At $y$ the definition [def-weil-punctual-weights] gives $|\\iota(\\alpha)|=q_y^{u/2}$. As a finite extension of $k_0$ of degree $m$, $\\kappa(y)$ has $q^m$ elements: a vector-space basis identifies its underlying set with $k_0^m$. Thus $q_y=q^m$. A field isomorphism fixes rational numbers, so $\\iota(q^{-mn})=q^{-mn}>0$. Multiplicativity of the complex absolute value [def-weil-complex-absolute-value] and the power laws [def-weil-real-power] give\n$$|\\iota(q^{-mn}\\alpha)|=q^{-mn}q_y^{u/2}=q_y^{-n}q_y^{u/2}=q_y^{(u-2n)/2}.$$\nTogether with step 3 this is precisely punctual purity of weight $u-2n$. Take $\\mathcal G=\\mathcal F$ and $u=w$ for the first assertion. Steps 1--4 required only constructibility, so the same argument applies to constructible graded pieces below.",
+   "uses": [
+    "def-weil-punctual-weights",
+    "def-weil-complex-absolute-value",
+    "def-weil-real-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-tw-tate-twist-weight-shift.proof.md",
+    "place": "displayed absolute-value equality and its interpretation as punctual purity"
+   }
+  },
+  {
+   "text": "For the mixed assertion, choose the finite filtration $0=\\mathcal F_0\\subset\\cdots\\subset\\mathcal F_r=\\mathcal F$ and real weights $u_j\\leq w$ from [def-weil-punctual-weights]. In the trivialization of step 1, twisting keeps every underlying sheaf and every morphism unchanged and multiplies each Weil structure by the same invertible scalar $b$. Thus each inclusion is still a Weil morphism, since multiplying both sides of $i\\theta=\\theta' g^*i$ by $b$ preserves that equation. Kernels and quotients, including their underlying constructible objects, are unchanged; their induced Weil structures are multiplied by $b$ as well. In particular\n$\\mathcal F_j(n)/\\mathcal F_{j-1}(n)\\cong(\\mathcal F_j/\\mathcal F_{j-1})(n)$ as Weil sheaves. This proves the needed exactness directly, rather than inferring a sheaf filtration from stalk-module mixedness. By step 4 every displayed quotient is punctually pure of weight $u_j-2n\\leq w-2n$. The same finite filtration, now with these shifted weights, witnesses mixedness of $\\mathcal F(n)$ by the cited definition. The empty filtration for the zero sheaf is included.",
+   "uses": [
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-tw-tate-twist-weight-shift.proof.md",
+    "place": "last sentence: exactness on the sheaf filtration, graded-piece purity, and the upper bound"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-punctual-weights",
+  "lem-pur-twist-frobenius-scalar",
+  "lem-weil-point-fibre-equivalence",
+  "det-prop-sfb-cartesian-coefficients-twists",
   "def-weil-frobenius-coefficient-twists",
-  "lem-tw-multiplicativity",
-  "def-weil-frobenius-module-weights"
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-weil-local-frobenius-trace",
+  "def-weil-frobenius-module-weights",
+  "def-weil-punctual-weights",
+  "def-weil-complex-absolute-value",
+  "def-weil-real-power"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-tw-tate-twist-weight-shift.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-tw-tate-twist-weight-shift.proof.md",
+  "place": "entire proof, with the scalar theorem and the sheaf-filtration argument made explicit; checked against Deligne Weil II (1.2.5)(iv), (1.2.6), (1.2.7), pp. 154-155"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A Tate twist of a lisse Weil sheaf shifts punctual purity and mixed weights by minus twice the twist",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.TwistShiftData.Category\", \"CategoryTheory.TwistShiftData.ctorIdx\", \"CategoryTheory.TwistShiftData.hasShift\", \"CategoryTheory.TwistShiftData.shiftFunctor_map\", \"CategoryTheory.TwistShiftData.shiftIso\", \"CategoryTheory.TwistShiftData.instCategoryCategory\", \"CategoryTheory.TwistShiftData\", \"CategoryTheory.Triangulated.TStructure.le_shift\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for Tate twists and both sheaf-weight clauses; general categorical shifts, Lie weights and cyclotomic characters do not assert the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Tate twist of a lisse Weil sheaf shifts punctual purity and mixed weights by minus twice the twist",
+   "results": "{\"n_hits\": 8, \"top\": [\"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LieModule.shiftedGenWeightSpace.shift\", \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"LieModule.shiftedGenWeightSpace.shift_apply\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalCategoryLightCondMod\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for Tate twists and both sheaf-weight clauses; general categorical shifts, Lie weights and cyclotomic characters do not assert the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "TateTwist",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"loogle: unknown identifier 'TateTwist'\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for Tate twists and both sheaf-weight clauses; general categorical shifts, Lie weights and cyclotomic characters do not assert the item"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|IsPunctuallyPure|IsMixedOfWeightsAtMost",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for Tate twists and both sheaf-weight clauses; general categorical shifts, Lie weights and cyclotomic characters do not assert the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a Weil sheaf with the cyclotomic character multiplies local eigenvalues by q to a negative integer power and shifts weights",
+   "results": "{\"n_hits\": 8, \"top\": [\"cyclotomicCharacter\", \"cyclotomicCharacter.toFun_spec\", \"cyclotomicCharacter.toFun\", \"cyclotomicCharacter.toFun_apply\", \"cyclotomicCharacter.spec\", \"LieModule.weight_vector_multiplication\", \"cyclotomicCharacter.toZModPow_toFun\", \"cyclotomicCharacter.toZModPow\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for Tate twists and both sheaf-weight clauses; general categorical shifts, Lie weights and cyclotomic characters do not assert the item"
+  },
+  {
+   "tool": "grep",
+   "query": "cyclotomicCharacter|weight_vector_multiplication",
+   "results": "{\"n_hits\": 7, \"top\": [\"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/Basic.lean\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for Tate twists and both sheaf-weight clauses; general categorical shifts, Lie weights and cyclotomic characters do not assert the item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -76,5 +177,44 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-rankin"
+ "unit": "sk-p-real-rankin",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-tw-tate-twist-weight-shift",
+  "worker": "stage1",
+  "summary": "Retained the complete statement. Replaced the definition-only Frobenius-scalar citation by lem-pur-twist-frobenius-scalar. Chose a geometric trivialization of the pulled-back Tate line, computed the local scalar and both directions of eigenvalue scaling, then proved exactness on the actual Weil-sheaf filtration by the unchanged-underlying-object description. The proof applies to constructible graded pieces without assuming those pieces are lisse. No new nodes. The sorry-free project representation lemmas cover only the curve/eigenvalue-bound interface, not the full sheaf mixedness statement.",
+  "blueprint": "Steps 1--2 realize the opening normalization and m-fold local Frobenius; step 3 realizes eigenvalue scaling; step 4 realizes the displayed norm identity and pure conclusion; step 5 realizes the final filtration sentence. The unit key node is lem-rp-upper-bound, not this auxiliary item; no unit record is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-twist-frobenius-scalar",
+    "why": "Coefficient-line normalization on Spec k, a generic input to the prescribed Tate-twist calculation; no Rankin unit node computes this scalar."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Identifies a degree-zero rank-one point object with the coefficient unit from its section generator; used only as a point-coefficient tool."
+   },
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-twists",
+    "why": "Pulls the Tate line from Spec k to Y, without replacing any step of the Rankin route."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Naturality and composition compatibility of pullback with tensor justify the given Weil-twist and local-iteration formulas; a coefficient-operation tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-twist-frobenius-scalar",
+  "lem-weil-point-fibre-equivalence",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q102-eb01345e5",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q102-eb01345e5 (reviewer sub-agent of L); spot-checked: Read the item, report, current blueprint proof, unit/chapter route, all ten cited DAG nodes, and Deligne Weil I/II source passages. Verified geometric Frobenius scalar q^{-n}, m-fold local iteration q^{-mn}, coefficient/base-change morphisms, eigenvalue scaling, real-weight arithmetic, and preservation of the actual sheaf filtration including zero and Jordan cases. No duplicate, cycle, missing dependency, or repair needed. Review written to review.md."
+ }
 }

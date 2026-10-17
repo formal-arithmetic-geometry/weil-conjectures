@@ -16,9 +16,107 @@
   "def-weil-frobenius-point-transport",
   "def-weil-inverse-image-pullback-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $R=\\widehat{\\mathcal O}_{E,s}$ and $g=g_s$. Choose one flat-term K-flat resolution $q:P\\to N$ by [lem-pc-kflat-resolution]. Put $P_n=P\\otimes_R(A_n)_s$, $r_n:P\\to P_n$, $r_n(x)=x\\otimes1$, and $t_n=1\\otimes(A_{n+1}\\to A_n)$. These strict quotient maps represent $\\mathcal R(N)$ by [def-weil-pbc-adic-coefficient-datum]. Put $C_n=\\operatorname{Res}_n g_n^*P_n$, with the strict coefficient-induced transition $v_n:C_{n+1}\\to C_n$ of [def-weil-inverse-image-pullback-comparison](b). At finite level $g_n^*P_n$ represents $Lg_n^*N_n$ by part (a) of that definition. Set $D_n=\\Gamma(s,P_n)$, $B_n=\\Gamma(s,C_n)$, and\n$$u_n=\\Gamma(s,\\kappa_{P_n})\\sigma_{P_n}:D_n\\longrightarrow B_n.$$\nThe finite-level formula in [def-weil-frobenius-point-transport] says precisely that $[u_n]=\\iota_{N_n}$. All towers and arrows here are complexes of $\\mathcal O_E$-modules after restriction of scalars; no limit of categories with changing coefficient rings is being taken.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-frobenius-point-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), integral point transport: choose the common quotient-tower representative"
+   }
+  },
+  {
+   "text": "The maps $u_n$ commute strictly with the transitions. Indeed restriction along $g$ commutes with every morphism of sheaves. The inverse-image colimit insertion and its sheafification are natural in the sheaf, so applying a quotient before or after the two operations defining $\\sigma$ gives the same section. Finally the tensor insertion sends $x$ to $x\\otimes1$, and reducing this section sends it to $\\bar x\\otimes1$ whether reduction precedes or follows insertion. Linearity across coefficients uses the projection square $\\pi_n c_{\\mathcal O_E}=c_{A_n}g^{-1}(\\pi_n)$ in [def-weil-inverse-image-pullback-comparison]. Thus\n$$\\Gamma(s,v_n)u_{n+1}=u_n\\Gamma(s,t_n).$$\nThe same section calculation with $r_n$ gives\n$$\\Gamma(s,\\theta_n)\\sigma_P=u_n\\Gamma(s,r_n),\\qquad\n\\theta_n=\\kappa_{P_n}g^{-1}(r_n).$$\nConsequently $u_\\bullet:D_\\bullet\\to B_\\bullet$ is a strict map of tower complexes before localization. In particular it supplies a morphism in the derived category of towers, with the required evaluations.",
+   "uses": [
+    "def-weil-frobenius-point-transport",
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), compatibility before taking the derived limit; naturality of restriction, insertion and quotient"
+   }
+  },
+  {
+   "text": "Use $H(X_\\bullet)=\\operatorname{Cone}(1-s_X)[-1]$ with the convention in [lem-pur-integral-operations-well-defined]:\n$$H(X)^i=(\\prod_nX_n^{i-1})\\oplus(\\prod_nX_n^i),\\qquad d(b,a)=(-db-(1-s_X)a,da).$$\nThe strict equality in step 2 implies $(1-s_B)\\prod u_n=(\\prod u_n)(1-s_D)$. Hence $H(u)(b,a)=((\\prod u_n)b,(\\prod u_n)a)$ is a chain map. Countable sheaf-module products are exact and sectionwise by [lem-weil-proetale-countable-products-exact]; exact products give the derived products by [lem-weil-derived-limit-existence](2). Thus these are derived-limit models. Sections at $s$ preserve quasi-isomorphisms by [lem-weil-point-proetale-sections-exact]. Moreover the sectionwise product equality and the displayed two-summand differential identify $\\Gamma(s,H(X_\\bullet))$ with $H(\\Gamma(s,X_\\bullet))$, including its arrows, by the identity on the two product components. This proves the required preservation here by an explicit model, without selecting a comparison between unspecified Roos triangles.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-existence",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), realize the strict tower map by the specified shifted cone"
+   }
+  },
+  {
+   "text": "Let $\\chi_N:N\\to H(P_\\bullet)$ be the specified completion map of [lem-weil-finite-free-completed-scalar-comparison] for the identity extension $E=E$. Its representative on $P$ is $z\\mapsto(0,(r_nz)_n)$, and it is an isomorphism, natural in $N$, since $N$ is derived complete. Applying exact sections and step 3 gives the canonical identification\n$$\\alpha_N:\\Gamma(s,N)\\xrightarrow{\\sim}H(D_\\bullet).$$\nFor the target, the definition of completed pullback in [def-weil-derived-pullback-tensor-hom] and its well-definedness [lem-pur-integral-operations-well-defined] compute $Lg^*N$ as $H(C_\\bullet)$. Step 3 therefore gives\n$$\\beta_N:\\Gamma(s,Lg^*N)\\xrightarrow{\\sim}H(B_\\bullet).$$\nHere $B_n$ represents exactly $\\Gamma(s,Lg_n^*N_n)$ by step 1. These give the two identifications asserted in the statement. In particular the first identification uses the specified completion map, not an arbitrary isomorphism supplied by the existence of a distinguished triangle.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), canonical completeness identifications for source and completed pullback"
+   }
+  },
+  {
+   "text": "We compare the maps on $\\Gamma(s,P)$, which maps quasi-isomorphically to $\\Gamma(s,N)$ by [lem-weil-point-proetale-sections-exact]. By step 4,\n$$H(u)\\alpha_N\\Gamma(s,q)(z)=(0,(u_n\\Gamma(s,r_n)z)_n).$$\nPart (b) of [def-weil-inverse-image-pullback-comparison] defines the integral $\\kappa_N$ from the map $g^{-1}P\\to H(C_\\bullet)$ sending $w\\mapsto(0,(\\theta_nw)_n)$, followed by the inverse of $g^{-1}q$. The restriction and insertion formula for $\\sigma$ in [def-weil-frobenius-point-transport] commutes with $q$, so $\\sigma_N\\Gamma(s,q)=\\Gamma(s,g^{-1}q)\\sigma_P$. The factor $g^{-1}q$ and its inverse cancel in $\\iota_N=\\Gamma(s,\\kappa_N)\\sigma_N$. Thus\n$$\\beta_N\\iota_N\\Gamma(s,q)(z)=(0,(\\Gamma(s,\\theta_n)\\sigma_Pz)_n).$$\nStep 2 equates these two expressions, including their zero shifted-product components. Inverting $\\Gamma(s,q)$ gives\n$$\\beta_N\\iota_N=H(u)\\alpha_N.$$\nThis proves the equality with the specified integral transport as a derived morphism; the calculation does not infer equality from the individual reductions.",
+   "uses": [
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-frobenius-point-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), equality with the actual comparison map (b), including its zero shifted-product component"
+   }
+  },
+  {
+   "text": "For a chain map $f:P\\to P'$ of flat-term K-flat complexes, the quotient maps give a map of strict towers by [def-weil-pbc-adic-coefficient-datum]. Restriction, colimit insertion, sheafification and $x\\mapsto x\\otimes1$ commute with $f$, as their section formulas show. Hence $u'_{n}\\Gamma(s,f_n)=\\Gamma(s,g_n^*f_n)u_n$, and the product and two-component cone formulas in step 3 commute with $f$ too. The source comparison is natural and independent of the K-flat resolution by [lem-weil-finite-free-completed-scalar-comparison], while the target completed pullback has the same descent and independence by [lem-pur-integral-operations-well-defined]. Exact sections preserve their quasi-isomorphisms by [lem-weil-point-proetale-sections-exact]. The chain-map equalities therefore hold after localization: for a roof $P\\xleftarrow{a}Q\\xrightarrow{b}P'$ between K-flat representatives, they hold for $a,b$ and hence for $[b][a]^{-1}$. The resolving-class construction of the reduction functor in [def-weil-pbc-adic-coefficient-datum] computes derived morphisms this way. This proves naturality of the tower morphism, the identifications and the equality of step 5 for arbitrary derived morphisms, as well as independence of the common resolution.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), naturality and descent of the common-representative calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-frobenius-point-transport",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause (3), explicit strict-quotient and shifted-cone refinement using the cited existing definitions and completion theorem"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +152,45 @@
    "results": "8 hits; recorded top names: PresheafOfModules.evaluation_preservesFiniteLimits, SheafOfModules.evaluationPreservesLimitsOfShape, SheafOfModules.evaluationPreservesLimit, CategoryTheory.Limits.evaluationPreservesLimits, SheafOfModules.Finite.evaluationPreservesFiniteLimits, ContinuousMap.evalAlgHom, CategoryTheory.Limits.instPreservesFiniteLimitsFunctorObjEvaluationOfHasFiniteLimits, AlgebraicGeometry.Scheme.evaluation.  None identifies the specified point restriction/comparison map with its coherent derived-limit realization. Evaluation-preserves-limits and mappingCocone.lift provide ingredients only, not the completed coefficient identification or equality of these maps.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "point.*transport|transport.*point|frobenius.*limit",
+   "results": "Q29 read 3 hits: Mathlib/LinearAlgebra/AffineSpace/Independent.lean, Mathlib/LinearAlgebra/AffineSpace/Combination.lean, Mathlib/CategoryTheory/IsConnected.lean. Read the displayed signatures; mappingCocone.lift and evaluationPreservesLimit sources were inspected. These give cone/evaluation ingredients, not the specified completed-coefficient Frobenius transport identification.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact evaluation at an algebraically closed point preserves derived limits and the coefficient transport map",
+   "results": "Q29 read 8 hits: PresheafOfModules.evaluation_preservesFiniteLimits, SheafOfModules.evaluationPreservesLimitsOfShape, SheafOfModules.evaluationPreservesLimit, CategoryTheory.Limits.evaluationPreservesLimits, SheafOfModules.Finite.evaluationPreservesFiniteLimits, ContinuousMap.evalAlgHom, CategoryTheory.Limits.instPreservesFiniteLimitsFunctorObjEvaluationOfHasFiniteLimits, AlgebraicGeometry.Scheme.evaluation. Read the displayed signatures; mappingCocone.lift and evaluationPreservesLimit sources were inspected. These give cone/evaluation ingredients, not the specified completed-coefficient Frobenius transport identification.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.lift",
+   "results": "Q29 read 8 hits: CochainComplex.mappingCocone.ofHom_lift, CochainComplex.mappingCocone.lift, CochainComplex.mappingCocone.lift_fst, CochainComplex.mappingCocone.lift_f_snd_v, CochainComplex.mappingCocone.lift_f_fst_f, CochainComplex.mappingCocone.lift_f_snd_v_assoc, CochainComplex.mappingCocone.lift_f_fst_f_assoc, CochainComplex.mappingCocone.lift_fst_assoc. Read the displayed signatures; mappingCocone.lift and evaluationPreservesLimit sources were inspected. These give cone/evaluation ingredients, not the specified completed-coefficient Frobenius transport identification.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections point transport on a derived complete sheaf is the derived inverse limit of finite coefficient transport maps",
+   "results": "Q29 read 8 hits: CategoryTheory.Presheaf.FamilyOfElementsOnObjects.IsCompatible.section_apply, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, CategoryTheory.Sheaf.coneΓ_π_app, CategoryTheory.typesGlue_eval, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, CategoryTheory.Sheaf.ΓRes, SheafOfModules.Presentation.map_π_eq. Read the displayed signatures; mappingCocone.lift and evaluationPreservesLimit sources were inspected. These give cone/evaluation ingredients, not the specified completed-coefficient Frobenius transport identification.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact product preserving evaluation sends the mapping cone inverse limit of a compatible tower map to its evaluated derived limit",
+   "results": "Q29 read 8 hits: HomologicalComplex.isLimitOfEval, HomologicalComplex.coneOfHasLimitEval_π_app_f, HomologicalComplex.coneOfHasLimitEval_pt_d, HomologicalComplex.coneOfHasLimitEval_pt_X, HomologicalComplex.coneOfHasLimitEval, HomologicalComplex.isLimitConeOfHasLimitEval, HomologicalComplex.instPreservesLimitEval, CategoryTheory.Limits.evaluateCombinedCones. Read the displayed signatures; mappingCocone.lift and evaluationPreservesLimit sources were inspected. These give cone/evaluation ingredients, not the specified completed-coefficient Frobenius transport identification.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-trf-rational-frobenius-integral-model",
@@ -74,5 +207,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-integral-point-transport-tower-realization",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split the point-transport realization by an explicit common K-flat quotient tower, a strict transition calculation, sectionwise cone realization, the specified natural completeness comparison at E=E, and equality of the two cone maps including the zero shifted component. All supporting statements already exist; no new nodes.",
+  "blueprint": "Realizes clause (3) of prop-trf-rational-frobenius-integral-model.proof.md: the integral point transport in the compact-support Frobenius comparison is the realization of the finite transports. Steps 1-2 construct its coherent tower, step 3 realizes it, steps 4-5 prove the specified-map equality, step 6 proves naturality.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of a common flat-term K-flat resolution for the strict quotient construction; not supplied by sk-d-weil."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Generic strict-cone model and resolution-independent descent of completed pullback, used as fixed coefficient machinery."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic exactness and sectionwise computation of countable pro-etale module products, needed to evaluate the specified cone."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Generic identification of derived products with termwise products in an abelian category with exact countable products."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic exact evaluation at the algebraically closed point, ensuring that all complex comparisons pass to derived categories."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "The identity coefficient extension supplies the specified natural strict-cone completion isomorphism; the weak Roos-triangle completeness definition alone does not specify that map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q29-0c7f38b7a",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-0c7f38b7a (reviewer sub-agent of L); spot-checked: Reviewed the item, all six proof steps, every cited node statement and source route, coefficient categories, base-change comparison, duplicate searches, tool uses, and edge cases. The strict shifted-cone realization is correct; no repairs or dropped nodes are needed."
  }
 }

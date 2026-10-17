@@ -17,9 +17,85 @@
   "def-sf-kv-maps",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $H(U,V)=R\\mathcal Hom_A(U,V)$ and suppress $\\otimes_A^L$ in this proof. Apply the natural internal currying isomorphism of [lem-weil-pbc-ringed-internal-hom-exact-restriction] and then [lem-pur-rhom-global-sections] to obtain the natural bijection\n$$\\Phi_{P,U,V}:\\operatorname{Hom}(P,H(U,V))\\xrightarrow{\\sim}\\operatorname{Hom}(P\\otimes U,V).$$\nDefine $\\operatorname{ev}_{U,V}=\\Phi_{H(U,V),U,V}(1)$. Naturality in $P$, applied to $f:P\\to H(U,V)$ and the identity of $H(U,V)$, gives $\\Phi(f)=\\operatorname{ev}_{U,V}\\circ(f\\otimes1_U)$. Naturality in $V$ gives, for $a:V\\to V'$, $\\Phi(H(U,a)\\circ f)=a\\circ\\Phi(f)$. These are direct substitutions in the cited natural isomorphisms; no boundedness, perfectness or invertibility of $a$ is needed.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9, lemma-internal-hom, and Tag 08JA, lemma-section-RHom-over-U; take global H^0 of currying"
+   }
+  },
+  {
+   "text": "Let $\\beta:B\\to H(U,T)$ be the first arrow in clause (iv) of [def-sf-kv-maps]. Its clause (iii) specifies its transpose: reassociate the external product of the two internal Homs tensored with the two inputs, then apply their two evaluations. Substitute $(E_1,L_1)=(A_X,M)$ and $(E_2,L_2)=(N,\\omega_Y)$. Under $H(A_X,M)\\cong M$, the first evaluation is the unit action $M\\otimes A_X\\to M$: this unit identification is precisely the transpose of the unit action. The other evaluation is $\\operatorname{ev}_N$ by [def-trf-dualizing-complex]. Thus the transpose first identifies $(Lp_X^*M\\otimes Lp_Y^*D_YN)\\otimes Lp_Y^*N$ with $Lp_X^*M\\otimes Lp_Y^*(D_YN\\otimes N)$ and then applies $1\\otimes Lp_Y^*\\operatorname{ev}_N$. This is exactly $e$. The comparison in [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] has direction $Lp_Y^*(D_YN\\otimes N)\\to Lp_Y^*D_YN\\otimes Lp_Y^*N$, so this calculation uses its inverse. Compatibility with the unit, associativity and signed symmetry is explicitly supplied by [lem-pur-derived-pullback-tensor-iso]. In the two-evaluation shuffle, the only interchange removed on specializing is with $A_X$ in degree zero, hence contributes sign $+1$; $D_YN$ and $N$ retain their order. Consequently $\\Phi(\\beta)=e$, including the specified signs.",
+   "uses": [
+    "def-sf-kv-maps",
+    "def-trf-dualizing-complex",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-def-sf-kv-maps/def-sf-kv-maps.md",
+    "place": "clauses (iii) and (iv): two evaluations and the coefficient-unit specialization"
+   }
+  },
+  {
+   "text": "Put $Q=Rp_X^!M$. Clause (iv) of [def-sf-kv-maps] says $\\kappa_{M,N}=H(U,\\alpha)\\circ\\beta$. The postcomposition identity of Step 1 and Step 2 give\n$$\\Phi(\\kappa_{M,N})=\\alpha\\circ\\Phi(\\beta)=\\alpha\\circ e.$$\nThe evaluation description of $\\Phi$ from Step 1 rewrites the left side as $\\operatorname{ev}_{U,Q}\\circ(\\kappa_{M,N}\\otimes1_U)$, which proves both formulations of the asserted equality. This uses only the definition of the two arrows and naturality of the adjunction; it assumes neither that $\\kappa$ is an isomorphism nor that $N$ is site-perfect.",
+   "uses": [
+    "def-sf-kv-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-def-sf-kv-maps/def-sf-kv-maps.md",
+    "place": "clause (iv): composite with RHom(1,alpha) and its tensor–Hom transpose"
+   }
+  },
+  {
+   "text": "For $v:M\\to M'$, write $B(v)=Lp_X^*v\\otimes1$, $T(v)=Lp_X^*v\\otimes1$ and $Q(v)=Rp_X^!v$. The formula for $e$ gives $e_{M',N}\\circ(B(v)\\otimes1)=T(v)\\circ e_{M,N}$ by tensor functoriality and naturality of the pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The map $\\alpha$ is natural in $M$: in clause (ii) of [def-sf-kv-maps] its untransposed map is $(\\varepsilon_1\\boxtimes\\varepsilon_2)\\circ\\mathrm{Ku}_!$, where $\\mathrm{Ku}_!$ is the natural relative-product map of [thm-sf-kunneth-relative] followed by the natural base-change identifications of clause (i). Hence counit naturality and the natural exceptional adjunction give $Q(v)\\circ\\alpha_M=\\alpha_{M'}\\circ T(v)$. Therefore $Q(v)\\circ\\alpha_M\\circ e_{M,N}=\\alpha_{M'}\\circ e_{M',N}\\circ(B(v)\\otimes1)$. Naturality of $\\Phi$ in Step 1 gives the same square for $\\kappa$, so the equality in Step 3 is natural in $M$. All these uses are on the finite-Tor domains already stipulated by the product-map definition; its naturality theorem is applied with separated finite-type target base $X\\times_k s\\cong X$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-sf-kv-maps",
+    "thm-sf-kunneth-relative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-def-sf-kv-maps/def-sf-kv-maps.md",
+    "place": "clauses (i), (ii), (iv): natural compact-support product, counits, and their adjunction mates"
+   }
+  },
+  {
+   "text": "For $w:N'\\to N$, let $D_Yw:D_YN\\to D_YN'$ be the internal-Hom action specified in [def-trf-dualizing-complex]. Naturality of the bijection in Step 1 in its second input, applied to an identity internal-Hom map, gives\n$$\\operatorname{ev}_{N'}\\circ(D_Yw\\otimes1_{N'})=\\operatorname{ev}_{N}\\circ(1_{D_YN}\\otimes w).$$\nPull back this equality and tensor with $Lp_X^*M$. The natural pullback–tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the signed constraints of [lem-pur-derived-pullback-tensor-iso] yield\n$$e_{M,N'}\\circ((1\\boxtimes D_Yw)\\otimes1_{Lp_Y^*N'})=e_{M,N}\\circ(1_B\\otimes Lp_Y^*w).$$\nBoth sides have source $(M\\boxtimes D_YN)\\otimes Lp_Y^*N'$ and target $T$. Postcompose with $\\alpha_M$, which is independent of $N$. Transposing by the same natural bijection gives\n$$\\kappa_{M,N'}\\circ(1\\boxtimes D_Yw)=H(Lp_Y^*w,1_Q)\\circ\\kappa_{M,N}.$$\nThis is the required contravariant naturality in $N$, and the displayed uncurried square shows that the equality of Step 3 respects it. Together with Step 4 it proves naturality on the entire stated domain.",
+   "uses": [
+    "def-trf-dualizing-complex",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-def-sf-kv-maps/def-sf-kv-maps.md",
+    "place": "clauses (iii)–(iv): naturality of the two evaluations in the internal-Hom input"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "def-sf-kv-maps",
+  "def-trf-dualizing-complex",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-derived-pullback-tensor-iso",
+  "thm-sf-kunneth-relative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-def-sf-kv-maps/def-sf-kv-maps.md",
+  "place": "clauses (iii)–(iv), with the unit specialization and adjunction naturality written out; thm-trf-verdier-duality proof Step 3 evaluation compatibility"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +131,45 @@
    "results": "8 hits; contractLeft, PiTensorProduct.dualDistrib_apply, TensorPower.multilinearMapToDual_apply_tprod, TensorProduct.dualDistrib_apply, CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitRight, MvPolynomial.rTensor_apply_tmul_apply, dualTensorHom_apply, PiTensorProduct.toDualContinuousMultilinearMap_apply_apply",
    "date": "2026-10-17",
    "verdict": "no match: generic exponential comparisons, module contractions and sheaf pullback comparisons do not identify this geometric Kunneth–Verdier map with the external Verdier evaluation composite"
+  },
+  {
+   "tool": "grep",
+   "query": "kunnethVerdier|Verdier.*eval|eval.*Verdier",
+   "results": "0 hits; none",
+   "date": "2026-10-17",
+   "verdict": "no match: generic closed-category adjunction identities and ordinary sheaf pullback comparisons do not state the geometric product-map definition or its signed unit specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kunneth Verdier map tensor Hom transpose evaluation naturality",
+   "results": "8 hits; CategoryTheory.tensorLeftHomEquiv_naturality, transpose_dualTensorHom, CategoryTheory.ihom.coev_naturality_assoc, CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation, HomologicalComplex.mapBifunctorFlipIso_hom_naturality, PresheafOfModules.Monoidal.tensorHom, ModuleCat.ihom_ev_app, FGModuleCat.FGModuleCatEvaluation",
+   "date": "2026-10-17",
+   "verdict": "no match: generic closed-category adjunction identities and ordinary sheaf pullback comparisons do not state the geometric product-map definition or its signed unit specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.uncurry, CategoryTheory.ihom.ev",
+   "results": "8 hits; CategoryTheory.MonoidalClosed.uncurry_id_eq_ev, CategoryTheory.MonoidalClosed.uncurry_ihom_map, CategoryTheory.MonoidalClosed.uncurry_eq, CategoryTheory.MonoidalClosed.uncurry_pre, CategoryTheory.uncurry_expComparison, CategoryTheory.MonoidalClosed.uncurry_uncurry_ihomCurry, CategoryTheory.MonoidalClosed.uncurry_ihomCurry, CategoryTheory.MonoidalClosed.uncurry_ihomUncurry",
+   "date": "2026-10-17",
+   "verdict": "no match: generic closed-category adjunction identities and ordinary sheaf pullback comparisons do not state the geometric product-map definition or its signed unit specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor Hom transpose of an external Hom comparison is the external product of evaluations followed by a map to the exceptional pullback",
+   "results": "8 hits; CategoryTheory.coev_expComparison, CategoryTheory.expComparison, CategoryTheory.expComparison_ev, CategoryTheory.uncurry_expComparison, CategoryTheory.MonoidalClosed.compTranspose, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.MonoidalClosed.coev_app_comp_pre_app",
+   "date": "2026-10-17",
+   "verdict": "no match: generic closed-category adjunction identities and ordinary sheaf pullback comparisons do not state the geometric product-map definition or its signed unit specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For geometric sheaves the Kunneth Verdier comparison evaluates to the exceptional Kunneth morphism after the pulled back Verdier evaluation",
+   "results": "8 hits; LightCondensed.ihomPoints_symm_comp, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, instMonoidalClosedLightCondSet, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackIso",
+   "date": "2026-10-17",
+   "verdict": "no match: generic closed-category adjunction identities and ordinary sheaf pullback comparisons do not state the geometric product-map definition or its signed unit specialization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-trf-verdier-duality",
@@ -75,5 +186,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-kv-evaluation-formula",
+  "worker": "stage1",
+  "summary": "Five elementary steps using existing statements: derive the natural tensor–Hom bijection, calculate the unit specialization of external evaluation with its signs, evaluate the defining composite, and give explicit covariance in M and contravariance in N. No new nodes; no statement change; no Lean attachment. Retained inherited searches and added all five Q71 logged searches.",
+  "blueprint": "thm-trf-verdier-duality proof Step 3 evaluation compatibility, implemented through current main-20261015 def-sf-kv-maps clauses (iii)–(iv); clause (ii) is used only to check naturality of alpha. No change to the diagonal-trace-class unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic tool for the existing product-map construction: natural internal currying on the ringed site. This supplies a formal tool, not a replacement trace-formula route."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic tool for the existing product-map construction: identify H^0 of internal Hom with derived morphisms. This supplies a formal tool, not a replacement trace-formula route."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic tool for the existing product-map construction: unit, associativity and signed-symmetry coherence of the specified pullback comparison. This supplies a formal tool, not a replacement trace-formula route."
+   },
+   {
+    "node": "thm-sf-kunneth-relative",
+    "why": "Generic tool for the existing product-map construction: naturality of the compact-support product used in the definition of alpha. This supplies a formal tool, not a replacement trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic tool for the existing product-map construction: direction and bifunctoriality of the finite-level pullback–tensor isomorphism. This supplies a formal tool, not a replacement trace-formula route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "lem-pur-derived-pullback-tensor-iso",
+  "thm-sf-kunneth-relative",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q71-935f9981f",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q71-935f9981f (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, blueprint route, and Stacks 08J9/08JA/07A4. All five steps are valid, including comparison direction, Koszul signs, coefficient domains, and contravariant naturality. No cycles, new nodes, or repairs. Accepted all five declared tool uses. Detailed checks recorded in review.md."
  }
 }

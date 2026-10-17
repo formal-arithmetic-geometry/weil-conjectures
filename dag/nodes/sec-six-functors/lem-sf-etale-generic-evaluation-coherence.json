@@ -1,0 +1,112 @@
+{
+ "id": "lem-sf-etale-generic-evaluation-coherence",
+ "kind": "statement",
+ "title": "Evaluation coherence of generic stratum-Hom exchange",
+ "statement": "Let $A$ be a finite commutative ring. Let $s:S\\hookrightarrow X$ be an immersion, with fixed closed-then-open factorization, and let $s':S'\\hookrightarrow X'$ be its cartesian pullback along a scheme morphism $g_X:X'\\to X$, with $g_S:S'\\to S$ [def-pc-base-change, def-weil-closed-immersion, def-weil-open-immersion]. Use $Rs_!,Rs^!,Rs_*$ and their primed versions from these factorizations, with $Rs_!=j_!i_*$ and $Rs^!=Ri^!j^*$ [lem-cbc-open-closed-recollement, lem-exc-closed-ambient]. Use ordinary unbounded derived categories $D(T_{\\mathrm{et}},A)$ of sheaves of modules over the constant ring sheaf $A_T$ on small etale sites [def-weil-pbc-derived-categories], derived tensor $\\otimes_A^L$ [def-kun-derived-tensor], and derived internal Hom $\\mathscr H_T(U,V)=R\\mathcal Hom_{A_T}(U,V)$ [def-pur-derived-internal-hom]. Scheme inverse images on these categories are exact constant-coefficient inverse images [prop-weil-pbc-inverse-image-modules-exact]. Let $P\\in D(S_{\\mathrm{et}},A)$, $M\\in D(X_{\\mathrm{et}},A)$, and $H=\\mathscr H_S(P,Rs^!M)$. Write $b:g_X^*Rs_!\\xrightarrow{\\sim}Rs'_!g_S^*$ for canonical extension-by-zero base change, $e:g_X^*Rs_*\\to Rs'_*g_S^*$ for the adjunction-mate exchange, and $a:g_S^*Rs^!M\\to Rs'^!g_X^*M$ for a comparison satisfying the exceptional counit identity\n$$\\varepsilon^!_{s',g_X^*M}\\circ Rs'_!(a)\\circ b_{Rs^!M}=g_X^*\\varepsilon^!_{s,M}.$$\nAssume the canonical projection isomorphisms commute with $g^*$ under $b$ [lem-sf-etale-generic-immersion-projection]. Use the evaluation-normalized isomorphisms $\\theta_s,\\theta_{s'}$ of [lem-sf-etale-generic-stratum-mate], and let $\\beta_{P,Rs^!M}$ be the transpose of pulled-back evaluation. Then the composite\n$$g_X^*\\mathscr H_X(Rs_!P,M)\\xrightarrow{g_X^*\\theta_s}g_X^*Rs_*H\\xrightarrow{e_H}Rs'_*g_S^*H\\xrightarrow{Rs'_*\\beta_{P,Rs^!M}}Rs'_*\\mathscr H_{S'}(g_S^*P,g_S^*Rs^!M)\\xrightarrow{Rs'_*\\mathscr H(1,a)}Rs'_*\\mathscr H_{S'}(g_S^*P,Rs'^!g_X^*M)\\xrightarrow{\\theta_{s'}^{-1}}\\mathscr H_{X'}(Rs'_!g_S^*P,g_X^*M)$$\nhas tensor transpose $g_X^*\\mathrm{ev}_{Rs_!P,M}$ after identifying its tensor input by $b_P$ and the canonical tensor pullback map. Thus it equals the canonical evaluation-induced comparison $\\beta_{Rs_!P,M}$. This assertion is an identity of maps and assumes no isomorphism property of $e_H$, $a$, or $\\beta_{P,Rs^!M}$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08J9 (lemma-internal-hom); agent cartesian mate calculation using the projection, evaluation and exceptional counit identities."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-pur-derived-internal-hom",
+  "def-kun-derived-tensor",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-pc-base-change",
+  "lem-cbc-open-closed-recollement",
+  "lem-exc-closed-ambient",
+  "lem-sf-etale-generic-immersion-projection",
+  "lem-sf-etale-generic-stratum-mate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical base change of internal Hom from extension by zero agrees with composition of direct image exchange exceptional counit mate and internal Hom comparison",
+   "results": "CategoryTheory.coev_expComparison; CategoryTheory.expComparison; CategoryTheory.tensorLeftHomEquiv; CategoryTheory.ExponentiableMorphism.coev_naturality; CategoryTheory.tensorRightHomEquiv; CategoryTheory.tensorLeftAdjunction; CategoryTheory.tensorLeftHomEquiv_naturality; CategoryTheory.tensorRightAdjunction",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a cartesian immersion square the stratum Hom isomorphism intertwines pullback evaluation when projection and exceptional counit commute",
+   "results": "AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullback_snd_isIso_of_range_subset; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullback_snd_isIso_of_range_subset; AlgebraicGeometry.morphismRestrictOpensRange; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackConeOfLeftLift_snd; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackConeOfLeftLift_fst; AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullback_cone_of_left_condition; AlgebraicGeometry.IsOpenImmersion.isPullback_lift_id",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of internal Hom base change with extension by zero projection formula and exceptional adjunction mates",
+   "results": "IsBaseChange.linearMapLeftRight; CategoryTheory.TwoSquare.lanBaseChange; CategoryTheory.Adjunction.homAddEquiv_zero; CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π'; CategoryTheory.Adjunction.CommShift.compatibilityUnit_isoZero; ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction; CategoryTheory.ProjectiveResolution.Hom.hom_f_zero_comp_π_f_zero_assoc; CategoryTheory.ProjectiveResolution.Hom.hom_f_zero_comp_π_f_zero",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical stratum internal Hom base change comparison agrees with the evaluation transpose under exchange, projection, and exceptional counit",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical stratum internal Hom base change comparison agrees with the evaluation transpose under exchange, projection, and exceptional counit",
+   "results": "LightCondensed.ihomPoints_symm_comp; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.ExponentiableMorphism.coev_naturality; CategoryTheory.ExponentiableMorphism.ev_coev; CategoryTheory.ExponentiableMorphism.coev_naturality_assoc; CategoryTheory.ExponentiableMorphism.ev_naturality; CategoryTheory.coev_expComparison; CategoryTheory.ExponentiableMorphism.ev_coev_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\", \"comp\"",
+   "results": "CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.conjugateEquiv_comp; CategoryTheory.conjugateEquiv_comp_assoc; CategoryTheory.conjugateEquiv_symm_comp; CategoryTheory.conjugateEquiv_symm_comp_assoc; CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv; CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+  },
+  {
+   "tool": "grep",
+   "query": "(internalHom.*baseChange|baseChange.*internalHom|exchange.*(evaluation|internalHom))",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+  },
+  {
+   "tool": "grep",
+   "query": "(internalHom.*baseChange|baseChange.*internalHom|exchange.*evaluation)",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mate\", \"evaluation\"",
+   "results": "CategoryTheory.coevaluation_comp_leftAdjointMate; CategoryTheory.coevaluation_comp_rightAdjointMate; CategoryTheory.leftAdjointMate_comp_evaluation; CategoryTheory.rightAdjointMate_comp_evaluation; CategoryTheory.coevaluation_comp_leftAdjointMate_assoc; CategoryTheory.coevaluation_comp_rightAdjointMate_assoc; CategoryTheory.leftAdjointMate_comp_evaluation_assoc; CategoryTheory.rightAdjointMate_comp_evaluation_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-etale-generic-exchange-algclosed",
+  "date": "2026-10-17",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "thm-weil-etale-geometric-biduality",
+   "place": "Proof paragraph 4, \"The induction hypothesis over ... together with [lem-weil-geometric-generic-duality]\"; compatibility of generic stratum exchange with evaluation",
+   "via": [
+    "lem-sf-etale-generic-exchange-algclosed"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

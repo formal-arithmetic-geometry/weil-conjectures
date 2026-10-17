@@ -13,9 +13,196 @@
   "def-coef-simplicial-tensor-cotensor",
   "def-coef-good-cellular-tree"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write compositions right to left. Put $K_{ij}=I(i,j)$, with unit $e_i:\\Delta^0\\to K_{ii}$ and composition $c_{ijk}:K_{jk}\\times K_{ij}\\to K_{ik}$. Denote the given actions by $a^F_{ij},a^G_{ij},a^M_{ij}$. We use the canonical identifications $\\Delta^0\\otimes Z=Z$ and $(K\\times H)\\otimes Z=K\\otimes(H\\otimes Z)$: their maps into any $W$ are the same maps into $\\underline{\\operatorname{Map}}(Z,W)$ by the representing isomorphisms and simplicial currying. Uniqueness of representing objects supplies these identifications and their coherent unit and associativity maps. For fixed $K$, $K\\otimes-$ preserves ordinary colimits: maps $K\\otimes\\operatorname{colim}Z_d\\to W$ correspond successively to maps $\\operatorname{colim}Z_d\\to W^K$, compatible maps $Z_d\\to W^K$, and compatible maps $K\\otimes Z_d\\to W$. Thus it preserves the tree pushouts and the chain colimits used below.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15, pp.879-881: tensor and colimit universal properties expanded."
+   }
+  },
+  {
+   "text": "For any object $R$, the category $R/\\mathcal A$ has small Hom sets and all small colimits. To compute a colimit, adjoin to its underlying diagram an initial indexing vertex with value $R$ and all structural arrows; cocones on this augmented diagram are exactly cocones under $R$. For a nonempty filtered diagram, its underlying colimit already carries the root map: the maps out of $R$ agree at a common successor. Hence forgetting the root creates filtered colimits. For a $\\kappa$-presentable $P$, the free object $\\Phi_R(P)=(R\\to R\\amalg P)$ is presentable under $R$, because $\\operatorname{Hom}_{R/\\mathcal A}(\\Phi_R(P),Z)=\\operatorname{Hom}_{\\mathcal A}(P,UZ)$. The initial object $1_R$ is presentable as well: its Hom functor is singleton, and a nonempty filtered colimit of singleton sets is singleton by the elementwise criterion.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15, p.879: relative compactness under an arbitrary root."
+   }
+  },
+  {
+   "text": "Fix a downward-closed $D\\subseteq T_i$ of size less than $\\kappa$. For $W$ equal to the identity functor, $K_{ij}\\otimes-$, or $K_{jk}\\otimes(K_{ij}\\otimes-)$, apply $W$ to the restricted cellular tree. Its root is $R=WF_i$, its cell endpoints are $WP_t,WQ_t$, and its restricted colimit is $WY_i(D)$, by Step 1. These endpoints are presentable: this is the original endpoint hypothesis for $W=1$, the tensor hypothesis for a single tensor, and its iteration for a double tensor. Regard this tree in $R/\\mathcal A$ with root $1_R$ and endpoints $\\Phi_R(WP_t),\\Phi_R(WQ_t)$. Its pushout squares are the required squares under $R$: a map out is a map out of the predecessor object and a map from $WQ_t$ agreeing on $WP_t$. Step 2 makes its root and endpoints presentable. Apply [lem-coef-small-tree-presentable-vertices] in this cocomplete category on the inherited small well-founded poset $D$. It follows that $WY_i(D)$ is presentable under $WF_i$. This applies also to $D\\cap A_i$ and to the empty set. It asserts no ordinary presentability of $F_i$ or $Y_i(D)$.",
+   "uses": [
+    "def-coef-good-cellular-tree",
+    "def-coef-simplicial-tensor-cotensor",
+    "lem-coef-small-tree-presentable-vertices",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15, p.879: the compactness assertion after tensoring, reduced to the small-tree theorem."
+   }
+  },
+  {
+   "text": "Let $\\mathscr P$ be the small poset of families $D=(D_i)$ of downward-closed subsets of $T_i$ of size less than $\\kappa$. It is small because all $T_i$ and the object set of $I$ are small. The downward closure of $E_i$ is $\\bigcup_{t\\in E_i}(\\{t\\}\\cup(T_i)_{<t})$, of size less than $\\kappa$ by goodness and regularity; choose it as $B_{0,i}$. Unions of fewer than $\\kappa$ families give upper bounds in $\\mathscr P$, so this poset and every tail above a family are $\\kappa$-filtered. On any such tail, $D\\mapsto Y_j(D_j)$ has colimit $G_j$, and $D\\mapsto Y_j(D_j\\cap A_j)$ has colimit $M_j$. Indeed any vertex of $T_j$, or of $A_j$, lies in a small downward closure; union with the tail's lower bound provides an index there. A cocone on these pieces therefore gives a leg at every vertex, independent of choices by taking unions. Every order arrow is in a single piece, so these legs are a cocone on the entire restricted tree. Restriction gives the inverse correspondence. Step 2 gives the same presentations under any root $R\\to F_j$.",
+   "uses": [
+    "def-coef-good-cellular-tree",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15-16, pp.879-882: the small-piece filtered presentations and tails."
+   }
+  },
+  {
+   "text": "For any of the relatively presentable sources $Z=WY_i(D_i)$ of Step 3, a map under $R=WF_i$ to $G_j$, or to $M_j$, factors through a member of the appropriate presentation in Step 4. Apply the presentability of $Z$ and clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise]. Two such maps to stages agreeing in the total object become equal at a larger stage by clauses (2)-(3). Every application below uses the same specified map from $R$ to the target root $F_j$. Fewer than $\\kappa$ factorizations and equality witnesses can be imposed together by taking a common upper bound in $\\mathscr P$. Only pairs and triples of objects index the requirements, so there are fewer than $\\kappa$ of them: for an infinite object cardinal $\\theta<\\kappa$, $\\theta^2=\\theta$ and then $\\theta^3=\\theta$ by [lem-coef-infinite-cardinal-square-power]; finite object sets are immediate. We factor whole action maps with sources $K_{ij}\\otimes Z$, not one map for each simplex, so no bound on the number of simplices of $K_{ij}$ is needed.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-coef-infinite-cardinal-square-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15 compactness argument, pp.879-881; A.3.3.16, p.882: simultaneous witnesses."
+   }
+  },
+  {
+   "text": "We construct increasing families $B_n\\in\\mathscr P$. Put $X_n^i=Y_i(B_{n,i})$, $H_n^i=Y_i(B_{n,i}\\cap A_i)$, with canonical maps $x_n^i:X_n^i\\to X_{n+1}^i$, $h_n^i:H_n^i\\to H_{n+1}^i$, $k_n^i:H_n^i\\to X_n^i$. Write $g_n^i:X_n^i\\to G_i$, $m_n^i:H_n^i\\to M_i$, $q_i:M_i\\to G_i$, and root maps $r_n^i:F_i\\to X_n^i$, $s_n^i:F_i\\to H_n^i$. At stage $n$ choose partial action maps $u_n^{ij}:K_{ij}\\otimes X_n^i\\to X_{n+1}^j$ and $v_n^{ij}:K_{ij}\\otimes H_n^i\\to H_{n+1}^j$ satisfying\n$$g_{n+1}^ju_n^{ij}=a^G_{ij}(K_{ij}\\otimes g_n^i),\\quad m_{n+1}^jv_n^{ij}=a^M_{ij}(K_{ij}\\otimes m_n^i),$$\n$$u_n^{ij}(K_{ij}\\otimes r_n^i)=r_{n+1}^ja^F_{ij},\\quad v_n^{ij}(K_{ij}\\otimes s_n^i)=s_{n+1}^ja^F_{ij}.$$\nThese are partial actions; the stages are not asserted to be enriched diagrams. Step 5 factors the two global action maps for every pair $(i,j)$ under $K_{ij}\\otimes F_i$, where the target root is specified by $a^F_{ij}$. A common upper family gives preliminary maps $\\widetilde u^{ij},\\widetilde v^{ij}$ into $Y_j(C_j),Y_j(C_j\\cap A_j)$ with $C\\supseteq B_n$.",
+   "uses": [
+    "def-coef-good-cellular-tree",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15-16, pp.879-882: simultaneous partial-action recursion."
+   }
+  },
+  {
+   "text": "Enlarge $C$ so that the intersection and unit equations hold:\n$$k_{n+1}^jv_n^{ij}=u_n^{ij}(K_{ij}\\otimes k_n^i),\\qquad u_n^{ii}(e_i\\otimes X_n^i)=x_n^i,\\qquad v_n^{ii}(e_i\\otimes H_n^i)=h_n^i.$$\nHere $x_n,h_n,k_{n+1}$ denote the canonical maps into the final enlarged family. For the first equation the preliminary two maps out of $K_{ij}\\otimes H_n^i$ agree in $G_j$: the $M$ route becomes $q_ja^M_{ij}(K_{ij}\\otimes m_n^i)=a^G_{ij}(K_{ij}\\otimes q_im_n^i)$ by enriched naturality of $q$, and $q_im_n^i=g_n^ik_n^i$. They agree on the root by the root equations. The two unit comparisons agree in $G_i$ and $M_i$ by the unit laws for those actions, and agree under $F_i$ by the unit law for $F$. Step 5 equalizes these pairs with respectively the single-tensor and identity sources of Step 3. Enlargements only postcompose the preliminary maps, so the root and global equations remain true.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-coef-simplicial-tensor-cotensor",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15 unit laws and A.3.3.16(f), pp.879-882: equality witnesses for units and intersection."
+   }
+  },
+  {
+   "text": "For $n\\geq1$, additionally require the transition equations\n$$u_n^{ij}(K_{ij}\\otimes x_{n-1}^i)=x_n^ju_{n-1}^{ij},\\qquad v_n^{ij}(K_{ij}\\otimes h_{n-1}^i)=h_n^jv_{n-1}^{ij}.$$\nBefore enlargement, the first pair of maps into $Y_j(C_j)$ has common source $K_{ij}\\otimes X_{n-1}^i$. Their images in $G_j$ are both $a^G_{ij}(K_{ij}\\otimes g_{n-1}^i)$ by the previously imposed global equation and $g_n^ix_{n-1}^i=g_{n-1}^i$. Their restrictions to $K_{ij}\\otimes F_i$ agree by the root equation. The second pair likewise agrees in $M_j$ with common source $K_{ij}\\otimes H_{n-1}^i$ and the same root. Step 5 makes all these equations literal after enlargement.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15 second compatibility diagram, p.881; A.3.3.16(d)-(e), pp.881-882."
+   }
+  },
+  {
+   "text": "For every triple $(i,j,l)$ and $n\\geq1$, impose\n$$u_n^{jl}(K_{jl}\\otimes u_{n-1}^{ij})=u_n^{il}(c_{ijl}\\otimes x_{n-1}^i),$$\n$$v_n^{jl}(K_{jl}\\otimes v_{n-1}^{ij})=v_n^{il}(c_{ijl}\\otimes h_{n-1}^i).$$\nThe first equation has source $K_{jl}\\otimes K_{ij}\\otimes X_{n-1}^i$ and target $X_{n+1}^l$, using the product-tensor identification of Step 1. For preliminary maps into $Y_l(C_l)$ its two sides have images in $G_l$ respectively\n$$a^G_{jl}(K_{jl}\\otimes a^G_{ij})(K_{jl}\\otimes K_{ij}\\otimes g_{n-1}^i),\\qquad a^G_{il}(c_{ijl}\\otimes g_{n-1}^i).$$\nThese agree by the composition law of $G$. Their root restrictions agree by that of $F$. Replacing $X,u,g,G$ by $H,v,m,M$ proves equality in $M_l$ for the second pair with the same root restriction. The double-tensor sources are presentable under $K_{jl}\\otimes K_{ij}\\otimes F_i$ by Step 3. Therefore Step 5 supplies equality witnesses. No equation is obtained by canceling a map to $G_l$ or $M_l$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15 first compatibility diagram, pp.880-881; A.3.3.16(d)-(e), p.882: composition equations."
+   }
+  },
+  {
+   "text": "Take a common upper member for the preliminary family $C$ and all witnesses in Steps 7-9; denote it $B_{n+1}$. Postcompose the preliminary maps to this family and call them $u_n,v_n$. The number of witnesses is less than $\\kappa$ by Step 5, so $B_{n+1}\\in\\mathscr P$. Each imposed equation survives this enlargement: both sides postcompose by the same canonical target map, and the maps $u_{n-1},v_{n-1}$ in Steps 8-9 stay fixed. The intersection squares of canonical tree maps commute by colimit uniqueness. At $n=0$ impose only Steps 6-7; there are no negative-stage maps. This starts the recursion at the prescribed downward closures $B_0$ and completes its induction over all natural numbers.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15-16, pp.880-882: completing each recursive stage without monomorphisms."
+   }
+  },
+  {
+   "text": "Put $B_i=\\bigcup_{n<\\omega}B_{n,i}$ and $C_i=B_i\\cap A_i=\\bigcup_{n<\\omega}(B_{n,i}\\cap A_i)$. They are downward-closed, $E_i\\subseteq B_i$, and $|B_i|<\\kappa$ since $\\kappa$ is uncountable regular. Put $X^i=Y_i(B_i)$ and $H^i=Y_i(C_i)$. They are colimits of the chains $X_n^i,H_n^i$, with legs $\\xi_n^i,\\eta_n^i$: each vertex and order arrow in either union occurs at a finite stage, so the cocone argument of Step 4 applies. Tensoring with $K_{ij}$ preserves these chain colimits by Step 1. Thus the transition equations of Step 8 define maps\n$$U^{ij}:K_{ij}\\otimes X^i\\to X^j,\\qquad V^{ij}:K_{ij}\\otimes H^i\\to H^j$$\nuniquely by $U^{ij}(K_{ij}\\otimes\\xi_n^i)=\\xi_{n+1}^ju_n^{ij}$ and $V^{ij}(K_{ij}\\otimes\\eta_n^i)=\\eta_{n+1}^jv_n^{ij}$.",
+   "uses": [
+    "def-coef-good-cellular-tree",
+    "def-weil-pbc-category-colimit",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15-16 conclusion, pp.881-882: countable unions and amalgamation."
+   }
+  },
+  {
+   "text": "The unit equations of Step 7 give $U^{ii}(e_i\\otimes X^i)\\xi_n^i=\\xi_{n+1}^ix_n^i=\\xi_n^i$, proving the unit law by colimit uniqueness. On the leg $K_{jl}\\otimes K_{ij}\\otimes\\xi_n^i$, the composite $U^{jl}(K_{jl}\\otimes U^{ij})$ becomes\n$$\\xi_{n+2}^lu_{n+1}^{jl}(K_{jl}\\otimes u_n^{ij})=\\xi_{n+2}^lu_{n+1}^{il}(c_{ijl}\\otimes x_n^i)=\\xi_{n+1}^lu_n^{il}(c_{ijl}\\otimes X_n^i).$$\nThis is the restriction of $U^{il}(c_{ijl}\\otimes X^i)$. Double tensoring preserves the chain colimit by Step 1, so these restrictions prove the composition law. Substitution of $H,V,v,h,\\eta$ for $X,U,u,x,\\xi$ proves both laws for $V$. Consequently these maps define enriched functors on $X$ and $H$, with all simplicial degrees controlled by tensor maps rather than vertexwise equations.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15-16 conclusion, pp.881-882: enriched unit and composition laws on colimit legs."
+   }
+  },
+  {
+   "text": "Let $r_i:F_i\\to X^i$, $s_i:F_i\\to H^i$, $g_i:X^i\\to G_i$, $m_i:H^i\\to M_i$ be the canonical maps. The root equations of Step 6 give $U^{ij}(K_{ij}\\otimes r_i)=r_ja^F_{ij}$ and $V^{ij}(K_{ij}\\otimes s_i)=s_ja^F_{ij}$, by expressing $r_i,s_i$ at any stage. For example, on $K_{ij}\\otimes\\xi_n^i$ the global equation gives\n$$g_jU^{ij}(K_{ij}\\otimes\\xi_n^i)=g_{n+1}^ju_n^{ij}=a^G_{ij}(K_{ij}\\otimes g_n^i).$$\nThe colimit property proves $g_jU^{ij}=a^G_{ij}(K_{ij}\\otimes g_i)$; replacing $g,G,U,\\xi,u$ by $m,M,V,\\eta,v$ proves the equation for $m$. Hence $F\\to X\\to G$ and $F\\to H\\to M\\to G$ are enriched factorizations of $f$; their composites are $f$ on the root by the tree's structural maps. Thus $N=(B,U)$ and $N'=(C,V)$ are slices, and the canonical map $N'\\to M$ is enriched.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-coef-simplicial-tensor-cotensor",
+    "def-coef-good-cellular-tree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.15-16 conclusion, pp.881-882: the enriched maps under F and over G."
+   }
+  },
+  {
+   "text": "Let $k_i:H^i\\to X^i$ be the canonical map from the intersection colimit, so $k_i\\eta_n^i=\\xi_n^ik_n^i$. The intersection equation of Step 7 yields\n$$U^{ij}(K_{ij}\\otimes k_i)(K_{ij}\\otimes\\eta_n^i)=\\xi_{n+1}^ju_n^{ij}(K_{ij}\\otimes k_n^i)=\\xi_{n+1}^jk_{n+1}^jv_n^{ij}=k_jV^{ij}(K_{ij}\\otimes\\eta_n^i).$$\nTensor preservation and colimit uniqueness imply $U^{ij}(K_{ij}\\otimes k_i)=k_jV^{ij}$. Thus $N'\\to N$ is enriched, as is $N'\\to M$ from Step 13. The underlying subsets are exactly $C_i=B_i\\cap A_i$, so both maps are the canonical extension maps required. Their two composites to $G$ agree on every tree leg. Empty trees and empty intersections give the root object, so the same root equations apply; with no objects in $I$ the families and actions are empty and the conclusion is vacuous.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-coef-simplicial-tensor-cotensor",
+    "def-coef-good-cellular-tree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.16 conclusion, p.882: both canonical intersection maps respect every simplicial action."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-simplicial-tensor-cotensor",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "def-coef-good-cellular-tree",
+  "lem-coef-small-tree-presentable-vertices",
+  "lem-coef-infinite-cardinal-square-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2 derived coefficient adjunction: technical enriched diagram-model input; direct tensor-action expansion of HTT A.3.3.15-16, read online at the source URL. Archival HTT is WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +245,52 @@
    "results": "{\"t\": \"2026-10-17T12:58:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedFunctor\\\", \\\"IsCardinalPresentable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: RelativeCellComplex/Basic.lean:48-55 is a linear cell-complex structure, and its Cells projections do not produce compatible enriched actions or intersection slices. Enriched/FunctorCategory.lean:381 computes a mapping end only. The enriched grep hits at HomCongr.lean:50,54 and Ordinary/Basic.lean:297 are tactic slice syntax. Targeted Loogle and cellular-slice grep have no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "cellular.*slice|slice.*cellular|CellularTree",
+   "results": "{\"t\": \"2026-10-17T14:10:31Z\", \"tool\": \"grep\", \"query\": \"cellular.*slice|slice.*cellular|CellularTree\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned RelativeCellComplex/Basic.lean:48-66 (linear cell complexes), SubcomplexColimits.lean:44-74 (subcomplex multicoequalizers), Tree.lean:126 (rooted-order subtrees), Presentable/Directed.lean:65 (bounded diagram data), and Enriched/HomCongr.lean:50,54 and Ordinary/Basic.lean:297 (tactic syntax). None supplies enriched cellular actions or compatible intersection slices; targeted Loogle and cellular-slice grep have zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Small subdiagrams of cellular trees compatible with enriched actions and a prescribed intersection",
+   "results": "{\"t\": \"2026-10-17T14:10:32Z\", \"tool\": \"leansearch\", \"query\": \"Small subdiagrams of cellular trees compatible with enriched actions and a prescribed intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgCat.instSmallSubtypeForallCarrierObjMemSubalgebraSectionsSubalgebra\", \"SubAddAction.instMin\", \"SubRootedTree\", \"instEssentiallySmallLightDiagram\", \"SubMulAction.instMin\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.casesOn\", \"SubMulAction.instInfSet\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram.mk\"], \"digest\": \"0e63fee4f1bc969a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned RelativeCellComplex/Basic.lean:48-66 (linear cell complexes), SubcomplexColimits.lean:44-74 (subcomplex multicoequalizers), Tree.lean:126 (rooted-order subtrees), Presentable/Directed.lean:65 (bounded diagram data), and Enriched/HomCongr.lean:50,54 and Ordinary/Basic.lean:297 (tactic syntax). None supplies enriched cellular actions or compatible intersection slices; targeted Loogle and cellular-slice grep have zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedFunctor\", \"IsCardinalPresentable\"",
+   "results": "{\"t\": \"2026-10-17T14:10:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedFunctor\\\", \\\"IsCardinalPresentable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned RelativeCellComplex/Basic.lean:48-66 (linear cell complexes), SubcomplexColimits.lean:44-74 (subcomplex multicoequalizers), Tree.lean:126 (rooted-order subtrees), Presentable/Directed.lean:65 (bounded diagram data), and Enriched/HomCongr.lean:50,54 and Ordinary/Basic.lean:297 (tactic syntax). None supplies enriched cellular actions or compatible intersection slices; targeted Loogle and cellular-slice grep have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small compatible intersections of cellular slices in a simplicially enriched diagram category",
+   "results": "{\"t\": \"2026-10-17T14:10:42Z\", \"tool\": \"leanfinder\", \"query\": \"Small compatible intersections of cellular slices in a simplicially enriched diagram category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.MulticoequalizerDiagram\", \"HomotopicalAlgebra.RelativeCellComplex.Cells\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.k\", \"CategoryTheory.SmallObject.relativeCellComplexιObj\", \"CategoryTheory.SmallObject.instSmallιAttachCellsιFunctorObj\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.j\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"HomotopicalAlgebra.RelativeCellComplex\"], \"digest\": \"3264d2481a5d4582\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned RelativeCellComplex/Basic.lean:48-66 (linear cell complexes), SubcomplexColimits.lean:44-74 (subcomplex multicoequalizers), Tree.lean:126 (rooted-order subtrees), Presentable/Directed.lean:65 (bounded diagram data), and Enriched/HomCongr.lean:50,54 and Ordinary/Basic.lean:297 (tactic syntax). None supplies enriched cellular actions or compatible intersection slices; targeted Loogle and cellular-slice grep have zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "slice|compact|presentab",
+   "results": "{\"t\": \"2026-10-17T14:10:46Z\", \"tool\": \"grep\", \"query\": \"slice|compact|presentab\", \"sub\": \"CategoryTheory/Enriched\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Enriched/HomCongr.lean\", \"Mathlib/CategoryTheory/Enriched/HomCongr.lean\", \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\"], \"digest\": \"5d8a9433fd7e5d98\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned RelativeCellComplex/Basic.lean:48-66 (linear cell complexes), SubcomplexColimits.lean:44-74 (subcomplex multicoequalizers), Tree.lean:126 (rooted-order subtrees), Presentable/Directed.lean:65 (bounded diagram data), and Enriched/HomCongr.lean:50,54 and Ordinary/Basic.lean:297 (tactic syntax). None supplies enriched cellular actions or compatible intersection slices; targeted Loogle and cellular-slice grep have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enriched functor actions on small cellular subdiagrams can be closed under composition while respecting intersection with an existing subdiagram",
+   "results": "{\"t\": \"2026-10-17T14:10:57Z\", \"tool\": \"leanfinder\", \"query\": \"Enriched functor actions on small cellular subdiagrams can be closed under composition while respecting intersection with an existing subdiagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.relativeCellComplexιObj\", \"HomotopicalAlgebra.RelativeCellComplex.Cells\", \"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.ι\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.k\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.hj\", \"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.i\"], \"digest\": \"08349c127b3405b9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned RelativeCellComplex/Basic.lean:48-66 (linear cell complexes), SubcomplexColimits.lean:44-74 (subcomplex multicoequalizers), Tree.lean:126 (rooted-order subtrees), Presentable/Directed.lean:65 (bounded diagram data), and Enriched/HomCongr.lean:50,54 and Ordinary/Basic.lean:297 (tactic syntax). None supplies enriched cellular actions or compatible intersection slices; targeted Loogle and cellular-slice grep have zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enriched-diagram-size-generation",
@@ -89,5 +318,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-cellular-compatible-slices",
+  "worker": "stage1",
+  "summary": "Expanded the enriched compatible-slice argument using relatively presentable single- and double-tensor cellular pieces. Reused the existing small-tree, elementwise filtered-colimit and cardinal-square nodes; imposed units, transitions, composition and intersection equations explicitly, without cancellation or root presentability. No statement correction and no new nodes.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the derived coefficient-adjunction and inverse-limit comparison; technical enriched diagram-model input through lem-coef-simplicial-model-coherent-diagrams. HTT Lemmas A.3.3.15-A.3.3.16, printed pp.879-882, specialized to simplicial enrichment; tensor presentability is the consequence of condition (iii) used by the proof. The steps expand the compatible-slice input of HTT A.3.3.15-16 below the enriched diagram-model construction."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q60-2fc54b42c",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q60-2fc54b42c (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source passages. All 14 steps check, including relative presentability, double-tensor composition witnesses and canonical intersection maps. No new nodes, circular dependencies or repairs. Target coefficient distinctions remain intact. Detailed checks are in review.md."
  }
 }

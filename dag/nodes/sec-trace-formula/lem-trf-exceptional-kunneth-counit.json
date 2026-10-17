@@ -15,9 +15,40 @@
   "def-trf-external-product",
   "def-sf-kv-maps"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Unfold clause (ii) of [def-sf-kv-maps] for the specified exceptional adjunctions. It defines $\\alpha$ as the exceptional adjoint of the composite\n$$Rf_!Q\\xrightarrow{\\mathrm{Ku}_!}Rf_{1!}Rf_1^!L_1\\boxtimes_A^LRf_{2!}Rf_2^!L_2\\xrightarrow{\\varepsilon_{f_1,L_1}\\boxtimes\\varepsilon_{f_2,L_2}}L.$$\nEquivalently, the adjunction transpose of $\\alpha$ is the displayed composite from $Rf_!Q$ to $L$, so\n$$\\varepsilon_{f,L}\\circ Rf_!(\\alpha)=(\\varepsilon_{f_1,L_1}\\boxtimes\\varepsilon_{f_2,L_2})\\circ\\mathrm{Ku}_!.$$\nAll maps are the specified constructible maps on the finite-Tor categories in the statement.",
+   "uses": [
+    "def-sf-kv-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-def-sf-kv-maps/def-sf-kv-maps.md",
+    "place": "clause (ii), displayed exceptional Künneth composite and its exceptional adjoint"
+   }
+  },
+  {
+   "text": "For $e:P\\to Q$, functoriality of $Rf_!$ and associativity of composition give $Rf_!(\\alpha\\circ e)=Rf_!(\\alpha)\\circ Rf_!(e)$. Postcomposing with the counit $\\varepsilon_{f,L}$ and substituting Step 1 yields exactly\n$$Rf_!P\\xrightarrow{Rf_!(e)}Rf_!Q\\xrightarrow{\\mathrm{Ku}_!}Rf_{1!}Rf_1^!L_1\\boxtimes_A^LRf_{2!}Rf_2^!L_2\\xrightarrow{\\varepsilon_{f_1,L_1}\\boxtimes\\varepsilon_{f_2,L_2}}L.$$\nIf $h:P'\\to P$ is a further morphism, replacing $e$ by $e\\circ h$ gives the same equality with $Rf_!(e)\\circ Rf_!(h)=Rf_!(e\\circ h)$, proving naturality under precomposition. The functoriality and the counit transpose are those of the specified adjunction $Rf_!\\dashv Rf^!$ in [def-trf-admissibility].",
+   "uses": [
+    "def-trf-admissibility",
+    "def-sf-kv-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/thm-trf-verdier-duality.proof.md",
+    "place": "Step 3, adjoint-canonical compatibility; together with product-map definition (ii)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-kv-maps",
+  "def-trf-admissibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/thm-trf-verdier-duality.proof.md",
+  "place": "Step 3, exceptional tensor–Hom compatibility, expanded using clause (ii) of def-sf-kv-maps"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,7 +87,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-trf-verdier-duality",
@@ -73,5 +104,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-exceptional-kunneth-counit",
+  "worker": "stage1",
+  "summary": "Read the item against the current main-20261015 blueprint and the specified product-map definition. No project declaration states this exact precomposition formula and no existing DAG node duplicates it. The split keeps the item statement unchanged and writes the proof as two elementary mate-calculus steps: first unfold the exceptional-adjoint definition of alpha, then use functoriality of Rf_! and counit composition to insert an arbitrary e and prove precomposition naturality. No new nodes were needed.",
+  "blueprint": "Step 1 realizes thm-trf-verdier-duality proof Step 3 by unfolding the exceptional tensor–Hom compatibility; Step 2 realizes the same compatibility after precomposition, using product-map definition (ii)."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q68-d2278d161",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q68-d2278d161 (reviewer sub-agent of L); spot-checked: Read the item, all six dependency statements, cited blueprint sources, and unit/chapter route. Both proof steps correctly use the specified finite-Tor adjunction and Künneth map; edge cases, duplicate candidates, and dependency cycles checked. Corrected only proof_origin.by from document to agent as required for blueprint-only proofs. Full findings in review.md; corrected JSON under fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
  }
 }
