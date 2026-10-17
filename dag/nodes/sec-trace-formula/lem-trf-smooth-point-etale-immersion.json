@@ -230,5 +230,23 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-05cf76237 (reviewer sub-agent of L); spot-checked: Read the item, new node, cited DAG statements, Stacks Tags 057G/057F/057C and dimension references, route documents, and required review materials. The four induction steps correctly establish finite fibre dimension, the etale singleton-fibre base case, the smooth Cartier dimension-lowering step, residue-field preservation, and immersion composition. Hypotheses and edge cases were checked; the new node is proper, searched, and non-duplicate. No route-pivot machinery or forbidden SGA source appears. Review written to review.md; no repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-548199fb8",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Statement, dependencies, source Tag 057G, docstrings, edge cases, route-pivot constraints, report sections, and scompile evidence verified; no fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothPointEtaleImmersion",
+  "declaration": "AlgebraicGeometry.Smooth.exists_etale_immersion_slice",
+  "statement": "theorem Smooth.exists_etale_immersion_slice {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] (x : X) (hx : IsClosed {f.asFiber x}) (h : letI := (f.residueFieldMap x).hom.toAlgebra Module.Finite (S.residueField (f x)) (X.residueField x) ∧ Algebra.IsSeparable (S.residueField (f x)) (X.residueField x)) : ∃ (Z : Scheme.{u}) (i : Z ⟶ X) (z : Z), IsImmersion i ∧ i z = x ∧ Etale (i ≫ f) ∧ Set.range ((i ≫ f).fiberι (f x)) = Set.singleton z",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothPointEtaleImmersion.lean"
  }
 }
