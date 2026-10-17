@@ -15,9 +15,74 @@
   "def-weil-sheaf-of-modules-category",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-pe-constant-left-module-inverse-image] for each $u_\\alpha$, $a_p$, and $a$: geometric inverse image preserves the constant $\\Lambda$ ring sheaf and gives the canonical exact module inverse image, compatibly with composition. To obtain its module Hom adjunction, apply [lem-weil-pbc-geometric-module-transport] with $L=f^{-1}$, $V=f_*$, $R=\\Lambda_{\\rm target}$, $A=S=\\Lambda_{\\rm source}$, $eR$ the inverse of the constant-ring comparison, and $c=1$. The required operation comparison is precisely the transported ring comparison of the preceding node. The stated bijection is the restriction of the geometric adjunction to linear maps. Thus all component and total module adjunctions below have the original units and counits and the coherent composite identifications, rather than chosen unrelated adjunctions.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-geometric-module-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV (proposition-functoriality-algebraic-structures-topoi), module adjunction via finite-product transport; constant coefficient specialization of the ringed setup of 0D7C--0D7D."
+   }
+  },
+  {
+   "text": "Fix a module $G$ on $\\mathcal D$. The sites, geometric transitions, augmentation coherence and coefficient ring satisfy [lem-trf-total-site-free-module-resolution]. Take its exact augmented complex $P_\\bullet(G)\\to a^{-1}G$. Its differential sends the $\\alpha$ summand to the alternating sum of the $\\alpha\\delta_i$ summands; its augmentation folds the vertex summands. These are total module maps, with the canonical constant-coefficient lifts fixed in Step 1. Total modules form an abelian category: since each $u_\\alpha^*$ is exact by [lem-pe-constant-left-module-inverse-image], the componentwise kernels, cokernels and images of a family map inherit transition maps, and the component universal properties give the family ones. Hence exactness of this complex, and the images used in Step 4, are computed componentwise, and injectivity of $I$ refers to this abelian category.",
+   "uses": [
+    "lem-trf-total-site-free-module-resolution",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7C (lemma-simplicial-resolution-augmentation-modules), with its specified face maps."
+   }
+  },
+  {
+   "text": "The module adjunctions of Step 1 and the identity-summand bijection of [lem-trf-total-site-free-module-resolution] identify\n$$\\operatorname{Hom}_{\\Lambda_{\\mathcal D}}(G,a_{p,*}I_p)\\cong\\operatorname{Hom}_{\\Lambda_{\\mathcal C_p}}(a_p^{-1}G,I_p)\\cong\\operatorname{Hom}_{\\mathrm{Tot}}(P_p(G),I).$$\nFor the augmentation degree they identify $\\operatorname{Hom}(G,a_*I)$ with $\\operatorname{Hom}_{\\mathrm{Tot}}(a^{-1}G,I)$. If $f:a_p^{-1}G\\to I_p$, precomposing its total extension with $d_i:P_{p+1}(G)\\to P_p(G)$ gives at the identity summand $I(\\delta_i)\\circ u_i^{-1}f$. Its component adjoint is the map on Hom induced by the displayed coface $a_{p,*}I_p\\to a_{p+1,*}I_{p+1}$: this follows by substituting the unit formula for the adjoint and cancelling the component unit-counit pair. The augmentation is restriction to component zero, since the fold augmentation corresponds to $1_{a_0^{-1}G}$; the adjoint of the identity $a_*I\\to a_*I$ is the counit, so the resulting sheaf arrow is exactly the stated transpose of its zero component. All bijections are natural in $G$ and $I$, and hence identify the whole alternating complexes.",
+   "uses": [
+    "lem-trf-total-site-free-module-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7D (lemma-augmentation-cech-complex-modules), Hom construction and adjointness, with the explicit face formula in 0D7C."
+   }
+  },
+  {
+   "text": "Set $E_p=P_p(G)$ for $p\\ge0$, $E_{-1}=a^{-1}G$, and $\\partial_0=\\epsilon$. Since $I$ is injective [def-sp-injective-resolutions], applying $\\operatorname{Hom}_{\\mathrm{Tot}}(-,I)$ to Step 2's exact augmented complex is exact. Explicitly, a cocycle $z:E_p\\to I$ kills $\\operatorname{im}\\partial_{p+1}=\\ker\\partial_p$, so factors through $\\operatorname{im}\\partial_p\\hookrightarrow E_{p-1}$; the injective extension property extends that factor to $E_{p-1}\\to I$. For $p=0$, $\\partial_0$ is an epimorphism onto $E_{-1}$ and the factor is the unique preimage in $\\operatorname{Hom}(E_{-1},I)$. Precomposition by this epimorphism is injective, giving exactness at the initial augmentation term too. Step 3 therefore proves exactness after $\\operatorname{Hom}_{\\Lambda_{\\mathcal D}}(G,-)$ in all degrees.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7D, final paragraph: Hom into an injective module is exact, expanded using images and injective extensions."
+   }
+  },
+  {
+   "text": "The differentials square to zero because they do so after every Hom test of Step 3: take $G$ to be the source term and apply the composite to its identity. At a term $C^p=a_{p,*}I_p$, take $G=\\ker(C^p\\to C^{p+1})$. Its inclusion is a Hom cocycle, so Step 4 lifts it to the preceding term (to $a_*I$ when $p=0$). This makes the preceding arrow onto the kernel, proving exactness of the module-sheaf sequence itself. Injectivity of $a_*I\\to C^0$ follows from its injectivity under all Hom tests, taking $G$ to be its kernel. Finally a morphism $I\\to I'$ postcomposes the Hom complexes and commutes with their natural bijections and the total face and fold maps. Thus it commutes with the stated augmentation and all cofaces, proving naturality in $I$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7D, Yoneda construction; explicit kernel test and functoriality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-trf-total-site-free-module-resolution",
+  "lem-weil-pbc-geometric-module-transport"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0D7D (lemma-augmentation-cech-complex-modules), using Tag 0D7C for the free simplex resolution."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +118,45 @@
    "results": "{\"t\": \"2026-10-17T19:06:17Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialObject, CategoryTheory.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned signatures are ordinary injective resolutions, augmented complexes, and Mayer-Vietoris exactness, not total simplicial-site augmentation. Read Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean:12--67, which only constructs a Cech complex of a presheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every injective total module on a simplicial site, the augmented alternating direct image Cech complex is exact and remains exact after Hom from any module",
+   "results": "{\"t\": \"2026-10-17T19:34:06Z\", \"tool\": \"leanfinder\", \"query\": \"For every injective total module on a simplicial site, the augmented alternating direct image Cech complex is exact and remains exact after Hom from any module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"ChainComplex.alternatingConst_exactAt\", \"AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace\", \"CochainComplex.isKInjective_of_injective_aux\", \"CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ\", \"CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ\"], \"digest\": \"c3c150298dcaf686\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic simplicial chain, extra-degeneracy, injective-resolution or ordinary Cech constructions do not construct the coherent total-site free module resolution or its augmented direct-image Hom complex."
+  },
+  {
+   "tool": "grep",
+   "query": "augmentation.*Cech|simplicial.*injective|alternating.*face",
+   "results": "{\"t\": \"2026-10-17T19:34:12Z\", \"tool\": \"grep\", \"query\": \"augmentation.*Cech|simplicial.*injective|alternating.*face\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean\"], \"digest\": \"44f8c1b230bbba14\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic simplicial chain, extra-degeneracy, injective-resolution or ordinary Cech constructions do not construct the coherent total-site free module resolution or its augmented direct-image Hom complex."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmented alternating direct image Cech complex of an injective module on a total simplicial site is exact and Hom exact",
+   "results": "{\"t\": \"2026-10-17T19:34:12Z\", \"tool\": \"leansearch\", \"query\": \"The augmented alternating direct image Cech complex of an injective module on a total simplicial site is exact and Hom exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ\", \"HomologicalComplex.ExactAt\", \"CategoryTheory.InjectiveResolution.exact_succ\", \"HomologicalComplex.Acyclic\", \"CochainComplex.cm5b.instIsStrictlyGEI\", \"CochainComplex.cm5b.I\", \"CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ\", \"CochainComplex.isKInjective_of_injective_aux\"], \"digest\": \"7742d0dc935b6da7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic simplicial chain, extra-degeneracy, injective-resolution or ordinary Cech constructions do not construct the coherent total-site free module resolution or its augmented direct-image Hom complex."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution, ChainComplex.alternatingConst_exactAt, CategoryTheory.SimplicialObject",
+   "results": "{\"t\": \"2026-10-17T19:34:12Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.InjectiveResolution, ChainComplex.alternatingConst_exactAt, CategoryTheory.SimplicialObject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic simplicial chain, extra-degeneracy, injective-resolution or ordinary Cech constructions do not construct the coherent total-site free module resolution or its augmented direct-image Hom complex."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmentation of a coherent simplicial diagram of topoi has an exact chain resolution whose degree p is the left adjoint to component restriction applied to the inverse image of a module G",
+   "results": "{\"t\": \"2026-10-17T19:38:45Z\", \"tool\": \"leanfinder\", \"query\": \"An augmentation of a coherent simplicial diagram of topoi has an exact chain resolution whose degree p is the left adjoint to component restriction applied to the inverse image of a module G\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"classifyingSpaceUniversalCover.compForgetAugmented.toModule\", \"Profinite.NobelingProof.succ_exact\", \"Condensed.hasExactLimitsOfShape\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.Abelian.LeftResolution.chainComplex\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ\"], \"digest\": \"078a58524518c5d9\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic simplicial chain, extra-degeneracy, injective-resolution or ordinary Cech constructions do not construct the coherent total-site free module resolution or its augmented direct-image Hom complex."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-total-site-augmentation-spectral-sequence",
@@ -68,7 +168,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof of the ancestor local-term-locality input: the general simplicial-site augmentation construction, component derived comparison, and alternating-face double-complex spectral sequence used in the descent argument. Specifically the exact augmented simplex resolution and its Hom into an injective, Stacks 0D7C--0D7D.",
+   "place": "Current main-20261015 lem-trf-local-term-locality proof, paragraph (1) and (2), final sentences invoking normal-cone specialization (Varshavsky §§1.3–1.4 and 2.1); along the recorded nearby-cycle descent branch, the injective augmented simplicial-site row exactness of Stacks 0D7D.",
    "via": [
     "lem-trf-total-site-augmentation-spectral-sequence",
     "lem-trf-oriented-nearby-hypercover-spectral-sequence",
@@ -81,5 +181,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-total-site-injective-cech-resolution",
+  "worker": "stage1",
+  "summary": "Split Stacks 0D7D into the canonical constant-module adjunctions, the free module resolution 0D7C, explicit adjunction identification of its Hom differential and counit augmentation, injective image-factor extensions, and kernel tests for sheaf exactness and naturality. One new statement-only node states the free module resolution and its identity-summand Hom bijection. The item statement is unchanged.",
+  "blueprint": "Current main-20261015 lem-trf-local-term-locality proof, paragraph (1) and (2), final sentences invoking normal-cone specialization (Varshavsky §§1.3–1.4 and 2.1); along the recorded nearby-cycle descent branch, the injective augmented simplicial-site row exactness of Stacks 0D7D.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic canonical coefficient and inverse-image transport for any geometric morphism of small-site topoi, used to keep the module category and coherences fixed. This is not a replacement for the total-site resolution route."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-module-transport",
+    "why": "Generic Hom bijection for finite-product transport of modules along a geometric adjunction; supplies the actual linear adjunction in Step 1, which no same-unit definition states."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-geometric-module-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-c930bbcdb",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-c930bbcdb (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-total-site-free-module-resolution, every cited statement, the parent's Step 7 and the abelian sibling lem-trf-total-site-injective-augmentation-exactness in full. Sources, checked against tags/tags: Stacks spaces-simplicial 0D72 (l.1242), lemma-simplicial-resolution-augmentation (l.1712) with its whole proof, 0D7C (l.2109) and 0D7D (l.2142); sites 00YV. The item statement is unchanged and agrees with 0D7D, specialized to constant Λ-modules and to coherent geometric transitions. The coefficient category (injective total Λ-modules) is the one the parent uses. The item is not a target. The new node is true: componentwise it is a_m^{-1}G tensored with the augmented unnormalized chains of Δ[m], which an extra degeneracy contracts. I checked the identity-summand Hom bijection and its inverse formula through the cocycle law, and tested m=0, G=0, Λ=0 and Λ=Z/4. It is not a duplicate: grep over 0D72/0D7B/0D7C/0D7D/0D79 and g_{p!} sums finds only the abelian component restriction and inline proof steps. It is not a clause of the item and is strictly smaller. Steps 3–5 check out: δ_i indexing, alternating signs, the augmentation as the transposed counit, the injective extension through im∂_p, and the Yoneda kernel tests. I accept both tool_uses: lem-pe-constant-left-module-inverse-image (already accepted on the parent) and lem-weil-pbc-geometric-module-transport (L=f^{-1}, R=Λ_target, A=S=Λ_source, c=1, all hypotheses hold). No SGA source and no cycle. FIX: Step 2 now says why total modules form an abelian category with componentwise kernels, cokernels and images (exactness of u_α^* by lem-pe), which Step 4's image factorization and the meaning of 'injective total module' need, and adds lem-pe to Step 2's uses; proof_deps is unchanged. The corrected file is under fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
  }
 }

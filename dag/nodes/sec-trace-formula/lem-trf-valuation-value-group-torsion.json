@@ -11,9 +11,81 @@
   "def-pc-field-extension",
   "def-weil-algebraic-element"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $U=\\{v\\in V:v\\ne0,\\ v^{-1}\\in V\\}$ and $M=V\\setminus U$. Thus $U$ is precisely the set of units of $V$: an inverse in the subring is the field inverse. If $r\\in M$ and $b\\in V$, then $br\\in M$, since an inverse $c\\in V$ of $br$ would make $bc$ an inverse of $r$. In particular $0\\in M$, $1\\notin M$, and $-r\\in M$ whenever $r\\in M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph, and Tag 0ASH, lemma-inequality-general, proof: normalization of a nonzero relation at a term of minimal value. Agent-written direct polynomial version, with the elementary divisibility and nonunit arguments written below; no finite-index theorem is invoked."
+   }
+  },
+  {
+   "text": "For nonzero $r,s\\in E$, the hypothesis applied to $r/s$ says $r/s\\in V$ or $s/r\\in V$. Consequently, if $r,s\\in M$ are nonzero and $r/s\\in V$, then $r+s=s(1+r/s)\\in M$ by Step 1; if $s/r\\in V$, use $r+s=r(1+s/r)$. The zero cases are immediate. Thus $M$ is closed under addition, and every finite sum of elements of $M$ belongs to $M$. This is a direct calculation, without invoking a local-ring or maximal-ideal theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph, and Tag 0ASH, lemma-inequality-general, proof: normalization of a nonzero relation at a term of minimal value. Agent-written direct polynomial version, with the elementary divisibility and nonunit arguments written below; no finite-index theorem is invoked."
+   }
+  },
+  {
+   "text": "Fix $x\\in E^\\times$. By [def-weil-algebraic-element] there is a nonzero polynomial $P(T)=\\sum_{i\\in I}c_iT^i\\in K[T]$ with $P(x)=0$, where $I$ is its finite nonempty set of exponents with nonzero coefficients. Put $d_i=c_ix^i\\in E^\\times$. Then $\\sum_{i\\in I}d_i=0$. There are at least two indices: a single term is nonzero because both its coefficient and $x$ are nonzero in a field.",
+   "uses": [
+    "def-weil-algebraic-element"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph, and Tag 0ASH, lemma-inequality-general, proof: normalization of a nonzero relation at a term of minimal value. Agent-written direct polynomial version, with the elementary divisibility and nonunit arguments written below; no finite-index theorem is invoked."
+   }
+  },
+  {
+   "text": "Choose $j\\in I$ such that $d_i/d_j\\in V$ for all $i\\in I$. Here is the finite selection argument: start with any term, and process the remaining terms one at a time. If the new term divided by the current chosen term is in $V$, keep the choice. Otherwise their inverse ratio is in $V$, so replace the chosen term by the new one; every earlier term divided by the new choice is the product of its old ratio and the old choice divided by the new one, hence is in $V$. This induction ends because $I$ is finite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph, and Tag 0ASH, lemma-inequality-general, proof: normalization of a nonzero relation at a term of minimal value. Agent-written direct polynomial version, with the elementary divisibility and nonunit arguments written below; no finite-index theorem is invoked."
+   }
+  },
+  {
+   "text": "Write $t_i=d_i/d_j\\in V$. Dividing the relation in Step 3 by $d_j\\ne0$ gives $\\sum_i t_i=0$, and $t_j=1$. If every $t_i$ with $i\\ne j$ belonged to $M$, Step 2 would give $-1=\\sum_{i\\ne j}t_i\\in M$, contradicting Step 1 since $-1$ is a unit. Hence there is $i\\ne j$ with $t_i\\in U$; in particular $t_i,t_i^{-1}\\in V$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph, and Tag 0ASH, lemma-inequality-general, proof: normalization of a nonzero relation at a term of minimal value. Agent-written direct polynomial version, with the elementary divisibility and nonunit arguments written below; no finite-index theorem is invoked."
+   }
+  },
+  {
+   "text": "If $i>j$, the equation $t_i=(c_i/c_j)x^{i-j}$ gives $x^{i-j}=(c_j/c_i)t_i$; take $n=i-j$, $a=c_j/c_i\\in K^\\times$, and $u=t_i$. If $i<j$, invert the same equation to obtain $t_i^{-1}=(c_j/c_i)x^{j-i}$, hence $x^{j-i}=(c_i/c_j)t_i^{-1}$; take $n=j-i$, $a=c_i/c_j\\in K^\\times$, and $u=t_i^{-1}$. In both cases $n\\ge1$ and $u,u^{-1}\\in V$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph, and Tag 0ASH, lemma-inequality-general, proof: normalization of a nonzero relation at a term of minimal value. Agent-written direct polynomial version, with the elementary divisibility and nonunit arguments written below; no finite-index theorem is invoked."
+   }
+  },
+  {
+   "text": "The set $U=V^\\times$ is a subgroup of $E^\\times$: products and inverses remain in $V$ together with their inverses. In the quotient group $E^\\times/U$, the equality $x^n=au$ gives $[x]^n=[a]$ because $[u]=1$. Thus the positive multiple $n[x]$ lies in the image of $K^\\times$, exactly the final clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph, and Tag 0ASH, lemma-inequality-general, proof: normalization of a nonzero relation at a term of minimal value. Agent-written direct polynomial version, with the elementary divisibility and nonunit arguments written below; no finite-index theorem is invoked."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-element"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph, and Tag 0ASH, lemma-inequality-general, proof: normalization of a nonzero relation at a term of minimal value. Agent-written direct polynomial version, with the elementary divisibility and nonunit arguments written below; no finite-index theorem is invoked."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +128,59 @@
    "results": "2 hits; top=['Mathlib/RingTheory/Bezout.lean', 'Mathlib/RingTheory/Valuation/Extension.lean']; note=; digest=4677de2d47b5c850. Read Valuation/Minpoly.lean:39-58: these minimal-polynomial lemmas concern the constant coefficient being nonzero, not a power differing from a base element by a valuation-ring unit. Discrete uniformizer expansions assume rank-one discreteness, and Dedekind ramification bounds assume Dedekind domains; neither covers arbitrary valuation rings. ValueGroup definitions and abstract group torsion lemmas do not assert this algebraic extension property.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite extension of valued fields, the quotient of value groups is torsion and every element power is a base element times a valuation-ring unit",
+   "results": "{\"t\": \"2026-10-17T19:40:20Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite extension of valued fields, the quotient of value groups is torsion and every element power is a base element times a valuation-ring unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationRing.ValueGroup\", \"Valuation.FiniteField.instIsTrivialOn\", \"ValuationRing.instInhabitedValueGroup\", \"Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField\", \"ValuationRing.instNontrivialValueGroup\", \"IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"IsNonarchimedeanLocalField.instCompatibleValueGroupWithZeroV\", \"Valued.ResidueField\"], \"digest\": \"7f5ecfdd27c5dc03\"}; Source inspection of the candidates in the inherited searches found value-group definitions, finite-field triviality, or rank-one discrete expansions; none gives the arbitrary algebraic-extension assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation, IsAlgebraic, value group, quotient torsion",
+   "results": "{\"t\": \"2026-10-17T19:40:20Z\", \"tool\": \"loogle\", \"query\": \"Valuation, IsAlgebraic, value group, quotient torsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `value`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Source inspection of the candidates in the inherited searches found value-group definitions, finite-field triviality, or rank-one discrete expansions; none gives the arbitrary algebraic-extension assertion.",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "value group|finite index|lemma-inequality-general",
+   "results": "{\"t\": \"2026-10-17T19:40:20Z\", \"tool\": \"grep\", \"query\": \"value group|finite index|lemma-inequality-general\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/ValuationRing.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuativeRel/Trivial.lean\", \"Mathlib/RingTheory/Valuation/ValuativeRel/Basic.lean\", \"Mathlib/RingTheory/Valuation/ValuativeRel/Basic.lean\", \"Mathlib/RingTheory/Valuation/ValuativeRel/Basic.lean\", \"Mathlib/RingTheory/Valuation/ValuativeRel/Basic.lean\"], \"digest\": \"2dbb9f725e49e98d\"}; Source inspection of the candidates in the inherited searches found value-group definitions, finite-field triviality, or rank-one discrete expansions; none gives the arbitrary algebraic-extension assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite valued field extension has finite index of the base value group in the extension value group",
+   "results": "{\"t\": \"2026-10-17T19:41:24Z\", \"tool\": \"leanfinder\", \"query\": \"Finite valued field extension has finite index of the base value group in the extension value group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.FiniteField.instIsTrivialOn\", \"Valuation.FiniteField.algebraMap_le_one\", \"IsNonarchimedeanLocalField.instIsRankLeOne\", \"Valuation.FiniteField.algebraMap_eq_one\", \"IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"ValuationRing.instNontrivialValueGroup\", \"Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField\", \"IsNonarchimedeanLocalField.instCompatibleValueGroupWithZeroV\"], \"digest\": \"9f10ae8294bb8f27\"}; Source inspection of the candidates in the inherited searches found value-group definitions, finite-field triviality, or rank-one discrete expansions; none gives the arbitrary algebraic-extension assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite index|inequality-general|ValueGroup",
+   "results": "{\"t\": \"2026-10-17T19:41:24Z\", \"tool\": \"grep\", \"query\": \"finite index|inequality-general|ValueGroup\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/ValuationRing.lean\", \"Mathlib/RingTheory/Valuation/ValuationRing.lean\", \"Mathlib/RingTheory/Valuation/ValuationRing.lean\", \"Mathlib/RingTheory/Valuation/ValuationRing.lean\", \"Mathlib/RingTheory/Valuation/ValuationRing.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\", \"Mathlib/RingTheory/Valuation/ValuationSubring.lean\"], \"digest\": \"b20ede265fec083e\"}; Source inspection of the candidates in the inherited searches found value-group definitions, finite-field triviality, or rank-one discrete expansions; none gives the arbitrary algebraic-extension assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsAlgebraic, Valuation",
+   "results": "{\"t\": \"2026-10-17T19:43:11Z\", \"tool\": \"loogle\", \"query\": \"Algebra.IsAlgebraic, Valuation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Source inspection of the candidates in the inherited searches found value-group definitions, finite-field triviality, or rank-one discrete expansions; none gives the arbitrary algebraic-extension assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic field extension and a valuation subring every element has a positive power equal to a base scalar times a unit",
+   "results": "{\"t\": \"2026-10-17T19:43:28Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic field extension and a valuation subring every element has a positive power equal to a base scalar times a unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationSubring.instInhabited\", \"ValuationSubring\", \"ValuationSubring.instValuationRingSubtypeMem\", \"Valuation.HasExtension.instAlgebra_valuationSubring\", \"ValuationRing.instValuationRingInteger\", \"ValuationSubring.mk\", \"instIsIntegrallyClosedSubtypeMemValuationSubring\", \"Valuation.valuationSubring\"], \"digest\": \"aee3755232610113\"}; Source inspection of the candidates in the inherited searches found value-group definitions, finite-field triviality, or rank-one discrete expansions; none gives the arbitrary algebraic-extension assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-algebraic-height",
@@ -87,5 +208,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-value-group-torsion",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the algebraic power-times-unit input directly from a polynomial relation. The defining inverse alternative gives total divisibility and elementary closure of the nonunits under sums; normalizing the polynomial at a term dividing all others forces a second unit ratio. The ratio gives the required positive power in either exponent order. All calculations are explicit and no new node or finite-index black box is needed.",
+  "blueprint": "Supplies the recorded value-group torsion input in lem-trf-valuation-algebraic-height Step 5, beneath the historical lem-trf-local-term-locality proof (1)--(2) semistable-alteration/finite-height branch. Retains the imported ancestry and does not change the current unit or chapter route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-6db617960",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-6db617960 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full; I made no changes and wrote no fixes. The delivery has no new nodes, the statement and stmt_deps are unchanged, and proof_deps=[def-weil-algebraic-element] (Mathlib leaf IsAlgebraic). Source checks: Stacks more-algebra.tex lemma-inequality-general (0ASH, lines 37334-37374) normalizes a vanishing sum at its minimal term, and lemma-etale-extension-valuation-ring (0ASJ, line 37480, first proof paragraph) supplies f = w h^n from finite index. The node uses the 0ASH idea directly on the polynomial of x and is correctly marked agent-written. Each step checks out: (1) nonunits M times V stays in M, with 0 and -r in M; (2) M is closed under addition through r+s = s(1+r/s); (3) a nonzero polynomial with x≠0 gives at least two nonzero terms; (4) a finite selection finds a term dividing all others; (5) the sum of the other ratios is -1, so some ratio is a unit; (6) both orders i>j and i<j give x^|i-j| = a u with a in K^× and u a unit; (7) V^× is a subgroup, so the class of x has finite order over K^×. Small cases tested: V=E; E=K; Q(√2) at 2 with x^2=2; T^p-a in characteristic p; higher-rank V; infinite algebraic E/K. No hypothesis is missing and no target is weakened. The parent lem-trf-valuation-algebraic-height Step 5 uses exactly the conclusion x^n = a u, and the item does not cite the parent, so there is no cycle. An rg search of the DAG for value group, 0ASH/0ASJ and power-times-unit wording found no duplicate. No off-unit statement is used, so there are no tool_uses. The 13 recorded Mathlib searches across three kinds of tool are adequate. One harmless wording slip: the report mentions a citations.json that the commit does not contain."
  }
 }
