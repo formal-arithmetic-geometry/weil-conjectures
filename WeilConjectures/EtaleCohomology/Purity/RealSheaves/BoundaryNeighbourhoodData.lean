@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryGenericPoint
+public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseGaloisDescent
 
 /-!

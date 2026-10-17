@@ -232,24 +232,25 @@ theorem exists_stalk_directImage_linearMap_invariants (hF : F.IsLisse)
       (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1).hom)
     (hcα : (specGeometricFrobenius k₀ ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1).hom ≫
       (t.left ≫ pullback.fst h _) = (t.left ≫ pullback.fst h _) ≫ α)
-    (a : Spec (.of Ω) ⟶ Spec (.of Ω))
-    (ha : a ≫ (specFieldMap K' Ω ≫ k) = (specFieldMap K' Ω ≫ k) ≫
+    (η : Spec (.of Ω) ⟶ (U ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (hη : specFieldMap K' Ω ≫ k = η) (a : Spec (.of Ω) ⟶ Spec (.of Ω))
+    (ha : a ≫ η = η ≫
       ((U ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
         (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1).hom)
     (haε : a ≫ nbhdGenericPoint j h k e Ω = nbhdGenericPoint j h k e Ω ≫ α) :
     ∃ Sp : (((directImage j).obj F).stalk x).carrier →ₗ[PadicAlgCl l]
         (WeilCoefficients.toModuleCat l).obj
-          ((Sheaf.Γ _ _).obj ((specFieldMap K' Ω ≫ k)^*[_].obj F.obj.carrier.X)),
+          ((Sheaf.Γ _ _).obj ((η)^*[_].obj F.obj.carrier.X)),
       Function.Injective Sp ∧
       (∀ u, u ∈ LinearMap.range Sp ↔ ∀ σ : Ω ≃ₐ[K'] Ω,
         ((WeilCoefficients.toModuleCat l).map ((resOver _ _
-          (show Spec.map (CommRingCat.ofHom σ.toRingHom) ≫ (specFieldMap K' Ω ≫ k) =
-            specFieldMap K' Ω ≫ k by
-              rw [← Category.assoc, specMap_algEquiv_comp_specFieldMap])).app
+          (show Spec.map (CommRingCat.ofHom σ.toRingHom) ≫ η = η by
+              rw [← hη, ← Category.assoc, specMap_algEquiv_comp_specFieldMap])).app
                 F.obj.carrier.X)).hom u = u) ∧
       ∀ v, Sp ((((directImage j).obj F).stalk x).frobenius v) =
         ((WeilCoefficients.toModuleCat l).map
           (globalSectionsTransport _ ha (F.frobeniusPowStr _))).hom (Sp v) := by
+  subst hη
   set x̄ := (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x
   set P := ((directImage j).obj F).obj.carrier.X
   set c := t.left ≫ pullback.fst h x̄
