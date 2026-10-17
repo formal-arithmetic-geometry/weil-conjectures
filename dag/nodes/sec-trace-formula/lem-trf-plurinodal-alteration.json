@@ -20,7 +20,8 @@
   "def-kun-projective",
   "def-pc-geometrically-irreducible",
   "def-weil-pbc-scheme-reduction",
-  "def-sc-discrete-valuation-ring"
+  "def-sc-discrete-valuation-ring",
+  "def-trf-projective-nodal-tower"
  ],
  "proof": [
   {
@@ -436,5 +437,27 @@
   "group": "Q88",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-cd216f707 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes, every cited statement, the unit and chapter route, and the sources: ILO Exposé IX Thm 1.2 (p.131), Exposé X Thm 3.5 Steps 2/5 (pp.162-164), Exposé X Lemma 2.2 and its proof (pp.149-150), Stacks 0C59/0C5B, and 087S/01WE. The item statement is verbatim unchanged. There is no SGA, and this is not a target node, so there is no base-change morphism or coefficient category to check. The trait induction (Steps 1-9) and the field pair induction (Steps 10-12) are correctly set up, and I checked them on the small cases d=1, inseparable L, split components, uv=t and uv=t1t2. The four new nodes are faithful statement-only versions of X 3.5 Step 5, IX 1.2 (G forgotten), 0C59/0C5B and the Vidal 4.4.4 step of X 2.2. None duplicates an existing node or restates a clause of the item. I accept all 18 tool_uses (generic black boxes). Three repairs are in fixes/: (1) E1/C4: def-kun-projective means H-projective, but ILO gives only projective-bundle projectivity. Preparation now gives Y->S projective (X 3.5 Step 5 plus Stacks 087S/01WE). Nodal reduction now assumes Y projective over the spectrum of a Noetherian ring, so b and f' are H-projective via 087S/01WE, and a is asserted only proper. The resolution node now asserts only a proper birational r. Item steps 5, 11 and 12 are updated to match. (2) E1: item step 11 now argues that (h^{-1}Z)_red is nowhere dense. (3) B3: the nodal-family-geometry node now cites def-weil-closed-immersion and def-kun-dimension. No uses changed, nothing dropped.; 5 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PlurinodalAlteration",
+  "declaration": "AlgebraicGeometry.exists_plurinodal_alteration",
+  "declarations": [
+   "AlgebraicGeometry.exists_plurinodal_alteration",
+   "AlgebraicGeometry.exists_smooth_proper_alteration"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PlurinodalAlteration.lean",
+  "statement": "theorem exists_plurinodal_alteration (p : ℕ) [Fact p.Prime] (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [IsStrictlyHenselianLocalRing R] [CharP R p] [IsAlgClosed (IsLocalRing.ResidueField R)] (hexc : IsExcellent R) (Ω : Type u) [Field Ω] [IsSepClosed Ω] [Algebra R Ω] (hη : Function.Injective (algebraMap R Ω)) (X : Scheme.{u}) [IsIntegral X] (f : X ⟶ Spec (.of R)) [IsProper f] [IsDominant f] : ∃ (R' : Type u) (_ : CommRing R') (_ : IsDomain R') (_ : IsDiscreteValuationRing R') (_ : Algebra R R'), Module.Finite R R' ∧ Function.Injective (algebraMap R R') ∧ (∃ (Ω' : Type u) (_ : Field Ω') (_ : IsSepClosed Ω') (j : Ω →+* Ω') (j' : R' →+* Ω'), j'.comp (algebraMap R R') = j.comp (algebraMap R Ω) ∧ Function.Injective j') ∧ ∀ Z : Closeds ↥((pullback f (Spec.map (CommRingCat.ofHom (algebraMap R R')))).nilradical.subscheme), (Z : Set _) ∈ irreducibleComponents ↥((pullback f (Spec.map (CommRingCat.ofHom (algebraMap R R')))).nilradical.subscheme) → Dense ((Scheme.IdealSheafData.subschemeι (pullback f (Spec.map (CommRingCat.ofHom (algebraMap R R')))).nilradical ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap R R')))) '' (Z : Set _)) → ∃ (P : Scheme.{u}) (a : P ⟶ (Scheme.IdealSheafData.vanishingIdeal Z).subscheme) (t : P ⟶ Spec (.of R')), IsProjectiveNodalTower t ∧ IsProper a ∧ IsDominant a ∧ (∃ U : (Scheme.IdealSheafData.vanishingIdeal Z).subscheme.Opens, Dense (U : Set ↥((Scheme.IdealSheafData.vanishingIdeal Z).subscheme)) ∧ IsFinite (a ∣_ U)) ∧ a ≫ (Scheme.IdealSheafData.vanishingIdeal Z).subschemeι ≫ (pullback f (Spec.map (CommRingCat.ofHom (algebraMap R R')))).nilradical.subschemeι ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap R R'))) = t",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-51b0d3d9f",
+  "group": "Q15",
+  "result": "pass",
+  "note": "All hypotheses, conclusions, dependencies, helper definitions, docstrings, edge cases, and exact signatures checked; both delivered Lean files compile cleanly via scompile.py."
  }
 }
