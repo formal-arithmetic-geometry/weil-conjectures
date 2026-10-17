@@ -9,6 +9,7 @@ public import WeilConjectures.WeilSheaf.ArtinSchreierTrace
 public import WeilConjectures.WeilSheaf.FourierInversion.Defs
 public import WeilConjectures.WeilSheaf.UpperStarId
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
+public import WeilConjectures.WeilSheaf.UpperStarConstant
 
 /-!
 # Pullbacks of Artin–Schreier sheaves
@@ -99,75 +100,79 @@ lemma homMkOfFrobeniusStr_hom_hom_f {F G : WeilSheaf k₀ l X}
 
 end HomMk
 
-section Constant
+end WeilSheaf
 
-omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
-/-- The underlying morphism of the canonical isomorphism `g^* ℚ̄_ℓ ≅ ℚ̄_ℓ` of sheaves of modules. -/
-lemma _root_.AlgebraicGeometry.ProEtale.adicUpperStarUnitIso_hom_hom {Z W : Scheme.{u}}
-    (g : Z ⟶ W) :
-    (ProEtale.adicUpperStarUnitIso l g).hom.hom = ProEtale.upperStarAdicConstantSheafHom l g :=
+section Trivialization
+
+local notation "ĀS" => affineLine.geometricArtinSchreierMap k₀
+
+variable (ψ : AddChar k₀ (PadicAlgCl l))
+
+variable (l) in
+/-- The evaluation `ĀS^* ℒ_ψ ⟶ ĀS^* ĀS_* ℚ̄_ℓ ⟶ ℚ̄_ℓ` at the point of the fibre given by the
+Artin–Schreier cover, as a morphism of sheaves of modules. -/
+noncomputable def affineLine.artinSchreierImageEvalModHom :
+    (ĀS)^*ᵃ[l].obj (image (WeilSheaf.artinSchreierIdempotent ψ)).obj.carrier ⟶
+      (WeilSheaf.adicConstant k₀ l (affineLine k₀)).obj.carrier :=
+  (ĀS)^*ᵃ[l].map (image.ι (WeilSheaf.artinSchreierIdempotent ψ)).hom.hom.f ≫
+    (ProEtale.adicUpperStarLowerStarAdjunction l ĀS).counit.app _
+
+lemma affineLine.artinSchreierImageEvalModHom_hom :
+    (affineLine.artinSchreierImageEvalModHom l ψ).hom =
+      affineLine.artinSchreierImageEval ψ 0 := by
+  rw [affineLine.artinSchreierImageEvalModHom, Mod.comp_hom', ProEtale.adicUpperStar_map_hom]
+  erw [Adjunction.modAdjunction_counit_app_hom]
+  rw [affineLine.artinSchreierImageEval, affineLine.artinSchreierTranslation_zero,
+    CategoryTheory.Functor.map_id, Category.id_comp]
   rfl
 
-variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-  [Y.Over (Spec (CommRingCat.of k₀))] (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
+lemma affineLine.isIso_artinSchreierImageEval :
+    IsIso (affineLine.artinSchreierImageEval ψ 0) := by
+  obtain ⟨E, hE⟩ := affineLine.exists_iso_artinSchreierImage ψ
+  have h := hE 0
+  rw [AddChar.map_zero_eq_one] at h
+  have h' : affineLine.artinSchreierImageEval ψ 0 = E.hom := by
+    rw [affineLine.artinSchreierImageEval, h]
+    erw [one_smul]
+    exact Category.comp_id _
+  rw [h']
+  infer_instance
 
-omit [Fact (ringChar k₀ ≠ l)] in
-/-- The canonical isomorphism `φ̄^* ℚ̄_ℓ ≅ ℚ̄_ℓ` is compatible with the canonical Weil structures
-`Fr^* ℚ̄_ℓ ≅ ℚ̄_ℓ`, by the cocycle condition. -/
-lemma upperStarAdicConstantSheafHom_frobenius :
-    ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l].map
-        (ProEtale.upperStarAdicConstantSheafHom l
-          (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))) ≫
-        ProEtale.upperStarAdicConstantSheafHom l
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom =
-      (ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
-          (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))).inv.app
-          (ProEtale.adicConstantSheaf l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≫
-        (ProEtale.upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
-          φ (comp_over φ (Spec (CommRingCat.of k₀)))).symm).hom.app
-          (ProEtale.adicConstantSheaf l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≫
-        (ProEtale.upperStarComp _
-          (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))
-          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app
-          (ProEtale.adicConstantSheaf l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≫
-        (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))^*[_].map
-          (ProEtale.upperStarAdicConstantSheafHom l
-            (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom) ≫
-        ProEtale.upperStarAdicConstantSheafHom l
-          (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀)))) := by
-  rw [← cancel_epi ((ProEtale.upperStarComp (WeilCoefficients.{u} l)
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
-      (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))).hom.app
-        (ProEtale.adicConstantSheaf l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber)),
-    Iso.hom_inv_id_app_assoc, ProEtale.upperStarAdicConstantSheafHom_comp,
-    ProEtale.upperStarAdicConstantSheafHom_comp,
-    ProEtale.upperStarCongr_hom_app_comp_upperStarAdicConstantSheafHom]
-
-/-- The canonical morphism `φ^* ℚ̄_ℓ ⟶ ℚ̄_ℓ` of Weil sheaves: the canonical isomorphism
-`φ̄^* ℚ̄_ℓ ≅ ℚ̄_ℓ` of the underlying sheaves, which is compatible with the Weil structures by the
-cocycle condition for these canonical isomorphisms. -/
-noncomputable def upperStarAdicConstantHom :
-    (upperStar φ).obj (adicConstant k₀ l Y) ⟶ adicConstant k₀ l X :=
-  homMkOfFrobeniusStr (ProEtale.adicUpperStarUnitIso l
-    (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))).hom (by
-    rw [ProEtale.adicUpperStarUnitIso_hom_hom, frobeniusStr_adicConstant, frobeniusStr_upperStar,
-      frobeniusStr_adicConstant]
+/-- The trivialisation `AS^* ℒ_ψ ⟶ ℚ̄_ℓ` of the pullback of `ℒ_ψ` along the Artin–Schreier map,
+as a morphism of Weil sheaves: the evaluation at the point of the fibre given by the cover, which
+is compatible with the Weil structures
+(`AlgebraicGeometry.affineLine.artinSchreierImageEval_frobenius`). -/
+noncomputable def WeilSheaf.upperStarArtinSchreierMapImageHom :
+    (WeilSheaf.upperStar (affineLine.artinSchreierMap k₀)).obj
+        (image (WeilSheaf.artinSchreierIdempotent ψ)) ⟶
+      WeilSheaf.adicConstant k₀ l (affineLine k₀) :=
+  WeilSheaf.homMkOfFrobeniusStr (affineLine.artinSchreierImageEvalModHom l ψ) (by
+    rw [affineLine.artinSchreierImageEvalModHom_hom, WeilSheaf.frobeniusStr_upperStar,
+      ← cancel_epi ((ProEtale.upperStarComp (WeilCoefficients.{u} l)
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ĀS).hom.app _)]
     simp only [Category.assoc]
-    exact upperStarAdicConstantSheafHom_frobenius φ)
+    erw [Iso.hom_inv_id_app_assoc]
+    convert affineLine.artinSchreierImageEval_frobenius ψ using 2
+    all_goals rfl)
 
-instance : IsIso (upperStarAdicConstantHom (k₀ := k₀) (l := l) φ) := by
-  have : IsIso (upperStarAdicConstantHom (k₀ := k₀) (l := l) φ).hom.hom.f :=
-    inferInstanceAs (IsIso (ProEtale.adicUpperStarUnitIso l
-      (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))).hom)
-  exact isIso_of_isIso_hom_hom_f _
+instance : IsIso (WeilSheaf.upperStarArtinSchreierMapImageHom ψ) := by
+  have : IsIso (affineLine.artinSchreierImageEvalModHom l ψ).hom := by
+    rw [affineLine.artinSchreierImageEvalModHom_hom]
+    exact affineLine.isIso_artinSchreierImageEval ψ
+  have : IsIso (affineLine.artinSchreierImageEvalModHom l ψ) :=
+    isIso_of_reflects_iso _ (Mod.forget _)
+  have : IsIso (WeilSheaf.upperStarArtinSchreierMapImageHom ψ).hom.hom.f :=
+    inferInstanceAs (IsIso (affineLine.artinSchreierImageEvalModHom l ψ))
+  exact WeilSheaf.isIso_of_isIso_hom_hom_f _
 
-/-- **The pullback of the constant Weil sheaf is the constant Weil sheaf**: `φ^* ℚ̄_ℓ ≅ ℚ̄_ℓ`. -/
-noncomputable def upperStarAdicConstantIso :
-    (upperStar φ).obj (adicConstant k₀ l Y) ≅ adicConstant k₀ l X :=
-  asIso (upperStarAdicConstantHom φ)
+/-- Blueprint `lem-fd-as-lisse`: the pullback of `ℒ_ψ` along the Artin–Schreier map is the
+constant Weil sheaf, `AS^* ℒ_ψ ≅ ℚ̄_ℓ`. -/
+noncomputable def WeilSheaf.upperStarArtinSchreierMapImageIso :
+    (WeilSheaf.upperStar (affineLine.artinSchreierMap k₀)).obj
+        (image (WeilSheaf.artinSchreierIdempotent ψ)) ≅
+      WeilSheaf.adicConstant k₀ l (affineLine k₀) :=
+  asIso (WeilSheaf.upperStarArtinSchreierMapImageHom ψ)
 
-end Constant
-
-end WeilSheaf
+end Trivialization
 
 end AlgebraicGeometry

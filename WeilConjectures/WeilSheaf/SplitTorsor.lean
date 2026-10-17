@@ -112,8 +112,6 @@ end Sections
 
 section Sheaves
 
-variable [WeaklyEtale π]
-
 variable (l) in
 /-- The action of `τ_g` on `π_* ℚ̄_ℓ`, pulling back sections along `τ_g` and using
 `τ_g ≫ π = π`:
@@ -153,24 +151,6 @@ lemma torsorTranslation_hom_app (g : G) (U : Z.ProEt) :
   · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
       MorphismProperty.Over.mk]
 
-variable [AddCommGroup G]
-
-/-- The actions of the `τ_g` on `π_* ℚ̄_ℓ` compose: if `τ_{g + h} = τ_g ≫ τ_h` then
-`σ_g ≫ σ_h = σ_{g + h}`. -/
-lemma torsorTranslation_comp (hadd : ∀ g h, (τ (g + h)).hom = (τ g).hom ≫ (τ h).hom)
-    (g h : G) :
-    torsorTranslation l π τ hτ g ≫ torsorTranslation l π τ hτ h =
-      torsorTranslation l π τ hτ (g + h) := by
-  refine Mod.hom_ext _ _ ?_
-  ext ⟨U⟩ : 3
-  rw [Mod.comp_hom', ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
-    torsorTranslation_hom_app, torsorTranslation_hom_app, torsorTranslation_hom_app,
-    ← Functor.map_comp, ← op_comp]
-  congr 2
-  apply pullback.hom_ext
-  · simp
-  · simp [add_comm g h, hadd]
-
 variable (l) in
 /-- The evaluation `π^* π_* ℚ̄_ℓ ⟶ ℚ̄_ℓ` along the section `x ↦ (x, τ_g x)`: the pullback of the
 action of `τ_g` followed by the counit of `π^* ⊣ π_*`. -/
@@ -179,12 +159,7 @@ noncomputable def torsorEval (g : G) :
   (π)^*ᵃ[l].map (torsorTranslation l π τ hτ g) ≫
     (adicUpperStarLowerStarAdjunction l π).counit.app _
 
-/-- The evaluations compose with the action: `π^* σ_g ≫ ev_h = ev_{g + h}`. -/
-lemma upperStar_map_torsorTranslation_comp_torsorEval
-    (hadd : ∀ g h, (τ (g + h)).hom = (τ g).hom ≫ (τ h).hom) (g h : G) :
-    (π)^*ᵃ[l].map (torsorTranslation l π τ hτ g) ≫ torsorEval l π τ hτ h =
-      torsorEval l π τ hτ (g + h) := by
-  rw [torsorEval, ← Functor.map_comp_assoc, torsorTranslation_comp π τ hτ hadd, torsorEval]
+variable [WeaklyEtale π]
 
 /-- The counit of `π^* ⊣ π_*`, computed by restriction, evaluates a function on `V ×_Z W` along
 the diagonal section `x ↦ (x, v x)`. -/
@@ -261,6 +236,33 @@ lemma torsorEval_hom_ext (hsplit : IsTorsorSplit π τ hτ)
   simp only [adicFunctionsPresheaf_map, ModuleCat.hom_ofHom] at this
   rw [← torsorSection_torsorIndex π τ hτ V.hom hsplit z]
   exact this
+
+variable [AddCommGroup G]
+
+omit [Finite G] [WeaklyEtale π] in
+/-- The actions of the `τ_g` on `π_* ℚ̄_ℓ` compose: if `τ_{g + h} = τ_g ≫ τ_h` then
+`σ_g ≫ σ_h = σ_{g + h}`. -/
+lemma torsorTranslation_comp (hadd : ∀ g h, (τ (g + h)).hom = (τ g).hom ≫ (τ h).hom)
+    (g h : G) :
+    torsorTranslation l π τ hτ g ≫ torsorTranslation l π τ hτ h =
+      torsorTranslation l π τ hτ (g + h) := by
+  refine Mod.hom_ext _ _ ?_
+  ext ⟨U⟩ : 3
+  rw [Mod.comp_hom', ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    torsorTranslation_hom_app, torsorTranslation_hom_app, torsorTranslation_hom_app,
+    ← Functor.map_comp, ← op_comp]
+  congr 2
+  apply pullback.hom_ext
+  · simp
+  · simp [add_comm g h, hadd]
+
+omit [Finite G] [WeaklyEtale π] in
+/-- The evaluations compose with the action: `π^* σ_g ≫ ev_h = ev_{g + h}`. -/
+lemma upperStar_map_torsorTranslation_comp_torsorEval
+    (hadd : ∀ g h, (τ (g + h)).hom = (τ g).hom ≫ (τ h).hom) (g h : G) :
+    (π)^*ᵃ[l].map (torsorTranslation l π τ hτ g) ≫ torsorEval l π τ hτ h =
+      torsorEval l π τ hτ (g + h) := by
+  rw [torsorEval, ← Functor.map_comp_assoc, torsorTranslation_comp π τ hτ hadd, torsorEval]
 
 end Sheaves
 

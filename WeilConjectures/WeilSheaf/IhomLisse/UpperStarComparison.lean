@@ -36,9 +36,18 @@ open CategoryTheory MonoidalCategory Limits Functor.LaxMonoidal
 
 namespace AlgebraicGeometry.ProEtale
 
-variable {l : ℕ} [Fact l.Prime]
+variable {l : ℕ} [Fact l.Prime] {Y' : Scheme.{u}}
 
 attribute [local instance] Sheaf.symmetricCategory
+
+/-- The internal hom out of an isomorphism is an isomorphism. -/
+lemma _root_.CategoryTheory.Mod.isIso_ihomMap_app {M M' : AdicSheaf l Y'} (f : M ⟶ M') [IsIso f]
+    (N : AdicSheaf l Y') : IsIso ((Mod.ihomMap f).app N) :=
+  ⟨(Mod.ihomMap (inv f)).app N, by
+    rw [← NatTrans.comp_app, ← Mod.ihomMap_comp, IsIso.inv_hom_id, Mod.ihomMap_id]
+    rfl, by
+    rw [← NatTrans.comp_app, ← Mod.ihomMap_comp, IsIso.hom_inv_id, Mod.ihomMap_id]
+    rfl⟩
 
 section Comparison
 
@@ -147,7 +156,23 @@ lemma adicUpperStarIhomComparison_comp {W : Scheme.{u}} (r : W ⟶ Z) (M N : Adi
   have hm := NatTrans.IsMonoidal.tensor (τ := (upperStarComp (WeilCoefficients.{u} l) r g).hom)
     ((AdicSheaf.ihom M).obj N).X M.X
   rw [Functor.LaxMonoidal.comp_μ] at hm
-  sorry
+  have key : (upperStarComp (WeilCoefficients.{u} l) r g).hom.app ((AdicSheaf.ihom M).obj N).X ▷
+        (r)^*[WeilCoefficients.{u} l].obj ((g)^*[WeilCoefficients.{u} l].obj M.X) ≫
+      μ (r)^*[WeilCoefficients.{u} l] ((g)^*[WeilCoefficients.{u} l].obj ((AdicSheaf.ihom M).obj N).X)
+        ((g)^*[WeilCoefficients.{u} l].obj M.X) ≫
+      (r)^*[WeilCoefficients.{u} l].map (μ (g)^*[WeilCoefficients.{u} l] ((AdicSheaf.ihom M).obj N).X M.X ≫
+        (g)^*[WeilCoefficients.{u} l].map (Mod.evaluation M N)) =
+      ((r ≫ g)^*[WeilCoefficients.{u} l].obj ((AdicSheaf.ihom M).obj N).X ◁
+        (upperStarComp (WeilCoefficients.{u} l) r g).inv.app M.X ≫
+      μ (r ≫ g)^*[WeilCoefficients.{u} l] ((AdicSheaf.ihom M).obj N).X M.X ≫
+        (r ≫ g)^*[WeilCoefficients.{u} l].map (Mod.evaluation M N)) ≫
+      (upperStarComp (WeilCoefficients.{u} l) r g).hom.app N.X := by
+    rw [Category.assoc, Category.assoc,
+      (upperStarComp (WeilCoefficients.{u} l) r g).hom.naturality, reassoc_of% hm, tensorHom_def',
+      Category.assoc, ← MonoidalCategory.whiskerLeft_comp_assoc, Iso.inv_hom_id_app,
+      MonoidalCategory.whiskerLeft_id, Category.id_comp, Functor.map_comp]
+    rfl
+  exact key
 
 /-- The right action of `ℚ̄_ℓ` on a pullback. -/
 lemma rightAct_adicUpperStar_obj (N : AdicSheaf l Y) :
@@ -155,7 +180,18 @@ lemma rightAct_adicUpperStar_obj (N : AdicSheaf l Y) :
       ((g)^*ᵃ[l].obj N).X ◁ adicUpperStarRingHom l g ≫
         μ (g)^*[WeilCoefficients.{u} l] N.X (adicConstantSheaf l Y) ≫
           (g)^*[WeilCoefficients.{u} l].map (Mod.rightAct N) := by
-  sorry
+  have h := Adjunction.μ_comp_map_braiding (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) g)
+    N.X (adicConstantSheaf l Y)
+  have key : (β_ ((g)^*[WeilCoefficients.{u} l].obj N.X) (adicConstantSheaf l Z)).hom ≫
+      adicUpperStarRingHom l g ▷ (g)^*[WeilCoefficients.{u} l].obj N.X ≫
+        μ (g)^*[WeilCoefficients.{u} l] (adicConstantSheaf l Y) N.X ≫
+          (g)^*[WeilCoefficients.{u} l].map (Mod.act (A := adicConstantSheaf l Y) N.X) =
+      (g)^*[WeilCoefficients.{u} l].obj N.X ◁ adicUpperStarRingHom l g ≫
+        μ (g)^*[WeilCoefficients.{u} l] N.X (adicConstantSheaf l Y) ≫
+          (g)^*[WeilCoefficients.{u} l].map
+            ((β_ N.X (adicConstantSheaf l Y)).hom ≫ Mod.act (A := adicConstantSheaf l Y) N.X) := by
+    rw [Functor.map_comp, reassoc_of% h, BraidedCategory.braiding_naturality_right_assoc]
+  exact key
 
 /-- For `M = ℚ̄_ℓ` the comparison is the identification `g^* 𝓗om(ℚ̄_ℓ, N) ≅ g^* N ≅
 𝓗om(ℚ̄_ℓ, g^* N)`. -/
@@ -166,9 +202,161 @@ lemma adicUpperStarIhomComparison_unit (N : AdicSheaf l Y) :
         Mod.ihomRegularIso.inv.app ((g)^*ᵃ[l].obj N) := by
   apply Mod.uncurryHom_injective
   rw [Mod.uncurryHom_comp_ihomMap, uncurryHom_adicUpperStarIhomComparison, Mod.uncurryHom,
-    Mod.comp_hom', comp_whiskerRight, Category.assoc]
-  sorry
+    Mod.evaluation_regular, Mod.evaluation_regular, Mod.comp_hom']
+  have key : (g)^*[WeilCoefficients.{u} l].obj ((Mod.ihom (AdicSheaf.unit l Y)).obj N).X ◁
+        adicUpperStarRingHom l g ≫
+      μ (g)^*[WeilCoefficients.{u} l] ((Mod.ihom (AdicSheaf.unit l Y)).obj N).X
+        (adicConstantSheaf l Y) ≫
+      (g)^*[WeilCoefficients.{u} l].map
+        ((Mod.ihomRegularIso.hom.app N).hom ▷ adicConstantSheaf l Y ≫ Mod.rightAct N) =
+      ((g)^*[WeilCoefficients.{u} l].map (Mod.ihomRegularIso.hom.app N).hom ≫
+          (Mod.ihomRegularIso.inv.app ((g)^*ᵃ[l].obj N)).hom) ▷ adicConstantSheaf l Z ≫
+        (Mod.ihomRegularIso.hom.app ((g)^*ᵃ[l].obj N)).hom ▷ adicConstantSheaf l Z ≫
+          Mod.rightAct ((g)^*ᵃ[l].obj N) := by
+    rw [← comp_whiskerRight_assoc, Category.assoc, ← Mod.comp_hom', Iso.inv_hom_id_app,
+      Mod.id_hom']
+    erw [Category.comp_id]
+    rw [rightAct_adicUpperStar_obj, Functor.map_comp,
+      ← μ_natural_left_assoc, whisker_exchange_assoc]
+    rfl
+  exact key
+
+/-- The comparison is an isomorphism for `M = ℚ̄_ℓ`. -/
+instance isIso_adicUpperStarIhomComparison_unit (N : AdicSheaf l Y) :
+    IsIso (adicUpperStarIhomComparison l g (AdicSheaf.unit l Y) N) := by
+  have : IsIso ((Mod.ihomMap (adicUpperStarUnitIso l g).inv).app ((g)^*ᵃ[l].obj N)) :=
+    Mod.isIso_ihomMap_app _ _
+  have : IsIso (adicUpperStarIhomComparison l g (AdicSheaf.unit l Y) N ≫
+      (Mod.ihomMap (adicUpperStarUnitIso l g).inv).app ((g)^*ᵃ[l].obj N)) := by
+    rw [adicUpperStarIhomComparison_unit]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _
+    ((Mod.ihomMap (adicUpperStarUnitIso l g).inv).app ((g)^*ᵃ[l].obj N))
+
+/-- The comparison is an isomorphism for `M` if it is one for a module isomorphic to `M`. -/
+lemma isIso_adicUpperStarIhomComparison_of_iso {M M' : AdicSheaf l Y} (e : M' ≅ M)
+    (N : AdicSheaf l Y) [IsIso (adicUpperStarIhomComparison l g M N)] :
+    IsIso (adicUpperStarIhomComparison l g M' N) := by
+  have : IsIso ((Mod.ihomMap e.hom).app N) := Mod.isIso_ihomMap_app _ _
+  have : IsIso ((Mod.ihomMap ((g)^*ᵃ[l].map e.hom)).app ((g)^*ᵃ[l].obj N)) :=
+    Mod.isIso_ihomMap_app _ _
+  have h := adicUpperStarIhomComparison_ihomMap g e.hom N
+  have : IsIso ((g)^*ᵃ[l].map ((Mod.ihomMap e.hom).app N) ≫
+      adicUpperStarIhomComparison l g M' N) := by
+    rw [h]
+    infer_instance
+  exact IsIso.of_isIso_comp_left ((g)^*ᵃ[l].map ((Mod.ihomMap e.hom).app N)) _
+
+attribute [local instance] Abelian.hasFiniteBiproducts in
+/-- The comparison is an isomorphism for a finite direct sum if it is one for each summand. -/
+lemma isIso_adicUpperStarIhomComparison_biproduct {n : ℕ} (M : Fin n → AdicSheaf l Y)
+    (N : AdicSheaf l Y) [∀ i, IsIso (adicUpperStarIhomComparison l g (M i) N)] :
+    IsIso (adicUpperStarIhomComparison l g (⨁ M) N) := by
+  refine ⟨∑ i, (Mod.ihomMap ((g)^*ᵃ[l].map (biproduct.ι M i))).app ((g)^*ᵃ[l].obj N) ≫
+    inv (adicUpperStarIhomComparison l g (M i) N) ≫
+      (g)^*ᵃ[l].map ((Mod.ihomMap (biproduct.π M i)).app N), ?_, ?_⟩
+  · rw [Preadditive.comp_sum]
+    have (i : Fin n) : adicUpperStarIhomComparison l g (⨁ M) N ≫
+        (Mod.ihomMap ((g)^*ᵃ[l].map (biproduct.ι M i))).app ((g)^*ᵃ[l].obj N) ≫
+          inv (adicUpperStarIhomComparison l g (M i) N) ≫
+            (g)^*ᵃ[l].map ((Mod.ihomMap (biproduct.π M i)).app N) =
+        (g)^*ᵃ[l].map ((Mod.ihomMap (biproduct.ι M i)).app N ≫
+          (Mod.ihomMap (biproduct.π M i)).app N) := by
+      rw [← adicUpperStarIhomComparison_ihomMap_assoc, IsIso.hom_inv_id_assoc,
+        Functor.map_comp]
+    simp_rw [this]
+    rw [← Functor.map_sum]
+    simp_rw [← NatTrans.comp_app]
+    rw [← NatTrans.app_sum, Mod.sum_ihomMap_ι_comp_ihomMap_π]
+    exact (g)^*ᵃ[l].map_id _
+  · rw [Preadditive.sum_comp]
+    have (i : Fin n) : ((Mod.ihomMap ((g)^*ᵃ[l].map (biproduct.ι M i))).app ((g)^*ᵃ[l].obj N) ≫
+          inv (adicUpperStarIhomComparison l g (M i) N) ≫
+            (g)^*ᵃ[l].map ((Mod.ihomMap (biproduct.π M i)).app N)) ≫
+          adicUpperStarIhomComparison l g (⨁ M) N =
+        (Mod.ihomMap ((g)^*ᵃ[l].map (biproduct.π M i ≫ biproduct.ι M i))).app
+          ((g)^*ᵃ[l].obj N) := by
+      rw [Category.assoc, Category.assoc, adicUpperStarIhomComparison_ihomMap,
+        IsIso.inv_hom_id_assoc, ← NatTrans.comp_app, ← Mod.ihomMap_comp, Functor.map_comp]
+    simp_rw [this]
+    rw [← NatTrans.app_sum]
+    have h : ∑ i, Mod.ihomMap ((g)^*ᵃ[l].map (biproduct.π M i ≫ biproduct.ι M i)) =
+        Mod.ihomMapAddHom _ _ ((g)^*ᵃ[l].map (∑ i, biproduct.π M i ≫ biproduct.ι M i)) := by
+      rw [Functor.map_sum, map_sum]
+      rfl
+    rw [h, biproduct.total, Functor.map_id, Mod.ihomMapAddHom_apply, Mod.ihomMap_id]
+    rfl
 
 end Comparison
+
+/-- **Isomorphisms are local for the pro-étale topology**: a morphism of sheaves of
+`ℚ̄_ℓ,X`-modules is an isomorphism if its pullbacks along the members of a pro-étale cover are. -/
+lemma AdicSheaf.isIso_of_isIso_upperStar {X : Scheme.{u}} {ι : Type*} {W : ι → Scheme.{u}}
+    (p : ∀ i, W i ⟶ X) [∀ i, WeaklyEtale (p i)]
+    (hp : Presieve.ofArrows W p ∈ Scheme.proetalePrecoverage X) {M N : AdicSheaf l X}
+    (f : M ⟶ N) (h : ∀ i, IsIso ((p i)^*ᵃ[l].map f)) : IsIso f := by
+  have : Mono f := Preadditive.mono_of_isZero_kernel f
+    (AdicSheaf.isZero_of_isZero_upperStar p hp fun i ↦
+      (isZero_kernel_of_mono ((p i)^*ᵃ[l].map f)).of_iso (PreservesKernel.iso (p i)^*ᵃ[l] f))
+  have : Epi f := Preadditive.epi_of_isZero_cokernel f
+    (AdicSheaf.isZero_of_isZero_upperStar p hp fun i ↦
+      (isZero_cokernel_of_epi ((p i)^*ᵃ[l].map f)).of_iso (PreservesCokernel.iso (p i)^*ᵃ[l] f))
+  exact isIso_of_mono_of_epi f
+
+/-- If `a ≫ b ≫ c` is an isomorphism and `a`, `c` are, so is `b`. -/
+private lemma isIso_of_isIso_comp_comp {C : Type*} [Category C] {P Q R S : C} (a : P ⟶ Q)
+    (b : Q ⟶ R) (c : R ⟶ S) [IsIso a] [IsIso c] [IsIso (a ≫ b ≫ c)] : IsIso b := by
+  have : IsIso (b ≫ c) := IsIso.of_isIso_comp_left a _
+  exact IsIso.of_isIso_comp_right b c
+
+/-- **The pullback of the internal hom out of a lisse sheaf is the internal hom out of the
+pullback**: for `M` lisse the comparison `g^* 𝓗om(M, N) ⟶ 𝓗om(g^* M, g^* N)` is an
+isomorphism, for every morphism `g`. -/
+theorem IsAdicLisseSheaf.isIso_adicUpperStarIhomComparison {Y Z : Scheme.{u}} (g : Z ⟶ Y)
+    {M : AdicSheaf l Y} (hM : IsAdicLisseSheaf M) (N : AdicSheaf l Y) :
+    IsIso (adicUpperStarIhomComparison l g M N) := by
+  obtain ⟨R, hR, hRM⟩ := hM
+  obtain ⟨κ, V, v, rfl⟩ := R.exists_eq_ofArrows
+  have (k : κ) : WeaklyEtale (v k) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hR (.mk k)
+  have (k : κ) : WeaklyEtale (pullback.fst g (v k)) :=
+    MorphismProperty.pullback_fst _ _ ‹WeaklyEtale (v k)›
+  refine AdicSheaf.isIso_of_isIso_upperStar (fun k ↦ pullback.fst g (v k))
+    (Precoverage.mem_coverings_of_isPullback v hR g _ _
+      fun k ↦ IsPullback.of_hasPullback g (v k)) _ fun k ↦ ?_
+  obtain ⟨n, ⟨e⟩⟩ := hRM (v k) (.mk k)
+  have hq (N' : AdicSheaf l (V k)) : IsIso (adicUpperStarIhomComparison l
+      (pullback.snd g (v k)) ((v k)^*ᵃ[l].obj M) N') := by
+    have := isIso_adicUpperStarIhomComparison_biproduct (pullback.snd g (v k))
+      (fun _ : Fin n ↦ AdicSheaf.unit l (V k)) N'
+    exact isIso_adicUpperStarIhomComparison_of_iso _ e N'
+  have hqv : IsIso (adicUpperStarIhomComparison l (pullback.snd g (v k) ≫ v k) M N) := by
+    have := adicUpperStarIhomComparison_comp (v k) (pullback.snd g (v k)) M N
+    have : IsIso ((Mod.ihomMap (M := (pullback.snd g (v k))^*ᵃ[l].obj ((v k)^*ᵃ[l].obj M))
+        ((adicUpperStarComp l (pullback.snd g (v k)) (v k)).inv.app M)).app
+          ((pullback.snd g (v k) ≫ v k)^*ᵃ[l].obj N)) := Mod.isIso_ihomMap_app _ _
+    have : IsIso (adicUpperStarIhomComparison l (pullback.snd g (v k) ≫ v k) M N ≫
+        (Mod.ihomMap (M := (pullback.snd g (v k))^*ᵃ[l].obj ((v k)^*ᵃ[l].obj M))
+          ((adicUpperStarComp l (pullback.snd g (v k)) (v k)).inv.app M)).app _ ≫
+        (AdicSheaf.ihom ((pullback.snd g (v k))^*ᵃ[l].obj ((v k)^*ᵃ[l].obj M))).map
+          ((adicUpperStarComp l (pullback.snd g (v k)) (v k)).hom.app N)) := by
+      rw [← this]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ (_ ≫ _)
+  have hpg : IsIso (adicUpperStarIhomComparison l (pullback.fst g (v k) ≫ g) M N) := by
+    rw [pullback.condition]
+    exact hqv
+  have := adicUpperStarIhomComparison_comp g (pullback.fst g (v k)) M N
+  have : IsIso ((Mod.ihomMap (M := (pullback.fst g (v k))^*ᵃ[l].obj ((g)^*ᵃ[l].obj M))
+      ((adicUpperStarComp l (pullback.fst g (v k)) g).inv.app M)).app
+        ((pullback.fst g (v k) ≫ g)^*ᵃ[l].obj N)) := Mod.isIso_ihomMap_app _ _
+  have : IsIso ((adicUpperStarComp l (pullback.fst g (v k)) g).hom.app
+      ((AdicSheaf.ihom M).obj N) ≫
+        (pullback.fst g (v k))^*ᵃ[l].map (adicUpperStarIhomComparison l g M N) ≫
+          adicUpperStarIhomComparison l (pullback.fst g (v k)) ((g)^*ᵃ[l].obj M)
+            ((g)^*ᵃ[l].obj N)) := by
+    rw [this]
+    infer_instance
+  exact isIso_of_isIso_comp_comp _ _ _
 
 end AlgebraicGeometry.ProEtale

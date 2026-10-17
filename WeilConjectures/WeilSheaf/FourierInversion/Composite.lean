@@ -28,6 +28,14 @@ namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
+/-- Pullbacks of Weil sheaves along equal morphisms agree. -/
+theorem WeilSheaf.upperStar_eq_of_eq {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+    [Y.Over (Spec (CommRingCat.of k₀))] {f g : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))]
+    [g.IsOver (Spec (CommRingCat.of k₀))] (h : f = g) :
+    (WeilSheaf.upperStar f : WeilSheaf k₀ l Y ⥤ _) = WeilSheaf.upperStar g := by
+  subst h
+  rfl
+
 /-- **`FT_{ψ⁻¹} ∘ FT_ψ` on the triple product** (blueprint `lem-fd-kernel-composition`,
 `sk-lem-kernel-composition`, without forming the convolution kernel). On `𝔸³` with points
 `(x, ξ, y)`,
@@ -100,9 +108,28 @@ theorem nonempty_iso_fourierTransform_comp_fourierTransform_inv
     rw [e₁, e₂, e₃, h₁₂₃]
     ring
   -- the two kernels pulled back to `𝔸³`
-  have hmul : affinePlane.mul k₀ = affineLine.homOfSection k₀ m := rfl
+  have hmul : affinePlane.mul k₀ = affineLine.homOfSection k₀ m := by
+    refine AffineSpace.hom_ext ?_ fun _ ↦ ?_
+    · rw [affinePlane.mul, affineLine.homOfSection, AffineSpace.homOfVector_over]
+    · rw [affinePlane.mul, affineLine.homOfSection, AffineSpace.homOfVector_appTop_coord]
   have hK (φ : AddChar k₀ (PadicAlgCl l)) : fourierKernel φ = artinSchreierOf φ m := by
-    rw [fourierKernel, artinSchreierOf, hmul]
+    rw [fourierKernel, artinSchreierOf]
+    exact Functor.congr_obj (WeilSheaf.upperStar_eq_of_eq hmul) _
+  obtain ⟨eG₁⟩ := nonempty_iso_upperStar_artinSchreierOf (affineTripleProduct.proj₁₂ k₀) ψ m
+  obtain ⟨eG₂⟩ := nonempty_iso_upperStar_artinSchreierOf (affineTripleProduct.proj₂₃ k₀) ψ⁻¹ m
+  obtain ⟨eInv⟩ := nonempty_iso_artinSchreierOf_inv ψ ((affineTripleProduct.proj₂₃ k₀).appTop m)
+  obtain ⟨eMul⟩ := nonempty_iso_tensorObj_artinSchreierOf ψ
+    (-(affineTripleProduct.proj₂₃ k₀).appTop m) ((affineTripleProduct.proj₁₂ k₀).appTop m)
+  obtain ⟨eT₁⟩ := WeilComplex.nonempty_iso_tensorLisse_of_iso
+    (eqToIso (congrArg (WeilSheaf.upperStar (affineTripleProduct.proj₁₂ k₀)).obj (hK ψ)) ≪≫
+      eG₁)
+    (ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_fourierKernel ψ))
+    (isLisse_artinSchreierOf ψ _)
+  obtain ⟨eT₂⟩ := WeilComplex.nonempty_iso_tensorLisse_of_iso
+    (eqToIso (congrArg (WeilSheaf.upperStar (affineTripleProduct.proj₂₃ k₀)).obj (hK ψ⁻¹)) ≪≫
+      eG₂ ≪≫ eInv)
+    (ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_fourierKernel ψ⁻¹))
+    (isLisse_artinSchreierOf ψ _)
   sorry
 
 end AlgebraicGeometry
