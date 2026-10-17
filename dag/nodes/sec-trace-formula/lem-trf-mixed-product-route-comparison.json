@@ -12,11 +12,126 @@
   "def-sf-kv-maps",
   "fix-prop-projection-formula"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the input $B$ in the assertion. Write $v:U=Y\\times_sX\\to X$ for the second projection, and set $N=v^*B$, $M=Ra_{X!}B$, $H=a_Y^*M$. Then $r^*N=p_2^*B$, $\\pi r=fp_1$, and $Z_X=X\\times_YU$ with projections $p_1,r$. The other two Cartesian squares are $(U,v,\\pi,Y,a_X,a_Y)$ and $(Z_X,p_2,p_1,X,a_X,a_X)$. These are identifications of the represented pairs of points, with no assumption that a leg square of a correspondence is Cartesian. Use the geometric six-functor structure supplied in [def-sf-kv-maps]. By [thm-sf-ctf-stability](i),(ii),(iv), $N,M,H$, the external products, and all compact-support images used below belong to the finite-Tor constructible domains. By [lem-sf-proetale-constructible-origin](ii), these bounded constructible pro-etale objects have etale-origin witnesses, so the domain condition of compact-support composition is satisfied. Use (A4) of [def-sf-datum] to identify $Rf_!K=Rf_*K=K'$, and [thm-sf-comp-composition] to identify $R\\pi_!Rr_!=Rf_!Rp_{1!}$ via $\\pi r=fp_1$. All comparisons below are these specified comparisons.",
+   "uses": [
+    "def-sf-kv-maps",
+    "thm-sf-ctf-stability",
+    "lem-sf-proetale-constructible-origin",
+    "def-sf-datum",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 3 (a), mixed-product factorization: geometry and domains"
+   }
+  },
+  {
+   "text": "Let $\\sigma$ denote the signed tensor symmetry. For a map $u$ and objects $T$ on its target and $F$ on its source, abbreviate the left-handed projection isomorphism by\n$$\\ell_{u;T,F}=Ru_!(\\sigma_{F,u^*T})\\circ\\operatorname{PF}_{u,F,T}\\circ\\sigma_{T,Ru_!F}:T\\otimes Ru_!F\\longrightarrow Ru_!(u^*T\\otimes F).$$\nThis is a notation for the displayed forward composite. Its invertibility is [fix-prop-projection-formula]. All pullback/tensor identifications used in this formula and below are those of [lem-pur-derived-pullback-tensor-iso], including their compatibility with signed symmetry and composition.",
+   "uses": [
+    "fix-prop-projection-formula",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/thm-sf-kunneth-relative.proof.md",
+    "place": "Steps 2 and 4: projection transformations read with tensor symmetry"
+   }
+  },
+  {
+   "text": "Denote the compact-support exchanges (A2) of [def-sf-datum] for the three displayed Cartesian squares by\n$$c_Y:H\\xrightarrow{\\sim}R\\pi_!N,\\qquad c_X:a_X^*M\\xrightarrow{\\sim}Rp_{1!}p_2^*B,$$\n$$d:f^*R\\pi_!N\\xrightarrow{\\sim}Rp_{1!}r^*N,\\qquad e:\\pi^*K'\\xrightarrow{\\sim}Rr_!p_1^*K.$$\nHere $e$ is exchange for $f$ along $\\pi$, and $d$ for $\\pi$ along $f$; they are different exchanges. Pasting the square for $a_X$ along $a_Y$ with the square for $\\pi$ along $f$ gives the square for $a_X$ along $a_X=a_Yf$. Thus the horizontal-pasting equation of [fix-lem-exchanges](2), evaluated at $B$, is exactly\n$$c_X=d\\circ f^*c_Y,$$\nwhere $a_X^*M=f^*H$ and $r^*N=p_2^*B$. Identity-square exchanges are identities by the same cited clause.",
+   "uses": [
+    "def-sf-datum",
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 3 (a): expand the exchanges in the mixed-product factorization"
+   }
+  },
+  {
+   "text": "Expand $E_r(B)$ using [def-sf-kv-maps](i). Its relative-product base is $Y\\times_sX=U$; the two maps into that base are $r$ and $\\mathrm{id}_U$, with objects $p_1^*K$ on $Z_X$ and $N$ on $U$. Clause (iv) of [lem-sf-kunneth-coherence] identifies this relative map with $\\operatorname{PF}_{r,p_1^*K,N}^{-1}$. The two target-side exchanges in the definition are $e^{-1}$ in the first factor and identity in the second. Consequently, as a map into $\\pi^*K'\\otimes N$,\n$$E_r(B)=(e^{-1}\\otimes1_N)\\circ\\operatorname{PF}_{r,p_1^*K,N}^{-1}.$$\nThis identifies the specified product map, rather than choosing an isomorphism of its source and target.",
+   "uses": [
+    "def-sf-kv-maps",
+    "lem-sf-kunneth-coherence",
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-def-sf-kv-maps/def-sf-kv-maps.md",
+    "place": "(i): specialize to (f,id_X); relative identity-factor normalization"
+   }
+  },
+  {
+   "text": "Expand $J_{Y,X}(B)$ and $J_X(B)$ by the same definition [def-sf-kv-maps](i), now for $(\\mathrm{id}_Y,a_X)$ and $(\\mathrm{id}_X,a_X)$. For the former, the relative base is $Y$, the maps are $\\mathrm{id}_Y,\\pi$, and the inputs are $K',N$; for the latter the base is $X$, the maps are $\\mathrm{id}_X,p_1$, and the inputs are $K,p_2^*B$. Clauses (i),(iv) of [lem-sf-kunneth-coherence] identify their relative-product maps with $\\ell_{\\pi;K',N}^{-1}$ and $\\ell_{p_1;K,p_2^*B}^{-1}$: swap the two factors, use the identity-factor projection formula, and swap the target factors back. The first target exchange in each definition is identity, and the second is $c_Y^{-1}$ or $c_X^{-1}$. Hence\n$$J_{Y,X}(B)=(1_{K'}\\otimes c_Y^{-1})\\circ\\ell_{\\pi;K',N}^{-1},\\qquad J_X(B)=(1_K\\otimes c_X^{-1})\\circ\\ell_{p_1;K,p_2^*B}^{-1}.$$\nBoth formulas keep exactly the signed symmetries in the definition of $\\ell$.",
+   "uses": [
+    "def-sf-kv-maps",
+    "lem-sf-kunneth-coherence",
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-def-sf-kv-maps/def-sf-kv-maps.md",
+    "place": "(i): specialize to (id_Y,a_X) and (id_X,a_X)"
+   }
+  },
+  {
+   "text": "Apply the canonical map of [thm-sf-kunneth-relative] over the base $Y$ to $f:X\\to Y$, $\\pi:U\\to Y$, and the objects $K,N$. Its fibre product is $Z_X$ with projections $p_1,r$. Denote this map by\n$$\\kappa:R\\pi_!Rr_!(p_1^*K\\otimes r^*N)\\longrightarrow K'\\otimes R\\pi_!N.$$\nThe four defining operations in that theorem are: apply $R\\pi_!$ to $\\operatorname{PF}_{r,p_1^*K,N}^{-1}$, then to $e^{-1}\\otimes1$, then remove the factor $\\pi^*K'$ by the inverse left-handed projection map for $\\pi$. Therefore the expression for $E_r$ obtained in step 4 gives\n$$\\kappa=\\ell_{\\pi;K',N}^{-1}\\circ R\\pi_!E_r(B).$$\nIn particular step 5 identifies the left side of the asserted identity with $(1_{K'}\\otimes c_Y^{-1})\\circ\\kappa$.",
+   "uses": [
+    "thm-sf-kunneth-relative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/thm-sf-kunneth-relative.proof.md",
+    "place": "Steps 1--4, applied over Y to (f,pi;K,N)"
+   }
+  },
+  {
+   "text": "Now expand the relative product with the order $(\\pi,f;N,K)$. Its second projection is $p_1$, its inverse exchange is $d^{-1}$, and its outer map is $f$. The signed swap from $U\\times_YX$ to $X\\times_YU=Z_X$ changes the first inverse projection map into $\\ell_{p_1;K,r^*N}^{-1}$; the target swap changes the last one into $\\operatorname{PF}_{f,K,R\\pi_!N}^{-1}$. Thus the explicit four-operation composite of [thm-sf-kunneth-relative] in this order, after those swaps, is\n$$\\operatorname{PF}_{f,K,R\\pi_!N}^{-1}\\circ Rf_!(1_K\\otimes d^{-1})\\circ Rf_!(\\ell_{p_1;K,p_2^*B}^{-1}).$$\nSymmetry clause (i) of [lem-sf-kunneth-coherence], applied to these very inputs over $Y$, says this composite equals $\\kappa$. This is the comparison between the two orders of integration needed here; the cited lemma includes the Koszul signs, so none are discarded.",
+   "uses": [
+    "thm-sf-kunneth-relative",
+    "lem-sf-kunneth-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry clause (i), applied to (f,pi;K,N) over Y"
+   }
+  },
+  {
+   "text": "Naturality of the projection isomorphism [fix-prop-projection-formula] in its second variable, applied to $c_Y^{-1}:R\\pi_!N\\to H$, gives\n$$(1_{K'}\\otimes c_Y^{-1})\\circ\\operatorname{PF}_{f,K,R\\pi_!N}^{-1}=\\operatorname{PF}_{f,K,H}^{-1}\\circ Rf_!(1_K\\otimes f^*c_Y^{-1}).$$\nInsert the formula of step 7 for $\\kappa$. The two adjacent coefficient arrows inside $Rf_!$ compose as\n$$(1_K\\otimes f^*c_Y^{-1})\\circ(1_K\\otimes d^{-1})=1_K\\otimes(d\\circ f^*c_Y)^{-1}=1_K\\otimes c_X^{-1}$$\nby the exchange-pasting equality of step 3. Combining with step 5 now gives\n$$J_{Y,X}(B)\\circ R\\pi_!E_r(B)=\\operatorname{PF}_{f,K,H}^{-1}\\circ Rf_!\\bigl((1_K\\otimes c_X^{-1})\\circ\\ell_{p_1;K,p_2^*B}^{-1}\\bigr)=\\operatorname{PF}_{f,K,H}^{-1}\\circ Rf_!J_X(B).$$\nSince $H=a_Y^*Ra_{X!}B$, this is the required equality. The source comparison is the one fixed in step 1 and no properness of $a_X,a_Y$, or $\\pi$ has been used.",
+   "uses": [
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 3 (a), mixed-product factorization: naturality and substitution"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-datum",
+  "def-sf-kv-maps",
+  "fix-lem-exchanges",
+  "fix-prop-projection-formula",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-kunneth-coherence",
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-comp-composition",
+  "thm-sf-ctf-stability",
+  "thm-sf-kunneth-relative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+  "place": "Step 3 (a), common-transpose comparison; expanded using the two explicit relative Kunneth orders over Y and exchange pasting"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-source-exchange",
@@ -67,6 +182,48 @@
    "results": "MeasureTheory.Integrable.comp_fst_iff; ProbabilityTheory.Kernel.lintegral_map; IsProperMap; CategoryTheory.Limits.limitFlipCompLimIsoLimitCompLim_inv_π_π; isProperMap_fst_of_compactSpace; isProperMap_snd_of_compactSpace; MeasureTheory.Integrable.comp_snd_map_prodMk; IsProperMap.prodMap",
    "date": "2026-10-17",
    "verdict": "no match: hits do not state this specified geometric six-functor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compact support Kunneth integration map commutes with proper direct image in the first factor via the inverse projection formula",
+   "results": "8 hits: MeasureTheory.integral_integral_swap_of_hasCompactSupport, continuousOn_integral_bilinear_of_locally_integrable_of_compact_support, continuousOn_integral_of_compact_support, ContinuousLinearMap.integral_comp_commSL, CompactlySupportedContinuousMap.integralLinearMap_apply, CompactlySupportedContinuousMap.compLinearMap, MeasureTheory.integral_continuousLinearMap_prod', CompactlySupportedContinuousMap.integralPositiveLinearMap_toFun",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the geometric constructible compact-support Kunneth comparison; ordinary sheaf pushforward composition is not this identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the geometric constructible compact-support Kunneth comparison; ordinary sheaf pushforward composition is not this identity"
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|Kunneth|projectionFormula|compactSupport",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the geometric constructible compact-support Kunneth comparison; ordinary sheaf pushforward composition is not this identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The two orders of compactly supported integration in a Cartesian square agree with the relative Kunneth map and the projection formula",
+   "results": "8 hits: MeasureTheory.integral_integral_swap_of_hasCompactSupport, VectorFourier.integral_fourierIntegral_swap, CompactlySupportedContinuousMap.integralLinearMap, MeasureTheory.Measure.integral_compProd, CompactlySupportedContinuousMap.integralPositiveLinearMap, CompactlySupportedContinuousMap.integralLinearMap_apply, MeasureTheory.integral_continuousLinearMap_prod, MeasureTheory.Measure.setIntegral_compProd",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the geometric constructible compact-support Kunneth comparison; ordinary sheaf pushforward composition is not this identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Symmetry of relative Kunneth for sheaf complexes and pasting of base change exchange identify a mixed external product pushforward with the inverse projection formula",
+   "results": "8 hits: SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardNatIso_inv, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardComp_hom_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the geometric constructible compact-support Kunneth comparison; ordinary sheaf pushforward composition is not this identity"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|pushforward_assoc",
+   "results": "9 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the geometric constructible compact-support Kunneth comparison; ordinary sheaf pushforward composition is not this identity"
   }
  ],
  "blueprint": {
@@ -85,5 +242,64 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-mixed-product-route-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the exact mixed-product maps through the relative Kunneth map for (f,pi) over Y. Its existing symmetry lemma compares the two integration orders; exchange pasting and projection-formula naturality then prove the identity. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the mixed-product factorization in Step 3 (a) of lem-trf-trace-source-exchange, the common-transpose argument after the second-variable ordinary counit.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "The comparison equivalence supplies the etale-origin witnesses required by the finite-level compact-support compositor; no coefficient categories are identified silently."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Finite-coefficient pullback, tensor and compact-support preservation check the domains of the mixed-product maps; the proper-compatibility unit does not prove preservation."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "The generic geometric compact-support compositor identifies pi r with f p_1, rather than changing the proper-compatibility route."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "The geometric projection isomorphism and its naturality supply the two projection conventions and the final coefficient naturality square."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "The monoidal pullback constraints preserve the signed symmetries used when writing the two integration orders."
+   },
+   {
+    "node": "fix-lem-exchanges",
+    "why": "Horizontal pasting and identity normalization of the specified geometric compact-support exchanges give c_X=d f^*c_Y."
+   },
+   {
+    "node": "lem-sf-kunneth-coherence",
+    "why": "The relative-product identity-factor and signed-symmetry clauses, specialized to the existing canonical maps, compare the two orders of integration over Y."
+   },
+   {
+    "node": "thm-sf-kunneth-relative",
+    "why": "Its explicit four-operation canonical map is expanded for (f,pi) and (pi,f) over Y; it is a generic product calculation within the proper-compatibility route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-ctf-stability",
+  "thm-sf-comp-composition",
+  "fix-prop-projection-formula",
+  "lem-pur-derived-pullback-tensor-iso",
+  "fix-lem-exchanges",
+  "lem-sf-kunneth-coherence",
+  "thm-sf-kunneth-relative"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-237dff949",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-237dff949 (reviewer sub-agent of L); spot-checked: Read the item, its parent's step 11, the unit sk-p-proper, main-20261015 lem-trf-trace-source-exchange.proof.md Step 3(a) (lines 87-109), and the statements of every cited node. Statement unchanged; it is typed at A_{E,n} with f proper and K,B in D^b_ctf, and both sides type-check as maps Rπ_!Rr_!(K⊠B)→K'⊗a_Y^*Ra_{X!}B. I recomputed def-sf-kv-maps(i) for (f,id_X), (id_Y,a_X) and (id_X,a_X). E_r=(e^{-1}⊗1)PF_r^{-1} follows from coherence (iv). J_{Y,X}=(1⊗c_Y^{-1})ℓ_π^{-1} and J_X=(1⊗c_X^{-1})ℓ_{p_1}^{-1} follow from (i)+(iv), also checked by direct expansion. Expanding the four operations of thm-sf-kunneth-relative over Y gives κ=ℓ_π^{-1}Rπ_!E_r for (f,π) and, for (π,f) after the swaps, PF_f^{-1}Rf_!(1⊗d^{-1})Rf_!ℓ_{p_1}^{-1}. These are equal by lem-sf-kunneth-coherence(i), Koszul signs included. The pasting c_X=d∘f^*c_Y is fix-lem-exchanges(2) with g=a_Y, h=f. Second-variable naturality of PF finishes the proof, with the arrows in the right order. Edge cases f=id, B=0, K=0, X empty, the point case, non-proper X=A^1 and shifts all pass. No new nodes; no duplicate (lem-trf-product-projection-comparison is a different identity); no cycle (checked by transitive closure); no SGA cited. The 12 searches cover all three kinds. All 8 declared tool_uses are accepted as generic six-functor black boxes. No changes."
  }
 }

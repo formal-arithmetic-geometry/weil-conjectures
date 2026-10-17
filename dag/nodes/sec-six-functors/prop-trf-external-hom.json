@@ -18,13 +18,10 @@
  ],
  "proof": [
   {
-   "text": "Fix $L_1,L_2$. For fixed $E_2$, let $\\mathcal T_1(E_2)$ be the objects $E_1$ for which the specified $\\beta$ is invertible. The two sides are contravariant exact functors in $E_1$, and likewise in $E_2$: on the resolution models of [def-weil-derived-pullback-tensor-hom] and [def-pur-derived-internal-hom], tensor with a fixed K-flat complex carries a mapping cone to the mapping cone of the tensored map, and $\\mathcal Hom^\\bullet(-,I)$ carries a cone to the corresponding shifted cone. The evaluation maps defining $\\beta$ in [def-sf-kv-maps] respect these cone and shift identifications, using the tensor symmetry with its Koszul signs. All values remain in $D^b_{ctf}$ by [thm-sf-ctf-stability]. Thus [lem-sf-triangle-two-out-of-three], applied on the opposite triangulated category, gives cone closure of $\\mathcal T_1(E_2)$. It contains zero and is closed under shifts and finite sums. It is closed under direct summands: if $E_1$ is a retract of $E'_1$, naturality makes $\\beta(E_1,E_2)$ a retract in the arrow category of $\\beta(E'_1,E_2)$; composing the retraction and section with the inverse gives its inverse. Consequently it is thick. For fixed $E_1$, the two functors in $E_2$ are again contravariant exact by the displayed cone models and $\\beta$ respects shifts. Applying [lem-sf-triangle-two-out-of-three] gives cone closure in $E_2$; zero, shifts and finite sums are preserved, and a retraction in $E_2$ gives a retraction of the two arrows by naturality. If $s_A,r_A,s_B,r_B$ are the resulting sections and retractions of source and target and $b$ is the invertible larger arrow, $r_A b^{-1}s_B$ is an inverse of the retract arrow, as follows by naturality and $r_As_A=r_Bs_B=1$. Thus this class in $E_2$ is thick too. By [lem-trf-devissage-generation] it is therefore enough to prove $\\beta$ for every pair of generators $E_i=Rg_{i*}j_{i!}F_i$. Explicitly, first fix a generator $E_2$ and extend from generator $E_1$ to all $E_1$; then fix any $E_1$ and extend from generator $E_2$ to all $E_2$. This is thick generation, not replacement of lisse sheaves by constant sheaves.",
+   "text": "Fix $L_1,L_2$. By [lem-trf-external-hom-thick-reduction], both sides of $\\beta$ are exact contravariant functors in each $E_i$, and the specified comparison respects their shift maps. Apply [lem-sf-generating-class-determination] to these functors on the opposite triangulated categories. The objects $Rg_{i*}j_{i!}F_i$ thickly generate by [lem-trf-devissage-generation]; taking opposites preserves their shifts, triangles and retracts. First fix a generator $E_2$ and propagate invertibility from generator $E_1$ to every $E_1$; then fix any $E_1$ and propagate from generator $E_2$ to every $E_2$. Thus it suffices to treat pairs of the stated generators.",
    "uses": [
-    "def-weil-derived-pullback-tensor-hom",
-    "def-pur-derived-internal-hom",
-    "def-sf-kv-maps",
-    "thm-sf-ctf-stability",
-    "lem-sf-triangle-two-out-of-three",
+    "lem-trf-external-hom-thick-reduction",
+    "lem-sf-generating-class-determination",
     "lem-trf-devissage-generation"
    ],
    "elementary": false,
@@ -90,15 +87,11 @@
    }
   },
   {
-   "text": "We verify that $\\gamma$ is the specified evaluation-defined $\\beta$, rather than just an unspecified isomorphism. Let $q_i:h_i^*H_i\\to C_i$ be the ordinary counit after $H_i\\simeq Rh_{i*}C_i$, using the ordinary adjunction in [fix-prop-adjunctions] (1); put $e_i:F_i\\otimes_A^L C_i\\to h_i^!L_i$ for the perfect-evaluation pairing, and $\\mu_i:Rh_{i!}h_i^!L_i\\to L_i$ for the constructible exceptional counit in [def-trf-admissibility]. The canonical tensor–Hom isomorphism [lem-sf-tensor-hom] says, on transposing, that evaluation $E_i\\otimes_A^L H_i\\to L_i$ is\n$$\nE_i\\otimes_A^L H_i\\xrightarrow{\\operatorname{PF}_{h_i}}\nRh_{i!}(F_i\\otimes_A^L h_i^*H_i)\n\\xrightarrow{Rh_{i!}(e_i\\circ(1\\otimes q_i))}\nRh_{i!}h_i^!L_i\\xrightarrow{\\mu_i}L_i.\n$$\nThe projection maps here are the natural isomorphisms of [fix-prop-projection-formula]; their second arguments $H_i$ have finite Tor amplitude by Step 2. By the definition of the canonical ordinary comparison, the ordinary transpose of $K_*$ is $q_1\\boxtimes q_2$, under $h^*(H_1\\boxtimes H_2)=h_1^*H_1\\boxtimes h_2^*H_2$. By [def-sf-kv-maps] (ii), the exceptional transpose of $\\alpha_h$ is $\\mathrm{Ku}_!$ followed by $\\mu_1\\boxtimes\\mu_2$. Consequently, transposing $\\gamma$ first across tensor–Hom and then across the ordinary and exceptional adjunctions gives\n$$\n\\begin{aligned}\nE\\otimes_A^L(H_1\\boxtimes_A^L H_2)\n&\\longrightarrow Rh_!\\bigl(F\\otimes_A^L h^*(H_1\\boxtimes_A^L H_2)\\bigr)\\\\\n&\\xrightarrow{Rh_!((e_1\\boxtimes e_2)\\circ(1\\otimes(q_1\\boxtimes q_2)))}\nRh_!(h_1^!L_1\\boxtimes_A^L h_2^!L_2)\\\\\n&\\xrightarrow{\\mathrm{Ku}_!}Rh_{1!}h_1^!L_1\\boxtimes_A^L Rh_{2!}h_2^!L_2\n\\xrightarrow{\\mu_1\\boxtimes\\mu_2}L.\n\\end{aligned}\n$$\nThe first arrow is the compact-support projection map, after $E\\simeq Rh_!F$. The canonical $\\mathrm{Ku}_!$ is the composite of base-change and projection maps in [thm-sf-kunneth-relative]. The symmetry, iterated-product, base-change and identity-factor projection-formula clauses (i)–(iv) of [lem-sf-kunneth-coherence] give the compatibility used here: pull the factor maps to $X_1\\times X_2$, insert $H_1,H_2$ as identity-map factors, and regroup the four factors as $(F_1,H_1)$ and $(F_2,H_2)$. Using these clauses, the displayed composite is the external product of the two preceding formulas for evaluation, with only the tensor symmetry moving $H_1$ past $E_2$. It is therefore exactly the tensor–Hom transpose defining $\\beta$ in [def-sf-kv-maps] (iii). Injectivity of the adjunction bijections gives $\\gamma=\\beta$. Hence $\\beta$ is invertible for generators, and Step 1 proves it for all $E_i$. Finally, evaluation, tensor symmetry and tensor–Hom transposition are natural (contravariantly in $E_i$, covariantly in $L_i$), so the specified isomorphism is natural in all four variables, independent of the generator choices.",
+   "text": "Apply [lem-sf-kv-beta-kunneth-evaluation] with $S_i=U_i$, $Y_i=X_i$, the locally closed immersions $h_i=g_i\\circ j_i$ of Step 2 (open, then closed), the lisse locally finite-free, hence finite projective, $F_i$ of Step 2, and the given $L_i$. Its $T_i$ are the $C_i$ of Step 2, and its identifications $R\\mathcal Hom_A(E_i,L_i)\\simeq Rh_{i*}T_i$ and $R\\mathcal Hom_A(Rh_!F,L)\\simeq R\\mathcal Hom_A(E,L)$ are those of Step 3 (tensor–Hom, finite-projective evaluation, $\\mathrm{Ku}_!$). Its composite is exactly $\\gamma$: the ordinary comparison first in the first factor with auxiliary $Rh_{2*}C_2$, then in the second with auxiliary $C_1$, direct-image composition (Step 4), then $Rh_*(1\\otimes\\alpha_h)$ and the inverse target identification (Step 5). The lemma says this composite equals the evaluation-defined $\\beta$ of [sk-def-sf-kv-maps] (iii), which is the map of [def-sf-kv-maps] (iii): both are the tensor–Hom transpose of the two evaluations with the Koszul signs of the tensor symmetry. Hence $\\gamma=\\beta$, so $\\beta$ is invertible on the generators, and Step 1 extends this to all $E_i$. The definition of $\\beta$ uses natural evaluations, signed tensor symmetry and adjunction transposition, hence is natural contravariantly in the $E_i$ and covariantly in the $L_i$.",
    "uses": [
-    "fix-prop-adjunctions",
-    "def-trf-admissibility",
-    "lem-sf-tensor-hom",
-    "fix-prop-projection-formula",
-    "def-sf-kv-maps",
-    "thm-sf-kunneth-relative",
-    "lem-sf-kunneth-coherence"
+    "lem-sf-kv-beta-kunneth-evaluation",
+    "sk-def-sf-kv-maps",
+    "def-sf-kv-maps"
    ],
    "elementary": false,
    "source": {
@@ -109,24 +102,22 @@
  ],
  "proof_deps": [
   "def-compact-support-direct-image-detailed",
-  "def-pur-derived-internal-hom",
   "def-sf-kv-maps",
-  "def-weil-finite-torsion-constructibility",
   "def-trf-admissibility",
-  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-torsion-constructibility",
   "def-weil-l-adic-coefficient-extension",
-  "fix-prop-adjunctions",
-  "fix-prop-projection-formula",
-  "lem-sf-kunneth-coherence",
+  "lem-sf-generating-class-determination",
+  "lem-sf-kv-beta-kunneth-evaluation",
   "lem-sf-tensor-hom",
-  "lem-sf-triangle-two-out-of-three",
   "lem-trf-devissage-generation",
+  "lem-trf-external-hom-thick-reduction",
   "lem-trf-ordinary-kunneth",
   "lem-weil-derived-direct-image-composition",
   "lem-weil-pbc-closed-immersion-proper",
   "lem-weil-pbc-finite-flat-local-free",
   "prop-sf-dualizable-hom",
   "prop-trf-exceptional-kunneth",
+  "sk-def-sf-kv-maps",
   "thm-sf-ctf-stability",
   "thm-sf-kunneth-relative"
  ],
@@ -264,7 +255,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -300,16 +291,16 @@
   "date": "2026-10-17",
   "item": "prop-trf-external-hom",
   "worker": "stage1",
-  "summary": "Audited and replaced the earlier sandbox attempt. Kept the source statement and six-functors unit route. Expanded to six proof steps with explicit thick-generation closure, compactification and locally finite-free checks, source/target Hom identifications, two typed ordinary Künneth applications, exceptional Künneth, and the evaluation transpose calculation. Reused existing nodes only; corrected the claim about the Lean structure projection, which is not an unconditional proof and states only existence of some isomorphism. Repeated real Mathlib searches through msearch.py and read the candidate files.",
-  "blueprint": "Steps 1–2 realize the first proof paragraph through the locally finite-free reduction; Step 3 realizes its tensor–Hom formula and the second paragraph’s F-dual and shriek-product identifications; Steps 4–5 realize the two displayed comparison arrows; Step 6 expands the final evaluation/mate calculation.",
+  "summary": "Repair of the returned 2095-character Step 1 and 2804-character Step 6: extracted geometric exactness/shift compatibility and the specified adjoint-mate product calculation as two statement-only nodes. Thick closure itself is supplied by the existing generating-class determination node, avoiding a duplicate generic lemma. All other proof steps, the item statement, Lean/audit records and route are retained. New statements explicitly introduce their finite-coefficient data and all maps; actual logged Mathlib searches were read and retained, with additional searches for the clarified statements. Maintainer review (Codex reader, 2026-10-17): the extracted mate lemma duplicated the existing unsplit node lem-sf-kv-beta-kunneth-evaluation (Q86, same unit), which states for locally closed immersions and lisse finite-projective F_i that exactly the Step 4–5 composite equals the evaluation-defined beta; it is dropped and Step 6 cites the existing node.",
+  "blueprint": "Step 1 realizes the opening exactness and two-variable dévissage sentence, with geometric shift compatibility in lem-trf-external-hom-thick-reduction and thick propagation in lem-sf-generating-class-determination. Steps 2–5 retain the original generator, tensor–Hom, ordinary and exceptional Künneth route verbatim. Step 6 realizes the final sentence (identification of the composite with the specified beta via ordinary and exceptional adjoints) through the existing lem-sf-kv-beta-kunneth-evaluation.",
   "tool_uses": []
  },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-N8-d8529c135",
-  "group": "N8",
+  "reviewer": "NT-cc-Q84-de4f7a31a",
+  "group": "Q84",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-d8529c135 (reviewer sub-agent of L); spot-checked: PASS: I read the whole delivery and found no faults, so nothing was repaired. Changes: none (no fixes, no drop_nodes, no tool_uses). STATEMENT: identical in master and main-20261015. It is true over a field, and checked at X_i a point (perfect complexes), at i_*A on A^1 and at zero objects. beta matches def-sf-kv-maps (iii) including its blueprint_update. SHAPE AND ROUTE: one commit with only the item and the report. No new nodes. proof_deps equals the union of the step uses. All 21 cited nodes lie on the transitive route of sk-thm-sf-kunneth-verdier, so no tool use is needed, and no SGA source is cited. STEPS: (1) lem-trf-devissage-generation gives thick generation in D(X,A); lem-sf-triangle-two-out-of-three has its exactness and shift hypotheses checked on the K-flat/K-injective models; the retract inverse r_A b^-1 s_B holds in both directions. (2) The generator closed immersion is proper (lem-weil-pbc-closed-immersion-proper), so def-compact-support-direct-image-detailed gives E_i=Rh_{i!}F_i. A_{E,n} is finite local (def-weil-l-adic-coefficient-extension item 4); stalks are finite (def-weil-finite-torsion-constructibility) and free (lem-weil-pbc-finite-flat-local-free). h^! preserves D^b_ctf by def-trf-admissibility, tensor and Rf_* by thm-sf-ctf-stability (ii)/(iii). (3) prop-sf-dualizable-hom applies to the site-perfect F_i only; lem-sf-tensor-hom (blueprint_update read) and def-sf-kv-maps (i) give E=Rh_!F. (4) lem-trf-ordinary-kunneth is applied twice, with (h_1,X_2,Rh_{2*}C_2) and (h_2,U_1,C_2,C_1) swapped, composed by lem-weil-derived-direct-image-composition (1). (5) prop-trf-exceptional-kunneth applies to (h_1,h_2,L_1,L_2). (6) Unwinding the Yoneda chain of lem-sf-tensor-hom gives mu, then adjoint, then PF, in the stated PF direction. The ordinary comparison's adjoint is counit times identity, giving q_1 times q_2 with the composite counit of fix-prop-adjunctions (3). alpha's transpose comes from def-sf-kv-maps (ii); Ku_!/PF coherence comes from lem-sf-kunneth-coherence (i)-(iv). So gamma equals beta. Minor, unchanged: step 6 names fix-prop-adjunctions (1) where clause (3) is also used, but the node cited is correct. DUPLICATES: a grep for external-Hom terms found def-sf-kv-maps, thm-trf-kunneth-verdier (which uses this item), lem-sf-hom-comparison-finite-free (a different statement) and unrelated Picard-framework nodes. None duplicates the item. LEAN: the HasKunnethComparisons.externalHom projection has a producer containing sorry and states only that some isomorphism exists, so it is not attached. Full checks are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-de4f7a31a (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement (with blueprint_update where present), the main-20261015 and master blueprint text and the unit's β step. Statement unchanged and verbatim; same coefficient category (A_{E,n}, constructible h^! of def-trf-admissibility); β of def-sf-kv-maps(iii) equals β of sk-def-sf-kv-maps(iii). Step 1: thick-reduction lemma plus lem-sf-generating-class-determination on the opposite categories, with the shift taken as [-1]. Thick closure in D(X,A) equals that in D^b_ctf. The two-pass order is correct. The opposite triangulated structure is part of the Mathlib-leaf notion (Opposite/Pretriangulated.lean:168, Triangulated.lean:37), as elsewhere in the DAG. Steps 2-5 are unchanged and checked hypothesis by hypothesis. C5 duplicate: the new lem-trf-external-hom-mate-identification duplicates the existing same-unit node lem-sf-kv-beta-kunneth-evaluation (Q86, 2026-10-17, cited by the reviewed unit node's Step 15). That node states that the Step 4-5 composite equals the evaluation-defined β, for locally closed immersions h_i=g_i j_i and lisse finite-projective F_i, which is exactly the generator case. FIX: Step 6 now cites lem-sf-kv-beta-kunneth-evaluation, sk-def-sf-kv-maps and def-sf-kv-maps, with every hypothesis matched. proof_deps were recomputed, the step is 1282 characters, and the mate node is dropped. lem-trf-external-hom-thick-reduction is kept: exactness exists in lem-weil-pbc-ringed-internal-hom-exact-restriction and lem-kun-derived-tensor-triangulated, but no node states the shift compatibility of β. It was checked at zero objects and at point schemes with shifted free complexes, where the Koszul signs agree. All citations are on the route, there is no cycle and no tool_uses. Note for the maintainer: the unit node sk-thm-sf-kunneth-verdier already proves β invertible by this route.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -1,0 +1,96 @@
+{
+ "id": "lem-trf-external-hom-thick-reduction",
+ "kind": "statement",
+ "title": "Exactness and shift compatibility for the external Hom thick reduction",
+ "statement": "Fix the finite-field and finite-coefficient datum of [def-trf-admissibility], so \\(k=\\overline{\\mathbf F}_q\\), \\(\\ell\\ne\\operatorname{char}k\\), \\(A=\\mathcal O_E/\\varpi_E^n\\) for a finite extension \\(E/\\mathbf Q_\\ell\\) and \\(n\\geq1\\). Let \\(X_1,X_2\\) be separated finite-type \\(k\\)-schemes and fix \\(L_i\\in D^b_{ctf}(X_i,A)\\). Use the derived operations of [def-weil-derived-pullback-tensor-hom], and external products and the evaluation-defined comparison \\(\\beta\\) of [def-sf-kv-maps]. Define bifunctors, contravariant in both variables, by\n\\[\n B(E_1,E_2)=R\\mathcal Hom_A(E_1,L_1)\\boxtimes_A^L R\\mathcal Hom_A(E_2,L_2),\\qquad\n T(E_1,E_2)=R\\mathcal Hom_A(E_1\\boxtimes_A^L E_2,L_1\\boxtimes_A^L L_2).\n\\]\nThey take values in \\(D^b_{ctf}(X_1\\times_kX_2,A)\\). For each fixed \\(E_2\\), \\(B(-,E_2)\\) and \\(T(-,E_2)\\) are exact functors from the opposite triangulated category \\(D^b_{ctf}(X_1,A)^{\\mathrm{op}}\\); the analogous assertion holds with the two variables exchanged. The natural transformation \\(\\beta:B\\to T\\) is compatible with their canonical shift isomorphisms in each variable: if \\(c_{B,i,m}:B(E_i[m],E_j)\\xrightarrow{\\sim}B(E_i,E_j)[-m]\\) and \\(c_{T,i,m}\\) denote these comparisons (with the variables in their original order), then for every \\(m\\in\\mathbf Z\\),\n\\[\n c_{T,i,m}\\circ\\beta(E_i[m],E_j)=\\beta(E_i,E_j)[-m]\\circ c_{B,i,m}.\n\\]\nThe triangulated structures and exactness have the meaning of [def-weil-triangulated-category]; the comparisons include the tensor symmetry with its Koszul signs.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/prop-trf-external-hom.proof.md",
+  "place": "first paragraph, sentence beginning “Both sides are exact in each $E_i$”: closure under cones, shifts, sums, and retracts"
+ },
+ "stmt_deps": [
+  "def-trf-admissibility",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-kv-maps",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a triangulated category a natural transformation of exact contravariant functors is an isomorphism on a thick generating subcategory then on all objects",
+   "results": "Hits: CategoryTheory.Functor.essImageDistTriang_mem_of_iso; CategoryTheory.Functor.isHomological_of_localization; CategoryTheory.Functor.map_distinguished_op_exact; CategoryTheory.Functor.isTriangulated_of_iso (none states the geometric external-Hom reduction).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Thick closure argument for a natural transformation of exact contravariant functors and retract inverse",
+   "results": "Hits: CategoryTheory.NatTrans.retractArrowApp; CategoryTheory.Retract.op; CategoryTheory.ObjectProperty.prop_retractClosure; CategoryTheory.ObjectProperty.retractClosure (generic retract utilities, no thick-generation lemma).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.LocalizingSubcategory",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.LocalizingSubcategory'.",
+   "date": "2026-10-17",
+   "verdict": "invalid query (unknown identifier); not evidence of absence; supplemented by the valid Functor.IsTriangulated query"
+  },
+  {
+   "tool": "grep",
+   "query": "LocalizingSubcategory|thick.*subcategory|retract.*inverse",
+   "results": "0 hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "External derived internal Hom comparison is a natural transformation of triangulated contravariant functors compatible with integer shifts",
+   "results": "8 hits: derived-functor factorization CommShift instances, Adjunction.IsTriangulated.commShift/mk', Triangle.functorHomMk/', Functor.comp_homologySequenceδ, and mapTriangleCommShiftIso. These are generic shift infrastructure, not the geometric external-Hom natural transformation.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor and internal Hom cone models give shift compatible external Hom comparison on constructible sheaves",
+   "results": "8 hits: CochainComplex.mappingCone.shiftIso/shiftTriangleIso/shiftTrianglehIso; Abelian.Ext.homEquiv/homAddEquiv/hom/hom'; Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt. None concerns the sheaf external-Hom transformation.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated",
+   "results": "12 hits defining triangulated functors and generic consequences, including map_distinguished and isTriangulated_of_iso; none states exactness and shift compatibility for the geometric external-Hom comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "externalProduct.*(ihom|internalHom|RHom)|(ihom|internalHom|RHom).*externalProduct",
+   "results": "3 hits in Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:357,409,418; diagram external-product simplifications, no geometric derived sheaf comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "prop-trf-external-hom",
+  "date": "2026-10-17",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-verdier",
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-external-hom",
+   "place": "first paragraph, opening sentence “Both sides are exact in each $E_i$”: exact contravariant functors and compatibility of beta with the shift maps needed for thick generation",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
