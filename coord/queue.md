@@ -24,7 +24,6 @@
 | `Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeSection` | 4 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence` | 4 | 3 | proof |
 | `Sheaf.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal` | 5 | 1 | proof |
-| `WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal` | 5 | 10 | proof |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.PolynomialGenericStrictLocalizationField` | 10 | 1 | proof |
@@ -33,6 +32,7 @@
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
 | `Sheaf.CategoryTheory.CartanEilenbergDecalageSpectralObject` | 13 | 1 | proof |
 | `Sheaf.CategoryTheory.FilteredComplexDecalageComparison` | 13 | 1 | proof |
+| `Sheaf.CategoryTheory.SpectralObjectPageTwoMapExistence` | 13 | 1 | proof |
 | `Sheaf.Paper.IntegralResiduePullFlatModel` | 13 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueScalarCounitModel` | 13 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorPullCounitModel` | 13 | 1 | proof |
