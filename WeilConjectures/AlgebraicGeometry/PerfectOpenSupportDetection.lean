@@ -69,7 +69,7 @@ private theorem perfect_shift (X : Scheme.{u})
   refine ⟨W, hx, K⟦n⟧, ⟨?_, ?_⟩, ?_⟩
   · exact ⟨a - n, b - n, fun i hi ↦ hb (i + n) (by omega)⟩
   · exact fun i ↦ hf (i + n)
-  · let L := (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) W).mapDerivedCategory
+  · let L := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W).mapDerivedCategory
     exact ⟨(L.commShiftIso n).app P ≪≫ (shiftFunctor _ n).mapIso e ≪≫
       ((DerivedCategory.Q.commShiftIso n).app K).symm⟩
 

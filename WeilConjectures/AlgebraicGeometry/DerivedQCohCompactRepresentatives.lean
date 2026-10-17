@@ -52,7 +52,7 @@ private theorem perfect_of_iso (X : Scheme.{u})
     Scheme.IsPerfect X F := by
   intro x
   obtain ⟨U, hx, K, hK, ⟨eK⟩⟩ := hE x
-  exact ⟨U, hx, K, hK, ⟨((SheafOfModules.overFunctor
+  exact ⟨U, hx, K, hK, ⟨((SheafOfModules.overFunctor.{u}
     (moduleRings X.toRingedSpace) U).mapDerivedCategory.mapIso e.symm) ≪≫ eK⟩⟩
 
 /-- The concrete perfect-complex closure theorem supplies Mathlib's thick-property API. -/
