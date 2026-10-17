@@ -16,9 +16,197 @@
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-integral-rational-qbar-compact-support"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work at a finite coefficient field whenever a construction involves finitely many objects or arrows. In the common-stage category every object and arrow is represented at some finite extension, and equality means equality after further extension [def-weil-algebraically-closed-coefficients]. In particular a Weil structure, its inverse and their inverse equations can be represented over one finite field $E$: first represent the two arrows, then enlarge $E$ to make both inverse equations hold. This does not require an integral lattice stable under Frobenius. The computations below are natural in rational arrows; their common-stage versions use the specified scalar comparisons in the pullback and compact-support functors.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction and Part 2; common-stage bookkeeping"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-constructible-pullback-t-exact] to the base change $h:W\\to X$ (in fact that lemma allows any morphism of finite-type $k$-schemes). It gives constructible $t$-exactness, exactness on the underlying hearts, and the natural isomorphisms $\\mathcal H^a(h^*K)\\cong h^*\\mathcal H^a(K)$ at $E$ and at $\\Qlb$. Write $G_T=Lg_T^*$ for geometric-Frobenius pullback. Since $h_0$ is defined over $k_0$, $g_Xh=hg_W$. The pullback-composition comparisons give $\\alpha:G_Wh^*\\xrightarrow{\\sim}h^*G_X$. For $(K,\\theta)$ set $\\theta_h=h^*\\theta\\circ\\alpha_K$. These are the induced Weil structures. The comparisons at $E$ are the rationalizations of [lem-pod-integral-pullback-composition], and those at $\\Qlb$ are their common-stage maps as in [def-weil-derived-pullback-tensor-hom].",
+   "uses": [
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-pod-integral-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; pullback comparisons: Stacks 0D6D, sites-cohomology lemma-derived-pullback-composition"
+   }
+  },
+  {
+   "text": "The cohomology comparison in Step 2 is Weil-equivariant. Indeed a $t$-exact triangulated functor sends the truncation triangle at $a$ to the truncation triangle at $a$; uniqueness of these triangles [lem-weil-heart-short-exact-triangles](1) makes the resulting truncation and cohomology isomorphisms natural in maps of functors as well as in $K$. Apply this to $h^*,G_X,G_W$ and $\\alpha$. Both routes from $G_W\\mathcal H^a(h^*K)$ to $h^*\\mathcal H^a(K)$ are the comparison induced by the same truncation maps and $\\theta_h=h^*\\theta\\alpha_K$, so they agree. The Frobenius pullbacks are $t$-exact by [lem-a1-constructible-pullback-t-exact], applied to the automorphisms $g_T$.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "lem-a1-constructible-pullback-t-exact",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction: cohomology sheaves, with BBD 1.3.3--1.3.6 truncation uniqueness"
+   }
+  },
+  {
+   "text": "For the assertion about closed points, factor $h_0$ as a closed immersion into an open subscheme of $X_0$. An open immersion identifies the local rings at corresponding points [def-weil-open-immersion]. For a closed immersion, the local ring at the source point is the target local ring modulo the stalk of its defining ideal, by the affine quotient description in [def-weil-closed-immersion]. Its maximal ideal is the image of the target maximal ideal; quotienting by it gives the same residue field [def-weil-residue-field]. Thus $\\kappa(x)\\cong\\kappa(z)$ over $k_0$. Since $z$ is closed in the finite-type scheme $W_0$, [lem-kun-closed-point-field](a) makes this a finite extension of $k_0$; applying the converse of the same lemma on $X_0$ shows that $x$ is closed. In particular $r=[\\kappa(z):k_0]=[\\kappa(x):k_0]$ and both residue fields have $q^r$ elements.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion",
+    "def-weil-residue-field",
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction: closed points and equal residue fields; elementary local-ring quotient calculation"
+   }
+  },
+  {
+   "text": "For compatible geometric points choose $\\bar x=h\\bar z$, with common source $s=\\operatorname{Spec}k$. The inverse of the composition comparison $L\\bar x^*K\\cong L\\bar z^*Lh^*K$, followed by the same point-fibre functor on $s$, gives the canonical comparison $c_K:\\operatorname{Fib}_sL\\bar z^*h^*K\\cong\\operatorname{Fib}_sL\\bar x^*K$. This uses [lem-pod-integral-pullback-composition] and its rational and common-stage versions in [def-weil-derived-pullback-tensor-hom]. Taking degree-zero cohomology for a sheaf gives $(h^*\\mathcal F)_{\\bar z}\\cong\\mathcal F_{\\bar x}$, by the stalk convention of [def-weil-local-frobenius-trace] and the point/cohomology comparison in [lem-a1-constructible-pullback-t-exact].",
+   "uses": [
+    "lem-pod-integral-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-local-frobenius-trace",
+    "lem-a1-constructible-pullback-t-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction: canonical stalk comparison"
+   }
+  },
+  {
+   "text": "Check the local operators themselves, using the common integer $r$ of Step 4. Let $\\alpha_m:G_W^mh^*\\cong h^*G_X^m$ be the comparison from $g_X^mh=hg_W^m$. Then $(\\theta_h)^{[m]}=h^*(\\theta^{[m]})\\alpha_m$: the case $m=1$ is its definition, and the step $m\\mapsto m+1$ substitutes $\\theta^{[m+1]}=\\theta^{[m]}G_X^m(\\theta)$; naturality moves the new $\\theta$ past the comparison, and associativity of [lem-pod-integral-pullback-composition] identifies the two remaining composition comparisons. At $m=r$ the returns are $g_X^r\\bar x=\\bar xg_s^r$ and $g_W^r\\bar z=\\bar zg_s^r$. Under $c_K$, their composition comparisons coincide by that same associativity. The iterated point transports $I^{[r]}$ commute with $c_K$: apply [lem-weil-frobenius-point-transport-natural](2) successively to the pre-fibre composition isomorphism $L\\bar z^*h^*K\\cong L\\bar x^*K$ and its $g_s$-pullbacks. Finally naturality of $c$ identifies the maps obtained from $\\theta^{[r]}$. Thus each of the three factors defining the local operator in [def-weil-local-frobenius-trace] commutes with $c$, giving $c_KF_z=F_xc_K$. Taking degree zero proves the asserted Frobenius-equivariant sheaf stalk formula. All identities are identities of the specified maps, not just equality of their traces.",
+   "uses": [
+    "lem-pod-integral-pullback-composition",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction: local Frobenius, using its three-factor point-transport definition"
+   }
+  },
+  {
+   "text": "Now consider $j_0$. Its geometric base change is a quasi-compact open immersion: $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied to $X\\to\\operatorname{Spec}k$ (a field is a Noetherian ring). For each affine open $V\\subseteq X$, its open subscheme $V\\cap U$ is Noetherian and in particular quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian], applied to that open of $X$. This verifies quasi-compactness of $j$ on an affine cover of its target. Use the compactification $(j,\\operatorname{id}_X)$ in the compact-support definition. At finite coefficients its functor is exact extension by zero. At the integral stage its formula is $R\\varprojlim_n\\operatorname{Res}_n j_!(K\\otimes^L A_{E,n})$. Precisely [lem-sf-integral-open-reduction-comparison] identifies this functor naturally with termwise ringed-site extension by zero $j_!K$, identifies the open adjunctions, and ensures derived completeness. That termwise functor is exact by [lem-pur-site-restriction-module-adjunction-exact]. Consequently [lem-weil-pbc-exact-functor-complex-cohomology] gives $\\mathcal H^a(Rj_!K)\\cong j_!\\mathcal H^a(K)$ and preserves both vanishing half-lines. Its output is integral constructible by [lem-sf-integral-compact-support-constructible], applied with this compactification. Thus this is $t$-exactness on the actual integral constructible categories, without interchanging truncation with reduction modulo $\\varpi^n$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-sf-integral-compact-support-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.1.13, 6.7.7 and Remark 6.8.15; Stacks 03DJ, sites-modules lemma-extension-by-zero-exact; 010N, homology lemma-exact-functor"
+   }
+  },
+  {
+   "text": "Rationalize Step 7. By [def-weil-constructible-standard-tstructure], each rational half of the standard pair is the isomorphism closure of its integral half, and the common-stage half is the isomorphism closure of the finite-field halves. Since $Rj_!$ uses the integral operation on rational objects and acts stagewise at $\\Qlb$ [def-weil-integral-rational-qbar-compact-support], it preserves both halves at $E$ and at $\\Qlb$. The bounded $t$-structures and their coefficient-compatible truncations are those of [prop-constructible-truncations]. Applying truncation uniqueness [lem-weil-heart-short-exact-triangles](1) gives the natural isomorphism $\\mathcal H^a(Rj_!L)\\cong j_!\\mathcal H^a(L)$. The termwise identification and its open unit are compatible with scalar extension: the tensor comparison of [lem-sf-open-tensor-normalization] identifies tensoring an extended object with extending its tensor product, and [det-sf-open-closed-extension-zero-limits] allows its completed scalar extension to be computed through the defining derived limit. Hence these comparisons represent well-defined maps in the common-stage category; the compact-support field-independence assertion is also [lem-weil-compact-support-finite-field-independence].",
+   "uses": [
+    "def-weil-constructible-standard-tstructure",
+    "def-weil-integral-rational-qbar-compact-support",
+    "prop-constructible-truncations",
+    "lem-weil-heart-short-exact-triangles",
+    "lem-sf-open-tensor-normalization",
+    "det-sf-open-closed-extension-zero-limits",
+    "lem-weil-compact-support-finite-field-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2), Lemma 6.1.13; Stacks 0GL1 (sites-cohomology lemma-j-shriek-and-tensor)"
+   }
+  },
+  {
+   "text": "Base change $j$ along $g_X$. Its pullback is again $j$ because $j_0$ is defined over $k_0$. The canonical completed open base-change comparison [lem-cbc-completed-extension-zero-comparison], identified with the integral pullbacks in use by [lem-a1-integral-pullback-completed-comparison], gives $\\beta:G_XRj_!\\cong Rj_!G_U$. Define $\\theta_{j!}=Rj_!(\\theta)\\beta_L$. Rationalize and pass to the common stage as in Step 8. This is the induced Weil structure. The normalized open unit in [lem-sf-open-tensor-normalization], identified with the realized unit by [lem-sf-integral-open-reduction-comparison], has $j^*\\beta$ equal to the identity after the restriction identifications. Consequently $\\eta:L\\xrightarrow{\\sim}j^*Rj_!L$ intertwines Weil structures: after restriction the equation for $\\theta_{j!}$ is precisely the equation for $\\theta$. Finally the cohomology comparisons of Step 8 intertwine these structures by uniqueness of truncations [lem-weil-heart-short-exact-triangles](1), just as in Step 3. This proves the Weil cohomology assertion for $Rj_!$.",
+   "uses": [
+    "lem-cbc-completed-extension-zero-comparison",
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-sf-open-tensor-normalization",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-weil-heart-short-exact-triangles",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2, extension-by-zero sentence: induced Weil structures and open unit"
+   }
+  },
+  {
+   "text": "For $x\\in U_0$, regard the same point as a closed point of $U_0$. It is closed there since its singleton is closed already in $X_0$. Apply Steps 5--6 with $h_0=j_0$ and the sheaf $j_!\\mathcal G$; compose that stalk comparison with the inverse of the Weil-equivariant open unit $\\eta_{\\mathcal G}$ of Step 9. This gives $(j_!\\mathcal G)_{\\bar x}\\cong\\mathcal G_{\\bar x}$ and intertwines the local operators. The residue fields and the integer $r$ agree by Step 4. If $x\\notin U_0$, the pullback of $U$ along $\\bar x:s\\to X$ is empty. Apply [lem-cbc-completed-extension-zero-comparison] to this square, and use [lem-a1-integral-pullback-completed-comparison] to identify its pullback with the one in the stalk definition. Its right side is extension from the empty site, hence zero (the sheaf axiom on its empty cover forces every module section to be zero). Thus $L\\bar x^*Rj_!K=0$ integrally. Rationalizing and then extending from a common finite field shows $(j_!\\mathcal G)_{\\bar x}=0$ as required, using [def-weil-local-frobenius-trace].",
+   "uses": [
+    "lem-cbc-completed-extension-zero-comparison",
+    "lem-a1-integral-pullback-completed-comparison",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2, stalks of extension by zero and restriction to the open"
+   }
+  },
+  {
+   "text": "To make explicit the assertion about exact functors of Weil sheaves, kernels and cokernels of a Weil-equivariant map are computed in the constructible heart. The exact automorphism pullback $G_T$ preserves their universal properties; thus their kernels and cokernels acquire induced invertible Weil structures, and their inclusions and projections are equivariant. For example, the kernel structure is the unique map $G_T\\ker u\\to\\ker u$ induced by $G_T\\ker u\\to G_T\\mathcal F\\xrightarrow{\\theta}\\mathcal F$; applying the same construction to $\\theta^{-1}$ gives its inverse. The identical argument applies to cokernels. The underlying exact functors $h^*$ (Step 2) and $j_!$ (Steps 7--8), with the natural structures of Steps 2 and 9, preserve these universal kernel and cokernel maps. Hence they preserve short exact sequences of constructible Weil sheaves. This is a direct universal-property calculation in the fixed-pair category [def-weil-weil-sheaf-complex], not an assertion of a triangulated structure on the category of Weil complexes.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "lem-a1-constructible-pullback-t-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Restriction and Part 2: exactness in the constructible Weil heart"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-pod-integral-pullback-composition",
+  "def-weil-weil-sheaf-complex",
+  "lem-weil-heart-short-exact-triangles",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-residue-field",
+  "lem-kun-closed-point-field",
+  "def-weil-local-frobenius-trace",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sf-integral-compact-support-constructible",
+  "def-weil-constructible-standard-tstructure",
+  "prop-constructible-truncations",
+  "lem-sf-open-tensor-normalization",
+  "det-sf-open-closed-extension-zero-limits",
+  "lem-weil-compact-support-finite-field-independence",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-a1-integral-pullback-completed-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Restriction paragraph and Part 2, extension by zero; argument assembled from the explicitly cited general comparison lemmas and Bhatt--Scholze 6.1, 6.7--6.8"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,10 +235,45 @@
    "results": "none",
    "date": "2026-10-17",
    "verdict": "no match: hits concern O_X-modules, Zariski stalks or arbitrary presheaves; none gives the common-stage ell-adic Weil functors with local Frobenius, constructibility and t-exactness"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|extensionByZero.*stalk|stalk.*extensionByZero",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state constructible ell-adic Weil exactness together with local geometric Frobenius and extension-by-zero stalk formulas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pullback and open extension by zero of constructible Weil complexes commute with cohomology and geometric Frobenius on stalks",
+   "results": "TopCat.Presheaf.stalkPullbackHom, TopCat.Presheaf.germ_stalkPullbackInv, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, TopCat.Presheaf.germ_stalkPullbackHom, CategoryTheory.Precoverage.ZeroHypercover.pullback₁_toPreZeroHypercover, CategoryTheory.Precoverage.ZeroHypercover.pullback₂_toPreZeroHypercover, TopCat.Presheaf.stalkPullbackInv, TopCat.Presheaf.stalkPullbackIso",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state constructible ell-adic Weil exactness together with local geometric Frobenius and extension-by-zero stalk formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of constructible ell-adic Weil sheaves is t-exact and open extension by zero has Frobenius equivariant stalks",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackIso",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state constructible ell-adic Weil exactness together with local geometric Frobenius and extension-by-zero stalk formulas"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilComplex|localFrobenius|Constructible.*[tT]Exact|[tT]Exact.*Constructible",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state constructible ell-adic Weil exactness together with local geometric Frobenius and extension-by-zero stalk formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image and extension by zero on the constructible derived category with ell-adic coefficients and Weil descent",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, Profinite.NobelingProof.succ_exact, CategoryTheory.Abelian.Ext.mapExactFunctor, Condensed.profiniteSolid, CondensedMod.IsSolid.isIso_solidification_map, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations do not state constructible ell-adic Weil exactness together with local geometric Frobenius and extension-by-zero stalk formulas"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-morphism-open-closed-reduction",
@@ -76,5 +299,154 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-immersion-weil-local-behavior",
+  "worker": "stage1",
+  "summary": "Kept both clauses unchanged. Reused the existing constructible pullback t-exactness, coherent pullback and point transport, normalized integral open extension and completed open base-change nodes; wrote the residue-field and Frobenius arguments and the passage to the Weil heart explicitly. No new nodes.",
+  "blueprint": "Steps 2--6 realize the Restriction paragraph; Steps 7--11 realize the extension-by-zero sentence of Part 2. Step 1 supplies common-stage bookkeeping.",
+  "tool_uses": [
+   {
+    "node": "def-weil-algebraically-closed-coefficients",
+    "why": "Generic Algebraically closed coefficient category interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "def-weil-derived-pullback-tensor-hom",
+    "why": "Generic Derived pullback, tensor product, and internal Hom interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "def-weil-integral-rational-qbar-compact-support",
+    "why": "Generic Integral, rational, and algebraically closed compact-support functors interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-a1-constructible-pullback-t-exact",
+    "why": "Generic Pullback is t-exact for the standard constructible t-structures interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "Generic Composition isomorphism for integral derived pullbacks interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "def-weil-weil-sheaf-complex",
+    "why": "Generic Weil sheaf and Weil complex interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic Short exact sequences in the heart are triangles interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "def-weil-open-immersion",
+    "why": "Generic Open immersion of schemes interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic Closed immersion of schemes interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "def-weil-residue-field",
+    "why": "Generic Residue field of a point of a scheme interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic Residue fields of closed points interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "def-weil-local-frobenius-trace",
+    "why": "Generic Local Frobenius and local alternating trace interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Generic The point transport along Frobenius is linear and natural interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic An open subscheme of a Noetherian scheme is Noetherian interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-sf-integral-open-reduction-comparison",
+    "why": "Generic Strict reduction and normalized realization of completed open extension interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic Restriction and extension by zero for modules on a localized site interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic An exact functor commutes with cohomology of cochain complexes interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-sf-integral-compact-support-constructible",
+    "why": "Generic The integral compact-support direct image of a constructible complex is constructible interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "def-weil-constructible-standard-tstructure",
+    "why": "Generic Standard pair of subcategories on the constructible categories interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Generic Construction of constructible truncations interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic Open-extension unit normalization for derived tensor and base change interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "det-sf-open-closed-extension-zero-limits",
+    "why": "Generic Extension by zero preserves products and derived limits interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-compact-support-finite-field-independence",
+    "why": "Generic Independence of the finite coefficient field interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-cbc-completed-extension-zero-comparison",
+    "why": "Generic Completed extension-by-zero base change interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-a1-integral-pullback-completed-comparison",
+    "why": "Generic The integral derived pullback agrees with the strict-tower completed pullback interface used for immersion operations; this unit supplies the open--closed weight reduction, not this general coefficient, categorical, or scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-pod-integral-pullback-composition",
+  "def-weil-weil-sheaf-complex",
+  "lem-weil-heart-short-exact-triangles",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-residue-field",
+  "lem-kun-closed-point-field",
+  "def-weil-local-frobenius-trace",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sf-integral-compact-support-constructible",
+  "def-weil-constructible-standard-tstructure",
+  "prop-constructible-truncations",
+  "lem-sf-open-tensor-normalization",
+  "det-sf-open-closed-extension-zero-limits",
+  "lem-weil-compact-support-finite-field-independence",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-a1-integral-pullback-completed-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-6acd44227",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-6acd44227 (reviewer sub-agent of L); spot-checked: Reviewed the item, unit route, every proof step and cited node, source locations, coefficient categories, base-change morphisms, edge cases, route-pivot constraints, and long-step rule. The statement is preserved and mathematically supported; no repairs or new nodes are needed."
  }
 }

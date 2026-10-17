@@ -16,9 +16,141 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-kinjective-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $J=I/i_0$ and let $r:J\\to I$ forget the arrow to $i_0$. By [lem-weil-pbc-initial-functor-cofiltered-criterion], $J$ is small cofiltered and $r$ is initial: any $i\\in I$ has a common predecessor $j$ with $i_0$, giving an arrow $r(j\\to i_0)\\to i$; any two such arrows from one object become equal after a refinement in $I$, which is also a refinement in $J$ by composition with its fixed arrow to $i_0$. The same criterion, applied with opposite target category, preserves the three component limits. Hence we may work over $J$; its opposite is exactly the filtered category in the asserted formula. The identity arrow of $i_0$ is the distinguished stage, and the composite pullback to $P$ is $u_{i_0}^*$.",
+   "uses": [
+    "lem-weil-pbc-initial-functor-cofiltered-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 04E6 (definition-cofinal), 04E7 (lemma-cofinal), and 002R (lemma-initial); applied to the slice projection."
+   }
+  },
+  {
+   "text": "Use [lem-trf-oriented-triple-limit-descent] on this system. Its first clause supplies qcqs limits and arrows, so [lem-trf-qcqs-oriented-triple-presentation] supplies finite-cover triple sites with terminal triples and restriction equivalences to the $P_j$ and $P$. Its second clause provides strict small site models $\\mathcal C_j$, $\\mathcal C$ with finite coverings, cover-preserving continuous transition functors, and colimiting object and arrow cocones. These are precisely the hypotheses of [lem-weil-pbc-colimit-of-sites]; its canonical site morphisms agree with $u_{ji}$ and $u_i$ by the third clause of the new node. Thus its inverse-image formula and the abstract cohomology-colimit theorem can be used on the actual oriented products, including their canonical maps, rather than on unrelated equivalent topoi.",
+   "uses": [
+    "lem-trf-oriented-triple-limit-descent",
+    "lem-trf-qcqs-oriented-triple-presentation",
+    "lem-weil-pbc-colimit-of-sites"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI 2.5 and 2.7 (2.c), printed pp. 179–180; the finite-cover site colimit is Stacks sites.tex, Tags 09YL and 0A35."
+   }
+  },
+  {
+   "text": "Work first with abelian sheaves. For $F$ on $P_{i_0}$ set $F_j=u_{ji_0}^{-1}F$ and $F_\\infty=u_{i_0}^{-1}F$. The inverse-image composition comparisons identify every $u_j^{-1}F_j$ with $F_\\infty$ and all transitions with its identity. Therefore their colimit is $F_\\infty$ by [lem-weil-pbc-colimit-constant-connected-diagram]. Apply [lem-weil-pbc-cohomology-colimit-of-sites] with the terminal triple at the distinguished stage; base change takes that triple to each terminal triple. We obtain $\\varinjlim_{J^{\\mathrm{op}}} H^p(P_j,F_j)\\cong H^p(P,F_\\infty)$ for $p\\ge0$, with the adjunction-unit pullback maps specified in that node. By [lem-sp-derived-functor-single-identification] these are the groups of $R\\Gamma(F[0])$; [lem-weil-pbc-derived-functor-negative-vanishing] gives zero in negative degrees. Thus the comparison is proved for a sheaf in degree zero.",
+   "uses": [
+    "lem-weil-pbc-colimit-constant-connected-diagram",
+    "lem-weil-pbc-cohomology-colimit-of-sites",
+    "lem-sp-derived-functor-single-identification",
+    "lem-weil-pbc-derived-functor-negative-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 09YP (lemma-colimit), with derived.tex Tag 05TC (lemma-negative-vanishing) for negative degrees."
+   }
+  },
+  {
+   "text": "For any geometric morphism $f$ in the system, its derived cohomological pullback is $R\\Gamma(\\eta_f)$ followed by the canonical composition identification $R\\Gamma Rf_*\\cong R\\Gamma$. The source categories are Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck], applied to the constant integer sheaf for abelian sheaves. K-injective resolutions exist by [lem-sfb-grothendieck-k-injective]. Right derived functors are triangulated by [lem-pc-right-derived-functor-triangulated], and exact inverse images induce triangulated functors by [lem-sf-exact-functor-derived-triangulated]. The derived unit commutes with shifts by [lem-weil-pbc-derived-adjunction-shift], and [lem-sfb-derived-composition-adjunction-normalization] fixes the composition comparison to the actual composite adjunction. Consequently the canonical pullback transformation commutes with shifts: the unit and composition maps are unchanged when the chosen resolutions are shifted. Its naturality on all three arrows of a distinguished triangle, including the shifted last arrow, makes a morphism of triangles. By [lem-weil-pbc-derived-cohomology-ladder] it therefore gives a morphism of long exact cohomology sequences.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-weil-pbc-derived-cohomology-ladder",
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Right derived functors and triangulated functors, together with the canonical adjunction normalization of the cited nodes; XI 2.7 (*) identifies the comparison as the functoriality map."
+   }
+  },
+  {
+   "text": "Let $L\\in D^+(P_{i_0},\\mathbb Z)$ and choose $a$ with $\\mathcal H^q(L)=0$ for $q<a$. We prove by induction on $b-a+1$ that the canonical comparison for $\\tau_{\\le b}L$ is an isomorphism in every degree. The base $b=a-1$ is the zero object: all its cohomology vanishes. For $b\\ge a$, [lem-weil-pbc-truncation-triangle] gives the functorial triangle $\\tau_{\\le b-1}L\\to\\tau_{\\le b}L\\to\\mathcal H^b(L)[-b]\\to$. Exact inverse image commutes with its kernels, images and quotients, hence with its truncations and cohomology sheaves; apply the exact derived functor from the preceding step. After derived sections the preceding step gives compatible long exact sequences at every stage and at the limit. Taking their filtered colimit keeps them exact by [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. The induction hypothesis and step 3, shifted by $-b$, give isomorphisms for the first and third vertices in all degrees. Apply [lem-weil-pbc-five-lemma] to each five-term segment with the middle group belonging to $\\tau_{\\le b}L$. This proves the induction claim, for all degrees, without a bound on the cohomological dimension of the sites.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle); exactness of filtered colimits and the five lemma are used as the cited generic tools."
+   }
+  },
+  {
+   "text": "Fix the required integer $n$. The functor $\\Gamma$ is additive left exact, so [lem-weil-pbc-derived-functor-truncation-iso] applies on every stage site and the limit site: the inclusion $\\tau_{\\le n}L\\to L$ induces an isomorphism on $H^nR\\Gamma$. Exact inverse image identifies these inclusions with the pullbacks of the distinguished-stage inclusion. The natural comparison square thus has three isomorphisms, the top one from step 5 when $n\\ge a$. If $n<a$, both sides vanish by [lem-weil-pbc-derived-functor-negative-vanishing]. This proves the abelian-complex continuity comparison for every integer $n$. In particular no infinite spectral-sequence passage or inverse-image preservation of injectives has been assumed.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-truncation-iso",
+    "lem-weil-pbc-derived-functor-negative-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TC (lemma-negative-vanishing), parts (1) and (2): derived sections are left t-exact and degree n sees only the upper truncation at n."
+   }
+  },
+  {
+   "text": "For the given constant ring $\\Lambda$, let $V$ forget the module action. By [lem-pe-constant-left-module-inverse-image], $Vu_i^*\\cong u_i^{-1}V$, with the same adjunction units and composition comparisons. By [lem-pe-left-module-derived-evaluation-forget], evaluation at each terminal triple gives $vR\\Gamma(K)\\cong R\\Gamma(VK)$, compatibly with the canonical global-cohomology pullbacks. Thus step 6 for $VK$ is exactly the underlying abelian-group comparison for the claimed module-cohomology map. A filtered colimit of modules has its underlying filtered colimit group, with action $\\lambda[x]=[\\lambda x]$; the equivalence relation respects the action because the transition maps are linear. The comparison is linear, and a bijective linear map has linear inverse, so the abelian isomorphism proves the required one for $\\Lambda$.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-pe-left-module-derived-evaluation-forget"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), extended to bounded-below derived evaluation as stated by the cited node."
+   }
+  },
+  {
+   "text": "The isomorphism throughout is the original canonical map: step 3 uses the pullback via the adjunction unit, and steps 5–6 only test that map for invertibility. For a map of complexes, or a morphism of inverse systems, the underived squares commute because they apply the same inverse-image units and the same cocone coprojections. [lem-weil-pbc-site-cohomology-pullback] supplies the naturality and composition identities on sheaves, and [lem-sfb-derived-composition-adjunction-normalization] supplies those same composite units on K-injective representatives. Naturality of units on complex morphisms and their composition identity therefore give these commuting squares already in the derived categories. Taking $H^n$, then the colimit, preserves the squares. The module comparisons of step 7 preserve the units as well, so the result is natural in $K$, commutes with restriction of inverse systems, and has the asserted adjunction-unit normalization. No coefficient torsion, constructibility, or dimension condition was used.",
+   "uses": [
+    "lem-weil-pbc-site-cohomology-pullback",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XI 2.7 (*) and the verification following (2.f), printed p. 180: identification with the actual functoriality map; generic normalization supplied by the cited nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-initial-functor-cofiltered-criterion",
+  "lem-trf-oriented-triple-limit-descent",
+  "lem-trf-qcqs-oriented-triple-presentation",
+  "lem-weil-pbc-colimit-of-sites",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-weil-pbc-cohomology-colimit-of-sites",
+  "lem-sp-derived-functor-single-identification",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-derived-functor-truncation-iso",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-weil-pbc-site-cohomology-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XI 2.5–2.7 provide the finite-cover triple-site and localization route; the general affine-transition statement is proved here using Stacks 09YP and finite truncation, rather than importing a general cohomology-of-topos-limits theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,7 +196,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-proper-fibre-exchange",
@@ -89,5 +221,124 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-oriented-derived-cohomology-continuity",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Added one statement-only geometric site-descent lemma, not a cohomology restatement. The eight-step proof passes to the refinement slice, constructs the correct finite-cover colimit site, proves sheaf continuity by the existing abstract theorem, and promotes it by a canonical-truncation five-lemma induction, then uses the arbitrary-constant-ring forgetting comparison. Exact search records and verbatim citation quotes accompany the report.",
+  "blueprint": "Proof (1),(2), specialization-to-the-normal-cone paragraph: nearby-cycle constructibility; the inverse-limit localization used in the proper oriented-image calculation of Orgogozo Lemma 9.1.1.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-initial-functor-cofiltered-criterion",
+    "why": "A functor out of a cofiltered category satisfying the two lifting conditions is initial; colimits over the opposite categories agree is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-of-sites",
+    "why": "The colimit of an inverse system of sites with finite coverings is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-constant-connected-diagram",
+    "why": "The colimit of a constant diagram over a connected (e.g. nonempty filtered) category is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-colimit-of-sites",
+    "why": "Cohomology on a colimit of sites is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-sp-derived-functor-single-identification",
+    "why": "The derived functor on an object placed in degree 0 computes the classical right derived functors is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-negative-vanishing",
+    "why": "Right derived functors move to the right is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Module sheaves over arbitrary ring sheaves are Grothendieck is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "The unbounded right derived functor is triangulated is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "An exact functor of abelian categories induces a triangulated functor on derived categories is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-adjunction-shift",
+    "why": "Canonical derived ringed-topos adjunction is shift-compatible is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Derived composition preserves the specified adjunction normalization is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-cohomology-ladder",
+    "why": "A morphism of distinguished triangles gives a morphism of the long exact cohomology sequences is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "The truncation triangle tau_{<=q-1}K -> tau_{<=q}K -> H^q(K)[-q] is distinguished is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "why": "Filtered colimits of abelian groups are exact is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-weil-pbc-five-lemma",
+    "why": "Five lemma in an abelian category is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-truncation-iso",
+    "why": "Low-degree cohomology of a right derived functor sees only low degrees is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Exact geometric inverse image with arbitrary constant left-module coefficients is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-pe-left-module-derived-evaluation-forget",
+    "why": "Derived evaluation of arbitrary left-module sheaves commutes with forgetting scalars is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-cohomology-pullback",
+    "why": "Pullback on cohomology over objects along a morphism of sites is used as generic category/site/derived-cohomology infrastructure; the normal-cone local-term unit does not replace this tool."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "K-injective existence in Grothendieck categories is a generic resolution tool for the site cohomology comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-initial-functor-cofiltered-criterion",
+  "lem-weil-pbc-colimit-of-sites",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-weil-pbc-cohomology-colimit-of-sites",
+  "lem-sp-derived-functor-single-identification",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-derived-functor-truncation-iso",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-sfb-grothendieck-k-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N5-aa718faaa",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-aa718faaa (reviewer sub-agent of L); spot-checked: Read the item, new node, unit/chapter route, all cited statements, sources, packet, report, and delivery errors A–F. Verified every proof step, hypotheses, coefficient/module comparison, finite-cover site descent, truncation induction, edge cases, duplicate search, Mathlib searches, and route-lock compliance. Review written to review.md."
  }
 }

@@ -15,9 +15,105 @@
   "def-sc-relative-differential-sheaf",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $W_0$ be the given trivializing open neighbourhood of $z$. The restriction $W_0\\to S$ is smooth by [lem-pc-open-immersion-smooth-composition]. Apply [lem-weil-pbc-smooth-locally-standard-smooth] to obtain affine neighbourhoods $U=\\operatorname{Spec}A\\subset W_0$ of $z$ and $V=\\operatorname{Spec}R\\subset S$ of $p(z)$, with $p(U)\\subset V$ and $A$ standard smooth over $R$. Write $s|_U=f$ in the restricted trivialization. By [lem-pc-zero-scheme-properties], $Z\\cap U=\\operatorname{Spec}B$, where $B=A/(f)$. Let $\\mathfrak q\\subset A$ be the prime of $z$; it contains $f$. Choose a presentation $A=R[x_1,\\ldots,x_n]/(g_1,\\ldots,g_c)$ as in [def-weil-pbc-standard-smooth-algebra], and write $a_i$ for the class of $x_i$. The matrix $J=(\\partial_i g_\\ell)_{1\\le\\ell,i\\le c}$ over $A$ has unit determinant (it is the transpose of the matrix in that definition).",
+   "uses": [
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-weil-pbc-smooth-locally-standard-smooth",
+    "lem-pc-zero-scheme-properties",
+    "def-weil-pbc-standard-smooth-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VC (lemma-open-immersion-smooth), 01VA (lemma-composition-smooth), 01V7 (lemma-smooth-locally-standard-smooth); algebra.tex, Tag 00T6 (definition-standard-smooth); divisors.tex, Tag 02OR (lemma-zero-scheme), (3)"
+   }
+  },
+  {
+   "text": "By [def-sc-relative-differential-sheaf], the restriction of $\\Omega^1_{W/S}$ to $U$ is $\\widetilde{\\Omega_{A/R}}$, carrying $d_{W/S}f$ to the universal $df$. By [lem-weil-pbc-spec-tilde-stalk-localization] and [lem-weil-pbc-affine-open-stalk-localization], its stalk at $z$ is $(\\Omega_{A/R})_{\\mathfrak q}$ over $A_{\\mathfrak q}=\\mathcal O_{W,z}$. Thus the vector in the hypothesis is $df\\otimes1$ in $\\Omega_{A/R}\\otimes_A\\kappa(z)$: the identification sends $(\\omega/u)\\otimes\\lambda$ to $\\omega\\otimes(\\bar u^{-1}\\lambda)$, with inverse $\\omega\\otimes\\lambda\\mapsto(\\omega/1)\\otimes\\lambda$. By [lem-weil-pbc-standard-smooth-kahler-basis], $da_{c+1},\\ldots,da_n$ form an $A$-basis. Write $df=\\sum_{i>c}b_i\\,da_i$. Tensoring this finite free module gives $\\kappa(z)^{n-c}$ with those basis vectors. Nonvanishing therefore gives an index $j>c$ with $b_j\\notin\\mathfrak q$. In particular $n>c$; the case $n=c$ cannot satisfy the hypothesis.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-standard-smooth-kahler-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T7 (lemma-standard-smooth), (2); schemes.tex, Tag 01HV (lemma-spec-sheaves), (6),(7); morphisms.tex, Tag 01UT (lemma-differentials-affine)"
+   }
+  },
+  {
+   "text": "Choose a polynomial $h\\in R[x_1,\\ldots,x_n]$ mapping to $f$. All partial derivatives in this step are evaluated at $(a_1,\\ldots,a_n)$. Put $k_i=(\\partial_i g_\\ell)_{\\ell=1}^c$ for $i>c$ and $u=(\\partial_1h,\\ldots,\\partial_ch)$. The derivation rules of [def-weil-pbc-kahler-differentials], applied to monomials and then sums, give $dG(a)=\\sum_i(\\partial_iG)(a)\\,da_i$ for any polynomial $G$. Apply this to $g_\\ell(a)=0$. In column notation the resulting identities are $J(da_1,\\ldots,da_c)^{\\mathrm t}=-\\sum_{i>c}k_i\\,da_i$. Since $J^{-1}=(\\det J)^{-1}\\operatorname{adj}(J)$ exists, substitute into $df=dh(a)$ to obtain\n$$b_i=\\partial_i h-uJ^{-1}k_i\\quad(i>c).$$\nThese are the coefficients of Step 2 by uniqueness in its cited basis; no exactness or flatness of a tensor functor has been used.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T7 (lemma-standard-smooth), proof, explicit elimination in the displayed naive cotangent complex; polynomial derivation rules expanded here"
+   }
+  },
+  {
+   "text": "Let $\\Delta\\in R[x_1,\\ldots,x_n]$ be the determinant of the Jacobian of $(g_1,\\ldots,g_c,h)$ with columns $x_1,\\ldots,x_c,x_j$. Over $A$, the first $c$ rows of this matrix form the block $(J\\mid k_j)$, and its last row is $(u,\\partial_jh)$.\nSubtract $uJ^{-1}$ times the first $c$ rows from the last row. The determinant is unchanged, and the last row becomes $(0,\\ldots,0,b_j)$ by Step 3. Hence $\\Delta(a)=\\det(J)b_j$. Since $\\det J$ is a unit and $b_j\\notin\\mathfrak q$, $\\Delta(a)\\notin\\mathfrak q$. Let $\\delta$ be its image in $B=A/(f)$ and $\\overline{\\mathfrak q}=\\mathfrak q/(f)$. Then $\\delta\\notin\\overline{\\mathfrak q}$, so $z$ belongs to $D_B(\\delta)$. The same computation includes $c=0$: the empty determinant is $1$, and $\\Delta=\\partial_jh$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T6 (definition-standard-smooth), enlarged minor for the extra equation; block determinant calculation supplied explicitly"
+   }
+  },
+  {
+   "text": "Put $C=B[1/\\delta]$, the localization of [def-weil-ring-localization-away]. It has the explicit $R$-algebra presentation\n$$C\\cong R[x_1,\\ldots,x_n,t]/(g_1,\\ldots,g_c,h,t\\Delta-1).$$\nIndeed, send $x_i$ to the image of $a_i$ and $t$ to $\\delta^{-1}$. Conversely the classes of $x_i$ induce a map from $B$, and $t\\Delta=1$ makes $\\delta$ invertible, so it extends to $C$. These maps fix every generator in either direction and are inverse. Order the variables with $x_1,\\ldots,x_c,x_j,t$ first; these are $c+2$ distinct variables since $j>c$. The Jacobian of the $c+2$ equations with respect to these variables has upper-right column zero and bottom-right entry $\\Delta$, while its upper-left $(c+1)$-square block has determinant $\\Delta$. Its determinant is therefore $\\Delta^2$, a unit in $C$. Thus this presentation is standard smooth by [def-weil-pbc-standard-smooth-algebra]. The inequality on the numbers of equations and variables is $c+2\\le n+1$, which holds because $n>c$.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-standard-smooth-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T6 (definition-standard-smooth); explicit localization presentation as in Example 00T8 (example-make-standard-smooth)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-standard-smooth-is-smooth], $C$ is smooth over $R$. By [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], $\\operatorname{Spec}C\\to V$ is smooth. By [lem-weil-pbc-principal-localization-open-immersion], $\\operatorname{Spec}C=D_B(\\delta)$ is an open subscheme of $\\operatorname{Spec}B=Z\\cap U$, containing $z$ by Step 4. It is consequently an open neighbourhood of $z$ in $Z$. Its composite to $S$ is smooth in [def-sbc-smooth-morphisms]: local finite presentation is checked using the same affine target neighbourhood $V\\subset S$. For formal smoothness, any first order thickening $T\\subset T'$ of affine schemes over $S$ with $T\\to\\operatorname{Spec}C$ has $T'\\to S$ factoring through $V$, because $T$ and $T'$ have the same underlying topological space and $T$ maps into $V$. The smooth map $\\operatorname{Spec}C\\to V$ supplies the required lift of $T\\to\\operatorname{Spec}C$ over $V$, hence over $S$. This proves smoothness on the exhibited open neighbourhood, with no assumed flatness of $B$ or $Z\\to S$.",
+   "uses": [
+    "lem-weil-pbc-standard-smooth-is-smooth",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T7 (lemma-standard-smooth), (1); morphisms.tex, Tag 01V6 (lemma-smooth-characterize); more-morphisms.tex, Tag 02H6 (lemma-smooth-formally-smooth); schemes.tex, Tag 01I3 (lemma-standard-open-affine)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-smooth-locally-standard-smooth",
+  "lem-pc-zero-scheme-properties",
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-sc-relative-differential-sheaf",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-standard-smooth-kahler-basis",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-standard-smooth-is-smooth",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00T6 (definition-standard-smooth) and 00T7 (lemma-standard-smooth), (1),(2); explicit enlarged-minor argument between the cited local-chart and standard-smooth results",
+  "group": "N9",
+  "date": "2026-10-18"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -74,10 +170,52 @@
    "results": "{\"t\": \"2026-10-17T18:17:16Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth hypersurface criterion using the relative Kahler differential of one equation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.IsStandardSmooth\", \"Algebra.instSmoothOfIsStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"RingHom.IsStandardSmoothOfRelativeDimension\"], \"digest\": \"533bae546ef86f0f\"}; Read the returned hits: local algebra Jacobian criteria and standard-smooth presentations are related, but none states this scheme-level local hypersurface criterion in one specialization. Quotient.lean concerns square-zero quotients, not this assertion.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hypersurface|smooth.*quotient|quotient.*smooth|jacobian",
+   "results": "{\"t\": \"2026-10-17T19:43:19Z\", \"tool\": \"grep\", \"query\": \"hypersurface|smooth.*quotient|quotient.*smooth|jacobian\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/Quotient.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\"], \"digest\": \"e820a6bf9f276070\"}; Read Mathlib/RingTheory/Smooth/Local.lean (local Jacobian injectivity requires the full conormal comparison), StandardSmoothOfFree.lean (requires H1 vanishing and a differential basis), and Quotient.lean (square-zero descent). These and the scheme smooth-chart API do not state this hypersurface implication in one specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A zero scheme of a function on a smooth scheme is smooth wherever its differential does not vanish",
+   "results": "{\"t\": \"2026-10-17T19:43:20Z\", \"tool\": \"leansearch\", \"query\": \"A zero scheme of a function on a smooth scheme is smooth wherever its differential does not vanish\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.Scheme.zeroLocus\", \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"AlgebraicGeometry.IsSmooth.mk\", \"Algebra.smoothLocus\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"Bundle.mdifferentiableOn_zeroSection\"], \"digest\": \"f0bde0a31785ee8a\"}; Read Mathlib/RingTheory/Smooth/Local.lean (local Jacobian injectivity requires the full conormal comparison), StandardSmoothOfFree.lean (requires H1 vanishing and a differential basis), and Quotient.lean (square-zero descent). These and the scheme smooth-chart API do not state this hypersurface implication in one specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, KaehlerDifferential",
+   "results": "{\"t\": \"2026-10-17T19:43:20Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Smooth, KaehlerDifferential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/RingTheory/Smooth/Local.lean (local Jacobian injectivity requires the full conormal comparison), StandardSmoothOfFree.lean (requires H1 vanishing and a differential basis), and Quotient.lean (square-zero descent). These and the scheme smooth-chart API do not state this hypersurface implication in one specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A hypersurface in a smooth scheme over a base is smooth at a point where the relative differential of its equation is nonzero",
+   "results": "{\"t\": \"2026-10-17T19:43:30Z\", \"tool\": \"leanfinder\", \"query\": \"A hypersurface in a smooth scheme over a base is smooth at a point where the relative differential of its equation is nonzero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"Algebra.basicOpen_subset_smoothLocus_iff\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\"], \"digest\": \"3bf583c1eb668b4a\"}; Read Mathlib/RingTheory/Smooth/Local.lean (local Jacobian injectivity requires the full conormal comparison), StandardSmoothOfFree.lean (requires H1 vanishing and a differential basis), and Quotient.lean (square-zero descent). These and the scheme smooth-chart API do not state this hypersurface implication in one specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsStandardSmooth|basis_kaehlerDifferential|isUnit_jacobian",
+   "results": "{\"t\": \"2026-10-17T19:43:37Z\", \"tool\": \"grep\", \"query\": \"IsStandardSmooth|basis_kaehlerDifferential|isUnit_jacobian\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\"], \"digest\": \"7fc35fdce8d399c9\"}; Read Mathlib/RingTheory/Smooth/Local.lean (local Jacobian injectivity requires the full conormal comparison), StandardSmoothOfFree.lean (requires H1 vanishing and a differential basis), and Quotient.lean (square-zero descent). These and the scheme smooth-chart API do not state this hypersurface implication in one specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotient of a smooth algebra by a single equation with a nonzero cotangent vector is smooth near that prime",
+   "results": "{\"t\": \"2026-10-17T19:43:48Z\", \"tool\": \"leanfinder\", \"query\": \"Quotient of a smooth algebra by a single equation with a nonzero cotangent vector is smooth near that prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsSmoothAt\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.smoothLocus\", \"Algebra.IsStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.instSmoothOfIsStandardSmooth\"], \"digest\": \"686f6d1bd0a64ab7\"}; Read Mathlib/RingTheory/Smooth/Local.lean (local Jacobian injectivity requires the full conormal comparison), StandardSmoothOfFree.lean (requires H1 vanishing and a differential basis), and Quotient.lean (square-zero descent). These and the scheme smooth-chart API do not state this hypersurface implication in one specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-bertini-singular-locus-dimension",
@@ -97,5 +235,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-hypersurface-nonzero-relative-differential",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split it in six steps, using only existing nodes. The proof restricts to a standard smooth chart inside the given trivialization, identifies the nonzero differential with a nonzero basis coefficient, computes the enlarged Jacobian determinant, and writes an explicit standard smooth presentation after inverting that determinant. No flatness hypothesis is introduced. Mathlib and project-source searches found no exact attachment or leaf.",
+  "blueprint": "Realizes the nonzero-derivative smoothness input in the second paragraph of lem-zl-bertini-finite-cover-curve.proof.md (main-20261015), through the inherited singular-locus-dimension / smooth-member ancestry. It supplies the one-way smoothness implication needed by the universal-family argument of Stacks 0FD6.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-open-immersion-smooth-composition",
+    "why": "Restricts the smooth ambient morphism to its trivializing open; this is a generic scheme tool, not a replacement of the Bertini route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-locally-standard-smooth",
+    "why": "Provides the standard smooth affine chart for the ambient morphism; the real-sheaf unit has no such local algebra statement."
+   },
+   {
+    "node": "lem-pc-zero-scheme-properties",
+    "why": "Provides the affine quotient description of the zero scheme of a section; a generic zero-scheme tool for the same Bertini route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Identifies the chart local ring and germ map with localization so the nonzero residue differential is computed in the correct field."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Converts the constructed smooth algebra into a smooth affine scheme morphism in the formally smooth conventions used by the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-smooth-locally-standard-smooth",
+  "lem-pc-zero-scheme-properties",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N9-35d6b05f6",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N9-35d6b05f6 (reviewer sub-agent of L); spot-checked: Read the complete item, six steps, cited statements, Stacks sources and current blueprint route. The enlarged Jacobian minor and localization presentation prove smoothness without assuming flatness of Z. Edge cases, duplicate candidates and dependency closure checked; no new nodes, long-step violations or repairs. Accepted generic tool uses are documented in review.md."
  }
 }

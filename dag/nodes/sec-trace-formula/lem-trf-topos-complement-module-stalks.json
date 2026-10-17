@@ -14,9 +14,144 @@
   "def-weil-sheaf-of-modules-category",
   "def-trf-geometric-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a geometric morphism between sites, inverse image on sheaves of modules over a constant commutative ring is obtained by applying the abelian inverse image and transporting the constant scalar action. The scalar comparison is canonical, and the abelian inverse image is exact; hence module inverse image is exact and is compatible with composition and localization.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi"
+   }
+  },
+  {
+   "text": "Use [lem-trf-topos-localization-site-presentation] for $A=u$, so $\\mathcal E=\\operatorname{Sh}(\\mathcal C)$, $u=h_U$, and the open slice is presented by $\\mathcal C/U$ with restriction as inverse image. Since $h_U$ is subterminal and the topology is subcanonical, every $V$ has at most one arrow to $U$. The coefficient identification of step 1 identifies the restricted constant ring with the constant ring on the slice. Apply [lem-pur-site-restriction-module-adjunction-exact] to this ringed site. It constructs the exact module functor $j_!$ and the adjunction $j_!\\dashv j^*$.",
+   "uses": [
+    "lem-trf-topos-localization-site-presentation",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CI (lemma-topos-good-site) and 04GZ (lemma-localize-topos); sites-modules.tex Tags 03DI and 03DJ."
+   }
+  },
+  {
+   "text": "Compute the open adjunction unit using [def-weil-extension-by-zero-presheaf]. At $V\\to U$ its sole summand is $G(V\\to U)$, and the unit is inclusion of that summand, hence the identity. Sheafifying and then restricting gives the same result: every covering and every refinement of an object $V\\to U$ in $\\mathcal C$ has its unique induced structure maps to $U$, so the matching families and their equivalence relations used in sheafification are exactly those on $\\mathcal C/U$. The restricted presheaf is already $G$, a sheaf, and therefore $\\eta^j_G:G\\to j^*j_!G$ is an isomorphism. This also proves full faithfulness of $j_!$.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), summand formula and adjunction; Tag 0F6Z (lemma-restrict-back), at-most-one-arrow case; Tag 03CY, module sheafification."
+   }
+  },
+  {
+   "text": "Apply the closed-complement module statement to the complementary embedding k. Its module direct image k_* is exact and fully faithful, the counit k^*k_*H → H is an isomorphism, and its essential image is precisely the modules F whose restriction to the open subtopos is zero. Thus the unit F → k_*k^*F is an isomorphism for every module supported on the closed complement.",
+   "uses": [
+    "lem-trf-oriented-closed-base-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 08LY, 08M1; sites-modules.tex Tag 08M3"
+   }
+  },
+  {
+   "text": "For a point p:Set→E, the inverse image p^{-1}u is a subterminal set, hence is either empty or singleton. These alternatives are mutually exclusive and exhaustive. The universal property of the complementary open and closed subtopoi then factors p uniquely up to the specified compatible isomorphism through j or k, respectively; write the factors as p=jp_o or p=kp_c.",
+   "uses": [
+    "lem-trf-topos-complement-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 08LW, 08LY and 08M0"
+   }
+  },
+  {
+   "text": "The support characterization in step 3 gives $j^*k_*H=0$. For any closed module $H$, the two adjunctions give $\\operatorname{Hom}(k^*j_!G,H)\\cong\\operatorname{Hom}(j_!G,k_*H)\\cong\\operatorname{Hom}(G,j^*k_*H)=0$. Taking $H=k^*j_!G$ makes its identity zero, so $k^*j_!G=0$. Thus both zero restrictions hold as objects of the module categories, without any assumption that the topos has enough points.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-trf-oriented-closed-base-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 08LY and 08M1, through the cited closed-support module theorem; sites-modules.tex Tag 03DI for the open adjunction."
+   }
+  },
+  {
+   "text": "For an open point use $p^*\\cong p_o^*j^*$, the composition comparison of [lem-pe-constant-left-module-inverse-image]. Applying $p_o^*$ to the open unit isomorphism gives $p^*j_!G\\cong p_o^*G$; applying it to $j^*k_*H=0$ gives $p^*k_*H=0$. For a closed point use $p^*\\cong p_c^*k^*$ instead. The zero restriction $k^*j_!G=0$ gives $p^*j_!G=0$, and the closed counit isomorphism $k^*k_*H\\to H$ gives $p^*k_*H\\cong p_c^*H$. These are natural because all four identifications come from natural adjunction maps, zero objects and the natural composition comparison.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-trf-topos-complement-factorization",
+    "lem-trf-oriented-closed-base-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, functorial inverse image; Tags 08LW and 08LY, complementary subtopoi. The resulting open point formulas agree with sites-modules.tex Tag 0710."
+   }
+  },
+  {
+   "text": "Let $\\epsilon^j:j_!j^*\\to1$ and $\\eta^k:1\\to k_*k^*$ be the actual adjunction maps. The triangle identity $j^*(\\epsilon^j_F)\\circ\\eta^j_{j^*F}=1$ shows that $j^*(\\epsilon^j_F)$ is the inverse of the open unit isomorphism. Similarly $\\epsilon^k_{k^*F}\\circ k^*(\\eta^k_F)=1$, and $\\epsilon^k$ is the closed counit isomorphism, so $k^*(\\eta^k_F)$ is its inverse. Apply $p_o^*$ or $p_c^*$ and the preceding composition identifications. Under exactly these identifications the counit at an open point and the unit at a closed point are identity maps, as asserted.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-trf-oriented-closed-base-localization",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, adjunction maps; sites.tex Tags 00YV, 08LY and 08M1. The identities are the two adjunction triangle identities."
+   }
+  },
+  {
+   "text": "The point inverse image of a module sheaf is exact by the general module inverse-image result in step 1. Therefore all point inverse images on module sheaves, including p_o^* and p_c^*, are exact.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV"
+   }
+  },
+  {
+   "text": "All asserted conclusions now follow from the adjunctions, support characterization, zero restrictions, point factorization and exact inverse image already established. If $u=0$, then $\\mathcal E/u$ is the empty topos and $\\mathcal E_c\\simeq\\mathcal E$, so $j_!$ is zero and $k$ is the identity. If $u=1$, then $j$ is the identity and the closed complement is the empty topos. If $\\Lambda=0$, all module categories are zero. A topos with no points causes no problem: the point assertions are conditional on a given point, and the zero restrictions were proved by adjunction, not by stalk conservativity.",
+   "uses": [
+    "lem-trf-topos-complement-factorization",
+    "lem-trf-oriented-closed-base-localization",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI, 04EQ and 0710; sites.tex Tags 08LY and 08M1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-trf-oriented-closed-base-localization",
+  "lem-trf-topos-complement-factorization",
+  "lem-trf-topos-localization-site-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "03DI/03DJ for the site adjunction; 0F6Z for its subterminal unit calculation; sites.tex 03CI/04GZ for the site presentation, 00YV for inverse image, and 08LY/08M1 for the complementary closed subtopos. The point and adjunction-map formulas are the explicit categorical deductions in steps 6–8; their open part agrees with 0710."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +194,45 @@
    "results": "{\"t\": \"2026-10-17T19:23:07Z\", \"tool\": \"leanfinder\", \"query\": \"Modules supported on the closed complement of an open subtopos are exactly closed direct images; extension by zero has zero closed stalks and its original open stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.exists_const\", \"ModuleCat.Tilde.sectionsSubmodule\", \"ModuleCat.Tilde.isFractionPrelocal\", \"ModuleCat.Tilde.isLocallyFraction\", \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"ModuleCat.Tilde.isLocallyFraction_pred\", \"AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero\", \"StalkSkyscraperPresheafAdjunctionAuxs.toSkyscraperPresheaf_app\"], \"digest\": \"292d80d7c4f3db5e\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned signatures; localized O_X modules, zero loci and topological skyscraper adjunctions do not state the general topos support and stalk assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Module sheaves on a Grothendieck topos complementary open and closed subtopoi point stalk formulas",
+   "results": "ModuleCat.Tilde.toOpen_germ_apply, ModuleCat.Tilde.toOpen_germ, ModuleCat.Tilde.toStalk, TopCat.stalkToFiber; these concern schemes/topological stalks and do not state the general topos theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, ModuleCat, point stalk, extension by zero",
+   "results": "loogle parser rejected the comma-separated input (unknown/invalid identifier); no declaration returned.",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "extension.?by.?zero|closed.?subtopos|sheafFiber [Mathlib/CategoryTheory/Sites]",
+   "results": "no hits in Mathlib/CategoryTheory/Sites.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a Grothendieck topos open and closed embeddings extension by zero and direct image have point stalk formulas",
+   "results": "TopCat.Presheaf.stalk, TopCat.Presheaf.stalkFunctor, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso and related topological/scheme stalk declarations; no general topos module statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf,Adjunction,ModuleCat",
+   "results": "loogle returned 0 hits and reported unknown identifier Sheaf.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-source-localization",
@@ -74,7 +244,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Nearby-cycle finiteness input used in the normal-cone specialization argument: open/closed source reduction before cohomology strata. Generic topos input for the proof of source localization.",
+   "place": "Generic open/closed topos and module input used by the source-localization proof: module adjunctions, closed support, and point stalk calculations.",
    "via": [
     "lem-trf-oriented-source-localization",
     "lem-trf-psi-proper-surjective-constructibility",
@@ -86,5 +256,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-topos-complement-module-stalks",
+  "worker": "stage1",
+  "summary": "Maintainer repair: made the small site/slice presentation a cited prerequisite; corrected the direction of the open unit and wrote its unique-summand calculation; derived the zero restrictions by the two adjunctions and all point formulas and map identities by composition and triangle identities. Corrected the degenerate-case discussion. The theorem statement is unchanged.",
+  "blueprint": "The ten steps supply the generic module open/closed input at the existing source-localization ancestor place. The added presenting-site lemma is independent of trace, duality, coefficients and the parent theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-oriented-closed-base-localization",
+    "why": "Its generic closed-complement module theorem supplies exact fully faithful k_* and the support characterization required here."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Its generic constant-ring module inverse-image theorem supplies exactness for every point and geometric morphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-oriented-closed-base-localization",
+  "lem-pe-constant-left-module-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-4e46492e4",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-4e46492e4 (reviewer sub-agent of L); spot-checked: Read the mathematics and cited sources in full. Repaired the missing site-presentation prerequisite, reversed open-unit arrow, and incomplete point/adjunction calculations. Corrected the u=0/u=1 edge cases. Statement unchanged; no cycles, dropped machinery, or long non-elementary steps. Two corrected JSON files and detailed source checks are recorded in review.md.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

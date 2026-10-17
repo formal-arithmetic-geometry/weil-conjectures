@@ -37,9 +37,99 @@
   "def-weil-pbc-qbar-category",
   "def-weil-derived-pullback-tensor-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "At finite level, the Kummer sheaf $\\mu_{\\ell^r,X}$ is etale locally the constant cyclic sheaf and its transition maps are the power maps. The finite Tate sheaf construction and the finite-twist line lemma therefore identify $T_{E,n}$ with the locally constant rank-one sheaf $A_{E,n}(m)$ and identify reduction along $A_{E,n+1}\\to A_{E,n}$ with the displayed map; for $m<0$ the same assertion follows by taking the sheaf dual of the positive twist, using the invertibility of the Tate line. The compatible locally free rank-one reductions are exactly a lisse $\\mathcal O_E$-sheaf of rank one in the adic sense, and their scalar extension to a common finite stage gives a lisse $\\overline{\\mathbf Q}_\\ell$-sheaf with one-dimensional geometric fibres. The common-stage construction is independent of the chosen finite coefficient field $E$ up to its canonical scalar-extension identifications. More explicitly, $\\ell=u\\varpi_E^e$ with $e\\geq1$, so $\\ell^nA_{E,n}=0$. On an etale cover with a primitive $\\ell^{n+1}$-st root $\\zeta$, the transition sends the generator $\\zeta$ to the primitive root $\\zeta^\\ell$, so after coefficient reduction its matrix is $1$. Tensor powers and the inverse of the dual base-change isomorphism give the same matrix for every signed twist. At a geometric point compatible bases can be chosen successively, since units of $A_{E,n}$ lift to units of $A_{E,n+1}$; their inverse limit is a basis over $\\mathcal O_E$.",
+   "uses": [
+    "def-asd-finite-etale-tate-sheaf",
+    "lem-asd-finite-etale-twist-line",
+    "lem-pur-twist-sheaf-locally-free",
+    "det-def-sp-tate-twist-locally-free",
+    "def-pod-lisse-l-adic-sheaves",
+    "def-pod-lisse-adic-fibre-functors",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 5.1.5; Definition 6.8.3 and Proposition 6.8.4(1); Remark 6.8.15, together with the finite etale Kummer construction"
+   }
+  },
+  {
+   "text": "For a finite etale $X$-scheme $P$, the comparison adjunction identifies $\\nu_X^*h_P$ with the pro-etale sheaf represented by the same $P$: maps from either object to $G$ are $G(P)$, by adjunction and Yoneda, naturally in $P$. Apply this to the finite etale roots-of-unity schemes and their power maps. The exact constant-coefficient inverse image of [lem-sf-comparison-pullback-exact] and the tensor comparison of [lem-weil-pbc-ringed-topoi-module-pullback-tensor] then identify the positive finite twists. For a rank-one line the pullback of its dual is its dual, since the evaluation comparison is the identity on a local basis; this gives the negative twists too. The Kummer-level independence in [det-def-sp-tate-twist-locally-free], clause 2, and the reduction formula of [lem-pur-twist-sheaf-locally-free] identify these objects with $A_{E,n}(m)_X$, compatibly with coefficient reduction. For the inverse limit, use the compatible primitive-root pro-etale cover of [det-def-sp-tate-twist-locally-free], clause 1. On its slice site the canonical maps $\\mathcal O_E(m)_X\\to A_{E,n}(m)_X$ are the quotient maps $\\widehat{\\mathcal O}_{E,X}\\to(A_{E,n})_X$ in the induced tensor or dual bases. Their limit is an isomorphism by the definition of the completed coefficient sheaf. Slice restriction commutes with limits (sections on each object compute both limits), so these canonical local isomorphisms prove $\\mathcal O_E(m)_X\\cong\\varprojlim_n\\nu_X^*T_{E,n}$ globally. No assertion that $\\nu_X^*$ commutes with infinite limits is used.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-pur-twist-sheaf-locally-free",
+    "def-coefficient-twists-detailed",
+    "det-def-sp-tate-twist-locally-free",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Section 099R (section-comparison), Lemma 0GLZ (lemma-describe-pullback-from-etale); sites-modules.tex Tags 04JC and 03EL; Bhatt–Scholze Corollary 5.1.5 and Proposition 6.8.4(1); compatible Kummer bases as in the cited twist nodes"
+   }
+  },
+  {
+   "text": "The integral categories underlying [def-weil-pbc-qbar-category] and [def-weil-derived-pullback-tensor-hom] must first be compared. The scheme $X$ is noetherian and finite-dimensional with $\\ell$ invertible. Thus [lem-weil-pbc-integral-stratified-perfect-characterization] identifies their integral full subcategories inside the derived category over the same completed coefficient sheaf, with the same reductions; in particular it supplies the required compatible etale-origin witnesses. Both rationalizations have the same objects and Hom groups tensored with $E$. The coefficient changes of [prop-weil-pbc-scalar-extension] are ordinary derived extension of completed coefficient rings. Those in [def-weil-rationalization-karoubi] are their completed versions, and [lem-weil-finite-free-completed-scalar-comparison] identifies them by the canonical quotient-tower map. Hence the common-stage constructions agree with these specified comparisons, rather than merely sharing notation. The line from Step 2 is therefore an object of the stated category; its rationalization at stage $E$ is exactly the twist object of [def-coefficient-twists-detailed].",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-pbc-qbar-category",
+    "def-weil-derived-pullback-tensor-hom",
+    "prop-weil-pbc-scalar-extension",
+    "def-weil-rationalization-karoubi",
+    "def-coefficient-twists-detailed",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.5.1, Proposition 6.6.11 and Proposition 6.8.11(3), with the explicitly strengthened category comparison stated by lem-weil-pbc-integral-stratified-perfect-characterization; Lemma 6.5.5; the cited DAG scalar-localization definitions"
+   }
+  },
+  {
+   "text": "Choose a common finite coefficient field for $K$ and the line, and let $C$ be the integral representative of $K$ there, justified by Step 3. Put $B=\\widehat{\\mathcal O}_{E,X}$ and $L=\\mathcal O_E(m)_X$. The invertibility and integral membership assertions of [prop-weil-twist-preserves] give $L\\in D^b_c(X,\\mathcal O_E)$. Since noetherian $X$ is quasi-compact and separated $X$ is quasi-separated, [lem-fix-constructible-tensor-completion] applies to $C,L$: the ordinary product $C\\otimes_B^L L$ is derived complete and its canonical quotient-tower comparison to $C\\widehat\\otimes^L_{\\mathcal O_E}L$ is an isomorphism, natural in $C$. Step 2 identifies $L$ with the lisse realization of $\\mathcal T_E$. Thus the ordinary twist of [def-coefficient-twists-detailed] and the completed tensor of [def-weil-derived-pullback-tensor-hom] agree by this specified map. Rationalize and apply the common-stage tensor operation in that definition. Its scalar-extension comparisons and their tower compatibility, together with the coefficient compatibility of twisting supplied by [prop-weil-twist-preserves], make the resulting natural isomorphism independent of enlarging the field. This gives $K(m)\\cong K\\otimes^L\\mathcal T$ and the asserted integral completeness. All integral tensors here are over $B$, never the discrete constant sheaf $(\\mathcal O_E)_X$.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-twist-sheaf-locally-free",
+    "prop-weil-twist-preserves",
+    "det-def-sp-tate-twist-locally-free",
+    "lem-fix-constructible-tensor-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.5, pp. 49–50; Definition 3.4.10 and Lemma 3.4.12(4), pp. 22–23; common-stage operations as specified in the cited DAG definitions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-asd-finite-etale-tate-sheaf",
+  "def-coefficient-twists-detailed",
+  "def-pod-lisse-adic-fibre-functors",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-qbar-category",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-rationalization-karoubi",
+  "det-def-sp-tate-twist-locally-free",
+  "lem-asd-finite-etale-twist-line",
+  "lem-fix-constructible-tensor-completion",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-twist-preserves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Corollary 5.1.5, Definition 6.8.3, Proposition 6.8.4(1), Remark 6.8.15; finite Kummer construction and common-stage coefficient definitions"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -71,7 +161,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -88,5 +178,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-tate-twist-lisse-line",
+  "worker": "stage1",
+  "summary": "Audited the imported three-clause Tate-twist statement against the Kummer construction and Bhatt–Scholze pro-etale lisse formalism. Added three proof steps: finite-level Kummer reductions and rank-one lisse structure, comparison pullback and inverse-limit identification, and the common-stage derived-tensor identification for arbitrary complexes. The statement and hypotheses are unchanged; no new DAG nodes were needed because the required finite twist, locally-free completed twist, coefficient, comparison, lisse, and tensor facts are existing nodes. Maintainer repair: made finite-site comparison explicit, cited the existing theorem identifying the two integral categories and the finite-free scalar comparison, and cited the canonical ordinary/completed constructible tensor comparison. The proof now has four steps; no statement changes or new nodes.",
+  "blueprint": "The steps realize the parent blueprint proof sentence that the twist $(d)$ is lisse of rank one and hence can be used as the tensor line; the finite-level and common-stage details follow the coefficient-twist definition and Bhatt–Scholze §§5.1, 6.8."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q121-1d66be6a2",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q121-1d66be6a2 (reviewer sub-agent of L); spot-checked: Read the mathematics and cited sources in full. Repaired three implicit comparisons using existing DAG lemmas: finite-site pullback, coefficient-category agreement, and ordinary/completed tensor. Statement unchanged; no new nodes. Corrected JSON is under fixes/dag/nodes/; concrete checks and source locations are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -12,9 +12,49 @@
   "def-pc-field-extension",
   "def-weil-algebraic-element"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $r=0$, take $x=0\\in J$; the indexed conclusion is empty. Assume $r>0$. For each $i$ put $J_i=J\\mathfrak p_1\\cdots\\widehat{\\mathfrak p_i}\\cdots\\mathfrak p_r$. This ideal is not contained in $\\mathfrak p_i$: choose $a\\in J\\setminus\\mathfrak p_i$, and for each $j\\ne i$ choose $b_j\\in\\mathfrak p_j\\setminus\\mathfrak p_i$, possible by the hypothesis that no two primes contain one another. The product $a\\prod_{j\\ne i}b_j$ lies in $J_i$ and is outside $\\mathfrak p_i$, since a prime containing a finite product contains one factor. (For $r=1$ the empty product is $1$.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 0GTE, proof lines 8577–8581, with Algebra Lemma Tag 07K1 (product of ideals in a prime)"
+   }
+  },
+  {
+   "text": "Fix $i$. For the affine scheme $\\operatorname{Spec}(B)$ and the prime $\\mathfrak p_i$, the local ring is $B_{\\mathfrak p_i}$ and its residue field is $B_{\\mathfrak p_i}/\\mathfrak p_iB_{\\mathfrak p_i}$. Writing $S=(B/\\mathfrak p_i)\\setminus\\{0\\}$, localization commutes with this quotient, so this quotient is $S^{-1}(B/\\mathfrak p_i)=\\operatorname{Frac}(B/\\mathfrak p_i)$; this is the affine residue-field definition [def-weil-residue-field]. Choose a transcendental $\\xi_i\\in\\kappa(\\mathfrak p_i)$, which exists because $\\kappa(\\mathfrak p_i)/k_i$ is not algebraic. Write $\\xi_i=u/v$ with $u\\in B$ and $v\\notin\\mathfrak p_i$. Since $J_i\\not\\subseteq\\mathfrak p_i$, choose $c\\in J_i\\setminus\\mathfrak p_i$ and rewrite $\\xi_i=(uc)/(vc)$. Then $a_i=uc$ and $b_i=vc$ belong to $J_i$, while $b_i\\notin\\mathfrak p_i$ because $\\mathfrak p_i$ is prime. If both images of $a_i$ and $b_i$ in $\\kappa(\\mathfrak p_i)$ were algebraic over $k_i$, their quotient would be algebraic over $k_i$ (the algebraic elements in a field extension form a subfield), contradicting the transcendence of $\\xi_i$. Thus one of $a_i,b_i$ has transcendental image; choose $x_i$ to be that element. This gives $x_i\\in J_i$ with transcendental image over $k_i.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-pc-field-extension",
+    "def-weil-algebraic-element"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 0GTE, proof lines 8582–8587"
+   }
+  },
+  {
+   "text": "Set $x=x_1+\\cdots+x_r$. Since each $x_i\\in J_i\\subseteq J$, we have $x\\in J$. For a fixed $i$, every $x_j$ with $j\\ne i$ lies in $\\mathfrak p_i$ because $J_j$ contains the factor $\\mathfrak p_i$; hence the image of $x$ in $\\kappa(\\mathfrak p_i)$ equals the image of $x_i$, which is transcendental over $k_i$. Therefore this single $x$ has the required property at all the prime ideals.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 0GTE, proof lines 8588–8592"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-element",
+  "def-pc-field-extension",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma Tag 0GTE (lemma-silly), proof lines 8577–8592"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,7 +86,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-generic-principal-coordinate-dimension-drop",
@@ -74,5 +114,23 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-prime-transcendental-coordinate",
+  "worker": "stage1",
+  "summary": "Expanded the imported Stacks Tag 0GTE proof into the empty-family case, the finite-product prime argument for the ideals J_i, the affine fraction-field calculation and denominator-clearing argument, and the final sum. No auxiliary nodes were created: the product and algebraicity manipulations are elementary consequences of the prime-ideal and field-extension definitions.",
+  "blueprint": [
+   "The steps realize the ancestor's generic-point coordinate choice, specifically its use of Stacks Tag 0GTE to choose one element transcendental in each selected residue field."
+  ],
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-c922fad21",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-c922fad21 (reviewer sub-agent of L); spot-checked: Step 2 cited def-weil-residue-field for the unstated affine identity κ(p)=Frac(B/p), a C4 citation gap. The corrected full DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-finite-prime-transcendental-coordinate.json and spells out the localization quotient calculation. All other hypotheses, edge cases, source steps (Stacks Tag 0GTE/07K1), dependencies, route constraints, and duplicate checks passed; review.md records the full checks.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -17,9 +17,182 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the affine Noetherian approximation $N$ of $S$ from [lemma-nagata-noetherian-inverse-system-affine]. Apply [lem-sbc-normal-finite-stage-diagram] to this $N$ and the normal integral $S$, obtaining integral normal stages $S_i$ finite over the affine stages of $N$, dominant projections $S\\to S_i$, and the finite natural transformation to $N$. Each $S_i$ is affine by [lem-weil-pbc-finite-morphism-permanence](b), and Noetherian by [lem-weil-pbc-finite-type-over-noetherian]: a finite algebra is of finite type, as its module generators also generate it as an algebra. The cone is limiting by [lem-sbc-dominant-finite-refinement-limit]. The transition maps are affine since both source and target are affine. Reindex by a nonempty directed set using [lem-weil-pbc-cofiltered-limit-directed-reindex]. Dominance between integral schemes carries generic point to generic point. Write $S=\\operatorname{Spec}R$, $S_i=\\operatorname{Spec}R_i$; these dominant projections give injections $R_i\\hookrightarrow R$ and $R=\\varinjlim R_i$. The last equality follows from the universal property of the affine limit, by testing maps from affine schemes.",
+   "uses": [
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lem-sbc-normal-finite-stage-diagram",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sbc-dominant-finite-refinement-limit",
+    "lem-weil-pbc-cofiltered-limit-directed-reindex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§3.1 normal Noetherian approximation; explicit normal refinement via finite normalization."
+   }
+  },
+  {
+   "text": "Apply [thm-pd-spreading-out](1) to $p$ and this system to obtain $Z_a\\to S_a$ of finite presentation with pullback $Z$. The stages are affine Noetherian, hence qcqs, and $Z_a$ is qcqs by [lem-weil-pbc-qcqs-morphism-permanence](2). Apply [lem-weil-pbc-descend-flat-finite-presentation] to obtain flatness at a later stage. Apply [lem-trf-geometrically-reduced-fibres-limit-descent] to obtain reduced geometric fibres at a later stage. Choose a common upper bound; finite presentation and flatness survive its base change by [lem-weil-pbc-qcqs-morphism-permanence](3) and [lem-weil-pbc-flat-morphism-base-change]. Call this model $p_0:Z_0\\to S_0$. It has every required property of the family and base. It remains to construct the modification model. We shall show directly that $f$ is an isomorphism, without invoking the downstream eta-normality node, and then use the identity of $Z_0$.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-trf-geometrically-reduced-fibres-limit-descent",
+    "lem-weil-pbc-flat-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§3.1 and Remark 3.1.1(i); Proposition 3.5.2 noetherian-reduction paragraph."
+   }
+  },
+  {
+   "text": "Fix an affine open $U=\\operatorname{Spec}A$ of $Z$. If it is empty its inverse image is empty, so there is nothing to check; assume it nonempty. Its inverse image is affine, say $\\operatorname{Spec}B$, and $B$ is finite over $A$ by [def-weil-finite-integral-morphism]. The algebra $A$ is finitely presented over $R$ by [lem-weil-pbc-lfp-affine-opens-finite-presentation]. Flatness gives $A\\hookrightarrow A_K$, $K=\\operatorname{Frac}R$, by [lem-sc-flat-invertible-sections-torsion-free] with the trivial line bundle. Let $V$ be the common schematically dense isomorphism open of $f$. If a section of $B$ vanishes on the generic fibre, its restriction to $V\\cap U$ vanishes, since the same torsion-freeness lemma applies to every affine open of that flat open. Schematic density of $f^{-1}V$ then makes that section zero. Thus $B\\hookrightarrow B_K=A_K$, compatibly with $A\\to B$, and we regard $A\\subseteq B\\subseteq A_K$. The generic fibre is reduced by hypothesis and field-extension injectivity (a vector-space basis); hence $A$ is reduced. No finite-presentation assertion about $B$ is used.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-sc-flat-invertible-sections-torsion-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 3.5.2: finite modification algebra and schematic density, made explicit before approximation."
+   }
+  },
+  {
+   "text": "Choose finitely many $A$-algebra generators $b_1,\\ldots,b_n$ of $B$ (module generators suffice). By [lem-weil-pbc-finite-algebra-is-integral] choose monic polynomials $P_j(T)\\in A[T]$ with $P_j(b_j)=0$. Since $B\\subset A_K$, write all $b_j=a_j/r$ with a single $0\\ne r\\in R$ and $a_j\\in A$, by multiplying their finitely many denominators. Choose a finite presentation $A=R[x_1,\\ldots,x_m]/(g_1,\\ldots,g_t)$. All coefficients of the $g_k$, of representatives of $a_j$, and of the coefficients of $P_j$ occur at one stage $R_i$. Put $A_i=R_i[x_1,\\ldots,x_m]/(g_{1,i},\\ldots,g_{t,i})$. Its base change is $A$. After increasing $i$, $\\operatorname{Spec}A_i\\to S_i$ is flat by [lem-weil-pbc-descend-flat-finite-presentation] and has reduced geometric fibres by [lem-trf-geometrically-reduced-fibres-limit-descent]. Flatness and geometric reducedness of $U\\to S$ follow by restriction from $p$, so both descent hypotheses hold. Keep the same notation for the later coefficients and stage.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-trf-geometrically-reduced-fibres-limit-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 3.5.2 noetherian reduction; agent finite-generator construction replacing unjustified exact descent of an arbitrary finite algebra."
+   }
+  },
+  {
+   "text": "Arrange also $P_{j,i}(a_{j,i}/r_i)=0$ in $(A_i)_{r_i}$. Here is the finite-data check: if $d_j=\\deg P_j$, the polynomial $r^{d_j}P_j(a_j/r)$ is zero in $A$. In the displayed polynomial presentation it is a finite combination $\\sum_k h_{jk}g_k$. Adjoin the finitely many coefficients of all $h_{jk}$ to the chosen stage. The equality of these polynomials then holds at a later stage (each coefficient equality in the filtered colimit holds eventually). After localization it gives the desired relation. Set $C_i=A_i[T_1,\\ldots,T_n]/(P_{j,i}(T_j),r_iT_j-a_{j,i})$. The monic relations bound each exponent of $T_j$ by $d_j-1$, so finitely many monomials generate $C_i$ as an $A_i$-module. The linear relations give $(C_i)_{r_i}\\cong(A_i)_{r_i}$ by substitution $T_j\\mapsto a_{j,i}/r_i$; the checked polynomial identities make the substitution well-defined. Sending $T_j$ to $b_j$ gives a surjection $C_i\\otimes_{R_i}R\\twoheadrightarrow B$.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 3.5.2 noetherian reduction; explicit finite algebra with prescribed localization."
+   }
+  },
+  {
+   "text": "Let $J_i=\\{c\\in C_i:r_i^Nc=0\\text{ for some }N\\}$ and $D_i=C_i/J_i$. This is an ideal: for two elements use the larger exponent, and multiplication preserves annihilation. Localization identifies $D_i$ with the image of $C_i$ in $(A_i)_{r_i}$. Flatness of $A_i$ over the domain $R_i$ gives $A_i\\hookrightarrow(A_i)_{r_i}$ by [lem-sc-flat-invertible-sections-torsion-free]. Consequently $A_i\\subseteq D_i\\subseteq(A_i)_{r_i}$ and $(D_i)_{r_i}=(A_i)_{r_i}$. The algebra $D_i$ is finite over $A_i$, being a quotient of $C_i$. Every element of $J_i$ maps to zero in $B$: its image is killed by a power of the nonzero $r\\in R$, while $B\\subset A_K$. Thus the preceding surjection factors as $D_i\\otimes_{R_i}R\\twoheadrightarrow B$. The construction requires a surjection, not an unjustified isomorphism after a possibly nonflat base change.",
+   "uses": [
+    "lem-sc-flat-invertible-sections-torsion-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 3.5.2 noetherian reduction; base-torsion quotient retaining the dense generic isomorphism."
+   }
+  },
+  {
+   "text": "Put $Y_i=\\operatorname{Spec}A_i$ and $E_i=\\operatorname{Spec}D_i$. These are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Let $W\\subset Y_i$ be the isomorphism locus of the finite algebra inclusion $A_i\\subset D_i$. It is open: its complement is the support of the finite module $D_i/A_i$, and if this module vanishes at a prime, one element outside that prime kills all of a finite list of generators, so it vanishes on a principal neighbourhood. It contains $D(r_i)$ and the generic fibre over $S_i$, since $(D_i)_{r_i}=(A_i)_{r_i}$. Moreover $\\widetilde{D_i}\\subset j_*\\mathcal O_W$ for $j:W\\hookrightarrow Y_i$: a section vanishing on $W$ vanishes after inverting $r_i$, and $D_i\\hookrightarrow(A_i)_{r_i}$ remains injective upon localization on $Y_i$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 3.5.2: open isomorphism locus of the finite algebra, with the source base torsion removed."
+   }
+  },
+  {
+   "text": "We show that $W$ contains the generic points of every fibre of $Y_i\\to S_i$. At such a point [lem-trf-generic-fibre-points-smooth] supplies a smooth neighbourhood $T$. All local rings of $T$ are integrally closed domains by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] and [lem-weil-pbc-smooth-over-normal-ring-normal], since $S_i$ is normal. The open $D(r_i)$ is dense on $T$: flatness makes multiplication by $r_i$ injective on every affine chart, so localization is injective; an open on which $r_i$ were everywhere nilpotent would contradict that injection. For an affine open $H\\subset T$, each section of the finite algebra $\\widetilde{D_i}(H)$ is integral over $\\mathcal O_T(H)$ by [lem-weil-pbc-finite-algebra-is-integral]. Its restriction to $H\\cap D(r_i)$ extends to $\\mathcal O_T(H)$ by [lem-sbc-normal-dense-open-integral-section]. The injection into the $r_i$-localization makes the extension equal to the original section. Therefore $\\widetilde{D_i}|_T=\\mathcal O_T$, so $T\\subset W$. All smoothness and extension inputs are applied to Noetherian schemes at this stage.",
+   "uses": [
+    "lem-trf-generic-fibre-points-smooth",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-sbc-normal-dense-open-integral-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 3.5.2: normal neighbourhoods at fibre-component generic points."
+   }
+  },
+  {
+   "text": "If $y\\notin W$ and $s$ is its image in $S_i$, then $s\\ne\\eta_i$, because $W$ contains the generic fibre. The local domain $R_{i,s}$ therefore has a nonzero maximal-ideal element, which is a nonzerodivisor, so its depth is at least one. The fibre local ring $F=\\mathcal O_{(Y_i)_s,y}$ is reduced: its extension to an algebraic closure is reduced by the retained geometric-fibre hypothesis, and scalar extension of a field is injective. The point $y$ is not a generic point of a fibre component by the preceding step. Thus the local ring $F$ has dimension at least one. [lem-weil-pbc-serre-criterion-reduced] gives depth $F\\ge1$. Apply [lem-weil-pbc-flat-local-depth-formula] to the flat local map $\\mathcal O_{S_i,s}\\to\\mathcal O_{Y_i,y}$; both rings are Noetherian, and its closed-fibre ring is $F$. It gives depth $\\mathcal O_{Y_i,y}\\ge2$.",
+   "uses": [
+    "lem-weil-pbc-serre-criterion-reduced",
+    "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 3.5.2: depth addition outside the isomorphism open."
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-depth-two-hartogs-restriction] to $L=Y_i$, its open $W$, and $N=\\mathcal O_{Y_i}$. It is quasi-coherent and finite on every affine chart and at every stalk; $Y_i$ is Noetherian, and the previous step verifies the depth hypothesis at every point of the complement. Hence $\\mathcal O_{Y_i}=j_*\\mathcal O_W$. Since $\\mathcal O_{Y_i}\\subseteq\\widetilde{D_i}\\subseteq j_*\\mathcal O_W$, we get $D_i=A_i$. The surjection in step 6 now reads $A\\twoheadrightarrow B$, and it is the original injective structure map $A\\hookrightarrow B\\subset A_K$. It is therefore an isomorphism. This holds for every affine open $U\\subset Z$, so the inverses of the restrictions of $f$ glue (uniquely on overlaps) to an inverse of $f$. This argument establishes the needed conclusion directly and never cites the downstream eta-normality node, which depends on this item.",
+   "uses": [
+    "lem-sbc-depth-two-hartogs-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 3.5.2: depth/Z-closure conclusion, applied to the approximating finite algebra."
+   }
+  },
+  {
+   "text": "Take $Z^{\\prime}_0=Z_0$ and $f_0=\\mathrm{id}_{Z_0}$ for the family chosen in step 2. The identity is finite and proper directly from [def-weil-finite-integral-morphism] and [def-weil-proper-morphism], and is an $\\eta_0$-modification with $V=Z_0$: restriction to the whole scheme is injective, including for the empty scheme. The model isomorphism $Z\\cong Z_0\\times_{S_0}S$, composed with the now proved isomorphism $f:Z^{\\prime}\\to Z$, supplies the second model isomorphism, and makes the diagram with $f_0$ commute. The dominant projection $S\\to S_0$ takes the generic point to the generic point, as recorded in step 1. These are precisely the compatible base-change isomorphisms and all the required clauses.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-proper-morphism",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 3.5.2 noetherian-reduction assertion; agent assembly of the exact model after the finite-algebra argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-sbc-normal-finite-stage-diagram",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sbc-dominant-finite-refinement-limit",
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-descend-flat-finite-presentation",
+  "lem-trf-geometrically-reduced-fibres-limit-descent",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-trf-generic-fibre-points-smooth",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-over-normal-ring-normal",
+  "lem-sbc-normal-dense-open-integral-section",
+  "lem-weil-pbc-serre-criterion-reduced",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-sbc-depth-two-hartogs-restriction",
+  "def-weil-proper-morphism",
+  "def-pc-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "§3.1, Remark 3.1.1(i), and Proposition 3.5.2, noetherian reduction and depth proof. The missing archived PDF is WANTED; public arXiv v3 was read. Exact finite-modification descent is replaced by a finite algebra surjection and a torsion quotient, then the source depth argument at that stage."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -90,10 +263,66 @@
    "results": "hits=8; top=['AlgebraicGeometry.Scheme.Hom.normalizationDesc', 'AlgebraicGeometry.Scheme.Hom.normalization', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc', 'AlgebraicGeometry.Scheme.Hom.toNormalization', 'AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc', 'AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization', 'AlgebraicGeometry.Scheme.Hom.fromNormalization', 'AlgebraicGeometry.Scheme.Hom.normalization.hom_ext']; note=; digest=8cfa2b2cad74f1cc. Noetherian scheme instances and relative normalization maps do not provide this diagram approximation.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian approximation of a finite eta-modification of a flat finitely presented geometrically reduced family over a normal affine integral base",
+   "results": "hits=8; top=['Algebra.Smooth.flat_of_isNoetherianRing', 'Algebra.Smooth.exists_finiteType', 'Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing', 'Algebra.Smooth.exists_subalgebra_finiteType', 'AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization', 'Algebra.Smooth.exists_subalgebra_fg', 'Algebra.IsGeometricallyReduced.of_forall_fg', 'Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg']; note=; digest=857e0c0028102a57; subdirectory=.. Read hits: geometric reducedness definitions and reducedness of the total space do not assert eventual reducedness of all geometric fibres; affine-limit equality of two morphisms is also insufficient.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "hits=1; top=['AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank']; note=; digest=f3b269fa3ef20709; subdirectory=.. Read hits: geometric reducedness definitions and reducedness of the total space do not assert eventual reducedness of all geometric fibres; affine-limit equality of two morphisms is also insufficient.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Noetherian.*approximation|geometric.*reduced|finite.*modification",
+   "results": "hits=17; top=['Mathlib/AlgebraicGeometry/AffineSpace.lean', 'Mathlib/AlgebraicGeometry/AffineSpace.lean', 'Mathlib/AlgebraicGeometry/AffineSpace.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean']; note=; digest=999afccf366a9dce; subdirectory=AlgebraicGeometry. Read hits: geometric reducedness definitions and reducedness of the total space do not assert eventual reducedness of all geometric fibres; affine-limit equality of two morphisms is also insufficient.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Spread out a finite modification of a flat finitely presented family with geometrically reduced fibres to a normal Noetherian affine base",
+   "results": "hits=8; top=['AlgebraicGeometry.Flat.casesOn', 'AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth', 'AlgebraicGeometry.Flat.recOn', 'AlgebraicGeometry.Flat.mk', 'AlgebraicGeometry.Flat.flat_appLE', 'AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation', 'Algebra.Smooth.flat_of_isNoetherianRing', 'AlgebraicGeometry.Flat.isStableUnderBaseChange']; note=; digest=b90d3d37b617c15a; subdirectory=.. Read hits: geometric reducedness definitions and reducedness of the total space do not assert eventual reducedness of all geometric fibres; affine-limit equality of two morphisms is also insufficient.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite algebra and finite morphism descend to a finite stage of an affine inverse system",
+   "results": "hits=8; top=['AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop', 'AlgebraicGeometry.IsFinite.finite_app', 'AlgebraicGeometry.Scheme.Hom.finite_app', 'AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite', 'AlgebraicGeometry.isFinite_iff', 'AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite', 'AlgebraicGeometry.IsFinite.toIsAffineHom', 'AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE']; note=; digest=9481f2a4c7b9bbe9; subdirectory=.. Read hits: geometric reducedness definitions and reducedness of the total space do not assert eventual reducedness of all geometric fibres; affine-limit equality of two morphisms is also insufficient.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme.Hom",
+   "results": "hits=0; top=[]; note=; digest=4f53cda18c2baa0c; subdirectory=.. Read hits: geometric reducedness definitions and reducedness of the total space do not assert eventual reducedness of all geometric fibres; affine-limit equality of two morphisms is also insufficient.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "descend.*finite|finite.*descend|spreading.*finite",
+   "results": "hits=6; top=['Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean', 'Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean', 'Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean', 'Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean', 'Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean', 'Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean']; note=; digest=c189735f900d8d2a; subdirectory=AlgebraicGeometry. Read hits: geometric reducedness definitions and reducedness of the total space do not assert eventual reducedness of all geometric fibres; affine-limit equality of two morphisms is also insufficient.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite morphisms descend along affine inverse limits",
+   "results": "hits=8; top=['AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd', 'AlgebraicGeometry.IsFinite', 'AlgebraicGeometry.IsFinite.recOn', 'AlgebraicGeometry.exists_appTop_π_eq_of_isLimit', 'AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop', 'AlgebraicGeometry.isFinite_iff', 'AlgebraicGeometry.IsFinite.toIsAffineHom', 'AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme']; note=; digest=c2d77d09b6d7d4d6; subdirectory=.. Read hits: geometric reducedness definitions and reducedness of the total space do not assert eventual reducedness of all geometric fibres; affine-limit equality of two morphisms is also insufficient.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-geometrically-reduced-eta-normal",
@@ -121,5 +350,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-normal-approximation-finite-eta-modification",
+  "worker": "stage1",
+  "summary": "One generic geometric-fibre limit-descent node, statement only. Construct a normal affine Noetherian inverse system using existing finite-refinement nodes; descend the flat reduced family. A finite algebra surjection and base-torsion quotient reduce the given modification on each affine chart to the source noetherian depth argument, proving it an isomorphism; the identity then supplies an exact model. No finite-presentation assumption is silently imposed on the given finite morphism. Statement unchanged.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: Temkin Proposition 3.5.2 and its noetherian reduction, generic-fibre smoothness input, and depth/Z-closure argument."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q86-59a23e198",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q86-59a23e198 (reviewer sub-agent of L); spot-checked: Reviewed item, new node, all cited statements, unit/chapter route, Temkin Proposition 3.5.2 and Stacks Tags 0576, 0579, 05F4. All eleven proof steps and hypotheses check; the finite-algebra argument correctly avoids finite-presentation and tensor-injectivity errors. The new limit lemma is distinct, correctly statement-only, and Mathlib searches are complete. Edge cases, cycles, duplicate candidates, route restrictions, and elementary-step length rules pass. Review written to review.md; Temkin PDF remains WANTED locally, with the exact public arXiv v3 source read."
  }
 }

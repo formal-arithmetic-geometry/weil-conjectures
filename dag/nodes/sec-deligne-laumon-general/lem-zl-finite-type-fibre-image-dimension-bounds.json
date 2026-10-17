@@ -13,9 +13,78 @@
   "def-kun-topological-krull-dimension",
   "def-pc-scheme-fibre"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $X=\\varnothing$, then $f(X)=\\varnothing$, its closure and $X$ both have dimension $-\\infty$, and both asserted inequalities are immediate. Assume henceforth that $X$ is nonempty. Since a field is Noetherian, the finite-type-over-Noetherian theorem [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian, and [lem-sc-noetherian-finite-irreducible-components] gives finitely many irreducible components $X_1,\\ldots,X_t$. Applying [lem-kun-dimension-finite-type] to $X$, to $Y$, and to each component shows that all global dimensions used below are finite.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2L, proof of (2), reduction to finitely many irreducible components; finite-type Noetherianity and finite-dimensionality"
+   }
+  },
+  {
+   "text": "For each component $X_i$, use [lem-weil-pbc-closed-subset-closed-subscheme] to give the closed subset its reduced closed-subscheme structure $j_i:X_i\\hookrightarrow X$. The immersion finite-type clause (2) of [lem-weil-pbc-immersion-base-change-lft] and the finite closed-immersion statement [lem-weil-pbc-closed-immersion-finite], composed with the finite-type structure morphism of $X$ by [lem-sfb-finite-type-composition-base-change](1), show that $X_i$ is finite type over $k$. Let $f_i:X_i\\to Y$ be the induced $k$-morphism and $Z_i=\\overline{f_i(X_i)}$. Apply [lem-zl-irreducible-fibre-dimension-lower-bound] to $f_i$, writing $r_i=\\dim X_i-\\dim Z_i$. Its dense-open equality locus is nonempty because $X_i$ is nonempty; at a point of that locus, the local fibre dimension equals $r_i$ and is nonnegative by [def-kun-topological-dimension-at-point]. Thus $r_i\\ge0$ and $\\dim Z_i\\le\\dim X_i$ for every $i.$",
+   "uses": [
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-zl-irreducible-fibre-dimension-lower-bound",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2L, lemma-dimension-fibres-locally-algebraic, (2)(a), applied to each irreducible component"
+   }
+  },
+  {
+   "text": "The closure of the finite union $f(X)=\\bigcup_i f(X_i)$ is the finite union $\\overline{f(X)}=\\bigcup_i Z_i$. Any irreducible closed subset of a finite union of closed subsets is contained in one member, so the Krull dimension of this union is at most the maximum of the dimensions of the $Z_i$. Combining this with Step 2 and the definition of the dimension of $X$ as the maximum of the dimensions of its finitely many irreducible components gives $\\dim\\overline{f(X)}\\le\\dim X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2L, proof of (2), finite-component reduction and the definition of dimension by irreducible chains"
+   }
+  },
+  {
+   "text": "Now assume $\\dim Y\\le d$ and every scheme-theoretic fibre $X_y$ has dimension at most $n$. For each $X_i$, choose its generic point $\\eta_i$ and put $y_i=f(\\eta_i)$. Apply the child node to $f_i:X_i\\to Y$: it gives $r_i\\le\\dim_{\\eta_i}((X_i)_{y_i})$. By [lem-pc-closed-imm-base-change], the fibre $(X_i)_{y_i}$ is a closed subscheme of $X_{y_i}$; under the homeomorphisms in [def-pc-scheme-fibre], its underlying space is the closed subspace $X_i\\cap f^{-1}(y_i)$ of $X_{y_i}$. Local dimension is monotone for a closed subspace by the following elementary argument from [def-kun-topological-dimension-at-point]: choose an ambient open neighbourhood attaining the ambient local dimension; its intersection with the closed subspace is a neighbourhood in that subspace, and every chain of irreducible closed subsets of this intersection is a chain in the ambient neighbourhood. Thus the minimum defining the subspace local dimension is no larger than the ambient local dimension. This gives $\\dim_{\\eta_i}((X_i)_{y_i})\\le\\dim_{\\eta_i}(X_{y_i})\\le\\dim X_{y_i}\\le n$, where the last inequality is the fibre hypothesis. Since $Z_i$ is a closed subset of $Y$, $\\dim Z_i\\le\\dim Y\\le d$, and hence $\\dim X_i=\\dim Z_i+r_i\\le d+n$. Taking the maximum over the finitely many components $X_i$ yields $\\dim X\\le d+n.$",
+   "uses": [
+    "lem-zl-irreducible-fibre-dimension-lower-bound",
+    "lem-pc-closed-imm-base-change",
+    "def-pc-scheme-fibre",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2L, lemma-dimension-fibres-locally-algebraic, (2)(a), applied at each component generic point"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-dimension-at-point",
+  "def-pc-scheme-fibre",
+  "lem-kun-dimension-finite-type",
+  "lem-pc-closed-imm-base-change",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-zl-irreducible-fibre-dimension-lower-bound"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2L, lemma-dimension-fibres-locally-algebraic, (2)(a) and proof, applied componentwise"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -75,7 +144,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-bertini-singular-locus-dimension",
@@ -87,7 +156,7 @@
  "blueprint": {
   "from": {
    "node": "lem-zl-bertini-finite-cover-curve",
-   "place": "proof, second paragraph: 'Tag 0FD6 on $X\\setminus S$, together with these finitely many derivative conditions, makes a general member smooth everywhere on $X$'; the universal-family dimension argument in Stacks 0FD6.",
+   "place": "proof, second paragraph: the universal-family dimension argument in Stacks 0B2L; apply the irreducible-source fibre estimate to finitely many components",
    "via": [
     "lem-zl-bertini-singular-locus-dimension",
     "lem-zl-bertini-smooth-member"
@@ -95,5 +164,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-finite-type-fibre-image-dimension-bounds",
+  "worker": "stage1",
+  "summary": "Repaired the returned split. Each irreducible component is given a closed-subscheme structure, its finite-type-over-k hypothesis is checked using the closed-subset, immersion finite-type, closed-immersion finite, and finite-type composition nodes, and the child lower-bound lemma is applied in the correct direction using its dense-open equality locus. The fibre estimate now compares the restricted fibre (identified as a closed subspace of the ambient fibre) with the ambient fibre via scheme-fibre base change and the elementary neighbourhood-and-chain proof of local-dimension monotonicity written in Step 4. Added the required local-dimension dependency to the child.",
+  "blueprint": "The four repaired steps realize the universal-family dimension argument in the second paragraph of the blueprint lemma-zl-bertini-finite-cover-curve, using Tag 0B2L componentwise; the elementary local-dimension comparison is written out in Step 4.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q02-652af62fd",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q02-652af62fd (reviewer sub-agent of L); spot-checked: Read both nodes fully and checked every step, cited statement, sources, route, duplicates and edge cases. Stacks 0B2L supports the child; the component and fibre arguments are valid. Corrected two unclosed math delimiters and completed new-node metadata under fixes/. Full findings are in review.md; mathematical statements are unchanged.; 2 file(s) fixed by the reviewer"
  }
 }
