@@ -13,9 +13,97 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-adically-complete-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a prime $p\\subset R$ and put $S=R\\setminus p$, $A=S^{-1}R=R_p$, $m=pA$, and $B=S^{-1}N\\subset K$. By [def-weil-pbc-localization-at-prime], $A$ is local with maximal ideal $m$. It is Noetherian by [lem-weil-pbc-localization-noetherian], applied to $R$ and $S$. Since $A\\subset K$ contains $R$, it is a domain and its fraction field is $K$: every $a/d\\in K$, with $a,d\\in R$ and $d\\ne0$, is already a quotient of elements of $A$. Every element of $S$ is a unit in $K$, so $S^{-1}K=K$. Applying [lem-weil-pbc-integral-closure-commutes-localization] to $R\\to K$ shows that $B$ is exactly the integral closure of $A$ in $K$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence) and 0307 (lemma-integral-closure-localize); local reduction of Swanson–Huneke Proposition 4.8.2, printed p. 84."
+   }
+  },
+  {
+   "text": "Apply clause (1) of [lem-weil-pbc-localization-prime-residue-field-iso] to the localization $N\\to S^{-1}N=B$, with $S$ viewed in $N$. It gives inverse extension and contraction on primes disjoint from $S$. Restrict these inverse maps to primes $Q\\subset N$ with $Q\\cap R=p$ and primes $q\\subset B$ with $q\\cap A=m$. This restriction is valid: $Q\\cap R=p$ implies $Q\\cap S=\\varnothing$, and $a/s\\in(QB)\\cap A$ if and only if $a\\in p$, since $s$ is a unit in $B$ and $(QB)\\cap N=Q$. Conversely, $q\\cap A=m$ gives $(q\\cap N)\\cap R=p$, because $a/1\\in m$ is equivalent to $a\\in p$. Thus the two prime sets have the same cardinality. It remains to bound the latter set for the Noetherian local domain $A$.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3 (lemma-spec-localization), restricted to the specified fibre; Swanson–Huneke Proposition 4.8.2, printed p. 84, localization paragraph."
+   }
+  },
+  {
+   "text": "Put $H=\\varprojlim_{n\\ge1}A/m^n$ and let $n=\\ker(H\\to A/m)$. By [lem-weil-pbc-local-completion-local-ring], $H$ is local with maximal ideal $n=mH$ and the contraction of $n$ to $A$ is $m$. Apply [lem-trf-normalization-completed-product-comparison] to $A$, $K$ and $B$. List the distinct minimal primes of $H$ as $h_1,\\ldots,h_r$; the list is finite. In that node's notation put $C_i=H/h_i$, $L_i=\\operatorname{Frac}(C_i)$ and let $T_i$ be the integral closure of $C_i$ in $L_i$. Each $C_i$ is a complete Noetherian local domain. Its maximal ideal is $n_i=n/h_i$, since its quotient by $n/h_i$ is the field $H/n$ and every proper ideal is contained in the image of $n$. The same node supplies the embedding $e_i:K\\hookrightarrow L_i$ induced by $A\\hookrightarrow C_i$; its integrality assertion shows that $e_i(B)\\subseteq T_i$. Write $j_i:B\\to T_i$ for this restriction.",
+   "uses": [
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-trf-normalization-completed-product-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Proposition 4.8.2, printed p. 84, completed-component construction; Proposition 4.7.3 for component embeddings. Local completion: Stacks Tags 05GG (lemma-hathat-finitely-generated) and 05GI (lemma-radical-completion)."
+   }
+  },
+  {
+   "text": "For each $i$, [lem-weil-pbc-complete-pair-henselian] applied to the $n_i$-adically complete $C_i$ makes $(C_i,n_i)$ henselian, so $C_i$ is henselian local by [def-weil-pbc-henselian-terminology]. The ring $T_i\\subset L_i$ is nonzero and integral over $C_i$ by [def-weil-pbc-integral-closure]. Its only idempotents are $0$ and $1$, since $e(e-1)=0$ in a domain has these two solutions. Consequently [lem-trf-integral-component-henselian-permanence] says that $T_i$ is local and $C_i\\to T_i$ is local. Denote its unique maximal ideal by $M_i$; its contraction is $n_i$. Moreover every prime $M\\subset T_i$ contracting to $n_i$ is maximal: $T_i/M$ is an integral domain integral over the field $C_i/n_i$. For $0\\ne x$ in that domain choose a monic relation of least degree; its constant coefficient is nonzero, as otherwise cancellation of $x$ lowers the degree. Solving the relation for $x^{-1}$ proves that $T_i/M$ is a field. Hence every such $M$ equals $M_i$.",
+   "uses": [
+    "lem-weil-pbc-complete-pair-henselian",
+    "def-weil-pbc-henselian-terminology",
+    "def-weil-pbc-integral-closure",
+    "lem-trf-integral-component-henselian-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0ALJ (lemma-complete-henselian) and 092X (lemma-integral-over-henselian), domain case of the cited connected-integral-algebra node; this supplies the locality used from Swanson–Huneke Theorem 4.3.4 in Proposition 4.8.2."
+   }
+  },
+  {
+   "text": "Let $q\\subset B$ be any prime with $q\\cap A=m$. Apply [lem-trf-normalization-completed-branch-lift] to the Noetherian local domain $A$ and its normalization $B\\subset K$. It gives a minimal prime $h\\subset H$, an $A$-algebra map $j:B\\to T$ for the normalization $T$ of $H/h$ in its fraction field, and a prime $M\\subset T$ with $j^{-1}(M)=q$ and contraction $n/h$ in $H/h$. Our list exhausts the minimal primes, so $h=h_i$ for some $i$ and $T=T_i$. Step 4 gives $M=M_i$. We must also identify the supplied map $j$ with the fixed $j_i$. For $b\\in B\\subset K=\\operatorname{Frac}(A)$ write $b=a/d$ with $a,d\\in A$, $d\\ne0$. Inside $B$ we have $db=a$. Both $A$-algebra maps into $T_i\\subset L_i$ therefore send $b$ to the same fraction $\\bar a/\\bar d$. The denominator is nonzero because the embedding $A\\hookrightarrow C_i$ is injective by [lem-trf-normalization-completed-product-comparison]. Thus $j=j_i$, and $q=j_i^{-1}(M_i)$.",
+   "uses": [
+    "lem-trf-normalization-completed-branch-lift",
+    "lem-trf-normalization-completed-product-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Lemma 4.8.3, printed p. 84, component form; Proposition 4.7.3 for injectivity on the base. The uniqueness calculation in the fraction field identifies the map in the lifting statement with the fixed component embedding."
+   }
+  },
+  {
+   "text": "The preceding step shows that every prime of $B$ contracting to $m$ is one of the $r$ ideals $j_i^{-1}(M_i)$. These are primes, and each contracts to $m$: contraction along $C_i\\to T_i$ gives $n_i$, along $H\\to C_i$ gives $n$, and along $A\\to H$ gives $m$. Some of the $r$ ideals may coincide; their image is nevertheless finite with cardinality at most $r$. By Step 2 the original fibre over $p$ has the same cardinality. Finally $H$ is exactly $\\widehat{R_p}$, and $r$ is the number of all its minimal primes, so this is the claimed bound as well as finiteness. This argument includes $p=0$: then $A=K$, $H=K$, $r=1$ and the only fibre prime is $0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/swanson-huneke-integral-closure.pdf",
+    "place": "Proposition 4.8.2, completed-branch cardinality conclusion; elementary finite-image counting from the preceding steps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-trf-normalization-completed-product-comparison",
+  "lem-weil-pbc-complete-pair-henselian",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-integral-closure",
+  "lem-trf-integral-component-henselian-permanence",
+  "lem-trf-normalization-completed-branch-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/swanson-huneke-integral-closure.pdf",
+  "place": "Proposition 4.8.2, printed pp. 83–84 (PDF pp. 97–98), own-fraction-field case, using its Lemma 4.8.3 component lift already in the DAG. Local book PDF is WANTED; author-hosted PDF read online. Locality of branch normalizations is obtained from existing Stacks 0ALJ and 092X tools instead of invoking the stronger finite-normalization theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +139,45 @@
    "results": "{\"t\": \"2026-10-17T22:01:31Z\", \"tool\": \"leanfinder\", \"query\": \"There are finitely many branches in the normalization over a prime of a Noetherian ring even if normalization is not module finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFintypeElemIdealPrimesOver\", \"primesOver_finite\", \"Ideal.card_primesOverFinset_le_finrank\", \"instFiniteMaximalSpectrumOfIsFractionRing\", \"Algebra.QuasiFinite.finite_primesOver\", \"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"one_le_primesOver_ncard\", \"Algebra.QuasiFiniteAt\"], \"digest\": \"3e393277cff4bf26\"}",
    "date": "2026-10-18",
    "verdict": "no match: primesOver_finite requires IsDedekindDomain on the extension ring, and Algebra.QuasiFinite.finite_primesOver assumes quasi-finiteness. Neither is available for arbitrary nonfinite normalization; neither gives the completed-branch bound. Read QuasiFinite/Basic.lean and DedekindDomain/Ideal/Lemmas.lean at the returned declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian domain the number of primes in its integral closure above a prime is bounded by the number of minimal primes of the completed local ring",
+   "results": "{\"t\": \"2026-10-17T22:27:02Z\", \"tool\": \"leanfinder\", \"query\": \"For a Noetherian domain the number of primes in its integral closure above a prime is bounded by the number of minimal primes of the completed local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.card_primesOverFinset_le_finrank\", \"one_le_primesOver_ncard\", \"instFintypeElemIdealPrimesOver\", \"primesOver_finite\", \"primesOver_ncard_ne_zero\", \"IsDedekindDomain.primesOverEquivPrimesOver_inertiagDeg_eq\", \"Ideal.ncard_primesOver_mul_ncard_primesOver\", \"Ideal.height_le_height_add_of_liesOver\"], \"digest\": \"2d5a000ee6ad91f6\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned primesOver finiteness declarations require a Dedekind extension ring or quasi-finiteness; normalization here need not be finite or quasi-finite. The finrank bounds concern finite field extensions of Dedekind domains, not minimal primes of the completed local ring. Source read at DedekindDomain/Ideal/Lemmas.lean:1233 and QuasiFinite/Basic.lean:84."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"primesOver\", \"Finite\"",
+   "results": "{\"t\": \"2026-10-17T22:27:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"primesOver\\\", \\\"Finite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"primesOver_finite\", \"IsDedekindDomain.primesOver_finite\", \"Localization.finite_of_primesOver_eq_singleton\", \"Algebra.QuasiFinite.finite_primesOver\", \"Algebra.QuasiFinite.iff_finite_primesOver\"], \"digest\": \"9b707dfc2e7d3f06\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned primesOver finiteness declarations require a Dedekind extension ring or quasi-finiteness; normalization here need not be finite or quasi-finite. The finrank bounds concern finite field extensions of Dedekind domains, not minimal primes of the completed local ring. Source read at DedekindDomain/Ideal/Lemmas.lean:1233 and QuasiFinite/Basic.lean:84."
+  },
+  {
+   "tool": "grep",
+   "query": "primesOver_finite|finite.*primesOver|[Ff]inite.*[Ll]ying",
+   "results": "{\"t\": \"2026-10-17T22:27:03Z\", \"tool\": \"grep\", \"query\": \"primesOver_finite|finite.*primesOver|[Ff]inite.*[Ll]ying\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean\"], \"digest\": \"a8ceeca9d2ba8092\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned primesOver finiteness declarations require a Dedekind extension ring or quasi-finiteness; normalization here need not be finite or quasi-finite. The finrank bounds concern finite field extensions of Dedekind domains, not minimal primes of the completed local ring. Source read at DedekindDomain/Ideal/Lemmas.lean:1233 and QuasiFinite/Basic.lean:84."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite lying over for normalization of arbitrary Noetherian domains with completed branch cardinality bound",
+   "results": "{\"t\": \"2026-10-17T22:27:03Z\", \"tool\": \"leansearch\", \"query\": \"Finite lying over for normalization of arbitrary Noetherian domains with completed branch cardinality bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFintypeElemIdealPrimesOver\", \"primesOver_finite\", \"Algebra.QuasiFinite.finite_primesOver\", \"coe_primesOverFinset\", \"algebra_finiteType_of_liesOver\", \"completeIntegralClosure_eq_integralClosure\", \"module_finite_of_liesOver\", \"Ideal.mem_primesOver_iff_mem_normalizedFactors\"], \"digest\": \"355a98c94c9f0359\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned primesOver finiteness declarations require a Dedekind extension ring or quasi-finiteness; normalization here need not be finite or quasi-finite. The finrank bounds concern finite field extensions of Dedekind domains, not minimal primes of the completed local ring. Source read at DedekindDomain/Ideal/Lemmas.lean:1233 and QuasiFinite/Basic.lean:84."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization has finite fibres bounded by analytic branches even without module finiteness of normalization",
+   "results": "{\"t\": \"2026-10-17T22:27:05Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization has finite fibres bounded by analytic branches even without module finiteness of normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"Ideal.spanIntNorm_localization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"Algebra.quasiFinite_iff\", \"primesOver_finite\", \"Ideal.card_primesOverFinset_le_finrank\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"one_le_primesOver_ncard\"], \"digest\": \"e7673b594ac0000b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned primesOver finiteness declarations require a Dedekind extension ring or quasi-finiteness; normalization here need not be finite or quasi-finite. The finrank bounds concern finite field extensions of Dedekind domains, not minimal primes of the completed local ring. Source read at DedekindDomain/Ideal/Lemmas.lean:1233 and QuasiFinite/Basic.lean:84."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-normalization-integral-closure-krull",
@@ -83,5 +206,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-normalization-finite-prime-fibres",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Localize at the chosen prime, identify the normalization fibre by general localization prime correspondence, use existing completed-component comparison and branch lifting, prove each branch normalization local by henselian integral-algebra permanence, identify all lifting maps by fractions, and count the finite image of the branch set. No new nodes or Mathlib leaves. Preserved prior searches and all imported metadata; fresh item searches recorded with msearch.py.",
+  "blueprint": "Historical dependency ancestry, not a verbatim Orgogozo/Heinzer sentence: the current ancestor DAG proof Step 3 invokes lem-trf-specialization-zero-section for fixed-locus specialization; the main-20261015 blueprint proof, paragraph (1) and (2), says Varshavsky’s theorem is proved by specialization to the normal cone. The intermediate normalization branch recorded in from.via was created below that specialization input. The present node supplies commutative algebra for that historical descendant branch. The current blueprint has no Orgogozo/Heinzer normalization sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-closure-commutes-localization",
+    "why": "Generic localization of integral closure needed in the source local reduction; the local-term unit contains no replacement commutative algebra theorem."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Only its general localization prime-bijection clause is used to restrict to a fibre; the trace unit has no localization-prime interface."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Identifies the maximal ideal of a local completion and its contraction, a generic algebra tool used in the completed-branch source construction."
+   },
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "Completeness gives henselianity of each completed domain branch, below the fixed normalization dependency route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-complete-pair-henselian"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-ba980c0ba",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-ba980c0ba (reviewer sub-agent of L); spot-checked: Full review written to review.md. Item and six steps match Swanson–Huneke Proposition 4.8.2 and Lemma 4.8.3; all cited DAG statements, hypotheses, route, edge cases, and Mathlib searches were checked. No repairs or dropped nodes needed."
  }
 }

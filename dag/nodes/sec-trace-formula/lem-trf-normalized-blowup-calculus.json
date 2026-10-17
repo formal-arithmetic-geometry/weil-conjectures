@@ -16,9 +16,116 @@
   "def-sbc-smooth-morphisms",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work componentwise. By the componentwise-normalization definition, each irreducible component of the reduced finite-type scheme S is replaced by its function-field normalization. The normalization existence theorem gives a finite, surjective and birational map on each integral component. The source has integrally closed local domains by the definition of normalization, hence is normal and reduced; finiteness over a finite-type Q-scheme gives finite type over Q. Taking the finite disjoint union of the component normalizations gives the asserted normal, reduced, finite-type scheme B_J(S) and a map to S that is surjective and birational on each component. Since V(J) is nowhere dense, no generic point is in the center, so the ordinary blowup and its normalization retain all generic points.",
+   "uses": [
+    "def-weil-pbc-reduced-normalization",
+    "def-sc-normalization",
+    "lem-sc-normalization-exists",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 2.2.1--2.2.4, pp.89--90; Stacks Tags 035S and 035Q"
+   }
+  },
+  {
+   "text": "The ordinary blowup has invertible extended ideal by the principalization theorem, and its universal property gives a unique lift of every morphism to S on which the extended ideal is invertible. Let Y be a normal S-scheme whose generic points map to generic points of S and on which J is invertible. On each integral component, the lift Y to the ordinary blowup is dominant; the existing normalization-lifting theorem factors this lift uniquely through the normalization of the blowup. These componentwise factorizations glue because they agree on the generic points and on overlaps by uniqueness. Thus B_J(S) is final among the stated normal S-schemes. Applying finality to an S-automorphism of B_J(S) gives the identity.",
+   "uses": [
+    "thm-nagata-blowup-principalizes-center",
+    "thm-nagata-blowup-universal-property",
+    "lem-sbc-normalization-dominant-lift",
+    "def-nagata-global-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 2.2.1--2.2.4, pp.89--90; Lemma 2.2.9, p.91"
+   }
+  },
+  {
+   "text": "For the comparison over S^nu, construct the maps by the two universal properties rather than by commuting integral closure with adjoining fractions. Put X=B_J(S) and Y=B_{J O_{S^nu}}(S^nu). The morphism Y\to S has invertible J and Y is normal, so the finality proved in Step 2 gives a unique S-map Y\to X. Conversely, X is normal and its componentwise generic maps to S lift uniquely to S^nu by the normalization-lifting theorem. The pullback of J to X is invertible by principalization, so the blowup universal property over S^nu gives a map X\to Bl_{J O_{S^nu}}(S^nu); its generic map is dominant on each component, and the same normalization-lifting theorem factors it uniquely through Y. The two composites are identities because both are maps over S (respectively over S^nu) inducing the identity on the generic points, and the uniqueness clauses in Steps 2 and in the normalization-lifting theorem apply componentwise. This yields the canonical isomorphism X\\simeq Y over S^nu. The calculation is valid for J=(x^2,y^3) in Q[x,y]: it uses the universal properties and makes no claim that normalization commutes with adjoining the fractions x^2/y^3.",
+   "uses": [
+    "lem-sbc-normalization-dominant-lift",
+    "thm-nagata-blowup-principalizes-center",
+    "thm-nagata-blowup-universal-property",
+    "def-nagata-global-blowup",
+    "def-weil-pbc-reduced-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 2.2.9 and 2.2.7--2.2.8, pp.90--91"
+   }
+  },
+  {
+   "text": "Let h:T→S be smooth. The smoothness criterion [sbc-lem-smooth-criterion] gives that h is flat and locally of finite presentation with geometrically regular, hence geometrically reduced, fibres. On affine charts over the reduced finite-type Q-scheme S, the standard smooth-algebra argument in ILO Lemma 2.2.9 shows that T is reduced. The same lemma identifies the integral closures defining the componentwise normalizations after this smooth base change; the identification is local for localization and therefore glues to T^nu≅S^nu×_S T. Applying the same argument to the Rees charts of the ordinary blowup gives B_{J O_T}(T)≅B_J(S)×_S T. The projection is smooth by stability of smoothness under base change. This argument uses the smooth-base-change normalization theorem itself and does not invoke the field-smooth geometric-normality statement.",
+   "uses": [
+    "sbc-lem-smooth-criterion",
+    "lem-pc-smooth-flat",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-sbc-smooth-morphisms",
+    "def-nagata-global-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 2.2.7--2.2.9, pp.90--91"
+   }
+  },
+  {
+   "text": "The open S\\V(J) is dense in every component of S. Flatness and local finite presentation make h open, and flatness forces every irreducible component of T to dominate an irreducible component of S; therefore h^{-1}(S\\V(J)) is dense in each component of T, so J O_T remains nowhere dense. The chart constructions in Steps 3 and 4 use only canonical restrictions and the uniqueness clauses of the two universal properties, so the comparisons are unchanged by an identity map and agree after two composable smooth maps. This proves identity and composition compatibility.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 2.2.7--2.2.8, pp.90--91"
+   }
+  },
+  {
+   "text": "If J=O_S, its extension is invertible, so the Cartier-center blowup isomorphism identifies the ordinary blowup with S and therefore B_O(S)=S^nu. If S is normal, every component local ring is already integrally closed, so the componentwise normalization map is an isomorphism by the definition of normalization; consequently B_O(S)=S. Finally, a regular finite-type Q-scheme is normal by the regular-to-normal lemma, so its normalization is also an isomorphism. No regularity hypothesis is applied to a merely normal scheme.",
+   "uses": [
+    "cor-nagata-blowup-cartier-iso",
+    "def-weil-pbc-reduced-normalization",
+    "def-sc-normalization",
+    "rem-pc-regular-normal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 2.2.1--2.2.4, pp.89--90"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-nagata-blowup-cartier-iso",
+  "def-nagata-global-blowup",
+  "def-sbc-smooth-morphisms",
+  "def-sc-normalization",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-reduced-normalization",
+  "lem-pc-smooth-flat",
+  "lem-sbc-normalization-dominant-lift",
+  "lem-sc-normalization-exists",
+  "lem-weil-pbc-flat-lfp-open",
+  "rem-pc-regular-normal",
+  "sbc-lem-smooth-geometrically-reduced",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-blowup-universal-property",
+  "sbc-lem-smooth-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, 2.2.1--2.2.4, Lemma 2.2.9 and 2.2.7--2.2.8, printed pp.89--91; affine integral-closure details expanded here"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,7 +157,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-toric-normalized-desingularization",
@@ -62,7 +169,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, 2.2.1--2.2.4, Lemma 2.2.9 and 2.2.7--2.2.8, printed pp.89--91. Finiteness and normality of normalization: Stacks Tags 035S (morphisms.tex, lemma-nagata-normalization) and 035Q (morphisms.tex, lemma-normalization-normal), applied to finite-type Q-schemes. The input is one normalized blowup, with no resolution algorithm or equivariance assertion.",
+   "place": "Historical normalized-blowup input in lem-trf-local-term-locality proof (1)--(2), through ILO Expose VIII 2.2.1--2.2.9; the split realizes the universal-property, smooth-pullback, density, and unit-ideal clauses.",
    "via": [
     "lem-trf-toric-normalized-desingularization",
     "lem-trf-functorial-fan-desingularization",
@@ -77,5 +184,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-normalized-blowup-calculus",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by removing the false affine claim that normalization commutes with adjoining blowup-chart fractions and replacing it with a two-sided universal-property construction. Removed six auxiliary nodes because they restated clauses of the item; the proof now reuses the existing normalization-lifting node and the ordinary blowup nodes. Removed the erroneous regularity citation and explicitly records that the Q[x,y], J=(x^2,y^3) test is handled without the false calculation.",
+  "blueprint": "Realizes the normalized-blowup input in lem-trf-local-term-locality proof (1)--(2), specifically ILO Expose VIII 2.2.1--2.2.9.",
+  "tool_uses": [
+   {
+    "node": "def-weil-scheme-morphism-properties",
+    "why": "Its statement records the smooth criterion (flat, locally of finite presentation, geometrically regular fibres) used to justify the smooth-source reducedness and density arguments; no node on this normalized-blowup route supplies that generic smooth-morphism fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "Its statement supplies openness of a flat locally finitely presented morphism for the dense-open pullback argument; no node in this unit supplies the topological property."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Its statement supplies the final regular-implies-normal clause of the item; the normalized-blowup unit-ideal argument itself only handles normal schemes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-scheme-morphism-properties",
+  "lem-weil-pbc-flat-lfp-open",
+  "rem-pc-regular-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q12-34463b7f6",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q12-34463b7f6 (reviewer sub-agent of L); spot-checked: Step 4 omitted the existing sbc-lem-smooth-criterion needed to obtain the regular-morphism hypothesis used by ILO Lemma 2.2.9; the corrected DAG JSON adds the citation and proof dependency. The item metadata also incorrectly named created.item as lem-trf-toric-normalized-desingularization; this is corrected. Detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
