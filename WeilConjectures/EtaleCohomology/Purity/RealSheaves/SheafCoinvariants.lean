@@ -166,7 +166,7 @@ theorem exists_equivalence_isLisse_geometricCoinvariants :
             Representation.Coinvariants ((e.functor.obj F).obj.ρ.comp W.geometric.subtype),
           ∀ v, f ((F.obj.geometricCoinvariants F.property).frobenius v) =
             (e.functor.obj F).obj.ρ.toCoinvariants W.geometric W.frobeniusLift (f v)) := by
-  obtain ⟨e, hst, hdu, hse⟩ := W.exists_equivalence_isLisse l
+  obtain ⟨e, hst, hdu, hse, -⟩ := W.exists_equivalence_isLisse l
   refine ⟨e, hst, hdu, hse, fun F ↦ ?_⟩
   obtain ⟨a, ha⟩ := hse ⟨F.obj.dual F.property, F.property.dual⟩
   obtain ⟨b⟩ := hdu F
