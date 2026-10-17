@@ -10,6 +10,7 @@ public import Mathlib.Analysis.Normed.Module.FiniteDimension
 public import Mathlib.NumberTheory.Padics.ProperSpace
 public import WeilConjectures.AlgebraicGeometry.ProEtale.CohomologyFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProfiniteCoefficientCohomology
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.ForgetModuleCohomology
 
@@ -232,5 +233,51 @@ noncomputable def isColimitAdicConstantSheafCocone : IsColimit (adicConstantShea
   have := isIso_of_mono_of_epi (colimit.desc (compactLatticeDiagram l S) (adicConstantSheafCocone l S))
   have : IsIso ((colimit.isColimit _).desc (adicConstantSheafCocone l S)) := this
   exact IsColimit.ofPointIso (colimit.isColimit _)
+
+variable {l S}
+
+/-- The underlying abelian sheaf of `ℚ̄_ℓ,S` has no cohomology above `2d`, for `S` of finite type
+and dimension at most `d` over a separably closed field: it is the filtered colimit of the
+sheaves `C(-, Λ)`, which have no cohomology above `2d`. -/
+theorem subsingleton_H_adicConstantSheafAb_of_two_mul_lt {K : Type u} [Field K] [IsSepClosed K]
+    (a : S ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a] (d : ℕ)
+    (hS : topologicalKrullDim S ≤ (d : WithBot ℕ∞)) (q : ℕ) (hq : 2 * d < q) :
+    Subsingleton (Sheaf.H (adicConstantSheafAb l S) q) := by
+  have := LocallyOfFiniteType.isLocallyNoetherian a
+  have := QuasiCompact.compactSpace_of_compactSpace a
+  have : IsNoetherian S := {}
+  exact Scheme.ProEt.subsingleton_H_of_isColimit_of_isFiltered S
+    (isColimitAdicConstantSheafCocone l S) q fun Λ ↦
+      subsingleton_H_continuousSheaf_of_profinite a d hS Λ.down.ballSubgroup
+        Λ.down.ballSubgroup_succ_le Λ.down.eq_zero_of_forall_mem_ballSubgroup q hq
+
+instance : IsAddTorsionFree (ULift.{u + 1} (PadicAlgCl l)) where
+  nsmul_right_injective _ hn _ _ h :=
+    ULift.ext _ _ (nsmul_right_injective hn (congrArg ULift.down h))
+
+/-- **Cohomological dimension of `ℚ̄_ℓ`.** For a scheme `S` of finite type and of dimension at
+most `d` over a separably closed field, `Hᵠ(S_proét, ℚ̄_ℓ) = 0` for `q > 2d`, cohomology being
+computed in sheaves of `ℚ̄_ℓ`-modules. -/
+theorem isZero_rightDerived_Γ_adicConstantSheaf_of_two_mul_lt {K : Type u} [Field K]
+    [IsSepClosed K] (a : S ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a] (d : ℕ)
+    (hS : topologicalKrullDim S ≤ (d : WithBot ℕ∞)) (q : ℕ) (hq : 2 * d < q) :
+    IsZero (((Sheaf.Γ (Scheme.ProEt.topology S) (WeilCoefficients.{u} l)).rightDerived q).obj
+      (adicConstantSheaf l S)) := by
+  obtain ⟨q, rfl⟩ : ∃ q', q = q' + 1 := ⟨q - 1, by lia⟩
+  have hH := subsingleton_H_adicConstantSheafAb_of_two_mul_lt (l := l) a d hS (q + 1) hq
+  obtain ⟨e₁⟩ := Sheaf.cohomology_nonempty_addEquiv_rightDerived_evaluation_succ
+    (Scheme.ProEt.topology S) _ (Scheme.ProEt.isTerminalMkId S) (adicConstantSheafAb l S) q
+  let e₂ := forgetRightDerivedGlobalSectionsIso (ULift.{u + 1} (PadicAlgCl l)) S
+    (adicConstantSheaf l S) (q + 1)
+  have : Subsingleton ((forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l)))
+      AddCommGrpCat.{u + 1}).obj (((globalSectionsFunctor (ModuleCat.{u + 1}
+        (ULift.{u + 1} (PadicAlgCl l))) S).rightDerived (q + 1)).obj (adicConstantSheaf l S))) :=
+    (e₂.addCommGroupIsoToAddEquiv.trans e₁.symm).toEquiv.subsingleton
+  have : ((sheafSections (Scheme.ProEt.topology S) (WeilCoefficients.{u} l)).obj
+      (op (Scheme.ProEt.mk (𝟙 S)))).Additive := ⟨fun {_ _ _ _} ↦ rfl⟩
+  refine IsZero.of_iso (ModuleCat.isZero_of_subsingleton (((globalSectionsFunctor (ModuleCat.{u + 1}
+    (ULift.{u + 1} (PadicAlgCl l))) S).rightDerived (q + 1)).obj (adicConstantSheaf l S)))
+    (Functor.rightDerivedObjIsoOfIso (Sheaf.ΓNatIsoSheafSections _ _
+      (Scheme.ProEt.isTerminalMkId S)) (q + 1) _)
 
 end AlgebraicGeometry.ProEtale
