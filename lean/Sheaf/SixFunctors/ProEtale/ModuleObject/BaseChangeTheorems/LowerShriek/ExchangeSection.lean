@@ -2,7 +2,7 @@
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
-import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
+import all Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeMono
 
 /-! Componentwise geometric inputs for cartesian extension by zero. -/
 
@@ -83,7 +83,33 @@ theorem boundedConstructibleOpenImmersionLowerShriekBaseChange_app_section
       (boundedConstructibleUpperStar Λ ℓ g' ⋙
         boundedConstructibleOpenImmersionLowerShriek Λ ℓ j').obj K,
       β ≫ α.app K = 𝟙 _ := by
-  sorry
+  have :
+      IsIso (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).unit := by
+    have : IsIso (openImmersionLowerShriekUpperStarAdjunction Λ j.left).unit :=
+      openUnitIsIso Λ j.left
+    have : IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j.left).unit :=
+      Adjunction.isIso_mapDerivedCategoryAdjunction_unit
+        (openImmersionLowerShriekUpperStarAdjunction Λ j.left)
+    have ff := Adjunction.fullyFaithfulLOfIsIsoUnit
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j.left)
+    have := ff.full
+    have := ff.faithful
+    have : (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).Full := by
+      unfold boundedConstructibleOpenImmersionLowerShriek
+      infer_instance
+    have : (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).Faithful := by
+      unfold boundedConstructibleOpenImmersionLowerShriek
+      infer_instance
+    exact Adjunction.unit_isIso_of_L_fully_faithful
+      (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j)
+  -- Cartesian support makes the counit invertible on the target of the exchange.
+  have := boundedCartesianCounit Λ ℓ sq K
+  have : IsIso (α.app K) := by
+    rw [hα]
+    simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Functor.comp_obj]
+    infer_instance
+  exact ⟨inv (α.app K), IsIso.inv_hom_id _⟩
 
 end
 end AlgebraicGeometry.ProEtale.CondensedRing

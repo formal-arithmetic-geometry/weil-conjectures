@@ -9,25 +9,33 @@
  ],
  "proof": [
   {
-   "text": "On abelian pro-etale sheaves, apply weakly etale base change to the cartesian open square and conjugate the resulting right-adjoint isomorphism. This is the existing openImmersionLowerShriekBaseChangeIso construction.",
+   "text": "Reuse the proved boundedCartesianCounit helper in the proof module of [stage3-sfb-open-base-change-component-mono]. It says that the bounded-constructible jprime counit is invertible at g^*(j_! K). Its proof uses ordinary abelian-sheaf cartesian base change to detect support, reflects the linear counit through Mod.forget, derives the resulting natural isomorphism, and restricts through the fully faithful bounded-constructible inclusion. No equality of module and abelian exchange maps is required.",
    "uses": [
-    "lem-weil-pbc-coefficient-site-weakly-etale-base-change"
+    "stage3-sfb-open-base-change-component-mono"
    ],
    "elementary": false
   },
   {
-   "text": "For abelian pro-etale sheaves, cartesian extension-by-zero base change identifies the\ninverse image of the extension by zero with extension by zero from the pulled-back open.\nThe comparison is linear over the pulled-back coefficient ring: its map on the open is the\nidentity after the cartesian identification, and extension by zero gives the unique action\naway from the open. The coefficient morphisms are isomorphisms, so scalar transport preserves\nthis identification. Under the canonical scalar-transport\nisomorphisms, the adjunction units, counits and pullback composition comparisons on module\nobjects forget to these sheaf comparisons: expand the lifted adjunctions and cancel the\ncoefficient-isomorphism inverse pairs using their triangle identities. Their displayed mate\nis therefore precisely the linear exchange map. All four functors are exact. Applying this\nsheaf-level comparison and its inverse degreewise commutes with differentials and descends through\nquasi-isomorphisms.\nThe compatibility isomorphisms defining the restricted bounded constructible functors and\nadjunctions therefore identify the displayed composite on K with this derived exchange.\nTake the component of the degreewise inverse under these compatibility isomorphisms.\nIt is a morphism from the target to the source whose composite with α.app K is the identity,\nsince the degreewise inverse equation survives localization and restriction. Only existence\nfor this fixed K is asserted; the theorem does not choose data or assert naturality in K.",
+   "text": "Reuse the proved openUnitIsIso helper from [lem-weil-pbc-condensed-open-closed-recollement]. The mapDerivedCategoryAdjunction unit theorem makes the derived extension by zero fully faithful. Its restriction to bounded constructible objects is fully faithful, so the restricted adjunction unit is invertible.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite alpha by h_alpha and expand only natural-transformation composition and whiskering at K. Every factor is invertible: the unit from step 2, the square-transport isomorphism, the counit from step 1, and the unitors. Hence alpha.app K is invertible. Its inverse beta satisfies beta composed with alpha.app K = identity by IsIso.inv_hom_id.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coefficient-site-weakly-etale-base-change"
+  "stage3-sfb-open-base-change-component-mono",
+  "lem-weil-pbc-condensed-open-closed-recollement"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-open-base-change/thm-sfb-dc-open-base-change-iso.md",
-  "place": "C3: detailed module-linear, exact-derived and bounded-constructible transport of the ordinary sheaf exchange; final component cancellation/existence"
+  "place": "E4 second reading: reuse proved support/counit transport from ExchangeMono and the recollement unit isomorphism; invert the original unit-square-counit component without a new geometric theorem."
  },
  "lean": {
   "existing": false,
@@ -105,10 +113,10 @@
   "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261017T032449-L-1749299",
-  "kind": "interface",
+  "landing": "20261017T054231-L-3848901",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
