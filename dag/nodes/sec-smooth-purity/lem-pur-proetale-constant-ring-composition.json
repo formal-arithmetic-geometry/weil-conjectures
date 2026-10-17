@@ -12,7 +12,8 @@
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-constant-sheaf",
   "def-weil-proetale-inverse-image",
-  "prop-weil-pbc-proetale-constant-ring-map"
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-comparison-pullback"
  ],
  "proof": [
   {
@@ -201,5 +202,24 @@
   "group": "Q76",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-bca47bea9 (reviewer sub-agent of L); spot-checked: I read the item, its four steps and every cited statement in full: def-weil-proetale-inverse-image, def-weil-pbc-constant-sheaf, def-weil-pbc-sheafification, prop-weil-pbc-proetale-constant-ring-map, def-weil-pbc-proetale-site and def-pc-scheme. I checked the sources at Stacks proetale.tex section-morphism (09A5), and at sites.tex example-constant-sheaf (0H7J) and proposition-sheafification-adjoint (00WH). The statement is unchanged and correct. Its coefficient category is ring sheaves, its morphism is pro-etale base change V to X x_Y V, and c^f is the adjoint of rho^f, matching the definition node; prop-weil-pbc-proetale-constant-ring-map identifies it for commutative coefficients. I tested Z empty, A = 0, identity morphisms and disconnected V; all hold. Step 1: beta is restriction along the canonical isomorphism, and it keeps constants because the sheafification map is natural. Step 2: both maps send a constant a to the constant a, so uniqueness of sheafification for rings gives rho^{kh} = beta o R_k(rho^h) o rho^k. Step 3: Phi_h(d) = rho^h o c_k by naturality of eta_h, and then Phi_k(rho^h o c_k) = R_k(rho^h) o rho^k. All types check. Step 4: the mate compatibility Phi_{kh}(t o alpha) = beta o Phi_k Phi_h(t) has the correct directions, and injectivity of Phi_{kh} gives the claim. All four steps are elementary, the uses equal proof_deps, and no proof of a cited node is used. The route matches the main-20261015 ancestor lem-pur-diagonal-base-change, whose last clause is p_2 o Delta = id. There are no new nodes, no SGA sources and no tool_uses. One finding for the maintainer: the existing unsplit node sec-trace-formula/lem-trf-constant-coefficient-composition (unit sk-d-weil, created by N2) states the identical equality. The report's DAG search missed it. This delivery creates no node, so nothing can be dropped here; the two nodes should be identified, for example by giving the trf node a one-step split that cites this item. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleConstantRingComposition",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleCoefficientInverseImageMap_comp",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleConstantRingComposition.lean",
+  "statement": "theorem proEtaleCoefficientInverseImageMap_comp {Z W V : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) (A : Type u) [CommRing A] [Finite A] : proEtaleCoefficientInverseImageMap (h ≫ k) A = (ProEtale.supportSiteProEtaleComparisonComp CommRingCat.{u + 1} h k).hom.app (proEtaleConstantRing V A) ≫ (proEtaleSheafInverseImage h CommRingCat.{u + 1}).map (proEtaleCoefficientInverseImageMap k A) ≫ proEtaleCoefficientInverseImageMap h A",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The published supportSiteProEtaleComparisonComp is the canonical mate of the chosen fibre-product associativity comparison. Its owning, already landed node lem-weil-pbc-comparison-pullback is added to stmt_deps; no comparison or coefficient map is redefined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-55f259834",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Read node, all 6 stmt_deps and their lean records, the published declarations (ProEtaleInverseImage.lean proEtaleConstantRing/proEtaleSheafInverseImage/proEtaleCoefficientInverseImageMap; SupportComparisonPullbackCoherence.lean:140-148 supportSiteProEtaleComparisonComp = conjugateIsoEquiv mate of Over.pullbackComp, direction L_{hk} -> L_k ⋙ L_h). Hypotheses exact (Scheme.{u} morphisms h,k; A : Type u, CommRing, Finite; no IsIso/universe restriction); conclusion c^{kh} = α_{A_V} ≫ h⁻¹(c^k) ≫ c^h matches the node; edge cases (empty Z, A=0, identities, disconnected) covered. Node diff: only lean plus stmt_deps gaining the landed lem-weil-pbc-comparison-pullback (allowed by brief-stage2 l.140). lean.statement verbatim in file; sorry-only; docstrings carry source places, blueprint tag and the 4 proof steps. nt_compile.py: module compiles clean in 20.6 s, no warnings. Scratch rfl check: the α used is defeq to proEtaleRingInverseImageComp and the pullback is defeq to proEtaleSheafInverseImage. Maintainer notes: the DAG duplicate lem-trf-constant-coefficient-composition should later record this theorem as existing; two published names for α predate this delivery. No fixes needed."
  }
 }
