@@ -8,6 +8,7 @@ module
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 
 /-!
@@ -98,59 +99,6 @@ theorem nonempty_iso_derivedTensor_leftDerivedUpperStar_obj_dualizingComplex
   obtain ⟨β⟩ := nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ) X
   have := h K
   exact ⟨(β.app _).app _ ≪≫ asIso (dualizingComplexTensorMap Λ f K)⟩
-
-include d in
-/-- Blueprint `prop-asd-smooth-base-change`: Arbitrary base change for smooth ambient duality.
-
-Let `f : X ⟶ Y` be as in `AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`
-(`thm-asd-smooth-tensor`) and let `g : Y' ⟶ Y` be arbitrary, with base change `f' : X' ⟶ Y'`
-and `g' : X' ⟶ X`:
-
-```
-  X' --g'--> X
-  |          |
-  f'         f
-  ↓          ↓
-  Y' --g---> Y
-```
-
-The canonical morphism `Lg'^* Rf^! ⟶ Rf'^! Lg^*`
-(`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`, the mate of the
-compact-support base change) is an isomorphism; at `Λ_Y` it identifies `Lg'^* ω_f` with
-`ω_{f'}`. The canonical morphism is only constructed for quasi-compact `f'`. -/
-theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension
-    {X' Y' : Scheme.{u}} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g)
-    [HasCompactification f'] [QuasiCompact f'] :
-    IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) :=
-  sorry
-
-include d in
-/-- Blueprint `prop-asd-smooth-base-change`: Arbitrary base change for smooth ambient duality.
-
-Let `f : X ⟶ Y` be as in `AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`
-(`thm-asd-smooth-tensor`) and let `g : Y' ⟶ Y` be arbitrary, with base change `f' : X' ⟶ Y'`
-and `g' : X' ⟶ X`:
-
-```
-  X' --g'--> X
-  |          |
-  f'         f
-  ↓          ↓
-  Y' --g---> Y
-```
-
-The canonical morphism `Lg'^* Rf^! K ⟶ Rf'^! Lg^* K` is an isomorphism for every complex `K`;
-at `K = Λ_Y` it identifies `Lg'^* ω_f` with `ω_{f'}`. The canonical morphism, the mate of the
-compact-support base change, is only constructed for quasi-compact `f'`
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`);
-for an arbitrary `f'` the existence of a natural isomorphism `Rf^! ⋙ Lg'^* ≅ Lg^* ⋙ Rf'^!` is
-recorded. -/
-theorem nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar {X' Y' : Scheme.{u}}
-    {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g)
-    [HasCompactification f'] :
-    Nonempty (R(f)^![ModuleCat.{u + 1} Λ] ⋙ L((g')^*[ModuleCat.{u + 1} Λ]) ≅
-      L((g)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')^![ModuleCat.{u + 1} Λ]) :=
-  sorry
 
 end Etale
 

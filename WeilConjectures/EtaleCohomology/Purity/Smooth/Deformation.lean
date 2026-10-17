@@ -152,6 +152,19 @@ theorem exists_nonempty_iso_twistShift_of_leftDerivedUpperStar_iso {U T : Scheme
     ((pointSmallEtale x').uliftSheafFiberIso _).symm.app _ ≪≫ sheafFiberUnitIso _ x'⟩
 
 omit [HasTateTwist Λ] in
+/-- Blueprint `pur9-def-section-invariant`: Section invariant
+
+For a compactifiable `g : V ⟶ B` with a section `s : B ⟶ V`, the section invariant
+`𝒞(g, s) = Ls^* ω_g` (`AlgebraicGeometry.Etale.sectionInvariant`) is the derived pullback along
+`s` of the dualizing complex `ω_g = Rg^! Λ_B`. When `g` is separated, `s` is a closed immersion
+(`AlgebraicGeometry.IsClosedImmersion.of_section_of_isSeparated`). -/
+theorem sectionInvariant_eq {V B : Scheme.{u}} (g : V ⟶ B) [HasCompactification g]
+    (s : B ⟶ V) :
+    sectionInvariant Λ g s =
+      (L((s)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) g) :=
+  rfl
+
+omit [HasTateTwist Λ] in
 /-- Blueprint `lem-pur-dnc-section-geometry`: Geometry of the deformation
 
 *Base change of section invariants*, the input of the two fibre identifications
@@ -222,7 +235,8 @@ open _root_.AlgebraicGeometry.Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {V B : Scheme.{u}} {d : ℕ}
   {g : V ⟶ B} {s : B ⟶ V} {N : NormalConeData d s} (D : DeformationToNormalConeData d g s N)
 
-/-- Blueprint `def-pur-dnc-section-family`: Deformation space of a closed section
+/-- Blueprint `def-pur-dnc-section-family`: Deformation space of a closed section; also
+blueprint `pur9-def-family-object`: Family object.
 
 The *family object* `F = Ls̃^* ω_{g̃}` on `𝔸¹_B` of a deformation datum: the section invariant
 of the deformation `g̃ : 𝒟_s V ⟶ 𝔸¹_B` and its section `s̃`. -/
@@ -511,6 +525,37 @@ theorem existsUnique_familyObject_iso
   refine eq_of_leftDerivedUpperStar_oneSection_eq Λ _ _ (D.isInvertible_familyObject Λ) _ _ ?_
   rw [← cancel_mono (ε.hom.app _)]
   exact hκ.trans ((key κ₀ ψ).trans hψ).symm
+
+/-- The comparison `κ_{g,s} : F ≅ La^* 𝒞(g, s)` of the family object with the pullback of the
+section invariant, normalized at `t = 1` against `θ₁ : i₁^* F ≅ 𝒞(g, s)`: the unique one of
+`existsUnique_familyObject_iso`. This is the extension of the punctured trivialisation. -/
+noncomputable def familyObjectIso
+    (θ₁ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
+      (D.familyObject Λ) ≅ sectionInvariant Λ g s) :
+    D.familyObject Λ ≅
+      (L((𝔸(ULift.{u} (Fin 1); B) ↘ B)^*[ModuleCat.{u + 1} Λ])).obj (sectionInvariant Λ g s) :=
+  (D.existsUnique_familyObject_iso Λ aB θ₁).exists.choose
+
+/-- Blueprint `pur9-dnc-def-iso`: The DNC isomorphism
+
+`δ_{g,s} : 𝒞(g, s) ≅ 𝒞(π_N, 0_N)` is the composite
+
+`𝒞(g, s) ≅ Li₀^* La^* 𝒞(g, s) ≅ Li₀^* F ≅ 𝒞(π_N, 0_N)`,
+
+of `a ∘ i₀ = 𝟙`, the inverse of `Li₀^* κ_{g,s}` for the comparison
+`κ_{g,s} : F ≅ La^* 𝒞(g, s)` (`familyObjectIso`, normalized against the fibre identification
+`θ₁` at `t = 1`) and the fibre identification `θ₀ : Li₀^* F ≅ 𝒞(π_N, 0_N)` at `t = 0`
+(`lem-pur-dnc-section-geometry` (1)). -/
+noncomputable def dncIso [HasCompactification N.proj]
+    (θ₁ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
+      (D.familyObject Λ) ≅ sectionInvariant Λ g s)
+    (θ₀ : (L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
+      (D.familyObject Λ) ≅ sectionInvariant Λ N.proj N.zeroSection) :
+    sectionInvariant Λ g s ≅ sectionInvariant Λ N.proj N.zeroSection :=
+  ((leftDerivedUpperStarCompSectionIso _ _ _
+      (AffineSpace.zeroSection_comp_over (ULift.{u} (Fin 1)) B)).app _).symm ≪≫
+    (L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).mapIso
+      (D.familyObjectIso Λ aB θ₁).symm ≪≫ θ₀
 
 omit [HasTateTwist.IsNormalized Λ] in
 /-- Blueprint `prop-pur-dnc-family-constancy`: The deformation family is constant along the

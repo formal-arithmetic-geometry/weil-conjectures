@@ -108,6 +108,26 @@ theorem nonempty_iso_leftDerivedUpperStar_puncturedLine_familyObject (hs : s ≫
     (hm₂.trans (Category.assoc _ _ _).symm)
   exact ⟨e₁ ≪≫ e₂.symm ≪≫ (leftDerivedUpperStarComp _ j (𝔸(ULift.{u} (Fin 1); B) ↘ B)).app _⟩
 
+include d in
+/-- Blueprint `pur9-dg-def-punctured`: The punctured trivialization
+
+`τ° : Lj^* ℱ ≅ Lj^* La^* 𝒞(g, s)` over the punctured line `j : 𝔾_{m,B} ⊆ 𝔸¹_B`, for the
+family object `ℱ = Ls̃^* ω_{g̃}` of the deformation space of `s` and `a : 𝔸¹_B ⟶ B`. It is
+obtained from the identification `D_s V ×_{𝔸¹_B} 𝔾_{m,B} = V ×_B 𝔾_{m,B}`, the base change
+isomorphisms of the dualizing complexes of `g̃` and `g` along `𝔾_{m,B} ⟶ 𝔸¹_B` and
+`𝔾_{m,B} ⟶ B` (`sk-prop-cohsm`), and the composition comparisons of derived pullbacks
+(`nonempty_iso_leftDerivedUpperStar_puncturedLine_familyObject`); the base change isomorphism
+being only known to exist, one such composite is chosen. -/
+noncomputable def puncturedTrivialization (hs : s ≫ g = 𝟙 B)
+    [HasCompactification (Scheme.Hom.deformationSpaceProj g s)]
+    [HasInvertibleExponent Λ s.ker.deformationSpace] :
+    (L(((Scheme.Hom.puncturedLine B).ι)^*[ModuleCat.{u + 1} Λ])).obj
+        (sectionInvariant Λ (Scheme.Hom.deformationSpaceProj g s) s.deformationSpaceSection) ≅
+      (L(((Scheme.Hom.puncturedLine B).ι)^*[ModuleCat.{u + 1} Λ])).obj
+        ((L((𝔸(ULift.{u} (Fin 1); B) ↘ B)^*[ModuleCat.{u + 1} Λ])).obj
+          (sectionInvariant Λ g s)) :=
+  Classical.choice (nonempty_iso_leftDerivedUpperStar_puncturedLine_familyObject Λ (d := d) g s hs)
+
 end Construction
 section StandardPair
 

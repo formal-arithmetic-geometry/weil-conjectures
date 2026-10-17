@@ -72,6 +72,54 @@ namespace AlgebraicGeometry
 
 variable {V B : Scheme.{u}}
 
+/-- In the extended Rees algebra `R[t, I t⁻¹]`, every element of `I` is a multiple of `t`:
+`x = t · (x t⁻¹)`. -/
+lemma _root_.Ideal.algebraMap_mem_span_extendedReesAlgebraT {R : Type*} [CommRing R]
+    {I : Ideal R} {x : R} (hx : x ∈ I) :
+    algebraMap R I.extendedReesAlgebra x ∈ Ideal.span {I.extendedReesAlgebraT} := by
+  refine Ideal.mem_span_singleton'.2
+    ⟨⟨_, Ideal.C_mul_T_neg_one_mem_extendedReesAlgebra hx⟩, Subtype.ext ?_⟩
+  simp only [Subalgebra.coe_mul, Ideal.coe_extendedReesAlgebraT,
+    Ideal.coe_algebraMap_extendedReesAlgebra, mul_assoc, ← LaurentPolynomial.T_add]
+  simp
+
+namespace Scheme.IdealSheafData
+
+open AffineZariskiSite
+
+variable {X : Scheme.{u}} (I : X.IdealSheafData)
+
+/-- The inclusion `𝒪_X / I ⟶ ⨁_{r ≥ 0} I^r / I^{r+1}` of the degree-zero part of the associated
+graded algebra. -/
+noncomputable def quotientToNormalCone : I.quotientAlgebra ⟶ I.normalConePresheaf where
+  app U := CommRingCat.ofHom (Ideal.Quotient.lift _
+    ((Ideal.Quotient.mk (I.tIdeal U)).comp (I.toReesPresheaf.app U).hom)
+    fun _ ha ↦ Ideal.Quotient.eq_zero_iff_mem.2
+      (Ideal.algebraMap_mem_span_extendedReesAlgebraT ha))
+  naturality U V i := by
+    refine CommRingCat.hom_ext (Ideal.Quotient.ringHom_ext (RingHom.ext fun x ↦ ?_))
+    change Ideal.Quotient.mk _
+        ((I.toReesPresheaf.app V).hom ((X.affineStructurePresheaf.map i).hom x)) =
+      Ideal.Quotient.mk _ ((I.reesPresheaf.map i).hom ((I.toReesPresheaf.app U).hom x))
+    exact congrArg _ (I.toReesPresheaf.naturality_apply i x)
+
+lemma quotientToNormalCone_normalConeToQuotient :
+    I.quotientToNormalCone ≫ I.normalConeToQuotient = 𝟙 _ := by
+  ext U x
+  obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
+  change Polynomial.eval 0 (Ideal.extendedReesAlgebraToPolynomial _ (Ideal.Quotient.mk _)
+    Ideal.mk_ker.ge (algebraMap _ (I.siteIdeal U.unop).extendedReesAlgebra x)) = _
+  exact (congrArg (Polynomial.eval 0)
+    (Ideal.extendedReesAlgebraToPolynomial_algebraMap _ _ x)).trans Polynomial.eval_C
+
+/-- The projection `N_I X ⟶ V(I)` of the normal cone to the closed subscheme cut out by `I`,
+given by the degree-zero part `𝒪_X / I ⟶ ⨁_{r ≥ 0} I^r / I^{r+1}`. -/
+noncomputable def normalConeToQuotientSpec : I.normalCone ⟶ I.quotientSpec :=
+  relativeGluingMap I.coequifibered_toQuotientAlgebra I.coequifibered_toNormalConePresheaf
+    I.quotientToNormalCone
+
+end Scheme.IdealSheafData
+
 namespace Scheme.Hom
 
 /-! ### The construction -/
@@ -82,8 +130,12 @@ open AffineZariskiSite
 
 variable (g : V ⟶ B) (s : B ⟶ V)
 
-/-- The projection `g̃ : D_s V ⟶ 𝔸¹_B` of the deformation space of the section `s`, given by the
-coordinate `t` and `D_s V ⟶ V ⟶ B`. -/
+/-- Blueprint `pur9-def-deformation-space`: Deformation space of a section
+
+The projection `g̃ : D_s V ⟶ 𝔸¹_B` of the deformation space
+`D_s V = Spec_V (⨁_{r ∈ ℤ} I^r t^{-r})` of the section `s`
+(`AlgebraicGeometry.Scheme.IdealSheafData.deformationSpace` of the ideal `I` of `s(B)`), given by
+the coordinate `t` and `D_s V ⟶ V ⟶ B`. -/
 noncomputable def deformationSpaceProj : s.ker.deformationSpace ⟶ 𝔸(ULift.{u} (Fin 1); B) :=
   s.ker.deformationSpaceToPolynomialSpec ≫ V.polynomialSpecToAffineSpace ≫
     AffineSpace.map (ULift.{u} (Fin 1)) g
@@ -133,6 +185,27 @@ instance [IsClosedImmersion s] : IsClosedImmersion s.normalConeZeroSection := by
   exact IsClosedImmersion.of_comp _
     (relativeGluingData s.ker.coequifibered_toNormalConePresheaf).toBase
 
+/-- Blueprint `pur9-def-normal-cone`: Normal cone
+
+For a closed immersion `s : B ⟶ V` with ideal sheaf `I`, the normal cone
+`N_{B/V} = Spec (⨁_{r ≥ 0} I^r / I^{r+1})` (`AlgebraicGeometry.Scheme.IdealSheafData.normalCone`)
+lies over `B = V(I)`: this is its projection `N_{B/V} ⟶ B`, given by the degree-zero part
+`𝒪_V / I ⟶ ⨁_{r ≥ 0} I^r / I^{r+1}`. Its zero section is `normalConeZeroSection`, given by the
+projection of the graded algebra onto its degree-zero part
+(`normalConeZeroSection_normalConeToBase`). -/
+noncomputable def normalConeToBase [IsClosedImmersion s] : s.ker.normalCone ⟶ B :=
+  s.ker.normalConeToQuotientSpec ≫ inv s.toQuotientSpec
+
+/-- Blueprint `pur9-def-normal-cone`: the zero section of the normal cone of a closed immersion is
+a section of its projection. -/
+@[reassoc (attr := simp)]
+lemma normalConeZeroSection_normalConeToBase [IsClosedImmersion s] :
+    s.normalConeZeroSection ≫ s.normalConeToBase = 𝟙 B := by
+  rw [normalConeZeroSection, normalConeToBase, IdealSheafData.normalConeToQuotientSpec,
+    Category.assoc, ← Category.assoc (relativeGluingMap _ _ _), ← relativeGluingMap_comp,
+    IdealSheafData.quotientToNormalCone_normalConeToQuotient, relativeGluingMap_id,
+    Category.id_comp, IsIso.hom_inv_id]
+
 /-- `𝔸¹_B ⟶ 𝔸¹_{V(I_s)} = Spec_V (𝒪_V / I_s)[t]`, the affine line over `B ≅ V(I_s)`. -/
 noncomputable def affineSpaceToQuotientPolynomialSpec :
     𝔸(ULift.{u} (Fin 1); B) ⟶ s.ker.quotientPolynomialSpec :=
@@ -158,7 +231,9 @@ lemma affineSpaceToQuotientPolynomialSpec_toPolynomialSpec :
       AffineSpace.map (ULift.{u} (Fin 1)) s ≫ inv V.polynomialSpecToAffineSpace :=
   IsPullback.lift_snd _ _ _ _
 
-/-- The section `s̃ : 𝔸¹_B ⟶ D_s V` of `g̃`: on the extended Rees algebra it is
+/-- Blueprint `pur9-def-deformation-space`: Deformation space of a section
+
+The section `s̃ : 𝔸¹_B ⟶ D_s V` of `g̃`: on the extended Rees algebra it is
 `𝒪_V[t, I t⁻¹] ⟶ (𝒪_V / I)[t]`, `t ↦ t`, `x t⁻¹ ↦ 0`. -/
 noncomputable def deformationSpaceSection : 𝔸(ULift.{u} (Fin 1); B) ⟶ s.ker.deformationSpace :=
   s.affineSpaceToQuotientPolynomialSpec ≫ relativeGluingMap s.ker.coequifibered_toReesPresheaf
