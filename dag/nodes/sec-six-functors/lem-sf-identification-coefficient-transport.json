@@ -2,7 +2,7 @@
  "id": "lem-sf-identification-coefficient-transport",
  "kind": "statement",
  "title": "Identity-point composition normalization at all coefficient stages",
- "statement": "Fix a six-functor datum [def-sf-datum], with $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\geq1$. Put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and choose $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. Let $X$ be a separated finite-type $k$-scheme, $s=\\operatorname{Spec}k$, and $a:X\\to s$ its structure morphism. Use the datum's constructible finite-Tor categories and exceptional adjunctions; at the integral stage use the completed operations with compatible etale-origin witnesses on finite reductions, at $E$ use their scalar localization, and at $\\overline{\\mathbf Q}_\\ell$ use a common finite coefficient stage, on the corresponding domains of [fix-lem-exchanges]. Let $\\alpha_{\\mathrm{id}_s,a}:R\\mathrm{id}_{s!}Ra_!\\xrightarrow{\\sim}Ra_!$ denote the specified compact-support composition comparison: the finite comparison of [thm-sf-comp-composition], its completed form, or its rationalized or common-stage form as in [fix-lem-exchanges](2),(4), respectively. Under the canonical $R\\mathrm{id}_{s!}\\cong\\mathrm{id}$ identification, $\\alpha_{\\mathrm{id}_s,a}$ is the identity natural transformation at each of these stages.\n\nPut $\\omega_s=R\\mathrm{id}_s^!\\Lambda_s$ and let $\\nu:\\omega_s\\to\\Lambda_s$ be the counit of $R\\mathrm{id}_{s!}\\dashv R\\mathrm{id}_s^!$ under that same identity comparison. Let $c:Ra^!\\omega_s\\to Ra^!\\Lambda_s$ be the inverse of the right-adjoint mate of $\\alpha_{\\mathrm{id}_s,a}$; thus $c$ is the conjugate of $\\alpha_{\\mathrm{id}_s,a}^{-1}$ with respect to $Ra_!\\dashv Ra^!$ and the composite adjunction $R\\mathrm{id}_{s!}Ra_!\\dashv Ra^!R\\mathrm{id}_s^!$ with pasted unit and counit. Then $\\nu$ and $c$ are isomorphisms, $c=Ra^!(\\nu)$, and, for the counit $\\varepsilon^!_N:Ra_!Ra^!N\\to N$ of $Ra_!\\dashv Ra^!$,\n$$\\varepsilon^!_{\\Lambda_s}\\circ Ra_!(c)=\\nu\\circ\\varepsilon^!_{\\omega_s}.$$\nThese are equations of morphisms in the actual category at the chosen coefficient stage. In particular the integral assertion is an assertion for the specified completed composition comparison itself.",
+ "statement": "Fix a six-functor datum [def-sf-datum], with $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\geq1$. Put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and choose $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. Let $X$ be a separated finite-type $k$-scheme, $s=\\operatorname{Spec}k$, and $a:X\\to s$ its structure morphism. Use the datum's constructible finite-Tor categories and exceptional adjunctions; at the integral stage use the specified completed operations with compatible etale-origin witnesses on finite reductions, at $E$ their raw scalar localization, and at $\\overline{\\mathbf Q}_\\ell$ their common finite coefficient stages, on the corresponding domains of [fix-lem-exchanges]. Write $I=R\\mathrm{id}_{s!}$ and $J=R\\mathrm{id}_s^!$. Let $\\alpha_{\\mathrm{id}_s,a}:IRa_!\\xrightarrow{\\sim}Ra_!$ be the specified compact-support composition comparison: at finite coefficients the comparison of [thm-sf-comp-composition], integrally the specified completed comparison of [fix-lem-exchanges](2),(4), and at field coefficients its scalar-localized or common-stage image as in the same node. Let $v:I\\xrightarrow{\\sim}\\mathrm{id}$ be the canonical identity comparison: finite-level identity compactification, integrally the inverse of the actual reduction/total-limit unit $u_C:C\\to\\mathcal L_s\\mathcal R_sC$ of [lem-coef-derived-system-evaluation-calculus], and at field coefficients its scalar image. Then $\\alpha_{\\mathrm{id}_s,a}=vRa_!$; equivalently it is the identity under this comparison at every listed coefficient stage.\n\nLet $e:IJ\\to\\mathrm{id}$ be the counit of $I\\dashv J$, put $\\omega_s=J\\Lambda_s$, and define the identity-normalized counit\n$$\\nu=e_{\\Lambda_s}\\circ v_{J\\Lambda_s}^{-1}:\\omega_s\\longrightarrow\\Lambda_s.$$\nLet $c:Ra^!\\omega_s\\to Ra^!\\Lambda_s$ be the inverse of the right-adjoint mate of $\\alpha_{\\mathrm{id}_s,a}$; equivalently it is the conjugate of $\\alpha_{\\mathrm{id}_s,a}^{-1}$ with respect to $Ra_!\\dashv Ra^!$ and the composite adjunction $IRa_!\\dashv Ra^!J$, with pasted unit and counit. Then $\\nu$ and $c$ are isomorphisms, $c=Ra^!(\\nu)$, and, for the counit $\\varepsilon^!_N:Ra_!Ra^!N\\to N$,\n$$\\varepsilon^!_{\\Lambda_s}\\circ Ra_!(c)=\\nu\\circ\\varepsilon^!_{\\omega_s}.$$\nThese are equations of morphisms in the actual coefficient category at the chosen stage; the integral assertion concerns the specified completed composition comparison itself.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-identification/sk-thm-sf-identification.proof.md",
   "place": "Pairing-identification proof, normalization at the point; fix-lem-exchanges clauses (2),(4), completed and transported composition comparisons at (id_s,a)"
@@ -10,11 +10,123 @@
  "stmt_deps": [
   "def-sf-datum",
   "thm-sf-comp-composition",
-  "fix-lem-exchanges"
+  "fix-lem-exchanges",
+  "lem-coef-derived-system-evaluation-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "At finite coefficients, [thm-sf-comp-composition] gives $\\alpha_{\\mathrm{id}_s,a}=vRa_!$ by its identity clause. Integrally the identity compactification in [def-weil-integral-rational-qbar-compact-support] gives $IC=\\mathcal L_s\\mathcal R_sC$. Use the actual adjunction $\\mathcal R_s\\dashv\\mathcal L_s$ and its unit $u$ from [lem-coef-derived-system-evaluation-calculus]. The identity-open case of [lem-sf-integral-open-reduction-comparison] says that this $u_C$ is invertible on derived-complete inputs; the open coefficient comparison $r_{\\mathrm{id}}$ is the identity, since extension by zero along the identity leaves the flat-term reduction representative and every quotient map unchanged. Its formula $d_{\\mathrm{id}}=u_C^{-1}\\mathcal L(r_{\\mathrm{id}})^{-1}$ therefore fixes the canonical identity comparison as $v_C=u_C^{-1}$.",
+   "uses": [
+    "thm-sf-comp-composition",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-integral-open-reduction-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, as total-limit foundation; identity normalization is the agent calculation using the cited open-reduction theorem."
+   }
+  },
+  {
+   "text": "Fix an integral input $K$ and a compactification $a=pj$ with $j$ quasi-compact open and $p$ proper. Put $T=S_pJ_j$ on semilinear systems, $N=T\\mathcal R_XK$, and $C=d_{a,K}:\\mathcal L_sN\\xrightarrow{\\sim}Ra_!K$, the direct strict-tower identification of [lem-sf-integral-compactification-comparison-bridge]. The tower is the one defining [def-weil-integral-rational-qbar-compact-support]. The system inputs and intermediate outputs meet the realization domain of [lem-sf-integral-compactification-system-realization]: the datum's operations are on $D^b_{ctf}$, hence have common finite cohomological and Tor intervals, and (A5) of [def-sf-datum] identifies the system levels and quotient transitions with the finite reductions. Normalization and compatible etale-origin witnesses are part of the stated coefficient-domain data. Choose the outer identity compactification and retain the same compactification for the composite. The bridge lemma fixes $B_{\\mathrm{id}}=1$, $I=\\mathcal L_s\\mathcal R_s$ and $d_{\\mathrm{id},M}=1$ under the system unitors. It compares its counit formula to the actual word-normalized composition of [fix-lem-exchanges](2),(4); this is the comparison our statement names.",
+   "uses": [
+    "lem-sf-integral-compactification-comparison-bridge",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-sf-integral-compactification-system-realization",
+    "def-sf-datum",
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-identification/sk-thm-sf-identification.proof.md",
+    "place": "Agent expansion of the normalized trace sentence; the named bridge isolates the comparison obligation missing from the returned proof."
+   }
+  },
+  {
+   "text": "Write $e_N^{\\mathrm{sys}}:\\mathcal R_s\\mathcal L_sN\\to N$ for the actual system counit of [lem-coef-derived-system-evaluation-calculus]. For the outer identity compactification, the proper/open map and proper/open compositors give $\\beta=1_T$ by [lem-sf-ambient-proper-open-pasting]. Specialize the equality of [lem-sf-integral-compactification-comparison-bridge] to $(g,f)=(\\mathrm{id}_s,a)$. Its $d_g=1$, $d_h=d_f=C$ and $B_g=1$ give, for the specified comparison of [fix-lem-exchanges](2),(4),\n$$\\alpha_{\\mathrm{id}_s,a,K}=C\\circ\\mathcal L_s(e_N^{\\mathrm{sys}})\\circ\\mathcal L_s\\mathcal R_s(C^{-1}).$$\nAll maps here are actual integral maps. Naturality of $u$ gives $\\mathcal L_s\\mathcal R_s(C^{-1})u_{Ra_!K}=u_{\\mathcal L_sN}C^{-1}$. The adjunction triangle $\\mathcal L_s(e_N^{\\mathrm{sys}})u_{\\mathcal L_sN}=1$ therefore yields $\\alpha_{\\mathrm{id}_s,a,K}u_{Ra_!K}=1$. By Step 1, $u_{Ra_!K}$ is invertible, so $\\alpha_{\\mathrm{id}_s,a,K}=u_{Ra_!K}^{-1}=v_{Ra_!K}$. This uses the bridge's statement, without choosing or normalizing any of the unspecified expression-realization maps $c_V$.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-integral-compactification-comparison-bridge",
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 only supplies the total-limit model. The agent calculation specializes the explicitly cited comparison-bridge statement and uses naturality and the adjunction triangle."
+   }
+  },
+  {
+   "text": "At $E$, [def-weil-rationalization-karoubi] has the same objects as the integral category and morphisms $f/t^r$; the higher compact-support operations are those of [def-weil-integral-rational-qbar-compact-support]. Applying its scalar-localization functor $Q$ to Step 3 gives $\\alpha_E=Q(\\alpha_{\\mathrm{int}})=Q(v_{Ra_!})=v_E Ra_{!,E}$. Here the operation/composition coefficient comparisons are the supplied compatibility data of (A5) of [def-sf-datum]. Naturality also holds on denominators: $v_{K'}I_E(f/t^r)=Q(v_{K'}I(f))/t^r=Q(fv_K)/t^r=(f/t^r)v_K$. At $\\overline{\\mathbf Q}_\\ell$, choose one finite field containing representatives for the finitely many objects and morphisms in question, as in [def-weil-algebraically-closed-coefficients]. The equality just proved over that field gives equality of their common-stage classes. Under a further field extension the functor sends this equality and its inverse identities to the same equalities; (A5) identifies these images with the supplied operation/composition comparisons. This proves normalization at both field stages using the specified coefficient data, rather than deducing equality from reductions.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-sf-datum",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-identification/sk-thm-sf-identification.proof.md",
+    "place": "Agent expansion of the normalized trace sentence: explicit scalar-localization and common-stage morphism calculation; A5 is required structure of the assumed datum."
+   }
+  },
+  {
+   "text": "Fix any of the four stages. Write $F=Ra_!$, $G=Ra^!$, $I=R\\mathrm{id}_{s!}$ and $J=R\\mathrm{id}_s^!$. Clause (A1) of [def-sf-datum] supplies $F\\dashv G$, with unit $\\eta$ and counit $\\mu$, and $I\\dashv J$, with counit $e:IJ\\to\\mathrm{id}$. Let $w_L=e_L\\circ v_{JL}^{-1}:JL\\to L$. Applying [def-weil-pbc-adjunction-conjugate] to $v^{-1}:\\mathrm{id}\\to I$, for $I\\dashv J$ and the identity adjunction of [def-weil-pbc-composite-adjunction], gives precisely $w:J\\to\\mathrm{id}$: its component formula is $e_Lv_{JL}^{-1}$ because the identity-adjunction unit is the identity. That node says conjugation sends isomorphisms to isomorphisms, so $w$ is invertible. In particular $\\nu=w_{\\Lambda_s}$ is invertible. The maps $v_{\\Lambda_s}:I\\Lambda_s\\to\\Lambda_s$ and $\\nu:J\\Lambda_s\\to\\Lambda_s$ have different sources; the latter has just been constructed from $e$ and $v_{J\\Lambda_s}^{-1}$.",
+   "uses": [
+    "def-sf-datum",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0, lemma-compose-counits, and the componentwise conjugation definition."
+   }
+  },
+  {
+   "text": "The preceding normalization says $\\alpha=vF$. The counit of $IF\\dashv GJ$ is $e_L\\circ I(\\mu_{JL})$ by [def-weil-pbc-composite-adjunction]. Substitution in the conjugation formula of [def-weil-pbc-adjunction-conjugate] for $\\alpha^{-1}:F\\to IF$ gives\n$$c_L=G(e_L)\\circ G(I(\\mu_{JL}))\\circ G(v_{FGJL}^{-1})\\circ\\eta_{GJL}:GJL\\longrightarrow GL.$$\nNaturality of $v^{-1}:\\mathrm{id}\\to I$ at $\\mu_{JL}:FGJL\\to JL$ gives $I(\\mu_{JL})\\circ v_{FGJL}^{-1}=v_{JL}^{-1}\\circ\\mu_{JL}$. Thus\n$$c_L=G(e_Lv_{JL}^{-1})\\circ G(\\mu_{JL})\\circ\\eta_{GJL}=G(w_L),$$\nusing the $F\\dashv G$ triangle identity from (A1) of [def-sf-datum]. At $L=\\Lambda_s$ this is $c=Ra^!(\\nu)$; a functor carries the two inverse identities for $\\nu$ to inverse identities for $c$, so $c$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-sf-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0, lemma-compose-counits; agent component calculation using naturality and the adjunction triangle."
+   }
+  },
+  {
+   "text": "Naturality of the counit $\\varepsilon^!=\\mu$ at $\\nu:\\omega_s\\to\\Lambda_s$ gives $\\varepsilon^!_{\\Lambda_s}\\circ Ra_!(Ra^!(\\nu))=\\nu\\circ\\varepsilon^!_{\\omega_s}$. Substituting $c=Ra^!(\\nu)$ gives the claimed equation in the chosen coefficient category.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Naturality of the counit of an adjunction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-sf-comp-composition",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-integral-compactification-comparison-bridge",
+  "lem-sf-integral-compactification-system-realization",
+  "def-sf-datum",
+  "fix-lem-exchanges",
+  "lem-sf-ambient-proper-open-pasting",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-identification/sk-thm-sf-identification.proof.md",
+  "place": "Expanded identity-point trace normalization, absent from the blueprint proof itself; actual completed comparison via strict-system realization and reduction/limit triangle, followed by a typed mate calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,7 +193,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-sf-identification",
@@ -98,5 +210,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sf-identification-coefficient-transport",
+  "worker": "stage1",
+  "summary": "Repairs the returned C3/C4/E5 gap by introducing a general comparison lemma between the constant-tower word normalization of completed compact-support composition and the explicit semilinear reduction/total-limit counit formula. Steps 2–3 cite that formula from the new statement, including the identity compactification d=1, rather than from the proof of the realization lemma. Restores fix-lem-exchanges(2),(4) as the comparison named in the statement and used by the parents. The actual unit/counit triangle then proves identity normalization; Steps 1 and 4–7 are retained. One statement-only new node, no Mathlib leaves.",
+  "blueprint": "The pairing-identification proof identifies the trace as the exceptional-adjunction counit. These steps supply its identity-point normalization; that calculation is agent-written and not claimed to appear in the blueprint.",
+  "tool_uses": [
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Finite compact-support identity normalization is used as a generic composition tool; the identification unit has no construction of finite compact-support composition."
+   },
+   {
+    "node": "def-weil-integral-rational-qbar-compact-support",
+    "why": "Its actual strict-tower, localized and common-stage compact-support functors fix the concrete objects and maps being normalized."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Its actual reduction/total-limit adjunction, unit, counit and triangle identities are needed for the completed identity calculation."
+   },
+   {
+    "node": "lem-sf-integral-open-reduction-comparison",
+    "why": "Its identity-open specialization fixes the inverse actual completion unit and proves its invertibility on derived-complete inputs."
+   },
+   {
+    "node": "def-sf-datum",
+    "why": "The statement assumes this datum; its A1 and A5 provide precisely the adjunction and coefficient-compatibility structure used."
+   },
+   {
+    "node": "lem-sf-ambient-proper-open-pasting",
+    "why": "Its unital system compositors and identity proper/open maps compute the identity compactification before realization."
+   },
+   {
+    "node": "def-weil-rationalization-karoubi",
+    "why": "Its explicit localized Hom groups allow the equation and naturality to be checked on fractions."
+   },
+   {
+    "node": "def-weil-algebraically-closed-coefficients",
+    "why": "Its common-stage morphism classes allow equality to be checked at the chosen finite coefficient field."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-conjugate",
+    "why": "Its component formula and invertibility assertion compute the right identity comparison and composite mate."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Its identity adjunction and pasted counit formula type the conjugation calculations."
+   },
+   {
+    "node": "lem-sf-integral-compactification-system-realization",
+    "why": "Only its stated normalized/common-bound system domains are used in Step 2. No normalization is inferred from its unspecified family c_V."
+   },
+   {
+    "node": "fix-lem-exchanges",
+    "why": "Its clauses (2),(4) specify the completed and transported composition comparison already used by the parent and sibling. The new bridge compares that same constant-tower word construction to the actual semilinear counit formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sf-comp-composition",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-integral-open-reduction-comparison",
+  "def-sf-datum",
+  "lem-sf-ambient-proper-open-pasting",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-sf-integral-compactification-system-realization",
+  "fix-lem-exchanges"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-486faa1fe",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-486faa1fe (reviewer sub-agent of L); spot-checked: Read in full: the item's statement and all 7 steps, the new bridge node, every cited statement (def-sf-datum A1/A5, thm-sf-comp-composition, fix-lem-exchanges statement plus proof Steps 11-16, lem-sf-cbc-compact-support-composition-limit, lem-coef-derived-system-evaluation-calculus, lem-sf-integral-open-reduction-comparison, def-weil-integral-rational-qbar-compact-support, lem-sf-integral-compactification-system-realization, lem-sf-ambient-proper-open-pasting, lem-weil-pbc-constant-completion-equivalence, def-weil-pbc-adjunction-conjugate and def-weil-pbc-composite-adjunction, the rationalization and common-stage definitions), the unit, the main-20261015 identification proof and fix-lem-exchanges.proof.md, and both citers. Checks: Step 1 uses the identity-open case of the open-reduction lemma (r_id=1, so d_id=u^{-1}, and u is invertible on complete inputs). Step 3 specializes the bridge with g=id: c_h=c_f, d_g=1, B_g=1, and beta=1 by the identity-square clause of the pasting lemma. This gives alpha=C L(e_N) LR(C^{-1}); naturality of u and the triangle for R -| L give alpha=u^{-1}=v. Only statements are used, so the returned C3 fault is repaired. Step 4: fractions and colimit classes. I recomputed Steps 5-6: the conjugate of v^{-1} is e_L v^{-1}_{JL}; the composite counit is e I(mu J); naturality plus the F-G triangle give c=G(w). Step 7 is naturality. The bridge: all compositions type-check, and its left side matches fix-lem-exchanges Steps 13-15. In the case of two identities both sides reduce to the inverse completion unit, using the unit-transport clause of the constant-completion equivalence. The bridge is a general (g,f) comparison, so not a restatement (D1). An rg search of the DAG and reading the candidates found no duplicate and no cycle. All 12 declared tool_uses are accepted as black-box uses of their statements. No SGA source is used. Fix (B3): the bridge's beta^T had no defining node. I now cite lem-cbc-strict-tower-proper-open-calculus (gamma_Q and the compositors) in its statement and add it to stmt_deps; the corrected file is fixes/dag/nodes/sec-six-functors/lem-sf-integral-compactification-comparison-bridge.json.; 1 file(s) fixed by the reviewer"
  }
 }

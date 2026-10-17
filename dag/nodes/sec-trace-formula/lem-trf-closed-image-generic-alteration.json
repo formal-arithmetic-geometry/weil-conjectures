@@ -15,9 +15,116 @@
   "def-pc-integral-scheme",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Choose a point over the generic point with finite residue extension.* Let $\\eta$ be the generic point of the integral closed subscheme $Z$. The hypothesis on the underlying image of $h$ gives a point of $Y$ over $\\eta$. Let $Y_\\eta=Y\\times_X\\operatorname{Spec}\\kappa(\\eta)$ be the fibre of $h$ over $\\eta$ [def-pc-scheme-fibre]; its first projection is a homeomorphism onto the subspace $h^{-1}(\\eta)$ of $Y$, so $Y_\\eta$ is nonempty. By [lem-pc-proper-base-change](1) the projection $Y_\\eta\\to\\operatorname{Spec}\\kappa(\\eta)$ is proper, in particular of finite type [def-weil-proper-morphism]. A nonempty affine open $U\\subseteq Y_\\eta$ is of finite type over $\\kappa(\\eta)$ and its coordinate ring has a maximal ideal, giving a point $z$ closed in $U$; by [lem-kun-closed-point-field](a) applied to $U$, $\\kappa(z)$ is a finite extension of $\\kappa(\\eta)$. Let $y\\in Y$ be the image of $z$, so $h(y)=\\eta$. Apply [lem-weil-pbc-fibre-product-point-residue-field] to $z$: here $\\kappa(y)\\otimes_{\\kappa(\\eta)}\\kappa(\\eta)=\\kappa(y)$ is a field, so the attached prime is $0$ and $\\kappa(y)\\to\\kappa(z)$ is an isomorphism of extensions of $\\kappa(\\eta)$. Hence the extension $\\kappa(\\eta)\\to\\kappa(y)$ induced by $h$ is finite. The closure of $y$ is a nonempty irreducible closed subset of $Y$ whose generic point is $y$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-proper-morphism",
+    "lem-pc-proper-base-change",
+    "lem-kun-closed-point-field",
+    "lem-weil-pbc-fibre-product-point-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.2.1 proof, p. 8 (author PDF lines 668--674): choose a closed point over the generic point and take its closure."
+   }
+  },
+  {
+   "text": "*Form the integral closed subscheme and factor through $Z$.* Give the closure $\\overline{\\{y\\}}$ its reduced induced closed subscheme structure, using [lem-weil-pbc-reduced-induced-closed-subscheme]. Call the resulting closed immersion $j:W\\hookrightarrow Y$. It is integral: it is nonempty, reduced by construction, and irreducible because its underlying space is the closure of one point. Since every point of $W$ specializes from $y$ and $h(y)=\\eta$, the underlying image of $h\\circ j$ is contained in the underlying space of $Z$ (the image of a specialization is a specialization, and $Z$ is closed). The reduced-source factorization lemma [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] therefore gives a morphism $a:W\\to Z$ with $i_Z\\circ a=h\\circ j$, where $i_Z:Z\\hookrightarrow X$ is the given closed immersion.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.2.1 proof, p. 8 (author PDF lines 668--674): closure of the chosen point and its map to the closed image."
+   }
+  },
+  {
+   "text": "*Properness of $a$.* The composite $h\\circ j:W\\to X$ is proper by [lem-weil-pbc-closed-immersion-proper], since $j$ is a closed immersion and $h$ is proper. Because $i_Z$ is a closed immersion, hence a monomorphism, the square with top map $a$ and bottom map $h\\circ j$ is Cartesian: the factorization through $i_Z$ identifies $W$ with $W\\times_X Z$. Thus $a$ is the base change of $h\\circ j$ along $i_Z$, and is proper by [lem-pc-proper-base-change](1). The displayed equality $i_Z\\circ a=h\\circ j$ is the required composite identity (with the conventional order of composition read as $W\\xrightarrow{a}Z\\xrightarrow{i_Z}X$).",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-closed-immersion",
+    "def-pc-fibre-product",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W5 and 01W4 (closed immersions proper; properness stable under base change), applied to the closure map."
+   }
+  },
+  {
+   "text": "*Finiteness on a dense open.* We show that the set-theoretic fibre $a^{-1}(\\eta)$ is $\\{y\\}$. The closed immersions $j$ and $i_Z$ induce isomorphisms $\\kappa_Y(y)\\cong\\kappa_W(y)$ and $\\kappa_X(\\eta)\\cong\\kappa_Z(\\eta)$ of residue fields [lem-weil-pbc-field-point-factors-through-immersion](1), compatible with the maps induced by $h$ and $a$ because $i_Z\\circ a=h\\circ j$; so by Step 1 the extension $\\kappa_Z(\\eta)\\to\\kappa_W(y)$ induced by $a$ is finite. Let $W_\\eta=W\\times_Z\\operatorname{Spec}\\kappa(\\eta)$ be the fibre of $a$ over $\\eta$ [def-pc-scheme-fibre]; its first projection is a homeomorphism onto the subspace $a^{-1}(\\eta)$ of $W$, and $W_\\eta$ is of finite type over $\\kappa(\\eta)$ because $a$ is proper (Step 3) and properness is stable under base change [lem-pc-proper-base-change](1), [def-weil-proper-morphism]. The point of $W_\\eta$ over $y$ has residue field $\\kappa_W(y)$ by [lem-weil-pbc-fibre-product-point-residue-field] (again $\\kappa_W(y)\\otimes_{\\kappa(\\eta)}\\kappa(\\eta)=\\kappa_W(y)$ is a field), which is finite over $\\kappa(\\eta)$; so it is a closed point of $W_\\eta$ by [lem-kun-closed-point-field](a), and $\\{y\\}$ is closed in the subspace $a^{-1}(\\eta)$. Now let $w\\in a^{-1}(\\eta)$. Since $y$ is the generic point of $W$ [def-pc-integral-scheme], $w\\in\\overline{\\{y\\}}$, so every open neighbourhood of $w$ in $W$ contains $y$; hence $w$ lies in the closure of $\\{y\\}$ inside $a^{-1}(\\eta)$, which is $\\{y\\}$. Therefore $a^{-1}(\\eta)=\\{y\\}$ is finite. The hypotheses of [lem-weil-pbc-generic-finite-morphism-open-neighborhood] hold for $a$: properness supplies quasi-compactness, quasi-separatedness and locally finite type, while $Z$ is Noetherian because it is a closed subscheme of the Noetherian scheme $X$. That lemma gives a dense open $U\\subseteq Z$ containing $\\eta$ such that $a^{-1}(U)\\to U$ is finite [def-weil-finite-integral-morphism].",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-field-point-factors-through-immersion",
+    "lem-weil-pbc-fibre-product-point-residue-field",
+    "lem-pc-proper-base-change",
+    "lem-kun-closed-point-field",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NW, finite generic fibre implies finiteness over a dense open; applied to $a:W\to Z$."
+   }
+  },
+  {
+   "text": "*Surjectivity.* The image of the proper map $a$ is closed because proper morphisms are universally closed [def-weil-proper-morphism]. It contains $\\eta$, since $a(y)=\\eta$. The point $\\eta$ is generic for the irreducible space $Z$, so every closed subset containing it is all of $Z$; hence $a$ is surjective.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W1 (definition-proper), together with the generic-point characterization of an integral scheme."
+   }
+  },
+  {
+   "text": "*Alteration conclusion.* Steps 3--5 show that $a$ is proper and surjective and finite over the dense open $U$ of $Z$. Every irreducible component of $W$ is $W$ itself, and it dominates $Z$ because $a$ is surjective. Therefore all clauses in the definition of an alteration [def-trf-orgogozo-induction-data] hold, and the constructed $a:W\\to Z$ is an alteration.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.2.1 proof, p. 8; conclusion that the closure map is proper, surjective and generically finite."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-pc-scheme-fibre",
+  "def-trf-orgogozo-induction-data",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-proper-morphism",
+  "lem-kun-closed-point-field",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "lem-weil-pbc-field-point-factors-through-immersion",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+  "place": "Lemma 3.2.1 proof, p. 8 (author PDF lines 668--674); local PDF unavailable, so the closure argument is written out from the cited Stacks generic-finiteness and properness lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,7 +156,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-modification-closed-image-lifting",
@@ -68,5 +175,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-closed-image-generic-alteration",
+  "worker": "stage1",
+  "summary": "Split the generic-point closure argument into six steps. The chosen closed point over the generic point has finite residue extension; its reduced closure is integral and factors through Z by the existing reduced-source lemma. Properness is obtained by identifying the factorization square as a base change, and the existing Tag 02NW generic-finite-neighbourhood lemma supplies finiteness on a dense open. The image is closed and contains the generic point, hence the map is surjective, so the alteration definition applies. No new DAG nodes were needed.",
+  "blueprint": "Realizes the ancestor lem-trf-local-term-locality proof sentence choosing an integral closed W_Z over the generic point of each integral closed Z; concretely, the six steps implement the closure-of-a-closed-point argument described in Orgogozo Lemma 3.2.1, p. 8.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "The factorization of h∘j through the given reduced closed subscheme Z uses the general reduced-source/set-theoretic-image criterion, which is not a route-specific lemma of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "The construction and uniqueness of the reduced induced closed subscheme on the closure of y are generic scheme geometry."
+   },
+   {
+    "node": "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "why": "Finiteness after shrinking from a finite generic fibre is the general Tag 02NW theorem and is not supplied by the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Properness of the closure composite uses the general closed-immersion properness theorem."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Properness of a after identifying the factorization square as Cartesian uses general proper base change."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "The finite residue-field extension at a closed point of a finite-type scheme over a field is a general Zariski-lemma tool."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-point-residue-field",
+    "why": "Identifying the residue field of a point of a scheme-theoretic fibre with that of its image (Steps 1 and 4) is general scheme geometry; sk-i-curve-zero supplies no such lemma."
+   },
+   {
+    "node": "lem-weil-pbc-field-point-factors-through-immersion",
+    "why": "Residue fields are unchanged under the closed immersions W->Y and Z->X (Step 4); general scheme geometry not supplied by the trace-formula unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-pc-proper-base-change",
+  "lem-kun-closed-point-field",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "lem-weil-pbc-field-point-factors-through-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N3-88bbad648",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-88bbad648 (reviewer sub-agent of L); spot-checked: I read the item's statement and all six steps in full, every cited node's statement, the parent lem-trf-modification-closed-image-lifting, unit sk-i-curve-zero, and Stacks 02NW (generically finite), 01W5, 01K1 and lemma-local-ring-fibre. The Orgogozo PDF is not in the literature, so proof_origin=agent and the WANTED line are correct. The statement holds on the cases I tested: h=id, a normalization, and P^1 over a point (where a non-closed choice of y would fail, and the step avoids it). It is not a duplicate of any DAG node, and it is a lemma inside the parent's Step 1, not a restated clause. Repaired two faults. (1) C1/C4, Step 1: the step used without citation that the fibre's points are the points of h^-1(eta) and that residue fields agree between the fibre and Y; it now cites def-pc-scheme-fibre and lem-weil-pbc-fibre-product-point-residue-field. (2) E5, Step 4: the argument that the generic fibre is Spec kappa(y) mixed up tensoring with kappa(eta) and localizing at y. It now proves a^-1(eta)={y} directly: residue fields are unchanged under the closed immersions (lem-weil-pbc-field-point-factors-through-immersion (1)), y is a closed point of the finite-type fibre (lem-kun-closed-point-field (a)), and every point of the fibre is a specialization of the generic point y. Also dropped the uncited 'unique' in Step 2, recomputed proof_deps, and added two generic sk-thm-p1 tool_uses. The six declared tool_uses are all generic scheme lemmas and are accepted. Statement unchanged; no node added or dropped.; 1 file(s) fixed by the reviewer"
  }
 }
