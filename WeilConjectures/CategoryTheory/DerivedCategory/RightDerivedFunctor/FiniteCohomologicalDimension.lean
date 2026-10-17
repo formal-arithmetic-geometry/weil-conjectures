@@ -235,7 +235,8 @@ section Coproducts
 /-- If a natural transformation `α : A ⟶ B` is an isomorphism at the objects of a diagram and at
 the cocone point of a cocone `c` over it, then `B` sends `c` to a colimit cocone as soon as `A`
 does. -/
-noncomputable def isColimitMapCoconeOfNatTrans {X Y K : Type*} [Category* X] [Category* Y] [Category* K]
+noncomputable def isColimitMapCoconeOfNatTrans {X Y K : Type*} [Category* X] [Category* Y]
+    [Category* K]
     {A B : X ⥤ Y} (α : A ⟶ B) {G : K ⥤ X} (c : Cocone G) (hA : IsColimit (A.mapCocone c))
     [∀ j, IsIso (α.app (G.obj j))] [IsIso (α.app c.pt)] : IsColimit (B.mapCocone c) := by
   let β : G ⋙ A ≅ G ⋙ B :=

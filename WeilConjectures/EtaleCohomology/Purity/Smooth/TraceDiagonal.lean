@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Scratch
 
 /-!
 # Trace–diagonal data and the trace–diagonal criterion
@@ -98,8 +97,9 @@ structure TraceDiagonalDatum (L : DerivedCategoryModule Λ X) where
   /-- The trace `tr_f : Rf_! L ⟶ Λ_Y`. -/
   trace : (R(f)_![ModuleCat.{u + 1} Λ]).obj L ⟶ derivedTensorUnit _ Y
   /-- The diagonal class `cl_Δ : RΔ_! Λ_X ⟶ Lp₂^* L`. -/
-  diagonalClass : (R(TraceDiagonalDatum.diagonal f)_![ModuleCat.{u + 1} Λ]).obj (derivedTensorUnit _ X) ⟶
-    (L((pullback.snd f f)^*[ModuleCat.{u + 1} Λ])).obj L
+  diagonalClass :
+    (R(TraceDiagonalDatum.diagonal f)_![ModuleCat.{u + 1} Λ]).obj (derivedTensorUnit _ X) ⟶
+      (L((pullback.snd f f)^*[ModuleCat.{u + 1} Λ])).obj L
 
 namespace TraceDiagonalDatum
 
@@ -200,7 +200,11 @@ lemma adjunction_counit : (d.adjunction hl hr).counit = d.counit :=
 /-- Blueprint `thm-pur-td-criterion`: Trace–diagonal criterion
 
 If the two triangular composites are the identity, the exceptional inverse image is
-`Rf^! ≅ Lf^*(-) ⊗ᴸ L`, by uniqueness of right adjoints. -/
+`Rf^! ≅ Lf^*(-) ⊗ᴸ L`, by uniqueness of right adjoints.
+
+Here `Rf^!` is the ambient right adjoint `AlgebraicGeometry.Etale.rightDerivedUpperShriek` of
+`Rf_!` on the unbounded derived categories; the blueprint's `Rf^!` on `D^b_ctf` is its
+restriction (blueprint `cor-sf-ambient-adjoint-discharge`). -/
 noncomputable def rightDerivedUpperShriekIso :
     R(f)^![ModuleCat.{u + 1} Λ] ≅ d.functor :=
   (rightDerivedUpperShriekAdjunction _ f).rightAdjointUniq (d.adjunction hl hr)
@@ -208,22 +212,22 @@ noncomputable def rightDerivedUpperShriekIso :
 /-- Blueprint `thm-pur-td-criterion`: Trace–diagonal criterion
 
 The isomorphism `Rf^! ≅ G_L` is compatible with the counits: the counit of `Rf_! ⊣ Rf^!` is
-`ε ∘ Rf_!(Rf^! ≅ G_L)`. -/
-theorem rightDerivedUpperShriekIso_hom_counit
-    (K : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+`ε ∘ Rf_!(Rf^! ≅ G_L)`, where `ε = (d.adjunction hl hr).counit` is the counit `d.counit` of the
+trace–diagonal datum (`AlgebraicGeometry.Etale.TraceDiagonalDatum.adjunction_counit`). -/
+theorem rightDerivedUpperShriekIso_hom_counit (K : DerivedCategoryModule Λ Y) :
     (R(f)_![ModuleCat.{u + 1} Λ]).map ((d.rightDerivedUpperShriekIso hl hr).hom.app K) ≫
-      (d.adjunction hl hr).counit.app K = (rightDerivedUpperShriekAdjunction _ f).counit.app K :=
-  by
-  cmp_goal Adjunction.rightAdjointUniq_hom_app_counit (rightDerivedUpperShriekAdjunction _ f)
-    (d.adjunction hl hr) K
-  sorry
+      (d.adjunction hl hr).counit.app K = (rightDerivedUpperShriekAdjunction _ f).counit.app K := by
+  have h := Adjunction.map_hom_app_counit_of_eq_rightAdjointUniq
+    (rightDerivedUpperShriekAdjunction _ f) (d.adjunction hl hr)
+    (d.rightDerivedUpperShriekIso hl hr) rfl K
+  exact h
 
 /-- Blueprint `thm-pur-td-criterion`: Trace–diagonal criterion
 
 The isomorphism `Rf^! ≅ G_L` compatible with the counits is unique. -/
 theorem rightDerivedUpperShriekIso_unique (e : R(f)^![ModuleCat.{u + 1} Λ] ≅ d.functor)
-    (he : ∀ K, (R(f)_![ModuleCat.{u + 1} Λ]).map (e.hom.app K) ≫ (d.adjunction hl hr).counit.app K =
-      (rightDerivedUpperShriekAdjunction _ f).counit.app K) :
+    (he : ∀ K, (R(f)_![ModuleCat.{u + 1} Λ]).map (e.hom.app K) ≫
+      (d.adjunction hl hr).counit.app K = (rightDerivedUpperShriekAdjunction _ f).counit.app K) :
     e = d.rightDerivedUpperShriekIso hl hr := by
   ext K
   apply ((d.adjunction hl hr).homEquiv _ _).symm.injective

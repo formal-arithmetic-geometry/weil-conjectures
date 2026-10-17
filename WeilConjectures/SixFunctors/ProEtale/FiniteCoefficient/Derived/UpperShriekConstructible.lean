@@ -80,6 +80,7 @@ noncomputable def rightDerivedUpperShriekComparisonIso
 
 end Comparison
 
+omit [Finite Λ] in
 /-- A fully faithful exact functor reflects homology concentration. -/
 lemma homologyConcentratedIn_of_mapDerivedCategory_comparisonUpperStar {X : Scheme.{u}}
     {a b : ℤ} {G : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -152,7 +153,7 @@ instance (X : Scheme.{u}) (a b : ℤ) :
       (DerivedCategory.constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X a b) :=
   have : (_root_.DerivedCategory.homologyConcentratedIn (C := Sheaf (Scheme.ProEt.topology X)
       (ModuleCat.{u + 1} Λ)) a b).IsClosedUnderIsomorphisms :=
-    ⟨fun e ⟨h₁, h₂⟩ ↦ ⟨_root_.DerivedCategory.TStructure.t.isGE_of_iso e a,
+    ⟨fun e ⟨_, _⟩ ↦ ⟨_root_.DerivedCategory.TStructure.t.isGE_of_iso e a,
       _root_.DerivedCategory.TStructure.t.isLE_of_iso e b⟩⟩
   inferInstanceAs (DerivedCategory.boundedConstructible _ X ⊓
     _root_.DerivedCategory.homologyConcentratedIn a b ⊓
@@ -165,6 +166,7 @@ variable {k : Type u} [Field k] {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
 
 include aY
 
+omit [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f] in
 /-- Blueprint `def-weil-exceptional-inverse-image`: the pro-étale exceptional inverse image
 carries `Dᵇc(Y, A)` into `Dᵇc(X, A)`, for a separated finite-type `f` over a finite-type
 `k`-scheme `Y` and a finite `Λ` whose exponent is invertible on `Y`. -/
@@ -180,6 +182,7 @@ theorem boundedConstructible_rightDerivedUpperShriek
     (DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj
       (Etale.boundedConstructible_rightDerivedUpperShriek Λ aY f hG))
 
+omit [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f] in
 /-- Blueprint `def-weil-exceptional-inverse-image`: the explicit interval bounds. There is a
 shift `c`, depending only on `f`, such that `Rf^!` carries `D_c^[a, b](Y, A)` with Tor amplitude
 in `[a, b]` into `D_c^[a - c, b + c](X, A)` with Tor amplitude in `[a - c, b + c]`, for all
@@ -202,6 +205,7 @@ theorem exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek :
       hG.1.1).symm
     (constructibleTorAmplitudeIn_mapDerivedCategory_comparisonUpperStar Λ (hc a b G hG'))
 
+omit [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f] in
 /-- Blueprint `def-weil-exceptional-inverse-image`: the pro-étale exceptional inverse image
 carries `Dctf(Y, A)` into `Dctf(X, A)`. -/
 theorem constructibleFiniteTor_rightDerivedUpperShriek
@@ -215,6 +219,7 @@ theorem constructibleFiniteTor_rightDerivedUpperShriek
   exact (DerivedCategory.exists_constructibleTorAmplitudeIn_iff_constructibleFiniteTor _).1
     ⟨a - c, b + c, hc a b L hab⟩
 
+omit [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f] in
 /-- The pro-étale compact-support direct image carries `Dctf(X, A)` into `Dctf(Y, A)`: on
 `ν^* G` it is `ν^* Rf_!^{ét} G` (`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekComparisonIso`)
 and the étale `Rf_!` preserves `Dctf`

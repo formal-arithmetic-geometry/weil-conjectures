@@ -209,6 +209,7 @@ section ReductionToProper
 variable [HasCompactification f] [HasCompactification f'] [QuasiCompact f']
   (sq : IsPullback g' f' f g)
 
+omit [Finite Λ] [HasCompactification f] [HasCompactification f'] [QuasiCompact f'] in
 /-- The inverse of the compact-support base change `Ex_!(c)` along a compactification
 `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f` is the vertical pasting of the base change isomorphism of the
 extension by zero `Lg'^* j'_! ≅ j_! Lḡ^*` with the inverse of the derived base change `Ex_*` of
@@ -358,7 +359,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso_mateEquiv
     (rightDerivedUpperShriekAdjunction _ f') (Iso.refl (R(f)_![ModuleCat.{u + 1} Λ]))
     (rightDerivedLowerShriekIso Λ c') (TwoSquare.vComp α β')
   have hEx := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
-  show IsIso (mateEquiv (rightDerivedUpperShriekAdjunction _ f)
+  change IsIso (mateEquiv (rightDerivedUpperShriekAdjunction _ f)
     (rightDerivedUpperShriekAdjunction _ f')
     (TwoSquare.mk _ _ _ _ (inv (rightDerivedLowerShriekBaseChangeMap Λ sq)))).natTrans
   rw [twoSquare_inv_rightDerivedLowerShriekBaseChangeMap]

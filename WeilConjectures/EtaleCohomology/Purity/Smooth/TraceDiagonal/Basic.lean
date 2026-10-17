@@ -30,6 +30,10 @@ coefficient category: for `A = ModuleCat Λ`, the monoidal instance on `D(X_ét)
 instance search is a different term from the one inside `derivedTensor` and its unitors, and
 the kernel does not compare the two in reasonable time (see
 `WeilConjectures.SixFunctors.Etale.Derived.TensorStructure`).
+
+Similarly, the diagonal is used in the form `AlgebraicGeometry.Etale.TraceDiagonalDatum.diagonal`,
+with codomain `pullback f f` rather than the reducible synonym `pullback.diagonalObj f`: the
+kernel does not compare functors on the derived categories over the two in reasonable time.
 -/
 
 @[expose] public section
@@ -39,6 +43,22 @@ universe u' u
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor
+
+namespace CategoryTheory.Adjunction
+
+variable {C D : Type*} [Category* C] [Category* D] {F : C ⥤ D} {G G' : D ⥤ C}
+
+/-- A variant of `CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit` for an isomorphism
+`e` which is equal to `rightAdjointUniq adj₁ adj₂`. Applied with `he := rfl`, it avoids unifying
+`e` with `rightAdjointUniq adj₁ adj₂` under the projections `Iso.hom` and `NatTrans.app`, which
+can be very expensive for functors between derived categories. -/
+lemma map_hom_app_counit_of_eq_rightAdjointUniq (adj₁ : F ⊣ G) (adj₂ : F ⊣ G') (e : G ≅ G')
+    (he : e = adj₁.rightAdjointUniq adj₂) (x : D) :
+    F.map (e.hom.app x) ≫ adj₂.counit.app x = adj₁.counit.app x := by
+  subst he
+  exact rightAdjointUniq_hom_app_counit adj₁ adj₂ x
+
+end CategoryTheory.Adjunction
 
 namespace AlgebraicGeometry
 

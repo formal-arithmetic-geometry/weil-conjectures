@@ -108,13 +108,14 @@ for `P` finitely presented, the comparison map `[P, Q]_X ⟶ [P_X, Q_X]` is an i
 constant sheaf functor is monoidal, additive, left exact and a left adjoint. -/
 theorem Etale.isIso_ihomComparison_constantSheaf_app (P Q : ModuleCat.{u + 1} Λ)
     [Module.FinitePresentation Λ P] :
-    IsIso ((ihomComparison (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) P).natTrans.app
-      Q) := by
+    IsIso ((ihomComparison (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+      P).natTrans.app Q) := by
   have := MonoidalClosed.monoidalPreadditive_of_braided
     (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
   have : PreservesFiniteLimits (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
     comp_preservesFiniteLimits (Functor.const _) (presheafToSheaf _ _)
-  have := (constantSheafAdj X.smallEtaleTopology (ModuleCat.{u + 1} Λ) terminalIsTerminal).isLeftAdjoint
+  have :=
+    (constantSheafAdj X.smallEtaleTopology (ModuleCat.{u + 1} Λ) terminalIsTerminal).isLeftAdjoint
   exact ModuleCat.isIso_ihomComparison_app_of_finitePresentation _ P Q
 
 /-- Blueprint `lem-pur-lisse-morphism-rigidity`: Rigidity of morphisms of finite locally
@@ -134,7 +135,8 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.ihom [IsNoetherianRing Λ]
   obtain ⟨𝒰₀, h𝒰₀⟩ := IsLocallyConstantSheaf.exists_cover₂ L M
   let 𝒰 := 𝒰₀.nonemptyMembers
   have key (i : 𝒰.I₀) : ∃ H : ModuleCat.{u + 1} Λ, Module.Finite Λ H ∧
-      Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj ((CategoryTheory.ihom L).obj M) ≅
+      Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj
+          ((CategoryTheory.ihom L).obj M) ≅
         (constantSheaf (𝒰.X i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj H) := by
     set Y := 𝒰.X i
     set g := 𝒰.f i
@@ -164,8 +166,8 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.ihom [IsNoetherianRing Λ]
     · exact asIso ((ihomComparison (Etale.upperStar (ModuleCat.{u + 1} Λ) g) L).natTrans.app M) ≪≫
         (CategoryTheory.ihom _).mapIso eM.symm ≪≫
         asIso ((MonoidalClosed.pre eL.hom).app _) ≪≫
-        (asIso ((ihomComparison (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) P).natTrans.app
-          Q)).symm
+        (asIso ((ihomComparison (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+          P).natTrans.app Q)).symm
   choose H hH e using key
   have hc (i : 𝒰.I₀) : ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj
       ((CategoryTheory.ihom L).obj M)).IsConstant (𝒰.X i).smallEtaleTopology :=

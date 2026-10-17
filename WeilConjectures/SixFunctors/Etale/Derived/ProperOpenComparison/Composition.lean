@@ -26,8 +26,8 @@ not use proper base change.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.whiskerLeft_lowerStarIdDerivedPlus_inv_comp_rightDerivedFunctorPlusCompIso'`:
-  the right unit law for the composition isomorphisms of derived pushforwards.
+- the right unit law for the composition isomorphisms of derived pushforwards:
+  `Etale.whiskerLeft_lowerStarIdDerivedPlus_inv_comp_rightDerivedFunctorPlusCompIso'`.
 - `AlgebraicGeometry.ProperOpenDatum.comparison_comp`: the composition law.
 - `AlgebraicGeometry.ProperOpenDatum.comparison_id`: the identity law.
 -/
@@ -74,7 +74,8 @@ lemma whiskerLeft_lowerStarIdDerivedPlus_inv_comp_rightDerivedFunctorPlusCompIso
     (Etale.lowerStarComp _ g (𝟙 Y) g (Category.comp_id g).symm)) K
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.rightDerivedFunctorPlusCompUnit_app, assoc] at hfac
-  have hcomp : (NatTrans.mapHomotopyCategoryPlus (Etale.lowerStarId (ModuleCat.{u + 1} Λ) Y).inv).app
+  have hcomp :
+      (NatTrans.mapHomotopyCategoryPlus (Etale.lowerStarId (ModuleCat.{u + 1} Λ) Y).inv).app
         (((g)_*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj K) ≫
       (NatTrans.mapHomotopyCategoryPlus
         (Etale.lowerStarComp _ g (𝟙 Y) g (Category.comp_id g).symm).hom).app K = 𝟙 _ := by

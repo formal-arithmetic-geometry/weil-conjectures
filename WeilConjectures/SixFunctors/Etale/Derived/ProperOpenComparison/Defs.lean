@@ -233,7 +233,8 @@ instance isIso_upperStar_b_map_openImmersionLowerShriekToLowerStarPlus_app
       let sq := IsPullback.of_hasPullback D.j₁ (W.ι ≫ D.b)
       have := Etale.isIso_derivedBaseChangeMapPlus_of_etale Λ sq
       exact IsZero.of_iso
-        ((((pullback.snd D.j₁ (W.ι ≫ D.b))_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus).map_isZero
+        ((((pullback.snd D.j₁
+          (W.ι ≫ D.b))_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus).map_isZero
           (isZero_derivedCategoryPlus_of_isEmpty Λ _ _))
         (asIso ((Etale.derivedBaseChangeMapPlus _ sq.toCommSq).app K))
     have := isIso_of_source_target_iso_zero (D+((W.ι)^*[ModuleCat.{u + 1} Λ]).map

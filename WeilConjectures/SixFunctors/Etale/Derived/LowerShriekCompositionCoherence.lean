@@ -24,7 +24,8 @@ proof as the corresponding blueprint nodes of the six-functor chapters:
 
 Together with the commutation of the derived pullback along an étale morphism with the derived
 internal hom (`AlgebraicGeometry.Etale.isIso_ihomComparison_leftDerivedUpperStar_of_etale`, in
-`WeilConjectures.SixFunctors.Etale.Derived.UpperStarInternalHom`), they are the inputs of the composition and étale-locality statements for cohomologically smooth
+`WeilConjectures.SixFunctors.Etale.Derived.UpperStarInternalHom`), they are the inputs of the
+composition and étale-locality statements for cohomologically smooth
 morphisms (`lem-pur-co-smooth-composition`, `lem-pur-co-smooth-etale-locality`).
 -/
 

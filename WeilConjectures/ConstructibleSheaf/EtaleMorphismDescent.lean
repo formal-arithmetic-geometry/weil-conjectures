@@ -60,6 +60,7 @@ noncomputable def localizationRestrictionComp' :
     (MorphismProperty.Over.mapComp (Q := ⊤) (P := @Etale) (hf := inferInstance)
       (hg := inferInstance) g₁₂ hg).symm A _ _ _).symm
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 lemma localizationRestrictionComp'_hom_app_hom_app (P : Sheaf R.smallEtaleTopology A)
     (U : T.Etale) :
     ((localizationRestrictionComp' A g₁ g₂ g₁₂ hg).hom.app P).hom.app (op U) =
@@ -100,13 +101,19 @@ lemma upperStarIsoLocalizationRestriction_comp (P : Sheaf R.smallEtaleTopology A
   clear e₁ e₂ e₃ e₄ e₅
   obtain ⟨U⟩ := U
   subst hg
-  simp [localizationRestrictionLowerStarAdjunction_unit_app_hom_app', lowerStar_map_hom_app,
+  simp only [Functor.comp_obj, ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    localizationRestrictionLowerStarAdjunction_unit_app_hom_app', lowerStar_map_hom_app,
     lowerStarComp_hom_app_hom_app, localizationRestrictionComp'_hom_app_hom_app]
   simp only [localizationRestriction_obj_obj_map, ← Functor.map_comp, ← op_comp]
   congr 1
   apply Quiver.Hom.unop_inj
   apply MorphismProperty.Over.Hom.ext
-  simp
+  simp only [Functor.id_obj, MorphismProperty.Over.mapPullbackAdj_counit_app, op_comp, unop_comp,
+    Quiver.Hom.unop_op, MorphismProperty.Comma.comp_hom, MorphismProperty.Over.homMk_hom,
+    Comma.comp_left, MorphismProperty.Over.mapComp_inv_app_left, overPullback_obj_left,
+    Functor.const_obj_obj, Over.homMk_left, overPullback_obj_hom, Functor.map_comp, Category.assoc,
+    MorphismProperty.Over.map_map_left, MorphismProperty.Over.pullbackComp_hom_app_left,
+    pullback.map_id, Category.id_comp, pullbackLeftPullbackSndIso_inv_fst]
   exact Category.id_comp (pullback.fst U.hom (g₁ ≫ g₂))
 
 /-- The inverse form of `AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction_comp`. -/
@@ -128,8 +135,7 @@ lemma localizationRestrictionComp_inv_app_eq (P : Sheaf R.smallEtaleTopology A) 
         (upperStarIsoLocalizationRestriction A g₁₂ inferInstance).hom.app P := by
   rw [← cancel_epi ((localizationRestrictionComp' A g₁ g₂ g₁₂ hg).hom.app P),
     Iso.hom_inv_id_app, localizationRestrictionComp_hom_app_eq]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc,
-    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_app]
+  simp only [Category.assoc]
   simp
 
 end Comp
@@ -175,6 +181,7 @@ noncomputable def descentComponent {W : X.Etale} (q : W ⟶ Scheme.Etale.mk v) :
   P.obj.map (liftEtaleIso v q).hom.op ≫ ψ.hom.app (op (liftEtale v q)) ≫
     Q.obj.map (liftEtaleIso v q).inv.op
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The value of `ψ` at an étale `X'`-scheme `T`, transported along an isomorphism `T ≅ T'`. -/
 lemma hom_app_eq_of_iso {T T' : X'.Etale} (k : T ≅ T') :
     ψ.hom.app (op T) = ((localizationRestriction A v inferInstance).obj P).obj.map k.inv.op ≫
@@ -183,6 +190,7 @@ lemma hom_app_eq_of_iso {T T' : X'.Etale} (k : T ≅ T') :
   rw [ψ.hom.naturality_assoc, ← Functor.map_comp, ← op_comp, Iso.hom_inv_id, op_id,
     CategoryTheory.Functor.map_id, Category.comp_id]
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 lemma descentComponent_naturality {W₁ W₂ : X.Etale} (g : W₁ ⟶ W₂)
     (q₂ : W₂ ⟶ Scheme.Etale.mk v) :
     P.obj.map g.op ≫ descentComponent v ψ (g ≫ q₂) =
@@ -206,6 +214,7 @@ lemma descentComponent_naturality {W₁ W₂ : X.Etale} (g : W₁ ⟶ W₂)
   erw [reassoc_of% hk]
   rw [← Functor.map_comp, ← op_comp, e₂, op_comp, Functor.map_comp]
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- **Gluing of morphisms along a surjective étale morphism**, in terms of the restriction
 functors: a morphism `ψ` of the restrictions of `P` and `Q` to `X'` whose components at an
 étale `X`-scheme `W` do not depend on the chosen lift of `W` to `X'` is the restriction of a
@@ -262,6 +271,7 @@ lemma exists_localizationRestriction_map_eq (hv : Function.Surjective v.base)
 
 end Descent
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 lemma localizationRestrictionComp_inv_app_hom_app {T S R : Scheme.{u}} (g₁ : T ⟶ S)
     (g₂ : S ⟶ R) (g₁₂ : T ⟶ R) (hg : g₁₂ = g₁ ≫ g₂) [Etale g₁] [Etale g₂] [Etale g₁₂]
     (P : Sheaf R.smallEtaleTopology A) (U : T.Etale) :
@@ -291,6 +301,7 @@ noncomputable def mapMkIso {W : X.Etale} (g : W.left ⟶ Z) [Etale g] (hg : g �
     (MorphismProperty.Over.map ⊤ (inferInstance : Etale w)).obj (Scheme.Etale.mk g) ≅ W :=
   MorphismProperty.Over.isoMk (Iso.refl _) (by simp [hg])
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The component of `ψ` at a lift `q` of `W`, computed through a factorisation `g` of `q` through
 `p : Z ⟶ X'`. -/
 lemma descentComponent_eq_compRestriction {W : X.Etale} (q : W ⟶ Scheme.Etale.mk v)
@@ -309,6 +320,7 @@ lemma descentComponent_eq_compRestriction {W : X.Etale} (q : W ⟶ Scheme.Etale.
     ← Functor.map_comp, ← Functor.map_comp_assoc, ← op_comp, Quiver.Hom.unop_op]
   congr 3
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- **Gluing of morphisms along a surjective étale morphism** `v : X' ⟶ X`, in terms of the
 restriction functors: for a cartesian square `Z = X' ×_X X'` with projections `r₁, r₂`, a
 morphism `ψ` of restrictions to `X'` whose two restrictions to `Z` agree is the restriction of a

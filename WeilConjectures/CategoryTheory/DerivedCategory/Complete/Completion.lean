@@ -127,7 +127,8 @@ noncomputable def reflectorOfDistinguishedAdjunction :
   Adjunction.adjunctionOfEquivLeft _ _
 
 lemma reflectorOfDistinguishedAdjunction_unit_app (K : C) :
-    (reflectorOfDistinguishedAdjunction S P hP h).unit.app K = reflectorOfDistinguishedι S P h K := by
+    (reflectorOfDistinguishedAdjunction S P hP h).unit.app K =
+      reflectorOfDistinguishedι S P h K := by
   change reflectorOfDistinguishedι S P h K ≫ 𝟙 _ = _
   rw [comp_id]
 
@@ -316,7 +317,8 @@ section Completion
 variable (I : Ideal R) (h : ∃ ϖ ∈ nonZeroDivisors R, I = Ideal.span {ϖ})
 
 /-- The objects on which a chosen generator of `I` acts invertibly. -/
-noncomputable abbrev completionKernel : ObjectProperty (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
+noncomputable abbrev completionKernel :
+    ObjectProperty (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
   smulInvertible J h.choose
 
 lemma derivedComplete_le_rightOrthogonal :

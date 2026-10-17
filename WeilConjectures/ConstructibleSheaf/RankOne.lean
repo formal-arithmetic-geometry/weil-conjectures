@@ -23,7 +23,8 @@ Let `Λ` be a commutative ring and let `L` be a locally constant sheaf of `Λ`-m
    of `L` is the multiplication by a unique endomorphism of `Λ_X`, that is by a unique global
    section of `Λ_X`, a locally constant function `X → Λ`
    (`AlgebraicGeometry.Scheme.unitEndRingEquivOfHasRankOneStalks`), and the automorphisms of `L`
-   are the units of `End Λ_X` (`AlgebraicGeometry.Scheme.unitsUnitEndMulEquivAutOfHasRankOneStalks`);
+   are the units of `End Λ_X`
+   (`AlgebraicGeometry.Scheme.unitsUnitEndMulEquivAutOfHasRankOneStalks`);
 2. two isomorphisms `φ ψ : L ≅ M` of such sheaves differ by a unique unit of `End Λ_X`
    (`AlgebraicGeometry.Scheme.existsUnique_hom_eq_comp_unitEndAction_of_hasRankOneStalks`); for a
    unit `v` of `Λ`, the constant unit, `v • φ` is an isomorphism whose stalks are `v` times those

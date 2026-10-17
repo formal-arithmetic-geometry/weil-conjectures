@@ -91,7 +91,7 @@ For `P` bounded below of étale origin, composition with the unit `η` followed 
 bijection is `g ↦ Ri_! g`, which is bijective by full faithfulness of `Ri_!`; so `g ↦ g ≫ η` is
 bijective on `Hom(P, Q)`. Taking `P = Ri^! Ri_! Q`, which is bounded below of étale origin, gives
 a left inverse `r` of `η`, and taking `P = Q` shows that `η ≫ r = 𝟙`. -/
-theorem isIso_rightDerivedUpperShriekHomEquiv_id_of_isClosedImmersion [CompactSpace X]
+theorem isIso_rightDerivedUpperShriekHomEquiv_id_of_isClosedImmersion
     {Q : DerivedCategory (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ))}
     (hQ : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Z Q) :
     IsIso (rightDerivedUpperShriekHomEquiv i hQ.plusEtaleOrigin

@@ -267,8 +267,8 @@ lemma rightDerivedFunctorCompIso'_hom_of_iso_id_left (G : C ⥤ C) (F : C ⥤ D)
   rw [NatTrans.comp_app, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerLeft_app, h₁,
     NatTrans.comp_app, Functor.whiskerRight_app, Functor.leftUnitor_hom_app]
   erw [Category.comp_id]
-  rw [rightDerivedFunctorCompUnit_app, Category.assoc, ← Functor.map_comp, Iso.trans_hom (rightDerivedFunctorNatIso e₀),
-    NatTrans.comp_app, ← Category.assoc]
+  rw [rightDerivedFunctorCompUnit_app, Category.assoc, ← Functor.map_comp,
+    Iso.trans_hom (rightDerivedFunctorNatIso e₀), NatTrans.comp_app, ← Category.assoc]
   erw [rightDerivedFunctorNatTrans_app e₀.hom K]
   rw [Category.assoc]
   erw [rightDerivedFunctorIdIso_fac_app, Category.comp_id]
@@ -392,12 +392,12 @@ lemma lowerStarFactor_id_left (h : Y ⟶ X) :
       Functor.isoWhiskerRight (lowerStarId A Y) (h)_*[A] ≪≫ ((h)_*[A]).leftUnitor := by
   ext M b
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app, Functor.leftUnitor_hom_app, Category.comp_id,
+    Functor.whiskerRight_app, Functor.leftUnitor_hom_app,
     ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.id_hom, NatTrans.id_app,
     lowerStarFactor_hom_app_hom_app, lowerStar_map_hom_app', lowerStarId_hom_app_hom_app]
   rw [MorphismProperty.Over.pullbackComp_id_left]
   simp only [MorphismProperty.Over.pullbackCongr_refl, Iso.trans_hom, Iso.refl_hom,
-    Iso.symm_hom, Functor.isoWhiskerLeft_hom, NatTrans.comp_app, NatTrans.id_app,
+    Iso.symm_hom, Functor.isoWhiskerLeft_hom, NatTrans.comp_app,
     Functor.rightUnitor_inv_app, Functor.whiskerLeft_app, Category.id_comp]
   exact (Category.comp_id _).symm
 
@@ -408,12 +408,12 @@ lemma lowerStarFactor_id_right (h : Z ⟶ Y) :
       Functor.isoWhiskerLeft (h)_*[A] (lowerStarId A Y) ≪≫ ((h)_*[A]).rightUnitor := by
   ext M b
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
-    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Category.comp_id,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app,
     ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.id_hom, NatTrans.id_app,
     lowerStarFactor_hom_app_hom_app, lowerStarId_hom_app_hom_app, lowerStar_obj_obj_map']
   rw [MorphismProperty.Over.pullbackComp_id_right]
   simp only [MorphismProperty.Over.pullbackCongr_refl, Iso.trans_hom, Iso.refl_hom,
-    Iso.symm_hom, Functor.isoWhiskerRight_hom, NatTrans.comp_app, NatTrans.id_app,
+    Iso.symm_hom, Functor.isoWhiskerRight_hom, NatTrans.comp_app,
     Functor.leftUnitor_inv_app, Functor.whiskerRight_app, Category.id_comp]
   exact (Category.comp_id _).symm
 
@@ -442,7 +442,7 @@ lemma lowerStarFactor_assoc (f : W ⟶ Z) (g : Z ⟶ Y) (h : Y ⟶ X) {fg : W �
   simp only [NatTrans.comp_app, Functor.associator_hom_app, Category.id_comp,
     Functor.whiskerLeft_app, Functor.whiskerRight_app] at this
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Iso.trans_hom, Category.assoc, reassoc_of% this]
+    Iso.trans_hom, reassoc_of% this]
   simp [lowerStarCongr]
 
 end Underived

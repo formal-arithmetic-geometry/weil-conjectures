@@ -54,7 +54,8 @@ Let `c = (X ⟶[j] X̄ ⟶[p] Y)` be a compactification of `f`, let `G` be a bou
 `α : ν_X^* G ≅ K`. Then the pro-étale compact-support functor `Rf_!(c) = Rp_* j_!` attached to
 `c` satisfies `Rf_!(c) K ≅ ν_Y^* (Rf_!^{ét}(c) G)`, where `Rf_!^{ét}(c) = Rp_{ét,*} j^{ét}_!` is
 the étale compact-support functor attached to the same compactification. It is the
-compact-support comparison `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationComparisonIso`
+compact-support comparison
+`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationComparisonIso`
 (the identification of the two extensions by zero, followed by the comparison direct image for
 the proper `p`) precomposed with `Rf_!(c) α⁻¹`; it is natural in the witness
 (`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationWitnessIso_naturality`). No
@@ -105,6 +106,8 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {G : DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
     DerivedCategory (Sheaf X.smallEtaleTopology A)}
 
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] in
 /-- The pro-étale compact-support functor `Rf_!(c)` attached to a compactification `c` sends a
 bounded below object of étale origin to a bounded below object: on `ν^* G` it is
 `ν^* Rf_!^{ét}(c) G`, and the étale `Rf_!(c)` preserves bounded below objects. -/
@@ -138,6 +141,8 @@ noncomputable def rightDerivedUpperShriekOfAdjunction
       DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) :=
   R(ν_*(Y)[A]) ⋙ G ⋙ D(ν^*(X)[A])
 
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] in
 /-- The étale object `f^× Rν_* L` of which `Rf^×(c) L` is the comparison pullback is bounded
 below when `L` is, for a functor `f^×` preserving bounded below objects. -/
 lemma plus_obj_rightDerivedFunctor_comparisonLowerStar_obj
@@ -147,6 +152,8 @@ lemma plus_obj_rightDerivedFunctor_comparisonLowerStar_obj
     DerivedCategory.TStructure.t.plus (G.obj (R(ν_*(Y)[A]).obj L)) :=
   hG _ (plus_rightDerivedFunctor_comparisonLowerStar_obj hL)
 
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] in
 /-- `Rf^×(c)` sends a bounded below object to an object bounded below of étale origin. -/
 lemma plusEtaleOrigin_rightDerivedUpperShriekOfAdjunction_obj
     (adj : Etale.rightDerivedLowerShriekOfCompactification A c ⊣ G)
@@ -440,7 +447,7 @@ lemma rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso_hom_app_hom
 @[simp]
 lemma rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso_refl (c : Compactification f) :
     rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso Λ c c = Iso.refl _ := by
-  ext K : 2
+  ext : 2
   ext
   rw [rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso_hom_app_hom,
     rightDerivedLowerShriekOfCompactificationEtaleOriginIso_refl]
@@ -452,7 +459,7 @@ lemma rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso_trans
     rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso Λ c₁ c₂ ≪≫
         rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso Λ c₂ c₃ =
       rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso Λ c₁ c₃ := by
-  ext K : 2
+  ext : 2
   ext
   rw [rightDerivedLowerShriekOfCompactificationPlusEtaleOriginIso_hom_app_hom Λ c₁ c₃,
     ← rightDerivedLowerShriekOfCompactificationEtaleOriginIso_trans Λ c₁ c₂ c₃]
@@ -602,6 +609,7 @@ theorem hasCohomologicalDimensionLEOnEtaleOrigin_and_nonempty_adjunction_constru
   ⟨(hasCohomologicalDimensionLEOnEtaleOrigin_and_bijective_classAdjunction Λ aY _ d hd).1,
     ⟨DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aY f⟩⟩
 
+omit [QuasiCompact aY] in
 /-- Blueprint `rem-ptr-weil-ambient-exceptional-adjoint-11`: on the coefficient class of étale
 origin both halves of the ambient exceptional right adjoint datum are theorems: the vanishing
 half is the class-restricted datum `FullCD_cls(p, Λ; 2d)`, with the sharp comparison bound
