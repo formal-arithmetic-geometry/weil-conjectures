@@ -96,7 +96,7 @@ imports; downstream files may import this module or just the pieces they need.
   `AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedUpperShriek`
   (`sk-thm-sf-ctf-stability`, clauses (i)–(v)).
 - `AlgebraicGeometry.Etale.ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek`
-  (`sk-lem-sf-ctf-generation`).
+  (`sk-lem-sf-flat-model`, complement).
 - `AlgebraicGeometry.Etale.constructibleFiniteTor_eq_triangEnvelope_ctfGenerators`
   (`lem-trf-devissage-generation`): `Dctf(X, Λ)` is the thick envelope of the generators
   `AlgebraicGeometry.Etale.ctfGenerators`; it is a thick subcategory by
@@ -144,14 +144,15 @@ imports; downstream files may import this module or just the pieces they need.
   a change-of-coefficients functor that the library does not yet have.
 * The internal-Hom half of clause (ii) of `sk-thm-sf-ctf-stability` is not restated: it *is*
   `torAmplitudeIn_derivedHom` below, with the same shifts.
-* `sk-lem-sf-ctf-generation` is stated for `A = ModuleCat Λ` with `Λ` finite, because its proof
-  uses flat constructible models (`hasTorAmplitudeIn_iff_exists_flatConstructibleModel`), which
+* The generation statement (the complement of `sk-lem-sf-flat-model`) is stated for
+  `A = ModuleCat Λ` with `Λ` finite, because its proof uses flat constructible models
+  (`hasTorAmplitudeIn_iff_exists_flatConstructibleModel`), which
   need finite stalks, and the `π₁(U)`-composition factors of the stalks; this is what the
   blueprint assumes. Flatness of the lisse generators is `ObjectProperty.flat`, as in
   `WeilConjectures.SixFunctors.Etale.Derived.Finiteness`. The blueprint restricts to varieties
   over a separably closed field; the statement here only asks `X` to be Noetherian, which is
   all the proof uses.
-* "Thick subcategory" in `sk-lem-sf-ctf-generation` is spelled as an `ObjectProperty` that is
+* "Thick subcategory" in the generation statement is spelled as an `ObjectProperty` that is
   `ObjectProperty.IsTriangulated`, `ObjectProperty.IsStableUnderRetracts` and
   `ObjectProperty.IsClosedUnderIsomorphisms`; generation is the statement that any such property
   containing the generators contains all of `Dctf(X, A)`. In `lem-trf-devissage-generation` the
@@ -194,5 +195,34 @@ imports; downstream files may import this module or just the pieces they need.
   `Y` is needed for a uniform shift, since `f` must be covered by finitely many affine charts:
   for `f : ⊔ₙ 𝔸ⁿ_k ⟶ ⊔ₙ Spec k` the complex `Rf^!Λ` sits in degree `-2n` on the `n`-th
   component. Noetherianity gives `dim 𝔸ⁿ_V = dim V + n`, which fails for general rings.
+
+## Remarks of the blueprint recorded here
+
+* `sk-rem-sf-typing` (typing table: ambient definition, small-category theorem). Each operation
+  is defined on the ambient derived category and proved to descend to the small categories:
+  `Lf^*` by `constructibleFiniteTor_leftDerivedUpperStar` (and `boundedConstructible_*` for
+  `Dᵇc`); `⊗ᴸ` by `constructibleFiniteTor_tensor` and `torAmplitudeIn_tensor`
+  (`[a, b] + [c, d]`); `RHom` by `constructibleFiniteTor_derivedHom`,
+  `constructibleFiniteTor_derivedHom_of_field` and `torAmplitudeIn_derivedHom`
+  (`[c - b - 2m, d - a + 2m]`, and `[c - b, d - a]` for a dualizable first argument,
+  `torAmplitudeIn_derivedHom_of_isDualizable`), and on the pro-étale site for pulled-back pairs
+  by `ProEtale.DerivedCategory.constructibleFiniteTor_derivedHom_mapDerivedCategory`; `Rf_*` by
+  `constructibleFiniteTor_rightDerivedLowerStar` and `torAmplitudeIn_rightDerivedLowerStar`
+  (`[a, b + 2 dim X]`), on the pro-étale site by
+  `ProEtale.boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar`; `Rf_!` by
+  `constructibleFiniteTor_rightDerivedLowerShriek`; `Rf^!` (the étale adjoint of `Rf_!`, which
+  exists unconditionally) by `constructibleFiniteTor_rightDerivedUpperShriek` and the shifted
+  forms of `sk-prop-sf-rf-shriek-preservation`; `𝔻_X` by `constructibleFiniteTor_verdierDual`
+  and `verdierDualEquivalence`. The descended functors are the `DerivedCategoryFiniteTor.*`
+  functors. The ambient pro-étale adjoint `Rf^×` is hypothetical and is used nowhere.
+* `sk-rem-sf-ledger` (what is unconditional, conditional, open). Expository. In this library
+  the conditional items of the ledger are not used: every exceptional inverse image is the
+  étale adjoint `R(f)^!` (Brown representability), and the operations are never introduced as
+  definitions carrying properties.
+* `sk-rem-sf-comp-scope` (scope of the coherence). Expository: the coherence of
+  `WeilConjectures.SixFunctors.Etale.Derived.Composition` and
+  `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence` is proved for étale sheaves,
+  i.e. on the étale-origin complexes `ν^* D⁺(X_ét)` of the pro-étale site; nothing is claimed
+  for arbitrary pro-étale objects, whose geometric stalks are not conservative.
 
 -/

@@ -67,46 +67,37 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {X S : Scheme.{u}} (aX : X ⟶ S) [HasCompactification aX] [(R(aX)_![A]).IsLeftAdjoint]
   [IsIso (projectionMap A aX)]
 
-/-- Blueprint `thm-pod-global-verdier-duality`: Global Verdier duality at the point, natural
-form.
+/-- Blueprint `thm-pod-global-verdier-duality`: Global Verdier duality at the point.
 
 For `a_X : X ⟶ S` admitting a compactification and satisfying the projection formula (which
 holds at every finite coefficient ring, `AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`),
-the canonical isomorphism
-
-`RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`,
-
-natural in `K`, written in `D(S_ét)` as `(Ra_{X!} K)^∨ ≅ Ra_{X*}(𝔻_X K)`. It is the inverse of
-the tensor–Hom exchange `Ra_{X*} RHom(K, Ra_X^! N) ≅ RHom(Ra_{X!} K, N)`
+the canonical isomorphism `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`, written in `D(S_ét)` as
+`(Ra_{X!} K)^∨ ≅ Ra_{X*}(𝔻_X K)`. It is the inverse of the tensor–Hom exchange
+`Ra_{X*} RHom(K, Ra_X^! N) ≅ RHom(Ra_{X!} K, N)`
 (`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso`, built from the adjunctions and
 the projection formula only) at `N = Λ_S`. -/
-noncomputable def globalVerdierDualityNatIso :
-    (R(aX)_![A]).op ⋙ DerivedCategory.coefficientDual A S ≅
-      verdierDual A aX ⋙ R((aX)_*[A]) :=
-  NatIso.ofComponents
-    (fun K ↦ (((derivedHomRightDerivedLowerShriekIso A aX).app K).app (𝟙_ _)).symm)
-    (fun {K K'} g ↦ by
-      have h := NatTrans.congr_app ((derivedHomRightDerivedLowerShriekIso A aX).inv.naturality g)
-        (𝟙_ _)
-      simpa using h)
-
-/-- Blueprint `thm-pod-global-verdier-duality`: Global Verdier duality at the point.
-
-The canonical isomorphism `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`, written in `D(S_ét)` as
-`(Ra_{X!} K)^∨ ≅ Ra_{X*}(𝔻_X K)`; the component at `K` of
-`AlgebraicGeometry.Etale.globalVerdierDualityNatIso`. -/
 noncomputable def globalVerdierDualityIso
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     (DerivedCategory.coefficientDual A S).obj (op ((R(aX)_![A]).obj K)) ≅
       (R((aX)_*[A])).obj ((verdierDual A aX).obj (op K)) :=
-  (globalVerdierDualityNatIso A aX).app (op K)
+  (((derivedHomRightDerivedLowerShriekIso A aX).app (op K)).app (𝟙_ _)).symm
 
+omit [HasSmallSiteSheafify A] in
+lemma globalVerdierDualityIso_eq
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    globalVerdierDualityIso A aX K =
+      (((derivedHomRightDerivedLowerShriekIso A aX).app (op K)).app (𝟙_ _)).symm :=
+  rfl
+
+-- A proof by `rfl` (or by `simp`/`rw` closing with `rfl`) makes the kernel reduce the
+-- projections of `derivedHomRightDerivedLowerShriekIso`, which times out.
 omit [HasSmallSiteSheafify A] in
 lemma globalVerdierDualityIso_inv
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     (globalVerdierDualityIso A aX K).inv =
       ((derivedHomRightDerivedLowerShriekIso A aX).app (op K)).hom.app (𝟙_ _) :=
-  rfl
+  (congrArg Iso.inv (globalVerdierDualityIso_eq A aX K)).trans
+    ((Iso.symm_inv _).trans (Iso.app_hom _ _))
 
 omit [HasSmallSiteSheafify A] in
 /-- Blueprint `thm-pod-global-verdier-duality`: Global Verdier duality at the point,
@@ -116,7 +107,16 @@ lemma globalVerdierDualityIso_hom_naturality
     (DerivedCategory.coefficientDual A S).map ((R(aX)_![A]).map g).op ≫
         (globalVerdierDualityIso A aX K).hom =
       (globalVerdierDualityIso A aX K').hom ≫ (R((aX)_*[A])).map ((verdierDual A aX).map g.op) :=
-  (globalVerdierDualityNatIso A aX).hom.naturality g.op
+  NatTrans.congr_app ((derivedHomRightDerivedLowerShriekIso A aX).inv.naturality g.op) (𝟙_ _)
+
+/-- Blueprint `thm-pod-global-verdier-duality`: Global Verdier duality at the point, natural
+form: `AlgebraicGeometry.Etale.globalVerdierDualityIso` as a natural isomorphism
+`(Ra_{X!} -)^∨ ≅ Ra_{X*} 𝔻_X(-)` of functors `D(X_ét)ᵒᵖ ⥤ D(S_ét)`. -/
+noncomputable def globalVerdierDualityNatIso :
+    (R(aX)_![A]).op ⋙ DerivedCategory.coefficientDual A S ≅
+      verdierDual A aX ⋙ R((aX)_*[A]) :=
+  NatIso.ofComponents (fun K ↦ globalVerdierDualityIso A aX K.unop)
+    (fun g ↦ globalVerdierDualityIso_hom_naturality A aX g.unop)
 
 /-- Blueprint `thm-pod-global-verdier-duality`: Global Verdier duality at the point, the case
 `K = Λ_X`.
@@ -190,8 +190,9 @@ theorem globalVerdierDualityIso_inv_comp_mateEquiv
         R((aX)_*[A']).map (((RHom(X)[A']).obj (op K')).map
           ((mateEquiv (rightDerivedUpperShriekAdjunction A aX)
             (rightDerivedUpperShriekAdjunction A' aX) ρ).app (𝟙_ _))) ≫
-        ((derivedHomRightDerivedLowerShriekIso A' aX).app (op K')).hom.app (TS.obj (𝟙_ _)) :=
-  derivedHomRightDerivedLowerShriekIso_hom_app_comp_mateEquiv A aX A' TX TS K K' σ μ ρ ν h
+        ((derivedHomRightDerivedLowerShriekIso A' aX).app (op K')).hom.app (TS.obj (𝟙_ _)) := by
+  rw [globalVerdierDualityIso_inv]
+  exact derivedHomRightDerivedLowerShriekIso_hom_app_comp_mateEquiv A aX A' TX TS K K' σ μ ρ ν h
     (𝟙_ _)
 
 end CoefficientChange

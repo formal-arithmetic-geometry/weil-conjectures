@@ -181,6 +181,32 @@ theorem nonempty_iso_externalProduct_rightDerivedLowerStar (Λ : Type (u + 1)) [
   have := isIso_externalProductRightDerivedLowerStarMap (ModuleCat.{u + 1} Λ) b c f M Q
   exact ⟨asIso (externalProductRightDerivedLowerStarMap (ModuleCat.{u + 1} Λ) b c f M Q)⟩
 
+/-- Blueprint `lem-trf-ordinary-kunneth`: Ordinary Kunneth for a general morphism.
+
+The detailed form of `sk-lem-sf-kunneth-star`, at a finite coefficient ring `A` whose exponent
+is invertible in `k` (such as `A_{E,n}`): for a morphism `f : X ⟶ Y` of separated finite-type
+`k`-schemes, an auxiliary separated finite-type `k`-scheme `Z`, `L ∈ Dctf(X, A)` and
+`Q ∈ Dctf(Z, A)`, the canonical comparison `Rf_* L ⊠ Q ⟶ R(f × id_Z)_* (L ⊠ Q)`
+(`AlgebraicGeometry.Etale.externalProductRightDerivedLowerStarMap`) is an isomorphism. It is the
+composite of the base-change map along `Y ×_k Z ⟶ Y`, an isomorphism by `lem-kun-0f1n`
+(`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`), and of the projection map of
+`R(f × id_Z)_*`. -/
+theorem isIso_externalProductRightDerivedLowerStarMap_of_finite (Λ : Type (u + 1)) [CommRing Λ]
+    [Finite Λ] {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))] {Z : Scheme.{u}}
+    (b : Y ⟶ Spec (.of k)) (c : Z ⟶ Spec (.of k)) (f : X ⟶ Y)
+    [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b]
+    [IsSeparated c] [LocallyOfFiniteType c] [QuasiCompact c]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (_hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X L)
+    (_hQ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z Q) :
+    IsIso (externalProductRightDerivedLowerStarMap (ModuleCat.{u + 1} Λ) b c f L Q) := by
+  have := isIso_tensorBaseChangeMap Λ c b (f ≫ b) (pullback.snd b c) (pullback.fst b c)
+    (pullback.mapOverBaseRight f b c) (pullback.fst (f ≫ b) c) f rfl
+    (IsPullback.of_hasPullback b c).flip (isPullback_mapOverBaseRight_fst b c f) Q L
+  exact isIso_externalProductRightDerivedLowerStarMap (ModuleCat.{u + 1} Λ) b c f L Q
+
 /-- Blueprint `sk-thm-sf-kunneth-relative`: Relative product theorem.
 
 Let `f : X ⟶ B` and `g : Y ⟶ B` be separated of finite type over a base scheme `B`, and let

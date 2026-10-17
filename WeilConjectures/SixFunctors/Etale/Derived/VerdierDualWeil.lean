@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.WeilEquivariance
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarId
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
 
 /-!
