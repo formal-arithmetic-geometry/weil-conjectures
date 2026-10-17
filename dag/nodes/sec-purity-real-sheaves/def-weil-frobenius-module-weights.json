@@ -3,24 +3,94 @@
  "blueprint": {
   "is": "def-weil-frobenius-module-weights",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Weights of finite-dimensional Frobenius modules",
- "statement": "Fix a prime $p$, an integer $a\\in\\mathbf Z_{\\geq1}$, and let $q=p^a$ be the\nfixed prime power. Fix a prime $\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$,\nchoose an algebraic closure $\\Qlb$ of $\\Ql$, and fix an isomorphism\n$\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$. For a finite-dimensional\n$\\Qlb$-vector space $V$, an automorphism $F$, and $w\\in\\mathbf R$, call\n$(V,F)$ $\\iota$-pure of weight $w$ if every eigenvalue $\\alpha$ of $F$\nsatisfies $|\\iota(\\alpha)|=q^{w/2}$. Call $(V,F)$ $\\iota$-mixed of weights at\nmost $w$ if there are an integer $m\\geq0$, an $F$-stable filtration\n\n$$\n 0=V_0\\subset V_1\\subset\\cdots\\subset V_m=V\n$$\n\nand real numbers $w_1,\\ldots,w_m\\leq w$ such that each $(V_r/V_{r-1},F)$ is\n$\\iota$-pure of weight $w_r$.",
+ "statement": "Fix a prime $p$, an integer $a\\in\\mathbf Z_{\\geq1}$, and let $q=p^a$ be the\nfixed prime power. Fix a prime $\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$ [def-weil-l-adic-numbers],\nchoose an algebraic closure $\\Qlb$ of $\\Ql$ [def-weil-algebraic-closure], and fix an isomorphism\n$\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$. For a finite-dimensional\n$\\Qlb$-vector space $V$ [def-weil-finite-dimensional-subspace], a $\\Qlb$-linear automorphism $F:V\\to V$ (thus a Frobenius module [sk-def-frobmod]), and $w\\in\\mathbf R$, call\n$(V,F)$ $\\iota$-pure of weight $w$ if every eigenvalue $\\alpha$ of $F$\nsatisfies $|\\iota(\\alpha)|=q^{w/2}$, where $|\\cdot|$ is the complex absolute value [def-weil-complex-absolute-value]. Call $(V,F)$ $\\iota$-mixed of weights at\nmost $w$ if there are an integer $m\\geq0$, an $F$-stable filtration\n\n$$\n 0=V_0\\subseteq V_1\\subseteq\\cdots\\subseteq V_m=V\n$$\n\nand real numbers $w_1,\\ldots,w_m\\leq w$ such that each $(V_r/V_{r-1},F)$ is\n$\\iota$-pure of weight $w_r$.\n\nHere an eigenvalue of a linear operator $A$ on a vector space is a scalar\n$\\alpha$ for which there is a vector $v\\ne0$ with $A(v)=\\alpha v$.\nAn $F$-stable filtration means a finite increasing family of\n$\\Qlb$-linear subspaces $V_r\\subseteq V$ with the displayed endpoints\nand $F(V_r)=V_r$ for every $0\\le r\\le m$.\nThe successive quotient $V_r/V_{r-1}$ is the quotient vector space\n[def-weil-pbc-quotient-module], and its induced Frobenius is\n$v+V_{r-1}\\mapsto F(v)+V_{r-1}$ for $v\\in V_r$.\nThe number $q^{w/2}$ is the real power of the positive real number $q$ [def-weil-real-power].\nThe isomorphism $\\iota$ is an isomorphism of fields, with no continuity\ncondition. Neither $F$ nor the operators on the successive quotients\nare required to be semisimple. The case $m=0$ is allowed, when the\nendpoint conditions require $V=0$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-semi/def-weil-frobenius-module-weights.md",
   "place": "node def-weil-frobenius-module-weights, order 2651"
  },
  "stmt_deps": [
-  "def-weil-finite-field-fiber"
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-dimensional-subspace",
+  "sk-def-frobmod",
+  "def-weil-complex-absolute-value",
+  "def-weil-pbc-quotient-module",
+  "def-weil-real-power"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsPureOfWeight|HasWeightsAtMost|FrobeniusModule|IsMixedOfWeight",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A vector space automorphism is mixed of weights at most w if it admits a finite invariant filtration with pure graded quotients",
+   "results": "{\"hits\": 8, \"top\": [\"MvPolynomial.IsWeightedHomogeneous\", \"MvPowerSeries.IsWeightedHomogeneous\", \"LieModule.Weight.instFinite\", \"LieModule.instLinearWeightsOfIsLieAbelian\", \"LieModule.Weight.instFintype\", \"RootPairing.Equiv.weightHom_toLinearMap\", \"MvPolynomial.IsWeightedHomogeneous.pow\", \"MvPolynomial.IsWeightedHomogeneous.inj_right\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPureOfWeight\"",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pure and mixed weights of a finite dimensional vector space with an automorphism, eigenvalue absolute values and a stable filtration with pure quotients",
+   "results": "{\"hits\": 8, \"top\": [\"LieModule.zero_lt_finrank_genWeightSpace\", \"LieModule.finite_genWeightSpace_ne_bot\", \"LieModule.exists₂_genWeightSpace_smul_add_eq_bot\", \"LieModule.genWeightSpace_zsmul_add_ne_bot\", \"LieModule.genWeightSpace_nsmul_add_ne_bot_of_le\", \"LieModule.iSup_genWeightSpace_eq_top\", \"LieModule.genWeightSpace_chainTopCoeff_add_one_zsmul_add\", \"LieModule.genWeightSpace_chainTopCoeff_add_one_nsmul_add\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pure.*weight|mixed.*weight|weight.*Frobenius",
+   "results": "{\"hits\": 1, \"top\": [\"Mathlib/NumberTheory/SelbergSieve.lean\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deligne weight of a linear automorphism over an algebraically closed field via a complex embedding and finite filtration of invariant subspaces",
+   "results": "{\"hits\": 8, \"top\": [\"LieModule.genWeightSpace_zsmul_add_ne_bot\", \"LieModule.Weight.instFintype\", \"LieModule.Weight.hasEigenvalueAt\", \"LieModule.finite_genWeightSpace_ne_bot\", \"LieModule.finite_genWeightSpaceOf_ne_bot\", \"LieModule.trace_toEnd_genWeightSpace\", \"LieModule.genWeightSpace_chainTopCoeff_add_one_zsmul_add\", \"LieModule.genWeightSpace_nsmul_add_ne_bot_of_le\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def HasEigenvalue|def HasEigenvector|def eigenspace",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.HasEigenvalue",
+   "results": "{\"hits\": 12, \"top\": [\"Module.End.HasEigenvalue\", \"Module.End.hasEigenvalue_of_hasEigenvector\", \"Module.End.hasEigenvalue_of_hasGenEigenvalue\", \"Module.End.HasEigenvalue.exists_hasEigenvector\", \"Module.End.hasGenEigenvalue_of_hasEigenvalue\", \"Module.End.hasGenEigenvalue_iff_hasEigenvalue\", \"Module.End.Eigenvalues.val_mk\", \"Module.End.hasEigenvalue_iff\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "constituent only: eigenvalues, not purity or mixedness"
+  },
+  {
+   "tool": "grep",
+   "query": "HasEigenvalue|HasEigenvector",
+   "results": "{\"hits\": 5, \"top\": [\"29\", \"417\", \"420\", \"421\", \"425\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "constituent only: eigenvalue and eigenvector definitions, not the weight predicates"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -44,5 +114,20 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-semi"
+ "unit": "sk-p-real-semi",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-weil-frobenius-module-weights",
+  "worker": "stage1",
+  "summary": "Compared both blueprint snapshots and the project declarations. Retained the two weight predicates and all coefficient hypotheses; made linearity, eigenvalues, stable subspaces, quotient action and the empty filtration explicit. Replaced the unused geometric finite-field-fiber dependency by the existing coefficient, finite-dimensional, Frobenius-module, complex-norm and quotient-module notions. No new nodes or theorem assertions are needed. The project purity declaration covers only one clause; its HasWeightsAtMost is a bound on eigenvalues, not the filtration predicate. Mathlib semantic searches, name searches and source searches do not supply both predicates.",
+  "blueprint": "Realizes the entire definition def-weil-frobenius-module-weights, first paragraph (purity) and finite stable-filtration display and final sentence (mixedness). This is a definition inside sk-p-real-semi, not the key proposition of that unit; its proof route and unit realization are not changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-793ee68d4",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-793ee68d4 (reviewer sub-agent of L); spot-checked: I read all of def-weil-frobenius-module-weights against both blueprint snapshots, master order 2651 and main-20261015 order 2995. The two texts are identical. All hypotheses are kept: p is prime, a>=1, q=p^a, l is a prime different from p, Qlb is an algebraic closure of Q_l, iota is a field isomorphism, w is real, and nothing requires integrality or semisimplicity. The clarifications are equivalent to the source. First, F(V_r) contained in V_r is the same as F(V_r)=V_r, because F is injective and V_r is finite-dimensional. Second, strict and non-strict inclusions give the same predicate, because a zero quotient is pure of every weight and can be deleted. Third, the induced map on V_r/V_{r-1} is a well-defined automorphism, so applying the purity predicate to the quotients is legitimate. I tested V=0 (m=0), a 1-dimensional scalar c, the non-semisimple Jordan block with eigenvalue 1 (pure of weight 0), and diag(1,q), which is mixed of weights at most 2 but not at most 1. I read all six cited statements and they say what the item takes from them (sk-def-frobmod: first sentence only, a notion rather than a route). Dropping def-weil-finite-field-fiber is accepted: the item introduces p, a, q, l and Qlb itself, so it is a parametric form with the same meaning. No duplicates: def-weil-punctual-weights and sk-d-real-weights are about sheaves, sk-def-roots is about polynomials, def-tw-eigenvalue is a q-adic normalization, and lem-a1-punctual-bound-module-mixed is a downstream user. There are no new nodes, no proof steps, no tool_uses and no SGA. Fault fixed (B3): q^{w/2} was defined inline without citing the existing node def-weil-real-power (mathlib, Real.rpow, no dependencies). I added [def-weil-real-power] to that sentence and to stmt_deps in fixes/dag/nodes/sec-purity-real-sheaves/def-weil-frobenius-module-weights.json. This adds no cycle and changes nothing else.; 1 file(s) fixed by the reviewer"
+ }
 }

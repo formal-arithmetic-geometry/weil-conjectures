@@ -14,9 +14,65 @@
   "def-weil-proetale-inverse-image",
   "prop-weil-pbc-proetale-constant-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $L_f=f^{-1}$ and $R_f=f_*$, with the ring-sheaf adjunction of [def-weil-proetale-inverse-image]. Let $\\beta:R_kR_h\\xrightarrow{\\sim}R_{kh}$ be the direct-image comparison specified in the statement. At an object $T\\to V$, its component on a sheaf $G$ identifies $G(Z\\times_W(W\\times_VT))$ with $G(Z\\times_VT)$ by restriction along the canonical isomorphism of these objects over $Z$. For $G=A_Z$, this restriction sends the constant section $a$ to the constant section $a$: the sheafification map from the constant presheaf is natural for every arrow, and that presheaf has identity restrictions, by [def-weil-pbc-constant-sheaf]. Thus this particular comparison preserves the specified constants, including on an empty object.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5 (section-morphism), base-change definition of the site morphism; agent-written composition calculation from the specified adjunctions."
+   }
+  },
+  {
+   "text": "Consider the ring-sheaf map $b=\\beta_{A_Z}\\circ R_k(\\rho_A^h)\\circ\\rho_A^k:A_V\\to R_{kh}A_Z$. By [def-weil-proetale-inverse-image], $\\rho_A^k$ sends a constant $a$ on $T$ to the constant $a$ on $W\\times_VT$, and $R_k(\\rho_A^h)$ sends it to the constant $a$ on $Z\\times_W(W\\times_VT)$. Step 1 shows that $\\beta$ then sends it to the constant $a$ on $Z\\times_VT$. This is exactly the defining value of $\\rho_A^{kh}$. Consequently $b$ and $\\rho_A^{kh}$ agree after precomposition with the constant presheaf $A\\to A_V$. Since $A_V$ is its sheafification [def-weil-pbc-constant-sheaf], uniqueness in [def-weil-pbc-sheafification] gives $\\rho_A^{kh}=\\beta_{A_Z}\\circ R_k(\\rho_A^h)\\circ\\rho_A^k$ as maps of ring sheaves.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J (example-constant-sheaf) and Tag 00WH (proposition-sheafification-adjoint); apply their universal property to the constant-section maps of def-weil-proetale-inverse-image."
+   }
+  },
+  {
+   "text": "For the adjunctions of [def-weil-proetale-inverse-image], denote the Hom bijection by $\\Phi_f(t)=R_f(t)\\circ\\eta_{f,F}$ for $t:L_fF\\to G$. Abbreviate $c_A^h,c_A^k$ to $c_h,c_k$, and put $d=c_h\\circ L_h(c_k):L_hL_kA_V\\to A_Z$. Naturality of $\\eta_h$ for $c_k:L_kA_V\\to A_W$ gives the explicit calculation\n$$\\begin{aligned}\n\\Phi_h(d)&=R_h(c_h)\\circ R_hL_h(c_k)\\circ\\eta_{h,L_kA_V}\\\\\n&=R_h(c_h)\\circ\\eta_{h,A_W}\\circ c_k=\\rho_A^h\\circ c_k,\\\\\n\\Phi_k(\\Phi_h(d))&=R_k(\\rho_A^h)\\circ R_k(c_k)\\circ\\eta_{k,A_V}\n=R_k(\\rho_A^h)\\circ\\rho_A^k.\n\\end{aligned}$$\nThe last equalities use exactly that $c_h$ and $c_k$ are adjoint to the specified $\\rho_A^h$ and $\\rho_A^k$. These are ring-sheaf Hom sets throughout; no module pullback or derived comparison is used.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5 (section-morphism), base-change definition of the site morphism; agent-written composition calculation from the specified adjunctions."
+   }
+  },
+  {
+   "text": "The composite adjunction has Hom bijection $\\Phi_k\\circ\\Phi_h$, obtained simply by applying the two given Hom bijections successively. The canonical $\\alpha:L_{kh}\\xrightarrow{\\sim}L_hL_k$ in the statement is the comparison of left adjoints corresponding to $\\beta:R_kR_h\\xrightarrow{\\sim}R_{kh}$; its defining compatibility with these bijections is\n$$\\Phi_{kh}(t\\circ\\alpha_F)=\\beta_G\\circ\\Phi_k(\\Phi_h(t))\\qquad(t:L_hL_kF\\to G).$$\nApply this identity at $F=A_V$, $G=A_Z$, $t=d$ from Step 3. Steps 2 and 3 give $\\Phi_{kh}(d\\circ\\alpha_{A_V})=\\rho_A^{kh}=\\Phi_{kh}(c_A^{kh})$. Injectivity of the adjunction bijection yields $c_A^{kh}=d\\circ\\alpha_{A_V}=c_A^h\\circ h^{-1}(c_A^k)\\circ\\alpha_{h,k,A_V}$, with precisely the specified comparison and coefficient maps.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5 (section-morphism), base-change definition of the site morphism; agent-written composition calculation from the specified adjunctions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A5 (section-morphism), with sites.tex Tags 0H7J (example-constant-sheaf) and 00WH (proposition-sheafification-adjoint); explicit constant-section and adjunction calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -73,10 +129,45 @@
    "results": "Hits concern scheme structure-sheaf composition or constant sheaves and change of value category; none states composition of the canonical constant-ring coefficient maps for small pro-etale inverse images. Read CategoryTheory.constantCommuteCompose in Mathlib/CategoryTheory/Sites/ConstantSheaf.lean:184-203; it changes the value category on one fixed site. Search returned 8 hits; top results: AlgebraicGeometry.LocallyRingedSpace.comp_c, AlgebraicGeometry.LocallyRingedSpace.comp_c_app, AlgebraicGeometry.Spec.sheafedSpaceMap_comp, AlgebraicGeometry.SheafedSpace.comp_c_app', AlgebraicGeometry.SheafedSpace.comp_c_app, AlgebraicGeometry.SheafedSpace.comp_hom_c_app', AlgebraicGeometry.StructureSheaf.comap_comp, AlgebraicGeometry.SheafedSpace.comp_hom_c_app",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*[Cc]omp|[Cc]omp.*constantSheaf|constant.*[Rr]ing.*[Cc]omp",
+   "results": "13 hits; Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean. Read constantCommuteCompose in CategoryTheory/Sites/ConstantSheaf.lean:184-203: this changes the value category on a fixed site. Scheme module pullback composition concerns structure sheaves or modules, not the specified constant-ring maps on the pro-etale sites. Generic adjunction composition is the elementary Hom-bijection calculation written out in Steps 3-4.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pullback of constant ring sheaves respects composition of morphisms of sites via the canonical constant section maps",
+   "results": "8 hits; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, CategoryTheory.instIsConstantObjSheafSheafCompose, CategoryTheory.constantCommuteCompose, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback, SheafOfModules.pullbackComp, CategoryTheory.GrothendieckTopology.pullbackComp, CategoryTheory.GrothendieckTopology.Cover.pullbackComp. Read constantCommuteCompose in CategoryTheory/Sites/ConstantSheaf.lean:184-203: this changes the value category on a fixed site. Scheme module pullback composition concerns structure sheaves or modules, not the specified constant-ring maps on the pro-etale sites. Generic adjunction composition is the elementary Hom-bijection calculation written out in Steps 3-4.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.constantSheaf",
+   "results": "0 hits; . Read constantCommuteCompose in CategoryTheory/Sites/ConstantSheaf.lean:184-203: this changes the value category on a fixed site. Scheme module pullback composition concerns structure sheaves or modules, not the specified constant-ring maps on the pro-etale sites. Generic adjunction composition is the elementary Hom-bijection calculation written out in Steps 3-4.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical inverse image maps of constant sheaves of commutative rings on pro-etale sites commute with composition of scheme morphisms",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.comp_app_assoc, AlgebraicGeometry.Scheme.Hom.comp_app_assoc, AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc, AlgebraicGeometry.Scheme.Hom.map_appLE', AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app. Read constantCommuteCompose in CategoryTheory/Sites/ConstantSheaf.lean:184-203: this changes the value category on a fixed site. Scheme module pullback composition concerns structure sheaves or modules, not the specified constant-ring maps on the pro-etale sites. Generic adjunction composition is the elementary Hom-bijection calculation written out in Steps 3-4.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For composable inverse image and direct image adjunctions, the adjunct of c_h composed with h inverse image c_k equals the composite of the direct image constant section maps",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm, CompHausLike.LocallyConstant.adjunction_left_triangle, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor. Read constantCommuteCompose in CategoryTheory/Sites/ConstantSheaf.lean:184-203: this changes the value category on a fixed site. Scheme module pullback composition concerns structure sheaves or modules, not the specified constant-ring maps on the pro-etale sites. Generic adjunction composition is the elementary Hom-bijection calculation written out in Steps 3-4.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-diagonal-base-change",
@@ -95,5 +186,20 @@
    "pur713-def-pullback-comparison"
   ],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-proetale-constant-ring-composition",
+  "worker": "stage1",
+  "summary": "Kept the statement and canonical choices unchanged. Proved equality of the direct-image constant-section maps by sheafification uniqueness, wrote out the two successive adjuncts using unit naturality, and used the defining mate compatibility of the specified inverse-image comparison. All four steps are elementary calculations from cited definitions and their stated universal properties. No new nodes or Mathlib leaves. Searched the whole DAG/blueprint and project source, retained the existing blueprint same_as reference, and recorded actual further Mathlib searches. Checked empty schemes/objects, the zero ring, identity maps and disconnected schemes.",
+  "blueprint": "Realizes the coefficient-composition compatibility needed in lem-pur-diagonal-base-change, Proof last sentence: p_2 composed with Delta is the identity and functoriality of derived pullback. This is the underived ring-coefficient compatibility extracted there; it also makes explicit the same constant-section argument appearing in pur713-def-pullback-comparison. The unit route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-bca47bea9",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-bca47bea9 (reviewer sub-agent of L); spot-checked: I read the item, its four steps and every cited statement in full: def-weil-proetale-inverse-image, def-weil-pbc-constant-sheaf, def-weil-pbc-sheafification, prop-weil-pbc-proetale-constant-ring-map, def-weil-pbc-proetale-site and def-pc-scheme. I checked the sources at Stacks proetale.tex section-morphism (09A5), and at sites.tex example-constant-sheaf (0H7J) and proposition-sheafification-adjoint (00WH). The statement is unchanged and correct. Its coefficient category is ring sheaves, its morphism is pro-etale base change V to X x_Y V, and c^f is the adjoint of rho^f, matching the definition node; prop-weil-pbc-proetale-constant-ring-map identifies it for commutative coefficients. I tested Z empty, A = 0, identity morphisms and disconnected V; all hold. Step 1: beta is restriction along the canonical isomorphism, and it keeps constants because the sheafification map is natural. Step 2: both maps send a constant a to the constant a, so uniqueness of sheafification for rings gives rho^{kh} = beta o R_k(rho^h) o rho^k. Step 3: Phi_h(d) = rho^h o c_k by naturality of eta_h, and then Phi_k(rho^h o c_k) = R_k(rho^h) o rho^k. All types check. Step 4: the mate compatibility Phi_{kh}(t o alpha) = beta o Phi_k Phi_h(t) has the correct directions, and injectivity of Phi_{kh} gives the claim. All four steps are elementary, the uses equal proof_deps, and no proof of a cited node is used. The route matches the main-20261015 ancestor lem-pur-diagonal-base-change, whose last clause is p_2 o Delta = id. There are no new nodes, no SGA sources and no tool_uses. One finding for the maintainer: the existing unsplit node sec-trace-formula/lem-trf-constant-coefficient-composition (unit sk-d-weil, created by N2) states the identical equality. The report's DAG search missed it. This delivery creates no node, so nothing can be dropped here; the two nodes should be identified, for example by giving the trf node a one-step split that cites this item. No fixes were written."
  }
 }
