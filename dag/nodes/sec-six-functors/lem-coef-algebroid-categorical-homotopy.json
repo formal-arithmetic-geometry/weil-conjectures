@@ -24,7 +24,11 @@
   "place": "Corollary 4.3.17, Definition 4.3.18, Proposition 5.1.11 and Lemma 5.1.12, Definition 5.5.1 and Definition 5.5.2, Proposition 5.5.3, Corollary 5.5.6 (restricted to nonempty finite sets), Lemma 5.5.7, Theorem 5.5.13 (read online; not archived in literature/). No Stacks tag states this infinity-categorical fact."
  },
  "stmt_deps": [
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "lem-coef-algebroid-bilinear-colimits",
+  "lem-coef-algebroid-object-space-fibration",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-model-infinity-derived-adjunction"
  ],
  "proof": [
   {
@@ -245,5 +249,47 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5e34a6c2f",
+  "group": "Q155",
+  "result": "fix",
+  "note": "Mathematics, dependency interfaces, universes, edge cases and verbatim signature checked; snapshot compiles cleanly through scompile.py. Replaced the H1/H11 placeholder second reading with a complete report in fixes/lem-coef-algebroid-categorical-homotopy.report.md. Findings recorded in review.md; branch and snapshot unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AlgebroidCategoricalHomotopy",
+  "declaration": "SSet.Enhanced.Algebroid.categorical_homotopy",
+  "declarations": [
+   "SSet.Enhanced.Algebroid.CartesianSpaceCoefficients",
+   "SSet.Enhanced.Algebroid.finiteLabelSpaces",
+   "SSet.Enhanced.Algebroid.FiniteUnitDiagram",
+   "SSet.Enhanced.Algebroid.spatialActionAt",
+   "SSet.Enhanced.Algebroid.spatialActionBy",
+   "SSet.Enhanced.Algebroid.spatialActionEdge",
+   "SSet.Enhanced.Algebroid.SpatialCylinder",
+   "SSet.Enhanced.Algebroid.IsSpatiallyNaturallyEquivalent",
+   "SSet.Enhanced.Algebroid.IsCategoricalEquivalence",
+   "SSet.Enhanced.Algebroid.spatialOpPair",
+   "SSet.Enhanced.Algebroid.spatialCotensorAt",
+   "SSet.Enhanced.Algebroid.spatialCotensorEdge",
+   "SSet.Enhanced.Algebroid.spatialIteratedCotensor",
+   "SSet.Enhanced.Algebroid.spatialProductCotensor",
+   "SSet.Enhanced.Algebroid.spatialIteratedAction",
+   "SSet.Enhanced.Algebroid.spatialProductAction",
+   "SSet.Enhanced.Algebroid.spatialActionHom",
+   "SSet.Enhanced.Algebroid.spatialCotensorHom",
+   "SSet.Enhanced.Algebroid.spatialCopowerHom",
+   "SSet.Enhanced.Algebroid.SpatialCotensorData",
+   "SSet.Enhanced.Algebroid.categorical_homotopy"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AlgebroidCategoricalHomotopy.lean",
+  "statement": "theorem categorical_homotopy {EV ES : SSet.{max (u + 1) v}} [Quasicategory EV] [Quasicategory ES] (p : EV ⟶ monoidalSimplexBase.{max (u + 1) v}) (q : ES ⟶ monoidalSimplexBase.{max (u + 1) v}) (hV : IsPresentablyMonoidal.{u, v} p) (hS : IsMonoidalInfinityCategory q) (spaces : CartesianSpaceCoefficients.{u, v} q) (unitV : UnitSection p) (unitS : UnitSection q) : Nonempty (SpatialCotensorData.{u, v} p q unitV unitS spaces)",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repairs returned head a84d59307f05. Uses the actual total operadic algebroid categories with independent small and containing universes. The normalized binary change of enrichment fixes the entire spatial action, copowers have genuine colimiting cocones and a fully natural universal property, cotensors have a fully natural parametric mapping-space adjunction, finite unit maps are the normalized unitFamily images of all finite-set functions, and cylinder endpoints retain composing triangles. Completeness, full faithfulness and essential surjectivity use the recorded dependency predicates. The canonical contravariant cotensor edge is defined directly from the coherent bifunctor. Added statement dependencies are already landed interfaces used by these declarations."
  }
 }
