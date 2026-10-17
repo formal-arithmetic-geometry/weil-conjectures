@@ -91,6 +91,7 @@ theorem exists_affine_perfect_open_stalk_chainMap_lift
   have hQcancel : (eW.app Q).inv.f n ≫ (eW.app Q).hom.f n = 𝟙 _ := by
     simpa only [HomologicalComplex.comp_f, HomologicalComplex.id_f] using
       congrArg (fun f ↦ f.f n) (eW.app Q).inv_hom_id
+  simp only [eW] at hPcancel hQcancel
   simp only [← Category.assoc, hPcancel, hQcancel, Category.id_comp]
 
 end

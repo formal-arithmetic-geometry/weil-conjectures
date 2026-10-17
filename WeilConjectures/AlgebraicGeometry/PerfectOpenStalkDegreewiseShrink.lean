@@ -171,7 +171,7 @@ theorem exists_affine_perfect_open_stalk_degreewise_shrink
     (restriction_comp_iso X U W V hWU hVW) (.up ℤ)
   let C := D.symm
   let k := fun n : ℤ ↦ (C.app P).hom.f n ≫ B.map (g n) ≫ (C.app Q).inv.f n
-  obtain ⟨c, hc⟩ := exists_openStalk_restriction_transport X U x hxU W hxW hWU
+  obtain ⟨c₀, c, hc₀, hc⟩ := exists_openStalk_restriction_transport X U x hxU W hxW hWU
     (openModuleStalkRestrictionComparison X U W hWU x hxU hxW) V hxV hVW hVU
   let c' := NatIso.mapHomologicalComplex c (.up ℤ)
   let S := (openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)
@@ -180,10 +180,23 @@ theorem exists_affine_perfect_open_stalk_degreewise_shrink
     Functor.isoWhiskerLeft R c' ≪≫ e
   have heV : eV = Functor.mapHomologicalComplexCompIso
       (openModuleStalkRestrictionComparison X U V hVU x hxU hxV) (.up ℤ) := by
-    ext M n
-    dsimp [eV, c', C, D, e, restriction_comp_iso]
-    simp only [Functor.map_id, Category.id_comp]
-    exact (hc (M.X n)).symm
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    apply HomologicalComplex.hom_ext
+    intro n
+    simp only [eV, c', C, D, e, S, Iso.trans_hom, NatTrans.comp_app, HomologicalComplex.comp_f,
+      Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Functor.isoWhiskerLeft_hom,
+      Functor.whiskerLeft_app, Functor.associator_hom_app, Iso.symm_hom,
+      Functor.mapHomologicalComplexCompIso_hom_app_f, NatIso.mapHomologicalComplex_hom_app_f,
+      NatIso.mapHomologicalComplex_inv_app_f, Functor.mapHomologicalComplex_map_f,
+      restriction_comp_iso, NatIso.ofComponents_inv_app, Iso.refl_inv,
+      Category.id_comp]
+    erw [CategoryTheory.Functor.map_id, Category.id_comp, HomologicalComplex.id_f, Category.id_comp]
+    have h := hc (M.X n)
+    rw [hc₀] at h
+    erw [CategoryTheory.Functor.map_id, Category.id_comp] at h
+    exact h.symm
   refine ⟨V, hxV, hV, hVW, hVU, k, ?_, ?_⟩
   · intro n
     by_cases hn : n ∈ Finset.Icc a b

@@ -71,6 +71,9 @@ noncomputable def externalConstantSectionsTensorMap
       ((RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom).obj
         (externalCupCoefficients f g F G)).val where
   app V := ModuleCat.ofHom
+    (X := (picardConstantSectionsTensor k Y g (scalarObj f F (op ⊤)) G).obj V)
+    (Y := ((RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom).obj
+      (externalCupCoefficients f g F G)).val.obj V)
     { toFun := fun x ↦ externalSectionsComponent f g F G V.unop
         (picardConstantTensorBalancedSections k Y g (scalarObj f F (op ⊤)) G V.unop x)
       map_add' := by intros; simp

@@ -114,17 +114,11 @@ theorem exists_open_stalk_free_map_one_lift
   let E : R ⋙ S ≅ T := e V hxV hVU
   have hi (i : I) : ∃ g : R.obj L ⟶ R.obj N,
       S.map g = E.hom.app L ≫ ti i ≫ E.inv.app N := by
-    obtain ⟨d, hd⟩ := he (D i) (hxD i) (hDU i) (a i) V hxV (hVD i) hVU
-    let Rᵢ := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (hDU i))
+    obtain ⟨c, d, -, hc⟩ := he (D i) (hxD i) (hDU i) (a i) V hxV (hVD i) hVU
     let Q := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
       (homOfLE (hVD i))
-    let c : Rᵢ ⋙ Q ≅ R := NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)
     refine ⟨c.inv.app L ≫ Q.map (k i) ≫ c.hom.app N, ?_⟩
-    exact restriction_lift_stalk c d (a i) E (fun M ↦ by
-      simp only [c, NatIso.ofComponents_hom_app, Iso.refl_hom, Functor.map_id,
-        Category.id_comp]
-      exact hd M)
-      (ti i) (k i) (hk i)
+    exact restriction_lift_stalk c d (a i) E hc (ti i) (k i) (hk i)
   choose g hg using hi
   let K : R.obj F ⟶ R.obj N := ∑ i : I, R.map (SheafOfModules.freeπ i) ≫ g i
   refine ⟨V, hxV, hVU, E, K, ?_⟩
