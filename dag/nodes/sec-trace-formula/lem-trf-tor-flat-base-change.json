@@ -10,11 +10,83 @@
  "stmt_deps": [
   "def-weil-pbc-flat-ring-map",
   "def-weil-pbc-faithfully-flat-ring-map",
-  "def-weil-pbc-tor-modules"
+  "def-weil-pbc-tor-modules",
+  "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a free resolution $P_\\bullet\\to M$ over $R$: existence follows, for example, by applying [lem-weil-pbc-free-resolution-ses-split] to $0\\to M\\xrightarrow{1}M\\to0\\to0$ and retaining its first resolution. Put $C_\\bullet=P_\\bullet\\otimes_R A$ and $D_\\bullet=P_\\bullet\\otimes_R B$, with $C_{-1}=D_{-1}=0$ (the augmentations to $M$ are not included in these complexes). By [def-weil-pbc-tor-modules], $H_n(C_\\bullet)=\\operatorname{Tor}^R_n(M,A)$ and $H_n(D_\\bullet)=\\operatorname{Tor}^R_n(M,B)$ for all $n\\ge0$. Multiplication on the second tensor factor makes $C_\\bullet$ a complex of $A$-modules and $D_\\bullet$ a complex of $B$-modules; these actions induce the coefficient actions on Tor.",
+   "uses": [
+    "lem-weil-pbc-free-resolution-ses-split",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LY (algebra-section-tor), resolution definition; Tag 065P (algebra-lemma-reverse-long-exact-seq-ext), free resolutions of a short exact sequence"
+   }
+  },
+  {
+   "text": "Write $g:A\\to B$ for the coefficient map. The tensor universal property [def-weil-pbc-module-tensor-product] gives mutually inverse $B$-linear maps in each degree\n$$\\theta_j:(P_j\\otimes_R A)\\otimes_A B\\longrightarrow P_j\\otimes_R B,\\quad(p\\otimes a)\\otimes b\\longmapsto p\\otimes g(a)b,$$\n$$\\eta_j:p\\otimes b\\longmapsto(p\\otimes1)\\otimes b.$$\nThe $R$-balancing relation holds because the two maps $R\\to B$ agree, and the $A$-balancing relation holds because $g(aa')b=g(a)g(a')b$. The composites are identities on generators: $\\theta_j\\eta_j(p\\otimes b)=p\\otimes b$ and $\\eta_j\\theta_j((p\\otimes a)\\otimes b)=(p\\otimes1)\\otimes g(a)b=(p\\otimes a)\\otimes b$. Both differential composites send $(p\\otimes a)\\otimes b$ to $d_P(p)\\otimes g(a)b$. Thus $\\theta:C_\\bullet\\otimes_A B\\xrightarrow{\\sim}D_\\bullet$ is an isomorphism of complexes.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M8 (algebra-lemma-flat-base-change-tor), tensor-complex identification in the free-resolution proof, with fixed base R"
+   }
+  },
+  {
+   "text": "Since $B$ is flat over $A$, [lem-weil-pbc-flat-tensor-exact] makes $F=-\\otimes_A B:\\operatorname{Mod}_A\\to\\operatorname{Mod}_B$ exact: apply its assertion to each three-term part of a short exact sequence, including the zeros at its ends. Tensor is additive by its defining formula on maps. Apply [lem-sp-exact-functor-preserves-homology](c) to $C_{n+1}\\to C_n\\to C_{n-1}$ for each $n\\ge0$. Its inverse comparison gives\n$$\\kappa_n:H_n(C_\\bullet)\\otimes_A B\\xrightarrow{\\sim}H_n(C_\\bullet\\otimes_A B).$$\nThe cited statement says that this comparison is induced by cycles and their quotient by boundaries: if $z\\in\\ker d_{C,n}$, then $\\kappa_n([z]\\otimes b)=[z\\otimes b]$. There is no boundedness assumption; only these three terms are used, including $C_{-1}=0$ for $n=0$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N (homology-lemma-exact-functor), exact functors and kernels/cokernels; tensor exactness is algebra Tag 00HD (algebra-lemma-flat)"
+   }
+  },
+  {
+   "text": "Compose $\\kappa_n$ with $H_n(\\theta)$. In the Tor identifications of step 1 this is a $B$-linear isomorphism from $\\operatorname{Tor}^R_n(M,A)\\otimes_A B$ to $\\operatorname{Tor}^R_n(M,B)$. To identify the map, let $z=\\sum_i p_i\\otimes a_i$ be a cycle in $C_n$. The composite sends\n$$[z]\\otimes b\\longmapsto\\left[\\sum_i p_i\\otimes g(a_i)b\\right].$$\nBy functoriality in the coefficient module in [def-weil-pbc-tor-modules], the map $A\\to B$ induces $[z]\\mapsto[\\sum_i p_i\\otimes g(a_i)]$. Its $B$-linear extension across tensor with $B$ gives exactly the displayed formula, hence the canonical coefficient-base-change map. Equality on these generators proves equality of the maps by [def-weil-pbc-module-tensor-product]; the isomorphism therefore proves the assertion for the specified map, not just an abstract isomorphism of the modules.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LY (algebra-section-tor), functoriality in the second variable; Tag 00M8 (algebra-lemma-flat-base-change-tor), natural comparison on a resolution"
+   }
+  },
+  {
+   "text": "Now assume $A\\to B$ is faithfully flat and $\\operatorname{Tor}^R_n(M,B)=0$. Put $T=\\operatorname{Tor}^R_n(M,A)$. The proved isomorphism gives $T\\otimes_A B=0$. The tensor universal property [def-weil-pbc-module-tensor-product] gives the switch isomorphism $B\\otimes_A T\\cong T\\otimes_A B$, $b\\otimes t\\mapsto t\\otimes b$, whose inverse is the same switch. Thus tensoring the complex $0\\to T\\to0$ on the left with $B$ produces an exact zero complex. By the reflection of exactness in [def-weil-pbc-faithfully-flat-ring-map], $0\\to T\\to0$ is exact at $T$. Its kernel there is $T$ and its image is $0$, so $T=0$, as required.",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HB (algebra-definition-flat), items (2) and (4), applied to the complex 0 -> T -> 0"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-free-resolution-ses-split",
+  "def-weil-pbc-tor-modules",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-sp-exact-functor-preserves-homology",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Adaptation of Tag 00M8 (algebra-lemma-flat-base-change-tor), fixing R and tensoring the coefficient complex over A; details from Tags 00LY, 00HD, 00HB and homology Tag 010N."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +115,59 @@
    "results": "Module.Flat.iff_flat_tensorProduct and Module.FaithfullyFlat declarations; no exact Tor theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For commutative rings R to A to B with B flat over A, Tor over R of M and A tensor over A with B is Tor over R of M and B",
+   "results": "Flatness/base-change infrastructure: Module.Flat.of_flat_tensorProduct, Module.Flat.baseChange, Module.Flat.iff_flat_tensorProduct, RingHom.Flat.isStableUnderBaseChange, Module.Flat.instTensorProduct, Module.FaithfullyFlat.instTensorProduct, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.isBaseChange. None states Tor coefficient base change.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor",
+   "results": "CategoryTheory.Tor, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.Tor_obj, CategoryTheory.Tor_map. Definitions and projective vanishing only; source Tor.lean read.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*base.?[Cc]hange|base.?[Cc]hange.*Tor|Tor.*[Ff]lat|[Ff]lat.*Tor",
+   "results": "25 broad case-insensitive hits, including Order/Closure.lean, representation group-homology Functoriality.lean, geometry base-change and TorsionFree imports; these are substring noise, no Tor coefficient comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor commutes with flat extension of coefficients while keeping the base ring fixed",
+   "results": "ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.rTensor_exact, Module.Flat.rTensor_shortComplex_exact, Module.FaithfullyFlat.instTensorProduct, Module.Flat.lTensor_shortComplex_exact, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, Module.Flat.lTensor_exact, ModuleCat.preservesFiniteLimits_extendScalars_of_flat. Exactness tools, no Tor comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact extension of scalars commutes with the homology of a tensor product of a projective resolution, giving base change of Tor groups",
+   "results": "Rep.torIso, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor_map, CategoryTheory.Tor'_map_app, CategoryTheory.Tor', CategoryTheory.Tor_obj, Rep.isZero_Tor_succ_of_projective. Tor resolution definitions/computations, not fixed-base coefficient extension.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTor\\b|\\bTor\\x27\\b",
+   "results": "Mathlib/CategoryTheory/Monoidal/Tor.lean:12,14,20,21,42. Read whole file (definitions at 44 and 50; projective vanishing at 56 and 62); no flat coefficient extension theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"iso\"",
+   "results": "12 substring hits such as Vector.instNoNatZeroDivisors, ordered-ring instances, RelIso and OrderIso coercions; no Tor isomorphism.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-log-regular-monomial-tor",
@@ -72,5 +193,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-tor-flat-base-change",
+  "worker": "stage1",
+  "summary": "Proved fixed-base coefficient change using an R-free resolution, an explicit tensor-complex isomorphism, flat tensor exactness and the existing exact-functor homology comparison. Identified the resulting isomorphism on cycle representatives with the canonical coefficient map, including n=0, and deduced faithful-flat vanishing from reflection of exactness. No new nodes. Clarified that Stacks 00M8 is the model proof, not the literal fixed-base statement.",
+  "blueprint": "Realizes the coefficient-base-change input to lem-trf-local-term-locality proof (1)--(2), through the monomial Tor-independence reduction in lem-trf-log-regular-monomial-tor; retains the inherited blueprint ancestor and via chain. No change to the contracting-correspondence unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-e3dabe9f1",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-e3dabe9f1 (reviewer sub-agent of L); spot-checked: I read all five steps against the cited statements and Stacks 00M8 (label lemma-flat-base-change-tor, line 18735), 00LY, 00HD, 00HB, 010N and 065P. 00M8 changes the base ring, while this item fixes R and changes only the coefficient A->B; proof_origin correctly records the proof as an agent adaptation. The statement is true and needs no flatness of A or B over R. Small cases agree: Z/2 with Z->Q; Z/4->Z/4[x], where both sides are (Z/2)[x]; and n=0. Step 1 gets a free resolution by applying the free-resolution lemma to 0->M->M->0->0, which is valid. Step 2 (the termwise isomorphism (P(x)A)(x)_A B = P(x)B) is elementary, with R- and A-balancing checked. Step 3 combines the Mathlib leaves on flat tensor exactness and clause (c) of the exact-functor homology lemma; that clause gives the cycle-induced comparison [z](x)b -> [z(x)b] with no boundedness assumption. Step 4 identifies the composite with the B-linear extension of Tor(M,g), so the stated map is the isomorphism. Step 5 proves T=0 from the faithful-flatness definition applied to 0->T->0. There are no new nodes. No existing node duplicates the item: the closest candidates (tor-one-surjective-flat-middle, flat-scalar-extension-tor-comparison, tor-localization-on-spec) differ. Every cited node is a definition, a Mathlib leaf or a Lean-closed node, so there is no route departure and no tool_uses. Changes: none. Note for the maintainer: the maintainer-owned source.place still says the 00M8 proof 'applies verbatim' and would read better as 'adapted'."
  }
 }

@@ -14,9 +14,120 @@
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Forget the log structures and apply [lem-trf-polarized-scheme-etale-descent]. The underlying $\\theta_{ij}$ have the identity and cocycle conditions; the specified $\\theta_{ij}^*L_j\\simeq L_i$ have their own identity and cocycle conditions, so the line-bundle datum meets the corrected child hypothesis. Relative ampleness is exactly ampleness after restriction to every affine open of $U_i$. Obtain $f:X\\to S$, an invertible module $L$, and compatible identifications $X\\times_SU_i\\simeq X_i$ carrying $L$ to $L_i$.",
+   "uses": [
+    "lem-trf-polarized-scheme-etale-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C with scheme effectivity through Tags 02WW and 04W8."
+   }
+  },
+  {
+   "text": "Under these identifications the maps $p_i:X_i\\to X$ are the base changes of $U_i\\to S$ along $f$. Thus [lem-weil-pbc-etale-covering-base-change] makes $\\{p_i:X_i\\to X\\}$ a jointly surjective etale cover of the descended $X$. Each $X_i$ is locally Noetherian, since it is a fine log scheme in the sense of [def-trf-fs-log-blowup]. Apply [lem-trf-etale-local-noetherian-descent] to this cover: $X$ is locally Noetherian. This establishes the underlying-scheme hypothesis of fine-log descent before applying it.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-trf-fs-log-blowup",
+    "lem-trf-etale-local-noetherian-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 034C (lemma-Noetherian-local-fppf); ILO VI 1.1 convention; Morphisms Tag 02GO and Topologies Tag 022D for the base-changed covering."
+   }
+  },
+  {
+   "text": "Use the cover $\\{X_i\\to X\\}$ of Step 2. The overlap $X_i\\times_XX_j$ identifies with $X\\times_SU_{ij}$ by the fibre-product universal property. The log parts of $\\theta_{ij}$ therefore identify the restrictions of $M_{X_i}$ and $M_{X_j}$ on precisely these overlaps, over the structure sheaf. Their identity and triple cocycle follow from those of the given log isomorphisms. By [lem-trf-fine-log-structure-etale-descent] they glue to a fine log structure $M_X$ on $X$ with compatible identifications $M_X|_{X_i}\\simeq M_{X_i}$.",
+   "uses": [
+    "lem-trf-fine-log-structure-etale-descent",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.8 final sentence, printed pp. 107--108; VI 1.1."
+   }
+  },
+  {
+   "text": "Construct the log structure map for $f$. Let $A=f^{-1}M_S$, equipped with $f^{-1}M_S\\to f^{-1}\\mathcal O_S\\to\\mathcal O_X$, and let $B=M_X$. On $X_i$, the given log morphism $X_i\\to U_i$ followed by the strict log morphism $U_i\\to S$ gives $A|_{X_i}\\to M_{X_i}=B|_{X_i}$. These maps agree on $X_i\\times_XX_j$ because $\\theta_{ij}$ is a log isomorphism over $U_{ij}$. The arbitrary-monoid-sheaf clause of [lem-trf-fine-log-structure-etale-descent] gives a unique $f^\\flat:f^{-1}M_S\\to M_X$ compatible with the structure maps. Together with $f$ this is a log morphism by [def-trf-fs-log-blowup]. Its restrictions are the specified log morphisms, so the identifications of Step 1 are now over the log base $S$ and induce the original polarization and overlap data.",
+   "uses": [
+    "lem-trf-fine-log-structure-etale-descent",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1 and VIII 3.3.8: sheaf gluing of the structure morphism to the base, after scheme descent."
+   }
+  },
+  {
+   "text": "If every $X_i$ is fs, its log structure has etale-local charts by fine saturated monoids. Apply the saturated-chart clause of [lem-trf-fine-log-structure-etale-descent] to the same cover of $X$. It gives saturated charts for $M_X$, and therefore $X$ is fs.",
+   "uses": [
+    "lem-trf-fine-log-structure-etale-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1; VIII 3.3.8--3.3.9."
+   }
+  },
+  {
+   "text": "For two descents $(X,M_X,L)$ and $(X\\prime,M_{X\\prime},L\\prime)$ with the specified identifications, let $h_i:X_i\\to X\\prime$ be the underlying comparison isomorphisms followed by projection to $X\\prime$. They agree on $X_i\\times_XX_j$. By [lem-weil-pbc-fpqc-finer-than-etale] the cover of Step 2 is fpqc, and [lem-weil-pbc-fpqc-representable-descent] descends the $h_i$ to a unique $h:X\\to X\\prime$. Its two composites to $S$ agree on the cover, so uniqueness of that same descent with target $S$ shows $h$ is over $S$. Applying the same argument on $X\\prime$ descends the inverse comparisons; the two inverse equations hold globally by uniqueness after restriction. The uniqueness clause of [lem-trf-polarized-scheme-etale-descent] gives the compatible invertible-module isomorphism for this same underlying $h$. The local log comparisons are maps $h^{-1}M_{X\\prime}|_{X_i}\\to M_X|_{X_i}$. Apply the arbitrary-monoid-sheaf clause of [lem-trf-fine-log-structure-etale-descent] to descend them and their inverse comparisons. Its uniqueness makes their composites identities and makes the resulting log isomorphism commute with the maps from $M_S$, since both assertions hold locally. Every compatible log isomorphism has this underlying scheme map and this monoid-sheaf map by the same two uniqueness assertions. This proves unique compatible isomorphism of the polarized log descents.",
+   "uses": [
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-fine-log-structure-etale-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q and Topologies Tag 022C; uniqueness in polarized scheme descent and sheaf-level log descent."
+   }
+  },
+  {
+   "text": "For the final assertion write $q_a:T_a\\to T$ and $g_a:T_a\\to Z$ for the given strict etale cover and compatible log $S$-morphisms. The underlying $g_a$ agree on $T_a\\times_TT_b$. By [lem-weil-pbc-fpqc-finer-than-etale] this is an fpqc cover, so [lem-weil-pbc-fpqc-representable-descent] produces a unique scheme map $g:T\\to Z$ with $gq_a=g_a$. If $t:T\\to S$ and $z:Z\\to S$ are the structure maps, then $(zg)q_a=zg_a=tq_a$ for every $a$. The uniqueness in representable descent, now with target $S$, implies $zg=t$; hence the underlying descended map is an $S$-morphism.",
+   "uses": [
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q (lemma-fpqc-universal-effective-epimorphisms); Topologies Tag 022C."
+   }
+  },
+  {
+   "text": "Equip $A=g^{-1}M_Z$ with the composite $g^{-1}M_Z\\to g^{-1}\\mathcal O_Z\\to\\mathcal O_T$ and put $B=M_T$. Strictness of $q_a$ identifies $M_{T_a}$ with $M_T|_{T_a}$, so the log parts of $g_a$ give maps $u_a:A|_{T_a}\\to B|_{T_a}$ over $\\mathcal O_{T_a}$. They agree on overlaps because the given $g_a$ agree as log morphisms. Apply the arbitrary-monoid-sheaf clause of [lem-trf-fine-log-structure-etale-descent] on the locally Noetherian scheme $T$: it gives a unique $g^\\flat:g^{-1}M_Z\\to M_T$ over $\\mathcal O_T$. By [def-trf-fs-log-blowup], $(g,g^\\flat)$ is a log morphism. It is over the log base $S$: the maps $t^{-1}M_S\\to M_T$ obtained from $t$ and from the composite $zg$ agree after every $q_a$, since the $g_a$ are log $S$-morphisms, and the uniqueness in the same sheaf clause makes them equal. The scheme-map uniqueness in Step 7 and the monoid-map uniqueness here give the required uniqueness of the log $S$-morphism.",
+   "uses": [
+    "lem-trf-fine-log-structure-etale-descent",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1 and VIII 3.3.8, with the sectionwise sheaf gluing condition for arbitrary inverse-image monoid sheaves."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-fs-log-blowup",
+  "lem-trf-etale-local-noetherian-descent",
+  "lem-trf-fine-log-structure-etale-descent",
+  "lem-trf-polarized-scheme-etale-descent",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 3.3.8 descent sentence, made explicit using effective polarized scheme descent (Stacks 0D3C/02WW/04W8), local Noetherianity (034C), and representable morphism descent (023Q/022C)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,7 +166,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-coherent-log-ideal-chart-construction",
@@ -81,5 +192,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-polarized-fine-log-etale-descent",
+  "worker": "stage1",
+  "summary": "Repaired all five returned points: imposed the line-bundle identity/cocycle in the polarized child; restricted the fine-log child to locally Noetherian schemes and added the statement-only etale-local Noetherianity input; descended underlying scheme maps explicitly; expanded the monoid-map clause to arbitrary sheaves, then constructed both the base log morphism and the final descended log morphism; corrected the cover to X_i -> X. Preserved the item statement and existing searches; refreshed current main ancestry and recorded fresh searches for changed child statements. Three new unsplit children, no Mathlib leaves.",
+  "blueprint": "Realizes the additional descent input in the parent lem-trf-coherent-log-ideal-chart-construction proof, specifically ILO VIII 3.3.8 final sentence (fine-log chart and morphism descent) and the effective polarized descent specified there; the scheme polarization route is Stacks 0D3C/02WW/04W8.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Converts the strict etale source covers to fpqc covers for representable morphism descent; a generic topology tool of sk-thm-p1 not supplied by sk-i-curve-zero."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Descends the underlying scheme morphisms and tests their inverse and S-linearity equations after the cover; the unit has no representable scheme-morphism descent statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Identifies X_i -> X as a jointly surjective etale covering, the base change of the given covering of S; a generic covering tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-etale-covering-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-c023b16da",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-c023b16da (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full. Sources checked: Stacks 0D3C (spaces-descent l.2125), 02WW (spaces l.1603), 04W8, 034C (descent l.4762), 021N, 023Q, 022C/022D and 02GO, plus ILO VIII 3.3.8 (pp.107-108) and VI 1.1 (p.69). Polarized child: it is true by the 02WW gluing route (the relation is a monomorphism because composing with X_j->U_j recovers u). After that, 04W8 descends L, and 0D3C makes X->S representable. The line-bundle cocycle is needed: the identity-cover example with lambda13 != lambda12*lambda23 shows it, and on the real conic O(1) admits no cocycle while O(2) does. Fine-log child: étale sheaf gluing, with the unit condition and charts both étale-local. The A,B clause is general enough for inverse-image sheaves; tested on a Galois log point, the A^1 N-chart and the empty case. Noetherian child: this is exactly 034C plus 021N. Mathlib has only ascent along open subschemes (Noetherian.lean l.158-221), so it is not a Mathlib leaf. Item steps 1-8: each hypothesis is matched, including the X_i->X cover by base change, local Noetherianity before the log gluing, strictness giving M_{U_i}=M_S|U_i, uniqueness via fpqc representable descent, and the equation over M_S by A,B uniqueness. The statement is unchanged and not weakened, and the item is not a target node. Duplicate searches (rg for 0D3C, 02WW, 04W8, 0D40, 034C; regex for ample with descent and for log structures with glue) found no duplicate; thm-pd-effective-descent and the lem-galois-fpqc nodes are different statements. Accepted tool_uses: lem-weil-pbc-fpqc-finer-than-etale, lem-weil-pbc-fpqc-representable-descent, lem-weil-pbc-etale-covering-base-change. No SGA is cited and the blueprint ancestry is correct. No fixes."
  }
 }
