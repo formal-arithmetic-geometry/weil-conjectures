@@ -13,9 +13,113 @@
   "def-trf-geometric-morphism",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=\\mathcal C_\\tau/X$, $E=\\mathcal C_{\\tau'}/X$, $e=\\epsilon_X$, $G=e_*H$ and $m=r+1\\geq1$. Since $e_*$ leaves the underlying presheaf unchanged, $G$ is already a $\\tau$-sheaf. Its $\\tau$-sheafification is therefore $H$: the identity map of this presheaf satisfies the universal property of sheafification. Thus the counit $e^{-1}G\\to H$ is an isomorphism. All cohomology below is over the terminal object $X$ of the indicated slice site.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZC, lemma-V-implies-cohomology-extra-general, first sentence of proof; comparison morphism of section-compare."
+   }
+  },
+  {
+   "text": "Apply [sk-thm-groth-ss] to $e:D\\to E$ followed by global sections. Its site clause gives that $e_*$ preserves injectives and the first-quadrant sequence $E_2^{p,q}=H^p_E(X,R^qe_*H)\\Rightarrow H^{p+q}_D(X,H)$. Use the Cartan--Eilenberg realization specified by [thm-sp-grothendieck]. By [thm-sp-double-complex-spectral-sequences] its abutment has the finite filtration $H^n=F^0H^n\\supseteq\\cdots\\supseteq F^{n+1}H^n=0$, with $F^pH^n/F^{p+1}H^n=E_\\infty^{p,n-p}$. The abstract edge comparison lemmas used below apply to these categories: abelian sheaves on a small site are sheaves of modules over the constant integer ring sheaf, since every abelian group has its unique unital integer action; [lem-pur-ringed-site-grothendieck-abelian] therefore makes both abelian sheaf categories Grothendieck. Global sections take values in abelian groups. The injective-preservation assertion above supplies the required acyclicity for this composite.",
+   "uses": [
+    "sk-thm-groth-ss",
+    "thm-sp-grothendieck",
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0732, lemma-Leray and proof, applied to e; finite filtration from derived.tex Tags 015N and 015J."
+   }
+  },
+  {
+   "text": "The hypothesis gives $E_2^{p,q}=0$ for $1\\leq q\\leq m-1$, for every $p$. At $(m,0)$ every outgoing $d_s$ ($s\\geq2$) has negative second coordinate. An incoming $d_s$ has source $(m-s,s-1)$, which is zero in the vanishing band when $s\\leq m$, and has negative first coordinate when $s>m$. Consequently $E_2^{m,0}=E_\\infty^{m,0}$. All intermediate graded pieces $E_\\infty^{p,m-p}$ for $1\\leq p<m$ are zero, so $F^1H^m=F^mH^m=E_2^{m,0}$. At $(0,m)$ there are no incoming differentials on any page; hence the stable term embeds into $E_2^{0,m}$. By the convergence convention [def-sp-convergence], the bottom edge identifies $E_2^{m,0}$ with $F^mH^m\\subset H^m$ and the left edge factors as $H^m\\twoheadrightarrow H^m/F^1H^m=E_\\infty^{0,m}\\hookrightarrow E_2^{0,m}$. We have proved $0\\to H^m_E(X,G)\\xrightarrow{a}H^m_D(X,H)\\xrightarrow{b}(R^me_*H)(X)$ exact. This argument includes $m=1$, where the intermediate range is empty.",
+   "uses": [
+    "def-sp-convergence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZC, lemma-V-implies-cohomology-extra-general, extraction of the displayed exact sequence from Leray; homology.tex convergence convention Tag 012U."
+   }
+  },
+  {
+   "text": "Identify $a$ with the comparison map in the statement, rather than just some injection between the groups. Choose injective resolutions $H\\to I^\\bullet$ and $G\\to J^\\bullet$. The pullback construction [lem-weil-pbc-site-cohomology-pullback], using $e^{-1}G\\cong H$, gives a map $\\beta:e^{-1}J^\\bullet\\to I^\\bullet$ extending this counit. Its adjoint is $\\phi:J^\\bullet\\to e_*I^\\bullet$, and in degree zero it extends the inclusion $G\\to e_*I^0$ by the adjunction triangle identity. Apply [lem-sc-grothendieck-bottom-resolution-comparison] with $F=e_*$ and the second functor $\\Gamma(X,-)$: it identifies $a$ with $H^m$ of $\\phi(X):J^\\bullet(X)\\to I^\\bullet(X)$. The same chain map computes cohomology pullback followed by the counit, because the pullback formula is the unit $J\\to e_*e^{-1}J$ followed by $e_*\\beta$, exactly $\\phi$. Thus $a$ is precisely the canonical pullback of the item.",
+   "uses": [
+    "lem-weil-pbc-site-cohomology-pullback",
+    "lem-sc-grothendieck-bottom-resolution-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZC, first two sentences of proof; cohomology pullback via injective resolutions; derived.tex Tag 015N bottom edge."
+   }
+  },
+  {
+   "text": "Let $P$ be the presheaf on $E$ given by $P(U\\to X)=H^m_D(U,H)=H^m(I^\\bullet(U))$. By [lem-weil-pbc-site-higher-direct-image-sheafified-presheaf], its sheafification is $R^me_*H$, and its unit sends a section cocycle to its class in $\\mathcal H^m(e_*I^\\bullet)$. To identify this unit with $b$, apply [lem-pc-grothendieck-cocycle-comparison] to $F=e_*$ and $\\Gamma(X,-)$. Here $\\Gamma(X,-)$ preserves kernels, so the supplied cycle lift $\\Gamma(X,Z^m(e_*I))\\to Z^m(I(X))$ is the canonical identification: both groups are the sections killed by the same differential. Its defining inclusion equation is the identity. The cited comparison says that $b$ takes the class of $z\\in Z^m(I(X))$ to the section defined by that cocycle in $\\mathcal H^m(e_*I)(X)$. Every cohomology class has a cocycle representative. Therefore $b$ equals the component at $X$ of $P\\to P^\\#$.",
+   "uses": [
+    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "lem-pc-grothendieck-cocycle-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 072W, lemma-higher-direct-images and proof, together with Tag 0EZC last sentence; derived.tex Tags 015J and 015N left edge."
+   }
+  },
+  {
+   "text": "For the sheafification unit $\\eta:P\\to P^\\#$ on $E$, its sheafification $\\eta^\\#$ is an isomorphism: applying the universal property twice, both $P^\\#$ and $(P^\\#)^\\#$ represent maps from $P$ to sheaves, and the induced map is $\\eta^\\#$. Thus [lem-weil-pbc-site-sheafification-iso-locally-bijective] makes $\\eta$ locally injective. If $b(\\xi)=\\eta_X(\\xi)=0=\\eta_X(0)$, there is a $\\tau'$-covering $\\{X_i\\to X\\}$ with $\\xi|_{X_i}=0$. Conversely, if such a covering kills $\\xi$, naturality of $\\eta$ kills the restrictions of $\\eta_X(\\xi)$. A section of the sheaf $P^\\#$ vanishing on a covering is zero, by uniqueness in its sheaf equalizer condition. Hence $\\ker b$ consists exactly of the $\\tau'$-locally zero classes. The exact sequence of Step 3, with the map identified in Step 4, proves both injectivity and the asserted image.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EZC, concluding sentence expanded using sites.tex Tags 00WK (lemma-sections-sheafification) and 00WM (lemma-mono-epi-sheafification)."
+   }
+  },
+  {
+   "text": "The comparison commutes with restriction. Keep the two resolutions and the sheaf complex map $\\phi$ of Step 4 fixed. For every arrow $U\\to X$, evaluate $\\phi$ on that object; the square with the restriction maps $J^\\bullet(X)\\to J^\\bullet(U)$ and $I^\\bullet(X)\\to I^\\bullet(U)$ commutes degreewise because $\\phi$ is a map of sheaf complexes. The same holds for every further arrow $V\\to U$ in $\\mathcal C/X$. By [lem-weil-pbc-object-cohomology-presheaf-resolution], these section homology maps are precisely cohomology restriction, naturally in all these arrows. By the formula in [lem-weil-pbc-site-cohomology-pullback], the horizontal maps $H^m(\\phi(U))$ are the canonical comparison pullbacks on $U$. Taking homology of the commuting squares proves the requested compatibility, independently of the chosen resolutions.",
+   "uses": [
+    "lem-weil-pbc-object-cohomology-presheaf-resolution",
+    "lem-weil-pbc-site-cohomology-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "section-compare-general, commutativity with relocalization; Tag 0EZC first sentence, with cohomology over objects as in Section 01FT."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "sk-thm-groth-ss",
+  "thm-sp-grothendieck",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-sp-convergence",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-sc-grothendieck-bottom-resolution-comparison",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "lem-pc-grothendieck-cocycle-comparison",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-object-cohomology-presheaf-resolution"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0EZC, lemma-V-implies-cohomology-extra-general, proof; the filtration calculation and last sentence are expanded using the cited generic DAG tools."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +155,59 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CochainComplex.cm5b.instInjectiveXIntI\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K : CochainComplex C ℤ} (n : ℤ),\\n  CategoryTheory.Injective ((CochainComplex.cm5b.I K).X n)\", \"doc\": \"For each integer $ n $, the object $ (I K).X(n) $ in the cochain complex $ I K $ constructed via injective replacements is an injective object in the abelian category $ \\\\mathcal{C} $. This follows fro\"}\n  {\"name\": \"CochainComplex.isKInjective_of_injective_aux\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  {K L : CochainComplex C ℤ} (f : K ⟶ L) (α : CochainComplex.HomComplex.Cochain K L (-1)) (n m : ℤ),\\n  n + 1 = m →\\n    HomologicalComplex.ExactAt K m →\\n      ∀ [CategoryTheory.Injective (L.X m)],\\n     \", \"doc\": \"Let $ K $ and $ L $ be cochain complexes in a preadditive category $ \\\\mathcal{C} $ with integer indices. Suppose $ f : K \\\\to L $ is a chain map, $ \\\\alpha $ is a cochain of degree $-1$ in $ \\\\text{Hom}(\"}\n  {\"name\": \"TopCat.Presheaf.app_injective_of_stalkFunctor_map_injective\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X : TopCat}\\n  {FC : C → C → Type u_1} {CC : C → Type v} [inst_2 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)]\\n  [instCC : CategoryTheory.ConcreteCategory C FC]\\n  [CategoryTheory.Limits.PreservesF\", \"doc\": \"Let $F$ be a sheaf and $G$ a presheaf on a topological space $X$ with values in a category $\\\\mathcal{C}$. For a morphism $f : F \\\\to G$ and an open set $U \\\\subseteq X$, if for every point $x \\\\in U$ the\"}\n  {\"name\": \"CategoryTheory.Sheaf.isLocallyInjective_iff_injective\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallyInjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {FD : D → D → Type u_1} {CD : D → Type w} [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)]\\n  [inst_3 : CategoryTheory.ConcreteCategory D FD] {J : CategoryTheory.GrothendieckTop\", \"doc\": \"A morphism $\\\\phi: F_1 \\\\to F_2$ between sheaves on a category $\\\\mathcal{C}$ with respect to a Grothendieck topology $J$ is locally injective if and only if for every object $X$ in the opposite category\"}\n  {\"name\": \"TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X : TopCat}\\n  {FC : C → C → Type u_1} {CC : C → Type v} [inst_2 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)]\\n  [instCC : CategoryTheory.ConcreteCategory C FC]\\n  [CategoryTheory.Limits.PreservesF\", \"doc\": \"For a sheaf $\\\\mathcal{F}$ and a presheaf $\\\\mathcal{G}$ on a topological space $X$, a morphism $f : \\\\mathcal{F} \\\\to \\\\mathcal{G}$ is injective on all stalks $\\\\mathcal{F}_x \\\\to \\\\mathcal{G}_x$ for every $\"}\n  {\"name\": \"CategoryTheory.Presheaf.isLocallyInjective_of_injective\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallyInjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {FD : D → D → Type u_1} {CD : D → Type w} [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)]\\n  [inst_3 : CategoryTheory.ConcreteCategory D FD] (J : CategoryTheory.GrothendieckTop\", \"doc\": \"If each component of a natural transformation $\\\\phi : F_1 \\\\Rightarrow F_2$ between presheaves (functors $\\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{D}$) is injective, then $\\\\phi$ is locally injective with r\"}\n  {\"name\": \"groupCohomology.cochainsMap_f_map_mono\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality\", \"type\": \"∀ {k G H : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Group H] {A : Rep k H} {B : Rep k G} (f : G →* H)\\n  (φ : (Action.res (ModuleCat k) f).obj A ⟶ B),\\n  Function.Surjective ⇑f →\\n    ∀ [CategoryTheory.Mono φ] (i : ℕ), CategoryTheory.Mono ((groupCohomology.cochainsMap f φ).f i)\", \"doc\": \"If $ f $ is a surjective function and $ \\\\phi $ is a monomorphism of representations, then for every natural number $ i $, the induced map on the $ i $-th cochain group $ (\\\\text{cochainsMap}\\\\, f\\\\, \\\\phi\"}\n  {\"name\": \"CategoryTheory.Sheaf.isLocallyInjective_forget\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallyInjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {FD : D → D → Type u_1} {CD : D → Type w} [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)]\\n  [inst_3 : CategoryTheory.ConcreteCategory D FD] {J : CategoryTheory.GrothendieckTop\", \"doc\": \"If $\\\\phi: F_1 \\\\to F_2$ is a locally injective morphism between sheaves on a category $\\\\mathcal{C}$ with respect to a Grothendieck topology $J$, then the induced morphism obtained by composing with the\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits give ordinary local injectivity or unrelated group cohomology maps. No Leray edge result with this site-local image characterization was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If higher direct images vanish through degree n, the Leray comparison is injective in degree n plus one with image locally zero classes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For any additive functor $ F : C \\\\to D $ between abelian categories, natural number $ n $, and injective object $ X $ in $ C $, the $(n+1)$-th right-derived functor of $ F $ evaluated at $ X $ yields \"}\n  {\"name\": \"CochainComplex.cm5b.instInjectiveXIntI\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K : CochainComplex C ℤ} (n : ℤ),\\n  CategoryTheory.Injective ((CochainComplex.cm5b.I K).X n)\", \"doc\": \"For each integer $ n $, the object $ (I K).X(n) $ in the cochain complex $ I K $ constructed via injective replacements is an injective object in the abelian category $ \\\\mathcal{C} $. This follows fro\"}\n  {\"name\": \"CochainComplex.isKInjective_of_injective_aux\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  {K L : CochainComplex C ℤ} (f : K ⟶ L) (α : CochainComplex.HomComplex.Cochain K L (-1)) (n m : ℤ),\\n  n + 1 = m →\\n    HomologicalComplex.ExactAt K m →\\n      ∀ [CategoryTheory.Injective (L.X m)],\\n     \", \"doc\": \"Let $ K $ and $ L $ be cochain complexes in a preadditive category $ \\\\mathcal{C} $ with integer indices. Suppose $ f : K \\\\to L $ is a chain map, $ \\\\alpha $ is a cochain of degree $-1$ in $ \\\\text{Hom}(\"}\n  {\"name\": \"CategoryTheory.Sheaf.isLocallyInjective_iff_injective\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallyInjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {FD : D → D → Type u_1} {CD : D → Type w} [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)]\\n  [inst_3 : CategoryTheory.ConcreteCategory D FD] {J : CategoryTheory.GrothendieckTop\", \"doc\": \"A morphism $\\\\phi: F_1 \\\\to F_2$ between sheaves on a category $\\\\mathcal{C}$ with respect to a Grothendieck topology $J$ is locally injective if and only if for every object $X$ in the opposite category\"}\n  {\"name\": \"CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallySurjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {FA : A → A → Type u_1} {CA : A → Type w'}\\n  [inst_2 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] [inst_3 : CategoryTheory.ConcreteCateg\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{A}$ be a concrete category. For presheaves $F_1, F_2, F_3: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{A}$ and nat\"}\n  {\"name\": \"CategoryTheory.Presheaf.isLocallyInjective_iff_of_fac\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallyInjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {FD : D → D → Type u_1} {CD : D → Type w} [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)]\\n  [inst_3 : CategoryTheory.ConcreteCategory D FD] (J : CategoryTheory.GrothendieckTop\", \"doc\": \"Given natural transformations $\\\\phi: F_1 \\\\to F_3$ and $\\\\psi: F_1 \\\\to F_3$ between presheaves on a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, if the composition $\\\\phi\\\\psi$ equals\"}\n  {\"name\": \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {I : C} [CategoryTheory.Injective I] {K : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj I)) (n :\", \"doc\": \"Let $\\\\mathcal{C}$ be an abelian category with injective object $I$, and let $K$ be a cochain complex in $\\\\mathcal{C}$ strictly supported in degrees $\\\\geq n$. For any integer $i < n$, every morphism $\\\\\"}\n  {\"name\": \"CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallyBijective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {FA : A → A → Type u_1} {CA : A → Type w'}\\n  [inst_2 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] [inst_3 : CategoryTheory.ConcreteCateg\", \"doc\": \"A morphism between presheaves becomes locally injective after sheafification if and only if the original morphism is locally injective, i.e., $\\\\text{Sheaf.IsLocallyInjective}((\\\\text{presheafToSheaf } \"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state this Leray edge injection and its site-local image characterization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"Exact\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state this Leray edge injection and its site-local image characterization."
+  },
+  {
+   "tool": "grep",
+   "query": "Leray|edgeMap|edge_map|locally.*zero",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/LocalField/Basic.lean\", \"line\": \"128\", \"text\": \"  exact ⟨e.symm.trans (LocallyFiniteOrder.orderMonoidWithZeroEquiv _)⟩\"}\n  {\"file\": \"Mathlib/NumberTheory/AbelSummation.lean\", \"line\": \"316\", \"text\": \"      <| (locallyIntegrableOn_mul_sum_Icc c zero_le_one hf_int).integrableOn_of_isBigO_atTop\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/DedekindEta.lean\", \"line\": \"175\", \"text\": \"    multipliableLocallyUniformlyOn_eta (eta_tprod_ne_zero z.2)\"}\n  {\"file\": \"Mathlib/Combinatorics/Extremal/RuzsaSzemeredi.lean\", \"line\": \"65\", \"text\": \"      #(G.cliqueFinset 3) = m ∧ G.LocallyLinear) _ _ (Nat.zero_le _)\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/SumCoeff.lean\", \"line\": \"179\", \"text\": \"    refine locallyIntegrableOn_mul_sum_Icc f zero_le_one ?_\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/SumCoeff.lean\", \"line\": \"271\", \"text\": \"    simpa using locallyIntegrableOn_mul_sum_Icc f zero_le_one (locallyIntegrableOn_const 1)\"}\n  {\"file\": \"Mathlib/Probability/Process/LocalProperty.lean\", \"line\": \"93\", \"text\": \"def Locally [TopologicalSpace ι] [OrderTopology ι] [Zero E]\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Support.lean\", \"line\": \"547\", \"text\": \"theorem LocallyFinite.smul_left [Zero R] [Zero M] [SMulWithZero R M]\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Support.lean\", \"line\": \"552\", \"text\": \"theorem LocallyFinite.smul_right [Zero M] [SMulZeroClass R M]\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Riemannian/PathELength.lean\", \"line\": \"320\", \"text\": \"  rcases exists_lt_locally_constant_of_riemannianEDist_lt hr zero_lt_one\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Riemannian/PathELength.lean\", \"line\": \"342\", \"text\": \"  rcases exists_lt_locally_constant_of_riemannianEDist_lt hu zero_lt_one with\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Riemannian/Basic.lean\", \"line\": \"434\", \"text\": \"  rcases exists_lt_locally_constant_of_riemannianEDist_lt hy zero_lt_one\"}\n  {\"file\": \"Mathlib/Data/List/Sort.lean\", \"line\": \"571\", \"text\": \"@[simp] theorem sortedGE_map_ofDual :\"}\n  {\"file\": \"Mathlib/Data/List/Sort.lean\", \"line\": \"582\", \"text\": \"protected alias ⟨SortedGE.map_ofDual, SortedLE.of_map_ofDual⟩ := sortedGE_map_ofDual\"}\n  {\"file\": \"Mathlib/Data/List/Sort.lean\", \"line\": \"595\", \"text\": \"theorem sortedGE_map_toDual {l : List α} :\"}\n  {\"file\": \"Mathlib/Data/List/Sort.lean\", \"line\": \"606\", \"text\": \"protected alias ⟨SortedGE.map_toDual, SortedLE.of_map_toDual⟩ := sortedGE_map_toDual\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/LocallyConvex.lean\", \"line\": \"24\", \"text\": \"- `locallyConvexSpace_iff_zero` : in a module, local convexity at zero gives\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/LocallyConvex.lean\", \"line\": \"71\", \"text\": \"theorem LocallyConvexSpace.convex_basis_zero [LocallyConvexSpace 𝕜 E] :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/LocallyConvex.lean\", \"line\": \"87\", \"text\": \"theorem LocallyConvexSpace.ofBasisZero {ι : Type*} (b : ι → Set E) (p : ι → Prop)\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/LocallyConvex.lean\", \"line\": \"95\", \"text\": \"theorem locallyConvexSpace_iff_zero : LocallyConvexSpace 𝕜 E ↔\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/LocallyConvex.lean\", \"line\": \"98\", \"text\": \"    LocallyConvexSpace.ofBasisZero 𝕜 E _ _ h fun _ => And.right⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"138\", \"text\": \"instance [Algebra.FiniteType (𝒜 0) A] : LocallyOfFiniteType (Proj.toSpecZero 𝒜) := by\"}\n  {\"file\": \"Mathlib/Algebra/Order/Monoid/LocallyFiniteOrder.lean\", \"line\": \"29\", \"text\": \"- `LocallyFiniteOrder.orderMonoidWithZeroEquiv`:\"}\n  {\"file\": \"Mathlib/Algebra/Order/Monoid/LocallyFiniteOrder.lean\", \"line\": \"196\", \"text\": \"def LocallyFiniteOrder.orderMonoidWithZeroEquiv (G : Type*) [LinearOrderedCommGroupWithZero G]\"}\n  {\"file\": \"Mathlib/Algebra/Order/Monoid/LocallyFiniteOrder.lean\", \"line\": \"198\", \"text\": \"  OrderMonoidIso.withZeroUnits.symm.trans (LocallyFiniteOrder.orderMonoidEquiv _).withZero\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state this Leray edge injection and its site-local image characterization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Comparison of cohomology of two topologies is injective one degree beyond the vanishing range of higher direct images",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"{F : Sheaf C X} {G : Presheaf C X} (f : F.1 ⟶ G) :\\n  (∀ x : X, Function.Injective ((stalkFunctor C x).map f)) ↔ ∀ U : Opens X, Function.Injective (f.app (op U))\", \"doc\": \"For a sheaf $\\\\mathcal{F}$ and a presheaf $\\\\mathcal{G}$ on a topological space $X$, a morphism $f : \\\\mathcal{F} \\\\to \\\\mathcal{G}$ is injective on all stalks $\\\\mathcal{F}_x \\\\to \\\\mathcal{G}_x$ for every $\"}\n  {\"name\": \"groupCohomology.cochainsMap_id_f_map_mono\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality\", \"type\": \"{A B : Rep k G} (φ : A ⟶ B) [Mono φ] (i : ℕ) : Mono ((cochainsMap (MonoidHom.id G) φ).f i)\", \"doc\": \"For any monomorphism $\\\\phi: A \\\\to B$ of representations and natural number $i$, the induced cochain map $C^\\\\bullet(G, A) \\\\to C^\\\\bullet(G, B)$ has an injective component $\\\\phi_i: C^i(G, A) \\\\to C^i(G, B\"}\n  {\"name\": \"CochainComplex.cm5b\", \"module\": \"Mathlib.Algebra.Homology.Factorizations.CM5b\", \"type\": \"(n : ℤ) [K.IsStrictlyGE (n + 1)] [L.IsStrictlyGE n] :\\n  ∃ (L' : CochainComplex C ℤ) (_hL' : L'.IsStrictlyGE n) (i : K ⟶ L') (p : L' ⟶ L) (_hi : Mono i) (_hp :\\n    degreewiseEpiWithInjectiveKernel p) (_hp' : QuasiIso p), i ≫ p = f\", \"doc\": \"Given cochain complexes $ K $ and $ L $ in an abelian category $ \\\\mathcal{C} $ with $ K $ strictly supported in degrees $ \\\\geq n+1 $ and $ L $ strictly supported in degrees $ \\\\geq n $, there exists a \"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.ofHom_injective\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \"{f₁ f₂ : F ⟶ G} (h : ofHom f₁ = ofHom f₂) : f₁ = f₂\", \"doc\": \"The canonical map from chain maps $\\\\varphi: F \\\\to G$ to degree 0 cochains in the homomorphism complex $\\\\text{Hom}(F,G)$, defined by $\\\\varphi \\\\mapsto (\\\\varphi_p: F.X_p \\\\to G.X_p)_{p \\\\in \\\\mathbb{Z}}$, i\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex_injective_iff\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(P : Extension R A) [FormallySmooth R P.Ring] :\\n  Function.Injective P.cotangentComplex ↔ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For an $ R $-algebra extension $ P $, the cotangent complex map $ P.\\text{cotangentComplex} $ is injective if and only if the first cohomology group $ \\text{Algebra.H1Cotangent}(R, A) $ is trivial (i.e.\"}\n  {\"name\": \"CochainComplex.isKInjective_of_injective_aux\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KInjective\", \"type\": \"{K L : CochainComplex C ℤ} (f : K ⟶ L) (α : Cochain K L (-1)) (n m : ℤ) (hnm : n + 1 = m) (hK : K.ExactAt m)\\n  [Injective (L.X m)] (hα : (δ (-1) 0 α).EqUpTo (Cochain.ofHom f) n) :\\n  ∃ (h : K.X (n + 2) ⟶ L.X (n + 1)), (δ (-1) 0 (α + Cochain.single h (-1))).EqUpTo (Cochain.ofHom f) m\", \"doc\": \"Let $ K $ and $ L $ be cochain complexes in a preadditive category $ \\\\mathcal{C} $ with integer indices. Suppose $ f : K \\\\to L $ is a chain map, $ \\\\alpha $ is a cochain of degree $-1$ in $ \\\\text{Hom}(\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.instIsStrictlyGECochainComplexOfNatInt\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Extend\", \"type\": \": R.cochainComplex.IsStrictlyGE 0\", \"doc\": \"The cochain complex associated to an injective resolution, when extended from natural number indices to integer indices, is strictly supported in degrees ≥ 0. This means all non-zero terms of the comp\"}\n  {\"name\": \"CochainComplex.isStrictlyGE_of_iso\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"(n : ℤ) [K.IsStrictlyGE n] : L.IsStrictlyGE n\", \"doc\": \"If cochain complexes $ K $ and $ L $ are isomorphic and $ K $ is strictly supported in degrees $ \\\\geq n $, then $ L $ is also strictly supported in degrees $ \\\\geq n $.\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state this Leray edge injection and its site-local image characterization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leray spectral sequence edge injection with image the kernel of the cohomology presheaf sheafification map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₁ =\\n    (CategoryTheory.presheafToSheaf J\", \"doc\": \"For a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the first object $ X_1 $ of the associated Mayer-Vietoris short complex is given by sheafif\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.g =\\n    CategoryTheory.Limits.biprod.desc\\n\", \"doc\": \"For a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the second differential $g$ in the associated short complex of sheaves with additive commutative group coeff\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          J.MayerVietorisSquare → CategoryTheory.ShortComplex (CategoryTh\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, this constructs a short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commut\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.f =\\n    CategoryTheory.Limits.biprod.lift\\n\", \"doc\": \"For a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, the differential $ f $ of the associated short complex in the category of sheaves with values in addit\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mono_f₁₃\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] (self : J.MayerVietorisSquare), CategoryTheory.Mono self.f₁₃\", \"doc\": \"In a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and admitting weak sheafification, the morphism $f_{13}$ from the first to the third object in any Mayer-Vietoris square is a mono\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₃ =\\n    (CategoryTheory.presheafToSheaf J\", \"doc\": \"The third object $X_3$ in the Mayer-Vietoris short complex associated to a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$ is given by sheafifying the Yoneda embed\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          CategoryTheory.Sheaf J AddCommGrpCat → ℕ → C\", \"doc\": \"For a fixed natural number $n$ and a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups, the cohomology presheaf is a contravariant functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{AddCommGrp\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₂ =\\n    ((CategoryTheory.presheafToSheaf \", \"doc\": \"In a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, for a Mayer-Vietoris square $S$, the second object $X_2$ of the associated Mayer-Vietoris short complex in the category of sheave\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state this Leray edge injection and its site-local image characterization."
+  },
+  {
+   "tool": "grep",
+   "query": "Leray|edgeMap|edge_map",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not state this Leray edge injection and its site-local image characterization."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheaf|rightDerived",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"line\": \"26\", \"text\": \"We also define `Sheaf.cohomologyPresheaf F n : Cᵒᵖ ⥤ AddCommGrpCat`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"line\": \"33\", \"text\": \"  `(F.cohomologyPresheaf n).obj (Opposite.op U) ≃+ Sheaf.H F n`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"line\": \"35\", \"text\": \"  `(F.cohomologyPresheaf n).obj (Opposite.op U) ≃+ Sheaf.H (F.over U) n`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"line\": \"72\", \"text\": \"def cohomologyPresheafFunctor (n : ℕ) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"line\": \"81\", \"text\": \"abbrev cohomologyPresheaf (F : Sheaf J AddCommGrpCat.{v}) (n : ℕ) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"45\", \"text\": \"  biprod.lift ((F.cohomologyPresheaf n).map S.f₂₄.op)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"46\", \"text\": \"      ((F.cohomologyPresheaf n).map S.f₃₄.op)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"50\", \"text\": \"      ⟨(F.cohomologyPresheaf n).map S.f₂₄.op y,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"51\", \"text\": \"        (F.cohomologyPresheaf n).map S.f₃₄.op y⟩ := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"69\", \"text\": \"  biprod.desc ((F.cohomologyPresheaf n).map S.f₁₂.op)\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Basic.lean lines 72–83 define the cohomology presheaf only; they do not give the comparison theorem. Read the displayed definitions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-comparison-induction-step",
@@ -82,5 +235,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-comparison-next-degree-image",
+  "worker": "stage1",
+  "summary": "Read Stacks 0EZC and the generic source lemmas; expanded the Leray finite-filtration argument, identified both canonical edges on injective resolutions, derived the local-zero image criterion from local injectivity of sheafification, and proved restriction naturality. Statement unchanged. Reused all generic facts already in the DAG; no new nodes.",
+  "blueprint": "The topology-comparison branch recorded by blueprint.from and its via chain: this is the 0EZC unique-lift input used in the 0EZE induction, below lem-trf-local-term-locality. It does not replace the contracting-correspondence argument of the current blueprint ancestor. Searched the whole blueprint for locally zero, Leray, 0732, 01FW, sheafification and edge map; no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "sk-thm-groth-ss",
+    "why": "Generic Leray existence and preservation of injective abelian sheaves, for the comparison morphism of slice sites. No node of sk-i-curve-zero supplies this general categorical tool."
+   },
+   {
+    "node": "thm-sp-grothendieck",
+    "why": "Specifies the Cartan–Eilenberg realization so the existing generic edge formulas apply to the same spectral sequence. No node of sk-i-curve-zero supplies this general categorical tool."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "Finite abutment filtration and stable-term identifications for that first-quadrant realization. No node of sk-i-curve-zero supplies this general categorical tool."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Supplies the Grothendieck hypothesis on abelian sheaves, viewed as modules over the constant integer ring, for the generic edge comparison tools. No node of sk-i-curve-zero supplies this general categorical tool."
+   },
+   {
+    "node": "def-sp-convergence",
+    "why": "The convergence convention identifies stable terms with the abutment filtration; used in the explicit page calculation. No node of sk-i-curve-zero supplies this general categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-cohomology-pullback",
+    "why": "The canonical pullback is computed on injective resolutions and is independent of choices. No node of sk-i-curve-zero supplies this general categorical tool."
+   },
+   {
+    "node": "lem-sc-grothendieck-bottom-resolution-comparison",
+    "why": "Identifies the bottom edge with the resolution comparison map; it is used for sites, not just for topological spaces. No node of sk-i-curve-zero supplies this general categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "why": "General site formula for the higher-direct-image sheaf and its specified cocycle map. No node of sk-i-curve-zero supplies this general categorical tool."
+   },
+   {
+    "node": "lem-pc-grothendieck-cocycle-comparison",
+    "why": "Identifies the left edge with the cycle-to-cohomology-sheaf map, without a vanishing hypothesis. No node of sk-i-curve-zero supplies this general categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "why": "Local injectivity of the sheafification unit, deduced by applying its if-and-only-if to the unit. No node of sk-i-curve-zero supplies this general categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-object-cohomology-presheaf-resolution",
+    "why": "Naturality in all site arrows of the section-complex computation of object cohomology. No node of sk-i-curve-zero supplies this general categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-thm-groth-ss",
+  "thm-sp-grothendieck",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-sp-convergence",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-sc-grothendieck-bottom-resolution-comparison",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "lem-pc-grothendieck-cocycle-comparison",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "lem-weil-pbc-object-cohomology-presheaf-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q96-1ea536ea0",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q96-1ea536ea0 (reviewer sub-agent of L); spot-checked: Read the item, seven proof steps, unit/chapter route, cited DAG statements, Stacks Tag 0EZC and comparison setup, blueprint ancestry, and required delivery rules. Verified hypotheses, spectral-sequence filtration and edge maps, canonical base-change direction, ordinary abelian-sheaf coefficients, locally-zero image criterion, restriction naturality, edge cases, duplicates, cycles, long-step rule, route lock, and batch-5 constraints. No new nodes or repairs required; review.md records the checks."
  }
 }

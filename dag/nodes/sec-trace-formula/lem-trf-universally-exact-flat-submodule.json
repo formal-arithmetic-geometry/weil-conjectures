@@ -11,9 +11,41 @@
   "def-weil-pbc-flat-ring-map",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $0\\to N\\to N'\\to N''\\to0$ be any short exact sequence of $R$-modules, with $N''$ the cokernel of the injection $N\\to N'$. Tensoring the universally exact sequence $0\\to M_1\\to M_2\\to M_3\\to0$ with each of $N$, $N'$, and $N''$ gives three short exact rows. Tensoring $0\\to N\\to N'\\to N''\\to0$ with the flat module $M_2$ gives an injective middle vertical map $M_2\\otimes_RN\\to M_2\\otimes_RN'$. Thus these maps form a commutative 3\\times3 diagram with exact rows and an injective middle vertical arrow.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058P, proof of lemma-ui-flat-domain, diagram setup"
+   }
+  },
+  {
+   "text": "For an injection $N\\to N'$ and $x\\in M_1\\otimes_RN$ mapping to zero in $M_1\\otimes_RN'$, commutativity of the left square makes the image of $x$ in $M_2\\otimes_RN$ map to zero in $M_2\\otimes_RN'$. The middle vertical map is injective by Step 1, so that image in $M_2\\otimes_RN$ is zero. Exactness of the top row then gives $x=0$. Hence $M_1\\otimes_RN\\to M_1\\otimes_RN'$ is injective for every injection $N\\to N'$, and $M_1$ is flat by the definition of flatness.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058P, proof of lemma-ui-flat-domain, argument that M_1 is flat"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 058P, lemma-ui-flat-domain"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,7 +77,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-completed-free-flat-mittag-leffler",
@@ -77,5 +109,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-universally-exact-flat-submodule",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 058P and split its M_1-flat conclusion into the tensor 3x3 diagram setup and the injectivity chase. The statement and hypotheses are unchanged; no new node is needed because the two cited definition nodes provide flatness and tensor-product maps, and all remaining diagram facts are the source's elementary exactness argument.",
+  "blueprint": "Realizes the Tag 058P application in the Tag 05DJ proof of the completed direct-sum flatness: after the universally exact completion-to-product sequence is formed, applying the M_1 conclusion of Tag 058P to the flat product module gives flatness of the completed direct sum. The two steps realize the diagram setup and the sentence proving the submodule M_1 flat.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q27-a074bdf6f",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-a074bdf6f (reviewer sub-agent of L); spot-checked: Read all required instructions, packet/report, unit/chapter route, item, cited nodes, and Stacks Tag 058P in full. The two-step tensor diagram and injectivity chase are mathematically correct, hypotheses and tensor/flatness definitions match the source, edge cases pass, no duplicate/cycle/route-pivot issue or hidden long lemma was found, and no tool_uses are accepted. The report claims a citations.json attachment that is absent; this is a minor report inconsistency only and does not affect the node."
  }
 }

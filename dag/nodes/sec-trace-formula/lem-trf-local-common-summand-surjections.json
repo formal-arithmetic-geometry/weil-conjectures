@@ -10,9 +10,110 @@
  "stmt_deps": [
   "def-weil-pbc-free-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathfrak m$ be the unique maximal ideal and $k=R/\\mathfrak m$. This quotient is a field: for $a\\notin\\mathfrak m$, maximality gives $1=ra+b$ with $b\\in\\mathfrak m$, so $\\bar r\\bar a=1$. Reduction is a local ring homomorphism $\\rho:R\\to k$, since its inverse image of the maximal ideal $0$ of $k$ is $\\mathfrak m$. Reducing the coefficients of $\\alpha,\\beta$ in the standard bases gives $k$-linear maps $a,b:k^n\\to k^m$. Both are surjective: lift a target vector coordinatewise to $R^m$, choose a preimage under the corresponding original surjection, and reduce that preimage. Put $V=k^n$, $A=\\ker a$ and $B=\\ker b$. The case $m=0$ already has the solution $U=0$; the following argument also covers it.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph; details supplied for the residue-field construction and its lift"
+   }
+  },
+  {
+   "text": "We first construct a simultaneous complement over $k$. Apply [lem-trf-vector-subspace-complement] to $C=A\\cap B$ inside $A$ and inside $B$, obtaining $A=C\\oplus A_0$ and $B=C\\oplus B_0$. Apply it also to $A+B$ inside $V$, obtaining $V=(A+B)\\oplus D$. Every subspace $P$ of $V$ is finite-dimensional: choose its complement using the same lemma and project the finite standard spanning family of $V$ onto $P$; the images span $P$. Thus all subspaces just named are finite-dimensional.",
+   "uses": [
+    "lem-trf-vector-subspace-complement",
+    "def-weil-finite-dimensional-subspace",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph; details supplied for the residue-field construction and its lift"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-idempotent-charpoly-rank-nullity] applied to $a$ and $b$, $\\dim A+m=n=\\dim B+m$, hence $\\dim A=\\dim B$. Apply that same theorem to the projections $A\\to A_0$ and $B\\to B_0$ along $C$, whose kernels are $C$, to obtain $\\dim A_0+\\dim C=\\dim A=\\dim B=\\dim B_0+\\dim C$. Therefore $\\dim A_0=\\dim B_0$. By [lem-trf-equal-dimension-linear-equivalence] choose a linear isomorphism $\\theta:A_0\\to B_0$.",
+   "uses": [
+    "lem-weil-pbc-idempotent-charpoly-rank-nullity",
+    "lem-trf-equal-dimension-linear-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph; details supplied for the residue-field construction and its lift"
+   }
+  },
+  {
+   "text": "The sum $A+B=C\\oplus A_0\\oplus B_0$ is direct. Indeed if $c+x+y=0$ with $c\\in C$, $x\\in A_0$, $y\\in B_0$, then $y=-c-x\\in A\\cap B=C$, so $y=0$ and then $c=x=0$. Consequently every vector of $V$ has unique coordinates $c+x+y+d$ in $C,A_0,B_0,D$. Define $G=\\{x+\\theta(x):x\\in A_0\\}$ and $\\overline U=G+D$. This is a subspace by linearity of $\\theta$, and its elements have unique expressions $x+\\theta(x)+d$. The displayed decompositions justify these assertions directly, without a dimension count.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph; details supplied for the residue-field construction and its lift"
+   }
+  },
+  {
+   "text": "The subspace $\\overline U$ is complementary to both $A$ and $B$. For $v=c+x+y+d$, put $z=\\theta^{-1}(y)$; then $v=(c+x-z)+(z+\\theta(z)+d)$ lies in $A+\\overline U$. Also $v=(c+y-\\theta(x))+(x+\\theta(x)+d)$ lies in $B+\\overline U$. If $x+\\theta(x)+d\\in A$, the unique coordinates force $d=0$ and $\\theta(x)=0$, so $x=0$. Membership in $B$ similarly forces $d=x=0$. Thus $a|_{\\overline U}$ and $b|_{\\overline U}$ are injective. They are surjective because $a,b$ are surjective and vanish on $A,B$, respectively: decompose any preimage using the corresponding direct sum. The inverse of $a|_{\\overline U}$, followed by inclusion, is a linear map $q:k^m\\to k^n$ with image $\\overline U$, $aq=1$, and $bq$ an isomorphism. Linearity of the inverse follows by applying the injective linear map $a|_{\\overline U}$ to the addition and scalar identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph; details supplied for the residue-field construction and its lift"
+   }
+  },
+  {
+   "text": "For each standard basis vector $e_j$ of $k^m$, choose a vector $v_j\\in R^n$ reducing to $q(e_j)$. Define $s:R^m\\to R^n$ by $s((r_j))=\\sum_j r_jv_j$. Its reduction is exactly $q$. In the scalar extension of [def-weil-module-base-change], identify $R^t\\otimes_R k$ with $k^t$ by $(r_i)\\otimes c\\mapsto(\\rho(r_i)c)$; its inverse is $(c_i)\\mapsto\\sum_i e_i\\otimes c_i$. The tensor relations verify the two composites on the standard generators and pure tensors. Under these identifications, the scalar extensions of $\\alpha s,\\beta s:R^m\\to R^m$ are $aq$ and $bq$, respectively: evaluate on each $e_j\\otimes1$.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph; details supplied for the residue-field construction and its lift"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-local-free-base-change-reflects-iso] to the local homomorphism $\\rho:R\\to k$ and separately to $\\alpha s$ and $\\beta s$. Both source and target are the finite free module $R^m$, and their scalar extensions are isomorphisms by steps 5--6. Hence $\\alpha s$ and $\\beta s$ are isomorphisms over $R$. In particular $s$ is injective: $s(t)=0$ implies $(\\alpha s)(t)=0$ and then $t=0$.",
+   "uses": [
+    "lem-sc-local-free-base-change-reflects-iso",
+    "def-weil-pbc-free-module",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph; details supplied for the residue-field construction and its lift"
+   }
+  },
+  {
+   "text": "Set $U=\\operatorname{im}s\\subseteq R^n$. The map $s:R^m\\to U$ is an isomorphism, with inverse $s(t)\\mapsto t$ by injectivity. Thus $\\alpha|_U$ and $\\beta|_U$ are isomorphisms because their composites with this parametrization are $\\alpha s$ and $\\beta s$. Finally, for either $\\gamma=\\alpha$ or $\\beta$, write $x=(x-u)+u$ with $u=(\\gamma|_U)^{-1}(\\gamma x)$; then $x-u\\in\\ker\\gamma$. If $u\\in U\\cap\\ker\\gamma$, injectivity of $\\gamma|_U$ gives $u=0$. This proves both asserted direct-sum decompositions. All sums and maps above allow empty standard bases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph; details supplied for the residue-field construction and its lift"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "lem-trf-vector-subspace-complement",
+  "def-weil-finite-dimensional-subspace",
+  "lem-weil-pbc-idempotent-charpoly-rank-nullity",
+  "lem-trf-equal-dimension-linear-equivalence",
+  "def-weil-module-base-change",
+  "lem-sc-local-free-base-change-reflects-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph; details supplied for the residue-field construction and its lift; Stacks explicitly omits these details"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +163,38 @@
    "results": "23 hits; top=['Mathlib/LinearAlgebra/QuadraticForm/Basic.lean', 'Mathlib/LinearAlgebra/Projection.lean', 'Mathlib/LinearAlgebra/Projection.lean', 'Mathlib/LinearAlgebra/Projection.lean', 'Mathlib/LinearAlgebra/Projection.lean', 'Mathlib/LinearAlgebra/Projection.lean', 'Mathlib/LinearAlgebra/Prod.lean', 'Mathlib/LinearAlgebra/Prod.lean']; note=; digest=ad9637046681662a. The hits give an individual splitting/complement or its formal properties, not one summand simultaneously complementary to two kernels. Read Submodule.exists_isCompl (Basis/VectorSpace.lean:280) and the uses with different complements in FiniteDimensional/Basic.lean:93-97.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "common.*complement|exists.*isCompl.*isCompl|exists.*common|bijective.*residue|isUnit.*det",
+   "results": "{\"t\": \"2026-10-17T21:36:32Z\", \"tool\": \"grep\", \"query\": \"common.*complement|exists.*isCompl.*isCompl|exists.*common|bijective.*residue|isUnit.*det\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/SesquilinearForm.lean\", \"Mathlib/LinearAlgebra/Matrix/SesquilinearForm.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Card.lean\", \"Mathlib/LinearAlgebra/Basis/VectorSpace.lean\", \"Mathlib/LinearAlgebra/SymplecticGroup.lean\", \"Mathlib/LinearAlgebra/SymplecticGroup.lean\", \"Mathlib/LinearAlgebra/SymplecticGroup.lean\", \"Mathlib/LinearAlgebra/SymplecticGroup.lean\"], \"digest\": \"fbecfa012e669289\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: individual complements/splittings do not give a simultaneous complement"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompl, IsCompl",
+   "results": "{\"t\": \"2026-10-17T21:36:33Z\", \"tool\": \"loogle\", \"query\": \"IsCompl, IsCompl\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsCompl\", \"IsCompl.symm\", \"isCompl_comm\", \"IsCompl.codisjoint\", \"IsCompl.disjoint\", \"ComplementedLattice.exists_isCompl\", \"ComplementedLattice.mk\", \"complementedLattice_iff\"], \"digest\": \"a0647ae7e373df9b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: individual complements/splittings do not give a simultaneous complement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two subspaces of equal finite dimension in a vector space admit a common complementary subspace",
+   "results": "{\"t\": \"2026-10-17T21:36:35Z\", \"tool\": \"leanfinder\", \"query\": \"Two subspaces of equal finite dimension in a vector space admit a common complementary subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.isCompl_iff_disjoint\", \"Submodule.finrank_add_eq_of_isCompl\", \"Submodule.exists_isCompl\", \"Submodule.complementedLattice\", \"Submodule.ClosedComplemented.of_finiteDimensional\", \"Submodule.finrank_add_inf_finrank_orthogonal'\", \"Module.Dual.isCompl_ker_of_disjoint_of_ne_bot\", \"Submodule.finrank_add_finrank_le_of_disjoint\"], \"digest\": \"42e1dfb41f698068\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: individual complements/splittings do not give a simultaneous complement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two surjective linear maps of finite free modules over a local ring have a common complementary summand",
+   "results": "{\"t\": \"2026-10-17T21:36:55Z\", \"tool\": \"leansearch\", \"query\": \"Two surjective linear maps of finite free modules over a local ring have a common complementary summand\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.coe_equivProdOfSurjectiveOfIsCompl\", \"Submodule.linearProjOfIsCompl_comp_surjective_of_exact\", \"LinearMap.ofIsCompl\", \"LinearMap.splittingOfFinsuppSurjective\", \"LinearMap.ofIsCompl_eq'\", \"DirectSum.lmap_surjective\", \"LinearMap.surjective_comp_subtype_of_isComplemented\", \"IsLocalizedModule.map_surjective\"], \"digest\": \"f3fa0558a238c1ed\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: individual complements/splittings do not give a simultaneous complement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-surjective-two-term-determinant-calculus",
@@ -95,5 +224,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-local-common-summand-surjections",
+  "worker": "stage1",
+  "summary": "Expanded the omitted residue-field common-complement construction and its lift in Stacks 0FJK. Reused rank-nullity and local finite-free isomorphism reflection; added two Mathlib leaves for individual complements and equal-dimensional linear equivalences. Statement unchanged.",
+  "blueprint": "Realizes the auxiliary common-summand input of lem-trf-surjective-two-term-determinant-calculus under the inherited lem-trf-local-term-locality ancestry; retains the unit route. The field graph construction and the lifted maps are proved explicitly.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-local-free-base-change-reflects-iso",
+    "why": "Used only to reflect the two square finite-free isomorphisms along R to its residue field. This generic local algebra tool is not supplied by sk-i-curve-zero; it completes the prescribed residue-field lifting argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-local-free-base-change-reflects-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-588fd2fa0",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-588fd2fa0 (reviewer sub-agent of L); spot-checked: Read all eight steps, both new nodes, cited statements and source locations. The common-complement construction and residue-field lift are correct, including rank zero and characteristic two. Mathlib leaves match; no duplicates, cycles, long-step violations or dropped-route dependencies found. Accepted the local finite-free isomorphism-reflection tool use. Full checks recorded in review.md; no fixes needed."
  }
 }

@@ -11,41 +11,68 @@
   "def-trf-mittag-leffler-module",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an arbitrary family $(Q_{\\alpha})_{\\alpha\\in A}$ of $R$-modules. Tensoring the universally exact sequence with $\\prod_{\\alpha}Q_{\\alpha}$ gives an exact top row $0\to M_1\\otimes_R\\prod_{\\alpha}Q_{\\alpha}\to M_2\\otimes_R\\prod_{\\alpha}Q_{\\alpha}\to M_3\\otimes_R\\prod_{\\alpha}Q_{\\alpha}\to0$. Tensoring it separately with each $Q_{\\alpha}$ and taking the componentwise product gives an exact bottom row $0\to\\prod_{\\alpha}(M_1\\otimes_RQ_{\\alpha})\to\\prod_{\\alpha}(M_2\\otimes_RQ_{\\alpha})\to\\prod_{\\alpha}(M_3\\otimes_RQ_{\\alpha})\to0$. The canonical tensor-to-product maps form a commutative diagram between these rows, by their definition on pure tensors and linearity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059N, lemma-pure-submodule-ML, proof: the displayed commutative diagram and the assertion that both rows are exact."
+   }
+  },
+  {
+   "text": "The middle vertical map in this diagram is injective because $M_2$ is Mittag-Leffler, whose defining condition [def-trf-mittag-leffler-module] asserts injectivity of the canonical map for every family of modules. If an element of $M_1\\otimes_R\\prod_{\\alpha}Q_{\\alpha}$ maps to zero in $\\prod_{\\alpha}(M_1\\otimes_RQ_{\\alpha})$, commutativity sends its image in $M_2\\otimes_R\\prod_{\\alpha}Q_{\\alpha}$ to zero in the product of the $M_2$ tensors; injectivity of the middle vertical map makes that image zero. The top row is exact at $M_1\\otimes_R\\prod_{\\alpha}Q_{\\alpha}$, so its first arrow is injective and the original element is zero. Thus the canonical map for this arbitrary family is injective, and $M_1$ is Mittag-Leffler by the same definition.",
+   "uses": [
+    "def-trf-mittag-leffler-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059N, lemma-pure-submodule-ML, proof: conclusion (1) from the tensor diagram and Proposition 059M."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-mittag-leffler-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059N, lemma-pure-submodule-ML, part (1), proof via the displayed tensor diagram; the definition is the equivalent tensor criterion of Tag 059M."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "a universally exact short exact sequence with Mittag Leffler middle module has Mittag Leffler submodule",
-   "results": "Category/module exactness and AdicCompletion.map_exact hits; no pure-submodule Mittag-Leffler theorem.",
-   "date": "2026-10-18",
+   "results": "Profinite.NobelingProof.succ_exact; ModuleCat.span_rightExact; AdicCompletion.map_exact; Function.Exact.exact_mapQ_iff; instAB5ModuleCat; Module.support_of_exact; associatedPrimes.subset_union_of_exact; Module.Finite.of_exact; none states the module Mittag-Leffler inheritance theorem.",
+   "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "universally exact MittagLeffler submodule",
-   "results": "0 hits; unknown identifier universally.",
-   "date": "2026-10-18",
+   "query": "MittagLeffler module tensor product product injective",
+   "results": "0 hits; unknown identifier MittagLeffler.",
+   "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "pure submodule Mittag Leffler",
+   "query": "Mittag|mittag|universally exact|tensor.*prod.*injective [Mathlib]",
    "results": "0 hits in Mathlib grep.",
-   "date": "2026-10-18",
+   "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "universally exact sequence ML submodule",
-   "results": "LinearMap.exact_subtype_mkQ and generic exactness declarations; no ML inheritance theorem.",
-   "date": "2026-10-18",
+   "query": "universally exact sequence Mittag Leffler submodule tensor product",
+   "results": "LinearMap.rTensor_exact_iff_lTensor_exact; Module.FaithfullyFlat.rTensor_exact_iff_exact; Submodule.tensorEquivMul; Module.Flat.rTensor_exact; Module.Flat.lTensor_exact; lTensor_exact; lTensor_injective_of_exact_of_exact_of_rTensor_injective; exact_of_isLocalized_span; no module Mittag-Leffler inheritance theorem.",
+   "date": "2026-10-17",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-completed-free-flat-mittag-leffler",
@@ -77,5 +104,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-pure-submodule-mittag-leffler",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Tag 059N (part (1)) and the tensor characterization in Tag 059M, retaining all hypotheses. The proof is split into the exact tensor diagram for an arbitrary family and the diagram chase using the middle module's Mittag-Leffler injectivity; no new nodes were needed. Searched the whole DAG, blueprint and project source for duplicates or a finished declaration, and ran all required Mathlib searches.",
+  "blueprint": "Realizes the ancestor blueprint sentence in Tag 05DJ's proof saying that Algebra Tag 059N applied to the universally exact completion-to-product sequence makes the completed submodule Mittag-Leffler.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q25-1387f2b56",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-1387f2b56 (reviewer sub-agent of L); spot-checked: Mathematics and route are correct after full source and edge-case checks. Repair required: the item node’s created.item incorrectly names lem-trf-completed-free-flat-mittag-leffler; fixes/dag/nodes/sec-trace-formula/lem-trf-pure-submodule-mittag-leffler.json corrects it to lem-trf-pure-submodule-mittag-leffler. Review written to review.md.; 1 file(s) fixed by the reviewer"
  }
 }

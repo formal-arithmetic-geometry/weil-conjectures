@@ -11,9 +11,80 @@
   "def-pc-scheme",
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the quotient-map construction for the intersection-refining cover $\\mathcal C$ to obtain a continuous map $f:X\\to Y$ with $f^{-1}(f(U))=U$ and with the opens $f(U)$ forming a basis of $Y$. If $O$ is a union of members of $\\mathcal C$, then $f(O)=\\bigcup_{U\\subset O}f(U)$ is open and $f^{-1}(f(O))=O$.",
+   "uses": [
+    "lem-trf-derived-basis-open-subcollection-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0D5Q"
+   }
+  },
+  {
+   "text": "Set $\\mathcal O_Y(V)=\\mathcal O_X(f^{-1}V)$, with the inherited ring operations and restriction maps. A covering of $V$ pulls back to a covering of $f^{-1}V$, and inverse images preserve intersections; thus the sheaf equalizer axiom for $\\mathcal O_X$ is the sheaf equalizer axiom for $\\mathcal O_Y$ [def-weil-pbc-sites-and-cohomology]. The identity map $\\mathcal O_Y\\to f_*\\mathcal O_X$ makes $f$ a morphism of ringed spaces [def-weil-locally-ringed-space-morphism]. No locally ringed or scheme property is required of $Y$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D68 (cohomology-lemma-uniqueness), setting the auxiliary structure sheaf to the direct image"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-derived-basis-local-ext-sheaf] to the ringed-space morphism $f$ and the objects $M,N$. Its hypotheses hold on each basis open $f(U)$ because $f^{-1}(f(U))=U$ and the assumed local vanishing is exactly the required vanishing on $M|_U,N|_U$. Hence negative Hom vanishes on every open of $Y$, and $V\\mapsto\\operatorname{Hom}(M|_{f^{-1}(V)},N|_{f^{-1}(V)})$ is a sheaf.",
+   "uses": [
+    "lem-trf-derived-basis-open-subcollection-map",
+    "lem-trf-derived-basis-local-ext-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D66, part (2)"
+   }
+  },
+  {
+   "text": "Write $F(V)=\\operatorname{Hom}(M|_{f^{-1}V},N|_{f^{-1}V})$ for the sheaf just obtained, and $\\mathcal C_O=\\{U\\in\\mathcal C:U\\subset O\\}$. Step 1 gives a cover $f(O)=\\bigcup_{U\\in\\mathcal C_O}f(U)$. For $U,V\\in\\mathcal C_O$ one has $f(U)\\cap f(V)=f(U\\cap V)$: if $y=f(x)\\in f(U)\\cap f(V)$, the equalities $f^{-1}f(U)=U$ and $f^{-1}f(V)=V$ put $x$ in both $U$ and $V$. The assumed refinement therefore covers this intersection by the $f(W)$ for $W\\in\\mathcal C$ with $W\\subset U\\cap V$. An inclusion-compatible family $a_U\\in F(f(U))$ restricts from both $U$ and $V$ to $a_W$ on every such $f(W)$. The uniqueness clause of the sheaf axiom [def-weil-pbc-sites-and-cohomology] makes the restrictions equal on $f(U)\\cap f(V)$. Its existence clause glues them to a unique section of $F(f(O))$. Since $f^{-1}f(O)=O$, this is precisely the required map on $O$. Conversely restrictions of a global map satisfy the inclusion equations by composition of restriction; uniqueness of gluing makes the two operations inverse.",
+   "uses": [
+    "lem-trf-derived-basis-open-subcollection-map",
+    "lem-trf-derived-basis-local-ext-sheaf",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D68 (cohomology-lemma-uniqueness), using Tag 0D5Q and Tag 0D66"
+   }
+  },
+  {
+   "text": "Apply the all-open vanishing conclusion of [lem-trf-derived-basis-local-ext-sheaf] to $f(O)$, using $f^{-1}f(O)=O$, to obtain the asserted negative-degree vanishing. The sheaf axiom for the empty cover says $F(\\varnothing)$ is a singleton, so Step 4 also applies when $O=\\varnothing$ and its indexing family is empty. If that family contains the empty open, its only map is again the unique section of $F(\\varnothing)$. If $X=\\varnothing$ and $\\mathcal C$ is empty, the topological basis in Step 1 is empty and covers $Y$, so $Y=\\varnothing$; the same argument applies without any nonemptiness assumption.",
+   "uses": [
+    "lem-trf-derived-basis-local-ext-sheaf",
+    "lem-trf-derived-basis-open-subcollection-map",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D66, part (2), including empty opens"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-derived-basis-open-subcollection-map",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-trf-derived-basis-local-ext-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0D66 and 0D68, with quotient-space construction Tag 0D5Q"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,7 +130,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-derived-basis-bbd-descent",
@@ -89,5 +160,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-derived-basis-local-hom-glue",
+  "worker": "stage1",
+  "summary": "Split the local negative-Ext and Hom-descent statement into the Stacks 0D66 ringed-space vanishing/sheaf input and the 0D5Q quotient-map construction. The proof constructs the quotient map and its direct-image ring sheaf, applies 0D66 on its basis, identifies sections over a union of basis opens with compatible local maps, and handles empty opens explicitly. No statement was changed.",
+  "blueprint": "Realizes the BBD-descent supporting component in the inherited lem-trf-local-term-locality ancestry: quotient-space construction (0D5Q), negative-Ext sheaf (0D66), and the uniqueness/gluing argument of 0D68. The original blueprint ancestry and via list are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NQ-0b5e60a39",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-0b5e60a39 (reviewer sub-agent of L); spot-checked: Reviewed item and both new nodes against Stacks 0D66, 0D5Q, and 0D68; checked every proof step, hypothesis, edge case, cited statement, route, searches, duplicates, and coefficient category. No faults or repairs needed. Review written to review.md."
  }
 }

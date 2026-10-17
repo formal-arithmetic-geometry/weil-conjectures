@@ -23,9 +23,160 @@
   "lem-pc-affine-qcoh-derived-equivalence",
   "def-pc-ring-pseudo-coherent-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Keep the affine opens $U=\\operatorname{Spec}A$, $V=\\operatorname{Spec}R$ specified in the statement. The affine flatness criterion gives flatness of $R\\to A$, and the affine characterization of local finite presentation gives a finite presentation of $A$ over $R$ for these very opens. Every affine open of a locally Noetherian scheme has Noetherian coordinate ring, so $R$ is Noetherian; no shrinking of the given $V$ is needed. The presentation makes $A$ a finite-type $R$-algebra, and the Noetherian-algebra theorem makes $A$ Noetherian. If $t_1,\\ldots,t_n$ generate $A$ over $R$, then $1\\otimes t_1,\\ldots,1\\otimes t_n$ generate $B=A\\otimes_R A$ over $A$ through its first factor. The same theorem therefore makes $B$ Noetherian.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2U, affine reduction; morphisms.tex Tags 01U5 and 01TQ; algebra.tex Tag 00FN"
+   }
+  },
+  {
+   "text": "Put $W=U\\times_VU$. It is the open subscheme $U\\times_SU$ of $Y$: both maps from $U$ factor through the open immersion $V\\hookrightarrow S$, which is a monomorphism. The affine fibre-product theorem identifies $W$ with $\\operatorname{Spec}B$ and its first projection with $a\\mapsto a\\otimes1$. The restricted diagonal is induced by $\\mu:B\\to A$, $a\\otimes a'\\mapsto aa'$, because composing either coprojection with $\\mu$ is the identity. Its inverse image of $D(b)\\subset\\operatorname{Spec}B$ is $D(\\mu(b))\\subset\\operatorname{Spec}A$. Thus the sections of $(\\Delta_*\\mathcal O_X)|_W$ on $D(b)$ are $A_{\\mu(b)}$, with $B$ acting through $\\mu$. The basic-open section formula for associated sheaves gives exactly the same sections for $\\widetilde A$, with the same fraction restriction maps. They identify the sheaves, not just their global sections.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2U, diagonal affine comparison; schemes.tex Tags 01I4 and 01HV"
+   }
+  },
+  {
+   "text": "Let $E=K|_U$. Pseudo-coherence restricts to $U$ by its local definition. The pseudo-coherent quasi-coherence theorem gives $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_U)$, so the affine equivalence supplies $M\\in D(A)$ with $\\widetilde M\\cong E$. The affine pseudo-coherence criterion supplies a bounded-above complex of finite free $A$-modules representing $M$; this is precisely pseudo-coherence over $A$. This also verifies that applying the affine equivalence was legitimate: membership in $D_{\\mathrm{QCoh}}$ was established before its use.",
+   "uses": [
+    "def-pur-pseudo-coherent-complex",
+    "lem-sc-pseudo-coherent-qcoh",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-pseudo-coherent-criterion",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2U, paragraph beginning Observe that relatively perfect objects; perfect.tex Tags 08E5, 06Z0, 08E7"
+   }
+  },
+  {
+   "text": "The local relative Tor hypothesis on $K$ restricts to $U$ and to the base open $V$. Its formulation using inverse images of $\\mathcal O_S$-modules also tests all $\\mathcal O_V$-modules: a module on $V$ extends by direct image along $V\\hookrightarrow S$, and its restriction back is the original module, directly from the open direct-image formula. Apply the affine relative-Tor criterion to $R\\to A$ and $E=\\widetilde M$. Its local-finite clause (and its inverse-image-test clause) gives one finite interval $[a,b]$ with $H^i(M\\otimes_R^{\\mathbf L}N)=0$ for every $R$-module $N$ outside that interval. This is a relative $R$-Tor bound; the absolute $A$-Tor criterion is not being substituted. In particular taking $N=R$ shows $H^i(M)=0$ for $i<a$ and $i>b$.",
+   "uses": [
+    "lem-trf-affine-relative-tor-amplitude-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DHY, lemma-tor-dimension-rel-affine (2), including the finite-subcover argument on the affine source"
+   }
+  },
+  {
+   "text": "The affine pullback comparison, including its open-restriction clause, gives $(Lp_1^*K)|_W\\cong\\widetilde{M_1}$ with $M_1=M\\otimes_{A,p_1}^{\\mathbf L}B$. The $A$-module $B$ through $p_1$ is flat: it is base change of the flat $R$-module $A$ from Step 1. Hence $B[0]$ itself computes this derived tensor. Exactness of flat tensor on kernels and images gives $H^i(M_1)=H^i(M)\\otimes_{A,p_1}B$, so $M_1$ is bounded below by $a$. These computations also verify the stated use of flat resolutions for the derived tensor.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2U, pullback compatibility; perfect.tex Tag 08DW; algebra.tex Tags 00HI and 00HD"
+   }
+  },
+  {
+   "text": "The map $\\mu:B\\to A$ is surjective since $\\mu(a\\otimes1)=a$. Thus $A$ is a cyclic, hence finitely generated, $B$-module. Over the Noetherian ring $B$ of Step 1, the Noetherian pseudo-coherence criterion applied to $A[0]$ makes it pseudo-coherent: its only nonzero cohomology is the finite module $A$ in degree zero. By the definition of ring pseudo-coherence it has a bounded-above finite-free $B$-complex representative. This proves the finiteness condition on the first argument of the forthcoming internal-Hom comparison; neither regularity of the diagonal nor a bounded projective resolution is assumed.",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2U, pseudo-coherence condition for the diagonal; in the Noetherian case more-algebra.tex Tag 066E"
+   }
+  },
+  {
+   "text": "Use open restriction of derived internal Hom to identify its restriction from $Y$ to $W$ with $R\\mathcal Hom_W(\\widetilde A,\\widetilde{M_1})$. Step 6 gives a bounded-above finite-free (therefore finite-projective) representative for its first argument, and Step 5 gives bounded-below cohomology for its second. The affine pseudo-coherent RHom theorem, with coefficient ring $B$, now gives $R\\mathcal Hom_W(\\widetilde A,\\widetilde{M_1})\\cong\\widetilde{R\\operatorname{Hom}_B(A,M_1)}$. Finite freeness implies projectivity by the cited free-module theorem. All the hypotheses of this comparison have now been supplied, including the bounded-below hypothesis which would fail for an arbitrary unbounded second argument.",
+   "uses": [
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+    "lem-weil-pbc-free-module-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2U, internal Hom compatibility; cohomology.tex Tag 08DL; perfect.tex Tag 0A6H (3)(a)"
+   }
+  },
+  {
+   "text": "Restrict $\\xi$ to $W$ and use the full faithfulness of the affine derived equivalence for $B$ to define its inverse image $\\xi_U:A\\to M_1$. Check the induced multiplication map using tensor-Hom evaluation. On either side it is the transpose of the composite $A\\otimes_B^{\\mathbf L}A\\to A\\xrightarrow{\\xi_U}M_1$, respectively its sheaf version, where the first arrow is the derived multiplication of the degree-zero algebra $A$. The canonical affine tensor comparison carries this multiplication to sheaf multiplication: on representative tensors its value is $x\\otimes y\\mapsto xy$. The Hom comparison in Step 7 respects this transposition. Concretely, a bounded-above finite-free resolution of $A$ and a bounded-below representative of $M_1$ compute it by the cited finite-free derived-Hom model. In each total degree only finitely many Hom summands occur, and the comparison is componentwise evaluation $h\\otimes x\\mapsto h(x)$ before and after associated sheafification; the functorial Hom-tensor identity and its cochain differentials are the same. Thus the sheafification of the multiplication map induced by $\\xi_U$ is the restriction of the given multiplication isomorphism. The affine equivalence reflects isomorphisms, proving $A\\xrightarrow{\\sim}R\\operatorname{Hom}_B(A,M_1)$.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-sc-derived-hom-finite-free-model",
+    "lem-sc-derived-hom-tensor-total",
+    "def-pc-canonical-derived-tensor-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2U, final sentence recovering the algebraic conditions; perfect.tex Tags 08DX and 0A6H; cohomology.tex tensor-Hom evaluation"
+   }
+  },
+  {
+   "text": "The same model formulas verify the final compatibility assertions. Multiplication by $c\\in A$ on the coefficient complex and precomposition by multiplication on the diagonal commute with the comparisons: the former is $h\\mapsto ch$, and evaluation gives $(ch)(x)=c\\,h(x)$; the latter is the functorial first-variable Hom action. For a smaller pair of affine opens, its product is an open in $W$. Open restriction of pullback and RHom gives the operations there. The basic-open fraction map for $\\widetilde A$ in Step 2 commutes with restriction. For the Hom comparison, restrict the finite-free/bounded-below representatives: the degreewise finite Hom sums restrict to the same finite Hom sums of the restricted terms, and the evaluation formula and differential are unchanged. This constructs the same comparison on the smaller open, so the two descriptions of the restricted class are equal by full faithfulness of its affine equivalence. This is compatibility of the constructed maps; it does not infer equality of arbitrary derived morphisms from local equality. If $U$ is empty, $A=B=0$, all module and sheaf objects are zero, and any finite interval works. For the identity map $R=A$ the diagonal and all these formulas reduce to the ordinary affine equivalence and evaluation.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-sc-derived-hom-finite-free-model",
+    "lem-sc-derived-hom-tensor-total",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2U, restriction of the three affine comparisons; perfect.tex Tag 0A6H proof and cohomology.tex Tag 08DL"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-pur-pseudo-coherent-complex",
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-trf-affine-relative-tor-amplitude-criterion",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+  "lem-weil-pbc-free-module-projective",
+  "lem-sc-derived-hom-finite-free-model",
+  "lem-sc-derived-hom-tensor-total",
+  "def-pc-canonical-derived-tensor-hom-bijection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E2U, lemma-relative-dualizing-complex-algebra, with its affine comparison inputs; Noetherian diagonal pseudo-coherence via more-algebra.tex Tag 066E and relative Tor amplitude via perfect.tex Tag 0DHY."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,10 +205,38 @@
    "results": "8 hits; top=['SheafOfModules.pullbackObjUnitToUnit', 'SheafOfModules.pullbackPushforwardAdjunction', 'SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit', 'SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit', 'AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward', 'SheafOfModules.PullbackConstruction.adjunction', 'AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback', 'SheafOfModules.pushforwardSections_unitHomEquiv']; note=; digest=07f2b133263072a6",
    "date": "2026-10-18",
    "verdict": "no match: only ordinary module-sheaf adjunctions, ordinary dual modules, and general scheme properties; no affine comparison for a coherent derived relative dualizing pair"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi-coherence-(pushforward|pullback|internal-hom)|RHom",
+   "results": "{\"t\": \"2026-10-17T21:33:10Z\", \"tool\": \"grep\", \"query\": \"quasi-coherence-(pushforward|pullback|internal-hom)|RHom\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\"], \"digest\": \"19a1848dd005b933\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned ordinary sheaf adjunctions, ordinary module duals, and unrelated pullback occurrences do not assert the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine translation of a coherent relative dualizing pair to a derived module over tensor product",
+   "results": "{\"t\": \"2026-10-17T21:33:11Z\", \"tool\": \"leansearch\", \"query\": \"affine translation of a coherent relative dualizing pair to a derived module over tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.dual\", \"LinearMap.transvection.baseChange\", \"dualTensorHomEquivOfBasis\", \"TensorProduct.dualDistrib\", \"dualTensorHomEquiv\", \"IsBaseChange.toDual_apply\", \"TensorProduct.AlgebraTensorModule.dualDistrib\", \"Module.Dual.baseChange\"], \"digest\": \"9ac57d3a6869b92a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned ordinary sheaf adjunctions, ordinary module duals, and unrelated pullback occurrences do not assert the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Modules.pullback, SheafOfModules.pushforward, derived Hom",
+   "results": "{\"t\": \"2026-10-17T21:33:11Z\", \"tool\": \"loogle\", \"query\": \"Scheme.Modules.pullback, SheafOfModules.pushforward, derived Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Scheme.Modules.pullback'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned ordinary sheaf adjunctions, ordinary module duals, and unrelated pullback occurrences do not assert the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine sheaf operations diagonal pushforward derived pullback internal Hom correspond to modules over A tensor_R A",
+   "results": "{\"t\": \"2026-10-17T21:33:12Z\", \"tool\": \"leanfinder\", \"query\": \"Affine sheaf operations diagonal pushforward derived pullback internal Hom correspond to modules over A tensor_R A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.unitToPushforwardObjUnit\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\"], \"digest\": \"1a38b0a068f79eb9\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned ordinary sheaf adjunctions, ordinary module duals, and unrelated pullback occurrences do not assert the item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-relative-dualizing-pair-rigidity",
@@ -87,5 +266,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-affine-relative-dualizing-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the affine reduction of Stacks 0E2U into explicit ring-hypothesis, diagonal basic-open, pseudo-coherence, relative-Tor, bounded-below pullback, RHom and class-compatibility steps. Reused existing affine-comparison lemmas; the only new statement-only node is the generic relative affine Tor criterion 0DHY. Removed an initially proposed node bundling the item comparison clauses. No statement change, no existence assertion, no etale six-functor duality, and no SGA source.",
+  "blueprint": "Realizes the affine comparison input to the given-pair rigidity used by the coherent relative-duality polynomial-chart construction in the recorded semistable-alteration branch below lem-trf-local-term-locality. The recorded blueprint ancestry and unit are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-pseudo-coherent-qcoh",
+    "why": "Generic affine coherent-derived or commutative-algebra tool used with its stated hypotheses; the curve-local-term unit has no replacement and its semistable/coherent-duality route is unchanged."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic affine coherent-derived or commutative-algebra tool used with its stated hypotheses; the curve-local-term unit has no replacement and its semistable/coherent-duality route is unchanged."
+   },
+   {
+    "node": "lem-pc-affine-pseudo-coherent-criterion",
+    "why": "Generic affine coherent-derived or commutative-algebra tool used with its stated hypotheses; the curve-local-term unit has no replacement and its semistable/coherent-duality route is unchanged."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic affine coherent-derived or commutative-algebra tool used with its stated hypotheses; the curve-local-term unit has no replacement and its semistable/coherent-duality route is unchanged."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic affine coherent-derived or commutative-algebra tool used with its stated hypotheses; the curve-local-term unit has no replacement and its semistable/coherent-duality route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Generic affine coherent-derived or commutative-algebra tool used with its stated hypotheses; the curve-local-term unit has no replacement and its semistable/coherent-duality route is unchanged."
+   },
+   {
+    "node": "lem-sc-derived-internal-hom-restrict-open",
+    "why": "Generic affine coherent-derived or commutative-algebra tool used with its stated hypotheses; the curve-local-term unit has no replacement and its semistable/coherent-duality route is unchanged."
+   },
+   {
+    "node": "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+    "why": "Generic affine coherent-derived or commutative-algebra tool used with its stated hypotheses; the curve-local-term unit has no replacement and its semistable/coherent-duality route is unchanged."
+   },
+   {
+    "node": "lem-sc-derived-hom-finite-free-model",
+    "why": "Generic affine coherent-derived or commutative-algebra tool used with its stated hypotheses; the curve-local-term unit has no replacement and its semistable/coherent-duality route is unchanged."
+   },
+   {
+    "node": "lem-sc-derived-hom-tensor-total",
+    "why": "Generic affine coherent-derived or commutative-algebra tool used with its stated hypotheses; the curve-local-term unit has no replacement and its semistable/coherent-duality route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+  "lem-sc-derived-hom-finite-free-model",
+  "lem-sc-derived-hom-tensor-total"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q42-1aad72eeb",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-1aad72eeb (reviewer sub-agent of L); spot-checked: Read the item, new Tor node, all proof steps, cited DAG statements, unit/chapter route, worker report, and Stacks Tags 0E2U and 0DHY. Verified hypotheses, affine base-change and D(B) coefficient identification, Tor bounds, RHom evaluation, restriction compatibilities, edge cases, duplicate searches, route-pivot compliance, and no SGA or forbidden machinery. Wrote review.md; no repairs needed."
  }
 }

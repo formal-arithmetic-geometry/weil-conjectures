@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-a1-exceptional-constituents",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Exceptional rank-one constituents",
@@ -13,79 +13,212 @@
   "place": "node lem-a1-exceptional-constituents, order 2801"
  },
  "stmt_deps": [
+  "rem-dl-a1-conventions",
+  "def-wf-constant-weil-twist",
   "def-fd-artin-schreier-sheaf",
   "def-weil-ordinary-compact-cohomology",
-  "def-weil-punctual-weights"
+  "def-weil-punctual-weights",
+  "def-weil-frobenius-module-weights"
  ],
  "proof": [
   {
-   "text": "Let $j:U_0\\hookrightarrow\\mathbf A^1_{k_0}$ be the given dense open\nimmersion with finite closed complement $i:Z\\hookrightarrow\\mathbf A^1$,\nand let $\\mathcal E_0$ be the lisse extension of $\\mathcal E$ to the\nline: $\\mathcal E_0=\\mathcal B_b\\otimes\\mathcal L_{\\psi,ax}$ (a rank-one\nlisse $\\Qlb$-sheaf on $\\mathbf A^1_{k_0}$, since both factors are\nlisse there — the linear phase $ax$ has no pole on the line —\nwith the constant [def-wf-constant-weil-twist] of the Weil twist\n$\\mathcal B_b$ and\nthe convention $\\mathcal L_{\\psi,0}=1$), so that\n$j_*\\mathcal E=\\mathcal E_0$ and $i^*j_*\\mathcal E= i^*\\mathcal E_0$.",
+   "text": "Use the finite-field, geometric-Frobenius and adic coefficient conventions of [rem-dl-a1-conventions]. Write $A_0=\\mathbf A^1_{k_0}$, $A=A_0\\otimes k$, and $j:U_0\\hookrightarrow A_0$. Its reduced closed complement $Z_0$ is finite over $k_0$: a proper closed subset of $\\operatorname{Spec}k_0[x]$ is cut out by a nonzero polynomial $f$, and $k_0[x]/\\sqrt{(f)}$ is finite-dimensional over $k_0$. With $f=1$ when the complement is empty, $U_0=D(f)$ is a smooth affine curve. Write the constant rank-one factor as $\\mathcal B_b$, $b\\in\\Qlb^\\times$, using [def-wf-constant-weil-twist], and put $L=\\Qlb_{A_0}$ in the constant case or $L=\\mathcal L_{\\psi,ax}$, $a\\ne0$, in the other case. Then $\\mathcal E_0=\\mathcal B_b\\otimes L$ restricts to $\\mathcal E$. The Artin–Schreier factor is lisse of rank one on the whole line by [lem-fd-as-lisse], so $\\mathcal E_0$ is lisse there. Only this restriction identity is needed; no claim about the derived direct image $Rj_*$ is used.",
    "uses": [
-    "def-wf-constant-weil-twist"
+    "rem-dl-a1-conventions",
+    "def-wf-constant-weil-twist",
+    "lem-fd-as-lisse"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-exceptional-constituents.proof.md",
+    "place": "Opening paragraph: full-line extension and finite complement"
+   }
   },
   {
-   "text": "Step 1 (the cohomology of the line). The compactly supported cohomology\nof $\\mathcal E_0$ on the affine line is concentrated in degree $2$\nfor $a=0$ and vanishes altogether for $a\\neq0$. Both cases use the\ndegreewise Poincare duality [thm-pod-degreewise-perfectness-over-a-field]\nof the Poincare-duality chapter for the smooth, separated (not proper)\ncurve $\\mathbf A^1_{k_0}$, of dimension $d=1$, at the field stage\n$\\overline{\\mathbf Q}_\\ell$: the lisse rank-one sheaf $\\mathcal E_0$ is\nperfect ([def-pod-perfect-complex-on-x]), so\n$H_c^i(\\mathbf A^1,\\mathcal E_0)^\\vee\\cong\nH^{2-i}(\\mathbf A^1,\\mathcal E_0^\\vee(1))$. For $a\\neq0$, the coefficient\ndual is $\\mathcal E_0^\\vee=\\mathcal B_b^{-1}\\otimes\\mathcal L_{\\psi,-ax}$\n([lem-fd-as-lisse]); over $\\mathbf A^1_k$ the constant factor\n$\\mathcal B_b^{-1}$ is geometrically trivial (it only rescales the\nFrobenius eigenvalues by a constant, [lem-wf-constant-twist-weight]),\nso the ordinary cohomology of $\\mathcal E_0^\\vee$ is that of\n$\\mathcal L_{\\psi,-ax}$ and vanishes by\n[lem-fd-cohomology-affine-line-character], $-a\\neq0$; hence all\n$H_c^i(\\mathbf A^1,\\mathcal E_0)$ vanish. For $a=0$,\n$j_*\\mathcal E=\\mathcal E_0= \\mathcal B_b$ is lisse and constant;\nfor the constant sheaf, $H^j(\\mathbf A^1,\\overline{\\mathbf Q}_\\ell)$ is\n$\\overline{\\mathbf Q}_\\ell$ for $j=0$ and zero otherwise\n([lem-fd-affine-line-constant-cohomology]), so the duality leaves only\n$H^2_c(\\mathbf A^1,\\overline{\\mathbf Q}_\\ell)$, one-dimensional, and the\nFrobenius similitude of [cor-pod-untwisted-similitude],\n$\\langle Fx,Fy\\rangle_2=q\\langle x,y\\rangle_2$ with $y=1\\in H^0$ fixed by\n$F$, shows that $F$ acts on it by $q$:\n$R\\Gamma_c(\\mathbf A^1,\\overline{\\mathbf Q}_\\ell)\\cong\n\\overline{\\mathbf Q}_\\ell(-1)[-2]$. Tensoring with the constant twist gives\n$H_c^0=H_c^1=0$ and $H_c^2=\\mathcal B_b(-1)$ with weights\n$w+2$ by the weight-shift and constant-twist rules. Hence, in all\ncases, $H_c^i(\\mathbf A^1,\\mathcal E_0)=0$ for $i\\neq0,2$ and\n$H_c^2(\\mathbf A^1,\\mathcal E_0)$ has weights at most $w+2$.",
+   "text": "Set $c=2\\log_q|\\iota(b)|$. The constant unit is pure of weight zero directly from [def-weil-punctual-weights]; the other possible factor $L$ is pure of weight zero by [lem-fd-as-purity]. Consequently [lem-wf-constant-twist-weight] makes $\\mathcal E_0$ pure of weight $c$ at every closed point of $A_0$. This weight equals the given $w$: choose a closed point of $U_0$. Such a point exists explicitly by choosing a finite extension $k'/k_0$ with $\\#k'>\\deg f$, and an element on which $f$ is nonzero; its image in $D(f)$ is closed. At this point $u$, the rank-one eigenvalue has absolute value both $q_u^{c/2}$ and $q_u^{w/2}$. Since $q_u>1$, $c=w$. Thus purity of weight $w$ holds on the entire line, including the missing points.",
    "uses": [
-    "thm-pod-degreewise-perfectness-over-a-field",
-    "def-pod-perfect-complex-on-x",
+    "def-weil-punctual-weights",
+    "lem-fd-as-purity",
+    "lem-wf-constant-twist-weight"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-exceptional-constituents.proof.md",
+    "place": "Boundary paragraph: justify the weight at missing points from purity on the nonempty open"
+   }
+  },
+  {
+   "text": "Apply field-stage Poincare duality on the smooth separated geometrically connected curve $A_0$, of dimension one. Its structure morphism is smooth separated of finite type, so [cor-pur-smooth-admissibility] supplies the finite-stage constructible admissibility required in the Poincare conventions. Both choices of $L$ are site-perfect: the constant unit is locally free of rank one; for the Artin–Schreier factor this is the lisse rank-one assertion of [lem-fd-as-lisse]. Placed in degree zero, these are bounded complexes of finite projective coefficient modules locally on the site, precisely [def-pod-perfect-complex-on-x]. Thus [thm-pod-degreewise-perfectness-over-a-field], at $\\Lambda=\\Qlb$ and $d=1$, gives finite-dimensional perfect line-valued pairings\n$$H_c^i(A,L)\\times H^{2-i}(A,L^\\vee)\\longrightarrow\\Qlb(-1).$$\nUse these for $i=0,1,2$ below. Properness is not a hypothesis of this duality theorem.",
+   "uses": [
+    "cor-pur-smooth-admissibility",
     "lem-fd-as-lisse",
-    "lem-wf-constant-twist-weight",
-    "lem-fd-cohomology-affine-line-character",
+    "def-pod-perfect-complex-on-x",
+    "thm-pod-degreewise-perfectness-over-a-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-exceptional-constituents.proof.md",
+    "place": "Step 1: hypotheses and field-stage degreewise duality"
+   }
+  },
+  {
+   "text": "For $L=\\Qlb$, [lem-fd-affine-line-constant-cohomology] identifies $H^0(A,L)$ with the constant sections $\\Qlb$ and makes $H^1(A,L)=H^2(A,L)=0$. The pairings in step 3 therefore give $H_c^0(A,L)=H_c^1(A,L)=0$ and $\\dim H_c^2(A,L)=1$. The section $1\\in H^0(A,L)$ is fixed by the canonical Frobenius. By [cor-pod-untwisted-similitude] the untwisted pairing satisfies $\\langle Fx,F1\\rangle=q\\langle x,1\\rangle$. Perfectness makes $x\\mapsto\\langle x,1\\rangle$ an isomorphism of one-dimensional vector spaces, so this equation says that $F$ acts on $H_c^2(A,L)$ by $q$. Thus this Frobenius module is $\\Qlb(-1)$.",
+   "uses": [
     "lem-fd-affine-line-constant-cohomology",
+    "thm-pod-degreewise-perfectness-over-a-field",
     "cor-pod-untwisted-similitude"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-exceptional-constituents.proof.md",
+    "place": "Step 1: constant-coefficient calculation and Frobenius normalization"
+   }
   },
   {
-   "text": "Step 2 (the boundary). The boundary sheaf $B=i^*\\mathcal E_0$ is\nsupported on the finite set $Z$ and has weights at most $w$: at a\npoint $z\\in Z$ the stalk is the stalk of the lisse rank-one\n$\\mathcal E_0$, whose Frobenius eigenvalue has modulus\n$q_z^{w/2}$ (the twist-scaled root of unity, weights by\n[lem-fd-as-purity] and [lem-wf-constant-twist-weight]). By\nthe finite-boundary computation [lem-a1-finite-boundary-cohomology],\n$H_c^r(Z,B)=0$ for $r\\neq0$, and $H_c^0(Z,B)$ has weights at most\n$w$ by [lem-a1-finite-boundary-weights].",
+   "text": "For $L=\\mathcal L_{\\psi,ax}$ with $a\\ne0$, [lem-fd-as-lisse] identifies $L^\\vee$ with $\\mathcal L_{\\psi,-ax}$. Here $-a\\ne0$ even in characteristic two. The character is the fixed nontrivial prime-field character used in the definition of this sheaf; hence [lem-fd-cohomology-affine-line-character] applies over the algebraically closed geometric field $k$ to the coefficient $-a$. It gives $H^{2-i}(A,L^\\vee)=0$ for $i=0,1,2$. The perfect pairings of [thm-pod-degreewise-perfectness-over-a-field] force $H_c^i(A,L)=0$ in each of these degrees. No inference about weights or finite-field traces is needed for this vanishing.",
    "uses": [
-    "lem-fd-as-purity",
-    "lem-wf-constant-twist-weight",
+    "lem-fd-as-lisse",
+    "lem-fd-cohomology-affine-line-character",
+    "thm-pod-degreewise-perfectness-over-a-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-exceptional-constituents.proof.md",
+    "place": "Step 1: nonzero linear character case"
+   }
+  },
+  {
+   "text": "Use [lem-wf-constant-twist-cohomology] with the separated finite-type structure morphism $A_0\\to\\operatorname{Spec}k_0$, the constructible sheaf $L$ in degree zero, and the point twist $\\mathcal B_b$. It gives Frobenius-compatible isomorphisms $H_c^i(A,\\mathcal E_0)\\cong H_c^i(A,L)\\otimes\\mathcal B_b$. In degrees zero and one these spaces vanish by steps 4–5. In degree two they vanish in the nonconstant-character case, and otherwise form a line with Frobenius eigenvalue $bq$. Step 2 gives $|\\iota(bq)|=q^{w/2}q=q^{(w+2)/2}$, so this last line is pure of weight $w+2$ by [def-weil-frobenius-module-weights]. In either case the degree-two group has weights at most $w+2$.",
+   "uses": [
+    "lem-wf-constant-twist-cohomology",
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-exceptional-constituents.proof.md",
+    "place": "Step 1: constant twisting and the degree-two weight bound"
+   }
+  },
+  {
+   "text": "Let $i:Z_0\\hookrightarrow A_0$ be the reduced closed complement from step 1 and put $B=i^*\\mathcal E_0$. Its stalk at a closed point is exactly the same Frobenius representation as that of $\\mathcal E_0$ there, so step 2 makes it pure of weight $w$. The finite-boundary lemma [lem-a1-finite-boundary-cohomology], applied to the finite $k_0$-scheme $Z_0$ and this constructible Weil sheaf, gives $H_c^r(Z,B)=0$ for $r\\ne0$. The companion statement [lem-a1-finite-boundary-weights] gives weights at most $w$ on $H_c^0(Z,B)$. This also covers $Z_0=\\varnothing$.",
+   "uses": [
     "lem-a1-finite-boundary-cohomology",
     "lem-a1-finite-boundary-weights"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-exceptional-constituents.proof.md",
+    "place": "Step 2: finite-boundary cohomology and weights"
+   }
   },
   {
-   "text": "Step 3 (the localization sequence). The open–closed recollement\ntriangle of [def-weil-open-closed-recollement] (at $\\Qlb$ for Weil sheaves, [prop-sf-open-closed-triangle-all-stages]), applied with\n$K=j_*\\mathcal E=\\mathcal E_0$ and the extension-by-zero functor\n[def-weil-extension-by-zero] of the framework chapter, gives the exact\nsequence\n\n$$\nH_c^0(Z,B)\\longrightarrow H_c^1(U,\\mathcal E)\\longrightarrow\nH_c^1(\\mathbf A^1,\\mathcal E_0)\\longrightarrow H_c^1(Z,B)=0,\n$$\n\nand $H_c^0(U,\\mathcal E)=0$ (it injects into $H_c^0(\\mathbf A^1, \\mathcal E_0)=0$). Hence $H_c^1(U,\\mathcal E)$ is a quotient of the\nweight-$w$ group $H_c^0(Z,B)$ and has weights at most $w$ (in\nparticular at most $w+1$); the group $H_c^2(U,\\mathcal E)$ is a\nsubobject of $H_c^2(\\mathbf A^1,\\mathcal E_0)$, of weights at most\n$w+2$ by the subquotient bound of\n[lem-a1-subquotient-extension-bounds]. This is the asserted bound\n$w+i$ for $i=0,1,2$; the degrees outside $\\{0,1,2\\}$ have no\ncohomology (the compact-support range of\n[lem-zl-affine-curve-range] of this chapter, or directly from the\nconcentration of the two terms of the triangle).",
+   "text": "Apply [prop-sf-open-closed-triangle-all-stages] to $K=\\mathcal E_0$ on $A$, with $\\Lambda=\\Qlb$. All data descend to $k_0$, so this is a Weil-equivariant triangle. Clause 3 of [prop-functor-package], applied to the structure map, identifies its compact-support image with\n$$R\\Gamma_c(U,\\mathcal E)\\longrightarrow R\\Gamma_c(A,\\mathcal E_0)\\longrightarrow R\\Gamma_c(Z,B)\\longrightarrow .$$\nThis uses the package's $\\Qlb$ constructible domain, not merely a finite-torsion triangulatedness result. The derived homology long exact sequence [lem-sf-derived-homology-long-exact] is consequently Frobenius-equivariant. Its terms in steps 6–7 give $H_c^0(U,\\mathcal E)=0$ from $H_c^{-1}(Z,B)=0$ and $H_c^0(A,\\mathcal E_0)=0$, and give\n$$H_c^0(Z,B)\\twoheadrightarrow H_c^1(U,\\mathcal E),\\qquad H_c^2(U,\\mathcal E)\\xrightarrow{\\sim}H_c^2(A,\\mathcal E_0),$$\nsince $H_c^1(A,\\mathcal E_0)=H_c^1(Z,B)=H_c^2(Z,B)=0$.",
    "uses": [
-    "def-weil-open-closed-recollement",
     "prop-sf-open-closed-triangle-all-stages",
-    "def-weil-extension-by-zero",
-    "lem-a1-subquotient-extension-bounds",
-    "lem-zl-affine-curve-range"
+    "prop-functor-package",
+    "lem-sf-derived-homology-long-exact"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-exceptional-constituents.proof.md",
+    "place": "Step 3: localization, compact-support composition, and its long exact sequence"
+   }
+  },
+  {
+   "text": "By [lem-a1-subquotient-extension-bounds], the Frobenius-stable quotient $H_c^1(U,\\mathcal E)$ of $H_c^0(Z,B)$ has weights at most $w$, and hence at most $w+1$ (the same weight filtration works because $w\\le w+1$). The degree-two isomorphism of step 8 and step 6 give weights at most $w+2$. Degree zero vanishes. Finally $U_0=D(f)$ is a smooth affine curve and $\\mathcal E$ is a constructible $\\Qlb$-Weil sheaf in degree zero, so [lem-zl-affine-curve-range] gives zero for every degree outside $\\{0,1,2\\}$. The zero vector space has the empty weight filtration by [def-weil-frobenius-module-weights], for every bound, including the bounds $w+i$ in negative degrees. These assertions prove the required bound for every integer $i$.",
+   "uses": [
+    "lem-a1-subquotient-extension-bounds",
+    "lem-zl-affine-curve-range",
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-exceptional-constituents.proof.md",
+    "place": "Step 3: subquotient bounds and all remaining degrees"
+   }
   }
  ],
  "proof_deps": [
+  "rem-dl-a1-conventions",
   "def-wf-constant-weil-twist",
-  "thm-pod-degreewise-perfectness-over-a-field",
-  "def-pod-perfect-complex-on-x",
   "lem-fd-as-lisse",
+  "def-weil-punctual-weights",
+  "lem-fd-as-purity",
   "lem-wf-constant-twist-weight",
-  "lem-fd-cohomology-affine-line-character",
+  "cor-pur-smooth-admissibility",
+  "def-pod-perfect-complex-on-x",
+  "thm-pod-degreewise-perfectness-over-a-field",
   "lem-fd-affine-line-constant-cohomology",
   "cor-pod-untwisted-similitude",
-  "lem-fd-as-purity",
+  "lem-fd-cohomology-affine-line-character",
+  "lem-wf-constant-twist-cohomology",
+  "def-weil-frobenius-module-weights",
   "lem-a1-finite-boundary-cohomology",
   "lem-a1-finite-boundary-weights",
-  "def-weil-open-closed-recollement",
   "prop-sf-open-closed-triangle-all-stages",
-  "def-weil-extension-by-zero",
+  "prop-functor-package",
+  "lem-sf-derived-homology-long-exact",
   "lem-a1-subquotient-extension-bounds",
   "lem-zl-affine-curve-range"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-exceptional-constituents.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-exceptional-constituents.proof.md",
+  "place": "Opening paragraph and Steps 1–3; expanded with existing DAG statements and explicit Frobenius calculations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ArtinSchreier|Artin.Schreier|WeilSheaf|HasWeightsAtMost",
+   "results": "1 hits: Mathlib/FieldTheory/KummerExtension.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern Lie weights, affine combinations or unrelated algebraic geometry, not Weil cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*weight|weight.*Frobenius|compactlySupportedCohomology",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern Lie weights, affine combinations or unrelated algebraic geometry, not Weil cohomology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weights of compactly supported cohomology of an Artin Schreier sheaf on the affine line",
+   "results": "8 hits: Finset.affineCombinationLineMapWeights_self, RootPairingCat.weight, AlgebraicGeometry.IsArtinianScheme.recOn, LieModule.Weight.instFinite, RootPairingCat.weightIsAddCommGroup, AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_of_isAffine, Affine.Simplex.touchpointWeights, LieModule.Weight.instFintype",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern Lie weights, affine combinations or unrelated algebraic geometry, not Weil cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"compactlySupportedCohomology\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern Lie weights, affine combinations or unrelated algebraic geometry, not Weil cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ArtinSchreier\", \"cohomology\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern Lie weights, affine combinations or unrelated algebraic geometry, not Weil cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported cohomology of a constant rank one Weil sheaf or linear Artin Schreier sheaf on a dense open of the affine line has weights at most weight plus degree",
+   "results": "8 hits: LieModule.exists₂_genWeightSpace_smul_add_eq_bot, LieModule.exists_genWeightSpace_smul_add_eq_bot, LieModule.genWeightSpace_zsmul_add_ne_bot, LieModule.eventually_genWeightSpace_smul_add_eq_bot, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, LieModule.genWeightSpace_nsmul_add_ne_bot_of_le, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, LieModule.finite_genWeightSpace_ne_bot",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern Lie weights, affine combinations or unrelated algebraic geometry, not Weil cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Frobenius eigenvalues on compact support cohomology of a rank one local system on an open affine line satisfy the weight bound",
+   "results": "8 hits: LieModule.exists₂_genWeightSpace_smul_add_eq_bot, LieModule.exists_genWeightSpace_smul_add_eq_bot, LieModule.genWeightSpace_zsmul_add_ne_bot, LieModule.finite_genWeightSpace_ne_bot, LieModule.finite_genWeightSpaceOf_ne_bot, LieModule.genWeightSpace_nsmul_add_ne_bot_of_le, LieModule.eventually_genWeightSpace_smul_add_eq_bot, groupCohomology.Hilbert90.aux_ne_zero",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern Lie weights, affine combinations or unrelated algebraic geometry, not Weil cohomology"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -685,5 +818,99 @@
   }
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-thm-dl-a1-upper"
+ "unit": "sk-thm-dl-a1-upper",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-exceptional-constituents",
+  "worker": "stage1",
+  "summary": "Kept the exceptional rank-one statement and its full-line/finite-boundary route. Expanded the purity inference c=w, field-duality hypotheses, constant Frobenius q, twist-cohomology compatibility, and the equivariant localization sequence. Reused all inputs from existing nodes; no new nodes. The imported Lean audit names missing modules, so it is not attachment evidence.",
+  "blueprint": "Opening paragraph: steps 1–2; Step 1 (line cohomology): steps 3–6; Step 2 (boundary): step 7; Step 3 (localization and range): steps 8–9. Supports unit step 2, the constant-factor calculation, and the imported exceptional-character case without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "cor-pur-smooth-admissibility",
+    "why": "Finite-stage admissibility of the smooth affine-line structure map, to check the Poincare-duality hypotheses. The item unit contains no theorem supplying this generic input."
+   },
+   {
+    "node": "thm-pod-degreewise-perfectness-over-a-field",
+    "why": "The perfect compact-support/ordinary cohomology pairing for the site-perfect rank-one coefficient object on a nonproper smooth curve. The item unit contains no theorem supplying this generic input."
+   },
+   {
+    "node": "cor-pod-untwisted-similitude",
+    "why": "The explicit q multiplier in the affine-line top compact-support pairing, which determines its Frobenius. The item unit contains no theorem supplying this generic input."
+   },
+   {
+    "node": "lem-fd-as-lisse",
+    "why": "Lisse rank-one Artin–Schreier factors and their coefficient duals. The item unit contains no theorem supplying this generic input."
+   },
+   {
+    "node": "lem-fd-as-purity",
+    "why": "Weight zero of Artin–Schreier stalks on the full line. The item unit contains no theorem supplying this generic input."
+   },
+   {
+    "node": "lem-wf-constant-twist-weight",
+    "why": "Punctual purity after a constant Weil twist. The item unit contains no theorem supplying this generic input."
+   },
+   {
+    "node": "lem-fd-affine-line-constant-cohomology",
+    "why": "Ordinary geometric cohomology of the affine line, used in its Poincare pairing. The item unit contains no theorem supplying this generic input."
+   },
+   {
+    "node": "lem-fd-cohomology-affine-line-character",
+    "why": "Ordinary geometric vanishing for a nonzero linear Artin–Schreier phase. The item unit contains no theorem supplying this generic input."
+   },
+   {
+    "node": "lem-wf-constant-twist-cohomology",
+    "why": "Projection formula for a constant Weil twist, including Frobenius compatibility. The item unit contains no theorem supplying this generic input."
+   },
+   {
+    "node": "lem-a1-finite-boundary-cohomology",
+    "why": "Concentration of finite-scheme compact-support cohomology in degree zero. The item unit contains no theorem supplying this generic input."
+   },
+   {
+    "node": "prop-sf-open-closed-triangle-all-stages",
+    "why": "The Weil-equivariant localization triangle at the Qbar coefficient stage. The item unit contains no theorem supplying this generic input."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Clause 3 sends localization to compact supports using compact-support composition at Qbar coefficients. The item unit contains no theorem supplying this generic input."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "The generic derived-category long exact cohomology sequence. The item unit contains no theorem supplying this generic input."
+   },
+   {
+    "node": "lem-a1-subquotient-extension-bounds",
+    "why": "The generic upper-weight bound for a Frobenius-stable quotient. The item unit contains no theorem supplying this generic input."
+   },
+   {
+    "node": "lem-zl-affine-curve-range",
+    "why": "Compact-support range for the smooth affine open curve with constructible sheaf coefficients. The item unit contains no theorem supplying this generic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-pur-smooth-admissibility",
+  "thm-pod-degreewise-perfectness-over-a-field",
+  "cor-pod-untwisted-similitude",
+  "lem-fd-as-lisse",
+  "lem-fd-as-purity",
+  "lem-wf-constant-twist-weight",
+  "lem-fd-affine-line-constant-cohomology",
+  "lem-fd-cohomology-affine-line-character",
+  "lem-wf-constant-twist-cohomology",
+  "lem-a1-finite-boundary-cohomology",
+  "prop-sf-open-closed-triangle-all-stages",
+  "prop-functor-package",
+  "lem-sf-derived-homology-long-exact",
+  "lem-a1-subquotient-extension-bounds",
+  "lem-zl-affine-curve-range"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q51-b95a57cd0",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q51-b95a57cd0 (reviewer sub-agent of L); spot-checked: Reviewed the full item, cited nodes, sources, route, hypotheses, edge cases, and delivery rules. The nine-step proof is sound, complete, and requires no repairs."
+ }
 }
