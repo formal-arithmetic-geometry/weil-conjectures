@@ -1,0 +1,119 @@
+{
+ "id": "lem-coef-simplicial-derived-pushout-mapping",
+ "kind": "statement",
+ "title": "Framed homotopy function complexes and derived pushouts of simplicial categories",
+ "statement": "Give the category $\\mathrm{sCat}$ of small simplicial categories the Bergner model structure: its weak equivalences are the Dwyer--Kan equivalences, with generators and path-component categories as in [lem-coef-simplicial-interval-lifting] and [lem-coef-simplicial-interval-cell-stability]. Write $h\\mathrm{sCat}$ for the localization at Dwyer--Kan equivalences, computed by cofibrant-fibrant replacements and cylinder homotopy classes. Universes contain all diagrams and ordinary Hom sets used below. Use the cosimplicial Reedy model structure and latching objects of [lem-coef-reedy-model-structure], and Kan complexes and homotopy pullbacks as in [lem-coef-kan-quillen-right-proper]. For a cofibrant replacement $QA\\to A$, a frame means an augmented cosimplicial object $A^\\bullet\\to\\operatorname{const}(QA)$ with $A^0=QA$, each augmentation $A^n\\to QA$ a weak equivalence, and every latching map $L_nA^\\bullet\\to A^n$ a cofibration, including $n=0$. Such frames exist and may be chosen functorially. For a fibrant replacement $T\\to RT$ define the homotopy function complex by\n$$\\operatorname{Map}^h(A,T)_n=\\operatorname{Hom}_{\\mathrm{sCat}}(A^n,RT),$$\nwith simplicial operators given by precomposition with the cosimplicial operators. The Hom on the right is the ordinary set of enriched functors, with no simplicial model structure on $\\mathrm{sCat}$ assumed. These complexes are Kan, are independent up to natural weak equivalence of the replacement and frame choices, and are homotopy invariant in both variables. There is a natural bijection $\\pi_0\\operatorname{Map}^h(A,T)\\cong\\operatorname{Hom}_{h\\mathrm{sCat}}(A,T)$, compatible with restriction and composition. A representative $QA\\to RT$ induces a functor $\\pi_0A\\to\\pi_0T$, up to natural isomorphism, by using the equivalences $\\pi_0QA\\to\\pi_0A$ and $\\pi_0T\\to\\pi_0RT$; this depends only on its homotopy class.\n\nFor any small span $A\\leftarrow X\\to B$, let $P$ be the ordinary pushout of a cofibrant replacement of the span (a span of cofibrant objects with both structure maps cofibrations). The restriction comparison is a natural weak equivalence\n$$\\operatorname{Map}^h(P,T)\\simeq\\operatorname{Map}^h(A,T)\\times^h_{\\operatorname{Map}^h(X,T)}\\operatorname{Map}^h(B,T).$$\nFor any small family $(A_i)_{i\\in I}$ the disjoint-union coproduct satisfies the natural restriction comparison\n$$\\operatorname{Map}^h(\\coprod_{i\\in I}A_i,T)\\simeq\\prod_{i\\in I}\\operatorname{Map}^h(A_i,T),$$\nincluding the empty family. These comparisons commute with the cocone restrictions and maps of spans and families, so that maps of spans induce maps of their derived pushouts in $h\\mathrm{sCat}$, compatible with identities and composition.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Hovey, Model Categories, Definition 5.2.7, Theorem 5.2.8, Corollaries 5.4.4 and 5.4.8, and Theorem 5.4.9 (ordinary-model framings and function complexes); derived-pushout and coproduct mapping comparisons are the framed colimit calculation. Read online 2026-10-17; archival copy WANTED. No Stacks tag states this theorem.",
+  "external": [
+   {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Appendix A.3.5, Notation A.3.5.1 and Remark A.3.5.2 (localization pushout); the function-complex comparison here is an agent-stated supporting theorem, not a quotation of Proposition A.3.5.5."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-simplicial-interval-cell-stability",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushout of a span of simplicial categories has mapping spaces into a fibrant target given by a homotopy pullback",
+   "results": "[leanfinder] OK 8 hits; returned generic model-category path-object and lifting declarations, but no simplicial-category derived-pushout mapping-space theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pushout, HomotopicalAlgebra.ModelCategory",
+   "results": "[loogle] OK 4 hits: HomotopicalAlgebra.Cylinder.trans_I, trans_π, trans_i₀, trans_i₁. These concern cylinder pushouts, not mapping spaces of derived simplicial-category pushouts.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*pushout|derived.*pushout|mapping.*space",
+   "results": "[grep] OK 2 hits in Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean:76,159; only left-homotopy cylinder/pushout hypotheses, no derived pushout mapping formula.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicTopology/ModelCategory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "homotopy pushout mapping spaces simplicial categories",
+   "results": "[leansearch] OK 8 hits: generic simplicial-category enrichment and ordinary pushout preservation declarations; no derived simplicial-category mapping-space pullback.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cosimplicial.*(frame|resolution)|homotopy.function|derived.mapping|mapping.space",
+   "results": "Executed search: 0 hits. No declarations found.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicTopology/ModelCategory"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CosimplicialObject, HomotopicalAlgebra.ModelCategory",
+   "results": "Executed search: 0 hits. No declarations found.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cosimplicial frames in an ordinary model category give Kan homotopy function complexes whose path components are morphisms in the homotopy category and which send homotopy colimits to homotopy limits",
+   "results": "Executed search: 8 hits. HomotopicalAlgebra.CofibrantObject.HoCat.resolution; HomotopicalAlgebra.CofibrantObject.HoCat; HomotopicalAlgebra.CofibrantObject.toHoCat; SSet.hoFunctor; HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism; HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass; HomotopicalAlgebra.CofibrantObject.toHoCat_map_eq_iff; HomotopicalAlgebra.CofibrantObject.instCategoryWithWeakEquivalencesHoCat Returned signatures concern homotopy classes or additive Dold--Kan homotopies; none gives the framed mapping comparisons or the walking-groupoid restriction theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "walking.*(groupoid|isomorphism)|homotopy.*function.*complex|cosimplicial.*frame|derived.*coproduct",
+   "results": "Executed search: 5 hits. Mathlib/CategoryTheory/Extensive.lean; Mathlib/CategoryTheory/Extensive.lean; Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean; Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean; Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean Read Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean: WalkingIso.equiv (line 120) classifies strict functors to ordinary categories; it does not give the Bergner homotopy function-complex equivalence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-simplicial-inversion-universal-property",
+  "date": "2026-10-17",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the derived pushout and its mapping-space universal property used before arrow inversion.",
+   "via": [
+    "lem-coef-simplicial-inversion-universal-property",
+    "lem-coef-simplicial-localization-comparison-calculus",
+    "lem-coef-unstraightening-homotopy-descent",
+    "lem-coef-contravariant-slice-model",
+    "lem-coef-right-straightening-fiber-comparison",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

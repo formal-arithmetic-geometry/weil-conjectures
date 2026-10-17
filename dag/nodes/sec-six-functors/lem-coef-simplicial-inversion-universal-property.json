@@ -11,9 +11,102 @@
   "lem-coef-simplicial-interval-lifting",
   "lem-coef-simplicial-interval-cell-stability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The item declares the Dwyer--Kan model structure with the displayed generating sets $I$ and $J$; this step checks that these data form a model structure. The interval-lifting node supplies completeness and cocompleteness of $\\mathrm{sCat}$, the generators, functorial small-object factorizations as a $K\\text{-cell}$ map followed by a $K\\text{-inj}$ map for $K=I,J$, the retract description of $K\\text{-cof}$, the inclusion $J\\subseteq I\\text{-cof}$, and the description of $J\\text{-inj}$ as local Kan fibrations lifting $\\pi_0$-invertible vertices. The interval-cell-stability node supplies two-out-of-three and retract closure for the class $W$ of Dwyer--Kan equivalences and says that every relative $J$-cell map is in $W$; hence $J\\text{-cof}\\subseteq I\\text{-cof}\\cap W$. The remaining clauses are checked in the next step.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-simplicial-interval-cell-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Sections 1--3, generating maps (C1),(C2),(A1),(A2), Propositions 2.3, 2.5 and Theorem 1.1 via the Kan recognition theorem (Hovey, Model Categories, Theorem 2.1.19); HTT Appendix A.3.2 for the Bergner model structure"
+   }
+  },
+  {
+   "text": "Continuing the check of the model structure, lifting against $\\varnothing\\to\\{0\\}$ is surjectivity on objects, and lifting against $U(\\partial\\Delta^n)\\to U(\\Delta^n)$ with the two objects fixed is the lifting problem of $\\partial\\Delta^n\\to\\Delta^n$ in one mapping set. By the boundary characterization of trivial Kan fibrations in the Kan model node (including $n=0$), $I\\text{-inj}$ consists of the functors that are surjective on objects and trivial Kan fibrations on every mapping set. Such a $p:A\\to B$ is a weak equivalence on mapping sets, and $\\pi_0p$ is fully faithful and surjective on objects, so $p\\in W$; given $a$ and a $\\pi_0$-invertible vertex $e:pa\\to b$, choose $a'$ over $b$ and a vertex $d:a\\to a'$ over $e$ by surjectivity on vertices, and $d$ is invertible in $\\pi_0A$ since $\\pi_0p$ is fully faithful, so $p\\in J\\text{-inj}$. Conversely let $p\\in W\\cap J\\text{-inj}$. Each mapping map is a Kan fibration and a weak equivalence, hence a trivial Kan fibration by the Kan model node. For an object $b$ of $B$, essential surjectivity of $\\pi_0p$ gives $a$ and an invertible component $pa\\to b$; lifting a representing vertex by the equivalence-lifting clause gives $a'$ with $pa'=b$. Thus $I\\text{-inj}=W\\cap J\\text{-inj}$. If $f\\in I\\text{-cof}\\cap W$, factor $f=pj$ with $j\\in J\\text{-cell}$ and $p\\in J\\text{-inj}$; two-out-of-three gives $p\\in W$, hence $p\\in I\\text{-inj}$, and the lift in the square with $f$ on the left, $p$ on the right, $j$ on top and the identity at the bottom exhibits $f$ as a retract of $j$, so $f\\in J\\text{-cof}$. Therefore $(I\\text{-cof},W\\cap J\\text{-inj})$ and $(J\\text{-cof},J\\text{-inj})$ with $J\\text{-cof}=I\\text{-cof}\\cap W$ are the two weak factorization systems of a model structure with weak equivalences $W$, and its cofibrant-fibrant replacements and homotopy classes compute the declared $h\\mathrm{sCat}$ used in the remaining steps.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-simplicial-interval-cell-stability",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Sections 1--3, generating maps (C1),(C2),(A1),(A2), Propositions 2.3, 2.5 and Theorem 1.1 via the Kan recognition theorem (Hovey, Model Categories, Theorem 2.1.19); HTT Appendix A.3.2 for the Bergner model structure"
+   }
+  },
+  {
+   "text": "Use the framed function complexes of the derived-pushout mapping node: their $n$-simplices are ordinary enriched functors from the $n$th term of a cosimplicial frame into $RT$. Put $X=\\operatorname{Map}^h(C,T)$, $Y=\\operatorname{Map}^h(\\coprod_W[1],T)$ and $Z=\\operatorname{Map}^h(\\coprod_W\\mathbb J,T)$. Applying the node's pushout comparison gives $\\operatorname{Map}^h(L_WC,T)\\simeq X\\times_Y^h Z$, with $q^*$ corresponding to the projection to $X$. Its explicit natural bijection $\\pi_0\\operatorname{Map}^h(A,T)\\cong\\operatorname{Hom}_{h\\mathrm{sCat}}(A,T)$, for $A=C,L_WC$, identifies the path-component map of this projection with the homotopy-class map in the item.",
+   "uses": [
+    "lem-coef-simplicial-derived-pushout-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Sections 5.2 and 5.4; application of the framed derived-pushout mapping theorem stated in the cited node."
+   }
+  },
+  {
+   "text": "The coproduct comparison of the derived-pushout mapping node identifies $Y$ with $\\prod_{w\\in W}Y_w$ and $Z$ with $\\prod_{w\\in W}Z_w$, where $Y_w=\\operatorname{Map}^h([1],T)$ and $Z_w=\\operatorname{Map}^h(\\mathbb J,T)$, compatibly with restriction. Use the compatible frame choices supplied by the walking-groupoid node: $Z_w\\to Y_w$ factors as a trivial Kan fibration $Z_w\\to E_w$ followed by inclusion of the invertible-arrow components. The product $p:\\prod_w Z_w\\to E:=\\prod_wE_w$ is again a trivial Kan fibration: for a lifting problem against any boundary inclusion choose a lift in each coordinate, giving the required product lift. This uses the boundary lifting characterization in the Kan model node, including the boundary of $\\Delta^0$. The subcomplex $E\\subseteq\\prod_wY_w$ is a union of components, since an edge has its two endpoints in the same component in every coordinate. The empty product is a point, so the argument includes $W=\\varnothing$.",
+   "uses": [
+    "lem-coef-simplicial-derived-pushout-mapping",
+    "lem-coef-simplicial-walking-groupoid-components",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Appendix A.3.5, with agent argument from the stronger walking-groupoid function-complex lemma; products of trivial Kan fibrations use componentwise boundary lifting."
+   }
+  },
+  {
+   "text": "Let $a:X\\to Y=\\prod_wY_w$ be restriction and put $X_E=X\\times_Y E$. Inclusion of a union of components of a Kan complex is a Kan fibration: a horn whose vertices lie in those components has any filler in the ambient Kan complex, and that filler's vertices remain in the same components. Thus $E\\to Y$ and $E_w\\to Y_w$ are Kan fibrations. The complexes chosen in Step 3 compute $X\\times_Y^h Z$ as $X\\times_Y\\prod_wZ_w=X_E\\times_E\\prod_wZ_w$ by the Kan model node's homotopy-pullback convention. Its projection to $X_E$ is a trivial Kan fibration, since every boundary lifting problem is the pullback of one for $p$. Therefore the projection to $X$ induces a bijection onto $\\pi_0X_E\\subseteq\\pi_0X$. This proves injectivity without inferring it from connected ordinary fibers. By definition $X_E$ consists exactly of those components whose restrictions send each $w$ to an invertible class in $\\pi_0(RT)$. The framed mapping node identifies these components with homotopy classes and identifies their induced functors on path-component categories. Since $\\pi_0T\\to\\pi_0(RT)$ is an equivalence, this says exactly that the induced functor $\\pi_0C\\to\\pi_0T$ sends every $w\\in W$ to an isomorphism, independent of natural-isomorphism choices. In particular the identity class of $L_WC$ shows that $q$ inverts $W$.",
+   "uses": [
+    "lem-coef-simplicial-derived-pushout-mapping",
+    "lem-coef-simplicial-walking-groupoid-components",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Appendix A.3.5, Proposition A.3.5.5; agent proof by pullback of a trivial Kan fibration, using the full function-complex criterion rather than only pi_0."
+   }
+  },
+  {
+   "text": "If $(L,q)$ and $(L\\prime,q\\prime)$ both satisfy this mapping property, apply it with targets $L\\prime$ and $L$. The identity class on $L\\prime$ restricted along $q\\prime$ and the class induced by $q$ give maps under $C$ in both directions. Applying injectivity to the two composites, whose restrictions to $C$ are identities, shows that the composites are identities in $h\\mathrm{sCat}$. Thus the two pairs are isomorphic under $C$; the same restriction argument proves uniqueness of the isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.5.5, uniqueness clause"
+   }
+  },
+  {
+   "text": "For an enriched functor carrying each specified arrow of $C$ into the specified arrow set of $C\\prime$, the naturality clause of the derived-pushout mapping node supplies the induced map between the two derived pushouts in $h\\mathrm{sCat}$. Restriction of mapping classes commutes with this map. Applying the uniqueness argument to identity and composite maps shows that the construction is independent of replacement choices and preserves composition and identities.",
+   "uses": [
+    "lem-coef-simplicial-derived-pushout-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.3.5.1 and Proposition A.3.5.5, functoriality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-derived-pushout-mapping",
+  "lem-coef-simplicial-interval-cell-stability",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-simplicial-walking-groupoid-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent proof of HTT Appendix A.3.5 localization mapping property, repaired using ordinary-model cosimplicial frames (Hovey Sections 5.2 and 5.4), the full walking-groupoid function-complex criterion, and an explicit trivial-fibration pullback; sources read online 2026-10-17, not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,7 +145,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-localization-comparison-calculus",
@@ -64,7 +157,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, derived coefficient-adjunction and inverse-limit comparison, via the inherited unstraightening descent foundation: universal property used to invert the replacement weak equivalences, before coherent-nerve comparison.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the derived localization mapping property and its walking-groupoid inversion test used before coherent-nerve comparison.",
    "via": [
     "lem-coef-simplicial-localization-comparison-calculus",
     "lem-coef-unstraightening-homotopy-descent",
@@ -83,5 +176,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-inversion-universal-property",
+  "worker": "stage1",
+  "summary": "Repair of returned N7 delivery: replaces the undefined simplicial-category enrichment by ordinary-Hom cosimplicial-frame function complexes, records pi_0/homotopy-category and coproduct/product comparisons, strengthens walking-groupoid restriction to a weak equivalence onto invertible components, and proves injectivity by a pullback of a trivial Kan fibration. Accepted Steps 1, 5 and 6 are retained. Original statement and current repository creation ancestry are preserved; two new unsplit supporting statements and no Mathlib leaves.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the derived coefficient-adjunction mapping calculation: realizes the inherited localization foundation before coherent-nerve comparison. The two smaller supporting facts are framed mapping of spans/families and the single walking-groupoid restriction test; no change to the unit or chapter route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-d132e802d",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-d132e802d (reviewer sub-agent of L); spot-checked: I read the whole item and both new nodes, plus the statements of every node they cite (interval-lifting, interval-cell-stability, kan-quillen-right-proper, reedy-model-structure), the parent node, the nodes that use the item, the unit sk-prop-sf-biduality-general and the chapter. Item: statement unchanged. Checked on W empty, T empty, C=[1] with its arrow marked, and a discrete non-invertible target. Steps 2-6 are correct: the derived-pushout node states the pushout comparison, the pi_0/hsCat bijection and the coproduct-to-product comparison; the walking-groupoid node gives the compatible choices that make the restriction a trivial Kan fibration onto E_T; products of trivial fibrations lift coordinatewise; pulling back along a union of components gives injectivity; and pi_0 equivalences reflect isomorphisms, which gives the image. New nodes: derived-pushout-mapping is Hovey's framed left function complex plus standard homotopy-pushout and coproduct facts, all correct. Walking-groupoid-components is true: Fun(J,T) to Fun(Delta^1,T) is fully faithful onto the equivalences, so on cores it is an inclusion of components. Neither node reaches the item. The only near-duplicates (cosimplicial-frame-mapping, model-colimit-localization-comparison) do reach it, so citing them would make a cycle. Searches and blueprint fields are present; all citations stay in the unit; no tool_uses. Repair: old Step 1 said the interval nodes 'thus' give the model structure but omitted I-inj = W ∩ J-inj and I-cof ∩ W ⊆ J-cof (error D5/C2). I wrote the recognition argument out as two steps, the second citing kan-quillen boundary lifting, in fixes/dag/nodes/sec-six-functors/lem-coef-simplicial-inversion-universal-property.json; nothing else in the file changed. Sources: HTT A.3.5, Hovey 5.2/5.4 and Bergner are not archived and network access is blocked, so the cited pages were not opened. The WANTED lines and proof_origin=agent are correct; I checked the mathematics independently.; 1 file(s) fixed by the reviewer"
  }
 }

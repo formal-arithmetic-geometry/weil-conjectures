@@ -10,9 +10,65 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the stated pointwise convention for right Kan extension, the right Kan extension condition is the limiting condition on the opposite of $(j\\downarrow[n])$. For $n\\geq0$, this comma category has one object $([-1],\\varnothing\\to[n])$ and one object $([0],i)$ for each vertex $i$ of $[n]$. Its only nonidentity arrows go from the empty-set object to the vertex objects: they are induced by the unique map $[-1]\\to[0]$. Consequently its opposite, not the comma category itself, is $V_n$, and restricting $U$ gives exactly the specified vertex-star cone, including its coherence. At $n=-1$ the comma category has just the identity of $[-1]$; the prescribed cone is the identity cone on $B$, which is limiting by [lem-cbc-enhanced-functor-cone-calculus]: for every $x$ the cone-induced comparison $\\operatorname{Map}_{\\mathcal C}(x,B)\\to\\operatorname{Map}_{\\operatorname{Fun}(\\Delta^0,\\mathcal C)}(\\Delta_{\\Delta^0}x,B)$ is the identity after the defining identification $\\operatorname{Fun}(\\Delta^0,\\mathcal C)=\\mathcal C$. Thus the pointwise conditions at all objects of $\\Delta_+$ are equivalent to the asserted conditions for $n\\geq0$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 6.1.2.11 and proof, pp. 541–543; identification of the pointwise comma category with the vertex star."
+   }
+  },
+  {
+   "text": "Use the limit duals of [lem-coef-infinity-final-index-colimit] and [lem-coef-infinity-colimit-gluing]. Concretely apply those statements to $\\mathcal C^{\\mathrm{op}}$ and opposite indexing shapes: ordinal reversal exchanges inner horn $i$ with inner horn $r-i$, preserves degreewise injectivity and degreewise pushouts, and exchanges the defined cones and cocones. Thus the colimit-gluing statement gives limits on a union of shapes from the pullback of their three restricted limits, with the induced coherent cone and its projections. It requires only that particular pullback, not all finite limits or a terminal object. The initial vertex of the arrow shape $V_0=(v_0\\to b)$ gives its limit $A$, with legs $1_A$ and $a$, by the final-index statement applied oppositely. In every simplicial degree there is an actual pushout\n$$N(V_{n+1})=N(V_n)\\amalg_{\\{b\\}}\\Delta^1_{v_{n+1},b}:$$\nthere are no composable nonidentity arrows in a star, so every nondegenerate simplex belongs to one of these edges, and their intersection is exactly $b$. The inclusion of $b$ into the new edge is degreewise injective. If the old limiting cone has apex $L_n$, the three restricted limits are $L_n$, $B$ and $A$; their comparison cospan is $L_n\\to B\\leftarrow A$, where the first leg is the old augmentation projection and the second is $a$. Gluing therefore makes $L_{n+1}=L_n\\times_B A$ a limiting apex for the enlarged star, with precisely the old vertex projections after $L_{n+1}\\to L_n$, the new projection to $A$, and their coherent common projection to $B$. When $\\mathcal C$ admits pullbacks this induction starts at $L_0=A$ and constructs the asserted iterated pullback limits for every $n$.",
+   "uses": [
+    "lem-coef-infinity-final-index-colimit",
+    "lem-coef-infinity-colimit-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 6.1.2.11, printed pp.541–543, vertex slices I([n]); Proposition 4.4.2.2 and Remark 4.4.2.3, printed p.296, applied oppositely to the displayed union of stars. Agent expansion of the edge-by-edge gluing argument."
+   }
+  },
+  {
+   "text": "Now assume only the specified cartesian squares, without assuming other pullbacks exist in $\\mathcal C$. The specified $V_0$ cone has apex $U_0=A$ and is the limit cone just identified. Inductively suppose the specified $V_n$ cone with apex $U_n$ is limiting. The hypothesis gives a pullback cone with apex $U_{n+1}$ for the cospan $U_n\\to B\\leftarrow A$; [lem-coef-infinity-terminal-pullback-criterion] identifies its mapping-space comparison as an equivalence, retaining the square's specified coherence. Apply the limit dual of [lem-coef-infinity-colimit-gluing] to the same pushout of shapes as in step 2, with this particular pullback. Its induced limiting cone is the specified cone from $U$: on $N(V_n)$ its legs are restriction to the first $n+1$ vertices, on the new edge its leaf leg is restriction to the last vertex, and on their intersection its leg is the augmentation. The coherence joining these restrictions is exactly that of the assumed square, all obtained by restricting the same simplicial diagram $U$. Thus gluing proves this specified $V_{n+1}$ cone limiting. This induction includes $n=0$ (the square $U_1\\to A$ over $A\\to B$) and proves the claim for every degree. Step 1 then gives the right Kan extension condition.",
+   "uses": [
+    "lem-coef-infinity-terminal-pullback-criterion",
+    "lem-coef-infinity-colimit-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 6.1.2.11 proof, pp. 541–543; induction using the cartesian comparison squares."
+   }
+  },
+  {
+   "text": "Assume the specified cones are limiting, as in the preceding clauses, and write $F_m:N(V_m)\\to\\mathcal C$ for the star diagram. The functor $s_\\theta:V_m\\to V_n$ sends $b$ to $b$ and $v_r$ to $v_{\\theta(r)}$, so $F_m=F_nN(s_\\theta)$. Restricting the specified $V_n$ cone along $s_\\theta$ gives a full coherent cone $c_\\theta$ on $F_m$ with apex $U_n$. The simplicial map $U(\\theta):U_n\\to U_m$ compares this cone to the limiting $V_m$ cone: its $r$-th leaf component is the $\\theta(r)$-th projection since $\\theta\\iota_r=\\iota_{\\theta(r)}$, and its central component and all the edge compatibility homotopies are obtained by restricting $U$ along the augmentation maps. By [lem-cbc-enhanced-functor-cone-calculus], composition with the limiting $V_m$ cone gives an equivalence\n$$\\operatorname{Map}_{\\mathcal C}(U_n,U_m)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(N(V_m),\\mathcal C)}(\\Delta_{V_m}U_n,F_m).$$\nIts homotopy fiber over $c_\\theta$ is contractible. Hence $U(\\theta)$, together with its specified cone comparison, is the coordinate-selection map up to contractible coherent choice. This argument uses the full cone, including its edge homotopies, rather than just equalities in the homotopy category. Here is the higher compatibility explicitly. Given a string $[n_0]\\to\\cdots\\to[n_k]$ and a vertex $r\\in[n_0]$, let $r_i$ be its image in $[n_i]$. These data define an ordinary functor $[k]\\times[2]\\to\\Delta_+$ whose value on $(i,0)$ is $[-1]$, on $(i,1)$ is $[0]$, and on $(i,2)$ is $[n_i]$. Its horizontal maps are the empty-set inclusion and the vertex inclusion $r_i$, and its vertical maps are identities in the first two columns and the given monotone maps in the last. The defining squares commute because the vertices $r_i$ were propagated along the string. Restricting $U$ along the opposite nerve of this functor supplies the full parameter family of augmentation and vertex cone comparisons, including their compatibility triangles. Faces delete or compose the same monotone maps and degeneracies insert identities, so restrictions along every face and degeneracy give the corresponding family for that shorter or repeated string. Applying this to all vertices and all subchains covers every coordinate. Thus the original coherent diagram supplies the coordinate comparisons and their compatibilities in every dimension simultaneously. One may take the already limiting $U_n$ cones as the iterated-pullback models themselves; comparisons with other models are equivalences in the contractible space of limiting cones supplied by the same cited node. This proves the asserted compatibility without replacing the coherent diagram by unrelated maps chosen in each degree.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 6.1.2.11 proof, pp. 541–543; functoriality of the vertex projections and simplicial identities."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-final-index-colimit",
+  "lem-coef-infinity-colimit-gluing",
+  "lem-coef-infinity-terminal-pullback-criterion",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Agent expansion of Proposition 6.1.2.11 and proof, printed pp.541–543, using the limit dual of Proposition 4.4.2.2/Remark 4.4.2.3, printed p.296. Read online independently on 2026-10-17; archival copy remains WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,7 +128,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-geometric-descent",
@@ -97,5 +153,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-augmented-vertex-cone-recognition",
+  "worker": "stage1",
+  "summary": "Four-step proof with zero new nodes. Corrected the opposite-comma orientation and included degree -1; supplied the exact existing coherent gluing and endpoint-limit statements for the iterated-pullback induction, retaining the specified cones. Used the full cone-space equivalence for coordinate selection and retained higher compatibilities by restriction of the original diagram U.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, derived coefficient adjunction: the independent simplicial-space foundation below the enriched completion chain; augmented vertex-star limits and the Cech right Kan extension condition.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "General fixed-apex cone-space universal property and contractibility of limiting-cone identifications; used only to identify coordinate maps with their full coherence, not to replace the coefficient unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-16daeb4ed",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-16daeb4ed (reviewer sub-agent of L); spot-checked: PASS, no changes and no fixes files. Read the item in full, the full statements of all 5 cited nodes, the unit sk-prop-sf-biduality-general (no listed steps), the chapter record and step 13 of the citer lem-coef-space-geometric-descent. Source: HTT Prop 6.1.2.11 with proof (printed pp.541-543) and Prop 4.4.2.2 / Rem 4.4.2.3 (printed p.296), read from a local copy because the project literature has none (archival copy correctly WANTED, proof_origin=agent). The statement is unchanged and correct. (j|[n]) has the empty-set object and n+1 vertex objects, with arrows only from the empty-set object to the vertices, so its opposite is V_n. That matches HTT's I([n]), and the 'iff' is the pointwise definition plus the identity cone in degree -1. Small cases tested: n=0 gives A (V_0 has an initial vertex); n=1 gives AxA over B; the degeneracy s_0 gives the diagonal; empty A; A=pt over B=S^1 gives the loop space, so coherence data matters. Step 1 is genuinely elementary. Step 2 applies the final-index and gluing lemmas to C^op; the degreewise pushout N(V_{n+1})=N(V_n) glued over {b} to one edge is checked, and only that one pullback is needed. Step 3 runs an induction from U_0=A in which each specified square is the gluing pullback, and the cones agree because all of them restrict U. Step 4: the fixed-apex cone equivalence gives coordinate selection up to contractible choice, and the functor [k]x[2] to Delta_+ is checked to commute. Long step 4 (2698 chars) is one explicit coherence argument hiding no lemma; it may stay. There are no new nodes. The rg duplicate search found no equivalent node (nearest: split-augmentation-colimit, segal-finite-cover-descent). The dependency closures of the cited nodes do not reach the item, so there is no cycle. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, a generic cone universal property from another unit. No SGA. Not a target node, so the base-change and coefficient check does not apply."
  }
 }
