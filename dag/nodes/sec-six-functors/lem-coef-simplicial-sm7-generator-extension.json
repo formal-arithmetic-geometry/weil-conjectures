@@ -265,5 +265,28 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-3f2c1d08d (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and every cited statement in full: boundary-collapse-test, which supplies the model-category and WFS lifting characterizations and completeness; tensor-cotensor, whose vertex Hom bijections give K-functoriality by Yoneda, which is elementary; and kan-quillen-right-proper, which gives monos as cofibrations, Kan fibrations as RLP against horns, and trivial fibrations as RLP against boundaries including n=0. I also read the new leaf lem-coef-parametrized-adjunction-corner-lifting against pinned Mathlib. ParametrizedAdjunction.lean has variables at lines 31-40 and hasLiftingProperty_iff at line 164. PullbackObjObj.lean has PushoutObjObj at 73-84 and PullbackObjObj at 332-344. P, Q, the corner maps and the equivalence match exactly with F=H, G=R, f1=i, f2=j, f3=p, so it is an exact leaf with only the stated pushout and pullback assumed. Step 1 instantiation (b,c,p) gives c□b and q_b(p) with the variance checked. Step 5 instantiation (c,b,p) gives the swapped-summand pushout and m(c,p). Steps 2-4 correctly use C = LLP(F∩W) and C∩W = LLP(F) with S^□=F∩W and T^□=F. There is no smallness or transfinite argument, so domain cofibrancy is indeed unneeded. Steps 6 and 7 prove both directions of the SM7 equivalence. Edge cases checked: b=∅→Δ⁰ reduces c□b to c and q_b(p) to p; identity arrows; empty S or T. The route stays inside unit sk-prop-sf-biduality-general plus the Mathlib leaf, with no tool uses and no SGA. The source is blueprint main-20261015 prop-coef-integral-exceptional-adjoint paragraph 2, as an agent-written prerequisite of the parent's Step 6, with HTT A.3.3.4 WANTED. rg duplicate search found no existing statement of the corner theorem; the two quasi-categorical candidates differ. The new node is not a clause of the item. Not a target, so the base-change morphism is not applicable. No fixes. Minor: the report mentions a citations.json that is not delivered."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c84851095",
+  "group": "Q35",
+  "result": "pass",
+  "note": "The commit has 3 files (module, node lean record, report); no statement_change, no new or dependency nodes. Clause by clause the Lean matches the node: the model-category convention is the boundary-collapse dependency's (limits/colimits of size max v w, w free; both functorial factorizations); hS: S.rlp = trivialFibrations and hT: T.rlp = fibrations are exact; the pushout product is pushout(parameterMap b A, tensorMap K c) -> tensor L B, and IsPushoutProduct fixes both legs so the map is unique and canonical (the tensor square commutes); hSprod covers cofibration and trivial-if-b-weak via the KQ realization-based weak equivalence; hTprod gives trivial cofibrations; the conclusion keeps 'c or b weak' and states a real two-way equivalence with the existing recorded SatisfiesSM7 (cornerMap is the real pullback.lift; J.rlp is a Kan fibration). No cofibrancy or smallness assumption. Edge cases checked: empty set into Delta0, identity arrows, empty S/T, independent universes u v w. Duplicate search: no named generator criterion or pushout-product predicate exists; SM7 is reused; no DAG path to or from nerve-localization, so no cycle. Gates: definitions have real content, the proof is sorry only, docstrings carry source/blueprint and all 7 steps, lean.statement is verbatim (once). Report: real Worker report plus the standard 2026-10-17 second-reading note. nt_compile.py --json: rc 0, no errors or warnings; #check matches the node signature. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialSM7GeneratorExtension",
+  "declaration": "CategoryTheory.simplicial_sm7_generator_extension",
+  "declarations": [
+   "CategoryTheory.SimplicialTensorCotensor.IsPushoutProduct",
+   "CategoryTheory.SimplicialTensorCotensor.SatisfiesPushoutProductAxiom",
+   "CategoryTheory.simplicial_sm7_generator_extension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialSM7GeneratorExtension.lean",
+  "statement": "theorem simplicial_sm7_generator_extension {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimitsOfSize.{max v w, max v w} M] [HasColimitsOfSize.{max v w, max v w} M] [HasFunctorialFactorization (cofibrations M) (trivialFibrations M)] [HasFunctorialFactorization (trivialCofibrations M) (fibrations M)] [SimplicialCategory M] (D : SimplicialTensorCotensor M) (S T : MorphismProperty M) (hS : S.rlp = trivialFibrations M) (hT : T.rlp = fibrations M) (hSprod : ∀ {A B : M} {K L : SSet.{v}} (s : A ⟶ B) (b : K ⟶ L), S s → Mono b → ∃ q : pushout (D.parameterMap b A) (D.tensorMap K s) ⟶ D.tensor L B, D.IsPushoutProduct s b q ∧ Cofibration q ∧ (SSet.Enhanced.IsWeakHomotopyEquivalence b → WeakEquivalence q)) (hTprod : ∀ {A B : M} {K L : SSet.{v}} (t : A ⟶ B) (b : K ⟶ L), T t → Mono b → ∃ q : pushout (D.parameterMap b A) (D.tensorMap K t) ⟶ D.tensor L B, D.IsPushoutProduct t b q ∧ trivialCofibrations M q) : D.SatisfiesPushoutProductAxiom ∧ (D.SatisfiesPushoutProductAxiom ↔ SimplicialModelLocalization.SatisfiesSM7 M)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
