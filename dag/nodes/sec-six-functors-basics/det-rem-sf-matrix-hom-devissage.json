@@ -484,5 +484,23 @@
   "group": "Q99",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-52d06585e (reviewer sub-agent of L); spot-checked: I read the whole delivery: the main-20261015 blueprint statement and proof, the unit, Stacks 08JI at its label, and the full statement (with any blueprint_update) of all 36 cited nodes. The statement matches the blueprint hypothesis by hypothesis: arbitrary finite commutative ell-primary A, separably closed k, nonseparated finite-type X, ordinary étale Dctf. The route is the blueprint's: dense open, local Hom, j_!/i_* identities, support triangle, induction, gluing. No SGA source, no pro-étale clause, no cycle. Steps 1, 3, 4 and 6–10 check out: the cd bound from lem-kun-0f10 feeds clause 2 of det-cor-sf-direct-image-ctf-open-tor (all module sheaves), the same ambient Ri^! appears in the support triangle and the Hom identity, K is in D^+ for the recollement, and Ri^!L is never assumed constructible. thm-sf-hom-ctf and lem-weil-verdier-preservation-strata are restricted special cases of this item, not duplicates. Repairs: (1) Step 5 (2502 chars) proved inline a sub-claim with its own hypotheses: Hom from an étale-locally split lisse sheaf into a flat constructible sheaf is flat and constructible. I made it the statement-only node lem-sfb-lisse-split-hom-flat-constructible, tested on E=0, E=A, E=A^t, empty U, varying idempotents and A=F_ell[x,y]/(x,y)^2, and checked that no existing node states it. Step 5 now cites it and keeps the 08JI/08JB local-to-global argument and the [a-e,b-c] degree check. lem-pc-finite-projective-internal-hom-evaluation and lem-sf-finite-projective-dual dropped out of proof_deps and tool_uses. (2) In Step 2, lem-weil-pbc-constructible-etale-set-pullback only gives constructibility of the underlying sheaf of sets; I added the A-module refinement (the Step 4 argument). The remaining 28 tool_uses are accepted. Every step is now under 2000 chars. The new node's Mathlib search is three greps with no hits; LeanSearch, Loogle and LeanFinder are unreachable from this machine and are recorded as unavailable.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15a7dd71a",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Statement matches node/blueprint clause by clause: IsSepClosed k, (ℓ:k)≠0 with ℓ prime, finite comm A:Type(u+1) with ∃n ℓ^n=0, X over Spec k with LocallyOfFiniteType+QuasiCompact (no separatedness), K L : DerivedCategoryModule A X with recorded isBoundedConstructible and ∃a≤b hasTorAmplitudeIn (all degree-0 module sheaves); conclusion is both clauses for Etale.derivedHom (ModuleCat A) X, the existing internal Hom of the recorded fixed-scalar encoding, already used by landed lem-weil-stratum-ambient-hom and thm-sf-hom-ctf (recorded derivedInternalHomOfUniverses lives on the SheafOfModules encoding). Edge cases (empty X, zero ring, K/L=0, singleton intervals, char 0, nonreduced/nonseparated X) and universes (project u/u+1 convention) fine. Commit only adds node lean field, module, report; lean.statement verbatim; 10 proof steps verbatim in docstring; sorry-only; source/blueprint docstrings; recorded proof-dep modules imported non-public, none invented; Worker report and Second reading by Q07 present. nt_compile.py --json on the snapshot: rc 0, no errors/warnings, module 2.9 s. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.EtaleInternalHomDevissage",
+  "declaration": "AlgebraicGeometry.Etale.isBoundedConstructible_finiteTor_derivedHom_by_devissage",
+  "file": "lean/Sheaf/SixFunctors/EtaleInternalHomDevissage.lean",
+  "statement": "theorem isBoundedConstructible_finiteTor_derivedHom_by_devissage (k : Type u) [Field k] [IsSepClosed k] (ℓ : ℕ) [Fact ℓ.Prime] (_hℓ : (ℓ : k) ≠ 0) (A : Type (u + 1)) [CommRing A] [Finite A] (_hA : ∃ n : ℕ, (ℓ : A) ^ n = 0) (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (K L : DerivedCategoryModule A X) (_hKc : DerivedCategory.isBoundedConstructible A X K) (_hKt : ∃ a b : ℤ, a ≤ b ∧ DerivedCategory.hasTorAmplitudeIn A X a b K) (_hLc : DerivedCategory.isBoundedConstructible A X L) (_hLt : ∃ a b : ℤ, a ≤ b ∧ DerivedCategory.hasTorAmplitudeIn A X a b L) : DerivedCategory.isBoundedConstructible A X (((derivedHom (ModuleCat.{u + 1} A) X).obj (op K)).obj L) ∧ ∃ a b : ℤ, a ≤ b ∧ DerivedCategory.hasTorAmplitudeIn A X a b (((derivedHom (ModuleCat.{u + 1} A) X).obj (op K)).obj L)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

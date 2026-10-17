@@ -30,7 +30,10 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-kan-quillen-model-right-proper-core"
+  "lem-coef-kan-quillen-model-right-proper-core",
+  "lem-coef-sharp-pullback-calculus",
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-ex-infinity-finite-products"
  ],
  "proof": [
   {
@@ -243,5 +246,30 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-0f5b198b5 (reviewer sub-agent of L); spot-checked: I read the mathematics in full. The cited source, Rezk's sharp-maps paper (Theorem 6.1, Propositions 2.2 and 2.7), is not archived and network access is blocked here, so I could not open it. The worker followed the sanctioned procedure: a WANTED line and proof_origin by agent. I verified everything directly instead. Item statement: true and unchanged; it is the realisation/Puppe descent theorem for a cartesian transformation. I tested it on Y_0 empty, constant diagrams, products with a fixed Kan fibre, EG->BG with discrete rows (gives G ~ ΩBG), and identity p. Step 1: a Kan fibration is sharp via the factorisation A->A'->Y_m, right properness and the homotopy-pullback model in lem-coef-kan-quillen-right-proper; elementary is acceptable. Step 2: exactly the new node's hypotheses. Step 3: v_n∘α=v_m makes the operators well defined, diag G = diagX ×_{diagY} T strictly, and G_0 = X_0 ×_{Y_0} T. Step 4: e=(X(α),p_n) is a weak equivalence. lem-coef-kan-pullback-fibration-invariance applies with comparisons (e,1,1): both f-legs are fibrations, commutativity holds, and P ×_{Y_n} T = G_m with the step-3 operator map. Step 5: the homotopically constant clause of lem-coef-bisimplicial-diagonal-equivalence, with the map induced by ι_X. Step 6: two-out-of-three for T=Y_0 and for T=Δ^0. proof_deps equals the union of the step uses; all cited nodes are in unit sk-prop-sf-biduality-general apart from a definition node; no cycle (127 reachable nodes checked); no tool_uses. New node lem-coef-rezk-diagonal-sharp: statement-only, self-contained, created and blueprint fields correct, four kinds of Mathlib search recorded. It is true (Rezk 6.1) and its sharpness hypothesis is genuine ({0}->Δ^1 is not sharp). It does not restate the item, which also needs steps 3-5. Duplicate search with rg over dag/nodes: lem-coef-space-geometric-descent (an infinity-categorical colimit statement), the universal-colimits, homotopy-pullback-invariance and Segal/Rezk-completion nodes are all different. Not a target node; no SGA; no coefficient category or base-change morphism involved. Minor: the report claims the item's created field was changed to ND, but the file correctly keeps Q04; no fix needed. No files changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f1fb552c7",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: Kan rows, Kan-fibration rows and homotopy-cartesian operator squares (IsHomotopyCartesian argument order checked against SharpPullbackCalculus.lean:41). The row-zero square uses the canonical maps (currying unit plus bisimplicialZerothRowIndex). The strict vertex fiber is the pullback along Δ[0]→Y₀. The homotopy fiber is the commaSubcomplex path model after Ex∞ replacement, so no Kan diagonal is assumed. The comparison and the naturality map are fixed by their coordinates through a monic inclusion. No extra hypotheses or universe restrictions. Edge cases covered: empty Y₀, empty fibers, identity p, degree 0. The three helpers carry real data; docstrings give source and blueprint; the proof is sorry only; lean.statement is verbatim; stmt_deps cover every declaration used; the report has the Worker report and Second reading by Q86 sections. nt_compile.py --json exited 0 with no diagnostics. Only non-blocking finding: cosmetic duplicate public/private imports of BisimplicialDiagonalEquivalence and SharpPullbackCalculus."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.EquifiberedBisimplicialDiagonal",
+  "declaration": "SSet.Enhanced.equifibered_bisimplicial_diagonal",
+  "file": "lean/Sheaf/AlgebraicTopology/EquifiberedBisimplicialDiagonal.lean",
+  "statement": "theorem equifibered_bisimplicial_diagonal (X Y : SimplexCategoryᵒᵖ ⥤ SSet.{u}) (p : X ⟶ Y) (hX : ∀ m : SimplexCategoryᵒᵖ, KanComplex (X.obj m)) (hY : ∀ m : SimplexCategoryᵒᵖ, KanComplex (Y.obj m)) (hF : ∀ m : SimplexCategoryᵒᵖ, Fibration (p.app m)) (hS : ∀ (m n : SimplexCategoryᵒᵖ) (a : m ⟶ n), IsHomotopyCartesian (X.map a) (p.app m) (p.app n) (Y.map a)) : IsHomotopyCartesian (equifiberedRowZeroInclusion X) (p.app (Opposite.op ⦋0⦌)) (Functor.whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) (Functor.uncurry.map p)) (equifiberedRowZeroInclusion Y) ∧ ∃ c : ∀ y : (Y.obj (Opposite.op ⦋0⦌)) _⦋0⦌, pullback (SSet.const (X := Δ[0]) y) (p.app (Opposite.op ⦋0⦌)) ⟶ (equifiberedDiagonalFiberAmbient p y).toSSet, (∀ y : (Y.obj (Opposite.op ⦋0⦌)) _⦋0⦌, c y ≫ (equifiberedDiagonalFiberAmbient p y).ι = equifiberedDiagonalFiberCoordinates p y ∧ IsWeakHomotopyEquivalence (c y)) ∧ ∀ (X' Y' : SimplexCategoryᵒᵖ ⥤ SSet.{u}) (p' : X' ⟶ Y') (a : X ⟶ X') (b : Y ⟶ Y') (comm : p ≫ b = a ≫ p') (y : (Y.obj (Opposite.op ⦋0⦌)) _⦋0⦌) (y' : (Y'.obj (Opposite.op ⦋0⦌)) _⦋0⦌) (hy : (b.app (Opposite.op ⦋0⦌)).app _ y = y') (c' : pullback (SSet.const (X := Δ[0]) y') (p'.app (Opposite.op ⦋0⦌)) ⟶ (equifiberedDiagonalFiberAmbient p' y').toSSet), c' ≫ (equifiberedDiagonalFiberAmbient p' y').ι = equifiberedDiagonalFiberCoordinates p' y' → ∃ h : (equifiberedDiagonalFiberAmbient p y).toSSet ⟶ (equifiberedDiagonalFiberAmbient p' y').toSSet, h ≫ (equifiberedDiagonalFiberAmbient p' y').ι = (equifiberedDiagonalFiberAmbient p y).ι ≫ (exInfinityFunctor.map (Functor.whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) (Functor.uncurry.map a)) ⊗ₘ (ihom Δ[1]).map (exInfinityFunctor.map (Functor.whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) (Functor.uncurry.map b)))) ∧ pullback.map (SSet.const (X := Δ[0]) y) (p.app (Opposite.op ⦋0⦌)) (SSet.const (X := Δ[0]) y') (p'.app (Opposite.op ⦋0⦌)) (𝟙 _) (a.app (Opposite.op ⦋0⦌)) (b.app (Opposite.op ⦋0⦌)) (by simp [hy]) (by simpa using congrArg (fun t ↦ t.app (Opposite.op ⦋0⦌)) comm) ≫ c' = c y ≫ h",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.equifiberedRowZeroInclusion",
+   "SSet.Enhanced.equifiberedDiagonalFiberAmbient",
+   "SSet.Enhanced.equifiberedDiagonalFiberCoordinates",
+   "SSet.Enhanced.equifibered_bisimplicial_diagonal"
+  ],
+  "note": "Second reading repaired the strict vertex fiber (the constant map has domain Δ[0]), transported the row restriction to actual X₀ by the currying unit, used the recorded Ex∞ functor and unit before taking the path fiber of a possibly non-Kan diagonal, and characterized the canonical comparison and its naturality by both ambient coordinates. Three helper definitions contain only real data. The mathematical node statement is unchanged."
  }
 }
