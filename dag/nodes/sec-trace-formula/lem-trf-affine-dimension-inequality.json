@@ -12,9 +12,87 @@
   "def-weil-pbc-finite-type-algebra",
   "def-kun-transcendence-degree"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the one-generator polynomial case let $P=R[T]$. The polynomial ring is a domain, is free (hence flat) as an $R$-module, and is finite type over $R$; therefore it is Noetherian. For $\\mathfrak q\\subset P$ over $\\mathfrak p$, the flat height formula gives $\\operatorname{ht}(\\mathfrak q)=\\operatorname{ht}(\\mathfrak p)+\\operatorname{ht}(\\bar{\\mathfrak q})$, where $\\bar{\\mathfrak q}$ is the corresponding prime of $(R/\\mathfrak p)[T]$. The algebraic transcendence degree $\\operatorname{trdeg}_R P$ is one: after passing to fraction fields, $\\operatorname{Frac}(P)=\\operatorname{Frac}(R)(T)$, while the fraction-field extensions over $R$ and over $P$ are algebraic, so the domain tower identity reduces $\\operatorname{trdeg}_R P$ to $\\operatorname{trdeg}_{\\operatorname{Frac}(R)}\\operatorname{Frac}(P)=1$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-domain",
+    "lem-weil-pbc-projective-module-flat",
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-flat-height-formula",
+    "lem-exc-domain-transcendence-degree-tower",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IJ, Case I: S=R[x], initial transcendence-degree assertion and flat base–fibre dimension formula."
+   }
+  },
+  {
+   "text": "Analyze the polynomial fibre. Put $D=R/\\mathfrak p$, $F=\\operatorname{Frac}(D)=\\kappa(\\mathfrak p)$, and localize $D[T]$ at $W=D\\setminus\\{0\\}$, which gives $F[T]$ ($D[T]$ is a domain and every element of $F[T]$ is a polynomial over $D$ divided by a common denominator in $W$). Since $\\mathfrak q\\cap R=\\mathfrak p$, the prime $\\bar{\\mathfrak q}$ and every prime of $D[T]$ contained in it meet $D$ only in $0$, hence are disjoint from $W$, and the inclusion-preserving bijection of the localization statement matches the chains of primes below $\\bar{\\mathfrak q}$ with those below its image; so the localization-prime and residue-field isomorphism identifies $\\bar{\\mathfrak q}$ with a prime $Q$ of $F[T]$, preserves the height of the prime interval below $\\bar{\\mathfrak q}$, and identifies $\\kappa(\\mathfrak q)$ with $\\kappa(Q)$. If $Q=0$, then $\\operatorname{ht}(Q)=0$ and $\\kappa(Q)=F(T)$, so the residue transcendence degree is $1$. If $Q\\ne0$, the PID statement for $F[T]$ makes $Q$ maximal, hence $\\operatorname{ht}(Q)=1$; writing $\\theta$ for the image of $T$, the quotient field $F(\\theta)$ is a finite algebraic extension by the simple-algebraic power-basis theorem, so its transcendence degree over $F$ is $0$. Thus in both cases $\\operatorname{ht}(\\bar{\\mathfrak q})+\\operatorname{trdeg}_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q)=1$. Substitution into the flat height formula proves the desired inequality, in fact equality, for $P=R[T]$.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-pur-polynomial-field-pid",
+    "lem-weil-pbc-simple-algebraic-extension-power-basis",
+    "lem-weil-pbc-flat-height-formula",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IJ, Case I: localization to κ(p)[T], the two prime cases, and the residue-field computation."
+   }
+  },
+  {
+   "text": "For the one-generator quotient case write $S=P/(\\mathfrak n)$, where $\\mathfrak n$ is a nonzero prime of $P$ and $T$ maps to $\\theta$. Since $P$ and $S$ are domains and $\\mathfrak n\\cap R=0$, a nonzero polynomial in $\\mathfrak n$ gives a nontrivial algebraic relation for $\\theta$ over $\\operatorname{Frac}(R)$. The power-basis theorem then makes $\\operatorname{Frac}(R)(\\theta)=\\operatorname{Frac}(S)$ (the smallest subfield of $\\operatorname{Frac}(S)$ containing $\\operatorname{Frac}(R)$ and $\\theta$, since $S=R[\\theta]$) a finite extension of $\\operatorname{Frac}(R)$, of degree $d$ say. For $s\\in S$ the $d+1$ elements $1,s,\\ldots,s^d$ are linearly dependent over $\\operatorname{Frac}(R)$, so $g(s)=0$ for a nonzero $g\\in\\operatorname{Frac}(R)[Y]$; multiplying $g$ by the product $c\\in R\\setminus\\{0\\}$ of the denominators of its coefficients gives a nonzero $cg\\in R[Y]$ with $(cg)(s)=0$. Thus no element of $S$ is algebraically independent over $R$, and $\\operatorname{trdeg}_R S=0$ by the definition of transcendence degree. For $\\mathfrak q\\subset S$ let $\\mathfrak q\\prime$ be its inverse image in $P$. Quotienting identifies $\\kappa(\\mathfrak q\\prime)$ with $\\kappa(\\mathfrak q)$. Prime chains below $\\mathfrak q$ correspond to chains from $\\mathfrak n$ to $\\mathfrak q\\prime$; because $P$ is a domain and $\\mathfrak n$ is nonzero, $0\\subsetneq\\mathfrak n$, so adjoining $0$ at the bottom shows $\\operatorname{ht}(\\mathfrak q)+1\\le\\operatorname{ht}(\\mathfrak q\\prime)$. Apply the polynomial result of Steps 1–2 to $\\mathfrak q\\prime$: $\\operatorname{ht}(\\mathfrak q\\prime)+\\operatorname{trdeg}_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q)=\\operatorname{ht}(\\mathfrak p)+1$. Comparing these inequalities (with the finite and infinite-height cases interpreted in the extended natural order) gives $\\operatorname{ht}(\\mathfrak q)\\le\\operatorname{ht}(\\mathfrak p)-\\operatorname{trdeg}_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q)$, which is the target because $\\operatorname{trdeg}_R S=0$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-domain",
+    "lem-weil-pbc-simple-algebraic-extension-power-basis",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IJ, Case II: nonzero prime kernel, algebraicity, quotient prime, and height drop."
+   }
+  },
+  {
+   "text": "Finally induct on $n\\ge0$ for the claim: for every inclusion of domains $R\\subseteq S$ with $R$ Noetherian and $S$ generated as an $R$-algebra by $n$ elements $x_1,\\ldots,x_n$ (such a list exists by the finite-type definition), and all primes $\\mathfrak q\\subset S$, $\\mathfrak p=\\mathfrak q\\cap R$, the displayed inequality holds. The one-generator case is Steps 1–3: if $S=R[x_1]$, the kernel $\\mathfrak n$ of $R[T]\\to S$, $T\\mapsto x_1$, is prime because $S$ is a domain; if $\\mathfrak n=0$ then $S\\cong R[T]$ and Steps 1–2 apply, otherwise Step 3 applies. For zero generators $S=R$, the primes and residue fields agree and all relevant transcendence degrees are zero. For $n>0$, set $A=R[x_1,\\ldots,x_{n-1}]\\subseteq S$ and $\\mathfrak r=\\mathfrak q\\cap A$. The intermediate ring $A$ is a domain as a subring of $S$ and is Noetherian by finite-type Noetherianity. Apply the induction hypothesis to $R\\subseteq A$ and the one-generator estimate of Steps 1–3 to $A\\subseteq S$. Add the two inequalities. The residue fields form the tower $\\kappa(\\mathfrak p)\\subseteq\\kappa(\\mathfrak r)\\subseteq\\kappa(\\mathfrak q)$, so the field tower identity adds the residue transcendence degrees; the domain tower identity adds $\\operatorname{trdeg}_R A$ and $\\operatorname{trdeg}_A S$ to $\\operatorname{trdeg}_R S$. Cancelling the intermediate height and collecting terms yields the displayed inequality.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-kun-transcendence-degree-tower",
+    "lem-exc-domain-transcendence-degree-tower",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02IJ, opening paragraph and conclusion: induction on the number of algebra generators."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-exc-domain-transcendence-degree-tower",
+  "lem-kun-transcendence-degree-tower",
+  "lem-pur-polynomial-field-pid",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-weil-pbc-simple-algebraic-extension-power-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02IJ, algebra-lemma-dimension-formula: induction on generators, Case I polynomial algebra, and Case II quotient by a nonzero prime."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,7 +124,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-dimension-formula",
@@ -58,7 +136,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "the dimension-formula input used to bound local chains in the proof of the item",
+   "place": "the dimension-formula input used to bound local chains in the proof of lem-trf-local-term-locality; affine reduction to Tag 02IJ",
    "via": [
     "lem-trf-local-dimension-formula",
     "lem-trf-closed-dominant-dimension",
@@ -71,5 +149,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-affine-dimension-inequality",
+  "worker": "stage1",
+  "summary": "Read Stacks Algebra Tag 02IJ and the exact item/source context. No finished Lean declaration states this inequality, and the Mathlib searches found only weaker height bounds and transcendence-degree finiteness. The proof is split along the source: finite-generator induction; the polynomial one-generator case via flat height decomposition and the two polynomial-fibre prime cases; and the quotient one-generator case via algebraicity and the one-step height drop from a nonzero prime kernel. I created no new nodes because every non-elementary cited input already exists in the DAG; the prime-chain height drop and tower substitutions are written out as elementary consequences of the cited statements. Edge cases R=S, a field base, q=0, and a nonzero algebraic quotient were checked.",
+  "blueprint": "Realizes the ancestor proof input “the dimension-formula input used to bound local chains” by the complete Tag 02IJ affine algebra argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-b56846233",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-b56846233 (reviewer sub-agent of L); spot-checked: I read the item, the parent lem-trf-local-dimension-formula's use of it, and the statement of each of the 11 cited nodes, all checked against Stacks algebra.tex Lemma lemma-dimension-formula (Tag 02IJ): statement and full proof. The statement matches 02IJ's inequality clause hypothesis for hypothesis and is not weakened; the universally-catenary equality is the separate node lem-exc-dimension-formula-universally-catenary-finite-type-domain. Small cases checked: R=S; k to k[T] at 0 and (T); Z to Z[i] at (1+i); Z_(p)[T] at (p,T) and (p); Z_(p)[1/p] at 0. Step 1: polynomial domain, free hence flat, finite type hence Noetherian, then the 00ON flat height formula; trdeg_R R[T]=1 from the domain tower. Step 2: localizing D[T] at D minus 0 keeps heights because every prime below q-bar meets D in 0; the PID and power-basis nodes give the cases Q=0 and Q nonzero, with sum 1 in both. Step 3: n meets R in 0, so theta is algebraic; ht(q)+1 <= ht(q') by putting 0 below n, an elementary replacement for 'one-equation'. Step 4: induction through A=R[x_1..x_{n-1}], which is a Noetherian domain; field and domain towers; ht(r) is finite and cancels. Route: the only non-leaf cited statement, lem-weil-pbc-localization-prime-residue-field-iso (unit sk-thm-p1), is on the transitive route of sk-i-curve-zero, so no tool use is needed and none is accepted. No SGA source. No duplicate after rg for 02IJ, trdeg_R S and 'dimension formula'. Not in Mathlib. Fixes, in fixes/dag/nodes/sec-trace-formula/lem-trf-affine-dimension-inequality.json: (1) B4: the escapes \\bar, \\ne and \\theta in the proof JSON had been decoded as backspace, newline and tab, and are restored as TeX; (2) E5: Step 3's 'clearing denominators' is written out; (3) D4: Step 4 states the inductive claim and the kernel-zero / kernel-nonzero dichotomy for one generator; (4) Step 2 states why localization keeps the height. Uses, proof_deps and all other fields are unchanged. No new nodes, no drops.; 1 file(s) fixed by the reviewer"
  }
 }
