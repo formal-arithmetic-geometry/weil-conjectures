@@ -10,7 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import WeilConjectures.AlgebraicGeometry.GmPicardPullback
+import WeilConjectures.AlgebraicGeometry.Sites.GmPicardPullback
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
 import WeilConjectures.AlgebraicGeometry.Curve.AffinePicardTorsionBaseChange
 import WeilConjectures.AlgebraicGeometry.BaseChangeCurve
 import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
@@ -32,6 +33,102 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 namespace AlgebraicGeometry
 
 set_option autoImplicit false
+
+namespace Scheme
+
+open Opposite
+
+private theorem terminal_naturality.{v, w}
+    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
+    [HasSheafify J AddCommGrpCat.{w}] [HasExt (Sheaf J AddCommGrpCat.{w})]
+    (F : Sheaf J AddCommGrpCat.{w}) {T S : C}
+    (hT : Limits.IsTerminal T) (hS : Limits.IsTerminal S) (x : Sheaf.H F 0) :
+    F.obj.map (hT.from S).op (Sheaf.H.equiv₀ F hT x) = Sheaf.H.equiv₀ F hS x := by
+  let φ := (sheafificationAdjunction J AddCommGrpCat.{w}).homEquiv _ F
+    (Abelian.Ext.addEquiv₀ x)
+  change F.obj.map (hT.from S).op (φ.app (op T) (ULift.up (1 : ℤ))) =
+    φ.app (op S) (ULift.up (1 : ℤ))
+  exact (ConcreteCategory.congr_hom (φ.naturality (hT.from S).op)
+    (ULift.up (1 : ℤ))).symm
+
+
+private theorem gm_units_cohomology_pullback (X Y : Scheme.{u}) (u : Y ⟶ X) (a : Γ(X, ⊤)ˣ) :
+    Sheaf.H.equiv₀ Y.gmSheaf (MorphismProperty.Over.mkIdTerminal @Etale Y)
+      (Sheaf.H.map (upperStarGmSheafToGmSheaf u) 0
+        (Etale.cohomologyMap u X.gmSheaf 0
+          ((Sheaf.H.equiv₀ X.gmSheaf
+            (MorphismProperty.Over.mkIdTerminal @Etale X)).symm
+              (ULift.up (Additive.ofMul a))))) =
+      ULift.up (Additive.ofMul (Units.map u.appTop.hom.toMonoidHom a)) := by
+  let hX := MorphismProperty.Over.mkIdTerminal @Etale X
+  let hY := MorphismProperty.Over.mkIdTerminal @Etale Y
+  let b := X.gmSheaf.obj.map (hX.from (⊤_ X.Etale)).op (ULift.up (Additive.ofMul a))
+  let e := Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}
+    Limits.terminalIsTerminal
+  let g := e.inv.app X.gmSheaf b
+  have hb : (Sheaf.H.equiv₀ X.gmSheaf Limits.terminalIsTerminal).symm b =
+      (Sheaf.H.equiv₀ X.gmSheaf hX).symm (ULift.up (Additive.ofMul a)) := by
+    apply (Sheaf.H.equiv₀ X.gmSheaf Limits.terminalIsTerminal).injective
+    rw [AddEquiv.apply_symm_apply, ← terminal_naturality X.gmSheaf hX]
+    rw [AddEquiv.apply_symm_apply]
+  have h := Etale.cohomologyMap_zero_eq_globalSectionsUpperStarMap u X.gmSheaf g
+  simp only [g, e, ← ConcreteCategory.comp_apply, Iso.inv_hom_id_app,
+    ConcreteCategory.id_apply] at h
+  rw [← hb, h, Sheaf.H.equiv₀_symm_naturality]
+  rw [← terminal_naturality Y.gmSheaf Limits.terminalIsTerminal hY]
+  rw [AddEquiv.apply_symm_apply]
+  simp only [Etale.globalSectionsUpperStarMap, ConcreteCategory.comp_apply]
+  simp only [← ConcreteCategory.comp_apply, Iso.inv_hom_id_app,
+    ConcreteCategory.id_apply]
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  let c := upperStarGmSheafToGmSheaf u
+  let η := (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} u).unit
+  let U := (Etale.upperStar AddCommGrpCat.{u + 1} u).obj X.gmSheaf
+  change Y.gmSheaf.obj.map (Limits.terminalIsTerminal.from (Etale.mk (𝟙 Y))).op
+    (c.hom.app (op (⊤_ Y.Etale))
+      (U.obj.map (Limits.PreservesTerminal.iso u.Etale).inv.op
+        ((η.app X.gmSheaf).hom.app (op (⊤_ X.Etale)) b))) = _
+  rw [NatTrans.naturality_apply c.hom]
+  have hu := (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} u).homEquiv
+    X.gmSheaf Y.gmSheaf |>.apply_symm_apply (gmSheafToLowerStarGmSheaf u)
+  change η.app X.gmSheaf ≫ (Etale.lowerStar AddCommGrpCat.{u + 1} u).map c =
+    gmSheafToLowerStarGmSheaf u at hu
+  have huv := ConcreteCategory.congr_hom
+    (congrArg (fun f ↦ f.hom.app (op (⊤_ X.Etale))) hu) b
+  change c.hom.app _ ((η.app X.gmSheaf).hom.app _ b) =
+    (gmSheafToLowerStarGmSheaf u).hom.app _ b at huv
+  erw [huv]
+  dsimp only [b]
+  rw [NatTrans.naturality_apply (gmSheafToLowerStarGmSheaf u).hom]
+  let p := MorphismProperty.Over.pullback @Etale ⊤ u
+  let m : Etale.mk (𝟙 Y) ⟶ p.obj (Etale.mk (𝟙 X)) :=
+    Limits.terminalIsTerminal.from (Etale.mk (𝟙 Y)) ≫
+      (Limits.PreservesTerminal.iso u.Etale).inv ≫ p.map (hX.from (⊤_ X.Etale))
+  change Y.gmSheaf.obj.map (Limits.terminalIsTerminal.from (Etale.mk (𝟙 Y))).op
+    (Y.gmSheaf.obj.map (Limits.PreservesTerminal.iso u.Etale).inv.op
+      (Y.gmSheaf.obj.map (p.map (hX.from (⊤_ X.Etale))).op
+        ((gmSheafToLowerStarGmSheaf u).hom.app (op (Etale.mk (𝟙 X)))
+          (ULift.up (Additive.ofMul a))))) = _
+  erw [← ConcreteCategory.comp_apply, ← Functor.map_comp,
+    ← ConcreteCategory.comp_apply, ← Functor.map_comp]
+  change Y.gmSheaf.obj.map m.op
+    ((gmSheafToLowerStarGmSheaf u).hom.app (op (Etale.mk (𝟙 X)))
+      (ULift.up (Additive.ofMul a))) = _
+  have hm : m.left ≫ Limits.pullback.fst (𝟙 X) u = u := by
+    have hf : Limits.pullback.fst (𝟙 X) u = Limits.pullback.snd (𝟙 X) u ≫ u := by
+      simpa using (Limits.pullback.condition (f := 𝟙 X) (g := u))
+    rw [hf, ← Category.assoc]
+    have hw : m.left ≫ Limits.pullback.snd (𝟙 X) u = 𝟙 Y := m.w
+    erw [hw, Category.id_comp]
+  apply ULift.ext
+  apply Additive.toMul.injective
+  apply Units.ext
+  change m.left.appTop ((Limits.pullback.fst (𝟙 X) u).appTop (a : Γ(X, ⊤))) =
+    u.appTop (a : Γ(X, ⊤))
+  erw [← ConcreteCategory.comp_apply, ← Scheme.Hom.comp_appTop, hm]
+  rfl
+
+end Scheme
 
 private theorem kummer_comparison (C P : Scheme.{u}) (π : P ⟶ C) (n : ℕ) :
     ∃ φ : ((Etale.upperStar AddCommGrpCat.{u + 1} π).mapShortComplex.obj
@@ -149,7 +246,7 @@ theorem kummer_base_change_compatibility
   have : IsCurve g := { krullDim_le_one := hdim }
   have : IsCurve (C ↘ Spec (.of k)) := inferInstanceAs (IsCurve f)
   have : IsCurve (P ↘ Spec (.of k')) := inferInstanceAs (IsCurve g)
-  obtain ⟨hPic, hUnits⟩ := Scheme.picard_cohomology_pullback k k' C P π
+  have hUnits := Scheme.gm_units_cohomology_pullback C P π
   refine ⟨hC, hP, φ, h₂, h₃, ?_, ?_, ?_, ?_, ?_, ?_⟩
   · intro q x
     erw [hδ']
@@ -167,16 +264,7 @@ theorem kummer_base_change_compatibility
         congrArg (fun a => Sheaf.H.map a q
           (Etale.cohomologyMap π C.gmSheaf q x)) φ.comm₂₃.symm)
   · intro L
-    let M := (fromSkeleton C.Modules).obj L.val
-    obtain ⟨hM, hMpic⟩ := hPic M
-    have : ((Modules.tensorPullback π).obj M).IsInvertible := hM
-    obtain ⟨adj⟩ := Modules.nonempty_tensorPullbackAdjunction π
-    let e := (Adjunction.leftAdjointUniq (Modules.pullbackPushforwardAdjunction π) adj).app M
-    have he : Pic.map π L = Pic.ofIsInvertible ((Modules.tensorPullback π).obj M) := by
-      apply (Pic.eq_ofIsInvertible_iff _ _).2
-      exact ⟨fromSkeletonToSkeletonIso _ ≪≫ e⟩
-    rw [he]
-    simpa only [M, Pic.ofIsInvertible_fromSkeleton] using hMpic.symm
+    exact (Scheme.gmCohomologyMap_toCohomologicalPicardGroup π L).symm
   · exact hUnits
   · intro hAff
     let : IsAffine C := hAff
