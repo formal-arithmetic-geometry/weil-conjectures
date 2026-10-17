@@ -61,13 +61,7 @@ theorem grothendieckDevissage_secondAdicSystem_core
       IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2
         (cokernel (α.hom.app (op n)))))
     (θ : formalCompletionSystem K H.obj ⋙ formalCompletionFunctor I ≅
-      (formalCompletionSystem I H.obj ⋙ formalCompletionFunctor K).flip)
-    (hθ : ∀ e n : ℕ,
-        formalModuleQuotientπ K (e + 1) H.obj ≫
-          formalModuleQuotientπ I (n + 1) (formalModuleQuotient K (e + 1) H.obj) ≫
-          (θ.hom.app (op e)).app (op n) =
-        formalModuleQuotientπ I (n + 1) H.obj ≫
-          formalModuleQuotientπ K (e + 1) (formalModuleQuotient I (n + 1) H.obj)) :
+      (formalCompletionSystem I H.obj ⋙ formalCompletionFunctor K).flip) :
     ∃ (N : CoherentFormalModule X K) (δ : N ⟶ (completion X K).obj H)
       (σ : N.obj ⋙ formalCompletionFunctor I ≅
         (M.obj ⋙ formalCompletionFunctor K).flip),
@@ -82,7 +76,7 @@ theorem grothendieckDevissage_secondAdicSystem_core
         IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2
           (cokernel (δ.hom.app (op e))))) := by
   obtain ⟨N, δ, σ, hsquare⟩ :=
-    grothendieckDevissage_secondAdicSystem_lift I K M hthick H α θ hθ
+    grothendieckDevissage_secondAdicSystem_lift I K M hthick H α θ
   obtain ⟨t, ht, hα⟩ := htorsion
   refine ⟨N, δ, σ, hsquare, 4 * t, ?_, ?_⟩
   · omega

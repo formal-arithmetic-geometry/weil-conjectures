@@ -109,14 +109,14 @@ theorem supported_open_pushforward (X : Scheme.{u}) (U : X.Opens)
     · exact Or.inl (hTU hx)
     · exact Or.inr hx
   obtain ⟨hunit, hcanonical⟩ :=
-    supported_open_pushforward_local_comparisons X U T hT hTU V rfl
+    supported_open_pushforward_local_comparisons X U T hT V rfl
   refine ⟨supported_open_pushforward_perfect X U T hT hTU, ?_, ?_⟩
   · intro adj E hE
     exact derived_restriction_isIso_open_cover X U V hcover (adj.unit.app E)
       (hunit adj E hE U (Or.inl rfl)) (hunit adj E hE V (Or.inr rfl))
   · intro adj S adjS F hF hsupport φ hφ
     exact derived_restriction_isIso_open_cover X U V hcover φ
-      (hcanonical adj S adjS F hF hsupport φ hφ U (Or.inl rfl))
-      (hcanonical adj S adjS F hF hsupport φ hφ V (Or.inr rfl))
+      (hcanonical adj S adjS F hsupport φ hφ U (Or.inl rfl))
+      (hcanonical adj S adjS F hsupport φ hφ V (Or.inr rfl))
 
 end AlgebraicGeometry.Scheme
