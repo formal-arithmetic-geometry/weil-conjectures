@@ -2,7 +2,7 @@
  "id": "lem-coef-two-sided-bar-regular-word-identification",
  "kind": "statement",
  "title": "Regular-word identification after forgetting the external action",
- "statement": "Use quasicategories and coherent diagrams as in [def-cbc-enhanced-diagrams-cones], monoidal infinity-categories as in [def-coef-monoidal-infinity-category], and the planar operad $\\mathsf{Chain}_2$ and its operator category as in [lem-coef-composable-bimodule-operad-segal]. Let $\\mathcal V$ act coherently on $\\mathcal M$, let $A$ be an associative unital algebra of $\\mathcal V$, and let $Q$ be a coherent left $A$-module of $\\mathcal M$. Let $F$ be the regular operadic lift encoding the $(A,A)$-bimodule $A$ and the module $Q$: its restriction to $\\mathsf{BM}_{01}$ is the algebra $A$ composed with the map of planar operads $\\mathsf{BM}_{01}\\to\\mathsf{Ass}_1$ sending $a_0,p,a_1$ to $a_1$ and each operation to the unique operation of the same arity (so both actions on $p$ are multiplication, with all unit and associativity coherences), and its restriction to $\\mathsf{BM}_{12}$ encodes $Q$. Let $R$ be the category with objects $pa_1^nq$ for $n\\geq0$ and all endpoint-preserving block operators retaining $p$ and $q$. Let $W$ be the category with objects $a_1^kq$ for $k\\geq0$ and all endpoint-preserving block operators retaining $q$. Relabelling $p$ as $a_1$ defines a functor $r:R\\to W$. Evaluate both restrictions of $F$ by total-contraction cocartesian transport of [lem-coef-infinity-pointwise-cocartesian-transport] in the underlying category $\\mathcal M$; denote the resulting diagrams by $Y:N(R)\\to\\mathcal M$ and $X:N(W)\\to\\mathcal M$. There is a coherent equivalence $Y\\simeq X\\circ N(r)$, with components identifying $A\\otimes A^{\\otimes n}\\otimes U_AQ$ with $A^{\\otimes(n+1)}\\otimes U_AQ$, compatible with every string of operators in $R$. The diagram $X$ is defined on all of $N(W)$, including the leading-unit arrows $a_1^kq\\to a_1^{k+1}q$ whose first output block is empty; these arrows are not in the image of $r$. These comparisons are in $\\mathcal M$ after forgetting the external left action and assert no $A$-linearity of a leading-unit insertion. No colimits are assumed.",
+ "statement": "Use the quasicategory, universe, nerve and coherent-functor conventions of [def-cbc-enhanced-diagrams-cones], monoidal infinity-categories of [def-coef-monoidal-infinity-category], and the planar operad $\\mathsf{Chain}_2$ and operator categories of [lem-coef-composable-bimodule-operad-segal]. Let $\\mathcal V$ act coherently on $\\mathcal M$, let $A$ be an associative unital algebra in $\\mathcal V$, and let $Q$ be a coherent left $A$-module in $\\mathcal M$; $U_AQ$ denotes its underlying object, forgetting its action.\n\nSpecify the action-valued target as follows. Let $\\mathsf{BM}$ be the planar operad with colours $v,m,t$ and singleton operation sets exactly for $v^r\\to v$, $t^s\\to t$, and $v^rmt^s\\to m$ ($r,s\\geq0$). Its operator category uses the same ordered-block convention as $\\mathsf{Chain}_2^\\otimes$. Represent the coherent action by its action operad $\\pi:\\mathcal E^\\otimes\\to N(\\mathsf{BM}^\\otimes)$, a cocartesian fibration of nonsymmetric infinity operads: the colour fibers are $\\mathcal V,\\mathcal M,*$, a list has the product of its colour fibers, and transport along a block is the corresponding iterated tensor or action, ignoring terminal right factors, with the given coherent associativity and units. Thus $\\mathcal E_m=\\mathcal M$. The map $g:N(\\mathsf{Chain}_2^\\otimes)\\to N(\\mathsf{BM}^\\otimes)$ sends $a_0,a_1,p$ to $v$, $q$ to $m$ and $a_2$ to $t$, and sends each allowed operation to the unique operation with those colours.\n\nLet $F:N(\\mathsf{Chain}_2^\\otimes)\\to\\mathcal E^\\otimes$ be an inert-preserving algebra lift over $g$, equipped with the coherent identification $\\pi F\\simeq g$ (a lift in the relative infinity-category of the cited Segal statement). Its values on $a_0,a_1,p,q,a_2$ are respectively $A,A,A,U_AQ,*$. Its $\\mathsf{BM}_{01}$ restriction is coherently the pullback of the algebra $A$ along $c:\\mathsf{BM}_{01}\\to\\mathsf{Ass}_1$, which sends $a_0,p,a_1$ to $a_1$ and each operation to the unique operation of the same arity; its $\\mathsf{BM}_{12}$ restriction encodes $Q$ and the terminal right action. These identifications agree on the shared algebra at $a_1$. This is the regularity hypothesis, including both multiplication actions and all coherences.\n\nA block operator from a word $L$ of length $\\ell$ to $L'$ of length $\\ell'$ is the operator over the opposite of a monotone map $h:[\\ell']\\to[\\ell]$, whose $j$th output is an allowed operation on the consecutive input positions $h(j-1)+1,\\ldots,h(j)$. It preserves exterior endpoints if $h(0)=0$ and $h(\\ell')=\\ell$. Define $R$ to have words $pa_1^nq$ ($n\\geq0$) and these endpoint-preserving operators with the input $p$ in the output $p$ block and the input $q$ in the output $q$ block. Define $W$ similarly with words $a_1^kq$ ($k\\geq0$), retaining the input $q$ in the final output block. Composition is ordered block substitution. Relabelling $p$ as $a_1$ defines $r:R\\to W$.\n\nFor either word category $C$, write $b_C=g|_{N(C)}$. Total contraction is the coherent transformation $\\beta_C:b_C\\to\\operatorname{const}(m)$ given at each word by the single $\\mathsf{BM}$ operation contracting all its entries. Evaluate $F|_{N(C)}$ by cocartesian transport along the composite $\\pi F|_{N(C)}\\simeq b_C\\xrightarrow{\\beta_C}\\operatorname{const}(m)$, as in [lem-coef-infinity-pointwise-cocartesian-transport]. Write $Y:N(R)\\to\\mathcal M$ and $X:N(W)\\to\\mathcal M$ for the resulting diagrams. There is a coherent equivalence $Y\\simeq X\\circ N(r)$, with components identifying $A\\otimes A^{\\otimes n}\\otimes U_AQ$ with $A^{\\otimes(n+1)}\\otimes U_AQ$, compatible with every string of operators in $R$. The diagram $X$ is defined on all of $N(W)$, including the leading-unit arrows $a_1^kq\\to a_1^{k+1}q$ over $h:[k+2]\\to[k+1]$ with $h(0)=h(1)=0$, $h(j)=j-1$ for $j\\geq2$; these have empty first output block and are not in the image of $r$. The comparison is in $\\mathcal M$ after forgetting the external left action and asserts no $A$-linearity of a leading-unit insertion. No colimits are assumed.",
  "source": {
   "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
   "place": "Higher Algebra, Construction 4.4.2.7 and the ordered operator convention of Construction 4.2.2.6. Agent-written supporting formulation extracted from the returned proof; read online; WANTED: archived source in literature/. No Stacks tag states the infinity-operadic result."
@@ -13,9 +13,110 @@
   "lem-coef-composable-bimodule-operad-segal",
   "lem-coef-infinity-pointwise-cocartesian-transport"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Define an endomorphism $\\rho$ of $\\mathsf{Chain}_2$ by $\\rho(a_0)=\\rho(p)=a_1$, fixing $a_1,q,a_2$, and sending every allowed operation to the unique operation of its relabelled type. The $a_0$ operations become $a_1$ operations, $a_0^u p a_1^v\\to p$ becomes $a_1^{u+1+v}\\to a_1$, and the $q$ and $a_2$ operations are fixed. These are all allowed types, including nullary algebra operations. Substitution and identities are preserved because every relevant operation set is a singleton. On operator categories $\\rho$ leaves interval maps unchanged, so preserves inert maps, and $g\\circ N(\\rho^\\otimes)=g$. On $R$ this functor has image in $W$ and is precisely $r$: its first output block contains the first input $a_1$, and its final block contains $q$. Thus $r$ preserves identities and composites. No inverse of $r$ is asserted.",
+   "uses": [
+    "lem-coef-composable-bimodule-operad-segal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.2.2.6; ordered operations of the cited planar Segal lemma; elementary relabelling."
+   }
+  },
+  {
+   "text": "Put $F'=F\\circ N(\\rho^\\otimes)$, with its induced coherent base identification over $g$. On $\\mathsf{BM}_{12}$, $F'=F$ since $\\rho$ is the identity there. On $\\mathsf{BM}_{01}$, $\\rho$ factors as $c$ followed by $\\mathsf{Ass}_1\\hookrightarrow\\mathsf{Chain}_2$; hence $F'$ restricts to $A\\circ c$. The regularity hypothesis supplies a coherent equivalence from $F|_{\\mathsf{BM}_{01}}$ to this restriction, agreeing with the identity on the shared $A$. Together with the identity on $\\mathsf{BM}_{12}$ it is an equivalence between the two restriction triples, including their gluing and base identifications. Apply the relative Segal restriction equivalence over the fixed $g$, with target $\\mathcal E^\\otimes\\to N(\\mathsf{BM}^\\otimes)$. A quasi-inverse to that equivalence carries this equivalence of triples to an equivalence $\\epsilon:F\\simeq F'$ of algebra lifts over $g$. In particular its inverse and the two inverse homotopies are coherent transformations over $g$. This uses regularity as an identification of entire operadic lifts, rather than only equality of multiplication maps.",
+   "uses": [
+    "lem-coef-composable-bimodule-operad-segal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 4.4.1.11 and the relative algebra-lift formulation of the cited node; agent specialization by rho."
+   }
+  },
+  {
+   "text": "Let $K=N(R)$, $D=F|_K$ and $D'=F|_{N(W)}\\circ N(r)$. Restriction of $\\epsilon$ gives $e:D\\simeq D'$ over the common base $b=b_R=b_W\\circ N(r)$. Write $\\delta:\\pi D\\simeq b$ and $\\delta':\\pi D'\\simeq b$ for the base identifications; being over $b$ includes the homotopy $\\delta'\\circ\\pi e\\simeq\\delta$. Total contractions are natural: substituting any endpoint-preserving operator into the final contraction gives the unique operation on the entire input word. Relabelling does not change its image in $\\mathsf{BM}$, so $\\beta_R=\\beta_W\\circ N(r)$. Consequently, for $G=\\operatorname{const}(m)$ and $\\gamma=\\beta_R\\delta$, $\\gamma'=\\beta_R\\delta'$, the equivalence $e$ includes the homotopy $\\gamma'\\circ\\pi e\\simeq\\gamma$. All these are transformations of whole $K$-diagrams by restriction of the corresponding simplicial maps.",
+   "uses": [
+    "lem-coef-composable-bimodule-operad-segal",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.4.2.7, total-contraction transformation; elementary restriction of the relative Segal comparison."
+   }
+  },
+  {
+   "text": "Apply pointwise cocartesian transport to $\\pi$, first with $N(W)$ and its total-contraction transformation, then with $K$ and $\\gamma$. The categories $R,W$ are small (finite words and finite monotone maps), and $\\pi$ has quasicategorical source and target and cocartesian lifts by the action-target hypothesis. We obtain $\\lambda_W:F|_{N(W)}\\to X$ and $\\lambda:D\\to Y$ with cocartesian vertex components and target over $m$. The constant-base fibers are respectively $\\operatorname{Fun}(N(W),\\mathcal M)$ and $\\operatorname{Fun}(K,\\mathcal M)$. The product-of-colour-fibers description and the specified total-contraction transport identify their values as $X(a_1^kq)\\simeq A^{\\otimes k}\\otimes U_AQ$ and $Y(pa_1^nq)\\simeq A\\otimes A^{\\otimes n}\\otimes U_AQ$. Iterated tensor/action is interpreted using its given associativity and unit equivalences, as in the monoidal Segal convention; $A^{\\otimes0}$ contributes the unit.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.4.2.7; action-valued Example 4.4.2.12 and the stated tensor convention."
+   }
+  },
+  {
+   "text": "Precompose $\\lambda_W$ with $N(r)$ and write $Z=X\\circ N(r)$, $\\lambda':D'\\to Z$. Its base is $\\gamma'$ by Step 3. Every vertex component remains a $\\pi$-cocartesian edge. The if direction of the pointwise criterion, now applied with index $K$, therefore makes $\\lambda'$ a cocartesian transport of $D'$ along $\\gamma'$ in the same functor-category fibration as $\\lambda$. This verifies restriction of transport using the criterion's stated hypothesis; it does not infer a comparison merely from matching object values.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.2.1, cocartesian dual; pointwise criterion with index N(R)."
+   }
+  },
+  {
+   "text": "Work in the constant-base fiber $\\mathcal F_G=\\operatorname{Fun}(K,\\mathcal M)$. The composite $\\lambda'e:D\\to Z$, with the base homotopy of Step 3, is a point of the homotopy fiber over $\\gamma$ in the transport lemma's mapping-space formula. Its inverse image gives $u:Y\\to Z$ with $u\\lambda\\simeq\\lambda'e$. Apply the same formula to $\\lambda'$ and $\\lambda e^{-1}$, using the inverse base homotopy, to obtain $v:Z\\to Y$ with $v\\lambda'\\simeq\\lambda e^{-1}$. Thus $(vu)\\lambda\\simeq v\\lambda'e\\simeq\\lambda e^{-1}e\\simeq\\lambda$ in the homotopy fiber over $\\gamma$; the specified base homotopies agree because $e^{-1}e\\simeq1_D$ is an inverse homotopy over $b$. The mapping-space equivalence for $H=Y$ pulls this homotopy back to $vu\\simeq1_Y$. Similarly, using the formula for $\\lambda'$ with $H=Z$ gives $uv\\simeq1_Z$. Naturality in $H$ and the composition/precomposition compatibility stated in the transport lemma justify these compositions in the mapping fibers. These two inverse homotopies prove $Y\\simeq Z$ inside $\\operatorname{Fun}(K,\\mathcal M)$. The inverse used here is the inverse of $e$, supplied by Step 2, not an inverse relabelling functor.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.2 and Proposition 2.4.1.7, cocartesian duals; mapping-space fiber formula in the functor category."
+   }
+  },
+  {
+   "text": "An edge of $\\operatorname{Fun}(K,\\mathcal M)$ is a simplicial map $K\\times\\Delta^1\\to\\mathcal M$; hence the equivalence in Step 6 restricts to a coherent comparison on each simplex of $K$, namely every string of operators of $R$, and its faces and degeneracies agree by restriction. The inverse homotopies are simplices of the same functor category, so retain those compatibilities as well. At a word $pa_1^nq$, the restriction equivalence of Step 2 identifies the $p$ factor with the first $a_1$ factor using the specified regular $A\\circ c$, and fixes the remaining $A$ factors and $Q$. Its transported component is therefore the tensor identification of Step 4. The transport lemma's composition clause identifies successive tensor/action transports with total contraction, compatibly with the precomposition maps that defined $u,v$; thus the tensor interpretation has the same coherent comparison on operator strings. No separate choice of maps on strings is being assembled.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.2.1 and Proposition 2.4.1.7, cocartesian duals; unpacking the coherent functor-category equivalence."
+   }
+  },
+  {
+   "text": "The construction of $X$ in Step 4 uses all of $N(W)$. The displayed leading-unit map is an allowed $W$-operator: $h$ is monotone with both exterior endpoints fixed, the first output block is empty, the later algebra blocks are singletons, and the last block contains $q$. In the image of $r$, the first output block contains the relabelled input $p$, so is nonempty; therefore this operator is outside that image (also for $k=0$, when its source is $q$). All our transports land in $\\mathcal E_m=\\mathcal M$, so the comparison has exactly the asserted underlying target and makes no claim about an external left action.",
+   "uses": [
+    "lem-coef-composable-bimodule-operad-segal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.2.2.6, endpoint and empty-block check; Construction 4.4.2.7, underlying output fiber."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-composable-bimodule-operad-segal",
+  "lem-coef-infinity-pointwise-cocartesian-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Repair via the relative Segal equivalence (Proposition 4.4.1.11) applied to rho, followed by total contraction (Construction 4.4.2.7) and the functor-category mapping-space transport formula (HTT 3.1.2.1, 2.4.4.2, 2.4.1.7, duals). Sources read online; no archived copies in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,10 +173,45 @@
    "results": "{\"t\": \"2026-10-17T13:06:58Z\", \"tool\": \"leansearch\", \"query\": \"relabel regular bimodule as algebra factor gives equivalent evaluated tensor word diagrams including leading unit extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Bimod.regular\", \"ModuleCat.monModuleEquivalenceAlgebraForget\", \"ModuleCat.monModuleEquivalenceAlgebra\", \"Bialgebra.TensorProduct.lid_toAlgEquiv\", \"TensorProduct.AlgebraTensorModule.cancelBaseChange\", \"MonoidAlgebra.tensorEquiv\", \"BialgEquivClass.toAlgEquivClass\", \"Algebra.TensorProduct.liftEquiv\"], \"digest\": \"3dce6ebf81446f30\"}",
    "date": "2026-10-17",
    "verdict": "no match: the hits Bimod.regular, ModuleCat.monModuleEquivalenceAlgebraForget, ModuleCat.monModuleEquivalenceAlgebra, Bialgebra.TensorProduct.lid_toAlgEquiv, TensorProduct.AlgebraTensorModule.cancelBaseChange, MonoidAlgebra.tensorEquiv, BialgEquivClass.toAlgEquivClass, Algebra.TensorProduct.liftEquiv concern ordinary categories, bicategories, modules or algebraic presentations; none supplies a parameterized infinity-operadic transport/word-diagram comparison. Read the ordinary cocartesian universal-property and regular-bimodule source statements to rule out a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent equivalence regular two-sided bar words relabel p as algebra factor",
+   "results": "{\"t\": \"2026-10-17T15:56:29Z\", \"tool\": \"leanfinder\", \"query\": \"coherent equivalence regular two-sided bar words relabel p as algebra factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.reindex\", \"Algebra.Presentation.reindex\", \"Algebra.PreSubmersivePresentation.reindex\", \"Algebra.Presentation.reindex_toGenerators\", \"Algebra.PreSubmersivePresentation.reindex_toPresentation\", \"Algebra.Generators.reindex_val\", \"Algebra.PreSubmersivePresentation.reindex_map\", \"Monoid.CoprodI.NeWord.replaceHead\"], \"digest\": \"d4608f76b2642392\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained search results concern ordinary algebraic reindexing and bimodules, not coherent lifts to an infinity operad and their transport comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject, CategoryTheory.Monad",
+   "results": "{\"t\": \"2026-10-17T15:56:30Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialObject, CategoryTheory.Monad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained search results concern ordinary algebraic reindexing and bimodules, not coherent lifts to an infinity operad and their transport comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*word|leading.*unit|two-sided.*bar",
+   "results": "{\"t\": \"2026-10-17T15:56:30Z\", \"tool\": \"grep\", \"query\": \"regular.*word|leading.*unit|two-sided.*bar\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained search results concern ordinary algebraic reindexing and bimodules, not coherent lifts to an infinity operad and their transport comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent regular bimodule bar diagram relabeling and leading unit insertion",
+   "results": "{\"t\": \"2026-10-17T15:56:30Z\", \"tool\": \"leansearch\", \"query\": \"coherent regular bimodule bar diagram relabeling and leading unit insertion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Bimod.actRight_one_assoc\", \"Bimod.left_assoc\", \"Bimod.one_actLeft\", \"Bimod.actRight_one\", \"Bimod.RightUnitorBimod.hom_right_act_hom'\", \"Bimod.triangle_bimod\", \"Bimod.left_assoc_assoc\", \"Bimod.one_actLeft_assoc\"], \"digest\": \"7395da11c6f14f2d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained search results concern ordinary algebraic reindexing and bimodules, not coherent lifts to an infinity operad and their transport comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "regular bimodule bar evaluated word diagram compatible with block operators",
+   "results": "{\"t\": \"2026-10-17T15:56:33Z\", \"tool\": \"leanfinder\", \"query\": \"regular bimodule bar evaluated word diagram compatible with block operators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Bimod.regular\", \"Bimod.LeftUnitorBimod.hom\", \"Bimod.RightUnitorBimod.hom\", \"Bimod.regular_actLeft\", \"Bimod.regular_actRight\", \"Bimod.TensorBimod.X\", \"Rep.barComplex.d_single\", \"Bimod.whiskerLeft\"], \"digest\": \"6a474fcd25ea1dbc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained search results concern ordinary algebraic reindexing and bimodules, not coherent lifts to an infinity operad and their transport comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-two-sided-coherent-bar-construction",
@@ -99,5 +235,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-two-sided-bar-regular-word-identification",
+  "worker": "stage1",
+  "summary": "Repaired the returned coherence gap: collapse a_0,p to a_1 by the operad endomorphism rho, use regularity and the relative Segal restriction equivalence over g to compare whole lifts, restrict that equivalence to R, and construct the transported comparison and its coherent inverse using mapping-space fibers in Fun(N(R),M). Defined the action target, all word operators, total contractions and U_AQ explicitly. Removed the duplicated leading-unit evaluation; only its domain/image assertion is needed. No new nodes and no change of the unit route.",
+  "blueprint": "The imported item's ancestry points to prop-coef-integral-exceptional-adjoint, displayed derived-Hom calculation and the sentence that the calculation defines the adjunction. The eight repaired steps realize the supporting regular-word evaluation used by that calculation, following Construction 4.4.2.7 and the ordered-operator convention of Construction 4.2.2.6."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NL-12555fa4b",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-12555fa4b (reviewer sub-agent of L); spot-checked: I read the delivery in full. It is one commit with the item and its report and no new nodes. The item is not a target, so the base-change and coefficient check does not apply. No SGA is cited. Statement: I compared it with the pre-repair unsplit text. The conclusion is unchanged (coherent Y≃X∘N(r) with the stated components, coherent on every string of R; X defined on all of N(W), including leading-unit arrows outside the image of r; the comparison is in M only; no colimits). The changes only type the action operad π, the colour map g, the lift over g, the block-operator convention (the same as the Segal node's), R, W, the total contraction and U_AQ. Regularity is now a coherent equivalence with A∘c rather than a strict composite, which weakens the hypothesis. The parent's steps 1–2 construct exactly this target and lift, so its step 11 still applies. Steps: (1) ρ (a0,p↦a1) sends every allowed type to an allowed type, including nullary ones. Operation sets are singletons, inert maps are preserved, gρ=g, and ρ^⊗|_R=r. (2) Fρ|BM12=F and Fρ|BM01=F|Ass1∘c≃A∘c. The Segal node's stated relative restriction equivalence over a fixed g reflects the equivalence of triples to ε:F≃Fρ over g. (3) β_R=β_W∘N(r), because operators preserve endpoints and the BM operation is unique. (4)–(5) The transport-lemma hypotheses hold. The values are A^{⊗k}⊗U_AQ and A⊗A^{⊗n}⊗U_AQ. λ_W∘N(r) is cocartesian by the 'if' clause. (6) The u/v argument correctly gives vu≃1 and uv≃1 through the natural mapping-fiber equivalence. (7) Coherence on strings holds because this is an equivalence in Fun(K,M). (8) For h=(0,0,1,…,k+1) the first block is empty and the last block is q, so the arrow lies in W. Every arrow in the image of r has a nonempty first block. I checked k=0 and k=1, n=0, and closure of R and W under composition. Duplicates: I searched dag/nodes (Chain_2, the bar/word nodes, the leading-unit sibling) and found none. All cited statements are in the unit, def-cbc is only a definition, there are no tool_uses, and proof_deps equals the union of the uses. Higher Algebra and Higher Topos Theory are not archived; proof_origin is correctly 'agent' and the WANTED lines are recorded. No fixes."
  }
 }

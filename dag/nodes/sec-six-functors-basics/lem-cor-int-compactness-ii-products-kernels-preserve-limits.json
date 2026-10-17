@@ -1,0 +1,99 @@
+{
+ "id": "lem-cor-int-compactness-ii-products-kernels-preserve-limits",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 002N, lemma-limits-products-equalizers"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-category-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.HasLimitOfHasProductsOfHasEqualizers.buildIsLimit",
+  "file": "Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean",
+  "line": 81,
+  "how": "exact: buildIsLimit at lines 81-91 takes two limiting product fans and a limiting equalizer fork and proves the induced cone limiting. The two component equations are hs and ht at lines 71-73; buildLimit at lines 60-69 defines the cone with components k followed by the object projections. Variables at lines 44-51 impose no HasEqualizers or global completeness hypothesis."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "det-cor-int-compactness-ii-extension-zero",
+  "date": "2026-10-17",
+  "group": "Q136"
+ },
+ "kind": "statement",
+ "title": "A diagram limit from the two products and their equalizer",
+ "statement": "Let $I$ be a small category and $M:I\\to\\mathcal C$ a diagram in a category $\\mathcal C$, with smallness as in [def-weil-size-convention]. Suppose the products [def-weil-category-product] $P=\\prod_{i\\in\\mathrm{Ob}(I)}M(i)$ and $Q=\\prod_{(\\alpha:i\\to j)\\in\\mathrm{Ar}(I)}M(j)$ exist. Let $s,t:P\\to Q$ be characterized by $\\operatorname{pr}_\\alpha s=M(\\alpha)\\operatorname{pr}_i$ and $\\operatorname{pr}_\\alpha t=\\operatorname{pr}_j$. Suppose $k:L\\to P$ is an equalizer of $s,t$: $sk=tk$, and every $a:T\\to P$ with $sa=ta$ factors uniquely through $k$. Then the cone with vertex $L$ and components $\\operatorname{pr}_i k$ is a limit cone of $M$, meaning every compatible family $a_i:T\\to M(i)$ factors uniquely through these components. Only these two products and this particular equalizer are required.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor preserving products and kernels preserves every existing small limit",
+   "results": "Hit CategoryTheory.Limits.preservesLimits_of_preservesEqualizers_and_products in Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers; it requires global products and equalizers, while this node packages the existing-limit argument used here.",
+   "date": "2026-10-17",
+   "verdict": "generalization: Mathlib theorem under stronger global hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.preservesLimits_of_preservesEqualizers_and_products",
+   "results": "CategoryTheory.Limits.preservesLimits_of_preservesEqualizers_and_products in Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.",
+   "date": "2026-10-17",
+   "verdict": "generalization: global products/equalizers version"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimits_of_preservesEqualizers_and_products",
+   "results": "Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:208; no theorem with the exact existing-limit formulation.",
+   "date": "2026-10-17",
+   "verdict": "generalization: stronger global version only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserving products and kernels preserves every existing small limit",
+   "results": "Hits for preservesLimits_of_preservesEqualizers_and_products and preservesLimit_of_preservesEqualizers_and_product; no exact existing-limit formulation.",
+   "date": "2026-10-17",
+   "verdict": "generalization: stronger global version"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reconstruct a limit of a single diagram from the products indexed by objects and arrows and the kernel of their difference map without all equalizers existing",
+   "results": "{\"t\": \"2026-10-17T11:43:46Z\", \"tool\": \"leanfinder\", \"query\": \"Reconstruct a limit of a single diagram from the products indexed by objects and arrows and the kernel of their difference map without all equalizers existing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.HasLimitOfHasProductsOfHasEqualizers.buildIsLimit\", \"CategoryTheory.Limits.HasLimitOfHasProductsOfHasEqualizers.buildLimit\", \"CategoryTheory.Limits.HasLimitOfHasProductsOfHasEqualizers.buildLimit_pt\", \"CategoryTheory.Limits.limitConeOfEqualizerAndProduct\", \"CategoryTheory.Limits.HasLimitOfHasProductsOfHasEqualizers.buildLimit_π_app\", \"CategoryTheory.Limits.limitSubobjectProduct\", \"CategoryTheory.Limits.hasLimit_of_equalizer_and_product\", \"CategoryTheory.NormalMonoCategory.hasLimit_parallelPair\"], \"digest\": \"5cfc48695f86b5e6\"}",
+   "date": "2026-10-17",
+   "verdict": "match: buildIsLimit, Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:81; source signature read at lines 44-91. Earlier global-preservation candidates were unnecessarily strong; this node now states the exact local construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.HasLimitOfHasProductsOfHasEqualizers.buildIsLimit",
+   "results": "{\"t\": \"2026-10-17T11:45:55Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.HasLimitOfHasProductsOfHasEqualizers.buildIsLimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.HasLimitOfHasProductsOfHasEqualizers.buildIsLimit\"], \"digest\": \"4c20f2dadf563eca\"}",
+   "date": "2026-10-17",
+   "verdict": "match: buildIsLimit, Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:81; source signature read at lines 44-91. Earlier global-preservation candidates were unnecessarily strong; this node now states the exact local construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given the products of objects and of targets of arrows of one small diagram and the equalizer of the two canonical maps, their composite cone is a limit",
+   "results": "{\"t\": \"2026-10-17T11:45:55Z\", \"tool\": \"leansearch\", \"query\": \"Given the products of objects and of targets of arrows of one small diagram and the equalizer of the two canonical maps, their composite cone is a limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.limitConeOfEqualizerAndProduct\", \"CategoryTheory.Limits.HasLimitOfHasProductsOfHasEqualizers.buildLimit_π_app\", \"CategoryTheory.Cat.HasLimits.limitCone\", \"CategoryTheory.Limits.Types.Small.productLimitCone\", \"CategoryTheory.Limits.HasLimitOfHasProductsOfHasEqualizers.buildLimit\", \"CategoryTheory.Limits.HasLimitOfHasProductsOfHasEqualizers.buildLimit_pt\", \"CategoryTheory.Limits.pullbackIsPullback\", \"CategoryTheory.Limits.HasLimitOfHasProductsOfHasEqualizers.buildIsLimit\"], \"digest\": \"25a7280fc0254be4\"}",
+   "date": "2026-10-17",
+   "verdict": "match: buildIsLimit, Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:81; source signature read at lines 44-91. Earlier global-preservation candidates were unnecessarily strong; this node now states the exact local construction."
+  },
+  {
+   "tool": "grep",
+   "query": "def buildIsLimit|def buildLimit",
+   "results": "{\"t\": \"2026-10-17T11:49:35Z\", \"tool\": \"grep\", \"query\": \"def buildIsLimit|def buildLimit\", \"sub\": \"CategoryTheory/Limits/Constructions\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean\"], \"digest\": \"2c97b507b4828684\"}",
+   "date": "2026-10-17",
+   "verdict": "match: buildIsLimit, Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean:81; source signature read at lines 44-91. Earlier global-preservation candidates were unnecessarily strong; this node now states the exact local construction."
+  }
+ ],
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-int-compactness-ii",
+ "blueprint": {
+  "from": {
+   "node": "det-cor-int-compactness-ii-extension-zero",
+   "place": "proof (1): the split-kernel argument and the reduction of arbitrary limits to products and kernels",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

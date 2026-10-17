@@ -1,0 +1,102 @@
+{
+ "id": "lem-cor-int-compactness-ii-pretriangulated-kernel-split",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05QU, lemma-when-split; preservation follows from its projection-coprojection normal form"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-weil-preadditive-category",
+  "def-weil-pbc-additive-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-cor-int-compactness-ii-extension-zero",
+  "date": "2026-10-17",
+  "group": "Q136"
+ },
+ "kind": "statement",
+ "title": "Additive functors from a pre-triangulated category preserve existing kernels",
+ "statement": "Let $\\mathcal C$ be a pre-triangulated category [def-weil-triangulated-category] and $\\mathcal D$ a preadditive category [def-weil-preadditive-category]. Let $F:\\mathcal C\\to\\mathcal D$ be additive [def-weil-pbc-additive-functor]. For any morphism $d:X\\to Y$ in $\\mathcal C$ and any kernel $k:K\\to X$ of $d$, $F(k):F(K)\\to F(X)$ is a kernel of $F(d)$. Here a kernel of $d$ means $dk=0$ and that every $a:T\\to X$ with $da=0$ factors uniquely as $a=kb$ with $b:T\\to K$. No existence of other kernels in either category is assumed.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive functor on a pretriangulated category preserves every existing kernel",
+   "results": "Hits included CategoryTheory.Functor.preservesEqualizers_of_preservesKernels and generic homological kernel declarations; no theorem with the stated pretriangulated split-kernel hypotheses.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.preservesEqualizers_of_preservesKernels",
+   "results": "CategoryTheory.Functor.preservesEqualizers_of_preservesKernels in Mathlib/CategoryTheory/Preadditive/LeftExact.lean; it assumes preservation of every kernel and does not state the pretriangulated split-kernel implication.",
+   "date": "2026-10-17",
+   "verdict": "generalization: preserves equalizers from kernel preservation, but not this node"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesEqualizers_of_preservesKernels|instSplitMonoCategory",
+   "results": "Mathlib/CategoryTheory/Preadditive/LeftExact.lean:107 preservesEqualizers_of_preservesKernels; Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:466 instSplitMonoCategory; no combined theorem.",
+   "date": "2026-10-17",
+   "verdict": "generalization: component results only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor on a pretriangulated category preserves every existing kernel",
+   "results": "Hits for triangulated functors being additive and homological functors preserving kernels; no theorem for arbitrary additive functors using split monomorphisms.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "preserv.*[Kk]ernel|[Kk]ernel.*preserv|SplitMonoCategory",
+   "results": "{\"t\": \"2026-10-17T08:38:48Z\", \"tool\": \"grep\", \"query\": \"preserv.*[Kk]ernel|[Kk]ernel.*preserv|SplitMonoCategory\", \"sub\": \"CategoryTheory/Preadditive\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\", \"Mathlib/CategoryTheory/Preadditive/LeftExact.lean\"], \"digest\": \"3520cf48c5f4dfb0\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: the split-monomorphism instance is one ingredient, not the assertion for an arbitrary morphism having a kernel; inspected Pretriangulated.lean:466 and LeftExact.lean:85-112"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor from a pretriangulated category to any preadditive category preserves each kernel that exists in its source",
+   "results": "{\"t\": \"2026-10-17T11:43:26Z\", \"tool\": \"leanfinder\", \"query\": \"An additive functor from a pretriangulated category to any preadditive category preserves each kernel that exists in its source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsTriangulatedHomologicalKernel\", \"CategoryTheory.Functor.IsHomological\", \"CategoryTheory.Functor.IsTriangulated.instAdditive\", \"CategoryTheory.Functor.IsHomological.toPreservesZeroMorphisms\", \"CategoryTheory.Functor.instAdditiveOfIsHomological\", \"CategoryTheory.Functor.IsHomological.mk'\", \"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.mem_homologicalKernel_trW_iff\"], \"digest\": \"04020d8ee1bf06f8\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: the split-monomorphism instance is one ingredient, not the assertion for an arbitrary morphism having a kernel; inspected Pretriangulated.lean:466 and LeftExact.lean:85-112"
+  },
+  {
+   "tool": "grep",
+   "query": "preserv.*[Kk]ernel|[Kk]ernel.*preserv|SplitMonoCategory",
+   "results": "{\"t\": \"2026-10-17T11:43:44Z\", \"tool\": \"grep\", \"query\": \"preserv.*[Kk]ernel|[Kk]ernel.*preserv|SplitMonoCategory\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Kernels.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Kernels.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Kernels.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Kernels.lean\", \"Mathlib/CategoryTheory/Functor/EpiMono.lean\", \"Mathlib/CategoryTheory/EpiMono.lean\", \"Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Cokernels.lean\"], \"digest\": \"184d66ab9f0a2f1a\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: the split-monomorphism instance is one ingredient, not the assertion for an arbitrary morphism having a kernel; inspected Pretriangulated.lean:466 and LeftExact.lean:85-112"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive functor from a pretriangulated category to any preadditive category preserves each kernel that exists in its source",
+   "results": "{\"t\": \"2026-10-17T11:43:45Z\", \"tool\": \"leansearch\", \"query\": \"An additive functor from a pretriangulated category to any preadditive category preserves each kernel that exists in its source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsTriangulated.instAdditive\", \"CategoryTheory.Functor.instAdditiveOfIsHomological\", \"CategoryTheory.Functor.IsTriangulated\", \"CategoryTheory.Functor.IsTriangulated.mk\", \"CategoryTheory.Functor.PreservesHomology.preservesKernels\", \"CategoryTheory.Functor.PreservesHomology.preservesKernel\", \"CategoryTheory.additiveFunctor\", \"CategoryTheory.Functor.preservesFiniteBiproductsOfAdditive\"], \"digest\": \"63ddfefe44d20477\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: the split-monomorphism instance is one ingredient, not the assertion for an arbitrary morphism having a kernel; inspected Pretriangulated.lean:466 and LeftExact.lean:85-112"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.instSplitMonoCategory",
+   "results": "{\"t\": \"2026-10-17T11:43:45Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Pretriangulated.instSplitMonoCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.instSplitMonoCategory\"], \"digest\": \"b5bee1453bcf62e8\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: the split-monomorphism instance is one ingredient, not the assertion for an arbitrary morphism having a kernel; inspected Pretriangulated.lean:466 and LeftExact.lean:85-112"
+  }
+ ],
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-int-compactness-ii",
+ "blueprint": {
+  "from": {
+   "node": "det-cor-int-compactness-ii-extension-zero",
+   "place": "proof (1): the split-kernel argument and the reduction of arbitrary limits to products and kernels",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
