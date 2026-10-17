@@ -1,150 +1,33 @@
 {
-  "id": "cor-pur-smooth-admissibility",
-  "blueprint": {
-    "is": "cor-pur-smooth-admissibility",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Smooth morphisms satisfy the preservation clauses",
-  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $X,Y$ be finite-type $k$-schemes [def-weil-finite-type-morphism],\nand let $f:X\\to Y$ be a smooth separated finite-type $k$-morphism\nof pure relative dimension $d\\geq0$. Here $Rf^!$ denotes the\nconstructible exceptional functor of [def-weil-exceptional-inverse-image].\nThe\nambient exceptional right\nadjoint datum of [def-weil-ambient-exceptional-adjoint] was the\nhypothesis under which this corollary was formerly stated; it is not assumed\nhere, being on the bounded constructible and finite-Tor coefficients that the\ntwo clauses below quantify over the theorem\n[cor-sf-ambient-adjoint-discharge]. Then $f$ satisfies the\ntwo preservation clauses of\n[def-weil-exceptional-adjoint-admissibility], with\n$c_f^-=c_f^+=-2d$ in the signed convention of that definition:\n\n1. *constructibility.* For all integers $a\\leq b$,\n$$\nL\\in D_c^{[a,b]}(Y,A)\\quad\\Longrightarrow\\quad\nRf^!L\\in D_c^{[a-2d,b-2d]}(X,A).\n$$\n1. *finite Tor amplitude.* If $K\\in D^b_{ctf}(Y,A)$ has\nfinite Tor amplitude in\n$[a,b]$, then $Rf^!K$ has finite Tor amplitude in\n$[a-2d,b-2d]$; in particular $Rf^!$ carries $D^b_{ctf}(Y,A)$\ninto $D^b_{ctf}(X,A)$.\n\nThus every such smooth morphism is\nexceptional-adjoint admissible at $A=A_{E,n}$ in the constructible sense —\nthe three clauses of [def-weil-exceptional-adjoint-admissibility] read on the\ncomplexes of the blueprint's coefficient class that the two clauses above\nquantify over; the unrestricted clause (1) of that definition, on all\npro-etale sheaves, is false in general and is not asserted —: the\npreservation\nclauses are consequences of purity, not hypotheses of it, and the ambient\ndatum that the earlier form of this corollary assumed is not an assumption\neither, by [cor-sf-ambient-adjoint-discharge]. The further statement\n``admissible at $\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$'' demands in addition the\nuniformity of the two clauses over the finite stages and the\nfinite-reduction and scalar-extension compatibilities of the right adjoints;\nthose are the coefficient transport of the transport section at the end of\nthis chapter, and they are *not* asserted here.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
-    "place": "node cor-pur-smooth-admissibility, order 2077"
-  },
-  "stmt_deps": [
-    "def-pur-conventions",
-    "def-weil-ambient-exceptional-adjoint",
-    "cor-sf-ambient-adjoint-discharge",
-    "def-weil-exceptional-adjoint-admissibility",
-    "def-sbc-smooth-morphisms",
-    "def-weil-constructible-intervals",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-scheme-morphism-properties",
-    "def-weil-finite-type-morphism",
-    "def-weil-exceptional-inverse-image"
-  ],
-  "proof": [
-    {
-      "text": "Check the geometric hypotheses of the ordinary etale purity theorem. The base $\\operatorname{Spec}k$ is Noetherian, since a field has only the ideals $0$ and $k$. By [lem-weil-pbc-finite-type-over-noetherian], $X$ and $Y$ are Noetherian; in particular $Y$ is quasi-compact. By [lem-weil-pbc-locally-noetherian-quasi-separated], $Y$ is quasi-separated. Apply [thm-nagata-compactification] to the separated finite-type $f$ to choose a compactification. For the coefficient data of [def-weil-l-adic-coefficient-extension], [lem-weil-l-adic-extension-integers-dvr] makes $\\mathcal O_E$ a DVR with finite residue field. Then [lem-weil-valued-dvr-finite-quotients] makes $A=A_{E,n}$ finite. Since $|\\ell|_E=|\\ell|_\\ell<1$, one has $\\ell\\in\\mathfrak m_E=(\\varpi_E)$, hence $\\ell^n\\in(\\varpi_E^n)$ and $N=\\ell^n$ kills $A$. This $N$ is invertible on the $k$-scheme $Y$, since $\\ell\\ne p$. Thus $Y$, $f$, $A$ and $d$ satisfy precisely the Noetherian-base, compactifiability, exponent and pure-relative-dimension hypotheses of [thm-asd-smooth-tensor].",
-      "uses": [
-        "lem-weil-pbc-finite-type-over-noetherian",
-        "lem-weil-pbc-locally-noetherian-quasi-separated",
-        "thm-nagata-compactification",
-        "def-pur-conventions",
-        "def-weil-l-adic-coefficient-extension",
-        "lem-weil-l-adic-extension-integers-dvr",
-        "lem-weil-valued-dvr-finite-quotients",
-        "thm-asd-smooth-tensor"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
-        "place": "Proof, opening use of ordinary etale smooth tensor duality; hypotheses made explicit"
-      }
-    },
-    {
-      "text": "For any $M\\in D^b_c(Y,A)$, choose $G\\in D^b_c(Y_{\\mathrm{et}},A)$ and $M\\cong\\nu_Y^*G$ using [lem-sf-proetale-constructible-origin](ii). Exactness and the cohomology formula of [lem-sf-comparison-pullback-exact] give $\\mathcal H^r(M)\\cong\\nu_Y^*\\mathcal H^r(G)$. The equivalence on constructible sheaves in [lem-sf-proetale-constructible-origin](i) reflects zero objects, so $G$ has exactly the same cohomological vanishing interval as $M$. Use the formula on etale-origin inputs in [def-weil-exceptional-inverse-image] to write\n$$Rf^!M\\cong\\nu_X^*f^\\times G.$$\nThe bounded-class adjunction is supplied by [cor-sf-ambient-adjoint-discharge]. This invokes no unrestricted pro-etale ambient adjunction and does not use preservation of constructibility by $f^!$ as a hypothesis.",
-      "uses": [
-        "lem-sf-proetale-constructible-origin",
-        "lem-sf-comparison-pullback-exact",
-        "def-weil-exceptional-inverse-image",
-        "cor-sf-ambient-adjoint-discharge"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
-        "place": "Proof, opening comparison to ordinary etale coefficients; replaces the incorrect compact-support base-change citation"
-      }
-    },
-    {
-      "text": "Put $\\omega_f=f^\\times A_Y$. By [thm-asd-smooth-tensor], there is a sheaf $T$ of $A_X$-modules, locally constant and locally free of rank one, and an isomorphism $\\omega_f\\cong T[2d]$. For every ordinary etale complex $G$, including a bounded constructible complex that has no finite Tor amplitude, that same theorem gives\n$$f^\\times G\\cong f^{-1}G\\otimes_A^L\\omega_f.$$\nChoose an etale covering family $u_i:U_i\\to X$ trivializing $T$. The numerical preservation statements require the rank-one local trivializations, and do not require a choice of the canonical Tate orientation.",
-      "uses": [
-        "thm-asd-smooth-tensor"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
-        "place": "Proof, opening assertion for bounded constructible inputs without finite Tor amplitude; unit step (iii), purity"
-      }
-    },
-    {
-      "text": "For each $u=u_i$, apply [lem-kun-inverse-image-monoidal] to the tensor formula and use that the exact module inverse image in [prop-weil-pbc-inverse-image-modules-exact] is termwise on complexes. It takes $T[2d]$ to $A_U[2d]$. Since derived tensor is triangulated in its second variable by [lem-kun-derived-tensor-triangulated], this gives\n$$u^{-1}f^\\times G\\cong (u^{-1}f^{-1}G)\\otimes_A^L A_U[2d]\\cong (u^{-1}f^{-1}G)[2d].$$\nThe last unit isomorphism is computed by $P\\otimes_A A_U=P$ for a K-flat representative $P$, using [def-kun-derived-tensor]. The displayed local formula holds for every $G$; finite Tor amplitude has not been used.",
-      "uses": [
-        "lem-kun-inverse-image-monoidal",
-        "prop-weil-pbc-inverse-image-modules-exact",
-        "lem-kun-derived-tensor-triangulated",
-        "def-kun-derived-tensor"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
-        "place": "Proof, constructibility calculation: local expansion of the purity tensor formula"
-      }
-    },
-    {
-      "text": "Let $M\\in D_c^{[a,b]}(Y,A)$ and use its $G$ from step 2. By [prop-weil-pbc-inverse-image-modules-exact] and [lem-weil-pbc-exact-functor-bounded-below], $\\mathcal H^r(f^{-1}G)\\cong f^{-1}\\mathcal H^r(G)$; the same cohomology formula holds for restriction by $u_i^{-1}$. Each $f^{-1}\\mathcal H^r(G)$ is constructible by [prop-constructible-pullback], applied to its underlying sheaf; the induced module action is the action in the module inverse-image theorem. On the pulled-back strata, local trivializations as finite constant $A$-modules remain such by [lem-kun-pullback-constant], so this is constructibility as $A$-modules, not merely as underlying sets. The local formula of step 4 and [lem-sp-derived-cohomology-shift] yield\n$$u_i^{-1}\\mathcal H^r(f^\\times G)\\cong u_i^{-1}f^{-1}\\mathcal H^{r+2d}(G).$$\nFor $r\\notin[a-2d,b-2d]$ the right side is zero, hence the left sides vanish on a covering and $\\mathcal H^r(f^\\times G)=0$. For each of the finitely many remaining $r$, take a finite constructible stratification for $f^{-1}\\mathcal H^{r+2d}(G)$. For a stratum $Z\\hookrightarrow X$, write $v_i:Z\\times_XU_i\\to Z$ for the pulled-back etale cover and $F_Z=(f^{-1}\\mathcal H^{r+2d}(G))|_Z$. Restricting the displayed cohomology isomorphism to $Z\\times_XU_i$ gives $v_i^{-1}(\\mathcal H^r(f^\\times G)|_Z)\\cong v_i^{-1}F_Z$. Choose an etale cover $W_j\\to Z$ on which $F_Z$ is a finite constant $A$-module sheaf. Then the family $W_j\\times_Z(Z\\times_XU_i)\\to Z$ covers $Z$ and trivializes $\\mathcal H^r(f^\\times G)|_Z$ as those same finite constant $A$-modules, using [lem-kun-pullback-constant]. Thus its restriction to $Z$ is locally constant with finite stalks. Thus $f^\\times G$ is bounded constructible by [def-weil-pbc-constructible-complexes], in precisely $[a-2d,b-2d]$. No finiteness of the trivializing covering family is needed: the stratification itself is finite. Finally [lem-sf-proetale-constructible-origin] and [lem-sf-comparison-pullback-exact] take this conclusion along $\\nu_X^*$ to $Rf^!M$. This proves clause (1).",
-      "uses": [
-        "prop-weil-pbc-inverse-image-modules-exact",
-        "lem-weil-pbc-exact-functor-bounded-below",
-        "prop-constructible-pullback",
-        "lem-kun-pullback-constant",
-        "lem-sp-derived-cohomology-shift",
-        "def-weil-pbc-constructible-complexes",
-        "lem-sf-proetale-constructible-origin",
-        "lem-sf-comparison-pullback-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
-        "place": "Proof, Step 1 (constructibility and the signed interval shift)"
-      }
-    },
-    {
-      "text": "Now let $K\\in D^b_{ctf}(Y,A)$ have Tor amplitude in $[a,b]$, and choose a bounded constructible etale representative $G$ as in step 2. By [lem-sf-comparison-tor-amplitude](ii), $G$ has Tor amplitude in $[a,b]$ on the etale site. Put $\\kappa=A/(\\varpi_E)$. Apply [lem-exc-residue-tor-test] to this bounded constructible etale $G$: the complex $G\\otimes_A^L\\kappa_Y$ has cohomology zero outside $[a,b]$. This is an etale-site use of the residue-field criterion; no criterion for arbitrary pro-etale sheaves is being asserted.",
-      "uses": [
-        "lem-sf-comparison-tor-amplitude",
-        "lem-exc-residue-tor-test"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
-        "place": "Proof, Step 2 (residue-field criterion), input side"
-      }
-    },
-    {
-      "text": "Let $H=f^\\times G$, which is bounded constructible by step 5 applied to any cohomological bounding interval of $K$. Restrict $H\\otimes_A^L\\kappa_X$ to a trivializing $u=u_i$. Using step 4, [lem-kun-inverse-image-monoidal] for $u$ and $f$, [lem-kun-pullback-constant] for the constant residue-field sheaves, and the shift compatibility of [lem-kun-derived-tensor-triangulated], obtain\n$$\n u^{-1}(H\\otimes_A^L\\kappa_X)\n \\cong ((u^{-1}f^{-1}G)[2d])\\otimes_A^L\\kappa_U\n \\cong (u^{-1}f^{-1}(G\\otimes_A^L\\kappa_Y))[2d].\n$$\nBoth $u^{-1}$ and $f^{-1}$ are exact on module sheaves by [prop-weil-pbc-inverse-image-modules-exact]. The cohomology formula of [lem-weil-pbc-exact-functor-bounded-below] and the signed shift formula of [lem-sp-derived-cohomology-shift] therefore identify degree $r$ of the last complex with\n$$u^{-1}f^{-1}\\mathcal H^{r+2d}(G\\otimes_A^L\\kappa_Y).$$\nIt vanishes for $r\\notin[a-2d,b-2d]$ by step 6. Vanishing on the covering $\\{U_i\\}$ is vanishing of the sheaf, so $H\\otimes_A^L\\kappa_X$ has cohomology in $[a-2d,b-2d]$.",
-      "uses": [
-        "lem-kun-inverse-image-monoidal",
-        "lem-kun-pullback-constant",
-        "lem-kun-derived-tensor-triangulated",
-        "prop-weil-pbc-inverse-image-modules-exact",
-        "lem-weil-pbc-exact-functor-bounded-below",
-        "lem-sp-derived-cohomology-shift"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
-        "place": "Proof, displayed residue-field tensor calculation and concluding paragraph; written after local trivialization"
-      }
-    },
-    {
-      "text": "Apply [lem-exc-residue-tor-test] to the bounded constructible etale $H$ of step 7. It has Tor amplitude in $[a-2d,b-2d]$. By [lem-sf-comparison-tor-amplitude](i), $\\nu_X^*H\\cong Rf^!K$ has that same Tor amplitude against all degree-zero pro-etale $A$-module sheaves. Step 5 already proves its bounded constructibility. By [def-weil-finite-tor-amplitude], it lies in $D^b_{ctf}(X,A)$, proving clause (2). The shift in step 5 is exactly the signed choice $c_f^-=c_f^+=-2d$ of [def-weil-exceptional-adjoint-admissibility]. Together with the bounded-class adjunction of [cor-sf-ambient-adjoint-discharge], these are the constructible analogues asserted in the statement. The unrestricted ambient clause (1) and the coefficient-transport statements at $\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell$ are not consequences of this argument.",
-      "uses": [
-        "lem-exc-residue-tor-test",
-        "lem-sf-comparison-tor-amplitude",
-        "def-weil-finite-tor-amplitude",
-        "def-weil-exceptional-adjoint-admissibility",
-        "cor-sf-ambient-adjoint-discharge"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
-        "place": "Proof, conclusion of Step 2 and interpretation of the two preservation clauses"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "cor-pur-smooth-admissibility",
+ "blueprint": {
+  "is": "cor-pur-smooth-admissibility",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Smooth morphisms satisfy the preservation clauses",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $X,Y$ be finite-type $k$-schemes [def-weil-finite-type-morphism],\nand let $f:X\\to Y$ be a smooth separated finite-type $k$-morphism\nof pure relative dimension $d\\geq0$. Here $Rf^!$ denotes the\nconstructible exceptional functor of [def-weil-exceptional-inverse-image].\nThe\nambient exceptional right\nadjoint datum of [def-weil-ambient-exceptional-adjoint] was the\nhypothesis under which this corollary was formerly stated; it is not assumed\nhere, being on the bounded constructible and finite-Tor coefficients that the\ntwo clauses below quantify over the theorem\n[cor-sf-ambient-adjoint-discharge]. Then $f$ satisfies the\ntwo preservation clauses of\n[def-weil-exceptional-adjoint-admissibility], with\n$c_f^-=c_f^+=-2d$ in the signed convention of that definition:\n\n1. *constructibility.* For all integers $a\\leq b$,\n$$\nL\\in D_c^{[a,b]}(Y,A)\\quad\\Longrightarrow\\quad\nRf^!L\\in D_c^{[a-2d,b-2d]}(X,A).\n$$\n1. *finite Tor amplitude.* If $K\\in D^b_{ctf}(Y,A)$ has\nfinite Tor amplitude in\n$[a,b]$, then $Rf^!K$ has finite Tor amplitude in\n$[a-2d,b-2d]$; in particular $Rf^!$ carries $D^b_{ctf}(Y,A)$\ninto $D^b_{ctf}(X,A)$.\n\nThus every such smooth morphism is\nexceptional-adjoint admissible at $A=A_{E,n}$ in the constructible sense —\nthe three clauses of [def-weil-exceptional-adjoint-admissibility] read on the\ncomplexes of the blueprint's coefficient class that the two clauses above\nquantify over; the unrestricted clause (1) of that definition, on all\npro-etale sheaves, is false in general and is not asserted —: the\npreservation\nclauses are consequences of purity, not hypotheses of it, and the ambient\ndatum that the earlier form of this corollary assumed is not an assumption\neither, by [cor-sf-ambient-adjoint-discharge]. The further statement\n``admissible at $\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$'' demands in addition the\nuniformity of the two clauses over the finite stages and the\nfinite-reduction and scalar-extension compatibilities of the right adjoints;\nthose are the coefficient transport of the transport section at the end of\nthis chapter, and they are *not* asserted here.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
+  "place": "node cor-pur-smooth-admissibility, order 2077"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-ambient-exceptional-adjoint",
+  "cor-sf-ambient-adjoint-discharge",
+  "def-weil-exceptional-adjoint-admissibility",
+  "def-sbc-smooth-morphisms",
+  "def-weil-constructible-intervals",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-finite-type-morphism",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Check the geometric hypotheses of the ordinary etale purity theorem. The base $\\operatorname{Spec}k$ is Noetherian, since a field has only the ideals $0$ and $k$. By [lem-weil-pbc-finite-type-over-noetherian], $X$ and $Y$ are Noetherian; in particular $Y$ is quasi-compact. By [lem-weil-pbc-locally-noetherian-quasi-separated], $Y$ is quasi-separated. Apply [thm-nagata-compactification] to the separated finite-type $f$ to choose a compactification. For the coefficient data of [def-weil-l-adic-coefficient-extension], [lem-weil-l-adic-extension-integers-dvr] makes $\\mathcal O_E$ a DVR with finite residue field. Then [lem-weil-valued-dvr-finite-quotients] makes $A=A_{E,n}$ finite. Since $|\\ell|_E=|\\ell|_\\ell<1$, one has $\\ell\\in\\mathfrak m_E=(\\varpi_E)$, hence $\\ell^n\\in(\\varpi_E^n)$ and $N=\\ell^n$ kills $A$. This $N$ is invertible on the $k$-scheme $Y$, since $\\ell\\ne p$. Thus $Y$, $f$, $A$ and $d$ satisfy precisely the Noetherian-base, compactifiability, exponent and pure-relative-dimension hypotheses of [thm-asd-smooth-tensor].",
+   "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-locally-noetherian-quasi-separated",
     "thm-nagata-compactification",
@@ -152,308 +35,473 @@
     "def-weil-l-adic-coefficient-extension",
     "lem-weil-l-adic-extension-integers-dvr",
     "lem-weil-valued-dvr-finite-quotients",
+    "thm-asd-smooth-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
+    "place": "Proof, opening use of ordinary etale smooth tensor duality; hypotheses made explicit"
+   }
+  },
+  {
+   "text": "For any $M\\in D^b_c(Y,A)$, choose $G\\in D^b_c(Y_{\\mathrm{et}},A)$ and $M\\cong\\nu_Y^*G$ using [lem-sf-proetale-constructible-origin](ii). Exactness and the cohomology formula of [lem-sf-comparison-pullback-exact] give $\\mathcal H^r(M)\\cong\\nu_Y^*\\mathcal H^r(G)$. The equivalence on constructible sheaves in [lem-sf-proetale-constructible-origin](i) reflects zero objects, so $G$ has exactly the same cohomological vanishing interval as $M$. Use the formula on etale-origin inputs in [def-weil-exceptional-inverse-image] to write\n$$Rf^!M\\cong\\nu_X^*f^\\times G.$$\nThe bounded-class adjunction is supplied by [cor-sf-ambient-adjoint-discharge]. This invokes no unrestricted pro-etale ambient adjunction and does not use preservation of constructibility by $f^!$ as a hypothesis.",
+   "uses": [
     "lem-sf-proetale-constructible-origin",
     "lem-sf-comparison-pullback-exact",
     "def-weil-exceptional-inverse-image",
-    "cor-sf-ambient-adjoint-discharge",
-    "thm-asd-smooth-tensor",
-    "lem-kun-inverse-image-monoidal",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-kun-derived-tensor-triangulated",
-    "def-kun-derived-tensor",
-    "lem-weil-pbc-exact-functor-bounded-below",
-    "prop-constructible-pullback",
-    "lem-kun-pullback-constant",
-    "lem-sp-derived-cohomology-shift",
-    "def-weil-pbc-constructible-complexes",
-    "lem-sf-comparison-tor-amplitude",
-    "lem-exc-residue-tor-test",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-exceptional-adjoint-admissibility"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "cor-sf-ambient-adjoint-discharge"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
-    "place": "Proof, opening all-input etale tensor formula and Steps 1–2, expanded using rank-one local trivializations; realizes unit step (iii)"
+    "place": "Proof, opening comparison to ordinary etale coefficients; replaces the incorrect compact-support base-change citation"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "smooth.*(purity|shriek)|shriek.*smooth",
-      "results": "0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "no match for smooth exceptional inverse-image preservation; hits concern other notions or there were no hits"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Smooth purity exceptional inverse image shifts bounded constructible cohomology and finite Tor amplitude by twice the relative dimension",
-      "results": "service unavailable: Internal Server Error; 0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For a smooth separated morphism of schemes of pure relative dimension d, exceptional inverse image preserves constructible cohomology and Tor amplitude with shift minus 2d",
-      "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange",
-      "date": "2026-10-16",
-      "verdict": "no match for smooth exceptional inverse-image preservation; hits concern other notions or there were no hits"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.DerivedCategory, \"shriek\"",
-      "results": "loogle: unknown identifier 'CategoryTheory.DerivedCategory'; 0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "invalid pattern; superseded by the UpperShriek query"
-    },
-    {
-      "tool": "grep",
-      "query": "UpperShriek|exceptional.*inverse|constructibleTorAmplitudeIn",
-      "results": "0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "no match for smooth exceptional inverse-image preservation; hits concern other notions or there were no hits"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The right adjoint to etale compact support for a smooth map is pullback tensored with a rank one local system shifted by twice the dimension, so it preserves constructible intervals",
-      "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.instIsLeftAdjointPullback",
-      "date": "2026-10-16",
-      "verdict": "no match for smooth exceptional inverse-image preservation; hits concern other notions or there were no hits"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"UpperShriek\"",
-      "results": "0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "no match for smooth exceptional inverse-image preservation; hits concern other notions or there were no hits"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "An exact pullback functor on sheaves preserves homological support and tensoring by an invertible rank one sheaf preserves Tor amplitude",
-      "results": "8 hits: SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.GrothendieckTopology.W.transport_isMonoidal, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, SheafOfModules.pullbackIso, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackComp",
-      "date": "2026-10-16",
-      "verdict": "Generic sheaf pullback and unit interfaces only; no exceptional inverse-image preservation theorem."
-    },
-    {
-      "tool": "grep",
-      "query": "rightDerivedUpperShriek|dualizingComplex|exceptionalInverseImage",
-      "results": "0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "No match for exceptional inverse-image or dualizing-complex declarations."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"dualizingComplex\"",
-      "results": "0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "No match for exceptional inverse-image or dualizing-complex declarations."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2077,
-  "blueprint_uses": [
-    "cor-pur-dualizing-object-purity",
-    "cor-sf-ambient-adjoint-discharge",
-    "def-coefficient-twists-detailed",
-    "def-pur-conventions",
-    "def-sbc-smooth-morphisms",
-    "def-weil-ambient-exceptional-adjoint",
-    "def-weil-constructible-intervals",
-    "def-weil-exceptional-adjoint-admissibility",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-scheme-morphism-properties",
-    "lem-exc-residue-tor-test",
-    "lem-weil-field-tor-amplitude",
-    "prop-weil-pbc-inverse-image-exact",
-    "prop-weil-twist-preserves",
-    "thm-asd-smooth-tensor",
-    "thm-cbc-finite-level-proetale",
-    "thm-pur-diagonal-dualizing-object",
-    "thm-sf-ambient-adjoint-class"
-  ],
-  "blueprint_tags": [
-    "latex:corollary"
-  ],
-  "uses_not_cited": [
-    "def-sbc-smooth-morphisms",
-    "def-weil-constructible-intervals",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "Put $\\omega_f=f^\\times A_Y$. By [thm-asd-smooth-tensor], there is a sheaf $T$ of $A_X$-modules, locally constant and locally free of rank one, and an isomorphism $\\omega_f\\cong T[2d]$. For every ordinary etale complex $G$, including a bounded constructible complex that has no finite Tor amplitude, that same theorem gives\n$$f^\\times G\\cong f^{-1}G\\otimes_A^L\\omega_f.$$\nChoose an etale covering family $u_i:U_i\\to X$ trivializing $T$. The numerical preservation statements require the rank-one local trivializations, and do not require a choice of the canonical Tate orientation.",
+   "uses": [
+    "thm-asd-smooth-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
+    "place": "Proof, opening assertion for bounded constructible inputs without finite Tor amplitude; unit step (iii), purity"
+   }
   },
-  "chapter": "sec-six-functors",
-  "unit": "sk-prop-sf-rf-shriek-preservation",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "cor-pur-smooth-admissibility",
-    "worker": "stage1",
-    "summary": "Expanded the smooth-purity route into eight steps, with etale-origin descent, local trivializations of the rank-one dualizing line, constructible-stratum checks, an etale residue-field calculation and two-way Tor-interval comparison. No new nodes. Made explicit the unit’s finite-type domain and corrected the word weaker for the further coefficient-transport assertion. Replaced the imported base-change and rational-field citations, which did not state the facts used. Second reading verified the physical blueprint and Stacks sources, completed the step-1 citation list, and wrote the stratum-cover refinement explicitly.",
-    "blueprint": "Opening all-etale tensor formula and comparison: steps 1–4. Imported Proof Step 1, constructibility and interval shift: step 5. Imported Proof Step 2 and its concluding paragraph, residue-field Tor criterion: steps 6–8. All realize unit sk-prop-sf-rf-shriek-preservation step (iii); no unit/chapter route is changed.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-finite-type-over-noetherian",
-        "why": "Generic geometric hypothesis check for the ordinary etale purity theorem (Stacks 01T6); no such lemma is stated in this unit."
-      },
-      {
-        "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
-        "why": "Generic quasi-separatedness check for compactification (Stacks 01OY); no such lemma is stated in this unit."
-      },
-      {
-        "node": "thm-nagata-compactification",
-        "why": "Generic existence of a compactification needed to apply ordinary etale purity, without changing the smooth-purity route."
-      },
-      {
-        "node": "lem-weil-l-adic-extension-integers-dvr",
-        "why": "Generic coefficient-ring input: the valuation ring of a finite extension of Q_l is a DVR with finite residue field."
-      },
-      {
-        "node": "lem-weil-valued-dvr-finite-quotients",
-        "why": "Generic finite-quotient theorem needed for the finite-ring hypothesis of ordinary etale smooth duality."
-      },
-      {
-        "node": "lem-sf-proetale-constructible-origin",
-        "why": "Generic equivalence of intrinsic finite constructibility with etale origin, needed to move the computation to the etale site."
-      },
-      {
-        "node": "lem-sf-comparison-pullback-exact",
-        "why": "Generic exactness and cohomology formula for the etale/pro-etale comparison; the unit has no comparison exactness lemma."
-      },
-      {
-        "node": "cor-sf-ambient-adjoint-discharge",
-        "why": "The existing bounded-class existence/adjunction theorem, not the false unrestricted ambient datum."
-      },
-      {
-        "node": "thm-asd-smooth-tensor",
-        "why": "The all-ordinary-etale-input smooth-purity tensor theorem supplies the rank-one dualizing line, including for non-finite-Tor inputs; this is precisely the unit purity route."
-      },
-      {
-        "node": "lem-kun-inverse-image-monoidal",
-        "why": "Generic derived monoidality of etale inverse image (Stacks 07A4), for restricting the purity formula and testing against the residue field."
-      },
-      {
-        "node": "prop-weil-pbc-inverse-image-modules-exact",
-        "why": "Exactness for actual constant-coefficient module sheaves, rather than only abelian sheaves; needed for the cohomology calculation."
-      },
-      {
-        "node": "lem-kun-derived-tensor-triangulated",
-        "why": "Generic derived tensor shift compatibility on the ordinary etale category."
-      },
-      {
-        "node": "lem-weil-pbc-exact-functor-bounded-below",
-        "why": "Generic commutation of an exact module functor with every derived cohomology sheaf."
-      },
-      {
-        "node": "prop-constructible-pullback",
-        "why": "Generic constructible-sheaf pullback theorem used for each cohomology sheaf; not a stronger preservation result for exceptional inverse image."
-      },
-      {
-        "node": "lem-kun-pullback-constant",
-        "why": "Generic inverse-image identification for the constant residue-field sheaf; monoidality alone does not supply that identification."
-      },
-      {
-        "node": "lem-sp-derived-cohomology-shift",
-        "why": "Generic signed shift/cohomology identity determines the endpoint signs."
-      },
-      {
-        "node": "lem-exc-residue-tor-test",
-        "why": "The residue-field test on bounded constructible ordinary etale complexes, as required by unit step (iii)."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "thm-nagata-compactification",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients",
-    "lem-sf-proetale-constructible-origin",
-    "lem-sf-comparison-pullback-exact",
-    "cor-sf-ambient-adjoint-discharge",
-    "thm-asd-smooth-tensor",
+  {
+   "text": "For each $u=u_i$, apply [lem-kun-inverse-image-monoidal] to the tensor formula and use that the exact module inverse image in [prop-weil-pbc-inverse-image-modules-exact] is termwise on complexes. It takes $T[2d]$ to $A_U[2d]$. Since derived tensor is triangulated in its second variable by [lem-kun-derived-tensor-triangulated], this gives\n$$u^{-1}f^\\times G\\cong (u^{-1}f^{-1}G)\\otimes_A^L A_U[2d]\\cong (u^{-1}f^{-1}G)[2d].$$\nThe last unit isomorphism is computed by $P\\otimes_A A_U=P$ for a K-flat representative $P$, using [def-kun-derived-tensor]. The displayed local formula holds for every $G$; finite Tor amplitude has not been used.",
+   "uses": [
     "lem-kun-inverse-image-monoidal",
     "prop-weil-pbc-inverse-image-modules-exact",
     "lem-kun-derived-tensor-triangulated",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
+    "place": "Proof, constructibility calculation: local expansion of the purity tensor formula"
+   }
+  },
+  {
+   "text": "Let $M\\in D_c^{[a,b]}(Y,A)$ and choose $G$ as in step 2. By [prop-weil-pbc-inverse-image-modules-exact] and [lem-weil-pbc-exact-functor-bounded-below], $\\mathcal H^q(f^{-1}G)\\cong f^{-1}\\mathcal H^q(G)$. For each $q$, the underlying set sheaf of $\\mathcal H^q(G)$ is constructible by [lem-weil-pbc-constructible-module-underlying-sets], and its pullback is constructible by [prop-constructible-pullback]. Its strata are locally closed subsets of $X$; since $X$ is of finite type over the field $k$, its underlying space is Noetherian, so by [def-weil-constructible-subset] every locally closed subset, in particular every stratum, is constructible, as condition (a) of [def-weil-pbc-etale-constructible-sheaf] requires. On each stratum for that set sheaf, [lem-pod-module-local-constancy-of-finite-underlying] gives local constancy of the pulled-back module sheaf. Its underlying geometric stalks are finite by the chosen set-sheaf stratification, so [lem-weil-pbc-finite-locally-constant-module-values] gives finite constant module values. Thus $Q^r=f^{-1}\\mathcal H^{r+2d}(G)$ is a constructible $A_X$-module sheaf for every $r$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
     "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-weil-pbc-constructible-module-underlying-sets",
     "prop-constructible-pullback",
-    "lem-kun-pullback-constant",
+    "lem-pod-module-local-constancy-of-finite-underlying",
+    "lem-weil-pbc-finite-locally-constant-module-values",
+    "def-weil-constructible-subset",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
+    "place": "Proof, Step 1 (constructibility and the signed interval shift)"
+   }
+  },
+  {
+   "text": "Put $H=f^\\times G$ and $F^r=\\mathcal H^r(H)$. Exactness of each $u_i^{-1}$ and its cohomology formula ([prop-weil-pbc-inverse-image-modules-exact], [lem-weil-pbc-exact-functor-bounded-below]), applied to step 4 and the signed shift formula [lem-sp-derived-cohomology-shift], give\n$$u_i^{-1}F^r\\cong u_i^{-1}f^{-1}\\mathcal H^{r+2d}(G)=u_i^{-1}Q^r.$$\nFor each $r$, choose a finite stratification witnessing constructibility of $Q^r$ from step 5. Apply [lem-sf-etale-local-isomorphism-constructible] with $F=F^r$, $G=Q^r$ and the same covering $\\{u_i\\}$: that very stratification makes $F^r$ constructible as an $A_X$-module sheaf. This invokes the fixed-stratum cover-refinement lemma, without requiring a finite trivializing covering or overlap compatibility of the purity trivializations.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-bounded-below",
     "lem-sp-derived-cohomology-shift",
+    "lem-sf-etale-local-isomorphism-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
+    "place": "Proof, Step 1 (constructibility and the signed interval shift)"
+   }
+  },
+  {
+   "text": "For $r\\notin[a-2d,b-2d]$, step 2 gives $\\mathcal H^{r+2d}(G)=0$. Hence every $u_i^{-1}F^r$ in step 6 is zero. Any section of $F^r$ restricts to zero after pulling the covering $\\{U_i\\}$ back to its domain, and is therefore zero by the uniqueness part of the sheaf axiom. Thus $F^r=0$. Together with step 6, [def-weil-pbc-constructible-complexes] gives $H\\in D_c^{[a-2d,b-2d]}(X_{\\Et},A)$. Finally [lem-sf-proetale-constructible-origin] and [lem-sf-comparison-pullback-exact] take this conclusion along $\\nu_X^*$ to $Rf^!M$ using step 2. This proves clause (1).",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-pullback-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
+    "place": "Proof, Step 1 (constructibility and the signed interval shift)"
+   }
+  },
+  {
+   "text": "Now let $K\\in D^b_{ctf}(Y,A)$ have Tor amplitude in $[a,b]$, and choose a bounded constructible etale representative $G$ as in step 2. By [lem-sf-comparison-tor-amplitude](ii), $G$ has Tor amplitude in $[a,b]$ on the etale site. Put $\\kappa=A/(\\varpi_E)$. Apply [lem-exc-residue-tor-test] to this bounded constructible etale $G$: the complex $G\\otimes_A^L\\kappa_Y$ has cohomology zero outside $[a,b]$. This is an etale-site use of the residue-field criterion; no criterion for arbitrary pro-etale sheaves is being asserted.",
+   "uses": [
+    "lem-sf-comparison-tor-amplitude",
     "lem-exc-residue-tor-test"
-  ],
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-Codex-Q37-94d928c3b",
-    "group": "Q37",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-94d928c3b (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, sources and unit/chapter route; checked all eight steps, edge cases, duplicates and dependency cycles. Mathematics accepted. Corrected only proof_origin.by from document to agent, as required for blueprint-based proofs. Whole corrected JSON and detailed review.md written; all 17 declared tool_uses accepted.; 1 file(s) fixed by the reviewer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
+    "place": "Proof, Step 2 (residue-field criterion), input side"
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-abd1ba976",
-    "group": "Q09",
-    "result": "pass",
-    "note": "Reviewed immutable files, all statement dependencies, sources, canonical constructions, universes, edge cases, and report. Both Lean files passed all five scompile.py checks without diagnostics. review.md written; branch unchanged."
+  {
+   "text": "Let $H=f^\\times G$, which is bounded constructible by steps 5–7 applied to any cohomological bounding interval of $K$. Restrict $H\\otimes_A^L\\kappa_X$ to a trivializing $u=u_i$. Using step 4, [lem-kun-inverse-image-monoidal] for $u$ and $f$, [lem-kun-pullback-constant] for the constant residue-field sheaves, and the shift compatibility of [lem-kun-derived-tensor-triangulated], obtain\n$$\n u^{-1}(H\\otimes_A^L\\kappa_X)\n \\cong ((u^{-1}f^{-1}G)[2d])\\otimes_A^L\\kappa_U\n \\cong (u^{-1}f^{-1}(G\\otimes_A^L\\kappa_Y))[2d].\n$$\nBoth $u^{-1}$ and $f^{-1}$ are exact on module sheaves by [prop-weil-pbc-inverse-image-modules-exact]. The cohomology formula of [lem-weil-pbc-exact-functor-bounded-below] and the signed shift formula of [lem-sp-derived-cohomology-shift] therefore identify degree $r$ of the last complex with\n$$u^{-1}f^{-1}\\mathcal H^{r+2d}(G\\otimes_A^L\\kappa_Y).$$\nIt vanishes for $r\\notin[a-2d,b-2d]$ by step 8. Vanishing on the covering $\\{U_i\\}$ is vanishing of the sheaf, so $H\\otimes_A^L\\kappa_X$ has cohomology in $[a-2d,b-2d]$.",
+   "uses": [
+    "lem-kun-inverse-image-monoidal",
+    "lem-kun-pullback-constant",
+    "lem-kun-derived-tensor-triangulated",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-sp-derived-cohomology-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
+    "place": "Proof, displayed residue-field tensor calculation and concluding paragraph; written after local trivialization"
+   }
   },
-  "lean": {
-    "module": "Sheaf.Paper.SmoothExceptionalPreservation",
-    "declaration": "WeilConjectures.PurityFiniteSetting.smooth_exceptional_preservation",
-    "declarations": [
-      "WeilConjectures.PurityFiniteSetting.prime_isUnit_stalk",
-      "WeilConjectures.PurityFiniteSetting.smooth_exceptional_preservation"
-    ],
-    "file": "lean/Sheaf/Paper/SmoothExceptionalPreservation.lean",
-    "statement": "theorem smooth_exceptional_preservation (P : WeilConjectures.PurityFiniteSetting.{u}) (X Y : Scheme.{u}) [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ) [SmoothOfRelativeDimension d f] : (∀ (a b : ℤ) (hab : a ≤ b) (L : proEtaleDerivedCategory Y P.Ring), finiteTorsionConstructibleIn P.coefficients.l P.extension P.level P.level_pos Y (P.prime_isUnit_stalk Y) a b hab L → finiteTorsionConstructibleIn P.coefficients.l P.extension P.level P.level_pos X (P.prime_isUnit_stalk X) (a - 2 * (d : ℤ)) (b - 2 * (d : ℤ)) (sub_le_sub_right hab _) ((finiteExceptionalInverseImage P.coefficients.l P.extension P.level P.level_pos P.field.k X Y f).obj L)) ∧ (∀ (a b : ℤ) (K : proEtaleDerivedCategory Y P.Ring), finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y K → HasProEtaleTorAmplitude Y P.Ring K a b → HasProEtaleTorAmplitude X P.Ring ((finiteExceptionalInverseImage P.coefficients.l P.extension P.level P.level_pos P.field.k X Y f).obj K) (a - 2 * (d : ℤ)) (b - 2 * (d : ℤ))) ∧ (∀ K : proEtaleDerivedCategory Y P.Ring, finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y K → finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos X ((finiteExceptionalInverseImage P.coefficients.l P.extension P.level P.level_pos P.field.k X Y f).obj K))",
-    "branch": "newtargets-dag",
-    "by": "Q09",
-    "date": "2026-10-16",
-    "existing": false
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $f:X\\to Y$ be smooth separated of pure relative dimension $d$.\nThen $f$ satisfies the\ntwo preservation clauses of\n[def-weil-exceptional-adjoint-admissibility], with\n$c_f^-=c_f^+=-2d$ in the signed convention of that definition:\n\n1. *constructibility.* For all integers $a\\leq b$,\n$$\nL\\in D_c^{[a,b]}(Y,A)\\quad\\Longrightarrow\\quad\nRf^!L\\in D_c^{[a-2d,b-2d]}(X,A).\n$$\n1. *finite Tor amplitude.* If $K\\in D^b_{ctf}(Y,A)$ has\nfinite Tor amplitude in\n$[a,b]$, then $Rf^!K$ has finite Tor amplitude in\n$[a-2d,b-2d]$; in particular $Rf^!$ carries $D^b_{ctf}(Y,A)$\ninto $D^b_{ctf}(X,A)$.\n\nThus every smooth morphism is\nexceptional-adjoint admissible at $A=A_{E,n}$ in the constructible sense:\nthe preservation clauses of [def-weil-exceptional-adjoint-admissibility]\nhold on the complexes of the blueprint's coefficient class. The ambient\nexceptional right adjoint datum of [def-weil-ambient-exceptional-adjoint] is\nnot assumed: on the bounded constructible and finite-Tor coefficients that\nthe two clauses quantify over it is the theorem\n[cor-sf-ambient-adjoint-discharge]. The unrestricted clause (1) of\n[def-weil-exceptional-adjoint-admissibility], on all pro-étale sheaves, is\nfalse in general and is not asserted. Admissibility at\n$\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$ demands in addition the uniformity of the\ntwo clauses over the finite stages and the finite-reduction and\nscalar-extension compatibilities of the right adjoints; those are the\ncoefficient transport of the purity chapter and are not asserted here.",
-    "proof": [
-      {
-        "text": "By [cor-pur-dualizing-object-purity] the right adjoint $Rf^!$, whose\nexistence on the coefficients used here is the theorem\n[cor-sf-ambient-adjoint-discharge], is\nidentified with $Lf^*(-)(d)[2d]$ on finite-Tor objects. For a\nbounded constructible complex $L$ without finite Tor amplitude, use\nthe tensor formula on all ordinary etale complexes of\n[thm-asd-smooth-tensor], the orientation at $\\Lambda$ of\n[thm-pur-diagonal-dualizing-object], and the comparison\n[thm-sf-ambient-adjoint-class]. They give the same identification\nfor $L$; no site-perfectness of $L$ is assumed. The criterion below is\napplied at the finite etale level and transported to the small pro-etale\nsite along [thm-cbc-finite-level-proetale], as elsewhere in this\nchapter.\nStep 1: (1). The inverse image of [prop-weil-pbc-inverse-image-exact] is exact.\nIt preserves constructibility: pull back each finite stratification\nand each finite locally constant sheaf on its strata, as in\n[def-weil-finite-torsion-constructibility]. Thus for\n$L\\in D_c^{[a,b]}(Y,A)$ the complex $Lf^*L$ is bounded constructible\nwith $\\mathcal H^r(Lf^*L)\\cong f^*\\mathcal H^r(L)$, which vanishes for\n$r\\notin[a,b]$; the [def-coefficient-twists-detailed] twist preserves the\nvanishing degrees by [prop-weil-twist-preserves], and the shift moves them, by the convention\n$\\mathcal H^r(C[2d])=\\mathcal H^{r+2d}(C)$, to $[a-2d,b-2d]$.\nStep 2: (2). Test the finite Tor amplitude of $Rf^!K$ by the residue\nfield criterion of [lem-exc-residue-tor-test]: it is equivalent to\nthe complex $\\mathcal H^\\bullet\\bigl(Rf^!K\\otimes^L_A\\kappa\\bigr)$ being\nconcentrated in $[a-2d,b-2d]$. Substituting the purity\nidentification and the associativity of the derived tensor product,\n\n$$\nRf^!K\\otimes^L_A\\kappa\n\\;\\cong\\;\\bigl(Lf^*K\\otimes^L_A\\kappa\\bigr)(d)[2d]\n\\;\\cong\\;Lf^*\\bigl(K\\otimes^L_A\\kappa\\bigr)(d)[2d].\n$$",
-        "uses": [
-          "cor-pur-dualizing-object-purity",
-          "cor-sf-ambient-adjoint-discharge",
-          "thm-asd-smooth-tensor",
-          "thm-pur-diagonal-dualizing-object",
-          "thm-sf-ambient-adjoint-class",
-          "thm-cbc-finite-level-proetale",
-          "prop-weil-pbc-inverse-image-exact",
-          "def-weil-finite-torsion-constructibility",
-          "def-coefficient-twists-detailed",
-          "prop-weil-twist-preserves",
-          "lem-exc-residue-tor-test"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "By the same criterion applied to $K$, the complex\n$K\\otimes^L_A\\kappa$ has cohomology in $[a,b]$; the inverse image\n$Lf^*$ is exact, so $Lf^*(K\\otimes^L_A\\kappa)$ has cohomology in\n$[a,b]$, and the twist by the locally constant free rank-one sheaf\n$\\Lambda(d)$ preserves the vanishing degrees. The shift therefore puts\nthe cohomology in $[a-2d,b-2d]$, which is the assertion. At field\ncoefficients the assertion is the case already recorded in\n[lem-weil-field-tor-amplitude].",
-        "uses": [
-          "lem-weil-field-tor-amplitude"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Apply [lem-exc-residue-tor-test] to the bounded constructible etale $H$ of step 9. It has Tor amplitude in $[a-2d,b-2d]$. By [lem-sf-comparison-tor-amplitude](i), $\\nu_X^*H\\cong Rf^!K$ has that same Tor amplitude against all degree-zero pro-etale $A$-module sheaves. Steps 5–7 already proves its bounded constructibility. By [def-weil-finite-tor-amplitude], it lies in $D^b_{ctf}(X,A)$, proving clause (2). The shift in steps 5–7 is exactly the signed choice $c_f^-=c_f^+=-2d$ of [def-weil-exceptional-adjoint-admissibility]. Together with the bounded-class adjunction of [cor-sf-ambient-adjoint-discharge], these are the constructible analogues asserted in the statement. The unrestricted ambient clause (1) and the coefficient-transport statements at $\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell$ are not consequences of this argument.",
+   "uses": [
+    "lem-exc-residue-tor-test",
+    "lem-sf-comparison-tor-amplitude",
+    "def-weil-finite-tor-amplitude",
+    "def-weil-exceptional-adjoint-admissibility",
+    "cor-sf-ambient-adjoint-discharge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
+    "place": "Proof, conclusion of Step 2 and interpretation of the two preservation clauses"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "thm-nagata-compactification",
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "thm-asd-smooth-tensor",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-pullback-exact",
+  "def-weil-exceptional-inverse-image",
+  "cor-sf-ambient-adjoint-discharge",
+  "lem-kun-inverse-image-monoidal",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-kun-derived-tensor-triangulated",
+  "def-kun-derived-tensor",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-constructible-module-underlying-sets",
+  "prop-constructible-pullback",
+  "lem-pod-module-local-constancy-of-finite-underlying",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-constructible-subset",
+  "lem-sp-derived-cohomology-shift",
+  "lem-sf-etale-local-isomorphism-constructible",
+  "def-weil-pbc-constructible-complexes",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-exc-residue-tor-test",
+  "lem-kun-pullback-constant",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-exceptional-adjoint-admissibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/cor-pur-smooth-admissibility.md",
+  "place": "Proof, opening all-input etale tensor formula and Steps 1–2, expanded using rank-one local trivializations; realizes unit step (iii)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "smooth.*(purity|shriek)|shriek.*smooth",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for smooth exceptional inverse-image preservation; hits concern other notions or there were no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth purity exceptional inverse image shifts bounded constructible cohomology and finite Tor amplitude by twice the relative dimension",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth separated morphism of schemes of pure relative dimension d, exceptional inverse image preserves constructible cohomology and Tor amplitude with shift minus 2d",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange",
+   "date": "2026-10-16",
+   "verdict": "no match for smooth exceptional inverse-image preservation; hits concern other notions or there were no hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory, \"shriek\"",
+   "results": "loogle: unknown identifier 'CategoryTheory.DerivedCategory'; 0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "invalid pattern; superseded by the UpperShriek query"
+  },
+  {
+   "tool": "grep",
+   "query": "UpperShriek|exceptional.*inverse|constructibleTorAmplitudeIn",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for smooth exceptional inverse-image preservation; hits concern other notions or there were no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right adjoint to etale compact support for a smooth map is pullback tensored with a rank one local system shifted by twice the dimension, so it preserves constructible intervals",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.instIsLeftAdjointPullback",
+   "date": "2026-10-16",
+   "verdict": "no match for smooth exceptional inverse-image preservation; hits concern other notions or there were no hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UpperShriek\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for smooth exceptional inverse-image preservation; hits concern other notions or there were no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact pullback functor on sheaves preserves homological support and tensoring by an invertible rank one sheaf preserves Tor amplitude",
+   "results": "8 hits: SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.GrothendieckTopology.W.transport_isMonoidal, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, SheafOfModules.pullbackIso, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackComp",
+   "date": "2026-10-16",
+   "verdict": "Generic sheaf pullback and unit interfaces only; no exceptional inverse-image preservation theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedUpperShriek|dualizingComplex|exceptionalInverseImage",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No match for exceptional inverse-image or dualizing-complex declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizingComplex\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No match for exceptional inverse-image or dualizing-complex declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2077,
+ "blueprint_uses": [
+  "cor-pur-dualizing-object-purity",
+  "cor-sf-ambient-adjoint-discharge",
+  "def-coefficient-twists-detailed",
+  "def-pur-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-ambient-exceptional-adjoint",
+  "def-weil-constructible-intervals",
+  "def-weil-exceptional-adjoint-admissibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-scheme-morphism-properties",
+  "lem-exc-residue-tor-test",
+  "lem-weil-field-tor-amplitude",
+  "prop-weil-pbc-inverse-image-exact",
+  "prop-weil-twist-preserves",
+  "thm-asd-smooth-tensor",
+  "thm-cbc-finite-level-proetale",
+  "thm-pur-diagonal-dualizing-object",
+  "thm-sf-ambient-adjoint-class"
+ ],
+ "blueprint_tags": [
+  "latex:corollary"
+ ],
+ "uses_not_cited": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-constructible-intervals",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "cor-pur-smooth-admissibility",
+  "worker": "stage1",
+  "summary": "Repair of human return: retained statement, Lean record, smooth-purity route and all other proof arguments. Replaced the long former step 5 by three shorter steps. Module pullback uses the existing finite-underlying local-constancy and finite-value lemmas; transfer of a fixed constructible stratification through etale-local cohomology isomorphisms is extracted as one new statement-only node. No new Mathlib leaves.",
+  "blueprint": "Opening all-etale tensor formula and comparison: unchanged steps 1–4. Blueprint Proof Step 1: steps 5–7, with the former fixed-stratum local-isomorphism argument extracted as lem-sf-etale-local-isomorphism-constructible. Blueprint Proof Step 2: steps 8–10, the former steps 6–8 with internal cross-references renumbered. The local rank-one purity route and residue-field test are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic geometric hypothesis check for the ordinary etale purity theorem (Stacks 01T6); no such lemma is stated in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic quasi-separatedness check for compactification (Stacks 01OY); no such lemma is stated in this unit."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic existence of a compactification needed to apply ordinary etale purity, without changing the smooth-purity route."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient-ring input: the valuation ring of a finite extension of Q_l is a DVR with finite residue field."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Generic finite-quotient theorem needed for the finite-ring hypothesis of ordinary etale smooth duality."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic equivalence of intrinsic finite constructibility with etale origin, needed to move the computation to the etale site."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic exactness and cohomology formula for the etale/pro-etale comparison; the unit has no comparison exactness lemma."
+   },
+   {
+    "node": "cor-sf-ambient-adjoint-discharge",
+    "why": "The existing bounded-class existence/adjunction theorem, not the false unrestricted ambient datum."
+   },
+   {
+    "node": "thm-asd-smooth-tensor",
+    "why": "The all-ordinary-etale-input smooth-purity tensor theorem supplies the rank-one dualizing line, including for non-finite-Tor inputs; this is precisely the unit purity route."
+   },
+   {
+    "node": "lem-kun-inverse-image-monoidal",
+    "why": "Generic derived monoidality of etale inverse image (Stacks 07A4), for restricting the purity formula and testing against the residue field."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exactness for actual constant-coefficient module sheaves, rather than only abelian sheaves; needed for the cohomology calculation."
+   },
+   {
+    "node": "lem-kun-derived-tensor-triangulated",
+    "why": "Generic derived tensor shift compatibility on the ordinary etale category."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Generic commutation of an exact module functor with every derived cohomology sheaf."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Generic constructible-sheaf pullback theorem used for each cohomology sheaf; not a stronger preservation result for exceptional inverse image."
+   },
+   {
+    "node": "lem-kun-pullback-constant",
+    "why": "Generic inverse-image identification for the constant residue-field sheaf; monoidality alone does not supply that identification."
+   },
+   {
+    "node": "lem-sp-derived-cohomology-shift",
+    "why": "Generic signed shift/cohomology identity determines the endpoint signs."
+   },
+   {
+    "node": "lem-exc-residue-tor-test",
+    "why": "The residue-field test on bounded constructible ordinary etale complexes, as required by unit step (iii)."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-module-underlying-sets",
+    "why": "Forgetting a constructible module sheaf gives the set-sheaf constructible stratification used by the existing pullback theorem."
+   },
+   {
+    "node": "lem-pod-module-local-constancy-of-finite-underlying",
+    "why": "Recovers module local constancy from finite locally constant underlying set sheaves on the pulled-back strata; this is a generic coefficient-structure tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-locally-constant-module-values",
+    "why": "Converts module local constancy and finite geometric stalks into actual finite constant module values on a cover."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "thm-nagata-compactification",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-pullback-exact",
+  "cor-sf-ambient-adjoint-discharge",
+  "thm-asd-smooth-tensor",
+  "lem-kun-inverse-image-monoidal",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "prop-constructible-pullback",
+  "lem-kun-pullback-constant",
+  "lem-sp-derived-cohomology-shift",
+  "lem-exc-residue-tor-test",
+  "lem-weil-pbc-constructible-module-underlying-sets",
+  "lem-pod-module-local-constancy-of-finite-underlying",
+  "lem-weil-pbc-finite-locally-constant-module-values"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-b234c42d6",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-b234c42d6 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, the master and current blueprint item, the unit/chapter records and the Stacks 03RU module clause (etale-cohomology.tex lines 9917-9957). The statement and Lean record are byte-identical to the base copy, and no target is weakened. Steps 1-4 are unchanged. Steps 8-10 are the old steps 6-8, and every renumbered cross-reference is correct. All hypotheses check: Noetherian/qcqs/compactifiable, A finite with l^n A=0, thm-asd-smooth-tensor valid for all etale inputs, comparison-Tor (ii)/(i) and the residue test on bounded constructible etale complexes, shift sign H^r(C[2d])=H^{r+2d}(C). No SGA citation and no base-change comparison is used. The new node lem-sf-etale-local-isomorphism-constructible is true: the covers W_t x_X U_j of Z trivialise i^{-1}F, using inverse-image composition and constant pullback, with no overlap cocycle needed. I tested it on an empty X, the identity cover, a nontrivial twist over a non-separably-closed field, and infinite or disconnected covers. It is statement-only and self-contained, has sources and searches, and is strictly smaller than the item. A regex sweep of the DAG (local isomorphism, lisse descent, 03RU) found no duplicate. FIX: step 5 used prop-constructible-pullback, whose def-constructible-constructible only gives locally closed strata, but module constructibility (def-weil-pbc-etale-constructible-sheaf (a)) needs constructible strata. I added the sentence that X is of finite type over k, so its space is Noetherian, so every locally closed stratum is constructible by def-weil-constructible-subset (005L), and added def-weil-constructible-subset and def-weil-pbc-etale-constructible-sheaf to step 5 uses and proof_deps. The whole corrected item is in fixes/dag/nodes/sec-six-functors/cor-pur-smooth-admissibility.json. I accept the three new tool_uses (lem-weil-pbc-constructible-module-underlying-sets, lem-pod-module-local-constancy-of-finite-underlying, lem-weil-pbc-finite-locally-constant-module-values) together with the 17 already accepted. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-abd1ba976",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Reviewed immutable files, all statement dependencies, sources, canonical constructions, universes, edge cases, and report. Both Lean files passed all five scompile.py checks without diagnostics. review.md written; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothExceptionalPreservation",
+  "declaration": "WeilConjectures.PurityFiniteSetting.smooth_exceptional_preservation",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.prime_isUnit_stalk",
+   "WeilConjectures.PurityFiniteSetting.smooth_exceptional_preservation"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothExceptionalPreservation.lean",
+  "statement": "theorem smooth_exceptional_preservation (P : WeilConjectures.PurityFiniteSetting.{u}) (X Y : Scheme.{u}) [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ) [SmoothOfRelativeDimension d f] : (∀ (a b : ℤ) (hab : a ≤ b) (L : proEtaleDerivedCategory Y P.Ring), finiteTorsionConstructibleIn P.coefficients.l P.extension P.level P.level_pos Y (P.prime_isUnit_stalk Y) a b hab L → finiteTorsionConstructibleIn P.coefficients.l P.extension P.level P.level_pos X (P.prime_isUnit_stalk X) (a - 2 * (d : ℤ)) (b - 2 * (d : ℤ)) (sub_le_sub_right hab _) ((finiteExceptionalInverseImage P.coefficients.l P.extension P.level P.level_pos P.field.k X Y f).obj L)) ∧ (∀ (a b : ℤ) (K : proEtaleDerivedCategory Y P.Ring), finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y K → HasProEtaleTorAmplitude Y P.Ring K a b → HasProEtaleTorAmplitude X P.Ring ((finiteExceptionalInverseImage P.coefficients.l P.extension P.level P.level_pos P.field.k X Y f).obj K) (a - 2 * (d : ℤ)) (b - 2 * (d : ℤ))) ∧ (∀ K : proEtaleDerivedCategory Y P.Ring, finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y K → finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos X ((finiteExceptionalInverseImage P.coefficients.l P.extension P.level P.level_pos P.field.k X Y f).obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $f:X\\to Y$ be smooth separated of pure relative dimension $d$.\nThen $f$ satisfies the\ntwo preservation clauses of\n[def-weil-exceptional-adjoint-admissibility], with\n$c_f^-=c_f^+=-2d$ in the signed convention of that definition:\n\n1. *constructibility.* For all integers $a\\leq b$,\n$$\nL\\in D_c^{[a,b]}(Y,A)\\quad\\Longrightarrow\\quad\nRf^!L\\in D_c^{[a-2d,b-2d]}(X,A).\n$$\n1. *finite Tor amplitude.* If $K\\in D^b_{ctf}(Y,A)$ has\nfinite Tor amplitude in\n$[a,b]$, then $Rf^!K$ has finite Tor amplitude in\n$[a-2d,b-2d]$; in particular $Rf^!$ carries $D^b_{ctf}(Y,A)$\ninto $D^b_{ctf}(X,A)$.\n\nThus every smooth morphism is\nexceptional-adjoint admissible at $A=A_{E,n}$ in the constructible sense:\nthe preservation clauses of [def-weil-exceptional-adjoint-admissibility]\nhold on the complexes of the blueprint's coefficient class. The ambient\nexceptional right adjoint datum of [def-weil-ambient-exceptional-adjoint] is\nnot assumed: on the bounded constructible and finite-Tor coefficients that\nthe two clauses quantify over it is the theorem\n[cor-sf-ambient-adjoint-discharge]. The unrestricted clause (1) of\n[def-weil-exceptional-adjoint-admissibility], on all pro-étale sheaves, is\nfalse in general and is not asserted. Admissibility at\n$\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$ demands in addition the uniformity of the\ntwo clauses over the finite stages and the finite-reduction and\nscalar-extension compatibilities of the right adjoints; those are the\ncoefficient transport of the purity chapter and are not asserted here.",
+  "proof": [
+   {
+    "text": "By [cor-pur-dualizing-object-purity] the right adjoint $Rf^!$, whose\nexistence on the coefficients used here is the theorem\n[cor-sf-ambient-adjoint-discharge], is\nidentified with $Lf^*(-)(d)[2d]$ on finite-Tor objects. For a\nbounded constructible complex $L$ without finite Tor amplitude, use\nthe tensor formula on all ordinary etale complexes of\n[thm-asd-smooth-tensor], the orientation at $\\Lambda$ of\n[thm-pur-diagonal-dualizing-object], and the comparison\n[thm-sf-ambient-adjoint-class]. They give the same identification\nfor $L$; no site-perfectness of $L$ is assumed. The criterion below is\napplied at the finite etale level and transported to the small pro-etale\nsite along [thm-cbc-finite-level-proetale], as elsewhere in this\nchapter.\nStep 1: (1). The inverse image of [prop-weil-pbc-inverse-image-exact] is exact.\nIt preserves constructibility: pull back each finite stratification\nand each finite locally constant sheaf on its strata, as in\n[def-weil-finite-torsion-constructibility]. Thus for\n$L\\in D_c^{[a,b]}(Y,A)$ the complex $Lf^*L$ is bounded constructible\nwith $\\mathcal H^r(Lf^*L)\\cong f^*\\mathcal H^r(L)$, which vanishes for\n$r\\notin[a,b]$; the [def-coefficient-twists-detailed] twist preserves the\nvanishing degrees by [prop-weil-twist-preserves], and the shift moves them, by the convention\n$\\mathcal H^r(C[2d])=\\mathcal H^{r+2d}(C)$, to $[a-2d,b-2d]$.\nStep 2: (2). Test the finite Tor amplitude of $Rf^!K$ by the residue\nfield criterion of [lem-exc-residue-tor-test]: it is equivalent to\nthe complex $\\mathcal H^\\bullet\\bigl(Rf^!K\\otimes^L_A\\kappa\\bigr)$ being\nconcentrated in $[a-2d,b-2d]$. Substituting the purity\nidentification and the associativity of the derived tensor product,\n\n$$\nRf^!K\\otimes^L_A\\kappa\n\\;\\cong\\;\\bigl(Lf^*K\\otimes^L_A\\kappa\\bigr)(d)[2d]\n\\;\\cong\\;Lf^*\\bigl(K\\otimes^L_A\\kappa\\bigr)(d)[2d].\n$$",
+    "uses": [
+     "cor-pur-dualizing-object-purity",
+     "cor-sf-ambient-adjoint-discharge",
+     "thm-asd-smooth-tensor",
+     "thm-pur-diagonal-dualizing-object",
+     "thm-sf-ambient-adjoint-class",
+     "thm-cbc-finite-level-proetale",
+     "prop-weil-pbc-inverse-image-exact",
+     "def-weil-finite-torsion-constructibility",
+     "def-coefficient-twists-detailed",
+     "prop-weil-twist-preserves",
+     "lem-exc-residue-tor-test"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "By the same criterion applied to $K$, the complex\n$K\\otimes^L_A\\kappa$ has cohomology in $[a,b]$; the inverse image\n$Lf^*$ is exact, so $Lf^*(K\\otimes^L_A\\kappa)$ has cohomology in\n$[a,b]$, and the twist by the locally constant free rank-one sheaf\n$\\Lambda(d)$ preserves the vanishing degrees. The shift therefore puts\nthe cohomology in $[a-2d,b-2d]$, which is the assertion. At field\ncoefficients the assertion is the case already recorded in\n[lem-weil-field-tor-amplitude].",
+    "uses": [
+     "lem-weil-field-tor-amplitude"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

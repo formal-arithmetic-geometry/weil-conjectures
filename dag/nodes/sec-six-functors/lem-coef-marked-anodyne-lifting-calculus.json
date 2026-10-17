@@ -87,16 +87,45 @@
    }
   },
   {
-   "text": "Check the eight pairs from Step 5. For (i) and $b_m$, [lem-coef-inner-anodyne-pushout-product] makes the underlying minimal-marked product inner anodyne, hence marked anodyne after giving both sides minimal markings. To justify this last passage with the lifting-property definition of inner anodyne used by that node, apply [lem-coef-small-object-cell-factorization] in unmarked simplicial sets to the finite inner horns. Their finite domains satisfy its smallness hypothesis for an omega-chain. Its retract characterization identifies the maps left orthogonal to inner fibrations with retracts of inner-horn cell maps. Minimal marking preserves these pushouts, transfinite composites and retracts, since their only marked edges are degeneracies. They therefore lie in the saturated closure of (i). For (i) and $a$, the map is an isomorphism: the source horn contains all vertices, which already supplies every new vertical marking. For an endpoint prism $e\\square b_n$ and $b_m$, the product is $e\\square(b_n\\square b_m)$ after permuting coordinates; $b_n\\square b_m$ is a simplicial monomorphism, so Step 4 applies. For an endpoint prism and $a$, it is an isomorphism if $n>0$, because $\\partial\\Delta^n$ contains every vertex. If $n=0$, it marks the square starting with the two vertical edges and the upper horizontal edge: mark the diagonal by (iii), then the lower horizontal edge by [lem-coef-marked-triangle-cancellation]. For (iii) and $b_m$, the underlying map is an identity. When $m>0$, every vertex of $\\Delta^m$ lies in its boundary, so the boundary factor already supplies every edge of $\\Delta^2$ paired with a constant edge at that vertex; these are all the target markings because the second factor is minimally marked. The product is therefore an isomorphism. For $m=0$, its empty boundary leaves (iii) itself. For (iii) and $a$, the only missing marking is $([0,2],[0,1])$; the triangle with vertices $(0,0),(1,0),(2,1)$ has its two consecutive edges already marked, so a pushout of (iii) marks that diagonal. For (iv) and $b_m$, the underlying map is an identity. For $m>0$, every target marked edge is $(h,s_0v)$ for an edge $h$ of $K$ and a vertex $v$ of $\\Delta^m$; that vertex is in $\\partial\\Delta^m$, so this edge is already marked by the boundary factor. Thus the product is an isomorphism. For $m=0$ the boundary is empty and the product is (iv). For (iv) and $a$, the underlying object is $K\\times\\Delta^1$; the source marks exactly the edges with at least one degenerate coordinate. For each remaining edge $(h,[0,1])$, the triangle with vertices $(d_1h,0),(d_0h,0),(d_0h,1)$ is supplied by the degeneracy $s_1h$ and the order map $(0,0,1)$ in the second coordinate. Its two consecutive edges are marked, and (iii) marks its diagonal. Well-ordering these edges gives the desired marking extension. This proves every generating case; Step 5 proves the full pushout-product assertion, including maps that add markings without changing underlying simplices.",
+   "text": "For the inner-horn cases (A1),(A2), first use [lem-coef-inner-anodyne-pushout-product]: the underlying product with $b_m$ is inner anodyne. The horn inclusion has the required left lifting property by the definition of inner fibration. By [lem-coef-inner-horn-cell-generation], this product is a retract of a small inner-horn cell map. Minimal marking preserves its coproducts, pushouts and continuous unions: their only marked edges are images of degenerate edges, hence exactly the degeneracies of the underlying colimit. It also preserves retract diagrams. Thus the minimally marked product lies in the closure of (i). For the product with $a$, the underlying map is an identity, and every newly marked vertical edge already comes from the source horn, which contains every vertex of the simplex. This product is an isomorphism.",
    "uses": [
     "lem-coef-inner-anodyne-pushout-product",
-    "lem-coef-marked-triangle-cancellation",
-    "lem-coef-small-object-cell-factorization"
+    "lem-coef-inner-horn-cell-generation"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-    "place": "Proposition 3.1.2.3, cases (A1)-(D2), with the individual triangle attachments written out."
+    "place": "Proposition 3.1.2.3, cases (A1),(A2); Remark 3.1.1.4. The cellular comparison is the cited existing Mathlib leaf."
+   }
+  },
+  {
+   "text": "For the endpoint-prism cases (B1),(B2), the product $(e\\square b_n)\\square b_m$ is $e\\square(b_n\\square b_m)$, by permuting product coordinates and identifying the union of the three source pieces. The map $b_n\\square b_m$ is the inclusion $(\\partial\\Delta^n\\times\\Delta^m)\\cup(\\Delta^n\\times\\partial\\Delta^m)\\subseteq\\Delta^n\\times\\Delta^m$, hence a simplicial monomorphism. The final assertion of [lem-coef-marked-endpoint-prism-generation] applies. For $(e\\square b_n)\\square a$, if $n>0$, the boundary contains every vertex, so every new vertical marking is already present and the map is an isomorphism. If $n=0$, the source marks the two vertical edges and the upper horizontal edge of the square. Its upper triangle marks the diagonal by (iii); its lower triangle then has the diagonal and final vertical edge marked, so [lem-coef-marked-triangle-cancellation] marks the lower horizontal edge. These are pushouts of the indicated marking extensions.",
+   "uses": [
+    "lem-coef-marked-endpoint-prism-generation",
+    "lem-coef-marked-triangle-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.2.3, cases (B1),(B2); Proposition 3.1.1.5 and Corollary 3.1.1.7."
+   }
+  },
+  {
+   "text": "For the triangle-generator cases (C1),(C2), the product of (iii) with $b_m$ has identity underlying map. If $m>0$, its boundary piece already marks every pair $(h,s_0v)$, since each vertex $v$ of $\\Delta^m$ is in the boundary; these are exactly the target markings. For $m=0$ the product is (iii) itself. For the product of (iii) with $a$, direct inspection of coordinatewise markings leaves just the edge $([0,2],[0,1])$ unmarked. The triangle with vertices $(0,0),(1,0),(2,1)$ has both consecutive edges already marked. Pushing out (iii) along this triangle marks exactly the missing diagonal.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.2.3, cases (C1),(C2); explicit coordinatewise marking checks."
+   }
+  },
+  {
+   "text": "For the Kan-marking cases (D1),(D2), the product of (iv) with $b_m$ has identity underlying map. If $m>0$, every target marked edge is $(h,s_0v)$, and is already marked by the boundary piece because $v\\in\\partial\\Delta^m$. For $m=0$ the product is (iv). For the product with $a$, the underlying object is $K\\times\\Delta^1$; its source marks exactly the edges with at least one degenerate coordinate. For each missing edge $(h,[0,1])$, take the triangle $(s_1h,(0,0,1))$ with vertices $(d_1h,0),(d_0h,0),(d_0h,1)$. Both consecutive edges are already marked, and its diagonal is the desired edge. A pushout of (iii) marks this edge; a small well-ordered composite does so for all missing edges. Thus all eight generating products have now been checked. The saturation reduction in Step 5 proves the full pushout-product assertion, including maps adding only markings.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.1.2.3, cases (D1),(D2); explicit degeneracy triangle attachments."
    }
   },
   {
@@ -112,7 +141,7 @@
    }
   },
   {
-   "text": "For $0<k\\leq n$ the fully marked horn $(\\Lambda_k^n)^\\sharp\\to(\\Delta^n)^\\sharp$ is marked anodyne. For $n\\geq3$ every edge is already in the horn, so it is the pushout of (i) or (ii) adding the source markings. For $n=2$, first fill the underlying horn with (i) or (ii), retaining all old markings; the only new edge is then marked using (iii) if $k=1$, and [lem-coef-marked-triangle-cancellation] if $k=2$. For $n=1,k=1$, use (ii). Let $j:X\\to Y$ be any degreewise injective marked map. A lifting square for a positive-index horn against $r:\\operatorname{Map}^\\sharp(Y,C^\\natural)\\to\\operatorname{Map}^\\sharp(X,C^\\natural)$ adjoints to a map from the domain of $j\\square((\\Lambda_k^n)^\\sharp\\to(\\Delta^n)^\\sharp)$ into $C^\\natural$. Step 6 makes this map marked anodyne (interchange the two factors), and Step 1 gives its filler. Thus $r$ is a right fibration. Its target is Kan by Step 7, so [lem-cbc-right-fibration-space-fiber] makes $r$ a Kan fibration.",
+   "text": "For $0<k\\leq n$ the fully marked horn $(\\Lambda_k^n)^\\sharp\\to(\\Delta^n)^\\sharp$ is marked anodyne. For $n\\geq3$ every edge is already in the horn, so it is the pushout of (i) or (ii) adding the source markings. For $n=2$, first fill the underlying horn with (i) or (ii), retaining all old markings; the only new edge is then marked using (iii) if $k=1$, and [lem-coef-marked-triangle-cancellation] if $k=2$. For $n=1,k=1$, use (ii). Let $j:X\\to Y$ be any degreewise injective marked map. A lifting square for a positive-index horn against $r:\\operatorname{Map}^\\sharp(Y,C^\\natural)\\to\\operatorname{Map}^\\sharp(X,C^\\natural)$ adjoints to a map from the domain of $j\\square((\\Lambda_k^n)^\\sharp\\to(\\Delta^n)^\\sharp)$ into $C^\\natural$. Steps 6-9 make this map marked anodyne (interchange the two factors), and Step 1 gives its filler. Thus $r$ is a right fibration. Its target is Kan by Step 10, so [lem-cbc-right-fibration-space-fiber] makes $r$ a Kan fibration.",
    "uses": [
     "lem-coef-marked-triangle-cancellation",
     "lem-cbc-right-fibration-space-fiber"
@@ -124,7 +153,7 @@
    }
   },
   {
-   "text": "If $j$ is marked anodyne, a boundary lifting square for the same $r$ adjoints to lifting $C^\\natural\\to*$ against $j\\square((\\partial\\Delta^n)^\\sharp\\to(\\Delta^n)^\\sharp)$. The latter is marked anodyne by Step 6. Step 1 supplies the filler, for every $n\\geq0$, with $n=0$ giving extension of vertices. Thus $r$ is a trivial Kan fibration, using exactly the boundary-lifting characterization of [lem-coef-kan-quillen-right-proper].",
+   "text": "If $j$ is marked anodyne, a boundary lifting square for the same $r$ adjoints to lifting $C^\\natural\\to*$ against $j\\square((\\partial\\Delta^n)^\\sharp\\to(\\Delta^n)^\\sharp)$. The latter is marked anodyne by Steps 6-9. Step 1 supplies the filler, for every $n\\geq0$, with $n=0$ giving extension of vertices. Thus $r$ is a trivial Kan fibration, using exactly the boundary-lifting characterization of [lem-coef-kan-quillen-right-proper].",
    "uses": [
     "lem-coef-kan-quillen-right-proper"
    ],
@@ -152,7 +181,7 @@
    "elementary": true,
    "source": {
     "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-    "place": "Remark 3.1.1.3; universe bookkeeping for Steps 1-10."
+    "place": "Remark 3.1.1.3; universe bookkeeping for Steps 1-13."
    }
   }
  ],
@@ -163,6 +192,7 @@
   "lem-cbc-simplicial-composition-spine",
   "lem-coef-infinity-monomorphism-boundary-cells",
   "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-inner-horn-cell-generation",
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-marked-endpoint-prism-generation",
   "lem-coef-marked-triangle-cancellation",
@@ -250,10 +280,52 @@
    "results": "{\"t\": \"2026-10-16T18:25:41Z\", \"tool\": \"leanfinder\", \"query\": \"Marked simplicial set exponentials into a quasi category with marked equivalences have Kan cores and restriction fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.QCat.bicategory\", \"SSet.modelCategoryQuillen.I\", \"SSet.Truncated.Quasicategory₂\", \"SSet.QCat.strictBicategory\", \"SSet.QCat\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\"], \"digest\": \"cabf19a01a9c97b5\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned unmarked horn, Kan-fibration and ordinary QCat declarations do not define marked simplicial sets or prove this marked lifting calculus. Read CategoryWithFibrations.lean:38-53,69-100, KanComplex.lean:37-51 and Quasicategory/StrictBicategory.lean:14-32."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Marked anodyne maps and fibrant marked simplicial sets over a point",
+   "results": "{\"t\": \"2026-10-17T07:26:08Z\", \"tool\": \"leansearch\", \"query\": \"Marked anodyne maps and fibrant marked simplicial sets over a point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.FibrantObject\", \"HomotopicalAlgebra.isFibrant_iff\", \"HomotopicalAlgebra.IsFibrant\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.fibrantObjects\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\"], \"digest\": \"ebc62274334d8fe3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole marked lifting calculus; hits are unmarked simplicial or unrelated meta declarations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"marked\"",
+   "results": "{\"t\": \"2026-10-17T07:26:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"marked\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Lean.isMarkedMeta\", \"Lean.isMarkedBorrowed\", \"Lean.Meta.Grind.throwNotMarkedWithGrindAttribute\", \"Lean.Meta.Grind.isMarkedSubsingletonApp\", \"Lean.Meta.Grind.isMarkedSubsingletonConst\"], \"digest\": \"d5fdc54f3da00ed6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole marked lifting calculus; hits are unmarked simplicial or unrelated meta declarations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked anodyne maps of marked simplicial sets are stable under pushout products with monomorphisms and sharp mapping spaces into naturally marked quasicategories are Kan complexes",
+   "results": "{\"t\": \"2026-10-17T07:26:09Z\", \"tool\": \"leanfinder\", \"query\": \"Marked anodyne maps of marked simplicial sets are stable under pushout products with monomorphisms and sharp mapping spaces into naturally marked quasicategories are Kan complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"9cc3d8c5bc4f262c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole marked lifting calculus; hits are unmarked simplicial or unrelated meta declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "llp_rlp|retract.*cell|Inner.*anodyne|inner.*anodyne",
+   "results": "{\"t\": \"2026-10-17T07:26:42Z\", \"tool\": \"grep\", \"query\": \"llp_rlp|retract.*cell|Inner.*anodyne|inner.*anodyne\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/IsUniquelyCodimOneFace.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing.lean\"], \"digest\": \"581a167a9413fff9\"}",
+   "date": "2026-10-17",
+   "verdict": "existing leaf confirmed: inner-horn retract/cell generation; not the complete marked lifting calculus"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian marked simplicial sets naturally marked infinity categories marked anodyne pushout product",
+   "results": "{\"t\": \"2026-10-17T07:26:44Z\", \"tool\": \"leanfinder\", \"query\": \"Cartesian marked simplicial sets naturally marked infinity categories marked anodyne pushout product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.instCartesianMonoidalCategory\", \"SSet.modelCategoryQuillen.I\", \"SSet.Truncated.instCartesianMonoidalCategory\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.instFiniteTensorObj\", \"SSet.instFinitePullback\", \"SSet.Subcomplex.prod\"], \"digest\": \"93e0ec11de826bd6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole marked lifting calculus; hits are unmarked simplicial or unrelated meta declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "def innerFibrations|innerAnodyneExtensions_eq_retracts_transfiniteCompositions",
+   "results": "{\"t\": \"2026-10-17T07:29:13Z\", \"tool\": \"grep\", \"query\": \"def innerFibrations|innerAnodyneExtensions_eq_retracts_transfiniteCompositions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\"], \"digest\": \"f7043b6bb599794c\"}",
+   "date": "2026-10-17",
+   "verdict": "existing leaf confirmed: inner-horn retract/cell generation; not the complete marked lifting calculus"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-point-cartesian-model",
@@ -266,8 +338,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-marked-anodyne-lifting-calculus",
   "worker": "stage1",
-  "summary": "Characterized terminal lifting objects, retained marked endpoint-prism generation, checked all eight generator products and mapping restrictions, and verified the finite detector in every parameter degree. Second reading removed the duplicate Kan-base helper in favor of lem-cbc-right-fibration-space-fiber, cited the existing relative skeletal filtration, and clarified definitions and inverse witnesses. Two genuinely smaller technical nodes remain: endpoint-prism generation and marked triangle cancellation. All searches are real logged requests; no Lean attachment.",
-  "blueprint": "Integral exceptional-adjoint proof, paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation; technical foundations for the finite-adjunction-diagram realization, specifically the full functor-category pushout comparison in lem-coef-hammock-infinity-localization. Technical input: Cartesian simplicial model of marked simplicial sets over a point. Foundational sublemma: Marked-anodyne lifting, products and mapping objects. Steps 1-11 supply the marked lifting calculus on the inherited finite-shape enhancement branch, without changing the unit or chapter route.",
+  "summary": "Repair of the dedicated 2026-10-17 long-step handoff. Kept the statement, Lean record, route and all other proof arguments. Replaced former Step 6 by four generator-family checks; cited the existing Mathlib leaf lem-coef-inner-horn-cell-generation for the hidden lifting-to-cell comparison instead of reproving the small-object/retract theorem inline. Explicitly cited the existing endpoint-prism and triangle-cancellation statements where used. No new node is needed: the remaining marking checks are elementary pushouts of the stated generators. Preserved earlier searches and report; synchronized citations and internal step references.",
+  "blueprint": "Integral exceptional-adjoint proof, paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation; technical foundations for the finite-adjunction-diagram realization, specifically the full functor-category pushout comparison in lem-coef-hammock-infinity-localization. Technical input: Cartesian simplicial model of marked simplicial sets over a point. Foundational sublemma: Marked-anodyne lifting, products and mapping objects. Steps 1-14 retain the existing finite-shape enhancement route; Steps 6-9 refine the former eight-case Step 6.",
   "tool_uses": [
    {
     "node": "lem-cbc-equivalence-outer-horn-filling",
@@ -283,7 +355,7 @@
    },
    {
     "node": "lem-cbc-right-fibration-space-fiber",
-    "why": "Its first conclusion upgrades a right fibration with Kan target to a Kan fibration, exactly as needed in Step 8. This existing generic tool avoids a duplicate; the unit has no such Kan-base statement."
+    "why": "Its first conclusion upgrades a right fibration with Kan target to a Kan fibration, exactly as needed in Step 11. This existing generic tool avoids a duplicate; the unit has no such Kan-base statement."
    }
   ]
  },
@@ -294,12 +366,12 @@
   "lem-cbc-right-fibration-space-fiber"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q48-c4d26a595",
-  "group": "Q48",
+  "reviewer": "NT-cc-NI-803d5e272",
+  "group": "NI",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-c4d26a595 (reviewer sub-agent of L); spot-checked: Pass with no changes and no dropped nodes. I read the item, both new nodes and every cited statement in full, and checked them against a local text copy of HTT, which is not in literature/: Def 3.1.1.1, Rem 3.1.1.3–4, Prop 3.1.1.5 with its proof, Prop 3.1.1.6 with its proof, Cor 3.1.1.7, Prop 3.1.2.3 cases A1–D2, Rem 3.1.3.1 and 3.1.3.4, Lemma 3.1.3.6, and the detector A in the proof of 3.1.3.7(1). The item statement is the point case of these with no hypothesis added or dropped; it is a technical simplicial node, so no base-change morphism or coefficient category is involved. Step checks: Step 1 uses both directions of the outer-horn node, the core-Kan clause and the composition/inverse clause, and the (iv) square forces every equivalence to be marked. Step 2 builds a countable Kan subcomplex and reaches K^sharp by a well-ordered chain of pushouts; empty K gives the identity. Step 3 meets the small-object node's hypotheses with aleph_1 and countable domains. Step 5 writes out the marked two-variable saturation and uses the boundary-cell leaf. In Step 6 I recomputed all eight cases: the n=0 prism square marks the diagonal with (iii) and then the lower edge with cancellation, the (iii)x a diagonal comes from triangle (0,0),(1,0),(2,1), and the (iv)x a diagonal comes from (s_1h,(0,0,1)). Step 7 handles sharp diagonals through product triangles. In Step 8, fully marked horns with n>=3 contain every edge, n=2 k=2 uses cancellation, and right fibration plus Kan target gives a Kan fibration by lem-cbc-right-fibration-space-fiber. In Step 10 the faces give vertices (e0,e1,e0,e1) and the witnesses g e = id and e g = id, so restriction is an isomorphism. New nodes: endpoint-prism-generation is exactly HTT 3.1.1.5 (classes 2' and 2'' generate the same class, which contains 2, and the class of 1 and 2 contains 2' and 2''), including m=0; triangle-cancellation is exactly Cor 3.1.1.7. Both are self-contained, statement-only real lemmas, not clauses of the item, and rg found no duplicates in the DAG. There is no cycle, all cited ids exist and none is merged. Accepted tool uses: four cbc-unit generic simplicial nodes (outer-horn filling, functor-cone calculus, composition spine, and right fibration over a Kan base); the biduality unit does not cite the cbc unit. Note for whoever splits the cancellation node: HTT proves it through the relative Prop 3.1.1.6, so that split must avoid lem-coef-marked-point-cartesian-model or it will create a cycle."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-803d5e272 (reviewer sub-agent of L); spot-checked: Read the whole item: statement, 14 steps, split_report and tool_uses. Read the statements of all 13 cited nodes and HTT (text copy, April 2017): Def 3.1.1.1, Rem 3.1.1.3-4, Prop 3.1.1.5 classes (2),(2'),(2''), Cor 3.1.1.7, Prop 3.1.2.3 cases (A1)-(D2). Checked Mathlib Inner/Basic.lean:43 and 89-92, Quasicategory/InnerFibration.lean:64 and Inner/PushoutProduct.lean:103-109. The leaf's recorded path is correct; the worker's remark about an extra path component is unfounded. This delivery repairs the old long Step 6 by splitting it into Steps 6-9 and newly citing the dependency-free Mathlib leaf lem-coef-inner-horn-cell-generation, which is in the item's own unit. Recomputed every case. (A1): a product of minimally marked sets is minimally marked, so the pushout product is the minimal marking of an inner-anodyne map, i.e. a retract of an inner-horn cell map. (A2): an isomorphism, since the horn contains every vertex. (B1): the final clause of the prism node applies to the union inclusion. (B2) at n=0: generator (iii) marks the diagonal on triangle (0,0),(1,0),(1,1), then the cancellation node marks the remaining edge {0}x[0,1] using the marking {degenerate,02,12}; this matches the HTT text. (C2): one pushout of (iii) along triangle (0,0),(1,0),(2,1). (D2): triangle (s_1h,(0,0,1)), faces checked. Also re-verified the other steps: Step 1 equivalences, Step 3 aleph_1 smallness, Step 11 fully marked horns (n>=3 needs a face index outside {a,b,k}; n=2; n=1), and Step 13 detector faces: vertices (e0,e1,e0,e1), edges 02 and 13 are identities. Mechanical checks: proof_deps equals the union of uses; all ids exist and are unmerged; no cycle; the longest step is 1745 characters. There is no new node and no target, so no base-change comparison applies; no SGA is used. Accepted the four inherited cbc tool uses. Fixes in the corrected item file: the stale 'Step 8' in the tool_uses note for lem-cbc-right-fibration-space-fiber now reads 'Step 11', and 'Steps 6-9 makes' now reads 'Steps 6-9 make'.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicTopology.MarkedAnodyneLiftingCalculus",

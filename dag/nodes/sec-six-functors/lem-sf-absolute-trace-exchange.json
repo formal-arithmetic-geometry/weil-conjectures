@@ -10,9 +10,86 @@
  "stmt_deps": [
   "def-sfb-monoidal-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\Phi_{M,W}$ for the displayed composite in the statement. First spell out the adjunction conventions. If $L\\dashv B$ has Hom bijection $\\alpha$, its counit at $Z$ is $t_Z=\\alpha^{-1}(1_{BZ})$; naturality in the source gives $\\alpha^{-1}(v)=t_Z\\circ L(v)$ for every $v:H\\to BZ$. Thus the inverse of the $U\\dashv R$ bijection sends $h:W\\to RD_XM$ to $g_h=\\varepsilon_{D_XM}\\circ U(h)$. The $P_T\\dashv A_T$ bijection sends $v:H\\to\\omega_T$ to $\\operatorname{tr}_T\\circ P_T(v)$. In particular, the definition of $\\tau$ gives the exact equality $\\operatorname{tr}_Y\\circ P_Y(\\tau)=\\operatorname{tr}_X\\circ\\kappa_{\\omega_X}$. These formulas follow by applying naturality to the identity defining each counit; no triangle identity beyond the stipulated Hom adjunction is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Proof, paragraph 1, displayed Hom bijections: agent-explicit categorical exchange lemma supplying the formal-exchange arrow without an ambient admissibility hypothesis."
+   }
+  },
+  {
+   "text": "For $h:W\\to J_M$ put $e_M^r=\\operatorname{ev}_{X,M}\\circ\\sigma_{M,D_XM}$, $b_h=e_M^r\\circ(1_M\\otimes g_h):M\\otimes UW\\to\\omega_X$, and $q_{M,W}=\\kappa_{M\\otimes UW}\\circ P_Y(\\theta_{M,W}\\circ\\sigma_{W,FM})$. Reverse the displayed chain, starting with $h$. The successive morphisms are $g_h$, then $b_h$, then $\\operatorname{tr}_X\\circ P_X(b_h)$, then $\\operatorname{tr}_X\\circ P_X(b_h)\\circ q_{M,W}$, then its $P_Y\\dashv A_Y$ transpose $c_h:W\\otimes FM\\to\\omega_Y$, and finally the tensor-Hom transpose of $c_h$. Every operation is bijective: the Hom adjunctions are hypotheses, tensor symmetry and $q$ are isomorphisms, and the internal-Hom bijections are hypotheses. Hence these operations define $\\Psi_{M,W}=\\Phi_{M,W}^{-1}$, natural in $W$ by the assumed naturality of each operation. The tensor bifunctor and composition conventions are those of [def-sfb-monoidal-category].",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Proof, paragraph 1, displayed Hom bijections: agent-explicit categorical exchange lemma supplying the formal-exchange arrow without an ambient admissibility hypothesis."
+   }
+  },
+  {
+   "text": "Compute the intermediate $P_Y\\dashv A_Y$ transpose explicitly. Set $d_h=F(b_h)\\circ\\theta_{M,W}\\circ\\sigma_{W,FM}$. Functoriality, naturality of $\\kappa$ at $b_h$, and the trace equality in step 1 give\n$$\\begin{aligned}\n\\operatorname{tr}_Y\\circ P_Y(\\tau\\circ d_h)\n&=\\operatorname{tr}_X\\circ\\kappa_{\\omega_X}\\circ P_YF(b_h)\\circ P_Y(\\theta_{M,W}\\circ\\sigma_{W,FM})\\\\\n&=\\operatorname{tr}_X\\circ P_X(b_h)\\circ\\kappa_{M\\otimes UW}\\circ P_Y(\\theta_{M,W}\\circ\\sigma_{W,FM})\\\\\n&=\\operatorname{tr}_X\\circ P_X(b_h)\\circ q_{M,W}.\n\\end{aligned}$$\nInjectivity of the stipulated adjunction bijection therefore gives $c_h=\\tau\\circ F(b_h)\\circ\\theta_{M,W}\\circ\\sigma_{W,FM}$. This identifies the actual transpose, rather than merely an abstract isomorphism of representing objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Proof, paragraph 1, displayed Hom bijections: agent-explicit categorical exchange lemma supplying the formal-exchange arrow without an ambient admissibility hypothesis."
+   }
+  },
+  {
+   "text": "Naturality of $\\theta$ in $W$, followed by naturality of tensor symmetry, says\n$$\\theta_{M,J_M}\\circ\\sigma_{J_M,FM}\\circ(h\\otimes1_{FM})=F(1_M\\otimes U(h))\\circ\\theta_{M,W}\\circ\\sigma_{W,FM}.$$\nSubstitute $g_h=\\varepsilon_{D_XM}\\circ U(h)$ and $b_h=e_M^r\\circ(1_M\\otimes g_h)$ into step 3. The tensor bifunctor's composition law and functoriality of $F$ give\n$$c_h=\\tau\\circ F(e_M^r)\\circ F(1_M\\otimes\\varepsilon_{D_XM})\\circ\\theta_{M,J_M}\\circ\\sigma_{J_M,FM}\\circ(h\\otimes1_{FM})=\\lambda_M\\circ(h\\otimes1_{FM}).$$\nOnly the tensor bifunctor laws from [def-sfb-monoidal-category] and the naturalities explicitly assumed in the item were used.",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Proof, paragraph 1, displayed Hom bijections: agent-explicit categorical exchange lemma supplying the formal-exchange arrow without an ambient admissibility hypothesis."
+   }
+  },
+  {
+   "text": "By definition of $E_M$, $\\operatorname{ev}_{Y,FM}\\circ(E_M\\otimes1_{FM})=\\lambda_M$. Consequently $\\operatorname{ev}_{Y,FM}\\circ((E_M\\circ h)\\otimes1_{FM})=\\lambda_M\\circ(h\\otimes1_{FM})=c_h$. Injectivity of the specified tensor-Hom bijection shows $\\Psi_{M,W}(h)=E_M\\circ h$. Thus the inverse of the displayed composite is precisely postcomposition with the map required in the statement, for every $W$ and every $h$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Proof, paragraph 1, displayed Hom bijections: agent-explicit categorical exchange lemma supplying the formal-exchange arrow without an ambient admissibility hypothesis."
+   }
+  },
+  {
+   "text": "Check the variance in $M$ explicitly. For $a:M'\\to M$ and $h:W\\to RD_XM$, let $h'=R(D_Xa)\\circ h$. Counit naturality gives $g_{h'}=D_Xa\\circ g_h$. Naturality of the specified internal-Hom evaluation and symmetry gives $e_{M'}^r\\circ(1_{M'}\\otimes D_Xa)=e_M^r\\circ(a\\otimes1_{D_XM})$, so $b_{h'}=b_h\\circ(a\\otimes1_{UW})$. Apply naturality of $\\theta$ in $M$ and of symmetry to the formula in step 3: it yields $c_{h'}=c_h\\circ(1_W\\otimes F(a))$. Naturality of the $Y$ internal-Hom bijection now gives $\\Psi_{M',W}(h')=D_Y(F(a))\\circ\\Psi_{M,W}(h)$. Taking $W=J_M$ and $h=1_{J_M}$ in step 5 proves $E_{M'}\\circ R(D_Xa)=D_Y(F(a))\\circ E_M$, the claimed contravariant naturality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+    "place": "Proof, paragraph 1, displayed Hom bijections: agent-explicit categorical exchange lemma supplying the formal-exchange arrow without an ambient admissibility hypothesis."
+   }
+  },
+  {
+   "text": "For fixed $M$, step 5 is a natural isomorphism of representable presheaves $h_{J_M}\\to h_{D_YFM}$, since $\\Psi$ is a natural bijection by step 2. Apply [lem-galois-yoneda-fully-faithful] in the locally small category $\\mathcal C_Y$. Its bijection identifies this transformation with $E_M$ (evaluate at $1_{J_M}$), and identifies its inverse with a morphism $H_M:D_YFM\\to J_M$. Under the same bijection composition is postcomposition of morphisms, so the two inverse transformation identities give $H_M\\circ E_M=1_{J_M}$ and $E_M\\circ H_M=1_{D_YFM}$. Thus $E_M$ is an isomorphism; step 6 supplies its naturality and step 5 supplies the more precise clause.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001P, lemma-yoneda: full faithfulness of the Yoneda embedding; apply to the representable-presheaf isomorphism calculated above."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-monoidal-category",
+  "lem-galois-yoneda-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+  "place": "Proof, paragraph 1, displayed Hom bijections: agent-explicit categorical exchange lemma supplying the formal-exchange arrow without an ambient admissibility hypothesis. Explicit proof from the stated Hom adjunctions; final representation argument uses Stacks Tag 001P."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +132,52 @@
    "results": "8 hits; CategoryTheory.expComparison, CategoryTheory.coev_expComparison, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.MonoidalClosed.FunctorCategory.adj, CategoryTheory.FunctorToTypes.adj, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.bijection, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso",
    "date": "2026-10-17",
    "verdict": "no match: hits concern Cartesian exponential comparison, tensor-Hom adjunctions, or rigid duals; none states the absolute-trace exchange with its specified pairing"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|projectionFormula|projection_formula|frobeniusMorphism|expComparison",
+   "results": "25 hits; Mathlib/CategoryTheory/ComposableArrows/Basic.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Monoidal/Closed/Functor.lean; Frobenius/exponential comparisons require Cartesian tensor and additional adjunction data"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalClosed",
+   "results": "12 hits; CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def, CategoryTheory.Monoidal.Reflective.monoidalClosed, CategoryTheory.Monoidal.Reflective.closed, CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom, CategoryTheory.Monoidal.Reflective.isIso_tfae",
+   "date": "2026-10-17",
+   "verdict": "no match: candidates require Cartesian monoidal categories, a monoidal equivalence, or full closed structures; none states the given absolute-trace pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In symmetric monoidal categories a projection formula F(M) tensor W isomorphic F(M tensor U(W)), adjunction U left adjoint R and absolute trace adjunctions imply R Hom(M,omegaX) isomorphic Hom(F(M),omegaY)",
+   "results": "8 hits; CategoryTheory.frobeniusMorphism_mate, CategoryTheory.tensorLeftAdjunction, CategoryTheory.tensorRightAdjunction, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorRightHomEquiv, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.tensorRightHomEquiv_symm_naturality",
+   "date": "2026-10-17",
+   "verdict": "no match: returned rigid tensor-Hom or Cartesian exponential comparisons and unrelated geometric adjunctions; none covers the stated hypotheses and map"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusMorphism|expComparison|internalHomAdjunction",
+   "results": "7 hits; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Braided.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Monoidal/Closed/Functor.lean; Frobenius/exponential comparisons require Cartesian tensor and additional adjunction data"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier exchange isomorphism from a projection formula and absolute trace adjunction",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, CategoryTheory.CostructuredArrow.ιCompGrothendieckProj_inv_app, AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal, CategoryTheory.ShortComplex.LeftHomologyData.copy_π, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom",
+   "date": "2026-10-17",
+   "verdict": "no match: returned rigid tensor-Hom or Cartesian exponential comparisons and unrelated geometric adjunctions; none covers the stated hypotheses and map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality exchange from absolute adjunctions and projection formula identifying the exchange map with trace evaluation",
+   "results": "8 hits; CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight, FGModuleCat.exactPairing, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorRightHomEquiv, CategoryTheory.coevaluation_comp_leftAdjointMate, CategoryTheory.tensorLeftAdjunction",
+   "date": "2026-10-17",
+   "verdict": "no match: returned rigid tensor-Hom or Cartesian exponential comparisons and unrelated geometric adjunctions; none covers the stated hypotheses and map"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-finite-exceptional",
@@ -75,5 +194,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-absolute-trace-exchange",
+  "worker": "stage1",
+  "summary": "Expanded the absolute-trace exchange into seven steps: adjunction counit conventions, the inverse Hom chain, the trace transpose calculation, the projection/symmetry calculation, identification with postcomposition by E, contravariant naturality, and the existing general Yoneda Mathlib leaf. No change to the statement and no new nodes. Checked project Lean and Mathlib candidates; none covers the full stated map and hypotheses.",
+  "blueprint": "lem-coef-finite-exceptional proof paragraph 1, the third Hom bijection: supplies its formal exchange by absolute adjunctions and projection formula, as specified by the item ancestry.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-be9e7d080",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-be9e7d080 (reviewer sub-agent of L); spot-checked: I read the delivery in full and wrote no fixes. It is one commit containing the item and its report, with no new nodes. Source: blueprint main-20261015 lem-coef-finite-exceptional.proof.md, paragraph 1, third Hom bijection. With F=Rf_!, U=f^*, R=Rf_*, P=Ra_!, A=Ra^!, kappa the compact-support composition and theta the projection formula, E_M is exactly the exchange Rf_*D_XM -> D_Y Rf_!M. The citer lem-coef-finite-exceptional applies the item with exactly these substitutions and uses only invertibility and the Hom action, which the statement gives. I recomputed all seven steps. (1) The counit formula gives g_h=eps∘U(h) and tr_Y∘P_Y(tau)=tr_X∘kappa. (2) The middle bijection's inverse is precomposition with q; the types check, and b_h matches the inverse of 'symmetry then evaluation' by naturality of sigma. (3) Naturality of kappa at b_h gives c_h. (4) Naturality of theta in W and of sigma gives c_h=lambda_M∘(h⊗1). (5) So Psi(h)=E_M∘h. (6) Contravariant naturality holds; the evaluation identity ev_{M'}(D_X a⊗1)=ev_M(1⊗a) follows from the assumed naturality in M at v=1. (7) The Yoneda leaf lem-galois-yoneda-fully-faithful (Stacks 001P, categories.tex lemma-yoneda) gives the inverse and is used for what its statement says. Small cases: with identity data E=id; in vector spaces with scalars c,d for theta,kappa, E=cd·id; with a zero dualizing object the claim holds trivially. Both cited nodes are Mathlib leaves (MonoidalCategory and Yoneda.fullyFaithful), so there is no route issue and no tool_uses. No SGA is cited. blueprint.from and same_as=[] are correct: fix-cor-verdier-exchange is the geometric version under an admissibility hypothesis and is not a duplicate. The statement is unchanged and does not weaken anything; the hexagon and associators it assumes are unused. This is not a target node, so the base-change and coefficient-category check does not apply."
  }
 }

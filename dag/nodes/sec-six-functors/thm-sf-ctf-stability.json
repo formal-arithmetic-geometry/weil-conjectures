@@ -1,177 +1,164 @@
 {
-  "id": "thm-sf-ctf-stability",
-  "blueprint": {
-    "is": "thm-sf-ctf-stability",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Preservation on the proved finite-Tor domains",
-  "statement": "Fix the finite-field datum [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and an integer $n\\geq1$. Put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ range over separated finite-type morphisms between separated finite-type $k$-schemes [def-weil-scheme-morphism-properties]. Use bounded constructibility [def-weil-finite-torsion-constructibility], its cohomological intervals [def-weil-constructible-intervals], finite Tor amplitude [def-weil-finite-tor-amplitude], and the coefficient twists [def-coefficient-twists-detailed].\nAt this finite coefficient stage the following hold:\n\n1. **(i)** $Lf^*$ carries $D^b_{ctf}(Y,A)$ into\n$D^b_{ctf}(X,A)$.\n1. **(ii)** Derived tensor carries\n$D^b_{ctf}\\times D^b_{ctf}$ into $D^b_{ctf}$; if the two inputs have\nTor amplitude in $[a,b]$ and $[c,d]$, the output has Tor amplitude in\n$[a+c,b+d]$.\nFor $K,L\\in D^b_{ctf}(X,A)$, internal Hom also belongs to $D^b_{ctf}(X,A)$.\nIf $K,L$ have Tor amplitude in $[a,b]$ and $[c,d]$ and\n$m\\in\\mathbf Z_{\\geq0}$ and $\\dim X\\leq m$, then $R\\mathcal Hom(K,L)$ has Tor amplitude in\n$[c-b-2m,d-a+2m]$; if moreover $K$ is site-perfect, it has Tor\namplitude in the sharper interval $[c-b,d-a]$.\nThe elementary formula $R\\mathcal Hom(K,L)=K^\\vee\\otimes^L L$\nwith coefficient dual $K^\\vee=R\\mathcal Hom(K,A_X)$, and the\ndimension-free interval $[c-b,d-a]$, still require\na site-perfect first argument (for the origin\n$i:\\{0\\}\\hookrightarrow\\mathbf A^1$, both $i_*A$ and $A$ have Tor\namplitude $[0,0]$, while $R\\mathcal Hom(i_*A,A)=i_*A(-1)[-2]$ has\ncohomology in degree $2$);\nthe general preservation assertion uses geometric Verdier duality.\n1. **(iii)** $Rf_*$ carries $D^b_{ctf}(X,A)$ into\n$D^b_{ctf}(Y,A)$; for input Tor amplitude $[a,b]$ and\n$d\\in\\mathbf Z_{\\geq0}$ and $\\dim X\\leq d$, the output has Tor amplitude in $[a,b+2d]$.\n1. **(iv)** $Rf_!$ carries $D^b_{ctf}(X,A)$ into\n$D^b_{ctf}(Y,A)$.\n1. **(v)** The exceptional adjoint on the constructible\ncoefficient category satisfies $Rf^!=D_Xf^*D_Y$ and carries\n$D^b_{ctf}(Y,A)$ into $D^b_{ctf}(X,A)$.\nFor nonnegative integer dimension bounds $d_X,d_Y$ with\n$\\dim X\\leq d_X$ and $\\dim Y\\leq d_Y$\n[def-kun-topological-krull-dimension], and input Tor interval $[a,b]$,\none output interval is $[a-2d_X,b+2d_Y]$.\nFor nonempty schemes the bounds may be their dimensions;\nfor an empty scheme the bound may be zero.\n1. **(vi)** For every separated finite-type $X/k$,\n$D_X=R\\mathcal Hom_X(-,Ra_X^!A)$ is a contravariant exact\nanti-equivalence with $K\\simeq D_XD_XK$, by the geometric\nVerdier-biduality theorem on this domain.\n1. **(vii)** On the finite-Tor constructible domains,\nfinite coefficient quotients commute with pullback, tensor, both\ndirect images, general internal Hom, Verdier duality and the\nexceptional adjoint, preserving their evaluation and adjunction maps.\nFor derived-complete\nintegral objects, $D^b_c(X,\\mathcal O_E)=D^b_{ctf}(X,\\mathcal O_E)$.\nGeneral internal Hom and the exceptional adjoint preserve this\ncategory; Verdier duality is an anti-equivalence on it, with the\ncanonical finite reductions of these operations. These conclusions\npass to the bounded constructible categories at $E$ and\n$\\Qlb$, with their specified coefficient-passage operations.\nThe elementary site-perfect formula in (ii) retains its stated\nhypothesis. No unrestricted unbounded pro-etale exceptional\nadjunction is asserted here.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-ctf-stability/thm-sf-ctf-stability.md",
-    "place": "node thm-sf-ctf-stability, order 2213"
-  },
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-scheme-morphism-properties",
-    "def-weil-site-perfect-complex",
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-exceptional-inverse-image",
-    "def-compact-support-direct-image-detailed",
-    "def-kun-topological-krull-dimension",
-    "def-weil-l-adic-coefficient-extension",
-    "def-weil-constructible-intervals",
-    "def-coefficient-twists-detailed"
-  ],
-  "proof": [
-    {
-      "text": "For (i), [lem-sf-pullback-tor-amplitude] applies to the separated finite-type f and the given finite coefficient ring: it supplies bounded constructibility and the unchanged Tor interval [a,b], hence membership by [def-weil-finite-tor-amplitude]. For (ii), [lem-sf-tensor-ctf](ii) gives constructibility and the additive interval [a+c,b+d]. For a site-perfect first argument in [def-weil-site-perfect-complex], we prove the coefficient-dual tensor formula on the coefficient site itself, without assuming a six-functor datum. Derived Hom commutes with slice restriction by [lem-weil-pbc-ringed-internal-hom-exact-restriction], and derived tensor does so by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. On a local bounded finite-projective model P, each term is a retract of a finite free module, so its ordinary Hom functor is exact (a retract of a finite sum of identity functors), and its dual is flat by the same retraction. Thus [lem-pc-bounded-exact-term-hom-quasi-iso] computes derived Hom by the ordinary bounded Hom complex. The dual complex is bounded and flat, hence K-flat by [lem-pc-bounded-above-flat-kflat-site]; [lem-weil-pbc-site-derived-tensor-descent] computes its derived tensor with a flat K-flat representative F of L. By [lem-pc-finite-projective-internal-hom-evaluation], each term identifies the dual tensor with Hom. In degrees i,j the map sends phi tensor x to the Hom component of source degree -i with value (-1)^(ij) phi(-)x. The target differential on a degree i+j map is d_F h-(-1)^(i+j)h d_P; using d_dual(phi)=(-1)^(i+1)phi d_P, the d_F and d_P coefficients on the source are respectively (-1)^(ij) and (-1)^(ij+i+j+1), exactly those on the target. Hence this is an isomorphism of complexes and is the evaluation comparison. Its cone is locally acyclic; each cohomology section is locally zero and therefore zero by the sheaf axiom, proving the formula globally. To obtain its sharper bound on either site, refine the site-perfect cover until the finitely many idempotent, differential and splitting matrices of its bounded local model are constant. This expresses the model on each nonempty cover object as the constant sheaf of a bounded finite-projective A-complex C. Testing the given Tor interval against constant module sheaves shows that C has Tor amplitude [a,b]: the constant-sheaf functor is exact by [lem-weil-pbc-sheafification-exact] applied to the sectionwise constant presheaves. The sheaf tensor of [def-pur-sheaf-tensor-product] is their sectionwise tensor followed by sheafification, so it agrees with the constant sheaf of the module tensor; a nonzero constant module remains nonzero on a nonempty object, since a cover of that object has a nonempty member. This detects the required cohomology vanishing. The ring A is Noetherian, being a quotient of the discrete valuation ring O_E. Apply [lem-weil-bounded-finite-tor-perfect] to replace C by a finite-projective A-complex supported in [a,b]. Dualizing puts its terms in [-b,-a]. A flat model of L in [c,d] from [lem-sf-flat-model] then makes the coefficient-dual tensor complex flat and supported in [c-b,d-a]. Exact restriction to a site cover detects cohomology vanishing, proving the interval globally. On the etale site this is also [thm-sf-hom-ctf], and for etale-origin site-perfect inputs it is [cor-sf-hom-ctf-proetale-unconditional]. For general inputs on either site, [cor-weil-finite-constructible-hom] gives preservation and [c-b-2m,d-a+2m]. The example is checked on the etale site first: [lem-weil-pbc-finite-stalk-formula-restriction] gives stalk A at the origin and zero elsewhere for i_*A. Geometric stalks are exact by [prop-weil-pbc-geometric-stalks-exact] and conservative by [lemma-weil-pbc-geometric-stalk-conservative]. By the stalk tensor formula [lem-pod-etale-stalk-tensor-scalar], tensoring with i_*A preserves injections, so i_*A and the constant sheaf A have Tor interval [0,0]. With s=i, P=A and M=A, [lem-weil-stratum-ambient-hom] gives R\\mathcal Hom(i_*A,A)=Ri_*Ri^!A, since internal Hom from the unit is the identity. The direct image i_* is exact by the same finite-stalk formula. At Y=Spec k, [lem-pur-gysin-structure] places Ri^!A(1)[2] in degree zero with rank-one cohomology, and [thm-pur-affine-line-orientation] identifies that cohomology with A through the normalized generator. Therefore R\\mathcal Hom(i_*A,A)=i_*A(-1)[-2], nonzero in degree 2 since n>=1. This example has the same pro-etale realization: [lem-sf-proetale-constructible-origin] supplies the bounded constructible comparison, [lem-sf-comparison-tor-amplitude] preserves the intervals, and [thm-sf-hom-comparison-constructible] identifies the internal Homs.",
-      "uses": [
-        "lem-sf-pullback-tor-amplitude",
-        "def-weil-finite-tor-amplitude",
-        "lem-sf-flat-model",
-        "lem-sf-tensor-ctf",
-        "def-weil-site-perfect-complex",
-        "thm-sf-hom-ctf",
-        "cor-sf-hom-ctf-proetale-unconditional",
-        "cor-weil-finite-constructible-hom",
-        "lem-weil-pbc-finite-stalk-formula-restriction",
-        "lem-pod-etale-stalk-tensor-scalar",
-        "lem-weil-stratum-ambient-hom",
-        "lem-pur-gysin-structure",
-        "thm-pur-affine-line-orientation",
-        "lem-sf-proetale-constructible-origin",
-        "lem-sf-comparison-tor-amplitude",
-        "thm-sf-hom-comparison-constructible",
-        "prop-weil-pbc-geometric-stalks-exact",
-        "lemma-weil-pbc-geometric-stalk-conservative",
-        "lem-weil-bounded-finite-tor-perfect",
-        "lem-weil-pbc-sheafification-exact",
-        "def-pur-sheaf-tensor-product",
-        "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "lem-pc-bounded-exact-term-hom-quasi-iso",
-        "lem-pc-bounded-above-flat-kflat-site",
-        "lem-weil-pbc-site-derived-tensor-descent",
-        "lem-pc-finite-projective-internal-hom-evaluation"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-ctf-stability/thm-sf-ctf-stability.md",
-        "place": "## Proof, paragraph 1"
-      }
-    },
-    {
-      "text": "For (iii), [lem-sf-etale-direct-image-vanishing] supplies UDV(f,A;2d): the coefficient ring is finite, killed by a power of ell, and ell is invertible in k. Applying [thm-sf-direct-image-tor-amplitude] with N=2d proves the etale assertion, and [cor-sf-direct-image-ctf-proetale] proves the assertion for every bounded constructible finite-Tor pro-etale input. For (iv), the finite-type separated target is quasi-compact and quasi-separated, so [thm-nagata-compactification] supplies f=pj with j open and p proper. The middle scheme is finite type over k because p is proper over the finite-type target. By [def-compact-support-direct-image-detailed], the compact-support candidate is Rp_*j_!. By [lem-trf-open-ctf], j_! preserves bounded constructibility and the Tor interval, and (iii) applied to p gives preservation for the candidate. Every input in the statement is of etale origin by [lem-sf-proetale-constructible-origin], so [prop-compactification-coherence-detailed] identifies this candidate with the specified compact-support functor independently of the compactification.",
-      "uses": [
-        "cor-sf-direct-image-ctf-proetale",
-        "thm-sf-direct-image-tor-amplitude",
-        "lem-sf-etale-direct-image-vanishing",
-        "def-compact-support-direct-image-detailed",
-        "lem-trf-open-ctf",
-        "thm-nagata-compactification",
-        "lem-sf-proetale-constructible-origin",
-        "prop-compactification-coherence-detailed"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-ctf-stability/thm-sf-ctf-stability.md",
-        "place": "## Proof, paragraph 2"
-      }
-    },
-    {
-      "text": "For (v), a closed immersion i:Z\\hookrightarrow T with dim T<=d has quasi-compact open complement because T is Noetherian. By [thm-pur-open-complement-unconditional] its complement has all-sheaf vanishing and constructible direct images with c=2d; these are exactly the hypotheses of [prop-exc-closed-tor], giving Tor interval [a,b+2d+1]. For a smooth separated finite-type map of pure relative dimension r, [cor-pur-smooth-admissibility] gives preservation and interval [a-2r,b-2r]. Choose the finite affine chart presentations U\\hookrightarrow A^{d_U}_V of [thm-pur-general-admissibility]. Its open-complement hypotheses are discharged by [cor-pur-general-admissibility-datum]. Explicitly, for X nonempty take D=max d_U and c_U=2(d_U+dim Y). Each expression c_U+1+2(D-d_U) equals 2D+2dim Y+1, so the assembled interval is [a-2D,b+2dim Y+1]. For X empty the chart family is empty and the output is zero. In the pro-etale constructible category [thm-sf-preservation-class](2) states this preservation for every separated finite-type f, with no unrestricted ambient adjoint assumption. The formula in [lem-coef-finite-exceptional] identifies this exceptional functor with D_X Lf^* D_Y. To obtain the sharper bound stated in the item, apply [cor-coef-finite-verdier] with the identity quotient $A\\to A$: on a scheme of dimension at most e, D sends [u,v] to [-v-2e,-u]. Thus D_Y sends [a,b] to [-b-2d_Y,-a]; (i) leaves this interval unchanged; D_X then sends it to [a-2d_X,b+2d_Y]. If X or Y is empty, the exceptional output is zero, so any nonnegative dimension bounds give a valid interval. For (vi), [thm-fix-general-biduality] gives the exact contravariant anti-equivalence and the canonical biduality isomorphism on either finite-coefficient site.",
-      "uses": [
-        "thm-pur-open-complement-unconditional",
-        "prop-exc-closed-tor",
-        "cor-pur-smooth-admissibility",
-        "thm-pur-general-admissibility",
-        "cor-pur-general-admissibility-datum",
-        "thm-sf-preservation-class",
-        "lem-coef-finite-exceptional",
-        "thm-fix-general-biduality",
-        "cor-coef-finite-verdier"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-ctf-stability/thm-sf-ctf-stability.md",
-        "place": "## Proof, paragraph 3"
-      }
-    },
-    {
-      "text": "For (vii), fix a quotient $A_{E,n}\\to A_{E,m}$ with 1<=m<=n. On the finite-Tor domains [lem-fix-operation-reduction] gives the pullback, tensor and compact-support comparisons and their tensor, evaluation, unit and counit compatibilities. For ordinary direct image, [lem-coef-finite-direct-image] gives the counit-defined comparison, its naturality and its coefficient-quotient cocycle; for a pro-etale input K, [lem-sf-proetale-constructible-origin](ii) gives a bounded constructible etale representative K′ with K isomorphic to nu_T^*K′, and [lem-sf-comparison-tor-amplitude](ii) gives K′ the same finite Tor interval as K. Thus both the constructibility and finite-Tor hypotheses of its pro-etale assertion hold. For general internal Hom use the evaluation-defined comparison of [thm-coef-finite-hom], which explicitly respects evaluation and tensor-Hom adjunction and needs no site-perfect first variable. For Verdier duality, [cor-coef-finite-verdier] gives the quotient cocycle and compatibility with evaluation and biduality. For the exceptional functor, [lem-coef-finite-exceptional] gives the quotient cocycle and identifies the units and counits under compact-support coefficient change. These are the specified comparison maps, rather than arbitrary isomorphisms of the resulting objects.",
-      "uses": [
-        "lem-fix-operation-reduction",
-        "lem-coef-finite-direct-image",
-        "thm-coef-finite-hom",
-        "cor-coef-finite-verdier",
-        "lem-coef-finite-exceptional",
-        "lem-sf-proetale-constructible-origin",
-        "lem-sf-comparison-tor-amplitude"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-ctf-stability/thm-sf-ctf-stability.md",
-        "place": "## Proof, paragraph 4"
-      }
-    },
-    {
-      "text": "For a derived-complete integral input K, its residue reduction K_1 is bounded; choose an interval containing its cohomology. By [lem-coef-integral-residue-tor], that interval bounds the Tor amplitude of every reduction K_n, proving D^b_c(X,O_E)=D^b_{ctf}(X,O_E). For integral K,L, [cor-coef-integral-internal-hom] places their ambient internal Hom in this category, with the common dimension-dependent interval, and [lem-coef-integral-hom-reduction] identifies its canonical finite reductions and evaluations. [thm-coef-integral-verdier] gives the exact anti-equivalence, the canonical finite reductions, and biduality. Apply [prop-coef-integral-exceptional-adjoint] with R=O_E to these separated finite-type schemes and morphism. Use its specified functor $G_fL=R\\varprojlim_{n\\geq1}\\operatorname{Res}_n Rf_n^!L_n$ on modules over the completed integral coefficient sheaves, with the coherent normalized transition maps fixed in that statement before taking the total derived limit. It preserves the derived-complete constructible category, is right adjoint to integral $Rf_!$, and is canonically $D_{X,R}f^*_{\\mathrm{comp}}D_{Y,R}L$. Its canonical reductions are $Rf_n^!L_n$, and these comparisons identify the actual units and counits with the finite ones. For any uniform reduction Tor interval [a,b] of L, which exists by the same residue argument, its output interval is [a-2d_X,b+2d_Y] for nonnegative integer dimension bounds d_X,d_Y; empty schemes may use bound zero. Thus these claims are about derived-complete integral objects and their canonical reductions, without assuming that an arbitrary levelwise constructible tower is effective. At E, [thm-coef-rational-verdier] gives rationalized evaluation and biduality and the finite-field-extension cocycle, while [lem-coef-rational-operations] identifies internal Hom and the exceptional functor and preserves evaluation, units and counits. Finally [thm-coef-qbar-verdier] states that these compatible finite-field functors and maps define the duality and exceptional adjunction in the common-stage Q-bar category, including its retracts. Concretely a common-stage object (E,K) has dual (E,D_{X,E}K); the scalar-extension comparisons identify these representatives after changing E, and their compatibility with retracts gives the same assertions for the idempotent completion.",
-      "uses": [
-        "lem-coef-integral-residue-tor",
-        "cor-coef-integral-internal-hom",
-        "lem-coef-integral-hom-reduction",
-        "thm-coef-integral-verdier",
-        "prop-coef-integral-exceptional-adjoint",
-        "thm-coef-rational-verdier",
-        "lem-coef-rational-operations",
-        "thm-coef-qbar-verdier"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-ctf-stability/thm-sf-ctf-stability.md",
-        "place": "## Proof, paragraph 5"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "thm-sf-ctf-stability",
+ "blueprint": {
+  "is": "thm-sf-ctf-stability",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Preservation on the proved finite-Tor domains",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and an integer $n\\geq1$. Put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ range over separated finite-type morphisms between separated finite-type $k$-schemes [def-weil-scheme-morphism-properties]. Use bounded constructibility [def-weil-finite-torsion-constructibility], its cohomological intervals [def-weil-constructible-intervals], finite Tor amplitude [def-weil-finite-tor-amplitude], and the coefficient twists [def-coefficient-twists-detailed].\nAt this finite coefficient stage the following hold:\n\n1. **(i)** $Lf^*$ carries $D^b_{ctf}(Y,A)$ into\n$D^b_{ctf}(X,A)$.\n1. **(ii)** Derived tensor carries\n$D^b_{ctf}\\times D^b_{ctf}$ into $D^b_{ctf}$; if the two inputs have\nTor amplitude in $[a,b]$ and $[c,d]$, the output has Tor amplitude in\n$[a+c,b+d]$.\nFor $K,L\\in D^b_{ctf}(X,A)$, internal Hom also belongs to $D^b_{ctf}(X,A)$.\nIf $K,L$ have Tor amplitude in $[a,b]$ and $[c,d]$ and\n$m\\in\\mathbf Z_{\\geq0}$ and $\\dim X\\leq m$, then $R\\mathcal Hom(K,L)$ has Tor amplitude in\n$[c-b-2m,d-a+2m]$; if moreover $K$ is site-perfect, it has Tor\namplitude in the sharper interval $[c-b,d-a]$.\nThe elementary formula $R\\mathcal Hom(K,L)=K^\\vee\\otimes^L L$\nwith coefficient dual $K^\\vee=R\\mathcal Hom(K,A_X)$, and the\ndimension-free interval $[c-b,d-a]$, still require\na site-perfect first argument (for the origin\n$i:\\{0\\}\\hookrightarrow\\mathbf A^1$, both $i_*A$ and $A$ have Tor\namplitude $[0,0]$, while $R\\mathcal Hom(i_*A,A)=i_*A(-1)[-2]$ has\ncohomology in degree $2$);\nthe general preservation assertion uses geometric Verdier duality.\n1. **(iii)** $Rf_*$ carries $D^b_{ctf}(X,A)$ into\n$D^b_{ctf}(Y,A)$; for input Tor amplitude $[a,b]$ and\n$d\\in\\mathbf Z_{\\geq0}$ and $\\dim X\\leq d$, the output has Tor amplitude in $[a,b+2d]$.\n1. **(iv)** $Rf_!$ carries $D^b_{ctf}(X,A)$ into\n$D^b_{ctf}(Y,A)$.\n1. **(v)** The exceptional adjoint on the constructible\ncoefficient category satisfies $Rf^!=D_Xf^*D_Y$ and carries\n$D^b_{ctf}(Y,A)$ into $D^b_{ctf}(X,A)$.\nFor nonnegative integer dimension bounds $d_X,d_Y$ with\n$\\dim X\\leq d_X$ and $\\dim Y\\leq d_Y$\n[def-kun-topological-krull-dimension], and input Tor interval $[a,b]$,\none output interval is $[a-2d_X,b+2d_Y]$.\nFor nonempty schemes the bounds may be their dimensions;\nfor an empty scheme the bound may be zero.\n1. **(vi)** For every separated finite-type $X/k$,\n$D_X=R\\mathcal Hom_X(-,Ra_X^!A)$ is a contravariant exact\nanti-equivalence with $K\\simeq D_XD_XK$, by the geometric\nVerdier-biduality theorem on this domain.\n1. **(vii)** On the finite-Tor constructible domains,\nfinite coefficient quotients commute with pullback, tensor, both\ndirect images, general internal Hom, Verdier duality and the\nexceptional adjoint, preserving their evaluation and adjunction maps.\nFor derived-complete\nintegral objects, $D^b_c(X,\\mathcal O_E)=D^b_{ctf}(X,\\mathcal O_E)$.\nGeneral internal Hom and the exceptional adjoint preserve this\ncategory; Verdier duality is an anti-equivalence on it, with the\ncanonical finite reductions of these operations. These conclusions\npass to the bounded constructible categories at $E$ and\n$\\Qlb$, with their specified coefficient-passage operations.\nThe elementary site-perfect formula in (ii) retains its stated\nhypothesis. No unrestricted unbounded pro-etale exceptional\nadjunction is asserted here.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-ctf-stability/thm-sf-ctf-stability.md",
+  "place": "node thm-sf-ctf-stability, order 2213"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-site-perfect-complex",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-compact-support-direct-image-detailed",
+  "def-kun-topological-krull-dimension",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-constructible-intervals",
+  "def-coefficient-twists-detailed"
+ ],
+ "proof": [
+  {
+   "text": "For (i), [lem-sf-pullback-tor-amplitude] gives bounded constructibility and the unchanged Tor interval $[a,b]$ for the separated finite-type morphism $f$. For the tensor assertion of (ii), [lem-sf-tensor-ctf](ii) gives bounded constructibility and Tor interval $[a+c,b+d]$. These are precisely membership in the finite-Tor subcategories of [def-weil-finite-tor-amplitude].",
+   "uses": [
     "lem-sf-pullback-tor-amplitude",
-    "def-weil-finite-tor-amplitude",
-    "lem-sf-flat-model",
     "lem-sf-tensor-ctf",
-    "def-weil-site-perfect-complex",
-    "thm-sf-hom-ctf",
-    "cor-sf-hom-ctf-proetale-unconditional",
-    "cor-weil-finite-constructible-hom",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/thm-sf-ctf-stability.proof.md",
+    "place": "paragraph 1, pullback and tensor"
+   }
+  },
+  {
+   "text": "For the site-perfect formula in (ii), apply [lem-sfb-ringed-site-perfect-duality] on the chosen small coefficient site, with ring sheaf $A_X$. Site-perfectness in [def-weil-site-perfect-complex] is exactly its local bounded finite-free-retract hypothesis. Its canonical evaluation isomorphism gives $K^\\vee\\otimes^L_A L\\cong R\\mathcal Hom_A(K,L)$, with $K^\\vee=R\\mathcal Hom_A(K,A_X)$. This uses ringed-site duality, without assuming a six-functor datum.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality",
+    "def-weil-site-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/thm-sf-ctf-stability.proof.md",
+    "place": "paragraph 1, coefficient-dual tensor formula"
+   }
+  },
+  {
+   "text": "To prove the sharper Tor bound, [lem-sf-site-perfect-tor-window] applied to $K$ gives, on a covering of each site object, finite-projective models $P$ supported in $[a,b]$. This node supplies both restriction of the Tor condition to arbitrary slice test sheaves and shortening of the perfect model to these precise degrees. Use these models in the following two steps.",
+   "uses": [
+    "lem-sf-site-perfect-tor-window"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/thm-sf-ctf-stability.proof.md",
+    "place": "paragraph 1, choosing a local perfect model in the prescribed interval"
+   }
+  },
+  {
+   "text": "Each functor $\\mathcal Hom_A(P^r,-)$ is a retract of a finite sum of identity functors, hence is exact. By [lem-pc-bounded-exact-term-hom-quasi-iso] the map $\\mathcal Hom^\\bullet(P,A_X[0])\\to\\mathcal Hom^\\bullet(P,I(A_X[0]))$ is a quasi-isomorphism. The latter represents the derived dual by [def-pur-derived-internal-hom]. Thus the ordinary dual represents $K^\\vee$ on this slice, using the restriction isomorphism of [lem-weil-pbc-ringed-internal-hom-exact-restriction]. By the degree formula of [def-pur-hom-complex], its degree $r$ term is $(P^{-r})^\\vee$. It vanishes outside $[-b,-a]$ and is a finite-free retract, by dualizing the given retraction maps.",
+   "uses": [
+    "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/thm-sf-ctf-stability.proof.md",
+    "place": "paragraph 1, reversed degrees of the local dual"
+   }
+  },
+  {
+   "text": "Finite-free retracts are flat: their tensor functors are retracts of finite sums of the identity. The bounded dual of the preceding step is therefore K-flat by [lem-pc-bounded-above-flat-kflat-site]. Choose for $L$ a flat model supported in $[c,d]$ by [lem-sf-flat-model]; restriction to the covering slices is exact and monoidal by [lem-pur-site-restriction-module-adjunction-exact] and [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], so it preserves flatness. [lem-weil-pbc-site-derived-tensor-descent] computes the dual tensor by the total tensor of these models. Its terms are flat and vanish outside $[c-b,d-a]$. Tensoring it with a degree-zero test sheaf has the same degree bounds, so the evaluation isomorphism in Step 2 gives this Tor bound locally. Sheaf cohomology vanishing is local, giving the asserted bound globally.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-sf-flat-model",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/thm-sf-ctf-stability.proof.md",
+    "place": "paragraph 1, tensoring the reversed dual interval"
+   }
+  },
+  {
+   "text": "For arbitrary $K,L$ in the finite-Tor constructible category, [cor-weil-finite-constructible-hom] gives bounded constructibility, finite Tor amplitude, and the interval $[c-b-2m,d-a+2m]$ on either site. Its hypotheses are satisfied because $X$ is separated and finite type and $m$ is a nonnegative dimension bound. This proves the general internal-Hom assertion; the preceding steps give its site-perfect refinement.",
+   "uses": [
+    "cor-weil-finite-constructible-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/thm-sf-ctf-stability.proof.md",
+    "place": "paragraph 1, general geometric internal Hom"
+   }
+  },
+  {
+   "text": "For the origin $i:\\operatorname{Spec}k\\hookrightarrow\\mathbf A^1_k$, work first on the etale site. [lem-weil-pbc-finite-stalk-formula-restriction] gives stalk $A$ at the origin and zero elsewhere for $i_*A$. Exact and conservative geometric stalks, [prop-weil-pbc-geometric-stalks-exact] and [lemma-weil-pbc-geometric-stalk-conservative], together with [lem-pod-etale-stalk-tensor-scalar], show that tensoring with $i_*A$ preserves injections. Thus $i_*A$ and $A$ have Tor interval $[0,0]$. The canonical comparison [lem-weil-pbc-comparison-direct-image-canonical-mate] identifies $\\nu^*Ri_*A$ with $Ri_*\\nu^*A$; etale exactness of $i_*$ follows from the same stalk formula. [lem-sf-comparison-tor-amplitude](i) therefore gives the same two Tor intervals for the pro-etale sheaves, where $i_*$ is exact by [lem-exc-proetale-closed-exact] since its complement is quasi-compact.",
+   "uses": [
     "lem-weil-pbc-finite-stalk-formula-restriction",
-    "lem-pod-etale-stalk-tensor-scalar",
-    "lem-weil-stratum-ambient-hom",
-    "lem-pur-gysin-structure",
-    "thm-pur-affine-line-orientation",
-    "lem-sf-proetale-constructible-origin",
-    "lem-sf-comparison-tor-amplitude",
-    "thm-sf-hom-comparison-constructible",
     "prop-weil-pbc-geometric-stalks-exact",
     "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-bounded-finite-tor-perfect",
-    "lem-weil-pbc-sheafification-exact",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pc-bounded-exact-term-hom-quasi-iso",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pc-finite-projective-internal-hom-evaluation",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-exc-proetale-closed-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/thm-sf-ctf-stability.proof.md",
+    "place": "paragraph 1, flatness of the origin example"
+   }
+  },
+  {
+   "text": "On the pro-etale site of the Noetherian $\\mathbf A^1_k$, specialize [lem-weil-stratum-ambient-hom] to $s=i$ and $P=M=A$: $R\\mathcal Hom(i_*A,A)\\cong Ri_*Ri^!_{\\mathrm{amb}}A$, with $Ri^!_{\\mathrm{amb}}$ the right adjoint of $i_*$ on the ambient unbounded categories. This is not by definition the constructible functor $Ri^!$ of [def-weil-exceptional-inverse-image]; compare them. With $j:\\mathbf G_{m,k}\\hookrightarrow\\mathbf A^1_k$, [lem-exc-proetale-support-triangle] gives a triangle $i_*Ri^!_{\\mathrm{amb}}A\\to A\\to Rj_*j^*A\\to$. By [prop-sf-localization-all-stages](1'),(3') at $\\Lambda=A$, the last two vertices lie in $D^b_{ctf}$, triangulated by [lem-weil-finite-ctf-triangulated], hence so does the first. The counit $i^*i_*\\to\\mathrm{id}$ is invertible by [lem-exc-proetale-closed-fully-faithful] and $i^*$ preserves $D^b_{ctf}$ by (3'), so $Ri^!_{\\mathrm{amb}}A\\in D^b_c(\\operatorname{Spec}k,A)$. For $Q$ there, the ambient adjunction and clause (2) give natural bijections $\\operatorname{Hom}(Q,Ri^!_{\\mathrm{amb}}A)\\cong\\operatorname{Hom}(i_*Q,A)\\cong\\operatorname{Hom}(Q,Ri^!A)$; Yoneda gives $Ri^!_{\\mathrm{amb}}A\\cong Ri^!A$. [cor-pur-affine-space-zero-section-purity] with $B=\\operatorname{Spec}k$, $c=1$ states $Ri^!A\\cong A(-1)[-2]$ for every $n\\geq1$. Exactness [lem-exc-proetale-closed-exact] gives $R\\mathcal Hom(i_*A,A)\\cong i_*A(-1)[-2]$. Its degree-two cohomology is nonzero: the rank-one twist is nonzero and $i_*$ is fully faithful by [lem-exc-proetale-closed-fully-faithful]. This holds for ramified $E$ and every $n$.",
+   "uses": [
+    "lem-weil-stratum-ambient-hom",
+    "lem-exc-proetale-support-triangle",
+    "prop-sf-localization-all-stages",
+    "lem-weil-finite-ctf-triangulated",
+    "def-weil-exceptional-inverse-image",
+    "cor-pur-affine-space-zero-section-purity",
+    "lem-exc-proetale-closed-exact",
+    "lem-exc-proetale-closed-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/thm-sf-ctf-stability.proof.md",
+    "place": "paragraph 1, purity and supported Hom in the origin example"
+   }
+  },
+  {
+   "text": "For (iii), [lem-sf-etale-direct-image-vanishing] supplies UDV(f,A;2d): the coefficient ring is finite, killed by a power of ell, and ell is invertible in k. Applying [thm-sf-direct-image-tor-amplitude] with N=2d proves the etale assertion, and [cor-sf-direct-image-ctf-proetale] proves the assertion for every bounded constructible finite-Tor pro-etale input. For (iv), the finite-type separated target is quasi-compact and quasi-separated, so [thm-nagata-compactification] supplies f=pj with j open and p proper. The middle scheme is finite type over k because p is proper over the finite-type target. By [def-compact-support-direct-image-detailed], the compact-support candidate is Rp_*j_!. By [lem-trf-open-ctf], j_! preserves bounded constructibility and the Tor interval, and (iii) applied to p gives preservation for the candidate. Every input in the statement is of etale origin by [lem-sf-proetale-constructible-origin], so [prop-compactification-coherence-detailed] identifies this candidate with the specified compact-support functor independently of the compactification.",
+   "uses": [
     "cor-sf-direct-image-ctf-proetale",
     "thm-sf-direct-image-tor-amplitude",
     "lem-sf-etale-direct-image-vanishing",
     "def-compact-support-direct-image-detailed",
     "lem-trf-open-ctf",
     "thm-nagata-compactification",
-    "prop-compactification-coherence-detailed",
+    "lem-sf-proetale-constructible-origin",
+    "prop-compactification-coherence-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-ctf-stability/thm-sf-ctf-stability.md",
+    "place": "## Proof, paragraph 2"
+   }
+  },
+  {
+   "text": "For (v), a closed immersion i:Z\\hookrightarrow T with dim T<=d has quasi-compact open complement because T is Noetherian. By [thm-pur-open-complement-unconditional] its complement has all-sheaf vanishing and constructible direct images with c=2d; these are exactly the hypotheses of [prop-exc-closed-tor], giving Tor interval [a,b+2d+1]. For a smooth separated finite-type map of pure relative dimension r, [cor-pur-smooth-admissibility] gives preservation and interval [a-2r,b-2r]. Choose the finite affine chart presentations U\\hookrightarrow A^{d_U}_V of [thm-pur-general-admissibility]. Its open-complement hypotheses are discharged by [cor-pur-general-admissibility-datum]. Explicitly, for X nonempty take D=max d_U and c_U=2(d_U+dim Y). Each expression c_U+1+2(D-d_U) equals 2D+2dim Y+1, so the assembled interval is [a-2D,b+2dim Y+1]. For X empty the chart family is empty and the output is zero. In the pro-etale constructible category [thm-sf-preservation-class](2) states this preservation for every separated finite-type f, with no unrestricted ambient adjoint assumption. The formula in [lem-coef-finite-exceptional] identifies this exceptional functor with D_X Lf^* D_Y. To obtain the sharper bound stated in the item, apply [cor-coef-finite-verdier] with the identity quotient $A\\to A$: on a scheme of dimension at most e, D sends [u,v] to [-v-2e,-u]. Thus D_Y sends [a,b] to [-b-2d_Y,-a]; (i) leaves this interval unchanged; D_X then sends it to [a-2d_X,b+2d_Y]. If X or Y is empty, the exceptional output is zero, so any nonnegative dimension bounds give a valid interval. For (vi), [thm-fix-general-biduality] gives the exact contravariant anti-equivalence and the canonical biduality isomorphism on either finite-coefficient site.",
+   "uses": [
     "thm-pur-open-complement-unconditional",
     "prop-exc-closed-tor",
     "cor-pur-smooth-admissibility",
@@ -180,369 +167,529 @@
     "thm-sf-preservation-class",
     "lem-coef-finite-exceptional",
     "thm-fix-general-biduality",
-    "cor-coef-finite-verdier",
+    "cor-coef-finite-verdier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-ctf-stability/thm-sf-ctf-stability.md",
+    "place": "## Proof, paragraph 3"
+   }
+  },
+  {
+   "text": "For (vii), fix a quotient $A_{E,n}\\to A_{E,m}$ with 1<=m<=n. On the finite-Tor domains [lem-fix-operation-reduction] gives the pullback, tensor and compact-support comparisons and their tensor, evaluation, unit and counit compatibilities. For ordinary direct image, [lem-coef-finite-direct-image] gives the counit-defined comparison, its naturality and its coefficient-quotient cocycle; for a pro-etale input K, [lem-sf-proetale-constructible-origin](ii) gives a bounded constructible etale representative K′ with K isomorphic to nu_T^*K′, and [lem-sf-comparison-tor-amplitude](ii) gives K′ the same finite Tor interval as K. Thus both the constructibility and finite-Tor hypotheses of its pro-etale assertion hold. For general internal Hom use the evaluation-defined comparison of [thm-coef-finite-hom], which explicitly respects evaluation and tensor-Hom adjunction and needs no site-perfect first variable. For Verdier duality, [cor-coef-finite-verdier] gives the quotient cocycle and compatibility with evaluation and biduality. For the exceptional functor, [lem-coef-finite-exceptional] gives the quotient cocycle and identifies the units and counits under compact-support coefficient change. These are the specified comparison maps, rather than arbitrary isomorphisms of the resulting objects.",
+   "uses": [
     "lem-fix-operation-reduction",
     "lem-coef-finite-direct-image",
     "thm-coef-finite-hom",
+    "cor-coef-finite-verdier",
+    "lem-coef-finite-exceptional",
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-ctf-stability/thm-sf-ctf-stability.md",
+    "place": "## Proof, paragraph 4"
+   }
+  },
+  {
+   "text": "For a derived-complete integral input $K$, its residue reduction $K_1$ has cohomology in some finite interval. [lem-coef-integral-residue-tor] gives that same Tor interval for every canonical reduction $K_n$ and explicitly concludes $D^b_c(X,\\mathcal O_E)=D^b_{ctf}(X,\\mathcal O_E)$. For integral $K,L$, [cor-coef-integral-internal-hom] gives preservation by ambient internal Hom and a uniform reduction interval; [lem-coef-integral-hom-reduction] identifies its canonical finite reductions and evaluations. [thm-coef-integral-verdier] supplies the exact duality anti-equivalence, its canonical reductions and biduality. These nodes supply the integral assertions directly.",
+   "uses": [
     "lem-coef-integral-residue-tor",
     "cor-coef-integral-internal-hom",
     "lem-coef-integral-hom-reduction",
-    "thm-coef-integral-verdier",
+    "thm-coef-integral-verdier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/thm-sf-ctf-stability.proof.md",
+    "place": "paragraph 5, integral residue, internal Hom and Verdier duality"
+   }
+  },
+  {
+   "text": "For the integral exceptional operation, apply [prop-coef-integral-exceptional-adjoint] with $R=\\mathcal O_E$ to the given separated finite-type $f:X\\to Y$. Its statement specifies the coherent normalized tower before the total inverse limit and gives the functor $G_fL=R\\varprojlim_n\\operatorname{Res}_nRf_n^!L_n$. It states preservation, the right adjunction to integral $Rf_!$, the identification $G_fL\\cong D_{X,R}f^*_{\\mathrm{comp}}D_{Y,R}L$, and the canonical reductions $(G_fL)_n\\cong Rf_n^!L_n$ identifying actual units and counits. A uniform input Tor interval $[a,b]$ exists by [lem-coef-integral-residue-tor]; the same exceptional-adjoint statement gives the output interval $[a-2d_X,b+2d_Y]$ for nonnegative dimension bounds, including bound zero for an empty scheme. No construction or effectivity of an arbitrary levelwise tower is used here.",
+   "uses": [
     "prop-coef-integral-exceptional-adjoint",
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/thm-sf-ctf-stability.proof.md",
+    "place": "paragraph 5, specified coherent integral exceptional adjunction"
+   }
+  },
+  {
+   "text": "At $E$, [thm-coef-rational-verdier] gives rationalized evaluation and biduality and the finite-field-extension cocycle; [lem-coef-rational-operations] identifies internal Hom and the exceptional functor with the specified coefficient-passage operations, preserving evaluations, units and counits. [thm-coef-qbar-verdier] then states that these compatible finite-field functors induce the common-stage duality and exceptional adjunction, including compatibility with retracts. In particular its explicit formula $(E,K)\\mapsto(E,D_{X,E}K)$ supplies the common-stage representative; its assertion about retracts supplies the extension to the idempotent completion. These are applications of the existing coefficient-passage theorems, with no new descent argument hidden in this step.",
+   "uses": [
     "thm-coef-rational-verdier",
     "lem-coef-rational-operations",
     "thm-coef-qbar-verdier"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-ctf-stability/thm-sf-ctf-stability.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "stability of constructible finite Tor categories under six functors",
-      "results": "8 unrelated CategoryTheory/Condensed/sheaf finite-limit declarations; none states the theorem",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "constructibleFiniteTor, DerivedCategory",
-      "results": "0 hits; unknown identifier 'constructibleFiniteTor'",
-      "date": "2026-10-16",
-      "verdict": "query rejected"
-    },
-    {
-      "tool": "grep",
-      "query": "constructibleFiniteTor_(leftDerivedUpperStar|tensor|rightDerivedLowerStar|rightDerivedLowerShriek|rightDerivedUpperShriek) [subdirectory SixFunctors/Etale/Derived]",
-      "results": "0 hits in Mathlib search directory",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "constructible finite Tor tensor product preserves bounded constructible complexes",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "grep",
-      "query": "constructibleFiniteTor [subdirectory Mathlib]",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "IsTriangulated, ObjectProperty",
-      "results": "0 hits; unknown identifier 'IsTriangulated'",
-      "date": "2026-10-16",
-      "verdict": "query rejected"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "constructible finite Tor stability theorem six functors",
-      "results": "8 unrelated CategoryTheory/Condensed/sheaf finite-limit declarations; none states the theorem",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Functor, PreservesFiniteLimits",
-      "results": "0 hits; unknown identifier 'PreservesFiniteLimits'",
-      "date": "2026-10-16",
-      "verdict": "query rejected"
-    },
-    {
-      "tool": "grep",
-      "query": "constructibleFiniteTor [subdirectory Mathlib/CategoryTheory]",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "bounded constructible complexes of sheaves with finite Tor dimension preserved by derived functors",
-      "results": "8 derived-category T-structure and exact-functor declarations; none states constructible finite-Tor stability for the six operations",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "Verdier|constructible.*Tor|Tor.*constructible [subdirectory CategoryTheory]",
-      "results": "19 hits, all generic Verdier localization terminology or bibliographical references; no constructible finite-Tor six-operation theorem",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "six operations preserve bounded constructible sheaves of finite Tor amplitude over finite coefficient rings",
-      "results": "8 hits: light condensed Grothendieck/monoidal facts, derived-category support facts, and finite-type module sheaves; none states six-operation constructible finite-Tor stability.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf",
-      "results": "12 hits: Sheaf, terminal, sheafOver, isTerminalTerminal, sheafToPresheaf, fullyFaithfulSheafToPresheaf, Inhabited sheaves, sheafSections, sheafOver_obj, isTerminalOfEqTop, homEquiv, isTerminalOfBotCover; none states the item.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "constructible|torAmplitude|six.?functor",
-      "results": "0 hits in Mathlib/CategoryTheory.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "six operations on bounded constructible complexes of finite Tor dimension",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "derived categories of constructible sheaves finite tor dimension tensor internal Hom exceptional inverse image",
-      "results": "8 hits: generic Tor definitions/formulas and light-condensed monoidal/internal-projectivity declarations; no six-operation finite-Tor stability theorem.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "constructible.*[Tt]or|[Tt]or.*constructible|[Vv]erdier[Dd]ual",
-      "results": "0 hits in Mathlib/CategoryTheory.",
-      "date": "2026-10-16",
-      "verdict": "no match",
-      "subdirectory": "CategoryTheory"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Tor",
-      "results": "4 hits: CategoryTheory.Tor, isZero_Tor_succ_of_projective, Tor_obj, Tor_map; generic Tor constructions, no constructible finite-Tor six-operation statement.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Constructible complexes with finite Tor dimension are stable under the six operations on etale sheaves",
-      "results": "8 hits: etale morphism base change/composition, sheaf finite limits/presentation, Grothendieck abelian complexes and formally etale tensor products; none states the item.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "import_flags": [
-    "padded_uses"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2213,
-  "blueprint_uses": [
-    "cor-coef-finite-verdier",
-    "cor-pur-general-admissibility-datum",
-    "cor-pur-smooth-admissibility",
-    "cor-coef-integral-internal-hom",
-    "cor-sf-direct-image-ctf-proetale",
-    "cor-sf-hom-ctf-proetale-unconditional",
-    "cor-weil-finite-constructible-hom",
-    "def-compact-support-direct-image-detailed",
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-exceptional-inverse-image",
-    "def-weil-finite-field-fiber",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-scheme-morphism-properties",
-    "def-weil-site-perfect-complex",
-    "lem-coef-finite-direct-image",
-    "lem-coef-finite-exceptional",
-    "lem-coef-integral-hom-reduction",
-    "lem-coef-integral-residue-tor",
-    "lem-coef-rational-operations",
-    "lem-exc-constant-inverse-image-flat",
-    "lem-fix-operation-reduction",
-    "lem-sf-etale-direct-image-vanishing",
-    "lem-weil-pbc-pullback-preserves-bounded-constructible",
-    "prop-coef-integral-exceptional-adjoint",
-    "prop-exc-closed-tor",
-    "prop-sf-dualizable-hom",
-    "thm-coef-finite-hom",
-    "thm-coef-integral-verdier",
-    "thm-coef-qbar-verdier",
-    "thm-coef-rational-verdier",
-    "thm-fix-general-biduality",
-    "thm-pur-general-admissibility",
-    "thm-pur-open-complement-unconditional",
-    "thm-sf-direct-image-tor-amplitude",
-    "thm-sf-hom-ctf",
-    "thm-sf-preservation-class"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-six-functors",
-  "unit": "sk-thm-sf-ctf-stability",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "thm-sf-ctf-stability",
-    "worker": "stage1",
-    "summary": "Five-step stage-1 split retaining the source route and using existing nodes only. Repair includes per-step sources, the existing pullback Tor theorem, a finite-projective interval argument on either site, compactification and comparison citations, quotient-map compatibilities and uniform integral reduction bounds. STATEMENT-DISPUTED corrections resolve the Hom/tensor interval ambiguity and empty-scheme dimension arithmetic. Current repair replaces the now datum-dependent coefficient-dual citation with a signed local calculation from general ringed-site statements. Independent second reading explicitly recovers the etale representative’s finite Tor interval before applying the pro-etale coefficient/direct-image comparison. Landing-return repair: revalidated the current integral exceptional-adjoint statement and made its specified coherent normalized tower, completed pullback, actual reduction maps and nonnegative dimension bounds explicit in step 5; refreshed its citation quote against the current DAG.",
-    "blueprint": "Archived thm-sf-ctf-stability.md proof: step 1 realizes paragraph 1 (pullback, tensor, Hom and counterexample); step 2 paragraph 2 (both direct images); step 3 paragraph 3 (exceptional preservation, dual formula, amplitude and biduality); step 4 paragraph 4 (finite quotients); step 5 paragraph 5 (derived-complete integral and field coefficients). The unit's second paragraph is realized only on these stated coefficient domains, not on arbitrary unnormalized reduction towers.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-finite-stalk-formula-restriction",
-        "why": "General finite-direct-image stalk calculation used only to verify the affine-line origin example; no node in this unit gives the stalk formula."
-      },
-      {
-        "node": "lem-pod-etale-stalk-tensor-scalar",
-        "why": "General etale stalk/tensor comparison used to check flatness of the origin sheaf."
-      },
-      {
-        "node": "prop-weil-pbc-geometric-stalks-exact",
-        "why": "General etale exact-stalk tool used to check preservation of injections in the origin example."
-      },
-      {
-        "node": "lemma-weil-pbc-geometric-stalk-conservative",
-        "why": "General etale conservative-stalk tool used in the same flatness and exactness calculation."
-      },
-      {
-        "node": "lem-weil-bounded-finite-tor-perfect",
-        "why": "Commutative-algebra tool placing a finite-projective local coefficient model in its specified Tor interval; the site-perfect definition itself gives no degree bounds."
-      },
-      {
-        "node": "lem-weil-pbc-sheafification-exact",
-        "why": "General exact sheafification tool applied to constant module presheaves in the local finite-projective model argument."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-        "why": "General ringed-site restriction of derived Hom, for the finite local coefficient calculation; no six-functor datum is assumed."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "why": "General monoidality of derived pullback, applied only to slice restriction in the local evaluation calculation."
-      },
-      {
-        "node": "lem-pc-bounded-exact-term-hom-quasi-iso",
-        "why": "Computes local derived Hom from a bounded finite-projective source using exact termwise Hom."
-      },
-      {
-        "node": "lem-pc-bounded-above-flat-kflat-site",
-        "why": "Makes the bounded dual complex K-flat, justifying its use as a derived tensor model."
-      },
-      {
-        "node": "lem-weil-pbc-site-derived-tensor-descent",
-        "why": "Computes the coefficient-dual derived tensor using flat K-flat representatives."
-      },
-      {
-        "node": "lem-pc-finite-projective-internal-hom-evaluation",
-        "why": "Termwise canonical evaluation for finite-projective module sheaves; the item supplies the signed bounded-complex assembly."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-pbc-finite-stalk-formula-restriction",
-    "lem-pod-etale-stalk-tensor-scalar",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-bounded-finite-tor-perfect",
-    "lem-weil-pbc-sheafification-exact",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pc-bounded-exact-term-hom-quasi-iso",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pc-finite-projective-internal-hom-evaluation"
-  ],
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-Q31-3798f1279",
-    "group": "Q31",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q31-3798f1279 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, unit/chapter route, archived source, all five proof steps, and all 54 cited dependency statements. The corrected Hom interval interpretation and empty-scheme dimension bounds are mathematically sound; source hypotheses, coefficient categories, base-change maps, edge cases, tool uses, and dependency closure check out. No new nodes or repairs are required. The accepted no-push preflight passed."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Fix the finite-field datum,\n$A=A_{E,n}$, and separated finite-type morphisms between separated finite-type\n$k$-schemes. Use the bounded\nconstructible categories and their\nfinite-Tor subcategories.\nAt this finite coefficient stage the following hold:\n\n1. **(i)** $Lf^*$ carries $D^b_{ctf}(Y,A)$ into\n$D^b_{ctf}(X,A)$.\n1. **(ii)** Derived tensor carries\n$D^b_{ctf}\\times D^b_{ctf}$ into $D^b_{ctf}$; if the two inputs have\nTor amplitude in $[a,b]$ and $[c,d]$, the output has Tor amplitude in\n$[a+c,b+d]$.\nFor $K,L\\in D^b_{ctf}(X,A)$, internal Hom has this same conclusion.\nIf $K,L$ have Tor amplitude in $[a,b]$ and $[c,d]$ and\n$\\dim X\\leq m$, then $R\\mathcal Hom(K,L)$ has Tor amplitude in\n$[c-b-2m,d-a+2m]$; if moreover $K$ is site-perfect, it has Tor\namplitude in the sharper interval $[c-b,d-a]$.\nThe elementary formula $R\\mathcal Hom(K,L)=K^\\vee\\otimes^L L$, with\ncoefficient dual $K^\\vee=R\\mathcal Hom(K,A_X)$, and the dimension-free\ninterval $[c-b,d-a]$ require a site-perfect first argument: for the origin\n$i:\\{0\\}\\hookrightarrow\\mathbf A^1$ both $i_*A$ and $A$ have Tor amplitude\n$[0,0]$, while $R\\mathcal Hom(i_*A,A)=i_*A(-1)[-2]$ has cohomology in\ndegree $2$.\n1. **(iii)** $Rf_*$ carries $D^b_{ctf}(X,A)$ into\n$D^b_{ctf}(Y,A)$; for input Tor amplitude $[a,b]$ and\n$\\dim X\\leq d$, the output has Tor amplitude in $[a,b+2d]$.\n1. **(iv)** $Rf_!$ carries $D^b_{ctf}(X,A)$ into\n$D^b_{ctf}(Y,A)$.\n1. **(v)** The exceptional adjoint on the constructible\ncoefficient category satisfies $Rf^!=D_Xf^*D_Y$ and carries\n$D^b_{ctf}(Y,A)$ into $D^b_{ctf}(X,A)$.\nFor input Tor interval $[a,b]$, one output interval is\n$[a-2\\dim X,b+2\\dim Y]$.\n1. **(vi)** For every separated finite-type $X/k$,\n$D_X=R\\mathcal Hom_X(-,Ra_X^!A)$ is a contravariant exact\nanti-equivalence with $K\\simeq D_XD_XK$.\n1. **(vii)** On the finite-Tor constructible domains,\nfinite coefficient quotients commute with pullback, tensor, both\ndirect images, general internal Hom, Verdier duality and the\nexceptional adjoint, preserving their evaluation and adjunction maps.\nFor derived-complete\nintegral objects, $D^b_c(X,\\mathcal O_E)=D^b_{ctf}(X,\\mathcal O_E)$.\nGeneral internal Hom and the exceptional adjoint preserve this\ncategory; Verdier duality is an anti-equivalence on it, with the\ncanonical finite reductions of these operations. These conclusions\npass to the bounded constructible categories at $E$ and\n$\\Qlb$, with their specified coefficient-passage operations.",
-    "proof": [
-      {
-        "text": "For (i), bounded constructibility is\n[lem-weil-pbc-pullback-preserves-bounded-constructible], and\nflat inverse image in [lem-exc-constant-inverse-image-flat]\npreserves the Tor interval of\n[def-weil-finite-tor-amplitude].\nFor (ii), the Tor intervals add under derived tensor: with bounded\nflat models of $K$ in $[a,b]$ and of $L$ in $[c,d]$, the total tensor\ncomplex is a bounded flat model in $[a+c,b+d]$. Refine the\nfinite constructible stratifications for the two complexes; the\nbounded tensor complexes on each stratum have finite locally constant\ncohomology, which gives constructibility. If $K$ is site-perfect\nin [def-weil-site-perfect-complex], a bounded finite-projective\nlocal model $P$ in $[a,b]$ computes its dual and identifies\n$R\\mathcal Hom(K,L)=K^\\vee\\otimes^L L$ by\n[prop-sf-dualizable-hom]. The tensor argument proves Hom\npreservation in that case, and since $P^\\vee$ is a bounded\nfinite-projective complex in $[-b,-a]$, the tensor bound gives the\ninterval $[c-b,d-a]$; this is the sharper assertion of\n[thm-sf-hom-ctf], whose argument is local on the site and so applies\non either site; on the pro-étale site this is [cor-sf-hom-ctf-proetale-unconditional]. For a general constructible finite-Tor\nfirst argument, use [cor-weil-finite-constructible-hom], whose\nproof uses geometric Verdier biduality and gives the\ndimension-dependent interval $[c-b-2m,d-a+2m]$. The displayed\nexample shows the dimension-free interval fails without\nsite-perfectness: $R\\mathcal Hom(i_*A,A)=i_*Ri^!A$ by adjunction, and\n$Ri^!A=A(-1)[-2]$ by purity for the point in the smooth curve.",
-        "uses": [
-          "lem-weil-pbc-pullback-preserves-bounded-constructible",
-          "lem-exc-constant-inverse-image-flat",
-          "def-weil-finite-tor-amplitude",
-          "def-weil-site-perfect-complex",
-          "prop-sf-dualizable-hom",
-          "thm-sf-hom-ctf",
-          "cor-sf-hom-ctf-proetale-unconditional",
-          "cor-weil-finite-constructible-hom"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Clause (iii) is [cor-sf-direct-image-ctf-proetale]: its etale\ncalculation is [thm-sf-direct-image-tor-amplitude], with the\nuniform all-sheaf cohomological bound supplied by\n[lem-sf-etale-direct-image-vanishing]. That calculation uses a\nbounded-above free resolution of a finite constant coefficient and\nthe cohomological bound; it does not use a projection formula for an\narbitrary sheaf on the target. For (iv), choose a compactification\n$f=pj$ and use [def-compact-support-direct-image-detailed].\nExtension by zero $j_!$ is exact and commutes with tensor, as is\nseen on stalks, so preserves the Tor interval and constructibility.\nApply (iii) to the proper factor $p$.",
-        "uses": [
-          "cor-sf-direct-image-ctf-proetale",
-          "thm-sf-direct-image-tor-amplitude",
-          "lem-sf-etale-direct-image-vanishing",
-          "def-compact-support-direct-image-detailed"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Clause (v) is the preservation result for the exceptional inverse\nimage, assembled from the closed and smooth cases. For a closed immersion\n$i:Z\\hookrightarrow T$ with $\\dim T\\leq d$, the open complement satisfies\nthe open-complement condition with $c=2d$ by\n[thm-pur-open-complement-unconditional], so [prop-exc-closed-tor]\ncarries bounded constructible input of Tor amplitude $[a,b]$ to bounded\nconstructible output of Tor amplitude $[a,b+2d+1]$. For $f$ smooth of pure\nrelative dimension $d$, purity identifies $Rf^!$ with $Lf^*(-)(d)[2d]$ and\n[cor-pur-smooth-admissibility] gives the shift $-2d$ on both intervals.\nA general $f$ is, on affine charts $U\\subseteq f^{-1}(V)$, a closed\nimmersion $U\\hookrightarrow\\mathbf A^{d_U}_V$ followed by the smooth\nprojection, and composing the two cases along the charts is\n[thm-pur-general-admissibility]; its open-complement hypothesis on the\ncharts is discharged by [cor-pur-general-admissibility-datum], so it is a\ntheorem and not an assumption. At the finite stage $A=A_{E,n}$ and for every\nseparated finite-type $f$ of the statement this is\n[thm-sf-preservation-class](2): $Rf^!$ carries $D^b_{ctf}(Y,A)$ into\n$D^b_{ctf}(X,A)$, with no ambient datum assumed on that category. With this\npreservation, the finite dual formula and adjunction of\n[lem-coef-finite-exceptional] identify $Rf^!$ with $D_Xf^*D_Y$ on this\ndomain; applying the finite duality bound on $Y$, ordinary pullback, and\nthe finite duality bound on $X$ gives the displayed output interval. Clause (vi) is\n[thm-fix-general-biduality] at finite coefficients;\nits geometric proof supplies the\nanti-equivalence and is not replaced by the site-perfect calculation\nin (ii).",
-        "uses": [
-          "thm-pur-open-complement-unconditional",
-          "prop-exc-closed-tor",
-          "cor-pur-smooth-admissibility",
-          "thm-pur-general-admissibility",
-          "cor-pur-general-admissibility-datum",
-          "thm-sf-preservation-class",
-          "lem-coef-finite-exceptional",
-          "thm-fix-general-biduality"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "For (vii), use [lem-fix-operation-reduction] for pullback,\ntensor and compact supports, and [lem-coef-finite-direct-image]\nfor ordinary direct image. General finite internal-Hom and duality\ncomparisons are [thm-coef-finite-hom], [cor-coef-finite-verdier];\nthe exceptional comparison is [lem-coef-finite-exceptional].\nTheir proofs compare the specified evaluations and adjunction maps.",
-        "uses": [
-          "lem-fix-operation-reduction",
-          "lem-coef-finite-direct-image",
-          "thm-coef-finite-hom",
-          "cor-coef-finite-verdier",
-          "lem-coef-finite-exceptional"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "At integral coefficients, [lem-coef-integral-residue-tor]\nidentifies the two constructible categories. General internal Hom\nand its finite reductions are\n[cor-coef-integral-internal-hom], [lem-coef-integral-hom-reduction].\nThe anti-equivalence and exceptional adjunction are\n[thm-coef-integral-verdier], [prop-coef-integral-exceptional-adjoint].\nThese proofs establish normalized-tower effectivity and the finite\nreductions with uniform bounds; they do not infer a common integral\nlocal model merely from levelwise constructibility.\nFinally [thm-coef-rational-verdier], [lem-coef-rational-operations]\nidentify the operations after rationalization, and\n[thm-coef-qbar-verdier] transports them to the common-stage\ncategory, including its retracts. Their adjunctions have precisely\nthe bounded constructible domains stated in those results.",
-        "uses": [
-          "lem-coef-integral-residue-tor",
-          "cor-coef-integral-internal-hom",
-          "lem-coef-integral-hom-reduction",
-          "thm-coef-integral-verdier",
-          "prop-coef-integral-exceptional-adjoint",
-          "thm-coef-rational-verdier",
-          "lem-coef-rational-operations",
-          "thm-coef-qbar-verdier"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/thm-sf-ctf-stability.proof.md",
+    "place": "paragraph 5, rationalization and common-stage coefficient passage"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "def-weil-finite-tor-amplitude",
+  "lem-sfb-ringed-site-perfect-duality",
+  "def-weil-site-perfect-complex",
+  "lem-sf-site-perfect-tor-window",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-pur-hom-complex",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-sf-flat-model",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "cor-weil-finite-constructible-hom",
+  "lem-weil-pbc-finite-stalk-formula-restriction",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-exc-proetale-closed-exact",
+  "lem-weil-stratum-ambient-hom",
+  "lem-exc-proetale-support-triangle",
+  "prop-sf-localization-all-stages",
+  "lem-weil-finite-ctf-triangulated",
+  "def-weil-exceptional-inverse-image",
+  "cor-pur-affine-space-zero-section-purity",
+  "lem-exc-proetale-closed-fully-faithful",
+  "cor-sf-direct-image-ctf-proetale",
+  "thm-sf-direct-image-tor-amplitude",
+  "lem-sf-etale-direct-image-vanishing",
+  "def-compact-support-direct-image-detailed",
+  "lem-trf-open-ctf",
+  "thm-nagata-compactification",
+  "lem-sf-proetale-constructible-origin",
+  "prop-compactification-coherence-detailed",
+  "thm-pur-open-complement-unconditional",
+  "prop-exc-closed-tor",
+  "cor-pur-smooth-admissibility",
+  "thm-pur-general-admissibility",
+  "cor-pur-general-admissibility-datum",
+  "thm-sf-preservation-class",
+  "lem-coef-finite-exceptional",
+  "thm-fix-general-biduality",
+  "cor-coef-finite-verdier",
+  "lem-fix-operation-reduction",
+  "lem-coef-finite-direct-image",
+  "thm-coef-finite-hom",
+  "lem-coef-integral-residue-tor",
+  "cor-coef-integral-internal-hom",
+  "lem-coef-integral-hom-reduction",
+  "thm-coef-integral-verdier",
+  "prop-coef-integral-exceptional-adjoint",
+  "thm-coef-rational-verdier",
+  "lem-coef-rational-operations",
+  "thm-coef-qbar-verdier"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/thm-sf-ctf-stability.proof.md",
+  "place": "Five proof paragraphs, with general ringed-site perfect-duality tools and the all-finite-level zero-section purity specialization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "stability of constructible finite Tor categories under six functors",
+   "results": "8 unrelated CategoryTheory/Condensed/sheaf finite-limit declarations; none states the theorem",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "constructibleFiniteTor, DerivedCategory",
+   "results": "0 hits; unknown identifier 'constructibleFiniteTor'",
+   "date": "2026-10-16",
+   "verdict": "query rejected"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleFiniteTor_(leftDerivedUpperStar|tensor|rightDerivedLowerStar|rightDerivedLowerShriek|rightDerivedUpperShriek) [subdirectory SixFunctors/Etale/Derived]",
+   "results": "0 hits in Mathlib search directory",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constructible finite Tor tensor product preserves bounded constructible complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleFiniteTor [subdirectory Mathlib]",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsTriangulated, ObjectProperty",
+   "results": "0 hits; unknown identifier 'IsTriangulated'",
+   "date": "2026-10-16",
+   "verdict": "query rejected"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constructible finite Tor stability theorem six functors",
+   "results": "8 unrelated CategoryTheory/Condensed/sheaf finite-limit declarations; none states the theorem",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, PreservesFiniteLimits",
+   "results": "0 hits; unknown identifier 'PreservesFiniteLimits'",
+   "date": "2026-10-16",
+   "verdict": "query rejected"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleFiniteTor [subdirectory Mathlib/CategoryTheory]",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible complexes of sheaves with finite Tor dimension preserved by derived functors",
+   "results": "8 derived-category T-structure and exact-functor declarations; none states constructible finite-Tor stability for the six operations",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|constructible.*Tor|Tor.*constructible [subdirectory CategoryTheory]",
+   "results": "19 hits, all generic Verdier localization terminology or bibliographical references; no constructible finite-Tor six-operation theorem",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "six operations preserve bounded constructible sheaves of finite Tor amplitude over finite coefficient rings",
+   "results": "8 hits: light condensed Grothendieck/monoidal facts, derived-category support facts, and finite-type module sheaves; none states six-operation constructible finite-Tor stability.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf",
+   "results": "12 hits: Sheaf, terminal, sheafOver, isTerminalTerminal, sheafToPresheaf, fullyFaithfulSheafToPresheaf, Inhabited sheaves, sheafSections, sheafOver_obj, isTerminalOfEqTop, homEquiv, isTerminalOfBotCover; none states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|torAmplitude|six.?functor",
+   "results": "0 hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "six operations on bounded constructible complexes of finite Tor dimension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived categories of constructible sheaves finite tor dimension tensor internal Hom exceptional inverse image",
+   "results": "8 hits: generic Tor definitions/formulas and light-condensed monoidal/internal-projectivity declarations; no six-operation finite-Tor stability theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Tt]or|[Tt]or.*constructible|[Vv]erdier[Dd]ual",
+   "results": "0 hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "no match",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor",
+   "results": "4 hits: CategoryTheory.Tor, isZero_Tor_succ_of_projective, Tor_obj, Tor_map; generic Tor constructions, no constructible finite-Tor six-operation statement.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible complexes with finite Tor dimension are stable under the six operations on etale sheaves",
+   "results": "8 hits: etale morphism base change/composition, sheaf finite limits/presentation, Grothendieck abelian complexes and formally etale tensor products; none states the item.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "padded_uses"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2213,
+ "blueprint_uses": [
+  "cor-coef-finite-verdier",
+  "cor-pur-general-admissibility-datum",
+  "cor-pur-smooth-admissibility",
+  "cor-coef-integral-internal-hom",
+  "cor-sf-direct-image-ctf-proetale",
+  "cor-sf-hom-ctf-proetale-unconditional",
+  "cor-weil-finite-constructible-hom",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-site-perfect-complex",
+  "lem-coef-finite-direct-image",
+  "lem-coef-finite-exceptional",
+  "lem-coef-integral-hom-reduction",
+  "lem-coef-integral-residue-tor",
+  "lem-coef-rational-operations",
+  "lem-exc-constant-inverse-image-flat",
+  "lem-fix-operation-reduction",
+  "lem-sf-etale-direct-image-vanishing",
+  "lem-weil-pbc-pullback-preserves-bounded-constructible",
+  "prop-coef-integral-exceptional-adjoint",
+  "prop-exc-closed-tor",
+  "prop-sf-dualizable-hom",
+  "thm-coef-finite-hom",
+  "thm-coef-integral-verdier",
+  "thm-coef-qbar-verdier",
+  "thm-coef-rational-verdier",
+  "thm-fix-general-biduality",
+  "thm-pur-general-admissibility",
+  "thm-pur-open-complement-unconditional",
+  "thm-sf-direct-image-tor-amplitude",
+  "thm-sf-hom-ctf",
+  "thm-sf-preservation-class"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-ctf-stability",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-sf-ctf-stability",
+  "worker": "stage1",
+  "summary": "Returned long-step repair: replaced the two long paragraphs by short cited applications, reusing existing generic perfect duality, prescribed Tor-window, normalized integral-adjunction and common-stage coefficient-passage nodes. Preserved the statement and Lean record exactly and kept the other three proof steps unchanged. The origin example now cites zero-section purity for every finite coefficient level, avoiding the narrower ramification-divisibility hypothesis of the previous Gysin citation. No new nodes.",
+  "blueprint": "Current main-20261015 thm-sf-ctf-stability.proof.md: steps 1–8 realize paragraph 1 in its original order; steps 9, 10, 11 retain the former paragraphs 2, 3, 4 verbatim; steps 12–14 realize paragraph 5 by the existing residue, Hom, integral-adjoint and field-passage statements. Both unit proof paragraphs remain realized on the stated constructible domains.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-stalk-formula-restriction",
+    "why": "General finite-direct-image stalk calculation used only to verify the affine-line origin example; no node in this unit gives the stalk formula."
+   },
+   {
+    "node": "lem-pod-etale-stalk-tensor-scalar",
+    "why": "General etale stalk/tensor comparison used to check flatness of the origin sheaf."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "General etale exact-stalk tool used to check preservation of injections in the origin example."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "General etale conservative-stalk tool used in the same flatness and exactness calculation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "General ringed-site restriction of derived Hom, for the finite local coefficient calculation; no six-functor datum is assumed."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "General monoidality of derived pullback, applied only to slice restriction in the local evaluation calculation."
+   },
+   {
+    "node": "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "why": "Computes local derived Hom from a bounded finite-projective source using exact termwise Hom."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Makes the bounded dual complex K-flat, justifying its use as a derived tensor model."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Computes the coefficient-dual derived tensor using flat K-flat representatives."
+   },
+   {
+    "node": "lem-sfb-ringed-site-perfect-duality",
+    "why": "General ringed-site coefficient-dual evaluation; avoids requiring a six-functor datum in the local calculation."
+   },
+   {
+    "node": "lem-sf-site-perfect-tor-window",
+    "why": "General ringed-site shortening to the prescribed Tor interval, replacing the hidden constant-matrix and perfect-model argument."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact slice restriction for the local bounded flat tensor calculation."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Canonical etale/pro-etale direct-image comparison for the finite origin immersion."
+   },
+   {
+    "node": "lem-exc-proetale-closed-exact",
+    "why": "Exact closed direct image for the origin example; the open complement is quasi-compact."
+   },
+   {
+    "node": "lem-exc-proetale-closed-fully-faithful",
+    "why": "Full faithfulness of closed direct image detects the nonzero degree-two sheaf in the example."
+   },
+   {
+    "node": "cor-pur-affine-space-zero-section-purity",
+    "why": "Existing all-finite-level zero-section purity, used only for c=1 over Spec k in the source counterexample."
+   },
+   {
+    "node": "lem-exc-proetale-support-triangle",
+    "why": "Ambient pro-etale closed support triangle, used only in the origin example to show the ambient Ri^!A is constructible and so agrees with the constructible exceptional functor."
+   },
+   {
+    "node": "prop-sf-localization-all-stages",
+    "why": "Constructible Rj_* and i^* preservation and the constructible right adjoint of i_*, used only to identify the ambient and constructible Ri^!A in the origin example."
+   },
+   {
+    "node": "lem-trf-open-ctf",
+    "why": "Open extension by zero preserves bounded constructibility and Tor interval in clause (iv); the unit step cites sk-lem-sf-open-ctf for it."
+   },
+   {
+    "node": "prop-exc-closed-tor",
+    "why": "Closed-immersion Tor bound in the narrative of clause (v), as cited by the current blueprint proof."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Finite-quotient comparisons for pullback, tensor and compact supports in clause (vii); the unit step cites sk-prop-sf-pf-reduction for them."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-stalk-formula-restriction",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-bounded-finite-tor-perfect",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-finite-projective-internal-hom-evaluation",
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-sf-site-perfect-tor-window",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-exc-proetale-closed-exact",
+  "lem-exc-proetale-closed-fully-faithful",
+  "cor-pur-affine-space-zero-section-purity",
+  "lem-exc-proetale-support-triangle",
+  "prop-sf-localization-all-stages",
+  "lem-trf-open-ctf",
+  "prop-exc-closed-tor",
+  "lem-fix-operation-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-f3b6ea136",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-f3b6ea136 (reviewer sub-agent of L); spot-checked: I read the whole item, all 14 steps, every one of the 54 cited statements, the unit and chapter records, the current main-20261015 proof, and Stacks 08JJ, 08G7 and 08H5. The statement is unchanged and nothing is weakened. There are no new nodes. One fault (C4/E6) in step 8: lem-weil-stratum-ambient-hom gives Ri_*Ri^!_amb A, where Ri^!_amb is the ambient unbounded pro-etale right adjoint of i_*. The step then applies cor-pur-affine-space-zero-section-purity, which concerns the constructible Rz^! = nu^* z^x Rnu_* of def-weil-exceptional-inverse-image, a different functor by definition. Repaired with existing nodes only. lem-exc-proetale-support-triangle gives i_*Ri^!_amb A -> A -> Rj_*j^*A. prop-sf-localization-all-stages (1') and (3') put the last two vertices in D^b_ctf, which is triangulated by lem-weil-finite-ctf-triangulated. The counit isomorphism from lem-exc-proetale-closed-fully-faithful then puts Ri^!_amb A in D^b_c(Spec k). Clause (2) of the localization node with Yoneda in D^b_c gives Ri^!_amb A = Ri^!A. Purity with c=1 then holds for every n and for ramified E. No cycle; the step is 1547 characters. proof_deps is recomputed (58 ids) and split_report.tool_uses gains five entries: support-triangle, localization-all-stages, and the undeclared off-unit lem-trf-open-ctf, prop-exc-closed-tor and lem-fix-operation-reduction, all accepted as tools. Other checks: Hom intervals [c-b,d-a] and [c-b-2m,d-a+2m]; the Verdier composite [a-2d_X,b+2d_Y] with signs verified; chart arithmetic 2D+2dimY+1; empty schemes; UDV(f,A;2d); Nagata hypotheses; etale origin for Rf_!; finite, integral, E and Qlb comparisons; and the origin small cases. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Fix the finite-field datum,\n$A=A_{E,n}$, and separated finite-type morphisms between separated finite-type\n$k$-schemes. Use the bounded\nconstructible categories and their\nfinite-Tor subcategories.\nAt this finite coefficient stage the following hold:\n\n1. **(i)** $Lf^*$ carries $D^b_{ctf}(Y,A)$ into\n$D^b_{ctf}(X,A)$.\n1. **(ii)** Derived tensor carries\n$D^b_{ctf}\\times D^b_{ctf}$ into $D^b_{ctf}$; if the two inputs have\nTor amplitude in $[a,b]$ and $[c,d]$, the output has Tor amplitude in\n$[a+c,b+d]$.\nFor $K,L\\in D^b_{ctf}(X,A)$, internal Hom has this same conclusion.\nIf $K,L$ have Tor amplitude in $[a,b]$ and $[c,d]$ and\n$\\dim X\\leq m$, then $R\\mathcal Hom(K,L)$ has Tor amplitude in\n$[c-b-2m,d-a+2m]$; if moreover $K$ is site-perfect, it has Tor\namplitude in the sharper interval $[c-b,d-a]$.\nThe elementary formula $R\\mathcal Hom(K,L)=K^\\vee\\otimes^L L$, with\ncoefficient dual $K^\\vee=R\\mathcal Hom(K,A_X)$, and the dimension-free\ninterval $[c-b,d-a]$ require a site-perfect first argument: for the origin\n$i:\\{0\\}\\hookrightarrow\\mathbf A^1$ both $i_*A$ and $A$ have Tor amplitude\n$[0,0]$, while $R\\mathcal Hom(i_*A,A)=i_*A(-1)[-2]$ has cohomology in\ndegree $2$.\n1. **(iii)** $Rf_*$ carries $D^b_{ctf}(X,A)$ into\n$D^b_{ctf}(Y,A)$; for input Tor amplitude $[a,b]$ and\n$\\dim X\\leq d$, the output has Tor amplitude in $[a,b+2d]$.\n1. **(iv)** $Rf_!$ carries $D^b_{ctf}(X,A)$ into\n$D^b_{ctf}(Y,A)$.\n1. **(v)** The exceptional adjoint on the constructible\ncoefficient category satisfies $Rf^!=D_Xf^*D_Y$ and carries\n$D^b_{ctf}(Y,A)$ into $D^b_{ctf}(X,A)$.\nFor input Tor interval $[a,b]$, one output interval is\n$[a-2\\dim X,b+2\\dim Y]$.\n1. **(vi)** For every separated finite-type $X/k$,\n$D_X=R\\mathcal Hom_X(-,Ra_X^!A)$ is a contravariant exact\nanti-equivalence with $K\\simeq D_XD_XK$.\n1. **(vii)** On the finite-Tor constructible domains,\nfinite coefficient quotients commute with pullback, tensor, both\ndirect images, general internal Hom, Verdier duality and the\nexceptional adjoint, preserving their evaluation and adjunction maps.\nFor derived-complete\nintegral objects, $D^b_c(X,\\mathcal O_E)=D^b_{ctf}(X,\\mathcal O_E)$.\nGeneral internal Hom and the exceptional adjoint preserve this\ncategory; Verdier duality is an anti-equivalence on it, with the\ncanonical finite reductions of these operations. These conclusions\npass to the bounded constructible categories at $E$ and\n$\\Qlb$, with their specified coefficient-passage operations.",
+  "proof": [
+   {
+    "text": "For (i), bounded constructibility is\n[lem-weil-pbc-pullback-preserves-bounded-constructible], and\nflat inverse image in [lem-exc-constant-inverse-image-flat]\npreserves the Tor interval of\n[def-weil-finite-tor-amplitude].\nFor (ii), the Tor intervals add under derived tensor: with bounded\nflat models of $K$ in $[a,b]$ and of $L$ in $[c,d]$, the total tensor\ncomplex is a bounded flat model in $[a+c,b+d]$. Refine the\nfinite constructible stratifications for the two complexes; the\nbounded tensor complexes on each stratum have finite locally constant\ncohomology, which gives constructibility. If $K$ is site-perfect\nin [def-weil-site-perfect-complex], a bounded finite-projective\nlocal model $P$ in $[a,b]$ computes its dual and identifies\n$R\\mathcal Hom(K,L)=K^\\vee\\otimes^L L$ by\n[prop-sf-dualizable-hom]. The tensor argument proves Hom\npreservation in that case, and since $P^\\vee$ is a bounded\nfinite-projective complex in $[-b,-a]$, the tensor bound gives the\ninterval $[c-b,d-a]$; this is the sharper assertion of\n[thm-sf-hom-ctf], whose argument is local on the site and so applies\non either site; on the pro-étale site this is [cor-sf-hom-ctf-proetale-unconditional]. For a general constructible finite-Tor\nfirst argument, use [cor-weil-finite-constructible-hom], whose\nproof uses geometric Verdier biduality and gives the\ndimension-dependent interval $[c-b-2m,d-a+2m]$. The displayed\nexample shows the dimension-free interval fails without\nsite-perfectness: $R\\mathcal Hom(i_*A,A)=i_*Ri^!A$ by adjunction, and\n$Ri^!A=A(-1)[-2]$ by purity for the point in the smooth curve.",
+    "uses": [
+     "lem-weil-pbc-pullback-preserves-bounded-constructible",
+     "lem-exc-constant-inverse-image-flat",
+     "def-weil-finite-tor-amplitude",
+     "def-weil-site-perfect-complex",
+     "prop-sf-dualizable-hom",
+     "thm-sf-hom-ctf",
+     "cor-sf-hom-ctf-proetale-unconditional",
+     "cor-weil-finite-constructible-hom"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Clause (iii) is [cor-sf-direct-image-ctf-proetale]: its etale\ncalculation is [thm-sf-direct-image-tor-amplitude], with the\nuniform all-sheaf cohomological bound supplied by\n[lem-sf-etale-direct-image-vanishing]. That calculation uses a\nbounded-above free resolution of a finite constant coefficient and\nthe cohomological bound; it does not use a projection formula for an\narbitrary sheaf on the target. For (iv), choose a compactification\n$f=pj$ and use [def-compact-support-direct-image-detailed].\nExtension by zero $j_!$ is exact and commutes with tensor, as is\nseen on stalks, so preserves the Tor interval and constructibility.\nApply (iii) to the proper factor $p$.",
+    "uses": [
+     "cor-sf-direct-image-ctf-proetale",
+     "thm-sf-direct-image-tor-amplitude",
+     "lem-sf-etale-direct-image-vanishing",
+     "def-compact-support-direct-image-detailed"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Clause (v) is the preservation result for the exceptional inverse\nimage, assembled from the closed and smooth cases. For a closed immersion\n$i:Z\\hookrightarrow T$ with $\\dim T\\leq d$, the open complement satisfies\nthe open-complement condition with $c=2d$ by\n[thm-pur-open-complement-unconditional], so [prop-exc-closed-tor]\ncarries bounded constructible input of Tor amplitude $[a,b]$ to bounded\nconstructible output of Tor amplitude $[a,b+2d+1]$. For $f$ smooth of pure\nrelative dimension $d$, purity identifies $Rf^!$ with $Lf^*(-)(d)[2d]$ and\n[cor-pur-smooth-admissibility] gives the shift $-2d$ on both intervals.\nA general $f$ is, on affine charts $U\\subseteq f^{-1}(V)$, a closed\nimmersion $U\\hookrightarrow\\mathbf A^{d_U}_V$ followed by the smooth\nprojection, and composing the two cases along the charts is\n[thm-pur-general-admissibility]; its open-complement hypothesis on the\ncharts is discharged by [cor-pur-general-admissibility-datum], so it is a\ntheorem and not an assumption. At the finite stage $A=A_{E,n}$ and for every\nseparated finite-type $f$ of the statement this is\n[thm-sf-preservation-class](2): $Rf^!$ carries $D^b_{ctf}(Y,A)$ into\n$D^b_{ctf}(X,A)$, with no ambient datum assumed on that category. With this\npreservation, the finite dual formula and adjunction of\n[lem-coef-finite-exceptional] identify $Rf^!$ with $D_Xf^*D_Y$ on this\ndomain; applying the finite duality bound on $Y$, ordinary pullback, and\nthe finite duality bound on $X$ gives the displayed output interval. Clause (vi) is\n[thm-fix-general-biduality] at finite coefficients;\nits geometric proof supplies the\nanti-equivalence and is not replaced by the site-perfect calculation\nin (ii).",
+    "uses": [
+     "thm-pur-open-complement-unconditional",
+     "prop-exc-closed-tor",
+     "cor-pur-smooth-admissibility",
+     "thm-pur-general-admissibility",
+     "cor-pur-general-admissibility-datum",
+     "thm-sf-preservation-class",
+     "lem-coef-finite-exceptional",
+     "thm-fix-general-biduality"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For (vii), use [lem-fix-operation-reduction] for pullback,\ntensor and compact supports, and [lem-coef-finite-direct-image]\nfor ordinary direct image. General finite internal-Hom and duality\ncomparisons are [thm-coef-finite-hom], [cor-coef-finite-verdier];\nthe exceptional comparison is [lem-coef-finite-exceptional].\nTheir proofs compare the specified evaluations and adjunction maps.",
+    "uses": [
+     "lem-fix-operation-reduction",
+     "lem-coef-finite-direct-image",
+     "thm-coef-finite-hom",
+     "cor-coef-finite-verdier",
+     "lem-coef-finite-exceptional"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "At integral coefficients, [lem-coef-integral-residue-tor]\nidentifies the two constructible categories. General internal Hom\nand its finite reductions are\n[cor-coef-integral-internal-hom], [lem-coef-integral-hom-reduction].\nThe anti-equivalence and exceptional adjunction are\n[thm-coef-integral-verdier], [prop-coef-integral-exceptional-adjoint].\nThese proofs establish normalized-tower effectivity and the finite\nreductions with uniform bounds; they do not infer a common integral\nlocal model merely from levelwise constructibility.\nFinally [thm-coef-rational-verdier], [lem-coef-rational-operations]\nidentify the operations after rationalization, and\n[thm-coef-qbar-verdier] transports them to the common-stage\ncategory, including its retracts. Their adjunctions have precisely\nthe bounded constructible domains stated in those results.",
+    "uses": [
+     "lem-coef-integral-residue-tor",
+     "cor-coef-integral-internal-hom",
+     "lem-coef-integral-hom-reduction",
+     "thm-coef-integral-verdier",
+     "prop-coef-integral-exceptional-adjoint",
+     "thm-coef-rational-verdier",
+     "lem-coef-rational-operations",
+     "thm-coef-qbar-verdier"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

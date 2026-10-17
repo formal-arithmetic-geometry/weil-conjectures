@@ -1,0 +1,93 @@
+{
+ "id": "lem-coef-marked-cone-adjunction-substitution",
+ "kind": "statement",
+ "title": "Marked cone adjunction and substitution before deriving straightening",
+ "statement": "Use the small simplicial categories and coherent realization $\\mathfrak C$ of [lem-coef-coherent-nerve-comparison], marked simplicial sets of [lem-coef-marked-point-cartesian-model], and the marked cone diagrams $L_u$ of [lem-coef-marked-cone-generator-calculations]. For any small simplicial set $S$, small simplicial category $I$, and simplicial functor $u:\\mathfrak C[S]\\to I^{\\mathrm{op}}$, the functor $L_u$ preserves small colimits and has a right adjoint $U_u$ on marked enriched $I$-diagrams. Its $n$-simplices over $\\sigma:\\Delta^n\\to S$ are marked enriched natural maps $L_u((\\Delta^n)^\\flat_\\sigma)\\to F$, with simplex operators by restriction; an edge is marked exactly when its map extends across $L_u((\\Delta^1)^\\flat_\\sigma)\\to L_u((\\Delta^1)^\\sharp_\\sigma)$.\n\nWrite $L_S=L_{\\mathrm{id}_{\\mathfrak C[S]}}$, $U_S$ for its right adjoint, and $T=L_{\\Delta^0}$ with right adjoint $U_0$. For $a:A\\to B$, let $a_!$ compose the base map with $a$. There are canonical natural isomorphisms\n$$L_Ba_!\\cong(\\mathfrak C[a]^{\\mathrm{op}})_!L_A.$$\nMore generally, for $v:I\\to J$, $L_{v^{\\mathrm{op}}u}\\cong v_!L_u$ and $U_{v^{\\mathrm{op}}u}\\cong U_uv^*$, where $v^*$ is restriction and $v_!$ is enriched left Kan extension. For a marked $I$-diagram $G$ its value is the marked coend\n$$(v_!G)(j)=\\int^{i\\in I}J(v(i),j)^\\sharp\\times G(i).$$\nHere the coend identifies the action on the mapping factor with the action on $G$, and markings are induced from the displayed marked products. All these isomorphisms commute with identities, composite substitutions, and maps of the input object.\n\nFor every vertex $s$ there is a natural marked isomorphism $(U_SF)_s\\cong U_0(F(s))$. If $X\\to U_SF$ is adjoint to $h:L_SX\\to F$, its marked fiber map at $s$ is adjoint under $T\\dashv U_0$ to the composite $T(X_s)\\to L_SX(s)\\xrightarrow{h_s}F(s)$, where the first map is induced by the fiber inclusion and the identity of $s$. For the initial-face inclusion $a:\\Delta^{n-1}\\hookrightarrow\\Delta^n$, $n\\geq1$, the extension of any marked $\\mathfrak C[\\Delta^{n-1}]^{\\mathrm{op}}$-diagram $G$ has value canonically $G(i)$ at $i<n$ and the empty marked simplicial set at $n$. No model structure over a base, local Kan hypothesis, or straightening equivalence is assumed.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Definition 3.2.1.2, Proposition 3.2.1.4, Corollary 3.2.1.5, and the vertex adjunction before Lemma 3.2.3.3; marked generators are those in the cone-generator node. No Stacks tag states this simplicial result; HTT is requested in report.md."
+ },
+ "stmt_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-marked-cone-generator-calculations"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Marked simplicial cone straightening preserves colimits and has a simplexwise right adjoint compatible with enriched left Kan extension and vertex fibers",
+   "results": "{\"t\": \"2026-10-17T08:30:39Z\", \"tool\": \"leanfinder\", \"query\": \"Marked simplicial cone straightening preserves colimits and has a simplexwise right adjoint compatible with enriched left Kan extension and vertex fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.SimplicialObject.instIsRightKanExtensionOppositeTruncatedSimplexCategoryObjCoskAppTruncatedCounitCoskAdjTruncation\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\"], \"digest\": \"dd3c76c03befdecc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary Kan extensions, ordinary adjunctions on cone categories and StrictSegal coskeleta; none constructs the marked coherent cone or its marked simplexwise right adjoint. Source grep has no cone-straightening implementation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The marked coherent cone construction has an adjunction whose restriction to a vertex is the point cone adjunction",
+   "results": "{\"t\": \"2026-10-17T08:30:50Z\", \"tool\": \"leanfinder\", \"query\": \"The marked coherent cone construction has an adjunction whose restriction to a vertex is the point cone adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.coneOfAdj_pt\", \"CategoryTheory.Adjunction.conesIsoComponentHom\", \"CategoryTheory.Adjunction.conesIsoComponentInv\", \"CategoryTheory.Adjunction.functorialityLeftAdjoint\", \"CategoryTheory.Limits.coneOfAdj\", \"CategoryTheory.Adjunction.functorialityAdjunction'\", \"CategoryTheory.Adjunction.functorialityAdjunction\", \"CategoryTheory.Adjunction.conesIso\"], \"digest\": \"28c50d72e28d592c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary Kan extensions, ordinary adjunctions on cone categories and StrictSegal coskeleta; none constructs the marked coherent cone or its marked simplexwise right adjoint. Source grep has no cone-straightening implementation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Enriched.LeftKanExtension",
+   "results": "{\"t\": \"2026-10-17T08:30:51Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Enriched.LeftKanExtension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Enriched.LeftKanExtension'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary Kan extensions, ordinary adjunctions on cone categories and StrictSegal coskeleta; none constructs the marked coherent cone or its marked simplexwise right adjoint. Source grep has no cone-straightening implementation."
+  },
+  {
+   "tool": "grep",
+   "query": "marked.*cone|cone.*marked|straighten|unstraighten",
+   "results": "{\"t\": \"2026-10-17T08:30:51Z\", \"tool\": \"grep\", \"query\": \"marked.*cone|cone.*marked|straighten|unstraighten\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary Kan extensions, ordinary adjunctions on cone categories and StrictSegal coskeleta; none constructs the marked coherent cone or its marked simplexwise right adjoint. Source grep has no cone-straightening implementation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Marked coherent cone adjunction commutes with base substitution and enriched left Kan extension",
+   "results": "{\"t\": \"2026-10-17T08:30:51Z\", \"tool\": \"leansearch\", \"query\": \"Marked coherent cone adjunction commutes with base substitution and enriched left Kan extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.TwoSquare.lanBaseChange\", \"CategoryTheory.Adjunction.functorialityLeftAdjoint\", \"CategoryTheory.Functor.isLimitConeOfIsRightKanExtension_lift\", \"CategoryTheory.Bicategory.LeftExtension.instCommuteWithOfIsLeftAdjoint\", \"CategoryTheory.Functor.LeftExtension.coconeAt\", \"CategoryTheory.TwoSquare.isIso_lanBaseChange_app\", \"CategoryTheory.Adjunction.functorialityAdjunction'\", \"CategoryTheory.Functor.isLimitConeOfIsRightKanExtension\"], \"digest\": \"16ab7e2f52453369\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary Kan extensions, ordinary adjunctions on cone categories and StrictSegal coskeleta; none constructs the marked coherent cone or its marked simplexwise right adjoint. Source grep has no cone-straightening implementation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftKanExtension",
+   "results": "{\"t\": \"2026-10-17T08:32:42Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsLeftKanExtension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isLeftKanExtensionId\", \"CategoryTheory.Functor.instIsLeftKanExtensionLeftKanExtensionLeftKanExtensionUnit\", \"CategoryTheory.Functor.IsLeftKanExtension\", \"CategoryTheory.Functor.HasLeftKanExtension.mk\", \"CategoryTheory.Functor.coconeOfIsLeftKanExtension\", \"CategoryTheory.Functor.isLeftKanExtensionAlongEquivalence\", \"CategoryTheory.Functor.isLeftKanExtensionAlongEquivalence'\", \"CategoryTheory.Functor.colimitIsoOfIsLeftKanExtension\"], \"digest\": \"5d5828425caf3a04\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary Kan extensions, ordinary adjunctions on cone categories and StrictSegal coskeleta; none constructs the marked coherent cone or its marked simplexwise right adjoint. Source grep has no cone-straightening implementation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-cartesian-cone-fiber-comparison",
+  "date": "2026-10-17",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed finite-coefficient derived mapping-complex adjunction preceding the derived inverse limit; relative marked simplicial foundations below lem-coef-algebroid-external-product: Cartesian base-equivalence invariance and extension. Technical input: the canonical fiber-to-cone comparison for a naturally marked Cartesian fibration, before deriving base extension. Extracted prerequisite: returned proof Step 12, Marked cone adjunction and substitution before deriving straightening.",
+   "via": [
+    "lem-coef-cartesian-cone-fiber-comparison",
+    "lem-coef-cartesian-base-equivalence-invariance",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-cartesian-monoidal-straightening",
+    "lem-coef-algebroid-external-product",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
