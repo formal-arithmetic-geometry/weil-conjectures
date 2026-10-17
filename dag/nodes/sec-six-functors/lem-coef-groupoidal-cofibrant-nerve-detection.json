@@ -9,7 +9,9 @@
  },
  "stmt_deps": [
   "lem-coef-sorted-simplicial-algebra-model",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-cofibrant-completion-nerve-equivalence"
  ],
  "proof": [
   {
@@ -263,5 +265,27 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-8610b36bb (reviewer sub-agent of L); spot-checked: I read the item and all eight steps in full, plus the statements of all 11 cited nodes. All cited nodes are in the item's unit sk-prop-sf-biduality-general and none is merged, so no tool_uses are needed. proof_deps equals the union of the step uses. The dependency closure (194 nodes) does not reach the item, so there is no cycle; the earlier cycle through kan-fibration-arbitrary-base-fibers is gone. The statement is unchanged and true: forward by step 1 (rows plus the diagonal lemma), converse through the per-object fibration E(T,y)->B(T), whose base points are the objects x. Step 3 shows precomposition by a vertex is an equivalence using the groupoid hypothesis and homotopy-equivalence-weak. Step 5 shows each naturality square is a homotopy pullback through fiber detection over the identity base, with the hofib orientation matching def-cbc-enhanced-diagrams-cones. Step 6 checks every hypothesis of equifibered-bisimplicial-diagonal. Step 7 contracts diag E through the terminal object of the slice. Step 8 uses kan-homotopy-pullback-invariance and the Ex-infinity units. Cofibrancy is unused, and keeping it is correct because it is the source's hypothesis. I tested empty O, disconnected O, empty mapping sets, a single object, and one-dimensional horns; none fails. Nothing is duplicated: cofibrant-localization-diagonal-nerve, cofibrant-completion-nerve-equivalence, free-category-groupoid-nerve and cofibrant-simplicial-inversion each treat one canonical map, not detection for an arbitrary functor. The only citer, simplicial-invertible-arrow-pushout step 6, applies the item with exactly its hypotheses. There are no new nodes and no fixes. Minor point, not a fault: the step 3 homotopy relies on |X|x[0,1] being a k-space. Dwyer-Kan Corollary 9.6 is not in literature and the network is blocked, so I checked the mathematics on its own; the source stays WANTED and proof_origin is agent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a22e1e07",
+  "group": "N3",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: fixed-object U V : Fixed O, f a FixedHom; fixedWeakEquivalences and fixedFibrations are mappingwise; cofibrancy is fixedCofibrations of discreteInclusion (LLP against mappingwise trivial Kan fibrations); the pi0 groupoid hypothesis is IsEquivalenceVertex on every vertex, equivalent because pi0 is a quotient of vertices; NT is the existing TwoSided diagonalNerve of degreeDiagram, the same rendering as the landed stmt dep; the conclusion is an iff with no Kan, connectedness or nonemptiness assumption. Edge cases checked: empty O, empty mapping sets, nerve degree p=0, a single universe u. The new helper degreeDiagramMap has real canonical data (degreeFunctor of bundleMap f) and is not a duplicate. lean.statement is verbatim; the item changes only lean and stmt_deps (two landed deps added, permitted); no dependency cycle. The docstrings carry source places, blueprint ids and all eight proof steps; the theorem's proof is only sorry; no line over 100 characters. nt_compile.py --json on the snapshot: rc 0, no errors or warnings. Not faults of this delivery: the landed cofibrant-completion-nerve-equivalence node's dependency record is incomplete, and the project already had two diagonal-nerve definitions."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.GroupoidalCofibrantNerveDetection",
+  "declaration": "SSet.Bergner.groupoidal_cofibrant_nerve_detection",
+  "declarations": [
+   "SSet.Bergner.degreeDiagramMap",
+   "SSet.Bergner.groupoidal_cofibrant_nerve_detection"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/GroupoidalCofibrantNerveDetection.lean",
+  "statement": "theorem groupoidal_cofibrant_nerve_detection {O : Type u} {U V : Fixed O} (f : U ⟶ V) (hU : fixedCofibrations O (discreteInclusion U)) (hV : fixedCofibrations O (discreteInclusion V)) (hgroupU : ∀ (a b : O) (e : (U.Hom a b) _⦋0⦌), IsEquivalenceVertex U e) (hgroupV : ∀ (a b : O) (e : (V.Hom a b) _⦋0⦌), IsEquivalenceVertex V e) : fixedWeakEquivalences O f ↔ Enhanced.IsWeakHomotopyEquivalence (CategoryTheory.TwoSidedSimplicialGrothendieck.diagonalNerveMap (degreeDiagramMap f))",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
