@@ -1,6 +1,6 @@
 # Work queue
 
-22 items; claim with `tools/claim.py next <group> [--stage N]`.
+18 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (22)
+## Stage 3: modules to prove (18)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -21,12 +21,8 @@
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic` | 3 | 7 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal` | 3 | 9 | proof |
 | `Sheaf.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal` | 5 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine` | 8 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientSquareCoherence` | 10 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
-| `Sheaf.CategoryTheory.CartanEilenbergDecalageSpectralObject` | 13 | 1 | proof |
-| `Sheaf.CategoryTheory.FilteredComplexDecalageComparison` | 13 | 1 | proof |
-| `Sheaf.CategoryTheory.SpectralObjectPageTwoMapExistence` | 13 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueScalarCounitModel` | 13 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorPullCounitModel` | 13 | 1 | proof |
 | `Sheaf.Paper.IntegralResiduePullFlatModelComparison` | 14 | 1 | proof |
