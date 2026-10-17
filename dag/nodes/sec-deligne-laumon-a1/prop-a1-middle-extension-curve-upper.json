@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-a1-middle-extension-curve-upper",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Upper bound for a curve middle extension",
@@ -19,15 +19,19 @@
  ],
  "proof": [
   {
-   "text": "Choose a dense affine $v:V_0\\hookrightarrow U_0$ by\n[lem-a1-affine-core-of-curve]. The recovery lemma\n[lem-a1-lisse-middle-extension] identifies\n$v_*\\mathcal F|_V$ with $\\mathcal F$, so by transitivity of ordinary\ndirect image, $j_*\\mathcal F$ is the middle extension of\n$\\mathcal F|_{V_0}$ directly from $V_0$ to $C_0$.",
+   "text": "Choose a dense affine $v:V_0\\hookrightarrow U_0$ by [lem-a1-affine-core-of-curve]. Since $U_0$ is a smooth geometrically connected curve, the lemma applies; the complement of $V_0$ in $U_0$ is finite, and the complement of $U_0$ in $C_0$ is finite because it is a closed zero-dimensional subscheme of the finite-type curve $C_0$. The recovery lemma [lem-a1-lisse-middle-extension], applied to the lisse sheaf $\\mathcal F$ on $U_0$, identifies $v_* (\\mathcal F|_{V_0})$ with $\\mathcal F$. Transitivity of ordinary direct image therefore identifies $j_*\\mathcal F$ with the middle extension of $\\mathcal F|_{V_0}$ along the composite $V_0\\hookrightarrow C_0$.",
    "uses": [
     "lem-a1-affine-core-of-curve",
     "lem-a1-lisse-middle-extension"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/prop-a1-middle-extension-curve-upper.proof.md",
+    "place": "first paragraph"
+   }
   },
   {
-   "text": "The affine estimate [thm-a1-affine-curve-upper] bounds\n$H_c^r(V,\\mathcal F)$ by $w+r$. The boundary stalk at a point of\nthe finite complement $C\\setminus V$ is the inertia invariants of the\nlocal geometric generic stalk, of weights at most $w$ by the\nweights-of-inertia-invariants corollary [lem-wf-boundary-semicontinuity]\n(with the boundary stalk description of\n[lem-wf-boundary-stalk-invariants]), and the finite-boundary\ncalculation [lem-a1-finite-boundary-cohomology] then shows that\nthe boundary term of\nthe localization triangle [prop-a1-curve-boundary-sequence] for\n$V\\hookrightarrow C$ is concentrated in degree zero, and\n[lem-a1-finite-boundary-weights] gives its weights at\nmost $w$. Thus each middle cohomology group $H_c^r(C,j_*\\mathcal F)$\nis an extension of a quotient of $H_c^r(V,\\mathcal F)$ by a subobject\nof the (degree-zero) boundary group; when $r=0$ it is an injection.\nSubquotients preserve the stated bounds by\n[lem-a1-subquotient-extension-bounds], and extensions preserve\nthem by [lem-a1-extension-bounds]; since $r\\geq0$, the boundary bound $w$ is at\nmost $w+r$.",
+   "text": "If $\\mathcal F$ has rank zero, it is the zero lisse sheaf, so its ordinary direct image and all compactly supported cohomology groups are zero and the conclusion is immediate. Assume henceforth that its rank is at least one. The restriction $\\mathcal F|_{V_0}$ remains lisse and punctually $\\iota$-pure of weight $w$, so [thm-a1-affine-curve-upper] gives weights at most $w+r$ for $H_c^r(V,\\mathcal F)$ and vanishing outside degrees $0,1,2$. For each point of the finite boundary $Z_0=C_0\\setminus V_0$, [lem-wf-boundary-semicontinuity] applied to $V_0\\hookrightarrow C_0$ gives weights at most $w$ on the stalk of the middle extension; [lem-wf-boundary-stalk-invariants] identifies that stalk with inertia invariants, compatibly with Frobenius. Hence [lem-a1-finite-boundary-weights] gives weights at most $w$ on the degree-zero boundary group, while [lem-a1-finite-boundary-cohomology] says all other boundary cohomology vanishes. The localization triangle [prop-a1-curve-boundary-sequence] yields the long exact sequence. For $r=0$ it has $0\\to H_c^0(V,\\mathcal F)\\to H_c^0(C,j_*\\mathcal F)\\to B$ with $B$ a subobject of the boundary degree-zero group, so the middle term is an extension of a subobject of $B$ by $H_c^0(V,\\mathcal F)$. For $r=1$ it gives a quotient $H_c^1(V,\\mathcal F)\\twoheadrightarrow H_c^1(C,j_*\\mathcal F)$, and for $r\\ge2$ it gives an isomorphism with $H_c^r(V,\\mathcal F)$; the same sequence gives vanishing outside $0,1,2$. By [lem-a1-subquotient-extension-bounds], quotients and subobjects preserve upper weight bounds, and by [lem-a1-extension-bounds], extensions preserve them. Thus the degree-zero group has weights at most $w$, the degree-one group at most $w+1$, and for $r\\ge2$ the bound is $w+r$; the boundary bound $w\\le w+r$ applies in every nonnegative degree.",
    "uses": [
     "thm-a1-affine-curve-upper",
     "lem-wf-boundary-semicontinuity",
@@ -38,29 +42,33 @@
     "lem-a1-subquotient-extension-bounds",
     "lem-a1-extension-bounds"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/prop-a1-middle-extension-curve-upper.proof.md",
+    "place": "second paragraph, with the localization long exact sequence written degree by degree"
+   }
   }
  ],
  "proof_deps": [
   "lem-a1-affine-core-of-curve",
+  "lem-a1-extension-bounds",
+  "lem-a1-finite-boundary-cohomology",
+  "lem-a1-finite-boundary-weights",
   "lem-a1-lisse-middle-extension",
-  "thm-a1-affine-curve-upper",
+  "lem-a1-subquotient-extension-bounds",
   "lem-wf-boundary-semicontinuity",
   "lem-wf-boundary-stalk-invariants",
-  "lem-a1-finite-boundary-cohomology",
   "prop-a1-curve-boundary-sequence",
-  "lem-a1-finite-boundary-weights",
-  "lem-a1-subquotient-extension-bounds",
-  "lem-a1-extension-bounds"
+  "thm-a1-affine-curve-upper"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/prop-a1-middle-extension-curve-upper.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/prop-a1-middle-extension-curve-upper.proof.md",
+  "place": "two proof paragraphs, with the localization long exact sequence expanded"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -102,5 +110,21 @@
   }
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-thm-dl-a1-upper"
+ "unit": "sk-thm-dl-a1-upper",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "prop-a1-middle-extension-curve-upper",
+  "worker": "stage1",
+  "summary": "Audited the current main-20261015 proposition and preserved its two-step route. No auxiliary nodes were needed: the existing affine-core, lisse-recovery, affine estimate, boundary, localization, finite-boundary, subquotient, and extension statements supply every non-elementary input. Expanded the second step to write the localization long exact sequence in the correct degree-zero and degree-one orientations and to account for vanishing outside degrees 0, 1, 2. Updated the source and blueprint metadata to the current snapshot.",
+  "blueprint": "Realizes the two paragraphs of the current main-20261015 proof: choose an affine core and recover the sheaf by transitive ordinary direct image; then combine the affine estimate with boundary stalk weights, finite-boundary concentration, localization, and Frobenius weight stability.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q29-fc71aba05",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-fc71aba05 (reviewer sub-agent of L); spot-checked: The boundary semicontinuity lemma requires lisse rank ≥1, but the delivered proof applies it without handling rank-zero sheaves. Added a corrected full DAG JSON under fixes/dag/nodes/sec-deligne-laumon-a1/prop-a1-middle-extension-curve-upper.json, splitting off the zero-sheaf case before invoking the lemma.; 1 file(s) fixed by the reviewer"
+ }
 }

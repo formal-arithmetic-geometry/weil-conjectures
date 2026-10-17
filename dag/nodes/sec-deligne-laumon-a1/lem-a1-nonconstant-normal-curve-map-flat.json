@@ -12,9 +12,130 @@
   "def-sbc-normal-dominant-galois",
   "def-weil-flat-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The schemes $X,Y$ are integral by [def-pc-curve]. By [lem-sc-scheme-sober] they have unique generic points $\\eta_X,\\eta_Y$. The dimension convention of [def-pc-curve] is the supremum of local-ring dimensions [def-pc-dimension]; [lem-pc-scheme-dimension-local-rings] identifies it with topological Krull dimension. Thus $Y$ has topological dimension one, and every local ring of $Y$ has dimension at most one.",
+   "uses": [
+    "def-pc-curve",
+    "lem-sc-scheme-sober",
+    "def-pc-dimension",
+    "lem-pc-scheme-dimension-local-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCK, lemma-flat, proof; generic points and dimension-one hypotheses"
+   }
+  },
+  {
+   "text": "The point $f(\\eta_X)$ must equal $\\eta_Y$. Indeed, put $z=f(\\eta_X)$. If $z\\ne\\eta_Y$, its closure is a proper irreducible closed subset of $Y$, by uniqueness of generic points [lem-sc-scheme-sober]. For any $w\\in\\overline{\\{z\\}}$ different from $z$, uniqueness of generic points also makes $\\overline{\\{w\\}}\\subsetneq\\overline{\\{z\\}}$. This would give a length-two chain $\\overline{\\{w\\}}\\subsetneq\\overline{\\{z\\}}\\subsetneq Y$, contradicting [def-kun-topological-krull-dimension] and Step 1. Therefore $\\overline{\\{z\\}}=\\{z\\}$. Continuity of the map underlying $f$ [def-weil-locally-ringed-space-morphism] implies $f(X)\\subseteq\\overline{\\{f(\\eta_X)\\}}=\\{z\\}$: the inverse image of this closed set contains $\\eta_X$, hence its closure $X$. This contradicts the two-point image hypothesis. Consequently $f$ sends generic point to generic point, and its image is dense.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "def-kun-topological-krull-dimension",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCK, lemma-flat, proof; nonconstant implies dominant, with the specialization argument written out"
+   }
+  },
+  {
+   "text": "The field $k$ is Noetherian [def-weil-pbc-noetherian-ring]: its only ideals are $(0)$ and $(1)$. Its spectrum is the one-point affine scheme [def-weil-affine-spectrum], so it is quasi-compact and locally Noetherian [pqf-def-locnoeth]. Apply [lem-weil-pbc-finite-type-over-noetherian] to $Y\\to\\operatorname{Spec}k$, using finite type from [def-pc-curve]. This makes $Y$ locally Noetherian. For $y\\in Y$ choose an affine open from the Noetherian affine cover in [pqf-def-locnoeth], with coordinate ring $R$. The germ map identifies $\\mathcal O_{Y,y}$ with a localization of $R$ by [lem-weil-pbc-affine-open-stalk-localization]. By [lem-weil-pbc-localization-noetherian], $\\mathcal O_{Y,y}$ is Noetherian.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-affine-spectrum",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-pc-curve",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCK, lemma-flat, proof; Noetherian local rings underlying the appeal to Tag 0B8Y"
+   }
+  },
+  {
+   "text": "Fix $x\\in X$, set $y=f(x)$, $A=\\mathcal O_{Y,y}$ and $B=\\mathcal O_{X,x}$. The ring $A$ is a normal local domain by the hypothesis [def-sbc-normal-dominant-galois]; Steps 1 and 3 give Noetherianity and dimension at most one. If its dimension is one, [lem-sc-normal-dim1-dvr] makes $A$ a discrete valuation ring, hence a principal ideal domain by [def-sc-discrete-valuation-ring]. If its dimension is zero, its maximal ideal $\\mathfrak m$ must be zero: otherwise the prime chain $(0)\\subsetneq\\mathfrak m$ contradicts [def-weil-pbc-krull-dimension-ring]. Every nonzero element is then a unit by [lem-weil-pbc-local-ring-unit-criterion], so $A$ is a field and again a principal ideal domain. These are the only cases since a nonzero local domain has the prime $(0)$ and dimensions are suprema of nonnegative integers.",
+   "uses": [
+    "def-sbc-normal-dominant-galois",
+    "lem-sc-normal-dim1-dvr",
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCK, lemma-flat, proof; field-or-DVR dichotomy; Tag 0B8Y, lemma-regular-point-on-curve, and algebra Tag 00PD"
+   }
+  },
+  {
+   "text": "Write $K_Y=\\mathcal O_{Y,\\eta_Y}$ and $K_X=\\mathcal O_{X,\\eta_X}$. They are fields, and the germ maps $\\rho_y:A\\to K_Y$, $\\rho_x:B\\to K_X$ are injective; also $B$ is a domain, by [lem-sc-integral-scheme-stalks-in-function-field], applied separately to the two integral schemes. Step 2 gives the unital ring map $u=f^\\sharp_{\\eta_X}:K_Y\\to K_X$, which is injective: if $a\\ne0$ and $u(a)=0$, applying $u$ to $aa^{-1}=1$ gives $0=1$. For the stalk map $\\varphi=f^\\sharp_x:A\\to B$, one has $\\rho_x\\varphi=u\\rho_y$. To check this equality, represent an element of $A$ by $s_y$ on an open $V\\ni y$; both sides are the germ of $f^\\sharp_V(s)$ at $\\eta_X\\in f^{-1}(V)$, by [def-weil-locally-ringed-space-morphism] and the germ description [def-weil-pbc-module-stalk]. If $\\varphi(a)=0$, this equality and injectivity of $u\\rho_y$ give $a=0$. Thus $\\varphi$ is injective.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCK, lemma-flat, proof; injectivity on local rings; expanded argument for Tag 0CC1, lemma-dominant-between-integral, (2) implies (6)"
+   }
+  },
+  {
+   "text": "Regard $B$ as an $A$-module via $\\varphi$. If $a\\in A$ is nonzero and $ab=0$ for $b\\in B$, then $\\varphi(a)b=0$ in the domain $B$. By Step 5, $\\varphi(a)\\ne0$, hence $b=0$. This is precisely torsion-freeness in the hypothesis of [lem-weil-pbc-pid-torsion-free-module-flat]. Since $A$ is a principal ideal domain by Step 4, that node gives flatness of $B$ as an $A$-module. No finite generation of $B$ over $A$ is needed.",
+   "uses": [
+    "lem-weil-pbc-pid-torsion-free-module-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCK, lemma-flat, proof; torsion-free implies flat; Tag 0539, lemma-valuation-ring-torsion-free-flat, in the PID case"
+   }
+  },
+  {
+   "text": "The point $x$ was arbitrary. Step 6 therefore proves that every map $\\mathcal O_{Y,f(x)}\\to\\mathcal O_{X,x}$ is flat. By [def-weil-flat-morphism], this says exactly that $f$ is flat.",
+   "uses": [
+    "def-weil-flat-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCK, lemma-flat, proof; conclusion by stalkwise definition, Tag 01U3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-curve",
+  "lem-sc-scheme-sober",
+  "def-pc-dimension",
+  "lem-pc-scheme-dimension-local-rings",
+  "def-kun-topological-krull-dimension",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "def-sbc-normal-dominant-galois",
+  "lem-sc-normal-dim1-dvr",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "def-weil-flat-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CCK, lemma-flat, proof, with its citations 0B8Y, 0CC1 and 0539 expanded using existing DAG nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +171,52 @@
    "results": "{\"t\": \"2026-10-17T15:12:18Z\", \"tool\": \"leanfinder\", \"query\": \"Any dominant morphism from an integral scheme to a normal one dimensional scheme is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\"], \"digest\": \"1dfe2fa740c9f9be\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Flat.lean:36–48,99–107 and SchemeTheoreticallyDominant.lean:59–73. The hits define flatness, detect it on stalks, or concern normalization and flat base change. The only Loogle flatness implication has a one-point integral target, not a normal curve. None states flatness of a nonconstant curve morphism or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*(curve|[Dd]edekind|[Dd]ominant)|([Dd]edekind|[Dd]ominant).*flat",
+   "results": "{\"t\": \"2026-10-17T16:51:01Z\", \"tool\": \"grep\", \"query\": \"flat.*(curve|[Dd]edekind|[Dd]ominant)|([Dd]edekind|[Dd]ominant).*flat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\"], \"digest\": \"8c1d2a555c063689\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits provide definitions, stalkwise flatness, flat open immersions, normalization or flat base change; none gives normal-target curve flatness. Flat.lean lines 99–106 and 116–123 were read; the subsingleton integral target instance requires a one-point target, unlike a curve."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonconstant morphism from an integral curve to a normal curve is flat",
+   "results": "{\"t\": \"2026-10-17T16:51:02Z\", \"tool\": \"leansearch\", \"query\": \"A nonconstant morphism from an integral curve to a normal curve is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\"], \"digest\": \"010f6462d2770533\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits provide definitions, stalkwise flatness, flat open immersions, normalization or flat base change; none gives normal-target curve flatness. Flat.lean lines 99–106 and 116–123 were read; the subsingleton integral target instance requires a one-point target, unlike a curve."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.IsIntegral",
+   "results": "{\"t\": \"2026-10-17T16:51:02Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, AlgebraicGeometry.IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instOfSubsingletonCarrierCarrierCommRingCatOfIsIntegral\", \"AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_isLocallyNoetherian\", \"AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian\", \"AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian_1\"], \"digest\": \"fe7b6f0638678718\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits provide definitions, stalkwise flatness, flat open immersions, normalization or flat base change; none gives normal-target curve flatness. Flat.lean lines 99–106 and 116–123 were read; the subsingleton integral target instance requires a one-point target, unlike a curve."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonconstant morphism of integral curves with normal target is flat",
+   "results": "{\"t\": \"2026-10-17T16:51:09Z\", \"tool\": \"leanfinder\", \"query\": \"A nonconstant morphism of integral curves with normal target is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.IsSmooth\"], \"digest\": \"412862aed68beb40\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits provide definitions, stalkwise flatness, flat open immersions, normalization or flat base change; none gives normal-target curve flatness. Flat.lean lines 99–106 and 116–123 were read; the subsingleton integral target instance requires a one-point target, unlike a curve."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dominant morphism from an integral scheme to a normal one dimensional locally noetherian scheme is flat",
+   "results": "{\"t\": \"2026-10-17T16:51:20Z\", \"tool\": \"leanfinder\", \"query\": \"A dominant morphism from an integral scheme to a normal one dimensional locally noetherian scheme is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\"], \"digest\": \"16d4c34d8e7415b5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits provide definitions, stalkwise flatness, flat open immersions, normalization or flat base change; none gives normal-target curve flatness. Flat.lean lines 99–106 and 116–123 were read; the subsingleton integral target instance requires a one-point target, unlike a curve."
+  },
+  {
+   "tool": "grep",
+   "query": "instOfSubsingletonCarrierCarrierCommRingCatOfIsIntegral|iff_flat_stalkMap|of_stalkMap|def Flat|class Flat",
+   "results": "{\"t\": \"2026-10-17T16:51:43Z\", \"tool\": \"grep\", \"query\": \"instOfSubsingletonCarrierCarrierCommRingCatOfIsIntegral|iff_flat_stalkMap|of_stalkMap|def Flat|class Flat\", \"sub\": \"AlgebraicGeometry/Morphisms/Flat.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"19\", \"39\", \"42\", \"99\", \"100\"], \"digest\": \"5dae6c195fcf55c5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits provide definitions, stalkwise flatness, flat open immersions, normalization or flat base change; none gives normal-target curve flatness. Flat.lean lines 99–106 and 116–123 were read; the subsingleton integral target instance requires a one-point target, unlike a curve."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-nonzero-differential-generically-etale",
@@ -72,5 +235,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-nonconstant-normal-curve-map-flat",
+  "worker": "stage1",
+  "summary": "Kept the exact normal-target nonconstant-curve flatness statement of Stacks 0CCK. Expanded dominance, the field-or-DVR dichotomy, local-ring injectivity and torsion-freeness in seven steps. Reused existing nodes throughout; no new nodes. Repeated the item Mathlib search with both direct and more general formulations and read candidate source types.",
+  "blueprint": "Supplies automatic flatness for the differential criterion in paragraph 3 of the current main-20261015 proof of lem-a1-finite-map-curve, via lem-a1-nonzero-differential-generically-etale. No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Identifies scheme topological dimension with the supremum of local-ring dimensions, to expand the dominance argument and dimension bounds in Stacks 0CCK. This unit contains no separate local algebra replacement."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Generic local algebra tool for the normal one-dimensional target stalks; it supplies the DVR criterion in the source proof. This unit contains no separate local algebra replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-sc-normal-dim1-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q129-697f4b872",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q129-697f4b872 (reviewer sub-agent of L); spot-checked: Read the complete item, all cited statements, sources, and unit/chapter route. All seven steps correctly expand Stacks 0CCK, including the generic field case and stalk-map injection. No new nodes, cycles, forbidden dependencies, hidden long steps, or target weakening. No fixes needed; review.md records the detailed checks."
  }
 }

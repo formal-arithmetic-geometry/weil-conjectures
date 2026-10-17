@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "cor-mg-det-weight-exterior",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Determinant weights of an exterior power",
@@ -15,38 +15,132 @@
  "stmt_deps": [
   "def-mg-weil-composition-series",
   "def-real-weil-representation-operations",
-  "def-mg-determinantal-weight-multiset"
+  "def-mg-determinantal-weight-multiset",
+  "def-wf-determinantal-weight",
+  "def-wf-geometric-semisimplicity"
  ],
  "proof": [
   {
-   "text": "The factors $A_a$ are those of the chosen series of\n[def-mg-weil-composition-series], counted as in\n[def-mg-determinantal-weight-multiset], and $\\gamma_a$ is their\ndeterminantal weight in the sense of [def-wf-determinantal-weight] (the\ngeometric semisimplicity of [def-wf-geometric-semisimplicity] is not\nneeded for the argument). By [lem-rp-determinant-weights-agree], every\n$A_a$ and every Jordan–Holder constituent of\n$\\bigwedge^r\\mathcal F_0$ has finite geometric determinant, and for\neach of them $\\dw_\\iota$ equals $\\dw_{\\lambda_\\iota}$. Hence\n[prop-ag-det-weight-exterior], applied with $\\lambda=\\lambda_\\iota$, gives the assertion and\nits converse.",
+   "text": "Fix $0\\le r\\le\\dim V$. Use the operations and constituent convention of [def-real-weil-representation-operations]. Under the exact tensor equivalence [prop-wf-weil-sheaf-representation-equivalence], subobjects, quotients and subquotients correspond in both directions, so the simple factors $A_a$ of the chosen series and the constituents $C$ of $\\bigwedge^r\\mathcal F_0$ are nonzero irreducible lisse Weil sheaves on the same $X_0$. Here simplicity, including nonzeroness, is exactly the condition in [def-mg-weil-composition-series]. Each occurrence in the chosen series is retained, as required by [def-mg-determinantal-weight-multiset].",
    "uses": [
+    "def-real-weil-representation-operations",
+    "prop-wf-weil-sheaf-representation-equivalence",
     "def-mg-weil-composition-series",
-    "def-mg-determinantal-weight-multiset",
-    "def-wf-determinantal-weight",
-    "def-wf-geometric-semisimplicity",
-    "lem-rp-determinant-weights-agree",
+    "def-mg-determinantal-weight-multiset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/cor-mg-det-weight-exterior.proof.md",
+    "place": "Proof, sole paragraph"
+   }
+  },
+  {
+   "text": "Set $\\lambda=\\lambda_\\iota$, where $\\lambda_\\iota(a)=2\\log|\\iota(a)|/\\log q$ is the real weight character of [d-weights]. The finite-field convention gives $q>1$, so this normalization is defined. Apply [lem-rp-determinant-weights-agree] to each $A_a$ and to each constituent $C$ from step 1. Its curve and embedding hypotheses are exactly the hypotheses here. Its first clause gives finite geometric determinant for all these sheaves; its irreducible clause gives $\\dw_{\\lambda_\\iota}(A_a)=\\dw_\\iota(A_a)=\\gamma_a$ and $\\dw_{\\lambda_\\iota}(C)=\\dw_\\iota(C)$. Thus every finite-geometric-determinant hypothesis of the conditional exterior-power proposition holds.",
+   "uses": [
+    "d-weights",
+    "lem-rp-determinant-weights-agree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/cor-mg-det-weight-exterior.proof.md",
+    "place": "Proof, sole paragraph"
+   }
+  },
+  {
+   "text": "Apply [prop-ag-det-weight-exterior] to the original nonzero $\\mathcal F_0$, its chosen composition series, this $r$, and $\\lambda_\\iota$. Step 2 identifies its input weights with the $\\gamma_a$ of the present statement. Consequently its distinct-weight set $R$ and capacities $r(\\gamma)=\\sum_{\\gamma_a=\\gamma}d_a$ are exactly ours. The proposition gives, for every constituent $C$, an admissible tuple with $\\dw_{\\lambda_\\iota}(C)=\\sum_{\\gamma\\in R}n_\\gamma\\gamma$. Its converse supplies, for every admissible tuple, at least one constituent $C$ with that equality. It requires no semisimplicity of the original Weil representation.",
+   "uses": [
     "prop-ag-det-weight-exterior"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/cor-mg-det-weight-exterior.proof.md",
+    "place": "Proof, sole paragraph"
+   }
+  },
+  {
+   "text": "In both directions from step 3 substitute the equality $\\dw_\\iota(C)=\\dw_{\\lambda_\\iota}(C)$ already proved in step 2. The capacity inequalities and total $\\sum_\\gamma n_\\gamma=r$ are unchanged. This proves the asserted possible weights and the non-emptiness for every tuple. Distinct tuples may give the same sum; the argument asserts existence for each tuple and makes no assertion about output multiplicities. Since $r$ was arbitrary in the specified interval, the conclusion holds for every such $r$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/cor-mg-det-weight-exterior.proof.md",
+    "place": "Proof, sole paragraph"
+   }
   }
  ],
  "proof_deps": [
+  "def-real-weil-representation-operations",
+  "prop-wf-weil-sheaf-representation-equivalence",
   "def-mg-weil-composition-series",
   "def-mg-determinantal-weight-multiset",
-  "def-wf-determinantal-weight",
-  "def-wf-geometric-semisimplicity",
+  "d-weights",
   "lem-rp-determinant-weights-agree",
   "prop-ag-det-weight-exterior"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/cor-mg-det-weight-exterior.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-detweights/cor-mg-det-weight-exterior.proof.md",
+  "place": "Proof, sole paragraph"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "detWeight|determinantal|Weil.*[Ss]heaf",
+   "results": "No hits. Read hits: exterior-power constructions and pairings, finite-group character criteria, and Lie-algebra trace forms do not assert possible normalized determinant weights for Weil-sheaf constituents or the converse.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Determinant weights of Jordan Holder constituents of exterior powers of Weil representations",
+   "results": "exteriorPower.pairingDual_ιMulti_ιMulti; ExteriorAlgebra.exteriorPower; ModuleCat.exteriorPower; exteriorPower.alternatingMapToDual_apply_ιMulti; Matrix.det; exteriorPower.toTensorPower_apply_ιMulti; Matrix.detp; Matrix.detRowAlternating Read hits: exterior-power constructions and pairings, finite-group character criteria, and Lie-algebra trace forms do not assert possible normalized determinant weights for Weil-sheaf constituents or the converse.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation.exteriorPower, Representation",
+   "results": "No hits. loogle: unknown identifier 'Representation.exteriorPower' Read hits: exterior-power constructions and pairings, finite-group character criteria, and Lie-algebra trace forms do not assert possible normalized determinant weights for Weil-sheaf constituents or the converse.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The possible determinant weights of irreducible constituents of an exterior power of a lisse Weil sheaf are sums of rank-counted constituent determinant weights, and every admissible sum occurs",
+   "results": "exteriorPower.pairingDual_apply_apply_eq_one; exteriorPower.toTensorPower_apply_ιMulti; exteriorPower.pairingDual_ιMulti_ιMulti; exteriorPower.pairingDual_apply_apply_eq_one_zero; LieModule.exists₂_genWeightSpace_smul_add_eq_bot; LieModule.trace_comp_toEnd_genWeightSpace_eq; LieModule.trace_toEnd_genWeightSpace; LieModule.traceForm_eq_sum_finrank_nsmul' Read hits: exterior-power constructions and pairings, finite-group character criteria, and Lie-algebra trace forms do not assert possible normalized determinant weights for Weil-sheaf constituents or the converse.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "weightMultiset|HasFiniteGeometricDet|IsPunctuallyPure|exterior.*[Cc]onstituent",
+   "results": "No hits. Read hits: exterior-power constructions and pairings, finite-group character criteria, and Lie-algebra trace forms do not assert possible normalized determinant weights for Weil-sheaf constituents or the converse.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "exteriorPower",
+   "results": "No hits. loogle: unknown identifier 'exteriorPower' Read hits: exterior-power constructions and pairings, finite-group character criteria, and Lie-algebra trace forms do not assert possible normalized determinant weights for Weil-sheaf constituents or the converse.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite dimensional group representation the normalized logarithmic determinant weights of all composition factors of its exterior powers are exactly the bounded sums of the weights of its simple factors",
+   "results": "FDRep.simple_iff_char_is_norm_one; FDRep.average_char_eq_finrank_invariants; FDRep.char_orthonormal; FDRep.char_one; FDRep.scalar_product_char_eq_finrank_equivariant; LieModule.traceForm_eq_sum_finrank_nsmul'; LieModule.traceForm_eq_sum_finrank_nsmul; TannakaDuality.FiniteGroup.sumSMulInv_single_id Read hits: exterior-power constructions and pairings, finite-group character criteria, and Lie-algebra trace forms do not assert possible normalized determinant weights for Weil-sheaf constituents or the converse.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "simple_iff_char_is_norm_one|traceForm_eq_sum_finrank_nsmul|def exteriorPower|theorem pairingDual_ιMulti_ιMulti",
+   "results": "Mathlib/Algebra/Category/ModuleCat/ExteriorPower.lean; Mathlib/RepresentationTheory/FinGroupCharZero.lean; Mathlib/RepresentationTheory/FinGroupCharZero.lean; Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean; Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean; Mathlib/Algebra/Lie/Weights/Killing.lean; Mathlib/Algebra/Lie/TraceForm.lean; Mathlib/Algebra/Lie/TraceForm.lean Read hits: exterior-power constructions and pairings, finite-group character criteria, and Lie-algebra trace forms do not assert possible normalized determinant weights for Weil-sheaf constituents or the converse.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -77,5 +171,35 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-d-real-detweights"
+ "unit": "sk-d-real-detweights",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "cor-mg-det-weight-exterior",
+  "worker": "stage1",
+  "group": "Q37",
+  "summary": "Expanded the blueprint reduction to agreement of determinant weights and the conditional exterior theorem into four steps, checking lisse simple factors through the exact tensor equivalence, all finite-determinant hypotheses, equality of input capacities, both directions, and substitution of output weights. Statement unchanged; added its explicit determinant-weight and geometric-semisimplicity notion dependencies. No new nodes.",
+  "blueprint": "Realizes the sole paragraph of the current main-20261015 proof: factors and multiplicities in step 1, agreement/finite determinant in step 2, conditional exterior proposition in step 3, and both conclusions in step 4. The unit rank-one route is retained; this corollary is not the unit key definition, so unit realization fields are untouched.",
+  "tool_uses": [
+   {
+    "node": "prop-ag-det-weight-exterior",
+    "why": "Generic conditional exterior-power weight theorem, used exactly as in the blueprint; this unit supplies the rank-one comparison that discharges its finite-determinant hypotheses, not another exterior-power theorem."
+   },
+   {
+    "node": "prop-wf-weil-sheaf-representation-equivalence",
+    "why": "Exact tensor equivalence identifies simple representation subquotients with nonzero irreducible lisse Weil sheaves so the rank-one comparison applies; the determinant-weight unit does not reconstruct this foundational equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-ag-det-weight-exterior",
+  "prop-wf-weil-sheaf-representation-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q37-5f644a1e2",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-5f644a1e2 (reviewer sub-agent of L); spot-checked: Reviewed item, all four proof steps, every cited statement/source, unit/chapter route, coefficient category, base-change convention, edge cases, duplicate/cycle risks, and delivery errors A–F. Statement and sources agree; no new nodes or repairs are needed. Review written to review.md."
+ }
 }

@@ -13,9 +13,64 @@
   "def-weil-weil-sheaf-complex",
   "def-weil-derived-pullback-tensor-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the geometric hypotheses. By [lem-pod-separated-finite-type-base-change], $C$ is separated and finite type over $k$. By [lem-sbc-smooth-relative-dimension-permanence](1), its structure morphism is smooth of relative dimension one, as is that of $C_0$. For the projection $p_C:C\\to C_0$, [lem-sc-scheme-over-field-universally-open] applied to $\\operatorname{Spec}k$ over $k_0$ says that $p_C$ is open. Every nonempty open $W\\subset C$ has nonempty open image meeting the dense $U_0$; a point in that intersection lifts to $W\\cap p_C^{-1}(U_0)$. Thus $U$ is dense in $C$. Forget the Weil structure temporarily and use the geometric immersion pair $j:U\\hookrightarrow C$, $i:Z\\hookrightarrow C$ in the statement. In the finite-coefficient-field adic category, [lem-a1-qbar-open-closed-cohomology] explicitly says that ordinary open direct image sends lisse sheaves on $U$ to constructible sheaves on $C$. Apply this to the underlying lisse sheaf $\\mathcal F$. The sheaf obtained is precisely $A=j_*\\mathcal F$ of [def-wf-middle-extension], whose direct-image convention is ordinary sheaf pushforward, not the entire derived image. The same cohomology interface identifies the standard heart with constructible sheaves, so $A[0]$ belongs to $\\Sh_c(C,\\Qlb)$ of [def-weil-constructible-heart]. The interface assumes a smooth separated finite-type curve over a perfect field and a dense open; here it is applied on the geometric curve over $k$, with exactly those hypotheses. It requires neither connectedness nor properness.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-sc-scheme-over-field-universally-open",
+    "lem-a1-qbar-open-closed-cohomology",
+    "def-wf-middle-extension",
+    "def-weil-constructible-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/prop-a1-curve-boundary-sequence.proof.md",
+    "place": "First sentence, K=j_*F; constructible input supplied by the existing rational open–closed cohomology interface"
+   }
+  },
+  {
+   "text": "By [lem-a1-qbar-open-closed-cohomology], the constructible pullback $i^*$ for this complementary immersion pair is t-exact. Thus it sends $A[0]$, which is in both standard halves, into both standard halves on $Z$. The same node identifies these halves and their heart with ordinary cohomology of pro-etale coefficient-module representatives. Consequently this object is the degree-zero ordinary inverse image $B=i^*A$ in the conventions of [def-weil-derived-pullback-tensor-hom], and it lies in $\\Sh_c(Z,\\Qlb)$ by [def-weil-constructible-heart]. This deduction uses the adic interface itself, not finite-ring constructibility of a boundary stalk.",
+   "uses": [
+    "lem-a1-qbar-open-closed-cohomology",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-constructible-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "§6.8, Definitions 6.8.6 and 6.8.8, Proposition 6.8.14 and Remark 6.8.15; applied through lem-a1-qbar-open-closed-cohomology"
+   }
+  },
+  {
+   "text": "Write $\\theta: Lg_U^*\\mathcal F\\xrightarrow{\\sim}\\mathcal F$ for the given Weil isomorphism. Since $g_C$ is an automorphism restricting to $g_U$, reindexing site objects by these automorphisms gives a natural isomorphism $c:Lg_C^*j_*\\mathcal F\\xrightarrow{\\sim}j_*Lg_U^*\\mathcal F$: the two section formulas identify by the isomorphism between pulling a neighborhood back by $g_C$ and then intersecting with $U$, and first intersecting with $U$ and pulling back by $g_U$. Restrictions and coefficient actions agree under that fiber-product identification; the inverse uses the inverse automorphisms. On the adic common-stage categories these are the same cohomology comparisons, compatible with coefficient extension and Frobenius, stated in [lem-a1-qbar-open-closed-cohomology]. Hence $\\theta_A=(j_*\\theta)\\circ c$ is an isomorphism $Lg_C^*A\\to A$. The equality $g_Ci=ig_Z$ similarly gives $b:Lg_Z^*i^*A\\xrightarrow{\\sim}i^*Lg_C^*A$; put $\\theta_B=i^*(\\theta_A)\\circ b$. Functors preserve inverses, so $\\theta_B$ is an isomorphism. Scheme isomorphisms preserve the standard structure by the cited interface. Thus these are isomorphisms on the two heart objects already obtained, and [def-weil-weil-sheaf-complex], clause 3, makes $(A,\\theta_A)$ and $(B,\\theta_B)$ constructible Weil sheaves. They are exactly the induced structures specified in the statement.",
+   "uses": [
+    "lem-a1-qbar-open-closed-cohomology",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/prop-a1-curve-boundary-sequence.proof.md",
+    "place": "First sentence, Weil-compatible constructible input K=j_*F and its boundary restriction; natural automorphism reindexing as in the final clause of lem-a1-qbar-open-closed-cohomology"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-scheme-over-field-universally-open",
+  "lem-a1-qbar-open-closed-cohomology",
+  "def-wf-middle-extension",
+  "def-weil-constructible-heart",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-i-dl-a1-local/prop-a1-curve-boundary-sequence.proof.md",
+  "place": "First sentence and finite-boundary sentence; specialization of the existing adic open–closed cohomology interface, with explicit induced Weil structures"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,10 +114,53 @@
    "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.IsLE, DerivedCategory.IsGE, DerivedCategory.TStructure.t, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
    "date": "2026-10-17",
    "verdict": "no match: generic derived t-structure, Zariski module pushforward and the constant ell-adic coefficient sheaf do not supply adic constructibility of this ordinary middle extension and its boundary restriction"
+  },
+  {
+   "tool": "grep",
+   "query": "middleExtension|constructible.*lowerStar|IsConstructibleSheaf",
+   "results": "{\"t\": \"2026-10-17T16:51:37Z\", \"tool\": \"grep\", \"query\": \"middleExtension|constructible.*lowerStar|IsConstructibleSheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern Zariski structure modules, scheme images, discrete condensed modules or constant adic coefficients; none states constructibility of this adic ordinary middle extension and its boundary restriction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A lisse l-adic sheaf on an open curve has constructible ordinary direct image and constructible inverse image on the boundary",
+   "results": "{\"t\": \"2026-10-17T16:51:37Z\", \"tool\": \"leansearch\", \"query\": \"A lisse l-adic sheaf on an open curve has constructible ordinary direct image and constructible inverse image on the boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\"], \"digest\": \"a9ea69837af8067e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern Zariski structure modules, scheme images, discrete condensed modules or constant adic coefficients; none states constructibility of this adic ordinary middle extension and its boundary restriction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-17T16:51:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Constructible\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern Zariski structure modules, scheme images, discrete condensed modules or constant adic coefficients; none states constructibility of this adic ordinary middle extension and its boundary restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary direct image of a lisse adic sheaf along a dense open immersion into a smooth curve and its closed boundary restriction are constructible",
+   "results": "{\"t\": \"2026-10-17T16:51:46Z\", \"tool\": \"leanfinder\", \"query\": \"Ordinary direct image of a lisse adic sheaf along a dense open immersion into a smooth curve and its closed boundary restriction are constructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.liftCoborder_app\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.Scheme.Hom.coborderRange\", \"AlgebraicGeometry.Scheme.Hom.liftCoborder\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.Scheme.Hom.liftCoborder_preimage\", \"AlgebraicGeometry.Scheme.IdealSheafData.opensRange_glueDataObjMap\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\"], \"digest\": \"61d394ab38d715ea\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern Zariski structure modules, scheme images, discrete condensed modules or constant adic coefficients; none states constructibility of this adic ordinary middle extension and its boundary restriction"
+  },
+  {
+   "tool": "grep",
+   "query": "ellAdic|EllAdic|constructible",
+   "results": "{\"t\": \"2026-10-17T16:52:00Z\", \"tool\": \"grep\", \"query\": \"ellAdic|EllAdic|constructible\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\"], \"digest\": \"a2316ee2f8e31b2c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern Zariski structure modules, scheme images, discrete condensed modules or constant adic coefficients; none states constructibility of this adic ordinary middle extension and its boundary restriction",
+   "directory": "AlgebraicGeometry/Sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The underived pushforward of an l-adic local system on an open smooth curve lies in the standard constructible heart and inverse image along its closed complement preserves the heart",
+   "results": "{\"t\": \"2026-10-17T16:52:06Z\", \"tool\": \"leanfinder\", \"query\": \"The underived pushforward of an l-adic local system on an open smooth curve lies in the standard constructible heart and inverse image along its closed complement preserves the heart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"LightCondMod.LocallyConstant.functor\", \"CompHausLike.LocallyConstantModule.functor\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"CondensedMod.LocallyConstant.functor\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"LightCondMod.ofSheafLightProfinite\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"33aa01a658e25638\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern Zariski structure modules, scheme images, discrete condensed modules or constant adic coefficients; none states constructibility of this adic ordinary middle extension and its boundary restriction"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-a1-curve-boundary-sequence",
@@ -87,5 +185,44 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-adic-middle-extension-constructible",
+  "worker": "stage1",
+  "summary": "Reused lem-a1-qbar-open-closed-cohomology for ordinary adic direct-image constructibility and t-exact closed restriction. Checked the ordinary/derived distinction and wrote the induced Frobenius isomorphisms explicitly. No statement change and no new nodes.",
+  "blueprint": "prop-a1-curve-boundary-sequence.proof.md, first sentence: constructible K=j_*F; finite-boundary sentence: constructible i^*j_*F. These are realized by Steps 1 and 2, with Weil structures supplied in Step 3.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-qbar-open-closed-cohomology",
+    "why": "Generic rational-coefficient standard-cohomology and open–closed restriction tool. Its statement supplies ordinary lisse direct-image constructibility, the t-exact closed pullback and Frobenius compatibility; no other node in sk-i-dl-a1-local supplies this adic interface. This does not replace the unit local-duality route."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Base change preserves separated finite-type schemes; used only to check the geometric domain of the adic tool."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Base change preserves smooth relative dimension one; used only to check the geometric curve domain of the adic tool."
+   },
+   {
+    "node": "lem-sc-scheme-over-field-universally-open",
+    "why": "The geometric projection is open, so the inverse image of the dense open is dense; a generic geometric setup tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-qbar-open-closed-cohomology",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-scheme-over-field-universally-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q74-30788be20",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q74-30788be20 (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, all cited node statements, blueprint proof, and Bhatt–Scholze source material. The unchanged statement has all hypotheses and the ordinary degree-zero coefficient convention. Steps 1–3 correctly establish geometric hypotheses, adic constructibility, t-exact boundary pullback, and induced Frobenius structures; no step exceeds 2000 characters or hides a separate lemma. No duplicates, cycles, SGA citations, batch-5 violations, or Mathlib matches. Accepted the recorded generic tool uses and wrote review.md."
  }
 }

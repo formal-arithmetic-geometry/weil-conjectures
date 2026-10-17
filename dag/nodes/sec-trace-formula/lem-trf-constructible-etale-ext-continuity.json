@@ -13,9 +13,106 @@
   "def-weil-pbc-etale-constructible-sheaf",
   "def-weil-pbc-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every $r\\geq1$, iterate the finite affine-free epimorphism on $K_{r-1}$, define $K_r$ as its kernel, and use the syzygy statement to obtain $0\\to K_r\\to E_{r-1}\\to\\cdots\\to E_0\\to P_i\\to0$ with all $K_a$ constructible. Exact inverse image preserves each resulting sequence at every later stage and at $X$.",
+   "uses": [
+    "lem-trf-constructible-etale-finite-affine-syzygy",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 095N and 03RZ, finite affine presentation and closure of constructible modules under kernels; inverse-image exactness is the module-sheaf pullback construction."
+   }
+  },
+  {
+   "text": "Write each finite affine-free term as $E_a=\\bigoplus_t j_{U_{a,t}!}A_{U_{a,t}}$ on $X_i$, and for $j\\ge i$ put $U_{a,t,j}=U_{a,t}\\times_{X_i}X_j$ and $U_{a,t,\\infty}=U_{a,t}\\times_{X_i}X$. These schemes are affine: their projections to $U_{a,t}$ are base changes of the affine transition maps or the affine limit projection. They form an affine inverse system with limit $U_{a,t,\\infty}$. The canonical free-sheaf inverse-image isomorphism identifies each pullback of $E_a$ with the corresponding finite sum on these objects; its generating-section formula identifies the degree-zero pullback maps with section pullback. Apply the extension-by-zero adjunction to an injective resolution of $Q_j$ or $Q$: restriction preserves injectives, so Ext from each summand is the cohomology of its restricted section complex. Thus $\\operatorname{Ext}^q(E_{a,j},Q_j)=\\bigoplus_t H^q(U_{a,t,j},Q_j|_{U_{a,t,j}})$, and likewise at the limit. To check the maps, represent an Ext class by a cocycle into an injective resolution, apply exact inverse image and a comparison to an injective resolution on the new scheme. Under the generating-section adjunction, this cocycle becomes its section pullback followed by the same resolution comparison; this also holds for boundaries. Thus the maps are precisely cohomology pullback. After forgetting coefficients, the cohomology-continuity theorem applies to each affine system in every $q\\ge0$. Finite sums commute with the filtered colimit, giving the canonical Ext comparison isomorphism for every $E_a$.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-free-etale-module",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-free-sheaf-derived-sections",
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S6 (lemma-shriek-base-change), 09YQ (theorem-colimit), and 01YX (Limits, lemma-directed-inverse-system-has-limit); extension-by-zero adjunction and injective-resolution computation."
+   }
+  },
+  {
+   "text": "Take the finite affine-free presentation $E_1\\xrightarrow{b}E_0\\to P_i\\to0$ supplied by the cited finite-presentation statement and pull it to every stage and to $X$. By exactness, $\\operatorname{Hom}(P_j,Q_j)$ is the kernel of $\\operatorname{Hom}(E_{0,j},Q_j)\\to\\operatorname{Hom}(E_{1,j},Q_j)$, and the same holds at $X$. The generating-section adjunction in the free-sheaf inverse-image statement identifies each of these two Hom groups with the finite sum of coefficient sections on the base-changed affine objects, and identifies its transition maps with section pullback. The section-colimit statement therefore makes the comparison for each of the two Hom groups bijective. Concretely, a map $P\\to Q$ gives finitely many sections for $E_0$; descend them to a common stage. Its composite with $b$ is zero on $X$, so the finitely many corresponding sections for $E_1$ vanish at a common later stage. The descended map then factors uniquely through $P_j$. If two stage maps agree on $X$, apply the same section-colimit argument to their difference after precomposition with the epimorphism $E_{0,j}\\to P_j$; the difference is zero at a later stage. This proves bijectivity of the canonical degree-zero comparison.",
+   "uses": [
+    "lem-weil-pbc-limit-pullback-sections-colimit",
+    "lem-weil-pbc-constructible-module-finite-presentation",
+    "lem-weil-pbc-inverse-image-free-etale-module",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 095N (lemma-category-constructible-modules) and 09YU (lemma-category-is-colimit), fully faithful argument, with 09YQ (theorem-colimit) in degree zero."
+   }
+  },
+  {
+   "text": "For fixed $n$, choose the resolution in step 1 through $K_{n+1}$ and write $C_{d,r}$ for the comparison map on $\\operatorname{Ext}^d(K_r,Q)$. Induct on $d$: for $0\\le d\\le n$, (M$_d$) $C_{d,r}$ is mono for every $0\\le r\\le n+1-d$, and (I$_d$) $C_{d,r}$ is an isomorphism for every $0\\le r\\le n-d$. At $d=0$, step 3 gives both clauses. Assuming them through $d$, compare the shifted exact segments $\\operatorname{Ext}^{d}(E_r,Q)\\to\\operatorname{Ext}^{d}(K_{r+1},Q)\\to\\operatorname{Ext}^{d+1}(K_r,Q)\\to\\operatorname{Ext}^{d+1}(E_r,Q)$. For $r\\le n-d$, the mono four lemma applies: the first comparison is epi, the second is mono by (M$_d$), and the last is mono by the finite-affine calculation in step 2, so $C_{d+1,r}$ is mono, proving (M$_{d+1}$). For $r\\le n-d-1$, use the unshifted exact segment $\\operatorname{Ext}^{d}(K_{r+1},Q)\\to\\operatorname{Ext}^{d+1}(K_r,Q)\\to\\operatorname{Ext}^{d+1}(E_r,Q)\\to\\operatorname{Ext}^{d+1}(K_{r+1},Q)$. The epi four lemma has first map epi by (I$_d$), third map epi by step 2, and fourth map mono by (M$_{d+1}$), so $C_{d+1,r}$ is epi; together with mono this proves (I$_{d+1}$). At $d=n$, (I$_n$) with $r=0$ is the desired isomorphism. Filtered-colimit exactness supplies the top exact rows, and the cited four-lemma leaves provide exactly these hypotheses.",
+   "uses": [
+    "lem-coef-ext-contravariant-six-term",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-trf-constructible-etale-ext-mono-four-lemma",
+    "lem-pc-four-lemma-epi",
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "lem-trf-constructible-etale-finite-affine-syzygy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GIT (cohomology of filtered colimits of complexes), combined with the standard Ext long exact sequence and finite constructible resolution induction."
+   }
+  },
+  {
+   "text": "All comparison maps above are induced by the exact inverse-image functors on $A$-module sheaves. The abelian-sheaf inverse-image composition isomorphisms are $A$-linear: apply their naturality to multiplication by each $a\\in A$ and use the module structures supplied by exact module inverse image. Their associativity identities thus hold in module sheaves as well. Applying the termwise exact functors and these isomorphisms to complexes gives the module-derived composition comparisons. The exact-functor Ext comparison identifies the resulting maps under passage to later stages. Functoriality on the localized categories preserves composition of derived morphisms, proving the stated canonicality and composition compatibility.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "lem-weil-pbc-ext-exact-functor-composition-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Functoriality in Tag 09YU and the naturality of the Tag 0GIT comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-constructible-etale-finite-affine-syzygy",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-inverse-image-free-etale-module",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-affine-etale-site-colimit",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-free-sheaf-derived-sections",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "lem-weil-pbc-limit-pullback-sections-colimit",
+  "lem-weil-pbc-constructible-module-finite-presentation",
+  "lem-coef-ext-contravariant-six-term",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-trf-constructible-etale-ext-mono-four-lemma",
+  "lem-pc-four-lemma-epi",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-ext-exact-functor-composition-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09YU and 0GIT; finite constructible affine-free resolution and Ext induction supplied by the worker."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,7 +151,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nearby-duality-operation-squares",
@@ -66,7 +163,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), normal-cone specialization and the nearby-duality input of Varshavsky 4.1.4(b): Ext continuity for constructible etale modules in affine inverse limits",
+   "place": "The Ext-continuity input used in the nearby-duality/local-term argument: finite constructible presentations, affine inverse-limit cohomology continuity, and induction on finite affine-free resolutions.",
    "via": [
     "lem-trf-nearby-duality-operation-squares",
     "lem-trf-nearby-cycle-verdier-duality",
@@ -76,5 +173,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-constructible-etale-ext-continuity",
+  "worker": "stage1",
+  "summary": "Repaired the returned split: the mono four-lemma leaf now has the correct Mathlib shape (alpha epi, beta and delta mono imply gamma mono); degree-zero Hom descent spells out the adjunction, finite-section kernel argument, and eventual equality; and the Ext step states the finite triangular induction on d and r, using the shifted segment for injectivity and the unshifted segment for surjectivity. Maintainer repair: use canonical free-sheaf pullback on the original stage objects in step 2; cite the actual affine-free presentation in step 3, with the section-colimit kernel argument; spell out A-linearity in step 5.",
+  "blueprint": "Realizes the Ext-continuity input in the local-term/nearby-duality proof: finite constructible presentations, cohomology on affine etale objects, degree-zero full faithfulness, and the explicit two-pass induction on finite affine-free resolutions."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q29-bf5687331",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-bf5687331 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Repaired canonical free-sheaf pullback citations, the finite-presentation citation and Hom descent argument, and syzygy definition dependencies/source labels. Statements unchanged. Four-lemma, induction, edge-case and dependency checks passed. Whole corrected JSON files are in fixes/; detailed findings are in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
