@@ -15,6 +15,7 @@ public import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram
+public import Sheaf.AlgebraicGeometry.PerfectHomComparisonTriangle
 
 /-! # Core object comparison data (without the final Hom pin).
 
@@ -331,7 +332,31 @@ theorem perfectOverlapRestrictedComposite
   simp only [Category.assoc, morphismRestrict_ι]
   rw [← Category.assoc, Scheme.Hom.resLE_comp_ι, Category.assoc, hgf]
 
+end
 
+section
+variable [∀ Z : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+
+/-- Characterizing equation for the fixed local composite without requiring an
+open-site derived-category instance.  The definition is in this module, so its
+no-expose body may be unfolded here; downstream modules use this named equation.
+-/
+theorem perfectOverlapCompositeLocalIso_eq_compositionTo_global
+    {X K Y : Scheme.{u}} (g : X ⟶ Y) (gk : X ⟶ K) (f : K ⟶ Y)
+    (hgf : gk ≫ f = g) (U : Y.Opens) :
+    let hP : g ⁻¹ᵁ U ≤ gk ⁻¹ᵁ (f ⁻¹ᵁ U) := by
+      rw [← Scheme.Hom.comp_preimage, hgf]
+    let j := gk.resLE (f ⁻¹ᵁ U) (g ⁻¹ᵁ U) hP
+    let hj : j ≫ (f ∣_ U) = g ∣_ U := by
+      apply (cancel_mono U.ι).1
+      simp only [Category.assoc, morphismRestrict_ι]
+      rw [← Category.assoc, Scheme.Hom.resLE_comp_ι, Category.assoc, hgf]
+    perfectOverlapCompositeLocalIso f gk g hgf U =
+      compositionTo j (f ∣_ U) (g ∣_ U) hj := by
+  intro hP j hj
+  unfold perfectOverlapCompositeLocalIso compositionTo
+  rfl
 
 end
 
