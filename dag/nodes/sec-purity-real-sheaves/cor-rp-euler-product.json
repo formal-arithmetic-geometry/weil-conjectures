@@ -1,108 +1,205 @@
 {
-  "id": "cor-rp-euler-product",
-  "blueprint": {
-    "is": "cor-rp-euler-product",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Euler product of the $L$-function of a lisse sheaf",
-  "statement": "Let $U_0$ be a smooth geometrically connected affine curve, let\n$U=U_0\\times_{k_0}k$, and let $\\mathcal G_0$ be a lisse\nWeil sheaf on $U_0$. Then, as\npower series in $t$ (the Euler series of [d-real-cohom]),\n\n$$\n\\prod_{x\\in|U_0|}\\det\\bigl(1-F_xt^{d(x)},\\mathcal G_{0,\\bar x}\\bigr)^{-1}\n=\n\\frac{\\det(1-Ft,H_c^1(U,\\mathcal G))}\n{\\det(1-Ft,H_c^2(U,\\mathcal G))},\n$$\n\nwhere $|U_0|$ is the set of closed points, $d(x)$ the degree of\n$x$, and the right-hand side is the graded form of the\nGrothendieck–Lefschetz trace formula\n[thm-trf-grothendieck-lefschetz-qbar] of the trace-formula chapter (summed\nwith the signs $(-1)^{i+1}$).",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/cor-rp-euler-product.md",
-    "place": "node cor-rp-euler-product, order 2663"
-  },
-  "stmt_deps": [
-    "d-real-cohom",
+ "id": "cor-rp-euler-product",
+ "blueprint": {
+  "is": "cor-rp-euler-product",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Euler product of the $L$-function of a lisse sheaf",
+ "statement": "Let $U_0$ be a smooth geometrically connected affine curve, let\n$U=U_0\\times_{k_0}k$, and let $\\mathcal G_0$ be a lisse\nWeil sheaf on $U_0$. Then, as\npower series in $t$ (the Euler series of [d-real-cohom]),\n\n$$\n\\prod_{x\\in|U_0|}\\det\\bigl(1-F_xt^{d(x)},\\mathcal G_{0,\\bar x}\\bigr)^{-1}\n=\n\\frac{\\det(1-Ft,H_c^1(U,\\mathcal G))}\n{\\det(1-Ft,H_c^2(U,\\mathcal G))},\n$$\n\nwhere $|U_0|$ is the set of closed points, $d(x)$ the degree of\n$x$, and the right-hand side is the graded form of the\nGrothendieck–Lefschetz trace formula\n[thm-trf-grothendieck-lefschetz-qbar] of the trace-formula chapter (summed\nwith the signs $(-1)^{i+1}$).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/cor-rp-euler-product.md",
+  "place": "node cor-rp-euler-product, order 2663"
+ },
+ "stmt_deps": [
+  "d-real-cohom",
+  "thm-trf-grothendieck-lefschetz-qbar",
+  "def-wf-weil-category",
+  "d-real-setup",
+  "def-weil-punctual-weights"
+ ],
+ "proof": [
+  {
+   "text": "*Finite-level hypotheses.* By [def-wf-weil-category], $\\mathcal G_0$ is an object $(E,(G_E,\\varphi))$ of $\\mathrm{WeilD}(U_0,\\Qlb)$: $E/\\Ql$ is finite in $\\Qlb$, $G_E$ lies in $\\mathcal C_E=D^b_c(U,E)$ of [def-weil-pbc-rational-category] and $\\varphi:P_EG_E\\xrightarrow{\\sim}G_E$. This is the representative $(E,K_E)$ required in [thm-trf-grothendieck-lefschetz-qbar]. The objects of $D^b_c(U,E)$ are those of the integral category $D^b_c(U,\\mathcal O_E)$ of [def-weil-pbc-bounded-constructible-complete] ($U$ is of finite type over $k$, hence noetherian of finite dimension, and $\\ell$ is invertible on it), so $K_{\\mathcal O}=G_E$ with $\\alpha=\\mathrm{id}$ is a lattice as in [thm-trf-trace-formula-e]. Membership of $G_E$ in that integral category includes compatible pairs $(L_n,\\alpha_n)$ with $L_n\\in D^+(U_{\\mathrm{et}},A_{E,n})$ and $\\alpha_n:\\nu_U^*L_n\\xrightarrow{\\sim}G_E\\otimes^L_{\\mathcal O_E}A_{E,n}$; each is an explicit etale-origin witness of the reduction $K_n$ in the sense of [def-weil-pbc-etale-origin-witness], and these are retained. For admissibility: $U_0$ is affine, hence separated, and of finite type over $k_0$, a curve in the sense of [d-real-setup]; by [thm-nagata-compactification] the separated finite-type morphism $U_0\\to\\operatorname{Spec}k_0$ to the quasi-compact quasi-separated base has a compactification over $k_0$, which we fix. The graph correspondences of the iterates $\\Phi^m$ and the fixed-point base changes on its base change to $k$ are separated finite-type morphisms between finite-type $k$-schemes with separated targets (products, compactifications and closed fixed loci of separated schemes). By [def-trf-admissibility] the exceptional-adjoint datum is a theorem for every such morphism, with adjunction and compactification comparisons from [thm-sf-ambient-adjoint-class] and stage-independent bounds from [thm-sf-preservation-class]. Thus every finite-level hypothesis of [thm-trf-trace-formula-e] holds for this lattice, and so do the hypotheses of [thm-trf-grothendieck-lefschetz-qbar] for $\\mathcal G_0$.",
+   "uses": [
+    "def-wf-weil-category",
+    "def-weil-pbc-rational-category",
+    "def-weil-pbc-bounded-constructible-complete",
+    "def-weil-pbc-etale-origin-witness",
+    "thm-trf-trace-formula-e",
     "thm-trf-grothendieck-lefschetz-qbar",
-    "def-wf-weil-category"
-  ],
-  "proof": [
-    {
-      "text": "This is the curve case of the Euler-product form of the trace formula\n[thm-trf-l-function-euler-product], applied with $\\Lambda=\\Qlb$,\n$X_0=U_0$ (separated of finite type, of dimension one) and\n$K=\\mathcal G_0$, a sheaf placed in degree zero, under the hypotheses\nof [thm-trf-grothendieck-lefschetz-qbar] with which the trace formula\nis applied to $\\mathcal G_0$. The local factor of that theorem at a\nclosed point $x$ is $\\det(1-F_xt^{e_x}\\mid\\mathcal G_{0,\\bar x})$,\nwith $e_x=d(x)$ and $F_x$ the local geometric Frobenius at $x$ of\n[def-weil-punctual-weights], so its $L(U_0,\\mathcal G_0,t)$ is the\nleft-hand side; by its items (2) and (3) this equals\n\n$$\n\\frac{\\det(1-Ft,H_c^1(U,\\mathcal G))}\n{\\det(1-Ft,H_c^0(U,\\mathcal G))\\,\\det(1-Ft,H_c^2(U,\\mathcal G))}.\n$$",
-      "uses": [
-        "thm-trf-l-function-euler-product",
-        "thm-trf-grothendieck-lefschetz-qbar",
-        "def-weil-punctual-weights"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Finally $H_c^0(U,\\mathcal G)=0$ by [lem-a1-affine-hc0], so the\nfactor $i=0$ is $1$, which gives the displayed identity.",
-      "uses": [
-        "lem-a1-affine-hc0"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+    "d-real-setup",
+    "thm-nagata-compactification",
+    "def-trf-admissibility",
+    "thm-sf-ambient-adjoint-class",
+    "thm-sf-preservation-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/cor-rp-euler-product.proof.md",
+    "place": "proof, single paragraph"
+   }
+  },
+  {
+   "text": "Apply the curve case of the Euler-product form of the trace formula\n[thm-trf-l-function-euler-product] with $\\Lambda=\\Qlb$,\n$X_0=U_0$ (separated of finite type, of dimension one, by [d-real-setup]) and\n$K=\\mathcal G_0$, a sheaf placed in degree zero; its hypotheses are those\nof [thm-trf-grothendieck-lefschetz-qbar], verified in Step 1. Its local factor at a\nclosed point $x$ is $\\det(1-t^{e_x}F^{\\mathrm{trf}}_x\\mid\\mathcal G_{0,\\bar x})$\nwith $e_x=[\\kappa(x):k_0]=d(x)$ and $F^{\\mathrm{trf}}_x$ its one-circuit local\nFrobenius: the scalar extension to $\\Qlb$ of the $E$-stage operator $F_{y,e_x}$\nof [prop-trf-rational-frobenius-integral-model] for a representative and a lattice\nwith finite-Tor reductions, $y$ a rational point under $x$. The $F_x$ of the\nstatement is the local geometric Frobenius of [def-weil-punctual-weights], i.e. the\noperator of [def-weil-local-frobenius-trace] on the same stalk.\nBy [lem-rp-local-frobenius-models-agree] the two operators are conjugate on every\n$\\mathcal H^j(\\mathcal G_0)_{\\bar x}$ (only $j=0$ occurs), so the two local\ndeterminants agree, and they do not depend on the choices of $\\bar x$ by\n[lem-weil-local-frobenius-conjugacy-class]. Hence the $L(U_0,\\mathcal G_0,t)$ of\n[thm-trf-l-function-euler-product] is the left-hand side, and its items (2) and (3) give\n\n$$\n\\frac{\\det(1-Ft,H_c^1(U,\\mathcal G))}\n{\\det(1-Ft,H_c^0(U,\\mathcal G))\\,\\det(1-Ft,H_c^2(U,\\mathcal G))},\n$$\n\nwith $F$ and $H_c^i$ those of [thm-trf-grothendieck-lefschetz-qbar], as the statement specifies.",
+   "uses": [
     "thm-trf-l-function-euler-product",
     "thm-trf-grothendieck-lefschetz-qbar",
+    "d-real-setup",
+    "prop-trf-rational-frobenius-integral-model",
     "def-weil-punctual-weights",
-    "lem-a1-affine-hc0"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/cor-rp-euler-product.md",
-    "place": "## Proof"
+    "def-weil-local-frobenius-trace",
+    "lem-rp-local-frobenius-models-agree",
+    "lem-weil-local-frobenius-conjugacy-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/cor-rp-euler-product.proof.md",
+    "place": "proof, single paragraph"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2663,
-  "blueprint_uses": [
-    "d-real-cohom",
-    "def-weil-punctual-weights",
-    "def-wf-weil-category",
+  {
+   "text": "Finally $H_c^0(U,\\mathcal G)=0$ by [lem-a1-affine-hc0], whose hypotheses (a smooth geometrically connected affine curve and a lisse Weil sheaf on it) are those of the statement. Its compact support cohomology is that of [def-weil-ordinary-compact-cohomology], built on the same rational compact-support functor whose scalar extension to $\\Qlb$ is the $H_c^0$ of Step 2. So the factor $i=0$ is the determinant of $1-Ft$ on the zero space, namely $1$, and Step 2 gives the displayed identity.",
+   "uses": [
     "lem-a1-affine-hc0",
-    "thm-trf-grothendieck-lefschetz-qbar",
-    "thm-trf-l-function-euler-product"
-  ],
-  "blueprint_tags": [
-    "latex:corollary"
-  ],
-  "uses_not_cited": [
-    "def-wf-weil-category"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-purity-real-sheaves",
-  "unit": "sk-p-real-rankin",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $U_0$ be a smooth geometrically connected affine curve, let\n$U=U_0\\times_{k_0}k$, and let $\\mathcal G_0$ be a lisse\nWeil sheaf on $U_0$. Then, as\npower series in $t$ (the Euler series of [d-real-cohom]),\n\n$$\n\\prod_{x\\in|U_0|}\\det\\bigl(1-F_xt^{d(x)},\\mathcal G_{0,\\bar x}\\bigr)^{-1}\n=\n\\frac{\\det(1-Ft,H_c^1(U,\\mathcal G))}\n{\\det(1-Ft,H_c^2(U,\\mathcal G))},\n$$\n\nwhere $|U_0|$ is the set of closed points, $d(x)$ the degree of\n$x$, and the right-hand side is the graded form of the\nGrothendieck–Lefschetz trace formula\n[thm-trf-grothendieck-lefschetz-qbar] (summed\nwith the signs $(-1)^{i+1}$).",
-    "proof": [
-      {
-        "text": "This is the curve case of the Euler-product form of the trace formula\n[thm-trf-l-function-euler-product], applied with $\\Lambda=\\Qlb$,\n$X_0=U_0$ (separated of finite type, of dimension one) and\n$K=\\mathcal G_0$, a sheaf placed in degree zero, under the hypotheses\nof [thm-trf-grothendieck-lefschetz-qbar] with which the trace formula\nis applied to $\\mathcal G_0$. The local factor of that theorem at a\nclosed point $x$ is $\\det(1-F_xt^{e_x}\\mid\\mathcal G_{0,\\bar x})$,\nwith $e_x=d(x)$ and $F_x$ the local geometric Frobenius at $x$ of\n[def-weil-punctual-weights], so its $L(U_0,\\mathcal G_0,t)$ is the\nleft-hand side; by its items (2) and (3) this equals\n\n$$\n\\frac{\\det(1-Ft,H_c^1(U,\\mathcal G))}\n{\\det(1-Ft,H_c^0(U,\\mathcal G))\\,\\det(1-Ft,H_c^2(U,\\mathcal G))}.\n$$",
-        "uses": [
-          "thm-trf-l-function-euler-product",
-          "thm-trf-grothendieck-lefschetz-qbar",
-          "def-weil-punctual-weights"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Finally $H_c^0(U,\\mathcal G)=0$ by [lem-a1-affine-hc0], so the\nfactor $i=0$ is $1$, which gives the displayed identity.",
-        "uses": [
-          "lem-a1-affine-hc0"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/cor-rp-euler-product.proof.md",
+    "place": "proof, single paragraph"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-wf-weil-category",
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-etale-origin-witness",
+  "thm-trf-trace-formula-e",
+  "thm-trf-grothendieck-lefschetz-qbar",
+  "d-real-setup",
+  "thm-nagata-compactification",
+  "def-trf-admissibility",
+  "thm-sf-ambient-adjoint-class",
+  "thm-sf-preservation-class",
+  "thm-trf-l-function-euler-product",
+  "prop-trf-rational-frobenius-integral-model",
+  "def-weil-punctual-weights",
+  "def-weil-local-frobenius-trace",
+  "lem-rp-local-frobenius-models-agree",
+  "lem-weil-local-frobenius-conjugacy-class",
+  "lem-a1-affine-hc0",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/cor-rp-euler-product.proof.md",
+  "place": "## Proof (single paragraph)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Euler product of the L-function of a lisse Weil sheaf on a smooth geometrically connected affine curve",
+   "results": "NumberField.dedekindZeta; DirichletCharacter.LSeries_eulerProduct_hasProd; DirichletCharacter.LSeries_eulerProduct; DirichletCharacter.LSeries_eulerProduct_tprod; ArithmeticFunction.vonMangoldt.LFunctionResidueClassAux; DirichletCharacter.LFunctionTrivChar_eq_mul_riemannZeta; DirichletCharacter.LSeries_eulerProduct_exp_log; DirichletCharacter.LFunctionTrivChar (Mathlib NumberTheory EulerProduct/LSeries declarations)",
+   "date": "2026-10-17",
+   "verdict": "no match: only arithmetic Dirichlet or number-field Euler products"
+  },
+  {
+   "tool": "loogle",
+   "query": "WeilGroup.eulerSeries determinant compactTopFrobenius",
+   "results": "0 hits; unknown identifier WeilGroup.eulerSeries",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck.?Lefschetz|eulerSeries|compactTopFrobenius in Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euler product trace formula lisse sheaf",
+   "results": "EulerProduct.summable_and_hasSum_smoothNumbers_prod_primesBelow_tsum; EulerProduct.prod_primesBelow_tsum_eq_tsum_smoothNumbers; EulerProduct.summable_and_hasSum_factoredNumbers_prod_filter_prime_geometric; DirichletCharacter.LSeries_eulerProduct_tprod; ArithmeticFunction.IsMultiplicative.eulerProduct_hasProd; EulerProduct.eulerProduct_hasProd; EulerProduct.eulerProduct_hasProd_mulIndicator; DirichletCharacter.LSeries_eulerProduct (Mathlib EulerProduct/DirichletLSeries declarations)",
+   "date": "2026-10-17",
+   "verdict": "no match: generic arithmetic Euler-product declarations only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2663,
+ "blueprint_uses": [
+  "d-real-cohom",
+  "def-weil-punctual-weights",
+  "def-wf-weil-category",
+  "lem-a1-affine-hc0",
+  "thm-trf-grothendieck-lefschetz-qbar",
+  "thm-trf-l-function-euler-product"
+ ],
+ "blueprint_tags": [
+  "latex:corollary"
+ ],
+ "uses_not_cited": [
+  "def-wf-weil-category"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $U_0$ be a smooth geometrically connected affine curve, let\n$U=U_0\\times_{k_0}k$, and let $\\mathcal G_0$ be a lisse\nWeil sheaf on $U_0$. Then, as\npower series in $t$ (the Euler series of [d-real-cohom]),\n\n$$\n\\prod_{x\\in|U_0|}\\det\\bigl(1-F_xt^{d(x)},\\mathcal G_{0,\\bar x}\\bigr)^{-1}\n=\n\\frac{\\det(1-Ft,H_c^1(U,\\mathcal G))}\n{\\det(1-Ft,H_c^2(U,\\mathcal G))},\n$$\n\nwhere $|U_0|$ is the set of closed points, $d(x)$ the degree of\n$x$, and the right-hand side is the graded form of the\nGrothendieck–Lefschetz trace formula\n[thm-trf-grothendieck-lefschetz-qbar] (summed\nwith the signs $(-1)^{i+1}$).",
+  "proof": [
+   {
+    "text": "This is the curve case of the Euler-product form of the trace formula\n[thm-trf-l-function-euler-product], applied with $\\Lambda=\\Qlb$,\n$X_0=U_0$ (separated of finite type, of dimension one) and\n$K=\\mathcal G_0$, a sheaf placed in degree zero, under the hypotheses\nof [thm-trf-grothendieck-lefschetz-qbar] with which the trace formula\nis applied to $\\mathcal G_0$. The local factor of that theorem at a\nclosed point $x$ is $\\det(1-F_xt^{e_x}\\mid\\mathcal G_{0,\\bar x})$,\nwith $e_x=d(x)$ and $F_x$ the local geometric Frobenius at $x$ of\n[def-weil-punctual-weights], so its $L(U_0,\\mathcal G_0,t)$ is the\nleft-hand side; by its items (2) and (3) this equals\n\n$$\n\\frac{\\det(1-Ft,H_c^1(U,\\mathcal G))}\n{\\det(1-Ft,H_c^0(U,\\mathcal G))\\,\\det(1-Ft,H_c^2(U,\\mathcal G))}.\n$$",
+    "uses": [
+     "thm-trf-l-function-euler-product",
+     "thm-trf-grothendieck-lefschetz-qbar",
+     "def-weil-punctual-weights"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Finally $H_c^0(U,\\mathcal G)=0$ by [lem-a1-affine-hc0], so the\nfactor $i=0$ is $1$, which gives the displayed identity.",
+    "uses": [
+     "lem-a1-affine-hc0"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "cor-rp-euler-product",
+  "worker": "stage1",
+  "summary": "Audited the imported corollary against the main-20261015 blueprint proof and the current Lean source. The Lean declaration exists only with sorry and states the weaker polynomial-existence form, so it is not an attachment. The item itself is split into the two source arguments: apply the general Euler-product trace theorem in the curve, degree-zero lisse-sheaf case and identify its local and cohomological factors, then remove the H_c^0 factor using affine-curve vanishing. All cited facts are already represented by existing DAG nodes; no new nodes were needed. Maintainer-reader repair (Q35, 2026-10-17): a new Step 1 verifies the finite-level hypotheses (etale-origin witnesses from the integral category of def-wf-weil-category, a compactification by Nagata, admissibility as a theorem); Step 2 now cites the new statement-only lemma lem-rp-local-frobenius-models-agree for the identification of the trace-formula local Frobenius with the operator of def-weil-punctual-weights; stmt_deps gained d-real-setup and def-weil-punctual-weights.",
+  "blueprint": "Step 1 discharges the phrase 'under the hypotheses of [thm-trf-grothendieck-lefschetz-qbar] with which the trace formula is applied to G_0'; Step 2 realizes the application of thm-trf-l-function-euler-product with Lambda=Qlb, X_0=U_0, K=G_0 and the sentence identifying its local factor with F_x of def-weil-punctual-weights; Step 3 realizes the final sentence invoking lem-a1-affine-hc0.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-45e1e5d32",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-45e1e5d32 (reviewer sub-agent of L); spot-checked: I read the item, both blueprint copies (main-20261015 and master), unit sk-p-real-rankin and every cited statement in full, including the trf, sf and pbc definitions and theorems. The statement is true: small cases on A^1, G_m and the zero sheaf all check, and it is not weakened. I repaired three faults. (1) E1/C4: step 1 applied thm-trf-l-function-euler-product without proving the finite-level hypotheses of thm-trf-trace-formula-e, an etale-origin witness for each reduction and admissibility on a compactification. A new Step 1 proves them. The witnesses come from membership in def-weil-pbc-bounded-constructible-complete through def-wf-weil-category and def-weil-pbc-rational-category, as def-weil-pbc-etale-origin-witness requires. The compactification comes from thm-nagata-compactification. Admissibility is a theorem by def-trf-admissibility, thm-sf-ambient-adjoint-class and thm-sf-preservation-class, and the targets are separated. (2) C4/E6: the step equated the trace-formula local Frobenius (def-trf-frobenius-operators and prop-trf-rational-frobenius-integral-model, Phi^m fixed point plus kappa) with F_x of def-weil-punctual-weights and def-weil-local-frobenius-trace (geometric-point return), and no node states this; only the constant-sheaf case lem-zl-constant-sheaf-lseries exists. I added the statement-only lemma lem-rp-local-frobenius-models-agree, which says the two are conjugate on each H^j, and Step 2 now cites it together with lem-weil-local-frobenius-conjugacy-class. Its Mathlib grep found no match; LeanSearch and Loogle could not be run here and are recorded as unavailable. (3) B3: d-real-setup and def-weil-punctual-weights were added to stmt_deps. Step 3 checks the hypotheses of lem-a1-affine-hc0 and the compact-support convention. All citations are on the unit route, so no tool_uses are needed, and there are no cycles. Not changed: the statement keeps the master phrase 'of the trace-formula chapter', which the main blueprint drops; the passed sibling lem-wf-euler-product-middle-extension has the same uncited local-Frobenius identification.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }

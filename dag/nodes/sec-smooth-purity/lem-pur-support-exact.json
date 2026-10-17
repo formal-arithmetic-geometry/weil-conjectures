@@ -21,16 +21,17 @@
  ],
  "proof": [
   {
-   "text": "Work on compatible representatives of $\\mathcal C=X_{\\mathrm{proet}}$ in the size convention of [def-weil-proetale-inverse-image], with $\\mathcal O=\\Lambda_X$. By [lem-weil-proetale-weakly-etale-localization], $U_{\\mathrm{proet}}=\\mathcal C/U$, $\\Lambda_U=\\mathcal O|_U$, and $U\\to X$ is a monomorphism. The restriction of a sheaf $M$ to $U$ has value $M(W)$ on $(W\\to U)$, as in [def-pur-localized-ringed-site]. This is the inverse image of [def-weil-proetale-inverse-image]: for $W\\to U$, the category $\\mathcal I_W$ there has initial object $(W,W\\to U\\times_XW)$, with the diagonal arrow. A morphism from this object to $(V,\\phi)$ must be the second component $W\\to V$ of $\\phi$, and this component does define that unique morphism. Thus the opposite indexing category has a final object, its colimit is $M(W)$, and sheafification changes nothing because restriction is a sheaf. Apply this calculation also to rings and module actions. Under $j^{-1}\\Lambda_X=\\Lambda_X|_U$, the coefficient map $c^j_\\Lambda:j^{-1}\\Lambda_X\\to\\Lambda_U$ of [def-weil-proetale-inverse-image] sends each constant section $\\lambda$ to $\\lambda$: its adjoint $\\rho^j_\\Lambda$ was defined that way, and the initial-object calculation evaluates the adjunction on that same section. Consequently $c^j_\\Lambda$ is the inverse of the isomorphism $\\Lambda_U\\to\\Lambda_X|_U$ in clause (2) of [lem-weil-proetale-weakly-etale-localization], since the composite is the unique sheaf-of-rings map extending the identity on constants. The module pullback $j^*M=j^{-1}M\\otimes_{j^{-1}\\Lambda_X}\\Lambda_U$ is therefore restriction as an $\\Lambda_U$-module: after this coefficient identification, the sectionwise maps $x\\otimes a\\mapsto ax$ and $x\\mapsto x\\otimes1$ are inverse and commute with restrictions, so remain inverse after sheafification. The module unit is the abelian-sheaf unit followed by $x\\mapsto x\\otimes1$; under these identifications it is still restriction. For $V\\to X$ in $\\mathcal C$, put $V_U=V\\times_XU$. The same two cited statements ensure $V_U$ is an object of $\\mathcal C$. The direct-image formula now gives $(j_*j^*M)(V)=M(V_U)$, and the unit at $V$ is the restriction $M(V)\\to M(V_U)$.",
+   "text": "Work on compatible representatives of $\\mathcal C=X_{\\mathrm{proet}}$ in the size convention of [def-weil-proetale-inverse-image], with $\\mathcal O=\\Lambda_X$. By [lem-pur-proetale-open-unit-evaluation], after the canonical coefficient identification from [prop-weil-pbc-proetale-constant-ring-map] and the localization identification from [lem-weil-proetale-weakly-etale-localization], the module pullback $j^*M$ is the restriction $M|_U$ and the unit $M\\to j_*j^*M$ is restriction on every object. Explicitly, for $V\\to X$ put $V_U=V\\times_XU$. The direct-image formula in [def-weil-proetale-inverse-image] gives $(j_*j^*M)(V)=M(V_U)$, and the unit is the restriction map $M(V)\\to M(V_U)$.",
    "uses": [
-    "def-weil-proetale-inverse-image",
+    "lem-pur-proetale-open-unit-evaluation",
+    "prop-weil-pbc-proetale-constant-ring-map",
     "lem-weil-proetale-weakly-etale-localization",
-    "def-pur-localized-ringed-site"
+    "def-weil-proetale-inverse-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-exact.md",
-    "place": "Proof, the restriction map on V and V times_X U; expanded using the localization and inverse-image definitions"
+    "place": "Proof, first paragraph: restriction and coefficient identification"
    }
   },
   {
@@ -99,18 +100,19 @@
   }
  ],
  "proof_deps": [
-  "def-weil-proetale-inverse-image",
-  "lem-weil-proetale-weakly-etale-localization",
-  "def-pur-localized-ringed-site",
-  "lem-weil-pbc-free-yoneda-presheaf-module",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-weil-pbc-ringed-site-module-sheafification-exact",
-  "def-sp-injective-resolutions",
-  "def-weil-sheaf-of-modules-category",
   "def-pur-flasque-support",
+  "def-sp-injective-resolutions",
   "def-weil-pbc-exact-sequence",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "lem-exc-proetale-closed-essential-image",
+  "lem-pur-proetale-open-unit-evaluation",
   "lem-weil-pbc-cochain-complexes-degreewise-exact",
-  "lem-exc-proetale-closed-essential-image"
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-weil-pbc-proetale-constant-ring-map"
  ],
  "proof_origin": {
   "by": "agent",
@@ -190,7 +192,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -219,28 +221,38 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-pur-support-exact",
   "worker": "stage1",
-  "summary": "Rechecked the returned stage-1 split against every current cited statement after the failed landing lock. All eleven prior citation statements are unchanged and their hypotheses still apply. Made naturality of the free-presheaf basis map explicit in step 2, refreshed the current citation audit and replaced the obsolete stage-2 report with the authorized stage-1 repair report. Preserved the source statement and six-step free-module proof route; zero new nodes or Mathlib leaves.",
-  "blueprint": "Realizes the entire imported proof: its first kernel sentence is step 5; its free-module monomorphism on V times_X U is steps 1--2; applying Hom(-,I) and the restriction identification is steps 3--4; the termwise conclusion is steps 5--6. The optional recollement sentence is not used.",
+  "summary": "Repaired the returned long first step by citing the now-reviewed existing canonical open pro-etale pullback evaluation and unit lemma lem-pur-proetale-open-unit-evaluation, together with the existing coefficient and localization statements. Removed the duplicate candidate from the retained sandbox after comparing its entire statement with that existing node. The item statement, Lean record and remaining five proof steps are preserved. No new nodes.",
+  "blueprint": "Realizes the entire imported free-module proof: step 1 cites the existing canonical module inverse-image evaluation and unit comparison; unchanged steps 2--4 prove the free-sheaf monomorphism and injective lifting; unchanged steps 5--6 identify the kernel and give degreewise exactness.",
   "tool_uses": [
    {
     "node": "lem-weil-proetale-weakly-etale-localization",
     "why": "Identifies the pro-etale site of the open with X_proet/U, its constant coefficients and restriction, and supplies the open monomorphism used in the free-basis injection. This generic site-localization interface is not stated by another node of this unit; it preserves the imported free-sheaf proof route."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Step 1 takes from its statement only that the adjoint of the constant-section map is the structure map c^j_Lambda of def-weil-proetale-inverse-image, the coefficient identification under which lem-pur-proetale-open-unit-evaluation is stated; this generic pro-etale coefficient fact has no node in sk-prop-a1-kummer or its cited units, and the free-module route is unchanged."
+   },
+   {
+    "node": "lem-exc-proetale-closed-essential-image",
+    "why": "Step 5 takes from its statement only that the closed adjunction unit is an isomorphism on module sheaves killed by j^* for a quasi-compact complementary open (the identification G_Z M = s_*s^!M also recorded in def-pur-flasque-support); a generic closed-immersion tool, not a replacement of a step of the unit's route."
    }
   ]
  },
  "tool_uses": [
-  "lem-weil-proetale-weakly-etale-localization"
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-exc-proetale-closed-essential-image"
  ],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NZ-1e251c20f",
-  "group": "NZ",
+  "reviewer": "NT-cc-Q56-14c81b415",
+  "group": "Q56",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-1e251c20f (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, source locations, and unit/chapter route. All six steps check out, including pro-étale coefficient identification, free-sheaf monomorphism, injective lifting, and degreewise exactness. Edge cases pass; no new nodes, duplicates, circular dependencies, or repairs. Accepted the localization tool use. Full review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-14c81b415 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and every cited statement in full. Sources checked: the master and main-20261015 blueprint proof (same free-module route, no blueprint_update); Stacks sites-modules 03EI l.874, 04IX l.2019, 0G1V l.2149 (after 03DI), 03EJ l.2288; homology 0114 l.3113. The delivery has no new nodes. The statement, Lean record and statement_change are unchanged, quasi-compact scope included. Step 1 now cites the reviewed same-unit lem-pur-proetale-open-unit-evaluation. Its hypotheses (open immersion, finite commutative Lambda, any module sheaf) hold, and it gives the restriction formula for j^*M and for the unit, natural in M and W. This is a proper citation, not a relabelling, and the discarded candidate was correctly recognised as a specialization of it. Steps 2-6 hold: the free-basis injection uses that U->X is a monomorphism, and exact sheafification keeps the map a monomorphism. The Hom(L_T,M)=M(T) restriction calculation is elementary. Injective lifting gives sectionwise surjectivity and hence an epimorphism. The kernel step uses def-pur-flasque-support and the closed-unit isomorphism, which needs j quasi-compact. The degreewise criterion for Z-indexed complexes completes the proof. Edge cases checked: U=X, U empty, Lambda=0, a single degree, and the excluded non-quasi-compact counterexample. No cycle (a BFS from all 13 dependencies does not reach the item), no SGA citation, all steps under 2000 characters, and proof_deps equals the union of uses. Near-duplicates lem-exc-proetale-supported-kernel-complex (Noetherian base, assumes epic units) and lem-exc-proetale-support-triangle (derived-category triangle) differ from the item. FIX: prop-weil-pbc-proetale-constant-ring-map (unit sk-thm-properbasechange, step 1) and lem-exc-proetale-closed-essential-image (unit sk-prop-sf-closed-unit, step 5) lie outside the unit's route and were not declared. I declared both as generic tools in split_report.tool_uses in fixes/dag/nodes/sec-smooth-purity/lem-pur-support-exact.json; nothing else in the file changed. Accepted tool_uses: lem-weil-proetale-weakly-etale-localization, prop-weil-pbc-proetale-constant-ring-map, lem-exc-proetale-closed-essential-image.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.PurSupportExact",

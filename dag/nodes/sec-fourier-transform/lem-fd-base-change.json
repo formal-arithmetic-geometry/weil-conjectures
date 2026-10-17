@@ -3,42 +3,135 @@
  "blueprint": {
   "is": "lem-fd-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Base change of the transform",
- "statement": "Let $g:S'\\to S$ be a morphism of separated finite-type schemes over $k_0$, and let $V'=V\\times_SS'$. For $K\\in D^b_c(V,E)$ there is a canonical identification\n\n$$\n\\operatorname{FT}_\\psi(g^*K)\\cong g^*\\operatorname{FT}_\\psi(K).\n$$",
+ "statement": "Use the adic coefficient conventions of [def-fourier-set]: $k_0=\\mathbf F_q$ has characteristic $p$, $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ is finite and contains the values of the fixed additive character $\\psi$, and $D^b_c(-,E)$ is the rationalized derived-complete constructible category on the pro-étale site. Let $S$ be a separated finite-type $k_0$-scheme and $V\\to S$ a vector bundle of constant rank $r$, with dual $V^\\vee$ and evaluation pairing $b$. In this coefficient convention the Fourier transform means\n$$\n\\operatorname{FT}_{\\psi,V/S}(K)=Rp_{2,!}(Lp_1^*K\\otimes_E^L b^*\\mathcal L_\\psi)[r],\n$$\nwhere $p_1,p_2$ are the projections of $V\\times_SV^\\vee$ and $Rf_!$ is the adic compact-support direct image of [def-fourier-set]. This is the integral-transform formula of [def-fd-transform], interpreted with these adic operations, rather than with discrete $E$-module sheaves on the small étale site.\n\nLet $g:S'\\to S$ be a morphism of separated finite-type $k_0$-schemes, put $V'=V\\times_SS'$ and $(V')^\\vee=V^\\vee\\times_SS'$, and denote the projections by $u:V'\\to V$ and $v:(V')^\\vee\\to V^\\vee$. For every $K\\in D^b_c(V,E)$ there is a canonical identification, natural in $K$,\n$$\n\\operatorname{FT}_{\\psi,V'/S'}(Lu^*K)\\cong Lv^*\\operatorname{FT}_{\\psi,V/S}(K).\n$$\nThus the two occurrences of $g^*$ in the source formula are the induced pullbacks $Lu^*$ and $Lv^*$, respectively.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-base-change/lem-fd-base-change.md",
   "place": "node lem-fd-base-change, order 2703"
  },
  "stmt_deps": [
+  "def-fourier-set",
+  "def-fd-transform",
+  "def-fd-kernel",
   "def-weil-pbc-scheme-conventions"
  ],
  "proof": [
   {
-   "text": "The compactly supported pushforward $p_{2,!}$ of [def-fd-transform] is the composite of extension by zero along a chosen compactification $\\bar p_2$ of $p_2$ with the direct image along the proper morphism $\\bar p_2$; extension by zero commutes with arbitrary base change by [sbc-prop-extension-by-zero-and-arbitrary-base-change], and the direct image of a proper morphism satisfies the $\\overline{\\mathbf Q}_\\ell$ proper base change of [thm-weil-pbc-qbar], so for the cartesian square of the base change the identification\n\n$$\ng^*p_{2,!}\\cong p'_{2,!}\\,g_V^*,\\qquad g_V:V'\\times_{S'}V'^\\vee\\to V\\times_SV^\\vee,\n$$\n\nholds. The integrand base changes by pullback: $g_V^*(p_1^*K\\otimes^L\\mathcal K_\\psi)\\cong{p_1'}^*(g^*K)\\otimes^Lg_V^*\\mathcal K_\\psi$, and $g_V^*\\mathcal K_\\psi\\cong\\mathcal K'_\\psi$ because the pairing $b'$ is the base change of $b$ and the lisse Artin–Schreier sheaf of [lem-fd-as-lisse] pulls back to the sheaf attached to the base-changed function ([def-fd-kernel]). Combining these identifications, and noting that the shift $[r]$ of [def-fd-transform] commutes with pullback, gives the displayed isomorphism.",
+   "text": "Put $W=V\\times_SV^\\vee$, $W'=V'\\times_{S'}(V')^\\vee$, and write $a:W'\\to W$ for the induced map. The evaluation pairing and kernel are those of [def-fd-kernel], with the adic interpretation fixed by [def-fourier-set]. In a local trivialization $V=\\mathbf A^r_S$, base change replaces the coefficient ring $R$ by $R'$ and leaves the coordinates $x_i,\\xi_i$ unchanged; hence the dual bundle base changes to the dual of $V'$, and $b'=\\sum_i x_i\\xi_i=b\\circ a$ as a function to $\\mathbf A^1_{k_0}$. This equality is invariant under a change of basis, so it holds globally. The square with top $a$, bottom $v$ and vertical maps $p'_2,p_2$ is cartesian: a map into $W\\times_{V^\\vee}(V')^\\vee$ is exactly a triple $(x,\\xi,s')$ with $x,\\xi$ over $g(s')$, which is the functor of points of $W'$. Also $p_1a=up'_1$.",
    "uses": [
-    "def-fd-transform",
-    "sbc-prop-extension-by-zero-and-arbitrary-base-change",
-    "thm-weil-pbc-qbar",
-    "lem-fd-as-lisse",
-    "def-fd-kernel"
+    "def-fd-kernel",
+    "def-fourier-set"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-base-change/lem-fd-base-change.proof.md",
+    "place": "First displayed base-change square and the clause that the pairing base changes"
+   }
+  },
+  {
+   "text": "The morphism $p_2$ is separated of finite type, since locally it is the projection $\\mathbf A^r_{V^\\vee}\\to V^\\vee$; all schemes here are separated finite type over a field. Choose a compactification $W\\xrightarrow{j}\\overline W\\xrightarrow{P}V^\\vee$ using [thm-nagata-compactification], with $j$ quasi-compact open and $P$ proper. Pull it back along $v$ as prescribed by [def-cbc-compact-support-square], giving $j':W'\\hookrightarrow\\overline W'$ and proper $P':\\overline W'\\to(V')^\\vee$, with $\\bar a:\\overline W'\\to\\overline W$. The finite-type geometry lemma [lem-cbc-compactification-geometry-fibre-bound], applied over $\\operatorname{Spec}k_0$ and then to $P$, supplies finite Noetherian affine covers, finite dimension and a uniform geometric-fibre dimension bound for $P$; it applies to $P'$ too. Its invertibility clause applies to $\\ell\\ne p$. Thus these are legitimate schemes for finite-extension proper base change, without any smoothness hypothesis on $g$.",
+   "uses": [
+    "thm-nagata-compactification",
+    "def-cbc-compact-support-square",
+    "lem-cbc-compactification-geometry-fibre-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-base-change/lem-fd-base-change.proof.md",
+    "place": "Opening compactification sentence; verification of the proper base-change hypotheses"
+   }
+  },
+  {
+   "text": "First compare the open factors. For an integral constructible representative $M_0$ on $W$, [lem-cbc-completed-extension-zero-comparison] gives the canonical isomorphism\n$$L\\bar a^*_{\\mathrm{comp}}j_!M_0\\xrightarrow{\\sim}j'_!La^*_{\\mathrm{comp}}M_0.$$\nIts hypotheses are precisely the cartesian open square of Step 2, the quasi-compactness of $j$, and derived completeness of $M_0$. It also asserts completeness of $j_!M_0$. Rationalizing this comparison gives the same isomorphism over $E$: [prop-weil-pbc-rational-transport] extends natural transformations and their inverses, with the same components on the integral objects. The two compositions are identities after rationalization because they were identities before it. This uses the completed-coefficient open comparison, rather than applying an ordinary étale inverse-image theorem directly to adic coefficients.",
+   "uses": [
+    "lem-cbc-completed-extension-zero-comparison",
+    "prop-weil-pbc-rational-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, lemma-shriek-base-change, through the cited completed extension-by-zero theorem and rational transport"
+   }
+  },
+  {
+   "text": "For $M\\in D^b_c(W,E)$, compute $Rp_{2,!}M=RP_*j_!M$ with the compactification of Step 2. The proper factor has its canonical $E$-coefficient exchange isomorphism by [thm-weil-pbc-finite-extension], applied to $P$, $v$ and $j_!M$. Compose it with $RP'_*$ of the rationalized open comparison from Step 3:\n$$\nLv^*RP_*j_!M\\xrightarrow{\\sim}RP'_*L\\bar a^*j_!M\\xrightarrow{\\sim}RP'_*j'_!La^*M.\n$$\nThe theorem [thm-cbc-complete-proetale] states exactly this ordered proper/open construction at the integral stage, including agreement with the canonical compactification comparisons. The rational statement [thm-cbc-finite-extension] identifies its rationalization as the specified natural exchange, independent of the integral representative. Consequently the displayed composite is the canonical comparison\n$$Lv^*Rp_{2,!}M\\xrightarrow{\\sim}Rp'_{2,!}La^*M.$$\nThe applicability of these compact-support statements also supplies the constructible domains of the two compactification composites. We have used their stated proper/open construction; we have not identified a rational sheaf category with a discrete-coefficient étale category.",
+   "uses": [
+    "thm-weil-pbc-finite-extension",
+    "thm-cbc-complete-proetale",
+    "thm-cbc-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-base-change/lem-fd-base-change.proof.md",
+    "place": "Opening compactification sentence and the displayed compact-support base-change identification, at the finite coefficient-field stage"
+   }
+  },
+  {
+   "text": "The kernel is $\\mathcal K_\\psi=b^*\\mathcal L_\\psi$ by [def-fd-kernel]. Hence Step 1 gives\n$$La^*\\mathcal K_\\psi\\cong La^*Lb^*\\mathcal L_\\psi\\cong L(b\\circ a)^*\\mathcal L_\\psi=L(b')^*\\mathcal L_\\psi=\\mathcal K'_\\psi.$$\nHere the pullbacks on a lisse coefficient sheaf are interpreted in the adic sense of [def-fourier-set]. The composition comparison is [lem-pod-integral-pullback-composition], applied to the integral coefficient objects and then rationalized by [prop-weil-pbc-rational-transport]. Equivalently, at every finite quotient it is ordinary composition of inverse images, and the cited composition theorem supplies the coherent integral comparison. Lisseness and rank one of the Artin–Schreier sheaf are supplied by [lem-fd-as-lisse]; they are not being used as a theorem about base change. Since its monodromy has finite image in $E^\\times$, its values are units in $\\mathcal O_E$, so this kernel has the corresponding rank-one integral lattice.",
+   "uses": [
+    "def-fd-kernel",
+    "def-fourier-set",
+    "lem-pod-integral-pullback-composition",
+    "prop-weil-pbc-rational-transport",
+    "lem-fd-as-lisse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-base-change/lem-fd-base-change.proof.md",
+    "place": "Kernel clause: the pairing base changes and its Artin–Schreier sheaf pulls back"
+   }
+  },
+  {
+   "text": "Apply the rational coefficient case of [lem-pur-derived-pullback-tensor-iso] with $f=a$, $M=Lp_1^*K$ and $N=\\mathcal K_\\psi$. It gives\n$$La^*(Lp_1^*K\\otimes_E^L\\mathcal K_\\psi)\\cong La^*Lp_1^*K\\otimes_E^LLa^*\\mathcal K_\\psi.$$\nUsing $p_1a=up'_1$ from Step 1, the composition isomorphisms [lem-pod-integral-pullback-composition] and their rational extensions [prop-weil-pbc-rational-transport] identify the first factor with $L(p'_1)^*Lu^*K$. Step 5 identifies the second with $\\mathcal K'_\\psi$. Thus the resulting isomorphism is\n$$La^*(Lp_1^*K\\otimes_E^L\\mathcal K_\\psi)\\cong L(p'_1)^*Lu^*K\\otimes_E^L\\mathcal K'_\\psi.$$\nAll objects belong to the rational constructible domains of the tensor comparison; in particular it is its $\\Lambda=E$ clause, not its finite-ring clause, that is applied. The comparisons are natural in $K$.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-pod-integral-pullback-composition",
+    "prop-weil-pbc-rational-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; composition Tag 0D6D, through the cited integral/rational comparisons"
+   }
+  },
+  {
+   "text": "Write $F=Lp_1^*K\\otimes_E^L\\mathcal K_\\psi$. The completed pullback commutes with every integer shift by [lem-cbc-completed-pullback-triangles], and this shift comparison rationalizes by [prop-weil-pbc-rational-transport]. Therefore Steps 4 and 6 give the chain\n$$\n\\begin{aligned}\nLv^*\\operatorname{FT}_{\\psi,V/S}(K)\n&=Lv^*(Rp_{2,!}F[r])\\\\\n&\\cong (Lv^*Rp_{2,!}F)[r]\\\\\n&\\cong Rp'_{2,!}La^*F[r]\\\\\n&\\cong Rp'_{2,!}\\bigl(L(p'_1)^*Lu^*K\\otimes_E^L\\mathcal K'_\\psi\\bigr)[r]\\\\\n&=\\operatorname{FT}_{\\psi,V'/S'}(Lu^*K).\n\\end{aligned}\n$$\nThe first and last equalities use exactly the integral-transform formula [def-fd-transform], with the adic operations specified in the statement. Invert this composite to obtain the displayed direction in the claim. Each factor is a specified natural isomorphism, so their composite and inverse are canonical and natural. The rank remains $r$ under base change, as is evident from the local trivializations in Step 1; no extra shift or twist occurs.",
+   "uses": [
+    "lem-cbc-completed-pullback-triangles",
+    "prop-weil-pbc-rational-transport",
+    "def-fd-transform"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-base-change/lem-fd-base-change.proof.md",
+    "place": "Final sentence: combine integrand and pushforward comparisons and commute the shift"
+   }
   }
  ],
  "proof_deps": [
-  "def-fd-transform",
-  "sbc-prop-extension-by-zero-and-arbitrary-base-change",
-  "thm-weil-pbc-qbar",
+  "def-fd-kernel",
+  "def-fourier-set",
+  "thm-nagata-compactification",
+  "def-cbc-compact-support-square",
+  "lem-cbc-compactification-geometry-fibre-bound",
+  "lem-cbc-completed-extension-zero-comparison",
+  "prop-weil-pbc-rational-transport",
+  "thm-weil-pbc-finite-extension",
+  "thm-cbc-complete-proetale",
+  "thm-cbc-finite-extension",
+  "lem-pod-integral-pullback-composition",
   "lem-fd-as-lisse",
-  "def-fd-kernel"
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-cbc-completed-pullback-triangles",
+  "def-fd-transform"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-base-change/lem-fd-base-change.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-base-change/lem-fd-base-change.proof.md",
+  "place": "Entire proof, expanded in seven steps with completed/rational coefficient interfaces replacing the untyped coefficient shortcuts"
  },
  "mathlib_searches": [
   {
@@ -46,10 +139,45 @@
    "query": "AlgebraicGeometry.Etale.fourierTransformBaseChangeIso",
    "results": [],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fourier Deligne transform of constructible adic sheaves commutes with arbitrary base change of schemes",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pushforward; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; SheafOfModules.conjugateEquiv_pullbackComp_inv; actual hits read: the results concern ordinary scheme-module pullback or analytic Fourier transforms, not the adic Fourier–Deligne base-change theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fourier Deligne transform of etale sheaves commutes with base change",
+   "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; FourierTransform.fourier; FourierTransform.fourierₗ; TemperedDistribution.fourierTransform_toTemperedDistributionCLM_eq; FourierTransform; FourierInvPair; FourierSMul; FourierTransform.fourierEquiv_apply; actual hits read: the results concern ordinary scheme-module pullback or analytic Fourier transforms, not the adic Fourier–Deligne base-change theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourier\", \"baseChange\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fourierTransform|fourier.*baseChange",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change isomorphism for compactly supported integral transforms with an Artin Schreier sheaf kernel on a vector bundle",
+   "results": "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackIso; SheafOfModules.freeFunctorCompPullbackIso; actual hits read: the results concern ordinary scheme-module pullback or analytic Fourier transforms, not the adic Fourier–Deligne base-change theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -91,5 +219,79 @@
   }
  },
  "chapter": "sec-fourier-transform",
- "unit": "sk-prop-base-change"
+ "unit": "sk-prop-base-change",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-fd-base-change",
+  "worker": "stage1",
+  "summary": "Seven-step split with no new nodes: distinguish the two induced pullbacks, construct the Cartesian Fourier square, factor compact-support exchange into proper/open comparisons in completed/rational coefficients, compute the kernel and integrand pullbacks, and commute the shift. Preserve the E-adic theorem rather than attaching the finite-ring upstream theorem. See report for the current blueprint coefficient mismatch.",
+  "blueprint": "Steps 1–4 realize the unit compactification/proper-open sentence and its displayed base-change comparison; Steps 5–6 realize the kernel and integrand clauses; Step 7 realizes the shift and final combination. The source’s g* shorthand is expanded to u* and v*.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Existence of a compactification of the separated finite-type projection; the unit explicitly chooses one and supplies no existence theorem."
+   },
+   {
+    "node": "lem-cbc-compactification-geometry-fibre-bound",
+    "why": "Noetherian, finite-dimensional geometry and uniform proper-fibre bound needed to check the proper base-change hypotheses."
+   },
+   {
+    "node": "lem-cbc-completed-extension-zero-comparison",
+    "why": "The completed-coefficient version of the open-factor base-change step explicitly prescribed by the unit."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Transport the actual integral comparisons and their inverses to the E-adic rationalized categories."
+   },
+   {
+    "node": "thm-weil-pbc-finite-extension",
+    "why": "Proper base change at the exact coefficient field E in the unit’s proper-factor step; Qlbar proper base change alone would not prove an E-coefficient isomorphism."
+   },
+   {
+    "node": "thm-cbc-complete-proetale",
+    "why": "Its statement fixes the ordered proper/open composite and compactification compatibility used in the unit’s first step."
+   },
+   {
+    "node": "thm-cbc-finite-extension",
+    "why": "Its statement supplies the rational natural compact-support exchange, its constructible domains and independence of the integral representative."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "Coherent composition of the actual completed integral pullbacks; used after rationalization in the kernel and first-projection identifications."
+   },
+   {
+    "node": "lem-fd-as-lisse",
+    "why": "Lisseness and rank one of the Artin–Schreier sheaf, as explicitly required in the unit kernel clause."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "The rational pullback/tensor isomorphism used in the unit’s integrand clause."
+   },
+   {
+    "node": "lem-cbc-completed-pullback-triangles",
+    "why": "The integer-shift comparison for completed pullback used in the final clause."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-nagata-compactification",
+  "lem-cbc-compactification-geometry-fibre-bound",
+  "lem-cbc-completed-extension-zero-comparison",
+  "prop-weil-pbc-rational-transport",
+  "thm-weil-pbc-finite-extension",
+  "thm-cbc-complete-proetale",
+  "thm-cbc-finite-extension",
+  "lem-pod-integral-pullback-composition",
+  "lem-fd-as-lisse",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-cbc-completed-pullback-triangles"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-d72e7395e",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-d72e7395e (reviewer sub-agent of L); spot-checked: I read the whole item and every node it cites, with the master and main-20261015 blueprint sources. Statement: the source writes g^*K for K in D^b_c(V,E), which is ill-typed. The fix makes the two induced pullbacks explicit as Lu^* and Lv^*; the hypotheses (separated finite-type k0-schemes, g arbitrary, rank r) and the canonical, natural conclusion with shift [r] are unchanged, so nothing is weakened. Coefficients are the adic D^b_c(-,E) of def-fourier-set, and the item never identifies them with the discrete-Λ category of the def-fd-transform/def-fd-kernel blueprint_updates. That two-reading risk is upstream, not this delivery's fault. Steps: 1 is elementary and correct (b'=b∘a, the cartesian square, p1a=up1'). 2: Nagata applies because V^∨ is qcqs; the geometry lemma, applied over Spec k0 and then to P and P', gives Noetherian finite-dimensional schemes with a uniform fibre bound; ℓ≠p. 3: the hypotheses of lem-cbc-completed-extension-zero-comparison hold (open square, j quasi-compact, derived-complete input), and rational transport extends the isomorphism and its inverse. 4: thm-cbc-complete-proetale gives the ordered proper/open composite, and thm-cbc-finite-extension alone already states the E-coefficient compact-support exchange for arbitrary g, so the proper-factor step is redundant but correct. 5: a^*b^*L≅b'^*L by integral pullback composition plus rationalization; the integral lattice exists because μ_p⊂O_E^×. 6: the Λ=E clause of lem-pur-derived-pullback-tensor-iso. 7: shift comparison and assembly are correct. Route: using the E-coefficient and completed tools instead of discrete 03S6 and Q̄ℓ base change is justified, and all 11 declared tool_uses are accepted. No new nodes and no duplicate found by grep. Edge cases checked: r=0, K=0, g=id, empty or non-flat g. Batch-5 check: I recomputed the closure of each listed citation. None reaches sec-trace-formula, the nt-assume-* leaves, the Poincaré duality theorem or any batch-4 target. The sec-poincare-duality nodes reached are general foundations in unit sk-lem-finite (finiteness), which the instructions allow: def-pod-ring-scalar-extension (definition), lem-pod-separated-finite-type-base-change (Mathlib-leaf scheme fact), lem-pod-adic-limit-finite-modules (commutative algebra), the lisse sheaf foundations, and lem-pod-integral-pullback-composition (coefficient foundation). None is a step of either assumed proof. Note for citers: thm-a1-fourier-t-exact and prop-a1-fourier-middle-extension apply the item to base change to k̄0, which is not finite type over k0. The proof itself only needs Noetherian finite-dimensional schemes. No fixes were made."
+ }
 }

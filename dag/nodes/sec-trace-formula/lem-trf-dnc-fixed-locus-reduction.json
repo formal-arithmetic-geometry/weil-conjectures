@@ -11,64 +11,183 @@
   "def-trf-fixed-scheme",
   "def-sbc-closed-immersion-ideal-sheaf",
   "def-sbc-ideal-sheaf-powers",
-  "lem-trf-dnc-functorial-geometry"
+  "lem-trf-dnc-functorial-geometry",
+  "def-weil-pbc-scheme-reduction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $W=c^{-1}(Z\\times Z)$. On an affine neighbourhood of $y_C$ its ideal is $J+K$, where $K=c_2^{\\cdot}I_Z\\mathcal O_C$. The stabilizing inclusion $K\\subseteq J$ makes this sum equal to $J$, so $W=c_1^{-1}(Z)=\\{y_C\\}$ scheme-theoretically; the equality is local on $C$ and both inverse images are empty away from this point. The fixed-square relation gives $c_1i_F=d=c_2i_F$. Since the hypothesis identifies $F$ with the reduced point $y_C$ and $c_2(y_C)=y_X$, $d$ factors through $Z$ and $d^{-1}Z=F$ scheme-theoretically.",
+   "uses": [
+    "def-trf-fixed-scheme",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Theorem 2.1.3(b), proof after Corollary 1.4.5; Lemma 1.4.3(d)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-dnc-functorial-geometry] to the two legs over the pair $(X,Z)$. Its support criterion applied to $c_2$ and the displayed power inclusion says that the special leg $b_2$ has image set-theoretically in the zero section. Since $c_1^{-1}(Z)=\\{y_C\\}$, the zero-section inverse-image clause for the first leg gives $b_1^{-1}(Z)=\\{y_C\\}$ scheme-theoretically. The preceding identification $W=\\{y_C\\}$ lets these be read as statements about the two legs of the special fibre of the correspondence deformation.",
+   "uses": [
+    "lem-trf-dnc-functorial-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 1.4.3(b),(d), Theorem 2.1.3(b) proof"
+   }
+  },
+  {
+   "text": "Apply the correspondence clause of [lem-trf-dnc-functorial-geometry] to obtain $\\widetilde c$ and the natural closed immersion $j:\\widetilde F_{d^{-1}Z}\\hookrightarrow T:=\\operatorname{Fix}(\\widetilde c)$. Step 1 gives $d^{-1}Z=F=y_C$. Its ideal inside $F$ is zero, so the displayed Rees formula is $\\mathcal O_{F_D}[0/t]=\\mathcal O_{F_D}$: the source is $(y_C)_D\\cong D$. The generic-fibre clause of that node identifies $j_\\eta$ with the identity of $F\\times_k\\eta$, proving that $j$ is an isomorphism on generic fibres.",
+   "uses": [
+    "lem-trf-dnc-functorial-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Corollary 1.4.5 and Theorem 2.1.3(b) proof after it"
+   }
+  },
+  {
+   "text": "On $T_s=\\operatorname{Fix}(\\widetilde c)_s$ the two special legs agree, by the fibre-product definition of the relative fixed scheme. At each point of $T_s$, Step 2 puts its $b_2$-image in the zero section, hence its equal $b_1$-image there as well. The equality $b_1^{-1}(Z)=\\{y_C\\}$ then forces $|T_s|\\subseteq\\{y_C\\}$. The closed immersion $j$ from Step 3 has this special point in its image, so the special fibre has exactly that support.",
+   "uses": [
+    "lem-trf-dnc-functorial-geometry",
+    "def-trf-fixed-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Theorem 2.1.3(b), final paragraph of the proof"
+   }
+  },
+  {
+   "text": "The ring $R=k[t]_{(t)}$ is Noetherian: every nonzero element is $t^a u$ with $u$ a unit, and an element of least such exponent in a nonzero ideal generates that ideal. Thus every ideal is finitely generated [def-weil-pbc-noetherian-ring]. Its only primes are $(0)$ and $(t)$, so $D$ is quasi-compact, and its single affine chart makes it locally Noetherian [pqf-def-locnoeth]. The Rees node makes $\\widetilde C_W$ separated and finite type over $D$. By [def-weil-finite-type-morphism] choose a finite affine cover with rings $B_i$ finitely generated over $R$. Since $\\widetilde X_Z/D$ is separated, its relative diagonal is closed [def-weil-proper-morphism], so its pullback $T\\hookrightarrow\\widetilde C_W$ is closed by [lem-weil-pbc-proper-fp-permanence](b). On that cover [def-weil-closed-immersion] expresses $T$ by the affine rings $B_i/L_i$. The images of the finite algebra generators of $B_i$ generate $B_i/L_i$ over $R$, so the finite-cover criterion of [def-weil-finite-type-morphism] makes $T$ finite type over $D$. Apply [lem-weil-pbc-finite-type-over-noetherian] to conclude that $T$ is Noetherian.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "pqf-def-locnoeth",
+    "lem-trf-dnc-functorial-geometry",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Theorem 2.1.3(b), final reduction comparison; affine Noetherian and reduction details expanded"
+   }
+  },
+  {
+   "text": "Every point of $T$ maps to either $\\eta$ or $s$, the two points of $D$. Step 3 shows that $j$ covers all points over $\\eta$, and Step 4 that it covers all points over $s$. Thus its image is all of $|T|$. Its source $D$ is reduced: $k[t]_{(t)}$ is a subring of the field $k(t)$, so its rings of local sections have no nonzero nilpotents [def-pc-reduced-scheme]. Apply [lem-weil-pbc-reduced-induced-closed-subscheme](3) to this reduced closed subscheme of $T$, with closed subset $|T|$. It identifies $j$ with the reduced induced closed subscheme on all of $|T|$, namely $T_{\\mathrm{red}}\\hookrightarrow T$ of [def-weil-pbc-scheme-reduction]. In particular $j$ induces an isomorphism on reductions. This uses surjectivity on points directly; it makes no inference from the number of irreducible components.",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Theorem 2.1.3(b), final reduction comparison; affine Noetherian and reduction details expanded"
+   }
+  },
+  {
+   "text": "By Step 6 the ideal of $j$ is the nilradical $\\mathcal N_T$ of [def-weil-pbc-scheme-reduction]. Step 5 verifies both hypotheses, quasi-compactness and local Noetherianity, of [lem-sc-reduction-nilradical-nilpotent]. Hence $\\mathcal N_T^{m+1}=0$ for some $m\\geq0$. Thus the closed immersion $(y_C)_D\\hookrightarrow T$ is a nilpotent thickening in the power-of-ideal sense [def-sbc-ideal-sheaf-powers], proving the final assertion.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction",
+    "lem-sc-reduction-nilradical-nilpotent",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Theorem 2.1.3(b), final reduction comparison; affine Noetherian and reduction details expanded"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-trf-fixed-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-proper-morphism",
+  "lem-sc-reduction-nilradical-nilpotent",
+  "lem-trf-dnc-functorial-geometry",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Theorem 2.1.3(b), proof after Corollary 1.4.5"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "The reduced fixed locus of the deformation to the normal cone of a contracting correspondence is the constant isolated fixed point.",
-   "results": "ContractingWith fixed-point lemmas in Mathlib.Topology.MetricSpace.Contracting; no scheme fixed-locus result.",
+   "query": "reduced fixed locus of a contracting deformation to the normal cone",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.specTargetImage, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.specTargetImageIdeal, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjCarrierIso",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "no match: these declarations do not state the contracting-correspondence Rees fixed-scheme theorem"
   },
   {
    "tool": "loogle",
-   "query": "Scheme.IsReduced, Scheme.Hom.closedImmersion, IsClosed",
-   "results": "0 hits; unknown identifier Scheme.IsReduced.",
+   "query": "AlgebraicGeometry.IsClosedImmersion, Scheme.Fiber, Ideal.pow",
+   "results": "0 hits: . loogle: unknown identifier 'Scheme.Fiber'",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "no match: these declarations do not state the contracting-correspondence Rees fixed-scheme theorem"
   },
   {
    "tool": "grep",
    "query": "fixed.*locus|normal.*cone|reduction|nilpotent",
-   "results": "Mathlib AlgebraicGeometry Properties and Cover/Open nilpotence lemmas, but no deformation fixed-locus theorem.",
+   "results": "24 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "no match: these declarations do not state the contracting-correspondence Rees fixed-scheme theorem"
   },
   {
    "tool": "leansearch",
-   "query": "The reduced fixed locus of a deformation to the normal cone is the constant fixed point for a contracting correspondence.",
-   "results": "ContractingWith fixed-point lemmas and ordinary linear traces; no scheme deformation theorem.",
+   "query": "reduced fixed locus of a contracting deformation to the normal cone",
+   "results": "8 hits: ContractingWith.isFixedPt_fixedPoint_iterate, ContractingWith.exists_fixedPoint', ContractingWith.fixedPoint_isFixedPt, ContractingWith.efixedPoint_isFixedPt', ContractingWith.efixedPoint, ContractingWith.fixedPoint_unique', ContractingWith.fixedPoint, ContractingWith.dist_le_of_fixedPoint",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "no match: these declarations do not state the contracting-correspondence Rees fixed-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "deformationToNormalCone|normalCone|fixedLocus|fixedScheme",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: these declarations do not state the contracting-correspondence Rees fixed-scheme theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a Rees deformation of a correspondence contracting toward an isolated fixed point, its fixed scheme is a nilpotent thickening of the constant fixed point.",
+   "results": "8 hits: instIsNoetherianRingSubtypePolynomialMemSubalgebraReesAlgebra, MvPowerSeries.LinearTopology.isTopologicallyNilpotent_of_constantCoeff, MvPowerSeries.WithPiTopology.isTopologicallyNilpotent_of_constantCoeff_isNilpotent, AlgebraicGeometry.Scheme.nilradical, AlgebraicGeometry.Scheme.mk.noConfusion, PowerSeries.WithPiTopology.isTopologicallyNilpotent_iff_constantCoeff_isNilpotent, PowerSeries.WithPiTopology.isTopologicallyNilpotent_of_constantCoeff_isNilpotent, MvPowerSeries.WithPiTopology.isTopologicallyNilpotent_iff_constantCoeff_isNilpotent",
+   "date": "2026-10-17",
+   "verdict": "no match: these declarations do not state the contracting-correspondence Rees fixed-scheme theorem"
   },
   {
    "tool": "loogle",
    "query": "AlgebraicGeometry.IsReduced, AlgebraicGeometry.IsClosedImmersion",
    "results": "1 hits: AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective",
    "date": "2026-10-17",
-   "verdict": "no match: generic reduction and closed-immersion results do not identify the fixed scheme of a Rees correspondence"
+   "verdict": "no match: these declarations do not state the contracting-correspondence Rees fixed-scheme theorem"
   },
   {
    "tool": "leanfinder",
-   "query": "For a Rees deformation of a scheme correspondence stabilizing a closed point, contraction of the ordinary leg forces the equalizer on the normal cone to be supported at that point.",
-   "results": "8 hits: AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.ker_toNormalization, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.Hom.liftQuotient",
+   "query": "For a Rees deformation of a correspondence contracting toward an isolated fixed point, its fixed scheme is a nilpotent thickening of the constant fixed point.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover, AlgebraicGeometry.Scheme.nilradical, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, AlgebraicGeometry.Scheme.nilradical_eq_bot, PrimeSpectrum.mem_image_comap_zeroLocus_sdiff, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, Algebra.FormallyUnramified.ext_of_iInf, AlgebraicGeometry.Scheme.Hom.liftQuotient",
    "date": "2026-10-17",
-   "verdict": "no match: generic reduction and closed-immersion results do not identify the fixed scheme of a Rees correspondence"
-  },
-  {
-   "tool": "grep",
-   "query": "isIso_of_isClosedImmersion_of_surjective",
-   "results": "2 hits: Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
-   "date": "2026-10-17",
-   "verdict": "no match: generic reduction and closed-immersion results do not identify the fixed scheme of a Rees correspondence"
+   "verdict": "no match: these declarations do not state the contracting-correspondence Rees fixed-scheme theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-term-locality",
@@ -85,5 +204,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-dnc-fixed-locus-reduction",
+  "worker": "stage1",
+  "summary": "Split the Rees fixed-scheme argument into seven steps using existing nodes only. Retained the imported statement, including that F is the reduced point. Replaced an invalid irreducible-component argument with surjectivity on both fibres and uniqueness of reduced induced closed subschemes; verified Noetherianity and cited uniform nilradical nilpotence for the final thickening clause. Reconciled the Mathlib search record with the durable executed-query log.",
+  "blueprint": "Realizes the current main-20261015 lem-trf-local-term-locality proof paragraph (2), specifically the Rees specialization and the assertion after Corollary 1.4.5 that the fixed-scheme deformation is generically an isomorphism and an isomorphism on reductions.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-reduction-nilradical-nilpotent",
+    "why": "Generic Noetherian-scheme nilradical nilpotence turns the reduction comparison into a uniformly nilpotent thickening; the trace-formula unit supplies no separate nilpotence lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-reduction-nilradical-nilpotent"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-1c19633aa",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-1c19633aa (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full, every cited statement, and Varshavsky math/0505564 at Lemma 1.4.3(a)-(e), 1.4.4, Cor 1.4.5, Def 2.1.1, Rem 2.1.2 and the full proof of Thm 2.1.3(a),(b). After the leg swap (his c_1 contracts; ours is c_2), the hypotheses are exactly his with Z={y_X}. The added hypothesis that F is the reduced point is supplied by the parent's Step 1, so this is not a weakening. Step 1: the ideal of c^{-1}(ZxZ) is J+K=J, and d factors through Z because F is reduced. Step 2: the Rees node, with f=c_2 for the power-inclusion support criterion and f=c_1 for the zero-section inverse-image clause, both with Z'=W; the legs are identified by uniqueness of lifts. Step 3: the zero ideal gives F_D=D, and the node's generic-fibre clause gives the isomorphism there. Step 4: the special legs agree on Fix(c~)_s, so its support is {y_C}. Step 5: R is a DVR; T is closed in C~_W by base change of the relative diagonal, so it is of finite type and Noetherian. Step 6: j is surjective and its source is reduced, so by uniqueness of the reduced induced structure (clause 3) j is T_red. Step 7: the nilradical is nilpotent. Small cases checked: c_2=0 and c_2=x^2 on A^1 (u(1-tu)=0 with 1-tu a unit) and the point. There are no new nodes and no duplicates (rg search), no cycle, no SGA citation. Accepted tool_use: lem-sc-reduction-nilradical-nilpotent, a generic black box. No fixes."
  }
 }

@@ -1,0 +1,83 @@
+{
+ "id": "lem-trf-point-transport-composition",
+ "kind": "statement",
+ "title": "Composition of finite-level point transports",
+ "statement": "Fix a prime $p$, an integer $a\\geq1$, $q=p^a$, the field $k_0=\\mathbf F_q$, and its fixed algebraic closure $k$, the datum of [def-weil-finite-field-fiber]. Fix a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ inside the chosen algebraic closure of $\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$, a uniformizer $\\varpi_E$, and $n\\geq1$. Put $A=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension], $s=\\operatorname{Spec}k$, and $h=\\operatorname{Spec}(\\gamma):s\\to s$, where $\\gamma=(z\\mapsto z^q)^{-1}$ is geometric Frobenius [def-weil-frobenius-detailed]. On the small pro-etale site of $s$ [def-weil-pbc-proetale-site] use the constant ring sheaf $A_s$ [def-weil-pbc-constant-sheaf], the category $D^b_c(s,A)$ [def-weil-finite-torsion-constructibility], and the point fiber functor $V=\\operatorname{Fib}_s$ [def-weil-finite-coefficient-point].\n\nFor each $r\\geq1$ put $Q_r=L(h^r)^*$, the finite-coefficient derived pullback of [def-weil-derived-pullback-tensor-hom]. For $N\\in D^b_c(s,A)$ define $\\iota_N^{(r)}:V(N)\\to V(Q_rN)$ by the finite-level recipe of [def-weil-frobenius-point-transport] with $h$ replaced by $h^r$: restriction along $h^r$, followed by the specified inverse-image colimit insertion and sheafification, then the comparison induced by $x\\mapsto x\\otimes1$. For $m\\geq1$ let $t_m:Q_1Q_m\\xrightarrow{\\sim}Q_{m+1}$ be the inverse of the canonical composition isomorphism of [lem-weil-pbc-proetale-derived-pullback-composition]. Then for every $m\\geq1$ and $N\\in D^b_c(s,A)$,\n$$\n\\iota_N^{(m+1)}=V(t_{m,N})\\circ\\iota_{Q_mN}^{(1)}\\circ\\iota_N^{(m)}.\n$$\nMoreover, for every $r\\geq1$ and every derived morphism $u:N\\to N'$ in $D^b_c(s,A)$,\n$$\nV(Q_ru)\\circ\\iota_N^{(r)}=\\iota_{N'}^{(r)}\\circ V(u).\n$$",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7), printed pp. 150-151, transport of structure on the geometric point. The finite derived composition and naturality are the auxiliary refinement of the explicit DAG point-transport recipe needed for the m-th-iterate clause of blueprint lem-trf-frobenius-operator-compact-description; the argument is recorded in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-frobenius-detailed",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-coefficient-point",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-frobenius-point-transport",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Composition of finite coefficient point transport maps along powers of an automorphism using restriction colimit insertion and tensor unit",
+   "results": "8 hits: TensorPower.cast_trans, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀', AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand', AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand, AdicCompletion.transitionMap_comp_eval, MvPolynomial.universalFactorizationMap_comp_map, AlgebraicGeometry.AffineSpace.reindex",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are generic reindexing, underived pullback comparisons, or functoriality; none states the specified finite derived point-fiber insertion and its composition law"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "5 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are generic reindexing, underived pullback comparisons, or functoriality; none states the specified finite derived point-fiber insertion and its composition law"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|sheafSections|map_comp",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean, Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean, Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean, Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; grep directory Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are generic reindexing, underived pullback comparisons, or functoriality; none states the specified finite derived point-fiber insertion and its composition law"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Successive inverse image restriction and tensor unit insertions compose to the insertion for the composite automorphism",
+   "results": "8 hits: CategoryTheory.Limits.image.compIso_inv_comp_image_ι_assoc, CategoryTheory.ChosenPullbacksAlong.pullbackComp, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict_assoc, ContAction.resComp, CategoryTheory.MonoidalCategory.tensor_inv_hom_id', CategoryTheory.Limits.image.compIso_inv_comp_image_ι, CategoryTheory.FreeMonoidalCategory.HomEquiv.ρ_inv_hom, Action.resComp",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are generic reindexing, underived pullback comparisons, or functoriality; none states the specified finite derived point-fiber insertion and its composition law"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of change of geometric point on derived global sections under successive field automorphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.residueFieldMap_comp, AlgebraicGeometry.Scheme.Hom.comp_appTop, AlgebraicGeometry.Scheme.comp_appTop, AlgebraicGeometry.Scheme.comp_appTop_assoc, AlgebraicGeometry.Scheme.Hom.comp_appTop_assoc, AlgebraicGeometry.AffineSpace.map_comp, AlgebraicGeometry.Scheme.comp_app_assoc, AlgebraicGeometry.Scheme.Hom.comp_app_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are generic reindexing, underived pullback comparisons, or functoriality; none states the specified finite derived point-fiber insertion and its composition law"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-compact-frobenius-transport-composition",
+  "date": "2026-10-17",
+  "group": "Q03"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-frobenius-operator-compact-description",
+   "place": "Proof paragraph: 'transports the pair ... along the compact-support base-change identification' for the m-th iterate; compatibility of its point-fiber insertion with successive powers, isolated from the compact-support exchange.",
+   "via": [
+    "lem-trf-compact-frobenius-transport-composition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

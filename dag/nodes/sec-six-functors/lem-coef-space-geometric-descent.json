@@ -174,19 +174,57 @@
    }
   },
   {
-   "text": "Let $\\Delta_\\infty$ have all finite ordinals $J$, including $\\varnothing$, and maps $J\\sqcup\\{\\infty\\}\\to J'\\sqcup\\{\\infty\\}$ fixing the new greatest element. Define $F:N(\\Delta_\\infty)^{\\mathrm{op}}\\to\\mathcal S$ by $F(J)=G(J\\sqcup\\{\\infty\\})$. Its restriction along $i^{\\mathrm{op}}:\\Delta^{\\mathrm{op}}\\to\\Delta_\\infty^{\\mathrm{op}}$, where $i$ includes the NONEMPTY ordinals and extends maps to fix $\\infty$, is $H_\\bullet$. There is an ordinary adjunction $i\\dashv U$ with $U(J)=J\\sqcup\\{\\infty\\}$: restriction to the ordinary elements gives the natural bijection $\\operatorname{Hom}_{\\Delta_\\infty}(iA,J)=\\operatorname{Hom}_\\Delta(A,UJ)$. On a morphism, $U$ is its underlying monotone map between the nonempty extended ordinals; thus the bijection respects composition. Taking opposites gives $U^{\\mathrm{op}}\\dashv i^{\\mathrm{op}}$. Since $\\varnothing$ is initial in $\\Delta_\\infty$, it is final in the opposite, so [lem-coef-infinity-final-index-colimit] gives a colimit cocone on $F$ with vertex $F(\\varnothing)=G_0$. Its edges are restriction to the last vertex. By [lem-coef-infinity-right-adjoint-reindexing], restricting this cocone along the right adjoint $i^{\\mathrm{op}}$ gives a colimit cocone on $H_\\bullet$, with the same vertex $G_0$. Write $B=|G_\\bullet|$. To specify the augmented transformation, extend $G_\\bullet$ by its realization cocone to $\\overline G:N(\\Delta_+)^{\\mathrm{op}}\\to\\mathcal S$, with $\\overline G(\\varnothing)=B$. On finite ordinals, the natural inclusions $J\\hookrightarrow J\\sqcup\\{\\infty\\}$ give, after applying $\\overline G$ contravariantly, a coherent transformation $\\overline G(J\\sqcup\\{\\infty\\})\\to\\overline G(J)$. Its nonempty restriction is $\\alpha$, its component at the empty ordinal is the original $G_0\\to B$, and its source augmentation is restriction to the last vertex. Naturality of the inclusions supplies all the compatibility homotopies used here. Step 11 gives cartesianness on the unaugmented diagrams. Applying step 10 therefore gives the canonical $G_{n+1}\\simeq G_n\\times_B G_0$ and the induction on the number of factors.",
+   "text": "Choose the realization augmentation $\\overline G:N(\\Delta_+)^{\\mathrm{op}}\\to\\mathcal S$ with apex $B=|G_\\bullet|$, as constructed in steps 2–7. Apply [lem-coef-right-decalage-index-calculus]. Set $F=GN(U^{\\mathrm{op}}):N(D)^{\\mathrm{op}}\\to\\mathcal S$; restriction along $N(i^{\\mathrm{op}})$ is $H_\\bullet$. The node gives $i\\dashv U$, hence $U^{\\mathrm{op}}\\dashv i^{\\mathrm{op}}$, and makes $\\varnothing$ final in $D^{\\mathrm{op}}$. Apply [lem-coef-right-decalage-augmentation-prism] to $\\overline G$: it specifies the cocone $a:F\\to\\operatorname{const}_{G_0}$ by last-vertex restriction, with $a_{\\varnothing}=1_{G_0}$. These categories are small: their objects are indexed by nonnegative cardinalities, and their arrows are maps of finite sets.",
+   "uses": [
+    "lem-coef-right-decalage-index-calculus",
+    "lem-coef-right-decalage-augmentation-prism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemmas 6.1.3.16–17 and Proposition 6.1.3.19; direct ordinal-index proof with the specified cocone checked by its mapping-space universal property."
+   }
+  },
+  {
+   "text": "We verify that this particular cocone $a$, rather than an unspecified cocone with the same apex, is colimiting. By [lem-coef-infinity-final-index-colimit] choose a colimiting cocone $b$ on $F$ with apex $G_0$ and $b_{\\varnothing}=1_{G_0}$. For each space $T$ let $V(T)=\\operatorname{Map}_{\\operatorname{Fun}(N(D)^{\\mathrm{op}},\\mathcal S)}(F,\\operatorname{const}_T)$ and let $e:V(T)\\to\\operatorname{Map}(G_0,T)$ be evaluation at $\\varnothing$. The dual criterion of [lem-cbc-enhanced-functor-cone-calculus] says that composition $c_b:\\operatorname{Map}(G_0,T)\\to V(T)$ is an equivalence. Its composite $ec_b$ is homotopic to the identity because $b_{\\varnothing}=1$, so $e$ is an equivalence. Likewise $ec_a\\simeq1$ because $a_{\\varnothing}=1$, so $c_a$ is an equivalence by two-out-of-three. The same cocone criterion makes $a$ colimiting.",
    "uses": [
     "lem-coef-infinity-final-index-colimit",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemmas 6.1.3.16–17 and Proposition 6.1.3.19; direct ordinal-index proof with the specified cocone checked by its mapping-space universal property."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-right-adjoint-reindexing] to $L=U^{\\mathrm{op}}$, $R=i^{\\mathrm{op}}$ and the colimiting cocone $a$ of step 13. Step 12 checks precisely its ordinary adjunction and smallness hypotheses. The restricted cocone on $H_\\bullet$ is colimiting with the same vertex $G_0$. Its legs are last-vertex restrictions, since restriction keeps the complete prism $a$ of step 12.",
+   "uses": [
     "lem-coef-infinity-right-adjoint-reindexing"
    ],
    "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-    "place": "HTT Lemmas 6.1.3.16–17: split right shift and its ordinary reindexing adjunction."
+    "place": "HTT Lemmas 6.1.3.16–17 and Proposition 6.1.3.19; direct ordinal-index proof with the specified cocone checked by its mapping-space universal property."
    }
   },
   {
-   "text": "Let $\\overline G:N(\\Delta_+)^{\\mathrm{op}}\\to\\mathcal S$ be the single augmented diagram from step 12, with $\\overline G(\\varnothing)=B$. Its canonical square $G_{n+1}\\to G_n$ over $G_0\\to B$ is cartesian by that step; its maps are restriction to the first $n+1$ vertices and to the last vertex. Apply [lem-coef-augmented-vertex-cone-recognition]. For a cospan $B_1\\to D\\leftarrow B_2$ of Kan complexes, [lem-coef-space-path-fibration-replacement] makes the endpoint map $E_{B_1\\to D}\\to D$ a Kan fibration. Its pullback over $B_2$ is Kan, by lifting a horn first in $B_2$ and then through that fibration. The universal path cone on this pullback has identity comparison, so [lem-coef-kan-nerve-pullback-recognition] makes it limiting. Thus pullbacks in $\\mathcal S$ exist; the vertex-recognition statement gives, inductively from $G_0$, a limiting cone with apex $G_n$ on the $n+1$ augmentation arrows $G_0\\to B$. Its comparison is the canonical vertex map, not an independently chosen equivalence to an iterated pullback. The same statement identifies this condition with the Cech right Kan extension and records its simplicial naturality. Concretely $\\theta:[m]\\to[n]$ sends the vertex $k$ to $\\theta(k)$; under the canonical comparisons its map therefore selects the corresponding coordinates, including repetitions and omissions. All higher compatibilities are those of $\\overline G$ and the cited cone statement. This proves effectiveness, including $G_1\\simeq G_0\\times_BG_0$. Component surjectivity of $G_0\\to B$ is step 8.",
+   "text": "Write $B=|G_\\bullet|$ and retain the given realization augmentation $\\overline G:N(\\Delta_+)^{\\mathrm{op}}\\to\\mathcal S$, with $\\overline G(\\varnothing)=B$. By [lem-coef-right-decalage-augmentation-prism], the original-element inclusion prism gives a single augmented transformation $FN(j^{\\mathrm{op}})\\to\\overline G$. Its nonempty restriction is $\\alpha$ of step 11, its empty component is the original $G_0\\to B$, and its source augmentation is exactly the last-vertex cocone proved colimiting in step 14. Thus both columns are realization diagrams, and step 11 checks every unaugmented naturality square. Step 10 gives this conclusion for the augmented transformation $c'$ obtained by transporting the bar cocones of steps 6–7 along the step-2 equivalences; $c'$ extends $\\alpha$ itself and both its columns are colimit diagrams. Transpose either extension to a join cone $N(\\Delta^{\\mathrm{op}})^{\\triangleright}\\to\\operatorname{Fun}(\\Delta^1,\\mathcal S)$ on $\\alpha$. Since its columns are colimit diagrams, the second clause of [lem-coef-infinity-relative-cocone-parameters], for $\\mathcal S\\to *$ and parameter $\\Delta^1$, makes it a colimit diagram. Under the fixed-boundary comparison of [lem-coef-infinity-join-cone-calculus], dualized by reversing simplices as in step 5, both are initial in the cocone category of $\\alpha$, so by [lem-cbc-enhanced-functor-cone-calculus] they are joined by an equivalence there, hence by an equivalence of whole diagrams $N(\\Delta_+)^{\\mathrm{op}}\\times\\Delta^1\\to\\mathcal S$ restricting to the identity on $\\alpha$. Restricted to the square indexed by $\\varnothing\\to[n]$ it is an equivalence of coherent squares, so the invariance clause of [lem-coef-kan-nerve-pullback-recognition] makes the canonical square $G_{n+1}\\to G_n$ over $G_0\\to B$ of the given transformation cartesian for every $n\\geq0$. Its maps and homotopies are the stated restriction prisms.",
+   "uses": [
+    "lem-coef-right-decalage-augmentation-prism",
+    "lem-coef-infinity-relative-cocone-parameters",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-kan-nerve-pullback-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemmas 6.1.3.16–17 and Proposition 6.1.3.19; direct ordinal-index proof with the specified cocone checked by its mapping-space universal property."
+   }
+  },
+  {
+   "text": "Let $\\overline G:N(\\Delta_+)^{\\mathrm{op}}\\to\\mathcal S$ be the single augmented diagram from step 15, with $\\overline G(\\varnothing)=B$. Its canonical square $G_{n+1}\\to G_n$ over $G_0\\to B$ is cartesian by that step; its maps are restriction to the first $n+1$ vertices and to the last vertex. Apply [lem-coef-augmented-vertex-cone-recognition]. For a cospan $B_1\\to D\\leftarrow B_2$ of Kan complexes, [lem-coef-space-path-fibration-replacement] makes the endpoint map $E_{B_1\\to D}\\to D$ a Kan fibration. Its pullback over $B_2$ is Kan, by lifting a horn first in $B_2$ and then through that fibration. The universal path cone on this pullback has identity comparison, so [lem-coef-kan-nerve-pullback-recognition] makes it limiting. Thus pullbacks in $\\mathcal S$ exist; the vertex-recognition statement gives, inductively from $G_0$, a limiting cone with apex $G_n$ on the $n+1$ augmentation arrows $G_0\\to B$. Its comparison is the canonical vertex map, not an independently chosen equivalence to an iterated pullback. The same statement identifies this condition with the Cech right Kan extension and records its simplicial naturality. Concretely $\\theta:[m]\\to[n]$ sends the vertex $k$ to $\\theta(k)$; under the canonical comparisons its map therefore selects the corresponding coordinates, including repetitions and omissions. All higher compatibilities are those of $\\overline G$ and the cited cone statement. This proves effectiveness, including $G_1\\simeq G_0\\times_BG_0$. Component surjectivity of $G_0\\to B$ is step 8.",
    "uses": [
     "lem-coef-augmented-vertex-cone-recognition",
     "lem-coef-kan-nerve-pullback-recognition",
@@ -229,12 +267,15 @@
   "lem-coef-free-bar-cell-filtration",
   "lem-coef-infinity-final-index-colimit",
   "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-join-cone-calculus",
   "lem-coef-infinity-relative-cocone-parameters",
   "lem-coef-infinity-right-adjoint-reindexing",
   "lem-coef-join-cone-weight-cofibrancy",
   "lem-coef-kan-nerve-pullback-recognition",
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-pinched-cube-latching",
+  "lem-coef-right-decalage-augmentation-prism",
+  "lem-coef-right-decalage-index-calculus",
   "lem-coef-simplicial-presheaf-projective-model",
   "lem-coef-simplicial-projective-model-calculus",
   "lem-coef-space-path-fibration-replacement",
@@ -355,7 +396,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-completion",
@@ -452,7 +493,7 @@
   "date": "2026-10-17",
   "item": "lem-coef-space-geometric-descent",
   "worker": "stage1",
-  "summary": "Repair of the returned independent split. Statement and Lean interface unchanged. Four new statement-only lower inputs: coend invariance/cells, free-bar filtration and contraction data, Kan-nerve pullback recognition with coherent invariance, augmented vertex-star/Cech recognition. Original join-weight input retained. Reuse existing equifibered-diagonal and relative-cocone-parameters rather than duplicate Puppe or pointwise-product results. Fourteen steps; converse pullback pasting explicit, both groupoid steps non-elementary, corrected provenance and stale report claims. Both dependency types checked against Q60 routes.",
+  "summary": "Repairs the 2026-10-17 long-step return. Statement, statement dependencies, source, Lean interface and steps 1–11 retained. Former step 12 is replaced by four short steps citing separate statement-only inputs for the ordinal indexing adjunction and the coherent augmentation prisms, checking the specified final-object cocone by evaluation and two-out-of-three, reindexing along the right adjoint, and applying the independently proved cartesian realization theorem. Former steps 13–14 are retained, with the effectiveness reference renumbered. The statement/proof closure has been checked against the current supported Q60 repair, without the excluded classification/descent closure.",
   "blueprint": "The supporting geometric-descent input below prop-coef-integral-exceptional-adjoint, proof paragraph 2, in the enriched completion/localization chain. No chapter or unit step is replaced. The free node-level proof is rebuilt after Q60 invalidated its circular prerequisite proof.",
   "tool_uses": [
    {
@@ -482,9 +523,9 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q55-499de385f",
-  "group": "Q55",
+  "reviewer": "NT-cc-N0-6ebd8babf",
+  "group": "N0",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-499de385f (reviewer sub-agent of L); spot-checked: Read the item, all five new nodes, every cited statement (26 proof deps and 4 statement deps), the unit sk-prop-sf-biduality-general and the blueprint ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2. HTT, Riehl–Verity and Rezk are not in literature/; the delivery marks them WANTED and sets proof_origin to agent, which is correct. Statement, stmt_deps, source and lean are identical to the side tree, so no target is weakened. A traversal of statement deps, proof deps and step uses reaches 236 nodes with no cycle back to the item and none of the Q60-excluded straightening, localization or descent nodes. proof_deps equals the union of the step uses, and no SGA source is cited. I checked steps 1-14 by hand. Highlights: min(x,s) commutes with max, so the C[N(I)]->I contraction is well defined. Reversing the outer order turns the terminal extra-degeneracies into exactly the identities of extra-degeneracy-contraction. On constant K the [0]-leg is a natural endomorphism that fixes vertices, hence the identity. The groupoid covers [m+1]=[m]u{i,m+1} and [n+1] each meet in one vertex, and the converse of pasting is used correctly. i -| U for the right shift holds, so U^op -| i^op and right-adjoint-reindexing applies. The vertex-star comma category is (j|[n])^op = V_n. The fiber transport uses right properness along {e}->Delta^1. The long step 12 (2090 characters) is one fully cited argument: the right-shift colimit is a three-line adjunction plus two cited nodes, so it may stay. All five new nodes are true, checked on small cases (join weights for K empty, a point and Delta^1; coend cells and pushouts; Reedy attaching maps of the free bar; the loop-space test for pullback recognition; n=0 for vertex stars). None is a duplicate: the existing bar-resolution, model-coherent and diagonal-space-colimit nodes all depend on the item through their proofs, and the terminal-pullback and Kan-pullback nodes do not state recognition in N_hc(Kan) both ways with whole-square invariance. I accept the four declared sk-prop-sf-cbc tool uses: kan-whitehead-inverse, enhanced-functor-cone-calculus, kan-mapping-homotopy-invariance and simplicial-homotopy-equivalence-weak. No fixes were made. One immaterial point: the unchanged source.place still mentions sandbox reading copies."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-6ebd8babf (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement (28 proof deps, 4 stmt deps, plus infinity-join-cone-calculus), and the unit and chapter. HTT is not archived in literature/, so the cited places 6.1.3.16-19 could not be opened; the item's proof_origin is agent with WANTED lines, and I checked the new mathematics directly. Compared with the side-project copy, the statement, stmt_deps, source and lean are byte-identical, and steps 1-11 and old steps 13-14 (now 16-17) are unchanged. Old step 12 (2090 characters) becomes steps 12-15. New node index-calculus is true: a map iA->J in D is a monotone map A->UJ extended by infinity, so i is left adjoint to U, and the empty ordinal is initial; counts match for A=[0],J=empty (1=1) and A=[1],J=[0] (3=3). It is kept as a node because it defines D, i, j and U. New node augmentation-prism is true: eta and lambda are natural, a at the empty ordinal is the identity, the eta prism goes from F N(j^op) to the augmented diagram, and its restrictions are first-vertices restriction and the augmentation; the source augmentation equals the restricted cocone a already at the level of ordinary functors. Neither node is a duplicate or a relabelled clause of the item; searches and blueprint fields are complete. Step 13 correctly checks the specified cocone through final-index-colimit, the dual cone criterion and two-out-of-three. Step 14 applies right-adjoint-reindexing with L=U^op, R=i^op, and the directions check. FIX in step 15: step 10 proves the cartesian square only for the bar-cocone realization of steps 6-7, but step 15 applied it to the last-vertex cocone without comparing the two (the old step 12 had the same gap). I added the transport: relative-cocone-parameters makes both extensions of alpha colimit diagrams in Fun(Delta^1,S); infinity-join-cone-calculus and enhanced-functor-cone-calculus (initial objects form a contractible space) make them equivalent as whole diagrams; the invariance clause of kan-nerve-pullback-recognition transports cartesianness. proof_deps regenerated (adds infinity-join-cone-calculus). Closure has 407 nodes, no missing ids, no cycle, none of the Q60-excluded nodes and no SGA; longest step is 1990 characters. The four declared sk-prop-sf-cbc tool uses are accepted.; 1 file(s) fixed by the reviewer"
  }
 }

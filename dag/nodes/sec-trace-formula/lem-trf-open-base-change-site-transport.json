@@ -1,11 +1,134 @@
 {
  "id": "lem-trf-open-base-change-site-transport",
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All inverse images and open extensions used below are exact constant-$\\Lambda$ module functors. For the etale inverse images use exactness on abelian sheaves: kernels and cokernels of constant-$\\Lambda$ module maps have their underlying abelian kernels and cokernels, with the induced scalar action, so the same assertion holds for modules. Pro-etale module inverse image is exact by the constant-coefficient exactness theorem. The comparison $C_T$ is the exact module inverse image specified in the pro-etale module definition. Etale extension by zero is exact, and pro-etale extension by zero is exact and acts degreewise. The two open-adjunction pairs are $j_{e,!}\\dashv j_e^*$ and $j_{p,!}\\dashv j_p^*$, and likewise for $j'$. Here and below all pro-etale module pullbacks use the canonical constant-ring identifications of the cited exactness theorem.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-exact",
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-weil-pbc-proetale-modules",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-cbc-proetale-extension-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AE, definition-extension-zero (3); sites-modules.tex Tags 03DI/03DJ, lemma-extension-by-zero and lemma-extension-by-zero-exact"
+   }
+  },
+  {
+   "text": "Use the termwise derived functors of these exact functors. The exact-functor factorization theorem says that they preserve quasi-isomorphisms and compute the derived functors on every complex. A natural transformation on sheaves gives a chain map on each complex: its naturality at $d^n$ is precisely the chain-map equation in degree $n$. The localization universal property descends these transformations, preserving composition, inverses, and equalities. In particular the open units and counits descend. Their two triangle equations hold degreewise on complexes, hence after localization; thus they give the canonical derived open adjunctions. Every sheaf-level equation used below therefore holds on derived categories with these specified maps. Exact functors preserve cohomological lower bounds by the bounded-below theorem, so all functors in this argument restrict to the $D^+$ categories in the statement.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; descent of units and counits with their triangle equations"
+   }
+  },
+  {
+   "text": "Write $J_e=j_{e,!}$, $I_e=j_e^*$, $J_p=j_{p,!}$, $I_p=j_p^*$, and use primes for $j'$. Write $u_e:1\\to I_eJ_e$, $u_p:1\\to I_pJ_p$ for the open units. The open-comparison unit theorem gives\n$$I_p(e_{j,M})\\circ a_{j,J_eM}\\circ C_U(u_{e,M})=u_{p,C_UM}.$$\nIt applies to the same finite ring and the same specified $a_j,e_j$, and Step 2 descends its sheaf equation. Multiplying by $I_p(e_{j,M}^{-1})$ shows that the $J_p\\dashv I_p$ transpose of $e_{j,M}^{-1}$ is $a_{j,J_eM}\\circ C_U(u_{e,M})$. This is the transpose of the inverse mate of $a_j$ in the mate definition. Injectivity of this Hom bijection shows that $e_j^{-1}:J_pC_U\\to C_ZJ_e$ has right mate $a_j:C_UI_e\\to I_pC_Z$, with respect to $J_e\\dashv I_e$ and $J_p\\dashv I_p$. The same argument for $j'$ gives $(e_{j'}^{-1})^\\flat=a_{j'}$.",
+   "uses": [
+    "lem-sf-open-comparison-unit-normalization",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, lemma-jshriek-comparison, adjoint normalization; categories.tex Tag 0B65, lemma-transformation-between-functors-and-adjoints"
+   }
+  },
+  {
+   "text": "Let $h_e:I'_eq_e^*\\xrightarrow{\\sim}r_e^*I_e$ and $h_p:I'_pq_p^*\\xrightarrow{\\sim}r_p^*I_p$ be the canonical pullback-square identifications, and put $c_e=h_e^{-1}$, $c_p=h_p^{-1}$. Put $d_e=(\\beta^e)^{-1}$ and $d_p=(\\beta^p)^{-1}$. The etale base-change theorem specifies the $J'_e\\dashv I'_e$ transpose of $d_{e,M}$ as $c_{e,J_eM}\\circ r_e^*(u_{e,M})$. Its module-complex assertion and the derived corollary give this same named arrow on $D^+$. For the pro-etale map the open-tensor normalization theorem, specialized to the finite constant ring $\\Lambda$, explicitly identifies its $\\beta$ with the canonical map of the pro-etale base-change theorem and specifies exactly the analogous transpose $c_{p,J_pN}\\circ r_p^*(u_{p,N})$. Thus, by the inverse-mate formula, $d_e:J'_er_e^*\\to q_e^*J_e$ has mate $c_e$, and $d_p:J'_pr_p^*\\to q_p^*J_p$ has mate $c_p$. This uses the normalization clause of the cited theorem, not just invertibility of its comparison.",
+   "uses": [
+    "lem-cbc-extension-zero-base-change",
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-sf-open-tensor-normalization",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero-base-change.proof.md",
+    "place": "Canonical unit/counit comparison in the first and final paragraphs; its inverse open-unit normalization as stated in lem-sf-open-tensor-normalization"
+   }
+  },
+  {
+   "text": "The Cartesian coherence clause of the pullback-comparison theorem, written with the inverse square comparisons $c_e,c_p$, is the equality\n$$ (I'_pa_q)\\circ(a_{j'}q_e^*)\\circ(C_{U'}c_e)\n=(c_pC_Z)\\circ(r_p^*a_j)\\circ(a_rI_e).\\tag{*}$$\nBoth sides go from $C_{U'}r_e^*I_e$ to $I'_pq_p^*C_Z$. Indeed the left path compares $r_e^*I_e$ with $I'_eq_e^*$ first and then moves $C$ past $j'$ and $q$; the right path moves $C$ past $r$ and $j$ first and then uses the pro-etale square comparison. This is the cited Cartesian compatibility with its orientation reversed, using the inverses of $h_e,h_p$. The comparisons include the chosen Cartesian-square datum, so no strict equality of chosen fibre products is assumed. Step 2 descends this sheaf-level equality to the same derived functors.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-comparison-pullback.md",
+    "place": "Statement: compatibility with composites and the Cartesian identification; explicitly written as the square equation (*)"
+   }
+  },
+  {
+   "text": "Take mates between $J_e\\dashv I_e$ and $J'_p\\dashv I'_p$, with side functors $G=C_{U'}r_e^*$ and $H=q_p^*C_Z$. Consider\n$$A=(q_p^*e_j^{-1})\\circ(d_pC_U)\\circ(J'_pa_r):J'_pC_{U'}r_e^*\\to q_p^*C_ZJ_e.$$\nPasting the square $e_j^{-1}$ with the square $d_p$ gives, by the mate-pasting theorem and Steps 3--4, the mate $(c_pC_Z)\\circ(r_p^*a_j)$ for the composite before precomposing $J'_pa_r$. Precomposition by $J'_pa_r$ precomposes its mate by $a_rI_e$. To check this last whiskering directly in the mate formula, naturality of the unit of $J'_p\\dashv I'_p$ at $a_r$ moves $a_r$ through that unit; the remaining two factors are unchanged. Consequently\n$$A^\\flat=(c_pC_Z)\\circ(r_p^*a_j)\\circ(a_rI_e).$$",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; Mathlib/CategoryTheory/Adjunction/Mates.lean mateEquiv_vcomp, with side-functor naturality expanded"
+   }
+  },
+  {
+   "text": "For the same two adjunctions and side functors consider\n$$B=(a_qJ_e)\\circ(C_{Z'}d_e)\\circ(e_{j'}^{-1}r_e^*):J'_pC_{U'}r_e^*\\to q_p^*C_ZJ_e.$$\nPaste $d_e$ and $e_{j'}^{-1}$ in the opposite order to Step 6. The mate-pasting theorem and Steps 3--4 give $(a_{j'}q_e^*)\\circ(C_{U'}c_e)$ for the composite before postcomposing $a_qJ_e$. Postcomposing that square by $a_qJ_e$ postcomposes its mate by $I'_pa_q$. In the defining mate formula, this follows by naturality of $a_q:C_{Z'}q_e^*\\to q_p^*C_Z$ at the counit $J_eI_e\\to1$: it moves $a_q$ past the last counit factor. Thus\n$$B^\\flat=(I'_pa_q)\\circ(a_{j'}q_e^*)\\circ(C_{U'}c_e).$$",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; Mathlib/CategoryTheory/Adjunction/Mates.lean mateEquiv_vcomp, with side-functor naturality expanded"
+   }
+  },
+  {
+   "text": "Equation (*) identifies the two mates computed in Steps 6--7. Since the mate correspondence is a bijection, $A=B$. Postcompose this equality with $q_p^*e_j$ and precompose with $e_{j'}r_e^*$. The adjacent $e_j,e_j^{-1}$ and $e_{j'},e_{j'}^{-1}$ cancel, leaving\n$$d_p\\circ(J'_pa_r)\\circ(e_{j'}r_e^*)=(q_p^*e_j)\\circ(a_qJ_e)\\circ C_{Z'}d_e,$$\nthat is, $d_p\\circ T=S\\circ C_{Z'}d_e$. Postcompose by $\\beta^p$ and precompose by $C_{Z'}\\beta^e$, and cancel each inverse pair $\\beta^p d_p=1$ and $d_e\\beta^e=1$. Evaluation at $M$ gives precisely\n$$\\beta^p_{C_UM}\\circ S_M=T_M\\circ C_{Z'}(\\beta^e_M).$$\nAll equations take place in the actual derived Hom sets with the comparisons fixed above. The Noetherian and qcqs assumptions of the item remain in force; no direct-image comparison or conservativity of geometric pro-etale stalks is needed in this open-adjunction calculation.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-weil-shriek-operator-fibres.proof.md",
+    "place": "Proof (β), finite-horizontal mate assertion: explicit open-comparison subcalculation by equality of mates"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-exact",
+  "prop-weil-pbc-proetale-constant-exact",
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-cbc-proetale-extension-zero",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-sf-open-comparison-unit-normalization",
+  "def-weil-pbc-adjunction-mate",
+  "lem-cbc-extension-zero-base-change",
+  "cor-cbc-derived-extension-zero-base-change",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AF, lemma-jshriek-comparison; explicit mate-pasting compatibility for the canonical open base-change maps, expanding the use in main-20261015 lem-trf-weil-shriek-operator-fibres proof (β)"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-horizontal-shriek-mate",
@@ -69,6 +192,41 @@
    "results": "{\"t\": \"2026-10-17T08:45:13Z\", \"tool\": \"leanfinder\", \"query\": \"The inverse of the open extension by zero base change is the open adjunction mate of the pullback square and is preserved by comparison of etale and proetale sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackIso\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\"], \"digest\": \"712192c5d5ddbddb\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned ordinary module/site or topological support declarations do not identify these specified derived etale/pro-etale maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The etale to proetale site comparison commutes with the canonical extension by zero base change morphism for a Cartesian square of open immersions",
+   "results": "{\"t\": \"2026-10-17T12:54:31Z\", \"tool\": \"leanfinder\", \"query\": \"The etale to proetale site comparison commutes with the canonical extension by zero base change morphism for a Cartesian square of open immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\", \"AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app'\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullback_cone_of_left_condition\", \"SheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\"], \"digest\": \"a4297e55e26e5fd8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general mate calculus and sheaf restriction/pullback results do not state the specified etale/pro-etale derived comparison square; generic mate calculus is reused via existing nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*etale|etale.*proetale|mateEquiv",
+   "results": "{\"t\": \"2026-10-17T12:54:59Z\", \"tool\": \"grep\", \"query\": \"proetale.*etale|etale.*proetale|mateEquiv\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\"], \"digest\": \"7ceeefe10a297459\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general mate calculus and sheaf restriction/pullback results do not state the specified etale/pro-etale derived comparison square; generic mate calculus is reused via existing nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse mate of the pullback comparison for an open immersion commutes with base change and a comparison of sites",
+   "results": "{\"t\": \"2026-10-17T12:55:00Z\", \"tool\": \"leansearch\", \"query\": \"The inverse mate of the pullback comparison for an open immersion commutes with base change and a comparison of sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.invApp_app_apply\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.inv_naturality_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_invApp\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality\"], \"digest\": \"71ce0f987aadd797\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general mate calculus and sheaf restriction/pullback results do not state the specified etale/pro-etale derived comparison square; generic mate calculus is reused via existing nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-17T12:55:00Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general mate calculus and sheaf restriction/pullback results do not state the specified etale/pro-etale derived comparison square; generic mate calculus is reused via existing nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley comparison for extension by zero along an open subtopos is the inverse mate of the commuting inverse image square",
+   "results": "{\"t\": \"2026-10-17T12:55:49Z\", \"tool\": \"leanfinder\", \"query\": \"Beck Chevalley comparison for extension by zero along an open subtopos is the inverse mate of the commuting inverse image square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.pullbackObjObjOfImageOpen\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"CompHausLike.LocallyConstant.adjunction_left_triangle\", \"CategoryTheory.sheafComposeNatIso\", \"AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app\", \"CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\"], \"digest\": \"714417c25e2ae892\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general mate calculus and sheaf restriction/pullback results do not state the specified etale/pro-etale derived comparison square; generic mate calculus is reused via existing nodes"
   }
  ],
  "blueprint": {
@@ -81,5 +239,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-open-base-change-site-transport",
+  "worker": "stage1",
+  "summary": "Checked the current statement, both canonical open-adjunction normalizations and all cited statements. Proved the map equality by the Cartesian pullback coherence equation, computed the two pasted mates explicitly and cancelled the comparison inverses. Kept all hypotheses and the statement unchanged; reused existing exactness, localization and mate tools; no new nodes.",
+  "blueprint": "Realizes the open-base-change comparison needed in proof (β), finite-horizontal mate assertion, of lem-trf-weil-shriek-operator-fibres through lem-trf-finite-horizontal-shriek-mate. The steps expand the canonical-open-map transport, without replacing the unit route.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Exactness of etale inverse image, extended to fixed modules by the underlying kernels and cokernels. This is a generic tool; the Weil-pushforward unit has no replacement and its Frobenius route is unchanged."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Exactness of constant-coefficient pro-etale module pullback with its canonical coefficient identifications. This is a generic tool; the Weil-pushforward unit has no replacement and its Frobenius route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exactness of etale open extension, needed for termwise derived descent. This is a generic tool; the Weil-pushforward unit has no replacement and its Frobenius route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "The ordinary etale open-adjunction units and counits used for the derived ones. This is a generic tool; the Weil-pushforward unit has no replacement and its Frobenius route is unchanged."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "The exact pro-etale open adjunction and its degreewise extension. This is a generic tool; the Weil-pushforward unit has no replacement and its Frobenius route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Exact functors preserve the D+ domains used in this item. This is a generic tool; the Weil-pushforward unit has no replacement and its Frobenius route is unchanged."
+   },
+   {
+    "node": "lem-sf-open-comparison-unit-normalization",
+    "why": "Unit normalization of the named site/open comparison, rather than an arbitrary isomorphism. This is a generic tool; the Weil-pushforward unit has no replacement and its Frobenius route is unchanged."
+   },
+   {
+    "node": "lem-cbc-extension-zero-base-change",
+    "why": "The specified inverse-etale-base-change transpose. This is a generic tool; the Weil-pushforward unit has no replacement and its Frobenius route is unchanged."
+   },
+   {
+    "node": "cor-cbc-derived-extension-zero-base-change",
+    "why": "The same etale comparison on D+. This is a generic tool; the Weil-pushforward unit has no replacement and its Frobenius route is unchanged."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "The inverse-open-unit normalization of the named pro-etale base-change map, specialized to finite constant coefficients. This is a generic tool; the Weil-pushforward unit has no replacement and its Frobenius route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Cartesian coherence of the canonical site pullback comparisons. This is a generic tool; the Weil-pushforward unit has no replacement and its Frobenius route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-exact",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-cbc-proetale-extension-zero",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-cbc-extension-zero-base-change",
+  "cor-cbc-derived-extension-zero-base-change",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-50f3287c0",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-50f3287c0 (reviewer sub-agent of L); spot-checked: I read all 8 steps in full against the statements of the 16 proof dependencies and 12 statement dependencies, Stacks 09AF (proetale.tex l.5076, proof by the adjunction j_proet^{-1}eps_*=eps_*j_et^{-1}) and main-20261015 lem-trf-weil-shriek-operator-fibres proof (β). No new nodes and the statement is unchanged; the source and target of S, T, beta^e and beta^p match. I redid the mate algebra by hand. Step 3: the unit normalization of lem-sf-open-comparison-unit-normalization makes a_j C_U(u_e) the transpose of e_j^{-1}, so mate(e_j^{-1})=a_j. Step 4: the adjunct descriptions in lem-cbc-extension-zero-base-change (with its degreewise module clause and cor-cbc-derived-*) and lem-sf-open-tensor-normalization (constant finite A) give mate(d_e)=c_e and mate(d_p)=c_p, in the right directions. Step 5: (*) is the composite/Cartesian compatibility of lem-weil-pbc-comparison-pullback applied to jr=qj'. Steps 6-7: mate-pasting clause (1) is instantiated correctly, and the whiskerings by a_r and a_q follow from naturality of the unit and counit. Step 8: the cancellations are correct. Exactness, termwise descent and D+ preservation (steps 1-2) are cited correctly, with Lambda finite commutative throughout. The edge cases (empty U, q=id, j=id) are consistent. No cycle; proof_deps equals the union of the uses; no SGA. Route: every cited statement is on the sk-d-weil-push route except lem-sf-open-tensor-normalization; I accept that tool use (no on-route node gives the pro-etale beta normalization), and the other 10 declared tool uses are on-route, so declaring them is redundant but harmless. One item for the maintainer: the existing unsplit node lem-fix-site-open-exchange (Q130, 2026-10-17) states the same equation, conjugated by a_q and J'_p a_r, without the Noetherian/qcqs hypotheses. This split never uses those hypotheses, so it proves that node too. They should be merged; drop_nodes cannot apply because both are existing nodes. Separately, the blueprint_update of lem-cbc-extension-zero-base-change describes the same canonical map by its forward construction; no action needed. No fixes written."
  }
 }

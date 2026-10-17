@@ -17,9 +17,63 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the Kan model structure to $\\mathsf{sSet}_{\\mathcal U}$. Its fibrant objects are precisely the Kan complexes, and every simplicial set is cofibrant because the map from the empty simplicial set is degreewise injective. The stipulated functor $j$ is its universal infinity localization at precisely these weak equivalences. Consequently the fibrant-representative clause of the frame lemma gives $\\mathcal U$-small Kan complexes $K,L$ and equivalences $\\alpha:jK\\simeq pA$, $\\beta:jL\\simeq pB$. Enlarge the ambient universe to $\\mathcal U\\prime$ when applying the model-category localization statement; this changes no object or simplicial-set size. This use of the localization interface does not identify an arbitrary localization functor with the coherent nerve on maps without justification.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent specialization of the cited model-category localization statements; Hovey Chapter 5, with infinity-localization comparison as specified in the frame node."
+   }
+  },
+  {
+   "text": "In $\\operatorname{Map}_{\\mathcal S_{\\mathcal U}}(jK,jL)$ consider the component of $\\beta^{-1}\\circ p(F)\\circ\\alpha$. Apply the frame lemma with the cofibrant object $K$ and fibrant object $L$. It states that every component of this localized mapping space is represented by an actual map $K\\to L$. Choose such an $f$. Thus $\\beta\\circ j(f)$ and $p(F)\\circ\\alpha$ belong to the same component of $\\operatorname{Map}_{\\mathcal S_{\\mathcal U}}(jK,pB)$: composition on components is composition in the homotopy category, and $\\beta\\circ\\beta^{-1}$ lies in the identity component. A connecting path is chosen in the next step.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent specialization of the actual-map representative clause of lem-coef-cosimplicial-frame-mapping."
+   }
+  },
+  {
+   "text": "Use the model clause of the pullback lemma with $\\mathcal A=N(\\mathsf{sSet}_{\\mathcal U})$, $\\mathcal B=\\mathcal E$, $\\mathcal C=\\mathcal S_{\\mathcal U}$ and functors $j,p$: take $\\mathcal P$ to be the simplicial pullback $(N(\\mathsf{sSet}_{\\mathcal U})\\times\\mathcal E)\\times_{\\mathcal S_{\\mathcal U}\\times\\mathcal S_{\\mathcal U}}\\operatorname{Eq}(\\mathcal S_{\\mathcal U})$ and $r$ its projection to $\\mathcal E$; its objects are the triples $(K,A,\\alpha)$ of the statement. Since $\\operatorname{Eq}$ is full in $\\operatorname{Fun}(\\Delta^1,\\mathcal S_{\\mathcal U})$, an edge $(K,A,\\alpha)\\to(L,B,\\beta)$ is a triple $(g,G,\\sigma)$: an edge $g$ of the nerve, i.e. a simplicial map $K\\to L$, an edge $G:A\\to B$, and $\\sigma:\\Delta^1\\times\\Delta^1\\to\\mathcal S_{\\mathcal U}$ with rows $\\alpha$ ($t=0$), $\\beta$ ($t=1$) and columns $j(g)$, $p(G)$. Its projections are $g$ and $G$ on the nose. Construct $\\sigma$ for $(f,F)$. By inner horn filling choose $2$-simplices $\\tau_1$ with edges $01=j(f)$, $12=\\beta$, $02=c_1$ and $\\tau_2$ with edges $\\alpha$, $p(F)$, $c_2$. By step 2, $c_1,c_2$ lie in one component of $\\operatorname{Map}(jK,pB)$, which is Kan by [lem-coef-infinity-pinch-comparison]; so there is an edge from $c_2$ to $c_1$, a $2$-simplex $\\omega$ with edges $01=1_{jK}$, $02=c_2$, $12=c_1$. On vertices $jK,jK,jL,pB$ the faces $d_0=\\tau_1$, $d_2=\\omega$, $d_3=s_0(j(f))$ agree on common edges and form an inner horn $\\Lambda^3_1$. A filler has $d_1$ with edges $j(f),\\beta,c_2$. It and $\\tau_2$ share the edge $c_2$ and glue to $\\sigma$ on the two nondegenerate triangles of $\\Delta^1\\times\\Delta^1$. Put $\\widetilde F=(f,F,\\sigma)$. It projects to exactly $f$ and $F$. Accessibility, colimit and Cartesian hypotheses are not used.",
+   "uses": [
+    "lem-coef-accessible-pullback-filtered-colimit",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Strict equivalence-arrow pullback model stated by lem-coef-accessible-pullback-filtered-colimit; inner horn filling as in HTT Definition 1.1.2.4; agent construction of the square (reviewer repair 2026-10-17)."
+   }
+  },
+  {
+   "text": "By step 3, $r(\\widetilde F)=F$. The degenerate edge $s_0(F)$ of $\\operatorname{Fun}(\\Delta^1,\\mathcal E)$ from $r(\\widetilde F)$ to $F$ is an equivalence: it is its own inverse, both inverse equations witnessed by degenerate $2$-simplices. In particular $\\widetilde F$ projects to the component of $F$, and $\\operatorname{Fun}(\\Delta^1,r)$ is essentially surjective. Empty Kan complexes are allowed by the Kan model structure: for $pA$ empty take $K$ empty; if $pB$ is empty the existence of $p(F)$ forces $pA$ empty as well. The construction uses no Cartesian-fibration property of $p$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent: degenerate edges are equivalences (definition of equivalence edge in def-cbc-enhanced-diagrams-cones)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-accessible-pullback-filtered-colimit",
+  "lem-coef-infinity-pinch-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Theorem 5.3.17 proof motivates passage from simplicial sets to spaces. The arrow-representation consequence here is an agent argument from the explicitly cited model-localization and pullback statements; it is not a claim that HTT Proposition 2.4.4.3 states that formula."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,7 +119,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enriched-completion-localization",
@@ -89,5 +143,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-model-arrow-lifting",
+  "worker": "stage1",
+  "summary": "Retained the statement verbatim. Reused existing Kan model, cosimplicial-frame mapping, homotopy-pullback mapping-space, arrow-morphism-space and pointwise-equivalence interfaces. Removed the earlier proposed mapping-space node because the current existing accessible-pullback node states its formula. Replaced an unjustified identification of j on Kan models by the explicit model-localization argument. Kept the coherence path and checked exact ordinary-morphism projection, equivalence in the arrow category, universes and empty endpoints. No new nodes or Mathlib leaves. Reviewer repair (maintainer reader, 2026-10-17): step 3 now builds the arrow directly in the strict equivalence-arrow pullback model, since the cited mapping-space equivalence is not stated to commute with the projections; step 4 becomes elementary, and the arrow-morphism-square and pointwise-equivalence citations are no longer needed.",
+  "blueprint": "Historical generated ancestry remains prop-coef-integral-exceptional-adjoint through the recorded via chain. These steps provide the simplicial-model/arrow-representation auxiliary argument named by the imported item; the current main-20261015 exceptional-adjoint proof instead discusses finite reductions and contains no such simplicial-model paragraph. No chapter or unit route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-ece686372",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-ece686372 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement: kan-quillen-right-proper, cosimplicial-frame-mapping, accessible-pullback-filtered-colimit (statement plus all 12 steps), infinity-arrow-morphism-square, infinity-pointwise-equivalences, def-coef-infinity-category-of-spaces, def-cbc-enhanced-diagrams-cones and infinity-pinch-comparison. I also read the parent's step 6. There are no new nodes. Everything cited is in unit sk-prop-sf-biduality-general, there is no SGA, and the statement is unchanged. The DAG search found no duplicate. Steps 1–2 are correct. Every simplicial set is cofibrant because the map from the empty set is degreewise injective, and the Kan complexes are the fibrant objects. The frame lemma's fibrant-representative clause and its actual-map component clause apply because the statement stipulates that j is the coherent localization; universes may be enlarged. C4 fault in step 3: it used the mapping-space equivalence of accessible-pullback-filtered-colimit to conclude that the chosen vertex projects to the components of f and F. That node states only 'a natural equivalence'; it never says the equivalence commutes with the projections, unlike arrow-morphism-square, which states this explicitly. Repair, in fixes/dag/nodes/sec-six-functors/lem-coef-simplicial-model-arrow-lifting.json: step 3 now uses the strict Eq(S) pullback model clause of the same node. An edge there is (g,G,sigma), and its projections are exactly g and G. sigma is built by inner-horn filling: tau1=(j(f),beta;c1) and tau2=(alpha,p(F);c2). Map(jK,pB) is Kan by infinity-pinch-comparison, which gives a 2-simplex omega from c2 to c1. The faces d0=tau1, d2=omega, d3=s0(j(f)) form an inner horn Lambda^3_1, and its filler glues with tau2 along c2. I checked the face conventions and the pullback condition. So r(F~)=F exactly. Step 4 is now elementary: the degenerate edge is an equivalence. arrow-morphism-square and pointwise-equivalences are dropped from uses and proof_deps; they are existing nodes, so there is no drop_nodes. I checked the edge cases: empty K, empty pB (which forces pA empty), p constant, universes, and that no Cartesian or isofibration hypothesis on p is used. No tool_uses accepted. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

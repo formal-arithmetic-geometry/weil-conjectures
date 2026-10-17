@@ -17,9 +17,106 @@
   "prop-functor-package",
   "prop-exc-open-adjoint"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $H=Gu=vg$. All functors in this proof are at the fixed finite coefficient ring $A$, and suppress derived symbols. Pullback preserves $D^b_{ctf}$ by [lem-sf-pullback-tor-amplitude], tensor preserves it by [lem-sf-tensor-ctf], and exceptional preservation is part of the constructible datum [def-trf-admissibility]. Thus every displayed projection is evaluated on its allowed domains. Write\n$$c_P:u^*G^!P\\xrightarrow{\\sim}H^!P,\\qquad d_P:g^!v^*P\\xrightarrow{\\sim}H^!P.$$\nThese are the inverses of exceptional composition, with the open identifications from [prop-exc-open-adjoint]. Since these comparisons are conjugates of compact-support composition, [lem-trf-adjoint-mate](2) identifies their counits with those of the composite adjunction [def-weil-pbc-composite-adjunction]. In particular $\\kappa_P=d_P^{-1}c_P$. Ordinary pullback composition [lem-weil-pbc-proetale-derived-pullback-composition] identifies both $u^*G^*N$ and $g^*v^*N$ with $H^*N$; its comparison between them is precisely $\\lambda_N$.",
+   "uses": [
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "def-trf-admissibility",
+    "prop-exc-open-adjoint",
+    "lem-trf-adjoint-mate",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0, lemma-compose-counits, and Tag 0B65, lemma-transformation-between-functors-and-adjoints; agent setup of the two factorizations in Varshavsky Lemma 4.2.2(a)"
+   }
+  },
+  {
+   "text": "For $j=u,v$, the map $T_j(P,Q)$ is the canonical tensor comparison $j^*P\\otimes j^*Q\\cong j^*(P\\otimes Q)$. Indeed [lem-sf-open-tensor-normalization] says that the inverse of the open projection $\\gamma_{K,Q}:j_!K\\otimes Q\\to j_!(K\\otimes j^*Q)$ is the adjunct of the open unit $K\\to j^*j_!K$, tensored with $1$. At $K=j^*P$, transpose $(\\varepsilon_{j,P}\\otimes1)\\gamma_{j^*P,Q}^{-1}$. The result is the tensor comparison preceded by $(j^*\\varepsilon_{j,P}\\circ\\eta_{j,j^*P})\\otimes1$, which is the identity by the triangle identity of $j_!\\dashv j^*$ [prop-exc-open-adjoint]. This is exactly the defining adjunct of $T_j$, using the normalized open projection of [def-exchange-projection]: for the compactification $(j,\\operatorname{id})$ of $j$ the map $\\pi_{\\operatorname{id}}$ is the identity, so $\\operatorname{PF}_j^{(j,\\operatorname{id})}=\\gamma$, and the compatibility of $\\operatorname{PF}$ with compactification comparisons in [fix-prop-projection-formula] makes this independent of the chosen compactification. This calculation takes place on the ordinary derived categories, so also on the full constructible domains.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "prop-exc-open-adjoint",
+    "def-exchange-projection",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; open-adjunction normalization supplied by lem-sf-open-tensor-normalization; agent triangle-identity calculation"
+   }
+  },
+  {
+   "text": "Set $K=u^*G^!M$ and let $E_G=u^*T_G\\circ T_u(G^!M,G^*N)$, with source $K\\otimes H^*N$. Transpose $E_G$ under $G_!u_!\\dashv u^*G^!$. The composite-counit formula [def-weil-pbc-composite-adjunction], naturality of the open counit, and the defining adjunct of $T_u$ first give\n$$\\varepsilon_G\\,G_!T_G\\,G_!(\\varepsilon_{u,G^!M}\\otimes1)\\,G_!(\\operatorname{PF}_{u,K,G^*N}^{-1}).$$\nReplace $\\varepsilon_GG_!T_G$ by $(\\varepsilon_{G,M}\\otimes1)\\operatorname{PF}_{G,G^!M,N}^{-1}$, the definition in the item. Naturality of projection in its first argument moves $G_!\\varepsilon_{u,G^!M}$ through this inverse projection. The adjunct becomes\n$$(\\varepsilon_{G,M}\\,G_!\\varepsilon_{u,G^!M}\\otimes1)\\operatorname{PF}_{G,u_!K,N}^{-1}\\,G_!(\\operatorname{PF}_{u,K,G^*N}^{-1}).$$\nThe naturality and composition compatibility asserted in [fix-prop-projection-formula] identify the last two factors with $\\operatorname{PF}_{H,K,N}^{-1}$ under $G_!u_!\\cong H_!$. Counit compatibility of $c$ [lem-trf-adjoint-mate] identifies the first factor with $\\varepsilon_{H,M}H_!c_M\\otimes1$.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-exchange-projection",
+    "fix-prop-projection-formula",
+    "lem-trf-adjoint-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.md",
+    "place": "Naturality and composition compatibility of PF; agent expansion for H=Gu of Varshavsky Lemma 4.2.2(a), locality"
+   }
+  },
+  {
+   "text": "By naturality of $\\operatorname{PF}_H^{-1}$, the map at the end of Step 3,\n$$(\\varepsilon_{H,M}H_!c_M\\otimes1)\\operatorname{PF}_{H,K,N}^{-1},$$\nis the $H_!\\dashv H^!$ adjunct of $T_H(M,N)\\circ(c_M\\otimes1)$. The hom bijection and the counit normalization of $c$ therefore give\n$$c_{M\\otimes N}\\,E_G=T_H(M,N)(c_M\\otimes1).$$\nHere the passage between the composite and $H$ adjunctions is the conjugate comparison specified by [def-trf-admissibility]; its action on adjuncts is [lem-trf-adjoint-mate](2). No base-change transformation is used.",
+   "uses": [
+    "def-exchange-projection",
+    "def-trf-admissibility",
+    "lem-trf-adjoint-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; agent application of the adjunction bijection"
+   }
+  },
+  {
+   "text": "Now set $L=g^!v^*M$ and $E_v=g^!T_v(M,N)\\circ T_g(v^*M,v^*N)$. Transpose under $v_!g_!\\dashv g^!v^*$. The composite counit [def-weil-pbc-composite-adjunction] and naturality of the $g$-counit give $\\varepsilon_v\\,v_!T_v\\,v_!(\\varepsilon_g\\,g_!T_g)$. Substituting the two defining adjuncts from [def-exchange-projection] and the item, and moving $v_!\\varepsilon_{g,v^*M}$ through the first inverse projection by naturality, gives\n$$(\\varepsilon_{v,M}\\,v_!\\varepsilon_{g,v^*M}\\otimes1)\\operatorname{PF}_{v,g_!L,N}^{-1}\\,v_!(\\operatorname{PF}_{g,L,v^*N}^{-1}).$$\nComposition compatibility in [fix-prop-projection-formula] converts the last two factors into $\\operatorname{PF}_{H,L,N}^{-1}$. Counit compatibility of $d$ [lem-trf-adjoint-mate] converts the first factor into $\\varepsilon_{H,M}H_!d_M\\otimes1$. Naturality of $\\operatorname{PF}_H^{-1}$ and the hom bijection consequently yield\n$$d_{M\\otimes N}\\,E_v=T_H(M,N)(d_M\\otimes1).$$",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-exchange-projection",
+    "fix-prop-projection-formula",
+    "lem-trf-adjoint-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.md",
+    "place": "Naturality and composition compatibility of PF; agent expansion for H=vg of Varshavsky Lemma 4.2.2(a), locality"
+   }
+  },
+  {
+   "text": "Step 2 identifies $E_G$ with $u^*T_G$ after the source tensor comparison and identifies $E_v$ with $T_g(v^*M,v^*N)$ after the target tensor comparison. Precompose the equation in Step 5 with $\\kappa_M\\otimes\\lambda_N$. Since $d_M\\kappa_M=c_M$ and $\\lambda_N$ identifies the two copies of $H^*N$, its right side is $T_H(c_M\\otimes1)$, which is the right side of Step 4. Cancel the isomorphism $d_{M\\otimes N}$ from the resulting equality and use $d_{M\\otimes N}^{-1}c_{M\\otimes N}=\\kappa_{M\\otimes N}$. This gives exactly the required identity. Only the equality of composites $Gu=vg$ was used; neither a Cartesian square nor properness enters.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.2.2(a), first sentence of the proof (locality of the exceptional tensor diagram); explicit open-restriction lemma for the normalized finite-coefficient operations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-trf-admissibility",
+  "def-weil-pbc-composite-adjunction",
+  "fix-prop-projection-formula",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-trf-adjoint-mate",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "prop-exc-open-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Lemma 4.2.2(a), first sentence: explicit adjunct calculation supplying the omitted locality argument, using the normalized finite-coefficient projection and composition interfaces"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,7 +155,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-cohomological-evaluation-calculus",
@@ -78,5 +175,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-exceptional-tensor-open-restriction",
+  "worker": "stage1",
+  "summary": "Kept the statement and coefficient domains unchanged. Expanded the omitted locality calculation using the two factorizations H=Gu=vg, normalized open tensor maps, composite counits, and projection composition. All auxiliary facts reuse existing DAG nodes; no new nodes.",
+  "blueprint": "lem-trf-local-term-locality blueprint_update.proof[1], via lem-trf-trace-specialization and lem-trf-cohomological-evaluation-calculus: locality in Varshavsky Lemma 4.2.2(a).",
+  "tool_uses": [
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Generic finite-coefficient adjunction, projection, or constructible-domain interface used in the explicit locality calculation; the curve-zero unit supplies no replacement and its normal-cone route is unchanged."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic finite-coefficient adjunction, projection, or constructible-domain interface used in the explicit locality calculation; the curve-zero unit supplies no replacement and its normal-cone route is unchanged."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Generic finite-coefficient adjunction, projection, or constructible-domain interface used in the explicit locality calculation; the curve-zero unit supplies no replacement and its normal-cone route is unchanged."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Generic finite-coefficient adjunction, projection, or constructible-domain interface used in the explicit locality calculation; the curve-zero unit supplies no replacement and its normal-cone route is unchanged."
+   },
+   {
+    "node": "lem-trf-adjoint-mate",
+    "why": "Generic finite-coefficient adjunction, projection, or constructible-domain interface used in the explicit locality calculation; the curve-zero unit supplies no replacement and its normal-cone route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic finite-coefficient adjunction, projection, or constructible-domain interface used in the explicit locality calculation; the curve-zero unit supplies no replacement and its normal-cone route is unchanged."
+   },
+   {
+    "node": "prop-exc-open-adjoint",
+    "why": "Generic finite-coefficient adjunction, projection, or constructible-domain interface used in the explicit locality calculation; the curve-zero unit supplies no replacement and its normal-cone route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-prop-projection-formula",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-trf-adjoint-mate",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "prop-exc-open-adjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-ca9029578",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-ca9029578 (reviewer sub-agent of L); spot-checked: Read the item in full (statement and 6 steps), every cited node's statement (def-trf-admissibility, def-exchange-projection, fix-prop-projection-formula, lem-sf-open-tensor-normalization, lem-trf-adjoint-mate, def-weil-pbc-composite-adjunction, prop-exc-open-adjoint, lem-sf-pullback-tor-amplitude, lem-sf-tensor-ctf, lem-weil-pbc-proetale-derived-pullback-composition, prop-functor-package, coefficient and ctf definitions), the unit sk-i-curve-zero, both citers, and Varshavsky Lemma 4.2.2(a), pp. 30-31: 'The assertion is local' is the omitted step this item supplies. Statement: finite pro-etale A_{E,n}, D^b_ctf, the specified constructible Rf^! of def-trf-admissibility; no category substitution, nothing weakened; holds on commutative, non-Cartesian squares (tested on id/id, G_m in A^1 over a point, and U empty). I redid every adjunct calculation. Step 2: T_j equals the restriction-tensor comparison, by the gamma^{-1} normalization and the triangle identity. Steps 3 and 5: composite counits, PF naturality, PF composition compatibility, and the counit clause of lem-trf-adjoint-mate(2) for c and d. Step 4: the hom bijection, with alpha naturality. Step 6: d kappa = c, then cancel d. All correct. No new nodes, no cycle, no duplicate (searched T-map/exceptional-tensor nodes). Seven tool uses accepted as generic interfaces. FIX (C1/C4): Step 2 identified the open PF with gamma, but def-exchange-projection defines PF only for a chosen compactification. I added the (j,id)-compactification sentence and fix-prop-projection-formula (compactification-comparison clause) to the step's uses, and set elementary false.; 1 file(s) fixed by the reviewer"
  }
 }

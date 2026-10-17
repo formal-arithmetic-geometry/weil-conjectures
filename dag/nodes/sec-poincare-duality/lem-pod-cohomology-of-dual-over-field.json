@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pod-cohomology-of-dual-over-field",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cohomology of the dual of a finite complex over a field",
@@ -12,33 +12,138 @@
   "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-derived-duality/lem-pod-cohomology-of-dual-over-field.md",
   "place": "node lem-pod-cohomology-of-dual-over-field, order 2439"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pod-conventions",
+  "def-weil-abstract-derived-category",
+  "def-weil-finite-dimensional-subspace",
+  "def-pod-perfect-point-complex"
+ ],
  "proof": [
   {
-   "text": "Step 1: split the complex. Since $E$ is a field, every finite-dimensional $E$-vector space is projective and injective. Let $C=(C^\\bullet ,d^\\bullet )$ be a bounded complex of finite-dimensional $E$-vector spaces and write $Z^j=\\ker d^j$, $B^{j+1}=\\operatorname {im}d^j$. Choose splittings $C^j=B^{j+1}\\oplus Z^j$ of the short exact sequence $0\\to Z^j\\to C^j\\xrightarrow {d^j}B^{j+1}\\to 0$ and $Z^j=B^j\\oplus H^j(C)$ of $0\\to B^j\\to Z^j\\to H^j(C)\\to 0$ (all of them split because the quotients are vector spaces). In the resulting decomposition $C^j=B^{j+1}\\oplus B^j\\oplus H^j(C)$, the differential sends $B^{j+1}$ onto $B^{j+1}$ (the coordinate $B^{j+1}\\subset C^{j+1}$ via the chosen splitting) and kills $B^j\\oplus H^j(C)$, so $C$ is the direct sum of the complexes $B^j\\oplus B^j$ with the identity differential (contractible, hence zero in the derived category) and $H^j(C)$ with zero differential. Therefore\n\n$$\nC\\cong \\bigoplus _jH^j(C)[-j]\n$$\n\nin the derived category. Step 2: the dual. By [def-pod-perfect-point-complex] (the field stage of [def-weil-finite-coefficient-point]) $C$ is a perfect point complex, so by [def-weil-derived-pullback-tensor-hom]\n\n$$\nC^\\vee =R\\operatorname {Hom}_E(C,E)\\cong \\bigoplus _jH^j(C)^\\vee [j],\n$$\n\nthe direct sum of the finite-dimensional duals in the shifted degrees. Step 3: the pairings and the double dual. From Step 2,\n\n$$\nH^{-i}(C^\\vee )=H^i(C)^\\vee ,\n$$\n\nand the evaluation is the sum of the canonical evaluations $H^j(C)\\otimes H^j(C)^\\vee \\to E$, which are perfect pairings of finite-dimensional vector spaces; the canonical comparison $C\\to C^{\\vee \\vee }$ is an isomorphism by the biduality of [prop-pod-biduality-at-the-point], $C$ being a perfect point complex (Step 2), and under the decomposition of Step 1 it is the sum of the canonical isomorphisms $H^j(C)\\to H^j(C)^{\\vee \\vee }$, each an isomorphism because a finite-dimensional vector space is reflexive. This proves all the claims, [def-weil-finite-coefficient-point] providing the identification of the derived dual over the field with the termwise dual complex.",
+   "text": "Write $Z^j=\\ker d_C^j$, $B^j=\\operatorname{im}d_C^{j-1}$ and $V^j=Z^j/B^j=H^j(C)$, using [def-weil-abstract-derived-category]. Every vector space is projective by [lem-weil-pbc-vector-space-projective]. Its lifting property in [def-weil-pbc-projective-module], applied to the identity maps of $B^{j+1}$ and $V^j$, gives sections $s_j:B^{j+1}\\to C^j$ of $d_C^j:C^j\\twoheadrightarrow B^{j+1}$ and $t_j:V^j\\to Z^j$ of the quotient. Put $L^j=s_j(B^{j+1})$ and $W^j=t_j(V^j)$. Then $C^j=B^j\\oplus W^j\\oplus L^j$: subtract $s_j(d_Cx)$ to enter $Z^j$, then subtract $t_j$ of its quotient class to enter $B^j$; applying $d_C$ and then the quotient also proves uniqueness. The only nonzero differential block is the isomorphism $d_C:L^j\\to B^{j+1}$. The projection $C^j\\twoheadrightarrow W^j$ sends a finite spanning set to a finite spanning set, so $W^j$, hence $V^j$, is finite dimensional by [def-weil-finite-dimensional-subspace]. All these summands vanish outside the finite support of $C$.",
    "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-vector-space-projective",
+    "def-weil-pbc-projective-module",
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-derived-duality/lem-pod-cohomology-of-dual-over-field.md",
+    "place": "Proof, Steps 1–3; expanded splitting and evaluation calculation. Compare current main-20261015 unit sk-thm-derived-duality, its sole proof paragraph."
+   }
+  },
+  {
+   "text": "Let $H$ be the complex with $H^j=W^j$ and zero differential. The inclusion $a:H\\to C$ and projection $b:C\\to H$ are chain maps with $ba=1_H$. On the complementary complex $T^j=B^j\\oplus L^j$, define $h^j:T^j\\to T^{j-1}$ to be $(d_C:L^{j-1}\\to B^j)^{-1}$ on $B^j$ and zero on $L^j$. Then $dh+hd=1_T$: $dh$ is the identity on the $B$ block and $hd$ on the $L$ block. Extend $h$ by zero on $H$. Thus $1_C-ab=dh+hd$, so $a,b$ are inverse in the homotopy category and therefore in its derived localization [def-weil-abstract-derived-category]. This is precisely $C\\cong\\bigoplus_jH^j(C)[-j]$; the sum is finite. The induced identification $W^j\\cong H^j(C)$ is the original cycle quotient, not a newly chosen cohomology identification.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-derived-duality/lem-pod-cohomology-of-dual-over-field.md",
+    "place": "Proof, Steps 1–3; expanded splitting and evaluation calculation. Compare current main-20261015 unit sk-thm-derived-duality, its sole proof paragraph."
+   }
+  },
+  {
+   "text": "The terms of $H$ are projective by [lem-weil-pbc-vector-space-projective] and $H$ is bounded. Apply [lem-pod-projective-hom-evaluation-model] to $P=H$ and $N=E[0]$. It gives a representative $D=\\operatorname{Hom}_E^\\bullet(H,E[0])$ of $H^\\vee$, together with the representative of its actual derived evaluation. In degree $q$ only the factor with input degree $-q$ survives, so $D^q=\\operatorname{Hom}_E(W^{-q},E)$. Its differential is zero because both differentials in the Hom formula are zero. Consequently $H^{-i}(H^\\vee)=\\operatorname{Hom}_E(W^i,E)$. The evaluation on $W^i\\otimes D^{-i}$ is $x\\otimes\\phi\\mapsto(-1)^{i(-i)}\\phi(x)=(-1)^i\\phi(x)$. This sign comes from the order $H\\otimes H^\\vee$ in the stated evaluation; it is an invertible scalar.",
+   "uses": [
+    "lem-weil-pbc-vector-space-projective",
+    "lem-pod-projective-hom-evaluation-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-derived-duality/lem-pod-cohomology-of-dual-over-field.md",
+    "place": "Proof, Steps 1–3; expanded splitting and evaluation calculation. Compare current main-20261015 unit sk-thm-derived-duality, its sole proof paragraph."
+   }
+  },
+  {
+   "text": "The comparison of the preceding step is natural. For $a:H\\to C$, the dual map $a^\\vee:C^\\vee\\to H^\\vee$ is precomposition with $a$. Naturality of the evaluation counit gives $\\operatorname{ev}_C\\circ(a\\otimes1)=\\operatorname{ev}_H\\circ(1\\otimes a^\\vee)$. Both $a$ and $a^\\vee$ are isomorphisms in $D(E)$, so applying cohomology identifies the pairing in the statement with $(x,\\phi)\\mapsto(-1)^i\\phi(x)$ on $W^i\\times(W^i)^\\vee$. Here the product of cohomology classes is represented by the tensor of their cycle representatives, by the total tensor model of [lem-pod-projective-hom-evaluation-model]. For a finite basis $e_1,\\ldots,e_r$ of $W^i$ [def-weil-vector-space-dimension], let $e_1^*,\\ldots,e_r^*$ be its coordinate functionals. Every functional is uniquely $\\sum_t\\phi(e_t)e_t^*$, so these form a basis of the dual, and the pairing matrix is $(-1)^i I_r$. Its inverse is the same matrix. Thus both adjoints of the pairing are bijections: this proves perfectness and identifies the canonical map $H^{-i}(C^\\vee)\\to H^i(C)^\\vee$ as an isomorphism. Splittings were used to verify the canonical map; the map itself is defined by evaluation and uses no choices.",
+   "uses": [
+    "lem-pod-projective-hom-evaluation-model",
+    "def-weil-abstract-derived-category",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-derived-duality/lem-pod-cohomology-of-dual-over-field.md",
+    "place": "Proof, Steps 1–3; expanded splitting and evaluation calculation. Compare current main-20261015 unit sk-thm-derived-duality, its sole proof paragraph."
+   }
+  },
+  {
+   "text": "The given bounded finite-dimensional complex has finite projective terms, by [lem-weil-pbc-vector-space-projective] and the finite spanning condition, and hence is a perfect point complex by [def-pod-perfect-point-complex]. Apply [prop-pod-biduality-at-the-point] to this $C$ at coefficient ring $E$. Its first conclusion is exactly that the canonical comparison $C\\to C^{\\vee\\vee}$, defined by evaluation and coevaluation, is an isomorphism. Together with Step 4 this proves all clauses of the item.",
+   "uses": [
+    "lem-weil-pbc-vector-space-projective",
     "def-pod-perfect-point-complex",
-    "def-weil-finite-coefficient-point",
-    "def-weil-derived-pullback-tensor-hom",
     "prop-pod-biduality-at-the-point"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-derived-duality/lem-pod-cohomology-of-dual-over-field.md",
+    "place": "Proof, Steps 1–3; expanded splitting and evaluation calculation. Compare current main-20261015 unit sk-thm-derived-duality, its sole proof paragraph."
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-vector-space-projective",
+  "def-weil-pbc-projective-module",
+  "def-weil-finite-dimensional-subspace",
+  "lem-pod-projective-hom-evaluation-model",
+  "def-weil-vector-space-dimension",
   "def-pod-perfect-point-complex",
-  "def-weil-finite-coefficient-point",
-  "def-weil-derived-pullback-tensor-hom",
   "prop-pod-biduality-at-the-point"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-derived-duality/lem-pod-cohomology-of-dual-over-field.md",
-  "place": "## Proof"
+  "place": "Proof, Steps 1–3; expanded splitting and evaluation calculation. Compare current main-20261015 unit sk-thm-derived-duality, its sole proof paragraph."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of the derived dual of a bounded finite dimensional vector space complex is dual to opposite cohomology, evaluation is perfect",
+   "results": "{\"t\": \"2026-10-17T12:47:38Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of the derived dual of a bounded finite dimensional vector space complex is dual to opposite cohomology, evaluation is perfect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomologyIsoExt\", \"CochainComplex.acyclic_op\", \"CochainComplex.isKProjective_of_op\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"Rep.standardResolution.extIso\", \"CochainComplex.HomComplex.homologyAddEquiv\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\", \"groupCohomologyIso\"], \"digest\": \"24c2ee2ae77afd86\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, Module.Dual",
+   "results": "{\"t\": \"2026-10-17T12:47:31Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex, Module.Dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*dual|dual.*homology|IsPerfPair|exists_quasiIso_of_zero_differential",
+   "results": "{\"t\": \"2026-10-17T12:47:31Z\", \"tool\": \"grep\", \"query\": \"homology.*dual|dual.*homology|IsPerfPair|exists_quasiIso_of_zero_differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/Reduced.lean\", \"Mathlib/LinearAlgebra/RootSystem/Reduced.lean\", \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn.lean\", \"Mathlib/LinearAlgebra/RootSystem/Basic.lean\", \"Mathlib/LinearAlgebra/RootSystem/Basic.lean\", \"Mathlib/LinearAlgebra/RootSystem/Basic.lean\", \"Mathlib/LinearAlgebra/RootSystem/Basic.lean\", \"Mathlib/LinearAlgebra/RootSystem/Finite/G2.lean\"], \"digest\": \"c9ceedbfc4c04f01\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "homology of dual complex vector spaces evaluation perfect pairing",
+   "results": "{\"t\": \"2026-10-17T12:47:31Z\", \"tool\": \"leansearch\", \"query\": \"homology of dual complex vector spaces evaluation perfect pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.IsPerfPair.dualEval\", \"LinearMap.IsPerfPair\", \"LinearMap.toPerfPair_apply\", \"LinearMap.IsPerfectCompl\", \"LinearMap.IsPerfPair.mk\", \"topDualPairing_apply\", \"LinearMap.dualPairing_nondegenerate\", \"LinearMap.IsContPerfPair.mk\"], \"digest\": \"2e7f3ba4f576a683\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of vector spaces splits as its cohomology with zero differential plus contractible identity complexes",
+   "results": "{\"t\": \"2026-10-17T12:48:07Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded complex of vector spaces splits as its cohomology with zero differential plus contractible identity complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.Splitting\", \"CochainComplex.mappingCone.triangleRotateShortComplexSplitting\", \"CochainComplex.homOfDegreewiseSplit_f\", \"CochainComplex.homOfDegreewiseSplit\", \"CochainComplex.cocycleOfDegreewiseSplit\", \"CategoryTheory.ShortComplex.Splitting.ofIsIsoOfIsZero\", \"CategoryTheory.ShortComplex.Splitting.homologyData_iso\", \"CategoryTheory.ShortComplex.Splitting.rightHomologyData_H\"], \"digest\": \"1b490f6bb46fa652\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|internalHom.*[Qq]|internalHom.*[Uu]nit",
+   "results": "{\"t\": \"2026-10-17T12:48:11Z\", \"tool\": \"grep\", \"query\": \"RHom|internalHom.*[Qq]|internalHom.*[Uu]nit\", \"sub\": \"CategoryTheory/DerivedCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +168,29 @@
   }
  },
  "chapter": "sec-poincare-duality",
- "unit": "sk-thm-derived-duality"
+ "unit": "sk-thm-derived-duality",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pod-cohomology-of-dual-over-field",
+  "worker": "stage1",
+  "summary": "Expanded the unit splitting route into five steps with explicit projective sections, a written contraction, a Hom-complex computation, the canonical evaluation square and finite-basis perfectness. Kept the statement unchanged. One new generic projective Hom/evaluation model is statement-only; it has no cohomology or perfectness conclusion. Existing project declarations cover an unspecified cohomology isomorphism and biduality, but do not state the evaluation-perfectness clause. Removed definition-only citations that did not assert the model calculation. Accounted for the Koszul sign in the displayed tensor order.",
+  "blueprint": "Master node proof Steps 1, 2, 3 are realized respectively by steps 1–2, 3, 4–5; main-20261015 unit sk-thm-derived-duality retains exactly this split-complex route. The current main node has the same statement and no proof text.",
+  "tool_uses": [
+   {
+    "node": "prop-pod-biduality-at-the-point",
+    "why": "Generic perfect-point biduality supplies only the final canonical biduality clause, as explicitly required by the imported node proof; the unit itself contains no separate biduality theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pod-biduality-at-the-point"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-afe8737cb",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-afe8737cb (reviewer sub-agent of L); spot-checked: Read the item, its 5 steps, the new node lem-pod-projective-hom-evaluation-model and every cited statement, plus master and main-20261015 blueprint nodes and Stacks more-algebra 0A8H, 0A5Y, 0GWQ, 0A5W, 0A66 (line 18708) and 064K; all tags match tags/tags. Statement is verbatim the blueprint's, not weakened. Coefficient category: def-pod-conventions puts C in D^b_fd(E), a subcategory of D(E), with C^vee=RHom_E(C,E) and evaluation the adjunction counit (def-pod-perfect-point-complex), so the new node applies with R=E. Step 1 splitting (sections from projectivity, existence/uniqueness of B+W+L) and Step 2 homotopy (dh+hd=1 on T, 1-ab=dh+hd) checked. Step 3: D^q=Hom(W^{-q},E), zero differential, sign (-1)^i. Step 4: counit extranaturality transports the pairing to the ±I matrix, perfect in every characteristic. Step 5: perfect point complex, then prop-pod-biduality-at-the-point clause 1. New node is true: 0A66 with the same hypotheses, 064K for K-flatness, chain-map check of the Koszul-signed counit done. Small cases P=0, R[n], infinite free with unbounded N, Z/4, zero ring. Not a duplicate of lem-sc-derived-hom-projective-resolution, lem-pc-ring-derived-map-representative or lem-weil-pbc-bounded-above-projective-model; not a clause of the item. Batch-5 check: def-pod-conventions is a general definition required by the statement; its route to def-trf-iterated-weil-map goes only through definition statements, and prop-pod-biduality (already cited) carries it too. The projective Hom/evaluation model is general homological algebra that neither nt-assume leaf gives and that is no step of their proofs. The item itself enters batch 5 via lem-a1-local-boundary-duality as field linear algebra. Both citations accepted. The declared tool_use on prop-pod-biduality-at-the-point is unnecessary because sk-def-perfect is on the unit route; harmless. No fixes."
+ }
 }

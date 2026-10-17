@@ -11,9 +11,92 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-kan-quillen-model-right-proper-core"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=RX$, $B=RY$, $C=RZ$, $D=RQ$, $F=Rf$ and $G=Rg$. The maps $r_T:T\\to RT$ are weak equivalences and $RT$ is Kan. Use the model factorization axiom to choose $A\\xrightarrow{\\alpha}U\\xrightarrow{p}C$ and $B\\xrightarrow{\\beta}V\\xrightarrow{q}C$, with $\\alpha,\\beta$ trivial cofibrations and $p,q$ fibrations. Then $U,V$ are Kan. Put $K=Z\\times_CU$ and $L=Z\\times_CV$, using $r_Z:Z\\to C$. Their projections $k:K\\to Z$ and $l:L\\to Z$ are fibrations. Here and below the horn-lifting definition proves pullback stability by projecting a lifting problem to the original fibration, and composition stability by taking successive lifts. Right properness applied to $r_Z$ and $p,q$ gives weak equivalences $K\\to U$ and $L\\to V$. Naturality of $r$ defines maps $s_X=(f,\\alpha r_X):X\\to K$ and $s_Y=(g,\\beta r_Y):Y\\to L$. Their composites to $U,V$ are weak equivalences, so two-out-of-three makes $s_X,s_Y$ weak equivalences. Thus these are admissible two-leg replacements of the original cospan.",
+   "uses": [
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, displayed derived coefficient adjunction: agent expansion of the sharp-map comparison setup; Rezk Section 2.3 (printed p.4), Kerodon 0109 and 0329 read online, not archived. No Stacks tag states this simplicial comparison."
+   }
+  },
+  {
+   "text": "For any other admissible replacements $X\\xrightarrow{i}X_f\\to Z$ and $Y\\xrightarrow{j}Y_f\\to Z$, factor $f$ as a trivial cofibration $t:X\\to T$ followed by a fibration $T\\to Z$. The model lifting axiom applied to $t$ against $X_f\\to Z$ and against $k$ gives maps $T\\to X_f$ and $T\\to K$ over $Z$ whose restrictions to $X$ are $i$ and $s_X$. Both maps are weak equivalences by two-out-of-three. Similarly obtain a fibration $S\\to Z$, a trivial cofibration $Y\\to S$, and weak equivalences $S\\to Y_f$ and $S\\to L$ under $Y$ over $Z$. Strict-pullback invariance now gives weak equivalences $T\\times_Z S\\to X_f\\times_ZY_f$ and $T\\times_Z S\\to K\\times_Z L$: in each application the base map is $1_Z$, both legs into $Z$ on the $T$ side of the cospans are fibrations, and both outer component maps are weak equivalences. The maps from $Q$ to these three pullbacks commute because the lifts restrict to the specified maps from $X,Y$. Two-out-of-three therefore shows that $Q\\to X_f\\times_ZY_f$ is a weak equivalence exactly when $c_0:Q\\to K\\times_Z L$ is. Since the replacements of step 1 exist, the definition's existential condition is equivalent to $c_0$ being a weak equivalence.",
+   "uses": [
+    "lem-coef-kan-quillen-model-right-proper-core",
+    "lem-coef-kan-pullback-fibration-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, displayed derived coefficient adjunction: agent expansion of the sharp-map comparison setup; Rezk Section 2.3 (printed p.4), Kerodon 0109 and 0329 read online, not archived. No Stacks tag states this simplicial comparison."
+   }
+  },
+  {
+   "text": "Put $H=U\\times_CV$. Apply strict-pullback invariance to the map of cospans $(K\\to Z\\leftarrow L)\\to(U\\to C\\leftarrow V)$. The three component maps are weak equivalences by step 1, and the left legs $k,p$ are fibrations. Thus the coordinate map $w:K\\times_ZL\\to H$ is a weak equivalence. Define $d:D\\to H$ by $(\\alpha Ra,\\beta Rb)$; its coordinates have the same image in $C$ since $F Ra=G Rb$. Naturality gives the exact equality $w c_0=d r_Q$. Since $w$ and $r_Q$ are weak equivalences, two-out-of-three shows that $c_0$ is a weak equivalence if and only if $d$ is.",
+   "uses": [
+    "lem-coef-kan-quillen-model-right-proper-core",
+    "lem-coef-kan-pullback-fibration-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, displayed derived coefficient adjunction: agent expansion of the sharp-map comparison setup; Rezk Section 2.3 (printed p.4), Kerodon 0109 and 0329 read online, not archived. No Stacks tag states this simplicial comparison."
+   }
+  },
+  {
+   "text": "Let $E=\\operatorname{Fun}(\\Delta^1,C)$ with endpoint maps $e_0,e_1$. Apply the internal-Hom fibration-corner theorem to $\\partial\\Delta^1=\\{0,1\\}\\hookrightarrow\\Delta^1$ and the Kan fibration $C\\to\\Delta^0$. Its target identifies degreewise with $C\\times C$, so $(e_0,e_1):E\\to C\\times C$ is a Kan fibration. Define $E_B=E\\times_{e_1,C,G}B$ and $E_V=E\\times_{e_1,C,q}V$. The maps $E_B\\to C\\times B$ and $E_V\\to C\\times V$, given by $e_0$ and the other coordinate, are pullbacks of $(e_0,e_1)$ and hence fibrations. Their composites to $C$ are fibrations because $B,V$ are Kan: $C\\times B\\to C$ and $C\\times V\\to C$ are pullbacks of their terminal fibrations. Also $e_1:E\\to C$ is a fibration, by composing $(e_0,e_1)$ with the projection whose other factor is the Kan complex $C$. Thus $E_V\\to V$ is a fibration.",
+   "uses": [
+    "lem-cbc-internal-hom-fibration-corner-map",
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, displayed derived coefficient adjunction: agent expansion of the sharp-map comparison setup; Rezk Section 2.3 (printed p.4), Kerodon 0109 and 0329 read online, not archived. No Stacks tag states this simplicial comparison."
+   }
+  },
+  {
+   "text": "The map $E_B\\to E_V$ sends $(\\gamma,b)$ to $(\\gamma,\\beta b)$. It is the pullback of the weak equivalence $\\beta:B\\to V$ along the fibration $E_V\\to V$, since $q\\beta=G$. Right properness makes it a weak equivalence. Apply strict-pullback invariance to $(E_B\\xrightarrow{e_0}C\\xleftarrow{F}A)\\to(E_V\\xrightarrow{e_0}C\\xleftarrow{p}U)$, with component maps $E_B\\to E_V$, $1_C$, and $\\alpha$. The left legs are fibrations by step 4. After exchanging the two pullback coordinates this gives a weak equivalence $\\phi:P_R=A\\times_C E_B\\to U\\times_C E_V=P(p,q)$, explicitly $(a,\\gamma,b)\\mapsto(\\alpha a,\\gamma,\\beta b)$.",
+   "uses": [
+    "lem-coef-kan-quillen-model-right-proper-core",
+    "lem-coef-kan-pullback-fibration-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, displayed derived coefficient adjunction: agent expansion of the sharp-map comparison setup; Rezk Section 2.3 (printed p.4), Kerodon 0109 and 0329 read online, not archived. No Stacks tag states this simplicial comparison."
+   }
+  },
+  {
+   "text": "All of $U,V,C$ are Kan and $p,q$ are fibrations. The constant-path comparison theorem therefore gives a weak equivalence $\\psi:H\\to P(p,q)$, inserting the constant path at $p(u)=q(v)$. Let $c:D\\to P_R$ be the map in the statement. The internal functor and constant-diagram definitions give the strict equality $\\phi c=\\psi d$: both sides have coordinates $\\alpha Ra,\\beta Rb$, and the constant path at $F Ra=G Rb$. Since $\\phi,\\psi$ are weak equivalences, two-out-of-three gives $c\\in W$ if and only if $d\\in W$. Steps 2 and 3 identify this condition with the original square being homotopy cartesian. Every construction used terminal fibrations, factorizations, lifts and degreewise pullbacks; it required neither an initial Kan hypothesis nor a chosen point. Thus the argument also includes empty simplicial sets.",
+   "uses": [
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-quillen-model-right-proper-core",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, displayed derived coefficient adjunction: agent expansion of the sharp-map comparison setup; Rezk Section 2.3 (printed p.4), Kerodon 0109 and 0329 read online, not archived. No Stacks tag states this simplicial comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-quillen-model-right-proper-core",
+  "lem-coef-kan-pullback-fibration-invariance",
+  "lem-cbc-internal-hom-fibration-corner-map",
+  "lem-coef-kan-pullback-path-comparison",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, displayed derived coefficient adjunction: agent expansion of the sharp-map comparison setup; Rezk Section 2.3 (printed p.4), Kerodon 0109 and 0329 read online, not archived. No Stacks tag states this simplicial comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +132,45 @@
    "results": "{\"t\": \"2026-10-17T09:22:18Z\", \"tool\": \"grep\", \"query\": \"homotopy.?cartesian|homotopy.?pullback|derived.?pullback|fibrant.*cospan\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: zero hits in Mathlib/AlgebraicTopology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square of simplicial sets is homotopy cartesian using fibration replacements over its base if and only if its functorial Kan replacement maps by a weak equivalence to the mapping path pullback",
+   "results": "{\"t\": \"2026-10-17T12:12:10Z\", \"tool\": \"leanfinder\", \"query\": \"A square of simplicial sets is homotopy cartesian using fibration replacements over its base if and only if its functorial Kan replacement maps by a weak equivalence to the mapping path pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.Cylinder.LeftHomotopy.covering_homotopy\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.PathObject.RightHomotopy.homotopy_extension\", \"HomotopicalAlgebra.PathObject.trans_P\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\"], \"digest\": \"847a6ad3bd186bab\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern path-object projections, model axioms, homotopies or ordinary pullbacks, not the arbitrary-base two-leg recognition theorem; PathObject.lean and SimplicialSet/CategoryWithFibrations.lean inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.PathObject, HomotopicalAlgebra.WeakEquivalence",
+   "results": "{\"t\": \"2026-10-17T12:12:42Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.PathObject, HomotopicalAlgebra.WeakEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.mk\", \"HomotopicalAlgebra.PathObject.weakEquivalence_ι\", \"HomotopicalAlgebra.PathObject.instWeakEquivalenceP₀\", \"HomotopicalAlgebra.PathObject.instWeakEquivalenceP₁\", \"HomotopicalAlgebra.PathObject.RightHomotopy.weakEquivalence_iff\"], \"digest\": \"0d0e10a606998940\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern path-object projections, model axioms, homotopies or ordinary pullbacks, not the arbitrary-base two-leg recognition theorem; PathObject.lean and SimplicialSet/CategoryWithFibrations.lean inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.?cartesian|homotopy.?pullback|fibrant.*cospan",
+   "results": "{\"t\": \"2026-10-17T12:12:42Z\", \"tool\": \"grep\", \"query\": \"homotopy.?cartesian|homotopy.?pullback|fibrant.*cospan\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits in Mathlib/AlgebraicTopology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homotopy cartesian square of simplicial sets is detected by the mapping path space homotopy pullback after fibrant replacement",
+   "results": "{\"t\": \"2026-10-17T12:13:33Z\", \"tool\": \"leansearch\", \"query\": \"A homotopy cartesian square of simplicial sets is detected by the mapping path space homotopy pullback after fibrant replacement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.PathObject.trans\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"CategoryTheory.BicartesianSq.toIsPullback\", \"HomotopicalAlgebra.ModelCategory.cm4a\", \"CategoryTheory.BicartesianSq.of_isPullback_isPushout\", \"SSet.instFinitePullback\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"579564ba1e0b09a2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern path-object projections, model axioms, homotopies or ordinary pullbacks, not the arbitrary-base two-leg recognition theorem; PathObject.lean and SimplicialSet/CategoryWithFibrations.lean inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weak equivalences between simplicial cospans induce weak equivalences between their homotopy pullbacks after replacing all objects by Kan complexes",
+   "results": "{\"t\": \"2026-10-17T12:13:34Z\", \"tool\": \"leanfinder\", \"query\": \"Weak equivalences between simplicial cospans induce weak equivalences between their homotopy pullbacks after replacing all objects by Kan complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.PathObject.instWeakEquivalenceP₁\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.PathObject.instWeakEquivalenceP₀\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\"], \"digest\": \"1c3ee0b58ae1a4df\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern path-object projections, model axioms, homotopies or ordinary pullbacks, not the arbitrary-base two-leg recognition theorem; PathObject.lean and SimplicialSet/CategoryWithFibrations.lean inspected."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-sharp-pullback-calculus",
@@ -84,5 +202,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-fibrant-path-recognition",
+  "worker": "stage1",
+  "summary": "Q133 expands the arbitrary-base/Kan-replacement comparison using only existing model/right-properness, strict-pullback-invariance, internal-Hom-corner and constant-path-comparison nodes. It compares all two-leg replacements by explicit lifts, changes the base by right properness, and verifies the exact constant-path maps. No statement change and no new nodes.",
+  "blueprint": "Paragraph 2, displayed derived coefficient adjunction of prop-coef-integral-exceptional-adjoint.proof.md; this is the fibrant-replacement/path-model comparison needed by the descendant sharp-map setup. The existing ancestry is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-c1be1ad36",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-c1be1ad36 (reviewer sub-agent of L); spot-checked: I read the whole item, all six steps and the full statements of the five cited nodes. The statement is true and not weakened. Rezk's existential two-leg definition holds iff Q→K×_Z L is a weak equivalence, iff RQ→U×_C V is one, iff RQ→P_R is one. I checked the edge cases Z empty (it forces RZ, RQ and P_R empty) and X empty with Z nonempty, and no step picks a point. Step 1: K→U is the pullback of r_Z along the fibration p, so right properness applies, and s_X is well defined by naturality (pα r_X = r_Z f). Step 2: lifts along trivial cofibrations against X_f→Z and k. The strict-pullback invariance node's hypotheses hold, with fibration legs T→Z, X_f→Z and k, and all components weak equivalences. The maps from Q commute. Step 3: w c_0 = d r_Q holds exactly. Step 4: the Mathlib leaf SSet.fibration_pullbackObjObjπ (PushoutProduct.lean:70-93) applied to ∂Δ¹↪Δ¹ and C→Δ⁰ makes (e0,e1) a fibration; E_B→C and E_V→V are fibrations as pullbacks and composites. Step 5: E_V×_V B = E_B, so right properness gives a weak equivalence, and the invariance node gives φ:P_R→P(p,q) with the right endpoint orientation. Step 6: the path-comparison node's Kan and fibration hypotheses hold, and φc = ψd holds strictly. There is no cycle over the 72 nodes the item reaches; the invariance and fibration-criterion nodes, which depend on the item, are not cited. Route: three cited nodes are in the same unit, plus one definition and one Mathlib leaf. No duplicate: lem-coef-kan-nerve-pullback-recognition needs Kan corners and uses ∞-cartesianness. No new nodes, no SGA, ten search records of all three kinds. Rezk and Kerodon are not in the literature folder; the report lists them as WANTED and proof_origin is agent. No fixes."
  }
 }
