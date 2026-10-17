@@ -100,7 +100,9 @@ theorem exists_open_spreading_geometric_generic_cover {X S : Scheme.{u}}
   refine ⟨g '' U, g.isOpenMap U hU, ⟨η, hηU, hgη⟩, ?_⟩
   intro s hs K hK y
   obtain ⟨t, htU, hts⟩ := hs
-  obtain ⟨E, hE, z, p, hp⟩ := exists_common_field_fibre_comparison f g t s hts K y
+  obtain ⟨E, hE, z, k, heq, -, hp⟩ := exists_common_field_fibre_comparison f g t s hts K y
+  let p := (commonFieldFibreIso f g t s z k y heq).hom ≫
+    pullback.fst (pullback.snd (f.fiberToSpecResidueField s) y) k
   let q := pullback.fst (h.fiberToSpecResidueField t) z ≫ h.fiberι t
   let B : I → Set ↥(pullback (h.fiberToSpecResidueField t) z) := fun i ↦ q ⁻¹' C i
   refine ⟨pullback (h.fiberToSpecResidueField t) z, p, B, hp,
