@@ -21,7 +21,12 @@
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "def-coef-dg-quillen-diagram",
+  "def-coef-strict-quillen-sections",
+  "def-coef-quillen-derived-diagram",
+  "def-coef-cosimplicial-product-total",
+  "lem-coef-sheaf-flat-model"
  ],
  "proof": [
   {
@@ -304,5 +309,39 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d628a11f0",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Statement, dependencies, declarations, docstrings, edge cases, source alignment, and recorded per-file compilation checked; no substantive errors found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.QuillenSectionRectification",
+  "declaration": "CategoryTheory.QuillenSections.quillenSectionRectification",
+  "declarations": [
+   "CategoryTheory.QuillenSections.segmentPre",
+   "CategoryTheory.QuillenSections.segmentMap",
+   "CategoryTheory.QuillenSections.MappingTerm",
+   "CategoryTheory.QuillenSections.MappingReplacement",
+   "CategoryTheory.QuillenSections.initialString",
+   "CategoryTheory.QuillenSections.finalString",
+   "CategoryTheory.QuillenSections.MappingReplacement.projection",
+   "CategoryTheory.QuillenSections.stringPairing",
+   "CategoryTheory.QuillenSections.totalPairingTerm",
+   "CategoryTheory.QuillenSections.TotalMappingComputation",
+   "CategoryTheory.QuillenSections.complexSpace",
+   "CategoryTheory.QuillenSections.Rectification",
+   "CategoryTheory.QuillenSections.quillenSectionRectification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/QuillenSectionRectification.lean",
+  "statement": "theorem quillenSectionRectification {I : Type v} [SmallCategory I] (M : I → Type u) [∀ i, Category.{v} (M i)] [∀ i, ModelCategory (M i)] [∀ i, EnrichedOrdinaryCategory Complex.{v} (M i)] [∀ i, DgModel (M i)] (D : Diagram I M) (L : I → SSet.{max u v t}) (q : ∀ i : I, HomotopicalAlgebra.FiniteReedy.largeNerve.{u, v, max u v t} (M i) ⟶ L i) (hq : ∀ i : I, HomotopicalAlgebra.FiniteReedy.IsLocalization (HomotopicalAlgebra.weakEquivalences (M i)) (q i)) (stable : ∀ i : I, CoefficientFlatModel.IsStableEnhancement (L i)) : Nonempty (Rectification.{u, v, t} D L q)",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the stable homotopy theory with its chain enrichment allowed explicitly by the statement. Derived sections are the entire relative functor simplicial set, and the mapping comparison is the canonical augmented, composition-compatible bar totalization. No arbitrary proposition placeholders and no conclusion hypotheses."
  }
 }

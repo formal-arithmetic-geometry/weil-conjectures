@@ -1,0 +1,114 @@
+{
+ "id": "def-coef-dg-quillen-diagram",
+ "kind": "definition",
+ "title": "Combinatorial differential graded models and enriched Quillen diagrams",
+ "status": "split",
+ "statement": "Let $\\operatorname{Ch}(\\mathbf{Ab})$ denote unbounded cochain complexes as in [def-weil-abstract-derived-category]. A combinatorial dg model consists of a category with a Mathlib model structure, all small limits and colimits, the locally presentable, set-generated functorial-factorization data of [lem-coef-model-colimit-localization-comparison], and an ordinary-compatible enrichment over these complexes. It is tensored and cotensored: $K\\otimes X$ and $Y^K$ have specified coevaluation/evaluation maps whose composition-induced maps of complexes are representable bijections after testing by every complex. For any cofibration $a:A\\to B$ and fibration $p:X\\to Y$, the canonical map $\\underline{Hom}(B,X)\\to\\underline{Hom}(A,X)\\times_{\\underline{Hom}(A,Y)}\\underline{Hom}(B,Y)$ is degreewise surjective and is a quasi-isomorphism if $a$ or $p$ is a weak equivalence. For a small category $I$ and such categories $M_i$, a dg Quillen diagram assigns enriched ordinary functors $F_\\alpha:M_i\\to M_j$, $U_\\alpha:M_j\\to M_i$, an adjunction with enriched unit and counit, preservation by $F_\\alpha$ of cofibrations and trivial cofibrations, and enriched natural isomorphisms $F_\\beta F_\\alpha\\cong F_{\\alpha\\gg\\beta}$ and $F_{1_i}\\cong id$, with the associativity and both unit identities.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-coef-model-colimit-localization-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2: generic enriched coefficient-diagram rectification, including the free-section construction and coherent mapping end."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "differential graded Quillen diagram strict sections model structure",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.mk'\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \"[CategoryWithFibrations C] [CategoryWithCofibrations C] [CategoryWithWeakEquivalences C] [HasFiniteLimits C]\\n  [HasFiniteColimits C] [(weakEquivalences C).HasTwoOutOfThreeProperty]\\n  [IsWeakFactorizationSystem (cofibrations C) (trivialFibrations C)]\\n  [IsWeakFactorizationSystem (trivialCofibrations \", \"doc\": \"A structure on a category $\\\\mathcal{C}$ defining it as a model category, consisting of three classes of morphisms (fibrations, cofibrations, and weak equivalences) satisfying the axioms: (1) $\\\\mathcal\"}\n  {\"name\": \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \": (fibrations C).IsStableUnderProductsOfShape J\", \"doc\": \"A category equipped with cofibrations, fibrations, and weak equivalences, together with a weak factorization system and stability of fibrations under products, satisfies the axioms of a model category\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": fibrations SSet.{u} = J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Fractions\", \"type\": \"{X Y : CochainComplex C ℤ} (f : Q.obj X ⟶ Q.obj Y) (n : ℤ) [X.IsStrictlyLE n] :\\n  ∃ (X' : CochainComplex C ℤ) (_ : X'.IsStrictlyLE n) (s : X' ⟶ X) (_ : IsIso (Q.map s)) (g : X' ⟶ Y),\\n    f = inv (Q.map s) ≫ Q.map g\", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, and a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category $D(\\\\mathcal{C})$, if $X$ is strictly supported above degree $n$ (i.e\"}\n  {\"name\": \"CategoryTheory.DifferentialObject.noConfusionType\", \"module\": \"Mathlib.CategoryTheory.DifferentialObject\", \"type\": \"Sort u_2 →\\n  {S : Type u_1} →\\n    [inst : AddMonoidWithOne S] →\\n      {C : Type u} →\\n        [inst_1 : CategoryTheory.Category.{v, u} C] →\\n          [inst_2 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n            [inst_3 : CategoryTheory.HasShift C S] →\\n              CategoryTheory.DifferentialObj\", \"doc\": \"A differential object in a category $\\\\mathcal{C}$ equipped with a shift operation parameterized by an additive monoid $S$ and zero morphisms consists of an object $X$ in $\\\\mathcal{C}$ and a morphism $\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": CategoryWithFibrations SSet.{u}\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.mk\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (categoryWithFibrations :\\n        autoParam (HomotopicalAlgebra.CategoryWithFibrations C)\\n          HomotopicalAlgebra.ModelCategory.categoryWithFibrations._autoParam) →\\n      (categoryWithCofibrations :\\n          autoParam (Homotopica\", \"doc\": \"Constructs a model category structure on a category $\\\\mathcal{C}$ by specifying three classes of morphisms (fibrations, cofibrations, weak equivalences) and verifying the axioms: (1) $\\\\mathcal{C}$ has\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \"[hf : Fibration f] {n : ℕ} (i : Fin (n + 2)) : HasLiftingProperty (horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No exact definition or theorem. ModelCategory axioms and ordinary derived adjunctions are reused; they do not specify a varying dg Quillen diagram, its strict end, or its derived total-category presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "diagram of differential graded enriched Quillen adjunctions with coherent composition and unit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derivedε\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ constructed as the right derived functor description, combining whiskered natural transformations $\\\\beta$, \"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G, F$ forming an adjunction $G \\\\dashv F$, with localizations $L_1, L_2$ respecting a morphism property $W_2$\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"For any object $X_2$ in category $\\\\mathcal{C}_2$, the composition of $G'$ applied to $\\\\beta_{X_2}$ with the derived counit $\\\\varepsilon'$ evaluated at $L_2(X_2)$ equals the composition of $\\\\alpha_{F(X\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$, $F : \\\\mathcal{C}_2 \\\\to \\\\mathcal{C}_1$ forming an adjunction $G \\\\dashv \"}\n  {\"name\": \"CategoryTheory.Adjunction.comp\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} →\\n            {E : Type u₃} →\\n              [ℰ : CategoryTheory.Category.{v₃\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ and adjunctions $F \\\\dashv G$ between $\\\\mathcal{C}$ and $\\\\mathcal{D}$, $H \\\\dashv I$ between $\\\\mathcal{D}$ and $\\\\mathcal{E}$, the composite adjun\"}\n  {\"name\": \"CategoryTheory.Enriched.FunctorCategory.enrichedId_π_assoc\", \"module\": \"Mathlib/CategoryTheory/Enriched/FunctorCategory\", \"type\": \"∀ (V : Type u₁) [inst : CategoryTheory.Category.{v₁, u₁} V] [inst_1 : CategoryTheory.MonoidalCategory V] {C : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} C] {J : Type u₃} [inst_3 : CategoryTheory.Category.{v₃, u₃} J]\\n  [inst_4 : CategoryTheory.EnrichedOrdinaryCategory V C] (F₁ : CategoryTh\", \"doc\": \"For any monoidal category $\\\\mathcal{V}$, category $\\\\mathcal{C}$ enriched over $\\\\mathcal{V}$, small category $\\\\mathcal{J}$, and functors $F_1: \\\\mathcal{J} \\\\to \\\\mathcal{C}$, the composition of the enric\"}\n  {\"name\": \"CategoryTheory.Enriched.FunctorCategory.enrichedComp_π\", \"module\": \"Mathlib/CategoryTheory/Enriched/FunctorCategory\", \"type\": \"∀ (V : Type u₁) [inst : CategoryTheory.Category.{v₁, u₁} V] [inst_1 : CategoryTheory.MonoidalCategory V] {C : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} C] {J : Type u₃} [inst_3 : CategoryTheory.Category.{v₃, u₃} J]\\n  [inst_4 : CategoryTheory.EnrichedOrdinaryCategory V C] (F₁ F₂ F₃ : Cate\", \"doc\": \"For each object $ j $ in the small category $ \\\\mathcal{J} $, the composition of the enriched composition morphism $[F_1, F_2]_{\\\\mathcal{V}} \\\\otimes [F_2, F_3]_{\\\\mathcal{V}} \\\\to [F_1, F_3]_{\\\\mathcal{V}\"}\n  {\"name\": \"CategoryTheory.Enriched.FunctorCategory.enrichedComp_π_assoc\", \"module\": \"Mathlib/CategoryTheory/Enriched/FunctorCategory\", \"type\": \"∀ (V : Type u₁) [inst : CategoryTheory.Category.{v₁, u₁} V] [inst_1 : CategoryTheory.MonoidalCategory V] {C : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} C] {J : Type u₃} [inst_3 : CategoryTheory.Category.{v₃, u₃} J]\\n  [inst_4 : CategoryTheory.EnrichedOrdinaryCategory V C] (F₁ F₂ F₃ : Cate\", \"doc\": \"Given a monoidal category $\\\\mathcal{V}$, an ordinary category $\\\\mathcal{C}$, and a small category $\\\\mathcal{J}$, the enriched composition morphism $[F_1, F_2]_{\\\\mathcal{V}} \\\\otimes [F_2, F_3]_{\\\\mathca\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No exact definition or theorem. ModelCategory axioms and ordinary derived adjunctions are reused; they do not specify a varying dg Quillen diagram, its strict end, or its derived total-category presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "DgModel|DGModel|QuillenSection|dgEnrichment|DGCategory",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "No exact definition or theorem. ModelCategory axioms and ordinary derived adjunctions are reused; they do not specify a varying dg Quillen diagram, its strict end, or its derived total-category presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n DgModel|DgQuillen|QuillenDiagram|StrictQuillenSections|IsSectionEnd in WeilConjectures and lean/Sheaf; rg -l strict section|Quillen diagram dag/nodes; blueprint_refs.py search Quillen",
+   "results": "No corresponding declaration in WeilConjectures or lean/Sheaf. DAG hits are theorem nodes using inline conventions; blueprint search: 0 blueprint nodes match Quillen. Existing SSet.Enhanced.sectionSSet is used, not redeclared; existing CombinatorialModelCategory and IsStableEnhancement are reused.",
+   "date": "2026-10-17",
+   "verdict": "The three definitions introduced here have no existing exact interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-quillen-section-rectification",
+  "date": "2026-10-17",
+  "group": "Q130"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: generic enriched coefficient-diagram rectification, including the free-section construction and coherent mapping end.",
+   "via": [
+    "lem-coef-quillen-section-rectification",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgQuillenDiagram",
+  "declaration": "CategoryTheory.QuillenSections.Diagram",
+  "declarations": [
+   "CategoryTheory.QuillenSections.Complex",
+   "CategoryTheory.QuillenSections.TensorCotensor",
+   "CategoryTheory.QuillenSections.IsHomComparison",
+   "CategoryTheory.QuillenSections.DgModel",
+   "CategoryTheory.QuillenSections.EnrichedAction",
+   "CategoryTheory.QuillenSections.EnrichedAction.map",
+   "CategoryTheory.QuillenSections.IsEnrichedNatural",
+   "CategoryTheory.QuillenSections.Diagram"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgQuillenDiagram.lean",
+  "statement": "structure Diagram (I : Type v) [SmallCategory I] (M : I → Type u) [∀ i, Category.{v} (M i)] [∀ i, ModelCategory (M i)] [∀ i, EnrichedOrdinaryCategory Complex.{v} (M i)]",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d628a11f0",
+  "group": "Q130",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d628a11f0",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Statement, dependencies, declarations, docstrings, edge cases, source alignment, and recorded per-file compilation checked; no substantive errors found."
+ }
+}
