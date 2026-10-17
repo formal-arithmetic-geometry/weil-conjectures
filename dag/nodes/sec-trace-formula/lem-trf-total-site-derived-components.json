@@ -12,11 +12,93 @@
   "def-weil-size-convention",
   "def-trf-geometric-morphism",
   "def-weil-abstract-derived-category",
-  "def-weil-pbc-simplicial-object"
+  "def-weil-pbc-simplicial-object",
+  "lem-trf-total-site-component-restriction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the total-site sheaf description, a sheaf is exactly a family of component sheaves with transition maps along every simplicial operator satisfying the identity and composition compatibilities. The component functors are therefore the restrictions $r_n$ in the new component-restriction lemma. That lemma gives the exact left adjoint formula, exactness of each $r_n$, and conservativity of the family: a map of total sheaves is an isomorphism exactly when all its component maps are isomorphisms.",
+   "uses": [
+    "lem-trf-total-site-component-restriction",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 09WF (lemma-describe-sheaves-simplicial-site-site) and 09WG (lemma-restriction-to-components-site)."
+   }
+  },
+  {
+   "text": "For compatible site morphisms $h_n$, define the inverse image of a family by $(h^{-1}F)_n=h_n^{-1}F_n$; its transition map along $\\alpha:[p]\\to[q]$ is $f_\\alpha^{-1}h_p^{-1}F_p\\cong h_q^{-1}f'^{-1}_\\alpha F_p\\xrightarrow{h_q^{-1}F(\\alpha)}h_q^{-1}F_q$, using the specified commutation isomorphism $f_\\alpha^{-1}h_p^{-1}\\cong h_q^{-1}f'^{-1}_\\alpha$ (inverse images of $h_p\\circ f_\\alpha\\cong f'_\\alpha\\circ h_q:\\mathrm{Sh}(\\mathcal C_q)\\to\\mathrm{Sh}(\\mathcal D_p)$), and the cocycle identities give the identity and composition compatibilities. Define $h_*G$ degreewise by $(h_*G)_n=h_{n,*}G_n$. For $\\alpha:[p]\\to[q]$, its transition map $f'^{-1}_\\alpha h_{p,*}G_p\\to h_{q,*}G_q$ is the $(h_q^{-1}\\dashv h_{q,*})$-adjoint of the composite $h_q^{-1}f'^{-1}_\\alpha h_{p,*}G_p\\cong f_\\alpha^{-1}h_p^{-1}h_{p,*}G_p\\xrightarrow{f_\\alpha^{-1}\\varepsilon_p}f_\\alpha^{-1}G_p\\xrightarrow{G(\\alpha)}G_q$, where $\\varepsilon_p$ is the component counit. Taking component adjoints gives mutually inverse maps between compatible family morphisms $h^{-1}F\\to G$ and $F\\to h_*G$: a family $(F_n\\to h_{n,*}G_n)$ is compatible with the transition maps exactly when its adjoint family $(h_n^{-1}F_n\\to G_n)$ is, by naturality of the component adjunctions and the definition of the two transition maps; the two composites are the identity by the component triangle identities. Hence $h^{-1}\\dashv h_*$ and $r_nh_*=h_{n,*}r_n$ on the nose, with the component units and counits. (Stacks proves the same in the strict case A via $v_{total}$, Tag 0D96, where $h_{total,*}$ is the system $(h_{n,*}F_n,h_{n,*}F(\\varphi))$ and $h_{total}^{-1}$ its componentwise left adjoint.)",
+   "uses": [
+    "lem-trf-total-site-component-restriction",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D96, lemma-morphism-simplicial-sites (proof, case A: $h_{total,*}$ and $h_{total}^{-1}$ on systems and $(g'_n)^{-1}h_{total,*}=h_{n,*}g_n^{-1}$)."
+   }
+  },
+  {
+   "text": "Let $L\\in D^+(\\mathcal C_{total})$. The total site is a small site, so its abelian sheaves have enough injectives [lem-weil-pbc-site-sheaves-enough-injectives], and they are the modules over the constant integer sheaf, hence a Grothendieck abelian category [lem-weil-pbc-ring-sheaves-grothendieck] (likewise for each $\\mathcal C_n$, $\\mathcal D_n$, $\\mathcal D_{total}$). By the bounded-below representative theorem choose a bounded-below complex $J$ of injective abelian sheaves on the total site with $QJ\\cong L$; it is K-injective. By the component-restriction lemma every $r_nJ$ is a bounded-below complex of injectives on $\\mathcal C_n$, hence K-injective, and since $r_n$ is exact it represents $r_nL$. By the underived identity $r_nh_*=h_{n,*}r_n$ of step 2, $r_n(h_*J)=h_{n,*}(r_nJ)$; the left side represents $r_nRh_*L$ ($r_n$ exact, applied termwise) and the right side represents $Rh_{n,*}(r_nL)$. This gives $r_nRh_*L\\simeq Rh_{n,*}(r_nL)$; by the uniqueness of K-injective resolutions up to unique homotopy [lem-sp-kinjective-computes](1) it is independent of $J$ and natural in $L$.",
+   "uses": [
+    "lem-trf-total-site-component-restriction",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D97, lemma-direct-image-morphism-simplicial-sites (proof: K-injective representative, Tag 09WH lemma-restriction-injective-to-component-site, and Tag 0D96)."
+   }
+  },
+  {
+   "text": "The inverse image $h^{-1}$ of step 2 is exact: by the component-restriction lemma a sequence of total abelian sheaves is exact iff each restriction $r_n$ of it is (each $r_n$ is exact and the family is conservative, applied to the cohomology objects), and $r_nh^{-1}=h_n^{-1}r_n$ with $h_n^{-1}$ exact as the inverse image of a geometric morphism. Thus $h^{-1}$ is applied termwise to any representative of $K$, preserves quasi-isomorphisms and induces $h^{-1}:D^+(\\mathcal D_{total})\\to D^+(\\mathcal C_{total})$ by the universal property of the localization [def-weil-abstract-derived-category]. Restricting the termwise identity gives $r_nh^{-1}K=h_n^{-1}(r_nK)$ on representatives, natural in $K$, hence the canonical natural isomorphism in $D^+$.",
+   "uses": [
+    "lem-trf-total-site-component-restriction",
+    "def-trf-geometric-morphism",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D96, lemma-morphism-simplicial-sites (proof: exactness of $h_{total}^{-1}$ and $g_n^{-1}h_{total}^{-1}=h_n^{-1}(g'_n)^{-1}$); Tag 09WG part (1)."
+   }
+  },
+  {
+   "text": "The ordinary unit of $h^{-1}\\dashv h_*$ is the family of component units, by the adjunction of step 2. Represent $K$ by a complex $K$ of total abelian sheaves on $\\mathcal D_{total}$ and choose a K-injective resolution $h^{-1}K\\to I$ with $I$ a bounded-below complex of injectives (step 3); the derived unit $\\eta_{h,K}$ is represented by the composite chain map $K\\to h_*h^{-1}K\\to h_*I$. Applying $r_n$ gives $r_nK\\to h_{n,*}h_n^{-1}(r_nK)\\to h_{n,*}(r_nI)$, the first arrow being the component unit. By steps 3 and 4, $r_nI$ is a K-injective resolution of $r_nh^{-1}K=h_n^{-1}(r_nK)$, so this composite is the standard representative of $\\eta_{h_n,r_nK}:r_nK\\to Rh_{n,*}h_n^{-1}(r_nK)$, and its target is identified with $r_nRh_*h^{-1}K$ precisely by the comparison of step 3 (computed with $J=I$) followed by $Rh_{n,*}$ of the comparison of step 4. Hence, under these isomorphisms, $r_n(\\eta_{h,K})=\\eta_{h_n,r_nK}$ as morphisms of $D^+(\\mathcal D_n)$; independence of the choices is [lem-sp-kinjective-computes](1).",
+   "uses": [
+    "lem-trf-total-site-component-restriction",
+    "def-trf-geometric-morphism",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 0D96 and 0D97 (componentwise adjunction and componentwise K-injective computation); the unit computation is written out here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-geometric-morphism",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sp-kinjective-computes",
+  "lem-trf-total-site-component-restriction",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-site-sheaves-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tags 09WF, 09WG, 09WH, 0D96 and 0D97; componentwise injective-resolution proof of the derived comparison, with the unit compatibility written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,7 +137,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-proper-hypercover-etale-descent",
@@ -67,7 +149,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Normal-cone specialization, Orgogozo Lemma 3.1.1 first descent isomorphism: passage from component ph/etale comparison to the total topos, and the derived composition calculation in Stacks 0DHL.",
+   "place": "Normal-cone specialization, Orgogozo Lemma 3.1.1 first descent isomorphism: passage from component ph/etale comparison to the total topos, and the derived composition calculation in Stacks 0D97.",
    "via": [
     "lem-trf-proper-hypercover-etale-descent",
     "lem-trf-nearby-proper-hyperdescent",
@@ -79,5 +161,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-total-site-derived-components",
+  "worker": "stage1",
+  "summary": "Expanded the imported Stacks statement into the total-site family description, the explicit componentwise adjunction, the bounded-below K-injective comparison, exact inverse-image comparison, and componentwise unit calculation. Added one strict supporting node for exact/conservative component restriction and its injective-resolution consequence; no Mathlib declaration matches the total simplicial-site result.",
+  "blueprint": "Realizes lem-trf-local-term-locality proof paragraph (2), specifically the component-to-total descent isomorphism and derived composition calculation cited through Stacks Tags 09WF, 09WG, 0D96, 09WH and 0D97."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-55d103027",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-55d103027 (reviewer sub-agent of L); spot-checked: I read the Stacks sources: spaces-simplicial.tex 09WF, 09WG (all parts with proof), 09WH, 0D95/0D96 and 0D97 (0DH0 is the ringed lemma). The item statement is correct and unchanged: it generalizes Stacks case A to cocycle coherence and restricts to D^+. I checked it on a constant simplicial site (cosimplicial sheaves, where the left adjoint is a left Kan extension). Repairs: (1) Step 2 wrote the coherence iso as h_p^{-1}f_α^{-1}≅f'_α^{-1}h_q^{-1}, which does not typecheck; rewritten as f_α^{-1}h_p^{-1}≅h_q^{-1}f'^{-1}_α, with the transition map of h_*G given by f_α^{-1} of the counit followed by G(α). (2) Step 5 represented the derived unit on a K-injective representative of K and used conservativity to get an equality; rewritten as K→h_*h^{-1}K→h_*I for a resolution I of h^{-1}K, whose restriction is the standard representative of η_{h_n}. (3) Step 3 did not discharge the hypotheses of the cited nodes (enough injectives, Grothendieck); added lem-weil-pbc-site-sheaves-enough-injectives and lem-weil-pbc-ring-sheaves-grothendieck, both on the unit route. (4) Source tag 0DH0 corrected to 0D96, and 09WH added. (5) New node lem-trf-total-site-component-restriction: its statement now explicitly allows the coherence-up-to-isomorphism setting the item uses, and drops the needless 'bounded-below' so the K-injective clause matches 09WH. Its blueprint via was missing the item in front; fixed. The new node is a genuine lemma (09WG+09WH) and strictly smaller than the item. I found no duplicate in the DAG. Its Loogle record is a malformed query, but LeanSearch, LeanFinder and grep are recorded. All statements cited are on the unit route; no tool_uses are needed. No SGA source is used.; 2 file(s) fixed by the reviewer"
  }
 }
