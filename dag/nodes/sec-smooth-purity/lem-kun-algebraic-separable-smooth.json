@@ -133,5 +133,30 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ass3026 (reviewer sub-agent of L); spot-checked: Filtered/directed union of finite separable subextensions elementary (compositum, union by algebraicity, separability inherited); citer lem-kun-separable-smooth-colimit uses it only for finite separable L_j, consistent. FIX more, RETURN less: C4 lem-weil-pbc-finite-separable-extension-etale concludes etale in the sense of def-weil-etale-morphism (lfp+flat+unramified), while the step took etale=>smooth from def-sbc-smooth-morphisms whose 'etale' is smooth of rel. dim. 0, a different definition; now cites existing lem-weil-pbc-etale-smooth-zero-dimensional-fibres for the bridge (added to uses and proof_deps). Missed by J1 second reading.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-744dc32dc",
+  "group": "Q110",
+  "result": "fix",
+  "note": "Mathematics correct. IsSeparable K L includes algebraicity. The finite IntermediateField subtype index is filtered; the stages are IsSeparable/Etale/Smooth; the IsColimit of the canonical inclusion cocone in CommAlgCat.{v} K has apex L. These match the node and blueprint statement verbatim (master and main-20261017). Deps checked: Algebra.Etale.of_finite_of_isSeparable signature by #check; AlgebraicGeometry.Smooth = affine-local Algebra.Smooth; the proof-dep module is imported non-public. Edge cases checked: L=K, infinite L, char p, nonempty index, independent universes u,v. Helper diagram and cocone are real canonical data. Only the theorem proof is sorry. Docstrings carry the source and blueprint id. lean.statement is verbatim in the file. The node differs from the base only in its lean field. The second-reading section is the standard 2026-10-17 note. nt_compile --json: clean, 3.4 s. Only finding: the module docstring lacked the Main definitions/Main statements list (H9 convention). Fixed in fixes/AlgebraicSeparableSmooth.lean, a complete replacement for lean/Sheaf/FieldTheory/AlgebraicSeparableSmooth.lean that adds only that list; it compiles clean in 3.1 s, and the declarations and statement are unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.AlgebraicSeparableSmooth",
+  "declaration": "FieldTheory.algebraic_separable_extension_is_filtered_colimit",
+  "declarations": [
+   "FieldTheory.finiteSubextensionDiagram",
+   "FieldTheory.finiteSubextensionCocone",
+   "FieldTheory.algebraic_separable_extension_is_filtered_colimit"
+  ],
+  "file": "lean/Sheaf/FieldTheory/AlgebraicSeparableSmooth.lean",
+  "statement": "theorem algebraic_separable_extension_is_filtered_colimit {K : Type u} {L : Type v} [Field K] [Field L] [Algebra K L] [Algebra.IsSeparable K L] : IsFiltered {E : IntermediateField K L // Module.Finite K E} ∧ (∀ E : {E : IntermediateField K L // Module.Finite K E}, Algebra.IsSeparable K E.1 ∧ Algebra.Etale K E.1 ∧ Algebra.Smooth K E.1) ∧ Nonempty (IsColimit (finiteSubextensionCocone K L))",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The finite intermediate-field inclusion diagram and its cocone are canonical helpers for this node. Algebra.IsSeparable includes algebraicity. Finite stages are encoded by Module.Finite in the index; their separability, etaleness, smoothness, filteredness and the K-algebra colimit are all asserted.",
+  "fixed_by": "NT-stage2-cc-744dc32dc"
  }
 }

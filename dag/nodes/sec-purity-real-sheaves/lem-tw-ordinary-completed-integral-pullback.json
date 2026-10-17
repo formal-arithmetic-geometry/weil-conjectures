@@ -314,5 +314,47 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q40-4bf0198ea (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited statements; checked Bhatt–Scholze and Stacks sources, coefficient categories, all seven steps, strict completion-map normalization, edge cases, duplicates and route restrictions. No delivery repairs needed. Accepted thirteen generic tool uses. Detailed checks and one inherited indirect missing-reference observation are recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f23bb2b52",
+  "group": "Q147",
+  "result": "pass",
+  "note": "Read the node, the 14 statement dependencies and the exact side declarations. All clauses match without stronger hypotheses: IsNoetherian, Krull-dimension bound and IsUnit l on both schemes, the recorded pro-etale site and completed coefficient ring, and the recorded integral constructibility predicate. The coefficient map c_f is the unique map fixed by its finite projections through the recorded constant-section map. Ordinary pullback is Mathlib SheafOfModules.pullback derived by totalLeftDerived; the recorded ringedTopoiDerivedPullback dependency is only an existence theorem, so this is not a second definition. The comparison eta is uniquely fixed on every flat-term K-flat representative by the (quotient product, 0) map into the existing strict Roos cone with its real transitions, so it is natural and independent of the resolution; all uniqueness claims are true. The single universe for schemes and E is inherited from the sfIntegralConstructible dependency. Gates met: no hollow definitions, all theorems sorry, source and blueprint docstrings, proof steps in the main docstring, statement verbatim and all 22 declarations recorded (checked by script), node otherwise unchanged. nt_compile --json compiled cleanly in 8.7 s; the axioms check and an rfl universe check also compiled. No faults."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrdinaryCompletedIntegralPullback",
+  "declaration": "WeilConjectures.ordinaryCompletedIntegralPullback",
+  "declarations": [
+   "WeilConjectures.ordinaryIntegralFiniteDirectRingMap",
+   "WeilConjectures.ordinaryIntegralDirectRingMap_existsUnique",
+   "WeilConjectures.ordinaryIntegralDirectRingMap",
+   "WeilConjectures.ordinaryIntegralModulePush",
+   "WeilConjectures.ordinaryIntegralModulePush_isRightAdjoint",
+   "WeilConjectures.ordinaryIntegralModulePull",
+   "WeilConjectures.ordinaryIntegralModuleAdjunction",
+   "WeilConjectures.ordinaryIntegralModulePull_additive",
+   "WeilConjectures.ordinaryIntegralPull_hasLeftDerived",
+   "WeilConjectures.ordinaryIntegralDerivedPull",
+   "WeilConjectures.ordinaryIntegralPullCounit",
+   "WeilConjectures.ordinaryIntegralPullComplex",
+   "WeilConjectures.ordinaryIntegralPullComplexCounit",
+   "WeilConjectures.ordinaryIntegralPullComplexCounit_isIso",
+   "WeilConjectures.ordinaryIntegralQuotientAugmentation_existsUnique",
+   "WeilConjectures.ordinaryIntegralQuotientAugmentation",
+   "WeilConjectures.ordinaryIntegralProductAugmentation",
+   "WeilConjectures.ordinaryIntegralCompletionChain_condition",
+   "WeilConjectures.ordinaryIntegralCompletionChain",
+   "WeilConjectures.ordinaryIntegralCompletionComparison_existsUnique",
+   "WeilConjectures.ordinaryIntegralCompletionComparison",
+   "WeilConjectures.ordinaryCompletedIntegralPullback"
+  ],
+  "file": "lean/Sheaf/Paper/OrdinaryCompletedIntegralPullback.lean",
+  "statement": "theorem ordinaryCompletedIntegralPullback [IsNoetherian X] [IsNoetherian Y] (_hXdim : ∃ n : ℕ, topologicalKrullDim X ≤ n) (_hYdim : ∃ n : ℕ, topologicalKrullDim Y ≤ n) (_hXinv : IsUnit (l : Γ(X, ⊤))) (_hYinv : IsUnit (l : Γ(Y, ⊤))) (K : DerivedCategory (integralTowerModules l E Y)) (hK : sfIntegralConstructible l E Y K) : sfIntegralConstructible l E X ((ordinaryIntegralDerivedPull l E f).obj K) ∧ IsIso ((ordinaryIntegralCompletionComparison l E f).app K)",
+  "branch": "newtargets-dag",
+  "by": "Q147",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

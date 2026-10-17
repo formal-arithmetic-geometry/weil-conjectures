@@ -216,5 +216,24 @@
   "group": "Q102",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q102-eb01345e5 (reviewer sub-agent of L); spot-checked: Read the item, report, current blueprint proof, unit/chapter route, all ten cited DAG nodes, and Deligne Weil I/II source passages. Verified geometric Frobenius scalar q^{-n}, m-fold local iteration q^{-mn}, coefficient/base-change morphisms, eigenvalue scaling, real-weight arithmetic, and preservation of the actual sheaf filtration including zero and Jordan cases. No duplicate, cycle, missing dependency, or repair needed. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86c9a98a4",
+  "group": "Q136",
+  "result": "fix",
+  "note": "Statement matches node except H3: the mixed conjunct dropped the node's lisse hypothesis on F (node: 'a lisse Weil sheaf F ... if F is iota-mixed'); fixes/TateTwistWeightShift.lean adds `F.IsLisse →` to conjunct 2 (statement refit from file). Citer audit (thm-weil-deligne-purity, lem-rp-hc2-eigenvalue-determinant-weight, lem-a1-curve-hc2-bound, rem-dl-a1-conventions, sk-d-dl-a1-setup): all use lisse sheaves/module twists, none broken. H11: delivered second reading was a self-check; fixes/lem-tw-tate-twist-weight-shift.report.md keeps the Worker report and replaces it with an independent clause-by-clause reading. Verified: k0/l/iota iso/finite type (LFT+QuasiCompact) binders; tateTwistSheaf = existing upstream signed Tate line (def-wf-tate-twist, Frobenius q^-1 via cyclotomicUnit_eq, duals for n<0), Tate line first as in WeilComplex.tateTwist; IsPunctuallyPureOfWeight/IsMixedOfWeightsAtMost are the recorded predicates (finite filtration incl. empty); edge cases n=0, n<0, zero sheaf, empty scheme ok; no duplicate upstream; only sorry; docstrings with source, blueprint id and five proof steps; node changed only in lean. nt_compile --json: delivered and fixed files each 3.7 s, rc 0, no diagnostics (error reporting sanity-checked)."
+ },
+ "lean": {
+  "module": "Sheaf.EtaleCohomology.Purity.RealSheaves.TateTwistWeightShift",
+  "declaration": "AlgebraicGeometry.WeilSheaf.tateTwist_weight_shift",
+  "file": "lean/Sheaf/EtaleCohomology/Purity/RealSheaves/TateTwistWeightShift.lean",
+  "statement": "theorem tateTwist_weight_shift [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] (ι : PadicAlgCl l ≃+* ℂ) (F : WeilSheaf k₀ l X) (n : ℤ) : (∀ {w : ℝ}, F.IsLisse → F.IsPunctuallyPureOfWeight ι.toRingHom w → IsPunctuallyPureOfWeight ι.toRingHom ((tateTwistSheaf k₀ l X n).tensorObj F (isLisse_tateTwistSheaf k₀ l X n)) (w - 2 * n)) ∧ (∀ {w : ℝ}, F.IsLisse → F.IsMixedOfWeightsAtMost ι.toRingHom w → IsMixedOfWeightsAtMost ι.toRingHom ((tateTwistSheaf k₀ l X n).tensorObj F (isLisse_tateTwistSheaf k₀ l X n)) (w - 2 * n))",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-86c9a98a4"
  }
 }

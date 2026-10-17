@@ -120,5 +120,23 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-1387f2b56 (reviewer sub-agent of L); spot-checked: Mathematics and route are correct after full source and edge-case checks. Repair required: the item node’s created.item incorrectly names lem-trf-completed-free-flat-mittag-leffler; fixes/dag/nodes/sec-trace-formula/lem-trf-pure-submodule-mittag-leffler.json corrects it to lem-trf-pure-submodule-mittag-leffler. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-937a9ee1d",
+  "group": "Q149",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Stacks 059N(1) (algebra.tex 21564-21588): CommRing R, modules M1..M3 in independent universes, f,g, universal exactness via rTensor injective/exact/surjective for all N : Type (max u v w t), h2 = landed Module.IsMittagLeffler.{u,w,i,max v t} R M2, conclusion IsMittagLeffler.{u,v,i,max w t} R M1. Hypothesis and conclusion range over the same test modules and index type; the conclusion universe loses no generality (ULift transport down); the fixed-universe exactness hypothesis is no stronger than the node and stays non-vacuous (prover will need the standard universe lift of universal injectivity when i is large). No added assumptions; edge cases (empty J, zero modules, M3=0, f=0) covered; no duplicate in Mathlib or side lean; node differs from live only by lean; lean.statement verbatim equal to file signature; docstrings carry source place, blueprint tag and proof steps; proof is sorry only; report has Worker report and Second reading by Q149. nt_compile.py --json: clean in 2.5 s, no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.PureSubmoduleMittagLeffler",
+  "declaration": "Module.pure_submodule_mittag_leffler",
+  "file": "lean/Sheaf/TraceFormula/PureSubmoduleMittagLeffler.lean",
+  "statement": "theorem pure_submodule_mittag_leffler {R : Type u} [CommRing R] {M₁ : Type v} [AddCommGroup M₁] [Module R M₁] {M₂ : Type w} [AddCommGroup M₂] [Module R M₂] {M₃ : Type z} [AddCommGroup M₃] [Module R M₃] (f : M₁ →ₗ[R] M₂) (g : M₂ →ₗ[R] M₃) (h_exact : ∀ (N : Type (max u v w t)) [AddCommGroup N] [Module R N], Function.Injective (f.rTensor N) ∧ Function.Exact (f.rTensor N) (g.rTensor N) ∧ Function.Surjective (g.rTensor N)) (h₂ : Module.IsMittagLeffler.{u, w, i, max v t} R M₂) : Module.IsMittagLeffler.{u, v, i, max w t} R M₁",
+  "branch": "newtargets-dag",
+  "by": "Q149",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
