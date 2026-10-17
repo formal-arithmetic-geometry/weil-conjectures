@@ -8,14 +8,69 @@
   "place": "Step 3, proof of (a): “the defining evaluation of chi_f turns the evaluation ... into tau_f Rf_* ev_K mu_f”, and multiplication/projection identification expanded in returned item step 9"
  },
  "stmt_deps": [
+  "def-trf-admissibility",
   "def-trf-kernel-pushforward-maps",
   "fix-prop-projection-formula",
   "fix-prop-adjunctions",
   "def-trf-dualizing-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $Z=Rf_*D_XK$ and $B=\\tau_f\\circ Rf_*e_X\\circ\\mu_{f,D_XK,K}:Z\\otimes K'\\to\\omega_Y$. By [def-trf-kernel-pushforward-maps], $\\chi_f$ is precisely the tensor–Hom transpose of $B$. By [def-trf-dualizing-complex], $\\operatorname{ev}_{K'}$ is the inverse transpose of the identity of $R\\mathcal Hom(K',\\omega_Y)$. Apply the cancellation and evaluation formulas of [lem-pod-closed-uncurry-laws] in this second-variable convention to obtain\n$$B=\\operatorname{uncurry}(\\operatorname{curry}(B))=\\operatorname{ev}_{K'}\\circ(\\chi_f\\otimes1_{K'}).$$\nExplicitly, that leaf writes the fixed argument first: precompose $B$ with the signed symmetry $K'\\otimes Z\\to Z\\otimes K'$, curry, and uncurry. Its evaluation formula gives $\\operatorname{ev}^{\\ell}_{K'}(1_{K'}\\otimes\\chi_f)$; precomposing back with the symmetry gives $\\operatorname{ev}_{K'}(\\chi_f\\otimes1_{K'})$ by naturality of the symmetry. The two inverse symmetries cancel. This is exactly the evaluation convention specified in the two definitions, and proves the first identity.",
+   "uses": [
+    "def-trf-kernel-pushforward-maps",
+    "def-trf-dualizing-complex",
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 3, proof of (a): the defining evaluation of chi_f"
+   }
+  },
+  {
+   "text": "For the second identity fix $M\\in D^b_{ctf}(X,A)$ and abbreviate $L=Lf^*$, $R=Rf_*$, $T=RM\\otimes RK$, with ordinary unit $\\eta$ and counit $\\varepsilon$ from [fix-prop-adjunctions](1). Write $c:L(T)\\xrightarrow{\\sim}LRM\\otimes LRK$ for the tensor comparison used in [def-trf-kernel-pushforward-maps], namely $\\mu_{f;RM,RK}$ of [lem-pur-derived-pullback-tensor-iso]; at the finite stage $A=A_{E,n}$ that statement identifies it with the canonical tensor comparison of the morphism of ringed pro-etale topoi induced by $f$, which is the comparison $\\mu_{u;F,G}$ entering $a_{u,M,N}$ in [def-exchange-projection] for $u=f$. Set\n$$a=(\\varepsilon_M\\otimes1_{LRK})\\circ c:L(T)\\to M\\otimes LRK.$$\nThe projection-transformation definition in [def-exchange-projection], with $u=f$ and $N=RK=K'$, gives the ordinary direct-image projection map $\\pi=R(a)\\circ\\eta_T$. This is the specified $\\operatorname{PF}_{f,M,K'}$: since $f$ is proper, compute its compact-support definition with the compactification $j=\\operatorname{id}_X$, $p=f$. The open tensor comparison is then the identity under the unit identifications, so the defining composite is $\\pi$. The compactification compatibility and proper identification in [fix-prop-projection-formula] identify this component with the stated projection map, independently of the chosen compactification. The finite-Tor input $K'$ and the finite-stage domains are exactly those stipulated by [def-trf-kernel-pushforward-maps].",
+   "uses": [
+    "fix-prop-adjunctions",
+    "def-trf-kernel-pushforward-maps",
+    "def-exchange-projection",
+    "fix-prop-projection-formula",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 3, proof of (a): counit normalization of the projection transformation"
+   }
+  },
+  {
+   "text": "Set $b=1_M\\otimes\\varepsilon_K:M\\otimes LRK\\to M\\otimes K$. Tensor functoriality gives\n$$b\\circ a=(\\varepsilon_M\\otimes\\varepsilon_K)\\circ c.$$\nBy the ordinary adjunction formula $\\Psi(v)=R(v)\\circ\\eta_T$ of [lem-weil-pbc-adjunction-of-natural-bijection], the definition of multiplication in [def-trf-kernel-pushforward-maps] is\n$$\\mu_{f,M,K}=R\\bigl((\\varepsilon_M\\otimes\\varepsilon_K)\\circ c\\bigr)\\circ\\eta_T.$$\nSubstitute the equality for $b\\circ a$ and the projection component computed in step 2. The functor composition law gives\n$$\\mu_{f,M,K}=R(b\\circ a)\\circ\\eta_T=R(b)\\circ R(a)\\circ\\eta_T=Rf_*(1_M\\otimes\\varepsilon_f)\\circ\\operatorname{PF}_{f,M,K'}.$$\nEvery map has source $Rf_*M\\otimes K'$ and target $Rf_*(M\\otimes K)$. This proves the second identity for the arbitrary $M$ chosen in step 2.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-trf-kernel-pushforward-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 3, proof of (a): multiplication and projection are adjoint to the same tensor of counits"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-trf-dualizing-complex",
+  "def-trf-kernel-pushforward-maps",
+  "fix-prop-adjunctions",
+  "fix-prop-projection-formula",
+  "lem-pod-closed-uncurry-laws",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+  "place": "Step 3, proof of (a), expanded from the defining tensor–Hom and ordinary adjunctions"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,10 +113,52 @@
    "results": "AlgebraicGeometry.Scheme.monObjAsOverPullback_mul; Filter.map_mul; AlgebraicGeometry.IsProper.instCompScheme; ProperConstSMul.recOn; AlgebraicGeometry.IsProper.instIsMultiplicativeScheme; CategoryTheory.Mon_Class.mul_eq_mul; CategoryTheory.MonObj.mul_eq_mul; IsProperMap.prodMap",
    "date": "2026-10-17",
    "verdict": "no match: hits do not state this specified geometric six-functor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier dual proper pushforward evaluation is structural trace after multiplication of direct images",
+   "results": "{\"t\": \"2026-10-17T11:31:26Z\", \"tool\": \"leanfinder\", \"query\": \"Verdier dual proper pushforward evaluation is structural trace after multiplication of direct images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ExponentiableMorphism.coev_ev\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"CategoryTheory.ExponentiableMorphism.coev_ev_assoc\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"SheafOfModules.pushforwardNatTrans_app_val_app_apply\"], \"digest\": \"0a3a05c7d1662853\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete geometric statement; generic adjunction or monoidal structure laws only"
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry_curry|homEquiv_naturality_right|homEquiv_counit",
+   "results": "{\"t\": \"2026-10-17T11:32:34Z\", \"tool\": \"grep\", \"query\": \"uncurry_curry|homEquiv_naturality_right|homEquiv_counit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/CodiscreteCategory.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/EffectiveEpi/Preserves.lean\", \"Mathlib/CategoryTheory/EffectiveEpi/Preserves.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\"], \"digest\": \"8a17b74825c7061b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete geometric statement; generic adjunction or monoidal structure laws only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The multiplication on direct images is the projection morphism followed by direct image of the adjunction counit",
+   "results": "{\"t\": \"2026-10-17T11:32:34Z\", \"tool\": \"leansearch\", \"query\": \"The multiplication on direct images is the projection morphism followed by direct image of the adjunction counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Preadditive.mul_def\", \"CategoryTheory.MonObj.mul_eq_mul\", \"DirectSum.mulHom\", \"CategoryTheory.Mon_Class.mul_eq_mul\", \"PiTensorProduct.mul\", \"AlgebraicGeometry.Scheme.monObjAsOverPullback_mul\", \"Filter.map_mul\", \"CategoryTheory.MonObj.ofRepresentableBy_mul\"], \"digest\": \"af2f04d802bc9e22\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete geometric statement; generic adjunction or monoidal structure laws only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"homEquiv\"",
+   "results": "{\"t\": \"2026-10-17T11:32:34Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, \\\"homEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.mkOfHomEquiv\", \"CategoryTheory.Adjunction.homEquiv\", \"CategoryTheory.Adjunction.homEquiv'\", \"CategoryTheory.Adjunction.corepresentableBy_homEquiv\", \"CategoryTheory.Adjunction.representableBy_homEquiv\", \"CategoryTheory.Adjunction.comp_homEquiv\", \"CategoryTheory.Adjunction.homEquiv_apply\", \"CategoryTheory.Adjunction.homEquiv_unit\"], \"digest\": \"d4686c3e2e7585d2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete geometric statement; generic adjunction or monoidal structure laws only"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem uncurry_curry|theorem homEquiv_naturality_right|def homEquiv|theorem homEquiv_symm_apply",
+   "results": "{\"t\": \"2026-10-17T11:33:26Z\", \"tool\": \"grep\", \"query\": \"theorem uncurry_curry|theorem homEquiv_naturality_right|def homEquiv|theorem homEquiv_symm_apply\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Parametrized.lean\"], \"digest\": \"3f8cf2d19ec6e357\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete geometric statement; generic adjunction or monoidal structure laws only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a strong monoidal left adjoint the right adjoint tensor multiplication is its projection morphism followed by the right adjoint of one counit",
+   "results": "{\"t\": \"2026-10-17T11:33:27Z\", \"tool\": \"leanfinder\", \"query\": \"For a strong monoidal left adjoint the right adjoint tensor multiplication is its projection morphism followed by the right adjoint of one counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\", \"CategoryTheory.frobeniusMorphism\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc\"], \"digest\": \"59911e1acf493e49\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete geometric statement; generic adjunction or monoidal structure laws only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-source-exchange",
@@ -86,5 +183,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-dual-pushforward-evaluation-counit",
+  "worker": "stage1",
+  "summary": "Statement preserved. Expanded the defining transpose of chi_f, identified the specified proper projection map using the trivial compactification, and computed multiplication by the ordinary unit formula. Reused two existing Mathlib leaves; no new nodes. Added the explicitly referenced admissibility definition to statement dependencies.",
+  "blueprint": "Realizes the defining-evaluation and tensor-of-counits sentences of lem-trf-trace-source-exchange.proof.md Step 3 (proof of (a)), within sk-p-proper steps 2–3. No unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-6e810f061",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-6e810f061 (reviewer sub-agent of L); spot-checked: Read the item, the source (main-20261015 lem-trf-trace-source-exchange.proof.md Step 3, proof of (a)), unit sk-p-proper steps 2-3, the parent's use in its step 12, and the statement of every cited node. The delivery has no new nodes. The statement matches the source's two sentences (the defining evaluation of chi_f, and multiplication adjoint to the tensor of the two counits) and keeps the hypotheses and the A_{E,n} D^b_ctf category. K'=Rf_*K is ctf by thm-sf-ctf-stability, as PF needs. Step 1: naturality of the second-variable currying bijection gives uncurry(chi)=ev_{K'}(chi⊗1). The symmetry signs cancel and the leaf clauses (uncurry_curry, uncurry_natural_left, uncurry_eq) say what the step uses. Step 2: (id_X, f) is a valid compactification; j_! and gamma are identities, so PF=R(a)∘eta. fix-prop-projection-formula gives independence of the compactification and Rf_!=Rf_*. Step 3: mu=R((eps⊗eps)c)eta=R(1⊗eps)R(a)eta, checked line by line. Edge cases checked: f=id, M=0, K=0, two points to a point, shifts. No duplicate found in the DAG, no cycle, no SGA citation. All off-unit statements cited lie in the uses-closure of sk-p-proper, so no tool_uses are needed. One C1/C4 fault, repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-dual-pushforward-evaluation-counit.json: step 2 silently identified the tensor comparison of def-trf-kernel-pushforward-maps (lem-pur-derived-pullback-tensor-iso) with mu_{u;F,G} of def-exchange-projection (ringed-topoi lemma). It now cites lem-pur-derived-pullback-tensor-iso, whose statement makes that identification at the finite stage, in step 2's uses and in proof_deps. The statement is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

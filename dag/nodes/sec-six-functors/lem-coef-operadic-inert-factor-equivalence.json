@@ -14,9 +14,113 @@
   "def-coef-monoidal-infinity-category",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the forward implication, suppose $u$ is $p$-cocartesian. In each given triangle the first short edge $u$ and the second short edge $t_i$ are cocartesian. The cancellation clause of [lem-coef-infinity-cocartesian-composition-initiality] therefore makes the long edge $w_i$ cocartesian. This includes the empty family when $r=0$.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.1.7, opposite-category cancellation."
+   }
+  },
+  {
+   "text": "For the converse choose a $p$-cocartesian lift $v:x\\to x^{\\prime}$ of $\\alpha$; it exists because $p$ is a cocartesian fibration. Put $\\mathcal F=\\mathcal V^{\\otimes}_{[r]}$. The lift $v$ is initial in the quasicategory $L(x,\\alpha)$ of [lem-coef-infinity-cocartesian-composition-initiality]. The given edge $u$ is another object of this category. Its mapping space from $v$ is contractible, hence nonempty, so a morphism gives an edge $e:x^{\\prime}\\to y$ in $\\mathcal F$ and a coherent triangle $ev\\simeq u$ over the triangle $(\\alpha,1_{[r]},\\alpha)$.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 2.4.1.9, dual: initial cocartesian lifts and their comparison triangles."
+   }
+  },
+  {
+   "text": "Choose coherent transport functors $T_i:\\mathcal F\\to\\mathcal V^{\\otimes}_{[1]}$ over $\\rho_i$, with cocartesian transformations $a_i(c):c\\to T_i(c)$. These are the transport functors of the Segal definition. Their coherent existence can be obtained from [lem-coef-infinity-pointwise-cocartesian-transport] by applying it to the inclusion $\\mathcal F\\to\\mathcal V^{\\otimes}$ and the constant transformation $\\rho_i$ of its base diagram, in a containing universe in which this indexing simplicial set is small. The mapping-space criterion identifies that lemma's mapping-square notion of cocartesianness with the horn notion used here. The Segal axiom says $T=(T_i)_i:\\mathcal F\\to(\\mathcal V^{\\otimes}_{[1]})^r$ is a functor equivalence. For each $i$, both $a_i(y)$ and the prescribed $t_i$ are cocartesian lifts with source $y$ over $\\rho_i$. Initiality of lifts gives a comparison equivalence $b_i:T_i(y)\\to y_i$ in the fiber over $[1]$ with a coherent triangle $b_i a_i(y)\\simeq t_i$.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definition 2.2.6(1)-(2); coherent transport via HTT Proposition 3.1.2.1 and uniqueness via Remark 2.4.1.9, dual."
+   }
+  },
+  {
+   "text": "Assume all $w_i$ are cocartesian. Set $v_i=a_i(x^{\\prime})v$ and $q_i=b_iT_i(e):T_i(x^{\\prime})\\to y_i$. Composition/cancellation makes $v_i$ cocartesian over $\\rho_i\\alpha$. Naturality of $a_i$ along $e$, followed by the comparison triangle for $b_i$ and by $ev\\simeq u$, gives the coherent composite triangle\n$$q_i v_i\\simeq b_iT_i(e)a_i(x^{\\prime})v\\simeq b_i a_i(y)ev\\simeq t_i u\\simeq w_i.$$\nThe coherent transport transformations supply the square in this calculation; coherent composition and its associativity are those of [lem-coef-infinity-mapping-composition]. All base triangles are the corresponding compositional triangles of the ordinary nerve, so this is a morphism in $L(x,\\rho_i\\alpha)$ from $v_i$ to $w_i$. Both its endpoints are initial cocartesian lifts. Their comparison is an equivalence in that lift category, and forgetting the triangle makes $q_i$ an equivalence in the fiber over $[1]$. Since $b_i$ is also an equivalence, $T_i(e)$ has invertible component class $[b_i]^{-1}[q_i]$, hence is an equivalence.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.1.7 and Remark 2.4.1.9, dual; agent expansion of the target-color comparison."
+   }
+  },
+  {
+   "text": "The edge $T(e)$ is an equivalence in the product: take the inverses and both inverse triangles coordinatewise. Let $G$ be a quasi-inverse of the Segal equivalence $T$ and $\\eta:1_{\\mathcal F}\\simeq GT$ its coherent natural equivalence. In $h\\mathcal F$, naturality says $[e]=[\\eta_y]^{-1}[G(T(e))][\\eta_{x^{\\prime}}]$. Each factor is invertible, so [lem-coef-infinity-mapping-composition] identifies $e$ as an equivalence edge of $\\mathcal F$. This argument uses the quasi-inverse in the definition of functor equivalence, rather than an uncited conservativity theorem.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definition 2.2.6(2); explicit inverse argument for conservativity of the Segal equivalence."
+   }
+  },
+  {
+   "text": "The fiber inclusion carries the inverse edge and inverse triangles of $e$ to the total quasicategory, so $e$ is an equivalence there too. By [lem-coef-infinity-mapping-composition], precomposition with an inverse of $e$ is a homotopy inverse to precomposition with $e$ on every mapping space. In the square of [lem-coef-infinity-cocartesian-mapping-criterion] for $e$, the bottom map is the identity, since $p(e)=1_{[r]}$, and the top map is this homotopy equivalence. The path-space pullback along the identity is equivalent to the upper-right mapping space by evaluation, with inverse the constant-path inclusion; thus this square is a homotopy pullback. The criterion makes $e$ cocartesian. Cancellation in the triangle with short edges $v,e$ now makes its long edge $u$ cocartesian. The original $t_i$ and triangles were arbitrary throughout, proving independence of choices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3 and Proposition 2.4.1.7, dual; agent expansion for a vertical equivalence."
+   }
+  },
+  {
+   "text": "For $r=0$, the Segal equivalence is $\\mathcal F\\simeq *$. Every edge in the one-point quasicategory is an equivalence, so the inverse argument of Step 5 makes the comparison $e$ in Step 2 an equivalence without any color tests. Step 6 then proves that $u$ is cocartesian. This works for every $s$: inert maps $[s]\\to[0]$ are opposite to the inclusions of any one vertex $[0]\\to[s]$, not just the identity at $[0]$. Thus the nullary clause of the original statement is valid and requires no added hypothesis.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Definitions 2.2.3 and 2.2.6(2), including the zeroth Segal product."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "def-coef-infinity-fibrations",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-mapping-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Definitions 2.2.6(1)-(2) and 2.2.13; target-color detection by factoring through a cocartesian lift and using conservative Segal transport. HTT Proposition 2.4.1.7, Remark 2.4.1.9 and Proposition 2.4.4.3, dual where appropriate. Online sources read 2026-10-17; not archived, WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -52,10 +156,45 @@
    "results": "{\"t\": \"2026-10-17T08:38:53Z\", \"tool\": \"leanfinder\", \"query\": \"Cocartesian edges in a Segal monoidal quasicategory can be detected by composition with projections to the individual tensor factors, including arity zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.IsStrictSegal\", \"SSet.StrictSegal\", \"SSet.StrictSegalCore.concat\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegalCore\", \"SSet.Truncated.Edge.tensor_surjective\", \"SSet.Truncated.liftOfStrictSegal.hσ'₀\", \"SSet.StrictSegal.isStrictSegal\"], \"digest\": \"81288cf82d6d6bfd\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary-category cocartesian arrows and strict Segal simplicial sets do not give detection of quasicategorical inert cocartesian edges"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Detect cocartesian edges over inert maps in a nonsymmetric monoidal infinity category by all consecutive target projections",
+   "results": "{\"t\": \"2026-10-17T10:21:19Z\", \"tool\": \"leanfinder\", \"query\": \"Detect cocartesian edges over inert maps in a nonsymmetric monoidal infinity category by all consecutive target projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.map_uniq\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.ext\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_comp\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_comp_map\"], \"digest\": \"c97702c918e3389e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the ordinary-category IsCocartesian and IsStronglyCocartesian definitions in Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:51-74; the other hits are monoidal tactics or truncated simplicial edges, not this quasicategorical inert-edge criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCocartesian, cocartesian, SSet",
+   "results": "{\"t\": \"2026-10-17T10:21:20Z\", \"tool\": \"loogle\", \"query\": \"IsCocartesian, cocartesian, SSet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsCocartesian'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Loogle could not resolve the unqualified identifier IsCocartesian; this empty result is not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCocartesian|cocartesian|Segal",
+   "results": "{\"t\": \"2026-10-17T10:21:20Z\", \"tool\": \"grep\", \"query\": \"IsCocartesian|cocartesian|Segal\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\", \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\"], \"digest\": \"91a483950b001010\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the ordinary-category IsCocartesian and IsStronglyCocartesian definitions in Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:51-74; the other hits are monoidal tactics or truncated simplicial edges, not this quasicategorical inert-edge criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cocartesian edges over inert maps in a monoidal infinity category are detected by target color projections",
+   "results": "{\"t\": \"2026-10-17T10:21:21Z\", \"tool\": \"leansearch\", \"query\": \"Cocartesian edges over inert maps in a monoidal infinity category are detected by target color projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsCocartesian.ext\", \"CategoryTheory.Functor.IsCocartesian.casesOn\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsCocartesian.mk\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map_self\", \"CategoryTheory.Functor.IsCocartesian.recOn\"], \"digest\": \"219798483dc7ccb3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the ordinary-category IsCocartesian and IsStronglyCocartesian definitions in Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:51-74; the other hits are monoidal tactics or truncated simplicial edges, not this quasicategorical inert-edge criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cocartesian edge detection from target color projections in a monoidal infinity category",
+   "results": "{\"t\": \"2026-10-17T10:21:23Z\", \"tool\": \"leanfinder\", \"query\": \"Cocartesian edge detection from target color projections in a monoidal infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib.Tactic.Monoidal.comp?\", \"CategoryTheory.Functor.IsCocartesian.map\", \"SSet.Truncated.Edge.tensor_surjective\", \"Mathlib.Tactic.Monoidal.mkContext?\", \"Mathlib.Tactic.Monoidal.monoidal\", \"Mathlib.Tactic.Monoidal.instMkMor₁MonoidalM\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"Mathlib.Tactic.Monoidal.mor₁OfExpr\"], \"digest\": \"848e29968f38b147\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the ordinary-category IsCocartesian and IsStronglyCocartesian definitions in Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:51-74; the other hits are monoidal tactics or truncated simplicial edges, not this quasicategorical inert-edge criterion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-correspondence-kan-filling",
@@ -65,7 +204,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, derived coefficient mapping-complex adjunction before R lim; operadic free extension in the fixed-object rectification chain: the operadic Kan-extension existence and parameter extension used to make the derived adjunction coherent. Hidden local argument: Returned Step 6: factor an inert edge through a cocartesian lift and detect its vertical comparison by all target color projections.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, returned Step 6: factor an inert edge through cocartesian lifts and detect its vertical comparison by all target color projections.",
    "via": [
     "lem-coef-operadic-correspondence-kan-filling",
     "lem-coef-operadic-free-cocone-characterization",
@@ -81,5 +220,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-inert-factor-equivalence",
+  "worker": "stage1",
+  "summary": "Retained the original statement, including its nullary clause, and repaired the saved attempt: its proposed r>=1 restriction was unjustified and its mapping-space formula had the wrong variance. The seven-step proof factors through an initial cocartesian lift, identifies its transported comparison with comparisons between initial color lifts, detects its inverse through the Segal functor equivalence, and applies the mapping-space criterion and cancellation. No new nodes.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, through the returned Step 6 of lem-coef-operadic-correspondence-kan-filling: preservation of inert edges is detected by target color projections, with the empty color family justified by the zeroth Segal equivalence."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-581b775fa",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-581b775fa (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 7 cited statements, both users (kan-filling Step 6, color-reconstruction Step 8) and the unit. It has no new nodes, and the statement is unchanged and true. The proof factors u as e∘v with v a cocartesian lift, which is initial in L(x,α). Each w_i ≃ (b_i T_i(e) a_i(x'))∘v, so two cancellations make w_i cocartesian exactly when T_i(e) is an equivalence. The Segal equivalence turns this into e being an equivalence, and cancellation in the triangle (v,e,u) then gives u cocartesian. I tested r=0 (fiber ≃ point, any vertex of [s]), r=1 with α the identity, s=0 and a non-invertible vertical e; all agree with the statement. Steps 1-7 use only what the cited statements say (cancellation/initiality, pointwise transport, mapping criterion, mapping composition), with the correct orientation and base triangles. Turning the class equality in Step 4 into a 2-simplex is glossed but routine. All cited statements are in the unit sk-prop-sf-biduality-general, so no tool_uses are needed and none are accepted, and there is no cycle (505-node traversal). It is not a duplicate: lem-coef-symmetric-inert-projection-detection works over Fin_* and lem-coef-inert-relative-tuple-cone is about limit cones. Minor provenance point: source.place still cites GH 3.1.13/3.1.15 while the steps cite 2.2.6/2.2.13; the source is not archived (WANTED, proof_origin agent), so I left it as is. No fixes; review.md written."
  }
 }

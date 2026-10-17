@@ -20,51 +20,139 @@
   "def-sfb-left-derivability-structure",
   "def-nagata-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $W_i^P=i_i^{-1}W_i$ and choose the localizations $L_i^P:P_i\\to D_i^P$ appearing in the derivability structures. The inverse-image classes contain identities because the $W_i$ do. Apply [lem-sfb-product-localization] twice: $L=\\prod_i L_i$ localizes $A=\\prod_i A_i$ at $W=\\prod_iW_i$, and $L_P=\\prod_iL_i^P$ localizes $P=\\prod_iP_i$ at $W_P=\\prod_iW_i^P$. Thus the localization data for the product inclusion can be taken to be these products, with $E=\\prod_iE_i$ and the product of the coordinate comparison isomorphisms.",
+   "uses": [
+    "lem-sfb-product-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Proof, finite-variable localization underlying descent of tensor products"
+   }
+  },
+  {
+   "text": "Check the two conditions of [def-sfb-left-derivability-structure] for $i=\\prod_i i_i$. Given $X=(X_i)_i$, choose $r_i:i_iP_i\\to X_i$ in $W_i$; their tuple is in $W$. For finality, fix an object $(Y,b)$ of $(E\\downarrow LX)$. It is a tuple $(Y_i,b_i)$, and its category of triples $(P,a,c)$ in the cited definition is exactly the product of the coordinate triple categories: the two equations defining arrows are coordinatewise. Each factor is nonempty and connected by coordinate finality. Choose an object in each factor to obtain a product object. Given two product objects, join their first coordinates by a finite zigzag, using identities in all other coordinates; then do this for the second coordinate and so on. There are only $n$ coordinates, so concatenation is a finite zigzag connecting the two product objects. This proves nonemptiness and connectedness, hence the required finality.",
+   "uses": [
+    "def-sfb-left-derivability-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Proof, the derivability structure used for tensor descent, expanded coordinatewise"
+   }
+  },
+  {
+   "text": "For the identity inclusion $P_i=A_i$, choose $L_i^P=L_i$ and $E_i=\\operatorname{id}_{D_i}$. The resolution of $X$ is $\\operatorname{id}_X$, which belongs to $W_i$. For an object $(Y,b:Y\\to L_iX)$, its triple category has terminal object $(X,\\operatorname{id}_X,b)$: the unique arrow from $(P,a,c)$ to it is $a$, and its second required equation is precisely $L_i(a)c=b$. A category with a terminal object is nonempty and connected, since each object maps to that object. This proves the identity-inclusion assertion directly from [def-sfb-left-derivability-structure].",
+   "uses": [
+    "def-sfb-left-derivability-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Proof, inclusion of unchanged arguments when deriving iterated tensor products"
+   }
+  },
+  {
+   "text": "The restriction of $F$ to $P=\\prod_iP_i$ inverts $W_P$. Indeed any tuple $(w_i)_i$ factors into the $n$ arrows changing one coordinate at a time. Every intermediate object remains in $P$, all identity coordinates belong to their $W_j$, and $F$ sends each factor to an isomorphism by the stated coordinate hypothesis. Its image of the tuple is their composite, hence invertible. Apply [lem-sfb-unary-left-derived-calculus] with $A,P,W,D,L$ the product data established above. Its existence assertion gives $LF$ and $\\varepsilon$ with the displayed bijection. Its candidate criterion gives precisely invertibility of $\\eta$ on tuples of resolving objects, and gives this invertibility for $\\varepsilon$ itself.",
+   "uses": [
+    "lem-sfb-unary-left-derived-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Proof, two-variable derived functor and its extension to three and four variables"
+   }
+  },
+  {
+   "text": "Apply the universal bijection for $(LG,\\varepsilon_G)$, supplied by [lem-sfb-unary-left-derived-calculus] with $G$ in place of $F$, to the test functor $V=LF$ and the transformation $\\tau\\circ\\varepsilon:LF\\circ L\\Rightarrow G$. It gives the unique $L\\tau:LF\\Rightarrow LG$ with $\\varepsilon_G\\circ((L\\tau)L)=\\tau\\circ\\varepsilon$. For an identity $\\tau$, the identity on $LF$ satisfies this equation, so uniqueness gives $L(\\operatorname{id})=\\operatorname{id}$. For $\\sigma:G\\Rightarrow K$, composing the defining equations yields $\\varepsilon_K\\circ(((L\\sigma)\\circ(L\\tau))L)=(\\sigma\\circ\\tau)\\circ\\varepsilon$, so uniqueness for $LK$ gives $L(\\sigma\\circ\\tau)=(L\\sigma)\\circ(L\\tau)$. If $\\tau$ is invertible, apply this result to $\\tau^{-1}\\tau$ and $\\tau\\tau^{-1}$ to obtain inverse transformations $L\\tau$ and $L(\\tau^{-1})$.",
+   "uses": [
+    "lem-sfb-unary-left-derived-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Proof, descending constraints and their comparison maps via universal properties"
+   }
+  },
+  {
+   "text": "For arbitrary $V$, the universal bijection of [lem-sfb-unary-left-derived-calculus] sends $\\gamma:V\\Rightarrow LF$ to $\\varepsilon\\circ(\\gamma L)$. If two such composites agree, injectivity of this bijection gives $\\gamma_1=\\gamma_2$.",
+   "uses": [
+    "lem-sfb-unary-left-derived-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Proof, uniqueness of derived comparisons"
+   }
+  },
+  {
+   "text": "Let $\\gamma,\\delta:V\\Rightarrow V'$ agree at every tuple $(L_iP_i)_i$. Given $y=(y_i)_i$, [lem-trf-localization-essentially-surjective] supplies $a_i\\in A_i$ and isomorphisms $L_i a_i\\cong y_i$. The resolution clause of [def-sfb-left-derivability-structure] supplies $r_i:i_iP_i\\to a_i$ in $W_i$. Since $L_i$ inverts $W_i$, composing these isomorphisms gives $u:(L_iP_i)_i\\xrightarrow{\\sim}y$. Write $z=(L_iP_i)_i$. Naturality gives $\\gamma_y V(u)=V'(u)\\gamma_z=V'(u)\\delta_z=\\delta_y V(u)$. Cancel the isomorphism $V(u)$ to get $\\gamma_y=\\delta_y$ for every $y$, and hence equality of transformations. All uses of resolutions are valid also for $n=1$ or identity inclusions.",
+   "uses": [
+    "lem-trf-localization-essentially-surjective",
+    "def-sfb-left-derivability-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Proof, descent of coherence identities, tested on resolving tuples"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-product-localization",
+  "def-sfb-left-derivability-structure",
+  "lem-sfb-unary-left-derived-calculus",
+  "lem-trf-localization-essentially-surjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+  "place": "Entire multivariable derived-calculus argument expanded from the sentences on two-variable descent, iterated tensor products, and descending constraints"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Products of left derivability structures compute left derived functors of functors in several variables, with counits invertible on resolving objects.",
    "results": "Hits: CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.leftDerived_fac_app, CategoryTheory.Functor.hasLeftDerivedFunctor_of_hasPointwiseLeftDerivedFunctor, CategoryTheory.Functor.leftDerived_fac, CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure, CategoryTheory.Functor.leftDerived_fac_assoc, CategoryTheory.Functor.leftDerived_fac_app_assoc, CategoryTheory.Functor.totalLeftDerived",
    "date": "2026-10-16",
-   "verdict": "no match for the complete statement; related hits do not supply the missing unbounded K-flat or multivariable assertion"
+   "verdict": "no complete match: related generic derived-functor declarations do not together state the finite-product derivability and all comparison clauses"
   },
   {
    "tool": "loogle",
    "query": "\"IsLeftDerivedFunctor\"",
    "results": "Hits: CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_iso, CategoryTheory.Functor.instIsLeftDerivedFunctorCompCompInvAssociatorWhiskerRightOfIsRightAdjoint",
    "date": "2026-10-16",
-   "verdict": "no match for the complete statement; related hits do not supply the missing unbounded K-flat or multivariable assertion"
+   "verdict": "no complete match: related generic derived-functor declarations do not together state the finite-product derivability and all comparison clauses"
   },
   {
    "tool": "grep",
    "query": "hasLeftDerivedFunctor|isLeftDerivedFunctor|IsLeftDerivabilityStructure|prod",
    "results": "Hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean. Directory: Mathlib/CategoryTheory/Localization/DerivabilityStructure",
    "date": "2026-10-16",
-   "verdict": "no match for the complete statement; related hits do not supply the missing unbounded K-flat or multivariable assertion"
+   "verdict": "no complete match: related generic derived-functor declarations do not together state the finite-product derivability and all comparison clauses"
   },
   {
    "tool": "leansearch",
    "query": "Natural transformations of functors induce unique natural transformations between their left derived functors and preserve natural isomorphisms.",
    "results": "Hits: CategoryTheory.Functor.leftDerivedNatTrans, CategoryTheory.NatTrans.leftDerived, CategoryTheory.Functor.leftDerived_ext, CategoryTheory.NatTrans.leftDerivedToHomotopyCategory, CategoryTheory.Functor.leftDerivedUnique, CategoryTheory.Functor.leftDerivedUnique.congr_simp, CategoryTheory.Functor.fromLeftDerivedZero, CategoryTheory.Functor.leftDerivedNatIso",
    "date": "2026-10-16",
-   "verdict": "no match for the complete statement; related hits do not supply the missing unbounded K-flat or multivariable assertion"
+   "verdict": "no complete match: related generic derived-functor declarations do not together state the finite-product derivability and all comparison clauses"
   },
   {
    "tool": "leanfinder",
    "query": "Finite products of derivability structures let one test a right Kan extension along a product of localization functors on tuples of resolving objects.",
    "results": "Hits: CategoryTheory.LocalizerMorphism.hasPointwiseRightDerivedFunctorAt_iff_of_isRightDerivabilityStructure, CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure, CategoryTheory.LocalizerMorphism.isRightDerivabilityStructure_iff, CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure', CategoryTheory.Functor.isPointwiseRightKanExtensionOfHasPointwiseLeftDerivedFunctor, CategoryTheory.LocalizerMorphism.Derives.hasPointwiseRightDerivedFunctor, CategoryTheory.Functor.hasPointwiseRightKanExtension_of_hasPointwiseLeftDerivedFunctor, CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.hasRightResolutions",
    "date": "2026-10-16",
-   "verdict": "no match for the complete statement; related hits do not supply the missing unbounded K-flat or multivariable assertion"
+   "verdict": "no complete match: related generic derived-functor declarations do not together state the finite-product derivability and all comparison clauses"
   },
   {
    "tool": "grep",
    "query": "leftDerivedNatTrans|leftDerivedNatIso|leftDerived_ext",
    "results": "Hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean. Directory: Mathlib/CategoryTheory/Functor/Derived",
    "date": "2026-10-16",
-   "verdict": "no match for the complete statement; related hits do not supply the missing unbounded K-flat or multivariable assertion"
+   "verdict": "no complete match: related generic derived-functor declarations do not together state the finite-product derivability and all comparison clauses"
   },
   {
    "tool": "leanfinder",
@@ -79,10 +167,38 @@
    "results": "{\"t\": \"2026-10-16T14:42:52Z\", \"tool\": \"grep\", \"query\": \"IsLeftDerivabilityStructure.*prod|prod.*IsLeftDerivabilityStructure|isLeftDerivedFunctor_iff_isIso\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\"], \"digest\": \"d14a79fa9282a635\"}",
    "date": "2026-10-16",
    "verdict": "no match; the sole hit tests the universal lift, not components on resolving objects or finite products"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure",
+   "results": "{\"t\": \"2026-10-17T10:33:19Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.instIsLeftDerivabilityStructureIdOfContainsIdentities\", \"CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure.hasLeftResolutions\", \"CategoryTheory.LocalizerMorphism.instIsLeftDerivabilityStructureOppositeOpOpOfIsRightDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.instIsRightDerivabilityStructureOppositeOpOpOfIsLeftDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.isLeftDerivabilityStructure_iff_op\", \"CategoryTheory.LocalizerMorphism.isRightDerivabilityStructure_iff_op\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure'\"], \"digest\": \"d7f30775d79bf354\"}",
+   "date": "2026-10-17",
+   "verdict": "related localization and derived-comparison interfaces, no exact attachment or single complete Mathlib match for the multivariable item"
+  },
+  {
+   "tool": "grep",
+   "query": "isLeftDerivedFunctor_of_isLeftDerivabilityStructure|IsLeftDerivabilityStructure|isLocalization_prod",
+   "results": "{\"t\": \"2026-10-17T10:33:19Z\", \"tool\": \"grep\", \"query\": \"isLeftDerivedFunctor_of_isLeftDerivabilityStructure|IsLeftDerivabilityStructure|isLocalization_prod\", \"sub\": \"CategoryTheory/Localization\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean\"], \"digest\": \"9e2ed434cac11a02\"}",
+   "date": "2026-10-17",
+   "verdict": "related localization and derived-comparison interfaces, no exact attachment or single complete Mathlib match for the multivariable item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite products of left derivability structures give derived functors computed on resolving objects with natural comparison maps",
+   "results": "{\"t\": \"2026-10-17T10:33:20Z\", \"tool\": \"leanfinder\", \"query\": \"Finite products of left derivability structures give derived functors computed on resolving objects with natural comparison maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.NatTrans.leftDerived\", \"CategoryTheory.Functor.leftDerived_fac_app\", \"CategoryTheory.Functor.leftDerived_fac\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.Functor.leftDerivedNatTrans\", \"CategoryTheory.NatTrans.leftDerived_comp\", \"CategoryTheory.LocalizerMorphism.Derives.hasPointwiseRightDerivedFunctor\"], \"digest\": \"03cf849fc7131631\"}",
+   "date": "2026-10-17",
+   "verdict": "related localization and derived-comparison interfaces, no exact attachment or single complete Mathlib match for the multivariable item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The product of localization functors is a localization and derived functors are detected on a derivability structure",
+   "results": "{\"t\": \"2026-10-17T10:34:07Z\", \"tool\": \"leansearch\", \"query\": \"The product of localization functors is a localization and derived functors are detected on a derivability structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsLocalization.prod\", \"CategoryTheory.Functor.IsLocalization.pi\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prodLift\", \"CategoryTheory.Localization.Construction.prodIsLocalization\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.prod\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Functor.IsLeftDerivedFunctor\", \"CategoryTheory.Adjunction.derived\"], \"digest\": \"06c2803a176c206e\"}",
+   "date": "2026-10-17",
+   "verdict": "related localization and derived-comparison interfaces, no exact attachment or single complete Mathlib match for the multivariable item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-derived-monoidal",
@@ -101,5 +217,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-multivariable-derived-calculus",
+  "worker": "stage1",
+  "summary": "Seven steps prove finite-product localization and derivability, identity inclusions, existence and detection via the unary theorem, comparison functoriality, and uniqueness. Repaired the prior comparison type and the omitted resolutions in detection; recorded project attachments for the unary theorem and reused the existing essential-surjectivity Mathlib leaf.",
+  "blueprint": "Steps 1-3 supply the product localization and resolving setup; step 4 realizes the derived-functor and iterated-variable sentences; steps 5-7 justify descending constraints and their coherence identities."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-1ad38cafb",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-1ad38cafb (reviewer sub-agent of L); spot-checked: I read all of the mathematics; no changes and no drops. The item statement is unchanged and true; it holds for any finite n, so 1<=n<=4 only narrows it. Step 1: lem-sfb-product-localization is exact Mathlib IsLocalization.pi (Pi.lean:31-35: Finite J, ContainsIdentities, IsLocalization). Its hypotheses hold for A_i and for the P_i, because inverse images of W_i contain identities and the product of inverse images is the inverse image of the product. Step 2: the triple category is the finite product of the coordinate triple categories, since all defining equations are coordinatewise, and the finite zigzag argument is correct. Step 3: (X,id,b) is terminal; L(a)c=b is the triple's own equation, and id_X lies in W_i. Step 4: factoring one coordinate at a time stays inside the product of the P_i, which gives Derives. The unary node's hypotheses are met. Steps 5-6: the typing tau∘eps: LF∘L=>G is correct, and identity, composition and isomorphism follow from uniqueness. Step 7: essential surjectivity plus resolutions give an isomorphism (L_iP_i)_i -> y, and naturality with cancellation finishes. The unary node matches slopmaster2 FromJoel Derives.lean:54-58 (hasLeftDerivedFunctor) and :107-109 (isLeftDerivedFunctor_iff_isIso), which have no extra hypotheses; the sorry map gives s=false, ts=false for both. I tested it on the identity inclusion and on the two-object case {0->1} with W = all arrows and P={0}. Neither new node duplicates an existing one: I compared them with lem-pur-left-derived-from-kflat-class, def-sfb-left-derived-functor, lem-sc-nattrans-from-resolving-class, lem-sfb-kflat-derivability, lem-coef-dg-product-localization and lem-coef-brown-localization-products. Neither restates a clause of the parent. The blueprint fields are correct, nothing is cited from SGA, and this is not a target node, so no base-change morphism or coefficient category is involved. No tool_uses are needed: the only node from another unit is a Mathlib leaf."
  }
 }

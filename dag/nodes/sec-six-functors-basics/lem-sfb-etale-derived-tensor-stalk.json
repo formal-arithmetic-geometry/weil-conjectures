@@ -1,0 +1,101 @@
+{
+ "id": "lem-sfb-etale-derived-tensor-stalk",
+ "kind": "statement",
+ "title": "Geometric etale stalks commute with unbounded derived tensor products",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $A$ a commutative ring, and $\\bar t:\\operatorname{Spec}\\Omega\\to T$ a geometric point [def-weil-geometric-point]. Use the small etale site $T_{\\mathrm{et}}$ [def-weil-pbc-etale-site], the constant coefficient sheaf $A_T$ [def-kun-constant-sheaf], and the ordinary unbounded derived category $D(T_{\\mathrm{et}},A)$ [def-weil-pbc-derived-categories]. For $K\\in D(T_{\\mathrm{et}},A)$ write $K_{\\bar t}\\in D(A)$ for the result of applying the exact geometric-stalk functor [def-weil-pbc-geometric-stalks] termwise to a representing complex; here $D(A)$ is the derived category of ordinary $A$-modules [def-weil-abstract-derived-category]. Derived tensor on the site is the K-flat construction [def-kun-derived-tensor]; on $D(A)$ it is the total tensor of an ordinary-module K-flat resolution [def-pc-module-kflat-complex]. For all $K,L\\in D(T_{\\mathrm{et}},A)$ there is a canonical isomorphism in $D(A)$, natural in both variables,\n$$\n(K\\otimes_{A_T}^{\\mathbf L}L)_{\\bar t}\\ \\cong\\ K_{\\bar t}\\otimes_A^{\\mathbf L}L_{\\bar t}.\n$$\nNo boundedness, constructibility, finiteness of $A$, or Tor-amplitude hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DEN, label lemma-check-K-flat-stalks, clause (1), applied to K-flat representatives of the derived tensor product at the point of the small etale site"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-site",
+  "def-kun-constant-sheaf",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-abstract-derived-category",
+  "def-kun-derived-tensor",
+  "def-pc-module-kflat-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stalk.*derived.*tensor|derived.*tensor.*stalk|KFlat.*stalk|stalk.*KFlat",
+   "results": "0 hits. ",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the derived tensor/stalk comparison; ordinary sheaf monoidality and module Tor functors do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"tensor\"",
+   "results": "6 hits. RingHom.SurjectiveOnStalks.tensorProductMap, PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks, PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux, Module.rankAtStalk_tensorProduct, Module.rankAtStalk_tensorProduct_of_isScalarTower, Module.rankAtStalk_eq_finrank_tensorProduct",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the derived tensor/stalk comparison; ordinary sheaf monoidality and module Tor functors do not specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "stalk commutes with derived tensor product for sheaves of modules",
+   "results": "8 hits. RingHom.SurjectiveOnStalks.tensorProductMap, ModuleCat.Tilde.toOpen_germ_apply, AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap, ModuleCat.Tilde.stalkIso, ModuleCat.Tilde.toStalk, Module.rankAtStalk_tensorProduct, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the derived tensor/stalk comparison; ordinary sheaf monoidality and module Tor functors do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric stalk of the derived tensor product of etale module sheaf complexes is the derived tensor product of their stalks",
+   "results": "8 hits. ModuleCat.Tilde.stalkIso_hom, smoothSheafCommRing.ι_forgetStalk_hom, smoothSheafCommRing.forgetStalk, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.toStalk, smoothSheafCommRing.ι_forgetStalk_inv, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, smoothSheafCommRing.ι_forgetStalk_hom_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the derived tensor/stalk comparison; ordinary sheaf monoidality and module Tor functors do not specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk|sheafFiber",
+   "results": "25 hits. Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean Read Mathlib/CategoryTheory/Sites/Point/Monoidal.lean: its sheafFiber Monoidal instance concerns ordinary sheaves; it does not state the unbounded derived tensor comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the derived tensor/stalk comparison; ordinary sheaf monoidality and module Tor functors do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact monoidal geometric stalk functor carries K-flat resolutions to K-flat complexes and commutes with unbounded derived tensor products",
+   "results": "8 hits. CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor'_map_app, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, CategoryTheory.Tor_map",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the derived tensor/stalk comparison; ordinary sheaf monoidality and module Tor functors do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"tensor\"",
+   "results": "0 hits. ",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the derived tensor/stalk comparison; ordinary sheaf monoidality and module Tor functors do not specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K-flat|Derived.*Monoidal|derived.*monoidal",
+   "results": "0 hits. ",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the derived tensor/stalk comparison; ordinary sheaf monoidality and module Tor functors do not specialize to it in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-ctf-finite-proper-tor",
+  "date": "2026-10-17",
+  "group": "Q31"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-ctf-finite-proper",
+ "blueprint": {
+  "from": {
+   "node": "det-ctf-finite-proper-tor",
+   "place": "From constant modules to all sheaves paragraph, displayed stalkwise derived tensor identification; the flat-resolution restriction argument formerly inside item step 5",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

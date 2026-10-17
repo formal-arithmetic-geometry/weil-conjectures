@@ -12,9 +12,106 @@
   "lem-weil-pbc-adjunction-shift-compatibility-unique",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The exact derived pullback of [lem-weil-pbc-ringed-topoi-derived-pullback] is $U$ in the canonical adjunction supplied by [lem-weil-pbc-ringed-projection-mate-exact]. The hypotheses are precisely the small ringed sites and the coefficient map in the statement; no flatness of that map is needed. By [lem-weil-pbc-adjunction-shift-compatibility-unique], the prescribed shift on $R$ is coherent and both unit $\\eta:1\\to RU$ and counit $\\varepsilon:UR\\to1$ commute with shifts. Apply [lem-sf-triangulated-right-adjoint] to this exact $U$ and this adjunction: $R$ is exact with the prescribed shift.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sf-triangulated-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; Tag 07A6, lemma-adjoint; derived.tex Tag 0A8D, lemma-adjoint-is-exact"
+   }
+  },
+  {
+   "text": "Fix $P$ and abbreviate $T_Y(M)=M\\otimes^{\\mathbf L}_{A_Y}P$, $H(K)=T_X(K)=K\\otimes^{\\mathbf L}_{A_X}UP$. Both tensor functors are exact by [lem-weil-pbc-ringed-projection-mate-exact]. Write $u_M:U(M[1])\\to(UM)[1]$, $r_K:R(K[1])\\to(RK)[1]$, and $t_Y(M):T_Y(M[1])\\to T_Y(M)[1]$, $t_X(K):H(K[1])\\to H(K)[1]$ for their natural shift maps. Then $F=T_YR$ and $G=RH$ are exact: applying their two factors successively to any distinguished triangle gives a distinguished triangle. Their induced shift maps, as in [lem-weil-pbc-commshift-nattrans-comp-whisker], are\n$$s_F(K)=t_Y(RK)\\circ(r_K\\otimes1),\\qquad s_G(K)=r_{H(K)}\\circ R(t_X(K)).$$\nThe composite $UF$ has shift map $s_{UF}(K)=u_{F(K)}\\circ U(s_F(K))$, and $UR$ has $s_{UR}(K)=u_{RK}\\circ U(r_K)$. All are coherent composite structures.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU, definition-derived-tor, and 0B56, equation-projection-formula-map; derived.tex Tag 014Y, lemma-composition-exact"
+   }
+  },
+  {
+   "text": "Put $\\beta_K=(\\varepsilon_K\\otimes1)\\circ\\mu_{RK,P}:UF(K)\\to H(K)$. The adjunction formula in [lem-weil-pbc-adjunction-of-natural-bijection] gives\n$$\\pi_{K,P}=R(\\beta_K)\\circ\\eta_{F(K)}.$$\nThe naturality in $K$ asserted by [lem-weil-pbc-ringed-projection-mate-exact] applies to exactly this projection mate (its variable $E$ is our $K$, and its variable $P$ is our fixed $P$). Thus $\\pi_{-,P}$ is natural, with no assertion that its components are invertible.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map, definition by adjoint transpose"
+   }
+  },
+  {
+   "text": "By the first-factor shift compatibility and naturality of $\\mu$ in [lem-weil-pbc-ringed-projection-mate-exact],\n$$t_X(URK)\\circ(s_{UR}(K)\\otimes1)\\circ\\mu_{R(K[1]),P}\n =\\mu_{RK,P}[1]\\circ s_{UF}(K).$$\nHere is the substitution specifying the square. First use naturality at $r_K:R(K[1])\\to(RK)[1]$:\n$$(U(r_K)\\otimes1)\\circ\\mu_{R(K[1]),P}=\\mu_{(RK)[1],P}\\circ U(r_K\\otimes1).$$\nThen use the shift square at $M=RK$:\n$$t_X(URK)\\circ(u_{RK}\\otimes1)\\circ\\mu_{(RK)[1],P}\n =\\mu_{RK,P}[1]\\circ u_{T_Y(RK)}\\circ U(t_Y(RK)).$$\nComposing and substituting the expressions from step 2 gives the displayed equation. This uses the canonical tensor comparison, rather than an arbitrary strong monoidal structure.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; canonical comparison on total K-flat tensor complexes, first-factor shift square"
+   }
+  },
+  {
+   "text": "The counit identity of [lem-weil-pbc-adjunction-shift-compatibility-unique] is\n$$\\varepsilon_{K[1]}=\\varepsilon_K[1]\\circ s_{UR}(K).$$\nTensor it with $1_{UP}$ and use the naturality of $t_X$ at $\\varepsilon_K:URK\\to K$. Substitution in step 4 gives\n$$\\begin{aligned}\nt_X(K)\\circ\\beta_{K[1]}\n &=t_X(K)\\circ(\\varepsilon_K[1]\\otimes1)\\circ(s_{UR}(K)\\otimes1)\\circ\\mu_{R(K[1]),P}\\\\\n &=(\\varepsilon_K\\otimes1)[1]\\circ t_X(URK)\\circ(s_{UR}(K)\\otimes1)\\circ\\mu_{R(K[1]),P}\\\\\n &=\\beta_K[1]\\circ s_{UF}(K).\n\\end{aligned}$$\nThe tensor shift maps are natural because they are the shift structures of the exact tensor functors supplied by [lem-weil-pbc-ringed-projection-mate-exact].",
+   "uses": [
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; derived.tex Tag 0A8D, lemma-adjoint-is-exact; counit-compatible shift identity"
+   }
+  },
+  {
+   "text": "Naturality of $\\eta$ at $s_F(K):F(K[1])\\to F(K)[1]$ and the unit-compatible shift identity of [lem-weil-pbc-adjunction-shift-compatibility-unique] give\n$$r_{UF(K)}\\circ R(s_{UF}(K))\\circ\\eta_{F(K[1])}\n =r_{UF(K)}\\circ R(u_{F(K)})\\circ\\eta_{F(K)[1]}\\circ s_F(K)\n =\\eta_{F(K)}[1]\\circ s_F(K).$$\nUse step 5 and naturality of $r$ at $\\beta_K:UF(K)\\to H(K)$ to compute\n$$\\begin{aligned}\ns_G(K)\\circ\\pi_{K[1],P}\n &=r_{H(K)}\\circ R(t_X(K)\\circ\\beta_{K[1]})\\circ\\eta_{F(K[1])}\\\\\n &=r_{H(K)}\\circ R(\\beta_K[1])\\circ R(s_{UF}(K))\\circ\\eta_{F(K[1])}\\\\\n &=(R\\beta_K)[1]\\circ r_{UF(K)}\\circ R(s_{UF}(K))\\circ\\eta_{F(K[1])}\\\\\n &=(R\\beta_K)[1]\\circ\\eta_{F(K)}[1]\\circ s_F(K)\n =\\pi_{K,P}[1]\\circ s_F(K).\n\\end{aligned}$$\nThe first and last equalities use the adjunct formula in [lem-weil-pbc-adjunction-of-natural-bijection]. This is the required shift square.",
+   "uses": [
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; derived.tex Tag 0A8D, lemma-adjoint-is-exact; explicit mate/unit calculation"
+   }
+  },
+  {
+   "text": "For a distinguished triangle $K_1\\xrightarrow a K_2\\xrightarrow b K_3\\xrightarrow c K_1[1]$, step 2 gives distinguished image triangles with connecting arrows $s_F(K_1)\\circ F(c)$ and $s_G(K_1)\\circ G(c)$. The three components $\\pi_{K_i,P}$ satisfy the first two squares by naturality. For the connecting square, naturality at $c$ followed by step 6 gives\n$$s_G(K_1)\\circ G(c)\\circ\\pi_{K_3,P}\n =s_G(K_1)\\circ\\pi_{K_1[1],P}\\circ F(c)\n =\\pi_{K_1,P}[1]\\circ s_F(K_1)\\circ F(c).$$\nThese are exactly the three defining equations for a morphism of triangles in [def-weil-pbc-triangles-with-shift].",
+   "uses": [
+    "def-weil-pbc-triangles-with-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0144, definition-triangle; morphism-of-triangles connecting equation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-triangles-with-shift",
+  "lem-sf-triangulated-right-adjoint",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56 projection transpose, Tag 07A4 tensor comparison, with derived.tex Tag 0A8D and unit/counit shift identities; first-variable calculation written explicitly"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +147,52 @@
    "results": "18 hits: Mathlib/CategoryTheory/Shift/ShiftedHomOpposite.lean, Mathlib/CategoryTheory/Shift/ShiftedHomOpposite.lean, Mathlib/CategoryTheory/Shift/ShiftedHomOpposite.lean, Mathlib/CategoryTheory/Shift/ShiftedHomOpposite.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean",
    "date": "2026-10-17",
    "verdict": "no match: CategoryTheory/Shift contains counit and shifted-Hom identities, no projection mate"
+  },
+  {
+   "tool": "grep",
+   "query": "projection|counit|homEquiv",
+   "results": "18 hits: Mathlib/CategoryTheory/Shift/ShiftedHomOpposite.lean, Mathlib/CategoryTheory/Shift/ShiftedHomOpposite.lean, Mathlib/CategoryTheory/Shift/ShiftedHomOpposite.lean, Mathlib/CategoryTheory/Shift/ShiftedHomOpposite.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean; directory CategoryTheory/Shift",
+   "date": "2026-10-17",
+   "verdict": "no match: the shift-directory hits are counit and shifted-Hom identities; the CategoryTheory projection search returned no hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"counit\"",
+   "results": "9 hits: CategoryTheory.Adjunction.CommShift.CompatibilityCounit, CategoryTheory.Adjunction.CommShift.commShift_counit, CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit, CategoryTheory.Equivalence.CommShift.instCommShiftHomFunctorCounitIso, CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift, CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app, CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift_assoc, CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: counit compatibility and its consequences are inputs, already represented by the existing adjunction shift node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived projection formula natural transformation commutes with shift in the direct image input and maps distinguished triangles to morphisms of triangles",
+   "results": "8 hits: CategoryTheory.NatTrans.shift_comm, CategoryTheory.NatTrans.CommShift.shift_comm, CategoryTheory.NatTrans.CommShiftCore.shift_comm, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.NatTrans.CommShift.mk, CategoryTheory.ShiftedHom.map, CategoryTheory.NatTrans.shift_app",
+   "date": "2026-10-17",
+   "verdict": "no match: generic CommShift natural-transformation identities require an already supplied shift-compatible transformation; they do not prove this ringed projection mate square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed topoi the derived projection mate R K tensor P to R of K tensor Lf* P commutes with shifting K",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give module adjunctions or triangulated adjoint exactness, not the ringed projection mate in its direct-image variable"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection.*CommShift|CommShift.*projection",
+   "results": "0 hits: ; directory CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: the shift-directory hits are counit and shifted-Hom identities; the CategoryTheory projection search returned no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal triangulated left adjoint and its triangulated right adjoint give an exact projection formula natural transformation in the right adjoint argument via the counit",
+   "results": "8 hits: CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Adjunction.isTriangulated_leftAdjoint, CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated, CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated, CategoryTheory.Adjunction.IsTriangulated.mk'', CategoryTheory.Adjunction.IsTriangulated.comp, CategoryTheory.Adjunction.IsTriangulated.mk', CategoryTheory.Adjunction.IsTriangulated",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give module adjunctions or triangulated adjoint exactness, not the ringed projection mate in its direct-image variable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-thm-sf-pf-adic-projection",
@@ -70,5 +209,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-ringed-projection-first-shift",
+  "worker": "stage1",
+  "summary": "Verified the canonical ringed projection transpose and proved first-variable exactness, the counit tensor square, its mate shift square, and the connecting square by explicit substitutions. Reused existing tensor/pullback/adjunction tools; no new nodes and no statement change.",
+  "blueprint": "det-thm-sf-pf-adic-projection proof paragraph (2), Extension: first fix L and extend in K using exact functors. Steps 1–2 supply exactness, 3–6 give the first-variable compatible projection mate, and 7 supplies the connecting square.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic ordinary ringed-topos derived tensor and canonical projection transpose; it supplies mu and tensor exactness but only the second-variable mate shift square. No node in the unit supplies these ringed-topos constructions."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic exact unbounded derived module pullback for a coefficient map; needed to apply the triangulated-right-adjoint tool to the prescribed shift. No node of the integral projection unit proves this construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-ef4d8a713",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-ef4d8a713 (reviewer sub-agent of L); spot-checked: PASS: I read the item, all 8 cited node statements, the parent det-thm-sf-pf-adic-projection (its step 7 uses this item), unit sk-thm-sf-pf-adic, and paragraph (2) of the main-20261015 projection proof. I checked the sources: Stacks 0B56 (sites-cohomology.tex 13656-13680) defines exactly the item's map, π is the adjunct of (ε⊗1)∘μ, in the same unbounded module-sheaf category with K-flat tensor; 07A4 (line 3684) gives μ; 0A8D (derived.tex 2290) gives the counit-defined right-adjoint shift, and its omitted details are written out in steps 4-6. I recomputed every displayed equality by hand. Step 4 uses μ-naturality at r_K plus μ's first-factor shift compatibility, which the mate node states and its proof confirms for both variables. Step 5 uses the counit identity ε_{K[1]}=ε_K[1]∘s_UR, step 6 the unit identity plus naturality of η and r, and step 7 the third equation of the morphism-of-triangles definition (Tag 0144). Domains, codomains and hypotheses all match, with no flatness, invertibility or faithfulness used. Edge cases hold: K=0 or P=0, f=id, and P=A_Y (π=1). No duplicate: the mate node covers only the shift square in the second variable P, and the scheme/étale projection nodes are specific. The item does not restate a clause of its parent, adds no new nodes, has no cycle and cites no SGA. Searches cover the three required kinds. I accept the declared tool_uses: ringed-projection-mate-exact and ringed-topoi-derived-pullback are generic ringed-topos black boxes. The unit record pointing to the sec-six-functors unit is inherited maintainer metadata. Optional later: det-thm-sf-pf-field-localizing step 3 could cite this item. No fixes made."
  }
 }

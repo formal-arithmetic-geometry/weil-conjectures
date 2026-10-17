@@ -1,0 +1,93 @@
+{
+ "id": "lem-coef-ordinary-bar-evaluation-naturality",
+ "kind": "statement",
+ "title": "Strict naturality of evaluation from comma-chain simplicial replacement",
+ "statement": "Use simplicial sets, nerves and simplicial replacements $\\mathrm{BK}$ as in [lem-coef-bousfield-kan-comparison-calculus] and [def-coef-zigzag-homotopy-calculus]. Let $P:A\\to C$ be a functor between small categories and $X:C\\to\\mathrm{sSet}$ a diagram. For $c\\in C$ the category $C/c$ has objects $t:d\\to c$ and arrows $h:(d,t)\\to(d',t')$ with $t'h=t$. Form the bisimplicial set\n$$V(P,X)_{i,q}=\\coprod_{x_0\\to\\cdots\\to x_i\\text{ in }A}\\ \\coprod_{(c_0,t_0)\\to\\cdots\\to(c_q,t_q)\\text{ in }C/Px_0}X(c_0)_q.$$\nIn the $q$ direction use the $\\mathrm{BK}$ operators on the displayed slice chain and $X$ factor. In the $i$ direction $d_0$ postcomposes every $t_a$ by $P(v_1)$ for $v_1:x_0\\to x_1$; other faces compose or delete arrows of the $A$ chain and degeneracies insert identities. Let $U(P,X)_{i,q}=\\coprod_{x_0\\to\\cdots\\to x_i}X(Px_0)_q$, with first $i$ face applying $X(Pv_1)$, the other $i$ operators on the chain, and $q$ operators on $X$. Then $\\operatorname{diag}U(P,X)=\\mathrm{BK}_A(XP)$, and\n$$e_{P,X}:V(P,X)\\to U(P,X),\\quad (x_\\bullet,(c_\\bullet,t_\\bullet),z)\\mapsto(x_\\bullet,X(t_0)z)$$\nis a bisimplicial map.\n\nFor functors $K:A'\\to A$, $H:C'\\to C$, $P':A'\\to C'$ with $PK=HP'$, a diagram $X':C'\\to\\mathrm{sSet}$ and a natural transformation $\\eta:X'\\Rightarrow XH$, define $V':V(P',X')\\to V(P,X)$ by $K$ on the $A'$ chain, $H$ on the slice chain and $\\eta_{c'_0}$ on $z$; define $U':U(P',X')\\to U(P,X)$ by $K$ on the $A'$ chain and $\\eta_{P'x'_0}$ on its coefficient. These are bisimplicial maps and $U'e_{P',X'}=e_{P,X}V'$ strictly. All these induced maps preserve identities and composition in $(K,H,\\eta)$ strictly. Consequently their diagonal maps form the same strictly commutative square. No equivalence condition on any of these data is required.",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Dwyer–Kan, Calculating simplicial localizations, proof 9.10, printed pp.32–33: regrouping by A-chains, evaluation of terminal-slice augmentation, and its strict naturality. No Stacks tag states this categorical bar calculation; source formulas checked online, agent expansion of strict naturality."
+ },
+ "stmt_deps": [
+  "lem-coef-bousfield-kan-comparison-calculus",
+  "def-coef-zigzag-homotopy-calculus"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of evaluation augmentation from a Bousfield Kan simplicial replacement under a natural transformation of diagrams",
+   "results": "{\"t\": \"2026-10-17T08:39:10Z\", \"tool\": \"leansearch\", \"query\": \"Naturality of evaluation augmentation from a Bousfield Kan simplicial replacement under a natural transformation of diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.augment\", \"CategoryTheory.evaluation\", \"AlgebraicTopology.DoldKan.map_Q\", \"AlgebraicTopology.DoldKan.Q_f_naturality\", \"CategoryTheory.SimplicialObject.whiskering_map_app_app\", \"AlgebraicTopology.DoldKan.Q_f_naturality_assoc\", \"AlgebraicTopology.DoldKan.natTransP_app\", \"CategoryTheory.CosimplicialObject.augment_hom_app\"], \"digest\": \"a14bb5b66dc7f4dc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:500–530 for SimplicialObject.augment; it extends already supplied augmentation data, not this chain-indexed construction. NatTrans.naturality gives only one square for a supplied transformation, not V, its operators and their laws. DoldKan.P_f_naturality and Q_f_naturality concern preadditive chain projections. Neither they nor generic Grothendieck.map_map in the hits state this bisimplicial evaluation theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of evaluation of a Bousfield Kan simplicial replacement under a natural transformation of diagrams",
+   "results": "{\"t\": \"2026-10-17T08:40:30Z\", \"tool\": \"leansearch\", \"query\": \"Naturality of evaluation of a Bousfield Kan simplicial replacement under a natural transformation of diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.P_f_naturality\", \"AlgebraicTopology.DoldKan.Q_f_naturality\", \"AlgebraicTopology.DoldKan.P_f_naturality_assoc\", \"CategoryTheory.SimplicialObject.whiskering_map_app_app\", \"AlgebraicTopology.DoldKan.Q_f_naturality_assoc\", \"AlgebraicTopology.DoldKan.map_Q\", \"SimplicialObject.Split.evalN_map\", \"AlgebraicTopology.DoldKan.hσ'_naturality\"], \"digest\": \"251195d31a7ba91f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:500–530 for SimplicialObject.augment; it extends already supplied augmentation data, not this chain-indexed construction. NatTrans.naturality gives only one square for a supplied transformation, not V, its operators and their laws. DoldKan.P_f_naturality and Q_f_naturality concern preadditive chain projections. Neither they nor generic Grothendieck.map_map in the hits state this bisimplicial evaluation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "{\"t\": \"2026-10-17T08:39:11Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans.naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.naturality\", \"CategoryTheory.Limits.PullbackCone.isoMk\", \"CategoryTheory.Limits.PushoutCocone.isoMk\", \"CategoryTheory.Limits.PullbackCone.isoMk_hom_hom\", \"CategoryTheory.Limits.PullbackCone.isoMk_inv_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom\", \"CategoryTheory.Grothendieck.map_map\"], \"digest\": \"4b8320ba791eeca4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:500–530 for SimplicialObject.augment; it extends already supplied augmentation data, not this chain-indexed construction. NatTrans.naturality gives only one square for a supplied transformation, not V, its operators and their laws. DoldKan.P_f_naturality and Q_f_naturality concern preadditive chain projections. Neither they nor generic Grothendieck.map_map in the hits state this bisimplicial evaluation theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Bousfield|simplicial replacement|augmentation",
+   "results": "{\"t\": \"2026-10-17T08:39:11Z\", \"tool\": \"grep\", \"query\": \"Bousfield|simplicial replacement|augmentation\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\"], \"digest\": \"b0c3ea8b6d7f0b3e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:500–530 for SimplicialObject.augment; it extends already supplied augmentation data, not this chain-indexed construction. NatTrans.naturality gives only one square for a supplied transformation, not V, its operators and their laws. DoldKan.P_f_naturality and Q_f_naturality concern preadditive chain projections. Neither they nor generic Grothendieck.map_map in the hits state this bisimplicial evaluation theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialObject.augment",
+   "results": "{\"t\": \"2026-10-17T08:40:30Z\", \"tool\": \"grep\", \"query\": \"SimplicialObject.augment\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\"], \"digest\": \"bed0a8bdf7f821da\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:500–530 for SimplicialObject.augment; it extends already supplied augmentation data, not this chain-indexed construction. NatTrans.naturality gives only one square for a supplied transformation, not V, its operators and their laws. DoldKan.P_f_naturality and Q_f_naturality concern preadditive chain projections. Neither they nor generic Grothendieck.map_map in the hits state this bisimplicial evaluation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "evaluation map naturality for Bousfield Kan simplicial replacement",
+   "results": "{\"t\": \"2026-10-17T08:41:51Z\", \"tool\": \"leanfinder\", \"query\": \"evaluation map naturality for Bousfield Kan simplicial replacement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.P_f_naturality\", \"AlgebraicTopology.DoldKan.Q_f_naturality\", \"AlgebraicTopology.DoldKan.PInfty_f_naturality\", \"AlgebraicTopology.DoldKan.QInfty_f_naturality\", \"AlgebraicTopology.DoldKan.natTransPInfty_f\", \"AlgebraicTopology.DoldKan.P_f_naturality_assoc\", \"AlgebraicTopology.DoldKan.Q_f_naturality_assoc\", \"AlgebraicTopology.DoldKan.natTransPInfty\"], \"digest\": \"1fab67bc9af0fad0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean:500–530 for SimplicialObject.augment; it extends already supplied augmentation data, not this chain-indexed construction. NatTrans.naturality gives only one square for a supplied transformation, not V, its operators and their laws. DoldKan.P_f_naturality and Q_f_naturality concern preadditive chain projections. Neither they nor generic Grothendieck.map_map in the hits state this bisimplicial evaluation theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-ordinary-two-sided-bar-comparison",
+  "date": "2026-10-17",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient-adjunction and inverse-limit calculation: auxiliary localization mapping-space foundation; ordinary two-sided bar comparison (Dwyer–Kan Proposition 9.5), used in proof 10.6 before taking the simplicial-degree diagonal. Dwyer–Kan, Calculating simplicial localizations, proof 9.10, printed pp.32–33: regrouping by A-chains, evaluation of terminal-slice augmentation, and its strict naturality.",
+   "via": [
+    "lem-coef-ordinary-two-sided-bar-comparison",
+    "lem-coef-two-sided-simplicial-grothendieck-invariance",
+    "lem-coef-fixed-hammock-graph-homotopy-invariance",
+    "lem-coef-hammock-pair-homotopy-invariance",
+    "lem-coef-dk-cofibrant-localization-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

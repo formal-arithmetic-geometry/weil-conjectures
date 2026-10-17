@@ -11,9 +11,67 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-cbc-kan-functor-space-kan], $\\operatorname{Fun}(A,A)$ and $\\operatorname{Fun}(B,B)$ are Kan: apply its statement with $(K,Z)=(A,A)$ and $(B,B)$. More generally $\\operatorname{Fun}(X,Y)$ is Kan for every pair of $\\mathcal W$-small Kan complexes, so $\\mathbf{Kan}_{\\mathcal W}$ is locally Kan. The quasicategory assertion of [lem-coef-kan-coherent-nerve-quasicategory] therefore applies to its coherent nerve in the containing universe and gives that $\\mathcal S_{\\mathcal W}$ is a quasicategory. By the formula for the internal functor simplicial set in [def-cbc-enhanced-diagrams-cones], the two assumed homotopies are edges in the respective endomorphism simplicial sets, with endpoints $gf,1_A$ and $fg,1_B$ in some order.",
+   "uses": [
+    "lem-cbc-kan-functor-space-kan",
+    "lem-coef-kan-coherent-nerve-quasicategory",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-category-of-spaces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00TN",
+    "place": "Corollary 3.1.3.4; coherent-nerve quasicategory input is Theorem 2.4.5.1 (00LJ)."
+   }
+  },
+  {
+   "text": "Orient these edges as $h_A:1_A\\to gf$ and $h_B:1_B\\to fg$. Here is the explicit reversal when needed. In any of the Kan simplicial sets obtained in step 1, given an edge $e:u\\to v$, prescribe a $\\Lambda_0^2$-horn with vertices $(u,v,u)$, edge $01=e$, and edge $02$ the degenerate edge at $u$. Its two prescribed faces agree at their common vertex $u$. The Kan condition in [def-cbc-enhanced-diagrams-cones] fills this horn; the missing edge $12$ is an edge $v\\to u$. If the given homotopy already points from the identity to the composite, retain it; otherwise apply this construction. Thus both $h_A$ and $h_B$ are actual $1$-simplices with the desired ordered endpoints, not merely zigzags or equalities of components.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00M0",
+    "place": "Remark 2.4.6.4 (00M0), condition (c): in a locally Kan simplicial category a homotopy may be taken in either direction; the subsection is 2.4.6 (00LW). Explicit outer-horn argument written here."
+   }
+  },
+  {
+   "text": "Construct $\\sigma$ directly as an enriched functor $\\mathfrak C[\\Delta^2]\\to\\mathbf{Kan}_{\\mathcal W}$, using [def-coef-infinity-category-of-spaces]. Send objects $(0,1,2)$ to $(A,B,A)$. Send the singleton-poset mapping sets $N(P_{0,1})$ and $N(P_{1,2})$ constantly to $f$ and $g$, and the diagonal singleton-poset mapping sets to the identity vertices. The only remaining nonempty mapping set is $N(P_{0,2})$. Its poset has exactly $\\{0,2\\}\\subset\\{0,1,2\\}$, so its nerve is $\\Delta^1$: send it by the edge $h_A$, with values $1_A$ at $\\{0,2\\}$ and $gf$ at $\\{0,1,2\\}$. The only composition involving two nonidentity source arrows is $P_{1,2}\\times P_{0,1}\\to P_{0,2}$; union sends its unique vertex to $\\{0,1,2\\}$, where our map has value $g\\circ f$, exactly the enriched composite of the constant maps. Compositions with identities satisfy the unit law, and all maps from empty mapping sets are unique. This checks every enriched composition and identity equation in every degree (the constant simplicial maps include all degeneracies). The enriched functor is therefore a $2$-simplex of the coherent nerve. Restriction to the three faces selects $\\{0,1\\}$, $\\{1,2\\}$ and $\\{0,2\\}$ respectively, so its edges are exactly $f,g,1_A$. The identity vertex corresponds to the degenerate edge: the degeneracy $[1]\\to[0]$ sends the two objects to $A$ and its singleton mapping set to the identity map.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00M5",
+    "place": "Proposition 2.4.6.10 and Example 2.4.3.10 (00KX), interpreted by a direct calculation in the project inclusion-poset convention. Kerodon uses the opposite path-poset orientation; no comparison of conventions is assumed."
+   }
+  },
+  {
+   "text": "For $\\tau$ use the same explicitly specified mapping sets of $\\mathfrak C[\\Delta^2]$ from [def-coef-infinity-category-of-spaces], now send objects to $(B,A,B)$, $P_{0,1}$ to $g$, $P_{1,2}$ to $f$, diagonal sets to identity vertices, and $N(P_{0,2})$ by $h_B$. Its endpoint values are $1_B$ at $\\{0,2\\}$ and $fg$ at $\\{0,1,2\\}$, so the union composition agrees with $f\\circ g$; all remaining compositions are unit compositions or have empty domain. The face restrictions are thus $g,f,1_B$, with the long edge degenerate at $B$. In the quasicategory established in step 1, these two triangles are precisely the two inverse-equation witnesses required by the definition of equivalence edge in [def-cbc-enhanced-diagrams-cones]. Hence $f$ is an equivalence with specified inverse $g$. No step chooses a vertex of $A$ or $B$, only vertices of their endomorphism mapping sets. If both complexes are empty these sets are the one-point simplicial set and the construction still applies. If only one is empty, a map in each direction cannot exist unless both are empty; the hypotheses already exclude that case. For arbitrary disconnected complexes the same mapping-set argument applies without alteration.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00M5",
+    "place": "Proposition 2.4.6.10 and Example 2.4.3.10 (00KX), interpreted by a direct calculation in the project inclusion-poset convention. Kerodon uses the opposite path-poset orientation; no comparison of conventions is assumed."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-kan-functor-space-kan",
+  "lem-coef-kan-coherent-nerve-quasicategory",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2: mapping adjunction and triangle identities. Direct subset-poset construction informed by online Kerodon 00M5 and 00KX; these online references are not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +107,45 @@
    "results": "{\"t\": \"2026-10-17T07:35:24Z\", \"tool\": \"grep\", \"query\": \"SimplicialNerve|simplicialNerve\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"d4b2106a92c08ddb\"}",
    "date": "2026-10-17",
    "verdict": "no match: read all hits and Mathlib/AlgebraicTopology/SimplicialNerve.lean:26-34,193-209. The latter defines the nerve and lists vertex/edge and quasicategory identifications as TODO. Ordinary nerve homEquiv and truncated homotopy-category hits do not identify inverse homotopies of Kan maps with coherent-nerve inverse triangles. Topological and chain-complex homotopy equivalences also do not state this criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy inverse maps of Kan complexes yield inverse triangles and an equivalence edge in the homotopy coherent nerve",
+   "results": "{\"t\": \"2026-10-17T09:24:29Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy inverse maps of Kan complexes yield inverse triangles and an equivalence edge in the homotopy coherent nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.homEquiv_symm_apply\", \"CategoryTheory.nerve.homEquiv\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\", \"CategoryTheory.nerve.mk₁_homEquiv_apply\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"CategoryTheory.nerve.homEquiv_apply\"], \"digest\": \"4d736cdc07f6748a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary category nerves, truncated homotopy categories or model-category homotopy classes; none constructs coherent-nerve triangles from Kan homotopies. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:20-34,193-209, ordinary Nerve.lean:168-215,237-243 and NerveAdjunction.lean:275-278. SimplicialNerve defines the object but does not state the required identification. The separate Kan-exponential fact is already the cited Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialNerve|simplicialNerve",
+   "results": "{\"t\": \"2026-10-17T09:25:02Z\", \"tool\": \"grep\", \"query\": \"SimplicialNerve|simplicialNerve\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"d4b2106a92c08ddb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary category nerves, truncated homotopy categories or model-category homotopy classes; none constructs coherent-nerve triangles from Kan homotopies. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:20-34,193-209, ordinary Nerve.lean:168-215,237-243 and NerveAdjunction.lean:275-278. SimplicialNerve defines the object but does not state the required identification. The separate Kan-exponential fact is already the cited Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simplicial homotopy equivalences of Kan complexes give equivalence edges in the coherent nerve of spaces",
+   "results": "{\"t\": \"2026-10-17T09:25:02Z\", \"tool\": \"leansearch\", \"query\": \"Simplicial homotopy equivalences of Kan complexes give equivalence edges in the coherent nerve of spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.instSetoidEdge\", \"CategoryTheory.nerve.homEquiv\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.ShortComplex.HomotopyEquiv.ext_iff\", \"CategoryTheory.nerve.edgeMk\", \"SSet.Truncated.HomotopicL\", \"SSet.Truncated.HomotopicR\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass\"], \"digest\": \"1ce128f8db630365\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary category nerves, truncated homotopy categories or model-category homotopy classes; none constructs coherent-nerve triangles from Kan homotopies. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:20-34,193-209, ordinary Nerve.lean:168-215,237-243 and NerveAdjunction.lean:275-278. SimplicialNerve defines the object but does not state the required identification. The separate Kan-exponential fact is already the cited Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialNerve\", \"Homotopy\"",
+   "results": "{\"t\": \"2026-10-17T09:25:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\", \\\"Homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary category nerves, truncated homotopy categories or model-category homotopy classes; none constructs coherent-nerve triangles from Kan homotopies. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:20-34,193-209, ordinary Nerve.lean:168-215,237-243 and NerveAdjunction.lean:275-278. SimplicialNerve defines the object but does not state the required identification. The separate Kan-exponential fact is already the cited Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A two simplex in the simplicial nerve is a homotopy from its long edge to the composite of its short edges",
+   "results": "{\"t\": \"2026-10-17T09:25:13Z\", \"tool\": \"leanfinder\", \"query\": \"A two simplex in the simplicial nerve is a homotopy from its long edge to the composite of its short edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.δ₂_two\", \"CategoryTheory.nerve.δ₁_mk₂_eq\", \"CategoryTheory.nerve.δ₂_zero\", \"CategoryTheory.nerve.δ₂_mk₂_eq\", \"CategoryTheory.nerve.δ₀_mk₂_eq\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.nerve.homEquiv_comp\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\"], \"digest\": \"d44a46f1fb3d17d4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary category nerves, truncated homotopy categories or model-category homotopy classes; none constructs coherent-nerve triangles from Kan homotopies. Read Mathlib/AlgebraicTopology/SimplicialNerve.lean:20-34,193-209, ordinary Nerve.lean:168-215,237-243 and NerveAdjunction.lean:275-278. SimplicialNerve defines the object but does not state the required identification. The separate Kan-exponential fact is already the cited Mathlib leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-adjunction-mapping-equivalence",
@@ -79,5 +172,35 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-coherent-nerve-inverse-equivalence",
+  "worker": "stage1",
+  "group": "Q138",
+  "summary": "Constructed the two enriched-functor triangles directly, checking every composition and face restriction. Normalized either homotopy orientation by an explicit outer-horn filler, using the existing Mathlib Kan-exponential leaf. Cited the existing coherent-nerve quasicategory theorem. No new nodes; statement and ancestry unchanged. Checked empty and disconnected complexes and searched Lean, DAG, blueprint and Mathlib.",
+  "blueprint": "Realizes the mapping-adjunction/triangle-identities argument in paragraph 2 of the historical ancestor prop-coef-integral-exceptional-adjoint, at its recorded descendant lem-coef-infinity-adjunction-mapping-equivalence. The main-20261015 ancestor retains the adjunction statement and omits the historical proof, so no alternate unit route is introduced.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-kan-functor-space-kan",
+    "why": "Kan internal functor objects supply homotopy reversal and local Kan enrichment; this existing Mathlib leaf is a generic simplicial-set tool."
+   },
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Supplies the explicit horn, functor-object and equivalence-edge definitions used by the item itself, not an alternate proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-kan-functor-space-kan",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-7d8f3d125",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-7d8f3d125 (reviewer sub-agent of L); spot-checked: I read the item, all four cited nodes and the Kerodon sources in full. The statement is true and is the special case of Kerodon 00M5 (Prop 2.4.6.10) with 00M0 (Rem 2.4.6.4(c)) for Kan_W. I tested the empty, one-empty, point and disconnected cases. Step 1 correctly applies the Mathlib leaf lem-cbc-kan-functor-space-kan (Kerodon 00TN, checked) and the in-unit lem-coef-kan-coherent-nerve-quasicategory (00LJ, checked). Step 2 fills a Lambda^2_0 outer horn in a Kan complex to reverse an edge; it is elementary and correct. Steps 3 and 4 check C[Delta^2] in the project's inclusion subset-poset convention. Here the edge {0,2} ⊂ {0,1,2} runs from 1_A to gf, the opposite of Kerodon's 00KX direction, and the worker handled this without assuming any comparison of conventions. The union composition {1,2} ∪ {0,1} goes to g∘f, the unit laws hold, and the faces are f, g, 1_A. sigma and tau are exactly def-cbc's inverse-triangle witnesses. There are no new nodes. lem-coef-kan-weak-equivalence-space-edge is a stronger statement needing Whitehead's theorem, not a duplicate. The searches are recorded. The tool_uses are harmless: one is a Mathlib leaf and one is a definition. Fix: step 2 cited tag 00LW as Remark 2.4.6.4, but 00LW is Subsection 2.4.6 and the remark is tag 00M0. I corrected the step 2 source document and place and added (00M0) to the item's source.place. The report's WANTED line has the same misnumbering and should request 00M0.; 1 file(s) fixed by the reviewer"
  }
 }

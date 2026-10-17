@@ -12,11 +12,146 @@
   "def-pur-sheaf-tensor-product",
   "def-weil-abstract-derived-category",
   "def-pc-kflat-complex",
-  "lem-pur-derived-change-of-rings"
+  "lem-pur-derived-change-of-rings",
+  "def-pc-sheaf-restrict-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $E_R(\\mathcal M)=\\mathcal M(*)$ and let $C_R(M)$ have value $M$ at $*$ and identity restriction. A matching family for the sole covering sieve consists of one section indexed by $\\mathrm{id}_*$; its unique amalgamation is that section. Thus every presheaf is a sheaf. By [def-weil-sheaf-of-modules-category], the data of a module sheaf are precisely one $R$-module, and a morphism is precisely one $R$-linear map: the identity restriction is forced by the presheaf identity law. The maps $E_RC_R(M)\\to M$ and $C_RE_R(\\mathcal M)\\to\\mathcal M$ with component the identity are natural isomorphisms. Their triangle identities are identities at $*$. This constructs the asserted equivalence and its specified inverse.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00X9, section-topoi, punctual topos paragraph after definition-topos (00XA); explicit module specialization"
+   }
+  },
+  {
+   "text": "The equivalence just constructed is additive, since addition of module-sheaf morphisms is addition of their sole component. For a map $a:M\\to N$, the presheaves with values $\\ker a$ and $N/\\operatorname{im}a$ are already sheaves by step 1. They have the kernel and cokernel universal properties because a factorization of a module-sheaf map is exactly a factorization of its sole component. This also agrees with the kernel/cokernel description in [def-weil-sheaf-of-modules-category]. Hence both $E_R$ and $C_R$ preserve kernels and cokernels and are exact. For any small family $(M_i)$ the sheaf with value $\\bigoplus_iM_i$ is its coproduct, since maps from it are precisely families of maps from the $M_i$. Evaluation therefore also preserves all direct sums used below.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian, specialized using sites.tex Tag 00X9; direct universal-property verification"
+   }
+  },
+  {
+   "text": "By [def-pur-sheaf-tensor-product], the presheaf tensor product of $\\mathcal M$ and $\\mathcal N$ has sole value $\\mathcal M(*)\\otimes_R\\mathcal N(*)$. It is a sheaf by step 1. The sheafification universal property in [def-weil-presheaf-modules-sheafification] identifies its sheafification with itself: the identity map has the same factorization property, so the two maps supplied by the universal properties are inverse. Consequently the tensor comparison sends each $m\\otimes n$ to the same $m\\otimes n$ at $*$. It is natural, and its associativity, symmetry and unit compatibilities hold on pure tensors (which generate the tensor products). Thus it is the ordinary tensor product, with its usual structure maps.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03CY, lemma-sheafification-presheaf-modules"
+   }
+  },
+  {
+   "text": "Let $\\varphi:R\\to S$. By [def-pc-sheaf-restrict-scalars], restriction changes the action at $*$ to $r\\cdot n=\\varphi(r)n$, leaving elements and maps unchanged. By [def-pur-sheaf-tensor-product] and step 3, extension has sole value $M\\otimes_RS$ and sends $a$ to $a\\otimes1$. The extension/restriction adjunction is explicit here: $u:M\\otimes_RS\\to N$ corresponds to $m\\mapsto u(m\\otimes1)$; an $R$-linear $v:M\\to N$ has inverse transpose $m\\otimes s\\mapsto s v(m)$, well defined by the balancing relation. Both composites are identities, and the formulas commute with maps of $M,N$. Taking $u$ to be the identity gives the unit $m\\mapsto m\\otimes1$. These formulas are identical for sheaves and modules under evaluation.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, lemma-adjointness-tensor-restrict, and preceding restriction/change-of-rings definitions; explicit transpose formulas"
+   }
+  },
+  {
+   "text": "Apply $E_R$ and $C_R$ to every degree and differential of a cochain complex as defined in [def-weil-abstract-derived-category]. The equation $d^{i+1}d^i=0$ and the chain-map equations become exactly the same equations at $*$. The natural isomorphisms of step 1 applied degreewise are chain isomorphisms and give inverse equivalences of complex categories. A cochain homotopy is a family $h^i:K^i\\to L^{i-1}$ with $f^i-g^i=d_L^{i-1}h^i+h^{i+1}d_K^i$. The two functors carry this equation to the identical equation and back. Hence they give well-defined inverse functors on maps modulo homotopy, proving the homotopy-category comparison as well.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Paragraph defining cochain homotopy before Lemma 0112; derived.tex Tag 05RN, section-homotopy"
+   }
+  },
+  {
+   "text": "For every complex $K$, step 2 identifies the kernels, images and quotients in $H^i(K)=\\ker d^i/\\operatorname{im}d^{i-1}$ with the corresponding ordinary-module objects. These identifications commute with chain maps, since the maps on kernels and quotients are induced by their components. Thus $E_RH^i(K)\\cong H^i(E_RK)$, and conversely with $C_R$. In the terminology of [def-weil-abstract-derived-category], both functors preserve and reflect acyclicity and quasi-isomorphisms.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU, definition-unbounded-derived-category, and homology.tex Tag 0115, definition-quasi-isomorphism-cochain; explicit cohomology calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to the exact additive functors $E_R,C_R$ of step 2. It gives functors $D(E_R),D(C_R)$ and their natural factorization isomorphisms with the localization functors $Q$. They are inverse equivalences: after precomposition with $Q$, each composite is naturally the identity by the degreewise isomorphisms of step 5. The universal property of localization [def-weil-abstract-derived-category] descends those natural isomorphisms; their inverses and identities descend too, so their composites remain identities. This proves the derived equivalence and its commutation with localization. The construction applies to unbounded complexes, since the cited factorization lemma is stated for $D(\\mathcal A)$, not only $D^+(\\mathcal A)$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; Tag 05RU, definition-unbounded-derived-category, localization universal property"
+   }
+  },
+  {
+   "text": "By [def-pc-tensor-complex-sheaves], total tensor in degree $n$ is $\\bigoplus_{p+q=n}K^p\\otimes L^q$ and has differential $d_K\\otimes1+(-1)^p1\\otimes d_L$ on the $(p,q)$ summand. Steps 2 and 3 identify every summand, the direct sum, and both differential components with their module versions. Therefore evaluation identifies the two total tensor complexes by the identity on each pure tensor in each summand. For any acyclic module complex $A$, $C_R(A)$ is acyclic by step 6; applying the K-flat test [def-pc-kflat-complex] and this total-tensor identity proves that evaluation carries a K-flat sheaf complex to a K-flat module complex. Conversely every acyclic sheaf complex is $C_R(A)$ for its acyclic evaluation, so the same test proves the reverse implication. Also flat terms correspond: by [def-pc-flat-sheaf-modules], flatness means exactness of tensoring, and steps 2 and 3 identify the two exactness tests.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN, definition-K-flat; homology.tex Tag 012Z, definition-associated-simple-complex; sites-modules.tex Tag 03ER, definition-flat"
+   }
+  },
+  {
+   "text": "Choose a K-flat resolution $P\\to K$ with flat terms using [lem-pc-kflat-resolution]. By steps 6 and 8, its evaluation is an ordinary-module K-flat resolution with flat terms, and conversely an ordinary-module resolution gives one by $C_R$. The computation isomorphism of [lem-pur-derived-change-of-rings] represents sheaf derived extension by $Q(P\\otimes_{\\underline R}\\underline S)$. Steps 3--4 identify its chain representative with $E_R(P)\\otimes_RS$, and step 7 identifies its localization with the ordinary-module localization. A chain map between K-flat representatives is carried to the same tensor map on both sides. The quasi-isomorphism invariance and canonical comparison for different K-flat resolutions in [lem-pur-derived-change-of-rings] therefore give the same derived computation independently of the resolution. Here the ring map is arbitrary; exactness of extension of scalars is not assumed.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; Tag 06YT, lemma-derived-tor-quasi-isomorphism-other-side; Tag 06YY, lemma-derived-base-change"
+   }
+  },
+  {
+   "text": "Finally apply [lem-pur-sheaf-ring-derived-coefficient-adjunction] to this small singleton site and $\\underline\\varphi$. Its normalized unit at $QP$, for the flat-term K-flat resolution just chosen, is represented by $P\\to\\operatorname{Res}(P\\otimes_{\\underline R}\\underline S)$, $x\\mapsto x\\otimes1$. Step 4 identifies this chain map, including every degree, with the ordinary unit. The same cited statement identifies the transpose of a chain map $g$ by $x\\otimes s\\mapsto s g(x)$, which evaluation also leaves unchanged. For $q:QP\\xrightarrow{\\sim}QK$, naturality gives $\\eta_{QK}=\\operatorname{Res}(L\\varphi^*(q))\\circ\\eta_{QP}\\circ q^{-1}$. Evaluation preserves each factor by steps 4, 7 and 9. Hence the comparison of derived computations preserves the unit also at $QK$, as well as on K-flat representatives, proving the final assertion.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint, identity-topos ring map; normalization from derived.tex Tags 0FND and 09T5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00X9 punctual topos paragraph; explicit module/complex specialization, with sites-modules and sites-cohomology results cited separately in the steps"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +187,52 @@
    "results": "8 hits: PresheafOfModules.evaluation, PresheafOfModules.sections.eval, PresheafOfModules.evaluation_obj, SheafOfModules.evaluation, CategoryTheory.evalEquiv.congr_simp, CategoryTheory.eval_app, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, CategoryTheory.sheafSectionsNatIsoEvaluation",
    "date": "2026-10-17",
    "verdict": "no match: evaluation or module-level adjunction and functoriality results do not state this full comparison for complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation|discrete.*equiv|equiv.*discrete",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean; source subdirectory Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected evaluation and bottom-topology equivalence candidates; none states the full module, complex, K-flat and scalar-unit comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at the single object of the category with only an identity arrow identifies sheaves of ring modules, tensor products, complexes and derived categories with ordinary modules",
+   "results": "8 hits: SheafOfModules.evaluation, SheafOfModules.unit_val, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, SheafOfModules.forgetToSheafModuleCat_obj_val, SheafOfModules.unit, SheafOfModules.forgetToSheafModuleCat, SheafOfModules.unitHomEquiv_apply_coe",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected evaluation and bottom-topology equivalence candidates; none states the full module, complex, K-flat and scalar-unit comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules on the trivial topology of the one object identity category are equivalent to modules over a ring and the equivalence commutes with derived tensor products",
+   "results": "8 hits: CategoryTheory.sheafBotEquivalence, SheafOfModules.forgetToSheafModuleCat_obj_val, SheafOfModules.noConfusionType, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, SheafOfModules.hom_ext, SheafOfModules, SheafOfModules.mk, SheafOfModules.forgetToSheafModuleCat",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected evaluation and bottom-topology equivalence candidates; none states the full module, complex, K-flat and scalar-unit comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.evaluation",
+   "results": "12 hits: SheafOfModules.evaluation, SheafOfModules.evaluationPreservesLimitsOfSize, SheafOfModules.Finite.evaluationPreservesFiniteLimits, SheafOfModules.evaluationPreservesLimitsOfShape, SheafOfModules.hasLimit, SheafOfModules.createsLimit, SheafOfModules.evaluationPreservesLimit, SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatObjFunctorIsSheafPresheafOfModulesForgetEvaluationForgetLinearMapIdCarrierSections",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected evaluation and bottom-topology equivalence candidates; none states the full module, complex, K-flat and scalar-unit comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module sheaf on the terminal category with bottom Grothendieck topology is just a module and evaluation is a tensor equivalence",
+   "results": "8 hits: CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, SheafOfModules.unit_val, CondensedMod.LocallyConstant.functorIsoDiscreteAux₂, SheafOfModules.forgetToSheafModuleCat_obj_val, SheafOfModules.unit, SheafOfModules.unitHomEquiv, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected evaluation and bottom-topology equivalence candidates; none states the full module, complex, K-flat and scalar-unit comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafBotEquivalence|isSheaf_bot",
+   "results": "9 hits: Mathlib/CategoryTheory/Sites/Point/Presheaf.lean, Mathlib/CategoryTheory/Sites/Point/Presheaf.lean, Mathlib/CategoryTheory/Sites/Point/Presheaf.lean, Mathlib/CategoryTheory/Sites/SheafOfTypes.lean, Mathlib/CategoryTheory/Sites/Sheafification.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean; source subdirectory Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected evaluation and bottom-topology equivalence candidates; none states the full module, complex, K-flat and scalar-unit comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction",
@@ -79,5 +256,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-singleton-site-module-comparison",
+  "worker": "stage1",
+  "summary": "Constructed evaluation and constant inverse explicitly on the punctual site; computed exactness, tensor, scalars, complexes and homotopies directly, and reused existing derived factorization, K-flat resolution/change-of-rings and normalized derived-unit nodes. Statement retained; no new nodes.",
+  "blueprint": "Supports the integral-lattice finite-level module reconstruction used in thm-weil-pbc-finite-extension through the existing created.item ancestry. This is the punctual-site comparison invoked by lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction; it does not replace any geometric step of sk-thm-properbasechange.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat change-of-rings computation on a ringed site, specialized to the singleton site; the proper-base-change unit does not construct this homological algebra."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of flat-term K-flat resolutions, needed to compare computations and normalized units; no geometric proper-base-change step supplies resolutions."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic normalized derived scalar-extension adjunction on a small ringed site, used solely for the explicit unit formula; it does not replace the proper-base-change route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N5-a04e60cef",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-a04e60cef (reviewer sub-agent of L); spot-checked: I read the whole item: all 10 steps, all 12 cited statements, and the citing parent's steps 7-8. Source: Stacks sites.tex 00X9, the punctual-topos paragraph after 00XA. That site has one object, the identity, and only {id} as a covering, which is the item's site with the maximal sieve as its only covering sieve. Every step tag exists with the label the step names: 03DA, 03EK, 03CY, 03CZ, 03ER, 0112, 0115, 012Z, 05RN, 05RU, 015F, 0FND, 09T5, 06YN, 06YS, 06YT, 06YY, 07A6. No SGA source is used. Steps 1-6 are elementary and correct: every presheaf is a sheaf; kernels, cokernels and direct sums are computed at *; the presheaf tensor is already a sheaf; the extension/restriction transposes u(m⊗1) and m⊗s↦s v(m) are written out; homotopies and cohomology carry over. Step 7 applies the unbounded Mathlib-leaf derived factorization, and the isomorphisms descend because whiskering by the localization Q is fully faithful. Step 8 checks K-flatness in both directions with the (-1)^p total tensor, and termwise flatness. Steps 9 and 10 use only the stated clauses of the derived change-of-rings lemma, the K-flat resolution lemma, and the normalized derived adjunction (small site, commutative rings, flat terms). The naturality formula η_QK = Res(Lφ*q)∘η_QP∘q^-1 is correct. Edge cases checked: R=0, and Z→Z/2, where a resolution is needed because extension of scalars is not exact. Searches of the DAG and the blueprint (punctual, singleton, one-object site, Sh(pt), 00X9) found no duplicate. The existing one-object-site convention nodes never state this comparison. There are no new nodes. I accept three tool uses as declared: lem-pur-derived-change-of-rings, lem-pc-kflat-resolution and lem-pur-sheaf-ring-derived-coefficient-adjunction, all generic homological algebra that replaces no step of the proper-base-change route. Minor point, not changed: the statement leaves S's commutativity implicit (Stacks convention, and the cited nodes require it); the only citer uses commutative A→A_n. No fixes were made."
  }
 }

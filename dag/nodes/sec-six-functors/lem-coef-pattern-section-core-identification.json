@@ -14,9 +14,105 @@
   "lem-coef-joyal-model-structure",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "An equivalence in $B=\\Delta^0$ or $\\Delta^1$ is an identity: an inverse would give inequalities in both directions between its endpoints, so the endpoints coincide and the unique edge is degenerate. Hence $p:E\\to B$ is an isofibration as defined in [lem-coef-infinity-isofibration-exponentiation]: its inner lifting property is assumed, and the identity at $p(x)$ lifts to the identity at $x$. Apply that node with $\\varnothing\\hookrightarrow B$. It gives an isofibration $p_*:\\operatorname{Fun}(B,E)\\to\\operatorname{Fun}(B,B)$ between quasicategories. The strict fibre at $\\mathrm{id}_B$ is a quasicategory: an inner horn in the fibre is a lifting problem for $p_*$ with bottom the constant simplex at $\\mathrm{id}_B$, so its lift remains in the fibre. This fibre is exactly $\\operatorname{Sec}_B(E)$, by the degreewise pullback and functor definitions. The same argument applies to $F$.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4(c), printed p.1484; agent-written expansion of the strict-section argument. Archival source WANTED."
+   }
+  },
+  {
+   "text": "The section fibre is the full simplicial subset of $\\operatorname{Fun}(B,E)$ on its section vertices. Indeed, if $h:B\\times\\Delta^n\\to E$ has section vertices, $ph$ and the projection have the same value $b$ at every product vertex $(b,i)$. A simplex of $\\Delta^0$ or $\\Delta^1$ is uniquely determined by its ordered vertices (it is a weakly increasing map to $[0]$ or $[1]$). Applying this to every simplex of the product gives $ph=\\operatorname{pr}_B$. For an edge between section vertices, equivalence in this full subset is therefore equivalent to equivalence in the ambient functor quasicategory: the inverse edge and its two inverse triangles have only those vertices and hence remain in the full subset. Conversely an inverse there is an inverse in the ambient category.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4(c), printed p.1484; agent-written expansion of the strict-section argument. Archival source WANTED."
+   }
+  },
+  {
+   "text": "Let $\\tau$ be an edge of $\\operatorname{Sec}_B(E)$. By Step 2 and [lem-coef-infinity-pointwise-equivalences], $\\tau$ is an equivalence precisely when its component at each vertex $b$ is an equivalence in $E$. These components lie in $E_b$. For any edge $a$ of $E_b$, equivalence in $E_b$ implies equivalence in $E$ by inclusion. Conversely, an inverse in $E$ for such an $a$ has both endpoints over $b$. Its image in $B$ is the unique edge from $b$ to $b$, hence is degenerate; both inverse triangles project to the constant triangle at $b$, since all their vertices do. Thus the inverse witnesses lie in $E_b$. Therefore the section equivalences are exactly the transformations whose components are equivalences in their vertex fibres.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4(c), printed p.1484; agent-written expansion of the strict-section argument. Archival source WANTED."
+   }
+  },
+  {
+   "text": "In the coordinatewise product marking of [lem-coef-marked-point-cartesian-model], the marked edges of $B^\\flat\\times(\\Delta^n)^\\sharp$ are exactly the pairs $(s_0b,\\alpha)$, where $b$ is a vertex of $B$ and $\\alpha$ is any edge of $\\Delta^n$. Consequently an underlying section family $h:B\\times\\Delta^n\\to E$ is a marked map to $E^{\\mathrm{v}\\simeq}$ if and only if every component $h(b,\\alpha)$ is an equivalence in $E_b$. By Step 3 this is equivalent to every edge of the corresponding $n$-simplex of $\\operatorname{Sec}_B(E)$ being an equivalence. This is precisely membership in its core, by [def-cbc-enhanced-diagrams-cones]. Both sides are thus the very same subset of the same families in every degree, not merely equivalent spaces. Their simplicial operators both precompose on $\\Delta^n$, so these degreewise identities give the asserted identity of simplicial sets.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4(c), printed p.1484; agent-written expansion of the strict-section argument. Archival source WANTED."
+   }
+  },
+  {
+   "text": "Now assume $qu=p$ and $u$ is a categorical equivalence. By [lem-coef-joyal-quasicategory-characterizations](2), choose an ordinary simplicial quasi-inverse $v:F\\to E$ and inverse natural equivalences $vu\\simeq\\mathrm{id}_E$, $uv\\simeq\\mathrm{id}_F$. Postcomposition $u_*:\\operatorname{Fun}(B,E)\\to\\operatorname{Fun}(B,F)$ has quasi-inverse $v_*$. For example the evaluation formula $(h,t)\\mapsto\\eta(h(-),t)$ for an inverse transformation $\\eta$ defines the transformation $v_*u_*\\to\\mathrm{id}$. It is an equivalence: at every vertex $h$ its component is an equivalence in $\\operatorname{Fun}(B,E)$ by the pointwise criterion applied at the vertices of $B$; the same criterion applied with domain $\\operatorname{Fun}(B,E)$ proves the assertion for the transformation itself. The other inverse transformation is treated identically. Hence $u_*$ is a functor equivalence, and it is strictly over $\\operatorname{Fun}(B,B)$ because $qu=p$. No assertion that $v$ is over $B$ has been used.",
+   "uses": [
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4(c), printed p.1484; agent-written expansion of the strict-section argument. Archival source WANTED."
+   }
+  },
+  {
+   "text": "Step 1 gives isofibrations $p_*$ and $q_*$ over the common quasicategory $\\operatorname{Fun}(B,B)$; Step 5 gives the functor equivalence $u_*$ commuting with these projections. Apply [lem-coef-infinity-isofibration-base-change] with $\\mathcal R=\\Delta^0$ and $h$ the vertex $\\mathrm{id}_B$. Its strict pullbacks are exactly the two section quasicategories, and its induced equivalence is exactly postcomposition by $u$ on their defining families. By [lem-coef-joyal-quasicategory-characterizations](2) this functor equivalence is a categorical equivalence. The general final clause of [lem-coef-quasicategory-full-subcategory-core-equivalence] then gives a weak homotopy equivalence on their cores. This uses the general clause for every functor equivalence, not the narrower clause about replete full subcategories.",
+   "uses": [
+    "lem-coef-infinity-isofibration-base-change",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-quasicategory-full-subcategory-core-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4(c), printed p.1484; agent-written expansion of the strict-section argument. Archival source WANTED."
+   }
+  },
+  {
+   "text": "Naturality follows directly from the identity of families in Step 4: a map over $B$ sends a fibre edge and its inverse triangles into the corresponding fibre, hence preserves $E^{\\mathrm{v}\\simeq}$ and commutes with the degreewise identification by postcomposition. Pulling a family back along a map between the allowed point and interval bases also commutes with it by precomposition. No step chooses a vertex in any fibre or section category. If a fibre is empty there is no section since $B$ is nonempty, and both displayed section-core and marked-map simplicial sets are empty. If all fibres are nonempty but there are no sections (for example, $E$ is the discrete two-point simplicial set mapping to the two different vertices of $\\Delta^1$), both sets are again empty. The isofibration base-change theorem and the general core-equivalence clause permit empty quasicategories, so the equivalence assertion covers these cases too.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4(c), printed p.1484; agent-written expansion of the strict-section argument. Archival source WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-isofibration-base-change",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-quasicategory-full-subcategory-core-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Expansion of Higher Algebra Lemma B.2.4(c), printed p.1484, using the cited existing isofibration and pointwise-equivalence statements. Online source read 2026-10-17; archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +148,38 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Over.coreHomEquivToOverSections\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.Sections\", \"type\": \": CoreHomEquiv (toOver I) (sections I)\", \"doc\": \"In a Cartesian closed category with chosen pullbacks, this defines a natural equivalence between hom-sets $\\\\mathrm{Hom}_{\\\\mathcal{C}/I}(A \\\\times I, X)$ and $\\\\mathrm{Hom}_{\\\\mathcal{C}}(A, \\\\Gamma(X))$ f\"}\n  {\"name\": \"CategoryTheory.Over.coreHomEquivToOverSections_homEquiv\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.Sections\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.CartesianMonoidalCategory C]\\n  (I : C) [inst_2 : CategoryTheory.Closed I]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.curryRightUnitorHom I)]\\n  [inst_4 : CategoryTheory.BraidedCategory C] (A : C)\", \"doc\": \"In a Cartesian closed category with chosen pullbacks, there is a natural equivalence between the hom-sets $\\\\mathrm{Hom}_{\\\\mathcal{C}/I}(A \\\\times I, X)$ and $\\\\mathrm{Hom}_{\\\\mathcal{C}}(A, \\\\Gamma(X))$ f\"}\n  {\"name\": \"SSet.StrictSegalCore\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"SSet → ℕ → Type u\", \"doc\": \"A type family parameterized by a simplicial set $X$ and a natural number $n$, representing the strict Segal condition at level $n$ for $X$. For each $n$, $\\\\text{StrictSegalCore}(X, n)$ encodes the req\"}\n  {\"name\": \"CategoryTheory.Over.toOverSectionsAdj\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.Sections\", \"type\": \": toOver I ⊣ sections I\", \"doc\": \"In a Cartesian closed category with chosen pullbacks, the functor sending objects to their product with $ I $ in the over category $ \\\\mathcal{C}/I $ is left adjoint to the sections functor, with the a\"}\n  {\"name\": \"CategoryTheory.StrictPseudofunctorCore\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.StrictPseudofunctor\", \"type\": \"(B : Type u₁) →\\n  [CategoryTheory.Bicategory B] →\\n    (C : Type u₂) → [CategoryTheory.Bicategory C] → Type (max (max (max (max (max u₁ u₂) v₁) v₂) w₁) w₂)\", \"doc\": \"The structure defining a strict pseudofunctor between bicategories, consisting of mappings for objects, 1-cells, 2-cells, and coherence isomorphisms satisfying strict associativity and unitality condi\"}\n  {\"name\": \"CategoryTheory.coreFunctor\", \"module\": \"Mathlib.CategoryTheory.Core\", \"type\": \": Core (C ⥤ D) ⥤ Core C ⥤ Core D\", \"doc\": \"The core functor that maps the core of the functor category $\\\\mathcal{C} \\\\to \\\\mathcal{D}$ to the functor category between the cores of $\\\\mathcal{C}$ and $\\\\mathcal{D}$. For each functor $F: \\\\mathcal{C}\"}\n  {\"name\": \"SSet.StrictSegal.quasicategory\", \"module\": \"Mathlib.AlgebraicTopology.Quasicategory.StrictSegal\", \"type\": \"{X : SSet.{u}} (sx : StrictSegal X) : Quasicategory X\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the quasicategory condition: every inner horn $\\\\Lambda^k[n] \\\\to X$ admits a filler $\\\\Delta[n] \\\\to X$ for all\"}\n  {\"name\": \"SSet.StrictSegalCore.recOn\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \"{X : SSet} →\\n  {n : ℕ} →\\n    {motive : X.StrictSegalCore n → Sort u_1} →\\n      (t : X.StrictSegalCore n) →\\n        ((concat :\\n              (x : X.obj (Opposite.op (SimplexCategory.mk 1))) →\\n                (s : X.obj (Opposite.op (SimplexCategory.mk n))) →\\n                  CategoryTheory.Simplicia\", \"doc\": \"Given a simplicial set $X$ and a natural number $n$, this recursor allows defining functions on the strict Segal core $X.\\\\text{StrictSegalCore}(n)$ by specifying how to handle the concatenation operat\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the hit signatures and pinned Mathlib source. FiberedCategory/Cocartesian.lean:43-78 and Core.lean:35-58 concern ordinary categories with Hom sets; Quasicategory/Basic.lean:33-57 and InnerFibration.lean:29-97 give inner-horn predicates and lifting only. Sections.lean:35-74 concerns ordinary cartesian closed categories; StrictSegal.lean gives unique composition in strict Segal objects, not a maximal Kan core of arbitrary section quasicategories. No returned declaration states the relative marked assertion or a one-line generalization."
+  },
+  {
+   "tool": "grep",
+   "query": "section.*core|core.*section|[Mm]arked.*[Mm]ap",
+   "results": "{\"t\": \"2026-10-17T12:09:54Z\", \"tool\": \"grep\", \"query\": \"section.*core|core.*section|[Mm]arked.*[Mm]ap\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits concern ordinary category sections/equivalences or Strict Segal data; Loogle returns StrictSegalCore and skeleton coreflectivity. Read Sections.lean:35-74, Quasicategory/Basic.lean:33-57, InnerFibration.lean:29-85, and StrictSegal.lean:50-120; none states maximal Kan cores of strict quasicategory sections or this marked identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A categorical equivalence over a poset induces an equivalence of strict section quasicategories and their maximal Kan cores",
+   "results": "{\"t\": \"2026-10-17T12:09:54Z\", \"tool\": \"leansearch\", \"query\": \"A categorical equivalence over a poset induces an equivalence of strict section quasicategories and their maximal Kan cores\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.coreHomEquivToOverSections\", \"CategoryTheory.Over.postEquiv\", \"CategoryTheory.Under.postEquiv\", \"CategoryTheory.Limits.Cocones.functorialityEquivalence\", \"CategoryTheory.Equivalence.skeletonEquiv\", \"CategoryTheory.Equivalence.sheafCongr\", \"CategoryTheory.Limits.Types.sectionsEquiv\", \"CategoryTheory.Limits.HasColimit.isoOfEquivalence\"], \"digest\": \"ad65951abe326497\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits concern ordinary category sections/equivalences or Strict Segal data; Loogle returns StrictSegalCore and skeleton coreflectivity. Read Sections.lean:35-74, Quasicategory/Basic.lean:33-57, InnerFibration.lean:29-85, and StrictSegal.lean:50-120; none states maximal Kan cores of strict quasicategory sections or this marked identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"core\", \"SSet\"",
+   "results": "{\"t\": \"2026-10-17T12:09:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"core\\\", \\\"SSet\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Truncated.skAdj.coreflective\", \"SSet.Truncated.sk_coreflective\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal.ofCore\", \"SSet.StrictSegalCore.spineToSimplex\", \"SSet.StrictSegalCore.spine_spineToSimplex\", \"SSet.StrictSegalCore.spineToSimplex_spine\", \"SSet.StrictSegalCore.spineToSimplexAux\"], \"digest\": \"477b41c316c8925c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits concern ordinary category sections/equivalences or Strict Segal data; Loogle returns StrictSegalCore and skeleton coreflectivity. Read Sections.lean:35-74, Quasicategory/Basic.lean:33-57, InnerFibration.lean:29-85, and StrictSegal.lean:50-120; none states maximal Kan cores of strict quasicategory sections or this marked identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The core of the quasicategory of sections of an inner fibration over a point or interval is the marked mapping space with vertical fiber equivalences",
+   "results": "{\"t\": \"2026-10-17T12:09:55Z\", \"tool\": \"leanfinder\", \"query\": \"The core of the quasicategory of sections of an inner fibration over a point or interval is the marked mapping space with vertical fiber equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegalCore\", \"SSet.StrictSegal.ofCore\", \"SSet.StrictSegal.quasicategory'\", \"SSet.StrictSegal.quasicategory\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Quasicategory\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.QCat.bicategory\"], \"digest\": \"f7568169b1313e91\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits concern ordinary category sections/equivalences or Strict Segal data; Loogle returns StrictSegalCore and skeleton coreflectivity. Read Sections.lean:35-74, Quasicategory/Basic.lean:33-57, InnerFibration.lean:29-85, and StrictSegal.lean:50-120; none states maximal Kan cores of strict quasicategory sections or this marked identity."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-pattern-fibered-edge-detection",
@@ -83,5 +207,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-pattern-section-core-identification",
+  "worker": "stage1",
+  "summary": "Proved the unchanged point/interval section-core statement in seven steps using existing nodes only. Made the section fibre full by the vertex-determined simplex argument; checked inverse witnesses in vertex fibres, the exact product markings, and strict base change of exponentiated isofibrations. Retained inherited source and searches and added genuine logged searches. No new nodes or Lean edits.",
+  "blueprint": "Realizes the point and interval test, Higher Algebra B.2.4(c), within the marked-operadic infrastructure for proof paragraph 2 of prop-coef-integral-exceptional-adjoint, through the recorded blueprint ancestry. The chapter and unit route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-ae1300a56",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-ae1300a56 (reviewer sub-agent of L); spot-checked: I read the item, all seven steps and every cited node's full statement. The delivery is one commit with no new nodes; the blueprint from/via fields match the parent. The statement is unchanged, true and matches what the parent lem-coef-pattern-fibered-edge-detection uses in its base case. Cases tested: identity over Δ^1 gives Δ^0; Δ^1×Δ^1 over Δ^1 gives a 3-point discrete core on both sides; an empty fibre and a two-point discrete E with no sections give empty sets on both sides. Step 1: equivalences in Δ^0 and Δ^1 are degenerate, so p is an isofibration; exponentiation along ∅↪B makes p_* an isofibration; the strict fibre over id_B is a quasicategory. Step 2: Sec is full in Fun(B,E) because maps into a poset nerve are determined by their vertices. Step 3: the pointwise criterion applies with K=B, and inverse witnesses lie in E_b. Step 4: the product marking gives marked edges (s_0 b, α), so the core and Map^♯_B are the same subset in every degree. Step 5: the characterization (2) quasi-inverse, whiskered and checked by the pointwise criterion twice, makes u_* a functor equivalence strictly over Fun(B,B), with no inverse assumed over B. Step 6: every hypothesis of isofibration-base-change holds at R=Δ^0, h=id_B, and the general clause of the core-equivalence node allows empty cases. Step 7: naturality and empty cases are fine. Every cited statement is in the unit's route and no SGA is cited. No duplicate after an rg search over Sec / Map^♯_B / B^♭ candidates. HA B.2.4(c) is online only and recorded as WANTED, with an agent proof_origin; I could not consult it, so I verified the proof independently against the cited statements. Minor: the stmt_dep lem-coef-kan-quillen-right-proper is not named in the text but is harmless. No fixes."
  }
 }

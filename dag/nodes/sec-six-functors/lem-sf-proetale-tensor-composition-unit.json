@@ -16,9 +16,78 @@
   "def-weil-pbc-composite-adjunction",
   "lem-weil-pbc-left-exact-site-inverse-image-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every object $U$ of $V_{\\mathrm{proet}}$, the universal property of fibre products gives $q_U:Z\\times_W(W\\times_VU)\\cong Z\\times_VU$: its components are the projection to $Z$ and the composite projection to $U$. The inverse has components the projection to $Z$ and the pair of projections to $W,U$. Both composites have the original projections, hence are identities by uniqueness. The same uniqueness proves naturality in $U$. The inverse-image definition supplies covering-preserving, finite-limit-preserving site functors, so the site-composition lemma applies. Transporting its comparison along $q$ yields $a_{h,k}$ and the right comparison $d^0$ on underlying sheaves. Write $j^f_F:F\\to f_*f^{-1}F$ for the sheaf unit. The cited unit compatibility says, sectionwise, $a_{h,k,F}(j^h_{k^{-1}F}(j^k_F(m)))=d^0_{(kh)^{-1}F}(j^{kh}_F(m))$, with the left side evaluated on $B_hB_kU$ and $m\\in F(U)$. This is the underlying sheaf-unit identity used below.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-site-morphism-composition",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CB, lemma-composition-morphisms-sites, and Definition 03CC"
+   }
+  },
+  {
+   "text": "Put $A=h^{-1}k^{-1}R_V$, $B=h^{-1}R_W$, $C=R_Z$, $N=h^{-1}k^{-1}M$, $\\alpha=h^{-1}c_k$ and $\\beta=c_h$. The tensor and colimit assertions of the inverse-image lemma identify $h^*k^*M$ with $(N\\otimes_{A,\\alpha}B)\\otimes_{B,\\beta}C$. Indeed, the relative tensor is the coequalizer of the two action maps on $F\\otimes_{\\mathbf Z}R\\otimes_{\\mathbf Z}G$, and both tensor factors and this coequalizer are preserved. The same lemma says that $a_{h,k}$ is monoidal, so, using $c_{kh}a_{h,k,R_V}=\\beta\\alpha$, the target identifies with $N\\otimes_{A,\\beta\\alpha}C$. Define $T((m\\otimes a)\\otimes b)=m\\otimes\\beta(a)b$. For $r\\in A$, the relation $(rm\\otimes a)=(m\\otimes\\alpha(r)a)$ is preserved because $rm\\otimes\\beta(a)b=m\\otimes\\beta\\alpha(r)\\beta(a)b$. The outer $B$-balancing is preserved by multiplicativity of $\\beta$. Conversely $S(m\\otimes b)=(m\\otimes1)\\otimes b$ is $A$-balanced since $(rm\\otimes1)\\otimes b=(m\\otimes\\alpha(r))\\otimes b=(m\\otimes1)\\otimes\\beta\\alpha(r)b$. Thus $TS=1$, and $ST=1$ by the outer balancing relation. The formulas are additive and $C$-linear, and commute with restriction maps and morphisms in $M$. By the definition of sheaf tensor product as sheafification of the sectionwise tensor, these maps give inverse natural sheaf maps; reinsert $a_{h,k}$ in $T$ and its inverse in $S$. This is exactly $t_{h,k}$.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "def-weil-proetale-inverse-image",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3, lemma-adjoint-push-pull-modules, together with Tag 03EL tensor-product-pullback"
+   }
+  },
+  {
+   "text": "For a coefficient ring sheaf write $\\rho_f=f_*c_f\\circ j^f_{R_{\\mathrm{target}}}$. The module-operation definition makes $f_*$ act through $\\rho_f$, and its module unit sends $m$ to $j^f_M(m)\\otimes1$: under its stated identification $f^*M\\cong f^{-1}M$ by $x\\otimes r\\mapsto c_f^{-1}(r)x$, this is exactly $j^f_M$. Apply the sheaf-unit identity of Step 1 to $R_V$. Naturality with respect to $c_k$, followed by $c_h$ and the equality $c_{kh}a_{h,k,R_V}=c_hh^{-1}c_k$, gives $d^0_{R_Z}\\rho_{kh}=k_*\\rho_h\\circ\\rho_k$. Hence restriction along $q_U$ respects the $R_V$-actions on $(kh)_*P$ and $k_*h_*P$ for every $R_Z$-module $P$; restriction along $q_U^{-1}$ gives its inverse. This is the specified natural module isomorphism $d_{h,k}$. Finally the composite-adjunction definition gives its left adjoint $h^*k^*$ the unit $k_*(\\eta^h_{k^*M})\\circ\\eta^k_M$.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-site-morphism-composition",
+    "def-pc-fibre-product",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3, lemma-adjoint-push-pull-modules"
+   }
+  },
+  {
+   "text": "Evaluate both sides of the claimed unit equation at $U\\in V_{\\mathrm{proet}}$ and $m\\in M(U)$. By Step 3 the successive units send $m$ first to $j^k_M(m)\\otimes1$, then to $(w\\otimes1)\\otimes1$, where $w=j^h_{k^{-1}M}(j^k_M(m))$ on $B_hB_kU$. Step 2 sends this to $a_{h,k,M}(w)\\otimes1$, since $c_h(1)=1$. The right side sends $m$ to the restriction along $q_U$ of $j^{kh}_M(m)\\otimes1$. Naturality of the tensor restriction maps makes this $d^0_{(kh)^{-1}M}(j^{kh}_M(m))\\otimes1$, equal to the left side by Step 1. This checks every section of $M$, hence proves the equality of sheaf maps and therefore the displayed natural-transformation equality. Apply the conjugate-iso/unit-equation lemma with $L_1=h^*k^*$, $R_1=k_*h_*$, $L_2=(kh)^*$, $R_2=(kh)_*$ and $\\delta=d_{h,k}$. The unit of the first adjunction is exactly the composite unit just calculated, so the lemma proves the asserted uniqueness of this explicit comparison.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-site-morphism-composition",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; composite-adjunction calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-site-morphism-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
+  "place": "Final displayed compatibility equation and preceding sentence on pullback-composition identifications"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,6 +123,34 @@
    "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; pullbackComp; pushforwardComp; unitToPushforwardObjUnit; Scheme.Modules.pullbackComp. The first result is a candidate for the abstract part only: it does not state agreement with the explicit tensor presentation.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "explicit pro-etale module tensor pullback composition comparison preserves adjunction units",
+   "results": "8 hits including AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality, conjugateEquiv_pullbackComp_inv, and SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; none identifies the explicit pro-etale inverse-image/tensor formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv_pullbackComp_inv\"",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv and AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; these concern abstract chosen pullbacks and do not identify the explicit pro-etale tensor formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|conjugateEquiv|tensor.*pullback /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules",
+   "results": "25 hits, including PullbackContinuous.lean:167-182 pullbackComp/conjugateEquiv and Adjunction Mates; no explicit pro-etale tensor comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "explicit tensor pullback composition of sheaves of modules agrees with the adjunction unit",
+   "results": "8 hits, including CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom and SheafOfModules.conjugateEquiv_pullbackComp_inv; no statement of the explicit pro-etale module-sheaf formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
@@ -63,7 +160,7 @@
   "lines": "177-182",
   "note": "Normalizes the comparison defined by conjugation at lines 167-174, for the chosen abstract left adjoint (line 53). Agreement with the explicit inverse-image/tensor formulas in this statement is a further theorem, not a one-line specialization."
  },
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-frobenius-trivialization-pullback",
@@ -82,5 +179,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-proetale-tensor-composition-unit",
+  "worker": "stage1",
+  "summary": "Q45 retained the original statement, creation stamp, blueprint ancestry and earlier Mathlib search records; checked Stacks Tags 03CB/03CC, 03D3, 03EK/03EL and 0B65/0DV0. Four steps construct q, verify both balancing relations and inverse tensor maps, identify coefficient actions and units, and calculate the unit equation on every section before applying generic uniqueness. No new nodes.",
+  "blueprint": "Realizes the final paragraph of def-pur-scheme-geometric-frobenius, the compatibility of comparison isomorphisms with pullback-composition identifications, via the auxiliary ordinary tensor comparison used by lem-pur-frobenius-trivialization-pullback.",
+  "tool_uses": [
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Its universal property constructs the canonical site-object isomorphism q and its naturality; no six-operations theorem replaces this construction."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Supplies the sectionwise tensor followed by sheafification, allowing the balanced generator maps to define sheaf maps."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Supplies the generic formula for the composite unit, used to identify the displayed equation."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "Supplies the ordinary module pullback, coefficient action and its specified adjunction, before passage to derived operations."
+   },
+   {
+    "node": "def-weil-proetale-inverse-image",
+    "why": "Supplies the actual small pro-etale site functors and sheaf units; this generic construction is not a six-operations assembly assertion."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Supplies uniqueness of a comparison with the prescribed right adjoint and unit equation; the unit route supplies no alternate generic uniqueness statement."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Supplies preservation of tensors and colimits and monoidality of the site-composition comparison, required for the explicit tensor construction."
+   },
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "Supplies the generic sheaf inverse-image comparison with its unit normalization; the package unit assumes composition and does not construct this site comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-fibre-product",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-site-morphism-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-7817630fe",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-7817630fe (reviewer sub-agent of L); spot-checked: I read the item, all 8 cited statements, the sk-thm-sf-package route, the ancestor def-pur-scheme-geometric-frobenius (final paragraph, main-20261015), both citers, and the Stacks sources at their labels: 03CB at sites.tex:2764, 03D3, 03EK, 03EL at sites-modules.tex:3649, 0B65, 0DV0. The statement is unchanged and is what both citers use. d_{h,k} (restriction along q_U) runs from (kh)_* to k_*h_*, which is the delta direction of the conjugate-iso lemma. The unit equation matches the composite-adjunction unit k_*(eta^h)eta^k. Coefficients are those of def-weil-pbc-proetale-operations. Step 1: q is built by fibre-product uniqueness, and the 03CB hypotheses (continuity, exact u_s) are met; transporting the unit compatibility along q is a short re-indexing check. Step 2: I rechecked both balancing relations, TS=1 and ST=1, and that monoidality of a_{h,k} gives c_{kh}a=beta alpha; passing to sheafified iterated tensors is standard by the universal property of sheafification. Step 3: I verified d^0 rho_{kh}=k_*rho_h rho_k myself, via naturality of j^h, the c_{kh} identity, Step 1 and naturality of d^0. Step 4: computed section by section with c_h(1)=1, then the conjugate-iso uniqueness applied with correct types. Small cases checked: identity morphisms, M=0, M=R_V. No new nodes. No duplicate: the derived, constant-ring and integral composition nodes are different statements. The Mathlib conjugateEquiv_pullbackComp_inv is abstract, so it is correctly a candidate, not a match. All cited units are in the transitive route, so the 8 declared tool_uses are redundant; I accept them as harmless. No SGA. review_split.py: PASS. No fixes."
  }
 }

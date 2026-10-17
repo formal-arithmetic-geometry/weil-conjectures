@@ -28,9 +28,85 @@
   "det-def-sfb-constructible-local-model",
   "def-weil-pbc-proetale-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the finite stratification $Y=\\coprod_aY_a$ given in the hypothesis. By [lemma-constructible-pullback-stratification], its base changes $Y'_a=Y'\\times_YY_a$ form a finite stratification of $Y'$ with underlying strata $g^{-1}(|Y_a|)$. That statement supplies locally closed strata, not constructibility. Apply [lem-pur-scheme-constructible-preimage] separately to each constructible subset $|Y_a|\\subseteq |Y|$: every $g^{-1}(|Y_a|)$ is constructible. Thus the proposed strata have both properties required here.",
+   "uses": [
+    "lemma-constructible-pullback-stratification",
+    "lem-pur-scheme-constructible-preimage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+    "place": "paragraph 'Constructible complexes', 'constructibility (pull back the stratification)'; Stacks 054I, lemma-inverse-image-constructible"
+   }
+  },
+  {
+   "text": "For each $a$, set $g_a:Y'_a\\to Y_a$. Clause 1 of [det-pe-topos-functoriality-inverse-image] applies to this arbitrary scheme morphism: the base-change functor from $(Y_a)_{\\mathrm{pro\\acute et}}$ to $(Y'_a)_{\\mathrm{pro\\acute et}}$ sends coverings to coverings. Apply it to the whole given family $\\{U_{a,i}\\to Y_a\\}_i$. We obtain the cover $\\{V_{a,i}=U_{a,i}\\times_{Y_a}Y'_a\\to Y'_a\\}_i$. No assertion that $g_a$ is itself weakly etale is needed.",
+   "uses": [
+    "det-pe-topos-functoriality-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+    "place": "paragraph 'Constructible complexes', 'via the local coefficient models on strata'; arbitrary scheme base change of covers"
+   }
+  },
+  {
+   "text": "Fix $(a,i)$, abbreviate $U=U_{a,i}$, $V=V_{a,i}$, $h:V\\to U$ and $P=P_{a,i}$, and choose a finite scalar presentation $\\Lambda(*)^m\\xrightarrow{A}\\Lambda(*)^n\\to P\\to0$. Then $M|_U\\simeq\\Lambda_U\\otimes_{\\Lambda(*)}P\\simeq\\operatorname{coker}(\\Lambda_U^m\\xrightarrow{A}\\Lambda_U^n)$, with $A$ acting through $\\Lambda(*)\\to\\Lambda_U$ as in form 2 of [det-def-sfb-constructible-local-model]: the constant-sheaf functor $Q\\mapsto Q_U$ is exact and $\\Lambda_U\\otimes_{\\Lambda(*)_U}-$ is right exact and sends $\\Lambda(*)_U^n$ to $\\Lambda_U^n$, so it carries the presentation of $P$ to this cokernel. This is the specific matrix of the chosen presentation of the given $P$, not merely some matrix supplied by the existential equivalence of that lemma. For this admissible $\\Lambda$, [sk-prop-sfb-cartesian-coefficients] identifies module pullback $h^*$ with exact inverse image along the canonical ring isomorphism $\\alpha_h:h^{-1}\\Lambda_U\\cong\\Lambda_V$. Therefore it takes $\\Lambda_U$ to $\\Lambda_V$, finite sums to finite sums, and cokernels to cokernels. For finite sums this also follows directly from the pullback adjunction in [sk-def-sfb-module-pushforward-pullback]: maps from the pullback of a finite sum correspond to tuples of maps from the summands. We obtain $h^*(M|_U)\\simeq\\operatorname{coker}(\\Lambda_V^m\\xrightarrow{h^*A}\\Lambda_V^n)$.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+    "place": "paragraph 'Constructible complexes', finite scalar matrix calculation for the local coefficient models"
+   }
+  },
+  {
+   "text": "The matrix $h^*A$ is the same scalar matrix $A$. Indeed, a scalar $a\\in\\Lambda(*)$ determines a morphism from the condensed tensor unit $\\mathbf Z$ to $\\Lambda$; its image under $p_U^*$ is the scalar section acting on $\\Lambda_U$ ([sk-def-sfb-pulled-back-coefficients]). The coefficient comparison $\\alpha_h$ is the component of the natural point-pullback comparison ([sk-def-sfb-coefficient-morphisms]); naturality on that morphism takes this section to the section of $\\Lambda_V$ defined by the same $a$. Since $\\alpha_h$ is a ring morphism, multiplication by each matrix entry is respected. The same right-exactness computation as in Step 3, now over $V$ (exactness of $Q\\mapsto Q_V$, right exactness of $\\Lambda_V\\otimes_{\\Lambda(*)_V}-$, with $\\Lambda_V\\otimes_{\\Lambda(*)}P$ as defined in [det-def-sfb-constructible-local-model]), identifies the cokernel in Step 3 with $\\Lambda_V\\otimes_{\\Lambda(*)}P$ for the same $P$. Finally the module pullback composition isomorphism in [sk-def-sfb-module-pushforward-pullback], applied to the equal composites $V\\to U\\to Y$ and $V\\to Y'\\to Y$, identifies $h^*(M|_U)$ with $(g^*M)|_V$. Thus each base-changed cover member has the required local model with the original finitely presented $P$.",
+   "uses": [
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-coefficient-morphisms",
+    "det-def-sfb-constructible-local-model",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+    "place": "paragraph 'Constructible complexes', 'via the local coefficient models on strata'; explicit scalar naturality and pullback composition"
+   }
+  },
+  {
+   "text": "Step 1 gives a finite stratification of $Y'$ by constructible locally closed subschemes; Step 2 gives the covers of these strata; Steps 3-4 give the local models with the same finitely presented scalar modules. Since $Y'$ is qcqs, these are precisely the witnesses required by [sk-def-sfb-constructible]. Hence $g^*M$ is constructible with all the more precise data asserted in the statement.",
+   "uses": [
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+    "place": "paragraph 'Constructible complexes', constructibility conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-def-sfb-constructible-local-model",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-pur-scheme-constructible-preimage",
+  "lemma-constructible-pullback-stratification",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+  "place": "Expansion of 'pull back the stratification / via the local coefficient models on strata'; the blueprint is agent-written. Stacks 054I supplies constructible preimages; the scalar-matrix calculation is written out using the cited DAG statements."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -38,10 +114,59 @@
    "results": "Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean Mathlib/RingTheory/Spectrum/Prime/Topology.lean Mathlib/Topology/Spectral/ConstructibleTopology.lean Mathlib/Topology/Constructible.lean Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean | Sites:\n0\nhits | preimage:\nMathlib/Topology/Constructible.lean:244 Mathlib/Topology/Constructible.lean:254 Mathlib/Topology/Constructible.lean:259 Mathlib/Topology/Constructible.lean:295 Mathlib/Topology/Constructible.lean:382 Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:172 ",
    "date": "2026-10-17",
    "verdict": "no match: Mathlib has constructible subsets and their preimages (Scheme.Hom.isConstructible_preimage, AlgebraicGeometry/Morphisms/FinitePresentation.lean:172) but no constructible module sheaves on the pro-étale site; LeanSearch/Loogle were not reachable from this review machine and were not run"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of a constructible module with finite constant local models on strata",
+   "results": "instModulePullback; VectorBundle.pullback; PresheafOfModules.pullbackObjIsDefined; LocallyConstant.comapₗ; no pro-étale constructible-module declaration",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, IsConstructibleSheaf.upperStar, LocallyConstant",
+   "results": "0 hits; unknown identifier IsConstructibleSheaf.upperStar",
+   "date": "2026-10-17",
+   "verdict": "invalid query (unknown identifier); not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleSheaf|finite constant local model|pullback.*constructible",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback preserves finite constant local model constructible module sheaves",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits; SheafOfModules.pullback; AlgebraicGeometry.Scheme.Modules.pullback; no exact constructibility theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsConstructibleModuleObject, IsLocallyFinitelyPresented, upperStar",
+   "results": "Logged 0 hits: ; loogle: unknown identifier 'IsConstructibleModuleObject'",
+   "date": "2026-10-17",
+   "verdict": "invalid query (unknown identifier); not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleModuleObject|IsLocallyFinitelyPresented|constant local model",
+   "results": "Logged 0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback of finite constant local model constructible module pro-étale",
+   "results": "Logged 8 hits: SheafOfModules.pullback; AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Modules.instAdditivePullback; LocallyConstant.comapₗ",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "maintainer-reader",
@@ -62,5 +187,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-pullback-constant-model-constructible",
+  "worker": "stage1",
+  "summary": "Retained the item statement, blueprint ancestry and logged searches. Repaired the retained split: constructibility of inverse-image strata is cited separately from locally closed stratification; arbitrary-scheme cover base change uses det-pe-topos-functoriality-inverse-image; the local model is proved through finite scalar matrices, exact module inverse image and naturality of coefficient comparison, with the same finitely presented scalar module. No new nodes or Mathlib leaves.",
+  "blueprint": "Step 1 realizes 'constructibility (pull back the stratification)'. Steps 2-4 realize 'via the local coefficient models on strata' by arbitrary base change of covers and a finite scalar matrix calculation. Step 5 applies the constructibility definition. The unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "det-pe-topos-functoriality-inverse-image",
+    "why": "Generic arbitrary-scheme base-change theorem for pro-etale covering families, used to pull back the local-model covers; this supplies a site tool, not a replacement of the unit proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-topos-functoriality-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-43ad1d3c9",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-43ad1d3c9 (reviewer sub-agent of L); spot-checked: Read the whole item and every cited statement: lemma-constructible-pullback-stratification, lem-pur-scheme-constructible-preimage, det-pe-topos-functoriality-inverse-image clause 1, sk-prop-sfb-cartesian-coefficients, sk-def-sfb-module-pushforward-pullback, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-coefficient-morphisms, det-def-sfb-constructible-local-model, sk-def-sfb-constructible, and def-constructible-stratification with its blueprint_update. Sources checked: Stacks 054I (morphisms.tex l.4340); Mathlib Scheme.Hom.isConstructible_preimage at FinitePresentation.lean:171-179, for arbitrary schemes; Bhatt–Scholze Lemma 6.3.8 proof; and the main-20261015 pullback proof paragraph 'Constructible complexes'. Step 1: the strata are locally closed by the stratification lemma and constructible by the Mathlib leaf; no finite-type hypothesis is needed. Step 2: covers base-change along an arbitrary g. Step 4: naturality of alpha_h plus the ring-map property keeps the scalar matrix the same, and the composition isomorphism gives (g^*M)|_V. Step 5: the qcqs definition applies. Hypotheses and the coefficient category match the parent det-proper-base-change-unbounded-pullback, which applies the item to qcqs finite-type schemes and to H^i. Edge cases checked: Y' empty, empty strata, P=0, g=id, field coefficients. No false statement. There are no new nodes, and the item duplicates no existing node (checked lem-sfb-adic-finite-stratification-pullback, lem-sfb-dc-upper-star-preserves and the constructible-preimage nodes). Route is fine: sk-thm-p1 and sk-def-sfb-finite-pushforward-pullback are both on the unit's transitive route. The tool_use for det-pe-topos-functoriality-inverse-image is accepted but not needed. One repair (C3): Steps 3 and 4 got 'M|_U ≅ coker(A) for the chosen presentation of the given P' from the existential (1)<=>(2) lemma of det-def-sfb-constructible-local-model, whose statement only gives some matrix. I replaced this with the elementary argument: constant sheaves are exact and Λ_U⊗- is right exact. Only those two step texts are changed; statement, uses and proof_deps are unchanged. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-pullback-constant-model-constructible.json.; 1 file(s) fixed by the reviewer"
  }
 }

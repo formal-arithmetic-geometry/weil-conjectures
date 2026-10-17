@@ -10,9 +10,72 @@
  "stmt_deps": [
   "def-kun-subspace-topology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F=F_i$, $H=H_i$, $J=\\{0,\\ldots,n\\}\\setminus\\{i\\}$, and $c_i=0$, $c_j=1/n$ for $j\\in J$. For $x\\in F$ put $m(x)=\\min_{j\\in J}x_j$ and $r(x)=1-nm(x)$. Since $|J|=n$ and $\\sum_{j\\in J}x_j=1$, we have $0\\leq m\\leq1/n$, $0\\leq r\\leq1$, and $r=0$ exactly at $c$. Finite minima are continuous: iterate $\\min(a,b)=(a+b-|a-b|)/2$. The relative interior of $F$ consists precisely of points with all $x_j>0$ for $j\\in J$: strict inequalities persist on a small relative ball; if $x_j=0$, decreasing this coordinate and increasing another $J$-coordinate stays in the affine span but exits $F$. Thus $B=\\partial F=\\{x\\in F:m(x)=0\\}$. The same argument with all $n+1$ coordinates gives $\\partial\\Delta^n=H\\cup F$ and $H\\cap F=B$. Applying the strict-inequality argument also to $0\\leq s\\leq1$ gives $\\partial(F\\times[0,1])=(F\\times\\{0\\})\\cup S$, where $S=(B\\times[0,1])\\cup(F\\times\\{1\\})$. These are finite unions of coordinate-zero or endpoint sets, hence closed in the indicated subspaces. Here and below the subspace topology is [def-kun-subspace-topology].",
+   "uses": [
+    "def-kun-subspace-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent expansion of Hovey, Model Categories, paragraph after Proposition 3.2.2, printed p.79 (PDF index 88); explicit barycentric formulas supplying the omitted boundary-pair argument."
+   }
+  },
+  {
+   "text": "Define $\\alpha:H\\to F$ by $\\alpha(t)_i=0$ and $\\alpha(t)_j=t_j+t_i/n$ for $j\\in J$. Its coordinates are nonnegative and sum to $1$. Because some $t_j=0$ with $j\\in J$, $m(\\alpha(t))=t_i/n$. Conversely define $a:F\\to H$ by $a(x)_i=nm(x)$ and $a(x)_j=x_j-m(x)$ for $j\\in J$. These coordinates are nonnegative, sum to $1$, and one $J$-coordinate is zero. Substitution gives $a\\alpha(t)=t$ and $\\alpha a(x)=x$. Both maps are continuous by their coordinate formulas and continuity of $m$ from step 1. They restrict to the identity on $B$, where $m=0$ and $t_i=0$. Thus $\\alpha$ is a homeomorphism fixing $B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent expansion of Hovey, Model Categories, paragraph after Proposition 3.2.2, printed p.79 (PDF index 88); explicit barycentric formulas supplying the omitted boundary-pair argument."
+   }
+  },
+  {
+   "text": "Define $\\beta:F\\to S$ on the closed cover $F_{\\leq}=\\{r\\leq1/2\\}$, $F_{\\geq}=\\{r\\geq1/2\\}$ by\n$$\\beta(x)=\\begin{cases}(c+2(x-c),1),&r(x)\\leq1/2,\\\\(c+(x-c)/r(x),2-2r(x)),&r(x)\\geq1/2.\\end{cases}$$\nThe first spatial coordinate has sum $1$ and minimum $2m(x)-1/n\\geq0$, so lies in $F$. In the second branch put $u=c+(x-c)/r(x)$; for $j\\in J$, $u_j=(x_j-m(x))/r(x)\\geq0$, its sum is $1$, and one coordinate is zero, so $u\\in B$. Also $2-2r\\in[0,1]$. At $r=1/2$ both formulas give $(c+2(x-c),1)$; at $r=0$ the first gives $(c,1)$, and at $r=1$ the second gives $(x,0)$. The first branch is affine and the second has a denominator bounded below by $1/2$, so both are continuous on their closed domains. Apply [lem-coef-closed-union-continuity] on $X=F$ to the resulting well-defined function (with codomain the ambient Euclidean product), then use its image in $S$ with the induced topology [def-kun-subspace-topology]. This proves continuity of $\\beta$.",
+   "uses": [
+    "lem-coef-closed-union-continuity",
+    "def-kun-subspace-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent expansion of Hovey, Model Categories, paragraph after Proposition 3.2.2, printed p.79 (PDF index 88); explicit barycentric formulas supplying the omitted boundary-pair argument."
+   }
+  },
+  {
+   "text": "Define $b:S\\to F$ on the top and side by $b(y,1)=(c+y)/2$ for $y\\in F$, and $b(u,s)=c+(1-s/2)(u-c)$ for $u\\in B$, $s\\in[0,1]$. These points lie in $F$ by coordinate nonnegativity and sum $1$. On the intersection $B\\times\\{1\\}$ the two formulas agree. The top and side are closed in $S$ by step 1 and each formula is continuous, so [lem-coef-closed-union-continuity] proves continuity of $b$. For $y\\in F$, $m((c+y)/2)=1/(2n)+m(y)/2$, hence $r((c+y)/2)=r(y)/2\\leq1/2$; substitution into the first branch of $\\beta$ returns $(y,1)$. For $u\\in B$, $m(b(u,s))=s/(2n)$ and $r(b(u,s))=1-s/2\\geq1/2$; substitution into the second branch returns $(u,s)$. Conversely, on the first branch $b\\beta(x)=(c+c+2(x-c))/2=x$, and on the second it is $c+r(x)((x-c)/r(x))=x$. Thus $b$ and $\\beta$ are continuous inverses, and $\\beta(u)=(u,0)$ for $u\\in B$.",
+   "uses": [
+    "lem-coef-closed-union-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent expansion of Hovey, Model Categories, paragraph after Proposition 3.2.2, printed p.79 (PDF index 88); explicit barycentric formulas supplying the omitted boundary-pair argument."
+   }
+  },
+  {
+   "text": "On $\\partial\\Delta^n=H\\cup F$ set $\\psi(t)=(\\alpha(t),0)$ on $H$ and $\\psi(x)=\\beta(x)$ on $F$. On their intersection $B$, both formulas give $(u,0)$ by steps 2 and 3. They therefore define a function, continuous on each of the two closed pieces and hence continuous by [lem-coef-closed-union-continuity]. Its inverse on $\\partial(F\\times[0,1])=(F\\times\\{0\\})\\cup S$ is $(x,0)\\mapsto a(x)$ on the bottom and $(y,s)\\mapsto b(y,s)$ on $S$. On the intersection $B\\times\\{0\\}$ both give $u$: $a(u)=u$ and $b(u,0)=u$. The bottom and $S$ are closed, and these inverse formulas are continuous, so the same cited lemma proves continuity of the inverse. All restrictions and maps into these subspaces use [def-kun-subspace-topology]. The inverse identities follow from $a\\alpha=1$, $\\alpha a=1$, $b\\beta=1$, and $\\beta b=1$ already checked. Finally $\\psi|_H=(\\alpha,0)$ is a homeomorphism onto $F\\times\\{0\\}$, since $\\alpha:H\\to F$ is a homeomorphism. This is the asserted boundary homeomorphism with its required horn restriction.",
+   "uses": [
+    "lem-coef-closed-union-continuity",
+    "def-kun-subspace-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Agent expansion of Hovey, Model Categories, paragraph after Proposition 3.2.2, printed p.79 (PDF index 88); explicit barycentric formulas supplying the omitted boundary-pair argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-subspace-topology",
+  "lem-coef-closed-union-continuity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Agent expansion of Hovey, Model Categories, paragraph after Proposition 3.2.2, printed p.79 (PDF index 88); explicit barycentric formulas supplying the omitted boundary-pair argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,7 +107,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-realization-finite-limits",
@@ -70,5 +133,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-horn-boundary-cylinder-homeomorphism",
+  "worker": "stage1 Q127",
+  "summary": "Retained and repaired the interrupted coning construction using explicit barycentric/minimum coordinates. Corrected the reversed top radial coefficient, removed quotient-cone continuity assertions and the unnecessary polytope radial-coordinate dependency, and cited an exact Mathlib closed-union continuity leaf for every gluing. Five steps give both maps and inverse identities; no statement change. Inherited Mathlib search history retained.",
+  "blueprint": "Proof paragraph 2, derived coefficient adjunction: foundational simplex-pair input through geometric realization; closed-piece continuity for the boundary homeomorphism carrying the horn to the cylinder bottom.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-9da20442e",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-9da20442e (reviewer sub-agent of L); spot-checked: I read the whole item, its 5 steps, the new leaf, the parent's use (lem-coef-realization-finite-limits step 11), def-kun-subspace-topology, the unit record and Mathlib ContinuousOn.lean:878-887. The statement is unchanged, true and not weakened: n>=2, every i, frontiers relative to the affine spans, H_i onto F_i x {0}. Step 1: m=min_J x_j lies in [0,1/n], the relative interior is J-coordinates >0 (n>=2 gives a second coordinate to move mass to), so dF={m=0}, dDelta=H u F and H n F=B. Step 2: I checked alpha(t)_j=t_j+t_i/n and a(x)=(nm, x_j-m): both sum to 1, m(alpha t)=t_i/n, a alpha=id and alpha a=id. Step 3: first branch has min 2m-1/n>=0 exactly when r<=1/2; second branch has u_j=(x_j-m)/r, so u is in B and the height is in [0,1]; the branches agree at r=1/2 and give (x,0) at r=1. Step 4: b agrees on B x {1}, r(b(y,1))=r(y)/2 and r(b(u,s))=1-s/2, and both inverse identities hold. Step 5: the two definitions agree on B and on B x {0}; continuity comes from the leaf on closed covers. Exact-rational tests for n=2..5, all i, including the seam, barycentre and B points, gave 0 failures. The new leaf ContinuousOn.union_of_isClosed (line 879) is an exact match with 4 recorded searches. No existing DAG node states the pasting lemma; other nodes only use it inline. The only citations are a definition and a Mathlib leaf, so the step stays on the unit route and there are no tool uses. Hovey is not in literature/ and proof_origin is agent, which is correct. One remark, not a fault of this delivery: the inherited source.place says Hovey has an 'explicit coning and radial-coordinate construction', but Hovey only asserts the homeomorphism; that field is the maintainer's. No fixes."
  }
 }

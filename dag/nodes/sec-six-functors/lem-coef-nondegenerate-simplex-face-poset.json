@@ -11,9 +11,82 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\sigma:\\Delta^n\\to X$ and $\\tau:\\Delta^m\\to X$ be nondegenerate, and suppose $\\alpha,\\beta:[n]\\to[m]$ represent arrows $\\sigma\\to\\tau$. By [def-cbc-enhanced-diagrams-cones], the vertices of $\\Delta^n$ are the maps $[0]\\to[n]$, and $\\Delta(\\alpha)$ acts on them by $i\\mapsto\\alpha(i)$. For each $i$, the arrow equations give $\\tau_0(\\alpha(i))=\\sigma_0(i)=\\tau_0(\\beta(i))$. The hypothesis that $\\tau$ is injective in every degree gives injectivity of $\\tau_0$, hence $\\alpha(i)=\\beta(i)$ for every $i$. Thus $\\alpha=\\beta$, proving that every hom-set of $B_X$ has at most one element.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Variant 4.2.3.15 (5), uniqueness of faces; Variant 4.2.3.16 (*); explicit agent expansion, online PDF read 2026-10-17; local archival copy WANTED."
+   }
+  },
+  {
+   "text": "For an arrow $\\alpha:\\sigma\\to\\tau$ with $\\sigma$ nondegenerate, suppose $\\alpha:[n]\\to[m]$ is not injective. There are $i<j$ with $\\alpha(i)=\\alpha(j)$; monotonicity gives $\\alpha(i)=\\alpha(i+1)$, and $n\\geq1$. Apply [lem-weil-pbc-simplex-degeneracy-factorization] with $k=n$, target ordinal $[m]$ and this index $i$. It gives $\\alpha=\\psi\\circ q_i$, where $q_i:[n]\\to[n-1]$ collapses $i,i+1$. Consequently $\\sigma=\\tau\\Delta(\\psi)\\Delta(q_i)$ is the degeneracy of the lower-dimensional simplex $\\tau\\Delta(\\psi)$ by a nonidentity surjection. This contradicts the definition of nondegenerate. Hence every arrow of $B_X$ is injective; if $n=0$, injectivity already holds because the domain has one element.",
+   "uses": [
+    "lem-weil-pbc-simplex-degeneracy-factorization",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Variant 4.2.3.15 (5), face operators on nondegenerate simplices; explicit agent expansion, online PDF read 2026-10-17; local archival copy WANTED."
+   }
+  },
+  {
+   "text": "Define $\\sigma\\leq\\tau$ when an arrow $\\sigma\\to\\tau$ exists. Identity and composition of the monotone maps defining $\\mathsf S(X)$ give reflexivity and transitivity. If arrows exist both ways, step 2 gives injections $[n]\\to[m]$ and $[m]\\to[n]$, hence $n=m$. A monotone injection $[n]\\to[n]$ lists $n+1$ distinct elements of that same ordered set in increasing order, so its list is $0,1,\\ldots,n$ and it is the identity. The arrow equation then gives $\\sigma=\\tau$ as maps from the same standard simplex. This proves antisymmetry on the actual objects, not merely on isomorphism classes. Together with step 1, $B_X$ is the category associated with this partial order.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Variant 4.2.3.15 (5), conclusion that the nondegenerate-simplex category is a poset; explicit agent expansion, online PDF read 2026-10-17; local archival copy WANTED."
+   }
+  },
+  {
+   "text": "Now let $\\sigma:\\Delta^n\\to X$ be any simplex. Apply [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] to its top simplex $z=\\sigma_n(\\mathrm{id}_{[n]})$. It supplies a unique $r$, a nondegenerate $y\\in X_r$ and a surjective monotone $s:[n]\\to[r]$ with $z=X(s)(y)$. To translate this into maps, define $\\bar\\sigma_d(u)=X(u)(y)$ for $u:[d]\\to[r]$. Functoriality gives a simplicial map. Naturality of $\\sigma$ gives $\\sigma_d(v)=X(v)(z)$ for every $v:[d]\\to[n]$, so $\\sigma=\\bar\\sigma\\Delta(s)$. Evaluation at the identity also translates uniqueness back to uniqueness of $\\bar\\sigma$ and $s$. These are precisely the $\\bar\\sigma$ and $s_\\sigma$ of the statement; write $s=s_\\sigma$. The standard-simplex formulas here are those of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Variant 4.2.3.16, left-adjoint assertion after condition (*): choose the nondegenerate core; explicit agent expansion, online PDF read 2026-10-17; local archival copy WANTED."
+   }
+  },
+  {
+   "text": "Let $\\alpha:[n]\\to[m]$ represent an arrow $\\sigma\\to\\tau$ with $\\tau$ nondegenerate. For each $j\\in[r]$, put $a(j)=\\min s^{-1}(j)$. These minima exist because $s$ is surjective. If $j<j\\prime$, every element of $s^{-1}(j)$ precedes every element of $s^{-1}(j\\prime)$ by monotonicity, so $a$ is monotone and $sa=\\mathrm{id}_{[r]}$. Define $t=\\alpha a$. If $s(i)=s(i\\prime)$, the two equations for $\\sigma$ imply $\\tau_0(\\alpha(i))=\\bar\\sigma_0(s(i))=\\bar\\sigma_0(s(i\\prime))=\\tau_0(\\alpha(i\\prime))$. Since $\\tau_0$ is injective, $\\alpha(i)=\\alpha(i\\prime)$. Taking $i\\prime=a(s(i))$ gives $\\alpha=t s$. Finally, using composition of standard-simplex operators [def-cbc-enhanced-diagrams-cones], $\\tau\\Delta(t)=\\tau\\Delta(\\alpha)\\Delta(a)=\\sigma\\Delta(a)=\\bar\\sigma\\Delta(sa)=\\bar\\sigma$. Thus $t$ is an arrow $\\bar\\sigma\\to\\tau$ in $B_X$, and gives the required factorization.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Variant 4.2.3.16, left-adjoint assertion: explicit section and factorization; explicit agent expansion, online PDF read 2026-10-17; local archival copy WANTED."
+   }
+  },
+  {
+   "text": "If $t\\prime:[r]\\to[m]$ is another monotone map satisfying $\\alpha=t\\prime s$, then for each $j\\in[r]$ the section from step 5 gives $t\\prime(j)=t\\prime(s(a(j)))=\\alpha(a(j))=t(j)$. Therefore $t\\prime=t$. Both $\\bar\\sigma$ and $\\tau$ are nondegenerate, so step 2 also shows that this unique arrow is injective. The factorization is through the fixed unique decomposition of step 4, hence establishes exactly the final clause of the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Variant 4.2.3.16, uniqueness in the left-adjoint assertion; explicit agent expansion, online PDF read 2026-10-17; local archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-weil-pbc-simplex-degeneracy-factorization",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Explicit vertex, degeneracy and monotone-section proof expanding HTT Variants 4.2.3.15 (5) and 4.2.3.16, printed p. 256; Stacks 017R supplies only the cited nondegenerate decomposition. Local HTT archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -91,10 +164,52 @@
    "results": "{\"t\": \"2026-10-17T08:57:57Z\", \"tool\": \"leanfinder\", \"query\": \"The full subcategory of nondegenerate simplices has at most one simplex operator between objects when its simplices are embedded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.unique_nonDegenerate_simplex\", \"SSet.unique_nonDegenerate_map\", \"SSet.mono_of_nonDegenerate\", \"SSet.unique_nonDegenerate_dim\", \"SSet.stdSimplex.mem_nonDegenerate_iff_mono\", \"SSet.N.mk'.inj\", \"SSet.stdSimplex.ext₀\", \"SSet.stdSimplex.ext₀_iff\"], \"digest\": \"321a109a728cec8c\"}",
    "date": "2026-10-17",
    "verdict": "no full match: SSet.N.instPartialOrder orders nondegenerate simplices by generated subcomplex; SSet.N.existsUnique_of_le and SSet.Nonsingular.injective_map (Nonsingular.lean:133 and :107) give uniqueness of face operators, while SSet.S.existsUnique_toNπ (NonDegenerateSimplices.lean:280) gives the degeneracy map. Read these sources; none states the universal factorization of arbitrary simplex-category morphisms through that map. The full category identification and factorization require the image-factor argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "existsUnique|injective_map|toNπ|adjunction",
+   "results": "{\"t\": \"2026-10-17T11:22:13Z\", \"tool\": \"grep\", \"query\": \"existsUnique|injective_map|toNπ|adjunction\", \"sub\": \"AlgebraicTopology/SimplicialSet/Nonsingular.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"107\", \"138\", \"140\", \"143\", \"149\"], \"digest\": \"a52b6cec8554d3a1\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: read SSet.Nonsingular.injective_map (Nonsingular.lean:107), SSet.N.existsUnique_of_le (:138), SSet.N.instPartialOrder (NonDegenerateSimplices.lean:108), and SSet.S.existsUnique_toNπ (:280). They cover individual order, thinness or decomposition facts; none gives factorization of every simplex-category arrow to a nondegenerate target through the fixed degeneracy map. The monotone-section argument in steps 5-6 is still required; this conjunction is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The nondegenerate simplices form a reflective full subcategory of the category of simplices of a nonsingular simplicial set",
+   "results": "{\"t\": \"2026-10-17T11:22:13Z\", \"tool\": \"leansearch\", \"query\": \"The nondegenerate simplices form a reflective full subcategory of the category of simplices of a nonsingular simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.nonDegenerate\", \"SSet.N.mk\", \"SSet.N\", \"SSet.degenerate\", \"SSet.N.mk'\", \"SSet.N.toS\", \"SSet.mem_nonDegenerate_iff_notMem_degenerate\", \"SSet.mem_degenerate_iff_notMem_nonDegenerate\"], \"digest\": \"5a658ac2a3880c73\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: read SSet.Nonsingular.injective_map (Nonsingular.lean:107), SSet.N.existsUnique_of_le (:138), SSet.N.instPartialOrder (NonDegenerateSimplices.lean:108), and SSet.S.existsUnique_toNπ (:280). They cover individual order, thinness or decomposition facts; none gives factorization of every simplex-category arrow to a nondegenerate target through the fixed degeneracy map. The monotone-section argument in steps 5-6 is still required; this conjunction is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Nonsingular",
+   "results": "{\"t\": \"2026-10-17T11:22:13Z\", \"tool\": \"loogle\", \"query\": \"SSet.Nonsingular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Nonsingular\", \"SSet.instNonsingularToSSet\", \"SSet.instNonsingularNerve\", \"SSet.instNonsingularObjSimplexCategoryStdSimplex\", \"SSet.Nonsingular.of_iso\", \"SSet.Nonsingular.of_mono\", \"SSet.N.monoOfLE\", \"SSet.N.instMonoSimplexCategoryMonoOfLE\"], \"digest\": \"2ad365d10236e1ce\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: read SSet.Nonsingular.injective_map (Nonsingular.lean:107), SSet.N.existsUnique_of_le (:138), SSet.N.instPartialOrder (NonDegenerateSimplices.lean:108), and SSet.S.existsUnique_toNπ (:280). They cover individual order, thinness or decomposition facts; none gives factorization of every simplex-category arrow to a nondegenerate target through the fixed degeneracy map. The monotone-section argument in steps 5-6 is still required; this conjunction is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a nonsingular simplicial set the full simplex subcategory on nondegenerate simplices is a poset and each map to it factors uniquely through the nondegenerate quotient",
+   "results": "{\"t\": \"2026-10-17T11:22:18Z\", \"tool\": \"leanfinder\", \"query\": \"In a nonsingular simplicial set the full simplex subcategory on nondegenerate simplices is a poset and each map to it factors uniquely through the nondegenerate quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.N.instPartialOrder\", \"SSet.N.instPreorder\", \"SSet.unique_nonDegenerate_simplex\", \"SSet.N.le_iff_exists_mono\", \"SSet.exists_nonDegenerate\", \"SSet.N.nonDegenerate\", \"SSet.nonDegenerate\", \"SSet.orderEmbeddingN_apply\"], \"digest\": \"8557ecb59540b6cb\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: read SSet.Nonsingular.injective_map (Nonsingular.lean:107), SSet.N.existsUnique_of_le (:138), SSet.N.instPartialOrder (NonDegenerateSimplices.lean:108), and SSet.S.existsUnique_toNπ (:280). They cover individual order, thinness or decomposition facts; none gives factorization of every simplex-category arrow to a nondegenerate target through the fixed degeneracy map. The monotone-section argument in steps 5-6 is still required; this conjunction is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction|reflect|existsUnique_toNπ|toNπ",
+   "results": "{\"t\": \"2026-10-17T11:23:27Z\", \"tool\": \"grep\", \"query\": \"adjunction|reflect|existsUnique_toNπ|toNπ\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplicesSubcomplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\"], \"digest\": \"16af7aaf517d4d44\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: read SSet.Nonsingular.injective_map (Nonsingular.lean:107), SSet.N.existsUnique_of_le (:138), SSet.N.instPartialOrder (NonDegenerateSimplices.lean:108), and SSet.S.existsUnique_toNπ (:280). They cover individual order, thinness or decomposition facts; none gives factorization of every simplex-category arrow to a nondegenerate target through the fixed degeneracy map. The monotone-section argument in steps 5-6 is still required; this conjunction is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from any simplex into an embedded nondegenerate simplex factors through the unique surjective degeneracy onto its nondegenerate core",
+   "results": "{\"t\": \"2026-10-17T11:23:29Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from any simplex into an embedded nondegenerate simplex factors through the unique surjective degeneracy onto its nondegenerate core\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.exists_nonDegenerate\", \"SSet.N.mk'_surjective\", \"SSet.unique_nonDegenerate_simplex\", \"SSet.unique_nonDegenerate_map\", \"SSet.N.mk_surjective\", \"SSet.S.mk_surjective\", \"SSet.mono_of_nonDegenerate\", \"SSet.S.toN\"], \"digest\": \"b0445387ccb630b2\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: read SSet.Nonsingular.injective_map (Nonsingular.lean:107), SSet.N.existsUnique_of_le (:138), SSet.N.instPartialOrder (NonDegenerateSimplices.lean:108), and SSet.S.existsUnique_toNπ (:280). They cover individual order, thinness or decomposition facts; none gives factorization of every simplex-category arrow to a nondegenerate target through the fixed degeneracy map. The monotone-section argument in steps 5-6 is still required; this conjunction is not a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-poset-nerve-cofinal-replacement",
@@ -125,5 +240,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-nondegenerate-simplex-face-poset",
+  "worker": "stage1",
+  "summary": "Zero-new-node split. Proved thinness by vertex injectivity, injectivity of arrows using the existing adjacent-collapse Mathlib leaf, antisymmetry by dimensions and monotone endomorphisms, and factorization by an explicitly chosen monotone section of the existing unique nondegenerate decomposition. Read all cited statements, HTT printed p.256 and Stacks 017R; retained the statement and historical ancestry, expanded the source reference to Variant 4.2.3.16, searched the project/DAG/blueprint and all four Mathlib services, and checked the empty, vertex and degenerate-simplex cases.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint: its finite coefficient adjunction enhancement passes through the intervening accessible-Ind and cofinal-poset replacement nodes listed in blueprint.from.via. This item realizes precisely the nondegenerate-simplex step of that replacement, HTT Variant 4.2.3.15 (5), with its general embedded-simplex formulation in Variant 4.2.3.16. It does not change the chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-6fc5d9874",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-6fc5d9874 (reviewer sub-agent of L); spot-checked: I read the whole item. It has no new nodes, and the statement is unchanged and not weakened. Against HTT printed p.256 (fetched online and extracted with pdftotext): Variant 4.2.3.16 (*), 'every nondegenerate simplex is a monomorphism', is exactly the item's hypothesis. Its claims that I_0 ⊆ I has a left adjoint and that N(I_0) is a poset are exactly the item's thinness, poset and unique-factorization clauses. Lurie assumes K finite there, but the argument does not use finiteness. Step checks: 1, thinness from vertex equations and injectivity of τ_0, correct. 2, a noninjective arrow gives adjacent equal values; the Mathlib leaf lem-weil-pbc-simplex-degeneracy-factorization (eq_σ_comp_of_not_injective', Basic.lean:732, read) then makes σ degenerate. Variance and the n=0 case are handled, and the 'surjective operator' and 'm<n' conventions of def-weil-pbc-simplicial-set agree. 3, antisymmetry by equal dimension and monotone injection [n]->[n] = id, correct. 4, the Stacks 017R leaf (simplicial.tex:1796, read; Mathlib Degenerate.lean names exist) is applied to the top simplex, with an explicit Yoneda translation. 5, the least-element section, cancellation on s-fibres through injective τ_0, and τΔ(t)=σ̄, correct. 6, uniqueness from the section, correct. proof_deps is the union of uses. The non-definition citations are Mathlib leaves, so no tool_uses. The parent cofinal-replacement steps 1-2 use exactly this statement. comma-initial (a consequence, not cited), subdivision-face-poset-calculus and finite-embedded-simplex-resolution are not duplicates, and there is no cycle. Tests: the empty, vertex, degenerate-over-vertex and nondegenerate-input cases; the Δ^1/∂Δ^1 counterexample shows (*) is needed; a brute-force check on Δ^2 up to dimension 3 (34 simplices, 88 arrows into nondegenerate targets) passed. There is no base-change morphism or coefficient category here. FIX: source.place named only Variant 4.2.3.15 (5), although the report said 4.2.3.16 had been added. It now names Variant 4.2.3.16 (*) and the left-adjoint/poset sentences, p.256, with 4.2.3.15 (5) as a comparison. That is the only field changed. The HTT archival copy is still WANTED, and proof_origin.by=agent is correct.; 1 file(s) fixed by the reviewer"
  }
 }
