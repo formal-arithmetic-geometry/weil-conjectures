@@ -11,9 +11,91 @@
   "lem-coef-simplicial-projective-model-calculus",
   "lem-coef-simplicial-localization-comparison-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the assumed enriched functorial cofan factorization to the empty cofan at each $X\\in U$. It gives $\\varnothing\\to QX\\xrightarrow{q_X}X$, with $QX\\in U$, the first arrow a cofibration and $q_X$ a trivial fibration. The stated enriched functoriality supplies a simplicial functor $Q:U\\to U$ and an enriched natural transformation $q:Q\\to1_U$. If $X$ is fibrant, composition of $q_X$ with $X\\to *$ is a fibration, so $QX$ is bifibrant. Naturality gives $q_YQ(f)=fq_X$, so two-out-of-three shows that $Q$ carries weak equivalences to weak equivalences. Consequently inclusion $i:U^{cf}\\to U^f$ and $Q:U^f\\to U^{cf}$ preserve the specified weak equivalences. Their transformations $iQ\\to1_{U^f}$ and $Qi\\to1_{U^{cf}}$ have weak-equivalence components.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Lemma A.3.6.17, printed p.904 (PDF p.922), interval argument; archival copy WANTED. No Stacks tag states this simplicial-enriched assertion."
+   }
+  },
+  {
+   "text": "Put $G=W\\cap\\operatorname{Ar}(U^{cf})$. Let $f:X\\to Y$ be in $G$. Apply the one-fan factorization in the chunk to $f$ to obtain $X\\xrightarrow{i_f}Z\\xrightarrow{p_f}Y$ with $i_f$ a trivial cofibration and $p_f$ a fibration. Two-out-of-three makes $p_f$ trivial; $Z$ is cofibrant because $X$ is, and fibrant because $Y$ is. Lifting against $X\\to *$ gives $r:Z\\to X$ with $ri_f=1_X$. Lifting against $\\varnothing\\to Y$ gives $s:Y\\to Z$ with $p_fs=1_Y$. Thus all objects and all vertex arrows used in the following calculation lie in the full subcategory $U^{cf}$.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Lemma A.3.6.17, printed p.904 (PDF p.922), interval argument; archival copy WANTED. No Stacks tag states this simplicial-enriched assertion."
+   }
+  },
+  {
+   "text": "The simplicial model axiom gives trivial Kan fibrations $i_f^*:\\operatorname{Map}(Z,Z)\\to\\operatorname{Map}(X,Z)$ and $(p_f)_*:\\operatorname{Map}(Z,Z)\\to\\operatorname{Map}(Z,Y)$. For the first use the trivial cofibration $i_f$ and the fibration $Z\\to *$; for the second use the cofibration $\\varnothing\\to Z$ and the trivial fibration $p_f$. The vertices $i_fr$ and $1_Z$ have the same image $i_f$ in the first map; $sp_f$ and $1_Z$ have the same image $p_f$ in the second. Lifting $\\partial\\Delta^1\\hookrightarrow\\Delta^1$ over these constant edges joins the respective pairs. Hence $[i_fr]=[1_Z]=[sp_f]$ in the component category. It follows that $[rs][f]=[r][sp_f][i_f]=1_X$ and $[f][rs]=[p_f][i_fr][s]=1_Y$. Every arrow of $G$ is therefore invertible in $\\pi_0U^{cf}$, using the actual enriched mapping simplicial sets.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Lemma A.3.6.17, printed p.904 (PDF p.922), interval argument; archival copy WANTED. No Stacks tag states this simplicial-enriched assertion."
+   }
+  },
+  {
+   "text": "The localization-at-already-invertible-arrows clause of [lem-coef-simplicial-localization-comparison-calculus] now gives a Dwyer--Kan equivalence $a:U^{cf}\\to L_GU^{cf}$. The relative enriched functors $i,Q$ from step 1 induce $\\bar i:L_GU^{cf}\\to L_WU^f$ and $\\bar Q:L_WU^f\\to L_GU^{cf}$ by functoriality of enriched localization. Notice that this uses the localization-at-equivalences clause only; the comparison for an entire model category is not being applied to the chunk, which need not itself be a model category.",
+   "uses": [
+    "lem-coef-simplicial-localization-comparison-calculus",
+    "lem-coef-simplicial-inversion-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Lemma A.3.6.17, printed p.904 (PDF p.922), interval argument; archival copy WANTED. No Stacks tag states this simplicial-enriched assertion."
+   }
+  },
+  {
+   "text": "Let $\\ell:U^f\\to L_WU^f$ and $a:U^{cf}\\to L_GU^{cf}$ be the structure maps of [lem-coef-simplicial-inversion-universal-property]. Functoriality of localization (step 4) gives $\\bar ia=\\ell i$ and $\\bar Q\\ell=aQ$, and induced maps are compatible with composition in $h\\mathrm{sCat}$; hence $[\\ell iQ]=[\\bar i][\\bar Q][\\ell]$ and $[aQi]=[\\bar Q][\\bar i][a]$. Since $\\ell$ is a simplicial functor, whiskering the enriched transformation $q:iQ\\to1_{U^f}$ of step 1 gives an enriched natural transformation $\\ell q:\\ell iQ\\to\\ell$: the two composition maps agree after applying $\\ell$ on mapping simplicial sets. Its components $\\ell(q_X)$ have $q_X\\in W$, so they are isomorphisms in $\\pi_0L_WU^f$: the class $[\\ell]=\\ell^*(1)$ lies in the image described in [lem-coef-simplicial-inversion-universal-property]. [lem-coef-simplicial-natural-equivalence-homotopy] gives $[\\ell iQ]=[\\ell]$, and injectivity of $\\ell^*$ on $\\operatorname{Hom}_{h\\mathrm{sCat}}(L_WU^f,L_WU^f)$ gives $[\\bar i][\\bar Q]=1$. The same argument with $a$, $G$ and $q:Qi\\to1_{U^{cf}}$, whose components $q_X$ for bifibrant $X$ lie in $G$, gives $[\\bar Q][\\bar i]=1$. Thus $[\\bar i]$ is an isomorphism in $h\\mathrm{sCat}$, the model homotopy category of the Dwyer--Kan model structure. Apply [lem-coef-model-localization-detects-weak-equivalences] to that model category and its homotopy localization, as supplied by [lem-coef-simplicial-inversion-universal-property]. It follows that $\\bar i$ is a Dwyer--Kan equivalence. The composite $\\bar ia=\\ell i$ is inclusion $U^{cf}\\to U^f$ followed by localization, which is $\\eta_U$, so two-out-of-three with step 4 proves the claimed comparison.",
+   "uses": [
+    "lem-coef-simplicial-natural-equivalence-homotopy",
+    "lem-coef-simplicial-inversion-universal-property",
+    "lem-coef-model-localization-detects-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Lemma A.3.6.17, printed p.904 (PDF p.922), interval argument; archival copy WANTED. No Stacks tag states this simplicial-enriched assertion."
+   }
+  },
+  {
+   "text": "For the simplicial functor $F:U\\to U\\prime$ in the statement, its restrictions $F^{cf}:U^{cf}\\to U\\prime^{cf}$ and $F^f:U^f\\to U\\prime^f$ exist by the two object-preservation hypotheses, and $F^f$ preserves the marked arrows by the weak-equivalence hypothesis. Write $\\ell_U:U^f\\to L_WU^f$ for localization and $i_U:U^{cf}\\to U^f$ for inclusion. Functoriality gives $L(F^f)\\ell_U=\\ell_{U\\prime}F^f$, and the restrictions satisfy $F^fi_U=i_{U\\prime}F^{cf}$. Therefore $L(F^f)\\eta_U=L(F^f)\\ell_Ui_U=\\ell_{U\\prime}F^fi_U=\\ell_{U\\prime}i_{U\\prime}F^{cf}=\\eta_{U\\prime}F^{cf}$. This is a commuting square for functorial localization choices and a commuting square in $h\\mathrm{sCat}$ independently of those choices. No compatibility of $F$ with $Q$ is needed.",
+   "uses": [
+    "lem-coef-simplicial-localization-comparison-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Lemma A.3.6.17, printed p.904 (PDF p.922), interval argument; archival copy WANTED. No Stacks tag states this simplicial-enriched assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-localization-comparison-calculus",
+  "lem-coef-simplicial-inversion-universal-property",
+  "lem-coef-simplicial-natural-equivalence-homotopy",
+  "lem-coef-model-localization-detects-weak-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemma A.3.6.17, printed p.904; agent expansion of the replacement, Whitehead and interval arguments; source read online but not archived"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,7 +134,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-chunk-localized-evaluation-exponential",
@@ -84,5 +166,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-chunk-bifibrant-localization",
+  "worker": "stage1",
+  "summary": "Retained the statement and all prior searches. Constructed chunk-preserving enriched cofibrant replacement using the empty cofan hypothesis, proved weak equivalences bifibrant-invertible by one-fan factorization and SM7, compared localized categories using the existing enriched natural-equivalence homotopy lemma after localization, and wrote the naturality equality. No new node (the delivered interval lemma was dropped on review as a few-line consequence of existing nodes); no Lean or compilation.",
+  "blueprint": "Nearest ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 displayed derived coefficient adjunction and inverse-limit comparison, through the existing enriched-diagram/localization foundation. Realizes HTT Lemma A.3.6.17 within the same unit. Whole-blueprint searches for cofibrant, enriched natural, localization and natural transformation found no equivalent blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NN-1ec85e33b",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-1ec85e33b (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node, the statements of all six cited nodes, and the parent step that uses the item. All of them are in unit sk-prop-sf-biduality-general, so no tool_uses are needed. Source: HTT A.3.6.17 is not in literature/ and the reviewer network is blocked, so I could not open it. It is recorded as WANTED and the proof is marked agent, so I checked the mathematics independently. Steps 1-4 and 6 are correct. Step 1: the empty cofan gives a cofibrant replacement inside U; Q preserves weak equivalences by two-out-of-three, and the components lie in W and G respectively. Step 2: the one-fan gives Z with both lifts r and s valid. Step 3: SM7 gives trivial Kan fibrations i_f^* and (p_f)_*, using Map(X,*)=* and Map(empty,-)=*; boundary lifting for Delta^1 is in kan-quillen; both inverse products check. Step 4: the already-invertible clause applies, and i and Q carry the markings correctly. Step 6: the naturality chain is correct. The new node lem-coef-enriched-natural-localization-homotopy is true (tested on [0] to [1] with W the arrow, on empty C and on W empty). But it is a few-line consequence of the existing same-unit node lem-coef-simplicial-natural-equivalence-homotopy plus the injectivity and image clause of lem-coef-simplicial-inversion-universal-property (C5/C1). The report did not compare it with that node or with simplicial-marked-cylinder-comparison. FIX: dropped the new node and rewrote step 5. It now whiskers q by the localization maps ell and a, gets [ell iQ]=[ell] and [aQi]=[a] from natural-equivalence-homotopy, and cancels ell and a by injectivity, giving [i-bar][Q-bar]=1 and [Q-bar][i-bar]=1. It then applies detects-weak-equivalences and two-out-of-three as before. proof_deps and the split_report summary are updated, and no file cites the dropped node.; 1 file(s) fixed by the reviewer"
  }
 }
