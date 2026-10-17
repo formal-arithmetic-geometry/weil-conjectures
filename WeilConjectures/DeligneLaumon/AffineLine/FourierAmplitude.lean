@@ -384,10 +384,4 @@ theorem isLE_fourierTransform_of_isGE_of_isLE (ψ : AddChar k₀ (PadicAlgCl l))
       ((fourierTransform ψ).mapIso (e ≪≫ WeilComplex.singleComplexIsoShift n G) ≪≫
         ((fourierTransform ψ).commShiftIso (-n)).app _)).symm (n - 1)
 
-/-- The top cohomology sheaf of the transform of a complex `≤ m` has finite support. -/
-theorem support_homologySheaf_fourierTransform_finite (ψ : AddChar k₀ (PadicAlgCl l))
-    (hψ : ψ ≠ 1) {m : ℤ} {K : WeilComplex k₀ l (affineLine k₀)} (hK : K.obj.IsLE m) :
-    ((WeilComplex.homologySheaf (m + 1)).obj ((fourierTransform ψ).obj K)).support.Finite :=
-  sorry
-
 end AlgebraicGeometry
