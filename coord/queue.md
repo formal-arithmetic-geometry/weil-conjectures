@@ -23,9 +23,9 @@
 | `Sheaf.Paper.FiniteDiscreteCoefficientSquareCoherence` | 10 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorPullCounitModel` | 13 | 1 | proof |
-| `Sheaf.Paper.IntegralResiduePullFlatModelComparison` | 14 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison` | 15 | 1 | proof |
+| `Sheaf.Paper.IntegralResiduePullFlatModelMateNormalized` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
 
