@@ -81,7 +81,7 @@ theorem selfExt_tor_resolution_local
   · let := _hJ
     let F := Scheme.Modules.restrictFunctor V.ι
     let G := SheafOfModules.overFunctor V.toScheme.ringCatSheaf W
-    let : F.Additive := restriction_additive _
+    let : F.Additive := inferInstance
     let : F.PreservesKInjectiveComplexes :=
       (openImmersion_restriction_derived_properties V.ι).2
     let Jv : CochainComplex V.toScheme.Modules ℤ := (F.mapHomologicalComplex (.up ℤ)).obj J
