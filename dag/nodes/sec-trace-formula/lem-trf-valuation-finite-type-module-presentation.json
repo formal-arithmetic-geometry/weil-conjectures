@@ -2,20 +2,115 @@
  "id": "lem-trf-valuation-finite-type-module-presentation",
  "kind": "statement",
  "title": "Finite flat modules over finite type algebras over valuation rings are finitely presented",
- "statement": "Let $A$ be a valuation ring. Let $A\\to B$ be a ring map of finite type [def-weil-pbc-finite-type-algebra]. Let $M$ be a finite $B$-module [def-weil-finitely-generated-module]. If $M$ is flat as an $A$-module [def-weil-pbc-flat-ring-map], then $M$ is finitely presented as a $B$-module [def-sc-finitely-presented-module].",
+ "statement": "Let $A$ be a valuation ring [def-trf-valuation-ring]. Let $A\\to B$ be a ring map of finite type [def-weil-pbc-finite-type-algebra]. Let $M$ be a finite $B$-module [def-weil-finitely-generated-module]. If $M$ is flat as an $A$-module [def-weil-pbc-flat-ring-map], then $M$ is finitely presented as a $B$-module [def-sc-finitely-presented-module].",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Lemma Tag 053E (lemma-flat-finite-type-valuation-ring-finite-presentation), part (2), statement and proof at lines 5966--6001"
  },
  "stmt_deps": [
+  "def-trf-valuation-ring",
   "def-weil-pbc-finite-type-algebra",
   "def-weil-finitely-generated-module",
   "def-weil-pbc-flat-ring-map",
   "def-sc-finitely-presented-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First $A$ is local. Indeed its fraction-field characterization [def-trf-valuation-ring] implies that any two nonzero elements $a,b\\in A$ satisfy $a\\mid b$ or $b\\mid a$, by applying it to $a/b$. Thus its nonunits form a proper ideal: if $a,b$ are nonunits and $b=ac$, then $a+b=a(1+c)$ is a nonunit; the other divisibility and zero cases are identical, and multiplication preserves nonunits. Every proper ideal contains only nonunits, so this is the unique maximal ideal. Choose algebra generators $b_1,\\ldots,b_n$ of $B$ over $A$ [def-weil-pbc-finite-type-algebra], and module generators $m_1,\\ldots,m_r$ of $M$ over $B$ [def-weil-finitely-generated-module].",
+   "uses": [
+    "def-trf-valuation-ring",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 053E(2), lemma-flat-finite-type-valuation-ring-finite-presentation, proof: explicit filtered-polynomial homogenization followed by Tag 053C"
+   }
+  },
+  {
+   "text": "For $d\\geq0$ let $F_dM$ be the $A$-span of $b_1^{\\alpha_1}\\cdots b_n^{\\alpha_n}m_j$ with $\\sum_i\\alpha_i\\leq d$. Then $F_dM\\subseteq F_{d+1}M$, $b_iF_dM\\subseteq F_{d+1}M$, and $\\bigcup_dF_dM=M$, by the chosen generators. Put $N=\\bigoplus_{d\\geq0}F_dM\\,t^d$, viewed as the $A$-module of finite formal polynomials with degree-$d$ coefficient in $F_dM$. For the polynomial ring $P=A[X_0,X_1,\\ldots,X_n]$ [def-weil-pbc-mv-polynomial-ring], let $X_0$ act by $t$ and $X_i$ by $b_it$. These commuting $A$-linear actions define a $P$-module, graded by polynomial degree. It is generated over $P$ by the $m_jt^0$: the spanning term $b^\\alpha m_jt^d$ equals $X_0^{d-|\\alpha|}X_1^{\\alpha_1}\\cdots X_n^{\\alpha_n}(m_jt^0)$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 053E(2), lemma-flat-finite-type-valuation-ring-finite-presentation, proof: explicit filtered-polynomial homogenization followed by Tag 053C"
+   }
+  },
+  {
+   "text": "The flat $A$-module $M$ is torsion-free by [lem-trf-flat-module-torsionfree-domain], since $A$ is a domain. If $0\\ne a\\in A$ and $a\\sum_dx_dt^d=0$ in $N$, each $ax_d=0$ in $M$, hence every $x_d=0$. Thus $N$ is torsion-free as an $A$-module. Apply [lem-trf-valuation-torsionfree-flat] to deduce that $N$ is flat over $A$.",
+   "uses": [
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-trf-valuation-torsionfree-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 053E(2), lemma-flat-finite-type-valuation-ring-finite-presentation, proof: explicit filtered-polynomial homogenization followed by Tag 053C"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-local-graded-flat-module-finite-presentation] with coefficient ring $R=A$, polynomial ring $P$ with all $n+1$ variables of weight $1$, and graded module $L=N$ (zero in negative degrees). Step 1 gives locality of $A$, Step 2 gives the internal grading and finite generation, and Step 3 gives flatness over $A$. Hence $N$ is finitely presented over $P$.",
+   "uses": [
+    "lem-trf-local-graded-flat-module-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 053E(2), lemma-flat-finite-type-valuation-ring-finite-presentation, proof: explicit filtered-polynomial homogenization followed by Tag 053C"
+   }
+  },
+  {
+   "text": "Evaluation $\\epsilon:N\\to M$, $\\sum_dx_dt^d\\mapsto\\sum_dx_d$, is $P$-linear for the action $X_0\\mapsto1$, $X_i\\mapsto b_i$ on $M$, and is surjective because $\\bigcup_dF_dM=M$. Its kernel is $(X_0-1)N$: if $\\sum_{d=0}^Dx_d=0$, put $y_d=-\\sum_{i=0}^dx_i\\in F_dM$ for $0\\leq d<D$. Direct multiplication gives $(t-1)\\sum_{d=0}^{D-1}y_dt^d=\\sum_{d=0}^Dx_dt^d$. For $D=0$ the kernel element is zero. Conversely evaluation kills $(t-1)N$. Therefore $N/(X_0-1)N\\cong M$, with the stated action of every variable.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 053E(2), lemma-flat-finite-type-valuation-ring-finite-presentation, proof: explicit filtered-polynomial homogenization followed by Tag 053C"
+   }
+  },
+  {
+   "text": "Write the finite presentation from Step 4 as $N=P^v/\\langle h_1,\\ldots,h_u\\rangle_P$, using [def-sc-finitely-presented-module]. Put $Q=A[X_1,\\ldots,X_n]$. Evaluation $X_0=1$ identifies $P/(X_0-1)$ with $Q$ by the polynomial universal property [def-weil-pbc-mv-polynomial-ring]. Quotienting $N$ by $(X_0-1)N$ gives $P^v/(\\langle h_1,\\ldots,h_u\\rangle_P+(X_0-1)P^v)$, which is $Q^v/\\langle h_1(1,X),\\ldots,h_u(1,X)\\rangle_Q$: the coordinate quotient map has kernel $(X_0-1)P^v$, and sends the relation span onto exactly that evaluated span. Step 5 identifies this quotient with $M$. Thus $M$ is finitely presented over $Q$.",
+   "uses": [
+    "def-sc-finitely-presented-module",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 053E(2), lemma-flat-finite-type-valuation-ring-finite-presentation, proof: explicit filtered-polynomial homogenization followed by Tag 053C"
+   }
+  },
+  {
+   "text": "The map $Q\\to B$, $X_i\\mapsto b_i$, is surjective by the algebra generators of Step 1. In particular $B$ is of finite type as a $Q$-algebra (no further generators). The $Q$-action on $M$ in Step 6 is restriction of its given $B$-action, as checked on each $X_i$ in Step 5. Apply [lem-trf-finitely-presented-over-subring] to $Q\\to B$ and $M$: finite presentation over $Q$ from Step 6 implies finite presentation over $B$.",
+   "uses": [
+    "lem-trf-finitely-presented-over-subring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 053E(2), lemma-flat-finite-type-valuation-ring-finite-presentation, proof: explicit filtered-polynomial homogenization followed by Tag 053C"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-valuation-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-trf-valuation-torsionfree-flat",
+  "lem-trf-local-graded-flat-module-finite-presentation",
+  "def-sc-finitely-presented-module",
+  "lem-trf-finitely-presented-over-subring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 053E(2), polynomial graded-module route; the explicit degree-filtration construction and evaluation kernel replace the abstract homogenization and torsion-quotient reductions"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +139,38 @@
    "results": "Module.finitePresentation_of_finite; no exact valuation theorem",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite module over a finite type algebra over a valuation ring that is flat over the valuation ring is finitely presented",
+   "results": "{\"t\": \"2026-10-17T21:11:51Z\", \"tool\": \"leanfinder\", \"query\": \"A finite module over a finite type algebra over a valuation ring that is flat over the valuation ring is finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FinitePresentation.of_finite_of_finitePresentation\", \"Module.FinitePresentation.iff_finitePresentation_of_finite\", \"Module.finitePresentation_of_finite\", \"Algebra.IsStandardSmooth.finitePresentation\", \"Algebra.FinitePresentation.of_finiteType\", \"Algebra.FinitePresentation.of_finitePresentation\", \"AlgHom.FinitePresentation.of_finiteType\", \"RingHom.FinitePresentation.of_finiteType\"], \"digest\": \"478bb9226a7d4b08\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationRing, Module.FinitePresentation",
+   "results": "{\"t\": \"2026-10-17T21:12:02Z\", \"tool\": \"loogle\", \"query\": \"ValuationRing, Module.FinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "valuation.*presentation|presentation.*valuation|053E|053C",
+   "results": "{\"t\": \"2026-10-17T21:12:02Z\", \"tool\": \"grep\", \"query\": \"valuation.*presentation|presentation.*valuation|053E|053C\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nagata theorem torsion free finite module over finitely generated algebra over a valuation domain is finitely presented",
+   "results": "{\"t\": \"2026-10-17T21:12:02Z\", \"tool\": \"leansearch\", \"query\": \"Nagata theorem torsion free finite module over finitely generated algebra over a valuation domain is finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.finitePresentation_of_finite\", \"Module.free_iff_isTorsionFree\", \"Module.free_of_finite_type_torsion_free\", \"instFiniteOfFinitePresentation\", \"instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree\", \"Module.FinitePresentation.mk\", \"Module.free_of_finite_type_torsion_free'\", \"Module.FinitePresentation.of_finite_of_finitePresentation\"], \"digest\": \"9d29bab29b162635\"}; Module.finitePresentation_of_finite (Algebra/Module/FinitePresentation.lean:118) requires a Noetherian coefficient ring, not assumed here. Module.finitePresentation_of_projective requires projectivity over the whole polynomial ring, not merely flatness over its coefficient ring.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-flat-finite-module-presentation",
@@ -86,5 +209,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-finite-type-module-presentation",
+  "worker": "stage1",
+  "summary": "Proved Tag 053E(2) by an explicit degree-filtration polynomial module N inside M[t], so N is finite graded and torsion-free over A. Applied the smaller generic graded local-ring theorem 053C, recovered M by the explicit evaluation kernel (X_0-1)N, and evaluated a finite presentation before transferring it along Q to B using the existing 0561 node. Added only one statement-only node, searched with all four authorized modes; no hypothesis change. Added the missing valuation-ring definition citation.",
+  "blueprint": "Realizes the ancestor lem-trf-local-term-locality proof (1)--(2), normal-cone semistable-alteration branch, via the flat-family dimension/valuation-ring finite-presentation input. In Tag 053E(2) this is the last sentence applying the graded polynomial-module theorem; Steps 2 and 5 give the homogenization/dehomogenization argument explicitly."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q96-6c74c1d8a",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q96-6c74c1d8a (reviewer sub-agent of L); spot-checked: Read the item, new Tag 053C node, unit/chapter route, all cited statements, and Stacks Tags 053C, 053E, and 0561. Verified every hypothesis, seven proof steps, filtration and evaluation-kernel calculations, Q→B finite-presentation transfer, edge cases, searches, duplicate checks, and route restrictions. No mathematical or procedural fault found."
  }
 }
