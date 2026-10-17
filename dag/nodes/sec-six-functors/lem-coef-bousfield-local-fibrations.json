@@ -29,9 +29,119 @@
  "stmt_deps": [
   "lem-coef-simplicial-model-nerve-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $C,W,F$ for the original classes and $W_S,F_S$ for the localized weak equivalences and fibrations. By [lem-coef-simplicial-model-nerve-localization], the original derived mapping spaces are mapping spaces of the original infinity localization. Therefore $W\\subseteq W_S$: precomposition by an equivalence induces an equivalence on mapping spaces into every $S$-local object. As the cofibrations are unchanged, $C\\cap W\\subseteq C\\cap W_S$. Taking right lifting classes in the two model weak factorization systems gives $F_S\\subseteq F$. This already proves the implication from localized to original fibration, without any condition on the endpoints.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Hirschhorn Proposition 3.3.3(1) and Proposition 3.3.16(1), printed pp. 58,63; the class comparison is expanded from the weak factorization axioms. Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "For each $s:A\\to B$ in $S$, choose a cofibrant replacement $a:A_s\\to A$ that is a trivial fibration, and factor $sa$ as a cofibration $t_s:A_s\\to B_s$ followed by a trivial fibration $b:B_s\\to B$. The cofibrations are a left lifting class, so their composition closure [lem-coef-lifting-class-closure] makes $B_s$ cofibrant. For every original fibrant $V$, the commutative square $(a,b):t_s\\to s$ has weak-equivalence vertical arrows. The derived mapping comparison [lem-coef-simplicial-model-nerve-localization] thus identifies its two locality tests up to equivalence. Hence $V$ is $S$-local exactly when each strict enriched map $m_{s,V}:=\\underline{\\operatorname{Map}}(B_s,V)\\to\\underline{\\operatorname{Map}}(A_s,V)$ is a weak homotopy equivalence. SM7 makes $m_{s,V}$ a Kan fibration between Kan complexes (the endpoints $A_s,B_s$ are cofibrant). By [lem-coef-kan-quillen-right-proper], that condition is equivalently that $m_{s,V}$ be a trivial Kan fibration. No condition on the original $A,B$ was imposed.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Definitions 3.3.8 and Lemma 3.3.11(1), printed pp. 60-61: specialize the resolution construction to cofibrant arrow replacements and simplicial tensors. Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "Put $\\partial_n:\\partial\\Delta^n\\hookrightarrow\\Delta^n$, including $n=0$, and form\n$$h_{s,n}:P_{s,n}:=(A_s\\otimes\\Delta^n)\\amalg_{A_s\\otimes\\partial\\Delta^n}(B_s\\otimes\\partial\\Delta^n)\\longrightarrow B_s\\otimes\\Delta^n.$$\nThese are original cofibrations with cofibrant endpoints. Here is the direct verification from SM7 in [lem-coef-simplicial-model-nerve-localization]. For any cofibration $i$ and simplicial-set monomorphism $j$, a lifting square from $i\\mathbin\\square j$ to an original trivial fibration $r$ transposes by tensor-Hom adjunction to a square from $j$ to the SM7 map associated to $(i,r)$. That map is a trivial Kan fibration, and lifts against $j$ by the Kan model weak factorization system [lem-coef-kan-quillen-right-proper]. Thus $i\\mathbin\\square j$ is an original cofibration. Apply this first to $i:0\\to A_s$ or $0\\to B_s$ and $j:\\varnothing\\to K$, for any simplicial set $K$, to see that their tensors with $K$ are cofibrant; the tensor adjunction identifies tensors of initial objects with initial objects; apply it to $0\\to A_s$ and $\\partial_n$ to make $A_s\\otimes\\partial\\Delta^n\\to A_s\\otimes\\Delta^n$ a cofibration. Its pushout is $B_s\\otimes\\partial\\Delta^n\\to P_{s,n}$. Pushout and composition closure [lem-coef-lifting-class-closure] now give cofibrancy of $P_{s,n}$, and application to $(t_s,\\partial_n)$ gives the assertion for $h_{s,n}$.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Definition 3.3.8 and Proposition 3.3.9(1), printed p. 60; direct SM7/tensor proof of the simplicial horns and their cofibrant endpoints. Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "Each $h_{s,n}$ is in $W_S$. Fix an original fibrant $S$-local $V$. Step 2 makes $m_{s,V}$ a trivial Kan fibration. Tensor-Hom adjunction and the universal property of the pushout in Step 3 identify $\\underline{\\operatorname{Map}}(h_{s,n},V)$ with the corner map\n$$\\underline{\\operatorname{Map}}_{\\mathrm{sSet}}(\\Delta^n,\\underline{\\operatorname{Map}}(B_s,V))\\longrightarrow\n\\underline{\\operatorname{Map}}_{\\mathrm{sSet}}(\\partial\\Delta^n,\\underline{\\operatorname{Map}}(B_s,V))\n\\times_{\\underline{\\operatorname{Map}}_{\\mathrm{sSet}}(\\partial\\Delta^n,\\underline{\\operatorname{Map}}(A_s,V))}\n\\underline{\\operatorname{Map}}_{\\mathrm{sSet}}(\\Delta^n,\\underline{\\operatorname{Map}}(A_s,V)).$$\nA lift of a boundary $\\partial_m$ against this corner is exactly a lift of $\\partial_n\\mathbin\\square\\partial_m$ against $m_{s,V}$, by the same adjunction. The former pushout product is degreewise the inclusion of the union of the two boundary products into $\\Delta^n\\times\\Delta^m$, hence is a monomorphism. A trivial Kan fibration lifts against every monomorphism by [lem-coef-kan-quillen-right-proper], so this corner lifts every boundary and is a trivial Kan fibration. Since both endpoints of $h_{s,n}$ are cofibrant, the strict mapping sets into fibrant $V$ compute derived mapping spaces by [lem-coef-simplicial-model-nerve-localization]. Thus $\\operatorname{Map}^h(h_{s,n},V)$ is an equivalence for every test $V$, as required. In particular Step 3 makes $h_{s,n}$ a localized trivial cofibration.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Proposition 3.3.10(1) and Lemma 3.3.13(1), printed pp. 60-61; expand the simplicial tensor/mapping-space calculation instead of presuming the localized model structure simplicial. Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "For an original fibrant $V$, Step 2 and the boundary lifting characterization in [lem-coef-kan-quillen-right-proper] give the following exact criterion: $V$ is $S$-local if and only if $V\\to1$ lifts against every $h_{s,n}$. Indeed a square $\\partial\\Delta^n\\to\\underline{\\operatorname{Map}}(B_s,V)$ over $\\Delta^n\\to\\underline{\\operatorname{Map}}(A_s,V)$ transposes to a map $P_{s,n}\\to V$, and an extension to $B_s\\otimes\\Delta^n$ is exactly its filler. These identifications use the simplicial tensor-Hom adjunction of [lem-coef-simplicial-model-nerve-localization], so hold also at $n=0$, when $h_{s,0}=t_s$. This is a locality test in the original structure, with no assertion that all local objects are localized fibrant.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Lemma 3.3.11(1), printed p. 61, with its lifting equivalence written explicitly for the chosen tensors. Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "Now let $p:X\\to Y$ be an original fibration with both endpoints $S$-local, and factor it in the GIVEN localized model structure as $X\\xrightarrow{i}E\\xrightarrow{q}Y$, with $i$ a localized trivial cofibration and $q$ a localized fibration. Such a factorization is part of the model axioms [lem-coef-simplicial-model-nerve-localization]; it uses neither small-object generation nor existence of any further model structure. Step 1 makes $q$ an original fibration, so $E$ is original fibrant: to lift an old trivial cofibration against $E\\to1$, first extend its composite into fibrant $Y$, then lift that extension through $q$. For every $h_{s,n}$ and map $u:P_{s,n}\\to E$, locality of $Y$ and Step 5 extend $qu$ to $v:B_s\\otimes\\Delta^n\\to Y$. By Step 4, $h_{s,n}$ is localized trivial, so lift the square $(u,v)$ through the localized fibration $q$. This extends $u$ into $E$. Step 5 proves that $E$ is $S$-local.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Proposition 3.3.16(1), factorization on printed p. 63, and the expanded proof of Proposition 3.3.14(1), printed pp. 61-62. Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "The arrow $i:X\\to E$ is a local equivalence between $S$-local objects. In the original homotopy category, precomposition by $i$ is therefore bijective on maps into $X$ and into $E$. To justify this bridge explicitly, enlarge universes so that $\\mathcal M$ is small. The class $W$ is a wide subcategory: identities have the left lifting property against every fibration, so belong to $C\\cap W$, and two-out-of-three makes $W$ closed under composition. By [lem-coef-hammock-infinity-localization], the reduced-hammock mapping simplicial sets represent the original localized mapping spaces, compatibly with actual maps and composition. The universal property in [lem-coef-simplicial-model-nerve-localization] identifies that localization with the one computing $\\operatorname{Map}^h$. By [lem-coef-hammock-components-localization], their connected components are naturally the Hom sets in the ordinary formal-inversion localization $H=\\mathcal M[W^{-1}]$, with the same composition and actual-map functor $\\gamma$. This formal-inversion category has the ordinary localization universal property: a functor inverting $W$ extends by sending each adjoined inverse $w^{-1}$ to the inverse of its image, and the composition and inverse relations are preserved. Surjectivity of $i^*:\\operatorname{Hom}_H(\\gamma E,\\gamma X)\\to\\operatorname{Hom}_H(\\gamma X,\\gamma X)$ supplies $g$ with $g\\gamma(i)=1_{\\gamma X}$. Injectivity of $i^*$ with target $\\gamma E$, applied to $(\\gamma(i)g)\\gamma(i)=\\gamma(i)=1_{\\gamma E}\\gamma(i)$, gives $\\gamma(i)g=1_{\\gamma E}$. Thus $\\gamma(i)$ is invertible. Apply [lem-coef-model-localization-detects-weak-equivalences] in the ORIGINAL model category, with no cofibrancy assumptions on $X,E$: $i$ is an original weak equivalence. Its original cofibration property follows from the shared cofibrations.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-hammock-components-localization",
+    "lem-coef-model-localization-detects-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Theorem 3.2.13(1), printed p. 55, used in Proposition 3.3.16(1), printed p. 63; the local Whitehead argument is expanded through the existing model saturation theorem. Read online; not archived in literature/."
+   }
+  },
+  {
+   "text": "Since $i$ is an original trivial cofibration and $p$ an original fibration, the old weak factorization lifting axiom [lem-coef-simplicial-model-nerve-localization] applied to the square with top $1_X$, bottom $q$, left $i$ and right $p$ gives $r:E\\to X$ with $ri=1_X$ and $pr=q$. Hence $(i,1_Y):p\\to q$ and $(r,1_Y):q\\to p$ are arrow-category maps whose composite is the identity of $p$. By the right lifting class retract closure [lem-coef-lifting-class-closure], $p$ is a localized fibration as an arrow retract of $q$. Together with Step 1 this proves both implications. No localized fibrancy of $X$ or $Y$ was used.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/pshmain.pdf",
+    "place": "Proposition 3.3.16(1), printed p. 63; in this factorization the original-trivial-cofibration lift gives the required retract directly, expanding the concluding appeal to Proposition 3.3.15. Read online; not archived in literature/."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-hammock-components-localization",
+  "lem-coef-hammock-infinity-localization",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-simplicial-model-nerve-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, derived coefficient adjunction before R lim, auxiliary model-presentation foundation. Expanded from Hirschhorn 3.3.16(1), with the horn proof of 3.3.14 and the local Whitehead argument of 3.2.13; read online at the Rochester mirror, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +184,101 @@
    "results": "{\"t\": \"2026-10-16T21:28:31Z\", \"tool\": \"grep\", \"query\": \"Bousfield|local.*object|fibration\", \"sub\": \"CategoryTheory/Localization/Bousfield.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"13\", \"20\", \"32\", \"46\", \"55\"], \"digest\": \"1169b913c1bb874a\"}",
    "date": "2026-10-17",
    "verdict": "no match: semantic hits isFibrant_of_fibration and cm3b concern fibrancy and retract closure for a single supplied model structure, not comparison of two model structures. Read Mathlib/CategoryTheory/Localization/Bousfield.lean:13-28,52-58: LeftBousfield.W tests ordinary Hom-set bijections and has no model-fibration assertion. Loogle returned no hits; the second semantic phrasing also gives only ordinary model-category predicates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a left Bousfield localization the original fibrations between local objects remain fibrations without properness hypotheses",
+   "results": "{\"t\": \"2026-10-16T22:36:43Z\", \"tool\": \"leanfinder\", \"query\": \"In a left Bousfield localization the original fibrations between local objects remain fibrations without properness hypotheses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations_1\", \"HomotopicalAlgebra.mem_fibrations\", \"HomotopicalAlgebra.fibrations\", \"HomotopicalAlgebra.Fibration.mem\", \"HomotopicalAlgebra.instFibrationPTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.trivialFibrations_sub_fibrations\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\"], \"digest\": \"545624f4a0131bbc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Localization/Bousfield.lean:13-58, AlgebraicTopology/ModelCategory/Basic.lean:49-88 and BifibrantObjectHomotopy.lean:133-139. The Bousfield declarations concern ordinary Hom-set bijections and supplied reflectors; the model declarations concern one supplied structure. None compares fibrations under a changed local-equivalence model structure. The second semantic phrasing likewise returns only single-model fibration predicates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fibrations between local objects are unchanged by left Bousfield localization",
+   "results": "{\"t\": \"2026-10-16T22:36:44Z\", \"tool\": \"leansearch\", \"query\": \"Fibrations between local objects are unchanged by left Bousfield localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.LeftBousfield.W\", \"CategoryTheory.Localization.LeftBousfield.isLocalization\", \"HomotopicalAlgebra.Fibration\", \"HomotopicalAlgebra.fibrations\", \"CategoryTheory.MorphismProperty.le_leftBousfieldW_isLocal\", \"CategoryTheory.Localization.LeftBousfield.W_eq_inverseImage_isomorphisms\", \"HomotopicalAlgebra.instFibrationPCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.CategoryWithFibrations.fibrations\"], \"digest\": \"325f8dadd3019270\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Localization/Bousfield.lean:13-58, AlgebraicTopology/ModelCategory/Basic.lean:49-88 and BifibrantObjectHomotopy.lean:133-139. The Bousfield declarations concern ordinary Hom-set bijections and supplied reflectors; the model declarations concern one supplied structure. None compares fibrations under a changed local-equivalence model structure. The second semantic phrasing likewise returns only single-model fibration predicates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fibration\", \"local\"",
+   "results": "{\"t\": \"2026-10-16T22:36:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"fibration\\\", \\\"local\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Localization/Bousfield.lean:13-58, AlgebraicTopology/ModelCategory/Basic.lean:49-88 and BifibrantObjectHomotopy.lean:133-139. The Bousfield declarations concern ordinary Hom-set bijections and supplied reflectors; the model declarations concern one supplied structure. None compares fibrations under a changed local-equivalence model structure. The second semantic phrasing likewise returns only single-model fibration predicates."
+  },
+  {
+   "tool": "grep",
+   "query": "Bousfield|local.*fibr|fibr.*local",
+   "results": "{\"t\": \"2026-10-16T22:36:45Z\", \"tool\": \"grep\", \"query\": \"Bousfield|local.*fibr|fibr.*local\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\"], \"digest\": \"feecaa3e29bf1d0a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Localization/Bousfield.lean:13-58, AlgebraicTopology/ModelCategory/Basic.lean:49-88 and BifibrantObjectHomotopy.lean:133-139. The Bousfield declarations concern ordinary Hom-set bijections and supplied reflectors; the model declarations concern one supplied structure. None compares fibrations under a changed local-equivalence model structure. The second semantic phrasing likewise returns only single-model fibration predicates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two model category structures with identical cofibrations and localized weak equivalences a map between fibrant local objects has the same fibration property",
+   "results": "{\"t\": \"2026-10-16T22:36:46Z\", \"tool\": \"leanfinder\", \"query\": \"For two model category structures with identical cofibrations and localized weak equivalences a map between fibrant local objects has the same fibration property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.fibration_iff\", \"HomotopicalAlgebra.mem_fibrations\", \"HomotopicalAlgebra.fibrations\", \"HomotopicalAlgebra.Fibration.mem\", \"HomotopicalAlgebra.ModelCategory.categoryWithFibrations\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\", \"HomotopicalAlgebra.FibrantBrownFactorization.instWeakEquivalencePTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\"], \"digest\": \"0278b54b8927dedc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/Localization/Bousfield.lean:13-58, AlgebraicTopology/ModelCategory/Basic.lean:49-88 and BifibrantObjectHomotopy.lean:133-139. The Bousfield declarations concern ordinary Hom-set bijections and supplied reflectors; the model declarations concern one supplied structure. None compares fibrations under a changed local-equivalence model structure. The second semantic phrasing likewise returns only single-model fibration predicates."
+  },
+  {
+   "tool": "grep",
+   "query": "Bousfield|local.*fibr|fibr.*local",
+   "results": "{\"t\": \"2026-10-16T23:36:41Z\", \"tool\": \"grep\", \"query\": \"Bousfield|local.*fibr|fibr.*local\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Localization/BousfieldTransfiniteComposition.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\", \"Mathlib/CategoryTheory/Localization/Bousfield.lean\"], \"digest\": \"81938955bd7eeae3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits concern the classes or fibrant-object subcategories of one supplied model structure; the ordinary Bousfield file tests Hom-set bijections. Read Mathlib/CategoryTheory/Localization/Bousfield.lean:13-90, AlgebraicTopology/ModelCategory/Basic.lean:49-98 and BifibrantObjectHomotopy.lean:126-145. No hit compares the fibrations of two model structures whose weak equivalences differ; a second semantic phrasing was also read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fibrations between local objects are unchanged by left Bousfield localization",
+   "results": "{\"t\": \"2026-10-16T23:36:42Z\", \"tool\": \"leansearch\", \"query\": \"Fibrations between local objects are unchanged by left Bousfield localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.LeftBousfield.W\", \"CategoryTheory.Localization.LeftBousfield.isLocalization\", \"HomotopicalAlgebra.Fibration\", \"HomotopicalAlgebra.fibrations\", \"CategoryTheory.MorphismProperty.le_leftBousfieldW_isLocal\", \"CategoryTheory.Localization.LeftBousfield.W_eq_inverseImage_isomorphisms\", \"HomotopicalAlgebra.instFibrationPCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.CategoryWithFibrations.fibrations\"], \"digest\": \"325f8dadd3019270\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits concern the classes or fibrant-object subcategories of one supplied model structure; the ordinary Bousfield file tests Hom-set bijections. Read Mathlib/CategoryTheory/Localization/Bousfield.lean:13-90, AlgebraicTopology/ModelCategory/Basic.lean:49-98 and BifibrantObjectHomotopy.lean:126-145. No hit compares the fibrations of two model structures whose weak equivalences differ; a second semantic phrasing was also read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fibration\", \"local\"",
+   "results": "{\"t\": \"2026-10-16T23:36:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"fibration\\\", \\\"local\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits concern the classes or fibrant-object subcategories of one supplied model structure; the ordinary Bousfield file tests Hom-set bijections. Read Mathlib/CategoryTheory/Localization/Bousfield.lean:13-90, AlgebraicTopology/ModelCategory/Basic.lean:49-98 and BifibrantObjectHomotopy.lean:126-145. No hit compares the fibrations of two model structures whose weak equivalences differ; a second semantic phrasing was also read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a left Bousfield localization the original fibrations between local objects remain fibrations without properness hypotheses",
+   "results": "{\"t\": \"2026-10-16T23:36:43Z\", \"tool\": \"leanfinder\", \"query\": \"In a left Bousfield localization the original fibrations between local objects remain fibrations without properness hypotheses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations_1\", \"HomotopicalAlgebra.mem_fibrations\", \"HomotopicalAlgebra.fibrations\", \"HomotopicalAlgebra.Fibration.mem\", \"HomotopicalAlgebra.instFibrationPTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.trivialFibrations_sub_fibrations\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\"], \"digest\": \"545624f4a0131bbc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits concern the classes or fibrant-object subcategories of one supplied model structure; the ordinary Bousfield file tests Hom-set bijections. Read Mathlib/CategoryTheory/Localization/Bousfield.lean:13-90, AlgebraicTopology/ModelCategory/Basic.lean:49-98 and BifibrantObjectHomotopy.lean:126-145. No hit compares the fibrations of two model structures whose weak equivalences differ; a second semantic phrasing was also read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two model category structures with identical cofibrations and localized weak equivalences a map between fibrant local objects has the same fibration property",
+   "results": "{\"t\": \"2026-10-16T23:37:02Z\", \"tool\": \"leanfinder\", \"query\": \"For two model category structures with identical cofibrations and localized weak equivalences a map between fibrant local objects has the same fibration property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.fibration_iff\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.isFibrant_of_fibration\", \"HomotopicalAlgebra.BifibrantObject.instIsFibrantObjBifibrantObjects\", \"HomotopicalAlgebra.bifibrantObjects_le_fibrantObject\", \"HomotopicalAlgebra.BifibrantObject.instIsFibrantObjι\"], \"digest\": \"787fff163f330e17\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic hits concern the classes or fibrant-object subcategories of one supplied model structure; the ordinary Bousfield file tests Hom-set bijections. Read Mathlib/CategoryTheory/Localization/Bousfield.lean:13-90, AlgebraicTopology/ModelCategory/Basic.lean:49-98 and BifibrantObjectHomotopy.lean:126-145. No hit compares the fibrations of two model structures whose weak equivalences differ; a second semantic phrasing was also read."
+  },
+  {
+   "tool": "grep",
+   "query": "LeftBousfield|rightBousfield|fibrations.*local|local.*fibrations",
+   "results": "{\"t\": \"2026-10-16T23:57:29Z\", \"tool\": \"grep\", \"query\": \"LeftBousfield|rightBousfield|fibrations.*local|local.*fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\"], \"digest\": \"b721a02400ce5d44\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader queries. Read Mathlib/CategoryTheory/Localization/Bousfield.lean:13-110, AlgebraicTopology/ModelCategory/Basic.lean:49-98, and CategoryTheory/Presentable/OrthogonalReflection.lean:333-357. The Hom-set isLocal_iff_isIso result gives the elementary cancellation pattern in Step 7, not a model-fibration comparison. Semantic hits concern the fibrant or bifibrant subcategories and one fixed model structure; quoted Loogle gives zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Model structures with common cofibrations have identical fibrations between objects orthogonal to the localized weak equivalences",
+   "results": "{\"t\": \"2026-10-16T23:57:37Z\", \"tool\": \"leanfinder\", \"query\": \"Model structures with common cofibrations have identical fibrations between objects orthogonal to the localized weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.fibration_iff\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.bifibrantObjects_le_fibrantObject\", \"HomotopicalAlgebra.bifibrantObjects_le_cofibrantObject\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\"], \"digest\": \"dad8be819f09e5e5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader queries. Read Mathlib/CategoryTheory/Localization/Bousfield.lean:13-110, AlgebraicTopology/ModelCategory/Basic.lean:49-98, and CategoryTheory/Presentable/OrthogonalReflection.lean:333-357. The Hom-set isLocal_iff_isIso result gives the elementary cancellation pattern in Step 7, not a model-fibration comparison. Semantic hits concern the fibrant or bifibrant subcategories and one fixed model structure; quoted Loogle gives zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bousfield\"",
+   "results": "{\"t\": \"2026-10-16T23:59:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"Bousfield\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader queries. Read Mathlib/CategoryTheory/Localization/Bousfield.lean:13-110, AlgebraicTopology/ModelCategory/Basic.lean:49-98, and CategoryTheory/Presentable/OrthogonalReflection.lean:333-357. The Hom-set isLocal_iff_isIso result gives the elementary cancellation pattern in Step 7, not a model-fibration comparison. Semantic hits concern the fibrant or bifibrant subcategories and one fixed model structure; quoted Loogle gives zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-bousfield-quillen-descent",
@@ -97,5 +298,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-bousfield-local-fibrations",
+  "worker": "stage1",
+  "summary": "Statement and statement dependencies unchanged. Eight proof steps normalize S to cofibrant cofibrations, construct explicit tensor-boundary horns and prove they are local trivial cofibrations, use their lifting criterion to prove locality of the intermediate factor, apply the existing model-localization saturation theorem through the explicit local Whitehead argument, and finish by an old-model lift and arrow retract. All inputs are existing nodes; no new nodes, no properness or combinatoriality assumption, and no project Lean attachment. The preliminary uncommitted fibrant-characterization child was dropped after reading the missing left-proper hypothesis of Hirschhorn 3.4.1. Second reading supplies the ordinary-localization bridge with the existing hammock mapping-space and component comparison statements, and explicitly specifies the empty-to-K tensor input.",
+  "blueprint": "The existing ancestry leads to prop-coef-integral-exceptional-adjoint, proof paragraph 2: derived coefficient adjunction in the displayed R Hom / R lim calculation. These steps realize the auxiliary small-model-presentation foundation beneath lem-coef-dugger-localization-criterion, without changing the geometric or coefficient route of sk-prop-sf-biduality-general.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-e34d10c75",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-e34d10c75 (reviewer sub-agent of L); spot-checked: I read the item and all six cited statements in full, plus the citer's use. All 8 steps check out against what those statements say. (1) An original weak equivalence is a local one, so localized fibrations are original fibrations (F_S ⊆ F) by right-lifting characterization. (2) Cofibrant arrow replacement t_s, with B_s cofibrant by composition closure; SM7 makes m_{s,V} a Kan fibration, so locality is equivalent to m_{s,V} being a trivial fibration. (3) Cofibration □ monomorphism is a cofibration, by transposing to the SM7 corner map; initial tensors are initial, so P_{s,n} is cofibrant. (4) The corner map lifts every boundary because ∂_n□∂_m is a monomorphism, so h_{s,n} ∈ C∩W_S. (5) For fibrant V, locality is equivalent to RLP against all h_{s,n}, including n=0. (6) The localized factorization's middle object E is fibrant and local, without Hirschhorn 3.4.1 or left properness. (7) The Yoneda cancellation in M[W^{-1}] goes through the hammock π_0 nodes and then detects-weak-equivalences, so i ∈ W. (8) An old-model lift gives r with ri=1 and pr=q, so p is a retract of q, hence p ∈ F_S. The source is Hirschhorn 3.3.16(1), not archived; the report has a WANTED line and the proof is marked agent-written. The item assumes S-local endpoints rather than Hirschhorn's localized-fibrant ones, which is the form the citer lem-coef-bousfield-quillen-descent needs, and the proof proves it directly. Statement, stmt_deps and source are identical to the unsplit node in the side DAG, so nothing is weakened. There are no new nodes. All deps are in unit sk-prop-sf-biduality-general, so no tool_uses are needed. There is no cycle and no SGA citation. All three search kinds are recorded. No duplicate in the DAG: the other Bousfield nodes are existence or Quillen-equivalence theorems with left-proper combinatorial hypotheses. Edge cases checked: S empty, S of identities, ∅→pt in sSet, n=0. No fixes."
  }
 }

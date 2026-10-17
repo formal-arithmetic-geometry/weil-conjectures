@@ -29,90 +29,178 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=\\operatorname{Fun}(L,\\mathcal E)$. The exponential-corner theorem makes $D$ a quasicategory (use $\\varnothing\\hookrightarrow L$ and $\\mathcal E\\to *$). Restriction $\\operatorname{Fun}(\\Delta^1,D)\\to D\\times D$ is an isofibration, using $\\partial\\Delta^1\\hookrightarrow\\Delta^1$. Pull it back along $\\mathcal E\\to D\\times D$, $T\\mapsto(a,\\Delta_LT)$. Its pullback is exactly $P_a$, and the pullback projection $P_a\\to\\mathcal E$ is an isofibration: any inner-horn or source-specified equivalence-edge lifting problem projects to one for the original isofibration, and its lift together with the prescribed base map is a lift into the degreewise pullback. For an inner horn in $P_a$, first fill its projection in $\\mathcal E$, then lift that filler, so $P_a$ is a quasicategory. By the sharp-cocone theorem $J_a=S_a(\\mathcal E)$ is a quasicategory and its apex projection is an isofibration. No restriction on $L$, including nonemptiness, has entered.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-join-cocone-associativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.1.5, preparatory fibrancy and endpoint restrictions; read online, archive WANTED; agent expansion using the cited DAG statements."
+   }
+  },
+  {
+   "text": "For every small simplicial set $R$, put $A_R=\\operatorname{Fun}(L\\star R,\\mathcal E)\\times_{\\operatorname{Fun}(L,\\mathcal E)}\\{a\\}$ and $B_R=\\operatorname{Fun}(L\\diamond R,\\mathcal E)\\times_{\\operatorname{Fun}(L,\\mathcal E)}\\{a\\}$. The restriction maps to $\\operatorname{Fun}(L,\\mathcal E)$ are isofibrations, since both pure inclusions of $L$ are degreewise injective. The blunt-to-sharp comparison gives a functor equivalence of the unrestricted functor objects, strictly over this base, since it fixes $L$. Isofibration base change along the vertex $a$ gives an equivalence $r_R:A_R\\to B_R$ between quasicategories. There is a simplicial isomorphism $B_R\\cong\\operatorname{Fun}(R,P_a)$: in parameter degree $m$, a map $(L\\diamond R)\\times\\Delta^m\\to\\mathcal E$ with prescribed $L\\times\\Delta^m$ is, by the defining quotient, an apex map $R\\times\\Delta^m\\to\\mathcal E$ and a cylinder map $L\\times\\Delta^1\\times R\\times\\Delta^m\\to\\mathcal E$, equal at $0$ to $a\\operatorname{pr}_L$ and at $1$ to the constant-in-$L$ apex. Products preserve this quotient because its generating relations retain the parameter coordinate. Currying is precisely the displayed cocone pullback. Also maps $e:R\\to J_a$ correspond bijectively to vertices $F_e:L\\star R\\to\\mathcal E$ of $A_R$ by the sharp-join universal property. Under these identifications $r_R(F_e)$ is exactly $ce:R\\to P_a$, where $c$ is the comparison in the item. This is only an object bijection on the sharp side; no isomorphism $\\operatorname{Fun}(R,J_a)=A_R$ is asserted.",
+   "uses": [
+    "lem-coef-infinity-blunt-sharp-join-equivalence",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-base-change",
+    "lem-coef-infinity-join-cocone-associativity",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.1.5, sharp/fat adjunction and restriction to the fixed diagram; read online, archive WANTED; agent expansion using the cited DAG statements."
+   }
+  },
+  {
+   "text": "We check precisely how the object bijection $e\\mapsto F_e$ treats equivalences. Let $I=N(\\{0\\cong1\\})$ be the invertible interval of the cited interval theorem. For any small $R$, projection $R\\times I\\to R$ is a categorical equivalence. Indeed it has the section at $0$; the unique arrows $0\\to i$ in the two-object groupoid give a natural isomorphism from its constant-$0$ endofunctor to its identity, hence a simplicial homotopy on $R\\times I$. For every quasicategory $Q$, precomposition gives quasi-inverse functors on the functor objects: the remaining composite is naturally equivalent to the identity, because at each vertex its component is the image of an invertible groupoid arrow. The pointwise-equivalence theorem verifies that this is an equivalence edge, and the Joyal functor-equivalence test identifies the projection as a categorical equivalence. Therefore $\\overline B=L\\star(R\\times I)\\to B=L\\star R$ is a categorical equivalence by preservation under joins. The two endpoint sections agree on $L$, have composite identity with this projection, and induce a degreewise injection $B\\amalg_L B\\hookrightarrow\\overline B$: the two pure $R$ copies and mixed $L$-$R$ blocks are disjoint unless in the common pure $L$ summand. Thus this is a categorical mapping cylinder for $B$ relative to $L$. The relative categorical cylinder criterion says that $F_{e_0}$ and $F_{e_1}$ are equivalent vertices in $A_R$ exactly when there is a map $L\\star(R\\times I)\\to\\mathcal E$ restricting to $a$ on $L$ and to those two maps at the endpoints. By the sharp-join universal property this is the same as a map $R\\times I\\to J_a$ with endpoints $e_0,e_1$. Currying and the invertible-interval theorem in the quasicategory $\\operatorname{Fun}(R,J_a)$ say this is equivalent to a coherent natural equivalence between $e_0,e_1$. Here functor objects are quasicategories by the exponential-corner theorem. For completeness, isomorphism in $hQ$ is the same as existence of an equivalence edge: the triangle-calculus theorem represents an isomorphism and its inverse by edges and realizes both inverse equations by the two triangles required by the definition. All maps in this argument fix the prescribed boundary $a$ throughout the homotopy.",
+   "uses": [
+    "lem-coef-quasicategory-invertible-interval",
+    "lem-coef-infinity-pointwise-equivalences",
+    "lem-coef-joyal-functor-equivalence-test",
+    "lem-coef-join-preserves-categorical-equivalences",
+    "lem-coef-relative-categorical-cylinder-criterion",
+    "lem-coef-infinity-join-cocone-associativity",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-homotopy-category-triangle-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.1.5, expanded recognition of equivalence on sharp/fat adjoints via relative categorical cylinders; read online, archive WANTED; agent expansion using the cited DAG statements."
+   }
+  },
+  {
+   "text": "For every small $R$, step 3 makes $e\\mapsto F_e$ a bijection on classes of vertices modulo coherent natural equivalence. Step 2's functor equivalence $r_R$ also induces a bijection on such classes, using its quasi-inverse and its two natural-equivalence witnesses. Their composite, by its explicit identification in step 2, is postcomposition with $c:J_a\\to P_a$. Use surjectivity at $R=P_a$ to get $g:P_a\\to J_a$ with $cg\\simeq1_{P_a}$. Whiskering by $c$ gives $c(gc)\\simeq c(1_{J_a})$. Injectivity at $R=J_a$ gives $gc\\simeq1_{J_a}$. These are exactly a quasi-inverse and the two coherent natural equivalences, so $c$ is a functor equivalence. Enlarge the universe once to contain these test shapes when needed; all constructions above hold in that universe. It is over $\\mathcal E$ strictly: restriction to the final block agrees with the apex map in the fat-join quotient in every simplicial degree.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.1.5, explicit quasi-inverse recognition; read online, archive WANTED; agent expansion using the cited DAG statements."
+   }
+  },
+  {
+   "text": "Both apex maps in step 1 are isofibrations, and $c$ is an equivalence strictly over the common quasicategory $\\mathcal E$. Apply isofibration base change with $R=\\Delta^0$ and the map selecting any vertex $T$. It gives an equivalence of the strict fibers. The coherent fiber is exactly $U_D(a,\\Delta_LT)$: its $n$-simplices are arrows parametrized by $\\Delta^n$ with both endpoints constant, directly from the displayed definition of $P_a$. The pinch-comparison theorem says this is Kan and gives the natural equivalence from the specified right-pinched $\\operatorname{Map}_D(a,\\Delta_LT)$ to this fiber. To check Kan structure on the sharp fiber independently, reverse simplices. The explicit join formula identifies $(J_a)^{\\mathrm{op}}$ over $\\mathcal E^{\\mathrm{op}}$ with the sharp slice $(\\mathcal E^{\\mathrm{op}})_{/a^{\\mathrm{op}}}$ on $L^{\\mathrm{op}}$. The opposite theorem ensures $\\mathcal E^{\\mathrm{op}}$ is a quasicategory. The general sharp-slice theorem makes this projection a right fibration, and the right-fibration fiber theorem makes its strict fibers Kan. The opposite of a Kan complex is Kan, since reversal sends each horn $\\Lambda_i^n$ to $\\Lambda_{n-i}^n$ and carries a filler back to a filler. This proves that the original sharp fiber is Kan. Thus the comparison of strict fibers is an equivalence of Kan spaces, not merely an equivalence of their homotopy categories.",
+   "uses": [
+    "lem-coef-infinity-isofibration-base-change",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-infinity-right-fibration-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.1.6; Corollaries 4.2.1.7-4.2.1.8; dual of Proposition 2.1.2.1; read online, archive WANTED; agent expansion using the cited DAG statements."
+   }
+  },
+  {
+   "text": "For $u:L'\\to L$ the sharp side restricts by $u\\star\\operatorname{id}$ and the fat side by $u\\diamond\\operatorname{id}$. For $v:R'\\to R$ the same is true in the final block. The collapse commutes with these maps: on a cylinder simplex with interval coordinate $t:[n]\\to[1]$, both composites take the $L$ coordinate on $t^{-1}(0)$ and the final coordinate on $t^{-1}(1)$. Postcomposition by any $\\mathcal E\\to\\mathcal E'$ also commutes with these formulas and all endpoint restrictions. Hence the comparisons are natural in shape, diagram, and target. On fixed-apex fibers these formulas agree with the natural pinch comparison, since both pinch maps split the same interval into its two blocks. For an apex arrow $h:T\\to T'$, the coherent fiber is $U_D(a,\\Delta_LT)$ and its transport sends a cocone $\\lambda$ to the coherent composite $\\Delta_L(h)\\lambda$; this retains the composition homotopies. The cocone projection itself supplies these transport diagrams, and $c$ is a map over $\\mathcal E$, hence takes a diagram over $h$ to the corresponding diagram over $h$. To make the transport interpretation precise, the sharp apex projection is a left fibration by reversing the right-fibration assertion in step 5. On the coherent side the fixed-source arrow projection in $D$ is a left fibration, by applying the fixed-target-arrow right-fibration theorem to $D^{\\mathrm{op}}$ and reversing simplices; $P_a$ is its pullback along $\\Delta_L$. The mapping-space opposite comparison in the opposite theorem identifies the reversed fibers. Thus these diagrams encode the usual coherent composition, including all higher apex compatibilities; no strictly chosen composition functor is required.",
+   "uses": [
+    "lem-coef-infinity-blunt-sharp-join-equivalence",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.1.5 and Corollary 4.2.1.7, naturality of the join collapse and its fixed-fiber comparison; read online, archive WANTED; agent expansion using the cited DAG statements."
+   }
+  },
+  {
+   "text": "The definition of a colimiting coherent cocone is initiality in $P_a$. A functor equivalence induces equivalences on every mapping space by the enhanced functor/cone calculus, so the equivalence $c$ preserves and reflects initial objects. Explicitly, for an initial $j\\in J_a$ and any $p\\in P_a$, choose $j'$ with $cj'\\simeq p$ by step 4; then $\\operatorname{Map}_{P_a}(cj,p)\\simeq\\operatorname{Map}_{J_a}(j,j')$ is contractible. Here replacing $p$ by the equivalent object $cj′$ induces a mapping-space equivalence: compose with the chosen equivalence and its inverse; the associative and unit homotopies of the mapping-composition theorem show that these two induced maps are homotopy inverses. The reverse implication tests objects $cj'$ and uses the same mapping equivalence. A vertex $j$ is the right-join cocone $L\\star\\Delta^0\\to\\mathcal E$, and its image under $c$ is exactly its induced coherent transformation by step 2. This proves the initial/colimiting characterization. For $L=\\varnothing$, both $L\\star R$ and $L\\diamond R$ are $R$, $D=\\operatorname{Fun}(\\varnothing,\\mathcal E)$ is terminal, and $J_a=P_a=\\mathcal E$ with comparison the identity; both fixed-apex fibers are a point. For nonempty $L$ with $\\mathcal E=\\varnothing$ there is no input $a$; for $L=\\varnothing=\\mathcal E$ the total categories are empty and the assertions about vertices and fibers are vacuous.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Paragraph immediately following Proposition 4.2.1.5, colimits as initial cocones; empty-shape verification; read online, archive WANTED; agent expansion using the cited DAG statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-homotopy-category-triangle-calculus",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-blunt-sharp-join-equivalence",
+  "lem-coef-infinity-isofibration-base-change",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-join-cocone-associativity",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-join-preserves-categorical-equivalences",
+  "lem-coef-joyal-functor-equivalence-test",
+  "lem-coef-quasicategory-invertible-interval",
+  "lem-coef-relative-categorical-cylinder-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, coherent mapping-space infrastructure under the recorded ancestry; expansion of HTT Proposition 4.2.1.5 and Corollaries 4.2.1.7-4.2.1.8 read online (printed pp.241-242), using explicit relative-cylinder recognition rather than asserting an isomorphism of parametrized sharp diagram categories."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "For an arbitrary simplicial diagram in a quasicategory its join undercategory is equivalent to the coherent cocone category and the comparison induces equivalences on fixed apex fibers",
-   "results": "{\"t\": \"2026-10-16T20:19:27Z\", \"tool\": \"leanfinder\", \"query\": \"For an arbitrary simplicial diagram in a quasicategory its join undercategory is equivalent to the coherent cocone category and the comparison induces equivalences on fixed apex fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.costructuredArrowEquiv\", \"CategoryTheory.Limits.Cocones.whiskeringEquivalence\", \"CategoryTheory.Limits.Cocones.functorialityEquivalence\", \"CategoryTheory.Limits.Cocones.functorialityEquivalence_functor\", \"CategoryTheory.Limits.Cocones.whiskeringEquivalence_counitIso\", \"CategoryTheory.Functor.Final.coconesEquiv\", \"CategoryTheory.Limits.Cocones.whiskeringEquivalence_functor\", \"SSet.Truncated.HomotopyCategory.functorEquiv\"], \"digest\": \"ca5e6ecac65d8868\"}",
+   "query": "quasicategorical join slice equivalent coherent cocone category fixed apex Kan fiber",
+   "results": "{\"t\": \"2026-10-16T22:58:27Z\", \"tool\": \"leanfinder\", \"query\": \"quasicategorical join slice equivalent coherent cocone category fixed apex Kan fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.WithInitial.coconeEquiv\", \"CategoryTheory.Join.costructuredArrowEquiv\", \"CategoryTheory.Join.structuredArrowEquiv\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"CategoryTheory.Join.isEquivalenceMapPair\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.Functor.Final.coconesEquiv\"], \"digest\": \"0bf5c1f3be76ac12\"}",
    "date": "2026-10-16",
-   "verdict": "no match: the returned CategoryTheory.Join equivalences and Cocones.whiskeringEquivalence/functorialityEquivalence are for ordinary categories and do not compare sharp/fat simplicial slices or their Kan fibers. The SSet.Truncated nerve equivalence is about ordinary homotopy categories. Scoped grep hits are copyright/underlying-category text; Loogle reports unknown Under. The second phrasing still returns only ordinary joins."
+   "verdict": "no match: inspected returned signatures; ordinary-category joins/cocones, nerve/homotopy-category adjunctions and StrictSegal Kan extensions do not compare sharp/fat quasicategorical slices or fixed-apex Kan fibers. Read Mathlib/CategoryTheory/Join/Final.lean:23-50, AlgebraicTopology/Quasicategory/Basic.lean:34-103, and SimplicialSet/Coskeletal.lean:38-85. No exact or one-line specialization."
   },
   {
    "tool": "loogle",
-   "query": "SSet, Under",
-   "results": "{\"t\": \"2026-10-16T20:19:17Z\", \"tool\": \"loogle\", \"query\": \"SSet, Under\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Under'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "CategoryTheory.Join, SSet.Quasicategory, Cocone",
+   "results": "{\"t\": \"2026-10-16T22:58:27Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Join, SSet.Quasicategory, Cocone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Cocone'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: the returned CategoryTheory.Join equivalences and Cocones.whiskeringEquivalence/functorialityEquivalence are for ordinary categories and do not compare sharp/fat simplicial slices or their Kan fibers. The SSet.Truncated nerve equivalence is about ordinary homotopy categories. Scoped grep hits are copyright/underlying-category text; Loogle reports unknown Under. The second phrasing still returns only ordinary joins."
+   "verdict": "invalid query: loogle: unknown identifier 'Cocone'"
   },
   {
    "tool": "grep",
-   "query": "slice|[Uu]nder|[Cc]ocone",
-   "results": "{\"t\": \"2026-10-16T20:19:17Z\", \"tool\": \"grep\", \"query\": \"slice|[Uu]nder|[Cc]ocone\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\"], \"digest\": \"0f2438c8b6be9615\"}",
+   "query": "join|cocone|slice|quasicategory",
+   "results": "{\"t\": \"2026-10-16T22:58:27Z\", \"tool\": \"grep\", \"query\": \"join|cocone|slice|quasicategory\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"b68f7d98bedd49b6\"}",
    "date": "2026-10-16",
-   "verdict": "no match: the returned CategoryTheory.Join equivalences and Cocones.whiskeringEquivalence/functorialityEquivalence are for ordinary categories and do not compare sharp/fat simplicial slices or their Kan fibers. The SSet.Truncated nerve equivalence is about ordinary homotopy categories. Scoped grep hits are copyright/underlying-category text; Loogle reports unknown Under. The second phrasing still returns only ordinary joins."
+   "verdict": "no match: inspected returned signatures; ordinary-category joins/cocones, nerve/homotopy-category adjunctions and StrictSegal Kan extensions do not compare sharp/fat quasicategorical slices or fixed-apex Kan fibers. Read Mathlib/CategoryTheory/Join/Final.lean:23-50, AlgebraicTopology/Quasicategory/Basic.lean:34-103, and SimplicialSet/Coskeletal.lean:38-85. No exact or one-line specialization."
   },
   {
    "tool": "leansearch",
-   "query": "Join slices and fat slices of a simplicial diagram in an infinity category are equivalent including the spaces of cocones at a fixed apex",
-   "results": "{\"t\": \"2026-10-16T20:19:17Z\", \"tool\": \"leansearch\", \"query\": \"Join slices and fat slices of a simplicial diagram in an infinity category are equivalent including the spaces of cocones at a fixed apex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.coconeTypesEquiv\", \"CategoryTheory.Limits.Cocone.category\", \"CategoryTheory.Limits.coconeOfCoconeUncurryIsColimit\", \"CategoryTheory.Limits.CofanTypes.equivOfIsColimit.congr_simp\", \"CategoryTheory.Limits.IsColimit.fac\", \"CategoryTheory.Functor.coconeTypes\", \"CategoryTheory.Limits.Cocone\", \"CategoryTheory.Limits.IsColimit.coconePointUniqueUpToIso\"], \"digest\": \"6f65946f64e4e292\"}",
+   "query": "sharp join slice of a simplicial diagram is equivalent to coherent cocones with fixed apex",
+   "results": "{\"t\": \"2026-10-16T22:58:28Z\", \"tool\": \"leansearch\", \"query\": \"sharp join slice of a simplicial diagram is equivalent to coherent cocones with fixed apex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cocone\", \"CategoryTheory.Limits.IsColimit.corepresentableBy\", \"CategoryTheory.Functor.coconeTypes\", \"CategoryTheory.Limits.colimit.isoColimitCocone\", \"CategoryTheory.Limits.Cocone.pt\", \"CategoryTheory.Limits.coconeOfCoconeUncurry_pt\", \"CategoryTheory.ShortComplex.colimitCocone\", \"CategoryTheory.Functor.CoconeTypes.ι\"], \"digest\": \"e53e666e97698abb\"}",
    "date": "2026-10-16",
-   "verdict": "no match: the returned CategoryTheory.Join equivalences and Cocones.whiskeringEquivalence/functorialityEquivalence are for ordinary categories and do not compare sharp/fat simplicial slices or their Kan fibers. The SSet.Truncated nerve equivalence is about ordinary homotopy categories. Scoped grep hits are copyright/underlying-category text; Loogle reports unknown Under. The second phrasing still returns only ordinary joins."
+   "verdict": "no match: inspected returned signatures; ordinary-category joins/cocones, nerve/homotopy-category adjunctions and StrictSegal Kan extensions do not compare sharp/fat quasicategorical slices or fixed-apex Kan fibers. Read Mathlib/CategoryTheory/Join/Final.lean:23-50, AlgebraicTopology/Quasicategory/Basic.lean:34-103, and SimplicialSet/Coskeletal.lean:38-85. No exact or one-line specialization."
   },
   {
    "tool": "leanfinder",
-   "query": "The undercategory of a simplicial diagram defined by sharp joins is equivalent over the target category to the fat join undercategory",
-   "results": "{\"t\": \"2026-10-16T20:19:28Z\", \"tool\": \"leanfinder\", \"query\": \"The undercategory of a simplicial diagram defined by sharp joins is equivalent over the target category to the fat join undercategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.mapPairEquiv\", \"CategoryTheory.Join.isEquivalenceMapPair\", \"CategoryTheory.Join.mapPairEquiv_counitIso\", \"CategoryTheory.Join.mapPairEquiv_functor\", \"CategoryTheory.Join.mapPairEquiv_unitIso\", \"CategoryTheory.Join.structuredArrowEquiv\", \"CategoryTheory.Join.costructuredArrowEquiv\", \"CategoryTheory.Join.isoMkFunctor\"], \"digest\": \"020d2dea93ad313b\"}",
+   "query": "The fat undercategory defined by the blunt simplicial join is equivalent to the sharp undercategory over a quasicategory",
+   "results": "{\"t\": \"2026-10-16T23:22:23Z\", \"tool\": \"leanfinder\", \"query\": \"The fat undercategory defined by the blunt simplicial join is equivalent to the sharp undercategory over a quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.OneTruncation₂.nerveEquiv\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.Truncated.rightExtensionInclusion\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.StructuredArrow.isEquivalence_toUnder\", \"CategoryTheory.Under.postEquiv\", \"SSet.hoFunctor.unitHomEquiv\"], \"digest\": \"cd529e7c570886f2\"}",
    "date": "2026-10-16",
-   "verdict": "no match: the returned CategoryTheory.Join equivalences and Cocones.whiskeringEquivalence/functorialityEquivalence are for ordinary categories and do not compare sharp/fat simplicial slices or their Kan fibers. The SSet.Truncated nerve equivalence is about ordinary homotopy categories. Scoped grep hits are copyright/underlying-category text; Loogle reports unknown Under. The second phrasing still returns only ordinary joins."
+   "verdict": "no match: inspected returned signatures; ordinary-category joins/cocones, nerve/homotopy-category adjunctions and StrictSegal Kan extensions do not compare sharp/fat quasicategorical slices or fixed-apex Kan fibers. Read Mathlib/CategoryTheory/Join/Final.lean:23-50, AlgebraicTopology/Quasicategory/Basic.lean:34-103, and SimplicialSet/Coskeletal.lean:38-85. No exact or one-line specialization."
   },
   {
    "tool": "loogle",
-   "query": "CategoryTheory.Limits.Cocone, SSet",
-   "results": "{\"t\": \"2026-10-16T20:25:36Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.Cocone, SSet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SSet.finite_of_isColimit\", \"SSet.hasDimensionLT_of_isColimit\", \"SSet.iSup_range_eq_top_of_isColimit\", \"SSet.range_eq_iSup_of_isColimit\", \"SSet.coconeN\", \"SSet.coconeN'\"], \"digest\": \"9e4caf915e212fee\"}",
+   "query": "\"Quasicategory\", \"join\"",
+   "results": "{\"t\": \"2026-10-16T23:22:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"join\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: valid Loogle query returns finite/dimension facts about ordinary colimits in SSet and cocones of nondegenerate simplices. None compares join slices to coherent cocone categories in a quasicategory."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For an arbitrary simplicial diagram in a quasicategory its join undercategory is equivalent to the coherent cocone category and the comparison induces equivalences on fixed apex fibers",
-   "results": "{\"t\": \"2026-10-16T21:23:47Z\", \"tool\": \"leanfinder\", \"query\": \"For an arbitrary simplicial diagram in a quasicategory its join undercategory is equivalent to the coherent cocone category and the comparison induces equivalences on fixed apex fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.costructuredArrowEquiv\", \"CategoryTheory.Limits.Cocones.whiskeringEquivalence\", \"CategoryTheory.Limits.Cocones.functorialityEquivalence\", \"CategoryTheory.Limits.Cocones.functorialityEquivalence_functor\", \"CategoryTheory.Limits.Cocones.whiskeringEquivalence_counitIso\", \"CategoryTheory.Functor.Final.coconesEquiv\", \"CategoryTheory.Limits.Cocones.whiskeringEquivalence_functor\", \"SSet.Truncated.HomotopyCategory.functorEquiv\"], \"digest\": \"ca5e6ecac65d8868\"}",
-   "date": "2026-10-16",
-   "verdict": "Renewed review: no match. Read the returned signatures: CategoryTheory.Join, Cocones.whiskeringEquivalence, StructuredArrow/Under equivalences and Cocone.category concern ordinary categories. The SSet.Truncated equivalence concerns ordinary homotopy categories. Loogle returns ambient-SSet colimit cocones and finite/dimension consequences. Scoped grep hits are license or underlying-category text. Neither semantic phrasing compares sharp/fat quasicategorical slices or fixed-apex Kan fibers."
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Limits.Cocone, SSet",
-   "results": "{\"t\": \"2026-10-16T21:23:50Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.Cocone, SSet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SSet.finite_of_isColimit\", \"SSet.hasDimensionLT_of_isColimit\", \"SSet.iSup_range_eq_top_of_isColimit\", \"SSet.range_eq_iSup_of_isColimit\", \"SSet.coconeN\", \"SSet.coconeN'\"], \"digest\": \"9e4caf915e212fee\"}",
-   "date": "2026-10-16",
-   "verdict": "Renewed review: no match. Read the returned signatures: CategoryTheory.Join, Cocones.whiskeringEquivalence, StructuredArrow/Under equivalences and Cocone.category concern ordinary categories. The SSet.Truncated equivalence concerns ordinary homotopy categories. Loogle returns ambient-SSet colimit cocones and finite/dimension consequences. Scoped grep hits are license or underlying-category text. Neither semantic phrasing compares sharp/fat quasicategorical slices or fixed-apex Kan fibers."
-  },
-  {
-   "tool": "grep",
-   "query": "slice|[Uu]nder|[Cc]ocone",
-   "results": "{\"t\": \"2026-10-16T21:23:50Z\", \"tool\": \"grep\", \"query\": \"slice|[Uu]nder|[Cc]ocone\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"cd72c1d1f6eac4f4\"}",
-   "date": "2026-10-16",
-   "verdict": "Renewed review: no match. Read the returned signatures: CategoryTheory.Join, Cocones.whiskeringEquivalence, StructuredArrow/Under equivalences and Cocone.category concern ordinary categories. The SSet.Truncated equivalence concerns ordinary homotopy categories. Loogle returns ambient-SSet colimit cocones and finite/dimension consequences. Scoped grep hits are license or underlying-category text. Neither semantic phrasing compares sharp/fat quasicategorical slices or fixed-apex Kan fibers."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Join slices and fat slices of a simplicial diagram in an infinity category are equivalent including the spaces of cocones at a fixed apex",
-   "results": "{\"t\": \"2026-10-16T21:24:27Z\", \"tool\": \"leansearch\", \"query\": \"Join slices and fat slices of a simplicial diagram in an infinity category are equivalent including the spaces of cocones at a fixed apex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.coconeTypesEquiv\", \"CategoryTheory.Limits.Cocone.category\", \"CategoryTheory.Limits.coconeOfCoconeUncurryIsColimit\", \"CategoryTheory.Limits.CofanTypes.equivOfIsColimit.congr_simp\", \"CategoryTheory.Limits.IsColimit.fac\", \"CategoryTheory.Functor.coconeTypes\", \"CategoryTheory.Limits.Cocone\", \"CategoryTheory.Limits.IsColimit.coconePointUniqueUpToIso\"], \"digest\": \"6f65946f64e4e292\"}",
-   "date": "2026-10-16",
-   "verdict": "Renewed review: no match. Read the returned signatures: CategoryTheory.Join, Cocones.whiskeringEquivalence, StructuredArrow/Under equivalences and Cocone.category concern ordinary categories. The SSet.Truncated equivalence concerns ordinary homotopy categories. Loogle returns ambient-SSet colimit cocones and finite/dimension consequences. Scoped grep hits are license or underlying-category text. Neither semantic phrasing compares sharp/fat quasicategorical slices or fixed-apex Kan fibers."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The undercategory of a simplicial diagram defined by sharp joins is equivalent over the target category to the fat join undercategory",
-   "results": "{\"t\": \"2026-10-16T21:24:30Z\", \"tool\": \"leanfinder\", \"query\": \"The undercategory of a simplicial diagram defined by sharp joins is equivalent over the target category to the fat join undercategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.StructuredArrow.isEquivalence_toUnder\", \"SimplexCategory.SkeletalFunctor.isEquivalence\", \"CategoryTheory.Join.structuredArrowEquiv\", \"CategoryTheory.Join.isEquivalenceMapPair\", \"CategoryTheory.Join.costructuredArrowEquiv\", \"CategoryTheory.Under.instIsEquivalenceObjPost\", \"CategoryTheory.CosimplicialObject.cechConerveEquiv_apply\", \"CategoryTheory.Join.isoMkFunctor\"], \"digest\": \"9c04705ebaa24270\"}",
-   "date": "2026-10-16",
-   "verdict": "Renewed review: no match. Read the returned signatures: CategoryTheory.Join, Cocones.whiskeringEquivalence, StructuredArrow/Under equivalences and Cocone.category concern ordinary categories. The SSet.Truncated equivalence concerns ordinary homotopy categories. Loogle returns ambient-SSet colimit cocones and finite/dimension consequences. Scoped grep hits are license or underlying-category text. Neither semantic phrasing compares sharp/fat quasicategorical slices or fixed-apex Kan fibers."
+   "verdict": "no match: inspected returned signatures; ordinary-category joins/cocones, nerve/homotopy-category adjunctions and StrictSegal Kan extensions do not compare sharp/fat quasicategorical slices or fixed-apex Kan fibers. Read Mathlib/CategoryTheory/Join/Final.lean:23-50, AlgebraicTopology/Quasicategory/Basic.lean:34-103, and SimplicialSet/Coskeletal.lean:38-85. No exact or one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-directed-cover-colimit-assembly",
@@ -132,5 +220,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-join-slice-cocone-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Seven steps construct the sharp/fat adjunction on diagrams, compare equivalence classes using a relative categorical cylinder and recognize a quasi-inverse, verify both apex isofibrations before fixed-fiber base change, prove Kan structure independently on both fibers, spell out naturality and transfer initiality. Corrected the inherited report and the first draft’s unjustified parameterized-diagram and Kan-fiber inferences. No new nodes.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: generic coherent mapping-space and filtered-subdiagram infrastructure along the recorded ancestry; HTT 4.2.1.5 realized in steps 1-4, 4.2.1.6-8 in step 5, naturality in step 6, initiality in step 7.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic theorem that a functor equivalence induces equivalences of mapping spaces, needed only to transfer initiality; this does not replace the sharp/fat comparison route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N4-7726a4208",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-7726a4208 (reviewer sub-agent of L); spot-checked: I read the item, all 18 cited node statements, the unit sk-prop-sf-biduality-general, the main-20261015 ancestor proof paragraph 2, possible duplicates (blunt-join-comparison, join-cone-calculus, join-cocone-associativity, cofinal-coslice-calculus) and the current citers. The statement is unchanged; it is generic quasicategory infrastructure with no coefficient category or base-change morphism. HTT 4.2.1 is not in literature (I checked LIST.md), so the WANTED line and proof_origin=agent are correct. Step 1: exponentiation with the empty map into L and with the boundary of the interval, then a pullback, makes P_a a quasicategory with an isofibration apex map; J_a comes from join-cocone-associativity. Step 2: both restrictions to Fun(L,E) are isofibrations; base change along the vertex a gives r_R; B_R is isomorphic to Fun(R,P_a) because products preserve the pushouts degreewise; r_R(F_e)=ce by naturality of c. Step 3: R x I -> R is a categorical equivalence (homotopy from the groupoid plus pointwise-equivalences plus the Joyal test); join preservation applies; I checked degreewise injectivity of B glued to B along L and that Fun_{f_A}(B,Q)=A_R, so the relative cylinder criterion applies, followed by currying, the invertible interval and triangle calculus. Step 4: the bijection on classes for R=P_a and R=J_a gives a quasi-inverse, strictly over E. Step 5: base change at a vertex T; the coherent fiber is U_D(a, constant T), which pinch-comparison makes Kan; J_a^op is the slice of E^op in the slice-right-fibration convention, its fibers are Kan by right-fibration-fibers, and horn reversal carries this back. Step 6: I checked that the collapse formula commutes with shape restriction and postcomposition; the left-fibration claims come from opposites. Step 7: initiality transfers through mapping-space equivalences and mapping-composition. Empty-L, empty-E and L a point in a nerve are consistent. proof_deps equals the union of uses, the 163-node closure has no cycle, there are no new nodes, and no SGA is used. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus as a generic black box. No fixes."
  }
 }
