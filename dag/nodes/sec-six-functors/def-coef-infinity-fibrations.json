@@ -113,26 +113,23 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-e9cdf6511 (reviewer sub-agent of L); spot-checked: The definition is correct; one source citation was imprecise and is fixed. HTT is not archived locally and the network is blocked, so I checked against the standard HTT definitions rather than the PDF. The horn ranges match HTT Def 2.0.0.3: inner 0<i<n, left 0<=i<n, right 0<i<=n, all with n>=1. The cartesian and cocartesian edge clauses (Lambda^n_n with final edge, Lambda^n_0 with edge {0,1}, n>=2) match the horn criterion of HTT Def 2.4.1.1 / Remark 2.4.1.4. The fibration clauses match Def 2.4.2.1 (fixed target for cartesian, fixed source for cocartesian). The item restricts the fibrations to quasicategories; every consumer (monoidal-infinity-category, complete-algebroid, kan-relative-nerve) has a quasicategorical base, so no target is weakened. Both stmt_deps say what the item uses: Stacks tags 016A/0174/0175 checked in tags/tags; Scholze Six-Functor Formalisms pp.13-14, Defs 2.1-2.2, checked locally. Small cases checked: n=1, n=2, N([1])->Delta^0 inner but not left, empty total space, identity map, base Delta^0. blueprint_refs search 'fibration' finds 0 nodes. A scan of all DAG statements finds only consumers and theorem nodes; lem-coef-infinity-grothendieck-limits-colimits restates the notion inline but is a theorem, not a duplicate. Pinned Mathlib has only SSet.InnerFibration (InnerFibration.lean:64-71) and no left/right/cartesian fibrations, so mathlib_match null is correct. The blueprint from/via chain is consistent with the main-20261015 proof paragraph 2 of prop-coef-integral-exceptional-adjoint. No route or tool use, no SGA source, unit realized fields untouched. FIX: the report says HTT Remark 2.4.1.4 was added, but source.place lacked it. I corrected source.place (only that field changed) in fixes/dag/nodes/sec-six-functors/def-coef-infinity-fibrations.json.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.CategoryTheory.InfinityFibrationsOverSimplicialBases",
-  "declaration": "SSet.Enhanced.cocartesianFibrationOver",
-  "declarations": [
-   "SSet.Enhanced.cocartesianFibrationOver"
-  ],
-  "file": "lean/Sheaf/CategoryTheory/InfinityFibrationsOverSimplicialBases.lean",
-  "statement": "def cocartesianFibrationOver {E B : SSet.{u}} (p : E ⟶ B) : Prop",
+  "module": "Sheaf.CategoryTheory.InfinityFibrationsCartesianRepair",
+  "declaration": "SSet.Enhanced.pCartesianEdge",
+  "file": "lean/Sheaf/CategoryTheory/InfinityFibrationsCartesianRepair.lean",
+  "statement": "def pCartesianEdge {E B : SSet.{u}} (p : E ⟶ B) (e : Δ[1] ⟶ E) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q30",
+  "by": "NM",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The previous cocartesianFibration predicate requires Quasicategory instances for both total space and base, so cannot express the arbitrary simplicial bases explicitly required by this consumer and HTT 5.4.4.2. The new module publicly reexports the existing full fibration/edge/fiber/preservation interface and gives exactly its same inner-horn and cocartesian edge-lift condition without those instance parameters. The existing predicates and modules remain usable."
+  "note": "The recorded module exposed only cocartesianFibrationOver, while this consumer needs the node's p-Cartesian edge predicate. The repair module states exactly the node's final-horn predicate as pCartesianEdge, definitionally delegating to the published IsCartesianEdge."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-b081a89ef",
-  "group": "Q30",
-  "result": "pass",
-  "note": "Statement matches node and HTT 5.4.4.2 clause by clause: regular lam<kappa, uncountable kappa, mu^nu<kappa, kappa-small X (nondegenerate simplices), arbitrary simplicial base via cocartesianFibrationOver, kappa-filtered fibers with existence of kappa-small lam-filtered colimits, coherent IsCocartesianTransport preservation (same convention as landed cocartesian_section_colimits), all strict sections kappa-filtered, comma(..., y, false) = y->s(x) weakly contractible. Universes follow the def-coef-presentable convention; no extra assumptions. sectionFiberEvaluation is the canonical pullback.lift (real data); its sorry'd obligation sectionEvaluation_comp_base checked true. Section 1(B) repair of def-coef-infinity-fibrations is justified (old predicate requires Quasicategory instances); same formula, public re-export, only the lean record changed. stage2_delivery check_lean_text/check_record: no failures; statement verbatim; lines <=100; report sections present. nt_compile --json on both files: exit 0, no errors printed. Observations only: equivalent helper SSet.Marked.Over.relativeFibration exists in a lemma module (def node is the right owner); report has 'HTT Lemma the project server' redaction artifact."
+  "reviewer": "NT-stage2-cc-cee3aeefc",
+  "group": "NM",
+  "result": "fix",
+  "note": "Item matches node and HTT Prop 3.1.1.11: inner fibration of quasicategories, Marked.markedAnodyne i, marked edges to p-Cartesian, joinSlice orientation Δ[n]⋆L, pullback legs (restriction, postcomposition) correct, helper maps are Classical.choose of true named ∃! theorems (not hollow), single universe, edge cases n=0 and empty U/V/L/E/B ok; new nodes def-coef-ordered-join and def-coef-join-slice (existing: true) pass H12. Findings: H4/H13 duplicate SSet.Enhanced.trivialKanFibration although def-weil-pbc-trivial-kan-fibration has Mathlib match SSet.modelCategoryQuillen.I.rlp (used by 29 landed modules); H4/H13 duplicate wrapper pCartesianEdge := IsCartesianEdge, which the recorded module InfinityFibrationsOverSimplicialBases already re-exports, and its record would overwrite Q30's cocartesianFibrationOver record; garbled report text. Fix: fixes/CartesianMarkedSliceRestriction.lean uses IsCartesianEdge and I.rlp (compiles clean via nt_compile.py, 10.5 s); lean-record.json and report.md updated; land with --revert-nodes def-coef-infinity-fibrations,def-weil-pbc-trivial-kan-fibration so both duplicate modules are left out. merge_delivery.py not run (no dry run). Delivered files also compiled clean."
  },
  "lean_audit": {
   "master": {

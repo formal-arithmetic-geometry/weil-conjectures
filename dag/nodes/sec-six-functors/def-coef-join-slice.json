@@ -1,0 +1,115 @@
+{
+ "id": "def-coef-join-slice",
+ "kind": "definition",
+ "title": "Ordered join slice",
+ "status": "split",
+ "statement": "For a simplicial map $p:K\\to C$ of [def-cbc-enhanced-diagrams-cones], using the ordered join of [def-coef-ordered-join], define the ordered join slice $C_{/p}$ degreewise by $(C_{/p})_n=\\{\\sigma:\\Delta^n\\star K\\to C\\mid \\sigma|_K=p\\}$, with operators given by precomposition with $\\Delta(\\alpha)\\star\\operatorname{id}_K$.",
+ "stmt_deps": [
+  "def-coef-ordered-join",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "source": {
+  "document": "https://kerodon.net/tag/018F",
+  "place": "Kerodon Proposition 4.3.6.1, join-slice construction"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "simplicial join slice maps Delta n join K to C restricting to p",
+   "results": "No exact Mathlib match; side declaration SSet.Enhanced.joinSlice found.",
+   "date": "2026-10-17",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "loogle",
+   "query": "joinSlice JoinSliceSimplex",
+   "results": "No Mathlib declaration; side module JoinSliceRightFibration.lean contains the canonical construction.",
+   "date": "2026-10-17",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "def joinSlice|JoinSliceSimplex",
+   "results": "No standalone definition node; lean/Sheaf/CategoryTheory/JoinSliceRightFibration.lean:137 defines joinSlice.",
+   "date": "2026-10-17",
+   "verdict": "Existing project declaration attached."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordered simplicial join and join slices of diagrams into a simplicial set",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Basic\", \"type\": \": Type (u + 1)\", \"doc\": \"The category of simplicial sets, defined as simplicial objects in the category of types. A simplicial set is a functor from the opposite of the simplex category $\\\\Delta^\\text{op}$ to the category of ty\"}\n  {\"name\": \"CategoryTheory.SimplicialObject\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max v u)\", \"doc\": \"A simplicial object in a category $\\\\mathcal{C}$ is a functor from the opposite of the simplex category $\\\\Delta^\\\\text{op}$ to $\\\\mathcal{C}$. The simplex category $\\\\Delta$ has objects given by finite or\"}\n  {\"name\": \"SSet.S\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Simplices\", \"type\": \"SSet → Type u\", \"doc\": \"The inductive type representing the standard simplex in the category of simplicial sets, defined as a functor from the opposite simplex category to types that assigns to each finite ordinal [n] the se\"}\n  {\"name\": \"CategoryTheory.SimplicialThickening\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialNerve\", \"type\": \"(J : Type u_1) → [LinearOrder J] → Type u_1\", \"doc\": \"The type of simplicial thickenings associated with a linearly ordered set $J$.\"}\n  {\"name\": \"SSet.hasColimits\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Basic\", \"type\": \": HasColimits SSet\", \"doc\": \"The category of simplicial sets admits all colimits, meaning that every diagram in this category has a colimit object.\"}\n  {\"name\": \"SSet.hasLimits\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Basic\", \"type\": \": HasLimits SSet\", \"doc\": \"The category of simplicial sets has all limits, meaning that for every diagram $D : \\\\mathcal{J} \\\\to \\\\text{SSet}$ where $\\\\mathcal{J}$ is a category of the same size as $\\\\text{SSet}$, the limit of $D$ e\"}\n  {\"name\": \"SSet.Subcomplex.preimage_max\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Subcomplex\", \"type\": \"(A B : X.Subcomplex) (p : Y ⟶ X) : (A ⊔ B).preimage p = A.preimage p ⊔ B.preimage p\", \"doc\": \"For any simplicial subcomplexes $A,B \\\\subseteq X$ and simplicial map $p: Y \\\\to X$, the preimage of the join $A \\\\sqcup B$ under $p$ equals the join of the preimages $A.p^{-1}$ and $B.p^{-1}$. Formally:\"}\n  {\"name\": \"CategoryTheory.SimplicialCategory\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialCategory.Basic\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max (max u (v + 1)) v)\", \"doc\": \"The ordinary category structure on a category $\\\\mathcal{C}$ obtained by enriching it over the monoidal category of simplicial sets $\\\\mathbf{SSet}$, where hom-objects are simplicial sets and compositio\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match: the hits define simplicial sets, ordinary simplicial categories or lattice joins of subcomplexes, not the ordered simplicial join or its join slices. Use the existing project declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-cartesian-marked-slice-restriction",
+  "date": "2026-10-17",
+  "group": "NM"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Technical marked-anodyne slice-extension input: the ordered join slice on which restriction is taken.",
+   "via": [
+    "lem-coef-cartesian-marked-slice-restriction",
+    "lem-coef-cartesian-comma-normalization",
+    "lem-coef-cartesian-terminal-twisted-resolution",
+    "lem-coef-coherent-diagram-coyoneda",
+    "lem-coef-small-diagram-model-rectification",
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.JoinSliceRightFibration",
+  "declaration": "SSet.Enhanced.joinSlice",
+  "statement": "def joinSlice {K C : SSet.{u}} (p : K ⟶ C) : SSet.{u}",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "The published joinSlice stores the initial restriction and extension map explicitly, which is definitionally the displayed degreewise ordered join slice."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cee3aeefc",
+  "group": "NM",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cee3aeefc",
+  "group": "NM",
+  "result": "fix",
+  "note": "Item matches node and HTT Prop 3.1.1.11: inner fibration of quasicategories, Marked.markedAnodyne i, marked edges to p-Cartesian, joinSlice orientation Δ[n]⋆L, pullback legs (restriction, postcomposition) correct, helper maps are Classical.choose of true named ∃! theorems (not hollow), single universe, edge cases n=0 and empty U/V/L/E/B ok; new nodes def-coef-ordered-join and def-coef-join-slice (existing: true) pass H12. Findings: H4/H13 duplicate SSet.Enhanced.trivialKanFibration although def-weil-pbc-trivial-kan-fibration has Mathlib match SSet.modelCategoryQuillen.I.rlp (used by 29 landed modules); H4/H13 duplicate wrapper pCartesianEdge := IsCartesianEdge, which the recorded module InfinityFibrationsOverSimplicialBases already re-exports, and its record would overwrite Q30's cocartesianFibrationOver record; garbled report text. Fix: fixes/CartesianMarkedSliceRestriction.lean uses IsCartesianEdge and I.rlp (compiles clean via nt_compile.py, 10.5 s); lean-record.json and report.md updated; land with --revert-nodes def-coef-infinity-fibrations,def-weil-pbc-trivial-kan-fibration so both duplicate modules are left out. merge_delivery.py not run (no dry run). Delivered files also compiled clean."
+ }
+}

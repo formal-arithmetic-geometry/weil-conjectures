@@ -11,7 +11,9 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
   "lem-coef-marked-anodyne-lifting-calculus",
-  "def-weil-pbc-trivial-kan-fibration"
+  "def-weil-pbc-trivial-kan-fibration",
+  "def-coef-ordered-join",
+  "def-coef-join-slice"
  ],
  "proof": [
   {
@@ -221,5 +223,35 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-46c7cb56f (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Repaired Step 2’s unsupported Cartesian-product-to-join claim using explicit shifted-horn identities and marking-only identity cases; corrected proof-origin metadata. Statements and dependencies unchanged. Small-case checks and acyclicity passed. Full findings are in review.md; corrected JSON is under fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cee3aeefc",
+  "group": "NM",
+  "result": "fix",
+  "note": "Item matches node and HTT Prop 3.1.1.11: inner fibration of quasicategories, Marked.markedAnodyne i, marked edges to p-Cartesian, joinSlice orientation Δ[n]⋆L, pullback legs (restriction, postcomposition) correct, helper maps are Classical.choose of true named ∃! theorems (not hollow), single universe, edge cases n=0 and empty U/V/L/E/B ok; new nodes def-coef-ordered-join and def-coef-join-slice (existing: true) pass H12. Findings: H4/H13 duplicate SSet.Enhanced.trivialKanFibration although def-weil-pbc-trivial-kan-fibration has Mathlib match SSet.modelCategoryQuillen.I.rlp (used by 29 landed modules); H4/H13 duplicate wrapper pCartesianEdge := IsCartesianEdge, which the recorded module InfinityFibrationsOverSimplicialBases already re-exports, and its record would overwrite Q30's cocartesianFibrationOver record; garbled report text. Fix: fixes/CartesianMarkedSliceRestriction.lean uses IsCartesianEdge and I.rlp (compiles clean via nt_compile.py, 10.5 s); lean-record.json and report.md updated; land with --revert-nodes def-coef-infinity-fibrations,def-weil-pbc-trivial-kan-fibration so both duplicate modules are left out. merge_delivery.py not run (no dry run). Delivered files also compiled clean."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianMarkedSliceRestriction",
+  "declaration": "SSet.Enhanced.cartesian_marked_slice_restriction",
+  "declarations": [
+   "SSet.Enhanced.joinSlicePostcompose",
+   "SSet.Enhanced.IsJoinSliceRestriction",
+   "SSet.Enhanced.existsUnique_joinSliceRestrict",
+   "SSet.Enhanced.joinSliceRestrict",
+   "SSet.Enhanced.IsCartesianMarkedSliceRestrictionMap",
+   "SSet.Enhanced.existsUnique_cartesianMarkedSliceRestrictionMap",
+   "SSet.Enhanced.cartesianMarkedSliceRestrictionMap",
+   "SSet.Enhanced.cartesian_marked_slice_restriction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CartesianMarkedSliceRestriction.lean",
+  "statement": "theorem cartesian_marked_slice_restriction {E B : SSet.{u}} [Quasicategory E] [Quasicategory B] (p : E ⟶ B) (hp : InnerFibration p) {U V : Marked.{u}} (i : U ⟶ V) (hi : Marked.markedAnodyne i) (q : V.underlying ⟶ E) (hq : ∀ (e : V.underlying _⦋1⦌), e ∈ V.marking → IsCartesianEdge p (SSet.yonedaEquiv.symm (q.app _ e))) : SSet.modelCategoryQuillen.I.rlp (cartesianMarkedSliceRestrictionMap p i q)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The theorem states HTT Proposition 3.1.1.11 with the canonical ordered join and join-slice restriction map. The two helper existence theorems determine the maps uniquely by their degreewise formulas; those coherence proofs and the main theorem are postponed. Reviewer fix: the Cartesian hypothesis uses the landed IsCartesianEdge of def-coef-infinity-fibrations and the conclusion uses the Mathlib match SSet.modelCategoryQuillen.I.rlp of def-weil-pbc-trivial-kan-fibration; the duplicate dependency modules are left out.",
+  "fixed_by": "NT-stage2-cc-cee3aeefc"
  }
 }

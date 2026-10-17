@@ -233,5 +233,29 @@
   "group": "Q93",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-d8590d8be (reviewer sub-agent of L); spot-checked: Read the item, its seven steps and the statements of the three same-unit nodes it cites (projective-chains, projective-cochain, graph-product), plus the parent dg-free-model. The statement is unchanged and correct. P⋆Q(s,t)=⊕_u P(u,t)⊗Q(s,u) matches the parent's composition A(u,t)⊗A(s,u)→A(s,t). I checked by hand that associativity reindexes to the same pairs (u,v), that E⋆P keeps u=t and P⋆E keeps u=s, and that R_P(H)(s,u)=∏_t[P(u,t),H(s,t)] and L_Q(H)(u,t)=∏_s[Q(s,u),H(s,t)] follow from currying; L_Q uses the cochain node's symmetry. Edge cases S empty, S a singleton and R=0 hold. Steps 2-7 are elementary uses of closedness and the coproduct and product universal properties, written out and not relabelled. Every citation states what its step takes from it. There are no new nodes, no duplicates (rg over the DAG and blueprint_refs search: the only related node, associative-algebra-model-transfer, takes biclosedness as a hypothesis) and no off-route or tool uses. I could not open Muro Definition 10.1: it is not in literature/, network access is blocked, and a search of the machine found no local copy. The delivery records it correctly as an agent proof with a WANTED line, and the mathematics was checked independently of Muro's notation. No SGA source. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e1ada370e",
+  "group": "Q29",
+  "result": "fix",
+  "note": "Read the node, both dependency nodes and their Lean (ProjectiveCochainMonoidalModel, CochainGraphProductModel, moduleHomComplex), the module, the report and the citer. Hypotheses R, S, m, g match the node with nothing stronger; S and R share universe u as in the dependency; the tensor_obj, unit_obj and both internal-Hom formulas are correct; empty S, singleton S, zero complexes and R=0 are covered. Item changed only in lean, dependency nodes untouched, report sections present, docstrings and conventions OK, proof is sorry, no duplicate found (rg plus recorded searches). H3 finding: the structure pinned only objects, leaving the morphism action of the tensor, the associator and the unitors arbitrary, so it did not state Muro Def. 10.1's canonical matrix product that the citer (dg categories as monoids) needs. Fixed by adding tensor_hom, associator, left_unitor and right_unitor fields stated on summand inclusions as in proof steps 2-4; theorem signature unchanged; the record fix adds lean.declarations. nt_compile: delivered module clean (10.8 s), fixed module clean (25.0 s), error-probe control confirms diagnostics are reported."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MatrixBiclosedMonoidalStructure",
+  "declaration": "HomotopicalAlgebra.matrixBiclosedMonoidalStructure",
+  "file": "lean/Sheaf/CategoryTheory/MatrixBiclosedMonoidalStructure.lean",
+  "statement": "theorem matrixBiclosedMonoidalStructure (R : Type u) [CommRing R] (S : Type u) (m : ProjectiveCochainMonoidalModel R) (g : CochainGraphProductModel R S m) : Nonempty (MatrixBiclosedMonoidalStructure R S)",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "HomotopicalAlgebra.MatrixBiclosedMonoidalStructure",
+   "HomotopicalAlgebra.matrixBiclosedMonoidalStructure"
+  ],
+  "note": "Reviewer fix: the helper structure now also fixes the canonical data of Muro Definition 10.1 on summand inclusions (tensor on morphisms, associator, both unitors), not only the objects; theorem signature unchanged.",
+  "fixed_by": "NT-stage2-cc-e1ada370e"
  }
 }
