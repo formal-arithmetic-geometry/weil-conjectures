@@ -1,0 +1,89 @@
+{
+ "id": "lem-kun-derived-pullback-composition-monoidal",
+ "kind": "statement",
+ "title": "Canonical derived etale inverse-image composition is monoidal",
+ "statement": "Let $\\Lambda$ be a commutative ring and let $u:Y\\to X$ and $v:Z\\to Y$ be morphisms of schemes [def-pc-scheme]. Use small representatives of the small etale sites [def-weil-size-convention, def-weil-pbc-etale-site], constant-coefficient module sheaves and their ordinary unbounded derived categories $D(T_{\\Et},\\Lambda)$ [def-weil-pbc-derived-categories]. Inverse image $u^{-1}$ is the termwise descent of the exact module inverse image [prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-exact-functor-derived-factorization]. Let $\\gamma_{u,v}:(uv)^{-1}\\xrightarrow{\\sim}v^{-1}u^{-1}$ be the termwise-descended inverse of the canonical module composition isomorphism of [lem-weil-pbc-inverse-image-composition-module-linear], normalized by the composite-adjunction unit. For each morphism $w$, write\n$$\\delta^w_{M,N}:w^{-1}(M\\otimes^L_\\Lambda N)\\xrightarrow{\\sim}w^{-1}M\\otimes^L_\\Lambda w^{-1}N$$\nfor the inverse of the canonical comparison of [lem-kun-inverse-image-monoidal], where $\\otimes^L_\\Lambda$ is the derived tensor product of [def-kun-derived-tensor], and write $\\epsilon_w:w^{-1}\\underline\\Lambda\\xrightarrow{\\sim}\\underline\\Lambda$ for the canonical constant-sheaf comparison [lem-kun-pullback-constant]. Then, for all $M,N\\in D(X_{\\Et},\\Lambda)$,\n$$\n\\delta^v_{u^{-1}M,u^{-1}N}\\circ v^{-1}(\\delta^u_{M,N})\\circ\\gamma_{u,v,M\\otimes^L N}\n=(\\gamma_{u,v,M}\\otimes^L\\gamma_{u,v,N})\\circ\\delta^{uv}_{M,N}.\n$$\nThe same comparison respects the unit: $\\epsilon_v\\circ v^{-1}(\\epsilon_u)\\circ\\gamma_{u,v,\\underline\\Lambda}=\\epsilon_{uv}$. For every morphism of schemes $w:V\\to V'$ and $M\\in D(V'_{\\Et},\\Lambda)$, with $l$ and $r$ the left and right unit constraints of [lem-kun-tensor-unit],\n$$w^{-1}(l_M)=l_{w^{-1}M}\\circ(\\epsilon_w\\otimes^L1)\\circ\\delta^w_{\\underline\\Lambda,M},\\qquad w^{-1}(r_M)=r_{w^{-1}M}\\circ(1\\otimes^L\\epsilon_w)\\circ\\delta^w_{M,\\underline\\Lambda}.$$\nFor a third morphism $t:T\\to Z$, the composition comparisons satisfy\n$$t^{-1}\\gamma_{u,v}\\circ\\gamma_{uv,t}=(\\gamma_{v,t}u^{-1})\\circ\\gamma_{u,vt}.$$\nAll equations use the canonical functor associativity and identity identifications and are natural in the derived objects.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, K-flat flat-term construction; underlying composition and tensor maps: sites-modules.tex Tags 03D8 (lemma-push-pull-composition-modules) and 03EL (lemma-tensor-product-pullback). The displayed coherence equations are the agent-stated comparison lemma extracted from the blueprint Kunneth-compatibility proof, not a verbatim assertion of those tags."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-kun-inverse-image-monoidal",
+  "lem-kun-pullback-constant",
+  "def-kun-derived-tensor",
+  "lem-kun-tensor-unit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(pullback|inverseImage).*(comp|monoidal)|(comp|monoidal).*(pullback|inverseImage)",
+   "results": "Hits read: Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/Adhesive/Basic.lean, Mathlib/CategoryTheory/Adhesive/Basic.lean, Mathlib/CategoryTheory/Adhesive/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: underived sheaf composition/associativity or generic monoidal infrastructure, not the canonical unbounded etale module tensor-composition coherence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition coherence of derived tensor pullback for sheaves of modules",
+   "results": "Hits read: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullback_assoc, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, CategoryTheory.GrothendieckTopology.overMapPullbackComp_hom_app_val_app, AlgebraicGeometry.Scheme.Modules.pullbackComp, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp, CategoryTheory.ChosenPullbacksAlong.pullbackComp",
+   "date": "2026-10-17",
+   "verdict": "no match: underived sheaf composition/associativity or generic monoidal infrastructure, not the canonical unbounded etale module tensor-composition coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal",
+   "results": "Hits read: CategoryTheory.Functor.Monoidal.instId, CategoryTheory.Functor.Monoidal, CategoryTheory.Equivalence.instMonoidalFunctorRefl, CategoryTheory.Equivalence.instMonoidalInverseRefl, CategoryTheory.Functor.instMonoidalProdDiag, CategoryTheory.Functor.CoreMonoidal.toMonoidal, CategoryTheory.Functor.Monoidal.toLaxMonoidal, CategoryTheory.Functor.Monoidal.toOplaxMonoidal",
+   "date": "2026-10-17",
+   "verdict": "no match: underived sheaf composition/associativity or generic monoidal infrastructure, not the canonical unbounded etale module tensor-composition coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical composition isomorphisms of inverse image functors on derived categories of sheaves of modules are monoidal associative and preserve tensor units",
+   "results": "Hits read: SheafOfModules.pullback_assoc, SheafOfModules.pushforward_assoc, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.pushforwardComp, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, SheafOfModules.pushforwardComp_inv_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no match: underived sheaf composition/associativity or generic monoidal infrastructure, not the canonical unbounded etale module tensor-composition coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback_assoc|pullbackComp|[Mm]onoidal",
+   "results": "Hits read: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: underived sheaf composition/associativity or generic monoidal infrastructure, not the canonical unbounded etale module tensor-composition coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback on ordinary etale module sheaves has tensor comparisons compatible with composition and identity maps",
+   "results": "Hits read: SheafOfModules.pullback_comp_id, SheafOfModules.pullbackComp, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullback_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: underived sheaf composition/associativity or generic monoidal infrastructure, not the canonical unbounded etale module tensor-composition coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-kun-bc-kunneth-compat",
+  "date": "2026-10-17",
+  "group": "Q153"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "lem-kun-bc-kunneth-compat",
+   "place": "Proof: passage through the Kunneth maps after the cartesian identification h^{-1}q^{-1} ≅ p^{-1}j^{-1}; coherence of the tensor and composition comparisons used in that passage.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
