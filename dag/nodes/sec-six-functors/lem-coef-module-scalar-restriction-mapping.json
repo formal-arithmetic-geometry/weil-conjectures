@@ -13,7 +13,11 @@
   "def-coef-monoidal-infinity-category",
   "def-coef-left-module-operadic-encoding",
   "lem-coef-colored-operation-section-reconstruction",
-  "lem-coef-module-scalar-restriction-coherence"
+  "lem-coef-module-scalar-restriction-coherence",
+  "lem-coef-infinity-cartesian-mapping-criterion",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "def-coef-infinity-relative-cone",
+  "lem-cbc-simplicial-composition-spine"
  ],
  "proof": [
   {
@@ -265,5 +269,33 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-1475c095a (reviewer sub-agent of L); spot-checked: Read all eight steps of the item in full, plus the statement of every cited node: scalar-restriction-coherence, colored-operation-section-reconstruction, def-coef-left-module-operadic-encoding, def-cbc-enhanced-diagrams-cones, cbc-enhanced-functor-cone-calculus, sset-anodyne-pushout-product (Mathlib leaf), cbc-kan-fibration-fiber-criterion, infinity-core-kan-fibration and infinity-mapping-composition. Also read the parent lem-coef-module-operad-encoding step 7 and unit sk-prop-sf-biduality-general. Compared with the live side copy, the statement, stmt_deps, blueprint and created fields are unchanged; only the proof, proof_origin, searches, status, proof_deps and split_report changed. The statement says e_h is theta-cartesian over Map_Alg(D,B), keeping g as data. This matches HA Cor. 4.2.3.2 (not archived; WANTED filed, proof_origin agent) and adds no presentability hypothesis, so it is not weakened. Tested on h = id, a non-faithful h, r = 0 (unit compatibility only), empty spaces and pure-algebra trees. The steps use the cited statements, not their proofs. Reconstruction applies because LM^tensor is the category of operators of the ordered two-colour operad and the tensoring is cocartesian. The endpoint paths sigma_r follow from the coherence formula b^h_r = b^{L_C}(h^{tensor r} tensor 1_x) and functoriality of the action. Trees, forests and contractions are clauses of the coherence and reconstruction nodes. Step 4 is a correct relative homotopy extension: a pushout-product of a mono with an anodyne map, then boundary lifting gives a trivial Kan fibration and contractible fibres. Inverses come from Kan edges being equivalences. Step 7 identifies the forward map with postcomposition, and step 8 handles parameters and naturality through the componentwise criterion. No cycle: the dependency closure of 729 nodes does not reach the item, and the parent's cartesian conclusion is not used. proof_deps equals the union of the step uses. The six recorded searches (LeanSearch x3, LeanFinder, Loogle, grep) were real and found no match; the earlier rate-limited query is recorded as unavailable. No duplicate in the DAG and no new nodes. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-kan-fibration-fiber-criterion, both generic black-box tools from sk-prop-sf-cbc, which the unit does not reach. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModuleScalarRestrictionMapping",
+  "declaration": "SSet.Enhanced.module_scalar_restriction_mapping",
+  "declarations": [
+   "SSet.Enhanced.scalarRestrictionShortEdge",
+   "SSet.Enhanced.IsScalarRestrictionRoofMap",
+   "SSet.Enhanced.IsNaturalScalarRestrictionRoofMap",
+   "SSet.Enhanced.ScalarRestrictionMappingSquare",
+   "SSet.Enhanced.ScalarRestrictionTreeData",
+   "SSet.Enhanced.IsScalarRestrictionReconstruction",
+   "SSet.Enhanced.module_scalar_restriction_mapping"
+  ],
+  "statement": "theorem module_scalar_restriction_mapping {O V M : SSet.{u}} [Quasicategory O] [Quasicategory V] [Quasicategory M] {q : O ⟶ lmBase.{u}} {p : V ⟶ monoidalSimplexBase.{u}} (_T : CoherentLeftTensoring (M := M) q p) (B C D : (lmAlgebras q) _⦋0⦌) (h : (arrowMappingSpace (lmAlgebras q) B C) _⦋0⦌) (L_C N L_h : (lmModuleObjects q) _⦋0⦌) (h_LC : (lmModuleRestriction q).app _ L_C = (lmSectionsInclusion q lmAlgebraInclusion).app _ C) (h_N : (lmModuleRestriction q).app _ N = (lmSectionsInclusion q lmAlgebraInclusion).app _ D) (h_Lh : (lmModuleRestriction q).app _ L_h = (lmSectionsInclusion q lmAlgebraInclusion).app _ B) (e_h : (arrowMappingSpace (lmModuleObjects q) L_h L_C) _⦋0⦌) (scalar_data : ScalarRestrictionTreeData q B C h L_C) (scalar_reconstruction : IsScalarRestrictionReconstruction scalar_data L_h e_h) : ∃ F : lmModuleObjects q ⟶ lmAlgebras q, F ≫ lmSectionsInclusion q lmAlgebraInclusion = lmModuleRestriction q ∧ ∀ (K : SSet.{u}) (Z : ((ihom K).obj (lmModuleObjects q)) _⦋0⦌), ScalarRestrictionMappingSquare ((ihom K).map F) Z ((constantDiagrams K (lmModuleObjects q)).app _ L_h) ((constantDiagrams K (lmModuleObjects q)).app _ L_C) ((arrowSpaceMap (constantDiagrams K (lmModuleObjects q)) L_h L_C).app _ e_h)",
+  "branch": "newtargets-dag",
+  "by": "Q149",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/CategoryTheory/ModuleScalarRestrictionMapping.lean",
+  "note": "H3 repair of returned head 90aecfb60090: scalar_data supplies the full coherent precomposed operation-tree and transformation-prism system. scalar_reconstruction identifies L_h and e_h with every tree and every prism, in all contraction-chain dimensions. The input is no longer specified solely by endpoint restriction equations. The canonical total triangle-roof comparison and its homotopy-fiber identifications are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ca6bea46",
+  "group": "Q149",
+  "result": "pass",
+  "note": "Read the node, the four added landed stmt_deps (no cycle; only lean and stmt_deps differ from the shared node), the module, and the exact dependency declarations (cartesianPostcomposition roof, homotopyPullbackComparison, IsInducedFiberMap, lmSections/lmModuleObjects/lmModuleRestriction, module_scalar_restriction_coherence). H3 return repaired: scalar_data plus scalar_reconstruction pin L_h and e_h on every simplex; in effect e_h restricted to the algebra part is h and its module component is the identity on x, which is exactly the node's (h,1_x) data and can be built from the coherence lemma's output. Conclusion: F is forced to be restriction (the inclusion is a monomorphism); the postcomposition square is a homotopy pullback for every K and Z (HTT 2.4.4.3 / HA Cor. 4.2.3.2, true); the homotopy fibers over g and hg are identified; the naturality clause is provable through the monomorphic roof inclusion. No extra hypotheses or universe restriction; edge cases h=id, non-faithful h, empty spaces, empty K and arity 0 covered. No hollow definitions; docstrings carry source and blueprint; the only proof is sorry; lean.statement is verbatim; report has both required sections. nt_compile.py --json: clean, 11.0 s and 9.4 s, exit 0. Two minor no-action nits only."
  }
 }

@@ -294,5 +294,34 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-6bb10fc4c (reviewer sub-agent of L); spot-checked: Read all six steps, cited statements, route, and Stacks sources. Repaired Steps 2 and 4 to avoid uncited identification of relative Proj with base-change projective space. Existing nodes supply the chart and properness. Statement unchanged; edge cases checked; no dependency cycle. Wrote review.md and corrected whole DAG JSON under fixes/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.VectorProjectiveCompletion",
+  "declaration": "AlgebraicGeometry.VectorProjectiveCompletion.exists_projective_completion",
+  "declarations": [
+   "AlgebraicGeometry.VectorProjectiveCompletion.Presentation",
+   "AlgebraicGeometry.VectorProjectiveCompletion.t",
+   "AlgebraicGeometry.VectorProjectiveCompletion.x",
+   "AlgebraicGeometry.VectorProjectiveCompletion.chartOpen",
+   "AlgebraicGeometry.VectorProjectiveCompletion.affineTop",
+   "AlgebraicGeometry.VectorProjectiveCompletion.projectiveChart",
+   "AlgebraicGeometry.VectorProjectiveCompletion.chartMap",
+   "AlgebraicGeometry.VectorProjectiveCompletion.exists_projective_completion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorProjectiveCompletion.lean",
+  "statement": "theorem exists_projective_completion (S : Scheme.{u}) [IsNoetherian S] (d : ℕ) (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d] : ∃ (P : Presentation S F) (ht : ∀ V : S.affineOpens, t P V ∈ P.algebra.grading V 1) (a : ∀ V : S.affineOpens, SymmetricAlgebraSheaf.sections F (op V.1) ≃+* HomogeneousLocalization.Away (P.algebra.grading V) (t P V)), IsNoetherian P.algebra.relProj ∧ IsProper P.algebra.relProjHom ∧ (∀ (V : S.affineOpens) (m : F.val.obj (op V.1)), (a V (SymmetricAlgebra.ι _ _ m)).val = algebraMap (P.algebra.obj V) (Localization.Away (t P V)) (x P V m) * IsLocalization.Away.invSelf (t P V)) ∧ (∀ (V : S.affineOpens) (r : Γ(S, V.1)), (a V (algebraMap Γ(S, V.1) (SymmetricAlgebraSheaf.sections F (op V.1)) r)).val = algebraMap (P.algebra.obj V) (Localization.Away (t P V)) (algebraMap Γ(S, V.1) (P.algebra.obj V) r)) ∧ (∀ (V : S.affineOpens) (e : VectorBundleZeroSection.Trivialization S d F V.1), ∃ q : MvPolynomial (Fin (d + 1)) Γ(S, V.1) ≃ₐ[Γ(S, V.1)] P.algebra.obj V, q (MvPolynomial.X 0) = t P V ∧ (∀ i : Fin d, q (MvPolynomial.X i.succ) = x P V (VectorBundleZeroSection.frameSection S d F V.1 e i)) ∧ (∀ (n : ℕ) (f : MvPolynomial (Fin (d + 1)) Γ(S, V.1)), q f ∈ P.algebra.grading V n ↔ f ∈ MvPolynomial.homogeneousSubmodule (Fin (d + 1)) Γ(S, V.1) n) ∧ ∃ (g : (RelativeProjectiveSpace.algebra V.1.toScheme d).sectionGrade (affineTop V) →+*ᵍ P.algebra.grading V) (hg : Function.Bijective g) (b : Proj (P.algebra.grading V) ≅ RelativeProjectiveSpace.scheme V.1.toScheme d), (∀ r : Γ(V.1.toScheme, ⊤), g ((RelativeProjectiveSpace.algebra V.1.toScheme d).algebra.obj.hom.hom.app (op ⊤) r) = algebraMap Γ(S, V.1) (P.algebra.obj V) (V.1.topIso.hom r)) ∧ (∀ i : Fin (d + 1), g (RelativeProjectiveSpace.coordinate V.1.toScheme d (affineTop V) i) = q (MvPolynomial.X i)) ∧ b.hom = Proj.map g (GradedRingHom.irrelevant_le_map_of_surjective hg.surjective) ≫ projectiveChart V d ∧ b.hom ≫ RelativeProjectiveSpace.π V.1.toScheme d = P.algebra.toOpen V ∧ b.hom ⁻¹ᵁ RelativeProjectiveSpace.standardOpen V.1.toScheme d 0 = Proj.basicOpen (P.algebra.grading V) (t P V)) ∧ (∀ (U V : S.affineOpens) (h : U.1 ≤ V.1), Spec.map (CommRingCat.ofHom (SymmetricAlgebraSheaf.restriction F (homOfLE h).op)) ≫ chartMap P ht a V = chartMap P ht a U) ∧ (∀ (V : S.affineOpens) (e e' : VectorBundleZeroSection.Trivialization S d F V.1) (G : Matrix (Fin d) (Fin d) Γ(S, V.1)), (∀ j : Fin d, VectorBundleZeroSection.frameSection S d F V.1 e' j = ∑ i : Fin d, G i j • VectorBundleZeroSection.frameSection S d F V.1 e i) → ∀ j : Fin d, a V (SymmetricAlgebra.ι _ _ (VectorBundleZeroSection.frameSection S d F V.1 e' j)) = ∑ i : Fin d, a V (algebraMap Γ(S, V.1) (SymmetricAlgebraSheaf.sections F (op V.1)) (G i j)) * a V (SymmetricAlgebra.ι _ _ (VectorBundleZeroSection.frameSection S d F V.1 e i))) ∧ IsSeparated (VectorBundleZeroSection.π S d F) ∧ LocallyOfFiniteType (VectorBundleZeroSection.π S d F) ∧ QuasiCompact (VectorBundleZeroSection.π S d F) ∧ IsNoetherian (VectorBundleZeroSection.scheme S d F) ∧ ∃ c : Compactification (VectorBundleZeroSection.π S d F), ∃ hZ : c.Z = P.algebra.relProj, c.g = eqToHom hZ ≫ P.algebra.relProjHom ∧ (c.i ≫ eqToHom hZ).opensRange = chartOpen P ∧ (∀ V : S.affineOpens, VectorBundleZeroSection.affineChart S d F V ≫ chartMap P ht a V = ((VectorBundleZeroSection.π S d F) ⁻¹ᵁ V.1).ι ≫ c.i ≫ eqToHom hZ) ∧ (∀ j : VectorBundleZeroSection.scheme S d F ⟶ P.algebra.relProj, (∀ V : S.affineOpens, VectorBundleZeroSection.affineChart S d F V ≫ chartMap P ht a V = ((VectorBundleZeroSection.π S d F) ⁻¹ᵁ V.1).ι ≫ j) → j = c.i ≫ eqToHom hZ) ∧ (d = 0 → ∃ (eE : VectorBundleZeroSection.scheme S d F ≅ S) (eP : P.algebra.relProj ≅ S), eE.hom = VectorBundleZeroSection.π S d F ∧ eP.hom = P.algebra.relProjHom ∧ c.i ≫ eqToHom hZ = eE.hom ≫ eP.inv)",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical affine-basis Sym(O_S ⊕ F) presentation, relative Proj, normalized local projective-space comparisons, dehomogenization chart and compatibility, compactification and structural rank-zero identity normalization. The theorem supplies all existence; no object is selected from an uncharacterized existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-05669933d",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Read node, 9 stmt deps, Stacks constructions.tex 01OA/01OB/01NG, module and all exact upstream/side declarations (GradedAlgebraData, relProj, VectorBundleZeroSection incl. affineChart_spec IsIso, RelativeProjectiveSpace, Compactification). Every node clause is rendered: Noetherian S, constant rank d≥0, Sym(O⊕F) via a Presentation pinned up to unique iso (no duplicate notion found), relProj Noetherian and proper, t of degree 1, j = c.i≫eqToHom hZ with image the union of D_+(t), rj=π, uniqueness of j, local x_i↦x_i/t and P^d_V comparison via g/b, restriction and frame compatibility, π separated + finite type, E Noetherian, Compactification, explicit d=0 identity. Edge cases d=0, empty base, zero ring and universes are fine. Only the node's lean field changed; lean.statement verbatim; 8 declarations with source/blueprint docstrings; only sorry is the theorem proof; Worker report and Second reading present (second reading by the author). nt_compile --json on the snapshot: exit 0, no errors, ~18-20 s; a deliberate-error control exited 1. Minor non-blocking notes: frame-change clause on a V is formal; P.algebra is characterized rather than tied by name to SymmetricAlgebraSheaf; RelativeProjData-based P^d_V is bridged by an explicit iso."
  }
 }

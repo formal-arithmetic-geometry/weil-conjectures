@@ -74,19 +74,31 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-integral-models",
  "lean": {
-  "module": "Sheaf.CategoryTheory.SiteDerivedConstantModuleFunctor",
-  "declaration": "CategoryTheory.siteDerivedConstantModuleFunctor",
+  "module": "Sheaf.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor",
+  "declaration": "CategoryTheory.commutativeSiteDerivedConstantModuleFunctor",
   "declarations": [
-   "CategoryTheory.siteModuleHasDerivedCategory",
-   "CategoryTheory.siteConstantModuleFunctorGeneral_exact",
-   "CategoryTheory.siteDerivedConstantModuleFunctor"
+   "CategoryTheory.realizationRing",
+   "CategoryTheory.realizationModules",
+   "CategoryTheory.realizationRingUnit",
+   "CategoryTheory.realizationRingUnit_locallyBijective",
+   "CategoryTheory.commutativeSiteConstantModuleFunctor",
+   "CategoryTheory.commutativeSiteConstantModuleFunctor_exact",
+   "CategoryTheory.commutativeSiteConstantModuleFunctor_additive",
+   "CategoryTheory.commutativeSiteConstantModuleFunctor_limits",
+   "CategoryTheory.commutativeSiteConstantModuleFunctor_colimits",
+   "CategoryTheory.realization_forget_preservesSheafification",
+   "CategoryTheory.realization_forget_preservesSheafification_instance",
+   "CategoryTheory.realizationRingIso",
+   "CategoryTheory.commutativeSiteConstantModuleFunctor_transport",
+   "CategoryTheory.commutativeSiteDerivedConstantModuleFunctor"
   ],
-  "file": "lean/Sheaf/CategoryTheory/SiteDerivedConstantModuleFunctor.lean",
-  "statement": "def siteDerivedConstantModuleFunctor [HasDerivedCategory.{wR} (ModuleCat.{max u v} R)] [HasDerivedCategory.{wS} (SheafOfModules.{max u v} ((constantSheaf J RingCat.{max u v}).obj (RingCat.of R)))] : DerivedCategory (ModuleCat.{max u v} R) ⥤ DerivedCategory (SheafOfModules.{max u v} ((constantSheaf J RingCat.{max u v}).obj (RingCat.of R)))",
+  "file": "lean/Sheaf/CategoryTheory/CommutativeSiteDerivedConstantModuleFunctor.lean",
+  "statement": "def commutativeSiteDerivedConstantModuleFunctor (R : Type (max u v)) [CommRing R] [HasDerivedCategory.{wR} (ModuleCat.{max u v} R)] [HasDerivedCategory.{wS} (realizationModules J R)] : DerivedCategory (ModuleCat.{max u v} R) ⥤ DerivedCategory (realizationModules J R)",
   "branch": "newtargets-dag",
-  "by": "Q80",
-  "date": "2026-10-16",
-  "existing": false
+  "by": "Q73",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Section 1(B): the recorded derived constant functor targets modules over constant RingCat sheafification; the recorded K-flat and tensor interfaces instead target modules over the forgotten constant CommRingCat sheaf. These presentations are canonically isomorphic but not definitionally equal. This module uses the same constant module presheaf and module sheafification with the commutative coefficient presentation, proves its exactness, and localizes it at independent derived-category sizes. realizationRingIso and commutativeSiteConstantModuleFunctor_transport explicitly identify it with the original recorded construction, which remains publicly imported."
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -97,11 +109,11 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-2ed3b1c24",
-  "group": "Q80",
+  "reviewer": "NT-stage2-cc-136da1a77",
+  "group": "Q73",
   "result": "pass",
-  "note": "Item Lean matches node and Stacks 09BE clause by clause (site via IsSiteForCoverings, IsTerminal X, CommRing R at the recorded max u v coefficient convention, IsPerfectRingComplex P, arbitrary L, actual covering Presieve.ofArrows in J X that may be empty, per-i alpha with the equality in the slice derived category via overFunctor.mapDerivedCategory); no extra hypotheses; universes u v wR wS wU bound. New node def-sfb-site-derived-constant-module-functor has real data (mapDerivedCategory of the recorded constant-module functor, exactness a named theorem), correct fields, not a duplicate (pur7710 nodes are scheme-specific and have no Lean). The 1(B) generalization of def-weil-pbc-ringed-derived-restriction is justified (old record needs SmallCategory and one universe), changes only lean and has a note. Item changes only lean and stmt_deps (landed or new nodes). Docstrings, line widths, proof-dependency imports and sorry-only proofs OK. All 3 modules compiled clean with nt_compile.py --json (2.8/2.6/3.2 s, no messages; the tool's error reporting was confirmed with a probe)."
+  "note": "Item Lean matches node clause by clause: κ = adjunction mate is an iso in D(C,S̲), natural; (1) flat-term K-flat P (IsKFlatForTotalTensor, equivalent to Stacks K-flat on ModuleCat) gives c_R(P) IsKFlatIndependentCoefficients plus IsFlatOnSite termwise, representative isos and the square identifying κ with Q(complexComparison), with the termwise formula in moduleComparison_tensor; (2) unit compatibility via derivedRestrictionIso; (3) transitivity theorem for arbitrary T,b. No extra hypotheses; universes independent (coefficient max u v is the recorded convention). §1(B) repair of def-sfb-site-derived-constant-module-functor justified (RingCat vs forgotten CommRingCat constant sheaf), lean-only with note, transport theorem to the old functor. Derived/ordinary extension as left adjoint of restriction is canonical: the recorded adjunction interface has no functor declaration and quantifies over presentations. No hollow defs, all theorems sorry, docstrings with source and blueprint, statements verbatim, stmt_deps gained only landed nodes. nt_compile --json on both files: rc 0, no errors or warnings. Minor non-blocking: Nonempty transport theorem, possibly unused SiteCoveringAxioms import, possibly redundant PreservesSheafification theorem."
  }
 }

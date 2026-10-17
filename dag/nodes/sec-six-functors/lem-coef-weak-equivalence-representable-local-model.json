@@ -25,7 +25,9 @@
  },
  "stmt_deps": [
   "lem-coef-cosimplicial-frame-mapping",
-  "lem-coef-locally-constant-presheaf-slice"
+  "lem-coef-locally-constant-presheaf-slice",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-space-valued-straightening"
  ],
  "proof": [
   {
@@ -311,5 +313,32 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.WeakEquivalenceRepresentableLocalModel",
+  "declaration": "HomotopicalAlgebra.WeakRepresentable.weak_equivalence_representable_local_model",
+  "declarations": [
+   "HomotopicalAlgebra.WeakRepresentable.representables",
+   "HomotopicalAlgebra.WeakRepresentable.localHom",
+   "HomotopicalAlgebra.WeakRepresentable.weakInclusion",
+   "HomotopicalAlgebra.WeakRepresentable.restrictedLocalization",
+   "HomotopicalAlgebra.WeakRepresentable.LocalModel",
+   "HomotopicalAlgebra.WeakRepresentable.weak_equivalence_representable_local_model"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/WeakEquivalenceRepresentableLocalModel.lean",
+  "statement": "theorem weak_equivalence_representable_local_model {M : Type u} [Category.{v} M] [HasLimits M] [HasColimits M] [ModelCategory M] [(cofibrations M).HasFunctorialFactorization (trivialFibrations M)] [(trivialCofibrations M).HasFunctorialFactorization (fibrations M)] (P : ObjectProperty M) (hP : ∀ {X Y : M} (f : X ⟶ Y), weakEquivalences M f → (P X ↔ P Y)) {K : SSet.{max u v t}} (q : FiniteReedy.largeNerve.{u, v, t} M ⟶ K) (hq : FiniteReedy.IsLocalization (weakEquivalences M) q) : ∃ p : SSet.LocallyConstantPresheafSlice.Presentation (AsSmall.{t} (InducedWideCategory M (fun X : P.FullSubcategory ↦ X.obj) (weakEquivalences M))), Nonempty (LocalModel p K (restrictedLocalization.{u, v, t} P q))",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The local models are the restricted enriched Hom presheaves, with actual Yoneda units, fibrancy and local weak equivalence for the recorded locally constant model structure. A single coherent functor, normalized under q on every simplex, induces the canonical value comparisons onto the equivalence components. Independent model-category object and morphism universes are enlarged with AsSmall. The two added statement dependencies are already recorded nodes: coherent-nerve normalization and a transitive compilation repair. No downstream nerve theorem is imported."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7a50edac9",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: model category with both functorial factorizations (frame-mapping convention); q quasicategorical localization; P closed both ways; C = AsSmall.{t} wide weak subcategory with u,v,t independent; discrete Yoneda h_x; P_lc via Presentation, whose localized weak/fibrant/cof fields are pinned; fibrant E_x = restricted enriched Hom with the actual Yoneda unit as a local weak equivalence; values to the IsEquivalenceEdge components of mappingSpace K by weak equivalences; actual arrows go to q(f); a single coherent comparison normalized on every simplex (IsOrdinaryNerveMap, strict under_localization, canonical mapping_space_comparison). Satisfiable via a fibrant hammock localization, since IsLocalization makes K a quasicategory. Edge cases (empty P, isomorphisms only, non-equivalent endpoints, degree 0, universes) ok. Statement verbatim; helpers are real constructions with source and blueprint docstrings; one sorry; all proof-dependency imports present, no downstream nerve import. nt_compile --json on both files: clean (5.2 s and 10.6 s, rc 0). Non-blocking: the SpaceValuedStraightening noncomputable repair already landed upstream (93990d0775, Q19) and differs only by a comment; the extra stmt_dep on it is harmless. Second-reading section follows the accepted 2026-10-17 direct-delivery rule.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
  }
 }

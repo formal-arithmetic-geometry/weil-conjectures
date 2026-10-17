@@ -14,7 +14,8 @@
   "def-weil-pbc-henselian-terminology",
   "def-weil-geometric-point",
   "def-weil-pbc-constant-sheaf",
-  "def-trf-geometric-morphism"
+  "def-trf-geometric-morphism",
+  "def-trf-local-oriented-projection-arrows"
  ],
  "proof": [
   {
@@ -289,5 +290,23 @@
   "group": "Q52",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q52-215b1e4cc (reviewer sub-agent of L); spot-checked: Read all eight steps and cited statements; checked ILO XI §§1–2.3.1 and supporting Stacks passages. Explicit refinements prove both stalk-colimit directions, and the unit calculation identifies the specified map. Constant-module coefficients and exactness are justified. Enough points is correctly used on B. No new nodes, duplicates, cycles, or target weakening found. Accepted all seven declared tool uses; detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.LocalOrientedProjectionExact",
+  "declaration": "CategoryTheory.GabberLocalProjection.local_oriented_projection_exact",
+  "file": "lean/Sheaf/CategoryTheory/Sites/LocalOrientedProjectionExact.lean",
+  "statement": "theorem local_oriented_projection_exact (R T : Type u) [CommRing R] [CommRing T] [IsStrictlyHenselianLocalRing R] [IsStrictlyHenselianLocalRing T] (A S B : Scheme.{u}) (eA : A ≅ Spec (.of R)) (eS : S ≅ Spec (.of T)) (a : A ⟶ S) (b : B ⟶ S) (ha : (eA.inv ≫ a ≫ eS.hom) (IsLocalRing.closedPoint R) = IsLocalRing.closedPoint T) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ A) (hx : (x ≫ eA.hom) default = IsLocalRing.closedPoint R) {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C) (p₁ : GeometricMorphism (Sheaf J (Type (u + 1))) (Sheaf A.smallEtaleTopology (Type (u + 1)))) (p₂ : GeometricMorphism (Sheaf J (Type (u + 1))) (Sheaf B.smallEtaleTopology (Type (u + 1)))) (τ : (p₂.comp (etale b)).direct ⟶ (p₁.comp (etale a)).direct) (hP : OrientedProduct.IsUniversal.{u + 1, u + 2, u + 1} (etale a) (etale b) p₁ p₂ τ) : ∃ d : sections S ≅ ((point x).comp (etale a)).inverse, d.hom = imageGerm a x ∧ (∃ (σ : GeometricMorphism (Sheaf B.smallEtaleTopology (Type (u + 1))) (Sheaf J (Type (u + 1)))) (α : (σ.comp p₁).direct ≅ ((epsilon B).comp (point x)).direct) (β : (σ.comp p₂).direct ≅ (identity _).direct), OrientedProduct.paste (etale a) (etale b) p₁ p₂ τ σ ((epsilon B).comp (point x)) (identity _) α β = (Functor.leftUnitor (etale b).direct).hom ≫ closedOrientation a b x d) ∧ ∀ (σ : GeometricMorphism (Sheaf B.smallEtaleTopology (Type (u + 1))) (Sheaf J (Type (u + 1)))) (α : (σ.comp p₁).direct ≅ ((epsilon B).comp (point x)).direct) (β : (σ.comp p₂).direct ≅ (identity _).direct), OrientedProduct.paste (etale a) (etale b) p₁ p₂ τ σ ((epsilon B).comp (point x)) (identity _) α β = (Functor.leftUnitor (etale b).direct).hom ≫ closedOrientation a b x d → ∀ (Λ : Type (u + 1)) [CommRing Λ], ∃ (pL : ModuleLift J B.smallEtaleTopology p₂ Λ) (sL : ModuleLift B.smallEtaleTopology J σ Λ) (e : sL.direct ⋙ pL.direct ≅ 𝟭 _), (∀ K : ringedSiteModules.{u + 1} ((constantSheaf B.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of Λ)), (underlying B.smallEtaleTopology Λ).map (e.hom.app K) = pL.underlyingDirect.hom.app (sL.direct.obj K) ≫ p₂.direct.map (sL.underlyingDirect.hom.app K) ≫ β.hom.app ((underlying B.smallEtaleTopology Λ).obj K)) ∧ (∀ H : ringedSiteModules.{u + 1} ((constantSheaf J RingCat.{u + 1}).obj (RingCat.of Λ)), IsIso ((unitComparison J B.smallEtaleTopology p₂ σ Λ pL sL e).app H)) ∧ PreservesFiniteLimits pL.direct ∧ PreservesFiniteColimits pL.direct",
+  "branch": "newtargets-dag",
+  "by": "Q137",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-241ad8154",
+  "group": "Q137",
+  "result": "pass",
+  "note": "Checked every hypothesis and conclusion clause against the node: strictly henselian A,S via isomorphisms with Spec R/T and IsStrictlyHenselianLocalRing; local a via ha; arbitrary B,b; geometric closed point x with hx; P characterized by the recorded IsUniversal with tau in the node's direction; canonical d normalized by imageGerm; closedCounit/closedOrientation built from the constant-sheaf counit and canonical constantPullback, mate direction checked; sigma existence plus a forall over sections with the pasted orientation; unitComparison is p2_* of the sigma unit composed with e, e normalized by beta; IsIso for all H; exactness as PreservesFiniteLimits and PreservesFiniteColimits. ModuleLift fixes the canonical constant-coefficient module lift up to iso (not hollow, not vacuous). Recorded declarations reused, no duplicates; node diff is only the lean record plus the new stmt_dep; lean.statement verbatim. Edge cases (empty B, Lambda=0, a=id, non-Noetherian) and universes OK. Gates OK. nt_compile.py --json on both files: rc 0, Arrows 15.8 s, Exact 5.9 s, no errors or warnings. No findings."
  }
 }

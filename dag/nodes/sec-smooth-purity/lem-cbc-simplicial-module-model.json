@@ -212,5 +212,29 @@
   "group": "Q10",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-b9b19dd1f (reviewer sub-agent of L); spot-checked: I read the whole delivery and every cited statement, and made no fixes. The item statement is unchanged. The proof's old long step 3 is now steps 3-5 (7 steps in all, longest 802 characters), and proof_deps equals the union of the step uses. The parent's step 4 in lem-cbc-dold-kan-hypercover-quillen still uses only the positive-degree fibration criterion and the final N Λ[f] clause. Stacks sources checked: Tag 08NU (simplicial.tex lines 5674-5685) says the horn contains every nondegenerate simplex except σ and σ_k, which matches the horn node. Tag 017V uses the opposite kernel convention, so it is correctly listed as background only. Tag 0FKI (degenerate subcomplex) justifies identifying N Λ[S] with the free module on nondegenerate simplices, i.e. the q_n of lem-cbc-normalized-simplex-chain-diagonal. Horn node: ∂t = (-1)^k u + (element of K) with a unit coefficient, so B = K ⊕ span(t, ∂t) ≅ K ⊕ D^n. I tested n=1 with k=0 and k=1, n=2 with k=1 (the raw face is not a complement; ∂t is), characteristic 2, and Λ=0. Disk node: the lift sends e_n to a preimage x and e_{n-1} to ∂x. The converse square v(e_n)=y, v(e_{n-1})=∂y is a chain map for every y, not only cycles. I checked n=1 and K=0. Item steps 2-7 match their cited statements: the one-sorted transfer; RLP through the adjunction and the Dold-Kan equivalence; the Moore comparison with translation x↦x+s(a) to cover all basepoints; Quillen as defined in the dg-presheaf node; Ken Brown with every simplicial set cofibrant. A DAG grep found no duplicate (the horn and disk hits are about anodyne maps, marked mapping simplices, Serre disks, or Γ t(E)). Neither new node restates a clause of the item, and there is no cycle. The three retained tool_uses (sorted-simplicial-algebra-model, model-infinity-derived-adjunction, kan-quillen-right-proper) are accepted again. No SGA source is used, and this is not a target node."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialModuleModel",
+  "declaration": "AlgebraicTopology.simplicialModuleModel",
+  "declarations": [
+   "AlgebraicTopology.simplicialModuleForget",
+   "AlgebraicTopology.simplicialModuleFree",
+   "AlgebraicTopology.simplicialModuleAdjunction",
+   "AlgebraicTopology.simplicialModuleModel"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialModuleModel.lean",
+  "statement": "theorem simplicialModuleModel (Λ : Type u) [CommRing Λ] : HasLimits (SimplicialObject (ModuleCat.{u} Λ)) ∧ HasColimits (SimplicialObject (ModuleCat.{u} Λ)) ∧ ∃ (s : ModelCategory SSet.{u}) (m : ModelCategory (SimplicialObject (ModuleCat.{u} Λ))), s.categoryWithFibrations = (inferInstance : CategoryWithFibrations SSet.{u}) ∧ s.categoryWithCofibrations = (inferInstance : CategoryWithCofibrations SSet.{u}) ∧ s.categoryWithWeakEquivalences = SSet.KanQuillen.weakEquivalenceStructure ∧ HasFunctorialFactorization (m.categoryWithCofibrations.cofibrations ⊓ m.categoryWithWeakEquivalences.weakEquivalences) m.categoryWithFibrations.fibrations ∧ HasFunctorialFactorization m.categoryWithCofibrations.cofibrations (m.categoryWithFibrations.fibrations ⊓ m.categoryWithWeakEquivalences.weakEquivalences) ∧ (∀ (A B : SimplicialObject (ModuleCat.{u} Λ)) (f : A ⟶ B), (m.categoryWithWeakEquivalences.weakEquivalences f ↔ SSet.Enhanced.IsWeakHomotopyEquivalence ((simplicialModuleForget Λ).map f)) ∧ (m.categoryWithFibrations.fibrations f ↔ SSet.modelCategoryQuillen.J.rlp ((simplicialModuleForget Λ).map f)) ∧ (m.categoryWithWeakEquivalences.weakEquivalences f ↔ QuasiIso ((Abelian.DoldKan.doldKanNormalizationEquivalence (ModuleCat.{u} Λ)).functor.map f)) ∧ (m.categoryWithFibrations.fibrations f ↔ ∀ n : ℕ, 0 < n → Function.Surjective (((Abelian.DoldKan.doldKanNormalizationEquivalence (ModuleCat.{u} Λ)).functor.map f).f n))) ∧ DgLeftQuillen s m (simplicialModuleFree Λ) ∧ (∀ (X Y : SSet.{u}) (f : X ⟶ Y), SSet.Enhanced.IsWeakHomotopyEquivalence f → QuasiIso ((Abelian.DoldKan.doldKanNormalizationEquivalence (ModuleCat.{u} Λ)).functor.map ((simplicialModuleFree Λ).map f)))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f06af5398",
+  "group": "NB",
+  "result": "pass",
+  "note": "All 11 node clauses match the Lean: commutative ring Λ with no extras; SimplicialObject (ModuleCat.{u} Λ); U is whiskered forget; the Kan model witness has all three structures fixed to the recorded ones; HasLimits, HasColimits and the two functorial factorizations match the dependency's model convention; N is the Dold-Kan functor, i.e. Mathlib's normalized Moore complex with kernels of d_1..d_n and differential d_0; W and Fib are created by U (J has all horns, including outer); W iff QuasiIso; Fib iff surjective in every degree n>0 with no degree-0 condition; DgLeftQuillen for the free functor, with a real whiskered adjunction; final weak-equivalence-to-quasi-iso clause has no fibrancy premise. The single universe u is forced by U and ModuleCat.free and matches the sibling dependencies. Edge cases checked: zero ring, char 2, constant simplicial modules, 1-dimensional outer horns, empty sSet. No duplicate notion. Docstrings carry the source place, blueprint tag and 7 proof steps; the only sorry is the main theorem; the node changes only its lean record and the statement is verbatim. The Second reading section holds the project's standard 2026-10-17 text. nt_compile --json: rc 0, clean, overlay compiled. No findings, no fixes."
  }
 }

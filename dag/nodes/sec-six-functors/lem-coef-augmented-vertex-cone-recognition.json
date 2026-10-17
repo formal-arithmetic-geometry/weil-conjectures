@@ -8,7 +8,8 @@
   "place": "Proposition 6.1.2.11 and its proof, printed pp.541–543: the vertex slice I([n]) and Cech right Kan extension; iterated-pullback limit of the finite star via the gluing of its edges. Read online; archival copy WANTED. No Stacks tag states the coherent assertion."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-augmented-vertex-diagrams"
  ],
  "proof": [
   {
@@ -177,5 +178,26 @@
   "group": "Q08",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-16daeb4ed (reviewer sub-agent of L); spot-checked: PASS, no changes and no fixes files. Read the item in full, the full statements of all 5 cited nodes, the unit sk-prop-sf-biduality-general (no listed steps), the chapter record and step 13 of the citer lem-coef-space-geometric-descent. Source: HTT Prop 6.1.2.11 with proof (printed pp.541-543) and Prop 4.4.2.2 / Rem 4.4.2.3 (printed p.296), read from a local copy because the project literature has none (archival copy correctly WANTED, proof_origin=agent). The statement is unchanged and correct. (j|[n]) has the empty-set object and n+1 vertex objects, with arrows only from the empty-set object to the vertices, so its opposite is V_n. That matches HTT's I([n]), and the 'iff' is the pointwise definition plus the identity cone in degree -1. Small cases tested: n=0 gives A (V_0 has an initial vertex); n=1 gives AxA over B; the degeneracy s_0 gives the diagonal; empty A; A=pt over B=S^1 gives the loop space, so coherence data matters. Step 1 is genuinely elementary. Step 2 applies the final-index and gluing lemmas to C^op; the degreewise pushout N(V_{n+1})=N(V_n) glued over {b} to one edge is checked, and only that one pullback is needed. Step 3 runs an induction from U_0=A in which each specified square is the gluing pullback, and the cones agree because all of them restrict U. Step 4: the fixed-apex cone equivalence gives coordinate selection up to contractible choice, and the functor [k]x[2] to Delta_+ is checked to commute. Long step 4 (2698 chars) is one explicit coherence argument hiding no lemma; it may stay. There are no new nodes. The rg duplicate search found no equivalent node (nearest: split-augmentation-colimit, segal-finite-cover-descent). The dependency closures of the cited nodes do not reach the item, so there is no cycle. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, a generic cone universal property from another unit. No SGA. Not a target node, so the base-change and coefficient check does not apply."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AugmentedVertexConeRecognition",
+  "declaration": "SSet.Enhanced.CechVertex.augmented_vertex_cone_recognition",
+  "declarations": [
+   "SSet.Enhanced.CechVertex.augmented_vertex_cone_recognition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AugmentedVertexConeRecognition.lean",
+  "statement": "theorem augmented_vertex_cone_recognition (C : SSet.{u}) [Quasicategory C] (U : N Index ⟶ C) : (IsRightKanExtension U ↔ ∀ n : ℕ, VertexLimits U n) ∧ (HasPullbacks C → ∀ n : ℕ, ∃ D : N (WithInitial (Star n)) ⟶ C, Nmap (WithInitial.incl : Star n ⥤ WithInitial (Star n)) ≫ D = Nmap (boundary n) ≫ U ∧ IsLimitCone D ∧ IsIteratedPullback n D) ∧ VertexLimits U 0 ∧ ((∀ n : ℕ, SquareLimits U n) → ∀ n : ℕ, VertexLimits U n) ∧ ((∀ n : ℕ, VertexLimits U n) → (∀ n : ℕ, IsContractible (limitingConeSpace (Nmap (boundary n) ≫ U))) ∧ (∀ (m n : ℕ) (t : ⦋m⦌ ⟶ ⦋n⦌), (𝟙 (N (Star m)) ⊗ₘ stdSimplex.δ (0 : Fin 3)) ≫ triangle t ≫ U = prism (vertexLegs m) ≫ U ∧ (𝟙 (N (Star m)) ⊗ₘ stdSimplex.δ (1 : Fin 3)) ≫ triangle t ≫ U = (Nmap (select t) ⊗ₘ 𝟙 (Δ[1] : SSet.{u})) ≫ prism (vertexLegs n) ≫ U ∧ (𝟙 (N (Star m)) ⊗ₘ stdSimplex.δ (2 : Fin 3)) ≫ triangle t ≫ U = prism ((Functor.const (Star m)).map ((WithInitial.incl.map t).op)) ≫ U) ∧ ∀ (k : ℕ) (q : Fin (k + 1) ⥤ VertexStrings), Nmap (q.prod (𝟭 (Fin 3))).op ≫ coordinateFamily U = Nmap (stringTriangle k q).op ≫ U)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb30c91c0",
+  "group": "N7",
+  "result": "pass",
+  "note": "Read node, new def node, both modules, report, dependency EnhancedDiagramsCones (coneCategory endpoint convention matches prism), HTT 6.1.2.11 place. Clause-by-clause: RKE via StructuredArrow k lowInclusion = (j|[n])^op with correct polarity, degree -1 included; LimitsAt fixes apex and whole cylinder; HasPullbacks only on V_1; iterated-pullback model recursive with identity base leg; SquareLimits first n+1 / last vertex from n=0; coordinate triangles and marked-string family checked true and matching proof step 4. No hollow defs, sorry only in theorem, docstrings with source/blueprint, lean.statement verbatim, 36 decls present, node diff only lean+stmt_deps. nt_compile --json both files: exit 0, no warnings (Diagrams 13.4s/7.0s, Recognition 5.5s/6.0s). Non-blocking: second reading by same worker (disclosed), '6.1.2.11' garbled to 'the project server' in report.md, N duplicates largeNerve body."
  }
 }

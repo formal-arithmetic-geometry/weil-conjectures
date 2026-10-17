@@ -1,0 +1,122 @@
+{
+ "id": "def-trf-local-oriented-projection-arrows",
+ "kind": "definition",
+ "title": "Canonical closed-point counit and normalized module projection arrows",
+ "status": "split",
+ "statement": "Use the small etale sites [def-weil-pbc-etale-site] and the geometric morphism and mate convention of [def-trf-geometric-morphism]. For a scheme X, write Gamma_X for evaluation at the final etale object, epsilon_X for the geometric morphism to sets with constant-sheaf inverse image [def-weil-pbc-constant-sheaf], and, for a geometric point x [def-weil-geometric-point], use its stalk/skyscraper geometric morphism [def-weil-pbc-geometric-stalks]. For a scheme map a:A→S use the existing sheafified Kan-extension inverse image [def-weil-pbc-etale-sheaves]. Define imageGerm_{a,x}:Gamma_S→(ax)^{-1} by the inverse-image adjunction unit, the canonical direct-image identification of global sections, and the germ at x. Given d:Gamma_S≅(ax)^{-1}, define the inverse-image counit (ax epsilon_B)^{-1}→b^{-1} by d^{-1}, the canonical constant-sheaf pullback isomorphism, and the constant-sheaf counit; closedOrientation is its direct-image mate. For any geometric morphism f of site topoi and commutative ring Lambda, a module lift consists of an adjunction on sheaves of modules over the sheafification of the constant Lambda-ring [def-weil-sheaf-of-modules-category] [def-weil-pbc-sheafification], natural identifications of its underlying set functors with f^{-1} and f_*, agreement of the adjunction hom-equivalences under those identifications, and the following normalization of module operations: for every generalized element, the adjoints of z=r x+y satisfy the same identity for every constant scalar r, acting through the ring-sheafification unit. For module lifts p_L,s_L and e:s_{L,*}p_{L,*}≅Id, define unitComparison:p_{L,*}→s_L^* by applying p_{L,*} to the s_L-adjunction unit and then applying e. These are definitions of the specified arrows and interfaces, with no invertibility or exactness asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sheafification"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé XI §§2.1–2.2, formulas (2.a)–(2.f), printed pp. 177–178; constant-module lift: Stacks Project, Sites, Tag 00YV."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical section closed point counit oriented product geometric morphism constant module lift",
+   "results": "CategoryTheory.constantSheafAdj_counit_app; ModuleCat.Tilde.const; CompHausLike.LocallyConstant.adjunction_unit; CompHausLike.LocallyConstant.counit; CompHausLike.LocallyConstant.counit_app_val; ModuleCat.Tilde.const_apply; CompHausLike.LocallyConstant.adjunction; CompHausLike.LocallyConstant.counitApp",
+   "date": "2026-10-17",
+   "verdict": "Reuse constantSheafAdj and its counit. No result defines the normalized local oriented-product arrows or a constant-module lift of an arbitrary geometric morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a geometric morphism of sheaf topoi to constant coefficient modules preserving the underlying adjunction and scalar operations",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.instIsRightAdjointPushforward; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.unitToPushforwardObjUnit; SheafOfModules.pullback",
+   "date": "2026-10-17",
+   "verdict": "These require a morphism of presented sites. They do not package arbitrary geometric morphisms, in particular the universal section, with the underlying set adjunction and constant scalar normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "closedCounit|closedOrientation|ModuleLift|localOriented|imageGerm (Mathlib, WeilConjectures, lean/Sheaf); canonical section (blueprint_refs.py and DAG)",
+   "results": "msearch Mathlib: 5 closedCounit hits in Monoidal.Closed.FunctorCategory.Groupoid and Pi.Monoidal, unrelated closed monoidal counits. WeilConjectures: no exact match. lean/Sheaf: pointFibreModuleLift and unrelated algebraic module lifts and a ProEtaleLocalizationFilteredSection.closedCounit field. blueprint_refs.py canonical section: lem-pur-divisor-class and lemma-nagata-conrad-graph-closure-quasi-finite, unrelated. DAG: the item describes this construction; lem-pe-constant-left-module-inverse-image states the general existence/exactness theorem but supplies no Lean interface.",
+   "date": "2026-10-17",
+   "verdict": "No prior definition of these canonical arrows or the normalized module lift. Reuse the existing GeometricMorphism, pointSmallEtale, sheafFiber, constantSheaf, ringedSiteModules, and etaleSetPullback rather than redefining those notions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-oriented-projection-exact",
+  "date": "2026-10-17",
+  "group": "Q137"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The canonical closed-point section and adjunction-unit map in the local oriented-product projection comparison.",
+   "via": [
+    "lem-trf-local-oriented-projection-exact",
+    "lem-trf-oriented-nearby-strict-local-description",
+    "lem-trf-good-oriented-nearby-kunneth",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.LocalOrientedProjectionArrows",
+  "declaration": "CategoryTheory.GabberLocalProjection.ModuleLift",
+  "file": "lean/Sheaf/CategoryTheory/Sites/LocalOrientedProjectionArrows.lean",
+  "statement": "structure ModuleLift {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (f : GeometricMorphism (Sheaf J (Type (u + 1))) (Sheaf K (Type (u + 1)))) (Λ : Type (u + 1)) [CommRing Λ]",
+  "branch": "newtargets-dag",
+  "by": "Q137",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.GabberLocalProjection.sections",
+   "CategoryTheory.GabberLocalProjection.etale",
+   "CategoryTheory.GabberLocalProjection.epsilon",
+   "CategoryTheory.GabberLocalProjection.point",
+   "CategoryTheory.GabberLocalProjection.germ",
+   "CategoryTheory.GabberLocalProjection.directSections",
+   "CategoryTheory.GabberLocalProjection.imageGerm",
+   "CategoryTheory.GabberLocalProjection.constantPullback",
+   "CategoryTheory.GabberLocalProjection.closedCounit",
+   "CategoryTheory.GabberLocalProjection.closedOrientation",
+   "CategoryTheory.GabberLocalProjection.identity",
+   "CategoryTheory.GabberLocalProjection.underlying",
+   "CategoryTheory.GabberLocalProjection.scale",
+   "CategoryTheory.GabberLocalProjection.ModuleLift",
+   "CategoryTheory.GabberLocalProjection.unitComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-241ad8154",
+  "group": "Q137",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-241ad8154",
+  "group": "Q137",
+  "result": "pass",
+  "note": "Checked every hypothesis and conclusion clause against the node: strictly henselian A,S via isomorphisms with Spec R/T and IsStrictlyHenselianLocalRing; local a via ha; arbitrary B,b; geometric closed point x with hx; P characterized by the recorded IsUniversal with tau in the node's direction; canonical d normalized by imageGerm; closedCounit/closedOrientation built from the constant-sheaf counit and canonical constantPullback, mate direction checked; sigma existence plus a forall over sections with the pasted orientation; unitComparison is p2_* of the sigma unit composed with e, e normalized by beta; IsIso for all H; exactness as PreservesFiniteLimits and PreservesFiniteColimits. ModuleLift fixes the canonical constant-coefficient module lift up to iso (not hollow, not vacuous). Recorded declarations reused, no duplicates; node diff is only the lean record plus the new stmt_dep; lean.statement verbatim. Edge cases (empty B, Lambda=0, a=id, non-Noetherian) and universes OK. Gates OK. nt_compile.py --json on both files: rc 0, Arrows 15.8 s, Exact 5.9 s, no errors or warnings. No findings."
+ }
+}

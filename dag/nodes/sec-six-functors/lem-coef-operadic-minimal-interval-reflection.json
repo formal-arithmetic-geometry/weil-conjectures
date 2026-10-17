@@ -11,7 +11,8 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-operadic-algebra-presentability",
   "def-coef-operadic-weak-approximation",
-  "def-coef-coherent-adjunction-data"
+  "def-coef-coherent-adjunction-data",
+  "lem-coef-infinity-pointwise-adjoint-criterion"
  ],
  "proof": [
   {
@@ -301,5 +302,35 @@
   "group": "Q129",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-9db864f69 (reviewer sub-agent of L); spot-checked: I read the whole item, all 14 cited statements and the user's step 3. The delivery adds no new nodes, the statement and provenance are unchanged, and a walk over 998 dependencies found no cycle. Step 1: phi=J psi gives t<=a<=b<=t+m and psi=ell psi0, ordinal arithmetic correctly marked elementary. Step 2: the generalized-operad inert-lift axiom (singleton intervals included) and the cocartesian mapping square, taken over the discrete N(Delta^op), give Map^{psi0}(D0,C)~Map^{psi}(D,C). Step 3: g preserves inert edges, and the composition lemma applied to (gamma,g(q),gamma0) makes gamma0 cocartesian over (a+.)^op. Step 4: T_{alpha/}->T is a left fibration (coslice lemma with K=Delta^0, K0 empty) and so is its pullback H->S; taking opposites and the right-fibration morphism-space formula give hofib_{gamma_B}(Map_S(beta,beta_B)->Map_T(alpha,g beta_B)); cone calculus plus the slice-arrow equivalence give the slice mapping fiber. I re-derived both formulas independently. Steps 5-6: the base map is forced to u=ell because the base is discrete and J is injective; two mapping-square equivalences and homotopy-pullback invariance give the natural equivalence induced by eta_A. Step 7: the dual pointwise adjoint criterion supplies the coherent adjunction data; the counit is an equivalence because i is fully faithful. Step 8 cases check out, including the counterexample n=1, k=0, r=0 where ell is not an identity. Statement tested on small cases (n=2,k=1; r=0; active; empty F). No duplicate: rg over dag/nodes finds only the item and its user. The source, Gepner-Haugseng 1312.3178 A.6.1, A.6.3 and E.0.2, is not archived, read online and marked WANTED; the reflection is honestly attributed to the agent; no SGA. Blueprint ancestor prop-coef-integral-exceptional-adjoint exists in main-20261015. Tool uses accepted: three sk-prop-sf-cbc nodes (cone-calculus, relative-coslice-left-fibration, right-fibration-morphism-space); no node of this unit states them. The worker wrote the tool_uses entries itself, which C8 reserves for the maintainer; their content is correct and I left them. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicMinimalIntervalReflection",
+  "declaration": "SSet.Enhanced.Nonsymmetric.WeakApproximation.operadic_minimal_interval_reflection",
+  "declarations": [
+   "SSet.Enhanced.Nonsymmetric.WeakApproximation.minimalIntervalLength",
+   "SSet.Enhanced.Nonsymmetric.WeakApproximation.IsMinimalFactorization",
+   "SSet.Enhanced.Nonsymmetric.WeakApproximation.minimalFactorizationsSubcomplex",
+   "SSet.Enhanced.Nonsymmetric.WeakApproximation.minimalFactorizations",
+   "SSet.Enhanced.Nonsymmetric.WeakApproximation.minimalInclusion",
+   "SSet.Enhanced.Nonsymmetric.WeakApproximation.factorizationDomain",
+   "SSet.Enhanced.Nonsymmetric.WeakApproximation.UnitMappingEquivalence",
+   "SSet.Enhanced.Nonsymmetric.WeakApproximation.UnitIsIntervalRestriction",
+   "SSet.Enhanced.Nonsymmetric.WeakApproximation.operadic_minimal_interval_reflection"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadicMinimalIntervalReflection.lean",
+  "statement": "theorem operadic_minimal_interval_reflection {M O : SSet.{max u v}} (q : M ⟶ monoidalSimplexBase.{max u v}) (p : O ⟶ monoidalSimplexBase.{max u v}) (g : M ⟶ O) (_hM : Presentability.IsSmall.{u} M) (_hO : Presentability.IsSmall.{u} O) (_hq : IsGeneralizedOperad q) (_hp : IsOperad p) (_hg : IsLaxMonoidalInfinityFunctor q p g) (_hfib : IsIsofibration g) (c : M _⦋0⦌) (α : (slice O (g.app _ c)) _⦋0⦌) (n k : ℕ) (φ : ⦋k⦌ ⟶ ⦋n⦌) (_hα : SSet.yonedaEquiv.symm (α.extension.app _ (joinPointTopSimplex 0)) ≫ p = monoidalBaseEdge φ.op) : ∃ (R : inertFactorizations p g c α ⟶ minimalFactorizations p g c α φ) (adj : HomotopicalAlgebra.ModelInfinity.CoherentAdjunction R (minimalInclusion p g c α φ)), IsEquivalenceEdge ((ihom (minimalFactorizations p g c α φ)).obj (minimalFactorizations p g c α φ)) adj.counitEdge ∧ ∀ A : (inertFactorizations p g c α) _⦋0⦌, UnitIsIntervalRestriction q p g c α φ A ((evaluation (inertFactorizations p g c α) (inertFactorizations p g c α) A).app _ adj.unitEdge) ∧ UnitMappingEquivalence (minimalInclusion p g c α φ) A (R.app _ A) ((evaluation (inertFactorizations p g c α) (inertFactorizations p g c α) A).app _ adj.unitEdge)",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded full coherent factorization category and adjunction data. Helper declarations describe the minimal full subcategory, project the actual unit restriction, and specify its natural precomposition equivalence by a comma equivalence over the target category with a coherent triangle family. No new primitive notion, postponed helper theorem, dependency repair or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3de76442f",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Every node clause matches the Lean, checked against the recorded declarations: same hypotheses as IsWeakApproximation (IsSmall.{u} on both, generalized operad M, ordinary operad O, inert-preserving g, IsIsofibration), no contractibility or weak-approximation assumption; base-arrow orientations of φ, J, ℓ correct; A0 is a fullSubcomplex restricting objects only, so comparison edges are unrestricted; CoherentAdjunction R i gives unit id→iR and counit Ri→id, and the counit is required to be IsEquivalenceEdge; the evaluated unit is IsMonoidalInertEdge over j↦a−t+j for every interval presentation of γ; the comma equivalence (outgoing=false) lies over A0 and its triangle family pins it to precomposition with the unit. Edge cases r=0, n=0, active and non-injective φ, empty F, universes all fine. One sorry; docstrings carry source and blueprint; lean.statement verbatim; one-definition search clean; the added stmt_dep lem-coef-infinity-pointwise-adjoint-criterion is justified. nt_compile --json on both delivered files: rc 0, no diagnostics. Minor, not blocking: the SpaceValuedStraightening dependency edit (noncomputable section, by Q19→Q45, inaccurate note) is redundant because base 904e24a already has noncomputable abbrev Diagrams and the live file compiles alone; the lead may --revert-nodes lem-coef-space-valued-straightening --drop-files lean/Sheaf/CategoryTheory/SpaceValuedStraightening.lean. The report's second-reading section is the same worker's second pass, stated honestly; this review is the independent reading.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
  }
 }

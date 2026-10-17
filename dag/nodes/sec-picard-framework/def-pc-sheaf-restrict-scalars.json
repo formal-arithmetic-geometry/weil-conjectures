@@ -85,19 +85,19 @@
  "lean": {
   "module": "Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings",
   "declaration": "SheafOfModules.restrictScalars",
-  "statement": "def restrictScalars :\n    SheafOfModules.{v} R' ⥤ SheafOfModules.{v} R",
+  "statement": "noncomputable def restrictScalars : SheafOfModules.{v} R' ⥤ SheafOfModules.{v} R",
   "branch": "mathlib",
-  "by": "Q06",
+  "by": "Q78",
   "date": "2026-10-17",
   "existing": true,
-  "note": "The Mathlib functor has exactly the dependency notion: it sends sheaves of O' modules to sheaves of O modules along a sheaf-ring morphism, preserving the underlying abelian sheaf and restricting the action objectwise; its Additive instance supplies the stated additive-functor clause. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean:36-47."
+  "note": "Section 1(B): the current record points to the constant-coefficient ModuleCat-valued presentation, which requires a constant ring and cannot be applied to an arbitrary ring sheaf as this dependency states. The retained Mathlib match SheafOfModules.restrictScalars is exactly the general ring-sheaf restriction, preserving sections and restricting their scalar action. Rebind to that existing declaration; no source module or mathematical definition changes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-cc790f01f",
-  "group": "Q06",
-  "result": "pass",
-  "note": "Statement, dependencies, canonical constructions, source/docstrings, edge cases, and report sections checked; scompile.py server compilation passed."
+  "reviewer": "NT-stage2-cc-23994bb91",
+  "group": "Q78",
+  "result": "fix",
+  "note": "Read the node, the 6 stmt_deps and their declarations, Stacks sites.tex 00X9 (punctual topos), the module and the report. All clauses match except the final unit clause. singletonDerivedScalarComparison left the sheaf derived adjunction aS unnormalized, so the final square could always be met by transporting aM and said nothing about the sheaf derived unit (H3, weaker conclusion). Fix: the definition takes the sheaf adjunction a and adds the K-flat normalization aS.unit(QhP) ≫ Res_D(eS P) ≫ factorsh = Qh((a.mapHomotopyCategory).unit P); the theorem passes a; docstrings and the record note are updated. Fixed file compiles cleanly with nt_compile (16.1 s); the delivered file also compiles (12.2 s). Universes: u+1 derived categories (repairs the old .{0}); S in universe u is the source convention. Edge cases (zero ring, identity and non-flat maps, unbounded complexes) are covered. No hollow definitions; the only sorry is the main theorem. The dependency rebind of lem-pur-derived-change-of-rings to the general derivedChangeOfRingsIndependentCoefficients is correct, but it leaves Q158's Sheaf/Paper/EtaleDerivedScalarTensor.lean owned by no node. The def-pc-sheaf-restrict-scalars rebind is redundant (the same declaration was already recorded by Q06) and its note is inaccurate; harmless."
  }
 }

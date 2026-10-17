@@ -166,5 +166,28 @@
   "group": "Q56",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q56-d852bdb8c (reviewer sub-agent of L); spot-checked: Read both nodes and cited mathematics in full. Filtration and lifting argument verified, including 19,377 finite combinatorial checks. Corrected Step 2’s mistaken Kan-fibration definition attribution; statements unchanged. No duplicates, cycles, long-step violations, or forbidden batch-5 dependencies found. Wrote review.md and corrected item JSON under fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.WalkingIsomorphismEdgeAnodyne",
+  "declaration": "SSet.walking_isomorphism_edge_anodyne",
+  "declarations": [
+   "SSet.walkingIsomorphismForwardEdge",
+   "SSet.walking_isomorphism_edge_anodyne"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/WalkingIsomorphismEdgeAnodyne.lean",
+  "statement": "theorem walking_isomorphism_edge_anodyne {E B : SSet.{u}} (p : E ⟶ B) (hp : SSet.modelCategoryQuillen.J.rlp p) : HasLiftingProperty walkingIsomorphismForwardEdge p",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper is the canonical Yoneda map represented by Mathlib coherentIso.hom; the theorem renders the node's explicit all-horn lifting property using Mathlib's horn-generated J.rlp."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a1c4a735",
+  "group": "NV",
+  "result": "pass",
+  "note": "Clause-by-clause match. WalkingIso is Codiscrete(ULift Bool) (one arrow per ordered pair) and coherentIso is its nerve = J. The forward edge is yonedaEquiv.symm coherentIso.hom.edge, the nerve of [1]->J sending the arrow to 0->1; a compiled check confirmed it sends the generic 1-simplex to hom.edge. J.rlp is exactly all horns Lambda[n+1,i] (m>=1, 0<=k<=m) and HasLiftingProperty is the diagonal filler, equivalent to Mathlib anodyneExtensions but stated explicitly as the node says. One universe u, polymorphic, no extra hypotheses, empty E/B not excluded. Node changed only in lean; lean.statement verbatim. Helper has real data. Docstrings carry source place, blueprint and proof steps. Proof is sorry only. No line over 100 characters. Stmt-dep import present; no duplicate of coherentIso. Report has Worker report and Second reading by NV sections. nt_compile --json on the snapshot file: clean in 7.5 s, no errors or warnings. No findings."
  }
 }

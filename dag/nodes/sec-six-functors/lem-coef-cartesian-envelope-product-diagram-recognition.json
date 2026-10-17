@@ -28,7 +28,8 @@
  "stmt_deps": [
   "def-coef-infinity-fibrations",
   "lem-coef-symmetric-monoidal-segal-classification",
-  "lem-cbc-enhanced-relative-exponential"
+  "lem-cbc-enhanced-relative-exponential",
+  "lem-coef-cartesian-operadic-envelope"
  ],
  "proof": [
   {
@@ -347,5 +348,39 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-d96c4c5bb (reviewer sub-agent of L); spot-checked: I read the whole item (statement and steps 1-7), the new uniqueness node, every cited statement, the parent lem-coef-lax-cartesian-classification, the unit and chapter records, and the 01:10 UTC return. HA is not archived, so I checked against HA Notation 2.4.1.2, Construction 2.4.1.4, Prop 2.4.1.5, Def 2.4.0.1 and Cor 2.4.1.8-9 as I know them. The delivery follows the return's option 2: the item now states only the properties of the model P (P is a cocartesian fibration, P_n ~ D^n, block mapping spaces, composition, the cocartesian criterion, Segal maps, the evaluation functor pi). I found no gap in the steps. Small cases checked: n=0, n=1, the binary fold, maps to and from <0>, inert maps and permutations, and D = Set. The new node is true (HA Cor 2.4.1.9 restricted to equivalences, keeping the homotopy fiber over u). It is statement-only, not a duplicate, and not a clause of the item or the parent. Both proposed tool uses (relative exponential, functor-cone calculus) are accepted. Two fixes: (1) step 1 used that v is a cartesian fibration without checking it; I added the check (v is faithful; the factorization through (<n>, alpha^{-1}T) fills the 2-horn; higher horns follow from faithfulness), cited def-coef-infinity-fibrations and recomputed proof_deps. (2) Nothing cites the new uniqueness node yet, so it needs import_flags=['unreachable']; I added it. Maintainer actions needed: (a) the reviewed parent lem-coef-lax-cartesian-classification still takes P ~ D^x from this item in step 1 (and uses it in steps 2 and 5-7); after the merge that citation is a C4 fault, so reopen the parent. Non-circular order: classification for P, then comparison through the uniqueness node and the envelope statement, then remove the unreachable flag. (b) The item's maintainer-owned title and source.place still say 'identification with the cartesian envelope' (B5); install split_report.title_correction and source_correction.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianEnvelopeProductDiagramRecognition",
+  "declaration": "SSet.Enhanced.CartesianEnvelope.cartesian_envelope_product_diagram_recognition",
+  "declarations": [
+   "SSet.Enhanced.CartesianEnvelope.fullSubset",
+   "SSet.Enhanced.CartesianEnvelope.fullSubsetSection",
+   "SSet.Enhanced.CartesianEnvelope.productEvaluation",
+   "SSet.Enhanced.CartesianEnvelope.indexEvaluation",
+   "SSet.Enhanced.CartesianEnvelope.inverseImageSubsets",
+   "SSet.Enhanced.CartesianEnvelope.fiberExponentSimplex",
+   "SSet.Enhanced.CartesianEnvelope.IsInverseImageDiagram",
+   "SSet.Enhanced.CartesianEnvelope.HasInverseImageTransport",
+   "SSet.Enhanced.CartesianEnvelope.fullSubsetFactors",
+   "SSet.Enhanced.CartesianEnvelope.IsFullSubsetProduct",
+   "SSet.Enhanced.CartesianEnvelope.HasBlockSubstitution",
+   "SSet.Enhanced.CartesianEnvelope.Recognition",
+   "SSet.Enhanced.CartesianEnvelope.cartesian_envelope_product_diagram_recognition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CartesianEnvelopeProductDiagramRecognition.lean",
+  "statement": "theorem cartesian_envelope_product_diagram_recognition (C : SSet.{u}) [Quasicategory C] (hC : HasFiniteProducts C) : Recognition C",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the landed product-diagram constructions of CartesianOperadicEnvelope; its theorem alone omits the full-subset evaluation clauses. Adds the actual full-subset section and evaluation functor, exact inverse-image normalization on every diagram simplex, and the recognition statement including specified full-subset product cones, arity-one equivalence and evaluation of active cocartesian arrows. The existing envelope node is added as a landed statement dependency; no mathematical statement is corrected."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f91af666c",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Read node, 4 stmt deps, landed CartesianOperadicEnvelope API, RelativeExponentialSimplex/evaluation, IsTransport/IsSymmetricMonoidal, IsFinStarActive/Inert, and the module. Recognition matches every node clause: cartesian v, Q quasicategory and cocartesian, P = full product-diagram subcomplex, p symmetric monoidal, p- vs q-cocartesian iff, tupleComparison equivalences with inert transports, coherent inverse-image transport, IsBlockComparison weak equivalence, block substitution, componentwise cocartesian criterion, real full-subset section and productEvaluation with normalization, full-subset product cone, P_1 equivalence, active-to-1 cocartesian edges sent to equivalences. Hypotheses are only Quasicategory and the landed HasFiniteProducts (n=0 included), single universe u. Substitution and naturality clauses are true by construction, as the node's proof argues. The product-cone clause is rendered via the restriction cone, from which the node's form follows. Edge cases n=0, m=0, empty blocks, nullary active map and empty C checked. No hollow defs, one sorry, docstrings present, statement verbatim. Added landed stmt_dep lem-coef-cartesian-operadic-envelope is allowed by brief §5 and is acyclic (742-node traversal). nt_compile --json exit 0 (5.1 s), matching the worker's compile and dry run. The second-reading section is the standard dispatcher note, as in 201 landed reports."
  }
 }

@@ -294,10 +294,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-37e27c4b2",
-  "group": "Q22",
-  "result": "pass",
-  "note": "Reviewed the packet, source, all dependencies, declarations, edge cases, docstrings, report sections, and immutable Lean module; scompile.py local side-overlay and server confirmation both passed with no findings."
+  "reviewer": "NT-stage2-cc-23994bb91",
+  "group": "Q78",
+  "result": "fix",
+  "note": "Read the node, the 6 stmt_deps and their declarations, Stacks sites.tex 00X9 (punctual topos), the module and the report. All clauses match except the final unit clause. singletonDerivedScalarComparison left the sheaf derived adjunction aS unnormalized, so the final square could always be met by transporting aM and said nothing about the sheaf derived unit (H3, weaker conclusion). Fix: the definition takes the sheaf adjunction a and adds the K-flat normalization aS.unit(QhP) ≫ Res_D(eS P) ≫ factorsh = Qh((a.mapHomotopyCategory).unit P); the theorem passes a; docstrings and the record note are updated. Fixed file compiles cleanly with nt_compile (16.1 s); the delivered file also compiles (12.2 s). Universes: u+1 derived categories (repairs the old .{0}); S in universe u is the source convention. Edge cases (zero ring, identity and non-flat maps, unbounded complexes) are covered. No hollow definitions; the only sorry is the main theorem. The dependency rebind of lem-pur-derived-change-of-rings to the general derivedChangeOfRingsIndependentCoefficients is correct, but it leaves Q158's Sheaf/Paper/EtaleDerivedScalarTensor.lean owned by no node. The def-pc-sheaf-restrict-scalars rebind is redundant (the same declaration was already recorded by Q06) and its note is inaccurate; harmless."
  },
  "lean": {
   "module": "Sheaf.ProperBaseChange.SingletonSiteModuleComparison",
@@ -316,18 +316,26 @@
    "CategoryTheory.singletonSheafExtensionObj",
    "CategoryTheory.singletonSheafExtensionMap",
    "CategoryTheory.singletonSheafRestriction",
+   "CategoryTheory.singletonRestrictionAdditive",
+   "CategoryTheory.singletonExtendScalarsAdditive",
    "CategoryTheory.singletonOrdinaryUnitMap",
    "CategoryTheory.singletonOrdinaryUnitFormula",
+   "CategoryTheory.singletonTensorComparison",
+   "CategoryTheory.singletonExtensionTmul",
+   "CategoryTheory.singletonScalarUnitCompatible",
    "CategoryTheory.singletonDerivedLocalizationCompatible",
-   "CategoryTheory.singletonDerivedChangeOfRingsWitness",
-   "CategoryTheory.singletonKFlatChangeOfRingsComputation",
+   "CategoryTheory.singletonExtensionHomotopyComparison",
+   "CategoryTheory.singletonRestrictionHomotopyComparison",
+   "CategoryTheory.singletonDerivedScalarComparison",
    "CategoryTheory.singleton_site_module_comparison"
   ],
-  "statement": "theorem singleton_site_module_comparison (R : Type u) [CommRing R] : ∃ (e : singletonModuleCategory R ≌ ModuleCat.{u} R), e.functor = singletonEvaluation R ∧ e.inverse = singletonConstantModuleSheaf (R := R) ∧ (∀ (S : ShortComplex (singletonModuleCategory R)), S.ShortExact → (S.map e.functor).ShortExact) ∧ (∀ (M N : singletonModuleCategory R), Nonempty (e.functor.obj ((SheafOfModules.siteSheafTensorRight N).obj M) ≅ MonoidalCategory.tensorObj (e.functor.obj M) (e.functor.obj N))) ∧ (∀ (S : Type u) [CommRing S] (φ : R →+* S), ∃ (E : singletonModuleCategory R ⥤ singletonModuleCategory S) (hobj : ∀ M, E.obj M = singletonSheafExtensionObj φ M) (hmap : ∀ {M N} (f : M ⟶ N), E.map f = eqToHom (hobj M) ≫ singletonSheafExtensionMap φ f ≫ eqToHom (hobj N).symm) (eS : singletonModuleCategory S ≌ ModuleCat.{u} S), eS.functor = singletonEvaluation S ∧ eS.inverse = singletonConstantModuleSheaf (R := S) ∧ Nonempty (E ⋙ eS.functor ≅ e.functor ⋙ ModuleCat.extendScalars φ) ∧ Nonempty (singletonSheafRestriction φ ⋙ e.functor ≅ eS.functor ⋙ ModuleCat.restrictScalars φ) ∧ singletonOrdinaryUnitFormula φ) ∧ (∃ (E : CochainComplex (singletonModuleCategory R) ℤ ≌ CochainComplex (ModuleCat.{u} R) ℤ), E.functor = (singletonEvaluation R).mapHomologicalComplex (ComplexShape.up ℤ)) ∧ (∃ (E : HomotopyCategory (singletonModuleCategory R) (ComplexShape.up ℤ) ≌ HomotopyCategory (ModuleCat.{u} R) (ComplexShape.up ℤ)), E.functor = (singletonEvaluation R).mapHomotopyCategory (ComplexShape.up ℤ)) ∧ (∀ {K L : CochainComplex (singletonModuleCategory R) ℤ} (f : K ⟶ L), QuasiIso f → QuasiIso (((singletonEvaluation R).mapHomologicalComplex (ComplexShape.up ℤ)).map f)) ∧ (∃ (hR : HasDerivedCategory (singletonModuleCategory R)) (hM : HasDerivedCategory (ModuleCat.{u} R)), singletonDerivedLocalizationCompatible R hR hM) ∧ (∀ (K : CochainComplex (singletonModuleCategory R) ℤ), CochainComplex.IsKFlatIndependentCoefficients (J := singletonTopology) (R := singletonRingSheaf R) K ↔ (HomologicalComplex.quasiIso (ModuleCat.{u} R) (ComplexShape.up ℤ)).kFlat (((singletonEvaluation R).mapHomologicalComplex (ComplexShape.up ℤ)).obj K)) ∧ (∀ (S : Type u) [CommRing S] (φ : R →+* S) (K : CochainComplex (singletonModuleCategory R) ℤ), singletonKFlatChangeOfRingsComputation R φ K)",
+  "statement": "theorem singleton_site_module_comparison (R : Type u) [CommRing R] : ∃ e : singletonModuleCategory R ≌ ModuleCat.{u} R, e.functor = singletonEvaluation R ∧ e.inverse = singletonConstantModuleSheaf (R := R) ∧ (∀ T : ShortComplex (singletonModuleCategory R), T.ShortExact → (T.map e.functor).ShortExact) ∧ singletonTensorComparison R ∧ (∃ E : CochainComplex (singletonModuleCategory R) ℤ ≌ CochainComplex (ModuleCat.{u} R) ℤ, E.functor = (singletonEvaluation R).mapHomologicalComplex (ComplexShape.up ℤ)) ∧ (∃ E : HomotopyCategory (singletonModuleCategory R) (ComplexShape.up ℤ) ≌ HomotopyCategory (ModuleCat.{u} R) (ComplexShape.up ℤ), E.functor = (singletonEvaluation R).mapHomotopyCategory (ComplexShape.up ℤ)) ∧ (∀ {K L : CochainComplex (singletonModuleCategory R) ℤ} (f : K ⟶ L), QuasiIso f ↔ QuasiIso (((singletonEvaluation R).mapHomologicalComplex (ComplexShape.up ℤ)).map f)) ∧ (∃ (hR : HasDerivedCategory.{u + 1} (singletonModuleCategory R)) (hM : HasDerivedCategory.{u + 1} (ModuleCat.{u} R)), singletonDerivedLocalizationCompatible R hR hM) ∧ (∀ K : CochainComplex (singletonModuleCategory R) ℤ, CochainComplex.IsKFlatIndependentCoefficients (J := singletonTopology) (R := singletonRingSheaf R) K ↔ (HomologicalComplex.quasiIso (ModuleCat.{u} R) (ComplexShape.up ℤ)).kFlat (((singletonEvaluation R).mapHomologicalComplex (ComplexShape.up ℤ)).obj K)) ∧ (∀ (S : Type u) [CommRing S] (φ : R →+* S), ∃ (E : singletonModuleCategory R ⥤ singletonModuleCategory S) (h : ∀ M, E.obj M = singletonSheafExtensionObj φ M) (_ : ∀ {M N} (f : M ⟶ N), E.map f = eqToHom (h M) ≫ singletonSheafExtensionMap φ f ≫ eqToHom (h N).symm) (_ : E.Additive) (s : E ⋙ singletonEvaluation S ≅ singletonEvaluation R ⋙ ModuleCat.extendScalars φ) (r : singletonSheafRestriction φ ⋙ singletonEvaluation R ≅ singletonEvaluation S ⋙ ModuleCat.restrictScalars φ) (a : E ⊣ singletonSheafRestriction φ), singletonScalarUnitCompatible φ E h s r a ∧ singletonOrdinaryUnitFormula φ ∧ ∃ (_ : HasDerivedCategory.{u + 1} (singletonModuleCategory R)) (_ : HasDerivedCategory.{u + 1} (singletonModuleCategory S)) (_ : HasDerivedCategory.{u + 1} (ModuleCat.{u} R)) (_ : HasDerivedCategory.{u + 1} (ModuleCat.{u} S)), singletonDerivedScalarComparison φ E s r a)",
   "branch": "newtargets-dag",
-  "by": "Q22",
+  "by": "Q78",
   "date": "2026-10-17",
   "existing": false,
-  "file": "lean/Sheaf/ProperBaseChange/SingletonSiteModuleComparison.lean"
+  "file": "lean/Sheaf/ProperBaseChange/SingletonSiteModuleComparison.lean",
+  "note": "Retains the landed punctual-site data and repairs the Lean interface to express the whole unchanged DAG statement: canonical natural tensor comparison, ordinary unit compatibility, universal derived scalar comparison, and the unit square at every derived object. Replaces the erroneous HasDerivedCategory.{0} requirement by the standard u+1 localization universe. No natural-language statement or dependency edge is changed. Reviewer fix: singletonDerivedScalarComparison now takes the sheaf adjunction a and normalizes the sheaf derived unit aS on every K-flat representative by the localized degreewise unit of a (as aM is normalized by ModuleCat.extendRestrictScalarsAdj); without it the final unit square was satisfiable by transporting aM and said nothing about the sheaf derived unit.",
+  "fixed_by": "NT-stage2-cc-23994bb91"
  }
 }

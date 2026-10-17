@@ -201,5 +201,31 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q26-f9dc684da (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, sources, and unit/chapter route. All six steps check out, including noncartesian refinements and strict-tower exchange coherence. Repaired one C1 omission: step 2 now cites existing étale module inverse-image exactness to preserve witness lower bounds. Statement and targets unchanged; no new nodes or cycles. Corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RefinementExchangeCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.refinementExchangeCoherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.refinementComparison",
+   "AlgebraicGeometry.ProEtale.StrictTower.refinementComparison_isIso",
+   "AlgebraicGeometry.ProEtale.StrictTower.refinementFiniteOrigin_pullback",
+   "AlgebraicGeometry.ProEtale.StrictTower.refinementCommonComparison",
+   "AlgebraicGeometry.ProEtale.StrictTower.refinementExchangeCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/RefinementExchangeCoherence.lean",
+  "statement": "theorem refinementExchangeCoherence {X Y : Scheme.{u}} {f : X ⟶ Y} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (M : Derived B X) (hM : ∀ n : ℕ, Nonempty (ScalarEtaleOrigin B X ((ev B X n).obj M))) : (∀ {c₁ c₂ : Compactification f} (r : c₁.Refinement c₂), IsIso ((refinementComparison B r).app M)) ∧ (∀ c : Compactification f, refinementComparison B (Compactification.Refinement.id c) = 𝟙 _) ∧ (∀ {c₁ c₂ c₃ : Compactification f} (r : c₁.Refinement c₂) (s : c₂.Refinement c₃), refinementComparison B (r.comp s) = refinementComparison B s ≫ refinementComparison B r) ∧ (∀ {X' Y' : Scheme.{u}} {f' : X' ⟶ Y'} (g' : X' ⟶ X) (g : Y' ⟶ Y) (sf : IsPullback g' f' f g) (c₁ c₂ : Compactification f) (c₁' c₂' : Compactification f') (s₁ : c₁'.Z ⟶ c₁.Z) (s₂ : c₂'.Z ⟶ c₂.Z) (si₁ : IsPullback g' c₁'.i c₁.i s₁) (sp₁ : IsPullback s₁ c₁'.g c₁.g g) (si₂ : IsPullback g' c₂'.i c₂.i s₂) (sp₂ : IsPullback s₂ c₂'.g c₂.g g) (r : c₁.Refinement c₂) (r' : c₁'.Refinement c₂') (hr : r'.hom ≫ s₂ = s₁ ≫ r.hom), compositionE B c₂ c₂' g' g s₂ si₂.w sp₂.w si₂ ≫ Functor.whiskerLeft (G B g') (refinementComparison B r' (MorphismProperty.IsStableUnderBaseChange.of_isPullback sf inferInstance)) = Functor.whiskerRight (refinementComparison B r) (G B g) ≫ compositionE B c₁ c₁' g' g s₁ si₁.w sp₁.w si₁) ∧ (∀ {c₁ c₂ d e : Compactification f} (u₁ : d.Refinement c₁) (u₂ : d.Refinement c₂) (v₁ : e.Refinement c₁) (v₂ : e.Refinement c₂), refinementCommonComparison B u₁ u₂ M hM = refinementCommonComparison B v₁ v₂ M hM) ∧ (∀ {c₁ c₂ c₃ d₁₂ d₂₃ d₁₃ : Compactification f} (u₁ : d₁₂.Refinement c₁) (u₂ : d₁₂.Refinement c₂) (v₂ : d₂₃.Refinement c₂) (v₃ : d₂₃.Refinement c₃) (w₁ : d₁₃.Refinement c₁) (w₃ : d₁₃.Refinement c₃), refinementCommonComparison B u₁ u₂ M hM ≪≫ refinementCommonComparison B v₂ v₃ M hM = refinementCommonComparison B w₁ w₃ M hM) ∧ (∀ {X' Y' : Scheme.{u}} {f' : X' ⟶ Y'} (g' : X' ⟶ X) (g : Y' ⟶ Y) (sf : IsPullback g' f' f g) (c₁ c₂ d : Compactification f) (c₁' c₂' d' : Compactification f') (s₁ : c₁'.Z ⟶ c₁.Z) (s₂ : c₂'.Z ⟶ c₂.Z) (sd : d'.Z ⟶ d.Z) (si₁ : IsPullback g' c₁'.i c₁.i s₁) (sp₁ : IsPullback s₁ c₁'.g c₁.g g) (si₂ : IsPullback g' c₂'.i c₂.i s₂) (sp₂ : IsPullback s₂ c₂'.g c₂.g g) (sid : IsPullback g' d'.i d.i sd) (spd : IsPullback sd d'.g d.g g) (u₁ : d.Refinement c₁) (u₂ : d.Refinement c₂) (u₁' : d'.Refinement c₁') (u₂' : d'.Refinement c₂') (hu₁ : u₁'.hom ≫ s₁ = sd ≫ u₁.hom) (hu₂ : u₂'.hom ≫ s₂ = sd ≫ u₂.hom), (G B g).map (refinementCommonComparison B u₁ u₂ M hM).hom ≫ (compositionE B c₂ c₂' g' g s₂ si₂.w sp₂.w si₂).app M = (compositionE B c₁ c₁' g' g s₁ si₁.w sp₁.w si₁).app M ≫ (refinementCommonComparison B u₁' u₂' ((G B g').obj M) (refinementFiniteOrigin_pullback B g' M hM) (MorphismProperty.IsStableUnderBaseChange.of_isPullback sf inferInstance)).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The full unchanged statement is the seven-conjunct refinementExchangeCoherence together with the actual refinementCommonComparison isomorphism. The two auxiliary theorems name invertibility and finite-origin pullback preservation from item proof step 2. Canonical compositionF/C/E are reused from the published StrictTowerCompositionPasting module; its reverse proof import must be omitted to avoid an import cycle."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11eb5d619",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Seven conjuncts match the node's clauses in order and direction. C_u is the canonical R_{p2} gamma for the identity-left square and e_i is the proper mate followed by beta. No added hypotheses: QuasiCompact f' is derived from sf, refinements need no cartesian condition, nothing on Y, and B : Type (u+1) is the universe the dependency requires. The finite-origin hM is levelwise with no uniform bound. refinementCommonComparison is real data from the actual isos, and the base-change and intertwining clauses use supplied cartesian faces. Only the lean record changed, the statement is verbatim and the dependency nodes are byte-identical. Reusing compositionF/C/E from StrictTowerCompositionPasting is right; the cycle-closing proof import is left out and listed under stages/2 rule 7. The existing CompactSupportFormalism.refinementComparison needs cartesian refinements and global HasBaseChange, so it does not apply. Docstrings and proof steps are present, nothing hollow, all proofs sorry. nt_compile.py is clean (12.1 s, re-run 7.0 s). The second reading is a self-reread by the same worker because the dispatcher forbade a second one; it is substantive and accepted."
  }
 }

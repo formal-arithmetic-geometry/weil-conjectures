@@ -164,5 +164,23 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-e48b351ef (reviewer sub-agent of L); spot-checked: Read the item and both new nodes fully; checked Stacks 091S, 091P and 0ATI, dependencies, route, edge cases and archived target scope. Folded elementary retract closure into the proof using the existing vanishing criterion; repaired generator terminology and metadata. Corrected files and review.md written; corrected dependencies are acyclic.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.PerfectOverDerivedCompleteRing",
+  "declaration": "DerivedCategory.perfect_of_derivedComplete",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/PerfectOverDerivedCompleteRing.lean",
+  "statement": "theorem perfect_of_derivedComplete {A : Type u} [CommRing A] [HasDerivedCategory.{w} (ModuleCat.{u} A)] (I : Ideal A) (hA : IsDerivedComplete I ((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj (ModuleCat.of A A))) : ∀ (P : DerivedCategory (ModuleCat.{u} A)), IsPerfectRingComplex P → IsDerivedComplete I P",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d749f01a",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Theorem perfect_of_derivedComplete matches the node clause by clause (CommRing A, arbitrary Ideal I, hA = IsDerivedComplete of singleFunctor 0 of ModuleCat.of A A, conclusion ∀ P, IsPerfectRingComplex P → IsDerivedComplete I P); checked against Stacks 091S (more-algebra.tex:26021-26044) and 0ATI (:20288). Recorded dependency declarations used, not copied; universe v:=u forced by the recorded IsPerfectRingComplex, w free; no extra hypotheses. Node diff adds only the lean field; lean.statement is verbatim in the file. Docstrings carry source, blueprint tag and all four proof steps; sorry only; no hollow definitions. Both report sections present. nt_compile.py --json on the snapshot file: clean (3.5 s / 8.8 s), and an error probe showed the tool reports errors. Edge cases A=0, I=⊥/⊤, zero object and non-free projectives covered. No findings."
  }
 }

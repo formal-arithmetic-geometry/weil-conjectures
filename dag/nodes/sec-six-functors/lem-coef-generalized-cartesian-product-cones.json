@@ -297,5 +297,51 @@
   "group": "Q51",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-92a683545 (reviewer sub-agent of L); spot-checked: I read the item, all 11 cited statements, the unit sk-prop-sf-biduality-general (it cites only sk-def-sf-operations and sk-prop-sf-rf-shriek-preservation), the chapter, and the main-20261015 proof of the blueprint ancestor prop-coef-integral-exceptional-adjoint. Chu-Haugseng 2006.08269 and HA are not archived locally, so I could not check the cited place; the node marks itself as an agent extension, so I checked the mathematics myself. The statement is true and unchanged: I tested r=0 and r=1, an inert selector and a collapsed block (nullary operation). The checks that matter: the cut functor; a_! preserves unions and (ab)_!=a_!b_!; the cartesian lift and the full faithfulness of s; the coherent left adjoint r through the dual universal-arrow clause, with discrete base mapping spaces; v and w respect arrows because edges(a_!L) is the cut preimage alpha^{-1}(edges L), and wv=id; inert preservation through cocartesian uniqueness; Pi H_F = F r s = F. Duplicate check: lem-coef-lax-cartesian-classification is the symmetric cocartesian case, not a duplicate. Long step 8 (2404 characters) hides a lemma. It says 'repeat the cone retraction R_e of Step 4' for a second functor, and that argument has its own hypothesis: a bare restriction of limits along the final reflective inclusion A_e is false (J={0->1}, A={1}); it works only because the diagram inverts the reflection. It also packs in the assembly, contractibility and naturality. Fixes, three faults: (1) C1/D5: new statement-only node lem-coef-reflection-inverting-limit-restriction (rg and blueprint search found no existing node; Mathlib grep finds only the ordinary-category initial_of_adjunction at Limits/Final.lean:144), cited in Steps 4 and 8; step 8 split into 8 and 9, all steps now under 2000 characters; Step 5 now names a strict section sigma so F->H_F is a functor; Step 9 proves naturality strictly through the product-diagram model. (2) Missing citation: the components, initial objects and product step, including empty K, is now cited from the existing node lem-coef-relative-limit-initial-components, which replaces lem-coef-infinity-final-index-colimit. (3) C8: added tool_uses for lem-cbc-enhanced-relative-exponential and lem-cbc-enhanced-functor-cone-calculus. All three tool uses are accepted, including def-cbc-enhanced-diagrams-cones. proof_deps equals the union of uses, every cited id exists, and there is no cycle. The new node's Mathlib search is grep only, because LeanSearch and LeanFinder were not available here.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GeneralizedCartesianProductCones",
+  "declaration": "SSet.Enhanced.GeneralizedCartesian.generalized_cartesian_product_cones",
+  "declarations": [
+   "SSet.Enhanced.GeneralizedCartesian.IsOrderedBlock",
+   "SSet.Enhanced.GeneralizedCartesian.orderedBlockBase",
+   "SSet.Enhanced.GeneralizedCartesian.total",
+   "SSet.Enhanced.GeneralizedCartesian.projection",
+   "SSet.Enhanced.GeneralizedCartesian.symmetricProjection",
+   "SSet.Enhanced.GeneralizedCartesian.fullSubset",
+   "SSet.Enhanced.GeneralizedCartesian.fullSubsetBase",
+   "SSet.Enhanced.GeneralizedCartesian.totalProduct",
+   "SSet.Enhanced.GeneralizedCartesian.product",
+   "SSet.Enhanced.GeneralizedCartesian.IsInertTupleCone",
+   "SSet.Enhanced.GeneralizedCartesian.IsMonoid",
+   "SSet.Enhanced.GeneralizedCartesian.monoids",
+   "SSet.Enhanced.GeneralizedCartesian.monoidInclusion",
+   "SSet.Enhanced.GeneralizedCartesian.algebraInclusion",
+   "SSet.Enhanced.GeneralizedCartesian.IsComparison",
+   "SSet.Enhanced.GeneralizedCartesian.HasContractibleLifts",
+   "SSet.Enhanced.GeneralizedCartesian.parameterRestriction",
+   "SSet.Enhanced.GeneralizedCartesian.parameterPostcomposition",
+   "SSet.Enhanced.GeneralizedCartesian.OperadNaturality",
+   "SSet.Enhanced.GeneralizedCartesian.CoefficientNaturality",
+   "SSet.Enhanced.GeneralizedCartesian.blockComponent",
+   "SSet.Enhanced.GeneralizedCartesian.InverseTupleFormula",
+   "SSet.Enhanced.GeneralizedCartesian.InverseBlockFormula",
+   "SSet.Enhanced.GeneralizedCartesian.Reconstruction",
+   "SSet.Enhanced.GeneralizedCartesian.generalized_cartesian_product_cones"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/GeneralizedCartesianProductCones.lean",
+  "statement": "theorem generalized_cartesian_product_cones : ∃ c : SimplexCategoryᵒᵖ ⥤ FinStar, IsOrderedBlock c ∧ ∀ (B : SSet.{u}) [Quasicategory B], CartesianEnvelope.HasFiniteProducts B → ∀ (M : SSet.{u}) (p : M ⟶ monoidalSimplexBase.{u}), Nonsymmetric.IsGeneralizedOperad p → Reconstruction (B := B) c p",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the actual product-diagram envelope and generalized incidence-operad axioms. Total product is constructed by full-subset evaluation on every simplex. The normalized comparison has a coherent inverse with explicit tuple and block formulas, contractible core homotopy fibres, and naturality for arbitrary coherent parameter families. Compile repair: use the existing finite discrete nerve and generic coherent cone evaluation directly, removing the broad downstream EnrichmentChangeAdjunction import. These are definitionally the same terms as its productIndex and productConeLeg abbreviations; no new helper definition or theorem dependency is introduced. The current published SpaceValuedStraightening source supplies the transitive noncomputable Diagrams fix."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-caa511e0f",
+  "group": "N7",
+  "result": "pass",
+  "note": "Matched every clause of the node to the Lean (ordered-block predicate, pullback of the product-diagram envelope, total product defined as full-subset evaluation, monoids via image cones of inert tuple cones including the terminal case over [0], algebras via the recorded IsGeneralizedOperad/algebras, comparison pinned to postcomposition with the total product, coherent quasi-inverse, tuple and block formulas including the nullary block, contractible core homotopy fibres, operad and coefficient naturality over arbitrary parameters). No stronger hypotheses, no silent universe restriction, no hollow definitions, exactly one sorry; docstrings and nine proof steps present; node changed only in lean, statement verbatim; nt_compile --json exit 0 with no messages (6.8 s, reproduced twice; the wrapper suppresses the sorry warning). Note only: equivalent ordered-block/full-subset definitions exist in modules outside the DAG closure (CartesianEnvelopeCocartesianCriterion, DayRelativeExponentialModel, CartesianMonoidalStraightening); the local copies are forced by the closure and H2 rules, flag for stage-3 consolidation."
  }
 }

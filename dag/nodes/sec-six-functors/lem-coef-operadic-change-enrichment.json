@@ -26,7 +26,10 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "lem-coef-operadic-algebra-presentability",
-  "def-coef-monoidal-infinity-category"
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-space-valued-straightening",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-cocartesian-relative-right-adjoint"
  ],
  "proof": [
   {
@@ -239,5 +242,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicChangeEnrichment",
+  "declaration": "SSet.Enhanced.Nonsymmetric.operadic_change_enrichment",
+  "declarations": [
+   "SSet.Enhanced.Nonsymmetric.IsOperadicPostcompositionMap",
+   "SSet.Enhanced.Nonsymmetric.IsOperadicWhiskeredSimplex",
+   "SSet.Enhanced.Nonsymmetric.OperadicChangeAdjunction",
+   "SSet.Enhanced.Nonsymmetric.operadic_change_enrichment"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadicChangeEnrichment.lean",
+  "statement": "theorem operadic_change_enrichment {E F : SSet.{max (u + 1) v}} [Quasicategory E] [Quasicategory F] (p : E ⟶ monoidalSimplexBase.{max (u + 1) v}) (q : F ⟶ monoidalSimplexBase.{max (u + 1) v}) (_hp : Algebroid.IsPresentablyMonoidal.{u, v} p) (_hq : Algebroid.IsPresentablyMonoidal.{u, v} q) (f : E ⟶ F) (hf : IsStrongMonoidalInfinityFunctor p q f) (g₁ : monoidalUnderlying q ⟶ monoidalUnderlying p) (a₁ : CoherentAdjunction (relativeFiberMap f hf.1.1 (monoidalBaseVertex 1)) g₁) (hcolim : SSet.Presentability.PreservesColimitsIn (relativeFiberMap f hf.1.1 (monoidalBaseVertex 1)) (fun I _ _ ↦ SSet.Presentability.IsSmall.{u, max (u + 1) v} I)) : ∃ (g : F ⟶ E) (hg : IsLaxMonoidalInfinityFunctor q p g) (a : CoherentAdjunction f g) (vertical : RelativeCoherentAdjunction f hf.1.1 g hg.1 a) (a₀ : CoherentAdjunction (relativeFiberMap f hf.1.1 (monoidalBaseVertex 1)) (relativeFiberMap g hg.1 (monoidalBaseVertex 1))) (t₀ : AdjunctionTriangles _ _ a₀), Nonempty (AdjunctionRestriction a a₀ vertical.toAdjunctionTriangles t₀ (monoidalFiberInclusion p 1) (monoidalFiberInclusion q 1)) ∧ Nonempty (FiberAdjunctionDataCompatibility _ _ g₁ a₀ a₁ t₀) ∧ Nonempty (OperadicChangeAdjunction.{u} p q f g a vertical.toAdjunctionTriangles)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Saved packet repaired after dry run and self-check: the given adjunction and colimit preservation are on the underlying [1]-fiber; the adjoint lax structure is constructed. The algebra unit, counit and both triangles are normalized as whiskerings of the same relative adjunction, rather than unrelated adjunctions and pairwise functor equivalences."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5784050e8",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Read the node (6 steps, GH A.5.11/A.5.12, HA 7.3.2.6/7.3.2.7), the report (Worker report and Second reading by Q15, the latter an openly declared self-check), the module and every declaration used: relativeFiberMap, AdjunctionTriangles, RelativeCoherentAdjunction, AdjunctionRestriction, FiberAdjunctionDataCompatibility, CoherentAdjunction, IsPresentablyMonoidal, overFunctors, Is{Lax,Strong}MonoidalInfinityFunctor, monoidalUnderlying/FiberInclusion, Operad, algebras, restriction, PreservesColimitsIn. All clauses match: presentably monoidal p,q; strong monoidal f; the given adjunction and colimit preservation on the canonical [1]-fiber map; conclusion has a lax g with a relative (vertical) coherent adjunction, fiber restriction, and an equivalence of adjunction data to the given a1; for every u-small Operad, postcomposition functors, a CoherentAdjunction whose unit, counit and triangles are literal whiskerings, and AdjunctionRestriction for every operad map. No extra hypotheses or universe restriction. Edge cases n=0, empty colimit, empty colors, identities and composites covered. Helpers have real content; docstrings carry source and blueprint; one sorry; statement verbatim; 4/4 declarations; prose statement unchanged; stmt_deps acyclic. nt_compile.py: exit 0, no errors or warnings, 6.5 s (an error control fails correctly). Finding: the SpaceValuedStraightening noncomputable repair is already landed (file differs by one blank line, node record older), so land with --revert-nodes lem-coef-space-valued-straightening.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
  }
 }

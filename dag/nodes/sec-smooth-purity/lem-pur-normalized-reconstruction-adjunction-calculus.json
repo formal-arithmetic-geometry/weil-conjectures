@@ -242,5 +242,41 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-3c17e883d (reviewer sub-agent of L); spot-checked: Read the full item, report, route, blueprint sources, and every cited node. Verified hypotheses, coefficient categories, base-change maps, all seven proof steps, edge cases, and duplicate candidates. Wrote review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus",
+  "declaration": "WeilConjectures.purNormalizedReconstructionAdjunctionCalculus",
+  "declarations": [
+   "WeilConjectures.purNormalizedReconstruction",
+   "WeilConjectures.purNormalizedProperty",
+   "WeilConjectures.purCompleteProperty",
+   "WeilConjectures.purRestrictedReduction",
+   "WeilConjectures.purRestrictedLimit",
+   "WeilConjectures.purRestrictedAdjunction",
+   "WeilConjectures.purRestrictedUnitCounit",
+   "WeilConjectures.purReconstructionEquivalence",
+   "WeilConjectures.PurReconstruction.realized",
+   "WeilConjectures.PurReconstruction.realizedAdjunction",
+   "WeilConjectures.PurReconstruction.realizationComparison",
+   "WeilConjectures.PurReconstruction.realizedTransformation",
+   "WeilConjectures.PurReconstruction.compositionComparison",
+   "WeilConjectures.PurReconstruction.Calculus",
+   "WeilConjectures.purNormalizedReconstructionAdjunctionCalculus"
+  ],
+  "file": "lean/Sheaf/Paper/PurNormalizedReconstructionAdjunctionCalculus.lean",
+  "statement": "theorem purNormalizedReconstructionAdjunctionCalculus (X : Scheme.{tX}) (Y : Scheme.{tY}) (Z : Scheme.{tZ}) (hX : IsUnit (l : Γ(X, ⊤))) (hY : IsUnit (l : Γ(Y, ⊤))) (hZ : IsUnit (l : Γ(Z, ⊤))) (SX : CoefficientDerivedSystemCalculus l E X) (SY : CoefficientDerivedSystemCalculus l E Y) (SZ : CoefficientDerivedSystemCalculus l E Z) (QX : ObjectProperty (coefficientSequenceDerived l E X)) (QY : ObjectProperty (coefficientSequenceDerived l E Y)) (QZ : ObjectProperty (coefficientSequenceDerived l E Z)) [QX.IsClosedUnderIsomorphisms] [QY.IsClosedUnderIsomorphisms] [QZ.IsClosedUnderIsomorphisms] : PurReconstruction.Calculus (purReconstructionEquivalence l E X hX SX QX) (purReconstructionEquivalence l E Y hY SY QY) (purReconstructionEquivalence l E Z hZ SZ QZ)",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The named reconstruction theorem states completeness of L(N) and invertibility of the actual unit/counit. The restricted functors and adjoint equivalence are real constructions on the recorded categories; the primary theorem supplies all transported formulas simultaneously, including arbitrary replete restrictions. Q = top recovers the full categories."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f0c51dc4e",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Delivery changes only the item node's lean field and adds one module; lean.statement is verbatim in the file and all 15 declarations exist; report has Worker report and Second reading by Q90. Checked every clause against the node and the dependencies' declarations: S (CoefficientDerivedSystemCalculus) fixes the actual adjunction through counit_projection and unit_projection, so quantifying over it adds no assumption; normalized = IsNormalizedCoefficientSequence (the dependency's own predicate, m=n included), complete = IntegralOnSlice.IsComplete none; the restricted functors, adjunction (restrictFullyFaithful with refl squares) and toEquivalence keep the actual u and e; Q-restrictions give exactly N'_W and C'_W, with Q=top the full case. Checked by hand the counit formula, transpose (naturality of e and epsilon plus a triangle identity), composition component and the transformation square. Edge cases n=0 meaning B_1, m=n, Q=bot/top, identity functors, independent tX/tY/tZ universes all covered. No hollow definitions, all proofs sorry, docstrings with source and blueprint tag, no stronger assumptions. Compile not reproduced: nt_compile --json timed out 4 times at its 60 s per-file limit on the side-only dependency CoefDerivedSystemEvaluationCalculus.lean (load 164-195; that dependency's review recorded 33.8 s), so the delivered file was never reached; judged from the delivery's recorded clean compile and preflight plus a hand check of the elaboration-sensitive Mathlib signatures. No fixes."
  }
 }

@@ -14,7 +14,8 @@
   "prop-weil-pbc-proetale-constant-ring-map",
   "def-weil-pbc-proetale-operations",
   "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-trf-constant-coefficient-composition"
+  "lem-trf-constant-coefficient-composition",
+  "pur713-def-pullback-comparison"
  ],
  "proof": [
   {
@@ -210,5 +211,24 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-bc8233f51 (reviewer sub-agent of L); spot-checked: I read all the mathematics in full and made no fixes. New node lem-trf-adjoint-composition-coherence is an exact Mathlib leaf; I checked it against CompositionIso.lean:64-80,157-184 and Mates.lean:311. With e_ijk=d_ijk^{-1}, Mathlib's hypothesis h, read in components, is the inverse of the node's d-cocycle. unit_conjugateEquiv_symm, with adj1=adj_ik, adj2=the composite and alpha=d, gives the node's unit equation. The component of the conclusion at M is the displayed a-equation. It tests correctly on identity adjunctions, one-object categories and empty categories. It is not a duplicate of lem-sc-left-adjoint-composition-iso-associativity, which is the special case where the functors are equal: (kh)_*N(U)=N(Z x_X U) and k_*h_*N(U)=N(Z x_Y(Y x_X U)) are only isomorphic. lem-pc-derived-pullback-assoc-kflat concerns Zariski O_X-modules, a different coefficient category. Item: Step 1 applies the constant-coefficient composition to all four pairs, which is what the composition lemma requires. Step 2: the variance of d=N(e_U^{-1}) is right and the cocycle follows from fibre-product uniqueness, so the elementary marking is fair. Step 3's unit-compatible conjugate is the same normalization the composition lemma uses for its termwise canonical isomorphism. Its tensor formula silently uses that inverse image commutes with tensor products, but nothing later depends on that formula. Step 4's index and inversion orders match the item. Steps 5-6 follow Stacks 0D6D's representative proof with 06YS and 0G7E, and the naturality cancellation is written out. Pullbacks are K-flat for arbitrary ringed-topos morphisms; no boundedness or scheme flatness is assumed, and W empty is covered. Blueprint places match the last sentence of the main-20261015 iterated-weil-cocycle proof. Accepted tool_uses: lem-weil-pbc-proetale-derived-pullback-composition, prop-weil-pbc-proetale-constant-ring-map, lem-pc-kflat-resolution, lem-weil-pbc-ringed-pullback-preserves-kflat. No SGA citations."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleConstantRingDerivedPullback_composition_coherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleDerivedPullbackCoherence.lean",
+  "statement": "theorem proEtaleConstantRingDerivedPullback_composition_coherence {X Y Z W : Scheme.{u}} (j : W ⟶ Z) (h : Z ⟶ Y) (k : Y ⟶ X) (A : Type u) [CommRing A] [Finite A] (M : proEtaleDerivedCategory X A) : (proEtaleConstantRingPullbackComposition j (h ≫ k) A).inv.app M ≫ (proEtaleConstantRingDerivedPullback A j).map ((proEtaleConstantRingPullbackComposition h k A).inv.app M) = (eqToIso (congrArg (proEtaleConstantRingDerivedPullback A) (Category.assoc j h k).symm)).hom.app M ≫ (proEtaleConstantRingPullbackComposition (j ≫ h) k A).inv.app M ≫ (proEtaleConstantRingPullbackComposition j h A).inv.app ((proEtaleConstantRingDerivedPullback A k).obj M)",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already landed constant-coefficient specialization proEtaleConstantRingPullbackComposition in the inverse direction. That definition is exactly the selected normalized composition comparison, with the canonical constant-coefficient transport. Explicit eqToIso along Category.assoc identifies the triple composite arrows; at components the canonical functor associator is definitionally identity. Added the landed owning node pur713-def-pullback-comparison to stmt_deps for this reused helper."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af9908d06",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Clause-by-clause check of proEtaleConstantRingDerivedPullback_composition_coherence against the node: j,h,k unrestricted; A : Type u, CommRing, Finite; M arbitrary in the unbounded derived category on the real small pro-etale site, no universe equality forced. c_{f,g} = (proEtaleConstantRingPullbackComposition f g A).inv : L(f≫g) ⟶ Lg ⋙ Lf, the selected canonical comparison transported along the canonical composite-coefficient equality, so no arbitrary choice. Both paths are in the correct order and the eqToIso along (Category.assoc j h k).symm goes the right way; both sides end at the same object by definition. Delivery changes only the item node (lean field; stmt_deps gains the landed pur713-def-pullback-comparison, allowed by brief §5, no cycle) and the new module; the 8 dependency nodes are byte-identical to the side clone. Statement field verbatim in the file. Docstrings have source place, blueprint tag and all six proof steps. No hollow definitions, only sorry, no pro-etale substitute. Stacks 0D6D read. Edge cases (empty W, identity arrows, zero ring, unbounded M, non-flat morphisms) covered. nt_compile.py --json exited 0 with no errors twice (7.8 s, 9.3 s); no sorry warning printed (apparently suppressed by tool options); a control copy with #check and a false example confirmed the file is elaborated. Not a fault here: two landed declarations state the same composite-coefficient fact."
  }
 }

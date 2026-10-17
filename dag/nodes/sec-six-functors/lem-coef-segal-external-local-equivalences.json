@@ -291,5 +291,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SegalExternalLocalEquivalences",
+  "declaration": "SSet.Enhanced.SegalPresheaf.segal_external_local_equivalences",
+  "declarations": [
+   "SSet.Enhanced.SegalPresheaf.productProjection",
+   "SSet.Enhanced.SegalPresheaf.cartesianFiberMap",
+   "SSet.Enhanced.SegalPresheaf.productLabelComparison",
+   "SSet.Enhanced.SegalPresheaf.productCoefficientRelations",
+   "SSet.Enhanced.SegalPresheaf.IsCartesianLabelTransport",
+   "SSet.Enhanced.SegalPresheaf.CartesianDayExtension",
+   "SSet.Enhanced.SegalPresheaf.segal_external_equivalences",
+   "SSet.Enhanced.SegalPresheaf.segal_external_local_equivalences"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SegalExternalLocalEquivalences.lean",
+  "statement": "theorem segal_external_local_equivalences {St : CocartesianStraightening.Statement.{u}} (A B : CartesianPresentation St) (P : SpaceProducts.{u, v}) {DC : EndpointData.{u, v} A.ambientProjection.{u, v}} {DD : EndpointData.{u, v} B.ambientProjection.{u, v}} {DCD : EndpointData.{u, v} (productProjection A.ambientProjection.{u, v} B.ambientProjection.{u, v})} {HC : YonedaLimits.HomPresentation.{u, v} A.ambientTotal.{u, v}} {HD : YonedaLimits.HomPresentation.{u, v} B.ambientTotal.{u, v}} {HCD : YonedaLimits.HomPresentation.{u, v} (pullback A.ambientProjection.{u, v} B.ambientProjection.{u, v})} {HC₁ : YonedaLimits.HomPresentation.{u, v} (fiber A.ambientProjection.{u, v} (baseVertex 1))} {HD₁ : YonedaLimits.HomPresentation.{u, v} (fiber B.ambientProjection.{u, v} (baseVertex 1))} {HCD₁ : YonedaLimits.HomPresentation.{u, v} (fiber (productProjection A.ambientProjection.{u, v} B.ambientProjection.{u, v}) (baseVertex 1))} (FC : FreeEdgeData DC HC HC₁) (FD : FreeEdgeData DD HD HD₁) (FCD : FreeEdgeData DCD HCD HCD₁) (MC : CartesianDayExtension.{u, v} A.ambientProjection.{u, v}) (MD : CartesianDayExtension.{u, v} B.ambientProjection.{u, v}) (S : Set (transportDiagrams.{u, v} (fiber A.ambientProjection.{u, v} (baseVertex 1)) false _⦋1⦌)) (T : Set (transportDiagrams.{u, v} (fiber B.ambientProjection.{u, v} (baseVertex 1)) false _⦋1⦌)) (hS : Small.{u} S) (hT : Small.{u} T) (hSC : IsMonoidallyCompatible (dayConvolution P MC.extension) S) (hTD : IsMonoidallyCompatible (dayConvolution P MD.extension) T) (LC : CoefficientReflector FC S) (LD : CoefficientReflector FD T) (LCD : CoefficientReflector FCD (productCoefficientRelations P A.ambientProjection.{u, v} B.ambientProjection.{u, v} HC₁ HD₁ S T)) : (∀ (f : segalCategory.{u, v} A.ambientProjection.{u, v} _⦋1⦌) (Y : segalCategory.{u, v} B.ambientProjection.{u, v} _⦋0⦌), IsCoefficientSegalEquivalence LC f → ∃ e : segalCategory.{u, v} (productProjection A.ambientProjection.{u, v} B.ambientProjection.{u, v}) _⦋1⦌, (segalInclusion (productProjection A.ambientProjection.{u, v} B.ambientProjection.{u, v})).app _ e = (fiberwiseExternalProduct P A.ambientProjection.{u, v} B.ambientProjection.{u, v}).app _ ((segalInclusion A.ambientProjection.{u, v}).app _ f, (transportDiagrams B.ambientTotal.{u, v} false).σ 0 ((segalInclusion B.ambientProjection.{u, v}).app _ Y)) ∧ IsCoefficientSegalEquivalence LCD e) ∧ (∀ (X : segalCategory.{u, v} A.ambientProjection.{u, v} _⦋0⦌) (g : segalCategory.{u, v} B.ambientProjection.{u, v} _⦋1⦌), IsCoefficientSegalEquivalence LD g → ∃ e : segalCategory.{u, v} (productProjection A.ambientProjection.{u, v} B.ambientProjection.{u, v}) _⦋1⦌, (segalInclusion (productProjection A.ambientProjection.{u, v} B.ambientProjection.{u, v})).app _ e = (fiberwiseExternalProduct P A.ambientProjection.{u, v} B.ambientProjection.{u, v}).app _ ((transportDiagrams A.ambientTotal.{u, v} false).σ 0 ((segalInclusion A.ambientProjection.{u, v}).app _ X), (segalInclusion B.ambientProjection.{u, v}).app _ g) ∧ IsCoefficientSegalEquivalence LCD e)",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "All five clauses are stated by segal_external_equivalences (three Segal clauses) and segal_external_local_equivalences (two coefficient-local clauses). Helpers give the canonical product-label restriction and normalize the Day tensor by inert/active cartesian transport. The Segal-subcategory arrow in each coefficient conclusion is fixed by its image under the full inclusion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d84093784",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Each of the five clauses matches the node and its dependency's exact declarations (fiberwiseExternalProduct, IsSegal, segalCategory/segalInclusion, Segal and coefficient reflectors, coefficientExternalRelations). The product total space is the strict pullback over Delta. S⊙T is moved along the canonical fibre comparison. CartesianDayExtension fixes the tensor by inert and active cartesian transport; it is not a duplicate of the cocartesian MonoidalDayExtension. No stronger hypotheses. Universes u, v are independent and nothing is unbound. Edge cases (empty presheaves, empty S/T, n>=2) are covered. lean.statement is verbatim and all 8 declarations are listed. Imports and line widths conform. Proofs are sorry only; docstrings carry source and blueprint. nt_compile --json on the snapshot: rc 0, no errors or warnings, module 5.0 s. Second-reading section is a self-reread, accepted as for Q03/Q60/Q134."
  }
 }

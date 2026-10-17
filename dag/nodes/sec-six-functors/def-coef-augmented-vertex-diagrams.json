@@ -1,0 +1,139 @@
+{
+ "id": "def-coef-augmented-vertex-diagrams",
+ "kind": "definition",
+ "title": "Coherent augmented vertex diagrams, pointwise extension cones and iterated pullback models",
+ "status": "split",
+ "statement": "Use the simplicial and coherent comma-cone notions of [def-cbc-enhanced-diagrams-cones]. For a small ordinary category $J$, write $N_uJ$ for its nerve lifted into the ambient universe $u$. Put $I=\\Delta_+^{\\mathrm{op}}$, using Mathlib's augmented simplex category, and let $j$ be the full inclusion of its objects $[-1]$ and $[0]$. For $U:N_uI\\to C$ and $k\\in I$, its prescribed pointwise cone is the natural transformation from the constant $k$ diagram to the codomain diagram on $(k\\downarrow j)$, followed by $U$; define the pointwise right Kan extension predicate by requiring each of these specified coherent cones to be limiting. A prescribed cone is limiting when its apex and entire cylinder agree with a limiting cone in the recorded comma-cone model. For $n\\geq0$, put $V_n=\\operatorname{WithTerminal}(\\operatorname{Discrete}(\\operatorname{Fin}(n+1)))$, with central object $b$. Its boundary sends every leaf to $[0]$, $b$ to $[-1]$, and every leaf arrow to the augmentation. Its cone legs from $[n]$ are the vertex restrictions and augmentation. The specified binary square has apex $[n+1]$, old leaf $[n]$ via the first $n+1$ vertices, new leaf $[0]$ via the last vertex, and center $[-1]$. Pullback existence means existence of limiting cones on all $N_uV_1$ diagrams. For $\\theta:[m]\\to[n]$, the star-selection functor sends leaf $r$ to $\\theta(r)$ and fixes $b$; the comparison triangle has columns $[n],[m]$, and the degree-$m$ boundary. The universal triangle on the category of vertex-marked ordinals has columns $[-1],[0],[n]$ and arrows the empty and marked-vertex inclusions; its opposite nerve followed by $U$ supplies all higher coordinate comparisons. Finally define an iterated pullback model on the left cone of $V_n$ recursively: at $n=0$ its leaf leg is the identity; at $n+1$ it extends to the left cone of $\\operatorname{WithTerminal}(\\operatorname{WithInitial}(\\operatorname{Discrete}(\\operatorname{Fin}(n+1)))\\sqcup\\operatorname{Discrete}(\\{*\\}))$, whose old-cone restriction is a recursive model and whose new-apex/old-apex/new-leaf/base square is limiting. These restrictions retain every old leaf, the new leaf and their common augmentation.",
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 6.1.2.11 and proof, printed pp.541–543; vertex slices, Cech right Kan extension and edge-by-edge gluing of finite vertex stars."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coherent cones for augmented simplicial objects and recursive binary pullback vertex-star models",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.SimplicialObject.augment\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"(X : SimplicialObject C) (X₀ : C) (f : X _⦋0⦌ ⟶ X₀)\\n  (w : ∀ (i : SimplexCategory) (g₁ g₂ : ⦋0⦌ ⟶ i), X.map g₁.op ≫ f = X.map g₂.op ≫ f) : SimplicialObject.Augmented C\", \"doc\": \"Given a simplicial object $X$ in a category $\\\\mathcal{C}$, an object $X_0$ in $\\\\mathcal{C}$, and a morphism $f : X([0]) \\\\to X_0$ satisfying the naturality condition that for all objects $i$ in the sim\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Augmented\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max u v)\", \"doc\": \"The category of augmented simplicial objects in $\\\\mathcal{C}$, defined as the comma category between the identity functor on simplicial objects in $\\\\mathcal{C}$ and the constant functor from $\\\\mathcal\"}\n  {\"name\": \"AugmentedSimplexCategory\", \"module\": \"Mathlib.AlgebraicTopology.SimplexCategory.Augmented.Basic\", \"type\": \"Type\", \"doc\": \"The category obtained by adjoining an initial object to the simplex category $\\\\Delta$, typically denoted as $[-1]$. This category is used in algebraic topology to model augmented simplicial objects.\"}\n  {\"name\": \"CategoryTheory.CosimplicialObject.Augmented\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max u v)\", \"doc\": \"The category of augmented cosimplicial objects in a category $\\\\mathcal{C}$, defined as the comma category of the constant functor $\\\\text{const}: \\\\mathcal{C} \\\\to \\\\text{CosimplicialObject}(\\\\mathcal{C})$\"}\n  {\"name\": \"CategoryTheory.Limits.PullbackCone\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.PullbackCone\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z)\", \"doc\": \"A pullback cone for morphisms $ f: X \\to Z $ and $ g: Y \\to Z $ is a cone over the cospan diagram formed by these morphisms, consisting of an apex object in the category and morphisms from the apex to $\"}\n  {\"name\": \"CategoryTheory.Limits.Cone.ofPullbackCone\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.PullbackCone\", \"type\": \"{F : WalkingCospan ⥤ C} (t : PullbackCone (F.map inl) (F.map inr)) : Cone F\", \"doc\": \"A pullback cone for morphisms $ f: X \\to Z $ and $ g: Y \\to Z $ is a cone over the cospan diagram formed by these morphisms, consisting of an apex object in the category and morphisms from the apex to $\"}\n  {\"name\": \"CategoryTheory.CommSq.cone\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.PullbackCone\", \"type\": \"(s : CommSq f g h i) : PullbackCone h i\", \"doc\": \"Given a commutative square in a category $\\\\mathcal{C}$ with morphisms $f: W \\\\to X$, $g: W \\\\to Y$, $h: X \\\\to Z$, and $i: Y \\\\to Z$ satisfying $h \\\\circ f = i \\\\circ g$, this constructs the pullback cone o\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Augmented.point\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialObject.Basic\", \"type\": \": Augmented C ⥤ C\", \"doc\": \"The functor from the category of augmented simplicial objects in $\\\\mathcal{C}$ to $\\\\mathcal{C}$ that maps each augmented simplicial object $(X, Y)$ to the object $Y$ in $\\\\mathcal{C}$, where $X$ is a s\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match for the coherent quasicategorical construction; Mathlib augmented simplex, comma and finite-star primitives are used directly. Ordinary-category Cech nerves do not supply it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent cones for augmented simplicial objects and recursive binary pullback vertex-star models",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Arrow.augmentedCechNerve\", \"module\": \"Mathlib/AlgebraicTopology/CechNerve\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (f : CategoryTheory.Arrow C) →\\n      [∀ (n : ℕ), CategoryTheory.Limits.HasWidePullback f.right (fun x => f.left) fun x => f.hom] →\\n        CategoryTheory.SimplicialObject.Augmented C\", \"doc\": \"For a category $\\\\mathcal{C}$ and a morphism $f: X \\\\to Y$ in $\\\\mathcal{C}$, the augmented Čech nerve is an augmented simplicial object in $\\\\mathcal{C}$ whose underlying simplicial object is the Čech ne\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.augmentedCechNerve\", \"module\": \"Mathlib/AlgebraicTopology/CechNerve\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [∀ (n : ℕ) (f : CategoryTheory.Arrow C),\\n          CategoryTheory.Limits.HasWidePullback f.right (fun x => f.left) fun x => f.hom] →\\n      CategoryTheory.Functor (CategoryTheory.Arrow C) (CategoryTheory.SimplicialObject.Augmented C)\", \"doc\": \"The functor from the arrow category of a category $\\\\mathcal{C}$ to the category of augmented simplicial objects in $\\\\mathcal{C}$. It sends each morphism $f: X \\\\to Y$ to its augmented Čech nerve (const\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.augmentedCechNerve_obj_left_obj\", \"module\": \"Mathlib/AlgebraicTopology/CechNerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  [inst_1 :\\n    ∀ (n : ℕ) (f : CategoryTheory.Arrow C),\\n      CategoryTheory.Limits.HasWidePullback f.right (fun x => f.left) fun x => f.hom]\\n  (f : CategoryTheory.Arrow C) (n : SimplexCategoryᵒᵖ),\\n  (CategoryTheory.SimplicialObject.augmentedC\", \"doc\": \"For any morphism $f: X \\to Y$ in a category $\\\\mathcal{C}$ and for each object $n$ in the opposite simplex category $\\\\Delta^\\\\text{op}$, the left component of the augmented Čech nerve of $f$ at $n$ is gi\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.augmentedCechNerve_obj_left_map\", \"module\": \"Mathlib/AlgebraicTopology/CechNerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  [inst_1 :\\n    ∀ (n : ℕ) (f : CategoryTheory.Arrow C),\\n      CategoryTheory.Limits.HasWidePullback f.right (fun x => f.left) fun x => f.hom]\\n  (f : CategoryTheory.Arrow C) {X Y : SimplexCategoryᵒᵖ} (g : X ⟶ Y),\\n  (CategoryTheory.SimplicialObj\", \"doc\": \"For a morphism $f: X \\to Y$ in a category $\\\\mathcal{C}$ and a morphism $g: X \\to Y$ in the opposite simplex category $\\\\Delta^\\\\text{op}$, the left component of the augmented Čech nerve of $f$ applied to \"}\n  {\"name\": \"CategoryTheory.SimplicialObject.augmentedCechNerve_obj_hom_app\", \"module\": \"Mathlib/AlgebraicTopology/CechNerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  [inst_1 :\\n    ∀ (n : ℕ) (f : CategoryTheory.Arrow C),\\n      CategoryTheory.Limits.HasWidePullback f.right (fun x => f.left) fun x => f.hom]\\n  (f : CategoryTheory.Arrow C) (x : SimplexCategoryᵒᵖ),\\n  (CategoryTheory.SimplicialObject.augmentedC\", \"doc\": \"For any morphism $f: X \\to Y$ in a category $\\\\mathcal{C}$ and any object $n$ in the opposite simplex category $\\\\Delta^\\\\text{op}$, the hom-component of the augmented Čech nerve of $f$ at $n$ coincides w\"}\n  {\"name\": \"CategoryTheory.Arrow.augmentedCechConerve\", \"module\": \"Mathlib/AlgebraicTopology/CechNerve\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (f : CategoryTheory.Arrow C) →\\n      [∀ (n : ℕ), CategoryTheory.Limits.HasWidePushout f.left (fun x => f.right) fun x => f.hom] →\\n        CategoryTheory.CosimplicialObject.Augmented C\", \"doc\": \"The augmented cosimplicial object in category $\\\\mathcal{C}$ constructed from a morphism $f : X \\\\to Y$, where the augmentation is given by the domain $X$ and the cosimplicial part is the Cech nerve of \"}\n  {\"name\": \"CategoryTheory.CosimplicialObject.augmentedCechConerve\", \"module\": \"Mathlib/AlgebraicTopology/CechNerve\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [∀ (n : ℕ) (f : CategoryTheory.Arrow C),\\n          CategoryTheory.Limits.HasWidePushout f.left (fun x => f.right) fun x => f.hom] →\\n      CategoryTheory.Functor (CategoryTheory.Arrow C) (CategoryTheory.CosimplicialObject.Augmented C)\", \"doc\": \"The functor from the arrow category of a category $\\\\mathcal{C}$ to the category of augmented cosimplicial objects in $\\\\mathcal{C}$. It sends each morphism $f : X \\\\to Y$ to its augmented Čech nerve, wh\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\", \"module\": \"Mathlib/AlgebraicTopology/CechNerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  [inst_1 :\\n    ∀ (n : ℕ) (f : CategoryTheory.Arrow C),\\n      CategoryTheory.Limits.HasWidePullback f.right (fun x => f.left) fun x => f.hom]\\n  (X : CategoryTheory.SimplicialObject.Augmented C) (F : CategoryTheory.Arrow C)\\n  (G : CategoryTheor\", \"doc\": \"For any category $\\\\mathcal{C}$, augmented simplicial object $X$, arrow $F : \\\\mathcal{C}^\\\\to$, and morphism $G : X \\\\to F$ in the arrow category, applying the Čech nerve equivalence yields the morphism \"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match for the coherent quasicategorical construction; Mathlib augmented simplex, comma and finite-star primitives are used directly. Ordinary-category Cech nerves do not supply it."
+  },
+  {
+   "tool": "grep",
+   "query": "augmented.*vertex|vertex.*cone|pointwise.*right.*Kan (Mathlib/AlgebraicTopology); CechVertex|AugmentedVertexDiagrams|def-coef-augmented-vertex-diagrams (DAG, Mathlib, upstream, Sheaf); blueprint_refs.py search augmented vertex and vertex star",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"line\": \"362\", \"text\": \"/-- The product `Xᶥ` is the vertex of a limit cone on `wideCospan ι X`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"line\": \"350\", \"text\": \"    (SimplexCategory.Truncated.inclusion n).op.HasPointwiseRightKanExtension F]\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean\", \"line\": \"21\", \"text\": \"`(rightExtensionInclusion X n).IsPointwiseRightKanExtension` holds.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean\", \"line\": \"55\", \"text\": \"namespace isPointwiseRightKanExtensionAt\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean\", \"line\": \"178\", \"text\": \"end isPointwiseRightKanExtensionAt\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean\", \"line\": \"184\", \"text\": \"open isPointwiseRightKanExtensionAt in\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean\", \"line\": \"186\", \"text\": \"noncomputable def isPointwiseRightKanExtensionAt (n : ℕ) :\"}\n\nDAG/Sheaf: no matching construction. Upstream rg: monomialCechVertex in ProjectiveSpace/MonomialCech.lean only, unrelated monomial cochains. blueprint_refs: 0 blueprint nodes match each query.",
+   "date": "2026-10-17",
+   "verdict": "no match for the coherent quasicategorical construction; Mathlib augmented simplex, comma and finite-star primitives are used directly. Ordinary-category Cech nerves do not supply it."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-augmented-vertex-cone-recognition",
+  "date": "2026-10-17",
+  "group": "N7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Canonical augmented vertex cones and their iterated binary pullback models used in the simplicial-space foundation of proof paragraph 2.",
+   "via": [
+    "lem-coef-augmented-vertex-cone-recognition",
+    "lem-coef-space-geometric-descent",
+    "lem-coef-algebroid-completion",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AugmentedVertexDiagrams",
+  "declaration": "SSet.Enhanced.CechVertex.IsRightKanExtension",
+  "declarations": [
+   "SSet.Enhanced.CechVertex.N",
+   "SSet.Enhanced.CechVertex.Nmap",
+   "SSet.Enhanced.CechVertex.prism",
+   "SSet.Enhanced.CechVertex.coneCylinder",
+   "SSet.Enhanced.CechVertex.LimitsAt",
+   "SSet.Enhanced.CechVertex.initialLegs",
+   "SSet.Enhanced.CechVertex.IsLimitCone",
+   "SSet.Enhanced.CechVertex.Index",
+   "SSet.Enhanced.CechVertex.degree",
+   "SSet.Enhanced.CechVertex.base",
+   "SSet.Enhanced.CechVertex.augment",
+   "SSet.Enhanced.CechVertex.Low",
+   "SSet.Enhanced.CechVertex.lowInclusion",
+   "SSet.Enhanced.CechVertex.commaDiagram",
+   "SSet.Enhanced.CechVertex.commaLegs",
+   "SSet.Enhanced.CechVertex.IsRightKanExtension",
+   "SSet.Enhanced.CechVertex.Star",
+   "SSet.Enhanced.CechVertex.boundary",
+   "SSet.Enhanced.CechVertex.vertexLegs",
+   "SSet.Enhanced.CechVertex.VertexLimits",
+   "SSet.Enhanced.CechVertex.squareBoundary",
+   "SSet.Enhanced.CechVertex.squareLegs",
+   "SSet.Enhanced.CechVertex.SquareLimits",
+   "SSet.Enhanced.CechVertex.HasPullbacks",
+   "SSet.Enhanced.CechVertex.select",
+   "SSet.Enhanced.CechVertex.coordinateTriangle",
+   "SSet.Enhanced.CechVertex.triangle",
+   "SSet.Enhanced.CechVertex.VertexStrings",
+   "SSet.Enhanced.CechVertex.universalTriangle",
+   "SSet.Enhanced.CechVertex.stringTriangle",
+   "SSet.Enhanced.CechVertex.coordinateFamily",
+   "SSet.Enhanced.CechVertex.StepBase",
+   "SSet.Enhanced.CechVertex.oldCone",
+   "SSet.Enhanced.CechVertex.newCone",
+   "SSet.Enhanced.CechVertex.stepSquare",
+   "SSet.Enhanced.CechVertex.IsIteratedPullback"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AugmentedVertexDiagrams.lean",
+  "statement": "def IsRightKanExtension {C : SSet.{u}} (U : N Index ⟶ C) : Prop",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb30c91c0",
+  "group": "N7",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb30c91c0",
+  "group": "N7",
+  "result": "pass",
+  "note": "Read node, new def node, both modules, report, dependency EnhancedDiagramsCones (coneCategory endpoint convention matches prism), HTT 6.1.2.11 place. Clause-by-clause: RKE via StructuredArrow k lowInclusion = (j|[n])^op with correct polarity, degree -1 included; LimitsAt fixes apex and whole cylinder; HasPullbacks only on V_1; iterated-pullback model recursive with identity base leg; SquareLimits first n+1 / last vertex from n=0; coordinate triangles and marked-string family checked true and matching proof step 4. No hollow defs, sorry only in theorem, docstrings with source/blueprint, lean.statement verbatim, 36 decls present, node diff only lean+stmt_deps. nt_compile --json both files: exit 0, no warnings (Diagrams 13.4s/7.0s, Recognition 5.5s/6.0s). Non-blocking: second reading by same worker (disclosed), '6.1.2.11' garbled to 'the project server' in report.md, N duplicates largeNerve body."
+ }
+}

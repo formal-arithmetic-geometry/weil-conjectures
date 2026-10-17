@@ -157,5 +157,35 @@
   "group": "Q96",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q96-9ede0ace5 (reviewer sub-agent of L); spot-checked: Read the item, cited statements, Hovey source locations, and unit/chapter route in full. Corrected Step 2 to apply the exact sequence at every basepoint in the endpoint fiber. Statement unchanged; empty, disconnected, and non-Kan-base cases checked. No missing dependencies or cycles. Wrote review.md and the whole corrected DAG JSON under fixes/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanFibrationEdgeFiberTransport",
+  "declaration": "SSet.Enhanced.kan_fibration_edge_fiber_transport",
+  "declarations": [
+   "SSet.Enhanced.kanEdgeEndpointMap",
+   "SSet.Enhanced.kanEdgeEndpoint",
+   "SSet.Enhanced.kanEdgeEndpointMap_comm",
+   "SSet.Enhanced.kanStrictFiber",
+   "SSet.Enhanced.kanEdgePullback",
+   "SSet.Enhanced.kanEndpointInclusion",
+   "SSet.Enhanced.kanStrictFiberMap",
+   "SSet.Enhanced.kanEdgePullbackMap",
+   "SSet.Enhanced.kan_fibration_edge_fiber_transport"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/KanFibrationEdgeFiberTransport.lean",
+  "statement": "theorem kan_fibration_edge_fiber_transport {Y₀ Y₁ S : SSet.{u}} (p₀ : Y₀ ⟶ S) (p₁ : Y₁ ⟶ S) (m : Y₀ ⟶ Y₁) (hm : m ≫ p₁ = p₀) (hp₀ : ∀ (n : ℕ), 1 ≤ n → ∀ (j : Fin (n + 1)), HasLiftingProperty (SSet.horn n j).ι p₀) (hp₁ : ∀ (n : ℕ), 1 ≤ n → ∀ (j : Fin (n + 1)), HasLiftingProperty (SSet.horn n j).ι p₁) (e : Δ[1] ⟶ S) : (∀ (a : Fin 2), IsWeakHomotopyEquivalence (kanEndpointInclusion p₀ e a) ∧ IsWeakHomotopyEquivalence (kanEndpointInclusion p₁ e a)) ∧ (IsWeakHomotopyEquivalence (kanStrictFiberMap p₀ p₁ m hm (kanEdgeEndpoint e 0)) ↔ IsWeakHomotopyEquivalence (kanStrictFiberMap p₀ p₁ m hm (kanEdgeEndpoint e 1))) ∧ (IsWeakHomotopyEquivalence (kanStrictFiberMap p₀ p₁ m hm (kanEdgeEndpoint e 0)) ↔ IsWeakHomotopyEquivalence (kanEdgePullbackMap p₀ p₁ m hm e)) ∧ (IsWeakHomotopyEquivalence (kanStrictFiberMap p₀ p₁ m hm (kanEdgeEndpoint e 1)) ↔ IsWeakHomotopyEquivalence (kanEdgePullbackMap p₀ p₁ m hm e))",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper declarations are the canonical degreewise pullbacks and endpoint maps used by the theorem; kanEdgeEndpointMap_comm is the named postponed well-definedness identity required by kanEndpointInclusion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-befa660fb",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Only the node's lean record changed; the record is complete and its statement matches the file exactly. Report has a real Worker report and Second reading by Q17. Every clause matches the node: horn lifting for n>=1 and all j on p0 and p1, hm : m ≫ p1 = p0, endpoints e(0)/e(1), strict fibres pullback (const s) p, edge pullbacks pullback e p, all four endpoint inclusions, three iff clauses, recorded SSet.Enhanced.IsWeakHomotopyEquivalence. No extra Kan, nonemptiness, connectedness or universe assumption. Seven real definitions, no arbitrary maps; the definition's proof obligation is the named sorry theorem kanEdgeEndpointMap_comm, shown true in a /tmp scratch proof (yonedaEquiv, simp, rfl). Docstrings carry Hovey places and blueprint tag; main docstring follows the node's proof steps. Proof-dependency imports present; lines <=100. Edge cases checked: empty, constant edge, disconnected, n=1, universes. Names new in the project, slopmaster2 and Mathlib. nt_compile --json: clean in 3.9 s, no warnings. No findings."
  }
 }

@@ -16,7 +16,8 @@
   "def-weil-pbc-adjunction-mate",
   "def-weil-pbc-composite-adjunction",
   "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "def-weil-pbc-ringed-topos-morphism"
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-ringed-tensor-square-presentation"
  ],
  "proof": [
   {
@@ -381,5 +382,33 @@
   "group": "Q103",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q103-db3c72f67 (reviewer sub-agent of L); spot-checked: Read both nodes fully and checked all six steps against cited statements and Stacks 07A7, 0B56, 0D6D, 07A4 and 0D6E. Canonical comparisons, mate directions and unbounded module coefficients agree. Edge cases and DAG-wide duplicate searches found no fault; dependency closure is acyclic. Both declared tool uses accepted. No repairs; full review in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingedKunnethFactorizations",
+  "declaration": "SheafOfModules.ringedKunnethFactorizations",
+  "declarations": [
+   "SheafOfModules.RingedTensorEdge.projectionFixedFirst",
+   "SheafOfModules.RingedKunneth.betaBar",
+   "SheafOfModules.RingedKunneth.directComparison",
+   "SheafOfModules.RingedKunneth.first",
+   "SheafOfModules.RingedKunneth.second",
+   "SheafOfModules.RingedKunneth.commonTranspose",
+   "SheafOfModules.ringedKunnethFactorizations"
+  ],
+  "file": "lean/Sheaf/Paper/RingedKunnethFactorizations.lean",
+  "statement": "theorem ringedKunnethFactorizations {Y X W : RingedTensorCorner.{u, w}} {q : RingedTensorEdge Y X} {a b : RingedTensorEdge X W} (s : RingedTensorSquare Y X X W q q a b) (aY : RingedTensorModel Y) (aX : RingedTensorModel X) (aW : RingedTensorModel W) (M N : DerivedCategory (SheafOfModules.{u} ((sheafCompose X.topology (forget₂ CommRingCat.{u} RingCat.{u})).obj X.ring))) : (RingedKunneth.first s aY aX aW M N ≫ (RingedKunneth.directComparison s).inv.app (W.tensor.obj (a.left.obj M, b.left.obj N)) = RingedKunneth.second s aY aX aW M N) ∧ ((q.derivedAdjunction.comp a.derivedAdjunction).homEquiv _ _).symm (RingedKunneth.second s aY aX aW M N) = RingedKunneth.commonTranspose s aY aX aW M N",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing RingedTensorSquare presentation, with the two q edges equal. The right-image path comparison is constructed by conjugation of the canonical pullback comparison through the composite adjunctions, exactly as in the proof of Stacks 0D6E; no arbitrary comparison or coherence hypothesis is supplied."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a69ce089f",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Every clause matches the node: theta BL≅AL; beta=s.exchange (mate of theta.hom); betaBar=mate of theta.inv, LR→SB; directComparison=conjugateIsoEquiv of theta, the canonical c per Stacks 0D6E and lem-sfb-ringed-comparison-tensor-adjunction; first/second have the displayed arrows and factor order; conjunct 1 first≫c.inv=second; conjunct 2 composite homEquiv.symm of second = A(t_L)≫t_A≫(Av_M⊗θ⁻¹≫Bv_N). No stronger assumptions or universe restriction; edge cases covered; lean.statement verbatim; declarations listed with real data and docstrings; only the theorem's proof is sorry; added stmt_dep is the landed presentation, acyclic; no name clashes. nt_compile --json on the snapshot file: 9.9 s, exit code 0, no errors or warnings. Second-reading section is the standard post-2026-10-17 placeholder. No fixes needed."
  }
 }
