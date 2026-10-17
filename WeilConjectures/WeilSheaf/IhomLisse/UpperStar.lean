@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Curry
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobeniusMate
 public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.IhomLisse.UpperStarComparison
@@ -218,15 +219,16 @@ theorem adicUpperStarIhomComparison_str {A B : AdicSheaf l Y} (sA : (b.inv)_*ᵃ
   apply Mod.hom_ext_of_evaluation
   have : IsIso (upperStarStr l c sA).hom.hom :=
     inferInstanceAs (IsIso ((Mod.forget _).map (upperStarStr l c sA).hom))
-  rw [← cancel_epi (_ ◁ (upperStarStr l c sA).hom.hom)]
   have h1 := ihomStr_evaluation a (upperStarStr l c sA) (upperStarStr l c sB)
   have h2 := upperStarStr_pairing (c := c) (ihomStr l b sA sB) sA sB (Mod.evaluation A B)
     (ihomStr_evaluation b sA sB)
   have h3 := uncurryHom_adicUpperStarIhomComparison j A B
   rw [Mod.uncurryHom] at h3
-  rw [comp_whiskerRight, comp_whiskerRight, Category.assoc]
-  erw [← whisker_exchange_assoc, ← tensorHom_def'_assoc, h1, ← tensorHom_def'_assoc]
-  erw [μ_natural_left_assoc, ← Functor.map_comp, h3, h3]
-  exact h2.symm
+  rw [← cancel_epi (_ ◁ (upperStarStr l c sA).hom.hom), comp_whiskerRight_assoc,
+    whisker_exchange_assoc, ← tensorHom_def'_assoc, h1, comp_whiskerRight_assoc,
+    ← tensorHom_def'_assoc]
+  erw [h3, h2, ← h3]
+  exact μ_natural_left_assoc (a.inv)_*[WeilCoefficients.{u} l]
+    (adicUpperStarIhomComparison l j A B).hom _ _
 
 end AlgebraicGeometry.ProEtale

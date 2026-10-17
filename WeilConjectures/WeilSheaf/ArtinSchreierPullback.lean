@@ -108,6 +108,35 @@ lemma homMkOfFrobeniusStr_hom_hom_f {F G : WeilSheaf k₀ l X}
     (homMkOfFrobeniusStr f hf).hom.hom.f = f :=
   rfl
 
+/-- A morphism `φ̄^* F ⟶ G` of the underlying sheaves of modules which is compatible with the Weil
+structures, in the form `Fr^* φ̄^* F ≅ (φ̄ ≫ Fr)^* F ≅ φ̄^* Fr^* F ⟶ φ̄^* F`, as a morphism of
+Weil sheaves `φ^* F ⟶ G`. -/
+set_option maxHeartbeats 50000 in
+noncomputable def homMkOfUpperStar {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
+    (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l Y}
+    {G : WeilSheaf k₀ l X}
+    (f : (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))^*ᵃ[l].obj
+      F.obj.carrier ⟶ G.obj.carrier)
+    (hf : (ProEtale.upperStarComp _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom
+          (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))).hom.app
+          F.obj.carrier.X ≫
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[_].map f.hom ≫
+        G.frobeniusStr =
+      (ProEtale.upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
+          φ (comp_over φ (Spec (CommRingCat.of k₀)))).symm).hom.app F.obj.carrier.X ≫
+        (ProEtale.upperStarComp _
+          (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app F.obj.carrier.X ≫
+        (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))^*[_].map
+          F.frobeniusStr ≫ f.hom) :
+    (upperStar φ).obj F ⟶ G :=
+  homMkOfFrobeniusStr f (by
+    rw [frobeniusStr_upperStar]
+    simp only [Category.assoc]
+    rw [← Iso.app_inv, Iso.eq_inv_comp]
+    exact hf)
+
+
 end HomMk
 
 end WeilSheaf
@@ -152,21 +181,21 @@ lemma affineLine.isIso_artinSchreierImageEval :
 as a morphism of Weil sheaves: the evaluation at the point of the fibre given by the cover, which
 is compatible with the Weil structures
 (`AlgebraicGeometry.affineLine.artinSchreierImageEval_frobenius`). -/
+set_option maxHeartbeats 50000 in
 noncomputable def WeilSheaf.upperStarArtinSchreierMapImageHom :
     (WeilSheaf.upperStar (affineLine.artinSchreierMap k₀)).obj
         (image (WeilSheaf.artinSchreierIdempotent ψ)) ⟶
       WeilSheaf.adicConstant k₀ l (affineLine k₀) :=
-  WeilSheaf.homMkOfFrobeniusStr (affineLine.artinSchreierImageEvalModHom l ψ) (by
-    rw [affineLine.artinSchreierImageEvalModHom_hom, WeilSheaf.frobeniusStr_upperStar]
-    simp only [Category.assoc]
-    exact (Iso.eq_inv_comp ((ProEtale.upperStarComp (WeilCoefficients.{u} l)
-      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ĀS).app _)).2
-      (affineLine.artinSchreierImageEval_frobenius ψ))
+  WeilSheaf.homMkOfUpperStar _ (affineLine.artinSchreierImageEvalModHom l ψ) (by
+    rw [affineLine.artinSchreierImageEvalModHom_hom]
+    exact affineLine.artinSchreierImageEval_frobenius ψ)
 
 instance : IsIso (WeilSheaf.upperStarArtinSchreierMapImageHom ψ) := by
   have : IsIso (affineLine.artinSchreierImageEvalModHom l ψ).hom := by
     rw [affineLine.artinSchreierImageEvalModHom_hom]
     exact affineLine.isIso_artinSchreierImageEval ψ
+  have : IsIso ((Mod.forget _).map (affineLine.artinSchreierImageEvalModHom l ψ)) :=
+    inferInstanceAs (IsIso (affineLine.artinSchreierImageEvalModHom l ψ).hom)
   have : IsIso (affineLine.artinSchreierImageEvalModHom l ψ) :=
     isIso_of_reflects_iso _ (Mod.forget _)
   have : IsIso (WeilSheaf.upperStarArtinSchreierMapImageHom ψ).hom.hom.f :=

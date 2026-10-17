@@ -431,7 +431,9 @@ theorem ProEtaleWeilSheaf.exists_retraction_of_isotypic [Etale π] [QuasiCompact
     (fun g ↦ ProEtale.AdicSheaf.smul (ULift.up (χ g)) U) 0
     (by rw [AddChar.map_zero_eq_one]; exact ProEtale.AdicSheaf.smul_one U)
     (ProEtaleWeilSheaf.torsorIdempotent π τ hτ χ)
-    (∑ g : G, ProEtale.AdicSheaf.smul (ULift.up (c g)) _ ≫ ev g) φ _ (fun h ↦ ?_) (fun g ↦ ?_)
+    (∑ g : G, ProEtale.AdicSheaf.smul (ULift.up (c g)) _ ≫ ev g) φ
+    ((π̄)^*ᵃ[l].map φ.hom.f ≫ (ProEtale.adicUpperStarLowerStarAdjunction l π̄).counit.app _)
+    (fun h ↦ ?_) (fun g ↦ ?_)
   · refine ⟨Abelian.monoLift φ _ hcok, ?_, Abelian.monoLift_comp _ _ _⟩
     rw [← cancel_mono φ, Category.assoc, Abelian.monoLift_comp, Category.id_comp,
       ProEtaleWeilSheaf.comp_torsorIdempotent π τ hτ χ hG φ hφ]
