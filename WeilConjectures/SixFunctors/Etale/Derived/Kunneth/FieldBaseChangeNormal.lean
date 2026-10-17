@@ -148,8 +148,8 @@ noncomputable def isLimitPullbackConstCone [IsConnected J] {D : J ⥤ C} {W X : 
       simp
   have e₄ : (isLimitConstCone J W).map cD w = w₀ :=
     (isLimitConstCone J W).hom_ext fun j ↦ by
-      rw [IsLimit.map_π]
-      simp [hw₀]
+      rw [IsLimit.map_π, hw₀]
+      exact (Category.comp_id _).symm
   rw [e₁, e₂, e₃, e₄]
   exact hpb
 
@@ -214,14 +214,13 @@ lemma map_mem_pairRight (i : Finset (A ⊕ B)) (x : pairLeft K A B i) : φ x ∈
   exact Algebra.adjoin_mono Set.subset_union_right hx
 
 /-- The morphism of diagrams `pairLeft ⟶ pairRight` induced by `φ`. -/
+@[simps]
 def pairHom : diagramOfMonotone (pairLeft K A B) ⟶ diagramOfMonotone (pairRight φ) where
   app i := CommRingCat.ofHom
     ((φ.comp (pairLeft K A B i).val).codRestrict _ (map_mem_pairRight φ i)).toRingHom
-
-@[simp]
-lemma pairHom_app_apply (i : Finset (A ⊕ B)) (x : pairLeft K A B i) :
-    (((pairHom φ).app i).hom x : B) = φ x :=
-  rfl
+  naturality i j f := by
+    ext x
+    exact Subtype.ext rfl
 
 lemma finiteType_pairLeft (i : Finset (A ⊕ B)) : Algebra.FiniteType K (pairLeft K A B i) :=
   (Subalgebra.fg_iff_finiteType _).1 ⟨i.preimage Sum.inl Sum.inl_injective.injOn, by
@@ -235,12 +234,16 @@ lemma finiteType_pairRight (i : Finset (A ⊕ B)) : Algebra.FiniteType K (pairRi
       rw [Finset.coe_union, Finset.coe_image, Finset.coe_preimage, Finset.coe_preimage]
       rfl⟩
 
+lemma pairHom_app_comp_val (i : Finset (A ⊕ B)) :
+    (pairHom φ).app i ≫ CommRingCat.ofHom (pairRight φ i).val.toRingHom =
+      CommRingCat.ofHom (pairLeft K A B i).val.toRingHom ≫ CommRingCat.ofHom φ.toRingHom := by
+  ext x
+  rfl
+
 lemma finiteType_pairHom (i : Finset (A ⊕ B)) : ((pairHom φ).app i).hom.FiniteType := by
+  rw [pairHom_app, CommRingCat.hom_ofHom]
   refine RingHom.FiniteType.of_comp_finiteType (f := algebraMap K (pairLeft K A B i)) ?_
-  have e : ((pairHom φ).app i).hom.comp (algebraMap K (pairLeft K A B i)) =
-      (algebraMap K (pairRight φ i) : K →+* (diagramOfMonotone (pairRight φ)).obj i) :=
-    RingHom.ext fun x ↦ Subtype.ext (by simp)
-  rw [e]
+  rw [AlgHom.toRingHom_eq_coe, AlgHom.comp_algebraMap]
   exact RingHom.finiteType_algebraMap.2 (finiteType_pairRight φ i)
 
 lemma exists_mem_pairLeft (x : A) : ∃ i, x ∈ pairLeft K A B i :=
@@ -412,13 +415,16 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine_of_algebra {K : T
     rfl
   have ht (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) :
       t ≫ (S'.coneSpecOfMonotone FB).π.app i = (T.coneSpecOfMonotone FC).π.app i ≫ g.app i := by
+    have key : CommRingCat.ofHom (FB i.unop).val.toRingHom ≫ t.appTop =
+        (Subalgebra.pairHom φ).app i.unop ≫ CommRingCat.ofHom (FC i.unop).val.toRingHom := by
+      rw [Subalgebra.pairHom_app_comp_val]
+      congr 1
+      ext x
+      exact (hφ x).symm
     rw [Scheme.coneSpecOfMonotone_π_app, Scheme.coneSpecOfMonotone_π_app,
       Scheme.toSpecΓ_naturality_assoc, Category.assoc]
-    dsimp [g]
-    rw [← Spec.map_comp, ← Spec.map_comp]
-    congr 2
-    ext x
-    erw [Subalgebra.pairHom_app_apply, hφ]
+    exact congrArg (T.toSpecΓ ≫ ·)
+      ((Spec.map_comp _ _).symm.trans ((congrArg Spec.map key).trans (Spec.map_comp _ _)))
   have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : LocallyOfFiniteType (w.app i) :=
     HasRingHomProperty.Spec_iff.2
       (RingHom.finiteType_algebraMap.2 (Subalgebra.finiteType_pairLeft i.unop))

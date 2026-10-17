@@ -84,8 +84,8 @@ lemma isPullback_map_pullback_const {D : J ⥤ C} {W X : C} (a : X ⟶ W)
   have h₁ : (pullback ((Functor.const J).map a) w).map u ≫
       (pullback.fst ((Functor.const J).map a) w).app k =
         (pullback.fst ((Functor.const J).map a) w).app j := by
-    simpa using (pullback.fst ((Functor.const J).map a) w).naturality u
-  have h₂ : D.map u ≫ w.app k = w.app j := by simpa using w.naturality u
+    simp
+  have h₂ : D.map u ≫ w.app k = w.app j := by simp
   rw [h₁, h₂]
   exact isPullback_pullback_evaluation _ w j
 
