@@ -17,9 +17,105 @@
   "def-pur-sheaf-hom",
   "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct the specified map. Put $A=f^{-1}R$. The unit map $S\\otimes_A A\\to S$, $s\\otimes a\\mapsto s c(a)$, has inverse $s\\mapsto s\\otimes1$: the two composites are identities by the balancing relation. These maps induce inverse sheaf maps by [def-pur-sheaf-tensor-product]. Apply the tensor comparison [lem-weil-pbc-ringed-topoi-module-pullback-tensor] to the evaluation $L^\\vee\\otimes_R L\\to R$ from [def-pur-sheaf-hom]. It gives a pairing $f^*(L^\\vee)\\otimes_S f^*L\\to S$. Transpose it, using the symmetry and tensor-Hom adjunction in [lem-pc-sheaf-modules-tensor-closed], to obtain $\\delta_{f,L}$. This constructs an $S$-linear morphism without assuming it invertible.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "def-pur-sheaf-hom",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0GMX (remark-pullback-internal-hom), 03EL (lemma-tensor-product-pullback), 03EO (lemma-internal-hom-adjoint-tensor)."
+   }
+  },
+  {
+   "text": "Choose the given finite-free cover $\\{V_i\\to1_{\\mathcal C}\\}$. Since $u$ preserves the terminal object and coverings, $\\{u(V_i)\\to1_{\\mathcal D}\\}$ is a cover. The functor $u$ is continuous in the sense of [def-weil-pbc-sites-and-cohomology](3): it sends coverings to coverings, and since it preserves fibre products each $u(T\\times_VV_j)\\to u(T)\\times_{u(V)}u(V_j)$ is an isomorphism. Its $u_s$ is left adjoint to $G\\mapsto G\\circ u$, hence is the functor $f^{-1}$ of [lem-weil-pbc-left-exact-site-inverse-image-tensor], which preserves finite limits and colimits; so $u$ defines a morphism of sites. Apply [lem-weil-pbc-localize-ringed-site-morphism] with its source-site notation interchanged with ours: on $\\mathcal C/V_i$ and $\\mathcal D/u(V_i)$, write $f_i$ for the localized morphism. Its statement gives $(f^*N)|_{u(V_i)}\\cong f_i^*(N|_{V_i})$, with coefficient map $c|_{u(V_i)}$. By [def-pur-sheaf-hom] and relocalization in [def-pur-localized-ringed-site], restriction of sheaf Hom is sheaf Hom of the restrictions: at an object $T\\to V_i$ both consist of the same linear natural transformations on $\\mathcal C/T$, and evaluation is the same evaluation. Restriction to $u(V_i)$ is sectionwise, and the localization comparison and the tensor comparison [lem-weil-pbc-ringed-topoi-module-pullback-tensor] are both induced by $s\\otimes x\\mapsto s\\otimes x$ on pulled-back sections; so the restriction of $\\delta_{f,L}$ is $\\delta_{f_i,L|_{V_i}}$. We can therefore compute on a site where $L=R^{\\oplus r}$ for the specified finite $r=r_i$.",
+   "uses": [
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "def-pur-sheaf-hom",
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0 (lemma-localize-morphism-ringed-sites); Tag 03CF (sites.tex, lemma-localize-morphism); Tag 04TT (section-internal-hom), lemma-internal-hom-restriction; Tag 03EL."
+   }
+  },
+  {
+   "text": "Work in one such localized site, suppressing the index $i$. The finite product sheaf $R^r$ is also the finite direct sum: its projections and injections have $p_j\\iota_k=\\delta_{jk}$ and $\\sum_j\\iota_jp_j=1$, as checked on sections. For $T$ in this site, a linear sheaf map $R^r|_T\\to R|_T$ is determined by the $r$ sections $a_j$ which are its values on $e_j$. Conversely $(a_j)$ defines the map $(x_j)\\mapsto\\sum_j a_jx_j$ on every object over $T$. These formulas are mutually inverse, linear, and commute with restriction. Thus [def-pur-sheaf-hom] identifies $L^\\vee$ with $R^r$, with coordinate functionals $e_j^\\vee$ and evaluation $e_j^\\vee(e_k)=\\delta_{jk}$. The same formulas over $S$ identify the dual of $S^r$ with $S^r$. This is a direct calculation from the sheaf Hom definition, including $r=0$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0FNY (example-dual), finite-free calculation; Tag 04TT (section-internal-hom)."
+   }
+  },
+  {
+   "text": "The localized inverse image preserves finite products by [lem-weil-pbc-left-exact-site-inverse-image-tensor]. Applied to the coordinate diagram, it identifies $f_i^{-1}(R^r)$ with $(f_i^{-1}R)^r$, with the pulled-back injections and projections. For any ring sheaf $A$ and map $A\\to S$, the map $S\\otimes_A A^r\\to S^r$ sends $s\\otimes(a_j)$ to $(s c(a_j))$ and has inverse $(b_j)\\mapsto\\sum_j b_j\\otimes e_j$. The balancing relation gives both inverse identities, and the formulas commute with restrictions, so sheafifying gives inverse sheaf maps by [def-pur-sheaf-tensor-product]. Hence both $f_i^*L$ and $f_i^*(L^\\vee)$ are free of rank $r$ with the pulled-back bases. Pulling back the evaluation identities in Step 3 gives $\\delta_{f_i,L}(f_i^*e_j^\\vee)(f_i^*e_k)=\\delta_{jk}1_S$: the canonical tensor comparison in Step 1 is the one induced by pulling back that pairing. In the two coordinate identifications this sends the $j$th basis vector to the $j$th coordinate functional. Thus its matrix is the identity, and the inverse sends $\\psi$ to $\\sum_j\\psi(f_i^*e_j)f_i^*e_j^\\vee$. Only finite products and tensor balancing were used; in particular the ring map need not be flat.",
+   "uses": [
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0FNY (example-dual), explicit finite-free evaluation; Tag 03EL (lemma-tensor-product-pullback)."
+   }
+  },
+  {
+   "text": "On overlaps $u(V_i)\\times u(V_j)$ the two local inverses just constructed are inverses of the restriction of the single morphism $\\delta_{f,L}$, by Step 2. Inverses of a fixed map are equal: $h=h(\\delta k)=(h\\delta)k=k$. They therefore glue to a unique global $S$-linear inverse by [lem-pur-sheaf-hom-cover-gluing], with $U=1_{\\mathcal D}$ and the cover of Step 2. The composites with $\\delta_{f,L}$ restrict to identity maps, so uniqueness in that same gluing statement makes both composites identities globally. This proves isomorphy and the stated basis formula simultaneously. Identification of sheaves on $\\mathcal D/1$ with sheaves on $\\mathcal D$ is the sectionwise relabeling of objects [def-pur-localized-ringed-site].",
+   "uses": [
+    "lem-pur-sheaf-hom-cover-gluing",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EM (lemma-internal-hom), via Sites Tag 04TQ; local-to-global step in Tag 0FNY (example-dual)."
+   }
+  },
+  {
+   "text": "For a morphism $a:L\\to M$ of finite locally free $R$-modules, write $a^\\vee:M^\\vee\\to L^\\vee$ for precomposition [def-pur-sheaf-hom]. The two maps from $f^*(M^\\vee)$ to $\\mathcal Hom_S(f^*L,S)$ are $\\delta_{f,L}\\circ f^*(a^\\vee)$ and precomposition by $f^*a$ after $\\delta_{f,M}$. Under the tensor-Hom adjunction of [lem-pc-sheaf-modules-tensor-closed], their pairings are the pullbacks of $\\operatorname{ev}_L\\circ(a^\\vee\\otimes1_L)$ and $\\operatorname{ev}_M\\circ(1_{M^\\vee}\\otimes a)$, respectively, by naturality of [lem-weil-pbc-ringed-topoi-module-pullback-tensor]. These source pairings agree: both evaluate $(\\varphi,x)$ as $\\varphi(a(x))$ on every localized object. The adjunction is injective, so the two maps agree. This proves contravariant naturality without a common choice of bases for $L$ and $M$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0GMX (remark-pullback-internal-hom), 03EO (lemma-internal-hom-adjoint-tensor), 03EL (lemma-tensor-product-pullback); evaluation naturality calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "def-pur-sheaf-hom",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-pur-sheaf-hom-cover-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0GMX, 0FNY, 04J0, 03EL, 03EO and 03EM; explicit finite-basis proof of the Powers and duals paragraph of det-prop-sfb-cartesian-coefficients-twists, main-20261015."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +151,45 @@
    "results": "0 hits; . No matches in Mathlib/Algebra/Category/ModuleCat/Sheaf.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dual|internalHom|homObj",
+   "results": "0 hits: . Subdirectory: Algebra/Category/ModuleCat/Sheaf; ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback commutes with the internal dual of a finite locally free sheaf of modules without flatness",
+   "results": "8 hits: SheafOfModules.pullback, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackPushforwardAdjunction; ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullback\"",
+   "results": "12 hits: PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id; ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of the dual of a finite locally free sheaf of modules along any morphism of ringed sites is canonically the dual of pullback",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjUnitToUnit; ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The evaluation comparison commutes with extension of scalars and geometric inverse image for a locally finite free module sheaf",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.ιFree_freeMap_assoc; ",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-prop-sfb-cartesian-coefficients-twists",
@@ -75,5 +206,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-ringed-site-finite-free-dual-pullback",
+  "worker": "stage1",
+  "summary": "Constructed the evaluation comparison, reduced it to the specified covering by the existing ringed localization theorem, computed both finite free duals and scalar extension explicitly, glued the local inverses and checked contravariant naturality by evaluation. No new nodes; statement unchanged; no flatness assumption. Existing searches retained, five actual Q141 searches added.",
+  "blueprint": "Realizes the local free check in the Powers and duals paragraph of det-prop-sfb-cartesian-coefficients-twists (main-20261015), for arbitrary finite local rank; it does not alter the affine-space purity unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Steps 1, 2, 4 and 6 use the canonical natural relative tensor comparison to construct and identify pulled evaluation; a generic ringed-topos tool absent from the purity unit."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Steps 1 and 6 use the ordinary tensor-Hom adjunction and symmetry for module sheaves on any ringed site, not a Picard theorem."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Step 2 uses exactly the canonical restricted module-pullback comparison and localized coefficient map, a general site tool."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Step 4 uses finite-product preservation of geometric inverse image on each localized site, a generic site fact."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Step 5 uses existence and uniqueness of gluing compatible local module maps to glue inverses; no purity theorem is involved."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-pur-sheaf-hom-cover-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-bf64e0718",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-bf64e0718 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement (unchanged), all six steps and every cited node's statement. The delivery has no new nodes. Sources checked: Stacks sites-modules.tex 0GMX (remark-pullback-internal-hom, l.3787) and 0FNY (example-dual, l.4886); the flatness hypothesis at l.5606 is correctly not needed for finite locally free L. Blueprint main-20261015 sk-prop-sfb-cartesian-coefficients-twists.proof.md:32-35, Powers and duals paragraph, 'checks locally where L is free': the route is kept. The parent det-prop-sfb-cartesian-coefficients-twists applies the item with c=alpha_f on pro-etale sites, and the hypotheses are met. Small cases tested: rank 0, non-flat Z->Z/2 rank 1, ranks varying over a cover, empty cover. Steps 3-6 are correct: the coordinate dual, S(x)_A A^r = S^r, gluing inverses through existence and uniqueness, and naturality through injectivity of the adjunction. Repaired one fault (E1/E5 type) in Step 2. It applied lem-weil-pbc-localize-ringed-site-morphism without checking that u is continuous and defines a morphism of sites. The step now verifies continuity (a) and (b) of def-weil-pbc-sites-and-cohomology(3) and exactness of u_s through lem-weil-pbc-left-exact-site-inverse-image-tensor. It also replaces a garbled sentence about restriction of the comparisons with a plain statement on pulled-back sections. proof_deps is unchanged. Remaining note: the compatibility of the canonical localization and tensor comparisons on sections is routine and is accepted at this level. No duplicate at ringed-site scope: the scheme, iso-only and etale nodes are narrower. All five declared tool_uses are generic site and ringed-topos tools and are accepted. No SGA source is cited.; 1 file(s) fixed by the reviewer"
  }
 }
