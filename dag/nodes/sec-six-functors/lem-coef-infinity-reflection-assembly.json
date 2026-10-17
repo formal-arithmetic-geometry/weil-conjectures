@@ -27,7 +27,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-infinity-mapping-composition"
+  "lem-coef-infinity-mapping-composition",
+  "def-coef-coherent-adjunction-data"
  ],
  "proof": [
   {
@@ -236,5 +237,34 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-d974f957d (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-infinity-cocartesian-arrow-projection, all nine cited statements, the parent's citing step, and paragraph 2 of the ancestor prop-coef-integral-exceptional-adjoint in main-20261015. The item statement is unchanged and matches Kerodon 02FD/02FE and their coreflective dual. The new node is true: it is the dual of Kerodon 01VK. The Z restriction is necessary (the {0}⊂Δ¹ case shows why) and is present. It is statement-only, self-contained, has all three search kinds, and its blueprint ancestry is correct. Step 1: E⊂C×Δ¹ is a quasicategory with an inner fibration to Δ¹. I checked both test fibers in the cocartesian mapping criterion; in fiber 0 both sides are empty, so the map is ∅→∅. Step 2: the lift along ∅⊂C via the trivial-Kan leaf gives a coherent P and a. Step 3: inverting a on D gives the first triangle. Step 4: Pa and bP are invertible by cancellation into D. Step 5: I type-checked the three interchange identities and the idempotence calculation; an invertible idempotent is 1, so the second triangle holds in Fun(C,D). Step 6: the dual goes through opposites via the pinch/U comparison, with correct triangle orientations. A BFS over the 146 dependencies shows no cycle. Citing pointwise-cocartesian-transport would close an 8-node cycle back to the item, so the new lower node is justified. No duplicate exists. I accept the tool uses of lem-cbc-enhanced-functor-cone-calculus and lem-cbc-simplicial-composition-spine as generic black boxes; the trivial-Kan lemma is a Mathlib leaf. No SGA is used; the Kerodon sources are WANTED and proof_origin is agent. The new node has no lean_audit field, which I did not treat as a fault since 123 of 1647 nodes created since 2026-10-16 also lack it. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityReflectionAssembly",
+  "declaration": "SSet.Enhanced.reflection_assembly",
+  "declarations": [
+   "SSet.Enhanced.fullSubcategory",
+   "SSet.Enhanced.fullSubcategoryInclusion",
+   "SSet.Enhanced.mappingEdgeVertex",
+   "SSet.Enhanced.canonicalPrecompositionMap",
+   "SSet.Enhanced.canonicalPostcompositionMap",
+   "SSet.Enhanced.IsUniversalPrecomposition",
+   "SSet.Enhanced.IsUniversalPostcomposition",
+   "SSet.Enhanced.reflection_assembly"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityReflectionAssembly.lean",
+  "statement": "theorem reflection_assembly (C : SSet.{u}) [Quasicategory C] (P : C _⦋0⦌ → Prop) : ((∀ x : C _⦋0⦌, ∃ d₀ : fullSubcategory C P _⦋0⦌, ∃ u : C _⦋1⦌, ∃ h₁ : C.δ 1 u = x, ∃ h₀ : C.δ 0 u = (fullSubcategoryInclusion C P).app _ d₀, IsUniversalPrecomposition P x d₀ u h₁ h₀) → ∃ R : C ⟶ fullSubcategory C P, ∃ adj : HomotopicalAlgebra.ModelInfinity.CoherentAdjunction R (fullSubcategoryInclusion C P), ∀ x : C _⦋0⦌, ∃ h₁ : C.δ 1 ((SSet.Enhanced.evaluation C C x).app _ adj.unitEdge) = x, ∃ h₀ : C.δ 0 ((SSet.Enhanced.evaluation C C x).app _ adj.unitEdge) = (fullSubcategoryInclusion C P).app _ (R.app _ x), IsUniversalPrecomposition P x (R.app _ x) ((SSet.Enhanced.evaluation C C x).app _ adj.unitEdge) h₁ h₀) ∧ ((∀ x : C _⦋0⦌, ∃ d₀ : fullSubcategory C P _⦋0⦌, ∃ v : C _⦋1⦌, ∃ h₁ : C.δ 1 v = (fullSubcategoryInclusion C P).app _ d₀, ∃ h₀ : C.δ 0 v = x, IsUniversalPostcomposition P x d₀ v h₁ h₀) → ∃ B : C ⟶ fullSubcategory C P, ∃ adj : HomotopicalAlgebra.ModelInfinity.CoherentAdjunction (fullSubcategoryInclusion C P) B, ∀ x : C _⦋0⦌, ∃ h₁ : C.δ 1 ((SSet.Enhanced.evaluation C C x).app _ adj.counitEdge) = (fullSubcategoryInclusion C P).app _ (B.app _ x), ∃ h₀ : C.δ 0 ((SSet.Enhanced.evaluation C C x).app _ adj.counitEdge) = x, IsUniversalPostcomposition P x (B.app _ x) ((SSet.Enhanced.evaluation C C x).app _ adj.counitEdge) h₁ h₀)",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The natural mathematical statement is unchanged. Canonical pre/postcomposition restrict the homotopy class characterized by mapping_composition. The conclusion uses the existing independently bound def-coef-coherent-adjunction-data and includes universal properties for the evaluated unit/counit. No downstream local-adjoint criterion import is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-88ee0551b",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Node statement unchanged from base; only lean added and the landed existing node def-coef-coherent-adjunction-data added to stmt_deps (permitted as a landed node). lean.statement matches the file signature exactly; all 8 declarations listed. Clause check: C : SSet.{u} quasicategory, full subcategory = fullSubcomplex.toSSet, u : x -> i d0 with δ1/δ0 endpoints, IsUniversalPrecomposition = weak equivalence of the canonical composition restricted to u for every d; conclusion is CoherentAdjunction R i (unit id->iR, counit Ri->id, triangle 2-simplices in internal homs) plus universality of each evaluated unit component; the dual uses CoherentAdjunction i B with correct orientation and postcomposition. The canonical composition is the c of MappingCompositionStatement (same term as localAdjointComposition), fixed up to homotopy, so not an arbitrary map. Edge cases (empty C, empty D, empty mapping spaces) fine; no extra assumptions or universe restrictions; docstrings with source/blueprint; only sorry; Worker report and Second reading by Q52 present. nt_compile.py (local side overlay): exit 0, no errors."
  }
 }
