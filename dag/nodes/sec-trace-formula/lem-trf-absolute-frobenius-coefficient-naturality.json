@@ -13,13 +13,67 @@
   "def-weil-pbc-proetale-modules",
   "lem-pur-derived-change-of-rings",
   "lem-trf-absolute-frobenius-site",
+  "lem-pur-frobenius-trivialization-pullback",
   "det-prop-scalar-six-pullback",
   "lem-weil-pbc-finite-discrete-condensed-ring-constant",
   "lem-weil-pbc-finite-discrete-scheme-ring-constant"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $b=0$, both absolute-Frobenius pullbacks are the identity and the canonical coefficient comparison for the identity map is the identity. Since $\\tau_R^{(0)}=\\operatorname{id}$ by definition, both sides of the required equation are the identity of $TK$.",
+   "uses": [
+    "det-prop-scalar-six-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-trf-absolute-frobenius-site.proof.md",
+    "place": "Final proof paragraph, convention $b=0$ and identity comparison"
+   }
+  },
+  {
+   "text": "Consider $b=1$. For every weakly etale object $v:V\\to X$, the relative Frobenius $r_V=(F_V,v):V\\to V\\times_{X,F_X}X$ is the canonical isomorphism used to define the site trivialization in [lem-trf-absolute-frobenius-site]. The module version of that construction is exact and is induced termwise on complexes, as recorded in [lem-pur-frobenius-trivialization-pullback]. Choose a K-flat resolution $P\\to K$ using [lem-pur-derived-change-of-rings]. The comparison $c_{F_X,P}$ is represented by the coefficient-change pullback comparison of [det-prop-scalar-six-pullback] (1), after the finite discrete coefficient identifications of [lem-weil-pbc-finite-discrete-condensed-ring-constant] and [lem-weil-pbc-finite-discrete-scheme-ring-constant]. On each site object and each pure tensor $x\\otimes b$ its two composites to $P(V)\\otimes_A B$ are both restriction along $r_V$ followed by $x\\otimes b\\mapsto r_V^*(x)\\otimes b$: the first applies $c_{F_X,P}$ and then the $A$-trivialization, while the second applies the $B$-trivialization to the same relative-Frobenius restriction. The equality extends from pure tensors to the tensor complex and is preserved by differentials; exactness and localization at quasi-isomorphisms then give $T(\\tau_A^{(1)}{}_K)\\circ c_{F_X,K}=\\tau_B^{(1)}{}_{TK}$.",
+   "uses": [
+    "lem-trf-absolute-frobenius-site",
+    "lem-pur-frobenius-trivialization-pullback",
+    "lem-pur-derived-change-of-rings",
+    "det-prop-scalar-six-pullback",
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-trf-absolute-frobenius-site.proof.md",
+    "place": "Final proof paragraph, relative-Frobenius section maps and passage to exact inverse image"
+   }
+  },
+  {
+   "text": "For arbitrary $b$, use the multiplicative-iterate clause of [lem-trf-absolute-frobenius-site] and the same clause in [lem-pur-frobenius-trivialization-pullback]: under the canonical composition identification, $\\tau_R^{(b+1)}$ is the composite of $\\tau_R^{(1)}$ with the pullback of $\\tau_R^{(b)}$ (equivalently, the $(b+1)$-fold iterate of the one-step trivialization). The coefficient comparison in [det-prop-scalar-six-pullback] (1) is compatible with composition of scheme maps, so $c_{F_X^{b+1},K}$ is the composite of the one-step comparison and the comparison for the $b$-fold pullback, with the coefficient-change comparison inserted at each stage. In the square expressing the $b$-case, whisker the already proved one-step square by the relevant pullback functors; paste the two commuting squares and use naturality of the one-step trivialization. The outer rectangle has top edge $c_{F_X^{b+1},K}$ and vertical edges the two iterated trivializations, hence is exactly the desired equation for $b+1$ after cancelling the canonical composition isomorphisms. Induction proves the displayed equality for every $b\\geq0$. The argument only used K-flat resolutions to compute derived change of rings and never imposed flatness or Tor-amplitude on $B$ or $K$.",
+   "uses": [
+    "lem-trf-absolute-frobenius-site",
+    "lem-pur-frobenius-trivialization-pullback",
+    "det-prop-scalar-six-pullback",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-trf-absolute-frobenius-site.proof.md",
+    "place": "Final proof paragraph, multiplicative iterates"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-prop-scalar-six-pullback",
+  "lem-trf-absolute-frobenius-site",
+  "lem-pur-frobenius-trivialization-pullback",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-trf-absolute-frobenius-site.proof.md",
+  "place": "Final proof paragraph, expanded coefficient calculation and induction on the iterates"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,7 +105,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-scheme-galois-coefficient-change",
@@ -70,5 +124,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-absolute-frobenius-coefficient-naturality",
+  "worker": "stage1",
+  "summary": "No new nodes were needed. The proof is split into the identity case, the one-step coefficient calculation on relative-Frobenius site objects using a K-flat resolution, and induction using the canonical iterate and scalar-comparison composition laws. Existing finite-discrete coefficient identifications are cited to justify the stated ordinary constant-coefficient comparison.",
+  "blueprint": "Realizes the final coefficient-naturality sentence of thm-trf-finite-coefficient-map.proof.md through the relative-Frobenius section-map construction and the multiplicative iterate argument of lem-trf-absolute-frobenius-site.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-absolute-frobenius-site",
+    "why": "The coefficient unit needs the canonical relative-Frobenius site trivialization and its iterate law; this generic site lemma is outside the coefficient unit's route."
+   },
+   {
+    "node": "lem-pur-frobenius-trivialization-pullback",
+    "why": "The coefficient unit needs the finite-constant-module and iterate-compatible version of the Frobenius trivialization; no coefficient-unit node supplies it."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "K-flat resolutions and the everywhere-defined derived scalar extension are generic infrastructure, not a replacement for the coefficient unit route."
+   },
+   {
+    "node": "det-prop-scalar-six-pullback",
+    "why": "Clause (1) supplies the ambient pullback coefficient comparison and its composition coherence used by the unit's coefficient map."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "why": "It identifies finite discrete coefficient encodings before the scalar comparison is transported to ordinary constant coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "why": "It transports that finite coefficient-ring identification to the scheme pro-etale site."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-absolute-frobenius-site",
+  "lem-pur-frobenius-trivialization-pullback",
+  "lem-pur-derived-change-of-rings",
+  "det-prop-scalar-six-pullback",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NO-f00e7da12",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-f00e7da12 (reviewer sub-agent of L); spot-checked: I read the item, every cited node statement (det-prop-scalar-six-pullback clauses 1-3; lem-trf-absolute-frobenius-site statement and iterate proof step; lem-pur-frobenius-trivialization-pullback; lem-pur-derived-change-of-rings; both finite-discrete ring lemmas; def-weil-pbc-proetale-modules), the unit sk-p-trace-coeff, the blueprint proofs of thm-trf-finite-coefficient-map and lem-trf-absolute-frobenius-site (main-20261015), Stacks 0F6W at more-morphisms.tex:19215, and the only citer lem-trf-scheme-galois-coefficient-change. The statement is unchanged from base and true: tau comes from an isomorphism of ringed topoi with the identity, so no l-invertibility, flatness or Tor condition is needed. Its coefficient category and the transported comparison c match the parent and the sibling. The orientation T(tau_A) after c equals tau_B is exactly what the citer's Step 3 uses with b=am. Edge cases checked: b=0, b=1, B=0 (and A=0, which forces B=0), empty X, u=id, non-flat Z/l^2->F_l. The steps are sound: Step 1 is the identity case (c_id=id from the composition clause), Step 2 is the sectionwise check along r_V on a K-flat representative, Step 3 is the iterate formula plus pullback composition plus naturality, by induction. Each step uses only the statements of the cited nodes. There are no new nodes, and the dependency graph stays acyclic. The duplicate search over Frobenius with coefficient change or trivialization found no node stating this. The six tool_uses are generic infrastructure and I accept them, as for the sibling. No SGA is used. One fix: the delivery reset blueprint.from.via to [], but it must be [\"lem-trf-scheme-galois-coefficient-change\"] (the base value, brief 7.2). from is split-owned, so the merge would install the wrong value. The corrected node is in fixes/dag/nodes/sec-trace-formula/lem-trf-absolute-frobenius-coefficient-naturality.json. The report's claim that it corrected created.item does not match the files; created is unchanged and correct.; 1 file(s) fixed by the reviewer"
  }
 }
