@@ -1,0 +1,119 @@
+{
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-def-bc",
+ "status": "unsplit",
+ "mathlib_match": null,
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived base change morphism restriction to an etale slice counit transpose",
+   "results": "8 hits: KaehlerDifferential.isBaseChange_of_formallyEtale and ring étale base-change results; no derived sheaf arrow theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, DerivedCategory, IsIso",
+   "results": "0 hits; loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|counit|derived",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived base change arrow compatible with restriction",
+   "results": "8 hits: IsBaseChange tensor-product linear-map results; no derived sheaf restriction theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unbounded derived base change exchange map restricted along etale U to X with U to B over S equals local exchange morphism",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Etale.forget, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, KaehlerDifferential.isBaseChange_of_formallyEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; none states the specified geometric arrow-localization identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, \"mate\"",
+   "results": "0 hits: ; none states the specified geometric arrow-localization identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|exchange|counit",
+   "results": "1 hits in Algebra/Homology/DerivedCategory: Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; none states the specified geometric arrow-localization identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived Beck Chevalley transformation is compatible with localization of sites and restriction to etale objects",
+   "results": "8 hits: CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt.mk, CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Functor.hasPointwiseLeftDerivedFunctorAt_iff, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; none states the specified geometric arrow-localization identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of unbounded derived sheaf base change map equals local map by adjunction and counit",
+   "results": "8 hits: AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom, AlgebraicGeometry.Scheme.Modules.restrictAdjunction; none states the specified geometric arrow-localization identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Beck|mate|baseChange",
+   "results": "12 hits in CategoryTheory/Adjunction: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean; none states the specified geometric arrow-localization identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "sbc-lem-etale-locality",
+  "date": "2026-10-17",
+  "group": "Q10"
+ },
+ "id": "lem-sbc-derived-base-change-arrow-localization",
+ "title": "Derived base-change arrow under etale localization",
+ "statement": "Let $f:X\\to S$ and $g:T\\to S$ be morphisms of schemes, with the Cartesian square $Y=X\\times_ST$, $h:Y\\to X$, $e:Y\\to T$ [sbc-def-base-change-square]. Let $a:U\\to X$ and $b:B\\to S$ be etale morphisms [def-weil-etale-morphism], and let $f_U:U\\to B$ satisfy $fa=bf_U$. Put $T_B=B\\times_ST$, with projections $g_B:T_B\\to B$ and $c:T_B\\to T$, and $Y_U=U\\times_XY$, with projections $h_U:Y_U\\to U$ and $d:Y_U\\to Y$. The canonical identification $Y_U\\cong U\\times_BT_B$ defines $e_U:Y_U\\to T_B$, so $ce_U=ed$. Work on the small etale sites [def-weil-pbc-etale-site] in the universe of [def-weil-size-convention], and write $r_Z$ for restriction to an etale object $Z$. Let $K\\in D(\\operatorname{Ab}(T_{\\Et}))$ be an arbitrary unbounded complex of abelian sheaves [def-weil-pbc-abelian-etale-sheaves], [def-weil-abstract-derived-category], and put $K_B=r_{T_B}K$. Use the exact etale inverse images [prop-weil-pbc-inverse-image-exact] and the unbounded derived direct images and canonical derived adjunctions of [sbc-def-base-change-map], specialized to constant coefficients $\\mathbf Z$ (abelian sheaves). Write $\\beta_K:f^{-1}Rg_*K\\to Rh_*e^{-1}K$ for its counit-transpose base-change morphism, and $\\beta_{U,K_B}$ for the corresponding morphism of $(f_U,g_B,h_U,e_U)$. Under the canonical comparisons\n$$C_L^D:r_Uf^{-1}Rg_*K\\xrightarrow{\\sim}f_U^{-1}r_BRg_*K\\xrightarrow{\\sim}f_U^{-1}Rg_{B*}K_B,$$\n$$C_R^D:r_URh_*e^{-1}K\\xrightarrow{\\sim}Rh_{U*}r_{Y_U}e^{-1}K\\xrightarrow{\\sim}Rh_{U*}e_U^{-1}K_B,$$\ninduced by termwise inverse-image composition and the derived slice-localization comparisons of [lem-weil-pbc-ringed-derived-slice-localization], one has\n$$C_R^D\\circ r_U(\\beta_K)=\\beta_{U,K_B}\\circ C_L^D.$$\nThis identity is natural in $K$. For every integer $q$, the exact-restriction/cohomology comparisons identify $r_UH^q(\\beta_K)$ with $H^q(\\beta_{U,K_B})$ under $H^q(C_L^D)$ and $H^q(C_R^D)$ [lem-weil-pbc-site-restriction-exact], [lem-weil-pbc-exact-functor-complex-cohomology].",
+ "stmt_deps": [
+  "sbc-def-base-change-square",
+  "def-weil-pbc-etale-site",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "prop-weil-pbc-inverse-image-exact",
+  "sbc-def-base-change-map",
+  "lem-weil-pbc-ringed-derived-slice-localization",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EZR, label lemma-base-change-local, compatibility of derived counit-transpose maps"
+ },
+ "kind": "statement",
+ "blueprint": {
+  "from": {
+   "node": "sbc-lem-etale-locality",
+   "place": "Proof, second paragraph: 'the assertions (2) and (3) are the same argument with the localization compatibility for the higher direct images and sheafified cohomology', applied 'to R^q of the base-change maps'.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

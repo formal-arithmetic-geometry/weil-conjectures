@@ -12,9 +12,104 @@
   "def-coef-infinity-fibrations",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First extract an underlying coherent inverse, without imposing a condition over the base. By [lem-coef-joyal-functor-equivalence-test], precomposition by $v$ induces equivalences on the ordinary homotopy categories of functors into $E$ and into $F$. Essential surjectivity for target $E$ gives $w:F\\to E$ and an isomorphism $wv\\cong1_E$ in $h\\operatorname{Fun}(E,E)$. Postcompose this isomorphism by $v$, obtaining $vwv\\cong v$. Full faithfulness of precomposition for target $F$ lifts that isomorphism, and its inverse, to an isomorphism $vw\\cong1_F$ in $h\\operatorname{Fun}(F,F)$: the inverse equations follow by faithfulness. The functor simplicial sets are quasicategories by the same cited theorem. Apply [lem-coef-quasicategory-invertible-interval] to these two functor quasicategories; each isomorphism is represented by a $J$-path. Its forward and reverse edges and inverse triangles give coherent natural equivalences $wv\\simeq1_E$ and $vw\\simeq1_F$, in the sense of [def-cbc-enhanced-diagrams-cones]. Thus $v$ is a functor equivalence.",
+   "uses": [
+    "lem-coef-joyal-functor-equivalence-test",
+    "lem-coef-quasicategory-invertible-interval",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4, proof (a), printed pp.1483-1484; agent expansion: categorical equivalence versus coherent inverse"
+   }
+  },
+  {
+   "text": "By [lem-cbc-enhanced-functor-cone-calculus], the functor equivalence just constructed gives weak homotopy equivalences $\\operatorname{Map}_E(a,b)\\to\\operatorname{Map}_F(va,vb)$ for all vertices $a,b$. The same node says that the components of the coherent natural equivalence $vw\\simeq1_F$ are equivalence edges. Consequently for every vertex $z\\in F$ there is a vertex $t=wz\\in E$ and an equivalence edge $e:vt\\to z$. These statements supply precisely full faithfulness and essential surjectivity needed below.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4, proof (a), printed pp.1483-1484; agent expansion: mapping spaces and image objects"
+   }
+  },
+  {
+   "text": "Compute the base mapping spaces directly from [def-cbc-enhanced-diagrams-cones]. For $i,j\\in\\{0,1\\}$, an $n$-simplex of $\\operatorname{Map}_{\\Delta^1}(i,j)$ is a monotone map $[n+1]\\to[1]$ with the first $n+1$ vertices all $i$ and the last vertex $j$. There is exactly one if $i\\leq j$ and none otherwise. Thus this mapping space is respectively $*$ or $\\varnothing$, degreewise. For any simplicial map $r:C\\to\\Delta^1$, applying $r$ to a right-pinched simplex gives a map $\\operatorname{Map}_C(a,b)\\to\\operatorname{Map}_{\\Delta^1}(ra,rb)$. In particular $ra>rb$ forces $\\operatorname{Map}_C(a,b)=\\varnothing$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4, proof (a), printed pp.1483-1484; agent expansion: explicit point-or-empty calculation for the interval"
+   }
+  },
+  {
+   "text": "Fix $u:x\\to y$ and put $i=p(x)\\leq j=p(y)$. Apply [lem-coef-infinity-cocartesian-mapping-criterion] to $p$. For a test vertex $t$ with $k=p(t)$, if $j\\leq k$ both bottom corners of its square are $*$. Its path homotopy pullback is then exactly $\\operatorname{Map}_E(x,t)$, so the square is a homotopy pullback exactly when $u^*:\\operatorname{Map}_E(y,t)\\to\\operatorname{Map}_E(x,t)$ is a weak homotopy equivalence. If $j>k$, its bottom left corner and its upper left corner are both empty by step 3. The path homotopy pullback is empty as well, so the comparison is the identity of the empty space. Therefore $u$ is $p$-cocartesian exactly when $u^*$ is a weak homotopy equivalence for every $t$ with $p(t)\\geq j$. The identical calculation for the inner fibration $q$ characterizes $q$-cocartesianness of $v(u)$ by the same test on all $z\\in F$ with $q(z)\\geq j$. The inner-fibration and quasicategory hypotheses required by the criterion are exactly the hypotheses of the item.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4, proof (a), printed pp.1483-1484; agent expansion: apply the general mapping-square criterion and evaluate its path pullbacks"
+   }
+  },
+  {
+   "text": "For each vertex $t\\in E$, functoriality of Hom [lem-coef-infinity-hom-bifunctor-functoriality], applied to $v$ and to the edge $u$ in its first variable, supplies the homotopy-commuting square\n$$\\begin{array}{ccc}\\operatorname{Map}_E(y,t)&\\xrightarrow{u^*}&\\operatorname{Map}_E(x,t)\\\\\n\\downarrow v_*&&\\downarrow v_*\\\\\n\\operatorname{Map}_F(vy,vt)&\\xrightarrow{v(u)^*}&\\operatorname{Map}_F(vx,vt).\\end{array}$$\nBoth vertical maps are weak homotopy equivalences by step 2. Hence the upper arrow is a weak homotopy equivalence if and only if the lower arrow is: apply the square on components and on each based homotopy group. A homotopy changes a basepoint only by the corresponding path, giving a conjugate isomorphism, so strict commutation is unnecessary. Notice also $q(vt)=p(t)$ from $qv=p$. This compares precisely the tests in step 4 at image objects.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4, proof (a), printed pp.1483-1484; agent expansion: compare precomposition at the image targets"
+   }
+  },
+  {
+   "text": "For an arbitrary $z\\in F$, take $e:vt\\to z$ as in step 2 and choose its inverse edge $e':z\\to vt$ with inverse triangles. Applying $q$ to those triangles gives inverse edges in $\\Delta^1$. Since its only invertible edges are identities, $q(vt)=q(z)$. By the associativity, unit, component-dependence and inverse-triangle assertions of [lem-coef-infinity-mapping-composition], postcomposition by $e$ on $\\operatorname{Map}_F(vy,vt)$ and on $\\operatorname{Map}_F(vx,vt)$ has postcomposition by $e'$ as homotopy inverse: the two composites are homotopic to postcomposition by an identity. They are weak homotopy equivalences by [lem-cbc-simplicial-homotopy-equivalence-weak]. The same associativity identifies\n$$e_*\\,v(u)^*\\simeq v(u)^*\\,e_*.$$\nThus the precomposition test for $v(u)$ at $z$ is a weak homotopy equivalence if and only if it is one at $vt$, by the component and homotopy-group argument of step 5. This reduction respects $q(z)\\geq j$ because $q(z)=q(vt)=p(t)$.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4, proof (a), printed pp.1483-1484; agent expansion: extend the tests using equivalence edges, retaining their base labels"
+   }
+  },
+  {
+   "text": "If $u$ is $p$-cocartesian, step 4 makes its precomposition test invertible for every $t$ with $p(t)\\geq j$. Step 5 gives the test for $v(u)$ at every such $vt$, and step 6 gives it at every $z$ with $q(z)\\geq j$. Step 4 for $q$ now proves $v(u)$ is $q$-cocartesian. Conversely if $v(u)$ is $q$-cocartesian, its tests hold in particular at $vt$ for all $p(t)\\geq j$; step 5 gives the tests for $u$, and step 4 for $p$ proves $u$ is $p$-cocartesian. This proves both implications for every edge, including edges over either identity of the interval.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4, proof (a), printed pp.1483-1484; agent expansion: assemble the two implications"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-joyal-functor-equivalence-test",
+  "lem-coef-quasicategory-invertible-interval",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-mapping-composition",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Auxiliary quasicategorical input beneath paragraph 2: expands Higher Algebra B.2.4(a) using the opposite of HTT 2.4.4.3; those books are not archived, see WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +145,45 @@
    "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
    "date": "2026-10-17",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory",
+   "results": "OK: 12 hits; SSet.Quasicategory, SSet.instQuasicategoryOfKanComplex, SSet.quasicategory_of_hasLiftingProperty, SSet.Quasicategory.hasLiftingProperty, SSet.quasicategory_iff_hasLiftingProperty, SSet.Quasicategory.hornFilling, SSet.Quasicategory.hornFilling', SSet.Quasicategory.mk",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category cocartesian universal properties or quasicategory inner-horn definitions do not state this equivalence-invariance assertion; sources read in FiberedCategory/Cocartesian.lean:43-78 and Quasicategory/InnerFibration.lean:29-97."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian.*equivalence|equivalence.*cocartesian|categoricalEquivalence",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category cocartesian universal properties or quasicategory inner-horn definitions do not state this equivalence-invariance assertion; sources read in FiberedCategory/Cocartesian.lean:43-78 and Quasicategory/InnerFibration.lean:29-97."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of quasicategories over the one simplex preserves and reflects cocartesian edges of inner fibrations",
+   "results": "OK: 8 hits; CategoryTheory.Functor.IsCocartesian.of_iso_comp, CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso, CategoryTheory.Functor.IsCocartesian.of_comp_iso, CategoryTheory.Functor.IsStronglyCocartesian.codomainIsoOfBaseIso, CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian, SSet.Quasicategory.hornFilling, SSet.Quasicategory, CategoryTheory.Functor.IsCocartesian.map_uniq",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category cocartesian universal properties or quasicategory inner-horn definitions do not state this equivalence-invariance assertion; sources read in FiberedCategory/Cocartesian.lean:43-78 and Quasicategory/InnerFibration.lean:29-97."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cocartesian edge mapping space pullback criterion invariant under fully faithful essentially surjective functors between infinity categories",
+   "results": "OK: 8 hits; CategoryTheory.Functor.IsStronglyCocartesian.map, CategoryTheory.Functor.IsCocartesian.map_isHomLift, CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift, CategoryTheory.Functor.IsCocartesian.toIsHomLift, CategoryTheory.Functor.IsCocartesian.map, CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian, CategoryTheory.Functor.IsStronglyCocartesian, CategoryTheory.Functor.IsCocartesian.map_uniq",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category cocartesian universal properties or quasicategory inner-horn definitions do not state this equivalence-invariance assertion; sources read in FiberedCategory/Cocartesian.lean:43-78 and Quasicategory/InnerFibration.lean:29-97."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence of quasicategories over the interval preserves and reflects cocartesian morphisms",
+   "results": "OK: 8 hits; CategoryTheory.Functor.IsCocartesian, CategoryTheory.Functor.IsCocartesian.of_comp_iso, CategoryTheory.Functor.IsCocartesian.ext, CategoryTheory.Functor.IsStronglyCocartesian, CategoryTheory.Functor.IsCocartesian.of_iso_comp, CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian, CategoryTheory.Functor.IsCocartesian.fac, CategoryTheory.Functor.IsCocartesian.map_self",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category cocartesian universal properties or quasicategory inner-horn definitions do not state this equivalence-invariance assertion; sources read in FiberedCategory/Cocartesian.lean:43-78 and Quasicategory/InnerFibration.lean:29-97."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-pattern-fibered-edge-detection",
@@ -81,5 +211,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-interval-equivalence-cocartesian",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses exactly. Expanded equivalence invariance over the interval using existing coherent-inverse, mapping-space, and cocartesian-criterion nodes. Explicitly handled empty mapping spaces and essential-surjectivity comparisons over the correct vertex. No new nodes, no Lean changes or compiler use.",
+  "blueprint": "Serves the recorded ancestor paragraph 2 finite-coefficient mapping-complex adjunction through the marked-operadic-model ancestry. The seven steps fill precisely the HA B.2.4(a) invariance assertion, rather than applying it as a new lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Uses only its general mapping-space invariance under functor equivalence and pointwise detection of natural equivalences; the item unit has no separate statement of these generic quasicategory tools."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Turns the explicitly exhibited inverse postcomposition homotopies into weak homotopy equivalences; a generic simplicial-set tool, not a replacement of the coefficient route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-6cc6168c4",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-6cc6168c4 (reviewer sub-agent of L); spot-checked: I read the item and all ten cited statements in full. No new nodes; one commit with the item and its report. The statement is true as written and unchanged (HA B.2.4(a) / dual of HTT 2.4.4.3; neither is in literature/, the WANTED lines are recorded and proof_origin is agent). Step-by-step checks. Step 1: the definition of categorical equivalence with C=E gives w; full faithfulness with C=F lifts vwv~=v to vw~=1_F; the invertible-interval J-paths give the inverse-triangle witnesses that def-cbc requires. Step 2: the cone-calculus statement gives mapping-space equivalences and componentwise detection. Step 3: Map_{Delta^1}(i,j) is a point if i<=j and empty otherwise, checked by hand. Step 4: the mapping criterion over Delta^1 reduces to u^* being a weak equivalence for all t with p(t)>=j; the case j>k has an empty corner and is automatic. Step 5: naturality from the Hom bifunctor gives a homotopy-commuting square, and two-out-of-three gives the comparison. Step 6: the inverse triangles force q(z)=q(vt); associativity and the simplicial-homotopy lemma show the test at z is equivalent to the test at vt. Step 7 assembles both directions. Edge cases checked: empty E and F, identity v, edges over 00, 01 and 11, objects outside the image of v. No cycle (dependency closure of 378 nodes). About 120 cocartesian/equivalence nodes were scanned and none is a duplicate; the item does not restate a clause of its parent. Accepted tool uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-simplicial-homotopy-equivalence-weak, generic tools from sk-prop-sf-cbc, already accepted on lem-coef-infinity-hom-bifunctor-functoriality. This is not a target node, so no base-change morphism or coefficient category is involved. No SGA source was used. No fixes."
  }
 }
