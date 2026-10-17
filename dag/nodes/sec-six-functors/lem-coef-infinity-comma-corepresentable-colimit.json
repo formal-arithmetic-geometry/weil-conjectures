@@ -1,0 +1,75 @@
+{
+ "id": "lem-coef-infinity-comma-corepresentable-colimit",
+ "kind": "statement",
+ "title": "Comma colimit of a coherent covariant corepresentable",
+ "statement": "Use small quasicategories, coherent transformations, mapping spaces and colimiting cocones of [def-cbc-enhanced-diagrams-cones], and the infinity category $\\mathcal S_{\\mathcal U}$ of small spaces of [def-coef-infinity-category-of-spaces]. Use the coherent Hom functors and their functoriality from [lem-coef-infinity-hom-bifunctor-functoriality]. Fix a universe $\\mathcal U$, let $K,Z$ be $\\mathcal U$-small quasicategories, let $v:K\\to Z$ be a coherent functor, and let $k\\in K$ and $z\\in Z$. Form the coherent comma quasicategory\n$$I_z=K\\times_{Z,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,Z)\\times_{Z,\\operatorname{ev}_1}\\{z\\},$$\nwhere the map from $K$ is $v$. Its objects are $(t,\\alpha:v(t)\\to z)$, with their coherent triangle data and all higher simplices, and let $p:I_z\\to K$ be the projection. The coherent diagram $D:I_z\\to\\mathcal S_{\\mathcal U}$ is $D(t,\\alpha)=\\operatorname{Map}_K(k,t)$. Applying $v$ and composing with the tautological arrow $\\alpha$ gives a coherent cocone with apex $\\operatorname{Map}_Z(v(k),z)$ and legs\n$$\\operatorname{Map}_K(k,t)\\longrightarrow\\operatorname{Map}_Z(v(k),z),\\qquad f\\longmapsto\\alpha\\circ v(f).$$\nThis specified cocone is colimiting. In particular the canonical map\n$$\\operatorname{colim}_{(t,\\alpha)\\in I_z}\\operatorname{Map}_K(k,t)\\longrightarrow\\operatorname{Map}_Z(v(k),z)$$\nis an equivalence of spaces. All functor categories and cocone categories are formed in a containing universe; the assertion concerns whole spaces and coherent cocones, not only their sets of components.",
+ "source": {
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Proposition 6.1.14, last assertion and its Yoneda proof, printed pp. 269–270, applied to opposite categories; the colimit dual of Proposition 6.4.9, printed p. 298. These give the pointwise left Kan extension of a covariant corepresentable. Online July 30, 2026 revision read by the second reader; no Stacks tag states this quasicategorical result."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-infinity-hom-bifunctor-functoriality"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coyoneda.*[Kk]an|[Kk]an.*coyoneda|colimit.*coyoneda|coyoneda.*colimit",
+   "results": "{\"t\": \"2026-10-17T02:31:43Z\", \"tool\": \"grep\", \"query\": \"coyoneda.*[Kk]an|[Kk]an.*coyoneda|colimit.*coyoneda|coyoneda.*colimit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/Presentable/Type.lean\", \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\"], \"digest\": \"b54db4f5fae12954\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Presheaf.lean:402–421: the representable left-Kan-extension instance is for ordinary categories and Type-valued presheaves. The pointwise Kan APIs likewise use ordinary Category instances, not quasicategories or full mapping spaces. The comma and colimit search results do not assert this coherent space-valued cocone formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "colimit of covariant representable functor over comma category computes mapping space after applying a functor between quasicategories",
+   "results": "{\"t\": \"2026-10-17T02:31:44Z\", \"tool\": \"leansearch\", \"query\": \"colimit of covariant representable functor over comma category computes mapping space after applying a functor between quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comma.hasColimit\", \"CategoryTheory.Presheaf.colimitOfRepresentable\", \"CategoryTheory.Limits.colimit.post_desc\", \"CategoryTheory.Limits.colim\", \"CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation\", \"CategoryTheory.Comma.coconeOfPreservesIsColimit\", \"CategoryTheory.Comma.hasLimit\", \"CategoryTheory.Limits.colimit.cocone\"], \"digest\": \"0405832d06b1d8fc\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Presheaf.lean:402–421: the representable left-Kan-extension instance is for ordinary categories and Type-valued presheaves. The pointwise Kan APIs likewise use ordinary Category instances, not quasicategories or full mapping spaces. The comma and colimit search results do not assert this coherent space-valued cocone formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The left Kan extension of a corepresentable space valued functor is corepresentable, computed as the colimit over a costructured arrow infinity category",
+   "results": "{\"t\": \"2026-10-17T02:31:46Z\", \"tool\": \"leanfinder\", \"query\": \"The left Kan extension of a corepresentable space valued functor is corepresentable, computed as the colimit over a costructured arrow infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.pointwiseLeftKanExtension_obj\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"Condensed.lanPresheafIso_hom\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap\", \"CategoryTheory.Functor.corepresentableByCompCoyonedaObjOfIsColimit\", \"LightCondensed.lanPresheafExt_hom\", \"Condensed.lanPresheafExt_hom\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension\"], \"digest\": \"d68530d7bba8d206\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read Mathlib/CategoryTheory/Limits/Presheaf.lean:402–421: the representable left-Kan-extension instance is for ordinary categories and Type-valued presheaves. The pointwise Kan APIs likewise use ordinary Category instances, not quasicategories or full mapping spaces. The comma and colimit search results do not assert this coherent space-valued cocone formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-final-square-full-faithfulness",
+  "date": "2026-10-17",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, derived coefficient adjunction: foundational localization comparison, via the pointwise Kan-extension argument of Cisinski Theorem 7.5.18; the representable comma-colimit computation used to prove full faithfulness.",
+   "via": [
+    "lem-coef-final-square-full-faithfulness",
+    "lem-coef-fibrant-subcategory-localization",
+    "lem-coef-brown-reedy-fibrant-replacement",
+    "lem-coef-brown-finite-direct-rectification",
+    "lem-coef-cocomplete-cofibration-localization",
+    "lem-coef-small-diagram-model-rectification",
+    "lem-coef-model-colimit-localization-comparison",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

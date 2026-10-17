@@ -10,9 +10,78 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $a,a'\\in A$ and write $I=(q\\downarrow q(a'))$. Apply [lem-coef-infinity-comma-corepresentable-colimit] with $K=A$, $Z=X$, $v=q$, $k=a$, $z=q(a')$. It gives a colimiting coherent cocone on $D:I\\to\\mathcal S$, $D(b,\\alpha)=\\operatorname{Map}_A(a,b)$, whose apex is $M=\\operatorname{Map}_X(q(a),q(a'))$ and whose leg is $f\\mapsto\\alpha\\circ q(f)$. No Kan extension of an arbitrary diagram or generation assertion is being assumed.",
+   "uses": [
+    "lem-coef-infinity-comma-corepresentable-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 6.1.14 applied to opposite categories, and the colimit dual of Proposition 6.4.9: pointwise Kan extension on a covariant corepresentable."
+   }
+  },
+  {
+   "text": "Put $J=(r\\downarrow u q(a'))$. Apply [lem-coef-infinity-comma-corepresentable-colimit] with $K=B$, $Z=Y$, $v=r$, $k=i(a)$ and $z=u q(a')$. The diagram $E:J\\to\\mathcal S$, $E(c,\\beta)=\\operatorname{Map}_B(i(a),c)$, has the colimiting cocone with apex $N=\\operatorname{Map}_Y(r i(a),u q(a'))$ and legs $g\\mapsto\\beta\\circ r(g)$. By the finality hypothesis on $T_{a'}$, restriction of this very cocone to $I$ is still colimiting, with legs $g\\mapsto u(\\alpha)\\circ\\theta_b\\circ r(g)$ on $E T_{a'}(b,\\alpha)=\\operatorname{Map}_B(i(a),i(b))$. Here finality is the assumed preservation of colimiting coherent cocones under restriction.",
+   "uses": [
+    "lem-coef-infinity-comma-corepresentable-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 7.5.17 proof: restrict the pointwise comma-colimit cocone along the final comparison, specialized to the covariant corepresentable at i(a)."
+   }
+  },
+  {
+   "text": "The coherent Hom-functor transformation induced by $i$ restricts to $e:D\\to E T_{a'}$, with component $\\operatorname{Map}_A(a,b)\\to\\operatorname{Map}_B(i(a),i(b))$. Every component is an equivalence by full faithfulness of $i$, so [lem-cbc-enhanced-functor-cone-calculus] makes $e$ an equivalence in $\\operatorname{Fun}(I,\\mathcal S)$. Precomposition with $e$ identifies the spaces of cocones from these two diagrams into every constant diagram. Thus the colimit mapping-space criterion in that node shows that the cocone of Step 2 composed with $e$ is colimiting on $D$. Its apex is $N$ and its leg is $f\\mapsto u(\\alpha)\\circ\\theta_b\\circ r i(f)$.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "The first equivalence in the proof of Theorem 7.5.18, specialized to a corepresentable; objectwise full faithfulness identifies the restricted coherent diagrams."
+   }
+  },
+  {
+   "text": "Consider the actual map $w:M\\to N$, $\\gamma\\mapsto u(\\gamma)\\circ\\theta_a$. It is a morphism between the cocone of Step 1 and the cocone of Step 3: on the leg at $(b,\\alpha)$, naturality of $\\theta:r i\\simeq u q$ gives\n$$u(\\alpha)\\circ\\theta_b\\circ r i(f)\\simeq u(\\alpha)\\circ u q(f)\\circ\\theta_a\\simeq u(\\alpha\\circ q(f))\\circ\\theta_a.$$\nThese are coherent identifications of transformations, including all parameters, because $\\theta$ is a coherent natural equivalence and the Hom bifunctor preserves the functorial composition coherences. Both cocones are initial objects of the cocone quasicategory by Steps 1 and 3. Its full subcategory of initial objects is a Kan complex by [lem-cbc-enhanced-functor-cone-calculus], so this cocone morphism, and hence its apex map $w$, is an equivalence. Precomposition with $\\theta_a$ is an equivalence of mapping spaces: its inverse is precomposition with an inverse of $\\theta_a$, and the two inverse homotopies follow from its inverse triangles and associativity and unit homotopies. Since $w$ is the composite of $u_*:M\\to\\operatorname{Map}_Y(u q(a),u q(a'))$ with this equivalence, $u_*$ is an equivalence.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.5.18 proof, evaluated on covariant corepresentables; the displayed identity verifies the actual comparison map, rather than merely identifying two abstract apices."
+   }
+  },
+  {
+   "text": "For arbitrary $x,x'\\in X$, essential surjectivity provides $a,a'\\in A$ and equivalences $s:q(a)\\to x$ and $t:q(a')\\to x'$. The map $\\operatorname{Map}_X(x,x')\\to\\operatorname{Map}_X(q(a),q(a'))$ given by $f\\mapsto t^{-1}\\circ f\\circ s$ is an equivalence, with inverse $g\\mapsto t\\circ g\\circ s^{-1}$. Their composites are homotopic to the identities by the inverse triangles, associativity and unitality of [lem-coef-infinity-mapping-composition]. Applying $u$ gives the corresponding equivalence between $\\operatorname{Map}_Y(u(x),u(x'))$ and $\\operatorname{Map}_Y(u q(a),u q(a'))$. Coherent Hom functoriality identifies the two composites around the square, since $u(t^{-1}\\circ f\\circ s)\\simeq u(t)^{-1}\\circ u(f)\\circ u(s)$. Its bottom map is the equivalence of Step 4, and its two vertical maps are equivalences, so its top map is an equivalence. This is full faithfulness of $u$. If $A$ is empty, essential surjectivity makes $X$ empty and there are no pairs to check.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.5.18 proof, reduction to representables in the essential image of the left functor, and Proposition 6.1.15(ii); explicit extension from q-images by conjugation with equivalences."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-comma-corepresentable-colimit",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-mapping-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Theorem 7.5.18 full-faithfulness argument and Corollary 7.5.17, printed pp. 379–380 (PDF pp. 394–395); the square criterion is the abstracted space-valued Kan-extension argument. The source is online and WANTED for local archive."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,10 +133,38 @@
    "results": "{\"t\": \"2026-10-17T01:11:22Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopy exact square with full faithful upper inclusion and surjective left functor has fully faithful lower functor by pointwise left Kan extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.LeftExtension.isPointwiseLeftKanExtensionEquivOfGuitartExact\", \"CategoryTheory.TwoSquare.GuitartExact\", \"CategoryTheory.TwoSquare.GuitartExact.isConnected_rightwards\", \"CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact\", \"CategoryTheory.TwoSquare.CostructuredArrowDownwards.mk_surjective\", \"CategoryTheory.TwoSquare.guitartExact_iff_isConnected_downwards\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt.isIso_hom_app\", \"CategoryTheory.TwoSquare.guitartExact_iff_initial\"], \"digest\": \"67479981a739af1e\"}",
    "date": "2026-10-17",
    "verdict": "No match. Independent second reader inspected Mathlib/CategoryTheory/GuitartExact/Basic.lean:51-57,223-268, GuitartExact/KanExtension.lean:45-50 and Localization/DerivabilityStructure/Basic.lean:62-85: these APIs quantify over ordinary categories and ordinary connectedness, not quasicategories and weakly contractible comma nerves. FibrantObjectHomotopy.lean:34 additionally assumes ModelCategory. The returned declarations do not state this coherent result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fully faithful coherent functor from final comma comparisons in a square with essentially surjective left functor",
+   "results": "{\"t\": \"2026-10-17T01:59:43Z\", \"tool\": \"leanfinder\", \"query\": \"Fully faithful coherent functor from final comma comparisons in a square with essentially surjective left functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.final_of_comp_full_faithful'\", \"CategoryTheory.Functor.final_of_comp_full_faithful\", \"CategoryTheory.Functor.final_iff_comp_final_full_faithful\", \"CategoryTheory.TwoSquare.instFinalCostructuredArrowObjCostructuredArrowRightwardsOfGuitartExact\", \"CategoryTheory.TwoSquare.guitartExact_iff_final\", \"CategoryTheory.CostructuredArrow.full_map₂\", \"CategoryTheory.Functor.final_of_exists_of_isFiltered_of_fullyFaithful\", \"CategoryTheory.Comma.map_final\"], \"digest\": \"f872763a1dd9034a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category finality and Guitart-exact declarations; none states the coherent quasicategorical square criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.TwoSquare.guitartExact_iff_final, CategoryTheory.Functor.LeftExtension.isPointwiseLeftKanExtensionEquivOfGuitartExact",
+   "results": "{\"t\": \"2026-10-17T01:59:44Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.TwoSquare.guitartExact_iff_final, CategoryTheory.Functor.LeftExtension.isPointwiseLeftKanExtensionEquivOfGuitartExact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration returned."
+  },
+  {
+   "tool": "grep",
+   "query": "GuitartExact|fullyFaithful.*Kan|Kan.*fullyFaithful",
+   "results": "{\"t\": \"2026-10-17T01:59:44Z\", \"tool\": \"grep\", \"query\": \"GuitartExact|fullyFaithful.*Kan|Kan.*fullyFaithful\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean\"], \"digest\": \"c7fcce9f4adc06c0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: grep hits are ordinary Guitart-exact/localization APIs, not the stated quasicategorical criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Final comma comparison in a coherent square with fully faithful top functor implies bottom functor fully faithful",
+   "results": "{\"t\": \"2026-10-17T01:59:45Z\", \"tool\": \"leansearch\", \"query\": \"Final comma comparison in a coherent square with fully faithful top functor implies bottom functor fully faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comma.isEquivalenceMap\", \"CategoryTheory.Functor.FullyFaithful.ctorIdx\", \"CategoryTheory.Comma.instFaithfulCompPost\", \"CategoryTheory.Comma.instFullCompPostOfFaithful\", \"CategoryTheory.Functor.final_of_comp_full_faithful'\", \"CategoryTheory.MorphismProperty.Comma.instFaithfulChangeProp\", \"CategoryTheory.MorphismProperty.Comma.fullyFaithfulChangeProp\", \"CategoryTheory.Functor.FullyFaithful.faithful\"], \"digest\": \"5b60e4158176feb3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary comma/equivalence APIs, not the stated coherent square criterion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-fibrant-subcategory-localization",
@@ -99,5 +196,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-final-square-full-faithfulness",
+  "worker": "stage1",
+  "summary": "Second reader repaired uncited Kan-extension and presheaf-generation claims by a direct representable argument: compute the source and target comma-colimit cocones, restrict the target by finality, identify diagrams by full faithfulness of i, verify the actual mapping-space comparison using theta, and extend from q-images by explicit conjugation. One strictly smaller statement-only comma-corepresentable colimit node, no Mathlib leaves.",
+  "blueprint": "Technical input to the coherent-localization foundation of prop-coef-integral-exceptional-adjoint: the general square argument using pointwise Kan extensions and final comma comparisons (Cisinski Theorem 7.5.18 and Corollary 7.5.17).",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 3-4 take from its statement only the vertexwise criterion for equivalences in Fun(I,S), the mapping-space criterion for colimiting cocones, and that the full subcategory of initial objects is a contractible Kan complex; this generic quasicategory calculus (unit sk-prop-sf-cbc) is not replaced by any node of sk-prop-sf-biduality-general or its cited units."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-2bef33d51",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-2bef33d51 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-coef-infinity-comma-corepresentable-colimit, and the statements of all cited nodes: def-cbc-enhanced-diagrams-cones, def-coef-infinity-category-of-spaces, hom-bifunctor-functoriality, mapping-composition and cbc-enhanced-functor-cone-calculus. Read Cisinski CatLR (July 30, 2026, /tmp/catlr-nd) at Prop. 6.1.14–6.1.15 (pp. 269–271), Prop. 6.4.9 (p. 298), Cor. 7.5.17 and Thm 7.5.18 (pp. 379–380). The item is the Thm 7.5.18 square abstracted, with exactly its hypotheses: i fully faithful, q essentially surjective, and the comma functors final as in 7.5.17/6.4.5. The statement is unchanged and has no SGA citation. Steps 1–5 are correct. Step 4 states coherence of the cocone morphism, which is needed: the BZ/S^1 example shows pointwise homotopies of legs do not suffice. That coherence follows from the coherent T_* naturality in the hom-bifunctor node applied to u, ri and θ. Every hypothesis is used. Item small cases checked: Δ0, Δ1 picking 0, and BG→pt, where finality holds iff G is contractible. The new node is v_!h^k≃h^{v(k)} evaluated pointwise. It is true; checked for v=id, K=BG→pt (contractible homotopy orbits) and K=∅. It is statement only, self-contained, searched three ways, strictly smaller than the item, and not a duplicate of the ordinary pointwise-Kan, coherent-diagram-coyoneda, space-yoneda-density, pointwise-yoneda-evaluation or terminal-local-kan-corepresentability nodes; blueprint search for 'corepresentable' returns 0. Blueprint from/via are correct and there is no cycle (closure of 182 cited nodes). FIX: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc) is outside the unit's route, and the delivery left split_report.tool_uses empty. I added it with its reason in fixes/dag/nodes/sec-six-functors/lem-coef-final-square-full-faithfulness.json, and accept it as a tool use (vertexwise equivalences, the colimit mapping-space criterion, and contractibility of initial objects).; 1 file(s) fixed by the reviewer"
  }
 }
