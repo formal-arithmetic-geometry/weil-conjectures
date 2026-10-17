@@ -211,5 +211,23 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-f6b7b13f9 (reviewer sub-agent of L); spot-checked: I read the item and all six cited statements in full, plus the citer lem-coef-double-mapping-cylinder-space-pushout (steps 2-3). The statement is unchanged from the base and matches the def-cbc conventions. It adds no hypothesis and is not weakened. All 7 steps are correct. Step 1: the map descends through the quotient (elementary). Step 2: Sing(T) is Kan via the horn retraction from the pair homeomorphism in lem-coef-realization-finite-limits; this covers n=1 and both outer horns, and h is glued through the quotient so arbitrary T is allowed. Step 3: pointed maps and based homotopies of Q_n correspond to boundary-fixed continuous maps and homotopies via the cylinder lemma. The 'respects concatenation' claim is unjustified but unused. Step 4: I checked eps*rho_n = Phi_n via eps.|a| = a-hat, so with lem-coef-kan-realization-serre eps_* is an isomorphism at constant vertices; pi_0 also checked. Steps 5-6: I checked the attached-interval homotopies (endpoints at a=0, 1/2, 1), joint continuity by currying, both strict squares r_F eps+ = eps r_E and h_F eps+ = eps h_E, and the cancellation at the free end. Step 7: T empty. Tested on a point, [0,1], a two-point discrete space, the indiscrete two-point space and an interior basepoint. There are no new nodes and no cycle (closure of 42 nodes). There is no duplicate: lem-cbc-realization-singular-unit-weak is the unit, not the counit. No SGA is cited. The source is agent-formulated (Milnor; Hovey 3.6.7 is not archived) with a WANTED entry. FIX: split_report.tool_uses declared five 'off-unit' tools, but all five cited lemmas have unit sk-prop-sf-biduality-general, the item's own unit. I removed the list in fixes/dag/nodes/sec-six-functors/lem-coef-singular-counit-weak-equivalence.json and accept no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SingularCounitWeakEquivalence",
+  "declaration": "SSet.Enhanced.singular_counit_weak",
+  "file": "lean/Sheaf/AlgebraicTopology/SingularCounitWeakEquivalence.lean",
+  "statement": "theorem singular_counit_weak (T : TopCat.{u}) : Function.Bijective (componentsMap (sSetTopAdj.counit.app T).hom) ∧ ∀ (r : ℕ), 1 ≤ r → ∀ (x : |TopCat.toSSet.obj T|), Function.Bijective (homotopyGroupMap (sSetTopAdj.counit.app T).hom r x)",
+  "branch": "newtargets-dag",
+  "by": "Q154",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3766aead",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Read the item node, the def-cbc dependency (componentsMap/homotopyGroupMap in EnhancedDiagramsCones.lean:75-96), Mathlib SingularSet.lean (toSSet, toSSetObjEquiv, SSet.toTop, sSetTopAdj) and the snapshot module, node and report. singular_counit_weak (T : TopCat.{u}) states, with no extra hypotheses and an arbitrary universe, bijectivity of componentsMap and, for all r>=1 and every source point x, of homotopyGroupMap of the canonical counit (the evaluation map, continuous and natural). Matches every node clause; empty T covered. Only sorry, no defs; module and theorem docstrings have source place, blueprint tag and all 7 proof steps (condensed); lines <=100; lean.statement verbatim; statement unchanged; Worker report and Second reading present; proof-dep imports follow project practice. Mathlib and project searches found no existing counit theorem. nt_compile.py --json: clean, 2.3 s, exit 0; a deliberate-error control confirms the tool reports errors. No findings."
  }
 }

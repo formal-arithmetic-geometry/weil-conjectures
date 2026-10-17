@@ -226,5 +226,36 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-f5f7ffbce (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps and the full statement of every cited node, plus the citer's step (lem-coef-many-object-operad-accessibility step 8), the unit sk-prop-sf-biduality-general and chapter sec-six-functors. No new nodes. I checked the statement independently from the D(G), O_G and Phi_G formulas. M side, n>=1: the active hom is G(z0,x)xG(zn,y), giving A_x x X^{n-1} x B_y. O side: the operation is G(x,a0) x prod G(bi,ai) x G(bn,y). I recomputed substitution: the delivery writes the triangle relations in the opposite direction, which is consistent, and with h_i=r_i^{-1} they become the squares of Step 3. Phi sends (a^{-1},1,...,1,b), and the pair source change (u_{i-1}^{-1},u_i) moves both endpoints of the internal constant path by u_i. n=0: spans map to b a^{-1}, h->(x,1,h) is a section, and it is an equivalence because the span space is a right fibration over a contractible X_{/x}. Edge cases checked: discrete G, one object with automorphisms (answer H, not conjugacy classes), different components (empty), n=1, empty G. Corner-map hypotheses hold (boundary inclusion of Delta^1, X Kan). Path replacement with f=id gives c a weak equivalence, and the min homotopy is a simplicial homotopy. proof_deps equals the union of uses, all ids exist and none is merged, there is no cycle and all steps are under 2000 characters. The only off-unit citation is the Mathlib leaf lem-cbc-internal-hom-fibration-corner-map; its tool_use is accepted. Gepner-Haugseng is not archived: it is recorded as WANTED, proof_origin=agent is correct, and the check above does not rely on it. No SGA source is used. Reusing the existing path-replacement node rather than adding a duplicate path lemma is correct. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GroupoidActiveOperationEquivalence",
+  "declaration": "CategoryTheory.OperadGroupoidActiveOperationEquivalence.groupoid_active_operation_equivalence",
+  "declarations": [
+   "CategoryTheory.OperadGroupoidActiveOperationEquivalence.stringNerve",
+   "CategoryTheory.OperadGroupoidActiveOperationEquivalence.operatorNerve",
+   "CategoryTheory.OperadGroupoidActiveOperationEquivalence.stringOperatorMap",
+   "CategoryTheory.OperadGroupoidActiveOperationEquivalence.stringPairVertex",
+   "CategoryTheory.OperadGroupoidActiveOperationEquivalence.operatorPairVertex",
+   "CategoryTheory.OperadGroupoidActiveOperationEquivalence.fixedArityOperations",
+   "CategoryTheory.OperadGroupoidActiveOperationEquivalence.fixedArityInclusion",
+   "CategoryTheory.OperadGroupoidActiveOperationEquivalence.IsFixedArityOperationMap",
+   "CategoryTheory.OperadGroupoidActiveOperationEquivalence.sourceArrowSpace",
+   "CategoryTheory.OperadGroupoidActiveOperationEquivalence.positiveProductMap"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/GroupoidActiveOperationEquivalence.lean",
+  "statement": "theorem groupoid_active_operation_equivalence (N : CoherentNerveComparisonStatement.{u}) (O : SimplicialOperatorNerve.Statement N) (G : SimplicialGroupoid.{u}) (hG : G.IsFibrant) (P : OperadGroupoidOperatorMap.PairModel G) (F : OperadGroupoidOperatorMap.FunctorModel O G P) : (∀ (x y : G) (n : ℕ), 0 < n → ∃ e : fixedArityOperations (O.string_model G.carrier).projection (stringPairVertex N O G x y) n ⟶ fixedArityOperations (O.operators P.multicategory).projection (operatorPairVertex N O G P F x y) n, IsFixedArityOperationMap (stringOperatorMap N O G P F) (stringPairVertex N O G x y) n e ∧ IsFunctorEquivalence e ∧ ∃ a : fixedArityOperations (O.string_model G.carrier).projection (stringPairVertex N O G x y) n ⟶ (sourceArrowSpace (CoherentNerve.nerveFunctor.obj G.carrier) (N.vertex G.carrier x)) ⊗ (∏ᶜ fun _ : Fin (n - 1) ↦ CoherentNerve.nerveFunctor.obj G.carrier) ⊗ (fixedTargetArrows (CoherentNerve.nerveFunctor.obj G.carrier) (N.vertex G.carrier y)), ∃ b : fixedArityOperations (O.operators P.multicategory).projection (operatorPairVertex N O G P F x y) n ⟶ (sourceArrowSpace (CoherentNerve.nerveFunctor.obj G.carrier) (N.vertex G.carrier x)) ⊗ (∏ᶜ fun _ : Fin (n - 1) ↦ (ihom Δ[1]).obj (CoherentNerve.nerveFunctor.obj G.carrier)) ⊗ (fixedTargetArrows (CoherentNerve.nerveFunctor.obj G.carrier) (N.vertex G.carrier y)), IsFunctorEquivalence a ∧ IsFunctorEquivalence b ∧ IsFunctorEquivalence (positiveProductMap (CoherentNerve.nerveFunctor.obj G.carrier) (N.vertex G.carrier x) (N.vertex G.carrier y) n) ∧ e ≫ b = a ≫ positiveProductMap (CoherentNerve.nerveFunctor.obj G.carrier) (N.vertex G.carrier x) (N.vertex G.carrier y) n) ∧ ∀ (x y : G), ∃ e₀ : fixedArityOperations (O.string_model G.carrier).projection (stringPairVertex N O G x y) 0 ⟶ fixedArityOperations (O.operators P.multicategory).projection (operatorPairVertex N O G P F x y) 0, IsFixedArityOperationMap (stringOperatorMap N O G P F) (stringPairVertex N O G x y) 0 e₀ ∧ IsFunctorEquivalence e₀ ∧ ∃ a₀ : fixedArityOperations (O.string_model G.carrier).projection (stringPairVertex N O G x y) 0 ⟶ arrowMappingSpace (CoherentNerve.nerveFunctor.obj G.carrier) (N.vertex G.carrier x) (N.vertex G.carrier y), ∃ b₀ : fixedArityOperations (O.operators P.multicategory).projection (operatorPairVertex N O G P F x y) 0 ⟶ arrowMappingSpace (CoherentNerve.nerveFunctor.obj G.carrier) (N.vertex G.carrier x) (N.vertex G.carrier y), IsFunctorEquivalence a₀ ∧ IsFunctorEquivalence b₀ ∧ e₀ ≫ b₀ = a₀",
+  "branch": "newtargets-dag",
+  "by": "Q100",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-6c26b9881"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c26b9881",
+  "group": "Q100",
+  "result": "fix",
+  "note": "Statement matches node: fibrant small simplicial groupoid, M/O/f via SimplicialOperatorNerve string/operator models and FunctorModel, fixedArityOperations = full subcomplex of recorded operations (active, source changes in core ∩ constant ordinal) at inputArity n, induced map pinned by operationArrows equation, n>=1 products A_x×X^{n-1}×B_y and A_x×Fun(Δ1,X)^{n-1}×B_y with constant-path square and equivalences, separate n=0 clause to arrowMappingSpace; edge cases n=1 (Fin 0), n=0, x=y, empty G checked; single universe u, no extra hypotheses. Fixes: (H4) targetArrowSpace duplicated existing SSet.Enhanced.fixedTargetArrows (statement-ancestor node lem-coef-infinity-arrow-target-right-fibration) -> replaced; (H4) constantPathMap duplicated constantDiagrams Δ[1] X -> replaced; (H8) positiveProductMap lacked source/blueprint docstring and theorem docstring condensed the node's 8 steps into 7 -> rewritten; nullary clause no longer nested in/shadowing the positive-arity binders (parenthesized, meaning unchanged). Delivered and fixed files both compile clean via nt_compile.py (exit 0); a negative control confirms the compiler reports errors. lean.statement/declarations refit automatically from fixes/GroupoidActiveOperationEquivalence.lean."
  }
 }

@@ -98,7 +98,8 @@
   "lem-sf-comparison-pullback-exact",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "lem-weil-pbc-comparison-global-cohomology",
-  "def-weil-derived-cohomology-sheaves"
+  "def-weil-derived-cohomology-sheaves",
+  "def-pc-hypercohomology-left-edge"
  ],
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
@@ -214,5 +215,35 @@
   "group": "Q91",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q91-488eaef9c (reviewer sub-agent of L); spot-checked: Reviewed item, all four steps, cited nodes and sources, unit/chapter route, coefficient category, canonical base-change mate, edge cases, and DAG acyclicity. No new nodes or repairs are needed. Full review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SiteComparisonEdgeSection",
+  "declaration": "AlgebraicGeometry.ProEtale.siteComparison_edge_section",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.siteComparisonEtaleSections",
+   "AlgebraicGeometry.ProEtale.siteComparisonProEtaleSections",
+   "AlgebraicGeometry.ProEtale.siteComparisonEtaleLerayIso",
+   "AlgebraicGeometry.ProEtale.siteComparisonProEtaleLerayIso",
+   "AlgebraicGeometry.ProEtale.siteComparisonEtaleEdge",
+   "AlgebraicGeometry.ProEtale.siteComparisonProEtaleEdge",
+   "AlgebraicGeometry.ProEtale.siteComparisonCohomologyMap",
+   "AlgebraicGeometry.ProEtale.siteComparisonHigherImageSectionMap",
+   "AlgebraicGeometry.ProEtale.siteComparison_edge_section"
+  ],
+  "file": "lean/Sheaf/Paper/SiteComparisonEdgeSection.lean",
+  "statement": "theorem siteComparison_edge_section (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U V : Scheme.{u}} (f : U ⟶ V) [QuasiCompact f] [QuasiSeparated f] (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (x : (DerivedCategory.Plus.homologyFunctor (ModuleCat.{u + 1} Λ) q).obj ((siteComparisonEtaleSections U Λ).rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) : siteComparisonProEtaleEdge Λ f F q (siteComparisonCohomologyMap U Λ F q x) = siteComparisonHigherImageSectionMap Λ f F q (siteComparisonEtaleEdge Λ f F q x)",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The edges specialize the existing canonical truncation spectral-object edge and its target isomorphism, after the unit-normalized Leray identification. Global and higher-image comparison use exactly finiteComparisonGlobalSections and fixedComparisonDirectImageMatePlus. Helpers are canonical specializations belonging to this edge-section statement; every definition has explicit construction data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f01e62b5",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: Λ CommRing+Finite in Type (u+1) as in the deps; qcqs f; F[0]; q:ℕ; b = recorded fixedComparisonDirectImageMatePlus; c = H^q of recorded finiteComparisonGlobalSections after removing the derived-identity iso; canonical Leray isos via rightDerivedFunctorPlusCompIso' of lowerStarCompGlobalSectionsIso/globalSectionsLowerStarIso; edges = recorded hypercohomology leftEdge plus target iso; A_V(s) = comparison unit; exactness iso direction correct; ∀x. No extra hypotheses; q=0, zero sheaf, zero ring, identity and empty schemes covered. One-definition check: live EdgeMap is the bottom edge (different map); grothendieckLeftEdgeMap is proved equal to the hypercohomology edge, so not a duplicate. Node changed only in lean plus a landed added stmt_dep (allowed by §5); statement verbatim; 9 declarations recorded. #print axioms: sorry only in the main theorem. Docstrings with source and blueprint, 4-step proof docstring, lines ≤100. nt_compile on the side overlay: 33.2 s, no errors or warnings. Report has Worker report and Second reading by Q83."
  }
 }

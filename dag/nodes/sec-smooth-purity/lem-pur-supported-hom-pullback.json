@@ -355,5 +355,46 @@
   "group": "Q153",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-b6ebdb459 (reviewer sub-agent of L); spot-checked: Read the full item (statement unchanged; 9 steps), the new node lem-pur-proetale-supported-constant-presentation, the statements of all 36 cited nodes, and the citing steps 3–5 of thm-pur-affine-line-orientation. Sources checked: Milne LEC §9 pp.66–67 (Thm 9.4, functorial in pairs; Ex. 9.5; the Ext proof), Stacks 095L lemma-ses-associated-to-open and 03S6, and blueprint main-20261015 thm-pur-affine-line-orientation.proof.md. Base-change map: c is the adjoint-mate closed exchange. Step 3 proves it equals the unique d with d∘Lρ=ρ' by evaluation at 1 and epic cancellation. Coefficients are ordinary module sheaves over A_{E,n} on small sites throughout. Steps 6–8 check out: the derived universal property, the K-injective comparison t (exact inverse image is not assumed to preserve injectives), and the roof formula giving χ'(h*α)=L(χα)∘c^{-1} in every degree a. Step 9 (etale/pro-etale squares) checks out via lem-weil-pbc-comparison-pullback. The χ normalization matches the constructions in the proofs of lem-amb-closed-support-hom and lem-pur-supported-hom; I used them only to identify the canonical map. Pre-existing ambiguity, not a delivery fault: def-pur-support-cohomology derives Γ_Z in Ab for sheaves but in module derived categories for complexes; the item uses the complex reading. New node: true by hand check (local lifting of locally constant functions; the kernel is glued from a clopen support), with no quasi-compactness of j. Checked edge cases Z=∅, Z=X, nonreduced Z and non-qc U. Not a duplicate: the generic pro-etale sequences lem-sf-proetale-open-closed-sequence and lem-weil-pbc-proetale-ringed-open-closed assume j quasi-compact, and lem-pur-supported-hom proves this presentation only inside its proof (C3). Statement-only, four search kinds recorded, blueprint from/via correct, and not a restatement of the item. No cycle; no SGA. The 16 declared tool_uses are generic black boxes and are accepted. FIX (C1): step 2 used the identifications j^{-1}A_X=A_U and i^{-1}A_X=A_Z without citing prop-weil-pbc-inverse-image-modules-exact (1). The corrected item is in fixes/dag/nodes/sec-smooth-purity/lem-pur-supported-hom-pullback.json, with that node added to step 2's uses and one clause added; proof_deps is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportedHomPullback",
+  "declaration": "AlgebraicGeometry.supportedHom_pullback",
+  "declarations": [
+   "AlgebraicGeometry.SupportHomPair",
+   "AlgebraicGeometry.SupportHomPair.sections",
+   "AlgebraicGeometry.SupportHomPair.group",
+   "AlgebraicGeometry.SupportHomPair.complex",
+   "AlgebraicGeometry.SupportHomPair.cycleClass",
+   "AlgebraicGeometry.SupportHomPair.cocycleMorphism",
+   "AlgebraicGeometry.SupportHomPair.Identification",
+   "AlgebraicGeometry.supportHomConstantDirectImage",
+   "AlgebraicGeometry.SupportHomPair.Transport",
+   "AlgebraicGeometry.SupportHomPair.Transport.derivedMap",
+   "AlgebraicGeometry.SupportHomPair.Transport.homMap",
+   "AlgebraicGeometry.SupportHomPair.Transport.Compatible",
+   "AlgebraicGeometry.etaleSupportHomPair",
+   "AlgebraicGeometry.proEtaleSupportHomPair",
+   "AlgebraicGeometry.etaleSupportHomTransport",
+   "AlgebraicGeometry.proEtaleSupportHomTransport",
+   "AlgebraicGeometry.siteSupportHomTransport",
+   "AlgebraicGeometry.supportHomDerivedComparison",
+   "AlgebraicGeometry.SupportHomSquareCoherent",
+   "AlgebraicGeometry.supportedHom_pullback"
+  ],
+  "file": "lean/Sheaf/Paper/SupportedHomPullback.lean",
+  "statement": "theorem supportedHom_pullback (P : WeilConjectures.PurityFiniteSetting.{u}) : ∃ chiE : ∀ {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i], (etaleSupportHomPair P i).Identification, ∃ chiP : ∀ {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i], (proEtaleSupportHomPair P i).Identification, ∀ {Z X Z' X' : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (i' : Z' ⟶ X') [IsClosedImmersion i'] (h : X' ⟶ X) (g : Z' ⟶ Z) (_sq : ChosenCartesianSquare g i' i h), ∃ e : etaleSupportHomTransport P i i' h, ∃ p : proEtaleSupportHomTransport P i i' h, ∃ v : siteSupportHomTransport P i, ∃ v' : siteSupportHomTransport P i', SupportHomSquareCoherent P i i' h e p v v' ∧ ∀ (F : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) (a : ℤ), e.Compatible (hB := Etale.isContinuous_overPullback h) (chiE i) (chiE i') F a ∧ p.Compatible (hB := Scheme.ProEt.isContinuous_overPullback h) (chiP i) (chiP i') ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategoryPlus.obj F) a ∧ v.Compatible (hB := Scheme.isContinuous_toProEt X) (chiE i) (chiP i) F a ∧ v'.Compatible (hB := Scheme.isContinuous_toProEt X') (chiE i') (chiP i') ((Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) h).mapDerivedCategoryPlus.obj F) a",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical identifications and transports are introduced together with their evaluation-at-one, constant-unit and kernel-inclusion normalizations. The derived map is the existing rightDerivedFunctorPlusBaseChange; closed exchange is fixed by the epic constant restriction. The four compatibility clauses and both comparison squares are explicit. No statement correction, extra hypothesis, arbitrary-map parameter, or purity assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94b5e2060",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Read node, 12 stmt deps and their lean records, report, module, and the used declarations (supportSequenceModelIso, rightDerivedFunctorPlusBaseChange, comparisonUpperStar/Adjunction = recorded proEtaleSiteComparisonModules, ProEtale.upperStar = recorded proEtaleSheafInverseImage construction, supportSiteComparisonCoefficientPullbackIso, comparisonUpperStarUnitIso, P.constant). Every node clause is rendered with no extra hypotheses; h arbitrary, a in Z, universes u/u+1 unrestricted. Existential chi/transport data are uniquely pinned (cocycle normalization + naturality + enough injectives; homEquiv injective; L rho epi; kernel.iota mono; monic site arrows), so the statement is not weakened. No hollow definitions, a single sorry, docstrings with source and blueprint on all 20 declarations, lean.statement verbatim, node unchanged apart from lean, report has Worker report and Second reading by Q108. nt_compile on the snapshot: clean, 30.7 s, rc 0. Observations only: module-coefficient use of the generic supportedSectionsFunctor; the second reading is the author's own."
  }
 }
