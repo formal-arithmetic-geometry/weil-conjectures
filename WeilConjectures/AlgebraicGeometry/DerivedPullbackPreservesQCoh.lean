@@ -57,7 +57,8 @@ theorem derivedPullback_cohomology_over_affine {X Y : Scheme.{uX}} (f : X ⟶ Y)
         have hV' := (schemeDerivedQCoh_openRestriction_iff Y V E).2
           (fun i => by
             have := hE i
-            exact SheafOfModules.isQuasicoherent_over _ V)
+            exact SheafOfModules.isQuasicoherent_over ((DerivedCategory.homologyFunctor
+              (SheafOfModules.{uX} (moduleRings Y.toRingedSpace)) i).obj E) V)
         have : IsAffine U.toScheme := hU
         have : IsAffine V.toScheme := hV
         let : HasDerivedCategory (SheafOfModules.{uX}
