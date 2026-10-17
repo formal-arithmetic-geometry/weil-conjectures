@@ -210,5 +210,30 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-be9e7d080 (reviewer sub-agent of L); spot-checked: I read the delivery in full and wrote no fixes. It is one commit containing the item and its report, with no new nodes. Source: blueprint main-20261015 lem-coef-finite-exceptional.proof.md, paragraph 1, third Hom bijection. With F=Rf_!, U=f^*, R=Rf_*, P=Ra_!, A=Ra^!, kappa the compact-support composition and theta the projection formula, E_M is exactly the exchange Rf_*D_XM -> D_Y Rf_!M. The citer lem-coef-finite-exceptional applies the item with exactly these substitutions and uses only invertibility and the Hom action, which the statement gives. I recomputed all seven steps. (1) The counit formula gives g_h=eps∘U(h) and tr_Y∘P_Y(tau)=tr_X∘kappa. (2) The middle bijection's inverse is precomposition with q; the types check, and b_h matches the inverse of 'symmetry then evaluation' by naturality of sigma. (3) Naturality of kappa at b_h gives c_h. (4) Naturality of theta in W and of sigma gives c_h=lambda_M∘(h⊗1). (5) So Psi(h)=E_M∘h. (6) Contravariant naturality holds; the evaluation identity ev_{M'}(D_X a⊗1)=ev_M(1⊗a) follows from the assumed naturality in M at v=1. (7) The Yoneda leaf lem-galois-yoneda-fully-faithful (Stacks 001P, categories.tex lemma-yoneda) gives the inverse and is used for what its statement says. Small cases: with identity data E=id; in vector spaces with scalars c,d for theta,kappa, E=cd·id; with a zero dualizing object the claim holds trivially. Both cited nodes are Mathlib leaves (MonoidalCategory and Yoneda.fullyFaithful), so there is no route issue and no tool_uses. No SGA is cited. blueprint.from and same_as=[] are correct: fix-cor-verdier-exchange is the geometric version under an admissibility hypothesis and is not a duplicate. The statement is unchanged and does not weaken anything; the hexagon and associators it assumes are unused. This is not a target node, so the base-change and coefficient-category check does not apply."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AbsoluteTraceExchange",
+  "declaration": "CategoryTheory.absoluteTraceExchange",
+  "declarations": [
+   "CategoryTheory.absoluteTraceExchangeTrace",
+   "CategoryTheory.absoluteTraceExchangeMap",
+   "CategoryTheory.absoluteTraceExchangeHomEquiv",
+   "CategoryTheory.absoluteTraceExchange"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AbsoluteTraceExchange.lean",
+  "statement": "theorem absoluteTraceExchange (evY : ∀ M : Y, DY.obj (op M) ⊗ M ⟶ AY.obj Ω) (hX : ∀ (W M : X) (v : W ⟶ DX.obj (op M)), eX W M v = (v ⊗ₘ 𝟙 M) ≫ evX M) (hY : ∀ (W M : Y) (v : W ⟶ DY.obj (op M)), eY W M v = (v ⊗ₘ 𝟙 M) ≫ evY M) (hXM : ∀ (M' M : X) (a : M' ⟶ M), (DX.map a.op ⊗ₘ 𝟙 M') ≫ evX M' = (𝟙 (DX.obj (op M)) ⊗ₘ a) ≫ evX M) (hYM : ∀ (M' M : Y) (a : M' ⟶ M), (DY.map a.op ⊗ₘ 𝟙 M') ≫ evY M' = (𝟙 (DY.obj (op M)) ⊗ₘ a) ≫ evY M) (hθW : ∀ (M : X) (W W' : Y) (b : W ⟶ W'), (𝟙 (F.obj M) ⊗ₘ b) ≫ (θ M W').hom = (θ M W).hom ≫ F.map (𝟙 M ⊗ₘ U.map b)) (hθM : ∀ (M M' : X) (a : M ⟶ M') (W : Y), (F.map a ⊗ₘ 𝟙 W) ≫ (θ M' W).hom = (θ M W).hom ≫ F.map (a ⊗ₘ 𝟙 (U.obj W))) : (∀ M : X, IsIso (absoluteTraceExchangeMap adjX adjY Ω adj κ θ DX DY evX eY M)) ∧ (∀ (M' M : X) (a : M' ⟶ M), R.map (DX.map a.op) ≫ absoluteTraceExchangeMap adjX adjY Ω adj κ θ DX DY evX eY M' = absoluteTraceExchangeMap adjX adjY Ω adj κ θ DX DY evX eY M ≫ DY.map (F.map a).op) ∧ (∀ (M : X) (W : Y) (h : W ⟶ R.obj (DX.obj (op M))), (absoluteTraceExchangeHomEquiv adjX adjY Ω adj κ θ DX DY eX eY M W).symm h = h ≫ absoluteTraceExchangeMap adjX adjY Ω adj κ θ DX DY evX eY M)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The section binds the three categories with six independent object/morphism universes. Internal Hom is required only into AX Ω and AY Ω, using specified equivalences compatible with evaluation and evaluation naturality; no full closedness or relative right adjoint of F is imposed. The three helper definitions are exactly the trace transpose, specified exchange arrow, and displayed Hom bijection of this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58f1ce435",
+  "group": "NS",
+  "result": "pass",
+  "note": "I checked every hypothesis and conclusion clause of the node against the Lean, and I recomputed the six-step bijection: its inverse is postcomposition with E_M. The node's dinaturality of ev and the two naturality squares of theta are the equivalent forms used, and nothing extra is assumed. The three helper definitions are real data and are exactly the node's tau, E_M and the bijection. There are six independent universes, the only proof is sorry, docstrings carry the source place and blueprint tag, and lean.statement matches the file verbatim. The single commit has three files and changes only the node's lean field. The snapshot compiled cleanly through nt_compile.py --json, and a sanity run with an injected error confirmed the compile was real and showed only sorryAx as an extra axiom. Both dependencies are Mathlib declarations, the source exists, and the citer lem-coef-finite-exceptional uses only what the statement gives. The Second reading section records the 2026-10-17 direct-delivery policy, which I accept. No fixes."
  }
 }
