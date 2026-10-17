@@ -17,9 +17,72 @@
   "def-pc-fibre-product",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a point $t\\in Y$, put $k=\\kappa(t)$ and choose separably closed extensions $K/k$ and $L/k$. By [lem-weil-common-extension-fields] choose a field $M$ with compatible embeddings of $K$ and $L$ over $k$. Since $K$ is separably closed, [lem-weil-pbc-field-tensor-irreducible] applied with base field $K$, field extension $M/K$, and an arbitrary field extension $E/K$ shows that $M\\otimes_KE$ has a unique minimal prime; therefore $\\operatorname{Spec}M$ is geometrically irreducible over $K$ by [def-pc-geometrically-irreducible]. Apply [lem-sc-product-irreducible-components-bijection] to the product of $\\operatorname{Spec}M$ with $X_t\\times_k\\operatorname{Spec}K$ over $K$. Its projection induces a bijection between irreducible components of $X_t\\times_k\\operatorname{Spec}M$ and those of $X_t\\times_k\\operatorname{Spec}K$. The same argument over $L$ gives a bijection between the components over $M$ and those of $X_t\\times_k\\operatorname{Spec}L$. Composing one bijection with the inverse of the other proves equality of the component counts, including the empty and infinite cases; hence the value is independent of the chosen separably closed extension.",
+   "uses": [
+    "lem-weil-common-extension-fields",
+    "lem-weil-pbc-field-tensor-irreducible",
+    "def-pc-geometrically-irreducible",
+    "lem-sc-product-irreducible-components-bijection",
+    "def-pc-fibre-product",
+    "def-pc-separably-closed",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0556, proof: common field diagram and the two component bijections via Tag 038H."
+   }
+  },
+  {
+   "text": "Fix $t'\\in Y'$ and write $t=g(t')$ and $k=\\kappa(t)$, $k'=\\kappa(t')$. The residue-field map [def-weil-residue-field] makes $k'$ a field extension of $k$. Choose separably closed extensions $K/k$ and $L/k'$. Regard $L$ also as a field extension of $k$ and apply [lem-weil-common-extension-fields] to obtain a field $M$ receiving compatible embeddings of $K$ and $L$. The fibre-product universal property [def-pc-fibre-product], together with $X'=X\\times_YY'$, identifies $((X'_{t'})_L)_M$ with $(X_t)_M$: a map to either scheme is exactly a compatible pair of maps to $X$ and $\\operatorname{Spec}M$ over $Y$, with the map through $Y'$ forced by $\\operatorname{Spec}M\\to\\operatorname{Spec}L\\to\\operatorname{Spec}k'\\to Y'$. It also identifies $(X_t)_K$ with the corresponding $K$-base change used in the definition of $n_{X/Y}(t)$.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-pc-field-extension",
+    "def-pc-fibre-product",
+    "lem-weil-common-extension-fields",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0556, proof: comparison diagram of the two geometric fibres over a common separably closed field."
+   }
+  },
+  {
+   "text": "The common field $M$ need not be separably closed. Since $K$ and $L$ are separably closed, [lem-weil-pbc-field-tensor-irreducible] applied to $M\\otimes_K E$ for every field extension $E/K$, and likewise over $L$, shows that $\\operatorname{Spec}M$ is geometrically irreducible over each base [def-pc-geometrically-irreducible, def-weil-affine-spectrum]. Thus [lem-sc-product-irreducible-components-bijection] gives a bijection from the components of $(X_t)_M$ to those of $(X_t)_K$ and a bijection from the components of $((X'_{t'})_L)_M$ to those of $(X'_{t'})_L$. The canonical isomorphism of Step 2 identifies the two source schemes. Their component counts therefore agree, including zero and infinity. By Step 1 the counts on the two target schemes are respectively $n_{X/Y}(t)$ and $n_{X'/Y'}(t')$, proving the required equality for every $t'$.",
+   "uses": [
+    "lem-weil-pbc-field-tensor-irreducible",
+    "lem-sc-product-irreducible-components-bijection",
+    "def-pc-fibre-product",
+    "def-pc-geometrically-irreducible",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0556, proof: component bijections from the common field and conclusion of the base-change equality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-field-extension",
+  "def-pc-geometrically-irreducible",
+  "def-pc-scheme-fibre",
+  "def-pc-separably-closed",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "lem-sc-product-irreducible-components-bijection",
+  "lem-weil-common-extension-fields",
+  "lem-weil-pbc-field-tensor-irreducible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0556 (lemma-base-change-fibres-nr-geometrically-irreducible-components), proof, using Tag 038H via the existing product-component node."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,7 +126,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-geometric-component-count-generic-constancy",
@@ -75,7 +138,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "055A proof paragraph 1 and descent paragraph: invariance and arbitrary base change of the component-count function; In the Stacks 055A generic-constancy input to the 055B irreducible-fibre locus used by 05FH in the Noetherian-approximation branch of the blueprint proof; specifically Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), the projectivity of S over R (Tag 05FT) used with Tag 05FQ. In the resulting 05FT Noetherian-approximation input: 05FH, good irreducible-fibre locus. This input supports the constructibility proof in 055B for the irreducible-fibre locus.",
+   "place": "055A proof paragraph 1 and descent paragraph: invariance and arbitrary base change of the geometric irreducible-component count, using the Tag 0556 comparison diagram; the Tag 038H component-bijection input is already represented by existing DAG nodes.",
    "via": [
     "lem-trf-geometric-component-count-generic-constancy",
     "lem-trf-geometrically-irreducible-fibre-locus",
@@ -96,5 +159,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-geometric-fibre-component-count-base-change",
+  "worker": "stage1",
+  "summary": "Kept the imported Tag 0556 statement unchanged. Reused the existing common-extension, field-tensor irreducibility, and product irreducible-component bijection nodes; no new node is needed because Tag 038H is a direct specialization of those existing statements. Expanded the common-field comparison and arbitrary-base-change fibre identifications, including empty and infinite component sets.",
+  "blueprint": "055A proof paragraph 1 and descent paragraph: invariance and arbitrary base change of the geometric irreducible-component count, using the Tag 0556 comparison diagram; the Tag 038H component-bijection input is already represented by existing DAG nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q123-341dd4f91",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q123-341dd4f91 (reviewer sub-agent of L); spot-checked: Read the full mathematics against Stacks 0556, 038H, 038F, 00I7 and 0H7K. Corrected Step 3: the common field need not be separably closed; added existing definition citations. Statement unchanged; no new nodes, cycles, or long steps. Corrected JSON and concrete checks are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
  }
 }

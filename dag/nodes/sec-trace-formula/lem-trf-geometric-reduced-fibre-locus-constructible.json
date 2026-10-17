@@ -15,9 +15,73 @@
   "def-weil-constructible-subset",
   "def-pc-reduced-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $t\\in T$. By [lem-weil-pbc-affine-opens-basis] choose an affine open neighbourhood $V$ of $t$. Since $f$ is quasi-compact, $f^{-1}(V)$ is quasi-compact and has a finite affine open cover $U_1,\\ldots,U_n$ by [lem-weil-pbc-qcqs-finite-affine-open-cover]. Write $V=\\operatorname{Spec}A$ and $U_i=\\operatorname{Spec}B_i$. Apply [lem-weil-pbc-lfp-affine-opens-finite-presentation] to the original locally finitely presented morphism $f$, the affine open $U_i\\subseteq X$, and the affine open $V\\subseteq T$, with $f(U_i)\\subseteq V$. It gives that the induced ring map $A\\to B_i$ is finitely presented. The affine theorem [lem-trf-geometrically-reduced-fibre-locus] gives constructibility of the locus where $\\operatorname{Spec}(B_i\\otimes_A\\kappa(v))$ is geometrically reduced over $\\kappa(v)$. Apply [lem-trf-geometric-reducedness-algebraic-closure-test] to this fibre, with $k=\\kappa(v)$ and the algebraic closure chosen in the item. Its all-field-extension condition is exactly the affine theorem's condition; its other condition is reducedness of $(U_i)_{\\bar v}$. Thus the constructible locus is precisely $E_i=\\{v\\in V\\mid (U_i)_{\\bar v}\\text{ is reduced}\\}$. This comparison works in every characteristic, including empty chart fibres.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-trf-geometrically-reduced-fibre-locus",
+    "lem-trf-geometric-reducedness-algebraic-closure-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0579, affine-base and finite affine source-cover reduction; varieties.tex Tags 035X (2) iff (6) and 020I for the comparison with the chosen-algebraic-closure convention. Morphisms Tag 01TQ (lemma-locally-finite-presentation-characterize), (1) implies (2), supplies finite presentation of the chart ring map."
+   }
+  },
+  {
+   "text": "For every $v\\in V$, the fibre $(f^{-1}(V))_v$ is covered by the open subschemes $(U_i)_v$. A scheme is reduced exactly when all members of an open cover are reduced, so its geometric fibre is reduced exactly when every $(U_i)_{\\bar v}$ is reduced. Consequently $E\\cap V=\\bigcap_{i=1}^n E_i$. Finite intersections preserve constructibility by the Boolean-algebra definition of [def-weil-constructible-subset].",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0579, proof: fibres of the finite affine cover form an affine open covering of the fibre"
+   }
+  },
+  {
+   "text": "Thus every point $t\\in T$ has an open neighbourhood $V$ for which $E\\cap V$ is constructible. This is precisely that $E$ is locally constructible in the topological sense used by [lem-trf-locally-constructible-qcqs-global].",
+   "uses": [
+    "lem-trf-locally-constructible-qcqs-global"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0579, first sentence of the proof (definition of locally constructible)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-locally-constructible-qcqs-global] to the qcqs scheme $T$ and the subset $E$. It yields that $E$ is constructible in $T$. The empty-source and empty-fibre cases are included: the corresponding loci are all of $V$ and the reducedness criterion for an empty scheme is vacuous.",
+   "uses": [
+    "lem-trf-locally-constructible-qcqs-global"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0579, conclusion after establishing local constructibility; Topology Tag 053W for the qcqs local-to-global step"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-constructible-subset",
+  "lem-trf-geometric-reducedness-algebraic-closure-test",
+  "lem-trf-geometrically-reduced-fibre-locus",
+  "lem-trf-locally-constructible-qcqs-global",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0579 (lemma-geometrically-reduced-constructible), proof; Topology Tag 053W for collating local constructibility on a qcqs base"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,7 +120,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-geometrically-reduced-fibres-limit-descent",
@@ -86,5 +150,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-geometric-reduced-fibre-locus-constructible",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against Stacks Tag 0579 and retained its exact hypotheses, including quasi-compactness and local finite presentation of f, qcqs base, no flatness or Noetherian assumption, and empty fibres. Split the proof by first passing to an affine base neighbourhood and finite affine source cover, applying the existing affine geometrically reduced fibre locus theorem to each chart, intersecting the finitely many chart loci, and finally using the Mathlib local-to-global constructibility leaf for qcqs schemes. No finished project declaration states this item. Repair of returned head 2037243233: Step 1 now applies the separate arbitrary-field scheme comparison lem-trf-geometric-reducedness-algebraic-closure-test to each affine residue-field fibre. The affine theorem is used only for what its statement says (geometric reducedness after every field extension); the new comparison identifies that locus with reducedness after the chosen algebraic closure. Full source and edge-case audit is recorded in report.md and review.md.",
+  "blueprint": "Serves the inherited lem-trf-local-term-locality ancestry at the clause invoking Temkin Remark 3.1.1(i): the good geometric-fibre locus is constructible at a finite presentation stage."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q27-2f11cc19b",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-2f11cc19b (reviewer sub-agent of L); spot-checked: Full mathematical review completed. Fixed Step 1’s missing affine-ring finite-presentation citation using existing lemma lem-weil-pbc-lfp-affine-opens-finite-presentation (Stacks 01TQ). Verified Stacks 0579, 035X, 020I, 053W, 094L and the Mathlib local-to-global match. Both new nodes accepted; no statement changes, duplicates, cycles or dropped-route dependencies found. Review and corrected JSON written under the review directory.; 1 file(s) fixed by the reviewer"
  }
 }
