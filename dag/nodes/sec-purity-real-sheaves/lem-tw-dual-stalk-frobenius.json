@@ -12,9 +12,89 @@
   "def-real-weil-representation-operations",
   "def-weil-local-frobenius-trace"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-tw-lisse-rational-realization] for the underlying lisse object of $\\mathcal F$. By the finite-stage convention in [def-weil-weil-sheaf-complex], enlarge a finite coefficient field $E$ so that the sheaf, its Weil isomorphism $\\theta$, and $\\theta^{-1}$ are all represented over $E$ and are inverse there. Work with the resulting finite locally free $E_Y$-module $L$. All tensor, pullback and fibre comparisons below are the normalized comparisons in that realization theorem; at the end extend scalars from $E$ to $\\Qlb$. In particular no Frobenius-stable integral lattice is being assumed, and no equivalence with the project's distinct concrete WeilSheaf category is being assumed.",
+   "uses": [
+    "lem-tw-lisse-rational-realization",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2), Remark 6.8.15; common-stage interpretation of the first sentence of the blueprint proof"
+   }
+  },
+  {
+   "text": "Put $L^*=\\mathcal Hom_{E_Y}(L,E_Y)$ using [def-pur-sheaf-hom]. On a finite-free chart $L=E_Y^r$, a module map $L\\to E_Y$ is uniquely $(x_i)\\mapsto\\sum_i a_ix_i$, so $L^*=E_Y^r$ with coordinate dual basis. The evaluation is $b(\\lambda,v)=\\lambda(v)$; the local map $E_Y\\to L\\otimes L^*$ sends $1$ to $\\sum_i e_i\\otimes e_i^*$. This tensor is independent of basis: after $e'_i=\\sum_j e_jP_{ji}$ the dual basis transforms by $P^{-1}$ and the double sum contracts to $\\sum_j e_j\\otimes e_j^*$. The local coevaluations therefore agree on overlaps and glue by [lem-pur-sheaf-hom-cover-gluing]. The two triangle identities follow on each chart from $\\sum_i e_i^*(v)e_i=v$ and $\\sum_i\\lambda(e_i)e_i^*=\\lambda$, hence hold globally by uniqueness in that gluing statement. This includes $r=0$. Thus $L^*$ is lisse of finite rank. By [lem-tw-lisse-rational-realization] it defines an object of the constructible heart, and its evaluation and coevaluation are the ones in that coefficient category.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-pur-sheaf-hom-cover-gluing",
+    "lem-tw-lisse-rational-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0FNY (example-dual) and 04TT (section-internal-hom): finite-basis calculation and restriction of sheaf Hom"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-ringed-site-finite-free-dual-pullback] to the geometric-Frobenius pullback $g=g_Y$, the coefficient ring sheaf $E_Y$ on source and target with the ring map $g^{-1}E_Y\\to E_Y$ of the realization's pullback, and $L$. Its evaluation-defined comparison identifies $g^*L^*$ with $(g^*L)^*$. Follow it by precomposition with $\\theta^{-1}:L\\to g^*L$ (and the coefficient-unit identification). This is an isomorphism $\\theta^*:g^*L^*\\to L^*$, so gives $L^*$ the contragredient Weil structure. In these identifications,\n$$b(\\theta^*\\lambda,\\theta v)=\\lambda(\\theta^{-1}\\theta v)=\\lambda(v)=g^*b(\\lambda,v).$$\nThis equality of module maps is an equality of Weil morphisms under [lem-tw-lisse-rational-realization]. The same construction identifies the object with the linear dual specified in the item, because locally both are the coordinate dual with this evaluation, and the transition maps on dual bases are inverse transposes. It is therefore a lisse finite-rank constructible Weil sheaf, by step 2 and [def-weil-weil-sheaf-complex].",
+   "uses": [
+    "lem-pur-ringed-site-finite-free-dual-pullback",
+    "lem-tw-lisse-rational-realization",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), evaluation comparison; blueprint dual representation sentence"
+   }
+  },
+  {
+   "text": "Fix a closed point $y$ of degree $r$ and its geometric point $x=\\bar y$. In [def-weil-local-frobenius-trace] its return is $g_Y^rx=xg_s^r$, not $g_Y^rx=x$. Iterate the evaluation identity in step 3: if it holds for $\\theta^{[n]}$, pull back the one-step identity by $g_Y^n$ and compose to obtain it for $\\theta^{[n+1]}$; the case $n=1$ is step 3. Pull back by $x$ and evaluate at $s$. Point transport is the restriction-and-coprojection map of [def-weil-frobenius-point-transport]. Restriction of a pairing evaluates restrictions of its arguments, and the inverse-image coprojection sends a pure tensor to the tensor of its two images. Thus these maps take $b(\\lambda,v)$ to the evaluation of the transported arguments. On the coefficient unit they fix every constant scalar. The composition and point-transport normalization of [lem-tw-lisse-rational-realization] identifies this computation with precisely the local operators defined in [def-weil-local-frobenius-trace]. Hence the induced stalk pairing $b_y$ satisfies\n$$b_y(F_{y,\\mathcal F^\\vee}\\lambda,F_{y,\\mathcal F}v)=b_y(\\lambda,v).$$",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "def-weil-frobenius-point-transport",
+    "lem-tw-lisse-rational-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-tw-dual-negation.proof.md",
+    "place": "Proof, first sentence, expanded: iterate the dual evaluation identity and use the specified semilinear geometric-point return"
+   }
+  },
+  {
+   "text": "Write $V=\\mathcal F_{\\bar y}$ and $D=(\\mathcal F^\\vee)_{\\bar y}$. The functor $\\operatorname{Fib}_s Lx^*$ preserves tensor, unit and their constraints by [lem-tw-lisse-rational-realization] and [lem-sf-point-fibre-derived-tensor], so the two triangle identities of step 2 remain true on $V,D$. Write the image of the coevaluation of $1$ as a finite tensor sum $\\sum_jv_j\\otimes d_j$. Then $c_y:D\\to V^*$, $d\\mapsto(v\\mapsto b_y(d,v))$, has inverse $\\lambda\\mapsto\\sum_j\\lambda(v_j)d_j$: the two composites are identities by those triangle identities. In particular this is the required linear isomorphism. The stalk $V$ is finite-dimensional by [def-weil-local-frobenius-trace]. The local operator is a composite of the iterated Weil isomorphism, pullback-composition isomorphisms and point transports. Point transports are invertible by part 1 of [lem-weil-frobenius-cohomology-transport-iso] (apply that part with the auxiliary separated scheme $\\operatorname{Spec}k_0$, so it puts no separatedness assumption on $Y_0$); hence $A=F_{y,\\mathcal F}$ is an automorphism. In the identity of step 4 replace $v$ by $A^{-1}v$ to get\n$$c_y(F_{y,\\mathcal F^\\vee}\\lambda)(v)=c_y(\\lambda)(A^{-1}v).$$\nIt says exactly $c_yF_{y,\\mathcal F^\\vee}c_y^{-1}=(A^{-1})^*$. All formulas are compatible with extension from $E$ to $\\Qlb$ by the realization theorem, proving the assertions at the stated coefficients.",
+   "uses": [
+    "lem-tw-lisse-rational-realization",
+    "lem-sf-point-fibre-derived-tensor",
+    "def-weil-local-frobenius-trace",
+    "lem-weil-frobenius-cohomology-transport-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-tw-dual-negation.proof.md",
+    "place": "Proof, first sentence: inverse transpose from perfect evaluation and invariance; finite-sum inverse of the evaluation transpose"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-tw-lisse-rational-realization",
+  "def-weil-weil-sheaf-complex",
+  "def-pur-sheaf-hom",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-pur-ringed-site-finite-free-dual-pullback",
+  "def-weil-local-frobenius-trace",
+  "def-weil-frobenius-point-transport",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-weil-frobenius-cohomology-transport-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-tw-dual-negation.proof.md",
+  "place": "Proof first sentence, expanded using Bhatt-Scholze 6.8 and Stacks Tags 0GMX and 0FNY; no appeal to the different concrete Lean coefficient model"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +137,45 @@
    "results": "ModuleCat.Tilde.stalkIso_hom, smoothSheafCommRing.forgetStalk_inv_comp_eval, smoothSheafCommRing.forgetStalk_inv_comp_eval_apply, smoothSheafCommRing.forgetStalk, smoothSheafCommRing.ι_forgetStalk_inv, smoothSheafCommRing.ι_forgetStalk_inv_apply, smoothSheafCommRing.ι_forgetStalk_hom, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk",
    "date": "2026-10-17",
    "verdict": "no match: no lisse Weil sheaf or Frobenius-equivariant dual-stalk theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|stalk.*dual|dual.*stalk",
+   "results": "0 hits: . The hits supply ordinary dual representations, scheme structure-sheaf stalks, or light condensed internal Hom; none states the common-stage lisse Weil sheaf theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dual of a lisse l-adic Weil sheaf has inverse transpose local Frobenius on its geometric stalks",
+   "results": "8 hits: Lat.dualEquiv_inverse, Representation.dual_apply, LinearMap.dualMap_def, Module.Dual.transpose, Lat.dualEquiv_functor, Lat.dualEquiv, Representation.dual, LinearMap.dualMap. The hits supply ordinary dual representations, scheme structure-sheaf stalks, or light condensed internal Hom; none states the common-stage lisse Weil sheaf theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"dual\"",
+   "results": "0 hits: . The hits supply ordinary dual representations, scheme structure-sheaf stalks, or light condensed internal Hom; none states the common-stage lisse Weil sheaf theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the linear dual of a finite rank lisse Weil sheaf is its dual stalk with contragredient Frobenius",
+   "results": "8 hits: ModuleCat.Tilde.stalkIso_hom, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, smoothSheafCommRing.forgetStalk_inv_comp_eval_apply, smoothSheafCommRing.ι_forgetStalk_inv, smoothSheafCommRing.ι_forgetStalk_inv_apply, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, smoothSheafCommRing.ι_forgetStalk_hom, ModuleCat.Tilde.toStalk. The hits supply ordinary dual representations, scheme structure-sheaf stalks, or light condensed internal Hom; none states the common-stage lisse Weil sheaf theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric fibre of internal Hom from a finite locally free l-adic local system commutes with linear dual and automorphism transport",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp, LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_apply, LightCondensed.ihomPoints, LightCondensed.ihomPoints_symm_apply, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition'. The hits supply ordinary dual representations, scheme structure-sheaf stalks, or light condensed internal Hom; none states the common-stage lisse Weil sheaf theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-tw-dual-negation",
@@ -77,5 +192,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-tw-dual-stalk-frobenius",
+  "worker": "stage1",
+  "summary": "Kept the full statement. Separated the actual coefficient-model comparison from finite-free duality, constructed the dual Weil structure through evaluation, iterated the identity through the semilinear point return, and wrote the inverse of the stalk evaluation transpose. One new generic lisse realization interface; no new dual-stalk clause or Frobenius-pairing lemma. The concrete Lean theorem is a candidate only, since it is in another coefficient model.",
+  "blueprint": "Realizes the first sentence of lem-tw-dual-negation.proof.md (main-20261015) and the duality-negates-weights consequence of sk-r-real-linear; the weight calculation remains in the parent.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-finite-free-dual-pullback",
+    "why": "Generic evaluation-defined dual comparison for finite locally free modules on ringed sites; used to construct the Weil structure, not to replace the unit weight argument."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Generic gluing of sheaf-module maps supplies the global coevaluation from basis-independent local formulas."
+   },
+   {
+    "node": "lem-sf-point-fibre-derived-tensor",
+    "why": "Generic monoidal property of the specified point fibre; carries the two duality identities to vector spaces."
+   },
+   {
+    "node": "lem-weil-frobenius-cohomology-transport-iso",
+    "why": "Only its point-transport isomorphism clause is used, with auxiliary scheme Spec k_0; no global cohomology theorem or separatedness of Y_0 is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-finite-free-dual-pullback",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-weil-frobenius-cohomology-transport-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-8f3289be0",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-8f3289be0 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-tw-lisse-rational-realization and every cited statement in full. Sources checked: blueprint main-20261015 lem-tw-dual-negation (.md and .proof.md, first sentence of the proof), and Bhatt-Scholze section 6.8 (Lemma 6.8.2, Definition 6.8.3, Proposition 6.8.4, Lemmas 6.8.12 and 6.8.13, Proposition 6.8.14(2), Remark 6.8.15), which support the new node: the realization is fully faithful, the lisse part of the rational heart has essential image Loc(X,E_X), and the realization is compatible with tensor and pullback, for any finite-type X including nonseparated X. The node is a generic coefficient comparison, not a restatement of the item. It is not a duplicate of lem-weil-pbc-condensed-e-realization (separated, k-morphisms only), thm-sfb-extend-scalars-localization, lem-weil-pbc-lisse-e-constructible-integral-lattice, lem-per-adic-lisse-cohomology-calculus (separated, def-pod notion of lisse) or lem-sfb-integral-lisse-reduction-equivalence. Steps 1-5 check out: the common finite stage and realization; the dual-basis coevaluation is basis-independent and glues, with both triangle identities and r=0; theta^* is precomposition with theta^{-1} after the evaluation-normalized delta, with the correct variance; the induction on theta^[n] is set up with the semilinear return g^r x = x g_s^r; the ctf hypothesis of the fibre-tensor lemma holds by definition at field coefficients; the inverse of c_y is an explicit finite sum; only part 1 of the transport-iso lemma is used, via Spec k_0, so Y_0 needs no separatedness. Small cases tested: rank 0, empty base, rank 1 (dual Frobenius a^{-1}), a unipotent block (inverse transpose), degree r. Batch-5 check: the flagged citation lem-sfb-integral-lisse-reduction-equivalence (whose closure reaches lem-pod-adic-limit-finite-modules) was used only in the new node's statement, to identify the limit sheaves with continuous functions. That identification is not needed. lem-pod-adic-limit-finite-modules is general O_E-module algebra, not a step of Poincare duality. Even so, I replaced the citation (and def-weil-pbc-lisse-lattice-coefficients) with def-weil-completed-integral-coefficients and defined E_X inline as R^_X[1/varpi], so nothing in the trace-formula or Poincare-duality closure is newly cited. I also added the missing finite-type citation def-weil-scheme-morphism-properties, and reworded item step 3 to say 'coefficient ring sheaf E_Y' instead of 'continuous coefficient rings'. I accept the declared tool_uses: lem-pur-ringed-site-finite-free-dual-pullback, lem-pur-sheaf-hom-cover-gluing, lem-sf-point-fibre-derived-tensor, lem-weil-frobenius-cohomology-transport-iso (part 1 only). No SGA source is used. Corrected files are under fixes/dag/nodes/sec-purity-real-sheaves/.; 2 file(s) fixed by the reviewer"
  }
 }

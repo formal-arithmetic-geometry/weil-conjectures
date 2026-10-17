@@ -2,7 +2,7 @@
  "id": "lem-sf-ringed-localization-rhom-orthogonality",
  "kind": "statement",
  "title": "Localization orthogonality for derived internal Hom",
- "statement": "Let $\\mathcal C$ be a site small in the module universe, let $\\mathcal O$ be a sheaf of commutative rings, and let $f$ be a global section. Write $\\mathcal O_f$ for the sheafified sectionwise localization [def-weil-pbc-ringed-site-section-localization], and use the unbounded derived categories of $\\mathcal O$-modules and $\\mathcal O_f$-modules [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category] and derived internal Hom [def-pur-derived-internal-hom]. For $K\\in D(\\mathcal O)$ and $L\\in D(\\mathcal O_f)$, viewed as an $\\mathcal O$-complex by restriction of scalars [def-pc-sheaf-restrict-scalars], there is a natural isomorphism $$R\\mathcal Hom_{\\mathcal O}(L,K)\\cong R\\mathcal Hom_{\\mathcal O_f}(L,R\\mathcal Hom_{\\mathcal O}(\\mathcal O_f,K)).$$ Consequently, if $R\\mathcal Hom_{\\mathcal O}(\\mathcal O_f,K)=0$, then $R\\mathcal Hom_{\\mathcal O}(L,K)=0$ for every $L\\in D(\\mathcal O_f)$. No boundedness, finite-generation, or flatness hypothesis is imposed.",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe, let $\\mathcal O$ be a sheaf of commutative rings, and let $f$ be a global section. Write $\\mathcal O_f$ for the sheafified sectionwise localization [def-weil-pbc-ringed-section-localization, def-weil-pbc-ringed-site-section-localization], with its canonical ring map $\\mathcal O\\to\\mathcal O_f$, and use the unbounded derived categories of $\\mathcal O$-modules and $\\mathcal O_f$-modules [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category] and derived internal Hom [def-pur-derived-internal-hom]. For $K\\in D(\\mathcal O)$ and $L\\in D(\\mathcal O_f)$, viewed as an $\\mathcal O$-complex by restriction of scalars [def-pc-sheaf-restrict-scalars], there is a natural isomorphism $$R\\mathcal Hom_{\\mathcal O}(L,K)\\cong R\\mathcal Hom_{\\mathcal O_f}(L,R\\mathcal Hom_{\\mathcal O}(\\mathcal O_f,K)).$$ Consequently, if $R\\mathcal Hom_{\\mathcal O}(\\mathcal O_f,K)=0$, then $R\\mathcal Hom_{\\mathcal O}(L,K)=0$ for every $L\\in D(\\mathcal O_f)$. No boundedness, finite-generation, or flatness hypothesis is imposed.",
  "source": {
   "document": "literature/stacks-project/algebraization.tex",
   "place": "Tag 0996, lemma-map-twice-localize, clause (2), and Tag 0997, lemma-hom-from-Af, implication (1) => (2)."
@@ -11,12 +11,108 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "def-pur-derived-internal-hom",
+  "def-weil-pbc-ringed-section-localization",
   "def-weil-pbc-ringed-site-section-localization",
   "def-pc-sheaf-restrict-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=\\mathcal O_f$ and let $U:\\operatorname{Mod}(S)\\to\\operatorname{Mod}(\\mathcal O)$ be restriction of scalars. It leaves the underlying abelian sheaf unchanged. The kernel and cokernel descriptions in [def-weil-sheaf-of-modules-category] therefore give $U(\\ker a)=\\ker U(a)$ and $U(\\operatorname{coker}a)=\\operatorname{coker}U(a)$: sectionwise kernels are unchanged, and the underlying sheafification of the sectionwise additive quotient is unchanged. Thus $U$ is additive and exact, and it detects zero objects and acyclic complexes. In particular termwise restriction sends quasi-isomorphisms to quasi-isomorphisms and gives the restriction functor on the derived categories.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian, and Section 03D9, section-kernels; elementary exactness of restriction of scalars"
+   }
+  },
+  {
+   "text": "For an $\\mathcal O$-module $N$, set $H(N)=\\mathcal Hom_{\\mathcal O}(S,N)$ with $S$-action $(b\\phi)_W(c)=\\phi_W(b|_Wc)$ for $W\\to V$, $b\\in S(V)$ and $c\\in S(W)$. The sheaf Hom definition gives a sheaf; associativity and the unit law follow from those of multiplication in $S$, and postcomposition defines the additive functor $H$. For an $S$-module $M$, an $\\mathcal O$-linear map $a:UM\\to N$ gives an $S$-linear map $\\widetilde a:M\\to H(N)$ by $\\widetilde a_V(m)_W(c)=a_W(c\\,m|_W)$. Conversely $b:M\\to H(N)$ gives $m\\mapsto b_V(m)_V(1)$. These are inverse: evaluation recovers $a(m)$, while $S$-linearity gives $b_W(c m|_W)_W(1)=b_V(m)_W(c)$. Both formulas commute with restriction and with pre- and postcomposition. Hence $U\\dashv H$. This explicitly proves the elementary adjunction of Tag 0932; no adjunction for ordinary modules is silently applied to sheaves.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0932, lemma-adjoint-hom-restrict, explicit inverse formulas"
+   }
+  },
+  {
+   "text": "Choose a complex $F^\\bullet$ of $S$-modules representing $L$, and a K-injective resolution $K^\\bullet\\to I^\\bullet$ over $\\mathcal O$, using [prop-pur-kinjective-resolutions-exist]. Its small-site hypothesis is exactly the hypothesis on $\\mathcal C$. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] with $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$, $\\mathcal B=\\operatorname{Mod}(S)$, $v=U$ and $u=H$. Both categories are abelian, $U$ is exact by step 1, and step 2 gives the additive adjunction. Thus $H(I^\\bullet)$ is K-injective as an $S$-complex. By [def-pur-derived-internal-hom], its underlying $\\mathcal O$-complex represents $R\\mathcal Hom_{\\mathcal O}(S,K)$, since $S$ is placed in degree zero. This supplies the $S$-module structure required in the inner argument on the right of the claimed isomorphism.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0996, lemma-map-twice-localize, proof of (2); generic preservation is Stacks 08BJ"
+   }
+  },
+  {
+   "text": "Apply the two formulas of step 2 on every slice $\\mathcal C/V$ to each pair $(F^p,I^{p+n})$. They give mutually inverse sheaf maps between $\\mathcal Hom_{\\mathcal O}(UF^p,I^{p+n})$ and $\\mathcal Hom_S(F^p,H(I^{p+n}))$. Taking their product over $p\\in\\mathbf Z$ gives an isomorphism $\\mathcal Hom^\\bullet_{\\mathcal O}(UF^\\bullet,I^\\bullet)\\cong U\\mathcal Hom^\\bullet_S(F^\\bullet,H(I^\\bullet))$. Explicitly the degree-$n$ map sends $(a^p)_p$ to $(m\\mapsto(c\\mapsto a^p(cm)))_p$, with inverse evaluation at $1$. It commutes with the differential: $d_Ia^p-(-1)^na^{p+1}d_F$ is sent to $H(d_I)\\widetilde a^p-(-1)^n\\widetilde a^{p+1}d_F$, since $d_F(cm)=c\\,d_F(m)$. The formulas commute with all restriction maps, so they prove an isomorphism of sheaf complexes, not just of global Hom groups.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0996, proof of (2), final displayed equality; degreewise form of Tag 0932"
+   }
+  },
+  {
+   "text": "The two complexes in step 4 compute the two derived internal Homs by [def-pur-derived-internal-hom]: $I^\\bullet$ is K-injective over $\\mathcal O$, and $H(I^\\bullet)$ is K-injective over $S$ by step 3. Localizing the isomorphism therefore proves the claimed isomorphism in $D(\\mathcal O)$, with the right side restricted from $D(S)$. It is natural: step 4 commutes with maps of $F^\\bullet$ and $I^\\bullet$ by its formulas. The representative comparisons and functoriality of [def-pur-derived-internal-hom] descend this naturality in $F^\\bullet$ through quasi-isomorphisms. For the second argument, every derived morphism between K-injective representatives is represented by a chain map modulo homotopy by [lem-weil-pbc-kinjective-hom-derived]. Additivity of $H$ and the Hom-complex formulas preserve these homotopies. Thus the same naturality holds for all morphisms of $K$ and is independent of the chosen representatives.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0996, clause (2), canonical derived isomorphism"
+   }
+  },
+  {
+   "text": "Suppose $R\\mathcal Hom_{\\mathcal O}(S,K)=0$. Then every cohomology sheaf of $UH(I^\\bullet)$ is zero, because cohomology factors through the derived category. Exactness and detection of zero by $U$ from step 1 imply that $H(I^\\bullet)$ is acyclic as an $S$-complex. Thus the quasi-isomorphism $0\\to H(I^\\bullet)$ identifies it with zero in $D(S)$. The zero complex is K-injective (every map into it is zero), so derived internal Hom from $L$ into this zero object can be computed as $\\mathcal Hom^\\bullet_S(F^\\bullet,0)=0$. Step 5 now gives $R\\mathcal Hom_{\\mathcal O}(L,K)=0$. All products above are the products in the Hom-complex definition; the argument imposes no bound on $F^\\bullet$ or $I^\\bullet$, and uses neither finite generation nor flatness.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pur-derived-internal-hom",
+    "def-pur-kinjective-complex",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997, lemma-hom-from-Af, implication (1) to (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-hom",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-pur-kinjective-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0996, lemma-map-twice-localize, proof of (2); Tag 0997, lemma-hom-from-Af, implication (1) to (2). The ordinary adjunction of Tag 0932 is written explicitly; its K-injective consequence uses the existing general Tag 08BJ node."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +141,59 @@
    "results": "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; CategoryTheory.Sheaf.H; DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.isLE_iff; DerivedCategory.isGE_iff; CategoryTheory.InjectiveResolution.extMk_eq_zero_iff; DerivedCategory.isZero_of_isLE",
    "date": "2026-10-17",
    "verdict": "no match: returned ordinary derived-category degree and injective/projective facts, not the ringed-site localization criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed site derived internal Hom from a complex of localized ring modules equals derived internal Hom over the localized ring into coinduction",
+   "results": "Returned sheafification Hom equivalences and light condensed internal-Hom points. None states a derived change-of-rings identity for arbitrary ringed sites.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars, CochainComplex.IsKInjective",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedHom|derivedInternalHom|RHom|coinduc|coexten",
+   "results": "25 case-insensitive hits in Algebra, largely false positives in inrHom, star-hom, bifunctor names and mkCoinductive. Followed with targeted directory searches.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom change of rings is right adjoint to exact restriction of scalars on sheaves of modules",
+   "results": "ModuleCat.restrictCoextendScalarsAdj and the ordinary module adjoint instances; SheafOfModules.restrictScalars; presheaf restriction. Read Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean and Sheaf/ChangeOfRings.lean: these give ordinary-module coextension and sheaf restriction only.",
+   "date": "2026-10-17",
+   "verdict": "no match: no derived internal Hom comparison for sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of derived sheaf Hom from O localized at f implies vanishing from every unbounded complex of modules over O localized at f",
+   "results": "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, from_singleFunctor_obj_eq_zero_of_projective, isLE_iff, isGE_iff, isZero_of_isGE, isZero_of_isLE, isGE_Q_obj_iff, isLE_Q_obj_iff. Degree bounds do not assert the localization criterion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedInternalHom|derivedHom|coextend|restrictCoextend|RHom",
+   "results": "0 hits in Mathlib/Algebra/Category/ModuleCat/Sheaf.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "internal.?[Hh]om|derived.?[Hh]om|coextend",
+   "results": "0 hits in Mathlib/Algebra/Homology/DerivedCategory.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-ringed-rhom-derived-complete",
@@ -76,5 +221,34 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-ringed-localization-rhom-orthogonality",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0996(2) and 0997 and gave the K-injective coinduction calculation, spelling out the inverse formulas and their compatibility with restrictions and Hom-complex differentials. Reused the existing resolution and exact-left-adjoint/K-injective nodes; no new nodes. The statement is unchanged, and Mathlib has only ordinary-module coextension and sheaf restriction, not this derived sheaf identity.",
+  "blueprint": "The ancestor is prop-sf-dualizable-hom, via lem-sf-ringed-rhom-derived-complete and lem-sf-rational-thick-evaluation. This is the localization-orthogonality input to completeness of the target of the completed evaluation map; it elaborates the ancestor unit's internal-Hom computation on perfect complexes without changing that computation or its route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic unbounded homological-algebra tool: coinduction is a right adjoint to exact scalar restriction. The unit has no general K-injective preservation statement."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence of K-injective representatives on a small ringed site, used to compute the internal Hom in the unit; not a replacement route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-7fc5bcc1a",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-7fc5bcc1a (reviewer sub-agent of L); spot-checked: I read all of the mathematics: the item, all six steps, every cited node's statement, and the sources (Stacks 0996(2) with its proof, 0997 (1)=>(2), 0932 in sites-modules.tex l.4031, 08BJ in derived.tex l.9857). The statement matches 0996(2) and 0997 (1)=>(2) hypothesis by hypothesis: a commutative sheaf of rings on a site small in the module universe, the isomorphism in D(O) with the right side restricted from D(O_f), and no change of coefficient category. Step 1: restriction U is exact and detects acyclicity, since kernels and sheafified cokernels are unchanged. Step 2: I checked the adjunction U -| Hom_O(O_f,-) and its inverse formulas, including O- and O_f-linearity; it uses commutativity, which holds. Step 3: 08BJ is applied with u=H right adjoint to the exact v=U, the correct direction, and the degree-0 Hom complex gives RHom_O(O_f,K). Step 4: the differential sign identity and O-linearity of the slice-wise map hold. Step 5: naturality goes through 070I (a Mathlib leaf). Step 6: H(I) is acyclic, hence zero in D(O_f), so the right side vanishes. Small cases checked: f=1, f nilpotent, K=0 or L=0, the empty site, and Z with p (Hom and Ext^1 of Q into Z_p vanish). The delivery has no new nodes, and no existing node duplicates it; nearest candidates are rhom-calculus, local-hom-tower-criterion, module-localization-tower-vanishing and sc-sheaf-coinduction-adjunction (schemes only). I accept the declared tool_uses: lem-weil-pbc-right-adjoint-preserves-kinjective is a generic 08BJ tool, and prop-pur-kinjective-resolutions-exist is already on the route through sk-def-sf-operations. There is no cycle and no SGA citation. FIX: the statement cited only def-weil-pbc-ringed-site-section-localization, a module telescope for f in O(U) with no ring structure or ring map O->O_f, which Mod(O_f) and restriction of scalars need. I added the reviewed def-weil-pbc-ringed-section-localization (global section, sheafified algebra map) to the statement and stmt_deps and named the canonical ring map. The content is not weakened. The corrected item is under fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
  }
 }
