@@ -18,7 +18,10 @@
   "def-weil-field",
   "def-weil-flat-morphism",
   "def-weil-polynomial-ring",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-trf-strict-semistable-curve",
+  "def-trf-schematically-dense-open",
+  "def-trf-modification"
  ],
  "proof": [
   {
@@ -193,5 +196,23 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-308860345 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and the cited statements (horizontal-curve-models, proper-fp-permanence), plus the parent's use of the item and unit sk-i-curve-zero. The item statement is byte-identical to the side DAG's version, so it is not weakened. Steps 1-6 are correct: W is shown reduced via the injection into j_*O_U; eta is open because the primes form a finite chain (D(c)={eta}); flatness makes the generic fibre schematically dense; the induction states its invariant and keeps earlier centres via the last clause of the domination node; h_eta=q_eta^-1 p_eta. I checked the three new statements myself and found no false clause. Normality: A[t] and A[u,v]/(uv-a) with a nonzero are normal, normality ascends along etale maps, and a=0 charts miss the node locus. Domination: F is the normalization's fibre-generic valuations over non-fibre-generic points; closed centres follow by specializing to a closed point of the closure plus upper semicontinuity; a normal C' then dominates by ZMT; the unique-lift and closed-or-generic clauses and the finite-near-fibre-generic-points clause all hold. Extraction matches Temkin's (u,pi)/(t-a,pi) blow-up charts. Small cases checked: height 0, empty F, empty curve, a=0 chart, closed centre over a non-closed point of T. There are no duplicates among the rg candidates, no restated clause, no cycle, and uses equal proof_deps. I accept the tool_use proper-fp-permanence, a mathlib-status generic tool. No SGA. Limitation: the Temkin PDF is not local and network access is blocked, so I could not check the page and proposition places; the delivery is marked agent-origin with a WANTED line, as in the earlier Temkin-chain merges. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7e88801a0",
+  "group": "Q27",
+  "result": "fix",
+  "note": "Statements and constructions pass; all four Lean modules reproduced cleanly through scompile.py. Replaced the H11 placeholder second reading with a complete independent review in fixes/lem-trf-valuation-strict-semistable-cofinality.report.md. Full findings recorded in review.md; no Lean or JSON changes needed."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ValuationStrictSemistableCofinality",
+  "declaration": "AlgebraicGeometry.exists_strictSemistable_etaModification",
+  "file": "lean/Sheaf/TraceFormula/ValuationStrictSemistableCofinality.lean",
+  "statement": "theorem exists_strictSemistable_etaModification (K : Type u) [Field K] [IsSepClosed K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] (Ydata : StrictSemistableCurve (Spec (.of V))) (hgeneric : Smooth (pullback.snd Ydata.structureMap (Spec.map (CommRingCat.ofHom V.subtype)))) (W : Scheme.{u}) (q : W ⟶ Ydata.Y) (hq : SchemeModification q) : ∃ (Zdata : StrictSemistableCurve (Spec (.of V))) (z : Zdata.Y ⟶ W) (p : Zdata.Y ⟶ Ydata.Y), z ≫ q = p ∧ p ≫ Ydata.structureMap = Zdata.structureMap ∧ EtaModification (Spec.map (CommRingCat.ofHom V.subtype)) z (q ≫ Ydata.structureMap) ∧ EtaModification (Spec.map (CommRingCat.ofHom V.subtype)) p Ydata.structureMap",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

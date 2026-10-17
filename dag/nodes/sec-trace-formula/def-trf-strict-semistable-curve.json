@@ -1,0 +1,128 @@
+{
+ "id": "def-trf-strict-semistable-curve",
+ "kind": "definition",
+ "title": "Strictly semistable relative curves",
+ "status": "split",
+ "statement": "Let $T$ be a scheme [def-pc-scheme]. A strictly semistable $T$-curve is a scheme $Y$ with a morphism $f:Y\\to T$ which is flat [def-weil-flat-morphism], locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact [def-weil-finite-type-morphism] and quasi-separated [def-weil-quasi-separated-morphism], such that every fibre $Y_t$ [def-pc-scheme-fibre] is purely one-dimensional [def-weil-pure-dimension], together with the following local-chart condition. For every $y\\in Y$ there are an open $U\\subset Y$ containing $y$, an affine open $B\\subset T$, a commutative ring $A$ and an isomorphism $\\operatorname{Spec}A\\simeq B$ [def-weil-affine-spectrum], with $f(U)\\subset B$, and an etale $T$-morphism [def-weil-etale-morphism] from $U$ to either $\\operatorname{Spec}A[t]$ or $\\operatorname{Spec}(A[u,v]/(uv-a))$ for some $a\\in A$, with the standard structure map induced by the inclusion of coefficients. Here the polynomial algebras are as in [def-weil-polynomial-ring]. No separatedness or properness of $Y\\to T$ is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-pure-dimension",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-polynomial-ring"
+ ],
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "§1.2 (relative curves), §4.3 (strict semistability and Proposition 4.3.1)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A strictly semistable relative curve is flat finitely presented and locally has an etale map to an affine line or Spec A[u,v]/(uv-a)",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"semistable\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "semistable|schematicallyDense|SchematicallyDense|IsModification|EtaModification",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n semistable|schematicallyDense|SchematicallyDense|IsModification|EtaModification in WeilConjectures/, lean/Sheaf/, dag/nodes/ and dag/lean_names_upstream.json; tools/blueprint_refs.py search strict semistable / strictly semistable / schematically dense / modification",
+   "results": "No exact general notion or duplicate declaration. Blueprint searches strict semistable and strictly semistable: 0 hits. Schematic density occurs inline in NagataSketchClosure, not as a predicate. Orgogozo.IsModification is restricted to reduced, locally Noetherian compact targets and uses topological density. NodalFamilyEtaleLocalModel gives a universal nodal model over Z[a], not strict semistability. MultipointedCurve additionally specifies a marking. PureDimension already gives fibrewise pure dimension and is reused.",
+   "date": "2026-10-17",
+   "verdict": "No exact match; reuse the recorded PureDimension and Mathlib primitives."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valuation-strict-semistable-cofinality",
+  "date": "2026-10-17",
+  "group": "Q27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.1, pp. 27--29; forgetting that the dominating modification is a blow-up; Strictly semistable relative curves",
+   "via": [
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.TraceFormula.StrictSemistableCurve",
+  "declaration": "AlgebraicGeometry.StrictSemistableCurve",
+  "file": "lean/Sheaf/TraceFormula/StrictSemistableCurve.lean",
+  "statement": "structure StrictSemistableCurve (T : Scheme.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.strictNodalRing",
+   "AlgebraicGeometry.strictNodalRingCommRing",
+   "AlgebraicGeometry.StrictSemistableModel",
+   "AlgebraicGeometry.StrictSemistableModel.scheme",
+   "AlgebraicGeometry.StrictSemistableModel.baseMap",
+   "AlgebraicGeometry.StrictSemistableChart",
+   "AlgebraicGeometry.StrictSemistableCurve"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7e88801a0",
+  "group": "Q27",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7e88801a0",
+  "group": "Q27",
+  "result": "fix",
+  "note": "Statements and constructions pass; all four Lean modules reproduced cleanly through scompile.py. Replaced the H11 placeholder second reading with a complete independent review in fixes/lem-trf-valuation-strict-semistable-cofinality.report.md. Full findings recorded in review.md; no Lean or JSON changes needed."
+ }
+}

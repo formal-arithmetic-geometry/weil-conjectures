@@ -248,5 +248,23 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-b517b12f2 (reviewer sub-agent of L); spot-checked: I read Stacks 01V9 (lemma-smooth-at-point), statement and full proof, with Algebra 00TF (lemma-flat-fibre-smooth) and Definition 00TB. The item is 01V9 (1)<=>(2) with local flatness moved into the hypotheses: equivalent to the source, nothing added or weakened, and its only citer (lem-trf-generic-fibre-points-smooth) uses it in that form. Step 1 (forward): sbc-lem-smooth-criterion is applied to f|_U; that node is closed in slopmaster2, so it is a closed tool. The open-fibre-product lemma identifies U_s with p^{-1}(U) in X_s, and the fibre definition puts the point over x in it. Step 2: the lfp chart plus the spec-square and stalk-localization nodes make the stalk map R_p->A_q, flat only at q. Step 3: kappa(s)=kappa(p) via the residue-field identification; Spec(A tensor_R k) is an open of X_s via 01JR/01I4; Q=ker(F->kappa(q)) contracts to q. The D(h) Zariski argument is correct and elementary; open immersion into smooth N, then 02H6, gives k->F_h smooth, so k->F is smooth at Q. Step 4: the 00TF node applies with g=1, step-2 flatness and step-3 fibre smoothness; it uses the fibre A tensor_R kappa(p), not A/pA. Step 5: D(g) is an open neighbourhood of x and smooth over V; the step proves that composing with the open V in S keeps smoothness (lfp, plus thickenings have the same points so T'->S factors through V), which is correct since the cited composition lemma has the other order. Edge cases: non-flat Spec k->Spec k[t] is excluded by the hypothesis; F_p(t^{1/p})/F_p(t) and the node of uv=0 are false on both sides; empty X is vacuous. No new nodes. rg for 01V9/lemma-smooth-at-point finds only the differential criterion, global criteria and the Fitting locus, none a duplicate. Mathlib IsSmoothAt.of_formallySmooth_fiber needs the whole fibre smooth and Smooth.of_smooth_fiberToSpecResidueField is global, so neither is a leaf. Accepted tool_uses: lem-weil-pbc-flat-smooth-fibre-smooth-at-prime (00TF) and lem-weil-pbc-smooth-ring-map-iff-smooth-affine (02H6), both generic. No SGA. No changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d1d6cf4e4",
+  "group": "NC",
+  "result": "pass",
+  "note": "Reviewed packet, source, dependencies, Lean module, report sections, edge cases, route-pivot constraints, and compiler evidence. Signature and documentation match the node; scompile sandbox/library checks passed; no fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothAtPointFibreCriterion",
+  "declaration": "AlgebraicGeometry.smooth_at_point_iff_smooth_fibre_at_point",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothAtPointFibreCriterion.lean",
+  "statement": "theorem smooth_at_point_iff_smooth_fibre_at_point {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFinitePresentation f] (x : X) (hflat : (f.stalkMap x).hom.Flat) : (∃ U : X.Opens, x ∈ U ∧ Smooth (U.ι ≫ f)) ↔ ∃ V : (f.fiber (f x)).Opens, f.asFiber x ∈ V ∧ Smooth (V.ι ≫ f.fiberToSpecResidueField (f x))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

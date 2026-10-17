@@ -1,0 +1,118 @@
+{
+ "id": "def-trf-modification",
+ "kind": "definition",
+ "title": "Modifications and generic-fibre modifications",
+ "status": "split",
+ "statement": "For schemes $X,Y$ [def-pc-scheme], a morphism $f:X\\to Y$ is a modification if it is proper [def-weil-proper-morphism] and there exists an open $U\\subset Y$ such that both $U$ and $f^{-1}(U)$ are schematically dense [def-trf-schematically-dense-open] and the restriction $f^{-1}(U)\\to U$ along the open immersion [def-weil-open-immersion] is an isomorphism. Given schemes $T,E$, a specified morphism $e:E\\to T$ and $y:Y\\to T$, call $f$ an $e$-modification if it is a modification and the canonical base-change morphism $X\\times_T E\\to Y\\times_T E$ [def-pc-fibre-product], using $y\\circ f$ as the structure map of $X$, is an isomorphism. In particular, when $E=\\eta$ is the generic point of $T$, this is an $\\eta$-modification. This is the actual induced map, not an assertion that the two fibre products merely admit some isomorphism.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-trf-schematically-dense-open",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "§1.2 (modifications) and §4.2 (generic-fibre modifications)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A modification is proper and is an isomorphism on schematically dense opens; an eta modification is an isomorphism on the generic fibre",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.RespectsIso @IsProper\", \"doc\": \"Every isomorphism of schemes is a proper morphism.\"}\n  {\"name\": \"CategoryTheory.Oplax.StrongTrans.Hom.as\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Modification.Oplax\", \"type\": \"{B : Type u₁} →\\n  [inst : CategoryTheory.Bicategory B] →\\n    {C : Type u₂} →\\n      [inst_1 : CategoryTheory.Bicategory C] →\\n        {F G : CategoryTheory.OplaxFunctor B C} →\\n          {η θ : F ⟶ G} → CategoryTheory.Oplax.StrongTrans.Hom η θ → CategoryTheory.Oplax.StrongTrans.Modification η θ\", \"doc\": \"The canonical function that converts a modification between strong natural transformations (represented as a Hom) into the corresponding Modification type, for oplax functors between bicategories.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \": (MorphismProperty.isomorphisms Scheme).IsLocalAtTarget zariskiPrecoverage\", \"doc\": \"The property of being an isomorphism for morphisms of schemes is local on the target with respect to the Zariski precoverage. Specifically, if a morphism $ f: X \\to Y $ becomes an isomorphism after pul\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A modification is a proper morphism inducing an isomorphism over schematically dense opens in both source and target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $ X $ and $ Y $, a morphism $ f : X \\to Y $ is a local isomorphism if there exists an open cover $ \\\\{U_i\\\\} $ of $ X $ such that for each $ i $, the restriction $ f|_{U_i} $ is an isomorphis\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A property on morphisms $ f : X \\\\to Y $ between schemes, defined inductively to characterize when $ f $ satisfies the conditions of a preimmersion in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type u\", \"doc\": \"The type of partial maps between two schemes, defined on an open subset of the source scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally open if for every base change $ Y' \\\\to Y $, the induced morphism $ X \\\\times_Y Y' \\\\to Y' $ is an open map of topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism between schemes $ X $ and $ Y $ is an immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A morphism property $P$ on schemes is local at the target if, for any morphism $f$ with property $P$ and any covering sieve $S$ on the target of $f$ (in some Grothendieck topology), there exists a mor\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A morphism property $ P $ on schemes is Zariski-local at the source if it satisfies the condition of being local at the source with respect to the Zariski precoverage, generated by open immersions for\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "semistable|schematicallyDense|SchematicallyDense|IsModification|EtaModification",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n semistable|schematicallyDense|SchematicallyDense|IsModification|EtaModification in WeilConjectures/, lean/Sheaf/, dag/nodes/ and dag/lean_names_upstream.json; tools/blueprint_refs.py search strict semistable / strictly semistable / schematically dense / modification",
+   "results": "No exact general notion or duplicate declaration. Blueprint searches strict semistable and strictly semistable: 0 hits. Schematic density occurs inline in NagataSketchClosure, not as a predicate. Orgogozo.IsModification is restricted to reduced, locally Noetherian compact targets and uses topological density. NodalFamilyEtaleLocalModel gives a universal nodal model over Z[a], not strict semistability. MultipointedCurve additionally specifies a marking. PureDimension already gives fibrewise pure dimension and is reused.",
+   "date": "2026-10-17",
+   "verdict": "No exact match; reuse the recorded PureDimension and Mathlib primitives."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valuation-strict-semistable-cofinality",
+  "date": "2026-10-17",
+  "group": "Q27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.1, pp. 27--29; forgetting that the dominating modification is a blow-up; Modifications and generic-fibre modifications",
+   "via": [
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.TraceFormula.Modification",
+  "declaration": "AlgebraicGeometry.SchemeModification",
+  "file": "lean/Sheaf/TraceFormula/Modification.lean",
+  "statement": "structure SchemeModification {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.SchemeModification",
+   "AlgebraicGeometry.EtaModification"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7e88801a0",
+  "group": "Q27",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7e88801a0",
+  "group": "Q27",
+  "result": "fix",
+  "note": "Statements and constructions pass; all four Lean modules reproduced cleanly through scompile.py. Replaced the H11 placeholder second reading with a complete independent review in fixes/lem-trf-valuation-strict-semistable-cofinality.report.md. Full findings recorded in review.md; no Lean or JSON changes needed."
+ }
+}

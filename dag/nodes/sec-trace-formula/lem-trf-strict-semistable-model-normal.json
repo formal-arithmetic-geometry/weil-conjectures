@@ -19,7 +19,8 @@
   "def-weil-field",
   "def-weil-flat-morphism",
   "def-weil-pbc-normal-ring",
-  "def-weil-polynomial-ring"
+  "def-weil-polynomial-ring",
+  "def-trf-strictly-semistable-curve"
  ],
  "proof": [
   {
@@ -301,5 +302,23 @@
   "group": "Q88",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-9e97b1718 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is byte-identical to the live new-targets copy. The source checks out: Temkin arXiv:0707.3953v3, §4.3 p.27 defines strictly semi-stable, and the end of the first paragraph of the proof of Prop 4.3.1 (pp.27-28) uses exactly this normality. I read every cited node's statement: 00IC, 00GY, 030A, 02GO, 00HT, 00HR, 05CK (N=H), 01V6, 038X (L=K), 00NP, and 033C, which needs no Noetherian hypothesis, as a possibly non-Noetherian V requires. Each step checks. Step 1: a nonempty open of a finite chain is D(f) with f in p_{k+1} minus p_k, so A=V_f is a normal domain. Steps 2-3: if a=0 and h(c) lies on the node line, openness of h(U) gives a point z over the generic node. A faithfully flat, hence injective, map from (K[u,v]/(uv))_{(u,v)}, where Ann(u)=(v) and Ann(v)=(u) so u,v stay nonzero, cannot land in a regular local domain of the smooth generic fibre. So when a=0, h(c) lies in a Laurent chart. Steps 4-5: for a nonzero, the normal-form embedding into F[u,u^-1] works, and B_u ∩ B_v = B because a^m divides c_{-m]. I re-derived both, so B is normal. Step 6: the ascent uses a Zariski-open affine and 033C. Step 7: reducedness follows from the definition. Edge cases checked: C empty, V=K, a a unit, a=0 away from the node, disconnected etale charts. There are no new nodes. No DAG or blueprint duplicate turned up from rg on semistable, uv-a, Laurent and normal. There is no cycle, and the only citer is cofinality. No SGA is used. I accept the generic tool_uses from other units (sk-thm-p1, sk-thm-properbasechange, sk-prop-sf-cbc, sk-thm-picard-duality). Minor and not faults: blueprint.from.place was shortened but still names the exact Temkin sentence, and the report mentions a citations.json that is not in the commit. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f4c7ecb64",
+  "group": "NN",
+  "result": "fix",
+  "note": "Both Lean statements match the node and source; both files compile cleanly through scompile.py. H11 placeholder second reading repaired with a complete replacement report in fixes/. Full findings and compiler evidence are in review.md; branch and snapshot unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictlySemistableModelNormal",
+  "declaration": "AlgebraicGeometry.normal_and_reduced_of_strictlySemistableCurve",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictlySemistableModelNormal.lean",
+  "statement": "theorem normal_and_reduced_of_strictlySemistableCurve {K : Type u} [Field K] [IsSepClosed K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] {C : Scheme.{u}} (f : C ⟶ Spec (.of V)) (hC : IsStrictlySemistableCurve f) (hgeneric : Smooth (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap V K))))) : (∀ c : C, IsDomain (C.presheaf.stalk c) ∧ IsIntegrallyClosed (C.presheaf.stalk c)) ∧ IsReduced C",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

@@ -1,0 +1,111 @@
+{
+ "id": "def-trf-schematically-dense-open",
+ "kind": "definition",
+ "title": "Schematically dense open subschemes",
+ "status": "split",
+ "statement": "Let $Z$ be a scheme [def-pc-scheme] and let $U\\subset Z$ be open, with its canonical open immersion $j:U\\hookrightarrow Z$ [def-weil-open-immersion]. The open $U$ is schematically dense if the canonical morphism of structure sheaves $\\mathcal O_Z\\to j_*\\mathcal O_U$ is injective. Equivalently, for every open $W\\subset Z$ the restriction homomorphism $\\mathcal O_Z(W)\\to\\mathcal O_Z(W\\cap U)$ is injective.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion"
+ ],
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "§1.2, schematic density in the definition of a modification."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A schematically dense open immersion has injective restriction of sections on every open",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] (U : Y.Opens) {Z : CommRingCat}\\n  (h :\\n    Y.presheaf.obj\\n        (Opposite.op ((AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj ((TopologicalSpace.Opens.map f.base).obj U))) ⟶\\n      Z),\\n  CategoryTheory.Catego\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes, and let $U$ be an open subset of $Y$. Let $\\\\Gamma(V, \\\\mathcal{O}_S)$ denote the ring of sections of the structure sheaf of a scheme $S$ over an open s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.appIso\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"(U) : Γ(Y, f ''ᵁ U) ≅ Γ(X, U)\", \"doc\": \"For an open immersion of schemes $f: X \\\\to Y$ and an open subset $U$ of $X$, this defines the isomorphism of rings $\\\\Gamma(Y, f(U)) \\\\cong \\\\Gamma(X, U)$, where $\\\\Gamma(S, V)$ denotes the ring of sectio\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Preimmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] : IsPreimmersion f\", \"doc\": \"Every open immersion between schemes is a preimmersion. Specifically, if $ f: X \\to Y $ is an open immersion of schemes (i.e., a morphism whose underlying continuous map is a topological open embedding\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsOpenImmersion f] : IsSmooth f\", \"doc\": \"Every open immersion of schemes is a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.ΓIsoTop\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f] : Γ(X, ⊤) ≅ Γ(Y, f.opensRange)\", \"doc\": \"For an open immersion $ f: X \\to Y $ of schemes, there is an isomorphism between the global sections of the structure sheaf on $ X $ and the global sections of the open subset $ f(X) $ in $ Y $. This i\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.iff_stalk_iso\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsOpenImmersion f ↔\\n    Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) ∧\\n      ∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is an open immersion if and only if its underlying map of topological spaces is an open embedding, and for every point $x \\\\in X$, the induced map on stalks $f_x^\\\\#: \"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion\", \"type\": \": @IsOpenImmersion = (topologically IsOpenEmbedding) ⊓ stalkwise (Function.Bijective ·)\", \"doc\": \"A morphism of schemes is an open immersion if and only if it is a topological open embedding and induces bijective maps on all stalks.\"}\n  {\"name\": \"AlgebraicGeometry.instIsOpenImmersionMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) [IsOpenImmersion f] : IsOpenImmersion (f ∣_ U)\", \"doc\": \"Given a morphism $ f: X \\to Y $ of schemes that is an open immersion, and an open subset $ U $ of $ Y $, the restriction of $ f $ to $ U $ (denoted $ f|_U $) is also an open immersion. This means that \"}\n",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A schematically dense open subscheme U of X means that O_X to j_* O_U is injective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens}, Dense ↑U → AlgebraicGeometry.IsDominant U.ι\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, if $U$ is dense in $X$, then the canonical inclusion morphism $\\\\iota: U \\\\to X$ is dominant, meaning its image is dense in $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjectiveAt\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"(X : AlgebraicGeometry.Scheme) → ↥X → Prop\", \"doc\": \"For a scheme $X$ and a point $x$ in its underlying topological space, the proposition that the germ at $x$ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme $ X $ is called germ-injective if, for every point $ x $ in $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ x $ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U V : X.Opens},\\n  Dense ↑U → ∀ (hU' : U ≤ V), AlgebraicGeometry.IsDominant (X.homOfLE hU')\", \"doc\": \"Given a scheme $X$ and open subsets $U \\\\subseteq V$ of its underlying topological space, if $U$ is dense in $X$, then the inclusion-induced morphism $X|_U \\\\to X|_V$ is dominant. This means the image o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_germ_injective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X) [X.IsGermInjectiveAt x],\\n  ∃ U,\\n    ∃ (hx : x ∈ U),\\n      AlgebraicGeometry.IsAffineOpen U ∧\\n        Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (X.presheaf.germ U x hx))\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$ where the germ map is injective at $x$, there exists an affine open subset $U \\\\subseteq X$ containing $x$ such that the germ map $\\\\mathcal{O}_X(U) \\\\to \\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), Dense ↑f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "semistable|schematicallyDense|SchematicallyDense|IsModification|EtaModification",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n semistable|schematicallyDense|SchematicallyDense|IsModification|EtaModification in WeilConjectures/, lean/Sheaf/, dag/nodes/ and dag/lean_names_upstream.json; tools/blueprint_refs.py search strict semistable / strictly semistable / schematically dense / modification",
+   "results": "No exact general notion or duplicate declaration. Blueprint searches strict semistable and strictly semistable: 0 hits. Schematic density occurs inline in NagataSketchClosure, not as a predicate. Orgogozo.IsModification is restricted to reduced, locally Noetherian compact targets and uses topological density. NodalFamilyEtaleLocalModel gives a universal nodal model over Z[a], not strict semistability. MultipointedCurve additionally specifies a marking. PureDimension already gives fibrewise pure dimension and is reused.",
+   "date": "2026-10-17",
+   "verdict": "No exact match; reuse the recorded PureDimension and Mathlib primitives."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valuation-strict-semistable-cofinality",
+  "date": "2026-10-17",
+  "group": "Q27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.1, pp. 27--29; forgetting that the dominating modification is a blow-up; Schematically dense open subschemes",
+   "via": [
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.TraceFormula.SchematicallyDenseOpen",
+  "declaration": "AlgebraicGeometry.SchematicallyDenseOpen",
+  "file": "lean/Sheaf/TraceFormula/SchematicallyDenseOpen.lean",
+  "statement": "def SchematicallyDenseOpen {Z : Scheme.{u}} (U : Z.Opens) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7e88801a0",
+  "group": "Q27",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7e88801a0",
+  "group": "Q27",
+  "result": "fix",
+  "note": "Statements and constructions pass; all four Lean modules reproduced cleanly through scompile.py. Replaced the H11 placeholder second reading with a complete independent review in fixes/lem-trf-valuation-strict-semistable-cofinality.report.md. Full findings recorded in review.md; no Lean or JSON changes needed."
+ }
+}

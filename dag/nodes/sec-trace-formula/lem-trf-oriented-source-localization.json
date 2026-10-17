@@ -259,5 +259,37 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-8593d1a44 (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes, every cited node's statement and the sources. Stacks etale-cohomology 04CA(1) is the sheaves-of-sets clause with left inverse, and it matches lem-trf-etale-closed-complement-sets exactly. Stacks sites.tex 08LW, 08LY, 08LZ, 08M0 and 08M1 support the open/closed factorization node. ILO XI 1.10(b) (slice at the object X'->S'<-Y') is the source of lem-trf-oriented-slice-localization, which step 1 uses with U->S<-S. Orgogozo is not in literature/: it is recorded as WANTED and proof_origin is agent. The factorization node is true: a morphism factors through the closed complement iff a^{-1}u=0, and through the open slice iff a^{-1}u=1; edge cases u=0, u=1 and a degenerate H all hold. The module-stalks node: I checked exact inverse images, j_! left adjoint to j^*, closed essential image {j^*F=0}, k^*j_!=0 (through free modules and strict initial objects), points with p^{-1}u equal to 1 or 0, the four point formulas, and that the unit and counit are identities; u=0, u=1 and Lambda=0 hold. Step 2's closed-source identification by 2-Yoneda on the universal triple is sound and never uses Z as an etale object. Steps 3-4 (exactness and the short exact sequence through exact points and conservativity) are correct. Step 5, marked elementary, is a correct few-line consequence of the support and restriction identities. In steps 6-7 the refined partitions are admissible, since def-constructible-stratification has no closure condition and X is Noetherian. Step 8 matches the hypotheses of the Mathlib leaves. There are no duplicates: lem-kun-04ca has the abelian clause only, lem-trf-oriented-closed-base-restriction is a base-factor statement, and lem-sp-ringed-topos-binary-descent is Mayer-Vietoris. No new node restates a clause of the item. No SGA is cited, the statement is unchanged, no target or unit is touched, and tool_uses is empty with only Mathlib leaves off-unit. One minor imprecision, not fixed: step 7 attributes 'locally closed in an open or closed subscheme is locally closed in X' to def-weil-constructible-subset, but this is elementary topology. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-83e1aea55",
+  "group": "NQ",
+  "result": "fix",
+  "note": "Mathematics and Lean statement pass; immutable module compiles cleanly. Repaired H11’s placeholder second reading with a complete replacement report under fixes/. Full checks and compiler evidence are recorded in review.md; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrientedSourceLocalization",
+  "declaration": "AlgebraicGeometry.OrientedSourceLocalization.sourceLocalization",
+  "declarations": [
+   "AlgebraicGeometry.OrientedSourceLocalization.Modules",
+   "AlgebraicGeometry.OrientedSourceLocalization.additiveSheafification",
+   "AlgebraicGeometry.OrientedSourceLocalization.modulesAbelian",
+   "AlgebraicGeometry.OrientedSourceLocalization.hasDerived",
+   "AlgebraicGeometry.OrientedSourceLocalization.sourcePull",
+   "AlgebraicGeometry.OrientedSourceLocalization.sourceMap",
+   "AlgebraicGeometry.OrientedSourceLocalization.Operations",
+   "AlgebraicGeometry.OrientedSourceLocalization.counitComplex",
+   "AlgebraicGeometry.OrientedSourceLocalization.unitComplex",
+   "AlgebraicGeometry.OrientedSourceLocalization.complexSequence",
+   "AlgebraicGeometry.OrientedSourceLocalization.sourceLocalization"
+  ],
+  "file": "lean/Sheaf/Paper/OrientedSourceLocalization.lean",
+  "statement": "theorem sourceLocalization {U Z X S : Scheme.{u}} (f : X ⟶ S) [IsLocallyNoetherian S] [CompactSpace S] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (j : U ⟶ X) [IsOpenImmersion j] (i : Z ⟶ X) [IsClosedImmersion i] (complement : Set.range i.base = (Set.range j.base)ᶜ) (Λ : Type v) [CommRing Λ] [Finite Λ] : (∃ (V : VanishingTopos.{u, v} f), IsSubterminal V ∧ ∃ e : VanishingTopos.{u, v} (j ≫ f) ≌ Over V, Nonempty ((sourceMap.{u, v} f j).inverse ⋙ e.functor ≅ Over.star V) ∧ (sourceMap.{u, v} f i).direct.Full ∧ (sourceMap.{u, v} f i).direct.Faithful ∧ ∀ A : VanishingTopos.{u, v} f, (sourceMap.{u, v} f i).direct.essImage A ↔ IsIso (prod.fst : V ⨯ A ⟶ V)) ∧ ∃ r : Operations f j i Λ, (∀ F : Modules f Λ, OrientedConstructibleSheaf.IsConstructible f (𝟙 S) Λ F → OrientedConstructibleSheaf.IsConstructible (j ≫ f) (𝟙 S) Λ (r.openPull.obj F)) ∧ (∀ F : Modules f Λ, OrientedConstructibleSheaf.IsConstructible f (𝟙 S) Λ F → OrientedConstructibleSheaf.IsConstructible (i ≫ f) (𝟙 S) Λ (r.closedPull.obj F)) ∧ (∀ G : Modules (j ≫ f) Λ, OrientedConstructibleSheaf.IsConstructible (j ≫ f) (𝟙 S) Λ G → OrientedConstructibleSheaf.IsConstructible f (𝟙 S) Λ (r.openExtension.obj G)) ∧ (∀ H : Modules (i ≫ f) Λ, OrientedConstructibleSheaf.IsConstructible (i ≫ f) (𝟙 S) Λ H → OrientedConstructibleSheaf.IsConstructible f (𝟙 S) Λ (r.closedImage.obj H)) ∧ (∀ F : Modules f Λ, ∃ h : r.openAdjunction.counit.app F ≫ r.closedAdjunction.unit.app F = 0, (ShortComplex.mk (r.openAdjunction.counit.app F) (r.closedAdjunction.unit.app F) h).ShortExact) ∧ ∃ (h : ∀ K : CochainComplex (Modules f Λ) ℤ, (counitComplex r).app K ≫ (unitComplex r).app K = 0) (hSES : ∀ K : CochainComplex (Modules f Λ) ℤ, (complexSequence r h K).ShortExact), ∃ (ε : (r.openPull ⋙ r.openExtension).mapDerivedCategory ⟶ 𝟭 (DerivedCategory (Modules f Λ))) (η : 𝟭 (DerivedCategory (Modules f Λ)) ⟶ (r.closedPull ⋙ r.closedImage).mapDerivedCategory) (δ : (r.closedPull ⋙ r.closedImage).mapDerivedCategory ⟶ (r.openPull ⋙ r.openExtension).mapDerivedCategory ⋙ shiftFunctor (DerivedCategory (Modules f Λ)) (1 : ℤ)), (∀ K : CochainComplex (Modules f Λ) ℤ, ε.app (DerivedCategory.Q.obj K) = (r.openPull ⋙ r.openExtension).mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map ((counitComplex r).app K)) ∧ (∀ K : CochainComplex (Modules f Λ) ℤ, η.app (DerivedCategory.Q.obj K) = DerivedCategory.Q.map ((unitComplex r).app K) ≫ (r.closedPull ⋙ r.closedImage).mapDerivedCategoryFactors.inv.app K) ∧ (∀ K : CochainComplex (Modules f Λ) ℤ, δ.app (DerivedCategory.Q.obj K) = (r.closedPull ⋙ r.closedImage).mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.triangleOfSESδ (hSES K) ≫ (shiftFunctor (DerivedCategory (Modules f Λ)) (1 : ℤ)).map ((r.openPull ⋙ r.openExtension).mapDerivedCategoryFactors.inv.app K)) ∧ (∀ K : DerivedCategory (Modules f Λ), Triangle.mk (ε.app K) (η.app K) (δ.app K) ∈ distTriang (DerivedCategory (Modules f Λ)))",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical source square maps; open-slice and complementary closed essential-image characterization; the recorded finite-stratification module presentation and restrictions; exact adjoint extensions, natural sheaf short exact sequence, and natural unbounded derived triangle normalized to its canonical short-exact-complex boundary. Helpers are real constructions or conclusion data, with no extra mathematical hypotheses."
  }
 }
