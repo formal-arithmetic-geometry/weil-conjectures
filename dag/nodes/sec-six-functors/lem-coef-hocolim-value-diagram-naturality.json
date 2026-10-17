@@ -10,7 +10,8 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "stmt_deps": [
-  "lem-coef-hocolim-reindexing-zigzags"
+  "lem-coef-hocolim-reindexing-zigzags",
+  "lem-coef-space-valued-straightening"
  ],
  "proof": [
   {
@@ -140,5 +141,24 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q23-e6c15ba6d (reviewer sub-agent of L); spot-checked: Step 2 incorrectly assumes Q_J(Fg) is the restriction of Q_KF. The corrected DAG file in fixes/dag/nodes/sec-six-functors/lem-coef-hocolim-value-diagram-naturality.json proves equality via localized cocone universal properties. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HocolimValueDiagramNaturality",
+  "declaration": "HomotopicalAlgebra.hocolim_value_diagram_naturality",
+  "file": "lean/Sheaf/CategoryTheory/HocolimValueDiagramNaturality.lean",
+  "statement": "theorem hocolim_value_diagram_naturality {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] (hM : CombinatorialModelCategory.{u, v, w} M) {K J : Type v} [SmallCategory K] [SmallCategory J] (RK : ProjectiveHocolimReplacement (M := M) K) (RJ : ProjectiveHocolimReplacement (M := M) J) {H : Type u'} [Category.{v'} H] (L : M ⥤ H) [L.IsLocalization (weakEquivalences M)] (g : J ⥤ K) (F G : K ⥤ M) (η : F ⟶ G) (hη : ∀ k : K, weakEquivalences M (η.app k)) : (hocolimReindex hM RK RJ L g F ≫ L.map (RK.hocolim.map η) = L.map (RJ.hocolim.map (Functor.whiskerLeft g η)) ≫ hocolimReindex hM RK RJ L g G) ∧ (∀ h : g ⋙ F = g ⋙ G, Functor.whiskerLeft g η = eqToHom h → hocolimReindex hM RK RJ L g F ≫ L.map (RK.hocolim.map η) = eqToHom (congrArg (fun V : J ⥤ M ↦ L.obj (RJ.hocolim.obj V)) h) ≫ hocolimReindex hM RK RJ L g G)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The already landed space-valued-straightening dependency is made explicit to carry the compilation-only repair required by the immutable-head return. The hocolim naturality statement and proof are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0bfdacc99",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source, Lean modules, docstrings, edge cases, searches, and report sections. Reproduced successful per-file scompile side-overlay/server compilation; no substantive or mechanical defects found.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
  }
 }
