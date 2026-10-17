@@ -62,6 +62,31 @@ lemma globalSectionsTransport_comm_of_upperStar_of_comp {X Y P P' : Scheme.{u}} 
   rw [globalSectionsTransport_comp A hY h₂ h₄, globalSectionsTransport_comp A h₁ hX h₃,
     globalSectionsTransport_congr A h₃ hc _ _ hθ, globalSectionsTransport_congr_left A _ hΘ]
 
+/-- The transport of global sections along a square `τ ≫ t = t' ≫ g` and the identity of
+`g^* M` is natural in the sheaf `M`. -/
+lemma globalSectionsTransport_id_naturality {P P' Y Y' : Scheme.{u}} {τ : P' ⟶ P} {t : P ⟶ Y}
+    {t' : P' ⟶ Y'} {g : Y' ⟶ Y} (h : τ ≫ t = t' ≫ g) {M M' : Sheaf (Scheme.ProEt.topology Y) A}
+    (u : M ⟶ M') :
+    globalSectionsTransport A h (𝟙 ((g)^*[A].obj M)) ≫
+        (Sheaf.Γ _ A).map ((t')^*[A].map ((g)^*[A].map u)) =
+      (Sheaf.Γ _ A).map ((t)^*[A].map u) ≫ globalSectionsTransport A h (𝟙 ((g)^*[A].obj M')) := by
+  have n₁ := (upperStarCompIso A h).hom.naturality u
+  have n₂ := (globalSectionsToUpperStar A τ).naturality ((t)^*[A].map u)
+  simp only [Functor.comp_map] at n₁ n₂
+  simp only [globalSectionsTransport, CategoryTheory.Functor.map_id]
+  erw [Category.comp_id, Category.comp_id]
+  rw [Category.assoc, ← Functor.map_comp, ← n₁, Functor.map_comp,
+    reassoc_of% n₂]
+
+/-- The transport of global sections along a square `e ≫ t = t' ≫ g` with `e` an isomorphism and
+an isomorphism `ψ` is an isomorphism. -/
+lemma isIso_globalSectionsTransport {P P' Y Y' : Scheme.{u}} (e : P' ≅ P) {t : P ⟶ Y}
+    {t' : P' ⟶ Y'} {g : Y' ⟶ Y} (h : e.hom ≫ t = t' ≫ g) {M : Sheaf (Scheme.ProEt.topology Y) A}
+    {M' : Sheaf (Scheme.ProEt.topology Y') A} (ψ : (g)^*[A].obj M ⟶ M') [IsIso ψ] :
+    IsIso (globalSectionsTransport A h ψ) := by
+  rw [globalSectionsTransport_eq_of_iso A e h ψ]
+  infer_instance
+
 end AlgebraicGeometry.ProEtale
 
 namespace FrobeniusModule
@@ -77,12 +102,14 @@ theorem hasEigenvalue_of_iSup_range_eq_top {ι : Type*} {M : ι → FrobeniusMod
     (hg : ∀ i x, g i ((M i).frobenius x) = N.frobenius (g i x))
     (hsup : ⨆ i, LinearMap.range (g i) = ⊤) {α : K} (hα : N.frobeniusEnd.HasEigenvalue α) :
     ∃ i, (M i).frobeniusEnd.HasEigenvalue α := by
-  by_contra! hM
+  by_contra hM
+  push Not at hM
   let T : Module.End K N.carrier := N.frobeniusEnd - α • LinearMap.id
   have hTi (i : ι) (z : (M i).carrier) :
       g i ((M i).frobeniusEnd z - α • z) = T (g i z) := by
     simp [T, frobeniusEnd, hg]
-  have hsurj (i : ι) : Function.Surjective ((M i).frobeniusEnd - α • LinearMap.id) := by
+  have hsurj (i : ι) : Function.Surjective
+      ((M i).frobeniusEnd - α • (LinearMap.id : Module.End K (M i).carrier)) := by
     refine LinearMap.injective_iff_surjective.mp fun a b hab ↦ ?_
     by_contra hne
     refine hM i (Module.End.hasEigenvalue_of_hasEigenvector (x := a - b) ?_)
@@ -132,35 +159,34 @@ theorem mem_finitePoints_of_comp_geometricGaloisFrobenius_pow {m : ℕ} (hm : m 
   set g := s ≫ f.geometricFiberProj
   let σm := (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k) ^ m)
   let ψ : AlgebraicClosure k →+* AlgebraicClosure k := σm.symm.toRingEquiv.toRingHom
+  have hσ : σm.symm = FiniteField.frobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k) ^ m := by
+    rw [← AlgEquiv.aut_inv]
+    simp [σm, FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_eq_inv, inv_pow]
   have hψ (a : AlgebraicClosure k) : ψ a = a ^ (Nat.card k ^ m) := by
-    have h := AlgEquiv.apply_symm_apply
-      (FiniteField.frobeniusAlgEquivOfAlgebraic k (AlgebraicClosure k) ^ m) a
-    rw [AlgEquiv.coe_pow, FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate] at h
-    dsimp only at h
     change σm.symm a = _
-    rw [AlgEquiv.symm_apply_eq]
-    simp only [σm, FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_eq_inv, inv_pow,
-      AlgEquiv.aut_inv, AlgEquiv.symm_apply_eq, AlgEquiv.coe_pow,
-      FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate, Nat.card_eq_fintype_card]
+    rw [hσ, AlgEquiv.coe_pow, FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate,
+      Nat.card_eq_fintype_card]
   have hfix : (specGeometricFrobenius k ^ m).hom ≫ g = g := by
     rw [← Category.assoc, ← hs, Category.assoc,
       geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj]
+  have hψfix : Spec.map (CommRingCat.ofHom ψ) ≫ g = g := by
+    have hc : CommRingCat.ofHom σm.toRingEquiv.toRingHom ≫ CommRingCat.ofHom ψ = 𝟙 _ := by
+      ext a
+      exact σm.symm_apply_apply a
+    conv_lhs => rw [← hfix]
+    rw [specGeometricFrobenius_pow_hom, ← Category.assoc, ← Spec.map_comp, hc, Spec.map_id,
+      Category.id_comp]
   let α := Spec.preimage (s ≫ f.geometricFiberToAlgebraicClosure)
-  letI : Algebra k (AlgebraicClosure k) := (α.hom.comp (algebraMap k (AlgebraicClosure k))).toAlgebra
+  let : Algebra k (AlgebraicClosure k) :=
+    (α.hom.comp (algebraMap k (AlgebraicClosure k))).toAlgebra
   have hmem : g ∈ f.fixedFieldPoints ψ := by
-    refine ⟨?_, ?_⟩
-    · have h := s ≫= f.geometricFiber_condition
-      rw [← Category.assoc, ← Category.assoc,
-        ← Spec.map_preimage (s ≫ f.geometricFiberToAlgebraicClosure)] at h
-      refine h.trans ?_
-      simp only [Scheme.specAlgebraicClosure, Over.mk_hom, ← Spec.map_comp]
-      rfl
-    · rw [← hfix, specGeometricFrobenius_pow_hom, ← Category.assoc, ← Spec.map_comp]
-      convert hfix using 2
-      · congr 1
-        ext a
-        exact σm.apply_symm_apply a
-      · exact hfix
+    refine ⟨?_, hψfix⟩
+    have h := s ≫= f.geometricFiber_condition
+    rw [← Category.assoc, ← Category.assoc,
+      ← Spec.map_preimage (s ≫ f.geometricFiberToAlgebraicClosure)] at h
+    refine h.trans ?_
+    simp only [Scheme.specAlgebraicClosure, Over.mk_hom, ← Spec.map_comp]
+    rfl
   have key := f.mem_finitePoints_of_mem_fixedFieldPoints hm ψ hψ hmem
   have hd : g.base default = g.base (IsLocalRing.closedPoint _) :=
     congrArg g.base (Subsingleton.elim _ _)

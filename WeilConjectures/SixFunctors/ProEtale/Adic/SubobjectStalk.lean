@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Subobject.Lattice
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseIrreducible
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyIrreducible
 
 /-!
 # Stalks of subsheaves of `ℓ`-adic sheaves
@@ -175,7 +176,6 @@ lemma IsAdicLisseSheaf.underlying_finset_sup [IsLocallyNoetherian Y] {B : AdicSh
     exact hB.underlying_sup (hQ i (Finset.mem_insert_self i s))
       (ih fun j hj ↦ hQ j (Finset.mem_insert_of_mem hj))
 
-
 /-- The reparametrisation `G_{a ≫ y} ≅ G_y` of stalks is natural in the sheaf `G`. -/
 lemma reparamStalkIso_hom_naturality
     (a : Spec (.of (AlgebraicClosure Ω)) ≅ Spec (.of (AlgebraicClosure Ω)))
@@ -189,6 +189,97 @@ lemma reparamStalkIso_hom_naturality
   congr 1
   exact (globalSectionsUpperStarIso _ a).hom.naturality _
 
+
+section Monodromy
+
+variable {M : LisseMonodromy l Y Ω} {t}
+
+/-- The stalk map of a morphism of lisse sheaves is that of the underlying `ℓ`-adic sheaves. -/
+lemma lisseStalkMap_homMk {G H : LisseSheaf l Y} (f : G.obj ⟶ H.obj) :
+    lisseStalkMap t (ObjectProperty.homMk f : G ⟶ H) = adicStalkMap t f :=
+  rfl
+
+/-- **Lisse subsheaves are determined by their stalks.** If the monodromy at `t` is an
+equivalence, a lisse subsheaf `P` of a lisse sheaf `B` on a locally Noetherian scheme is contained
+in a lisse subsheaf `Q` as soon as `P_t ⊆ Q_t`: the composite `P ⟶ B ⟶ B / Q` of lisse sheaves
+vanishes on stalks at `t`. -/
+lemma le_of_adicStalkSubspace_le (hM : M.IsEquivalenceAt t) [IsLocallyNoetherian Y]
+    {B : AdicSheaf l Y} (hB : IsAdicLisseSheaf B) {P Q : Subobject B}
+    (hP : IsAdicLisseSheaf (Subobject.underlying.obj P))
+    (hQ : IsAdicLisseSheaf (Subobject.underlying.obj Q))
+    (h : adicStalkSubspace t P ≤ adicStalkSubspace t Q) : P ≤ Q := by
+  have hc : IsAdicLisseSheaf (cokernel Q.arrow) := (hQ.kernel_cokernel hB Q.arrow).2
+  have e (v : (WeilCoefficients.toModuleCat l).obj ((adicStalkFunctor l t).obj
+      (Subobject.underlying.obj P))) :
+      adicStalkMap t (P.arrow ≫ cokernel.π Q.arrow) v = adicStalkMap t 0 v := by
+    obtain ⟨w, hw⟩ := h (LinearMap.mem_range_self (adicStalkMap t P.arrow) v)
+    rw [adicStalkMap_comp, LinearMap.comp_apply, ← hw, ← LinearMap.comp_apply, ← adicStalkMap_comp,
+      cokernel.condition, adicStalkMap_zero, adicStalkMap_zero]
+    rfl
+  have h0 : (ObjectProperty.homMk (P.arrow ≫ cokernel.π Q.arrow) :
+      (⟨_, hP⟩ : LisseSheaf l Y) ⟶ ⟨_, hc⟩) = ObjectProperty.homMk 0 :=
+    hM.ext_of_lisseStalkMap (LinearMap.ext e)
+  exact Subobject.le_of_comm (Abelian.monoLift Q.arrow P.arrow (congrArg (·.hom) h0))
+    (Abelian.monoLift_comp _ _ _)
+
+/-- **Irreducibility from the stalk.** If the monodromy at `t` is an equivalence, a lisse
+subsheaf `P` of a lisse sheaf `B` on a locally Noetherian scheme is an irreducible local system
+as soon as its stalk `P_t` is a nonzero irreducible subrepresentation of `B_t`. -/
+lemma isIrreducibleAdicLocalSystem_of_adicStalkSubspace (hM : M.IsEquivalenceAt t)
+    [IsLocallyNoetherian Y] {B : AdicSheaf l Y} (hB : IsAdicLisseSheaf B) {P : Subobject B}
+    (hP : IsAdicLisseSheaf (Subobject.underlying.obj P)) (h0 : adicStalkSubspace t P ≠ ⊥)
+    (hirr : ∀ D : Submodule (PadicAlgCl l) (LisseMonodromy.StalkSpace t (⟨B, hB⟩ : LisseSheaf l Y)),
+      (∀ g, ∀ x ∈ D, M.rep t ⟨B, hB⟩ g x ∈ D) → D ≤ adicStalkSubspace t P →
+        D = ⊥ ∨ D = adicStalkSubspace t P) :
+    IsIrreducibleAdicLocalSystem (Subobject.underlying.obj P) := by
+  refine ⟨hP, fun hz ↦ h0 ?_, fun H i hi hH ↦ ?_⟩
+  · rw [adicStalkSubspace, hz.eq_of_src P.arrow 0, adicStalkMap_zero, LinearMap.range_zero]
+  let j : (⟨H, hH⟩ : LisseSheaf l Y) ⟶ ⟨B, hB⟩ := ObjectProperty.homMk (i ≫ P.arrow)
+  have hj : Function.Injective (adicStalkMap t (i ≫ P.arrow)) := injective_adicStalkMap t _
+  have hinv (g : Aut (Scheme.FiniteEtale.fiber t)) :
+      ∀ x ∈ LinearMap.range (adicStalkMap t (i ≫ P.arrow)), M.rep t ⟨B, hB⟩ g x ∈
+        LinearMap.range (adicStalkMap t (i ≫ P.arrow)) := by
+    rintro _ ⟨y, rfl⟩
+    exact ⟨M.rep t ⟨H, hH⟩ g y, M.rep_naturality t j g y⟩
+  have hle : LinearMap.range (adicStalkMap t (i ≫ P.arrow)) ≤ adicStalkSubspace t P := by
+    rw [adicStalkMap_comp, LinearMap.range_comp]
+    exact LinearMap.map_le_range
+  rcases hirr _ hinv hle with h | h
+  · left
+    have : Subsingleton (LisseMonodromy.StalkSpace t (⟨H, hH⟩ : LisseSheaf l Y)) :=
+      ⟨fun v w ↦ hj (by
+        rw [LinearMap.range_eq_bot.1 h]
+        rfl)⟩
+    exact hM.isZero_of_subsingleton ⟨H, hH⟩
+  · right
+    have hbij : Function.Bijective (lisseStalkMap t
+        (ObjectProperty.homMk i : (⟨H, hH⟩ : LisseSheaf l Y) ⟶ ⟨_, hP⟩)) := by
+      refine ⟨injective_adicStalkMap t i, fun y ↦ ?_⟩
+      obtain ⟨z, hz⟩ : adicStalkMap t P.arrow y ∈
+          LinearMap.range (adicStalkMap t (i ≫ P.arrow)) := by
+        rw [h]
+        exact LinearMap.mem_range_self _ y
+      refine ⟨z, injective_adicStalkMap t P.arrow ?_⟩
+      exact (LinearMap.congr_fun (adicStalkMap_comp t i P.arrow) z).symm.trans hz
+    have := hM.isIso_of_bijective _ hbij
+    exact (ObjectProperty.ι _).map_isIso (ObjectProperty.homMk i :
+      (⟨H, hH⟩ : LisseSheaf l Y) ⟶ ⟨_, hP⟩)
+
+/-- **Subrepresentations of a stalk come from lisse subsheaves.** If the monodromy at `t` is an
+equivalence, every subrepresentation of the stalk `B_t` of a lisse sheaf `B` on a locally
+Noetherian scheme is the stalk of a lisse subsheaf. -/
+lemma exists_adicStalkSubspace_eq (hM : M.IsEquivalenceAt t) [IsLocallyNoetherian Y]
+    {B : AdicSheaf l Y} (hB : IsAdicLisseSheaf B)
+    (C : Submodule (PadicAlgCl l) (LisseMonodromy.StalkSpace t (⟨B, hB⟩ : LisseSheaf l Y)))
+    (hC : ∀ g, ∀ x ∈ C, M.rep t ⟨B, hB⟩ g x ∈ C) :
+    ∃ P : Subobject B, IsAdicLisseSheaf (Subobject.underlying.obj P) ∧
+      adicStalkSubspace t P = C := by
+  obtain ⟨G', a, hinj, hrange⟩ := hM.exists_hom_range_eq ⟨C, fun g _ hx ↦ hC g _ hx⟩
+  have := hM.mono_of_injective a hinj
+  exact ⟨Subobject.mk a.hom, G'.property.of_iso (Subobject.underlyingIso a.hom).symm,
+    (adicStalkSubspace_mk t a.hom).trans hrange⟩
+
+end Monodromy
 end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.WeilCoefficients
@@ -204,5 +295,17 @@ lemma linearEquivOfIso_symm {M N : WeilCoefficients.{u} l} (e : M ≅ N) :
   LinearEquiv.ext fun x ↦ (linearEquivOfIso e).injective (by
     rw [LinearEquiv.apply_symm_apply, linearEquivOfIso_apply, linearEquivOfIso_apply]
     exact LinearMap.congr_fun (congrArg ModuleCat.Hom.hom e.inv_hom_id) x)
+
+lemma linearEquivOfIso_apply_eq_toModuleCat_map {M N : WeilCoefficients.{u} l} (e : M ≅ N)
+    (x : (toModuleCat l).obj M) :
+    linearEquivOfIso e x = ((toModuleCat l).map e.hom).hom x :=
+  rfl
+
+lemma toModuleCat_map_comp_apply {M N P : WeilCoefficients.{u} l} (f : M ⟶ N) (g : N ⟶ P)
+    (x : (toModuleCat l).obj M) :
+    ((toModuleCat l).map (f ≫ g)).hom x =
+      ((toModuleCat l).map g).hom (((toModuleCat l).map f).hom x) := by
+  rw [Functor.map_comp]
+  rfl
 
 end AlgebraicGeometry.WeilCoefficients
