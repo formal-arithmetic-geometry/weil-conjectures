@@ -165,10 +165,10 @@ public import WeilConjectures.Algebra.LimitFinitePresentation
 public import WeilConjectures.Algebra.LimitFinitePresentation.Colimits
 public import WeilConjectures.Algebra.LimitFinitePresentation.Core
 public import WeilConjectures.Algebra.Module.AdicCompletionStableRanges
-public import WeilConjectures.Algebra.Module.QuotientPrimaryComponentNoTorsion
-public import WeilConjectures.Algebra.Module.ReesKernelGenerators
 public import WeilConjectures.Algebra.Module.InverseLimitFinite
+public import WeilConjectures.Algebra.Module.QuotientPrimaryComponentNoTorsion
 public import WeilConjectures.Algebra.Module.RationalPerfectPairing
+public import WeilConjectures.Algebra.Module.ReesKernelGenerators
 public import WeilConjectures.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
 public import WeilConjectures.Algebra.PopescuLiftNilpotent
 public import WeilConjectures.Algebra.Schanuel
@@ -1579,9 +1579,9 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ContinuousSheaf
 public import WeilConjectures.AlgebraicGeometry.ProEtale.DenseOpen
 public import WeilConjectures.AlgebraicGeometry.ProEtale.FiniteCoefficientCohomology
-public import WeilConjectures.AlgebraicGeometry.ProEtale.IntegralAdicCohomology
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Flat.QuasiCompactCover
 public import WeilConjectures.AlgebraicGeometry.ProEtale.FromPi1
+public import WeilConjectures.AlgebraicGeometry.ProEtale.IntegralAdicCohomology
 public import WeilConjectures.AlgebraicGeometry.ProEtale.LocalProperties
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Proetale.Basic
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Proetale.Sheafification
@@ -4366,8 +4366,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedOpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedSupport
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CompactLatticeBasis
-public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologicalDimension
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheafTransport
