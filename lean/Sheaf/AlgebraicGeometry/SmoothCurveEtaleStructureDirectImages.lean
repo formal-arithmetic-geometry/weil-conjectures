@@ -26,7 +26,6 @@ import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
 import Sheaf.AlgebraicGeometry.GlobalSectionsGeomConnected
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
 import Sheaf.AlgebraicGeometry.DerivedAdjoint
 import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
 import Sheaf.AlgebraicGeometry.FlatDerivedStructureUnit

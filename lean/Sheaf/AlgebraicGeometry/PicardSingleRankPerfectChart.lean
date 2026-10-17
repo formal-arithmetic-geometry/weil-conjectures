@@ -18,7 +18,6 @@ import Sheaf.AlgebraicGeometry.PicardReferenceRankNeighbourhood
 import Sheaf.AlgebraicGeometry.ProperFlatDirectImagePerfectChart
 import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
 import Sheaf.AlgebraicGeometry.PicardFiberRankClopen
 
 /-! # Perfect charts for one direct-image rank condition
