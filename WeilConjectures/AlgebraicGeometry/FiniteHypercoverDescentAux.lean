@@ -88,4 +88,173 @@ lemma isQcqsEtale_of_compactSpace {X : Scheme.{u}} [CompactSpace X] [QuasiSepara
   ⟨Z.prop, inferInstanceAs (LocallyOfFinitePresentation Z.hom),
     inferInstanceAs (QuasiCompact Z.hom), inferInstanceAs (QuasiSeparated Z.hom)⟩
 
+instance SimplexCategory.Truncated.finite (r : ℕ) : Finite (SimplexCategory.Truncated r) :=
+  Finite.of_injective (fun Δ : SimplexCategory.Truncated r ↦
+    (⟨Δ.obj.len, Nat.lt_succ_of_le Δ.property⟩ : Fin (r + 1))) (by
+      rintro ⟨⟨a⟩, ha⟩ ⟨⟨b⟩, hb⟩ hab
+      simp only [Fin.mk.injEq] at hab
+      subst hab
+      rfl)
+
+instance SimplexCategory.Truncated.finite_op (r : ℕ) :
+    Finite (SimplexCategory.Truncated r)ᵒᵖ :=
+  Finite.of_equiv _ (opEquiv _).symm
+
+instance SimplexCategory.Truncated.finite_hom {r : ℕ} (a b : SimplexCategory.Truncated r) :
+    Finite (a ⟶ b) :=
+  Finite.of_injective (fun f : a ⟶ b ↦ f.hom) (fun _ _ h ↦ ObjectProperty.hom_ext _ h)
+
+instance SimplexCategory.Truncated.finite_hom_op {r : ℕ}
+    (a b : (SimplexCategory.Truncated r)ᵒᵖ) : Finite (a ⟶ b) :=
+  Finite.of_injective (fun f : a ⟶ b ↦ f.unop) (fun _ _ h ↦ Quiver.Hom.unop_inj h)
+
+namespace TruncatedFiniteSplitEtaleHypercover
+
+variable {X : Scheme.{u}} {r : ℕ} (U : TruncatedFiniteSplitEtaleHypercover X r)
+
+lemma compactSpace_N (n : Fin (r + 1)) :
+    CompactSpace (U.N n).left ∧ QuasiSeparatedSpace (U.N n).left := by
+  obtain ⟨k, V, ι, ⟨hι⟩, hV⟩ := U.finite_each_degree n
+  exact Scheme.Etale.compactSpace_quasiSeparatedSpace_of_isColimit ι hι
+    fun i ↦ ⟨(hV i).1, (hV i).2.1⟩
+
+lemma compactSpace_obj (Δ : (SimplexCategory.Truncated r)ᵒᵖ) :
+    CompactSpace (U.simplicial.obj Δ).left ∧ QuasiSeparatedSpace (U.simplicial.obj Δ).left :=
+  Scheme.Etale.compactSpace_quasiSeparatedSpace_of_isColimit _ (U.splitting Δ)
+    fun a ↦ U.compactSpace_N a.1
+
+lemma isQcqsEtale_diagram_obj [CompactSpace X] [QuasiSeparatedSpace X]
+    (Δ : (SimplexCategory.Truncated r)ᵒᵖ) : IsQcqsEtale (U.diagram.obj Δ) := by
+  obtain ⟨_, _⟩ := U.compactSpace_obj Δ
+  exact isQcqsEtale_of_compactSpace (U.simplicial.obj Δ)
+
+end TruncatedFiniteSplitEtaleHypercover
+
+section Transport
+
+variable {I : Type u} [Category.{u} I] (D : I ⥤ Scheme.{u}) (c : Cone D)
+
+/-- Base change along a composite transition map is base change along the two maps in turn. -/
+noncomputable def overPullbackCompIso {i j k : I} (h : j ⟶ i) (g : k ⟶ j) :
+    Over.pullback (D.map (g ≫ h)) ≅ Over.pullback (D.map h) ⋙ Over.pullback (D.map g) :=
+  eqToIso (congrArg (fun f ↦ Over.pullback f) (D.map_comp g h)) ≪≫ Over.pullbackComp _ _
+
+omit [Category.{u} I] in
+set_option linter.flexible false in
+private lemma eqToHom_pullbackComp_left_fst {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (f' : X ⟶ Z) (hf : f' = f ≫ g) (U : Over Z) :
+    ((eqToHom (congrArg (fun k : X ⟶ Z ↦ Over.pullback k) hf)).app U ≫
+        (Over.pullbackComp f g).hom.app U).left ≫
+      pullback.fst _ f ≫ pullback.fst U.hom g = pullback.fst U.hom f' := by
+  subst hf
+  simp only [eqToHom_refl, NatTrans.id_app, Category.id_comp]
+  simp [Over.pullbackComp, Over.mapComp, conjugateIsoEquiv, conjugateEquiv]
+
+@[reassoc (attr := simp)]
+lemma overPullbackCompIso_hom_app_left_fst {i j k : I} (h : j ⟶ i) (g : k ⟶ j)
+    (U : Over (D.obj i)) :
+    ((overPullbackCompIso D h g).hom.app U).left ≫ pullback.fst _ (D.map g) ≫
+      pullback.fst U.hom (D.map h) = pullback.fst U.hom (D.map (g ≫ h)) :=
+  eqToHom_pullbackComp_left_fst _ _ _ (D.map_comp g h) U
+
+@[reassoc (attr := simp)]
+lemma overPullbackCompIso_hom_app_left_snd {i j k : I} (h : j ⟶ i) (g : k ⟶ j)
+    (U : Over (D.obj i)) :
+    ((overPullbackCompIso D h g).hom.app U).left ≫ pullback.snd _ (D.map g) =
+      pullback.snd U.hom (D.map (g ≫ h)) :=
+  Over.w ((overPullbackCompIso D h g).hom.app U)
+
+lemma overPullbackStageIso_comp {i j k : I} (h : j ⟶ i) (g : k ⟶ j) (U : Over (D.obj i)) :
+    (overPullbackStageIso D c (g ≫ h)).hom.app U =
+      (Over.pullback (c.π.app k)).map ((overPullbackCompIso D h g).hom.app U) ≫
+        (overPullbackStageIso D c g).hom.app ((Over.pullback (D.map h)).obj U) ≫
+          (overPullbackStageIso D c h).hom.app U := by
+  ext : 1
+  apply pullback.hom_ext
+  · simp only [overPullbackStageIso_hom_app_left_fst, Over.comp_left, Category.assoc,
+      Over.pullback_map_left, pullback.lift_fst_assoc]
+    rw [overPullbackCompIso_hom_app_left_fst]
+  · simp [overPullbackStageIso_hom_app_left_snd]
+
+end Transport
+
+section Finite
+
+variable {I : Type u} [Category.{u} I] [IsCofiltered I] (D : I ⥤ Scheme.{u})
+  [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
+  [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)] {c : Cone D}
+  (hc : IsLimit c)
+
+include hc in
+/-- Equalities of natural transformations between finite diagrams of qcqs étale schemes descend
+eventually. -/
+theorem stageEventually_whiskerRight_eq {C : Type*} [Category* C] [Finite C] {i : I}
+    {F G : C ⥤ Over (D.obj i)} (hF : ∀ a, IsQcqsEtale (F.obj a))
+    (hG : ∀ a, IsQcqsEtale (G.obj a)) (φ ψ : F ⟶ G)
+    (h : Functor.whiskerRight φ (Over.pullback (c.π.app i)) =
+      Functor.whiskerRight ψ (Over.pullback (c.π.app i))) :
+    StageEventually i (fun _ h ↦ Functor.whiskerRight φ (Over.pullback (D.map h)) =
+      Functor.whiskerRight ψ (Over.pullback (D.map h))) := by
+  refine (StageEventually.finite_forall (fun a : C ↦ ?_)).mono fun _ _ H ↦ ?_
+  · obtain ⟨_, _, _, _⟩ := hF a
+    obtain ⟨_, _, _, _⟩ := hG a
+    exact stageEventually_overPullback_map_eq D hc _ _ (φ.app a) (ψ.app a)
+      (congrArg (fun τ ↦ τ.app a) h)
+  · ext a : 1
+    exact H a
+
+include hc in
+/-- Natural transformations between the base changes to the limit of finite diagrams of qcqs
+étale schemes over a stage descend to a later stage. -/
+theorem exists_natTrans_descent {C : Type*} [Category* C] [Finite C]
+    [∀ a b : C, Finite (a ⟶ b)] {i : I}
+    {F G : C ⥤ Over (D.obj i)} (hF : ∀ a, IsQcqsEtale (F.obj a))
+    (hG : ∀ a, IsQcqsEtale (G.obj a))
+    (φ : F ⋙ Over.pullback (c.π.app i) ⟶ G ⋙ Over.pullback (c.π.app i)) :
+    ∃ (j : I) (h : j ⟶ i) (ψ : F ⋙ Over.pullback (D.map h) ⟶ G ⋙ Over.pullback (D.map h)),
+      ∀ a, (Over.pullback (c.π.app j)).map (ψ.app a) ≫
+          (overPullbackStageIso D c h).hom.app (G.obj a) =
+        (overPullbackStageIso D c h).hom.app (F.obj a) ≫ φ.app a := by
+  obtain ⟨j₁, h₁, H₁⟩ := (StageEventually.finite_forall (fun a : C ↦ by
+    obtain ⟨_, _, _, _⟩ := hF a
+    obtain ⟨_, _, _, _⟩ := hG a
+    exact stageEventually_exists_overPullback_hom D hc (F.obj a) (G.obj a)
+      (φ.app a))).exists_hom
+  choose ψ₁ hψ₁ using H₁
+  have hnat : ∀ x : Σ a b : C, a ⟶ b,
+      (Over.pullback (c.π.app j₁)).map ((Over.pullback (D.map h₁)).map (F.map x.2.2) ≫
+        ψ₁ x.2.1) =
+      (Over.pullback (c.π.app j₁)).map (ψ₁ x.1 ≫ (Over.pullback (D.map h₁)).map
+        (G.map x.2.2)) := by
+    rintro ⟨a, b, f⟩
+    rw [← cancel_mono ((overPullbackStageIso D c h₁).hom.app (G.obj b))]
+    have n1 := (overPullbackStageIso D c h₁).hom.naturality (F.map f)
+    have n2 := (overPullbackStageIso D c h₁).hom.naturality (G.map f)
+    have n3 := φ.naturality f
+    simp only [Functor.comp_map] at n1 n2 n3
+    simp only [Functor.map_comp, Category.assoc, hψ₁, reassoc_of% n1, n2,
+      reassoc_of% (hψ₁ a), n3]
+  obtain ⟨j₂, g, H₂⟩ := (StageEventually.finite_forall (fun x : Σ a b : C, a ⟶ b ↦ by
+    obtain ⟨_, _, _, _⟩ := (hF x.1).overPullback (D.map h₁)
+    obtain ⟨_, _, _, _⟩ := (hG x.2.1).overPullback (D.map h₁)
+    exact stageEventually_overPullback_map_eq D hc _ _ _ _ (hnat x))).exists_hom
+  let τ := overPullbackCompIso D h₁ g
+  refine ⟨j₂, g ≫ h₁,
+    { app := fun a ↦ τ.hom.app (F.obj a) ≫ (Over.pullback (D.map g)).map (ψ₁ a) ≫
+        τ.inv.app (G.obj a)
+      naturality := fun a b f ↦ ?_ }, fun a ↦ ?_⟩
+  · have n1 := τ.hom.naturality (F.map f)
+    have n2 := τ.inv.naturality (G.map f)
+    have n3 := H₂ ⟨a, b, f⟩
+    simp only [Functor.comp_map, Functor.map_comp] at n1 n2 n3 ⊢
+    simp only [reassoc_of% n1, reassoc_of% n3, Category.assoc, n2]
+  · have n1 := (overPullbackStageIso D c g).hom.naturality (ψ₁ a)
+    simp only [Functor.comp_map] at n1
+    simp only [overPullbackStageIso_comp, Functor.map_comp, Category.assoc,
+      ← Functor.map_comp_assoc, Iso.inv_hom_id_app, Functor.comp_obj, Functor.map_id,
+      Category.id_comp]
+    simp only [Functor.map_comp, Category.assoc, reassoc_of% n1, hψ₁]
+
+end Finite
+
 end AlgebraicGeometry

@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
+public import WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentAux
 
 /-!
 # Blueprint statements
@@ -58,7 +58,10 @@ theorem finite_hypercover_descent_morphisms
             (((Over.pullbackComp (c.π.app j) (D.map h)).symm ≪≫
               eqToIso (congrArg (fun f : c.pt ⟶ D.obj i ↦ Over.pullback f)
                 (c.w h))).app (U.diagram.obj Δ)).hom ≫ φ.app Δ := by
-  sorry
+  intro r i U V φ
+  obtain ⟨j, h, ψ, hψ⟩ := exists_natTrans_descent D hc U.isQcqsEtale_diagram_obj
+    V.isQcqsEtale_diagram_obj φ
+  exact ⟨j, h, ψ, hψ⟩
 
 /-- Blueprint: lemma-weil-pbc-finite-hypercover-descent-equalities. -/
 theorem finite_hypercover_descent_equalities
@@ -76,6 +79,8 @@ theorem finite_hypercover_descent_equalities
       ∃ (j : Iᵒᵖ) (h : j ⟶ i),
         Functor.whiskerRight φ (Over.pullback (D.map h)) =
           Functor.whiskerRight ψ (Over.pullback (D.map h)) := by
-  sorry
+  intro r i U V φ ψ hφψ
+  exact (stageEventually_whiskerRight_eq D hc U.isQcqsEtale_diagram_obj
+    V.isQcqsEtale_diagram_obj φ ψ hφψ).exists_hom
 
 end AlgebraicGeometry

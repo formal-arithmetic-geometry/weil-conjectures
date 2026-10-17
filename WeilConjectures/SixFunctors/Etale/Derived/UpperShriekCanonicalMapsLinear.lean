@@ -138,7 +138,7 @@ lemma projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar
           K)).app L ≫
         ((rightDerivedLowerStarProjectionMap A f).app K).app L := by
   rw [rightDerivedLowerShriekIsoRightDerivedLowerStar_hom,
-    rightDerivedLowerShriekToLowerStarComp_comp_eq, projectionMap_app_app_eq]
+    rightDerivedLowerShriekToLowerStarComp_comp_eq]
   exact compactificationProjectionMap_comp_forgetSupports A (HasCompactification.compactification f)
     K L
 
@@ -184,8 +184,8 @@ theorem exists_rightDerivedLowerShriek_adjunction_of_rightDerivedLowerStar
   simp only [Adjunction.ofNatIsoLeft_counit, NatTrans.comp_app, Functor.whiskerLeft_app,
     Iso.symm_inv, hadj,
     rightDerivedLowerShriekLinearCounit, rightDerivedLowerStarLinearCounit, IsIso.hom_inv_id_assoc,
-    reassoc_of% h, Functor.map_comp, NatTrans.comp_app, Category.assoc]
-  rfl
+    Functor.map_comp, NatTrans.comp_app, Category.assoc]
+  exact (reassoc_of% h) _ |>.trans (by simp only [IsIso.hom_inv_id_assoc])
 
 end Proper
 

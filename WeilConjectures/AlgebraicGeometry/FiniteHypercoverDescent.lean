@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.CategoryTheory.Filtered.Basic
-public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
+public import WeilConjectures.AlgebraicGeometry.FiniteHypercoverDescentParts
 
 /-!
 # Blueprint statements
@@ -58,7 +58,8 @@ theorem finite_hypercover_descent
         Functor.whiskerRight ψ (Over.pullback (c.π.app i)) →
       ∃ (j : Iᵒᵖ) (h : j ⟶ i),
         Functor.whiskerRight φ (Over.pullback (D.map h)) =
-          Functor.whiskerRight ψ (Over.pullback (D.map h))) := by
-  sorry
+          Functor.whiskerRight ψ (Over.pullback (D.map h))) :=
+  ⟨finite_hypercover_descent_objects D c hc, finite_hypercover_descent_morphisms D c hc,
+    finite_hypercover_descent_equalities D c hc⟩
 
 end AlgebraicGeometry

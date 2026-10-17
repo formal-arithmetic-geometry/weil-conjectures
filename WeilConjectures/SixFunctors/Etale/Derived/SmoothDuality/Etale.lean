@@ -232,6 +232,20 @@ lemma isInvertible_dualizingComplex_of_isOpenImmersion {U X : Scheme.{u}} (j : U
   .of_iso (nonempty_dualizingComplex_iso_of_isOpenImmersion j).some.symm
     (DerivedCategory.isInvertible_unit Λ U)
 
+theorem isIso_rightDerivedUpperShriek_diagonal_map_dualizingComplexTensorMap_snd_aux
+    {V W : Scheme.{u}} (e : V ⟶ W) [_root_.AlgebraicGeometry.Etale e] [QuasiCompact e]
+    [HasCompactification e] [HasCompactification (pullback.diagonal e)]
+    (P : _root_.DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hΔ : ∀ Q, IsIso (dualizingComplexTensorMap Λ (pullback.diagonal e) Q))
+    (hid : IsIso (dualizingComplexTensorMap Λ (𝟙 V) P)) :
+    IsIso ((R(pullback.diagonal e)^![ModuleCat.{u + 1} Λ]).map
+      (dualizingComplexTensorMap Λ (pullback.snd e e) P)) := by
+  obtain ⟨E, hPF, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
+  exact isIso_map_dualizingComplexTensorMapOfIsIso_of_comp (pullback.diagonal e)
+    (pullback.snd e e) (𝟙 V) (pullback.diagonal_snd e) (E _ _ _ (pullback.diagonal_snd e))
+    (hPF _ _ _ (pullback.diagonal_snd e))
+    (projectionMapAssociativity Λ (pullback.diagonal e)) hΔ P hid
+
 /-- The diagonal step of smooth duality for étale morphisms, before pullback: for a
 quasi-compact étale `e : V ⟶ W`, with the exponent of `Λ` invertible on `V`, the tensor maps of
 the second projection `pr₂ : V ×_W V ⟶ V` become isomorphisms after `RΔ^!` along the diagonal
@@ -243,13 +257,9 @@ theorem isIso_rightDerivedUpperShriek_diagonal_map_dualizingComplexTensorMap_snd
     (P : _root_.DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso ((R(pullback.diagonal e)^![ModuleCat.{u + 1} Λ]).map
       (dualizingComplexTensorMap Λ (pullback.snd e e) P)) := by
-  obtain ⟨E, hPF, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
-  exact isIso_map_dualizingComplexTensorMapOfIsIso_of_comp (pullback.diagonal e)
-    (pullback.snd e e) (𝟙 V) (pullback.diagonal_snd e) (E _ _ _ (pullback.diagonal_snd e))
-    (hPF _ _ _ (pullback.diagonal_snd e))
-    (projectionMapAssociativity Λ (pullback.diagonal e))
-    (isIso_dualizingComplexTensorMap_of_isOpenImmersion (pullback.diagonal e)) P
-    (isIso_dualizingComplexTensorMap_id Λ V P)
+  have hΔ := isIso_dualizingComplexTensorMap_of_isOpenImmersion (Λ := Λ) (pullback.diagonal e)
+  have hid := isIso_dualizingComplexTensorMap_id Λ V P
+  exact isIso_rightDerivedUpperShriek_diagonal_map_dualizingComplexTensorMap_snd_aux e P hΔ hid
 
 /-- The diagonal step of smooth duality for étale morphisms: for a quasi-compact étale
 `e : V ⟶ W`, with the exponent of `Λ` invertible on `V`, the tensor maps of the second

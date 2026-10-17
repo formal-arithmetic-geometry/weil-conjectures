@@ -89,7 +89,7 @@ theorem residueFieldTrdeg_eq_trdeg_quotient {A : Type u} [CommRing A] [Algebra K
     (j : Spec (.of A) ⟶ X) [IsOpenImmersion j]
     (hj : j ≫ b = Spec.map (CommRingCat.ofHom (algebraMap K A))) (p : PrimeSpectrum A) :
     residueFieldTrdeg b (j p) = Algebra.trdeg K (A ⧸ p.asIdeal) := by
-  letI := (residueFieldHomOfOver b (j p)).toAlgebra
+  let := (residueFieldHomOfOver b (j p)).toAlgebra
   let e : X.residueField (j p) ≅ CommRingCat.of p.asIdeal.ResidueField :=
     asIso (j.residueFieldMap p) ≪≫ Spec.residueFieldIso (.of A) p
   have he : ∀ k : K, e.hom (residueFieldHomOfOver b (j p) k) =
@@ -107,8 +107,8 @@ theorem residueFieldTrdeg_eq_trdeg_quotient {A : Type u} [CommRing A] [Algebra K
       (IsFractionRing.injective (A ⧸ p.asIdeal) p.asIdeal.ResidueField)
   have : FaithfulSMul K (A ⧸ p.asIdeal) :=
     (faithfulSMul_iff_algebraMap_injective _ _).2 (algebraMap K (A ⧸ p.asIdeal)).injective
-  have h := Algebra.trdeg_add_eq K (A ⧸ p.asIdeal) p.asIdeal.ResidueField
-  rw [Algebra.trdeg_eq_zero (R := A ⧸ p.asIdeal), add_zero] at h
+  have h := trdeg_add_eq K (A ⧸ p.asIdeal) p.asIdeal.ResidueField
+  rw [trdeg_eq_zero (R := A ⧸ p.asIdeal), add_zero] at h
   exact h.symm
 
 /-- On an affine chart `Spec A ⟶ X` over `K` of a scheme locally of finite type over `K`, the
@@ -147,7 +147,7 @@ of the open neighbourhoods of `x` (Stacks `02FX`). -/
 theorem topologicalKrullDimAt_eq_ringKrullDim_stalk_add [LocallyOfFiniteType b] (x : X) :
     ∃ t : ℕ, residueFieldTrdeg b x = t ∧
       topologicalKrullDimAt x = ringKrullDim (X.presheaf.stalk x) + t := by
-  obtain ⟨A₀, _, _, j₀, _, ⟨p₀, rfl⟩, -, hj₀⟩ := exists_affineChart_over b (U := ⊤) trivial
+  obtain ⟨A₀, _, _, j₀, _, ⟨p₀, rfl⟩, -, hj₀⟩ := exists_affineChart_over b (U := ⊤) (x := x) trivial
   have := finiteType_of_affineChart j₀ hj₀
   have : IsNoetherianRing A₀ := Algebra.FiniteType.isNoetherianRing K A₀
   obtain ⟨t, ht, htr⟩ := exists_coheight_eq_and_residueFieldTrdeg_eq j₀ hj₀ p₀
