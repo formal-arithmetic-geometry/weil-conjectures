@@ -1,0 +1,109 @@
+{
+ "id": "def-trf-local-marking-length",
+ "kind": "definition",
+ "title": "Local length of a finite marking",
+ "status": "split",
+ "statement": "Let $k$ be a field [def-weil-field], $P=(C,D,i)$ a multipointed $k$-curve [def-trf-multipointed-curve], and $x\\in C$. Give every local ring $\\mathcal O_{D,d}$ its canonical $k$-vector-space structure through the structure morphism, using the local scalar map [def-trf-orgogozo-induction-data]. Define $\\ell_{P,x}=\\sum_{d\\in D,\\ i(d)=x}\\dim_k\\mathcal O_{D,d}$. There is at most one summand since $i$ is a closed immersion. The empty sum is zero. In the case used here, when $D$ is finite over $k$ [def-weil-finite-integral-morphism], this is the dimension of the local Artinian factor of its coordinate algebra supported at $x$, or zero when $x\\notin i(D)$. It is not the dimension of the scheme-theoretic fibre of $D\\to C$.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-multipointed-curve",
+  "def-trf-orgogozo-induction-data",
+  "def-weil-finite-integral-morphism"
+ ],
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Section 1.2 and Lemma 4.4.2, printed pp. 2 and 30–31; Appendix B, definition before Corollary B.2 and its graph count, printed pp. 57–58."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a marked curve to a neighbourhood and semistability at a point; dimension of the local Artinian marking factor; nodal projective line tree",
+   "results": "OK 8 hits: WeierstrassCurve.IsGoodReduction, WeierstrassCurve.IsMinimal, AlgebraicGeometry.IsSmoothOfRelativeDimension, WeierstrassCurve.minimal, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, WeierstrassCurve.exists_isMinimal, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, WeierstrassCurve.instIsMinimalMinimal. No marked-point, local marking factor, or projective-line tree definition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semistability at a point of a marked curve and length of its local marking algebra and projective line tree",
+   "results": "OK 8 hits: Scheme.mk.sizeOf_spec, WeierstrassCurve.Projective.Point.nonsingular, Module.rankAtStalk_eq, WeierstrassCurve.Jacobian.Point.mk.sizeOf_spec, AlgebraicGeometry.LocallyRingedSpace.isLocalRing, WeierstrassCurve.Projective.Point.ctorIdx, Module.rankAtStalk_self, Algebra.smoothLocus. No requested definition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSemistableAt|localMarkingLength|IsProjectiveLineTree|curveNodes",
+   "results": "msearch.py grep in Mathlib/AlgebraicGeometry: OK 0 hits. Direct rg with the same pattern, plus restrictCurve, in upstream WeilConjectures and project lean/Sheaf: no hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-curve-p1-tree-local-criterion",
+  "date": "2026-10-17",
+  "group": "Q53"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The semistable-alteration exceptional-fibre calculation in the nearby-cycle branch; this node makes precise the Appendix B Corollary B.2 genus/tree step used by the local criterion. Local notions used by the exceptional-fibre criterion.",
+   "via": [
+    "lem-trf-curve-p1-tree-local-criterion",
+    "lem-trf-valuation-exceptional-local-criterion",
+    "lem-trf-valuation-exceptional-blowdown",
+    "lem-trf-valuation-semistable-stable-contraction",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.TraceFormula.LocalMarkingLength",
+  "declaration": "AlgebraicGeometry.MultipointedCurve.localMarkingLength",
+  "file": "lean/Sheaf/TraceFormula/LocalMarkingLength.lean",
+  "statement": "def MultipointedCurve.localMarkingLength {k : Type u} [Field k] (P : MultipointedCurve (Spec (.of k))) (x : P.X) : ℕ",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d9d64eddb",
+  "group": "Q53",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d9d64eddb",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Read the node, all 19 statement deps, the 3 new definition nodes and their modules, the report and the dependency declarations (MultipointedCurve, MultipointedPair.IsSemistable/IsMultipointed, Orgogozo.IsOrdinaryDoublePoint/localScalar, Scheme.Modules.eulerChar, Scheme.Hom.fiber). Every clause matches the node: alg-closed k; proper reduced multipointed curves with finite markings; proper surjective f with compatible fD (hfD redundant, not stronger); signed-Euler-characteristic equal genera; closed point x (= k-point); actual scheme fibre f.fiber x, nonempty connected pure dim 1; hoff is the base change over C minus x; hsemi at all fibre points; hlength uses the stalk length with k-scalars (0 off D), cast to ENat; boundary = range ∩ closure of complement (parse confirmed by probe). IsProjectiveLineTree: reduced, connected, scalar-compatible ordinary double points at closed nonsmooth points, P1 closed immersion over k onto each component, finite counts, #nodes+1=#components, equivalent to the multigraph tree with loops and parallel edges counted. New nodes are needed (no existing definition node or declaration) and their fields are complete. Item changes only in lean and stmt_deps (adds the 3 new nodes); lean.statement verbatim for all 4. Docstrings carry source and blueprint and the 8 proof steps; only sorry (#print axioms: sorryAx plus standard axioms). nt_compile --json on all 4 snapshot files: rc 0, no diagnostics (2-3 s each); the tool's error reporting was confirmed with a deliberate failure. Report has Worker report, New nodes and the standard Second reading section. Temkin PDF not available locally; judged against the unchanged node statement. No repairs needed."
+ }
+}

@@ -23,7 +23,10 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
   "def-weil-proper-morphism",
-  "def-weil-pure-dimension"
+  "def-weil-pure-dimension",
+  "def-trf-semistable-marked-point",
+  "def-trf-local-marking-length",
+  "def-trf-projective-line-tree"
  ],
  "proof": [
   {
@@ -356,5 +359,24 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-f644ac8da (reviewer sub-agent of L); spot-checked: Read the required guidance, packet, report, item, all three new nodes, cited DAG statements, unit/chapter route, and cited sources. Verified all eight proof steps, hypotheses, edge cases, searches, duplicate checks, route restrictions, and the scheme-theoretic fibre and marking-length arguments. Wrote review.md; no repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d9d64eddb",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Read the node, all 19 statement deps, the 3 new definition nodes and their modules, the report and the dependency declarations (MultipointedCurve, MultipointedPair.IsSemistable/IsMultipointed, Orgogozo.IsOrdinaryDoublePoint/localScalar, Scheme.Modules.eulerChar, Scheme.Hom.fiber). Every clause matches the node: alg-closed k; proper reduced multipointed curves with finite markings; proper surjective f with compatible fD (hfD redundant, not stronger); signed-Euler-characteristic equal genera; closed point x (= k-point); actual scheme fibre f.fiber x, nonempty connected pure dim 1; hoff is the base change over C minus x; hsemi at all fibre points; hlength uses the stalk length with k-scalars (0 off D), cast to ENat; boundary = range ∩ closure of complement (parse confirmed by probe). IsProjectiveLineTree: reduced, connected, scalar-compatible ordinary double points at closed nonsmooth points, P1 closed immersion over k onto each component, finite counts, #nodes+1=#components, equivalent to the multigraph tree with loops and parallel edges counted. New nodes are needed (no existing definition node or declaration) and their fields are complete. Item changes only in lean and stmt_deps (adds the 3 new nodes); lean.statement verbatim for all 4. Docstrings carry source and blueprint and the 8 proof steps; only sorry (#print axioms: sorryAx plus standard axioms). nt_compile --json on all 4 snapshot files: rc 0, no diagnostics (2-3 s each); the tool's error reporting was confirmed with a deliberate failure. Report has Worker report, New nodes and the standard Second reading section. Temkin PDF not available locally; judged against the unchanged node statement. No repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CurveP1TreeLocalCriterion",
+  "declaration": "AlgebraicGeometry.curve_p1_tree_local_criterion",
+  "file": "lean/Sheaf/TraceFormula/CurveP1TreeLocalCriterion.lean",
+  "statement": "theorem curve_p1_tree_local_criterion {k : Type u} [Field k] [IsAlgClosed k] (P' P : MultipointedCurve (Spec (.of k))) [IsProper P'.x] [IsProper P.x] [IsReduced P'.X] [IsReduced P.X] [IsFinite P'.d] [IsFinite P.d] (f : P'.X ⟶ P.X) (fD : P'.D ⟶ P.D) (hf : f ≫ P.x = P'.x) (hfD : fD ≫ P.d = P'.d) (hmark : fD ≫ P.i = P'.i ≫ f) [IsProper f] [Surjective f] (hgenus : 1 - @Scheme.Modules.eulerChar k _ P'.X ⟨P'.x⟩ (SheafOfModules.unit P'.X.ringCatSheaf) = 1 - @Scheme.Modules.eulerChar k _ P.X ⟨P.x⟩ (SheafOfModules.unit P.X.ringCatSheaf)) (x : P.X) (hx : IsClosed ({x} : Set P.X)) [ConnectedSpace (f.fiber x)] (hpure : (f.fiber x).IsPureDimension 1) (hoff : IsIso (pullback.snd f (Scheme.Opens.ι (X := P.X) ⟨{x}ᶜ, hx.isOpen_compl⟩))) (hsemi : ∀ z : f.fiber x, (MultipointedPair.ofCurve P').IsSemistableAt (f.fiberι x z)) (hlength : (P.localMarkingLength x : ℕ∞) = (Set.range P'.i ∩ Set.range (f.fiberι x)).encard) : (MultipointedPair.ofCurve P).IsSemistableAt x ↔ IsProjectiveLineTree (f.fiberι x ≫ P'.x) ∧ (Set.range (f.fiberι x) ∩ closure (Set.range (f.fiberι x))ᶜ).encard + (Set.range P'.i ∩ Set.range (f.fiberι x)).encard ≤ 2",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Closed points encode k-points via Mathlib pointEquivClosedPoint. The residue-field fibre retains its scheme structure and its k-map f.fiberι x ≫ P′.x. The finite connected incidence multigraph is a tree exactly when its actual node count plus one equals its component count; no simple-graph quotient is used."
  }
 }

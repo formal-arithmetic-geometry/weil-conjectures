@@ -14,7 +14,9 @@
   "def-weil-closed-immersion",
   "def-weil-open-immersion",
   "def-weil-derived-pullback-tensor-hom",
-  "def-weil-integral-rational-qbar-compact-support"
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-a1-constructible-pullback-t-exact",
+  "def-weil-compact-support-coefficient-action"
  ],
  "proof": [
   {
@@ -448,5 +450,45 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-6acd44227 (reviewer sub-agent of L); spot-checked: Reviewed the item, unit route, every proof step and cited node, source locations, coefficient categories, base-change morphisms, edge cases, route-pivot constraints, and long-step rule. The statement is preserved and mathematically supported; no repairs or new nodes are needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d94a7c621",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Read node, source place (lem-zl-morphism-open-closed-reduction.proof.md Restriction l.15-20, Part 2 l.65-67), all stmt_dep declarations (ConstructiblePullbackComparison, SfCompactSupportCoefficientAction, IsoAlgebra.mapOfNatIso, LocalFrobeniusTrace local*), and the full module. Every hypothesis and clause matches: separated finite type with no extra assumptions, IsImmersion = closed then open, actual geometric base change, t-exactness and exact Weil-heart functors, Weil H^a comparison with the canonical underlying map, induced Weil structure pinned by pullback composition (orientation checked), closed point plus IsIso residueFieldMap, canonical stalk map with Frobenius equivariance (deg-1 indexing matches the recorded definition), recorded compact-support functor and pinned coefficient action, open stalks and zero_stalk outside range j0, common-stage descent. No cycle from the two added stmt_deps; lean.statement verbatim; helper theorems are sorry-only and true; no hollow defs; docstrings ok. nt_compile.py --json on the snapshot file: 20.5 s, exit 0, no errors or warnings. Observations, not faults: commShift data inherited from lem-a1 and the existential open adjunction only change data by natural automorphisms; the Second-reading section holds only the 2026-10-17 policy note."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ImmersionWeilLocalBehavior",
+  "declaration": "WeilConjectures.immersionWeil_pullback_local_behavior",
+  "declarations": [
+   "WeilConjectures.ImmersionWeilExactComparison",
+   "WeilConjectures.immersionWeilOverPullback_locallyOfFiniteType",
+   "WeilConjectures.immersionWeilOverPullback_quasiCompact",
+   "WeilConjectures.immersionWeilFiber_locallyOfFiniteType",
+   "WeilConjectures.immersionWeilFiber_quasiCompact",
+   "WeilConjectures.immersionWeil_closed_point",
+   "WeilConjectures.ImmersionWeilRationalPullback",
+   "WeilConjectures.ImmersionWeilCommonStagePullback",
+   "WeilConjectures.immersionWeil_pullback_local_behavior",
+   "WeilConjectures.immersionWeil_coefficient_unit",
+   "WeilConjectures.immersionWeilFiberMap_open",
+   "WeilConjectures.immersionWeilFiberMap_isOver",
+   "WeilConjectures.immersionWeilFiberMap_quasiCompact",
+   "WeilConjectures.immersionWeilOpenRationalFunctor",
+   "WeilConjectures.ImmersionWeilOpenAction",
+   "WeilConjectures.immersionWeilOpenCommonStageFunctor",
+   "WeilConjectures.ImmersionWeilRationalOpenExtension",
+   "WeilConjectures.ImmersionWeilCommonStageOpenExtension",
+   "WeilConjectures.immersionWeil_open_local_behavior"
+  ],
+  "file": "lean/Sheaf/Paper/ImmersionWeilLocalBehavior.lean",
+  "statement": "theorem immersionWeil_pullback_local_behavior : Nonempty (ImmersionWeilCommonStagePullback D l hl X₀ W₀ h₀ Ω)",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The pullback and open-extension theorems, with the closed-point theorem, state both numbered clauses. Owning-node clause packages retain normalized truncation and cohomology maps, exact Weil-heart restrictions, composition-normalized pullback Frobenius and stalk maps, the open-unit normalized Frobenius mate, and finite-stage local operator identities. Common-stage packages include all finite stages, canonical stage identifications, and descent of complexes and sheaves; thus the stalk assertions cover every common-stage Weil sheaf without a stable integral Frobenius lattice or an equality of coefficient and scheme universes. Uses the published compact-support action on morphisms; no arbitrary functor or comparison is assumed."
  }
 }
