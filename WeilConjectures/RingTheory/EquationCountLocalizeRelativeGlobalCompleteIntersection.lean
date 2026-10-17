@@ -49,7 +49,7 @@ localization of the corresponding fibre of `S`. Its spectrum is the basic open `
 fibre. Local dimension is unchanged on an open subspace, so both bounds apply and give equality
 at every point. Finally, dimension is the supremum of the dimensions at points, so every
 nonempty fibre of the enlarged quotient has dimension `n-c = (n+1)-(c+1)`. These are the seven
-steps of the DAG proof, using respectively the bounded-open-upstairs, basic-open localization,
+steps of the blueprint proof, using respectively the bounded-open-upstairs, basic-open localization,
 polynomial-quotient localization, height-quotient-bound, localization-tensor, dimension on open
 subspaces, and dimension-supremum-local-dimensions nodes. -/
 theorem exists_localization_relativeGlobalCompleteIntersection

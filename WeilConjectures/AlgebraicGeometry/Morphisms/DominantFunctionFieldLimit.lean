@@ -195,7 +195,6 @@ private theorem dominantGenericSpecCone_isLimit {I : Type u} [SmallCategory I]
       z.π.app i ≫ (X.obj i).fromSpecStalk (genericPoint (X.obj i))
     simpa only [Category.assoc, dominantGenericSpecMap_fromSpecStalk] using hi
 
--- The topological argument does not need the qcqs assumptions retained in the interface.
 set_option linter.unusedVariables false in
 /-- The spectra of the stage function fields have the spectrum of the limit function
 field as their limit, compatibly with the generic point inclusions.

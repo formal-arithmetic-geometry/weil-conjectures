@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 /-! # Extensionality of internal dual sections of exterior sheaves
@@ -38,12 +38,12 @@ functionals. Empty opens, zero rings and degree zero satisfy the same spanning
 and adjunction statements. -/
 theorem exteriorSheaf_dual_ext (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
     (U : X.Opens)
-    (q r : (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n)).val.obj (op U))
+    (q r : (Scheme.Modules.dual (Scheme.Modules.exteriorPower M n)).val.obj (op U))
     (h : ∀ (V : X.Opens) (g : V ⟶ U) (a : Fin n → M.val.obj (op V)),
-      q.app (op (Over.mk g)) (Scheme.Modules.exteriorSheafSection M n V a) =
-        r.app (op (Over.mk g)) (Scheme.Modules.exteriorSheafSection M n V a)) :
+      q.app (op (Over.mk g)) (Scheme.Modules.wedge (M := M) (r := n) (U := V) a) =
+        r.app (op (Over.mk g)) (Scheme.Modules.wedge (M := M) (r := n) (U := V) a)) :
     q = r := by
-  let P := Scheme.Modules.exteriorSheafPresheaf M n
+  let P := (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)
   let η := (PresheafOfModules.sheafificationAdjunction.{u}
     (𝟙 X.ringCatSheaf.obj)).unit.app P
   have heq (V : X.Opens) (g : V ⟶ U) :
@@ -72,7 +72,7 @@ theorem exteriorSheaf_dual_ext (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
     (Over.homMk g : Over.mk (g ≫ W.unop.hom) ⟶ W.unop).op x
   have hr := PresheafOfModules.naturality_apply r
     (Over.homMk g : Over.mk (g ≫ W.unop.hom) ⟶ W.unop).op x
-  have hy' : η.app (op V) y = (Scheme.Modules.exteriorSheaf M n).val.map g.op x := hy
+  have hy' : η.app (op V) y = (Scheme.Modules.exteriorPower M n).val.map g.op x := hy
   have he := CategoryTheory.congr_fun (heq V (g ≫ W.unop.hom)) y
   change q.app (op (Over.mk (g ≫ W.unop.hom))) (η.app (op V) y) =
     r.app (op (Over.mk (g ≫ W.unop.hom))) (η.app (op V) y) at he

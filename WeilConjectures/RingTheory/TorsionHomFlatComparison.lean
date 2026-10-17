@@ -52,21 +52,21 @@ Proof:
    (`LinearMap.baseChange_comp`), so the statement carries it by naming the map. -/
 theorem baseChange_bijective_of_ideal_power_torsion
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
-    (_hflat : (algebraMap R S).Flat) (I : Ideal R) (_hI : I.FG)
-    (_hquot : Function.Bijective
+    (hflat : (algebraMap R S).Flat) (I : Ideal R) (hI : I.FG)
+    (hquot : Function.Bijective
       (Ideal.quotientMap (I.map (algebraMap R S)) (algebraMap R S) Ideal.le_comap_map))
     {K : Type w} {N : Type x} [AddCommGroup K] [AddCommGroup N]
     [Module R K] [Module R N]
-    (_hK : ∀ k : K, ∃ n : ℕ, ∀ r ∈ I ^ n, r • k = 0) :
+    (hK : ∀ k : K, ∃ n : ℕ, ∀ r ∈ I ^ n, r • k = 0) :
     Function.Bijective (LinearMap.baseChange S : (K →ₗ[R] N) →
       (S ⊗[R] K →ₗ[S] S ⊗[R] N)) := by
   classical
   let c : N →ₗ[R] S ⊗[R] N := TensorProduct.mk R S N 1
   let t := Ideal.primaryComponent.map I c
   have ht : Function.Bijective t :=
-    Ideal.primaryComponent_baseChange_bijective I _hI _hflat _hquot N
+    Ideal.primaryComponent_baseChange_bijective I hI hflat hquot N
   have hmem (k : K) : k ∈ Ideal.primaryComponent K I := by
-    obtain ⟨n, hn⟩ := _hK k
+    obtain ⟨n, hn⟩ := hK k
     exact (Ideal.primaryComponent_mem K I k).2
       ⟨n, (Submodule.mem_torsionBySet_iff _ _).2 (fun r ↦ hn r r.property)⟩
   constructor

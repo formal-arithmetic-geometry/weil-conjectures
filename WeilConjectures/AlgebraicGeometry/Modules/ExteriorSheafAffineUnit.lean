@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 import WeilConjectures.AlgebraicGeometry.AffineLocalizingPresheafSheafification
@@ -43,22 +43,24 @@ theorem exteriorSheaf_affine_unit_bijective {X : Scheme.{u}} (M : X.Modules)
     [M.IsQuasicoherent] (n : ℕ) (U : X.affineOpens) :
     Function.Bijective
       (((PresheafOfModules.sheafificationAdjunction.{u} (𝟙 X.ringCatSheaf.obj)).unit.app
-        (exteriorSheafPresheaf M n)).app (op U.1)) := by
+        (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)).app (op U.1)) := by
   have hlocal (W : X.Opens) (hW : IsAffineOpen W) (a : Γ(X, W)) :
       IsLocalizedModule.Away a
-        ((exteriorSheafPresheaf M n).map (homOfLE (X.basicOpen_le a)).op).hom := by
+        ((_root_.PresheafOfModules.exteriorPower (R := _) M.val n).map
+          (homOfLE (X.basicOpen_le a)).op).hom := by
     let f := (homOfLE (X.basicOpen_le a)).op
     let := hW.isLocalization_basicOpen a
     let : IsLocalizedModule.Away a (M.val.map f).hom :=
       isLocalizedModule_basicOpen M hW a
-    change IsLocalizedModule.Away a (exteriorSheafRestriction M n f).hom
+    change IsLocalizedModule.Away a
+      ((_root_.PresheafOfModules.exteriorPower (R := _) M.val n).map f).hom
     exact exteriorPower.isLocalizedModule_of_wedge
       (R := Γ(X, W)) (B := Γ(X, X.basicOpen a)) (Submonoid.powers a)
       (M.val.obj (op W)) (M.val.obj (op (X.basicOpen a))) (M.val.map f) n
-      (exteriorSheafRestriction M n f)
-      ((Classical.choose_spec (exteriorSheafRestriction_existsUnique M n f)).1)
+      ((_root_.PresheafOfModules.exteriorPower (R := _) M.val n).map f)
+      ((_root_.PresheafOfModules.exteriorPower_map_ιMulti (R := _) M.val n f))
   let := isIso_sheafificationUnit_app_of_affine_localizing X
-    (exteriorSheafPresheaf M n) hlocal U.1 U.2
+    (_root_.PresheafOfModules.exteriorPower (R := _) M.val n) hlocal U.1 U.2
   exact ConcreteCategory.bijective_of_isIso _
 
 end AlgebraicGeometry.Scheme.Modules

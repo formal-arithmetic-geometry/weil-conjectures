@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Yoneda
+import WeilConjectures.CategoryTheory.BrownCohomologicalRepresentability
 import WeilConjectures.CategoryTheory.TriangulatedEquivalenceTransfer
 import WeilConjectures.CategoryTheory.CompactGenerationEquivalence
 import Mathlib.CategoryTheory.Triangulated.Opposite.Functor
@@ -35,9 +36,10 @@ Proof: Construct the category `ULiftHom.{max w v vH} C` and transport zero objec
 shifts, preadditivity, distinguished triangles, coproducts, compact generators, and
 weak generation across `ULiftHom.equiv`. Compose `H` with the inverse equivalence and
 `AddCommGrpCat.uliftFunctor`; transport homologicality and preservation of all products
-using the equivalence and the lift/down additive equivalences. Apply `hBrown` in the
-common universe. Descend the representing object and its natural bijections along the
-same equivalences to obtain a representing-by structure for `H ⋙ forget` in `C`.
+using the equivalence and the lift/down additive equivalences. Apply Brown
+representability (`brownCohomologicalRepresentability`) in the common universe. Descend the
+representing object and its natural bijections along the same equivalences to obtain a
+representing-by structure for `H ⋙ forget` in `C`.
 -/
 theorem brownCohomologicalRepresentabilityUniverseTransfer_aux
     (C : Type u) [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
@@ -45,15 +47,7 @@ theorem brownCohomologicalRepresentabilityUniverseTransfer_aux
     [IsTriangulated C] [HasCoproducts.{max w v vH} C]
     (hC : IsCompactlyGeneratedTriangulated.{max w v vH} C)
     (H : Cᵒᵖ ⥤ AddCommGrpCat.{vH}) [H.IsHomological]
-    (hH : ∀ I : Type (max w v vH), PreservesLimitsOfShape (Discrete I) H)
-    (hBrown : ∀ (A : Type u) [Category.{max w v vH} A]
-      [HasZeroObject A] [HasShift A ℤ] [Preadditive A]
-      [∀ n : ℤ, (shiftFunctor A n).Additive] [Pretriangulated A]
-      [IsTriangulated A] [HasCoproducts.{max w v vH} A],
-      IsCompactlyGeneratedTriangulated.{max w v vH} A →
-      ∀ (K : Aᵒᵖ ⥤ AddCommGrpCat.{max w v vH}) [K.IsHomological],
-      (∀ I : Type (max w v vH), PreservesLimitsOfShape (Discrete I) K) →
-      ∃ G : A, Nonempty (K ≅ preadditiveYoneda.obj G)) :
+    (hH : ∀ I : Type (max w v vH), PreservesLimitsOfShape (Discrete I) H) :
     ∃ G : C, Nonempty ((H ⋙ forget AddCommGrpCat).RepresentableBy G) := by
   let A := ULiftHom.{max w v vH} C
   let E : C ≌ A := ULiftHom.equiv
@@ -85,7 +79,7 @@ theorem brownCohomologicalRepresentabilityUniverseTransfer_aux
     have := hH I
     dsimp [K, L]
     infer_instance
-  obtain ⟨G, ⟨e⟩⟩ := hBrown A hGen K hK
+  obtain ⟨G, ⟨e⟩⟩ := brownCohomologicalRepresentability A hGen K hK
   refine ⟨G.objDown, ⟨?_⟩⟩
   refine { homEquiv := ?_, homEquiv_comp := ?_ }
   · intro X

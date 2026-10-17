@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 
 @[expose] public section
 
@@ -25,17 +25,17 @@ Source: Stacks Project, Tag 0BRT, degree-one specialization; Mathlib
 Proof: on each open U, use `exteriorPower.oneEquiv` to send the singleton wedge of
 m to m. For a restriction U to V, the chosen exterior restriction sends the singleton
 wedge of m to the singleton wedge of its restriction, by
-`exteriorSheafRestriction_existsUnique`. Thus the degree-one equivalences commute with
-restrictions on singleton wedges, and on every element because these wedges span.
+`PresheafOfModules.exteriorPower_map_ιMulti`. Thus the degree-one equivalences commute
+with restrictions on singleton wedges, and on every element because these wedges span.
 Their inverses also commute with restrictions, giving an isomorphism from
-`exteriorSheafPresheaf M 1` to `M.val`. Apply the sheafification functor to this
-isomorphism, then compose with the invertible counit of
+`PresheafOfModules.exteriorPower M.val 1` to `M.val`. Apply the sheafification functor
+to this isomorphism, then compose with the invertible counit of
 `PresheafOfModules.sheafificationAdjunction` at M. Since M is already a sheaf, this
 counit identifies the sheafification of `M.val` with M, proving the result.
 -/
 theorem exteriorSheaf_one_iso {X : Scheme.{u}} (M : X.Modules) :
-    Nonempty (exteriorSheaf M 1 ≅ M) := by
-  let e : exteriorSheafPresheaf M 1 ≅ M.val :=
+    Nonempty (exteriorPower M 1 ≅ M) := by
+  let e : (_root_.PresheafOfModules.exteriorPower (R := _) M.val 1) ≅ M.val :=
     PresheafOfModules.isoMk
       (fun U ↦ (exteriorPower.oneEquiv (X.presheaf.obj U) (M.val.obj U)).toModuleIso)
       (by
@@ -44,14 +44,13 @@ theorem exteriorSheaf_one_iso {X : Scheme.{u}} (M : X.Modules) :
         obtain ⟨m, rfl⟩ :=
           (exteriorPower.oneEquiv (X.presheaf.obj U) (M.val.obj U)).symm.surjective x
         change exteriorPower.oneEquiv (X.presheaf.obj V) (M.val.obj V)
-            (exteriorSheafRestriction M 1 f
+            (((_root_.PresheafOfModules.exteriorPower (R := _) M.val 1).map f)
               ((exteriorPower.oneEquiv (X.presheaf.obj U) (M.val.obj U)).symm m)) =
           M.val.map f
             (exteriorPower.oneEquiv (X.presheaf.obj U) (M.val.obj U)
               ((exteriorPower.oneEquiv (X.presheaf.obj U) (M.val.obj U)).symm m))
         rw [LinearEquiv.apply_symm_apply, exteriorPower.oneEquiv_symm_apply]
-        have h := (Classical.choose_spec
-          (exteriorSheafRestriction_existsUnique M 1 f)).1 (fun _ ↦ m)
+        have h := (_root_.PresheafOfModules.exteriorPower_map_ιMulti (R := _) M.val 1 f) (fun _ ↦ m)
         exact (congrArg (exteriorPower.oneEquiv (X.presheaf.obj V) (M.val.obj V)) h).trans
           (exteriorPower.oneEquiv_ιMulti _))
   exact ⟨(PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).mapIso e ≪≫

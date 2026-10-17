@@ -151,7 +151,6 @@ theorem koszul_roof_comparison_independent
     (A : Type u) [CommRing A] [HasDerivedCategory.{u + 1} (ModuleCat.{u} A)]
     (I : Ideal A) (r : ℕ) (f g : Fin r → A)
     (hregf : RingTheory.Sequence.IsKoszulRegular f)
-    (hregg : RingTheory.Sequence.IsKoszulRegular g)
     (hf : Ideal.span (Set.range f) = I) (hg : Ideal.span (Set.range g) = I)
     (φ : koszulDualComplex A r f ⟶
       (HomologicalComplex.single (ModuleCat A) (ComplexShape.up ℕ) r).obj
@@ -197,7 +196,6 @@ theorem koszul_roof_comparison_independent
         (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (-(r : ℤ))
           (ModuleCat.of A A)).hom)) := by
   classical
-  have _ := hregg
   have hmem (i : Fin r) : f i ∈ Submodule.span A (Set.range g) := by
     change f i ∈ Ideal.span (Set.range g)
     rw [hg, ← hf]

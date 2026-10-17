@@ -31,7 +31,6 @@ private theorem cancel_mapped_iso_pasting
 
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 set_option maxHeartbeats 800000 in
 -- The four descents compare large transported derived functor expressions.
 /-- Supplied direct restriction comparisons descend to commuting overlap comparisons.
@@ -80,8 +79,6 @@ theorem open_union_restriction_comparison_coherence
       (moduleRings (((W ⊔ V).ι ⁻¹ᵁ W) ⊓ ((W ⊔ V).ι ⁻¹ᵁ V)).toScheme.toRingedSpace))]
     :
     let L := (schemeOpenRestriction X (W ⊔ V)).mapDerivedCategory
-    let JW := (schemeOpenRestriction X W).mapDerivedCategory
-    let JV := (schemeOpenRestriction X V).mapDerivedCategory
     let SW := (schemeOpenOverlapRestriction X
       (homOfLE inf_le_left : W ⊓ V ⟶ W)).mapDerivedCategory
     let SV := (schemeOpenOverlapRestriction X
@@ -126,9 +123,7 @@ theorem open_union_restriction_comparison_coherence
         eI.functor.map (tT.inv.app (L.obj G)) ≫ cV.hom.app (RT.obj (L.obj G)) ≫
           SV.map (qV.hom.app (L.obj G)) ≫ SV.map (kV.hom.app G) ≫ sV.hom.app G =
             qI.hom.app G) := by
-  intro L JW JV SW SV sW sV PW PV kW kV U T RU RT SU ST tU tT eW eV qW qV eI qIY
-  have _hJW := JW
-  have _hJV := JV
+  intro L SW SV sW sV PW PV kW kV U T RU RT SU ST tU tT eW eV qW qV eI qIY
   let RI := (schemeOpenRestriction (W ⊔ V).toScheme (U ⊓ T)).mapDerivedCategory
   let kI := schemeDerivedOpenRestrictionCompIso X
     (homOfLE (inf_le_left.trans le_sup_left) : W ⊓ V ⟶ W ⊔ V)

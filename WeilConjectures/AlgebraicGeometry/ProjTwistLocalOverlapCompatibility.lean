@@ -217,7 +217,9 @@ theorem twist_localOverlap_pointwise
     (g j) (g i * g j) (dvd_mul_left (g j) (g i)) e
   exact ((Module.End.isUnit_iff _).mp he).1 (((Module.End.isUnit_iff _).mp hd).1 hcross)
 
-/-- (blueprint: lem-sc-proj-twist-local-overlap-compatibility) -/
+/-- Local fractions `t i` over the principal opens `D(g i)` of the chart of `D₊(f)` that
+evaluate to a twist section `s` at every point agree on each overlap `D(g i * g j)`.
+(blueprint: lem-sc-proj-twist-local-overlap-compatibility) -/
 theorem twist_localOverlap_compatibility
     {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]
     (𝒜 : ℕ → σ) [GradedRing 𝒜] (k : ℤ) (f : A) (b : ℕ)

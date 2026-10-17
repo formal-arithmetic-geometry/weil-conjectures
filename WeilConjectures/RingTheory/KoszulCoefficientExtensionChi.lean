@@ -206,14 +206,11 @@ formula gives contraction for the image sequence. The signed dual differential
 is precomposition with this contraction times (-1)^(n+1); the ring map preserves
 that sign. Thus the degreewise extensions commute with every differential and
 form chi. For n > r both exterior terms are zero; for n = 0 the single empty
-basis wedge gives scalar extension A -> S. No regularity assumption is needed
-for this component, though the common hypotheses are retained. -/
+basis wedge gives scalar extension A -> S. No regularity or localization assumption
+is needed for this component. -/
 theorem exists_koszul_coefficient_extension_chi
-    (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)
-    (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I)
-    (T : Submonoid A) (S : Type u) [CommRing S] [Algebra A S]
-    [IsLocalization T S]
-    (hs : Ideal.span (Set.range (algebraMap A S ∘ f)) = I.map (algebraMap A S)) :
+    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
+    (S : Type u) [CommRing S] [Algebra A S] :
   ∃ (χ : koszulDualComplex A r f ⟶
     ((ModuleCat.restrictScalars (algebraMap A S)).mapHomologicalComplex
       (ComplexShape.up ℕ)).obj (koszulDualComplex S r (algebraMap A S ∘ f))),
@@ -222,9 +219,6 @@ theorem exists_koszul_coefficient_extension_chi
     (χ.f n x).hom (exteriorPower.ιMulti S n
       (fun i ↦ (v i).mapRange (algebraMap A S) (map_zero _))) =
     algebraMap A S (x.hom (exteriorPower.ιMulti A n v)) := by
-  have _ := hreg
-  have _ := hf
-  have _ := hs
   refine ⟨CochainComplex.ofHom (fun n ↦ coefficientDegreeMap A S r n f) ?_, ?_⟩
   · intro n
     simpa only [Functor.mapHomologicalComplex_obj_d, koszulDualComplex,

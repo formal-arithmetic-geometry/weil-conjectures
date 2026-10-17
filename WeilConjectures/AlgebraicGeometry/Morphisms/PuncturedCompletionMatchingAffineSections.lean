@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingSections
-import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineSectionsComparison
+import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionAffineSections
 
 /-! # The principal-open section comparison for matching rings
 

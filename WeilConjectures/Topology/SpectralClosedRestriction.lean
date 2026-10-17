@@ -108,7 +108,7 @@ private theorem restriction_eq_implies_germ_eq
  stalks, then glue using sectionwise injectivity. (5) Express an arbitrary sheaf as a
  filtered colimit of these subsheaves; restriction and sections commute with the colimit
  on the spectral closed subspace, yielding surjectivity. Together with (1), the map is
- bijective. These steps use the proof dependencies recorded in the DAG node.
+ bijective. These steps use the proof dependencies recorded in the blueprint node.
 -/
 theorem spectral_closed_restriction
     (X : TopCat.{u}) [SpectralSpace X]

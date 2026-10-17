@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleSetPullback
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleNoetherianCriterion
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import WeilConjectures.SixFunctors.Finite.BaseChange
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # Finite pushforward preserves constructibility over a Noetherian scheme
@@ -43,8 +44,9 @@ private theorem lisse_of_iso {T : Scheme.{u}}
     exact Sheaf.isConstant_congr _
       ((T.smallEtaleTopology.overPullback (Type (u + 1))
         (𝒰.etalePrecoverageToEtale i)).mapIso e)
-  · intro Ω _ _ t
-    have := hfin Ω t
+  · refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ t ↦ ?_
+    have := (ConcreteCategory.isFinitelyGenerated_iff_finite _).mp
+      (hfin.isFinitelyGenerated_sheafFiber Ω t)
     exact Finite.of_equiv _
       (((pointSmallEtale t).sheafFiber (A := Type (u + 1))).mapIso e).toEquiv
 

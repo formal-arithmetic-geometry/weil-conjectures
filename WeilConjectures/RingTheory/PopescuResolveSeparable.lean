@@ -115,7 +115,7 @@ ring at that prime is regular, and its residue field is separable over the base 
 Source: Stacks Project, Smoothing Ring Maps, Lemma 07FE (lemma-resolve-special),
 Section 07FB (blueprint: lem-weil-pbc-popescu-resolve-separable).
 
-Proof (the DAG's twelve steps, including its repairs of the source's proof):
+Proof (the blueprint's twelve steps, including its repairs of the source's proof):
 
 Step 1. (Generators of $H_{A/k}$ and the exponent $n$.) $k$ is Noetherian (its only ideals are $0$
 and $k$) and $A$ is of finite type over $k$, so $A$ is Noetherian

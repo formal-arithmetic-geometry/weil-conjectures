@@ -119,10 +119,10 @@ theorem existsGluedSection
         e.hom.val.app (op ⊤) (res N a t) = s a := by
   classical
   dsimp only
-  obtain ⟨κ, U, g, f, m, hU, hid, hinv, hcoc, hm, htrans, hslocal, hf⟩ :=
+  obtain ⟨κ, U, g, f, m, hU, -, -, hcoc, hm, htrans, hslocal, hf⟩ :=
     exists_component_section_cech_data Z i hcover hdiscrete M s hs
   obtain ⟨N, e, hN, he, hetrans, _⟩ :=
-    exists_invertible_of_cech_transition U hU g hid hinv hcoc
+    exists_invertible_of_cech_transition U hU g hcoc
   have hfe : TopCat.Presheaf.IsCompatible N.presheaf U (fun b ↦ f b • e b) := by
     intro b c
     change N.presheaf.map (homOfLE inf_le_left).op (f b • e b) =

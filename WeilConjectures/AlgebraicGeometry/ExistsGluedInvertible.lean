@@ -102,24 +102,6 @@ theorem existsGluedInvertible
         ((i a).app (U p ⊓ U q) (g p q).val) at hn
     rw [← hn] at h
     exact h
-  have hinv_off (p q : Y) (W : Y.Opens) (hp : W ≤ U p) (hq : W ≤ U q)
-      (hWT : (W : Set Y) ⊆ Tᶜ) : gW q p W hq hp = (gW p q W hp hq)⁻¹ := by
-    apply eq_inv_of_mul_eq_one_left
-    apply Units.ext
-    apply (hsep W hWT).injective
-    funext a
-    have h := hrel a p q W hp hq
-    rw [hrel a q p W hq hp, smul_smul] at h
-    have hc := ((hf a p).map ((i a).preimage_mono hp)).smul_left_injective
-      (h.symm.trans (one_smul _ _).symm)
-    rw [mul_comm] at hc
-    simpa only [Units.val_mul, Units.val_one, map_mul, map_one] using hc
-  have hinv (p q : Y) (W : Y.Opens) (hp : W ≤ U p) (hq : W ≤ U q) :
-      gW q p W hq hp = (gW p q W hp hq)⁻¹ := by
-    by_cases hpq : p = q
-    · subst q
-      simp [gW, hid]
-    · exact hinv_off p q W hp hq (fun x hx ↦ hoff p q hpq ⟨hp hx, hq hx⟩)
   have hcoc_off (p q r : Y) (W : Y.Opens) (hp : W ≤ U p) (hq : W ≤ U q)
       (hr : W ≤ U r) (hWT : (W : Set Y) ⊆ Tᶜ) :
       gW p r W hp hr = gW p q W hp hq * gW q r W hq hr := by
@@ -142,7 +124,7 @@ theorem existsGluedInvertible
     · exact hcoc_off p q r W hp hq hr
         (fun x hx ↦ hoff p q hpq ⟨hp hx, hq hx⟩)
   obtain ⟨N, e, hN, he, heg, _⟩ :=
-    exists_invertible_of_cech_transition U hU g hid hinv hcoc
+    exists_invertible_of_cech_transition U hU g hcoc
   refine ⟨N, hN, fun a ↦ ?_⟩
   let e' : ∀ p : Y, Γ((pullback (i a)).obj N, (i a) ⁻¹ᵁ U p) :=
     fun p ↦ pullbackSection (i a) (e p)

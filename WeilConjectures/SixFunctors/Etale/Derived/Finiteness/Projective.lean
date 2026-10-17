@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteCancellation
 
 /-!
@@ -40,7 +42,16 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
-open Scheme
+open Scheme ProjectiveSpace
+
+/-- The projection `(ℙ¹_S)ⁿ ⟶ S` of the tower of projective lines is proper. -/
+instance ProjectiveSpace.isProper_projectiveLinePowProj (n : ℕ) (S : Scheme.{u}) :
+    IsProper (projectiveLinePowProj n S) := by
+  induction n with
+  | zero => exact inferInstanceAs (IsProper (𝟙 S))
+  | succ n ih =>
+    exact inferInstanceAs
+      (IsProper ((ProjectiveLine (projectiveLinePow n S) ↘ _) ≫ projectiveLinePowProj n S))
 
 namespace Etale
 
@@ -57,6 +68,29 @@ theorem hasConstructibleDirectImages_projectiveLine [HasInvertibleExponent Λ (S
     HasConstructibleDirectImages Λ (ProjectiveLine S ↘ S) :=
   sorry
 
+/-- **`𝒞` for finite morphisms.** A finite morphism `f : X ⟶ S` with Noetherian target
+satisfies `𝒞(f)`: `f_*` is exact and preserves constructible sheaves. -/
+theorem hasConstructibleDirectImages_of_isFinite {X S : Scheme.{u}} [IsNoetherian S]
+    (f : X ⟶ S) [IsFinite f] : HasConstructibleDirectImages Λ f := fun F _ ↦
+  (boundedConstructible_rightDerivedLowerStar_of_isFinite Λ f
+    (DerivedCategory.boundedConstructible_singleFunctor_obj F 0)).2
+
+/-- **`𝒞` for the tower of projective lines.** If `𝒞(ℙ¹_T ⟶ T)` holds for every scheme `T` of
+finite type over `k`, then `𝒞((ℙ¹_S)ⁿ ⟶ S)` holds for every `S` of finite type over `k`, the
+projection being a composite of projective lines over successive bases of finite type. -/
+theorem hasConstructibleDirectImages_projectiveLinePowProj
+    (h : ∀ (T : Scheme.{u}) (aT : T ⟶ Spec (.of k)) [LocallyOfFiniteType aT] [QuasiCompact aT],
+      HasConstructibleDirectImages Λ (ProjectiveLine T ↘ T))
+    {S : Scheme.{u}} (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS]
+    (n : ℕ) : HasConstructibleDirectImages Λ (projectiveLinePowProj n S) := by
+  induction n with
+  | zero =>
+    have : IsLocallyNoetherian S := LocallyOfFiniteType.isLocallyNoetherian aS
+    have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace aS
+    have : IsNoetherian S := {}
+    exact hasConstructibleDirectImages_of_isFinite (𝟙 S)
+  | succ n ih => exact (h _ (projectiveLinePowProj n S ≫ aS)).comp ih
+
 /-- Blueprint `lem-finrepair-projective-from-line`: Projective constructibility from
 projective-line constructibility.
 
@@ -68,8 +102,25 @@ theorem HasConstructibleDirectImages.of_projectiveLine
       HasConstructibleDirectImages Λ (ProjectiveLine T ↘ T))
     {X S : Scheme.{u}} (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS]
     (f : X ⟶ S) (N : Type u) [Finite N] (e : X ⟶ ℙ(N; S)) [IsClosedImmersion e]
-    (he : e ≫ ℙ(N; S) ↘ S = f) : HasConstructibleDirectImages Λ f :=
-  sorry
+    (he : e ≫ ℙ(N; S) ↘ S = f) : HasConstructibleDirectImages Λ f := by
+  have : IsLocallyNoetherian S := LocallyOfFiniteType.isLocallyNoetherian aS
+  have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace aS
+  have : IsNoetherian S := {}
+  have : IsLocallyNoetherian ℙ(N; S) :=
+    LocallyOfFiniteType.isLocallyNoetherian (ℙ(N; S) ↘ S ≫ aS)
+  have : CompactSpace ℙ(N; S) := QuasiCompact.compactSpace_of_compactSpace (ℙ(N; S) ↘ S ≫ aS)
+  have : IsNoetherian ℙ(N; S) := {}
+  -- `𝒞(ℙⁿ_S ⟶ S)`, through the finite surjective symmetric product `(ℙ¹_S)ᵏ ⟶ ℙⁿ_S`
+  have hP : HasConstructibleDirectImages Λ (ℙ(N; S) ↘ S) := by
+    cases isEmpty_or_nonempty N with
+    | inl _ => exact hasConstructibleDirectImages_of_isFinite _
+    | inr _ =>
+      obtain ⟨k, σ, _, _, hσ⟩ := exists_isFinite_surjective_projectiveLinePow N S
+      refine HasConstructibleDirectImages.of_comp_of_isFinite (ℙ(N; S) ↘ S ≫ aS) _ σ ?_
+      rw [hσ]
+      exact hasConstructibleDirectImages_projectiveLinePowProj h aS k
+  subst he
+  exact (hasConstructibleDirectImages_of_isFinite e).comp hP
 
 /-- Blueprint `thm-fin-projective-constructibility-complete`: Projective direct-image
 constructibility.

@@ -22,8 +22,6 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
--- The inherited statement binds JW and JV, which its conclusion does not reference.
-set_option linter.unusedVariables false in
 set_option linter.style.haveILetI false in
 -- Inline the localization witnesses as in the dependent statement, avoiding costly conversion.
 set_option maxHeartbeats 400000 in
@@ -62,8 +60,6 @@ theorem open_union_restriction_comparison_diagram
       (SheafOfModules.{u} (moduleRings (W ⊔ V).toScheme.toRingedSpace))]
     :
     let L := (schemeOpenRestriction X (W ⊔ V)).mapDerivedCategory
-    let JW := (schemeOpenRestriction X W).mapDerivedCategory
-    let JV := (schemeOpenRestriction X V).mapDerivedCategory
     let SW := (schemeOpenOverlapRestriction X
       (homOfLE inf_le_left : W ⊓ V ⟶ W)).mapDerivedCategory
     let SV := (schemeOpenOverlapRestriction X

@@ -11,6 +11,12 @@ import WeilConjectures.AlgebraicGeometry.DiagonalConormalAffineSectionsUnique
 import WeilConjectures.AlgebraicGeometry.DiagonalConormalAffineLiftInjective
 import WeilConjectures.AlgebraicGeometry.DiagonalConormalAffineDerivationSpan
 
+/-! # Affine sections of the chosen diagonal conormal derivation
+
+The affine coordinate calculation for the normalized derivation chosen by
+`exists_diagonalConormalDerivation`, and the fact that normalization by the kernel class map
+determines a diagonal conormal derivation (Stacks Project, Tag 08S2). -/
+
 @[expose] public section
 
 universe u

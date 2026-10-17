@@ -76,7 +76,7 @@ resolution with flat terms and a degreewise surjective augmentation. Surjectivit
 category of sheaves of modules, i.e. an epimorphism, rather than surjectivity on all sections.
 Source: Stacks Project, Lemma 06YS (blueprint: lem-pc-kflat-resolution).
 
-Proof outline recorded in the DAG:
+Proof outline recorded in the blueprint:
 1. Replace each good truncation of `G` by a bounded-above flat complex with a termwise
    surjective quasi-isomorphism, compatibly with the transition maps
    (`lem-pc-kflat-bounded-flat-replacement`).

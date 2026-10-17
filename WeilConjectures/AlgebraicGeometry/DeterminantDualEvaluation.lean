@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
@@ -49,11 +49,11 @@ theorem determinant_dual_evaluation (X : Scheme.{u})
     (M : X.Modules) (d : ℕ) (hfree : M.IsFiniteLocallyFreeOfRank d) :
     letI := SheafOfModules.monoidalCategory X.sheaf
     let L : SheafOfModules.{u} (moduleRings X.toRingedSpace) :=
-      Scheme.Modules.exteriorSheaf
+      Scheme.Modules.exteriorPower
         (SheafOfModules.homObj (R := X.sheaf) M
           (SheafOfModules.unit X.ringCatSheaf)) d
     let F : SheafOfModules.{u} (moduleRings X.toRingedSpace) :=
-      Scheme.Modules.exteriorSheaf M d
+      Scheme.Modules.exteriorPower M d
     Nonempty (L ⊗ F ≅ 𝟙_ (SheafOfModules.{u} (moduleRings X.toRingedSpace))) := by
   let := SheafOfModules.monoidalCategory X.sheaf
   let Z : X.Modules := SheafOfModules.free (ULift.{u} (Fin 0))
@@ -68,7 +68,7 @@ theorem determinant_dual_evaluation (X : Scheme.{u})
   have hS : S.ShortExact :=
     (ShortComplex.Splitting.ofIsZeroOfIsIso S hZ (inferInstance : IsIso S.g)).shortExact
   have : M.IsFiniteLocallyFreeOfRank d := hfree
-  let F := Scheme.Modules.exteriorSheaf M d
+  let F := Scheme.Modules.exteriorPower M d
   have : F.IsInvertible :=
     (Scheme.Modules.determinant_shortExact S hS 0 d d (by omega)).2.1
   obtain ⟨e⟩ := exteriorSheaf_dual_iso X M d hfree

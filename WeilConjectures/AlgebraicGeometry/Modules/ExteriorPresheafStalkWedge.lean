@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-!
@@ -40,22 +40,18 @@ private theorem commonGerms {X : Scheme.{v}} (M : X.Modules) (x : X)
     · simp only [Fin.snoc_castSucc]
       exact (M.presheaf.germ_res_apply (homOfLE hVU) x hxV (s j)).trans (hs j)
 
-set_option maxHeartbeats 800000 in
--- Semilinear exterior restrictions must be compared with abelian presheaf maps.
 set_option backward.isDefEq.respectTransparency false in
 private theorem exteriorWedge_res {X : Scheme.{v}} (M : X.Modules) (n : ℕ) (x : X)
     {U V : X.Opens} (f : V ⟶ U) (hx : x ∈ V) (a : Fin n → M.val.obj (op U)) :
-    TopCat.Presheaf.germ (exteriorSheafPresheaf M n).presheaf V x hx
-      (exteriorPower.ιMulti (X.presheaf.obj (op V)) n
-        (fun i ↦ M.val.map f.op (a i))) =
-      TopCat.Presheaf.germ (exteriorSheafPresheaf M n).presheaf U x (f.le hx)
-        (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a) := by
-  have hr := (Classical.choose_spec
-    (exteriorSheafRestriction_existsUnique M n f.op)).1 a
-  exact (congrArg
-    (TopCat.Presheaf.germ (exteriorSheafPresheaf M n).presheaf V x hx) hr.symm).trans
-      (TopCat.Presheaf.germ_res_apply
-        (exteriorSheafPresheaf M n).presheaf f x hx _)
+    TopCat.Presheaf.germ (PresheafOfModules.exteriorPower (R := X.presheaf) M.val n).presheaf
+        V x hx (exteriorPower.ιMulti (X.presheaf.obj (op V)) n
+          (fun i ↦ M.val.map f.op (a i))) =
+      TopCat.Presheaf.germ (PresheafOfModules.exteriorPower (R := X.presheaf) M.val n).presheaf
+        U x (f.le hx) (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a) := by
+  let P := PresheafOfModules.exteriorPower (R := X.presheaf) M.val n
+  have hr := PresheafOfModules.exteriorPower_map_ιMulti (R := X.presheaf) M.val n f.op a
+  exact (congrArg (TopCat.Presheaf.germ P.presheaf V x hx) hr.symm).trans
+    (TopCat.Presheaf.germ_res_apply P.presheaf f x hx _)
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem commonEquality {X : Scheme.{v}} (M : X.Modules) (n : ℕ) (x : X)
@@ -115,13 +111,15 @@ are no coordinate relations to check. A zero stalk ring needs no exclusion. -/
 theorem exteriorPresheaf_stalk_wedge {X : Scheme.{v}} (M : X.Modules)
     (n : ℕ) (x : X) :
     ∃ b : (M.presheaf.stalk x) [⋀^Fin n]→ₗ[X.presheaf.stalk x]
-        (TopCat.Presheaf.stalk (C := Ab.{v}) (exteriorSheafPresheaf M n).presheaf x),
+        (TopCat.Presheaf.stalk (C := Ab.{v})
+          (PresheafOfModules.exteriorPower (R := X.presheaf) M.val n).presheaf x),
       ∀ (U : X.Opens) (hx : x ∈ U) (a : Fin n → M.val.obj (op U)),
         b (fun i ↦ M.presheaf.germ U x hx (a i)) =
-          TopCat.Presheaf.germ (exteriorSheafPresheaf M n).presheaf U x hx
+          TopCat.Presheaf.germ
+            (PresheafOfModules.exteriorPower (R := X.presheaf) M.val n).presheaf U x hx
             (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a) := by
   classical
-  let P := exteriorSheafPresheaf M n
+  let P := (PresheafOfModules.exteriorPower (R := X.presheaf) M.val n)
   let T := TopCat.Presheaf.stalk (C := Ab.{v}) P.presheaf x
   let A := X.presheaf.stalk x
   have uniq (U V : X.Opens) (hxU : x ∈ U) (hxV : x ∈ V)
@@ -171,7 +169,7 @@ theorem exteriorPresheaf_stalk_wedge {X : Scheme.{v}} (M : X.Modules)
       funext j
       by_cases h : j = i <;> simp [h]
     rw [ha, ← hs, ← ht, ← map_add, hc, hc, hc, hb, hb, hb]
-    rw [(exteriorPower.ιMulti (X.presheaf.obj (op U)) n).map_update_add, map_add]
+    rw [(exteriorPower.ιMulti _ n).map_update_add, map_add]
   have smul (a : Fin n → M.presheaf.stalk x) (i : Fin n) (r : A) (s : M.presheaf.stalk x) :
       b (Function.update a i (r • s)) = r • b (Function.update a i s) := by
     obtain ⟨U, hxU, v, s', t', hv, hs, ht⟩ := rep a s s
@@ -192,7 +190,7 @@ theorem exteriorPresheaf_stalk_wedge {X : Scheme.{v}} (M : X.Modules)
       funext j
       by_cases h : j = i <;> simp [h]
     rw [ha, ← ht, ← hr, ← germ_smul, hc, hc, hb, hb]
-    rw [(exteriorPower.ιMulti (X.presheaf.obj (op V)) n).map_update_smul]
+    rw [(exteriorPower.ιMulti _ n).map_update_smul]
     exact PresheafOfModules.germ_smul (R := X.presheaf) P x V hxV r' _
   have alt (a : Fin n → M.presheaf.stalk x) (i j : Fin n)
       (h : a i = a j) (hne : i ≠ j) : b a = 0 := by
@@ -208,7 +206,7 @@ theorem exteriorPresheaf_stalk_wedge {X : Scheme.{v}} (M : X.Modules)
       funext k
       exact ((M.presheaf.germ_res_apply f x hxV (v k)).trans (hv k)).symm
     rw [hw, hb]
-    rw [(exteriorPower.ιMulti (X.presheaf.obj (op V)) n).map_eq_zero_of_eq w he hne]
+    rw [(exteriorPower.ιMulti _ n).map_eq_zero_of_eq w he hne]
     exact map_zero _
   let B : (M.presheaf.stalk x) [⋀^Fin n]→ₗ[X.presheaf.stalk x] T :=
     { toFun := b

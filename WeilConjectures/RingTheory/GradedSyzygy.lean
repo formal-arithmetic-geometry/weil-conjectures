@@ -83,7 +83,7 @@ theorem exists_graded_free_resolution_two {k : Type u} [Field k]
   let 𝒦₁ : ℤ → AddSubgroup q₀.ker :=
     fun j ↦ (𝒢₀ j).comap q₀.ker.subtype.toAddMonoidHom
   obtain ⟨hK₁, hfiniteK₁, _⟩ :=
-    graded_kernel_internal_finite 𝒢₀ hG₀ ℳ hℳ hs₀ hsmul q₀ hq₀ hg₀
+    graded_kernel_internal_finite 𝒢₀ hG₀ ℳ hℳ hs₀ q₀ hg₀
   have : Module.Finite S q₀.ker := hfiniteK₁
   have hsK₁ : ∀ (n : ℕ) (j : ℤ) (s : S) (x : q₀.ker),
       s ∈ homogeneousSubmodule (Fin 2) k n → x ∈ 𝒦₁ j →
@@ -96,7 +96,7 @@ theorem exists_graded_free_resolution_two {k : Type u} [Field k]
   let 𝒦₂ : ℤ → AddSubgroup q₁.ker :=
     fun j ↦ (𝒢₁ j).comap q₁.ker.subtype.toAddMonoidHom
   obtain ⟨hK₂, _, hgenK₂⟩ :=
-    graded_kernel_internal_finite 𝒢₁ hG₁ 𝒦₁ hK₁ hs₁ hsK₁ q₁ hq₁ hg₁
+    graded_kernel_internal_finite 𝒢₁ hG₁ 𝒦₁ hK₁ hs₁ q₁ hg₁
   have hsK₂ : ∀ (n : ℕ) (j : ℤ) (s : S) (x : q₁.ker),
       s ∈ homogeneousSubmodule (Fin 2) k n → x ∈ 𝒦₂ j →
         s • x ∈ 𝒦₂ ((n : ℤ) + j) := by

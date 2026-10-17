@@ -7,8 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.RingTheory.IsStrictHenselization
-import WeilConjectures.RingTheory.StrictHenselizationSurjectiveQuotientData
-import WeilConjectures.RingTheory.StrictHenselizationSurjectiveQuotientCore
+import WeilConjectures.RingTheory.PointedEtaleQuotientFinal
 
 /-! # Strict henselization and surjective local quotients
 
@@ -18,61 +17,49 @@ Source: Stacks Project, Tag 05WS (strict henselization of a quotient).
 
 @[expose] public section
 
-
 universe u
+open CategoryTheory CategoryTheory.Limits
 namespace Algebra
 
-set_option linter.style.haveILetI false in
-/-- A surjective quotient of a local base commutes with algebraic strict henselization.
-Source: Stacks Project, Tag 05WS, and the first isomorphism theorem.
+/-- Stacks Project, Tag 05WS: let `π : A → B` be a surjection of local rings with kernel
+`I`, and let `C` be the strict henselization of `A` with respect to `K`. Then `C ⧸ I C`,
+with the `B`-algebra structure induced by `π` (the hypothesis `hcomp`; it is unique since
+`π` is surjective), is the strict henselization of `B` with respect to any separable
+closure `L` of the residue field of `B`. Since `κ(A) ≅ κ(B)`, `L` may be taken to be `K`.
 (blueprint: lem-sbc-strict-henselization-surjective-quotient)
+(blueprint: lem-sbc-strict-henselization-surjective-quotient-core)
 
-Proof: The kernel equation and surjectivity identify B with A/I. Since I is contained
-in the maximal ideal of A, this quotient is local and has the same residue field as A.
-Transport K through that residue-field isomorphism; its B-action factors through the
-residue field, so the required scalar tower commutes. Consider the base-change functor
-from etale A-algebras pointed in K to etale B-algebras pointed in K. It is final, as
-follows. For a pointed etale B-algebra S, choose a standard etale principal neighbourhood
-of its distinguished prime. Lift the coefficients of its standard etale presentation to
-A, including the element inverted and the Jacobian determinant. The lifted presentation
-is etale over A and its reduction is that neighbourhood, providing an arrow from S to
-an object in the image. Given two such arrows, take the tensor product of their lifted
-A-algebras, pointed by multiplying their maps to K. The two induced maps from S agree
-at the distinguished point. Since S is etale over B, its diagonal is open, so these maps
-agree on an open neighbourhood of that point. Choose a principal open inside this
-neighbourhood and lift its denominator to the tensor product over A; it remains nonzero
-in K. Inverting it gives a common refinement equalizing the two arrows. This proves
-nonemptiness and connectedness of each comma category, hence finality. Extension of
-scalars is left adjoint to restriction, so it preserves the universal A-algebra cocone
-presenting C. Its new vertex is B tensor_A C, canonically C/IC. Finality identifies
-this with the universal cocone of all pointed etale B-algebras. The vertex identification
-and its structural B-map give IsStrictHenselization for the explicit quotient C/IC.
-This is the pointed-algebra proof of Tag 05WS; no ring is selected from an undetermined
-existence theorem. -/
+Proof: Base change of pointed etale algebras along π is final
+(`pointedEtaleQuotient_final`). Extension of scalars along π is a left adjoint, so it
+preserves the universal cocone presenting C. Transport the cocone along the natural
+diagram isomorphism and extend it along the final functor. The resulting universal cocone
+has vertex the base change of C, which `quotientBaseChangeObjIso` identifies with C/IC,
+equipped with the action induced by π. -/
 theorem IsStrictHenselization.surjective_quotient
-    (A K C B : Type u) [CommRing A] [IsLocalRing A] [Field K]
+    (A K C B L : Type u) [CommRing A] [IsLocalRing A] [Field K]
     [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K]
     [Algebra A K] [IsScalarTower A (IsLocalRing.ResidueField A) K]
     [CommRing C] [Algebra A C] (hC : IsStrictHenselization A K C)
-    [CommRing B] [IsLocalRing B]
-    (π : A →+* B) (hπ : Function.Surjective π)
-    (I : Ideal A) (hI : I ≤ IsLocalRing.maximalIdeal A) (hker : RingHom.ker π = I) :
-    ∃ (L : Type u) (_ : Field L)
-      (_ : Algebra (IsLocalRing.ResidueField B) L)
-      (_ : IsSepClosure (IsLocalRing.ResidueField B) L)
-      (_ : Algebra B L) (_ : IsScalarTower B (IsLocalRing.ResidueField B) L)
-      (_ : Algebra B (C ⧸ I.map (algebraMap A C))),
-      IsStrictHenselization B L (C ⧸ I.map (algebraMap A C)) := by
-  obtain ⟨L, fL, aL, sL, bL, tL, qB, _⟩ :=
-    strictHenselization_surjective_quotient_data A K C B π hπ I hI hker
-  letI : Field L := fL
-  letI : Algebra (IsLocalRing.ResidueField B) L := aL
-  letI : IsSepClosure (IsLocalRing.ResidueField B) L := sL
-  letI : Algebra B L := bL
-  letI : IsScalarTower B (IsLocalRing.ResidueField B) L := tL
-  letI : Algebra B (C ⧸ I.map (algebraMap A C)) := qB
-  obtain ⟨qB', hq⟩ :=
-    strictHenselization_surjective_quotient_core A K C B L hC π hπ I hI hker
-  exact ⟨L, fL, aL, sL, bL, tL, qB', hq⟩
+    [CommRing B] [IsLocalRing B] [Field L]
+    [Algebra (IsLocalRing.ResidueField B) L]
+    [IsSepClosure (IsLocalRing.ResidueField B) L]
+    [Algebra B L] [IsScalarTower B (IsLocalRing.ResidueField B) L]
+    (π : A →+* B) (hπ : Function.Surjective π) (I : Ideal A) (hker : RingHom.ker π = I)
+    [Algebra B (C ⧸ I.map (algebraMap A C))]
+    (hcomp : (algebraMap B (C ⧸ I.map (algebraMap A C))).comp π =
+      (Ideal.Quotient.mk _).comp (algebraMap A C)) :
+    IsStrictHenselization B L (C ⧸ I.map (algebraMap A C)) := by
+  obtain ⟨c, ⟨hc⟩, ⟨e⟩⟩ := hC
+  obtain ⟨F, hF, ⟨α⟩⟩ := pointedEtaleQuotient_final A K B L π hπ
+  have : F.Final := hF
+  let t := (Cocone.precompose α.inv).obj ((quotientBaseChange π).mapCocone c)
+  have ht : IsColimit t :=
+    (IsColimit.precomposeInvEquiv α _).symm
+      (isColimitOfPreserves (quotientBaseChange π) hc)
+  let d := (Functor.Final.extendCocone (F := F)).obj t
+  have hd : IsColimit d := (Functor.Final.isColimitExtendCoconeEquiv F t).symm ht
+  exact ⟨d, ⟨hd⟩,
+    ⟨(quotientBaseChange π).mapIso e ≪≫
+      quotientBaseChangeObjIso A B C π hπ I hker hcomp⟩⟩
 
 end Algebra

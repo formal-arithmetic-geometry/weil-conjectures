@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 public import WeilConjectures.RingTheory.Depth
-import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFormalHomAlgebraization
+import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedHomAlgebraization
 
 /-!
 # Surjectivity of restriction on the punctured power-series section

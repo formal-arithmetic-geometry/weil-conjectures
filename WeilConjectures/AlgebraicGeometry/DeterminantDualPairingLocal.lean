@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import WeilConjectures.AlgebraicGeometry.DeterminantDualLocalFrames
@@ -24,6 +24,7 @@ universe u
 
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
+open Scheme.Modules (wedge)
 
 /-- A determinant-formula morphism is bijective on sections below an open on which M
 is finite free, in every exterior degree.
@@ -45,13 +46,13 @@ basis is finite, these functionals form its dual basis, proving bijectivity.
 When n exceeds the rank, both exterior modules are zero;
 when n=0 both are the ring. Zero rings and empty opens are allowed. -/
 theorem exterior_dual_pairing_app_bijective (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
-    (f : Scheme.Modules.exteriorSheaf (Scheme.Modules.dual M) n ⟶
-      Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n))
+    (f : Scheme.Modules.exteriorPower (Scheme.Modules.dual M) n ⟶
+      Scheme.Modules.dual (Scheme.Modules.exteriorPower M n))
     (hf : ∀ (U : X.Opens) (a : Fin n → M.val.obj (op U))
       (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)),
-      (f.val.app (op U) (Scheme.Modules.exteriorSheafSection
-        (Scheme.Modules.dual M) n U φ)).app (op (Over.mk (𝟙 U)))
-        (Scheme.Modules.exteriorSheafSection M n U a) =
+      (f.val.app (op U) (wedge (M := Scheme.Modules.dual M) (r := n) (U := U) φ)).app
+          (op (Over.mk (𝟙 U)))
+        (wedge (M := M) (r := n) (U := U) a) =
       (Matrix.of fun i j ↦
         (show X.presheaf.obj (op U) from
           (φ j).app (op (Over.mk (𝟙 U))) (a i))).det)

@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.RingTheory.Depth
 public import Mathlib.RingTheory.KrullDimension.Basic
 import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwoCore
-import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwoTransfer
+import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimTwoTransfer
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
@@ -26,7 +26,7 @@ theorem stalk_normalization_boundary_dimension_two {S C : Scheme.{u}}
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]
     (U : S.Opens) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)
-    (s : S) (hs : s ∉ U)
+    (s : S)
     (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth
       (R := S.presheaf.stalk s) (S.presheaf.stalk s)) :
@@ -42,6 +42,6 @@ theorem stalk_normalization_boundary_dimension_two {S C : Scheme.{u}}
       (2 : WithBot ℕ∞) ≤ ringKrullDim
         ((pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization
           (pullback.fst c a) : Scheme.{u}).presheaf.stalk z) := by
-  apply stalk_normalization_boundary_dimension_two_transfer hS c U PA s hs hmin hdepth
-  exact stalk_normalization_boundary_dimension_two_target hS c U s hs hmin hdepth
+  apply stalk_normalization_boundary_dimension_two_transfer hS c U PA s
+  exact stalk_normalization_boundary_dimension_two_target c U s hmin hdepth
 end AlgebraicGeometry.Scheme

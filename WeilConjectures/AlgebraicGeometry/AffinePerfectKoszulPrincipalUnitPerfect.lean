@@ -9,47 +9,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.ShiftedKoszulAugmentation
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
+import WeilConjectures.AlgebraicGeometry.AffineKoszulGeometricProperties
 
 @[expose] public section
 
 universe a b
 open CategoryTheory
 namespace AlgebraicGeometry
-
--- The finite-basis argument follows the proved helpers in
--- Sheaf.AlgebraicGeometry.AffineKoszulGeometricProperties.
-private theorem koszul_term_free (A : Type a) [CommRing A] (r q : ℕ)
-    (U : (Spec (.of A)).Opens) :
-    ∃ m : ℕ, Nonempty
-      ((SheafOfModules.overFunctor.{a} (moduleRings (Spec (.of A)).toRingedSpace) U).obj
-        ((tilde.functor (.of A)).obj (ModuleCat.of A (⋀[A]^q (Fin r →₀ A)))) ≅
-        SheafOfModules.free
-          (R := (moduleRings (Spec (.of A)).toRingedSpace).over U) (ULift.{a} (Fin m))) := by
-  classical
-  let I := Set.powersetCard (Fin r) q
-  let b := (Finsupp.basisSingleOne : Module.Basis (Fin r) A (Fin r →₀ A)).exteriorPower q
-  let e : I ≃ ULift.{a} (Fin (Fintype.card I)) :=
-    (Fintype.equivFin I).trans Equiv.ulift.symm
-  let c := (b.reindex e).repr.toModuleIso
-  let F := SheafOfModules.overFunctor.{a}
-    (moduleRings (Spec (.of A)).toRingedSpace) U
-  refine ⟨Fintype.card I, ⟨?_⟩⟩
-  exact F.mapIso ((tilde.functor (.of A)).mapIso c ≪≫
-      tildeFinsupp (ULift.{a} (Fin (Fintype.card I)))) ≪≫
-    (SheafOfModules.mapFreeIso F (ULift.{a} (Fin (Fintype.card I))) (Iso.refl _)).symm
-
-private theorem koszul_term_zero (A : Type a) [CommRing A] (r q : ℕ) (hq : r < q) :
-    Limits.IsZero (ModuleCat.of A (⋀[A]^q (Fin r →₀ A))) := by
-  classical
-  let b := (Finsupp.basisSingleOne : Module.Basis (Fin r) A (Fin r →₀ A)).exteriorPower q
-  have : IsEmpty (Set.powersetCard (Fin r) q) := ⟨fun s ↦ by
-    have h := Finset.card_le_univ s.val
-    have hs : s.val.card = q := s.property
-    simp only [Fintype.card_fin, hs] at h
-    omega⟩
-  have : Subsingleton (⋀[A]^q (Fin r →₀ A)) :=
-    b.repr.injective.subsingleton
-  exact ModuleCat.isZero_of_subsingleton _
 
 private theorem shifted_koszul_strictly_perfect (A : Type a) [CommRing A] (r : ℕ)
     (f : Fin r → A) (U : (Spec (.of A)).Opens) :
@@ -85,7 +51,8 @@ private theorem shifted_koszul_strictly_perfect (A : Type a) [CommRing A] (r : �
     · exact hpos n hp
     · obtain ⟨q, hq⟩ := hneg n (by omega)
       have hrq : r < q := by omega
-      exact (F.map_isZero (T.map_isZero (koszul_term_zero A r (q + 1) (by omega)))).of_iso
+      exact (F.map_isZero (T.map_isZero
+        (isZero_exteriorPower_finsupp_of_lt A r (q + 1) (by omega)))).of_iso
         (F.mapIso (T.mapIso (L.extendXIso ComplexShape.embeddingDownNat hq)))
   · intro n
     change ∃ m : ℕ, ∃ (ι : F.obj (T.obj
@@ -95,7 +62,7 @@ private theorem shifted_koszul_strictly_perfect (A : Type a) [CommRing A] (r : �
     by_cases hp : 0 < n
     · exact ⟨0, 0, 0, (hpos n hp).eq_of_src _ _⟩
     · obtain ⟨q, hq⟩ := hneg n (by omega)
-      obtain ⟨m, ⟨e⟩⟩ := koszul_term_free A r (q + 1) U
+      obtain ⟨m, ⟨e⟩⟩ := exists_tilde_exteriorPower_iso_free A r (q + 1) U
       let e' := F.mapIso (T.mapIso (L.extendXIso ComplexShape.embeddingDownNat hq)) ≪≫ e
       exact ⟨m, e'.hom, e'.inv, e'.hom_inv_id⟩
 
@@ -114,7 +81,7 @@ comparison identifies this strictly perfect model with the restricted derived ob
 This is the definition of perfectness. For `r = 0` all terms are zero; if `A` is the
 zero ring, the spectrum is empty and the pointwise conclusion is vacuous. -/
 theorem affine_perfect_koszul_principal_unit_perfect
-    (A : Type a) [CommRing A] (r : ℕ) (f : Fin r → A) (e : ℕ) (he : 1 ≤ e)
+    (A : Type a) [CommRing A] (r : ℕ) (f : Fin r → A) (e : ℕ)
     [HasDerivedCategory.{b}
       (SheafOfModules.{a} (moduleRings (Spec (.of A)).toRingedSpace))]
     [∀ U : (Spec (.of A)).Opens,
@@ -127,7 +94,6 @@ theorem affine_perfect_koszul_principal_unit_perfect
           _ _ _ _ (tilde.functor (.of A))
           ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj
           (shiftedKoszulComplex A r (fun i ↦ f i ^ e)))) := by
-  have _ := he
   classical
   let K := ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{a} A)
     (SheafOfModules.{a} (moduleRings (Spec (.of A)).toRingedSpace))

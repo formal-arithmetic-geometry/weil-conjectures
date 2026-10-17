@@ -31,7 +31,7 @@ namespace Algebra
  topology, is a regular local ring. Source: Stacks Project, More on Algebra, Tag 07EI
 (blueprint: lem-weil-pbc-fs-adic-field-regular-local).
 
-Proof (the six steps of the DAG node):
+Proof (the six steps of the blueprint node):
 1. Reduce to the prime field using lem-weil-pbc-char-zero-field-extension-formally-smooth
    or lem-weil-pbc-field-char-p-nilpotent-lifting. Lift the field map first and then the
    algebra map by def-weil-pbc-formally-smooth-adic. If the original map kills m^q,

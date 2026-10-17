@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
@@ -79,7 +79,7 @@ theorem koszulRegularImmersion_self_ext_conormal_local_iso
     let T := (Scheme.Modules.restrictFunctor V.ι).obj
       ((Scheme.Modules.tensorPullback i).obj G)
     let F := (Scheme.Modules.restrictFunctor V.ι).obj
-      (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf
+      (Scheme.Modules.dual (Scheme.Modules.exteriorPower
         ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n))
     ∀ z : V.toScheme, ∃ W : V.toScheme.Opens,
       z ∈ W ∧ Nonempty (F.over W ≅ T.over W) := by
@@ -92,7 +92,7 @@ theorem koszulRegularImmersion_self_ext_conormal_local_iso
     Γ(Y, U.1) (i.ker.ideal U) m f hreg hf
   obtain ⟨eC⟩ := (affine_conormal_frame i U m b).1
   obtain ⟨eE⟩ := (Scheme.Modules.exteriorSheaf_local_free_comparison Z C n W m eC).1
-  let E := Scheme.Modules.exteriorSheaf C n
+  let E := Scheme.Modules.exteriorPower C n
   let eF : (Scheme.Modules.dual E).over W ≅
       SheafOfModules.free (ULift.{u} (Set.powersetCard (Fin m) n)) :=
     SheafOfModules.overHomObjIso E (SheafOfModules.unit Z.ringCatSheaf) W ≪≫

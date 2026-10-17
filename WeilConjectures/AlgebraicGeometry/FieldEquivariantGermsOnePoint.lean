@@ -264,7 +264,6 @@ private theorem onePoint_field_model
   rw [← Spec.map_comp]
   exact congrArg (fun f : L →ₐ[K] Ω ↦ Spec.map (CommRingCat.ofHom f.toRingHom)) hσs.symm
 
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 /-- Source: Stacks Project, Tag 04JM, direct proof of lemma-global-sections-point,
 and Tag 03QW, section-galois-action-stalks.
@@ -307,19 +306,19 @@ theorem onePoint_selected_lift_section
     (X : (Spec (.of K)).Etale) [Subsingleton X.left] [Nonempty X.left] :
     let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
     ∀ (x₀ : p.fiber.obj X) (ρ : Gal(Ks/K) → p.sheafFiber.obj F → p.sheafFiber.obj F),
-      (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
-        (hτ : (algebraMap Ks Ω).comp g.toRingHom =
-          τ.toRingHom.comp (algebraMap Ks Ω))
-        (Y : (Spec (.of K)).Etale) (y y' : p.fiber.obj Y)
-        (hy : y'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ y.left)
-        (z : F.obj.obj (op Y)),
+      (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω),
+        (algebraMap Ks Ω).comp g.toRingHom =
+          τ.toRingHom.comp (algebraMap Ks Ω) →
+        ∀ (Y : (Spec (.of K)).Etale) (y y' : p.fiber.obj Y),
+        y'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ y.left →
+        ∀ (z : F.obj.obj (op Y)),
         ρ g (p.toPresheafFiber Y y F.obj z) = p.toPresheafFiber Y y' F.obj z) →
       ∀ (f : p.fiber.obj X → p.sheafFiber.obj F),
-        (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
-          (hτ : (algebraMap Ks Ω).comp g.toRingHom =
-            τ.toRingHom.comp (algebraMap Ks Ω))
-          (x x' : p.fiber.obj X)
-          (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left),
+        (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω),
+          (algebraMap Ks Ω).comp g.toRingHom =
+            τ.toRingHom.comp (algebraMap Ks Ω) →
+          ∀ (x x' : p.fiber.obj X),
+          x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left →
           f x' = ρ g (f x)) →
         ∃ z : F.obj.obj (op X),
           p.toPresheafFiber X x₀ F.obj z = f x₀ := by
@@ -427,7 +426,6 @@ theorem onePoint_selected_lift_section
   exact hw.trans ((he (etaleSpec K L) (lift L) zL).symm.trans
     ((congrArg e hzL).trans (e.apply_symm_apply (f x₀))))
 
-set_option linter.unusedVariables false in
 /-- Source: Stacks Project, Tags 02GL and 03QW.
 (blueprint: lem-exc-field-equivariant-germs-one-point-propagation).
 
@@ -451,19 +449,19 @@ theorem onePoint_propagate_from_selected_lift
     (X : (Spec (.of K)).Etale) [Subsingleton X.left] [Nonempty X.left] :
     let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
     ∀ (x₀ : p.fiber.obj X) (ρ : Gal(Ks/K) → p.sheafFiber.obj F → p.sheafFiber.obj F),
-      (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
-        (hτ : (algebraMap Ks Ω).comp g.toRingHom =
-          τ.toRingHom.comp (algebraMap Ks Ω))
-        (Y : (Spec (.of K)).Etale) (y y' : p.fiber.obj Y)
-        (hy : y'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ y.left)
-        (z : F.obj.obj (op Y)),
+      (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω),
+        (algebraMap Ks Ω).comp g.toRingHom =
+          τ.toRingHom.comp (algebraMap Ks Ω) →
+        ∀ (Y : (Spec (.of K)).Etale) (y y' : p.fiber.obj Y),
+        y'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ y.left →
+        ∀ (z : F.obj.obj (op Y)),
         ρ g (p.toPresheafFiber Y y F.obj z) = p.toPresheafFiber Y y' F.obj z) →
       ∀ (f : p.fiber.obj X → p.sheafFiber.obj F),
-        (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
-          (hτ : (algebraMap Ks Ω).comp g.toRingHom =
-            τ.toRingHom.comp (algebraMap Ks Ω))
-          (x x' : p.fiber.obj X)
-          (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left),
+        (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω),
+          (algebraMap Ks Ω).comp g.toRingHom =
+            τ.toRingHom.comp (algebraMap Ks Ω) →
+          ∀ (x x' : p.fiber.obj X),
+          x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left →
           f x' = ρ g (f x)) →
         ∀ (z : F.obj.obj (op X)),
           p.toPresheafFiber X x₀ F.obj z = f x₀ →
@@ -478,7 +476,6 @@ theorem onePoint_propagate_from_selected_lift
     _ = ρ g (f x₀) := congrArg (ρ g) hz
     _ = f x := (hf g τ hτ x₀ x hx).symm
 
-set_option linter.unusedVariables false in
 /-- (blueprint: lem-exc-field-equivariant-germs-one-point) -/
 theorem field_equivariant_germ_family_section_onePoint
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
@@ -488,19 +485,19 @@ theorem field_equivariant_germ_family_section_onePoint
     (X : (Spec (.of K)).Etale) [Subsingleton X.left] [Nonempty X.left] :
     let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
     ∀ (ρ : Gal(Ks/K) → p.sheafFiber.obj F → p.sheafFiber.obj F),
-      (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
-        (hτ : (algebraMap Ks Ω).comp g.toRingHom =
-          τ.toRingHom.comp (algebraMap Ks Ω))
-        (Y : (Spec (.of K)).Etale) (y y' : p.fiber.obj Y)
-        (hy : y'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ y.left)
-        (z : F.obj.obj (op Y)),
+      (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω),
+        (algebraMap Ks Ω).comp g.toRingHom =
+          τ.toRingHom.comp (algebraMap Ks Ω) →
+        ∀ (Y : (Spec (.of K)).Etale) (y y' : p.fiber.obj Y),
+        y'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ y.left →
+        ∀ (z : F.obj.obj (op Y)),
         ρ g (p.toPresheafFiber Y y F.obj z) = p.toPresheafFiber Y y' F.obj z) →
       ∀ (f : p.fiber.obj X → p.sheafFiber.obj F),
-        (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
-          (hτ : (algebraMap Ks Ω).comp g.toRingHom =
-            τ.toRingHom.comp (algebraMap Ks Ω))
-          (x x' : p.fiber.obj X)
-          (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left),
+        (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω),
+          (algebraMap Ks Ω).comp g.toRingHom =
+            τ.toRingHom.comp (algebraMap Ks Ω) →
+          ∀ (x x' : p.fiber.obj X),
+          x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left →
           f x' = ρ g (f x)) →
         ∃ z : F.obj.obj (op X), ∀ x : p.fiber.obj X,
           p.toPresheafFiber X x F.obj z = f x  := by

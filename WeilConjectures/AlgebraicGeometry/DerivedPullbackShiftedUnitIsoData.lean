@@ -9,8 +9,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Mathlib.CategoryTheory.Triangulated.Functor
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Noetherian
 
 @[expose] public section
 set_option autoImplicit false
@@ -19,6 +17,10 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Monoida
 namespace AlgebraicGeometry
 
 /-- Shifted-unit comparison needed for the K-flat counit data.
+
+This is a conditional lemma: the isomorphism `Lf^*(O_Y[1]) ≅ O_Z[1]` is obtained from the
+assumed instance `[Functor.Monoidal (derivedPullback f)]`, which supplies `Lf^*O_Y ≅ O_Z`.
+No such monoidal structure on `derivedPullback f` is constructed in the project yet.
 
 Source: Stacks Project, Tag 06YJ, translated-unit comparison.  The proof uses
 that a monoidal derived pullback carries the monoidal unit to the monoidal unit,
@@ -30,7 +32,7 @@ shift and the monoidal unitors.
 (blueprint: lem-sc-derived-pullback-shifted-unit-iso-data).
 -/
 theorem exists_derivedPullback_shifted_unit_iso
-    {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]
+    {Z Y : Scheme.{u}} (f : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [Functor.Monoidal (derivedPullback f)] :

@@ -35,6 +35,8 @@ Using functions out of the proposition makes negative degrees empty products. -/
 abbrev serreSectionPiece (z : ℤ) :=
   PLift (0 ≤ z) → Γ(G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) z, ⊤)
 
+/-- Each degree piece `serreSectionPiece k G z` is an additive commutative group, being a
+group of functions into the section group of `G ⊗ O(z)`. -/
 noncomputable instance serreSectionPieceAddCommGroup (z : ℤ) :
     AddCommGroup (serreSectionPiece k G z) := by
   unfold serreSectionPiece

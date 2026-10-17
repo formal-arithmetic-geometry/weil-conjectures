@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import Mathlib.Topology.LocallyConstant.Basic
 public import Mathlib.Algebra.Homology.HomologicalComplex
 
@@ -37,7 +37,7 @@ noncomputable def locallyRankedExteriorTerm {X : Scheme.{uE}} (M : X.Modules)
     (r : LocallyConstant X ℕ) (n : ℤ) : X.Modules :=
   if 0 ≤ n then
     (pushforward (exteriorRankOpen r n.toNat).ι).obj
-      (exteriorSheaf
+      (exteriorPower
         ((restrictFunctor (exteriorRankOpen r n.toNat).ι).obj M) n.toNat)
   else 0
 

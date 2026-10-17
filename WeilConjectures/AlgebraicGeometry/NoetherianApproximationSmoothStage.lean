@@ -57,7 +57,8 @@ theorem Scheme.NoetherianApproximation.exists_smooth_stage {S : Scheme.{u}}
     [QuasiSeparated p] (f : X ⟶ S) [Smooth f] (a : X ⟶ Y)
     (H : IsPullback a f p (N.π.app i)) :
     ∃ j : Over i, Smooth (pullback.snd p (N.D.map j.hom)) := by
-  apply Scheme.NoetherianApproximation.smooth_stage_of_affine_models N p f a H
-  exact Scheme.NoetherianApproximation.exists_smooth_affine_model N p f a H
+  obtain ⟨j, hj⟩ := Scheme.NoetherianApproximation.exists_smooth_affine_model N p f a H
+  exact Scheme.NoetherianApproximation.smooth_stage_of_affine_models N p
+    ⟨j, _, _, Iso.refl _, Category.id_comp _, hj⟩
 
 end AlgebraicGeometry

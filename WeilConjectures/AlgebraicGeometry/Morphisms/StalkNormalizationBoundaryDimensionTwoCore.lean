@@ -18,7 +18,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option linter.unusedVariables false in
 /-- Boundary points of the smooth pullback have stalk dimension at least two.
 Source: Stacks Project, Tags 0EYJ, 0337, 00LK, 033C and 00H8.
 (blueprint: new-stalk-normalization-boundary-dimension-two-target)
@@ -30,14 +29,11 @@ smooth, hence their composite is flat. The pullback is locally Noetherian,
 since it is locally of finite type over the spectrum of the Noetherian stalk.
 Apply the flat local depth formula to f.stalkMap y: the nonnegative fibre depth
 shows depth at y is at least depth at s, hence at least two. The depth-support
-bound for the stalk as a module over itself gives the Krull dimension bound.
-The hypotheses hS and hs are retained unchanged but are not needed once hdepth
-and hmin have been supplied. -/
+bound for the stalk as a module over itself gives the Krull dimension bound. -/
 theorem stalk_normalization_boundary_dimension_two_target {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]
-    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]
-    (U : S.Opens) (s : S) (hs : s ∉ U)
+    (U : S.Opens) (s : S)
     (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth
       (R := S.presheaf.stalk s) (S.presheaf.stalk s)) :

@@ -39,7 +39,7 @@ theorem finiteEtaleDescent_fullyFaithful {Y Y' : Scheme.{v}} (g : Y' ⟶ Y)
     [Surjective g] [Etale g]
     (F : Y.FiniteEtale ⥤ AlgebraicGeometry.FiniteEtaleDescentData g)
     (q : ∀ P : Y.FiniteEtale, (F.obj P).obj.V.left ⟶ P.obj.left)
-    (h : finiteEtaleDescentCompatible F q) : Nonempty F.FullyFaithful := by
+    (h : FiniteEtaleDescentCompatible F q) : Nonempty F.FullyFaithful := by
   apply (Functor.FullyFaithful.nonempty_iff_map_bijective F).mpr
   intro P Q
   obtain ⟨_, hp, htP⟩ := h.1 P

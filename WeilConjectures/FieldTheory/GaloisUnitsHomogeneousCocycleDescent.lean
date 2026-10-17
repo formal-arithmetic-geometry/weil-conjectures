@@ -17,6 +17,7 @@ Source: Stacks Project, Section 0DVG, inhomogeneous differential, and Mathlib's
 `TopRep.homogeneousCochains` and concrete `TopModuleCat` kernels and cokernels.
 (blueprint: lem-sc-galois-units-homogeneous-cocycle-equivalence)
 (blueprint: lem-sc-galois-units-homogeneous-cocycle-descent)
+(blueprint: lem-sc-galois-units-homogeneous-comparison)
 -/
 
 @[expose] public section
@@ -256,7 +257,8 @@ private theorem action_continuous : Continuous (fun p :
 
 private def explicitCocycleEquiv :
     {c : C(Gal(SeparableClosure K/K) × Gal(SeparableClosure K/K), galoisUnitsTopRep K) //
-      ∀ g h i, (galoisUnitsTopRep K).ρ g (c (h, i)) - c (g * h, i) + c (g, h * i) - c (g, h) = 0} ≃
+      ∀ g h i, (galoisUnitsTopRep K).ρ g (c (h, i)) - c (g * h, i) + c (g, h * i) -
+        c (g, h) = 0} ≃
         GaloisUnitsTwoCocycle K :=
     { toFun := fun c ↦ ⟨c.val, c.val.continuous, c.property⟩
       invFun := fun c ↦ ⟨⟨c.val, c.property.1⟩, c.property.2⟩
@@ -266,50 +268,118 @@ private def explicitCocycleEquiv :
 noncomputable abbrev GaloisUnitsHomogeneousCocycles (K : Type u) [Field K] : Type u :=
   ContinuousCohomology.cocycles (galoisUnitsTopRep K) 2
 
+/-- The degree-two cocycles of the homogeneous cochain complex, identified with the
+concrete kernel of the degree-two differential. -/
+private def cocyclesIso :
+    ContinuousCohomology.cocycles (galoisUnitsTopRep K) 2 ≅
+      (concreteData (galoisUnitsTopRep K)).K :=
+  (homogeneousCochains (galoisUnitsTopRep K)).cyclesIsoSc' 1 2 3 (by simp) (by simp) ≪≫
+    (concreteData (galoisUnitsTopRep K)).cyclesIso
+
+/-- The change of variables on concrete kernels, before passing to homology. -/
+private def concreteCocycleEquiv :
+    ((homogeneousCochains (galoisUnitsTopRep K)).d 2 3).hom.ker ≃ GaloisUnitsTwoCocycle K :=
+  (kernelEquiv _ (action_continuous K)).trans (explicitCocycleEquiv K)
+
 /-- The explicit change of variables identifies homogeneous degree-two cocycles with
-inhomogeneous continuous cocycles.
+inhomogeneous continuous cocycles: a homogeneous cocycle `f` goes to
+`c(g,h) = f(1,g,gh)` (see `galoisUnitsHomogeneousCocyclesEquivTwoCocycle_apply`).
 Proof: evaluate at `(1,g,gh)` and use `f(g₀,g₁,g₂) = g₀ • c(g₀⁻¹g₁,g₁⁻¹g₂)` for the inverse.
 The cocycle identity and continuity follow by direct substitution.
 (blueprint: lem-sc-galois-units-homogeneous-cocycle-equivalence) -/
-theorem nonempty_equiv_galoisUnitsHomogeneousCocycles_twoCocycle
-    (K : Type u) [Field K] :
-    Nonempty (GaloisUnitsHomogeneousCocycles K ≃ GaloisUnitsTwoCocycle K) := by
-  let A := galoisUnitsTopRep K
-  let e : ContinuousCohomology.cocycles A 2 ≅
-      TopModuleCat.of ℤ ((homogeneousCochains A).d 2 3).hom.ker :=
-    Limits.KernelFork.mapIsoOfIsLimit
-      ((homogeneousCochains A).cyclesIsKernel 2 3 (by simp))
-      (TopModuleCat.isLimitKer _) (Iso.refl _)
-  exact ⟨(((forget (TopModuleCat ℤ)).mapIso e).toEquiv).trans
-    ((kernelEquiv A (action_continuous K)).trans (explicitCocycleEquiv K))⟩
+@[no_expose] def galoisUnitsHomogeneousCocyclesEquivTwoCocycle :
+    GaloisUnitsHomogeneousCocycles K ≃ GaloisUnitsTwoCocycle K :=
+  ((forget (TopModuleCat ℤ)).mapIso (cocyclesIso K)).toEquiv.trans (concreteCocycleEquiv K)
 
-/-- A cochain equivalence descends through homology to the coboundary quotient.
-Proof: homology is algebraic kernel modulo image; the formulas carry the degree-one
- differential to the displayed coboundary, so quotient induction gives inverse maps.
-(blueprint: lem-sc-galois-units-homogeneous-cocycle-descent) -/
-theorem nonempty_equiv_galoisUnitsH2_twoCocycleClasses_of_cocycle_equiv
-    (K : Type u) [Field K]
-    (h : Nonempty (GaloisUnitsHomogeneousCocycles K ≃ GaloisUnitsTwoCocycle K)) :
-    Nonempty (GaloisUnitsH2 K ≃ GaloisUnitsTwoCocycleClasses K) := by
-  rcases h with ⟨_⟩
+private lemma cocyclesIso_hom_i :
+    (cocyclesIso K).hom ≫ (concreteData (galoisUnitsTopRep K)).i =
+      (homogeneousCochains (galoisUnitsTopRep K)).iCycles 2 := by
+  simp [cocyclesIso]
+
+/-- The inhomogeneous cocycle attached to a homogeneous cocycle `f` is
+`(g, h) ↦ f(1, g, gh)`. -/
+theorem galoisUnitsHomogeneousCocyclesEquivTwoCocycle_apply
+    (z : GaloisUnitsHomogeneousCocycles K) (g h : Gal(SeparableClosure K/K)) :
+    (galoisUnitsHomogeneousCocyclesEquivTwoCocycle K z).val (g, h) =
+      (((homogeneousCochains (galoisUnitsTopRep K)).iCycles 2).hom z).val 1 g (g * h) := by
+  have hz := congrArg (fun φ ↦ φ.hom z) (cocyclesIso_hom_i K)
+  simp only [TopModuleCat.hom_comp, ContinuousLinearMap.coe_comp, Function.comp_apply] at hz
+  erw [← hz]
+  rfl
+
+/-- The homogeneous degree-two cohomology model agrees with the explicit inhomogeneous
+continuous cocycle quotient. This is a comparison of two continuous cochain models and
+involves no etale sheaves or sheaf cohomology. The equivalence is induced by the change of
+variables `galoisUnitsHomogeneousCocyclesEquivTwoCocycle` on cocycles
+(see `galoisUnitsH2EquivTwoCocycleClasses_π`).
+
+Proof: the Krull topology on `G = Gal(SeparableClosure K/K)` is compact Hausdorff.
+A unit and its inverse lie in a finite separable extension; the fixing subgroup of its
+normal closure is open. Thus its orbit map is locally constant. Since the coefficient
+space is discrete, the action `G × M → M` is jointly continuous.
+The compact-open exponential law identifies the iterated maps in homogeneous cochains
+with jointly continuous functions on `G^(n+1)`. Send an equivariant homogeneous cochain
+`f` to `c(g₁,...,gₙ) = f(1,g₁,g₁g₂,...,g₁...gₙ)`. Its inverse sends `c` to
+`f(g₀,...,gₙ) = g₀ • c(g₀⁻¹g₁,...,gₙ₋₁⁻¹gₙ)`. The two formulas are inverse by
+homogeneous equivariance. All substitutions are continuous by continuity of group
+operations and of the coefficient action. The alternating omission differential
+transforms to the inhomogeneous differential: omitting the first coordinate gives
+`g₁ • c(g₂,...,gₙ₊₁)`; an interior omission multiplies two adjacent arguments; the last
+omission drops the last argument. Mathlib's recursively defined differential has these
+alternating omission terms, as follows by induction on the recursion.
+In degrees one and two these formulas give respectively
+`g • b(h) - b(gh) + b(g)` and
+`g • c(h,i) - c(gh,i) + c(g,hi) - c(g,h)`.
+The termwise equivalences therefore identify two-cocycles and one-coboundaries.
+TopModuleCat homology has underlying algebraic kernel modulo image, with the quotient
+topology. Forget that topology and descend the inverse cochain transformations to the
+quotients: equality there is exactly the continuous-coboundary relation in
+`galoisUnitsTwoCocycleSetoid`. These descended transformations are mutually inverse.
+
+Source: Stacks Project, Section 0DVG, inhomogeneous differential; the homogeneous
+change of variables and its compatibility are the explicit argument above.
+(blueprint: lem-sc-galois-units-homogeneous-cocycle-descent)
+(blueprint: lem-sc-galois-units-homogeneous-comparison) -/
+@[no_expose] def galoisUnitsH2EquivTwoCocycleClasses :
+    GaloisUnitsH2 K ≃ GaloisUnitsTwoCocycleClasses K :=
   let A := galoisUnitsTopRep K
   let D := concreteData A
   let eH : continuousCohomology 2 A ≅ D.H :=
     (homogeneousCochains A).homologyIsoSc' 1 2 3 (by simp) (by simp) ≪≫ D.homologyIso
-  let e := (kernelEquiv A (action_continuous K)).trans (explicitCocycleEquiv K)
   let eQ : (((homogeneousCochains A).d 2 3).hom.ker ⧸ D.f'.hom.range) ≃
       GaloisUnitsTwoCocycleClasses K :=
-    Quotient.congr e (by
+    Quotient.congr (concreteCocycleEquiv K) (by
       intro x y
       change D.f'.hom.range.quotientRel x y ↔
-        galoisUnitsTwoCocycleRel K (e x) (e y)
+        galoisUnitsTwoCocycleRel K (concreteCocycleEquiv K x) (concreteCocycleEquiv K y)
       rw [boundary_coordinates A (action_continuous K)]
       constructor
       · rintro ⟨b, hb⟩
         exact ⟨b, b.continuous, hb⟩
       · rintro ⟨b, hb, hrel⟩
         exact ⟨⟨b, hb⟩, hrel⟩)
-  exact ⟨(((forget (TopModuleCat ℤ)).mapIso eH).toEquiv).trans eQ⟩
+  (((forget (TopModuleCat ℤ)).mapIso eH).toEquiv).trans eQ
+
+/-- `galoisUnitsH2EquivTwoCocycleClasses` sends the class of a homogeneous cocycle to the
+class of the corresponding inhomogeneous cocycle. -/
+theorem galoisUnitsH2EquivTwoCocycleClasses_π (z : GaloisUnitsHomogeneousCocycles K) :
+    galoisUnitsH2EquivTwoCocycleClasses K
+        ((ContinuousCohomology.π (galoisUnitsTopRep K) 2).hom z) =
+      (Quotient.mk (galoisUnitsTwoCocycleSetoid K)
+        (galoisUnitsHomogeneousCocyclesEquivTwoCocycle K z) : GaloisUnitsTwoCocycleClasses K) := by
+  let A := galoisUnitsTopRep K
+  let D := concreteData A
+  have h : ContinuousCohomology.π A 2 ≫
+      ((homogeneousCochains A).homologyIsoSc' 1 2 3 (by simp) (by simp) ≪≫
+        D.homologyIso).hom = (cocyclesIso K).hom ≫ D.π := by
+    simp [cocyclesIso, A, D]
+  have hz := congrArg (fun φ ↦ φ.hom z) h
+  simp only [TopModuleCat.hom_comp, ContinuousLinearMap.coe_comp, Function.comp_apply] at hz
+  rw [galoisUnitsH2EquivTwoCocycleClasses]
+  dsimp only [Equiv.trans_apply, Iso.toEquiv_fun, Functor.mapIso_hom]
+  erw [hz]
+  rfl
+
 end
 
 end Field

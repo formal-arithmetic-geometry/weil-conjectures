@@ -14,7 +14,7 @@ import Mathlib.Topology.Algebra.ClopenNhdofOne
 # Open normal stabilizers of continuous functions on profinite groups
 
 Source: Stacks Project, etale-cohomology.tex, Tag 04JP,
-definition-G-module-continuous; the profinite compactness argument is supplied in the DAG
+definition-G-module-continuous; the profinite compactness argument is supplied in the blueprint
 (blueprint: lem-exc-coinduced-functions-open-stabilizer).
 -/
 
@@ -37,7 +37,8 @@ Step 2: an open subgroup of compact `G` has finite index. Intersecting the finit
 conjugates of `V` over representatives of `G / V` gives an open normal subgroup `U ⊆ V`, and
 the same right-invariance holds for `U`.
 
-Source: Stacks Project, etale-cohomology.tex, Tag 04JP, with the group argument supplied in the DAG.
+Source: Stacks Project, etale-cohomology.tex, Tag 04JP, with the group argument supplied in the
+    blueprint.
 -/
 theorem exists_openNormalSubgroup_right_invariant
     (G : ProfiniteGrp.{u}) (S : Type v) [TopologicalSpace S] [DiscreteTopology S]

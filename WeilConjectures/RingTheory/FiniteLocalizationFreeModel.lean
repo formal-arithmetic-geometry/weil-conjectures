@@ -144,7 +144,8 @@ theorem exists_finite_localization_free_model (A : Type u) [CommRing A]
         ∀ i : ℤ, b + 1 - (k : ℤ) ≤ i → IsIso (τ.f i) :=
     Classical.choose_spec (hnext k (seq k))
   choose τ hcomm hstable using htrans
-  obtain ⟨F, hF, hfin, α, hα⟩ := exists_model_of_stabilized_finite_free_tower A M r f b
+  obtain ⟨F, hF, hfin, α, hα⟩ :=
+    CochainComplex.exists_model_of_stabilized_finite_free_tower A M r f b
     (fun k ↦ (seq k).val.1) (fun k ↦ (seq k).val.2) τ
     (fun k ↦ (seq k).property.1) (fun k ↦ (seq k).property.2.2.1)
     hcomm hstable (fun k ↦ (seq k).property.2.2.2.1)

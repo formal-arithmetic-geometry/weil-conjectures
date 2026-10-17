@@ -124,7 +124,6 @@ private noncomputable def restricted_limit_iso {S : Scheme.{v}} {I : Type v}
         (DerivedCategory.Q.obj (restrictedAffineL D c H U).pt) :=
   eqToIso (restricted_limit_cohomology_eq D c H p U)
 
--- Retain the actual transition and cone isomorphism when transporting coherence.
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 private theorem exists_concrete_single_coherence {S : Scheme.{v}}
