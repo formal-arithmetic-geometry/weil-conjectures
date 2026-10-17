@@ -99,14 +99,14 @@ theorem cartesianChartCohomologyLift_exchange
       (pullback.snd f (D.obj i).hom))^*[AddCommGrpCat.{u + 1}]).obj
     (((pullback.fst f (D.obj i).hom)^*[AddCommGrpCat.{u + 1}]).obj F)
   let z := rawRestrictedCohomologyClass h q G V x
-  let z' := cartesianChartRestrictedRawClass f D c F q i V U r j x hl₂
+  let z' := cartesianChartRestrictedRawClass f D c F q i V j x hl₂
   have hm := chartRawAdj_classPullback (B := (D.obj i).left)
     (T := (D.obj j.left).left) (T' := c.pt.left) f (D.obj i).hom (D.map j.hom).left
     (D.obj j.left).hom (Over.w (D.map j.hom)).symm (c.π.app j.left).left
     (c.π.app i).left (congrArg (fun t ↦ t.left) (c.w j.hom)).symm c.pt.hom
     (Over.w (c.π.app i)).symm (Over.w (c.π.app j.left)).symm
     l hl₁ hl₂ wl F q V U r hr z z'
-    (cartesianChartRestrictedRawClass_eq f D c F q i V U r j x hl₂)
+    (cartesianChartRestrictedRawClass_eq f D c F q i V j x hl₂)
   have hR := cartesianChartRestrictedCohomologyMap_eval f D c F q i V U r hr j x hl₂
   let _ := isIso_rawRestrictedCohomologyComparison h q G V
   let e := asIso (rawRestrictedCohomologyComparison h q G V)

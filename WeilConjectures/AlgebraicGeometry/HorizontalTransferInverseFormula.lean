@@ -132,6 +132,7 @@ theorem horizontal_transfer_eq_of_inverse_formula
     simp only [horizontalMateAdjunction, restricted_unit_map, restricted_counit_map]
     simp only [horizontalMateComp, Functor.fullyFaithfulCancelRight_hom_app,
       Functor.map_preimage, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app]
+    rfl
   apply (cancel_epi (j.inv.app D)).mp
   rw [j.inv_hom_id_app]
   apply (schemeDerivedQCohProperty Z).fullyFaithfulι.map_injective
