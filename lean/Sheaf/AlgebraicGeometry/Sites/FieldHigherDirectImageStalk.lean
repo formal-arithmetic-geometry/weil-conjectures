@@ -10,13 +10,10 @@ public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Sheaf.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal
+import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
-import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
-import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
+import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationField
 import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
-import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
@@ -35,13 +32,53 @@ open AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Etale
 
+set_option backward.isDefEq.respectTransparency false in
 private lemma isUniversalHomeomorphism_field_strictHenselizationEval
     {K : Type u} [Field K] (L : Type u) [Field L] [Algebra K L]
     [IsAlgClosure K L] [IsAlgClosed L] :
     IsUniversalHomeomorphism
       (Spec.map (strictHenselizationEval
         (Spec.map (CommRingCat.ofHom (algebraMap K L))))) := by
-  sorry
+  exact AlgebraicGeometry.Scheme.isUniversalHomeomorphism_spec_strictHenselizationEval
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private lemma strictHenselizationComparison_over
+    {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (s : Spec (.of Ω) ⟶ S) :
+    Spec.map (smallStrictHenselizationColimitIso s).hom ≫
+      strictHenselizationStructuralMap s = strictLocalizationToBase s := by
+  classical
+  let N := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse
+  let F := N ⋙ strictHenselizationAffineInclusion s
+  have := strictHenselizationAffineInclusion_isEquivalence s
+  have := (strictHenselization_properties s).2.1
+  let j := Classical.choice (IsCofiltered.nonempty
+    (C := SmallModel.{u} (strictHenselizationNeighbourhoods s)))
+  rw [← strictHenselizationStructuralMap_eq s j]
+  let : HasColimit (strictHenselizationDiagram s) := inferInstance
+  have hι : colimit.ι (strictHenselizationAffineDiagram s) (Opposite.op j) ≫
+      (smallStrictHenselizationColimitIso s).hom =
+      colimit.ι (strictHenselizationDiagram s) (Opposite.op (F.obj j)) := by
+    exact Functor.Final.ι_colimitIso_hom F.op (strictHenselizationDiagram s) (Opposite.op j)
+  have hleg : Spec.map (smallStrictHenselizationColimitIso s).hom ≫
+      (strictHenselizationCone s).π.app (Opposite.op (Opposite.op j)) =
+      Spec.map (colimit.ι (strictHenselizationDiagram s) (Opposite.op (F.obj j))) := by
+    change Spec.map (smallStrictHenselizationColimitIso s).hom ≫
+      Spec.map (colimit.ι (strictHenselizationAffineDiagram s) (Opposite.op j)) = _
+    rw [← Spec.map_comp, hι]
+  rw [← Category.assoc, hleg]
+  have hup := strictLocalizationCone_π_app_hom s (F.obj j)
+  rw [strictLocalizationCone_π_app] at hup
+  have heq : inv ((affineNeighborhoodDiagram s).obj (F.obj j)).toSpecΓ =
+      Spec.map (ΓSpecIso (N.obj j).1.left.unop).inv := by
+    change inv (Spec (N.obj j).1.left.unop).toSpecΓ = _
+    exact Scheme.isoSpec_Spec_inv _
+  rw [heq, Category.assoc] at hup
+  change Spec.map (colimit.ι (strictHenselizationDiagram s) (Opposite.op (F.obj j))) ≫
+    Spec.map (ΓSpecIso (N.obj j).1.left.unop).inv ≫
+      ((AffineEtale.Spec S).obj (N.obj j).1).hom = strictLocalizationToBase s at hup
+  exact hup
 
 set_option backward.isDefEq.respectTransparency false in
 private lemma nonempty_addEquiv_strictLocalization
@@ -70,6 +107,7 @@ private lemma nonempty_addEquiv_strictLocalization
     terminalIsTerminal q G
   exact ⟨(e₁ ≪≫ e₂ ≪≫ e₃ ≪≫ e₄ ≪≫ e₅).addCommGroupIsoToAddEquiv⟩
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Over a field, the geometric stalk of a higher direct image is the cohomology
 of the base change to the chosen algebraic closure.
 
@@ -100,6 +138,34 @@ theorem nonempty_addEquiv_sheafFiber_rightDerived_lowerStar_of_isAlgClosure
           (((lowerStar AddCommGrpCat.{u + 1} a).rightDerived q).obj F)) ≃+
         Sheaf.H ((upperStar AddCommGrpCat.{u + 1}
           (pullback.fst a (Spec.map (CommRingCat.ofHom (algebraMap K L))))).obj F) q) := by
-  sorry
+  let A := AddCommGrpCat.{u + 1}
+  let s := Spec.map (CommRingCat.ofHom (algebraMap K L))
+  let σ := strictHenselizationStructuralMap s
+  let h : Spec (.of L) ⟶ strictHenselizationScheme s :=
+    Spec.map (strictHenselizationEval s) ≫
+      Spec.map (smallStrictHenselizationColimitIso s).hom
+  have hh : h ≫ σ = s := by
+    dsimp only [h, σ]
+    rw [Category.assoc, strictHenselizationComparison_over]
+    exact spec_map_strictHenselizationEval_comp_strictLocalizationToBase s
+  have : IsUniversalHomeomorphism (Spec.map (strictHenselizationEval s)) :=
+    isUniversalHomeomorphism_field_strictHenselizationEval (K := K) L
+  have : IsUniversalHomeomorphism h := by dsimp only [h]; infer_instance
+  let g : pullback a s ⟶ pullback a σ :=
+    pullback.lift (pullback.fst a s) (pullback.snd a s ≫ h) (by
+      rw [Category.assoc, hh, pullback.condition])
+  have hg : IsPullback g (pullback.snd a s) (pullback.snd a σ) h := by
+    apply IsPullback.of_right (t := IsPullback.of_hasPullback a σ)
+    · simpa only [g, pullback.lift_fst, hh] using IsPullback.of_hasPullback a s
+    · exact pullback.lift_snd _ _ _
+  have : IsUniversalHomeomorphism g := MorphismProperty.of_isPullback hg.flip inferInstance
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian a
+  have : QuasiSeparated a := inferInstance
+  obtain ⟨e₁⟩ := nonempty_addEquiv_strictLocalization a L s F hF q
+  let e₂ := cohomologyEquiv g ((upperStar A (pullback.fst a σ)).obj F) q
+  let e₃ := (Sheaf.functorH (pullback a s).smallEtaleTopology q).mapIso
+    ((upperStarComp A g (pullback.fst a σ) (pullback.fst a s)
+      (by simp [g])).symm.app F)
+  exact ⟨e₁.trans (e₂.trans e₃.addCommGroupIsoToAddEquiv)⟩
 
 end AlgebraicGeometry.Etale
