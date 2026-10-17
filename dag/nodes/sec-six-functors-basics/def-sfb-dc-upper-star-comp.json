@@ -22,27 +22,34 @@
  ],
  "proof": [
   {
-   "text": "Construct the ambient comparison on the same module-object categories as the item. Write $L_h$ for the ambient $Lh^*$. Abelian sheaves are sheaves of modules over the constant integer sheaf: on constant integer sections the action is repeated addition, and sections of the sheafified constant integer presheaf act by gluing these local actions. The sheaf gluing axiom gives existence and uniqueness of this action, so it adds no data to an abelian sheaf or its morphisms. By [def-weil-sheaf-of-modules-category] these sheaf categories are abelian; in particular equalizers and coequalizers are kernels and cokernels of differences. For $h=f,g,g\\circ f$, [sk-def-sfb-module-pushforward-pullback] gives $h^*=\\operatorname{Ext}_{\\alpha_h}\\operatorname{mapMod}(h^*_{\\Ab})$ with $\\alpha_h$ invertible. Apply [lem-sfb-finite-upper-star-exact] with coefficient category $\\Ab$ to obtain exactness of $h^*_{\\Ab}$. The sheaf tensor of [sk-def-sfb-sheaf-tensor] is closed symmetric monoidal and right exact in each variable. Each tensor functor preserves finite coproducts; between abelian categories this implies additivity, since addition of maps is expressed using diagonal and codiagonal maps of biproducts. Hence the tensor hypotheses of [det-prop-sfb-module-pullback-exact-lifted] hold for the coefficient rings $\\Lambda_S$, $h^*\\Lambda_S$ and $\\Lambda_T$, where $h:T\\to S$. By [sk-def-sfb-transport] (1), $\\operatorname{mapMod}(h^*_{\\Ab})$ commutes with forgetful functors, so the lifting lemma with $F=h^*_{\\Ab}$ makes it exact. By [sk-def-sfb-change-of-scalars] (4)--(5), $\\operatorname{Ext}_{\\alpha_h}\\cong\\operatorname{Res}_{\\alpha_h^{-1}}$ and this restriction is exact. Its hypotheses hold because the abelian sheaf categories have equalizers and coequalizers and their closed symmetric tensor preserves colimits. Thus $h^*$, a composite of exact functors, is exact. Thus [sk-def-sfb-derived-categories], Exact functors, identifies $L_h$ with $D(h^*)$, the functor induced termwise; these termwise functors therefore invert quasi-isomorphisms. Let $a:(g\\circ f)^*\\xrightarrow{\\sim}f^*g^*$ be [def-sfb-module-upper-star-comp]. On a complex $K^\\bullet$ use $a_{K^n}$ in degree $n$: naturality of $a$ with respect to $d^n$ makes this a chain isomorphism, and naturality with respect to each degree of a complex map makes it a natural isomorphism of complex functors. Localize it in the target. Apply [lem-weil-pbc-localization-universal-property] (2) with source the complexes of $\\Mod_{\\Lambda_Z}$, $W$ the quasi-isomorphisms, localization $Q_Z$, and target $D(\\Mod_{\\Lambda_X})$. Take the two descended functors to be $L_{g\\circ f}$ and $L_fL_g$, using their exact-functor termwise comparisons. For $h:T\\to S$ write $\\psi_h:L_hQ_S\\xrightarrow{\\sim}Q_T\\operatorname{CoCh}(h^*)$ for its canonical exact-functor comparison. Set $\\phi_1=\\psi_{g\\circ f}$ and $\\phi_{2,K}=\\psi_{f,\\operatorname{CoCh}(g^*)K}\\circ L_f(\\psi_{g,K})$, so $\\phi_2:L_fL_gQ_Z\\xrightarrow{\\sim}Q_X\\operatorname{CoCh}(f^*g^*)$. Then descent gives the unique $c:L_{g\\circ f}\\xrightarrow{\\sim}L_fL_g$ satisfying $c_{Q_ZK}=\\phi_{2,K}^{-1}\\circ Q_X(a_{K^\\bullet})\\circ\\phi_{1,K}$. Its inverse is the descent of $a^{-1}$, since descent preserves compositions and identities. This is precisely the ambient composition comparison, normalized by the ordinary module pullback comparison on complexes.",
+   "text": "For each $h=f,g,g\\circ f$, [det-prop-sfb-module-pullback-exact-main] gives that the underived module-object pullback $h^*$ is additive and exact. The derived pullback $L_h$ of [sk-def-sfb-module-derived-pushpull] is the total left derived functor of $h^*$ computed on K-flat resolutions, so the existence hypotheses of the left-derived clause of [sk-def-sfb-derived-categories] are in force; by its exact-functor clause $L_h$ is identified with the termwise functor $D(h^*)$. Since $h^*$ is exact, $\\operatorname{CoCh}(h^*)$ preserves quasi-isomorphisms, so the localized termwise functor inverts them.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "sk-def-sfb-module-pushforward-pullback",
-    "lem-sfb-finite-upper-star-exact",
-    "sk-def-sfb-sheaf-tensor",
-    "det-prop-sfb-module-pullback-exact-lifted",
-    "sk-def-sfb-transport",
-    "sk-def-sfb-change-of-scalars",
+    "det-prop-sfb-module-pullback-exact-main",
     "sk-def-sfb-derived-categories",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.proof.md",
+    "place": "Conclusion: exactness of module-object pullback; literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-main.md"
+   }
+  },
+  {
+   "text": "Let $a:(g\\circ f)^*\\xrightarrow{\\sim}f^*g^*$ be [def-sfb-module-upper-star-comp]. The node [prop-sfb-module-left-derived-upper-star-comp] gives the ambient comparison $c:L_{g\\circ f}\\xrightarrow{\\sim}L_fL_g$ induced by $a$. Explicitly, if $Q_S$ denotes the derived localization and $\\psi_h:L_hQ_S\\xrightarrow{\\sim}Q_T\\operatorname{CoCh}(h^*)$ is the exact-functor comparison, then [lem-weil-pbc-localization-universal-property] descends the degreewise chain isomorphism $a_{K^n}$ to the unique transformation with $c_{Q_ZK}=L_f(\\psi_{g,K})^{-1}\\circ \\psi_{f,\\operatorname{CoCh}(g^*)K}^{-1}\\circ Q_X(a_{K^\\bullet})\\circ\\psi_{g\\circ f,K}$. Its inverse is the descent of $a^{-1}$, since descent preserves identities and compositions.",
+   "uses": [
     "def-sfb-module-upper-star-comp",
+    "prop-sfb-module-left-derived-upper-star-comp",
     "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/_section.md",
-    "place": "Clause 4 using clause 3; exactness expanded by det-prop-sfb-module-pullback-exact-main.proof.md, Setting, Transport, Extension of scalars and Conclusion; descent of transformations by the cited localization node (Stacks 04VG, lemma-properties-left-localization, for functor descent)."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/prop-sfb-module-left-derived-upper-star-comp.proof.md",
+    "place": "Levelwise comparison and transport to derived categories; literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/sk-prop-sfb-module-derived-factorization.proof.md",
+    "note": "The displayed component formula follows the localization node and the exact-functor comparisons."
    }
   },
   {
-   "text": "Write $L_h^c$ for the restricted functors and $\\iota_T:D_{\\mathrm{cons}}(T,\\Lambda)\\hookrightarrow D(\\Mod_{\\Lambda_T})$ for the inclusions. By [def-sfb-dc-upper-star], for $h:T\\to S$ the restriction comes with its inclusion comparison $e_h:\\iota_TL_h^c\\xrightarrow{\\sim}L_h\\iota_S$ (an equality in the strict restriction model). Paste these comparisons with $c$ from step 1 to obtain\n$$A:\\iota_XL_{g\\circ f}^c\\xrightarrow{e_{g\\circ f}}L_{g\\circ f}\\iota_Z\\xrightarrow{c\\iota_Z}L_fL_g\\iota_Z\\xrightarrow{L_fe_g^{-1}}L_f\\iota_YL_g^c\\xrightarrow{e_f^{-1}L_g^c}\\iota_XL_f^cL_g^c.$$\nEach arrow is a natural isomorphism, so their componentwise composite is one. All objects lie in the indicated domains because the restricted pullbacks of the cited definition are defined for every morphism of the setting and every commutative condensed $\\Lambda$.",
+   "text": "Write $L_h^c$ for the restricted functors and $\\iota_T:D_{\\mathrm{cons}}(T,\\Lambda)\\hookrightarrow D(\\Mod_{\\Lambda_T})$ for the inclusions. By [def-sfb-dc-upper-star], for $h:T\\to S$ the restriction comes with its inclusion comparison $e_h:\\iota_TL_h^c\\xrightarrow{\\sim}L_h\\iota_S$ (an equality in the strict restriction model). Paste these comparisons with $c$ from step 2 to obtain\n$$A:\\iota_XL_{g\\circ f}^c\\xrightarrow{e_{g\\circ f}}L_{g\\circ f}\\iota_Z\\xrightarrow{c\\iota_Z}L_fL_g\\iota_Z\\xrightarrow{L_fe_g^{-1}}L_f\\iota_YL_g^c\\xrightarrow{e_f^{-1}L_g^c}\\iota_XL_f^cL_g^c.$$\nEach arrow is a natural isomorphism, so their componentwise composite is one. All objects lie in the indicated domains because the restricted pullbacks of the cited definition are defined for every morphism of the setting and every commutative condensed $\\Lambda$.",
    "uses": [
     "def-sfb-dc-upper-star"
    ],
@@ -53,7 +60,7 @@
    }
   },
   {
-   "text": "By [sk-def-sfb-bounded-constructible], morphisms between bounded constructible objects are exactly their ambient derived morphisms, with the same identities and composition. For each $K\\in D_{\\mathrm{cons}}(Z,\\Lambda)$ define $c^c_K:L_{g\\circ f}^cK\\to L_f^cL_g^cK$ to be the very morphism $A_K$, now read in this full subcategory; define its inverse to be $A_K^{-1}$ in the same way. The two inverse equations hold because their images are the ambient inverse equations and the Hom sets are unchanged. For every $u:K\\to K'$, the naturality equation for these components is exactly the naturality equation for $A$ on $u$ in $D_{\\mathrm{cons}}(Z,\\Lambda)$, again in the same Hom set. Hence $c^c$ is a natural isomorphism and its image under $\\iota_X$ is $A$.",
+   "text": "By [sk-def-sfb-bounded-constructible], morphisms between bounded constructible objects are exactly their ambient derived morphisms, with the same identities and composition. For each $K\\in D_{\\mathrm{cons}}(Z,\\Lambda)$ define $c^c_K:L_{g\\circ f}^cK\\to L_f^cL_g^cK$ to be the morphism $A_K$, now read in this full subcategory; define its inverse to be $A_K^{-1}$ in the same way. The two inverse equations hold because their images are the ambient inverse equations and the Hom sets are unchanged. For every $u:K\\to K\\prime$, the naturality equation for these components is exactly the naturality equation for $A$ on $u$ in $D_{\\mathrm{cons}}(Z,\\Lambda)$, again in the same Hom set. Hence $c^c$ is a natural isomorphism and its image under $\\iota_X$ is $A$.",
    "uses": [
     "sk-def-sfb-bounded-constructible"
    ],
@@ -64,7 +71,7 @@
    }
   },
   {
-   "text": "If $b$ is another natural isomorphism with the specified ambient image, then for every $K$ its component $b_K$ and $c^c_K$ have the same image $A_K$. The inclusion is the identity on the Hom sets by [sk-def-sfb-bounded-constructible], so $b_K=c^c_K$ for every $K$; componentwise equality gives $b=c^c$. Define the composition isomorphism to be $c^c$. Under the inclusion comparisons $e_h$ of step 2 its ambient image is $c$ of step 1, exactly as required.",
+   "text": "If $b$ is another natural isomorphism with the specified ambient image, then for every $K$ its component $b_K$ and $c^c_K$ have the same image $A_K$. The inclusion is the identity on the Hom sets by [sk-def-sfb-bounded-constructible], so $b_K=c^c_K$ for every $K$; componentwise equality gives $b=c^c$. Define the composition isomorphism to be $c^c$. Under the inclusion comparisons $e_h$ of step 3 its ambient image is $c$ of step 2, exactly as required.",
    "uses": [
     "sk-def-sfb-bounded-constructible"
    ],
@@ -78,16 +85,12 @@
  "proof_deps": [
   "def-sfb-dc-upper-star",
   "def-sfb-module-upper-star-comp",
-  "def-weil-sheaf-of-modules-category",
-  "det-prop-sfb-module-pullback-exact-lifted",
-  "lem-sfb-finite-upper-star-exact",
+  "det-prop-sfb-module-pullback-exact-main",
   "lem-weil-pbc-localization-universal-property",
+  "prop-sfb-module-left-derived-upper-star-comp",
   "sk-def-sfb-bounded-constructible",
-  "sk-def-sfb-change-of-scalars",
   "sk-def-sfb-derived-categories",
-  "sk-def-sfb-module-pushforward-pullback",
-  "sk-def-sfb-sheaf-tensor",
-  "sk-def-sfb-transport"
+  "sk-def-sfb-module-derived-pushpull"
  ],
  "proof_origin": {
   "by": "agent",
@@ -227,10 +230,31 @@
    "results": "22 hits, including FullyFaithful.lean:372,378,384; DerivedCategory/ExactFunctor.lean:47,66,68,101,131; Abelian/LeftDerived.lean:208,229 and Functor/Derived/LeftDerived.lean:122. Read FullyFaithful.lean:365-387 and DerivedCategory/ExactFunctor.lean:1-90. These are generic cancellation, induced exact functors and natural-transformation composition tools; none states the entire geometric restricted comparison.",
    "date": "2026-10-16",
    "verdict": "candidate only: generic tools, not the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition isomorphism of derived pullbacks restricted to bounded constructible module objects over a commutative condensed ring",
+   "results": "SheafOfModules.pullbackComp, conjugateEquiv_pullbackComp_inv and PresheafOfModules.pullbackComp; read PullbackContinuous.lean:150–182. These are ordinary sheaf-module comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match: neither derived module objects nor bounded constructible restrictions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fullyFaithfulCancelRight\"",
+   "results": "Functor.fullyFaithfulCancelRight and component formulas; read Mathlib/CategoryTheory/Functor/FullyFaithful.lean:365–387.",
+   "date": "2026-10-17",
+   "verdict": "candidate only: generic categorical lifting, not the entire item"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructibleUpperStarComp|condensedRingObj",
+   "results": "zero hits in Mathlib.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -246,23 +270,15 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-dc-restricted-functors",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "def-sfb-dc-upper-star-comp",
   "worker": "stage1",
-  "summary": "Kept the definition verbatim. Named its setting, coefficient ring, full subcategory and ambient ordinary-composition notions. Replaced the imported uncited/missing ambient-factorization dependency by a construction from existing exactness, ordinary module composition and localization statements, then pasted the restriction comparisons and proved existence and uniqueness directly on the unchanged Hom sets. No new nodes and no assertion that the upstream master construction is finished. Second reading supplies the omitted exactness citations and checks their tensor and scalar-change hypotheses; the localized component formula fixes the ambient normalization explicitly. Fresh second reading also cites the abelian-sheaf category structure and corrects the domain of the step-3 naturality check. Current independent reading spells out the constant-integer sheaf action by gluing and tensor additivity from finite coproduct preservation, and rechecks all thirteen citation pairs.",
-  "blueprint": "Realizes the entire proof of def-sfb-dc-upper-star-comp: ambient comparison and inclusion pasting, then unique preimage through the full subcategory. The unit sk-def-sfb-dc-restricted-functors last bullet names this structure.",
+  "summary": "Repaired the returned split without changing the definition. The previous 3359-character ambient step hid exactness and derived-composition lemmas, so I added two statement-only nodes matching the current blueprint: exactness of module-object pullback and the ambient derived pullback composition comparison. The item now has five short steps: exactness and termwise derivation, explicit localized ambient comparison, restriction pasting, full-subcategory existence, and uniqueness. All citations and dependencies were refreshed; no Lean declaration exists in the designated attachment checkout.",
+  "blueprint": "Realizes the entire proof of def-sfb-dc-upper-star-comp. The new exactness node realizes the ambient-factorization exactness clause, and the new derived-composition node realizes its levelwise/localization clause; the remaining steps realize the restricted-functors proof.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-localization-universal-property",
-    "why": "Generic descent of a natural isomorphism to the derived localization, used to expand the ambient composition comparison explicitly; it does not replace the unit route of restricting the ambient map."
-   },
-   {
-    "node": "det-prop-sfb-module-pullback-exact-lifted",
-    "why": "Generic criterion that a functor of module objects lying over an exact functor is exact; supplies the elementary transport-exactness input along the blueprint ambient-factorization route. Requested as a tool for maintainer review; no maintainer-owned tool_uses field is set."
-   },
-   {
-    "node": "def-weil-sheaf-of-modules-category",
-    "why": "Generic abelianness of sheaves of modules, specialized to the constant integer sheaf to check the ambient abelian-sheaf categories in the exactness-lifting and change-of-scalars criteria; does not change the unit route."
+    "why": "Generic descent of transformations through derived localization, retaining the original ambient comparison normalization."
    }
   ]
  },
@@ -272,12 +288,12 @@
   "def-weil-sheaf-of-modules-category"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q60-7b29edc0a",
-  "group": "Q60",
+  "reviewer": "NT-cc-Q108-412d98057",
+  "group": "Q108",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q60-7b29edc0a (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, sources and route in full. Verified exactness hypotheses, condensed module-object coefficients, derived normalization, inclusion-map directions and uniqueness; tested edge cases. No new nodes or repairs. Accepted the three declared generic tool uses. Detailed checks are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-412d98057 (reviewer sub-agent of L); spot-checked: Verdict FIX: I read the whole delivery and the mathematics is sound. I made three small citation fixes and dropped no node. (1) Item: the item statement is unchanged and matches the blueprint def-sfb-dc-upper-star-comp. Step 2 checks out against the localization lemma (2): it uses F1 = Q_X CoCh((gf)^*) with φ1 = ψ_gf, F2 = Q_X CoCh(f^*)CoCh(g^*) with φ2 = ψ_f ∘ L_f ψ_g, and τ = Q(a). The displayed formula and the order of its factors are correct, and it matches the blueprint proof 1708 (L≅D transport) by naturality of ψ_f. In step 3 the pasting directions are correct. Steps 4–5 (lift through the full subcategory and uniqueness from equal Hom sets) are elementary from sk-def-sfb-bounded-constructible. (2) Both new statements match their blueprint nodes. det-prop-sfb-module-pullback-exact-main is true: f^*_Ab is exact, the forgetful functor creates finite limits and colimits, and α_f is an isomorphism; I tested f = id and Λ = 0. prop-sfb-module-left-derived-upper-star-comp is the referent of the item's 'ambient composition isomorphism'. Neither new node restates a clause of the item, and neither is circular. (3) No duplicates: I searched the whole DAG. The closest nodes are det-prop-sfb-module-pullback-exact-lifted (a generic ingredient), lem-sfb-finite-upper-star-exact (abelian sheaves only), and def-weil-pbc-ambient-ringed-exchange (a different coefficient category: sheaves of rings R_T, which I did not identify with module objects over Λ_X). (4) Fixes in fixes/dag/nodes/sec-six-functors-basics/: item step 1 now cites sk-def-sfb-module-derived-pushpull, where L_h is defined, and its wording about inverting quasi-isomorphisms is corrected; the ambient comparison node gets back the dropped citation [sk-def-sfb-module-derived-pushpull] for Lf^*; det-main now cites def-weil-pbc-additive-functor and def-galois-exact-functor (B3). (5) I accept the declared tool use of lem-weil-pbc-localization-universal-property (status mathlib, a generic descent). The maintainer should prune the stale node tool_uses det-prop-sfb-module-pullback-exact-lifted and def-weil-sheaf-of-modules-category at the merge. No SGA is cited. Details are in review.md.; 3 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

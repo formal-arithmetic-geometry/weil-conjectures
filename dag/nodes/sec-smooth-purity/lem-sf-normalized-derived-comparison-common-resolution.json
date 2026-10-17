@@ -15,9 +15,58 @@
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-sf-kinjective-derived-map-computation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-exact-functor-derived-factorization], $r(u)$ is a quasi-isomorphism. Thus $w=v\\circ r(u)$ is a quasi-isomorphism with K-injective target $T$, so is a K-injective resolution. Write $q=Q_{\\mathcal A'}u$ and $a=Q_{\\mathcal A}(r(u))$; the localization identifications identify $a$ with $r(q)$. The defining formula for resolution identifications in [lem-sf-kinjective-derived-map-computation], applied to $F$ with resolutions $v,w$ and to $G$ with resolution $u$, gives\n$$c^F_w=(\\eta^F_T)^{-1}RF(Q_{\\mathcal A}w)=c^F_v\\circ RF(a),\\qquad c^G_u=(\\eta^G_J)^{-1}\\circ RG(q).$$\nAll these maps are isomorphisms: $q,a$ are localized quasi-isomorphisms, $T,J$ are K-injective, and the cited lemma gives invertibility of their derived units. In particular\n$$(c^F_w)^{-1}=RF(a)^{-1}\\circ(c^F_v)^{-1}.$$",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), via the cited K-injective computation lemma; explicit naturality and cancellation argument by Q112."
+   }
+  },
+  {
+   "text": "Naturality of the supplied natural isomorphism $\\beta$ at $q$ says\n$$s(RG(q))\\circ\\beta_{Q_{\\mathcal A'}N}=\\beta_{Q_{\\mathcal A'}J}\\circ RF(a).$$\nSubstitute the two formulas from step 1 and use functoriality of $s$, associativity, and $RF(a)\\circ RF(a)^{-1}=1$. This gives the explicit equality\n$$\\begin{aligned}s(c^G_u)\\circ\\beta_{Q_{\\mathcal A'}N}\\circ(c^F_w)^{-1}\n&=(s\\eta^G_J)^{-1}\\circ s(RG(q))\\circ\\beta_{Q_{\\mathcal A'}N}\\circ RF(a)^{-1}\\circ(c^F_v)^{-1}\\\\\n&=(s\\eta^G_J)^{-1}\\circ\\beta_{Q_{\\mathcal A'}J}\\circ(c^F_v)^{-1}.\n\\end{aligned}$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), via the cited K-injective computation lemma; explicit naturality and cancellation argument by Q112."
+   }
+  },
+  {
+   "text": "The complex $J$ is K-injective and $v:rJ\\to T$ is the chosen K-injective resolution, exactly the two hypotheses in the supplied normalization. That normalization identifies the last expression of step 2 with $Q_{\\mathcal B}(Fv)^{-1}$. Its target is $Q_{\\mathcal B}(F(rJ))=Q_{\\mathcal B}(sGJ)$ because $Fr=sG$ on complexes. This proves the displayed assertion for the arbitrary pair $u,v$; no K-injectivity of $rJ$ was used. Invertibility of $Q_{\\mathcal B}(Fv)$ is used only as the explicit normalization hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), via the cited K-injective computation lemma; explicit naturality and cancellation argument by Q112."
+   }
+  },
+  {
+   "text": "To check the last compatibility clause, take two choices $u_i:N\\to J_i$, $v_i:rJ_i\\to T_i$, and put $w_i=v_i r(u_i)$ and $L_i=s(c^G_{u_i})\\beta_{Q_{\\mathcal A'}N}(c^F_{w_i})^{-1}$ for $i=1,2$. By the resolution-transition clause of [lem-sf-kinjective-derived-map-computation], the canonical changes at the source and target are respectively\n$$d_F=c^F_{w_2}(c^F_{w_1})^{-1},\\qquad d_G=s(c^G_{u_2}(c^G_{u_1})^{-1}).$$\nAssociativity and cancellation give $L_2=d_G\\circ L_1\\circ d_F^{-1}$. Since step 3 identifies $L_i=Q_{\\mathcal B}(Fv_i)^{-1}$, this is precisely the compatibility of the asserted arrows with both canonical changes of resolution. The cited lemma gives the cocycle identities for these changes, so the same equation is consistent for three or more choices.",
+   "uses": [
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), via the cited K-injective computation lemma; explicit naturality and cancellation argument by Q112."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sf-kinjective-derived-map-computation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 070Y (lemma-K-injective-defined), via lem-sf-kinjective-derived-map-computation; the arbitrary-resolution comparison formula is proved by the explicit naturality and cancellation calculation, not quoted as a Stacks lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +102,45 @@
    "results": "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality; CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc",
    "date": "2026-10-17",
    "verdict": "no match: the generic LocalizerMorphism comparison formula assumes a specified universal comparison and fixed target; it does not identify the supplied normalized comparison across both exact functors by these two arbitrary resolutions. InjectiveResolution hits only cover nonnegative injective resolutions of objects."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorComparison_fac_app|rightDerived_map_eq|isoRightDerivedObj",
+   "results": "Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; grep hits read at PointwiseRightDerived.lean:80 and Abelian/RightDerived.lean:114,126-153, directory Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: checked PointwiseRightDerived.lean:46-83 (universal comparison for a fixed target) and Abelian/RightDerived.lean:110-153 (objectwise injective resolutions); neither states the supplied normalized comparison through two arbitrary unbounded K-injective resolutions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorComparison_fac_app\"",
+   "results": "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: checked PointwiseRightDerived.lean:46-83 (universal comparison for a fixed target) and Abelian/RightDerived.lean:110-153 (objectwise injective resolutions); neither states the supplied normalized comparison through two arbitrary unbounded K-injective resolutions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality computes a normalized right derived comparison on any complex from its value on K-injective resolutions",
+   "results": "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality; CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality; CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.InjectiveResolution.iso_hom_naturality",
+   "date": "2026-10-17",
+   "verdict": "no match: checked PointwiseRightDerived.lean:46-83 (universal comparison for a fixed target) and Abelian/RightDerived.lean:110-153 (objectwise injective resolutions); neither states the supplied normalized comparison through two arbitrary unbounded K-injective resolutions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compute a normalized comparison of total right derived functors using a K-injective replacement followed by a K-injective resolution after an exact functor",
+   "results": "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.NatTrans.rightDerived; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.Functor.rightDerived",
+   "date": "2026-10-17",
+   "verdict": "no match: checked PointwiseRightDerived.lean:46-83 (universal comparison for a fixed target) and Abelian/RightDerived.lean:110-153 (objectwise injective resolutions); neither states the supplied normalized comparison through two arbitrary unbounded K-injective resolutions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of derived functor composites normalized on K-injectives has its component computed on successive injective replacements by naturality and cancellation",
+   "results": "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: checked PointwiseRightDerived.lean:46-83 (universal comparison for a fixed target) and Abelian/RightDerived.lean:110-153 (objectwise injective resolutions); neither states the supplied normalized comparison through two arbitrary unbounded K-injective resolutions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-compact-support-restriction-of-scalars",
@@ -75,5 +159,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-normalized-derived-comparison-common-resolution",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Derived the two resolution identities from the existing K-injective computation lemma, expanded naturality of the supplied comparison and the cancellation, applied exactly the supplied normalization, and wrote the change-of-resolution equation. No new nodes, no attachment, and no unproved comparison lemma introduced. Mathlib searches find objectwise injective-resolution or universal comparison results rather than this supplied normalized unbounded comparison.",
+  "blueprint": "Realizes the finite-level restriction-of-scalars comparison needed for transition maps in the derived inverse-limit formula of def-weil-integral-rational-qbar-compact-support, through the former step 5 of lem-sf-compact-support-restriction-of-scalars: evaluation at a non-K-injective restricted complex using u, v and naturality. The unit sk-def-sf-operations and chapter route are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-d8e0d1911",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-d8e0d1911 (reviewer sub-agent of L); spot-checked: I read the whole item, its 4 steps, every cited statement (lem-sf-kinjective-derived-map-computation, lem-weil-pbc-exact-functor-derived-factorization, def-sfb-right-derived-functor and the definition leaves), the citer lem-sf-compact-support-restriction-of-scalars and the normalization clause of lem-weil-proetale-direct-image-restriction-of-scalars, the unit sk-def-sf-operations and the chapter, and Stacks derived.tex lemma-K-injective-defined (070Y, line 9747). Types check: c_v = eta_T^{-1} RF(Qv), and both sides of the normalization and of the conclusion run Q(FT) -> Q(F rJ) = Q(sGJ). Because c_v eta_{rJ} = Q(Fv), the explicit hypothesis that Q(Fv) is invertible is equivalent to eta^F_{rJ} being invertible, and the normalization is beta_J = s eta^G_J (eta^F_{rJ})^{-1}. With r = s = id and beta = id this holds by naturality of eta. It is exactly what the direct-image lemma supplies, so the hypothesis can be met and nothing is weakened. With u = id the conclusion reduces to the normalization. Step 1 uses the leaf (r preserves quasi-isomorphisms) and the defining formula c_a = eta^{-1} RF(Qa), giving c_w = c_v RF(a); I verified it. Step 2 is naturality of beta at q followed by cancelling RF(a); I re-derived it, and it is elementary. Step 3 applies the item's own hypothesis at (J, v) and never uses K-injectivity of rJ. Step 4 uses the transition and cocycle clause of the computation lemma, and L2 = d_G L1 d_F^{-1} follows by cancellation. Edge cases checked: zero complexes, F = G = 0, identity resolutions, rJ not K-injective. There are no new nodes, no duplicate (rg over 070Y and the comparison/resolution keywords; candidates read), no restatement of the parent, no cycle, no SGA, and the route stays in the unit with leaves and definitions as notions; tool_uses is empty and none is needed. Searches cover all three kinds. No fixes."
  }
 }

@@ -90,15 +90,14 @@
    }
   },
   {
-   "text": "Pass to opposites to obtain the initial-vertex assertion. Explicitly, for a simplicial set $C$ define $C^{\\mathrm{op}}$ by replacing an operator $\\alpha:[a]\\to[b]$ with $j\\mapsto b-\\alpha(a-j)$. Reversal is involutive, carries $\\Lambda_i^n$ to $\\Lambda_{n-i}^n$, and preserves whole boundaries. Thus $\\mathcal X^{\\mathrm{op}},\\mathcal Y^{\\mathrm{op}}$ are quasicategories and $p^{\\mathrm{op}}$ is an inner fibration; a boundary with first vertex $x$ becomes one with last vertex $x$, preserving its restriction and projection equations.\nFor the mapping-space condition use [lem-coef-infinity-pinch-comparison]. With its Kan arrow mapping spaces $U$, reversal gives a simplicial isomorphism\n$$U_{C^{\\mathrm{op}}}(a,b)\\cong U_C(b,a)^{\\mathrm{op}}.$$\nTo check this isomorphism in degree $m$, represent a simplex of $U_{C^{\\mathrm{op}}}(a,b)$ by its prism $f:\\Delta^1\\times\\Delta^m\\to C^{\\mathrm{op}}$. Apply the opposite operation to $f$ and precompose with the vertex-reversal identifications $\\Delta^1\\cong(\\Delta^1)^{\\mathrm{op}}$ and $\\Delta^m\\cong(\\Delta^m)^{\\mathrm{op}}$. The resulting prism into $C$ has endpoints $b,a$. For $\\alpha:[r]\\to[m]$, restriction of this prism uses the reversed operator $j\\mapsto m-\\alpha(r-j)$; these are exactly the operators of $U_C(b,a)^{\\mathrm{op}}$. Reversing twice returns $f$, and applying a simplicial functor commutes with every operation, proving both the isomorphism and its naturality. For any simplicial set $Z$, barycentric reversal $(t_0,\\ldots,t_n)\\mapsto(t_n,\\ldots,t_0)$ defines a natural homeomorphism $|Z^{\\mathrm{op}}|\\cong|Z|$: the relation for $\\alpha$ on one side is the relation for its reversed operator on the other. Combine these homeomorphisms with the natural right-pinch homotopy equivalences\n$$\\operatorname{Map}_{C^{\\mathrm{op}}}(a,b)\\longrightarrow U_{C^{\\mathrm{op}}}(a,b),\\qquad\n\\operatorname{Map}_C(b,a)\\longrightarrow U_C(b,a).$$\nNaturality under $p$ identifies, up to these equivalences on source and target, the incoming mapping-space maps of $p^{\\mathrm{op}}$ at $x$ with the outgoing mapping-space maps of $p$ at $x$. By the weak homotopy equivalence convention of [def-cbc-enhanced-diagrams-cones], one family consists of weak homotopy equivalences if and only if the other does (check components and each based homotopy group through this commuting comparison). Therefore $p$-initiality is equivalent to $p^{\\mathrm{op}}$-finality. Apply steps 1-5 to $p^{\\mathrm{op}}$ and reverse the resulting fillers. This proves both implications of the initial-vertex assertion with exactly the original hypotheses.",
+   "text": "Pass to opposites to obtain the initial-vertex assertion. For a simplicial set $C$, the opposite replaces an operator $\\alpha:[a]\\to[b]$ by $j\\mapsto b-\\alpha(a-j)$. This operation is involutive, takes $\\Lambda_i^n$ to $\\Lambda_{n-i}^n$, preserves whole boundaries, and exchanges the first and last vertices. Applying it to an inner-horn lifting square and reversing the filler proves directly that $p^{\\mathrm{op}}$ is an inner fibration between quasicategories. It also gives a bijection between boundary squares for $p$ with first vertex $x$ and boundary squares for $p^{\\mathrm{op}}$ with last vertex $x$; both filler equations are preserved.\nUse the natural mapping-space equivalences in clause (4) of [lem-coef-infinity-relative-cone-equivalence], applied to $C=\\mathcal X,\\mathcal Y$ and the simplicial functor $p$. They identify the map $\\operatorname{Map}_{\\mathcal X^{\\mathrm{op}}}(z,x)\\to\\operatorname{Map}_{\\mathcal Y^{\\mathrm{op}}}(p(z),p(x))$ with $\\operatorname{Map}_{\\mathcal X}(x,z)\\to\\operatorname{Map}_{\\mathcal Y}(p(x),p(z))$ up to natural equivalences of spaces. Consequently one map is a weak homotopy equivalence if and only if the other is: the comparison equivalences give bijections on components and isomorphisms on based homotopy groups, and naturality intertwines the induced maps. Thus $x$ is $p$-initial exactly when it is $p^{\\mathrm{op}}$-final. Apply steps 1-5 to $p^{\\mathrm{op}}$ and reverse the boundary squares and their fillers. This proves both implications of the initial assertion, still only for $n>0$.",
    "uses": [
-    "lem-coef-infinity-pinch-comparison",
-    "def-cbc-enhanced-diagrams-cones"
+    "lem-coef-infinity-relative-cone-equivalence"
    ],
    "elementary": false,
    "source": {
     "document": "https://kerodon.net/tag/02WS",
-    "place": "Opposite dual of Corollary 7.1.5.17; natural mapping-space model comparison from Proposition 4.6.5.10 (01L5)."
+    "place": "Corollary 7.1.5.17, initial/final opposite duality; natural mapping-space comparison as explicitly stated in clause (4) of lem-coef-infinity-relative-cone-equivalence."
    }
   }
  ],
@@ -110,12 +109,12 @@
   "lem-cbc-kan-fibration-fiber-criterion",
   "lem-coef-right-fibration-contractible-fibers",
   "def-weil-pbc-trivial-kan-fibration",
-  "lem-coef-infinity-pinch-comparison"
+  "lem-coef-infinity-relative-cone-equivalence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://kerodon.net/tag/02WS",
-  "place": "Expanded right-slice/fiber proof of Corollary 7.1.5.17 and its opposite dual, using online sources not archived in literature/. No new theorem input is required beyond existing DAG nodes."
+  "place": "Agent expansion of Corollary 7.1.5.17 and its opposite dual: relative right slice, vertexwise Kan fibers, explicit boundary identification, and the existing natural opposite mapping-space comparison. Online Kerodon sources are not archived in literature/."
  },
  "mathlib_searches": [
   {
@@ -225,7 +224,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-parameter-cone-extension",
@@ -238,7 +237,7 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-relative-initial-boundary",
   "worker": "stage1",
-  "summary": "Kept the exact statement; proved the final criterion by the relative right slice, direct inner-horn lifting, Kan mapping-space fibers, and existing fibration criteria; identified all positive-dimensional boundary lifts including n=1; obtained initiality by explicit opposite and natural pinch comparisons. No new nodes, no attachments, no Lean writing or compilation.",
+  "summary": "Preserved the statement and the five right-slice proof steps after a source and citation audit. Replaced the long inline opposite-mapping-space comparison in step 6 by clause (4) of the existing lem-coef-infinity-relative-cone-equivalence; retained the explicit elementary horn and boundary reversal checks. No new nodes or Mathlib leaves. All citations quoted in citations.json; no Lean writing or compiler use.",
   "blueprint": "Historical ancestry through lem-coef-infinity-parameter-cone-extension: supplies its relative-initial/final boundary test in steps 2-5 and 8-9. The ancestor prop-coef-integral-exceptional-adjoint has no separate paragraph for this generic infrastructure; its current main-20261015 proof paragraph 2 concerns the coefficient adjunction. The six steps expand the local universal-cone infrastructure without altering that unit route.",
   "tool_uses": [
    {
@@ -261,12 +260,12 @@
   "def-cbc-enhanced-diagrams-cones"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q87-1504f2c44",
-  "group": "Q87",
+  "reviewer": "NT-cc-NG-e08566179",
+  "group": "NG",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-1504f2c44 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item is unchanged and there are no new nodes. The statement is Kerodon 02WS (1)<=>(3) with 02WR mapping-space initiality, written with the right-pinched Map of def-cbc-enhanced-diagrams-cones. Hypotheses are an inner fibration between quasicategories, both lifting equations are exact, and only n>0 is required. Step 1: the slice node's fibre over {x} is exactly the right-pinched Map, so q_z is Map_X(z,x)->Map_Y(pz,px) between Kan complexes. Step 2 (elementary, justified): D=Lambda_i^{m+1} face by face, and the horn is inner since 0<i<=m<m+1; checked m=i=1, where Lambda_1^1={1} gives Lambda_1^2. Step 3: pullback stability of right lifting plus a Kan base meets exactly the hypotheses of lem-cbc-right-fibration-space-fiber; only its first clause is used. Step 4: lem-cbc-kan-fibration-fiber-criterion applied to q_z, then lem-coef-right-fibration-contractible-fibers (no hypothesis on the base T); for the converse, pullback stability including n=0 surjectivity; the boundary conventions of the leaf and the criterion agree. Step 5 (elementary, justified): (bdry Delta^m * Delta^0) union Delta^m = bdry Delta^{m+1}; m=0 matches the n=1 problem for p. Step 6: right-pinched Map in X^op is the left-pinched space in X, compared through U_{C^op}(a,b) = U_C(b,a)^op, |Z^op| = |Z| and the naturality clause of lem-coef-infinity-pinch-comparison; verified. Small cases: identity map, Y a point, discrete nerves, empty mapping spaces. No added hypothesis. rg found no duplicate: cartesian-initial-boundary-lift is a fibrewise variant, relative-cone-initial-corner is a consumer. The dependency closure has 99 nodes and no cycle. No SGA source. Accepted tool_uses: lem-cbc-right-fibration-space-fiber and lem-cbc-kan-fibration-fiber-criterion, both generic simplicial-homotopy black boxes; the existing contractible-fibers node already records the same criterion as a tool. The def-cbc entry needs no tool use but is harmless. Kerodon is online only and WANTED is recorded. Not a target node, so the base-change and coefficient-category check does not apply. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-e08566179 (reviewer sub-agent of L); spot-checked: PASS: I read the whole delivery against its source and found nothing to fix. The delivery has one commit with two files (the item and its report) and no new nodes; the statement is unchanged. The only change is step 6, which now cites clause (4) of lem-coef-infinity-relative-cone-equivalence for the natural equivalence Map_{D^op}(x,y) ≃ Map_D(y,x) instead of proving it inline. That clause assumes no isofibration, and its naturality in simplicial functors is what the step needs; a weak equivalence then transfers by two-out-of-three on pi_0 and pi_n. The dependency closure of that node has 181 nodes and does not contain the item, so there is no cycle, and it is in the same unit (sk-prop-sf-biduality-general). The statement matches Kerodon 02WS (1)<=>(3) with the mapping-space meaning of 02WR and the opposite duals: an inner fibration between quasicategories, right-pinched Map, both filler equations, n>0 only. Kerodon is online only, not in literature/; WANTED is recorded. Step 1: the slice node gives the fibres exactly as Map(z,x), and the fibre of T over z is Map_Y(pz,px). Step 2: I checked D = Lambda^{m+1}_i face by face; the horn is inner since 0<i<=m<m+1, including m=i=1. Step 3: the first clause of lem-cbc-right-fibration-space-fiber applies (right fibration over a Kan base). Step 4: the Kan-fibration fibre criterion, then the contractible-fibres lemma, which needs no hypothesis on the base T; for the converse, pullback keeps boundary lifting including n=0, and the two boundary conventions agree. Step 5: (bdry Delta^m * Delta^0) union Delta^m = bdry Delta^{m+1}, and m=0 gives the n=1 problem. Step 6: order reversal sends Lambda^n_i to Lambda^n_{n-i}, so p^op is an inner fibration. Small cases checked: identity p, Y a point, n=1, empty mapping spaces. No duplicate found: rg over dag/nodes, and the cartesian-initial-boundary-lift statement is a fibrewise variant. I accept the declared tool_uses lem-cbc-right-fibration-space-fiber and lem-cbc-kan-fibration-fiber-criterion. All step uses equal proof_deps, every step is under 2000 characters, no SGA source is used, and this is not a target node. No fixes; details are in review.md."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
