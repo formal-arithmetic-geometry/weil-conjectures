@@ -10,11 +10,139 @@
  "stmt_deps": [
   "def-weil-pbc-proetale-operations",
   "def-weil-extension-by-zero",
-  "def-weil-compact-support-candidate"
+  "def-weil-compact-support-candidate",
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Exact termwise functors. Use filtration-preserving chain homotopies and the direct-sum filtration on shifts and mapping cones. If $H$ is additive and exact, then $H(F^{r+1}K)\\to H(F^rK)\\to H(\\operatorname{gr}^rK)$ is exact, so $\\operatorname{gr}^rH(K)=H(\\operatorname{gr}^rK)$ canonically. Exactness also identifies cycles, boundaries and cohomology after applying $H$, hence takes graded quasi-isomorphisms to graded quasi-isomorphisms. Additivity makes the shift and cone identifications termwise identities. The localization universal property [lem-weil-pbc-localization-universal-property] therefore descends $H$ to an exact filtered functor. It also descends every genuine filtration-preserving chain natural transformation between such functors and preserves its identities and composites. The filtration and graded complexes here are precisely [def-sp-filtration, def-sp-filtered-complex-subquotients].",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RX (section-filtered-derived-category): shifts, cones, filtered quasi-isomorphisms and localization; exact termwise functors"
+   }
+  },
+  {
+   "text": "Construct the right-derived lift. By [lem-trf-filtered-localization-injective-model], choose a filtered injective resolution $K\\to I$ and an exact quasi-inverse $J_F:DF^+(\\mathcal A)\\to K^+(\\mathcal I^f)$. Each filtered injective term splits into finitely many injectives with the sum filtration: starting at its last nonzero graded piece, split its inclusion into the preceding filtration term using injectivity and repeat downwards. An additive functor preserves these finite split sums. For left exact $T$, put $F^rT(I^n)=T(F^rI^n)\\subseteq T(I^n)$; the quotient map gives a canonical isomorphism $\\operatorname{gr}^rT(I^n)\\cong T(\\operatorname{gr}^rI^n)$, since that short exact sequence is split. This definition is functorial without choosing the splittings. Define $R^FT(K)=Q_F(T(J_FK))$. Termwise $T$ preserves filtered homotopies, shifts and split-sum cones, so this is exact. The model node says that both $\\omega I$ and $\\operatorname{gr}^rI$ are bounded-below complexes of ordinary injectives; [lem-weil-pbc-dplus-injective-representative](2) says these are K-injective. Thus they compute the ordinary $RT$ and give $\\omega R^FT\\cong RT\\omega$ and $\\operatorname{gr}^rR^FT\\cong RT\\operatorname{gr}^r$. The bijections in the model node identify resolution comparisons uniquely in the homotopy category, so these identifications are natural and independent of the chosen quasi-inverse. The construction preserves each finite filtration interval, because resolutions can be chosen in that interval.",
+   "uses": [
+    "lem-trf-filtered-localization-injective-model",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015Q, 015S, 05U2, 015U (equation-commute-gr), 015V (equation-commute-forget)"
+   }
+  },
+  {
+   "text": "Derive the adjunction on filtered Hom sets. Suppose $L:\\mathcal B\\to\\mathcal A$ is exact and $L\\dashv T$. For an injective $J\\in\\mathcal A$, $TJ$ is injective: a map from a subobject into $TJ$ transposes to a map into $J$ from the corresponding subobject under exact $L$, extends there, and transposes back. The split filtration in Step 2 then shows that $T$ sends filtered injectives to filtered injectives. For a bounded-below filtered complex $K$ over $\\mathcal B$ and a filtered-injective representative $I$ of an object over $\\mathcal A$, [lem-trf-filtered-localization-injective-model] gives\n$$\\operatorname{Hom}_{DF(\\mathcal A)}(L^FK,I)\n=\\operatorname{Hom}_{K_F(\\mathcal A)}(LK,I)\n\\cong\\operatorname{Hom}_{K_F(\\mathcal B)}(K,TI)\n=\\operatorname{Hom}_{DF(\\mathcal B)}(K,R^FTI).$$\nThe middle bijection is the ordinary adjunction in each cochain degree; a map preserves the filtration on one side exactly when its adjoint does on the other (apply the adjunction to each inclusion $F^rK\\to K$). The same argument transposes chain homotopies. Naturality of these bijections supplies $L^F\\dashv R^FT$, and the two triangle identities follow by applying the inverse Hom bijections to identities. Forgetting filtration computes this same resolution adjunction, so its unit and counit are the ordinary derived ones. All these functors preserve filtration intervals. Therefore [lem-trf-filtered-functor-graded-comparison], applied to the unit and counit that were just constructed, identifies their graded maps with the ordinary unit and counit as well. It also shows that any already constructed filtered comparison compatible with forgetting is invertible whenever its ordinary comparison is invertible; this does not assert that an arbitrary ordinary transformation lifts.",
+   "uses": [
+    "lem-trf-filtered-localization-injective-model",
+    "lem-trf-filtered-functor-graded-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.2.2 filtered adjunctions, expanded via filtered-injective Hom computation (Stacks Tag 05TY); Lemma 5.1.4(i)–(iii)"
+   }
+  },
+  {
+   "text": "Apply this to the specified coefficient categories. The small-site module categories are Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck]; [lem-weil-pbc-grothendieck-functorial-injective-embedding] supplies enough injectives. Use the ordinary uncompleted module inverse image/direct image and adjunction of [def-weil-pbc-proetale-operations]. The finite-ring constant-coefficient identification and exactness are [prop-weil-pbc-proetale-constant-exact], so $Lf^*=f^{-1}$ has the termwise lift of Step 1 and $Rf_*$ has the lift and filtered adjunction of Steps 2–3. The open operation is the sheaf functor of [def-weil-extension-by-zero]; its exactness and adjunction $j_!\\dashv j^{-1}$ are explicitly supplied by [lem-cbc-proetale-extension-zero]. For a supplied $f=pj$, define its filtered candidate to be $R^Fp_*j_!^F$. Applying $\\omega$ or $\\operatorname{gr}^r$ to this composite gives $Rp_*j_!$ on the corresponding ordinary complex. This is the candidate formula of the item, specializing to [def-weil-compact-support-candidate] where that node's field and $A_{E,n}$ hypotheses hold; the displayed composite makes sense for every finite commutative $A$. No compactification is claimed to exist. A restriction is made only if the total and graded inputs and the operations on them belong to the required domain.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+    "def-weil-pbc-proetale-operations",
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-weil-extension-by-zero",
+    "lem-cbc-proetale-extension-zero",
+    "def-weil-compact-support-candidate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.2.1(a)–(b); Stacks Tags 015Q/05U2 applied directly to small pro-etale module sheaves, rather than transported six exceptional functors"
+   }
+  },
+  {
+   "text": "Construct the generating canonical maps. Pullback composition is the termwise sheaf-composition map, with the normalization in [lem-weil-pbc-proetale-derived-pullback-composition]. Its identity and associativity equations hold on every section and in every cochain degree. Direct images preserve injectives by the exact-left-adjoint argument of Step 3. Consequently the filtered direct-image composition comparison can be computed on the same $I$ as $g_*f_*I=(gf)_*I$; this is the normalized ordinary comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], since its extra resolution map can be the identity. For an open Cartesian square, [lem-cbc-proetale-extension-zero-base-change] supplies the canonical sheaf comparison $g^{-1}j_!\\to j'_!g_U^{-1}$. All four functors are exact by Step 4; apply this map degreewise, including to each $F^r$, and descend by Step 1. Its identity and pasting normalizations can also be checked without stalks: under $j_!\\dashv j^{-1}$ and inverse-image/direct-image adjunction, this comparison is the conjugate of the restriction comparison $j^{-1}g_*\\cong g_{U*}j'^{-1}$. By the direct-image section formula of [def-weil-pbc-proetale-operations], both sides evaluate a sheaf on the identical Cartesian pullback of a test object in $U$. The open composition comparison $(bj)_!\\cong b_!j_!$ for composable open immersions $j,b$ is defined in the same way: it is the conjugate, under the composite adjunction $b_!j_!\\dashv j^{-1}b^{-1}$ of [def-weil-pbc-composite-adjunction], of the canonical identification $(bj)^{-1}\\cong j^{-1}b^{-1}$ (both evaluate a sheaf on the same test object), and it is unique by [lem-weil-pbc-conjugate-iso-unit-equation]; it is a degreewise map of exact functors, hence filtered. For two squares, stacked horizontally or vertically, these identifications compose to the identification of the outer pullback. The uniqueness of the conjugate comparison [lem-weil-pbc-conjugate-iso-unit-equation], using the composite units of [def-weil-pbc-composite-adjunction], then gives the same equations for extension by zero. All these are genuine filtered maps, with ordinary forgetful maps. Step 3 and [lem-trf-filtered-functor-graded-comparison] identify their graded maps with the normalized ordinary maps and allow inversion exactly on the stated domains.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-composite-adjunction",
+    "lem-trf-filtered-functor-graded-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§§5.2.1–5.2.2, canonical composition and open comparisons; Stacks Tag 03S6 (extension-by-zero base change)"
+   }
+  },
+  {
+   "text": "Lift the canonical expressions and the proper exchange. Build each canonical expression in the item recursively from the maps of Steps 3 and 5, applying the same composition and whiskering in the filtered category; when an ordinary comparison is invertible on its domain, use [lem-trf-filtered-functor-graded-comparison] to identify its graded maps. If every graded input is in that domain, each graded map is an isomorphism. The cone then has acyclic graded complexes, so its map to zero is a filtered quasi-isomorphism and the cone is zero in the localization. Thus the filtered comparison is invertible there. This last objectwise detection is elementary and also explains why an admissible restriction must include all graded inputs. In particular, for $fp=gf'$ and the canonical square isomorphism $\\theta:f'^{-1}g^{-1}\\cong p^{-1}f^{-1}$, the filtered direct-image exchange is the actual composite\n$$g^{-1,F}R^Ff_*\\xrightarrow{\\eta_{f'}}R^Ff'_*f'^{-1,F}g^{-1,F}R^Ff_*\n\\xrightarrow{R^Ff'_*\\theta}R^Ff'_*p^{-1,F}f^{-1,F}R^Ff_*\n\\xrightarrow{R^Ff'_*p^{-1,F}\\varepsilon_f}R^Ff'_*p^{-1,F}.$$\nThis construction uses no invertibility of exchange. For $f=p_cj_c$, compose this proper-factor mate with $R^Fp_{c*}'$ of the open comparison of Step 5. Proper identifications use the compactification with identity open. Here is also the actual proper/open expression used for refinements, including non-Cartesian refinement squares. For $k:U\\hookrightarrow V$, $i:S\\hookrightarrow T$ quasi-compact open, $r:U\\to S$, $p:V\\to T$ proper, and $pk=ir$, form $V_S=V\\times_TS$ with projections $b:V_S\\hookrightarrow V$, $q:V_S\\to S$ and $s=(k,r):U\\to V_S$. The geometric clause of [lem-cbc-strict-tower-proper-open-calculus] says precisely that $s$ is clopen; only this scheme-theoretic clause is used, not a tower-category theorem as a filtered-category theorem. On the decomposition $V_S=s(U)\\amalg(V_S\\setminus s(U))$, define the exact natural projection $\\pi_s:\\mathrm{id}\\to s_!s^{-1}$ by identity on the first component and zero on the second. This projection is a filtration-preserving chain transformation. Put $\\alpha_Q=(b_!\\pi_s q^{-1})\\circ\\beta_{i,p}:p^{-1}i_!\\to b_!q^{-1}\\to k_!r^{-1}$, where $\\beta$ is the open comparison of Step 5. In a Cartesian square $s=\\mathrm{id}$ and $\\alpha_Q=\\beta_{i,p}$. Define its filtered proper-adjunction mate by\n$$\\gamma_Q=(R^Fp_*k_!^F\\varepsilon_r)\\circ(R^Fp_*\\alpha_Q^F R^Fr_*)\\circ(\\eta_p i_!^F R^Fr_*):i_!^FR^Fr_*\\longrightarrow R^Fp_*k_!^F.$$\nThus $\\gamma_Q$ is constructed from actual filtered maps. For a refinement $U=S$ and $r=\\mathrm{id}$ it uses projection onto the clopen section; for composition towers it uses the Cartesian case. These are the supplied canonical proper/open and refinement formulas, and their inverses are used only where the ordinary maps are defined and invertible. The projection's composition and pullback identities are elementary: on each component they are the identity if the section lies in the indicated clopen subset and zero otherwise; iterated projection selects the intersection. They hold already on sheaves, hence degreewise on filtrations. Thus forgetting gives exactly the compactification-derived canonical maps, and the graded-comparison lemma gives exactly their graded maps. Composition and whiskering of these lifted expressions are literal composition and whiskering of natural transformations, so those operations are respected. This construction concerns the canonical expressions specified in the item, not a choice of lifts for arbitrary transformations.",
+   "uses": [
+    "lem-trf-filtered-functor-graded-comparison",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.2.2 “General principle”: recursive adjunction and inversion construction; proper-factor unit–square–counit written explicitly"
+   }
+  },
+  {
+   "text": "Verify vertical pasting for these particular compact-support exchanges. For proper vertical factors, [lem-weil-pbc-mate-pasting](2) applies to the filtered adjunctions of Step 3. It gives the outer mate as $(R^Ff'_*\\operatorname{Ex}_{*,e})\\circ(\\operatorname{Ex}_{*,f}R^Fe_*)$, with the composite unit $R_1\\eta_2L_1\\circ\\eta_1$ and counit $\\varepsilon_2\\circ L_2\\varepsilon_1R_2$. For open vertical factors, it is the extension-by-zero pasting equation proved in Step 5. To compare general compactification expressions, choose a compatible tower for $W\\xrightarrow eX\\xrightarrow fY$ and its base change, as in [lem-cbc-compactifiable-compatible-tower], on the domains where the ordinary composition comparisons are defined. Write its arrows as $i:X\\hookrightarrow\\bar X$, $q:\\bar X\\to Y$, $a:W\\hookrightarrow\\bar W$, $p:\\bar W\\to\\bar X$, and $V=\\bar W\\times_{\\bar X}X$ with open $b:V\\hookrightarrow\\bar W$, proper $r:V\\to X$, and open $j:W\\hookrightarrow V$, so $a=bj$ and $pb=ir$. In these coordinates the composition comparison is\n$$R^Fq_*i_!^FR^Fr_*j_!^F\n\\longrightarrow R^Fq_*R^Fp_*b_!^Fj_!^F\n\\cong R^F(qp)_*(bj)_!^F.$$\nThe first arrow is $R^Fq_*\\gamma_Qj_!^F$ for the Cartesian proper/open square $pb=ir$, with $\\gamma_Q$ exactly the mate written in Step 6; the last arrow is direct-image and open composition. This composition comparison is inverted only on its admissible domain. Expand the two candidate base-change paths using Step 6. The proper subrectangles combine by mate-pasting and the open subrectangles combine by Step 5. For the mixed interchange, write a base change of the proper/open square $Q$ as $Q_1$, with projections $d:U_1\\to U$, $v:V_1\\to V$, $c:S_1\\to S$, and $z:T_1\\to T$. Transposing by the two proper adjunctions reduces the required cube equation to the identity for the open maps $\\beta$ from Step 5 and the pullback of $\\pi_s$. The latter projection is identity on the pulled-back clopen component and zero on its complement, so the two transposed maps are identical. The adjunction bijections, or equivalently the change-of-adjunction formula [lem-weil-pbc-mate-pasting](3) and the triangle identities, therefore give\n$$(R^Fp_{1*}\\beta_k)\\circ(\\operatorname{Ex}_{*,p}k_!)\\circ(z^{-1,F}\\gamma_Q)=(\\gamma_{Q_1}d^{-1,F})\\circ(i_{1!}^F\\operatorname{Ex}_{*,r})\\circ(\\beta_iR^Fr_*).$$\nAll maps in this equation are the actual filtered mates or degreewise open/projection maps constructed in Steps 3, 5 and 6. This is the mixed proper/open interchange used in the expansion. Thus both expanded paths are the mate of the same pasted pullback square, followed by the same open-extension map for $bj$. Naturality moves the intermediate comparison and its inverse next to each other, where they cancel. This proves, with the displayed composition identifications,\n$$\\operatorname{Ex}_{!,fe}=(R^Ff'_!\\operatorname{Ex}_{!,e})\\circ(\\operatorname{Ex}_{!,f}R^Fe_!)$$\nin the filtered category. More explicitly both sides have source $g^{-1,F}R^Ff_!R^Fe_!$ and target $R^Ff'_!R^Fe'_!g''^{-1,F}$. Changing a tower by a supplied proper refinement inserts the Step 6 clopen-section mate and its inverse at the same position in both expressions. Projection onto nested clopen components composes as just checked in Step 6; the displayed mixed cube identity and naturality move these comparisons together and cancel them. Consequently the equation is intertwined by the supplied refinement comparisons, and forgetting gives the ordinary equation in the item. This is a calculation with actual compactification formulas; it uses neither faithfulness of $\\omega$ nor an assertion about arbitrary triangulated transformations. All section, adjunction and tower calculations allow arbitrary scheme maps: the tower node is over arbitrary bases, and no fixed-field linearity enters.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-cbc-compactifiable-compatible-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7C, 0F7D, 0F7F (proper/open comparison, its vertical and horizontal pasting, and base-change compatibility), with supplied towers of Tag 0F7J; filtered proof by explicit adjunction mates and clopen projections as written here, not by forgetting filtration."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-trf-filtered-localization-injective-model",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-trf-filtered-functor-graded-comparison",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+  "def-weil-pbc-proetale-operations",
+  "prop-weil-pbc-proetale-constant-exact",
+  "def-weil-extension-by-zero",
+  "lem-cbc-proetale-extension-zero",
+  "def-weil-compact-support-candidate",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-composite-adjunction",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-weil-pbc-mate-pasting",
+  "lem-cbc-compactifiable-compatible-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Construction from Tags 015Q/05TY/05U2, with the filtered canonical-map principle of Varshavsky §§5.1.3–5.2.2 expanded on the pro-etale compactification formulas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,7 +195,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-trf-trace-additivity-open-closed",
@@ -92,5 +220,84 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-filtered-derived-operation-lifts",
+  "worker": "stage1",
+  "summary": "Construct filtered derived operations and their adjunction from filtered-injective Hom computation; construct only the specified canonical maps and prove their graded compatibility using a conditional given-lift lemma. Expand proper/open mate pasting in compatible compactification towers. The statement is unchanged; no generic six-exceptional-functor or arbitrary-natural-transformation lifting claim is introduced.",
+  "blueprint": "Nearest ancestor prop-trf-trace-additivity-open-closed, Step 3 (filtered compact cohomology and canonical unit/exchange map), Step 4 (identify the graded operators by compact-support composition and pasting), and Step 6 (the unit for scheme Frobenius).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Universal property of localization descends exact termwise functors and genuine chain natural transformations; the unit has no general localization theorem."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Ordinary bounded-below injective complexes are K-injective, needed to identify the filtered construction with the existing right-derived functor."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic small-site module Grothendieck-abelian result supplies the existence hypotheses for filtered resolutions."
+   },
+   {
+    "node": "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+    "why": "Generic injective embeddings supply enough injectives in the sheaf coefficient categories."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Exact constant-coefficient inverse image for arbitrary scheme morphisms, including semilinear maps."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Exactness and the open sheaf adjunction for every finite commutative ring."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Normalization of canonical inverse-image composition on the pro-etale sites."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Normalization of canonical direct-image composition on injective representatives."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-base-change",
+    "why": "Canonical open-extension comparison for arbitrary finite commutative coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Uniqueness of the conjugate open comparison with its specified units."
+   },
+   {
+    "node": "lem-cbc-compactifiable-compatible-tower",
+    "why": "Supplied compactification towers and their common refinements over arbitrary bases are the geometric input for the formal pasting computation."
+   },
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Only its geometric assertion that the canonical map from a commutative proper/open square to its fibre product is clopen is used. The filtered arrows and coherence are constructed here from projection onto that clopen component and filtered adjunctions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-cbc-proetale-extension-zero",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-strict-tower-proper-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NB-fa8254553",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-fa8254553 (reviewer sub-agent of L); spot-checked: I read the whole item: its statement (unchanged from the import), all 7 steps, both new nodes, the statement of every cited node, unit sk-i-global-additivity, the chapter, and parent Steps 3, 4 and 6. Sources checked at the cited places: Stacks derived.tex (filtered-injective definition, 05TP and the split-strict-mono lemma, 05TS-05TY, 015Q, T_ext/05U2, commute-gr/forget) and Varshavsky 5.1.1-5.1.3 and Lemma 5.1.4(i)-(iii) with its proof, 5.2.1-5.2.2. Main checks: the filtered-injective splitting starts from the top piece, and F^rT(I)=T(F^rI) needs no choice of splitting and gives gr T = T gr. Graded-injective representatives are K-injective by dplus (2), so they compute the ordinary RT. A right adjoint of an exact functor preserves injectives, and transposition respects each filtration step because T is left exact, so the adjunction comes from 05TY(2) on both sides. Coefficients are ordinary uncompleted pro-etale A-modules for any finite commutative A, with f^{-1} exact by the constant-exact proposition and j_! exact and left adjoint by lem-cbc-proetale-extension-zero; the A_{E,n} candidate node is used only where its own hypotheses hold. The clopen clause of the strict-tower node holds under exactly the hypotheses used, and I rechecked it (s is an open immersion and is proper). alpha_Q and gamma_Q match that node, and gamma_Q goes in the right direction. I redid the mixed-cube transposition. Inversion on admissible domains by the graded-cone argument is correct. The graded-comparison node is true: I re-proved it from the unique truncation triangles; the edge cases (zero functor, one-piece filtration, h an isomorphism) hold, and it is strictly smaller than the item. The injective-model node matches 05TW, 05TY and 015Q and keeps a fixed filtration interval as the 05TS construction does. Searching rg over dag/nodes (015Q, 05TY, 05TW, 05TP, filtered injective, filtered derived) found no duplicate: the projective model, hom-calculus, operations-hom and kun tensor nodes all state different things. Neither new node restates a clause of the item. review_split passes, and I accept the declared tool_uses. Three small faults fixed in fixes/dag/nodes/sec-trace-formula/lem-trf-filtered-derived-operation-lifts.json: (1) Step 6's mate display was missing a trailing R^Ff_* in the middle object; (2) Step 5 now constructs the open composition comparison (bj)_! = b_!j_!, which Step 7 uses, as a conjugate, with citations already in uses; (3) in Step 7 the base-change projection a:V_1->V is renamed v, because a also names the tower's open immersion. No statement or dependency changed.; 1 file(s) fixed by the reviewer"
  }
 }
