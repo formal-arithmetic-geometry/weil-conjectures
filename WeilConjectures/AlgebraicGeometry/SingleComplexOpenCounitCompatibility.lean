@@ -121,7 +121,7 @@ theorem singleComplexOpen_counit_compatibility
     have hu := singleComplexOpen_directImage_unit f V J
     dsimp only at hu
     have hu' := hu
-    rw [← Category.assoc] at hu' 
+    rw [← Category.assoc] at hu'
     rw [hu', L₀.map_comp, L₀.map_comp]
     simp only [Category.assoc]
     erw [(a (f ∣_ V)).counit.naturality (rX.mapDerivedCategoryFactorsh.inv.app J)]

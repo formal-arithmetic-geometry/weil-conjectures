@@ -25,7 +25,7 @@ namespace AlgebraicGeometry
 
 /-- A directed system of Hom sets for two objects, with its actual limit functors.
 The structure records transport, lifting and eventual equality, rather than choosing
-an object or a morphism from an existence theorem. 
+an object or a morphism from an existence theorem.
 (blueprint: lem-pc-directed-perfect-hom-iso)
 -/
 structure DirectedPerfectHomSystem
@@ -104,7 +104,7 @@ theorem DirectedPerfectHomSystem.lift_iso
   exact (H.limit_transport (hkl₁.trans hl₁l) f').trans hf'
 
 /-- Recover the comparison square from the prescribed conjugated limit image.
-Source: Stacks Project, Tag 09RE, transport of the descended morphism. 
+Source: Stacks Project, Tag 09RE, transport of the descended morphism.
 (blueprint: lem-pc-directed-perfect-hom-iso)
 -/
 theorem iso_comparison_of_conjugated_identity
