@@ -15,7 +15,8 @@
  "stmt_deps": [
   "sk-def-pe-site",
   "det-pe-weak-contractible-equivalences",
-  "det-pe-replete-definition"
+  "det-pe-replete-definition",
+  "sk-def-pe-weak-contractible"
  ],
  "proof": [
   {
@@ -210,5 +211,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e00cba6ba",
+  "group": "N8",
+  "result": "pass",
+  "note": "Read node, blueprint source (main-20261015 det-pe-replete-on-contractible.md/.proof.md), 4 stmt_deps and their landed declarations (IsWeaklyContractible, IsReplete, proetale_weakContractible_equivalences, Mathlib ProEt), module, report (real Worker report and Second reading by N8). Node differs from base only in lean and a gained landed stmt_dep sk-def-pe-weak-contractible (permitted, no cycle); dependency nodes byte-identical. Clauses exact: arbitrary X, F : ℕᵒᵖ ⥤ Sheaf (ProEt.topology X) (Type (max (u+1) w)), categorical Epi transitions, arbitrary W with IsWeaklyContractible at the value universe (w=0 gives the Type (u+1) notion; universe-independent in substance), both conjuncts (transitions and every limit.π at op W). Universes u+1/u kept, value universe equals IsReplete.{u+1,u,w} (rfl probe), none unbound. Edge cases m=0, empty sections, empty or disconnected W fine. No definitions, proof sorry only, docstrings carry source, blueprint tag and 4 proof steps, statement field verbatim. nt_compile.py --json on the local overlay: module clean 2.2 s; probe clean, axioms propext/sorryAx/Classical.choice/Quot.sound. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.RepleteOnContractible",
+  "declaration": "AlgebraicGeometry.Scheme.proetale_surjective_sections_of_epi_tower",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/RepleteOnContractible.lean",
+  "statement": "theorem proetale_surjective_sections_of_epi_tower (X : Scheme.{u}) (F : ℕᵒᵖ ⥤ Sheaf (ProEt.topology X) (Type (max (u + 1) w))) (hF : ∀ n : ℕ, Epi (F.map (homOfLE (Nat.le_succ n)).op)) (W : X.ProEt) (hW : (ProEt.topology X).IsWeaklyContractible.{max (u + 1) w} W) : (∀ n : ℕ, Function.Surjective ((F.map (homOfLE (Nat.le_succ n)).op).hom.app (op W))) ∧ (∀ m : ℕ, Function.Surjective ((limit.π F (op m)).hom.app (op W)))",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
