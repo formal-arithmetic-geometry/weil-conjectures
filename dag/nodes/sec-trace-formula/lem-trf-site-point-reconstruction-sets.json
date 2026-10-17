@@ -12,11 +12,82 @@
   "def-weil-size-convention",
   "def-trf-geometric-morphism",
   "def-weil-pbc-sheafification",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-galois-yoneda-hom-bijection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $L(U)=p^{-1}(h_U^\\#)=u(U)$. The covariant representable $U\\mapsto h_U$ preserves finite limits, since maps into a limit are compatible families; sheafification preserves finite limits by [lem-weil-pbc-sheafification-sets-exact], and $p^{-1}$ preserves them by [def-trf-geometric-morphism]. Thus $L$ preserves the terminal object, products, and equalizers. Since $\\mathcal C$ is small in the universe fixed by [def-weil-size-convention], the disjoint union of the sets $L(U)$ and the corresponding arrow sets is small, so $\\mathcal N_u$ is small. The terminal object gives a pointed object; for $(U,a)$ and $(V,b)$, the element $(a,b)$ in $L(U\\times V)$ maps to both. For parallel arrows $(U,a)\\rightrightarrows(V,b)$, preservation of their equalizer supplies a pointed equalizing object. These are exactly the nonemptiness, common-source, and equalization conditions for cofilteredness.",
+   "uses": [
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-trf-geometric-morphism",
+    "def-weil-size-convention",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00YC (proposition-point-limits) and 00YB (lemma-neighbourhoods-directed), with the finite-limit/cofiltered argument in the proofs"
+   }
+  },
+  {
+   "text": "For a covering $\\{U_i\\to U\\}$, write $j_i:h_{U_i}^{\\#}\\to h_U^{\\#}$. We prove joint epimorphy by cancellation. Let $r,s:h_U^{\\#}\\to H$ be maps to a sheaf with $rj_i=sj_i$ for all $i$. For $t\\in h_U^{\\#}(T)$, [lem-weil-pbc-site-sheafification-sections-local] gives a covering $\\{T_a\\to T\\}$ on which $t$ is represented by arrows $g_a:T_a\\to U$. Pullback and composition of coverings in [def-weil-pbc-sites-and-cohomology] give a covering $\\{T_a\\times_U U_i\\to T\\}$. On each member, the restricted section $t$ is the image under $j_i$ of the section represented by the projection to $U_i$. Thus naturality and $rj_i=sj_i$ make $r_T(t)$ and $s_T(t)$ equal on that covering. The equalizer sheaf axiom in [def-weil-pbc-sites-and-cohomology] makes $H(T)\\to\\prod_{a,i}H(T_a\\times_U U_i)$ injective, so $r_T(t)=s_T(t)$ and hence $r=s$.\nFor any set $E$, the natural adjunction in [def-trf-geometric-morphism] carries maps $v,w:L(U)\\to E$ agreeing after all $L(U_i)\\to L(U)$ to maps $r,s:h_U^{\\#}\\to p_*E$ agreeing after all $j_i$. The cancellation just proved implies $v=w$. If some $x\\in L(U)$ were outside the union of these images, the constant-zero map and the characteristic function of $\\{x\\}$ from $L(U)$ to $\\{0,1\\}$ would agree on every image but differ at $x$, a contradiction. Therefore the maps $u(U_i)\\to u(U)$ are jointly surjective.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YA (lemma-point-site-topos), proof of (2), and Tag 00WT (lemma-covering-surjective-after-sheafification); the cancellation direction of 00WN (lemma-mono-epi-sheaves) is proved explicitly from the sheaf axiom, then adjunction gives joint surjectivity in sets."
+   }
+  },
+  {
+   "text": "For a set $E$, the sheaf $p_*E$ satisfies, naturally in $U$, \n$$(p_*E)(U)\\cong\\operatorname{Hom}(h_U^\\#,p_*E)\\cong\\operatorname{Map}(p^{-1}h_U^\\#,E)=\\operatorname{Map}(L(U),E).$$\nThe first bijection is Yoneda after sheafification, using [def-weil-pbc-sheafification] and [lem-galois-yoneda-hom-bijection]; the second is the adjunction in [def-trf-geometric-morphism]. Naturality in an arrow $f:U\\to V$ is precomposition with $L(f)$, by the naturality clause of [lem-galois-yoneda-hom-bijection].",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00Y6 (lemma-points-recover), 00Y7 (lemma-adjoint-point-push-stalk), and 00YA (lemma-point-site-topos), proof of (2)"
+   }
+  },
+  {
+   "text": "For a sheaf of sets $F$, set $S(F)=\\varinjlim_{(U,a)\\in\\mathcal N_u^{\\mathrm{op}}}F(U)$. By the colimit universal property [def-weil-pbc-category-colimit], a map $S(F)\\to E$ is a family of maps $\\phi_{U,a}:F(U)\\to E$ compatible with every pointed arrow. Currying gives $\\tau_U(s)(a)=\\phi_{U,a}(s)$; compatibility is exactly naturality of $\\tau:F\\to p_*E$ under the identification of Step 3. Hence\n$$\\operatorname{Map}(S(F),E)\\cong\\operatorname{Hom}(F,p_*E)\\cong\\operatorname{Map}(p^{-1}F,E),$$\nnaturally in $E$. By the Yoneda uniqueness of representing objects this yields a natural bijection $S(F)\\xrightarrow{\\sim}p^{-1}F$. Tracing the construction, the bijection sends the class of $s\\in F(U)$ at $a\\in L(U)$ to $p^{-1}(s)(a)$, exactly the displayed canonical map; postcomposition with a morphism of sheaves $F\\to G$ preserves this formula, so the bijection is natural in $F$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-galois-yoneda-hom-bijection",
+    "def-trf-geometric-morphism",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YA, proof of lemma-point-site-topos (2), canonical comparison, with Tag 00Y7 adjunction/currying"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00YA (lemma-point-site-topos), 00YB (lemma-neighbourhoods-directed), 00YC (proposition-point-limits), and 00Y7 (lemma-adjoint-point-push-stalk)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,7 +126,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-topos-points-geometric",
@@ -79,5 +150,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-site-point-reconstruction-sets",
+  "worker": "stage1",
+  "summary": "Split the set-valued reconstruction theorem into four complete steps: finite-limit preservation and cofiltered pointed objects, joint surjectivity over covers, the representable/skyscraper adjunction calculation, and the canonical colimit comparison for every sheaf of sets. Repaired return C1 by writing the full cancellation proof of joint epimorphy from local representatives and the sheaf equalizer axiom, then proving joint surjectivity via adjunction and characteristic functions. No new support nodes or uncited coequalizer presentation are used.",
+  "blueprint": "The imported blueprint ancestry is retained. The steps realize the site-point reconstruction used by the oriented-product point classification: finite-limit/cofiltered neighbourhoods, cover-surjectivity, and the canonical comparison from the Stacks 00YA proof.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-22bbea8dd",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-22bbea8dd (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps and all 8 cited statements in full, and Stacks sites.tex lemma-point-site-topos (00YA, the proof of (2) and the comparison map c), lemma-neighbourhoods-directed (00YB, l.8268) and proposition-point-limits (00YC, l.8309). The statement matches 00YA(2) for a site with finite limits, is unchanged and is not weakened. Step 1: h, # (via lem-weil-pbc-sheafification-sets-exact) and p^{-1} (via def-trf-geometric-morphism) each preserve finite limits; the terminal object, product and equalizer give the cofiltered conditions as in the 00YB proof. Step 2, the C1 repair, is correct. The local representatives come from sections-local, the covering T_a x_U U_i from axioms (ii)-(iii), and t|W = j_i(theta(pr2)) from naturality of the unit. Injectivity in the sheaf equalizer gives cancellation, which the adjunction and characteristic functions turn into joint surjectivity. The empty cover also works. Step 3: Yoneda, the sheafification universal property and the adjunction give (p_*E)(U) = Map(L(U),E), with naturality from the Yoneda node. Step 4: cocones over N_u^op, once curried, are exactly morphisms F -> p_*E. I traced the map with the unit and the triangle identity and it gives c[s,a] = p^{-1}(s~)(a), the displayed map. Small cases checked: a one-object site and an empty covering. There are no new nodes. lem-trf-site-point-fibre is the Lambda-module version and is not a duplicate. There is no cycle. The only cited statement outside the unit, sections-local, is Lean-closed in slopmaster2, so no tool_uses entry is needed. No SGA source is used. Remark: stmt_deps lists three lemmas the statement text does not cite; this is harmless and I left it unchanged. No fixes were written."
  }
 }
