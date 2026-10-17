@@ -1,6 +1,6 @@
 # Work queue
 
-24 items; claim with `tools/claim.py next <group> [--stage N]`.
+23 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (24)
+## Stage 3: modules to prove (23)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -33,7 +33,6 @@
 | `WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy` | 10 | 1 | proof |
 | `WeilConjectures.WeilSheaf.FourierInversion.Composite` | 11 | 1 | proof |
 | `WeilConjectures.WeilSheaf.FourierInversion.Delta` | 11 | 1 | proof |
-| `Sheaf.Paper.IntegralResidueTensorRouteDescent` | 12 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorRouteKFlat` | 12 | 1 | proof |
 | `WeilConjectures.WeilSheaf.FourierInversion.UpperStar` | 12 | 3 | proof |
 
