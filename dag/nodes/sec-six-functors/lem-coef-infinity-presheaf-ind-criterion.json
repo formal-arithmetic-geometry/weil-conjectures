@@ -256,5 +256,34 @@
   "group": "Q85",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-759565904 (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 10 cited statements, the 6 nodes used for the repair, the unit and chapter records, and the A–H rules. The item's statement is unchanged and correct: it matches HTT Corollary 5.3.5.4 (1)<=>(3) for A admitting kappa-small colimits, with the empty shape included and no hypothesis added. HTT is not archived and is WANTED; I did not fetch it, and proof_origin=agent is correct. Small cases checked: A=Delta^0, N(0->1) with kappa=omega, the empty presheaf, representable X. No new nodes. No duplicate: ind-kappa-presentability, ind-kappa-extension, accessible-compact-slice-density, space-yoneda-density and continuous-presheaf-representability state different results. No cycle, no SGA, Mathlib has only the ordinary-category version (not a leaf). Steps 1, 4, 5 and 6 are correct against their cited statements; the step-4 cylinder orientation and section/path argument check out. Two faults repaired in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-presheaf-ind-criterion.json (only proof, proof_deps and split_report changed). (1) E5, step 2: the comparison E=A x_B C -> C was justified by an informal inverse (b,v)->(k(b),v eps_b), which needs a transport along the right fibration that no cited node gives. It is now proved as follows: C->B is a right fibration (lem-coef-infinity-slice-right-fibration, then pullback) and an isofibration (last clause of lem-cbc-left-fibration-equivalence-lift on the opposites). lem-coef-infinity-isofibration-pullback-limit with T=A, g=y gives Fun(Q,E)^~ = Fun(Q,A)^~ x^h Fun(Q,C)^~. y_* is a homotopy equivalence by k and the whiskered unit/counit (lem-cbc-enhanced-functor-cone-calculus). The cases Q=C and Q=E give the quasi-inverse. (2) C1/C3, step 3: it now cites the mapping bifunctor H_A of lem-coef-space-transport-classification and the colimits in S from lem-coef-infinity-presheaf-free-cocompletion. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus (declared by the delivery) and lem-cbc-left-fibration-equivalence-lift (added). Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53a81198c",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Node differs from base only in lean; lean.statement verbatim. Hypotheses (κ regular in Cardinal.{u}, A quasicategory in SSet.{u}, hA colimits for all κ-small K) and clauses (1) (small κ-filtered I, p, colimiting cocone on ulift p ≫ infinityYoneda, equivalence edge X→apex) and (2) (every colimiting supplied cocone ⇒ IsPresheafLimitComparison) match HTT 5.3.5.4 (1)⇔(3) and the node. IsPresheafLimitComparison fixes the apex and the whole cylinder as X applied to the opposite cocone; checked against commaSubcomplex endpoint conventions and opIso vertex reversal j↦1−j that the image is a cone Δ X(a) → X∘q.op, so the predicate is exactly 'the induced cone is limiting'. Edge cases K=∅ (contractible value), I=∅, A=∅, K=Δ[0], Δ[1], κ=ℵ0 covered. Reuses canonical infinityPresheaves/infinityYoneda/infinityCategory/cone notions; helpers real; single sorry; docstrings carry source, blueprint and six proof steps. nt_compile --json side overlay rc=0, target 1.6 s, no errors/warnings. Minor non-blocking: redundant IsSmall conjunct, unused presheafValue, transitive-only stmt_deps for presheaf-yoneda (stage-2 rules forbid adding it)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityPresheafIndCriterion",
+  "declaration": "CategoryTheory.Spaces.presheaf_ind_criterion",
+  "declarations": [
+   "CategoryTheory.Spaces.presheafMap",
+   "CategoryTheory.Spaces.presheafValue",
+   "CategoryTheory.Spaces.presheafDiagram",
+   "CategoryTheory.Spaces.presheafObject",
+   "CategoryTheory.Spaces.presheafTransformationMap",
+   "CategoryTheory.Spaces.presheafOppositeCoconeMap",
+   "CategoryTheory.Spaces.IsPresheafLimitComparison",
+   "CategoryTheory.Spaces.presheaf_ind_criterion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityPresheafIndCriterion.lean",
+  "statement": "theorem presheaf_ind_criterion (κ : Cardinal.{u}) (hκ : κ.IsRegular) (A : SSet.{u}) [SSet.Quasicategory A] (hA : ∀ (K : SSet.{u}), SSet.Presentability.IsKappaSmall κ K → ∀ (q : K ⟶ A), ∃ t : (coconeCategory q) _⦋0⦌, IsColimiting q t) (X : (infinityPresheaves A) _⦋0⦌) : ((∃ (I : SSet.{u}) (hI : SSet.Quasicategory I), SSet.Presentability.IsSmall.{u, u} I ∧ @SSet.Presentability.IsKappaFiltered κ I hI ∧ ∃ (p : I ⟶ A), ∃ t : (coconeCategory (SSet.uliftFunctor.{u + 1, u}.map p ≫ infinityYoneda A)) _⦋0⦌, IsColimiting (SSet.uliftFunctor.{u + 1, u}.map p ≫ infinityYoneda A) t ∧ ∃ e : (infinityPresheaves A) _⦋1⦌, IsEquivalenceEdge (infinityPresheaves A) e ∧ (infinityPresheaves A).δ 1 e = X ∧ (infinityPresheaves A).δ 0 e = t.1.1)) ↔ (∀ (K : SSet.{u}), SSet.Presentability.IsKappaSmall κ K → ∀ (q : K ⟶ A), ∀ (lam : (coconeCategory q) _⦋0⦌), IsColimiting q lam → IsPresheafLimitComparison X q lam)",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the published presentability dependency. The induced-limit predicate fixes both the apex and the complete cylinder transformation obtained from the supplied cocone by taking opposites and applying the actual presheaf; no arbitrary limit cone is substituted."
  }
 }

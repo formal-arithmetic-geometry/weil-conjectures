@@ -294,5 +294,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f99a9a61",
+  "group": "Q27",
+  "result": "fix",
+  "note": "Statement matches node and HTT 5.4.4.3/5.3.4.13/5.3.1.18 clause by clause: cardinal hyps (regular, λ<κ, uncountable, μ^ν<κ), C λ/κ-accessible in SSet.{max(u+1) v}, K κ-small; conclusions κ-accessibility of ihom K C (∃ Prop-valued Quasicategory), small κ-filtered poset presentation with IsColimiting + equivalence edge apex→diagramVertex p and pointwise κ-compact values, pointwise compact ⇒ compact. Removal of the IsKappaSmall(nerve A) conjunct was correct. No extra assumptions, universes bound, edge cases (K=∅, C empty, λ=ℵ0) fine, recorded dependency declarations used, node changed only in lean, dependency nodes untouched, lean.statement verbatim. Fixes in fixes/AccessibleDiagramPresentations.lean: H8, the docstring now gives the node's 7 proof steps with the cited nodes; imports per brief-stage2 l.104: direct public import of EnhancedDiagramsCones plus plain imports of the 9 missing stated proof-dependency modules. Signature unchanged. nt_compile --json: delivered and fixed files exit 0, no warnings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AccessibleDiagramPresentations",
+  "declaration": "SSet.Presentability.accessibleDiagramPresentations",
+  "statement": "theorem accessibleDiagramPresentations (lam kap : Cardinal.{u}) (hlam : lam.IsRegular) (hkap : kap.IsRegular) (hlamkap : lam < kap) (huncountable : Cardinal.aleph0 < kap) (hExp : ∀ μ ν : Cardinal.{u}, μ < kap → ν < lam → μ ^ ν < kap) (C K : SSet.{max (u + 1) v}) [hC : SSet.Quasicategory C] (hClam : IsKappaAccessible C lam) (hCkap : IsKappaAccessible C kap) (hK : IsKappaSmall kap K) : ∃ (hFun : SSet.Quasicategory ((ihom K).obj C)), @IsKappaAccessible.{u, max (u + 1) v} ((ihom K).obj C) hFun kap ∧ (∀ (p : K ⟶ C), (∀ v₀ : K _⦋0⦌, IsKappaCompact C kap (p.app (op ⦋0⦌) v₀)) → @IsKappaCompact.{u, max (u + 1) v} ((ihom K).obj C) hFun kap (SSet.Enhanced.diagramVertex p)) ∧ (∀ (p : K ⟶ C), ∃ (A : Type (max (u + 1) v)) (_ : PartialOrder A), Small.{u} A ∧ @IsKappaFiltered.{u, max (u + 1) v} kap (nerve A) (CategoryTheory.Nerve.quasicategory) ∧ ∃ (q : nerve A ⟶ (ihom K).obj C), (∃ (t : (Enhanced.coconeCategory q) _⦋0⦌), Enhanced.IsColimiting q t ∧ ∃ (e : ((ihom K).obj C) _⦋1⦌), Enhanced.IsEquivalenceEdge ((ihom K).obj C) e ∧ ((ihom K).obj C).δ 1 e = t.1.1 ∧ ((ihom K).obj C).δ 0 e = SSet.Enhanced.diagramVertex p) ∧ (∀ (a : (nerve A) _⦋0⦌) (v₀ : K _⦋0⦌), IsKappaCompact C kap ((SSet.Enhanced.evaluation K C v₀).app (op ⦋0⦌) (q.app (op ⦋0⦌) a))))",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/CategoryTheory/AccessibleDiagramPresentations.lean",
+  "fixed_by": "NT-stage2-cc-1f99a9a61"
  }
 }

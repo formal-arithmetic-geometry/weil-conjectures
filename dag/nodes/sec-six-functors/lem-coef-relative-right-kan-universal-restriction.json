@@ -315,5 +315,32 @@
   "group": "Q56",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-0bf0b5ca8 (reviewer sub-agent of L); spot-checked: Read the item in full: statement unchanged, 10 steps, no new nodes. Also read all 20 cited node statements, the unit record sk-prop-sf-biduality-general, and the sources: HTT 4.3.2.7/4.3.2.15 and Kerodon 030F/0302 (online only; WANTED is recorded and proof_origin is agent). The statement is the fibre over a fixed s of the right-hand dual of HTT 4.3.2.15, with the existing isofibration hypothesis, so nothing is weakened. Steps 1-8 and 10 check out against the cited statements. In step 2's product-cell argument every missing simplex ends at the prescribed final vertex (m,n); m=n=1 checked. In step 3 the local W_{L_c} problems meet every hypothesis of relative-kan-existence. Step 5's dimension-0 lift and the fullness of R give exactly the definition of trivial Kan fibration. The step 7 join argument is checked, including that the local index at the apex is L_* = A. Step 10's pasting uses the naturality of the constant-source test under restriction. Repair to step 9: the glued edge was shown to be an equivalence only in Fun(K,D), via cone-calculus. The isofibration corner needs an equivalence edge in the pullback Fun(K,D)x_{Fun(K,B)}Fun(C^<,B). The fix also glues the inverse and both witness triangles, which lie over degenerate data. Step 9's uses drop cone-calculus, proof_deps is unchanged, and the tool_uses 'why' now names step 1 only. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus (generic, step 1). No cycle; no duplicate. The unsplit lem-coef-relative-right-kan-restriction is a special case of this item (it adds 'every h extends') and could cite it in its own split. Edge cases A=C, C empty, A empty, p=id, B a point and empty T pass.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4db90ea4",
+  "group": "N7",
+  "result": "pass",
+  "note": "Clause-by-clause match of node vs Lean. One universe u; A = fullSubcomplex C P; IsIsofibration p; R = existing relativeRightKanCategory over sectionCategory p s; T = full subcomplex of h with, for each c, an exact-boundary, exact-base (s l_c) p-limit cone (real data). The restriction is a Subcomplex.lift of the existing map; its landing obligation is a named sorry theorem, and true. Trivial-Kan lifting holds for all n including 0, plus IsFunctorEquivalence and IsFullyFaithful. Cone comparison: conditional existence with the three exact equations, and the iff for every such q. No added assumptions; edge cases n=0, empty A or C, A=C, p=id, B=pt covered. Node differs from the repo only in lean; lean.statement verbatim; six declarations listed; docstrings carry the source, blueprint id and proof steps; all theorems sorry; every proof_dep module that exists is imported. nt_compile --json clean (exit 0, 1.4 s; control error confirmed). Report has Worker report and Second reading by N7. Non-blocking: the Q12 restriction module cannot import this one in stage 3 without an import cycle (left out and listed per §3(7))."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeRightKanUniversalRestriction",
+  "declaration": "SSet.Enhanced.relative_right_kan_universal_restriction",
+  "declarations": [
+   "SSet.Enhanced.IsAdmissibleRestrictedDiagram",
+   "SSet.Enhanced.admissibleRestrictionSubcomplex",
+   "SSet.Enhanced.relative_right_kan_restriction_simplex",
+   "SSet.Enhanced.relativeRightKanAdmissibleRestriction",
+   "SSet.Enhanced.relative_right_kan_universal_restriction",
+   "SSet.Enhanced.relative_right_kan_cone_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeRightKanUniversalRestriction.lean",
+  "statement": "theorem relative_right_kan_universal_restriction {C D B : SSet.{u}} [Quasicategory C] [Quasicategory D] [Quasicategory B] (P : C _⦋0⦌ → Prop) (p : D ⟶ B) (hp : IsIsofibration p) (s : C ⟶ B) : (∀ n : ℕ, ∀ a : (∂Δ[n] : SSet.{u}) ⟶ (relativeRightKanCategory P p s).toSSet, ∀ b : (Δ[n] : SSet.{u}) ⟶ (admissibleRestrictionSubcomplex P p s).toSSet, a ≫ relativeRightKanAdmissibleRestriction P p s = (boundary n).ι ≫ b → ∃ c : (Δ[n] : SSet.{u}) ⟶ (relativeRightKanCategory P p s).toSSet, c ≫ relativeRightKanAdmissibleRestriction P p s = b ∧ (boundary n).ι ≫ c = a) ∧ IsFunctorEquivalence (relativeRightKanAdmissibleRestriction P p s) ∧ IsFullyFaithful (relativeRightKanAdmissibleRestriction P p s)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses sectionCategory, sectionUnderlying, relativeRightKanCategory, and relativeRightKanRestriction from the existing restriction module. The distinct relativeRightKanAdmissibleRestriction is its corestriction to admissible diagrams T; no duplicate restriction or fixed-base functor notion is declared. States all boundary dimensions and equivalence consequences, cone existence when qA is limiting, and the iff for every exact extension cone."
  }
 }

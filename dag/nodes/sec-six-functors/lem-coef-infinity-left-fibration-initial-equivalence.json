@@ -166,5 +166,27 @@
   "group": "Q113",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-e5f3be042 (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item, the new node lem-coef-infinity-initial-evaluation-trivial-fibration, the three cited definitions (def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, def-weil-pbc-trivial-kan-fibration), the citer lem-coef-twisted-arrow-left-fibration, the unit, the chapter and the ancestor. Item statement, stmt_deps, source and blueprint are byte-identical to the side-DAG copy, so the statement is not weakened. Running a DFS over the DAG finds no cycle; the earlier circular route through space-transport-classification is gone. proof_deps equals the union of the step uses. The Kerodon sources 03J6/038R are not in literature/: they are recorded as WANTED and the proof is marked by=agent. I checked them mathematically instead: d initial means {d}->D is left anodyne, so restriction into a left fibration is a trivial Kan fibration, and its fiber over p is ev_d: Fun_/B(D,T)->T_b, which is exactly the helper. Step 1: vertex surjectivity at u(e) gives v with pv=q and v(u(e))=e strictly. Step 2: lifting the n=1 boundaries over s0(e) gives alpha and alpha'; lifting the two n=2 boundaries (edges alpha, alpha' with a degenerate long edge) gives both inverse witnesses. All endpoints are compatible and each boundary evaluates to the constant triangle. Step 3 does the same at the given initial object u(e), using uv(u(e))=u(e). Step 4 is the definitional assembly and is rightly marked elementary. The new node meets B1-B7: statement only, all objects introduced, correct definitions cited, no double escapes. Its ten recorded Mathlib searches and my own grep find no left fibrations or anodyne maps in Mathlib, so unsplit is correct. Duplicate candidates opened and ruled out: relative-initial-boundary (02WS), cocone-restriction-initial (02XB), kan-mapping-restriction (030M), pointwise-yoneda-evaluation (03M5). Small cases tested: D=B=Delta^0; T or T_b empty; D=B=Delta^1 with d=0; B a point; B empty. Only definitions and a helper in the same unit are cited, so the route is unchanged and no tool_uses are needed; this is not a target node, so the base-change and coefficient checks do not apply. No SGA. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8e58d2881",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node: one universe u; quasicategories E, F, B; leftFibration p and q; u≫q=p; IsInitial for e and u(e); a strict v with v≫p=q; vu≃id_E and uv≃id_F, with directions checked. IsNaturallyEquivalentOver is a real helper that puts the edge, its inverse and both triangles over B through (ihom C).map r = const (diagramVertex r), exactly the node's convention. The existing EquivalenceOver (plain homotopies) and AreLMNaturallyEquivalentOver (only the edge over the base) are different notions, so the helper is not a duplicate. lean.statement is verbatim in the file; the node differs from the side DAG only in its lean field; imports are exactly the two stmt_deps; docstrings carry Kerodon 03J6 and the blueprint tag; the only proof is sorry. Edge cases checked: empty E or B is vacuous, B a point gives the ordinary criterion, E=F=B a point works. nt_compile is clean (1.2 s) and the only non-standard axiom is sorryAx. Cosmetic only: redaction artefacts in the report text."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InitialLeftFibrationEquivalence",
+  "declaration": "SSet.Enhanced.initial_left_fibration_equivalence",
+  "file": "lean/Sheaf/CategoryTheory/InitialLeftFibrationEquivalence.lean",
+  "statement": "theorem initial_left_fibration_equivalence {E F B : SSet.{u}} [Quasicategory E] [Quasicategory F] [Quasicategory B] (p : E ⟶ B) (q : F ⟶ B) (u : E ⟶ F) (hp : leftFibration p) (hq : leftFibration q) (hu : u ≫ q = p) (e : E.obj (op ⦋0⦌)) (he : IsInitial E e) (hue : IsInitial F (u.app (op ⦋0⦌) e)) : ∃ v : F ⟶ E, v ≫ p = q ∧ IsNaturallyEquivalentOver p (u ≫ v) (𝟙 E) ∧ IsNaturallyEquivalentOver q (v ≫ u) (𝟙 F)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.IsNaturallyEquivalentOver",
+   "SSet.Enhanced.initial_left_fibration_equivalence"
+  ]
  }
 }
