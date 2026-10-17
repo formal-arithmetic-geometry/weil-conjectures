@@ -1,0 +1,38 @@
+{
+ "id": "sk-lem-trf-graded-immersion-ample-criterion",
+ "kind": "unit",
+ "chapter": "sec-trace-formula",
+ "title": "An everywhere-defined graded Proj immersion detects relative ampleness",
+ "lean": [],
+ "uses": [],
+ "statement": "Let $h:Z\\to S$ be a quasi-compact morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism]. Let $L$ be an invertible $\\mathcal O_Z$-module [def-sc-invertible-module], and let $\\mathcal A=\\bigoplus_{d\\ge0}\\mathcal A_d$ be a quasi-coherent graded commutative $\\mathcal O_S$-algebra [def-weil-pbc-quasi-coherent-algebra, def-weil-pbc-graded-sheaf-structures]. It need not be generated in degree one and $\\mathcal A_0$ need not equal $\\mathcal O_S$. Suppose $\\psi:h^*\\mathcal A\\to\\bigoplus_{d\\ge0}L^{\\otimes d}$ is a graded algebra homomorphism [def-pc-module-pullback, def-pur-sheaf-tensor-product]. Let $U(\\psi)$ be the union, over $d\\ge1$, of the open loci on which $\\psi_d:h^*\\mathcal A_d\\to L^{\\otimes d}$ is surjective, and let $r_{L,\\psi}:U(\\psi)\\to\\operatorname{Proj}_S(\\mathcal A)$ be the canonical morphism [lem-trf-space-line-module-proj-map, def-nagata-relative-proj]. If $U(\\psi)=Z$ and $r_{L,\\psi}$ is an immersion [def-weil-closed-immersion], then $L|_{h^{-1}(V)}$ is ample [def-weil-pbc-ample-invertible-module] for every affine open $V\\subseteq S$.",
+ "steps": [
+  {
+   "text": "Fix an affine open $V\\subseteq S$, put $T=h^{-1}(V)$, and write $A=\\mathcal A(V)$ and $P=\\operatorname{Proj}(A)$. The affine restriction of the relative Proj and of the canonical map in [lem-trf-space-line-module-proj-map] identifies $r_{L,\\psi}|_T$ with the ordinary canonical morphism $r:T\\to P$ attached to the graded ring map $A\\to\\Gamma_*(T,L|_T)$ induced by $\\psi$. Because $U(\\psi)=Z$, the positive-degree images generate $L|_T$ at every point, so the nonvanishing opens of positive-degree homogeneous sections cover $T$."
+  },
+  {
+   "text": "The morphism $r:T\\to P$ is an immersion and $T$ is quasi-compact. Apply [lem-trf-qc-immersion-proj-open-factor] to obtain a quasi-compact open subscheme $Y\\subseteq P$ and a factorization $T\\xrightarrow{i}Y\\xrightarrow{u}P$ with $i$ a closed immersion and $u$ the open inclusion."
+  },
+  {
+   "text": "By [lem-trf-proj-qc-open-twist-ample], there is an integer $e\\geq1$ for which $\\mathcal O_Y(e)$ is invertible and ample. Restricting this ample module along the closed immersion $i$ and using [lem-trf-ample-restrict-closed-immersion] shows that $i^*\\mathcal O_Y(e)$ is ample on $T$. Via $u^*\\mathcal O_P(e)=\\mathcal O_Y(e)$, this is ampleness of $r^*\\mathcal O_P(e)$."
+  },
+  {
+   "text": "The ring map and canonical morphism from Step 1 satisfy the hypotheses of [lem-trf-proj-canonical-map-twist-comparison], so for some $d\\geq1$ there is an isomorphism $r^*\\mathcal O_P(dk)\\simeq L|_T^{\\otimes dk}$ for every $k\\geq1$. Taking $k=e$ and combining the usual tensor-power identification $\\mathcal O_P(e)^{\\otimes d}\\simeq\\mathcal O_P(ed)$ with Step 3 gives that $L|_T^{\\otimes ed}$ is ample, using [lem-sc-ample-positive-tensor-power] for the $d$th power of the ample module $r^*\\mathcal O_P(e)$."
+  },
+  {
+   "text": "Since $ed>0$, every affine nonvanishing section cover for the positive tensor power $L|_T^{\\otimes ed}$ is also a cover by sections of positive tensor powers of $L|_T$ (with the same nonvanishing loci). Thus $L|_T$ is ample directly from [def-weil-pbc-ample-invertible-module]. As this holds for the inverse image of every affine open $V\\subseteq S$, the asserted relative ampleness follows from the quasi-compactness of $h$."
+  }
+ ],
+ "source": "literature/stacks-project/morphisms.tex, Tag 01VJ (lemma-characterize-relatively-ample), proof of (6) implies (1); Constructions Tag 01O9 and Properties Tags 01PU, 01Q2, 01PT. Dedicated proof-unit binding for the existing criterion; historical blueprint ancestry remains on its nodes.",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}
