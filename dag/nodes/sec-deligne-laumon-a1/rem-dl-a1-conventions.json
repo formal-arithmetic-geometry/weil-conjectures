@@ -3,27 +3,87 @@
  "blueprint": {
   "is": "rem-dl-a1-conventions",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Affine-line and weight conventions",
- "statement": "Fix $k_0=\\mathbf F_q$, its algebraic closure $k$, a prime $\\ell\\ne \\operatorname{char}(k_0)$, and $\\iota:\\DLAQ\\simeq\\mathbf C$. Write\n$A_0=\\mathbf A^1_{k_0}$, $A=A_0\\otimes k$, and use a prime to denote the\ndual affine line. All cohomology is geometric, with geometric Frobenius\n([def-weil-frobenius-detailed]).\nA lisse Weil sheaf is *pure of weight $w$* if every eigenvalue\n$\\alpha$ at a closed point $x$ satisfies\n$|\\iota\\alpha|=q_x^{w/2}$; replace equality by $\\leq$ for an upper bound\n([def-weil-punctual-weights]).\nThe twist $(-1)$ raises weights by two ([def-wf-tate-twist]).\nA Weil sheaf $F$ is *irreducible lisse* (an *irreducible lisse Weil\nsheaf*) if it is lisse and nonzero and every lisse Weil subsheaf of $F$\nis $0$ or $F$: it is a simple object of the category of lisse Weil\nsheaves. On a connected normal scheme such as a dense open of $A_0$, this\nsays that the Weil group acts irreducibly on the geometric generic stalk.\nIt is weaker than simplicity in the category of all Weil sheaves, which\nnever holds for a nonzero lisse sheaf on a curve: for a closed point $x$,\nthe extension by zero of the restriction to the complement of $x$ is a\nnonzero proper subsheaf.\n\nFor a dense open $j:U_0\\hookrightarrow A_0$, $j_*F$ denotes the\n*ordinary* sheaf direct image. Its stalks at missing points are\ninertia invariants; its curve perverse intermediate extension is\n$j_{!*}(F[1])=(j_*F)[1]$ ([def-wf-middle-extension]). A lisse Weil sheaf $F$ on $U_0$ is *unramified at infinity* if it\nextends to a lisse Weil sheaf on the open $U_0\\cup\\{\\infty\\}$ of\n$\\mathbf P^1_{k_0}$ (with $A_0\\subset\\mathbf P^1_{k_0}$ the standard chart);\nequivalently, inertia\nat $\\infty\\in\\mathbf P^1_k$ acts trivially on the geometric generic fiber.\nA Weil sheaf on $U_0$ is *geometrically constant* if its underlying étale\nsheaf is constant on every connected open of $U=U_0\\otimes k$; for $U$\nconnected this means that the geometric fundamental group acts\ntrivially, while its Frobenius module may be nontrivial.",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber], with $k_0=\\mathbf F_q$ and its algebraic closure $k$, a prime $\\ell\\ne \\operatorname{char}(k_0)$, and $\\iota:\\overline{\\mathbf Q}_\\ell\\simeq\\mathbf C$. Write\n$A_0=\\mathbf A^1_{k_0}$, $A=A_0\\otimes k$, and use a prime to denote the\ndual affine line. The affine-space construction is [def-sbc-affine-space]; the standard projective-line chart is [def-sc-p1-standard]. All cohomology is geometric, in the sense of [def-weil-ordinary-compact-cohomology], with geometric Frobenius\n([def-weil-frobenius-detailed]).\nWeil sheaves mean [def-weil-weil-sheaf-complex], and lisse means [def-pod-lisse-l-adic-sheaves]. A lisse Weil sheaf is *pure of weight $w$* if every eigenvalue\n$\\alpha$ at a closed point $x$ satisfies\n$|\\iota\\alpha|=q_x^{w/2}$; replace equality by $\\leq$ for a punctual upper bound\n([def-weil-punctual-weights]).\nUse the twist construction [def-wf-tate-twist]; its weight shift is the specialization $n=-1$ of [lem-tw-tate-twist-weight-shift], so $(-1)$ raises weights by two.\nA Weil sheaf $F$ is *irreducible lisse* (an *irreducible lisse Weil\nsheaf*) if it is lisse and nonzero and every lisse Weil subsheaf of $F$\nis $0$ or $F$: it is a simple object of the category of lisse Weil\nsheaves. On a connected normal scheme such as a dense open of $A_0$, this\nsays that the Weil group acts irreducibly on the geometric generic stalk, by the exact fibre equivalence [cor-galois-lisse-representations] with the Weil structure [def-wf-fundamental-representation]; for curves the matching of subobjects is explicitly [prop-wf-weil-sheaf-representation-equivalence].\nIt is weaker than simplicity in the category of all Weil sheaves, which\nnever holds for a nonzero lisse sheaf on a curve: choose a closed point $x$ in a component on which its rank is positive;\nthe extension by zero of the restriction to the complement of $x$ is a\nnonzero proper subsheaf (its stalk at $x$ is zero and its generic stalk equals that of $F$); the canonical inclusion is the counit of [lem-weil-pbc-extension-by-zero-adjunction], with stalks given by [lem-weil-pbc-extension-by-zero-stalks], so it is injective by [lem-weil-pbc-geometric-stalks-detect-mono]. These constructions use [def-weil-pbc-extension-by-zero] at each finite adic coefficient stage and then pass to the rational coefficients.\n\nFor a dense open $j:U_0\\hookrightarrow A_0$, $j_*F$ denotes the\n*ordinary* sheaf direct image. Its stalks at missing points are\ninertia invariants by [lem-wf-boundary-stalk-invariants]; its curve perverse intermediate extension, characterized by the absence of boundary perverse subobjects and quotients, is\n$j_{!*}(F[1])=(j_*F)[1]$ ([lem-dl-a1-curve-intermediate-extension], with ordinary direct image as in [def-wf-middle-extension]). A lisse Weil sheaf $F$ on $U_0$ is *unramified at infinity* if it\nextends to a lisse Weil sheaf on the open $U_0\\cup\\{\\infty\\}$ of\n$\\mathbf P^1_{k_0}$ (with $A_0\\subset\\mathbf P^1_{k_0}$ the standard chart);\nby [lem-dl-a1-lisse-extension-inertia] applied to $C_0=U_0\\cup\\{\\infty\\}$, this is equivalent to the condition that inertia\nat $\\infty\\in\\mathbf P^1_k$ acts trivially on the geometric generic fiber.\nA Weil sheaf on $U_0$ is *geometrically constant* if its underlying étale\nsheaf is constant on every connected open of $U=U_0\\otimes k$; for $U$\nconnected this means that the geometric fundamental group acts\ntrivially, while its Frobenius module may be nontrivial. This last description uses [cor-galois-lisse-representations], which sends the constant sheaf to the trivial representation. Here constant means isomorphic to a finite direct sum of the constant coefficient sheaf in the adic convention, and the geometric fundamental representation and its Weil extension are those of [def-wf-fundamental-representation].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-d-dl-a1-setup/rem-dl-a1-conventions.md",
   "place": "node rem-dl-a1-conventions, order 3067"
  },
  "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-sbc-affine-space",
+  "def-sc-p1-standard",
+  "def-weil-ordinary-compact-cohomology",
   "def-weil-frobenius-detailed",
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves",
   "def-weil-punctual-weights",
   "def-wf-tate-twist",
-  "def-wf-middle-extension"
+  "lem-tw-tate-twist-weight-shift",
+  "cor-galois-lisse-representations",
+  "def-wf-fundamental-representation",
+  "prop-wf-weil-sheaf-representation-equivalence",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-geometric-stalks-detect-mono",
+  "def-weil-pbc-extension-by-zero",
+  "lem-wf-boundary-stalk-invariants",
+  "lem-dl-a1-curve-intermediate-extension",
+  "def-wf-middle-extension",
+  "lem-dl-a1-lisse-extension-inertia"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|IsUnramifiedAtInfinity|IsGeometricallyConstant",
+   "results": "Returned 0 hits: .  None states this l-adic Weil-sheaf result; algebraic unramified morphisms, inertia of ideals, structure-sheaf modules and general derived-category objects are different notions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lisse Weil sheaf geometrically constant unramified at infinity irreducible lisse geometric Frobenius weights",
+   "results": "Returned 8 hits: CategoryTheory.Sheaf.isConstant_iff_mem_essImage, NumberField.InfinitePlace.IsUnramified, LightCondensed.IsDiscrete, NumberField.InfinitePlace.IsUnramifiedIn, RCLike.cWeight, AlgebraicGeometry.FormallyUnramified.casesOn, AlgebraicGeometry.FormallyUnramified.recOn, NumberField.InfinitePlace.IsUnramified.stabilizer_eq_bot.  None states this l-adic Weil-sheaf result; algebraic unramified morphisms, inertia of ideals, structure-sheaf modules and general derived-category objects are different notions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilSheaf\"",
+   "results": "Returned 0 hits: .  None states this l-adic Weil-sheaf result; algebraic unramified morphisms, inertia of ideals, structure-sheaf modules and general derived-category objects are different notions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lisse Weil sheaf geometrically constant unramified at infinity irreducible lisse geometric Frobenius weights",
+   "results": "Returned 8 hits: IsArithFrobAt.arithFrobAt, arithFrobAt, IsArithFrobAt.exists_of_isInvariant, WittVector.isocrystal_classification, WittVector.StandardOneDimIsocrystal, Algebra.unramifiedLocus, Algebra.IsUnramifiedAt, WittVector.instIsocrystalStandardOneDimIsocrystal.  None states this l-adic Weil-sheaf result; algebraic unramified morphisms, inertia of ideals, structure-sheaf modules and general derived-category objects are different notions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|[Gg]eometric[Ff]robenius|[Tt]ate[Tt]wist|[Ww]eil[Ss]heaf",
+   "results": "Returned 3 hits: Mathlib/Topology/MetricSpace/Cover.lean, Mathlib/Topology/MetricSpace/MetricSeparated.lean, Mathlib/Data/Rel/Separated.lean.  None states this l-adic Weil-sheaf result; algebraic unramified morphisms, inertia of ideals, structure-sheaf modules and general derived-category objects are different notions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On an affine line over a finite field, define a geometrically constant l-adic Weil local system and irreducibility among lisse Weil subsheaves",
+   "results": "Returned 8 hits: LightCondensed.IsDiscrete, AlgebraicGeometry.Scheme.AffineZariskiSite, Condensed.lanSheafProfinite, LightCondensed.lanLightCondSet, AffineSubspace.mk.noConfusion, WeierstrassCurve.Affine.irreducible_polynomial, WeierstrassCurve.Affine, WeierstrassCurve.Affine.linePolynomial.  None states this l-adic Weil-sheaf result; algebraic unramified morphisms, inertia of ideals, structure-sheaf modules and general derived-category objects are different notions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -80,5 +140,40 @@
    ],
    "open": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "rem-dl-a1-conventions",
+  "worker": "stage1",
+  "summary": "Audited the definition clause by clause against main-20261015 and the slopmaster2 predicates. Exposed the finite-field, adic lisse/Weil, affine/projective-line, cohomology, and representation notions; reused existing theorem nodes for Tate weights, boundary stalks, and the lisse representation equivalence. Added two statement-only supporting results for the non-definitional lisse-extension/inertia and perverse-intermediate-extension comparisons; no new definitions and no theorem proof is hidden in the definition. Clarified that the displayed eigenvalue inequality is a punctual upper bound, not a definition of a mixed weight filtration.",
+  "blueprint": "Realizes both paragraphs of rem-dl-a1-conventions: affine-line/Frobenius/weights and irreducibility, then ordinary direct image, the two comparison assertions, unramifiedness, and geometric constancy. The older sk-d-dl-a1-setup is a partial overlap, omitting the irreducible-lisse paragraph, so same_as remains empty. The unit has no proof steps; this is a definition item rather than its separately imported sk key node."
+ },
+ "lean_candidates": [
+  {
+   "declaration": "AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse",
+   "file": "WeilConjectures/WeilSheaf/Category.lean",
+   "line": 342,
+   "note": "Matches the irreducible-lisse predicate only; no attachment of the whole conventions node."
+  },
+  {
+   "declaration": "AlgebraicGeometry.WeilSheaf.IsGeometricallyConstant",
+   "file": "WeilConjectures/DeligneLaumon/AffineLine/Defs.lean",
+   "line": 72,
+   "note": "Matches the geometrically constant predicate only."
+  },
+  {
+   "declaration": "AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity",
+   "file": "WeilConjectures/DeligneLaumon/AffineLine/Defs.lean",
+   "line": 94,
+   "note": "Matches the lisse-extension definition only; its docstring does not prove the inertia equivalence."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-6f300e2eb",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-6f300e2eb (reviewer sub-agent of L); spot-checked: Read the whole item (main-20261015 rem-dl-a1-conventions, order 3067), both new nodes, the unit sk-d-dl-a1-setup (no steps, uses []) and every cited node's statement. The item matches its source sentence by sentence. It makes two precisions and drops nothing: 'punctual upper bound' instead of 'upper bound', so it is not confused with the filtration-based mixed bound of def-weil-punctual-weights; and the nonsimplicity remark now takes x in a component of positive rank, because the source's version fails where the rank is 0. The twist claim is n=-1 of lem-tw-tate-twist-weight-shift (w-2n). The extension-by-zero counit, stalk and mono-detection lemmas say what the remark uses. New node lem-dl-a1-lisse-extension-inertia is true. Stacks 0BTD (pione-lemma-normal-pione-quotient-inertia, checked in pione.tex l.2984) makes ker(pi1 U -> pi1 C) normally generated by boundary inertia. The other geometric points over s give W(U_0)-conjugates of I_s, so the Weil structure covers them. Uniqueness and descent come from full faithfulness of restriction. Its hypotheses match d-real-setup/d-real-boundary. Tested on S_0 empty, F=0, constant sheaves, Kummer on G_m (does not extend) and Artin-Schreier at infinity. New node lem-dl-a1-curve-intermediate-extension is true: j_{!*}=tau_{<=-1}Rj_*(F[1])=(j_*F)[1]. i^!j_*F sits in degrees >=2 and Hom(i^*j_*F,E[-1])=0, so there are no Z-supported subobjects or quotients. Tested on j=id, F=0, a punctual summand and the Kummer IC complex. Neither node duplicates an existing one: thm-a1-curve-perverse-heart clause 4 gives perversity only, lem-wf-dense-open-pi1-surjective and lem-a1-lisse-middle-extension start from sheaves already lisse on C, and lem-wf-boundary-stalk-invariants gives a stalk only. Neither restates a proof clause; they are claims moved out of a definition. No cycle, no SGA, no tool_uses. Batch-5 citations, all accepted as general notions or tools outside both assumptions: def-pod-lisse-l-adic-sheaves, def-wf-middle-extension, d-real-boundary and def-wf-fundamental-representation are definitions, and def-wf-middle-extension already reached the PD chapter through the original blueprint uses. cor-galois-lisse-representations is the general lisse-sheaf/pi1 equivalence in the foundations unit sk-lem-finite, cited by 31 nodes, and Poincare duality neither states nor gives it. prop-wf-weil-sheaf-representation-equivalence, lem-tw-tate-twist-weight-shift and lem-wf-boundary-stalk-invariants are purity-chapter tools that reach the PD chapter only through definitions or nodes already in the item's original uses. None is a step of the trace-formula or PD proof. Minor: the new nodes lack a lean_audit field; left as is, since an absent field means none and the field is not split-owned. No fixes written."
  }
 }

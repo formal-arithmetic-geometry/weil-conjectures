@@ -12,9 +12,141 @@
   "sk-def-sf-kv-maps",
   "thm-sf-comp-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $U_u=Lu^*$, $P_u=Ru_!$, and $D_u(M,L)=\\operatorname{PF}_{u,M,L}^{-1}$. All maps below are the compactification-defined maps of [def-exchange-projection], with the canonical compositor $P_vP_u\\cong P_{vu}$. The pullbacks, tensors and compact-support images of the inputs remain in $D^b_{ctf}$ by [thm-sf-ctf-stability](i),(ii),(iv). Their etale-origin witnesses exist by [lem-sf-proetale-constructible-origin](ii), so the composition and exchange-pasting assertions apply. Projection maps are invertible by [fix-prop-projection-formula]; compact-support exchanges are invertible by [thm-cbc-finite-level-proetale]. Use the monoidal and signed symmetry comparisons of [lem-pur-derived-pullback-tensor-iso] throughout. This verifies the domains before taking any inverse; no axiomatic six-functor datum is assumed.",
+   "uses": [
+    "def-exchange-projection",
+    "thm-sf-ctf-stability",
+    "lem-sf-proetale-constructible-origin",
+    "fix-prop-projection-formula",
+    "thm-cbc-finite-level-proetale",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "steps (1)--(4): maps and their domains"
+   }
+  },
+  {
+   "text": "For $u:T\\to V$ and an auxiliary scheme $Z$, put $\\bar u=u\\times1_Z$, with projections $r:T\\times Z\\to T$, $s:V\\times Z\\to V$, $z:V\\times Z\\to Z$. Let $E_{u,Z}(M):U_sP_uM\\to P_{\\bar u}U_rM$ be exchange. Define the first-factor map\n$$L_{u,Z}(M,N)=(E_{u,Z}(M)^{-1}\\otimes1)D_{\\bar u}(U_rM,U_zN).$$\nIt goes from $P_{\\bar u}(M\\boxtimes N)$ to $P_uM\\boxtimes N$. Define $R_{Z,u}(N,M)$ by conjugating $L_{u,Z}(M,N)$ with the swaps of product schemes and the signed tensor symmetries. Thus $R$ applies $P_u$ in the second factor; the source $P_{1_Z\\times u}$ is identified with the swap-conjugate of $P_{u\\times1_Z}$ by the canonical compositors with the swap isomorphisms [thm-sf-comp-composition]. These are abbreviations for displayed composites, not additional comparison data. In particular, this fixes the order of all inverse projection and exchange factors that will occur in the product calculation.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-pur-derived-pullback-tensor-iso",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "canonical PF/base-change composite and coherence paragraph: concrete inverse base-change equation"
+   }
+  },
+  {
+   "text": "For $u:T\\to V$, $v:W\\to Z$, set $a=u\\times1_Z:T\\times Z\\to V\\times Z$, $b=1_V\\times v:V\\times W\\to V\\times Z$, and $a'=u\\times1_W$. Apply [sk-def-sf-kv-maps](i) over $V\\times Z$ with inputs pulled back from $M$ on $T$ and $N$ on $W$. The formula of [sk-thm-sf-kunneth-relative] is, in its stated direction, inverse compositor, $P_bD_{a'}$, $P_b(E_{a,b}^{-1}\\otimes1)$, symmetry, $D_b$, symmetry. This is $t_{u,v}$ itself, not its inverse. Write $s:V\\times Z\\to V$, $s':V\\times W\\to V$, $q:V\\times W\\to W$, and $K=U_{T\\times Z\\to T}M$. Horizontal exchange pasting [fix-lem-exchanges] gives\n$$E_{a,b}(K)\\,U_bE_{u,Z}(M)=E_{u,W}(M).$$\nReplace $P_aK$ by $U_sP_uM$ through $E_{u,Z}^{-1}$. Naturality of the outer inverse PF moves that replacement past $D_b$. The first inverse PF and the two successive inverse exchanges now give $L_{u,W}$. The remaining arrows are precisely\n$$P_b(U_{s'}P_uM\\otimes U_qN)\\xrightarrow{P_b\\sigma}P_b(U_qN\\otimes U_bU_sP_uM)\\xrightarrow{D_b}P_bU_qN\\otimes U_sP_uM\\xrightarrow{E_{v,V}^{-1}\\otimes1,\\,\\sigma}P_uM\\boxtimes P_vN,$$\nnamely $R_{V,v}$. Thus\n$$t_{u,v}(M,N)=R_{V,v}(P_uM,N)P_bL_{u,W}(M,N). \\tag{F}$$",
+   "uses": [
+    "sk-def-sf-kv-maps",
+    "sk-thm-sf-kunneth-relative",
+    "fix-lem-exchanges",
+    "thm-sf-comp-composition",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "steps (1)--(4): specialize the relative map to the product base and identify its six arrows"
+   }
+  },
+  {
+   "text": "For $T\\xrightarrow uV\\xrightarrow vS$ and fixed $Z$, put $A=u\\times1_Z$, $B=v\\times1_Z$, $H=U_{T\\times Z\\to T}M$, $Q=U_{S\\times Z\\to Z}N$. The inverse composition equation of [lem-sf-composition-projection-mate], using the compositor of [thm-sf-comp-composition], is\n$$D_{BA}(H,Q)=D_B(P_AH,Q)\\,P_BD_A(H,U_BQ).$$\nExpand $L_{v,Z}(P_uM,N)P_BL_{u,Z}(M,N)$. Naturality of $D_B$ moves $P_B(E_{u,Z}^{-1}\\otimes1)$ to the left of $D_B$; the resulting expression is\n$$((E_{v,Z}^{-1}P_u)\\circ P_BE_{u,Z}^{-1}\\ \\otimes1)\\,D_B(P_AH,Q)\\,P_BD_A(H,U_BQ).$$\nVertical exchange pasting [fix-lem-exchanges] identifies the first parenthesis with $E_{vu,Z}^{-1}$. The displayed inverse PF composition identity identifies the remaining two factors with $D_{BA}$. Therefore\n$$L_{vu,Z}(M,N)=L_{v,Z}(P_uM,N)\\,P_{v\\times1_Z}L_{u,Z}(M,N). \\tag{L}$$\nThis uses compatible compactifications for $u,v$ in the cited mate identity; the specified compositor and compactification independence identify it with the chosen operations. Such a triangle is provided by [lem-weil-pbc-compatible-compactification-triangle].",
+   "uses": [
+    "lem-sf-composition-projection-mate",
+    "fix-lem-exchanges",
+    "thm-sf-comp-composition",
+    "lem-weil-pbc-compatible-compactification-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "coherence paragraph: composition of the first-factor projection/exchange maps"
+   }
+  },
+  {
+   "text": "Conjugate (L) by the product swaps and tensor symmetries used to define $R$. The two adjacent swaps are inverse and cancel; naturality of symmetry moves them through the functorial images. The transport of $P$, $D$ and $E$ along the swap isomorphisms of product schemes is compatible with composition: the compositors with the swaps reassociate by the associativity clause of [thm-sf-comp-composition], the projection maps are compatible with that composition law by [fix-prop-projection-formula], and the exchanges respect the morphisms of square data given by the swaps and paste vertically by [fix-lem-exchanges](1),(2). This gives the second-factor composition equation\n$$R_{Z,vu}(N,M)=R_{Z,v}(N,P_uM)\\,P_{1_Z\\times v}R_{Z,u}(N,M). \\tag{R}$$\nAll signs are the signs of the same derived tensor symmetry; its compatibility with pullback composition is part of [lem-pur-derived-pullback-tensor-iso].",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "thm-sf-comp-composition",
+    "fix-lem-exchanges",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "coherence paragraph: the second-factor version of the preceding composition calculation"
+   }
+  },
+  {
+   "text": "Here is the mixed interchange, with all four morphisms specified:\n$$\\begin{array}{ccc}T\\times W&\\xrightarrow{u\\times1_W}&V\\times W\\\\ {1_T\\times v}\\downarrow&&\\downarrow{1_V\\times v}\\\\ T\\times Z&\\xrightarrow{u\\times1_Z}&V\\times Z.\\end{array}$$\nFor $M$ on $T$, $N$ on $W$, the equation is\n$$R_{V,v}(P_uM,N)P_{1_V\\times v}L_{u,W}(M,N)\n=L_{u,Z}(M,P_vN)P_{u\\times1_Z}R_{T,v}(M,N). \\tag{I}$$\nThe two sources are identified by the canonical compositors, since both total maps are $u\\times v$. To check the specified arrows, take the relative product data $a:T\\times Z\\to V\\times Z$, $b:V\\times W\\to V\\times Z$ from Step 3, with their pulled-back inputs. Formula (F) expands its relative product map as the left side of (I). Now interchange $a,b$. Clause (i), symmetry, in the statement of [sk-thm-sf-kunneth-relative] identifies the swapped relative map, followed by target tensor symmetry, with the original map. Expanding that swapped map gives the right side of (I): its inner $D$ is for $1_T\\times v$, its outer $D$ is for $u\\times1_Z$, and naturality of the outer inverse PF and horizontal exchange pasting, exactly as in Step 3, identify their coefficient exchanges with $R_{T,v}$ and $L_{u,Z}$. The source swap is precisely the canonical fibre-product swap. Thus this is the mixed PF/base-change identity for the displayed product square. The non-elementary equality used here is the existing relative theorem's explicit symmetry clause, not an inference from separate composition laws or an assumed six-functor coherence axiom.",
+   "uses": [
+    "sk-thm-sf-kunneth-relative",
+    "fix-lem-exchanges",
+    "thm-sf-comp-composition",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "coherence paragraph (i): symmetry of the relative product map, applied to the specified mixed square"
+   }
+  },
+  {
+   "text": "Put $A_i=P_{f_i}B_i$, and name the four consecutive product maps\n$$d=f_1\\times1_{X_2},\\quad a=g_1\\times1_{X_2},\\quad b=1_{S_1}\\times f_2,\\quad c=1_{S_1}\\times g_2.$$\nAlso put $a'=g_1\\times1_{Y_2}$ and $b'=1_{Y_1}\\times f_2$; thus $ba=a'b'$ and $GF=cbad=ca'b'd$. Substituting (L) and (R) in (F) for $(h_1,h_2)$ gives\n$$t_h=R_{S_1,g_2}(P_{g_1}A_1,A_2)\\,P_c\\bigl(R_{S_1,f_2}(P_{g_1}A_1,B_2)P_bL_{g_1,X_2}(A_1,B_2)\\bigr)\\,P_{cba}L_{f_1,X_2}(B_1,B_2).$$\nApply (I) with $u=g_1$, $v=f_2$, $M=A_1$, $N=B_2$ to the parenthesis. The expression becomes\n$$\\bigl(R_{S_1,g_2}(P_{g_1}A_1,A_2)P_cL_{g_1,Y_2}(A_1,A_2)\\bigr)\\,P_{ca'}\\bigl(R_{Y_1,f_2}(A_1,B_2)P_{b'}L_{f_1,X_2}(B_1,B_2)\\bigr).$$\nThe first parenthesis is $t_g(A_1,A_2)$ by (F); the second is $t_f(B_1,B_2)$ by (F), and $ca'=G$. This proves exactly $t_h=t_g\\circ P_G(t_f)$. Associativity of the canonical compositor in [thm-sf-comp-composition] identifies all the displayed multi-stage functor composites with the identifications in the statement.",
+   "uses": [
+    "thm-sf-comp-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "composition normalization: substitute the two one-factor composition equations and the mixed interchange"
+   }
+  },
+  {
+   "text": "For $u=1_T$, choose the identity compactification $j=p=1_T$ in [def-exchange-projection]. Its proper projection map is the identity by [lem-sfb-ringed-projection-tensor-composition]; its open tensor map is the identity by the restriction normalization of [lem-sf-open-tensor-normalization], since the open restriction is itself the identity. The exchange for the product projection square with vertical identities is also the identity: in the defining unit--square--counit formula all identity-adjunction maps are identities. Consequently the displayed definition gives $L_{1_T,Z}=1$ and, by conjugating with inverse swaps, $R_{Z,1_T}=1$. Formula (F) now gives $t_{1_{X_1},1_{X_2}}=1_{B_1\\boxtimes B_2}$. Compactification compatibility in [fix-prop-projection-formula] and the identity normalization of [thm-sf-comp-composition] identify this computation with the specified comparisons of the statement.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-sfb-ringed-projection-tensor-composition",
+    "lem-sf-open-tensor-normalization",
+    "fix-prop-projection-formula",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "identity-square normalization, checked on the actual identity compactification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "fix-lem-exchanges",
+  "fix-prop-projection-formula",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-composition-projection-mate",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "sk-def-sf-kv-maps",
+  "sk-thm-sf-kunneth-relative",
+  "thm-cbc-finite-level-proetale",
+  "thm-sf-comp-composition",
+  "thm-sf-ctf-stability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+  "place": "Explicit two-factor composition calculation following the relative product formula and its symmetry clause; concrete compactification PF/base-change lemmas replace axiomatic coherence."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,7 +185,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-kv-alpha-transpose-coherence",
@@ -65,12 +197,91 @@
  "blueprint": {
   "from": {
    "node": "sk-thm-sf-kunneth-verdier",
-   "place": "alpha paragraph: affine factorization into a closed immersion and smooth projection; compatibility of the specified exceptional transpose with composition requires composition coherence of its left-adjoint Ku_! map",
+   "place": "coherence paragraph: composition normalization of the specified Ku_! map and identity-square normalization",
    "via": [
     "lem-sf-kv-alpha-transpose-coherence"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-kv-shriek-composition",
+  "worker": "stage1",
+  "summary": "Repaired E3 by expanding t in its stated direction. Repaired E1 by using actual finite-level compactification transformations and verifying their constructible/etale-origin domains, with no def-sf-datum assumption. Repaired E5/C1/C4 by defining both one-factor maps, proving their composition equations, displaying the mixed product-square identity using the existing relative symmetry theorem and the exact inverse PF/exchange expansion, and substituting it explicitly into t_h. Identity normalization is computed on the identity compactification. Statement preserved; no new nodes.",
+  "blueprint": "Realizes the coherence paragraph of sk-thm-sf-kunneth-relative: composition normalization needed when iterating the canonical relative product formula and identity-square normalization.",
+  "tool_uses": [
+   {
+    "node": "sk-thm-sf-kunneth-relative",
+    "why": "Its actual six-arrow relative product formula and stated symmetry clause identify the specified maps in the mixed product square; no composition assertion for t is invoked."
+   },
+   {
+    "node": "def-exchange-projection",
+    "why": "Defines the concrete finite-level projection and exchange maps and allows the identity compactification computation."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Only pullback, tensor, and shriek preservation clauses (i),(ii),(iv) verify all finite-Tor domains."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Supplies the etale-origin witnesses required by the concrete composition and exchange assertions."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Invertibility, naturality and compactification compatibility of the actual projection transformations, with no axiomatic six-functor hypothesis."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "Invertibility of the specified compact-support exchanges on the verified etale-origin inputs."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Canonical signed monoidal pullback and composition comparisons used to type the product calculation."
+   },
+   {
+    "node": "fix-lem-exchanges",
+    "why": "Horizontal and vertical exchange pasting identify the specified product-square maps."
+   },
+   {
+    "node": "lem-sf-composition-projection-mate",
+    "why": "Its concrete inverse composition equation proves the one-factor composition identity."
+   },
+   {
+    "node": "lem-weil-pbc-compatible-compactification-triangle",
+    "why": "Supplies the compactification triangle required by the concrete composition-projection mate identity."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "The identity clause for the actual proper projection mate is used for the identity compactification."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "The open tensor restriction normalization gives the identity open projection map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-thm-sf-kunneth-relative",
+  "def-exchange-projection",
+  "thm-sf-ctf-stability",
+  "lem-sf-proetale-constructible-origin",
+  "fix-prop-projection-formula",
+  "thm-cbc-finite-level-proetale",
+  "lem-pur-derived-pullback-tensor-iso",
+  "fix-lem-exchanges",
+  "lem-sf-composition-projection-mate",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-dd42cf17c",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-dd42cf17c (reviewer sub-agent of L); spot-checked: I read the item, the unit sk-thm-sf-kunneth-verdier, the parent's use of the item, the blueprint sk-thm-sf-kunneth-relative proof (steps (1)-(4) and the coherence paragraph), and the statements of all 17 cited nodes. The statement type-checks and is unchanged: finite A_{E,n}, D^b_ctf, and Ku_! is sk-def-sf-kv-maps(i), i.e. kappa^rel over Y1xY2 followed by the inverse Ex_! identifications. (F) is correct: the six-arrow composite over VxZ with a=ux1, b=1xv, plus horizontal pasting E_{a,b} U_b E_{u,Z} = E_{u,W} from fix-lem-exchanges(2) and PF naturality. (L) is correct: the inverse form of lem-sf-composition-projection-mate plus vertical pasting, with its compactification-triangle hypothesis supplied by lem-weil-pbc-compatible-compactification-triangle. (I) correctly follows from symmetry clause (i) of the relative theorem; the swapped expansion gives R_{T,v} and L_{u,Z}(M,P_vN). I re-derived the Step 7 substitution (ba=a'b', ca'=G) and the Step 8 identity case. No cycle in the dependency closure, no duplicate among the Kunneth nodes, no SGA source, no abstract datum used. I accept the declared tool_uses. One fault, C2/C1: Step 5 (and the definition of R in Step 2) moves P, D and E along the scheme swaps, marked elementary with only the tensor lemma cited. The fix cites thm-sf-comp-composition, fix-prop-projection-formula and fix-lem-exchanges(1),(2), sets elementary=false, and adds one sentence; the statement and proof_deps are unchanged. Corrected file: fixes/dag/nodes/sec-six-functors/lem-sf-kv-shriek-composition.json; details in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

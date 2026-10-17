@@ -3,53 +3,159 @@
  "blueprint": {
   "is": "lem-wf-compact-character-logarithm",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A multiplicative curve character produces an invariant additive character",
- "statement": "Let $U_0/k_0$ be as in\n[def-wf-weil-group], put\n$\\Pi=\\pi_1(U_0\\times_{k_0}\\overline{k}_0,\\bar u)$, and let\n$\\chi:W(U_0,\\bar u)\\to E^\\times$\nbe continuous, where $E/\\mathbf Q_\\ell$ is finite. Choose\n$s\\in W(U_0,\\bar u)$ with $\\deg(s)=1$. There are integers\n$N,r\\geq1$ for which\n\n$$\n\\lambda:\\Pi\\longrightarrow E,\n\\qquad\n\\lambda(g)=\\log(\\chi(g)^N),\n$$\n\nis a continuous additive character and satisfies\n\n$$\n\\lambda(sgs^{-1})=\\lambda(g)=\\lambda(s^{-1}gs)\n\\qquad(g\\in\\Pi).\n$$",
+ "statement": "Let $U_0/k_0$ be as in\n[def-wf-weil-group], put\n$\\Pi=\\pi_1(U_0\\times_{k_0}\\overline{k}_0,\\bar u)$, and let\n$\\chi:W(U_0,\\bar u)\\to E^\\times$\nbe a continuous group homomorphism, where $E/\\mathbf Q_\\ell$ is finite, with its $\\ell$-adic topology as in\n[def-weil-l-adic-coefficient-extension]. Choose\n$s\\in W(U_0,\\bar u)$ with $\\deg(s)=1$. There are integers\n$N,r\\geq1$ for which\n\n$$\n\\lambda:\\Pi\\longrightarrow E,\n\\qquad\n\\lambda(g)=\\log(\\chi(g)^N),\n$$\n\nwhere $\\log$ is the logarithm series of [sk-d-real-log] (so in particular every $\\chi(g)^N$, $g\\in\\Pi$, lies in its domain $1+\\ell^2\\mathcal O_E$), is a continuous additive character and satisfies\n\n$$\n\\lambda(sgs^{-1})=\\lambda(g)=\\lambda(s^{-1}gs)\n\\qquad(g\\in\\Pi).\n$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-compact-character-logarithm.md",
   "place": "node lem-wf-compact-character-logarithm, order 2616"
  },
  "stmt_deps": [
-  "def-wf-weil-group"
+  "def-wf-weil-group",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-d-real-log"
  ],
  "proof": [
   {
-   "text": "The exact sequence of [def-wf-weil-group] makes $\\Pi$ a profinite,\nhence compact, group, since $\\Pi$ is the kernel of the degree map by\n[lem-wf-weil-group-exact-sequence]. Therefore\n$B=\\chi(\\Pi)$ is a compact subgroup of\n$E^\\times$. The normalized valuation\n$v_E:E^\\times\\to\\mathbf Z$ is continuous and $\\mathbf Z$ is discrete,\nso $v_E(B)$ is a finite subgroup of the torsion-free additive group\n$\\mathbf Z$. Hence $v_E(B)=0$ and\n$B\\subseteq\\mathcal O_E^\\times$.",
+   "text": "Put $U=U_0\\times_{k_0}\\overline{k}_0$. By [def-galois-fibre-functor], $\\Pi$ is the automorphism group of the finite-set-valued fibre functor on a small skeleton, with the evaluation topology. Applying [lem-galois-aut-profinite] to that functor shows that $\\Pi$ is profinite, hence compact. By [lem-wf-weil-group-exact-sequence], identify $\\Pi$ with $\\ker(\\deg)$ in $W$. We use the usual Weil-group topology: this subgroup is open and its topology is the profinite topology just described; consequently the restriction of the continuous map $\\chi$ to $\\Pi$ is continuous.",
    "uses": [
-    "def-wf-weil-group",
+    "def-galois-fibre-functor",
+    "lem-galois-aut-profinite",
     "lem-wf-weil-group-exact-sequence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-compact-character-logarithm.md",
+    "place": "Proof, first paragraph: geometric group and compactness"
+   }
   },
   {
-   "text": "Choose $r$ and $N$ from\n[lem-wf-deep-principal-unit-log]. Then\n$\\chi(g)^N\\in1+\\mathfrak m_E^r$ for every $g\\in\\Pi$, so $\\lambda$\nis defined and continuous. Since the target of $\\chi$ is abelian and\nthe logarithm is a homomorphism on the chosen principal-unit group,\n\n$$\n\\lambda(gh)=\\log(\\chi(g)^N\\chi(h)^N)\n=\\lambda(g)+\\lambda(h).\n$$",
+   "text": "Use the absolute value of [def-weil-l-adic-coefficient-extension]. By [lem-weil-l-adic-extension-integers-dvr], choose a uniformizer $\\varpi$ and write each $x\\in E^\\times$ uniquely as $u\\varpi^m$, with $u\\in\\mathcal O_E^\\times$ and $m\\in\\mathbf Z$; define $v_E(x)=m$. Uniqueness gives $v_E(xy)=v_E(x)+v_E(y)$, and the same node gives $|u|_E=1$, so $|x|_E=|\\varpi|_E^{v_E(x)}$, where $0<|\\varpi|_E<1$. The nonarchimedean inequality of [lem-weil-l-adic-extension-absolute-value] makes $v_E$ locally constant: if $|y-x|_E<|x|_E$, then $|y|_E\\leq|x|_E$; strict inequality would imply $|x|_E\\leq\\max(|x-y|_E,|y|_E)<|x|_E$, a contradiction. Thus $|y|_E=|x|_E$ and $v_E(y)=v_E(x)$. These balls are open, so $v_E:E^\\times\\to\\mathbf Z$ is continuous for the discrete topology.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-l-adic-extension-absolute-value"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-compact-character-logarithm.md",
+    "place": "Proof, first paragraph: normalized continuous valuation"
+   }
+  },
+  {
+   "text": "The fibres of $f=v_E\\circ\\chi|_\\Pi$ form a disjoint open cover of the compact space $\\Pi$. A finite subcover therefore shows that $f(\\Pi)$ is finite. Since $f$ is a homomorphism, its image is an additive subgroup of $\\mathbf Z$. If that subgroup contained $a\\neq0$, all integers $na$ for $n\\geq0$ would be distinct elements of it, contradicting finiteness. Hence $v_E(\\chi(g))=0$ for every $g\\in\\Pi$. The uniformizer expression in the previous step now has exponent zero, so $\\chi(g)\\in\\mathcal O_E^\\times$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-compact-character-logarithm.md",
+    "place": "Proof, first paragraph: finite valuation image and unit-valuedness"
+   }
+  },
+  {
+   "text": "Let $e=v_E(\\ell)>0$ and choose $r=2e+1$. Since $\\ell\\geq2$, we have $r\\geq1$ and $r>e/(\\ell-1)$. Apply [lem-wf-deep-principal-unit-log] with this $r$ to obtain $N\\geq1$ such that every $u\\in\\mathcal O_E^\\times$ has $u^N\\in1+\\mathfrak m_E^r$, together with a continuous homomorphism $L=\\log:1+\\mathfrak m_E^r\\to(\\mathfrak m_E^r,+)$. The preceding step applies this conclusion to every $\\chi(g)$, uniformly in $g$. The chosen $r$ also has $\\mathfrak m_E^r\\subseteq\\ell^2\\mathcal O_E$: the valuation of $x/\\ell^2$ is at least $r-2e\\geq0$. Thus $1+\\mathfrak m_E^r\\subseteq1+\\ell^2\\mathcal O_E$ lies in the domain of the logarithm of [sk-d-real-log], and there the two logarithms are the same series $\\sum_{n\\geq1}(-1)^{n+1}x^n/n$, so $L$ is the restriction of the statement's $\\log$.",
+   "uses": [
+    "lem-wf-deep-principal-unit-log",
+    "sk-d-real-log"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-compact-character-logarithm.md",
+    "place": "Proof, second paragraph: choose the deep subgroup and a uniform exponent"
+   }
+  },
+  {
+   "text": "Define $h:\\Pi\\to1+\\mathfrak m_E^r$ by $h(g)=\\chi(g)^N$. Because $E^\\times$ is abelian, $h(gg')=\\chi(g)^N\\chi(g')^N=h(g)h(g')$. Its map to $E^\\times$ is continuous, being a finite product of continuous maps, and the map with the subspace codomain $1+\\mathfrak m_E^r$ is therefore continuous as well. Compose it with the continuous logarithm and the inclusion $\\mathfrak m_E^r\\hookrightarrow E$ from [lem-wf-deep-principal-unit-log]. This yields the stated continuous map $\\lambda(g)=\\log(\\chi(g)^N)$, and the homomorphism identity of that logarithm gives $\\lambda(gg')=\\lambda(g)+\\lambda(g')$.",
    "uses": [
     "lem-wf-deep-principal-unit-log"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-compact-character-logarithm.md",
+    "place": "Proof, second paragraph: continuity and additivity"
+   }
   },
   {
-   "text": "Moreover\n\n$$\n\\chi(sgs^{-1})=\\chi(s)\\chi(g)\\chi(s)^{-1}=\\chi(g),\n$$\n\nwhich gives the first invariance identity. Replacing $g$ by\n$s^{-1}gs$ gives the second one.",
-   "uses": [],
-   "elementary": null
+   "text": "Since $\\deg$ is a homomorphism with kernel $\\Pi$ by [lem-wf-weil-group-exact-sequence], $\\deg(sgs^{-1})=1+0-1=0$ and $\\deg(s^{-1}gs)=-1+0+1=0$. Both arguments therefore belong to the domain of $\\lambda$. As $\\chi$ is a homomorphism into the abelian group $E^\\times$, $\\chi(sgs^{-1})=\\chi(s)\\chi(g)\\chi(s)^{-1}=\\chi(g)$ and likewise $\\chi(s^{-1}gs)=\\chi(g)$. Raising these equalities to $N$ and applying the same logarithm gives $\\lambda(sgs^{-1})=\\lambda(g)=\\lambda(s^{-1}gs)$.",
+   "uses": [
+    "lem-wf-weil-group-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-compact-character-logarithm.md",
+    "place": "Proof, final paragraph: both conjugation identities and their domains"
+   }
   }
  ],
  "proof_deps": [
-  "def-wf-weil-group",
+  "def-galois-fibre-functor",
+  "lem-galois-aut-profinite",
   "lem-wf-weil-group-exact-sequence",
-  "lem-wf-deep-principal-unit-log"
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-wf-deep-principal-unit-log",
+  "sk-d-real-log"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-compact-character-logarithm.md",
-  "place": "## Proof"
+  "place": "Proof, all three paragraphs; explicit finite-cover and valuation arguments supplied by Q151"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous multiplicative character of a Weil group into a finite extension of the l-adic numbers has a continuous additive logarithm after taking a uniform positive power on the geometric fundamental group",
+   "results": "cyclotomicCharacter.continuous, PadicInt.continuousAddCharEquiv, NumberField.mixedEmbedding.fundamentalCone.continuous_expMap, NumberField.mixedEmbedding.fundamentalCone.continuous_expMapBasis, PadicInt.continuous_addChar_of_value_at_one, PadicInt.continuousAddCharEquiv_symm_apply, DirichletCharacter.continuousOn_neg_logDeriv_LFunctionTrivChar₁, PadicInt.continuousAddCharEquiv_of_norm_mul_symm_apply",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompact, MonoidHom",
+   "results": "ContinuousMonoidHom.locallyCompactSpace_of_equicontinuousAt",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*(norm|valuat)|norm.*[Cc]ompact",
+   "results": "Mathlib/Topology/Algebra/Polynomial.lean, Mathlib/Topology/Algebra/Polynomial.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean, Mathlib/Topology/Algebra/Module/FiniteDimension.lean",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilGroup|principalUnit|principal_unit|log.*[Cc]haracter|[Cc]haracter.*log",
+   "results": "Mathlib/NumberTheory/Padics/AddChar.lean, Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean, Mathlib/NumberTheory/LSeries/Nonvanishing.lean, Mathlib/Analysis/LocallyConvex/WithSeminorms.lean, Mathlib/NumberTheory/LSeries/DirichletContinuation.lean, Mathlib/NumberTheory/LSeries/DirichletContinuation.lean, Mathlib/NumberTheory/LSeries/DirichletContinuation.lean, Mathlib/Analysis/Normed/Algebra/Spectrum.lean",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous character from a compact group to the units of a p-adic field gives a continuous additive character by taking a positive power and the p-adic logarithm",
+   "results": "PadicInt.continuousAddCharEquiv_apply, PadicInt.continuousAddCharEquiv_of_norm_mul_apply, PadicInt.continuousAddCharEquiv, PadicInt.continuousAddCharEquiv_symm_apply, PadicInt.continuousAddCharEquiv_of_norm_mul_symm_apply, PadicInt.continuousAddCharEquiv_of_norm_mul, PadicInt.continuous_addChar_of_value_at_one, PadicInt.addChar_of_value_at_one",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact group character into a finite p-adic field has an additive logarithm on a power of its image",
+   "results": "WeakDual.CharacterSpace.instCompactSpaceElemCharacterSpaceOfProperSpace, AddChar.complexBasis_apply, AddChar.circleEquivComplex, cyclotomicCharacter.toFun, AddChar.doubleDualEquiv, AddChar.instAddCommGroup, PadicInt.continuousAddCharEquiv_apply, PadicInt.continuousAddCharEquiv_symm_apply",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Continuous, \"log\"",
+   "results": "continuous_of_discreteTopology, continuous_of_indiscreteTopology, DiscreteTopology.of_continuous_injective, Topology.IsClosedEmbedding.continuous, Topology.IsCoinducing.continuous, Topology.IsEmbedding.continuous, Topology.IsInducing.continuous, Topology.IsOpenEmbedding.continuous",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -73,5 +179,39 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-d-real-log"
+ "unit": "sk-d-real-log",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-compact-character-logarithm",
+  "worker": "stage1",
+  "summary": "Made the implicit multiplicative-character hypothesis explicit after testing the constant-map counterexample. Replaced the imported compactness assertion by precise fibre-functor/profiniteness citations, proved local constancy of the valuation and finite triviality of its image, applied the existing deep-logarithm statement uniformly, and checked normality and both conjugations. No new nodes are needed. Maintainer reader (Q151 review): cited the defining node sk-d-real-log for the statement's logarithm and identified it with the deep-logarithm series in step 4.",
+  "blueprint": "Master item Proof paragraphs 1-3, respectively steps 1-3, steps 4-5 and step 6. The current main-20261015 item has the same statement and no proof; the unit small-logarithm domain is respected by r=2e+1.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-aut-profinite",
+    "why": "The generic automorphism-group result supplies profiniteness of the geometric fundamental group; the unit only sketches the logarithm."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "The local-field tool supplies uniformizer decompositions and the norm-one description of units, needed for the compact valuation argument."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-absolute-value",
+    "why": "The nonarchimedean inequality proves local constancy of the normalized valuation in the compactness argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-aut-profinite",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-l-adic-extension-absolute-value"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-e64069b21",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-e64069b21 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, which has 6 steps and no new nodes. Sources: the master proof (paragraphs 1-3) and main-20261015, whose statement is identical and whose .proof.md matches master word for word, although the report says main has no proof. I also read every cited statement and the unit sk-d-real-log. The worker's added 'group homomorphism' hypothesis is a valid correction: the constant map χ≡10 into Q_3 makes λ non-additive. It matches the source title, the source proof's use of multiplicativity and the citer thm-wf-rank-one-finite-geometric-image-curve, and it does not weaken the statement. Step 1: Π=Aut(F) on a small skeleton with finite fibres is profinite by lem-galois-aut-profinite. The Weil topology convention (Π open and profinite) matches sk-d-real-weil's definition of lisse, and it is the finest of the reasonable choices, so the hypothesis is not weakened. No DAG definition gives W a topology; that gap is pre-existing. Step 2: integers-dvr clauses 1, 4 and 5 and the ultrametric inequality make v_E locally constant. Step 3: finite subcover of a compact space, then a finite subgroup of Z is 0, so χ(Π) lies in O_E^×. Step 4: e≥1 and r=2e+1>e/(ℓ-1) even for ℓ=2; N is uniform; m^r⊆ℓ²O_E. Step 5: continuity and additivity follow from the deep-log node's statement. Step 6: both conjugates have degree 0 and the target is abelian. Small cases checked: trivial χ, finite image, ramified E, ℓ=2, Spec F_q. Accepted tool uses: aut-profinite, integers-dvr, absolute-value (a mathlib leaf). FIX: the statement's log cited no definition, so I added [sk-d-real-log] to the statement, stmt_deps, step 4 uses and proof_deps, and step 4 now identifies the deep-log series with it. There is no cycle and the content is unchanged.; 1 file(s) fixed by the reviewer"
+ }
 }

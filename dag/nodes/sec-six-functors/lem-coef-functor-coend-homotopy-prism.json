@@ -12,9 +12,92 @@
   "def-weil-pbc-category-colimit",
   "lem-coef-simplicial-extra-degeneracy-prism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each simplicial set K, let q^T_{p,K}:T_p(K\\times\\Delta^p)\\to R_T(K) and q^U_{p,K}:U_p(K\\times\\Delta^p)\\to R_U(K) be the canonical coend maps. Their compatibility with every simplex operator is exactly the relation in the displayed coend definition. Applying f or g on each summand therefore gives well-defined maps R_f(K),R_g(K), and all these maps are natural in K. We use the universal property of the colimits and coproducts in [def-weil-pbc-category-colimit] to treat these canonical maps as unique maps out of the corresponding coends.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Stacks Categories, definition of colimit (tag 002F), applied to the coend coproduct/coequalizer"
+   }
+  },
+  {
+   "text": "Fix p. Interchanging the factors in the explicit maps \\sigma_j of [lem-coef-infinity-right-prism-boundary] gives \\kappa_j:\\Delta^{p+1}\\to\\Delta^p\\times\\Delta^1 (0\\le j\\le p) with vertex list (0,0),\\ldots,(j,0),(j,1),\\ldots,(p,1). Each \\kappa_j is injective on vertices into the nerve of the poset [p]\\times[1], hence a monomorphism; write P_j for its image. The P_j cover \\Delta^p\\times\\Delta^1: an n-simplex of the product is a monotone chain in [p]\\times[1], and it lies in P_j for any j between the last first coordinate carrying second coordinate 0 and the first first coordinate carrying second coordinate 1 (take j=p, resp. j=0, for a chain entirely at height 0, resp. 1). For a<b, P_a\\cap P_b is the face on the common vertices (0,0),\\ldots,(a,0),(b,1),\\ldots,(p,1), which lies in P_c for every a\\le c\\le b. Degreewise a union of subsets is the coequalizer of the coproduct of the pairwise intersections into the coproduct of the pieces, and colimits and products of simplicial sets are degreewise ([def-weil-pbc-simplicial-set], [def-weil-pbc-category-colimit]); hence K\\times(\\Delta^p\\times\\Delta^1) is the colimit of the diagram of the K\\times P_a and K\\times(P_a\\cap P_b), and, because T_p preserves all small colimits, so is T_p(K\\times\\Delta^p\\times\\Delta^1) for the diagram of the T_p(K\\times P_a), T_p(K\\times(P_a\\cap P_b)). Via \\kappa_j, define on the j-th piece g_j=q^U_{p+1,K}\\circ H_j^p(K\\times\\Delta^{p+1}):T_p(K\\times\\Delta^{p+1})\\to R_U(K).",
+   "uses": [
+    "lem-coef-infinity-right-prism-boundary",
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00TH",
+    "place": "Lemma 3.1.2.12, explicit prism maps and horn filtration; factor interchange is the symmetry of the product"
+   }
+  },
+  {
+   "text": "Adjacent pieces P_j,P_{j+1} meet in the face omitting position j+1 in both vertex lists: \\kappa_j\\delta_{j+1}=\\kappa_{j+1}\\delta_{j+1}. By naturality of H and the U-coend relation q^U_{p+1,K}\\circ U_{p+1}(K\\times\\delta_{j+1})=q^U_{p,K}\\circ d_{j+1}, the restrictions of g_j and g_{j+1} to this face are q^U_{p,K}\\circ d_{j+1}H_j^p and q^U_{p,K}\\circ d_{j+1}H_{j+1}^p (evaluated at K\\times\\Delta^p), which agree by the middle identity d_{j+1}H_{j+1}^p=d_{j+1}H_j^p of [lem-coef-simplicial-extra-degeneracy-prism] (j<p). For a<b the intersection P_a\\cap P_b lies in each of P_a\\cap P_{a+1},\\ldots,P_{b-1}\\cap P_b, so restricting the successive adjacent agreements gives agreement of g_a and g_b on it. All pairwise restrictions therefore agree, and the colimit universal property of Step 2 glues the g_j to a unique map F_{p,K}:T_p(K\\times\\Delta^p\\times\\Delta^1)\\to R_U(K); uniqueness and naturality of H, q and T_p make it natural in K. No map on the boundary \\Delta^1\\times\\partial\\Delta^p is needed at this stage; the faces lying there are compared with level p-1 in Step 4.",
+   "uses": [
+    "lem-coef-infinity-right-prism-boundary",
+    "lem-coef-simplicial-extra-degeneracy-prism",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Section 3.10, Definition 3.11 and Proposition 3.12; the omitted proof is supplied by the explicit horn gluing above"
+   }
+  },
+  {
+   "text": "The maps F_{p,K} respect the coend relations in the T-variable. It is enough to check a coface and a codegeneracy, since every map in the simplex category factors as a surjection followed by an injection, hence is a composite of these. Since T_p preserves the colimit of Step 2 for \\Delta^{p'}\\times\\Delta^1, two maps out of T_p(K\\times\\Delta^{p'}\\times\\Delta^1) agree when they agree on every piece. By the vertex lists: for a coface \\delta_i:[p-1]\\to[p] and 0\\le j\\le p-1, (\\delta_i\\times1)\\kappa_j=\\kappa_{j+1}\\delta_i if i\\le j and =\\kappa_j\\delta_{i+1} if i>j; for a codegeneracy \\sigma_i:[p+1]\\to[p] and 0\\le j\\le p+1, (\\sigma_i\\times1)\\kappa_j=\\kappa_{j-1}\\sigma_i if i<j and =\\kappa_j\\sigma_{i+1} if i\\ge j. Using naturality of H and the U-coend relations, the required equalities on the j-th piece become respectively d_iH_{j+1}^p=H_j^{p-1}d_i (i\\le j) or d_{i+1}H_j^p=H_j^{p-1}d_i (i>j) for cofaces, and s_iH_{j-1}^p=H_j^{p+1}s_i (i<j) or s_{i+1}H_j^p=H_j^{p+1}s_i (i\\ge j) for codegeneracies; these are exactly the two strict-inequality face identities and the two degeneracy identities of [lem-coef-simplicial-extra-degeneracy-prism]. Hence the family (F_{p,K}) descends uniquely through the coend to a map \\widetilde H_K:R_T(K\\times\\Delta^1)\\to R_U(K).",
+   "uses": [
+    "lem-coef-simplicial-extra-degeneracy-prism",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean",
+    "place": "Lines 48-67, the face and degeneracy identities for combinatorial simplicial homotopy"
+   }
+  },
+  {
+   "text": "On the endpoint K\\times\\{0\\}, the last face of the prism simplex κ_p gives q^U_{p+1,K}(d_{p+1}H_p^p\\otimes1)=q^U_{p,K}(f_p\\otimes1), using d_{p+1}H_p^p=f_p. On K\\times\\{1\\}, the first face of κ_0 gives q^U_{p+1,K}(d_0H_0^p\\otimes1)=q^U_{p,K}(g_p\\otimes1), using d_0H_0^p=g_p. These identities hold on every summand and therefore, by the coend quotient, are exactly \\widetilde H_K|_{K\\times\\{0\\}}=R_f(K) and \\widetilde H_K|_{K\\times\\{1\\}}=R_g(K). Reversing the interval exchanges the endpoints.",
+   "uses": [
+    "lem-coef-simplicial-extra-degeneracy-prism",
+    "lem-coef-infinity-right-prism-boundary",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean",
+    "place": "Lines 55-56, endpoint identities; endpoint faces of the prism maps"
+   }
+  },
+  {
+   "text": "For a map K\\to K' of simplicial sets, every construction above is obtained by applying the corresponding functorial map to K\\times(-); naturality of H, f and g makes the maps on every prism piece commute, and uniqueness of the colimit gluings and coend descents gives naturality of \\widetilde H. If the homotopy is precomposed by a map of T-diagrams or postcomposed by a map of U-diagrams, the same componentwise calculation replaces each g_j by its composite. Thus the glued map and its endpoint restrictions are compatible with both precomposition and postcomposition.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Section 3.10, naturality of the contraction/prism construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-infinity-right-prism-boundary",
+  "lem-coef-simplicial-extra-degeneracy-prism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+  "place": "Section 3.10, Definition 3.11 and Proposition 3.12, printed pp.12-13; the source's prism proof is omitted, so the horn-gluing and coend descent are supplied explicitly here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,7 +136,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-framed-projective-diagram-resolution",
@@ -65,7 +148,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient-adjunction and inverse-limit comparison; independent simplicial-diagram foundation below lem-coef-unstraightening-homotopy-descent. Supporting Dwyer--Kan weak exponentials and the homotopy-limit criterion. Supporting Framed mapping complexes and derived diagram adjunctions in simplicial categories. Weighted-coend lifting input for the first framed diagram adjunction: projective resolutions of entire diagrams paired with injective simplicial weights. Supporting Framed version of the simplicial replacement, with products of simplices; compare §§16.5 and 19.4. Agent-stated extension, not the literal projective-weight assertion of Theorem 19.3.1. Supporting Section 3.10, Definition 3.11 and Proposition 3.12, printed pp.12-13, and Appendix A, printed pp.108-109: contraction on realization; general prism triangulation formulation.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the simplicial-diagram coend/prism construction underlying the finite-level derived coefficient adjunction.",
    "via": [
     "lem-coef-framed-projective-diagram-resolution",
     "lem-coef-projective-frame-weighted-coend",
@@ -88,5 +171,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-functor-coend-homotopy-prism",
+  "worker": "stage1",
+  "summary": "Split the coend prism lemma into the canonical coend-map setup, an explicit prism cover using the existing right-prism filtration node, overlap gluing from the middle homotopy identity, verification of all simplex-operator relations, endpoint identification, and naturality. No new node was needed: the prism filtration and homotopy identities already exist in the DAG; the source's promised prism proof is omitted and the missing details are written as agent steps.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, simplicial-diagram/coend foundation for the displayed finite-level derived coefficient adjunction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-6d9065110",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-6d9065110 (reviewer sub-agent of L); spot-checked: I read the item, the four cited nodes (simplicial set, colimit, the homotopy identities in lem-coef-simplicial-extra-degeneracy-prism, and lem-coef-infinity-right-prism-boundary), Mathlib Homotopy.lean lines 44-67, and the parent's step 7, which uses the item with f=ae, g=1 at K=Δ^n. The statement is correct. Special cases: T_p=X_p⊗(-) gives the homotopy clause of lem-coef-reedy-realization-prism; C=sSet gives the diagonal-realization homotopy. With the Mathlib convention, the restriction at 0 is d_{p+1}H_p=f and at 1 is d_0H_0=g. Small cases K=∅, p=0 and p=1 check. The item is in the same unit as everything it cites, so the route is fine and no tool_uses are needed. There is no duplicate: reedy-realization-prism is only a specialisation. One fault, fixed: steps 2-3 glued along the horn filtration of the prism lemma. That filtration starts from X_0=({1}×Δ^p)∪(Δ^1×∂Δ^p), and no map on X_0 is defined at a fixed level, so the face identities used there are level p-1 data. The cited statement also does not say that the σ_j cover the product. The corrected file proves the cover: chains of [p]×[1] lie in some κ_j, P_a∩P_b is the face (0,0..a),(1,b..p), and the union is the colimit of the pieces and their pairwise intersections, which K×- and T_p preserve. It then glues by the middle identity d_{j+1}H_j=d_{j+1}H_{j+1} and chains it over non-adjacent pieces. Step 4 now writes out the vertex-list factorizations (δ_i×1)κ_j=κ_{j+1}δ_i or κ_jδ_{i+1}, and (σ_i×1)κ_j=κ_{j-1}σ_i or κ_jσ_{i+1}; I checked each against its homotopy identity. def-weil-pbc-simplicial-set was added to proof_deps. The statement is not changed. The source is Dugger §3.10 / Prop 3.12, which is not in literature/; WANTED is recorded and proof_origin=agent is correct. No SGA is cited.; 1 file(s) fixed by the reviewer"
  }
 }

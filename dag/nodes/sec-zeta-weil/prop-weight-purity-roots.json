@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-weight-purity-roots",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Reciprocal roots have the weight-$i$ absolute value",
@@ -13,36 +13,114 @@
   "place": "node prop-weight-purity-roots, order 2897"
  },
  "stmt_deps": [
-  "prop-weight-purity"
+  "prop-weight-purity",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-ordinary-reciprocal-roots"
  ],
  "proof": [
   {
-   "text": "By [def-weil-smooth-proper-cohomological-family], the polynomial\n$P_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})$ records the\neigenvalues of the Frobenius operator $F_{i,\\ell}$ on $V_{i,\\ell}$,\nand after scalar extension to $\\Qlb$ that operator is the operator\n$F_{\\Qlb}$ on the module $H^i(X,\\Qlb)$ of\n[def-weil-frobenius-module-weights]. By\n[prop-weight-purity-ordinary] that module is $\\iota$-pure of\nweight $i$, which by the same definition means that each of its\neigenvalues $\\alpha$ satisfies $|\\iota(\\alpha)|=q^{i/2}$; by\n[def-weil-ordinary-reciprocal-roots] the reciprocal roots of\n$P_{i,\\ell}$ are exactly these eigenvalues, counted with algebraic\nmultiplicity. This is the assertion, in the situation of\n[prop-weight-purity].",
+   "text": "Fix an integer $i$ with $0\\leq i\\leq2d$. By [prop-weil-reciprocal-roots-eigenvalues], the reciprocal roots of $P_{i,\\ell}$, with algebraic multiplicity, are exactly the eigenvalues of $F_{i,\\ell}\\otimes1$ on $V_{i,\\ell}\\otimes_{\\Ql}\\Qlb$. The hypotheses and notation are those supplied by [prop-weight-purity] and the smooth-proper family [def-weil-smooth-proper-cohomological-family].",
    "uses": [
+    "prop-weight-purity",
     "def-weil-smooth-proper-cohomological-family",
-    "def-weil-frobenius-module-weights",
-    "prop-weight-purity-ordinary",
-    "def-weil-ordinary-reciprocal-roots",
-    "prop-weight-purity"
+    "prop-weil-reciprocal-roots-eigenvalues"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-rootpurity/prop-weight-purity-roots.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "The scalar-extension comparison [lem-weil-cohomology-scalar-extension-qlbar] identifies $V_{i,\\ell}\\otimes_{\\Ql}\\Qlb$ with $H^i(X,\\Qlb)$ and carries $F_{i,\\ell}\\otimes1$ to the Frobenius operator $F_{\\Qlb}$. Therefore each reciprocal root $\\alpha$ from Step 1 is an eigenvalue of $F_{\\Qlb}$ on $H^i(X,\\Qlb)$.",
+   "uses": [
+    "lem-weil-cohomology-scalar-extension-qlbar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-rootpurity/prop-weight-purity-roots.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "By [prop-weight-purity-ordinary], the Frobenius module $(H^i(X,\\Qlb),F_{\\Qlb})$ is $\\iota$-pure of weight $i$. By the definition [def-weil-frobenius-module-weights], this means that every eigenvalue $\\alpha$ satisfies $|\\iota(\\alpha)|=q^{i/2}$. Applying this to the reciprocal root in Step 2 proves the assertion; since $i$ was arbitrary, it holds for every $0\\leq i\\leq2d$.",
+   "uses": [
+    "prop-weight-purity-ordinary",
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-rootpurity/prop-weight-purity-roots.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-smooth-proper-cohomological-family",
   "def-weil-frobenius-module-weights",
+  "def-weil-smooth-proper-cohomological-family",
+  "lem-weil-cohomology-scalar-extension-qlbar",
+  "prop-weight-purity",
   "prop-weight-purity-ordinary",
-  "def-weil-ordinary-reciprocal-roots",
-  "prop-weight-purity"
+  "prop-weil-reciprocal-roots-eigenvalues"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-rootpurity/prop-weight-purity-roots.md",
-  "place": "## Proof"
+  "place": "## Proof; expanded the eigenvalue identification and scalar-extension comparison"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For every degree i in smooth proper étale cohomology over a finite field, every reciprocal root of the Frobenius determinant polynomial has complex absolute value q^(i/2)",
+   "results": "8 hits: norm_root_le_spectralValue; FiniteField.algebraMap_norm_eq_pow; FiniteField.algebraMap_norm_eq_pow_sum; FiniteField.algebraMap_norm_eq_prod_pow; ClassGroup.cardM; NumberField.dedekindZeta_residue; exists_jacobiSum_eq_neg_one_add; ClassGroup.normBound",
+   "date": "2026-10-17",
+   "verdict": "no match: returned spectral norm, finite-field norm, class-group and zeta declarations, not cohomological purity"
+  },
+  {
+   "tool": "loogle",
+   "query": "FrobeniusModule.IsPureOfWeight, Polynomial.IsPureOfWeight, roots of det(1 - T F), reciprocal roots",
+   "results": "0 hits; parser error: expected end of input",
+   "date": "2026-10-17",
+   "verdict": "no match: query was rejected by the Loogle parser"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPureOfWeight|FrobeniusModule|reciprocal.*root|roots.*charpoly [Mathlib]",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib source has no declaration of the cohomological purity statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For every degree i in smooth proper étale cohomology over a finite field, every reciprocal root of the Frobenius determinant polynomial has complex absolute value q^(i/2)",
+   "results": "8 hits: Polynomial.roots_expand_pow; Polynomial.roots_expand; Polynomial.rootsExpandPowEquivRoots_apply; Polynomial.roots_expand_image_iterateFrobenius; AlgebraicGeometry.IsEtale.instIsSmooth; Polynomial.roots_X_pow_char_sub_C_pow; Polynomial.roots_expand_map_frobenius; Polynomial.roots_X_pow_char_pow_sub_C_pow",
+   "date": "2026-10-17",
+   "verdict": "no match: polynomial Frobenius-expansion and étale-smoothness results do not state the item"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPureOfWeight|FrobeniusModule|reciprocal[[:space:]].*root|roots.*charpoly [Mathlib]",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: second grep phrasing found no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.IsPureOfWeight",
+   "results": "0 hits; unknown identifier Polynomial.IsPureOfWeight",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib has no such declaration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "absolute values of reciprocal roots of determinant polynomial of Frobenius on finite field cohomology",
+   "results": "8 hits: ClassGroup.normBound; ClassGroup.cardM; NumberField.dedekindZeta_residue; FiniteField.algebraMap_norm_eq_prod_pow; ClassGroup.normBound_pos; FiniteField.orderOf_frobeniusAlgHom; FiniteField.algebraMap_norm_eq_pow; groupCohomology.Hilbert90.aux_ne_zero",
+   "date": "2026-10-17",
+   "verdict": "no match: unrelated norm, Frobenius automorphism and number-theory declarations"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -71,5 +149,29 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-prop-rootpurity"
+ "unit": "sk-prop-rootpurity",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-weight-purity-roots",
+  "worker": "stage1",
+  "summary": "Read the imported item against the master blueprint proof and the current main-20261015 proposition, whose mathematical conclusion is the same. No Lean declaration in the reference source states this item without sorry. Kept the statement and split the paragraph into three steps: reciprocal roots are Frobenius eigenvalues, scalar extension identifies that operator with the Frobenius on H^i(X,Q̄_l), and ordinary cohomological purity gives the absolute value. Added the missing family and reciprocal-root statement dependencies and cited the existing scalar-extension comparison; no new nodes were needed.",
+  "blueprint": "Realizes the sole paragraph of prop-weight-purity-roots.proof.md: the determinant/eigenvalue identification is Step 1, the passage to H^i(X,Q̄_l) is Step 2, and the purity-to-absolute-value conclusion is Step 3.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-cohomology-scalar-extension-qlbar",
+    "why": "The item needs the Frobenius-equivariant identification between V_{i,ell} tensor Q̄_ell and H^i(X,Q̄_ell); this generic scalar-extension interface is not supplied by the root-purity unit itself."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-cohomology-scalar-extension-qlbar"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-eaaeffa95",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-eaaeffa95 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item prop-weight-purity-roots, which has no new nodes, all 7 cited statements, and the blueprint item and unit sk-prop-rootpurity in both master and main-20261015, where they are word for word the same. The statement is unchanged and no target is weakened. Step 1: prop-weight-purity-roots's same-unit node prop-weil-reciprocal-roots-eigenvalues says the reciprocal roots are exactly the eigenvalues of F_{i,l} tensor 1 after extension to Qlb. Step 2: the 'In particular' clause of lem-weil-cohomology-scalar-extension-qlbar makes F_{i,l} tensor 1 and F_Qlb on H^i(X,Qlb) conjugate. Its hypotheses are all fixed in prop-weight-purity, and the coefficient category is the same algebraically closed Qlb one. Step 3: prop-weight-purity-ordinary gives iota-purity of weight i, and def-weil-frobenius-module-weights turns that into |iota(alpha)|=q^{i/2}. proof_deps equals the union of the uses, and the two added stmt_deps are correct. Edge cases tested: V=0 (vacuous), d=0/i=0 (alpha=1), P^1 with i=2 (alpha=q, whereas an ordinary root would give q^{-1}), an elliptic curve with i=1, and a non-semisimple F. No cycle (no cited node's closure reaches the item), no SGA, and no duplicate (cor-zl-purity-smooth-proper, prop-zl-smooth-proper-relative-purity and prop-arithmetic-roots state different things), so same_as=[] stands. I accept the declared tool use of lem-weil-cohomology-scalar-extension-qlbar (unit sk-thm-rh): it is a generic scalar-extension comparison, independent of purity, and no node in the root-purity unit's route gives the Frobenius-equivariance. Batch 5: both listed citations reach only prop-cohomological-finiteness, the first directly and the second through the general definition def-weil-smooth-proper-cohomological-family that the blueprint already cites. That node gives finiteness, vanishing and H^0, which is a hypothesis of the trace formula and not a step of the proof of the trace formula or of Poincare duality, so nothing has to be repointed to the nt-assume leaves. Observation: the delivery left the key unit's realized fields empty (they should be statement=[prop-weight-purity-roots] and step 1 = [prop-weight-purity-roots, prop-weil-reciprocal-roots-eigenvalues, prop-weight-purity-ordinary]). I wrote no unit fix because merge_delivery.py refuses a fix to a unit file the delivery did not change; the maintainer may fill those fields. No fixes were written."
+ }
 }
