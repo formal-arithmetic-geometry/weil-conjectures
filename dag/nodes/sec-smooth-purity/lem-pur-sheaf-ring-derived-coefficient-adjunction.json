@@ -1,0 +1,63 @@
+{
+ "id": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: compatible finite-level functors; the derived reduction of coefficients from level m to level n and its adjunction with restriction of scalars, used for the transition maps of the derived extension of level evaluation.",
+   "via": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-pur-coefficient-system-derived-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived change of rings along a map of ring sheaves is left adjoint to restriction of scalars, with normalized unit and transposes",
+ "statement": "Let $\\mathcal C$ be a small site and $\\varphi:\\mathcal O\\to\\mathcal O'$ a morphism of sheaves of commutative rings on $\\mathcal C$. Use the abelian categories of sheaves of $\\mathcal O$- and $\\mathcal O'$-modules [def-weil-sheaf-of-modules-category], their unbounded derived categories $D(\\mathcal O)$, $D(\\mathcal O')$ with localizations $Q$ [def-weil-abstract-derived-category], restriction of scalars $\\operatorname{Res}_\\varphi$ [def-pc-sheaf-restrict-scalars] and the change of rings $-\\otimes_{\\mathcal O}\\mathcal O'$ [def-pur-sheaf-tensor-product]. Then $\\operatorname{Res}_\\varphi$ is exact, so applying it termwise defines $\\operatorname{Res}_\\varphi:D(\\mathcal O')\\to D(\\mathcal O)$. Let $L\\varphi^*=-\\otimes^{\\mathbf L}_{\\mathcal O}\\mathcal O':D(\\mathcal O)\\to D(\\mathcal O')$ be the derived change of rings of [lem-pur-derived-change-of-rings], computed on K-flat complexes with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules, lem-pc-kflat-resolution] through the canonical isomorphism $c_P:L\\varphi^*(QP)\\cong Q(P\\otimes_{\\mathcal O}\\mathcal O')$. Then $L\\varphi^*$ is left adjoint to $\\operatorname{Res}_\\varphi$: there are bijections\n$$\\operatorname{Hom}_{D(\\mathcal O')}(L\\varphi^*K,H)\\cong\\operatorname{Hom}_{D(\\mathcal O)}(K,\\operatorname{Res}_\\varphi H),$$\nnatural in $K\\in D(\\mathcal O)$ and $H\\in D(\\mathcal O')$, normalized on representatives as follows. Let $P$ be a K-flat complex of $\\mathcal O$-modules with flat terms. (1) Under $c_P$, the unit at $QP$ is the class of the termwise map $P\\to\\operatorname{Res}_\\varphi(P\\otimes_{\\mathcal O}\\mathcal O')$, $x\\mapsto x\\otimes1$. (2) For a complex $H$ of $\\mathcal O'$-modules and a morphism of complexes $g:P\\to\\operatorname{Res}_\\varphi H$, the adjunct of $Q(g)$ is, under $c_P$, the class of the morphism of complexes $P\\otimes_{\\mathcal O}\\mathcal O'\\to H$, $x\\otimes a\\mapsto a\\,g(x)$. In particular, if $g$ is a quasi-isomorphism, the counit at $QH$ is this class composed with $c_P$ and the inverse of $L\\varphi^*(Q(g))$. No flatness of $\\varphi$ and no boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6 (lemma-adjoint), specialized to the morphism of ringed topoi given by the identity topos and the ring map; normalization by derived.tex Tag 0FND (lemma-pre-derived-adjoint-functors) and Tag 09T5 (lemma-derived-adjoint-functors)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg 'extendRestrictScalarsAdj|pullbackPushforwardAdjunction' and rg 'Adjunction|⊣' in Mathlib/CategoryTheory/Functor/Derived (Mathlib under ~/weil-conjectures-sheaf/lean/.lake/packages/mathlib)",
+   "results": "ModuleCat/ChangeOfRings.lean extendRestrictScalarsAdj (modules over a ring, underived); Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:60 pullbackPushforwardAdjunction (underived sheaf modules); Sheaf/ChangeOfRings.lean:36 restrictScalars; CategoryTheory/Functor/Derived/Adjunction.lean:39-151 Adjunction.derived (generic derived adjunction given localized functors and compatibilities)",
+   "date": "2026-10-17",
+   "verdict": "no match: no derived scalar extension/restriction adjunction for sheaves of modules on a site; Adjunction.derived is a generic tool, not this statement with its K-flat normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-coefficient-evaluation-derived-left-adjoint",
+  "date": "2026-10-17",
+  "group": "Q21"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
