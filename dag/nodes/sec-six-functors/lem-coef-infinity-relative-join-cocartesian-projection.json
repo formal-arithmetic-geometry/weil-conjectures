@@ -286,5 +286,24 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-d17808b4b (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the report and the full statements of all four cited definitions. Those are def-coef-infinity-relative-join, def-coef-infinity-relative-cone (join blocks), def-coef-infinity-fibrations and def-cbc-enhanced-diagrams-cones. I also read the parent node lem-coef-infinity-relative-join-simplex-extension, whose step uses exactly the three stated clauses, and paragraph 2 of the blueprint ancestor prop-coef-integral-exceptional-adjoint (main-20261015). Kerodon 02RH/02ZR is not archived in literature/; it is recorded as WANTED, and proof_origin is agent, so I judged the proof directly against the definitions. The statement is the special case of Kerodon 5.2.3.17 with the square (u, id), composed with the projection to S as in the opening of 02ZR. Its hypotheses match the definition of cocartesian fibration (source and base quasicategories), and the statement is unchanged. Step checks: (1) the normal form (sigma, epsilon, a) holds because u*id preserves join summands, so the final block is forced to be sigma restricted to it. (2) The horn parameter extends: consecutive edges lie in some present face for inner horns and for Lambda_0^n with n>=3. For Lambda_0^2 an extension needs v(0)=v(1); the values (0,1,0) give a counterexample otherwise, and only the equal case is used. (3) For a mixed horn with i<n, the face d_n is present and contains the whole initial block. Comparing each face d_j with d_n on their intersection forces its initial datum to be a restriction of the X-simplex from d_n. I checked this by hand in all n=2 cases. (4)-(5) Inner fibration: the three parameter cases are exhaustive. The quasicategory proof fills in S first and then lifts, so it is not circular. (6)-(7) Initial edges use exactly the cocartesian-edge definition, and final edges are filled by i_S(sigma). (8) Every vertex is i_X(x) or i_S(s), so the lifts exist. Edge cases checked: X empty, S empty, S a point, u = id, degenerate base edges. There are no new nodes. No existing DAG node states that the projection X star_S S -> S is cocartesian, so there is no duplicate. proof_deps equals the union of the uses, all cited nodes are split and unmerged, and there is no cycle. Only definitions are cited, so there is no route question, and there are no tool_uses. The 17 Mathlib searches are recorded with no match. One minor remark: the item has no lean_audit field, as with its sibling node from the same parent split. Preflight passed, so I made no change. No fixes were written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd366678a",
+  "group": "Q87",
+  "result": "fix",
+  "note": "Statement matches node and Kerodon 02RH (square u,id_S) + 02ZR projection clause by clause: X,S quasicategories in free universe u, hu : cocartesianFibration u, Y = relativeJoin u (𝟙 S), π = relativeJoinProjection (canonical), conclusions ∃ Quasicategory Y, cocartesianFibration π, preservesCocartesianEdges via relativeJoinInl with rfl compatibility; no extra hypotheses, lean.statement verbatim, node unchanged except lean record. Edge cases (empty X/S, S=Δ[0], u=id, degenerate edges) covered. No defs, sorry only, docstrings with source and blueprint and 8 steps. nt_compile --json exit 0, no diagnostics, on delivered and fixed module. FIX (H9): removed unused non-proof-dep import Sheaf.AlgebraicTopology.BluntSharpJoinEquivalence (module of lem-coef-infinity-blunt-sharp-join-equivalence, already re-exported by RelativeJoin); fixes/RelativeJoinCocartesianProjection.lean and fixes/<item>.report.md with the false 'required by proof plan' sentence corrected."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeJoinCocartesianProjection",
+  "declaration": "SSet.Enhanced.relativeJoin_cocartesianProjection",
+  "file": "lean/Sheaf/CategoryTheory/RelativeJoinCocartesianProjection.lean",
+  "statement": "theorem relativeJoin_cocartesianProjection {X S : SSet.{u}} [Quasicategory X] [Quasicategory S] (u : X ⟶ S) (hu : cocartesianFibration u) : ∃ (hY : Quasicategory (relativeJoin u (𝟙 S))), @cocartesianFibration (relativeJoin u (𝟙 S)) S (relativeJoinProjection u (𝟙 S)) hY inferInstance ∧ preservesCocartesianEdges u (relativeJoinProjection u (𝟙 S)) (relativeJoinInl u (𝟙 S)) (by rfl)",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-cd366678a"
  }
 }
