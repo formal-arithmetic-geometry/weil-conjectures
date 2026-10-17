@@ -9,6 +9,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 public import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 public import Mathlib.CategoryTheory.ObjectProperty.Small
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
+import Sheaf.CategoryTheory.DerivedPerfectSmallClassCore
+import Sheaf.CategoryTheory.DerivedPerfectSmallClassProperties
 
 /-! # Small perfect classes in Grothendieck derived categories
 
@@ -75,6 +77,11 @@ theorem derived_exists_perfectSmallClass
         ∃ (J : Type v) (a : J → I), S (∐ fun j ↦ Y (a j)) ∧
           ∃ g : U ⟶ ∐ fun j ↦ Y (a j),
             g ≫ Sigma.desc (fun j ↦ Sigma.ι Y (a j)) = f) := by
-  sorry
+  obtain ⟨S, α, hα, hS, hSi, hSt, hPS, hSsum, hcompact⟩ :=
+    derived_exists_perfectSmallClass_core P
+  let _ : Fact α.IsRegular := hα
+  obtain ⟨hperfect, hfactor⟩ :=
+    derived_perfectSmallClass_properties S α hSsum hcompact
+  exact ⟨S, hS, hSi, hSt, hPS, hperfect, hfactor⟩
 
 end CategoryTheory
