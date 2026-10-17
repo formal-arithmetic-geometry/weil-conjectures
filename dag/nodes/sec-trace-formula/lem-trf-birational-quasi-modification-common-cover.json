@@ -13,7 +13,10 @@
   "def-pc-reduced-scheme",
   "def-weil-finite-type-morphism",
   "def-weil-irreducible-components",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-trf-birational-quasi-modification",
+  "def-trf-centred-valuation",
+  "def-trf-modification"
  ],
  "proof": [
   {
@@ -370,5 +373,27 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-80beaa594 (reviewer sub-agent of L); spot-checked: I read the item, its 13 steps, every cited node's statement, the parent lem-trf-valuation-stable-reduction and the consumer lem-trf-valuation-horizontal-curve-models in full. No new nodes; statement unchanged. Stacks sources checked at the cited labels, with tags/tags confirming each tag: 0F41 (qcqs base, no finite presentation), 0BAC, 0BAJ, 01L0, 01J6, 00IA, 01W1/3/4/5/6, 01J3, 0356, 01RV, 01I4/01JQ, 01JC, 01HV, 01ON. Temkin's paper is not in literature/; it is recorded as WANTED and proof_origin.by is agent, which is correct. Step checks: (1) components with C_a -> X a monomorphism; the lift lands in the same component, so the hypothesis restricts to each C_a. (2) The dense Nagata compactification is reduced, irreducible and integral. (3) Generic fibre: A in B in K, so B tensor_A K = K. (4)-(5) Z, the reduced closure of xi in the product of the compactifications, is integral with generic fibre Spec K. (6) Proper-to-separated and base change make W_i -> Y_i proper. (7) The affine birational node with S = Y = V and s_Y = id gives an isomorphism that is the restriction of the given map. (8) Nonempty opens of an integral scheme are schematically dense. (9)-(10) A dominating valuation, a lift, and separated uniqueness against the compactification give the cover. (11) The finite coproduct map is proper; the off-diagonal blocks are handled correctly. (12) The component-coproduct node, plus reduced X with zero nilradical, gives schematic density. (13) Affine reindexing. Small cases checked: X empty, a field, the two charts of P^1, two crossing lines, a missing valuation. The item's 'modification' (isomorphism between schematically dense opens) is the same as the consumer's definition. The stronger form, with the full preimage as source open, also follows because p^{-1}(eta_a) = {xi_a}; noted in review.md, no change needed. Seven off-unit tool_uses are accepted as generic black boxes. Duplicates ruled out: riemann-zariski-finite-refinement (finite type over Z, separable extensions allowed) and modifications-zariski-refinement (Noetherian base). No SGA. proof_deps equals the union of uses, and there are no doubled backslashes. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c04a6364e",
+  "group": "Q01",
+  "result": "fix",
+  "note": "Substantive checks pass; all three Lean modules compile through scompile.py. Replaced the H11 placeholder second reading with a complete report under fixes/. Findings recorded in review.md; immutable files and branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BirationalQuasiModificationCommonCover",
+  "declaration": "AlgebraicGeometry.exists_common_reduced_modification_cover",
+  "declarations": [
+   "AlgebraicGeometry.exists_common_reduced_modification_cover",
+   "AlgebraicGeometry.exists_common_reduced_modification_affine_cover"
+  ],
+  "statement": "theorem exists_common_reduced_modification_cover (X : Scheme.{u}) [IsReduced X] [CompactSpace X] [QuasiSeparatedSpace X] (n : ℕ) (Y : Fin n → Scheme.{u}) [∀ i : Fin n, IsIntegral (Y i)] (f : ∀ i : Fin n, Y i ⟶ X) (hY : ∀ i : Fin n, IsBirationalQuasiModification (f i)) (hcomponents : Set.Finite (irreducibleComponents X)) (hvaluation : ∀ η : X, closure ({η} : Set X) ∈ irreducibleComponents X → ∀ (V : ValuationSubring (X.residueField η)) (v : Spec (.of V) ⟶ X), IsCenteredValuation η V v → ∃ i : Fin n, ∃ l : Spec (.of V) ⟶ Y i, l ≫ f i = v) : ∃ (X₁ : Scheme.{u}) (p : X₁ ⟶ X), IsReduced X₁ ∧ SchemeModification p ∧ ∃ W : Fin n → X₁.Opens, (⨆ i, W i) = ⊤ ∧ ∀ i : Fin n, ∃ a : (W i).toScheme ⟶ Y i, SchemeModification a ∧ a ≫ f i = (W i).ι ≫ p",
+  "by": "Q01",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/BirationalQuasiModificationCommonCover.lean",
+  "branch": "newtargets-dag"
  }
 }

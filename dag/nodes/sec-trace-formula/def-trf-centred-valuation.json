@@ -1,0 +1,107 @@
+{
+ "id": "def-trf-centred-valuation",
+ "kind": "definition",
+ "title": "Centred valuation",
+ "status": "split",
+ "statement": "For a scheme Z, a point η, a valuation subring V of the residue field of η, and a morphism v : Spec V → Z, v is a centred valuation at η when v composed with the canonical map Spec κ(η) → Spec V is the canonical morphism Spec κ(η) → Z. Here schemes and affine spectra use [def-pc-scheme] and [def-weil-affine-spectrum], the generic point uses [def-sc-generic-point], the residue field uses [def-weil-residue-field], and the field condition uses [def-weil-field].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-residue-field",
+  "def-sc-generic-point",
+  "def-weil-affine-spectrum",
+  "def-weil-field"
+ ],
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Temkin §3.2, definition of Val_K(S) preceding Corollary 3.2.5, p. 16"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Valuation subring of the function field of an irreducible component and a morphism of its spectrum agreeing with the canonical generic point morphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ValuationSubring.mk\", \"module\": \"Mathlib.RingTheory.Valuation.ValuationSubring\", \"type\": \"{K : Type u} →\\n  [inst : Field K] →\\n    (toSubring : Subring K) → (∀ (x : K), x ∈ toSubring.carrier ∨ x⁻¹ ∈ toSubring.carrier) → ValuationSubring K\", \"doc\": \"Let $K$ be a field and let $A$ be a subring of $K$. If for every element $x \\\\in K$, either $x \\\\in A$ or $x^{-1} \\\\in A$, then this constructor builds the term of type `ValuationSubring K` corresponding\"}\n  {\"name\": \"ValuationSubring.mk.noConfusion\", \"module\": \"Mathlib.RingTheory.Valuation.ValuationSubring\", \"type\": \"{K : Type u} →\\n  {inst : Field K} →\\n    {P : Sort u_1} →\\n      {toSubring : Subring K} →\\n        {mem_or_inv_mem' : ∀ (x : K), x ∈ toSubring.carrier ∨ x⁻¹ ∈ toSubring.carrier} →\\n          {toSubring' : Subring K} →\\n            {mem_or_inv_mem'' : ∀ (x : K), x ∈ toSubring'.carrier ∨ x⁻¹ ∈ toSubring'.\", \"doc\": \"A valuation subring of a field $ K $ is a subring that is closed under the valuation, meaning for every element $ x $ in $ K $, either $ x $ or its inverse $ x^{-1} $ belongs to the subring. This stru\"}\n  {\"name\": \"Valuation.valuationSubring\", \"module\": \"Mathlib.RingTheory.Valuation.ValuationSubring\", \"type\": \": ValuationSubring K\", \"doc\": \"Given a valuation $ v $ from a field $ K $ to a linearly ordered commutative group with zero $ \\\\Gamma_0 $, this is the valuation subring consisting of all elements $ x \\\\in K $ satisfying $ v(x) \\\\leq 1\"}\n  {\"name\": \"ValuationSubring.valuation\", \"module\": \"Mathlib.RingTheory.Valuation.ValuationSubring\", \"type\": \": Valuation K A.ValueGroup\", \"doc\": \"The canonical valuation on a field $K$ associated with a valuation subring $A$. It is the quotient map from $K$ to the value group of $A$, which is the quotient of $K$ by the group of units of $A$ (wi\"}\n  {\"name\": \"ValuationSubring.ofSubring\", \"module\": \"Mathlib.RingTheory.Valuation.ValuationSubring\", \"type\": \"(R : Subring K) (hR : ∀ x : K, x ∈ R ∨ x⁻¹ ∈ R) : ValuationSubring K\", \"doc\": \"Given a subring $ R $ of a field $ K $ and a property that for every element $ x $ in $ K $, either $ x $ belongs to $ R $ or its inverse $ x^{-1} $ belongs to $ R $, this function constructs the valu\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"[IrreducibleSpace X] (f : X.PartialMap Y) : Spec X.functionField ⟶ Y\", \"doc\": \"Given an irreducible scheme $X$ and a partial map $f : X \\to Y$ to a scheme $Y$, this constructs the morphism $\\\\operatorname{Spec}(K(X)) \\to Y$ where $K(X)$ is the function field of $X$. The constructio\"}\n  {\"name\": \"ValuationSubring\", \"module\": \"Mathlib.RingTheory.Valuation.ValuationSubring\", \"type\": \"(K : Type u) → [Field K] → Type u\", \"doc\": \"A valuation subring of a field $ K $ is a subring equipped with properties ensuring it is closed under the valuation, forming a structure that satisfies the axioms of a valuation subring.\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (self : AlgebraicGeometry.ValuativeCommSq f), ValuationRing self.R\", \"doc\": \"For any valuative commutative square involving a morphism of schemes $ f: X \\\\to Y $, the associated ring $ R $ is a valuation ring, meaning it is an integral domain such that for every non-zero elemen\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No exact match; returned signatures inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Centred valuation on a scheme is a valuation subring of its function field with a compatible spectrum morphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (self : AlgebraicGeometry.ValuativeCommSq f), ValuationRing self.R\", \"doc\": \"For any valuative commutative square involving a morphism of schemes $ f: X \\\\to Y $, the associated ring $ R $ is a valuation ring, meaning it is an integral domain such that for every non-zero elemen\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.isFractionRing\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (self : AlgebraicGeometry.ValuativeCommSq f),\\n  IsFractionRing self.R self.K\", \"doc\": \"For any valuative commutative square involving a morphism of schemes $ f: X \\to Y $, the fraction field $ K $ of the commutative ring $ R $ associated to the square satisfies the universal property of \"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.field\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → {f : X ⟶ Y} → (self : AlgebraicGeometry.ValuativeCommSq f) → Field self.K\", \"doc\": \"For a valuative commutative square involving schemes, this function equips the component $ K $ with the structure of a field, which is the fraction field of a valuation ring in the diagram.\"}\n  {\"name\": \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsIntegral X] (x : ↥X),\\n  IsFractionRing ↑(X.presheaf.stalk x) ↑X.functionField\", \"doc\": \"For any integral scheme $X$ and any point $x$ in $X$, the function field of $X$ is the fraction ring of the stalk of the structure sheaf at $x$. This means every non-zero divisor in the stalk becomes \"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.algebra\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → {f : X ⟶ Y} → (self : AlgebraicGeometry.ValuativeCommSq f) → Algebra self.R self.K\", \"doc\": \"For each valuative commutative square involving a morphism of schemes $f: X \\to Y$, this function equips the fraction field component $K$ with the structure of an algebra over the commutative ring $R$ \"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    (self : AlgebraicGeometry.ValuativeCommSq f) →\\n      AlgebraicGeometry.Spec { carrier := self.K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X\", \"doc\": \"For a valuative commutative square involving schemes $X$ and $Y$ with a morphism $f: X \\to Y$, this is the morphism from the spectrum of the fraction field $K$ (equipped with its field structure) to th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.functionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [IrreducibleSpace ↥X] → CommRingCat\", \"doc\": \"For an irreducible scheme $X$, the function field is defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$. This corresponds to the commutative ring obtained by takin\"}\n  {\"name\": \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [inst : AlgebraicGeometry.IsIntegral X] → Field ↑X.functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No exact match; returned signatures inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "CenteredValuation|CentredValuation|centered.?valuation|centred.?valuation",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "No exact match; returned signatures inspected."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-birational-quasi-modification-common-cover",
+  "date": "2026-10-17",
+  "group": "Q01"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "statement notion used by the trace-formula reduction",
+   "via": [
+    "lem-trf-birational-quasi-modification-common-cover",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CenteredValuation",
+  "declaration": "AlgebraicGeometry.IsCenteredValuation",
+  "statement": "def IsCenteredValuation {Z : Scheme.{u}} (η : Z) (V : ValuationSubring (Z.residueField η)) (v : Spec (.of V) ⟶ Z) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/CenteredValuation.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c04a6364e",
+  "group": "Q01",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c04a6364e",
+  "group": "Q01",
+  "result": "fix",
+  "note": "Substantive checks pass; all three Lean modules compile through scompile.py. Replaced the H11 placeholder second reading with a complete report under fixes/. Findings recorded in review.md; immutable files and branch head unchanged."
+ }
+}
