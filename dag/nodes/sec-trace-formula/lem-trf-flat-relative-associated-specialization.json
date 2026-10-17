@@ -21,9 +21,163 @@
   "def-pc-module-pullback",
   "def-kun-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The integral closed subscheme $Y\\hookrightarrow X$ is locally of finite type by [lem-weil-pbc-immersion-base-change-lft](2), so $Y\\to S$ is locally of finite type by [lem-weil-pbc-proper-fp-permanence](e). These assertions remain true after arbitrary base change by [lem-weil-pbc-lft-base-change], and hold also for the integral closed subschemes $Y'$ used below. In particular all fibres and field-extended fibres used below are locally of finite type over their fields, hence locally Noetherian by [pqf-lem-locnoeth-lft]. The spectrum of a field is Noetherian since its only ideals are zero and the whole field. No Noetherianity of $S$ is asserted.",
+   "uses": [
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-lft-base-change",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSI, preparations for the fibre and local-ring arguments; Morphisms Tags 01T5, 01T6, 01T9, 01T0"
+   }
+  },
+  {
+   "text": "For each of these locally algebraic fibres, at a component generic point $z$ one has $\\dim_z Z=\\dim\\overline{\\{z\\}}$. Indeed [lem-sc-locnoeth-components-locally-finite] gives a neighbourhood meeting only finitely many components; remove the other components, none of which contains $z$, to obtain an open neighbourhood contained in its component $D$. On this neighbourhood the ambient space and $D$ have the same topology. [lem-sc-dimension-locally-algebraic] gives $\\dim_zD=\\dim D$, proving the assertion from the neighbourhood definition of dimension. Apply this in particular to $x\\in Y_s$ to obtain $\\dim_xY_s=\\dim C$. Also $Y_t$ is irreducible with generic point $y$: on affine charts it is obtained from the domain defining $Y$ by inverting the nonzero functions on the integral image closure of $t$.",
+   "uses": [
+    "lem-sc-locnoeth-components-locally-finite",
+    "lem-sc-dimension-locally-algebraic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSI, second paragraph and the interpretation of the displayed local dimension; Varieties Tag 0A21(3)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-valuative-fibre-component-lift] to $f,y,s,x$. Retain its square $X'=X\\times_SS'$, valuation base $S'=\\operatorname{Spec}A$, points $t',s',y',x'$ and integral closed subscheme $Y'=\\overline{\\{y'\\}}$. Put $K=\\operatorname{Frac}(A)$ and $k=A/\\mathfrak m_A$. Write $C'$ for the component of $Y'_{s'}$ with generic point $x'$. The generic fibre $Y'_{t'}$ is the component of $Y_t\\times_t t'$ with generic point $y'$: on affine charts taking the prime defining the closure of $y'$ and then localizing in $A\\setminus\\{0\\}$ recovers the prime of that component.",
+   "uses": [
+    "lem-trf-valuative-fibre-component-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSI, first paragraph: choose the diagram of Tag 0GSH"
+   }
+  },
+  {
+   "text": "Put $\\mathcal F'=(g')^*\\mathcal F$. It is quasi-coherent and finite type by [lem-weil-pbc-module-pullback-quasi-coherent] and [lem-weil-pbc-module-pullback-finite-type]. The stalk formula [lem-weil-pbc-module-stalk-pullback] and pointwise scalar extension [lem-pc-pullback-stalk-relative-flat-extension], applied with $M=\\mathcal F_x$, give that $\\mathcal F'_{x'}$ is $A$-flat; here $\\mathcal O_{S',s'}=A$. Since $y'$ is generic in a component of $Y_t\\times_t t'$, it is generic in its fibre over the generic point $y$ (localizing at $y$ preserves minimal primes). The residual fibre is $\\operatorname{Spec}(\\kappa(t')\\otimes_{\\kappa(t)}\\kappa(y))$. As $y$ is relatively associated, [lem-trf-relative-assassin-base-change] therefore gives $y'\\in\\operatorname{Ass}_{X'/S'}(\\mathcal F')$.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-module-pullback-finite-type",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-pc-pullback-stalk-relative-flat-extension",
+    "lem-trf-relative-assassin-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSI, first paragraph: relative assassin base change (05DC) and pointwise flat base change (01U8)"
+   }
+  },
+  {
+   "text": "Prove $x'\\in\\operatorname{Ass}_{X'/S'}(\\mathcal F')$ by contradiction. Set $B=\\mathcal O_{X',x'}$, $N=\\mathcal F'_{x'}$, $R=B/\\mathfrak m_AB$ and $L=N/\\mathfrak m_AN$. Choose a finite type affine $A$-chart around $x'$ and an affine module presentation there. By [lem-weil-pbc-affine-open-stalk-localization] and [lem-weil-pbc-spec-tilde-stalk-localization], $B$ is a localization at a prime of that finite type algebra and $N$ is a finite $B$-module. The local map $A\\to B$ is thus essentially of finite type. The same localization formulas on the closed-fibre chart and [lem-weil-pbc-module-stalk-pullback] identify $R=\\mathcal O_{X'_{s'},x'}$ and $L=(\\mathcal F'_{s'})_{x'}$. Thus $R$ is Noetherian by step 1 and $L$ is finite. If $x'$ is not relatively associated, the maximal ideal $\\mathfrak m_R$ is not associated to $L$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSI, third paragraph: local algebra A to B, finite module N, and closed-fibre stalks"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q\\subset B$ be the prime corresponding to $y'$, which specializes to $x'$. In the local spectrum the closure of $y'$ is $V(\\mathfrak q)$. Its closed fibre at $x'$ has just one prime, since $x'$ is the generic point of its fibre component and localization keeps only primes contained in $\\mathfrak m_B$. Consequently $\\sqrt{\\mathfrak q+\\mathfrak m_AB}=\\mathfrak m_B$, or $\\sqrt{\\overline{\\mathfrak q}}=\\mathfrak m_R$ for the image ideal in $R$. Apply [lem-weil-pbc-nonzerodivisor-if-maximal-not-associated] to the Noetherian local ring $R$ and finite module $L$: obtain $h\\in\\mathfrak m_R$ acting injectively on $L$. Some power $h^n$, with $n\\ge1$, lies in $\\overline{\\mathfrak q}$, so choose $g\\in\\mathfrak q$ with image $h^n$ in $R$. Its multiplication on $L$ is injective as a composite of $n$ injective maps. This is the source's prime-avoidance conclusion, obtained here from the existing nonzerodivisor lemma and the radical equality.",
+   "uses": [
+    "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSI, third paragraph: radical equality and choice of g (prime-avoidance conclusion)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-valuation-finite-module-injectivity] to multiplication $g:N\\to N$. The two $B$-modules are finite, the target is $A$-flat by step 4, the map $A\\to B$ is local essentially of finite type, and its reduction is injective by step 6. Hence $g$ acts injectively on $N$. It remains injective after both localizations used to reach the generic-fibre stalk at $y'$: if $g(n/u)=0$, the fraction criterion [def-weil-pbc-module-localization] supplies a further denominator $v$ with $vgn=0$; injectivity gives $vn=0$ and thus $n/u=0$. By the affine stalk and pullback formulas of step 5, this localized module is $(\\mathcal F'_{t'})_{y'}$, over $(B\\otimes_AK)_{\\mathfrak q}=\\mathcal O_{X'_{t'},y'}$. But $y'$ is relatively associated, so this stalk has a nonzero element annihilated by its maximal ideal. The element $g\\in\\mathfrak q$ maps into that maximal ideal and kills it, contradicting injectivity. Therefore $x'$ is relatively associated.",
+   "uses": [
+    "lem-trf-valuation-finite-module-injectivity",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSI, third paragraph: injectivity lifted using 0GSG and contradiction on the generic-fibre stalk"
+   }
+  },
+  {
+   "text": "By [lem-trf-relative-assassin-base-change], the associated point $x'$ maps to $x\\in\\operatorname{Ass}_{X/S}(\\mathcal F)$ and is generic in the residue-field fibre over $x$ of $X'_{s'}\\to X_s$. This same residual fibre occurs for $Y_s\\times_s s'\\to Y_s$, since $x\\in Y_s$ and a closed immersion does not change its residue field. Because $x$ is a component generic point of $Y_s$, $x'$ is a component generic point of $Y_s\\times_s s'$: on affine charts, a prime properly contained in the prime of $x'$ would contract to a prime contained in the minimal prime of $x$, hence to that same prime; after localizing at $x$ it would contradict minimality in the residue-field fibre. Thus the closure of $x'$ in $Y_s\\times_s s'$ is an irreducible component. It equals $C'$ topologically because $Y'_{s'}$ is a closed subscheme of this base change and contains $x'$.",
+   "uses": [
+    "lem-trf-relative-assassin-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSI, second paragraph: descend association and identify the special component after field extension"
+   }
+  },
+  {
+   "text": "Choose a finite type affine $A$-chart $W=\\operatorname{Spec}D\\subset Y'$ containing $x'$. Its coordinate ring is a domain and $A\\to D$ is injective: every nonempty open of the integral scheme $Y'$ contains $y'$, whose image is the generic point of $\\operatorname{Spec}A$, so a nonzero element of $A$ cannot vanish in $D$. The fibre $W_{s'}$ is nonempty. Apply [lem-trf-valuation-domain-fibre-dimensions]: every component of $W_{s'}$ has dimension $\\dim(D\\otimes_AK)$. In particular $C'\\cap W$ is such a component by [lem-sc-components-open-injection]. By [lem-sc-dimension-locally-algebraic], its dimension is $\\dim C'$, while the nonempty open $W_{t'}$ of the irreducible $Y'_{t'}$ has dimension $\\dim Y'_{t'}$. The affine spectrum/ring comparison [lem-weil-pbc-spec-topological-krull-dimension-ring] identifies $\\dim W_{t'}=\\dim(D\\otimes_AK)$. Hence $\\dim C'=\\dim Y'_{t'}$.",
+   "uses": [
+    "lem-trf-valuation-domain-fibre-dimensions",
+    "lem-sc-components-open-injection",
+    "lem-sc-dimension-locally-algebraic",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSI, first paragraph: apply Algebra Tag 00QK on an affine neighbourhood of x′"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-fibre-dimension-after-base-change] to $Y\\to S$ at $y'$ over $t'$: $\\dim_{y'}(Y_t\\times_t t')=\\dim_yY_t$. Step 2 identifies the left side with $\\dim Y'_{t'}$ and the right side with $\\dim Y_t$, since $y'$ is generic in its component and $Y_t$ is irreducible. The same base-change lemma at $x'$ over $s'$ gives $\\dim_{x'}(Y_s\\times_s s')=\\dim_xY_s$. By step 8, $x'$ is a component generic point of this entire base change, so step 2 identifies its local dimension with $\\dim C'$. Combining these equalities with steps 2 and 9 gives $\\dim_xY_s=\\dim C=\\dim C'=\\dim Y'_{t'}=\\dim Y_t$. Together with step 8 this is the required conclusion.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSI, first and second paragraphs: preserve component dimensions under the two residue-field extensions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "lem-pc-pullback-stalk-relative-flat-extension",
+  "lem-sc-components-open-injection",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sc-locnoeth-components-locally-finite",
+  "lem-trf-relative-assassin-base-change",
+  "lem-trf-valuation-domain-fibre-dimensions",
+  "lem-trf-valuation-finite-module-injectivity",
+  "lem-trf-valuative-fibre-component-lift",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GSI (lemma-associated-point-specializes), all three proof paragraphs; the prime-avoidance choice is written via a power of a nonzerodivisor, and field-component dimension comparison uses the existing local fibre-dimension base-change theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,10 +220,38 @@
    "results": "8 hits; Algebra.HasGoingDown.of_flat, Module.isLocallyConstant_rankAtStalk, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber_assoc, Module.rankAtStalk_pos_iff_mem_support, Module.rankAtStalk_eq, Module.stableUnderSpecialization_support, Module.rankAtStalk_eq_zero_iff_notMem_support; digest=4047063a06761352. Read the returned types: flatness/going down, module rank, generic-point topology and stalk functoriality do not assert relative associated-point specialization or preservation of fibre-component dimension. The grep hits concern elliptic-curve formulae and a comment on cycle pushforward, not this theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relative associated point specializes at a flat fibre component generic point and the dimension of its closure fibre stays constant",
+   "results": "8 hits: AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.Scheme.le_iff_specializes, AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk_assoc, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk_assoc, genericPoint_specializes, IsLocalRing.specializes_closedPoint, AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf; digest=4b0b576abeed11b5.  Hits concern generic-point topology, flat morphisms or residue-field descriptions, not relative associated-point specialization and component dimension.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeAss|assassin|associatedPoint|equidimensional",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean; digest=2b027e3be165cb00.  Hits concern generic-point topology, flat morphisms or residue-field descriptions, not relative associated-point specialization and component dimension.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relative associated point specializes at a flat generic point of a fibre component of its closure",
+   "results": "8 hits: IsGenericPoint.specializes, Specializes, genericPoints, genericPoints.isGenericPoint, genericPoint_specializes, IsLocalRing.specializes_closedPoint, genericPoints.ofComponent, specializes_rfl; digest=59f6c2cc848bf7b6.  Hits concern generic-point topology, flat morphisms or residue-field descriptions, not relative associated-point specialization and component dimension.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finite type family the closure of a fibrewise associated point has the same fibre component dimension at flat points and remains fibrewise associated",
+   "results": "8 hits: AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Flat.instDescScheme, AlgebraicGeometry.Flat, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, Algebra.HasGoingDown.of_flat, Algebra.IsStandardSmoothOfRelativeDimension.out, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; digest=4a1d6a7bd6df6516.  Hits concern generic-point topology, flat morphisms or residue-field descriptions, not relative associated-point specialization and component dimension.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flat-associated-equidimensional",
@@ -97,5 +279,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-flat-relative-associated-specialization",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and expanded Stacks 0GSI into a valuative component lift, pointwise base change, a closed-fibre nonzerodivisor contradiction, and dimension comparison. Added four strictly smaller statement-only inputs (0GSH, 05DC, 0GSG, 00QK). Reused the existing nonzerodivisor and local fibre-dimension lemmas, writing the elementary power and component arguments explicitly. Searched both project Lean sources, the full DAG, blueprint and Mathlib; no exact attachment or new Mathlib leaf was found.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. The ten steps expand the pointwise 0GSI input under the existing component-closure/semistable branch; the current blueprint ancestor is read together with its main-20261015 update.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Local Noetherianity of locally finite type fibres over fields; no Noetherian hypothesis on the base is introduced. This is a generic tool not supplied by a node of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-sc-locnoeth-components-locally-finite",
+    "why": "Isolate a component near its generic point to compare local and component dimension. This is a generic tool not supplied by a node of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-sc-dimension-locally-algebraic",
+    "why": "Dimension of nonempty opens and local dimension on the irreducible fibres and their components. This is a generic tool not supplied by a node of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Quasi-coherence of the valuation-base pullback of F. This is a generic tool not supplied by a node of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-finite-type",
+    "why": "Finite type of the valuation-base pullback of F. This is a generic tool not supplied by a node of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-pullback",
+    "why": "Identify pulled-back sheaf stalks with scalar extensions. This is a generic tool not supplied by a node of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-pc-pullback-stalk-relative-flat-extension",
+    "why": "Pointwise relative flatness after arbitrary base change; global relative flatness is not assumed. This is a generic tool not supplied by a node of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Express local rings and the local structural maps using one affine finite type chart. This is a generic tool not supplied by a node of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-weil-pbc-spec-tilde-stalk-localization",
+    "why": "Express the finite stalk module and its further localizations in affine coordinates. This is a generic tool not supplied by a node of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+    "why": "Choose a regular element in the maximal ideal of the Noetherian closed-fibre local ring. This is a generic tool not supplied by a node of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-sc-components-open-injection",
+    "why": "C prime intersect an affine open is a component of that open. This is a generic tool not supplied by a node of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-weil-pbc-spec-topological-krull-dimension-ring",
+    "why": "Compare the ring dimension in 00QK with affine-fibre topological dimension. This is a generic tool not supplied by a node of sk-i-curve-zero."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Preserve local topological fibre dimension under the two residue-field extensions. This is a generic tool not supplied by a node of sk-i-curve-zero."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-locnoeth-lft",
+  "lem-sc-locnoeth-components-locally-finite",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-pc-pullback-stalk-relative-flat-extension",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+  "lem-sc-components-open-injection",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "lem-sc-fibre-dimension-after-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-ca684bf25",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-ca684bf25 (reviewer sub-agent of L); spot-checked: Read Stacks 0GSI (all three proof paragraphs), 0GSH, 0GSG (more-morphisms.tex), 05DC (divisors.tex) and 00QK (algebra.tex), and checked the tags against tags/tags. The item statement is unchanged and faithful to 0GSI: f locally of finite type, F quasi-coherent of finite type, flatness only at x. The extra equality dim_x Y_s = dim C comes from the source's second paragraph. All ten steps check against the statements they cite. Step 4 gets flatness from the pointwise stalk extension and association of y' from 05DC, using going-down to show y' lies over y. Step 6 replaces prime avoidance correctly: it uses the radical equality, the existing nonzerodivisor lemma, and a lift of a power of h. Step 7 applies 0GSG with u=g, then localizes to reach the generic-fibre stalk at y' and the contradiction. Step 8 shows x' is a component generic point of all of Y_s x s'. Step 9 applies 00QK on an affine chart where A injects into D and the special fibre is nonempty. Step 10 uses local fibre-dimension base change twice and closes the chain of equalities. uses equals proof_deps and there is no cycle. The four new nodes are faithful to their sources, statement-only, with correct ancestry, same_as=[] and all three search kinds recorded. Checked on small cases (D=A, A[u], A[u,v]/(uv-pi), A[1/pi] excluded; identity and inseparable field extensions; A a field). rg over dag/nodes found no duplicates (the Bourbaki flat-base-change node, fibre-component-relative-associated and the Nagata valuation nodes all differ), and no new node restates a clause of the item. No SGA is cited. Accepted the 13 declared generic tool_uses. No fixes written."
  }
 }
