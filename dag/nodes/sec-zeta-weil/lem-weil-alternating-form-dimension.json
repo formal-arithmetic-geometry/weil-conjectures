@@ -101,5 +101,24 @@
   "group": "Q123",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q123-360db6cca (reviewer sub-agent of L); spot-checked: Mathematics passes, but fixes are needed: self-contained leaf dependencies, inaccurate grep result, current blueprint source metadata, and explicit basis-cardinality identification. Repairs are in fixes/dag/nodes/sec-zeta-weil/, with full checks in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.LinearAlgebra.Matrix.BilinearForm",
+  "declaration": "LinearMap.BilinForm.even_finrank_of_isAlt",
+  "statement": "theorem even_finrank_of_isAlt {B : LinearMap.BilinForm K V} (halt : B.IsAlt) (hnd : B.Nondegenerate) : Even (Module.finrank K V)",
+  "branch": "slopmaster2",
+  "by": "Q34",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Exact existing declaration of the published library (lean/WeilConjectures/Mathlib/LinearAlgebra/Matrix/BilinearForm.lean on the delivery's base and in the live build), tagged with this blueprint id. Section variables {K V : Type*} [Field K] [NeZero (2 : K)] [AddCommGroup V] [Module K V] [FiniteDimensional K V]: for a field, NeZero (2 : K) is exactly char(K) ≠ 2 (Ring.two_ne_zero converts ringChar K ≠ 2), the universes of K and V are independent, Nondegenerate and IsAlt are Mathlib's predicates, and the conclusion is Even (Module.finrank K V). Fully proved (#print axioms: propext, Classical.choice, Quot.sound). The worker read the older slopmaster2 copy, which assumes [CharZero K]; the published version was generalized to NeZero 2. The delivered duplicate Sheaf.LinearAlgebra.AlternatingFormDimension is left out.",
+  "fixed_by": "NT-stage2-cc-0ec477fdb"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0ec477fdb",
+  "group": "Q34",
+  "result": "fix",
+  "note": "The delivered signature (field K, ringChar K ≠ 2, finite-dimensional V in an independent universe, nondegenerate and IsAlt BilinForm, Even finrank) matches the node and the blueprint source clause by clause; docstrings, proof only sorry and edge cases are ok; nt_compile rc 0 in 3.1 s. H4 finding: the delivery's base and the live published library already contain LinearMap.BilinForm.even_finrank_of_isAlt in WeilConjectures.Mathlib.LinearAlgebra.Matrix.BilinearForm under [NeZero (2 : K)], which is exactly char ≠ 2 for a field. It is tagged with this blueprint id and fully proved (axioms: propext, Classical.choice, Quot.sound). The worker read the older slopmaster2 copy with [CharZero K]. A check compile derives the delivered signature from it via Ring.two_ne_zero. Fix: lem-weil-alternating-form-dimension.lean-record.json sets existing: true, branch slopmaster2, file null and the verbatim statement (refit_record and check_existing both accept it), so the duplicate Sheaf module is left out; the fixed report.md adds a correction section. The Second reading section is the accepted 2026-10-17 placeholder.; left out new module(s) lean/Sheaf/LinearAlgebra/AlternatingFormDimension.lean (--drop-files, or a record fixed to existing: true)"
  }
 }

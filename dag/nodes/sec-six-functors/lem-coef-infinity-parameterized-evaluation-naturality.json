@@ -263,5 +263,29 @@
   "group": "Q105",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q105-90c1b6c7e (reviewer sub-agent of L); spot-checked: Reviewed item and all seven steps against ten cited node statements, the unit/blueprint route, and Kerodon 038A, 03M4, and 01PF. Checked hypotheses, parameter coherence, arrow orientations, universes, edge cases, Mathlib searches, duplicates, and route/tool uses. No new nodes, repairs, circularity, weakened target, or SGA citation. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityParameterizedEvaluationNaturality",
+  "declaration": "SSet.Enhanced.PointwiseYoneda.parameterized_evaluation_naturality",
+  "file": "lean/Sheaf/CategoryTheory/InfinityParameterizedEvaluationNaturality.lean",
+  "statement": "theorem parameterized_evaluation_naturality (c : SpaceComparison.{u}) (C : SSet.{u}) [Quasicategory C] (F G : liftSpace C ⟶ CategoryTheory.Spaces.infinityCategory.{u}) (a : C _⦋0⦌) (η : (value (F.app (op ⦋0⦌) (ULift.up a))) _⦋0⦌) : (∀ x : C _⦋0⦌, ∃ H : SSet.Homotopy ((𝟙 (transformations F G) ⊗ₘ pointAction c F (ULift.up a) (ULift.up x) η) ≫ (component c F G (ULift.up x) ⊗ₘ 𝟙 _) ≫ applyMap _ _) ((β_ (transformations F G) (mappingSpace (liftSpace C) (ULift.up a) (ULift.up x))).hom ≫ (𝟙 _ ⊗ₘ evaluate c F G (ULift.up a) η) ≫ action c G (ULift.up a) (ULift.up x)), ∀ (B : SSet.{u + 1}) (b : B ⟶ transformations F G), ∃ H_B : SSet.Homotopy ((b ⊗ₘ 𝟙 _) ≫ ((𝟙 (transformations F G) ⊗ₘ pointAction c F (ULift.up a) (ULift.up x) η) ≫ (component c F G (ULift.up x) ⊗ₘ 𝟙 _) ≫ applyMap _ _)) ((b ⊗ₘ 𝟙 _) ≫ ((β_ (transformations F G) (mappingSpace (liftSpace C) (ULift.up a) (ULift.up x))).hom ≫ (𝟙 _ ⊗ₘ evaluate c F G (ULift.up a) η) ≫ action c G (ULift.up a) (ULift.up x))), H_B.h = ((b ⊗ₘ 𝟙 _) ▷ Δ[1]) ≫ H.h)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.PointwiseYoneda.evaluationArrowFamily",
+   "SSet.Enhanced.PointwiseYoneda.transformationEvaluationFamily",
+   "SSet.Enhanced.PointwiseYoneda.parameterized_evaluation_naturality"
+  ],
+  "note": "Repair of returned head 44aaf353451b, H3. Fixes the characterized comparison before all diagram data and states the homotopy between the two explicit maps on the full product; every parameter restriction uses the same homotopy. The forward comparison is specified on all subset chains, its backward map is a representative of its unique inverse homotopy class. No comparison is existentially selected to satisfy Reconstruction. C is small in the value universe and is lifted only to form coherent diagrams. The global transformation evaluation family retains higher simplices in C. Natural-language statement unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-52d888d00",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Previous H3 return (existential comparison) repaired: c : SpaceComparison is fixed and universally quantified first; it is uniquely determined up to homotopy. Clause-by-clause check against the node: C u-small quasicategory via liftSpace; T = transformations F G; M_x = mappingSpace; both maps (alpha_x(e(f)) and G(f)(alpha_a(eta))) with correct factor order; homotopy on the full product T x M_x; B -> T restriction of the same H; no representability, invertibility or Yoneda hypothesis; universes bound, no equality imposed. Empty cases covered. Helpers have real data; Classical.choose is pinned by the right_pinch_comparison prism formula. Only sorry is the item proof; docstrings carry source places and blueprint. lean.statement verbatim; node differs from base only in lean; no import cycle. nt_compile on the snapshot module: rc=0, about 4.4 s, no errors or warnings. Observation, not a defect: the node's informal x-coherence clause has no Lean conjunct and transformationEvaluationFamily is unused in the statement; the node specifies no formal x-compatibility and the consumer Reconstruction uses exactly the per-x homotopy."
  }
 }

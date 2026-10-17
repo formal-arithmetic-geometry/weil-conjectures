@@ -261,5 +261,29 @@
   "group": "Q85",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q85-007217a04 (reviewer sub-agent of L); spot-checked: Read the item, sole new node, cited statements, sources, and route in full. Stacks 0E48/0GL1/0E8I/03S6 support the factor calculation and mate directions; small cases and duplicate/cycle checks passed. Added the omitted lem-pur-etale-open-derived-tensor tool-use declaration in corrected item JSON. Details are in review.md; no mathematical statements changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompactProjectionExchange",
+  "declaration": "AlgebraicGeometry.Etale.compactProjectionMapCoeffFirst_baseChangeMap",
+  "statement": "theorem compactProjectionMapCoeffFirst_baseChangeMap {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} [HasCompactification f] [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) (M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (Q : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : L((g)^*[ModuleCat.{u + 1} Λ]).map (compactProjectionMapCoeffFirst Λ f Q M) ≫ (rightDerivedLowerShriekBaseChangeMap Λ sq).app (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj (L((f)^*[ModuleCat.{u + 1} Λ]).obj Q)).obj M) ≫ (R(f')_![ModuleCat.{u + 1} Λ]).map (((leftDerivedUpperStarTensorComparison _ g').app (L((f)^*[ModuleCat.{u + 1} Λ]).obj Q)).app M) ≫ (R(f')_![ModuleCat.{u + 1} Λ]).map (((-⊗ᴸ-(X')[ModuleCat.{u + 1} Λ]).map (derivedSquareUpperStarIsoInvApp _ sq.toCommSq Q)).app (L((g')^*[ModuleCat.{u + 1} Λ]).obj M)) = ((leftDerivedUpperStarTensorComparison _ g).app Q).app ((R(f)_![ModuleCat.{u + 1} Λ]).obj M) ≫ ((-⊗ᴸ-(Y')[ModuleCat.{u + 1} Λ]).obj (L((g)^*[ModuleCat.{u + 1} Λ]).obj Q)).map ((rightDerivedLowerShriekBaseChangeMap Λ sq).app M) ≫ compactProjectionMapCoeffFirst Λ f' (L((g)^*[ModuleCat.{u + 1} Λ]).obj Q) (L((g')^*[ModuleCat.{u + 1} Λ]).obj M)",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Maintainer-review fix: the delivered existing record AlgebraicGeometry.Etale.projectionMap_rightDerivedLowerShriekBaseChangeMap (WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange) states the right-coefficient square (Rf_!M ⊗ Q, Ex_! ⊗ 1), i.e. step 5 of the node's proof, not the node's coefficient-first equation with 1 ⊗ b_M. The module states the node's equation with Π_{f,Q,M} = Rf_!(σ) ∘ projectionMap ∘ σ (derivedTensorSymmetry, the convention of lem-amb-proper-coproducts-projection), the upstream exchange map rightDerivedLowerShriekBaseChangeMap, and the same source/target identifications as the upstream theorem; the upstream theorem is the input of step 5 of its proof.",
+  "declarations": [
+   "AlgebraicGeometry.Etale.compactProjectionMapCoeffFirst",
+   "AlgebraicGeometry.Etale.compactProjectionMapCoeffFirst_baseChangeMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactProjectionExchange.lean",
+  "fixed_by": "NT-stage2-cc-22592f27a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22592f27a",
+  "group": "Q50",
+  "result": "fix",
+  "note": "The delivered existing:true record projectionMap_rightDerivedLowerShriekBaseChangeMap is proved upstream and its record is verbatim. Its projectionMap and exchange-map construction match the node, its hypotheses are no stronger than the node's, and edge cases (zero ring, empty schemes, unbounded objects) are covered. But it states the right-coefficient square (Rf_!M⊗Q, Ex_!⊗1), which is step 5 of the node's proof. The node states the coefficient-first Π of lem-amb-proper-coproducts-projection with 1⊗b_M (H3). Fix: new module Sheaf.AlgebraicGeometry.CompactProjectionExchange. compactProjectionMapCoeffFirst = σ ≫ projectionMap ≫ Rf_!(σ) using derivedTensorSymmetry. compactProjectionMapCoeffFirst_baseChangeMap states the node's equation with the upstream exchange and identifications; proof is sorry and the docstring carries all six steps. Also a lean-record.json (existing:false, statement verbatim) and the report with an added 'Maintainer review fix' section. nt_compile.py: clean, no errors, all variables bound."
  }
 }

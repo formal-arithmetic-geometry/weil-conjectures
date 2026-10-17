@@ -5,7 +5,14 @@
   "def-coef-presentable-infinity-category",
   "def-coef-infinity-fibrations",
   "lem-coef-ind-kappa-presentability",
-  "lem-coef-ind-right-adjoint-coherent"
+  "lem-coef-ind-right-adjoint-coherent",
+  "lem-coef-relative-cone-presheaf-fibers",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-presheaf-ind-criterion",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "def-coef-finite-limits-square-cones",
+  "lem-coef-cat-infinity-opposite-involution",
+  "lem-coef-space-valued-straightening"
  ],
  "proof": [
   {
@@ -235,5 +242,40 @@
   "group": "Q114",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-e18fa7bbb (reviewer sub-agent of L); spot-checked: Read in full: the item (delivered and base versions), the three new nodes, every cited node statement, the parent lem-coef-ind-presheaf-fibration-accessibility, and GHN arXiv:1501.02161v3 (fetched as a PDF into /tmp) at Def 7.2/Prop 7.3, Def 9.1-Cor 9.17 with the proofs of 9.10, 9.12 and 9.16. Steps 1-8 match GHN Prop 9.6/Cor 9.9(ii) (with HTT 3.2.2.13 for the edge criterion) and the proofs of 9.12 and 9.16, plus 9.14 for the Ind criterion and 9.10 for the extension. The rewrite of condition (ii) changes the statement but does not weaken it, and the report names the change. The old composite needed a strict map from the ordinary join into the fat cone, which does not exist: checked on A=pt, E=Δ^1, as GHN Warning 9.2 also says. The new augmented-limit form is GHN's own condition in the proof of 9.16 (K^◁→C/x versus K^{◁▷}→C). Variance is checked, the parent's step 4 reads (ii) the same way, and it is not a target. The new nodes are true and general, not restated clauses of the item. Tests: E empty, A=E=pt and p=id for the fiber lemma; covariance of (-)∘f^* for the classifier; y(a) and constant G for the extension. The item was tested with A empty, A=pt (fiber Fun(X, Ind C)), K empty and X empty. Two points are noted but not changed. (1) Step 5 identifies the coherent precomposition diagram with H 'by uniqueness of the adjoint', which is imprecise at the coherent level; GHN 9.16→9.17 make the same identification, and lem-coef-ind-right-adjoint-coherent builds exactly this functor in its proof. (2) The report missed that lem-coef-relative-functor-cocartesian-classifier overlaps the existing lem-cbc-enhanced-relative-exponential (unit sk-prop-sf-cbc), which already gives the construction and the edge criterion. The new node adds the GHN 7.3 classification that steps 2, 5 and 8 need, so it is a generalization and is kept. No fixes, no tool_uses, no SGA."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39c3fd826",
+  "group": "Q10",
+  "result": "fix",
+  "note": "Hypothesis hq0 (HEq of q0's projection with p) does not identify q0's total space with E, so p is not actually tied to F0 (H3). Fix adds hE0 : (CocartesianStraightening.object q0).obj.left.underlying = E, the same pairing the module's own Classifies uses; fixes/GhnIndPresheafCartesianRealization.lean (complete) and fixes/<item>.report.md; lean.statement is re-read from the fixed file. Everything else verified: conditions (i) and (ii) against GHN 9.12/9.16 (square orientation, pinned slice functor, empty K), Cartesian fibration, classification via straightening the opposite projection then opCat, small-limit preservation, equivalence along y^op and uniqueness; universes consistent; no hollow definitions; only the main theorem is sorry; noncomputable dependency repairs already on HEAD. nt_compile: delivered module clean in 9.8 s, fixed module clean in 6.1 s.; reverted the delivery's change of existing node(s) lem-coef-relative-cone-presheaf-fibers, lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GhnIndPresheafCartesianRealization",
+  "declaration": "SSet.Enhanced.GhnInd.ghn_ind_presheaf_cartesian_realization",
+  "declarations": [
+   "SSet.Enhanced.GhnInd.restrict",
+   "SSet.Enhanced.GhnInd.cylinder",
+   "SSet.Enhanced.GhnInd.edgeSquare",
+   "SSet.Enhanced.GhnInd.EdgeCondition",
+   "SSet.Enhanced.GhnInd.baseValue",
+   "SSet.Enhanced.GhnInd.IsFiberSlice",
+   "SSet.Enhanced.GhnInd.SendsCoconeToLimit",
+   "SSet.Enhanced.GhnInd.FiberCondition",
+   "SSet.Enhanced.GhnInd.subcategory",
+   "SSet.Enhanced.GhnInd.projection",
+   "SSet.Enhanced.GhnInd.PreservesSmallLimits",
+   "SSet.Enhanced.GhnInd.Classifies",
+   "SSet.Enhanced.GhnInd.ghn_ind_presheaf_cartesian_realization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/GhnIndPresheafCartesianRealization.lean",
+  "statement": "theorem ghn_ind_presheaf_cartesian_realization (A E : SSet.{u}) [Quasicategory A] [Quasicategory E] (κ : Cardinal.{u}) (hκ : κ.IsRegular) (F0 : SSet.uliftFunctor.{u + 1}.obj A ⟶ compactRex κ) (p : E ⟶ A) (hp : cocartesianFibration p) (S0 : CocartesianStraightening.Statement.{u}) (q0 : CocartesianStraightening.coCart A (S0.relativeModels A) _⦋0⦌) (hE0 : (CocartesianStraightening.object q0).obj.left.underlying = E) (hq0 : HEq (CocartesianStraightening.object q0).obj.hom.val p) (hF0 : AreNaturallyEquivalent (CocartesianStraightening.classify ((S0.equivalences A inferInstance).straighten.app _ q0)) (F0 ≫ (compactRexSubcomplex κ).ι)) (R : CompactIndRight.{u, 0} κ) (S : CocartesianStraightening.Statement.{u + 1}) (opCat : CatInfinity.{u + 1} ⟶ CatInfinity.{u + 1}) (hopCat : IsCatInfinityOpposite opCat) : ∃ (hT : Quasicategory (subcategory p κ).toSSet) (hP : Quasicategory (infinityPresheaves A)), @cartesianFibration _ _ (projection p κ) hT hP ∧ ∃ W : (SSet.uliftFunctor.{u + 2}.obj (infinityPresheaves A).op) ⟶ CatInfinity.{u + 1}, Classifies (projection p κ) S opCat W ∧ PreservesSmallLimits W ∧ AreNaturallyEquivalent (SSet.uliftFunctor.{u + 2}.map (SSet.opFunctor.map (infinityYoneda A)) ≫ W) (SSet.opFunctor.map (SSet.uliftFunctor.{u + 2}.map F0) ≫ R.diagram) ∧ ∀ W' : (SSet.uliftFunctor.{u + 2}.obj (infinityPresheaves A).op) ⟶ CatInfinity.{u + 1}, PreservesSmallLimits W' → AreNaturallyEquivalent (SSet.uliftFunctor.{u + 2}.map (SSet.opFunctor.map (infinityYoneda A)) ≫ W') (SSet.opFunctor.map (SSet.uliftFunctor.{u + 2}.map F0) ≫ R.diagram) → AreNaturallyEquivalent W' W",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the actual relative-cylinder pushout, native coherent presheaves, the specified square cone and slice cone criteria, the normalized straightening equivalence, and the complete CompactIndRight diagram. All helper definitions have actual data. Additional statement dependencies are published interfaces used in these helpers; the space-valued-straightening dependency has a compilation-only noncomputable repair.",
+  "fixed_by": "NT-stage2-cc-39c3fd826"
  }
 }

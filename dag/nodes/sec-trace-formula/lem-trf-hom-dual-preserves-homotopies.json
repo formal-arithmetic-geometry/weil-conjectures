@@ -153,5 +153,32 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q28-37aaa2d1d (reviewer sub-agent of L); spot-checked: Read the full item, all five steps, both cited definitions, current blueprint route and Stacks 0A8H. Signed homotopy and contravariant composition are correct; 405 small arithmetic cases passed. No duplicate, cycle, missing non-elementary citation or coefficient-category change found. No fixes or tool_uses needed. Detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ModuleHomPrecompHomotopy",
+  "declaration": "CochainComplex.moduleHomPrecomp_preserves_homotopies",
+  "declarations": [
+   "CochainComplex.moduleHomPrecompComponent",
+   "CochainComplex.moduleHomPrecomp_comm",
+   "CochainComplex.moduleHomPrecomp",
+   "CochainComplex.moduleHomPrecomp_id_comp",
+   "CochainComplex.moduleHomPrecomp_preserves_homotopies",
+   "CochainComplex.moduleHomDual_preserves_homotopies",
+   "CochainComplex.moduleHomDual_preserves_homotopy_inverses"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ModuleHomPrecompHomotopy.lean",
+  "statement": "theorem moduleHomPrecomp_preserves_homotopies (T : CochainComplex (ModuleCat.{u} A) ℤ) {f f' : P ⟶ R} (h : Homotopy f f') : ∃ H : Homotopy (moduleHomPrecomp T f) (moduleHomPrecomp T f'), ∀ (j : ℤ) (φ : HomComplex.Cochain R T j), H.hom j (j - 1) φ = j.negOnePow • (HomComplex.Cochain.ofHomotopy h).comp φ (by omega)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a57ac75c",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Node (unchanged except lean), both deps (moduleHomComplex at uH, same universe as the item; Mathlib DerivedCategory), source place and the delivered module were read. All clauses match: real linear precomposition data; chain map comm for all j,k; id and contravariant comp for every Q,L with fixed T; Homotopy f f' is the node's f-f'=d h+h d; the homotopy of f*,f'* is fully pinned (H.hom j (j-1) phi = j.negOnePow * ofHomotopy(h).comp phi, other components zero); the sign was verified via delta_comp and delta_ofHomotopy against Homotopy.comm; the A[0] specialization uses HomologicalComplex.single 0; the HomotopyEquiv has hom and inv pinned to f^vee and g^vee. No extra hypotheses; j negative, char 2 and zero cases are covered; docstrings carry the source, blueprint tag and five proof steps; lean.statement is verbatim; no public duplicate in lean/. nt_compile --json on the local side overlay: 5.8 s, no diagnostics. The second-reading section is the accepted 2026-10-17 direct-delivery note. No findings."
  }
 }

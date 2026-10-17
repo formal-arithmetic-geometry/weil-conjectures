@@ -204,5 +204,23 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q12-e4c66e44c (reviewer sub-agent of L); spot-checked: Reviewed item, unit/chapter route, all cited nodes and sources, HTT pp. 413/415, Stacks Tag 017R, Mathlib searches, edge cases, cardinal coding, strict cocone reindexing, and colimit invariance. No mathematical or DAG faults found; review.md written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinitySmallCoconeRepresentatives",
+  "declaration": "SSet.Presentability.small_cocone_representatives",
+  "file": "lean/Sheaf/CategoryTheory/InfinitySmallCoconeRepresentatives.lean",
+  "statement": "theorem small_cocone_representatives (κ : Cardinal.{u}) (hκ : κ.IsRegular) (C : SSet.{u}) [SSet.Quasicategory C] : ∃ (R : Type u) (K : R → SSet.{u}) (p : ∀ r : R, K r ⟶ C) (coc : ∀ r : R, (SSet.Enhanced.coconeCategory (p r)) _⦋0⦌), (∀ r : R, IsKappaSmall κ (K r)) ∧ (∀ (K' : SSet.{u}) (hK' : IsKappaSmall κ K') (p' : K' ⟶ C) (t' : (SSet.Enhanced.coconeCategory p') _⦋0⦌), ∃ (r : R) (u : K r ≅ K'), p r = u.hom ≫ p' ∧ (coc r).1.1 = t'.1.1 ∧ (coc r).1.2 = ((ihom Δ[1]).map ((MonoidalClosed.pre u.hom).app C)).app (op ⦋0⦌) t'.1.2) ∧ (∀ (K' : SSet.{u}) (hK' : IsKappaSmall κ K') (p' : K' ⟶ C) (t' : (SSet.Enhanced.coconeCategory p') _⦋0⦌), SSet.Enhanced.IsColimiting p' t' → ∃ (r : R) (u : K r ≅ K'), SSet.Enhanced.IsColimiting (p r) (coc r) ∧ p r = u.hom ≫ p' ∧ (coc r).1.1 = t'.1.1 ∧ (coc r).1.2 = ((ihom Δ[1]).map ((MonoidalClosed.pre u.hom).app C)).app (op ⦋0⦌) t'.1.2)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73c7b4a39",
+  "group": "N8",
+  "result": "pass",
+  "note": "Node vs Lean checked clause by clause against the dependency definitions IsKappaSmall (nondegenerate count < κ), coconeCategory (comma vertex: apex t.1.1, full transformation t.1.2 from p to const) and IsColimiting (initial). Small R : Type u; κ-small K r; for every κ-small K' (the H3 hK' repair is present in both clauses), p' and t' there are r and u : K r ≅ K' with p r = u.hom ≫ p', literal apex equality, and equality of the full transformation after reindexing by pre u.hom (variance correct); the colimiting clause also requires IsColimiting of the representative. No extra assumptions; single universe u, nothing unbound. Edge cases: empty K', empty C, κ = ℵ₀. No duplicate declaration (checked InfinityEssentiallySmallCocones and InfinityBoundedColimitPresentation). Docstrings carry source and blueprint; proof is only sorry; lean.statement is verbatim; 3-file single commit. nt_compile --json on the snapshot: 4.5 s, exit 0, no errors; a sanity re-run shows the file is elaborated and depends only on sorryAx plus standard axioms. The Second reading section is the standard line used by 186 landed reports. merge_delivery not run (landing tool)."
  }
 }

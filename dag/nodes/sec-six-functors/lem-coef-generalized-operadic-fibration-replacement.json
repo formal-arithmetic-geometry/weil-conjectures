@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "lem-coef-operadic-algebra-presentability"
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-space-valued-straightening"
  ],
  "proof": [
   {
@@ -230,5 +231,29 @@
   "group": "Q116",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-756fe4b86 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the statements of all 12 cited nodes (plus the proof of lem-coef-marked-operadic-model-structures), the citer active-lift-criterion, and Gepner–Haugseng arXiv:1312.3178 online (Ex. 3.2.4(3), Thm 3.2.5, Def 3.2.9, Rem 3.2.12, Def 2.4.1). One C3/C4 fault: Steps 1-3 treated the generalized model structure of lem-coef-marked-operadic-model-structures as the categorical-pattern model M_P. Only that node's proof builds it that way; its statement does not say so. Step 5's pattern-induced-fibration-test needs g to be a fibration in M_P, which the steps never showed. Repair in the fixes directory: (1) new unsplit statement-only node lem-coef-generalized-operad-pattern-fibered (source GH Example 3.2.4(3)): over (N(Delta^op), inert), the fibered objects of the incidence pattern (D_n cones) are exactly the generalized operads (no Kan condition) with inert cocartesian marking. I tested it for n=0,1,2 and for empty X. A DAG and blueprint search found no existing node stating it. Only an rg search of Mathlib is recorded: the network is blocked here, so LeanSearch, Loogle and LeanFinder were not run and should be added at merge. (2) Steps 1, 2, 3 and 7 now factor f and lift the enriched Homs in M_P, using the axioms of lem-coef-categorical-pattern-model-calculus (target Hom H_B(-,B-bar) is terminal) and the new node; proof_deps recomputed. Statement, stmt_deps and blueprint fields are unchanged. All other steps checked as written: equivalence edges are inert and cocartesian over identities; cocartesian edges over equivalences are equivalences; the inverse r with re=id exactly and the marked homotopy H come from lifting in fibrant marked Homs; the Kan zero fiber follows by conjugating with H_0 and applying the core-Kan theorem to M'_0 -> Delta^0. Edge cases (empty, terminal, non-ordinary O) are fine. No tool uses, no SGA, no cycle.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eecaa460b",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean: IsGeneralizedOperad p/q (includes the Kan zero fiber); hf = over-base, inert-preserving; ∃ M' in universe u with IsGeneralizedOperad r; e ≫ g = f strictly; the equivalence has an over-base inert-preserving quasi-inverse r, and both inverse natural equivalences are equivalence edges inside markedFunctors (over-base complexes), with correct δ1/δ0 endpoints; the categorical fibration is inert-preserving over base, Mathlib SSet.InnerFibration, and lifts equivalence edges with given source and exact image. No extra hypotheses or universe restriction; empty operads, n=0 and identity edges are covered. Gates pass: predicates have real content, docstrings carry source place and blueprint tag, the theorem docstring has all 7 proof steps, the only proof is sorry, the node's statement field equals the file's signature, and no duplicate declaration exists. nt_compile.py: item module and SpaceValuedStraightening compile with no errors or warnings. Notes: the SpaceValuedStraightening noncomputable repair duplicates the identical fix already landed by Q19 (differs by one blank line), and the added stmt_dep is upstream and acyclic; if landing objects that the node moved after the base, use --revert-nodes lem-coef-space-valued-straightening. Some imports are unneeded but harmless."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GeneralizedOperadicFibrationReplacement",
+  "declaration": "SSet.Enhanced.Nonsymmetric.generalized_operadic_fibration_replacement",
+  "declarations": [
+   "SSet.Enhanced.Nonsymmetric.IsGeneralizedOperadicEquivalence",
+   "SSet.Enhanced.Nonsymmetric.IsGeneralizedCategoricalFibration",
+   "SSet.Enhanced.Nonsymmetric.generalized_operadic_fibration_replacement"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/GeneralizedOperadicFibrationReplacement.lean",
+  "statement": "theorem generalized_operadic_fibration_replacement {M O : SSet.{u}} (p : M ⟶ monoidalSimplexBase.{u}) (q : O ⟶ monoidalSimplexBase.{u}) (hM : IsGeneralizedOperad p) (hO : IsGeneralizedOperad q) (f : M ⟶ O) (hf : IsLaxMonoidalInfinityFunctor p q f) : ∃ (M' : SSet.{u}) (r : M' ⟶ monoidalSimplexBase.{u}), IsGeneralizedOperad r ∧ ∃ (e : M ⟶ M') (g : M' ⟶ O), e ≫ g = f ∧ IsGeneralizedOperadicEquivalence (p := p) (q := r) e ∧ IsGeneralizedCategoricalFibration (p := r) (q := q) g",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned head d20da2992743: H3 is fixed by explicitly requiring e to be over the base and inert-preserving, and by taking both coherent inverse equivalences in the dependency-defined marked relative functor complexes, including their inverse triangles. H8 is fixed by reproducing all seven node proof steps in the theorem docstring. The natural-language statement and theorem signature are unchanged. Repair of returned immutable head a45b3a4d7eff retains that mathematical packet and records the report-path diagnostic in report.md. The compile-discovered transitive SpaceValuedStraightening dependency is repaired in this packet solely by making Diagrams noncomputable."
  }
 }

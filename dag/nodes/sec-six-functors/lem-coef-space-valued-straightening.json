@@ -348,10 +348,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-34c3ff5c2",
-  "group": "Q19",
+  "reviewer": "NT-stage2-cc-eecaa460b",
+  "group": "Q13",
   "result": "pass",
-  "note": "Exact existing theorem matches the node and HTT Proposition the project server; dependency repair is semantic-preserving, documented, and scompile.py passes sandbox and library checks."
+  "note": "Every clause of the node matches the Lean: IsGeneralizedOperad p/q (includes the Kan zero fiber); hf = over-base, inert-preserving; ∃ M' in universe u with IsGeneralizedOperad r; e ≫ g = f strictly; the equivalence has an over-base inert-preserving quasi-inverse r, and both inverse natural equivalences are equivalence edges inside markedFunctors (over-base complexes), with correct δ1/δ0 endpoints; the categorical fibration is inert-preserving over base, Mathlib SSet.InnerFibration, and lifts equivalence edges with given source and exact image. No extra hypotheses or universe restriction; empty operads, n=0 and identity edges are covered. Gates pass: predicates have real content, docstrings carry source place and blueprint tag, the theorem docstring has all 7 proof steps, the only proof is sorry, the node's statement field equals the file's signature, and no duplicate declaration exists. nt_compile.py: item module and SpaceValuedStraightening compile with no errors or warnings. Notes: the SpaceValuedStraightening noncomputable repair duplicates the identical fix already landed by Q19 (differs by one blank line), and the added stmt_dep is upstream and acyclic; if landing objects that the node moved after the base, use --revert-nodes lem-coef-space-valued-straightening. Some imports are unneeded but harmless."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.SpaceValuedStraightening",
@@ -373,9 +373,9 @@
   "file": "lean/Sheaf/CategoryTheory/SpaceValuedStraightening.lean",
   "statement": "theorem space_valued_straightening : ∃ S : Straightening.{u}, Nonempty (BaseNaturality S) ∧ ∀ (C : Type u) [Category.{u} C], IsOrdinaryComparison S C",
   "branch": "newtargets-dag",
-  "by": "Q19",
+  "by": "Q13",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The ordinary left adjoint is specified by its canonical comma-pullback universal property, in both variables; this is the displayed subset quotient and simplex colimit. Coherent naturality is retained for base change and for families of ordinary comparisons. No construction is chosen from an undetermined existence theorem. Compile repair under §1(B): the recorded Diagrams abbreviation depended on noncomputable smallSpaces and failed code generation. Mark Diagrams noncomputable, retaining its exact data, every signature, and the ordinary comparison construction. This transitive dependency belongs to the item’s statement/proof prerequisite closure."
+  "note": "Dependency-module repair under brief-stage2 §1(B). The recorded module cannot compile against the current smallSpaces: its Diagrams abbreviation is missing noncomputable. This delivery keeps every declaration type, body, universe, and theorem statement and adds only noncomputable to Diagrams. It states the same complete space-valued straightening and ordinary-base comparison. This transitive prerequisite of OperadicAlgebraPresentability is cited directly by the consumer so the repair is reviewable in the same packet."
  }
 }

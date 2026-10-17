@@ -25,7 +25,8 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-continuous-space-presheaf"
  ],
  "proof": [
   {
@@ -230,5 +231,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-678513736",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Read item node, the 3 stmt deps, new node def-coef-continuous-space-presheaf, the 4 proof-dep signatures (presentation now general in u,v), HomBifunctorData, homSpaceCategory, IsPresentable/IsSmall/HasSmallColimits. Clause-by-clause: presentable C : SSet.{max(u+1) v} with IsPresentable.{u,v}, no universe equation; H : C.op ⟶ homSpaceCategory (small spaces lifted); IsRepresentable = ∃ HomBifunctorData M, c with coherent natural equivalence to M(-,c); TakesSmallColimitsToLimits tests every IsSmall.{u} I (no quasicategory or nonemptiness condition) and requires the actual image cone (apex equation plus full reversed cylinder, matching the reviewed OppositeImageComparisonIsEquivalence) to be limiting; empty colimit retained via the apex clause. Definitions real; docstrings carry source and blueprint; six-step proof docstring; sorry only; statements verbatim; lines ≤100. nt_compile --json on the 3 delivered files, run twice: exit 0, no errors or warnings (4.8/4.0/8.8 s). F1 (mechanical): Q19 batch 93990d0775 landed the identical noncomputable Diagrams repair after this delivery's base, so merge_delivery will refuse the stale lem-coef-space-valued-straightening lean record (line 905); land with --revert-nodes lem-coef-space-valued-straightening (module byte-identical to main). If refused, the group only rebases and drops that node and module change. O1: HomBifunctorData pins only values and 1-simplex actions (inherited interface). O2: stage 3 must compare HomPresentation and HomBifunctorData. O3: cosmetic 'the project server' text in report.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ContinuousPresheafRepresentability",
+  "declaration": "SSet.Enhanced.ContinuousPresheaf.continuous_presheaf_representability",
+  "declarations": [
+   "SSet.Enhanced.ContinuousPresheaf.continuous_presheaf_representability"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ContinuousPresheafRepresentability.lean",
+  "statement": "theorem continuous_presheaf_representability (C : SSet.{max (u + 1) v}) [Quasicategory C] (_hC : SSet.Presentability.IsPresentable.{u, v} C) (H : C.op ⟶ homSpaceCategory.{u, v}) : IsRepresentable H ↔ TakesSmallColimitsToLimits H",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of dc16c6cc89f6: reuses the current published presentation, free-cocompletion and Yoneda-limit proof prerequisites, importing all four recorded proof dependency modules. The presentation now used has independent small and ambient universes; the obsolete replacement modules and stale dependency records are not delivered. Main theorem statement and new continuity predicates are unchanged."
  }
 }

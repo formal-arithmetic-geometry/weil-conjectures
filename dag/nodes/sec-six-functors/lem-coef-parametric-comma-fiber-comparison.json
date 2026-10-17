@@ -9,7 +9,13 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-infinity-mapping-composition"
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-lax-comma-target-fibration",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-coef-kan-homotopy-commuting-pullback-invariance",
+  "lem-coef-infinity-source-gluing",
+  "lem-coef-spaces-homotopy-fiber-detection"
  ],
  "proof": [
   {
@@ -218,5 +224,65 @@
   "group": "Q86",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q86-86c70a90c (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources and routes. Repaired one coherent-naturality citation gap in Steps 3 and 6 using the existing Hom-bifunctor theorem. Statement unchanged; edge cases and 4,425 finite examples checked. Review and corrected JSON written. Accepted the declared functor-calculus tool use.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a37c98d68",
+  "group": "N6",
+  "result": "pass",
+  "note": "Read node, report, module and all 8 statement-dependency declarations (mappingSpace, canonicalHomComposition, laxComma*, arrowSquare*, PathModelComparisonFamily, simplicialHomotopyPullback, IsInducedFiberMap). E is the node's two-sided comma via laxComma pullback; the exponentiation iso is fixed on all three coordinates by a hand-checked interchange, with restriction squares; alpha/alpha'/beta/gamma=c(Gbeta,alpha')/q=k;t/phi=F;c(gamma,-) match the node; hofibers over sigma0 B and alpha; Comparison face equations (canonical square, adjustment, first/last triangles) are mutually consistent with the dependency orientations; the coherent naturality H over the DatumHom nerve includes K'->K restrictions; satisfiability sketched. No extra hypotheses, single universe, edge cases covered. Only sorry is the main theorem; statement verbatim; declarations match the file; only lean+stmt_deps changed; six added landed deps, acyclic over 405 nodes. nt_compile rc0 22.9s clean; injected-error control rc1. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ParametricCommaFiberComparison",
+  "declaration": "SSet.Enhanced.parametric_comma_fiber_comparison",
+  "declarations": [
+   "SSet.Enhanced.ParametricComma.object",
+   "SSet.Enhanced.ParametricComma.source",
+   "SSet.Enhanced.ParametricComma.target",
+   "SSet.Enhanced.ParametricComma.arrow",
+   "SSet.Enhanced.ParametricComma.interchange",
+   "SSet.Enhanced.ParametricComma.Presentation",
+   "SSet.Enhanced.ParametricComma.ExponentiationStatement",
+   "SSet.Enhanced.ParametricComma.Datum",
+   "SSet.Enhanced.ParametricComma.M",
+   "SSet.Enhanced.ParametricComma.X",
+   "SSet.Enhanced.ParametricComma.Y",
+   "SSet.Enhanced.ParametricComma.Y₀",
+   "SSet.Enhanced.ParametricComma.Z",
+   "SSet.Enhanced.ParametricComma.Z₀",
+   "SSet.Enhanced.ParametricComma.h",
+   "SSet.Enhanced.ParametricComma.k",
+   "SSet.Enhanced.ParametricComma.f",
+   "SSet.Enhanced.ParametricComma.g",
+   "SSet.Enhanced.ParametricComma.t",
+   "SSet.Enhanced.ParametricComma.s",
+   "SSet.Enhanced.ParametricComma.gamma",
+   "SSet.Enhanced.ParametricComma.q",
+   "SSet.Enhanced.ParametricComma.phi",
+   "SSet.Enhanced.ParametricComma.v",
+   "SSet.Enhanced.ParametricComma.Q",
+   "SSet.Enhanced.ParametricComma.R",
+   "SSet.Enhanced.ParametricComma.IsCanonicalMappingComparison",
+   "SSet.Enhanced.ParametricComma.Comparison",
+   "SSet.Enhanced.ParametricComma.DatumHom",
+   "SSet.Enhanced.ParametricComma.DatumHom.id",
+   "SSet.Enhanced.ParametricComma.DatumHom.comp",
+   "SSet.Enhanced.ParametricComma.datumCategory",
+   "SSet.Enhanced.ParametricComma.FiberMap",
+   "SSet.Enhanced.ParametricComma.componentEdge",
+   "SSet.Enhanced.ParametricComma.changeEdge",
+   "SSet.Enhanced.ParametricComma.RepresentsEdge",
+   "SSet.Enhanced.ParametricComma.CoherentComparisonStatement",
+   "SSet.Enhanced.ParametricComma.DataCoverageStatement",
+   "SSet.Enhanced.parametric_comma_fiber_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ParametricCommaFiberComparison.lean",
+  "statement": "theorem parametric_comma_fiber_comparison : (∀ (C B D : SSet.{u}) [Quasicategory C] [Quasicategory B] [Quasicategory D] (F : C ⟶ D) (G : B ⟶ D), Quasicategory (ParametricComma.object F G) ∧ ParametricComma.ExponentiationStatement F G) ∧ ParametricComma.DataCoverageStatement.{u} ∧ ParametricComma.CoherentComparisonStatement.{u}",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The comma is the existing laxComma target pullback. The specified gamma, q and phi use the recorded canonical composition; the comparison retains the actual comma square, endpoint-adjustment triangles and the two final pasting triangles. A single map from the nerve of the category of based comma data to the arrow object of the coherent space category records naturality with all higher coherences. Added only already-landed statement dependencies for the reused helper interfaces; no node statement changed, no new or repaired dependency module. The Q86 merge was stage 1 and supplied no Lean binding."
  }
 }

@@ -141,5 +141,23 @@
   "group": "Q111",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q111-d2a9c46d6 (reviewer sub-agent of L); spot-checked: Read the item, cited statements, both blueprint sources, and unit/chapter route in full. Repaired three faults: missing definition dependency, reliance on an outdated p-linear-filtration clause, and missing citation to the existing filtration criterion. Corrected JSON and review.md written; edge cases and dependency acyclicity checked. Statement unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.FrobeniusModuleMixedSubquotient",
+  "declaration": "FrobeniusModule.IsMixedOfWeightsAtMost.subquotient",
+  "file": "lean/Sheaf/LinearAlgebra/FrobeniusModuleMixedSubquotient.lean",
+  "statement": "theorem IsMixedOfWeightsAtMost.subquotient (p a ell : ℕ) [Fact (Nat.Prime p)] (ha : 1 ≤ a) [Fact (Nat.Prime ell)] (hellp : ell ≠ p) (Qlb : Type v) [Field Qlb] [Algebra (ℚ_[ell]) Qlb] (hQ : IsAlgClosure (ℚ_[ell]) Qlb) (iota : Qlb ≃+* ℂ) (M : FrobeniusModule.{u, v} Qlb) (w : ℝ) (hM : IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota M w) (S : Submodule Qlb M.carrier) (hS : S.map M.frobenius.toLinearMap = S) (U : Submodule Qlb S) (hU : U.map (M.frobenius.ofSubmodules S S hS).toLinearMap = U) : IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota { carrier := S ⧸ U frobenius := Submodule.Quotient.equiv U U (M.frobenius.ofSubmodules S S hS) hU } w",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14f989571",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Read node (master/main-20261015/main-20261017 identical), dependency IsMixedOfWeightsAtMost and FrobeniusModule structure, module, report, commit stat (3 files, node changes only lean field, statement verbatim). Hypotheses/conclusion match: full coefficient context, independent universes u v, w:ℝ, S stable in V, U stable in S with equality-form stability (equivalent in finite dimension), canonical induced quotient Frobenius, same filtration-based mixedness in the conclusion, no extra assumptions. Edge cases V=0, U=⊥, S=⊤, U=S, w≤0, a=1 covered; statement true. Docstrings carry source place, blueprint tag and 3-step proof; sorry only; no hollow defs; no existing duplicate (upstream HasWeightsAtMost is eigenvalue-only). Second-reading section is the accepted 2026-10-17 placeholder. nt_compile.py --json on snapshot file: clean compile in 16.0 s, no errors or warnings. No findings."
  }
 }

@@ -88,7 +88,8 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-simplicial-right-fibration-presentation",
   "lem-coef-simplicial-model-nerve-localization",
-  "lem-coef-enriched-diagram-rectification"
+  "lem-coef-enriched-diagram-rectification",
+  "lem-coef-kan-diagram-localized-evaluation"
  ],
  "mathlib_searches": [
   {
@@ -179,5 +180,34 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-a1c657af0 (reviewer sub-agent of L); spot-checked: I read the item, its five steps, every cited node's full statement, the parent lem-coef-space-transport-classification (whose step 3 is the only citation of the item), the unit sk-prop-sf-biduality-general and the blueprint ancestor prop-coef-integral-exceptional-adjoint. The statement is true. Its coefficient category is covariant projective sSet-diagrams on C[A]. This matches D_K in the localized-evaluation and evaluation-restriction nodes and D^cov_S in the right-fibration node. Phi_K is the comparison of the enriched-diagram rectification node with M=sSet, C=C[K] and u=id. Small cases checked: B empty, u=id, and A=B=Delta^0. Steps 1-2 use only stated clauses of lem-coef-simplicial-projective-model-calculus. Step 3's exact identity e_B(F C[u]) = e_A(F) u was checked through naturality of the unit eta. Its hypotheses hold: QD and D are objectwise Kan. Step 5 applies the covariant clauses of the right-fibration node (preserves objectwise weak equivalences between Kan diagrams; base change) to a:QD->D. The route stays inside the item's own unit, with no tool_uses and no SGA citation. A graph walk finds no cycle. No duplicate: the nearest nodes are the cited evaluation-restriction node and lem-coef-derived-restriction-bifibrant-nerve-equivalence, which is a different Quillen-equivalence statement. Three faults, repaired in fixes/dag/nodes/sec-six-functors/lem-coef-derived-restriction-rectification.json: (1) Step 3 used the exact restriction identity of lem-coef-kan-diagram-evaluation-restriction without listing that node in its uses (C1/C3); added. (2) Step 4 attributed the joint coherence and replacement compatibility to the localized-evaluation node, which does not state them (C3). They are clauses of the evaluation-restriction node, and the step is rewritten to apply that node with K=A, K'=B, v=u and the functorial replacement of step 2. It writes the step-3 equivalence as a composite of four coherent comparisons, from which naturality in F, the composite of base maps and the identity case follow. (3) blueprint.from.via began with the item itself; it now starts with lem-coef-space-transport-classification, followed by that node's own via list. The statement, stmt_deps, status and the set of proof_deps are unchanged. The report wrongly says created was corrected to Q34; the file keeps the correct creator, which is harmless. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-727c64adb",
+  "group": "NC",
+  "result": "fix",
+  "note": "Read the item node, all 5 stmt_deps, the module, the report (Worker report and Second reading by NC present), the dependency Lean (SimplicialRightFibrationPresentation, KanDiagramLocalizedEvaluation, KanDiagramEvaluationRestriction) and the node diff (only lean changed, plus stmt_deps gaining the landed lem-coef-kan-diagram-localized-evaluation, which is allowed). Hypotheses match with no extra assumptions and one universe u. The Phi comparison is the evaluated replacement edge, its endpoints fixed by IsChainEvaluation and BifibrantAgreement, with the target identity by unit naturality. The localization, restriction and replacement coherence clauses are true and render naturality in F and u. Edge cases (B empty, u = id, composites, Delta0) are covered. Fixed two faults: (1) H3, the functorial factorization was existential inside Nonempty and is now a parameter fac, so the statement holds for every functorial projective cofibration/trivial-fibration factorization; (2) the unstraightening base-change field asserted an arbitrary iso and now states IsOverHomotopyEquivalence of U_B.map replacement composed with (p.covariant_base_change.comparison u).inv.app F. Observation, not returned: derivedKanNerveUp/Down duplicate raiseNerve/lowerNerve of the proof dependency lem-coef-kan-diagram-evaluation-restriction, which a fix cannot add to stmt_deps. nt_compile --json: delivered file 4.6 s and fixed file 12.3 s, both with no messages; an injected-error control did report the error. fixes/ has the full module, the lean-record (statement verbatim) and the report."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedRestrictionRectification",
+  "declaration": "SSet.SimplicialRightFibration.derived_restriction_rectification",
+  "declarations": [
+   "SSet.SimplicialRightFibration.derivedKanNerveUp",
+   "SSet.SimplicialRightFibration.derivedKanNerveDown",
+   "SSet.SimplicialRightFibration.derivedReplacementFamily",
+   "SSet.SimplicialRightFibration.DerivedRestrictionEvaluation",
+   "SSet.SimplicialRightFibration.DerivedRestrictionEvaluation.phi",
+   "SSet.SimplicialRightFibration.DerivedRestrictionRectificationData",
+   "SSet.SimplicialRightFibration.derived_restriction_rectification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedRestrictionRectification.lean",
+  "statement": "theorem derived_restriction_rectification (p : Presentation.{u}) {A B : SSet.{u}} (u : B ⟶ A) (F : CovDiagram A) (hFcof : ∃ (I : CovDiagram A) (hI : IsInitial I), UnmarkedStraightening.projectiveCof (PinchedCube.rigidification.obj A) (hI.to F)) (hFfibrant : UnmarkedStraightening.ProjectivelyFibrant F) (fac : FunctorialFactorizationData (UnmarkedStraightening.projectiveCof (PinchedCube.rigidification.obj B)) (UnmarkedStraightening.projectiveFib (PinchedCube.rigidification.obj B) ⊓ UnmarkedStraightening.projectiveWeak (PinchedCube.rigidification.obj B))) : Nonempty (DerivedRestrictionRectificationData p u F fac)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Retains the repaired canonical factorization and both factorization legs. Adds the actual equivalence edge from Phi_B(QD) to Phi_A(F) restricted along u, fixed to the evaluated replacement arrow. The simultaneous chain-evaluation localization is normalized by the recorded BifibrantAgreement on every enriched mapping simplex. Full localized restriction is internal-hom precomposition, with strict identity/composition laws; whole replacement arrow families descend through localization with normalization to the identity-arrow family. The containing universe is enlarged without changing small bases or values. Reviewer fix: the functorial factorization is a parameter (the statement holds for every functorial projective cofibration/trivial-fibration factorization, as the node's 'functorially factor' says, not for one chosen inside Nonempty), and the unstraightening clause composes with the inverse of the canonical base-change comparison p.covariant_base_change.comparison u instead of asserting an arbitrary isomorphism.",
+  "fixed_by": "NT-stage2-cc-727c64adb"
  }
 }
