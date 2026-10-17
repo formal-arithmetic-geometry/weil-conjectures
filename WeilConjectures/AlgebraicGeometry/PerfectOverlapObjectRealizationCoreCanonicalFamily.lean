@@ -53,8 +53,6 @@ attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverMo
     [∀ (Z : Scheme.{u}) (U : Z.Opens),
       HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
     (j : I) (hij : i ≤ j)
-    (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),
-      ∃ k : I, j ≤ k)
     (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens)
     (hcover : U ⊔ V = ⊤)
     (hU : IsCompact (U : Set (↥(pullback t (Spec.map (R.map (homOfLE hij)))))))
@@ -75,7 +73,7 @@ attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverMo
         (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) ∣_ V)).obj B ≅
       (schemeOpenRestriction _ _).mapDerivedCategory.obj E) :
     (k : I) → (hjk : j ≤ k) →
-      perfectOverlapComparisonDataType R c hc i Z t j hij hstage
+      perfectOverlapComparisonDataType R c hc i Z t j hij (fun _ _ ↦ ⟨j, le_rfl⟩)
         U V hcover hU hV A B hA hB E φU φV k hjk := by
   intro k hjk
   let aj : Over.mk (Spec.map (c.ι.app i)) ⟶
@@ -115,8 +113,6 @@ theorem perfect_overlap_object_realization_core_data_at
       HasDerivedCategory.{w} ((SheafOfModules.{u})
         ((moduleRings Z.toRingedSpace).over U))]
     (j : I) (hij : i ≤ j)
-    (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),
-      ∃ k : I, j ≤ k)
     (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens)
     (hcover : U ⊔ V = ⊤)
     (hU : IsCompact (U : Set (↥(pullback t (Spec.map (R.map (homOfLE hij)))))))
@@ -137,9 +133,9 @@ theorem perfect_overlap_object_realization_core_data_at
         (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) ∣_ V)).obj B ≅
       (schemeOpenRestriction _ _).mapDerivedCategory.obj E)
     (k : I) (hjk : j ≤ k) :
-    Nonempty (perfectOverlapComparisonDataType R c hc i Z t j hij hstage
+    Nonempty (perfectOverlapComparisonDataType R c hc i Z t j hij (fun _ _ ↦ ⟨j, le_rfl⟩)
       U V hcover hU hV A B hA hB E φU φV k hjk) := by
-  exact ⟨perfectOverlapCanonicalComparisonFamily R c hc i Z t j hij hstage
+  exact ⟨perfectOverlapCanonicalComparisonFamily R c hc i Z t j hij
     U V hcover hU hV A B hA hB E φU φV k hjk⟩
 
 /-- The prescribed overlap comparison data exists simultaneously at every stage.
@@ -160,8 +156,6 @@ theorem perfect_overlap_object_realization_core_data_family
       HasDerivedCategory.{w} ((SheafOfModules.{u})
         ((moduleRings Z.toRingedSpace).over U))]
     (j : I) (hij : i ≤ j)
-    (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),
-      ∃ k : I, j ≤ k)
     (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens)
     (hcover : U ⊔ V = ⊤)
     (hU : IsCompact (U : Set (↥(pullback t (Spec.map (R.map (homOfLE hij)))))))
@@ -182,14 +176,14 @@ theorem perfect_overlap_object_realization_core_data_family
         (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) ∣_ V)).obj B ≅
       (schemeOpenRestriction _ _).mapDerivedCategory.obj E) :
     Nonempty (Σ data : (k : I) → (hjk : j ≤ k) →
-      perfectOverlapComparisonDataType R c hc i Z t j hij hstage
+      perfectOverlapComparisonDataType R c hc i Z t j hij (fun _ _ ↦ ⟨j, le_rfl⟩)
         U V hcover hU hV A B hA hB E φU φV k hjk, Unit) := by
   classical
   let data : (k : I) → (hjk : j ≤ k) →
-      perfectOverlapComparisonDataType R c hc i Z t j hij hstage
+      perfectOverlapComparisonDataType R c hc i Z t j hij (fun _ _ ↦ ⟨j, le_rfl⟩)
         U V hcover hU hV A B hA hB E φU φV k hjk := fun k hjk ↦
     Classical.choice (perfect_overlap_object_realization_core_data_at R c hc i Z t j hij
-      hstage U V hcover hU hV A B hA hB E φU φV k hjk)
+      U V hcover hU hV A B hA hB E φU φV k hjk)
   exact ⟨data, ()⟩
 
 end AlgebraicGeometry
