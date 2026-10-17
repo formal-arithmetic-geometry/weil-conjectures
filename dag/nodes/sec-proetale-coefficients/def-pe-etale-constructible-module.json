@@ -181,31 +181,34 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-d6828349f (reviewer sub-agent of L); spot-checked: I read the whole item and report, the unit and chapter records, the main-20261015 blueprint comparison and equivalence statements, all 12 stmt_deps, and both citers (sk-thm-pe-constructible-comparison steps 2 and 3, lem-sfb-adic-stratified-perfect). Sources checked: Stacks etale-cohomology.tex, the paragraph before Def 03RW (definition-constructible) and clause (3); proetale.tex Lemma 09AL (lemma-compare-constructible-derived), its definition of D_c. Checked clause by clause: arbitrary scheme X; commutative Noetherian Lambda; Mod over Lambda_X on the small etale site; every affine open U gets a finite partition into locally closed strata whose sets are constructible in U, with immersions; the restriction i_a^{-1}F is taken along Z_a->X. The item's 'etale cover plus constant model with f.g. M' wording is equivalent to Stacks' 'locally constant of finite type': a stalk of a finite-type sheaf is f.g., and on an empty piece M=0 can be chosen. D^b_c is the full subcategory with constructible H^q bounded on a finite interval, with no completeness condition, matching 09AL and the blueprint. No new nodes; the delivery creates no cycle. Duplicate search covered 03RW/03RU/09AL plus all constructible definitions. Every candidate defines a different category: def-constructible-constructible, def-weil-pbc-etale-constructible-sheaf/-constructible-complexes/-constructible-abelian-sheaf and def-weil-pbc-etale-sheaves use finite coefficients or one global stratification; pur713-def-finite-constructible and -category-et use O_E/varpi^n; the sfb/pur713 module nodes are pro-etale. def-weil-pbc-*locally-constant-finite-type* states the same local notion that the item writes inline; that is acceptable and they agree. Small cases checked: empty X with n=0; a separably closed point with Lambda=Z, where the infinite module Z is allowed; zero module; Lambda=0; a non-quasi-compact open stratum is rejected because the constructibility clause is stated explicitly; unbounded cohomology is excluded. No SGA is cited. No fixes and no tool_uses."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-b0e28f188",
-  "group": "Q28",
+  "reviewer": "NT-stage2-cc-cbcbe8a24",
+  "group": "Q91",
   "result": "pass",
-  "note": "Read node, all 13 stmt_deps and their Lean records, Stacks 03RW(3) and 09AL, the module and the report (Worker report and Second reading by Q28 both present). Only the item node changed: lean record plus added landed dep lem-weil-pbc-etale-constant-ring-module-equivalence; lean.statement verbatim. Clauses match: arbitrary Scheme.{u}; CommRing and IsNoetherianRing on Type (u+1), no topology; SheafOfModules over the constant ring sheaf, tested through the canonical restriction-of-scalars equivalence; every affine open has its own LocallyClosedStratification with an explicit IsConstructible clause in U; upperStar along S.immersion a ≫ U.ι; etale cover with Module.Finite constant models and module-sheaf isomorphisms on the localized site; FullSubcategory; DerivedCategory via HasDerivedCategory.standard (ofIsGrothendieckAbelian not imported, instance checked by rfl); H^q constructible for every q and zero outside one interval, no completeness condition. Edge cases checked: empty X, n=0, zero ring/module, Λ=Z, non-qc X, non-qc open stratum rejected, unbounded rejected. No duplicate: existing constructible definitions need finite Λ, a global stratification, or the pro-etale site. Gates: no hollow definitions, no proofs or sorry, source and blueprint docstrings present. nt_compile.py: clean in 3.3 s; check file gives axioms propext/choice/Quot.sound only."
+  "note": "Full read of the node, the 3 snapshot modules, the report (real Worker report and Second reading by Q91), the dependency declarations (ConstantCompletion, small-model comparison, AsSmall X.Etale/X.ProEt, old Tor and constructible records, IsDerivedLimit) and Stacks 09C2/09AL/03RW(3). Every hypothesis and conclusion matches the node: IsNoetherian X; A : Type (max v (u+1)), an independent coefficient universe that repairs H3; local completeness via the kernel of A to A/J; constructibility defined on each affine open, equivalent to a global finite stratification on Noetherian X; Tor tests on every K-flat representative and every module; IsDerivedLimit of the canonical tower; the cohomology bound; Tor of each N_n; Cn, alpha, beta for all n<=m with cocycle, Cn 0 = C with alpha 0 equal to e, and the alpha compatibility through the canonical comparison. H4 fixed (recorded smallModelProEtaleComparison used directly). No hollow definition: data is real or chosen by a uniqueness theorem; the InverseImageData choice is the landed dependency's own usage. The two section 1(B) repairs change only lean and state the same notions at the larger coefficient size. Three landed stmt_deps added, no cycle (my closures 168/623/110). No duplicate declaration found. Edge cases checked: empty X, N=0, J=0, J=A, n=0, a=b, m=n. nt_compile.py on all 3 files, run twice: exit 0, no diagnostics. lean.statement fields match the file signatures exactly and declaration lists are complete. Only nit: hab repeats the a<=b inside the predicate."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ConstructibleNoetherianEtaleModules",
-  "declaration": "AlgebraicGeometry.Etale.constructibleNoetherianModules",
+  "module": "Sheaf.AlgebraicGeometry.CoefficientConstructibleEtaleModules",
+  "declaration": "AlgebraicGeometry.Scheme.IsCoefficientConstructibleEtaleModule",
   "declarations": [
-   "AlgebraicGeometry.Scheme.IsAffineLocallyConstructibleEtaleModuleSheaf",
-   "AlgebraicGeometry.Etale.constructibleNoetherianModules",
-   "AlgebraicGeometry.Etale.ConstructibleNoetherianModuleCategory",
-   "AlgebraicGeometry.Etale.noetherianEtaleModulesHasDerivedCategory",
-   "AlgebraicGeometry.Etale.boundedConstructibleNoetherianModules",
-   "AlgebraicGeometry.Etale.BoundedConstructibleNoetherianModuleCategory"
+   "CategoryTheory.coefficientModelFixedScalars",
+   "CategoryTheory.IsCoefficientModelLocallyConstantFinite",
+   "AlgebraicGeometry.Scheme.coefficientEtaleBaseChange",
+   "AlgebraicGeometry.Scheme.coefficientEtaleBaseChange_isContinuous",
+   "AlgebraicGeometry.Scheme.coefficientEtaleFixedPullback",
+   "AlgebraicGeometry.Scheme.IsCoefficientConstructibleEtaleModule",
+   "AlgebraicGeometry.Scheme.IsCoefficientBoundedConstructibleEtale",
+   "AlgebraicGeometry.Scheme.CoefficientConstructibleEtaleModuleCategory",
+   "AlgebraicGeometry.Scheme.CoefficientBoundedConstructibleEtaleCategory"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleNoetherianEtaleModules.lean",
-  "statement": "def constructibleNoetherianModules (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ] : ObjectProperty (ringedSiteModules.{u + 1} ((constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of Λ)))",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientConstructibleEtaleModules.lean",
+  "statement": "def IsCoefficientConstructibleEtaleModule (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (F : CategoryTheory.ConstantCompletion.Mod (CategoryTheory.ConstantCompletion.constant (smallModelComparisonEtaleTopology.{u, v} X) A)) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q28",
-  "date": "2026-10-16",
+  "by": "Q91",
+  "date": "2026-10-17",
   "existing": false,
-  "note": "Affine-local constructibility over an arbitrary commutative Noetherian coefficient ring, and both full categories. Uses the existing constant-scalar restriction to express local module isomorphisms via the recorded Etale.upperStar. The added already-landed dependency supplies this canonical restriction, without introducing another notion or changing the statement."
+  "note": "§1(B), H3 repair: the recorded interface ties coefficients to the scheme universe. This module publicly retains that interface and supplies the identical notion on the equivalent coefficient-sized AsSmall sites, with A : Type (max v (u+1)). Constructibility is affine-local, uses the recorded locally closed scheme stratification, and trivializes by finitely generated constant modules on the equivalent localized etale sites. The full categories and bounded constructible category retain all ambient morphisms."
  },
  "lean_audit": {
   "master": {

@@ -28,7 +28,9 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-relative-join",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-join-slice-diagram-isomorphisms"
  ],
  "proof": [
   {
@@ -343,5 +345,36 @@
   "group": "Q61",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-b9e2b1ffc (reviewer sub-agent of L); spot-checked: Read in full: the item, all 16 cited node statements, the parent lem-coef-infinity-relative-kan-existence (steps 0, 1, 3, 4 use this item), the unit sk-prop-sf-biduality-general, and Kerodon 0302 Prop. 7.3.5.5, which gives the same route: K, J=K*_C C, S, beta, psi_0, T, gamma+/- via rho/rho'. The statement is true and unchanged. Small cases tested: A empty, A=C=point, C=Delta^1 with A={0}, and A non-replete. Step 1: inner fibration via the pushout-product leaf plus fullness; the cocartesian lift (1_a,v) via the arrow-square and mapping criterion is correct. Step 2: strict-fiber equivalences, pullback along A and the fiberwise criterion of the presentation node give the equivalence without assuming A replete; the source equation is exact. Step 3: 1_a is final in the slice, carried over to K_a by psi_a. Step 4: J is a quasicategory via the opposite of the cartesian realization. P_x/Q_x are checked; the pairing by inserting t_j is inner and keeps the support, and the order by j then dimension is valid. The prescribed values on H are monotone and agree on overlaps, and S i_K=pi, S i_C=1, S j_c psi^=k_c, S(delta*1)=pr all hold exactly. Step 5: rho and nu are monotone, the endpoints are T_c and T_c^-, the component at e is the square (1_a,e), and gamma+ by max is correct. FIX: added the same-unit lem-coef-infinity-mapping-composition to step 1 (e*v* ~ h* from the composition triangle) and step 3 (precomposition with an equivalence edge, used with the quasi-inverse). Neither cited statement covered these. Its dependency closure does not reach the item, so no cycle; proof_deps updated. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus (generic tool from another unit) and lem-coef-simplicial-right-fibration-presentation (same unit; only its fiberwise criterion is used). No new nodes, no duplicate, no SGA, no coefficient category or base-change morphism involved.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ArrowJoinGeometry",
+  "declaration": "SSet.Enhanced.arrow_join_geometry",
+  "declarations": [
+   "SSet.Enhanced.arrowJoinSubcategory",
+   "SSet.Enhanced.arrowJoinSubcategoryInclusion",
+   "SSet.Enhanced.arrowJoinTarget",
+   "SSet.Enhanced.arrowJoinSliceVertexInclusion",
+   "SSet.Enhanced.arrowJoinSliceSourceProjection",
+   "SSet.Enhanced.arrowJoinSliceCocone",
+   "SSet.Enhanced.IsConstantTransformation",
+   "SSet.Enhanced.IsIdentityComponent",
+   "SSet.Enhanced.ArrowJoinGeometry",
+   "SSet.Enhanced.arrow_join_geometry"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ArrowJoinGeometry.lean",
+  "statement": "theorem arrow_join_geometry {C : SSet.{u}} [Quasicategory C] (P : C _⦋0⦌ → Prop) : Nonempty (ArrowJoinGeometry C P)",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The structure fields state the source-restricted arrow quasicategory, target cocartesian fibration, slice prism equivalence and source projection, final identity arrows, relative join map S, constant beta, and coherent gamma-plus/gamma-minus comparisons."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e00526bc",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Read node, Kerodon 0302 place, all 5 stmt-dep declarations (fullSubcomplex/evaluation/IsFunctorEquivalence/IsTerminal; relativeJoin and its maps/joinBlockParameter/relativeJoinFiberCone; cocartesianFibration/fiber; rightVertexSlice/projection/sliceArrowPrism; rightConeExtension by ∃!) and the full ArrowJoinGeometry.lean. Every node clause has a field. Canonical data are pinned by equations (pi_source, identity_source, psi_prism/psi_source, beta_formula, join_lift_interval/base, T_formula, j_join/j_cylinder). Only S, gamma± and the (b,k_c) lift are existential, as in the node. Face/formula consistency checked for beta and gamma±; gamma_minus_base fixes both sides of the (1_a,e) square. Edge cases (P false, C empty, P true, A non-replete, degree 0) are fine; single universe u. No duplicate notion, nothing hollow, sole sorry is the main theorem, docstrings and 5-step proof present, lean.statement verbatim. stmt_deps adds two landed deps with no cycle (DAG closure checked). nt_compile.py --json on the snapshot: rc=0, 30 side overlay modules plus the item in 3.6s, no diagnostics. Cosmetic only: 'Proposition the project server' garble in the report."
  }
 }

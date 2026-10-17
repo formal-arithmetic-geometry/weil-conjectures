@@ -26,7 +26,8 @@
   "def-weil-finitely-generated-module",
   "def-weil-proetale-inverse-image",
   "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "sk-def-pe-classical-definition"
+  "sk-def-pe-classical-definition",
+  "def-constructible-stratification"
  ],
  "proof": [
   {
@@ -344,5 +345,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleProEtaleClassical",
+  "declaration": "AlgebraicGeometry.ProEtale.constructible_isClassicalModule",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.constructible_isClassicalModule",
+   "AlgebraicGeometry.ProEtale.locallyConstructible_isClassicalModule"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleProEtaleClassical.lean",
+  "statement": "theorem constructible_isClassicalModule (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (Λ : Type u) [CommRing Λ] [IsNoetherianRing Λ] (F : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Scheme.proEtaleConstantRing X Λ))) (S : Scheme.LocallyClosedStratification X) (_hred : ∀ k : Fin S.n, IsReduced (S.domain k)) (_hmodels : ∀ k : Fin S.n, ∃ (I : Type (u + 1)) (V : I → (S.domain k).ProEt) (f : ∀ a : I, V a ⟶ Scheme.ProEt.mk (𝟙 (S.domain k))), Presieve.ofArrows V f ∈ (Scheme.ProEt.precoverage (S.domain k)).coverings _ ∧ ∀ a : I, ∃ M : ModuleCat.{u + 1} (ULift.{u + 1, u} Λ), Module.Finite (ULift.{u + 1, u} Λ) M ∧ Nonempty ((Scheme.proEtaleConstantModulePullback (S.immersion k) Λ F).over (V a) ≅ Scheme.proEtaleConstantModuleSheafOver (S.domain k) Λ (V a) M)) : IsClassicalModule Λ F",
+  "branch": "newtargets-dag",
+  "by": "Q122",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Two statements, respectively the global finite-partition assertion and its Zariski-local variant. Classicality is the recorded continuity-map predicate for intrinsic constant-ring modules. The existing LocallyClosedStratification includes constructibility in its inherited current Topology.Stratification; its reduced immersed domains realize the reduced induced strata. Finite type is stated by finitely generated constant models on a pro-etale trivializing cover. No finite coefficient ring or reduced ambient scheme is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9c9e214c",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Clause-by-clause match: Λ any commutative Noetherian ring (no [Finite]); X qcqs; F an intrinsic constant-ring module sheaf on the recorded pro-étale site; the finite stratification's strata are locally closed, disjoint, covering and constructible (isConstructible_stratum confirmed by #check); reduced domains realize the reduced induced structure; restriction is the canonical proEtaleConstantModulePullback; finite-type local constancy is the recorded predicate's body plus Module.Finite; conclusion IsClassicalModule; the Zariski-local variant is correct. Edge cases n=0, empty strata, nonreduced X, zero ring, infinite Λ and universes are fine. Two sorry-only theorems, no definitions, docstrings carry source, blueprint tag and proof steps. lean.statement is verbatim; dependency records are unchanged; added stmt_dep def-constructible-stratification creates no cycle. nt_compile.py --json: clean, 2.1 s. Non-blocking: the landed def-constructible-stratification text and docstring still say 'no constructibility'."
  }
 }

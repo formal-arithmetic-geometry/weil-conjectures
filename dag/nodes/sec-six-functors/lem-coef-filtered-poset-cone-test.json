@@ -175,5 +175,23 @@
   "group": "Q130",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-212d82370 (reviewer sub-agent of L); spot-checked: I read the item, all four cited nodes and their neighbours in full, and HTT at the cited places: Def 4.1.1.1, Prop 4.1.1.8 (pp.225-226), Prop 4.2.1.5, Prop 4.2.3.14 and Variants 4.2.3.15-16 (pp.254-256), Remark 5.3.1.12 (p.383). HTT was read from a PDF fetched from the node's URL; it is not archived. The statement matches Remark 5.3.1.12 exactly (|B|<kappa, empty poset included, no colimit hypothesis). I tested it on B empty, a point, two discrete points, 0<1, kappa=aleph_0, and E empty or terminal. Three repairable faults. (1) C4: step 1 cites lem-coef-infinity-join-cocone-associativity to identify a coherent (transformation) cocone with a map N(B)*Delta^0 -> E, but that node never states this comparison; it is in lem-coef-join-slice-cocone-comparison. Step 1 was also marked elementary while doing this. (2) C4: step 2 has the same misattribution, from extension to cocone on q. (3) C1+E1: step 2 quotes HTT Variants 4.2.3.15/16 with no node, then applies lem-coef-infinity-cofinal-comma-criterion with J=K. That node requires quasicategories, but K is an arbitrary kappa-small simplicial set, and HTT's cofinality there is the right-fibration notion of Def 4.1.1.1. Fixes: new statement-only unsplit node lem-coef-infinity-poset-nerve-cofinal-replacement (from HTT 4.2.3.15/16 with 4.1.1.8(1)=>(2) and 4.2.1.5; kappa-smallness for uncountable kappa checked from the construction). It is not a duplicate, after rg over dag/nodes and the main-20261015 blueprint. Its Mathlib record has three greps; LeanSearch and Loogle could not be reached from this machine and are recorded as unavailable, so it needs a re-search on the Codex machine. Both item steps are rewritten to cite lem-coef-join-slice-cocone-comparison, which is in the same unit, split and reviewed. Step 1 now writes out N(B)*Delta^0=N(B^triangleright). Step 2 uses the new node's Map equivalence on pi_0 and checks K empty. The associativity and comma-criterion citations are dropped, and proof_deps equals the union of the uses. There is no cycle, the item's statement, source and blueprint fields are unchanged, and no tool_uses are needed. The report also lists a citations.json that is not in the delivery. WANTED: HTT for the literature archive.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FilteredPosetConeTest",
+  "declaration": "SSet.Presentability.isKappaFiltered_iff_poset_cone_extension",
+  "file": "lean/Sheaf/CategoryTheory/FilteredPosetConeTest.lean",
+  "statement": "theorem isKappaFiltered_iff_poset_cone_extension (κ : Cardinal.{u}) (hκ : κ.IsRegular) (E : SSet.{max (u + 1) v}) [Quasicategory E] : IsKappaFiltered κ E ↔ ∀ (B : Type (max (u + 1) v)) [PartialOrder B], HasCardinalLT B κ → ∀ (p : nerve B ⟶ E), ∃ (pbar : nerve (WithTop B) ⟶ E), nerveMap (WithTop.coeOrderHom (α := B)).monotone.functor ≫ pbar = p",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d3162625",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Read the node, both statement dependencies (IsKappaSmall/IsKappaFiltered in PresentableInfinityCategory.lean, coherent coconeCategory), the module, the report (it has a real Worker report and Second reading by Q28) and HTT Remark 5.3.1.12 with Variants 4.2.3.15/16. Every clause matches: regular kappa in Cardinal.{u} (infinite via aleph0_le); E : SSet.{max (u+1) v} quasicategory; IsKappaFiltered on the left; B any PartialOrder with HasCardinalLT B kappa (gives Small.{u}, ULift representatives give the converse, no Nonempty); WithTop B as the fresh top; exact restriction along nerveMap of the inclusion; iff with no colimit hypothesis. Edge cases: empty B forces a vertex (both sides false for empty E); a point, discrete pairs and the chain 0<1; kappa=aleph0 finite; uncountable kappa bound; terminal E. One theorem, proof only sorry; source and blueprint docstrings; the proof docstring cites all proof_deps; lean.statement verbatim; node unchanged except lean; no duplicate in side Sheaf or Mathlib. nt_compile --json local overlay: exit 0, 1.5 s, no warnings. A probe confirmed the type, HasCardinalLT.small and the inclusion rfl, and that the wrapper reports errors. Cosmetic only: redacted HTT numbers in the report prose."
  }
 }

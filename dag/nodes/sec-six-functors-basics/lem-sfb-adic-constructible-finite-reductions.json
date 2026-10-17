@@ -35,7 +35,10 @@
   "def-weil-finitely-generated-module",
   "def-weil-derived-limit",
   "def-weil-pbc-algebra-hom-quotient",
-  "def-weil-proetale-tor-amplitude"
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-pe-etale-constructible-module"
  ],
  "proof": [
   {
@@ -589,5 +592,64 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-8f53b58f7 (reviewer sub-agent of L); spot-checked: Read the item's statement and all ten steps. Also read all 35 cited node statements, the unit sk-lem-integral-models and the chapter, the ancestor det-lem-integral-models-stacks, and the parent lem-sfb-adic-residue-lisse-perfect-lift, whose Steps 1-2 supply exactly the item's hypotheses and use its conclusions. Checked Stacks proetale.tex at 09C1 (l.5776), 09C2 (l.5788, statement and proof), 099M (l.4305) and 09AL (l.5357). The statement matches 09C1/09C2 for arbitrary Noetherian A and ideal J over the constant-sheaf coefficients A_X, with the Tor interval [a,b] made explicit and the étale markings α_n, β_n (with C_1 = C) added. The local completeness notion matches the D_comp condition of lem-sp-completed-pullback-adjunction. Nothing is weakened and no SGA source is used. Steps 1-5, 7, 9 and 10 are correct: K-flat balancing and cocycle; the residue Tor transfer via det-pe-finite-tor-comparison-noetherian; the J-adic filtration induction for the Tor interval (0942(2)); the K-injective limit identified with Cone(1-T)[-1] through exact products, enough injectives and derived-limit-existence clauses (1) and (3); the Milnor sequence with the b+1 term killed by the top-degree epimorphism; full-faithfulness lifts; cocycle cancellation. Step 6 correctly applies nilpotent-reduction-lissity with B=P_n, I=J/J^n, K=N_n|_S bounded above. Small cases checked: empty X, N=0, J=0, J=A (forces N=0), n=1, a=b, and A=k[x,y]/(x,y)^2. One repaired gap (C4/E5): Steps 6 and 8 refined 'the stratifications supplied by Step 3', but the constructibility in sk-thm-pe-constructible-comparison is only local on X. The fix file adds a sentence to each step: intersect the finitely many open coverings and work on one open U, using the already-cited exact restriction (def-weil-pbc-proetale-operations, prop-weil-pbc-inverse-image-modules-exact) and tensor pullback. It also adds sk-thm-pe-constructible-comparison to Step 6's uses; proof_deps is unchanged as a set. No new nodes. No duplicates: lem-sf-complete-residue-cohomology-bounds and lem-fix-residue-lisse-projective-models are DVR-specific. No cycle. Accepted tool_uses: the generic off-route statements, including the two pro-étale comparison theorems from sec-proetale-coefficients, a chapter this chapter uses, and which the ancestor already cites.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicConstructibleFiniteReductions",
+  "declaration": "AlgebraicGeometry.Scheme.adic_constructible_finite_reductions",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryUnit_existsUnique",
+   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryUnit",
+   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryUnitComplex",
+   "AlgebraicGeometry.Scheme.adicFiniteUnit_existsUnique",
+   "AlgebraicGeometry.Scheme.adicFiniteUnit",
+   "AlgebraicGeometry.Scheme.adicFiniteResComp_existsUnique",
+   "AlgebraicGeometry.Scheme.adicFiniteResComp",
+   "AlgebraicGeometry.Scheme.adicFiniteDresComp",
+   "AlgebraicGeometry.Scheme.adicFiniteChangeComp_existsUnique",
+   "AlgebraicGeometry.Scheme.adicFiniteChangeComp",
+   "AlgebraicGeometry.Scheme.adicFiniteExtendComp_existsUnique",
+   "AlgebraicGeometry.Scheme.adicFiniteExtendComp",
+   "AlgebraicGeometry.Scheme.adicFiniteComparisonData",
+   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryPullback",
+   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryPullbackAdditive",
+   "AlgebraicGeometry.Scheme.adicFinitePullback",
+   "AlgebraicGeometry.Scheme.adicFinitePullbackComparison",
+   "AlgebraicGeometry.Scheme.adicFiniteConstantMap",
+   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryComparison_existsUnique",
+   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryComparison",
+   "AlgebraicGeometry.Scheme.adicFiniteComparison_existsUnique",
+   "AlgebraicGeometry.Scheme.adicFiniteComparison",
+   "AlgebraicGeometry.Scheme.adicFiniteCoeff",
+   "AlgebraicGeometry.Scheme.adicFiniteQuotient",
+   "AlgebraicGeometry.Scheme.adicFiniteFactor",
+   "AlgebraicGeometry.Scheme.adicFiniteQuotientComp",
+   "AlgebraicGeometry.Scheme.adicFiniteFactorComp",
+   "AlgebraicGeometry.Scheme.adicFiniteExtension",
+   "AlgebraicGeometry.Scheme.adicFiniteConstantComp",
+   "AlgebraicGeometry.Scheme.adicFiniteExtensionComp",
+   "AlgebraicGeometry.Scheme.adicFiniteAmbient",
+   "AlgebraicGeometry.Scheme.adicFiniteComplete",
+   "AlgebraicGeometry.Scheme.adicFiniteEtale",
+   "AlgebraicGeometry.Scheme.adicFiniteReduction",
+   "AlgebraicGeometry.Scheme.adicFiniteRho",
+   "AlgebraicGeometry.Scheme.adicFiniteUnderlying",
+   "AlgebraicGeometry.Scheme.adicFiniteTransition",
+   "AlgebraicGeometry.Scheme.adic_constructible_finite_reductions"
+  ],
+  "file": "lean/Sheaf/Paper/AdicConstructibleFiniteReductions.lean",
+  "statement": "theorem adic_constructible_finite_reductions (X : Scheme.{u}) [IsNoetherian X] (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A) (N : adicFiniteAmbient.{u, v} X A) (hcomplete : adicFiniteComplete.{u, v} X A J N) (C : adicFiniteEtale.{u, v} X J 0) (hC : IsCoefficientBoundedConstructibleEtale.{u, v} X (adicFiniteCoeff J 0) C) (e : (adicFinitePullback.{u, v} X (adicFiniteCoeff J 0)).obj C ≅ adicFiniteReduction.{u, v} X J N 0) (a b : ℤ) (hab : a ≤ b) (hTor : HasCoefficientModelTorAmplitude (constant (smallModelComparisonEtaleTopology.{u, v} X) (adicFiniteCoeff J 0)) C a b) : (∃ hp : HasProduct (adicFiniteUnderlying.{u, v} X J N), @IsDerivedLimit _ _ _ _ _ _ _ _ hp (adicFiniteTransition.{u, v} X J N) N) ∧ (∀ q : ℤ, (q < a ∨ b < q) → IsZero ((coefficientModelCohomology (constant (coefficientProEtaleModelTopology.{u, v} X) A) q).obj N)) ∧ (∀ n : ℕ, HasCoefficientProEtaleTorAmplitude.{u, v} X (adicFiniteCoeff J n) (adicFiniteReduction.{u, v} X J N n) a b) ∧ ∃ (Cn : ∀ n : ℕ, adicFiniteEtale.{u, v} X J n) (alpha : ∀ n : ℕ, (adicFinitePullback.{u, v} X (adicFiniteCoeff J n)).obj (Cn n) ≅ adicFiniteReduction.{u, v} X J N n) (beta : ∀ {m n : ℕ} (h : n ≤ m), (adicFiniteExtension (smallModelComparisonEtaleTopology.{u, v} X) (adicFiniteFactor J h)).obj (Cn m) ≅ Cn n), (∀ n : ℕ, IsCoefficientBoundedConstructibleEtale.{u, v} X (adicFiniteCoeff J n) (Cn n)) ∧ (∀ n : ℕ, HasCoefficientModelTorAmplitude (constant (smallModelComparisonEtaleTopology.{u, v} X) (adicFiniteCoeff J n)) (Cn n) a b) ∧ (∃ hzero : Cn 0 = C, (adicFinitePullback.{u, v} X (adicFiniteCoeff J 0)).map (eqToIso hzero).hom ≫ e.hom = (alpha 0).hom) ∧ (∀ (r m n : ℕ) (hnm : n ≤ m) (hmr : m ≤ r), (adicFiniteExtensionComp (smallModelComparisonEtaleTopology.{u, v} X) (adicFiniteFactor J hmr) (adicFiniteFactor J hnm) (adicFiniteFactor J (hnm.trans hmr)) (adicFiniteFactorComp J hnm hmr)).hom.app (Cn r) ≫ (beta (hnm.trans hmr)).hom = (adicFiniteExtension (smallModelComparisonEtaleTopology.{u, v} X) (adicFiniteFactor J hnm)).map (beta hmr).hom ≫ (beta hnm).hom) ∧ (∀ (m n : ℕ) (h : n ≤ m), (adicFinitePullback.{u, v} X (adicFiniteCoeff J n)).map (beta h).hom ≫ (alpha n).hom = (adicFiniteComparison.{u, v} X (adicFiniteFactor J h)).inv.app (Cn m) ≫ (adicFiniteExtension (coefficientProEtaleModelTopology.{u, v} X) (adicFiniteFactor J h)).map (alpha m).hom ≫ (adicFiniteRho.{u, v} X J N h).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "H3/H4/H9 repair: independent coefficient universe max v (u+1); input, etale origins and reductions use ConstantCompletion.D on coefficient-sized site models. The recorded smallModelProEtaleComparison is used directly, through its specified algebraic and derived inverse image. The canonical quotient units, scalar reassociations and comparison maps retain their sectionwise or K-flat normalizations. Generalized Tor and constructibility interfaces are dependency repairs; the mathematical node is unchanged. The unused direct LocallyClosedStratification import is removed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cbcbe8a24",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Full read of the node, the 3 snapshot modules, the report (real Worker report and Second reading by Q91), the dependency declarations (ConstantCompletion, small-model comparison, AsSmall X.Etale/X.ProEt, old Tor and constructible records, IsDerivedLimit) and Stacks 09C2/09AL/03RW(3). Every hypothesis and conclusion matches the node: IsNoetherian X; A : Type (max v (u+1)), an independent coefficient universe that repairs H3; local completeness via the kernel of A to A/J; constructibility defined on each affine open, equivalent to a global finite stratification on Noetherian X; Tor tests on every K-flat representative and every module; IsDerivedLimit of the canonical tower; the cohomology bound; Tor of each N_n; Cn, alpha, beta for all n<=m with cocycle, Cn 0 = C with alpha 0 equal to e, and the alpha compatibility through the canonical comparison. H4 fixed (recorded smallModelProEtaleComparison used directly). No hollow definition: data is real or chosen by a uniqueness theorem; the InverseImageData choice is the landed dependency's own usage. The two section 1(B) repairs change only lean and state the same notions at the larger coefficient size. Three landed stmt_deps added, no cycle (my closures 168/623/110). No duplicate declaration found. Edge cases checked: empty X, N=0, J=0, J=A, n=0, a=b, m=n. nt_compile.py on all 3 files, run twice: exit 0, no diagnostics. lean.statement fields match the file signatures exactly and declaration lists are complete. Only nit: hab repeats the a<=b inside the predicate."
  }
 }

@@ -127,26 +127,30 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-33172fd5a (reviewer sub-agent of L); spot-checked: Read the item, all six cited statements, sources, and unit/chapter route in full. Definition matches Stacks 08FZ and passes zero, empty-scheme, shift, and nonregular-coefficient tests. Added the missing supplementary 0652 source label in split_report only. No new nodes, accepted attachments, tool uses, or target weakening. Concrete checks and inherited graph issues are recorded in review.md.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-0162dc157",
-  "group": "NB",
+  "reviewer": "NT-stage2-cc-cbcbe8a24",
+  "group": "Q91",
   "result": "pass",
-  "note": "Reviewed the immutable module, all six dependencies, sources, docstrings, report, universes and edge cases. Statement field matches verbatim; no substantive or mechanical faults found. Snapshot compilation reproduced cleanly through scompile.py. Evidence recorded in review.md; branch head unchanged."
+  "note": "Full read of the node, the 3 snapshot modules, the report (real Worker report and Second reading by Q91), the dependency declarations (ConstantCompletion, small-model comparison, AsSmall X.Etale/X.ProEt, old Tor and constructible records, IsDerivedLimit) and Stacks 09C2/09AL/03RW(3). Every hypothesis and conclusion matches the node: IsNoetherian X; A : Type (max v (u+1)), an independent coefficient universe that repairs H3; local completeness via the kernel of A to A/J; constructibility defined on each affine open, equivalent to a global finite stratification on Noetherian X; Tor tests on every K-flat representative and every module; IsDerivedLimit of the canonical tower; the cohomology bound; Tor of each N_n; Cn, alpha, beta for all n<=m with cocycle, Cn 0 = C with alpha 0 equal to e, and the alpha compatibility through the canonical comparison. H4 fixed (recorded smallModelProEtaleComparison used directly). No hollow definition: data is real or chosen by a uniqueness theorem; the InverseImageData choice is the landed dependency's own usage. The two section 1(B) repairs change only lean and state the same notions at the larger coefficient size. Three landed stmt_deps added, no cycle (my closures 168/623/110). No duplicate declaration found. Edge cases checked: empty X, N=0, J=0, J=A, n=0, a=b, m=n. nt_compile.py on all 3 files, run twice: exit 0, no diagnostics. lean.statement fields match the file signatures exactly and declaration lists are complete. Only nit: hab repeats the a<=b inside the predicate."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude",
-  "declaration": "AlgebraicGeometry.Scheme.HasProEtaleTorAmplitude",
+  "module": "Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude",
+  "declaration": "AlgebraicGeometry.Scheme.HasCoefficientProEtaleTorAmplitude",
   "declarations": [
-   "AlgebraicGeometry.Scheme.HasProEtaleTorAmplitude",
-   "AlgebraicGeometry.Scheme.HasFiniteProEtaleTorAmplitude"
+   "CategoryTheory.coefficientModelCohomology",
+   "CategoryTheory.HasCoefficientModelTorAmplitude",
+   "AlgebraicGeometry.Scheme.coefficientModelAdditiveSheafify",
+   "AlgebraicGeometry.Scheme.coefficientEtaleModelAdditiveSheafify",
+   "AlgebraicGeometry.Scheme.HasCoefficientProEtaleTorAmplitude",
+   "AlgebraicGeometry.Scheme.HasFiniteCoefficientProEtaleTorAmplitude"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleTorAmplitude.lean",
-  "statement": "def HasProEtaleTorAmplitude (Y : Scheme.{t}) (A : Type t) [CommRing A] (K : proEtaleDerivedCategory Y A) (a b : ℤ) : Prop",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientProEtaleTorAmplitude.lean",
+  "statement": "abbrev HasCoefficientProEtaleTorAmplitude (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (K : CategoryTheory.ConstantCompletion.D (CategoryTheory.ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) A)) (a b : ℤ) : Prop",
   "branch": "newtargets-dag",
-  "by": "NB",
-  "date": "2026-10-15",
+  "by": "Q91",
+  "date": "2026-10-17",
   "existing": false,
-  "note": "Uses the recorded derivedTensor on all K-flat resolutions of all representatives isomorphic to K. The universal representative formulation is resolution-independent and uses exactly the recorded SheafOfModules derived category; no new tensor construction or arbitrary map is chosen."
+  "note": "§1(B), H3 repair: the recorded interface ties coefficients to the scheme universe. This module publicly retains that interface and supplies the identical notion on the equivalent coefficient-sized AsSmall sites, with A : Type (max v (u+1)). Tor is tested on every K-flat representative and every degree-zero module sheaf using the existing total tensor and standard localization."
  }
 }

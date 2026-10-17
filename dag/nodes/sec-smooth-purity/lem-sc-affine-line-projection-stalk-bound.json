@@ -131,7 +131,16 @@
  },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
- "lean": {},
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Sites.AffineLineProjectionStalkBound",
+  "declaration": "AlgebraicGeometry.Scheme.affineLineProjection_stalk_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/AffineLineProjectionStalkBound.lean",
+  "statement": "theorem affineLineProjection_stalk_bound (hP1 : ∀ (S : Scheme.{u}) (F : Sheaf (AlgebraicGeometry.ProjectiveLine S).smallEtaleTopology AddCommGrpCat.{u + 1}), F.IsTorsion → ∀ q : ℕ, 2 < q → IsZero (((Etale.lowerStar AddCommGrpCat.{u + 1} (AlgebraicGeometry.ProjectiveLine S ↘ S)).rightDerived q).obj F)) (hBoundary : ∀ {U Z Y : Scheme.{u}} (j : U ⟶ Y) [IsOpenImmersion j] (i : Z ⟶ Y) [IsClosedImmersion i] (g : Y ⟶ Z), Set.range i.base = (Set.range j.base)ᶜ → i ≫ g = 𝟙 Z → ∀ (M : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) (p q : ℕ), 0 < p → 0 < q → IsZero (((Etale.lowerStar AddCommGrpCat.{u + 1} g).rightDerived p).obj (((Etale.lowerStar AddCommGrpCat.{u + 1} j).rightDerived q).obj M))) (hStalk : ∀ {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}), F.IsTorsion → ∀ q : ℕ, Subsingleton ((Etale.cohomology AddCommGrpCat.{u + 1} (pullback f (strictLocalizationToBase s)) q).obj ((DerivedCategory.singleFunctor _ 0).obj ((Etale.upperStar AddCommGrpCat.{u + 1} (pullback.fst f (strictLocalizationToBase s))).obj F))) → IsZero ((pointSmallEtale s).sheafFiber.obj (((Etale.lowerStar AddCommGrpCat.{u + 1} f).rightDerived q).obj F))) (hLeray : ∀ {X Y S T : Scheme.{u}} (j : X ⟶ Y) (g : Y ⟶ S) (s : T ⟶ S) (M : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (r : ℕ), (∀ p q : ℕ, p + q = r → IsZero ((Etale.upperStar AddCommGrpCat.{u + 1} s).obj (((Etale.lowerStar AddCommGrpCat.{u + 1} g).rightDerived p).obj (((Etale.lowerStar AddCommGrpCat.{u + 1} j).rightDerived q).obj M)))) → IsZero ((Etale.upperStar AddCommGrpCat.{u + 1} s).obj (((Etale.lowerStar AddCommGrpCat.{u + 1} (j ≫ g)).rightDerived r).obj M))) (hAffineLine : ∀ (K : Type u) [CommRing K] (m : ℕ), ∃ e : Spec (.of (MvPolynomial (Fin (m + 1)) K)) ≅ AffineSpace PUnit.{u + 1} (Spec (.of (MvPolynomial (Fin m) K))), e.hom ≫ AffineSpace PUnit.{u + 1} (Spec (.of (MvPolynomial (Fin m) K))) ↘ Spec (.of (MvPolynomial (Fin m) K)) = Spec.map (CommRingCat.ofHom (MvPolynomial.rename (Fin.castSucc : Fin m → Fin (m + 1))).toRingHom)) (K : Type u) [Field K] [IsAlgClosed K] (n : ℕ) (hCartier : ∀ (Y : Scheme.{u}) [IsIntegral Y] (f : Y ⟶ Spec (.of K)) [Smooth f] [LocallyOfFiniteType f] [QuasiCompact f] (a : ℕ), a < n + 2 → topologicalKrullDim Y = ((n + 2 : ℕ) : WithBot ℕ∞) → ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) (y : Y), s (IsLocalRing.closedPoint Ω) = y → ∀ [Algebra K (Y.residueField y)], Spec.map (CommRingCat.ofHom (algebraMap K (Y.residueField y))) = Y.fromSpecResidueField y ≫ f → ∀ [Algebra (Y.residueField y) Ω], Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) Ω)) ≫ Y.fromSpecResidueField y = s → Algebra.trdeg K (Y.residueField y) = (a : Cardinal.{u}) → ∀ [Algebra K (strictHenselization s)], Spec.map (CommRingCat.ofHom (algebraMap K (strictHenselization s))) = strictLocalizationToBase s ≫ f → ∀ (h : strictHenselization s), h ∈ IsLocalRing.maximalIdeal _ → h ≠ 0 → (Spec (.of (Localization.Away h))).HasTorsionEtaleCohomologicalDimensionLE (n + 2 - a)) (M : Sheaf (Spec (.of (MvPolynomial (Fin (n + 2)) K))).smallEtaleTopology AddCommGrpCat.{u + 1}) (N : ℕ) (hN : 0 < N) (hM : N • 𝟙 M = 0) (q : ℕ) (hq : 2 ≤ q) : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Spec (.of (MvPolynomial (Fin (n + 1)) K))), ((n + 2 : ℕ) : Cardinal.{u}) < (q : Cardinal.{u}) + residueFieldTrdeg (Spec.map (CommRingCat.ofHom (algebraMap K (MvPolynomial (Fin (n + 1)) K)))) (s (IsLocalRing.closedPoint Ω)) → IsZero ((Etale.upperStar AddCommGrpCat.{u + 1} s).obj (((Etale.lowerStar AddCommGrpCat.{u + 1} (Spec.map (CommRingCat.ofHom (MvPolynomial.rename (Fin.castSucc : Fin (n + 1) → Fin (n + 2))).toRingHom))).rightDerived q).obj M))",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-17",
+  "existing": false
+ },
  "reviewed": {
   "date": "2026-10-15",
   "by": "L",
@@ -174,5 +183,13 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f03767360",
+  "group": "Q32",
+  "result": "fix",
+  "note": "Statement exact against node and source (six inputs, positive annihilator N, q>=2 including q=2, separably closed geometric points, strict cardinal trdeg inequality); edge cases n=0, q=2, m=0, zero ring, N=1, a=0 and a=d-1, h zero or unit, and empty schemes are covered; universes u and u+1; one sorry, no defs, docstrings OK, lean.statement verbatim, lines <=100; nt_compile.py passed clean in 2.2 s. Only change by the delivery: item lean, module and report; dependency nodes unchanged. Uses upstream Sites strictHenselization/strictLocalizationToBase: the same canonical notions, and the side source's recorded names are abbrevs of them; probe confirms the published strictHenselizationRing lacks IsLocalRing and is not defeq (advisory: maintainer should rebind the two dependency records or publish the side abbrevs). FIX: complete replacement report fixes/lem-sc-affine-line-projection-stalk-bound.report.md renames the stale '## Dependency modules' section (its claimed dependency rebindings were withdrawn) with an accurate note and corrects the IsLocalRing typo."
  }
 }
