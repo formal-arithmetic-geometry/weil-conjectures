@@ -119,18 +119,14 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "module": "WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/Sites/StrictHenselizationLocal.lean",
-  "declaration": "AlgebraicGeometry.Scheme.henselianLocalRing_strictHenselization",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.isLocalRing_strictHenselization",
-   "AlgebraicGeometry.Scheme.henselianLocalRing_strictHenselization",
-   "AlgebraicGeometry.Scheme.isSepClosed_residueField_strictHenselization"
-  ],
-  "branch": "slopmaster2",
-  "date": "2026-10-13",
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility",
+  "declaration": "AlgebraicGeometry.strictHenselizationLocalStructure",
+  "statement": "theorem strictHenselizationLocalStructure\n    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (barY : Spec (.of Ω) ⟶ Y) :\n    ∃ (_ : IsLocalRing (Scheme.strictHenselizationRing barY)),\n      IsStrictlyHenselianLocalRing (Scheme.strictHenselizationRing barY)",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-17",
   "existing": true,
-  "note": "Re-pointed during upstream sync: upstream now proves this result. The former SHEAF duplicate module was retired; its users import the upstream module and use its instances."
+  "note": "The recorded upstream instances concern Scheme.strictHenselization, while the loaded strictHenselizationRing is a separate affine-diagram colimit and does not synthesize IsLocalRing. Reuse the existing project compatibility theorem, whose exact statement supplies locality and strict henselianity for strictHenselizationRing itself, with no residue-field identification or geometric factorization. The consumer explicitly passes Classical.choose of its local-ring existence to IsLocalRing.maximalIdeal; this selects a proof of a proposition, not ring data. Both the compatibility signature and this use were verified with scompile.py. No new module or duplicate theorem is delivered."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -213,5 +209,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a43c49454",
+  "group": "Q22",
+  "result": "pass",
+  "note": "The statement matches node lem-sc-affine-line-infinity-strict-local-model and the source (thm-sc-affine-torsion-cd.md, local calculation and compactification) in every clause, neither weaker nor stronger: arbitrary e, the canonical residueFieldAlgebraMap K-algebras, ∃ a<n+2 shared by both trdeg, h in the maximal ideal with h≠0, and Nonempty(pullback j ρ ≅ Spec R[1/h]). Edge cases n=0, nonclosed points and all characteristics are covered, with no added universe restriction. A probe confirmed that IsLocalRing for the loaded strictHenselizationRing colimit does not synthesize, so the §1(B) lean-only rebind of lem-weil-pbc-strict-henselization-local-structure to the existing AlgebraicGeometry.strictHenselizationLocalStructure is correct: verbatim signature, sorry-free axioms. Passing Classical.choose of that Prop proof to maximalIdeal is sound, and adding the node to stmt_deps is right. The node diff touches only lean and stmt_deps. One theorem proved by sorry, no definitions, source and blueprint docstrings with the proof steps, lean.statement verbatim, both report sections present, no duplicate found. nt_compile.py exited 0 with no errors (1.7 s). No fixes needed."
  }
 }
