@@ -11,9 +11,133 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-simplicial-projective-model-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first with any small simplicial category $B$, covering both $A$ and $A^{\\mathrm{op}}$. The Kan model category of simplicial sets is combinatorial and simplicial for its Cartesian enrichment by [lem-coef-simplicial-presheaf-projective-model]. Hence [lem-coef-simplicial-projective-model-calculus] gives the projective model structure on enriched $B$-diagrams, its local presentability and the free adjunction $F_bK=B(b,-)\\times K\\dashv\\operatorname{ev}_b$. Put $I_B=\\{F_b(\\partial\\Delta^k)\\to F_b(\\Delta^k):b\\in\\operatorname{Ob}B,\\ k\\geq0\\}$. Transposing a square against such a map gives exactly a square against $\\partial\\Delta^k\\to\\Delta^k$ at $b$. By the boundary characterization in [lem-coef-kan-quillen-right-proper], $I_B^{\\square}$ is precisely the objectwise trivial fibrations. Each map in $I_B$ is therefore a projective cofibration. All families are small in the fixed universe, enlarged if necessary.",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-projective-model-calculus",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.2 and A.3.3.5, printed pp. 870–871: free projective generators; explicit boundary lifting test."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-presentable-cellular-factorization] to $I_B$ in the locally presentable diagram category of Step 1 and to $\\varnothing\\to P$. It factors as an initial $I_B$-cell map $\\varnothing\\to C$ followed by an objectwise trivial fibration $p:C\\to P$. If $P$ is projectively cofibrant, its lifting property supplies $s:P\\to C$ with $ps=1_P$, so its initial map is an arrow retract of the initial cell map. Conversely every such cell map has the left lifting property against objectwise trivial fibrations: at a successor choose a filler on each free boundary summand, extend across the pushout, and at a limit use the compatible fillers' colimit map. Start with the unique map from the initial diagram. Retracts retain the lifting property by [lem-coef-lifting-class-closure]. Thus a retract of an initial cell map is projectively cofibrant. This proves the stated characterization for both choices of $B$.",
+   "uses": [
+    "lem-coef-presentable-cellular-factorization",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.5, printed p. 871: explicit cellular factorization, transfinite lifting and retract argument."
+   }
+  },
+  {
+   "text": "For a right $B$-module $Z$ and a left $B$-module $P$, use the displayed coequalizer in the item to form $Z\\otimes_BP$. Colimits of enriched diagrams are objectwise: the action of $B(b,c)$ on a colimit is induced from the actions on its terms, since multiplication by a fixed simplicial set preserves colimits degreewise; the unit and associativity identities hold on every colimit leg. The same degreewise observation shows that $Z\\otimes_B-$ preserves colimits: both coproducts in the coequalizer commute with a colimit in $P$, as do the coequalizer and that colimit. Explicitly a map out of either iterated colimit is the same compatible family of maps $Z(b)\\times P_i(b)\\to T$ satisfying the action equations. This also proves that the resulting isomorphisms commute with a morphism $Z\\to Z'$ and with all attaching maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent coend calculation following A.3.3.5: colimit universal properties in simplicial sets."
+   }
+  },
+  {
+   "text": "For every object $b$ and simplicial set $K$ there is a natural isomorphism $Z\\otimes_BF_bK\\cong Z(b)\\times K$. In degree $r$ send the class of $(z,f,k)$, where $f\\in B(b,c)_r$ and $z\\in Z(c)_r$, to $(Z(f)z,k)$. The coend relation and associativity of the action make this well-defined. Its inverse sends $(z,k)$ to $[z,1_b,k]$, where the identity vertex is degenerated to degree $r$. One composite is the identity by the unit equation; the other is the identity because the relation identifies $[z,f,k]$ with $[Z(f)z,1_b,k]$. These formulas commute with simplicial operators, with maps of $Z$ and $K$, and with the inclusions of boundaries into simplices. In particular they identify the actual cell-attachment maps after applying the coend.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent enriched co-Yoneda calculation on the free diagrams of A.3.3.5; explicit mutually inverse maps."
+   }
+  },
+  {
+   "text": "For any simplicial set $K$, multiplication by $K$ preserves weak homotopy equivalences. To check this without a fibrancy assumption, take a weak equivalence $f:X\\to Y$. All simplicial sets are cofibrant by [lem-coef-kan-quillen-right-proper]. Apply [lem-coef-brown-split-factorizations] to obtain $f=pi$, $ps=1_Y$, where $i$ and $s$ are cofibrations and $p$ is a trivial fibration. Two-out-of-three makes both $i$ and $s$ weak equivalences, hence trivial cofibrations. In the Kan model structure trivial cofibrations are exactly the maps with the left lifting property against all Kan fibrations, that is, the anodyne maps. Applying [lem-coef-sset-anodyne-pushout-product] with the monomorphism $\\varnothing\\to K$ shows $K\\times i$ and $K\\times s$ anodyne, hence weak equivalences. Since $(K\\times p)(K\\times s)=1$, two-out-of-three makes $K\\times p$ weak; composing with $K\\times i$ proves the assertion. The factor exchange gives the same assertion for $-\\times K$.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent product calculation from the Kan model axioms and the cited anodyne pushout-product theorem, used in the A.3.3.5 cell argument."
+   }
+  },
+  {
+   "text": "A coproduct of weak homotopy equivalences of simplicial sets is a weak homotopy equivalence, including the empty coproduct. Indeed the realization quotient in [def-cbc-enhanced-diagrams-cones] identifies the realization of a simplicial coproduct with the topological disjoint union of the realizations: the simplex relations never change the summand. Paths lie in one summand, so components are the disjoint union of the summands' component sets. Likewise a based cube, and any homotopy between based cubes, has connected domain and lies in the basepoint's summand. Thus its based homotopy groups and induced maps are precisely those of that summand. The empty case has empty component sets and no basepoints.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent elementary realization-quotient calculation for coproducts, in the cell argument following A.3.3.5."
+   }
+  },
+  {
+   "text": "Let $u:Z\\to Z'$ be an objectwise weak equivalence of right $B$-modules. Let $P_\\alpha$ be an initial free-boundary cell presentation, continuous at limits. Prove by transfinite induction that $u\\otimes_B P_\\alpha$ is a weak equivalence. At $\\alpha=0$ both coends are empty, hence the map is the identity. At a successor, suppose $P_\\alpha\\to P_{\\alpha+1}$ attaches cells indexed by a small set $T$, at objects $b_t$ and dimensions $k_t$. By Steps 3–4 the coend for $Z$ is the pushout of the span\n$$Z\\otimes_BP_\\alpha\\ \\longleftarrow\\ \\coprod_{t\\in T} Z(b_t)\\times\\partial\\Delta^{k_t}\\ \\longrightarrow\\ \\coprod_{t\\in T} Z(b_t)\\times\\Delta^{k_t},$$\nand the same is true for $Z'$, with a commuting map of spans induced by $u$. The rightward arrows are degreewise injective since boundary inclusions are injective, including $k_t=0$. Steps 5–6 give weak equivalences on both coproduct terms; the induction hypothesis gives the third. The pushout clause of [lem-coef-sset-gluing-filtered-equivalences], with its monomorphism leg taken to be the rightward arrow, proves that the actual successor coend comparison is weak.",
+   "uses": [
+    "lem-coef-sset-gluing-filtered-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent transfinite successor step following the free generators in A.3.3.5; application of the cited simplicial-set gluing theorem."
+   }
+  },
+  {
+   "text": "At a nonzero limit ordinal $\\beta$, Step 3 identifies each coend on $P_\\beta$ with the colimit of its coends on $P_\\alpha$, $\\alpha<\\beta$, naturally in $Z$. The ordinal category $\\{\\alpha:\\alpha<\\beta\\}$ is a small nonempty directed poset: the maximum of a finite nonempty set of its elements is still below $\\beta$, and $0$ bounds the empty set. The filtered-colimit clause of [lem-coef-sset-gluing-filtered-equivalences] therefore applies to the preceding comparison diagram and proves the limit-stage comparison weak. Together with Step 7, this proves the comparison for every initial cell module, including presentations of length zero and successor length.",
+   "uses": [
+    "lem-coef-sset-gluing-filtered-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent transfinite limit step following A.3.3.5; the directed-colimit clause of the cited simplicial-set theorem."
+   }
+  },
+  {
+   "text": "For a projectively cofibrant left $B$-module $P$, choose the cell module $C$ and maps $P\\xrightarrow{s}C\\xrightarrow{p}P$ of Step 2 with $ps=1$. Applying $Z\\otimes_B-$ and $Z'\\otimes_B-$, naturality in the left variable gives commutative squares exhibiting $u\\otimes_BP$ as an arrow retract of $u\\otimes_BC$. The latter is weak by Steps 7–8; weak equivalences are retract closed in the Kan model structure [lem-coef-kan-quillen-right-proper]. Hence $u\\otimes_BP$ is weak. This proves the first invariance claim on taking $B=A$, $P=H$, and $u:V\\to V'$.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent retract step following A.3.3.5 and the Kan model retract axiom."
+   }
+  },
+  {
+   "text": "For the other invariance claim take $B=A^{\\mathrm{op}}$, regard the projectively cofibrant right $A$-module $V$ as a left $B$-module, and regard $H\\to H'$ as a map of right $B$-modules. Step 9 gives a weak equivalence $H\\otimes_{A^{\\mathrm{op}}}V\\to H'\\otimes_{A^{\\mathrm{op}}}V$. Switching the two factors on every coproduct term induces an isomorphism $H\\otimes_{A^{\\mathrm{op}}}V\\cong V\\otimes_AH$: a relation between $[H(f)h,v]$ and $[h,V(f)v]$ becomes precisely the relation between $[v,H(f)h]$ and $[V(f)v,h]$. Switching again is the inverse. This is simplicial and natural in both modules, so it identifies the weak equivalence with the comparison asserted in the item. Every use of gluing involved only degreewise monomorphisms and every product argument allowed arbitrary simplicial sets; no local Kan condition on $A$ or cofibrancy or fibrancy of the varying modules has entered.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent opposite-category symmetry of the defining coequalizer, completing the cell/gluing consequence of A.3.3.5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-presentable-cellular-factorization",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-sset-anodyne-pushout-product",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-sset-gluing-filtered-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "A.3.3.2 and A.3.3.5 (printed pp. 870–871; PDF pages 888–889), read online: explicit coend/cell/gluing consequence, with generic model-localization lemmas avoided to prevent a dependency cycle."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,10 +194,45 @@
    "results": "{\"t\": \"2026-10-17T04:58:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\", \\\"IsLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "coend.*cofibrant|cofibrant.*coend|weighted.*weakEquivalence",
+   "results": "{\"t\": \"2026-10-17T05:28:34Z\", \"tool\": \"grep\", \"query\": \"coend.*cofibrant|cofibrant.*coend|weighted.*weakEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned simplicial enrichment, ordinary monoidal/colimit or cofibrant model-category facts do not state enriched balanced coend invariance or the free-boundary cell characterization. Read the displayed hit types and relevant SimplicialCategory/SimplicialObject.lean:35–44, SimplicialSet/CategoryWithFibrations.lean:77 and ModelCategory/CofibrantObjectHomotopy.lean:35–80."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coend\", \"cofibrant\"",
+   "results": "{\"t\": \"2026-10-17T05:28:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"coend\\\", \\\"cofibrant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned simplicial enrichment, ordinary monoidal/colimit or cofibrant model-category facts do not state enriched balanced coend invariance or the free-boundary cell characterization. Read the displayed hit types and relevant SimplicialCategory/SimplicialObject.lean:35–44, SimplicialSet/CategoryWithFibrations.lean:77 and ModelCategory/CofibrantObjectHomotopy.lean:35–80."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An enriched coend of simplicial modules over a small simplicial category preserves objectwise weak equivalences when the fixed module is projectively cofibrant",
+   "results": "{\"t\": \"2026-10-17T05:28:36Z\", \"tool\": \"leanfinder\", \"query\": \"An enriched coend of simplicial modules over a small simplicial category preserves objectwise weak equivalences when the fixed module is projectively cofibrant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"AlgebraicTopology.DoldKan.Γ₀_obj_obj\", \"AlgebraicTopology.DoldKan.Γ₀.obj\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"CategoryTheory.SimplicialNerve\", \"SSet.instMonoidalClosed\", \"CategoryTheory.SimplicialObject.instHasColimits\"], \"digest\": \"052f06192cf54156\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned simplicial enrichment, ordinary monoidal/colimit or cofibrant model-category facts do not state enriched balanced coend invariance or the free-boundary cell characterization. Read the displayed hit types and relevant SimplicialCategory/SimplicialObject.lean:35–44, SimplicialSet/CategoryWithFibrations.lean:77 and ModelCategory/CofibrantObjectHomotopy.lean:35–80."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projectively cofibrant simplicial weight makes enriched tensor products homotopy invariant in the other variable",
+   "results": "{\"t\": \"2026-10-17T05:28:56Z\", \"tool\": \"leansearch\", \"query\": \"A projectively cofibrant simplicial weight makes enriched tensor products homotopy invariant in the other variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.cofibrations_eq\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.BifibrantObject.instIsCofibrantObjι\", \"HomotopicalAlgebra.CofibrantObject.instIsStableUnderPrecompHomRel\", \"HomotopicalAlgebra.CofibrantObject.instCategoryWithWeakEquivalencesHoCat\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.CofibrantObject.instIsStableUnderPostcompHomRel\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\"], \"digest\": \"b268d591e9a74fc9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned simplicial enrichment, ordinary monoidal/colimit or cofibrant model-category facts do not state enriched balanced coend invariance or the free-boundary cell characterization. Read the displayed hit types and relevant SimplicialCategory/SimplicialObject.lean:35–44, SimplicialSet/CategoryWithFibrations.lean:77 and ModelCategory/CofibrantObjectHomotopy.lean:35–80."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projectively cofibrant enriched weights are retracts of free boundary cell complexes and their balanced tensor preserves objectwise weak homotopy equivalences",
+   "results": "{\"t\": \"2026-10-17T05:28:58Z\", \"tool\": \"leanfinder\", \"query\": \"Projectively cofibrant enriched weights are retracts of free boundary cell complexes and their balanced tensor preserves objectwise weak homotopy equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.CofibrantObject.instHasQuotientWeakEquivalencesHomRel\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\"], \"digest\": \"920bc9cfff94b1b0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned simplicial enrichment, ordinary monoidal/colimit or cofibrant model-category facts do not state enriched balanced coend invariance or the free-boundary cell characterization. Read the displayed hit types and relevant SimplicialCategory/SimplicialObject.lean:35–44, SimplicialSet/CategoryWithFibrations.lean:77 and ModelCategory/CofibrantObjectHomotopy.lean:35–80."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-geometric-descent",
@@ -98,5 +257,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-coend-homotopy-invariance",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Ten steps establish free-boundary cellular characterization, compute colimits and coends on free diagrams explicitly, prove product invariance via Brown factorizations and the existing anodyne pushout-product leaf, and apply existing simplicial-set gluing and directed-colimit statements by transfinite induction and retract, then exchange the two module variables over the opposite category. No new nodes. Checked small and empty cases, cited statements, project sources, blueprint and Mathlib.",
+  "blueprint": "Realizes the technical enriched completion foundation below prop-coef-integral-exceptional-adjoint, proof paragraph 2 (derived coefficient adjunction): the precise one-projectively-cofibrant-variable coend input used by lem-coef-space-geometric-descent; retains the recorded ancestry through that item. The new blueprint paragraph contains the derived RHom/Rlim calculation, not a separate coend theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-c3b202e32",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-c3b202e32 (reviewer sub-agent of L); spot-checked: I read the item, its 10 steps and every cited statement in full. Source: I fetched HTT and read printed pp. 870-871. Prop. A.3.3.2 gives the projective combinatorial model structure on A^C, and Rem. A.3.3.5 gives the free generators F^C_A(D)=A⊗Map_C(C,D). The coend-invariance clauses are correctly marked as agent-written. The statement is true and keeps the needed cofibrancy hypothesis: for A=BG with a trivial point module, V↦V/G is not invariant. The coefficient category is sSet with the Kan-Quillen model structure throughout, and nothing is weakened. Step 1: by adjunction, I_B^□ is exactly the objectwise trivial fibrations (boundary test including n=0). Step 2: the cellular factorization and split ps=1 give one direction; the explicit LLP of cell maps plus closure under retracts gives the other. Steps 3-4 are elementary colimit and co-Yoneda calculations ([z,f,k]↦(Z(f)z,k)), and I checked the variance. Step 5: Brown split factorization (all simplicial sets are cofibrant) and the pushout-product with ∅→K make K×i and K×s anodyne, so K×f is weak, with no fibrancy needed. Step 6: coproducts preserve weak homotopy equivalences via the realization quotient (acceptable as elementary). Step 7: the gluing lemma's mono leg is applied correctly to ∐Z(b)×∂Δ^k→∐Z(b)×Δ^k. Step 8: the directed-colimit clause applies to the predecessors of a limit ordinal. Step 9: arrow retract. Step 10: factor swap over A^op. proof_deps equals the union of the uses. Every cited statement is in unit sk-prop-sf-biduality-general except a definition node, so no tool_uses are needed. There is no cycle (213 ancestors traversed) and no duplicate in the DAG (searched coend, projectively cofibrant and ⊗_A). Step 4 of the parent lem-coef-space-geometric-descent uses exactly the stated clauses. There are no new nodes and no fixes."
  }
 }

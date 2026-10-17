@@ -10,9 +10,87 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the standard-simplex convention of [def-cbc-enhanced-diagrams-cones]. A simplex $\\alpha:[r]\\to[n]$ belongs to $\\Delta^S$ exactly when its image is contained in $S$. Thus it belongs to $K_J$ exactly when its image omits a vertex of $J$. All unions below are degreewise unions, which are closed under precomposition and hence are simplicial subsets. In particular these membership criteria apply to degenerate simplices as well as injective ones; no nondegenerate-simplex decomposition theorem is needed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 4.4.5.8, description of K; direct image-set formulation. Printed pp.305-306 (PDF page indices 322-323), read online; archival copy WANTED; no matching Stacks tag."
+   }
+  },
+  {
+   "text": "Fix the given gap $i<j<k$. Let $P$ be the finite collection of subsets $T\\subseteq[n]$ containing $J\\cup\\{j\\}$. List its elements as $T_1,\\ldots,T_t$ in increasing cardinality, with any order among sets of equal cardinality. A proper subset in $P$ therefore occurs earlier. Put $L_0=K_J$ and $L_h=K_J\\cup\\bigcup_{b\\leq h}\\Delta^{T_b}$. These are increasing simplicial subsets by step 1. The full set $[n]$ is the unique largest element of $P$, so $T_t=[n]$ and $L_t=\\Delta^n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 4.4.5.8 proof, P, its linear ordering and K(h). Printed pp.305-306 (PDF page indices 322-323), read online; archival copy WANTED; no matching Stacks tag."
+   }
+  },
+  {
+   "text": "At stage $h$, write $T=T_h=\\{v_0<\\cdots<v_d\\}$ and let $a$ be the index of $j$ in this list. Since $T$ contains $i,j,k$, one has $d\\geq2$ and $0<a<d$. For any $v\\in T$ different from $j$, the face on $T\\setminus\\{v\\}$ is already in $L_{h-1}$: if $v\\in J$, it omits a vertex of $J$ and lies in $K_J$; if $v\\notin J$, it still contains $J\\cup\\{j\\}$, belongs to $P$, and has smaller cardinality than $T$, so was attached earlier. This uses only the face membership criterion of step 1 and the ordering of step 2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 4.4.5.8 proof, the faces in the upper-left inner horn of its pushout square. Printed pp.305-306 (PDF page indices 322-323), read online; archival copy WANTED; no matching Stacks tag."
+   }
+  },
+  {
+   "text": "Using the standard-simplex face membership convention of [def-cbc-enhanced-diagrams-cones], the distinguished face $F=T\\setminus\\{j\\}$ is absent from $L_{h-1}$. Indeed $j\\notin J$, so $J\\subseteq F$, and the injective simplex on $F$ does not belong to $K_J$. If it belonged to an earlier face $\\Delta^{T_b}$, then $F\\subseteq T_b$. But $j\\in T_b$, hence $T=F\\cup\\{j\\}\\subseteq T_b$, while $b<h$ implies $|T_b|\\leq|T|$. This forces $T_b=T$, contradicting distinctness of the enumeration. The simplex on $T$ is absent too, since its restriction to $F$ would otherwise be present. This is the entire exclusion argument; it invokes no lifting or anodyne-saturation lemma.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 4.4.5.8 proof, verification that the omitted j-face has not already been attached. Printed pp.305-306 (PDF page indices 322-323), read online; archival copy WANTED; no matching Stacks tag."
+   }
+  },
+  {
+   "text": "Identify $\\Delta^d$ with the face $\\Delta^T$ by the increasing bijection $[d]\\to T$. We claim that its intersection with $L_{h-1}$ is exactly $\\Lambda_a^d$. A simplex in the horn omits some $v\\in T$ other than $j$, so lies in the face already present by step 3. Conversely, if its image omits no vertex of $T$ other than possibly $j$, that image is $F$ or $T$. Such a simplex cannot lie in $L_{h-1}$: any part of the defining union containing it would contain its whole image, hence the injective simplex on $F$, contradicting step 4. These two implications hold in every degree. By the horn definition of [def-cbc-enhanced-diagrams-cones], they give precisely the claimed intersection, with the inner index verified in step 3.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 4.4.5.8 proof, exact identification of the upper-left corner as the j-horn, in every simplicial degree. Printed pp.305-306 (PDF page indices 322-323), read online; archival copy WANTED; no matching Stacks tag."
+   }
+  },
+  {
+   "text": "Now $L_h=L_{h-1}\\cup\\Delta^T$. In each simplicial degree, the pushout of the two inclusions of the intersection is this union: the equivalence relation identifies exactly the two copies of the intersection, with no other identifications. Explicitly, maps $u:L_{h-1}\\to X$ and $v:\\Delta^d\\to X$ agreeing on $\\Lambda_a^d$ define a unique map from $L_h$ by $u$ on the first part and $v$ through the displayed face identification on the second. Step 5 makes this well-defined. Precomposition preserves each part, so the two simplicial naturality equations make the glued map simplicial. This proves the degreewise pushout assertion and its induced simplicial operators. Thus the filtration of step 2 has the required attachments, taking $d_h=d$ and $a_h=a$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 4.4.5.8 proof, displayed pushout square; its degreewise set gluing expanded explicitly. Printed pp.305-306 (PDF page indices 322-323), read online; archival copy WANTED; no matching Stacks tag."
+   }
+  },
+  {
+   "text": "For a quasicategory $Q$ and the given map $f_0:K_J\\to Q$, inductively suppose $f_{h-1}:L_{h-1}\\to Q$ has been constructed. Restrict it along the attaching map $\\Lambda_{a_h}^{d_h}\\to L_{h-1}$. Since $0<a_h<d_h$, the defining horn-filling property of [def-cbc-enhanced-diagrams-cones] gives $g_h:\\Delta^{d_h}\\to Q$ whose restriction is exactly this map. The pushout established in step 6 glues $g_h$ and $f_{h-1}$ into $f_h:L_h\\to Q$ with $f_h|_{L_{h-1}}=f_{h-1}$. Starting at $h=1$ and ending at the finite stage $t$ gives $f_t:\\Delta^n\\to Q$ with $f_t|_{K_J}=f_0$, as asserted.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 4.4.5.8, finite horn filtration; extension by the defining quasicategory horn fillers. Printed pp.305-306 (PDF page indices 322-323), read online; archival copy WANTED; no matching Stacks tag."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Lemma 4.4.5.8, printed pp.305-306 (PDF page indices 322-323), read online 2026-10-17. Expanded image-set/intersection and degreewise-pushout proof, with the consequence proved by finite horn filling. No local literature archive; WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -69,10 +147,54 @@
    "results": "{\"t\": \"2026-10-17T05:11:39Z\", \"tool\": \"grep\", \"query\": \"generalizedHorn|generalized.horn|IsInner|innerAnodyneExtensions\", \"sub\": \"AlgebraicTopology/SimplicialSet/AnodyneExtensions\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PairingCore.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PairingCore.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PairingCore.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PairingCore.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/UnionProd.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/UnionProd.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing.lean\"], \"digest\": \"8ae408f0e36d47b2\"}",
    "date": "2026-10-17",
    "verdict": "Second-reader independent search: no exact match. Read PairingCore.lean:220-234, Inner/Basic.lean:43-60, and Inner/PushoutProduct.lean:55-61. PairingCore.IsInner only defines a condition on a supplied pairing, horn and stdSimplex.face are constructions, and the pushout-product theorem concerns a horn times a boundary. None constructs the gapped face-complement pairing or the required finite filtration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite filtration of the union of faces of a simplex missing vertices in a subset with an interior gap by pushouts of inner horn inclusions",
+   "results": "{\"t\": \"2026-10-17T05:33:21Z\", \"tool\": \"leanfinder\", \"query\": \"A finite filtration of the union of faces of a simplex missing vertices in a subset with an interior gap by pushouts of inner horn inclusions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn\", \"SSet.horn.multicoequalizerDiagram\", \"SSet.horn_eq_iSup\", \"SSet.stdSimplex.face\", \"SSet.horn_obj\", \"SSet.boundary\", \"SSet.horn.faceι\", \"SSet.horn.isColimit\"], \"digest\": \"40639e33dc366a15\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: source read at Horn.lean:32-62, Quasicategory/Basic.lean:39-53 and AnodyneExtensions/Inner/Basic.lean:43-60,143-157. Single horns and their filling define one attachment; the pairing theorem assumes a supplied regular inner pairing and does not construct the gapped-subset filtration or prove this finite presentation. The union-product theorem at Inner/PushoutProduct.lean:55-61 concerns a different subcomplex. None is an exact match or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Subcomplex.Pairing.IsInner, SSet.innerAnodyneExtensions",
+   "results": "{\"t\": \"2026-10-17T05:33:22Z\", \"tool\": \"loogle\", \"query\": \"SSet.Subcomplex.Pairing.IsInner, SSet.innerAnodyneExtensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.Subcomplex.Pairing.innerAnodyneExtensions\"], \"digest\": \"9dc52378b5d519de\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: source read at Horn.lean:32-62, Quasicategory/Basic.lean:39-53 and AnodyneExtensions/Inner/Basic.lean:43-60,143-157. Single horns and their filling define one attachment; the pairing theorem assumes a supplied regular inner pairing and does not construct the gapped-subset filtration or prove this finite presentation. The union-product theorem at Inner/PushoutProduct.lean:55-61 concerns a different subcomplex. None is an exact match or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "J'|subset.*simplex|innerAnodyne",
+   "results": "{\"t\": \"2026-10-17T05:33:22Z\", \"tool\": \"grep\", \"query\": \"J'|subset.*simplex|innerAnodyne\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplices.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\"], \"digest\": \"33d93817cb9c3c0a\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: source read at Horn.lean:32-62, Quasicategory/Basic.lean:39-53 and AnodyneExtensions/Inner/Basic.lean:43-60,143-157. Single horns and their filling define one attachment; the pairing theorem assumes a supplied regular inner pairing and does not construct the gapped-subset filtration or prove this finite presentation. The union-product theorem at Inner/PushoutProduct.lean:55-61 concerns a different subcomplex. None is an exact match or a one-line specialization.",
+   "directory": "AlgebraicTopology/SimplicialSet"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A generalized inner horn made of faces avoiding a nonconsecutive vertex subset has an explicit finite inner horn filtration",
+   "results": "{\"t\": \"2026-10-17T05:34:10Z\", \"tool\": \"leansearch\", \"query\": \"A generalized inner horn made of faces avoiding a nonconsecutive vertex subset has an explicit finite inner horn filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.horn\", \"SSet.horn_obj\", \"SSet.horn_eq_iSup\", \"SSet.KanComplex.hornFilling\", \"SSet.quasicategory_of_filler\", \"SSet.horn.faceι_ι\", \"SSet.horn.face\"], \"digest\": \"f64dc9210037d9cb\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: source read at Horn.lean:32-62, Quasicategory/Basic.lean:39-53 and AnodyneExtensions/Inner/Basic.lean:43-60,143-157. Single horns and their filling define one attachment; the pairing theorem assumes a supplied regular inner pairing and does not construct the gapped-subset filtration or prove this finite presentation. The union-product theorem at Inner/PushoutProduct.lean:55-61 concerns a different subcomplex. None is an exact match or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every map from the subcomplex of a simplex whose simplices avoid containing a fixed noninterval vertex subset extends to the simplex in any quasicategory",
+   "results": "{\"t\": \"2026-10-17T05:34:12Z\", \"tool\": \"leanfinder\", \"query\": \"Every map from the subcomplex of a simplex whose simplices avoid containing a fixed noninterval vertex subset extends to the simplex in any quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.quasicategory_of_filler\", \"SSet.horn\", \"SSet.KanComplex.hornFilling\", \"SSet.Subcomplex.N.mk'_surjective\", \"SSet.Subcomplex.N.mk_surjective\", \"SSet.Subcomplex.N.mk\"], \"digest\": \"75ba1236824a974d\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: source read at Horn.lean:32-62, Quasicategory/Basic.lean:39-53 and AnodyneExtensions/Inner/Basic.lean:43-60,143-157. Single horns and their filling define one attachment; the pairing theorem assumes a supplied regular inner pairing and does not construct the gapped-subset filtration or prove this finite presentation. The union-product theorem at Inner/PushoutProduct.lean:55-61 concerns a different subcomplex. None is an exact match or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "gapped|generalizedHorn|generalized.*horn|face.*pairing|Pairing.*face",
+   "results": "{\"t\": \"2026-10-17T05:34:12Z\", \"tool\": \"grep\", \"query\": \"gapped|generalizedHorn|generalized.*horn|face.*pairing|Pairing.*face\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PairingCore.lean\"], \"digest\": \"0aa0b60e64f7f406\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: source read at Horn.lean:32-62, Quasicategory/Basic.lean:39-53 and AnodyneExtensions/Inner/Basic.lean:43-60,143-157. Single horns and their filling define one attachment; the pairing theorem assumes a supplied regular inner pairing and does not construct the gapped-subset filtration or prove this finite presentation. The union-product theorem at Inner/PushoutProduct.lean:55-61 concerns a different subcomplex. None is an exact match or a one-line specialization.",
+   "directory": "AlgebraicTopology"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-weak-retraction-coherent-extension",
@@ -102,5 +224,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-gapped-face-inner-horn-presentation",
+  "worker": "stage1",
+  "summary": "Kept the statement and sole statement dependency. Expanded HTT Lemma 4.4.5.8 into an explicit finite cardinality-ordered face filtration, checked the exact inner-horn intersection in every degree, proved its degreewise pushout by gluing, and extended maps by finite induction from the quasicategory definition. Read the only cited statement, the parent use, chapter/unit and historical blueprint paragraph; searched both Lean sources, the whole DAG/blueprint and Mathlib. No attachment, new nodes, statement dispute, route change or hidden anodyne-calculus theorem. All proof steps are shorter than 2000 characters.",
+  "blueprint": "Realizes HTT Lemma 4.4.5.8 as used in step 3 of lem-coef-weak-retraction-coherent-extension. Retains the historical ancestry to prop-coef-integral-exceptional-adjoint, proof paragraph 2 (finite-coefficient derived mapping-complex adjunction before R lim), in main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md; this is a combinatorial supporting lemma, without replacing any unit step.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-6efada2f7",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-6efada2f7 (reviewer sub-agent of L); spot-checked: The statement agrees exactly with HTT Lemma 4.4.5.8 (same gap hypothesis and K_J = union of the faces at q in J), stated as the finite inner-horn filtration that the lemma's proof gives, plus the quasicategory extension clause with exact restriction to K_J. HTT is not archived locally: the worker filed WANTED and set proof_origin to agent, which is correct. I read all 7 steps in full. Step 1: membership is decided by the image of a simplex, so degeneracies are covered. Step 2: P is ordered by cardinality and ends at [n]. Step 3: every face T minus v with v != j is already present, and 0<a<d. Step 4: the omitted face F = T minus j is absent, because F inside T_b forces T inside T_b and then equality by cardinality. Step 5: the intersection is exactly the horn at a in every degree, since an image containing F is F or T. Step 6: the pushout is the degreewise union of sets. Step 7: finite induction with the definition's inner-horn fillers. Every cited use of def-cbc-enhanced-diagrams-cones is in that node's statement (simplex convention, horn as 'omits some vertex other than i', quasicategory filling for 0<i<n). I ran my own exhaustive check of all J, every admissible j and 2<=n<=7 (825 configurations): the horn intersection, the inner index and final coverage all hold. Hand checks of n=2 and n=3 also pass. The parent lem-coef-weak-retraction-coherent-extension step 3 uses n=2m, J = odd vertices and the gap 1<2<3, which is valid; there is no cycle. The delivery has no new nodes. The DAG duplicate search (4.4.5.8, gapped, inner anodyne, face unions) finds only Kerodon 01NX nodes and general saturation or horn nodes, none of which duplicates this one. The 14 Mathlib searches support the null match. There are no tool uses, no SGA and no off-route citation. Minor and unchanged: the item lacks a lean_audit key, which is not split-owned. No fixes."
  }
 }

@@ -11,9 +11,79 @@
   "def-weil-pbc-simplicial-set",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=[1]\\times\\Delta^{\\mathrm{op}}\\times\\Delta^{\\mathrm{op}}$, where $[1]$ has the arrow $0\\to1$. An arrow $A\\to B$ of simplicial spaces is exactly a covariant Set-valued diagram $F:D\\to\\mathrm{Set}$: its values at $0$ are those of $A$, its values at $1$ those of $B$, and the mixed arrows express naturality of $A\\to B$. Maps of diagrams are exactly commuting squares of bisimplicial maps. This follows by expanding the two functor laws and the naturality equations in [def-weil-pbc-simplicial-set]. Colimits of such diagrams are computed at each $d\\in D$: take the set colimits there, and induce each operator from the compatible component operators. A cocone to another diagram gives unique component maps by [def-weil-pbc-category-colimit]; their naturality holds after every coprojection, hence by uniqueness. This verifies existence and the universal property, and shows evaluation at $d$ preserves all small colimits.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent argument, bounded-presheaf input: identification of the arrow category with diagrams and pointwise colimits."
+   }
+  },
+  {
+   "text": "Fix the diagram $F$ for $A\\to B$. Define a small category $E$ with objects $(d,x)$, $d\\in D$, $x\\in F(d)$, and arrows $(d,x)\\to(e,y)$ the arrows $a:d\\to e$ of $D$ such that $F(a)x=y$. Composition is that of $D$, well defined by functoriality; write $\\pi:E\\to D$ for the projection. Its object set is the disjoint union of the elements of $A$ and $B$, so has size less than $\\gamma$. The morphisms of $D$ are three copies of the morphisms of $\\Delta\\times\\Delta$, so also have size less than $\\gamma$. A morphism of $E$ is determined by its source element and its projected arrow. For each source element there are fewer than $\\gamma$ choices, and there are fewer than $\\gamma$ source elements. Regularity therefore gives $|\\operatorname{Mor}E|<\\gamma$. This includes the case $F$ is empty, when $E$ is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent argument, bounded-presheaf input: explicit category of elements and its cardinal bound."
+   }
+  },
+  {
+   "text": "For any diagram $G:D\\to\\mathrm{Set}$, a map $F\\to G$ is a family $t_{d,x}\\in G(d)$ satisfying $G(a)t_{d,x}=t_{e,F(a)x}$ for every $a:d\\to e$. Indeed a natural transformation $u$ gives $t_{d,x}=u_d(x)$; conversely define $u_d(x)=t_{d,x}$ and these equations give its naturality. These operations are inverse, including empty fibers. The displayed families are exactly the limit of $G\\pi:E\\to\\mathrm{Set}$. They identify the functor $\\operatorname{Hom}(F,-)$ with the pointwise limit of the evaluation functors $\\mathrm{ev}_{\\pi(e)}$, indexed by $E$. Postcomposing $G\\to G'$ applies its component to each $t_{d,x}$, so this identification is natural in $G$. Each evaluation preserves small $\\gamma$-filtered colimits by step 1. Since $E$ has fewer than $\\gamma$ morphisms, [lem-coef-accessible-set-functor-limits] says that their pointwise limit preserves these colimits. Thus $\\operatorname{Hom}(F,-)$ preserves them. Via step 1 this proves the required $\\gamma$-presentability of the arbitrary arrow $A\\to B$.",
+   "uses": [
+    "lem-coef-accessible-set-functor-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent argument, bounded-presheaf input: Hom as a small limit of evaluation functors and the existing Mathlib commutation theorem."
+   }
+  },
+  {
+   "text": "A subspace $B\\subseteq Y$ means subsets $B_{p,q}\\subseteq Y_{p,q}$ stable under both simplicial directions. Such families form a subset of the powerset of $\\coprod_{p,q}Y_{p,q}$, so $I_\\gamma(Y)$ is small. The empty family is a subspace and has size zero. For a family $(B_i)_{i\\in T}$ with $|T|<\\gamma$, the union $B_{p,q}=\\bigcup_i(B_i)_{p,q}$ is stable under every operator: an element comes from one $B_i$, and its operator stays in that $B_i$. Its total set is a union of fewer than $\\gamma$ sets of size less than $\\gamma$, hence has size less than $\\gamma$ by regularity. This gives an upper bound, including the empty family. A category with fewer than $\\gamma$ morphisms has fewer than $\\gamma$ objects, by its identity arrows; thus every diagram of that size in this poset has an upper bound on its objects, which is a cocone because a poset has at most one arrow between any two objects. This proves $\\gamma$-filteredness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent argument, filtered-union input: smallness, unions, regularity and the empty diagram."
+   }
+  },
+  {
+   "text": "Every $y\\in Y_{p,q}$ lies in a subspace of size less than $\\gamma$. In bidegree $(r,s)$ take all images $Y(\\alpha,\\beta)y$ for order-preserving $\\alpha:[r]\\to[p]$ and $\\beta:[s]\\to[q]$. Identities include $y$ and composition of operators makes these subsets a subspace. Its total set is an image of a subset of $\\operatorname{Mor}(\\Delta\\times\\Delta)$, so has size less than $\\gamma$. Consequently $\\bigcup_{B\\in I_\\gamma(Y)}B=Y$. Identify the monomorphism $X\\hookrightarrow Y$ with its degreewise subset. Then $(X\\cap B)_{p,q}=X_{p,q}\\cap B_{p,q}$ is stable under operators and these intersections have degreewise union $X$. This identification also explains the intersection convention in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent argument, filtered-union input: the subspace generated by a simplex and exhaustion of both endpoints."
+   }
+  },
+  {
+   "text": "Verify the arrow-colimit property directly. Given a cocone of squares from $(X\\cap B\\hookrightarrow B)$ to a fixed arrow $h:U\\to V$, denote its component maps by $u_B:X\\cap B\\to U$ and $v_B:B\\to V$. For $y\\in Y_{p,q}$ choose a bounded $B$ containing it and put $v(y)=v_B(y)$. For $x\\in X_{p,q}$ choose such a $B$ and put $u(x)=u_B(x)$. These values are independent of choices: $B\\cup B'$ is a bounded subspace by step 4, and cocone compatibility identifies both values there. For any simplicial operator, use a $B$ containing the original simplex; it contains its image, and naturality of $u_B,v_B$ proves naturality of $u,v$. For $x\\in X\\cap B$, the square equation gives $hu(x)=v(x)$, hence $(u,v)$ is a square. It restricts to the given cocone and is unique since every simplex occurs in some $B$ by step 5. This is exactly the colimit universal property [def-weil-pbc-category-colimit], proving the final assertion for the specified canonical cocone.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent argument, filtered-union input: explicit universal property of the canonical arrow cocone."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-accessible-set-functor-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Auxiliary bounded-presheaf input under ancestor paragraph 2; explicit category-of-elements Hom calculation and filtered-union cocone verification, using the existing small-limit Mathlib leaf."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,10 +140,146 @@
    "results": "{\"t\": \"2026-10-17T04:57:30Z\", \"tool\": \"leanfinder\", \"query\": \"A presheaf with fewer than kappa total elements on a category with fewer than kappa morphisms is kappa presentable, including presheaves representing commuting squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeTypeObjUliftYonedaOfHasColimitsOfSize\", \"CategoryTheory.Presheaf.instIsCardinalLocallyPresentableFunctorOppositeOfHasPullbacks\", \"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeFreeYonedaOfHasColimitsOfSize\", \"CategoryTheory.isCardinalPresentable\", \"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"CategoryTheory.isCardinalPresentable_iff\", \"CategoryTheory.IsCardinalPresentable\", \"CategoryTheory.ObjectProperty.ColimitOfShape.isCardinalPresentable\"], \"digest\": \"69734d6ecbee1be2\"}",
    "date": "2026-10-17",
    "verdict": "no match: Presheaf.lean:47-56 gives representable presentability, and CardinalFilteredPresentation gives a criterion with a cardinally bounded presentation supplied as input. Neither supplies the bounded category-of-elements presentation of a bisimplicial arrow or its subspace exhaustion in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "Arrow.*Presentable|isCardinalPresentable.*Arrow|arrow.*filtered",
+   "sub": "Mathlib/CategoryTheory",
+   "results": "{\"t\": \"2026-10-17T05:23:12Z\", \"tool\": \"grep\", \"query\": \"Arrow.*Presentable|isCardinalPresentable.*Arrow|arrow.*filtered\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "inconclusive: subdirectory was mistakenly prefixed by Mathlib/; the tool searched a nonexistent directory. Do not infer absence from these zero hits; corrected CategoryTheory/Presentable search is recorded below."
+  },
+  {
+   "tool": "grep",
+   "query": "CategoryOfElements|functorToRepresentables|isCardinalPresentable",
+   "sub": "Mathlib/CategoryTheory",
+   "results": "{\"t\": \"2026-10-17T05:23:11Z\", \"tool\": \"grep\", \"query\": \"CategoryOfElements|functorToRepresentables|isCardinalPresentable\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "inconclusive: subdirectory was mistakenly prefixed by Mathlib/; the tool searched a nonexistent directory. Do not infer absence from these zero hits; corrected CategoryTheory/Presentable search is recorded below."
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded presheaf category of elements representables presentable regular cardinal",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T05:23:12Z\", \"tool\": \"leansearch\", \"query\": \"bounded presheaf category of elements representables presentable regular cardinal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalLocallyPresentable.mk\", \"CategoryTheory.IsLocallyPresentable.exists_cardinal\", \"CategoryTheory.isPresentable_of_isCardinalPresentable\", \"CategoryTheory.IsCardinalLocallyPresentable\", \"CategoryTheory.isCardinalPresentable_of_le\", \"CategoryTheory.Presheaf.instIsCardinalLocallyPresentableFunctorOppositeOfHasPullbacks\", \"CategoryTheory.IsLocallyPresentable.mk\", \"CategoryTheory.IsCardinalLocallyPresentable.of_le\"], \"digest\": \"969cc35b2a4d53d4\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the whole item: the returned results supply generic presentability, limits, or colimit tools; the bounded elements-category calculation and filtered-subspace exhaustion must still be proved."
+  },
+  {
+   "tool": "loogle",
+   "query": "Arrow, IsCardinalPresentable, filtered colimit",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T05:23:12Z\", \"tool\": \"loogle\", \"query\": \"Arrow, IsCardinalPresentable, filtered colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Arrow'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the whole item: the returned results supply generic presentability, limits, or colimit tools; the bounded elements-category calculation and filtered-subspace exhaustion must still be proved."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CategoryOfElements, CategoryTheory.Presheaf.functorToRepresentables, IsCardinalPresentable",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T05:23:12Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.CategoryOfElements, CategoryTheory.Presheaf.functorToRepresentables, IsCardinalPresentable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.CategoryOfElements'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the whole item: the returned results supply generic presentability, limits, or colimit tools; the bounded elements-category calculation and filtered-subspace exhaustion must still be proved."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom functor of a bounded arrow preserves cardinal filtered colimits when source and target do",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T05:23:12Z\", \"tool\": \"leansearch\", \"query\": \"Hom functor of a bounded arrow preserves cardinal filtered colimits when source and target do\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.preservesColimitsOfShape_of_isCardinalAccessible\", \"CategoryTheory.Functor.preservesColimitsOfShape_of_isCardinalAccessible_of_essentiallySmall\", \"CategoryTheory.Functor.IsCardinalAccessible.preservesColimitOfShape\", \"CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits\", \"CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimits\", \"CategoryTheory.Functor.IsCardinalAccessible.mk\", \"preservesFilteredColimits_coyoneda\", \"CategoryTheory.Limits.comp_preservesFilteredColimits\"], \"digest\": \"7b8004c7a6e1756a\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the whole item: the returned results supply generic presentability, limits, or colimit tools; the bounded elements-category calculation and filtered-subspace exhaustion must still be proved."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a presheaf on a small category whose underlying set has cardinality below a regular cardinal, the category of elements is small and the presheaf is a colimit of representables whose Hom functors preserve filtered colimits",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T05:23:13Z\", \"tool\": \"leanfinder\", \"query\": \"For a presheaf on a small category whose underlying set has cardinality below a regular cardinal, the category of elements is small and the presheaf is a colimit of representables whose Hom functors preserve filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeTypeObjUliftYonedaOfHasColimitsOfSize\", \"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeFreeYonedaOfHasColimitsOfSize\", \"CategoryTheory.Limits.isIndObject_of_isFiltered_of_finallySmall\", \"CategoryTheory.Presheaf.instIsCardinalLocallyPresentableFunctorOppositeOfHasPullbacks\", \"CategoryTheory.IsCardinalPresentable\", \"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"CategoryTheory.isCardinalPresentable_iff\", \"CategoryTheory.isCardinalPresentable\"], \"digest\": \"a8597eca9a284b61\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the whole item: the returned results supply generic presentability, limits, or colimit tools; the bounded elements-category calculation and filtered-subspace exhaustion must still be proved."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arrow A to B in a category, if A and B are cardinal presentable then the arrow is cardinal presentable in the arrow category",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T05:23:14Z\", \"tool\": \"leanfinder\", \"query\": \"For an arrow A to B in a category, if A and B are cardinal presentable then the arrow is cardinal presentable in the arrow category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"CategoryTheory.ObjectProperty.ColimitOfShape.isCardinalPresentable\", \"CategoryTheory.isCardinalPresentable_of_isColimit\", \"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"CategoryTheory.isCardinalPresentable_of_isColimit'\", \"CategoryTheory.isClosedUnderColimitsOfShape_isCardinalPresentable\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.isCardinalPresentable\"], \"digest\": \"467c163d96d8463b\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the whole item: the returned results supply generic presentability, limits, or colimit tools; the bounded elements-category calculation and filtered-subspace exhaustion must still be proved."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presheaf on a small category with fewer than gamma elements is gamma-presentable for regular gamma larger than the category morphisms",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T05:36:22Z\", \"tool\": \"leanfinder\", \"query\": \"A presheaf on a small category with fewer than gamma elements is gamma-presentable for regular gamma larger than the category morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeTypeObjUliftYonedaOfHasColimitsOfSize\", \"CategoryTheory.Presheaf.instIsCardinalLocallyPresentableFunctorOppositeOfHasPullbacks\", \"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeFreeYonedaOfHasColimitsOfSize\", \"CategoryTheory.isCardinalPresentable\", \"CategoryTheory.ObjectProperty.ColimitOfShape.isCardinalPresentable\", \"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"CategoryTheory.IsCardinalPresentable\", \"CategoryTheory.isCardinalPresentable_iff\"], \"digest\": \"04beb0413fbc6967\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the whole item: the returned results supply generic presentability, limits, or colimit tools; the bounded elements-category calculation and filtered-subspace exhaustion must still be proved."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeFreeYonedaOfHasColimitsOfSize",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T05:36:22Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeFreeYonedaOfHasColimitsOfSize\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeFreeYonedaOfHasColimitsOfSize\"], \"digest\": \"b1053ce98d4de3d3\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the whole item: the returned results supply generic presentability, limits, or colimit tools; the bounded elements-category calculation and filtered-subspace exhaustion must still be proved."
+  },
+  {
+   "tool": "grep",
+   "query": "instIsCardinalPresentableFunctorOppositeFreeYoneda|CategoryOfElements",
+   "sub": "Mathlib/CategoryTheory/Presentable",
+   "results": "{\"t\": \"2026-10-17T05:36:22Z\", \"tool\": \"grep\", \"query\": \"instIsCardinalPresentableFunctorOppositeFreeYoneda|CategoryOfElements\", \"sub\": \"Mathlib/CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "inconclusive: subdirectory was mistakenly prefixed by Mathlib/; the tool searched a nonexistent directory. Do not infer absence from these zero hits; corrected CategoryTheory/Presentable search is recorded below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arrow between gamma-presentable objects is gamma-presentable in the arrow category when gamma-filtered colimits commute with finite limits in sets",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T05:36:25Z\", \"tool\": \"leanfinder\", \"query\": \"An arrow between gamma-presentable objects is gamma-presentable in the arrow category when gamma-filtered colimits commute with finite limits in sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isClosedUnderColimitsOfShape_isCardinalPresentable\", \"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"CategoryTheory.isCardinalPresentable_of_isColimit\", \"CategoryTheory.ObjectProperty.ColimitOfShape.isCardinalPresentable\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.MorphismProperty.isFinitelyPresentable\", \"CategoryTheory.isCardinalPresentable_of_isColimit'\", \"CategoryTheory.IsFinitelyAccessibleCategory.instIsFilteredCostructuredArrowFullSubcategoryIsFinitelyPresentableι\"], \"digest\": \"96dc8b215bdebdb2\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the whole item: the returned results supply generic presentability, limits, or colimit tools; the bounded elements-category calculation and filtered-subspace exhaustion must still be proved."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Arrow, IsCardinalPresentable",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T05:36:25Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Arrow, IsCardinalPresentable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsCardinalPresentable'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the whole item: the returned results supply generic presentability, limits, or colimit tools; the bounded elements-category calculation and filtered-subspace exhaustion must still be proved."
+  },
+  {
+   "tool": "grep",
+   "query": "Arrow.*presentable|isCardinalPresentable.*arrow|arrow.*presentable",
+   "sub": "Mathlib/CategoryTheory/Presentable",
+   "results": "{\"t\": \"2026-10-17T05:36:25Z\", \"tool\": \"grep\", \"query\": \"Arrow.*presentable|isCardinalPresentable.*arrow|arrow.*presentable\", \"sub\": \"Mathlib/CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "inconclusive: subdirectory was mistakenly prefixed by Mathlib/; the tool searched a nonexistent directory. Do not infer absence from these zero hits; corrected CategoryTheory/Presentable search is recorded below."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom in the arrow category is a finite limit of endpoint Hom sets and preserves filtered colimits",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T05:36:26Z\", \"tool\": \"leansearch\", \"query\": \"Hom in the arrow category is a finite limit of endpoint Hom sets and preserves filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimits\", \"CategoryTheory.Arrow.hasLimitsOfShape\", \"CategoryTheory.Arrow.hasColimits\", \"CategoryTheory.Arrow.hasLimits\", \"CategoryTheory.Arrow.hasColimitsOfShape\", \"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits_of_types\", \"CategoryTheory.instSmallArrowOfLocallySmall\", \"CategoryTheory.Arrow.mk_hom\"], \"digest\": \"0dc0a74ef469255b\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the whole item: the returned results supply generic presentability, limits, or colimit tools; the bounded elements-category calculation and filtered-subspace exhaustion must still be proved."
+  },
+  {
+   "tool": "grep",
+   "query": "isCardinalAccessible_of_isLimit|IsCardinalPresentable",
+   "sub": "CategoryTheory/Presentable",
+   "results": "{\"t\": \"2026-10-17T05:39:34Z\", \"tool\": \"grep\", \"query\": \"isCardinalAccessible_of_isLimit|IsCardinalPresentable\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\"], \"digest\": \"44f89acc15501250\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match for the whole item: the returned results supply generic presentability, limits, or colimit tools; the bounded elements-category calculation and filtered-subspace exhaustion must still be proved."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isCardinalAccessible_of_isLimit",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T05:39:35Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.isCardinalAccessible_of_isLimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isCardinalAccessible_of_isLimit\"], \"digest\": \"3de6ba41fe2f7a3f\"}",
+   "date": "2026-10-17",
+   "verdict": "match for the proof input already represented by lem-coef-accessible-set-functor-limits, not a match for this item; read Mathlib/CategoryTheory/Presentable/Limits.lean:158-168."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-bousfield-smith-bounded-generation",
@@ -85,7 +291,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Ancestor proof paragraph 2, derived coefficient adjunction before the displayed derived-limit calculation; auxiliary descendant Rezk Proposition 9.1 final-paragraph Bousfield–Smith bounded-subobject argument. The Rezk argument is not literally a paragraph of the ancestor blueprint.",
+   "place": "Proof paragraph 2, beginning For K in D^b_c(X,R), before the derived-limit display; auxiliary bounded-presheaf and filtered-subobject input to the inherited Rezk Proposition 9.1 / Bousfield--Smith descendant. Not a literal statement or proof in this ancestor.",
    "via": [
     "lem-coef-bousfield-smith-bounded-generation",
     "lem-coef-simplicial-local-bounded-lifting",
@@ -106,5 +312,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-space-small-subobjects",
+  "worker": "stage1",
+  "summary": "Proved bounded-arrow presentability by identifying arrows with diagrams on [1] x Delta^op x Delta^op, writing Hom as an explicit limit over a cardinally bounded category of elements, and applying the existing Mathlib leaf lem-coef-accessible-set-functor-limits. Proved smallness, cardinal filteredness, exhaustion, and the exact arrow-colimit cocone directly. No new nodes.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2, before the derived-limit display; the inherited Rezk/Bousfield--Smith descendant uses this bounded-presheaf and filtered-union input. This auxiliary assertion is not literally in the ancestor text.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-ef24514b9",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-ef24514b9 (reviewer sub-agent of L); spot-checked: I read the item statement and all 6 steps in full, plus the statements of the cited nodes def-weil-pbc-simplicial-set, def-weil-pbc-category-colimit and lem-coef-accessible-set-functor-limits (a Mathlib leaf in the same unit). I checked the leaf against Mathlib/CategoryTheory/Presentable/Limits.lean:158-168 (isCardinalAccessible_of_isLimit): it needs a regular cardinal, HasCardinalLT (Arrow K) and accessible components, and nothing about the domain category, which matches the node. The statement is unchanged, true and not weakened. Bounded arrows are gamma-presentable with no mono hypothesis; I_gamma(Y) is small and gamma-filtered (the empty subspace covers the empty diagram); and the canonical cocone (X cap B -> B) -> (X -> Y) is a colimit. Step 1 identifies the arrow category with Fun([1]xDelta^op xDelta^op, Set) and computes colimits pointwise; it is elementary. Step 2 bounds the category of elements: |Mor E| < gamma by regularity, since the target is F(a)x, and the empty case is covered. Step 3 writes Hom(F,-) as the limit over E of evaluations, with explicit inverse maps and naturality, then applies the leaf with C = Fun(D,Set) and K = E; every hypothesis is met. Step 4 checks smallness via a powerset, unions of fewer than gamma subspaces, and that an upper bound is a cocone in a poset. Step 5 uses the subspace generated by one simplex, of size at most |Mor(Delta x Delta)|, and shows exhaustion of Y and of X. Step 6 checks the arrow-colimit universal property directly: well-defined via B cup B', natural, a commuting square, and unique by exhaustion. There are no new nodes. The rg duplicate search over dag/nodes (presentab, accessible, category of elements, filtered union) found only general presentability facts and the model-level users, none stating this item. The only citer is lem-coef-bousfield-smith-bounded-generation, the statement gives it exactly what it uses, and there is no cycle. The dependencies are definitions plus a same-unit Mathlib leaf, so there is no route issue and no tool_uses. There is no SGA and no doubled backslashes. The blueprint ancestry is labelled honestly as agent-formulated (proof_origin agent). Base change and coefficient category do not apply: this is a combinatorial lemma, not a target. No fixes."
  }
 }
