@@ -90,7 +90,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
   [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ V] [HasCompactification π]
   {k : Type u} [Field k] (aS : S ⟶ Spec (.of k)) [IsSeparated aS] [LocallyOfFiniteType aS]
 
-omit [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] in
+omit [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ V] in
 /-- `Rz^! ω_π ≅ R(π ∘ z)^! Λ_S = Λ_S`. -/
 lemma nonempty_iso_rightDerivedUpperShriek_dualizingComplex :
     Nonempty ((R(E.zero)^![ModuleCat.{u + 1} Λ]).obj
