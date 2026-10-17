@@ -11,9 +11,104 @@
   "def-coef-symmetric-operadic-family",
   "lem-coef-active-operad-cocartesian-concatenation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The active concatenation construction of [lem-coef-active-operad-cocartesian-concatenation] identifies the source of the product cone with the concatenation of the source diagrams, and identifies its apex with the concatenation of the apices. The same construction supplies all associativity, symmetry and unit coherences and shows that applying q gives the corresponding concatenated base cone. Thus the displayed diagonal cone is an active coherent cocone, including nullary blocks.",
+   "uses": [
+    "lem-coef-active-operad-cocartesian-concatenation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.8 and the active-concatenation conventions of Definition 3.1.1.2; printed pp.321-322."
+   }
+  },
+  {
+   "text": "It is enough first to treat two factors. Fix a context Z in E^\\otimes and a color W. Apply the q-colimiting square for c_1 with context v_2\\oplus Z. Its upper-left corner is the active mapping space from v_1\\oplus v_2\\oplus Z to W, and its upper-right corner is the coherent transformation space for the J_1-diagram D_1\\oplus v_2\\oplus Z. The bottom row is the identical construction after q, with the specified base cocone. This is exactly the first relative universal square in the definition of an operadically q-colimiting cocone.",
+   "uses": [
+    "def-coef-symmetric-operadic-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.8, first binary reduction; Definition 3.1.1.2 and Remark 3.1.1.5."
+   }
+  },
+  {
+   "text": "For each vertex j_1 of J_1, the q-colimiting square of [def-coef-symmetric-operadic-family] for c_2 with context D_1(j_1)\\oplus Z (moved to the right of c_2 by the symmetry coherence of [lem-coef-active-operad-cocartesian-concatenation]) and color W is a homotopy pullback; its upper row is composition with D_1(j_1)\\oplus c_2\\oplus Z from \\operatorname{Map}(D_1(j_1)\\oplus v_2\\oplus Z,W) to \\operatorname{Map}_{\\operatorname{Fun}(J_2,E^\\otimes_{\\mathrm{act}})}(D_1(j_1)\\oplus D_2\\oplus Z,\\Delta_{J_2}W), and its lower row is the same after q. Apply [lem-coef-pointwise-constant-target-square-assembly] with r=q_{\\mathrm{act}}:E^\\otimes_{\\mathrm{act}}\\to O^\\otimes_{\\mathrm{act}}, B=J_1, K=J_2, a=D_1\\oplus v_2\\oplus Z, f=D_1\\oplus D_2\\oplus Z on J_1\\times J_2 and \\alpha=1_{D_1}\\oplus c_2\\oplus1_Z, the coherent transformation obtained by applying the coherent functor \\oplus of [lem-coef-active-operad-cocartesian-concatenation] to D_1, the cocone c_2 and Z, transposed along the exponential equivalence \\operatorname{Fun}(J_1,\\operatorname{Fun}(J_2,E))\\simeq\\operatorname{Fun}(J_1\\times J_2,E) of [lem-coef-cat-infinity-colimits-cartesian-closure]; q_{\\mathrm{act}} carries it to the corresponding base transformation because q preserves concatenation. Its restriction at j_1 is the cocone above, so the hypothesis of that lemma is the pointwise statement just obtained. It gives a homotopy-pullback square from \\operatorname{Map}_{\\operatorname{Fun}(J_1,E^\\otimes_{\\mathrm{act}})}(D_1\\oplus v_2\\oplus Z,\\Delta_{J_1}W) to \\operatorname{Map}_{\\operatorname{Fun}(J_1\\times J_2,E^\\otimes_{\\mathrm{act}})}(D_1\\oplus D_2\\oplus Z,\\Delta_{J_1\\times J_2}W) over the corresponding base square. This includes empty J_1 or J_2.",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-coef-active-operad-cocartesian-concatenation",
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "lem-coef-pointwise-constant-target-square-assembly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.8, binary Fubini step; Definition 3.1.1.2 mapping-space test; pointwise assembly as in HTT Proposition 5.1.2.2."
+   }
+  },
+  {
+   "text": "Paste the square of step 3 with the square of step 2. The specified cocone homotopies are compatible because both are obtained by restricting the same active concatenation simplex. The homotopy-pullback pasting criterion [lem-coef-infinity-homotopy-pullback-pasting] therefore makes the outer rectangle a homotopy pullback. This outer rectangle is precisely the q-colimiting square for the diagonal cone on J_1\\times J_2 with apex v_1\\oplus v_2, for the arbitrary context Z and color W.",
+   "uses": [
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-cat-infinity-colimits-cartesian-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.8, binary case; the path-space formulation uses the specified homotopies of Definition 3.1.1.2."
+   }
+  },
+  {
+   "text": "Induct on the finite set I. The induction step applies the binary result to the already concatenated first block and the next factor. The associativity and permutation coherences of active concatenation identify every parenthesization and ordering with the canonical finite concatenation, while the exponential equivalence identifies the iterated indexing shape with $\\prod_{i\\in I}J_i$. Hence the diagonal cone for any finite I is operadically q-colimiting. The induction starts at one factor and uses the empty tuple unit for I=\\varnothing.",
+   "uses": [
+    "lem-coef-active-operad-cocartesian-concatenation",
+    "lem-coef-cat-infinity-colimits-cartesian-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.8, finite induction and Remarks 3.1.1.5-3.1.1.6."
+   }
+  },
+  {
+   "text": "If a cocone or one of its diagrams is changed by a coherent equivalence, precomposition and postcomposition with that equivalence and a chosen coherent inverse induce inverse equivalences on the coherent functor quasicategories and on all four mapping spaces in the q-test; the two specified inverse homotopies carry the path coordinate to homotopic inverse path coordinates. For an equivalence of indexing quasicategories u:J'\\to J, precomposition u^* has quasi-inverse given by any chosen inverse equivalence, and the unit and counit homotopies induce inverse equivalences on both coherent transformation spaces by the exponential equivalence of [lem-coef-cat-infinity-colimits-cartesian-closure]. These equivalences commute with restriction along the cocone and with q, so they identify the two homotopy-pullback comparisons. Thus the homotopy-pullback condition, and therefore the conclusion, is invariant under the two coherent equivalences stated in the item.",
+   "uses": [
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "lem-coef-infinity-homotopy-pullback-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 3.1.1.2 and Remark 3.1.1.5, invariance of the mapping-space criterion."
+   }
+  },
+  {
+   "text": "No separate argument is needed for empty shapes: steps 2-5 never assume J_i nonempty, and for empty J_i every mapping space out of a diagram indexed by an empty shape (or by a product containing it) is the one-point space, as is \\operatorname{Fun}(\\varnothing,-)=\\Delta^0. Thus if J_1=\\varnothing the outer square of step 4 is the square of step 2, which says that q induces an equivalence on \\operatorname{Map}(v_1\\oplus v_2\\oplus Z,W); and if J_2=\\varnothing the square of step 3 has contractible right-hand corners and is a homotopy pullback by the pointwise case of step 3. For I=\\varnothing the product shape is \\Delta^0, the diagonal cone is the identity cocone on the empty tuple, its source diagram is the empty tuple, and with context Z the q-test square has both horizontal maps the identity of \\operatorname{Map}(Z,W) and of \\operatorname{Map}(qZ,qW), so it is a homotopy pullback. This proves the empty-shape and empty-family clauses without adding a colimit-existence or tensor-preservation hypothesis.",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-coef-active-operad-cocartesian-concatenation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.8 and Remark 3.1.1.5, empty indexing and nullary cases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-symmetric-operadic-family",
+  "lem-coef-active-operad-cocartesian-concatenation",
+  "lem-coef-cat-infinity-colimits-cartesian-closure",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-pointwise-constant-target-square-assembly"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Proposition 3.1.1.8, printed pp.321-322; Definitions 3.1.1.2 and Remark 3.1.1.5. The binary Fubini argument and finite induction are written out here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,7 +147,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-operadic-left-horn-filling",
@@ -79,5 +174,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-colimit-finite-amalgamation",
+  "worker": "stage1",
+  "summary": "Split the relative symmetric operadic finite-amalgamation statement into the active-concatenation construction, a binary mapping-space Fubini argument, homotopy-pullback pasting, finite induction, and coherent-equivalence invariance. No new nodes were needed: the existing active-concatenation, Cat-infinity cartesian-closure, and homotopy-pullback-pasting statements supply the non-elementary ingredients. Empty shapes and the empty family are handled explicitly. Reviewer (Q24 maintainer reader, 2026-10-17): step 3 now assembles the pointwise q-squares through the new statement-only node lem-coef-pointwise-constant-target-square-assembly instead of an unsupported 'degreewise limits preserve path pullbacks' remark; step 7 rewritten (an empty J_i has no cone component; the empty cases follow from steps 2-5).",
+  "blueprint": "Realizes the inherited prop-coef-integral-exceptional-adjoint proof paragraph 2 prerequisite at HA Proposition 3.1.1.8: finite concatenation of relative operadic colimit cocones and its mapping-space invariance."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-a83639178",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-a83639178 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the 4 cited statements (def-coef-symmetric-operadic-family, lem-coef-active-operad-cocartesian-concatenation, lem-coef-cat-infinity-colimits-cartesian-closure, lem-coef-infinity-homotopy-pullback-pasting), the base conventions, the unit and the parent's use of the item. HA 3.1.1.8 is not in literature/, so the source could not be checked at its place; it is recorded as WANTED and proof_origin=agent is right. The statement is unchanged and true. I tested it on ordinary symmetric monoidal categories over Comm, on q=id, on J_1 empty and on I empty. It is not a duplicate of the nonsymmetric absolute node lem-coef-operadic-concatenation-colimits, and the route stays in unit sk-prop-sf-biduality-general. Fault 1, step 3 (error C1/E5): it put the pointwise c_2 squares together over J_1 by claiming 'degreewise limits preserve path pullbacks', which does not hold for strict limits, and no cited node states the needed fact. The nearest existing nodes (relative-cocone-parameters, relative-cone-constant-test) test against every object, but the operadic condition tests only colors. Fix: added the statement-only node lem-coef-pointwise-constant-target-square-assembly (pointwise homotopy-pullback squares for a constant target give the square over B×K; source HTT 5.1.2.2/5.1.2.3; Mathlib grep found no match, the other search services are unavailable here) and rewrote step 3 to apply it with r=q_act, B=J_1, K=J_2, alpha=1+c_2+1. Fault 2, step 7: the text said an empty-shape cocone has 'the unique nullary active map' as its component, which is wrong. Rewritten: the empty cases follow from steps 2-5, and I=empty gives the identity square. Steps 1, 2, 4, 5 and 6 check out. The report says created.item was changed to Q24, but the file correctly keeps Q120/left-horn-filling, so I made no change there. No drops, no tool_uses.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
