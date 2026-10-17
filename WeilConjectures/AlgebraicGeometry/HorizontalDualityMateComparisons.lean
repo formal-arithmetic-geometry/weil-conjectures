@@ -67,7 +67,7 @@ def horizontalMateAmbientId (X : Scheme.{u}) : derivedPullback (𝟙 X) ≅ 𝟭
 def horizontalMateComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     horizontalMatePullback g ⋙ horizontalMatePullback f ≅
       horizontalMatePullback (f ≫ g) :=
-  Functor.fullyFaithfulCancelRight (schemeDerivedQCohProperty Z).ι
+  Functor.fullyFaithfulCancelRight (schemeDerivedQCohProperty X).ι
     (Functor.isoWhiskerLeft (schemeDerivedQCohProperty Z).ι
       (horizontalMateAmbientComp f g))
 
