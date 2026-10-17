@@ -175,7 +175,7 @@ neighbourhood of `x` iff every compatible diagram at `x` lifts along each surjec
 of Artinian local rings whose kernel has module length one. The consequences
 that the kernel is a residue-field module and is square zero are not extra hypotheses.
 
-Proof, following the five steps of the DAG node:
+Proof, following the five steps of the blueprint node:
 1. Choose affine neighbourhoods `V = Spec R` of `f(x)` and `U = Spec A` of `x`
    with `f(U)` contained in `V`. Local Noetherianity (pqf-def-locnoeth) makes `R`
    Noetherian, and local finite type (def-weil-finite-type-morphism) makes `A`

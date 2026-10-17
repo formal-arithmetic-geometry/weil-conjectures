@@ -10,6 +10,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap.Comp
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
@@ -257,12 +258,17 @@ cohomological dimension on torsion sheaves and commutes with direct sums; on geo
 by unbounded proper base change, it becomes `RΓ(Z_ȳ, M) ⊗ᴸ N ≅ RΓ(Z_ȳ, M ⊗ᴸ N)` for a complex
 `N` of `Λ`-modules, which holds for `N = Λ` and passes to all `N` through these colimits.
 
+This is the case of a finite, hence additively torsion, ring of
+`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_isProper`
+(`lem-kun-0f0g`), proved there at the geometric points of `Y` through the compatibility of the
+projection map with base change and unbounded proper base change.
+
 The blueprint node is stated for `g` of finite type between Noetherian schemes, with the tensor
 factors in the other order; neither hypothesis is used by the argument above. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_of_finite [Finite Λ] {Z : Scheme.{u}}
     (g : Z ⟶ Y) [IsProper g] :
     IsIso (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) g) :=
-  sorry
+  isIso_rightDerivedLowerStarProjectionMap_of_isProper Λ isAddTorsion_of_finite g
 
 /-- **The projection formula at finite coefficients, unbounded.** For a finite coefficient
 ring `Λ` and `f : X ⟶ Y` admitting a compactification, the projection map

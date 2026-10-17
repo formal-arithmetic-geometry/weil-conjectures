@@ -181,7 +181,7 @@ theorem exists_stalk_cardinality_bound_of_constructible
     (by simpa using hi)
   obtain ⟨c, hc, -⟩ := etaleSetInverseImageStalkGerm X (S.domain i)
     (S.immersion i) G _ t
-  have hfin := (hS i).2 _ t
+  have hfin := (hS i).finite_sheafFiber _ t
   have hfinG : Finite (((pointSmallEtale (t ≫ S.immersion i)).sheafFiber).obj G) :=
     @Finite.of_equiv _ _ hfin (Equiv.ofBijective c hc)
   have hcardG : Nat.card (((pointSmallEtale (t ≫ S.immersion i)).sheafFiber).obj G) ≤

@@ -35,7 +35,7 @@ base change identify its source with R[Z]/(Z^p-i(a)), where i(a) = a tensor 1.
 Tensor associativity identifies the target L tensor_M R with L tensor_K F.
 Compose these algebra equivalences and forget their algebra structure.
 This argument also holds when F is zero: both sides are zero rings. -/
-theorem FormalFiberDegreePQuotient
+theorem nonempty_quotient_X_pow_sub_C_ringEquiv_tensorProduct
     (K L : Type u) [Field K] [Field L] [Algebra K L]
     (M : IntermediateField K L)
     (F : Type u) [CommRing F] [Algebra K F]

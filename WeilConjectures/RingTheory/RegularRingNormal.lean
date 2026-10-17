@@ -45,7 +45,7 @@ Proof:
 theorem isNormalRing (R : Type u) [CommRing R] [IsRegularRing R] :
     ∀ (p : Ideal R) [p.IsPrime],
       IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p) := by
-  apply (Ring.serreCriterionNormal R).mpr
+  apply (Ring.forall_isIntegrallyClosed_localization_iff_isSerreR_and_isSerreS R).mpr
   constructor
   · intro p hp
     exact inferInstance

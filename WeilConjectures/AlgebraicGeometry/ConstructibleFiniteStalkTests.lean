@@ -134,7 +134,8 @@ theorem exists_finite_stalk_tests_of_constructible
   refine ⟨P, ?_, ?_⟩
   · intro z
     obtain ⟨i, _, hi⟩ := Finset.mem_image.mp z.property
-    have hfin := (hS i).2.2 _ (s i)
+    have hfin := ((ConcreteCategory.isFinitelyGenerated_iff_finite _).mp
+      ((hS i).2.2.isFinitelyGenerated_sheafFiber _ (s i)))
     let e₁ := (pointSmallEtale (s i)).sheafFiber.mapIso ((ea i).app F)
     let e₂ := ((pointSmallEtale (s i)).sheafFiberCompIso
       (CategoryTheory.forget AddCommGrpCat.{u + 1})).app

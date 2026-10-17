@@ -135,7 +135,7 @@ theorem canonical_localized_approximation_limit
         (contractedPrime_map B κ q' i j f) x)
   let g : ∀ i, Nq.obj i →+ LocalizedModule q'.asIdeal.primeCompl M' := fun i ↦
     primeModuleMap _ _ (κ.app i).hom rfl (ν.app i).hom (hmodel.2.2.2.2.2 i)
-  obtain ⟨eN, heN⟩ := localizedModuleColimitComparison B D Nq κ ν
+  obtain ⟨eN, heN⟩ := exists_colimit_addEquiv_localizedModule B D Nq κ ν
     hmodel.2.1 hmodel.2.2.1 hs hmodel.2.2.2.2.2 q'
     (fun _ ↦ AddEquiv.refl _) (by
       intro i j f x s
