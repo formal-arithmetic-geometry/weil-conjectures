@@ -29,7 +29,9 @@
   "lem-coef-coherent-nerve-comparison",
   "lem-coef-marked-point-cartesian-model",
   "lem-coef-marked-relative-cartesian-model",
-  "lem-coef-simplicial-model-coherent-diagrams"
+  "lem-coef-simplicial-model-coherent-diagrams",
+  "lem-coef-unmarked-straightening-quillen",
+  "lem-coef-marked-cone-external-product"
  ],
  "proof": [
   {
@@ -340,5 +342,49 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MarkedConeStraighteningQuillen",
+  "declaration": "SSet.MarkedConeStraightening.marked_cone_straightening_quillen",
+  "declarations": [
+   "SSet.MarkedConeStraightening.cone",
+   "SSet.MarkedConeStraightening.indexConeMap",
+   "SSet.MarkedConeStraightening.indexConeMap_objects",
+   "SSet.MarkedConeStraightening.indexValueMap",
+   "SSet.MarkedConeStraightening.Diagrams",
+   "SSet.MarkedConeStraightening.eval",
+   "SSet.MarkedConeStraightening.projectiveWeak",
+   "SSet.MarkedConeStraightening.projectiveFib",
+   "SSet.MarkedConeStraightening.projectiveCof",
+   "SSet.MarkedConeStraightening.IsProjectivelyFibrant",
+   "SSet.MarkedConeStraightening.diagramAction",
+   "SSet.MarkedConeStraightening.ConeAdjunction",
+   "SSet.MarkedConeStraightening.PushPullAdjunction",
+   "SSet.MarkedConeStraightening.BaseChange",
+   "SSet.MarkedConeStraightening.IndexExtension",
+   "SSet.MarkedConeStraightening.IndexExtension.right",
+   "SSet.MarkedConeStraightening.IndexChange",
+   "SSet.MarkedConeStraightening.toPointSlice",
+   "SSet.MarkedConeStraightening.indexValueMap_identity",
+   "SSet.MarkedConeStraightening.indexValueMap_composition",
+   "SSet.MarkedConeStraightening.Statement",
+   "SSet.MarkedConeStraightening.marked_cone_straightening_quillen"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/MarkedConeStraighteningQuillen.lean",
+  "statement": "theorem marked_cone_straightening_quillen (P : Marked.CartesianModelStatement.{u}) : letI := P.enrichment Nonempty (Statement P P.mapping_iso)",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already-landed canonical unmarked pushout and the generic marked cone values; their two owning nodes are added to stmt_deps. The opposite of an enriched index functor is the existing SSet.SimplicialRightFibration.enrichedOp (lem-coef-simplicial-right-fibration-presentation), not a second definition. The actual pushout map normalizes index comparison, base comparison fixes cone simplices, and right comparisons are adjunction mates. The derived unit is expressed for every weak equivalence from straightening to a projectively fibrant diagram.",
+  "fixed_by": "NT-stage2-cc-8d2be6dbf"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d2be6dbf",
+  "group": "Q29",
+  "result": "fix",
+  "note": "Statement correct against node and HTT 3.2.0.1/3.2.1.2/3.2.1.4/3.2.1.14: cone pushout and markedValue marking (all g in Cop(c,phi x)_1, degenerate included, action-closed), actions/maps pinned to valueAction/valueMap, St -| Un, left Quillen under IsLocallyKan with projective classes fixed, derived unit for every weak eq r: St X -> F with F fibrant under DK, ordinary counit for fibrant F, every_object_cofibrant, base and index substitution with identity-on-cone formula, pushout-map transpose and conjugate mates (orientations checked), base and index coherence, point comparison; P installs only the landed point-model enrichment; package form matches landed unmarked_straightening_quillen and is determined; edge cases and universes fine; 4 named sorries with proofs; docstrings present; report sections present; stmt_deps additions landed and acyclic. FIX (H4): delivered oppositeFunctor duplicated landed SSet.SimplicialRightFibration.enrichedOp (SimplicialRightFibrationPresentation.lean:61-70); fixes/MarkedConeStraighteningQuillen.lean imports and uses enrichedOp and removes the duplicate, main statement unchanged; lean-record override updates the note; report fix section appended. nt_compile per-file: delivered and fixed modules both clean."
  }
 }

@@ -231,5 +231,23 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-f83803679 (reviewer sub-agent of L); spot-checked: I read the item in full: its unchanged statement, five steps, dependencies, blueprint fields and 13 search records. I also read the full statements of the three cited nodes: lem-coef-reedy-model-structure, lem-coef-brown-split-factorizations (also checked against the pinned Mathlib BrownLemma.lean:48-64) and def-weil-pbc-category-colimit (Stacks 002F, label categories-definition-colimit, confirmed in tags/tags). The statement is true and not weakened: it is Hovey 5.2.6 (colim is left adjoint to const, so colim is left Quillen) followed by Ken Brown 1.1.12. Small cases checked: the empty category, the one-object category, discrete J, and the walking span used by the parent. Step 1 derives the adjunction from the colimit universal property. Step 2 moves lifting squares across the adjunction and uses the lifting-class description of both factorization systems; this is Hovey 1.3.4 written out. Step 3 shows the colimit of the initial diagram is initial and adds that isomorphisms are cofibrations and cofibrations compose. Step 4 checks the hypotheses of the Brown node in M^J and applies its statement, not its proof. Step 5 finishes by two-out-of-three. proof_deps equals the union of the step uses, and there is no cycle. The general candidate lem-coef-model-infinity-derived-adjunction cannot be cited here, because its dependencies already reach this item, so citing it would close a cycle. No other duplicate was found. The delivery creates no new nodes. Both cited statements are in the item's unit (sk-prop-sf-biduality-general), so no tool_uses are needed. No SGA source is used. Hovey is not archived, so the report rightly files a WANTED line and sets proof_origin.by to agent. One harmless report inaccuracy: it lists citations.json and searches.jsonl, which are not in the delivered commit. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ReedyColimitComparison",
+  "file": "lean/Sheaf/CategoryTheory/ReedyColimitComparison.lean",
+  "declaration": "HomotopicalAlgebra.reedy_colimit_comparison",
+  "statement": "theorem reedy_colimit_comparison (M : Type u) [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] [HasLimitsOfSize.{w, w} M] [HasColimitsOfSize.{w, w} M] [(cofibrations M).HasFunctorialFactorization (trivialFibrations M)] [(trivialCofibrations M).HasFunctorialFactorization (fibrations M)] (J : Type w) [SmallCategory J] (N P : MorphismProperty J) [N.IsMultiplicative] [P.IsMultiplicative] (r : ReedyStructure N P ℕ) [diagramModel : ModelCategory (J ⥤ M)] (hReedy : diagramModel = Classical.choose (Reedy.model_structure N P r) ∧ weakEquivalences (J ⥤ M) = (weakEquivalences M).functorCategory J ∧ cofibrations (J ⥤ M) = Reedy.leftClass P (cofibrations M) ∧ fibrations (J ⥤ M) = Reedy.rightClass N (fibrations M)) (hconstF : ∀ {X Y : M} (f : X ⟶ Y), Fibration f → Fibration ((Functor.const J).map f)) (hconstTF : ∀ {X Y : M} (f : X ⟶ Y), Fibration f → WeakEquivalence f → Fibration ((Functor.const J).map f) ∧ WeakEquivalence ((Functor.const J).map f)) : (∀ {X Y : J ⥤ M} (f : X ⟶ Y), (∀ j : J, WeakEquivalence (f.app j)) → IsCofibrant X → IsCofibrant Y → WeakEquivalence (colimMap f)) ∧ (∀ X : J ⥤ M, IsCofibrant X → IsCofibrant (colimit X))",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eaaef9266",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: M's instances equal the variable block at ReedyModelStructure.lean:555-559; ReedyStructure N P uses Mathlib's orientation (N lowers, P raises), so leftClass P and rightClass N are right; hReedy pins the instance to Classical.choose (Reedy.model_structure N P r) and its other conjuncts are redundant, not stronger; a /tmp instantiation test shows hReedy can be met. hconstF/hconstTF state preservation of fibrations and trivial fibrations; the two conclusions use objectwise weak equivalences, IsCofibrant and Mathlib's colimit (the def-weil-pbc-category-colimit record). Empty J, degree 0 and universes u/v/w are covered with no added assumptions. Proof is sorry only; docstrings carry the source and blueprint tag; lean.statement is verbatim; only the node's lean field changed; report has Worker report and Second reading by Q12. nt_compile --json with side overlay: rc 0, no errors or warnings. Minor: the report mentions a searches.jsonl that is not in the commit; search records are in the node."
  }
 }
