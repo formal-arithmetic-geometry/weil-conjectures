@@ -25,7 +25,7 @@
  ],
  "proof": [
   {
-   "text": "Construct Y by applying the functor to all entries of the canonical ExactCouple. Map each exact ShortComplex using Mathlib ShortComplex.Exact.map. The initial object equalities and structure-map squares are identities.",
+   "text": "Construct the mapped exact couple componentwise. Map each exact short complex using ShortComplex.Exact.map and exact_iff_image_eq_kernel. Its object equalities are reflexive and its three structure-map squares are identities.",
    "uses": [
     "def-sp-exact-couple",
     "lem-sp-exact-functor-preserves-homology"
@@ -37,7 +37,7 @@
    }
   },
   {
-   "text": "Construct imageIso using PreservesImage.iso and the image functor on an isomorphism of arrows. Construct cyclesIso using PreservesKernel.iso and kernel.mapIso; construct quotientIso using PreservesCokernel.iso and cokernel.mapIso. Their defining equations imply the derived alpha, f, and g squares by cancellation of image inclusions and quotient/image epimorphisms. Iterate this explicit comparison recursively. Recursively compose the derived D inclusions; prove their monicity and the comparison inclusion square by induction. The differential square follows from the f and g squares; the next-page equation is quotientIso_projection.",
+   "text": "Construct imageIso by PreservesImage.iso and im.mapIso on an arrow isomorphism, cyclesIso by PreservesKernel.iso and kernel.mapIso, and quotientIso by PreservesCokernel.iso and cokernel.mapIso. The inclusion and quotient equations prove all three derived-map squares by mono and epi cancellation. The incoming differential square uses transport_square for its integer indices. Iterate Comparison.next to comparisonPages. Recursively compose pageInclusion, prove monicity and its comparison square by induction. Composition of the f and g squares proves differential naturality; Comparison.ei_π supplies the next-page equation.",
    "uses": [
     "def-sp-exact-couple",
     "lem-sp-exact-functor-preserves-homology"
@@ -49,13 +49,14 @@
    }
   },
   {
-   "text": "Map zero objects to obtain the same half-plane bounds. Apply halfPlaneConvergence separately to obtain normalized alpha colimits, limiting subobjects, top and finite filtrations, and convergence. Construct the colimit comparison from the two normalizations and hD(0,n). Integer induction proves the cocone equation: positive steps use the cocone equation, negative steps cancel invertible alpha transitions (their kernels and cokernels vanish by exactness and negative-index E vanishing). Construct filtration-step isomorphisms by image preservation and graded-piece isomorphisms by cokernel preservation.",
+   "text": "Map zero objects to retain the half-plane bounds. Apply halfPlaneConvergence to both couples for their normalized alpha colimits, limiting subobjects, finite filtrations and convergence. Define normalizedColimitIso through the normalizations at D(0,n). Prove the cocone comparison by integer induction: positive steps use the cocone equations, negative steps cancel alphaDiagonal, which is invertible by alpha_iso_left from the half-plane diagonal-colimits proof. Obtain filtrationIso through imageSubobjectIso and imageIso; cancellation of the target step inclusion proves its compatibility with successive step inclusions. Apply quotientIso to obtain gradedIso and its projection equation.",
    "uses": [
     "thm-sp-half-plane-convergence",
     "def-sp-convergence",
     "def-sp-filtration",
     "def-sp-exact-couple",
-    "lem-sp-exact-functor-preserves-homology"
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-sp-half-plane-diagonal-colimits"
    ],
    "elementary": false,
    "source": {
@@ -64,7 +65,7 @@
    }
   },
   {
-   "text": "Apply the proved lem-sp-exact-functor-half-plane to the finite-page and filtration comparisons. Its proof identifies stationary cycle and boundary towers with their limits, constructs the infinite-page comparison through the canonical weak-convergence graded isomorphisms, and supplies all explicit large-page lambda/t/psi witnesses and their naturality. Independently prove compatibility of adjacent stable-page isomorphisms: their projection equation makes the kernel inclusion epi; map that epimorphism and cancel it, using the kernel and next-page quotient squares.",
+   "text": "Use the proved exactFunctor_halfPlane with the constructed finite-page, normalized cocone, filtration-step and graded-piece comparisons to obtain the infinite-page and explicit large-page statements. For adjacent stable pages take their canonical halfPlaneConvergence witnesses. The projection equation and the stable-page isomorphism make the kernel inclusion epi. Cancel its image under the functor; the kernel-inclusion and next-page-projection equations then prove the required stable-page naturality.",
    "uses": [
     "lem-sp-exact-functor-half-plane",
     "thm-sp-half-plane-convergence"
@@ -82,12 +83,13 @@
   "thm-sp-half-plane-convergence",
   "def-sp-convergence",
   "def-sp-filtration",
+  "lem-sp-half-plane-diagonal-colimits",
   "lem-sp-exact-functor-half-plane"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "C4 complete explicit functorial image/kernel/cokernel construction and iteration, normalized colimit/filtration comparison, and proved limiting/large-page comparison in lem-sp-exact-functor-half-plane. No new or inherited nonstandard axioms; print axioms returns only propext, Classical.choice and Quot.sound."
+  "place": "D2 stage 3, 2026-10-18: complete explicit mapped-couple and derived-page constructions, integer-inductive normalized-colimit transport, image and quotient filtration comparisons, and reuse of exactFunctor_halfPlane. The existing theorem signature is unchanged; no sorry is added."
  },
  "mathlib_searches": [
   {
@@ -169,7 +171,6 @@
   "summary": "Split from the definitions (Stacks 12.21, Tags 011Q/011R/011S/011T/0AMJ, and 12.7.2, Tag 010N) in six steps: Phi C is exact; one derived step commutes with Phi (each derived structure map characterized by an epi/mono identity that Phi preserves); induction on r for all iterated couples, using lem-sp-couple-morphism for the map induced by an isomorphism of couples; half-plane hypotheses and E_infinity; the image filtration; the E_infinity = gr isomorphism. Statement made precise: Part 2 now says (id, phi_r) is an isomorphism of exact couples Phi(C_r) -> (Phi C)_r with Phi(D_r) = (Phi D)_r as subobjects; Part 3 defines the isomorphism psi_r: gr^p A^n -> E_r^{p,q} explicitly (it is the one built in Step 2 of the proof of thm-sp-half-plane-convergence, which its statement does not fix) and states phi_r o Phi(psi_r) = psi_r^Phi o kappa. Added def-sp-convergence to stmt_deps (E_infinity). Two new nodes: lem-sp-derived-couple-exact (Stacks 011R, unsplit) and lem-sp-exact-functor-preserves-homology (Mathlib leaf, Functor.preservesHomologyOfExact), both taken from the stopped earlier worker's files and re-searched under the three-kind rule; clause (c) on inverse images dropped from the latter (unused)."
  },
  "tool_uses": [
-  "lem-sp-couple-morphism",
   "thm-sp-half-plane-convergence"
  ],
  "reviewed": {
@@ -203,16 +204,9 @@
   "reviewer": "COMPILER",
   "group": "D2",
   "result": "pass",
-  "landing": "20261017T163410-L-3003725",
+  "landing": "20261017T165545-L-3619435",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.BigradedExactCouple.filtration_comparison",
-   "CategoryTheory.BigradedExactCouple.mapped"
-  ],
-  "sorry_after": [
-   "CategoryTheory.BigradedExactCouple.exactFunctor_couple"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_before_upsync_e47": {
   "module": "Sheaf.CategoryTheory.ExactFunctorCouple",
