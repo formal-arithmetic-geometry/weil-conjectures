@@ -18,9 +18,114 @@
   "def-pc-derived-pullback",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take the basis $\\mathcal B$ of affine opens $U=\\operatorname{Spec}A$ mapping into affine opens $V=\\operatorname{Spec}R$ of $S$, choosing the latter inside a Noetherian affine cover. Refine by smaller such opens when necessary. The affine-comparison lemma gives a flat finitely presented map $R\\to A$ of Noetherian rings and an algebraic object $M$ for $K|_U$ which is pseudo-coherent, has finite $R$-Tor amplitude, and satisfies $R\\operatorname{Hom}_B(A,M_1)\\cong A$ for $B=A\\otimes_RA$. Its class $\\xi_U$ is a basis of the rank-one $A$-module $\\operatorname{Hom}_{D(B)}(A,M_1)$. Indeed, taking degree zero in the multiplication isomorphism identifies that Hom group with $A$, sending $1$ to $\\xi_U$. Apply the same comparison to any second supplied pair.",
+   "uses": [
+    "lem-trf-affine-relative-dualizing-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2U, lemma-relative-dualizing-complex-algebra; first paragraph of 0E2W."
+   }
+  },
+  {
+   "text": "For this ring map put $C=\\varphi^!R=R\\operatorname{Hom}_{P}(A,P)[n]$, where $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow A$. The algebraic relative-perfection theorem gives pseudo-coherence, finite $R$-Tor amplitude and the scalar isomorphism $A\\to R\\operatorname{Hom}_A(C,C)$. Set $p_i:A\\to B$ to be the coprojections and $\\delta:B\\to A$ multiplication. Flat base change in the shriek calculus, for $R\\to R'=A$ and input $R[0]\\in D^+(R)$, gives $C\\otimes_{A,p_1}^{\\mathbf L}B\\cong p_2^!A$. Composition for $A\\xrightarrow{p_2}B\\xrightarrow{\\delta}A$, whose composite is the identity, gives $\\delta^!p_2^!A\\cong A$. The surjective-map coinduction clause identifies its underlying $B$-object with $R\\operatorname{Hom}_B(A,C\\otimes_{A,p_1}^{\\mathbf L}B)$. All these rings are Noetherian finite-type $R$-algebras: apply the Noetherian-algebra theorem to $P,A,B$. Thus $C$ meets every hypothesis of the algebraic isomorphism lemma, without assuming the kernel of $P\\to A$ is a regular sequence.",
+   "uses": [
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-trf-algebraic-shriek-relative-perfect",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0BZW (lemma-relative-dualizing-algebraic) and 0E2E (lemma-relative-dualizing-noetherian), proof via flat base change and composition."
+   }
+  },
+  {
+   "text": "The algebraic isomorphism lemma applied to $M,C$ supplies an $A$-linear isomorphism $M\\cong C$. Conjugation by it identifies the scalar maps into their derived endomorphism objects, since an $A$-linear isomorphism commutes with multiplication by every $a\\in A$. Consequently $A\\to R\\operatorname{Hom}_A(M,M)$ is an isomorphism. The affine pseudo-coherent RHom comparison identifies its sheafification with $\\mathcal O_U\\to R\\mathcal Hom_U(K|_U,K|_U)$: its first argument has a bounded-above finite-free representative, and its second is bounded below because finite $R$-Tor amplitude applied to $R$ gives bounded cohomology. Derived internal Hom commutes with open restriction, so the restriction to every $U\\in\\mathcal B$ of the global scalar map is an isomorphism. The cone has zero cohomology sheaves on this covering, hence zero cohomology sheaves globally. This proves the first assertion.",
+   "uses": [
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-algebraic-shriek-relative-perfect",
+    "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+    "lem-sc-derived-internal-hom-restrict-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2V, lemma-relative-dualizing-RHom, via the Noetherian algebraic argument of 0E2G; affine RHom comparison 0A6H."
+   }
+  },
+  {
+   "text": "Now let $(K,\\xi),(L,\\eta)$ be supplied pairs. On $U\\in\\mathcal B$ the algebraic isomorphism lemma and affine derived equivalence supply an isomorphism $\\beta_U:K|_U\\to L|_U$. Its action sends the generator $\\xi_U$ to another generator of the $A$-module $\\operatorname{Hom}_{D(B)}(A,L_1)$. Hence $\\beta_U(\\xi_U)=u\\eta_U$ for a unique unit $u\\in A^\\times$. Define $\\alpha_U=u^{-1}\\beta_U$; its derived pullback sends $\\xi_U$ to $\\eta_U$. Any automorphism of $K|_U$ is a scalar unit: by step 3 its derived endomorphism object is $A$, so its degree-zero endomorphism ring is $A$. If it fixes $\\xi_U$, multiplication on the free rank-one class module forces that unit to be $1$. Thus $\\alpha_U$ is the unique class-preserving isomorphism. The same scalar computation gives $\\operatorname{Hom}(K|_U,K|_U[i])=0$ for every $i<0$.",
+   "uses": [
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-trf-affine-relative-dualizing-comparison",
+    "lem-trf-algebraic-shriek-relative-perfect",
+    "lem-sc-affine-pseudo-coherent-rhom-qcoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2W, lemma-uniqueness-relative-dualizing, first two paragraphs; affine normalization and scalar automorphisms."
+   }
+  },
+  {
+   "text": "For an inclusion $W\\subset U$ of basis elements, $\\alpha_U|_W$ and $\\alpha_W$ preserve the restricted class, so they agree by the affine uniqueness of step 4. Use the BBD descent theorem with local objects $K_U=K|_U$ and their canonical restriction isomorphisms. Its negative self-extension hypothesis is exactly the last conclusion of step 4. The global object $K$ with identity local identifications is one solution, while $L$ with identifications $\\alpha_U^{-1}:L|_U\\to K_U$ is another; the just-proved inclusion compatibility verifies its descent condition. The uniqueness clause of that theorem gives an isomorphism $\\alpha:K\\to L$ whose restrictions are $\\alpha_U$. This uses a basis, not a finite cover; intersections are only required to be unions of smaller basis elements. No quasi-compactness or affine-intersection assumption is made.",
+   "uses": [
+    "lem-trf-derived-basis-bbd-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2W, final paragraph; Cohomology Tags 0D67 and 0D6C, uniqueness clause of BBD descent."
+   }
+  },
+  {
+   "text": "The multiplication isomorphism belonging to $(L,\\eta)$, together with the derived-Hom/global-sections identity, identifies $\\operatorname{Hom}_{D(\\mathcal O_Y)}(\\Delta_*\\mathcal O_X,Lp_1^*L)$ with $H^0(Y,\\Delta_*\\mathcal O_X)=\\Gamma(X,\\mathcal O_X)$, sending $\\eta$ to $1$. Thus $(Lp_1^*\\alpha)\\xi$ is $v\\eta$ for one global function $v$. Its restriction along every $U$ is $\\eta_U$, by the construction of $\\alpha_U$, so $v|_U=1$ for all $U$. The sheaf axiom gives $v=1$, proving class preservation globally. To check uniqueness, let $\\alpha'$ be any other class-preserving isomorphism. Its restriction to every basis open equals $\\alpha_U$ by step 4. In the BBD system of step 5 both $\\alpha$ and $\\alpha'$ respect all local identifications, so its unique-isomorphism clause gives $\\alpha'=\\alpha$. The global-sections computation also rules out an undetected class difference away from the diagonal, whose derived Hom object is supported on $\\Delta(X)$.",
+   "uses": [
+    "lem-pur-rhom-global-sections",
+    "lem-trf-derived-basis-bbd-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2W, normalization and last sentence; Cohomology derived-Hom/global-sections identity."
+   }
+  },
+  {
+   "text": "Finally let $j:U\\hookrightarrow X$ be any open, including the empty open. Pseudo-coherence and the local relative Tor bounds remain true upon restricting their local representatives. For the square of diagonals, the inverse image of $U\\times_SU$ under $\\Delta$ is $U$, so restriction of $\\Delta_*\\mathcal O_X$ is $\\Delta_{U*}\\mathcal O_U$ directly from the definition of closed-immersion direct image. Derived pullback and derived internal Hom commute with this open restriction, so the restricted class still satisfies the multiplication isomorphism. The morphism $f|_U$ is separated, flat and locally finitely presented, as is checked on the same charts (its diagonal is the restricted closed immersion). The base $S$ is unchanged. Repeating steps 1--6 for the supplied restricted pairs proves both assertions on $U$. For $U=\\varnothing$ all module sheaves and all objects and maps are zero, so the conclusions hold as well.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-sc-derived-internal-hom-restrict-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E2T--0E2W and the open-restriction observation in 0E2X."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affine-relative-dualizing-comparison",
+  "lem-trf-algebraic-shriek-calculus",
+  "lem-trf-algebraic-shriek-relative-perfect",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-trf-algebraic-relative-dualizing-isomorphism",
+  "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-trf-derived-basis-bbd-descent",
+  "lem-pur-rhom-global-sections",
+  "lem-pc-affine-derived-pullback-tensor-tilde"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E2U--0E2W, affine reduction, normalization and descent. The scalar calculation uses dualizing.tex 0BZW and 0E2E, compared with the given object by 0E2D; BBD descent uses cohomology.tex 0D6C."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +154,38 @@
    "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/AlgebraicGeometry",
    "date": "2026-10-18",
    "verdict": "no match: hits concern ordinary module duality, flatness, ordinary sheaf gluing, or categorical adjunctions; none states this derived coherent-duality theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|semidualizing|relativeDualizing",
+   "results": "1 hits; top=['Mathlib/Algebra/Homology/HomotopyFiber.lean']; note=; digest=064930e5919f47f9; directory=Mathlib/Algebra",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary module-sheaf adjunctions, rigid categorical duals and flat scheme isomorphisms do not express coherent relative dualizing pairs or their diagonal normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique class preserving isomorphism between relative dualizing pairs for a flat morphism of locally Noetherian schemes",
+   "results": "8 hits; top=['AlgebraicGeometry.Flat.isIso_of_surjective_of_mono', 'AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp', 'AlgebraicGeometry.Flat.mk', 'RingHom.Flat.respectsIso', 'AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom', 'AlgebraicGeometry.instIsAffineHomOfIsIsoScheme', 'AlgebraicGeometry.universallyClosed_respectsIso', 'AlgebraicGeometry.Flat.instMorphismRestrict']; note=; digest=3bf8a48650292d17",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary module-sheaf adjunctions, rigid categorical duals and flat scheme isomorphisms do not express coherent relative dualizing pairs or their diagonal normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rigidity of coherent relative dualizing pairs on schemes: scalar derived endomorphisms and unique isomorphism preserving a chosen diagonal class",
+   "results": "8 hits; top=['CategoryTheory.RigidCategory', 'AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom', 'FGModuleCat.rightRigidCategory', 'CategoryTheory.rightDualIso', 'AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc', 'CategoryTheory.leftDualIso', 'CategoryTheory.leftDualIso_id', 'FGModuleCat.exactPairing']; note=; digest=2319efccb219afc1",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary module-sheaf adjunctions, rigid categorical duals and flat scheme isomorphisms do not express coherent relative dualizing pairs or their diagonal normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.Iso",
+   "results": "12 hits; top=['DerivedCategory.singleFunctorIsoCompQ', 'DerivedCategory.singleFunctorsPostcompQIso', 'DerivedCategory.singleFunctorIsoCompQh', 'DerivedCategory.singleFunctorsPostcompQhIso', 'DerivedCategory.quotientCompQhIso', 'DerivedCategory.mem_distTriang_iff', 'DerivedCategory.homologyFunctorFactors', 'DerivedCategory.homologyFunctorFactorsh']; note=; digest=455dc679adc513df",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary module-sheaf adjunctions, rigid categorical duals and flat scheme isomorphisms do not express coherent relative dualizing pairs or their diagonal normalization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-relative-duality-polynomial-chart",
@@ -81,5 +214,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-relative-dualizing-pair-rigidity",
+  "worker": "stage1",
+  "summary": "Read Stacks 0E2T--0E2W and algebraic 0E2C--0E2E, 0BZW. Reduced supplied pairs to affine modules, constructed a comparison polynomial dualizing object using existing shriek calculus, derived scalar endomorphisms by algebraic unnormalized isomorphism, normalized local isomorphisms by the diagonal generator, and applied existing BBD uniqueness. Added only affine comparison and algebraic unnormalized isomorphism as statement-only nodes. No statement change and no existence theorem for scheme pairs is used.",
+  "blueprint": "Realizes the coherent relative-duality rigidity input of the polynomial-chart construction in the semistable modification branch below lem-trf-local-term-locality, retaining its recorded ancestry. The argument is entirely coherent algebraic duality and does not use an etale six-functor dualizing object.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic Hilbert basis theorem for the Noetherian hypotheses of algebraic shriek calculus."
+   },
+   {
+    "node": "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+    "why": "Generic affine sheaf/module derived-Hom comparison; the trace-formula unit supplies no replacement."
+   },
+   {
+    "node": "lem-sc-derived-internal-hom-restrict-open",
+    "why": "Generic localization of derived internal Hom to opens, needed to identify the scalar map and restricted pairs."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic affine derived equivalence, used only to transfer a module isomorphism to sheaves."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic identification of derived morphisms with zeroth hypercohomology of internal Hom, used to test equality of diagonal classes."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic open-restriction compatibility of derived pullback, used to retain a pair on an open."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pur-rhom-global-sections",
+  "lem-pc-affine-derived-pullback-tensor-tilde"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q109-9d6a312b7",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q109-9d6a312b7 (reviewer sub-agent of L); spot-checked: Read all three nodes and checked Stacks 0E2T–0E2W, 0E2C–0E2E, 0BZW, shriek base change, affine RHom, and BBD descent. Projection conventions, hypotheses, normalization, and edge cases check out. No duplicate or restated split found; no repairs needed. Detailed findings and frozen-history limitations are recorded in review.md."
  }
 }

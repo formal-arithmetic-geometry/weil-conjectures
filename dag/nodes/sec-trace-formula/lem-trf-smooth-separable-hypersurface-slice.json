@@ -19,9 +19,167 @@
   "def-trf-effective-cartier-center",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $k=\\kappa(s)$ and $L=\\kappa(x)$. By [lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension], choose affine opens $W=\\operatorname{Spec}A\\subseteq X$ and $V=\\operatorname{Spec}B\\subseteq S$ about $x,s$, with $f(W)\\subseteq V$, such that $\\Omega_{A/B}$ is free of rank $d$. The map $W\\to S$ is smooth by [lem-pc-open-immersion-smooth-composition]. It is smooth as a map to $V$ as well: local finite presentation uses the same target affine neighbourhoods, and a lifting square over $V$ is a lifting square over $S$, whose lift is still over $V$ because $V\\to S$ is a monomorphism. Now [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] makes $B\\to A$ smooth. In particular $A$ is finitely presented over $B$. Set $C=k\\otimes_B A$. By [lem-weil-pbc-fibre-product-affine-spectra] and [lem-weil-pbc-open-fibre-product], $W_s=\\operatorname{Spec}C$ is the open of $X_s$ above $W$. Let $\\mathfrak q$ be its point corresponding to $x$, and put $R=C_{\\mathfrak q}$, $\\mathfrak m=\\mathfrak qR$. By [lem-weil-pbc-affine-open-stalk-localization], $R=\\mathcal O_{X_s,x}$. Its residue field is $L$: [lem-sbc-scheme-fibre-stalk-quotient] identifies $R$ with $\\mathcal O_{X,x}/\\mathfrak m_s\\mathcal O_{X,x}$, and this ideal is inside $\\mathfrak m_x$, so passage to the residue field gives $\\mathcal O_{X,x}/\\mathfrak m_x$. The algebra $C$ is finite type over $k$, since the images of any finite algebra-generating set of $A/B$ generate $C/k$.",
+   "uses": [
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "def-sbc-smooth-morphisms",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sbc-scheme-fibre-stalk-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 057C and 057D, affine/fibre local-ring setup; Morphisms Tags 02G1 and 01UT; Schemes Tag 0HA1"
+   }
+  },
+  {
+   "text": "Let $E=\\Omega_{R/k}\\otimes_R L$. Differential base change [lem-weil-pbc-kahler-differentials-base-change] gives $\\Omega_{C/k}\\cong C\\otimes_A\\Omega_{A/B}$, and differential localization [lem-weil-pbc-kahler-differentials-localization] then gives\n$$E\\cong\\Omega_{C/k}\\otimes_C L\\cong\\Omega_{A/B}\\otimes_A L\\cong L^d.$$\nFor the first identification $(\\omega/t)\\otimes\\lambda$ maps to $\\omega\\otimes\\bar t^{-1}\\lambda$, with inverse $\\omega\\otimes\\lambda\\mapsto(\\omega/1)\\otimes\\lambda$; the middle identification cancels the $C$ tensor factor by $(c\\otimes\\omega)\\otimes\\lambda\\mapsto\\omega\\otimes\\bar c\\lambda$. The last identification tensors the basis from step 1. Thus $E\\ne0$, since $d\\geq1$ and $L$ is a field. Moreover these identifications carry differentials to differentials. By [def-sc-relative-differential-sheaf] and [lem-weil-pbc-spec-tilde-stalk-localization], they also identify $E$ with $\\Omega^1_{X/S,x}\\otimes_{\\mathcal O_{X,x}}L$, carrying the relative differential of a germ to the differential of its fibre image.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "def-sc-relative-differential-sheaf",
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057D, identification of fibre differentials; Algebra Tags 00RV and 00RT; Morphisms Tag 01UT"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-jacobi-zariski-differential-maps] to $k\\to R\\to L=R/\\mathfrak m$. It gives an exact sequence\n$$\\mathfrak m/\\mathfrak m^2\\xrightarrow{\\delta}E\\longrightarrow\\Omega_{L/k}\\longrightarrow0,\\qquad \\delta(\\bar h\\bmod\\mathfrak m^2)=d\\bar h\\otimes1.$$\nThe extension $L/k$ is finite separable by hypothesis, so $\\Omega_{L/k}=0$ by [lem-trf-separable-field-differentials-vanish]. Hence $\\delta$ is surjective. Choose a nonzero vector of $E$ and a preimage under $\\delta$, represented by $\\bar h\\in\\mathfrak m$. Then $d\\bar h\\otimes1\\ne0$. By the surjection of [lem-sbc-scheme-fibre-stalk-quotient], lift $\\bar h$ to $h\\in\\mathcal O_{X,x}$. The quotient has maximal ideal $\\mathfrak m_x/\\mathfrak m_s\\mathcal O_{X,x}$, so $h\\in\\mathfrak m_x$. Step 2 identifies $dh\\otimes1$ with the chosen nonzero vector. This is the needed local equation, obtained from the full conormal exact sequence rather than merely from vanishing of $\\Omega_{L/k}$.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-differential-maps",
+    "lem-trf-separable-field-differentials-vanish",
+    "lem-sbc-scheme-fibre-stalk-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057D, exact conormal sequence and lifting of the germ; Tag 057G, positive-dimensional case using finite-separable differential vanishing; Algebra Tags 00RU and 090W"
+   }
+  },
+  {
+   "text": "By smooth base change [lem-weil-pbc-smooth-ring-map-base-change-composition](1), $C$ is smooth over $k$. Thus $R=C_{\\mathfrak q}$ is regular local by [lem-weil-pbc-smooth-over-field-regular-local], and is an integral domain by [lem-sc-regular-local-domain]. Since $d\\bar h\\otimes1\\ne0$, we have $\\bar h\\ne0$; multiplication by $\\bar h$ on $R$ is injective. Use [lem-weil-pbc-affine-open-stalk-localization] on $W$ to write $h=b/t$ with $b,t\\in A$ and $t(x)\\ne0$. By [lem-weil-pbc-affine-open-section-vanishing-prime], $U_0=D_W(t)$ is affine and $a=b/t\\in\\Gamma(U_0,\\mathcal O)$ has germ $h$. Let $Z=V(a)\\subseteq U_0$. It contains $x$ because $h\\in\\mathfrak m_x$. As the zero scheme of the section $a$ of the trivial rank-one module, it is locally principal and closed by [lem-pc-zero-scheme-properties]. Its fibre equation has germ $\\bar h$ at $x$.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-smooth-over-field-regular-local",
+    "lem-sc-regular-local-domain",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-pc-zero-scheme-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057C, the equation is fibre-regular; Algebra Tags 00TT and 00NP; extension of the germ as in Tag 056Y, first paragraph"
+   }
+  },
+  {
+   "text": "Write $C_0=C[1/\\bar t]$, so $(U_0)_s=\\operatorname{Spec}C_0$, and let $a_s\\in C_0$ be the fibre image of $a$. The affine fibre-product formula of step 1 identifies $Z_s$ with $\\operatorname{Spec}(C_0/(a_s))$: the tensor isomorphism sends $\\lambda\\otimes(c\\bmod a)$ to the class of $\\lambda\\otimes c$, with inverse induced by $\\lambda\\otimes c\\mapsto\\lambda\\otimes(c\\bmod a)$. The ring $C_0$ is finite type over $k$ (adjoin an inverse of $\\bar t$), hence Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]; a field is Noetherian since its only ideals are $0$ and the whole field. Let $I=\\operatorname{Ann}_{C_0}(a_s)$ and choose finite generators $u_1,\\ldots,u_n$. Each $(u_i)_x$ is zero because $a_s$ is a nonzerodivisor in $R$. The localization description [lem-weil-pbc-affine-open-stalk-localization] supplies $v_i$ outside the prime of $x$ with $v_iu_i=0$. Put $v=\\prod_i v_i$ (or $1$ if $n=0$). In $(C_0)_v$ multiplication by $a_s$ is injective: if $a_s c/v^r=0$, some $v^N a_s c=0$, so $v^Nc\\in I$, and $vI=0$. Thus $Z_s$ is an effective Cartier divisor near $x$, by the locally-one-nonzerodivisor definition [def-trf-effective-cartier-center].",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-trf-effective-cartier-center"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057C and Divisors Tag 062Y, verification of the fibre-Cartier hypothesis; finite-annihilator argument as Algebra Tag 00FN"
+   }
+  },
+  {
+   "text": "The open restriction $U_0\\to S$ is smooth by [lem-pc-open-immersion-smooth-composition], hence flat and locally of finite presentation by [lem-pc-smooth-flat]. The closed subscheme $Z\\subseteq U_0$ is locally principal, and step 5 proves that $Z_s$ is effective Cartier near $x$. All hypotheses of [lem-pc-recd-fibre-cartier-local] therefore hold. It gives an ambient open neighbourhood $U_1\\subseteq U_0$ of $x$ such that $Z\\cap U_1$ is a relative effective Cartier divisor. By [def-pc-relative-effective-cartier], it is in particular an effective Cartier divisor on $U_1$.",
+   "uses": [
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-pc-smooth-flat",
+    "lem-pc-recd-fibre-cartier-local",
+    "def-pc-relative-effective-cartier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057C, use of the fibre-regular equation to obtain a Cartier cut; Divisors Tag 062Y(3), lemma-fibre-Cartier"
+   }
+  },
+  {
+   "text": "Apply [lem-zl-hypersurface-nonzero-relative-differential] to the smooth morphism $U_0\\to S$, the trivial invertible module $\\mathcal O_{U_0}$, its section $a$, and $Z=V(a)$. The module is invertible by its single global basis $1$ [def-sc-invertible-module]. Its relative differential at $x$ is the nonzero vector from steps 2--3, since $a_x=h$. The cited lemma gives an open neighbourhood $N$ of $x$ in $Z$ on which $Z\\to S$ is smooth. By the subspace topology of the closed immersion [def-weil-closed-immersion], choose an open $O\\subseteq U_0$ with $Z\\cap O=N$. Inside the open $O\\cap U_1$ choose a principal open $U=D_{U_0}(g)$ containing $x$, using [lem-weil-pbc-spec-localization-away-basic-open]; it is affine by [lem-weil-pbc-affine-open-section-vanishing-prime]. Set $D=Z\\cap U$. The Cartier property on $U_1$ restricts to $U$: the same local nonzerodivisor generators work on smaller opens [def-trf-effective-cartier-center]. The morphism $D\\to S$ is smooth because $D$ is an open subscheme of $N$, by [lem-pc-open-immersion-smooth-composition]. Its closed immersion into $U$ is the principal quotient construction, and it contains $x$.",
+   "uses": [
+    "lem-zl-hypersurface-nonzero-relative-differential",
+    "def-sc-invertible-module",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-trf-effective-cartier-center",
+    "lem-pc-open-immersion-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057C, nonzero-differential smoothness and final shrinking; the existing nonzero-relative-differential hypersurface criterion, with its explicit standard smooth proof"
+   }
+  },
+  {
+   "text": "It remains to compute the dimension of this particular cut. The affine fibre description in step 5 and the final principal localization give\n$$\\mathcal O_{D_s,x}\\cong R/(\\bar h).$$\nIndeed localizing $C_0/(a_s)$ at the point of $x$ sends $(c\\bmod a_s)/(u\\bmod a_s)$ to the class of $c/u$ in $R/(\\bar h)$; lifting numerator and denominator defines the inverse. Further restriction to the open $U$ changes neither local ring. The ring $R$ is Noetherian local, and $\\bar h\\in\\mathfrak m$ is a nonzerodivisor by steps 3--4. Therefore [lem-weil-pbc-dimension-quotient-nonzerodivisor] gives $\\dim(R/(\\bar h))+1=\\dim R$. Its residue field is still $L$, since $(R/(\\bar h))/(\\mathfrak m/(\\bar h))=R/\\mathfrak m$. Apply [lem-kun-dimension-formula] to the finite-type $k$-schemes $(U_0)_s=\\operatorname{Spec}C_0$ and $Z_s=\\operatorname{Spec}(C_0/(a_s))$. The extension $L/k$ is finite algebraic, so its transcendence degree is zero: an algebraically independent nonempty set would contain a transcendental element. Thus their dimensions at $x$ are respectively $\\dim R$ and $\\dim(R/(\\bar h))$. The open-fibre identification [lem-weil-pbc-open-fibre-product] and [lem-weil-pbc-dimension-at-point-open-subspace] identify these with $\\dim_x(X_s)=d$ and $\\dim_x(D_s)$. Consequently $\\dim_x(D_s)+1=d$, hence $\\dim_x(D_s)=d-1$. The point in $D$ above $x$ is unique because a closed immersion is injective on underlying points [def-weil-closed-immersion].",
+   "uses": [
+    "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "lem-kun-dimension-formula",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057C, displayed dimension drop; Tag 057G, positive-dimensional induction step; Algebra Tag 00KW and Morphisms Tag 02FX"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "def-sbc-smooth-morphisms",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "def-sc-relative-differential-sheaf",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "lem-trf-separable-field-differentials-vanish",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-pc-zero-scheme-properties",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-trf-effective-cartier-center",
+  "lem-pc-smooth-flat",
+  "lem-pc-recd-fibre-cartier-local",
+  "def-pc-relative-effective-cartier",
+  "lem-zl-hypersurface-nonzero-relative-differential",
+  "def-sc-invertible-module",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-kun-dimension-formula",
+  "lem-weil-pbc-dimension-at-point-open-subspace"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 057C (lemma-slice-smooth-given-element), 057D (lemma-slice-smooth-once), and 057G (lemma-slice-smooth), positive-dimensional paragraph; Cartier neighbourhood obtained using the equivalent Divisors Tag 062Y(3) fibre-Cartier criterion rather than reproving 056Y."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +222,45 @@
    "results": "{\"t\": \"2026-10-17T20:56:12Z\", \"tool\": \"grep\", \"query\": \"smooth.*quotient|quotient.*smooth|smooth.*nonzero.*differential\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Quotient.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\"], \"digest\": \"dcac6a47732ae31c\"}; Hits read: smooth charts, freeness/rank of differentials and square-zero quotient lifting do not construct a smooth Cartier divisor through the prescribed point with the dimension drop.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "057F|057C|slice.smooth|smooth.*hypersurface|hypersurface.*smooth",
+   "results": "{\"t\": \"2026-10-17T21:12:11Z\", \"tool\": \"grep\", \"query\": \"057F|057C|slice.smooth|smooth.*hypersurface|hypersurface.*smooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned smooth chart and relative-dimension definitions in Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean and RingTheory/Smooth/StandardSmooth.lean. They do not construct a prescribed-point Cartier hypersurface. RingTheory/Smooth/Quotient.lean treats square-zero quotients, not this cut.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth hypersurface slice through a closed point with separable residue field and dimension drop",
+   "results": "{\"t\": \"2026-10-17T21:12:11Z\", \"tool\": \"leansearch\", \"query\": \"Smooth hypersurface slice through a closed point with separable residue field and dimension drop\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.mk\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\"], \"digest\": \"9d08fac3e5e42972\"}; Read the returned smooth chart and relative-dimension definitions in Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean and RingTheory/Smooth/StandardSmooth.lean. They do not construct a prescribed-point Cartier hypersurface. RingTheory/Smooth/Quotient.lean treats square-zero quotients, not this cut.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"Cartier\"",
+   "results": "{\"t\": \"2026-10-17T21:12:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"Smooth\\\", \\\"Cartier\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned smooth chart and relative-dimension definitions in Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean and RingTheory/Smooth/StandardSmooth.lean. They do not construct a prescribed-point Cartier hypersurface. RingTheory/Smooth/Quotient.lean treats square-zero quotients, not this cut.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism has a smooth effective Cartier hypersurface through a separable closed fibre point of positive dimension with fibre dimension one smaller",
+   "results": "{\"t\": \"2026-10-17T21:12:12Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth morphism has a smooth effective Cartier hypersurface through a separable closed fibre point of positive dimension with fibre dimension one smaller\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\"], \"digest\": \"e8c804b56ca41513\"}; Read the returned smooth chart and relative-dimension definitions in Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean and RingTheory/Smooth/StandardSmooth.lean. They do not construct a prescribed-point Cartier hypersurface. RingTheory/Smooth/Quotient.lean treats square-zero quotients, not this cut.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth family and a separable closed point in a positive dimensional fibre, choose one local equation giving a smooth Cartier divisor and reducing relative dimension by one",
+   "results": "{\"t\": \"2026-10-17T21:13:06Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth family and a separable closed point in a positive dimensional fibre, choose one local equation giving a smooth Cartier divisor and reducing relative dimension by one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmooth.relativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\"], \"digest\": \"0432e98a46f1431b\"}; Read the returned smooth chart and relative-dimension definitions in Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean and RingTheory/Smooth/StandardSmooth.lean. They do not construct a prescribed-point Cartier hypersurface. RingTheory/Smooth/Quotient.lean treats square-zero quotients, not this cut.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-smooth-point-etale-immersion",
@@ -95,5 +288,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-smooth-separable-hypersurface-slice",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Wrote eight steps selecting a nonzero differential by the conormal sequence and finite-separable vanishing, extending its fibre-regular germ, obtaining the Cartier cut with the existing relative Cartier criterion, applying the existing nonzero-differential hypersurface smoothness result, and computing the local-ring dimension drop. Every theorem input already exists in the DAG; no new nodes. Read the cited statements and retained the inherited Mathlib search records, with five fresh searches recorded in the local log.",
+  "blueprint": "The inherited historical auxiliary ancestry through lem-trf-smooth-point-etale-immersion and lem-trf-relative-completion-etale-approximation serves the 057G positive-dimensional smooth immersion slice. Steps 1--3 realize the choice of a nonzero fibre differential, steps 4--7 realize the one smooth Cartier cut, and step 8 its dimension drop. The current main-20261015 contracting-correspondence proof of lem-trf-local-term-locality is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "why": "The generic smooth differential rank formula provides a nonzero cotangent vector in positive fibre dimension. No unit-level step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "The affine smoothness comparison supplies the smooth affine coordinate algebra, not a different trace-formula route. No unit-level step is replaced."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "The generic fibre-stalk quotient identifies the correct residue field and lifts the chosen fibre germ. No unit-level step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-regular-local",
+    "why": "Regularity of a smooth fibre local ring makes its nonzero equation fibre-regular. No unit-level step is replaced."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "The generic regular-local-domain theorem is used only to infer that a nonzero fibre germ is a nonzerodivisor. No unit-level step is replaced."
+   },
+   {
+    "node": "lem-pc-zero-scheme-properties",
+    "why": "The generic local form of a zero scheme identifies the chosen principal closed subscheme. No unit-level step is replaced."
+   },
+   {
+    "node": "lem-pc-recd-fibre-cartier-local",
+    "why": "The generic fibre-Cartier criterion supplies the ambient Cartier neighbourhood over an arbitrary base. No unit-level step is replaced."
+   },
+   {
+    "node": "lem-zl-hypersurface-nonzero-relative-differential",
+    "why": "The generic local smooth hypersurface criterion gives smoothness for our chosen nonzero differential, not Bertini or another unit route. No unit-level step is replaced."
+   },
+   {
+    "node": "lem-kun-dimension-formula",
+    "why": "The generic finite-type dimension formula converts the local-ring quotient calculation to dimension at the fibre point. No unit-level step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-open-subspace",
+    "why": "Generic affine scheme or local algebra input to the Stacks slicing argument; this trace-formula unit has no alternative statement of the tool. No unit-level step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-sc-regular-local-domain",
+  "lem-pc-zero-scheme-properties",
+  "lem-pc-recd-fibre-cartier-local",
+  "lem-zl-hypersurface-nonzero-relative-differential",
+  "lem-kun-dimension-formula",
+  "lem-weil-pbc-dimension-at-point-open-subspace"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N1-09a71d7e5",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-09a71d7e5 (reviewer sub-agent of L); spot-checked: Read all eight proof steps, 38 cited-node statements, Stacks source passages, and unit/chapter route. The conormal choice, Cartier criterion, smoothness argument, and dimension drop are valid. No new nodes, cycles, long-step violations, or repairs. Accepted ten generic tool uses; details and pivot-list availability limitation are recorded in review.md."
  }
 }

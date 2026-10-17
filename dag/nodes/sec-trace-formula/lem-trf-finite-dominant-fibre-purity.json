@@ -2,7 +2,7 @@
  "id": "lem-trf-finite-dominant-fibre-purity",
  "kind": "statement",
  "title": "Purity of fibres under a finite dominant integral cover",
- "statement": "Let S be an integral Noetherian scheme [def-pc-integral-scheme; pqf-def-locnoeth]. Let C and D be integral schemes [def-pc-integral-scheme] of finite type over S [def-weil-finite-type-morphism], and let r:D\\to C be a finite dominant S-morphism [def-weil-finite-integral-morphism; def-weil-surjective-morphism]. Assume that there is an integer n\\geq0 such that every nonempty scheme-theoretic fibre C_s [def-pc-scheme-fibre] is pure of dimension n, meaning that every irreducible component [def-weil-irreducible-components] of C_s has topological Krull dimension n [def-kun-topological-krull-dimension]. Then every nonempty fibre D_s is pure of dimension n.",
+ "statement": "Let S be an integral Noetherian scheme [def-pc-integral-scheme; pqf-def-locnoeth]. Let C and D be integral schemes [def-pc-integral-scheme] of finite type over S [def-weil-finite-type-morphism], and let r:D\\to C be a finite dominant S-morphism [def-weil-finite-integral-morphism; def-sbc-normal-dominant-galois]. Assume that there is an integer n\\geq0 such that every nonempty scheme-theoretic fibre C_s [def-pc-scheme-fibre] is pure of dimension n, meaning that every irreducible component [def-weil-irreducible-components] of C_s has topological Krull dimension n [def-kun-topological-krull-dimension]. Then every nonempty fibre D_s is pure of dimension n.",
  "source": {
   "document": "literature/stacks-project/more-morphisms.tex",
   "place": "Dimension-of-fibres discussion using openness of the bounded-dimension locus (02FZ), together with Algebra Tags 00OK and 00OY for finite integral dimension preservation; the proof adds the standard going-up argument that a component of a fibre of a finite dominant integral map maps onto a component downstairs."
@@ -12,14 +12,117 @@
   "pqf-def-locnoeth",
   "def-weil-finite-type-morphism",
   "def-weil-finite-integral-morphism",
-  "def-weil-surjective-morphism",
+  "def-sbc-normal-dominant-galois",
   "def-pc-scheme-fibre",
   "def-weil-irreducible-components",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $f:D\\to S$ and $h:C\\to S$ for the structure morphisms. Finiteness makes $r$ closed, and dominance means that its image is dense; hence $r(D)=C$. For each $s\\in S$, the map $r_s:D_s\\to C_s$ is the base change of $r$ along $C_s\\to C$, so it is finite and surjective. The two fibres are of finite type over $\\kappa(s)$ by finite-type base change, and are Noetherian by finite type over the Noetherian scheme $\\operatorname{Spec}\\kappa(s)$. In particular $D_s$ is nonempty exactly when $C_s$ is nonempty.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-sbc-normal-dominant-galois",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WN (lemma-finite-proper), 01WL (lemma-base-change-finite), 01S1 (lemma-base-change-surjective), 01T4 (lemma-base-change-finite-type), 01T6 (lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "Let $\\xi_D$ and $\\xi_C$ be the generic points of the integral schemes $D$ and $C$. Continuity gives $r(D)\\subseteq\\overline{\\{r(\\xi_D)\\}}$; Step 1 and uniqueness of generic points give $r(\\xi_D)=\\xi_C$. Put $t=f(\\xi_D)=h(\\xi_C)$, without assuming that $t$ is generic in $S$. The fibre projection identifies $|D_t|$ with the subspace $f^{-1}(t)$, which contains $\\xi_D$. Any nonempty open of this subspace is $V\\cap f^{-1}(t)$ for a nonempty open $V$ of $D$; it contains $\\xi_D$ since every nonempty open of $D$ does. Thus $D_t$ has the point corresponding to $\\xi_D$ as a dense generic point and is irreducible. The identical subspace argument with $C,h,\\xi_C$ proves that $C_t$ is nonempty and irreducible.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-sc-scheme-sober",
+    "def-sc-generic-point",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IS (lemma-scheme-sober) and 01K1 (lemma-fibre-topological); elementary subspace argument using the generic points of the total spaces."
+   }
+  },
+  {
+   "text": "The nonempty irreducible fibre $C_t$ has itself as its unique irreducible component, so the hypothesis gives $\\dim C_t=n$. Apply finite-surjective dimension preservation to $r_t$ using Step 1 to get $\\dim D_t=n$. Since $D_t$ is irreducible and of finite type over $\\kappa(t)$, the local dimension theorem for irreducible locally algebraic schemes gives $\\dim_{\\widetilde\\xi_D}D_t=\\dim D_t=n$. Here $\\widetilde\\xi_D$ is the fibre point corresponding to $\\xi_D$.",
+   "uses": [
+    "lem-sc-finite-surjective-dimension",
+    "lem-sc-dimension-locally-algebraic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00OK (lemma-integral-sub-dim-equal) and 00OY (lemma-Noether-normalization); varieties.tex Tag 0A21 (lemma-dimension-locally-algebraic), part (3)."
+   }
+  },
+  {
+   "text": "For $x\\in D$ let $d(x)=\\dim_{\\widetilde x}D_{f(x)}$, the local topological dimension in its fibre. If $n>0$, the bounded-dimension locus $U_{n-1}=\\{x:d(x)\\leq n-1\\}$ is open in $D$ by the local-fibre-dimension openness theorem, since $f$ is locally of finite type. Step 3 says that it does not contain $\\xi_D$. Every nonempty open of $D$ contains $\\xi_D$, so $U_{n-1}=\\varnothing$. Consequently $d(x)\\geq n$ for every $x\\in D$. If $n=0$, the same inequality follows directly because the local dimension at a point is nonnegative.",
+   "uses": [
+    "lem-weil-pbc-local-fibre-dimension-open",
+    "def-sc-generic-point",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FZ (lemma-openness-bounded-dimension-fibres); topology.tex Tag 0055 (definition-Krull), item (4), for n=0. The open locus is upstairs in D."
+   }
+  },
+  {
+   "text": "Fix any $s$ with $D_s\\ne\\varnothing$. By Step 1, $C_s\\ne\\varnothing$, and its components all have dimension $n$ by hypothesis. Apply the equidimensional-open local-dimension theorem with $Y=O=C_s$ to get $\\dim_z C_s=n$ for every $z\\in C_s$. The supremum-of-local-dimensions formula then gives $\\dim C_s=n$. Applying finite-surjective dimension preservation to $r_s$ yields $\\dim D_s=n$. For every $x\\in D_s$, the whole fibre is an open neighbourhood of $x$, so the definition of local dimension gives $\\dim_xD_s\\leq\\dim D_s=n$.",
+   "uses": [
+    "lem-sbc-equidimensional-open-local-dimension",
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "lem-sc-finite-surjective-dimension",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21 (lemma-dimension-locally-algebraic), parts (3), (5); topology.tex Tag 0B7I (lemma-dimension-supremum-local-dimensions); Algebra Tags 00OK and 00OY."
+   }
+  },
+  {
+   "text": "Steps 4 and 5 give $\\dim_xD_s=n$ for every point of each nonempty fibre $D_s$. Step 1 makes $D_s$ locally Noetherian. Apply the constant-local-dimension component theorem to $Y=O=D_s$: every irreducible component of $D_s$ has dimension $n$. This is precisely the required purity. Fibres which are empty impose no assertion.",
+   "uses": [
+    "lem-sbc-constant-local-dimension-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0055 (definition-Krull); constant local dimension and irreducible components, as stated in lem-sbc-constant-local-dimension-components."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "def-sbc-normal-dominant-galois",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-pc-integral-scheme",
+  "lem-sc-scheme-sober",
+  "def-sc-generic-point",
+  "def-pc-scheme-fibre",
+  "lem-sc-finite-surjective-dimension",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-weil-pbc-local-fibre-dimension-open",
+  "def-kun-topological-dimension-at-point",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-sbc-constant-local-dimension-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Agent proof from Tags 02FZ, 01WL, 01WN, 01S1, 01T4, 01T6, Algebra 00OK and 00OY, Varieties 0A21, and Topology 0B7I/0055; the generic-point argument supplies the lower bound."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +144,52 @@
    "results": "Mathlib/AlgebraicGeometry/Morphisms/Finite.lean and ZariskisMainTheorem.lean contain finite-morphism and dimension infrastructure, but no statement of finite-dominant fibre purity.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinite.*[Dd]im|[Dd]im.*IsFinite|[Ee]quidimensional|pure.*dimension",
+   "results": "7 hits: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean. Read the displayed hits; no theorem of pure scheme-fibre dimension transfer.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Upper semicontinuity of local fibre dimension for finite type scheme morphisms",
+   "results": "8 hits: UpperSemicontinuousAt, UpperSemicontinuous, UpperSemicontinuousOn, upperSemicontinuousAt_iff, UpperSemicontinuousWithinAt, UpperSemicontinuous.upperSemicontinuousWithinAt, UpperSemicontinuousAt.of_frequently, UpperSemicontinuous.limsup_le. Read the displayed hits; no theorem of pure scheme-fibre dimension transfer.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsDominant",
+   "results": "0 hits: . Read the displayed hits; no theorem of pure scheme-fibre dimension transfer.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite dominant morphism of integral schemes over an integral base, if every target fibre is pure of dimension n then every source fibre is pure of dimension n",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.Scheme.Hom.discrete_fiber. Read the displayed hits; no theorem of pure scheme-fibre dimension transfer.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*[Dd]im|[Dd]im.*fiber|[Ee]quidimensional",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean. Read the displayed hits; no theorem of pure scheme-fibre dimension transfer.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pure dimension of all scheme fibres transferred along a finite dominant map between irreducible schemes using upper semicontinuity of local fibre dimension",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant, AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget, AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace, AlgebraicGeometry.LocallyQuasiFinite. Read the displayed hits; no theorem of pure scheme-fibre dimension transfer.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-base-modification-comparison-fibre-image",
@@ -73,5 +218,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-dominant-fibre-purity",
+  "worker": "stage1",
+  "summary": "Kept all mathematical hypotheses and conclusion. Corrected the definition citation for dominance. Six steps using existing nodes only: finite surjectivity on fibres; generic points give irreducible fibres over their common image even if the structure maps do not dominate S; dimension n at the generic point of D; 02FZ rules out smaller local fibre dimension; finite-surjective dimension preservation bounds every fibre above by n; constant local dimension gives pure components. No unsupported componentwise going-up/going-down assertion, no flatness or normality assumption, and no new nodes. Mathlib and project-source searches found no attachment or one-line Mathlib specialization.",
+  "blueprint": "The auxiliary finite-cover dimension argument in the base-modification comparison (created.item lem-trf-base-modification-comparison-fibre-image, Step 5), through the existing ancestry to lem-trf-local-term-locality, supports its specialization/normal-cone route. The current main-20261015 proof has no separate finite-cover statement. No unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Only finite morphisms being closed is used to turn the given dominance into surjectivity; no trace-formula argument is replaced. The unit has no statement giving this general dimension/topology fact."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Existence and uniqueness of total-space generic points is generic scheme topology, needed to identify the fibre over their common image. The unit has no statement giving this general dimension/topology fact."
+   },
+   {
+    "node": "lem-sc-finite-surjective-dimension",
+    "why": "Only equality of total dimensions for finite surjective maps of finite-type schemes over a field is used, at t and at each s. The unit has no statement giving this general dimension/topology fact."
+   },
+   {
+    "node": "lem-sc-dimension-locally-algebraic",
+    "why": "Only equality of local and global dimension for the irreducible fibre D_t is used. The unit has no statement giving this general dimension/topology fact."
+   },
+   {
+    "node": "lem-weil-pbc-local-fibre-dimension-open",
+    "why": "The source explicitly calls for 02FZ; its open locus on D rules out a smaller dimension than that computed at the total-space generic point. The unit has no statement giving this general dimension/topology fact."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Converts the given componentwise purity of C_s to local dimension n, a general finite-type-over-a-field fact. The unit has no statement giving this general dimension/topology fact."
+   },
+   {
+    "node": "lem-sbc-constant-local-dimension-components",
+    "why": "Converts the proved constant local dimension of the Noetherian fibre D_s to the required componentwise purity. The unit has no statement giving this general dimension/topology fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-sc-scheme-sober",
+  "lem-sc-finite-surjective-dimension",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-weil-pbc-local-fibre-dimension-open",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sbc-constant-local-dimension-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q86-8d23007fa",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q86-8d23007fa (reviewer sub-agent of L); spot-checked: The mathematics and six proof steps check out, including edge cases and all cited node hypotheses. The delivered item retains stale source metadata: `source.document` is `literature/stacks-project/more-morphisms.tex` and its place advertises an unsupported going-up argument, while the report says this was corrected. I wrote the complete corrected item under fixes/dag/nodes/sec-trace-formula/lem-trf-finite-dominant-fibre-purity.json, pointing to the exact morphisms tags and aligning proof_origin. Full review is in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

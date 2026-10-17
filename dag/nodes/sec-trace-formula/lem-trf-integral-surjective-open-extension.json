@@ -14,9 +14,71 @@
   "def-weil-finite-integral-morphism",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The map $V\\to U$ is affine because it is integral. Cover each affine $W\\subset S$ by affine opens and refine $W\\cap U$ by principal affine opens $W_i=D(f_i)$; write $W=\\operatorname{Spec}A$ and $g^{-1}(W_i)=\\operatorname{Spec}B_i$. Apply the localization-compatible affine-chart construction of [lem-trf-open-relative-normalization-gluing], whose chart identifications are exactly the integral-closure localization statement [lem-weil-pbc-integral-closure-commutes-localization]. On an overlap the identifications localize to the same integral closure, hence satisfy the cocycle condition. The affine schemes obtained from these charts therefore glue (first over the affine cover of $W\\cap U$, then over the affine cover of $S$) to a scheme $V'$ with an integral morphism $V'\\to S$; by construction its restriction to $U$ is $V$. This is the arbitrary-open gluing argument in the proof of Stacks Lemma 0CNX, and it never treats the composite $V\\to U\\to S$ as a quasi-compact or quasi-separated normalization input.",
+   "uses": [
+    "lem-trf-open-relative-normalization-gluing",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CNX proof; repaired by the arbitrary-open gluing lemma and Morphisms Tags 035F, 035H, 035K"
+   }
+  },
+  {
+   "text": "Let Z=(S\\setminus U)_{\\mathrm{red}} be the reduced induced closed subscheme on the complement. The existence, reducedness and underlying closed subset of Z are supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. Its closed immersion Z→S is integral by the affine definition: on an affine open it is induced by a quotient ring map, hence an affine integral map.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CNX proof; Schemes Tags 01J3 and 01J4"
+   }
+  },
+  {
+   "text": "Set $\\overline V=V'\\amalg Z$ and let q:\\overline V→S be induced by the two structure maps. A finite coproduct of affine morphisms is affine; on an affine open of S its section ring is the product of the two section rings, and a product of rings integral over the base is integral coordinatewise. Therefore q is integral, using the definition [def-weil-finite-integral-morphism] and the coproduct construction [lem-weil-pbc-scheme-coproduct-family]. The image of V' contains U because its restriction there is V→U, which is surjective, while the image of Z is S\\setminus U. Hence q is surjective.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-surjective-morphism",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CNX proof; definition of integral and surjective morphisms; Schemes Tag 01JB"
+   }
+  },
+  {
+   "text": "Base change of the coproduct along U→S gives (V'\\amalg Z)×_S U ≅ (V'×_S U)\\amalg(Z×_S U). The second summand is empty because Z is supported on S\\setminus U, and the first is V by Step 1. Thus q^{-1}(U)=\\overline V×_S U is canonically isomorphic to V over U, as required. This is the fibre-product definition [def-pc-fibre-product] together with the universal property of the coproduct.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CNX proof; restriction to U"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "lem-trf-open-relative-normalization-gluing",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CNX, lemma-extend-integral-surjective-morphisms, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,7 +110,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-fppf-integral-surjective-refinement",
@@ -78,5 +140,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-integral-surjective-open-extension",
+  "worker": "stage1",
+  "summary": "Repair of returned delivery: Step 1 no longer applies relative normalization to the composite V→U→S, since an arbitrary open U→S need not be quasi-compact. A new statement node, lem-trf-open-relative-normalization-gluing, isolates the corrected arbitrary-open affine integral-closure gluing construction; Step 1 cites it and the existing localization theorem. The target statement remains unrestricted. Steps 2–4 and their dependencies are unchanged.",
+  "blueprint": "Realizes the extension step in the ancestor proof route for lem-trf-local-term-locality (Tag 0CNZ/0CNX), with the repaired arbitrary-open gluing construction made explicit."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q76-29d61d27f",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q76-29d61d27f (reviewer sub-agent of L); spot-checked: The target theorem and Tags 0CNX/035F/035H/035K route are correct. Step 1 and the new chart node must explicitly refine to principal affine opens for localization, and the new node must declare dependencies for affine spectra, integral closure, and localization. Complete corrected JSON files are in fixes/dag/nodes/sec-trace-formula/. Review written to review.md.; 2 file(s) fixed by the reviewer"
  }
 }
