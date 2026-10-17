@@ -1,6 +1,6 @@
 # Work queue
 
-28 items; claim with `tools/claim.py next <group> [--stage N]`.
+27 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (28)
+## Stage 3: modules to prove (27)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -26,16 +26,15 @@
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal` | 3 | 9 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence` | 4 | 3 | proof |
 | `Sheaf.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal` | 5 | 1 | proof |
-| `Sheaf.Paper.CondensedQbarPullbackCube` | 5 | 5 | proof |
-| `Sheaf.Paper.StrictHenselizationPointEvaluationPointed` | 5 | 1 | proof |
 | `WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal` | 5 | 10 | proof |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 7 | 3 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine` | 8 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientSquareCoherence` | 10 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
 | `Sheaf.Paper.FiniteDiscreteCoefficientRestriction` | 12 | 1 | proof |
-| `Sheaf.Paper.IntegralResidueScalarGeometryBridge` | 12 | 1 | proof |
-| `Sheaf.Paper.IntegralResiduePullFlatModel` | 13 | 2 | proof |
+| `Sheaf.Paper.IntegralResiduePullFlatModel` | 13 | 1 | proof |
+| `Sheaf.Paper.IntegralResidueScalarCounitModel` | 13 | 1 | proof |
+| `Sheaf.Paper.IntegralResidueTensorPullCounitModel` | 13 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation` | 30 | 1 | proof |
