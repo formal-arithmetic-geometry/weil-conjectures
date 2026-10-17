@@ -53,9 +53,9 @@ variable {R F Ω : Type u} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
   {ℓ : ℕ} [hℓ' : Fact ℓ.Prime]
 
 omit [HenselianLocalRing R] [IsAlgClosed (ResidueField R)] [IsDomain R]
-  [IsDiscreteValuationRing R] in
+  [IsDiscreteValuationRing R] [IsFractionRing R F] hℓ' in
 /-- `ℓ` is invertible in `F` if it is invertible in the residue field of `R`. -/
-lemma natCast_ne_zero_of_residue [IsLocalRing R] [Nontrivial F]
+lemma natCast_ne_zero_of_residue [IsLocalRing R]
     (hℓ : (ℓ : ResidueField R) ≠ 0) : (ℓ : F) ≠ 0 := by
   have : IsUnit (ℓ : R) := by
     by_contra h
@@ -66,7 +66,7 @@ lemma natCast_ne_zero_of_residue [IsLocalRing R] [Nontrivial F]
   intro h0
   exact not_isUnit_zero (h0 ▸ this.map (algebraMap R F))
 
-omit [Fact ℓ.Prime] in
+omit [Fact ℓ.Prime] [IsDomain R] [IsDiscreteValuationRing R] in
 /-- `F` contains the primitive `ℓ ^ m`-th roots of unity. -/
 lemma exists_isPrimitiveRoot_pow (hℓ : (ℓ : ResidueField R) ≠ 0) (m : ℕ) :
     ∃ ζ : F, IsPrimitiveRoot ζ (ℓ ^ m) := by
@@ -103,7 +103,8 @@ noncomputable def _root_.PadicInt.mulLeftContinuousMonoidHom (c : ℤ_[ℓ]) :
     continuous_toAdd)
 
 @[simp]
-lemma _root_.PadicInt.toAdd_mulLeftContinuousMonoidHom_apply (c : ℤ_[ℓ]) (x : Multiplicative ℤ_[ℓ]) :
+lemma _root_.PadicInt.toAdd_mulLeftContinuousMonoidHom_apply (c : ℤ_[ℓ])
+    (x : Multiplicative ℤ_[ℓ]) :
     (PadicInt.mulLeftContinuousMonoidHom c x).toAdd = c * x.toAdd :=
   rfl
 
@@ -162,7 +163,7 @@ theorem exists_isEllAdicQuotient (hℓ : (ℓ : ResidueField R) ≠ 0) :
   set n := finrank F E
   have hn0 : n ≠ 0 := Module.finrank_pos.ne'
   set b := n.factorization ℓ
-  letI : Algebra R E := ((algebraMap F E).comp (algebraMap R F)).toAlgebra
+  let : Algebra R E := ((algebraMap F E).comp (algebraMap R F)).toAlgebra
   have : IsScalarTower R F E := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   obtain ⟨γ, hγ⟩ := exists_pow_eq_algebraMap_of_dvd_finrank R F E (N := ℓ ^ b)
     (by rw [Nat.cast_pow]; exact pow_ne_zero _ hℓ) (Nat.ordProj_dvd n ℓ) hπ

@@ -161,6 +161,22 @@ lemma nonempty_sepClosedSections_upperStar_iso {Y : Scheme.{u}}
     ΓIsoSheafFiberOfIsSepClosed _ ≪≫
       (upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) x (𝟙 _)).app L ≪≫ e⟩
 
+/-- The sections over `Spec K` of `H⁰(Lx^* N)` are the stalk of `H⁰(N)` at the geometric point
+`x`. -/
+lemma nonempty_sepClosedSections_homology_iso {Y : Scheme.{u}}
+    {N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {L : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (e : (_root_.DerivedCategory.homologyFunctor _ 0).obj N ≅ L)
+    (hL : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
+      Nonempty ((pointSmallEtale s).sheafFiber.obj L ≅ ModuleCat.of Λ Λ))
+    (x : Spec (.of K) ⟶ Y) :
+    Nonempty ((sepClosedSections Λ K).obj ((_root_.DerivedCategory.homologyFunctor _ 0).obj
+      ((L((x)^*[ModuleCat.{u + 1} Λ])).obj N)) ≅ ModuleCat.of Λ Λ) := by
+  obtain ⟨e'⟩ := nonempty_sepClosedSections_upperStar_iso Λ L hL x
+  exact ⟨(sepClosedSections Λ K).mapIso
+    (((leftDerivedUpperStarHomologyFunctorIso _ x 0).app N).symm ≪≫
+      (x)^*[ModuleCat.{u + 1} Λ].mapIso e) ≪≫ e'⟩
+
 end SepClosed
 
 /-- The coordinate of the complement of the zero section pulls back to the coordinate. -/

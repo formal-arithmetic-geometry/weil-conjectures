@@ -265,6 +265,15 @@ lemma homology_props_of_iso_singleFunctor [Finite Λ] {X : Scheme.{u}}
     (_root_.DerivedCategory.homologyFunctorObjIsoOfIsoSingleFunctor e) ≪≫
       (GrothendieckTopology.Point.uliftSheafFiberIso _ _).app L ≪≫ eL).toLinearEquiv.toEquiv.symm
 
+/-- The geometric stalks of the constant sheaf `Λ` are `Λ`. -/
+lemma nonempty_sheafFiber_unit_iso {X : Scheme.{u}} (Ω : Type u) [Field Ω] [IsSepClosed Ω]
+    (s : Spec (.of Ω) ⟶ X) :
+    Nonempty ((pointSmallEtale s).sheafFiber.obj (𝟙_ (Sheaf X.smallEtaleTopology
+      (ModuleCat.{u + 1} Λ))) ≅ ModuleCat.of Λ Λ) :=
+  let : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  ⟨(pointSmallEtale s).sheafFiberConstantSheafIso _⟩
+
 end Cardinality
 
 section Unit

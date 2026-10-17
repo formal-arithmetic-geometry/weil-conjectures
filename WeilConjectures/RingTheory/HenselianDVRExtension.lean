@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.NumberTheory.RamificationInertia.Basic
+public import Mathlib.NumberTheory.RamificationInertia.Inertia
+public import Mathlib.NumberTheory.RamificationInertia.Ramification
+public import Mathlib.RingTheory.RamificationInertia.Basic
 public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
 public import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
@@ -86,20 +88,24 @@ variable {R F L : Type u} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
 
 variable (R F L) in
 include F in
+omit [HenselianLocalRing R] in
 lemma isDedekindDomain_integralClosure : IsDedekindDomain (integralClosure R L) :=
   integralClosure.isDedekindDomain R F L
 
 variable (R L) in
+omit [IsDomain R] [IsDiscreteValuationRing R] in
 lemma isLocalRing_integralClosure : IsLocalRing (integralClosure R L) :=
   IsLocalRing.of_henselianLocalRing_of_isIntegral_of_isDomain (R := R)
 
 variable (R F L) in
 include F in
+omit [HenselianLocalRing R] in
 lemma finite_integralClosure : Module.Finite R (integralClosure R L) :=
   IsIntegralClosure.finite R F L (integralClosure R L)
 
 variable (R F L) in
 include F in
+omit [HenselianLocalRing R] [FiniteDimensional F L] [Algebra.IsSeparable F L] in
 /-- The integral closure of `R` in `L` is not a field: a uniformizer of `R` is not a unit
 in it. -/
 lemma not_isField_integralClosure : ¬ IsField (integralClosure R L) := by
@@ -147,6 +153,8 @@ theorem isDiscreteValuationRing_integralClosure :
 
 variable (R F L) in
 include F in
+omit [IsDomain R] [IsDiscreteValuationRing R] [HenselianLocalRing R] [FiniteDimensional F L]
+  [Algebra.IsSeparable F L] in
 lemma injective_algebraMap_integralClosure :
     Function.Injective (algebraMap R (integralClosure R L)) := by
   intro a b h
@@ -158,10 +166,11 @@ lemma injective_algebraMap_integralClosure :
 
 variable (R F L) in
 include F in
+omit [IsDomain R] [IsDiscreteValuationRing R] [FiniteDimensional F L] [Algebra.IsSeparable F L] in
 lemma isLocalHom_algebraMap_integralClosure :
     letI := isLocalRing_integralClosure R L
     IsLocalHom (algebraMap R (integralClosure R L)) := by
-  letI := isLocalRing_integralClosure R L
+  let := isLocalRing_integralClosure R L
   have : FaithfulSMul R (integralClosure R L) :=
     (faithfulSMul_iff_algebraMap_injective R _).2 (injective_algebraMap_integralClosure R F L)
   infer_instance
@@ -170,6 +179,7 @@ variable [IsAlgClosed (ResidueField R)]
 
 variable (R F L) in
 include F in
+omit [IsAlgClosed (ResidueField R)] in
 lemma henselianLocalRing_integralClosure : HenselianLocalRing (integralClosure R L) := by
   have := isLocalRing_integralClosure R L
   have := finite_integralClosure R F L
@@ -177,14 +187,16 @@ lemma henselianLocalRing_integralClosure : HenselianLocalRing (integralClosure R
 
 variable (R F L) in
 include F in
+omit [IsDomain R] [IsDiscreteValuationRing R] [FiniteDimensional F L]
+  [Algebra.IsSeparable F L] in
 /-- The residue field of the integral closure is the residue field of `R`. -/
 lemma bijective_algebraMap_residueField_integralClosure :
     letI := isLocalRing_integralClosure R L
     letI := isLocalHom_algebraMap_integralClosure R F L
     Function.Bijective
       (algebraMap (ResidueField R) (ResidueField (integralClosure R L))) := by
-  letI := isLocalRing_integralClosure R L
-  letI := isLocalHom_algebraMap_integralClosure R F L
+  let := isLocalRing_integralClosure R L
+  let := isLocalHom_algebraMap_integralClosure R F L
   have := Algebra.IsAlgebraic.residueField_of_isIntegral (R := R) (S := integralClosure R L)
   exact IsAlgClosed.algebraMap_bijective_of_isIntegral
 
@@ -229,10 +241,28 @@ theorem exists_eq_unit_mul_pow_finrank {π : R} (hπ : Irreducible π) :
     have hbij := bijective_algebraMap_residueField_integralClosure R F L
     exact (LinearEquiv.ofBijective (Algebra.linearMap (ResidueField R) (ResidueField B))
       hbij).finrank_eq.symm.trans (Module.finrank_self _)
-  have hfund := Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing B F L
-    (p := maximalIdeal R) (IsDiscreteValuationRing.not_a_field R)
-  rw [he, hf, mul_one] at hfund
-  exact hfund
+  have : FaithfulSMul R B := (faithfulSMul_iff_algebraMap_injective R B).2
+    (injective_algebraMap_integralClosure R F L)
+  have : Module.Free R B := Module.free_of_finite_type_torsion_free'
+  have hpS : Ideal.map (algebraMap R B) (maximalIdeal R) ≠ ⊥ := by
+    rw [(IsDiscreteValuationRing.irreducible_iff_uniformizer π).1 hπ, Ideal.map_span,
+      Set.image_singleton, ne_eq, Ideal.span_singleton_eq_bot]
+    exact hπB
+  let : Unique ((maximalIdeal R).primesOver B) :=
+    { default := ⟨maximalIdeal B, inferInstance, inferInstance⟩
+      uniq := fun q ↦ by
+        obtain ⟨q, hq, hlo⟩ := q
+        refine Subtype.ext (IsLocalRing.eq_maximalIdeal ?_)
+        refine Ideal.isMaximal_of_isIntegral_of_isMaximal_comap (R := R) q ?_
+        rw [← Ideal.under_def, ← Ideal.over_def q (maximalIdeal R)]
+        infer_instance }
+  have hsum := Ideal.sum_ramification_inertia_eq_finrank (maximalIdeal R) B
+  rw [Fintype.sum_unique] at hsum
+  change (maximalIdeal B).ramificationIdx R * (maximalIdeal B).inertiaDeg R = _ at hsum
+  rw [← Ideal.ramificationIdx'_eq_ramificationIdx' _ _ hpS,
+    ← Ideal.inertiaDeg'_eq_inertiaDeg (maximalIdeal R) (maximalIdeal B), he, hf, mul_one,
+    ← IsFractionRing.finrank_eq R F B L] at hsum
+  exact hsum
 
 variable (R F L) in
 include F in

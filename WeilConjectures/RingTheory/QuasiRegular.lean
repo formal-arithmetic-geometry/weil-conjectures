@@ -247,6 +247,43 @@ theorem coeff_mem_of_eval_mem_pow_succ : ∀ {n : ℕ} {a : Fin n → R}, IsRevR
           coeff_mem_of_eval_mem_pow_succ_of_eval_eq_zero (hZ d ihS) hF hev
     exact hS d F hF hev m
 
+open RingTheory.Sequence in
+/-- A weakly regular list `r₁, …, r_n` gives a sequence `a` regular read from the end
+(`MvPolynomial.IsRevRegular`, `a = (r_n, …, r₁)`) generating the same ideal. -/
+theorem exists_isRevRegular_of_isWeaklyRegular (r : List R) (hr : IsWeaklyRegular R r) (n : ℕ)
+    (hn : r.length = n) :
+    ∃ a : Fin n → R, IsRevRegular a ∧ Ideal.span (Set.range a) = Ideal.ofList r := by
+  induction r using List.reverseRecOn generalizing n with
+  | nil =>
+    subst hn
+    exact ⟨Fin.elim0, trivial, by simp [Set.range_eq_empty]⟩
+  | append_singleton l x ih =>
+    simp only [List.length_append, List.length_singleton] at hn
+    subst hn
+    rw [isWeaklyRegular_append_iff, isWeaklyRegular_singleton_iff] at hr
+    obtain ⟨a', ha', hspan⟩ := ih hr.1 _ rfl
+    have hrange : Set.range (Fin.cons x a' : Fin (l.length + 1) → R) =
+        insert x (Set.range a') := by
+      ext y
+      constructor
+      · rintro ⟨i, rfl⟩
+        obtain rfl | ⟨j, rfl⟩ := Fin.eq_zero_or_eq_succ i
+        · exact Set.mem_insert _ _
+        · exact Set.mem_insert_of_mem _ ⟨j, by simp⟩
+      · rintro (rfl | ⟨j, rfl⟩)
+        exacts [⟨0, by simp⟩, ⟨j.succ, by simp⟩]
+    refine ⟨Fin.cons x a', ⟨by simpa using ha', fun y hy ↦ ?_⟩, ?_⟩
+    · simp only [Fin.tail_cons, Fin.cons_zero, hspan] at hy ⊢
+      have hsm : (Ideal.ofList l • ⊤ : Submodule R R) = Ideal.ofList l := by
+        rw [Ideal.smul_top_eq_map, Algebra.algebraMap_self, Ideal.map_id]; rfl
+      have h1 := hr.2 (a₁ := Submodule.Quotient.mk y) (a₂ := 0) (by
+        change x • Submodule.Quotient.mk y = x • 0
+        rw [smul_zero, ← Submodule.Quotient.mk_smul, Submodule.Quotient.mk_eq_zero, hsm]
+        exact hy)
+      rwa [Submodule.Quotient.mk_eq_zero, hsm] at h1
+    · rw [hrange, Ideal.span_insert, hspan, Ideal.ofList_append, Ideal.ofList_singleton,
+        sup_comm]
+
 end QuasiRegular
 
 end MvPolynomial
