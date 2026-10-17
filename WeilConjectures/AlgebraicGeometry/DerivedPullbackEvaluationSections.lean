@@ -241,7 +241,7 @@ theorem exists_derivedPullback_evaluation_sections
     {T S : Scheme.{u}} (g : T ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))]
-    (m : (derivedPullback g).CoreMonoidal) (hm : IsDerivedPullbackMonoidalModel g m)
+    (m : (derivedPullback g).CoreMonoidal)
     (qS : ∀ A K L : schemeDerivedCategory S,
       (A ⟶ (derivedInternalHom (Opens.grothendieckTopology S)
         S.toRingedSpace.sheaf).obj (op K, L)) ≃ (A ⊗ K ⟶ L))
@@ -298,7 +298,6 @@ theorem exists_derivedPullback_evaluation_sections
                   ((m.μIso _ K).hom ≫
                     (derivedPullback g).map (qS _ K L (𝟙 _))))) x)) =
           (derivedPullback g).map (eS (op K, L) x)) := by
-  have _ := hm
   have : (schemeDerivedDirectImage g).Additive := by
     dsimp [schemeDerivedDirectImage, RingedSpace.derivedModuleDirectImage]
     infer_instance
