@@ -15836,3 +15836,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:19 L: batch 20261017T131005 dependency take-out
 - 13:33 L: merged deliver/G1/WeilConjectures.SmoothPurity.Defs (stage 3; reviewer PASS; first push; landing 20261017T133353-L-2578124 (proof); batch 20261017T133349; modules 1; new nodes 0; change records: coord/changes/smoothPurityIso.md)
 - 13:44 L: returned deliver/E1/Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound (reviewer RETURN: (the landing tools, head 7ea619f9f) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 13:48 L: returned deliver/D2/Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison (reviewer RETURN: (the landing tools, head 2b365e12d) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
