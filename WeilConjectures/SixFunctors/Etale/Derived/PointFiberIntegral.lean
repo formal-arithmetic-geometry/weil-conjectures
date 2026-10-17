@@ -469,7 +469,8 @@ theorem boundedConstructible_of_boundedConstructibleIntegral [IsPrecomplete I Λ
 
 omit [IsNoetherianRing Λ] in
 /-- A constant sheaf on a finitely generated module is constructible on `Spec k`. -/
-lemma isConstructibleSheaf_constantSheaf (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] :
+lemma isConstructibleSheaf_constantSheaf_of_isSepClosed (M : ModuleCat.{u + 1} Λ)
+    [Module.Finite Λ M] :
     IsConstructibleSheaf
       ((constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) := by
   rw [isConstructibleSheaf_iff_moduleFinite_pointSections]
@@ -563,7 +564,8 @@ lemma boundedConstructible_torAmplitudeIn_single_quot (n : ℕ) :
         ((DerivedCategory.singleFunctor _ 0).obj
           ((constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
             (ModuleCat.of Λ (Λ ⧸ I ^ n)))) := by
-  have := isConstructibleSheaf_constantSheaf (k := k) (ModuleCat.of Λ (Λ ⧸ I ^ n))
+  have := isConstructibleSheaf_constantSheaf_of_isSepClosed (k := k)
+    (ModuleCat.of Λ (Λ ⧸ I ^ n))
   refine ⟨DerivedCategory.boundedConstructible_singleFunctor_obj _ 0, ?_⟩
   have hT :=
     _root_.DerivedCategory.quotPowTriangle_distinguished (Spec (.of k)).smallEtaleTopology hϖ hI n
