@@ -13,9 +13,63 @@
   "def-sc-function-field",
   "def-weil-pbc-normal-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\xi$ and $\\eta$ be the generic points of $X$ and $Y$. That $f$ induces a map $k(Y)=\\mathcal O_{Y,\\eta}\\to\\mathcal O_{X,\\xi}=k(X)$ means $f(\\xi)=\\eta$, and the induced map is the stalk map $f^\\sharp_\\xi$, which is the given isomorphism. Let $V\\subseteq Y$ be any nonempty affine open, $A=\\mathcal O_Y(V)$. Because $f$ is finite [def-weil-finite-integral-morphism], $U=f^{-1}(V)$ is affine, $U=\\operatorname{Spec}B$ with $B=\\mathcal O_X(U)$, and $f^\\sharp:A\\to B$ is finite; $U$ is nonempty since $\\xi\\in U$ ($f(\\xi)=\\eta\\in V$). By [lem-sc-integral-function-field-affine-fraction] (applied to $Y,V$ and to $X,U$) $A$ and $B$ are domains and the germ maps $A\\to k(Y)$, $B\\to k(X)$ are injective and make $k(Y)$, $k(X)$ fraction fields of $A$, $B$. Compatibility of germs with $f^\\sharp$ gives a commutative square: $A\\to B\\to k(X)$ equals $A\\to k(Y)\\xrightarrow{f^\\sharp_\\xi}k(X)$. The second composite is injective, so $A\\to B$ is injective; identifying everything inside $K:=k(X)$ via these injections, $A\\subseteq B\\subseteq K$ and $K$ is the fraction field of both $A$ and $B$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-pc-integral-scheme",
+    "def-sc-function-field",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AB1, proof first paragraph: finite morphisms are affine on affine opens and birationality gives an injective map with isomorphic fraction fields."
+   }
+  },
+  {
+   "text": "$A$ is a normal domain. Indeed $A$ is a domain (Step 1). For a maximal ideal $\\mathfrak m\\subset A$ let $y\\in V$ be the corresponding point; by [lem-weil-pbc-affine-open-stalk-localization](c) the germ map identifies $A_{\\mathfrak m}$ with $\\mathcal O_{Y,y}$ as rings, which is a normal domain by hypothesis [def-weil-pbc-normal-ring]. So every $A_{\\mathfrak m}$ is a normal domain, and [lem-weil-pbc-normal-domain-of-local-normal] (Stacks 030B, (3)$\\Rightarrow$(1)) shows that $A$ is integrally closed in its fraction field $K$. Since $A\\to B$ is finite, every $b\\in B$ is integral over $A$ by [lem-weil-pbc-finite-algebra-is-integral]. As $b\\in K=\\operatorname{Frac}(A)$ and $A$ is integrally closed in $K$, $b\\in A$. Hence $A\\to B$ is surjective, so (being injective) an isomorphism.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-normal-domain-of-local-normal",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AB1, proof: 'As Y is normal, the ring O_Y(V) is integrally closed in the fraction field. Since f is finite (or integral) every element of O_X(U) is integral over O_Y(V). We conclude O_Y(V)=O_X(U).' Normality of O_Y(V) as in properties.tex Tag 033L (lemma-integral-normal), whose proof is algebra.tex Tag 030B (lemma-normality-is-local)."
+   }
+  },
+  {
+   "text": "Over each nonempty affine open $V\\subseteq Y$ the restriction $f^{-1}(V)\\to V$ is a morphism of affine schemes $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ whose ring map $A\\to B$ is an isomorphism by Step 2, so it is an isomorphism; over the empty open $f^{-1}(\\emptyset)=\\emptyset$. The affine opens cover $Y$, and being an isomorphism is local on the target (the restrictions are bijective homeomorphisms on a cover, hence $f$ is a homeomorphism, and $f^\\sharp$ is an isomorphism on stalks). Hence $f$ is an isomorphism.",
+   "uses": [
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AB1, final sentence: equality on affine opens proves that $f$ is an isomorphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-normal-ring",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-normal-domain-of-local-normal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0AB1 (lemma-finite-birational-over-normal), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,7 +101,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-proper-birational-normal-curve-iso",
@@ -59,7 +113,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), projective preparation of the relative-curve alteration input: a Chow modification is an isomorphism on the smooth generic curve.",
+   "place": "Proof (1)--(2), projective preparation of the relative-curve alteration input: the finite birational map over the normal target is an isomorphism on affine opens.",
    "via": [
     "lem-trf-proper-birational-normal-curve-iso",
     "lem-trf-dejong-relative-marked-semistable",
@@ -72,5 +126,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-birational-normal-iso",
+  "worker": "stage1",
+  "summary": "Split Tag 0AB1 into the affine-local ring comparison (Step 1), integral closedness of the normal affine target ring plus finiteness (Step 2), and target-local gluing (Step 3). Maintainer review (Q18 reader): the worker's new node lem-trf-normal-affine-open-domain (Tag 033L forward direction) was folded into Step 2, since it is two lines from the existing Mathlib leaves lem-weil-pbc-affine-open-stalk-localization and lem-weil-pbc-normal-domain-of-local-normal (Stacks 030B); the finite-implies-integral citation lem-weil-pbc-finite-algebra-is-integral was added; the proof-only dependency was removed from stmt_deps. The target hypotheses and conclusion are unchanged.",
+  "blueprint": "Realizes the ancestor proof sentence asserting that the finite birational comparison is an isomorphism on the smooth generic curve: Steps 1–3 implement the affine ring argument of Tag 0AB1."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-ce3a0a5dd",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-ce3a0a5dd (reviewer sub-agent of L); spot-checked: Read in full against the sources. Stacks morphisms.tex Tag 0AB1 (lemma-finite-birational-over-normal) matches the item clause by clause. Properties Tag 033L (lemma-integral-normal) is proved there only by citing Algebra Tag 030B (lemma-normality-is-local), and I read both. Item statement: kept. It is correct only when 'inducing' is read as f(generic point of X)=generic point of Y with the stalk map an isomorphism; an abstract field isomorphism would make it false (closed point of a non-discrete valuation ring of C whose residue field is C). That is the parent's reading, and Step 1 now says it explicitly. Small cases checked: identity; cusp normalisation (target normality needed); A^1 minus 0 into A^1 (finiteness needed); k[t^p]⊂k[t] (birationality needed). Every step's citations say what the step uses. There is no route issue (all deps are definitions or Mathlib leaves), no SGA, and no tool_uses. No existing node or Mathlib declaration states 0AB1. Three repairs, in the whole corrected file fixes/dag/nodes/sec-trace-formula/lem-trf-finite-birational-normal-iso.json: (1) removed the proof-only lem-trf-normal-affine-open-domain from stmt_deps; (2) added the missing finite-implies-integral citation lem-weil-pbc-finite-algebra-is-integral (Stacks 00GK) to Step 2; (3) folded the new node into Step 2 and dropped it. The new node is true (033L forward direction) and is not a duplicate or a restated clause, but it is a two-line consequence of the existing Mathlib leaves lem-weil-pbc-affine-open-stalk-localization (A_m isomorphic to O_{Y,y}) and lem-weil-pbc-normal-domain-of-local-normal (030B), so under rule C1 it is a step, not a node. I also wrote Step 1's generic-point and germ-compatibility argument and Step 3's target-local gluing in full; proof_deps is now the union of all uses.; 1 file(s) fixed by the reviewer"
  }
 }
