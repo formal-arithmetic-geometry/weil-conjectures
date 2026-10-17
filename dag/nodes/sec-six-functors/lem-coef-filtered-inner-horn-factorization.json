@@ -8,11 +8,118 @@
   "place": "Proposition 4.1.3.2 (functorial small-object construction using all inner horns); Kerodon tag, not a Stacks tag; read online 2026-10-17; archive WANTED."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use ordinary colimits throughout. For a small diagram of simplicial sets, take the set colimit in each degree; its simplicial operators are induced by the diagram operators. Every simplicial identity follows after precomposing with every degreewise cocone map. A compatible family of simplicial maps to $Z$ induces degreewise maps to $Z$ commuting with all operators, uniquely. This proves the colimit universal property. For arrows the same construction on source and target induces the colimit arrow. In particular pushouts and coproducts exist degreewise; a pushout set is the disjoint union modulo the identifications from the common domain. This specifies choices once for all diagrams in the fixed universe.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01BP",
+    "place": "Proposition 4.1.3.2 (01BP), recursive horn attachment and filtered-colimit preservation; online source read 2026-10-17, local archive WANTED."
+   }
+  },
+  {
+   "text": "For $0<i<n$, put $A_{n,i}=\\Lambda_i^n$ and $B_n=\\Delta^n$. These are finite in the required sense: a nondegenerate simplex of $B_n$ is a strictly increasing vertex chain, hence corresponds to a nonempty subset of $[n]$. A simplex of its horn is degenerate inside the horn exactly when its vertex chain repeats: deleting repetitions does not change the image, so the shorter chain still omits a vertex other than $i$ and belongs to the horn. Thus the horn also has only finitely many nondegenerate simplices. By [lem-coef-finite-simplicial-hom-filtered-colimit], both $\\operatorname{Hom}(A_{n,i},-)$ and $\\operatorname{Hom}(B_n,-)$ preserve all small filtered colimits, in particular the sequential colimit indexed by $\\mathbf N$. No finiteness of the total set of degenerate simplices is asserted.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-simplicial-set",
+    "lem-coef-finite-simplicial-hom-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01BP",
+    "place": "Proposition 4.1.3.2 (01BP), recursive horn attachment and filtered-colimit preservation; online source read 2026-10-17, local archive WANTED."
+   }
+  },
+  {
+   "text": "For $f:X\\to Y$ set $X_0(f)=X$, $f_0=f$. Given $f_r:X_r(f)\\to Y$, define $$S_{n,i}(f_r)=\\operatorname{Hom}(A_{n,i},X_r(f))\\times_{\\operatorname{Hom}(A_{n,i},Y)}\\operatorname{Hom}(B_n,Y).$$ Its elements are exactly the pairs $(\\alpha,\\beta)$ satisfying $f_r\\alpha=\\beta|_{A_{n,i}}$. Define $X_{r+1}(f)$ by the pushout $$X_r(f)\\amalg_{\\coprod_{n\\ge2,\\,0<i<n}\\coprod_{s\\in S_{n,i}(f_r)}A_{n,i}}\\coprod_{n\\ge2,\\,0<i<n}\\coprod_{s\\in S_{n,i}(f_r)}B_n,$$ attaching each horn by its $\\alpha$. The maps $f_r$ and the $\\beta$ agree on the attaching horns and hence give $f_{r+1}$. Put $T(f)=\\operatorname{colim}_{r\\in\\mathbf N}X_r(f)$, let $u_f$ be the initial cocone map, and let $v_f$ be induced by the $f_r$. The identity $v_fu_f=f$ follows on $X_0(f)$. Each coproduct index is small: the horn labels are countable and the indicated Hom sets are small. Degreewise quotients, small coproducts and this countable colimit stay in the input universe.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01BP",
+    "place": "Proposition 4.1.3.2 (01BP), recursive horn attachment and filtered-colimit preservation; online source read 2026-10-17, local archive WANTED."
+   }
+  },
+  {
+   "text": "A commuting square $(a,b):f\\to g$ induces maps $X_r(f)\\to X_r(g)$ by recursion. At $r=0$ use $a$. At the successor send a cell label $(\\alpha,\\beta)$ to $(a_r\\alpha,b\\beta)$, which is again a square since $g_ra_r=bf_r$. On its copy of $B_n$ use the identity map into the summand with that new label. These maps agree on each attaching horn, so define the map on the pushout and satisfy $g_{r+1}a_{r+1}=bf_{r+1}$. For identity squares the induced maps are identities, and for composed squares they are the composites: this holds on the old object by induction and on every new summand by the label formula, then on the pushout by uniqueness. Passage to the sequential colimit defines $T(a,b)$. The same uniqueness proves its identity and composition laws and the equations $T(a,b)u_f=u_ga$, $v_gT(a,b)=bv_f$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01BP",
+    "place": "Proposition 4.1.3.2 (01BP), recursive horn attachment and filtered-colimit preservation; online source read 2026-10-17, local archive WANTED."
+   }
+  },
+  {
+   "text": "The map $u_f$ is a countable continuous cell composite of pushouts of coproducts of inner horn inclusions. It is therefore inner anodyne by [lem-coef-inner-horn-cell-generation]: a cell composite is a retract of itself by identity maps. To prove $v_f$ is an inner fibration, take a square with top map $\\alpha:A_{n,i}\\to T(f)$ and bottom map $\\beta:B_n\\to Y$. Step 2 and [lem-coef-finite-simplicial-hom-filtered-colimit] give an $r$ and $\\alpha_r:A_{n,i}\\to X_r(f)$ with cocone composite $\\alpha$. Then $f_r\\alpha_r=v_f\\alpha=\\beta|_{A_{n,i}}$ already as maps to the fixed $Y$. The label $(\\alpha_r,\\beta)$ thus occurs at stage $r$, and its attached copy of $B_n$ in $X_{r+1}(f)$, followed by the cocone map, supplies the required filler. No assumption on injectivity of a transition map is needed.",
+   "uses": [
+    "lem-coef-inner-horn-cell-generation",
+    "lem-coef-finite-simplicial-hom-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01BP",
+    "place": "Proposition 4.1.3.2 (01BP), recursive horn attachment and filtered-colimit preservation; online source read 2026-10-17, local archive WANTED."
+   }
+  },
+  {
+   "text": "For each fixed $(n,i)$ and arbitrary filtered diagram of arrows $h_j:U_j\\to V_j$, the set $S_{n,i}(h)$ is the displayed fibre product of three Hom sets. By [lem-coef-finite-simplicial-hom-filtered-colimit] each of those Hom functors preserves this colimit, since the two shapes are finite by step 2. By [lem-weil-pbc-filtered-colimits-commute-finite-limits] the canonical comparison from the colimit of their fibre products to the fibre product of their colimits is bijective. Consequently $$\\operatorname{colim}_j S_{n,i}(h_j)\\cong S_{n,i}(\\operatorname{colim}_j h_j).$$ The comparison sends a square to the square obtained by composing with its source and target cocone maps, so respects evaluation on its horn and simplex. This holds for filtered ordinary categories with parallel arrows and for noninjective transitions, not only directed unions.",
+   "uses": [
+    "lem-coef-finite-simplicial-hom-filtered-colimit",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01BP",
+    "place": "Proposition 4.1.3.2 (01BP), recursive horn attachment and filtered-colimit preservation; online source read 2026-10-17, local archive WANTED."
+   }
+  },
+  {
+   "text": "We prove by induction on $r$ that the canonical map $\\operatorname{colim}_jX_r(f_j)\\to X_r(\\bar f)$, $\\bar f=\\operatorname{colim}_j f_j$, is an isomorphism over $\\operatorname{colim}_jY_j$. The base $r=0$ is the source colimit. For the successor use step 6 for the square-label sets. For any set diagram $S_j$ and fixed simplicial set $K$, maps $\\coprod_{s\\in S_j}K\\to Z$ are functions $S_j\\to\\operatorname{Hom}(K,Z)$; compatibility in $j$ is exactly a function $\\operatorname{colim}_j S_j\\to\\operatorname{Hom}(K,Z)$. Thus $\\operatorname{colim}_j\\coprod_{s\\in S_j}K\\cong\\coprod_{s\\in\\operatorname{colim}_j S_j}K$. The further fixed coproduct over $(n,i)$ commutes with colimits by the same compatible-family calculation. Finally a map from a pushout to $Z$ is a pair of maps agreeing on the common domain. Hence taking a colimit of these pushouts is the pushout of the colimits: both Hom sets are the families of maps on all three legs, compatible in $j$ and agreeing on each span. Evaluation compatibility in step 6 identifies these three legs with the defining span for $X_{r+1}(\\bar f)$. This proves the induction, including compatibility with every stage map and the structural maps to $Y$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01BP",
+    "place": "Proposition 4.1.3.2 (01BP), recursive horn attachment and filtered-colimit preservation; online source read 2026-10-17, local archive WANTED."
+   }
+  },
+  {
+   "text": "Maps from either $\\operatorname{colim}_j\\operatorname{colim}_r X_r(f_j)$ or $\\operatorname{colim}_r\\operatorname{colim}_j X_r(f_j)$ to any $Z$ are precisely families of maps $X_r(f_j)\\to Z$ compatible in both indices. Their universal properties therefore give a canonical isomorphism between these two colimits. Compose it with the stage comparisons of step 7 to obtain $$\\theta:\\operatorname{colim}_jT(f_j)\\xrightarrow{\\sim}T(\\bar f).$$ At each $j$ this composite is $T$ of the cocone square, by the recursive label formula in step 4, so $\\theta$ is exactly the comparison asserted in the statement. At $r=0$ it gives $\\theta\\,(\\operatorname{colim}_j u_{f_j})=u_{\\bar f}$. On each $X_r(f_j)$ both $v_{\\bar f}\\theta$ and $\\operatorname{colim}_jv_{f_j}$ are the original structural map to $Y_j$ followed by its cocone map; uniqueness gives their equality. This proves preservation together with both specified legs.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01BP",
+    "place": "Proposition 4.1.3.2 (01BP), recursive horn attachment and filtered-colimit preservation; online source read 2026-10-17, local archive WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-category-colimit",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-finite-simplicial-hom-filtered-colimit",
+  "lem-coef-inner-horn-cell-generation",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01BP",
+  "place": "Proposition 4.1.3.2; source read online, local archive unavailable. The omitted filtered-colimit and strict-functoriality checks are expanded explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +162,59 @@
    "results": "{\"t\": \"2026-10-17T06:32:40Z\", \"tool\": \"leanfinder\", \"query\": \"Finitely presentable inner horn inclusions give a functorial small object factorization preserving all filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"CategoryTheory.SmallObject.functorialFactorizationData\", \"SSet.modelCategoryQuillen.J\", \"CategoryTheory.SmallObject.hasFunctorialFactorization\", \"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom\", \"CategoryTheory.MorphismProperty.instHasFunctorialFactorizationLlpRlp\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\"], \"digest\": \"d93eb3a44f2a7c42\"}",
    "date": "2026-10-17",
    "verdict": "no match for the complete statement. Mathlib has inner anodyne definitions and a functorial small-object factorization (CategoryTheory.SmallObject.functorialFactorizationData, IsCardinalForSmallObjectArgument.lean:460-468; inner horn smallness in AnodyneExtensions/Inner/Basic.lean:76-102). These do not state preservation of all filtered colimits by the chosen factorization. Generic filtered-colimit declarations and Kan-Quillen all-horn factorization are not exact matches. Sources and candidate types read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"innerAnodyne\"",
+   "results": "{\"t\": \"2026-10-17T08:01:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"innerAnodyne\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeInnerAnodyneExtensions\", \"SSet.instIsStableUnderCobaseChangeInnerAnodyneExtensions\", \"SSet.instIsStableUnderCoproductsInnerAnodyneExtensions\", \"SSet.instIsStableUnderRetractsInnerAnodyneExtensions\", \"SSet.instIsStableUnderTransfiniteCompositionInnerAnodyneExtensions\", \"SSet.instRespectsIsoInnerAnodyneExtensions\", \"SSet.instRespectsIsoStrongInnerAnodyneExtensions\", \"SSet.innerAnodyneExtensions\"], \"digest\": \"b97f00b65ea0e3df\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item: SmallObject.functorialFactorizationData at IsCardinalForSmallObjectArgument.lean:460-468 gives factorization but not filtered-colimit preservation; inner horn smallness at Inner/Basic.lean:78-86 and finite presentability at Presentable.lean:51 are only ingredients. Candidate types and source declarations read; second semantic phrasing also returns only ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFiltered|PreservesFiltered|functorialFactorizationData",
+   "results": "{\"t\": \"2026-10-17T08:01:23Z\", \"tool\": \"grep\", \"query\": \"preservesFiltered|PreservesFiltered|functorialFactorizationData\", \"sub\": \"CategoryTheory/SmallObject\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\"], \"digest\": \"1172420f26eaea03\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item: SmallObject.functorialFactorizationData at IsCardinalForSmallObjectArgument.lean:460-468 gives factorization but not filtered-colimit preservation; inner horn smallness at Inner/Basic.lean:78-86 and finite presentability at Presentable.lean:51 are only ingredients. Candidate types and source declarations read; second semantic phrasing also returns only ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functorial inner horn small object factorization commutes with filtered colimits",
+   "results": "{\"t\": \"2026-10-17T08:01:24Z\", \"tool\": \"leansearch\", \"query\": \"A functorial inner horn small object factorization commutes with filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Limits.PreservesFilteredColimits\", \"CategoryTheory.Functor.isFinitelyAccessible_iff_preservesFilteredColimits\", \"CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits\", \"CategoryTheory.Limits.filtered_colim_preservesFiniteLimits_of_types\", \"CategoryTheory.Limits.preservesSmallestFilteredColimits_of_preservesFilteredColimits\", \"CategoryTheory.Limits.instIsIPCFunctor\", \"CategoryTheory.Limits.PreservesFilteredColimitsOfSize\"], \"digest\": \"b8d340b622846ecf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item: SmallObject.functorialFactorizationData at IsCardinalForSmallObjectArgument.lean:460-468 gives factorization but not filtered-colimit preservation; inner horn smallness at Inner/Basic.lean:78-86 and finite presentability at Presentable.lean:51 are only ingredients. Candidate types and source declarations read; second semantic phrasing also returns only ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial inner anodyne inner fibration factorization of simplicial maps preserving filtered colimits",
+   "results": "{\"t\": \"2026-10-17T08:01:33Z\", \"tool\": \"leanfinder\", \"query\": \"Functorial inner anodyne inner fibration factorization of simplicial maps preserving filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantBrownFactorization.mk'_i\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.FibrantBrownFactorization.mk'_r\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.J\", \"HomotopicalAlgebra.FibrantBrownFactorization.r\", \"HomotopicalAlgebra.FibrantBrownFactorization.mk'_p\"], \"digest\": \"0d09db6256a85a7b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item: SmallObject.functorialFactorizationData at IsCardinalForSmallObjectArgument.lean:460-468 gives factorization but not filtered-colimit preservation; inner horn smallness at Inner/Basic.lean:78-86 and finite presentability at Presentable.lean:51 are only ingredients. Candidate types and source declarations read; second semantic phrasing also returns only ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presentable inner horn inclusions give a functorial small object factorization preserving all filtered colimits",
+   "results": "{\"t\": \"2026-10-17T08:02:05Z\", \"tool\": \"leanfinder\", \"query\": \"Finitely presentable inner horn inclusions give a functorial small object factorization preserving all filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"CategoryTheory.SmallObject.functorialFactorizationData\", \"SSet.modelCategoryQuillen.J\", \"CategoryTheory.SmallObject.hasFunctorialFactorization\", \"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom\", \"CategoryTheory.MorphismProperty.instHasFunctorialFactorizationLlpRlp\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\"], \"digest\": \"d93eb3a44f2a7c42\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item: SmallObject.functorialFactorizationData at IsCardinalForSmallObjectArgument.lean:460-468 gives factorization but not filtered-colimit preservation; inner horn smallness at Inner/Basic.lean:78-86 and finite presentability at Presentable.lean:51 are only ingredients. Candidate types and source declarations read; second semantic phrasing also returns only ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "innerAnodyneExtensions|innerFibrations",
+   "results": "{\"t\": \"2026-10-17T08:02:05Z\", \"tool\": \"grep\", \"query\": \"innerAnodyneExtensions|innerFibrations\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"a3cb85abbf9c13cc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item: SmallObject.functorialFactorizationData at IsCardinalForSmallObjectArgument.lean:460-468 gives factorization but not filtered-colimit preservation; inner horn smallness at Inner/Basic.lean:78-86 and finite presentability at Presentable.lean:51 are only ingredients. Candidate types and source declarations read; second semantic phrasing also returns only ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "instIsFinitelyPresentable|instance.*IsFinitelyPresentable|IsFinitelyPresentable",
+   "results": "{\"t\": \"2026-10-17T08:02:16Z\", \"tool\": \"grep\", \"query\": \"instIsFinitelyPresentable|instance.*IsFinitelyPresentable|IsFinitelyPresentable\", \"sub\": \"AlgebraicTopology/SimplicialSet/Presentable.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"33\", \"34\", \"38\", \"51\"], \"digest\": \"34fee1732bae9e5e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete item: SmallObject.functorialFactorizationData at IsCardinalForSmallObjectArgument.lean:460-468 gives factorization but not filtered-colimit preservation; inner horn smallness at Inner/Basic.lean:78-86 and finite presentability at Presentable.lean:51 are only ingredients. Candidate types and source declarations read; second semantic phrasing also returns only ingredients."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-localization-existence",
@@ -94,5 +250,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-filtered-inner-horn-factorization",
+  "worker": "stage1",
+  "summary": "Retained every clause and supplied the explicit omega-stage relative inner-horn attachment proof. Reused the existing inner-horn cell Mathlib leaf and filtered-colimit/finite-limit Mathlib leaf. Created one Mathlib leaf for finite simplicial Hom preservation. Expanded strict naturality, all smallness checks, the arbitrary-filtered-category square-set comparison, and both-leg compatibility. No project declaration attaches. Local Kerodon archive requested in report.",
+  "blueprint": "Supports the filtered-union localization construction in the recorded ancestry to prop-coef-integral-exceptional-adjoint, proof paragraph 2 and naturality paragraph; no unit or chapter route changed. Kerodon 01BP recursive attachment, final lifting paragraph, and omitted filtered-colimit check are realized by steps 1-8."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-e53137e79",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-e53137e79 (reviewer sub-agent of L); spot-checked: Read the item and new node in full, the statements of all five cited nodes, the citer lem-coef-simplicial-localization-existence, and the Mathlib source (Presentable.lean:51, Presentable/Finite.lean:67, SimplicialSet/Finite.lean:31, Inner/Basic.lean:89). The item statement is unchanged and not weakened: its index condition is exactly filtered, and it has strict functoriality, both naturality equations, both legs, and stays in one universe. Steps 1-8 are correct. Step 2: horn finiteness holds because deleting repeated vertices keeps the image, so the shorter chain stays in the horn. Step 5: inner anodyne by the cell-generation Mathlib leaf (a cell map is its own retract); the fibration filler comes from factoring the horn map through a finite stage of the sequential colimit (by the finite-Hom node) and using that stage's attached simplex, with both triangles checked. Step 6: finite-Hom node plus Stacks 002W for the cospan, valid for any small filtered I. Steps 7-8: colimits exchanged by their universal properties, and the comparison is identified as the canonical one. The new node lem-coef-finite-simplicial-hom-filtered-colimit is an exact Mathlib leaf (SSet.Finite.instIsFinitelyPresentable, unfolded with isFinitelyPresentable_iff_preservesFilteredColimitsOfSize, universes matching). It is statement-only and self-contained; tested at K empty (needs nonempty I, which filtered gives), K = point, and noninjective transitions. No duplicate (checked small-inner-horn-completion, pointwise-compact-diagrams, joyal-filtered-equivalences, hypercover lifting, inner-horn-cell-generation) and no blueprint same_as. Off-unit citations are only definitions or Mathlib leaves, so no tool_uses. No SGA, target or coefficient changes. Kerodon 01BP is WANTED and the proof is marked agent-written. No fixes."
  }
 }
