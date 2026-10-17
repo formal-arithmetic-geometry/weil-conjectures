@@ -26,9 +26,7 @@
   "def-sp-filtered-complex-subquotients",
   "def-pc-module-kflat-complex",
   "def-weil-pbc-free-module",
-  "def-kun-finite-filtered-module-homotopy",
-  "lem-kun-filtered-tensor-graded-comparison",
-  "lem-sp-finite-filtration-induction"
+  "def-kun-finite-filtered-module-homotopy"
  ],
  "proof": [
   {
@@ -268,7 +266,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-kun-bounded-tensor-tor-spectral-sequence",
   "by": "worker",
@@ -321,12 +319,12 @@
   "lem-pc-right-fraction-common-refinement"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q18-9fa5c4cdb",
-  "group": "Q18",
+  "reviewer": "NT-cc-Q81-d18709907",
+  "group": "Q81",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-9fa5c4cdb (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited statements; checked Stacks 0H7X, 0BYH, 06Y3, filtered fractions, long exact sequences, and roof comparisons. All eight steps and both new nodes hold, including edge cases. Checked duplicates, target coefficient categories and morphism directions; accepted four generic tool uses. No repairs needed. Detailed findings are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-d18709907 (reviewer sub-agent of L); spot-checked: This is a return repair with no new nodes. It changes the item's status from unsplit to split and removes two unused stmt_deps (lem-kun-filtered-tensor-graded-comparison, lem-sp-finite-filtration-induction). Neither appears in the statement or in any step's uses. I re-read the whole item anyway. Statement: it matches Stacks 0H7X (more-algebra.tex:15645-15764), restricted to labels in [a,b), so F^aP=P and F^bP=0. No degree bound is imposed and nothing is weakened. The 𝓗_f(R)/W in the statement agree with def-kun-finite-filtered-module-homotopy. Steps 1-3 (generators, kernel-killing cells, union): I checked filtration preservation, the chain-map identities, the subcomplex property by induction, and injectivity from finite support, including the cases i<=a and i>=b. Step 4: the rows are degreewise exact by the cokernel definition, the ladder commutes by the naturality node, and I redid both five-lemma chases. Step 5: every hypothesis of lem-kun-split-cell-complex-kflat holds with C0=0 and C_{m+1}=P_m/F^iP_m/gr^iP_m; gr^iP_m injects into gr^iP on generators. Steps 6-8: the Ore and cancellation conditions run in the same direction as Mathlib HasRightCalculusOfFractions (CalculusOfFractions.lean:207-211), which is the convention of the representation and common-refinement leaves. Resolving the roof apex keeps denominators in W, giving essential surjectivity, fullness and faithfulness; the inverse functor follows. proof_deps is exactly the union of the step uses. There is no cycle (transitive closure of 165 nodes) and no duplicate (rg for 0H7X and filtered quasi-isomorphism finds only the item's own helpers and its parent chain). No SGA is cited. I accept the four generic tool uses (two long-exact-sequence lemmas from sk-thm-p1, two right-fraction lemmas from sk-thm-picard-duality). Edge cases tested: R=0, K=0, K=R in a single degree, b=a+1, identity roofs. No fixes were written."
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.FiniteFilteredKFlatReplacement",
