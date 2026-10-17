@@ -333,6 +333,78 @@ theorem nonempty_iso_upperStar_fib (K : DerivedCategory 𝒳) {F : DerivedCatego
   exact ⟨iUp.mapDerivedCategory.mapIso e₁ ≪≫
     asIso ((derivedUpperLowerAdjunctionI adjI).counit.app _)⟩
 
+/-- The supported localization triangle `i_* RΓ_Z K ⟶ K ⟶ Rj_* j^* K ⟶`, as a functor of `K`. -/
+noncomputable def triangleFunctor : DerivedCategory 𝒳 ⥤ Triangle (DerivedCategory 𝒳) where
+  obj K := Recollement.triangle (derivedAdjunctionJ adjJ) (derivedAdjunction adjI adjJ h₀ hdet) K
+    (existsUnique_distTriang adjI adjJ h₀ hdet K).exists.choose
+  map {K K'} φ := (Recollement.exists_triangleHom _ _ (isZero_mapDerivedCategory_jUp_iLow h₀) φ
+    (existsUnique_distTriang adjI adjJ h₀ hdet K).exists.choose_spec
+    (existsUnique_distTriang adjI adjJ h₀ hdet K').exists.choose_spec).choose
+  map_id K := Recollement.triangleHom_ext _ _ (isZero_mapDerivedCategory_jUp_iLow h₀)
+    (existsUnique_distTriang adjI adjJ h₀ hdet K).exists.choose_spec
+    (existsUnique_distTriang adjI adjJ h₀ hdet K).exists.choose_spec
+    ((Recollement.exists_triangleHom _ _ (isZero_mapDerivedCategory_jUp_iLow h₀) (𝟙 K)
+      (existsUnique_distTriang adjI adjJ h₀ hdet K).exists.choose_spec
+      (existsUnique_distTriang adjI adjJ h₀ hdet K).exists.choose_spec).choose_spec.2.1)
+  map_comp {K K' K''} φ ψ := Recollement.triangleHom_ext _ _ (isZero_mapDerivedCategory_jUp_iLow h₀)
+    (existsUnique_distTriang adjI adjJ h₀ hdet K).exists.choose_spec
+    (existsUnique_distTriang adjI adjJ h₀ hdet K'').exists.choose_spec (by
+      rw [(Recollement.exists_triangleHom _ _ (isZero_mapDerivedCategory_jUp_iLow h₀) (φ ≫ ψ)
+          (existsUnique_distTriang adjI adjJ h₀ hdet K).exists.choose_spec
+          (existsUnique_distTriang adjI adjJ h₀ hdet K'').exists.choose_spec).choose_spec.2.1,
+        Pretriangulated.comp_hom₂,
+        (Recollement.exists_triangleHom _ _ (isZero_mapDerivedCategory_jUp_iLow h₀) φ
+          (existsUnique_distTriang adjI adjJ h₀ hdet K).exists.choose_spec
+          (existsUnique_distTriang adjI adjJ h₀ hdet K').exists.choose_spec).choose_spec.2.1,
+        (Recollement.exists_triangleHom _ _ (isZero_mapDerivedCategory_jUp_iLow h₀) ψ
+          (existsUnique_distTriang adjI adjJ h₀ hdet K').exists.choose_spec
+          (existsUnique_distTriang adjI adjJ h₀ hdet K'').exists.choose_spec).choose_spec.2.1])
+
+lemma triangleFunctor_obj_distinguished (K : DerivedCategory 𝒳) :
+    (triangleFunctor adjI adjJ h₀ hdet).obj K ∈ distTriang _ :=
+  (existsUnique_distTriang adjI adjJ h₀ hdet K).exists.choose_spec
+
+lemma triangleFunctor_map_hom₁ {K K' : DerivedCategory 𝒳} (φ : K ⟶ K') :
+    ((triangleFunctor adjI adjJ h₀ hdet).map φ).hom₁ =
+      iLow.mapDerivedCategory.map ((functor adjI adjJ h₀ hdet).rightDerivedFunctor.map φ) :=
+  (Recollement.exists_triangleHom _ _ (isZero_mapDerivedCategory_jUp_iLow h₀) φ
+    (existsUnique_distTriang adjI adjJ h₀ hdet K).exists.choose_spec
+    (existsUnique_distTriang adjI adjJ h₀ hdet K').exists.choose_spec).choose_spec.1
+
+lemma triangleFunctor_map_hom₂ {K K' : DerivedCategory 𝒳} (φ : K ⟶ K') :
+    ((triangleFunctor adjI adjJ h₀ hdet).map φ).hom₂ = φ :=
+  (Recollement.exists_triangleHom _ _ (isZero_mapDerivedCategory_jUp_iLow h₀) φ
+    (existsUnique_distTriang adjI adjJ h₀ hdet K).exists.choose_spec
+    (existsUnique_distTriang adjI adjJ h₀ hdet K').exists.choose_spec).choose_spec.2.1
+
+lemma triangleFunctor_map_hom₃ {K K' : DerivedCategory 𝒳} (φ : K ⟶ K') :
+    ((triangleFunctor adjI adjJ h₀ hdet).map φ).hom₃ =
+      jLow.rightDerivedFunctor.map (jUp.mapDerivedCategory.map φ) :=
+  (Recollement.exists_triangleHom _ _ (isZero_mapDerivedCategory_jUp_iLow h₀) φ
+    (existsUnique_distTriang adjI adjJ h₀ hdet K).exists.choose_spec
+    (existsUnique_distTriang adjI adjJ h₀ hdet K').exists.choose_spec).choose_spec.2.2
+
+/-- The first vertex of the supported localization triangle is `i_* RΓ_Z`. -/
+noncomputable def triangleFunctorπ₁Iso : triangleFunctor adjI adjJ h₀ hdet ⋙ Triangle.π₁ ≅
+    (functor adjI adjJ h₀ hdet).rightDerivedFunctor ⋙ iLow.mapDerivedCategory :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun φ ↦ by
+    simp only [Functor.comp_map, Triangle.π₁_map, triangleFunctor_map_hom₁, Iso.refl_hom,
+      Category.comp_id, Category.id_comp])
+
+/-- The second vertex of the supported localization triangle is `K`. -/
+noncomputable def triangleFunctorπ₂Iso :
+    triangleFunctor adjI adjJ h₀ hdet ⋙ Triangle.π₂ ≅ 𝟭 _ :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun φ ↦ by
+    simp only [Functor.comp_map, Triangle.π₂_map, triangleFunctor_map_hom₂, Iso.refl_hom,
+      Category.comp_id, Category.id_comp, Functor.id_map])
+
+/-- The third vertex of the supported localization triangle is `Rj_* j^*`. -/
+noncomputable def triangleFunctorπ₃Iso : triangleFunctor adjI adjJ h₀ hdet ⋙ Triangle.π₃ ≅
+    jUp.mapDerivedCategory ⋙ jLow.rightDerivedFunctor :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun φ ↦ by
+    simp only [Functor.comp_map, Triangle.π₃_map, triangleFunctor_map_hom₃, Iso.refl_hom,
+      Category.comp_id, Category.id_comp])
+
 end Derived
 
 end Sheaves

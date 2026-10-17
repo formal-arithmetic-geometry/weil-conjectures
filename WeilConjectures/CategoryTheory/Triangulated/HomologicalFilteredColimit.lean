@@ -8,6 +8,8 @@ module
 public import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 public import Mathlib.CategoryTheory.Triangulated.HomologicalFunctor
+public import Mathlib.CategoryTheory.Triangulated.Yoneda
+public import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-!
 # Homological functors and colimits of triangles
@@ -217,6 +219,63 @@ lemma IsContinuousOn.of_triangle₁ (h₂ : F.IsContinuousOn (Triangle.π₂.map
     (fun i ↦ inv_rot_of_distTriang _ (hT i)) ((Pretriangulated.invRotate C).mapCocone s)
     (inv_rot_of_distTriang _ hs) (h₃.shift (-1)) h₂
 
+omit [HasExactColimitsOfShape I A] in
+/-- Continuity is invariant under isomorphism of the functors along which a cocone is mapped. -/
+lemma isContinuousOn_mapCocone_iff_of_iso {D : Type*} [Category D] {Φ Φ' : D ⥤ C} (e : Φ ≅ Φ')
+    {G : I ⥤ D} (s : Cocone G) :
+    F.IsContinuousOn (Φ.mapCocone s) ↔ F.IsContinuousOn (Φ'.mapCocone s) :=
+  forall_congr' fun n ↦ isIso_colimitDesc_iff_of_iso (Functor.isoWhiskerLeft G e) (e.app s.pt)
+    (fun i ↦ e.hom.naturality (s.ι.app i)) (F.shift n)
+
+omit [HasColimitsOfShape I A] [HasExactColimitsOfShape I A] in
+/-- If the comparison map for `K` is an isomorphism, so is the comparison map for `K ⋙ P`, for
+`P` preserving colimits of shape `I`. -/
+lemma isIso_colimitDesc_comp_of_preserves {A' B : Type*} [Category A'] [Category B]
+    [HasColimitsOfShape I A'] [HasColimitsOfShape I B] (P : A' ⥤ B) [PreservesColimitsOfShape I P]
+    {K : I ⥤ A'} {c : Cocone K} (h : IsIso (colimit.desc K c)) :
+    IsIso (colimit.desc (K ⋙ P) (P.mapCocone c)) := by
+  have hc : IsColimit c := IsColimit.ofPointIso (colimit.isColimit K) (i := h)
+  exact inferInstanceAs
+    (IsIso ((colimit.isColimit _).coconePointUniqueUpToIso (isColimitOfPreserves P hc)).hom)
+
 end Functor
+
+section Coyoneda
+
+universe v u₁ u₂
+
+variable {C D : Type*} [Category.{v} C] [Category.{v} D]
+  [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]
+  [Pretriangulated C] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
+  [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+  {I : Type*} [Category I] [HasColimitsOfShape I AddCommGrpCat.{v}]
+
+open Opposite
+
+/-- Transport of continuity of `Hom(P, -)` along an adjunction `L ⊣ R`:
+`Hom(L P, -) ≅ Hom(P, R -)`. -/
+lemma isContinuousOn_preadditiveCoyoneda_of_adjunction {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R)
+    [L.Additive] [R.Additive] [R.CommShift ℤ] (P : C) {G : I ⥤ D} (s : Cocone G)
+    (h : (preadditiveCoyoneda.obj (op P)).IsContinuousOn (R.mapCocone s)) :
+    (preadditiveCoyoneda.obj (op (L.obj P))).IsContinuousOn s := by
+  intro n
+  let e₀ : preadditiveCoyoneda.obj (op (L.obj P)) ≅ R ⋙ preadditiveCoyoneda.obj (op P) :=
+    NatIso.ofComponents (fun Y ↦ (adj.homAddEquiv P Y).toAddCommGrpIso) (fun f ↦ by
+      ext x
+      exact adj.homEquiv_naturality_right x f)
+  let e : shiftFunctor D n ⋙ preadditiveCoyoneda.obj (op (L.obj P)) ≅
+      R ⋙ shiftFunctor C n ⋙ preadditiveCoyoneda.obj (op P) :=
+    Functor.isoWhiskerLeft _ e₀ ≪≫ (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (R.commShiftIso n) _ ≪≫ Functor.associator _ _ _
+  exact (Functor.isIso_colimitDesc_iff_of_natIso s e).2 (h n)
+
+/-- Continuity of `Hom(P, -)` only depends on `P` up to isomorphism. -/
+lemma isContinuousOn_preadditiveCoyoneda_of_iso {P P' : C} (e : P ≅ P') {G : I ⥤ C}
+    (s : Cocone G) (h : (preadditiveCoyoneda.obj (op P)).IsContinuousOn s) :
+    (preadditiveCoyoneda.obj (op P')).IsContinuousOn s := fun n ↦
+  (Functor.isIso_colimitDesc_iff_of_natIso s
+    (Functor.isoWhiskerLeft (shiftFunctor C n) (preadditiveCoyoneda.mapIso e.op))).2 (h n)
+
+end Coyoneda
 
 end CategoryTheory
