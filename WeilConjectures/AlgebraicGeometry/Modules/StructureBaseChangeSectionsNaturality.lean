@@ -116,7 +116,6 @@ theorem structure_baseChange_sections_naturality
       congrArg (fun f : C ⟶ Y ↦ f ⁻¹ᵁ U) sq'.symm
     have ew : t ⁻¹ᵁ v ⁻¹ᵁ g ⁻¹ᵁ U = w ⁻¹ᵁ q ⁻¹ᵁ g ⁻¹ᵁ U :=
       congrArg (fun f : C ⟶ B ↦ f ⁻¹ᵁ (g ⁻¹ᵁ U)) wq.symm
-    -- Expose only the concrete pushforward restriction maps, retaining the open transports.
     with_unfolding_all
       change C.presheaf.map (eqToHom e').op ((w ≫ k).app (p ⁻¹ᵁ U) z) =
         C.presheaf.map (eqToHom ew).op

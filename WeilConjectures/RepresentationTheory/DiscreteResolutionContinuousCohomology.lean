@@ -11,8 +11,8 @@ public import Mathlib.RepresentationTheory.Invariants
 public import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Category.Grp.AB
-import WeilConjectures.RepresentationTheory.DiscreteResolutionInhomogeneousCohomology
-import WeilConjectures.RepresentationTheory.HomogeneousInhomogeneousContinuousCohomology
+public import WeilConjectures.RepresentationTheory.DiscreteResolutionInhomogeneousCohomology
+public import WeilConjectures.RepresentationTheory.HomogeneousInhomogeneousContinuousCohomology
 
 /-!
 # Continuous cohomology from a transported injective resolution
@@ -29,8 +29,9 @@ open CategoryTheory
 
 namespace Rep
 
-/-- Invariants of a transported injective resolution compute homogeneous continuous
-cohomology, with all coefficient modules in the same universe.
+/-- Additive equivalence between the homology of the invariants of a transported injective
+resolution and homogeneous continuous cohomology, with all coefficient modules in the same
+universe.
 
 Source: Stacks Project, Etale Cohomology, Section 0DVG, profinite comparison.
 (blueprint: lem-sc-discrete-resolution-continuous-cohomology).
@@ -57,7 +58,7 @@ the equivariant coefficient equivalence identifies the complexes for E(F) and N.
 Taking kernel modulo image, which computes underlying TopModuleCat homology, completes
 the comparison with the invariant complex of the given resolution. This uses integer
 modules and does not require a finite coefficient ring. -/
-theorem nonempty_equiv_invariantResolution_continuousCohomology
+noncomputable def invariantResolutionHomologyAddEquivContinuousCohomology
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
     (A : Type v) [Category.{w} A] [Abelian A]
@@ -69,10 +70,10 @@ theorem nonempty_equiv_invariantResolution_continuousCohomology
     (e : (E.functor.obj F).obj.V ≃ₗ[ℤ] N.V)
     (he : ∀ (g : G) (x : (E.functor.obj F).obj.V),
       e ((E.functor.obj F).obj.ρ g x) = N.ρ g (e x)) (q : ℕ) :
-    Nonempty (((((E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙
+    ((((E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙
       forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat).mapHomologicalComplex
-        (ComplexShape.up ℕ)).obj I.cocomplex).homology q) ≃
-      continuousCohomology q N) := by
+        (ComplexShape.up ℕ)).obj I.cocomplex).homology q) ≃+
+      continuousCohomology q N := by
   classical
   have hN : ∀ x : N.V, IsOpen {g : G | N.ρ g x = x} := by
     intro x
@@ -90,7 +91,10 @@ theorem nonempty_equiv_invariantResolution_continuousCohomology
         simpa only [he, e.apply_symm_apply] using h
     rw [hs]
     exact hx
-  obtain ⟨t, ht⟩ := exists_homogeneousCochains_inhomogeneous_coordinates G N hN
+  have htex := exists_homogeneousCochains_inhomogeneous_coordinates G N hN
+  have ht := htex.choose_spec
+  set t := htex.choose
+  clear_value t
   let V := forget₂ (TopModuleCat.{max u s} ℤ) (ModuleCat.{max u s} ℤ) ⋙
     forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat
   let K := (V.mapHomologicalComplex (ComplexShape.up ℕ)).obj
@@ -117,9 +121,9 @@ theorem nonempty_equiv_invariantResolution_continuousCohomology
           e ((-1 : ℤ) ^ (k.val + 1) •
             e.symm (t n x (Fin.contractNth k (· * ·) g)))
     simp only [he, e.apply_symm_apply, map_zsmul]
-  obtain ⟨a⟩ := nonempty_equiv_invariantResolution_inhomogeneous G A E F I K t' ht' q
+  let a := invariantResolutionHomologyAddEquivInhomogeneous G A E F I K t' ht' q
   let b : K.homology q ≅ V.obj (continuousCohomology q N) :=
     ((TopRep.homogeneousCochains N).sc q).mapHomologyIso V
-  exact ⟨a.trans b.addCommGroupIsoToAddEquiv.toEquiv⟩
+  exact a.trans b.addCommGroupIsoToAddEquiv
 
 end Rep

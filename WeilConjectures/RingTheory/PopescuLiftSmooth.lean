@@ -26,7 +26,7 @@ namespace Algebra
 properties. This is about `d.liftingAlgebra`, never an arbitrary algebra D.
 
 Source: Stacks Project, Tag 07CP, key equality through the end of the proof;
-the original DAG steps 8--18.
+the original blueprint steps 8--18.
 (blueprint: lem-weil-pbc-popescu-lift-smooth).
 
 Proof: Expanding the cleared relations gives πp_{kl}=-a_k(f_l-πz_l)+Σh_{klj}(f_j-πz_j).

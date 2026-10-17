@@ -73,7 +73,7 @@ The multiplier remains outside the prime, so the localized fractions agree at th
 The stipulated transition and fraction formulas therefore give a bijective comparison
 from the colimit of N. Addition is respected at common stages; the comparison is an
 additive equivalence with the stated coprojection formula. -/
-theorem localizedModuleColimitComparison
+theorem exists_colimit_addEquiv_localizedModule
     {Λ : Type u} [Preorder Λ] [Nonempty Λ] [IsDirected Λ (· ≤ ·)]
     {T : Type u} [CommRing T] {M : Type v} [AddCommGroup M] [Module T M]
     (B : Λ ⥤ CommRingCat.{u}) (D : Λ ⥤ AddCommGrpCat.{v})

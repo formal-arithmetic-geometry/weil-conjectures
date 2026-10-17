@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullback
 import WeilConjectures.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 import WeilConjectures.AlgebraicGeometry.OpenRestrictionKFlatModel
 import WeilConjectures.AlgebraicGeometry.OpenRestrictionTotalTensor
-import WeilConjectures.AlgebraicGeometry.SheafZeroStalks
 
 /-! # Locality of a fixed Tor amplitude interval
 

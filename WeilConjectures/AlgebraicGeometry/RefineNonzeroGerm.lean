@@ -126,7 +126,6 @@ theorem refine_section_nonzero_germs (X : Scheme.{u})
     simpa only [map_zero] using h.trans hz.symm
   have hinj : Function.Injective (e.hom.hom.app (op V')) :=
     ((sheafToPresheaf _ _).mapIso e).app (op V') |>.toEquiv.injective
-  -- Equality of the two values would kill the retained marked germ.
   have hmz : m ≠ z := by
     intro hmz
     have hzero : F.obj.map r.op a = 0 := hinj (by rw [haV, hzV, hmz])

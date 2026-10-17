@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.AlgebraicGeometry.FiniteConstantAbelianRefinement
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # Finite local constancy after forgetting an abelian structure
@@ -36,7 +37,7 @@ private theorem finite_constant_value {Y : Scheme.{u}}
     (e : ((sheafCompose Y.smallEtaleTopology
       (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G).over U ≅
         (constantSheaf (Y.smallEtaleTopology.over U) (Type (u + 1))).obj S)
-    (hfinite : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
+    (hfinite : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y),
       Finite (((pointSmallEtale s).sheafFiber (A := Type (u + 1))).obj
         ((sheafCompose Y.smallEtaleTopology
           (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G)))
@@ -89,13 +90,13 @@ theorem finite_local_abelian_forget_iff {Y : Scheme.{u}}
     IsFiniteLocallyConstantSheafOfTypes
       ((sheafCompose Y.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G) ↔
     IsLocallyConstantSheaf G ∧
-      ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
+      ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y),
         Finite (((pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj G) := by
   have : CategoryTheory.Limits.PreservesFilteredColimitsOfSize.{u, u}
       (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
     CategoryTheory.Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1}
       (CategoryTheory.forget AddCommGrpCat.{u + 1})
-  have hfinite (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y) :
+  have hfinite (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) :
       Finite (((pointSmallEtale s).sheafFiber (A := Type (u + 1))).obj
         ((sheafCompose Y.smallEtaleTopology
           (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G)) ↔
@@ -129,14 +130,14 @@ theorem finite_local_abelian_forget_iff {Y : Scheme.{u}}
             (𝒰₀.etalePrecoverageToEtale i.1)).mem_essImage_of_isConstant
       have : Nonempty (𝒰.etalePrecoverageToEtale i).left := i.2
       have : Finite S := finite_constant_value G (𝒰.etalePrecoverageToEtale i) S e.symm
-        h.finite_sheafFiber
+        (fun Ω _ _ s ↦ h.finite_sheafFiber Ω s)
       exact finite_constant_abelian_refinement G (𝒰.etalePrecoverageToEtale i) S e.symm
     choose 𝒱 h𝒱 using hrefine
     refine ⟨⟨⟨𝒰.bind 𝒱, fun i ↦ ?_⟩⟩⟩
     exact h𝒱 i.1 i.2
   · rintro ⟨hlocal, hstalk⟩
-    refine isFiniteLocallyConstantSheafOfTypes_of_finite_sheafFiber ?_
-      fun Ω _ _ s ↦ (hfinite Ω s).mpr (hstalk Ω s)
+    refine ⟨?_, isFiniteSheaf_of_finite_algClosed_stalks _
+      fun Ω _ _ s ↦ (hfinite Ω s).mpr (hstalk Ω s)⟩
     obtain ⟨⟨𝒰, h𝒰⟩⟩ := hlocal.nonempty_locallyConstantDatum
     refine ⟨𝒰, fun i ↦ ?_⟩
     have := h𝒰 i

@@ -12,6 +12,7 @@ public import WeilConjectures.ConstructibleSheaf.Refinement
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-! # Finite local constancy under refinement
 
@@ -279,10 +280,9 @@ theorem refinement_preserves_finite_lisse
       eqToIso (congrArg (fun f => (etaleSetPullback f).obj F)
         (Limits.pullback.condition (f := a) (g := b)).symm) ≪≫
       ((c X (T.domain i) (Limits.pullback a b) a (Limits.pullback.fst a b)).app F).symm
-  refine isFiniteLocallyConstantSheafOfTypes_of_finite_sheafFiber
-    (etaleSetLocallyConstant_descend (Limits.pullback.fst a b)
-      ((etaleSetPullback a).obj F) (locallyConstant_of_iso e hq)) ?_
-  intro Ω _ _ s
+  refine ⟨etaleSetLocallyConstant_descend (Limits.pullback.fst a b)
+    ((etaleSetPullback a).obj F) (locallyConstant_of_iso e hq), ?_⟩
+  refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_
   obtain ⟨t, ht⟩ := exists_comp_eq_of_surjective (Limits.pullback.fst a b) s
   obtain ⟨cq, hcq, _⟩ := etaleSetInverseImageStalkGerm (S.domain k) (Limits.pullback a b)
     (Limits.pullback.snd a b) ((etaleSetPullback b).obj F) Ω t

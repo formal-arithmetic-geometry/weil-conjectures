@@ -68,7 +68,7 @@ factorization in which some denominator becomes elementary standard.
 Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07F4
 (blueprint: lem-weil-pbc-popescu-delocalize-base).
 
-Proof (the eleven steps of the DAG node):
+Proof (the eleven steps of the blueprint node):
 1. Use `lem-weil-pbc-smooth-retract-standard-smooth` to replace the smooth intermediate
    algebra by a standard smooth algebra with a retraction, preserving the factorization.
 2. Choose finitely many generators and relations for `A` using

@@ -48,10 +48,10 @@ The empty generating set gives empty tuples and m = 0; no nonzero or proper
 ideal assumption is needed. -/
 private theorem exists_finite_koszul_cycle_lift
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
-    (_hflat : (algebraMap R S).Flat) (I : Ideal R) (_hI : I.FG)
-    (_hquot : Function.Bijective
+    (hflat : (algebraMap R S).Flat) (I : Ideal R) (_hI : I.FG)
+    (hquot : Function.Bijective
       (Ideal.quotientMap (I.map (algebraMap R S)) (algebraMap R S) Ideal.le_comap_map))
-    (n : ℕ) (_hn : 1 ≤ n) (s : Finset R)
+    (n : ℕ) (hn : 1 ≤ n) (s : Finset R)
     (_hs : Ideal.span (s : Set R) = I ^ n)
     {N : Type w} [AddCommGroup N] [Module R N]
     (x : s → S ⊗[R] N)
@@ -60,7 +60,7 @@ private theorem exists_finite_koszul_cycle_lift
       (∀ i j : s, (i : R) • y j = (j : R) • y i) ∧
       ∀ i : s, 1 ⊗ₜ[R] y i = x i + (i : R) • m := by
   classical
-  let : Module.Flat R S := RingHom.flat_algebraMap_iff.mp _hflat
+  let : Module.Flat R S := RingHom.flat_algebraMap_iff.mp hflat
   let δ : (s → N) →ₗ[R] (s × s → N) :=
     LinearMap.pi fun ij ↦
       (ij.1 : R) • LinearMap.proj ij.2 - (ij.2 : R) • LinearMap.proj ij.1
@@ -127,13 +127,13 @@ private theorem exists_finite_koszul_cycle_lift
         Ideal.Quotient.mk (I.map (algebraMap R S)) (algebraMap R S r) := by
     refine ⟨RingEquiv.ofBijective
       (Ideal.quotientMap (I.map (algebraMap R S)) (algebraMap R S)
-        Ideal.le_comap_map) _hquot, ?_⟩
+        Ideal.le_comap_map) hquot, ?_⟩
     intro r
     change Ideal.quotientMap (I.map (algebraMap R S)) (algebraMap R S)
       Ideal.le_comap_map (Ideal.Quotient.mk I r) = _
     exact Ideal.quotientMap_mk
   have hT := RingTheory.torsionModule_flat_baseChange_bijective
-    (T := H) (algebraMap R S) _hflat I hiso
+    (T := H) (algebraMap R S) hflat I hiso
     (fun h ↦ ⟨n, by omega, hkill h⟩)
   have hmodule : Module.compHom S (algebraMap R S) = (inferInstance : Module R S) := by
     ext r a
@@ -196,16 +196,16 @@ all generators, hence on their span. The zero ideal gives the zero map;
 for the unit ideal every map is principal, so the same statement applies. -/
 theorem exists_ideal_power_hom_lift
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
-    (_hflat : (algebraMap R S).Flat) (I : Ideal R) (_hI : I.FG)
-    (_hquot : Function.Bijective
+    (hflat : (algebraMap R S).Flat) (I : Ideal R) (hI : I.FG)
+    (hquot : Function.Bijective
       (Ideal.quotientMap (I.map (algebraMap R S)) (algebraMap R S) Ideal.le_comap_map))
-    (n : ℕ) (_hn : 1 ≤ n)
+    (n : ℕ) (hn : 1 ≤ n)
     {N : Type w} [AddCommGroup N] [Module R N]
     (d : ↥(I ^ n) →ₗ[R] S ⊗[R] N) :
     ∃ (l : ↥(I ^ n) →ₗ[R] N) (m : S ⊗[R] N),
       ∀ r : ↥(I ^ n), 1 ⊗ₜ[R] l r = d r + (r : R) • m := by
   classical
-  obtain ⟨s, hs⟩ := _hI.pow (n := n)
+  obtain ⟨s, hs⟩ := hI.pow (n := n)
   let f : s → ↥(I ^ n) := fun i ↦ ⟨i, hs ▸ Ideal.subset_span i.property⟩
   have hx : ∀ i j : s, (i : R) • d (f j) = (j : R) • d (f i) := by
     intro i j
@@ -214,7 +214,7 @@ theorem exists_ideal_power_hom_lift
     apply Subtype.ext
     exact mul_comm _ _
   obtain ⟨y, m, hy, hym⟩ := exists_finite_koszul_cycle_lift
-    _hflat I _hI _hquot n _hn s hs (fun i ↦ d (f i)) hx
+    hflat I hI hquot n hn s hs (fun i ↦ d (f i)) hx
   let a : (s →₀ R) →ₗ[R] ↥(I ^ n) := Finsupp.linearCombination R f
   let b : (s →₀ R) →ₗ[R] N := Finsupp.linearCombination R y
   let c : N →ₗ[R] S ⊗[R] N := TensorProduct.mk R S N 1
@@ -255,7 +255,7 @@ theorem exists_ideal_power_hom_lift
     have hc : c (b z) = 0 := by
       have he := congrArg (fun F : (s →₀ R) →ₗ[R] S ⊗[R] N ↦ F z) hbc
       simpa [haz] using he
-    have hi := (Ideal.primaryComponent_baseChange_bijective I _hI _hflat _hquot N).1
+    have hi := (Ideal.primaryComponent_baseChange_bijective I hI hflat hquot N).1
     have he : Ideal.primaryComponent.map I c ⟨b z, hbz⟩ =
         Ideal.primaryComponent.map I c 0 := by
       apply Subtype.ext

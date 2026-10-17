@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Functor.Currying
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import all WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 import all WeilConjectures.AlgebraicGeometry.ThickeningSystemPushforwardAdic
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
@@ -29,15 +30,17 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Completion restricted to coherent modules killed by the closed ideal. -/
-private noncomputable abbrev supportedCompletion {X Z : Scheme.{u}} (i : Z ⟶ X)
+/-- The `I`-adic completion `F ↦ (F / I^(n+1) F)_n` restricted to coherent modules supported
+on the closed subscheme `Z`. -/
+noncomputable abbrev supportedCompletion {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (I : X.IdealSheafData) :=
   ObjectProperty.ι (fun F : CoherentModules X ↦ CoherentModuleSupportedOn F i) ⋙
     ObjectProperty.ι (RingedSpace.IsCoherent X.toRingedSpace) ⋙ formalCompletionFunctor I
 
-/-- Transport full faithfulness across the closed coherent equivalence and its
-natural completion comparison. -/
-private theorem supportedCompletion_fullyFaithful {X Z : Scheme.{u}}
+/-- If completion on the closed subscheme `Z` is an equivalence, then completion of coherent
+modules supported on `Z` is fully faithful. Proof: transport full faithfulness across the closed
+coherent equivalence and its natural completion comparison. -/
+theorem supportedCompletion_fullyFaithful {X Z : Scheme.{u}}
     [IsNoetherian X] (i : Z ⟶ X) [IsClosedImmersion i] (I : X.IdealSheafData)
     (he : (@completion Z (isNoetherian_of_locallyOfFiniteType i)
       (I.comap i)).IsEquivalence) :
@@ -67,7 +70,7 @@ private theorem supportedCompletion_fullyFaithful {X Z : Scheme.{u}}
   exact ⟨Functor.Full.of_iso hε, Functor.Faithful.of_iso hε⟩
 
 /-- Identify the recursive multiplication-image power with the subscheme ideal. -/
-private theorem powerSupported_iff {X : Scheme.{u}} (K : X.IdealSheafData)
+theorem coherentModuleSupportedOn_pow_subschemeι_iff {X : Scheme.{u}} (K : X.IdealSheafData)
     (r : ℕ) (hr : 0 < r) (F : CoherentModules X) :
     CoherentModuleSupportedOn F (K ^ r).subschemeι ↔
       IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι r).2 F.obj) := by
@@ -76,6 +79,20 @@ private theorem powerSupported_iff {X : Scheme.{u}} (K : X.IdealSheafData)
   change IsZero (Scheme.idealModuleProduct (K ^ r).subschemeι.ker.toModulesι F.obj) ↔ _
   rw [Scheme.IdealSheafData.ker_subschemeι]
   exact ⟨fun h ↦ h.of_iso d, fun h ↦ h.of_iso d.symm⟩
+
+/-- A module killed by `K ^ r` is killed by `K ^ (r + 1)`: the product with the larger power
+factors through the product with the smaller one. -/
+theorem isZero_idealModuleProduct_pow_succ {X : Scheme.{u}} (K : X.IdealSheafData) (r : ℕ)
+    (F : X.Modules)
+    (h : IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι r).2 F)) :
+    IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι (r + 1)).2 F) := by
+  obtain ⟨k, hk⟩ := formalModuleQuotient_factor K (𝟙 F) (Nat.le_succ r)
+  have hi : Scheme.idealModuleProductι (Scheme.idealSheafPower K.toModulesι r).2 F = 0 :=
+    h.eq_zero_of_src _
+  have hm := idealModuleProduct_mono (Scheme.idealSheafPower K.toModulesι (r + 1)).2 F
+  apply IsZero.of_mono_eq_zero
+    (Scheme.idealModuleProductι (Scheme.idealSheafPower K.toModulesι (r + 1)).2 _)
+  simpa only [Category.comp_id, hi, comp_zero] using hk
 
 /-- The closed ideal kills pushforward; compare the two ideal-power inclusions. -/
 private theorem pushforward_power_zero {X : Scheme.{u}} [IsNoetherian X]
@@ -149,18 +166,10 @@ theorem formalSecondIdealAlgebraization_transitions
   refine ⟨hz e, ?_⟩
   let i := (K ^ (e + 2)).subschemeι
   have hsrc : CoherentModuleSupportedOn (F (e + 1)) i :=
-    (powerSupported_iff K (e + 2) (by omega) _).mpr (hz (e + 1))
-  have htgt : CoherentModuleSupportedOn (F e) i := by
-    apply (powerSupported_iff K (e + 2) (by omega) _).mpr
-    obtain ⟨k, hk⟩ := formalModuleQuotient_factor K (𝟙 (F e).obj) (Nat.le_succ (e + 1))
-    have hi : Scheme.idealModuleProductι
-        (Scheme.idealSheafPower K.toModulesι (e + 1)).2 (F e).obj = 0 :=
-      (hz e).eq_zero_of_src _
-    have hm := idealModuleProduct_mono (Scheme.idealSheafPower K.toModulesι (e + 2)).2
-      (F e).obj
-    apply IsZero.of_mono_eq_zero
-      (Scheme.idealModuleProductι (Scheme.idealSheafPower K.toModulesι (e + 2)).2 _)
-    simpa only [Category.comp_id, hi, comp_zero] using hk
+    (coherentModuleSupportedOn_pow_subschemeι_iff K (e + 2) (by omega) _).mpr (hz (e + 1))
+  have htgt : CoherentModuleSupportedOn (F e) i :=
+    (coherentModuleSupportedOn_pow_subschemeι_iff K (e + 2) (by omega) _).mpr
+      (isZero_idealModuleProduct_pow_succ K (e + 1) _ (hz e))
   let A : ObjectProperty.FullSubcategory
       (fun H : CoherentModules X ↦ CoherentModuleSupportedOn H i) := ⟨F (e + 1), hsrc⟩
   let B : ObjectProperty.FullSubcategory
@@ -258,10 +267,10 @@ theorem formalSecondIdealAlgebraization_transitions
   let Q : CoherentModules X := ⟨formalModuleQuotient K (e + 1) (F (e + 1)).obj,
     (formalCompletionSystem_coherent K (F (e + 1))).1 e⟩
   have hQ : CoherentModuleSupportedOn Q j :=
-    (powerSupported_iff K (e + 1) (Nat.succ_pos e) Q).mpr
+    (coherentModuleSupportedOn_pow_subschemeι_iff K (e + 1) (Nat.succ_pos e) Q).mpr
       ((formalCompletionSystem_coherent K (F (e + 1))).2.1 e)
   have hB : CoherentModuleSupportedOn (F e) j :=
-    (powerSupported_iff K (e + 1) (Nat.succ_pos e) _).mpr (hz e)
+    (coherentModuleSupportedOn_pow_subschemeι_iff K (e + 1) (Nat.succ_pos e) _).mpr (hz e)
   let A' : ObjectProperty.FullSubcategory
       (fun H : CoherentModules X ↦ CoherentModuleSupportedOn H j) := ⟨Q, hQ⟩
   let B' : ObjectProperty.FullSubcategory

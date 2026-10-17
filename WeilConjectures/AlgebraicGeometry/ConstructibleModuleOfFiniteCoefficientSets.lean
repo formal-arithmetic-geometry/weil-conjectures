@@ -14,6 +14,7 @@ import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAbelianLiftHom
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # Module constructibility from finite sets and finite coefficients
@@ -334,7 +335,7 @@ private theorem finite_constant_module_value {Y : Scheme.{u}}
     (e : ((sheafCompose Y.smallEtaleTopology
       (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj G).over U ≅
         (constantSheaf (Y.smallEtaleTopology.over U) (Type (u + 1))).obj S)
-    (hfinite : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
+    (hfinite : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y),
       Finite (((pointSmallEtale s).sheafFiber (A := Type (u + 1))).obj
         ((sheafCompose Y.smallEtaleTopology
           (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj G)))
@@ -417,8 +418,7 @@ private theorem exists_finite_coefficient_module_charts
     inferInstanceAs (JointlySurjective (precoverage @Etale))
   have : etalePrecoverage.{u}.IsStableUnderComposition :=
     inferInstanceAs (precoverage @Etale).IsStableUnderComposition
-  obtain ⟨𝒰₀, h𝒰₀⟩ := hF.1
-  have hfinite := hF.finite_sheafFiber
+  obtain ⟨⟨𝒰₀, h𝒰₀⟩, hfinite⟩ := hF
   let 𝒰 : Cover.{u} etalePrecoverage X :=
     { I₀ := { i : 𝒰₀.I₀ // Nonempty (𝒰₀.X i) }
       X i := 𝒰₀.X i.1
@@ -444,7 +444,9 @@ private theorem exists_finite_coefficient_module_charts
         ((sheafCompose X.smallEtaleTopology
           (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F)).over U
     obtain ⟨S, ⟨e⟩⟩ := H.mem_essImage_of_isConstant
-    have : Finite S := finite_constant_module_value Λ F U S e.symm hfinite
+    have : Finite S := finite_constant_module_value Λ F U S e.symm fun Ω _ _ s ↦
+      (ConcreteCategory.isFinitelyGenerated_iff_finite _).mp
+        (hfinite.isFinitelyGenerated_sheafFiber Ω s)
     choose V v hv M hM e' α hα using
       finite_constant_module_neighborhood Λ F U S I hkill e.symm
     let 𝒱 : Cover.{u} etalePrecoverage U.left :=
@@ -612,13 +614,14 @@ theorem isConstructibleSheaf_of_finite_coefficient_underlying_sets
   have transport {H K : Sheaf (S.domain i).smallEtaleTopology (Type (u + 1))}
       (q : H ≅ K) (hH : IsFiniteLocallyConstantSheafOfTypes H) :
       IsFiniteLocallyConstantSheafOfTypes K := by
-    obtain ⟨𝒰, h𝒰⟩ := hH.1
-    refine isFiniteLocallyConstantSheafOfTypes_of_finite_sheafFiber ⟨𝒰, fun j ↦ ?_⟩
-      fun Ω _ _ s ↦ ?_
+    obtain ⟨⟨𝒰, h𝒰⟩, hfin⟩ := hH
+    refine ⟨⟨𝒰, fun j ↦ ?_⟩,
+      isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_⟩
     · have := h𝒰 j
       exact Sheaf.isConstant_congr _
         (((S.domain i).smallEtaleTopology.overPullback (Type (u + 1)) _).mapIso q)
-    · exact @Finite.of_equiv _ _ (hH.finite_sheafFiber Ω s)
+    · exact @Finite.of_equiv _ _ ((ConcreteCategory.isFinitelyGenerated_iff_finite _).mp
+          (hfin.isFinitelyGenerated_sheafFiber Ω s))
         ((pointSmallEtale s).sheafFiber.mapIso q).toEquiv
   have hG := transport e.symm (hS i)
   obtain ⟨d, hd⟩ := exists_finite_coefficient_module_charts Λ G hG I hI

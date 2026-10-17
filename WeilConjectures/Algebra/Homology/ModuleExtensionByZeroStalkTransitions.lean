@@ -41,7 +41,7 @@ these isomorphisms to get the final equation. This construction works for indepe
 adjunctions because only their own units, counits and triangle identities are used. Source: Stacks
 Project, Sheaves Lemma 00A7 (2)-(4) and Lemma 00A5.
 (blueprint: lem-sc-module-extension-by-zero-stalk-maps-transitions) -/
-theorem ModuleExtensionByZeroStalkTransitions (X : RingedSpace.{u}) :
+theorem moduleExtensionByZero_stalk_transitions (X : RingedSpace.{u}) :
     (∀ F : SheafOfModules.{u} (moduleRings X),
       IsIso ((Classical.choice (open_restriction_adjunction_exact X ⊤).2.2.2.2).counit.app F) ∧
       ∃ iota : (∀ (W W' : Opens X), W ≤ W' →

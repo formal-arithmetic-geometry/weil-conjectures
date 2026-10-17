@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
+public import WeilConjectures.AlgebraicGeometry.EtaleFieldGeometricAction
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import Mathlib.Topology.Algebra.OpenSubgroup
 import Mathlib.Topology.Algebra.MulAction
@@ -25,6 +25,9 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
+
+attribute [local instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
+  AlgebraicGeometry.etaleFieldActionForget₂
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Source: Stacks Project, Tag 03QT, proof of theorem-equivalence-sheaves-point;

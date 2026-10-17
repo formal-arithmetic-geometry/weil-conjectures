@@ -86,7 +86,7 @@ private theorem polynomial_quotient_fibre_lower_bound
 Source: Stacks Project, Algebra, Lemma Tag 00SU
 (blueprint: lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation).
 
-Proof, following the six DAG steps:
+Proof, following the six blueprint steps:
 1. Generate a finite type subring by the coefficients of the relations, and form its
 polynomial quotient. Polynomial scalar extension and tensor-quotient base change identify
 its base change with the original quotient (`lem-weil-pbc-polynomial-scalar-extension`,

@@ -36,7 +36,7 @@ private theorem isKProjective_of_degreewise_split
   exact (HomotopyCategory.distinguished_iff_iso_trianglehOfDegreewiseSplit _).2
     ⟨S, σ, ⟨Iso.refl _⟩⟩
 
-/-- The degreewise split telescope sequence yields a K-projective model of the union.
+/-- The union of a degreewise split filtration by K-projective stages is K-projective.
 Source: Stacks Project, Tags 09KL--09KM.
 (blueprint: lem-pc-filtered-free-kprojective-assembly)
 
@@ -50,8 +50,8 @@ hold on every summand. Thus S is K-projective. The degreewise split short comple
 gives a distinguished triangle S -> S -> P -> S[1] in the homotopy category.
 K-projectivity is left orthogonality to acyclic objects. This orthogonal is a
 triangulated subcategory, so its closure under third objects proves P K-projective
-from the two copies of S. Take Q = P with the identity isomorphism. The zero-stage
-hypothesis is unnecessary for this argument but is retained in the signature. -/
+from the two copies of S. The zero-stage hypothesis is unnecessary for this argument but is
+retained in the signature. -/
 theorem filtered_free_telescope_assembly
     {A : Type u} [CommRing A]
     (P : CochainComplex (ModuleCat.{max u v} A) ℤ)
@@ -65,8 +65,7 @@ theorem filtered_free_telescope_assembly
       ∃ r : (F (n + 1)).X k ⟶ (F n).X k,
         (step n).f k ≫ r = 𝟙 ((F n).X k))
     (hstage : ∀ n, (F n).IsKProjective) :
-    ∃ Q : CochainComplex (ModuleCat.{max u v} A) ℤ,
-      Q.IsKProjective ∧ Nonempty (Q ≅ P) := by
+    P.IsKProjective := by
   classical
   cases hzero
   let S := ShortComplex.mk (filteredTelescopeMap F step)
@@ -74,7 +73,6 @@ theorem filtered_free_telescope_assembly
   have hS : (∐ F).IsKProjective := isKProjective_coproduct F hstage
   have σ := filteredTelescope_degreewise_splitting P F ι step hmono hcompat
     hexhaustive hsplit
-  exact ⟨P, isKProjective_of_degreewise_split S (fun k ↦ (σ k).some) hS hS,
-    ⟨Iso.refl P⟩⟩
+  exact isKProjective_of_degreewise_split S (fun k ↦ (σ k).some) hS hS
 
 end CochainComplex
