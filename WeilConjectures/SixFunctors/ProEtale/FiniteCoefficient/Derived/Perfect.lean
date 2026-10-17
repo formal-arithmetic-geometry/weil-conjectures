@@ -19,6 +19,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.Dualizable
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Detection
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.DualizableLocal
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableProjectiveUnitPerfect
+public import WeilConjectures.SixFunctors.ProEtale.WContractibleUnit
 
 /-!
 
@@ -57,8 +60,17 @@ coefficient ring `Λ`, lies in `Dctf(X, Λ)`.
   (`prop-pod-perfect-local-model`): a perfect complex lies in `Dctf(X, Λ)`. It is locally a
   bounded complex of finite projective modules
   (`AlgebraicGeometry.ProEtale.DerivedCategory.isDualizable_iff_isLocallyPerfect`, the node
-  `sk-def-perfect`, `sorry` there), so its cohomology sheaves are locally constant
-  with finite stalks, hence of étale origin (`lem-sf-proetale-constructible-origin`).
+  `sk-def-perfect`), so its cohomology sheaves are locally constant with finite stalks, hence of étale origin (`lem-sf-proetale-constructible-origin`).
+- `AlgebraicGeometry.ProEtale.DerivedCategory.isDualizable_iff_isLocallyPerfect`
+  (`sk-def-perfect`, Stacks 0FPV): an object of `D(X_proét, Λ)` is dualizable if and only if it
+  is locally quasi-isomorphic to a bounded complex of finite projective `Λ_X`-modules. Being
+  dualizable is local for the pro-étale topology
+  (`AlgebraicGeometry.ProEtale.isDualizable_of_cover`,
+  `AlgebraicGeometry.ProEtale.isDualizable_leftDerivedUpperStar_obj`), and over the spectrum of
+  a w-contractible ring global sections behave like modules over a ring, so that dualizable
+  objects are bounded complexes of finite projective objects there
+  (`DerivedCategory.exists_iso_Q_obj_of_isDualizable`,
+  `AlgebraicGeometry.ProEtale.projective_unit_and_finite_of_isWContractibleRing`).
 - `AlgebraicGeometry.ProEtale.DerivedCategory.isTriangulated_boundedConstructible`:
   `Dᵇc_proét(X, Λ)` is a triangulated subcategory at a finite coefficient ring.
 - `AlgebraicGeometry.ProEtale.isDualizable_derivedDual` (`lem-pod-coefficient-dual-perfect`):
@@ -438,20 +450,40 @@ def IsLocallyPerfect (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X
 
 omit [Finite Λ] in
 /-- A perfect, that is dualizable, object of `D(X_proét, Λ)` is locally quasi-isomorphic to a
-bounded complex of finite projective `Λ_X`-modules (`sk-def-perfect`, Stacks, Tag 0FPV). -/
+bounded complex of finite projective `Λ_X`-modules (`sk-def-perfect`, Stacks, Tag 0FPV).
+
+Cover `X` by spectra `W i` of w-contractible rings (`Scheme.exists_isWContractibleRing_cover`).
+The derived pullbacks of `K` to the `W i` are dualizable
+(`AlgebraicGeometry.ProEtale.isDualizable_leftDerivedUpperStar_obj`), and over `W i` the unit is
+projective with finite global sections on coproducts and tensor products
+(`AlgebraicGeometry.ProEtale.projective_unit_and_finite_of_isWContractibleRing`), so dualizable
+objects are bounded complexes of finite projective objects
+(`DerivedCategory.exists_iso_Q_obj_of_isDualizable`). -/
 theorem isLocallyPerfect_of_isDualizable
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
-    (hK : IsDualizable K) : IsLocallyPerfect Λ K :=
-  sorry
+    (hK : IsDualizable K) : IsLocallyPerfect Λ K := by
+  obtain ⟨ι, R, hR, g, hg⟩ := Scheme.exists_isWContractibleRing_cover X
+  have (i : ι) : WeaklyEtale (g i) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hg (.mk i)
+  refine ⟨ι, _, g, hg, fun i ↦ ?_⟩
+  obtain ⟨_, hC, hT⟩ := projective_unit_and_finite_of_isWContractibleRing Λ (R i)
+  exact _root_.DerivedCategory.exists_iso_Q_obj_of_isDualizable hC hT
+    (isDualizable_leftDerivedUpperStar_obj (g i) hK)
 
 omit [Finite Λ] in
 /-- An object of `D(X_proét, Λ)` which is locally quasi-isomorphic to a bounded complex of
 finite projective `Λ_X`-modules is perfect, that is dualizable (`sk-def-perfect`, Stacks,
-Tag 0FPP). -/
+Tag 0FPP): bounded complexes of finite projective modules are dualizable
+(`DerivedCategory.finProjComplex.isDualizable`), and dualizability is local for the pro-étale
+topology (`AlgebraicGeometry.ProEtale.isDualizable_of_cover`). -/
 theorem isDualizable_of_isLocallyPerfect
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
-    (hK : IsLocallyPerfect Λ K) : IsDualizable K :=
-  sorry
+    (hK : IsLocallyPerfect Λ K) : IsDualizable K := by
+  obtain ⟨ι, W, g, hg, hP⟩ := hK
+  have (i : ι) : WeaklyEtale (g i) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hg (.mk i)
+  exact isDualizable_of_cover g hg fun i ↦ (_root_.DerivedCategory.finProjComplex.isDualizable
+    (hP i))
 
 omit [Finite Λ] in
 /-- Blueprint `sk-def-perfect`: Perfectness at the point and on `X`.
