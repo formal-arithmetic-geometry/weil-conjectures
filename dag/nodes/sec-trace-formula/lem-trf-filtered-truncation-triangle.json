@@ -14,9 +14,110 @@
   "def-weil-abstract-derived-category",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal K$ be the category of bounded-below complexes with a uniform finite filtration, modulo filtration-preserving homotopies. Filtered-homotopic maps $f\\simeq g:X\\to Y$, $f-g=dh+hd$, already agree in $DF^+(\\mathcal C)$: the filtered cylinder $\\operatorname{Cyl}X^n=X^n\\oplus X^{n+1}\\oplus X^n$, $d(a,b,c)=(da-b,-db,dc+b)$, with direct-sum filtration, has inclusions $i_0,i_1$ of the outer summands, a common retraction $p(a,b,c)=a+c$ which is a filtered homotopy equivalence (hence a graded quasi-isomorphism), and $f=\\varphi i_0$, $g=\\varphi i_1$ for $\\varphi=f\\,\\mathrm{pr}_1-h\\,\\mathrm{pr}_2+g\\,\\mathrm{pr}_3$; so $Q(i_0)=Q(p)^{-1}=Q(i_1)$. By [lem-weil-pbc-localization-universal-property], $DF^+(\\mathcal C)$ is the localization of $\\mathcal K$ at the graded quasi-isomorphisms $W$. The objects of $\\mathcal K$ form a full subcategory of the cone-triangulated $K^+$ of finite filtered objects [lem-trf-filtered-cone-localization] closed under zero, shifts (same bounds) and cones (bounds $[\\min a,\\max b]$), so $\\mathcal K$ is triangulated by the cone triangles [def-weil-triangulated-subcategory]. Let $\\mathcal P\\subseteq\\mathcal K$ be the graded-acyclic complexes. It contains $0$ and is stable under shifts and filtered homotopy equivalences. Given a distinguished $K\\to L\\to M\\to K[1]$ with $K,M\\in\\mathcal P$, its rotation $M[-1]\\to K\\to L$ is isomorphic to a cone triangle $X\\xrightarrow{u}Y\\to C(u)$ with $X,Y\\in\\mathcal P$; each $\\operatorname{gr}^pu$ is a map of acyclic complexes, so $u\\in W$ and the cone criterion of [lem-trf-filtered-cone-localization] gives $L\\simeq C(u)\\in\\mathcal P$. By that criterion $W=W_{\\mathcal P}$, so [lem-trf-triangulated-subcategory-cone-system] gives a multiplicative system with both calculi of fractions compatible with the triangulation, and [lem-pur-localization-triangles-05r6] makes $DF^+(\\mathcal C)$ triangulated, with distinguished triangles those isomorphic to images of cone triangles and $Q$ exact.",
+   "uses": [
+    "def-weil-triangulated-subcategory",
+    "lem-trf-filtered-cone-localization",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-trf-triangulated-subcategory-cone-system",
+    "lem-pur-localization-triangles-05r6"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§§5.1.1(a)–(b), 5.1.2(a), pp.39–40; Stacks derived.tex Tags 05S1 (lemma-filtered-acyclic) and 05S2 (definition-filtered-derived)"
+   }
+  },
+  {
+   "text": "The operations $t_{\\ge r}K=F^rK$ and $t_{<r}K=K/F^rK$ with induced and quotient filtrations [def-sp-filtration] are additive on $\\mathcal K$: a filtration-preserving homotopy restricts to $F^r$ and descends to $K/F^r$. They commute with shifts and with mapping cones and their direct-sum filtrations, $F^rC(u)=C(F^ru)$ and $C(u)/F^r=C(u/F^r)$. Since $F^p(F^rK)=F^{\\max(p,r)}K$ and $F^p(K/F^rK)=F^{\\min(p,r)}K/F^rK$, their graded complexes [def-sp-filtered-complex-subquotients] are $\\operatorname{gr}^pK$ for $p\\ge r$ (zero otherwise) and $\\operatorname{gr}^pK$ for $p<r$ (zero otherwise). So each graded map of a truncated $s\\in W$ is $\\operatorname{gr}^p(s)$ or a map of zero complexes; truncations preserve $W$ and descend by [lem-weil-pbc-localization-universal-property]. They send cone triangles to cone triangles, hence are exact for the triangulation of Step 1. For $\\omega$: the sequences $0\\to F^{p+1}K\\to F^pK\\to\\operatorname{gr}^pK\\to0$ are degreewise exact by definition of $\\operatorname{gr}^p$; for a graded quasi-isomorphism $s:K\\to K'$, take a common interval $F^a=$ everything, $F^{b+1}=0$, and descend from $p=b+1$ to $p=a$ with the long exact cohomology sequence [lem-weil-pbc-complex-ses-homology-long-exact] and the five lemma, to get that $F^ps$ is a quasi-isomorphism for every $p$, in particular $\\omega s=F^as$ [def-weil-abstract-derived-category]. Filtered homotopies forget to homotopies, so $\\omega$ descends; $\\operatorname{gr}^p$ descends by definition of $W$. Both preserve shifts and cones literally, so they are exact.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§§5.1.1(b)–(d), 5.1.2(b), pp.39–40; Stacks derived.tex Tag 05S3 (lemma-filtered-derived-functors)"
+   }
+  },
+  {
+   "text": "For the inclusion $\\iota:F^rM\\hookrightarrow M$, form its filtered mapping cone. In grade $p<r$ the induced map is $0\\to\\operatorname{gr}^pM$, so the cone-to-quotient map is the identity onto $\\operatorname{gr}^p(M/F^rM)$. In grade $p\\ge r$ the induced map is $\\operatorname{id}_{\\operatorname{gr}^pM}$, so its cone is contractible and the quotient grade is zero. Thus the cone maps by a graded quasi-isomorphism to $M/F^rM$; the cone-localization result makes this the distinguished triangle $t_{\\ge r}M\\to M\\to t_{<r}M\\to(t_{\\ge r}M)[1]$. The same calculation gives the stated graded-piece formula. It also shows directly that the triangle is natural for chain maps, hence for localized maps after descent.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-trf-filtered-cone-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.2(c), p.40; cone computation from §5.1.1(a)–(d)"
+   }
+  },
+  {
+   "text": "Let $L\\in DF^{+,\\ge r}$ and $R\\in DF^{+,<r}$, represented by complexes. By the graded-piece formula of Step 2, $t_{\\ge r}L\\to L$ and $R\\to t_{<r}R$ are graded quasi-isomorphisms (on the other grades they relate $0$ and an acyclic graded complex), so assume $F^rL=L$ and $F^rR=0$ literally. Orthogonality: by Step 1 and [lem-pc-right-fraction-representation] a morphism $Q(L)\\to Q(R[q])$ is $Q(f)Q(s)^{-1}$ with $s:Z\\to L$ in $W$ and $f:Z\\to R[q]$ in $\\mathcal K$. As $t_{<r}L=0$ and $t_{<r}$ preserves $W$, $t_{<r}Z$ is graded acyclic. By Step 3 the cone of $a:t_{\\ge r}Z\\to Z$ maps by a graded quasi-isomorphism to $t_{<r}Z$, so it is graded acyclic and $a\\in W$ by the cone criterion of [lem-trf-filtered-cone-localization]. Then $Q(f)Q(s)^{-1}=Q(fa)Q(sa)^{-1}$, and the filtered map $fa$ sends $F^rZ$, its whole source, into $F^r(R[q])=0$. Hence $\\operatorname{Hom}(L,R[q])=0$ for all $q$. Hom bijections: by (TR1) and (TR2) of [def-weil-triangulated-category], $L\\xrightarrow1L\\to0\\to L[1]$ and $0\\to R\\xrightarrow1R\\to0$ are distinguished (the latter rotates to $R\\xrightarrow1R\\to0\\to R[1]$). Apply [lem-weil-pbc-triangle-morphism-extension] to the first triangle and the triangle of Step 3 with middle map $g:L\\to M$: $q_{r,M}g\\in\\operatorname{Hom}(L,t_{<r}M)=0$, so (1) gives $f$ with $\\iota_{r,M}f=g$, unique by (2) as $\\operatorname{Hom}(L[1],t_{<r}M)=0$. Apply it to the triangle of Step 3 and the second triangle with middle map $g:M\\to R$: $g\\iota_{r,M}\\in\\operatorname{Hom}(t_{\\ge r}M,R)=0$ gives $h$ with $hq_{r,M}=g$, unique as $\\operatorname{Hom}((t_{\\ge r}M)[1],R)=0$. Both bijections are composition with fixed maps, so natural in $L$, $R$, and in $M$ by naturality of the triangle; this is the right- and left-adjoint assertion.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "def-weil-triangulated-category",
+    "lem-pc-right-fraction-representation",
+    "lem-trf-filtered-cone-localization",
+    "lem-weil-pbc-triangle-morphism-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.1(c), corrected adjoint directions; §5.1.2(b)–(c), pp.39–40; Stacks Tags 05S1–05S2"
+   }
+  },
+  {
+   "text": "Let $L\\to M\\to R\\to L[1]$ be any distinguished triangle with $L$ high-supported and $R$ low-supported. The composite $L\\to M\\to t_{<r}M$ is zero by the vanishing in Step 4, so the generic morphism-of-triangles extension lemma [lem-weil-pbc-triangle-morphism-extension] gives a morphism from this triangle to the canonical truncation triangle whose middle component is $1_M$. The same vanishing after every shift gives $\\operatorname{Hom}(L[1],t_{<r}M)=0$, so the first and third components are unique. Reversing the two triangles produces a morphism in the opposite direction; the composites extend $1_M$ and are therefore identities by the same uniqueness. Thus the comparison is a unique isomorphism fixing $M$. The inclusion and quotient maps are consequently the unique maps characterized by the two Hom bijections, which also proves functoriality and uniqueness of the triangle.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-triangle-morphism-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.2(c), uniqueness paragraph; TR3 comparison"
+   }
+  },
+  {
+   "text": "For $T_p=t_{\\ge p}t_{<p+1}$, applying the graded-piece formula twice leaves exactly $\\operatorname{gr}^pM$ and kills every other grade. On complexes, $\\omega T_pM=F^pM/F^{p+1}M=\\operatorname{gr}^pM$, and this identification is natural. Place an ordinary bounded-below complex $N$ in filtration degree $p$; the resulting functor $J_p:D^+(\\mathcal C)\\to DF^+(\\mathcal C)$ is exact, and $\\omega J_p=1$. If all other graded pieces of $M$ vanish in the derived category, the truncation maps are graded quasi-isomorphisms onto the degree-$p$ representative, so $M\\simeq J_p(\\operatorname{gr}^pM)$ and $T_pM\\simeq M$. Conversely $J_p(N)$ has no other graded piece. Thus $J_p$ and forgetting filtration are quasi-inverse on the pure-grade subcategory, and all claims remain valid when the other grades are acyclic rather than literally zero because the localization inverts exactly graded quasi-isomorphisms.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.1.1(d)–(e), §5.1.2(b), pp.39–40"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "def-weil-triangulated-subcategory",
+  "lem-pc-right-fraction-representation",
+  "lem-pur-localization-triangles-05r6",
+  "lem-trf-filtered-cone-localization",
+  "lem-trf-triangulated-subcategory-cone-system",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-triangle-morphism-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§§5.1.1–5.1.2, pp.39–40, with the filtered localization details from Stacks Tags 05S1–05S6"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -97,7 +198,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-filtered-functor-graded-comparison",
@@ -117,5 +218,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-filtered-truncation-triangle",
+  "worker": "stage1",
+  "summary": "Split the generic finite-filtered bounded-below localization into six proof steps: the triangulated localization of uniformly filtered complexes, descent and exactness of truncations/forgetful and graded functors, the cone realization of the truncation triangle, roof-level semiorthogonality and the two universal Hom bijections by triangle-morphism extension, uniqueness by triangle comparison, and the pure-grade equivalence. No new child nodes or Mathlib leaves were needed. The adjoint labels in Varshavsky §5.1.1(c) are reversed; the item statement and proof use the corrected universal maps.",
+  "blueprint": "Realizes Step 3 of prop-trf-trace-additivity-open-closed, paragraph 'More precisely, they form an endomorphism of this triangle of filtered origin': the exact compact-support filtered functors must recover the ordinary functors on each graded piece; universal filtration truncations supply that comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-6a50fbde9",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-6a50fbde9 (reviewer sub-agent of L); spot-checked: Read in full: the item; Varshavsky arXiv math/0505564 §5.1.1(a)-(e) and §5.1.2(a)-(c), pp.39-40; Stacks derived.tex Tags 05S0-05S4; every cited statement. The statement agrees with Varshavsky's uniform-bound setting. Confirmed the source error in §5.1.1(c): t_{>=r} is the right adjoint, not the left. Counterexample over F_2 with r=1, M=F_2 in grade 0, L=F_2 in grade 1: Hom(M,L)=F_2 but Hom(t_{>=1}M,L)=0. The item already states the correct directions. Checked the cone of F^rM->M grade by grade, the graded-piece formulas, both directions of the triangle-uniqueness comparison, and the pure-grade quasi-inverse. Edge cases checked: r outside the filtration support, a nonsplit two-step complex, unbounded cochain degrees. Repaired three faults: (F1, C4) lem-trf-filtered-cone-localization covers K^+ of finite filtered objects or a fixed interval, not the item's uniformly bounded category, so the triangulated structure was unsupported. The new Step 1 builds it via def-weil-triangulated-subcategory, the graded-acyclic subcategory, lem-trf-triangulated-subcategory-cone-system and lem-pur-localization-triangles-05r6. (F3) The step from complexes to the homotopy category was unjustified; added the filtered-cylinder argument and lem-weil-pbc-localization-universal-property. (F2, C1/E5) Step 3 used roofs with no fraction-calculus node, and its uniqueness was only 'the same refinement'. Rewritten as Step 4: orthogonality via lem-pc-right-fraction-representation and an explicit refinement along t_{>=r}Z->Z; both Hom bijections via lem-weil-pbc-triangle-morphism-extension (1)-(2) with the triangles L=L->0 and 0->R=R. Steps are renumbered to six; proof_deps is the exact union of the steps' uses, with the superfluous lem-trf-finite-filtered-graded-exactness dropped. No new nodes; no SGA. Tool use to record: lem-weil-pbc-triangle-morphism-extension (unit sk-thm-properbasechange, slopmaster2 Lean closed), an abstract pretriangulated lemma that no trace-unit node supplies. Overlap with lem-trf-filtered-derived-hom-calculus (which assumes enough injectives) is noted for the maintainer; the item is the general version, not a duplicate.; 1 file(s) fixed by the reviewer"
  }
 }
