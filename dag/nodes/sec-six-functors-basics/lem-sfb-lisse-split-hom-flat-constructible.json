@@ -25,9 +25,81 @@
   "def-weil-pbc-etale-constructible-sheaf",
   "def-pur-sheaf-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $H=\\mathcal Hom_{A_U}(E,G)$. On a member $V=V_\\alpha$ of the given covering, write $F=A_V^{\\oplus t}$ and choose $i:E|_V\\to F$, $p:F\\to E|_V$ with $pi=1$. By [def-pur-sheaf-hom], precomposition defines $a:H|_V\\to\\mathcal Hom(F,G|_V)$, $h\\mapsto hp$, and $b:\\mathcal Hom(F,G|_V)\\to H|_V$, $f\\mapsto fi$, with $ba=1$. Evaluation on the standard basis identifies $\\mathcal Hom(F,G|_V)$ with $(G|_V)^{\\oplus t}$. Thus $H|_V$ is the image of the idempotent $e^*:f\\mapsto f\\circ e$ on this finite sum, where $e=ip$ is an idempotent on $A_V^{\\oplus t}$. Each of the finitely many entries of $e$ is a section of $A_V$; [lem-weil-pbc-constant-sheaf-sections-locally-constant], applied to the additive group of $A$, allows a Zariski-open refinement of $V$ on which every entry is constant. On such a piece the matrix is an actual idempotent $e\\in\\operatorname{Mat}_t(A)$. These refinements still form an étale covering of $U$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-constant-sheaf-sections-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.proof.md",
+    "place": "Proof, Step 2: the termwise local Hom identification from a locally split finite projective term"
+   }
+  },
+  {
+   "text": "Let $0\\to B'\\to B\\to B''\\to0$ be a short exact sequence of $A_U$-module sheaves. On each covering piece $v:V\\to U$ of Step 1, restriction is the exact constant-coefficient inverse image of [prop-weil-pbc-inverse-image-modules-exact]. That node identifies $v^{-1}A_U$ with $A_V$ and $v^{-1}G$ with the module pullback $v^*G$; hence $G|_V$ is flat by [lem-weil-pbc-ringed-topos-flat-module-pullback]. The restricted tensor sequence for $H$ is the image of the natural idempotent $1\\otimes e^*$ on the tensor sequence for $(G|_V)^{\\oplus t}$. Restriction commutes with these tensor products: the sectionwise tensor formulas and their covering-local sheafifications in [def-pur-sheaf-tensor-product] are the same on the slice site. The latter sequence is exact because tensoring with $G|_V$ is exact and tensor product distributes over finite sums. The idempotent decomposes each term into its image and kernel, and all sequence maps respect these decompositions. Its image sequence is exact: apply the idempotent to any local lift in the exact sequence to obtain a lift in the image summand. Thus the tensor sequence for $H$ is exact on each $V$. Every geometric point of $U$ lifts to a member of this covering, so exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact] shows that its kernel, middle homology, and cokernel have zero stalks. They vanish by [lemma-weil-pbc-geometric-stalk-conservative], applied to their maps to zero; kernels and cokernels are those of the abelian module category [def-weil-sheaf-of-modules-category]. This proves flatness as defined in [def-pc-flat-sheaf-modules].",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-flat-sheaf-modules",
+    "def-weil-sheaf-of-modules-category",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.proof.md",
+    "place": "Proof, Step 2: Hom from a locally split finite projective term into a flat sheaf is flat"
+   }
+  },
+  {
+   "text": "Keep the finite constructible stratification $\\iota_k:Z_k\\to U$ witnessing constructibility of $G$ in [def-weil-pbc-etale-constructible-sheaf]. Base change the covering pieces of Step 1 to $Z_k$ and refine by an étale covering trivializing $\\iota_k^{-1}G$ as a finite constant $A$-module $\\underline M$. These fibre-product coverings cover $Z_k$ and retain the constant matrix $e$ of Step 1. By exactness and additivity of inverse image [prop-weil-pbc-inverse-image-modules-exact], inverse image of the presentation $H|_V=\\operatorname{im}(e^*:(G|_V)^{\\oplus t}\\to(G|_V)^{\\oplus t})$ is $\\operatorname{im}(e^*:\\underline M^{\\oplus t}\\to\\underline M^{\\oplus t})$. This uses an image of a finite-sum endomorphism, not a general assertion that internal Hom commutes with inverse image along a stratum immersion. Let $N=\\operatorname{im}(e^*:M^{\\oplus t}\\to M^{\\oplus t})$, where $e^*$ acts by precomposition under $M^{\\oplus t}=\\operatorname{Hom}_A(A^{\\oplus t},M)$. The image sheaf just displayed is $\\underline N$: by [lem-weil-pbc-constant-sheaf-sections-locally-constant], sections of the constant additive-group sheaves are locally constant functions, and the constant matrix acts pointwise. A locally constant function valued in $N$ locally lifts to a constant element of $M^{\\oplus t}$, giving exactly the sheaf image. This identification is $A$-linear. Since $M$ is finite and $t$ is finite, $N$ is finite. Therefore $\\iota_k^{-1}H$ is finite locally constant for every $k$, which verifies constructibility of $H$ using the original finite stratification of $G$.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-constant-sheaf-sections-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.proof.md",
+    "place": "Proof, Step 2: the termwise Hom sheaf is flat constructible"
+   }
+  },
+  {
+   "text": "The local identifications in the first step are restrictions of the sheaf $H$ defined by [def-pur-sheaf-hom], so they glue to the stated global sheaf Hom. The second and third steps show respectively that this sheaf is flat and constructible, which is the required conclusion.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.proof.md",
+    "place": "Proof, Step 2: conclusion that the termwise Hom sheaf is flat constructible"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-rem-sf-matrix/det-rem-sf-matrix-hom-devissage.proof.md",
+  "place": "Proof, Step 2 sentence on termwise Hom from a locally split finite projective term"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +128,73 @@
    "results": "not run: LeanSearch/Loogle/LeanFinder are not reachable from the review service (msearch.py exists only on the Codex machine)",
    "date": "2026-10-17",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom sheaf from a locally split finite projective sheaf into a flat constructible sheaf is flat constructible",
+   "results": "SheafOfModules.isFinitePresentation; SheafOfModules.IsFiniteType; AlgebraicGeometry.Flat.flat_appLE; no coefficient-specific constructibility/Hom result",
+   "date": "2026-10-17",
+   "verdict": "no match: only generic finite-presentation, flat morphism, and sheaf-module declarations"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Hom, Flat, Constructible",
+   "results": "0 hits; loogle: unknown identifier 'Hom'",
+   "date": "2026-10-17",
+   "verdict": "invalid query: unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*Hom|Hom.*constructible Mathlib/CategoryTheory",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom sheaf from a finite projective locally split sheaf to a flat constructible sheaf",
+   "results": "CategoryTheory.sheafHom, CategoryTheory.sheafHom', AlgebraicGeometry.Scheme.Modules.Hom, CategoryTheory.Sheaf.Hom; none state flat constructibility",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheaf Hom declarations only"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*Hom|Hom.*constructible",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom from a finite locally projective module sheaf preserves flat modules and constructible sheaves",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.ihomPoints_apply; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-17",
+   "verdict": "no match: generic internal projectivity, sheaf Hom, or condensed-module declarations do not state flat constructibility on the small étale site"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafHom|isFlat.*retract|[Cc]onstructible.*[Ss]heaf",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/Monoidal.lean; Mathlib/CategoryTheory/Sites/Monoidal.lean; Mathlib/CategoryTheory/Sites/Monoidal.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: generic internal projectivity, sheaf Hom, or condensed-module declarations do not state flat constructibility on the small étale site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite locally projective sheaf of modules has internal Hom preserving flat constructible modules",
+   "results": "CategoryTheory.isInternallyProjective; Module.Flat.of_projective; CategoryTheory.InternallyProjective.preserves_epi; AlgebraicGeometry.Scheme.Modules.Hom; CategoryTheory.sheafHom; Module.Flat.projective_of_finitePresentation; SheafOfModules.IsFiniteType.mk; SheafOfModules.Hom",
+   "date": "2026-10-17",
+   "verdict": "no match: generic internal projectivity, sheaf Hom, or condensed-module declarations do not state flat constructibility on the small étale site"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|isConstructible",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "reviewer",
@@ -76,5 +211,44 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-lisse-split-hom-flat-constructible",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Local splitting maps realize Hom as the image of an explicit idempotent on a finite sum of G. Constant-coefficient inverse image, flat pullback and exact conservative geometric stalks justify flatness. On the original constructible stratification of G the constant matrix image is a finite constant module after an étale cover, proving constructibility without a descent claim or new nodes.",
+  "blueprint": "Realizes the sentence in det-rem-sf-matrix-hom-devissage Step 2 that the Hom sheaf from a locally split finite projective term into a flat constructible term is flat constructible.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "why": "Generic constant-sheaf section formula makes the finitely many matrix entries locally constant and identifies the image of a constant matrix on a constant module sheaf."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic exact constant-coefficient inverse image identifies restriction with module pullback and preserves finite sums and images on stratum inverse images."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "why": "Generic ringed-topos flat pullback supplies flatness of G on each étale covering piece."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic conservativity of geometric stalks detects the vanishing of the defects of exactness of the tensor sequence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-bf50eb152",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-bf50eb152 (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it with no fixes. Statement: unchanged and not weakened; it matches the parent det-rem-sf-matrix-hom-devissage (Step 5 applies it with E=P^q|_U, G=Q^r|_U) and the main-20261015 Step 2 sentence on the termwise flat constructible Hom. Every notion cites a node that defines it (flat is 03ER(3); constructible is 095E(3)/03RU with finite Lambda). Small cases tested: U empty; E=0 or G=0; t=0; E=A_U; G=A_U; A=F2xF2 with the summand for the idempotent (1,0); G=j_!A_W. The non-flat G=Z/2 over Z/4 is correctly excluded. Noetherianity is unused but harmless. Step 1: a=h->hp and b=f->fi with ba=1 make H|_V the image of e^* on (G|_V)^t. The 03P5 node makes the matrix entries Zariski-locally constant, and a Zariski refinement is still an etale covering. Step 2: restriction is the exact v^{-1} of prop-weil-pbc-inverse-image-modules-exact; G|_V is flat by the 05VD node; a summand cut out by the natural idempotent 1(x)e^* is exact; geometric stalks plus conservativity glue. The fact that the stalk of F|_V equals the stalk of F is uncited but elementary, and plain sheaf locality gives the same conclusion. Step 3: G's original strata are kept; exact inverse image carries im(e^*) to im(e^*) on constant M^t, which is the constant sheaf N, finite. No descent is needed and no Hom/inverse-image commutation is claimed. Step 4 is elementary. No new nodes. I checked duplicates (lem-sf-hom-finite-projective, lem-pc-finite-projective-internal-hom-evaluation, thm-sf-hom-ctf, lem-weil-pbc-flc-dual-stalk, lem-sfb-finite-field-internal-hom-finiteness, lem-per-dual-lisse-tensor): none states this item. No cycle (closure of 227 nodes); proof_deps equal the union of uses; no SGA. I accept the four generic tool_uses: constant-sheaf sections (03P5), exact constant-coefficient inverse image, flat pullback (05VD) and geometric-stalk conservativity. Sources checked at their labels: etale-cohomology remark-constant-locally-constant-maps and definition-finite-locally-constant; sites-modules definition-flat, lemma-pullback-flat and lemma-flat-pullback-exact."
  }
 }

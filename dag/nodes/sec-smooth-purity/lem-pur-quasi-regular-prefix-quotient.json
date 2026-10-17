@@ -12,9 +12,115 @@
   "def-weil-pbc-associated-graded-ring",
   "def-weil-pbc-mv-polynomial-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We first prove the one-generator quotient assertion for every commutative ring and every sequence of positive length $b$ satisfying the hypothesis. Put $t=f_1$, $B=A/(t)$, and let $q:A\\to B$ be the quotient map. Put $K=(q(f_2),\\ldots,q(f_b))$. Since $q(t)=0$, expanding products of generators gives $q(J^n)=K^n$ for all $n\\geq0$, with $q(J^0)=B$. Also $B/K=C$: the map $a\\bmod(t)\\mapsto a\\bmod J$ is surjective, and its kernel is $K$, because $J=(t,f_2,\\ldots,f_b)$. These are statements about representatives and the quotient kernel in [def-weil-pbc-algebra-hom-quotient].",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 061R, lemma-truncate-quasi-regular, opening reduction and definition of the quotient ideal."
+   }
+  },
+  {
+   "text": "Write $G_n=J^n/J^{n+1}$ and $\\Phi:C[T_1,\\ldots,T_b]\\xrightarrow{\\sim}\\bigoplus_nG_n$ for the assumed graded isomorphism. Multiplication by $T_1$ is injective: in the coefficient description of [def-weil-pbc-mv-polynomial-ring] it shifts an exponent $\\alpha$ to $\\alpha+e_1$, and these shifted exponents are distinct. Thus for any $y\\in J^r\\setminus J^{r+1}$, the polynomial $\\Phi^{-1}([y]_r)$ is nonzero and so is $T_1\\Phi^{-1}([y]_r)$. By the homogeneous multiplication formula (2) of [lem-weil-pbc-associated-graded-ring-structure], its image is $[t]_1[y]_r=[ty]_{r+1}$. In particular $ty\\notin J^{r+2}$. This uses no cancellation by $t$ in $A$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-associated-graded-ring",
+    "lem-weil-pbc-associated-graded-ring-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 061R, lemma-truncate-quasi-regular, last sentence, and 061N, equation-quasi-regular, multiplication by the first variable."
+   }
+  },
+  {
+   "text": "For $n\\geq1$ we claim $J^n\\cap tA=tJ^{n-1}$. The right-hand side lies in the left-hand side since $t\\in J$. Conversely write an element of the left-hand side as $ty$. For $n=1$, $y\\in A=J^0$ already. For $n\\geq2$, if $y\\notin J^{n-1}$ choose the least $m\\in\\{1,\\ldots,n-1\\}$ with $y\\notin J^m$. Then $y\\in J^{m-1}\\setminus J^m$, so Step 2 gives $ty\\notin J^{m+1}$. But $n\\geq m+1$ and $ty\\in J^n\\subseteq J^{m+1}$, a contradiction. Hence $y\\in J^{n-1}$. The descending inclusions of powers follow from the ideal-product definition: a product of $s+1$ elements of $J$ lies in the ideal $J^s$. Only a finite set of filtration levels was used; there is no separatedness or Noetherian assumption.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 061R, lemma-truncate-quasi-regular, assertion $J^nM\\cap f_1M=f_1J^{n-1}M$ and its initial-form argument, with $M=A$ and $n\\geq1$."
+   }
+  },
+  {
+   "text": "The maps $\\rho_n:G_n\\to K^n/K^{n+1}$ given by $[x]_n\\mapsto[q(x)]_n$ are well defined and surjective by Step 1. They assemble to a graded $C$-algebra map $\\rho:\\operatorname{gr}_J(A)\\to\\operatorname{gr}_K(B)$: additivity, multiplication and scalar compatibility follow on representatives from $q(x+y)=q(x)+q(y)$, $q(xy)=q(x)q(y)$ and the formulas in [lem-weil-pbc-associated-graded-ring-structure](1)-(3). In degree zero $\\rho_0$ is the identity of $C$ under $B/K=C$. For $n\\geq1$, a class $[x]_n$ lies in $\\ker\\rho_n$ precisely when $q(x)\\in K^{n+1}=q(J^{n+1})$. Choosing $z\\in J^{n+1}$ with $q(z)=q(x)$ gives $x-z\\in tA\\cap J^n$, and conversely any such difference gives a kernel class. Thus the kernel consists exactly of the classes in $G_n$ represented by $J^{n+1}+(tA\\cap J^n)$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-associated-graded-ring",
+    "lem-weil-pbc-associated-graded-ring-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 061R, lemma-truncate-quasi-regular, the displayed computation of the graded pieces of the quotient; representative calculation in place of an uncited quotient-isomorphism theorem."
+   }
+  },
+  {
+   "text": "By Step 3, for $n\\geq1$ the kernel classes in Step 4 are exactly $[ty]_n$ with $y\\in J^{n-1}$. By [lem-weil-pbc-associated-graded-ring-structure](2), these are $[t]_1[y]_{n-1}$. Hence $\\ker\\rho_n=[t]_1G_{n-1}$ for $n\\geq1$, while $\\ker\\rho_0=0$. Under $\\Phi$ this means: a homogeneous polynomial $H$ of degree $n\\geq1$ maps to zero under $\\rho\\Phi$ if and only if $H=T_1Q$ for a homogeneous polynomial $Q$ of degree $n-1$. Indeed choose $[y]_{n-1}$ in the preceding description and take $Q=\\Phi^{-1}([y]_{n-1})$; injectivity of $\\Phi$ gives the equality. The reverse implication holds because $\\rho([t]_1)=0$.",
+   "uses": [
+    "lem-weil-pbc-associated-graded-ring-structure",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 061R, lemma-truncate-quasi-regular, identification of the associated graded quotient with the polynomial module modulo $X_1$."
+   }
+  },
+  {
+   "text": "Restrict $\\rho\\Phi$ to polynomials in $T_2,\\ldots,T_b$. In degree zero it is the identity on $C$. In degree $n\\geq1$ it is surjective: lift a target class through $\\rho_n$, then through the degree-$n$ part of $\\Phi$, to a homogeneous polynomial $H$. Separate its finite monomial sum as $H=P+T_1Q$, where $P$ contains exactly the monomials with first exponent zero and $Q$ is obtained from the remaining monomials by lowering that exponent by one. Then $\\rho\\Phi(H)=\\rho\\Phi(P)$. It is injective: if $P$ in the remaining variables maps to zero, Step 5 gives $P=T_1Q$; the left side has first exponent zero on every monomial, while the right side has positive first exponent, so comparison of coefficients forces $P=0$. This argument works over any $C$, including the zero ring, by [def-weil-pbc-mv-polynomial-ring].",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 061R, lemma-truncate-quasi-regular, conclusion after quotienting by $X_1$; coefficientwise surjectivity and injectivity written out."
+   }
+  },
+  {
+   "text": "The inclusion $C[T_2,\\ldots,T_b]\\to C[T_1,\\ldots,T_b]$ sends each remaining variable to the variable with the same name; it exists by the polynomial universal property and is the monomial inclusion of Step 6. Its composite with $\\rho\\Phi$ sends $T_j$ to $[q(f_j)]_1$ and fixes $C$, so it is precisely the canonical map in the desired one-generator conclusion, by that universal property's uniqueness. It preserves degrees. Every polynomial and every element of an associated graded ring has finitely many homogeneous components; the degreewise bijections of Step 6 therefore give bijectivity of the whole map (lift or compare each of those finitely many components). A bijective algebra homomorphism has an algebra-homomorphic inverse: for $u=F(x)$ and $v=F(y)$ its inverse sends $u+v$, $uv$ and a scalar respectively to $x+y$, $xy$ and that scalar. This proves the one-generator graded algebra isomorphism.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-associated-graded-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 061R, lemma-truncate-quasi-regular, quotient by the first variable, and 061N, equation-quasi-regular, the canonical map; finite-degree assembly made explicit."
+   }
+  },
+  {
+   "text": "Now induct on $i$ from $0$ to $b$. At $i=0$, $B_0=A$ and the assertion is the given isomorphism. Suppose it holds at $i<b$. Apply the one-generator assertion just proved, over $B_i$, to the sequence $\\overline f_{i+1},\\ldots,\\overline f_b$ and its canonical isomorphism supplied by the induction hypothesis. Its next quotient is $B_i/(\\overline f_{i+1})\\cong B_{i+1}$: the map sending the iterated class of $a$ to $a\\bmod I_{i+1}$ is well defined and surjective, and its kernel before the second quotient is exactly the principal ideal $(\\overline f_{i+1})$, since $I_{i+1}=I_i+(f_{i+1})$. It identifies each remaining generator with the image of $f_j$ in $B_{i+1}$, and both coefficient maps send $a$ to $a\\bmod J$ in $C$. Write $u$ for this quotient-ring isomorphism. It maps the remaining ideal onto $\\overline J_{i+1}$, hence maps each power onto the corresponding power, by expanding products. Thus $[x]_n\\mapsto[u(x)]_n$ is a bijection of the successive-power quotients, with inverse induced by $u^{-1}$; the representative formulas for addition, multiplication and scalars show that their direct sum is a graded $C$-algebra isomorphism. On each remaining variable the composite sends $T_j$ to $[\\overline f_j]_1$, so polynomial uniqueness identifies it with the canonical map for $i+1$. This completes the induction, including $i=b$: then the remaining ideal is zero, its positive powers and positive graded pieces vanish, and its degree-zero ring is $B_b=C$. If $b=0$ the base case alone gives the result. Polynomial rings on no variables are $C$ by their monomial description.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-associated-graded-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 061R, lemma-truncate-quasi-regular, opening sentence reducing general $i$ to $i=1$; quotient representatives and both empty cases made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-associated-graded-ring-structure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 061R, lemma-truncate-quasi-regular, specialized to M=A; finite initial-form argument, graded kernel computation, coefficientwise quotient, and prefix induction written out. Canonical maps as in Tag 061N."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +156,73 @@
    "results": "{\"t\": \"2026-10-17T04:30:09Z\", \"tool\": \"leanfinder\", \"query\": \"If the associated graded algebra for ideal generators is polynomial, quotienting the ring by the first generator gives a polynomial associated graded algebra in the remaining generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.naive\", \"MvPolynomial.gradedAlgebra\", \"reesAlgebra\", \"adjoin_monomial_eq_reesAlgebra\", \"MvPolynomial.quotientEquivQuotientMvPolynomial\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"Algebra.PreSubmersivePresentation.ofHasCoeffs_val\", \"HomogeneousIdeal.irrelevant\"], \"digest\": \"b23f44c9d391339b\"}",
    "date": "2026-10-17",
    "verdict": "no match: regular/weakly regular quotient criteria already assume regularity, and Rees-algebra, internal-grading and coefficient-quotient equivalences do not assert truncation of a polynomial associated graded algebra. Source read: Mathlib/RingTheory/Regular/RegularSequence.lean:21, 135-147, 228-258; quasi-regular sequences are listed as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?regular|QuasiRegular|associatedGraded|AssociatedGraded",
+   "results": "{\"t\": \"2026-10-17T05:16:43Z\", \"tool\": \"grep\", \"query\": \"quasi.?regular|QuasiRegular|associatedGraded|AssociatedGraded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Pi.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Pi.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Pi.lean\"], \"digest\": \"23c693bbdd9c609f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: weakly regular results assume injectivity on successive quotients, Rees and internal graded algebras do not assert this associated-graded truncation, and polynomial quotient equivalences concern coefficient ideals. Read RegularSequence.lean:21,135-147,228-258, ReesAlgebra.lean:14-45 and Polynomial/Quotient.lean:198-272."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If the canonical associated graded algebra of an ideal is polynomial in its generators then after quotient by the first generator it is polynomial in the remaining generators",
+   "results": "{\"t\": \"2026-10-17T05:16:44Z\", \"tool\": \"leansearch\", \"query\": \"If the canonical associated graded algebra of an ideal is polynomial in its generators then after quotient by the first generator it is polynomial in the remaining generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"reesAlgebra\", \"AddMonoidAlgebra.grade.gradedAlgebra\", \"instIsNoetherianRingSubtypePolynomialMemSubalgebraReesAlgebra\", \"Ideal.homogeneous_span\", \"GradedAlgebra\", \"instFiniteTypeSubtypePolynomialMemSubalgebraReesAlgebraOfIsNoetherianRing\", \"Algebra.Generators.naive_val\", \"Algebra.FiniteType.quotient\"], \"digest\": \"3c8ffb377404d5a7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: weakly regular results assume injectivity on successive quotients, Rees and internal graded algebras do not assert this associated-graded truncation, and polynomial quotient equivalences concern coefficient ideals. Read RegularSequence.lean:21,135-147,228-258, ReesAlgebra.lean:14-45 and Polynomial/Quotient.lean:198-272."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsWeaklyRegular, Ideal.Quotient",
+   "results": "{\"t\": \"2026-10-17T05:16:44Z\", \"tool\": \"loogle\", \"query\": \"RingTheory.Sequence.IsWeaklyRegular, Ideal.Quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.Quotient'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: Loogle did not recognize Ideal.Quotient; reran a valid MvPolynomial quotient pattern and read its hits. This is not evidence of absence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi regular sequence remains quasi regular in the quotient ring by an initial segment",
+   "results": "{\"t\": \"2026-10-17T05:16:45Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi regular sequence remains quasi regular in the quotient ring by an initial segment\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"RingTheory.Sequence.IsWeaklyRegular.cons'\", \"RingTheory.Sequence.isWeaklyRegular_cons_iff'\", \"RingTheory.Sequence.isWeaklyRegular_iff\", \"RingTheory.Sequence.isRegular_cons_iff'\", \"RingTheory.Sequence.isWeaklyRegular_append_iff'\", \"RingTheory.Sequence.isWeaklyRegular_iff_Fin\", \"RingTheory.Sequence.IsWeaklyRegular.cons\"], \"digest\": \"f36864e09c8bb45e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: weakly regular results assume injectivity on successive quotients, Rees and internal graded algebras do not assert this associated-graded truncation, and polynomial quotient equivalences concern coefficient ideals. Read RegularSequence.lean:21,135-147,228-258, ReesAlgebra.lean:14-45 and Polynomial/Quotient.lean:198-272."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an ideal with polynomial associated graded ring quotient by one generator kills its initial variable in the associated graded ring",
+   "results": "{\"t\": \"2026-10-17T05:16:52Z\", \"tool\": \"leanfinder\", \"query\": \"For an ideal with polynomial associated graded ring quotient by one generator kills its initial variable in the associated graded ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.quotient_map_C_eq_zero\", \"MvPolynomial.eval₂_C_mk_eq_zero\", \"Polynomial.IsDistinguishedAt.map_eq_X_pow\", \"Ideal.quotient_map_C_eq_zero\", \"HomogeneousIdeal.toIdeal_irrelevant\", \"HomogeneousIdeal.irrelevant\", \"HomogeneousIdeal.mem_irrelevant_iff\", \"HomogeneousIdeal.mem_irrelevant_of_mem\"], \"digest\": \"3f33c2301918eca5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: weakly regular results assume injectivity on successive quotients, Rees and internal graded algebras do not assert this associated-graded truncation, and polynomial quotient equivalences concern coefficient ideals. Read RegularSequence.lean:21,135-147,228-258, ReesAlgebra.lean:14-45 and Polynomial/Quotient.lean:198-272."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, \"quotient\"",
+   "results": "{\"t\": \"2026-10-17T05:17:01Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.FiniteType.iff_quotient_mvPolynomial'\", \"Algebra.FiniteType.iff_quotient_mvPolynomial''\", \"Algebra.FiniteType.iff_quotient_mvPolynomial\", \"Algebra.FinitePresentation.iff_quotient_mvPolynomial'\", \"MvPolynomial.quotientEquivQuotientMvPolynomial\", \"MvPolynomial.quotient_map_C_eq_zero\", \"MvPolynomial.quotientEquivQuotientMvPolynomial_leftInverse\", \"MvPolynomial.quotientEquivQuotientMvPolynomial_rightInverse\"], \"digest\": \"5db1d35c2d51cb4c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: weakly regular results assume injectivity on successive quotients, Rees and internal graded algebras do not assert this associated-graded truncation, and polynomial quotient equivalences concern coefficient ideals. Read RegularSequence.lean:21,135-147,228-258, ReesAlgebra.lean:14-45 and Polynomial/Quotient.lean:198-272."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiregular|QuasiRegular|associatedGraded|associated_graded",
+   "results": "{\"t\": \"2026-10-17T05:24:04Z\", \"tool\": \"grep\", \"query\": \"quasiregular|QuasiRegular|associatedGraded|associated_graded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Pi.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Pi.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Pi.lean\"], \"digest\": \"ffa422671ec813f4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits define quasiregular elements of a non-unital ring for quasispectrum, a different notion from a quasi-regular sequence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsWeaklyRegular\", \"mod\"",
+   "results": "{\"t\": \"2026-10-17T05:24:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsWeaklyRegular\\\", \\\"mod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"RingTheory.Sequence.IsWeaklyRegular.ndrecIterModByRegular\", \"RingTheory.Sequence.IsWeaklyRegular.recIterModByRegular\", \"RingTheory.Sequence.IsWeaklyRegular.recIterModByRegularWithRing\", \"RingTheory.Sequence.IsWeaklyRegular.of_isLocalizedModule\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"ModuleCat.projectiveDimension_quotient_eq_add_length_of_isWeaklyRegular\"], \"digest\": \"0fc3d9d35882d1d8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: RegularSequence.lean:135-147 and 228-258 concern injectivity on successive quotients, not a polynomial associated-graded hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a decreasing ideal power filtration with polynomial graded ring, show I^n intersection a principal ideal equals the generator times I^(n-1)",
+   "results": "{\"t\": \"2026-10-17T05:24:07Z\", \"tool\": \"leanfinder\", \"query\": \"For a decreasing ideal power filtration with polynomial graded ring, show I^n intersection a principal ideal equals the generator times I^(n-1)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.adic_basis\", \"Ideal.exists_pow_inf_eq_pow_smul\", \"Ideal.stableFiltration_N\", \"Ideal.Filtration.submoduleInfHom\", \"Ideal.Filtration.submodule\", \"mem_reesAlgebra_iff\", \"Ideal.Filtration.submodule_span_single\", \"Ideal.Filtration.submodule_eq_span_le_iff_stable_ge\"], \"digest\": \"b5e55d868e80366a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the intersection result Ideal.exists_pow_inf_eq_pow_smul is Artin-Rees (Filtration.lean:389) and needs a Noetherian ring and finite module; the other hits construct filtrations or Rees algebras, not this truncation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-quasi-regular-noetherian-local",
@@ -74,5 +243,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-quasi-regular-prefix-quotient",
+  "worker": "stage1",
+  "summary": "Read Stacks 061R, 061P and 061N. Kept the statement unchanged and expanded the one-generator quotient proof in eight steps, including the finite filtration witness (no separatedness assumption), the kernel calculation, coefficientwise quotient and explicit prefix induction. Reused the three defining nodes and the existing associated-graded structure theorem. No new nodes or Mathlib leaves; no matching project declaration. All elementary calculations are written out rather than introduced as new nodes.",
+  "blueprint": "Proof, opening sentence: 'Use the frame class of [def-pur-frame-class]'; the regular local equations needed by that frame construction are supplied through lem-pur-smooth-pair-local-coordinates and lem-pur-relative-regular-equations-base-change. Here the Tag 061S input uses Tag 061R to pass to each prefix quotient."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-610f36751",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-610f36751 (reviewer sub-agent of L); spot-checked: Read the whole delivery: the statement of the item, all 8 steps, the 4 cited node statements, and Stacks algebra.tex 16855-16884 (061N/061P) and 17026-17057 (061R). The statement is exactly 061R with M=R. The canonical map C[T]->gr_J(A), T_j->[f_j]_1 is 061N, and the coefficient ring is B_i/Jbar_i=A/J. No hypotheses are added and the statement is unchanged and not weakened. Step 1: q(J^n)=K^n and B/K=C. Step 2: shifting by T_1 is injective and Phi is a ring isomorphism, so ty is not in J^{r+2}, without cancelling t. Step 3: the least failed level m gives J^n meet tA = tJ^{n-1}, which fills the source's last sentence with no separatedness. Step 4: the kernel of rho_n is J^{n+1}+(tA meet J^n), by lifting z. Step 5: the kernel is [t]_1 G_{n-1}, which is T_1 times polynomials of degree n-1 under Phi. Step 6: splitting H=P+T_1Q gives surjectivity, and comparing first exponents gives injectivity, over any C. Step 7: polynomial uniqueness identifies the map with the canonical one, and finite support gives bijectivity. Step 8: a stated induction with base i=0. The step applies the one-generator result over B_i, uses B_i/(f_{i+1}) isomorphic to B_{i+1}, and transports the graded rings; the cases i=b and b=0 are valid. The cited nodes say what the steps take from them. The cross-unit lem-weil-pbc-associated-graded-ring-structure is Lean-closed, so it is an admissible tool and no tool_uses is needed; the second reader's removal of the self-written entry agrees with C8. proof_deps equals the union of uses. There are no new nodes. An rg over dag/nodes for 061R and quasi-regular found no duplicate: the regular-sequence and flat-base-change neighbours state different results, and the parent cites exactly this conclusion. There is no cycle, no SGA citation, and the route and blueprint ancestry are unchanged; the opening sentence of lem-pur-divisor-class in main-20261015 checked. Small cases checked: Z with 2; k[x,y] with (x,y); k[x]x k with f=(x,1); J=A. Cases correctly excluded because the hypothesis fails: (x,x), and k[eps]/eps^2 with f=eps. No fixes."
  }
 }

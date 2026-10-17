@@ -1,0 +1,106 @@
+{
+ "id": "lem-cbc-local-acyclic-matching-cover-criterion",
+ "kind": "statement",
+ "title": "Boundary matching covers imply local acyclic fibration",
+ "statement": "Let $\\mathcal C$ be a small category with a Grothendieck topology $J$ given by covering sieves: a sieve is a set of arrows into an object closed under precomposition, the maximal sieve covers, and covering sieves satisfy pullback stability and transitivity. Use [def-weil-size-convention] for universes and [def-weil-pbc-sheafification] for associated sheaves and [def-weil-pbc-simplicial-set] for simplicial sets. Use [def-cbc-local-simplicial-presheaf-maps] for the homotopy-group and local-map conventions. For $V\\in\\mathcal C$, put $h_V(W)=\\operatorname{Hom}_{\\mathcal C}(W,V)$. The simplex $\\Delta^n$ is represented by $[n]$, its boundary $\\partial\\Delta^n$ is the union of its proper faces (empty when $n=0$), and $\\Lambda_i^n$ is the union of the faces other than face $i$, for $n\\ge1$ and $0\\le i\\le n$. Let $F,G:\\mathcal C^{\\mathrm{op}}\\to\\mathsf{sSet}$ be objectwise Kan simplicial presheaves: for every $V$, each map from a horn $\\Lambda_i^n$ to $F(V)$ or $G(V)$ extends to $\\Delta^n$, for $n\\geq1$ and $0\\leq i\\leq n$. A map $f:F\\to G$ is a local Kan fibration if every commutative square from $h_V\\times\\Lambda_i^n\\to h_V\\times\\Delta^n$ to $f$ has fillers after restriction along every arrow in some covering sieve of $V$; the fillers need not agree for different arrows. For objectwise Kan $F,G$, call $f$ a local weak equivalence if it induces an isomorphism on the associated sheaves of $\\pi_0$ and, for each $V\\in\\mathcal C$, $x\\in F(V)_0$ and $m\\ge1$, an isomorphism on the associated sheaves on $\\mathcal C/V$ of $\\pi_m(F|_{\\mathcal C/V},x)\\to\\pi_m(G|_{\\mathcal C/V},f(x))$, where $\\mathcal C/V$ has the induced topology. For $n\\geq0$, define $\\widetilde M_nF(V)=\\operatorname{Hom}_{\\mathsf{sSet}}(\\partial\\Delta^n,F(V))$ and define $\\widetilde M_nG$ similarly. If, for every $n$, the natural map $F_n\\longrightarrow\\widetilde M_nF\\times_{\\widetilde M_nG}G_n$ is a generalized cover [def-cbc-generalized-cover], then $f$ is both a local Kan fibration and a local weak equivalence. In degree zero the hypothesis is local surjectivity of $F_0\\to G_0$.",
+ "source": {
+  "document": "https://arxiv.org/pdf/math/0205027v2",
+  "place": "Dugger--Hollander--Isaksen, Proposition 3.2 and reformulation (3.4), printed pp. 7-8, converse direction; read online, archival local copy WANTED. No corresponding Stacks tag."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-generalized-cover",
+  "def-cbc-local-simplicial-presheaf-maps"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If every relative boundary matching map of a simplicial presheaf map is a generalized cover then the map is a local acyclic fibration",
+   "results": "CategoryTheory.Presheaf.IsLocallyInjective; CategoryTheory.coherentTopology.presheafIsLocallySurjective_iff; CategoryTheory.GrothendieckTopology.W.isLocallySurjective; no declaration states the simplicial-presheaf criterion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of objectwise Kan simplicial presheaves whose boundary matching maps are locally surjective is a local weak equivalence and local Kan fibration",
+   "results": "CategoryTheory.Presheaf.isLocallySurjective_of_whisker; CategoryTheory.GrothendieckTopology.W.isLocallySurjective; SSet.modelCategoryQuillen.J; no declaration states the simplicial-presheaf criterion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "local acyclic fibration matching generalized cover",
+   "results": "0 hits; parser rejected the free-text query.",
+   "date": "2026-10-17",
+   "verdict": "query rejected by parser; no mathematical absence conclusion from this query"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.modelCategoryQuillen.fibration_iff",
+   "results": "SSet.modelCategoryQuillen.fibration_iff in Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean; this only characterizes ordinary Kan fibrations, not local simplicial-presheaf acyclic fibrations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generalized.*cover|relative.*matching|local.*acyclic",
+   "results": "{\"t\": \"2026-10-17T05:08:54Z\", \"tool\": \"grep\", \"query\": \"generalized.*cover|relative.*matching|local.*acyclic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Linear.lean\"], \"digest\": \"b54387b7464be0ac\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: corrected root Mathlib search finds only localization of acyclic complexes; corrected CategoryTheory/Sites search finds matching families of set-valued presheaves, not relative simplicial boundary covers. Earlier wrong Mathlib/-prefixed subdirectory searches are retained in the raw log but are not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "presheaf.*acyclic|local.*fibration|matching",
+   "results": "{\"t\": \"2026-10-17T05:08:52Z\", \"tool\": \"grep\", \"query\": \"presheaf.*acyclic|local.*fibration|matching\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/IsSheafFor.lean\", \"Mathlib/CategoryTheory/Sites/IsSheafFor.lean\", \"Mathlib/CategoryTheory/Sites/IsSheafFor.lean\", \"Mathlib/CategoryTheory/Sites/IsSheafFor.lean\", \"Mathlib/CategoryTheory/Sites/IsSheafFor.lean\"], \"digest\": \"820371369f2b78c8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: corrected root Mathlib search finds only localization of acyclic complexes; corrected CategoryTheory/Sites search finds matching families of set-valued presheaves, not relative simplicial boundary covers. Earlier wrong Mathlib/-prefixed subdirectory searches are retained in the raw log but are not evidence of absence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "relative boundary maps of simplicial presheaves are generalized covers exactly when the map is a local acyclic fibration",
+   "results": "SSet.modelCategoryQuillen.instCategoryWithFibrations; SSet.modelCategoryQuillen.fibration_iff; CategoryTheory.GrothendieckTopology.W; no full local criterion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial presheaf morphism with the local right lifting property for every boundary inclusion is a weak equivalence on sheafified homotopy groups",
+   "results": "{\"t\": \"2026-10-17T05:25:12Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial presheaf morphism with the local right lifting property for every boundary inclusion is a weak equivalence on sheafified homotopy groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalencePResolutionObj\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\"], \"digest\": \"2195607b960330bb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned general model-category homotopy results, not local lifting for simplicial presheaves on a site."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-hypercover-cotensor-local-acyclic-fibration",
+  "date": "2026-10-17",
+  "group": "Q12"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-cbc-finite-level-proetale",
+   "place": "Proof opening 'Choose a compactification c=(j,p)' of thm-cbc-finite-level-proetale: arbitrary-site descent foundation for the affine-local compactification repair; in the descendant boundary-lifting proof, the local acyclic fibration square is solved after hypercover refinement before the mapping-space descent argument (DHI Proposition 5.1). Supporting input: Dugger--Hollander--Isaksen, Proposition 3.3 (published numbering; v2 Proposition 3.3), Section 3, pp. 7-8; finite cotensor corner map. Supporting converse in Proposition 3.2/(3.4), converting the corner boundary lifts into local acyclicity.",
+   "via": [
+    "lem-cbc-hypercover-cotensor-local-acyclic-fibration",
+    "lem-cbc-hypercover-relative-lifting",
+    "lem-cbc-simplicial-hypercover-fibration-test",
+    "lem-cbc-hypercover-localization-generation",
+    "lem-cbc-hyperdescent-local-orthogonality",
+    "lem-cbc-bounded-below-hypersheaf-model",
+    "lem-cbc-zariski-enhanced-derived-descent",
+    "lem-cbc-etale-local-compact-support-extension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

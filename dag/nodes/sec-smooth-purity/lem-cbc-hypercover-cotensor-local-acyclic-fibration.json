@@ -2,7 +2,7 @@
  "id": "lem-cbc-hypercover-cotensor-local-acyclic-fibration",
  "kind": "statement",
  "title": "Finite cotensor corner preserves local acyclic fibrations",
- "statement": "Let $\\mathcal C$ be a small category with a Grothendieck topology $J$ given by covering sieves: a sieve is a set of arrows into an object closed under precomposition, the maximal sieve covers, and covering sieves satisfy pullback stability and transitivity. Use [def-weil-size-convention] for universes and [def-weil-pbc-sheafification] for associated sheaves and [def-weil-pbc-simplicial-set] for simplicial sets. For $V\\in\\mathcal C$, put $h_V(W)=\\operatorname{Hom}_{\\mathcal C}(W,V)$. The simplex $\\Delta^n$ is represented by $[n]$, its boundary $\\partial\\Delta^n$ is the union of its proper faces (empty when $n=0$), and $\\Lambda_i^n$ is the union of the faces other than face $i$, for $n\\ge1$ and $0\\le i\\le n$. Let $F,G:\\mathcal C^{\\mathrm{op}}\\to\\mathsf{sSet}$ be objectwise Kan simplicial presheaves. A map $f:F\\to G$ is a local Kan fibration if every commutative square from $h_V\\times\\Lambda_i^n\\to h_V\\times\\Delta^n$ to $f$ has fillers after restriction along every arrow in some covering sieve of $V$; the fillers need not agree for different arrows. For objectwise Kan $F,G$, call $f$ a local weak equivalence if it induces an isomorphism on the associated sheaves of $\\pi_0$ and, for each $V\\in\\mathcal C$, $x\\in F(V)_0$ and $m\\ge1$, an isomorphism on the associated sheaves on $\\mathcal C/V$ of $\\pi_m(F|_{\\mathcal C/V},x)\\to\\pi_m(G|_{\\mathcal C/V},f(x))$, where $\\mathcal C/V$ has the induced topology. For a simplicial set $A$, define the objectwise cotensor by $(F^A)(V)_q=\\operatorname{Hom}_{\\mathsf{sSet}}(A\\times\\Delta^q,F(V))$. If $f$ is both a local Kan fibration and a local weak equivalence, and $i:K\\hookrightarrow L$ is an inclusion of finite simplicial sets (finitely many nondegenerate simplices), then the objectwise cotensor corner map\n$$F^L\\longrightarrow F^K\\times_{G^K}G^L$$\nhas objectwise Kan domain and codomain and is again a local Kan fibration and a local weak equivalence (hence a local acyclic fibration).",
+ "statement": "Let $\\mathcal C$ be a small category with a Grothendieck topology $J$ given by covering sieves: a sieve is a set of arrows into an object closed under precomposition, the maximal sieve covers, and covering sieves satisfy pullback stability and transitivity. Use [def-weil-size-convention] for universes and [def-weil-pbc-sheafification] for associated sheaves and [def-weil-pbc-simplicial-set] for simplicial sets. Use [def-cbc-local-simplicial-presheaf-maps] for the homotopy-group and local-map conventions. For $V\\in\\mathcal C$, put $h_V(W)=\\operatorname{Hom}_{\\mathcal C}(W,V)$. The simplex $\\Delta^n$ is represented by $[n]$, its boundary $\\partial\\Delta^n$ is the union of its proper faces (empty when $n=0$), and $\\Lambda_i^n$ is the union of the faces other than face $i$, for $n\\ge1$ and $0\\le i\\le n$. Let $F,G:\\mathcal C^{\\mathrm{op}}\\to\\mathsf{sSet}$ be objectwise Kan simplicial presheaves. A map $f:F\\to G$ is a local Kan fibration if every commutative square from $h_V\\times\\Lambda_i^n\\to h_V\\times\\Delta^n$ to $f$ has fillers after restriction along every arrow in some covering sieve of $V$; the fillers need not agree for different arrows. For objectwise Kan $F,G$, call $f$ a local weak equivalence if it induces an isomorphism on the associated sheaves of $\\pi_0$ and, for each $V\\in\\mathcal C$, $x\\in F(V)_0$ and $m\\ge1$, an isomorphism on the associated sheaves on $\\mathcal C/V$ of $\\pi_m(F|_{\\mathcal C/V},x)\\to\\pi_m(G|_{\\mathcal C/V},f(x))$, where $\\mathcal C/V$ has the induced topology. For a simplicial set $A$, define the objectwise cotensor by $(F^A)(V)_q=\\operatorname{Hom}_{\\mathsf{sSet}}(A\\times\\Delta^q,F(V))$. If $f$ is both a local Kan fibration and a local weak equivalence, and $i:K\\hookrightarrow L$ is an inclusion of finite simplicial sets (finitely many nondegenerate simplices), then the objectwise cotensor corner map\n$$F^L\\longrightarrow F^K\\times_{G^K}G^L$$\nhas objectwise Kan domain and codomain and is again a local Kan fibration and a local weak equivalence (hence a local acyclic fibration).",
  "source": {
   "document": "https://arxiv.org/pdf/math/0205027v2",
   "place": "Dugger--Hollander--Isaksen, Proposition 3.3 (published numbering; v2 Proposition 3.3), Section 3, pp. 7-8; finite cotensor corner map."
@@ -10,11 +10,86 @@
  "stmt_deps": [
   "def-weil-size-convention",
   "def-weil-pbc-sheafification",
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-local-simplicial-presheaf-maps"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $H=F^L$ and $B=F^K\\times_{G^K}G^L$. For each $V$, the internal-hom Kan theorem makes $H(V)$ and $F(V)^K$ Kan. Apply the corner-map theorem to $G(V)\\to *$ and $K\\hookrightarrow L$: restriction $r:G(V)^L\\to G(V)^K$ is a Kan fibration. To fill a horn in $B(V)$, first extend its $F(V)^K$ coordinate using its Kan property. Compose that simplex with $f$ to obtain the prescribed base simplex in $G(V)^K$; the other coordinate on the horn and this simplex form a lifting square for $r$. A filler for $r$, paired with the first filler, is a filler in the degreewise pullback $B(V)$. Thus both $H$ and $B$ are objectwise Kan. This uses no objectwise-fibration hypothesis on $f$.",
+   "uses": [
+    "lem-cbc-kan-functor-space-kan",
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205027v2",
+    "place": "Propositions 3.2-3.3 and (3.4), printed pp. 7-8; direct finite-boundary-cell expansion of the acyclic case."
+   }
+  },
+  {
+   "text": "Fix $m\\geq0$ and put $D_m=\\Delta^m\\times L$ and $A_m=(\\partial\\Delta^m\\times L)\\cup(\\Delta^m\\times K)$, a degreewise union of simplicial subsets of $D_m$. The simplex $\\Delta^m$ has finitely many nondegenerate simplices: a map $[q]\\to[m]$ is nondegenerate exactly when it is injective, since its epi-mono factorization gives a degeneracy whenever it is not injective. The finite-product theorem therefore makes $D_m$ finite. Apply the relative boundary-cell theorem to $A_m\\hookrightarrow D_m$. Its cells are precisely the nondegenerate simplices of $D_m$ outside $A_m$. There are finitely many, so only finitely many dimension stages are nonempty, and each finite coproduct of attachments can be attached one summand at a time. Consequently there is a finite filtration $A_m=Z_0\\hookrightarrow\\cdots\\hookrightarrow Z_N=D_m$, each map a pushout of one boundary inclusion $\\partial\\Delta^{d_j}\\hookrightarrow\\Delta^{d_j}$, allowing $d_j=0$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "lem-cbc-finite-simplicial-product",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205027v2",
+    "place": "Propositions 3.2-3.3 and (3.4), printed pp. 7-8; direct finite-boundary-cell expansion of the acyclic case."
+   }
+  },
+  {
+   "text": "The matching-cover theorem applied to $f$ supplies local strict boundary fillers in every degree, including degree zero. Consider any square $A_m\\to F(V)$, $D_m\\to G(V)$ for $f_V$. For the finite filtration just constructed, let $R_j$ be the sieve of arrows $u:W\\to V$ on which this square has a partial lift $Z_j\\to F(W)$ extending its prescribed $A_m$ map. Restriction of a partial lift shows that $R_j$ is a sieve, and $R_0$ is maximal. If $R_j$ covers, choose a partial lift for each $u\\in R_j$. Its restriction to the next attaching boundary, together with the given simplex in $G(W)$, is a relative boundary section for $f$. The matching-cover theorem gives a covering sieve $T_u$ of $W$ where it extends strictly. Glue each filler to the partial lift by the pushout defining $Z_{j+1}$; hence $u^*R_{j+1}$ contains $T_u$ and covers. Covering sieves are upward closed by transitivity (the pullback of a larger sieve along any arrow of a smaller sieve is maximal). Transitivity along $R_j$ now proves that $R_{j+1}$ covers. Finite induction gives a covering lifting sieve $R_N$ for the whole square. No compatible choices on different arrows and no infinite intersection of covering sieves are used.",
+   "uses": [
+    "lem-cbc-local-acyclic-matching-generalized-cover",
+    "def-cbc-generalized-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205027v2",
+    "place": "Propositions 3.2-3.3 and (3.4), printed pp. 7-8; direct finite-boundary-cell expansion of the acyclic case."
+   }
+  },
+  {
+   "text": "Identify a relative boundary section for $H\\to B$ over $V$ with a square as in the preceding step. Explicitly a map $Q\\to F(V)^L$ corresponds to a map $L\\times Q\\to F(V)$: from $a:Q\\to F(V)^L$ evaluate $a_q(z):L\\times\\Delta^q\\to F(V)$ at $(l,\\mathrm{id}_{[q]})$ on $(l,z)\\in L_q\\times Q_q$. Conversely a map $b:L\\times Q\\to F(V)$ sends $z\\in Q_q$ to the composite $L\\times\\Delta^q\\xrightarrow{1\\times z}L\\times Q\\xrightarrow b F(V)$. These constructions are inverse and commute with simplicial operators. Thus a map $\\partial\\Delta^m\\to H(V)$, and an $m$-simplex of $B(V)$ over its image, give maps $L\\times\\partial\\Delta^m\\to F(V)$ and $K\\times\\Delta^m\\to F(V)$ agreeing on $K\\times\\partial\\Delta^m$, and a map $L\\times\\Delta^m\\to G(V)$ agreeing with their composites with $f_V$. Gluing the first two maps degreewise and swapping factors gives the square $A_m\\to F(V)$, $D_m\\to G(V)$. A strict lift of this square is exactly an $m$-simplex of $H(V)$ with the prescribed boundary and image. All formulas commute with restriction in $V$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205027v2",
+    "place": "Propositions 3.2-3.3 and (3.4), printed pp. 7-8; direct finite-boundary-cell expansion of the acyclic case."
+   }
+  },
+  {
+   "text": "For every relative boundary section of $H\\to B$, Step 3 applied to the square identified in Step 4 gives a covering sieve with strict lifts. By the definition of generalized cover, every map $H_m\\to\\widetilde M_mH\\times_{\\widetilde M_mB}B_m$ is a generalized cover. Step 1 verifies that $H,B$ are objectwise Kan, so the boundary matching-cover criterion applies and proves that $H\\to B$ is both a local Kan fibration and a local weak equivalence. For $m=0$, $A_0=K$ and $D_0=L$ and the identical argument uses the degree-zero boundary clause; no nonemptiness assumption has been imposed.",
+   "uses": [
+    "def-cbc-generalized-cover",
+    "lem-cbc-local-acyclic-matching-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0205027v2",
+    "place": "Propositions 3.2-3.3 and (3.4), printed pp. 7-8; direct finite-boundary-cell expansion of the acyclic case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-kan-functor-space-kan",
+  "lem-cbc-internal-hom-fibration-corner-map",
+  "def-weil-pbc-simplicial-set",
+  "lem-cbc-finite-simplicial-product",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-cbc-local-acyclic-matching-generalized-cover",
+  "def-cbc-generalized-cover",
+  "lem-cbc-local-acyclic-matching-cover-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/math/0205027v2",
+  "place": "Proposition 3.3 acyclic case, expanded directly through Proposition 3.2/(3.4) and the existing Mathlib boundary-cell filtration. Archival DHI copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -95,7 +170,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-hypercover-relative-lifting",
@@ -120,5 +195,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-hypercover-cotensor-local-acyclic-fibration",
+  "worker": "stage1",
+  "summary": "Repaired the inherited split: replaced the unsupported local horn pushout-product assertion with a finite boundary-cell argument, proved the pullback Kan claim using a restriction fibration, corrected all verbatim citations, retained the original statement and searches, and added one matching-cover converse plus one exact Mathlib finite-product leaf. Second reading independently verified all five steps and both new nodes, confirmed the product Mathlib leaf, and cited the existing homotopy/local-map definition without changing hypotheses or conclusion.",
+  "blueprint": "Proof opening 'Choose a compactification c=(j,p)' of thm-cbc-finite-level-proetale: arbitrary-site descent foundation for the affine-local compactification repair; in the descendant boundary-lifting proof, the local acyclic fibration square is solved after hypercover refinement before the mapping-space descent argument (DHI Proposition 5.1). Supporting input: Dugger--Hollander--Isaksen, Proposition 3.3 (published numbering; v2 Proposition 3.3), Section 3, pp. 7-8; finite cotensor corner map. Steps 1-5 provide the finite cotensor input to the descendant hypercover lifting argument, through DHI Proposition 3.3 and (3.4)."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-17e302965",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-17e302965 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, unit sk-prop-sf-cbc and Mathlib FiniteProd.lean:78-81, Finite.lean:30-31 and Monoidal.lean; no fixes written. Item statement is unchanged and true, and it matches its citer lem-cbc-hypercover-relative-lifting. Small cases checked: K=L gives the identity; K empty gives F^L->G^L; L empty forces K empty; on the trivial topology it is the classical trivial-fibration corner fact. Step 1: Kan-ness of the pullback is correct. G(V)->* is a fibration, the corner leaf gives a restriction fibration, and the proof fills the F^K coordinate first, then lifts through that fibration. Step 2: finite cell filtration of A_m into D_m from the finite Delta^m, the product leaf and the boundary-cell leaf. The boundary-cell leaf is a Mathlib leaf from another unit, so it is a tool and no tool_uses entry is needed. Step 3: the sieve induction R_j is set up correctly, using only the statement of the forward matching-cover node, with upward closure and transitivity. Step 4: the currying and gluing identification is genuinely elementary. Step 5: the generalized-cover conclusion plus the new converse criterion applied to H and B, which are objectwise Kan by Step 1. The degree-zero case is handled. New node lem-cbc-local-acyclic-matching-cover-criterion is the true converse from DHI Prop. 3.2/(3.4) (Jardine's characterisation). It is self-contained, statement-only, has all three search kinds and is no restatement of the item. A whole-DAG scan finds only the opposite-direction node. New node lem-cbc-finite-simplicial-product is an exact Mathlib leaf, SSet.instFiniteTensorObj, with no duplicate in the DAG. No SGA; DHI is WANTED and proof_origin is agent. Minor: the new nodes have no lean_audit field, which tools/lean_status.py fills."
  }
 }
