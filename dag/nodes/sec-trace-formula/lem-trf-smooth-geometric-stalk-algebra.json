@@ -364,29 +364,27 @@
  },
  "lean": {
   "module": "Sheaf.TraceFormula.SmoothGeometricStalkAlgebra",
-  "declaration": "AlgebraicGeometry.smooth_geometric_stalk_algebra",
   "file": "lean/Sheaf/TraceFormula/SmoothGeometricStalkAlgebra.lean",
-  "statement": "theorem smooth_geometric_stalk_algebra {S V : Scheme.{u}} (f : V ⟶ S) [IsLocallyNoetherian S] [IsLocallyNoetherian V] [Smooth f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (v : Spec (.of Ω) ⟶ V) (hv : v ≫ f = s) : let A := Scheme.strictHenselizationRing s let B := Scheme.strictHenselizationRing v letI hA : IsLocalRing A := strictHenselizationLocalRing s letI hB : IsLocalRing B := strictHenselizationLocalRing v let φ : (A : Type u) →+* (B : Type u) := strictHenselizationRingMapAlong f s v hv let mA : Ideal A := IsLocalRing.maximalIdeal A let mB : Ideal B := IsLocalRing.maximalIdeal B IsNoetherianRing A ∧ IsNoetherianRing B ∧ IsLocalRing A ∧ IsLocalRing B ∧ mA.IsMaximal ∧ mB.IsMaximal ∧ RingHom.Flat φ ∧ IsLocalHom φ ∧ IsRegularRing (B ⧸ Ideal.map φ mA) ∧ (∀ (I : Ideal A), ∀ hI : I ≤ mA, RingHom.Flat (Ideal.quotientMap (Ideal.map φ I) φ Ideal.le_comap_map) ∧ IsLocalHom (Ideal.quotientMap (Ideal.map φ I) φ Ideal.le_comap_map) ∧ Nonempty (RingEquiv (B ⧸ (Ideal.map φ I ⊔ Ideal.map φ mA)) (B ⧸ Ideal.map φ mA))) ∧ (∀ (r : ℕ) (e : V ≅ 𝔸(ULift.{u} (Fin r); S)) (_he : e.hom ≫ (𝔸(ULift.{u} (Fin r); S) ↘ S) = f) (K : Finset (ULift.{u} (Fin r))) (hK : ∀ i, i ∈ K → strictHenselizationAffineCoordinate v r e i ∈ mB) (I : Ideal A), ∀ hI : I ≤ mA, IsNoetherianRing (B ⧸ (Ideal.map φ I ⊔ Ideal.span (Set.range (fun i : K => strictHenselizationAffineCoordinate v r e i.1)))) ∧ IsLocalRing (B ⧸ (Ideal.map φ I ⊔ Ideal.span (Set.range (fun i : K => strictHenselizationAffineCoordinate v r e i.1)))) ∧ RingHom.Flat (Ideal.quotientMap (Ideal.map φ I ⊔ Ideal.span (Set.range (fun i : K => strictHenselizationAffineCoordinate v r e i.1))) φ (Ideal.le_comap_map.trans (Ideal.comap_mono le_sup_left))) ∧ IsRegularRing (B ⧸ (Ideal.map φ mA ⊔ Ideal.span (Set.range (fun i : K => strictHenselizationAffineCoordinate v r e i.1)))) ∧ Nonempty (RingEquiv (B ⧸ ((Ideal.map φ I ⊔ Ideal.span (Set.range (fun i : K => strictHenselizationAffineCoordinate v r e i.1))) ⊔ Ideal.map φ mA)) (B ⧸ (Ideal.map φ mA ⊔ Ideal.span (Set.range (fun i : K => strictHenselizationAffineCoordinate v r e i.1))))) ∧ ringKrullDim (B ⧸ Ideal.map φ mA) = ringKrullDim (B ⧸ (Ideal.map φ mA ⊔ Ideal.span (Set.range (fun i : K => strictHenselizationAffineCoordinate v r e i.1)))) + K.card)",
-  "branch": "newtargets-dag",
-  "by": "Q69",
-  "date": "2026-10-18",
-  "existing": false,
+  "declaration": "AlgebraicGeometry.smooth_geometric_stalk_algebra",
   "declarations": [
    "AlgebraicGeometry.strictHenselizationLocalRing",
    "AlgebraicGeometry.strictHenselizationRingMap",
    "AlgebraicGeometry.strictHenselizationRingMapAlong",
    "AlgebraicGeometry.strictHenselizationAffineCoordinate",
-   "AlgebraicGeometry.strictHenselizationClosedFiberEquiv",
-   "AlgebraicGeometry.strictHenselizationAffineClosedFiberEquiv"
-  ]
+   "AlgebraicGeometry.smooth_geometric_stalk_algebra"
+  ],
+  "statement": "theorem smooth_geometric_stalk_algebra {S V : Scheme.{u}} (f : V ⟶ S) [IsLocallyNoetherian S] [IsLocallyNoetherian V] [Smooth f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (v : Spec (.of Ω) ⟶ V) (hv : v ≫ f = s) : IsNoetherianRing (Scheme.strictHenselizationRing s) ∧ IsNoetherianRing (Scheme.strictHenselizationRing v) ∧ IsLocalRing (Scheme.strictHenselizationRing s) ∧ IsLocalRing (Scheme.strictHenselizationRing v) ∧ RingHom.Flat (strictHenselizationRingMapAlong f s v hv) ∧ IsLocalHom (strictHenselizationRingMapAlong f s v hv) ∧ IsRegularRing ((Scheme.strictHenselizationRing v) ⧸ Ideal.map (strictHenselizationRingMapAlong f s v hv) (IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing s))) ∧ (∀ (I : Ideal (Scheme.strictHenselizationRing s)), ∀ _hI : I ≤ (IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing s)), RingHom.Flat (Ideal.quotientMap (Ideal.map (strictHenselizationRingMapAlong f s v hv) I) (strictHenselizationRingMapAlong f s v hv) Ideal.le_comap_map) ∧ IsLocalHom (Ideal.quotientMap (Ideal.map (strictHenselizationRingMapAlong f s v hv) I) (strictHenselizationRingMapAlong f s v hv) Ideal.le_comap_map) ∧ (∃ E : ((Scheme.strictHenselizationRing v) ⧸ (Ideal.map (strictHenselizationRingMapAlong f s v hv) I ⊔ Ideal.map (strictHenselizationRingMapAlong f s v hv) (IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing s)))) ≃+* ((Scheme.strictHenselizationRing v) ⧸ Ideal.map (strictHenselizationRingMapAlong f s v hv) (IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing s))), ∀ b : (Scheme.strictHenselizationRing v), E (Ideal.Quotient.mk _ b) = Ideal.Quotient.mk _ b)) ∧ (∀ (r : ℕ) (e : V ≅ 𝔸(ULift.{u} (Fin r); S)) (_he : e.hom ≫ (𝔸(ULift.{u} (Fin r); S) ↘ S) = f) (K : Finset (ULift.{u} (Fin r))) (_hK : ∀ i, i ∈ K → strictHenselizationAffineCoordinate v r e i ∈ (IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing v))) (I : Ideal (Scheme.strictHenselizationRing s)), ∀ _hI : I ≤ (IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing s)), IsNoetherianRing ((Scheme.strictHenselizationRing v) ⧸ (Ideal.map (strictHenselizationRingMapAlong f s v hv) I ⊔ Ideal.span (Set.range (fun i : K ↦ strictHenselizationAffineCoordinate v r e i.1)))) ∧ IsLocalRing ((Scheme.strictHenselizationRing v) ⧸ (Ideal.map (strictHenselizationRingMapAlong f s v hv) I ⊔ Ideal.span (Set.range (fun i : K ↦ strictHenselizationAffineCoordinate v r e i.1)))) ∧ RingHom.Flat (Ideal.quotientMap (Ideal.map (strictHenselizationRingMapAlong f s v hv) I ⊔ Ideal.span (Set.range (fun i : K ↦ strictHenselizationAffineCoordinate v r e i.1))) (strictHenselizationRingMapAlong f s v hv) (Ideal.le_comap_map.trans (Ideal.comap_mono le_sup_left))) ∧ IsRegularRing ((Scheme.strictHenselizationRing v) ⧸ (Ideal.map (strictHenselizationRingMapAlong f s v hv) (IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing s)) ⊔ Ideal.span (Set.range (fun i : K ↦ strictHenselizationAffineCoordinate v r e i.1)))) ∧ (∃ E : ((Scheme.strictHenselizationRing v) ⧸ ((Ideal.map (strictHenselizationRingMapAlong f s v hv) I ⊔ Ideal.span (Set.range (fun i : K ↦ strictHenselizationAffineCoordinate v r e i.1))) ⊔ Ideal.map (strictHenselizationRingMapAlong f s v hv) (IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing s)))) ≃+* ((Scheme.strictHenselizationRing v) ⧸ (Ideal.map (strictHenselizationRingMapAlong f s v hv) (IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing s)) ⊔ Ideal.span (Set.range (fun i : K ↦ strictHenselizationAffineCoordinate v r e i.1)))), ∀ b : (Scheme.strictHenselizationRing v), E (Ideal.Quotient.mk _ b) = Ideal.Quotient.mk _ b) ∧ ringKrullDim ((Scheme.strictHenselizationRing v) ⧸ Ideal.map (strictHenselizationRingMapAlong f s v hv) (IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing s))) = ringKrullDim ((Scheme.strictHenselizationRing v) ⧸ (Ideal.map (strictHenselizationRingMapAlong f s v hv) (IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing s)) ⊔ Ideal.span (Set.range (fun i : K ↦ strictHenselizationAffineCoordinate v r e i.1)))) + K.card)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-17",
+  "existing": false
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-732e9b636",
-  "group": "Q69",
+  "reviewer": "NT-stage2-Codex-14c865149",
+  "group": "N8",
   "result": "pass",
-  "note": "Statement, dependencies, canonical helpers, docstrings, edge cases, route-pivot compliance, citer audit, and report sections checked; scompile.py sandbox and server library compilation passed.",
-  "statement_corrected": true
+  "note": "Independent audit found no substantive or mechanical defects; report sections and permitted sorry-only theorem proof are present."
  }
 }
