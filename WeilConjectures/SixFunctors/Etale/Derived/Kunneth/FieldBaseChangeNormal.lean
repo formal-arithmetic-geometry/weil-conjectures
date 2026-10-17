@@ -306,14 +306,15 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_of_field {K : Type u} [Fiel
   let cY := pullbackConstCone a (g ≫ w) cT (h ≫ b) e hsT hpbY.w
   have hXl : IsLimit cX := isLimitPullbackConstCone a w hS b p' hs hpb
   have hYl : IsLimit cY := isLimitPullbackConstCone a (g ≫ w) hT (h ≫ b) e hsT hpbY
+  have e₁ (i : I) : cX.π.app i ≫ pD.app i = p' ≫ cS.π.app i :=
+    pullbackConstCone_π_app_snd _ _ _ _ _ _ _ i
+  have e₂ (i : I) : cY.π.app i ≫ eD.app i = e ≫ cT.π.app i :=
+    pullbackConstCone_π_app_snd _ _ _ _ _ _ _ i
   have hh₀ (i : I) : h ≫ cX.π.app i = cY.π.app i ≫ hD.app i := by
     refine (hX i).hom_ext ?_ ?_
     · rw [Category.assoc, Category.assoc, h₁' i]
       simp [cX, cY]
-    · rw [Category.assoc, Category.assoc, h₂' i]
-      simp only [cX, cY, eD, pD, pullbackConstCone_π_app_snd,
-        pullbackConstCone_π_app_snd_assoc]
-      rw [← ht, sq.w_assoc]
+    · rw [Category.assoc, Category.assoc, h₂' i, e₁ i, reassoc_of% (e₂ i), ← ht, sq.w_assoc]
   have hpD (i : I) : QuasiCompact (pD.app i) :=
     MorphismProperty.of_isPullback (P := @QuasiCompact) (hX i) ‹_›
   have hpD' (i : I) : LocallyOfFiniteType (pD.app i) :=
@@ -336,8 +337,8 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_of_field {K : Type u} [Fiel
     MorphismProperty.of_isPullback (P := @IsAffineHom)
       (isPullback_pullback_const_map a (g ≫ w) f).flip inferInstance
   exact Etale.isIso_baseChangeHomologyMap_of_isLimit Λ pD g eD hD hsq hS hXl hT hYl
-    (fun i ↦ (pullbackConstCone_π_app_snd _ _ _ _ _ _ _ i).symm) ht
-    (fun i ↦ (pullbackConstCone_π_app_snd _ _ _ _ _ _ _ i).symm) hh₀ sq (g ≫ w) (t ≫ s) hsT G q
+    (fun i ↦ (e₁ i).symm) ht
+    (fun i ↦ (e₂ i).symm) hh₀ sq (g ≫ w) (t ≫ s) hsT G q
     fun i ↦ Etale.isIso_baseChangeHomologyMap_of_field Λ (w.app i) a (g.app i) (pD.app i)
       ((pullback.fst a' w).app i) (hX i).flip (eD.app i) (hD.app i) (hsq i) n hn hΛ q _
 
@@ -365,11 +366,12 @@ subalgebras of `Γ(Z, ⊤)`. -/
 noncomputable def Scheme.isLimitConeSpecOfMonotone (Z : Scheme.{u}) [IsAffine Z] {R : Type*}
     [CommRing R] [Algebra R Γ(Z, ⊤)] {ι : Type u} [Preorder ι] [IsDirectedOrder ι] [Nonempty ι]
     (F : ι →o Subalgebra R Γ(Z, ⊤)) (hcov : ∀ x, ∃ i, x ∈ F i) :
-    IsLimit (Z.coneSpecOfMonotone F) :=
-  (isLimitOfPreserves Scheme.Spec (Subalgebra.isColimitCoconeOfMonotone F hcov).op).ofIsoLimit
-    (Cone.ext Z.isoSpec.symm fun i ↦ by
-      rw [Iso.symm_hom, Scheme.coneSpecOfMonotone_π_app, Scheme.isoSpec_inv_toSpecΓ_assoc]
-      rfl)
+    IsLimit (Z.coneSpecOfMonotone F) := by
+  refine (isLimitOfPreserves Scheme.Spec
+    (Subalgebra.isColimitCoconeOfMonotone F hcov).op).ofIsoLimit (Cone.ext Z.isoSpec.symm ?_)
+  intro i
+  rw [Iso.symm_hom, Scheme.coneSpecOfMonotone_π_app, Scheme.isoSpec_inv_toSpecΓ_assoc]
+  rfl
 
 /-- The general form of blueprint `lem-kun-0f1i-normal`, for given `K`-algebra structures on
 `Γ(S')` and `Γ(T)` compatible with `s` and `t`; see

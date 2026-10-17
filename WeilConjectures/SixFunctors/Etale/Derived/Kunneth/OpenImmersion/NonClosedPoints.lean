@@ -243,7 +243,8 @@ theorem Etale.isIso_sheafFiber_baseChangeHomologyMap_of_not_isClosed_snd {K : Ty
     have hn' : IsUnit (n : L) := by simpa using hn.map (algebraMap K L)
     refine Etale.isIso_baseChangeHomologyMap_of_isLimit_snd Λ aXL jL hπ qN ℓ hπq hWL sq' n hn'
       hΛ IH (fun k ↦ ?_) i _
-    rw [topologicalKrullDim_pullback_eq_of_field aX κ, add_comm, add_comm (topologicalKrullDim X)]
+    rw [topologicalKrullDim_pullback_eq_of_field aX κ, add_comm,
+      add_comm (topologicalKrullDim X)]
     exact topologicalKrullDim_add_lt_add aX (q₁.base z) (hdimD k)
   have key := (Etale.isIso_baseChangeHomologyMap_iff_of_cube Λ sq bT sq' bX hp he i F
     hT hX).1 hF
