@@ -165,13 +165,7 @@ theorem isIso_map_externalIhomMap_iff_of_baseChange {Z₁ Z₂ P Z₁' P' : Sche
   have : ∀ N, IsIso (derivedSquareUpperStarIsoInvApp A sq N) := fun N ↦ by
     unfold derivedSquareUpperStarIsoInvApp
     infer_instance
-  exact Adjunction.isIso_map_externalIhomMap_iff
-    (C₁ := _root_.DerivedCategory (Sheaf Z₁.smallEtaleTopology A))
-    (C₁' := _root_.DerivedCategory (Sheaf Z₁'.smallEtaleTopology A))
-    (C₂ := _root_.DerivedCategory (Sheaf Z₂.smallEtaleTopology A))
-    (C := _root_.DerivedCategory (Sheaf P.smallEtaleTopology A))
-    (C' := _root_.DerivedCategory (Sheaf P'.smallEtaleTopology A))
-    (rightDerivedUpperShriekAdjunction A g)
+  exact Adjunction.isIso_map_externalIhomMap_iff (rightDerivedUpperShriekAdjunction A g)
     (fun M N ↦ ((projectionMap A g).app M).app N) (rightDerivedUpperShriekAdjunction A g₁)
     (fun M N ↦ ((projectionMap A g₁).app M).app N)
     (projectionMap_app_app_naturality_left g) (projectionMap_app_app_naturality_left g₁)
