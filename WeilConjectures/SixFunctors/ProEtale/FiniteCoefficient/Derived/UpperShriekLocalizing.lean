@@ -38,10 +38,10 @@ over `k`.
 
 Two inputs from other subsections are stated as `sorry`ed theorems:
 
-- `AlgebraicGeometry.ProEtale.DerivedCategory.compactlyGeneratesLocalizingClosure_constructibleFiniteTor`
+- `ProEtale.DerivedCategory.compactlyGeneratesLocalizingClosure_constructibleFiniteTor`
   (blueprint `sk-lem-brown-hypotheses`): `Loc(Dctf(X, Λ))` has split idempotents, and
   `Dctf(X, Λ)` is essentially small and compactly generates `Loc(Dctf(X, Λ))`.
-- `AlgebraicGeometry.ProEtale.DerivedCategory.localizingConstructibleFiniteTor_rightDerivedLowerShriekOfCompactification`
+- `AlgebraicGeometry.ProEtale.DerivedCategory.localizingConstructibleFiniteTor_lowerShriek`
   (blueprint `det-sf-comp-coherence-single`): `Rf_!(c)` maps `Loc(Dctf(X, Λ))` into
   `Loc(Dctf(Y, Λ))` and `Dctf(X, Λ)` into `Dctf(Y, Λ)`, and preserves direct sums of objects of
   `Loc(Dctf(X, Λ))`.
@@ -98,7 +98,7 @@ separated finite-type `k`-scheme `Y`. For a compactification `c = (X ⟶[j] X̄ 
 functor `Rp_* ∘ j_! = Rf_!(c)` (triangulated) maps `Loc(Dctf(X, Λ))` into `Loc(Dctf(Y, Λ))` and
 `Dctf(X, Λ)` into `Dctf(Y, Λ)`, and its restriction to `Loc(Dctf(X, Λ))` preserves direct
 sums. -/
-theorem DerivedCategory.localizingConstructibleFiniteTor_rightDerivedLowerShriekOfCompactification
+theorem DerivedCategory.localizingConstructibleFiniteTor_lowerShriek
     {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
     [IsSeparated aY] [HasInvertibleExponent Λ Y] {f : X ⟶ Y} (c : Compactification f) :
     (∀ K, DerivedCategory.localizingConstructibleFiniteTor Λ X K →
@@ -120,11 +120,11 @@ variable {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [
 /-- The compact-support direct image `Rf_! = Rp_* ∘ j_! : Loc(Dctf(X, Λ)) ⥤ Loc(Dctf(Y, Λ))` on
 the localizing closures, attached to a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f`: the
 restriction of `Rf_!(c)` (blueprint `det-sf-comp-coherence-single`). -/
-noncomputable def rightDerivedLowerShriekLocalizing :
+noncomputable abbrev rightDerivedLowerShriekLocalizing :
     DerivedCategoryLocalizingFiniteTor Λ X ⥤ DerivedCategoryLocalizingFiniteTor Λ Y :=
   ObjectProperty.localizingClosureLift _ _
     (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c)
-    (DerivedCategory.localizingConstructibleFiniteTor_rightDerivedLowerShriekOfCompactification
+    (DerivedCategory.localizingConstructibleFiniteTor_lowerShriek
       Λ aY c).1
 
 /-- `Rf_!` on the localizing closures is compatible with the inclusions into the derived
@@ -136,18 +136,12 @@ noncomputable def rightDerivedLowerShriekLocalizingCompιIso :
         rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c :=
   ObjectProperty.localizingClosureLiftCompιIso _ _ _ _
 
-noncomputable instance : (rightDerivedLowerShriekLocalizing Λ aY c).CommShift ℤ :=
-  inferInstanceAs (ObjectProperty.localizingClosureLift _ _ _ _).CommShift ℤ
-
-instance : (rightDerivedLowerShriekLocalizing Λ aY c).IsTriangulated :=
-  inferInstanceAs (ObjectProperty.localizingClosureLift _ _ _ _).IsTriangulated
-
+/-- `Rf_!` on the localizing closures preserves direct sums (blueprint
+`det-sf-comp-coherence-single`). -/
 instance (J : Type (u + 1)) :
     PreservesColimitsOfShape (Discrete J) (rightDerivedLowerShriekLocalizing Λ aY c) :=
-  have := (DerivedCategory.localizingConstructibleFiniteTor_rightDerivedLowerShriekOfCompactification
-    Λ aY c).2.2 J
-  inferInstanceAs (PreservesColimitsOfShape (Discrete J)
-    (ObjectProperty.localizingClosureLift _ _ _ _))
+  have := (DerivedCategory.localizingConstructibleFiniteTor_lowerShriek Λ aY c).2.2 J
+  ObjectProperty.preservesColimitsOfShape_localizingClosureLift _ _ _ _ J
 
 end LowerShriek
 
@@ -161,9 +155,9 @@ variable {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [
 include aX in
 /-- Blueprint `det-sf-existence-brown` (1): `Rf_! : Loc(Dctf(X, Λ)) ⥤ Loc(Dctf(Y, Λ))` is a left
 adjoint, by Brown representability. -/
-instance isLeftAdjoint_rightDerivedLowerShriekLocalizing :
+theorem isLeftAdjoint_rightDerivedLowerShriekLocalizing :
     (rightDerivedLowerShriekLocalizing Λ aY c).IsLeftAdjoint :=
-  have := (DerivedCategory.localizingConstructibleFiniteTor_rightDerivedLowerShriekOfCompactification
+  have := (DerivedCategory.localizingConstructibleFiniteTor_lowerShriek
     Λ aY c).2.2
   ObjectProperty.isLeftAdjoint_localizingClosureLift _ _ _ _
     (DerivedCategory.compactlyGeneratesLocalizingClosure_constructibleFiniteTor Λ aX).1
@@ -205,7 +199,7 @@ include aX in
 compact generators `Dctf(X, Λ)` to compact objects `Dctf(Y, Λ)` of `Loc(Dctf(Y, Λ))`. -/
 instance (J : Type (u + 1)) :
     PreservesColimitsOfShape (Discrete J) (rightDerivedUpperShriekLocalizing Λ aX aY c) :=
-  have h := DerivedCategory.localizingConstructibleFiniteTor_rightDerivedLowerShriekOfCompactification
+  have h := DerivedCategory.localizingConstructibleFiniteTor_lowerShriek
     Λ aY c
   have := h.2.2
   ObjectProperty.preservesColimitsOfShape_of_localizingClosureLift_adjunction _ _ _ _
@@ -231,8 +225,7 @@ theorem exists_rightAdjoint_rightDerivedLowerShriekLocalizing :
           adj'.counit.app N = adj.counit.app N :=
   ⟨_, rightDerivedUpperShriekLocalizingAdjunction Λ aX aY c, inferInstance, inferInstance,
     inferInstance, fun _ ↦ inferInstance,
-    fun _ adj' ↦ (rightDerivedUpperShriekLocalizingAdjunction Λ aX aY c).existsUnique_iso_comp_counit
-      adj'⟩
+    fun _ ↦ (rightDerivedUpperShriekLocalizingAdjunction Λ aX aY c).existsUnique_iso_comp_counit⟩
 
 end UpperShriek
 

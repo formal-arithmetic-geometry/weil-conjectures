@@ -206,7 +206,7 @@ theorem Etale.exists_leftDerivedUpperStar_map_eq_of_isPullback_of_shift {T U Z :
   have h := Φ.commShiftIso_hom_naturality ((shiftFunctor _ n).preimage γ') n
   rw [Functor.map_preimage, hγ'] at h
   rw [← cancel_epi ((Φ.commShiftIso n).hom.app K), ← h]
-  simp [δ']
-  exact Category.comp_id _
+  simp only [δ', Category.assoc, Iso.inv_hom_id_app]
+  erw [Category.comp_id]
 
 end AlgebraicGeometry

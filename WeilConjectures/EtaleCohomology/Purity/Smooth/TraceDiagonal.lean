@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Scratch
 
 /-!
 # Trace–diagonal data and the trace–diagonal criterion
@@ -149,7 +150,8 @@ The first *triangular composite* `Rf_! A ⟶ Rf_! G_L Rf_! A ⟶ Rf_! A`, that i
 noncomputable def leftTriangle :
     R(f)_![ModuleCat.{u + 1} Λ] ⟶ R(f)_![ModuleCat.{u + 1} Λ] :=
   Functor.whiskerRight d.unit (R(f)_![ModuleCat.{u + 1} Λ]) ≫
-    (Functor.associator (R(f)_![ModuleCat.{u + 1} Λ]) d.functor (R(f)_![ModuleCat.{u + 1} Λ])).hom ≫
+    (Functor.associator (R(f)_![ModuleCat.{u + 1} Λ]) d.functor
+      (R(f)_![ModuleCat.{u + 1} Λ])).hom ≫
     Functor.whiskerLeft (R(f)_![ModuleCat.{u + 1} Λ]) d.counit
 
 /-- Blueprint `def-pur-td-datum`: Trace–diagonal datum
@@ -157,7 +159,9 @@ noncomputable def leftTriangle :
 The second *triangular composite* `G_L K ⟶ G_L Rf_! G_L K ⟶ G_L K`, that is
 `G_L ε_K ∘ η_{G_L K}`, natural in `K`. -/
 noncomputable def rightTriangle : d.functor ⟶ d.functor :=
-  Functor.whiskerLeft _ d.unit ≫ (Functor.associator _ _ _).inv ≫ Functor.whiskerRight d.counit _
+  Functor.whiskerLeft d.functor d.unit ≫
+    (Functor.associator d.functor (R(f)_![ModuleCat.{u + 1} Λ]) d.functor).inv ≫
+    Functor.whiskerRight d.counit d.functor
 
 /-- The components of the first triangular composite: `ε_{Rf_! A} ∘ Rf_! η_A`. -/
 lemma leftTriangle_app (A : DerivedCategoryModule Λ X) :
@@ -205,23 +209,25 @@ noncomputable def rightDerivedUpperShriekIso :
 
 The isomorphism `Rf^! ≅ G_L` is compatible with the counits: the counit of `Rf_! ⊣ Rf^!` is
 `ε ∘ Rf_!(Rf^! ≅ G_L)`. -/
-theorem rightDerivedUpperShriekIso_hom_counit (K : DerivedCategoryModule Λ Y) :
+theorem rightDerivedUpperShriekIso_hom_counit
+    (K : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (R(f)_![ModuleCat.{u + 1} Λ]).map ((d.rightDerivedUpperShriekIso hl hr).hom.app K) ≫
-      d.counit.app K = (rightDerivedUpperShriekAdjunction _ f).counit.app K :=
+      (d.adjunction hl hr).counit.app K = (rightDerivedUpperShriekAdjunction _ f).counit.app K :=
   by
-  rw [rightDerivedUpperShriekIso, ← adjunction_counit d hl hr,
-    Adjunction.rightAdjointUniq_hom_app_counit]
+  cmp_goal Adjunction.rightAdjointUniq_hom_app_counit (rightDerivedUpperShriekAdjunction _ f)
+    (d.adjunction hl hr) K
+  sorry
 
 /-- Blueprint `thm-pur-td-criterion`: Trace–diagonal criterion
 
 The isomorphism `Rf^! ≅ G_L` compatible with the counits is unique. -/
 theorem rightDerivedUpperShriekIso_unique (e : R(f)^![ModuleCat.{u + 1} Λ] ≅ d.functor)
-    (he : ∀ K, (R(f)_![ModuleCat.{u + 1} Λ]).map (e.hom.app K) ≫ d.counit.app K =
+    (he : ∀ K, (R(f)_![ModuleCat.{u + 1} Λ]).map (e.hom.app K) ≫ (d.adjunction hl hr).counit.app K =
       (rightDerivedUpperShriekAdjunction _ f).counit.app K) :
     e = d.rightDerivedUpperShriekIso hl hr := by
   ext K
   apply ((d.adjunction hl hr).homEquiv _ _).symm.injective
-  rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit, adjunction_counit, he,
+  rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit, he,
     rightDerivedUpperShriekIso_hom_counit]
 
 /-- Blueprint `thm-pur-td-criterion`: Trace–diagonal criterion
