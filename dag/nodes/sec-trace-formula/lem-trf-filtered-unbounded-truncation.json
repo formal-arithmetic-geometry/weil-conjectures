@@ -325,5 +325,46 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-444df3a27 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 12 steps, every cited node's statement, unit sk-i-additivity and its route, Varshavsky §5.1.1(a)-(e) and §5.1.2(a)-(c) (printed p.39), and Stacks derived.tex 05RX/05S1/05S2/05S3/05RG/05R6/014S/05QM (tags and labels verified). The statement matches Varshavsky's CF(A): uniformly finite filtrations by subcomplexes, no bound on cochain degree. The corrected adjoint directions are right: the counterexample J_{r-1}V->J_rV is filtered, nonzero after forgetting the filtration, and refutes 5.1.1(c) as printed. There are no new nodes. The item does not duplicate the bounded-below siblings (lem-trf-filtered-truncation-triangle, lem-trf-filtered-cone-localization, lem-trf-filtered-bounded-localization-comparison and others). I checked by hand: the cylinder (d^2=0, dH+Hd=1-i0p, phi is a chain map when f-g=dh+hd); the grade formulas F^{max(p,r)} and F^{min(p,r)}/F^r; the contraction of C(1); the finite induction on filtration; the roof in Step 8 (gr^pL=0 literally, a:A_rZ->Z in W, fa=0); the roles in both uses of the triangle-extension lemma, with Hom(L[1],B_rM)=0 and Hom(A_rM[1],R)=0; uniqueness of the triangle; and the pure-grade zigzag. Edge cases: r outside all grades, the zero complex, one grade, acyclic nonzero exterior grades, unbounded complexes. Route: the off-unit lem-pur-quasi-iso-cone-acyclic and lem-weil-pbc-triangle-morphism-extension are on the transitive route and Lean-closed, so tool_uses [] is correct. No SGA is used. One repairable fault (C1/E5): Steps 1 and 3 used, without citation, the fact that any two distinguished triangles on the same map are isomorphic. They need it for L≅C(f) in 𝒦, for identifying W with the class used by the cone-system node, and for closing 𝒫 under triangles. Fixed in fixes/dag/nodes/sec-trace-formula/lem-trf-filtered-unbounded-truncation.json: rotate by TR2, compare by TR3, cite the Mathlib leaf lem-sf-triangle-morphism-iso; def-weil-triangulated-category and lem-sf-triangle-morphism-iso added to those steps' uses, and proof_deps updated. The statement is unchanged. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FilteredUnboundedTruncation",
+  "declaration": "CochainComplex.FiniteFiltered.Unbounded.filteredUnboundedTruncation",
+  "declarations": [
+   "CochainComplex.FiniteFiltered.Unbounded.Complex",
+   "CochainComplex.FiniteFiltered.Unbounded.evaluation",
+   "CochainComplex.FiniteFiltered.Unbounded.quasiIso",
+   "CochainComplex.FiniteFiltered.Unbounded.Derived",
+   "CochainComplex.FiniteFiltered.Unbounded.Q",
+   "CochainComplex.FiniteFiltered.Unbounded.construction_finite",
+   "CochainComplex.FiniteFiltered.Unbounded.high",
+   "CochainComplex.FiniteFiltered.Unbounded.low",
+   "CochainComplex.FiniteFiltered.Unbounded.highι",
+   "CochainComplex.FiniteFiltered.Unbounded.lowπ",
+   "CochainComplex.FiniteFiltered.Unbounded.cone",
+   "CochainComplex.FiniteFiltered.Unbounded.shift",
+   "CochainComplex.FiniteFiltered.Unbounded.structure_maps",
+   "CochainComplex.FiniteFiltered.Unbounded.coneι",
+   "CochainComplex.FiniteFiltered.Unbounded.coneπ",
+   "CochainComplex.FiniteFiltered.Unbounded.shiftMap",
+   "CochainComplex.FiniteFiltered.Unbounded.TriangulatedLocalization",
+   "CochainComplex.FiniteFiltered.Unbounded.TruncationCalculus",
+   "CochainComplex.FiniteFiltered.Unbounded.Calculus",
+   "CochainComplex.FiniteFiltered.Unbounded.filteredUnboundedTruncation"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FilteredUnboundedTruncation.lean",
+  "statement": "theorem filteredUnboundedTruncation : Nonempty (Calculus A)",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Unbounded, uniformly finite filtrations on the complex as a whole. The category is the actual formal localization; the existence assertion includes a cone-normalized triangulation and the complete truncation calculus. Existing highObject, lowObject, coneObject and shiftObject are reused without their boundedness restrictions or the enough-injectives hypothesis of the separate derived Hom theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f05d5406f",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Commit f05d5406 adds only the report, the node's lean record (statement verbatim equal to the line-313 signature) and FilteredUnboundedTruncation.lean. Clause-by-clause match with the node and Varshavsky 5.1.1-5.1.2 p.39: Complex = FiniteFilteredObjects (CochainComplex A Z) none false, finite filtration of the whole complex by subcomplexes, no cochain bound; Derived = formal localization at graded quasi-isos; triangulation pinned by cone_normalization to actual filtered cone triangles with shiftComparison; omega and gr exact and pinned by comparisons with DerivedCategory.Q; high/low exact and pinned on morphisms via inclusion_normalization plus high_hom injectivity; graded formulas, natural distinguished triangle, unique_triangle (exists-unique with middle component eqToHom), Hom bijections in the corrected adjoint directions, T_p = low(p+1) then high p, pure support, omega T_p = gr p, T_p = id on the pure subcategory, pure equivalence. No extra hypotheses; universes u, v, w independent; HasDerivedCategory.standard exists. No hollow definitions: choose-based cone maps are fixed by the underlying chain map, same as the landed sibling; three sorry theorems with proof docstrings; source and blueprint docstrings throughout; no duplicate notion. nt_compile --json clean (rc 0, no messages; broken probe confirms errors are reported). The Second reading section is brief per dispatch policy (same as Q60) and is covered by this review. Minor redundancies only (doubled hypothesis in unique_triangle, high_naturality)."
  }
 }
