@@ -11,9 +11,60 @@
   "def-coef-inserter",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The product category $\\mathcal B=\\prod_{j\\in\\operatorname{Ob}J}\\mathcal A$ has objects and arrows coordinatewise. For $X\\in\\mathcal A$, the constant functor has components $F(X)_j=D(j)$ and the diagonal has components $G(X)_j=X$. Therefore an object of the inserter $\\mathcal I=\\operatorname{Ins}(F,G)$ is exactly a pair $(X,(u_j)_j)$ with $u_j:D(j)\\to X$. For two such objects, the inserter morphism condition is exactly $h\\circ u_j=u\\prime_j$ for every $j$, so the projection to $\\mathcal A$ is the stated vertex projection $V$.",
+   "uses": [
+    "def-coef-inserter"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof, complete implies cocomplete: accessible cocones from the small-product and inserter clauses; explicit description of the inserter objects and arrows."
+   }
+  },
+  {
+   "text": "Let $\\mathcal B\\prime=\\prod_{a\\in\\operatorname{Mor}J}\\mathcal A$. On an inserter object $(X,(u_j)_j)$ define $H(X,u)=(D(\\operatorname{dom}a))_a$ and $K(X,u)=(X)_a$. For each arrow $a:j\\to j\\prime$ of $J$, set $\\alpha_a=u_{j\\prime}\\circ D(a)$ and $\\beta_a=u_j$. If $h:(X,u)\\to(Y,v)$ is an inserter morphism, then $h\\circ u_j=v_j$ for every $j$, so $h\\circ\\alpha_a=v_{j\\prime}D(a)$ and $h\\circ\\beta_a=v_j$; hence these component maps define natural transformations $\\alpha,\\beta:H\\Rightarrow K$.",
+   "uses": [
+    "def-coef-inserter"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof, complete implies cocomplete: accessible cocones; construction and naturality of the two transformations on the second product."
+   }
+  },
+  {
+   "text": "An object $(X,u)$ lies in the equifier of $\\alpha$ and $\\beta$ exactly when, for every $a:j\\to j\\prime$, its component equality $u_{j\\prime}D(a)=u_j$ holds. By the definition of a cocone, this is precisely the cocone condition for the family $(u_j:D(j)\\to X)_j$. The equifier is full, so its morphisms are exactly the inserter morphisms; by the first step these are exactly the maps $h:X\\to Y$ satisfying $h\\circ u_j=v_j$ for all $j$. Thus the object and morphism assignments give a canonical identification with $\\operatorname{Cocone}(D)$.",
+   "uses": [
+    "def-coef-inserter",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof, complete implies cocomplete: the equifier of the two transformations is precisely the category of cocones."
+   }
+  },
+  {
+   "text": "If $J$ is empty, both products are empty products, the families $(u_j)_j$ and the equations indexed by $\\operatorname{Mor}J$ are empty, and the equifier imposes no additional condition. This agrees with the category of cocones on the empty diagram: an object is just an object of $\\mathcal A$ with its unique empty family of legs, and a morphism is any map in $\\mathcal A$. Hence the identification also covers the empty diagram.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof, complete implies cocomplete: explicit cocone identification, including the empty diagram."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-inserter",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Explicit expansion of the categorical cocone identification used in the proof paragraph on accessible cocones."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,7 +103,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-completeness-characterization",
@@ -75,5 +126,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cocone-pie-realization",
+  "worker": "stage1",
+  "summary": "Kept the imported statement unchanged and split its proof into the coordinate description of the inserter, construction and naturality of the two transformations, identification of the equifier with cocones, and the empty-diagram edge case. The existing definition nodes def-coef-inserter and def-weil-pbc-category-colimit provide all non-elementary inputs; no new node was needed. Searched the DAG, blueprint and source for duplicates and checked the Mathlib search results, which only provide ordinary Cocone interfaces and no inserter/equifier realization theorem.",
+  "blueprint": "Proof paragraph 2 categorical construction: explicit description of the inserter of the constant and diagonal functors, followed by the natural transformations indexed by arrows of J and the assertion that their equifier is precisely Cocone(D)."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-10547f83b",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-10547f83b (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is unchanged from the side-DAG base (diffed); the delivery only adds the proof, proof_deps, proof_origin, status and split_report. It cites two definitions, both read: def-coef-inserter and def-weil-pbc-category-colimit, whose cocone condition is iota_j D(a)=iota_i. I also read the parent lem-coef-accessible-completeness-characterization (its step 6 is the only user of the item), clause (3) of lem-coef-accessible-pie-closure (the equifier is the full subcategory where alpha_X=beta_X, matching the item), the blueprint proof file prop-coef-integral-exceptional-adjoint.proof.md, and the unit sk-prop-sf-biduality-general. Checks: the inserter direction u_j:D(j)->X and the morphism rule h u_j=v_j follow from G(f)u=vF(f) with F(f)=id. alpha_a=u_{cod a}D(a) and beta_a=u_{dom a} have the right types and are natural, since H(h)=id and h u_j=v_j. The equifier condition is exactly the cocone condition, and fullness gives the cocone morphisms. Small cases tested: empty J (both sides are A), a single identity arrow (vacuous condition, the coslice D(*)/A) and a parallel pair (coforks). All four steps are correct; step 4 is genuinely elementary; proof_deps equals the union of uses. No new nodes. The equifier and cocone/inserter greps over dag/nodes found no duplicate. Only definitions are cited, so there is no route problem and no tool_uses. The item is pure category theory with no base-change morphism or coefficient category, no SGA source, and no target weakened. One minor provenance point, accepted: the step source places name the parent's agent-written proof rather than text in the cited blueprint file, which is consistent with proof_origin.by=agent and the blueprint.from.via chain. Mathlib searches: LeanSearch is correctly recorded as unavailable (rate limit); LeanFinder, Loogle and grep are recorded with their results. No changes made."
  }
 }
