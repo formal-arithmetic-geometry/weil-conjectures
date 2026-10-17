@@ -11,7 +11,8 @@
   "def-trf-coherent-topos",
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-size-convention",
-  "def-weil-pbc-constant-sheaf"
+  "def-weil-pbc-constant-sheaf",
+  "def-trf-finite-locally-constant-set-sheaf"
  ],
  "proof": [
   {
@@ -178,5 +179,25 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-c63def836 (reviewer sub-agent of L); spot-checked: I read in full the item, every cited statement, the citer lem-trf-coherent-set-criterion, unit sk-i-curve-zero and Stacks sites-modules 093P (093Q, 093R, 093S(1), 093U). The statement is true and is used as stated, so I did not change or weaken it. Small cases checked: the topos where 1 is 0, empty limits and coproducts, identity and constant maps, the equality and full relations, and a two-point constant sheaf. The citer's use with arbitrary slice objects is covered. All cited lemmas are in the unit, Mathlib leaves or definitions. No new nodes, no duplicates, no SGA citation, no tool_uses needed. Three repairable faults are corrected in fixes/dag/nodes/sec-trace-formula/lem-trf-finite-locally-constant-coherent.json. (1) Steps 1-2 took the trivializing U_i to be representable (H_{U_i}), but the statement allows any objects of E. Added the reduction: 1 is coherent, so a finite subfamily of representables H_V trivializes F. (2) Step 2 wrongly said P is constant on each refined member and that the kernel pair is locally a coproduct of representables (E3). Rewrote it: R is a finite coproduct of equalizers, each a summand of a coherent W_j by extensivity. A summand of a quasi-compact object is quasi-compact, so R is quasi-compact and lem-trf-coherent-epimorphic-quotient gives coherence. (3) Steps 3-5 used, uncited, that -xW preserves colimits, epimorphisms, images and coequalizers. They now justify it from sheafification commuting with finite products (lem-weil-pbc-sheafification-sets-exact, a Mathlib leaf), and step 3 writes out the 093S(1) decomposition of morphisms. proof_deps updated. blueprint.from.via corrected to put the creator lem-trf-coherent-set-criterion first, followed by the creator's own via. The merge may need to apply this field by hand. Details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9bdeb0003",
+  "group": "NP",
+  "result": "fix",
+  "note": "Wrote review.md and complete replacements in fixes/. Repaired the universe-zero restriction, proof docstring, placeholder second reading, imports, and new-node TeX. Original and corrected modules compile cleanly through scompile.py. Delivery branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.FiniteLocallyConstantCoherent",
+  "declaration": "CategoryTheory.finiteLocallyConstant_coherent",
+  "file": "lean/Sheaf/CategoryTheory/Sites/FiniteLocallyConstantCoherent.lean",
+  "statement": "theorem finiteLocallyConstant_coherent {E : Type u} [Category.{v} E] [HasCoproducts.{w} E] [HasCoproducts.{0} E] [HasFiniteLimits E] [HasImages E] [HasColimitsOfShape WalkingParallelPair E] (_hE : IsCoherentTopos.{w} E) (F : E) : IsFiniteLocallyConstant F → IsCoherentObject.{w} F ∧ (∀ (n : ℕ) (G : Fin n → E), (∀ i, IsFiniteLocallyConstant (G i)) → IsFiniteLocallyConstant (∐ G)) ∧ (∀ (J : Type) [SmallCategory J] [FinCategory J] (D : J ⥤ E), (∀ j, IsFiniteLocallyConstant (D.obj j)) → IsFiniteLocallyConstant (limit D)) ∧ (∀ {G H : E} (f : G ⟶ H), IsFiniteLocallyConstant G → IsFiniteLocallyConstant H → IsFiniteLocallyConstant (image f)) ∧ (∀ {R G : E} (r₁ r₂ : R ⟶ G), IsEquivalenceRelation r₁ r₂ → IsFiniteLocallyConstant R → IsFiniteLocallyConstant G → IsFiniteLocallyConstant (coequalizer r₁ r₂))",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Intrinsic coherent-topos formulation of the finite-limit finite-cover site setting, supplied by lem-trf-finitary-site-coherent-generators. The independent review generalizes the covering-family universe to w in IsCoherentTopos and IsCoherentObject; finite trivializing families still use HasCoproducts.{0}. No mathematical statement correction.",
+  "fixed_by": "NT-stage2-Codex-9bdeb0003"
  }
 }

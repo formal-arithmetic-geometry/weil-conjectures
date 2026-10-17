@@ -1,0 +1,125 @@
+{
+ "id": "def-trf-finite-locally-constant-set-sheaf",
+ "kind": "definition",
+ "title": "Finite locally constant set objects in a finite-cover topos",
+ "statement": "Let $\\mathcal E$ be a category with finite limits and coproducts. An object $F$ is finite locally constant if there are a natural number $n$, objects $U_i$ for $i\\in\\operatorname{Fin}(n)$, and an epimorphic coproduct map $\\coprod_i U_i\to 1$ such that for every $i$ the pullback of $F$ to the slice $\\mathcal E/U_i$ is isomorphic to a finite coproduct $\\coprod_{m\\in\\operatorname{Fin}(r_i)} U_i$ for some natural number $r_i$. The site, size, and constant-sheaf conventions are those of [def-weil-pbc-sites-and-cohomology], [def-weil-size-convention], and [def-weil-pbc-constant-sheaf].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 093P (section-locally-constant), Definition 093Q (definition-locally-constant), with the finite-cover presentation convention."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite locally constant set sheaf finite cover slice constant sheaf",
+   "results": "CompHausLike.LocallyConstant.functor; LightCondensed.IsDiscrete; no declaration for finite locally constant set objects on arbitrary finite-cover topoi",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf IsConstant finite locally constant",
+   "results": "CategoryTheory.constantSheaf and Sheaf.IsConstant; these do not encode finite local triviality on a finite covering family",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "locally.?constant|finite.*constant|IsConstant",
+   "results": "Mathlib CategoryTheory/Sites/ConstantSheaf.lean defines constantSheaf and Sheaf.IsConstant, but no finite locally constant predicate",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite locally constant set sheaf trivialized by finite cover in a slice",
+   "results": "No arbitrary finite-cover topos predicate; only constant sheaf and coherent-site declarations",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite locally constant|locally constant set",
+   "results": "No matching declaration in /home/ubuntu/weil-src-slopmaster2/WeilConjectures",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite locally constant|locally constant set",
+   "results": "No matching declaration in /home/ubuntu/weil-newtargets-shared/lean/Sheaf",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-locally-constant-coherent",
+  "date": "2026-10-18",
+  "group": "NP"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "§8.1 coherence criterion: finite locally constant set sheaves on finite-cover triple sites.",
+   "via": [
+    "lem-trf-finite-locally-constant-coherent",
+    "lem-trf-coherent-set-criterion",
+    "lem-trf-oriented-constructible-coherent",
+    "lem-trf-psi-constructibility-descent",
+    "lem-trf-psi-good-oriented-cohomology-strata",
+    "lem-trf-nearby-cycle-sheaf-finiteness",
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "lem-trf-specialization-zero-section"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.FiniteLocallyConstant",
+  "declaration": "CategoryTheory.IsFiniteLocallyConstant",
+  "file": "lean/Sheaf/CategoryTheory/Sites/FiniteLocallyConstant.lean",
+  "statement": "def IsFiniteLocallyConstant {E : Type u} [Category.{v} E] [HasCoproducts E] [HasFiniteLimits E] (F : E) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9bdeb0003",
+  "group": "NP",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9bdeb0003",
+  "group": "NP",
+  "result": "fix",
+  "note": "Wrote review.md and complete replacements in fixes/. Repaired the universe-zero restriction, proof docstring, placeholder second reading, imports, and new-node TeX. Original and corrected modules compile cleanly through scompile.py. Delivery branch unchanged."
+ }
+}

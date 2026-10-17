@@ -15,7 +15,8 @@
   "def-weil-abstract-derived-category",
   "def-sp-left-exact-additive",
   "def-sp-double-complex-total",
-  "def-sp-spectral-sequence"
+  "def-sp-spectral-sequence",
+  "lem-trf-slice-site-simplicial-augmentation"
  ],
  "proof": [
   {
@@ -256,5 +257,45 @@
   "group": "Q60",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-6a1b31bef (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement and Stacks spaces-simplicial 0D78/0D79/0D7A with proofs, plus 09WF, 09WL, restriction-to-components-site, restriction-injective-to-component-site and augmentation-site. The item's statement and maintainer fields match the base exactly. Only stmt_deps, which adds the double-complex and spectral-sequence definitions the statement uses, proof, proof_origin, status and split_report changed. The coefficients are abelian sheaves as in 0D7A case (A) on the 09WL slice diagram. Steps checked: (1) e identifies b_*F with ker delta^0 by vertex compatibility; elementary is fair. (2) Representative with n=0, then the K-injective Hom bijection gives an actual injective resolution; component restriction gives resolutions of F_p, so the columns compute R^q b_{p,*}. (3)-(4) Rows are exact by the new node; the column-augmentation lemma's K.X 0 / K.flip.X q convention matches (face degree first); rho is a quasi-isomorphism. (5) First spectral sequence: E1 = R^q b_{p,*}F_p, d1 horizontal, finite convergence. (6) j comes from F to I^0; the edge E2^{p,0} onto E_inf^{p,0} = F^pH^p inside H^p is correct and not claimed injective. (7) Maps F[0] to I' that are homotopic are equal since I'^{-1} = 0, so they commute strictly with j; the total homotopy (-1)^p h was checked. (8) j^0 e = rho^0 b_*i by counit naturality. New node lem-trf-total-site-injective-augmentation-exactness = 0D79 injective case. It is true, and its pseudo-functorial generalization of case (A) is harmless. It is statement-only and self-contained, has 5 recorded searches and correct blueprint from/via. It is not a clause of the item and not a duplicate: lem-trf-simplicial-derived-image-spectral-sequence inlines 0D79 for schemes; the total-site module package, the hypercover-injective-sections node and the sc hypercover row do not state it. No cycle. Small cases: point site and cosimplicial injectives; constant U with b^{-1}G. Accepted tool_uses: lem-weil-pbc-ring-sheaves-grothendieck, lem-sc-first-quadrant-column-augmentation, thm-sp-double-complex-spectral-sequences, lem-sp-kinjective-computes, lem-weil-pbc-kinjective-hom-derived. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-22bc344cf",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Checked source, all statement dependencies, exact declarations, canonical comparison and edge normalization, universes, report sections, and route-pivot compliance. Snapshot compiled cleanly in sandbox and library modes; repository unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteAugmentationSpectralSequence",
+  "declaration": "CategoryTheory.SimplicialSlice.site_augmentation_spectral_sequence",
+  "declarations": [
+   "CategoryTheory.SimplicialSlice.componentDirectAdditive",
+   "CategoryTheory.SimplicialSlice.augmentationPageTermFunctor",
+   "CategoryTheory.SimplicialSlice.augmentationPagesFromTwo",
+   "CategoryTheory.SimplicialSlice.AugmentationBottomEdge",
+   "CategoryTheory.SimplicialSlice.AugmentationNaturalAbutment",
+   "CategoryTheory.SimplicialSlice.augmentationDerivedDirect",
+   "CategoryTheory.SimplicialSlice.augmentationCohomology",
+   "CategoryTheory.SimplicialSlice.augmentationCechCohomology",
+   "CategoryTheory.SimplicialSlice.augmentationNonnegativePlus",
+   "CategoryTheory.SimplicialSlice.augmentationCechAdditive",
+   "CategoryTheory.SimplicialSlice.augmentationResolutionBicomplex",
+   "CategoryTheory.SimplicialSlice.augmentationResolutionDirect",
+   "CategoryTheory.SimplicialSlice.augmentationResolutionDerivedIso",
+   "CategoryTheory.SimplicialSlice.IsAugmentationResolutionComparison",
+   "CategoryTheory.SimplicialSlice.augmentationDerivedCoface",
+   "CategoryTheory.SimplicialSlice.HasAugmentationPageOne",
+   "CategoryTheory.SimplicialSlice.HasAugmentationConvergence",
+   "CategoryTheory.SimplicialSlice.HasAugmentationSpectralSequence",
+   "CategoryTheory.SimplicialSlice.site_augmentation_spectral_sequence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SiteAugmentationSpectralSequence.lean",
+  "statement": "theorem site_augmentation_spectral_sequence {C : Type u} [Category.{v} C] [HasFiniteLimits C] (J : GrothendieckTopology C) (A : SimplicialObject.Augmented C) [HasDerivedCategory.{w'} (AbelianSheaf J A.left)] [HasDerivedCategory.{w} (Sheaf (J.over A.right) AddCommGrpCat.{max u v})] : HasAugmentationSpectralSequence J A",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of 97c3748b7c25: real comma total and slice sites, actual abelian sheaves and derived functors, canonical alternating faces and counit, resolution-normalized derived comparison, E1/d1, finite natural abutment, bottom edge and H0 counit normalization. Reuses the landed slice-site and Cech constructions; the downstream Cech-computation theorem is not used."
  }
 }
