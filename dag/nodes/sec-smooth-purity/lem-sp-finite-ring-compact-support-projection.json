@@ -332,5 +332,28 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q45-b9e329e47 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, source passages, and chapter/unit route. All six steps check out, including the unbounded comparison needed without finite Tor amplitude and the counit-mate identification of the canonical projection map. No cycles, new duplicates, coefficient-category substitutions, or prohibited SGA uses found. Accepted all ten declared tool uses. Detailed checks recorded in review.md; no repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0a5debc8e",
+  "group": "Q70",
+  "result": "fix",
+  "note": "Repaired the H1/H11 second-reading placeholder with a complete replacement report under fixes/. Verified hypotheses, canonical map, dependencies, universes, edge cases, verbatim signature, and clean scompile.py compilation. No substantive defect found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteRingCompactSupportProjection",
+  "declaration": "AlgebraicGeometry.Scheme.isIso_finiteRingCompactSupportProjection",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteRingCompactSupportProjection",
+   "AlgebraicGeometry.Scheme.isIso_finiteRingCompactSupportProjection"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteRingCompactSupportProjection.lean",
+  "statement": "theorem isIso_finiteRingCompactSupportProjection (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) (_hl : l.Prime) (_hlp : l ≠ D.p) (R : Type u) [CommRing R] [Finite R] (n : ℕ) (_hn : 1 ≤ n) (_hR : ∀ r : R, (l ^ n) • r = 0) {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) (c : Compactification f) [c.Z.Over (Spec (.of D.k))] [IsSeparated (c.Z ↘ Spec (.of D.k))] [LocallyOfFiniteType (c.Z ↘ Spec (.of D.k))] [QuasiCompact (c.Z ↘ Spec (.of D.k))] [c.i.IsOver (Spec (.of D.k))] [c.g.IsOver (Spec (.of D.k))] (M : proEtaleDerivedCategory X R) (K : proEtaleDerivedCategory Y R) (_hMc : ∀ i : ℤ, IsConstructibleProEtaleModuleSheaf X R ((DerivedCategory.homologyFunctor (proEtaleRingModules X (proEtaleConstantRing X R)) i).obj M)) (_hMb : ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules X (proEtaleConstantRing X R)) i).obj M)) (_hKc : ∀ i : ℤ, IsConstructibleProEtaleModuleSheaf Y R ((DerivedCategory.homologyFunctor (proEtaleRingModules Y (proEtaleConstantRing Y R)) i).obj K)) (_hKb : ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules Y (proEtaleConstantRing Y R)) i).obj K)) : IsIso (((finiteRingCompactSupportProjection R c).app M).app K)",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The actual canonical compactification projection natural transformation is transported through the published coefficient-realization equivalence into intrinsic constant-ring derived categories. The hypotheses use intrinsic constructibility of each cohomology sheaf and a finite cohomological range, without etale-origin, finite-Tor, flatness or DVR hypotheses. The given open and proper maps are packaged as c.i and c.g in an arbitrary Compactification f, with c.comm recording f = c.i ≫ c.g."
  }
 }
