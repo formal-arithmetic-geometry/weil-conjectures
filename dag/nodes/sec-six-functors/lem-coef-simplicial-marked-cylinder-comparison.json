@@ -201,5 +201,28 @@
   "group": "Q132",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-31f172fd9 (reviewer sub-agent of L); spot-checked: I read the item, its report and every cited statement in full: inversion-universal-property, inversion-product-parameter, walking-groupoid-components, derived-pushout-mapping and realization-finite-limits. The statement is unchanged and introduces its own objects. The essential-surjectivity hypothesis is extra but harmless, and it holds by lem-coef-simplicial-localization-essential-image. Small cases checked: A empty; A a point with V empty (gives 𝕁); V empty; A=[1] with V its arrow (gives 𝕁×𝕁); markings with identities or repeated arrows. Step-by-step results. Step 1: taking π0 of the walking-groupoid weak equivalence onto the union of invertible-arrow components gives the mapping property of (𝕁,i), and the characterization clause then gives 𝕁 ≅ L_{t}[1]. Step 2 had a C3 gap: it multiplied the Step 1 isomorphism in hsCat by A, which needs products to preserve Dwyer–Kan equivalences. That fact appears only in the proof of product-parameter, not in its statement. I fixed it in fixes/dag/nodes/sec-six-functors/lem-coef-simplicial-marked-cylinder-comparison.json by adding the two-line argument and citing lem-coef-realization-finite-limits (same unit, no cycle), and recomputed proof_deps. Step 3: the marked set is exactly R_J, and s(R)=R_J because s(v,1_e)=(v,1_e). Step 4: both directions of the image criterion hold, rs=q×i inverts H and R, and injectivity yields Φ under B. Step 5: k_e q=u j_e, then (q×i)j_e=ι_e q, and injectivity of q^* gives Φk_e=ι_e. Route and duplicates: all citations are in the unit sk-prop-sf-biduality-general, so there are no tool_uses. There is no cycle; the only citer is comparison-calculus step 4, which uses exactly these clauses. There are no new nodes, and no duplicate exists in the DAG. Source: HTT A.3.5.5, A.3.5.14 and A.3.6.17 are not archived under literature/, so they were not checked against the source. proof_origin.by=agent and the WANTED line are correct. No SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7f37d34f0",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Statement, dependencies, constructions, edge cases, docstrings, report sections, and compiler evidence all checked; no findings or repairs."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialMarkedCylinderComparison",
+  "declaration": "CategoryTheory.SimplicialInversion.simplicial_marked_cylinder_comparison",
+  "declarations": [
+   "CategoryTheory.SimplicialInversion.cylinderPair",
+   "CategoryTheory.SimplicialInversion.IsCylinderEndpoint",
+   "CategoryTheory.SimplicialInversion.simplicial_marked_cylinder_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialMarkedCylinderComparison.lean",
+  "statement": "theorem simplicial_marked_cylinder_comparison : ∀ (P : Pair.{u}) (L : SCat.{u}) (q : P.category ⟶ L), MappingProperty P (bergnerHomotopyFunctor.map q) → (∀ y : underlying L, ∃ x : underlying P.category, ∃ f : @Quiver.Hom (underlying L) inferInstance (q.obj x) y, ∃ g : @Quiver.Hom (underlying L) inferInstance y (q.obj x), SSet.π₀.mk (homEquiv' (C := underlying L) (q.obj x) (q.obj x) (f ≫ g)) = SSet.π₀.mk (homEquiv' (C := underlying L) (q.obj x) (q.obj x) (𝟙 _)) ∧ SSet.π₀.mk (homEquiv' (C := underlying L) y y (g ≫ f)) = SSet.π₀.mk (homEquiv' (C := underlying L) y y (𝟙 _))) → ∀ (LU : SCat.{u}) (u : (cylinderPair P).category ⟶ LU), MappingProperty (cylinderPair P) (bergnerHomotopyFunctor.map u) → ∃ (Φ : bergnerHomotopyFunctor.obj LU ⟶ bergnerHomotopyFunctor.obj (SSet.MarkedCone.productIndex L walkingGroupoid)), IsIso Φ ∧ bergnerHomotopyFunctor.map u ≫ Φ = bergnerHomotopyFunctor.map (productMap q adjoinInverse) ∧ ∃ (j : Bool → (P.category ⟶ (cylinderPair P).category)) (ι : Bool → (L ⟶ SSet.MarkedCone.productIndex L walkingGroupoid)) (k : Bool → (bergnerHomotopyFunctor.obj L ⟶ bergnerHomotopyFunctor.obj LU)), (∀ e : Bool, IsCylinderEndpoint P.category walkingArrow (ULift.up e) (j e)) ∧ (∀ e : Bool, IsCylinderEndpoint L walkingGroupoid (ULift.up e) (ι e)) ∧ ∀ e : Bool, bergnerHomotopyFunctor.map q ≫ k e = bergnerHomotopyFunctor.map (j e) ≫ bergnerHomotopyFunctor.map u ∧ k e ≫ Φ = bergnerHomotopyFunctor.map (ι e)",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

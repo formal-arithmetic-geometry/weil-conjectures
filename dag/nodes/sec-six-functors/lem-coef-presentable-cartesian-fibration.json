@@ -27,7 +27,12 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "def-coef-presentable-infinity-category",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-coef-small-right-adjoint-diagram-compact-model",
+  "lem-coef-ind-presheaf-fibration-accessibility",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-infinity-limits-products-pullbacks"
  ],
  "proof": [
   {
@@ -286,5 +291,24 @@
   "group": "N9",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-d6c7409ce (reviewer sub-agent of L); spot-checked: The split follows GHN arXiv:1501.02161v3 §10 step for step. GHN is not in literature/, so I read it at arxiv.org/html; the WANTED line stands. Item statement (unchanged): it matches GHN Def 10.1 and Thm 10.3. Accessibility of p is proved inside GHN's proof, so the statement is not weakened. Steps: (1) Remark 10.2: the adjunction comparison over v is checked through the mapping square and fibre detection over the identity. (2) Lemma 10.7: the total colimit lies over colim pa, so p preserves colimits; the empty diagram is covered. (3) kappa=(2^theta)^+ satisfies a^b<=2^theta<kappa, the hypothesis of the rank calculus; slice density follows. (4) Restricted Yoneda j: compactness is reflected through the small-spaces inclusion, the objectwise criterion applies, and full faithfulness follows from the colimit-mapping clause and Yoneda evaluation. (5) and (6) are GHN's final paragraph and Prop 10.5; straightening is applied with the universe pair shifted up, which that node allows. (7) The element category of j(b) is A_/b; the kappa-filtered hypothesis on G gives G≃Ĝ∘j^op, and naturality is sketched by postcomposition, which is acceptable. (8) HTT 5.4.6.6 through the accessible-pullback node, plus step 2. proof_deps equals the union of the uses, every cited statement is in the item's own unit, there are no tool_uses and no cycle. New nodes: (a) the compact-model node is true (small arrow set, a uniform lambda with all ranks ≪ lambda, Pr^R_lambda ≃ (Cat^rex(lambda))^op) and checked on an empty A, a point and an arrow. (b) The presheaf-fibration node is GHN Prop 10.5 exactly; 'lambda uncountable' only weakens it and the item supplies it; checked on an empty A, terminal F0 and a representable X. It is a special case of the item, but GHN prove it separately (Cor 9.17, Lemma 10.6) and the item's steps 3–7 are a real reduction, so D1/D2 are not violated. No duplicates (the Ind-kappa, common-rank, compact-approximation, free-cocompletion and pullback nodes were checked). No changes, no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b0cd6aa4e",
+  "group": "NS",
+  "result": "pass",
+  "note": "Statement and dependencies match the node; source and edge cases checked; per-file scompile passed with no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PresentableCartesianFibration",
+  "declaration": "SSet.Presentability.presentable_cartesian_fibration",
+  "file": "lean/Sheaf/CategoryTheory/PresentableCartesianFibration.lean",
+  "statement": "theorem presentable_cartesian_fibration {E B : SSet.{max (u + 1) v}} [Quasicategory E] [Quasicategory B] (p : E ⟶ B) (hp : Enhanced.cartesianFibration p) (G : (SSet.uliftFunctor.{max (u + 1) v + 1, max (u + 1) v}.obj B).op ⟶ Enhanced.CatInfinity.{max (u + 1) v}) (hclass : Enhanced.IndCartesianClassification p G) (hB : IsPresentable.{u, v} B) (hfibers : ∀ b : (SSet.uliftFunctor.{max (u + 1) v + 1, max (u + 1) v}.obj B).op _⦋0⦌, @IsPresentable.{u, v} (compactDiagramValue G b) (compactCatQuasicategory (G.app _ b))) (hR : ∀ e : (SSet.uliftFunctor.{max (u + 1) v + 1, max (u + 1) v}.obj B).op _⦋1⦌, ∃ L : compactDiagramValue G ((SSet.uliftFunctor.obj B).op.δ 0 e) ⟶ compactDiagramValue G ((SSet.uliftFunctor.obj B).op.δ 1 e), Nonempty (HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L (compactDiagramArrow G e))) (hG : ∃ κ : Cardinal.{u}, κ.IsRegular ∧ ∀ (I : SSet.{max (u + 1) v + 1}) (hI : Quasicategory I), IsSmall.{u, max (u + 1) v + 1} I → @IsKappaFiltered κ I hI → ∀ (F : I ⟶ SSet.uliftFunctor.{max (u + 1) v + 1, max (u + 1) v}.obj B) (t : (Enhanced.coconeCategory F) _⦋0⦌), Enhanced.IsColimiting F t → ∃ (o : (Enhanced.coneCategory (SSet.opFunctor.map F)) _⦋0⦌) (s : (Enhanced.coneCategory (SSet.opFunctor.map F ≫ G)) _⦋0⦌), Enhanced.IndOppositeCocone F t o ∧ Enhanced.IsImageCone G (SSet.opFunctor.map F) o s ∧ Enhanced.IsLimiting (SSet.opFunctor.map F ≫ G) s) : IsPresentable.{u, v} E ∧ ∃ μ : Cardinal.{u}, μ.IsRegular ∧ PreservesKappaFiltered μ p",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the published general Cartesian-section classification, coherent adjunctions, opposite-cocone and image-cone interfaces. Classifying values express the actual fibers through the full coherent classification. Presentability and filtered-colimit preservation are relative to u, with arbitrary independent containing universe max (u+1) v. No new notion, dependency repair or statement correction."
  }
 }

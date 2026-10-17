@@ -23,7 +23,8 @@
   "place": "Gepner–Haugseng, Enriched infinity-categories via nonsymmetric infinity-operads, Theorem 5.3.17 (sets versus spaces) and its functorial inclusion; Definitions 2.4.5 and 4.1.1. Read online; archive WANTED. Older numbering 5.2.17 in the proof of Haugseng rectification Theorem 5.8. No Stacks tag supplies this enriched discrete-object reduction. Completion itself is the existing lem-coef-algebroid-completion, not a new assertion here."
  },
  "stmt_deps": [
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "lem-coef-enriched-marked-realization"
  ],
  "proof": [
   {
@@ -319,5 +320,38 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-cc02834b6",
+  "group": "Q84",
+  "result": "fix",
+  "note": "Mathematics, dependency interfaces, universes, verbatim signature, and per-file compilation pass. Wrote review.md and a complete replacement report under fixes/ correcting the H11 placeholder second reading and adding compiler evidence. Lean and node records remain unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnrichedCompletionLocalization",
+  "declaration": "SSet.Enhanced.Algebroid.enriched_completion_localization",
+  "declarations": [
+   "SSet.Enhanced.Algebroid.HasDiscreteObjects",
+   "SSet.Enhanced.Algebroid.discreteObjects",
+   "SSet.Enhanced.Algebroid.ffesEdges",
+   "SSet.Enhanced.Algebroid.discreteFfesEdges",
+   "SSet.Enhanced.Algebroid.postcomposeAmbient",
+   "SSet.Enhanced.Algebroid.postcomposeTotal",
+   "SSet.Enhanced.Algebroid.postcomposeDiscrete",
+   "SSet.Enhanced.Algebroid.totalLocalDiagrams",
+   "SSet.Enhanced.Algebroid.discreteLocalDiagrams",
+   "SSet.Enhanced.Algebroid.IsDiscreteRestriction",
+   "SSet.Enhanced.Algebroid.HasLocalizedDiscreteComparison",
+   "SSet.Enhanced.Algebroid.enriched_completion_localization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnrichedCompletionLocalization.lean",
+  "statement": "theorem enriched_completion_localization {E : SSet.{max (u + 1) v}} [Quasicategory E] (p : E ⟶ monoidalSimplexBase.{max (u + 1) v}) (_hp : IsMonoidalInfinityCategory p) (unit : UnitSection p) : HasLocalizedDiscreteComparison.{u, v} unit ∧ (∀ (T : SSet.{max (u + 1) v}), Quasicategory T → ∃ r : (totalLocalDiagrams.{u, v} unit T).toSSet ⟶ (discreteLocalDiagrams.{u, v} unit T).toSSet, IsDiscreteRestriction.{u, v} unit T r) ∧ (∀ (F : SSet.{max (u + 1) v}) [Quasicategory F] (q : F ⟶ monoidalSimplexBase.{max (u + 1) v}), IsMonoidalInfinityCategory q → ∀ (unit' : UnitSection q) (f : E ⟶ F) (hf : IsStrongMonoidalInfinityFunctor p q f) (T : SSet.{max (u + 1) v}), Quasicategory T → ∃ (a : (totalLocalDiagrams.{u, v} unit' T).toSSet ⟶ (totalLocalDiagrams.{u, v} unit T).toSSet) (b : (discreteLocalDiagrams.{u, v} unit' T).toSSet ⟶ (discreteLocalDiagrams.{u, v} unit T).toSSet) (r : (totalLocalDiagrams.{u, v} unit T).toSSet ⟶ (discreteLocalDiagrams.{u, v} unit T).toSSet) (s : (totalLocalDiagrams.{u, v} unit' T).toSSet ⟶ (discreteLocalDiagrams.{u, v} unit' T).toSSet), IsDiscreteRestriction.{u, v} unit T r ∧ IsDiscreteRestriction.{u, v} unit' T s ∧ a ≫ (totalLocalDiagrams.{u, v} unit T).ι = (totalLocalDiagrams.{u, v} unit' T).ι ≫ (MonoidalClosed.pre (postcomposeTotal.{u, v} f hf)).app T ∧ b ≫ (discreteLocalDiagrams.{u, v} unit T).ι = (discreteLocalDiagrams.{u, v} unit' T).ι ≫ (MonoidalClosed.pre (postcomposeDiscrete.{u, v} f hf)).app T ∧ a ≫ r = s ≫ b)",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded operadic total category and FFES predicates. Defines the full discrete-object subcategory and actual coefficient postcomposition. Gives localization models with an inclusion-normalized infinity equivalence, its full coherent functor-category universal property, and the coefficient naturality square. Discrete means equivalent to a small constant Kan complex, including empty. UnitSection specifies a representative of the canonical unit; no presentability is assumed. The added landed dependency supplies invertingDiagrams and IsEdgeLocalization, not its realization theorem."
  }
 }

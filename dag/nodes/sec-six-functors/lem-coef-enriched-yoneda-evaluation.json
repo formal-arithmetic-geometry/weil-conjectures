@@ -265,5 +265,38 @@
   "group": "Q107",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-c1e3c9d20 (reviewer sub-agent of L); spot-checked: I read the item, the report, the three cited statements (Kan-model clause of lem-coef-simplicial-presheaf-projective-model, enriched-end mapping object and free diagram I(i,-)⊗X of lem-coef-simplicial-projective-model-calculus, notation of def-cbc-enhanced-diagrams-cones), unit sk-prop-sf-biduality-general and the main-20261015 prop-coef-integral-exceptional-adjoint proof. The statement is the strict simplicial enriched Yoneda isomorphism, unchanged and true; its extra hypotheses (locally Kan, cofibrant-fibrant) are harmless. I unpacked the end as an equalizer myself and got the step-2 equation α_y(f∘g,t)=μ(g,α_x(f,t)) with the correct variance; with I=A^op the free diagram at a is Y_a. Steps 3–6 check out: the inverse μ(f,t^*p), both inverse identities via the end equation at 1_a, diagonal composition in P, Y(u)(h,t)=t^*u∘h for naturality in a, and the mixed commutation. Elementary marks are justified. All citations are in the same unit, so no tool use is needed. Edge cases checked: terminal A, a one-object simplicial monoid, P(a)=∅, empty A. Duplicate search with rg over dag/nodes (lem-pc-yoneda, the infinity Yoneda nodes, lem-coef-space-yoneda-density) found no strict duplicate, and the one citer uses exactly this statement. There are no new nodes. HTT is not archived and I did not re-read it: proof_origin is agent with a WANTED line, and I verified the calculation directly. Remark, not a split fault: the item's creator-owned source.document has the malformed host people.math.ias.harvard.edu, for maintainer correction. No fixes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8c2b61ba3",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Immutable module and report reviewed; all statement clauses, dependencies, constructions, edge cases, docstrings, and per-file compilation checks pass."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnrichedYonedaEvaluation",
+  "declaration": "CategoryTheory.SimplicialYoneda.enriched_yoneda_evaluation",
+  "declarations": [
+   "CategoryTheory.SimplicialYoneda.representableAction",
+   "CategoryTheory.SimplicialYoneda.representableAction_laws",
+   "CategoryTheory.SimplicialYoneda.representable",
+   "CategoryTheory.SimplicialYoneda.postcompositionComponent",
+   "CategoryTheory.SimplicialYoneda.postcompositionComponent_naturality",
+   "CategoryTheory.SimplicialYoneda.postcompositionTransformation",
+   "CategoryTheory.SimplicialYoneda.representableObject",
+   "CategoryTheory.SimplicialYoneda.postcomposition",
+   "CategoryTheory.SimplicialYoneda.componentApplication",
+   "CategoryTheory.SimplicialYoneda.evaluation",
+   "CategoryTheory.SimplicialYoneda.kanModel",
+   "CategoryTheory.SimplicialYoneda.enriched_yoneda_evaluation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnrichedYonedaEvaluation.lean",
+  "statement": "theorem enriched_yoneda_evaluation (hA : ∀ a b : A, SSet.KanComplex (sHom a b)) (E : SimplicialDiagramEnrichment Aᵒᵖ SSet.{u}) (T : SimplicialTensorCotensor SSet.{u}) [@ProjectiveSimplicialModelStructure _ _ _ _ _ kanModel _ T E] : ∃ ε : ∀ (a : A) (P : SimplicialModelLocalization.Bif E.Diagrams), sHom (representableObject E a) P.obj ≅ (SimplicialDiagramEnrichment.value P.obj).obj (op a), (∀ (a : A) (P : SimplicialModelLocalization.Bif E.Diagrams), (ε a P).hom = evaluation E a P.obj) ∧ (∀ (a : A) (P : SimplicialModelLocalization.Bif E.Diagrams) (x : Aᵒᵖ), (𝟙 _ ⊗ₘ (ε a P).inv) ≫ componentApplication E (representableObject E a) P.obj x = (β_ _ _).hom ≫ uncurry ((SimplicialDiagramEnrichment.value P.obj).map (op a) x)) ∧ (∀ (a : A) (P Q : SimplicialModelLocalization.Bif E.Diagrams), eComp SSet (representableObject E a) P.obj Q.obj ≫ (ε a Q).hom = ((ε a P).hom ⊗ₘ 𝟙 (sHom P.obj Q.obj)) ≫ componentApplication E P.obj Q.obj (op a)) ∧ (∀ (a' a : A) (P : SimplicialModelLocalization.Bif E.Diagrams), (postcomposition E a' a ⊗ₘ 𝟙 _) ≫ eComp SSet (representableObject E a') (representableObject E a) P.obj ≫ (ε a' P).hom = (𝟙 _ ⊗ₘ (ε a P).hom) ≫ (β_ _ _).hom ≫ uncurry ((SimplicialDiagramEnrichment.value P.obj).map (op a) (op a'))) ∧ (∀ a : A, eId SSet a ≫ postcomposition E a a = eId SSet (representableObject E a)) ∧ (∀ a b c : A, eComp SSet a b c ≫ postcomposition E a c = (postcomposition E a b ⊗ₘ postcomposition E b c) ≫ eComp SSet (representableObject E a) (representableObject E b) (representableObject E c))",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded SimplicialDiagramEnrichment and ProjectiveSimplicialModelStructure, including genuine graded-natural mapping ends and their composition. Helpers construct the representable, the enriched Yoneda map and evaluation by their full simplicial formulas. The inverse is characterized by its action on every end projection. The Kan model is extracted from the presheaf-model theorem whose three prescribed morphism classes determine its data uniquely; no diagram or arbitrary map is chosen."
  }
 }
