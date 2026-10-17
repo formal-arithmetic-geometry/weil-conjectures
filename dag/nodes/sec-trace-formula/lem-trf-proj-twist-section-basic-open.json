@@ -220,5 +220,29 @@
   "group": "Q98",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q98-ff23f174b (reviewer sub-agent of L); spot-checked: Read the full item, report, unit, DAG context, cited node statements, and Stacks sources 01MU/01MV/01MW with 01M4/01MA. Verified all four proof steps, fraction and unit calculations, hypotheses, edge cases, Mathlib searches, route compliance, and corrected tag mapping. No mathematical, citation, duplication, circularity, or long-step fault found."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1784850be",
+  "group": "NH",
+  "result": "fix",
+  "note": "Lean matches the node and source; immutable module compiles cleanly. Complete replacement report in fixes repairs H11's second-reading disclaimer. review.md records all checks and the inherited source-tag typo."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjTwistSectionBasicOpen",
+  "declaration": "AlgebraicGeometry.Proj.twistSectionBasicOpen",
+  "declarations": [
+   "AlgebraicGeometry.Proj.twistSectionOnOpen",
+   "AlgebraicGeometry.Proj.twistSectionLoci",
+   "AlgebraicGeometry.Proj.twistSectionBasicOpen"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjTwistSectionBasicOpen.lean",
+  "statement": "theorem twistSectionBasicOpen (d : ℕ) (_hd : 0 < d) (W : (Proj 𝒜).Opens) (_hW : W = ⨆ (α : ℕ) (β : ℕ) (a : 𝒜 α) (b : 𝒜 β) (_ : α = β + d), basicOpen 𝒜 ((a : A) * (b : A))) (U : (Proj 𝒜).Opens) (_hU : U ≤ W) : (∀ (n : ℕ), 0 < n → ∀ (f : A) (hf : f ∈ 𝒜 (n * d)), Scheme.Modules.nonvanishingLocus ((twist 𝒜 (0 + ((n * d : ℕ) : ℤ))).restrict U.ι) (twistSectionOnOpen 𝒜 U hf) = ((U.ι ⁻¹ᵁ basicOpen 𝒜 f : U.toScheme.Opens) : Set U.toScheme)) ∧ TopologicalSpace.IsTopologicalBasis (twistSectionLoci 𝒜 d U) ∧ TopologicalSpace.IsTopologicalBasis {V : Set U.toScheme | V ∈ twistSectionLoci 𝒜 d U ∧ ∃ O : U.toScheme.Opens, (O : Set U.toScheme) = V ∧ IsAffineOpen O}",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the node's equivalent union characterization of W_d as the explicit equality hW; the two helper definitions construct the restricted canonical section and collect its actual stalk nonvanishing sets. No twisting sheaf, module restriction, or nonvanishing predicate is redefined."
  }
 }

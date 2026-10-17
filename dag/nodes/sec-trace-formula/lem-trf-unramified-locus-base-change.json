@@ -160,5 +160,27 @@
   "group": "Q19",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-9f0ecd3ef (reviewer sub-agent of L); spot-checked: Read the full item, unit/chapter route, cited DAG nodes, and Stacks Tags 0475 and 02GF. Statement, hypotheses, fibre/base-change morphism, proof steps, edge cases, dependencies, route locks, and tool uses check out. No new nodes or repairs are needed. The report mentions an absent citations.json, but direct source and DAG verification was completed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-dd303a348",
+  "group": "Q155",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, edge cases, route constraints, report sections, and scompile evidence all checked; no substantive or mechanical errors found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnramifiedLocusBaseChange",
+  "declaration": "AlgebraicGeometry.unramifiedLocus_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.unramifiedLocus",
+   "AlgebraicGeometry.unramifiedLocus_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/UnramifiedLocusBaseChange.lean",
+  "statement": "theorem unramifiedLocus_baseChange {Z S : Scheme.{u}} (h : Z ⟶ S) [LocallyOfFiniteType h] : IsOpen (unramifiedLocus h) ∧ (∀ z : Z, z ∈ unramifiedLocus h ↔ h.asFiber z ∈ unramifiedLocus (h.fiberToSpecResidueField (h z))) ∧ (∀ z : Z, z ∈ unramifiedLocus h ↔ IsIso ((h.fiber (h z)).residue (h.asFiber z)) ∧ (h.residueFieldMap z).hom.Finite ∧ @Algebra.IsSeparable (S.residueField (h z)) (Z.residueField z) _ _ (h.residueFieldMap z).hom.toAlgebra) ∧ (∀ {S' : Scheme.{u}} (k : S' ⟶ S), unramifiedLocus (pullback.snd h k) = (pullback.fst h k) ⁻¹' unramifiedLocus h)",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
