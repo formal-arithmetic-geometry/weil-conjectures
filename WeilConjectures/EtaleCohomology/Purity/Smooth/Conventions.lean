@@ -262,8 +262,20 @@ theorem boundedConstructibleFiniteTor_tateObject [HasInvertibleExponent Λ X] (m
     DerivedCategory.boundedConstructibleFiniteTor Λ X (tateObject Λ X m) :=
   HasTateTwist.boundedConstructibleFiniteTor_twistObject X m
 
-/-- The Tate twist `(m) : D(X_ét, Λ) ⥤ D(X_ét, Λ)`, tensoring with the twisting object
-`Λ_X(m)`. -/
+/-- Blueprint `def-pur-conventions`: Purity coefficient conventions
+
+The Tate twist `(m) : D(X_ét, Λ) ⥤ D(X_ét, Λ)`, `K(m) = K ⊗^L_{Λ_X} Λ_X(m)`, tensoring with the
+twisting object `Λ_X(m)`.
+
+The purity conventions fix a finite coefficient ring `Λ` (the finite stage `A = A_{E,n}`), whose
+exponent is invertible on the schemes in sight (`AlgebraicGeometry.HasInvertibleExponent`, i.e.
+`ℓ ≠ p`), the operations `Lf^*`, `⊗^L`, `Rf_*`, `Rf_!`, `Rf^!` of the framework on the
+categories `D(X_ét, Λ)`, `D^b_{ctf}(X, Λ)`, and the twists `K(m)` defined here; the dualizing
+complex of `a : Y ⟶ Spec k` is `ω_{Y,Λ} = Ra^! Λ` (`AlgebraicGeometry.Etale.dualizingComplex`).
+The normalization of geometric Frobenius on the twists (`q^{-m}` on `Λ(m)`) is
+`def-weil-frobenius-coefficient-twists` (`WeilConjectures.WeilSheaf.FrobeniusTwist`), and the
+other coefficient stages `𝒪_E, E, ℚ̄_ℓ` are the transports of
+`WeilConjectures.EtaleCohomology.Purity.Smooth.Transport`. -/
 noncomputable def tateTwist (m : ℤ) :
     DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
