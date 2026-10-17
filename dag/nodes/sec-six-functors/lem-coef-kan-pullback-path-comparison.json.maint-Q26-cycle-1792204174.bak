@@ -1,0 +1,275 @@
+{
+ "id": "lem-coef-kan-pullback-path-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, derived coefficient adjunction in the displayed R Hom / R lim calculation: coherent enhancement of the flat models; the finite-shape generation argument glues spaces of coherent transformations across one simplex attachment. Ingredient: ordinary pullback versus the path-space pullback.",
+   "via": [
+    "lem-coef-infinity-mapping-excision",
+    "lem-coef-infinity-colimit-gluing",
+    "lem-coef-infinity-finite-shape-generation",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Constant-path comparison for a Kan-fibration pullback",
+ "statement": "Use the simplicial sets, quasicategories, spaces and right-pinched mapping spaces of [def-cbc-enhanced-diagrams-cones], in its fixed universe convention. Let $u:U\\to W$ and $v:V\\to W$ be maps of Kan complexes. Define\n$$P(u,v)=U\\times_{W,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,W)\\times_{\\operatorname{ev}_1,W}V,$$\nwhere $\\operatorname{ev}_e$ restricts a simplicial path to its endpoint $e$. This is a Kan complex. If either $u$ or $v$ is a Kan fibration (right lifting property against all horn inclusions $\\Lambda_k^n\\hookrightarrow\\Delta^n$, $n\\geq1$, $0\\leq k\\leq n$), then the map $U\\times_W V\\to P(u,v)$ that inserts the constant path at the common image is a weak homotopy equivalence.",
+ "source": {
+  "document": "https://kerodon.net/tag/0329",
+  "place": "Kerodon Proposition 3.4.0.7 (0329), with path model Construction 3.4.0.3 (010B). The path model is Kan since endpoint evaluation to W × W is a Kan fibration by Corollary 3.1.3.3 (00TM) and its base is U × V. Read online 2026-10-16, not archived in literature/. Kerodon tags, unrelated to Stacks 0329."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [
+  {
+   "text": "Put $I=\\Delta^1$ and $T=\\operatorname{Fun}(I,W)$, using the degreewise internal functor and product definitions in [def-cbc-enhanced-diagrams-cones]. We first prove that $(\\operatorname{ev}_0,\\operatorname{ev}_1):T\\to W\\times W$ is a Kan fibration. A horn lifting problem for this map is exactly a map to $W$ from $(I\\times\\Lambda_k^n)\\cup_{\\partial I\\times\\Lambda_k^n}(\\partial I\\times\\Delta^n)$, to be extended to $I\\times\\Delta^n$: the two prescribed endpoints give the map on $\\partial I\\times\\Delta^n$, and the given horn of paths gives the other part. The inclusion is the pushout-product of the monomorphism $\\partial I\\hookrightarrow I$ and the horn inclusion $\\Lambda_k^n\\hookrightarrow\\Delta^n$. A horn inclusion is anodyne by the definition of Kan fibration: every Kan fibration lifts against it. The pushout-product is therefore anodyne by [lem-coef-sset-anodyne-pushout-product], and $W\\to\\Delta^0$ is a Kan fibration since $W$ is Kan, so the extension exists. The displayed $P(u,v)$ is the pullback of this endpoint-pair map along $(u,v):U\\times V\\to W\\times W$. For a horn in $P(u,v)$, fill its $U$ and $V$ coordinates separately, using their Kan conditions, then solve the endpoint-pair lifting problem with these prescribed coordinate fillers. The resulting triple is a filler in $P(u,v)$. This proves its Kan assertion without any fibration hypothesis on $u$ or $v$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00TM",
+    "place": "Corollary 3.1.3.3; Construction 3.4.0.3 (010B). The lifting argument is expanded using the existing anodyne pushout-product statement."
+   }
+  },
+  {
+   "text": "For either $e\\in\\{0,1\\}$, prove that $\\operatorname{ev}_e:T\\to W$ lifts against every $\\partial\\Delta^m\\hookrightarrow\\Delta^m$, including $m=0$. Under the same internal-functor definition, a lifting problem prescribes a map to $W$ on $(\\partial\\Delta^m\\times I)\\cup_{\\partial\\Delta^m\\times\\{e\\}}(\\Delta^m\\times\\{e\\})$. The inclusion into $\\Delta^m\\times I$ is the pushout-product of the monomorphism $\\partial\\Delta^m\\hookrightarrow\\Delta^m$ and $\\{e\\}\\hookrightarrow I$. Each endpoint inclusion is a one-dimensional horn inclusion and hence anodyne. By [lem-coef-sset-anodyne-pushout-product] this union inclusion is anodyne, so the Kan condition on $W$ supplies the extension. In dimension zero this is just extension from the chosen endpoint of $I$; no nonemptiness assumption on $W$ is used. The boundary-lifting characterization in [lem-coef-kan-quillen-right-proper] now says that both endpoint evaluations are trivial fibrations, hence weak homotopy equivalences. Moreover a pullback of either evaluation still has boundary lifting: project a boundary lifting problem to $T\\to W$, choose its filler there, and pair it with the already prescribed base simplex. Thus these pullbacks are also trivial fibrations by the same characterization.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UT",
+    "place": "Corollary 3.1.3.6, expanded into boundary lifting using the anodyne pushout-product; Kan-Quillen boundary characterization from the cited DAG node."
+   }
+  },
+  {
+   "text": "Suppose first that $u:U\\to W$ is a Kan fibration. Set $E_R=T\\times_{\\operatorname{ev}_1,W,v}V$, let $q_R:E_R\\to V$ be projection, and let $a_R:E_R\\to W$ be $\\operatorname{ev}_0$ on its path coordinate. Step 2 makes $q_R$ a trivial fibration. The constant-path map $s_R:V\\to E_R$, $y\\mapsto(c_{v(y)},y)$, is simplicial because the constant path is precomposition with $I\\to\\Delta^0$; it satisfies $q_Rs_R=1_V$ and $a_Rs_R=v$ in every degree. The model structure asserted by [lem-coef-kan-quillen-right-proper] has the two-out-of-three axiom, so $q_R$ being a weak equivalence and $q_Rs_R=1$ imply that $s_R$ is a weak equivalence. By the degreewise pullback definition, $P(u,v)=U\\times_{W,u,a_R}E_R$ and its projection $r_R:P(u,v)\\to E_R$ is a Kan fibration: given a horn problem, project it to the horn problem for $u$, lift there, and pair that lift with the prescribed simplex of $E_R$. The pullback of $s_R$ along $r_R$ is canonically $U\\times_W V$: a simplex in this pullback has path exactly $c_{v(y)}$ and satisfies $u(x)=v(y)$. Its map to $P(u,v)$ is consequently exactly $(x,y)\\mapsto(x,c_{u(x)},y)$. Right properness in [lem-coef-kan-quillen-right-proper], applied to the weak equivalence $s_R$ and the Kan fibration $r_R$, proves that this particular constant-path comparison is a weak homotopy equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0329",
+    "place": "Proposition 3.4.0.7, proof with f_0 a Kan fibration; its application of Proposition 3.4.0.2 (0109) is implemented by the existing right-properness statement."
+   }
+  },
+  {
+   "text": "If instead $v:V\\to W$ is a Kan fibration, use $E_L=U\\times_{u,W,\\operatorname{ev}_0}T$, with projection $q_L:E_L\\to U$ and $a_L:E_L\\to W$ given by $\\operatorname{ev}_1$. Step 2 makes $q_L$ a trivial fibration, and $s_L:U\\to E_L$, $x\\mapsto(x,c_{u(x)})$, satisfies $q_Ls_L=1_U$ and $a_Ls_L=u$. Two-out-of-three in the model structure of [lem-coef-kan-quillen-right-proper] again makes $s_L$ a weak equivalence. Now $P(u,v)=E_L\\times_{a_L,W,v}V$, and $r_L:P(u,v)\\to E_L$ is a Kan fibration by projecting each horn problem to $v$ and pairing its filler with the prescribed simplex of $E_L$. The pullback of $s_L$ along $r_L$ consists in each degree of $x,y$ with $u(x)=v(y)$ and path exactly $c_{u(x)}$. Therefore its map to $P(u,v)$ is the stated comparison from $U\\times_W V$. Right properness applied to $s_L$ and $r_L$ proves the required weak equivalence. This argument treats the second endpoint directly and uses no reversal of the simplicial interval.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0329",
+    "place": "Proposition 3.4.0.7, the other fibration case; endpoint 0 version of the preceding construction, written explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-sset-anodyne-pushout-product",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0329",
+  "place": "Proposition 3.4.0.7, with 010B, 00TM and 00UT. Online source read 2026-10-17; not archived in literature/. Agent expansion through existing anodyne pushout-product and right-properness nodes, with both fibration cases explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pullback of Kan complexes along a Kan fibration is a homotopy pullback and homotopy pullbacks preserve weak equivalences",
+   "results": "{\"t\": \"2026-10-16T11:04:14Z\", \"tool\": \"leanfinder\", \"query\": \"A pullback of Kan complexes along a Kan fibration is a homotopy pullback and homotopy pullbacks preserve weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\"], \"digest\": \"11cdfdb223a2fc64\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: PathObject.weakEquivalence_ι and its projection instances concern an arbitrary model-category path object. Instances.lean only gives pullback stability of trivial fibrations. Neither states the constant-path comparison for the simplicial prism model along a possibly nontrivial Kan fibration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KanFibration\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-16T11:04:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"KanFibration\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: PathObject.weakEquivalence_ι and its projection instances concern an arbitrary model-category path object. Instances.lean only gives pullback stability of trivial fibrations. Neither states the constant-path comparison for the simplicial prism model along a possibly nontrivial Kan fibration."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.pullback|homotopyPullback|path.*pullback",
+   "results": "{\"t\": \"2026-10-16T11:04:04Z\", \"tool\": \"grep\", \"query\": \"homotopy.pullback|homotopyPullback|path.*pullback\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\"], \"digest\": \"ab559047dde3c3b4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: PathObject.weakEquivalence_ι and its projection instances concern an arbitrary model-category path object. Instances.lean only gives pullback stability of trivial fibrations. Neither states the constant-path comparison for the simplicial prism model along a possibly nontrivial Kan fibration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The constant path map from a strict pullback along a Kan fibration to the path model homotopy pullback is a weak equivalence",
+   "results": "{\"t\": \"2026-10-16T11:04:05Z\", \"tool\": \"leansearch\", \"query\": \"The constant path map from a strict pullback along a Kan fibration to the path model homotopy pullback is a weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.PathObject.weakEquivalence_ι\", \"HomotopicalAlgebra.PathObject.noConfusion\", \"HomotopicalAlgebra.PathObject.instWeakEquivalenceP₁\", \"HomotopicalAlgebra.PathObject.IsGood.fibration_p\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.PathObject.noConfusionType\", \"HomotopicalAlgebra.PathObject.toPrepathObject\"], \"digest\": \"285a48328f7021a6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: PathObject.weakEquivalence_ι and its projection instances concern an arbitrary model-category path object. Instances.lean only gives pullback stability of trivial fibrations. Neither states the constant-path comparison for the simplicial prism model along a possibly nontrivial Kan fibration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weak equivalences of spans of Kan complexes induce weak equivalences of path space homotopy pullbacks",
+   "results": "{\"t\": \"2026-10-16T11:04:16Z\", \"tool\": \"leanfinder\", \"query\": \"Weak equivalences of spans of Kan complexes induce weak equivalences of path space homotopy pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.instWeakEquivalenceP₁\", \"HomotopicalAlgebra.PathObject.weakEquivalence_ι\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.instWeakEquivalenceP₀\", \"HomotopicalAlgebra.PathObject.instIsGoodTrans\", \"HomotopicalAlgebra.PathObject.RightHomotopy.weakEquivalence_iff\"], \"digest\": \"c6e11f22c555300a\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: PathObject.weakEquivalence_ι and its projection instances concern an arbitrary model-category path object. Instances.lean only gives pullback stability of trivial fibrations. Neither states the constant-path comparison for the simplicial prism model along a possibly nontrivial Kan fibration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strict fiber product along a Kan fibration computes the path space homotopy fiber product",
+   "results": "{\"t\": \"2026-10-16T13:07:11Z\", \"tool\": \"leanfinder\", \"query\": \"A strict fiber product along a Kan fibration computes the path space homotopy fiber product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.PathObject.IsGood\", \"HomotopicalAlgebra.PathObject.ofFactorizationData\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.PathObject.instIsVeryGoodOfFactorizationData\", \"HomotopicalAlgebra.PathObject.IsVeryGood\", \"HomotopicalAlgebra.PathObject.ofFactorizationData_P\"], \"digest\": \"31af514497e5633c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned monomorphism, nerve, Quillen generating-class and abstract path-object/product declarations do not state this explicit morphism-space or path-pullback assertion. PathObject.lean:53-72,84-93 describes arbitrary path objects; its weakEquivalence_ι concerns their diagonal, not the right-pinch comparison. The logged grep isolates only the already used restriction leaf; Loogle returns no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KanFibration\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-16T13:07:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"KanFibration\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned monomorphism, nerve, Quillen generating-class and abstract path-object/product declarations do not state this explicit morphism-space or path-pullback assertion. PathObject.lean:53-72,84-93 describes arbitrary path objects; its weakEquivalence_ι concerns their diagonal, not the right-pinch comparison. The logged grep isolates only the already used restriction leaf; Loogle returns no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "pinch|morphismSpace|homotopyPullback|homotopy_pullback|innerFibration_pullbackObjObjπ",
+   "results": "{\"t\": \"2026-10-16T13:07:05Z\", \"tool\": \"grep\", \"query\": \"pinch|morphismSpace|homotopyPullback|homotopy_pullback|innerFibration_pullbackObjObjπ\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"6bc1ee80f84a4a96\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned monomorphism, nerve, Quillen generating-class and abstract path-object/product declarations do not state this explicit morphism-space or path-pullback assertion. PathObject.lean:53-72,84-93 describes arbitrary path objects; its weakEquivalence_ι concerns their diagonal, not the right-pinch comparison. The logged grep isolates only the already used restriction leaf; Loogle returns no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change along a fibration between fibrant simplicial sets computes the derived fiber product via paths",
+   "results": "{\"t\": \"2026-10-16T17:41:27Z\", \"tool\": \"leanfinder\", \"query\": \"Base change along a fibration between fibrant simplicial sets computes the derived fiber product via paths\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.FibrantObject.homMk_homMk\", \"HomotopicalAlgebra.PathObject.trans_P\", \"HomotopicalAlgebra.PathObject.trans_ι\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.PathObject.trans_p₁\"], \"digest\": \"f394349883e0e96c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read PathObject.lean and the returned candidate types; path-object fibrancy, projection fibrations, composition of path objects and base change of trivial fibrations do not state the explicit constant-path comparison or objectwise invariance of the displayed path pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "pathObject|weakEquivalence.*[Bb]ase[Cc]hange|[Pp]ullback.*[Ww]eak[Ee]quivalence",
+   "results": "{\"t\": \"2026-10-16T17:41:25Z\", \"tool\": \"grep\", \"query\": \"pathObject|weakEquivalence.*[Bb]ase[Cc]hange|[Pp]ullback.*[Ww]eak[Ee]quivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\"], \"digest\": \"76b34071667fa287\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read PathObject.lean and the returned candidate types; path-object fibrancy, projection fibrations, composition of path objects and base change of trivial fibrations do not state the explicit constant-path comparison or objectwise invariance of the displayed path pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PathObject\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-16T17:42:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"PathObject\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read PathObject.lean and the returned candidate types; path-object fibrancy, projection fibrations, composition of path objects and base change of trivial fibrations do not state the explicit constant-path comparison or objectwise invariance of the displayed path pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyPullback|homotopy_pullback|constant.*path|path.*pullback",
+   "results": "{\"t\": \"2026-10-16T17:57:32Z\", \"tool\": \"grep\", \"query\": \"homotopyPullback|homotopy_pullback|constant.*path|path.*pullback\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/SimplyConnected.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Basic.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Basic.lean\"], \"digest\": \"735a3a6ded8bd065\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean:53-103,142-145, Instances.lean:65-109 and the returned simplicial CategoryWithFibrations declarations. These supply abstract path-object axioms, two-out-of-three, or pullback stability of trivial fibrations; none states the explicit constant-path comparison along a possibly nontrivial Kan fibration. The second phrasing returned the same abstract ingredients. FundamentalGroupoid path hits concern topological paths."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inclusion of a strict pullback into a simplicial path space homotopy pullback along a Kan fibration is a weak homotopy equivalence",
+   "results": "{\"t\": \"2026-10-16T17:57:32Z\", \"tool\": \"leansearch\", \"query\": \"The inclusion of a strict pullback into a simplicial path space homotopy pullback along a Kan fibration is a weak homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.weakEquivalence_ι\", \"HomotopicalAlgebra.PathObject.noConfusion\", \"HomotopicalAlgebra.PathObject.symm_ι\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.PathObject.trans\", \"HomotopicalAlgebra.PathObject.trans_ι\", \"HomotopicalAlgebra.PathObject.instWeakEquivalenceP₁\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\"], \"digest\": \"7498b6842508bb71\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean:53-103,142-145, Instances.lean:65-109 and the returned simplicial CategoryWithFibrations declarations. These supply abstract path-object axioms, two-out-of-three, or pullback stability of trivial fibrations; none states the explicit constant-path comparison along a possibly nontrivial Kan fibration. The second phrasing returned the same abstract ingredients. FundamentalGroupoid path hits concern topological paths."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PathObject\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-16T17:57:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"PathObject\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean:53-103,142-145, Instances.lean:65-109 and the returned simplicial CategoryWithFibrations declarations. These supply abstract path-object axioms, two-out-of-three, or pullback stability of trivial fibrations; none states the explicit constant-path comparison along a possibly nontrivial Kan fibration. The second phrasing returned the same abstract ingredients. FundamentalGroupoid path hits concern topological paths."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For maps of Kan complexes, inserting constant paths from a pullback along a Kan fibration into the simplicial path pullback is a weak homotopy equivalence",
+   "results": "{\"t\": \"2026-10-16T17:57:33Z\", \"tool\": \"leanfinder\", \"query\": \"For maps of Kan complexes, inserting constant paths from a pullback along a Kan fibration into the simplicial path pullback is a weak homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.weakEquivalence_ι\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.PathObject.trans_ι\", \"HomotopicalAlgebra.PathObject.instWeakEquivalenceP₁\"], \"digest\": \"192d363057e8f78d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean:53-103,142-145, Instances.lean:65-109 and the returned simplicial CategoryWithFibrations declarations. These supply abstract path-object axioms, two-out-of-three, or pullback stability of trivial fibrations; none states the explicit constant-path comparison along a possibly nontrivial Kan fibration. The second phrasing returned the same abstract ingredients. FundamentalGroupoid path hits concern topological paths."
+  },
+  {
+   "tool": "grep",
+   "query": "right[Pp]roper|[Rr]ight[Pp]roper|weakEquivalence.*[Bb]ase[Cc]hange|[Pp]ullback.*[Ww]eak[Ee]quivalence",
+   "results": "{\"t\": \"2026-10-16T17:57:48Z\", \"tool\": \"grep\", \"query\": \"right[Pp]roper|[Rr]ight[Pp]roper|weakEquivalence.*[Bb]ase[Cc]hange|[Pp]ullback.*[Ww]eak[Ee]quivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean:53-103,142-145, Instances.lean:65-109 and the returned simplicial CategoryWithFibrations declarations. These supply abstract path-object axioms, two-out-of-three, or pullback stability of trivial fibrations; none states the explicit constant-path comparison along a possibly nontrivial Kan fibration. The second phrasing returned the same abstract ingredients. FundamentalGroupoid path hits concern topological paths."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeakEquivalence\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-16T17:57:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeakEquivalence\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean:53-103,142-145, Instances.lean:65-109 and the returned simplicial CategoryWithFibrations declarations. These supply abstract path-object axioms, two-out-of-three, or pullback stability of trivial fibrations; none states the explicit constant-path comparison along a possibly nontrivial Kan fibration. The second phrasing returned the same abstract ingredients. FundamentalGroupoid path hits concern topological paths."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right properness of simplicial sets implies that pullback along a Kan fibration preserves the constant path weak equivalence",
+   "results": "{\"t\": \"2026-10-16T17:57:51Z\", \"tool\": \"leanfinder\", \"query\": \"Right properness of simplicial sets implies that pullback along a Kan fibration preserves the constant path weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.PathObject.IsGood\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.IsVeryGood\"], \"digest\": \"a258d6e486b353a1\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean:53-103,142-145, Instances.lean:65-109 and the returned simplicial CategoryWithFibrations declarations. These supply abstract path-object axioms, two-out-of-three, or pullback stability of trivial fibrations; none states the explicit constant-path comparison along a possibly nontrivial Kan fibration. The second phrasing returned the same abstract ingredients. FundamentalGroupoid path hits concern topological paths."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-mapping-excision",
+  "date": "2026-10-16",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-pullback-path-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its statement dependency. Expanded the endpoint-pair and endpoint-evaluation lifting arguments using the existing anodyne pushout-product Mathlib leaf. In each fibration case separately, exhibited the comparison itself as a pullback of a constant-path section along a Kan fibration, then used existing right properness. No new nodes; no exact project attachment or Mathlib match. Checked empty and degree-zero cases and the absence of a simplicial path reversal.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived Hom / derived limit coefficient adjunction, via the recorded coherent flat-model and finite-shape mapping-excision chain. This split supplies the strict-versus-path pullback ingredient without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-0b8033221",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-0b8033221 (reviewer sub-agent of L); spot-checked: I read the item, its four steps, the full statements of all three cited nodes, the unit sk-prop-sf-biduality-general, the chapter sec-six-functors and the parent's use (lem-coef-infinity-mapping-excision step 4). The statement is unchanged and agrees with Kerodon Prop. 3.4.0.7 (0329) and Constr. 3.4.0.3 (010B). Kerodon is not archived in literature/, so proof_origin=agent and the report files a WANTED line; no SGA is used. Step 1: a horn problem for (ev0,ev1):Fun(I,W)->WxW is extension along the pushout-product of the mono dI->I and the horn Lambda->Delta^n, in the factor order of lem-coef-sset-anodyne-pushout-product. I checked that Mathlib leaf at PushoutProduct.lean:95-103. The horn is anodyne by that node's definition. P is Kan once the U and V coordinates are filled first. Step 2: ev_e has boundary lifting through the pushout-product with {e}->Delta^1, which is Lambda^1_{1-e} under the node's horn convention. The m=0 case is covered. The trivial-fibration characterization is in lem-coef-kan-quillen-right-proper, and the pullback-stability argument is written out. Step 3: I verified degreewise that s_R(y)=(c_{v(y)},y) is a section of q_R, which is a weak equivalence by 2-of-3. P=U x_{u,W,a_R} E_R, and the pullback of s_R along the base change r_R of u is U x_W V with the exact map (x,c_{u(x)},y). Right properness is applied with the right legs. Step 4 is the symmetric case: s_L, the base change r_L of v, and the same identification; no interval reversal is used. Edge cases: empty W/U/V, discrete W, u=v=id. Two distinct points of a contractible groupoid nerve give an example where the claim fails without the fibration hypothesis, and that hypothesis is used only in steps 3 and 4. The cited statements are in the same unit or are definitions, so no tool_uses are needed. There is no cycle: the item is not among the 70 transitive dependencies. Duplicate candidates are one-sided mapping-path replacements (lem-coef-space-path-fibration-replacement, lem-cbc-kan-fibration-fiber-criterion) and lem-coef-kan-homotopy-pullback-invariance; all state different things, so there is no duplicate and no restated clause. The Mathlib searches are recorded and none matches. No fixes were needed. Details are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a3504199",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Checked every clause against the node and Kerodon 0329/010B. Fixed universe SSet.{u}; Kan hypotheses on U, V, W only. P(u,v) is the nested pullback via the dependency's evaluation at endpoints 0 and 1, identical to the existing simplicialHomotopyPullback. The map c is pinned down uniquely by its three projection equations, with the path coordinate u∘fst ≫ constantDiagrams; it exists (homotopyPullbackComparison builds the same lift). KanComplex of P is unconditional; (Fibration u ∨ Fibration v) → IsWeakHomotopyEquivalence c uses the scoped Quillen horn fibrations and the dependency's realization predicate. Edge cases covered: empty U/V/W, identity legs, neither or both legs fibrations. No definitions, proof is sorry only, docstrings carry source, blueprint id and proof plan, imports follow the stage-2 rule, lean.statement verbatim, node differs from the side clone only in its lean record, report has both required sections. nt_compile.py --json on the snapshot file: exit 0, no errors or warnings. Minor, no action: existing simplicialHomotopyPullback/homotopyPullbackComparison could have been reused, but the inline form is identical by definition."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanPullbackPathComparison",
+  "declaration": "SSet.Enhanced.kan_pullback_path_comparison",
+  "file": "lean/Sheaf/AlgebraicTopology/KanPullbackPathComparison.lean",
+  "statement": "theorem kan_pullback_path_comparison {U V W : SSet.{u}} [KanComplex U] [KanComplex V] [KanComplex W] (u : U ⟶ W) (v : V ⟶ W) : ∃ c : pullback u v ⟶ pullback (pullback.snd u (evaluation Δ[1] W (stdSimplex.obj₀Equiv.symm 0)) ≫ evaluation Δ[1] W (stdSimplex.obj₀Equiv.symm 1)) v, c ≫ pullback.fst _ _ ≫ pullback.fst _ _ = pullback.fst u v ∧ c ≫ pullback.fst _ _ ≫ pullback.snd _ _ = pullback.fst u v ≫ u ≫ constantDiagrams Δ[1] W ∧ c ≫ pullback.snd _ _ = pullback.snd u v ∧ KanComplex (pullback (pullback.snd u (evaluation Δ[1] W (stdSimplex.obj₀Equiv.symm 0)) ≫ evaluation Δ[1] W (stdSimplex.obj₀Equiv.symm 1)) v) ∧ ((Fibration u ∨ Fibration v) → IsWeakHomotopyEquivalence c)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The three projection equations uniquely specify the constant-path comparison; the Kan assertion precedes the conditional weak-equivalence assertion. All constructions use the recorded enhanced-diagram primitives and Mathlib pullbacks."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

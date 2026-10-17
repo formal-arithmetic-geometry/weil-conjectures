@@ -1,0 +1,289 @@
+{
+ "id": "lem-coef-infinity-homotopy-pullback-pasting",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim, via the algebra-fibration construction in lem-coef-algebroid-presentability: transport the input coherent diagram along the base cocone and identify mapping spaces over that cocone. Input for Cocartesian cancellation and initiality of lifts. Specifically the generic pasting and right-square cancellation calculation used in Step 1 of the cocartesian composition input.",
+   "via": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-grothendieck-limits-colimits",
+    "lem-coef-algebroid-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Homotopy-pullback pasting criterion for spaces",
+ "statement": "Use spaces as defined in [def-cbc-enhanced-diagrams-cones] and the path-space homotopy-pullback notion in [lem-coef-infinity-cocartesian-mapping-criterion]. For maps $r:X\\to Z$ and $s:Y\\to Z$, the path homotopy pullback is $X\\times_{Z,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,Z)\\times_{\\operatorname{ev}_1,Z}Y$, with all products and pullbacks formed degreewise; a specified commutation homotopy supplies the path coordinate of the comparison map. Let\n$$\\begin{array}{ccccc}A&\\longrightarrow&C&\\longrightarrow&D\\\\\n\\downarrow&&\\downarrow&&\\downarrow\\\\\nA'&\\longrightarrow&C'&\\longrightarrow&D'\\end{array}$$\nbe a diagram of spaces with commuting adjacent squares. If the right square is a homotopy pullback, then the left square is a homotopy pullback if and only if the outer rectangle is a homotopy pullback. In particular two adjacent homotopy-pullback squares paste to a homotopy pullback. The assertion also applies to specified homotopy-commuting squares: their comparison maps to the path pullbacks use the specified commutation homotopies, and the outer rectangle uses the concatenated homotopy.",
+ "source": {
+  "document": "https://kerodon.net/tag/0110",
+  "place": "Kerodon Proposition 3.4.1.11 (Tag 0110, Transitivity), equation composite-homotopy-pullback. The specified-homotopy form uses the path-space model and the concatenated commutation homotopy. Read online 2026-10-17; archive WANTED. These are Kerodon identifiers, not Stacks tags; no Stacks tag states this spaces formulation."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-cocartesian-mapping-criterion"
+ ],
+ "proof": [
+  {
+   "text": "Name the horizontal maps $a:A\\to C$, $d:C\\to D$, $h:A'\\to C'$, $k:C'\\to D'$, and the vertical maps $v:A\\to A'$, $c:C\\to C'$, $g:D\\to D'$. Orient the specified square homotopies as $\\alpha:ca\\Rightarrow hv$ and $\\eta:gd\\Rightarrow kc$. Strict squares use the constant homotopies. We use the path model $P(U\\to W\\leftarrow V)$ from the statement, which is Kan by [lem-coef-kan-pullback-path-comparison]. Here are the fibration facts needed below, derived from [lem-coef-sset-anodyne-pushout-product] and [lem-coef-kan-quillen-right-proper]. For a Kan complex $W$, endpoint-pair evaluation $W^I\\to W\\times W$, $I=\\Delta^1$, is a Kan fibration: a horn problem transposes to extension from $(I\\times\\Lambda_i^n)\\cup(\\partial I\\times\\Delta^n)$, an anodyne pushout-product. Evaluation at either one endpoint is a trivial fibration: a boundary problem transposes to $(I\\times\\partial\\Delta^n)\\cup(\\{e\\}\\times\\Delta^n)$, the pushout-product of the anodyne one-dimensional horn $\\{e\\}\\hookrightarrow I$ with a boundary monomorphism. The cited boundary-lifting characterization includes $n=0$. Pullbacks and composites of Kan fibrations are Kan fibrations, by projecting, filling, and pairing a lifting problem. These arguments also apply when some spaces are empty. Horn inclusions are anodyne directly from their defining right lifting property for Kan fibrations and the definition of anodyne in [lem-coef-sset-anodyne-pushout-product]. Products of Kan complexes are Kan by coordinatewise horn filling. Transposition between maps into $W^I$ and maps out of a product with $I$ follows directly from the degreewise internal-Fun definition in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0110",
+    "place": "0110: path-model implementation of the fibrant replacements; endpoint lifting is Kerodon 00TM and 00UT."
+   }
+  },
+  {
+   "text": "Define the mapping-path replacement of $c$ and the right-square path pullback by\n$$E=C\\times_{c,C',\\operatorname{ev}_0}(C')^I,\\qquad p:E\\to C',\\quad (x,\\lambda)\\mapsto\\lambda(1),$$\n$$Q_0=D\\times_{g,D',\\operatorname{ev}_0}(D')^I\\times_{\\operatorname{ev}_1,D',k}C',\\qquad q:Q_0\\to C'.$$\nAn element of $E$ retains its free endpoint $b=\\lambda(1)$. Step 1 makes $p$ and $q$ Kan fibrations: the maps $E\\to C\\times C\\prime$ and $Q_0\\to D\\times C\\prime$ are the pullbacks of endpoint-pair evaluation along $(x,b)\\mapsto(c(x),b)$ and $(z,b)\\mapsto(g(z),k(b))$, respectively. Compose with the projections to $C\\prime$, which are Kan fibrations because $C$ and $D$ are Kan. Both total spaces are therefore Kan. The projection $E\\to C$ is a pullback of single-endpoint evaluation and has all boundary lifts, so it is a weak equivalence by [lem-coef-kan-quillen-right-proper]. Its constant-path section $j:C\\to E$ is consequently a weak equivalence by two-out-of-three, and is a degreewise monomorphism because projection recovers $x$. The right-square comparison is\n$$r:C\\to Q_0,\\qquad x\\mapsto(d(x),\\eta_x,c(x)).$$\nIt is a weak equivalence by the assumed homotopy-pullback property of that specified square.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0110",
+    "place": "0110: replace the right square; explicit mapping-path replacement retains its specified commutation homotopy."
+   }
+  },
+  {
+   "text": "Construct a strict map $F:E\\to Q_0$ over $C'$. For $(x,\\lambda)\\in E$, prescribe in $D'$ the two consecutive edges $\\eta_x:gd(x)\\to kc(x)$ and $k\\lambda:kc(x)\\to k(b)$. This is a simplicial map $E\\times\\Lambda_1^2\\to D'$. On $j(C)\\times\\Delta^2$, prescribe the degenerate triangle $s_1\\eta$: its edges $01,12,02$ are $\\eta$, the constant edge, and $\\eta$. The prescriptions agree on the intersection. The inclusion\n$$(E\\times\\Lambda_1^2)\\cup_{C\\times\\Lambda_1^2}(C\\times\\Delta^2)\\hookrightarrow E\\times\\Delta^2$$\nis anodyne by [lem-coef-sset-anodyne-pushout-product], applied to the monomorphism $j$ and the horn inclusion. Since $D'$ is Kan it has an extension $T$. Restrict $T$ to edge $02$ and put $F(x,\\lambda)=(d(x),T_{02}(x,\\lambda),b)$. This is a simplicial map, satisfies $qF=p$ exactly, and satisfies $Fj=r$ exactly by the prescribed degenerate triangles. Since $j$ and $r$ are weak equivalences, two-out-of-three in [lem-coef-kan-quillen-right-proper] proves that $F$ is a weak equivalence. The choice of $T$ is a filler of an explicitly specified lifting problem, not a presumed canonical operation concatenating interval paths.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0110",
+    "place": "0110: replace the right square by an equivalent fibration over C′; triangle filling spells out composition of the specified homotopies."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-kan-pullback-fibration-invariance] to the cospans $E\\xrightarrow{p}C'\\xleftarrow{h}A'$ and $Q_0\\xrightarrow{q}C'\\xleftarrow{h}A'$. Their comparison maps are $F,1_{C'},1_{A'}$, all weak equivalences, and $qF=p$ is the strict equation from Step 3. Both fibration hypotheses were proved in Step 2. It follows that\n$$F_h:E\\times_{C'}A'\\longrightarrow Q_0\\times_{C'}A'$$\nis a weak equivalence. Degreewise, its source is exactly $P(C\\xrightarrow{c}C'\\xleftarrow{h}A')$; its target is exactly $P(D\\xrightarrow{g}D'\\xleftarrow{kh}A')$. Indeed a target simplex is $(z,\\gamma,b,t)$ with $b=h(t)$ and endpoints $\\gamma(0)=g(z)$, $\\gamma(1)=k(b)$; delete $b$ and recover it as $h(t)$ for the inverse. These formulas commute with every simplicial operator.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-pullback-fibration-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0110",
+    "place": "0110 proof final sentence: the same base change computes the left and outer tests; fibration invariance makes the replacement valid."
+   }
+  },
+  {
+   "text": "The left-square comparison is $l:A\\to E\\times_{C'}A'$, $z\\mapsto(a(z),\\alpha_z,v(z))$. Under the identification in Step 4, $F_hl$ sends $z$ to $(da(z),T_{02}(a(z),\\alpha_z),v(z))$. The triangle $T(a(z),\\alpha_z)$ has edges $01=\\eta_{a(z)}$ and $12=k\\alpha_z$. Thus its edge $02$ represents exactly the concatenated outer commutation homotopy $gda\\Rightarrow khv$. With this representative the outer comparison is $F_hl$. Since $F_h$ is a weak equivalence, the model-structure two-out-of-three axiom of [lem-coef-kan-quillen-right-proper] says that $l$ is a weak equivalence if and only if the outer comparison is. By the path-pullback definition these are precisely the left and outer homotopy-pullback properties. Taking both adjacent squares to be homotopy pullbacks proves the pasting assertion.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0110",
+    "place": "0110: both tests reduce to the same comparison; coordinate computation also treats the homotopy-commuting case."
+   }
+  },
+  {
+   "text": "The result is independent of the triangle representative of concatenation. Given two maps $T_0,T_1:A\\times\\Delta^2\\to D'$ extending the same consecutive edges $\\eta a$ and $k\\alpha$, prescribe them at the endpoints of a new interval $J=\\Delta^1$, and prescribe the common horn map constantly along $J$. The inclusion of this prescribed domain into $A\\times\\Delta^2\\times J$ is the pushout-product of the monomorphism $A\\times\\partial J\\hookrightarrow A\\times J$ with the anodyne horn inclusion $\\Lambda_1^2\\hookrightarrow\\Delta^2$, after interchanging factors. By [lem-coef-sset-anodyne-pushout-product] it is anodyne; the Kan property of $D'$ supplies an extension. Its $02$ edge gives a simplicial homotopy, fixed at its two endpoints, between the two outer path coordinates. Together with the constant $D$ and $A'$ coordinates this gives a map $H:A\\to M^J$, where $M=P(D\\to D'\\leftarrow A')$ is Kan by [lem-coef-kan-pullback-path-comparison], with $\\operatorname{ev}_0 H=o_0$ and $\\operatorname{ev}_1 H=o_1$, the two outer comparisons. Step 1 proves that both endpoint evaluations $M^J\\to M$ are trivial fibrations and hence weak equivalences. Two-out-of-three in [lem-coef-kan-quillen-right-proper] gives $o_0$ is a weak equivalence if and only if $H$ is, if and only if $o_1$ is. Thus every triangle filler representing the concatenated homotopy gives the same test. Strict squares use constant $\\alpha$ and $\\eta$; then $l$ lands in $j(C)$, on which Step 3 prescribes the degenerate triangle, so the outer homotopy is constant as required. No independently chosen outer homotopy is substituted for the concatenation.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0110",
+    "place": "0110 specified-homotopy extension: relative triangle filling and homotopy invariance make concatenation well-defined for the comparison test."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-pullback-fibration-invariance",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-sset-anodyne-pushout-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0110",
+  "place": "Proposition 3.4.1.11, transitivity; explicit mapping-path fibration replacement and relative triangle construction supply the specified-homotopy version. Online source, not archived."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given two adjacent homotopy commutative squares of Kan complexes with the right square a homotopy pullback, the left square is a homotopy pullback if and only if the outer rectangle is",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.PrepathObject.RightHomotopy.trans\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {Y : C} →\\n      {P : HomotopicalAlgebra.PrepathObject Y} →\\n        {X : C} →\\n          {f₀ f₁ f₂ : X ⟶ Y} →\\n            P.RightHomotopy f₀ f₁ →\\n              {P' : HomotopicalAlgebra.PrepathObject Y} →\\n                P'.RightHomotopy \", \"doc\": \"Given a category $\\\\mathcal{C}$, an object $Y$ with path objects $P(Y)$ and $P'(Y)$, and morphisms $f₀, f₁, f₂: X \\\\to Y$, if $h$ is a right homotopy from $f₀$ to $f₁$ and $h'$ is a right homotopy from \"}\n  {\"name\": \"HomotopicalAlgebra.PrepathObject.RightHomotopy.trans_h\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {Y : C} {P : HomotopicalAlgebra.PrepathObject Y} {X : C}\\n  {f₀ f₁ f₂ : X ⟶ Y} (h : P.RightHomotopy f₀ f₁) {P' : HomotopicalAlgebra.PrepathObject Y} (h' : P'.RightHomotopy f₁ f₂)\\n  [inst_1 : CategoryTheory.Limits.HasPullback P.p₁ P'.p₀],\\n  (h.t\", \"doc\": \"Given a category $\\\\mathcal{C}$, an object $Y$ with path objects $P(Y)$ and $P'(Y)$, and morphisms $f₀, f₁, f₂: X \\\\to Y$, if $h$ is a right homotopy from $f₀$ to $f₁$ and $h'$ is a right homotopy from \"}\n  {\"name\": \"HomotopicalAlgebra.Precylinder.LeftHomotopy.trans\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {X : C} →\\n      {P : HomotopicalAlgebra.Precylinder X} →\\n        {Y : C} →\\n          {f₀ f₁ f₂ : X ⟶ Y} →\\n            P.LeftHomotopy f₀ f₁ →\\n              {P' : HomotopicalAlgebra.Precylinder X} →\\n                P'.LeftHomotopy f₁ f₂ \", \"doc\": \"Given two consecutive left homotopies $ h: f_0 \\\\to f_1 $ and $ h': f_1 \\\\to f_2 $ between morphisms $ X \\\\to Y $ in a category equipped with precylinder structures $ P $ and $ P' $, and assuming the pus\"}\n  {\"name\": \"HomotopicalAlgebra.Precylinder.LeftHomotopy.trans_h\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X : C} {P : HomotopicalAlgebra.Precylinder X} {Y : C}\\n  {f₀ f₁ f₂ : X ⟶ Y} (h : P.LeftHomotopy f₀ f₁) {P' : HomotopicalAlgebra.Precylinder X} (h' : P'.LeftHomotopy f₁ f₂)\\n  [inst_1 : CategoryTheory.Limits.HasPushout P.i₁ P'.i₀], (h.trans h').\", \"doc\": \"Given two consecutive left homotopies $ h: f_0 \\\\to f_1 $ and $ h': f_1 \\\\to f_2 $ between morphisms $ X \\\\to Y $ in a category equipped with precylinder structures $ P $ and $ P' $, and assuming the pus\"}\n  {\"name\": \"CategoryTheory.IsPullback.paste_horiz_iff\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {X₁₁ X₁₂ X₁₃ X₂₁ X₂₂ X₂₃ : C} {h₁₁ : X₁₁ ⟶ X₁₂}\\n  {h₁₂ : X₁₂ ⟶ X₁₃} {h₂₁ : X₂₁ ⟶ X₂₂} {h₂₂ : X₂₂ ⟶ X₂₃} {v₁₁ : X₁₁ ⟶ X₂₁} {v₁₂ : X₁₂ ⟶ X₂₂} {v₁₃ : X₁₃ ⟶ X₂₃},\\n  CategoryTheory.IsPullback h₁₂ v₁₂ v₁₃ h₂₂ →\\n    CategoryTheory.CategoryStruct.c\", \"doc\": \"Given a commutative diagram of objects and morphisms in a category $ C $ forming two horizontally adjacent squares, if the right square is a pullback and the composition condition $ h_{11} \\\\circ h_{12\"}\n  {\"name\": \"CategoryTheory.Limits.pasteHorizIsPullbackEquiv\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {X₃ Y₁ Y₂ Y₃ : C} →\\n      {g₁ : Y₁ ⟶ Y₂} →\\n        {g₂ : Y₂ ⟶ Y₃} →\\n          {i₃ : X₃ ⟶ Y₃} →\\n            {t₂ : CategoryTheory.Limits.PullbackCone g₂ i₃} →\\n              {i₂ : t₂.pt ⟶ Y₂} →\\n                (t₁ : CategoryTheory.Limits.\", \"doc\": \"This definition establishes an equivalence between the condition that a horizontally pasted outer composite square is a pullback and the condition that the left square is a pullback, given that the ri\"}\n  {\"name\": \"CategoryTheory.IsPullback.paste_vert_iff\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {X₁₁ X₁₂ X₂₁ X₂₂ X₃₁ X₃₂ : C} {h₁₁ : X₁₁ ⟶ X₁₂}\\n  {h₂₁ : X₂₁ ⟶ X₂₂} {h₃₁ : X₃₁ ⟶ X₃₂} {v₁₁ : X₁₁ ⟶ X₂₁} {v₁₂ : X₁₂ ⟶ X₂₂} {v₂₁ : X₂₁ ⟶ X₃₁} {v₂₂ : X₂₂ ⟶ X₃₂},\\n  CategoryTheory.IsPullback h₂₁ v₂₁ v₂₂ h₃₁ →\\n    CategoryTheory.CategoryStruct.c\", \"doc\": \"Given two commutative squares in a category $\\\\mathcal{C}$, if the lower square is a pullback, then the upper square is a pullback if and only if the composite square formed by vertical pasting is a pu\"}\n  {\"name\": \"CategoryTheory.IsPullback.of_right\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {X₁₁ X₁₂ X₁₃ X₂₁ X₂₂ X₂₃ : C} {h₁₁ : X₁₁ ⟶ X₁₂}\\n  {h₁₂ : X₁₂ ⟶ X₁₃} {h₂₁ : X₂₁ ⟶ X₂₂} {h₂₂ : X₂₂ ⟶ X₂₃} {v₁₁ : X₁₁ ⟶ X₂₁} {v₁₂ : X₁₂ ⟶ X₂₂} {v₁₃ : X₁₃ ⟶ X₂₃},\\n  CategoryTheory.IsPullback (CategoryTheory.CategoryStruct.comp h₁₁ h₁₂) v₁₁ v₁₃\\n\", \"doc\": \"Given a commutative diagram with morphisms $h_{11}: X_{11} \\\\to X_{12}$, $h_{12}: X_{12} \\\\to X_{13}$, $v_{11}: X_{11} \\\\to X_{21}$, and compatible morphisms to $X_{22}, X_{23}$, if the outer rectangle $\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern categorical pullbacks (Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:191-247) or composition of right homotopies (Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:41-90); neither states path-space homotopy-pullback pasting. The ordinary pullback theorem cannot be specialized in one line to this homotopy statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback.paste_horiz",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.IsPullback.paste_horiz\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X₁₁ X₁₂ X₁₃ X₂₁ X₂₂ X₂₃ : C} {h₁₁ : X₁₁ ⟶ X₁₂} {h₁₂ : X₁₂ ⟶ X₁₃} {h₂₁ : X₂₁ ⟶ X₂₂} {h₂₂ : X₂₂ ⟶ X₂₃} {v₁₁ : X₁₁ ⟶ X₂₁} {v₁₂ : X₁₂ ⟶ X₂₂} {v₁₃ : X₁₃ ⟶ X₂₃} (s : CategoryTheory.IsPullback h₁₁ v₁₁ v₁₂ h₂₁) (t : CategoryTheory.IsPullback h₁₂ v₁₂ v₁₃ h\", \"doc\": \"Paste two pullback squares \\\"horizontally\\\" to obtain another pullback square.\\n\\nThe objects in the statement fit into the following diagram:\\n```\\nX₁₁ - h₁₁ -> X₁₂ - h₁₂ -> X₁₃\\n|            |            |\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern categorical pullbacks (Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:191-247) or composition of right homotopies (Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:41-90); neither states path-space homotopy-pullback pasting. The ordinary pullback theorem cannot be specialized in one line to this homotopy statement."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.?[Pp]ullback|[Hh]omotopy.?[Cc]artesian|[Hh]omotopy.*paste",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern categorical pullbacks (Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:191-247) or composition of right homotopies (Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:41-90); neither states path-space homotopy-pullback pasting. The ordinary pullback theorem cannot be specialized in one line to this homotopy statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pasting and cancellation for homotopy pullback squares of spaces or Kan complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.pullbackLeftPullbackSndIso_hom_snd_assoc\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {W X Y Z : C} (f : X ⟶ Z) (g : Y ⟶ Z) (g' : W ⟶ Y)\\n  [inst_1 : CategoryTheory.Limits.HasPullback f g]\\n  [inst_2 : CategoryTheory.Limits.HasPullback (CategoryTheory.Limits.pullback.snd f g) g'] {Z_1 : C} (h : W ⟶ Z_1),\\n  CategoryTheory.Category\", \"doc\": \"In a category, if $ P $ is the pullback of morphisms $ f: X \\to Z $ and $ g: Y \\to Z $, and $ Q $ is the pullback of the induced morphism from $ P $ and another morphism $ g': W \\to Y $, then the composi\"}\n  {\"name\": \"CategoryTheory.IsPullback.of_bot\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic\", \"type\": \"{X₁₁ X₁₂ X₂₁ X₂₂ X₃₁ X₃₂ : C} {h₁₁ : X₁₁ ⟶ X₁₂} {h₂₁ : X₂₁ ⟶ X₂₂} {h₃₁ : X₃₁ ⟶ X₃₂} {v₁₁ : X₁₁ ⟶ X₂₁} {v₁₂ : X₁₂ ⟶ X₂₂}\\n  {v₂₁ : X₂₁ ⟶ X₃₁} {v₂₂ : X₂₂ ⟶ X₃₂} (s : IsPullback h₁₁ (v₁₁ ≫ v₂₁) (v₁₂ ≫ v₂₂) h₃₁) (p : h₁₁ ≫ v₁₂ = v₁₁ ≫ h₂₁)\\n  (t : IsPullback h₂₁ v₂₁ v₂₂ h₃₁) : IsPullback h₁₁ v₁₁ v₁₂ h₂₁\", \"doc\": \"If the inner square and the lower square in a composite diagram are pullbacks and the diagram commutes, then the outer square formed by composing these squares is also a pullback in the category $\\\\mat\"}\n  {\"name\": \"CategoryTheory.IsPullback.paste_horiz\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic\", \"type\": \"{X₁₁ X₁₂ X₁₃ X₂₁ X₂₂ X₂₃ : C} {h₁₁ : X₁₁ ⟶ X₁₂} {h₁₂ : X₁₂ ⟶ X₁₃} {h₂₁ : X₂₁ ⟶ X₂₂} {h₂₂ : X₂₂ ⟶ X₂₃} {v₁₁ : X₁₁ ⟶ X₂₁}\\n  {v₁₂ : X₁₂ ⟶ X₂₂} {v₁₃ : X₁₃ ⟶ X₂₃} (s : IsPullback h₁₁ v₁₁ v₁₂ h₂₁) (t : IsPullback h₁₂ v₁₂ v₁₃ h₂₂) :\\n  IsPullback (h₁₁ ≫ h₁₂) v₁₁ v₁₃ (h₂₁ ≫ h₂₂)\", \"doc\": \"Given two adjacent pullback squares in a category, if the left square and the right square are pullbacks, then the composite square formed by horizontally composing these squares also satisfies the un\"}\n  {\"name\": \"CategoryTheory.IsPullback.paste_vert\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic\", \"type\": \"{X₁₁ X₁₂ X₂₁ X₂₂ X₃₁ X₃₂ : C} {h₁₁ : X₁₁ ⟶ X₁₂} {h₂₁ : X₂₁ ⟶ X₂₂} {h₃₁ : X₃₁ ⟶ X₃₂} {v₁₁ : X₁₁ ⟶ X₂₁} {v₁₂ : X₁₂ ⟶ X₂₂}\\n  {v₂₁ : X₂₁ ⟶ X₃₁} {v₂₂ : X₂₂ ⟶ X₃₂} (s : IsPullback h₁₁ v₁₁ v₁₂ h₂₁) (t : IsPullback h₂₁ v₂₁ v₂₂ h₃₁) :\\n  IsPullback h₁₁ (v₁₁ ≫ v₂₁) (v₁₂ ≫ v₂₂) h₃₁\", \"doc\": \"In a category $\\\\mathcal{C}$, if two squares are pullbacks, then their vertical composition is also a pullback. Specifically, given morphisms $X_{11} \\\\to X_{12}$, $X_{21} \\\\to X_{22}$, $X_{31} \\\\to X_{32\"}\n  {\"name\": \"CategoryTheory.Limits.pullbackLeftPullbackSndIso_hom_fst_assoc\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {W X Y Z : C} (f : X ⟶ Z) (g : Y ⟶ Z) (g' : W ⟶ Y)\\n  [inst_1 : CategoryTheory.Limits.HasPullback f g]\\n  [inst_2 : CategoryTheory.Limits.HasPullback (CategoryTheory.Limits.pullback.snd f g) g'] {Z_1 : C} (h : X ⟶ Z_1),\\n  CategoryTheory.Category\", \"doc\": \"Given two pullback squares arranged vertically in a composite diagram, the outer rectangle formed by composing the squares is also a pullback. Specifically, if $P$ is the pullback of $f: X \\to Z$ and $\"}\n  {\"name\": \"CategoryTheory.Limits.pasteHorizIsPullback\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting\", \"type\": \"(H : IsLimit t₂) (H' : IsLimit t₁) : IsLimit (t₂.pasteHoriz t₁ hi₂)\", \"doc\": \"If the right square and the left square in a horizontally composed diagram are pullbacks, then the outer rectangle is also a pullback. Specifically, given morphisms $g_1: Y_1 \\\\to Y_2$, $g_2: Y_2 \\\\to Y\"}\n  {\"name\": \"CategoryTheory.IsPullback.paste_horiz_iff\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic\", \"type\": \"{X₁₁ X₁₂ X₁₃ X₂₁ X₂₂ X₂₃ : C} {h₁₁ : X₁₁ ⟶ X₁₂} {h₁₂ : X₁₂ ⟶ X₁₃} {h₂₁ : X₂₁ ⟶ X₂₂} {h₂₂ : X₂₂ ⟶ X₂₃} {v₁₁ : X₁₁ ⟶ X₂₁}\\n  {v₁₂ : X₁₂ ⟶ X₂₂} {v₁₃ : X₁₃ ⟶ X₂₃} (s : IsPullback h₁₂ v₁₂ v₁₃ h₂₂) (e : h₁₁ ≫ v₁₂ = v₁₁ ≫ h₂₁) :\\n  IsPullback (h₁₁ ≫ h₁₂) v₁₁ v₁₃ (h₂₁ ≫ h₂₂) ↔ IsPullback h₁₁ v₁₁ v₁₂ h₂₁\", \"doc\": \"Given a commutative diagram of objects and morphisms in a category $ C $ forming two horizontally adjacent squares, if the right square is a pullback and the composition condition $ h_{11} \\\\circ h_{12\"}\n  {\"name\": \"CategoryTheory.Limits.leftSquareIsPullback\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting\", \"type\": \"(H : IsLimit t₂) (H' : IsLimit (t₂.pasteHoriz t₁ hi₂)) : IsLimit t₁\", \"doc\": \"Given two pullback squares arranged horizontally in a category, the outer composite square is also a pullback. Specifically, if the right square and the outer square satisfy the universal property of \"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern categorical pullbacks (Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:191-247) or composition of right homotopies (Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:41-90); neither states path-space homotopy-pullback pasting. The ordinary pullback theorem cannot be specialized in one line to this homotopy statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transitivity of homotopy Cartesian diagrams modeled by path-space fiber products of simplicial sets",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.PrepathObject.RightHomotopy.trans_h\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {Y : C} {P : HomotopicalAlgebra.PrepathObject Y} {X : C}\\n  {f₀ f₁ f₂ : X ⟶ Y} (h : P.RightHomotopy f₀ f₁) {P' : HomotopicalAlgebra.PrepathObject Y} (h' : P'.RightHomotopy f₁ f₂)\\n  [inst_1 : CategoryTheory.Limits.HasPullback P.p₁ P'.p₀],\\n  (h.t\", \"doc\": \"Given a category $\\\\mathcal{C}$, an object $Y$ with path objects $P(Y)$ and $P'(Y)$, and morphisms $f₀, f₁, f₂: X \\\\to Y$, if $h$ is a right homotopy from $f₀$ to $f₁$ and $h'$ is a right homotopy from \"}\n  {\"name\": \"HomotopicalAlgebra.PrepathObject.RightHomotopy.trans\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {Y : C} →\\n      {P : HomotopicalAlgebra.PrepathObject Y} →\\n        {X : C} →\\n          {f₀ f₁ f₂ : X ⟶ Y} →\\n            P.RightHomotopy f₀ f₁ →\\n              {P' : HomotopicalAlgebra.PrepathObject Y} →\\n                P'.RightHomotopy \", \"doc\": \"Given a category $\\\\mathcal{C}$, an object $Y$ with path objects $P(Y)$ and $P'(Y)$, and morphisms $f₀, f₁, f₂: X \\\\to Y$, if $h$ is a right homotopy from $f₀$ to $f₁$ and $h'$ is a right homotopy from \"}\n  {\"name\": \"HomotopicalAlgebra.PrepathObject.RightHomotopy.h₁_assoc\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {Y : C} {P : HomotopicalAlgebra.PrepathObject Y} {X : C}\\n  {f g : X ⟶ Y} (self : P.RightHomotopy f g) {Z : C} (h : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp self.h (CategoryTheory.CategoryStruct.comp P.p₁ h) =\\n    CategoryTheory.CategoryStr\", \"doc\": \"In a category $\\\\mathcal{C}$ with a path object $P(Y)$ for an object $Y$, given morphisms $f,g: X \\\\to Y$ and a right homotopy $h: X \\\\to P(Y)$ between them, the composition of $h$ with the first project\"}\n  {\"name\": \"HomotopicalAlgebra.PathObject.RightHomotopy.trans\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {X Y : C} →\\n      [inst_1 : HomotopicalAlgebra.ModelCategory C] →\\n        {P : HomotopicalAlgebra.PathObject Y} →\\n          [inst_2 : HomotopicalAlgebra.IsFibrant Y] →\\n            {f₀ f₁ f₂ : X ⟶ Y} →\\n              P.RightHomotopy f₀ f\", \"doc\": \"Given a fibrant object $ Y $ in a model category with path objects $ P(Y) $ and $ P'(Y) $, and morphisms $ f_0, f_1, f_2: X \\to Y $, if $ h $ is a right homotopy from $ f_0 $ to $ f_1 $ and $ h' $ is a\"}\n  {\"name\": \"HomotopicalAlgebra.PrepathObject.RightHomotopy.h₀_assoc\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {Y : C} {P : HomotopicalAlgebra.PrepathObject Y} {X : C}\\n  {f g : X ⟶ Y} (self : P.RightHomotopy f g) {Z : C} (h : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp self.h (CategoryTheory.CategoryStruct.comp P.p₀ h) =\\n    CategoryTheory.CategoryStr\", \"doc\": \"In a category $\\\\mathcal{C}$, given an object $Y$ with path object $P(Y)$, morphisms $f,g: X \\\\to Y$, and a right homotopy $h: X \\\\to P(Y)$ between $f$ and $g$, for any morphism $k: Y \\\\to Z$, the composi\"}\n  {\"name\": \"HomotopicalAlgebra.PathObject.instIsGoodTrans\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] {A : C}\\n  [inst_2 : HomotopicalAlgebra.IsFibrant A] (P P' : HomotopicalAlgebra.PathObject A) [P.IsGood] [inst_4 : P'.IsGood],\\n  (P.trans P').IsGood\", \"doc\": \"Given a fibrant object $ A $ in a model category and two good path objects $ P $ and $ P' $ for $ A $, the transposed path object constructed as the pullback of their evaluation maps $ P.p₁: P(A) \\to A\"}\n  {\"name\": \"HomotopicalAlgebra.PathObject.trans\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : HomotopicalAlgebra.ModelCategory C] →\\n      {A : C} →\\n        [HomotopicalAlgebra.IsFibrant A] →\\n          HomotopicalAlgebra.PathObject A →\\n            (P' : HomotopicalAlgebra.PathObject A) → [P'.IsGood] → HomotopicalAlgebr\", \"doc\": \"Given a fibrant object $A$ in a model category and two path objects $P$ and $P'$ for $A$ (with $P'$ satisfying the 'good' condition), this constructs a new path object for $A$ by taking the pullback o\"}\n  {\"name\": \"HomotopicalAlgebra.PathObject.trans_ι\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] {A : C}\\n  [inst_2 : HomotopicalAlgebra.IsFibrant A] (P P' : HomotopicalAlgebra.PathObject A) [inst_3 : P'.IsGood],\\n  (P.trans P').ι = CategoryTheory.Limits.pullback.lift P.ι P'.ι ⋯\", \"doc\": \"In a model category, for a fibrant object $A$ and path objects $P$ and $P'$ (with $P'$ satisfying the 'good' condition), the inclusion morphism $\\\\iota$ of the transposed path object $P \\\\times_A P'$ is\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern categorical pullbacks (Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:191-247) or composition of right homotopies (Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:41-90); neither states path-space homotopy-pullback pasting. The ordinary pullback theorem cannot be specialized in one line to this homotopy statement."
+  },
+  {
+   "tool": "grep",
+   "query": "paste_horiz_iff|paste_horiz",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean\", \"line\": \"191\", \"text\": \"theorem paste_horiz {X₁₁ X₁₂ X₁₃ X₂₁ X₂₂ X₂₃ : C} {h₁₁ : X₁₁ ⟶ X₁₂} {h₁₂ : X₁₂ ⟶ X₁₃}\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean\", \"line\": \"243\", \"text\": \"theorem paste_horiz_iff {X₁₁ X₁₂ X₁₃ X₂₁ X₂₂ X₂₃ : C} {h₁₁ : X₁₁ ⟶ X₁₂} {h₁₂ : X₁₂ ⟶ X₁₃}\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean\", \"line\": \"247\", \"text\": \"  ⟨fun h => h.of_right e s, fun h => h.paste_horiz s⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean\", \"line\": \"410\", \"text\": \"  exact .paste_horiz hsndfgr hfg\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean\", \"line\": \"567\", \"text\": \"theorem paste_horiz {X₁₁ X₁₂ X₁₃ X₂₁ X₂₂ X₂₃ : C} {h₁₁ : X₁₁ ⟶ X₁₂} {h₁₂ : X₁₂ ⟶ X₁₃}\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern categorical pullbacks (Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:191-247) or composition of right homotopies (Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:41-90); neither states path-space homotopy-pullback pasting. The ordinary pullback theorem cannot be specialized in one line to this homotopy statement.",
+   "subdirectory": "CategoryTheory/Limits/Shapes/Pullback/IsPullback"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy cartesian squares of Kan complexes satisfy the pasting law and right hand square cancellation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.PrepathObject.RightHomotopy.trans\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {Y : C} →\\n      {P : HomotopicalAlgebra.PrepathObject Y} →\\n        {X : C} →\\n          {f₀ f₁ f₂ : X ⟶ Y} →\\n            P.RightHomotopy f₀ f₁ →\\n              {P' : HomotopicalAlgebra.PrepathObject Y} →\\n                P'.RightHomotopy \", \"doc\": \"Given a category $\\\\mathcal{C}$, an object $Y$ with path objects $P(Y)$ and $P'(Y)$, and morphisms $f₀, f₁, f₂: X \\\\to Y$, if $h$ is a right homotopy from $f₀$ to $f₁$ and $h'$ is a right homotopy from \"}\n  {\"name\": \"HomotopicalAlgebra.PrepathObject.RightHomotopy.trans_h\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {Y : C} {P : HomotopicalAlgebra.PrepathObject Y} {X : C}\\n  {f₀ f₁ f₂ : X ⟶ Y} (h : P.RightHomotopy f₀ f₁) {P' : HomotopicalAlgebra.PrepathObject Y} (h' : P'.RightHomotopy f₁ f₂)\\n  [inst_1 : CategoryTheory.Limits.HasPullback P.p₁ P'.p₀],\\n  (h.t\", \"doc\": \"Given a category $\\\\mathcal{C}$, an object $Y$ with path objects $P(Y)$ and $P'(Y)$, and morphisms $f₀, f₁, f₂: X \\\\to Y$, if $h$ is a right homotopy from $f₀$ to $f₁$ and $h'$ is a right homotopy from \"}\n  {\"name\": \"HomotopicalAlgebra.PrepathObject.RightHomotopy.h₁_assoc\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {Y : C} {P : HomotopicalAlgebra.PrepathObject Y} {X : C}\\n  {f g : X ⟶ Y} (self : P.RightHomotopy f g) {Z : C} (h : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp self.h (CategoryTheory.CategoryStruct.comp P.p₁ h) =\\n    CategoryTheory.CategoryStr\", \"doc\": \"In a category $\\\\mathcal{C}$ with a path object $P(Y)$ for an object $Y$, given morphisms $f,g: X \\\\to Y$ and a right homotopy $h: X \\\\to P(Y)$ between them, the composition of $h$ with the first project\"}\n  {\"name\": \"HomotopicalAlgebra.PrepathObject.RightHomotopy.h₀_assoc\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {Y : C} {P : HomotopicalAlgebra.PrepathObject Y} {X : C}\\n  {f g : X ⟶ Y} (self : P.RightHomotopy f g) {Z : C} (h : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp self.h (CategoryTheory.CategoryStruct.comp P.p₀ h) =\\n    CategoryTheory.CategoryStr\", \"doc\": \"In a category $\\\\mathcal{C}$, given an object $Y$ with path object $P(Y)$, morphisms $f,g: X \\\\to Y$, and a right homotopy $h: X \\\\to P(Y)$ between $f$ and $g$, for any morphism $k: Y \\\\to Z$, the composi\"}\n  {\"name\": \"HomotopicalAlgebra.Precylinder.LeftHomotopy.trans_h\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X : C} {P : HomotopicalAlgebra.Precylinder X} {Y : C}\\n  {f₀ f₁ f₂ : X ⟶ Y} (h : P.LeftHomotopy f₀ f₁) {P' : HomotopicalAlgebra.Precylinder X} (h' : P'.LeftHomotopy f₁ f₂)\\n  [inst_1 : CategoryTheory.Limits.HasPushout P.i₁ P'.i₀], (h.trans h').\", \"doc\": \"Given two consecutive left homotopies $ h: f_0 \\\\to f_1 $ and $ h': f_1 \\\\to f_2 $ between morphisms $ X \\\\to Y $ in a category equipped with precylinder structures $ P $ and $ P' $, and assuming the pus\"}\n  {\"name\": \"HomotopicalAlgebra.PathObject.RightHomotopy.trans\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {X Y : C} →\\n      [inst_1 : HomotopicalAlgebra.ModelCategory C] →\\n        {P : HomotopicalAlgebra.PathObject Y} →\\n          [inst_2 : HomotopicalAlgebra.IsFibrant Y] →\\n            {f₀ f₁ f₂ : X ⟶ Y} →\\n              P.RightHomotopy f₀ f\", \"doc\": \"Given a fibrant object $ Y $ in a model category with path objects $ P(Y) $ and $ P'(Y) $, and morphisms $ f_0, f_1, f_2: X \\to Y $, if $ h $ is a right homotopy from $ f_0 $ to $ f_1 $ and $ h' $ is a\"}\n  {\"name\": \"HomotopicalAlgebra.Precylinder.LeftHomotopy.trans\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {X : C} →\\n      {P : HomotopicalAlgebra.Precylinder X} →\\n        {Y : C} →\\n          {f₀ f₁ f₂ : X ⟶ Y} →\\n            P.LeftHomotopy f₀ f₁ →\\n              {P' : HomotopicalAlgebra.Precylinder X} →\\n                P'.LeftHomotopy f₁ f₂ \", \"doc\": \"Given two consecutive left homotopies $ h: f_0 \\\\to f_1 $ and $ h': f_1 \\\\to f_2 $ between morphisms $ X \\\\to Y $ in a category equipped with precylinder structures $ P $ and $ P' $, and assuming the pus\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.BinaryProduct.square\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal\", \"type\": \"∀ {X Y : SSet.Truncated 2}\\n  {x₀ x₁ : X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.Truncated.Edge.tensor._proof_1 })}\\n  (ex : SSet.Truncated.Edge x₀ x₁)\\n  {y₀ y₁ : Y.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.Truncated.Edge.tensor._proof_1 })}\\n  (ey : SSet\", \"doc\": \"In the homotopy category of a 2-truncated simplicial set, for any edges $ e_x $ and $ e_y $, the composition of morphisms $ \\\\text{homMk}(e_x \\\\otimes \\\\text{id}_{y_0}) $ followed by $ \\\\text{homMk}(\\\\text\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned trans lemmas compose homotopies relative to path objects, and the simplicial square lemma concerns an ordinary homotopy category; none is homotopy-pullback pasting."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback.paste_horiz_iff",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.IsPullback.paste_horiz_iff\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X₁₁ X₁₂ X₁₃ X₂₁ X₂₂ X₂₃ : C} {h₁₁ : X₁₁ ⟶ X₁₂} {h₁₂ : X₁₂ ⟶ X₁₃} {h₂₁ : X₂₁ ⟶ X₂₂} {h₂₂ : X₂₂ ⟶ X₂₃} {v₁₁ : X₁₁ ⟶ X₂₁} {v₁₂ : X₁₂ ⟶ X₂₂} {v₁₃ : X₁₃ ⟶ X₂₃} (s : CategoryTheory.IsPullback h₁₂ v₁₂ v₁₃ h₂₂) (e : CategoryTheory.CategoryStruct.comp h₁₁ \", \"doc\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: IsPullback.paste_horiz_iff is ordinary categorical pullback pasting; read Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:243-248. It does not identify ordinary pullbacks with path homotopy pullbacks."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*[Pp]ullback|[Pp]ullback.*homotopy|paste_horiz_iff|leftSquareIsPullback",
+   "results": "[grep] OK 18 hit(s)\n  {\"file\": \"Mathlib/MeasureTheory/Integral/CurveIntegral/Poincare.lean\", \"line\": \"64\", \"text\": \"  -- The overall plan of the proof is to pullback the 1-form to the unit square along the homotopy,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"327\", \"text\": \"  refine (IsPullback.paste_horiz_iff (.flip <| .of_hasPullback _ _) (map_over f)).mp ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"167\", \"text\": \"      have := (IsPullback.paste_horiz_iff (.of_hasPullback f g.coborderRange.ι)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"line\": \"79\", \"text\": \"    (h' : P'.RightHomotopy f₁ f₂) [HasPullback P.p₁ P'.p₀] :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"line\": \"162\", \"text\": \"    (h' : P'.RightHomotopy f₁ f₂) [HasPullback P.p₁ P'.p₀] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"line\": \"199\", \"text\": \"    (isPullback f B').paste_horiz_iff] using\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Assoc.lean\", \"line\": \"110\", \"text\": \"  apply leftSquareIsPullback _ rfl (pullbackIsPullback f₃ f₄)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting.lean\", \"line\": \"26\", \"text\": \"* `leftSquareIsPullback` shows that the left square is a pullback if the other two are.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting.lean\", \"line\": \"121\", \"text\": \"def leftSquareIsPullback (H : IsLimit t₂) (H' : IsLimit (t₂.pasteHoriz t₁ hi₂)) : IsLimit t₁ := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting.lean\", \"line\": \"141\", \"text\": \"  toFun H' := leftSquareIsPullback t₁ _ H H'\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting.lean\", \"line\": \"228\", \"text\": \"    (leftSquareIsPullback _ hi₂ (PullbackCone.flipIsLimit H₁) (PullbackCone.flipIsLimit H₂))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean\", \"line\": \"217\", \"text\": \"  of_isLimit (leftSquareIsPullback (PullbackCone.mk h₁₁ _ p) rfl t.isLimit s.isLimit)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean\", \"line\": \"243\", \"text\": \"theorem paste_horiz_iff {X₁₁ X₁₂ X₁₃ X₂₁ X₂₂ X₂₃ : C} {h₁₁ : X₁₁ ⟶ X₁₂} {h₁₂ : X₁₂ ⟶ X₁₃}\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean\", \"line\": \"620\", \"text\": \"theorem paste_horiz_iff {X₁₁ X₁₂ X₁₃ X₂₁ X₂₂ X₂₃ : C} {h₁₁ : X₁₁ ⟶ X₁₂} {h₁₂ : X₁₂ ⟶ X₁₃}\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean\", \"line\": \"138\", \"text\": \"  PreOneHypercover.Homotopy.isLimitMultiforkEquiv E.fromSaturateOfHasPullbacks\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean\", \"line\": \"139\", \"text\": \"    E.toSaturateOfHasPullbacks E.fromSaturateToSaturateHomotopy\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean\", \"line\": \"28\", \"text\": \"  category of `1`-hypercovers up to homotopy is cofiltered if `C` has pullbacks.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean\", \"line\": \"307\", \"text\": \"/-- If `C` has pullbacks, the category of `1`-hypercovers up to homotopy is cofiltered. -/\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source hits concern ordinary pullback pasting and composition of path-object homotopies; read IsPullback/Basic.lean:215-248 and ModelCategory/RightHomotopy.lean:42-88. None states the spaces assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pasting and cancellation for homotopy pullback squares of spaces or Kan complexes",
+   "results": "OK 8 hits: CategoryTheory.Limits.pasteVertIsPullback, HomotopicalAlgebra.PathObject.RightHomotopy.trans, HomotopicalAlgebra.PathObject.trans_P, CategoryTheory.Limits.pasteHorizIsPullback, CategoryTheory.IsPullback.paste_horiz_iff, CategoryTheory.Limits.pullbackPullbackLeftIsPullback, CategoryTheory.Limits.pasteVertIsPullbackEquiv, HomotopicalAlgebra.PathObject.trans_ι",
+   "date": "2026-10-16",
+   "verdict": "no match: returned ordinary categorical pullback pasting and composition of homotopies; these do not state path homotopy-pullback pasting. Read Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:191-248 and Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:42-88."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pasting homotopy pullback squares Kan complexes",
+   "results": "OK 8 hits: HomotopicalAlgebra.PrepathObject.RightHomotopy.trans_h, HomotopicalAlgebra.PrepathObject.RightHomotopy.trans, SSet.RelativeMorphism.Homotopy.rel_assoc, HomotopicalAlgebra.Precylinder.LeftHomotopy.trans_h, SSet.RelativeMorphism.Homotopy.h₁_assoc, HomotopicalAlgebra.Precylinder.LeftHomotopy.trans, SSet.RelativeMorphism.Homotopy.h₀_assoc, HomotopicalAlgebra.PathObject.RightHomotopy.trans",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary categorical pullback pasting and composition of homotopies; these do not state path homotopy-pullback pasting. Read Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:191-248 and Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:42-88."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*pullback|pullback.*homotopy|paste_horiz_iff",
+   "results": "OK 7 hits: Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean, Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean, Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean, Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean, Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary categorical pullback pasting and composition of homotopies; these do not state path homotopy-pullback pasting. Read Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:191-248 and Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:42-88.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pasting homotopy pullback squares Kan complexes",
+   "results": "OK 8 hits: CategoryTheory.Limits.pasteHorizIsPullback, CategoryTheory.Limits.pullbackLeftPullbackSndIso_hom_snd_assoc, CategoryTheory.IsPullback.paste_horiz, CategoryTheory.IsPullback.paste_vert, CategoryTheory.Limits.leftSquareIsPullback, CategoryTheory.IsPullback.of_bot, CategoryTheory.Limits.pullbackLeftPullbackSndIso_hom_fst_assoc, CategoryTheory.Limits.pullbackLeftPullbackSndIso",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary categorical pullback pasting and composition of homotopies; these do not state path homotopy-pullback pasting. Read Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:191-248 and Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:42-88."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "path space homotopy pullback transitivity specified homotopy",
+   "results": "OK 8 hits: Path.Homotopy.hcomp, Path.Homotopy.transAssoc, HomotopicalAlgebra.PrepathObject.RightHomotopy.trans_h, HomotopicalAlgebra.PrepathObject.RightHomotopy.trans, Path.Homotopic.hcomp, HomotopicalAlgebra.PrepathObject.trans_P, HomotopicalAlgebra.PrepathObject.trans_ι, Path.Homotopy.trans_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary categorical pullback pasting and composition of homotopies; these do not state path homotopy-pullback pasting. Read Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:191-248 and Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:42-88."
+  },
+  {
+   "tool": "leansearch",
+   "query": "path space homotopy pullback transitivity specified homotopy",
+   "results": "OK 8 hits: HomotopicalAlgebra.PrepathObject.RightHomotopy.trans_h, HomotopicalAlgebra.PathObject.RightHomotopy.trans, HomotopicalAlgebra.PrepathObject.RightHomotopy.trans, ContinuousMap.HomotopyWith.trans, ContinuousMap.HomotopyEquiv.trans, Path.Homotopy.trans, Path.Homotopic.trans, Path.Homotopy.trans_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary categorical pullback pasting and composition of homotopies; these do not state path homotopy-pullback pasting. Read Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:191-248 and Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:42-88."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*[Pp]ullback|[Pp]ullback.*homotopy|[Pp]aste.*[Pp]ullback",
+   "subdirectory": "AlgebraicTopology",
+   "results": "OK 2 hits: Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: both hits are the RightHomotopy.trans path-object composition already read at Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean:42-88, not a homotopy-pullback pasting result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homotopy cartesian squares pasting lemma for fibrant simplicial sets",
+   "results": "OK 8 hits: HomotopicalAlgebra.FibrantObject.homMk_homMk, HomotopicalAlgebra.PathObject.trans_ι, HomotopicalAlgebra.PathObject.trans_P, HomotopicalAlgebra.BifibrantObject.homMk_homMk, HomotopicalAlgebra.FibrantObject.homMk_homMk_assoc, HomotopicalAlgebra.PathObject.instIsGoodTrans, HomotopicalAlgebra.PathObject.trans, HomotopicalAlgebra.PathObject.RightHomotopy.homotopy_extension",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. PathObject.trans (Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean:276-286) constructs a path object by gluing; RightHomotopy.trans (RightHomotopy.lean:160-164) composes homotopies. Neither asserts homotopy-pullback cancellation. The grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.?[Cc]artesian|[Hh]omotopy[Pp]ullback|homotopy.?pullback",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader grep returned no hits for homotopy-cartesian and homotopy-pullback terminology."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.PathObject.trans",
+   "results": "OK 7 hits: HomotopicalAlgebra.PathObject.trans, HomotopicalAlgebra.PathObject.instIsGoodTrans, HomotopicalAlgebra.PathObject.trans_P, HomotopicalAlgebra.PathObject.trans_ι, HomotopicalAlgebra.PathObject.trans_p₀, HomotopicalAlgebra.PathObject.trans_p₁, HomotopicalAlgebra.PathObject.RightHomotopy.trans",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. PathObject.trans (Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean:276-286) constructs a path object by gluing; RightHomotopy.trans (RightHomotopy.lean:160-164) composes homotopies. Neither asserts homotopy-pullback cancellation. The grep returned no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-cocartesian-composition-initiality",
+  "date": "2026-10-17",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-homotopy-pullback-pasting",
+  "worker": "stage1",
+  "blueprint": "The steps supply the generic homotopy-pullback pasting calculation used in Step 1 of lem-coef-infinity-cocartesian-composition-initiality, through the inherited chain to prop-coef-integral-exceptional-adjoint paragraph 2 (finite mapping-complex adjunction before R lim).",
+  "summary": "Restored the absent split from the saved draft and verified six steps: endpoint fibrations, mapping-path replacements, a strict comparison built by relative triangle lifting, its base change, cancellation by two-out-of-three, and independence of the concatenation representative. The latter now uses endpoint trivial fibrations rather than topological realization. No new nodes or statement changes. Second reading made the two endpoint-pair base changes explicit and corrected the weak-equivalence wording; the six-step argument and statement are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N1-ec0741a31",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-ec0741a31 (reviewer sub-agent of L); spot-checked: Read the item, all six steps and the full statements of all six cited nodes. Checked the source online at Kerodon Prop 3.4.1.11 (Tag 0110, Transitivity): commutative simplicial sets, right square a homotopy pullback, then left square ⇔ outer rectangle. The item states exactly this restricted to Kan complexes with the path model. The specified-homotopy clause goes beyond Kerodon; the delivery says so and proves it itself, so proof_origin=agent and the archive WANTED are right. No SGA is cited. Step 1: the endpoint-pair and single-endpoint lifting problems transpose to anodyne pushout-products (mono ∂I→I or ∂Δⁿ→Δⁿ against an anodyne horn), and the boundary characterization includes n=0. Step 2: E→C×C' and Q0→D×C' are pullbacks of (ev0,ev1) along c×id and g×k; C and D Kan make p and q fibrations; E→C is a trivial fibration, so j is a weak equivalence; r is a weak equivalence by hypothesis with the given η. Step 3: the horn data (η_x, kλ) agrees with the degenerate triangle (0,1,1) on j(C); the domain is the pushout-product of j with Λ²₁; F has the right endpoints, qF=p and Fj=r hold, and F is a weak equivalence by 2-of-3. Step 4: the fibration-invariance hypotheses hold exactly (α=F, β=id, γ=id, p and q fibrations); the identifications with P(c,h) and P(g,kh) are degreewise. Step 5: F_h∘l equals the outer comparison with the triangle-filler concatenation, and 2-of-3 gives left ⇔ outer. Step 6: the relative J-horn extension has fixed endpoints, M^J→M are trivial fibrations, so the result does not depend on the filler; in the strict case the outer path is constant. Edge cases: empty spaces, point spaces, discrete spaces, and pt→{0,1}→pt showing the right-square hypothesis is needed. proof_deps equal the union of uses, there is no cycle (140-node closure), and the route stays in unit sk-prop-sf-biduality-general apart from the definition def-cbc. No tool uses. No new nodes. rg duplicate search: lem-coef-sharp-pullback-calculus, lem-coef-kan-homotopy-pullback-invariance and lem-coef-rezk-diagonal-sharp do not state this; lem-coef-relative-right-kan-universal-restriction does a similar cancellation inline but is a consumer. No changes."
+ }
+}

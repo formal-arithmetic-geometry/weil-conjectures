@@ -30,83 +30,18 @@
  ],
  "proof": [
   {
-   "text": "Write $I=\\{\\partial\\Delta^n\\hookrightarrow\\Delta^n:n\\geq0\\}$, $J=\\{\\Lambda_i^n\\hookrightarrow\\Delta^n:n\\geq1,0\\leq i\\leq n\\}$, $F=J^{\\pitchfork}$ and $A={}^{\\pitchfork}F$. Limits and colimits of simplicial sets are computed degreewise: take the corresponding set limit or quotient disjoint union and let every simplicial operator act on representatives. The finite boundary and horn domains satisfy the smallness hypothesis with $\\kappa=\\aleph_0$: their maps into an increasing ordinal chain are determined by finitely many face simplices with finitely many equations, so all images and equations occur at one stage. The cellular small-object theorem gives functorial weak factorizations $({}^{\\pitchfork}(I^{\\pitchfork}),I^{\\pitchfork})$ and $(A,F)$; its retract formula identifies $A$ with retracts of $J$-cell maps. Boundary and horn cell maps are degreewise injective, because pushouts, coproducts and continuous ordinal unions of injections of sets are injections. Every monomorphism is an $I$-cell map by the boundary-cell decomposition, so ${}^{\\pitchfork}(I^{\\pitchfork})$ is exactly the monomorphisms. Here an $I$-cell map lifts against $I^{\\pitchfork}$ by successively choosing fillers at successor stages and taking their union at limits; the converse lifting class follows by factoring and taking the resulting arrow retract.",
+   "text": "Apply [lem-coef-kan-quillen-model-right-proper-core] to obtain all the asserted model-category, cellular, lifting and right-properness clauses. Its proof is independent of coherent localization. In the remaining two steps, references to steps 3–4 and steps 1–4 mean the corresponding boundary-lifting and model identifications supplied by this core theorem. Write $W,C,F$ for weak equivalences, monomorphisms and Kan fibrations, and $I$ for the boundary inclusions, as in the core proof.",
    "uses": [
-    "lem-coef-small-object-cell-factorization",
-    "lem-coef-infinity-monomorphism-boundary-cells"
+    "lem-coef-kan-quillen-model-right-proper-core"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
-    "place": "Propositions 3.2.2–3.2.3; small-object construction and retract argument."
+    "place": "Propositions 3.2.2–3.2.3, Theorems 3.6.4–3.6.5; extracted model/right-proper clauses, without coherent localization."
    }
   },
   {
-   "text": "Realization preserves the colimits in a $J$-cell construction, and sends each generating horn pair to $(D^{n-1}\\times[0,1],D^{n-1}\\times\\{0\\})$. The Serre model theorem says these inclusions and their pushouts, coproducts, transfinite composites and retracts are topological trivial cofibrations. Consequently realization sends every retract of a $J$-cell map to a weak homotopy equivalence. Thus $A\\subseteq W$, and step 1 already gives $A\\subseteq C$, where $C$ is the monomorphisms.",
-   "uses": [
-    "lem-coef-realization-finite-limits",
-    "lem-coef-topological-serre-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
-    "place": "Lemma 3.2.4; the realized boundary/horn-pair paragraph after Proposition 3.2.2 and immediately before Proposition 3.2.3; Theorem 2.4.23 for the topological trivial cofibrations."
-   }
-  },
-  {
-   "text": "If $p\\in I^{\\pitchfork}$, the $n=0$ lifting condition says exactly that $p_0$ is surjective, so the stated trivial-Kan definition applies. The trivial-Kan homotopy theorem supplies $g$ with $pg=1$ and $h:X\\times\\Delta^1\\to X$ from $1$ to $gp$. Finite-product preservation of realization turns $h$ into an ordinary homotopy, so $|g|$ is a homotopy inverse of $|p|$, and $p\\in W$. Also $p$ lifts against every monomorphism by the boundary-cell description and the recursive lifting argument of step 1; in particular it lifts against horns. Hence $I^{\\pitchfork}\\subseteq F\\cap W$.",
-   "uses": [
-    "def-weil-pbc-trivial-kan-fibration",
-    "lem-weil-pbc-trivial-kan-homotopy-equivalence",
-    "lem-coef-realization-finite-limits",
-    "lem-coef-infinity-monomorphism-boundary-cells"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tags 08NL (definition-trivial-kan), 08NS (lemma-trivial-kan-homotopy); Hovey Lemma 3.1.8 for realized cylinder."
-   }
-  },
-  {
-   "text": "Conversely let $p\\in F\\cap W$. Its realization is a Serre fibration and a weak homotopy equivalence. For a vertex $y$ of the target, component-surjectivity gives a point over the component of $y$, and lifting a path to $y$ makes the fibre nonempty. The fibre exact sequence makes all positive homotopy groups of that fibre zero: use the isomorphisms on $\\pi_{n+1}$ and $\\pi_n$ of total and base spaces. Its component set is a single orbit since $\\pi_0$ of the total maps injectively to the base; the stabilizer of one fibre component is the image of $\\pi_1$ of the total, which is all of $\\pi_1$ of the base. Thus the fibre is connected. Realization preserves this vertex fibre. The simplicial fibre is Kan, since each horn problem is a horn problem for $p$ with constant base simplex. The identification of its realization with the nonempty connected topological fibre shows that this simplicial fibre is weakly contractible. Indeed every point of a realization lies in a simplex and is joined inside that simplex to a vertex; changing the basepoint along this path identifies its positive homotopy groups with those at the vertex, which vanish by the fibre exact sequence. A Kan fibration is in particular a right fibration, since the horns with $0<i\\leq n$ are among all horns. Thus [lem-coef-right-fibration-contractible-fibers] applies to $p$ and gives a trivial Kan fibration in the boundary-lifting sense, including dimension zero. Hence $p\\in I^{\\pitchfork}$. This proves $F\\cap W=I^{\\pitchfork}$ without assuming that the base simplicial set is Kan.",
-   "uses": [
-    "lem-coef-kan-realization-serre",
-    "lem-coef-serre-homotopy-exact-sequence",
-    "lem-coef-realization-finite-limits",
-    "lem-coef-right-fibration-contractible-fibers"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
-    "place": "Corollary 3.6.2 and proof of Theorem 3.6.4 for the realized fibre argument; Kerodon Proposition 4.4.2.14 (01NU), implication (3) to (1), for boundary lifting from a right fibration with weakly contractible Kan fibres."
-   }
-  },
-  {
-   "text": "To obtain the other model factorization, factor any $i:X\\to Y$ in $C\\cap W$ as $X\\xrightarrow{j}Z\\xrightarrow{q}Y$ with $j\\in A$ and $q\\in F$. By step 2 and two-out-of-three, $q\\in F\\cap W=I^{\\pitchfork}$. Since $i$ is a monomorphism, step 1 gives a lift $s:Y\\to Z$ satisfying $si=j$ and $qs=1_Y$. The arrow maps $(1_X,s)$ and $(1_X,q)$ exhibit $i$ as a retract of $j$, so $i\\in A$; a lifting class is closed under arrow retracts by composing the square with the retract maps. Together with step 2 this gives $A=C\\cap W$. The two functorial weak factorizations from step 1 are therefore $(C,F\\cap W)$ and $(C\\cap W,F)$. Since $W$ is defined by realization, the two-out-of-three and retract assertions for $W$ are exactly the corresponding assertions for the topological weak-equivalence class in [lem-coef-topological-serre-model], transported across the functorial realization; no further recognition theorem is being invoked. These are precisely the model axioms. The map $X\\to *$ is in $F$ exactly when $X$ fills every horn, so the fibrant objects are exactly the Kan complexes. The boundary and horn cellular assertions and the boundary characterization of trivial fibrations are the descriptions already established in steps 1–4.",
-   "uses": [
-    "lem-coef-topological-serre-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
-    "place": "Retract argument in Theorem 3.6.5 and the two weak factorization systems."
-   }
-  },
-  {
-   "text": "Let $g:B'\\to B$ belong to $W$ and let $p:E\\to B$ belong to $F$, with no fibrancy assumption on either base. Realization identifies the pullback square with the pullback of the Serre fibration $|p|$. Its two fibres at a point $b'\\in|B'|$ are identical. Compare the natural fibre exact sequences. The base maps induce isomorphisms of all based homotopy groups; the fibre maps are identities. Write $f:E'\\to E$ and $q:E'\\to B'$ for the realized pullback maps and fix $e'\\in E'$. For $n\\geq1$ and $z\\in\\pi_n(E,f(e'))$, choose $t\\in\\pi_n(B',q(e'))$ mapping to $p_*z$. Its connecting image is zero (the distinguished component when $n=1$), since the fibre map is the identity. Exactness gives $z'\\in\\pi_n(E',e')$ with $q_*z'=t$. The class $z(f_*z')^{-1}$ has zero base image, so equals the image of a fibre class $a$; multiplying $z'$ by the image of $a$ on the left gives a preimage of $z$. For injectivity, suppose $f_*u=1$. The base isomorphism gives $q_*u=1$, so $u$ is the image of a fibre class $a$. Its image in $\\pi_n(E)$ is zero, so exactness writes $a=\\delta c$ for some $c\\in\\pi_{n+1}(B)$. Lift $c$ through the base isomorphism to $c'\\in\\pi_{n+1}(B')$; naturality and the identity fibre map give $a=\\delta c'$, so its image $u$ is zero. These ordered products also prove the $n=1$ case without commutativity. On components, over each component of $B$ with a nonempty fibre, components of $E$ are the orbits of the $\\pi_1$-action on the fibre-component set. Choose a component of $B'$ mapping to it, move the chosen basepoint along a path, and use path lifting to identify these fibre sets. The isomorphism on $\\pi_1$ identifies the actions and hence their orbit sets; $\\pi_0(g)$ bijective identifies the indexing base components, including those with empty fibres. Thus the total-space map is bijective on components too. It is a weak homotopy equivalence, proving right properness.",
-   "uses": [
-    "lem-coef-realization-finite-limits",
-    "lem-coef-kan-realization-serre",
-    "lem-coef-serre-homotopy-exact-sequence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
-    "place": "Proposition 2.4.18 and its proof, applied after Lemma 3.2.4 and Corollary 3.6.2."
-   }
-  },
-  {
-   "text": "Consider the ordinary category of Kan complexes with the restrictions of $W$ and $F$. Its terminal object is Kan. Maps to the terminal object belong to $F$; composition and base change preserve $F$ because a horn lifting problem reduces to the corresponding lifting problem before composition or pullback. A pullback of Kan complexes along a fibration is Kan by composing its fibration to its Kan base with the map to the terminal object. Trivial fibrations are $I^{\\pitchfork}$ by steps 3–4, so they too are stable under pullback by the same lifting argument. The functorial $(C\\cap W,F)$ factorization of a map between Kan complexes has Kan intermediate object, since its second leg is a fibration over a Kan complex. All the hypotheses of the fibrant-category localization theorem are now verified. It follows that localization sends each strict pullback along a fibration between Kan complexes to a limiting coherent square, naturally as a cone.",
+   "text": "Consider the ordinary category of Kan complexes with the restrictions of $W$ and $F$. Its terminal object is Kan. Maps to the terminal object belong to $F$; composition and base change preserve $F$ because a horn lifting problem reduces to the corresponding lifting problem before composition or pullback. A pullback of Kan complexes along a fibration is Kan by composing its fibration to its Kan base with the map to the terminal object. Trivial fibrations are $I^{\\pitchfork}$ by the core theorem, so they too are stable under pullback by the same lifting argument. The functorial $(C\\cap W,F)$ factorization of a map between Kan complexes has Kan intermediate object, since its second leg is a fibration over a Kan complex. All the hypotheses of the fibrant-category localization theorem are now verified. It follows that localization sends each strict pullback along a fibration between Kan complexes to a limiting coherent square, naturally as a cone.",
    "uses": [
     "lem-coef-brown-fibrant-localization-pullbacks"
    ],
@@ -117,7 +52,7 @@
    }
   },
   {
-   "text": "For $A\\to C\\leftarrow B$ with $A,B,C$ Kan, factor the first leg as $A\\xrightarrow{w}A'\\xrightarrow{p}C$ with $w\\in W$ and $p\\in F$. The object $A'$ and the strict pullback $P=A'\\times_CB$ are Kan, as in step 7. The image of this strict pullback cone is limiting by step 7. Let $D$ and $D'$ be the two cospan diagrams and let $\\alpha:D\\to D'$ have components $w,1_C,1_B$. Every component is an equivalence, so the enhanced functor-and-cone calculus makes $\\alpha$ an equivalence in the cospan functor quasicategory; choose an inverse $\\beta$ and the coherent inverse homotopies supplied there. Postcomposition with $\\alpha$ sends a cone $\\Delta_Kx\\to D$ to a cone $\\Delta_Kx\\to D'$, while postcomposition with $\\beta$ sends cones back, and the two coherent inverse homotopies give mutually inverse equivalences of the two cone quasicategories. Equivalences of mapping spaces therefore carry terminal cones to terminal cones, so the limiting cone on $P$ for $D'$ transports to a limiting cone for $D$. The same argument works for any weak-equivalence/fibration factorization of either leg. The full subcategory of terminal cones is a contractible Kan complex by the cone calculus; hence the space of comparisons of any two transported limiting cones is contractible. These comparisons are natural in maps of cospans, with the higher compatibilities supplied by the same coherent inverse homotopies. This is independence as a space with its limiting cone, not a claim of a preferred strict isomorphism of simplicial sets.",
+   "text": "For $A\\to C\\leftarrow B$ with $A,B,C$ Kan, factor the first leg as $A\\xrightarrow{w}A'\\xrightarrow{p}C$ with $w\\in W$ and $p\\in F$. The object $A'$ and the strict pullback $P=A'\\times_CB$ are Kan, as in the preceding step. The image of this strict pullback cone is limiting by the preceding step. Let $D$ and $D'$ be the two cospan diagrams and let $\\alpha:D\\to D'$ have components $w,1_C,1_B$. Every component is an equivalence, so the enhanced functor-and-cone calculus makes $\\alpha$ an equivalence in the cospan functor quasicategory; choose an inverse $\\beta$ and the coherent inverse homotopies supplied there. Postcomposition with $\\alpha$ sends a cone $\\Delta_Kx\\to D$ to a cone $\\Delta_Kx\\to D'$, while postcomposition with $\\beta$ sends cones back, and the two coherent inverse homotopies give mutually inverse equivalences of the two cone quasicategories. Equivalences of mapping spaces therefore carry terminal cones to terminal cones, so the limiting cone on $P$ for $D'$ transports to a limiting cone for $D$. The same argument works for any weak-equivalence/fibration factorization of either leg. The full subcategory of terminal cones is a contractible Kan complex by the cone calculus; hence the space of comparisons of any two transported limiting cones is contractible. These comparisons are natural in maps of cospans, with the higher compatibilities supplied by the same coherent inverse homotopies. This is independence as a space with its limiting cone, not a claim of a preferred strict isomorphism of simplicial sets.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "lem-cbc-enhanced-functor-cone-calculus"
@@ -130,15 +65,7 @@
   }
  ],
  "proof_deps": [
-  "lem-coef-small-object-cell-factorization",
-  "lem-coef-infinity-monomorphism-boundary-cells",
-  "lem-coef-realization-finite-limits",
-  "lem-coef-topological-serre-model",
-  "def-weil-pbc-trivial-kan-fibration",
-  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
-  "lem-coef-kan-realization-serre",
-  "lem-coef-serre-homotopy-exact-sequence",
-  "lem-coef-right-fibration-contractible-fibers",
+  "lem-coef-kan-quillen-model-right-proper-core",
   "lem-coef-brown-fibrant-localization-pullbacks",
   "def-cbc-enhanced-diagrams-cones",
   "lem-cbc-enhanced-functor-cone-calculus"

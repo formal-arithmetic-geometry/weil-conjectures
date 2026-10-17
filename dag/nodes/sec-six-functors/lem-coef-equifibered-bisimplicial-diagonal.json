@@ -23,21 +23,21 @@
  },
  "kind": "statement",
  "title": "Homotopy fibers of equifibered diagrams of Kan fibrations survive the diagonal",
- "statement": "Use small simplicial sets, Kan complexes, homotopy fibers and weak homotopy equivalences from [def-cbc-enhanced-diagrams-cones] and the Kan model structure of [lem-coef-kan-quillen-right-proper]. Let $X_\\bullet,Y_\\bullet:\\Delta^{\\mathrm{op}}\\to\\mathrm{sSet}$ be small simplicial diagrams of Kan complexes, and let $p:X_\\bullet\\to Y_\\bullet$ be a natural transformation such that every $p_m:X_m\\to Y_m$ is a Kan fibration. Suppose that for every $\\alpha:[m]\\to[n]$ in $\\Delta$ the naturality square\n$$\\begin{array}{ccc}X_n&\\xrightarrow{X(\\alpha)}&X_m\\\\ p_n\\downarrow&&\\downarrow p_m\\\\ Y_n&\\xrightarrow{Y(\\alpha)}&Y_m\\end{array}$$\nis a homotopy pullback. For $Z=X,Y$ put $(\\operatorname{diag}Z)_q=(Z_q)_q$ with both operators applied simultaneously. The unique maps $[m]\\to[0]$ induce maps from the constant diagrams on $X_0,Y_0$, hence maps $\\iota_X:X_0\\to\\operatorname{diag}X$ and $\\iota_Y:Y_0\\to\\operatorname{diag}Y$. Then\n$$\\begin{array}{ccc}X_0&\\xrightarrow{\\iota_X}&\\operatorname{diag}X\\\\ p_0\\downarrow&&\\downarrow\\operatorname{diag}p\\\\ Y_0&\\xrightarrow{\\iota_Y}&\\operatorname{diag}Y\\end{array}$$\nis a homotopy pullback, naturally in $p$. Equivalently, for each vertex $y\\in Y_0$, the canonical comparison from the strict fiber $p_0^{-1}(y)$ to the homotopy fiber of $\\operatorname{diag}p$ at $\\iota_Y(y)$ is a weak homotopy equivalence. Homotopy pullbacks and homotopy fibers involving a non-Kan diagonal are computed after functorial Kan replacement of the corresponding diagram. No Reedy fibrancy of the diagrams or Kan condition on their diagonals is assumed.",
+ "statement": "Use small simplicial sets, Kan complexes, homotopy fibers and weak homotopy equivalences from [def-cbc-enhanced-diagrams-cones] and the Kan model structure of [lem-coef-kan-quillen-model-right-proper-core]. Let $X_\\bullet,Y_\\bullet:\\Delta^{\\mathrm{op}}\\to\\mathrm{sSet}$ be small simplicial diagrams of Kan complexes, and let $p:X_\\bullet\\to Y_\\bullet$ be a natural transformation such that every $p_m:X_m\\to Y_m$ is a Kan fibration. Suppose that for every $\\alpha:[m]\\to[n]$ in $\\Delta$ the naturality square\n$$\\begin{array}{ccc}X_n&\\xrightarrow{X(\\alpha)}&X_m\\\\ p_n\\downarrow&&\\downarrow p_m\\\\ Y_n&\\xrightarrow{Y(\\alpha)}&Y_m\\end{array}$$\nis a homotopy pullback. For $Z=X,Y$ put $(\\operatorname{diag}Z)_q=(Z_q)_q$ with both operators applied simultaneously. The unique maps $[m]\\to[0]$ induce maps from the constant diagrams on $X_0,Y_0$, hence maps $\\iota_X:X_0\\to\\operatorname{diag}X$ and $\\iota_Y:Y_0\\to\\operatorname{diag}Y$. Then\n$$\\begin{array}{ccc}X_0&\\xrightarrow{\\iota_X}&\\operatorname{diag}X\\\\ p_0\\downarrow&&\\downarrow\\operatorname{diag}p\\\\ Y_0&\\xrightarrow{\\iota_Y}&\\operatorname{diag}Y\\end{array}$$\nis a homotopy pullback, naturally in $p$. Equivalently, for each vertex $y\\in Y_0$, the canonical comparison from the strict fiber $p_0^{-1}(y)$ to the homotopy fiber of $\\operatorname{diag}p$ at $\\iota_Y(y)$ is a weak homotopy equivalence. Homotopy pullbacks and homotopy fibers involving a non-Kan diagonal are computed after functorial Kan replacement of the corresponding diagram. No Reedy fibrancy of the diagrams or Kan condition on their diagonals is assumed.",
  "source": {
   "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
   "place": "Theorem 6.1 and Propositions 2.2, 2.7, specialized to simplicial sets, with Remark 6.8 for rowwise equivalences; printed pp. 3-4, 11-12. The row-zero comparison follows by pulling the diagram back along the constant diagram on Y_0. Also the realization-fiber argument in Rezk, A model for the homotopy theory of homotopy theory, Section 14, pp. 33-34. Read online; not archived in literature/. No Stacks tag states this result."
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-model-right-proper-core"
  ],
  "proof": [
   {
-   "text": "Each $p_m$ is sharp in the sense of [lem-coef-rezk-diagonal-sharp]. Indeed, for an arbitrary $a:A\\to Y_m$, factor $a$ as a weak equivalence $A\\to A'$ followed by a Kan fibration $A'\\to Y_m$. Since $Y_m$ is Kan, $A'$ is Kan. The pullback $A'\\times_{Y_m}X_m$ models the homotopy pullback by [lem-coef-kan-quillen-right-proper]. The map $A\\times_{Y_m}X_m\\to A'\\times_{Y_m}X_m$ is the pullback of $A\\to A'$ along a Kan fibration (the base change of $p_m$), hence is a weak equivalence by right properness. Stability of Kan fibrations under pullback follows directly by projecting a horn lifting problem, lifting for $p_m$, and pairing the lift with its given base coordinate. Thus the strict pullback square is homotopy cartesian, as required.",
+   "text": "Each $p_m$ is sharp in the sense of [lem-coef-rezk-diagonal-sharp]. Indeed, the general non-Kan strict-pullback criterion proved in step 1(b) of [lem-coef-sharp-pullback-calculus] applies to every Kan fibration, without any fibrancy assumption on the other leg or its source. It says that every strict pullback square of $p_m$ along an arbitrary $A\\to Y_m$ is homotopy cartesian: its comparison to the strict pullback is the identity. Hence $p_m$ is sharp. This criterion was proved there directly using the independent model/right-proper core, path comparison and path-model invariance, so no coherent-localization assertion is used.",
    "uses": [
     "lem-coef-rezk-diagonal-sharp",
-    "lem-coef-kan-quillen-right-proper"
+    "lem-coef-sharp-pullback-calculus"
    ],
    "elementary": true,
    "source": {
@@ -68,10 +68,11 @@
    }
   },
   {
-   "text": "Fix $\\alpha:[m]\\to[n]$ and put $P=X_m\\times_{Y_m}Y_n$. Since $p_m$ is a Kan fibration, $P$ represents the homotopy pullback of this cospan, by [lem-coef-kan-quillen-right-proper]. The hypothesized homotopy-cartesian square therefore says that $e:X_n\\to P$, $x\\mapsto(X(\\alpha)x,p_nx)$, is a weak equivalence. Both $X_n\\to Y_n$ and $P\\to Y_n$ are Kan fibrations: the first is $p_n$, and the second is a base change of $p_m$, whose horn-lifting property follows as in step 1. Apply [lem-coef-kan-pullback-fibration-invariance] to the cospans $X_n\\to Y_n\\leftarrow T$ and $P\\to Y_n\\leftarrow T$, with comparison maps $e,1_{Y_n},1_T$ and the same map $b_n:T\\to Y_n$. It gives a weak equivalence $G_n\\to P\\times_{Y_n}T$. By the pullback equations this target is $G_m$, and the map is exactly the operator map in step 3. Thus every structure map of $G$ is a weak equivalence; no fibration hypothesis on $b_n$ has been used.",
+   "text": "Fix $\\alpha:[m]\\to[n]$ and put $P=X_m\\times_{Y_m}Y_n$. Since $p_m$ is a Kan fibration, $P$ represents the homotopy pullback of this cospan, by [lem-coef-kan-pullback-path-comparison]. The hypothesized homotopy-cartesian square therefore says that $e:X_n\\to P$, $x\\mapsto(X(\\alpha)x,p_nx)$, is a weak equivalence. Both $X_n\\to Y_n$ and $P\\to Y_n$ are Kan fibrations: the first is $p_n$, and the second is a base change of $p_m$, whose horn-lifting property follows as in step 1. Apply [lem-coef-kan-pullback-fibration-invariance] to the cospans $X_n\\to Y_n\\leftarrow T$ and $P\\to Y_n\\leftarrow T$, with comparison maps $e,1_{Y_n},1_T$ and the same map $b_n:T\\to Y_n$. It gives a weak equivalence $G_n\\to P\\times_{Y_n}T$. By the pullback equations this target is $G_m$, and the map is exactly the operator map in step 3. Thus every structure map of $G$ is a weak equivalence; no fibration hypothesis on $b_n$ has been used.",
    "uses": [
-    "lem-coef-kan-quillen-right-proper",
-    "lem-coef-kan-pullback-fibration-invariance"
+    "lem-coef-kan-quillen-model-right-proper-core",
+    "lem-coef-kan-pullback-fibration-invariance",
+    "lem-coef-kan-pullback-path-comparison"
    ],
    "elementary": false,
    "source": {
@@ -91,9 +92,9 @@
    }
   },
   {
-   "text": "For $T=Y_0$ and $t=1$, step 5 identifies $X_0=G_0$ by a weak equivalence with the strict pullback of $\\operatorname{diag}p$ along $\\iota_Y$. By step 2 that strict pullback maps by a weak equivalence to the homotopy pullback. The composite is the comparison from the square in the statement, so two-out-of-three in [lem-coef-kan-quillen-right-proper] proves that square homotopy cartesian. For $T=\\Delta^0$ and $t=y$, step 5 instead gives $p_0^{-1}(y)\\simeq\\operatorname{diag}G$, while step 2 identifies this strict pullback with the homotopy fiber at $\\iota_Y(y)$. Their composite is exactly the asserted strict-to-homotopy-fiber map. A map of natural transformations sends every pair $(x,u)$ in step 3 to the pair of its images; the formulas for $v_m$ and the projections commute with these maps. Together with the functorial diagram replacements stipulated in the statement, this proves naturality. This argument never takes a strict fiber of an arbitrary weak equivalence and never assumes the diagonals are Kan.",
+   "text": "For $T=Y_0$ and $t=1$, step 5 identifies $X_0=G_0$ by a weak equivalence with the strict pullback of $\\operatorname{diag}p$ along $\\iota_Y$. By step 2 that strict pullback maps by a weak equivalence to the homotopy pullback. The composite is the comparison from the square in the statement, so two-out-of-three in [lem-coef-kan-quillen-model-right-proper-core] proves that square homotopy cartesian. For $T=\\Delta^0$ and $t=y$, step 5 instead gives $p_0^{-1}(y)\\simeq\\operatorname{diag}G$, while step 2 identifies this strict pullback with the homotopy fiber at $\\iota_Y(y)$. Their composite is exactly the asserted strict-to-homotopy-fiber map. A map of natural transformations sends every pair $(x,u)$ in step 3 to the pair of its images; the formulas for $v_m$ and the projections commute with these maps. Together with the functorial diagram replacements stipulated in the statement, this proves naturality. This argument never takes a strict fiber of an arbitrary weak equivalence and never assumes the diagonals are Kan.",
    "uses": [
-    "lem-coef-kan-quillen-right-proper"
+    "lem-coef-kan-quillen-model-right-proper-core"
    ],
    "elementary": true,
    "source": {
@@ -104,10 +105,12 @@
  ],
  "proof_deps": [
   "lem-coef-rezk-diagonal-sharp",
-  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-kan-quillen-model-right-proper-core",
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-kan-pullback-fibration-invariance",
-  "lem-coef-bisimplicial-diagonal-equivalence"
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-sharp-pullback-calculus"
  ],
  "proof_origin": {
   "by": "agent",

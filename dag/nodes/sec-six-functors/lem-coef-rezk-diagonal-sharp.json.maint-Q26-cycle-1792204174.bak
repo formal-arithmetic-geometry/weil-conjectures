@@ -1,0 +1,249 @@
+{
+ "id": "lem-coef-rezk-diagonal-sharp",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, displayed derived coefficient adjunction: the diagonal/coherent comparison. Rezk, Fibrations and Homotopy Colimits of Simplicial Sheaves, Theorem 6.1 and Proposition 2.2, for sharpness of the diagonal of an equifibered simplicial object.",
+   "via": [
+    "lem-coef-equifibered-bisimplicial-diagonal",
+    "lem-coef-rezk-explicit-completion",
+    "lem-coef-segal-dk-diagonal-equivalence",
+    "lem-coef-diagonal-coherent-nerve-comparison",
+    "lem-coef-cofibrant-simplicial-inversion",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Rezk diagonal sharpness for equifibered simplicial diagrams",
+ "statement": "Use small simplicial sets and weak homotopy equivalences from [def-cbc-enhanced-diagrams-cones] and the Kan--Quillen model structure from [lem-coef-kan-quillen-right-proper]. A commutative square is homotopy cartesian when its upper-left corner maps by a weak homotopy equivalence to the homotopy pullback of the other three corners; for non-Kan objects this is computed after functorial fibrant replacement of the diagram. Call a map $g:E\\to B$ sharp if every strict pullback square along every small simplicial map $A\\to B$ is homotopy cartesian. Let $X,Y:\\Delta^{\\mathrm{op}}\\to\\mathrm{sSet}$ be simplicial diagrams and $p:X\\to Y$ a natural transformation. Suppose each $p_m:X_m\\to Y_m$ is sharp and every naturality square for an operator $[m]\\to[n]$ in $\\Delta$ is homotopy cartesian. Put $(\\operatorname{diag}Z)_q=(Z_q)_q$ for $Z=X,Y$, with both operators applied simultaneously. Then $\\operatorname{diag}p$ is sharp. Neither the rows nor the diagonals are required to be Kan, and no Reedy fibrancy is assumed.",
+ "source": {
+  "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+  "place": "Theorem 6.1, printed pp. 11-12; Proposition 2.7, printed p. 4, identifies the definition of sharpness with universal homotopy-cartesianness. Read online, not archived in literature/. No Stacks tag states this result."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-sharp-pullback-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Set $C_nZ=Z_n\\times\\Delta^n$, $B_nZ=Z_n\\times\\partial\\Delta^n$, and let $L_nZ\\subset Z_n$ be the union of the images of the proper horizontal degeneracies. Define $F_nZ\\subset\\operatorname{diag}Z$ in degree $q$ as the union of the images of $(Z_k)_q\\times\\operatorname{Hom}_\\Delta([q],[k])$ for $k\\le n$, by $(z,\\alpha)\\mapsto Z(\\alpha)(z)$. The unique horizontal nondegenerate decomposition from [lem-weil-pbc-simplicial-set-nondegenerate-decomposition], applied separately at every vertical degree, gives $F_0Z=Z_0$, inclusions $F_{n-1}Z\\subset F_nZ$, and union $\\bigcup_nF_nZ=\\operatorname{diag}Z$. For $n\\ge1$, put $D_nZ=L_nZ\\times\\Delta^n$, $I_nZ=L_nZ\\times\\partial\\Delta^n$, and $A_nZ=B_nZ\\amalg_{I_nZ}D_nZ\\subset C_nZ$. There is a pushout $F_nZ=F_{n-1}Z\\amalg_{A_nZ}C_nZ$. Indeed a pair $(z,\\alpha)$ with nonsurjective $\\alpha$ is represented in a lower horizontal degree; a horizontally degenerate $z$ is represented through its degeneracy ancestor. These are exactly $B_nZ$ and $D_nZ$. Outside their union, $z$ is horizontally nondegenerate and $\\alpha$ is surjective, and uniqueness of its ancestor identifies no two remaining pairs. This verifies the pushout degreewise and is compatible with vertical operators. All displayed subobject maps are monomorphisms.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Equation (6.2) and Section 6.7; explicit degreewise nondegenerate-decomposition verification"
+   }
+  },
+  {
+   "text": "Use the relative-cocone clause of [lem-coef-sharp-special-colimit-gluing] in the following explicit form. For any of its three diagram shapes, a compatible cocone $U_i\\to E$ over $V_i\\to H$, with $E\\to H$ sharp and each component cocone square homotopy cartesian, induces a homotopy-cartesian colimit square. This applies to the finite degeneracy cubes, finite face diagrams and the two spans below: each time the diagram's cofibrancy or monomorphic-leg condition, its sharp components, and both its internal and cocone squares are checked before applying the clause. The target sharp map is specified separately on each use; it is either $p_n$, a product of $p_n$, or an already constructed $F_{n-1}X\\to F_{n-1}Y$. Thus no general model-localization theorem, and no result whose dependencies run through this diagonal theorem, is needed.",
+   "uses": [
+    "lem-coef-sharp-special-colimit-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Proposition 8.1 with its relative-cocone consequence from finite and sequential cofibrant colimit invariance; see the new lemma statement"
+   }
+  },
+  {
+   "text": "Induct on $n$ with the strengthened assertion: $F_nX\\to F_nY$ is sharp, and the square $C_kX\\to F_nX$ over $C_kY\\to F_nY$ is homotopy cartesian for every $0\\le k\\le n$. For $n=0$ this is the hypothesis on $p_0$ and the identity square, since $\\Delta^0$ is terminal. By [lem-coef-sharp-pullback-calculus], every product $p_k\\times\\mathrm{id}_K$ is sharp; each original operator square stays homotopy cartesian after multiplying by any $K$; and the square changing only the factor $K\\to K'$ is homotopy cartesian. These facts will verify the vertical sharpness and operator-square hypotheses in the induction step.",
+   "uses": [
+    "lem-coef-sharp-pullback-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 6.7, strengthened induction keeping the comparison squares"
+   }
+  },
+  {
+   "text": "For $n\\ge1$, describe $L_nZ$ by the finite proper-subset diagram indexed by $T\\subsetneq\\{1,\\ldots,n\\}$. Its value is $Z_{|T|}$, mapped to $Z_n$ by the surjection $\\sigma_T:[n]\\to[|T|]$, $\\sigma_T(j)=|\\{t\\in T:t\\le j\\}|$. For $T\\subset T'$ let $\\rho_{T,T'}:[|T'|]\\to[|T|]$ be the unique surjection satisfying $\\sigma_T=\\rho_{T,T'}\\sigma_{T'}$; the transition is $Z(\\rho_{T,T'}):Z_{|T|}\\to Z_{|T'|}$. Each $\\sigma_T$ has an increasing section, so its degeneracy map is injective. Apply [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] at each vertical degree: if $z=Z(\\tau)y$ is its unique expression with $y$ horizontally nondegenerate, let $J=\\{j:\\tau(j-1)<\\tau(j)\\}\\subseteq\\{1,\\ldots,n\\}$. Then $z$ lies in the $T$-image exactly when $J\\subseteq T$, since this is exactly the condition that $\\tau$ factor through $\\sigma_T$. Thus the $T$-image intersects the $T'$-image in the $(T\\cap T')$-image. Every equality of representatives in two images is therefore already identified through their intersection object. The colimit is their union $L_nZ$, and the latching map at $T$ is the injective inclusion of the union of its proper-subset images into its $T$-image. This proves precisely the cofibrancy required by [lem-coef-sharp-special-colimit-gluing](3), also after taking a product with a fixed $K$. All naturality squares are the hypothesized operator squares, or their products, so that lemma makes $L_nX\\to L_nY$ sharp. The step-2 cocone argument to the sharp $p_n$, using the original degeneracy squares, shows $L_nX\\to X_n$ over $L_nY\\to Y_n$ homotopy cartesian. In particular $D_nX\\to C_nX$ and $I_nX\\to B_nX$ over their $Y$ counterparts are homotopy cartesian by [lem-coef-sharp-pullback-calculus].",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "lem-coef-sharp-special-colimit-gluing",
+    "lem-coef-sharp-pullback-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 6.7, latching proper-subset diagram and Proposition 8.1(3)"
+   }
+  },
+  {
+   "text": "Assume the induction assertion for $n-1$. For each proper nonempty subset $T\\subsetneq[n]=\\{0,\\ldots,n\\}$, put $k=|T|-1$. The map $X_n\\times\\Delta^T\\to F_{n-1}X$ factors through $X_k\\times\\Delta^k$: first restrict by the increasing face $[k]\\hookrightarrow[n]$, identifying $\\Delta^T$ with $\\Delta^k$, and then use the $k$th cell cocone. Its square over $Y$ is homotopy cartesian by the product operator square, the induction assertion and pasting from [lem-coef-sharp-pullback-calculus]. At $T=\\varnothing$ the source and base are empty, so the same assertion is immediate from the strict-pullback criterion. The proper-face diagram $T\\mapsto X_n\\times\\Delta^T$ has colimit $B_nX$ and is cofibrant: its latching maps are boundary-face union inclusions. Its values and transition squares are sharp and homotopy cartesian because all are base changes of $p_n$. Apply the step-2 finite-subset cocone argument to the sharp target $F_{n-1}X\\to F_{n-1}Y$. It gives the homotopy-cartesian square $B_nX\\to F_{n-1}X$ over $B_nY\\to F_{n-1}Y$.",
+   "uses": [
+    "lem-coef-sharp-pullback-calculus",
+    "lem-coef-sharp-special-colimit-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 6.7, boundary attachment squares; expanded proper-face argument"
+   }
+  },
+  {
+   "text": "For each proper $T\\subsetneq\\{1,\\ldots,n\\}$, with $k=|T|<n$, the map $X_k\\times\\Delta^n\\to F_{n-1}X$ factors as $X_k\\times\\Delta^n\\to X_k\\times\\Delta^k\\to F_{n-1}X$, the first map using $\\Delta(\\sigma_T):\\Delta^n\\to\\Delta^k$. Write $c_k:C_kZ\\to F_{n-1}Z$ for the cell cocone. For $T\\subset T'$ the transition is $Z(\\rho_{T,T'})\\times\\mathrm{id}_{\\Delta^n}$. In vertical degree $q$, the $T$-cocone sends $(z,\\alpha:[q]\\to[n])$ to $Z(\\sigma_T\\alpha)(z)$. The $T'$-cocone of its image is $Z(\\sigma_{T'}\\alpha)Z(\\rho_{T,T'})(z)=Z(\\rho_{T,T'}\\sigma_{T'}\\alpha)(z)=Z(\\sigma_T\\alpha)(z)$. This proves cocone compatibility, including every multiple inclusion, and the construction commutes with vertical operators because the two simplicial directions commute. The first square over $Y$ is a strict pullback of the sharp product $p_k\\times\\mathrm{id}_{\\Delta^k}$; the second is homotopy cartesian by induction. Pasting in [lem-coef-sharp-pullback-calculus] and the step-2 proper-subset cocone argument therefore give $D_nX\\to F_{n-1}X$ over $D_nY\\to F_{n-1}Y$ homotopy cartesian. The vertical maps on $B_n,D_n,I_n,C_n$ are sharp, since they are products of $p_n$ or of the sharp latching map from step 4. The square $I_nX\\to D_nX$ over $I_nY\\to D_nY$ is a strict pullback of the latter sharp map, hence homotopy cartesian. The square $I_n\\to B_n$ is homotopy cartesian by step 4. Thus the intersection cocones to both $C_n$ and $F_{n-1}$ have homotopy-cartesian squares by pasting.",
+   "uses": [
+    "lem-coef-sharp-pullback-calculus",
+    "lem-coef-sharp-special-colimit-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 6.7, degenerate attachment and intersection squares"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-sharp-special-colimit-gluing](2) to the span $B_nZ\\leftarrow I_nZ\\to D_nZ$ for $Z=X,Y$. Both legs are inclusions, the vertical maps are sharp and both naturality squares are homotopy cartesian by steps 4-6. Its pushout $A_nX\\to A_nY$ is sharp. Apply the step-2 span cocone argument twice: to $C_nX\\to C_nY$ using $B_n\\to C_n$ (a strict product pullback), $D_n\\to C_n$ (step 4), and their intersection; and to $F_{n-1}X\\to F_{n-1}Y$ using steps 5-6. This gives homotopy-cartesian squares on both arrows $A_n\\to C_n$ and $A_n\\to F_{n-1}$. All sharpness and product-pullback assertions used here are given by [lem-coef-sharp-pullback-calculus].",
+   "uses": [
+    "lem-coef-sharp-special-colimit-gluing",
+    "lem-coef-sharp-pullback-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 6.7, first pushout application of Proposition 8.1(2)"
+   }
+  },
+  {
+   "text": "Now apply [lem-coef-sharp-special-colimit-gluing](2) to $F_{n-1}Z\\leftarrow A_nZ\\hookrightarrow C_nZ$. The right leg is mono by step 1; the vertical maps are sharp by induction and step 7; the two naturality squares are homotopy cartesian by step 7. Thus the pushout $F_nX\\to F_nY$ is sharp, and its cocone squares from $F_{n-1}$ and $C_n$ are homotopy cartesian. For $k<n$, paste the inductively known square $C_k\\to F_{n-1}$ with $F_{n-1}\\to F_n$, using [lem-coef-sharp-pullback-calculus]; this retains every old cell square. The new cell square is already supplied by the gluing lemma. This completes the strengthened induction.",
+   "uses": [
+    "lem-coef-sharp-special-colimit-gluing",
+    "lem-coef-sharp-pullback-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 6.7, second pushout application of Proposition 8.1(2)"
+   }
+  },
+  {
+   "text": "The sequences $F_0Z\\subset F_1Z\\subset\\cdots$ have monomorphic transition maps, sharp vertical maps and homotopy-cartesian naturality squares for successive arrows by step 8. All longer-arrow squares are homotopy cartesian by repeated pasting in [lem-coef-sharp-pullback-calculus]. Apply [lem-coef-sharp-special-colimit-gluing](1). It makes $\\operatorname{colim}_nF_nX\\to\\operatorname{colim}_nF_nY$ sharp. These colimits are literally the diagonals by step 1, so this is the required $\\operatorname{diag}p$. The argument used monomorphisms and sharp maps throughout and imposed no Kan or Reedy-fibrancy condition.",
+   "uses": [
+    "lem-coef-sharp-pullback-calculus",
+    "lem-coef-sharp-special-colimit-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 6.7, final sequential-union application of Proposition 8.1(1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+  "lem-coef-sharp-special-colimit-gluing",
+  "lem-coef-sharp-pullback-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived coefficient adjunction; explicit simplicial-set proof expanding the online but unarchived Rezk Section 6.7 (WANTED in report)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal of an equifibered bisimplicial map with sharp rows is sharp",
+   "results": "{\"t\": \"2026-10-16T23:20:59Z\", \"tool\": \"leanfinder\", \"query\": \"The diagonal of an equifibered bisimplicial map with sharp rows is sharp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategory.diag_subinterval_eq\", \"CategoryTheory.SimplicialObject.diagonal\", \"SSet.prodStdSimplex.nonDegenerate_iff_strictMono_objEquiv\", \"PartialOrder.mem_range_nerve_σ_iff\", \"SimplexCategoryGenRel.exists_normal_form_P_σ\", \"PartialOrder.mem_nerve_degenerate_of_eq\", \"SimplexCategoryGenRel.simplicialEvalσ_of_isAdmissible\", \"SimplicialObject.Splitting.IndexSet.pull\"], \"digest\": \"37d216ce51f54d5b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the read hits concern long edges (SimplicialObject.diagonal, Basic.lean:103), strict Segal compositions, ordinary categorical diagonal pullbacks, horn fibrations or path objects. None states diagonal sharpness. The focused AlgebraicTopology grep has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"diagonal\"",
+   "results": "{\"t\": \"2026-10-16T23:21:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"diagonal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"nhdsSet_diagonal\", \"nhdsSet_diagonal_le_uniformity\", \"nhdsSet_diagonal_eq_uniformity\", \"SSet.StrictSegal.spineToDiagonal\", \"SSet.Truncated.StrictSegal.spineToDiagonal\"], \"digest\": \"0a0cc0ea08bb16e9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the read hits concern long edges (SimplicialObject.diagonal, Basic.lean:103), strict Segal compositions, ordinary categorical diagonal pullbacks, horn fibrations or path objects. None states diagonal sharpness. The focused AlgebraicTopology grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "sharp|bisimplicial|equifibered|homotopyCartesian",
+   "results": "{\"t\": \"2026-10-16T23:21:00Z\", \"tool\": \"grep\", \"query\": \"sharp|bisimplicial|equifibered|homotopyCartesian\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the read hits concern long edges (SimplicialObject.diagonal, Basic.lean:103), strict Segal compositions, ordinary categorical diagonal pullbacks, horn fibrations or path objects. None states diagonal sharpness. The focused AlgebraicTopology grep has zero hits.",
+   "directory": "AlgebraicTopology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonal of a simplicial diagram of universal homotopy pullback maps is a universal homotopy pullback map",
+   "results": "{\"t\": \"2026-10-16T23:21:01Z\", \"tool\": \"leansearch\", \"query\": \"The diagonal of a simplicial diagram of universal homotopy pullback maps is a universal homotopy pullback map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullback_map_diagonal_isPullback\", \"CategoryTheory.Limits.pullback_lift_diagonal_isPullback\", \"CategoryTheory.Limits.pullback_diagonal_map_snd_fst_fst\", \"CategoryTheory.Limits.pullback.diagonal\", \"CategoryTheory.Limits.pullbackDiagonalMapIso\", \"CategoryTheory.Limits.diagonal_pullback_fst\", \"CategoryTheory.SimplicialObject.diagonal\", \"CategoryTheory.Limits.pullback.comp_diagonal\"], \"digest\": \"fb25145ac3e72a28\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the read hits concern long edges (SimplicialObject.diagonal, Basic.lean:103), strict Segal compositions, ordinary categorical diagonal pullbacks, horn fibrations or path objects. None states diagonal sharpness. The focused AlgebraicTopology grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rezk fibrations homotopy cartesian base change diagonal",
+   "results": "{\"t\": \"2026-10-16T23:21:05Z\", \"tool\": \"leanfinder\", \"query\": \"Rezk fibrations homotopy cartesian base change diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.instFibrationSndOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instFibrationFstOfIsFibrant\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\"], \"digest\": \"70dc99798e25e4bf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the read hits concern long edges (SimplicialObject.diagonal, Basic.lean:103), strict Segal compositions, ordinary categorical diagonal pullbacks, horn fibrations or path objects. None states diagonal sharpness. The focused AlgebraicTopology grep has zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-equifibered-bisimplicial-diagonal",
+  "date": "2026-10-17",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-rezk-diagonal-sharp",
+  "worker": "stage1",
+  "summary": "Expanded the skeletal proof with a strengthened cell-cocone induction, explicit face and degeneracy diagrams, and two reusable sharp-map lemmas. The special-colimit gluing statement includes the relative-cocone clause required at attachments. Removed an initially attempted citation of the existing model-cofibrant-colimit comparison after server preflight found a cycle through its model-localization prerequisites. Corrected doubled TeX escapes only; mathematical statement unchanged. Independent second reading expanded the degeneracy-image intersection and latching argument and wrote the cocone-compatibility equation explicitly; no statement was changed.",
+  "blueprint": "Realizes paragraph 2, displayed derived coefficient adjunction and its diagonal/coherent-comparison descendant, following Rezk Section 6.7 rather than substituting a different unit route. Whole-blueprint searches sharp, gluing, homotopy cartesian and cofibrant found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "why": "Unique nondegenerate decomposition is a generic simplicial-set tool needed to identify latching unions and skeletal pushouts; no node of this unit replaces its statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-3476194d2",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-3476194d2 (reviewer sub-agent of L); spot-checked: Read in full: the item lem-coef-rezk-diagonal-sharp (all 9 steps), both new nodes (lem-coef-sharp-pullback-calculus and lem-coef-sharp-special-colimit-gluing), the cited statements (nondegenerate decomposition = Stacks 017R Mathlib leaf, kan-quillen-right-proper, def-cbc-enhanced-diagrams-cones), the parent's use of the item, the blueprint ancestor and the unit. The source, Rezk's sharp-maps paper, is not archived (WANTED is recorded) and could not be reached from this server (ECONNREFUSED), so I checked the mathematics myself rather than against Rezk's text. Steps: step 1 is the Reedy-skeleton pushout F_n = F_{n-1} ⊔_{A_n} C_n, elementary from 017R per vertical degree. In step 4, sigma_T has jump set T, images intersect in the (T∩T')-image, the colimit maps injectively onto L_n and the latching maps are the monos L_{|T|} → Z_{|T|}. In steps 5 and 6 the cocones agree with the attaching maps (Z(d_T beta)z and Z(sigma_T alpha)y). Steps 7 and 8 use gluing(2) with the correct mono legs, and the two relative-cocone uses are separate. Step 9 is a sequence of monos plus pasting. proof_deps equals the union of uses; reachability recomputed, no cycle. New nodes: every calculus clause checked true in right-proper Kan-Quillen. Gluing cases (1)-(3) are the special shapes whose strict colimits are homotopy colimits; the relative clause follows via W_i = V_i ×_H E, universal colimits in sSet and homotopy invariance of cofibrant colimits. Edge cases checked: S empty, singleton, n=1 and n=2. Both nodes are statement-only, introduce their objects, define their notions inline, have single TeX escapes and all three search kinds, and are not restatements or DAG duplicates (checked kan-pullback-fibration-invariance, infinity-homotopy-pullback-pasting, space-universal-colimits-cartesian-pushouts, enriched-diagram-homotopy-descent, sset-gluing-filtered-equivalences, marked-sharp nodes). Unit route unchanged; accepted tool_use: lem-weil-pbc-simplicial-set-nondegenerate-decomposition (Mathlib leaf, generic). Not a target node; no SGA. No fixes. Residual: Rezk's numbering (Prop 2.7 vs the blueprint's 2.2) is unchecked because the source is not available here. One read-only git log was run by mistake; nothing was modified."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b86bed82b",
+  "group": "Q24",
+  "result": "pass",
+  "note": "I checked rezk_diagonal_sharp against the node clause by clause and all match: SSet.{u} with one universe; realization weak equivalences; IsHomotopyCartesian replaces both legs over the original base and fixes the comparison by its projections, which also forces commutativity, and right properness makes this match the fibrant-replacement wording; IsSharp tests every T->B; h_rows covers every m; h_squares covers every opposite arrow with corners matching p.naturality; the diagonal is Functor.diag whiskered into uncurry.map p, giving (X_q)_q; no Kan, Reedy or Nonempty hypothesis. The supplied calculus dependency matches all 8 clauses of its node and each is true; its record changes only lean. Neither the path-model IsHomotopyPullbackSquare (Kan corners only) nor SheafFlatModel.IsHomotopyPullback is the same notion. The item record changes only stmt_deps (calculus added, no cycle) and lean; both statements are verbatim in their files; no hollow definitions; exactly two sorry theorems; source and blueprint docstrings present; all nine proof steps in the docstring; report has both required sections. nt_compile.py --json on both files: rc 0, no errors or warnings; a deliberately broken control copy did report its error. Residual: Rezk's paper is not reachable from this server, so its numbering was not checked here."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.RezkDiagonalSharp",
+  "declaration": "SSet.rezk_diagonal_sharp",
+  "declarations": [
+   "SSet.rezk_diagonal_sharp"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/RezkDiagonalSharp.lean",
+  "statement": "theorem rezk_diagonal_sharp (X Y : SimplexCategoryᵒᵖ ⥤ SSet.{u}) (p : X ⟶ Y) (h_rows : ∀ m : SimplexCategoryᵒᵖ, IsSharp (p.app m)) (h_squares : ∀ (m n : SimplexCategoryᵒᵖ) (a : m ⟶ n), IsHomotopyCartesian (X.map a) (p.app m) (p.app n) (Y.map a)) : IsSharp (whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) (Functor.uncurry.map p))",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The diagonal is Mathlib uncurrying followed by categorical diagonal precomposition. Sharpness and homotopy-cartesianness use the prerequisite calculus module supplied in this delivery; no Kan or Reedy hypothesis is added."
+ }
+}

@@ -43,11 +43,11 @@
    }
   },
   {
-   "text": "Use $H(x,y,z)$ for the space of maps $\\Delta^2\\times\\Delta^n\\to\\mathcal D$ constant at $x,y,z$ on the three vertex families. Let $P_v\\subseteq H(d_0,e_0,e_1)$ impose edge $12=v$, and let $Q_u\\subseteq H(d_0,d_1,e_1)$ impose edge $01=u$, in each degree. Restriction to the other consecutive edge gives $r:P_v\\to A$ and $s:Q_u\\to B$. They are pullbacks of the $n=2$ spine restriction of [lem-cbc-simplicial-composition-spine], so they lift every boundary inclusion: compose a lifting problem with the spine restriction, fill it, and keep the fixed edge. Thus they are trivial Kan fibrations and are homotopy equivalences by [lem-weil-pbc-trivial-kan-homotopy-equivalence]. Since $A,B$ are Kan, the model-structure characterization in [lem-coef-kan-quillen-right-proper] also makes $P_v,Q_u$ Kan. Write $p:P_v\\to C$ and $q:Q_u\\to C$ for restriction to edge $02$. The composition convention of [lem-cbc-simplicial-composition-spine] represents postcomposition by $v$ by the span $A\\xleftarrow{r}P_v\\xrightarrow{p}C$, and precomposition by $u$ by $B\\xleftarrow{s}Q_u\\xrightarrow{q}C$.",
+   "text": "Use $H(x,y,z)$ for the space of maps $\\Delta^2\\times\\Delta^n\\to\\mathcal D$ constant at $x,y,z$ on the three vertex families. Let $P_v\\subseteq H(d_0,e_0,e_1)$ impose edge $12=v$, and let $Q_u\\subseteq H(d_0,d_1,e_1)$ impose edge $01=u$, in each degree. Restriction to the other consecutive edge gives $r:P_v\\to A$ and $s:Q_u\\to B$. They are pullbacks of the $n=2$ spine restriction of [lem-cbc-simplicial-composition-spine], so they lift every boundary inclusion: compose a lifting problem with the spine restriction, fill it, and keep the fixed edge. Thus they are trivial Kan fibrations and are homotopy equivalences by [lem-weil-pbc-trivial-kan-homotopy-equivalence]. Since $A,B$ are Kan, the model-structure characterization in [lem-coef-kan-quillen-model-right-proper-core] also makes $P_v,Q_u$ Kan. Write $p:P_v\\to C$ and $q:Q_u\\to C$ for restriction to edge $02$. The composition convention of [lem-cbc-simplicial-composition-spine] represents postcomposition by $v$ by the span $A\\xleftarrow{r}P_v\\xrightarrow{p}C$, and precomposition by $u$ by $B\\xleftarrow{s}Q_u\\xrightarrow{q}C$.",
    "uses": [
     "lem-cbc-simplicial-composition-spine",
     "lem-weil-pbc-trivial-kan-homotopy-equivalence",
-    "lem-coef-kan-quillen-right-proper"
+    "lem-coef-kan-quillen-model-right-proper-core"
    ],
    "elementary": false,
    "source": {
@@ -81,10 +81,12 @@
    }
   },
   {
-   "text": "Since $p,q$ are Kan fibrations between Kan complexes, [lem-coef-kan-quillen-right-proper] identifies $P_v\\times_C Q_u$ with the homotopy pullback $P_v\\times_C^h Q_u$. In the category of spaces the spans $A\\xleftarrow{r}P_v\\xrightarrow{p}C$ and $B\\xleftarrow{s}Q_u\\xrightarrow{q}C$ are exactly the maps $v\\circ(-)$ and $(-)\\circ u$ from step 2. Replacing their domains by $A,B$ through the equivalences $r,s$ therefore identifies this homotopy pullback with $A\\times_C^h B$, and its projection with the endpoint map $(r,s)$. This is the independence of a fibration replacement asserted by [lem-coef-kan-quillen-right-proper], applied to these two representatives of the same cospan of spaces; it does not assert that the original composition maps themselves are fibrations.",
+   "text": "Since $p,q$ are Kan fibrations between Kan complexes, [lem-coef-kan-pullback-path-comparison] identifies $P_v\\times_C Q_u$ with the path homotopy pullback $P_v\\times_C^h Q_u$. Choose simplicial sections $\\sigma:A\\to P_v$ and $\\tau:B\\to Q_u$ of the trivial fibrations $r,s$. They exist by boundary lifting against every monomorphism: the boundary-cell description in [lem-coef-kan-quillen-model-right-proper-core] gives the requisite lift against $\\varnothing\\to A$ and $\\varnothing\\to B$. Since $r\\sigma=1_A$ and $s\\tau=1_B$, two-out-of-three makes $\\sigma,\\tau$ weak equivalences. The composition-span convention in [lem-cbc-simplicial-composition-spine] makes $p\\sigma$ and $q\\tau$ actual representatives of $v\\circ(-)$ and $(-)\\circ u$. The maps $(\\sigma,\\operatorname{id}_C,\\tau)$ form a strictly commuting map of Kan cospans from $A\\xrightarrow{p\\sigma}C\\xleftarrow{q\\tau}B$ to $P_v\\xrightarrow{p}C\\xleftarrow{q}Q_u$. By [lem-coef-kan-homotopy-pullback-invariance] their path pullbacks are weakly equivalent. The composite projection to $A\\times B$ is the actual pair $(r,s)$, because $r\\sigma$ and $s\\tau$ are identities. Thus the identification retains the endpoint map and uses only strict-cospan invariance, without any coherent-localization theorem.",
    "uses": [
-    "lem-coef-kan-quillen-right-proper",
-    "lem-cbc-simplicial-composition-spine"
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-kan-quillen-model-right-proper-core"
    ],
    "elementary": false,
    "source": {
@@ -96,8 +98,7 @@
    "text": "Model $A\\times_C^h B$ by $A\\times_{C,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,C)\\times_{\\operatorname{ev}_1,C}B$. The homotopy-fiber convention in [def-cbc-enhanced-diagrams-cones] makes its simplices triples $(a,b,\\gamma)$ with a path $\\gamma:va\\simeq bu$ and all higher simplices. The natural pinch maps of [lem-coef-infinity-pinch-comparison], for $\\mathcal Q$ and for the three pairs of endpoints in $\\mathcal D$, replace every $U$ by the specified right-pinched mapping space. Their compatibility with evaluation is explicit: restricting the simplicial map defining a pinch to $s=0$ or $s=1$ is the pinch of that endpoint restriction. Thus the resulting equivalence has exactly the joint endpoint projection in the statement. The two maps into the cross term use the coherent composition spans from step 2; no strict choice of composition is part of the assertion.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
-    "lem-coef-infinity-pinch-comparison",
-    "lem-coef-kan-quillen-right-proper"
+    "lem-coef-infinity-pinch-comparison"
    ],
    "elementary": false,
    "source": {
@@ -124,11 +125,13 @@
   "lem-cbc-internal-hom-quasicategory",
   "lem-cbc-simplicial-composition-spine",
   "lem-weil-pbc-trivial-kan-homotopy-equivalence",
-  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-kan-quillen-model-right-proper-core",
   "lem-coef-inner-anodyne-pushout-product",
   "lem-cbc-invertible-prism-extension",
   "lem-cbc-enhanced-functor-cone-calculus",
-  "lem-coef-infinity-isofibration-exponentiation"
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-homotopy-pullback-invariance"
  ],
  "proof_origin": {
   "by": "agent",

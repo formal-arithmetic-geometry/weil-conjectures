@@ -1,0 +1,221 @@
+{
+ "id": "lem-coef-kan-quillen-model-right-proper-core",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: derived coefficient adjunction in the displayed R Hom / R lim calculation; flat-model stable enhancement foundation. Cosimplicial frames supply localization mapping spaces for the finite-diagram induction. Technical input: Theorem 3.1.8, Corollary 3.1.28, Theorem 3.1.29, and Corollary 3.8.4 with its proof; Hovey Propositions 3.2.2, 3.2.6 and Theorem 3.6.5 for the generating boundary/horn characterizations",
+   "via": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Kan–Quillen model structure and right properness before coherent localization",
+ "statement": "On the category of simplicial sets [def-weil-pbc-simplicial-set] let $\\Delta^n$ be the representable $\\operatorname{Hom}_\\Delta(-,[n])$, let $\\partial\\Delta^n$ be the union of its proper faces, and for $n\\geq1$ let $\\Lambda_i^n$ be the union of all faces except the $i$th, $0\\leq i\\leq n$. A weak homotopy equivalence is a map whose geometric realization induces a bijection on path components and isomorphisms of all homotopy groups at all basepoints. There is a functorial model structure with these weak equivalences, degreewise injective maps as cofibrations, and maps with the right lifting property against every $\\Lambda_i^n\\hookrightarrow\\Delta^n$ as fibrations (Kan fibrations). Its fibrant objects are the Kan complexes. A map is a trivial fibration exactly when it has the right lifting property against every $\\partial\\Delta^n\\hookrightarrow\\Delta^n$, including $n=0$. Every monomorphism is a transfinite composite of pushouts of coproducts of boundary inclusions. Trivial cofibrations are the retracts of transfinite composites of pushouts of coproducts of horn inclusions. Pullback of any weak homotopy equivalence along any Kan fibration is a weak homotopy equivalence (right properness).",
+ "source": {
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Propositions 3.2.2–3.2.3, Theorems 3.6.4–3.6.5; extracted model/right-proper clauses, without coherent localization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [
+  {
+   "text": "Write $I=\\{\\partial\\Delta^n\\hookrightarrow\\Delta^n:n\\geq0\\}$, $J=\\{\\Lambda_i^n\\hookrightarrow\\Delta^n:n\\geq1,0\\leq i\\leq n\\}$, $F=J^{\\pitchfork}$ and $A={}^{\\pitchfork}F$. Limits and colimits of simplicial sets are computed degreewise: take the corresponding set limit or quotient disjoint union and let every simplicial operator act on representatives. The finite boundary and horn domains satisfy the smallness hypothesis with $\\kappa=\\aleph_0$: their maps into an increasing ordinal chain are determined by finitely many face simplices with finitely many equations, so all images and equations occur at one stage. The cellular small-object theorem gives functorial weak factorizations $({}^{\\pitchfork}(I^{\\pitchfork}),I^{\\pitchfork})$ and $(A,F)$; its retract formula identifies $A$ with retracts of $J$-cell maps. Boundary and horn cell maps are degreewise injective, because pushouts, coproducts and continuous ordinal unions of injections of sets are injections. Every monomorphism is an $I$-cell map by the boundary-cell decomposition, so ${}^{\\pitchfork}(I^{\\pitchfork})$ is exactly the monomorphisms. Here an $I$-cell map lifts against $I^{\\pitchfork}$ by successively choosing fillers at successor stages and taking their union at limits; the converse lifting class follows by factoring and taking the resulting arrow retract.",
+   "uses": [
+    "lem-coef-small-object-cell-factorization",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Propositions 3.2.2–3.2.3; small-object construction and retract argument."
+   }
+  },
+  {
+   "text": "Realization preserves the colimits in a $J$-cell construction, and sends each generating horn pair to $(D^{n-1}\\times[0,1],D^{n-1}\\times\\{0\\})$. The Serre model theorem says these inclusions and their pushouts, coproducts, transfinite composites and retracts are topological trivial cofibrations. Consequently realization sends every retract of a $J$-cell map to a weak homotopy equivalence. Thus $A\\subseteq W$, and step 1 already gives $A\\subseteq C$, where $C$ is the monomorphisms.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-topological-serre-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 3.2.4; the realized boundary/horn-pair paragraph after Proposition 3.2.2 and immediately before Proposition 3.2.3; Theorem 2.4.23 for the topological trivial cofibrations."
+   }
+  },
+  {
+   "text": "If $p\\in I^{\\pitchfork}$, the $n=0$ lifting condition says exactly that $p_0$ is surjective, so the stated trivial-Kan definition applies. The trivial-Kan homotopy theorem supplies $g$ with $pg=1$ and $h:X\\times\\Delta^1\\to X$ from $1$ to $gp$. Finite-product preservation of realization turns $h$ into an ordinary homotopy, so $|g|$ is a homotopy inverse of $|p|$, and $p\\in W$. Also $p$ lifts against every monomorphism by the boundary-cell description and the recursive lifting argument of step 1; in particular it lifts against horns. Hence $I^{\\pitchfork}\\subseteq F\\cap W$.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration",
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "lem-coef-realization-finite-limits",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 08NL (definition-trivial-kan), 08NS (lemma-trivial-kan-homotopy); Hovey Lemma 3.1.8 for realized cylinder."
+   }
+  },
+  {
+   "text": "Conversely let $p\\in F\\cap W$. Its realization is a Serre fibration and a weak homotopy equivalence. For a vertex $y$ of the target, component-surjectivity gives a point over the component of $y$, and lifting a path to $y$ makes the fibre nonempty. The fibre exact sequence makes all positive homotopy groups of that fibre zero: use the isomorphisms on $\\pi_{n+1}$ and $\\pi_n$ of total and base spaces. Its component set is a single orbit since $\\pi_0$ of the total maps injectively to the base; the stabilizer of one fibre component is the image of $\\pi_1$ of the total, which is all of $\\pi_1$ of the base. Thus the fibre is connected. Realization preserves this vertex fibre. The simplicial fibre is Kan, since each horn problem is a horn problem for $p$ with constant base simplex. The identification of its realization with the nonempty connected topological fibre shows that this simplicial fibre is weakly contractible. Indeed every point of a realization lies in a simplex and is joined inside that simplex to a vertex; changing the basepoint along this path identifies its positive homotopy groups with those at the vertex, which vanish by the fibre exact sequence. A Kan fibration is in particular a right fibration, since the horns with $0<i\\leq n$ are among all horns. Thus [lem-coef-right-fibration-contractible-fibers] applies to $p$ and gives a trivial Kan fibration in the boundary-lifting sense, including dimension zero. Hence $p\\in I^{\\pitchfork}$. This proves $F\\cap W=I^{\\pitchfork}$ without assuming that the base simplicial set is Kan.",
+   "uses": [
+    "lem-coef-kan-realization-serre",
+    "lem-coef-serre-homotopy-exact-sequence",
+    "lem-coef-realization-finite-limits",
+    "lem-coef-right-fibration-contractible-fibers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Corollary 3.6.2 and proof of Theorem 3.6.4 for the realized fibre argument; Kerodon Proposition 4.4.2.14 (01NU), implication (3) to (1), for boundary lifting from a right fibration with weakly contractible Kan fibres."
+   }
+  },
+  {
+   "text": "To obtain the other model factorization, factor any $i:X\\to Y$ in $C\\cap W$ as $X\\xrightarrow{j}Z\\xrightarrow{q}Y$ with $j\\in A$ and $q\\in F$. By step 2 and two-out-of-three, $q\\in F\\cap W=I^{\\pitchfork}$. Since $i$ is a monomorphism, step 1 gives a lift $s:Y\\to Z$ satisfying $si=j$ and $qs=1_Y$. The arrow maps $(1_X,s)$ and $(1_X,q)$ exhibit $i$ as a retract of $j$, so $i\\in A$; a lifting class is closed under arrow retracts by composing the square with the retract maps. Together with step 2 this gives $A=C\\cap W$. The two functorial weak factorizations from step 1 are therefore $(C,F\\cap W)$ and $(C\\cap W,F)$. Since $W$ is defined by realization, the two-out-of-three and retract assertions for $W$ are exactly the corresponding assertions for the topological weak-equivalence class in [lem-coef-topological-serre-model], transported across the functorial realization; no further recognition theorem is being invoked. These are precisely the model axioms. The map $X\\to *$ is in $F$ exactly when $X$ fills every horn, so the fibrant objects are exactly the Kan complexes. The boundary and horn cellular assertions and the boundary characterization of trivial fibrations are the descriptions already established in steps 1–4.",
+   "uses": [
+    "lem-coef-topological-serre-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Retract argument in Theorem 3.6.5 and the two weak factorization systems."
+   }
+  },
+  {
+   "text": "Let $g:B'\\to B$ belong to $W$ and let $p:E\\to B$ belong to $F$, with no fibrancy assumption on either base. Realization identifies the pullback square with the pullback of the Serre fibration $|p|$. Its two fibres at a point $b'\\in|B'|$ are identical. Compare the natural fibre exact sequences. The base maps induce isomorphisms of all based homotopy groups; the fibre maps are identities. Write $f:E'\\to E$ and $q:E'\\to B'$ for the realized pullback maps and fix $e'\\in E'$. For $n\\geq1$ and $z\\in\\pi_n(E,f(e'))$, choose $t\\in\\pi_n(B',q(e'))$ mapping to $p_*z$. Its connecting image is zero (the distinguished component when $n=1$), since the fibre map is the identity. Exactness gives $z'\\in\\pi_n(E',e')$ with $q_*z'=t$. The class $z(f_*z')^{-1}$ has zero base image, so equals the image of a fibre class $a$; multiplying $z'$ by the image of $a$ on the left gives a preimage of $z$. For injectivity, suppose $f_*u=1$. The base isomorphism gives $q_*u=1$, so $u$ is the image of a fibre class $a$. Its image in $\\pi_n(E)$ is zero, so exactness writes $a=\\delta c$ for some $c\\in\\pi_{n+1}(B)$. Lift $c$ through the base isomorphism to $c'\\in\\pi_{n+1}(B')$; naturality and the identity fibre map give $a=\\delta c'$, so its image $u$ is zero. These ordered products also prove the $n=1$ case without commutativity. On components, over each component of $B$ with a nonempty fibre, components of $E$ are the orbits of the $\\pi_1$-action on the fibre-component set. Choose a component of $B'$ mapping to it, move the chosen basepoint along a path, and use path lifting to identify these fibre sets. The isomorphism on $\\pi_1$ identifies the actions and hence their orbit sets; $\\pi_0(g)$ bijective identifies the indexing base components, including those with empty fibres. Thus the total-space map is bijective on components too. It is a weak homotopy equivalence, proving right properness.",
+   "uses": [
+    "lem-coef-realization-finite-limits",
+    "lem-coef-kan-realization-serre",
+    "lem-coef-serre-homotopy-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 2.4.18 and its proof, applied after Lemma 3.2.4 and Corollary 3.6.2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-small-object-cell-factorization",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-topological-serre-model",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "lem-coef-kan-realization-serre",
+  "lem-coef-serre-homotopy-exact-sequence",
+  "lem-coef-right-fibration-contractible-fibers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Maintenance decomposition of the existing complete proof, steps 1–6 of lem-coef-kan-quillen-right-proper; no proof of Quillen Theorem B or coherent localization is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial sets have a right proper Kan Quillen model category structure with monomorphisms as cofibrations and horn lifting fibrations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.I\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property defined by the family of inclusions of the boundary of the standard $n$-simplex $\\\\partial\\\\Delta[n]$ into the standard $n$-simplex $\\\\Delta[n]$ for each natural number $n$. This co\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithCofibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.cofibrations_eq\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.cofibrations SSet = CategoryTheory.MorphismProperty.monomorphisms SSet\", \"doc\": \"In the category of simplicial sets equipped with the Quillen model structure, the class of cofibrations coincides with the class of monomorphisms.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.mono_of_cofibration\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y) [HomotopicalAlgebra.Cofibration f], CategoryTheory.Mono f\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property in the category of simplicial sets generated by all horn inclusions, defined as the supremum over all dimensions $n$ of the inclusions of the $i$-th horn $\\\\Lambda[n+1, i]$ into t\"}\n  {\"name\": \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y) [CategoryTheory.Mono f], HomotopicalAlgebra.Cofibration f\", \"doc\": \"In the category of simplicial sets equipped with the Quillen model structure, every monomorphism $ f $ is a cofibration. This establishes that the class of cofibrations coincides with the class of mon\"}\n  {\"name\": \"SSet.modelCategoryQuillen.cofibration_iff\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y), HomotopicalAlgebra.Cofibration f ↔ CategoryTheory.Mono f\", \"doc\": \"In the category of simplicial sets, a morphism $ f $ is a cofibration if and only if it is a monomorphism.\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryWithFibrations.lean:73-82 labels the Kan-Quillen model category as TODO; it supplies classes of maps, not a model-category instance or right properness. The pullback hits apply to trivial fibrations, not arbitrary Kan fibrations pulling back weak equivalences."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"RightProper\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryWithFibrations.lean:73-82 labels the Kan-Quillen model category as TODO; it supplies classes of maps, not a model-category instance or right properness. The pullback hits apply to trivial fibrations, not arbitrary Kan fibrations pulling back weak equivalences."
+  },
+  {
+   "tool": "grep",
+   "query": "RightProper|rightProper|right_proper|instance.*ModelCategory",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"line\": \"55\", \"text\": \"instance : ModelCategory Cᵒᵖ where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"97\", \"text\": \"instance : MorphismProperty.IsSmall.{u} modelCategoryQuillen.J.{u} :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"100\", \"text\": \"instance : IsCardinalForSmallObjectArgument modelCategoryQuillen.J.{u} Cardinal.aleph0.{u} where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"108\", \"text\": \"instance : HasSmallObjectArgument.{u} modelCategoryQuillen.J.{u} :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/Over.lean\", \"line\": \"143\", \"text\": \"instance ModelCategory.over [ModelCategory C] : ModelCategory (Over S) where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"line\": \"27\", \"text\": \"to define only local instances of `ModelCategory`, or to set these instances on type synonyms.\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ModelCategory/Injective.lean\", \"line\": \"204\", \"text\": \"scoped instance : ModelCategory (CochainComplex.Plus C) where\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryWithFibrations.lean:73-82 labels the Kan-Quillen model category as TODO; it supplies classes of maps, not a model-category instance or right properness. The pullback hits apply to trivial fibrations, not arbitrary Kan fibrations pulling back weak equivalences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Kan Quillen model structure on simplicial sets is right proper",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.Subcomplex.Pairing.IsProper\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.Pairing\", \"type\": \"{X : SSet} → {A : X.Subcomplex} → A.Pairing → Prop\", \"doc\": \"For a simplicial set $X$ and a subcomplex $A$ of $X$, a predicate that determines whether a given pairing associated to $X$ and $A$ satisfies the properness condition required in the context of anodyn\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": fibrations SSet.{u} = J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": CategoryWithFibrations SSet.{u}\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.Subcomplex.Pairing.IsRegular.toIsProper\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.Pairing\", \"type\": \"∀ {X : SSet} {A : X.Subcomplex} {P : A.Pairing} [self : P.IsRegular], P.IsProper\", \"doc\": \"For any simplicial set $X$ and its subcomplex $A$, if a pairing $P$ associated to $X$ and $A$ satisfies the regularity condition, then it also satisfies the properness condition required in anodyne ex\"}\n  {\"name\": \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \"[Mono f] : Cofibration f\", \"doc\": \"In the category of simplicial sets equipped with the Quillen model structure, every monomorphism $ f $ is a cofibration. This establishes that the class of cofibrations coincides with the class of mon\"}\n  {\"name\": \"SSet.modelCategoryQuillen.cofibrations_eq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": cofibrations SSet.{u} = monomorphisms _\", \"doc\": \"In the category of simplicial sets equipped with the Quillen model structure, the class of cofibrations coincides with the class of monomorphisms.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibration_iff\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": Fibration f ↔ J.rlp f\", \"doc\": \"A morphism $ f $ in the category of simplicial sets is a fibration in the Quillen model structure if and only if it satisfies the right lifting property with respect to all horn inclusions $ \\\\Lambda[n\"}\n  {\"name\": \"SSet.instBalanced\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Subcomplex\", \"type\": \": Balanced SSet.{u}\", \"doc\": \"The category of simplicial sets is balanced, meaning every monomorphism is an epimorphism and every epimorphism is a monomorphism.\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryWithFibrations.lean:73-82 labels the Kan-Quillen model category as TODO; it supplies classes of maps, not a model-category instance or right properness. The pullback hits apply to trivial fibrations, not arbitrary Kan fibrations pulling back weak equivalences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a weak homotopy equivalence of simplicial sets along a Kan fibration is a weak homotopy equivalence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithFibrations C] {X Y Z : C} (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst_3 : CategoryTheory.Limits.HasPullback f g] [(HomotopicalAlgebra.trivialFibrations\", \"doc\": \"In a category with fibrations and weak equivalences where trivial fibrations are stable under base change, if a morphism $ g $ is a trivial fibration (i.e., both a fibration and a weak equivalence), t\"}\n  {\"name\": \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithFibrations C] {X Y Z : C} (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst_3 : CategoryTheory.Limits.HasPullback f g] [(HomotopicalAlgebra.trivialFibrations\", \"doc\": \"In a category where trivial fibrations are stable under base change, if $ f $ is a trivial fibration (both a fibration and a weak equivalence) and $ g $ is any morphism with codomain matching $ f $, t\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.fibrations SSet = SSet.modelCategoryQuillen.J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithCofibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [(HomotopicalAlgebra.trivialCofibrations C).IsWeakFactorizationSys\", \"doc\": \"In a category equipped with fibrations, every base change (pullback) of a fibration is again a fibration.\"}\n  {\"name\": \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithCofibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [(HomotopicalAlgebra.cofibrations C).IsWeakFactorizationSystem (Ho\", \"doc\": \"In a category equipped with fibrations and weak equivalences, trivial fibrations (morphisms that are both fibrations and weak equivalences) are stable under base change. That is, the pullback of a tri\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibration_iff\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y), HomotopicalAlgebra.Fibration f ↔ SSet.modelCategoryQuillen.J.rlp f\", \"doc\": \"A morphism $ f $ in the category of simplicial sets is a fibration in the Quillen model structure if and only if it satisfies the right lifting property with respect to all horn inclusions $ \\\\Lambda[n\"}\n  {\"name\": \"HomotopicalAlgebra.FibrantBrownFactorization.instWeakEquivalencePTrivialCofibrationsFibrations\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/BrownLemma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] {X Y : C}\\n  (f : X ⟶ Y) (h : HomotopicalAlgebra.FibrantBrownFactorization f) [HomotopicalAlgebra.WeakEquivalence f],\\n  HomotopicalAlgebra.WeakEquivalence h.p\", \"doc\": \"In a model category, given a morphism with a fibrant Brown factorization, the morphism $ p $ in the factorization data is a weak equivalence. This instance asserts that the second morphism in the deco\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: CategoryWithFibrations.lean:73-82 labels the Kan-Quillen model category as TODO; it supplies classes of maps, not a model-category instance or right properness. The pullback hits apply to trivial fibrations, not arbitrary Kan fibrations pulling back weak equivalences."
+  },
+  {
+   "tool": "grep",
+   "query": "RightProper|right_proper|Serre|preservesFiniteLimits|HasSmallObjectArgument",
+   "results": "{\"t\": \"2026-10-16T13:34:14Z\", \"tool\": \"grep\", \"query\": \"RightProper|right_proper|Serre|preservesFiniteLimits|HasSmallObjectArgument\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\"], \"digest\": \"5177909ac74bdabd\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned SSet fibration/cofibration classes do not construct the full Kan-Quillen model structure; its Mathlib category file explicitly says TODO, and no right-properness theorem for arbitrary Kan fibrations is present."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Kan Quillen model structure on simplicial sets has realization weak equivalences",
+   "results": "{\"t\": \"2026-10-16T13:34:15Z\", \"tool\": \"leansearch\", \"query\": \"The Kan Quillen model structure on simplicial sets has realization weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.weakEquivalences\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.instWeakEquivalenceOfIsWeakFactorizationSystemTrivialCofibrationsFibrationsOfIsStableUnderRetractsWeakEquivalencesOfIsIso\", \"SSet.toTop\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\"], \"digest\": \"40a515e41ea0ba78\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned SSet fibration/cofibration classes do not construct the full Kan-Quillen model structure; its Mathlib category file explicitly says TODO, and no right-properness theorem for arbitrary Kan fibrations is present."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"ModelCategory\"",
+   "results": "{\"t\": \"2026-10-16T13:34:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"ModelCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instIsMultiplicativeCofibrations\", \"SSet.modelCategoryQuillen.instIsMultiplicativeFibrations\", \"SSet.modelCategoryQuillen.instIsStableUnderRetractsCofibrations\", \"SSet.modelCategoryQuillen.instIsStableUnderRetractsFibrations\"], \"digest\": \"c07b5afca0134e97\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned SSet fibration/cofibration classes do not construct the full Kan-Quillen model structure; its Mathlib category file explicitly says TODO, and no right-properness theorem for arbitrary Kan fibrations is present."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial sets admit the Kan Quillen model structure and weak equivalences pull back along Kan fibrations",
+   "results": "{\"t\": \"2026-10-16T13:34:18Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial sets admit the Kan Quillen model structure and weak equivalences pull back along Kan fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\"], \"digest\": \"46039d44e5e6b2b3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned SSet fibration/cofibration classes do not construct the full Kan-Quillen model structure; its Mathlib category file explicitly says TODO, and no right-properness theorem for arbitrary Kan fibrations is present."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-coef-kan-quillen-right-proper",
+  "by": "maintainer",
+  "date": "2026-10-17",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "tool_uses": [
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Maintenance extraction of the already reviewed model/right-proper proof, verbatim steps 1–6; coherent localization and its Quillen B dependence are excluded."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

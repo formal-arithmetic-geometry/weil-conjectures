@@ -21,13 +21,13 @@
  },
  "kind": "statement",
  "title": "Gluing and filtered-colimit stability for simplicial weak equivalences",
- "statement": "Use simplicial sets, monomorphisms and weak homotopy equivalences of [lem-coef-kan-quillen-right-proper]. Let $A_i\\xrightarrow{u_i}B_i$, $A_i\\xrightarrow{v_i}C_i$ for $i=0,1$ be two spans of small simplicial sets, with $u_0,u_1$ monomorphisms. Let $(a,b,c)$ be a commuting map from the first span to the second, all three components weak homotopy equivalences. Then the induced map $B_0\\amalg_{A_0}C_0\\to B_1\\amalg_{A_1}C_1$ is a weak homotopy equivalence.\n\nLet $I$ be a small nonempty partially ordered set in which every finite subset has an upper bound, viewed as a category with one arrow $i\\to j$ exactly when $i\\leq j$. For diagrams $X,Y:I\\to\\mathrm{sSet}$ and a natural transformation $f:X\\to Y$ whose components are weak homotopy equivalences, the map $\\operatorname{colim}_I X\\to\\operatorname{colim}_I Y$ is a weak homotopy equivalence. These colimits and pushouts are formed degreewise in sets; the transition maps need not be monomorphisms.",
+ "statement": "Use simplicial sets, monomorphisms and weak homotopy equivalences of [lem-coef-kan-quillen-model-right-proper-core]. Let $A_i\\xrightarrow{u_i}B_i$, $A_i\\xrightarrow{v_i}C_i$ for $i=0,1$ be two spans of small simplicial sets, with $u_0,u_1$ monomorphisms. Let $(a,b,c)$ be a commuting map from the first span to the second, all three components weak homotopy equivalences. Then the induced map $B_0\\amalg_{A_0}C_0\\to B_1\\amalg_{A_1}C_1$ is a weak homotopy equivalence.\n\nLet $I$ be a small nonempty partially ordered set in which every finite subset has an upper bound, viewed as a category with one arrow $i\\to j$ exactly when $i\\leq j$. For diagrams $X,Y:I\\to\\mathrm{sSet}$ and a natural transformation $f:X\\to Y$ whose components are weak homotopy equivalences, the map $\\operatorname{colim}_I X\\to\\operatorname{colim}_I Y$ is a weak homotopy equivalence. These colimits and pushouts are formed degreewise in sets; the transition maps need not be monomorphisms.",
  "source": {
   "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
   "place": "Lemma 5.2.6 (cube lemma), printed pp. 126-127, specialized to simplicial sets; filtered-colimit assertion: HTT Section A.2.7, Kan-model discussion following Example A.2.7.3 and Proposition A.2.6.15, condition (1), with Definition A.2.6.12(3); also used explicitly in HTT Proposition 2.2.2.7. No Stacks tag states these simplicial homotopy assertions."
  },
  "stmt_deps": [
-  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-kan-quillen-model-right-proper-core",
   "def-weil-pbc-category-colimit"
  ],
  "proof": [
@@ -35,7 +35,7 @@
    "text": "Let $J$ have three objects $c,a,b$ and only the two nonidentity arrows $a\\to c$ and $a\\to b$. Give them degrees $0,1,2$, respectively; let $J^-$ contain $a\\to c$ and $J^+$ contain $a\\to b$, together with all identities. Every arrow has the required unique inverse-then-direct factorization, so the Reedy-model theorem applies. The latching objects of a span $D=(C\\leftarrow A\\to B)$ are $L_cD=L_aD=\\varnothing$ and $L_bD=A$; the matching objects are $M_cD=M_bD=*$ and $M_aD=C$. In Kan–Quillen simplicial sets every object is cofibrant: its initial map from $\\varnothing$ is degreewise injective. Thus the Reedy cofibrancy conditions on $D$ are exactly the monomorphism condition on $A\\to B$. Both given spans $D_0,D_1$ are Reedy cofibrant, and $f=(c,a,b):D_0\\to D_1$ is a Reedy weak equivalence because Reedy weak equivalences are objectwise.",
    "uses": [
     "lem-coef-reedy-model-structure",
-    "lem-coef-kan-quillen-right-proper"
+    "lem-coef-kan-quillen-model-right-proper-core"
    ],
    "elementary": false,
    "source": {
@@ -48,7 +48,7 @@
    "uses": [
     "def-weil-pbc-category-colimit",
     "lem-coef-reedy-model-structure",
-    "lem-coef-kan-quillen-right-proper"
+    "lem-coef-kan-quillen-model-right-proper-core"
    ],
    "elementary": false,
    "source": {
@@ -62,7 +62,7 @@
     "lem-coef-brown-split-factorizations",
     "lem-coef-lifting-class-closure",
     "lem-coef-reedy-model-structure",
-    "lem-coef-kan-quillen-right-proper"
+    "lem-coef-kan-quillen-model-right-proper-core"
    ],
    "elementary": false,
    "source": {
@@ -75,7 +75,7 @@
    "uses": [
     "def-weil-pbc-category-colimit",
     "def-weil-pbc-simplicial-set",
-    "lem-coef-kan-quillen-right-proper"
+    "lem-coef-kan-quillen-model-right-proper-core"
    ],
    "elementary": true,
    "source": {
@@ -86,7 +86,7 @@
   {
    "text": "Construct a factorization for each arbitrary simplicial map $g:U\\to V$ as follows. Set $U^{(0)}=U$, with $g^{(0)}=g$. Given $g^{(m)}:U^{(m)}\\to V$, for each $r\\geq1$ and $0\\leq t\\leq r$ let $S_{r,t}^{(m)}$ be the set of pairs $(\\alpha,\\beta)$ with $\\alpha:\\Lambda_t^r\\to U^{(m)}$, $\\beta:\\Delta^r\\to V$, and $g^{(m)}\\alpha=\\beta|_{\\Lambda_t^r}$. Form $U^{(m+1)}$ by the pushout of $\\coprod_{r,t}\\coprod_{S_{r,t}^{(m)}}\\Lambda_t^r\\to U^{(m)}$ along $\\coprod_{r,t}\\coprod_{S_{r,t}^{(m)}}\\Lambda_t^r\\hookrightarrow\\coprod_{r,t}\\coprod_{S_{r,t}^{(m)}}\\Delta^r$. The top map evaluates $\\alpha$ on each summand, and the maps $\\beta$ extend $g^{(m)}$ to $g^{(m+1)}$. Put $Q(g)=\\operatorname{colim}_{m\\in\\mathbf N}U^{(m)}$. The resulting $j_g:U\\to Q(g)$ is a countable composite of pushouts of coproducts of horn inclusions, hence a trivial cofibration by the horn-cell characterization in the Kan–Quillen statement (a cell map is its own retract). Let $p_g:Q(g)\\to V$ be induced by the $g^{(m)}$. A horn square against $p_g$ descends by Step 4 to some $U^{(m)}$ with its commutativity equation valid there; the corresponding simplex attached at $m+1$ fills it. Thus $p_g$ is a Kan fibration and $g=p_gj_g$. A commuting square from $g$ to $g'$ sends $(\\alpha,\\beta)$ to its pair of composites. It therefore induces the maps of the displayed pushouts at each stage and then of their sequential colimits. Identities and compositions agree on the old object and every attached simplex, so agree by the pushout and colimit universal properties. This makes $Q,j,p$ functorial, not just a collection of unrelated factorizations. All displayed coproducts have small indexing sets because all objects and hom-sets are small.",
    "uses": [
-    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-kan-quillen-model-right-proper-core",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": false,
@@ -110,7 +110,7 @@
   {
    "text": "Each $j_{f_i}$ is a weak equivalence by Step 5. Since $f_i=p_{f_i}j_{f_i}$ is a weak equivalence by hypothesis, two-out-of-three in the Kan–Quillen model makes $p_{f_i}$ a weak equivalence. It is already a fibration, so is a trivial fibration. Let $\\bar p=\\operatorname{colim}_I p_{f_i}$. A square from $\\partial\\Delta^r\\hookrightarrow\\Delta^r$ to $\\bar p$ descends by Step 4 to a square against some $p_{f_i}$; the filler there composes to a filler for the original square. This includes $r=0$, where the upper map is empty and only the lower vertex needs a representative. The boundary-lifting characterization in the Kan–Quillen statement implies that $\\bar p$ is a trivial fibration, hence a weak equivalence. Step 6 identifies $\\bar j=\\operatorname{colim}_I j_{f_i}$, via $\\theta$, with the horn-cell map $j_{\\bar f}$ of Step 5, so $\\bar j$ is a weak equivalence as well. Isomorphisms are weak equivalences because realization carries an inverse to an inverse, giving inverse maps on components and all based homotopy groups. Finally $\\bar f=\\bar p\\bar j$: both composites agree after every $X_i\\to\\operatorname{colim}_I X_i$ by $p_{f_i}j_{f_i}=f_i$, so the colimit universal property gives equality. Two-out-of-three now makes $\\bar f$ a weak equivalence, proving precisely the canonical map of the second clause, without any injectivity assumption on the transitions.",
    "uses": [
-    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-kan-quillen-model-right-proper-core",
     "lem-coef-reedy-model-structure",
     "def-weil-pbc-category-colimit"
    ],
@@ -123,7 +123,7 @@
  ],
  "proof_deps": [
   "lem-coef-reedy-model-structure",
-  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-kan-quillen-model-right-proper-core",
   "def-weil-pbc-category-colimit",
   "lem-coef-brown-split-factorizations",
   "lem-coef-lifting-class-closure",

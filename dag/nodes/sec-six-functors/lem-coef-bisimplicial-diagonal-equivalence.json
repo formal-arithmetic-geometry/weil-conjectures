@@ -18,21 +18,21 @@
  },
  "kind": "statement",
  "title": "Diagonal preserves degreewise weak equivalences of bisimplicial sets",
- "statement": "A bisimplicial set is a functor $D:\\Delta^{\\mathrm{op}}\\times\\Delta^{\\mathrm{op}}\\to\\mathrm{Sets}$ [def-weil-pbc-simplicial-set]; its diagonal has $(\\operatorname{diag}D)_n=D_{n,n}$, with both simplicial operators applied together. Use weak homotopy equivalences as in [lem-coef-kan-quillen-right-proper]. For any morphism $D\\to E$ of bisimplicial sets, if $D_{m,\\bullet}\\to E_{m,\\bullet}$ is a weak homotopy equivalence for every $m$, then $\\operatorname{diag}D\\to\\operatorname{diag}E$ is a weak homotopy equivalence. The same holds with the two directions exchanged. In particular, if every structure map of the simplicial diagram $m\\mapsto D_{m,\\bullet}$ is a weak homotopy equivalence, the map from the constant diagram on $D_{0,\\bullet}$ induced by the unique maps $[m]\\to[0]$ has diagonal a weak homotopy equivalence $D_{0,\\bullet}\\to\\operatorname{diag}D$.",
+ "statement": "A bisimplicial set is a functor $D:\\Delta^{\\mathrm{op}}\\times\\Delta^{\\mathrm{op}}\\to\\mathrm{Sets}$ [def-weil-pbc-simplicial-set]; its diagonal has $(\\operatorname{diag}D)_n=D_{n,n}$, with both simplicial operators applied together. Use weak homotopy equivalences as in [lem-coef-kan-quillen-model-right-proper-core]. For any morphism $D\\to E$ of bisimplicial sets, if $D_{m,\\bullet}\\to E_{m,\\bullet}$ is a weak homotopy equivalence for every $m$, then $\\operatorname{diag}D\\to\\operatorname{diag}E$ is a weak homotopy equivalence. The same holds with the two directions exchanged. In particular, if every structure map of the simplicial diagram $m\\mapsto D_{m,\\bullet}$ is a weak homotopy equivalence, the map from the constant diagram on $D_{0,\\bullet}$ induced by the unique maps $[m]\\to[0]$ has diagonal a weak homotopy equivalence $D_{0,\\bullet}\\to\\operatorname{diag}D$.",
  "source": {
   "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
   "place": "Theorem 3.1.16, printed pp. 79-80; Hovey Lemma 5.3.1, printed p. 129, for the homotopically constant specialization No Stacks tag states this homotopical result."
  },
  "stmt_deps": [
   "def-weil-pbc-simplicial-set",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-model-right-proper-core"
  ],
  "proof": [
   {
-   "text": "View a bisimplicial set $X$ as a simplicial diagram $m\\mapsto X_{m,\\bullet}$ in simplicial sets. Apply [lem-coef-reedy-model-structure] to the Kan-Quillen model category of [lem-coef-kan-quillen-right-proper] and the small category $\\Delta^{\\mathrm{op}}$. Its weak equivalences are precisely the rowwise weak homotopy equivalences. Every such diagram is Reedy cofibrant: in vertical degree $q$, the latching colimit $L_mX\\to X_{m,\\bullet}$ identifies with the subset of horizontally degenerate simplices of $X_{m,q}$. Indeed, [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] gives each horizontal simplex a unique surjection onto its nondegenerate ancestor. Every representation through a proper surjection factors through this ancestor, and any two representations with the same image are identified there in the latching colimit. Thus the latching map is injective in every vertical degree, hence a Kan-Quillen cofibration. At $m=0$ the latching object is empty, so this argument includes degree zero.",
+   "text": "View a bisimplicial set $X$ as a simplicial diagram $m\\mapsto X_{m,\\bullet}$ in simplicial sets. Apply [lem-coef-reedy-model-structure] to the Kan-Quillen model category of [lem-coef-kan-quillen-model-right-proper-core] and the small category $\\Delta^{\\mathrm{op}}$. Its weak equivalences are precisely the rowwise weak homotopy equivalences. Every such diagram is Reedy cofibrant: in vertical degree $q$, the latching colimit $L_mX\\to X_{m,\\bullet}$ identifies with the subset of horizontally degenerate simplices of $X_{m,q}$. Indeed, [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] gives each horizontal simplex a unique surjection onto its nondegenerate ancestor. Every representation through a proper surjection factors through this ancestor, and any two representations with the same image are identified there in the latching colimit. Thus the latching map is injective in every vertical degree, hence a Kan-Quillen cofibration. At $m=0$ the latching object is empty, so this argument includes degree zero.",
    "uses": [
     "lem-coef-reedy-model-structure",
-    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-kan-quillen-model-right-proper-core",
     "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
    ],
    "elementary": false,
@@ -45,7 +45,7 @@
    "text": "Let $a:X\\to Y$ be a Reedy trivial cofibration. By [lem-coef-reedy-model-structure] it is objectwise a monomorphism and its relative latching maps $$u_m:A_m:=X_{m,\\bullet}\\amalg_{L_mX}L_mY\\longrightarrow Y_{m,\\bullet}$$ are Kan-Quillen trivial cofibrations. The decomposition of [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] identifies $A_m$ with the simplicial subset $X_{m,\\bullet}\\cup L_mY$ of $Y_{m,\\bullet}$: a simplex of $X$ that is degenerate in $Y$ has its ancestor in $X$, by applying a section of the degeneracy surjection. Define $Z^{-1}=X$ and $Z^m\\subseteq Y$ to be the horizontal simplicial subset generated by $X$ and all $Y_{r,\\bullet}$ with $r\\leq m$. Put $(K\\boxtimes T)_{r,q}=K_r\\times T_q$. Then $Z^{m-1}\\to Z^m$ is the pushout of $$ (\\partial\\Delta^m\\boxtimes Y_{m,\\bullet})\\amalg_{\\partial\\Delta^m\\boxtimes A_m}(\\Delta^m\\boxtimes A_m)\\longrightarrow\\Delta^m\\boxtimes Y_{m,\\bullet}. $$ To check the pushout in degree $(r,q)$, send $(\\alpha:[r]\\to[m],y)$ to $Y(\\alpha)(y)$. A nonsurjective $\\alpha$ factors through a proper face and lands in $Z^{m-1}$; a $y$ in $A_m$ is already prescribed by $X$ or a lower horizontal degree. All remaining pairs have $\\alpha$ surjective and $y$ horizontally nondegenerate outside $X$, and uniqueness of the nondegenerate decomposition says their images are distinct and exhaust the new elements. This proves the pushout assertion degree by degree. Vertical operators commute with the horizontal operators, so these are bisimplicial pushout squares. Every simplex belongs to some $Z^m$, and hence $\\operatorname{colim}_m Z^m=Y$.",
    "uses": [
     "lem-coef-reedy-model-structure",
-    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-kan-quillen-model-right-proper-core",
     "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
    ],
    "elementary": false,
@@ -55,10 +55,10 @@
    }
   },
   {
-   "text": "The diagonal functor preserves these pushouts and the sequential colimit, because their values are computed degree by degree in sets. It sends $K\\boxtimes T$ to $K\\times T$. Consequently the diagonal of each attachment in step 2 is a pushout of the pushout product of $\\partial\\Delta^m\\hookrightarrow\\Delta^m$ and $u_m$. The boundary inclusion is degreewise injective. A Kan-Quillen trivial cofibration is anodyne in the precise lifting-property meaning of [lem-coef-sset-anodyne-pushout-product]: by the model axioms of [lem-coef-reedy-model-structure] and the Kan-Quillen fibrations of [lem-coef-kan-quillen-right-proper], both classes are exactly the left lifting class of Kan fibrations. Thus [lem-coef-sset-anodyne-pushout-product] makes each pushout-product map anodyne. Fix any Kan fibration $H\\to K$. Pushouts preserve this lifting property: for a pushout of $U\\to V$ along $U\\to P$, restrict a lifting square for $P\\to P\\amalg_U V$ to $U\\to V$. A filler $V\\to H$ agrees on $U$ with the given $P\\to H$, so the pushout gives a filler $P\\amalg_U V\\to H$. For the sequential composite, start with the given map on $\\operatorname{diag}X$. Inductively the lifting property of each stage provides a map on the next stage restricting to the preceding map and commuting with the fixed Kan fibration. These compatible maps induce the filler on the colimit. Therefore $\\operatorname{diag}(a)$ is anodyne and hence a Kan-Quillen trivial cofibration. This includes $m=0$, where the boundary is empty.",
+   "text": "The diagonal functor preserves these pushouts and the sequential colimit, because their values are computed degree by degree in sets. It sends $K\\boxtimes T$ to $K\\times T$. Consequently the diagonal of each attachment in step 2 is a pushout of the pushout product of $\\partial\\Delta^m\\hookrightarrow\\Delta^m$ and $u_m$. The boundary inclusion is degreewise injective. A Kan-Quillen trivial cofibration is anodyne in the precise lifting-property meaning of [lem-coef-sset-anodyne-pushout-product]: by the model axioms of [lem-coef-reedy-model-structure] and the Kan-Quillen fibrations of [lem-coef-kan-quillen-model-right-proper-core], both classes are exactly the left lifting class of Kan fibrations. Thus [lem-coef-sset-anodyne-pushout-product] makes each pushout-product map anodyne. Fix any Kan fibration $H\\to K$. Pushouts preserve this lifting property: for a pushout of $U\\to V$ along $U\\to P$, restrict a lifting square for $P\\to P\\amalg_U V$ to $U\\to V$. A filler $V\\to H$ agrees on $U$ with the given $P\\to H$, so the pushout gives a filler $P\\amalg_U V\\to H$. For the sequential composite, start with the given map on $\\operatorname{diag}X$. Inductively the lifting property of each stage provides a map on the next stage restricting to the preceding map and commuting with the fixed Kan fibration. These compatible maps induce the filler on the colimit. Therefore $\\operatorname{diag}(a)$ is anodyne and hence a Kan-Quillen trivial cofibration. This includes $m=0$, where the boundary is empty.",
    "uses": [
     "lem-coef-reedy-model-structure",
-    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-kan-quillen-model-right-proper-core",
     "lem-coef-sset-anodyne-pushout-product"
    ],
    "elementary": false,
@@ -68,11 +68,11 @@
    }
   },
   {
-   "text": "Now let $f:D\\to E$ be rowwise a weak homotopy equivalence. Step 1 makes its endpoints cofibrant in the Reedy model category. Apply the cofibrant half of [lem-coef-brown-split-factorizations] there: write $f=pi$ with $i:D\\to Z$ a Reedy cofibration, $p:Z\\to E$ a Reedy trivial fibration, and $s:E\\to Z$ a Reedy cofibration satisfying $ps=1_E$. Two-out-of-three gives that both $i$ and $s$ are Reedy weak equivalences, so step 3 makes $\\operatorname{diag}(i)$ and $\\operatorname{diag}(s)$ weak homotopy equivalences. From $\\operatorname{diag}(p)\\operatorname{diag}(s)=1$ and two-out-of-three in [lem-coef-kan-quillen-right-proper], $\\operatorname{diag}(p)$ is a weak homotopy equivalence. The equality $\\operatorname{diag}(f)=\\operatorname{diag}(p)\\operatorname{diag}(i)$ proves the first assertion. The use of two-out-of-three in the Reedy category is justified by [lem-coef-reedy-model-structure].",
+   "text": "Now let $f:D\\to E$ be rowwise a weak homotopy equivalence. Step 1 makes its endpoints cofibrant in the Reedy model category. Apply the cofibrant half of [lem-coef-brown-split-factorizations] there: write $f=pi$ with $i:D\\to Z$ a Reedy cofibration, $p:Z\\to E$ a Reedy trivial fibration, and $s:E\\to Z$ a Reedy cofibration satisfying $ps=1_E$. Two-out-of-three gives that both $i$ and $s$ are Reedy weak equivalences, so step 3 makes $\\operatorname{diag}(i)$ and $\\operatorname{diag}(s)$ weak homotopy equivalences. From $\\operatorname{diag}(p)\\operatorname{diag}(s)=1$ and two-out-of-three in [lem-coef-kan-quillen-model-right-proper-core], $\\operatorname{diag}(p)$ is a weak homotopy equivalence. The equality $\\operatorname{diag}(f)=\\operatorname{diag}(p)\\operatorname{diag}(i)$ proves the first assertion. The use of two-out-of-three in the Reedy category is justified by [lem-coef-reedy-model-structure].",
    "uses": [
     "lem-coef-brown-split-factorizations",
     "lem-coef-reedy-model-structure",
-    "lem-coef-kan-quillen-right-proper"
+    "lem-coef-kan-quillen-model-right-proper-core"
    ],
    "elementary": false,
    "source": {
@@ -106,7 +106,7 @@
  "proof_deps": [
   "def-weil-pbc-simplicial-set",
   "lem-coef-brown-split-factorizations",
-  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-kan-quillen-model-right-proper-core",
   "lem-coef-reedy-model-structure",
   "lem-coef-sset-anodyne-pushout-product",
   "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"

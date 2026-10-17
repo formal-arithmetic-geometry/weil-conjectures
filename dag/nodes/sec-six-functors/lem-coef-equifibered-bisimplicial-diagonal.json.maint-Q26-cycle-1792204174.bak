@@ -1,0 +1,243 @@
+{
+ "id": "lem-coef-equifibered-bisimplicial-diagonal",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, displayed derived coefficient adjunction: mapping-space foundation via the cosimplicial-frame and cofibrant-inversion chain; diagonal/coherent comparison. Additional Rezk Segal-space infrastructure for the diagonal criterion, not a literal claim of the ancestor paragraph. Rezk, A model for the homotopy theory of homotopy theory, Section 14, printed pp. 32-34: the displayed construction preceding Remark 14.1 and the proof of assertions (1) and (3), with Sections 4-6 for the definitions. Supporting lemma: Homotopy fibers of equifibered diagrams of Kan fibrations survive the diagonal.",
+   "via": [
+    "lem-coef-rezk-explicit-completion",
+    "lem-coef-segal-dk-diagonal-equivalence",
+    "lem-coef-diagonal-coherent-nerve-comparison",
+    "lem-coef-cofibrant-simplicial-inversion",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Homotopy fibers of equifibered diagrams of Kan fibrations survive the diagonal",
+ "statement": "Use small simplicial sets, Kan complexes, homotopy fibers and weak homotopy equivalences from [def-cbc-enhanced-diagrams-cones] and the Kan model structure of [lem-coef-kan-quillen-right-proper]. Let $X_\\bullet,Y_\\bullet:\\Delta^{\\mathrm{op}}\\to\\mathrm{sSet}$ be small simplicial diagrams of Kan complexes, and let $p:X_\\bullet\\to Y_\\bullet$ be a natural transformation such that every $p_m:X_m\\to Y_m$ is a Kan fibration. Suppose that for every $\\alpha:[m]\\to[n]$ in $\\Delta$ the naturality square\n$$\\begin{array}{ccc}X_n&\\xrightarrow{X(\\alpha)}&X_m\\\\ p_n\\downarrow&&\\downarrow p_m\\\\ Y_n&\\xrightarrow{Y(\\alpha)}&Y_m\\end{array}$$\nis a homotopy pullback. For $Z=X,Y$ put $(\\operatorname{diag}Z)_q=(Z_q)_q$ with both operators applied simultaneously. The unique maps $[m]\\to[0]$ induce maps from the constant diagrams on $X_0,Y_0$, hence maps $\\iota_X:X_0\\to\\operatorname{diag}X$ and $\\iota_Y:Y_0\\to\\operatorname{diag}Y$. Then\n$$\\begin{array}{ccc}X_0&\\xrightarrow{\\iota_X}&\\operatorname{diag}X\\\\ p_0\\downarrow&&\\downarrow\\operatorname{diag}p\\\\ Y_0&\\xrightarrow{\\iota_Y}&\\operatorname{diag}Y\\end{array}$$\nis a homotopy pullback, naturally in $p$. Equivalently, for each vertex $y\\in Y_0$, the canonical comparison from the strict fiber $p_0^{-1}(y)$ to the homotopy fiber of $\\operatorname{diag}p$ at $\\iota_Y(y)$ is a weak homotopy equivalence. Homotopy pullbacks and homotopy fibers involving a non-Kan diagonal are computed after functorial Kan replacement of the corresponding diagram. No Reedy fibrancy of the diagrams or Kan condition on their diagonals is assumed.",
+ "source": {
+  "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+  "place": "Theorem 6.1 and Propositions 2.2, 2.7, specialized to simplicial sets, with Remark 6.8 for rowwise equivalences; printed pp. 3-4, 11-12. The row-zero comparison follows by pulling the diagram back along the constant diagram on Y_0. Also the realization-fiber argument in Rezk, A model for the homotopy theory of homotopy theory, Section 14, pp. 33-34. Read online; not archived in literature/. No Stacks tag states this result."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof": [
+  {
+   "text": "Each $p_m$ is sharp in the sense of [lem-coef-rezk-diagonal-sharp]. Indeed, for an arbitrary $a:A\\to Y_m$, factor $a$ as a weak equivalence $A\\to A'$ followed by a Kan fibration $A'\\to Y_m$. Since $Y_m$ is Kan, $A'$ is Kan. The pullback $A'\\times_{Y_m}X_m$ models the homotopy pullback by [lem-coef-kan-quillen-right-proper]. The map $A\\times_{Y_m}X_m\\to A'\\times_{Y_m}X_m$ is the pullback of $A\\to A'$ along a Kan fibration (the base change of $p_m$), hence is a weak equivalence by right properness. Stability of Kan fibrations under pullback follows directly by projecting a horn lifting problem, lifting for $p_m$, and pairing the lift with its given base coordinate. Thus the strict pullback square is homotopy cartesian, as required.",
+   "uses": [
+    "lem-coef-rezk-diagonal-sharp",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Theorem 6.1 and Propositions 2.2, 2.7, printed pp. 3-4 and 11-12; agent reconstruction of the constant-base-change argument."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-rezk-diagonal-sharp] to $p$. Its row maps are sharp by step 1, and all its operator squares are homotopy cartesian by hypothesis. Consequently $\\operatorname{diag}p$ is sharp: its strict pullback along any map $T\\to\\operatorname{diag}Y$ is a homotopy pullback, even if the diagonal is not Kan.",
+   "uses": [
+    "lem-coef-rezk-diagonal-sharp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Theorem 6.1 and Propositions 2.2, 2.7, printed pp. 3-4 and 11-12; agent reconstruction of the constant-base-change argument."
+   }
+  },
+  {
+   "text": "Let $t:T\\to Y_0$ be a map with $T$ Kan; later take $t=1_{Y_0}$ or a vertex $\\Delta^0\\to Y_0$. Write $v_m:[m]\\to[0]$ for the unique map, $b_m=Y(v_m)t:T\\to Y_m$, and set $G_m=X_m\\times_{Y_m}T$. An operator $\\alpha:[m]\\to[n]$ sends $(x,u)$ to $(X(\\alpha)x,u)$, because $v_n\\alpha=v_m$. These formulas give a simplicial diagram over the constant diagram on $T$. In degree $q$ its diagonal consists of pairs $(x,u)\\in(X_q)_q\\times T_q$ with $p_q(x)=b_q(u)$, and its operators act on both coordinates. Hence $\\operatorname{diag}G=\\operatorname{diag}X\\times_{\\operatorname{diag}Y}T$ strictly, using $T\\xrightarrow{t}Y_0\\xrightarrow{\\iota_Y}\\operatorname{diag}Y$, and $G_0=X_0\\times_{Y_0}T$. These identities use only degreewise pullbacks of simplicial sets [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Theorem 6.1 and Propositions 2.2, 2.7, printed pp. 3-4 and 11-12; agent reconstruction of the constant-base-change argument."
+   }
+  },
+  {
+   "text": "Fix $\\alpha:[m]\\to[n]$ and put $P=X_m\\times_{Y_m}Y_n$. Since $p_m$ is a Kan fibration, $P$ represents the homotopy pullback of this cospan, by [lem-coef-kan-quillen-right-proper]. The hypothesized homotopy-cartesian square therefore says that $e:X_n\\to P$, $x\\mapsto(X(\\alpha)x,p_nx)$, is a weak equivalence. Both $X_n\\to Y_n$ and $P\\to Y_n$ are Kan fibrations: the first is $p_n$, and the second is a base change of $p_m$, whose horn-lifting property follows as in step 1. Apply [lem-coef-kan-pullback-fibration-invariance] to the cospans $X_n\\to Y_n\\leftarrow T$ and $P\\to Y_n\\leftarrow T$, with comparison maps $e,1_{Y_n},1_T$ and the same map $b_n:T\\to Y_n$. It gives a weak equivalence $G_n\\to P\\times_{Y_n}T$. By the pullback equations this target is $G_m$, and the map is exactly the operator map in step 3. Thus every structure map of $G$ is a weak equivalence; no fibration hypothesis on $b_n$ has been used.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-kan-pullback-fibration-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Theorem 6.1 and Propositions 2.2, 2.7, printed pp. 3-4 and 11-12; agent reconstruction of the constant-base-change argument."
+   }
+  },
+  {
+   "text": "Apply the homotopically constant clause of [lem-coef-bisimplicial-diagonal-equivalence] to $G$. Step 4 verifies its hypothesis for every operator. It follows that $G_0\\to\\operatorname{diag}G$ is a weak homotopy equivalence. Its row-$m$ map is induced by $v_m$, so under the identifications of step 3 it is $(x,u)\\mapsto(X(v_m)x,u)$. In particular this is the comparison induced by $\\iota_X$, rather than an unspecified equivalence.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Theorem 6.1 and Propositions 2.2, 2.7, printed pp. 3-4 and 11-12; agent reconstruction of the constant-base-change argument."
+   }
+  },
+  {
+   "text": "For $T=Y_0$ and $t=1$, step 5 identifies $X_0=G_0$ by a weak equivalence with the strict pullback of $\\operatorname{diag}p$ along $\\iota_Y$. By step 2 that strict pullback maps by a weak equivalence to the homotopy pullback. The composite is the comparison from the square in the statement, so two-out-of-three in [lem-coef-kan-quillen-right-proper] proves that square homotopy cartesian. For $T=\\Delta^0$ and $t=y$, step 5 instead gives $p_0^{-1}(y)\\simeq\\operatorname{diag}G$, while step 2 identifies this strict pullback with the homotopy fiber at $\\iota_Y(y)$. Their composite is exactly the asserted strict-to-homotopy-fiber map. A map of natural transformations sends every pair $(x,u)$ in step 3 to the pair of its images; the formulas for $v_m$ and the projections commute with these maps. Together with the functorial diagram replacements stipulated in the statement, this proves naturality. This argument never takes a strict fiber of an arbitrary weak equivalence and never assumes the diagonals are Kan.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Theorem 6.1 and Propositions 2.2, 2.7, printed pp. 3-4 and 11-12; agent reconstruction of the constant-base-change argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-rezk-diagonal-sharp",
+  "lem-coef-kan-quillen-right-proper",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-pullback-fibration-invariance",
+  "lem-coef-bisimplicial-diagonal-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, derived coefficient adjunction: auxiliary diagonal infrastructure under the inherited ancestry. Agent proof using the cited sharp-diagonal theorem, pullback-invariance lemma, and homotopically constant diagonal theorem; online Rezk source not archived."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A map of bisimplicial sets whose every naturality square is a homotopy pullback has the same homotopy fibers after diagonal realization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.fibrations SSet = SSet.modelCategoryQuillen.J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"HomotopicalAlgebra.BifibrantObject.homMk_homMk\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasInitial C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_4 : CategoryTheory.Limits.HasTerminal C] {X Y Z : C} [inst_5 : HomotopicalA\", \"doc\": \"For bifibrant objects $X$, $Y$, and $Z$ in a category with cofibrations and fibrations, and morphisms $f : X \\\\to Y$ and $g : Y \\\\to Z$ in the original category, the composition of $\\\\text{homMk}(f)$ and\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.BinaryProduct.square\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal\", \"type\": \"∀ {X Y : SSet.Truncated 2}\\n  {x₀ x₁ : X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.Truncated.Edge.tensor._proof_1 })}\\n  (ex : SSet.Truncated.Edge x₀ x₁)\\n  {y₀ y₁ : Y.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.Truncated.Edge.tensor._proof_1 })}\\n  (ey : SSet\", \"doc\": \"In the homotopy category of a 2-truncated simplicial set, for any edges $ e_x $ and $ e_y $, the composition of morphisms $ \\\\text{homMk}(e_x \\\\otimes \\\\text{id}_{y_0}) $ followed by $ \\\\text{homMk}(\\\\text\"}\n  {\"name\": \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"∀ {D : SSet} (X : SSet),\\n  (∀ (m : ℕ),\\n      CategoryTheory.IsIso\\n        (CategoryTheory.Limits.prodComparison SSet.hoFunctor D (SSet.stdSimplex.obj (SimplexCategory.mk m)))) →\\n    CategoryTheory.IsIso (CategoryTheory.Limits.prodComparison SSet.hoFunctor D X)\", \"doc\": \"If the product comparison morphism of the homotopy category functor is an isomorphism for all standard simplices $\\\\Delta[m]$ and a fixed simplicial set $D$, then it is also an isomorphism for any simp\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.BinaryProduct.curriedInverse\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HoFunctorMonoidal\", \"type\": \"(X Y : SSet.Truncated 2) →\\n  CategoryTheory.Functor X.HomotopyCategory\\n    (CategoryTheory.Functor Y.HomotopyCategory (CategoryTheory.MonoidalCategoryStruct.tensorObj X Y).HomotopyCategory)\", \"doc\": \"A curried inverse for the binary product in the homotopy category of 2-truncated simplicial sets, constructed by lifting through homotopy equivalence. This defines a functor $ X.\\text{HomotopyCategory}\"}\n  {\"name\": \"SSet.RelativeMorphism.Homotopy.ofEq_h\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism\", \"type\": \"∀ {X Y : SSet} {A : X.Subcomplex} {B : Y.Subcomplex} {φ : A.toSSet ⟶ B.toSSet} {f g : SSet.RelativeMorphism A B φ}\\n  (h : f = g),\\n  (SSet.RelativeMorphism.Homotopy.ofEq h).h =\\n    CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory.SemiCartesianMonoidalCategory.fst X (SSet.stdSimplex.obj (Simpl\", \"doc\": \"Given equal relative morphisms $ f = g $ between simplicial set pairs $(X,A)$ and $(Y,B)$, the induced homotopy is constructed by composing the left projection morphism from the standard 1-simplex wit\"}\n  {\"name\": \"HomotopicalAlgebra.PathObject.trans_ι\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/PathObject\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.ModelCategory C] {A : C}\\n  [inst_2 : HomotopicalAlgebra.IsFibrant A] (P P' : HomotopicalAlgebra.PathObject A) [inst_3 : P'.IsGood],\\n  (P.trans P').ι = CategoryTheory.Limits.pullback.lift P.ι P'.ι ⋯\", \"doc\": \"In a model category, for a fibrant object $A$ and path objects $P$ and $P'$ (with $P'$ satisfying the 'good' condition), the inclusion morphism $\\\\iota$ of the transposed path object $P \\\\times_A P'$ is\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib NatTrans.Equifibered requires strict pullback naturality squares in an ordinary category, and EquifiberedLimits concerns closure under limits, not homotopy fibers after bisimplicial diagonal realization. The remaining hits concern Kan fibrations, ordinary categorical squares, or paths of topological homotopies. Read Limits/Shapes/Pullback/Equifibered.lean:39-67 and EquifiberedLimits.lean:17-45; the focused AlgebraicTopology grep found no bisimplicial or homotopy-cartesian implementation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equifibered simplicial diagrams of Kan fibrations induce homotopy cartesian squares from each row to their diagonals",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithCofibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  {J : Type u_1} {X Y : J → C} (f : (i : J) → X i ⟶ Y i) [inst_4 : C\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a weak factorization system where the left class consists of trivial cofibrations (morphisms that are both cofibrations and weak equivalences) and the righ\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithFibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [(HomotopicalAlgebra.weakEquivalences C).HasTwoOutOfThreePro\", \"doc\": \"In a model category $\\\\mathcal{C}$ with (trivial cofibration, fibration) factorizations, pullbacks, and fibrations stable under composition and base change, if every cofibration $i$ and trivial fibrati\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.fibrations SSet = SSet.modelCategoryQuillen.J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithFibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [(HomotopicalAlgebra.weakEquivalences C).HasTwoOutOfThreePro\", \"doc\": \"In a model category $\\\\mathcal{C}$ equipped with a (cofibration, trivial fibration) factorization system, pushouts, and cofibrations stable under composition and cobase change, if every trivial cofibra\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y) [hf : HomotopicalAlgebra.Fibration f] {n : ℕ} (i : Fin (n + 2)),\\n  CategoryTheory.HasLiftingProperty (SSet.horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"HomotopicalAlgebra.BifibrantObject.homMk_homMk\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasInitial C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_4 : CategoryTheory.Limits.HasTerminal C] {X Y Z : C} [inst_5 : HomotopicalA\", \"doc\": \"For bifibrant objects $X$, $Y$, and $Z$ in a category with cofibrations and fibrations, and morphisms $f : X \\\\to Y$ and $g : Y \\\\to Z$ in the original category, the composition of $\\\\text{homMk}(f)$ and\"}\n  {\"name\": \"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations_1\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithCofibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  {X₁ X₂ Y₁ Y₂ : C} (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂)\\n  [(HomotopicalAlg\", \"doc\": \"In a category equipped with a weak factorization system consisting of trivial cofibrations and fibrations, if $ f_1 $ and $ f_2 $ are fibrations and the binary products $ X_1 \\times X_2 $ and $ Y_1 \\tim\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib NatTrans.Equifibered requires strict pullback naturality squares in an ordinary category, and EquifiberedLimits concerns closure under limits, not homotopy fibers after bisimplicial diagonal realization. The remaining hits concern Kan fibrations, ordinary categorical squares, or paths of topological homotopies. Read Limits/Shapes/Pullback/Equifibered.lean:39-67 and EquifiberedLimits.lean:17-45; the focused AlgebraicTopology grep found no bisimplicial or homotopy-cartesian implementation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"diagonal\", \"Homotopy\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"ContinuousMap.Homotopy.diagonalPath'\", \"module\": \"Mathlib.AlgebraicTopology.FundamentalGroupoid.InducedMaps\", \"type\": \" {X Y : TopCat} {f g : C(↑X, ↑Y)} (H : f.Homotopy g) {x₀ x₁ : ↑X} (p : FundamentalGroupoid.fromTop x₀ ⟶ FundamentalGroupoid.fromTop x₁) : FundamentalGroupoid.fromTop (f x₀) ⟶ FundamentalGroupoid.fromTop (g x₁)\", \"doc\": \"The diagonal path, but starting from `f x₀` and going to `g x₁` \"}\n  {\"name\": \"ContinuousMap.Homotopy.diagonalPath\", \"module\": \"Mathlib.AlgebraicTopology.FundamentalGroupoid.InducedMaps\", \"type\": \" {X Y : TopCat} {f g : C(↑X, ↑Y)} (H : f.Homotopy g) {x₀ x₁ : ↑X} (p : FundamentalGroupoid.fromTop x₀ ⟶ FundamentalGroupoid.fromTop x₁) : FundamentalGroupoid.fromTop (H (0, x₀)) ⟶ FundamentalGroupoid.fromTop (H (1, x₁))\", \"doc\": \"The diagonal path `d` of a homotopy `H` on a path `p` \"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib NatTrans.Equifibered requires strict pullback naturality squares in an ordinary category, and EquifiberedLimits concerns closure under limits, not homotopy fibers after bisimplicial diagonal realization. The remaining hits concern Kan fibrations, ordinary categorical squares, or paths of topological homotopies. Read Limits/Shapes/Pullback/Equifibered.lean:39-67 and EquifiberedLimits.lean:17-45; the focused AlgebraicTopology grep found no bisimplicial or homotopy-cartesian implementation."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]quifiber|[Hh]omotopy[Cc]artesian|[Hh]omotopy.*[Pp]ullback|[Dd]iagonal.*[Ff]iber",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"line\": \"79\", \"text\": \"    (h' : P'.RightHomotopy f₁ f₂) [HasPullback P.p₁ P'.p₀] :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"line\": \"162\", \"text\": \"    (h' : P'.RightHomotopy f₁ f₂) [HasPullback P.p₁ P'.p₀] :\"}\n  {\"file\": \"Mathlib/Topology/FiberBundle/Constructions.lean\", \"line\": \"112\", \"text\": \"/-- The diagonal map from the total space of the fiberwise product of two fiber bundles\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Equifibered\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean\", \"line\": \"17\", \"text\": \"/-! # Functors equifibered over a fixed functor is closed under limits -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean\", \"line\": \"30\", \"text\": \"    IsClosedUnderLimitsOfShape (fun f : Over F ↦ f.hom.Equifibered) J := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean\", \"line\": \"65\", \"text\": \"    IsClosedUnderColimitsOfShape (fun f : Under F ↦ f.hom.Coequifibered) J := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean\", \"line\": \"66\", \"text\": \"  have : IsClosedUnderIsomorphisms fun f : Under F ↦ f.hom.Coequifibered :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Equifibered.lean\", \"line\": \"13\", \"text\": \"# Equifibered natural transformation\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Equifibered.lean\", \"line\": \"16\", \"text\": \"- `CategoryTheory.NatTrans.Equifibered`:\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Equifibered.lean\", \"line\": \"17\", \"text\": \"  A natural transformation `α : F ⟶ G` is equifibered if every commutative square of the following\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Equifibered.lean\", \"line\": \"24\", \"text\": \"- `CategoryTheory.NatTrans.Coequifibered`: The dual notion.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/Equifibered.lean\", \"line\": \"39\", \"text\": \"/-- A natural transformation is equifibered if every commutative square of the following form is\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"28\", \"text\": \"lemma Scheme.isLocallyDirected_of_equifibered_of_injective {J : Type*} [Category J]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"29\", \"text\": \"    {F G : J ⥤ Scheme.{u}} (s : F ⟶ G) [Quiver.IsThin J] (hs : s.Equifibered)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"68\", \"text\": \"is a pullback square. We bundle this in the form of a functor and an equifibered natural\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"79\", \"text\": \"  equifibered : natTrans.Equifibered\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"86\", \"text\": \"  apply MorphismProperty.of_isPullback (d.equifibered hij).flip\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"246\", \"text\": \"is said to be `Coequifibered` if `F(D(f)) = F(U)[1/f]`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"248\", \"text\": \"(See `coequifibered_iff_forall_isLocalizationAway`)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"270\", \"text\": \"lemma coequifibered_iff_forall_isLocalizationAway {F : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"272\", \"text\": \"    α.Coequifibered ↔ ∀ (U : X.AffineZariskiSite) (f : Γ(X, U.1)),\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"294\", \"text\": \"@[deprecated (since := \\\"2026-02-01\\\")] alias PreservesLocalization := NatTrans.Coequifibered\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"79\", \"text\": \"lemma coequifibered_normalizationDiagramMap :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"80\", \"text\": \"    ((toOpensFunctor Y).op.whiskerLeft f.normalizationDiagramMap).Coequifibered := by\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib NatTrans.Equifibered requires strict pullback naturality squares in an ordinary category, and EquifiberedLimits concerns closure under limits, not homotopy fibers after bisimplicial diagonal realization. The remaining hits concern Kan fibrations, ordinary categorical squares, or paths of topological homotopies. Read Limits/Shapes/Pullback/Equifibered.lean:39-67 and EquifiberedLimits.lean:17-45; the focused AlgebraicTopology grep found no bisimplicial or homotopy-cartesian implementation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy cartesian naturality squares of bisimplicial sets yield homotopy cartesian diagonal squares",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.CatCommSq.iso_hom_naturality_assoc\", \"module\": \"Mathlib.CategoryTheory.CatCommSq\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {C₃ : Type u_3} {C₄ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} C₃]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} C₄] (T : CategoryTheory.Functor C₁ C₂) (\", \"doc\": \"For categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{C}_3, \\\\mathcal{C}_4$ and functors $T: \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$, $L: \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_3$, $R: \\\\mathcal{C}_2 \\\\to \\\\mathcal{C}_4\"}\n  {\"name\": \"SSet.horn₂₂.sq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.HornColimits\", \"type\": \": Subcomplex.BicartSq.{u} (stdSimplex.face { 2 }) (stdSimplex.face {0, 2}) (stdSimplex.face { 1, 2 }) Λ[2, 2]\", \"doc\": \"The four subcomplexes of the standard 2-simplex—namely the 2nd face, the {0,2}-face, the {1,2}-face, and the 2-dimensional horn $\\\\Lambda^2_2$—form a bicartesian square in the lattice of subcomplexes. \"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.BinaryProduct.square\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.HoFunctorMonoidal\", \"type\": \"{X Y : Truncated.{u} 2} {x₀ x₁ : X _⦋0⦌₂} (ex : Edge x₀ x₁) {y₀ y₁ : Y _⦋0⦌₂} (ey : Edge y₀ y₁) :\\n  homMk (ex.tensor (.id y₀)) ≫ homMk (Edge.tensor (.id x₁) ey) =\\n    homMk (Edge.tensor (.id x₀) ey) ≫ homMk (ex.tensor (.id y₁))\", \"doc\": \"In the homotopy category of a 2-truncated simplicial set, for any edges $ e_x $ and $ e_y $, the composition of morphisms $ \\\\text{homMk}(e_x \\\\otimes \\\\text{id}_{y_0}) $ followed by $ \\\\text{homMk}(\\\\text\"}\n  {\"name\": \"CategoryTheory.CatCommSq.iso_hom_naturality\", \"module\": \"Mathlib.CategoryTheory.CatCommSq\", \"type\": \"[h : CatCommSq T L R B] {x y : C₁} (f : x ⟶ y) :\\n  R.map (T.map f) ≫ (iso T L R B).hom.app y = (iso T L R B).hom.app x ≫ B.map (L.map f)\", \"doc\": \"For a commutative square of functors between four categories $ C_1, C_2, C_3, C_4 $, the hom component of the isomorphism between the compositions $ C_1 \\\\xrightarrow{T} C_2 \\\\xrightarrow{R} C_4 $ and $\"}\n  {\"name\": \"SSet.prodStdSimplex.objEquiv_naturality\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.ProdStdSimplex\", \"type\": \"{m n : ℕ} (f : ⦋m⦌ ⟶ ⦋n⦌) (z : (Δ[p] ⊗ Δ[q] : SSet.{u}) _⦋n⦌) :\\n  (objEquiv z).comp f.toOrderHom = objEquiv ((Δ[p] ⊗ Δ[q]).map f.op z)\", \"doc\": \"For natural numbers $p, q, m, n$, the equivalence between the evaluation of the product $\\\\Delta^p \\\\times \\\\Delta^q$ at $[n]$ and the set of pairs $(f, g)$ with $f : [n] \\\\to [p]$ and $g : [n] \\\\to [q]$ i\"}\n  {\"name\": \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precomposeObjTransformObjSquare_iso_hom_naturality₂\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.Categorical.Basic\", \"type\": \"{X : Type u₇} {Y : Type u₈} [Category.{v₇} X] [Category.{v₈} Y] (ψ : CatCospanTransform F G F₁ G₁) {U V : X ⥤ Y}\\n  (α : U ⟶ V) :\\n  whiskerRight (precompose F G |>.map α) (transform X |>.obj ψ) ≫\\n      (CatCommSq.iso _ (transform Y |>.obj ψ) _ (precompose F₁ G₁ |>.obj V)).hom =\\n    (CatCommSq.iso _ (\", \"doc\": \"For categories $\\\\mathcal{X}, \\\\mathcal{Y}$ with functors $F, G, F', G'$ and a cospan transformation $\\\\psi$ between $(F, G)$ and $(F', G')$, along with functors $U, V : \\\\mathcal{X} \\\\to \\\\mathcal{Y}$ and \"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.BinaryProduct.mapHomotopyCategoryProdIdCompInverseIso\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.HoFunctorMonoidal\", \"type\": \"(f : X ⟶ X') : (mapHomotopyCategory f).prod (𝟭 _) ⋙ inverse X' Y ≅ inverse X Y ⋙ mapHomotopyCategory (f ▷ Y)\", \"doc\": \"For 2-truncated simplicial sets $X,X',Y$, the composition of the functor induced by a morphism $f:X\\\\to X'$ with the inverse of the binary product functor in the homotopy category coincides, up to homo\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.BinaryProduct.functorCompInverseIso\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.HoFunctorMonoidal\", \"type\": \": functor X Y ⋙ inverse X Y ≅ 𝟭 _\", \"doc\": \"For any two 2-truncated simplicial sets $X$ and $Y$, the composition of the functor from the homotopy category of their product $X \\times Y$ to the product of their individual homotopy categories $\\\\mat\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib NatTrans.Equifibered requires strict pullback naturality squares in an ordinary category, and EquifiberedLimits concerns closure under limits, not homotopy fibers after bisimplicial diagonal realization. The remaining hits concern Kan fibrations, ordinary categorical squares, or paths of topological homotopies. Read Limits/Shapes/Pullback/Equifibered.lean:39-67 and EquifiberedLimits.lean:17-45; the focused AlgebraicTopology grep found no bisimplicial or homotopy-cartesian implementation."
+  },
+  {
+   "tool": "grep",
+   "query": "bisimplicial|homotopyCartesian|homotopyPullback|equifibered",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib NatTrans.Equifibered requires strict pullback naturality squares in an ordinary category, and EquifiberedLimits concerns closure under limits, not homotopy fibers after bisimplicial diagonal realization. The remaining hits concern Kan fibrations, ordinary categorical squares, or paths of topological homotopies. Read Limits/Shapes/Pullback/Equifibered.lean:39-67 and EquifiberedLimits.lean:17-45; the focused AlgebraicTopology grep found no bisimplicial or homotopy-cartesian implementation.",
+   "directory": "Mathlib/AlgebraicTopology"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]harp|[Bb]isimplicial|[Ee]quifibered|[Hh]omotopy[Cc]artesian",
+   "results": "{\"t\": \"2026-10-16T22:21:34Z\", \"tool\": \"grep\", \"query\": \"[Ss]harp|[Bb]isimplicial|[Ee]quifibered|[Hh]omotopy[Cc]artesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Chebyshev.lean\", \"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"Mathlib/FieldTheory/Cardinality.lean\", \"Mathlib/Analysis/SpecialFunctions/Stirling.lean\", \"Mathlib/Analysis/SpecialFunctions/Stirling.lean\", \"Mathlib/Analysis/SpecialFunctions/Stirling.lean\", \"Mathlib/Combinatorics/SetFamily/KruskalKatona.lean\", \"Mathlib/Combinatorics/SetFamily/KruskalKatona.lean\"], \"digest\": \"e3c5ebf9f038abde\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits. SimplicialObject.diagonal (Basic.lean:103) is the long-edge map, StrictSegal.spineToDiagonal (StrictSegal.lean:344) composes a strict Segal path, and SSet.modelCategoryQuillen.fibration_iff (CategoryWithFibrations.lean:89) only identifies horn lifting. NatTrans.Equifibered (Pullback/Equifibered.lean:46) requires strict categorical pullbacks. None states preservation of universal homotopy-cartesian pullbacks by bisimplicial diagonal. Focused AlgebraicTopology grep returned zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rezk sharp maps and homotopy cartesian diagrams of simplicial sets",
+   "results": "{\"t\": \"2026-10-16T22:21:34Z\", \"tool\": \"leansearch\", \"query\": \"Rezk sharp maps and homotopy cartesian diagrams of simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.Subcomplex.BicartSq.isPushout\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap\", \"CategoryTheory.BicartesianSq\", \"CategoryTheory.Functor.IsCartesian.map.congr_simp\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk_eq_strictMap\"], \"digest\": \"6fdd3ed579863313\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits. SimplicialObject.diagonal (Basic.lean:103) is the long-edge map, StrictSegal.spineToDiagonal (StrictSegal.lean:344) composes a strict Segal path, and SSet.modelCategoryQuillen.fibration_iff (CategoryWithFibrations.lean:89) only identifies horn lifting. NatTrans.Equifibered (Pullback/Equifibered.lean:46) requires strict categorical pullbacks. None states preservation of universal homotopy-cartesian pullbacks by bisimplicial diagonal. Focused AlgebraicTopology grep returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"diagonal\"",
+   "results": "{\"t\": \"2026-10-16T22:21:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"diagonal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"nhdsSet_diagonal\", \"nhdsSet_diagonal_le_uniformity\", \"nhdsSet_diagonal_eq_uniformity\", \"SSet.StrictSegal.spineToDiagonal\", \"SSet.Truncated.StrictSegal.spineToDiagonal\"], \"digest\": \"0a0cc0ea08bb16e9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits. SimplicialObject.diagonal (Basic.lean:103) is the long-edge map, StrictSegal.spineToDiagonal (StrictSegal.lean:344) composes a strict Segal path, and SSet.modelCategoryQuillen.fibration_iff (CategoryWithFibrations.lean:89) only identifies horn lifting. NatTrans.Equifibered (Pullback/Equifibered.lean:46) requires strict categorical pullbacks. None states preservation of universal homotopy-cartesian pullbacks by bisimplicial diagonal. Focused AlgebraicTopology grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal homotopy pullback maps of bisimplicial sets are preserved by diagonal",
+   "results": "{\"t\": \"2026-10-16T22:21:37Z\", \"tool\": \"leanfinder\", \"query\": \"Universal homotopy pullback maps of bisimplicial sets are preserved by diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.BinaryProduct.functor_map\", \"CategoryTheory.Arrow.mapCechNerve_app\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.square\", \"SSet.RelativeMorphism.Homotopy.rel\", \"CategoryTheory.Arrow.cechNerve_map\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.curriedInverse\", \"CategoryTheory.SimplicialObject.cechNerve_map\", \"CategoryTheory.SimplicialObject.augmentedCechNerve_obj_left_map\"], \"digest\": \"b191e79693f9ffd2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits. SimplicialObject.diagonal (Basic.lean:103) is the long-edge map, StrictSegal.spineToDiagonal (StrictSegal.lean:344) composes a strict Segal path, and SSet.modelCategoryQuillen.fibration_iff (CategoryWithFibrations.lean:89) only identifies horn lifting. NatTrans.Equifibered (Pullback/Equifibered.lean:46) requires strict categorical pullbacks. None states preservation of universal homotopy-cartesian pullbacks by bisimplicial diagonal. Focused AlgebraicTopology grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal of an equifibered simplicial diagram of sharp maps is sharp",
+   "results": "{\"t\": \"2026-10-16T22:21:39Z\", \"tool\": \"leanfinder\", \"query\": \"The diagonal of an equifibered simplicial diagram of sharp maps is sharp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.P_δ\", \"CategoryTheory.SimplicialObject.diagonal\", \"SimplexCategoryGenRel.P_σ\", \"AlgebraicTopology.DoldKan.Isδ₀\", \"SSet.prodStdSimplex.objEquiv_δ_apply\", \"SimplexCategory.diag\", \"CategoryTheory.cechNerveTerminalFrom\", \"SimplicialObject.Splitting.IndexSet.e\"], \"digest\": \"615bd66c17b31106\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits. SimplicialObject.diagonal (Basic.lean:103) is the long-edge map, StrictSegal.spineToDiagonal (StrictSegal.lean:344) composes a strict Segal path, and SSet.modelCategoryQuillen.fibration_iff (CategoryWithFibrations.lean:89) only identifies horn lifting. NatTrans.Equifibered (Pullback/Equifibered.lean:46) requires strict categorical pullbacks. None states preservation of universal homotopy-cartesian pullbacks by bisimplicial diagonal. Focused AlgebraicTopology grep returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]harp|[Bb]isimplicial|[Ee]quifibered|[Hh]omotopy[Cc]artesian",
+   "results": "{\"t\": \"2026-10-16T22:21:57Z\", \"tool\": \"grep\", \"query\": \"[Ss]harp|[Bb]isimplicial|[Ee]quifibered|[Hh]omotopy[Cc]artesian\", \"sub\": \"Mathlib/AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits. SimplicialObject.diagonal (Basic.lean:103) is the long-edge map, StrictSegal.spineToDiagonal (StrictSegal.lean:344) composes a strict Segal path, and SSet.modelCategoryQuillen.fibration_iff (CategoryWithFibrations.lean:89) only identifies horn lifting. NatTrans.Equifibered (Pullback/Equifibered.lean:46) requires strict categorical pullbacks. None states preservation of universal homotopy-cartesian pullbacks by bisimplicial diagonal. Focused AlgebraicTopology grep returned zero hits.",
+   "directory": "Mathlib/AlgebraicTopology"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-rezk-explicit-completion",
+  "date": "2026-10-17",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-equifibered-bisimplicial-diagonal",
+  "worker": "ND",
+  "summary": "Kept the statement. Reduced the equifibered row-zero and vertex-fiber comparisons to a general sharp-diagonal theorem, strict base change of weak equivalences between fibrations, and the existing homotopically constant diagonal theorem. Added one statement-only node for Rezk Theorem 6.1 with arbitrary sharp row maps. Repaired the initial mistaken invocation of right properness along an arbitrary base map by citing the exact existing pullback-invariance theorem; gave the separate vertex construction rather than taking fibers of an arbitrary weak equivalence.",
+  "blueprint": "Historical prop-coef-integral-exceptional-adjoint paragraph 2, displayed coefficient adjunction, through the inherited frame/coherent-nerve/Rezk-completion chain. Steps 1-2 supply sharpness; steps 3-6 prove the constant-base and vertex-fiber comparisons needed by completion. The current main-20261015 paragraph does not literally assert this infrastructure; no unit step or coefficient category is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-ND-0f5b198b5",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-0f5b198b5 (reviewer sub-agent of L); spot-checked: I read the mathematics in full. The cited source, Rezk's sharp-maps paper (Theorem 6.1, Propositions 2.2 and 2.7), is not archived and network access is blocked here, so I could not open it. The worker followed the sanctioned procedure: a WANTED line and proof_origin by agent. I verified everything directly instead. Item statement: true and unchanged; it is the realisation/Puppe descent theorem for a cartesian transformation. I tested it on Y_0 empty, constant diagrams, products with a fixed Kan fibre, EG->BG with discrete rows (gives G ~ ΩBG), and identity p. Step 1: a Kan fibration is sharp via the factorisation A->A'->Y_m, right properness and the homotopy-pullback model in lem-coef-kan-quillen-right-proper; elementary is acceptable. Step 2: exactly the new node's hypotheses. Step 3: v_n∘α=v_m makes the operators well defined, diag G = diagX ×_{diagY} T strictly, and G_0 = X_0 ×_{Y_0} T. Step 4: e=(X(α),p_n) is a weak equivalence. lem-coef-kan-pullback-fibration-invariance applies with comparisons (e,1,1): both f-legs are fibrations, commutativity holds, and P ×_{Y_n} T = G_m with the step-3 operator map. Step 5: the homotopically constant clause of lem-coef-bisimplicial-diagonal-equivalence, with the map induced by ι_X. Step 6: two-out-of-three for T=Y_0 and for T=Δ^0. proof_deps equals the union of the step uses; all cited nodes are in unit sk-prop-sf-biduality-general apart from a definition node; no cycle (127 reachable nodes checked); no tool_uses. New node lem-coef-rezk-diagonal-sharp: statement-only, self-contained, created and blueprint fields correct, four kinds of Mathlib search recorded. It is true (Rezk 6.1) and its sharpness hypothesis is genuine ({0}->Δ^1 is not sharp). It does not restate the item, which also needs steps 3-5. Duplicate search with rg over dag/nodes: lem-coef-space-geometric-descent (an infinity-categorical colimit statement), the universal-colimits, homotopy-pullback-invariance and Segal/Rezk-completion nodes are all different. Not a target node; no SGA; no coefficient category or base-change morphism involved. Minor: the report claims the item's created field was changed to ND, but the file correctly keeps Q04; no fix needed. No files changed."
+ }
+}
