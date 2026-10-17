@@ -21,7 +21,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 -- The fixed rectangle interface names U and V although this comparison does not use them.
-set_option linter.unusedVariables false in
 /-- Canonical ordinary rectangle comparisons on the quasi-coherent subcategories.
 Source: Stacks Project, Tags 0D5S (pullback composition), 0ATM (pasting), and
 08HY (adjunctions defining the mate).

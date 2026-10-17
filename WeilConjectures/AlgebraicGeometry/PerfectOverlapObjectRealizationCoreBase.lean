@@ -27,7 +27,6 @@ Source: Stacks Project, Tags 09RE, 08DW and 0D5S.
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.unusedVariables false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false

@@ -30,7 +30,6 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme
 
-set_option linter.unusedVariables false in
 /-- Approximate a smooth pointed family, retaining the inverse systems of its generic
 fibres and generic base points. No finite cover or group action is involved.
 

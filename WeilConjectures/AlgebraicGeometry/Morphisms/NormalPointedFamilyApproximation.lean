@@ -29,7 +29,6 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme
 
-set_option linter.unusedVariables false in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Descend the base, family, section, and an invertible integer simultaneously.

@@ -30,7 +30,6 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 -- Preserve the original existential instance binder name `hH`.
-set_option linter.unusedVariables false in
 /-- A regular divisor has a pointed regular strict local ind-etale limit.
 
 Source: Stacks Project, Tag 0EYG, strict henselization paragraph; Tags 04GP,

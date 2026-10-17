@@ -33,7 +33,6 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry
 
-set_option linter.unusedVariables false in
 /-- Choose augmented resolutions and identify their global self-Ext/self-Tor homology.
 
 Source: Stacks Project, Tag 06YS (K-flat resolutions), Tag 079P (K-injective resolutions),

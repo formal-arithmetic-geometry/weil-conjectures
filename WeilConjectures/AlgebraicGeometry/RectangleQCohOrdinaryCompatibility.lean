@@ -89,7 +89,6 @@ private theorem upper_pasting_transport
       (schemeDerivedDirectImage q).map ((a t).unit.app ((derivedPullback p).obj E))) past
 
 
-set_option linter.unusedVariables false in
 /-- Ordinary base-change compatibility for the canonical comparison lifts.
 Source: Stacks Project, Tag 0ATM, and Tag 08HY.
 (blueprint: lem-sc-rectangle-qcoh-ordinary-compatibility)

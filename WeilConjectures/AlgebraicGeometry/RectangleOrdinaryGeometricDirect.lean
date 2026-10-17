@@ -25,7 +25,6 @@ open scoped CategoryTheory.TwoSquare
 namespace AlgebraicGeometry
 
 -- The fixed signature names hL and hs, although the conclusion does not depend on their proofs.
-set_option linter.unusedVariables false in
 /-- Direct-image and base comparisons compatible with a fixed canonical upper comparison.
 Source: Stacks Project, Tags 0ATM (ordinary base-change pasting), 08HY (the counit
 formula), 0D5S (pullback composition), and 0D5T (direct-image composition).
