@@ -29,7 +29,8 @@
  "stmt_deps": [
   "lem-coef-cartesian-mapping-simplex-presentation",
   "lem-coef-coherent-nerve-comparison",
-  "lem-coef-marked-point-cartesian-model"
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-right-straightening-fiber-comparison"
  ],
  "proof": [
   {
@@ -289,5 +290,56 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MappingSimplexConeFibers",
+  "declaration": "SSet.Enhanced.mapping_simplex_cone_fibers",
+  "declarations": [
+   "SSet.Straightening.coneTriangleDirect",
+   "SSet.Straightening.coneTriangleComposite",
+   "SSet.Straightening.coneTriangleInterval",
+   "SSet.Straightening.coneEdgeTriangle",
+   "SSet.Straightening.coneEdgeTriangle_endpoints",
+   "SSet.Straightening.coningEdge",
+   "SSet.Straightening.markedValueAt",
+   "SSet.Straightening.markedPrecomposition_preserves",
+   "SSet.Straightening.markedPrecomposition",
+   "SSet.Straightening.coneIndexMap",
+   "SSet.Straightening.coneIndexMap_marking",
+   "SSet.Straightening.coneIndexMap_laws",
+   "SSet.Straightening.markedConeDiagram",
+   "SSet.Straightening.markedValue",
+   "SSet.Straightening.markedValueMap_preserves",
+   "SSet.Straightening.markedValueMap",
+   "SSet.Straightening.markedPoint",
+   "SSet.Enhanced.mappingSimplexChainMap_naturality",
+   "SSet.Enhanced.mappingSimplexChainMap",
+   "SSet.Enhanced.mappingSimplexChainMap_marking",
+   "SSet.Enhanced.markedMappingSimplexChainMap",
+   "SSet.Enhanced.mappingSimplexChainMap_projection",
+   "SSet.Enhanced.mappingSimplexFiberInclusion_marking",
+   "SSet.Enhanced.mappingSimplexMarkedFiberInclusion",
+   "SSet.Enhanced.mappingSimplexFiberConeSquare",
+   "SSet.Enhanced.pointConst_vertex",
+   "SSet.Enhanced.mappingSimplexConeFiberMap",
+   "SSet.Enhanced.mappingSimplexPointMap",
+   "SSet.Enhanced.mappingSimplexConeChainMap",
+   "SSet.Enhanced.mapping_simplex_cone_fibers"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/MappingSimplexConeFibers.lean",
+  "statement": "theorem mapping_simplex_cone_fibers (n : ℕ) : (∀ (A : SimplexChain.{u} n) (i : Fin (n + 1)), Marked.weak (mappingSimplexConeFiberMap A i)) ∧ (∀ (A B : SimplexChain.{u} n) (h : A ⟶ B) (i : Fin (n + 1)), mappingSimplexPointMap h i ≫ mappingSimplexConeFiberMap B i = mappingSimplexConeFiberMap A i ≫ mappingSimplexConeChainMap h i)",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the landed unmarked enriched cone pushout and its canonical maps; adds the exact coning-edge marking and action, the marked diagram, and the fibre comparison with strict naturality for chain maps. The added statement dependency owns the reused unmarked construction; its theorem is not used to prove the marked equivalence."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c73566d9",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Read node, module, report (Worker report + Second reading by Q61), the three original stmt-dep modules plus the added landed RightStraighteningFiberComparison, and HTT Def 3.2.1.2 / psi / Lemma 3.2.3.3. Each clause matches: reused cone pushout and valueAt; coning edge {0,2} to {0,1,2} with the correct endpoints; marking is exactly degeneracies plus precomposition(g, coningEdge e) for marked e and any edge g; T is the construction over Delta[0]; psi is markedValueMap of the fibre-inclusion square plus a vertex transport only; Marked.weak is the absolute model; strict naturality holds for all chain maps. Edge cases n=0, i=n, empty fibres and chains are admitted; no added hypotheses; single universe u. No hollow defs; 12 named sorry theorems with proof docstrings; statement verbatim; declarations list exact. The added landed stmt_dep is allowed and its 231-node closure has no cycle; no duplicate found. nt_compile --json clean (exit 0, 1.8 s, no diagnostics). No findings."
  }
 }

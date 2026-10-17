@@ -29,7 +29,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-relative-cone",
-  "lem-cbc-enhanced-functor-cone-calculus"
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-join-slice-diagram-isomorphisms"
  ],
  "proof": [
   {
@@ -298,5 +299,37 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-ebd5f31fa (reviewer sub-agent of L); spot-checked: Read the item, all 5 steps, all 13 cited statements and Kerodon 7.1.6.19 (02X1, read online; not archived, WANTED recorded). The item is (2)<=>(3) of 02X1 plus the apex form and colimit dual. The project defines a p-limit by condition (2). The statement assumes no fibration on p and allows any small K, as the source does. Step 1: substituting (z,g,beta) and (x,f,alpha) into the varying-boundary formula of lem-coef-infinity-join-cone-calculus gives A_D x^h_{C_D} M_D with maps a beta and alpha Delta(u). Step 2: for a constant source, beta=id is a fibration. The constant-path map is an equivalence by lem-coef-kan-pullback-path-comparison. It commutes strictly over C_D, so invariance applies and gives the apex square. Step 3: correct pasting through the fibrant replacement A_D x_{C_B} hat M_B, from right properness and the path comparison. Homotopy-commuting squares are made strict through E_r before strict invariance is used. Step 4: checked the operator reversal and U_{D^op}(z,x) = U_D(x,z)^op. Checked the Sd/last-vertex/Ex^infinity zigzag, product compatibility, and triangle-space reversal: alpha Delta(u) becomes Delta(u) alpha, which is the item's colimit variance. Step 5: elementary from join-cone naturality, and it does not claim restriction preserves universality. Edge cases: K empty gives a p-initial object; K a point; p=id; terminal B; empty mapping spaces. All consistent. No new nodes, no cycle (157-node closure excludes the item), proof_deps equals the union of step uses. Duplicate candidates (relative-cocone-parameters, relative-cone-initial-corner, fiber-relative-colimit-criterion, relative-limit-initial-components) state different results. No SGA. Not a target node, so no base-change or coefficient-category check applies. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, for generic Kan mapping spaces and functor quasicategories. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeConeConstantTest",
+  "declaration": "SSet.Enhanced.relative_cone_constant_test",
+  "declarations": [
+   "SSet.Enhanced.constantTestSource",
+   "SSet.Enhanced.constantTestTarget",
+   "SSet.Enhanced.constantTestSpace",
+   "SSet.Enhanced.constantTestRestriction",
+   "SSet.Enhanced.constantTestPostcomposition",
+   "SSet.Enhanced.constantTestEvaluation",
+   "SSet.Enhanced.ConstantTestSquare",
+   "SSet.Enhanced.ConstantApexSquare",
+   "SSet.Enhanced.constantTestLeftApex",
+   "SSet.Enhanced.ConstantTestNaturality",
+   "SSet.Enhanced.relative_cone_constant_test"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeConeConstantTest.lean",
+  "statement": "theorem relative_cone_constant_test (K D B : SSet.{u}) [Quasicategory D] [Quasicategory B] (p : D ⟶ B) : (∀ q : rightJoinCone K ⟶ D, (IsRelativeColimitDiagram p q ↔ ∀ z : D _⦋0⦌, ConstantApexSquare p (rightJoinConeInclusion K) q z (rightConeApex K) false) ∧ (IsRelativeColimitDiagram p q ↔ ∀ z : D _⦋0⦌, ConstantTestSquare p (rightJoinConeInclusion K) q z false)) ∧ (∀ q : leftJoinCone K ⟶ D, (IsRelativeLimitDiagram p q ↔ ∀ z : D _⦋0⦌, ConstantApexSquare p (leftJoinConeInclusion K) q z (constantTestLeftApex K) true) ∧ (IsRelativeLimitDiagram p q ↔ ∀ z : D _⦋0⦌, ConstantTestSquare p (leftJoinConeInclusion K) q z true)) ∧ (∀ (q : rightJoinCone K ⟶ D) (z : D _⦋0⦌), IsWeakHomotopyEquivalence (constantTestEvaluation q z (rightConeApex K) false)) ∧ (∀ (q : leftJoinCone K ⟶ D) (z : D _⦋0⦌), IsWeakHomotopyEquivalence (constantTestEvaluation q z (constantTestLeftApex K) true)) ∧ ConstantTestNaturality.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The apex mapping-space square is represented by the canonical evaluation/restriction spans, whose evaluation legs are asserted weak equivalences. This avoids choosing strict composition or inverse equivalences in right-pinched mapping spaces. Constant-diagram tests and full simplicial naturality, including fixed join apices, are stated as well. All helpers are real constructions belonging to this item. Second reading reuses the landed rightConeApex of lem-coef-join-slice-diagram-isomorphisms instead of duplicating the final apex; that landed owner is added to stmt_deps. All recorded proof modules are imported and the docstring carries the full five-step node proof."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2d0cf2d3",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Read the node, all 4 stmt deps' exact declarations (RelativeInfinityCone, EnhancedDiagramsCones, EnhancedFunctorConeCalculus, JoinSliceDiagramIsomorphisms.rightConeApex), the module, the report and the Kerodon 02X1 source place. ConstantTestSquare is exactly IsRelativeColimitDiagram/IsRelativeLimitDiagram's square at the constant test diagram (same map order, endpoint rewritten via SSet.const_comp). The apex square is a span (evaluation/restriction), matching the project's composition convention; it is faithful because evaluation at the cone vertex is a weak equivalence (anodyne vertex inclusion), which the theorem asserts. No extra hypotheses (arbitrary p, any K, single universe u); naturality and fixed apex stated. Edge cases fine (empty K/D, empty mapping spaces, p=id, terminal B). Duplicate apex replaced by the landed rightConeApex, stmt_deps addition is acyclic (72-node closure), no existing left apex or constant-test theorem, lean.statement verbatim, node diff limited to lean+stmt_deps, all 13 proof-dep modules imported, real data, sorry-only, docstrings with source and blueprint, report has both sections. nt_compile.py --json exits 0 with no output; the tool was shown to catch an injected error. Cosmetic only: no Main definitions list; garbled link text in report."
  }
 }

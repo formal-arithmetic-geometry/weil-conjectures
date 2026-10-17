@@ -251,5 +251,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SmallBoundaryExtensionClasses",
+  "declaration": "SSet.small_boundaryExtensionHomotopyClass",
+  "declarations": [
+   "SSet.boundaryExtensionVertex",
+   "SSet.small_boundaryExtensionHomotopyClass"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SmallBoundaryExtensionClasses.lean",
+  "statement": "theorem small_boundaryExtensionHomotopyClass (C : SSet.{max (u + 1) v}) [Quasicategory C] (n : ℕ) (hn : 1 ≤ n) (b : (boundary n : SSet.{max (u + 1) v}) ⟶ C) (hsmall : ∃ K : SSet.{u}, KanComplex K ∧ ∃ f : uliftFunctor.{max (u + 1) v, u}.obj K ⟶ Enhanced.mappingSpace C (b.app _ (boundaryExtensionVertex n hn 0)) (b.app _ (boundaryExtensionVertex n hn (Fin.last n))), Enhanced.IsWeakHomotopyEquivalence f) : Small.{u} (RelativeMorphism.HomotopyClass (boundary n) (⊤ : C.Subcomplex) (Subcomplex.lift b le_top))",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses Mathlib RelativeMorphism.HomotopyClass with the prescribed boundary lifted to the top target subcomplex. The small-model hypothesis is the single-pair existential appearing in Presentability.IsLocallySmall, without global local smallness. Ambient universe max (u + 1) v contains the small universe u. The helper constructs boundary vertices using the existing boundary_obj_eq_univ theorem; no definition data is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1eab2e6b6",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Signature matches node clause by clause: universes u < max(u+1) v with Small.{u}; Quasicategory C; n>=1; b on Mathlib boundary; endpoint vertices via a real helper (obj₀Equiv.symm, boundary_obj_eq_univ); hsmall is a small Kan K with a weak equivalence to Enhanced.mappingSpace C b(0) b(n) (pointwise IsLocallySmall, equivalent since both are Kan, no other pairs assumed); RelativeMorphism over top subcomplex = extensions of b; Homotopy rel = b∘pr1 on ∂Δ^n×Δ^1; Quot generates the equivalence relation; empty E_b covered. Edge cases n=1, empty E_b, empty C, empty K, u=0 checked. Node differs from clone only in lean; statement verbatim; source/blueprint docstrings with six-step proof; only sorry is the item; no duplicate; report sections present. nt_compile --json side overlay: rc 0, no errors or warnings."
  }
 }

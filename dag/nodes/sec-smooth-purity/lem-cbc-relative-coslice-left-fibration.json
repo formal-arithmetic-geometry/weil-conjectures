@@ -280,5 +280,37 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-f71a1e523 (reviewer sub-agent of L); spot-checked: I read the item, its six steps, the four cited statements and the parent's use in full. Its parent and only citer is lem-cbc-inner-fibration-equivalence-outer-horn-lift (steps 1-3 and 5), which uses it with K0 = boundary of Delta^{n-2} inside K = Delta^{n-2}; the item's statement matches that use. The Kerodon sources (01BZ, 018J, 018K, 018F, 01H0) are not archived, so I could not open them; the node correctly says proof_origin.by=agent and the report lists them as WANTED. I checked the mathematics myself against the standard result (Kerodon 4.3.6.8 / HTT 2.1.2.3): an inner fibration and an arbitrary monomorphism suffice, with no Kan condition. Small cases hold: K empty gives E=C with rho and theta identities; K0=K makes rho an iso; D a point gives the absolute restriction; K0 empty gives the coslice of C at the empty map equal to C. Step 1: the join-coslice bijection is correct (it also holds for empty T). Step 2: the closure of the lifting class under weak saturation is correct, including the retract equations. Step 3: I checked independently that the boundary of Delta^p joined with a horn Lambda_i^m gives Lambda^{p+m+1}_{p+1+i}, which is inner exactly when i<m (examples p=0,m=1 and p=1,m=1). The step uses the first-variable clause of the saturation node, proves mono implies degreewise injective so the boundary-cell Mathlib leaf applies, and correctly reduces a coproduct of cells to successive single pushouts. Step 4: the relative square translates correctly against q, and the lift keeps f, a, h0 and k exactly. Step 5: the case Q -> point gives the absolute left fibrations and the quasicategory claims without circularity. Step 6: the pullback orientation for pi is right and the composite argument is complete. proof_deps equals the union of uses. There are no new nodes, so B and D are vacuous. Duplicate search with rg over dag/nodes (coslice, left fibration, Kerodon tags), plus the slice-right-fibration, join-slice-cocone, simplicial-undercategory, left-fibration-equivalence-lift, contractible-join and terminal-anodyne nodes, found no node stating or directly generalizing this lemma; same_as=[] holds. I accept both tool uses: the pushout-join saturation node is a generic tool from another unit, and the boundary-cell node is a Mathlib leaf. There is no SGA citation, the item is not a target node, and nothing was changed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeCosliceLeftFibration",
+  "declaration": "SSet.Enhanced.relativeCosliceRestrictionLeftFibration",
+  "declarations": [
+   "SSet.Enhanced.cosliceInclusionsNatural",
+   "SSet.Enhanced.cosliceJoinStandard",
+   "SSet.Enhanced.CoherentJoinSimplex",
+   "SSet.Enhanced.coherentJoinCoslice",
+   "SSet.Enhanced.coherentCosliceProjection",
+   "SSet.Enhanced.coherentCosliceRestriction",
+   "SSet.Enhanced.coherentCoslicePostcompose",
+   "SSet.Enhanced.relativeCoslicePullback",
+   "SSet.Enhanced.relativeCosliceRestrictionMap",
+   "SSet.Enhanced.relativeCosliceTheta",
+   "SSet.Enhanced.relativeCosliceRestrictionLeftFibration"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeCosliceLeftFibration.lean",
+  "statement": "theorem relativeCosliceRestrictionLeftFibration {C D K₀ K : SSet.{u}} [Quasicategory C] [Quasicategory D] (q : C ⟶ D) (hq : InnerFibration q) (i : K₀ ⟶ K) [Mono i] (f : K ⟶ C) : Quasicategory (coherentJoinCoslice f) ∧ Quasicategory (coherentJoinCoslice (i ≫ f)) ∧ Quasicategory (coherentJoinCoslice (f ≫ q)) ∧ Quasicategory (coherentJoinCoslice (i ≫ f ≫ q)) ∧ Quasicategory (relativeCoslicePullback q i f) ∧ leftFibration (relativeCosliceRestrictionMap q i f) ∧ leftFibration (relativeCosliceTheta q i f)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The node explicitly introduces the join coslice and its canonical maps; these helpers are constructed in its module. Reuses orderedJoinFunctor and orderedJoinInl/orderedJoinInr from the added landed dependencies. cosliceInclusionsNatural is the named well-definedness lemma for the pure restrictions, with its proof postponed separately as required by brief-stage2 section 2. Coslice simplices contain exactly one extension map and its boundary proof. The conclusion uses the specified relativeCosliceTheta, not an existential arbitrary map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9562b39ac",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Checked each clause of the node against the Lean: the hypotheses [Quasicategory C] [Quasicategory D], InnerFibration q and Mono i are exactly the node's; the coslices are defined as join maps K⋆Δⁿ→C extending f, using the landed orderedJoinFunctor and orderedJoinInl/Inr; E is the pullback of postcomposition and restriction; ρ is pullback.lift and θ is pullback.fst followed by the last-block projection, both the specified maps; leftFibration has the exact bounds m>=1, i<m; one arbitrary universe u. The lean.statement field is verbatim the signature, only lean differs from the repo node, and the stmt_dep records are unchanged. Edge cases covered: empty K or K0, identity i, terminal D, empty C, degree 0, m=1 i=0. No hollow definition: the only sorry theorems are the named well-definedness lemma cosliceInclusionsNatural (true; allowed by brief-stage2 l.62) and the main theorem. Docstrings carry the Kerodon tags and the blueprint id, and no line exceeds 100 characters. Listing slice-right-fibration as a statement dependency would close a DAG cycle (verified by walking the DAG); the reused helpers are sorry-free landed definitions, there is no Lean import cycle, and the choice is documented in lean.note, so it is accepted. nt_compile.py --json against the side overlay is clean (2.5 s, exit 0), and #check gives the expected signature. Harmless docstring remark about the empty-T case."
  }
 }

@@ -255,5 +255,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityCommonCompactnessRank",
+  "declaration": "SSet.Presentability.exists_common_compactness_rank",
+  "file": "lean/Sheaf/CategoryTheory/InfinityCommonCompactnessRank.lean",
+  "statement": "theorem exists_common_compactness_rank (C : SSet.{max (u + 1) v}) [SSet.Quasicategory C] (hC : IsAccessible.{u, v} C) (J : Type u) (X : J → C _⦋0⦌) : ∃ (κ : Cardinal.{u}), κ.IsRegular ∧ IsKappaAccessible C κ ∧ ∀ (j : J), IsKappaCompact C κ (X j)",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4417a6a3f",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Read the node, both statement-dependency nodes and the actual PresentableInfinityCategory.lean declarations (IsAccessible, IsKappaAccessible, IsKappaCompact, HasSmallKappaFilteredColimits and the rest). Each clause matches: C : SSet.{max (u+1) v} with [Quasicategory]; hC : IsAccessible.{u,v} C; J : Type u with no Nonempty assumption; X : J → C _[0]; ∃ κ : Cardinal.{u}, κ.IsRegular (includes aleph0_le) ∧ IsKappaAccessible C κ ∧ ∀ j, IsKappaCompact C κ (X j). No extra hypothesis, conclusion neither weaker nor stronger, universes bound. The statement is true by HTT 5.4.2.9 and 5.3.4.15, and the six proof steps are sound against the Lean definitions. Edge cases checked: empty J, empty C, κ=0 excluded. The module is a single sorry theorem with no definitions; docstrings carry the source place, blueprint id and full proof plan. The node differs from the side clone only in lean, and lean.statement equals the signature verbatim. The report has a real Worker report and Second reading by Q37. nt_compile --json with the side overlay: exit 0, no diagnostics, item 1.4 s; an injected error is reported, so the tool works. Only a cosmetic finding: some HTT numbers in the report are redacted."
  }
 }
