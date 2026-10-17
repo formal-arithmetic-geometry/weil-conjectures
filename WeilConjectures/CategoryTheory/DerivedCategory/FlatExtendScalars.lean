@@ -116,6 +116,12 @@ lemma derivedExtendScalars_map_smul_id (r : R) (X : DerivedCategory (ModuleCat.{
   (extendScalars.{u + 1, u + 1, u + 1} f).mapDerivedCategory_map_smul_id
     (extendScalars_map_smul_id f r) X
 
+/-- The derived extension of scalars is semilinear along `f`. -/
+lemma derivedExtendScalars_map_smul (r : R) {X Y : DerivedCategory (ModuleCat.{u + 1} R)}
+    (φ : X ⟶ Y) : (derivedExtendScalars f hf).map (r • φ) = f r • (derivedExtendScalars f hf).map φ := by
+  rw [show r • φ = (r • 𝟙 X) ≫ φ by rw [Linear.smul_comp, Category.id_comp], Functor.map_comp,
+    derivedExtendScalars_map_smul_id, Linear.smul_comp, Category.id_comp]
+
 /-- The derived extension of scalars commutes with cohomology. -/
 noncomputable def derivedExtendScalarsHomologyIso (n : ℤ)
     (X : DerivedCategory (ModuleCat.{u + 1} R)) :

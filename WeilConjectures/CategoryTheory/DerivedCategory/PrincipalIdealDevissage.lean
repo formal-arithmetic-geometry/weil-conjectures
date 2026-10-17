@@ -29,7 +29,7 @@ along their truncations (`DerivedCategory.prop_of_bounded`).
 
 universe u
 
-open CategoryTheory Limits Pretriangulated
+open CategoryTheory Limits Pretriangulated ZeroObject
 
 namespace DerivedCategory
 
@@ -88,5 +88,36 @@ theorem prop_of_boundedFiniteCohomology
     Module.Finite.equiv e.toLinearEquiv⟩
   exact prop_of_bounded P Q (fun M (_ : Module.Finite R M) ↦ singleProp_of_finite P hR M) K
     hK.1 hK.2
+
+section Triangulated
+
+variable {R : Type (u + 1)} [CommRing R] [IsNoetherianRing R]
+
+private lemma moduleFinite_of_exact {M N P : Type (u + 1)} [AddCommGroup M] [AddCommGroup N]
+    [AddCommGroup P] [Module R M] [Module R N] [Module R P] {f : M →ₗ[R] N} {g : N →ₗ[R] P}
+    (h : Function.Exact f g) [Module.Finite R M] [Module.Finite R P] : Module.Finite R N :=
+  Module.Finite.of_exact (f := f) (g := g.rangeRestrict)
+    (fun y ↦ by rw [← h y]; simp [Subtype.ext_iff]) g.surjective_rangeRestrict
+
+instance : (boundedFiniteCohomology R).IsTriangulated where
+  exists_zero := ⟨0, isZero_zero _, ⟨TStructure.t.bounded.prop_of_isZero (isZero_zero _),
+    fun n ↦ by
+      have := (ModuleCat.isZero_iff_subsingleton.1
+        ((homologyFunctor (ModuleCat.{u + 1} R) n).map_isZero (isZero_zero _)))
+      infer_instance⟩⟩
+  isStableUnderShiftBy a := ⟨fun X hX ↦ ⟨TStructure.t.bounded.le_shift a X hX.1, fun n ↦ by
+    have := hX.2 (a + n)
+    exact Module.Finite.equiv (M := (homologyFunctor (ModuleCat.{u + 1} R) (a + n)).obj X)
+      (((homologyFunctor (ModuleCat.{u + 1} R) 0).shiftIso a n (a + n) rfl).app X).symm.toLinearEquiv⟩⟩
+  toIsTriangulatedClosed₂ := .mk' fun T hT h₁ h₃ ↦ ⟨TStructure.t.bounded.ext_of_isTriangulatedClosed₂
+    T hT h₁.1 h₃.1, fun n ↦ by
+      have := h₁.2 n
+      have := h₃.2 n
+      exact moduleFinite_of_exact (f := ((homologyFunctor (ModuleCat.{u + 1} R) n).map T.mor₁).hom)
+        (g := ((homologyFunctor (ModuleCat.{u + 1} R) n).map T.mor₂).hom)
+        ((ShortComplex.ShortExact.moduleCat_exact_iff_function_exact _).1
+          (HomologySequence.exact₂ T hT n))⟩
+
+end Triangulated
 
 end DerivedCategory
