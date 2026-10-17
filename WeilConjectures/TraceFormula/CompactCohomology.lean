@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TopologicalInvariance
 public import WeilConjectures.TraceFormula.Stalk
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
 
@@ -48,11 +49,9 @@ automorphism of `RΓ_c(X, K) = Ra_{X!} K`
 (`ProEtale.CondensedRing.WeilBoundedConstructible.globalOperator`, blueprint
 `def-trf-frobenius-coefficient-morphism` and `lem-trf-frobenius-operator-compact-description`).
 
-## Sorried input
-
-- `ProEtale.CondensedRing.isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction`:
-  topological invariance, the unit `𝟭 ⟶ Lr^* ⋙ Rr_*` is an isomorphism for a finite universal
-  homeomorphism `r`.
+The comparison uses topological invariance
+(`ProEtale.CondensedRing.isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction`): the unit
+`𝟭 ⟶ Lr^* ⋙ Rr_*` is an isomorphism for a finite universal homeomorphism `r`.
 
 ## Main definitions
 
@@ -90,26 +89,6 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
-
-/-! ### Topological invariance -/
-
-section TopologicalInvariance
-
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-  {X X' : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType X'.hom]
-  [QuasiCompact X'.hom] [IsSeparated X'.hom]
-  (r : X ⟶ X') [IsFinite r.left] [IsUniversalHomeomorphism r.left]
-
-/-- **Topological invariance** of the bounded constructible derived category: for a finite
-universal homeomorphism `r`, the unit `𝟭 ⟶ Lr^* ⋙ Rr_*` of the adjunction `Lr^* ⊣ Rr_*` is an
-isomorphism, so that `Lr^*` is an equivalence with inverse `Rr_*` (blueprint `i-topology`). -/
-theorem isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction :
-    IsIso (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ r).unit :=
-  sorry
-
-end TopologicalInvariance
 
 /-! ### The lower shriek of Weil objects -/
 

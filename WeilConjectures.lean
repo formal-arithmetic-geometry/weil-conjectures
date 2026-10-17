@@ -4440,6 +4440,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowe
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TopologicalInvariance
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
@@ -4519,6 +4520,7 @@ public import WeilConjectures.TraceFormula.FixedPoint
 public import WeilConjectures.TraceFormula.Frobenius
 public import WeilConjectures.TraceFormula.Main
 public import WeilConjectures.TraceFormula.Stalk
+public import WeilConjectures.TraceFormula.TraceClass
 public import WeilConjectures.WeilObject.BoundedConstructible.Defs
 public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
 public import WeilConjectures.WeilObject.BoundedConstructible.TensorHom

@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Correspondence
+public import WeilConjectures.TraceFormula.TraceClass
 public import WeilConjectures.TraceFormula.FixedPoint
 
 /-!
