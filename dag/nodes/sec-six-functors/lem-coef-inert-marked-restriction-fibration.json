@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-isofibration-exponentiation",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-cocartesian-section-colimits",
+  "lem-coef-relative-right-kan-restriction"
  ],
  "proof": [
   {
@@ -237,5 +239,32 @@
   "group": "Q77",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-dd107e89c (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps and every cited statement in full: def-cbc-enhanced-diagrams-cones, lem-coef-infinity-isofibration-exponentiation, lem-cbc-inner-fibration-equivalence-outer-horn-lift, lem-cbc-equivalence-outer-horn-filling, lem-coef-infinity-pointwise-equivalences, def-coef-infinity-fibrations, lem-coef-infinity-cocartesian-composition-initiality. There are no new nodes. Step 1 applies the corner map to the empty subset, so L_J is the strict fiber; equivalences of the ambient functor category are recognized inside L_J by relative Lambda^n_0 filling over the constant simplex plus the converse criterion. Step 2: the restriction map is the degreewise pullback of q along h->(h,f), and equivalences lift with specified source. Step 3: components of an equivalence are equivalences, hence r-cocartesian by the horn definition. Step 4: I checked both triangles of the naturality square and their orientation against the composition/cancellation clause, which gives repleteness. Steps 5-6: fullness retains inner-horn fillers and the equivalence witnesses. Small cases checked: K=A, K empty, A empty, N([1]) over a point (no marked lift claimed), r=id, only degenerate markings. No duplicates: rg over dag/nodes for marked, replete, closed under equivalence, cocartesian image and 01F1; the categorical-pattern and section-restriction nodes differ. The consumer (coherent-module-section-model, step 8) matches the item's form. I accept the two split_report tool_uses (generic horn lemmas of sk-prop-sf-cbc). No SGA is cited; this is not a target node. The sources (Kerodon 01F1/01DK/01H0/019F, HTT 2.4.1.7) are not archived and the guard blocks network access; I checked the tags from memory, and the proof rests only on the DAG statements, with proof_origin agent. Size note: the horn lemma assumes small quasicategories and the item does not; this is covered by the universe convention, so I added no hypothesis. One fix: the item's source.place cited the dual of HTT 2.4.4.3, the mapping-space criterion, which no step uses. I replaced it with 01DK, 01H0/019F and the dual of HTT 2.4.1.7 in fixes/dag/nodes/sec-six-functors/lem-coef-inert-marked-restriction-fibration.json. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-93ea3507f",
+  "group": "Q102",
+  "result": "fix",
+  "note": "Wrote review.md and complete fixes. Mathematics and main signature match the node; original and replacement modules compile cleanly. Replaced the placeholder second reading, extracted restriction well-definedness into a named sorry helper, and corrected report citations. Branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InertMarkedRestrictionFibration",
+  "declaration": "SSet.Enhanced.inert_marked_restriction_fibration",
+  "declarations": [
+   "SSet.Enhanced.IsMarkedSection",
+   "SSet.Enhanced.markedSectionSubcomplex",
+   "SSet.Enhanced.sectionRestriction_mem_markedSectionSubcomplex",
+   "SSet.Enhanced.markedSectionRestriction",
+   "SSet.Enhanced.inert_marked_restriction_fibration"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InertMarkedRestrictionFibration.lean",
+  "statement": "theorem inert_marked_restriction_fibration {K E P : SSet.{u}} (r : E ⟶ P) (hr : IsIsofibration r) (A : K.Subcomplex) (f : K ⟶ P) (M : Set (K _⦋1⦌)) (hM : ∀ x : K _⦋0⦌, K.σ 0 x ∈ M) : IsIsofibration (markedSectionRestriction r f M A) ∧ (∀ e : (sectionCategory r f) _⦋1⦌, IsEquivalenceEdge (sectionCategory r f) e → IsMarkedSection r f M ((sectionCategory r f).δ 1 e) → IsMarkedSection r f M ((sectionCategory r f).δ 0 e))",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the existing strict fixed-base sectionCategory and sectionRestriction. The three helpers impose only the specified cocartesian marking on vertices and restrict along the actual inclusion; there are no additional existence or operadic hypotheses. IsIsofibration includes both quasicategory conditions and prescribed-source equivalence lifting. Maintainer review extracts the marked restriction well-definedness obligation as a named sorry theorem, with its proof plan, retaining the same canonical map data and main signature.",
+  "fixed_by": "NT-stage2-Codex-93ea3507f"
  }
 }

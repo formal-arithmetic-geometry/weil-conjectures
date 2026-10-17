@@ -23,7 +23,11 @@
   "place": "Lemma 4.3.19, Proposition 5.7.17 and Theorem 5.4.6 Read online where available; not archived in literature/. No Stacks tag states this infinity-categorical result."
  },
  "stmt_deps": [
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "def-coef-coherent-adjunction-data",
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-coef-infinity-limits-products-pullbacks",
+  "lem-coef-enriched-completion-localization"
  ],
  "proof": [
   {
@@ -305,5 +309,50 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1d7aa4de2",
+  "group": "Q93",
+  "result": "fix",
+  "note": "Reviewed statements, dependencies, source, universes, edge cases and canonical constructions. Supplied complete fixes for two duplicate helpers and the placeholder second reading. Original and fixed modules compile cleanly through scompile.py. Details in review.md; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnrichmentChangeAdjunction",
+  "declaration": "SSet.Enhanced.Algebroid.enrichment_change_adjunction",
+  "declarations": [
+   "SSet.Enhanced.Algebroid.totalInclusion",
+   "SSet.Enhanced.Algebroid.IsPostcomposition",
+   "SSet.Enhanced.Algebroid.completeInclusion",
+   "SSet.Enhanced.Algebroid.IsAdjointMonoidal",
+   "SSet.Enhanced.Algebroid.ChangeAdjunctionStatement",
+   "SSet.Enhanced.Algebroid.diagramOperad",
+   "SSet.Enhanced.Algebroid.IsDiagramEvaluation",
+   "SSet.Enhanced.Algebroid.diagramNerveBase",
+   "SSet.Enhanced.Algebroid.diagramNerve",
+   "SSet.Enhanced.Algebroid.diagramNerveProjection",
+   "SSet.Enhanced.Algebroid.productIndex",
+   "SSet.Enhanced.Algebroid.productConeLeg",
+   "SSet.Enhanced.Algebroid.CartesianSpacesStructure",
+   "SSet.Enhanced.Algebroid.rezkSimplexValue",
+   "SSet.Enhanced.Algebroid.rezkActionValue",
+   "SSet.Enhanced.Algebroid.spaceNerveEnrichment",
+   "SSet.Enhanced.Algebroid.spaceSimplexObject",
+   "SSet.Enhanced.Algebroid.spaceSimplexMap",
+   "SSet.Enhanced.Algebroid.IsRezkClassifier",
+   "SSet.Enhanced.Algebroid.AreNaturallyEquivalentOver",
+   "SSet.Enhanced.Algebroid.IsNerveEquivalenceOver",
+   "SSet.Enhanced.Algebroid.SpaceComparisonStatement",
+   "SSet.Enhanced.Algebroid.enrichment_change_adjunction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnrichmentChangeAdjunction.lean",
+  "statement": "theorem enrichment_change_adjunction : ChangeAdjunctionStatement.{u, v} ∧ SpaceComparisonStatement.{u, v}",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical postcomposition is fixed on all dependent-functor simplices. The adjoint lax structure is characterized by a relative adjunction over the operadic base. The spaces comparison identifies the actual unstraightened Segal nerve over the entire complete-algebroid category times Delta-op with the usual complete Segal-space nerve, whose object and enriched mapping formulas are specified on every coherent simplex. Helpers characterize and construct these same canonical maps; no data is selected from the postponed theorem. Reuses postcomposeAmbient from Sheaf.CategoryTheory.EnrichedCompletionLocalization; its universal-family specialization is exactly the ambient map used here. Independent maintainer reading: reuse underlyingChange from AlgebroidCocontinuousBaseChange (lem-coef-algebroid-cocontinuous-base-change) and Classification.diagram from QuasicategoryClassificationRealization (lem-coef-quasicategory-classification-realization), removing duplicate underlyingMap and rezkValue helpers. These are concrete definitions, not hypotheses or uses of their owning theorems; the theorem signature and mathematical statement are unchanged.",
+  "fixed_by": "NT-stage2-Codex-1d7aa4de2"
  }
 }
