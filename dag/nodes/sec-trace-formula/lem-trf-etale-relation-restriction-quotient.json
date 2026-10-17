@@ -327,5 +327,30 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q74-7a17ea351 (reviewer sub-agent of L); spot-checked: Read the item, all cited nodes, unit/chapter route, coordination files, and exact Stacks sources (Tags 02WT and 045Z). All six steps are mathematically sound, hypotheses and etale base-change/composition factorizations check out, quotient sheaf injectivity and surjective-cover gluing are correctly proved, edge cases were tested, searches and tool uses are recorded, and no duplicate/new-node or route violation remains. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-945b5163a",
+  "group": "N0",
+  "result": "pass",
+  "note": "Independently checked the immutable statement, dependencies, source references, Lean declarations, docstrings, edge cases, route-pivot status, report sections, and per-file scompile evidence; no substantive or mechanical defect found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleRelationRestrictionQuotient",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_relation_restriction_quotient",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.restrictedEtaleRelation",
+   "AlgebraicGeometry.AlgebraicSpace.restrictedEtaleRelationSource",
+   "AlgebraicGeometry.AlgebraicSpace.restrictedEtaleRelationTarget",
+   "AlgebraicGeometry.AlgebraicSpace.etale_relation_restriction_quotient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleRelationRestrictionQuotient.lean",
+  "statement": "theorem etale_relation_restriction_quotient {S : Scheme.{u}} {R U U' : Over S} (s t : R ⟶ U) [Mono (prod.lift s t)] (hrel : ∀ T : Over S, Equivalence (fun a b : T ⟶ U ↦ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b)) (g : U' ⟶ U) [Etale s.left] [Etale t.left] [Etale g.left] (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) (η : coequalizer (yoneda.map s) (yoneda.map t) ⟶ F.obj) (hη : ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun k : F.obj ⟶ G.obj ↦ η ≫ k)) (F' : Sheaf (Scheme.fppfTopology.over S) (Type u)) (η' : coequalizer (yoneda.map (restrictedEtaleRelationSource s t g)) (yoneda.map (restrictedEtaleRelationTarget s t g)) ⟶ F'.obj) (hη' : ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun k : F'.obj ⟶ G.obj ↦ η' ≫ k)) : Mono (prod.lift (restrictedEtaleRelationSource s t g) (restrictedEtaleRelationTarget s t g)) ∧ (∀ T : Over S, Equivalence (fun a b : T ⟶ U' ↦ ∃ r : T ⟶ restrictedEtaleRelation s t g, r ≫ restrictedEtaleRelationSource s t g = a ∧ r ≫ restrictedEtaleRelationTarget s t g = b)) ∧ Etale (restrictedEtaleRelationSource s t g).left ∧ Etale (restrictedEtaleRelationTarget s t g).left ∧ ∃ α : F'.obj ⟶ F.obj, (coequalizer.π (yoneda.map (restrictedEtaleRelationSource s t g)) (yoneda.map (restrictedEtaleRelationTarget s t g)) ≫ η') ≫ α = yoneda.map g ≫ (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η) ∧ Mono α ∧ (Surjective g.left → IsIso α)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The restricted relation and its projections are the actual iterated pullbacks in Over S. The two sheaf quotients are specified by their sheafification universal properties at the presheaf coequalizers, following the existing EtaleRelationQuotient interface. The quotient-projection compatibility uniquely determines the canonical map alpha; Mono alpha is equivalent to injectivity on every test scheme. No global sheafification-existence assumption is imposed on the big site."
  }
 }

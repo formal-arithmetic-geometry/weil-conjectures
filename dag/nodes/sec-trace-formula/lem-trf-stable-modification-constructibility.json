@@ -16,7 +16,9 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-etale-morphism",
   "def-sbc-smooth-morphisms",
-  "def-weil-constructible-subset"
+  "def-weil-constructible-subset",
+  "def-trf-semistable-multipointed-pair",
+  "def-trf-multipointed-curve-modification"
  ],
  "proof": [
   {
@@ -300,5 +302,23 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-8ca96722a (reviewer sub-agent of L); spot-checked: Read the item, all seven steps, both new nodes, cited statements, Temkin Lemma 5.1(ii), Stacks Tag 0DSC, unit/chapter route, and delivery report. Checked hypotheses, base changes, properness, component data, distinct special-point counting, edge cases, duplicates, searches, and route constraints. No forbidden SGA or dropped machinery; no step exceeds 2000 characters. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c01a79e26",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Reviewed packet, item, dependencies, source declarations, report, module, route-pivot compliance, edge cases, and scompile evidence; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.StableModificationConstructibility",
+  "declaration": "AlgebraicGeometry.stable_modification_constructibility",
+  "statement": "theorem stable_modification_constructibility {S : Scheme.{u}} [IsIntegral S] [IsNoetherian S] (η : S) (hη : IsGenericPoint η Set.univ) (X Y : MultipointedCurve S) (f : Y.Hom X) (hf : f.IsEtaModification (S.fromSpecResidueField η)) : ∃ Cₛ Cₜ : Set S, Topology.IsConstructible Cₛ ∧ Topology.IsConstructible Cₜ ∧ (∀ s : S, s ∈ Cₛ ↔ ((MultipointedPair.ofCurve Y).baseChange (S.fromSpecResidueField s)).IsSemistable) ∧ (∀ s : S, s ∈ Cₜ ↔ ((MultipointedPair.ofCurve Y).baseChange (S.fromSpecResidueField s)).IsSemistable ∧ MultipointedPair.HasGeometricStability ((MultipointedPair.ofCurve Y).baseChange (S.fromSpecResidueField s)) ((MultipointedPair.ofCurve X).baseChange (S.fromSpecResidueField s)) ((Over.pullback (S.fromSpecResidueField s)).map (Over.homMk (U := Over.mk Y.x) (V := Over.mk X.x) f.curve f.curve_over)))",
+  "by": "Q33",
+  "date": "2026-10-17",
+  "file": "lean/Sheaf/TraceFormula/StableModificationConstructibility.lean",
+  "existing": false,
+  "branch": "newtargets-dag"
  }
 }
