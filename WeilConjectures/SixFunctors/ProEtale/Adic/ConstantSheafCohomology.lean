@@ -117,5 +117,192 @@ lemma eq_zero_of_forall_mem_adicLatticeNbhd {k : Finset (PadicAlgCl l) × ℕ}
   linarith
 
 end Lattice
+section DirectedUnion
+
+variable {S : Scheme.{u}}
+
+/-- **Filtered unions of subsheaves.** A cocone of a `u + 1`-small filtered diagram of abelian
+pro-étale sheaves whose legs are monomorphisms is a colimit cocone as soon as every section of
+the cocone point is locally in the image of some leg: the comparison map from the colimit is a
+monomorphism since filtered colimits are exact, and an epimorphism since it is locally
+surjective. -/
+noncomputable def isColimitOfMonoOfLocallySurjective {K : Type (u + 1)} [SmallCategory K]
+    [IsFiltered K] {D : K ⥤ Sheaf (Scheme.ProEt.topology S) AddCommGrpCat.{u + 1}}
+    (c : Cocone D) [∀ k, Mono (c.ι.app k)]
+    (h : ∀ (V : S.ProEt) (s : c.pt.obj.obj (op V)), ∃ R ∈ Scheme.ProEt.topology S V,
+      ∀ ⦃W : S.ProEt⦄ (g : W ⟶ V), R g →
+        ∃ (k : K) (t : (D.obj k).obj.obj (op W)),
+          (c.ι.app k).hom.app (op W) t = c.pt.obj.map g.op s) :
+    IsColimit c := by
+  have : IsConnected K := IsFiltered.isConnected _
+  let φ := colimit.desc D c
+  have hmono : Mono φ := by
+    let α : D ⟶ (Functor.const _).obj c.pt := { app k := c.ι.app k }
+    have : Mono α := NatTrans.mono_of_mono_app _
+    have : Mono (colim.map α) := inferInstance
+    let e := (colimit.isColimit ((Functor.const K).obj c.pt)).coconePointUniqueUpToIso
+      (isColimitConstCocone K c.pt)
+    have : φ = colim.map α ≫ e.hom := by
+      refine colimit.hom_ext fun k ↦ ?_
+      simp [φ, e, α]
+    rw [this]
+    infer_instance
+  have hepi : Epi φ := by
+    have : Sheaf.IsLocallySurjective φ := by
+      refine ⟨fun {V} s ↦ ?_⟩
+      obtain ⟨R, hR, hRs⟩ := h V s
+      refine (Scheme.ProEt.topology S).superset_covering ?_ hR
+      intro W g hg
+      obtain ⟨k, t, ht⟩ := hRs g hg
+      refine ⟨(colimit.ι D k).hom.app (op W) t, ?_⟩
+      rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
+        ← ObjectProperty.FullSubcategory.comp_hom, colimit.ι_desc]
+      exact ht
+    exact Sheaf.epi_of_isLocallySurjective _
+  have : IsIso ((colimit.isColimit D).desc c) := isIso_of_mono_of_epi φ
+  exact IsColimit.ofPointIso (colimit.isColimit D)
+
+end DirectedUnion
+
+section Diagram
+
+variable (S : Scheme.{u})
+
+/-- The index category of the lattices `adicLattice l k`, lifted to `Type (u + 1)`. -/
+abbrev LatticeIndex := ULift.{u + 1} (Finset (PadicAlgCl l) × ℕ)
+
+instance : IsDirected (LatticeIndex.{u} l) (· ≤ ·) := by
+  classical exact
+  ⟨fun a b ↦ ⟨⟨(a.down.1 ∪ b.down.1, max a.down.2 b.down.2)⟩,
+    ⟨Finset.subset_union_left, le_max_left _ _⟩, ⟨Finset.subset_union_right, le_max_right _ _⟩⟩⟩
+
+instance : IsFiltered (LatticeIndex.{u} l) := isFiltered_of_directed_le_nonempty _
+
+variable {l} in
+/-- The inclusion of lattices, as a continuous homomorphism. -/
+noncomputable def adicLatticeInclusion {k k' : Finset (PadicAlgCl l) × ℕ} (h : k ≤ k') :
+    ContinuousAddMonoidHom (adicLattice l k) (adicLattice l k') :=
+  ⟨AddSubgroup.inclusion (adicLattice_mono h), continuous_subtype_val.subtype_mk _⟩
+
+/-- The diagram of the sheaves `U ↦ C(U, L)` for the lattices `L = adicLattice l k`. -/
+noncomputable def adicLatticeDiagram :
+    LatticeIndex.{u} l ⥤ Sheaf (Scheme.ProEt.topology S) AddCommGrpCat.{u + 1} where
+  obj k := continuousSheaf S (adicLattice l k.down)
+  map {X Y} f := continuousSheafMap S (adicLatticeInclusion (by
+    have h : X ≤ Y := leOfHom f
+    exact h))
+  map_id _ := by
+    apply Sheaf.hom_ext
+    ext U f
+    rfl
+  map_comp _ _ := by
+    apply Sheaf.hom_ext
+    ext U f
+    rfl
+
+/-- The underlying abelian sheaf of the constant `ℓ`-adic sheaf `ℚ̄_ℓ,S`. -/
+noncomputable abbrev adicConstantSheafAb : Sheaf (Scheme.ProEt.topology S) AddCommGrpCat.{u + 1} :=
+  (sheafForget₂ (ULift.{u + 1} (PadicAlgCl l)) S).obj (adicConstantSheaf l S)
+
+variable {l S} in
+/-- A continuous function with values in a lattice, as a section of `ℚ̄_ℓ,S`. -/
+noncomputable def latticeFunctionToAdic (k : Finset (PadicAlgCl l) × ℕ) (U : S.ProEt) :
+    ULift.{u + 1} C(U.left, adicLattice l k) →+ (adicConstantSheafAb l S).obj.obj (op U) where
+  toFun f := ULift.up ⟨⟨fun t ↦ (f.down t : PadicAlgCl l), by fun_prop⟩,
+    PadicAlgCl.mem_locallyFiniteFunctions_of_finiteDimensional <|
+      have : FiniteDimensional ℚ_[l] (Submodule.span ℚ_[l] (k.1 : Set (PadicAlgCl l))) :=
+        FiniteDimensional.span_finset _ _
+      Submodule.finiteDimensional_of_le
+        (S₂ := Submodule.span ℚ_[l] (k.1 : Set (PadicAlgCl l))) (Submodule.span_le.2 (by
+        rintro _ ⟨t, rfl⟩
+        exact (mem_adicLattice.1 (f.down t).2).1))⟩
+  map_zero' := rfl
+  map_add' _ _ := rfl
+
+/-- The cocone of the inclusions `C(-, L) ⟶ ℚ̄_ℓ,S`. -/
+noncomputable def adicLatticeCocone : Cocone (adicLatticeDiagram l S) where
+  pt := adicConstantSheafAb l S
+  ι :=
+    { app k := ⟨{ app U := AddCommGrpCat.ofHom (latticeFunctionToAdic k.down U.unop)
+                  naturality _ _ _ := rfl }⟩
+      naturality k k' f := by
+        apply Sheaf.hom_ext
+        ext U f
+        rfl }
+
+instance (k : LatticeIndex.{u} l) : Mono ((adicLatticeCocone l S).ι.app k) := by
+  have : Mono ((sheafToPresheaf _ _).map ((adicLatticeCocone l S).ι.app k)) := by
+    rw [NatTrans.mono_iff_mono_app]
+    intro U
+    rw [AddCommGrpCat.mono_iff_injective]
+    intro f g h
+    exact ULift.ext _ _ (ContinuousMap.ext fun t ↦ Subtype.ext (congrArg
+      (fun x : ULift.{u + 1} (PadicAlgCl.locallyFiniteFunctions l U.unop.left) ↦ x.down.1 t) h))
+  exact (sheafToPresheaf _ _).mono_of_mono_map this
+
+/-- Every section of `ℚ̄_ℓ,S` is locally a continuous function with values in a lattice: on an
+affine open neighbourhood of a point, a locally finite function has compact image in a
+finite-dimensional subspace. -/
+lemma exists_adicLattice_section (V : S.ProEt) (s : (adicConstantSheafAb l S).obj.obj (op V)) :
+    ∃ R ∈ Scheme.ProEt.topology S V, ∀ ⦃W : S.ProEt⦄ (g : W ⟶ V), R g →
+      ∃ (k : LatticeIndex.{u} l) (t : ((adicLatticeDiagram l S).obj k).obj.obj (op W)),
+        ((adicLatticeCocone l S).ι.app k).hom.app (op W) t =
+          (adicLatticeCocone l S).pt.obj.map g.op s := by
+  let D := adicLatticeDiagram l S
+  let c := adicLatticeCocone l S
+  let R : Sieve V :=
+    { arrows W g := ∃ (k : LatticeIndex.{u} l) (t : (D.obj k).obj.obj (op W)),
+        (c.ι.app k).hom.app (op W) t = c.pt.obj.map g.op s
+      downward_closed := by
+        rintro W W' g ⟨k, t, ht⟩ h
+        refine ⟨k, (D.obj k).obj.map h.op t, ?_⟩
+        rw [NatTrans.naturality_apply, ht]
+        change _ = c.pt.obj.map (g.op ≫ h.op) s
+        rw [Functor.map_comp]
+        rfl }
+  refine ⟨R, ?_, fun W g hg ↦ hg⟩
+  let f : C(V.left, PadicAlgCl l) := s.down.1
+  have hf : f ∈ PadicAlgCl.locallyFiniteFunctions l V.left := s.down.2
+  have key (x : V.left) : ∃ W : V.left.Opens, x ∈ W ∧ R (Scheme.ProEt.ofOpenImmersionHom V W.ι) := by
+    obtain ⟨N, hN, hfin⟩ := hf x
+    obtain ⟨_, ⟨W₀, hW, rfl⟩, hxW, hWN⟩ := V.left.isBasis_affineOpens.exists_subset_of_mem_open
+      (mem_interior_iff_mem_nhds.2 hN) isOpen_interior
+    let W : V.left.Opens := W₀
+    obtain ⟨B, hB⟩ := (hW.isCompact.image f.continuous).isBounded.exists_norm_le
+    obtain ⟨n, hn⟩ := pow_unbounded_of_one_lt B
+      (by exact_mod_cast (Fact.out : l.Prime).one_lt : (1 : ℝ) < l)
+    obtain ⟨s', hs'⟩ := Module.Finite.iff_fg.1 hfin
+    have hmem (y : W.toScheme) : f (W.ι y) ∈ adicLattice l (s', n) := by
+      rw [mem_adicLattice, hs']
+      have hy : W.ι y ∈ (W : Set V.left) := by simp
+      exact ⟨Submodule.subset_span ⟨_, interior_subset (hWN hy), rfl⟩,
+        (hB _ ⟨_, hy, rfl⟩).trans hn.le⟩
+    refine ⟨W, hxW, ⟨⟨(s', n)⟩, ULift.up ⟨fun y ↦ ⟨f (W.ι y), hmem y⟩,
+      (f.continuous.comp W.ι.continuous).subtype_mk _⟩, ?_⟩⟩
+    exact ULift.ext _ _ (Subtype.ext (ContinuousMap.ext fun y ↦ rfl))
+  choose W hxW hR using key
+  exact Scheme.ProEt.mem_topology_of_openImmersion R (fun x ↦ (W x).ι)
+    (fun x ↦ ⟨x, ⟨x, hxW x⟩, Scheme.Opens.ι_apply _ _⟩) hR
+
+/-- `ℚ̄_ℓ,S` is the filtered union of the subsheaves `U ↦ C(U, L)` of continuous functions with
+values in the lattices `L = adicLattice l k`. -/
+noncomputable def isColimitAdicLatticeCocone : IsColimit (adicLatticeCocone l S) :=
+  isColimitOfMonoOfLocallySurjective _ (exists_adicLattice_section l S)
+
+end Diagram
+
+/-- **Cohomological dimension of the constant `ℓ`-adic sheaf.** Let `S` be a quasi-compact
+quasi-separated scheme of finite type and of dimension at most `d` over a separably closed
+field. Then `Hᵠ(S_proét, ℚ̄_ℓ) = 0` for `q > 2d`, for the underlying abelian sheaf of the
+constant `ℓ`-adic sheaf. -/
+theorem subsingleton_H_adicConstantSheaf_of_two_mul_lt {S : Scheme.{u}} [CompactSpace S]
+    [QuasiSeparatedSpace S] {K : Type u} [Field K] [IsSepClosed K] (a : S ⟶ Spec (.of K))
+    [LocallyOfFiniteType a] [QuasiCompact a] (d : ℕ)
+    (hS : topologicalKrullDim S ≤ (d : WithBot ℕ∞)) (q : ℕ) (hq : 2 * d < q) :
+    Subsingleton (Sheaf.H (adicConstantSheafAb l S) q) :=
+  Scheme.ProEt.subsingleton_H_of_isColimit_of_isFiltered S (isColimitAdicLatticeCocone l S) q
+    fun k ↦ subsingleton_H_continuousSheaf_of_two_mul_lt_of_compact S
+      (antitone_adicLatticeNbhd k.down) (isOpen_adicLatticeNbhd k.down)
+      eq_zero_of_forall_mem_adicLatticeNbhd a d hS q hq
 
 end AlgebraicGeometry.ProEtale
