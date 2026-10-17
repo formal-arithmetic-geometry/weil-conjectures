@@ -130,40 +130,6 @@ theorem Scheme.H_map_isColimit_of_isFiltered (X : Scheme.{u}) [CompactSpace X]
       ∃ (j' : J) (φ : j ⟶ j'), Sheaf.H.map (D.map φ) q y = 0 :=
   Scheme.H_map_isColimit_of_isFiltered_of_large X hc q
 
-/-- The coefficient-size indexing variant of filtered-colimit continuity for sheaf cohomology. -/
-theorem Scheme.H_map_isColimit_of_isFiltered_coefficientSize
-    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
-    {J : Type (u + 1)} [SmallCategory J] [IsFiltered J]
-    {D : J ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
-    (hc : IsColimit c) (q : ℕ) :
-    (∀ x : Sheaf.H c.pt q, ∃ (j : J) (y : Sheaf.H (D.obj j) q),
-      Sheaf.H.map (c.ι.app j) q y = x) ∧
-    ∀ (j : J) (y : Sheaf.H (D.obj j) q), Sheaf.H.map (c.ι.app j) q y = 0 →
-      ∃ (j' : J) (φ : j ⟶ j'), Sheaf.H.map (D.map φ) q y = 0 := by
-  let E := Sheaf.functorH.{u + 1} X.smallEtaleTopology q
-  let R := DerivedCategory.singleFunctor
-    (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙
-      Etale.cohomology AddCommGrpCat.{u + 1} X (q : ℤ)
-  let e : E ≅ R := (Scheme.nonempty_sheafH_extDerivedIso X q).some
-  have hR : IsColimit (R.mapCocone c) :=
-    (Scheme.etaleCohomology_isColimit_of_isFiltered_coefficientSize X hc q).some
-  have hE : IsColimit (E.mapCocone c) := IsColimit.mapCoconeEquiv e.symm hR
-  have : PreservesFilteredColimitsOfSize.{u + 1, u + 1}
-      (CategoryTheory.forget AddCommGrpCat.{u + 1}) := inferInstance
-  constructor
-  · intro x
-    exact Concrete.isColimit_exists_rep (D ⋙ E) hE x
-  · intro j y hy
-    have hz : (E.mapCocone c).ι.app j y = (E.mapCocone c).ι.app j 0 := by
-      change Sheaf.H.map (c.ι.app j) q y = Sheaf.H.map (c.ι.app j) q 0
-      rw [(Sheaf.H.map (c.ι.app j) q).map_zero]
-      exact hy
-    obtain ⟨j', φ, ψ, hφ⟩ :=
-      Concrete.isColimit_exists_of_rep_eq (D ⋙ E) hE y 0 hz
-    refine ⟨j', φ, ?_⟩
-    change Sheaf.H.map (D.map φ) q y = Sheaf.H.map (D.map ψ) q 0 at hφ
-    rwa [(Sheaf.H.map (D.map ψ) q).map_zero] at hφ
-
 /-! ### Dévissage -/
 
 private theorem subsingleton_middle {X : Scheme.{u}}
