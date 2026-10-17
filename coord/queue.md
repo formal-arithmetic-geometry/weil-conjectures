@@ -27,6 +27,6 @@ Not items: a node in the proof dependencies has no Lean statement yet (the human
 
 | module | distance to a target | sorry | waits for (first unstated node) |
 |---|---|---|---|
-| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded` | 3 | 1 | `sk-thm-restriction` |
-| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | `sk-thm-restriction` |
+| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded` | 3 | 1 | `sk-def-sfb-qlbar-condensed` |
+| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | `sk-def-sfb-dc-setting` |
 | `Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound` | 5 | 1 | `det-ambient-ind-derived-sums` |
