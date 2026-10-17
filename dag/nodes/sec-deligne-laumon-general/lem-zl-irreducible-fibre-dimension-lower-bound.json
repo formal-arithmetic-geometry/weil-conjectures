@@ -2,7 +2,7 @@
  "id": "lem-zl-irreducible-fibre-dimension-lower-bound",
  "kind": "statement",
  "title": "Lower bound for fibres of an irreducible finite-type scheme",
- "statement": "Let $k$ be a field, let $X$ be an irreducible scheme [def-weil-irreducible-components] of finite type over $k$ [def-weil-finite-type-morphism], let $Y$ be a scheme of finite type over $k$, and let $f:X\\to Y$ be a $k$-morphism [def-weil-scheme-over-base]. Put $Z=\\overline{f(X)}$ with the topological closure in $Y$ and put $r=\\dim X-\\dim Z$, where dimensions are topological Krull dimensions [def-kun-topological-krull-dimension]. For every $x\\in X$, the local topological dimension [def-kun-topological-dimension-at-point] of the scheme-theoretic fibre $X_{f(x)}=X\\times_Y\\operatorname{Spec}\\kappa(f(x))$ [def-pc-scheme-fibre] at the point corresponding to $x$ is at least $r$. Moreover, the locus of points where this local fibre dimension equals $r$ is dense open in $X$.",
+ "statement": "Let $k$ be a field, let $X$ be an irreducible scheme [def-weil-irreducible-components] of finite type over $k$ [def-weil-finite-type-morphism], let $Y$ be a scheme of finite type over $k$, and let $f:X\\to Y$ be a $k$-morphism [def-weil-scheme-over-base]. There exists a natural number $r$ such that\n$$\\dim X=\\dim\\overline{f(X)}+r,$$\nwhere dimensions are topological Krull dimensions [def-kun-topological-krull-dimension] and the natural number is embedded in the extended dimension type. For every $x\\in X$, the local topological dimension [def-kun-topological-dimension-at-point] of the scheme-theoretic fibre $X_{f(x)}=X\\times_Y\\operatorname{Spec}\\kappa(f(x))$ [def-pc-scheme-fibre] at the point corresponding to $x$ is at least $r$. Moreover, the locus of points where this local fibre dimension equals $r$ is dense open in $X$.",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Tag 0B2L, lemma-dimension-fibres-locally-algebraic, parts (2)(a) and (2)(b), including the proof via the generic point and the transcendence-degree difference"
@@ -55,7 +55,7 @@
    }
   },
   {
-   "text": "Apply the closed-irreducible dimension/transcendence-degree theorem to $X\\subseteq X$ with generic point $\\eta$, and to $Z\\subseteq Y$ with generic point $\\xi$. Both ambient schemes are finite type over $k$, and both closed subsets are nonempty irreducible by Step 3. It gives $\\dim X=\\operatorname{trdeg}_k\\kappa_X(\\eta)$ and $\\dim Z=\\operatorname{trdeg}_k\\kappa_Y(\\xi)$. These are finite nonnegative integers: $X$ and $Y$ have finite dimension by the finite-type dimension theorem, and a chain in the closed subspace $Z$ is also a chain in $Y$. The residue-field map of $f$ gives a tower $k\\to\\kappa_Y(\\xi)\\to\\kappa_X(\\eta)$. The transcendence-degree tower identity therefore yields\n$$r=\\dim X-\\dim Z=\\operatorname{trdeg}_{\\kappa_Y(\\xi)}\\kappa_X(\\eta)\\in\\mathbb N.$$\nFiniteness of $\\operatorname{trdeg}_k\\kappa_X(\\eta)$ makes both summands in that tower identity finite, so this is ordinary integer subtraction without any infinite-dimension ambiguity.",
+   "text": "Apply the closed-irreducible dimension/transcendence-degree theorem to $X\\subseteq X$ with generic point $\\eta$, and to $Z\\subseteq Y$ with generic point $\\xi$. Both ambient schemes are finite type over $k$, and both closed subsets are nonempty irreducible by Step 3. It gives $\\dim X=\\operatorname{trdeg}_k\\kappa_X(\\eta)$ and $\\dim Z=\\operatorname{trdeg}_k\\kappa_Y(\\xi)$. These are finite nonnegative integers: $X$ and $Y$ have finite dimension by the finite-type dimension theorem, and a chain in the closed subspace $Z$ is also a chain in $Y$. The residue-field map of $f$ gives a tower $k\\to\\kappa_Y(\\xi)\\to\\kappa_X(\\eta)$. The transcendence-degree tower identity therefore yields\n$$\\dim X=\\dim Z+\\operatorname{trdeg}_{\\kappa_Y(\\xi)}\\kappa_X(\\eta),$$\nso choose $r=\\operatorname{trdeg}_{\\kappa_Y(\\xi)}\\kappa_X(\\eta)\\in\\mathbb N$.\nFiniteness of $\\operatorname{trdeg}_k\\kappa_X(\\eta)$ makes both summands in that tower identity finite, so this is ordinary integer subtraction without any infinite-dimension ambiguity.",
    "uses": [
     "lem-sc-closed-irreducible-dimension-trdeg",
     "lem-kun-dimension-finite-type",
@@ -280,5 +280,142 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-4d487c7c9 (reviewer sub-agent of L); spot-checked: Full mathematical review completed against Stacks Tag 0B2L and all cited DAG statements. The proof and edge cases check out. A4 metadata fault: created.item incorrectly names lem-zl-finite-type-fibre-image-dimension-bounds; corrected whole-node JSON is in fixes/dag/nodes/sec-deligne-laumon-general/lem-zl-irreducible-fibre-dimension-lower-bound.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.DeligneLaumon.IrreducibleFibreDimensionLowerBound",
+  "declaration": "AlgebraicGeometry.irreducible_fibre_dimension_lower_bound",
+  "file": "lean/Sheaf/DeligneLaumon/IrreducibleFibreDimensionLowerBound.lean",
+  "statement": "theorem irreducible_fibre_dimension_lower_bound (k : Type u) [Field k] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IrreducibleSpace X] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] : ∃ r : ℕ, topologicalKrullDim X = topologicalKrullDim (closure (Set.range f.base) : Set Y) + (r : WithBot ℕ∞) ∧ (∀ x : X, (r : WithBot ℕ∞) ≤ topologicalKrullDimAt (f.asFiber x)) ∧ Dense {x : X | topologicalKrullDimAt (f.asFiber x) = (r : WithBot ℕ∞)} ∧ IsOpen {x : X | topologicalKrullDimAt (f.asFiber x) = (r : WithBot ℕ∞)}",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-f1cbb1ef7"
+ },
+ "statement_change": {
+  "date": "2026-10-17",
+  "by": "Q77 stage 2",
+  "old_statement": "Let $k$ be a field, let $X$ be an irreducible scheme [def-weil-irreducible-components] of finite type over $k$ [def-weil-finite-type-morphism], let $Y$ be a scheme of finite type over $k$, and let $f:X\\to Y$ be a $k$-morphism [def-weil-scheme-over-base]. Put $Z=\\overline{f(X)}$ with the topological closure in $Y$ and put $r=\\dim X-\\dim Z$, where dimensions are topological Krull dimensions [def-kun-topological-krull-dimension]. For every $x\\in X$, the local topological dimension [def-kun-topological-dimension-at-point] of the scheme-theoretic fibre $X_{f(x)}=X\\times_Y\\operatorname{Spec}\\kappa(f(x))$ [def-pc-scheme-fibre] at the point corresponding to $x$ is at least $r$. Moreover, the locus of points where this local fibre dimension equals $r$ is dense open in $X$.",
+  "source": {
+   "document": "literature/stacks-project/varieties.tex",
+   "place": "Tag 0B2L, lemma-dimension-fibres-locally-algebraic, parts (2)(a) and (2)(b), generic-fibre transcendence-degree computation"
+  },
+  "citers": [
+   {
+    "id": "lem-zl-finite-type-fibre-image-dimension-bounds",
+    "holds": true,
+    "note": "The citer applies the lemma componentwise and only needs the natural-number dimension difference and its dense-open equality locus; the additive representative supplies exactly this."
+   }
+  ],
+  "what": "The expression dim X - dim Z is not typable in Lean: topologicalKrullDim has type WithBot ℕ∞, which has no subtraction operation. The source theorem guarantees that both dimensions are finite and that their difference is a natural number, so the corrected statement expresses this canonical difference by the equation dim X = dim Z + (r : WithBot ℕ∞) for an existential r : ℕ; all lower-bound and dense-open clauses use that same r.",
+  "old_proof": [
+   {
+    "text": "First check finiteness for the fibre calculations. A field is Noetherian: its only ideals are $(0)$ and $(1)$, generated by $0$ and $1$, and $\\operatorname{Spec}k$ is a one-point quasi-compact scheme. The finite-type-over-Noetherian theorem makes $X$ Noetherian. The minimal-closed-subset theorem gives the descending-chain condition on closed subsets of $|X|$: an infinite strictly descending chain would have no minimal member. The compact-subsets theorem therefore makes every subset of $|X|$ quasi-compact.",
+    "uses": [
+     "lem-weil-pbc-finite-type-over-noetherian",
+     "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+     "lem-sfb-noetherian-space-compact-subsets"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/varieties.tex",
+     "place": "Tag 0B2L, preliminary finite-type fibre assertion; auxiliary Tags 01T6 (lemma-finite-type-noetherian), 01OZ (properties-lemma-Noetherian-topology), 04ZA (topology-lemma-Noetherian-quasi-compact)."
+    }
+   },
+   {
+    "text": "Write $a_X:X\\to\\operatorname{Spec}k$ and $a_Y:Y\\to\\operatorname{Spec}k$ for the structure maps. Since $a_X=a_Y\\circ f$ is locally of finite type, clause (f) of the permanence theorem shows that $f$ is locally of finite type. For every affine open $V\\subseteq Y$, its inverse image is a subset of $|X|$, hence is quasi-compact by Step 1. Thus $f$ is quasi-compact and therefore finite type by definition. For every $y\\in Y$, finite-type base change now makes the fibre projection $X_y\\to\\operatorname{Spec}\\kappa(y)$ finite type. In particular all these fibre schemes have finite topological dimension, by the finite-type-over-a-field dimension theorem.",
+    "uses": [
+     "lem-weil-pbc-proper-fp-permanence",
+     "def-weil-finite-type-morphism",
+     "lem-sfb-finite-type-composition-base-change",
+     "lem-kun-dimension-finite-type"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/varieties.tex",
+     "place": "Tag 0B2L (1) and its proof; Tags 01T8 (lemma-permanence-finite-type), 01T4 (lemma-base-change-finite-type); finite-dimensionality over a field."
+    }
+   },
+   {
+    "text": "Irreducibility includes nonemptiness. By sobriety choose the generic point $\\eta$ of $X$, and put $\\xi=f(\\eta)$. The closed subset $f^{-1}(\\overline{\\{\\xi\\}})$ contains $\\eta$, hence all of $X$. Thus $f(X)\\subseteq\\overline{\\{\\xi\\}}$, while $\\xi\\in f(X)$ gives the reverse inclusion after taking closures. Consequently $Z=\\overline{\\{\\xi\\}}$ is a nonempty irreducible closed subset of $Y$, with generic point $\\xi$. Every nonempty open subset of $X$ contains $\\eta$: otherwise its closed complement would contain $\\eta$ and hence $X$.",
+    "uses": [
+     "lem-weil-pbc-scheme-sober"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/stacks-project/varieties.tex",
+     "place": "Tag 0B2L, proof of (2), first two sentences; sobriety Tag 01IS (schemes-lemma-scheme-sober)."
+    }
+   },
+   {
+    "text": "Apply the closed-irreducible dimension/transcendence-degree theorem to $X\\subseteq X$ with generic point $\\eta$, and to $Z\\subseteq Y$ with generic point $\\xi$. Both ambient schemes are finite type over $k$, and both closed subsets are nonempty irreducible by Step 3. It gives $\\dim X=\\operatorname{trdeg}_k\\kappa_X(\\eta)$ and $\\dim Z=\\operatorname{trdeg}_k\\kappa_Y(\\xi)$. These are finite nonnegative integers: $X$ and $Y$ have finite dimension by the finite-type dimension theorem, and a chain in the closed subspace $Z$ is also a chain in $Y$. The residue-field map of $f$ gives a tower $k\\to\\kappa_Y(\\xi)\\to\\kappa_X(\\eta)$. The transcendence-degree tower identity therefore yields\n$$r=\\dim X-\\dim Z=\\operatorname{trdeg}_{\\kappa_Y(\\xi)}\\kappa_X(\\eta)\\in\\mathbb N.$$\nFiniteness of $\\operatorname{trdeg}_k\\kappa_X(\\eta)$ makes both summands in that tower identity finite, so this is ordinary integer subtraction without any infinite-dimension ambiguity.",
+    "uses": [
+     "lem-sc-closed-irreducible-dimension-trdeg",
+     "lem-kun-dimension-finite-type",
+     "lem-kun-transcendence-degree-tower"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/varieties.tex",
+     "place": "Tag 0B2L, proof of (2), displayed transcendence-degree difference; Tag 0B1C (item-dimension-irreducible-trdeg in lemma-dimension-locally-algebraic), Fields Tag 030H (lemma-transcendence-degree-tower)."
+    }
+   },
+   {
+    "text": "Put $F=X_\\xi$, and let $\\widetilde\\eta\\in F$ correspond to $\\eta$. The fibre homeomorphism identifies $|F|$ with the subspace $f^{-1}(\\xi)$ containing $\\eta$. The closure of $\\eta$ in this subspace is $\\overline{\\{\\eta\\}}\\cap f^{-1}(\\xi)=f^{-1}(\\xi)$, so $F$ is nonempty irreducible with generic point $\\widetilde\\eta$. Its residue field is $\\kappa_X(\\eta)$ as an extension of $\\kappa_Y(\\xi)$, as follows directly from the fibre-product residue-field theorem. Indeed the tensor ring for this fibre-product point is\n$$\\kappa_X(\\eta)\\otimes_{\\kappa_Y(\\xi)}\\kappa_Y(\\xi)\\simeq\\kappa_X(\\eta),\\qquad a\\otimes b\\longmapsto a f^\\sharp(b),$$\nwith inverse $a\\mapsto a\\otimes1$. This is a field; the unital map from it to $\\kappa_F(\\widetilde\\eta)$ has zero kernel. The theorem identifies the latter residue field with the residue field at that zero prime, namely this same field, compatibly with both factor maps.",
+    "uses": [
+     "def-pc-scheme-fibre",
+     "lem-weil-pbc-fibre-product-point-residue-field"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/varieties.tex",
+     "place": "Tag 0B2L, proof of (2), generic fibre at the image of the generic point; Tag 01JT (schemes-lemma-points-fibre-product), residue-field clause."
+    }
+   },
+   {
+    "text": "The scheme $F$ is finite type over $\\kappa_Y(\\xi)$ by Step 2 and irreducible with generic point $\\widetilde\\eta$ by Step 5. Apply the closed-irreducible dimension theorem to its whole underlying space. By the compatible residue-field identification of Step 5 and Step 4,\n$$\\dim F=\\operatorname{trdeg}_{\\kappa_Y(\\xi)}\\kappa_F(\\widetilde\\eta)=r.$$\nThe irreducible locally-algebraic dimension theorem applies to $F$ over this field, since finite type implies locally finite type. It says that dimension at every point equals the global dimension. In particular $\\dim_{\\widetilde\\eta}F=r$. No reducedness, smoothness or dominance onto $Y$ has been assumed.",
+    "uses": [
+     "lem-sc-closed-irreducible-dimension-trdeg",
+     "lem-sc-dimension-locally-algebraic"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/varieties.tex",
+     "place": "Tag 0B2L, proof of (2), final equality of the displayed calculation; Tag 0A21 (lemma-dimension-locally-algebraic), parts (3), (6)."
+    }
+   },
+   {
+    "text": "Fix $x\\in X$, and let $\\widetilde x\\in X_{f(x)}$ be its corresponding fibre point. By Step 2 the global dimension of this nonempty fibre is finite. The minimum defining its dimension at $\\widetilde x$ is therefore a finite nonnegative integer $n$, bounded above by the dimension of the whole fibre, which is itself an open neighbourhood. Apply openness of the local fibre-dimension bound to the locally finite type morphism $f$ and this integer $n$. Its open set\n$$U_n=\\{z\\in X:\\dim_{\\widetilde z}X_{f(z)}\\leq n\\}$$\ncontains $x$, hence is nonempty and contains $\\eta$ by Step 3. Evaluation at $\\eta$ and Step 6 give $r=\\dim_{\\widetilde\\eta}X_\\xi\\leq n=\\dim_{\\widetilde x}X_{f(x)}$. Since $x$ was arbitrary, this proves the lower bound everywhere.",
+    "uses": [
+     "def-kun-topological-dimension-at-point",
+     "lem-weil-pbc-local-fibre-dimension-open"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/varieties.tex",
+     "place": "Tag 0B2L (2)(a), proof via Morphisms Tag 02FZ (lemma-openness-bounded-dimension-fibres)."
+    }
+   },
+   {
+    "text": "Use the same openness theorem with the nonnegative integer $r$ of Step 4. It makes $U_r$ open, and Step 6 shows that $\\eta\\in U_r$. Since $\\overline{\\{\\eta\\}}=X$, this open set is dense. By Step 7 every local fibre dimension is at least $r$, so the condition defining $U_r$ is equivalent to equality with $r$. Therefore the entire equality locus, not merely a subset of it, is dense open in $X$.",
+    "uses": [
+     "lem-weil-pbc-local-fibre-dimension-open"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/varieties.tex",
+     "place": "Tag 0B2L (2)(b), proof via Morphisms Tag 02FZ (lemma-openness-bounded-dimension-fibres)."
+    }
+   }
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f1cbb1ef7",
+  "group": "Q77",
+  "result": "fix",
+  "note": "Mathematics and verbatim Lean signature verified. Complete fixes add eight-step proof documentation, proof-dependency imports, and a substantive second reading. Original and corrected modules compile successfully through scompile.py. Findings and evidence recorded in review.md; branch unchanged.",
+  "statement_corrected": true
  }
 }
