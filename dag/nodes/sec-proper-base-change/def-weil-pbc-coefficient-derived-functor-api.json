@@ -1,129 +1,122 @@
 {
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "id": "def-weil-pbc-coefficient-derived-functor-api",
- "kind": "definition",
- "title": "Cached derived coefficient functors, adjunction and square",
- "statement": "For a commutative condensed coefficient ring Λ and scheme morphisms, cache the existing total left derived inverse image, total right derived direct image, their existing derived adjunction, and the inverse-image square isomorphism obtained by composing through the equal composites. These are the four unchanged definitions previously in Sheaf.Paper.FiniteDiscreteDerivedCoefficientData. The same API provides a partial record of only pullback and square coherence and its concrete finite-discrete abbreviation, without the right-mate field. The coefficient interfaces share one named, proved EssentiallySmall instance for Profinite, with the same essentiallySmallSelf proof as the former anonymous local instances.",
- "source": {
-  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/UpperLowerStar.lean",
-  "place": "derivedUpperStarLowerStarAdjunction and leftDerivedUpperStarComp"
- },
- "stmt_deps": [],
- "proof": [
-  {
-   "text": "Use the existing total derived functors and adjunction. Cache leftDerivedUpperStarComp with the named derived functors in its signature. Form coefficientAmbientSquare from the same inverse composition map, equality transport along sq.w, and other composition map, using an objectwise three-isomorphism constructor; coefficientIsoTransThree_eq identifies it with the ordinary composite. Define the generic FunctorComparisonSquare predicate as the universal component equation for functor comparisons between category families. Specialize it to the etale and internal derived functors to define CoefficientPullbackSquare; beta reduction gives exactly its former binders and equation. Reuse the same family and square interfaces in the existing records; no mathematical object or property changes. Preserve the non-exposed adjunction and ambient-square bodies and both existing equation APIs. The new coefficientAmbientSquare_eq exposes the objectwise construction to the square proof; coefficientAmbientSquare_app retains its original signature and follows from coefficientIsoTransThree_eq and NatIso.trans_app.",
-   "uses": [],
-   "elementary": true
-  }
- ],
- "proof_deps": [],
- "proof_origin": {
-  "by": "agent",
-  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/UpperLowerStar.lean",
-  "place": "derivedUpperStarLowerStarAdjunction and leftDerivedUpperStarComp",
-  "note": "B3: cached composition components and a generic category-family square predicate avoid kernel expansion of concrete derived-functor components; the mathematical comparisons and square equation are unchanged. Return repair, B3 2026-10-17: rebased on the current non-exposed wrappers; retained coefficientDerivedAdjunction_eq and coefficientAmbientSquare_app and their signatures."
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "Derived pullback functors of sheaves of modules have a canonical composition isomorphism and a derived adjunction with pushforward",
-   "date": "2026-10-16",
-   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback_comp_id, PresheafOfModules.pullbackComp, CategoryTheory.ChosenPullbacksAlong.pullbackComp",
-   "verdict": "No new derived construction: retain the existing upstream total-derived functors, adjunction and composition maps. Move the four cached wrappers verbatim, rather than constructing a duplicate."
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "id": "def-weil-pbc-coefficient-derived-functor-api",
+  "kind": "definition",
+  "title": "Cached derived coefficient functors, adjunction and square",
+  "statement": "For a commutative condensed coefficient ring Λ and scheme morphisms, cache the existing total left derived inverse image, total right derived direct image, their existing derived adjunction, and the inverse-image square isomorphism obtained by composing through the equal composites. These are the four unchanged definitions previously in Sheaf.Paper.FiniteDiscreteDerivedCoefficientData. The same API provides a partial record of only pullback and square coherence and its concrete finite-discrete abbreviation, without the right-mate field. The coefficient interfaces share one named, proved EssentiallySmall instance for Profinite, with the same essentiallySmallSelf proof as the former anonymous local instances.",
+  "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/UpperLowerStar.lean",
+    "place": "derivedUpperStarLowerStarAdjunction and leftDerivedUpperStarComp"
   },
-  {
-   "tool": "leanfinder",
-   "query": "Left derived functor of exact inverse image of internal modules over a condensed ring and its composition isomorphism",
-   "date": "2026-10-16",
-   "results": "8 hits: CondensedMod.LocallyConstant.adjunction, Condensed.profiniteSolid, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, LightCondMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.functorIsoDiscrete, CondensedMod.LocallyConstant.functorIsoDiscrete, CondensedMod.IsSolid.isIso_solidification_map",
-   "verdict": "No new derived construction: retain the existing upstream total-derived functors, adjunction and composition maps. Move the four cached wrappers verbatim, rather than constructing a duplicate."
+  "stmt_deps": [],
+  "proof": [
+    {
+      "text": "Use the existing total derived functors and adjunction. Compose the inverse of leftDerivedUpperStarComp, the equality transport of sq.w, and leftDerivedUpperStarComp for the other composite. Use the proved essentiallySmallSelf instance once for all cached coefficient interfaces; this changes no mathematical object. Name the existing pullback-family type and square predicate once as CoefficientPullbackFamily and CoefficientPullbackSquare; reuse these definitionally identical types in the partial record and its consumer records, avoiding repeated kernel expansion of concrete derived categories. B2: retain the exact adjunction and square construction bodies and make these two bodies non-exposed. Prove coefficientDerivedAdjunction_eq by unfolding its wrapper. Prove coefficientAmbientSquare_app using Mathlib NatIso.trans_app twice and the definitional component of symm, keeping concrete morphism projections folded.",
+      "uses": [],
+      "elementary": true
+    }
+  ],
+  "proof_deps": [],
+  "proof_origin": {
+    "by": "agent",
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/UpperLowerStar.lean",
+    "place": "derivedUpperStarLowerStarAdjunction and leftDerivedUpperStarComp",
+    "note": "A4: cache definitionally identical field interfaces; the four derived wrappers and all mathematical equations remain unchanged. B2, 2026-10-17: no mathematical data changes; hide the two large bodies and provide proved adjunction and square component equations. Return repair: delete the duplicate private triple_app helper; use Mathlib NatIso.trans_app directly."
   },
-  {
-   "tool": "grep",
-   "query": "comparison.*(UpperStar|LowerStar)|sheafPullback.*[Cc]omp|mapMod.*[Cc]omp|rightDerived.*[Ee]quiv",
-   "date": "2026-10-16",
-   "results": "0 hits: ",
-   "verdict": "No new derived construction: retain the existing upstream total-derived functors, adjunction and composition maps. Move the four cached wrappers verbatim, rather than constructing a duplicate."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.Paper.FiniteDiscreteDerivedCoefficientData",
-  "date": "2026-10-16",
-  "group": "E1"
- },
- "blueprint": {
-  "same_as": [],
-  "is": null,
-  "from": {
-   "node": "lem-weil-pbc-finite-discrete-derived-coefficient-data",
-   "place": "Cached derived coefficient functors, adjunction and square",
-   "via": []
-  }
- },
- "lean": {
-  "existing": false,
-  "module": "Sheaf.Paper.CoefficientDerivedFunctorAPI",
-  "file": "lean/Sheaf/Paper/CoefficientDerivedFunctorAPI.lean",
-  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.coefficientAmbientSquare",
-  "statement": "def coefficientAmbientSquare\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y}\n    {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : CommSq g' f' f g) :\n    coefficientDerivedUpperStar Λ g ⋙\n        coefficientDerivedUpperStar Λ f' ≅\n      coefficientDerivedUpperStar Λ f ⋙\n        coefficientDerivedUpperStar Λ g'",
-  "branch": "sheaf-dag",
-  "by": "E1",
-  "date": "2026-10-16",
-  "declarations": [
-   "coefficientProfiniteEssentiallySmall",
-   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientDerivedUpperStar",
-   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientDerivedLowerStar",
-   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientDerivedAdjunction",
-   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientAmbientSquare",
-   "AlgebraicGeometry.ProEtale.CondensedRing.CoefficientPullbackFamily",
-   "AlgebraicGeometry.ProEtale.CondensedRing.CoefficientPullbackSquare",
-   "AlgebraicGeometry.ProEtale.CondensedRing.CoefficientCoherentPullbackData",
-   "AlgebraicGeometry.ProEtale.CondensedRing.FiniteDiscreteCoherentPullbacks",
-   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientDerivedAdjunction_eq",
-   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientAmbientSquare_app",
-   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientDerivedUpperStarComp",
-   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientIsoTransThree",
-   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientIsoTransThree_hom_app",
-   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientAmbientSquare_hom_app",
-   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientIsoTransThree_eq",
-   "AlgebraicGeometry.ProEtale.CondensedRing.FunctorComparisonSquare",
-   "AlgebraicGeometry.ProEtale.CondensedRing.coefficientAmbientSquare_eq"
-  ]
- },
- "reviewed": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "X-cfc7e",
-  "group": "E1",
-  "result": "pass",
-  "landing": "20261016T131233-L-3106244",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B3",
-  "result": "pass",
-  "landing": "20261017T021559-L-693446",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "Derived pullback functors of sheaves of modules have a canonical composition isomorphism and a derived adjunction with pushforward",
+      "date": "2026-10-16",
+      "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback_comp_id, PresheafOfModules.pullbackComp, CategoryTheory.ChosenPullbacksAlong.pullbackComp",
+      "verdict": "No new derived construction: retain the existing upstream total-derived functors, adjunction and composition maps. Move the four cached wrappers verbatim, rather than constructing a duplicate."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Left derived functor of exact inverse image of internal modules over a condensed ring and its composition isomorphism",
+      "date": "2026-10-16",
+      "results": "8 hits: CondensedMod.LocallyConstant.adjunction, Condensed.profiniteSolid, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, LightCondMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.functorIsoDiscrete, CondensedMod.LocallyConstant.functorIsoDiscrete, CondensedMod.IsSolid.isIso_solidification_map",
+      "verdict": "No new derived construction: retain the existing upstream total-derived functors, adjunction and composition maps. Move the four cached wrappers verbatim, rather than constructing a duplicate."
+    },
+    {
+      "tool": "grep",
+      "query": "comparison.*(UpperStar|LowerStar)|sheafPullback.*[Cc]omp|mapMod.*[Cc]omp|rightDerived.*[Ee]quiv",
+      "date": "2026-10-16",
+      "results": "0 hits: ",
+      "verdict": "No new derived construction: retain the existing upstream total-derived functors, adjunction and composition maps. Move the four cached wrappers verbatim, rather than constructing a duplicate."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.Paper.FiniteDiscreteDerivedCoefficientData",
+    "date": "2026-10-16",
+    "group": "E1"
   },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "blueprint": {
+    "same_as": [],
+    "is": null,
+    "from": {
+      "node": "lem-weil-pbc-finite-discrete-derived-coefficient-data",
+      "place": "Cached derived coefficient functors, adjunction and square",
+      "via": []
+    }
+  },
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.Paper.CoefficientDerivedFunctorAPI",
+    "file": "lean/Sheaf/Paper/CoefficientDerivedFunctorAPI.lean",
+    "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.coefficientAmbientSquare",
+    "statement": "def coefficientAmbientSquare\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y}\n    {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : CommSq g' f' f g) :\n    coefficientDerivedUpperStar Λ g ⋙\n        coefficientDerivedUpperStar Λ f' ≅\n      coefficientDerivedUpperStar Λ f ⋙\n        coefficientDerivedUpperStar Λ g'",
+    "branch": "sheaf-dag",
+    "by": "E1",
+    "date": "2026-10-16",
+    "declarations": [
+      "coefficientProfiniteEssentiallySmall",
+      "AlgebraicGeometry.ProEtale.CondensedRing.coefficientDerivedUpperStar",
+      "AlgebraicGeometry.ProEtale.CondensedRing.coefficientDerivedLowerStar",
+      "AlgebraicGeometry.ProEtale.CondensedRing.coefficientDerivedAdjunction",
+      "AlgebraicGeometry.ProEtale.CondensedRing.coefficientAmbientSquare",
+      "AlgebraicGeometry.ProEtale.CondensedRing.CoefficientPullbackFamily",
+      "AlgebraicGeometry.ProEtale.CondensedRing.CoefficientPullbackSquare",
+      "AlgebraicGeometry.ProEtale.CondensedRing.CoefficientCoherentPullbackData",
+      "AlgebraicGeometry.ProEtale.CondensedRing.FiniteDiscreteCoherentPullbacks",
+      "AlgebraicGeometry.ProEtale.CondensedRing.coefficientDerivedAdjunction_eq",
+      "AlgebraicGeometry.ProEtale.CondensedRing.coefficientAmbientSquare_app"
+    ]
+  },
+  "reviewed": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "X-cfc7e",
+    "group": "E1",
+    "result": "pass",
+    "landing": "20261016T131233-L-3106244",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "B2",
+    "result": "pass",
+    "landing": "20261016T221554-L-1611092",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   }
- }
 }
