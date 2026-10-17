@@ -155,7 +155,8 @@ theorem lowerStar_obj_frobeniusPowIso (K : ProEtaleWeilSheaf k₀ l X) (m : ℕ)
   induction m with
   | zero =>
     ext1
-    rw [frobeniusPowIso_zero _ (by rw [pow_zero]; rfl), frobeniusPowIso_zero _ (by rw [pow_zero]; rfl)]
+    rw [frobeniusPowIso_zero _ (by rw [pow_zero]; rfl),
+      frobeniusPowIso_zero _ (by rw [pow_zero]; rfl)]
     simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
     exact (adicLowerStarSquareIso_id _ _ _ (by rw [pow_zero]; rfl) (by rw [pow_zero]; rfl) _
       K.carrier).symm
@@ -167,7 +168,8 @@ theorem lowerStar_obj_frobeniusPowIso (K : ProEtaleWeilSheaf k₀ l X) (m : ℕ)
     simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Functor.mapIso_hom, Functor.map_comp,
       Category.assoc]
     have nat := (adicLowerStarSquareIso l
-      (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ (comp_over φ _))).hom.naturality
+      (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ
+        (comp_over φ _))).hom.naturality
         (K.frobeniusPowIso m).hom
     simp only [Functor.comp_map] at nat
     rw [reassoc_of% nat]
@@ -246,13 +248,15 @@ end Transport
 section Constant
 
 set_option maxHeartbeats 800000 in
+-- the iterated Weil structures unfold through several module-object isomorphisms
 variable (k₀ l) in
 /-- The iterated Weil structure of the constant Weil sheaf is the identification
 `(Frᵐ⁻¹)_* ℚ̄_ℓ ≅ ℚ̄_ℓ`. -/
 lemma adicConstant_frobeniusPowIso (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
     (m : ℕ) :
     (adicConstant k₀ l X).frobeniusPowIso m =
-      adicLowerStarUnitIso l ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).symm := by
+      adicLowerStarUnitIso l
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).symm := by
   induction m with
   | zero =>
     ext1

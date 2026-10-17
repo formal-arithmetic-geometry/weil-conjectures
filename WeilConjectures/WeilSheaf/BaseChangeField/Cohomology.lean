@@ -71,9 +71,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
 /-- On underlying sheaves, transport along `θ` is the pushforward `θ_*`. -/
 def transportCompForgetIso :
     transport (l := l) θ r hθ ⋙ IsoAlgebra.forget _ ≅ IsoAlgebra.forget _ ⋙ (θ.hom)_*ᵃ[l] :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun _ ↦ by
-    rw [Category.comp_id, Category.id_comp]
-    rfl
+  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun _ ↦
+    (Category.comp_id _).trans (Category.id_comp _).symm
 
 include hsq in
 /-- The derived direct images commute with transport along the identifications `θ`, `θ_Y` of
@@ -129,6 +128,8 @@ private lemma toModuleCat_map_comp_apply {M N P : WeilCoefficients.{u} l} (f : M
   rw [CategoryTheory.Functor.map_comp]
   rfl
 
+set_option maxRecDepth 10000 in
+-- the Frobenius of the global sections unfolds through deep composites of isomorphisms
 /-- A Weil sheaf `H'` on a `k₀'`-scheme `Y'` isomorphic to the transport of a Weil sheaf `H` on a
 `k₀`-scheme `Y` along `θ : Ȳ ≅ Ȳ'`, `θ ≫ Fr' = Frʳ ≫ θ`, has the global sections of `H`, the
 Frobenius of `H'` corresponding to the `r`-th power of that of `H`. -/
@@ -139,21 +140,18 @@ theorem exists_linearEquiv_globalSections_of_iso_transport (H : WeilSheaf k₀ l
   let E := (Sheaf.Γ _ _).mapIso ((AdicSheaf.forget _).mapIso ((IsoAlgebra.forget _).mapIso α)) ≪≫
     (globalSectionsLowerStarIso (WeilCoefficients.{u} l) θ.hom).app H.obj.carrier.X
   have key : H'.obj.globalSectionsFrobenius ≫ E.hom =
-      E.hom ≫ H.obj.globalSectionsFrobeniusPow r := by
-    rw [← globalSectionsFrobenius_transport θ r hθ H.obj]
-    simp only [E, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, IsoAlgebra.forget_map,
-      Iso.hom_inv_id_app_assoc]
-    exact globalSectionsFrobenius_naturality_assoc α.hom _
+      E.hom ≫ H.obj.globalSectionsFrobeniusPow r :=
+    globalSectionsFrobenius_comp_of_iso_transport θ r hθ H.obj α
   refine ⟨WeilCoefficients.linearEquivOfIso E, fun x ↦ ?_⟩
   calc WeilCoefficients.linearEquivOfIso E (H'.globalSections.frobenius x)
       = ((WeilCoefficients.toModuleCat l).map (H'.obj.globalSectionsFrobenius ≫ E.hom)).hom x :=
         (toModuleCat_map_comp_apply _ _ x).symm
     _ = ((WeilCoefficients.toModuleCat l).map (E.hom ≫ H.obj.globalSectionsFrobeniusPow r)).hom
-        x := by rw [key]
+        x := congrArg (fun f ↦ ((WeilCoefficients.toModuleCat l).map f).hom x) key
     _ = ((WeilCoefficients.toModuleCat l).map (H.obj.globalSectionsFrobeniusPow r)).hom
         (WeilCoefficients.linearEquivOfIso E x) := toModuleCat_map_comp_apply _ _ x
     _ = (H.globalSections.frobeniusEnd ^ r) (WeilCoefficients.linearEquivOfIso E x) := by
-      rw [globalSectionsFrobeniusPow_apply, LinearMap.pow_apply]
+      rw [globalSectionsFrobeniusPow_apply, Module.End.pow_apply]
       rfl
 
 end WeilSheaf
