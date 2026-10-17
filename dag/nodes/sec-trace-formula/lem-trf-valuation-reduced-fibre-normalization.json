@@ -1,9 +1,196 @@
 {
  "kind": "statement",
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "Flatness makes multiplication by $0\\ne s\\in V$ injective on $A$: tensor the injection $V\\xrightarrow{s}V$ with $A$. Thus $A\\hookrightarrow A_K$. Integral closure is a subring containing $A$. Every intermediate ring $A\\subseteq D\\subseteq A_K$ is $V$-torsion-free, hence flat by [lem-trf-valuation-torsionfree-flat]. If $D$ is finite type over $V$, choose $P=V[X_1,\\ldots,X_r]\\twoheadrightarrow D$. Applying [lem-trf-valuation-finite-type-module-presentation] to the cyclic $P$-module $D$ gives a finite free presentation $P^m\\xrightarrow{U}P^n\\xrightarrow{q}D\\to0$ [def-sc-finitely-presented-module]. To check the cyclic kernel explicitly, lift $1_D$ to $v\\in P^n$, and lift the images of the basis vectors under $q$ to a row $r:P^n\\to P$. If $J=\\ker(P\\to D)$, then $1-r(v)$ and the finitely many $r(U(e_j))$ lie in $J$. For $x\\in J$, $xv\\in\\operatorname{im}U$, so $x=x(1-r(v))+r(xv)$ lies in the ideal they generate. Thus $J$ is finitely generated and $D$ is finitely presented as a $V$-algebra. If moreover $D$ is a finite $A$-module, the same lemma with $V\\to A$ and $M=D$ gives finite presentation as an $A$-module. These observations will apply to each finite intermediate algebra below. The zero algebra satisfies the conclusion. If $V=K$ (height zero), then $B=A$ and the assertions follow directly.",
+   "uses": [
+    "lem-trf-valuation-torsionfree-flat",
+    "lem-trf-valuation-finite-type-module-presentation",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Theorem 3.5.5, Step 3 and Lemma 3.5.1, printed pp. 20–23; valuation presentation tool: Stacks 053E(2); primary PDF read online, archival copy WANTED."
+   }
+  },
+  {
+   "text": "We first establish reduced geometric fibres of the relative integral closure, without assuming it finite. For a prime $\\mathfrak q$, integral closure commutes with localization by [lem-weil-pbc-integral-closure-commutes-localization], so $B_{V\\setminus\\mathfrak q}$ is the integral closure of $A_{V\\setminus\\mathfrak q}$ in $A_K$. For $\\mathfrak q=0$ it equals $A_K$. For $\\mathfrak q\\ne0$, put $W=V_{\\mathfrak q}$, $\\mathfrak m=\\mathfrak qW$, $E=B_{V\\setminus\\mathfrak q}$ and $k=W/\\mathfrak m$. The residue field $k$ is separably closed by the first clause of [lem-trf-sepclosed-valuation-geometric-components]. It is also perfect: if its characteristic is $p>0$, lift any $c\\in k$ to $W$, choose $0\\ne t\\in\\mathfrak m$, and take a root in $K$ of $X^p+tX-c$: in equal characteristic $p$ its derivative is the nonzero constant $t$; in mixed characteristic $K$ is algebraically closed because a characteristic-zero separably closed field has no algebraic extension. A root is integral over $W$ and hence belongs to $W$ (a valuation ring is integrally closed: a root of negative valuation makes the leading term of a monic equation have uniquely least valuation). Its residue is a $p$th root of $c$. In characteristic zero perfection is immediate. A perfect separably closed field is algebraically closed, since every irreducible polynomial is separable.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-trf-sepclosed-valuation-geometric-components",
+    "def-kun-separably-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Theorem 3.5.5, end of Steps 3–4 and opening paragraph of §4, printed pp. 23–24; primary PDF read online, archival copy WANTED."
+   }
+  },
+  {
+   "text": "If $a\\in E$ satisfies $a^n\\in\\mathfrak mE$, write that membership as a finite sum and choose a nonzero $x\\in\\mathfrak m$ dividing all its scalar coefficients; valuation ideals are linearly ordered, so $a^n\\in xE$. The value group of $W$ is divisible by [lem-trf-separably-closed-value-group-divisible], hence choose $y\\in\\mathfrak m$ with $x/y^n\\in W^\\times$. Then $(a/y)^n\\in E$, so $a/y$ is integral over $E$. Transitivity [lem-weil-pbc-integral-transitive] and the definition of $E$ as a relative integral closure imply $a/y\\in E$. Thus $a\\in\\mathfrak mE$, proving $E/\\mathfrak mE$ reduced. The residue field is algebraically closed by the preceding step, so [lem-trf-geometric-reducedness-algebraic-closure-test] makes this fibre geometrically reduced. For $\\mathfrak q=0$ use the assumed geometric reducedness of $A_K$. The affine fibre and reduced-ring comparisons [lem-weil-pbc-fibre-product-affine-spectra] and [lem-weil-pbc-affine-scheme-reduced-iff] identify these scheme assertions with the tensor products in the item. Every map $V\\to\\Omega$ to an algebraically closed field factors through the fraction field of $V/\\ker(V\\to\\Omega)$, so all its claimed fibres are covered.",
+   "uses": [
+    "lem-trf-separably-closed-value-group-divisible",
+    "lem-weil-pbc-integral-transitive",
+    "lem-trf-geometric-reducedness-algebraic-closure-test",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-scheme-reduced-iff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Theorem 3.5.5, final paragraph of Step 3 and Step 4, printed p. 23; primary PDF read online, archival copy WANTED."
+   }
+  },
+  {
+   "text": "For height one choose $0\\ne\\pi\\in\\mathfrak m_V$; $K=V[1/\\pi]$. Write hats for $\\pi$-adic completion. The formal comparison [lem-trf-valuation-rank-one-formal-comparison] gives the algebraically closed analytic field $\\widehat K$, the flat topologically finitely presented model $\\widehat A$, and the reduced affinoid algebra $C=\\widehat A[1/\\pi]$. Apply [lem-trf-valuation-grauert-remmert-powerbounded] to the image of $\\widehat A$ in $C$ to obtain finitely many generators $z_i$ of $C^\\circ$ over $\\widehat A$. This remains valid when $C=0$. Finite-module integrality [lem-weil-pbc-finite-algebra-is-integral] shows that $C^\\circ$ is integral over the image of $\\widehat A$. Conversely an element integral over this bounded image is power-bounded: its monic recurrence expresses all powers in the span of finitely many initial powers with bounded coefficients. Thus $C^\\circ$ is exactly the relative integral closure of the image of $\\widehat A$ in $C$.",
+   "uses": [
+    "lem-trf-valuation-rank-one-formal-comparison",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Theorem 3.5.5, Steps 2–3, printed pp. 22–23; primary PDF read online, archival copy WANTED."
+   }
+  },
+  {
+   "text": "Write $z_i=\\widehat a_i/s_i$ with $s_i$ a power of $\\pi$ and $\\widehat a_i\\in\\widehat A$. The projection $\\widehat A\\to A/\\pi^NA$ is surjective, restricts to the quotient map on $A$ and has kernel $\\pi^N\\widehat A$ [lem-weil-pbc-adic-completion-mod-power]; so choose $a_i\\in A$ with $\\widehat a_i-a_i\\in s_i\\widehat A$. Replacing $z_i$ by the image of $a_i/s_i$ changes it by an element of the bounded model, so it still lies in $C^\\circ$ and these new elements still generate $C^\\circ$ as an algebra over the image of $\\widehat A$. A monic equation for the image of $a_i/s_i$ yields, after clearing denominators and using that the flat $\\widehat V$-algebra $\\widehat A$ has no $\\pi$-torsion and so embeds in $C$, $a_i^m+c_1a_i^{m-1}s_i+\\cdots+c_{m-1}a_is_i^{m-1}\\in s_i^m\\widehat A$. Approximate the $c_j$ by elements of $A$ modulo $s_i^m\\widehat A$; this inclusion is preserved. The scalar saturation clause of [lem-trf-valuation-rank-one-formal-comparison] then puts its left side in $s_i^mA$. Dividing the resulting equality in $A_K$ gives a genuine monic equation over $A$ for $a_i/s_i$. Put $D=A[a_1/s_1,\\ldots,a_r/s_r]\\subseteq B$. A finite list of integral generators makes $D$ finite over $A$: monomials with exponents below their monic degrees span. Step 1 makes $D$ flat finitely presented over $V$ and finitely presented as an $A$-module.",
+   "uses": [
+    "lem-trf-valuation-rank-one-formal-comparison",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Theorem 3.5.5, Step 3, printed pp. 22–23; primary PDF read online, archival copy WANTED."
+   }
+  },
+  {
+   "text": "The finite-module completion clause of [lem-trf-valuation-rank-one-formal-comparison] identifies $\\widehat D\\subseteq C$ with the $\\widehat A$-algebra generated by the images of $a_i/s_i$, namely $C^\\circ$. Let $b\\in B$ and write $b=a/s$ with $a\\in A\\subseteq D$ and $0\\ne s\\in V$. Its image in $C$ is integral over the image of $\\widehat A$, so it belongs to $C^\\circ=\\widehat D$. Hence the image of $a$ belongs to $s\\widehat D$. Scalar saturation for $D$ gives $a\\in sD$; writing $a=sd$ and using torsion-freeness in $A_K$ gives $b=d\\in D$. Thus $B=D$, proving finiteness for height one. This reasoning does not assume $A\\to\\widehat A$ injective and also handles components on which $\\pi$ is a unit.",
+   "uses": [
+    "lem-trf-valuation-rank-one-formal-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Theorem 3.5.5, Step 3, printed p. 23; primary PDF read online, archival copy WANTED."
+   }
+  },
+  {
+   "text": "Now induct on a finite height $h>1$. Valuation primes form a chain, so there is a minimal nonzero prime $\\mathfrak p$; $V_1=V_{\\mathfrak p}$ has height one and $W=V/\\mathfrak p$ has height $h-1$. Put $T=V\\setminus\\mathfrak p$ and $L=\\operatorname{Frac}(W)=V_1/\\mathfrak pV_1$, which is separably closed by [lem-trf-sepclosed-valuation-geometric-components]. By localization of integral closure [lem-weil-pbc-integral-closure-commutes-localization] and the height-one result, $B_T$ is finite over $A_T$. Choose finitely many generators, clear their $T$-denominators to get $b_i\\in B$, and put $A'=A[b_i]$. Their monic equations make $A'$ finite over $A$ and step 1 makes it flat finitely presented over $V$. We have $A'_T=B_T$, relatively integrally closed in $A_K$ by [lem-weil-pbc-integral-transitive]. Transitivity also shows that the integral closure of $A'$ in $A_K$ is still $B$.",
+   "uses": [
+    "lem-trf-sepclosed-valuation-geometric-components",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-integral-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Theorem 3.5.5, Step 4, printed p. 23; primary PDF read online, archival copy WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-valuation-finite-height-composition] to $A'$ and $\\mathfrak p$. It gives $\\mathfrak pB=\\mathfrak pA'$ and identifies $B/\\mathfrak pB$ with the relative integral closure of $\\bar A=A'/\\mathfrak pA'$ in $F=A'_T/\\mathfrak pA'_T=\\bar A\\otimes_WL$. The algebra $\\bar A$ is flat finitely presented over $W$: reduce a finite presentation, and for an injection of $W$-modules its tensor product with $\\bar A$ is the same as tensoring those $V$-modules with $A'$, hence remains injective. Its generic fibre $F=B_T\\otimes_{V_1}L$ is geometrically reduced by steps 2–3. The induction hypothesis therefore gives finite generation of $B/\\mathfrak pB$ as a $\\bar A$-module. Lift module generators to $c_1,\\ldots,c_l\\in B$ and include $1$. For every $b\\in B$ subtract an $A'$-linear combination of the $c_i$ representing its residue. The difference lies in $\\mathfrak pB=\\mathfrak pA'\\subseteq A'$. Thus $1,c_1,\\ldots,c_l$ span $B$ over $A'$. Since $A'$ is finite over $A$, multiplying the two finite spanning lists proves $B$ finite over $A$. This completes the finite-height induction.",
+   "uses": [
+    "lem-trf-valuation-finite-height-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Theorem 3.5.5, Step 4, printed pp. 23–24; primary PDF read online, archival copy WANTED."
+   }
+  },
+  {
+   "text": "For arbitrary height, [lem-trf-valuation-arbitrary-height-limit] gives $K_0\\subseteq K$, the finite-height valuation ring $V_0=V\\cap K_0$, and $A_0$ with $A=A_0\\otimes_{V_0}V$. Apply the finite-height result to the relative integral closure $B_0\\subseteq A_0\\otimes_{V_0}K_0$. Put $D=B_0\\otimes_{V_0}V$. It is finite over $A$ by tensoring a finite spanning list. It is flat over $V$ since an injection of $V$-modules remains an injection as $V_0$-modules and tensoring it with $B_0$ preserves injectivity; tensor a finite presentation to get finite presentation over $V$. Its geometric fibres are reduced by [lem-trf-geometric-reduced-fibre-locus-base-change] and the affine fibre comparisons. Flatness embeds $D$ into $D_K$, and $D_K\\cong (B_0)_{K_0}\\otimes_{K_0}K\\cong A_K$. The resulting inclusion $A\\subseteq D\\subseteq A_K$ makes $D\\subseteq B$ by [lem-weil-pbc-finite-algebra-is-integral]. We have constructed a finite model; we have not assumed that integral closure commutes with this base change.",
+   "uses": [
+    "lem-trf-valuation-arbitrary-height-limit",
+    "lem-trf-geometric-reduced-fibre-locus-base-change",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-scheme-reduced-iff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Theorem 3.5.5, valuation-limit portion of Step 5, printed p. 24; primary PDF read online, archival copy WANTED."
+   }
+  },
+  {
+   "text": "To identify this model with the relative integral closure, use [lem-trf-geometrically-reduced-eta-normal] for $\\operatorname{Spec}D\\to\\operatorname{Spec}V$. The base is normal integral affine: a valuation ring is integrally closed by the monic valuation argument in step 2, its localizations are valuation rings, and affine schemes are qcqs. Flatness follows from [lem-weil-pbc-flat-ring-map-iff-flat-affine]; a finite algebra presentation gives a finitely presented affine morphism by the definition [def-sbc-locally-finite-presentation]. Let $b\\in B$ and write $b=d/s$ with $d\\in D$ and $0\\ne s\\in V$. The ring $D[b]\\subseteq A_K$ is finite over $D$ because $b$ already satisfies a monic equation over $A\\subseteq D$. Thus $\\operatorname{Spec}D[b]\\to\\operatorname{Spec}D$ is finite by [def-weil-finite-integral-morphism] and proper by [lem-weil-pbc-finite-proper]. It is an isomorphism on the generic fibre and on $D(s)$, since $b=d/s$. These opens are schematically dense on both schemes: localization at $s$ injects on their rings and on localizations of their rings, as both sit in the $K$-algebra $A_K$. Hence this is a finite $\\eta$-modification, and the eta-normality lemma makes it an isomorphism. Consequently $b\\in D$. This proves $B=D$, hence finiteness in arbitrary height.",
+   "uses": [
+    "lem-trf-geometrically-reduced-eta-normal",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Theorem 3.5.5, valuation-limit portion of Step 5 together with Proposition 3.5.2, printed pp. 20–24; primary PDF read online, archival copy WANTED."
+   }
+  },
+  {
+   "text": "We have proved $B$ finite over $A$, so it is finite type over $V$. The torsion-free and cyclic-polynomial-module arguments in step 1 now give flatness and finite presentation over $V$. Since $A\\subseteq B\\subseteq A_K$, localization at all nonzero elements of $V$ gives $A_K\\subseteq B\\otimes_VK\\subseteq A_K$, with injectivity from torsion-freeness; the canonical map is an isomorphism. Steps 2–3 prove every required geometric fibre reduced. This proves all clauses without a nonemptiness or finite-height assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Theorem 3.5.5, valuation case of Steps 3–5, printed pp. 23–24; primary PDF read online, archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-separably-closed",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-finitely-presented-module",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-integral-closure",
+  "lem-trf-geometric-reduced-fibre-locus-base-change",
+  "lem-trf-geometric-reducedness-algebraic-closure-test",
+  "lem-trf-geometrically-reduced-eta-normal",
+  "lem-trf-separably-closed-value-group-divisible",
+  "lem-trf-sepclosed-valuation-geometric-components",
+  "lem-trf-valuation-arbitrary-height-limit",
+  "lem-trf-valuation-finite-height-composition",
+  "lem-trf-valuation-finite-type-module-presentation",
+  "lem-trf-valuation-grauert-remmert-powerbounded",
+  "lem-trf-valuation-rank-one-formal-comparison",
+  "lem-trf-valuation-torsionfree-flat",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-integral-transitive"
+ ],
+ "proof_origin": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+  "place": "Theorem 3.5.5, Steps 2–5; explicit generator and limit arguments; primary PDF read online, archival copy WANTED.",
+  "by": "agent"
+ },
  "mathlib_match": null,
  "created": {
   "by": "worker",
@@ -29,65 +216,37 @@
  ],
  "mathlib_searches": [
   {
-   "tool": "leansearch",
-   "query": "For a valuation ring and a finitely presented algebra with geometrically reduced generic fibre, integral closure gives finite models with reduced special fibres",
-   "results": "hits=8; top=['integralClosure', 'integralClosure.isIntegralClosure', 'Ring.NormalClosure', 'integralClosure.AlgebraIsIntegral', 'instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure', 'Ring.instIsIntegrallyClosedNormalClosure', 'Valuation.Integers.integrallyClosed', 'ValuationSubring.isIntegral_of_mem_ringOfIntegers']; note=; digest=3c005a49162cd71a. Read the hits; no theorem matching this project-specific existence statement was found.",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "For a valuation ring and a finitely presented algebra with geometrically reduced generic fibre, integral closure gives finite models with reduced special fibres",
-   "results": "hits=8; top=['integralClosure', 'integralClosure.isIntegralClosure', 'Ring.NormalClosure', 'integralClosure.AlgebraIsIntegral', 'instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure', 'Ring.instIsIntegrallyClosedNormalClosure', 'Valuation.Integers.integrallyClosed', 'ValuationSubring.isIntegral_of_mem_ringOfIntegers']; note=; digest=3c005a49162cd71a. Read the hits; no theorem matching this project-specific existence statement was found.",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "ValuationRing, IsReduced, IsFinite, Algebra",
-   "results": "hits=0; top=[]; note=loogle: unknown identifier 'IsFinite'; digest=4f53cda18c2baa0c. Read the hits; no theorem matching this project-specific existence statement was found.",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "valuation.*integral.closure|geometrically.*reduced|reduced.*fibre",
-   "results": "hits=17; top=['Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean']; note=; digest=8668789345b988ca. Read the hits; no theorem matching this project-specific existence statement was found.",
+   "tool": "leanfinder",
+   "query": "relative integral closure over a separably closed valuation ring of a flat finitely presented algebra with geometrically reduced generic fibre is finite flat finitely presented and has reduced geometric fibres",
+   "results": "hits=8; top=['Algebra.ZariskisMainProperty', 'Algebra.IsGeometricallyReduced', 'IsIntegralClosure.finite', 'AlgebraicGeometry.finite_appTop_of_universallyClosed', 'Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct', 'Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced', 'Algebra.isReduced_of_isGeometricallyReduced', 'Algebra.ZariskisMainProperty.of_isIntegral']; note=; directory=. IsIntegralClosure.finite assumes an integrally closed Noetherian base and a finite separable field extension; neither is the item. Zariski main property and normalization constructions do not give relative reduced-fibre finiteness.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "For a flat finitely presented algebra over a finite height valuation ring with separably closed fraction field and geometrically reduced generic fibre, the integral closure in the generic algebra is finite with geometrically reduced fibres",
-   "results": "OK; 8 hits; top=['IsIntegralClosure.finite', 'Ring.DimensionLEOne.integralClosure', 'Algebra.ZariskisMainProperty', 'Ring.instFiniteNormalClosure_1', 'Algebra.IsGeometricallyReduced.of_forall_fg', 'Algebra.IsGeometricallyReduced', 'Ring.instFiniteNormalClosure', 'Ring.DimensionLEOne.isIntegralClosure']; note=; digest=5045ef6fa56bf586. Read IsIntegralClosure.finite in Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean:87,175: it assumes a normal Noetherian domain and finite separable extension of its fraction field. Here A need not be a domain or Noetherian and A_K is not such a field extension. GeometricallyReduced results give definitions and preservation, not this finiteness and fibre theorem.",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Reduced fibre theorem over a separably closed valued field without a height bound: relative integral closure of a flat finitely presented algebra is finite and geometrically reduced over the valuation ring",
-   "results": "OK; 8 hits; top=['Algebra.IsGeometricallyReduced', 'Algebra.FormallyUnramified.isReduced_of_field', 'Algebra.isGeometricallyReduced_iff', 'Algebra.isReduced_of_isGeometricallyReduced', 'Algebra.IsGeometricallyReduced.of_forall_fg', 'Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced', 'Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct', 'Algebra.IsGeometricallyReduced.of_injective']; note=; digest=d40bf1f4e363aa5c. Read IsIntegralClosure.finite in Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean:87,175: it assumes a normal Noetherian domain and finite separable extension of its fraction field. Here A need not be a domain or Noetherian and A_K is not such a field extension. GeometricallyReduced results give definitions and preservation, not this finiteness and fibre theorem.",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "The integral closure of a flat finitely presented valuation ring algebra in its generic fibre is finite when the fraction field is separably closed",
-   "results": "OK; 8 hits; top=['integralClosure.isIntegralClosure', 'integralClosure', 'integralClosure.AlgebraIsIntegral', 'IsIntegralClosure.finite', 'IsIntegralClosure.of_isIntegrallyClosed', 'instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure', 'Valuation.Integers.isIntegrallyClosed_integers', 'separableClosure']; note=; digest=1bfa1d73c9ed7e3c. Read IsIntegralClosure.finite in Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean:87,175: it assumes a normal Noetherian domain and finite separable extension of its fraction field. Here A need not be a domain or Noetherian and A_K is not such a field extension. GeometricallyReduced results give definitions and preservation, not this finiteness and fibre theorem.",
+   "query": "Relative normalization in the generic fibre of a finitely presented flat algebra over a valuation ring with separably closed fraction field is finite and has geometrically reduced special fibres",
+   "results": "hits=8; top=['Algebra.IsGeometricallyReduced', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization', 'AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization', 'AlgebraicGeometry.Scheme.Hom.normalization', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization', 'AlgebraicGeometry.finite_appTop_of_universallyClosed', 'AlgebraicGeometry.Scheme.Hom.normalizationDesc', 'AlgebraicGeometry.Scheme.Hom.normalizationDiagram']; note=; directory=. IsIntegralClosure.finite assumes an integrally closed Noetherian base and a finite separable field extension; neither is the item. Zariski main property and normalization constructions do not give relative reduced-fibre finiteness.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"integralClosure\", \"IsGeometricallyReduced\"",
-   "results": "OK; 0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read IsIntegralClosure.finite in Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean:87,175: it assumes a normal Noetherian domain and finite separable extension of its fraction field. Here A need not be a domain or Noetherian and A_K is not such a field extension. GeometricallyReduced results give definitions and preservation, not this finiteness and fibre theorem.",
+   "query": "\"integralClosure\", \"finite\"",
+   "results": "hits=4; top=['IsIntegralClosure.isFractionRing_of_finite_extension', 'integralClosure.isFractionRing_of_finite_extension', 'integralClosure.isIntegrallyClosedOfFiniteExtension', 'IsIntegralClosure.finite']; note=; directory=. IsIntegralClosure.finite assumes an integrally closed Noetherian base and a finite separable field extension; neither is the item. Zariski main property and normalization constructions do not give relative reduced-fibre finiteness.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "separably.closed|integralClosure.*finite|Grauert|Remmert AlgebraicGeometry",
-   "results": "OK; 6 hits; top=['Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean', 'Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean', 'Mathlib/AlgebraicGeometry/Sites/Etale.lean', 'Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean', 'Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean', 'Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean']; note=; digest=a8696ed1c554ae96. Read IsIntegralClosure.finite in Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean:87,175: it assumes a normal Noetherian domain and finite separable extension of its fraction field. Here A need not be a domain or Noetherian and A_K is not such a field extension. GeometricallyReduced results give definitions and preservation, not this finiteness and fibre theorem.",
+   "query": "IsIntegralClosure.finite|integralClosure.*finite|valuation.*reduced|ZariskisMainProperty",
+   "results": "hits=21; top=['Mathlib/RingTheory/Localization/Integral.lean', 'Mathlib/RingTheory/NormalClosure.lean', 'Mathlib/RingTheory/NormalClosure.lean', 'Mathlib/RingTheory/NormalClosure.lean', 'Mathlib/RingTheory/Etale/QuasiFinite.lean', 'Mathlib/RingTheory/Etale/QuasiFinite.lean', 'Mathlib/RingTheory/Unramified/LocalStructure.lean', 'Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean']; note=; directory=RingTheory. IsIntegralClosure.finite assumes an integrally closed Noetherian base and a finite separable field extension; neither is the item. Zariski main property and normalization constructions do not give relative reduced-fibre finiteness.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Temkin reduced fibre theorem valuation ring relative integral closure finite module",
+   "results": "hits=8; top=['Valuation.Integers.integrallyClosed', 'ValuationSubring.isIntegral_of_mem_ringOfIntegers', 'Valuation.Integers.isIntegrallyClosed_integers', 'mem_integralClosure_iff_mem_fg', 'ValuationRing.iff_isInteger_or_isInteger', 'ValuationRing.TFAE', \"ValuationSubring.isIntegral_of_mem_ringOfIntegers'\", 'Valuation.Integers.isIntegrallyClosed']; note=; directory=. IsIntegralClosure.finite assumes an integrally closed Noetherian base and a finite separable field extension; neither is the item. Zariski main property and normalization constructions do not give relative reduced-fibre finiteness.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
@@ -115,5 +274,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-reduced-fibre-normalization",
+  "worker": "stage1",
+  "summary": "Repaired the initial delivery: replaced target-clause restatements with residue comparison and input descent, restored the algebraically closed analytic hypothesis and the bounded ring-of-definition condition, and extracted the non-Noetherian formal comparison. The proof now writes monic approximation, scalar saturation, finite-height generator lifting, the root argument for fibres, and the eta-normal identification of the arbitrary-height finite model.",
+  "blueprint": "Historical creation chain through lem-trf-valuation-curve-finite-normalization: Temkin §4.1 opening paragraph uses Theorem 3.5.5 to prove finiteness of normalization. This is a general scheme-theoretic tool of that normalization argument, not a realization of the current contracting-correspondence statement of lem-trf-local-term-locality. Supporting ingredient: Theorem 3.5.5, Steps 2–4 (height-one analytic finiteness, decompletion, and finite-height composition) and the valuation-limit part of Step 5, printed pp. 22–24. Only the separably closed valuation-field case is asserted.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-246af6271",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-246af6271 (reviewer sub-agent of L); spot-checked: Read the item and all 11 steps, the four new nodes, the statements of all 25 cited nodes, the unit sk-i-curve-zero and the chapter. Temkin 0707.3953v3 is not in literature/ (WANTED is correct); I read an arXiv v3 text copy found on this machine: Lemma 2.1.1, Cor 2.1.3, Lemma 3.5.1, Prop 3.5.2 and its proof, and Thm 3.5.5 Steps 0-5. The item statement is unchanged and is the R=K° separably-closed-field case of 3.5.5; I tested V=K, A=0, V[x]/(x^2-pi^2) and V[x,y]/(xy-pi). Steps 1-11 follow Temkin Steps 2-5, and every inference holds. Step 1: the cyclic-kernel identity checks out. Steps 2-3: the residue-field perfection argument and the n-th-root argument are correct. Steps 4-6: the Grauert-Remmert hypotheses (algebraically closed, D inside C°) match the formal-comparison output, and saturation gives a genuine monic equation and B=D. Steps 7-8: the composition node's extra hypothesis is established first, and Abar is flat over W because M⊗_W Abar = M⊗_V A'. Steps 9-10: the descended finite model plus Prop 3.5.2 (eta-normal node) give D=B. The four new nodes are proved true or match the source, are not restatements of the item, and have no duplicates in the DAG or blueprint. Each records five or six searches. No cycle (traversal checked), no SGA, and every off-unit citation is a Mathlib leaf, so there are no tool_uses. One fix, C1: step 5 approximated elements of A^ modulo s A^ without citing A^/pi^N A^ = A/pi^N A. It now cites the existing Mathlib leaf lem-weil-pbc-adic-completion-mod-power (added to uses and proof_deps). Two phrases were also added: A^ is pi-torsion-free and embeds in C, and the new elements generate C° as an algebra over the image of A^.; 1 file(s) fixed by the reviewer"
  }
 }
