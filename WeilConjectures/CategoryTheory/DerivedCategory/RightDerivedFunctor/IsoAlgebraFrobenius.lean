@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategoryComp
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
 
 /-!
 # The structure isomorphisms of a right derived transport of algebras
