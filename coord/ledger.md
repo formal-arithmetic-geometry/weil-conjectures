@@ -15799,3 +15799,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:45 L: merged deliver/C3/Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeMono (stage 3; reviewer PASS; after a return; landing 20261017T044505-L-2942710 (proof); batch 20261017T044501; modules 1; new nodes 0)
 
 - 12:50 L: batch 20261017T044844 dependency take-out
+- 05:03 L: returned deliver/B2/Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine (reviewer RETURN: (the landing tools, head 28c84b472) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
