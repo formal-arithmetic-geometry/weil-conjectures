@@ -1,0 +1,93 @@
+{
+ "id": "lem-trf-finite-residue-point-closed-in-fibre",
+ "kind": "statement",
+ "title": "Finite residue field points are closed in finite-type fibres",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes locally of finite type [def-pc-scheme, def-weil-finite-type-morphism]. Let $x\\in X$ map to $s\\in S$, and let $X_s$ be the scheme-theoretic fibre [def-pc-scheme-fibre]. If $\\kappa(s)\\to\\kappa(x)$ is a finite field extension, meaning that $\\kappa(x)$ is finite-dimensional as a $\\kappa(s)$-vector space [def-weil-residue-field, def-pc-field-extension], then the point of $X_s$ induced by $x$ is closed in $X_s$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01TE and 01TF: Tag 01TE proves that an algebraic residue-field extension makes the point closed in its fibre; the stated finite extension is algebraic (Tag 01TF gives the converse under locally finite type)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-pc-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite residue field point is closed in a scheme locally of finite type over a field",
+   "results": "AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType; JacobsonSpace fibre instance",
+   "date": "2026-10-18",
+   "verdict": "generalization: Mathlib gives closed singleton iff residue-point map locally finite type on Jacobson schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosed singleton locallyOfFiniteType",
+   "results": "0 hits; parser error applying IsClosed",
+   "date": "2026-10-18",
+   "verdict": "unavailable: query failed to parse; not a negative search"
+  },
+  {
+   "tool": "grep",
+   "query": "isClosed_singleton|finite.*residue.*closed",
+   "results": "0 hits Historical request used subdirectory Mathlib/ or Mathlib/AlgebraicGeometry, which the command wrongly nested under Mathlib; its empty result is not evidence of absence. See the corrected grep below.",
+   "date": "2026-10-18",
+   "verdict": "invalid directory for this historical request; no absence conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a point of a scheme locally of finite type over a field with finite residue field extension is closed",
+   "results": "AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType; no direct theorem with finite residue hypothesis",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X : AlgebraicGeometry.Scheme} [JacobsonSpace ↥X] {x : ↥X} : IsClosed {x} ↔ AlgebraicGeometry.LocallyOfFiniteType (X.fromSpecResidueField x)\", \"doc\": \"[Stacks Tag 01TB](https://stacks.math.columbia.edu/tag/01TB) ((1) => (2))\"}\n",
+   "date": "2026-10-18",
+   "verdict": "Partial match: AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType (Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:221) assumes JacobsonSpace and local finite type of the residue-point inclusion. Fibre.lean:144 supplies the Jacobson instance. A theorem identifying the finite residue extension hypothesis with that inclusion hypothesis is still required; this is not the same statement or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isClosed_singleton_iff_locallyOfFiniteType|isClosed_singleton_of_finite|finite.*residue",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"line\": \"35\", \"text\": \"    have : IsFinite (X.fromSpecResidueField x ≫ f) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"211\", \"text\": \"    IsFinite (f.fiberToSpecResidueField x) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"215\", \"text\": \"nonrec lemma LocallyQuasiFinite.of_fiberToSpecResidueField\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"216\", \"text\": \"    (hf : ∀ x, LocallyQuasiFinite (f.fiberToSpecResidueField x)) : LocallyQuasiFinite f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"222\", \"text\": \"      .of_locallyQuasiFinite (f.fiberToSpecResidueField x)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"229\", \"text\": \"    convert! (inferInstance : LocallyQuasiFinite <| g ≫ f.fiberToSpecResidueField _) using 1\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"221\", \"text\": \"lemma isClosed_singleton_iff_locallyOfFiniteType {X : Scheme.{u}} [JacobsonSpace X] {x : X} :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"222\", \"text\": \"    IsClosed {x} ↔ LocallyOfFiniteType (X.fromSpecResidueField x) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"line\": \"145\", \"text\": \"  have : LocallyOfFiniteType (f.fiberToSpecResidueField y) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"line\": \"147\", \"text\": \"  LocallyOfFiniteType.jacobsonSpace (f.fiberToSpecResidueField y)\"}\n",
+   "date": "2026-10-18",
+   "verdict": "Partial match: AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType (Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:221) assumes JacobsonSpace and local finite type of the residue-point inclusion. Fibre.lean:144 supplies the Jacobson instance. A theorem identifying the finite residue extension hypothesis with that inclusion hypothesis is still required; this is not the same statement or a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-completion-etale-approximation",
+  "date": "2026-10-18",
+  "group": "Q75"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nodal relative-map approximation input, final smooth-slicing paragraph of Tag 0GDX: finite residue extension makes s_i closed in its fibre, by Tag 01TE (lemma-algebraic-residue-field-extension-closed-point-fibre); Tag 01TF states the converse under locally finite type.",
+   "via": [
+    "lem-trf-relative-completion-etale-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

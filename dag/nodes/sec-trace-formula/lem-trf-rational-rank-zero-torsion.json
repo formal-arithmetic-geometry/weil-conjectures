@@ -1,7 +1,7 @@
 {
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-residual-curve-value-group",
@@ -20,9 +20,65 @@
  "stmt_deps": [
   "def-trf-rational-rank"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $V=G\\otimes_{\\mathbf Z}\\mathbf Q$. By [def-trf-rational-rank], the hypothesis says $\\dim_{\\mathbf Q}V=0$. Thus $V=0$: if $v\\ne0$, the singleton $\\{v\\}$ is linearly independent, since $av=0$ with $a\\ne0$ implies $v=a^{-1}(av)=0$. The supremum of the cardinalities of linearly independent subsets (the vector-space dimension) would then be at least $1$, a contradiction. This argument uses cardinal dimension, not the natural-number-valued finrank of a possibly infinite-dimensional space.",
+   "uses": [
+    "def-trf-rational-rank"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary singleton argument using the definition of dimension; rational rank as in the item source, Temkin §2.1 (local archival copy unavailable)."
+   }
+  },
+  {
+   "text": "Let $S=\\mathbf Z\\setminus\\{0\\}$, a multiplicative subset, and form $S^{-1}G$ and $S^{-1}\\mathbf Z$ by [def-weil-pbc-module-localization]. Identify $S^{-1}\\mathbf Z$ with $\\mathbf Q$ via $a/s\\mapsto a/s$: every rational is such a fraction, and two such fractions are equal precisely when $at=bs$. In the localization equality criterion, $u(at-bs)=0$ for a nonzero integer $u$ is equivalent to $at=bs$ because $\\mathbf Z$ is a domain. The fraction addition and multiplication formulas agree. Hence this is a ring isomorphism, compatible with the scalar action, and the map $\\mathbf Z\\to\\mathbf Q$ is $a\\mapsto a/1$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07JZ (definition-localization-module), preceding fraction construction, specialized to the module Z; elementary rational-fraction identification."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-tensor-over-base] with $R=A=\\mathbf Z$, $T=S$, $M=\\mathbf Z$ and $N=G$. It gives the isomorphism $S^{-1}(\\mathbf Z\\otimes_{\\mathbf Z}G)\\longrightarrow S^{-1}\\mathbf Z\\otimes_{\\mathbf Z}G$ sending $(a\\otimes g)/s$ to $(a/s)\\otimes g$. The tensor universal property [def-weil-pbc-module-tensor-product] gives mutually inverse maps $\\mathbf Z\\otimes_{\\mathbf Z}G\\rightleftarrows G$, $a\\otimes g\\mapsto ag$ and $g\\mapsto1\\otimes g$: the composite on pure tensors is $1\\otimes ag=a\\otimes g$, and pure tensors generate. Localizing these inverse maps using [def-weil-pbc-module-localization] gives inverse maps $S^{-1}(\\mathbf Z\\otimes G)\\rightleftarrows S^{-1}G$. Likewise $q\\otimes g\\mapsto g\\otimes q$ and $g\\otimes q\\mapsto q\\otimes g$ are inverse maps by the same tensor universal property. Combining these maps and Step 2 yields an additive isomorphism $\\theta:S^{-1}G\\longrightarrow G\\otimes_{\\mathbf Z}\\mathbf Q$ with $\\theta(g/s)=g\\otimes(1/s)$; in particular $\\theta(g/1)=g\\otimes1$. Step 1 therefore implies $S^{-1}G=0$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK (lemma-tensor-localization); existing general base-ring tensor-localization leaf, with the unit and symmetry maps written out."
+   }
+  },
+  {
+   "text": "For any $g\\in G$, Step 3 gives $g/1=0$ in $S^{-1}G$. The kernel criterion explicitly stated in [def-weil-pbc-module-localization] gives $s\\in S$ with $sg=0$, so $s$ is a nonzero integer. Take $n=|s|\\geq1$. If $s>0$, then $n=s$ and $ng=0$; if $s<0$, then $n=-s$ and $ng=-(sg)=0$. This proves the required elementwise torsion assertion; the annihilating integer may depend on $g$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07JZ (definition-localization-module), fraction equivalence relation and localization map; elementary sign adjustment."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-rational-rank",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00DK (lemma-tensor-localization) and Tag 07JZ (definition-localization-module); elementary linear-algebra reduction supplied by Q99."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -36,7 +92,7 @@
    "query": "AddGroup, tensor Q, torsion",
    "results": "0 hits; loogle reported unknown identifier tensor.",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "unavailable: query failed to parse (unknown identifier tensor); this result is not evidence of absence"
   },
   {
    "tool": "grep",
@@ -51,13 +107,76 @@
    "results": "8 hits: isAddTorsionFree_iff_not_isOfFinAddOrder, AddMonoid.IsTorsion, AddMonoid.isTorsion_iff_isTorsion_int, and torsion subgroup APIs; no direct rationalization theorem.",
    "date": "2026-10-18",
    "verdict": "generalization: torsion APIs are available but the tensor criterion is not stated directly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "rank of a module equals dimension of tensor product with its field of fractions; rank zero iff torsion",
+   "results": "{\"t\": \"2026-10-17T20:38:02Z\", \"tool\": \"leanfinder\", \"query\": \"rank of a module equals dimension of tensor product with its field of fractions; rank zero iff torsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"rank_eq_zero_iff_isTorsion\", \"Module.finrank_eq_zero_iff_isTorsion\", \"Module.rankAtStalk_eq_finrank_tensorProduct\", \"Module.finrank_baseChange\", \"IsBaseChange.rank_eq_of_le_nonZeroDivisors\", \"Module.rank_baseChange\", \"rank_tensorProduct'\", \"Module.finrank_tensorProduct\"], \"digest\": \"43d2323d70c589c7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rank_eq_zero_iff_isTorsion|rank.*baseChange|rank.*tensor|rank.*fraction",
+   "results": "{\"t\": \"2026-10-17T20:38:10Z\", \"tool\": \"grep\", \"query\": \"rank_eq_zero_iff_isTorsion|rank.*baseChange|rank.*tensor|rank.*fraction\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dimension/Localization.lean\", \"Mathlib/LinearAlgebra/Dimension/Localization.lean\", \"Mathlib/LinearAlgebra/Dimension/Localization.lean\", \"Mathlib/LinearAlgebra/Dimension/Localization.lean\", \"Mathlib/LinearAlgebra/Dimension/Localization.lean\", \"Mathlib/LinearAlgebra/Dimension/Constructions.lean\", \"Mathlib/LinearAlgebra/Dimension/Constructions.lean\", \"Mathlib/LinearAlgebra/Dimension/Constructions.lean\"], \"digest\": \"be5855a725d17e50\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian group whose tensor product with the rational numbers has dimension zero is torsion",
+   "results": "{\"t\": \"2026-10-17T20:38:10Z\", \"tool\": \"leansearch\", \"query\": \"An abelian group whose tensor product with the rational numbers has dimension zero is torsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAddTorsionFree.of_module_rat\", \"rank_eq_zero_iff_isTorsion\", \"AddMonoid.IsTorsion\", \"rank_eq_zero_iff\", \"AddMonoid.isTorsion_iff_isTorsion_int\", \"AddCommGroup.torsion\", \"Module.IsTorsion'\", \"Module.finrank_eq_zero_iff_isTorsion\"], \"digest\": \"e0dcc2ed1f6a8049\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.rank, TensorProduct",
+   "results": "{\"t\": \"2026-10-17T20:38:10Z\", \"tool\": \"loogle\", \"query\": \"Module.rank, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Module.rank_baseChange\", \"rank_tensorProduct'\", \"rank_tensorProduct\", \"IsBaseChange.rank_eq_of_le_nonZeroDivisors\", \"IsBaseChange.lift_rank_eq_of_le_nonZeroDivisors\"], \"digest\": \"1605d53fbba05fc1\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isTorsion.*iff|iff.*isTorsion|isTorsion_of",
+   "results": "{\"t\": \"2026-10-17T20:38:19Z\", \"tool\": \"grep\", \"query\": \"isTorsion.*iff|iff.*isTorsion|isTorsion_of\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Ideal.lean\"], \"digest\": \"67807fbd30f4cebb\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rank_eq|rank_zero|isTorsion|subsingleton",
+   "results": "{\"t\": \"2026-10-17T20:38:19Z\", \"tool\": \"grep\", \"query\": \"rank_eq|rank_zero|isTorsion|subsingleton\", \"sub\": \"LinearAlgebra/Dimension/Localization.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"20\", \"44\", \"46\", \"47\", \"56\"], \"digest\": \"c639da6b4523b2b9\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rank_eq|isTorsion|subsingleton",
+   "results": "{\"t\": \"2026-10-17T20:38:31Z\", \"tool\": \"grep\", \"query\": \"rank_eq|isTorsion|subsingleton\", \"sub\": \"RingTheory/Localization/BaseChange.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rank_eq.*nonZero|namespace IsBaseChange|IsBaseChange.*rank|rank_eq_zero_iff",
+   "results": "{\"t\": \"2026-10-17T20:38:31Z\", \"tool\": \"grep\", \"query\": \"rank_eq.*nonZero|namespace IsBaseChange|IsBaseChange.*rank|rank_eq_zero_iff\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/SpecialLinearGroup.lean\", \"Mathlib/LinearAlgebra/SpecialLinearGroup.lean\", \"Mathlib/LinearAlgebra/SpecialLinearGroup.lean\", \"Mathlib/LinearAlgebra/Dimension/Localization.lean\", \"Mathlib/LinearAlgebra/Dimension/Localization.lean\", \"Mathlib/LinearAlgebra/Dimension/Localization.lean\", \"Mathlib/LinearAlgebra/Dimension/Localization.lean\", \"Mathlib/LinearAlgebra/Dimension/Localization.lean\"], \"digest\": \"cc6a8eec25623382\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localizing a module at the nonzero elements gives zero if and only if it is a torsion module",
+   "results": "{\"t\": \"2026-10-17T20:38:33Z\", \"tool\": \"leanfinder\", \"query\": \"localizing a module at the nonzero elements gives zero if and only if it is a torsion module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LocalizedModule.subsingleton_iff\", \"IsLocalizedModule.mk'_eq_zero'\", \"rank_eq_zero_iff_isTorsion\", \"IsLocalizedModule.subsingleton_iff\", \"LocalizedModule.subsingleton\", \"Module.IsTorsion\", \"Submodule.isTorsion'_iff_torsion'_eq_top\", \"Ideal.torsionOf_eq_bot_iff_of_noZeroSMulDivisors\"], \"digest\": \"ae1cacd72b6fef2e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proposition 4.3.1 proof, p. 27: after Abhyankar gives a torsion value-group quotient, separable closedness makes the ground-field value group divisible and hence the quotient trivial.",
+   "place": "Proposition 4.3.1 proof, printed p. 28: after Abhyankar gives a torsion value-group quotient, separable closedness makes the ground-field value group divisible and hence the quotient trivial.",
    "via": [
     "lem-trf-residual-curve-value-group",
     "lem-trf-single-valuation-semistable-extraction",
@@ -75,5 +194,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-rational-rank-zero-torsion",
+  "worker": "stage1",
+  "summary": "Unchanged true statement. No project attachment and no exact Mathlib rational-tensor criterion found. Four steps: cardinal-dimension singleton argument; Q as localization of Z at nonzero integers; existing tensor-localization leaf with explicit unit/symmetry maps; existing fraction kernel criterion and absolute-value annihilator. All dependencies already exist; no new nodes. The missing Temkin archive is reported, and the argument is marked agent-written from the locally read Stacks algebra source.",
+  "blueprint": "Serves the inherited Temkin Proposition 4.3.1 p. 27 value-group torsion inference in the stable-modification branch below lem-trf-local-term-locality (current blueprint sk-i-curve-zero, contracting-local-term proof); no change to the unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q99-dbead5115",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q99-dbead5115 (reviewer sub-agent of L); spot-checked: Read all four proof steps, cited statements, unit/chapter route, Stacks sources and Temkin’s exact passages; mathematics passes, including infinite-group cases. Corrected Temkin’s page reference to printed p. 28 and marked a failed Loogle query unavailable. Statement and proof unchanged. review.md and corrected JSON written.; 1 file(s) fixed by the reviewer"
  }
 }
