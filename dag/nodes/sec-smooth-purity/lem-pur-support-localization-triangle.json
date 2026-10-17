@@ -336,5 +336,34 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-e19638870 (reviewer sub-agent of L); spot-checked: Reviewed the corrected quasi-compact pro-etale localization triangle, all eight proof steps, every cited node statement, blueprint route, Stacks sources, Mathlib searches, base-change morphism, coefficient category, and edge cases. No mathematical or DAG faults found; review.md records the checks."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-101bf19ab",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Read all 3 snapshot modules, item and dep records (diffed vs side clone: only lean fields of def-pur-support-triangle/def-pur-triangle-meaning change, both with §1(B) notes replacing an etale-site record and a hollow arbitrary-predicate record; only citers are within this delivery). Every node clause matched: closed/open complementary pair, QuasiCompact j, finite comm Λ, fixed-scalar pro-etale module sheaves as in the landed def-pur-flasque-support, D+, s^!=finiteClosedUpperShriek, Rs^! via rightDerivedFunctorPlus, exact termwise s_*, distinguished cone triangle with Mathlib triangleOfSESδ boundary (-p q^{-1}), adjunction with counit pinned to the specified inclusion, counit-compatible uniqueness on the same categories, canonicality/functoriality/etale base change as concrete predicates with specified components. Existential eB/adj harmless. exists_proEtale_closedSupportTriangle is not a duplicate (Noetherian compact, lacks clauses). No hollow defs, sorry-only proofs with docstrings, statements verbatim, no line >100, no unbound vars. nt_compile.py --json on all three files: exit 0, no errors/warnings (3.4 s/3.3 s/4.5 s)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportLocalizationTriangle",
+  "declaration": "AlgebraicGeometry.ProEtale.supportLocalizationTriangle",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.supportClosedDerivedPlus",
+   "AlgebraicGeometry.ProEtale.supportModelKInjective",
+   "AlgebraicGeometry.ProEtale.supportOpenModelKInjective",
+   "AlgebraicGeometry.ProEtale.supportShriekModelComparison",
+   "AlgebraicGeometry.ProEtale.supportFirstModelComparison",
+   "AlgebraicGeometry.ProEtale.supportThirdModelComparison",
+   "AlgebraicGeometry.ProEtale.supportInjectiveConeDistinguished",
+   "AlgebraicGeometry.ProEtale.supportResolutionCone",
+   "AlgebraicGeometry.ProEtale.supportLocalizationTriangle"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportLocalizationTriangle.lean",
+  "statement": "theorem supportLocalizationTriangle : ∃ adj : supportClosedDerivedPlus Λ s j hPair ⊣ (finiteClosedUpperShriek Λ s j).rightDerivedFunctorPlus, (∀ (G : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ⥤ DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} Λ))) (adj' : supportClosedDerivedPlus Λ s j hPair ⊣ G), ∃! e : (finiteClosedUpperShriek Λ s j).rightDerivedFunctorPlus ≅ G, ∀ K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)), (supportClosedDerivedPlus Λ s j hPair).map (e.hom.app K) ≫ adj'.counit.app K = adj.counit.app K) ∧ (∀ K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)), ∃ (I : SupportComplex Λ X) (hI : IsSupportInjectiveModel Λ I) (hq : IsIso (DerivedCategory.Q.map (supportConeQuotient Λ s j hPair I))) (eB : DerivedCategory.Q.obj I ≅ K.obj), supportModelTriangle Λ s j hPair I hq ∈ distTriang (DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) ∧ DerivedCategory.Q.map (supportModelSequence Λ s j hPair I).f ≫ eB.hom = (supportFirstModelComparison Λ s j hPair I hI K eB).hom ≫ DerivedCategory.Plus.ι.map (adj.counit.app K) ∧ DerivedCategory.Q.map (supportModelSequence Λ s j hPair I).g ≫ (supportThirdModelComparison Λ j I hI K eB).hom = eB.hom ≫ DerivedCategory.Plus.ι.map ((derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) j).unit.app K)) ∧ supportTriangleMeaning Λ s j hPair",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

@@ -25,7 +25,9 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-cocartesian-section-colimits",
+  "lem-coef-filtered-cocartesian-section-cofinality"
  ],
  "proof": [
   {
@@ -261,5 +263,27 @@
  },
  "tool_uses": [
   "lem-cbc-enhanced-functor-cone-calculus"
- ]
+ ],
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e1b1b1ff",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Read the node, the 4 stmt_deps, the report (real Worker report and Second reading by Q10), and the module. Checked the exact declarations in the side clone: IsIsofibration, cocartesianFibrationOver, IsCocartesianEdge, fiber, sectionCategory, sectionFiberEvaluation, coconeCategory, IsColimiting, IsEquivalenceEdge, IsInfinityImageCocone. All 11 clauses match the node: categorical fibration via IsIsofibration; local cocartesianness on every edge pullback; the strict section category over id_S; the canonical fiber evaluation is reused, not copied; the transport prism is inline and justified because IsCocartesianTransport uses global q-cocartesian edges; existence comes with an equivalence edge in the cocone category; the iff holds for every D; no extra assumptions. Edge cases: empty K, empty S, empty fiber, degenerate edges, one containing universe. Only lean was added; stmt_deps gained two landed owner nodes with no cycle (graph walk); lean.statement is verbatim. Docstrings carry source, blueprint id and all 6 proof steps; proof is sorry only; no defs; imports correct; max line 88. nt_compile.py --json on the snapshot file: exit 0, 1.9 s, no errors or warnings. No findings requiring fix or return."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalTransportSectionColimits",
+  "declaration": "SSet.Enhanced.local_transport_section_colimits",
+  "declarations": [
+   "SSet.Enhanced.local_transport_section_colimits"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LocalTransportSectionColimits.lean",
+  "statement": "theorem local_transport_section_colimits {E S K : SSet.{u}} (q : E ⟶ S) (hq : IsIsofibration q) (hloc : ∀ a : Δ[1] ⟶ S, cocartesianFibrationOver (pullback.fst a q)) (P : K ⟶ sectionCategory q (𝟙 S)) (c : ∀ s : S _⦋0⦌, (coconeCategory (P ≫ sectionFiberEvaluation q s)) _⦋0⦌) (hc : ∀ s : S _⦋0⦌, IsColimiting (P ≫ sectionFiberEvaluation q s) (c s)) (htransport : ∀ (a : Δ[1] ⟶ S) (T : fiber q (a.app _ (stdSimplex.obj₀Equiv.symm 0)) ⟶ fiber q (a.app _ (stdSimplex.obj₀Equiv.symm 1))) (H : fiber q (a.app _ (stdSimplex.obj₀Equiv.symm 0)) ⊗ Δ[1] ⟶ pullback a q), H ≫ pullback.fst a q = snd _ _ → lift (𝟙 _) (SSet.const (stdSimplex.obj₀Equiv.symm 0)) ≫ H ≫ pullback.snd a q = pullback.snd (SSet.const (X := Δ[0]) (a.app _ (stdSimplex.obj₀Equiv.symm 0))) q → lift (𝟙 _) (SSet.const (stdSimplex.obj₀Equiv.symm 1)) ≫ H ≫ pullback.snd a q = T ≫ pullback.snd (SSet.const (X := Δ[0]) (a.app _ (stdSimplex.obj₀Equiv.symm 1))) q → (∀ x : (fiber q (a.app _ (stdSimplex.obj₀Equiv.symm 0))) _⦋0⦌, IsCocartesianEdge (pullback.fst a q) (lift (SSet.const x) (𝟙 Δ[1]) ≫ H)) → ∃ d : (coconeCategory ((P ≫ sectionFiberEvaluation q (a.app _ (stdSimplex.obj₀Equiv.symm 0))) ≫ T)) _⦋0⦌, IsInfinityImageCocone T (c (a.app _ (stdSimplex.obj₀Equiv.symm 0))) d ∧ IsColimiting ((P ≫ sectionFiberEvaluation q (a.app _ (stdSimplex.obj₀Equiv.symm 0))) ≫ T) d) : (∃ C : (coconeCategory P) _⦋0⦌, IsColimiting P C ∧ ∀ s : S _⦋0⦌, ∃ d : (coconeCategory (P ≫ sectionFiberEvaluation q s)) _⦋0⦌, IsInfinityImageCocone (sectionFiberEvaluation q s) C d ∧ ∃ e : (coconeCategory (P ≫ sectionFiberEvaluation q s)) _⦋1⦌, (coconeCategory (P ≫ sectionFiberEvaluation q s)).δ 1 e = d ∧ (coconeCategory (P ≫ sectionFiberEvaluation q s)).δ 0 e = c s ∧ IsEquivalenceEdge (coconeCategory (P ≫ sectionFiberEvaluation q s)) e) ∧ (∀ D : (coconeCategory P) _⦋0⦌, IsColimiting P D ↔ ∀ s : S _⦋0⦌, ∃ d : (coconeCategory (P ≫ sectionFiberEvaluation q s)) _⦋0⦌, IsInfinityImageCocone (sectionFiberEvaluation q s) D d ∧ IsColimiting (P ≫ sectionFiberEvaluation q s) d)",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses sectionCategory and sectionFiberEvaluation from their landed owner modules, including the existing named construction obligation; no duplicate evaluation definition. Local cocartesianness and its coherent transport prism are inline on actual edge pullbacks. The supplied fiber cocones, their transport preservation, existence up to cocone equivalence, and detection for every cocone are unchanged; no global cocartesianness or other fiber colimits are assumed."
+ }
 }

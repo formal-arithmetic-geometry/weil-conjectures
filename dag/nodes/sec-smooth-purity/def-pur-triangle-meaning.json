@@ -124,21 +124,36 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-5c72044d2 (reviewer sub-agent of L); spot-checked: Read the full delivery, DAG instructions, pinned blueprint source, unit/chapter route, every dependency statement, and recorded Mathlib searches. The definition matches blueprint node/order 1932 exactly; dependencies correctly provide support triangle, étale maps, fibre products, and pro-étale pullback. No proof steps or new nodes exist, no duplicates or weakened hypotheses were found, and edge cases including zero complexes, empty/full support, empty schemes, identity étale maps, and n=1 coefficients check out. Wrote review.md."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.SupportTriangleMeaning",
-  "declaration": "AlgebraicGeometry.supportLocalizationTriangleMeaning",
-  "file": "lean/Sheaf/AlgebraicGeometry/SupportTriangleMeaning.lean",
-  "statement": "def supportLocalizationTriangleMeaning {Triangle : Type u} (canonicality functoriality etaleBaseChange : Triangle → Prop) : Triangle → Prop",
+  "module": "Sheaf.AlgebraicGeometry.SupportTriangleCompatibility",
+  "declaration": "AlgebraicGeometry.ProEtale.supportTriangleMeaning",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SupportComplex",
+   "AlgebraicGeometry.ProEtale.IsSupportInjectiveModel",
+   "AlgebraicGeometry.ProEtale.supportAMap",
+   "AlgebraicGeometry.ProEtale.supportCMap",
+   "AlgebraicGeometry.ProEtale.SupportTriangleFunctoriality",
+   "AlgebraicGeometry.ProEtale.SupportTriangleCanonicality",
+   "AlgebraicGeometry.ProEtale.supportOpenBaseChangeApp",
+   "AlgebraicGeometry.ProEtale.supportOpenBaseChangeApp_naturality",
+   "AlgebraicGeometry.ProEtale.supportOpenBaseChangeComplex",
+   "AlgebraicGeometry.ProEtale.supportPullbackComplex",
+   "AlgebraicGeometry.ProEtale.SupportTriangleEtaleBaseChange",
+   "AlgebraicGeometry.ProEtale.supportTriangleMeaning"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportTriangleCompatibility.lean",
+  "statement": "def supportTriangleMeaning : Prop",
   "branch": "newtargets-dag",
-  "by": "NN",
-  "date": "2026-10-16",
-  "existing": false
+  "by": "Q98",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "§1(B): The recorded supportLocalizationTriangleMeaning merely conjoins three unconstrained predicates on an arbitrary type. It neither defines the three meanings nor fixes their maps. This module gives concrete predicates on the pro-etale injective cone: specified triangle morphisms, derived comparison invariance and invertibility, and the etale cartesian-square comparison of short complexes and complete triangles with canonical middle and quotient components."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-781ef1dac",
-  "group": "NN",
+  "reviewer": "NT-stage2-cc-101bf19ab",
+  "group": "Q98",
   "result": "pass",
-  "note": "Reviewed packet, source, item and all dependencies; verified exact statement, predicates, docstrings, edge cases, searches, report sections, and reproduced scompile.py successfully with no errors."
+  "note": "Read all 3 snapshot modules, item and dep records (diffed vs side clone: only lean fields of def-pur-support-triangle/def-pur-triangle-meaning change, both with §1(B) notes replacing an etale-site record and a hollow arbitrary-predicate record; only citers are within this delivery). Every node clause matched: closed/open complementary pair, QuasiCompact j, finite comm Λ, fixed-scalar pro-etale module sheaves as in the landed def-pur-flasque-support, D+, s^!=finiteClosedUpperShriek, Rs^! via rightDerivedFunctorPlus, exact termwise s_*, distinguished cone triangle with Mathlib triangleOfSESδ boundary (-p q^{-1}), adjunction with counit pinned to the specified inclusion, counit-compatible uniqueness on the same categories, canonicality/functoriality/etale base change as concrete predicates with specified components. Existential eB/adj harmless. exists_proEtale_closedSupportTriangle is not a duplicate (Noetherian compact, lacks clauses). No hollow defs, sorry-only proofs with docstrings, statements verbatim, no line >100, no unbound vars. nt_compile.py --json on all three files: exit 0, no errors/warnings (3.4 s/3.3 s/4.5 s)."
  }
 }

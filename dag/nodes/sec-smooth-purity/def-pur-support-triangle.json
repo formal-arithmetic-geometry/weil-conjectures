@@ -144,22 +144,34 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-365ea30f9 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, primary blueprint and relevant sources. Pro-étale resolution hypotheses, kernel construction, cone differential and edge cases check out. No new nodes or repairs. Target coefficient categories remain distinct; no comparison theorem is inferred. Detailed checks recorded in review.md."
  },
  "lean": {
-  "module": "WeilConjectures.SixFunctors.OpenClosed.Supports",
-  "declaration": "AlgebraicGeometry.Etale.supportLocalizationTriangle",
-  "statement": "noncomputable def supportLocalizationTriangle (hjs : Set.range s.base = (Set.range j.base)ᶜ)\n    (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) [∀ n, Injective (I.X n)] :\n    Pretriangulated.Triangle (DerivedCategory (Sheaf X.smallEtaleTopology A)) :=\n  DerivedCategory.triangleOfSES (shortExact_supportsShortComplex A j s hjs I)",
-  "branch": "slopmaster2",
-  "by": "NN",
-  "date": "2026-10-16",
-  "existing": true,
-  "note": "The upstream support-localization construction is the canonical triangle construction used by this item; its declaration supplies the triangle object and cone map. The pro-etale/ringed-site generalization in the blueprint is represented by the compatibility predicates in the item module."
+  "module": "Sheaf.AlgebraicGeometry.SupportTriangleConstruction",
+  "declaration": "AlgebraicGeometry.ProEtale.supportLocalizationCone",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.supportKernelAdditive",
+   "AlgebraicGeometry.ProEtale.supportShriekAdditive",
+   "AlgebraicGeometry.ProEtale.supportModelInclusion",
+   "AlgebraicGeometry.ProEtale.supportModelInclusion_unit_zero",
+   "AlgebraicGeometry.ProEtale.supportCComplex",
+   "AlgebraicGeometry.ProEtale.supportModelSequence",
+   "AlgebraicGeometry.ProEtale.supportLocalizationCone",
+   "AlgebraicGeometry.ProEtale.supportConeQuotient",
+   "AlgebraicGeometry.ProEtale.supportModelTriangle"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportTriangleConstruction.lean",
+  "statement": "def supportLocalizationCone (I : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ℤ)",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "§1(B): The recorded Etale.supportLocalizationTriangle is on the small etale site and does not give the pro-etale cone required here. This module reuses finiteClosedUpperShriek and supportedSectionsComplex, supplies the canonical inverse-supported-unit inclusion, its explicit mapping cone, the specified quotient map, and the triangle with boundary the inverse quotient followed by the negative shifted projection. Its argument I is the chosen injective resolution of the definition; the formula is also defined for any complex, and the item supplies the invertibility proof for injective models."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-781ef1dac",
-  "group": "NN",
+  "reviewer": "NT-stage2-cc-101bf19ab",
+  "group": "Q98",
   "result": "pass",
-  "note": "Reviewed packet, source, item and all dependencies; verified exact statement, predicates, docstrings, edge cases, searches, report sections, and reproduced scompile.py successfully with no errors."
+  "note": "Read all 3 snapshot modules, item and dep records (diffed vs side clone: only lean fields of def-pur-support-triangle/def-pur-triangle-meaning change, both with §1(B) notes replacing an etale-site record and a hollow arbitrary-predicate record; only citers are within this delivery). Every node clause matched: closed/open complementary pair, QuasiCompact j, finite comm Λ, fixed-scalar pro-etale module sheaves as in the landed def-pur-flasque-support, D+, s^!=finiteClosedUpperShriek, Rs^! via rightDerivedFunctorPlus, exact termwise s_*, distinguished cone triangle with Mathlib triangleOfSESδ boundary (-p q^{-1}), adjunction with counit pinned to the specified inclusion, counit-compatible uniqueness on the same categories, canonicality/functoriality/etale base change as concrete predicates with specified components. Existential eB/adj harmless. exists_proEtale_closedSupportTriangle is not a duplicate (Noetherian compact, lacks clauses). No hollow defs, sorry-only proofs with docstrings, statements verbatim, no line >100, no unbound vars. nt_compile.py --json on all three files: exit 0, no errors/warnings (3.4 s/3.3 s/4.5 s)."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",

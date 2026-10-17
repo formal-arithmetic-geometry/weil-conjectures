@@ -26,7 +26,10 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-space-transport-classification",
+  "def-coef-coherent-nerve-infrastructure",
+  "def-cbc-enhanced-cartesian-fibration"
  ],
  "proof": [
   {
@@ -355,5 +358,38 @@
   "group": "Q60",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-1b3fb0386 (reviewer sub-agent of L); spot-checked: I read all ten steps of the item, both delivered nodes, every cited statement, and HTT Cor. 2.1.2.7, §2.2.1/Prop. 2.2.1.1 and §3.2.5 (3.2.5.2–3.2.5.10, 3.2.5.16–3.2.5.18) in the sandbox copy. The statement is unchanged and no target is weakened. Steps 2–7, 9 and 10 check out. I re-derived the identification L_C(X)(c)=X×_{NC}N(C/c), the adjunction, the counit deformation retraction (true for arbitrary G), the terminal-fibre contraction through the relative cylinder, the left-horn fillers (including r=1, i=0), and the D^op→Sing|D|←D zigzag. Step 1 is one normalization argument built from cited statements, and step 9 is one construction; both are long but can stay. Step 8 hid a lemma (letter D5 / mechanical long-step check): the identification u_!P≅H_C(X) is HTT Prop. 2.2.1.1(2) in the unmarked case, which HTT calls 'obvious', and step 8 proved it inline in two sentences. No DAG node states it: the marked version in lem-coef-marked-cone-straightening-quillen needs a locally Kan target and does not apply to C[S]. FIX: I added the statement-only node lem-coef-unmarked-straightening-target-change (pi_!L_phi≅L_{pi^op phi}, equivalently U_{pi^op phi}G≅U_phi(pi^*G)), checked by pasting pushouts and the cone-object coend formula. I rewrote step 8 to cite it and to cite simplicial-presheaf-projective-model, updated proof_deps, and declared split_report.tool_uses for the generic realization-weak-equivalence, realization-singular-unit-weak and enhanced-functor-cone-calculus tools. LeanSearch, Loogle and LeanFinder are not reachable from this sandbox, so the new node records Mathlib grep searches only and marks the semantic searches unavailable; they still need to be run. The cylinder node is true: HTT 2.1.2.7 with {0}⊂Δ^1, tested with A=∅, A=K, K=∅ and K=Δ^0. The cone-comparison node is true: Remark 3.2.5.10 and Lemma 3.2.5.17(1). Its quotient description is right, and HTT 3.2.5.10(3)'s identification with the full subset cube is wrong on vertices (for C=[2], {0,2}~{0,1,2}; i+1 vertices versus 2^i). That source error is recorded in review.md for coord/HUMAN.md. Neither new node restates the item, and the marked 3.2.5.17(2) node is not a one-line duplicate. The dependency closure has 432 nodes and no cycle, and proof_deps equals the union of uses.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ee1584e1e",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: equivalence St_B for small quasicategories with Kan mapping objects; pointwise and coherent base naturality; adjunction for every small C with no Kan assumption; L_C pinned by the comma-pullback description and both actions (checked equivalent to the A_sigma quotient and simplex colimit; all conclusions iso-invariant); counit weak equivalence for Kan G; St(x) equivalent to the strict coherent nerve of D for every small left fibration and every objectwise weak equivalence; coherent naturality in J-families. Node delta is lean plus three stmt_deps whose closures do not contain the item; statement, proof and proof_deps unchanged; lean.statement verbatim. No hollow definitions, sorry-only proof, source and blueprint docstrings on all 12 declarations plus the full ten-step proof docstring, lines within 100 characters, no duplicate notion, universes u and u+1 all bound. nt_compile on the side overlay: clean, 2.4 s, no warnings. Notes, not blocking: the SimplicialRightFibrationPresentation module landed after the delivery and is not imported; cosmetic 'the project server' substitutions in the report."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpaceValuedStraightening",
+  "declaration": "SSet.Enhanced.SpaceStraightening.space_valued_straightening",
+  "declarations": [
+   "SSet.Enhanced.SpaceStraightening.LeftFibrations",
+   "SSet.Enhanced.SpaceStraightening.Diagrams",
+   "SSet.Enhanced.SpaceStraightening.CommaPresentation",
+   "SSet.Enhanced.SpaceStraightening.IsStrictCoherentNerve",
+   "SSet.Enhanced.SpaceStraightening.Straightening",
+   "SSet.Enhanced.SpaceStraightening.BaseNerve",
+   "SSet.Enhanced.SpaceStraightening.BaseNaturality",
+   "SSet.Enhanced.SpaceStraightening.IsFibrationDiagram",
+   "SSet.Enhanced.SpaceStraightening.IsCoherentFamily",
+   "SSet.Enhanced.SpaceStraightening.IsComparisonNatural",
+   "SSet.Enhanced.SpaceStraightening.IsOrdinaryComparison",
+   "SSet.Enhanced.SpaceStraightening.space_valued_straightening"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SpaceValuedStraightening.lean",
+  "statement": "theorem space_valued_straightening : ∃ S : Straightening.{u}, Nonempty (BaseNaturality S) ∧ ∀ (C : Type u) [Category.{u} C], IsOrdinaryComparison S C",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The ordinary left adjoint is specified by its canonical comma-pullback universal property, in both variables; this is the displayed subset quotient and simplex colimit. Coherent naturality is retained for base change and for families of ordinary comparisons. No construction is chosen from an undetermined existence theorem."
  }
 }
