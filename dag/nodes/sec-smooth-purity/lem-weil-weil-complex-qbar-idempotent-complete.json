@@ -184,5 +184,24 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-48981e064 (reviewer sub-agent of L); spot-checked: I read the item, its four steps, the master and main-20261015 blueprint statement and proof, every cited node's statement, the unit sk-def-purity-conv (no proof steps) and the one DAG citer. Statement: the only change is dropping 'exact'. This is justified and not a target weakening. def-weil-weil-sheaf-complex defines a fixed-pair category and says no triangulated structure is part of it, so 'exact equivalence' has no meaning there. The Jordan-block example at Spec k_0 (a nonsplit equivariant extension, while Hom of pairs into Lambda[1] is zero) shows the blueprint proof wrongly identifies fixed pairs with D^b of Weil sheaves. That is a source error the maintainer should record in HUMAN.md; the report names it under 'Statement corrected' rather than the E7 heading '## Source error'. The item is not a GOAL target. Its only citer, prop-pod-dual-tate-data-compatibility, uses only idempotent splitting, which is kept. Step 1: Y is finite type over k, elementary from def-weil-finite-type-morphism. lem-weil-qbar-idempotent-complete needs exactly a finite-type k-scheme and l != p, and its C_Y is the same category as D^b_c(Y,Qlb); it gives only the underlying splitting. A DFS over all dependencies of the cited nodes finds no cycle. Step 2: Lg* is additive (linear rational-level formula, and at the common stage it is conjugated by comparison isomorphisms); the morphism condition cuts out subgroups and the biproduct structure is correct. Step 3: I checked by hand that theta_L psi = rei = 1, psi theta_L = T(rei) = 1, i theta_L = theta T(i) and theta_L T(r) = r theta, using e theta = theta T(e). Step 4: i = e i 1 and r = 1 r e are Karoubi morphisms with composites 1_L and e, which gives essential surjectivity; full faithfulness is the cited node, applied to the additive category from step 2. Small cases e=0, e=1, empty Y_0, a block-diagonal theta and a swap-stable diagonal summand all work. There are no new nodes. A DAG-wide scan for idempotent plus Weil or fixed-pair statements found no duplicate (prop-trf-karoubi-independence is unrelated). Accepted tool_use: lem-weil-qbar-idempotent-complete (unit sk-prop-sf-biduality-general), used as a black-box idempotent completeness of the coefficient category; the blueprint route also left the unit here. No SGA citation. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilComplexQbarIdempotentComplete",
+  "declaration": "WeilConjectures.weil_complex_qbar_idempotent_complete",
+  "file": "lean/Sheaf/Paper/WeilComplexQbarIdempotentComplete.lean",
+  "statement": "theorem weil_complex_qbar_idempotent_complete (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Qbar : Type v) [Field Qbar] [Algebra (Padic l) Qbar] [IsAlgClosure (Padic l) Qbar] (Y₀ : Over (Spec (CommRingCat.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] : IsIdempotentComplete (sfCommonStageWeilComplex D l hl Y₀ Qbar) ∧ (toKaroubi (sfCommonStageWeilComplex D l hl Y₀ Qbar)).IsEquivalence",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-2f4a456b3"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2f4a456b3",
+  "group": "Q06",
+  "result": "fix",
+  "note": "Mathematical statement matches the immutable node; original and replacement compile cleanly. Complete fixes replace the placeholder second reading and expand the proof docstring. Review recorded in review.md; theorem signature and branch head unchanged."
  }
 }

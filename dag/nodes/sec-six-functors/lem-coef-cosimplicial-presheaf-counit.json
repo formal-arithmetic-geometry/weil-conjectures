@@ -35,7 +35,8 @@
   "def-coef-complete-algebroid",
   "lem-coef-reedy-model-structure",
   "lem-coef-hocolim-reindexing-zigzags",
-  "lem-coef-simplicial-presheaf-projective-model"
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-projective-frame-weighted-coend"
  ],
  "proof": [
   {
@@ -210,5 +211,32 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CosimplicialPresheafCounit",
+  "declaration": "HomotopicalAlgebra.CosimplicialPresheaf.cosimplicial_presheaf_counit",
+  "declarations": [
+   "HomotopicalAlgebra.CosimplicialPresheaf.collapse",
+   "HomotopicalAlgebra.CosimplicialPresheaf.CounitIndex",
+   "HomotopicalAlgebra.CosimplicialPresheaf.counitDiagram",
+   "HomotopicalAlgebra.CosimplicialPresheaf.evaluationCocone",
+   "HomotopicalAlgebra.CosimplicialPresheaf.hocolimAugmentation",
+   "HomotopicalAlgebra.CosimplicialPresheaf.cosimplicial_presheaf_counit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CosimplicialPresheafCounit.lean",
+  "statement": "theorem cosimplicial_presheaf_counit (hM : CombinatorialModelCategory.{v, u, u} M) (A : D ⥤ SimplexCategory ⥤ M) (hA : ∀ (d : D) (n : SimplexCategory), cofibrations M (Reedy.latchingTo (monomorphisms SimplexCategory) (A.obj d) n)) (hconst : ∀ (d : D) {n m : SimplexCategory} (a : n ⟶ m), weakEquivalences M ((A.obj d).map a)) : ∃ (P : ModelCategory (Dᵒᵖ ⥤ SSet.{u})) (L : (Dᵒᵖ ⥤ SSet.{u}) ⥤ M) (adj : L ⊣ ProjectiveFrame.mappingFunctor.{u, v, u, 0} A.flip), P.categoryWithWeakEquivalences.weakEquivalences = SSet.KanQuillen.weakEquivalenceStructure.weakEquivalences.functorCategory Dᵒᵖ ∧ P.categoryWithFibrations.fibrations = (SSet.modelCategoryQuillen.J.rlp).functorCategory Dᵒᵖ ∧ P.categoryWithCofibrations.cofibrations = ((SSet.modelCategoryQuillen.I.rlp).functorCategory Dᵒᵖ).llp ∧ (∀ F : Dᵒᵖ ⥤ SSet.{u}, ProjectiveFrame.IsCoend A.flip F (fun d n x ↦ (((adj.unit.app F).app (op d)).app (op n) x).down)) ∧ (∀ (X : M) (d : D) (n : SimplexCategory) (f : (A.obj d).obj n ⟶ X), (((adj.unit.app ((ProjectiveFrame.mappingFunctor.{u, v, u, 0} A.flip).obj X)).app (op d)).app (op n) (ULift.up f)).down ≫ adj.counit.app X = f) ∧ (∀ (F G : Dᵒᵖ ⥤ SSet.{u}) (i : F ⟶ G), P.categoryWithCofibrations.cofibrations i → cofibrations M (L.map i)) ∧ (∀ (F G : Dᵒᵖ ⥤ SSet.{u}) (i : F ⟶ G), P.categoryWithCofibrations.cofibrations i → P.categoryWithWeakEquivalences.weakEquivalences i → trivialCofibrations M (L.map i)) ∧ ∀ X : M, fibrations M (terminal.from X) → ∀ (Q : Dᵒᵖ ⥤ SSet.{u}) (q : Q ⟶ (ProjectiveFrame.mappingFunctor.{u, v, u, 0} A.flip).obj X), P.categoryWithCofibrations.cofibrations (initial.to Q) → P.categoryWithWeakEquivalences.weakEquivalences q → ∀ R : ProjectiveHocolimReplacement (M := M) (CounitIndex A X), Nonempty (Over.mk ((weakEquivalences M).Q.map (L.map q ≫ adj.counit.app X)) ≅ Over.mk ((weakEquivalences M).Q.map (hocolimAugmentation A X R))) ∧ (weakEquivalences M (L.map q ≫ adj.counit.app X) ↔ weakEquivalences M (hocolimAugmentation A X R))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the already landed ProjectiveFrame.mappingFunctor and IsCoend (the added statement dependency) for the actual Hom presheaf and full double-coend universal property. The unit gives the coend coprojections; an explicit evaluation equation fixes the counit. CostructuredArrow supplies the exact canonical simplex index, and the colimit of any specified projective replacement supplies its canonical augmentation. The comparison is an isomorphism in the slice of the ordinary localization, for every cofibrant weak-equivalence approximation, including approximations which are not fibrations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a0765ba56",
+  "group": "NL",
+  "result": "pass",
+  "note": "Full statement, dependencies, definitions, docstrings, edge cases, report sections, and compiler evidence checked; no substantive or mechanical defects found."
  }
 }
