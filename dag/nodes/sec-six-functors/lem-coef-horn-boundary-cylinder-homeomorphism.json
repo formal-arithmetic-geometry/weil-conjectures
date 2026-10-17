@@ -149,5 +149,23 @@
   "group": "Q127",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-9da20442e (reviewer sub-agent of L); spot-checked: I read the whole item, its 5 steps, the new leaf, the parent's use (lem-coef-realization-finite-limits step 11), def-kun-subspace-topology, the unit record and Mathlib ContinuousOn.lean:878-887. The statement is unchanged, true and not weakened: n>=2, every i, frontiers relative to the affine spans, H_i onto F_i x {0}. Step 1: m=min_J x_j lies in [0,1/n], the relative interior is J-coordinates >0 (n>=2 gives a second coordinate to move mass to), so dF={m=0}, dDelta=H u F and H n F=B. Step 2: I checked alpha(t)_j=t_j+t_i/n and a(x)=(nm, x_j-m): both sum to 1, m(alpha t)=t_i/n, a alpha=id and alpha a=id. Step 3: first branch has min 2m-1/n>=0 exactly when r<=1/2; second branch has u_j=(x_j-m)/r, so u is in B and the height is in [0,1]; the branches agree at r=1/2 and give (x,0) at r=1. Step 4: b agrees on B x {1}, r(b(y,1))=r(y)/2 and r(b(u,s))=1-s/2, and both inverse identities hold. Step 5: the two definitions agree on B and on B x {0}; continuity comes from the leaf on closed covers. Exact-rational tests for n=2..5, all i, including the seam, barycentre and B points, gave 0 failures. The new leaf ContinuousOn.union_of_isClosed (line 879) is an exact match with 4 recorded searches. No existing DAG node states the pasting lemma; other nodes only use it inline. The only citations are a definition and a Mathlib leaf, so the step stays on the unit route and there are no tool uses. Hovey is not in literature/ and proof_origin is agent, which is correct. One remark, not a fault of this delivery: the inherited source.place says Hovey has an 'explicit coning and radial-coordinate construction', but Hovey only asserts the homeomorphism; that field is the maintainer's. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.HornBoundaryCylinderHomeomorphism",
+  "declaration": "EuclideanGeometry.horn_boundary_cylinder_homeomorphism",
+  "file": "lean/Sheaf/Topology/HornBoundaryCylinderHomeomorphism.lean",
+  "statement": "theorem horn_boundary_cylinder_homeomorphism (n : ℕ) (hn : 2 ≤ n) (i : Fin (n + 1)) : ∃ ψ : ↥(intrinsicFrontier ℝ (stdSimplex ℝ (Fin (n + 1)))) ≃ₜ ↥(intrinsicFrontier ℝ ({t : Fin (n + 1) → ℝ | t ∈ stdSimplex ℝ (Fin (n + 1)) ∧ t i = 0} ×ˢ Set.Icc (0 : ℝ) 1)), (fun t ↦ (ψ t).val) '' {t | ∃ j : Fin (n + 1), j ≠ i ∧ t.val j = 0} = {p : (Fin (n + 1) → ℝ) × ℝ | p.1 ∈ stdSimplex ℝ (Fin (n + 1)) ∧ p.1 i = 0 ∧ p.2 = 0}",
+  "branch": "newtargets-dag",
+  "by": "Q76",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ae1f4f69",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Read the node, the def-kun-subspace-topology dependency, the module, the report and the Mathlib definitions of stdSimplex (StdSimplex.lean:35) and intrinsicFrontier (Intrinsic.lean:65). Every clause matches: 2<=n, i:Fin(n+1), the face as a literal set, the cylinder over Set.Icc 0 1, both boundaries relative to the affine span via intrinsicFrontier, subtype topologies, an existential homeomorphism, and the ambient image of the horn equal to exactly F_i x {0}, which is equivalent to the restriction being a homeomorphism onto it. The horn condition inside the simplex boundary loses no points. No extra hypotheses or universes. Edge cases checked: n=2, i=0 and i=n, the vertex e_i, and the face barycentre (which shows intrinsic rather than ambient frontier is needed). The node differs from base only in its lean field; lean.statement is verbatim the signature. Docstrings have the source place, blueprint tag and five proof steps. No definitions, sorry only, no pro-etale content. nt_compile --json side overlay: 3.4 s, rc=0, clean. Remark only: the inherited source.place overattributes the explicit construction to Hovey; this is not this delivery's field."
  }
 }
