@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-a1-affine-curve-upper",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Affine compact-support upper bound",
@@ -13,99 +13,198 @@
   "place": "node thm-a1-affine-curve-upper, order 2807"
  },
  "stmt_deps": [
+  "d-real-setup",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-weil-sheaf-complex",
   "def-weil-ordinary-compact-cohomology",
-  "def-weil-punctual-weights"
+  "def-weil-punctual-weights",
+  "def-weil-frobenius-module-weights"
  ],
  "proof": [
   {
-   "text": "The bounds in degrees zero and two are\n[lem-a1-affine-hc0], [lem-a1-curve-hc2-bound]; the first is the\nvanishing $H_c^0(C,\\mathcal F)=0$, and the purity of weight $w+2$ in\ndegree two is [lem-a1-affine-hc2-pure].\nThere is no cohomology outside degrees zero through two, by the\ncohomological range [lem-zl-affine-curve-range] of an affine curve\napplied to the (constructible) lisse sheaf $\\mathcal F$.",
+   "text": "The sheaf $\\mathcal F$ is constructible because a lisse sheaf is the single-stratum case of constructibility. Apply [lem-a1-affine-hc0] to obtain $H_c^0(C,\\mathcal F)=0$, and [lem-a1-affine-hc2-pure] to obtain purity of $H_c^2(C,\\mathcal F)$ of weight $w+2$, including when this group is zero. Apply [lem-zl-affine-curve-range] to obtain $H_c^i(C,\\mathcal F)=0$ for $i\\notin\\{0,1,2\\}$. All three statements have the smooth affine-curve hypotheses in force here; the first two also have the required geometric connectedness and lissity. Only the bound in degree one remains.",
    "uses": [
     "lem-a1-affine-hc0",
-    "lem-a1-curve-hc2-bound",
     "lem-a1-affine-hc2-pure",
     "lem-zl-affine-curve-range"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-affine-curve-upper.md",
+    "place": "Proof, first paragraph: endpoints and range"
+   }
   },
   {
-   "text": "For degree one choose the finite map of\n[lem-a1-finite-map-curve]. By\n[lem-a1-reduction-composition], the cohomology to be bounded is\n$H_c^1(\\mathbf A^1,\\mathcal K)$, where\n$\\mathcal K=g_*j_!\\mathcal F$.\nOn the open\n$W_0=\\mathbf A^1\\setminus(B\\cup g(C'_0\\setminus C_0))$\nthe restriction of the transported complex is lisse and pure of weight\n$w$, by [lem-a1-reduction-lisse-pure].\nFor the inclusion $a:W_0\\hookrightarrow\\mathbf A^1$,\nthe open–closed triangle of [def-weil-open-closed-recollement] (at $\\Qlb$ for Weil complexes,\n[prop-sf-open-closed-triangle-all-stages]) and the finite-boundary\nvanishing [lem-a1-finite-boundary-cohomology] give\n\n$$\nH_c^1(W,a^*\\mathcal K)\\twoheadrightarrow\nH_c^1(\\mathbf A^1,\\mathcal K).\n$$",
+   "text": "Choose $j:C_0\\hookrightarrow C'_0$ and $g:C'_0\\to A_0=\\mathbf A^1_{k_0}$ by [lem-a1-finite-map-curve]. Its output is precisely a smooth geometrically connected curve, a dense open immersion with finite complement, and a finite generically etale map, as required by [lem-a1-reduction-composition]. For the constructible Weil sheaf $\\mathcal K=g_*j_!\\mathcal F$, that lemma identifies $H_c^1(C,\\mathcal F)$ with $H_c^1(A,\\mathcal K)$, compatibly with Frobenius. By [lem-a1-reduction-lisse-pure], on the dense open $a:W_0=A_0\\setminus(B\\cup g(C'_0\\setminus C_0))\\hookrightarrow A_0$ the sheaf $\\mathcal L=a^*\\mathcal K$ is lisse and punctually pure of weight $w$. Here $B$ is the branch locus of $g$; the removed set is finite since $g$ is finite generically etale between curves and $C'_0\\setminus C_0$ is finite.",
    "uses": [
     "lem-a1-finite-map-curve",
     "lem-a1-reduction-composition",
-    "lem-a1-reduction-lisse-pure",
-    "def-weil-open-closed-recollement",
-    "prop-sf-open-closed-triangle-all-stages",
-    "lem-a1-finite-boundary-cohomology"
+    "lem-a1-reduction-lisse-pure"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-affine-curve-upper.md",
+    "place": "Proof, second paragraph: finite-map transport and lisse locus"
+   }
   },
   {
-   "text": "It suffices to bound the source.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $b:T_0=A_0\\setminus W_0\\hookrightarrow A_0$ be the reduced closed complement. Use [prop-sf-open-closed-triangle-all-stages] at $\\Lambda=\\Qlb$ for $\\mathcal K$. The compact-support composition/localization clause of [prop-functor-package], applied to $A\\to\\operatorname{Spec}k$, then gives the triangle of coefficient complexes\n$$R\\Gamma_c(W,\\mathcal L)\\longrightarrow R\\Gamma_c(A,\\mathcal K)\\longrightarrow R\\Gamma_c(T,b^*\\mathcal K)\\longrightarrow .$$\nThese are the coefficient complexes of [def-weil-ordinary-compact-cohomology]. The maps commute with Frobenius, since the open and closed immersions and $\\mathcal K$ are defined over $k_0$, and the localization/composition comparisons have the equivariance asserted by the cited nodes. The long exact sequence of [lem-sf-derived-homology-long-exact] includes\n$$H_c^1(W,\\mathcal L)\\longrightarrow H_c^1(A,\\mathcal K)\\longrightarrow H_c^1(T,b^*\\mathcal K).$$\nThe last group is zero by [lem-a1-finite-boundary-cohomology-positive] with $r=1$: $T_0$ is finite over $k_0$, and $b^*\\mathcal K$ is a constructible Weil sheaf in degree zero. No bound on its boundary weights is needed. Exactness therefore gives a Frobenius-equivariant surjection $H_c^1(W,\\mathcal L)\\twoheadrightarrow H_c^1(A,\\mathcal K)$.",
+   "uses": [
+    "prop-sf-open-closed-triangle-all-stages",
+    "prop-functor-package",
+    "def-weil-ordinary-compact-cohomology",
+    "lem-sf-derived-homology-long-exact",
+    "lem-a1-finite-boundary-cohomology-positive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-affine-curve-upper.md",
+    "place": "Proof, second paragraph: open-closed surjection; repaired positive-degree vanishing"
+   }
   },
   {
-   "text": "Apply [lem-a1-unramified-at-infinity] to the lisse sheaf\n$a^*\\mathcal K$ on $W_0$. After a finite constant extension it gives a\ndense open $v:V_0\\hookrightarrow\\mathbf A^1$ and a lisse sheaf\n$\\mathcal E$ on $V_0$, punctually $\\iota$-pure of weight $w$ and\nunramified at infinity, with a Frobenius-equivariant surjection\n$H_c^1(V,\\mathcal E)\\twoheadrightarrow H_c^1(W,a^*\\mathcal K)$. It\nsuffices to bound $H_c^1(V,\\mathcal E)$ by $w+1$.",
+   "text": "Apply [lem-a1-unramified-at-infinity] to $\\mathcal L$ on the dense open $W_0\\subset A_0$. Over a finite extension $k'_0=\\mathbf F_{q^m}$, it supplies a dense open $v:V_0\\hookrightarrow\\mathbf A^1_{k'_0}$ and a lisse Weil sheaf $\\mathcal E$, punctually pure of weight $w$ and unramified at infinity, with a surjection\n$$H_c^1(V,\\mathcal E)\\twoheadrightarrow H_c^1(W,\\mathcal L).$$\nThis map is equivariant for Frobenius over $k'_0$. On the right this is the $m$-th power of the original geometric Frobenius. From now until the final descent all weights are measured using $q^m$.",
    "uses": [
     "lem-a1-unramified-at-infinity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-affine-curve-upper.md",
+    "place": "Proof, fourth paragraph: remove ramification at infinity after constant extension"
+   }
   },
   {
-   "text": "Pass to the middle extension $v_*\\mathcal E$, as in the sketch. Let\n$i:Z_0\\hookrightarrow\\mathbf A^1$ be the finite complement of $V_0$.\nThe boundary sequence [prop-a1-curve-boundary-sequence] for $v$ gives\nthe Frobenius-equivariant exact sequence\n\n$$\nH_c^0(Z,i^*v_*\\mathcal E)\\longrightarrow H_c^1(V,\\mathcal E)\n\\longrightarrow H_c^1(\\mathbf A^1,v_*\\mathcal E)\\longrightarrow0 .\n$$",
+   "text": "Let $i:Z_0=\\mathbf A^1_{k'_0}\\setminus V_0\\hookrightarrow\\mathbf A^1_{k'_0}$ be the reduced finite complement, and use the ordinary sheaf middle extension $v_*\\mathcal E$. Apply [prop-a1-curve-boundary-sequence] to the dense open immersion of smooth curves $v$. It gives the Frobenius-equivariant exact sequence\n$$A_Z:=H_c^0(Z,i^*v_*\\mathcal E)\\longrightarrow M:=H_c^1(V,\\mathcal E)\\longrightarrow N:=H_c^1(\\mathbf A^1,v_*\\mathcal E)\\longrightarrow0.$$\nIn particular $\\ker(M\\to N)$ is the image of $A_Z$. This sequence is the ordinary-middle-extension sequence, rather than a claim identifying $v_*\\mathcal E$ with $Rv_*\\mathcal E$.",
    "uses": [
     "prop-a1-curve-boundary-sequence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-affine-curve-upper.md",
+    "place": "Proof, fifth paragraph: boundary exact sequence"
+   }
   },
   {
-   "text": "The stalks of $i^*v_*\\mathcal E$ have weights at most $w$ by the\nboundary semicontinuity [lem-wf-boundary-semicontinuity] (with\n$\\beta=w$), so $H_c^0(Z,i^*v_*\\mathcal E)$, and hence its image in\n$H_c^1(V,\\mathcal E)$, has weights at most $w$ by\n[lem-a1-finite-boundary-weights] and\n[lem-a1-subquotient-extension-bounds]. The right-hand group has\nweights at most $w+1$ by the affine-line estimate for the middle\nextension [thm-a1-line-middle-extension-upper]; this is where the\ncomposition filtration, the exactness of the middle extension at a\nfixed pure weight, and the Fourier bound of each factor enter. By\n[lem-a1-extension-bounds], $H_c^1(V,\\mathcal E)$ has weights at most\n$w+1$.",
+   "text": "If $\\mathcal E$ has rank zero, it and all its middle-extension stalks are zero, so $A_Z=0$ and the desired bound on $A_Z$ is vacuous. Otherwise its rank is positive: $V$ is a nonempty open of the integral curve $\\mathbf A^1_k$, hence connected, and a lisse sheaf has constant rank there. Apply [lem-wf-boundary-semicontinuity] with $X_0=\\mathbf A^1_{k'_0}$, $U_0=V_0$ and $\\beta=w$. Its hypotheses hold: the ambient curve is smooth separated geometrically connected, the complement is finite, and punctual purity gives $|\\iota(\\alpha)|^2=(q_s)^w$ at every closed point of $V_0$. Thus the stalks of $i^*v_*\\mathcal E$ have weights at most $w$. By [lem-a1-finite-boundary-weights], $A_Z$ has weights at most $w$.",
    "uses": [
     "lem-wf-boundary-semicontinuity",
-    "lem-a1-finite-boundary-weights",
-    "lem-a1-subquotient-extension-bounds",
-    "thm-a1-line-middle-extension-upper",
-    "lem-a1-extension-bounds"
+    "lem-a1-finite-boundary-weights"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-affine-curve-upper.md",
+    "place": "Proof, sixth paragraph: boundary weights, including the rank-zero case"
+   }
   },
   {
-   "text": "The successive surjections preserve this bound by\n[lem-a1-subquotient-extension-bounds].\nFinally finite constant extensions preserve and reflect weight\nbounds, as verified in [lem-a1-weight-bound-constant-extension].\nThis proves the degree-one assertion over the original field and\ncompletes the proof.",
+   "text": "The hypotheses of [thm-a1-line-middle-extension-upper] hold for $v$ and $\\mathcal E$, including unramifiedness at infinity. Its degree-one clause gives weights at most $w+1$ on $N$. Put $I=\\operatorname{im}(A_Z\\to M)$. The subquotient assertion [lem-a1-subquotient-extension-bounds] gives weights at most $w$ on $I$. The same filtration witnesses weights at most $w+1$, since each of its weights is at most $w\\le w+1$ in [def-weil-frobenius-module-weights]. Exactness from the preceding boundary-sequence step gives $0\\to I\\to M\\to N\\to0$. Apply [lem-a1-extension-bounds] with common bound $w+1$ to conclude that $M=H_c^1(V,\\mathcal E)$ has weights at most $w+1$.",
+   "uses": [
+    "thm-a1-line-middle-extension-upper",
+    "lem-a1-subquotient-extension-bounds",
+    "def-weil-frobenius-module-weights",
+    "lem-a1-extension-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-affine-curve-upper.md",
+    "place": "Proof, sixth paragraph: affine-line theorem and extension of the bound"
+   }
+  },
+  {
+   "text": "The two successive Frobenius-equivariant surjections, followed by the finite-map cohomology identification, make $H_c^1(C,\\mathcal F)$ a quotient of $M$ over $k'_0$. By [lem-a1-subquotient-extension-bounds] it has weights at most $w+1$ for $F^m$ and $q^m$. Every eigenvalue on each pure filtration quotient satisfies the bound, and [p-linear-filtration] gives the determinant product for this invariant filtration, so the eigenvalues of the full module are precisely those of its quotient blocks. Hence every eigenvalue $\\lambda$ of $F^m$ satisfies $|\\iota(\\lambda)|^2\\le(q^m)^{w+1}$. Apply [lem-a1-weight-bound-constant-extension] with $b=w+1$ to obtain $|\\iota(\\alpha)|^2\\le q^{w+1}$ for every eigenvalue $\\alpha$ of $F$. To read this as the filtration convention of [def-weil-frobenius-module-weights], apply [p-linear-triangular] to the automorphism $F$ over the algebraically closed coefficient field to obtain a full invariant flag. Each resulting one-dimensional quotient is pure of the real weight $2\\log_q|\\iota(\\alpha)|\\le w+1$. This also covers the zero-dimensional module with the empty filtration.",
    "uses": [
     "lem-a1-subquotient-extension-bounds",
-    "lem-a1-weight-bound-constant-extension"
+    "lem-a1-weight-bound-constant-extension",
+    "def-weil-frobenius-module-weights",
+    "p-linear-filtration",
+    "p-linear-triangular"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-affine-curve-upper.md",
+    "place": "Proof, final paragraph: quotient bounds and constant-field descent"
+   }
+  },
+  {
+   "text": "Degree one now has weights at most $w+1$. The degree-two group is pure of weight $w+2$ by the first step, hence has the required upper bound, using its one-step filtration. Every remaining group is zero by that step; the empty filtration gives every upper bound for the zero module in [def-weil-frobenius-module-weights]. These are all integers $i$, proving every clause.",
+   "uses": [
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-affine-curve-upper.md",
+    "place": "Proof, final sentence: assemble all degrees"
+   }
   }
  ],
  "proof_deps": [
   "lem-a1-affine-hc0",
-  "lem-a1-curve-hc2-bound",
   "lem-a1-affine-hc2-pure",
   "lem-zl-affine-curve-range",
   "lem-a1-finite-map-curve",
   "lem-a1-reduction-composition",
   "lem-a1-reduction-lisse-pure",
-  "def-weil-open-closed-recollement",
   "prop-sf-open-closed-triangle-all-stages",
-  "lem-a1-finite-boundary-cohomology",
+  "prop-functor-package",
+  "def-weil-ordinary-compact-cohomology",
+  "lem-sf-derived-homology-long-exact",
+  "lem-a1-finite-boundary-cohomology-positive",
   "lem-a1-unramified-at-infinity",
   "prop-a1-curve-boundary-sequence",
   "lem-wf-boundary-semicontinuity",
   "lem-a1-finite-boundary-weights",
-  "lem-a1-subquotient-extension-bounds",
   "thm-a1-line-middle-extension-upper",
+  "lem-a1-subquotient-extension-bounds",
+  "def-weil-frobenius-module-weights",
   "lem-a1-extension-bounds",
-  "lem-a1-weight-bound-constant-extension"
+  "lem-a1-weight-bound-constant-extension",
+  "p-linear-filtration",
+  "p-linear-triangular"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-affine-curve-upper.md",
-  "place": "## Proof"
+  "place": "Proof; same statement as main-20261015, with the weight-free finite-boundary correction and explicit rank-zero/descent arguments"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Weil\", \"Cohomology\"",
+   "results": "0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Deligne weight bound on compactly supported cohomology of pure lisse sheaves on affine curves",
+   "results": "8 hits; LieModule.Weight.instFinite, LieModule.Weight.instFintype, LieModule.Weight.instFintype.congr_simp, RootPairing.coxeterWeightIn_le_four, ModularFormClass.exists_bound, BoundingSieve.weights_nonneg, MvPolynomial.IsWeightedHomogeneous, LieModule.Weight.congr_simp; Lie-module and root-system weights, modular forms, sieve and polynomial weights; none concerns the statement",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported cohomology of a punctually pure lisse Weil sheaf on a smooth geometrically connected affine curve has weights at most w plus i",
+   "results": "8 hits; LieModule.exists₂_genWeightSpace_smul_add_eq_bot, LieModule.exists_genWeightSpace_smul_add_eq_bot, LieModule.genWeightSpace_zsmul_add_ne_bot, LieModule.eventually_genWeightSpace_smul_add_eq_bot, LieModule.finite_genWeightSpace_ne_bot, LieModule.genWeightSpace_nsmul_add_ne_bot_of_le, LieModule.finite_genWeightSpaceOf_ne_bot, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; hits concern Lie-module weights or number-field bounds, not Weil sheaf cohomology",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasWeightsAtMost|PunctuallyPure|WeilSheaf|compactlySupportedCohomology",
+   "results": "0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius eigenvalues on H_c^1 of a pure etale local system on an affine curve have complex absolute value at most q to the power (w+1)/2",
+   "results": "8 hits; NumberField.hermiteTheorem.boundOfDiscBdd, IsArithFrobAt.arithFrobAt, ClassGroup.normBound, NumberField.Embeddings.coeff_bdd_of_norm_le, ClassGroup.norm_lt, NumberField.norm_norm_le_norm_mul_house_pow, AlgHom.IsArithFrobAt.apply_of_pow_eq_one, ClassGroup.norm_le; hits concern Lie-module weights or number-field bounds, not Weil sheaf cohomology",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -705,5 +804,69 @@
   }
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-thm-dl-a1-upper"
+ "unit": "sk-thm-dl-a1-upper",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-a1-affine-curve-upper",
+  "worker": "stage1",
+  "summary": "Reused existing nodes throughout; repaired the first boundary surjection by weight-free positive-degree vanishing, cited compact-support localization and long exact cohomology explicitly, treated zero rank in semicontinuity, and expanded the constant-field descent. The statement and maintainer metadata are unchanged. No new nodes. Historical Lean audit points to an absent item file and is not evidence of a current completed declaration.",
+  "blueprint": "Steps 1, 2-3, 4, 5, 6-7, and 8-9 realize respectively the endpoints, finite-map/open-locus reduction, unramified-at-infinity reduction, middle-extension boundary sequence, boundary/Fourier weight estimate, and descent paragraphs of the original blueprint proof. The main-20261015 item has the identical statement. The affine-line unit composition-filtration route is used through thm-a1-line-middle-extension-upper; this item is not the unit key theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-affine-hc0",
+    "why": "Endpoint vanishing for the same smooth connected affine curve; the unit delegates endpoint facts."
+   },
+   {
+    "node": "lem-wf-boundary-semicontinuity",
+    "why": "The specified boundary weight estimate is used as a black box to control the boundary term, without changing the Fourier route."
+   },
+   {
+    "node": "prop-a1-curve-boundary-sequence",
+    "why": "Supplies the Frobenius-equivariant middle-extension boundary exact sequence, the local tool explicitly used by the source."
+   },
+   {
+    "node": "prop-sf-open-closed-triangle-all-stages",
+    "why": "Supplies the open-closed triangle at Qbar coefficients and its Weil equivariance for arbitrary transported K."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Only the compact-support composition/localization clause and equivariance are used, to turn recollement into the coefficient-complex triangle; the unit has no general compact-support localization statement."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Formal long exact cohomology of a triangle of coefficient complexes; this is the derived-category tool needed for the first surjection."
+   },
+   {
+    "node": "lem-a1-finite-boundary-cohomology-positive",
+    "why": "Weight-free positive-degree vanishing on the finite complement; replaces a source citation whose unused weight hypothesis was not justified."
+   },
+   {
+    "node": "p-linear-filtration",
+    "why": "The determinant product converts a bounded pure filtration into the eigenvalue bound needed for constant-field descent; this is the unit route linear-algebra tool."
+   },
+   {
+    "node": "p-linear-triangular",
+    "why": "A full invariant flag over the algebraically closed coefficient field converts the descended eigenvalue bound back to the stipulated filtration definition of weights."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-affine-hc0",
+  "lem-wf-boundary-semicontinuity",
+  "prop-a1-curve-boundary-sequence",
+  "prop-sf-open-closed-triangle-all-stages",
+  "prop-functor-package",
+  "lem-sf-derived-homology-long-exact",
+  "lem-a1-finite-boundary-cohomology-positive",
+  "p-linear-filtration",
+  "p-linear-triangular"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-5f43d4ac8",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-5f43d4ac8 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It is one commit with the item and its report and adds no new nodes. The statement is identical to both the master blueprint item and the main-20261015 item (order 3151), so no target was weakened. Every cited node is on the transitive route of sk-thm-dl-a1-upper, so the nine declared tool_uses are redundant and none needs acceptance; the graph stays acyclic. Steps checked against the full cited statements: (1) the hc0, hc2-pure and range nodes all have their hypotheses met. (2) The output of finite-map-curve matches the hypotheses of reduction-composition and reduction-lisse-pure. (3) The open-closed triangle at Qlb plus prop-functor-package clause 3 (Rf_! applied to the localization triangle) give the RΓ_c triangle; the Mathlib long exact sequence then applies. lem-a1-finite-boundary-cohomology-positive at r=1 correctly replaces the source's citation, whose stalk-weight hypothesis had not been verified. (4) unramified-at-infinity applies on W_0, with Frobenius F^m over F_{q^m}. (5) The boundary sequence applies to a dense open immersion of smooth curves. (6) The rank-zero case is split off, which gives the r≥1 hypothesis of semicontinuity with beta=w; finite-boundary-weights then applies. (7) The middle-extension theorem gives w+1, the subquotient and extension nodes finish degree one, and the zero modules are covered. (8) The constant-field descent goes through p-linear-filtration eigenvalues and the constant-extension node, then a p-linear-triangular flag over Qlb returns to the filtration convention. (9) Step 9 is elementary. Small cases tested: C=A^1 with F constant, F=0, empty boundary, zero H_c^2, m=1. Observation for maintenance, not a fault here: the statements of the imported nodes lem-a1-reduction-composition and prop-a1-curve-boundary-sequence leave Frobenius-equivariance implicit; the chapter conventions in rem-dl-a1-conventions supply it. No fixes were written."
+ }
 }

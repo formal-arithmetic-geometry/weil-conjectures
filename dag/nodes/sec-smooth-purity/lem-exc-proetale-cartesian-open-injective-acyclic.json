@@ -49,24 +49,56 @@
    }
   },
   {
-   "text": "Fix such a $Q=\\operatorname{Spec}B$. Put $W_Q=W\\times_TQ$, $U_Q=U\\times_TQ$, $P=V\\times_TQ$, and denote the induced maps by $p_Q:P\\to Q$ and $k_Q:U_Q\\hookrightarrow P$. Properness and the open-immersion assertions follow from [lem-weil-pbc-proper-base-change, lem-weil-pbc-open-immersion-base-change]. The map $U_Q\\to U$ is weakly etale by base-change stability in [lem-weil-pbc-weakly-etale-composition-base-change]; hence $J_Q=J|_{U_Q}$ is injective by [lem-weil-pbc-proetale-restriction-injectives]. Write $g:P\\to V$ and $g_U:U_Q\\to U$ for the projections; both are weakly etale, so $P$ and $U_Q$ are objects of $V_{\\mathrm{proet}}$ and $U_{\\mathrm{proet}}$. For such a map the inverse image of [def-weil-proetale-inverse-image] is restriction: for an object $Y\\to P$ of $P_{\\mathrm{proet}}$, an object $(Z,\\phi:Y\\to P\\times_VZ)$ of the index category $\\mathcal I_Y$ is the same as a $V$-morphism $Y\\to Z$, where $Y$ lies over $V$ through $Y\\to P\\to V$ (weakly etale by composition, [lem-weil-pbc-weakly-etale-composition-base-change]); hence $(Y\\to V,\\ (\\mathrm{id}_Y,Y\\to P))$ is initial in $\\mathcal I_Y$, the presheaf colimit is $F(Y\\to V)=(F|_P)(Y)$ naturally in $Y$, and this is already a sheaf, so sheafification changes nothing. The structure map $g^{-1}A_V\\to A_P$ is the identity on constant sections, which is the identification of [lem-weil-proetale-weakly-etale-localization] (2), so the module pullback is $g^{-1}$ itself. Thus $g^*F\\cong F|_P$ and likewise $g_U^*J\\cong J|_{U_Q}=J_Q$. Applied to the Cartesian square of $k$ and $g$ (note $U\\times_VP=U\\times_TQ=U_Q$), [lem-cbc-proetale-extension-zero-base-change] gives $g^{-1}k_!J\\cong k_{Q!}g_U^{-1}J$, i.e. identifies $F|_P$ with $k_{Q!}J_Q$. Let $S=\\{b\\in B:D(b)\\subseteq W_Q\\}$. Index by the small nonempty directed poset of finite subsets $E\\subseteq S$, ordered by inclusion, and set $W_E=\\bigcup_{b\\in E}D(b)$ and $U_E=P\\times_QW_E$. Principal opens form a basis directly from the Zariski definition: the complement of $V(I)$ is $\\bigcup_{b\\in I}D(b)$. Thus $W_Q=\\bigcup_EW_E$ and $U_Q=\\bigcup_EU_E$; the union of two finite subsets is an upper bound. For any affine open $L\\subseteq Q$, the restriction of $D(b)$ is $D(b|_L)$. By [lem-weil-pbc-principal-localization-open-immersion] this is the affine scheme $\\operatorname{Spec}(\\Gamma(L,\\mathcal O_L)_{b|_L})$, hence quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. A finite union of quasi-compact subsets is quasi-compact: extract a finite subcover on each subset and take their finite union. Thus $W_E\\hookrightarrow Q$ is quasi-compact by the affine-preimage definition in [def-weil-finite-type-morphism]. The map $k_E:U_E\\hookrightarrow P$ is quasi-compact by [lem-pc-quasi-compact-base-change]. The restricted map $r_E:U_E\\to W_E$ is proper by the proper-base-change lemma. The open immersion $a_E:U_E\\hookrightarrow U_Q$ is a weakly etale localization with the same restricted constant ring by [lem-weil-proetale-weakly-etale-localization]. Finally $J_E=J_Q|_{U_E}$ is injective by the restriction lemma. The index $E=\\varnothing$ gives the empty open and the zero sheaf, which is injective.",
+   "text": "Fix an affine weakly contractible $Q\\to T$, write $Q=\\operatorname{Spec}B$, and put $P=V\\times_TQ$, $W_Q=W\\times_TQ$, $U_Q=U\\times_TQ$. Denote the induced maps by $p_Q:P\\to Q$, $k_Q:U_Q\\hookrightarrow P$, $g:P\\to V$ and $g_U:U_Q\\to U$. Properness of $p_Q$ follows from [lem-weil-pbc-proper-base-change], and the open immersions from [lem-weil-pbc-open-immersion-base-change]. Both $g$ and $g_U$ are weakly etale by [lem-weil-pbc-weakly-etale-composition-base-change]. Hence $J_Q=J|_{U_Q}$ is injective by [lem-weil-pbc-proetale-restriction-injectives].",
    "uses": [
     "lem-weil-pbc-proper-base-change",
     "lem-weil-pbc-open-immersion-base-change",
-    "lem-weil-pbc-proetale-restriction-injectives",
-    "lem-cbc-proetale-extension-zero-base-change",
-    "lem-pc-quasi-compact-base-change",
     "lem-weil-pbc-weakly-etale-composition-base-change",
-    "lem-weil-pbc-principal-localization-open-immersion",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "def-weil-finite-type-morphism",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-proetale-inverse-image"
+    "lem-weil-pbc-proetale-restriction-injectives"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01W4, label lemma-base-change-proper; proetale.tex Tag 09AE, label definition-extension-zero; finite principal-open exhaustion written out"
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, label section-morphism; morphisms.tex Tag 01W4, label lemma-base-change-proper; weakly etale base-change and restriction input"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-proetale-object-inverse-image-restriction] to the site objects $g:P\\to V$ and $g_U:U_Q\\to U$. Its clauses (1)–(3) identify the actual inverse images $g^{-1},g_U^{-1}$ of [def-weil-proetale-inverse-image] with restriction, naturally, and the module pullbacks $g^*,g_U^*$ with restriction as constant-$A$ module sheaves. The square formed by $k,g,k_Q,g_U$ is Cartesian since $U\\times_VP=U\\times_TQ$. Thus [lem-cbc-proetale-extension-zero-base-change], applied to $J[0]$, identifies $F|_P=(k_!J)|_P$ with $k_{Q!}J_Q$. This is the identification of the actual sheaves: all functors in this comparison are exact inverse image and open extension applied in degree zero.",
+   "uses": [
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "lem-cbc-proetale-extension-zero-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, label section-morphism; the extracted inverse-image/restriction comparison and existing pro-etale open-extension base change"
+   }
+  },
+  {
+   "text": "Set $S=\\{b\\in B:D(b)\\subseteq W_Q\\}$. For a finite subset $E\\subseteq S$ put $W_E=\\bigcup_{b\\in E}D(b)$ and $U_E=P\\times_QW_E$. These finite subsets form a small nonempty directed poset: $\\varnothing$ is an object and $E\\cup E'$ is an upper bound. Since $W_Q$ is the complement of a closed set $V(I)$ in $\\operatorname{Spec}B$, it equals $\\bigcup_{b\\in I}D(b)$, so $W_Q=\\bigcup_EW_E$ and $U_Q=\\bigcup_EU_E$. For any affine open $L\\subseteq Q$, $D(b)\\cap L=D(b|_L)$ is affine by [lem-weil-pbc-principal-localization-open-immersion] and quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. A finite union of quasi-compact subsets is quasi-compact: take a finite subcover for each subset and then their finite union. Thus the inverse image of $W_E$ in each affine $L$ is quasi-compact. By the affine-preimage definition in [def-weil-finite-type-morphism], $i_E:W_E\\hookrightarrow Q$ is a quasi-compact open immersion.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Finite principal-open exhaustion from the Zariski definition; schemes.tex Tag 01I3, label lemma-standard-open-affine; algebra.tex Tag 00E8, label lemma-quasi-compact"
+   }
+  },
+  {
+   "text": "The map $k_E:U_E\\hookrightarrow P$ is quasi-compact by [lem-pc-quasi-compact-base-change], and $r_E:U_E\\to W_E$ is proper by [lem-weil-pbc-proper-base-change]. For the open immersion $a_E:U_E\\hookrightarrow U_Q$, [lem-weil-proetale-weakly-etale-localization] identifies the restricted site and constant ring; [lem-weil-pbc-proetale-restriction-injectives] therefore makes $J_E=J_Q|_{U_E}$ injective. These are the proper vertical maps, quasi-compact horizontal opens and injective coefficients required at each finite stage. For $E=\\varnothing$ the site is empty and its unique module sheaf is zero, which is injective directly from its lifting property.",
+   "uses": [
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-proetale-restriction-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AE, label definition-extension-zero, and slice-site restriction; geometric base-change stability"
    }
   },
   {
@@ -81,7 +113,7 @@
    }
   },
   {
-   "text": "Write $a_E:U_E\\hookrightarrow U_Q$. For $E\\subseteq E'$, the open-adjunction counit on $U_{E'}$ gives the transition $a_{E!}J_E\\to a_{E'!}J_{E'}$ after extension to $U_Q$. Under the Hom adjunction of [lem-weil-extension-by-zero-adjunction], these transitions correspond to restriction of maps from $J_Q$: restrictions from $U_{E^{\\prime\\prime}}$ to $U_{E^{\\prime}}$ and then $U_E$ compose to direct restriction to $U_E$. The adjunction bijection thus proves both the identity and composition laws for the transitions, so they form a diagram. Its cocone to $J_Q$ exhibits\n$$ \\varinjlim_E a_{E!}J_E\\cong J_Q. $$\nIndeed, by that adjunction a compatible family of maps $a_{E!}J_E\\to N$ is exactly a compatible family $J_Q|_{U_E}\\to N|_{U_E}$. It glues uniquely to a map $J_Q\\to N$: on an arbitrary object of $U_Q$ use its open cover by inverse images of the $U_E$ and the sheaf gluing axiom; this is a pro-etale covering because its maps are open immersions, and on each affine open the Zariski cover has a finite refinement by affine opens; agreements on overlaps follow by passing to $E\\cup E'$. Thus the cocone has the colimit universal property. The small colimits exist by [prop-pur-kinjective-resolutions-exist]. Applying the left adjoint $k_{Q!}$ preserves this colimit, as follows by applying its Hom adjunction to the colimit universal property. Also $k_{Q!}a_{E!}\\cong k_{E!}$, since both have right adjoint $a_E^*k_Q^*=k_E^*$. Consequently\n$$ F|_P\\cong k_{Q!}J_Q\\cong\\varinjlim_E F_E. $$\nAll these maps are the maps induced by the open counits, so this is a colimit of the same coefficient sheaves used in Step 3.",
+   "text": "Write $a_E:U_E\\hookrightarrow U_Q$. For $E\\subseteq E'$, the open-adjunction counit on $U_{E'}$ gives the transition $a_{E!}J_E\\to a_{E'!}J_{E'}$ after extension to $U_Q$. Under the Hom adjunction of [lem-weil-extension-by-zero-adjunction], these transitions correspond to restriction of maps from $J_Q$: restrictions from $U_{E^{\\prime\\prime}}$ to $U_{E^{\\prime}}$ and then $U_E$ compose to direct restriction to $U_E$. The adjunction bijection thus proves both the identity and composition laws for the transitions, so they form a diagram. Its cocone to $J_Q$ exhibits\n$$ \\varinjlim_E a_{E!}J_E\\cong J_Q. $$\nIndeed, by that adjunction a compatible family of maps $a_{E!}J_E\\to N$ is exactly a compatible family $J_Q|_{U_E}\\to N|_{U_E}$. It glues uniquely to a map $J_Q\\to N$: on an arbitrary object of $U_Q$ use its open cover by inverse images of the $U_E$ and the sheaf gluing axiom; this is a pro-etale covering because its maps are open immersions, and on each affine open the Zariski cover has a finite refinement by affine opens; agreements on overlaps follow by passing to $E\\cup E'$. Thus the cocone has the colimit universal property. The small colimits exist by [prop-pur-kinjective-resolutions-exist]. Applying the left adjoint $k_{Q!}$ preserves this colimit, as follows by applying its Hom adjunction to the colimit universal property. Also $k_{Q!}a_{E!}\\cong k_{E!}$, since both have right adjoint $a_E^*k_Q^*=k_E^*$. Consequently\n$$ F|_P\\cong k_{Q!}J_Q\\cong\\varinjlim_E F_E. $$\nAll these maps are the maps induced by the open counits, so this is a colimit of the same coefficient sheaves used in Step 6.",
    "uses": [
     "lem-weil-extension-by-zero-adjunction",
     "prop-pur-kinjective-resolutions-exist"
@@ -93,7 +125,7 @@
    }
   },
   {
-   "text": "The morphism $p_Q:P\\to Q$ is proper, hence separated and of finite type by [def-weil-proper-morphism]. Because $Q$ is affine, [lem-weil-pbc-qcqs-over-affine] gives that $P$ is a quasi-compact and quasi-separated scheme. Its identity morphism makes $P$ the terminal object of $P_{\\mathrm{proet}}$. Apply [det-pe-bounded-continuity-sections] with $X=P$, its terminal object $P$, ring sheaf $A_P$, and the diagram of complexes $F_E[0]$. The index of finite subsets is small and filtered, all complexes vanish below the common bound $0$, and the terminal object is qcqs. Step 4 identifies the termwise colimit with $(F|_P)[0]$. Thus, for every $q>0$,\n$$ H^q(P,F|_P)\\cong\\varinjlim_E H^q(P,F_E)=0 $$\nby Step 3. The continuity node allows an arbitrary sheaf of rings and all module sheaves, so neither rational coefficients nor an etale-origin condition is being imposed.",
+   "text": "The morphism $p_Q:P\\to Q$ is proper, hence separated and of finite type by [def-weil-proper-morphism]. Because $Q$ is affine, [lem-weil-pbc-qcqs-over-affine] gives that $P$ is a quasi-compact and quasi-separated scheme. Its identity morphism makes $P$ the terminal object of $P_{\\mathrm{proet}}$. Apply [det-pe-bounded-continuity-sections] with $X=P$, its terminal object $P$, ring sheaf $A_P$, and the diagram of complexes $F_E[0]$. The index of finite subsets is small and filtered, all complexes vanish below the common bound $0$, and the terminal object is qcqs. Step 7 identifies the termwise colimit with $(F|_P)[0]$. Thus, for every $q>0$,\n$$ H^q(P,F|_P)\\cong\\varinjlim_E H^q(P,F_E)=0 $$\nby Step 6. The continuity node allows an arbitrary sheaf of rings and all module sheaves, so neither rational coefficients nor an etale-origin condition is being imposed.",
    "uses": [
     "def-weil-proper-morphism",
     "det-pe-bounded-continuity-sections",
@@ -106,7 +138,7 @@
    }
   },
   {
-   "text": "For every $q>0$ and every affine weakly contractible $Q\\to T$, Steps 1 and 5 give $(R^qp_*k_!J)(Q)=0$. Clause (i) of [lem-sf-proetale-vanishing-detection] therefore gives $R^qp_*k_!J=0$ as a module sheaf on the whole small pro-etale site. This proves the stated acyclicity. The finite cohomological-dimension hypothesis is retained in the statement; this reduction does not use it because the existing quasi-compact-open acyclicity node is stronger and itself imposes no such bound. The geometric pro-etale acyclicity obligation remains in that existing node rather than being claimed from the etale source.",
+   "text": "For every $q>0$ and every affine weakly contractible $Q\\to T$, Steps 1 and 8 give $(R^qp_*k_!J)(Q)=0$. Clause (i) of [lem-sf-proetale-vanishing-detection] therefore gives $R^qp_*k_!J=0$ as a module sheaf on the whole small pro-etale site. This proves the stated acyclicity. The finite cohomological-dimension hypothesis is retained in the statement; this reduction does not use it because the existing quasi-compact-open acyclicity node is stronger and itself imposes no such bound. The geometric pro-etale acyclicity obligation remains in that existing node rather than being claimed from the etale source.",
    "uses": [
     "lem-sf-proetale-vanishing-detection"
    ],
@@ -127,13 +159,13 @@
   "lem-weil-pbc-weakly-etale-composition-base-change",
   "lem-weil-pbc-proper-base-change",
   "lem-weil-pbc-open-immersion-base-change",
+  "lem-sfb-proetale-object-inverse-image-restriction",
   "lem-cbc-proetale-extension-zero-base-change",
-  "lem-pc-quasi-compact-base-change",
   "lem-weil-pbc-principal-localization-open-immersion",
   "lem-weil-pbc-affine-scheme-qcqs",
   "def-weil-finite-type-morphism",
+  "lem-pc-quasi-compact-base-change",
   "lem-weil-proetale-weakly-etale-localization",
-  "def-weil-proetale-inverse-image",
   "lem-sp-proetale-open-injective-proper-acyclic",
   "lem-weil-extension-by-zero-adjunction",
   "def-weil-proper-morphism",
@@ -265,10 +297,38 @@
    "results": "{\"t\": \"2026-10-16T16:49:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"injective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsIsoPlusAppPlusRightDerivedFunctorPlusUnitObjInjectiveObjectMapCochainComplexPlusι\", \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles\"], \"digest\": \"f975bfe845a56a85\"}",
    "date": "2026-10-16",
    "verdict": "No match for this item. The injective-vanishing and injective-resolution declarations are general tools: none asserts that open extension of the given injective is proper-direct-image acyclic. The first requires its direct-image input itself to be injective; no such hypothesis holds here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper direct image extension by zero injective pro-etale module sheaf acyclic",
+   "results": "{\"t\": \"2026-10-17T08:02:25Z\", \"tool\": \"leanfinder\", \"query\": \"proper direct image extension by zero injective pro-etale module sheaf acyclic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.IsLocallyInjective\", \"PresheafOfModules.instIsLocallyInjectiveToSheafify\", \"PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective\", \"PresheafOfModules.Derivation.Universal.postcomp_injective\", \"CategoryTheory.Sheaf.isLocallyInjective_iff_injective\", \"PresheafOfModules.injective_of_mono\", \"PresheafOfModules.mono_of_injective\", \"CategoryTheory.Sheaf.isLocallyInjective_forget\"], \"digest\": \"605584e35db04331\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern local injectivity, Zariski module restrictions, or open-immersion geometry, not acyclicity of open-extended pro-etale injectives; the unqualified Loogle query reports an unknown identifier and supplies no evidence of absence."
+  },
+  {
+   "tool": "loogle",
+   "query": "rightDerived injective acyclic",
+   "results": "{\"t\": \"2026-10-17T08:02:26Z\", \"tool\": \"loogle\", \"query\": \"rightDerived injective acyclic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `rightDerived`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern local injectivity, Zariski module restrictions, or open-immersion geometry, not acyclicity of open-extended pro-etale injectives; the unqualified Loogle query reports an unknown identifier and supplies no evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|proper.*acyclic|acyclic.*proper",
+   "results": "{\"t\": \"2026-10-17T08:02:26Z\", \"tool\": \"grep\", \"query\": \"extensionByZero|proper.*acyclic|acyclic.*proper\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern local injectivity, Zariski module restrictions, or open-immersion geometry, not acyclicity of open-extended pro-etale injectives; the unqualified Loogle query reports an unknown identifier and supplies no evidence of absence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian proper morphism open immersion extension by zero injective pro-etale module sheaf higher direct image vanishes",
+   "results": "{\"t\": \"2026-10-17T08:02:27Z\", \"tool\": \"leansearch\", \"query\": \"Cartesian proper morphism open immersion extension by zero injective pro-etale module sheaf higher direct image vanishes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mk\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpace_isOpenImmersion\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.instMono\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\"], \"digest\": \"67f678d4cb5cb839\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: hits concern local injectivity, Zariski module restrictions, or open-immersion geometry, not acyclicity of open-extended pro-etale injectives; the unqualified Loogle query reports an unknown identifier and supplies no evidence of absence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "prop-exc-base-change-proper",
   "by": "worker",
@@ -280,8 +340,8 @@
   "date": "2026-10-17",
   "item": "lem-exc-proetale-cartesian-open-injective-acyclic",
   "worker": "stage1",
-  "summary": "Discarded the invalid earlier affine-line counterexample and restored the repository statement verbatim. Reduced the arbitrary Cartesian open to quasi-compact opens after evaluation on an affine weakly contractible base; reused the existing pro-etale quasi-compact injective acyclicity node and bounded-continuity theorem. Wrote the extension-by-zero colimit universal property and injective-resolution evaluation identities explicitly. No new nodes. Follow-up audit added the previously implicit weakly-etale base-change stability, principal-open quasi-compactness and qcqs-over-affine citations; no new nodes. Independent second reading expanded terminal-slice evaluation, transition composition, and the open-cover verification; statement and dependencies unchanged.",
-  "blueprint": "prop-exc-base-change-proper, Steps 2–4: supplies the extracted proper/open injective-acyclicity obligation needed before deriving the support comparison. This is a lower-level reduction to the already existing quasi-compact pro-etale obligation, not a replacement of the unit route.",
+  "summary": "Q102 repairs the dedicated long-step return: replaces former Step 2 by four short steps, extracts canonical weakly-etale pro-etale inverse-image/restriction and coefficient normalization as one new unsplit lemma, and retains principal-open exhaustion as an explicit elementary calculation using existing leaves. All other steps retain their argument with cross-references renumbered. Statement, Lean record, chapter/unit and accepted tool uses are unchanged. Maintainer reader (cc review): the new comparison node duplicated the existing unsplit node lem-sfb-proetale-object-inverse-image-restriction (clauses (1)-(3): weakly-etale site-object inverse image is restriction, with the constant-ring structure map and module pullback); the new node is dropped and Step 3 cites the existing node, declared as a tool use.",
+  "blueprint": "prop-exc-base-change-proper, Steps 2–4: same extracted injective-acyclicity route. New Steps 2–5 refine former Step 2; the new comparison lemma serves inverse-image/restriction identification after weakly-etale testing. New Steps 1,6–9 are the old Steps 1,3–6, with cross-references renumbered.",
   "tool_uses": [
    {
     "node": "prop-pur-kinjective-resolutions-exist",
@@ -314,6 +374,10 @@
    {
     "node": "lem-weil-proetale-weakly-etale-localization",
     "why": "Open immersions give weakly etale localizations and identify restricted constant coefficient rings; this is a generic site tool, not a replacement for the exceptional-adjoint route."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Generic site-theoretic comparison (Stacks sites 03CE applied to pro-etale 09A5): inverse image along a site object g:Y->X is sectionwise restriction, with the constant-ring structure map and module pullback identified. Step 3 takes only its statement to identify (k_!J)|_P and J|_{U_Q} with the actual inverse images; no node of sk-prop-sf-existence states it."
    }
   ]
  },
@@ -325,15 +389,16 @@
   "lem-weil-extension-by-zero-adjunction",
   "det-pe-bounded-continuity-sections",
   "lem-sf-proetale-vanishing-detection",
-  "lem-weil-proetale-weakly-etale-localization"
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q11-adbac5a06",
-  "group": "Q11",
+  "reviewer": "NT-cc-Q102-fe34b1c1b",
+  "group": "Q102",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-adbac5a06 (reviewer sub-agent of L); spot-checked: I read the item, all 21 cited nodes and the current blueprint proof prop-exc-base-change-proper.proof.md. The statement is identical to the side-DAG copy, so the target is not weakened. The finite-cd hypothesis is kept but not used. No new nodes. There is no cycle: the item does not appear among its dependencies' 905 transitive dependencies. The split is a real reduction, not a restatement. Step 1 evaluates at an affine weakly contractible Q (exact evaluation, restriction of injectives, direct-image section formula). Step 2 exhausts W_Q by finite unions of principal opens; these are quasi-compact over affine Q, k_E is quasi-compact by base change and r_E is proper. Step 3 applies the existing same-unit node lem-sp-proetale-open-injective-proper-acyclic, and every hypothesis matches. That node allows a non-Cartesian square; this is harmless because C is then clopen in B×_D E. Step 4 builds the colimit of a_{E!}J_E by adjunction and gluing. Step 5 applies det-pe-bounded-continuity-sections on the qcqs scheme P with bound 0. Step 6 applies lem-sf-proetale-vanishing-detection (i). Small cases checked: W empty, W=T, T=Spec k (the earlier affine-line counterexample is not Cartesian), A=0. One C1/C4 gap repaired: Step 2 applied lem-cbc-proetale-extension-zero-base-change, which is stated for the inverse image g^{-1}, but used the restriction F|_P. The identification of the two along a weakly étale g was not given, and no pro-étale node states it. I wrote the three-line argument from def-weil-proetale-inverse-image into Step 2 (the index category has an initial object, and the constant-ring map is the identity by lem-weil-proetale-weakly-etale-localization (2)). I also added def-weil-proetale-inverse-image to the step's uses and to proof_deps. I accepted the eight proposed generic tool_uses.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-fe34b1c1b (reviewer sub-agent of L); spot-checked: Read in full: the item and its 9 steps, the new node, every cited node's statement, unit sk-prop-sf-existence, the main-20261015 blueprint proof of prop-exc-base-change-proper (Steps 1-4), and Stacks proetale 09A5 and sites 03CE/00XZ. The statement and Lean record are unchanged and nothing is weakened. Fault (C5/duplicates): the new node lem-exc-proetale-weakly-etale-inverse-image-restriction duplicates an existing unsplit node on the base, lem-sfb-proetale-object-inverse-image-restriction (Q150, 2026-10-17). That node already states that the inverse image along a pro-etale site object is restriction, with the initial object of I_U, the constant-ring structure map, and module pullback as A_W-modules. The worker's list of non-duplicates misses it. The statement itself is true: checked through the initial object of I_Z and on X empty, A=0, non-monic X⊔X->X, and g=id. FIX: the new node is dropped. Step 3 now cites the existing node, proof_deps is recomputed, and the node is declared in split_report.tool_uses as a generic 03CE comparison; I accept that tool use. Steps 1-9 were checked against the cited statements. Weak contractibility of Q survives in the slice. The Cartesian open-immersion square U×_V P = U×_T Q meets the def-cbc hypotheses with A finite. The principal-open exhaustion gives quasi-compact i_E, and E=∅ is allowed. lem-sp-proetale-open-injective-proper-acyclic receives all its hypotheses. The open cover used in Step 7's colimit gluing is a pro-etale covering. Bounded continuity applies on qcqs P with bound 0. Detection clause (i) applies with A finite. Edge cases W=∅, W=T, non-quasi-compact W and A=0 were checked. The corrected item is in fixes/dag/nodes/sec-smooth-purity/; the full review is in review.md.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ExceptionalBaseChangeCartesianOpenInjectiveAcyclic",

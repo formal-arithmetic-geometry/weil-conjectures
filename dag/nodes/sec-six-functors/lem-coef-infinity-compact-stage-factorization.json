@@ -79,18 +79,31 @@
    }
   },
   {
-   "text": "Let $i=p(e)$. The fiber equivalence in [lem-coef-space-transport-classification] gives a component $\\xi\\in\\pi_0G(i)$ corresponding to $e\\in E_i$, and step 2 gives $\\pi_0(\\lambda_i)(\\xi)=[q(e)]=[m_h]$. To recover an actual edge and the claimed right-pinched component equation, put $P_y=\\operatorname{Map}_{\\mathcal E}(x,y)$. The two weak homotopy equivalences $|P_y|_Q\\to P_y$ and $\\theta:|P_y|_Q\\to A(x,y)$ of [lem-coef-pinched-rigidification-resolution] give a bijection $\\pi_0P_y\\to\\pi_0A(x,y)$ sending every edge to its rigidification vertex, since $Q^0=\\Delta^0$ and both displayed maps preserve that vertex. The unit $A(x,y)\\to\\operatorname{Sing}|A(x,y)|$ also gives a bijection on components: every realized simplex is joined to one of its vertices; every path in $|A(x,y)|$ is a singular 1-simplex; and the evaluation map $|\\operatorname{Sing}|A(x,y)||\\to|A(x,y)|$, given on a representative by $(\\sigma,t)\\mapsto\\sigma(t)$, is continuous by the realization quotient and recovers that point. These facts prove both surjectivity and injectivity, without asserting a general realization/singular weak-equivalence theorem. Thus we have a bijection $\\beta_y:\\pi_0P_y\\to\\pi_0h_x(y)$ carrying an edge to its singular rigidification point. The edge-representation clause of [lem-coef-infinity-mapping-composition] supplies $v:x\\to F(i)$ with $\\beta_{F(i)}([v])=\\xi$. Choose an inner-horn filler for the composable edges $v,\\iota_i$, with long edge $w:x\\to c$. In the rigidification of this 2-simplex the inclusion $\\{0,2\\}\\subset\\{0,1,2\\}$ is a 1-simplex in $A(x,c)$ joining the vertex of $w$ to the enriched composite of the vertices of $\\iota_i$ and $v$. The postcomposition formula in [def-coef-infinity-category-of-spaces] therefore gives $\\beta_c([w])=\\pi_0(\\lambda_i)(\\xi)=[m_h]=\\beta_c([h])$. Injectivity of $\\beta_c$ gives $[w]=[h]$, and the 2-simplex composition clause of [lem-coef-infinity-mapping-composition] gives $[w]=[\\iota_i][v]$. This is precisely the desired equation in the original right-pinched mapping space, using the original cocone leg.",
+   "text": "Put $P_y=\\operatorname{Map}_{\\mathcal E}(x,y)$, $A=\\mathfrak C[\\mathcal E]$, and let $p_y:|P_y|_Q\\to P_y$ and $\\theta_y:|P_y|_Q\\to A(x,y)$ be the weak homotopy equivalences of [lem-coef-pinched-rigidification-resolution]. Let $u_y:A(x,y)\\to\\operatorname{Sing}|A(x,y)|$ be the weak homotopy equivalence of [lem-cbc-realization-singular-unit-weak]. By the definition of weak homotopy equivalence in [def-cbc-enhanced-diagrams-cones], each induces a component bijection. Thus $\\beta_y=\\pi_0(u_y)\\pi_0(\\theta_y)\\pi_0(p_y)^{-1}$ is a bijection $\\pi_0P_y\\to\\pi_0h_x(y)$, with this target identified by [def-coef-infinity-category-of-spaces]. The degree-zero formula in the pinched-resolution statement and the characteristic-map formula in the unit statement give $\\beta_y([v])=[m_v]$ for every edge $v:x\\to y$. This is composition of the cited component bijections and their stated vertex formulas; the compatibility with postcomposition is supplied separately in step 6.",
+   "uses": [
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-cbc-realization-singular-unit-weak",
+    "def-coef-infinity-category-of-spaces",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.4.1 and Proposition 2.2.2.7, pinched rigidification comparison; compose the cited weak-equivalence statements on components. The realization/singular unit is the existing generic theorem lem-cbc-realization-singular-unit-weak (Kerodon Tag 0142)."
+   }
+  },
+  {
+   "text": "Let $i=p(e)$. The fiber and base-pullback clauses of [lem-coef-space-transport-classification] give $\\xi\\in\\pi_0G(i)$ corresponding to $e\\in E_i$, and step 2 gives $\\pi_0(\\lambda_i)(\\xi)=[q(e)]=[m_h]$. By step 5 and the edge-representation clause of [lem-coef-infinity-mapping-composition], choose $v:x\\to F(i)$ with $\\beta_{F(i)}([v])=\\xi$. Fill the inner $2$-horn with edges $v,\\iota_i$ using [def-cbc-enhanced-diagrams-cones], and write $w:x\\to c$ for its long edge. Apply [lem-coef-rigidification-component-postcomposition] to this triangle and the very same $\\beta$ of step 5. Since $\\lambda_i=h_x(\\iota_i)$, its triangle clause gives $\\beta_c([w])=\\pi_0(\\lambda_i)(\\xi)=[m_h]=\\beta_c([h])$. Injectivity gives $[w]=[h]$, while the triangle clause of [lem-coef-infinity-mapping-composition] gives $[w]=[\\iota_i][v]$. This proves the required equation with the original cocone leg. The comparison with enriched postcomposition is taken from the new cited theorem, not proved inline.",
    "uses": [
     "lem-coef-space-transport-classification",
-    "def-coef-infinity-category-of-spaces",
+    "lem-coef-infinity-mapping-composition",
     "def-cbc-enhanced-diagrams-cones",
-    "lem-coef-pinched-rigidification-resolution",
-    "lem-coef-infinity-mapping-composition"
+    "lem-coef-rigidification-component-postcomposition"
    ],
    "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-    "place": "Lemma 5.4.2.4, final component argument, printed pp.424-425; Proposition 2.2.4.1 and Proposition 2.2.2.7 supply the pinched rigidification comparison. The singular-component and 2-simplex subset calculations are written out from the cited definitions; the cited composition theorem identifies the resulting equation in the homotopy category."
+    "place": "HTT Lemma 5.4.2.4, component/retract argument, printed pp.424-425. The separately stated rigidification-component-postcomposition lemma supplies the comparison previously hidden in returned step 5."
    }
   },
   {
@@ -112,12 +125,14 @@
   "lem-cbc-enhanced-functor-cone-calculus",
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-pinched-rigidification-resolution",
-  "lem-coef-infinity-mapping-composition"
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-rigidification-component-postcomposition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-  "place": "Definition 5.3.4.5 and the component/retract argument in Lemma 5.4.2.4, printed pp.396 and 424-425. HTT was read online and is not archived in literature/. The explicit two-point separation proof of component coverage is supplied by the worker, from existing transport classification and the cocone criterion; no new total-space realization theorem is assumed."
+  "place": "Definition 5.3.4.5 and the component/retract argument in Lemma 5.4.2.4, printed pp.396 and 424-425, read online. HTT is not archived under literature/. The two-point separation argument is an agent expansion using the existing transport and cocone theorems. The mapping-space comparison now cites the existing pinched-resolution and realization/singular unit theorems. Repair of the returned step 5 extracts its concrete postcomposition comparison into lem-coef-rigidification-component-postcomposition; the component bijections themselves cite the existing pinched-resolution and realization/singular unit theorems."
  },
  "mathlib_searches": [
   {
@@ -189,10 +204,45 @@
    "results": "{\"t\": \"2026-10-16T21:51:19Z\", \"tool\": \"grep\", \"query\": \"corepresent|filtered|compact\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "No match for the quasicategory mapping-space statement. The returned presentability declarations concern ordinary categories and Hom sets; Basic.lean:286-291 was read. SimplicialNerve.lean:25-35 still lists the space quasicategory as a project. The independent Quasicategory grep returns zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "compact|filtered|factor",
+   "results": "{\"t\": \"2026-10-17T07:28:59Z\", \"tool\": \"grep\", \"query\": \"compact|filtered|factor\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"807eebde839cdec0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits and Loogle concern ordinary categories and Hom sets (IsCardinalPresentable.exists_hom_of_isColimit, Mathlib/CategoryTheory/Presentable/Basic.lean:286-291 read); they do not give the coherent quasicategory mapping-space statement. The Quasicategory grep hit TwoTruncated.lean:280 is about composition witnesses, not filtered colimits; lines 266-290 read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact objects in infinity categories factor morphisms through a stage of a filtered colimit",
+   "results": "{\"t\": \"2026-10-17T07:29:00Z\", \"tool\": \"leansearch\", \"query\": \"Compact objects in infinity categories factor morphisms through a stage of a filtered colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit\", \"CategoryTheory.Limits.isIndObject_of_isFiltered_of_finallySmall\", \"CategoryTheory.Limits.IndObjectPresentation.mk\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under\", \"CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag\", \"CategoryTheory.IsFiltered.SmallFilteredIntermediate.factoring\"], \"digest\": \"9a036b635e6e0e98\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits and Loogle concern ordinary categories and Hom sets (IsCardinalPresentable.exists_hom_of_isColimit, Mathlib/CategoryTheory/Presentable/Basic.lean:286-291 read); they do not give the coherent quasicategory mapping-space statement. The Quasicategory grep hit TwoTruncated.lean:280 is about composition witnesses, not filtered colimits; lines 266-290 read."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsFinitelyPresentable",
+   "results": "{\"t\": \"2026-10-17T07:29:00Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsFinitelyPresentable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsFinitelyPresentable\", \"CategoryTheory.instIsFinitelyPresentableObjFullSubcategoryIsFinitelyPresentableι\", \"CategoryTheory.instPreservesFilteredColimitsOfSizeObjOppositeFunctorTypeCoyonedaOpOfIsFinitelyPresentable\", \"CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimits\", \"CategoryTheory.isFinitelyPresentable_iff_preservesFilteredColimitsOfSize\", \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit\", \"CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit\", \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under\"], \"digest\": \"0cccba3bda369c48\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits and Loogle concern ordinary categories and Hom sets (IsCardinalPresentable.exists_hom_of_isColimit, Mathlib/CategoryTheory/Presentable/Basic.lean:286-291 read); they do not give the coherent quasicategory mapping-space statement. The Quasicategory grep hit TwoTruncated.lean:280 is about composition witnesses, not filtered colimits; lines 266-290 read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a compact object to a filtered colimit factors up to homotopy through a stage in a quasicategory",
+   "results": "{\"t\": \"2026-10-17T07:29:02Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from a compact object to a filtered colimit factors up to homotopy through a stage in a quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom\", \"CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit\", \"CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit\", \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit'\", \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit_under\"], \"digest\": \"39638e5257d9983e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits and Loogle concern ordinary categories and Hom sets (IsCardinalPresentable.exists_hom_of_isColimit, Mathlib/CategoryTheory/Presentable/Basic.lean:286-291 read); they do not give the coherent quasicategory mapping-space statement. The Quasicategory grep hit TwoTruncated.lean:280 is about composition witnesses, not filtered colimits; lines 266-290 read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an infinity category a compact object expressed as a filtered colimit is a retract of a stage",
+   "results": "{\"t\": \"2026-10-17T07:29:33Z\", \"tool\": \"leanfinder\", \"query\": \"In an infinity category a compact object expressed as a filtered colimit is a retract of a stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit\", \"CategoryTheory.IsCardinalPresentable.exists_eq_of_isColimit'\", \"CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit\", \"CategoryTheory.IsCardinalPresentable.exists_hom_of_isColimit\", \"CategoryTheory.instIsStableUnderRetractsIsCardinalPresentable\", \"CategoryTheory.Retract.isCardinalPresentable\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.isPresentable_eq_retractClosure\", \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity\"], \"digest\": \"77c9533face4e9ff\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits and Loogle concern ordinary categories and Hom sets (IsCardinalPresentable.exists_hom_of_isColimit, Mathlib/CategoryTheory/Presentable/Basic.lean:286-291 read); they do not give the coherent quasicategory mapping-space statement. The Quasicategory grep hit TwoTruncated.lean:280 is about composition witnesses, not filtered colimits; lines 266-290 read."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-presentable-cardinal-enlargement",
@@ -205,25 +255,30 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-compact-stage-factorization",
   "worker": "stage1",
-  "summary": "Statement unchanged. Six proof steps: compactness preserves the mapping-space cocone; existing space-valued transport represents it by a map from a left-fibration total space; the cocone universal property and the same transport formula make restriction injective on components of maps to a two-point space; an explicit separation argument forces a representing stage vertex; fiber evaluation gives the desired edge and the identity specialization gives the retract. No new nodes. Repeated log-backed Mathlib searches reject the ordinary-category analogue as a mismatch. Second reading repaired the corepresentable/right-pinched component comparison using the existing pinched resolution and checked composition using the existing mapping-composition theorem; no new nodes.",
-  "blueprint": "Supports prop-coef-integral-exceptional-adjoint, current main-20261015 proof paragraph 2 (the finite-level mapping-complex adjunction before R lim), through the retained historical ancestry. That proof does not literally state the compact-factorization lemma: the present item supplies the compactness infrastructure of its existing accessible-localization ancestry. Steps 1-6 expand the HTT Lemma 5.4.2.4 component/retract argument; the two-point test derives the required component coverage from generic classification rather than adding a node for the whole factorization.",
+  "summary": "Statement and Lean record unchanged. Retain the original route and steps 1-4 and the final retract step. Replace returned step 5 by the composition of the existing pinched-resolution and realization/singular component bijections, followed by stage-edge recovery citing one new unsplit generic compatibility theorem, lem-coef-rigidification-component-postcomposition. This removes the inline comparison with enriched postcomposition; no non-elementary proof step exceeds 2000 characters. Prior research and repair text are retained in the sandbox.",
+  "blueprint": "Supports prop-coef-integral-exceptional-adjoint, current main-20261015 proof paragraph 2 (the finite-level mapping-complex adjunction before R lim), through the retained historical ancestry. That proof does not literally state the compact-factorization lemma: the present item supplies the compactness infrastructure of its existing accessible-localization ancestry. Steps 1-6 expand the HTT Lemma 5.4.2.4 component/retract argument; the two-point test derives the required component coverage from generic classification rather than adding a node for the whole factorization. Q63 retains that ancestry and route; steps 5-6 now use the existing realization/singular unit theorem instead of hiding its component comparison in the recovery step. Returned step 5 is now steps 5-6: existing comparison nodes give the component bijection, and the new node isolates its compatibility with concrete corepresentable postcomposition. The blueprint ancestry and remaining proof route are unchanged.",
   "tool_uses": [
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
     "why": "Step 3 uses the general mapping-space universal property of a colimiting cocone. This is a generic foundational tool; the coefficient unit has no separate node stating this cocone criterion, and its biduality route is not replaced."
+   },
+   {
+    "node": "lem-cbc-realization-singular-unit-weak",
+    "why": "Step 5 uses only the generic realization/singular unit bijection on components for A(x,y). This is a topology tool, not a replacement of any coefficient-unit route step; the coefficient unit has no node stating this unit theorem."
    }
   ]
  },
  "tool_uses": [
-  "lem-cbc-enhanced-functor-cone-calculus"
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-realization-singular-unit-weak"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q111-1b579821f",
-  "group": "Q111",
+  "reviewer": "NT-cc-Q93-34f9c1dc8",
+  "group": "Q93",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-1b579821f (reviewer sub-agent of L); spot-checked: I read the whole item. All six steps were checked against the full statements of the seven proof dependencies; there are no new nodes. The statement is correct (HTT Lemma 5.4.2.4 / Def 5.3.4.5, read online and marked agent-written with a WANTED line). It is unchanged. Its hypotheses are exactly those used: γ regular, I small and γ-filtered (so nonempty), a colimiting cocone, x compact, and E admitting the colimits that the compactness definition requires. Step 1: the compactness clause of def-coef-presentable-infinity-category applies to the given cocone, with h_x(y)=Sing|C[E](x,y)|. Steps 2-3: the transformation-space, constant-product, pullback and composition clauses of lem-coef-space-transport-classification, together with the dual cocone criterion of lem-cbc-enhanced-functor-cone-calculus, make q^* bijective on π0. Step 4: the two-point discrete test is elementary and valid. Step 5: lem-coef-pinched-rigidification-resolution (Map^R equals the right-pinched space; Q^0=Δ^0, so vertices are preserved) gives a π0 bijection β. The edge-representation and 2-simplex clauses of lem-coef-infinity-mapping-composition, with the {0,2}⊂{0,1,2} edge of C[Δ^2], give [ι_i][v]=[h]. Step 6 gives the retract in hE. Small cases checked: one-object I, empty stages, finite sets, and the counterexample ℕ without compactness. No cycle: none of the dependency closures (17, 16, 298, 116, 3, 163, 102 nodes) contains the item. No duplicate: compact-relative-cocone-factorization covers posets only. The parent uses only the identity clause, which the item states. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, the generic colimit universal property. No SGA source and no coefficient category are involved. The blueprint from.place is honest. No changes made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-34f9c1dc8 (reviewer sub-agent of L); spot-checked: Pass with no changes; the full review is in review.md. The item's statement, stmt_deps and Lean record are unchanged, and the target is not weakened. Steps 1-4 and 7 check out against the full statements they cite: the compactness clause of def-coef-presentable-infinity-category; the transport, constant-functor and pullback clauses of lem-coef-space-transport-classification; the cocone criterion of lem-cbc-enhanced-functor-cone-calculus; the two-point Kan test; and the homotopy-category clause of lem-coef-infinity-mapping-composition. Step 5 builds the component bijection beta by composing the pi0 bijections of p and theta (lem-coef-pinched-rigidification-resolution, using Q^0=Delta^0) and of u (lem-cbc-realization-singular-unit-weak), with the vertex formula beta([v])=[m_v]. Step 6 uses lambda_i=h_x(iota_i) (by the definition of the image cocone), the new triangle clause and injectivity of beta, then the 2-simplex clause, to get [w]=[h]=[iota_i][v]. The orientation is right and the original cocone leg is used throughout. Mechanical checks: proof_deps equals the union of the steps' uses, every bracketed reference is listed in its step, there is no cycle (the item is not in its 525-node dependency closure), no dependency is missing or merged, and the longest step is 1099 characters. The new node lem-coef-rigidification-component-postcomposition is true. In C[Delta^2](0,2), the vertices {0,2} and {0,1,2} are joined by an edge; units form an enriched functor A->A^top and H_x acts by postcomposition after the unit, so pi0 H_x(g)[u f~]=[u w~]; the general clause follows because every component is represented by an edge. I tested it on nerves of discrete categories, degenerate g, empty P_y and non-Kan A(x,t). It is statement-only and self-contained, its stmt_deps match its references, it uses no compactness or colimit, and it does not restate any clause of the item. It does not duplicate rigidification-identity-action, hom-bifunctor-functoriality or pinched-rigidification-resolution, and no other DAG or blueprint statement found by search gives it. It is short enough that it could have been an elementary step, but I accept it as the node the return asked to be extracted. HTT is not archived under literature/; the node and report say so honestly (proof_origin by agent, WANTED line). I accept two tool uses: lem-cbc-enhanced-functor-cone-calculus (already accepted) and the new lem-cbc-realization-singular-unit-weak (generic topology, replaces no step of the unit's route). No SGA source is cited. No coefficient category or base-change morphism is involved."
  },
  "lean_audit": {
   "master": {

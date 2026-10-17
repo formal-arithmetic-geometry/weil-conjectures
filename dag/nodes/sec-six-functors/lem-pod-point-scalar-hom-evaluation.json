@@ -1,0 +1,81 @@
+{
+ "id": "lem-pod-point-scalar-hom-evaluation",
+ "kind": "statement",
+ "title": "Scalar compatibility of point internal-Hom evaluation",
+ "statement": "Fix $s=\\operatorname{Spec}k$ with $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, and finite extensions $E\\subset L$ of $\\mathbf Q_\\ell$ in a fixed $\\Qlb$ [def-pod-conventions]. Write $R=\\mathcal O_E$, $R'=\\mathcal O_L$, $B=\\widehat{\\mathcal O}_{E,s}$ and $B'=\\widehat{\\mathcal O}_{L,s}$. Let $P$ be a bounded complex of finite-projective $R$-modules [def-pc-perfect-ring-complex], and put $K=B\\otimes_{\\underline R}\\underline P$, $P^\\vee=\\operatorname{Hom}_R^\\bullet(P,R)$ and $H=B\\otimes_{\\underline R}\\underline{P^\\vee}$. Assume $K,H$ are in $D^b_c(s,R)$ [def-weil-derived-complete-integral-detailed] and identify $H$ with $R\\mathcal Hom_B(K,B)$ by the ordinary finite-projective Hom-complex model [def-pur-derived-internal-hom, def-pur-hom-complex]. Use the integral scalar-extension functor $T_{L/E}$ and operation comparison of [lem-pur-integral-operations-scalar-extension], with its internal-Hom arrow the transpose of scalar-extended evaluation. Identify $T_{L/E}$ with ordinary derived extension $-\\otimes_B^L B'$ by the canonical completion comparison [lem-weil-finite-free-completed-scalar-comparison]. The diagram comparing sections of the internal-Hom scalar arrow, through the specified sections comparisons [lem-weil-point-sections-scalar-extension], with the coefficient-module arrow\n$$P^\\vee\\otimes_R R'\\longrightarrow\\operatorname{Hom}_{R'}^\\bullet(P\\otimes_R R',R')$$\ncommutes in the derived category. The lower arrow is the actual map $f\\otimes a\\mapsto(x\\otimes b\\mapsto f(x)\\otimes ab)$, with the two sides placed in the same signed Hom-complex convention. This commutative diagram is natural in maps of $P$, is the identity under the canonical identifications when $L=E$, and respects the specified associators for $E\\subset L\\subset M$. It remains commutative after rationalization to $E\\subset L$, including naturality for localized morphisms.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "second sentence ('$R\\mathcal Hom$ at the point being computed over the coefficient ring'): scalar-extension compatibility of the finite-projective Hom model at common coefficient fields"
+ },
+ "stmt_deps": [
+  "def-pod-conventions",
+  "def-pc-perfect-ring-complex",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-point-sections-scalar-extension",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "scalar extension preserves finite projective Hom complexes and evaluation commutes with base change",
+   "results": "Module.Projective.tensorProduct; CategoryTheory.Functor.mapExactFunctor_smul; no exact derived coefficient comparison theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.baseChange, TensorProduct, Module.Free",
+   "results": "LinearMap.trace_baseChange; charpoly_baseChange; det_baseChange; no internal-Hom evaluation theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*Hom|Hom.*baseChange|finite.*projective",
+   "results": "Mathlib/LinearAlgebra/Dual/BaseChange.lean and TensorProduct/Tower.lean contain generic finite-projective dual base change; no project-specific four-stage comparison",
+   "date": "2026-10-17",
+   "verdict": "generalization: generic dual base-change APIs, not this coefficient comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "internal Hom of finite projective complex commutes with scalar extension and evaluation",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt; CategoryTheory.ihom.ev; generic scalar adjunction/evaluation only",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scalar extension compatibility of internal Hom for finite projective complexes",
+   "date": "2026-10-17",
+   "results": "8 hits: LightCondensed.ihom_map_val_app; CategoryTheory.Abelian.Ext.precompOfLinear; CategoryTheory.Abelian.Ext.smul_eq_comp_mk₀; CategoryTheory.Abelian.Ext.postcompOfLinear; CategoryTheory.Abelian.Ext.homLinearEquiv; CategoryTheory.Functor.mapExactFunctor_smul; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "verdict": "no match: generic categorical and module APIs, not the stated pro-etale comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-point-dualizing-complex",
+  "date": "2026-10-17",
+  "group": "Q20"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "lem-pod-point-dualizing-complex",
+   "place": "Second sentence: internal Hom at the point is computed over the coefficient ring; compatibility of this calculation with common finite coefficient fields.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
