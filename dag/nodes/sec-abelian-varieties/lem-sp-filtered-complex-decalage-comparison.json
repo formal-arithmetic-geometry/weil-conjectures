@@ -14,48 +14,62 @@
  ],
  "proof": [
   {
-   "text": "Use the proved cone-to-cokernel quasi-isomorphism for every finite interval. Its naturality identifies interval maps with the maps on quotients of decalage steps.",
+   "text": "Construct the individual normalized page isomorphisms and use their differential compatibility to obtain an isomorphism of page complexes. Their successor compatibility gives a morphism of spectral sequences; componentwise inverse chain maps give its inverse, with the commutativity equation obtained by cancellation.",
    "uses": [
-    "def-sp-filtered-complex-decalage-tower"
+    "lem-sp-filtered-complex-decalage-page-iso",
+    "lem-sp-filtered-complex-decalage-page-coherence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, section-filtered-complex, cycle/boundary and differential formulas; literature/stacks-project/derived.tex, Tag 015X, remark-final-functorial, second filtration. The decalage substitution is an agent derivation of the Tag 012K formulas."
+   }
   },
   {
-   "text": "Write Z_s(F)^(p,n) = F^p K^n intersect d^-1 F^(p+s) K^(n+1). The E_s denominator is Z_(s-1)(F)^(p+1,n) plus d Z_(s-1)(F)^(p-s+1,n-1). For a=p-n and r>=2, substitution in the decalage formula and d squared equal to zero give Z_(r-1)(Dec F)^(a,n)=Z_r(F)^(p,n), and the two denominator terms agree respectively. Thus E_(r-1)(Dec F)^(a,n-a) equals E_r(F)^(p,n-p). With tower index q corresponding to Dec(F)^(1-q), the spectral-object page at (p,q) is the original quotient cycle/boundary page at (p,q), starting at page two.",
+   "text": "Restrict any filtered map to the original representative pullbacks and use the canonical quotient-page map equation. Precompose with the epic representative-to-page map, apply the normalized page properties, and use naturality of the concrete right-interval cohomology classes.",
    "uses": [
+    "lem-sp-filtered-complex-decalage-representative-naturality",
+    "lem-sp-filtered-complex-decalage-page-iso",
     "lem-sp-filtered-complex-canonical-model",
-    "lem-sp-filtered-complex-decalage",
-    "def-sp-filtered-complex-decalage-tower"
+    "lem-sp-filtered-quotient-page-maps",
+    "lem-sp-filtered-complex-representative-epis"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, section-filtered-complex, cycle/boundary and differential formulas; literature/stacks-project/derived.tex, Tag 015X, remark-final-functorial, second filtration. The decalage substitution is an agent derivation of the Tag 012K formulas."
+   }
   },
   {
-   "text": "The comparison sends representatives to their own quotient classes. The differential is represented by d on both sides, and the successor homology comparison is the same quotient map. Cancel the epic representative maps to prove compatibility and assemble an isomorphism of entire sequences.",
+   "text": "Specialize the resulting naturality square to r=2. The page embedding is the spectral-object first-page isomorphism followed by the interval cone-to-quotient comparison. Cancel the latter and use its filtered-map naturality to obtain exactly the required pageTwoComparison equation.",
    "uses": [
-    "lem-sp-filtered-complex-canonical-model"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a filtered map, restrict to the representative pullbacks and descend to the boundary quotients. Cancellation gives the stated normalized page-two naturality. Infinite endpoints are the zero and full complexes; finite-page calculations use finite endpoints only.",
-   "uses": [
+    "def-sp-filtered-complex-decalage-page-data",
     "def-sp-filtered-complex-decalage-tower",
     "lem-sp-spectral-object-page-two-functor"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, section-filtered-complex, cycle/boundary and differential formulas; literature/stacks-project/derived.tex, Tag 015X, remark-final-functorial, second filtration. The decalage substitution is an agent derivation of the Tag 012K formulas."
+   }
   }
  ],
  "proof_deps": [
-  "def-sp-filtered-complex-decalage-tower",
+  "lem-sp-filtered-complex-decalage-page-iso",
+  "lem-sp-filtered-complex-decalage-page-coherence",
+  "lem-sp-filtered-complex-decalage-representative-naturality",
   "lem-sp-filtered-complex-canonical-model",
-  "lem-sp-filtered-complex-decalage",
+  "lem-sp-filtered-quotient-page-maps",
+  "lem-sp-filtered-complex-representative-epis",
+  "def-sp-filtered-complex-decalage-page-data",
+  "def-sp-filtered-complex-decalage-tower",
   "lem-sp-spectral-object-page-two-functor"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Homological Algebra and Derived Categories",
-  "place": "Tag 012K, cycle/boundary formulas for filtered-complex spectral sequences; Tag 015X, Remark 13.26.15, the second filtration.",
-  "note": "G4 expands the parent comparison plan into the concrete tower and its normalized maps; the cited sources supply the filtered and injective-resolution constructions."
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, section-filtered-complex, cycle/boundary and differential formulas; literature/stacks-project/derived.tex, Tag 015X, remark-final-functorial, second filtration. The decalage substitution is an agent derivation of the Tag 012K formulas.",
+  "note": "H3 proves the page isomorphisms and representative naturality, and assembles the sequence comparison from the remaining, strictly smaller differential/successor compatibility statement. Existing signatures are unchanged."
  },
  "mathlib_searches": [
   {
@@ -130,12 +144,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G4",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261016T015249-L-722295",
+  "landing": "20261017T062635-L-430355",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },

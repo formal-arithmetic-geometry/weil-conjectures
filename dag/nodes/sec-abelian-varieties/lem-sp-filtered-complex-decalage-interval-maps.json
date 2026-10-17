@@ -1,0 +1,132 @@
+{
+ "id": "lem-sp-filtered-complex-decalage-interval-maps",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "Proof: second spectral sequence and functoriality; the identification of the canonical filtered quotient sequence with the decalage tower: Naturality under squares changing decalage interval endpoints",
+   "via": [
+    "lem-sp-filtered-complex-decalage-comparison",
+    "lem-sp-ce-canonical-truncation-comparison",
+    "lem-sp-ce-filtered-truncation-comparison",
+    "lem-sp-ce-page-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Naturality under squares changing decalage interval endpoints",
+ "statement": "Let \\(C\\) be abelian and \\(U\\) a filtered cochain complex with its decalage tower [def-sp-filtered-complex-decalage-tower]. Given \\(a\\le b\\) and \\(a'\\le b'\\) in the extended integers and any square \\(\\alpha:(a\\le b)\\to(a'\\le b')\\) in their arrow category, construct the induced morphism \\(T_\\alpha\\) of the two tower cokernel short complexes. For every \\(n\\in\\mathbb Z\\), the cone-to-quotient cohomology comparisons satisfy \\(H^n(\\alpha)I_{a',b'}=I_{a,b}H^n(T_\\alpha^3)\\).",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, section-filtered-complex, cycle/boundary and differential formulas; literature/stacks-project/derived.tex, Tag 015X, remark-final-functorial, second filtration. The decalage substitution is an agent derivation of the Tag 012K formulas."
+ },
+ "stmt_deps": [
+  "def-sp-filtered-complex-decalage-tower"
+ ],
+ "proof": [
+  {
+   "text": "Map both endpoint arrows into the tower. Functoriality and thinness of the indexing category give the square. Its cokernel map supplies the third component of a morphism of cokernel short complexes.",
+   "uses": [
+    "def-sp-filtered-complex-decalage-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, section-filtered-complex, cycle/boundary and differential formulas; literature/stacks-project/derived.tex, Tag 015X, remark-final-functorial, second filtration. The decalage substitution is an agent derivation of the Tag 012K formulas."
+   }
+  },
+  {
+   "text": "Apply descShortComplex_naturality to this morphism. Apply homology, use naturality of the homotopy-category homology comparison, and compose with the cone-to-quotient isomorphisms.",
+   "uses": [
+    "def-sp-filtered-complex-decalage-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, section-filtered-complex, cycle/boundary and differential formulas; literature/stacks-project/derived.tex, Tag 015X, remark-final-functorial, second filtration. The decalage substitution is an agent derivation of the Tag 012K formulas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtered-complex-decalage-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, section-filtered-complex, cycle/boundary and differential formulas; literature/stacks-project/derived.tex, Tag 015X, remark-final-functorial, second filtration. The decalage substitution is an agent derivation of the Tag 012K formulas.",
+  "note": "H3 derives this concrete categorical comparison from the cited cycle/boundary formulas, using actual subcomplexes, quotient maps and Mathlib universal properties."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The mapping cone to cokernel quasi isomorphism for a monomorphism is natural in commutative squares of inclusions and induces natural interval cohomology comparisons",
+   "results": "Generic hits include CochainComplex.mappingCone.quasiIso_descShortComplex, cokernel.map and mapHomologicalComplexIso; no specialized endpoint-square comparison.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cone-to-cokernel cohomology isomorphism of a tower of monomorphisms is natural in interval endpoint squares",
+   "results": "8 hits, including CochainComplex.mappingConeCompTriangle_mor₃_naturality and mappingCone.mapHomologicalComplexXIso_eq; remaining hits concern DoldKan and small-object naturality. None states the interval result.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "descShortComplex_naturality",
+   "results": "2 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean:171 (the generic naturality theorem), and DerivedCategory/ShortExact.lean:63 (an application). The required endpoint-square short-complex map still has to be constructed.",
+   "date": "2026-10-17",
+   "verdict": "generic lemma requires the constructed cokernel-sequence morphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredComplexDecalageComparison",
+  "date": "2026-10-17",
+  "group": "H3"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexDecalageIntervalMaps",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexDecalageIntervalMaps.lean",
+  "declaration": "CategoryTheory.filteredComplexDecalageIntervalIso_map",
+  "statement": "theorem filteredComplexDecalageIntervalIso_map\n    (U : FilteredObject (CochainComplex C ℤ))\n    {a b a' b' : EInt} (h : a ≤ b) (h' : a' ≤ b')\n    (α : ComposableArrows.mk₁ (homOfLE h) ⟶ ComposableArrows.mk₁ (homOfLE h')) (n : ℤ) :\n    (((filteredComplexDecalageSpectralObjectFunctor C).obj U).H n).map α ≫\n        (filteredComplexDecalageIntervalIso U a' b' h' n).hom =\n      (filteredComplexDecalageIntervalIso U a b h n).hom ≫\n        HomologicalComplex.homologyMap (filteredComplexDecalageIntervalHom U h h' α).τ₃ n",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-17"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261017T062635-L-430355",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261017T062635-L-430355",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,148 @@
+{
+ "id": "lem-sp-filtered-complex-decalage-representative-kernels",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "Proof: second spectral sequence and functoriality; the identification of the canonical filtered quotient sequence with the decalage tower: Equality of original-page and decalage-class representative kernels",
+   "via": [
+    "lem-sp-filtered-complex-decalage-comparison",
+    "lem-sp-ce-canonical-truncation-comparison",
+    "lem-sp-ce-filtered-truncation-comparison",
+    "lem-sp-ce-page-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Equality of original-page and decalage-class representative kernels",
+ "statement": "Let \\(C\\) be abelian, \\(U=(K,F)\\) a filtered cochain complex, \\(p,q,r\\in\\mathbb Z\\), \\(r\\ge2\\), \\(n=p+q\\), and \\(R_r^{p,n}\\) its original cycle representative pullback. Let \\(z:R_r^{p,n}\\to Z_r^{p,n}(\\operatorname{gr}_F K)\\) satisfy the defining square with the quotient projection \\(F^pK^n\\to(F^p/F^{p+1})^n\\). If \\(\\pi_r\\) is the boundary-quotient projection [lem-sp-filtered-complex-canonical-model] and \\(c_r\\) the concrete decalage right-interval class map [def-sp-filtered-complex-decalage-page-data], then \\(\\ker(z\\pi_r)=\\ker(c_r)\\) as subobjects of \\(R_r^{p,n}\\).",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, section-filtered-complex, cycle/boundary and differential formulas; literature/stacks-project/derived.tex, Tag 015X, remark-final-functorial, second filtration. The decalage substitution is an agent derivation of the Tag 012K formulas."
+ },
+ "stmt_deps": [
+  "def-sp-filtered-complex-decalage-page-data",
+  "lem-sp-filtered-complex-canonical-model"
+ ],
+ "proof": [
+  {
+   "text": "For any quotient interval F^a/F^b and any representative x∈F^p with a≤p≤b, its homology class is zero exactly when its ambient inclusion factors through (F^p∩dF^a)+F^b. Prove this using the quotient exact sequence, opcycles and epimorphic refinements, extending the existing boundary-zero calculation to arbitrary endpoints.",
+   "uses": [
+    "lem-sp-filtered-complex-boundary-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, section-filtered-complex, cycle/boundary and differential formulas; literature/stacks-project/derived.tex, Tag 015X, remark-final-functorial, second filtration. The decalage substitution is an agent derivation of the Tag 012K formulas."
+   }
+  },
+  {
+   "text": "For D=Dec(F), the denominator (D^(-q)∩dD^(1-(q+r-1)))+D^(1-q) and the original denominator (F^p∩dF^(p-r+1))+F^(p+1) have the same factorization condition on an r-cycle. In either direction refine the epimorphism onto the sum, separate its two terms, and use the decalage intersection formula and d squared zero to lift them.",
+   "uses": [
+    "lem-sp-filtered-complex-decalage",
+    "def-sp-filtered-complex-decalage-page-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, section-filtered-complex, cycle/boundary and differential formulas; literature/stacks-project/derived.tex, Tag 015X, remark-final-functorial, second filtration. The decalage substitution is an agent derivation of the Tag 012K formulas."
+   }
+  },
+  {
+   "text": "The cokernel zero criterion, proved by Abelian.monoLift and monicity of the graded-cycle inclusion, identifies the original quotient zero condition with factorization through the graded boundary subobject. The public boundary-pullback theorem converts it to vanishing in the opcycles of F^(p-r+1)/F^(p+1). Apply the general interval boundary-zero calculation from the first step for F and for Dec(F), and the denominator equivalence from the second step. Test the resulting equivalence on the two kernel-subobject inclusions.",
+   "uses": [
+    "lem-sp-filtered-complex-boundary-pullback",
+    "def-sp-filtered-complex-decalage-page-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, section-filtered-complex, cycle/boundary and differential formulas; literature/stacks-project/derived.tex, Tag 015X, remark-final-functorial, second filtration. The decalage substitution is an agent derivation of the Tag 012K formulas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-filtered-complex-boundary-pullback",
+  "lem-sp-filtered-complex-decalage",
+  "def-sp-filtered-complex-decalage-page-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, section-filtered-complex, cycle/boundary and differential formulas; literature/stacks-project/derived.tex, Tag 015X, remark-final-functorial, second filtration. The decalage substitution is an agent derivation of the Tag 012K formulas.",
+  "note": "H3 derives this concrete categorical comparison from the cited cycle/boundary formulas, using actual subcomplexes, quotient maps and Mathlib universal properties."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Original filtered-complex quotient pages are uniquely isomorphic to spectral-object pages of the decalage tower, normalized on cycle representatives",
+   "results": "8 hits: HomologicalComplex.iCyclesIso, pOpcyclesIso, singleObjCyclesSelfIso; HomotopyCategory.homologyFunctorFactors and spectralObjectMappingCone; DoldKan ReflectsIsomorphisms; ComplexShape.quotient_isLocalization; ShortComplex.QuasiIso.isIso. None states the normalized filtered/decalage comparison.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Decalage cycle representatives surject onto cycles of the left quotient interval, have the original page quotient kernel, and identify its image with the spectral-object page",
+   "results": "8 hits: HomologicalComplex.i_cyclesMk, cyclesIsoSc'_hom_iCycles, cyclesIsoSc'_inv_iCycles, cyclesMk, restrictionCyclesIso, CochainComplex.liftCycles_shift_homologyπ, CochainComplex.HomComplex.leftHomologyData', HomologicalComplex.toCycles_i. Generic cycle APIs only, no decalage comparison.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "decalage",
+   "results": "0 Mathlib hits. The generic spectral-object and subobject APIs were read separately; none states this specialized decalage result.",
+   "date": "2026-10-17",
+   "verdict": "no exact match; generic APIs used in the proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredComplexDecalageComparison",
+  "date": "2026-10-17",
+  "group": "H3"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexDecalagePageData",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexDecalagePageData.lean",
+  "declaration": "CategoryTheory.filteredComplexDecalageRepresentative_kernels",
+  "statement": "theorem filteredComplexDecalageRepresentative_kernels\n    (U : FilteredObject (CochainComplex C ℤ)) (p q r : ℤ) (hr : 2 ≤ r)\n    (z : (U.filtration.complexCycleRepresentatives p (p + q) r : C) ⟶\n      (U.filtration.complexCycles p (p + q) r : C))\n    (hz : z ≫ (U.filtration.complexCycles p (p + q) r).arrow =\n      (U.filtration.complexCycleRepresentatives p (p + q) r).arrow ≫\n        (U.filtration.complexQuotientπ p (p + 1) (by omega)).f (p + q)) :\n    kernelSubobject (z ≫ filteredComplexPageπ U.obj U.filtration r (p, q)) =\n      kernelSubobject (filteredComplexDecalageRepresentativeClass U p q r hr)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-17"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261017T062635-L-430355",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261017T062635-L-430355",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

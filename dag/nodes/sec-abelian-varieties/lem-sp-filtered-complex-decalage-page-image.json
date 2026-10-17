@@ -1,0 +1,150 @@
+{
+ "id": "lem-sp-filtered-complex-decalage-page-image",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "Proof: second spectral sequence and functoriality; the identification of the canonical filtered quotient sequence with the decalage tower: The image of decalage representatives equals the embedded spectral page",
+   "via": [
+    "lem-sp-filtered-complex-decalage-comparison",
+    "lem-sp-ce-canonical-truncation-comparison",
+    "lem-sp-ce-filtered-truncation-comparison",
+    "lem-sp-ce-page-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The image of decalage representatives equals the embedded spectral page",
+ "statement": "Let \\(C\\) be abelian, \\(U=(K,F)\\) a filtered cochain complex, \\(p,q,r\\in\\mathbb Z\\), and \\(r\\ge2\\). Let \\(c_r\\) and \\(m_r\\) be respectively the concrete representative class map and the monic right-interval spectral-page embedding [def-sp-filtered-complex-decalage-page-data]. Then \\(\\operatorname{im}(c_r)=[m_r]\\) as subobjects of \\(H^{p+q}(\\operatorname{Dec}(F)^{1-(q+r-1)}/\\operatorname{Dec}(F)^{1-q})\\).",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, section-filtered-complex, cycle/boundary and differential formulas; literature/stacks-project/derived.tex, Tag 015X, remark-final-functorial, second filtration. The decalage substitution is an agent derivation of the Tag 012K formulas."
+ },
+ "stmt_deps": [
+  "def-sp-filtered-complex-decalage-page-data",
+  "def-sp-filtered-complex-decalage-tower"
+ ],
+ "proof": [
+  {
+   "text": "At r=2 the left and right intervals coincide. The left-interval representatives are epic onto cycles, and homologyπ is epic, so c_r is epic. The first-page embedding is an isomorphism. Both image subobjects are top.",
+   "uses": [
+    "lem-sp-filtered-complex-decalage-left-representatives",
+    "def-sp-filtered-complex-decalage-page-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, section-filtered-complex, cycle/boundary and differential formulas; literature/stacks-project/derived.tex, Tag 015X, remark-final-functorial, second filtration. The decalage substitution is an agent derivation of the Tag 012K formulas."
+   }
+  },
+  {
+   "text": "For r>2 put i0=q-r+2, i1=q, i2=q+1, i3=q+r-1. The spectral page is a quotient of H^n(i0,i2) and embeds in H^n(i1,i3). Their composite is the interval map (i0,i2)→(i1,i3): expand cokernelSequenceE.g, kernelSequenceE.f and πE≫ιE, then use toCycles_i and p_fromOpcycles.",
+   "uses": [
+    "def-sp-filtered-complex-decalage-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, section-filtered-complex, cycle/boundary and differential formulas; literature/stacks-project/derived.tex, Tag 015X, remark-final-functorial, second filtration. The decalage substitution is an agent derivation of the Tag 012K formulas."
+   }
+  },
+  {
+   "text": "The representative map onto cycles of the left interval is epic. Its composite with homologyπ and the left-to-right quotient map is c_r, by its defining cycle equation. Endpoint-square naturality transports that quotient map to the spectral-object interval map. Cancel the epic left-interval map in imageSubobject; the image is exactly the monic page embedding.",
+   "uses": [
+    "lem-sp-filtered-complex-decalage-left-representatives",
+    "lem-sp-filtered-complex-decalage-interval-maps",
+    "def-sp-filtered-complex-decalage-page-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, section-filtered-complex, cycle/boundary and differential formulas; literature/stacks-project/derived.tex, Tag 015X, remark-final-functorial, second filtration. The decalage substitution is an agent derivation of the Tag 012K formulas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-filtered-complex-decalage-left-representatives",
+  "def-sp-filtered-complex-decalage-page-data",
+  "def-sp-filtered-complex-decalage-tower",
+  "lem-sp-filtered-complex-decalage-interval-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, section-filtered-complex, cycle/boundary and differential formulas; literature/stacks-project/derived.tex, Tag 015X, remark-final-functorial, second filtration. The decalage substitution is an agent derivation of the Tag 012K formulas.",
+  "note": "H3 derives this concrete categorical comparison from the cited cycle/boundary formulas, using actual subcomplexes, quotient maps and Mathlib universal properties."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Original filtered-complex quotient pages are uniquely isomorphic to spectral-object pages of the decalage tower, normalized on cycle representatives",
+   "results": "8 hits: HomologicalComplex.iCyclesIso, pOpcyclesIso, singleObjCyclesSelfIso; HomotopyCategory.homologyFunctorFactors and spectralObjectMappingCone; DoldKan ReflectsIsomorphisms; ComplexShape.quotient_isLocalization; ShortComplex.QuasiIso.isIso. None states the normalized filtered/decalage comparison.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Decalage cycle representatives surject onto cycles of the left quotient interval, have the original page quotient kernel, and identify its image with the spectral-object page",
+   "results": "8 hits: HomologicalComplex.i_cyclesMk, cyclesIsoSc'_hom_iCycles, cyclesIsoSc'_inv_iCycles, cyclesMk, restrictionCyclesIso, CochainComplex.liftCycles_shift_homologyπ, CochainComplex.HomComplex.leftHomologyData', HomologicalComplex.toCycles_i. Generic cycle APIs only, no decalage comparison.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "decalage",
+   "results": "0 Mathlib hits. The generic spectral-object and subobject APIs were read separately; none states this specialized decalage result.",
+   "date": "2026-10-17",
+   "verdict": "no exact match; generic APIs used in the proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredComplexDecalageComparison",
+  "date": "2026-10-17",
+  "group": "H3"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexDecalagePageImage",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexDecalagePageImage.lean",
+  "declaration": "CategoryTheory.filteredComplex_decalage_page_image",
+  "statement": "theorem filteredComplex_decalage_page_image\n    (U : FilteredObject (CochainComplex C ℤ)) (p q r : ℤ) (hr : 2 ≤ r) :\n    imageSubobject (filteredComplexDecalageRepresentativeClass U p q r hr) =\n      Subobject.mk (filteredComplexDecalagePageEmbedding U p q r hr)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-17"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261017T062635-L-430355",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261017T062635-L-430355",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
