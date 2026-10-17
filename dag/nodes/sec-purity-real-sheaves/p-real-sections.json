@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "p-real-sections",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Global sections as invariants",
@@ -20,26 +20,156 @@
  ],
  "proof": [
   {
-   "text": "Apply [prop-wf-weil-sheaf-representation-equivalence] on the connected $U$. A global section of\n$\\mathcal F|_{U}$ is a morphism from the constant rank-one sheaf, hence under\nthe equivalence a map of $\\pi_1(U)$-representations from the trivial line to\n$V$. Such a map is determined by the image of $1$, which must be fixed by\nevery element; conversely every fixed vector defines one. This gives\n$H^0(U,\\mathcal F|_{U})=V^{\\pi_1(U)}$. The subgroup $\\pi_1(U)$ is normal in\n$W(U_0)$, being the kernel of the degree map by\n[lem-wf-weil-group-exact-sequence], so the degree-one lift normalizes its\naction and therefore preserves\nthe invariants; the identification is equivariant for the residual $F$.",
+   "text": "Hypotheses on the geometric curve. By [d-real-setup], $C_0\\to\\operatorname{Spec}k_0$ is separated, smooth and of finite type, $C_0$ is nonempty of pure dimension one [def-weil-pure-dimension], and $C=C_0\\times_{k_0}\\operatorname{Spec}k$ is connected. The base change $C\\to\\operatorname{Spec}k$ is separated by [lem-weil-pbc-separated-base-change], of finite type by clause (2) of [lem-sfb-finite-type-composition-base-change], and smooth by clause (2) of [lem-pc-proper-base-change]. Dimension (topological Krull dimension): a chain of irreducible closed subsets of $C_0$ lies in an irreducible component containing its top member, so $\\dim C_0=1$, and every affine open $\\operatorname{Spec}A\\subseteq C_0$ has $\\dim\\le1$ (closures turn a chain in an open into a chain in $C_0$). By [lem-weil-pbc-dimension-preserved-field-extension] the opens $\\operatorname{Spec}(A\\otimes_{k_0}k)$, which cover $C$, also have $\\dim\\le1$; a scheme is $T_0$ and quasi-sober by [lem-sc-scheme-sober], so [lem-weil-pbc-dimension-bound-open-cover] gives $\\dim C\\le1$. Conversely take a component $Z$ of $C_0$ with generic point $\\xi$ and an irreducible closed $Z'\\subsetneq Z$ with generic point $z'$ [lem-sc-scheme-sober], and an affine open $\\operatorname{Spec}A\\ni z'$. It contains $\\xi$, since $z'\\in\\overline{\\{\\xi\\}}$, and $\\xi\\notin Z'$; so $Z'\\cap\\operatorname{Spec}A\\subsetneq Z\\cap\\operatorname{Spec}A$ is a chain of length one, $\\dim\\operatorname{Spec}(A\\otimes_{k_0}k)\\ge1$ by the same lemma, and its closure chain gives $\\dim C\\ge1$. Hence $C$ is a nonempty connected smooth curve of dimension one over the algebraically closed field $k$ in the sense of [def-sc-curves].",
    "uses": [
-    "prop-wf-weil-sheaf-representation-equivalence",
-    "lem-wf-weil-group-exact-sequence"
+    "d-real-setup",
+    "def-weil-pure-dimension",
+    "lem-weil-pbc-separated-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-dimension-preserved-field-extension",
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-dimension-bound-open-cover",
+    "def-sc-curves"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-sections/p-real-sections.proof.md",
+    "place": "First sentence: 'on the connected U'; the standing curve C of the chapter is a smooth connected curve over k (reviewer FIX)"
+   }
+  },
+  {
+   "text": "By Step 1, clause 1 of [lem-sc-smooth-connected-curve-local-rings] makes $C$ Noetherian and integral. The smooth curve $C$ is normal by [lem-sc-smooth-normal]. Its nonempty open $U$ is therefore irreducible and connected: two nonempty opens of $U$ are nonempty opens of the irreducible space $C$, so intersect. Also $U$ is dense in $C$. Moreover $U_0$ is dense in $C_0$: by [lem-weil-pbc-base-change-image], applied to $\\operatorname{Spec}k\\to\\operatorname{Spec}k_0$ (surjective onto the one-point space) and $C_0\\to\\operatorname{Spec}k_0$, the projection $C\\to C_0$ is surjective; $U$ is the preimage of $U_0$, so $C$, the image of $\\overline U$, lies in $\\overline{U_0}$. The open $U$ is Noetherian and separated, by restriction from $C$. The prime $\\ell$ is invertible on $U$ since $\\ell\\ne\\operatorname{char}(k)$. Thus the underlying lisse-sheaf equivalence may be applied on $U$, with the same geometric generic point and stalk $V$.",
+   "uses": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-sc-smooth-normal",
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-sections/p-real-sections.proof.md",
+    "place": "First sentence: 'on the connected U'; verify the hypotheses of the underlying fibre equivalence"
+   }
+  },
+  {
+   "text": "Put $\\mathcal G=\\mathcal F|_U$ and let $\\mathbf1_U$ be the rank-one coefficient sheaf. A global section $s$ gives the sheaf morphism $m_s:\\mathbf1_U\\to\\mathcal G$ defined by $a\\mapsto a\\,s|_T$ over each etale $T\\to U$; conversely a coefficient-linear sheaf morphism $m$ gives $m_U(1)$. These constructions are inverse, since a local scalar multiplies the restriction of $1$, and this can be checked on a cover on which that scalar is constant. For adic coefficients use precisely [def-pod-lisse-l-adic-sheaves]: at $\\mathcal O_E$ both sides are compatible families of these finite-level maps or sections; at $E$ both are rationalized, and at $\\overline{\\mathbf Q}_\\ell$ morphisms and sections are taken over a common finite coefficient field and then extended. The same formulas respect transition maps and scalar extension. Hence ordinary adic global sections identify with $\\operatorname{Hom}(\\mathbf1_U,\\mathcal G)$ in the category of underlying lisse sheaves, without requiring the morphism to preserve a Weil structure.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-sections/p-real-sections.proof.md",
+    "place": "Second sentence: a global section is a morphism from the constant rank-one sheaf"
+   }
+  },
+  {
+   "text": "Apply clause 2 of [cor-galois-lisse-representations] to $U$, whose hypotheses were checked in Steps 1 and 2. The fibre functor is an equivalence and sends the unit sheaf to the trivial representation. Consequently it identifies $\\operatorname{Hom}(\\mathbf1_U,\\mathcal G)$ with the $\\pi_1(U)$-equivariant $\\overline{\\mathbf Q}_\\ell$-linear maps $\\overline{\\mathbf Q}_\\ell\\to V$. By [def-wf-fundamental-representation], the action on this fibre is exactly the restriction of the Weil fundamental representation to the geometric subgroup. It is the underlying geometric equivalence that is used here; imposing Weil-equivariance on these maps would incorrectly impose the additional equation $Fv=v$.",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "def-wf-fundamental-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-sections/p-real-sections.proof.md",
+    "place": "Second sentence: under the equivalence, morphisms are maps of geometric fundamental-group representations"
+   }
+  },
+  {
+   "text": "For such an equivariant map $f$, put $v=f(1)$. Since the source action is trivial, $gv=f(g1)=f(1)=v$ for every $g\\in\\pi_1(U)$, so $v$ lies in the invariant subspace of [def-real-weil-representation-operations]. Conversely, for an invariant vector $v$, the map $f_v(a)=av$ is linear and satisfies $g f_v(a)=a(gv)=av=f_v(a)$. The two maps are inverse since $f(a)=af(1)$, and preserve addition and scalars. Combining Steps 3 and 4 gives the asserted canonical identification $s\\mapsto s_{\\bar\\eta}$ from $H^0(U,\\mathcal G)$ to $V^{\\pi_1(U)}$.",
+   "uses": [
+    "def-real-weil-representation-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-sections/p-real-sections.proof.md",
+    "place": "Third and fourth sentences: evaluation at 1 and its inverse"
+   }
+  },
+  {
+   "text": "Write $r:W(U_0)\\to W(C_0)$ for restriction and $\\sigma=\\rho\\circ r$. Clause 2 of [lem-wf-dense-open-pi1-surjective] applies by Steps 1 and 2 and lifts the fixed degree-one $\\gamma\\in W(C_0)$ to a degree-one $\\widetilde\\gamma\\in W(U_0)$. By [lem-wf-weil-group-exact-sequence], $P=\\pi_1(U)$ is the kernel of the degree map. Thus $\\widetilde\\gamma^{-1}g\\widetilde\\gamma\\in P$ for $g\\in P$. For $v\\in V^P$ we have $g\\sigma(\\widetilde\\gamma)v=\\sigma(\\widetilde\\gamma)\\sigma(\\widetilde\\gamma^{-1}g\\widetilde\\gamma)v=\\sigma(\\widetilde\\gamma)v$; the same calculation for the inverse lift proves that $F=\\sigma(\\widetilde\\gamma)=\\rho(\\gamma)$ acts invertibly on $V^P$. On sections the Weil action sends $m:\\mathbf1_U\\to\\mathcal G$ to $\\varphi\\circ\\Phi_U^*m$, identifying $\\Phi_U^*\\mathbf1_U=\\mathbf1_U$. On the stalk, with the transport of [def-wf-fundamental-representation], this is $f\\mapsto\\sigma(\\widetilde\\gamma)\\circ f$: pullback and transport fix the source unit $1$, and the target operator is the one defining $\\sigma(\\widetilde\\gamma)$. Evaluation gives $(\\sigma(\\widetilde\\gamma)\\circ f)(1)=Ff(1)$, proving equivariance. Another lift differs by an element of $P$, which acts trivially on the invariants, so this is the residual action.",
+   "uses": [
+    "lem-wf-weil-group-exact-sequence",
+    "def-wf-fundamental-representation",
+    "lem-wf-dense-open-pi1-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-sections/p-real-sections.proof.md",
+    "place": "Last two sentences: normality, preservation of invariants, and residual Frobenius equivariance"
+   }
   }
  ],
  "proof_deps": [
-  "prop-wf-weil-sheaf-representation-equivalence",
-  "lem-wf-weil-group-exact-sequence"
+  "d-real-setup",
+  "def-weil-pure-dimension",
+  "lem-weil-pbc-separated-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-dimension-bound-open-cover",
+  "def-sc-curves",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sc-smooth-normal",
+  "lem-weil-pbc-base-change-image",
+  "def-pod-lisse-l-adic-sheaves",
+  "cor-galois-lisse-representations",
+  "def-wf-fundamental-representation",
+  "def-real-weil-representation-operations",
+  "lem-wf-weil-group-exact-sequence",
+  "lem-wf-dense-open-pi1-surjective"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-sections/p-real-sections.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-sections/p-real-sections.proof.md",
+  "place": "Entire proof, with the geometric fibre equivalence made explicit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "globalSections.*invariants|invariants.*globalSections|globalSections_eq",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: no global-section/invariant comparison was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of a locally constant l-adic sheaf are invariants under the etale fundamental group",
+   "results": "CategoryTheory.Sheaf.isConstant_of_iso; CategoryTheory.Sheaf.isConstant_iff_mem_essImage; CondensedSet.LocallyConstant.functorFullyFaithful; CompHausLike.LocallyConstant.counit_app_val; CategoryTheory.Sheaf.IsConstant.casesOn; CompHausLike.LocallyConstant.adjunction; LightCondensed.lanLightCondSet; Condensed.lanSheafProfinite",
+   "date": "2026-10-17",
+   "verdict": "no match: constant-sheaf and condensed locally-constant functor results do not compare a lisse etale sheaf with its fundamental-group invariants."
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation.invariants, CategoryTheory.Sheaf",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration contains both notions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a lisse etale sheaf on a connected scheme equal the fundamental group invariants of its geometric fibre, equivariantly for Frobenius",
+   "results": "CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer; CategoryTheory.PreGaloisCategory.endEquivSectionsFibers_π; CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply; CategoryTheory.PreGaloisCategory.endEquivSectionsFibers; CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat; CategoryTheory.PreGaloisCategory.autMulEquivAutGalois_π; CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_symm_fiber; CategoryTheory.PreGaloisCategory.comp_autMap_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern automorphisms of Galois fibre functors, not sections of lisse adic sheaves or Frobenius."
+  },
+  {
+   "tool": "grep",
+   "query": "invariants|trivial",
+   "results": "Mathlib/RepresentationTheory/Character.lean; Mathlib/RepresentationTheory/Character.lean; Mathlib/RepresentationTheory/Character.lean; Mathlib/RepresentationTheory/Character.lean; Mathlib/RepresentationTheory/Character.lean; Mathlib/RepresentationTheory/Induced.lean; Mathlib/RepresentationTheory/Induced.lean; Mathlib/RepresentationTheory/Induced.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: general representation invariants occur, but not the geometric comparison. Read RepresentationTheory/Invariants.lean, especially Rep.invariantsAdjunction at lines 276-290."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of equivariant maps from the trivial representation at one gives invariants, and sections of a local system are equivariant maps",
+   "results": "Rep.invariantsAdjunction; Rep.invariantsAdjunction_homEquiv_apply_hom; Rep.invariantsAdjunction_unit_app; Rep.invariantsFunctor_obj_carrier; Representation.linHom.invariantsEquivRepHom; Rep.linearizationTrivialIso; Representation.linHom.invariantsEquivFDRepHom; Rep.desc",
+   "date": "2026-10-17",
+   "verdict": "no match for the whole item: Rep.invariantsAdjunction (Invariants.lean:276) and its homEquiv formula (line 281) give only the algebraic part. Read them and the normal-subgroup invariants construction at lines 151-182. Step 4 writes the specialization explicitly."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -75,5 +205,59 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-sections"
+ "unit": "sk-p-real-sections",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "p-real-sections",
+  "worker": "stage1",
+  "summary": "Q102 follows the blueprint morphism-from-the-unit route. Verified that the similarly named Lean theorem uses a representation-only definition of global sections and is not an exact attachment. Uses the existing underlying lisse-sheaf equivalence, explicitly calculates evaluation at 1 and Frobenius compatibility, and verifies connectedness and adic coefficient hypotheses. No statement change and no new nodes. Maintainer reader FIX: added Step 1 verifying that the geometric curve is a separated smooth finite-type connected curve of dimension one (hypotheses of the cited curve lemmas), and in Step 2 the density of U_0 in C_0 required by clause 2 of the dense-open Weil-group lemma; steps renumbered.",
+  "blueprint": "All of the sole unit proof paragraph: Steps 1-2 verify the curve hypotheses and connected U; Steps 3-4 identify sections with geometric equivariant maps; Step 5 evaluates at 1; Step 6 proves normality and residual Frobenius equivariance.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Only clause 1 is used as a general curve-geometry tool: the standing smooth connected geometric curve is Noetherian and integral. This unit has no lemma supplying those properties."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Uses its underlying geometric lisse-sheaf fibre equivalence and its unit clause. The Weil-sheaf equivalence of sk-i-real-sheaves alone concerns Weil-equivariant morphisms and does not state the required geometric Hom identification."
+   },
+   {
+    "node": "lem-sc-smooth-normal",
+    "why": "General geometric tool to verify the normality hypothesis of dense-open fundamental-group surjectivity; this sections unit contains no normality lemma."
+   },
+   {
+    "node": "lem-wf-dense-open-pi1-surjective",
+    "why": "Only its Weil-group surjectivity clause is used to lift the already chosen degree-one operator on C_0 to U_0, so the displayed residual action is exactly the item's F. It does not replace the unit's Hom/evaluation proof."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Clause (2) only: smoothness of C_0 is stable under base change to k, needed to apply the curve lemmas to the geometric curve; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-preserved-field-extension",
+    "why": "Krull dimension of a finite-type algebra is unchanged by field extension; used affine-locally to see that the geometric curve C has dimension one, a hypothesis of the curve lemmas; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-bound-open-cover",
+    "why": "Topological bound of the dimension by an open cover, used for dim C <= 1; generic topology, no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-smooth-connected-curve-local-rings",
+  "cor-galois-lisse-representations",
+  "lem-sc-smooth-normal",
+  "lem-wf-dense-open-pi1-surjective",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "lem-weil-pbc-dimension-bound-open-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-4a3a07654",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-4a3a07654 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the unit and blueprint (main-20261015) statement and proof, every cited node's statement, and the delivery-errors list A–F. The statement is verbatim the blueprint's. Small cases check out: rank 0; a geometrically constant line with Frobenius scalar a ≠ 1, where both sides are that line with F acting by a; a nontrivial geometric character; and U0=C0. The worker's switch from the Weil equivalence to cor-galois-lisse-representations clause 2 is correct: taking Weil-equivariant maps would wrongly impose Fv=v. That corollary is already how def-wf-fundamental-representation and prop-wf-weil-sheaf-representation-equivalence are built, so no coefficient categories are silently identified. Step 6 (the old Step 5) gives a correct Frobenius computation: the degree-one lift from clause 2 of the dense-open lemma, normality of π1(U) as the kernel of the degree map, and independence of the chosen lift. Batch-5 check: def-pod-lisse-l-adic-sheaves is a general definition. cor-galois-lisse-representations is the general equivalence between lisse sheaves and π1-representations. Both assumption leaves (nt-assume-poincare-duality, nt-assume-trace-formula) and the item's own existing statement dependencies already reach it, and it was in the closure of both targets before this delivery. lem-wf-dense-open-pi1-surjective reaches the Poincaré-duality chapter only through that corollary. None of the three is a step of Poincaré duality or the trace formula, so all three are accepted. There are no new nodes and no cycle. I accept the four tool uses the worker declared. FIX (one fault, of type E1: hypotheses not checked): clause 2 of the dense-open lemma needs U0 dense in C0, and only U dense in C had been shown. The curve lemmas also need C to be a separated, finite-type, smooth curve of dimension one over k, which was asserted without proof. I added a new Step 1 that proves this from the base-change and dimension lemmas (separated, finite-type, smooth and image base-change lemmas, dimension preserved under field extension, the open-cover dimension bound, sobriety of schemes). I also added U0 dense in C0 to Step 2 (C→C0 is surjective), renumbered the step references, and updated proof_deps and split_report.tool_uses (three new tool uses). The fix is at fixes/dag/nodes/sec-purity-real-sheaves/p-real-sections.json; every other field is unchanged. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
