@@ -13,9 +13,52 @@
   "def-weil-closed-immersion",
   "lem-weil-pbc-reduced-induced-closed-subscheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $T=\\overline{f(|U|)}$. By [lem-weil-pbc-reduced-induced-closed-subscheme], there is a reduced closed subscheme $i_T:T_{\\mathrm{red}}\\to X$ with underlying image $T$. Since $U$ is reduced and $f(|U|)\\subseteq T$, apply [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] to $f$ and $i_T$. It gives a morphism $g:U\\to T_{\\mathrm{red}}$ with $i_T\\circ g=f$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 056B (lemma-scheme-theoretic-image-reduced), proof lines 983-987, citing Schemes Tag 0356 (lemma-map-into-reduction), lines 2268-2289"
+   }
+  },
+  {
+   "text": "Let $z:Z\\to X$ be any closed subscheme through which $f$ factors. Then $f(|U|)\\subseteq z(|Z|)$, and $z(|Z|)$ is closed by [def-weil-closed-immersion]. Hence $T\\subseteq z(|Z|)$. The scheme $T_{\\mathrm{red}}$ is reduced by [lem-weil-pbc-reduced-induced-closed-subscheme]. Apply [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] to $i_T:T_{\\mathrm{red}}\\to X$ and $z$ to obtain a factorization of $i_T$ through $z$. Thus $i_T$ is contained in every closed subscheme through which $f$ factors. Together with Step 1, this is the defining minimality of the scheme-theoretic image.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 056B (lemma-scheme-theoretic-image-reduced), proof lines 983-987, using Schemes Tag 0356 (lemma-map-into-reduction) for the map from T_red"
+   }
+  },
+  {
+   "text": "For a reduced open subscheme U⊂X, take f to be its open immersion. Its underlying image is |U|, and by definition its scheme-theoretic closure is the scheme-theoretic image of this immersion. The first two steps therefore identify that closure with the reduced induced closed subscheme on the topological closure of |U|.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 056B together with the definition of scheme-theoretic closure immediately following it"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 056B (lemma-scheme-theoretic-image-reduced), proof lines 983-987, with its cited Schemes Tag 0356 (lemma-map-into-reduction); definition-scheme-theoretically-dense, clause (1), for the final specialization"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,7 +111,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-subcurve-boundary",
@@ -99,5 +142,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-reduced-scheme-image",
+  "worker": "stage1",
+  "summary": "Split along Stacks Tag 056B and its cited Tag 0356: construct the reduced induced closed subscheme on the image closure; apply the existing reduced-source factorization theorem to f and then to the reduced induced closed subscheme mapping into any other closed factor; specialize to a reduced open immersion. No new nodes or statement changes. Maintainer review repaired the missing 0356 citation in the two original affine arguments.",
+  "blueprint": "Realizes the geometric input noted under lem-trf-local-term-locality: the reduced complementary closure is identified with the scheme-theoretic closure before the nodal closed-subcurve argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Stacks 0356 is the generic reduced-source factorization theorem explicitly cited in the proof of 056B. It supplies factorization and minimality, with no cohomological input and no replacement of the contracting-correspondence route; the item unit has no such scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q25-93c0956ae",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-93c0956ae (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, and unit/chapter route. Repaired C1/C5 by citing the existing Stacks 0356 reduced-source factorization lemma in both factorization and minimality steps. Statement unchanged; no new nodes. Edge cases and dependency checks passed. Accepted tool use and corrected JSON are documented in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

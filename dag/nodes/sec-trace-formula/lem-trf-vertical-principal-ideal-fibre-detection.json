@@ -16,9 +16,91 @@
   "def-weil-irreducible-components",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $U=V\\setminus\\{0\\}$. For every $s\\in U$, multiplication by $s$ on the domain $V$ is injective; [lem-weil-pbc-flat-tensor-exact] applied with the flat $V$-module $B$ makes multiplication by $s$ on $B$ injective. The identifications $V\\otimes_VB=B$ send $a\\otimes b$ to $ab$, with inverse $b\\mapsto1\\otimes b$. Identify $B_K=B\\otimes_VK$ with $U^{-1}B$: the mutually inverse maps are $b\\otimes(a/s)\\mapsto ab/s$ and $b/s\\mapsto b\\otimes(1/s)$. They respect the fraction relation and bilinearity, and their composites fix the displayed generators [def-weil-pbc-module-tensor-product, def-weil-pbc-module-localization]. The localization criterion $b/1=0\\iff sb=0$ for some $s\\in U$ now shows that $B\\to B_K$ is injective.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary application of flat tensor injectivity and the fraction relation; the displayed maps give the tensor/localization identification explicitly."
+   }
+  },
+  {
+   "text": "Fix $h\\in\\{f,g\\}$. Since $h$ is a unit in $B_K=U^{-1}B$, write its inverse as $b/s$ with $b\\in B$, $s\\in U$. The equality $hb/s=1$ means $t(hb-s)=0$ for some $t\\in U$ [def-weil-pbc-module-localization]; Step 1 cancels $t$, giving $hb=s$ in $B$. Multiplication by $b$ is injective: $bx=0$ implies $sx=hbx=0$, hence $x=0$ by Step 1. Consequently the $B$-linear map $i_h:B/hB\\to B/sB$, $x+hB\\mapsto bx+sB$, is well-defined and injective: if $bx=sy=hby$, cancel $b$ to obtain $x=hy$. There is a $B$-linear isomorphism $(V/sV)\\otimes_VB\\cong B/sB$: send $(a+sV)\\otimes x$ to $ax+sB$, and send $x+sB$ back to $(1+sV)\\otimes x$. These maps are well-defined by the quotient and tensor relations, and their composites fix every class and pure tensor [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Explicit denominator equation, cancellation, quotient injection and mutually inverse tensor-quotient maps; no valuation-chain induction."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q$ be minimal over $\\operatorname{Ann}_B(x)$ for an element $x\\in B/hB$; this is what weakly associated means here. Since $i_h$ is $B$-linear and injective, $\\operatorname{Ann}_B(i_h(x))=\\operatorname{Ann}_B(x)$: either annihilation equation implies the other by linearity and injectivity. Thus $\\mathfrak q$ is weakly associated to $B/sB\\cong(V/sV)\\otimes_VB$. Apply [lem-trf-flat-tensor-weakass-fibre] with $R=V$, $S=B$, and $M=V/sV$. Its hypotheses are exactly the assumed finite presentation and flatness of $B$; it requires neither a Noetherian base nor finite generation of ideals of $V$. For $\\mathfrak p=\\mathfrak q\\cap V$, $C=B\\otimes_V\\kappa(\\mathfrak p)$, and the corresponding fibre prime $\\overline{\\mathfrak q}$, it gives $\\overline{\\mathfrak q}=\\operatorname{Ann}_C(z)$ for some $z\\in C$.",
+   "uses": [
+    "lem-trf-flat-tensor-weakass-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IG, lemma-weak-bourbaki-pre, N=B and M=V/sV, forward implication; exact preservation of annihilators by the injection of Step 2."
+   }
+  },
+  {
+   "text": "The fibre $C$ is reduced by the geometric reducedness hypothesis with $L=\\kappa(\\mathfrak p)$. Since $\\overline{\\mathfrak q}=\\operatorname{Ann}_C(z)$ is proper, $z\\ne0$. Also $z\\notin\\overline{\\mathfrak q}$: otherwise $z^2=0$, contradicting reducedness. If a prime $\\mathfrak r$ were contained strictly in $\\overline{\\mathfrak q}$, then $z\\notin\\mathfrak r$, whereas for every $a\\in\\overline{\\mathfrak q}$ one has $az=0\\in\\mathfrak r$; primality would give $a\\in\\mathfrak r$, a contradiction. Hence $\\overline{\\mathfrak q}$ is a minimal prime of $C$. By [lem-weil-pbc-spec-irreducible-components-minimal-primes], $V(\\overline{\\mathfrak q})$ is an irreducible component. The closure of the point $\\overline{\\mathfrak q}$ is $V(\\overline{\\mathfrak q})$ directly from the definition of the closed sets $V(I)$, so this point is its generic point $\\xi$. The fibre-prime bijection [lem-weil-pbc-fibre-ring-primes-bijection] identifies its inverse image with $\\mathfrak q$. Therefore every weakly associated prime of $B/hB$ is one of the primes $\\mathfrak q_\\xi$ in the hypothesis.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-fibre-ring-primes-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary annihilator argument in a reduced ring, followed by the cited minimal-prime/component and fibre-prime statements."
+   }
+  },
+  {
+   "text": "Take $(r,h)$ to be either $(f,g)$ or $(g,f)$, and suppose that $x=r+hB$ is nonzero in $B/hB$. Its annihilator $I$ is proper, since $1x=x\\ne0$. By [lem-weil-pbc-minimal-prime-over-proper-ideal] choose a prime $\\mathfrak q$ minimal over $I$. It is weakly associated to $B/hB$ by the witness $x$, so Steps 3--4 identify it with a fibre-generic prime. The assumed equality of the two localized principal ideals implies $r/1=h(y/u)$ in $B_{\\mathfrak q}$ for some $y\\in B$ and $u\\notin\\mathfrak q$. The fraction relation [def-weil-pbc-module-localization], now for the multiplicative set $B\\setminus\\mathfrak q$, gives $v(ur-hy)=0$ for some $v\\notin\\mathfrak q$. Thus $vu$ annihilates $x$, so $vu\\in I\\subseteq\\mathfrak q$. This contradicts primality because both $u,v\\notin\\mathfrak q$. Therefore $r\\in hB$ for both ordered pairs.",
+   "uses": [
+    "lem-weil-pbc-minimal-prime-over-proper-ideal",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Minimal prime over the annihilator and the explicit fraction equation; this proves detection directly rather than invoking an extra localization-detection lemma."
+   }
+  },
+  {
+   "text": "For $(r,h)=(f,g)$, Step 5 gives $f\\in gB$, hence $fB\\subseteq gB$ by multiplication. For $(r,h)=(g,f)$ it gives the reverse inclusion. Antisymmetry yields $fB=gB$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary multiplication of generators and antisymmetry of ideal inclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-localization",
+  "lem-trf-flat-tensor-weakass-fibre",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "lem-weil-pbc-minimal-prime-over-proper-ideal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05IG (lemma-weak-bourbaki-pre), N=B, M=V/sV, after the explicit embedding B/hB -> B/sB where hb=s. Reduced-fibre minimality and element detection are proved directly in Steps 4--5."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,10 +129,38 @@
    "results": "{\"t\": \"2026-10-17T21:44:08Z\", \"tool\": \"grep\", \"query\": \"associated.*flat|flat.*associated|ValuationRing\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/Inverse.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\", \"Mathlib/RingTheory/Valuation/Integral.lean\", \"Mathlib/RingTheory/Valuation/ValuationRing.lean\", \"Mathlib/RingTheory/Valuation/ValuationRing.lean\"], \"digest\": \"d83153fb70b531a8\"}; Read the signatures: going-down for flat maps, the ordering of ideals of a valuation ring, DVR ideal classification, and unit detection at every stalk do not detect vertical principal ideals at fibre-generic stalks. No match.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Principal ideals generated by elements invertible over the fraction field of a domain are determined at generic points of reduced fibres of a flat finitely presented algebra",
+   "results": "{\"t\": \"2026-10-17T22:28:08Z\", \"tool\": \"leanfinder\", \"query\": \"Principal ideals generated by elements invertible over the fraction field of a domain are determined at generic points of reduced fibres of a flat finitely presented algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.ZariskisMainProperty\", \"mem_principal_ideals_iff\", \"FractionalIdeal.isPrincipal_of_unit_of_comap_mul_span_singleton_eq_top\", \"IsDedekindDomain.isPrincipalIdealRing_localization_over_prime\", \"FractionalIdeal.isPrincipal.of_finite_maximals_of_inv\", \"Ideal.Fiber.exists_smul_eq_one_tmul\", \"IsDedekindDomain.primesOverEquivPrimesOver_apply\", \"instIsPrincipalIdealRingLocalizationAlgebraMapSubmonoidPrimeComplOfIsDedekindDomainOfFiniteOfNeZeroIdeal\"], \"digest\": \"049ae781e75a9c94\"}; Read the returned signatures: principal/fractional ideal classifications, going-down, and valuation-ideal ordering do not assert equality detected only at fibre-component generic primes. Ideal.span_singleton_eq_span_singleton relates equality to associated generators in a domain; B here need not be a domain and that theorem does not perform the required detection. No match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ValuationRing\", \"Ideal\"",
+   "results": "{\"t\": \"2026-10-17T22:28:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"ValuationRing\\\", \\\"Ideal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"ValuationRing.instLinearOrderIdealOfDecidableLE\", \"ValuationRing.le_total_ideal\", \"PreValuationRing.iff_ideal_total\", \"ValuationRing.iff_ideal_total\", \"IsDiscreteValuationRing.toIsPrincipalIdealRing\", \"IsDiscreteValuationRing.instIsHausdorffMaximalIdeal\", \"IsDiscreteValuationRing.irreducible_of_span_eq_maximalIdeal\", \"IsDiscreteValuationRing.idealOrderIsoENat\"], \"digest\": \"ca3c2c5c8060f22d\"}; Read the returned signatures: principal/fractional ideal classifications, going-down, and valuation-ideal ordering do not assert equality detected only at fibre-component generic primes. Ideal.span_singleton_eq_span_singleton relates equality to associated generators in a domain; B here need not be a domain and that theorem does not perform the required detection. No match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "associated.*flat|flat.*associated|ValuationRing",
+   "results": "{\"t\": \"2026-10-17T22:28:09Z\", \"tool\": \"grep\", \"query\": \"associated.*flat|flat.*associated|ValuationRing\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Valuation/Integral.lean\", \"Mathlib/RingTheory/OrderOfVanishing/Noetherian.lean\", \"Mathlib/RingTheory/OrderOfVanishing/Noetherian.lean\", \"Mathlib/RingTheory/OrderOfVanishing/Noetherian.lean\"], \"digest\": \"951f1561238a7701\"}; Read the returned signatures: principal/fractional ideal classifications, going-down, and valuation-ideal ordering do not assert equality detected only at fibre-component generic primes. Ideal.span_singleton_eq_span_singleton relates equality to associated generators in a domain; B here need not be a domain and that theorem does not perform the required detection. No match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality of two principal ideals can be checked at fibre component generic points over a valuation domain when the generators are generically units and fibres are reduced",
+   "results": "{\"t\": \"2026-10-17T22:28:09Z\", \"tool\": \"leansearch\", \"query\": \"Equality of two principal ideals can be checked at fibre component generic points over a valuation domain when the generators are generically units and fibres are reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.span_singleton_eq_span_singleton\", \"FractionalIdeal.spanSingleton_eq_spanSingleton\", \"toPrincipalIdeal_eq_iff\", \"Valuation.Integers.isPrincipal_iff_exists_eq_setOf_valuation_le\", \"FractionalIdeal.spanSingleton.congr_simp\", \"IsDiscreteValuationRing.toIsPrincipalIdealRing\", \"FractionalIdeal.isPrincipal_iff\", \"Valuation.Integers.isPrincipal_iff_exists_isGreatest\"], \"digest\": \"d0f0843e9f7739be\"}; Read the returned signatures: principal/fractional ideal classifications, going-down, and valuation-ideal ordering do not assert equality detected only at fibre-component generic primes. Ideal.span_singleton_eq_span_singleton relates equality to associated generators in a domain; B here need not be a domain and that theorem does not perform the required detection. No match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-smooth-branches-strict-chart",
@@ -89,5 +199,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-vertical-principal-ideal-fibre-detection",
+  "worker": "stage1",
+  "summary": "Retained the full original statement and metadata. Replaced the provisional valuation-quotient child by an explicit six-step argument: inject B into B_K by flatness; write hb=s and embed B/hB in B/sB; apply the sole new statement-only Tag 05IG algebra-base-change lemma; prove minimality on the reduced fibre directly; choose a minimal prime of a nonzero class annihilator and contradict the localized ideal equality. No finite-chain induction or Noetherian hypothesis is used. Retained inherited search records and appended actual logged searches.",
+  "blueprint": "Historical nearby-cycle semistable-alteration branch of lem-trf-local-term-locality, Proof (1)--(2): fibre-generic detection of vertical principal ideals for strict semistable overlaps, through the original ancestry. No replacement of the current unit route is proposed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q86-abb3b7a78",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q86-abb3b7a78 (reviewer sub-agent of L); spot-checked: Read the item, new node, unit/chapter route, required stage documents, delivery errors A–F, cited DAG statements, Stacks Tag 05IG and the Tag 05CB weak-association material. Verified all hypotheses and six proof steps, including tensor/localization identifications, reduced-fibre minimality, fibre-prime correspondence, and the localization contradiction. The new node is a strict Tag 05IG specialization, has no duplicate, records the required Mathlib searches, and uses no SGA or dropped route-pivot machinery. Small edge cases were checked; no repair is needed."
  }
 }
