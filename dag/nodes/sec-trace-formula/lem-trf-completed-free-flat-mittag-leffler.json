@@ -13,9 +13,56 @@
   "def-weil-pbc-flat-ring-map",
   "def-trf-mittag-leffler-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $F=\\bigoplus_{a\\in A}R$ and let $\\iota:\\widehat F\\to R^A$ be the canonical coordinate map. By [lem-trf-completed-free-into-product-universally-injective], for every $R$-module $Q$ the map $Q\\otimes_R\\iota$ is injective. Let $C=\\operatorname{coker}(\\iota)$. By [lem-weil-pbc-tensor-right-exact], tensor products preserve the surjection to the cokernel, so tensoring $0\\to\\widehat F\\xrightarrow{\\iota}R^A\\to C\\to0$ with any $Q$ is exact; hence this is a universally exact short exact sequence.",
+   "uses": [
+    "lem-trf-completed-free-into-product-universally-injective",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DJ proof, first sentence and the universally exact sequence induced by Tag 05BC"
+   }
+  },
+  {
+   "text": "The product module $R^A$ is flat by [lem-trf-product-noetherian-flat-mittag-leffler]. Applying [lem-trf-universally-exact-flat-submodule] to the universally exact sequence from Step 1 gives that $\\widehat F$ is flat over $R$.",
+   "uses": [
+    "lem-trf-product-noetherian-flat-mittag-leffler",
+    "lem-trf-universally-exact-flat-submodule"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DJ proof, middle sentences: Tag 058P applied to the universally exact completion-to-product sequence"
+   }
+  },
+  {
+   "text": "The product module $R^A$ is Mittag-Leffler by [lem-trf-product-noetherian-flat-mittag-leffler]. Applying [lem-trf-pure-submodule-mittag-leffler] to the same universally exact sequence gives that its submodule $\\widehat F$ is Mittag-Leffler. Thus $\\widehat F$ is both flat and Mittag-Leffler, as required.",
+   "uses": [
+    "lem-trf-product-noetherian-flat-mittag-leffler",
+    "lem-trf-pure-submodule-mittag-leffler"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DJ proof, final sentences: Tag 059N applied to the universally exact completion-to-product sequence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-completed-free-into-product-universally-injective",
+  "lem-trf-product-noetherian-flat-mittag-leffler",
+  "lem-trf-pure-submodule-mittag-leffler",
+  "lem-trf-universally-exact-flat-submodule",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05DJ, lemma-completed-direct-sum-ML, proof; expanded through Tags 05BC, 058P, 059N and 05D0."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +101,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-completion-flat-mittag-leffler",
@@ -66,7 +113,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input: the projectivity of S over R (Tag 05FT) used with Tag 05FQ. Supporting proof of Tag 05DP (lemma-flat-pure-over-complete-projective). Second sentence: 'the module N^ is Mittag-Leffler'. Supporting proof of Tag 05DK (lemma-lift-ML): last sentence, applying lemma-completed-direct-sum-ML to the free cover.",
+   "place": "Proof (1)--(2), semistable-alteration input: the projectivity of S over R (Tag 05FT) used with Tag 05FQ. Supporting proof of Tag 05DP (lemma-flat-pure-over-complete-projective). Second sentence: the module N^ is Mittag-Leffler. Supporting proof of Tag 05DK (lemma-lift-ML): last sentence, applying lemma-completed-direct-sum-ML to the free cover.",
    "via": [
     "lem-trf-completion-flat-mittag-leffler",
     "lem-trf-local-flat-pure-complete-projective",
@@ -86,5 +133,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-completed-free-flat-mittag-leffler",
+  "worker": "stage1",
+  "summary": "Split Tag 05DJ into the canonical universally injective map from the completed direct sum to the product, the Noetherian product flat/Mittag-Leffler lemma, and the two inheritance lemmas for flatness and Mittag-Leffler modules in universally exact sequences. The item proof forms the universally exact completion-to-product sequence, then applies the flat-submodule and pure-submodule results. The statement and hypotheses are unchanged. Small cases checked include A empty, A finite, I=(0), I=R, and the zero ring.",
+  "blueprint": "Realizes the ancestor blueprint route at the sentence asserting the completed free module is Mittag-Leffler in Tag 05DP/05DK, with the completed-direct-sum proof of Tag 05DJ expanded into its Tag 05BC, 058P, 059N and 05D0 inputs."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-506279ad3",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-506279ad3 (reviewer sub-agent of L); spot-checked: Full mathematical review completed against Tags 05DJ, 05BC, 058P, 059N, and 05D0. Statements, hypotheses, proof steps, edge cases, citations, DAG acyclicity, and route constraints pass. Review written to review.md. The report mentions a missing citations.json artifact, recorded as a documentation issue only."
  }
 }

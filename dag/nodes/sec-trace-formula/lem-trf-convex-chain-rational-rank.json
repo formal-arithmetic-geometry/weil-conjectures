@@ -2,20 +2,67 @@
  "id": "lem-trf-convex-chain-rational-rank",
  "kind": "statement",
  "title": "Convex subgroup chains are bounded by rational rank",
- "statement": "Let $\\Gamma$ be a totally ordered abelian group, such as the value group attached to a valuation ring of a field [def-weil-field] and put $\\operatorname{rrk}(\\Gamma)=\\dim_{\\mathbf Q}(\\Gamma\\otimes_{\\mathbf Z}\\mathbf Q)\\in\\{0,1,2,\\dots\\}\\cup\\{\\infty\\}$. If $H_0\\subsetneq H_1\\subsetneq\\dots\\subsetneq H_n$ is a strict chain of convex subgroups of $\\Gamma$, then $n\\le\\operatorname{rrk}(\\Gamma)$.",
+ "statement": "Let $\\Gamma$ be a totally ordered abelian group, such as the value group attached to a valuation ring of a field [def-weil-field], and put $\\operatorname{rrk}(\\Gamma)=\\dim_{\\mathbf Q}(\\Gamma\\otimes_{\\mathbf Z}\\mathbf Q)$ [def-trf-rational-rank], with cardinal-valued dimension. If $H_0\\subsetneq H_1\\subsetneq\\dots\\subsetneq H_n$ is a strict chain of convex subgroups of $\\Gamma$ (a subgroup $H$ is convex when $h_1,h_2\\in H$ and $h_1\\le x\\le h_2$ imply $x\\in H$), then $\\operatorname{Cardinal.mk}(\\mathrm{Fin}\\,n)\\le\\operatorname{rrk}(\\Gamma)$.",
  "source": {
   "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
   "place": "§2.1, pp. 7–8, the convex-rank/height consequence of the value-group correspondence, checked alongside Lemma 2.1.2 and Corollary 2.1.3(i) in the author’s v3 PDF online at https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf."
  },
  "stmt_deps": [
-  "def-weil-field"
+  "def-weil-field",
+  "def-trf-rational-rank"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "If n=0 there is nothing to prove. Assume n>0. For each i=1,…,n choose an element x_i∈H_i\\H_{i-1}; replacing x_i by -x_i when necessary, assume x_i>0. This is possible because each strict inclusion supplies a nonzero element and a totally ordered abelian group lets us choose one of an element and its negative that is positive.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Temkin §2.1, pp. 7–8, convex-rank discussion; the element-selection argument is written out here."
+   }
+  },
+  {
+   "text": "The ordered group Γ is torsion-free: if m>0 and mγ=0, then a nonzero γ may be replaced by -γ>0, which gives 0<mγ, a contradiction. More generally, if H is convex, x>0, and m x∈H for some m>0, then 0≤x≤m x and convexity forces x∈H. Thus the image of every x_i in the quotient H_i/H_{i-1} has infinite order.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Temkin §2.1, pp. 7–8, convex-subgroup argument; the torsion-free and convexity details are written out here."
+   }
+  },
+  {
+   "text": "The tensors x_1⊗ 1,…,x_n⊗ 1 are linearly independent over ℚ. Indeed, suppose ∑_i q_i(x_i⊗ 1)=0 with q_i∈ℚ. Clearing denominators gives an integer relation ∑_i a_i x_i=0; because Γ has no nonzero finite-order element, the cited torsion-free rationalization lemma gives injectivity of Γ→Γ⊗_ℤℚ, so this reduction loses no information. If j is the largest index with a_j≠0, then −a_jx_j=∑_{i<j}a_i x_i∈H_{j-1}. Replacing signs if needed, the preceding convexity observation applied to |a_j|x_j forces x_j∈H_{j-1}, contradicting its choice. Hence all a_i, and therefore all q_i, vanish.",
+   "uses": [
+    "lem-trf-torsionfree-rationalization-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Temkin §2.1, pp. 7–8, the convex-rank bound; the linear-independence proof is written out here."
+   }
+  },
+  {
+   "text": "By the definition of rational rank, $\\Gamma\\otimes_{\\mathbf Z}\\mathbf Q$ is a $\\mathbf Q$-vector space whose cardinal dimension is $\\operatorname{rrk}(\\Gamma)$. Step 3 gives a linearly independent family indexed by $\\mathrm{Fin}\\,n$, so [lem-trf-independent-family-cardinal-dimension] shows that its cardinality $\\operatorname{Cardinal.mk}(\\mathrm{Fin}\\,n)$ is at most the cardinal dimension of that vector space. Therefore $\\operatorname{Cardinal.mk}(\\mathrm{Fin}\\,n)\\le\\operatorname{rrk}(\\Gamma)$.",
+   "uses": [
+    "def-trf-rational-rank",
+    "lem-trf-independent-family-cardinal-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Temkin §2.1, pp. 7–8, definition of rational rank and convex-rank consequence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-rational-rank",
+  "lem-trf-torsionfree-rationalization-injective",
+  "lem-trf-independent-family-cardinal-dimension"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
-  "place": "Temkin §2.1, pp. 7–8, convex-rank/height discussion with Lemma 2.1.2 and Corollary 2.1.3(i), checked in the author’s v3 PDF online."
+  "place": "Temkin §2.1, pp. 7–8; direct ordered-group proof of the convex-chain/rational-rank consequence."
  },
  "mathlib_searches": [
   {
@@ -30,7 +77,7 @@
    "query": "ConvexSubgroup rational rank ordered group",
    "results": "0 hits; service reported unknown identifier ConvexSubgroup.",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "unavailable: malformed query (unknown identifier ConvexSubgroup); not evidence of absence"
   },
   {
    "tool": "grep",
@@ -38,10 +85,17 @@
    "results": "1 unrelated hit in Mathlib/Algebra/Order/Nonneg/Module.lean; no convex subgroup chain theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A linearly ordered abelian group has a strict convex subgroup chain of length at most its rational rank",
+   "results": "{\"t\": \"2026-10-17T21:13:07Z\", \"tool\": \"leansearch\", \"query\": \"A linearly ordered abelian group has a strict convex subgroup chain of length at most its rational rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddSubgroup.dense_or_cyclic\", \"LinearOrderedCommGroup.discrete_or_denselyOrdered\", \"AddSubgroup.dense_xor'_cyclic\", \"AddGroup.rank\", \"AddSubgroup.dense_iff_ne_zmultiples\", \"MulArchimedeanClass.subgroup_antitone\", \"FiniteArchimedeanClass.addSubgroup_strictAnti\", \"FiniteArchimedeanClass.ballAddSubgroup_strictAnti\"], \"digest\": \"4c78ef1f7219139a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned Archimedean subgroup and finitely generated group rank results do not state the rational-rank chain bound"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-height-rank",
@@ -53,7 +107,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Temkin §2.1, pp. 7–8: the convex-rank/height discussion surrounding the value-group correspondence, with Lemma 2.1.2 and Corollary 2.1.3(i); checked in the author’s v3 PDF online at https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+   "place": "Temkin §2.1, pp. 7–8: the convex-rank/height consequence of the value-group correspondence, with Lemma 2.1.2 and Corollary 2.1.3(i); this split writes the ordered-group linear-independence argument.",
    "via": [
     "lem-trf-valuation-height-rank",
     "lem-trf-riemann-zariski-finite-refinement",
@@ -69,5 +123,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-convex-chain-rational-rank",
+  "worker": "stage1",
+  "summary": "Corrected the returned finite-range rational-rank statement: rational rank is cardinal-valued, so the conclusion is the cardinal inequality Cardinal.mk(Fin n) ≤ rrk(Γ). The proof now compares the independent Fin n-indexed family with cardinal dimension and remains valid for uncountable rational rank. The existing definition node is cited in the statement and final step; no new node is needed. Maintainer source review: made convexity explicit, cited the cardinal-dimension independent-family leaf in Step 4, and supplied the missing LeanSearch record; no hypothesis or conclusion weakened.",
+  "blueprint": "Realizes the ancestor blueprint's Temkin §2.1 convex-rank/height sentence: strict chains of convex subgroups inject into independent directions of the rationalized value group."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q50-1d3521515",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q50-1d3521515 (reviewer sub-agent of L); spot-checked: Read the full packet, item, cited nodes, unit route, Temkin source at §2.1 pp. 7–8, and Mathlib declarations. The convex-chain proof is correct in all steps, including torsion-free rationalization, largest-index contradiction, cardinal dimension, and edge cases. The independent-family node is an exact Mathlib specialization; the torsion-free node is correctly statement-only. Temkin supplies context rather than the exact lemma, which is explicitly agent-written and fully expanded. No duplicate, circular split, route-pivot violation, SGA citation, or repair is needed."
  }
 }
