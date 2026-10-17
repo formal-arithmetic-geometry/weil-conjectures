@@ -10,9 +10,62 @@
  "stmt_deps": [
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=(B\\times C)\\amalg_{A\\times C}(A\\times D)$ and write $k:P\\to B\\times D$ for the displayed map. In degree $n$, injectivity of $a_n,b_n$ identifies the two summands with subsets of $B_n\\times D_n$. Their intersection is precisely the image of $A_n\\times C_n$: an equality $(x,b_n(c))=(a_n(t),y)$ forces $x=a_n(t)$ and $y=b_n(c)$, with unique $t,c$. Consequently the set pushout is their union, and $k_n$ is its inclusion. These identifications commute with every simplicial operator, so $k$ is degreewise injective, hence a cofibration by [lem-coef-joyal-model-structure].",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1(C); elementary degreewise union computation of the cartesian pushout product."
+   }
+  },
+  {
+   "text": "We first derive the needed product preservation, rather than assume the cartesian model axiom. For any simplicial set $K$ and any quasicategory $Q$ in a sufficiently large test universe, [lem-coef-joyal-functor-equivalence-test] says $\\operatorname{Fun}(K,Q)$ is a quasicategory. There is a natural simplicial isomorphism $\\operatorname{Fun}(X\\times K,Q)\\cong\\operatorname{Fun}(X,\\operatorname{Fun}(K,Q))$: a simplex on either side is the same map $X\\times K\\times\\Delta^n\\to Q$, after permuting factors. Explicitly the forward map sends $f$ to the map whose value on $x\\in X_m$, $t:[m]\\to[n]$ is the simplex $K\\times\\Delta^m\\to Q$ given by $(z,s:[r]\\to[m])\\mapsto f_r(X(s)x,z,ts)$; evaluation at the identity simplex gives the inverse. Thus the isomorphism commutes with restriction in $X$. If $v:X\\to Y$ is a categorical equivalence, testing it on the quasicategory $\\operatorname{Fun}(K,Q)$ makes the homotopy-category restriction for $v\\times\\mathrm{id}_K$ an equivalence, by [lem-coef-joyal-model-structure]. Since this holds for every $Q$, that same node identifies $v\\times\\mathrm{id}_K$ as a categorical equivalence. No fibrancy or nonemptiness of $K,X,Y$ was used.",
+   "uses": [
+    "lem-coef-joyal-functor-equivalence-test",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.5.4, printed p.92 / PDF page 110; agent proof via the hFun testing definition and explicit currying, in place of the source rigidification argument."
+   }
+  },
+  {
+   "text": "Assume $a$ is a categorical equivalence. Step 2 gives categorical equivalences $a\\times\\mathrm{id}_C$ and $a\\times\\mathrm{id}_D$; both are degreewise injective, hence trivial cofibrations by [lem-coef-joyal-model-structure]. Let $u:A\\times D\\to P$ be the pushout of $a\\times\\mathrm{id}_C$ along $\\mathrm{id}_A\\times b$. We verify directly that $u$ is a trivial cofibration using that node's weak factorization system. Given a Joyal fibration $p:E\\to F$ and a square from $u$ to $p$, restrict its lower map along $B\\times C\\to P$ and its upper map along $A\\times C\\to A\\times D$. They form a square from $a\\times\\mathrm{id}_C$ to $p$. A lift $B\\times C\\to E$ exists because that map is a trivial cofibration. Its restriction on $A\\times C$ agrees with the given map $A\\times D\\to E$. The pushout universal property therefore gives a map $P\\to E$ extending both maps. Its composite with $p$ is the specified map $P\\to F$, since they agree on both summands. This solves every lifting square for $u$ against every Joyal fibration. The converse lifting characterization in [lem-coef-joyal-model-structure] makes $u$ a trivial cofibration, in particular a categorical equivalence.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1 and Corollary 2.2.5.4; elementary cobase-change lifting argument written out."
+   }
+  },
+  {
+   "text": "The composite $k\\circ u$ is $a\\times\\mathrm{id}_D$, as checked on $(t,d)\\in A_n\\times D_n$ in every degree. Both $u$ and $k\\circ u$ are categorical equivalences by steps 2-3, so two-out-of-three in [lem-coef-joyal-model-structure] makes $k$ a categorical equivalence. If instead $b$ is a categorical equivalence, interchange $(A,B,a)$ with $(C,D,b)$ and use the same argument. The flip $(x,y)\\mapsto(y,x)$ identifies both product targets and both pushout diagrams, hence identifies the resulting pushout-product map with $k$ up to simplicial isomorphism. Such isomorphisms induce isomorphisms of all the testing categories, so preserve categorical equivalences. All products and pushouts used to form $P,k,u$ are degreewise finite products, disjoint unions and quotients of small sets, hence stay in the input universe. The auxiliary test $Q$ and its functor simplicial sets may lie in any sufficiently large universe, exactly as permitted in the categorical-equivalence definition; they change none of these constructions.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.5.4 with Theorem 2.2.5.1: two-out-of-three, symmetry and universe bookkeeping."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-functor-equivalence-test"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Corollary 2.2.5.4 and Theorem 2.2.5.1 read online; explicit hFun-currying proof of product preservation and direct pushout lifting argument. Archive unavailable in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +108,45 @@
    "results": "0 hit(s): ",
    "date": "2026-10-17",
    "verdict": "no match: read the hits. SSet cartesian monoidal structures assert ordinary products, all-horn Quillen fibrations concern the Kan model structure, wide-pushout shape equivalences concern ordinary indexing categories, and ModelCategory/JoyalTrick.lean:13-21,40-69 is the generic model-axiom trick, not the Joyal model structure or its cartesian axiom. None specializes to the stated categorical-equivalence pushout product."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the Joyal model structure on simplicial sets, the pushout product of two monomorphisms is a categorical equivalence if either factor is a categorical equivalence",
+   "results": "{\"t\": \"2026-10-17T04:14:14Z\", \"tool\": \"leanfinder\", \"query\": \"In the Joyal model structure on simplicial sets, the pushout product of two monomorphisms is a categorical equivalence if either factor is a categorical equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.instIsStableUnderCoproductsMonomorphismsOfHasCoproductsType\", \"SSet.modelCategoryQuillen.cofibration_iff\"], \"digest\": \"eb184e344bb8e7a9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the Kan/Quillen model, ordinary cartesian structures, generic model axioms or indexing-category equivalences; none asserts the unmarked Joyal categorical-equivalence pushout-product clause."
+  },
+  {
+   "tool": "grep",
+   "query": "Joyal|categoricalEquivalence|categoricalFibration",
+   "results": "{\"t\": \"2026-10-17T04:14:22Z\", \"tool\": \"grep\", \"query\": \"Joyal|categoricalEquivalence|categoricalFibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\"], \"digest\": \"feb76b4d9aa0d6fc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the Kan/Quillen model, ordinary cartesian structures, generic model axioms or indexing-category equivalences; none asserts the unmarked Joyal categorical-equivalence pushout-product clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian Joyal model structure pushout product of trivial cofibration with a monomorphism",
+   "results": "{\"t\": \"2026-10-17T04:14:23Z\", \"tool\": \"leansearch\", \"query\": \"Cartesian Joyal model structure pushout product of trivial cofibration with a monomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.trivialCofibrations\", \"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.mem_trivialCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.mono_of_cofibration\"], \"digest\": \"8e70a61527821291\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the Kan/Quillen model, ordinary cartesian structures, generic model axioms or indexing-category equivalences; none asserts the unmarked Joyal categorical-equivalence pushout-product clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushout\", \"equivalence\"",
+   "results": "{\"t\": \"2026-10-17T04:14:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"pushout\\\", \\\"equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.WidePushoutShape.equivalenceOfEquiv\", \"CategoryTheory.Limits.WidePushoutShape.uliftEquivalence\", \"CategoryTheory.Limits.WidePushoutShape.equivalenceOfEquiv_functor_obj_none\", \"CategoryTheory.Limits.WidePushoutShape.equivalenceOfEquiv_functor_obj_some\", \"CategoryTheory.Limits.WidePushoutShape.equivalenceOfEquiv_functor_map_init\", \"CategoryTheory.Limits.Types.Pushout.equivalence_rel'\", \"CategoryTheory.EffectiveEquivalenceRelation.isPushout\"], \"digest\": \"c4103f098322200f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the Kan/Quillen model, ordinary cartesian structures, generic model axioms or indexing-category equivalences; none asserts the unmarked Joyal categorical-equivalence pushout-product clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian products with an arbitrary simplicial set preserve categorical equivalences and Joyal trivial cofibrations are stable under pushout",
+   "results": "{\"t\": \"2026-10-17T04:14:24Z\", \"tool\": \"leanfinder\", \"query\": \"Cartesian products with an arbitrary simplicial set preserve categorical equivalences and Joyal trivial cofibrations are stable under pushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.instIsStableUnderCobaseChangeMonomorphisms\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"SSet.instCartesianMonoidalCategory\", \"SSet.modelCategoryQuillen.fibrations_eq\"], \"digest\": \"23e5d9da32344690\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the Kan/Quillen model, ordinary cartesian structures, generic model axioms or indexing-category equivalences; none asserts the unmarked Joyal categorical-equivalence pushout-product clause."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-operadic-mapping-cylinder",
@@ -85,5 +173,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-joyal-cartesian-pushout-product",
+  "worker": "stage1",
+  "summary": "Kept the statement and source route; proved degreewise injectivity by the intersection/union calculation, product preservation by hFun testing and explicit currying, and the categorical-equivalence clause by a cobase-change lift and two-out-of-three. Reused the existing functor-equivalence-testing node; no new nodes.",
+  "blueprint": "Realizes the assigned blueprint.from place: the strict relative restriction supporting the symmetric operadic mapping-cylinder construction, beneath prop-coef-integral-exceptional-adjoint proof paragraph 2. This is a generic Joyal-model tool inside the existing unit, not a change to the biduality route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-b4b9e8232",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-b4b9e8232 (reviewer sub-agent of L); spot-checked: Read the item in full, both cited statements (lem-coef-joyal-model-structure, lem-coef-joyal-functor-equivalence-test), the report and the A–F checklist. The statement is unchanged and correct (HTT Thm 2.2.5.1 and Cor 2.2.5.4; HTT is not archived, so I could not check the printed page). I tested it on small cases: identities, empty A and C, and {0}->J against the boundary inclusion of Delta^1. Step 1: the two images meet exactly in a(A_n)xb(C_n), so the set pushout is their union; this is elementary. Step 2: I checked the currying isomorphism Fun(XxK,Q) = Fun(X,Fun(K,Q)) and its naturality in X. Fun(K,Q) is a quasicategory by the cited quasicategory clause applied to id_K with K small, and the hFun test then gives that vx id_K is a categorical equivalence. Step 3: u is the cobase change of the trivial cofibration ax id_C. I checked the explicit lift, the gluing through the pushout and both triangles; the model-structure statement makes the trivial cofibrations exactly the maps with the left lifting property against fibrations. Step 4: k∘u = ax id_D, so two-out-of-three gives k; the b case follows by the flip isomorphism. No new nodes and no tool_uses; both cited nodes are in unit sk-prop-sf-biduality-general. proof_deps equals the union of the step uses. Neither cited node depends on the item, so there is no cycle. No duplicate: lem-coef-inner-anodyne-pushout-product is the weaker inner-anodyne version, and lem-coef-joyal-homotopy-exponentials concerns the homotopy category. Mathlib has no Joyal model structure (only JoyalTrick.lean). No fixes."
  }
 }
