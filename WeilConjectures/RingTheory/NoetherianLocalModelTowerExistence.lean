@@ -40,7 +40,7 @@ Proof:
    localized presentations over `P` and `Q` by composition with these equivalences.
    The module remains in `Type t`, with the transported top-ring action. A finite
    presentation supplies a finite matrix whose cokernel is the module.
-2. Apply `WeilConjectures.limit_tower_essentially_finite_presentation` to the lifted
+2. Apply `RingHom.limit_tower_essentially_finite_presentation` to the lifted
    tower and this matrix. Its rings are essentially of finite type successively over
    the integers, hence Noetherian: finite type algebras over Noetherian rings are
    Noetherian, as are their localizations. Restrict stage-module actions along the two
@@ -135,7 +135,7 @@ theorem exists_noetherian_localModelTower
   have hM : Nonempty (((Fin n → T₁) ⧸ LinearMap.range H) ≃ₗ[T₁] M) := by
     rw [hH]
     exact ⟨e.symm⟩
-  have hlimit := WeilConjectures.limit_tower_essentially_finite_presentation
+  have hlimit := RingHom.limit_tower_essentially_finite_presentation
     α β P W f hf hS Q V g hg hT M m n H hM
   exact noetherian_localModelTower_of_categoricalLimit R S S' M m n hlimit
 
