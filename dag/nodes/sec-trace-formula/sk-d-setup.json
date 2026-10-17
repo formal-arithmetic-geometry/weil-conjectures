@@ -229,5 +229,23 @@
   "group": "Q46",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-b56929dee (reviewer sub-agent of L); spot-checked: I read the definition sk-d-setup in full against the source, main-20261015 sec-trace-formula/sk-d-setup/_section.md order 2610, and diffed it with master order 2266. I also read all 23 statement dependencies, the cross-check nodes thm-sf-ctf-stability, def-weil-derived-direct-image, def-weil-compact-support-candidate, def-weil-compactifications-refinements and def-weil-constructible-subset, the citers sk-d-six, sk-d-corr, sk-d-operator and sk-d-weil, and the slopmaster2 GeometricCoefficients structure in Defs.lean. All other clauses match the source: the coefficient datum, geometric schemes and maps, dimension, reduction, universal homeomorphisms, the ordinary pro-etale D(X,A), D^b_ctf as bounded constructible plus Stacks 08FZ Tor amplitude (the same subcategory as def-weil-finite-tor-amplitude where l is invertible), and Perf(R) (Stacks 0657, read). The one change is an established E7 source error, and I confirmed it independently. The closed immersion Spec k -> Spec k[x1,x2,...] at m is finite type and proper (Stacks morphisms lemma-immersion-locally-finite-type and lemma-closed-immersion-proper), so it is compactifiable with j=id. Its Ri_!A = i_*A is not constructible: a constructible set (Stacks 005G) containing m also contains p_N=(x1..xN), and going-down along a flat cover contradicts local constancy. The repair restricts the pullback and Rf_! stability requirements to geometric schemes and k-maps. That is exactly the scope of the GeometricCoefficients fields (IsGeometricHom) and of thm-sf-ctf-stability (i),(iv), so the requirements are true. sk-d-setup is not a target, and no target is weakened. Rf_! is the chosen-compactification composite R fbar_* j_!, consistent with def-compact-support-direct-image-detailed and def-weil-compact-support-candidate. Compactification independence is claimed only on the etale-origin subcategory. j_! is applied termwise through exactness and Stacks 015F (read). Requiring the compactification to be geometric loses no case. Edge cases checked: a point with f=id, the empty scheme, open and proper maps, and A=Z/l^2 with M=Z/l, which has infinite Tor amplitude and is excluded, so the finite-Tor condition is not vacuous. The statement dependencies are acyclic. There are no new nodes, no tool uses and no SGA citations. No citer breaks: each supplies its own operation data outside the geometric case. No fixes. Maintenance notes for the maintainer, not faults of this delivery: def-pc-perfect-ring-complex should cite Tag 0657 instead of 0A1U; the unit record's source still points to master; HUMAN.md should record the disputed all-scheme clause."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-107fe8d4c",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Read the node (main-20261015 sk-d-setup order 2610, with the reviewed geometric-scope correction), every statement dependency and the exact declarations used. finiteTorConstructible = intrinsicFiniteTorsionConstructible ⊓ HasFiniteProEtaleTorAmplitude. sfIntrinsicDerivedPullback is the ordinary pullback. sfIntrinsicCompactSupport = (j_!).mapDerivedCategory ⋙ R g_*. Compactification gives a proper g and an open immersion i; Z is geometric via g ≫ Y.hom. All clauses match with no stronger assumptions: IsTriangulated ∧ IsClosedUnderIsomorphisms, pullback preservation for all geometric k-maps, Rf_! preservation for actual chosen compactifications, documented conventions for products, dimension, reduction, universal homeomorphisms and Perf. Universes are parametric in u. Edge cases checked: empty scheme, n=0 excluded, id/open/proper maps. The upstream GeometricCoefficients is strictly stronger and was correctly rejected. The delivery adds only the lean record to the node; the statement occurs verbatim in the file; the report has both sections. nt_compile.py (json mode, private overlay) gave rc=0, 20 overlay modules, no errors or warnings. No findings, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TraceFormulaCoefficientSetup",
+  "declaration": "WeilConjectures.TraceFormulaCoefficientSetup",
+  "file": "lean/Sheaf/Paper/TraceFormulaCoefficientSetup.lean",
+  "statement": "def TraceFormulaCoefficientSetup (F : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ F.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) : Type _",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

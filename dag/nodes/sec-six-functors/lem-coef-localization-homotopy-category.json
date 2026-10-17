@@ -30,7 +30,8 @@
   "place": "Theorem 1.6.6 and Corollary 1.6.8 (printed pp. 24-25), Remarks 7.1.4 and 7.1.6 (printed pp. 324-325). Read online 2026-10-17; not archived in literature/. No Stacks tag states this quasicategorical comparison."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-localization-interface"
  ],
  "proof": [
   {
@@ -295,5 +296,29 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-28f18cc40 (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps, the new leaf, and the statements of all 5 cited nodes (mapping-composition, pinch-comparison, kan-realization-serre, def-cbc-enhanced-diagrams-cones, cbc cone-calculus), plus the parent citer, the unit record and the main-20261015 ancestor proof. Statement correction ('degenerate short side'): right. Under the old wording, in N(BZ) the 2-simplex (1,-1; long edge 0) would make 1~-1. The correction adds no hypothesis and keeps every conclusion, and the parent's use (steps 3,4,8,9) is unaffected. Step 1: the degree-1 right-pinched simplex has its 01 edge degenerate at x, so Map components give exactly the short-side relation; the other short side gives the same quotient by [id][u]=[w]. Steps 2-4: tau X=hX, the degreewise identification Fun(S,ND)=N Fun(tau S,D), and h of a coherent equivalence (square a x Delta^1) all hold. Step 5 gives the ordinary universal property including natural transformations. Step 6 is the word construction. Step 7: essential surjectivity via the full essential image L_0, r and faithful lifting; checked the empty case, C=[1] with all arrows inverted, and BN with all arrows inverted (hL=BZ). Step 8 gives naturality. All uses are in proof_deps, and the closure (121 nodes) is acyclic. New leaf lem-coef-homotopy-category-nerve-adjunction: verified in Mathlib NerveAdjunction.lean (nerveAdjunction l.393, isIso_counit l.409, nerveFunctorCompHoFunctorIso l.414, hoFunctor.isIso_prodComparison for arbitrary SSet l.463, preservesBinaryProducts l.479) and in HomotopyCat.lean (HoRel2 l.224, hoFunctor l.526). It matches clause by clause, has no proof, is self-contained, and its searches are logged. A whole-DAG duplicate scan found no existing nerve adjunction or product statement; joyal-model-structure, edge-triangle-presentation, triangle-calculus and others differ. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, only for Fun(K,C) and its full subcategories being quasicategories (step 7). Cisinski is not archived, so I could not check it at the cited place; the proof is marked by:agent with WANTED, and I checked all the mathematics directly. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f5cf9e184",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Read the node, both stmt deps (def-cbc-enhanced-diagrams-cones, def-coef-coherent-localization-interface: FiniteReedy.IsLocalization/Inverts/localDiagrams/largeNerve), the module, the report (Worker report + Second reading by Q59 present) and the Mathlib HomotopicL/R, homMk, nerveFunctorCompHoFunctorIso and nerveMap definitions. Each clause matches: short-side homotopy as EqvGen of HomotopicL or HomotopicR; equivalence edge iff IsIso; wide subcategory as W.IsMultiplicative; the existing coherent-localization interface reused through the canonical uliftFunctorTrivial isomorphism with the same q; essential surjectivity by an equivalence edge from q(c) to z; Functor.IsLocalization plus an equivalence to W.Localization commuting with q; naturality for LocalizerMorphism by a coherent lift and a unique normalized comparison beta (checked true and well-typed). Small C in universe u follows the node's 'enlarge universes so C is small'. Edge cases checked: empty C or L, W identities or all arrows, short-side check in N(BZ). No hollow definition, both proofs exactly sorry, source and blueprint docstrings carry all 8 steps, statement verbatim, declarations listed. The nt_compile per-file compile of the snapshot module is clean (1.8 s, exit code 0). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalizationHomotopyCategory",
+  "declaration": "SSet.Enhanced.localization_homotopy_category",
+  "declarations": [
+   "SSet.Enhanced.homotopyLocalizationFunctor",
+   "SSet.Enhanced.homotopy_category_description",
+   "SSet.Enhanced.localization_homotopy_category"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LocalizationHomotopyCategory.lean",
+  "statement": "theorem localization_homotopy_category {C : Type u} [Category.{u, u} C] (W : MorphismProperty C) [W.IsMultiplicative] {L : SSet.{u}} [Quasicategory L] (q : nerve C ⟶ L) (hq : HomotopicalAlgebra.FiniteReedy.IsLocalization.{u, u, u} W (((Functor.isoWhiskerLeft (nerve C) CategoryTheory.uliftFunctorTrivial) ≪≫ (nerve C).rightUnitor).hom ≫ q)) : (∀ (z : L _⦋0⦌), ∃ (c : C) (e : L _⦋1⦌), L.δ 1 e = q.app (op ⦋0⦌) (ComposableArrows.mk₀ c) ∧ L.δ 0 e = z ∧ IsEquivalenceEdge L e) ∧ (∃ (e : SSet.hoFunctor.obj L ≌ W.Localization) (α : Functor.comp (homotopyLocalizationFunctor q) e.functor ≅ W.Q), Functor.IsLocalization (homotopyLocalizationFunctor q) W ∧ (∀ {C' : Type u} [Category.{u, u} C'] (W' : MorphismProperty C') [W'.IsMultiplicative] {L' : SSet.{u}} [Quasicategory L'] (q' : nerve C' ⟶ L') (_hq' : HomotopicalAlgebra.FiniteReedy.IsLocalization.{u, u, u} W' (((Functor.isoWhiskerLeft (nerve C') CategoryTheory.uliftFunctorTrivial) ≪≫ (nerve C').rightUnitor).hom ≫ q')) (e' : SSet.hoFunctor.obj L' ≌ W'.Localization) (α' : Functor.comp (homotopyLocalizationFunctor q') e'.functor ≅ W'.Q) (T : LocalizerMorphism W W'), (∃ F : L ⟶ L', AreNaturallyEquivalent (q ≫ F) (nerveMap T.functor ≫ q') ∧ Nonempty (Functor.comp (homotopyLocalizationFunctor q) (SSet.hoFunctor.map F).toFunctor ≅ Functor.comp T.functor (homotopyLocalizationFunctor q'))) ∧ (∀ (F : L ⟶ L') (δ : Functor.comp (homotopyLocalizationFunctor q) (SSet.hoFunctor.map F).toFunctor ≅ Functor.comp T.functor (homotopyLocalizationFunctor q')), ∃! β : Functor.comp (SSet.hoFunctor.map F).toFunctor e'.functor ≅ Functor.comp e.functor (T.localizedFunctor W.Q W'.Q), ∀ c : C, β.hom.app ((homotopyLocalizationFunctor q).obj c) ≫ (T.localizedFunctor W.Q W'.Q).map (α.hom.app c) ≫ (Localization.Lifting.iso W.Q W (Functor.comp T.functor W'.Q) (T.localizedFunctor W.Q W'.Q)).hom.app c = e'.functor.map (δ.hom.app c) ≫ α'.hom.app (T.functor.obj c))))",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Second reading: reuse HomotopicalAlgebra.FiniteReedy.IsLocalization through the canonical trivial universe-lift isomorphism; no second coherent-localization definition. The first theorem identifies the existing path presentation with edge homotopy and detects equivalence edges. The main theorem restores multiplicativity of W, essential surjectivity, the comparison under C, the ordinary localization predicate, coherent lifts of functors of pairs, and the unique ordinary comparison with prescribed restriction, including identity/composition compatibility by uniqueness."
  }
 }

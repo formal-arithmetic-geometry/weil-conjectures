@@ -28,7 +28,10 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-category-of-spaces"
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-infinity-presheaf-yoneda",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-slice-arrow-equivalence"
  ],
  "proof": [
   {
@@ -230,5 +233,31 @@
   "group": "Q127",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-49c2c57fe (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the full statements of its 10 proof_deps and 2 stmt_deps. The statement is unchanged and is HTT 5.1.5.3 for the replete Yoneda image; step 3 proves the replete slice equivalent to HTT's pullback slice, so nothing is weakened. HTT is not archived: there is a WANTED line and proof_origin is agent. No SGA source is used. Step 1: transport gives small classifiers and essentially small mapping spaces, yoneda-presheaf-limits gives full faithfulness, and full-essential-image gives D ≃ A. Step 2: slice-right-fibration with transport's join-slice and pullback clauses and yoneda-evaluation make B classify F; s is an equivalence by the componentwise criterion. Step 3: the morphism-space formula plus homotopy-pullback invariance gives full faithfulness. I re-did the Λ^1_1 lift and the two Λ^2_2 lifts that make the lifted edge invertible ([f]=[k], so [g][f]=1). Step 4: the sections calculation has an exact middle exponential isomorphism, the coherent-nerve and transport comparisons are cited, and the elementary marking is acceptable. Step 5: the variance and the identification of the comparison map induced by α are correct; the colimit criterion of yoneda-presheaf-limits concludes. Step 6: restriction along e is a functor equivalence, so the universal property passes to δ_F in the larger universe. Small cases checked: D empty, D a point (A_{/F} ≃ F, with disconnected or looped F), F empty, F representable. No new nodes. No duplicate: space-yoneda-density, free-cocompletion, pointwise-lan, accessible-compact-slice-density and presentable-canonical-density all state something else. No cycle (closure of 381 nodes). The two sk-prop-sf-cbc nodes, functor-cone-calculus and right-fibration-morphism-space, are off this unit's route and accepted as declared generic tool_uses. Mathlib searches are recorded with no match. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9baae2ef",
+  "group": "Q80",
+  "result": "fix",
+  "note": "Read the node, the 5 stmt_deps declarations (coconeCategory/IsColimiting/IsFunctorEquivalence, infinityCategory, infinityPresheaves/infinityYoneda, fullEssentialImage, rightVertexSlice/rightVertexSliceProjection/sliceArrowPrism), the module, and the report (real Worker report and Second reading by Q80 sections). Every clause is exact: U-small quasicategory D; P(D); the actual Yoneda; the replete full image A; the literal (n+1)-simplex right slice and its pullback A_{/F}; essential smallness as IsFunctorEquivalence from ulift E with E : SSet.{u} a quasicategory; the canonical cocone fixed uniquely on every simplex by the prism equation (naturality checked, so it exists), with apex F and IsColimiting. Edge cases D empty, D a point, F empty, F representable are fine. No extra assumptions, sorry only, docstrings complete, statement field verbatim. nt_compile --json rc 0 with no errors or warnings. F1 (H9 / stage-2 import rule): the proof dependency lem-coef-infinity-yoneda-evaluation landed at 10:48, after the 10:42 delivery, and its module Sheaf.CategoryTheory.InfinityYonedaEvaluation was not imported. fixes/PresheafRepresentableSliceDensity.lean adds the private import and compiles cleanly; fixes/<item>.report.md updates the stale sentence about it. No mathematical findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PresheafRepresentableSliceDensity",
+  "declaration": "SSet.Enhanced.infinity_presheaf_representable_slice_density",
+  "declarations": [
+   "SSet.Enhanced.infinityRepresentableImage",
+   "SSet.Enhanced.infinityRepresentableSlice",
+   "SSet.Enhanced.infinityRepresentableSliceProjection",
+   "SSet.Enhanced.infinityRepresentableCoconeMap",
+   "SSet.Enhanced.infinity_presheaf_representable_slice_density"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PresheafRepresentableSliceDensity.lean",
+  "statement": "theorem infinity_presheaf_representable_slice_density (D : SSet.{u}) [Quasicategory D] : ∀ F : (CategoryTheory.Spaces.infinityPresheaves D) _⦋0⦌, (∃ (E : SSet.{u}) (_hE : Quasicategory E) (e : SSet.uliftFunctor.{u + 1, u}.obj E ⟶ infinityRepresentableSlice D F), IsFunctorEquivalence e) ∧ ∃ δ : (coconeCategory (infinityRepresentableSliceProjection D F)) _⦋0⦌, δ.1.1 = F ∧ (∀ (n : ℕ) (s : (infinityRepresentableSlice D F) _⦋n⦌), (𝟙 Δ[1] ⊗ₘ SSet.yonedaEquiv.symm s) ≫ infinityRepresentableCoconeMap D F δ = sliceArrowPrism n ≫ SSet.yonedaEquiv.symm (((pullback.snd (infinityRepresentableImage D).ι (rightVertexSliceProjection (CategoryTheory.Spaces.infinityPresheaves D) F)).app (op ⦋n⦌) s).val)) ∧ IsColimiting (infinityRepresentableSliceProjection D F) δ",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Second reading: uses the published coherent presheaf/Yoneda construction, its full essential image, and the existing exact right vertex slice. The cocone is determined on every slice simplex by the canonical prism formula; no arbitrary Yoneda map or arrow-comma replacement is assumed. All available recorded proof dependencies are imported privately unless needed by the statement."
  }
 }
