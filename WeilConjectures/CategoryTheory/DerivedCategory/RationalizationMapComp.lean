@@ -143,12 +143,11 @@ lemma mapOfRingHomCompIso_assoc (e₁₂ : F₁ ⋙ F₂ ≅ F₁₂) (e₂₃ :
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
     Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Category.id_comp] at hX
+  have conj : ∀ {G G' : Rationalization M₂ C₂ ⥤ Rationalization M₄ C₄} (α : G ⟶ G')
+      {X Y : Rationalization M₂ C₂} (e : X ≅ Y), α.app X = G.map e.hom ≫ α.app Y ≫ G'.map e.inv :=
+    fun α e ↦ by simp
   ext1
   refine Localization.natTrans_ext (Q M₁ C₁) (W M₁ C₁) (fun X ↦ ?_)
-  let L₁ := Localization.Lifting.iso (Q M₁ C₁) (W M₁ C₁) (F₁ ⋙ Q M₂ C₂)
-    (mapOfRingHom ψ₁ hM₁ F₁ hF₁)
-  have n₂₃ := (mapOfRingHomCompIso ψ₂ hM₂ F₂ hF₂ ψ₃ hM₃ F₃ hF₃ ψ₂₃ hM₂₃ F₂₃ hF₂₃ e₂₃).hom.naturality
-    (L₁.hom.app X)
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
     Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Category.id_comp]

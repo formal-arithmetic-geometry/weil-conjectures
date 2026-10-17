@@ -345,6 +345,77 @@ lemma derivedCompleteRationalScalarExtensionCompIso_hom_app_fromIntegral
 
 end Rational
 
+section Cocycle
+
+variable (l : ℕ) [Fact l.Prime] (E L M N : Type w) [Field E] [Field L] [Field M] [Field N]
+  [Algebra E (PadicAlgCl l)] [Algebra L (PadicAlgCl l)] [Algebra M (PadicAlgCl l)]
+  [Algebra N (PadicAlgCl l)] [Algebra E L] [Algebra L M] [Algebra E M] [Algebra M N]
+  [Algebra L N] [Algebra E N] [IsScalarTower E L (PadicAlgCl l)]
+  [IsScalarTower L M (PadicAlgCl l)] [IsScalarTower E M (PadicAlgCl l)]
+  [IsScalarTower M N (PadicAlgCl l)] [IsScalarTower L N (PadicAlgCl l)]
+  [IsScalarTower E N (PadicAlgCl l)]
+  [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)] [FiniteDimensional ℚ_[l] E]
+  [Algebra ℚ_[l] L] [IsScalarTower ℚ_[l] L (PadicAlgCl l)] [FiniteDimensional ℚ_[l] L]
+  [Algebra ℚ_[l] M] [IsScalarTower ℚ_[l] M (PadicAlgCl l)] [FiniteDimensional ℚ_[l] M]
+  [Algebra ℚ_[l] N] [IsScalarTower ℚ_[l] N (PadicAlgCl l)] [FiniteDimensional ℚ_[l] N]
+  [Small.{u + 1} E] [Small.{u + 1} L] [Small.{u + 1} M] [Small.{u + 1} N] (Y : Scheme.{u})
+
+/-- The composition isomorphisms of the integral scalar extensions satisfy the cocycle
+condition: the two identifications of `((K ⊗ 𝒪_L) ⊗ 𝒪_M) ⊗ 𝒪_N` with `K ⊗ 𝒪_N` agree. -/
+lemma derivedCompleteIntegralScalarExtensionCompIso_cocycle
+    (X : DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l E) :
+    (derivedCompleteIntegralScalarExtension l M N).map
+        ((derivedCompleteIntegralScalarExtensionCompIso l E L M Y).hom.app X) ≫
+      (derivedCompleteIntegralScalarExtensionCompIso l E M N Y).hom.app X =
+    (derivedCompleteIntegralScalarExtensionCompIso l L M N Y).hom.app
+        ((derivedCompleteIntegralScalarExtension l E L).obj X) ≫
+      (derivedCompleteIntegralScalarExtensionCompIso l E L N Y).hom.app X := by
+  apply (fullyFaithfulDerivedCompleteIntegralι l Y N).map_injective
+  have h := NatTrans.congr_app (congrArg Iso.hom (derivedBaseChangeCompIso_assoc Y
+    exists_isDerivedBaseChange_integersShrinkMap exists_isDerivedBaseChange_integersShrinkMap
+    exists_isDerivedBaseChange_integersShrinkMap exists_isDerivedBaseChange_integersShrinkMap
+    exists_isDerivedBaseChange_integersShrinkMap exists_isDerivedBaseChange_integersShrinkMap
+    (PadicAlgCl.integersShrinkMap_comp l E L M) (PadicAlgCl.integersShrinkMap_comp l L M N)
+    (PadicAlgCl.integersShrinkMap_comp l E L N) (PadicAlgCl.integersShrinkMap_comp l E M N)))
+    ((DerivedCategoryDerivedCompleteIntegral.ι _ l E).obj X)
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_inv_app, Category.id_comp] at h
+  simp only [Functor.map_comp, derivedCompleteIntegralScalarExtensionCompIso,
+    NatIso.ofComponents_hom_app, Functor.FullyFaithful.preimageIso_hom,
+    Functor.FullyFaithful.map_preimage]
+  exact h.symm
+
+
+/-- Blueprint `lem-weil-scalar-extension-composition` (coherence): the composition
+isomorphisms of the rational scalar extensions satisfy the cocycle condition, as isomorphisms
+of functors `D_comp(Y_ét, E) ⥤ D_comp(Y_ét, N)`. -/
+lemma derivedCompleteRationalScalarExtensionCompIso_assoc :
+    Functor.isoWhiskerRight (derivedCompleteRationalScalarExtensionCompIso l E L M Y)
+        (derivedCompleteRationalScalarExtension l M N) ≪≫
+      derivedCompleteRationalScalarExtensionCompIso l E M N Y =
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (derivedCompleteRationalScalarExtension l E L)
+        (derivedCompleteRationalScalarExtensionCompIso l L M N Y) ≪≫
+      derivedCompleteRationalScalarExtensionCompIso l E L N Y :=
+  Rationalization.mapOfRingHomCompIso_assoc _ _ _ _ (by
+    ext X
+    simpa using derivedCompleteIntegralScalarExtensionCompIso_cocycle l E L M N Y X)
+
+/-- The cocycle condition of `derivedCompleteRationalScalarExtensionCompIso_assoc`, evaluated
+at an object. -/
+lemma derivedCompleteRationalScalarExtensionCompIso_cocycle
+    (X : DerivedCategoryDerivedCompleteRational Y.smallEtaleTopology l E) :
+    (derivedCompleteRationalScalarExtension l M N).map
+        ((derivedCompleteRationalScalarExtensionCompIso l E L M Y).hom.app X) ≫
+      (derivedCompleteRationalScalarExtensionCompIso l E M N Y).hom.app X =
+    (derivedCompleteRationalScalarExtensionCompIso l L M N Y).hom.app
+        ((derivedCompleteRationalScalarExtension l E L).obj X) ≫
+      (derivedCompleteRationalScalarExtensionCompIso l E L N Y).hom.app X := by
+  simpa using NatTrans.congr_app
+    (congrArg Iso.hom (derivedCompleteRationalScalarExtensionCompIso_assoc l E L M N Y)) X
+end Cocycle
+
 end Etale
 
 end AlgebraicGeometry
