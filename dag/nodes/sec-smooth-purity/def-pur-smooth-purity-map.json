@@ -160,5 +160,49 @@
   "group": "Q70",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-87326ea27 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 14 statement dependencies, main-20261015 orders 2354/2356/2358 (pur9-cs-def-phi, the def, the theorem and its proof), master order 2012, the unit sk-thm-smooth-purity, and every citer of the item. The hypotheses are right: A_{E,n} coefficients, small pro-etale sites, D^b_ctf, X and Y separated of finite type over k, f separated, of finite type and smooth of pure relative dimension d. Pi_f comes from thm-pur-diagonal-dualizing-object and points the right way. No dependency path leads back to the item. Edge cases checked: K=0, d=0, f=id, X empty, n=1. Two faults, both repaired. (1) E7/C4: the delivery dropped the master's first factor, the twist reassociation, so the map no longer starts at Lf^*K(d)[2d]. Reviewed citers use that domain or the three-factor form: thm-pur-finite-coefficient-smooth-purity steps 1 and 4, thm-pur-finite-reduction-of-purity step 5, cor-pur-dualizing-object-purity, lem-pur-finite-universal-smooth-trace, def-pur-smooth-trace, thm-pur-smooth-base-change-coherence, det-sp-tower-gamma and lem-pur-projection-purity-agreement. The report does not mention them, and the main-20261015 theorem itself still uses the three-factor form. Repair: keep the main composite as gamma^sm and define gamma_{f,K} = gamma^sm ∘ tau, where tau is the shift-compatibility isomorphism of the derived tensor (def-weil-derived-tensor). (2) C4/C5/E6: the tensor arrow came from the imported, in_cycle node pur9-cs-def-phi, which is built on the pur713 stack and needs an adjunction (pur9-def-shriek-notation) that has no node. Its isomorphy was credited to thm-pur-cohomological-smoothness clause 1, which is about theta of def-pur-co-smoothness, and no node identifies the two maps. Repair: theta is now taken from def-pur-co-smoothness, which replaces pur9-cs-def-phi in stmt_deps. Merging pur9-cs-def-phi into def-pur-co-smoothness is left to the maintainer. The corrected file is at fixes/dag/nodes/sec-smooth-purity/def-pur-smooth-purity-map.json. No new nodes, no tool_uses, no drops.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityMap",
+  "declaration": "WeilConjectures.PurityFiniteSetting.smoothPurityMap",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.smoothPurityRingFinite",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityExceptional",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityExceptionalComparison",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityPullback",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityTensor",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityUnitIso",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityEtaleTheta",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityPullbackComparison",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityComparisonTensor",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityTensorComparison",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityTheta",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityTensorShiftGeneric",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityTensorPresentation",
+   "WeilConjectures.PurityFiniteSetting.existsUnique_smoothPurityTensorShift",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityTensorShiftCoefficients",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityTensorShift",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityReassociation",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityExceptionalOver",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityTensorMapInPresentation",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityTensorSource",
+   "WeilConjectures.PurityFiniteSetting.existsUnique_smoothPurityTensorMap",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityTensorMap",
+   "WeilConjectures.PurityFiniteSetting.smoothPurityMap"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityMap.lean",
+  "statement": "def smoothPurityMap (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [IsSeparated (Y ↘ Spec (.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ) [SmoothOfRelativeDimension d f] (K : Scheme.proEtaleDerivedCategory Y P.Ring) (hK : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y K)",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Defines both tensor and reassociated forms from the specified normalized diagonal orientation and canonical counit tensor mate, on the original intrinsic constructible finite-Tor object."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-57e538f4c",
+  "group": "Q61",
+  "result": "fix",
+  "note": "Math and Lean pass. Hypotheses match the node and nothing stronger is assumed: finite datum, X/Y separated finite type over k, f separated finite type smooth of pure rel. dim d, K finiteTorConstructible. Pi_f is the recorded diagonalDualizingObject, used as .inv. theta is nu^* of Etale.dualizingComplexTensorMap after symmetry and unit iso, the same map as comparedTensorClause. tau is tensor commShift plus shift cancellation. Arrow order tau, 1 tensor Pi^-1, theta. The three sorry'd theorems behind data are true: derivedTensor = curriedTensor by rfl (compiled), tensor-shift existence by HEq.rfl (compiled), and the tensor map does not depend on the etale presentation, by naturality through the canonical representative R nu_* K. Edge cases d=0, K=0, empty schemes, n=1 and universes pass. Docstrings, verbatim statement, 23/23 declarations and lean-only node change checked; nt_compile exit 0 with no warnings (6.7 s). Finding H11: the 'Second reading by Q61' section was the worker's self-reread. Fixed by fixes/def-pur-smooth-purity-map.report.md, the full report with the Worker report unchanged and an independent clause-by-clause second reading."
  }
 }
