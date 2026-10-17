@@ -279,7 +279,8 @@ theorem exists_forall_norm_sum_traceFunction_boundarySheaf_le (ψ : AddChar k₀
           (AffineSpace.fieldPointsEquiv k₀ _ x * AffineSpace.fieldPointsEquiv k₀ _ y)))‖
       ≤ ∑ x ∈ hs.toFinset, ‖ι (D.boundarySheaf.traceFunction n x *
         ψ (Algebra.trace k₀ (FiniteField.galoisExtension k₀ n)
-          (AffineSpace.fieldPointsEquiv k₀ _ x * AffineSpace.fieldPointsEquiv k₀ _ y)))‖ := norm_sum_le _ _
+          (AffineSpace.fieldPointsEquiv k₀ _ x * AffineSpace.fieldPointsEquiv k₀ _ y)))‖ :=
+      norm_sum_le _ _
     _ ≤ ∑ _x ∈ hs.toFinset, N * ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ n := Finset.sum_le_sum hterm
     _ = hs.toFinset.card * (N * ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ n) := by
         rw [Finset.sum_const, nsmul_eq_mul]

@@ -43,18 +43,21 @@ namespace WeilComplex
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- A Weil complex is `≤ n` exactly when its cohomology sheaves vanish in degrees `> n`. -/
 lemma isLE_iff_isZero_homologySheaf (K : WeilComplex k₀ l X) (n : ℤ) :
     K.obj.IsLE n ↔ ∀ a : ℤ, n < a → IsZero ((homologySheaf a).obj K) := by
   rw [_root_.DerivedCategory.isLE_iff]
   exact forall₂_congr fun a _ ↦ (isZero_homologySheaf_obj_iff a K).symm
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- A Weil complex is `≥ n` exactly when its cohomology sheaves vanish in degrees `< n`. -/
 lemma isGE_iff_isZero_homologySheaf (K : WeilComplex k₀ l X) (n : ℤ) :
     K.obj.IsGE n ↔ ∀ a : ℤ, a < n → IsZero ((homologySheaf a).obj K) := by
   rw [_root_.DerivedCategory.isGE_iff]
   exact forall₂_congr fun a _ ↦ (isZero_homologySheaf_obj_iff a K).symm
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The shift `K[a]` of a Weil complex `K ≥ n` is `≥ n - a`. -/
 lemma isGE_shift_obj (K : WeilComplex k₀ l X) (n a n' : ℤ) (h : a + n' = n)
     (hK : K.obj.IsGE n) : (K⟦a⟧).obj.IsGE n' := by
@@ -62,6 +65,7 @@ lemma isGE_shift_obj (K : WeilComplex k₀ l X) (n a n' : ℤ) (h : a + n' = n)
   exact _root_.DerivedCategory.TStructure.t.isGE_of_iso (X := K.obj⟦a⟧)
     (((WeilComplex.objectProperty k₀ l X).ι.commShiftIso a).app K).symm n'
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The shift `K[a]` of a Weil complex `K ≤ n` is `≤ n - a`. -/
 lemma isLE_shift_obj (K : WeilComplex k₀ l X) (n a n' : ℤ) (h : a + n' = n)
     (hK : K.obj.IsLE n) : (K⟦a⟧).obj.IsLE n' := by
@@ -209,8 +213,8 @@ theorem isGE_tensorLisse_obj (F : WeilSheaf k₀ l X) (hF : F.IsLisse)
     {K : WeilComplex k₀ l X} {a : ℤ} (hK : K.obj.IsGE a) :
     ((tensorLisse F hF).obj K).obj.IsGE a := by
   simpa using isGE_map_of_isGE (tensorLisse F hF) 0 (fun G ↦
-    (ProEtaleWeilSheaf.ihomFunctor k₀ l X (F.dual hF).obj).isGE_rightDerivedFunctor_obj_singleFunctor
-      G.obj) hK
+    (ProEtaleWeilSheaf.ihomFunctor k₀ l X
+      (F.dual hF).obj).isGE_rightDerivedFunctor_obj_singleFunctor G.obj) hK
 
 variable [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
@@ -306,6 +310,7 @@ theorem isLE_fourierTransform_obj (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ �
     ((WeilComplex.objectProperty k₀ l _).ι.mapTriangle.obj (Triangle.mk f g h)) hT (m + 1)
     ‹_› ‹_›
 
+omit [Finite k₀] in
 /-- The complement of a finite set of closed points of the affine line is a dense open: it
 contains the image of the generic point of the irreducible geometric line, which is not a
 closed point since the affine line is not a single point. -/

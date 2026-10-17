@@ -43,8 +43,10 @@ lemma isEisensteinAt_X_pow_add_C_mul_X_pow_sub_C {ϖ : E} (hϖ : Irreducible ϖ)
     (monic_X_pow n).add_of_left hlt
   have hdeg : (X ^ n + (C (ϖ * c) * X ^ (n - 1) - C (ϖ * c)) : E[X]).natDegree = n := by
     rw [natDegree_add_eq_left_of_degree_lt hlt, natDegree_X_pow]
-  have hm : maximalIdeal E = Ideal.span {ϖ} := (IsDiscreteValuationRing.irreducible_iff_uniformizer ϖ).1 hϖ
-  have hϖm : ϖ * c ∈ maximalIdeal E := hm ▸ Ideal.mul_mem_right _ _ (Ideal.mem_span_singleton_self ϖ)
+  have hm : maximalIdeal E = Ideal.span {ϖ} :=
+    (IsDiscreteValuationRing.irreducible_iff_uniformizer ϖ).1 hϖ
+  have hϖm : ϖ * c ∈ maximalIdeal E :=
+    hm ▸ Ideal.mul_mem_right _ _ (Ideal.mem_span_singleton_self ϖ)
   refine ⟨?_, fun {i} hi ↦ ?_, ?_⟩
   · rw [hmon.leadingCoeff]
     exact fun h ↦ (maximalIdeal.isMaximal E).ne_top ((Ideal.eq_top_iff_one _).2 h)

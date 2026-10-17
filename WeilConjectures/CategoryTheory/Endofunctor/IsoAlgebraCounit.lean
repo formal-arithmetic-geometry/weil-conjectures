@@ -55,7 +55,8 @@ noncomputable def mapOfNatIsoCompCounit (eL : L ⋙ G ≅ F ⋙ L) (eR : R ⋙ F
 lemma isIso_mapOfNatIsoCompCounit_app (eL : L ⋙ G ≅ F ⋙ L) (eR : R ⋙ F ≅ G ⋙ R)
     (ε : L ⋙ R ⟶ 𝟭 C) (hε : CounitCompatible eL eR ε) (K : IsoAlgebra F)
     [IsIso (ε.app K.carrier)] : IsIso ((mapOfNatIsoCompCounit eL eR ε hε).app K) := by
-  have : IsIso ((Algebra.forget F).map ((Algebra.IsIsoStr F).ι.map ((mapOfNatIsoCompCounit eL eR ε hε).app K))) :=
+  have : IsIso ((Algebra.forget F).map
+      ((Algebra.IsIsoStr F).ι.map ((mapOfNatIsoCompCounit eL eR ε hε).app K))) :=
     inferInstanceAs (IsIso (ε.app K.carrier))
   have := isIso_of_reflects_iso ((Algebra.IsIsoStr F).ι.map
     ((mapOfNatIsoCompCounit eL eR ε hε).app K)) (Algebra.forget F)

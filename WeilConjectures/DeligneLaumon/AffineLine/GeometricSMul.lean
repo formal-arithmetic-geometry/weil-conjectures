@@ -30,8 +30,10 @@ namespace affineLine
 
 
 /-- The constant function `a ∈ k̄` on the geometric affine line. -/
-noncomputable abbrev geometricConst (a : AlgebraicClosure k₀) : Γ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber, ⊤) :=
-  (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure.appTop ((Scheme.ΓSpecIso (.of (AlgebraicClosure k₀))).inv.hom a)
+noncomputable abbrev geometricConst (a : AlgebraicClosure k₀) :
+    Γ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber, ⊤) :=
+  (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure.appTop
+    ((Scheme.ΓSpecIso (.of (AlgebraicClosure k₀))).inv.hom a)
 
 omit [Finite k₀] in
 lemma geometricConst_mul (a b : AlgebraicClosure k₀) :
@@ -45,14 +47,20 @@ lemma geometricConst_one : geometricConst k₀ 1 = 1 := by
 omit [Finite k₀] in
 @[reassoc (attr := simp)]
 lemma geometricSMul_comp_geometricFiberToAlgebraicClosure (a : AlgebraicClosure k₀) :
-    geometricSMul k₀ a ≫ (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure = (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure :=
+    geometricSMul k₀ a ≫
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure =
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure :=
   pullback.lift_snd _ _ _
 
 omit [Finite k₀] in
 lemma geometricSMul_comp_geometricFiberProj (a : AlgebraicClosure k₀) :
     geometricSMul k₀ a ≫ (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj =
-      AffineSpace.homOfVector ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure ≫ (Scheme.specAlgebraicClosure k₀).hom)
-        fun _ ↦ geometricConst k₀ a * (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj.appTop (AffineSpace.coord _ PUnit.unit) :=
+      AffineSpace.homOfVector
+        ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure ≫
+          (Scheme.specAlgebraicClosure k₀).hom)
+        fun _ ↦ geometricConst k₀ a *
+          (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj.appTop
+            (AffineSpace.coord _ PUnit.unit) :=
   pullback.lift_fst _ _ _
 
 omit [Finite k₀] in
@@ -65,8 +73,11 @@ lemma geometricSMul_appTop_geometricConst (a b : AlgebraicClosure k₀) :
 omit [Finite k₀] in
 @[simp]
 lemma geometricSMul_appTop_coord (a : AlgebraicClosure k₀) :
-    (geometricSMul k₀ a).appTop ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj.appTop (AffineSpace.coord _ PUnit.unit)) =
-      geometricConst k₀ a * (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj.appTop (AffineSpace.coord _ PUnit.unit) := by
+    (geometricSMul k₀ a).appTop
+        ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj.appTop
+          (AffineSpace.coord _ PUnit.unit)) =
+      geometricConst k₀ a * (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj.appTop
+        (AffineSpace.coord _ PUnit.unit) := by
   rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, geometricSMul_comp_geometricFiberProj,
     AffineSpace.homOfVector_appTop_coord]
 

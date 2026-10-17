@@ -92,7 +92,8 @@ lemma factorGerm_eq_globalSectionsTransport {P W Y : Scheme.{u}} {w : W ⟶ Y} {
 the restriction along `s`. -/
 lemma globalSectionsToUpperStar_app_comp_factorGerm {P Y : Scheme.{u}} {s : P ⟶ Y} {y : P ⟶ P}
     (h : y ≫ s = s) (F : Sheaf (Scheme.ProEt.topology Y) A) :
-    (globalSectionsToUpperStar A s).app F ≫ factorGerm A h F = (globalSectionsToUpperStar A s).app F := by
+    (globalSectionsToUpperStar A s).app F ≫ factorGerm A h F =
+      (globalSectionsToUpperStar A s).app F := by
   rw [factorGerm, ← Category.assoc, ← globalSectionsToUpperStar_comp, Category.assoc,
     ← Functor.map_comp]
   simp only [upperStarFactor, Iso.trans_inv, NatTrans.comp_app, Iso.hom_inv_id_app_assoc,
@@ -128,7 +129,8 @@ lemma factorGerm_adicConstantSheaf_apply {S : Scheme.{u}} {L : Type u} [Field L]
   rw [map_smul]
   congr 1
   exact congrArg (fun φ ↦ φ.hom (oneGlobalSection (l := l) S))
-    (globalSectionsToUpperStar_app_comp_factorGerm (WeilCoefficients.{u} l) hσ (adicConstantSheaf l S))
+    (globalSectionsToUpperStar_app_comp_factorGerm (WeilCoefficients.{u} l) hσ
+      (adicConstantSheaf l S))
 
 /-- The germ along `σ` of a section transported along `z' ≫ w = π ≫ z` is the transport of its
 germ along `g`, when `σ ≫ z' = z' ≫ g`. -/
@@ -143,7 +145,8 @@ lemma globalSectionsTransport_comp_factorGerm {S Y Y' : Scheme.{u}} {L : Type u}
   let A := WeilCoefficients.{u} l
   have hσ' : σ ≫ π = π ≫ 𝟙 S := by rw [hσ, Category.comp_id]
   have hg' : g ≫ w = w ≫ 𝟙 Y := by rw [hg, Category.comp_id]
-  rw [factorGerm_eq_globalSectionsTransport A hσ hσ', factorGerm_eq_globalSectionsTransport A hg hg']
+  rw [factorGerm_eq_globalSectionsTransport A hσ hσ',
+    factorGerm_eq_globalSectionsTransport A hg hg']
   have h₁ : (σ ≫ z') ≫ w = π ≫ (𝟙 S ≫ z) := by
     rw [Category.assoc, hz, ← Category.assoc, hσ, Category.id_comp]
   have h₂ : (z' ≫ g) ≫ w = π ≫ (z ≫ 𝟙 Y) := by
@@ -236,7 +239,8 @@ lemma exists_ne_zero_factorGerm_eq_smul_of_twist {S Y Y' : Scheme.{u}} {L : Type
         ((π)^*[WeilCoefficients.{u} l].obj ((z)^*[WeilCoefficients.{u} l].obj N.X)),
       e ≠ 0 ∧ (factorGerm (WeilCoefficients.{u} l) hσ _).hom e = ULift.up χ • e := by
   refine ⟨_, globalSectionsTransport_globalSectionOfModHom_ne_zero hz θ, ?_⟩
-  rw [← ModuleCat.comp_apply, globalSectionsTransport_comp_factorGerm hσ hg hz hσz, ModuleCat.comp_apply,
+  rw [← ModuleCat.comp_apply, globalSectionsTransport_comp_factorGerm hσ hg hz hσz,
+    ModuleCat.comp_apply,
     hθ, map_smul]
 
 /-- **A sheaf trivialised with a twisted deck action is not a subquotient of a constant sheaf.**

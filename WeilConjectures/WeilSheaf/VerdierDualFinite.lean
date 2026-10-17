@@ -72,6 +72,7 @@ namespace WeilSheaf
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The Tate twist of the dual of a lisse Weil sheaf, `P^∨ ⊗ (ℚ̄_ℓ(m) ⊗ ℚ̄_ℓ)`, as it comes out
 of `𝔻_X P ≅ (P^∨ ⊗ ω)` with `ω ≅ ℚ̄_ℓ(m)[2m]`, is the constant twist `P^∨ ⊗ 𝓑_{χ_ℓ(σ)ᵐ}`. -/
 theorem nonempty_dual_tensorObj_tateTwistSheaf_iso (P : WeilSheaf k₀ l X) (hP : P.IsLisse)
@@ -190,6 +191,7 @@ noncomputable def verdierDualShiftIso [(verdierDual k₀ l Z).CommShift ℤ]
       ((shiftFunctorOpIso (WeilComplex k₀ l Z) b (-b) (by lia)).app (op Y)).symm ≪≫
     ((verdierDual k₀ l Z).commShiftIso b).app (op Y)
 
+omit [IsFinite (Z ↘ Spec (CommRingCat.of k₀))] [IsReduced Z] in
 /-- The Verdier dual of a distinguished triangle `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁[1]` is a distinguished
 triangle `𝔻 K₃ ⟶ 𝔻 K₂ ⟶ 𝔻 K₁ ⟶ 𝔻 K₃[1]`. -/
 lemma verdierDual_mapTriangle_distinguished [(verdierDual k₀ l Z).CommShift ℤ]
@@ -313,9 +315,12 @@ theorem nonempty_homologySheaf_neg_one_verdierDual_iso (A : WeilComplex k₀ l Z
   have hD₁ : t.IsGE ((verdierDual k₀ l Z).obj (op T₁.obj₁)) 0 := by
     simpa using isGE_verdierDual_of_isLE T₁.obj₁ 0
   have i₁ := _root_.DerivedCategory.isIso_homologyMap_mor₁ _
-    ((objectProperty k₀ l Z).ι.map_distinguished _ (verdierDual_mapTriangle_distinguished T₁ hT₁)) (-2) (-1) (by norm_num)
-    (isZero_homologyFunctor_of_isGE ((verdierDual k₀ l Z).obj (op T₁.obj₁)) 0 (-2) (by norm_num) hD₁)
-    (isZero_homologyFunctor_of_isGE ((verdierDual k₀ l Z).obj (op T₁.obj₁)) 0 (-1) (by norm_num) hD₁)
+    ((objectProperty k₀ l Z).ι.map_distinguished _ (verdierDual_mapTriangle_distinguished T₁ hT₁))
+        (-2) (-1) (by norm_num)
+    (isZero_homologyFunctor_of_isGE ((verdierDual k₀ l Z).obj (op T₁.obj₁)) 0 (-2)
+        (by norm_num) hD₁)
+    (isZero_homologyFunctor_of_isGE ((verdierDual k₀ l Z).obj (op T₁.obj₁)) 0 (-1)
+        (by norm_num) hD₁)
   let E₁ : (homologySheaf (-1)).obj ((verdierDual k₀ l Z).obj (op T₁.obj₃)) ≅
       (homologySheaf (-1)).obj ((verdierDual k₀ l Z).obj (op A)) :=
     ObjectProperty.isoMk _ (@asIso _ _ _ _ _ i₁)
@@ -325,11 +330,15 @@ theorem nonempty_homologySheaf_neg_one_verdierDual_iso (A : WeilComplex k₀ l Z
   have : t.IsLE T₂.obj₁ 1 := inferInstanceAs (t.IsLE ((t.truncLE 1).obj T₁.obj₃) 1)
   have : t.IsGE T₂.obj₁ 1 := inferInstanceAs (t.IsGE ((t.truncLE 1).obj T₁.obj₃) 1)
   have h₃ : t.IsGE T₂.obj₃ 2 := inferInstanceAs (t.IsGE ((t.truncGE 2).obj T₁.obj₃) 2)
-  have hD₃ : t.IsLE ((verdierDual k₀ l Z).obj (op T₂.obj₃)) (-2) := isLE_verdierDual_of_isGE T₂.obj₃ 2
+  have hD₃ : t.IsLE ((verdierDual k₀ l Z).obj (op T₂.obj₃)) (-2) :=
+    isLE_verdierDual_of_isGE T₂.obj₃ 2
   have i₂ := _root_.DerivedCategory.isIso_homologyMap_mor₂ _
-    ((objectProperty k₀ l Z).ι.map_distinguished _ (verdierDual_mapTriangle_distinguished T₂ hT₂)) (-1) 0 (by norm_num)
-    (isZero_homologyFunctor_of_isLE ((verdierDual k₀ l Z).obj (op T₂.obj₃)) (-2) (-1) (by norm_num) hD₃)
-    (isZero_homologyFunctor_of_isLE ((verdierDual k₀ l Z).obj (op T₂.obj₃)) (-2) 0 (by norm_num) hD₃)
+    ((objectProperty k₀ l Z).ι.map_distinguished _ (verdierDual_mapTriangle_distinguished T₂ hT₂))
+        (-1) 0 (by norm_num)
+    (isZero_homologyFunctor_of_isLE ((verdierDual k₀ l Z).obj (op T₂.obj₃)) (-2) (-1)
+        (by norm_num) hD₃)
+    (isZero_homologyFunctor_of_isLE ((verdierDual k₀ l Z).obj (op T₂.obj₃)) (-2) 0
+        (by norm_num) hD₃)
   let E₂ : (homologySheaf (-1)).obj ((verdierDual k₀ l Z).obj (op T₁.obj₃)) ≅
       (homologySheaf (-1)).obj ((verdierDual k₀ l Z).obj (op T₂.obj₁)) :=
     ObjectProperty.isoMk _ (@asIso _ _ _ _ _ i₂)
@@ -338,13 +347,16 @@ theorem nonempty_homologySheaf_neg_one_verdierDual_iso (A : WeilComplex k₀ l Z
   let E₃ : (homologySheaf (-1)).obj ((verdierDual k₀ l Z).obj (op T₂.obj₁)) ≅
       (homologySheaf 0).obj ((verdierDual k₀ l Z).obj (op (WeilSheaf.toComplex.obj
         ((homologySheaf 1).obj T₂.obj₁)))) :=
-    (homologySheaf (-1)).mapIso ((verdierDual k₀ l Z).mapIso e.symm.op ≪≫ verdierDualShiftIso _ 1) ≪≫
+    (homologySheaf (-1)).mapIso
+        ((verdierDual k₀ l Z).mapIso e.symm.op ≪≫ verdierDualShiftIso _ 1) ≪≫
       homologySheafShiftIso _ 1 (-1) 0 (by norm_num)
   -- `𝓗¹(C) ≅ 𝓗¹(B) ≅ 𝓗¹(A)`
-  have i₃ := _root_.DerivedCategory.isIso_homologyMap_mor₁ _ ((objectProperty k₀ l Z).ι.map_distinguished _ hT₂) 0 1
+  have i₃ := _root_.DerivedCategory.isIso_homologyMap_mor₁ _
+      ((objectProperty k₀ l Z).ι.map_distinguished _ hT₂) 0 1
     (by norm_num) (isZero_homologyFunctor_of_isGE T₂.obj₃ 2 0 (by norm_num) h₃)
     (isZero_homologyFunctor_of_isGE T₂.obj₃ 2 1 (by norm_num) h₃)
-  have i₄ := _root_.DerivedCategory.isIso_homologyMap_mor₂ _ ((objectProperty k₀ l Z).ι.map_distinguished _ hT₁) 1 2
+  have i₄ := _root_.DerivedCategory.isIso_homologyMap_mor₂ _
+      ((objectProperty k₀ l Z).ι.map_distinguished _ hT₁) 1 2
     (by norm_num) (isZero_homologyFunctor_of_isLE T₁.obj₁ 0 1 (by norm_num) h₁)
     (isZero_homologyFunctor_of_isLE T₁.obj₁ 0 2 (by norm_num) h₁)
   let e₃ : (homologySheaf 1).obj T₂.obj₁ ≅ (homologySheaf 1).obj T₁.obj₃ :=

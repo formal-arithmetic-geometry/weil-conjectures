@@ -296,6 +296,7 @@ variable {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [
   [QuasiCompact aY] [HasCompactification aY]
 
 include aY in
+omit [IsSeparated aY] [HasCompactification aY] in
 /-- **Artin–Gabber**, support side: for an affine morphism `f : X ⟶ Y` of finite type between
 separated schemes of finite type over `k`, whose fibres have dimension at most `d`, the
 compactly supported pushforward carries `ᵖD^{≤n}(X) ∩ Dctf(X)` into `ᵖD^{≤n+d}(Y)`.

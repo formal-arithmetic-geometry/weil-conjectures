@@ -59,8 +59,12 @@ theorem exists_isIso_sigmaDesc_geometricFiber_SpecMap (A : Type u) [CommRing A] 
     sigmaSpec (fun _ : PrimeSpectrum B ↦ CommRingCat.of (AlgebraicClosure k)) ≫
       Spec.map (CommRingCat.ofHom φ.toRingHom) ≫
       (pullbackSpecIso k A (AlgebraicClosure k)).inv
-  have hg : Sigma.desc (fun c ↦ Sigma.ι (fun _ : PrimeSpectrum B ↦ Spec (.of (AlgebraicClosure k))) c ≫ g) = g := Sigma.hom_ext _ _ fun c ↦ by simp
-  refine ⟨PrimeSpectrum B, inferInstance, fun c ↦ Sigma.ι (fun _ : PrimeSpectrum B ↦ Spec (.of (AlgebraicClosure k))) c ≫ g, fun c ↦ ?_, ?_⟩
+  have hg : Sigma.desc (fun c ↦
+      Sigma.ι (fun _ : PrimeSpectrum B ↦ Spec (.of (AlgebraicClosure k))) c ≫ g) = g :=
+    Sigma.hom_ext _ _ fun c ↦ by simp
+  refine ⟨PrimeSpectrum B, inferInstance,
+    fun c ↦ Sigma.ι (fun _ : PrimeSpectrum B ↦ Spec (.of (AlgebraicClosure k))) c ≫ g,
+    fun c ↦ ?_, ?_⟩
   · simp only [g, Category.assoc, ι_sigmaSpec_assoc]
     erw [pullbackSpecIso_inv_snd]
     rw [← Spec.map_comp, ← Spec.map_comp, ← Spec.map_id]
