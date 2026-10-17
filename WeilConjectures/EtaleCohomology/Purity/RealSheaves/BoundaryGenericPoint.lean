@@ -51,6 +51,7 @@ variable (pU) in
 noncomputable def genericStructHom : K →+* Ω :=
   (Spec.preimage (genericBasePoint j ≫ pU)).hom
 
+omit [Finite K] in
 variable (pU) in
 lemma spec_genericStructHom :
     Spec.map (CommRingCat.ofHom (genericStructHom pU j)) = genericBasePoint j ≫ pU := by
@@ -64,7 +65,7 @@ noncomputable def genericEmb : AlgebraicClosure K →+* Ω :=
 
 lemma genericEmb_algebraMap (x : K) :
     genericEmb pU j (algebraMap K (AlgebraicClosure K) x) = genericStructHom pU j x := by
-  letI := (genericStructHom pU j).toAlgebra
+  let _ := (genericStructHom pU j).toAlgebra
   exact (IsSepClosed.lift : AlgebraicClosure K →ₐ[K] Ω).commutes x
 
 lemma genericEmb_comp_algebraMap :
@@ -97,6 +98,7 @@ lemma genericGeomPoint_geometricFiberToAlgebraicClosure :
       Spec.map (CommRingCat.ofHom (genericEmb pU j)) :=
   pullback.lift_snd _ _ _
 
+omit [Finite K] in
 /-- Galois automorphisms of `Ω` over `k(C)` fix the structure map `k₀ ⟶ Ω`. -/
 lemma galois_comp_genericStructHom (σ : Gal(Ω/C.functionField)) :
     (σ : Ω →+* Ω).comp (genericStructHom pU j) = genericStructHom pU j := by
@@ -120,6 +122,7 @@ noncomputable def constantCoverPoint (A : FiniteEtaleAlgebra K) (ψ : A.1 →+* 
     rw [← Spec.map_comp]
     rfl)) (pullback.lift_fst _ _ _)
 
+omit [Finite K] in
 lemma constantCoverPoint_left (A : FiniteEtaleAlgebra K) (ψ : A.1 →+* Ω)
     (hψ : ψ.comp (algebraMap K A.1) = genericStructHom pU j) :
     (constantCoverPoint j A ψ hψ).left =
@@ -130,6 +133,7 @@ lemma constantCoverPoint_left (A : FiniteEtaleAlgebra K) (ψ : A.1 →+* Ω)
         rfl) :=
   rfl
 
+omit [Finite K] in
 lemma constantCoverPoint_injective (A : FiniteEtaleAlgebra K) {ψ ψ' : A.1 →+* Ω}
     (hψ : ψ.comp (algebraMap K A.1) = genericStructHom pU j)
     (hψ' : ψ'.comp (algebraMap K A.1) = genericStructHom pU j)
@@ -138,6 +142,7 @@ lemma constantCoverPoint_injective (A : FiniteEtaleAlgebra K) {ψ ψ' : A.1 →+
   simp only [constantCoverPoint_left, pullback.lift_snd] at h'
   exact congrArg CommRingCat.Hom.hom (Spec.map_injective h')
 
+omit [Finite K] in
 lemma galoisToAut_constantCoverPoint (σ : Gal(Ω/C.functionField)) (A : FiniteEtaleAlgebra K)
     (ψ : A.1 →+* Ω) (hψ : ψ.comp (algebraMap K A.1) = genericStructHom pU j) :
     (galoisToAut (genericPointLift j) σ).hom.app _ (constantCoverPoint j A ψ hψ) =
@@ -201,7 +206,8 @@ variable [GeometricallyConnected pU] [ConnectedSpace U]
   (GU : Type u) [Group GU] [TopologicalSpace GU] [IsTopologicalGroup GU] [CompactSpace GU]
   [∀ P, MulAction GU ((fiber sU).obj P)] [IsFundamentalGroup (fiber sU) GU]
 
-omit [IsOpenImmersion j] [Nonempty U] [IsIntegral C] in
+omit [IsOpenImmersion j] [Nonempty U] [IsIntegral C] [GeometricallyConnected pU]
+  [ConnectedSpace U] in
 /-- Paths commute with the geometric Frobenius of the constant covers. -/
 lemma geometricFrobenius_pow_path {Ω₁ Ω₂ : Type u} [Field Ω₁] [IsSepClosed Ω₁] [Field Ω₂]
     [IsSepClosed Ω₂] {s : Spec (.of Ω₁) ⟶ U} {s' : Spec (.of Ω₂) ⟶ U}
@@ -227,7 +233,7 @@ lemma coe_frobenius_symm_pow (L : IntermediateField K (AlgebraicClosure K))
     letI := Fintype.ofFinite K
     (((FiniteEtaleAlgebra.frobenius ⟨CommAlgCat.of K L, hA⟩).symm ^ n) y : AlgebraicClosure K) =
       (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K) ^ n) y := by
-  letI := Fintype.ofFinite K
+  let _ := Fintype.ofFinite K
   induction n generalizing y with
   | zero => rfl
   | succ n ih =>
@@ -252,7 +258,7 @@ theorem genericEmb_galois (σ : Gal(Ω/C.functionField)) (n : ℕ)
     letI := Fintype.ofFinite K
     σ (genericEmb pU j x) = genericEmb pU j
       ((FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K) ^ n) x) := by
-  letI := Fintype.ofFinite K
+  let _ := Fintype.ofFinite K
   let L : IntermediateField K (AlgebraicClosure K) := IntermediateField.adjoin K {x}
   have : FiniteDimensional K L :=
     IntermediateField.adjoin.finiteDimensional (Algebra.IsIntegral.isIntegral x)
@@ -283,7 +289,7 @@ theorem specMap_comp_genericGeomPoint (σ : Gal(Ω/C.functionField)) (n : ℕ)
     (h : (genericGaloisMap j sU GU σ, Multiplicative.ofAdd (n : ℤ)) ∈ weilGroup pU sU GU) :
     Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ genericGeomPoint pU j =
       genericGeomPoint pU j ≫ (pU.geometricGaloisFrobenius ^ n).hom := by
-  letI := Fintype.ofFinite K
+  let _ := Fintype.ofFinite K
   apply pullback.hom_ext
   · change _ ≫ genericGeomPoint pU j ≫ pU.geometricFiberProj =
       _ ≫ (pU.geometricGaloisFrobenius ^ n).hom ≫ pU.geometricFiberProj

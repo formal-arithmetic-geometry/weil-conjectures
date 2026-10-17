@@ -163,7 +163,7 @@ lemma resOver_comp_globalSectionsTransport {S P P' : Scheme.{u}} {η : S ⟶ Y} 
   have hM : globalSectionsTransport _ hm (𝟙 _) ≫ (Sheaf.Γ _ _).map ((pr)^*[_].map ψ) =
       globalSectionsTransport _ hm ψ := by
     rw [globalSectionsTransport, globalSectionsTransport, CategoryTheory.Functor.map_id]
-    simp only [Category.comp_id, Category.assoc, ← Functor.map_comp]
+    simp only [Category.assoc, ← Functor.map_comp]
     rfl
   rw [resOver_app_eq_transport, resOver_app_eq_transport,
     globalSectionsTransport_comp_eq _ hξ' ha h₁ rfl (Category.comp_id f) _ _ ψ hψr,

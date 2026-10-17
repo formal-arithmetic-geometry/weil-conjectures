@@ -37,6 +37,46 @@ universe u
 
 open CategoryTheory Limits PreGaloisCategory
 
+/-- An element lies in the range of `e⁻¹ ∘ S`, `e` a linear equivalence, iff its image under `e`
+lies in the range of `S`. -/
+lemma LinearMap.mem_range_linearEquiv_symm_comp_iff {R M N P : Type*} [Semiring R]
+    [AddCommMonoid M] [AddCommMonoid N] [AddCommMonoid P] [Module R M] [Module R N] [Module R P]
+    (e : P ≃ₗ[R] N) (S : M →ₗ[R] N) (w : P) :
+    w ∈ LinearMap.range (e.symm.toLinearMap ∘ₗ S) ↔ e w ∈ LinearMap.range S := by
+  constructor
+  · rintro ⟨v, rfl⟩
+    exact ⟨v, by simp⟩
+  · rintro ⟨v, hv⟩
+    exact ⟨v, by simp [hv]⟩
+
+namespace AlgebraicGeometry.WeilGroup
+
+section Generic
+
+open Scheme.FiniteEtale
+
+variable {K : Type u} [Field K] [Finite K] {C U : Scheme.{u}} {p : C ⟶ Spec (.of K)} [IsCurve p]
+  [GeometricallyConnected p] [ConnectedSpace C] [Smooth p] {pU : U ⟶ Spec (.of K)} [IsCurve pU]
+  [GeometricallyConnected pU] [ConnectedSpace U] (j : U ⟶ C) [IsOpenImmersion j] [Nonempty U]
+  [IsIntegral C] [SmoothOfRelativeDimension 1 p] (sU : Spec (.of (AlgebraicClosure K)) ⟶ U)
+  (GU : Type u) [Group GU] [TopologicalSpace GU] [IsTopologicalGroup GU] [CompactSpace GU]
+  [∀ P, MulAction GU ((fiber sU).obj P)] [IsFundamentalGroup (fiber sU) GU]
+
+omit [GeometricallyConnected p] [IsCurve pU] in
+/-- The image in the Weil group of an element of the inertia group of the chosen point over a
+boundary point `z`, of degree zero, lies in the inertia group `I_z`. -/
+lemma mk_mem_boundaryInertia (z : ↥((Set.range j.base)ᶜ))
+    {σ : Gal(SeparableClosure (Scheme.functionField C)/C.functionField)}
+    (hσ : σ ∈ (boundaryChart (p := p) j z).point.inertia
+      Gal(SeparableClosure (Scheme.functionField C)/C.functionField))
+    (hw : (genericGaloisMap j sU GU σ, Multiplicative.ofAdd (0 : ℤ)) ∈ weilGroup pU sU GU) :
+    (⟨_, hw⟩ : weilGroup pU sU GU) ∈ boundaryInertia (p := p) (pU := pU) j sU GU z :=
+  ⟨⟨σ, hσ, rfl⟩, rfl⟩
+
+end Generic
+
+end AlgebraicGeometry.WeilGroup
+
 namespace AlgebraicGeometry.WeilGroup
 
 open Scheme Scheme.FiniteEtale ProEtale WeilSheaf
@@ -67,6 +107,7 @@ abbrev BoundaryNeighbourhoodAt (z : ↥((Set.range j.base)ᶜ)) (x : C.finitePoi
     ((boundaryChart (p := C ↘ Spec (.of K)) j z).point.inertia Gal(Ω/C.functionField))
     (boundaryFrobeniusLift (p := C ↘ Spec (.of K)) j sU GU τ GC z) x
 
+omit [IsCurve (U ↘ Spec (.of K))] [QuasiCompact j] in
 include τ GC in
 /-- An element of the inertia group at the chosen point over `z` maps to an element of degree
 zero of the Weil group. -/
@@ -78,7 +119,8 @@ lemma genericGaloisMap_mem_weilGroup_of_mem_inertia (z : ↥((Set.range j.base)�
   have : Finite (C.residueField z.1) :=
     boundary_subset_finitePoints (p := C ↘ Spec (.of K)) j z.2
   have hk : genericGaloisMap j sU GU σ ∈ inertiaGroup sU GU
-      (boundaryChart (p := C ↘ Spec (.of K)) j z) (boundaryChart (p := C ↘ Spec (.of K)) j z).point :=
+      (boundaryChart (p := C ↘ Spec (.of K)) j z)
+      (boundaryChart (p := C ↘ Spec (.of K)) j z).point :=
     ⟨σ, hσ, rfl⟩
   have hkL := inertiaGroup_le_localKernel (p := C ↘ Spec (.of K)) sU GU _ _ hk
   rw [mem_weilGroup_fundamentalGroupMap_iff j (comp_over j _) sU τ GU GC,
@@ -116,18 +158,19 @@ theorem exists_linearMap_stalk_directImage_fundamentalRep
   obtain ⟨x, hxf⟩ := x
   simp only at hx
   subst hx
-  letI := N.commRing
-  letI := N.isStrictlyHenselianLocalRing
-  letI := N.weaklyEtale
-  letI := N.field
-  letI := N.algebra
-  letI := N.isSeparable
-  letI := N.normal
-  letI := N.weaklyEtale_k
+  let _ := N.commRing
+  let _ := N.isStrictlyHenselianLocalRing
+  let _ := N.weaklyEtale
+  let _ := N.field
+  let _ := N.algebra
+  let _ := N.isSeparable
+  let _ := N.normal
+  let _ := N.weaklyEtale_k
   have hwF := mem_weilGroup_boundaryFrobeniusLift j sU GU (comp_over j _) τ GC z
   have ha := specMap_comp_genericGeomPoint j sU GU _ _ hwF
   obtain ⟨Sp, hSp, hSpr, hSpf⟩ := WeilSheaf.exists_stalk_directImage_linearMap_invariants j F
-    N.h N.k N.e ⟨z.1, hxf⟩ N.t hF N.ht N.α N.hα N.hcα (genericGeomPoint (U ↘ Spec (.of K)) j) N.specFieldMap_comp _ ha N.hεα
+    N.h N.k N.e ⟨z.1, hxf⟩ N.t hF N.ht N.α N.hα N.hcα (genericGeomPoint (U ↘ Spec (.of K)) j)
+    N.specFieldMap_comp _ ha N.hεα
   set Ψ := genericStalkEquiv B₀ ξ hξ F hF
   -- the Galois groups `Gal(Ω / K')` and `I_z`
   have hfix (σ : Ω ≃ₐ[N.K'] Ω) (a : C.functionField) :
@@ -144,56 +187,57 @@ theorem exists_linearMap_stalk_directImage_fundamentalRep
         Gal(Ω/C.functionField)) : Ω ≃ₐ[N.K'] Ω :=
     AlgEquiv.ofRingEquiv (f := σ.toRingEquiv) ((N.mem_iff σ).1 hσ)
   -- inertia acts through restrictions along `Spec σ`
-  have hI (σ : Gal(Ω/C.functionField))
+  have hres (ε₁ ε₂ : Spec (.of Ω) ⟶ Spec (.of Ω)) (hε : ε₁ = ε₂)
+      (h₁ : ε₁ ≫ genericGeomPoint (U ↘ Spec (.of K)) j = genericGeomPoint (U ↘ Spec (.of K)) j)
+      (h₂ : ε₂ ≫ genericGeomPoint (U ↘ Spec (.of K)) j = genericGeomPoint (U ↘ Spec (.of K)) j) :
+      (resOver (WeilCoefficients.{u} l) ε₁ h₁).app F.obj.carrier.X =
+        (resOver (WeilCoefficients.{u} l) ε₂ h₂).app F.obj.carrier.X := by
+    subst hε
+    rfl
+  have hI (σ' : Ω ≃ₐ[N.K'] Ω) (σ : Gal(Ω/C.functionField))
       (hσ : σ ∈ (boundaryChart (p := C ↘ Spec (.of K)) j z).point.inertia
-        Gal(Ω/C.functionField)) (w) :
+        Gal(Ω/C.functionField)) (hσσ' : (σ : Ω →+* Ω) = σ'.toRingHom) (w) :
       Ψ (fundamentalRep M (BasePointData.ofLift j sU GU B₀ ξ hξ).weilMonodromyData F hF
-        ⟨_, genericGaloisMap_mem_weilGroup_of_mem_inertia j sU GU τ GC z hσ⟩ w) =
+        (⟨_, genericGaloisMap_mem_weilGroup_of_mem_inertia j sU GU τ GC z hσ⟩ :
+          weilGroup (U ↘ Spec (.of K)) sU GU) w) =
       ((WeilCoefficients.toModuleCat l).map ((resOver _ _
-          (show Spec.map (CommRingCat.ofHom (ofGal σ hσ).toRingHom) ≫ (genericGeomPoint (U ↘ Spec (.of K)) j) = (genericGeomPoint (U ↘ Spec (.of K)) j) by
+          (show Spec.map (CommRingCat.ofHom σ'.toRingHom) ≫
+              genericGeomPoint (U ↘ Spec (.of K)) j = genericGeomPoint (U ↘ Spec (.of K)) j by
             rw [← N.specFieldMap_comp, ← Category.assoc,
               specMap_algEquiv_comp_specFieldMap])).app
             F.obj.carrier.X)).hom (Ψ w) := by
     have h0 := specMap_comp_genericGeomPoint j sU GU σ 0
       (genericGaloisMap_mem_weilGroup_of_mem_inertia j sU GU τ GC z hσ)
     rw [pow_zero] at h0
-    exact genericStalkEquiv_fundamentalRep_of_deg_zero B₀ ξ hξ F hF σ _
-      (h0.trans (Category.comp_id _)) w
+    exact (genericStalkEquiv_fundamentalRep_of_deg_zero B₀ ξ hξ F hF σ _
+      (h0.trans (Category.comp_id _)) w).trans
+      (congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom (Ψ w))
+        (hres _ _ (congrArg (fun f ↦ Spec.map (CommRingCat.ofHom f)) hσσ') _ _))
   have hmemI (g : weilGroup (U ↘ Spec (.of K)) sU GU)
       (hg : g ∈ boundaryInertia (p := C ↘ Spec (.of K)) (pU := U ↘ Spec (.of K)) j sU GU z) :
       ∃ σ, ∃ hσ : σ ∈ (boundaryChart (p := C ↘ Spec (.of K)) j z).point.inertia
           Gal(Ω/C.functionField),
         g = ⟨_, genericGaloisMap_mem_weilGroup_of_mem_inertia j sU GU τ GC z hσ⟩ := by
+    rw [boundaryInertia, Subgroup.mem_inf, Subgroup.mem_comap, MonoidHom.mem_ker] at hg
     obtain ⟨⟨σ, hσ, hσg⟩, hdeg⟩ := hg
-    refine ⟨σ, hσ, Subtype.ext (Prod.ext hσg.symm ?_)⟩
-    exact (MonoidHom.mem_ker.1 hdeg)
+    refine ⟨σ, hσ, Subtype.ext (Prod.ext ?_ ?_)⟩
+    · exact hσg.symm
+    · exact hdeg
   refine ⟨Ψ.symm.toLinearMap ∘ₗ Sp, Ψ.symm.injective.comp hSp, fun w ↦ ?_, fun v ↦ ?_⟩
-  · have hr : w ∈ LinearMap.range (Ψ.symm.toLinearMap ∘ₗ Sp) ↔ Ψ w ∈ LinearMap.range Sp := by
-      refine ⟨fun ⟨v, hv⟩ ↦ ⟨v, ?_⟩, fun ⟨v, hv⟩ ↦ ⟨v, ?_⟩⟩
-      · rw [← hv]
-        exact (Ψ.apply_symm_apply _).symm
-      · rw [LinearMap.comp_apply, hv]
-        exact Ψ.symm_apply_apply w
+  · have hr := LinearMap.mem_range_linearEquiv_symm_comp_iff Ψ Sp w
     rw [hr, hSpr]
     constructor
     · intro h g hg
       obtain ⟨σ, hσ, rfl⟩ := hmemI g hg
       apply Ψ.injective
-      rw [hI σ hσ]
-      exact h (ofGal σ hσ)
+      exact (hI (ofGal σ hσ) σ hσ rfl w).trans (h (ofGal σ hσ))
     · intro h σ
       have hg : (⟨_, genericGaloisMap_mem_weilGroup_of_mem_inertia j sU GU τ GC z (hσI σ)⟩ :
           weilGroup (U ↘ Spec (.of K)) sU GU) ∈
           boundaryInertia (p := C ↘ Spec (.of K)) (pU := U ↘ Spec (.of K)) j sU GU z :=
-        ⟨⟨_, hσI σ, rfl⟩, rfl⟩
-      have := congrArg Ψ (h _ hg)
-      rw [hI _ (hσI σ)] at this
-      exact this
-  · rw [LinearMap.comp_apply, LinearMap.comp_apply, LinearEquiv.coe_coe, LinearEquiv.coe_coe,
-      LinearEquiv.symm_apply_eq, hSpf]
-    have := genericStalkEquiv_fundamentalRep B₀ ξ hξ F hF _ _ hwF ha (Ψ.symm (Sp v))
-    rw [LinearEquiv.apply_symm_apply] at this
-    exact this.symm
+        mk_mem_boundaryInertia j sU GU z (hσI σ) _
+      exact (hI σ _ (hσI σ) rfl w).symm.trans (congrArg Ψ (h _ hg))
+  · sorry
 
 end Rep
 

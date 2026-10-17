@@ -9,27 +9,21 @@ public import WeilConjectures.WeilSheaf.DirectImageStalk
 public import WeilConjectures.WeilSheaf.StalkTransportGeneral
 
 /-!
-# The Frobenius of boundary stalks of direct images through a neighbourhood
+# The counit of `j^* ⊣ j_*` and the Weil structures
 
-Let `j : U₀ ⟶ C₀` be a quasi-compact open immersion of `k₀`-schemes, `F` a Weil sheaf on `U₀`
-and `G = j_* F`. Let `h : Spec A ⟶ C̄` be a morphism with a point `c` over a geometric point `s`
-of `C̄`, `α` an endomorphism of `Spec A` lifting `Frᵐ` (`α ≫ h = h ≫ Frᵐ`) with
-`σᵐ ≫ c = c ≫ α`, and `ε : Spec Ω ⟶ Spec A` a point over a point `η` of `Ū` (`ε ≫ h = η ≫ j̄`)
-with an endomorphism `a` of `Spec Ω` such that `a ≫ η = η ≫ Frᵐ` and `a ≫ ε = ε ≫ α`.
+Let `j : U₀ ⟶ C₀` be a quasi-compact open immersion of `k₀`-schemes and `F` a Weil sheaf on `U₀`.
+The underlying morphism of sheaves `j̄^* L(F) ⟶ F` of a morphism of Weil sheaves `j^* L(F) ⟶ F`
+is compatible with the Weil structures
+(`AlgebraicGeometry.WeilSheaf.upperStarHom_frobeniusStr_compatible`). For the counit of
+`j^* ⊣ j_*` this morphism is the counit of `j̄^* ⊣ j̄_*` on the underlying sheaves
+(`AlgebraicGeometry.WeilSheaf.upperStarHom_counit`), so that the latter is compatible with the
+Weil structures of `F` and `j_* F` (`AlgebraicGeometry.WeilSheaf.counit_frobeniusStr_compatible`).
 
-Then:
-
-* the restriction `Γ(Spec A, h^* G) ⟶ G_s` along `c` intertwines the transport along `α` and the
-  Weil structure `φ_m` with the Frobenius of the stalk
-  (`AlgebraicGeometry.WeilSheaf.resOver_stalkAt_frobenius`);
-* the restriction to `Spec Ω` along `ε` followed by the counit `j̄^* j̄_* F ⟶ F`,
-  `Γ(Spec A, h^* G) ⟶ Γ(Spec Ω, (η ≫ j̄)^* G) ⟶ Γ(Spec Ω, η^* F)`
-  (`AlgebraicGeometry.WeilSheaf.genericSpecialization`), intertwines the transport along `α` with
-  the transport along `a ≫ η = η ≫ Frᵐ` and the Weil structure of `F`
-  (`AlgebraicGeometry.WeilSheaf.genericSpecialization_frobenius`).
-
-For a strictly henselian neighbourhood of a boundary point and `a` the residue Frobenius lift,
-this is the Frobenius equivariance of blueprint `lem-wf-boundary-stalk-invariants`.
+This is used for the Frobenius equivariance of the generic specialization of sections of `j_* F`
+over a strictly henselian neighbourhood of a boundary point, in blueprint
+`lem-wf-boundary-stalk-invariants`. The statements are made for `WeilSheaf.lowerStar` and an
+arbitrary functor `L` rather than for `WeilSheaf.directImage`: the kernel checks the unfolding of
+`directImage` and of the Weil structures of `j^* j_* F` very slowly.
 -/
 
 @[expose] public section
@@ -74,6 +68,8 @@ noncomputable def upperStarHom (θ : (L ⋙ upperStar j).obj F ⟶ (𝟭 _).obj 
   (𝟙 _ : (j̄)^*[_].obj (L.obj F).obj.carrier.X ⟶ ((L ⋙ upperStar j).obj F).obj.carrier.X) ≫
     θ.hom.hom.f.hom
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] [IsOpenImmersion j] [QuasiCompact j] in
 /-- The underlying morphism `j̄^* L(F) ⟶ F` of a morphism of Weil sheaves `j^* L(F) ⟶ F` is
 compatible with the Weil structures. -/
 lemma upperStarHom_frobeniusStr_compatible (θ : (L ⋙ upperStar j).obj F ⟶ (𝟭 _).obj F) :
@@ -94,6 +90,7 @@ lemma upperStarHom_frobeniusStr_compatible (θ : (L ⋙ upperStar j).obj F ⟶ (
 
 end UpperStarHom
 
+omit [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] in
 /-- The underlying morphism of the counit `j^* j_* F ⟶ F` of Weil sheaves is the counit of
 `j̄^* ⊣ j̄_*` on the underlying sheaves. -/
 lemma upperStarHom_counit :
@@ -104,6 +101,7 @@ lemma upperStarHom_counit :
     ProEtale.adicUpperStarLowerStarAdjunction, Adjunction.modAdjunction_counit_app_hom]
   exact Category.id_comp _
 
+omit [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] in
 /-- **The counit `j̄^* j̄_* F ⟶ F` is compatible with the Weil structures** of `F` and of
 `j_* F`. -/
 lemma counit_frobeniusStr_compatible :

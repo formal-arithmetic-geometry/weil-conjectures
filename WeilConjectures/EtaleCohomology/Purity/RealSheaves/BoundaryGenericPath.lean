@@ -40,6 +40,15 @@ universe u
 
 open CategoryTheory Limits PreGaloisCategory
 
+namespace CategoryTheory
+
+/-- Composites of `eqToIso`, followed by an isomorphism. -/
+lemma eqToIso_trans_assoc {𝒞 : Type*} [Category 𝒞] {X Y Z W : 𝒞} (p : X = Y) (q : Y = Z)
+    (γ : Z ≅ W) : eqToIso p ≪≫ eqToIso q ≪≫ γ = eqToIso (p.trans q) ≪≫ γ := by
+  rw [← Iso.trans_assoc, eqToIso_trans]
+
+end CategoryTheory
+
 namespace AlgebraicGeometry
 
 namespace Scheme.FiniteEtale
@@ -143,18 +152,21 @@ noncomputable def ofLift (B₀ : BasePointData (ofFundamentalGroup pU sU GU))
   frobPath := B₀.frobPath
 
 variable {j sU GU} (B₀ : BasePointData (ofFundamentalGroup pU sU GU))
-  (ξ : Spec (.of Ω) ⟶ UniversalCover.cover B₀.t)
-  (hξ : ξ ≫ UniversalCover.proj B₀.t = genericGeomPoint pU j)
 
 /-- The push-down of the path of the lift `Spec σ ≫ ξ` of `Spec σ ≫ η`, for `σ ∈ Gal(Ω / k(C))`,
 is the push-down of the path of `ξ` followed by the action of `σ` on the fibre functor at `η₀`. -/
-lemma pullbackPathIso'_liftPath_specMap (σ : Gal(Ω/C.functionField)) {η' : Spec (.of Ω) ⟶ _}
-    (h' : (Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ ξ) ≫ UniversalCover.proj B₀.t = η')
+lemma pullbackPathIso'_liftPath_specMap
+    (ξ : Spec (.of Ω) ⟶ UniversalCover.cover B₀.t)
+    (hξ : ξ ≫ UniversalCover.proj B₀.t = genericGeomPoint pU j) (σ : Gal(Ω/C.functionField))
+    {ξ' : Spec (.of Ω) ⟶ UniversalCover.cover B₀.t}
+    (hξ' : Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ ξ = ξ')
+    {η' : Spec (.of Ω) ⟶ pU.geometricFiber} (h' : ξ' ≫ UniversalCover.proj B₀.t = η')
     (hη' : η' ≫ pU.geometricFiberProj = genericBasePoint j) :
-    pullbackPathIso' pU.geometricFiberProj (UniversalCover.liftPath B₀.t _ h') =
+    pullbackPathIso' pU.geometricFiberProj (UniversalCover.liftPath B₀.t ξ' h') =
       pullbackPathIso' pU.geometricFiberProj (UniversalCover.liftPath B₀.t ξ hξ) ≪≫
         eqToIso (congrArg fiber (genericGeomPoint_geometricFiberProj j)) ≪≫
         galoisToAut (genericPointLift j) σ ≪≫ eqToIso (congrArg fiber hη'.symm) := by
+  subst hξ'
   ext P x
   apply fiber_ext
   simp only [Iso.trans_hom, NatTrans.comp_app, FintypeCat.comp_apply]
@@ -163,51 +175,60 @@ lemma pullbackPathIso'_liftPath_specMap (σ : Gal(Ω/C.functionField)) {η' : Sp
     pullbackPathIso'_hom_app_left, pullbackPathIso'_hom_app_left,
     UniversalCover.liftPath_hom_app_left, UniversalCover.liftPath_hom_app_left]
   simp only [Category.assoc]
-  rfl
 
 /-- **Inertia-type loops.** For `σ ∈ Gal(Ω / k(C))` fixing `η` (acting trivially on `k̄`), the
-loop at `t` defined by the lifts `Spec σ ≫ ξ` and `ξ` maps to the image of `σ` in `π₁(U₀)`. -/
-theorem geomAut_ofLift (σ : Gal(Ω/C.functionField))
-    (h' : (Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ ξ) ≫ UniversalCover.proj B₀.t =
-      genericGeomPoint pU j) :
-    (ofLift j sU GU B₀ ξ hξ).geomAut (UniversalCover.liftPath B₀.t _ h' ≪≫
+loop at `t` defined by the lifts `ξ' = Spec σ ≫ ξ` and `ξ` maps to the image of `σ` in
+`π₁(U₀)`. -/
+theorem geomAut_ofLift
+    (ξ : Spec (.of Ω) ⟶ UniversalCover.cover B₀.t)
+    (hξ : ξ ≫ UniversalCover.proj B₀.t = genericGeomPoint pU j) (σ : Gal(Ω/C.functionField))
+    {ξ' : Spec (.of Ω) ⟶ UniversalCover.cover B₀.t}
+    (hξ' : Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ ξ = ξ')
+    (h' : ξ' ≫ UniversalCover.proj B₀.t = genericGeomPoint pU j) :
+    (ofLift j sU GU B₀ ξ hξ).geomAut (UniversalCover.liftPath B₀.t ξ' h' ≪≫
       (UniversalCover.liftPath B₀.t ξ hξ).symm) = genericGaloisMap j sU GU σ := by
   rw [geomAut_apply]
-  change (toAutMulEquiv _ _).symm _ = (toAutMulEquiv _ _).symm _
+  change (toAutMulEquiv (fiber sU) GU).symm _ = (toAutMulEquiv (fiber sU) GU).symm _
   congr 1
-  rw [Iso.conjAut_apply, ← pullbackPathIso'_eq, pullbackPathIso'_trans, pullbackPathIso'_symm,
-    pullbackPathIso'_liftPath_specMap B₀ ξ hξ σ h' (genericGeomPoint_geometricFiberProj j)]
-  simp only [ofLift, Iso.trans_symm, Iso.trans_assoc, Iso.symm_self_id_assoc,
-    Iso.self_symm_id_assoc, eqToIso_trans_assoc, eqToIso_refl, Iso.refl_trans]
-  simp
+  simp only [MonoidHom.comp_apply, MulEquiv.coe_toMonoidHom, Iso.conjAut_apply]
+  rw [← pullbackPathIso'_eq, pullbackPathIso'_trans, pullbackPathIso'_symm,
+    pullbackPathIso'_liftPath_specMap B₀ ξ hξ σ hξ' h' (genericGeomPoint_geometricFiberProj j)]
+  simp only [ofLift, Iso.trans_symm, Iso.trans_assoc, Iso.symm_self_id_assoc]
+  simp only [eqToIso_trans_assoc, eqToIso_refl, Iso.refl_trans]
 
 /-- **Frobenius-type paths.** For `σ ∈ Gal(Ω / k(C))` with `Spec σ ≫ η = η ≫ Frⁿ`, the path
-`F_t ≅ F_{t ≫ Frⁿ}` defined by the lifts `Spec σ ≫ ξ` and `ξ ≫ (Ỹ_t ⟶ Ỹ_{t ≫ Frⁿ})` pushes down to
-the image of `σ` in `π₁(U₀)`. -/
-theorem downAut_ofLift (σ : Gal(Ω/C.functionField)) (n : ℕ)
-    (h₁ : (Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ ξ) ≫ UniversalCover.proj B₀.t =
+`F_t ≅ F_{t ≫ Frⁿ}` defined by the lifts `ξ' = Spec σ ≫ ξ` and `ξ ≫ (Ỹ_t ⟶ Ỹ_{t ≫ Frⁿ})`
+pushes down to the image of `σ` in `π₁(U₀)`. -/
+theorem downAut_ofLift
+    (ξ : Spec (.of Ω) ⟶ UniversalCover.cover B₀.t)
+    (hξ : ξ ≫ UniversalCover.proj B₀.t = genericGeomPoint pU j) (σ : Gal(Ω/C.functionField)) (n : ℕ)
+    {ξ' : Spec (.of Ω) ⟶ UniversalCover.cover B₀.t}
+    (hξ' : Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ ξ = ξ')
+    (h₁ : ξ' ≫ UniversalCover.proj B₀.t =
       genericGeomPoint pU j ≫ (pU.geometricGaloisFrobenius ^ n).hom)
     (h₂ : (ξ ≫ UniversalCover.map (pU.geometricGaloisFrobenius ^ n).hom B₀.t) ≫
       UniversalCover.proj (B₀.t ≫ (pU.geometricGaloisFrobenius ^ n).hom) =
         genericGeomPoint pU j ≫ (pU.geometricGaloisFrobenius ^ n).hom)
     (hd : (B₀.t ≫ (pU.geometricGaloisFrobenius ^ n).hom) ≫ pU.geometricFiberProj =
       B₀.t ≫ pU.geometricFiberProj) :
-    (ofLift j sU GU B₀ ξ hξ).downAut (UniversalCover.liftPath B₀.t _ h₁ ≪≫
-      (UniversalCover.liftPath (B₀.t ≫ (pU.geometricGaloisFrobenius ^ n).hom) _ h₂).symm) hd =
+    (ofLift j sU GU B₀ ξ hξ).downAut (UniversalCover.liftPath B₀.t ξ' h₁ ≪≫
+      (UniversalCover.liftPath (B₀.t ≫ (pU.geometricGaloisFrobenius ^ n).hom)
+        (ξ ≫ UniversalCover.map (pU.geometricGaloisFrobenius ^ n).hom B₀.t) h₂).symm) hd =
         genericGaloisMap j sU GU σ := by
   have hF := Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj pU n
   have hη' : (genericGeomPoint pU j ≫ (pU.geometricGaloisFrobenius ^ n).hom) ≫
       pU.geometricFiberProj = genericBasePoint j := by
     rw [Category.assoc, hF, genericGeomPoint_geometricFiberProj]
   rw [downAut]
-  change (toAutMulEquiv _ _).symm _ = (toAutMulEquiv _ _).symm _
+  change (toAutMulEquiv (fiber sU) GU).symm _ = (toAutMulEquiv (fiber sU) GU).symm _
   congr 1
-  rw [Iso.conjAut_apply, ← pullbackPathIso'_eq, pullbackPathIso'_trans, pullbackPathIso'_symm,
-    pullbackPathIso'_liftPath_specMap B₀ ξ hξ σ h₁ hη', UniversalCover.liftPath_map,
+  simp only [MonoidHom.comp_apply, MulEquiv.coe_toMonoidHom, Iso.conjAut_apply]
+  rw [← pullbackPathIso'_eq, pullbackPathIso'_trans, pullbackPathIso'_symm,
+    pullbackPathIso'_liftPath_specMap B₀ ξ hξ σ hξ' h₁ hη', UniversalCover.liftPath_map _ B₀.t ξ hξ,
     pullbackPathIso'_pullbackPathIso'_of_comp_eq hF]
-  simp only [ofLift, Iso.trans_symm, Iso.trans_assoc, eqToIso_symm', eqToIso_trans_assoc,
-    eqToIso_trans, Iso.symm_self_id_assoc, Iso.self_symm_id_assoc, eqToIso_refl, Iso.refl_trans]
-  simp
+  simp only [ofLift, Iso.trans_symm, Iso.trans_assoc, eqToIso_symm',
+    eqToIso_trans, Iso.symm_self_id_assoc, eqToIso_refl, Iso.refl_trans]
+  simp only [eqToIso_trans_assoc, eqToIso_refl, Iso.refl_trans]
 
 end BasePointData
 

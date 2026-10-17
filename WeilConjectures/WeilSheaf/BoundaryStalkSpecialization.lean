@@ -24,6 +24,11 @@ counit `j̄^* j̄_* F ⟶ F`. It intertwines the transports along lifts of the F
 restriction of sections of `F` from `Spec A ×_C̄ Ū` to `Spec Ω`
 (`AlgebraicGeometry.WeilSheaf.germ_diagLift_comp_genericSpecialization`).
 
+For a strictly henselian neighbourhood of the geometric point of a closed point `x`, whose
+punctured part is the spectrum of a field `K'`, and a Galois extension `Ω / K'`, this gives an
+injective linear map from the stalk `(j_* F)_x̄` to `Γ(Spec Ω, η^* F)` with image the
+`Gal(Ω / K')`-invariants, intertwining the Frobenius of the stalk with the transport along a lift
+of the Frobenius (`AlgebraicGeometry.WeilSheaf.exists_stalk_directImage_linearMap_invariants`).
 This is the stalk side of blueprint `lem-wf-boundary-stalk-invariants`.
 -/
 
@@ -101,8 +106,8 @@ lemma stalkAt_frobenius_apply
 through `congrArg`: the kernel checks the direct definitional unfolding slowly.) -/
 lemma stalk_frobenius_apply_eq (x : X.finitePoints) (v : (G.stalk x).carrier) :
     (G.stalk x).frobenius v = (G.stalkAt _ _
-      ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
-        x)).frobenius v :=
+      (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
+        (X ↘ Spec (CommRingCat.of k₀)) x)).frobenius v :=
   congrArg (fun f : (G.stalk x).carrier ≃ₗ[PadicAlgCl l] (G.stalk x).carrier ↦ f v) rfl
 
 /-- The Frobenius of the geometric stalk at a closed point `x`, `m = deg x`, is the transport of
@@ -178,6 +183,8 @@ noncomputable def genericSpecialization :
   (ProEtale.resOver _ ε hε).app _ ≫
     ProEtale.globalSectionsTransport _ (τ := (Iso.refl _).hom) (Category.id_comp (η ≫ j̄)) θ
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] [IsOpenImmersion j] [QuasiCompact j] in
 /-- **The generic specialization intertwines the Frobenius lifts.** For `θ` compatible with the
 Weil structures, a lift `α` of `Frᵐ` to `Spec A` and `a` of `Frᵐ` to `Spec Ω` with
 `a ≫ ε = ε ≫ α`, the generic specialization intertwines the transports along `α` and `a` and the
@@ -227,7 +234,8 @@ noncomputable abbrev nbhdGenericPoint : Spec (.of Ω) ⟶ Spec (.of A) :=
   specFieldMap K' Ω ≫ e.hom.left ≫ pullback.fst h (j̄)
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] [QuasiCompact j] in
+  [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] [QuasiCompact j] [Finite k₀]
+  [IsOpenImmersion j] [Algebra.IsSeparable K' Ω] in
 lemma nbhdGenericPoint_comp :
     nbhdGenericPoint j h Ω k e ≫ h = (specFieldMap K' Ω ≫ k) ≫ j̄ := by
   have hw : e.hom.left ≫ pullback.snd h (j̄) = k := MorphismProperty.Over.w e.hom
@@ -235,7 +243,8 @@ lemma nbhdGenericPoint_comp :
     ← Category.assoc e.hom.left, hw, Category.assoc]
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] [QuasiCompact j] in
+  [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] [QuasiCompact j] [Finite k₀]
+  [IsOpenImmersion j] [Algebra.IsSeparable K' Ω] in
 /-- The lift of `Spec Ω` through the iterated base change, given by the generic point. -/
 lemma overLift_nbhdGenericPoint_comp_pullbackComp :
     overLift (Scheme.ProEt.mk h) (nbhdGenericPoint j h Ω k e) (nbhdGenericPoint_comp j h k e) ≫
@@ -243,7 +252,9 @@ lemma overLift_nbhdGenericPoint_comp_pullbackComp :
         (Scheme.ProEt.mk h) =
       overLift ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (j̄)).obj (Scheme.ProEt.mk h))
         (specFieldMap K' Ω ≫ e.hom.left)
-        (by rw [Category.assoc]; exact congrArg (specFieldMap K' Ω ≫ ·) (MorphismProperty.Over.w e.hom)) := by
+        (by
+          rw [Category.assoc]
+          exact congrArg (specFieldMap K' Ω ≫ ·) (MorphismProperty.Over.w e.hom)) := by
   refine MorphismProperty.Over.Hom.ext ?_
   erw [MorphismProperty.Comma.comp_left]
   apply pullback.hom_ext
@@ -258,7 +269,7 @@ lemma overLift_nbhdGenericPoint_comp_pullbackComp :
         MorphismProperty.Over.pullbackComp_hom_app_left, Category.assoc]
       erw [pullback.map_id, Category.id_comp, pullbackLeftPullbackSndIso_inv_fst_snd,
         pullback.lift_snd_assoc, pullback.lift_fst_assoc]
-      simp only [Category.id_comp, Category.assoc]
+      simp only [Category.assoc]
       exact congrArg (specFieldMap K' Ω ≫ ·) (MorphismProperty.Over.w e.hom).symm
   · simp only [overLift, MorphismProperty.Over.homMk_hom, Over.homMk_left,
       MorphismProperty.Over.pullbackComp_hom_app_left, Category.assoc]
@@ -266,10 +277,10 @@ lemma overLift_nbhdGenericPoint_comp_pullbackComp :
       pullback.lift_snd, pullback.lift_snd]
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] in
-/-- **The generic specialization on germs.** The generic specialization of the germ along the
-diagonal of a section `p` of `j_* F` over the neighbourhood is the germ along the diagonal of
-the restriction of `p`, as a section of `F` over `Spec A ×_C̄ Ū = Spec K'`, to `Spec Ω`. -/
+  [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] [QuasiCompact j] [IsOpenImmersion j] in
+/-- **The generic specialization on germs.** The germ along the diagonal of the neighbourhood
+followed by the generic specialization is the restriction of sections of `F` from
+`Spec A ×_C̄ Ū = Spec K'` to `Spec Ω`, followed by the germ along the diagonal of `Spec Ω`. -/
 lemma germ_diagLift_comp_genericSpecialization :
     germ _ (Scheme.ProEt.mk h).hom ((j̄)_*[_].obj F.obj.carrier.X)
         (diagLift (Scheme.ProEt.mk h)) ≫
@@ -305,6 +316,7 @@ variable [IsStrictlyHenselianLocalRing A] [Normal K' Ω] (x : X.finitePoints)
     ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x)).obj
       (Scheme.ProEt.mk h))
 
+omit [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] in
 /-- **The boundary stalk of `j_* F` as Galois invariants, Frobenius-equivariantly.** Let
 `h : Spec A ⟶ C̄` be a weakly étale neighbourhood of the geometric point `x̄` of a closed point `x`
 through the closed point of the strictly henselian `Spec A`, whose punctured part
