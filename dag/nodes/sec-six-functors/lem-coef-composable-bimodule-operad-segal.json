@@ -81,11 +81,13 @@
    }
   },
   {
-   "text": "Let $E_f\\subseteq I_f$ be the full subcategory of the $n$ single-edge intervals $[i-1,i]$, $1\\leq i\\leq n$. These are all allowed, because $f$ increases by at most one at each step. The interval category has arrows from an interval to each of its subintervals. For an interval of length $r$, its outgoing comma with $E_f$ is the discrete set of its $r$ edges. The diagram $F_0|_{I_f}$ carries its edge projections to inert cocartesian edges. By the relative mapping-space product condition of [def-coef-monoidal-infinity-category], those projections are a $p$-limit over their base cone: by [lem-coef-infinity-relative-cone-constant-test] it suffices to test against constant diagrams at each $z$, and since the mapping spaces of $N(\\Delta^{\\mathrm{op}})$ are discrete, that constant-test square is a homotopy pullback exactly when the fiberwise maps $\\operatorname{Map}^\\phi(z,-)\\to\\prod_i\\operatorname{Map}^{\\rho_i\\circ\\phi}(z,-)$ are equivalences for every base arrow $\\phi$. For a length-zero interval this is the empty relative product in the fiber over $[0]$. Thus $F_0|_{I_f}$ is a pointwise relative right Kan extension of $F_0|_{E_f}$. By the cone comparison in [lem-coef-relative-right-kan-universal-restriction], its relative limit over the cone with apex $[n]$ is computed on $E_f$. The Segal equivalence for the fiber over $[n]$ supplies a tuple with components $F_0(f|_{[i-1,i]})$ and inert projections, and the mapping-space product axiom makes it exactly this $p$-limit. The case $n=0$ uses the one-point zero fiber and the empty product, not a nonexistent edge. Combining with step 4 gives the local relative limit required on $J_f$, with its given boundary and base cone.",
+   "text": "Let $E_f\\subseteq I_f$ be the full subcategory of the $n$ single-edge intervals $[i-1,i]$, $1\\leq i\\leq n$. These are all allowed, because $f$ increases by at most one at each step. The interval category has arrows from an interval to each of its subintervals. For an interval of length $r$, its outgoing comma with $E_f$ is the discrete set of its $r$ edges. The diagram $F_0|_{I_f}$ carries its edge projections to inert cocartesian edges. By the relative mapping-space product condition of [def-coef-monoidal-infinity-category], those projections are a $p$-limit over their base cone: by [lem-coef-infinity-relative-cone-constant-test] it suffices to test against constant diagrams at each $z$, and since the mapping spaces of $N(\\Delta^{\\mathrm{op}})$ are discrete, that constant-test square is a homotopy pullback exactly when the fiberwise maps $\\operatorname{Map}^\\phi(z,-)\\to\\prod_i\\operatorname{Map}^{\\rho_i\\circ\\phi}(z,-)$ are equivalences for every base arrow $\\phi$. For a length-zero interval this is the empty relative product in the fiber over $[0]$. Thus $F_0|_{I_f}$ is a pointwise relative right Kan extension of $F_0|_{E_f}$. By the cone comparison in [lem-coef-relative-right-kan-universal-restriction], its relative limit over the cone with apex $[n]$ is computed on $E_f$. The Segal equivalence for the fiber over $[n]$ is essentially surjective, so it supplies $y$ over $[n]$ with inert lifts $y\\to y_i$ over $\\rho_i$ and equivalences $y_i\\simeq F_0(f|_{[i-1,i]})$ in the fiber over $[1]$. Such an equivalence over an identity is cocartesian by [lem-coef-infinity-cocartesian-mapping-criterion], since precomposition with an equivalence induces equivalences of mapping spaces, and the composite of the inert lift with it is cocartesian by the composition assertion of [lem-coef-infinity-cocartesian-composition-initiality]. This gives a tuple with components exactly $F_0(f|_{[i-1,i]})$, inert projections and the prescribed base cone, and the mapping-space product axiom makes it exactly this $p$-limit. The case $n=0$ uses the one-point zero fiber and the empty product, not a nonexistent edge. Combining with step 4 gives the local relative limit required on $J_f$, with its given boundary and base cone.",
    "uses": [
     "def-coef-monoidal-infinity-category",
     "lem-coef-infinity-relative-cone-constant-test",
-    "lem-coef-relative-right-kan-universal-restriction"
+    "lem-coef-relative-right-kan-universal-restriction",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-cocartesian-composition-initiality"
    ],
    "elementary": false,
    "source": {
@@ -122,22 +124,25 @@
    }
   },
   {
-   "text": "Combine the equivalence of step 7, the pullback identification of step 3, and the four path approximations of step 1. Their comparison is the restriction in the statement, since every functor used on the forward comparison is precomposition with an inclusion or $\\Phi$. It is therefore an equivalence onto the stated infinity-categorical pullback. For an inert-preserving target map $v$, postcomposition commutes exactly with these restriction maps and with the functors $\\Phi$. Hence the resulting equivalence is natural in $\\mathcal X^\\otimes$; no claim that $v$ preserves arbitrary limits is used. All auxiliary relative limits were the inert products supplied by the target operad, so no presentability or colimit hypothesis has entered.",
+   "text": "Combine the equivalence of step 7, the pullback identification of step 3, and the four path approximations of step 1. Their comparison is the restriction in the statement, since every functor used on the forward comparison is precomposition with an inclusion or $\\Phi$. The restrictions land in the strict fiber product of the algebra categories, and the functors $\\Phi^*$ commute strictly with restriction to vertex intervals. To see that the restriction is an equivalence onto the stated infinity-categorical pullback, fix a small quasicategory $Q$ and apply $\\operatorname{Fun}(Q,-)^\\simeq$. By [lem-coef-infinity-isofibration-pullback-limit], applied to the isofibration of step 3, $\\operatorname{Fun}(Q,\\mathcal D_U(\\mathcal X))^\\simeq$ is the path pullback of the cores for $U_{01}$, $U_1$, $U_{12}$. A functor equivalence induces a functor equivalence on $\\operatorname{Fun}(Q,-)$ (postcompose with the quasi-inverse and the natural equivalences), hence a homotopy equivalence of cores, since a natural equivalence $\\eta:A\\times\\Delta^1\\to A$ carries $A^\\simeq\\times\\Delta^1$ into $A^\\simeq$. Thus the four maps $\\Phi^*$ and the equivalence of step 7 give weak homotopy equivalences, strictly compatible with the restriction maps. By [lem-coef-kan-homotopy-pullback-invariance], the induced map from the path pullback of the cores of the three algebra categories to the path pullback of the cores of the three path categories is a weak homotopy equivalence. The restriction from $\\operatorname{Fun}(Q,\\operatorname{Alg}_{\\mathsf{Chain}_2}(\\mathcal X))^\\simeq$ followed by this map equals the composite of weak equivalences through $\\mathcal D_2$ and $\\mathcal D_U$, so by two-out-of-three the restriction is an equivalence onto the categorical pullback for every $Q$. This is the mapping-space meaning of the categorical pullback in [lem-coef-infinity-isofibration-pullback-limit]. For an inert-preserving target map $v$, postcomposition commutes exactly with these restriction maps and with the functors $\\Phi$. Hence the resulting equivalence is natural in $\\mathcal X^\\otimes$; no claim that $v$ preserves arbitrary limits is used. All auxiliary relative limits were the inert products supplied by the target operad, so no presentability or colimit hypothesis has entered.",
    "uses": [
-    "lem-coef-bimodule-word-path-approximation"
+    "lem-coef-bimodule-word-path-approximation",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-coef-kan-homotopy-pullback-invariance"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
     "place": "Proposition 4.4.1.11 and Remark 4.4.2.2: assemble the actual restriction equivalence and its target naturality."
    }
   },
   {
-   "text": "Apply step 8 to both $\\mathcal X^\\otimes$ and $\\mathcal O^\\otimes$ and use its naturality for $v$. The resulting square of algebra categories commutes and its horizontal arrows are equivalences. Taking the categorical fiber over $g$ gives the corresponding equivalence of relative categories. More explicitly, a relative object is $(F,\\epsilon:vF\\simeq g)$; restricting gives the two algebra objects with their shared identification and the restrictions of $\\epsilon$. An inverse on algebra categories supplied by the horizontal equivalence in step 8 extends these data, and the inverse of the horizontal equivalence for $\\mathcal O$ lifts the restricted base identification to $vF\\simeq g$. The same construction with arbitrary simplicial parameters extends compatible transformations; the unit and counit are the restrictions of the two coherent inverse equivalences. This is equivalence invariance of the categorical pullback, whose mapping-space universal meaning is [lem-coef-infinity-isofibration-pullback-limit]. To relate a strict fiber when postcomposition is a categorical fibration, apply that node to $T=\\{g\\}$ and to the postcomposition functor itself. It states exactly that this degreewise strict pullback is a categorical pullback. Thus it is the stated equivalent model. No fibration hypothesis on the originally given $v$ is imposed for the categorical-fiber assertion.",
+   "text": "Apply step 8 to both $\\mathcal X^\\otimes$ and $\\mathcal O^\\otimes$ and use its naturality for $v$. The resulting square of algebra categories commutes and its horizontal arrows are equivalences. Taking the categorical fiber over $g$ gives the corresponding equivalence of relative categories. More explicitly, a relative object is $(F,\\epsilon:vF\\simeq g)$; restricting gives the two algebra objects with their shared identification and the restrictions of $\\epsilon$. An inverse on algebra categories supplied by the horizontal equivalence in step 8 extends these data, and the inverse of the horizontal equivalence for $\\mathcal O$ lifts the restricted base identification to $vF\\simeq g$. The same construction with arbitrary simplicial parameters extends compatible transformations; the unit and counit are the restrictions of the two coherent inverse equivalences. This is equivalence invariance of the categorical fiber. By [lem-coef-infinity-isofibration-pullback-limit] it is tested on the cores of $\\operatorname{Fun}(Q,-)$, where [lem-coef-kan-homotopy-pullback-invariance] applies to the path pullbacks over the constant point $g$, using the horizontal weak equivalences of cores from step 8. To relate a strict fiber when postcomposition is a categorical fibration, apply that node to $T=\\{g\\}$ and to the postcomposition functor itself. It states exactly that this degreewise strict pullback is a categorical pullback. Thus it is the stated equivalent model. No fibration hypothesis on the originally given $v$ is imposed for the categorical-fiber assertion.",
    "uses": [
-    "lem-coef-infinity-isofibration-pullback-limit"
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-coef-kan-homotopy-pullback-invariance"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
     "place": "Relative conclusion after Remark 4.4.2.2 and Construction 4.4.2.7; invariance of categorical fibers under the natural restriction equivalences."
@@ -156,7 +161,8 @@
   "def-coef-monoidal-infinity-category",
   "lem-coef-relative-right-kan-universal-restriction",
   "lem-coef-infinity-cocartesian-composition-initiality",
-  "lem-coef-infinity-relative-cone-constant-test"
+  "lem-coef-infinity-relative-cone-constant-test",
+  "lem-coef-kan-homotopy-pullback-invariance"
  ],
  "proof_origin": {
   "by": "agent",
@@ -275,10 +281,52 @@
    "results": "{\"t\": \"2026-10-16T21:55:39Z\", \"tool\": \"leanfinder\", \"query\": \"Segal gluing theorem identifies coherent algebras for two adjacent bimodules with pairs sharing an associative algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Bimod.triangle_bimod\", \"Bimod.TensorBimod.middle_assoc'\", \"Bimod.TensorBimod.X\", \"Bimod.whisker_assoc_bimod\", \"Bimod.associatorBimod\", \"Bimod.pentagon_bimod\", \"Bimod.AssociatorBimod.homAux\", \"Bimod.TensorBimod.left_assoc'\"], \"digest\": \"0855a76029e92d54\"}",
    "date": "2026-10-17",
    "verdict": "no match: second phrasing returns Bimod tensor and coherence declarations, all in an ordinary monoidal category with coequalizers and tensor-colimit preservation. The item requires neither of these hypotheses and concerns full coherent operadic algebra categories; the Bimod definitions and coequalizer tensor in Mathlib/CategoryTheory/Monoidal/Bimod.lean:79-139,356-366 were read and are not a specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction equivalence algebras for two composable bimodule operads Segal infinity category",
+   "results": "{\"t\": \"2026-10-17T07:57:19Z\", \"tool\": \"leanfinder\", \"query\": \"restriction equivalence algebras for two composable bimodule operads Segal infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.nerve.homEquiv_comp\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal\", \"SSet.IsStrictSegal\", \"SSet.StrictSegal.isStrictSegal\"], \"digest\": \"aa6772c6a5887069\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read Mathlib/CategoryTheory/Monoidal/Bimod.lean:79-139,350-366 and AlgebraicTopology/SimplicialSet/StrictSegal.lean:520-539. The hits describe ordinary internal bimodules, tensor coequalizers, strict Segal nerves, ordinary pullback associativity, or ordinary functor equivalences; none states coherent operadic algebra gluing or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Bimod, CategoryTheory.Nerve.strictSegal",
+   "results": "{\"t\": \"2026-10-17T07:57:20Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Bimod, CategoryTheory.Nerve.strictSegal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Bimod'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid query: unknown CategoryTheory.Bimod identifier; not absence evidence. A valid replacement Bimod, \"equiv\" query is recorded separately."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|Segal|bimodule",
+   "results": "{\"t\": \"2026-10-17T07:57:20Z\", \"tool\": \"grep\", \"query\": \"operad|Segal|bimodule\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\"], \"digest\": \"005ffa1d910c5716\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read Mathlib/CategoryTheory/Monoidal/Bimod.lean:79-139,350-366 and AlgebraicTopology/SimplicialSet/StrictSegal.lean:520-539. The hits describe ordinary internal bimodules, tensor coequalizers, strict Segal nerves, ordinary pullback associativity, or ordinary functor equivalences; none states coherent operadic algebra gluing or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "algebras over two adjacent bimodule operads are a pullback over the shared associative algebra",
+   "results": "{\"t\": \"2026-10-17T07:57:20Z\", \"tool\": \"leansearch\", \"query\": \"algebras over two adjacent bimodule operads are a pullback over the shared associative algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pullbackAssocIsPullback\", \"CategoryTheory.Limits.pullbackPullbackRightIsPullback\", \"CategoryTheory.Limits.pullbackAssoc\", \"CategoryTheory.Limits.pullbackPullbackLeftIsPullback\", \"Algebra.IsPushout.cancelBaseChangeAux\", \"Bimod.TensorBimod.X\", \"CategoryTheory.Limits.pullbackAssocSymmIsPullback\", \"instIsPushout\"], \"digest\": \"bc79e18aebc323dd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read Mathlib/CategoryTheory/Monoidal/Bimod.lean:79-139,350-366 and AlgebraicTopology/SimplicialSet/StrictSegal.lean:520-539. The hits describe ordinary internal bimodules, tensor coequalizers, strict Segal nerves, ordinary pullback associativity, or ordinary functor equivalences; none states coherent operadic algebra gluing or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "Bimod, \"equiv\"",
+   "results": "{\"t\": \"2026-10-17T07:59:51Z\", \"tool\": \"loogle\", \"query\": \"Bimod, \\\"equiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read Mathlib/CategoryTheory/Monoidal/Bimod.lean:79-139,350-366 and AlgebraicTopology/SimplicialSet/StrictSegal.lean:520-539. The hits describe ordinary internal bimodules, tensor coequalizers, strict Segal nerves, ordinary pullback associativity, or ordinary functor equivalences; none states coherent operadic algebra gluing or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent planar algebra functors glued along a common associative algebra restriction is an equivalence",
+   "results": "{\"t\": \"2026-10-17T08:00:03Z\", \"tool\": \"leanfinder\", \"query\": \"coherent planar algebra functors glued along a common associative algebra restriction is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsEquivalenceLightDiagram'LightDiagramToLightFunctor\", \"AlgebraicTopology.DoldKan.Compatibility.τ₀\", \"AlgebraicTopology.DoldKan.Compatibility.υ\", \"AlgebraicTopology.DoldKan.Compatibility.τ₁\", \"CategoryTheory.eq\", \"CategoryTheory.Join.mapPairEquiv\", \"CategoryTheory.GlueData.ofGlueData'\", \"CategoryTheory.algebraEquivUnder\"], \"digest\": \"2f1ebf7fbce1947a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read Mathlib/CategoryTheory/Monoidal/Bimod.lean:79-139,350-366 and AlgebraicTopology/SimplicialSet/StrictSegal.lean:520-539. The hits describe ordinary internal bimodules, tensor coequalizers, strict Segal nerves, ordinary pullback associativity, or ordinary functor equivalences; none states coherent operadic algebra gluing or specializes to it in one line."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-two-sided-coherent-bar-construction",
@@ -303,12 +351,12 @@
   "date": "2026-10-17",
   "item": "lem-coef-composable-bimodule-operad-segal",
   "worker": "stage1",
-  "summary": "Kept the statement unchanged. Replaced the absent proof by the path-approximation/right-Kan route of HA 4.4.1.11; verified the short-path nerve pushout, convex-hull right adjoint, empty relative products, inert detection, full transformations, target naturality and relative categorical fibers. Two new statement-only foundation lemmas; no Mathlib leaf or Lean attachment.",
-  "blueprint": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit: Infinity-categorical monadicity and the augmented counit bar resolution. Supporting foundation: Free coherent monad modules and their augmented free resolution. Supporting lemma: Coherent two-sided bar from a bimodule and a left module. Operadic Segal encoding of composable bimodules, before forming or realizing any bar.",
+  "summary": "Retained the imported nine-step path-approximation and relative right-Kan proof, checked every cited statement against the DAG, and marked the item split. No new nodes are needed: all non-elementary inputs already exist as DAG statements; no Lean attachment was found.",
+  "blueprint": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit: operadic Segal encoding of composable bimodules, path pushout and relative right-Kan extension.",
   "tool_uses": [
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
-    "why": "Generic quasicategorical calculus used in step 3: functor simplicial sets and their full subcategories are quasicategories, and equivalences of diagrams are detected pointwise; no node of this unit supplies these general foundations."
+    "why": "Generic coherent functor and cone quasicategory calculus used in step 3; no node of this unit supplies it."
    }
   ]
  },
@@ -316,12 +364,12 @@
   "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q77-3e77cc90e",
-  "group": "Q77",
+  "reviewer": "NT-cc-Q58-d6b0ca8cc",
+  "group": "Q58",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-3e77cc90e (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement and unit sk-prop-sf-biduality-general. HA and HTT are not archived, so I checked against my knowledge of HA 4.4.1.11 (the short-path right-Kan proof) and HTT 4.3.2.7/4.3.2.15; proof_origin.by=agent is correct. Item statement unchanged; it matches HA 4.4.1.11 for k=2 with no added hypothesis. Steps 1-3, 7-9 hold: Chain_2=W_2, image nesting gives the degreewise nerve pushout with the three [0]->[2] paths kept distinct, the isofibration pullback is a categorical pullback, inert detection uses the Segal equivalence, and the m=0 case is covered. Step 4: the convex hull is a right adjoint and I checked the cofinality direction. Repaired gap (C1/C4) in steps 4-6: the constant-apex cofinality equivalence and the Map^phi product clause of def-coef-monoidal-infinity-category were applied directly to the all-diagrams p-limit square of def-coef-infinity-relative-cone. Now cited lem-coef-infinity-relative-cone-constant-test (same unit) with one sentence in each step; proof_deps updated. Also corrected the stale 'why' of the accepted tool use lem-cbc-enhanced-functor-cone-calculus (step 3). New node lem-coef-bimodule-word-path-approximation: self-contained and true. Step_k is a generalized nonsymmetric operad and Phi_k a weak approximation; I tested factorisation categories by hand, including X=(p,q) and empty blocks. It specialises the same-day node lem-coef-operadic-weak-approximation-algebras (Gepner-Haugseng A.6.5) plus a real combinatorial check, so it is not a duplicate; its future split should cite that node. New node lem-coef-relative-right-kan-universal-restriction: HTT 4.3.2.15 dual with T, plus the 4.3.2.7 cone comparison; true. The same-day lem-coef-relative-right-kan-restriction (Q08) is its special case T=all and is unusable here, because non-inert h lack local limits. Kept; maintainer may later derive or merge the older node from it. No cycle, no target weakened, no SGA used, nothing dropped.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-d6b0ca8cc (reviewer sub-agent of L); spot-checked: Read in full: the item, all 9 steps, the unit, and every cited statement. Higher Algebra (HA) is not archived, so the source was checked against my knowledge of the HA 4.4.1.11/4.4.1.17 argument, not by opening the cited pages; proof_origin=agent is correct. No new nodes; statement unchanged and true (Chain_2 = W_2 by colour check; the (Set,x) case holds; X_[0] is a point). Steps 1-3, 6 and 7 are correct (pushout by image nesting with the three [0]->[2] paths distinct; isofibration pullback; relative right Kan extension and inert detection, including m=0). Long step 4 (2191 chars) stays: it is one argument, an elementary hull right adjoint (comma has a terminal object, contractible, limit direction checked) plus cofinal-comma and constant-test detection and corner-isofibration rectification, all cited; it hides no source lemma. Fixed three C2 citation faults in fixes/dag/nodes/sec-six-functors/lem-coef-composable-bimodule-operad-segal.json. (1) Step 5: Segal essential surjectivity gives components only up to equivalence; added the rectification by composing with an equivalence over an identity, citing the cocartesian mapping-criterion and composition-initiality nodes. (2) Step 8 was marked elementary but uses homotopy invariance of the categorical pullback; now tested on Fun(Q,-) cores via lem-coef-infinity-isofibration-pullback-limit and lem-coef-kan-homotopy-pullback-invariance, then two-out-of-three. (3) Step 9: same invariance cited; marked non-elementary. proof_deps updated; no cycle; no SGA. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus (step 3).; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.ComposableBimoduleOperadSegal",
