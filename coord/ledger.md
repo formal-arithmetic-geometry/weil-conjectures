@@ -15797,4 +15797,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:19 L: returned deliver/G2/Sheaf.AlgebraicGeometry.Sites.PolynomialGenericStrictLocalizationField (reviewer RETURN: (the landing tools, head 2d84d4166) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 04:38 L: merged deliver/F2/Sheaf.AlgebraicGeometry.SupportDimensionUnion (stage 3; reviewer PASS; first push; landing 20261017T043837-L-2860209 (proof); batch 20261017T043835; modules 1; new nodes 0)
 - 04:45 L: merged deliver/C3/Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeMono (stage 3; reviewer PASS; after a return; landing 20261017T044505-L-2942710 (proof); batch 20261017T044501; modules 1; new nodes 0)
-- 04:48 L: merged deliver/H4/Sheaf.CategoryTheory.SpectralObjectPageTwoMapExistence (stage 3; reviewer PASS; first push; landing 20261017T044846-L-2996845 (interface); batch 20261017T044844; modules 1; new nodes 0; change records: coord/changes/spectral-object-page-two-map-private-construction.md)
+
+- 12:50 L: batch 20261017T044844 dependency take-out
