@@ -1,6 +1,6 @@
 # Work queue
 
-77 items; claim with `tools/claim.py next <group> [--stage N]`.
+79 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (77)
+## Stage 3: modules to prove (79)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -60,6 +60,7 @@
 | `Sheaf.Paper.IntegralResiduePullFlatModel` | 13 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.PushforwardSupportClosed` | 14 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 14 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TruncatedHigherImageQuasiCoherent` | 15 | 1 | proof |
 | `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareEtalePathNormalization` | 15 | 1 | proof |
 | `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareProEtalePathNormalization` | 15 | 1 | proof |
@@ -88,6 +89,7 @@
 | `Sheaf.AlgebraicGeometry.IdealPowerLocalMapsEventuallyAgree` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootLimitCone` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineFiniteTypePullbackZeroTest` | 30 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent` | 41 | 1 | proof |
 
 Also listed above and claimable: 6 modules whose proof uses a node that has no Lean declaration yet.
