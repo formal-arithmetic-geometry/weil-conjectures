@@ -15,7 +15,8 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-adjunction-conjugate"
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-ringed-tensor-square-presentation"
  ],
  "proof": [
   {
@@ -231,5 +232,33 @@
   "group": "Q62",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q62-67a82e8e6 (reviewer sub-agent of L); spot-checked: Read all required instructions, DAG records, item, cited nodes, unit/chapter route, Stacks Tags 0D6D, 07A4, 07A6, 0D6E and Remark 07A7. Verified typing, hypotheses, monoidal substitution, conjugate direction, mate counit formula, nonflat and zero cases, route compliance, searches, and absence of long hidden lemmas. No new nodes or repairs are needed; review.md records the checks."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d201dc14",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Read the node, all stmt_deps and the landed RingedTensorSquarePresentation, RingedTopoiCanonicalTensorPullback and RingedToposDerivedPushforwardComposition interfaces, plus the previous RETURN. Every clause matches: corners and edges are the landed ringed presentations; the square carries the ring-compatible insertion equation; theta = leftDerivedNatIso of s.modules (P2->P1); c = rightDerivedNatIso of conjugateIsoEquiv s.modules (V1->V2), built independently; d_i are the canonical tensorComparison composites in node order; the counits are Adjunction.comp; equations and quantifiers match. Added witnesses (RingedPathRightDerived normalization, l_i per 0D6D, h_i per 0D6E) always hold or exist, so nothing stronger is assumed; checked by hand that the counit identity follows. No exactness/flatness assumption, universes u/w independent, no hollow defs, sorry only in the theorem, docstrings and proof outline present, lean.statement verbatim, stmt_deps gains only a landed node (allowed). nt_compile --json on the snapshot: clean, 57.9 s (one earlier 60 s timeout at load ~165). Minor notes: the second reading is a self-check; one import is not referenced directly."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingedComparisonTensorAdjunction",
+  "declaration": "CategoryTheory.ringedComparisonTensorAdjunction",
+  "declarations": [
+   "CategoryTheory.RingedPathRightDerived",
+   "CategoryTheory.ringedPathRightUnit",
+   "CategoryTheory.ringedPathLeftCounit",
+   "CategoryTheory.canonicalRingedPullbackComparison",
+   "CategoryTheory.canonicalRingedDirectImageComparison",
+   "CategoryTheory.ringedPathTensorMap",
+   "CategoryTheory.ringedComparisonTensorAdjunction"
+  ],
+  "file": "lean/Sheaf/Paper/RingedComparisonTensorAdjunction.lean",
+  "statement": "theorem ringedComparisonTensorAdjunction {W X₁ X₂ Y : RingedTensorCorner.{u, w}} (f₁ : RingedTensorEdge X₁ W) (f₂ : RingedTensorEdge X₂ W) (g₁ : RingedTensorEdge Y X₁) (g₂ : RingedTensorEdge Y X₂) (s : RingedTensorSquare Y X₁ X₂ W g₁ g₂ f₁ f₂) (aW : RingedTensorModel W) (aX₁ : RingedTensorModel X₁) (aX₂ : RingedTensorModel X₂) (aY : RingedTensorModel Y) [df₁ : RingedPathRightDerived f₁] [df₂ : RingedPathRightDerived f₂] [dg₁ : RingedPathRightDerived g₁] [dg₂ : RingedPathRightDerived g₂] [l₁ : (g₁.left ⋙ f₁.left).IsLeftDerivedFunctor (ringedPathLeftCounit f₁ g₁) (HomotopyCategory.quasiIso (ringedSiteModules.{u, u, u, u} ((sheafCompose Y.topology (forget₂ CommRingCat RingCat)).obj Y.ring)) (ComplexShape.up ℤ))] [l₂ : (g₂.left ⋙ f₂.left).IsLeftDerivedFunctor (ringedPathLeftCounit f₂ g₂) (HomotopyCategory.quasiIso (ringedSiteModules.{u, u, u, u} ((sheafCompose Y.topology (forget₂ CommRingCat RingCat)).obj Y.ring)) (ComplexShape.up ℤ))] [h₁ : (f₁.right ⋙ g₁.right).IsRightDerivedFunctor (ringedPathRightUnit f₁ g₁) (HomologicalComplex.quasiIso (ringedSiteModules.{u, u, u, u} ((sheafCompose W.topology (forget₂ CommRingCat RingCat)).obj W.ring)) (ComplexShape.up ℤ))] [h₂ : (f₂.right ⋙ g₂.right).IsRightDerivedFunctor (ringedPathRightUnit f₂ g₂) (HomologicalComplex.quasiIso (ringedSiteModules.{u, u, u, u} ((sheafCompose W.topology (forget₂ CommRingCat RingCat)).obj W.ring)) (ComplexShape.up ℤ))] : (∀ K H : DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose Y.topology (forget₂ CommRingCat RingCat)).obj Y.ring)), (canonicalRingedPullbackComparison s).hom.app (Y.tensor.obj (K, H)) ≫ ringedPathTensorMap f₁ g₁ aW aX₁ aY K H = ringedPathTensorMap f₂ g₂ aW aX₂ aY K H ≫ W.tensor.map (Prod.mkHom ((canonicalRingedPullbackComparison s).hom.app K) ((canonicalRingedPullbackComparison s).hom.app H))) ∧ (∀ Z : DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} ((sheafCompose W.topology (forget₂ CommRingCat RingCat)).obj W.ring)), (g₂.left ⋙ f₂.left).map ((canonicalRingedDirectImageComparison s).hom.app Z) ≫ (g₂.derivedAdjunction.comp f₂.derivedAdjunction).counit.app Z = (canonicalRingedPullbackComparison s).hom.app ((f₁.right ⋙ g₁.right).obj Z) ≫ (g₁.derivedAdjunction.comp f₁.derivedAdjunction).counit.app Z)",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned d70256e128d3: use recorded ringed tensor corners/edges/models and the ring-compatible square insertion equation. The actual module-sheaf derived categories carry HasDerivedCategory.{w}; there are no arbitrary category slots, tensor maps or endpoint isomorphisms. Both comparisons are Mathlib universal derived lifts of the ordinary ringed path comparison with the actual composite counits/units and their derived-functor witnesses. Lh*/Rh* are modeled by the composite functors themselves; composition identifications are identities in this model. The right lift is constructed independently of the derived mate. Right-derived witnesses include the derived Hom normalization, and the two counits are Adjunction.comp. The canonical tensor maps come from RingedTensorEdge.tensorComparison."
  }
 }

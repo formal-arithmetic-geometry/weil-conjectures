@@ -224,5 +224,38 @@
   "group": "Q112",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-11a2b8ed8 (reviewer sub-agent of L); spot-checked: I read the item, its report and every cited node's statement in full. Cited nodes: def-galois-finite-coproduct, def-weil-pbc-simplicial-object and lem-coef-fixed-object-scat-pushout-coproduct (all three Mathlib leaves), plus def-nagata-category. I also read the parent lem-coef-fixed-object-scat-left-proper, steps 1, 5 and 6, and the consumer bar in lem-coef-split-coproduct-bar-extra-degeneracy. The delivery creates no new nodes. Statement: B_n=(A*F)*A_1*...*A_n*V matches the parent's step 5 bar with C~=A*F. The target bar R (faces d_i for i<n fold, d_n through v, s_i inserting immediately after A_i) is exactly the bar the extra-degeneracy node defines. The unspecified degeneracy positions in B are forced by d_i s_i=d_{i+1}s_i=1. Steps: step 1 sets up uniqueness of maps out of finite coproducts (Stacks 002J, categories.tex:1421). Step 2 builds theta and eta, inverse by uniqueness, with no coherence theorem used. Step 3 checks every face by hand, including d_0 (X_1 sent by j into X_0, matching the fold of A_0 and A_1), the internal folds, d_n through v, and n=1. Step 4 checks the degeneracies, including n=0. Step 5 checks the augmentation through the pushout-coproduct leaf: its inverse iso has the right restrictions (F included, A sent by v into V, V coprojection), A*F versus F*A is handled by the braiding, and its hypotheses (small categories on O, v fixing O) hold. Step 6 passes from faces and degeneracies to all operators by the surjection–injection factorization, with augmentation as a map to the constant object (Stacks 018G, simplicial.tex:2777) and the inverse natural by conjugation. Edge cases checked: n=0, n=1, empty O, one-object categories, the identity-only category; no freeness is used. No duplicate was found (searched for braiding, reorder and coproduct bar; read the ordinary two-sided bar and enriched fixed-set model nodes). The item does not restate a parent clause. The route is unaffected, tool_uses is empty and no SGA is cited. Dwyer–Kan is not in literature/; it is listed as WANTED and proof_origin is agent. Mathlib searches cover all three kinds, with the Loogle parse failure recorded as unavailable. No fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab9166d21",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Checked every node clause against the Lean: fixed-object category (Functor, fixedCategory) is real data; Mathlib BinaryCofan/IsColimit/IsPushout/Cofan/SimplicialObject.Augmented used; B and R bars have concrete operator equations on all factors (faceFactor: first face via cAF.inl, internal folds, terminal face via v; degeneracyLabel leaves A_(i+1) unused; augmentations F->cAF.inr≫l / cFV.inl, V->r / cFV.inr, A->v≫...), all uniquely determined by the colimit cofans; conclusion ∃ iso of augmented simplicial objects with F,V fixed and X_k->A_k, uniquely determining the braiding/reassociation map (degree −1 forced because the degree-0 augmentation is jointly epi). Dependency pushout-coproduct theorem states the canonical comparison and both inverse restrictions as in the node; §1(B) repair justified, only lean keys differ from base. u,v independent, no extra assumptions; edge cases n=0,1, empty O ok. One sorry per module, docstrings with source, blueprint and proof steps, lean.statement verbatim, all declarations present. nt_compile.py --json on both snapshot files: exit 0, no errors (9.2 s, 8.0 s). Observations, not blocking: Q01's second reading was a self-pass; FreeFactorCategoryNormalForm.FunOver is a related, non-instance helper encoding not mentioned in the report."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.FixedObjectBarReordering",
+  "declaration": "FixedObject.BarReordering.fixed_object_scat_bar_reordering",
+  "declarations": [
+   "FixedObject.BarReordering.factors",
+   "FixedObject.BarReordering.Bar",
+   "FixedObject.BarReordering.Bar.augmented",
+   "FixedObject.BarReordering.Bar.leftIncl",
+   "FixedObject.BarReordering.Bar.rightIncl",
+   "FixedObject.BarReordering.Bar.aIncl",
+   "FixedObject.BarReordering.bFIncl",
+   "FixedObject.BarReordering.bAIncl",
+   "FixedObject.BarReordering.faceFactor",
+   "FixedObject.BarReordering.degeneracyLabel",
+   "FixedObject.BarReordering.Operators",
+   "FixedObject.BarReordering.ReorderingRestriction",
+   "FixedObject.BarReordering.fixed_object_scat_bar_reordering"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/FixedObjectBarReordering.lean",
+  "statement": "theorem fixed_object_scat_bar_reordering {O : Type u} (A F V P : Category.{v} O) (v : A ⟶ V) (cAF : BinaryCofan A F) (hcAF : IsColimit cAF) (cFV : BinaryCofan F V) (hcFV : IsColimit cFV) (l : cAF.pt ⟶ P) (r : V ⟶ P) (p : IsPushout cAF.inl v l r) (B : Bar O cAF.pt A V P id) (R : Bar O F A V cFV.pt (fun n ↦ n + 1)) (hB : Operators B.augmented v (bFIncl cAF B) (bAIncl cAF B) B.rightIncl (cAF.inr ≫ l) r) (hR : Operators R.augmented v R.leftIncl R.aIncl R.rightIncl cFV.inl cFV.inr) : ∃ e : B.augmented ≅ R.augmented, ReorderingRestriction cAF B R e",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

@@ -279,5 +279,32 @@
   "group": "Q46",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-8a90719eb (reviewer sub-agent of L); spot-checked: Read the item, all 9 steps, every cited statement (13), the unit/ancestor route and the brief/errors files. Statement unchanged and true: it matches HA B.0.27/B.2.7 in the fully scaled case. HA is not in literature/; it was read online by the worker and I could not reopen it read-only, so I checked the proof independently, step by step. Checks: step1 pattern clauses ok; step3 J_Q to J_P images ok; step4 lifts generator by generator, including the sharp {n}*K cone in C2, ok; step5 isofibration uses 'S contains equivalences', ok; steps6-7 pushout product, fixed-boundary Kan fiber V and core-Kan, ok; step8 exponential-corner lift with exact boundary, ok; step9 two-triangle cocartesian cancellation over every marked edge of B, ok. Edge cases checked: empty Y, empty A, empty K_alpha, point base. No new nodes, no duplicate (rg over dag/nodes), no cycle. Two repairs in fixes/: (1) step 2's homotopy-pullback hand-wave (E5) is now written out and cites the in-unit lem-coef-kan-homotopy-pullback-invariance and lem-coef-kan-pullback-path-comparison; (2) step 8 replaces the off-unit tool lem-cbc-enhanced-functor-cone-calculus with the in-unit lem-coef-infinity-pointwise-equivalences (C7), and split_report.tool_uses is removed. proof_deps recomputed. No tool use to accept.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e172229c",
+  "group": "Q37",
+  "result": "fix",
+  "note": "Read node, HA B.0.27/B.2.7 place as given, the three stmt_dep modules (EnhancedDiagramsCones, CategoricalPatternFibrancy, CategoricalPatternModelCalculus), delivered module and report. Induced pattern (marking T, Set.univ scaled, cones Σα{q // q≫Y.map=p_α ∧ all edges marked}), inducedObject, and the fibration⇔induced-fibered iff match the node; universes single u, nothing unbound; empty index/cone cases kept; no duplicate declaration; no hollow def; all theorems sorry; node fields other than lean unchanged. Faults repaired in fixes/: H3, the node's hypothesis 'S contains every equivalence edge of C' (used by proof step 5) was missing from the Lean, now added as hS with the recorded SSet.Enhanced.IsEquivalenceEdge; H8, the theorem docstring now gives the nine proof steps and the helper docstrings name the source place. fixes/ holds the complete module, the lean-record JSON (5 declarations, updated note) and the report with a Maintainer review fix section. nt_compile.py --json: delivered and fixed files both clean (11.1 s / 6.2 s); an injected error was reported."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PatternInducedFibrationTest",
+  "declaration": "SSet.Enhanced.CategoricalPattern.fibration_iff_induced_fibered",
+  "declarations": [
+   "SSet.Enhanced.CategoricalPattern.InducedConeIndex",
+   "SSet.Enhanced.CategoricalPattern.quasicategory_of_fibered_object",
+   "SSet.Enhanced.CategoricalPattern.inducedPattern",
+   "SSet.Enhanced.CategoricalPattern.inducedObject",
+   "SSet.Enhanced.CategoricalPattern.fibration_iff_induced_fibered"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PatternInducedFibrationTest.lean",
+  "statement": "theorem fibration_iff_induced_fibered (P : CategoricalPattern.{u}) (hS : ∀ e : P.carrier _⦋1⦌, IsEquivalenceEdge P.carrier e → e ∈ P.marked) (K : SSet.Marked.CartesianModelStatement.{u}) (hK : ModelStatement P K) (Y : CategoricalPattern.Object P) (hY : IsCategoricalPatternFibered P Y) {X : CategoricalPattern.Object P} (f : X ⟶ Y) : hK.model.categoryWithFibrations.fibrations f ↔ IsCategoricalPatternFibered (inducedPattern P Y hY) (inducedObject hY f)",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The module gives the induced small fully scaled pattern on a fibered object, transports a map into its slice, and states the fibration/fibered-object equivalence. The induced cone index records the projection equality and the requirement that every cone edge is marked. The node's hypothesis that S contains every equivalence edge of C is the hypothesis hS, stated with the recorded SSet.Enhanced.IsEquivalenceEdge of def-cbc-enhanced-diagrams-cones (added by the maintainer reviewer's fix; the delivered signature omitted it).",
+  "fixed_by": "NT-stage2-cc-5e172229c"
  }
 }

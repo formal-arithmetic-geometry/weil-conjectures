@@ -348,10 +348,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-1a299bde6",
-  "group": "Q02",
+  "reviewer": "NT-stage2-cc-14578032e",
+  "group": "Q69",
   "result": "pass",
-  "note": "Independent reading of Q02/lem-coef-cartesian-maps-presheaf-extension at 1a299bde6809. Every node clause matches the Lean (A U-small quasicategory; P(A) is the published infinityPresheaves; y is infinityYoneda; G ranges over all of diagrams (base A).op with V=max(u+1,v); right-fibration representative from an existential TransportClassifier with its clauses; cocartesian model Marked.Over.cartesianFunctors on the sharp opposite; Cartesian model as the op of the cocartesian model for O∘G per GHN §1.2; extensions preserve all IsSmall.{u} limit shapes including empty; restriction along y^op is an equivalence of whole functor categories; pre/postcomposition normalised on every relative simplex; any other representative or unstraightening covered). The quantifiers over S and O are pinned (FiberTransport, IsCatInfinityOpposite) and inhabited, so they are neither vacuous nor too loose. No extra assumptions, no universe equality, every variable bound. The strict objects equality is realisable. Edge cases checked: A empty, X empty, point or two points, G=[1], degenerate edges. No dependency cycle; all 11 stmt_deps have Lean records. No hollow definitions; the only sorry is the theorem; docstrings carry source, blueprint and the 7-step proof; lean.statement is verbatim and the declaration list matches. The SpaceValuedStraightening change (noncomputable abbrev Diagrams) is already live. nt_compile.py --json on both snapshot files: exit 0, no diagnostics. Already landed in batch 921a9050a4 with identical content. Process note only: the second-reading section is brief and self-described as a self-review; its single change (classifier T made existential) is correct."
+  "note": "Repairs my RETURN of 3f7fa881a978 as asked. Lean concludes (∃h, IsPresentable total) ∧ HasGraphwiseLimits p (identical to 2435135cae27) ∧ (∃h, IsPresentable completeCategory) ∧ HasCompleteGraphwiseLimits p unit ∧ ∃F, CoherentAdjunction F forgetGraph ∧ F≫algebraSpace=graphSpace ∧ RepresentsFixedEndpointEdges. Every node clause matches the Lean; hypotheses are exact (unit:UnitSection is the canonical representative); universes are independent and every variable is bound; lean.statement matches the file up to line breaks; all 16 declarations are present. The corrected statement contains the original in full and adds the complete clauses (GH 5.4.2/5.4.5); old_statement is archived. The side DAG has exactly the eight audited citers, all correctly holds:true (read collage-crossing step 6, flexible-weight step 8, free-edge-square); no Lean module imports the item. The new proof step 3 avoids algebroid-completion; no cycle; proof_deps equals the steps' uses. No hollow definitions; only the theorem is sorry; docstrings carry source, blueprint and proof plan; no duplicates in side or Mathlib. AlgebroidGraph, the def-coef-algebroid-graph node and the SpaceValuedStraightening §1(B) dependency are unchanged from the previously reviewed copies (the live copy differs only by a comment). nt_compile --json of SpaceValuedStraightening, AlgebroidGraph and AlgebroidPresentability: exit 0, no errors, no warnings. Cosmetic only: the module heading says 'complete algebroids'."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.SpaceValuedStraightening",
@@ -373,9 +373,9 @@
   "file": "lean/Sheaf/CategoryTheory/SpaceValuedStraightening.lean",
   "statement": "theorem space_valued_straightening : ∃ S : Straightening.{u}, Nonempty (BaseNaturality S) ∧ ∀ (C : Type u) [Category.{u} C], IsOrdinaryComparison S C",
   "branch": "newtargets-dag",
-  "by": "Q02",
+  "by": "Q69",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Dependency build repair: smallSpaces was unified with the published noncomputable Spaces.infinityCategory presentation. The existing computable abbrev Diagrams therefore failed compilation with compiler.ir.check (depends on smallSpaces with no executable code). Mark Diagrams noncomputable; all its data, definitions, theorem statement and proof docstring remain unchanged. This is required to compile the unchanged CocartesianStraightening and KanRelativeNerveLeftFibration prerequisites in the updated overlay."
+  "note": "§1(B) repair by Q69: the recorded source had a noncomputable dependency in abbrev Diagrams; the dependency module states the same declaration with `noncomputable abbrev Diagrams`, preserving its exact type and all other declarations."
  }
 }

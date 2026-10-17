@@ -112,5 +112,32 @@
   },
   "same_as": [],
   "is": null
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab9166d21",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Checked every node clause against the Lean: fixed-object category (Functor, fixedCategory) is real data; Mathlib BinaryCofan/IsColimit/IsPushout/Cofan/SimplicialObject.Augmented used; B and R bars have concrete operator equations on all factors (faceFactor: first face via cAF.inl, internal folds, terminal face via v; degeneracyLabel leaves A_(i+1) unused; augmentations F->cAF.inr≫l / cFV.inl, V->r / cFV.inr, A->v≫...), all uniquely determined by the colimit cofans; conclusion ∃ iso of augmented simplicial objects with F,V fixed and X_k->A_k, uniquely determining the braiding/reassociation map (degree −1 forced because the degree-0 augmentation is jointly epi). Dependency pushout-coproduct theorem states the canonical comparison and both inverse restrictions as in the node; §1(B) repair justified, only lean keys differ from base. u,v independent, no extra assumptions; edge cases n=0,1, empty O ok. One sorry per module, docstrings with source, blueprint and proof steps, lean.statement verbatim, all declarations present. nt_compile.py --json on both snapshot files: exit 0, no errors (9.2 s, 8.0 s). Observations, not blocking: Q01's second reading was a self-pass; FreeFactorCategoryNormalForm.FunOver is a related, non-instance helper encoding not mentioned in the report."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.FixedObjectPushoutCoproduct",
+  "declaration": "FixedObject.fixed_object_scat_pushout_coproduct",
+  "declarations": [
+   "FixedObject.Functor",
+   "FixedObject.Functor.id",
+   "FixedObject.Functor.comp",
+   "FixedObject.fixedCategory",
+   "FixedObject.pushoutComparison",
+   "FixedObject.fixed_object_scat_pushout_coproduct"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/FixedObjectPushoutCoproduct.lean",
+  "statement": "theorem fixed_object_scat_pushout_coproduct {O : Type u} (F A V P : Category.{v} O) (v : A ⟶ V) (cFA : BinaryCofan F A) (hcFA : IsColimit cFA) (cFV : BinaryCofan F V) (hcFV : IsColimit cFV) (a : cFA.pt ⟶ P) (b : V ⟶ P) (p : IsPushout cFA.inr v a b) : ∃ e : cFV.pt ≅ P, e.hom = pushoutComparison cFA cFV hcFV a b ∧ a ≫ e.inv = BinaryCofan.IsColimit.desc hcFA cFV.inl (v ≫ cFV.inr) ∧ b ≫ e.inv = cFV.inr",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The recorded Mathlib match CategoryTheory.IsPushout.of_coprod_inl_with_id supplies the abstract pushout calculation, but the repository has no category of categories on a literally fixed object type to specialize it to, nor the canonical specialized comparison with its restrictions. This module supplies that category and states the canonical comparison with its inverse restrictions, using Mathlib BinaryCofan, IsColimit, IsPushout and Iso throughout. The existing fixedObjectCategoryCoproduct is a chosen pushout in Cat, with a different object type and no fixed-object category interface; it is not a substitute for these strict fixed-object homs."
  }
 }

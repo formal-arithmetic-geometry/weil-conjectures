@@ -239,5 +239,31 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-9c850b77c (reviewer sub-agent of L); spot-checked: Read all mathematics and cited sources; all seven steps and the new finite-cover transport lemma are valid. Added missing new-node metadata in fixes/. Corrected the report’s reversed degree-zero test in review.md. Accepted all five declared tool_uses; no target weakened or SGA source used.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-05a26a94b",
+  "group": "Q50",
+  "result": "fix",
+  "note": "Statement checked clause by clause against node and source (identical TeX): hypotheses (finite type = LocallyOfFiniteType+QuasiCompact, separated, geometrically connected), U = D.geometricFiber, geometric point over an algebraically closed field, finite abelian M : Type (u+1) with constant sheaf; (3.1) as an abelian-group isomorphism pinned to the existing sheafHEquivContinuousMonoidHom; pointed-automorphism naturality via fundamentalGroupMap of pullbackFiberIso (f_{a^*P} = f_P∘a_*); Weil clause e((Φ^{deg w})^*c)(g) = e(c)(h) with ι h = w⁻¹ ι g w. Sign and direction checked against weilGroupDeg (exponent of geometric Frobenius on constant-cover fibres), geometricFrobeniusAlgEquivOfAlgebraic = φ_q⁻¹, and a Kummer/𝔾_m test (both sides multiply by q). Edge cases covered (M=0, degree 0, negative degrees, p-groups). No hollow definitions, theorem proof only sorry, docstrings complete, record statement verbatim. Finding H4: helper finiteConstantFrobeniusPower re-defines the landed WeilConjectures.FiniteFieldDatum.geometricFrobenius (def-weil-frobenius-detailed). Fix: helper removed, statement uses (D.geometricFrobenius U₀ ^ deg w : Aut _).hom, import swapped to Sheaf.AlgebraicGeometry.FrobeniusDetailed; record declarations and note updated; report gains a Reviewer fix section. Server nt_compile: delivered file clean 31.8 s and 29.1 s; final fix clean 30.0 s (a variant without type annotation took 56-58 s and was rejected)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteConstantH1Pi1",
+  "declaration": "AlgebraicGeometry.exists_finiteConstantH1Pi1",
+  "declarations": [
+   "AlgebraicGeometry.finiteConstantH1Pullback",
+   "AlgebraicGeometry.finiteConstantModelConnected",
+   "AlgebraicGeometry.finiteConstantFiberConnected",
+   "AlgebraicGeometry.exists_finiteConstantH1Pi1"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteConstantH1Pi1.lean",
+  "statement": "theorem exists_finiteConstantH1Pi1 (D : WeilConjectures.FiniteFieldDatum.{u}) (U₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType U₀.hom] [QuasiCompact U₀.hom] [IsSeparated U₀.hom] [GeometricallyConnected U₀.hom] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ (D.geometricFiber U₀).left) (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G] (M : Type (u + 1)) [AddCommGroup M] [Finite M] [TopologicalSpace M] [DiscreteTopology M] : ∃ e : Sheaf.H ((constantSheaf (D.geometricFiber U₀).left.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)) 1 ≃+ Additive (G →ₜ* Multiplicative M), (∀ c, (e c).toMul = EtaleTorsor.sheafHEquivContinuousMonoidHom M s G c) ∧ (∀ (a : (D.geometricFiber U₀).left ≅ (D.geometricFiber U₀).left) (ha : s ≫ a.hom = s) (c : Sheaf.H ((constantSheaf (D.geometricFiber U₀).left.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)) 1) (g : G), (e (finiteConstantH1Pullback a.hom M c)).toMul g = (e c).toMul (fundamentalGroupMap (pullbackFiberIso a.hom s ≪≫ eqToIso (congrArg fiber ha)) G G g)) ∧ (∀ (G₀ : Type u) [Group G₀] [TopologicalSpace G₀] [IsTopologicalGroup G₀] [CompactSpace G₀] [∀ P, MulAction G₀ ((fiber (s ≫ pullback.fst U₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))))).obj P)] [IsFundamentalGroup (fiber (s ≫ pullback.fst U₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))))) G₀] (w : weilGroup U₀.hom (s ≫ pullback.fst U₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) G₀) (c : Sheaf.H ((constantSheaf (D.geometricFiber U₀).left.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)) 1) (g h : G), fundamentalGroupMap (pullbackFiberIso (pullback.fst U₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) s) G G₀ h = w.val.1⁻¹ * fundamentalGroupMap (pullbackFiberIso (pullback.fst U₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) s) G G₀ g * w.val.1 → (e (finiteConstantH1Pullback ((D.geometricFrobenius U₀ ^ (weilGroupDeg U₀.hom (s ≫ pullback.fst U₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) G₀ w).toAdd : Aut (D.geometricFiber U₀).left)).hom M c)).toMul g = (e c).toMul h)",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Abelian-group comparison normalized to the existing canonical torsor character map, with pointed pullback and actual Weil-element inverse-conjugation naturality. Uses the recorded Ext model of etale cohomology. Helpers construct the canonical constant-coefficient H1 pullback; connectedness instances apply the existing Mathlib theorem. Reviewer fix (H4): the delivered helper finiteConstantFrobeniusPower re-defined id x Spec(phi_q^-1)^n, which is the landed WeilConjectures.FiniteFieldDatum.geometricFrobenius (def-weil-frobenius-detailed, Sheaf.AlgebraicGeometry.FrobeniusDetailed); the statement now uses its integer powers in Aut (D.geometricFiber U0).left and the helper is removed.",
+  "fixed_by": "NT-stage2-cc-05a26a94b"
  }
 }

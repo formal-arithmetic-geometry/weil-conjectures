@@ -219,5 +219,50 @@
   "group": "Q131",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-d66aa836b (reviewer sub-agent of L); spot-checked: PASS: I read the whole item. No faults, no fixes; review.md is in the run directory. STATEMENT: the hypotheses are exactly those of def-coef-left-module-operadic-encoding: an operadic fibration with only inert cocartesian lifts, f arbitrary, theta inert, v a cocartesian lift of theta, Map^b a homotopy fibre over b. I tested the cases theta=id (J empty, so the fibre is a point), target <0> (N contractible, every output discarded), k=0, an empty P_j (both sides empty) and a discrete coloured operad. The square orientation and the path direction vb to au agree with lem-coef-infinity-arrow-morphism-square. DUPLICATES: searched dag/nodes with rg for inert/discard near fibre and for hofib (about 50 hits); none states this relative LM fibre formula. STEPS: (1) the morphism conditions of LM force each retained output to keep its colour, and rho-bar_l theta equals rho_{i(l)} as base arrows; the 2-out-of-3 and initial-lift comparison clauses of cocartesian-composition-initiality give e_l and its triangle. (2) The mapping-space Segal clause applied to Y and Z, plus inversion of e_l over an identity via Hom-bifunctor, gives s and t. (3) Associativity and the triangle make v_* the projection, coherently. (4) The coherent-cube node compares the cospans; its auxiliary squares can be taken trivially (for example A=A'=empty), and h_R=t(h) holds strictly. (5) I checked the contraction by max(s,tau): it is monotone on [1]x[1], fixes the endpoint, and gives the identity at tau=0 and the constant path at tau=1; lem-cbc-simplicial-homotopy-equivalence-weak needs no Kan or nonempty hypothesis. (6) The natural map (b,gamma) to (p_j b) involves no choice of inverses. (7) The strict fibre over a of the path-pullback is exactly hofib_{au}(v_*); Arr(L) has discrete homotopy pullbacks, so no base path appears. ROUTE: no cycle (traversed 390 nodes). Every cited statement is in unit sk-prop-sf-biduality-general except lem-cbc-simplicial-homotopy-equivalence-weak; I accept that as a tool use, since it is a generic black box and 29 nodes already cite it. Not a target node, so the base-change and coefficient-category check does not apply. No SGA cited. SOURCES: Higher Algebra (Def. 2.1.1.10(2)) and Kerodon 06BZ are online only; WANTED is recorded and proof_origin is agent, which is correct."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-04d9ee540",
+  "group": "NP",
+  "result": "pass",
+  "note": "Repairs all four faults from the 98269ff47d2b return: per-K parameter-family clause, projection-change clause with actual comparison triangles and a homotopy between the old and new maps, coherent-square fibre identification preserving the bottom edge (orientation vb~au), and the lmBaseMappingVertex docstring plus a seven-step proof docstring. Checked every clause against the node and the side-clone declarations (IsLMOperadicFibration, IsLMInert, lmDiscarded = J, path-model homotopyFiber, mapping_composition, right_pinch_comparison). post/q/q'/c are uniquely determined because the LM nerve mapping spaces are discrete. Edge cases (theta = id, arity 0, empty K, empty mapping spaces) and universes OK. No hollow defs; the lmEdge_source/target sorry lemmas are proof obligations of a definition, allowed by brief l.62. Node differs only in lean; statement verbatim; declaration list exact; max line 94; all 5 proof-dependency imports present. nt_compile.py clean (11.4 s / 6.7 s; error path calibrated with a scratch file). Minor, non-blocking: restriction along K'->K is not explicit; the IsEquivalenceEdge premise is redundant."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InertProjectionSquareFibres",
+  "declaration": "SSet.Enhanced.inert_projection_square_fibres",
+  "declarations": [
+   "SSet.Enhanced.lmEdge_source",
+   "SSet.Enhanced.lmEdge_target",
+   "SSet.Enhanced.lmBaseMappingVertex",
+   "SSet.Enhanced.lmRelativeMappingSpace",
+   "SSet.Enhanced.lmRelativeUnderlyingMap",
+   "SSet.Enhanced.homotopyFiberSourceMap",
+   "SSet.Enhanced.lmDiscarded",
+   "SSet.Enhanced.chosenMappingComposition",
+   "SSet.Enhanced.chosenPostcomposition",
+   "SSet.Enhanced.squareBottomEdge",
+   "SSet.Enhanced.squareTopEdge",
+   "SSet.Enhanced.squareLeftEdge",
+   "SSet.Enhanced.squareRightEdge",
+   "SSet.Enhanced.squareRestriction",
+   "SSet.Enhanced.inertSquareBoundary",
+   "SSet.Enhanced.coherentSquareFiber",
+   "SSet.Enhanced.coherentSquareBottom",
+   "SSet.Enhanced.lmRelativeArrowMap",
+   "SSet.Enhanced.InertProjectionComparisonStatement",
+   "SSet.Enhanced.InertCoherentSquareStatement",
+   "SSet.Enhanced.lmFamilyMappingSpace",
+   "SSet.Enhanced.lmFamilyUnderlyingMap",
+   "SSet.Enhanced.InertProjectionFamilyStatement",
+   "SSet.Enhanced.inert_projection_square_fibres"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InertProjectionSquareFibres.lean",
+  "statement": "theorem inert_projection_square_fibres {E : SSet.{u}} [Quasicategory E] (r : E ⟶ lmBase.{u}) (hr : IsLMOperadicFibration r) {w z barz : LMOperadCategory} (f : w ⟶ z) (theta : z ⟶ barz) (hθ : IsLMInert theta) (X Y Z : E _⦋0⦌) (hX : r.app _ X = lmVertex w) (hY : r.app _ Y = lmVertex z) (hZ : r.app _ Z = lmVertex barz) (v : Δ[1] ⟶ E) (hv0 : E.δ 1 (SSet.yonedaEquiv v) = Y) (hv1 : E.δ 0 (SSet.yonedaEquiv v) = Z) (hvr : v ≫ r = lmEdge theta) (hc : IsCocartesianEdge r v) (Yi : ∀ i : lmDiscarded theta, E _⦋0⦌) (hYi : ∀ i, r.app _ (Yi i) = lmVertex (lmColour z i.1)) (projection : ∀ i : lmDiscarded theta, Δ[1] ⟶ E) (projection_source : ∀ i, E.δ 1 (SSet.yonedaEquiv (projection i)) = Y) (projection_target : ∀ i, E.δ 0 (SSet.yonedaEquiv (projection i)) = Yi i) (projection_base : ∀ i, projection i ≫ r = lmEdge (lmProjection z i.1)) (projection_cocartesian : ∀ i, IsCocartesianEdge r (projection i)) : (∀ h : (lmRelativeMappingSpace r X Z hX hZ (f ≫ theta)) _⦋0⦌, ∃ post : lmRelativeMappingSpace r X Y hX hY f ⟶ lmRelativeMappingSpace r X Z hX hZ (f ≫ theta), ∃ q : homotopyFiber post h ⟶ ∏ᶜ fun i : lmDiscarded theta => lmRelativeMappingSpace r X (Yi i) hX (hYi i) (f ≫ lmProjection z i.1), IsWeakHomotopyEquivalence q ∧ (∀ i, ∃ output : homotopyFiber post h ⟶ lmRelativeMappingSpace r X (Yi i) hX (hYi i) (f ≫ lmProjection z i.1), q ≫ Pi.π _ i = output ∧ output ≫ lmRelativeUnderlyingMap = homotopyFiberSourceMap ≫ lmRelativeUnderlyingMap ≫ chosenPostcomposition (⟨SSet.yonedaEquiv (projection i), by simpa [SimplicialObject.δ, SimplexCategory.δ_one_eq_const] using projection_source i, by simpa [SimplicialObject.δ, SimplexCategory.δ_zero_eq_const] using projection_target i⟩ : (mappingSpace E Y (Yi i)) _⦋0⦌)) ∧ (post ≫ lmRelativeUnderlyingMap = lmRelativeUnderlyingMap ≫ chosenPostcomposition (⟨SSet.yonedaEquiv v, by simpa [SimplicialObject.δ, SimplexCategory.δ_one_eq_const] using hv0, by simpa [SimplicialObject.δ, SimplexCategory.δ_zero_eq_const] using hv1⟩ : (mappingSpace E Y Z) _⦋0⦌)) ∧ InertProjectionComparisonStatement r f theta X Y Z hX hY hZ Yi hYi projection post h q ∧ InertCoherentSquareStatement r f theta X Y Z hX hY hZ v post h) ∧ InertProjectionFamilyStatement r",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repairs returned head 98269ff47d2b: the conclusion now includes arbitrary simplicial parameter diagrams in Fun(K,E), explicit cocartesian colour-projection comparison triangles and their induced homotopy, and the fixed-base strict coherent-square fibre identification preserving the bottom edge. The relative mapping spaces retain compatibility paths. All helper definitions have real construction data and belong to this mapping-square notion; the principal docstring follows all seven proof steps."
  }
 }

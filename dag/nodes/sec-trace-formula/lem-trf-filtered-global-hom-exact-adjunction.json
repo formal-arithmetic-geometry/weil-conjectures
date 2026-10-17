@@ -208,5 +208,37 @@
   "group": "Q69",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q69-458c580fd (reviewer sub-agent of L); spot-checked: Read the item, report, all cited statements, unit/chapter route, Varshavsky §§5.1.1–5.1.5, and relevant Stacks passages. Mathematics checks out. Added two missing tool declarations and explicit filtered-unit/counit calculations. Statement unchanged; no new nodes or cycles. Corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb86d09f3",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Repair of return L: F1 L^F is now constructed (L applied to each complex, filtration by images of L of the steps, Localization.lift/fac), F2 hypothesis uses the canonical derived adjunction adj.derivedPlus and the ordinary/graded comparison maps are pinned on all cohomology to L.mapDerivedCategory.map via representative-normalized omega/gr, F3 independent A/B universes through a §1(B) GlobalHomCalculusIn that only enlarges the coefficient universe (checked by field diff), F4 docstring has the source place and the five proof steps. All node clauses match; helpers true and sorry; no hollow definitions; only lean changed in 2 nodes; statements verbatim. nt_compile --json of both files: rc 0, no errors or warnings (33.3 s and 35.2 s); pp.universes scratch confirms independent universes. Remarks: dependency record replaced as §1(B) requires; quantification over calculus instances and cohomology pinning follow the project convention."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FilteredGlobalHomExactAdjunction",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredGlobalHomExactAdjunction.lean",
+  "declaration": "CochainComplex.FiniteFiltered.filteredGlobalHomExactAdjunction",
+  "declarations": [
+   "CochainComplex.FiniteFiltered.exactFiltered_antitone",
+   "CochainComplex.FiniteFiltered.exactFilteredObject",
+   "CochainComplex.FiniteFiltered.exactFiltered_bounds",
+   "CochainComplex.FiniteFiltered.exactFiltered_preserves",
+   "CochainComplex.FiniteFiltered.exactFilteredComplex",
+   "CochainComplex.FiniteFiltered.exactFiltered_inverts",
+   "CochainComplex.FiniteFiltered.exactFilteredDerived",
+   "CochainComplex.FiniteFiltered.exactFilteredDerivedQ",
+   "CochainComplex.FiniteFiltered.exactFiltered_graded_iso",
+   "CochainComplex.FiniteFiltered.exactFilteredGrIso",
+   "CochainComplex.FiniteFiltered.FilteredGlobalHomExactAdjunctionData",
+   "CochainComplex.FiniteFiltered.filteredGlobalHomExactAdjunction"
+  ],
+  "statement": "theorem filteredGlobalHomExactAdjunction [EnoughInjectives A] [EnoughInjectives B] {R : B ⥤ A} [R.Additive] (adj : L ⊣ R) [IsIso adj.derivedPlus.unit] : Nonempty (FilteredGlobalHomExactAdjunctionData L TA TB C GA GB)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

@@ -17,13 +17,16 @@
  },
  "kind": "statement",
  "title": "Presentability and graphwise limits of categorical algebras",
- "statement": "Let $\\mathcal V$ be a presentably monoidal infinity category and use the algebroids of [def-coef-complete-algebroid]. Then $\\operatorname{Algd}(\\mathcal V)$ is presentable. For a small diagram $(A_j)$ with object spaces $X_j$, its limit has object space $X=\\lim_jX_j$ and, for coherent objects $x=(x_j),y=(y_j)$, mapping object $\\lim_jA_j(x_j,y_j)$; compositions are induced by projection to every factor. An enriched graph consists of a small space $X$ and a functor $X\\times X\\to\\mathcal V$, with no chosen compositions or units. The forgetful functor to enriched graphs has a left adjoint, the free algebroid. In particular the free algebroid on two fixed objects with a single generating edge labeled by $v\\in\\mathcal V$ represents maps $v\\to A(x,y)$ with the two images of its objects fixed. These assertions concern all small coherent diagrams, not only diagrams in an ordinary homotopy category.",
+ "statement": "Let $\\mathcal V$ be a presentably monoidal infinity category and use the algebroids of [def-coef-complete-algebroid]. Choose a representative of the canonical monoidal unit section used in the completeness definition. Then the ambient category $\\operatorname{Algd}(\\mathcal V)$ is presentable, and the full subcategory $\\operatorname{Cat}_{\\mathcal V}$ of complete algebroids is presentable. For every small coherent diagram $(A_j)$ in $\\operatorname{Algd}(\\mathcal V)$, with object spaces $X_j$, its ambient limit has object space $X=\\lim_jX_j$ and, for coherent objects $x=(x_j),y=(y_j)$, mapping object $\\lim_jA_j(x_j,y_j)$; compositions are induced by projection to every factor. The same object-space and mapping-object formula, with compositions induced by projection, holds for every small coherent diagram in $\\operatorname{Cat}_{\\mathcal V}$, with its limit taken in the complete full subcategory. An enriched graph consists of a small space $X$ and a functor $X\\times X\\to\\mathcal V$, with no chosen compositions or units. The forgetful functor from all algebroids $\\operatorname{Algd}(\\mathcal V)$ to enriched graphs of [def-coef-algebroid-graph] has a left adjoint over object spaces, the free (uncompleted) algebroid. This graph-adjunction clause concerns the ambient category of algebroids; it does not assert that completion preserves object spaces. In particular the free algebroid on two fixed objects with a single generating edge labeled by $v\\in\\mathcal V$ represents maps $v\\to A(x,y)$ with the two images of its objects fixed. These assertions concern all small coherent diagrams, not only diagrams in an ordinary homotopy category.",
  "source": {
   "document": "https://arxiv.org/html/1312.3178",
   "place": "Proposition 4.3.5 and Remark 4.3.4; graph/operadic algebra construction of section 4.3, with limits as in Higher Algebra Proposition 3.2.2.1 and Corollary 3.2.2.3 (operadic limits) Read online where available; not archived in literature/. No Stacks tag states this infinity-categorical result."
  },
  "stmt_deps": [
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "def-coef-algebroid-graph",
+  "lem-coef-infinity-limits-products-pullbacks",
+  "lem-coef-model-infinity-derived-adjunction"
  ],
  "proof": [
   {
@@ -41,7 +44,7 @@
    }
   },
   {
-   "text": "The projection $p:\\operatorname{Algd}(\\mathcal V)\\to\\mathcal S$ is Cartesian, with restriction $f^*$ on its fibers, directly from the arrow description in step 1. Every fiber is presentable by [lem-coef-operadic-algebra-presentability]. For $f:X\\to Y$, the generalized operad map $\\Delta_X^{\\mathrm{op}}\\to\\Delta_Y^{\\mathrm{op}}$ is $f$ over $[0]$ and need not be an equivalence there. Instead use the ordinary operad map $q(f)$ from [lem-coef-many-object-operad-accessibility]: ordinary operads have contractible zero-fibers, so [lem-coef-operadic-free-extension] applies and gives $f_!\\dashv f^*$. The arrow over $f$ from $(X,A)$ to $(Y,f_!A)$ is specified by the unit $A\\to f^*f_!A$. For $g:Y\\to Z$ and $C$ over $Z$, precomposition with this arrow identifies $\\operatorname{Map}_{\\operatorname{Alg}_{q(Y)}(\\mathcal V)}(f_!A,g^*C)$ with $\\operatorname{Map}_{\\operatorname{Alg}_{q(X)}(\\mathcal V)}(A,f^*g^*C)$ by the adjunction. These are exactly the mapping-space fibers over $g$ and $gf$ in the total category. Naturality in $g$ gives the cocartesian universal property, so these unit arrows provide cocartesian lifts. Since a left adjoint preserves colimits (apply its mapping-space adjunction to a colimit cocone), these transports preserve colimits. The base $\\mathcal S$ has small colimits by [lem-coef-accessible-infinity-pullback], and [lem-coef-infinity-grothendieck-limits-colimits] therefore gives all small colimits in the total category. Together with step 1 and the definition of presentable in [def-coef-complete-algebroid], this proves presentability.",
+   "text": "The projection $p:\\operatorname{Algd}(\\mathcal V)\\to\\mathcal S$ is Cartesian, with restriction $f^*$ on its fibers, directly from the arrow description in step 1. Every fiber is presentable by [lem-coef-operadic-algebra-presentability]. For $f:X\\to Y$, the generalized operad map $\\Delta_X^{\\mathrm{op}}\\to\\Delta_Y^{\\mathrm{op}}$ is $f$ over $[0]$ and need not be an equivalence there. Instead use the ordinary operad map $q(f)$ from [lem-coef-many-object-operad-accessibility]: ordinary operads have contractible zero-fibers, so [lem-coef-operadic-free-extension] applies and gives $f_!\\dashv f^*$. The arrow over $f$ from $(X,A)$ to $(Y,f_!A)$ is specified by the unit $A\\to f^*f_!A$. For $g:Y\\to Z$ and $C$ over $Z$, precomposition with this arrow identifies $\\operatorname{Map}_{\\operatorname{Alg}_{q(Y)}(\\mathcal V)}(f_!A,g^*C)$ with $\\operatorname{Map}_{\\operatorname{Alg}_{q(X)}(\\mathcal V)}(A,f^*g^*C)$ by the adjunction. These are exactly the mapping-space fibers over $g$ and $gf$ in the total category. Naturality in $g$ gives the cocartesian universal property, so these unit arrows provide cocartesian lifts. Since a left adjoint preserves colimits (apply its mapping-space adjunction to a colimit cocone), these transports preserve colimits. The base $\\mathcal S$ has small colimits by [lem-coef-accessible-infinity-pullback], and [lem-coef-infinity-grothendieck-limits-colimits] therefore gives all small colimits in the total category. Together with step 1 and the definition of presentable in [def-coef-complete-algebroid], this proves presentability of the ambient algebroid category, an intermediate assertion used to obtain presentability of complete objects below.",
    "uses": [
     "def-coef-complete-algebroid",
     "lem-coef-operadic-algebra-presentability",
@@ -57,7 +60,20 @@
    }
   },
   {
-   "text": "For a small coherent diagram $A_j$, form $X=\\lim_jX_j$ in $\\mathcal S$ and denote its projections by $f_j$. Existence of this base limit follows from [lem-coef-accessible-infinity-pullback]. Restriction between the fibers preserves limits by [lem-coef-operadic-algebra-presentability]. The Cartesian formula of [lem-coef-infinity-grothendieck-limits-colimits] therefore constructs the total limit as $\\lim_j f_j^*A_j$ in the fiber over $X$. Evaluate it at the color $(x,y)$: pointwise creation of operadic limits from [lem-coef-operadic-algebra-presentability] gives $\\lim_j A_j(f_jx,f_jy)$, and [def-coef-complete-algebroid] identifies this with the asserted mapping object. Composition is the map from the tensor of two such limits to each $A_j(f_jx,f_jz)$ obtained by the two projections and composition in $A_j$, followed by the universal property of the target limit. For each $x$, the unit maps $\\mathbf1_{\\mathcal V}\\to A_j(f_jx,f_jx)$ are a coherent cone with constant source $\\mathbf1_{\\mathcal V}$, hence induce $\\mathbf1_{\\mathcal V}\\to\\lim_j A_j(f_jx,f_jx)$; this specifies the unit of the limit. This is the algebra structure of the created limit, so its full coherences, and not merely their images in the homotopy category, are included.",
+   "text": "By [lem-coef-algebroid-equivalence-nerve], the simplicial space I_n(A)=Map(E^n,A) is a groupoid object. By [lem-coef-space-geometric-descent], I_0(A) -> |I(A)| is an effective surjection and I_1(A) is its self-pullback. Thus the canonical I_0(A) -> I_1(A) is the diagonal; it is an equivalence if and only if I_0(A) -> |I(A)| is an equivalence, since every fiber of an effective surjection with equivalence diagonal is contractible. Completeness is therefore exactly locality for s:E^1 -> E^0. Apply the singleton-localization clause of [lem-coef-presentable-infinity-adjoints] to the ambient presentable category from the preceding steps. It gives presentability of the full subcategory of complete algebroids. Local objects are closed under small limits, computed in the ambient category, by the same clause. This proves the complete-category presentability assertion without using lem-coef-algebroid-completion, whose proof cites the present item.",
+   "uses": [
+    "lem-coef-algebroid-equivalence-nerve",
+    "lem-coef-space-geometric-descent",
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Definition 5.4.3 and Corollary 5.4.5 (complete subcategory presentability); Proposition 5.4.2 (locality and closure under limits); Definition 4.3.3 and Remark 4.3.4 (ambient free graph adjunction); Higher Algebra 3.2.2.1 and 3.2.2.3 (graphwise limits)."
+   }
+  },
+  {
+   "text": "For a small coherent diagram $A_j$, form $X=\\lim_jX_j$ in $\\mathcal S$ and denote its projections by $f_j$. Existence of this base limit follows from [lem-coef-accessible-infinity-pullback]. Restriction between the fibers preserves limits by [lem-coef-operadic-algebra-presentability]. The Cartesian formula of [lem-coef-infinity-grothendieck-limits-colimits] therefore constructs the total limit as $\\lim_j f_j^*A_j$ in the fiber over $X$. Evaluate it at the color $(x,y)$: pointwise creation of operadic limits from [lem-coef-operadic-algebra-presentability] gives $\\lim_j A_j(f_jx,f_jy)$, and [def-coef-complete-algebroid] identifies this with the asserted mapping object. Composition is the map from the tensor of two such limits to each $A_j(f_jx,f_jz)$ obtained by the two projections and composition in $A_j$, followed by the universal property of the target limit. For each $x$, the unit maps $\\mathbf1_{\\mathcal V}\\to A_j(f_jx,f_jx)$ are a coherent cone with constant source $\\mathbf1_{\\mathcal V}$, hence induce $\\mathbf1_{\\mathcal V}\\to\\lim_j A_j(f_jx,f_jx)$; this specifies the unit of the limit. This is the algebra structure of the created limit, so its full coherences, and not merely their images in the homotopy category, are included. When every A_j is complete, the preceding locality argument makes this ambient limit complete, and fullness identifies the cone as the limit in Cat_V. Thus the stated graphwise formula holds in the complete subcategory.",
    "uses": [
     "def-coef-complete-algebroid",
     "lem-coef-accessible-infinity-pullback",
@@ -71,7 +87,7 @@
    }
   },
   {
-   "text": "For each $X$, the color space of $q(X)$ is $X\\times X$ by [lem-coef-many-object-operad-accessibility]. The trivial-operad equivalence of [lem-coef-operadic-free-extension] identifies its trivial algebras with $\\operatorname{Fun}(X\\times X,\\mathcal V)$; it forgets exactly the compositions and units. Pull back that node's relative adjunction along $q$. Its free functor fixes $X$, and its mapping-space equivalence holds over every $f:X\\to Y$. Hence it supplies an adjunction on the total categories of graphs and algebroids, since the same equivalence identifies the fibers of their mapping spaces over every point of $\\operatorname{Map}_{\\mathcal S}(X,Y)$ and is natural in that space. This constructs the claimed free algebroid rather than postulating a monad on variable-object graphs.",
+   "text": "For each $X$, the color space of $q(X)$ is $X\\times X$ by [lem-coef-many-object-operad-accessibility]. The trivial-operad equivalence of [lem-coef-operadic-free-extension] identifies its trivial algebras with $\\operatorname{Fun}(X\\times X,\\mathcal V)$; it forgets exactly the compositions and units. Pull back that node's relative adjunction along $q$. Its free functor fixes $X$, and its mapping-space equivalence holds over every $f:X\\to Y$. Hence it supplies an adjunction on the total categories of graphs and algebroids, since the same equivalence identifies the fibers of their mapping spaces over every point of $\\operatorname{Map}_{\\mathcal S}(X,Y)$ and is natural in that space. This constructs the claimed free algebroid rather than postulating a monad on variable-object graphs. This adjunction is deliberately in the ambient Algd(V), as in Remark 4.3.4; completion of a free algebra need not retain its object space.",
    "uses": [
     "lem-coef-many-object-operad-accessibility",
     "lem-coef-operadic-free-extension"
@@ -100,7 +116,10 @@
   "lem-coef-operadic-algebra-presentability",
   "lem-coef-accessible-infinity-pullback",
   "lem-coef-operadic-free-extension",
-  "lem-coef-infinity-grothendieck-limits-colimits"
+  "lem-coef-infinity-grothendieck-limits-colimits",
+  "lem-coef-algebroid-equivalence-nerve",
+  "lem-coef-space-geometric-descent",
+  "lem-coef-presentable-infinity-adjoints"
  ],
  "proof_origin": {
   "by": "agent",
@@ -208,5 +227,174 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14578032e",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Repairs my RETURN of 3f7fa881a978 as asked. Lean concludes (∃h, IsPresentable total) ∧ HasGraphwiseLimits p (identical to 2435135cae27) ∧ (∃h, IsPresentable completeCategory) ∧ HasCompleteGraphwiseLimits p unit ∧ ∃F, CoherentAdjunction F forgetGraph ∧ F≫algebraSpace=graphSpace ∧ RepresentsFixedEndpointEdges. Every node clause matches the Lean; hypotheses are exact (unit:UnitSection is the canonical representative); universes are independent and every variable is bound; lean.statement matches the file up to line breaks; all 16 declarations are present. The corrected statement contains the original in full and adds the complete clauses (GH 5.4.2/5.4.5); old_statement is archived. The side DAG has exactly the eight audited citers, all correctly holds:true (read collage-crossing step 6, flexible-weight step 8, free-edge-square); no Lean module imports the item. The new proof step 3 avoids algebroid-completion; no cycle; proof_deps equals the steps' uses. No hollow definitions; only the theorem is sorry; docstrings carry source, blueprint and proof plan; no duplicates in side or Mathlib. AlgebroidGraph, the def-coef-algebroid-graph node and the SpaceValuedStraightening §1(B) dependency are unchanged from the previously reviewed copies (the live copy differs only by a comment). nt_compile --json of SpaceValuedStraightening, AlgebroidGraph and AlgebroidPresentability: exit 0, no errors, no warnings. Cosmetic only: the module heading says 'complete algebroids'.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-17",
+  "by": "Q69 stage 2",
+  "old_statement": "Let $\\mathcal V$ be a presentably monoidal infinity category and use the algebroids of [def-coef-complete-algebroid]. Then $\\operatorname{Algd}(\\mathcal V)$ is presentable. For a small diagram $(A_j)$ with object spaces $X_j$, its limit has object space $X=\\lim_jX_j$ and, for coherent objects $x=(x_j),y=(y_j)$, mapping object $\\lim_jA_j(x_j,y_j)$; compositions are induced by projection to every factor. An enriched graph consists of a small space $X$ and a functor $X\\times X\\to\\mathcal V$, with no chosen compositions or units. The forgetful functor to enriched graphs has a left adjoint, the free algebroid. In particular the free algebroid on two fixed objects with a single generating edge labeled by $v\\in\\mathcal V$ represents maps $v\\to A(x,y)$ with the two images of its objects fixed. These assertions concern all small coherent diagrams, not only diagrams in an ordinary homotopy category.",
+  "what": "The preceding correction was too narrow: it replaced the source's true ambient clauses (presentability of $\\operatorname{Algd}(\\mathcal V)$ and its graphwise limits) by complete-only clauses, even though GH Proposition 4.3.5 and the node's source place assert the ambient result. This repair restores both ambient clauses and retains the requested complete clauses, with an explicit canonical unit-section representative. The source distinguishes the ambient $\\operatorname{Algd}(\\mathcal V)$ from the complete full subcategory $\\operatorname{Cat}_{\\mathcal V}$; both assertions are stated. The free graph adjunction and fixed-endpoint edge probe remain ambient exactly as in GH Remark 4.3.4, since completion need not preserve object spaces (terminal coefficients give the edge case).",
+  "source": {
+   "document": "https://arxiv.org/html/1312.3178",
+   "place": "Definition 5.4.3 and Corollary 5.4.5 (complete subcategory presentability); Proposition 5.4.2 (locality and closure under limits); Definition 4.3.3 and Remark 4.3.4 (ambient free graph adjunction); Higher Algebra 3.2.2.1 and 3.2.2.3 (graphwise limits)."
+  },
+  "citers": [
+   {
+    "id": "lem-coef-algebroid-completion",
+    "holds": true,
+    "note": "Steps 1 and 2 use ambient Algd presentability and graphwise limits; the restored first two conjuncts provide exactly those hypotheses."
+   },
+   {
+    "id": "lem-coef-algebroid-categorical-homotopy",
+    "holds": true,
+    "note": "Step 2 applies the adjoint criterion to all Algd; ambient presentability and graphwise limits are now conclusions."
+   },
+   {
+    "id": "lem-coef-enriched-category-tensor-calculus",
+    "holds": true,
+    "note": "Steps 1 and 6 use the ambient clauses and steps 4 and 5 use the unchanged ambient edge probe; all are supplied."
+   },
+   {
+    "id": "lem-coef-enriched-small-products",
+    "holds": true,
+    "note": "Step 1 uses the ambient graphwise limit and step 2 identifies the complete limit; both clauses are now present."
+   },
+   {
+    "id": "lem-coef-enrichment-change-adjunction",
+    "holds": true,
+    "note": "Step 3 requires presentability of unrestricted Algd(V) and Algd(W); the ambient presentability conjunct is restored."
+   },
+   {
+    "id": "lem-coef-collage-crossing-transformations",
+    "holds": true,
+    "note": "Its proof uses the ambient free-algebroid and graphwise-limit interfaces; the restored ambient clauses supply them."
+   },
+   {
+    "id": "lem-coef-flexible-weight-enriched-lift",
+    "holds": true,
+    "note": "Its proof uses ambient graphwise limits for complete enriched categories; the restored ambient and complete clauses supply them."
+   },
+   {
+    "id": "lem-coef-free-enriched-edge-square-presentation",
+    "holds": true,
+    "note": "Its statement uses the free algebroid and completion interfaces; the unchanged ambient free adjunction remains available."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-coef-complete-algebroid"
+  ],
+  "old_proof": [
+   {
+    "text": "Put $q(X)=L_{\\mathrm{gen}}\\Delta_X^{\\mathrm{op}}$. By [lem-coef-many-object-operad-accessibility], $q$ is accessible and its algebras agree naturally with the algebroids of [def-coef-complete-algebroid]. Thus the total category in the statement is the pullback $\\mathcal S\\times_{\\operatorname{Opd}^{\\mathrm{ns}}_\\infty}\\operatorname{Alg}(\\mathcal V)$: an object is a space $X$ and a $q(X)$-algebra, and an arrow over $f$ is an algebra map to the restriction along $q(f)$. By [lem-coef-operadic-algebra-presentability] the other leg is accessible between presentable categories. The space category is accessible by [lem-coef-accessible-infinity-pullback], so that node's pullback theorem proves that $\\operatorname{Algd}(\\mathcal V)$ is accessible.",
+    "uses": [
+     "def-coef-complete-algebroid",
+     "lem-coef-many-object-operad-accessibility",
+     "lem-coef-operadic-algebra-presentability",
+     "lem-coef-accessible-infinity-pullback"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "https://arxiv.org/html/1312.3178",
+     "place": "Proof of Proposition 4.3.5, accessible pullback argument."
+    }
+   },
+   {
+    "text": "The projection $p:\\operatorname{Algd}(\\mathcal V)\\to\\mathcal S$ is Cartesian, with restriction $f^*$ on its fibers, directly from the arrow description in step 1. Every fiber is presentable by [lem-coef-operadic-algebra-presentability]. For $f:X\\to Y$, the generalized operad map $\\Delta_X^{\\mathrm{op}}\\to\\Delta_Y^{\\mathrm{op}}$ is $f$ over $[0]$ and need not be an equivalence there. Instead use the ordinary operad map $q(f)$ from [lem-coef-many-object-operad-accessibility]: ordinary operads have contractible zero-fibers, so [lem-coef-operadic-free-extension] applies and gives $f_!\\dashv f^*$. The arrow over $f$ from $(X,A)$ to $(Y,f_!A)$ is specified by the unit $A\\to f^*f_!A$. For $g:Y\\to Z$ and $C$ over $Z$, precomposition with this arrow identifies $\\operatorname{Map}_{\\operatorname{Alg}_{q(Y)}(\\mathcal V)}(f_!A,g^*C)$ with $\\operatorname{Map}_{\\operatorname{Alg}_{q(X)}(\\mathcal V)}(A,f^*g^*C)$ by the adjunction. These are exactly the mapping-space fibers over $g$ and $gf$ in the total category. Naturality in $g$ gives the cocartesian universal property, so these unit arrows provide cocartesian lifts. Since a left adjoint preserves colimits (apply its mapping-space adjunction to a colimit cocone), these transports preserve colimits. The base $\\mathcal S$ has small colimits by [lem-coef-accessible-infinity-pullback], and [lem-coef-infinity-grothendieck-limits-colimits] therefore gives all small colimits in the total category. Together with step 1 and the definition of presentable in [def-coef-complete-algebroid], this proves presentability.",
+    "uses": [
+     "def-coef-complete-algebroid",
+     "lem-coef-operadic-algebra-presentability",
+     "lem-coef-many-object-operad-accessibility",
+     "lem-coef-operadic-free-extension",
+     "lem-coef-accessible-infinity-pullback",
+     "lem-coef-infinity-grothendieck-limits-colimits"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "https://arxiv.org/html/1312.3178",
+     "place": "Lemma 4.3.7 and first sentence of the proof of Proposition 4.3.5."
+    }
+   },
+   {
+    "text": "For a small coherent diagram $A_j$, form $X=\\lim_jX_j$ in $\\mathcal S$ and denote its projections by $f_j$. Existence of this base limit follows from [lem-coef-accessible-infinity-pullback]. Restriction between the fibers preserves limits by [lem-coef-operadic-algebra-presentability]. The Cartesian formula of [lem-coef-infinity-grothendieck-limits-colimits] therefore constructs the total limit as $\\lim_j f_j^*A_j$ in the fiber over $X$. Evaluate it at the color $(x,y)$: pointwise creation of operadic limits from [lem-coef-operadic-algebra-presentability] gives $\\lim_j A_j(f_jx,f_jy)$, and [def-coef-complete-algebroid] identifies this with the asserted mapping object. Composition is the map from the tensor of two such limits to each $A_j(f_jx,f_jz)$ obtained by the two projections and composition in $A_j$, followed by the universal property of the target limit. For each $x$, the unit maps $\\mathbf1_{\\mathcal V}\\to A_j(f_jx,f_jx)$ are a coherent cone with constant source $\\mathbf1_{\\mathcal V}$, hence induce $\\mathbf1_{\\mathcal V}\\to\\lim_j A_j(f_jx,f_jx)$; this specifies the unit of the limit. This is the algebra structure of the created limit, so its full coherences, and not merely their images in the homotopy category, are included.",
+    "uses": [
+     "def-coef-complete-algebroid",
+     "lem-coef-accessible-infinity-pullback",
+     "lem-coef-operadic-algebra-presentability",
+     "lem-coef-infinity-grothendieck-limits-colimits"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "https://arxiv.org/html/1312.3178",
+     "place": "Operadic-limit construction, Higher Algebra Proposition 3.2.2.1 and Corollaries 3.2.2.3–3.2.2.5; Section 4.3 algebra fibration."
+    }
+   },
+   {
+    "text": "For each $X$, the color space of $q(X)$ is $X\\times X$ by [lem-coef-many-object-operad-accessibility]. The trivial-operad equivalence of [lem-coef-operadic-free-extension] identifies its trivial algebras with $\\operatorname{Fun}(X\\times X,\\mathcal V)$; it forgets exactly the compositions and units. Pull back that node's relative adjunction along $q$. Its free functor fixes $X$, and its mapping-space equivalence holds over every $f:X\\to Y$. Hence it supplies an adjunction on the total categories of graphs and algebroids, since the same equivalence identifies the fibers of their mapping spaces over every point of $\\operatorname{Map}_{\\mathcal S}(X,Y)$ and is natural in that space. This constructs the claimed free algebroid rather than postulating a monad on variable-object graphs.",
+    "uses": [
+     "lem-coef-many-object-operad-accessibility",
+     "lem-coef-operadic-free-extension"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "https://arxiv.org/html/1312.3178",
+     "place": "Definition 4.3.3 and Remark 4.3.4; relative adjunction from Lemma 3.6.7."
+    }
+   },
+   {
+    "text": "To make the edge graph precise take the discrete two-point space $\\{0,1\\}$, put $G(0,1)=v$, and put the initial object $0_{\\mathcal V}$ in the other three entries. Such an initial object exists because $\\mathcal V$ is presentable. Fix a map of this two-point space into the object space of $A$, with images $x,y$ (which may coincide). The adjunction in step 4 identifies the fiber of $\\operatorname{Map}(F(G),A)$ over this map with the graph mapping space. That space is the product of $\\operatorname{Map}_{\\mathcal V}(v,A(x,y))$ and the three spaces $\\operatorname{Map}_{\\mathcal V}(0_{\\mathcal V},A(x,x))$, $\\operatorname{Map}_{\\mathcal V}(0_{\\mathcal V},A(y,x))$, and $\\operatorname{Map}_{\\mathcal V}(0_{\\mathcal V},A(y,y))$. The latter spaces are contractible by the definition of initial, leaving the desired equivalence. These are equivalences of spaces, so all higher homotopies are retained. Every preceding construction used small coherent diagrams and their universal mapping-space properties.",
+    "uses": [
+     "def-coef-complete-algebroid"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "https://arxiv.org/html/1312.3178",
+     "place": "Remark 4.3.4, elementary fixed-endpoint specialization of the free adjunction."
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "def-coef-complete-algebroid",
+   "lem-coef-many-object-operad-accessibility",
+   "lem-coef-operadic-algebra-presentability",
+   "lem-coef-accessible-infinity-pullback",
+   "lem-coef-operadic-free-extension",
+   "lem-coef-infinity-grothendieck-limits-colimits"
+  ]
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AlgebroidPresentability",
+  "declaration": "SSet.Enhanced.Algebroid.algebroid_presentability",
+  "declarations": [
+   "SSet.Enhanced.Algebroid.graphPairCoordinates",
+   "SSet.Enhanced.Algebroid.markedAlgebras",
+   "SSet.Enhanced.Algebroid.markedProjection",
+   "SSet.Enhanced.Algebroid.markedGraph",
+   "SSet.Enhanced.Algebroid.markedEvaluation",
+   "SSet.Enhanced.Algebroid.IsConeOver",
+   "SSet.Enhanced.Algebroid.SingleEdgeGraph",
+   "SSet.Enhanced.Algebroid.RepresentsFixedEndpointEdges",
+   "SSet.Enhanced.Algebroid.completeAlgebraSpace",
+   "SSet.Enhanced.Algebroid.completeMarkedAlgebras",
+   "SSet.Enhanced.Algebroid.completeMarkedProjection",
+   "SSet.Enhanced.Algebroid.completeMarkedEvaluation",
+   "SSet.Enhanced.Algebroid.HasGraphwiseLimits",
+   "SSet.Enhanced.Algebroid.HasCompleteGraphwiseLimits",
+   "SSet.Enhanced.Algebroid.algebroid_presentability"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AlgebroidPresentability.lean",
+  "statement": "theorem algebroid_presentability {E : SSet.{max (u + 1) v}} [Quasicategory E] (p : E ⟶ monoidalSimplexBase.{max (u + 1) v}) (hp : IsPresentablyMonoidal.{u, v} p) (unit : UnitSection p) : (∃ h : Quasicategory (total.{u, v} p), @Presentability.IsPresentable.{u, v} (total.{u, v} p) h) ∧ HasGraphwiseLimits.{u, v} p ∧ (∃ h : Quasicategory (completeCategory.{u, v} unit), @Presentability.IsPresentable.{u, v} (completeCategory.{u, v} unit) h) ∧ HasCompleteGraphwiseLimits.{u, v} p unit ∧ ∃ F : graphs.{u, v} p ⟶ total.{u, v} p, Nonempty (HomotopicalAlgebra.ModelInfinity.CoherentAdjunction F (forgetGraph universalFamily.{u, v}.hom p)) ∧ F ≫ algebraSpace universalFamily.{u, v}.hom p = graphSpace universalFamily.{u, v}.hom p ∧ RepresentsFixedEndpointEdges.{u, v} p F",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Restores the true ambient presentability and HasGraphwiseLimits clauses while retaining the completeCategory and HasCompleteGraphwiseLimits clauses requested by the source correction; free adjunction and fixed-endpoint probe remain ambient."
  }
 }
