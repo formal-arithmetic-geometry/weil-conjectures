@@ -14,8 +14,8 @@
 |---|---|---|---|
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | repair |
 | `WeilConjectures.PoincareDuality.ProjectionFormula` | 2 | 5 | repair |
+| `WeilConjectures.PoincareDuality.Poincare` | 0 | 1 | repair |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 3 | disputed |
-| `WeilConjectures.PoincareDuality.Poincare` | 0 | 1 | proof |
 | `WeilConjectures.SmoothPurity.Defs` | 0 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructible` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EllAdicLocalizingCohomologicalRepresentability` | 3 | 1 | proof |
