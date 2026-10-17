@@ -13,7 +13,8 @@ public import Mathlib.Data.Fintype.Basic
 
 If finitely many properties of morphisms `k ⟶ j` into a fixed object `j` of a cofiltered category
 each hold for some morphism and are stable under precomposition, then they all hold for a common
-morphism (`CategoryTheory.IsCofiltered.exists_forall_of_finite`).
+morphism (`CategoryTheory.IsCofiltered.exists_forall_of_finite`). A finite family of objects has a
+common lower bound (`CategoryTheory.IsCofiltered.exists_forall_nonempty_hom`).
 -/
 
 @[expose] public section
@@ -46,5 +47,13 @@ theorem exists_forall_of_finite {ι : Type*} [Finite ι] {j : C}
     · rw [eq_condition]
       simpa only [b, Category.assoc] using hP i' (eqHom a b ≫ minToRight k₁ k₂) t₂ h₂
     · simpa only [a, Category.assoc] using hP i' (eqHom a b ≫ minToLeft k₁ k₂) t₁ (h₁ i' hi')
+
+/-- A finite family of objects of a cofiltered category has a common lower bound. -/
+lemma exists_forall_nonempty_hom {K : Type*} [Finite K] (F : K → C) :
+    ∃ l : C, ∀ k, Nonempty (l ⟶ F k) := by
+  classical
+  have := Fintype.ofFinite K
+  obtain ⟨l, hl⟩ := inf_objs_exists (Finset.univ.image F)
+  exact ⟨l, fun k ↦ hl (Finset.mem_image_of_mem F (Finset.mem_univ k))⟩
 
 end CategoryTheory.IsCofiltered
