@@ -2,7 +2,7 @@
  "id": "lem-coef-cone-presheaf-adjunction",
  "kind": "statement",
  "title": "Raw cone-presheaf adjunction and lifting preservation",
- "statement": "Use simplicial sets, internal functor simplicial sets and weak homotopy equivalences of [def-cbc-enhanced-diagrams-cones], coherent realization $\\mathfrak C$ and its ordered last-vertex cone from [lem-coef-pinched-cube-latching], and the Kan model and model-category conventions of [lem-coef-simplicial-boundary-collapse-test]. Fix a small simplicial set $S$, enlarging universes when necessary, and put $D=\\mathfrak C[S]^{\\mathrm{op}}$. Let $\\mathcal P_S$ be the category of simplicial functors $D\\to\\mathrm{sSet}$ and enriched natural transformations. An enriched natural transformation consists of maps at objects commuting with the simplicial action maps. This category has the projective model structure: weak equivalences are objectwise weak homotopy equivalences, fibrations are objectwise Kan fibrations, and cofibrations have the left lifting property against objectwise trivial Kan fibrations; factorizations are functorial. Its mapping simplicial set $\\underline{\\operatorname{Nat}}(F,G)$ has degree-$n$ simplices the enriched natural maps $F\\times\\Delta^n\\to G$. A projectively fibrant presheaf is one taking values in Kan complexes; projectively cofibrant means that its initial map is a projective cofibration.\n\nFor $a:X\\to S$ put $T_a=\\mathfrak C[X\\star\\Delta^0]\\amalg_{\\mathfrak C[X]}\\mathfrak C[S]$, with cone vertex $v$, and define $L_S(X)(s)=T_a(s,v)$, with action by precomposition. Define $U_S(F)\\to S$ by declaring its degree-$n$ simplices over $\\sigma:\\Delta^n\\to S$ to be enriched natural transformations $L_S(\\Delta^n\\xrightarrow{\\sigma}S)\\to F$; simplex operators are restriction. These are an ordinary adjunction $L_S\\dashv U_S$. The functor $L_S$ sends every degreewise monomorphism over $S$ to a projective cofibration. If $f:(X,a)\\to(Y,b)$ induces a Dwyer--Kan equivalence on $\\mathfrak C[S\\amalg_X(X\\star\\Delta^0)]\\to\\mathfrak C[S\\amalg_Y(Y\\star\\Delta^0)]$, then $L_S(f)$ is an objectwise weak homotopy equivalence. Here Dwyer--Kan means weak homotopy equivalences on all mapping simplicial sets and equivalence on the categories of their path components. These assertions make no assumption of a model structure on $\\mathrm{sSet}_{/S}$ and no quasicategory assumption on $S$.",
+ "statement": "Use simplicial sets, internal functor simplicial sets and weak homotopy equivalences of [def-cbc-enhanced-diagrams-cones], coherent realization $\\mathfrak C$ and its ordered last-vertex cone from [lem-coef-pinched-cube-latching], the Kan model structure, Kan fibrations and trivial Kan fibrations of [lem-coef-kan-quillen-right-proper], and the model-category conventions of [lem-coef-simplicial-boundary-collapse-test]. Fix a small simplicial set $S$, enlarging universes when necessary, and put $D=\\mathfrak C[S]^{\\mathrm{op}}$. Let $\\mathcal P_S$ be the category of simplicial functors $D\\to\\mathrm{sSet}$ and enriched natural transformations. An enriched natural transformation consists of maps at objects commuting with the simplicial action maps. This category has the projective model structure: weak equivalences are objectwise weak homotopy equivalences, fibrations are objectwise Kan fibrations, and cofibrations have the left lifting property against objectwise trivial Kan fibrations; factorizations are functorial. Its mapping simplicial set $\\underline{\\operatorname{Nat}}(F,G)$ has degree-$n$ simplices the enriched natural maps $F\\times\\Delta^n\\to G$. A projectively fibrant presheaf is one taking values in Kan complexes; projectively cofibrant means that its initial map is a projective cofibration.\n\nFor $a:X\\to S$ put $T_a=\\mathfrak C[X\\star\\Delta^0]\\amalg_{\\mathfrak C[X]}\\mathfrak C[S]$, with cone vertex $v$, and define $L_S(X)(s)=T_a(s,v)$, with action by precomposition. Define $U_S(F)\\to S$ by declaring its degree-$n$ simplices over $\\sigma:\\Delta^n\\to S$ to be enriched natural transformations $L_S(\\Delta^n\\xrightarrow{\\sigma}S)\\to F$; simplex operators are restriction. These are an ordinary adjunction $L_S\\dashv U_S$. The functor $L_S$ sends every degreewise monomorphism over $S$ to a projective cofibration. If $f:(X,a)\\to(Y,b)$ induces a Dwyer--Kan equivalence on $\\mathfrak C[S\\amalg_X(X\\star\\Delta^0)]\\to\\mathfrak C[S\\amalg_Y(Y\\star\\Delta^0)]$, then $L_S(f)$ is an objectwise weak homotopy equivalence. Here Dwyer--Kan means weak homotopy equivalences on all mapping simplicial sets and equivalence on the categories of their path components. These assertions make no assumption of a model structure on $\\mathrm{sSet}_{/S}$ and no quasicategory assumption on $S$.",
  "source": {
   "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
   "place": "Section 2.2.1 construction and first two sentences of the proof of Theorem 2.2.1.2 (the adjunction and preservation assertions only, without Quillen equivalence), together with Proposition A.3.3.2 for enriched projective model existence. No Stacks tag states this result. HTT reading copy is in the sandbox; archival copy WANTED."
@@ -10,11 +10,97 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-pinched-cube-latching",
-  "lem-coef-simplicial-boundary-collapse-test"
+  "lem-coef-simplicial-boundary-collapse-test",
+  "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-simplicial-presheaf-projective-model] only for its assertion that the Kan model on simplicial sets is combinatorial and simplicial. Apply [lem-coef-simplicial-projective-model-calculus] with that model category and with the small simplicial category $D=\\mathfrak C[S]^{\\mathrm{op}}$. Its first paragraph gives the enriched projective model structure, objectwise weak equivalences and fibrations, and functorial factorizations. It gives the objectwise tensor and the enriched-end mapping simplicial set, whose degree-$n$ elements are precisely enriched maps $F\\times\\Delta^n\\to G$. An object is fibrant exactly when its terminal map is objectwise a Kan fibration, that is, when every value is Kan. The asserted description of cofibrancy is the definition of the initial map being a projective cofibration. Neither an ordinary-category interpretation of $D$ nor local Kan mapping sets are used.",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§A.3.3, Proposition A.3.3.2 and Remark A.3.3.4; instantiated using the existing simplicial projective-model interface"
+   }
+  },
+  {
+   "text": "Write $A=\\mathfrak C[S]$. For a presheaf $F:A^{\\mathrm{op}}\\to\\mathrm{sSet}$ form its collage $E_F$: objects are those of $A$ and one new object $v$; old-to-old mapping sets are those of $A$, $E_F(s,v)=F(s)$, $E_F(v,s)=\\varnothing$, and $E_F(v,v)=\\Delta^0$. Composition with old arrows is the presheaf action. Its associativity and units are exactly the action axioms. The realization and enriched colimits exist by [lem-coef-pinched-cube-latching] and [lem-coef-simplicial-interval-lifting]. The presentation of $T_a$ as an enriched pushout leaves its old mapping sets equal to $A$, its reverse mapping sets empty and its $v$-endomorphisms equal to $\\Delta^0$: the cone has no arrow leaving $v$ except its identity, so a composable path involving a new arrow cannot return to an old object. All other new paths go from an old object to $v$. Explicitly, its old-to-$v$ mapping set at $s$ is the degreewise quotient of $\\coprod_{x\\in X_0} A(s,a(x))\\times\\mathfrak C[X\\star\\Delta^0](x,v)$ by the relations $(a(g)\\circ h,z)\\sim(h,z\\circ g)$ for $g\\in\\mathfrak C[X](x,y)$, $h\\in A(s,a(x))$, and $z\\in\\mathfrak C[X\\star\\Delta^0](y,v)$ in the same degree. Faces and degeneracies preserve these relations because composition is simplicial; precomposition acts on $h$. A word containing a cone arrow has that arrow last, so these are all relations involving new arrows. Maps from this presentation to any simplicial category are exactly pairs of enriched functors from the two pushout factors agreeing on $\\mathfrak C[X]$, which verifies the pushout universal property. Thus $T_a$ is the collage of its presheaf $s\\mapsto T_a(s,v)$. An enriched functor $T_a\\to E_F$ equal to the identity on $A$ and on $v$ is precisely a family of maps $T_a(s,v)\\to F(s)$ commuting with precomposition, hence precisely an enriched natural map $L_S X\\to F$. This is a strict bijection, natural in $X$ and $F$, with no Kan hypothesis.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.1, the correspondence description of M; agent expansion by the explicit collage presentation"
+   }
+  },
+  {
+   "text": "The simplex-colimit definition of $\\mathfrak C$ in [lem-coef-pinched-cube-latching] preserves colimits: a functor from $\\mathfrak C[K]$ to any simplicial category $B$ is exactly a compatible family of functors from $\\mathfrak C[\\Delta^n]$ for every simplex of $K$. Such families are exactly maps $K\\to N(B)$ for $N(B)_n=\\operatorname{Fun}(\\mathfrak C[\\Delta^n],B)$; applying the mapping-out definition of a colimit proves preservation. An enriched map from $T_a$ to $E_F$ as in Step 2 is equivalently a compatible choice of such maps for the cone on every simplex $\\sigma:\\Delta^n\\to X$, all equal on $A$ and on the single vertex $v$. Indeed every mixed simplex of $X\\star\\Delta^0$ is a simplex of $X$ followed by vertices at $v$, and face and degeneracy compatibility is exactly the indicated compatibility on cone simplices. A compatible family of maps $L_S(\\Delta^n\\xrightarrow{a\\sigma}S)\\to F$ is in turn exactly a map $X\\to U_S F$ over $S$: send $\\sigma$ to that family member; for every $\\alpha:[m]\\to[n]$ the equation is $\\eta_{\\sigma\\circ\\Delta(\\alpha)}=\\eta_\\sigma\\circ L_S(\\Delta(\\alpha))$, precisely the restriction defining $U_S$. This proves the natural bijection $\\operatorname{Nat}(L_S X,F)\\cong\\operatorname{Hom}_{/S}(X,U_S F)$. Its two constructions are inverse on every simplex, proving the adjunction and its identity laws. For $X=\\varnothing$, the relative cone has only the fixed base $A$ and $v$, $L_S X$ is initial, and both sets in the bijection are singletons. The same mapping-out proof gives the canonical identification $T_a\\cong\\mathfrak C[S\\amalg_X(X\\star\\Delta^0)]$, fixing $A$ and $v$.",
+   "uses": [
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.1, direct construction of Un and the adjunction; §2.2.2, simplex-colimit formula; agent expansion including the empty domain"
+   }
+  },
+  {
+   "text": "Use the generating class $I$ and its notation $I\\text{-inj}$, $I\\text{-cof}$ from [lem-coef-simplicial-interval-lifting]. If $p:B\\to C$ is $I$-injective, it is surjective on objects by the object generator, and each $B(b,b')\\to C(pb,pb')$ has the right lifting property against every simplex boundary by the two-object generators. By [lem-coef-kan-quillen-right-proper] these local maps are trivial Kan fibrations, and so lift against every degreewise monomorphism. In particular $U(\\partial B_m)\\to U(B_m)$ has the left lifting property against every $I$-injective functor. The cube attachment in [lem-coef-rigidification-boundary-cube] and pushout closure of lifting classes [lem-coef-lifting-class-closure] imply that $\\mathfrak C[\\partial\\Delta^n]\\to\\mathfrak C[\\Delta^n]$ is $I$-cofibrant for $n\\geq1$; for $n=0$ it is the object generator itself. Every simplicial monomorphism is a transfinite composite of pushouts of coproducts of boundary inclusions by [lem-coef-kan-quillen-right-proper]. Apply the colimit preservation proved in Step 3. Coproducts of left-lifting maps have the same property by choosing one filler per summand and taking their coproduct; pushouts preserve it by [lem-coef-lifting-class-closure], and continuous transfinite composites preserve it by [lem-coef-transfinite-left-lifting]. Therefore $\\mathfrak C[j]$ is $I$-cofibrant for every simplicial monomorphism $j$. This argument uses no Joyal model structure or coherent-nerve equivalence.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-rigidification-boundary-cube",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.5, first paragraph of the proof of Theorem 2.2.5.1, with the boundary-cell and lifting-closure arguments expanded"
+   }
+  },
+  {
+   "text": "Let $i:X\\hookrightarrow Y$ be over $S$ and let $p:F\\to G$ be an objectwise trivial Kan fibration. A lifting square for $L_S i$ against $p$ becomes, by Step 2, compatible functors $T_X\\to E_F$ and $T_Y\\to E_G$ fixing $A$ and $v$. The induced $E_F\\to E_G$ is $I$-injective: it fixes and hence surjects on objects, its old mapping maps and its $v$-endomorphism map are identities, its maps from $v$ to old objects are empty identities, and its maps from old objects to $v$ are precisely the trivial Kan fibrations $p_s$. These satisfy the boundary lifting tests by [lem-coef-kan-quillen-right-proper] and the generators in [lem-coef-simplicial-interval-lifting]. Put $P=Y\\amalg_X(X\\star\\Delta^0)$; the map $j:P\\hookrightarrow Y\\star\\Delta^0$ is a monomorphism, since in each simplicial degree it includes exactly the base simplices of $Y$, the cone vertex, and the mixed simplices whose initial part lies in $X$. The given square specifies a functor $\\mathfrak C[P]\\to E_F$ and a compatible functor $\\mathfrak C[Y\\star\\Delta^0]\\to E_G$. Step 4 gives a lift to $E_F$. Its restriction to $\\mathfrak C[Y]$ is the prescribed map through $A$, since $Y\\subseteq P$; its restriction to the cone vertex is the prescribed $v$. It therefore extends across the defining pushout to $T_Y\\to E_F$ over $A$ and $v$, and recovers a filler $L_S Y\\to F$. Thus $L_S i$ has the left lifting property against every objectwise trivial Kan fibration, which is exactly a projective cofibration in the model of Step 1. This also treats $X=\\varnothing$ because $P$ still contains $v$.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.1, first sentence of the proof of Theorem 2.2.1.2; agent-written lifting proof with collages, expanding the preservation assertion"
+   }
+  },
+  {
+   "text": "Finally Step 3 identifies the functor in the relative-cone hypothesis with $T_X\\to T_Y$, identically on $A$ and on the cone vertex. By the stated definition of Dwyer--Kan equivalence, its map on the mapping simplicial set of the particular pair $(s,v)$ is a weak homotopy equivalence for every object $s$ of $A$. These maps are exactly $(L_S f)(s):T_X(s,v)\\to T_Y(s,v)$. Hence $L_S f$ is an objectwise weak homotopy equivalence. No preservation of a homotopy pushout, no essential-surjectivity inference, and no model structure on $\\mathrm{sSet}_{/S}$ enter this argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.1, first sentence of the proof of Theorem 2.2.1.2; direct application of the local part of the relative-cone hypothesis"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-rigidification-boundary-cube",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-transfinite-left-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT §2.2.1, construction and first assertion of Theorem 2.2.1.2; §A.3.3, Proposition A.3.3.2; §2.2.5, first paragraph of the proof of Theorem 2.2.5.1. Online text read; archival copy WANTED. No Stacks tag states the enriched rigidification result. The source omits the elementary preservation details; the collage and lifting arguments above are written out by the worker."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +136,59 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.functorialityAdjunction'\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Limits\", \"type\": \": functorialityLeftAdjoint adj K ⊣ Cones.functoriality K G\", \"doc\": \"An adjunction between the functor $\\\\text{functorialityLeftAdjoint}(adj, K)$ (mapping cones over $K \\\\circ G$ to cones over $K$) and the functor $\\\\text{Cones.functoriality}(K, G)$ (mapping cones over $K\"}\n  {\"name\": \"CategoryTheory.Adjunction.functorialityLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Limits\", \"type\": \": Cone (K ⋙ G) ⥤ Cone K\", \"doc\": \"Given an adjunction between functors $F$ and $G$, this defines a functor from the category of cones over $K \\\\circ G$ to the category of cones over $K$. The construction uses the counit of the adjuncti\"}\n  {\"name\": \"CategoryTheory.Limits.isLimitConeOfAdj\", \"module\": \"Mathlib.CategoryTheory.Limits.HasLimits\", \"type\": \"(F : J ⥤ C) : IsLimit (coneOfAdj adj F)\", \"doc\": \"Given an adjunction between the constant functor and a functor $ L $, and a functor $ F : \\\\mathcal{J} \\\\to \\\\mathcal{C} $, the cone constructed from the adjunction (via the counit transformation) satisf\"}\n  {\"name\": \"CategoryTheory.Adjunction.conesIso\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Limits\", \"type\": \"{J : Type u} [Category.{v} J] {K : J ⥤ D} : F.op ⋙ (cones J D).obj K ≅ (cones J C).obj (K ⋙ G)\", \"doc\": \"Given adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, a diagram $ K : \\\\mathcal{J} \\\\to \\\\mathcal{D} $, and an object $ X \\\\in \\\\mathcal{C}^{\\\\text{op}} $, this\"}\n  {\"name\": \"CategoryTheory.Adjunction.functorialityAdjunction\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Limits\", \"type\": \": Cocones.functoriality K F ⊣ functorialityRightAdjoint adj K\", \"doc\": \"The adjunction asserting that the functor $\\\\text{Cocones.functoriality}_K F$ is left adjoint to the right adjoint functor $\\\\text{functorialityRightAdjoint}$, with unit and counit natural transformatio\"}\n  {\"name\": \"CategoryTheory.Adjunction.functorialityCounit'\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Limits\", \"type\": \": Cones.functoriality _ G ⋙ functorialityLeftAdjoint adj K ⟶ 𝟭 (Cone K)\", \"doc\": \"A natural transformation from the composition of the functoriality functors $ \\\\text{Cones.functoriality}_G \\\\circ \\\\text{functorialityLeftAdjoint} $ to the identity functor on cones, defined by applying\"}\n  {\"name\": \"CategoryTheory.Limits.coneOfAdj\", \"module\": \"Mathlib.CategoryTheory.Limits.HasLimits\", \"type\": \"(F : J ⥤ C) : Cone F\", \"doc\": \"Given a functor $ F : \\\\mathcal{J} \\\\to \\\\mathcal{C} $, this constructs a cone over $ F $ with apex $ L(F) $ and cone morphisms given by the components of the counit natural transformation $ \\\\epsilon_F :\"}\n  {\"name\": \"CategoryTheory.Limits.IsColimit.ofLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Limits.IsLimit\", \"type\": \"{D : Type u₄} [Category.{v₄} D] {G : K ⥤ D} {left : Cocone G ⥤ Cocone F} {right : Cocone F ⥤ Cocone G}\\n  (adj : left ⊣ right) {c : Cocone G} (t : IsColimit c) : IsColimit (left.obj c)\", \"doc\": \"Given an adjunction between functors of cocones, if a cocone $ c $ is a colimit for diagram $ G $, then applying the left adjoint functor to $ c $ yields a colimit cocone for diagram $ F $. This follo\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: read returned types. The hits give ordinary Kan extensions, coskeleton, sheaf skyscraper and singular/geometric realization adjunctions, or all-horn Kan classes. CategoryWithFibrations.lean:35-100 and NerveAdjunction.lean:388-415 contain no cone-presheaf adjunction; grep found zero straightening/coherent-realization/projective-cofibration hits."
+  },
+  {
+   "tool": "grep",
+   "query": "straighten|unstraighten|projective.*cofibration",
+   "results": "0 hits: . Read the returned types. Boundary.lean:35-51 gives ordinary simplex boundaries; CategoryWithFibrations.lean:35-100 gives Kan lifting classes; NerveAdjunction.lean:388-415 is the ordinary nerve/homotopy-category adjunction. None supplies coherent enriched rigidification, its cube attachment, or the cone-presheaf adjunction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Quillen\"",
+   "results": "12 hits: SSet.modelCategoryQuillen.instCategoryWithCofibrations, SSet.modelCategoryQuillen.instCategoryWithFibrations, SSet.modelCategoryQuillen.I, SSet.modelCategoryQuillen.J, SSet.modelCategoryQuillen.instIsMultiplicativeCofibrations, SSet.modelCategoryQuillen.instIsMultiplicativeFibrations, SSet.modelCategoryQuillen.instIsStableUnderRetractsCofibrations, SSet.modelCategoryQuillen.instIsStableUnderRetractsFibrations. Read the returned types. Boundary.lean:35-51 gives ordinary simplex boundaries; CategoryWithFibrations.lean:35-100 gives Kan lifting classes; NerveAdjunction.lean:388-415 is the ordinary nerve/homotopy-category adjunction. None supplies coherent enriched rigidification, its cube attachment, or the cone-presheaf adjunction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cone straightening is left adjoint to unstraightening on enriched simplicial presheaves",
+   "results": "8 hits: CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits, CategoryTheory.plusPlusAdjunction, CategoryTheory.Adjunction.functorialityLeftAdjoint, CategoryTheory.Presheaf.yonedaAdjunction, CategoryTheory.Limits.isLimitConeOfAdj, CategoryTheory.Adjunction.functorialityAdjunction', CategoryTheory.Adjunction.functorialityAdjunction, CategoryTheory.Enriched.HasConicalLimit.of_equiv. Read the returned types. Boundary.lean:35-51 gives ordinary simplex boundaries; CategoryWithFibrations.lean:35-100 gives Kan lifting classes; NerveAdjunction.lean:388-415 is the ordinary nerve/homotopy-category adjunction. None supplies coherent enriched rigidification, its cube attachment, or the cone-presheaf adjunction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right cone straightening functor from simplicial sets over a base to enriched simplicial presheaves admits unstraightening as right adjoint and preserves monomorphisms",
+   "results": "8 hits: CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor, CategoryTheory.SimplicialObject.coskAdj, SSet.coskAdj, SSet.StrictSegal.isRightKanExtension, CategoryTheory.SimplicialObject.cechNerveAdjunction, CategoryTheory.nerveAdjunction, sSetTopAdj, CategoryTheory.SimplicialObject.instIsRightKanExtensionOppositeTruncatedSimplexCategoryObjCoskAppTruncatedCounitCoskAdjTruncation. Read the returned types. Boundary.lean:35-51 gives ordinary simplex boundaries; CategoryWithFibrations.lean:35-100 gives Kan lifting classes; NerveAdjunction.lean:388-415 is the ordinary nerve/homotopy-category adjunction. None supplies coherent enriched rigidification, its cube attachment, or the cone-presheaf adjunction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For simplicial enriched categories, homotopy coherent categorification sends a simplex boundary to attachment of a cubical mapping space",
+   "results": "{\"t\": \"2026-10-17T02:07:42Z\", \"tool\": \"leanfinder\", \"query\": \"For simplicial enriched categories, homotopy coherent categorification sends a simplex boundary to attachment of a cubical mapping space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialCategory.sHom\", \"SSet.Augmented.stdSimplex\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\", \"SSet.PtSimplex.MulStruct.map\", \"SSet.ι₀\", \"SSet.ι₁\", \"SimplexCategory.toTopMap\"], \"digest\": \"c50f476cec917df4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-208. SimplicialThickening and SimplicialNerve define coherent simplices and their nerve, but no declaration computes the realization of a boundary as an enriched pushout or supplies the cone-presheaf adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialThickening|simplicialNerve|coherent.*(realization|boundary)",
+   "results": "{\"t\": \"2026-10-17T02:08:19Z\", \"tool\": \"grep\", \"query\": \"SimplicialThickening|simplicialNerve|coherent.*(realization|boundary)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\"], \"digest\": \"3358c6b085bd02b6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-208. SimplicialThickening and SimplicialNerve define coherent simplices and their nerve, but no declaration computes the realization of a boundary as an enriched pushout or supplies the cone-presheaf adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialThickening\"",
+   "results": "{\"t\": \"2026-10-17T02:08:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialThickening\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening\", \"CategoryTheory.SimplicialThickening.Path\", \"CategoryTheory.SimplicialThickening.as\", \"CategoryTheory.SimplicialThickening.instCategory\", \"CategoryTheory.SimplicialThickening.instCategoryStruct\", \"CategoryTheory.SimplicialThickening.mk\", \"CategoryTheory.SimplicialThickening.instSimplicialCategory\", \"CategoryTheory.SimplicialThickening.instCategoryPath\"], \"digest\": \"6b81c4012784104f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialNerve.lean:54-208. SimplicialThickening and SimplicialNerve define coherent simplices and their nerve, but no declaration computes the realization of a boundary as an enriched pushout or supplies the cone-presheaf adjunction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-contravariant-slice-model",
@@ -82,5 +217,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cone-presheaf-adjunction",
+  "worker": "stage1",
+  "summary": "Constructed the adjunction explicitly by collage maps and compatible simplex labels. Derived monomorphism preservation from one smaller boundary-cube attachment input, the existing Kan boundary-cell theorem, and lifting closure; relative-cone equivalence preservation follows directly on the (s,v) mapping sets. Reused the existing enriched projective-model calculus, not the ordinary-indexed version, and avoided the cyclic coherent-nerve/straightening/contravariant-model route. One statement-only new node, no new Mathlib leaves; the statement is unchanged. The local shared checkout lacked this recently created item, so its unmodified base was read from the authoritative server before splitting. Second reader made the collage quotient and simplex restriction equations explicit and independently searched Mathlib simplicial thickenings; statements unchanged.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint, the derived coefficient-adjunction and inverse-limit comparison: independent coherent foundations below the contravariant slice construction. Specific input: Raw cone-presheaf adjunction and lifting preservation. This split supplies the independent raw adjunction and lifting input, before the contravariant model and the full straightening comparison; no unit or chapter route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N2-a97abef28",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-a97abef28 (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps, the new node lem-coef-rigidification-boundary-cube and the full statements of all 9 cited nodes. HTT is not in the local literature: the delivery records a WANTED and sets proof_origin agent, and I checked it against HTT §2.2.1, the proof of 2.2.1.2, the first paragraph of the 2.2.5.1 proof and A.3.3.2. Step 1 takes enriched-D projective structure, end and tensor from the model calculus, and only the combinatorial simplicial Kan model from presheaf-projective-model. Step 2: the collage and coend presentation of T_a(s,v) are correct, because no arrow leaves v. Step 3: the colimit argument for C ⊣ N, the restriction equation and the empty X case are correct. Step 4: I-injective functors are local trivial fibrations, the cube pushout plus closure under pushout, coproduct and transfinite composition give I-cof, with no Joyal input. Step 5: E_p is I-injective, P→Y^▷ is mono, and the lift fixes C[Y] and v, so it descends to T_Y; I checked both triangles. Step 6 is elementary on the (s,v) components. New node: statement-only, self-contained, eight real searches, tested at n=1,2,3; only the (0,n) mapping set changes. It does not duplicate coherent-nerve-comparison (which is downstream and circular), pinched-cube-latching (a collapsed quotient) or any other DAG or blueprint node, and it is strictly smaller than the item. A transitive walk from all inputs finds no cycle. All uses are in unit sk-prop-sf-biduality-general, so there are no tool_uses. FIX (B3): the item statement used Kan fibrations and trivial Kan fibrations without citing a node that defines them. I added the citation [lem-coef-kan-quillen-right-proper] in the first sentence and in stmt_deps. This changes citations only, not the meaning, and creates no cycle. Left to the maintainer: source.place still claims a sandbox HTT copy that does not exist.; 1 file(s) fixed by the reviewer"
  }
 }
