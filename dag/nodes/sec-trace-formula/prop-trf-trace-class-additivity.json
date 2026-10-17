@@ -3,89 +3,147 @@
  "blueprint": {
   "is": "prop-trf-trace-class-additivity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Additivity of trace classes",
- "statement": "1. Let $i:Z\\hookrightarrow X$ be a closed subscheme with open complement\n$j:U\\hookrightarrow X$ which is $c$-invariant, $c_2(c_1^{-1}(Z))\\subset Z$,\nlet\n$$\nK'=j_!j^*K\\longrightarrow K\\longrightarrow K''=Ri_*i^*K\\longrightarrow K'[1]\n$$\nbe its open–closed triangle, and let $(u',u,u'')$ be the induced morphism\nof the corresponding triangles of the functors $Lc_2^*$ and $Rc_1^!$, with\n$u'=[j]_!(u|_U)$ and $u''=[i]_!(u|_Z)$ the induced coefficient morphisms of\n[lem-trf-trace-triangle-compatibility] (an arbitrary morphism of\ndistinguished triangles is not enough, see there). Then\n$$\n\\operatorname{Tr}_c(u)=\n\\operatorname{Tr}_c(u')+\\operatorname{Tr}_c(u'')\n$$\nin $\\operatorname{Hom}_{D(F,A)}(A_F,\\omega_{F,A})$; if $F$ is\nproper over $s$ with\nfinitely many components in the sense of\n[def-trf-fixed-scheme], the same identity holds for the\nlocal terms.\n1. *(Curve pieces.)* In the setting of [d-curve-pieces] ($m\\geq1$,\n$x\\in X_0(\\mathbf F_{q^m})$, $c=(\\operatorname{id}_X,\\Phi_m)$ the\ngraph correspondence), let $v:\\Phi_m^*K\\to K$ be the scheme-Frobenius\nmap $\\varphi_m$ or an arbitrary Frobenius coefficient morphism, with\npieces $u^Z,u^U$. Then $(u^U,v,u^Z)$ is a morphism of the\nopen–closed triangles $K^U\\to K\\to K^Z\\to K^U[1]$ under\n$L\\Phi_m^*$ and $Rc_1^!=\\operatorname{id}$, and hence\n$$\n\\operatorname{Tr}_c(v)=\\operatorname{Tr}_c(u^Z)+\\operatorname{Tr}_c(u^U),\n\\qquad\n\\operatorname{LT}_\\beta(v)=\\operatorname{LT}_\\beta(u^Z)+\\operatorname{LT}_\\beta(u^U)\n$$\nfor every component $\\beta$ of $F=\\operatorname{Fix}(\\Phi_m)$.\nInvertibility of $v$ is not required.",
+ "statement": "Fix the finite-field and coefficient conventions of [def-trf-coefficient-conventions], with $A=A_{E,n}$ and $s=\\operatorname{Spec}k$.\n1. Let $X,C$ be separated finite-type $k$-schemes, let $K\\in D^b_{ctf}(X,A)$, and let $c=(c_1,c_2):C\\to X\\times_sX$ be an admissible correspondence with coefficient morphism $u:Lc_2^*K\\to Rc_1^!K$ as in [def-trf-correspondence]. Put $F=\\operatorname{Fix}(c)$ as in [def-trf-fixed-scheme], and use the trace classes of [def-trf-trace-class]. Let $i:Z\\hookrightarrow X$ be a closed subscheme with open complement $j:U\\hookrightarrow X$, with $c_2(c_1^{-1}(Z))\\subset Z$ set-theoretically. Let\n$$\nK'=j_!j^*K\\longrightarrow K\\longrightarrow K''=Ri_*i^*K\\longrightarrow K'[1]\n$$\nbe the open–closed triangle, and let $(u',u,u'')$ be the induced morphism of its images under $Lc_2^*$ and $Rc_1^!$, where $u'=[j]_!(u|_U)$ and $u''=[i]_!(u|_Z)$ are the induced coefficient morphisms of [lem-trf-trace-triangle-compatibility]. Then\n$$\n\\operatorname{Tr}_c(u)=\\operatorname{Tr}_c(u')+\\operatorname{Tr}_c(u'')\n$$\nin $\\operatorname{Hom}_{D(F,A)}(A_F,\\omega_{F,A})$. If $F$ is proper over $s$ with finitely many open-and-closed components in the sense of [def-trf-fixed-scheme], then\n$$\n\\operatorname{LT}_\\beta(u)=\\operatorname{LT}_\\beta(u')+\\operatorname{LT}_\\beta(u'')\n$$\nfor every component $\\beta$, with local terms as in [def-trf-local-term]. The coefficient morphisms here are the induced ones; arbitrary morphisms of distinguished triangles are not asserted to satisfy this trace identity.\n2. Let $X_0$ be a separated finite-type $k_0$-scheme (the smooth curves of pure dimension one of [d-curve-pieces] are the case needed for the trace formula), put $X=X_0\\times_{k_0}k$, and let $K\\in D^b_{ctf}(X,A)$. Fix $m\\geq1$ and $x\\in X_0(\\mathbf F_{q^m})$, write $\\bar x$ for the corresponding $k$-point of $X$, and let $i:\\{\\bar x\\}\\hookrightarrow X$ and $j:U=X\\setminus\\{\\bar x\\}\\hookrightarrow X$. Let $\\Phi_m=\\Phi^m$ be the $m$-th iterate of the $k$-linear scheme Frobenius $\\Phi$ of [def-trf-scheme-frobenius], and let $v:L\\Phi_m^*K\\to K$ be an arbitrary morphism in $D(X,A)$, not necessarily invertible: for instance the scheme-Frobenius map $\\varphi_m=u_m$ of a strict Weil complex $(K,\\varphi)$ of [def-trf-iterated-weil-map], or the iterate $\\psi_m$ of a Frobenius coefficient morphism $\\psi$ of [def-trf-frobenius-coefficient-morphism]. Let $c=(\\operatorname{id}_X,\\Phi_m)$ be the graph correspondence of $(\\Phi_m,v)$ of [def-trf-graph-correspondence], and let $K^Z=Ri_*i^*K$, $K^U=j_!j^*K$, $u^Z$, and $u^U$ be the curve pieces and induced coefficient morphisms constructed from $v$ in [d-curve-pieces]. Then $(u^U,v,u^Z)$ is a morphism of the open–closed triangles $K^U\\to K\\to K^Z\\to K^U[1]$ under $L\\Phi_m^*$ and $Rc_1^!=\\operatorname{id}$, and\n$$\n\\operatorname{Tr}_c(v)=\\operatorname{Tr}_c(u^Z)+\\operatorname{Tr}_c(u^U),\\qquad\n\\operatorname{LT}_\\beta(v)=\\operatorname{LT}_\\beta(u^Z)+\\operatorname{LT}_\\beta(u^U)\n$$\nfor every component $\\beta$ of $\\operatorname{Fix}(\\Phi_m)$. Invertibility of $v$ is not required.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-additivity/prop-trf-trace-class-additivity.md",
   "place": "node prop-trf-trace-class-additivity, order 2354"
  },
  "stmt_deps": [
-  "lem-trf-trace-triangle-compatibility",
+  "def-trf-coefficient-conventions",
+  "def-trf-correspondence",
   "def-trf-fixed-scheme",
+  "def-trf-trace-class",
+  "def-trf-local-term",
+  "lem-trf-trace-triangle-compatibility",
   "d-curve-pieces",
-  "def-weil-scheme-morphism-properties"
+  "def-trf-scheme-frobenius",
+  "def-trf-iterated-weil-map",
+  "def-trf-frobenius-coefficient-morphism",
+  "def-trf-graph-correspondence"
  ],
  "proof": [
   {
-   "text": "The first assertion of (1) is exactly\n[lem-trf-trace-triangle-compatibility]. For the second, suppose\n$F$ proper over $s$ with finitely many open-and-closed components\n$\\beta\\in\\pi_0(F)$; the local terms of\n[def-trf-local-term] are the integrals\n$\\operatorname{LT}_\\beta(u)=\\int_\\beta\\operatorname{Tr}_c(u)|_\\beta$\nof [def-trf-integration], and integration is $A$-linear by\n[lem-trf-integration-linear], so\nadditivity of the classes gives\n$\\operatorname{LT}_\\beta(u)=\\operatorname{LT}_\\beta(u')+ \\operatorname{LT}_\\beta(u'')$ for every $\\beta$.",
+   "text": "For (1), apply [lem-trf-trace-triangle-compatibility] to the given admissible correspondence and the closed subscheme $Z$. Its invariance hypothesis is exactly $c_2(c_1^{-1}(Z))\\subset Z$, and its two induced maps are precisely $u'$ and $u''$. Its statement gives the morphism of open–closed triangles and the equality $\\operatorname{Tr}_c(u)=\\operatorname{Tr}_c(u')+\\operatorname{Tr}_c(u'')$ in the specified Hom group. No assertion about arbitrary triangle morphisms is used.",
    "uses": [
-    "lem-trf-trace-triangle-compatibility",
+    "lem-trf-trace-triangle-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-additivity/prop-trf-trace-class-additivity.proof.md",
+    "place": "first paragraph: trace-class identity"
+   }
+  },
+  {
+   "text": "Suppose $F$ is proper with finitely many open-and-closed components. The current statement of [def-trf-local-term] gives, for each component $\\beta$, its properness over $s$ and $\\operatorname{LT}_\\beta(w)=\\int_\\beta j_\\beta^*\\operatorname{Tr}_c(w)$ for each of the three coefficient morphisms $w$. Its restricted-section formula applies $Lj_\\beta^*$ to a section and composes with the fixed constant-coefficient and dualizing identifications. Consequently it preserves addition: $j_\\beta^*(\\sigma+\\tau)=j_\\beta^*\\sigma+j_\\beta^*\\tau$. Apply this to Step 1 and then [lem-trf-integration-linear] with scalar $1$ to obtain $\\operatorname{LT}_\\beta(u)=\\operatorname{LT}_\\beta(u')+\\operatorname{LT}_\\beta(u'')$. All these components carry the open subscheme structure, without reduction; their exceptional admissibility is the convention explicitly required by the local-term definition, so the integral has exactly the domain required by the linearity lemma.",
+   "uses": [
     "def-trf-local-term",
-    "def-trf-integration",
     "lem-trf-integration-linear"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-additivity/prop-trf-trace-class-additivity.proof.md",
+    "place": "first paragraph: componentwise integration"
+   }
   },
   {
-   "text": "For (2), write $\\Phi=\\Phi_m$ and let\n$$\nK^U\\xrightarrow{\\ \\varepsilon\\ }K\\xrightarrow{\\ \\eta\\ }K^Z\n\\xrightarrow{\\ \\delta\\ }K^U[1]\n$$\nbe the open–closed triangle of [prop-sf-open-closed-triangle-all-stages],\nwith $\\varepsilon$ the counit of $j_!\\dashv j^*$ and $\\eta$ the unit of\n$i^*\\dashv Ri_*$. The functor $L\\Phi^*$ is exact, so it carries this\ntriangle to a distinguished triangle, and $Rc_1^!=\\operatorname{id}$.\nLet $b:L\\Phi^*j_!\\xrightarrow{\\sim}j_!L\\Phi_U^*$ be the open base-change\nisomorphism used in $u^U$ ([prop-functor-package], clause (4)), and\n$\\gamma$ the ordinary half used in $u^Z$, as in [d-curve-pieces].",
+   "text": "For (2), first the correspondence. By [def-trf-graph-correspondence], $c=(\\operatorname{id}_X,\\Phi_m)$ with coefficient $\\iota_{X,K}\\circ v$ is a cohomological correspondence with $C=X$, $c_1=\\operatorname{id}_X$ and $c_2=\\Phi_m$, and $Rc_1^!K$ is identified with $K$ through $\\iota_{X,K}$; this is the identification $Rc_1^!=\\operatorname{id}$ of the statement. Its hypotheses hold: [def-trf-frobenius-coefficient-morphism] states that $\\Phi$, hence $\\Phi_m$, is finite (so a separated finite-type $k$-endomorphism) and that the exceptional leg $c_1=\\operatorname{id}_X$ is exceptionally admissible. A base change of $\\operatorname{id}_X$ may be taken to be an identity, so $c$ is admissible in the sense of [def-trf-correspondence] (elementary). The last paragraph of [d-curve-pieces] says its construction applies verbatim to any separated finite-type $X_0$ and any $v:\\Phi_m^*K\\to K$, without Weil structure, smoothness or invertibility, so the pieces in (2) are defined in this generality. [d-curve-pieces] states that $\\Phi_mi=i$, $\\Phi_m^{-1}(U)=U$, and the open square is Cartesian. For the graph $c$, $c_1=\\operatorname{id}_X$, so $c_2(c_1^{-1}(Z))=\\Phi_m(Z)=Z$ and the decomposition is $c$-invariant. The same node identifies $u^Z$ with the proper pushforward of the stalk map on the point correspondence and $u^U$ with extension by zero of the restricted coefficient map using open base change. These are exactly the two induced maps in [lem-trf-trace-triangle-compatibility], whose statement explicitly identifies its Frobenius specialization with the pieces of [d-curve-pieces]. This identification applies to arbitrary $v$, by the last paragraph of [d-curve-pieces].",
    "uses": [
-    "prop-sf-open-closed-triangle-all-stages",
-    "prop-functor-package",
+    "def-trf-graph-correspondence",
+    "def-trf-frobenius-coefficient-morphism",
+    "def-trf-correspondence",
+    "d-curve-pieces",
+    "lem-trf-trace-triangle-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-additivity/prop-trf-trace-class-additivity.proof.md",
+    "place": "curve setup, paragraphs (a) and (b), and final paragraph: identify the induced maps"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-trace-triangle-compatibility] with the invariant graph decomposition and the induced maps identified in Step 3. Its statement gives all three compatibilities, including the connecting square, so $(u^U,v,u^Z)$ is a morphism of the two open–closed triangles. Its trace identity gives $\\operatorname{Tr}_c(v)=\\operatorname{Tr}_c(u^U)+\\operatorname{Tr}_c(u^Z)$. Commutativity of addition in the Hom group gives the displayed order in (2). This uses the lemma for induced localization maps, not a general triangle-endomorphism trace claim.",
+   "uses": [
+    "lem-trf-trace-triangle-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-additivity/prop-trf-trace-class-additivity.proof.md",
+    "place": "paragraph (c) and final paragraph: triangle compatibility and trace identity"
+   }
+  },
+  {
+   "text": "By [thm-trf-frobenius-fixed-points], for $m\\geq1$ and the $k$-linear base change $\\Phi_m$ of the $q^m$-power scheme Frobenius of $X_0$, $F=\\operatorname{Fix}(\\Phi_m)$ is a finite disjoint union of reduced points $\\operatorname{Spec}k$, indexed by $X_0(\\mathbf F_{q^m})$. Each singleton is therefore both open and closed in $F$, and its open subscheme structure is already reduced. These verify both topological hypotheses and the reducedness hypothesis of the current point-component clause of [def-trf-local-term], which supplies properness and the local term on that component. For each component $\\beta$, apply the additive restriction of that definition to Step 4, obtaining $j_\\beta^*\\operatorname{Tr}_c(v)=j_\\beta^*\\operatorname{Tr}_c(u^Z)+j_\\beta^*\\operatorname{Tr}_c(u^U)$. Applying [lem-trf-integration-linear] with scalar $1$ gives $\\int_\\beta j_\\beta^*\\operatorname{Tr}_c(v)=\\int_\\beta j_\\beta^*\\operatorname{Tr}_c(u^Z)+\\int_\\beta j_\\beta^*\\operatorname{Tr}_c(u^U)$, which is the asserted local-term equality by [def-trf-local-term]. The finite-type and exceptional-admissibility conventions are the ones in that definition; no properness claim for the whole fixed scheme is needed here. Step 3 used the arbitrary-morphism clause of [d-curve-pieces]; none of these operations inverts $v$.",
+   "uses": [
+    "thm-trf-frobenius-fixed-points",
+    "def-trf-local-term",
+    "lem-trf-integration-linear",
     "d-curve-pieces"
    ],
-   "elementary": false
-  },
-  {
-   "text": "(a) $\\varepsilon\\circ u^U=v\\circ L\\Phi^*\\varepsilon$. By the adjunction\n$j_!\\dashv j^*$ of [prop-weil-open-closed-recollement-adjunctions] it\nsuffices to compare the restrictions to $U$ of the two maps\n$L\\Phi^*j_!j^*K\\cong j_!L\\Phi_U^*j^*K\\to K$. There $b$ restricts to the\npullback identification and $j^*\\varepsilon$ to the identity, so both\nrestrictions equal $j^*v$ composed with\n$L\\Phi_U^*j^*\\cong j^*L\\Phi^*$.",
-   "uses": [
-    "prop-weil-open-closed-recollement-adjunctions"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "(b) $u^Z\\circ L\\Phi^*\\eta=\\eta\\circ v$. By the adjunction $i^*\\dashv Ri_*$\nit suffices to compare the adjoint maps $i^*L\\Phi^*K\\to i^*K$. The\nadjoint of $\\eta\\circ v$ is $i^*v$. By the construction of $\\gamma$ as\nunit followed by counit, the triangle identities make the adjoint of\n$u^Z\\circ L\\Phi^*\\eta=Ri_*v_{\\bar x}\\circ\\gamma\\circ L\\Phi^*\\eta$\nequal to $v_{\\bar x}$ precomposed with $i^*L\\Phi^*K\\cong(\\Phi i)^*K=i^*K$;\nthis is $i^*v$, by the definition of the stalk map $v_{\\bar x}$\n($i^*$ being the stalk at $\\bar x$).",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "(c) $u^U[1]\\circ L\\Phi^*\\delta=\\delta\\circ u^Z$. By (a), (b) and the\naxiom of morphisms of triangles there is\n$w:L\\Phi^*K^Z\\to K^Z$ with $w\\circ L\\Phi^*\\eta=\\eta\\circ v$ and\n$\\delta\\circ w=u^U[1]\\circ L\\Phi^*\\delta$. Then\n$(w-u^Z)\\circ L\\Phi^*\\eta=0$, so $w-u^Z$ factors through\n$L\\Phi^*\\delta$ as $d\\circ L\\Phi^*\\delta$ with\n$d:L\\Phi^*K^U[1]\\to K^Z$. Via $b$ the source of $d$ is\n$j_!N[1]$ with $N=L\\Phi_U^*j^*K$, and\n$\\operatorname{Hom}(j_!N[1],Ri_*i^*K)=\\operatorname{Hom}(N[1],j^*Ri_*i^*K)=0$\nbecause $j^*Ri_*=0$ ([prop-weil-open-closed-recollement-adjunctions],\nas in the Hom vanishing of [prop-sf-open-closed-triangle-all-stages]).\nHence $w=u^Z$.",
-   "uses": [
-    "prop-weil-open-closed-recollement-adjunctions",
-    "prop-sf-open-closed-triangle-all-stages"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Thus $(u^U,v,u^Z)$ is the induced morphism of the open–closed triangles\nfor the closed point $Z=\\{\\bar x\\}$, which is $c$-invariant because\n$c_1=\\operatorname{id}$ and $\\Phi(\\bar x)=\\bar x$, and $u^U,u^Z$ are the\ninduced coefficient morphisms $[j]_!(v|_U)$, $[i]_!(v|_Z)$ of\n[lem-trf-trace-triangle-compatibility]; so (1) gives the identity of trace\nclasses. The fixed scheme $F=\\operatorname{Fix}(\\Phi)$\nis a finite disjoint union of copies of $\\operatorname{Spec}k$ by\n[thm-trf-frobenius-fixed-points], hence proper over $s$ with finitely\nmany open-and-closed components, so (1) also gives the identity of local\nterms. No step inverts $v$.",
-   "uses": [
-    "lem-trf-trace-triangle-compatibility",
-    "thm-trf-frobenius-fixed-points"
-   ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-additivity/prop-trf-trace-class-additivity.proof.md",
+    "place": "final paragraph: fixed-point components and local terms"
+   }
   }
  ],
  "proof_deps": [
-  "lem-trf-trace-triangle-compatibility",
-  "def-trf-local-term",
-  "def-trf-integration",
-  "lem-trf-integration-linear",
-  "prop-sf-open-closed-triangle-all-stages",
-  "prop-functor-package",
   "d-curve-pieces",
-  "prop-weil-open-closed-recollement-adjunctions",
+  "def-trf-correspondence",
+  "def-trf-frobenius-coefficient-morphism",
+  "def-trf-graph-correspondence",
+  "def-trf-local-term",
+  "lem-trf-integration-linear",
+  "lem-trf-trace-triangle-compatibility",
   "thm-trf-frobenius-fixed-points"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-additivity/prop-trf-trace-class-additivity.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-additivity/prop-trf-trace-class-additivity.proof.md",
+  "place": "first and final paragraphs; induced-map compatibility supplied directly by the existing cited lemma"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "additivity of Verdier trace classes for an invariant open closed decomposition",
+   "results": "Only generic triangulated-category, direct-sum linear trace, or triangle-completion declarations; none states a cohomological-correspondence trace-class equality.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lefschetz Verdier trace of a cohomological correspondence localization triangle",
+   "results": "Only generic triangulated-category, direct-sum linear trace, or triangle-completion declarations; none states a cohomological-correspondence trace-class equality.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"traceClass\"",
+   "results": "Lean.registerTraceClass and Aesop.TraceOption.traceClass concern debugging traces, not Verdier trace classes.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "traceClass|Lefschetz|Verdier",
+   "results": "19 hits in Mathlib/CategoryTheory: Verdier bibliography, quotients, and localization terminology, no Verdier trace-class declaration.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier trace class additivity for open closed localization of a cohomological correspondence",
+   "results": "Generic additive localization, Matrix.trace_add, and derived-category additive-functor declarations; none states this proposition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -120,5 +178,29 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-i-additivity"
+ "unit": "sk-i-additivity",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-trf-trace-class-additivity",
+  "worker": "stage1",
+  "summary": "Rechecked and replaced the earlier seven-step attempt. Introduced the ambient correspondence and coefficient data explicitly. Reused the existing induced-localization trace lemma for all triangle compatibilities; checked the graph invariance and the exact identification of both curve-piece maps; obtained local terms by componentwise restriction and linear integration. No new nodes and no Mathlib leaves. Repair of returned head b0e6e08377: rebased the retained split fields onto the current DAG node, reread all cited statements, and revised Steps 2 and 5 against the changed local-term definition. Explicitly checked both open and closed singleton conditions, reduced open subscheme structure, positive Frobenius exponent, and the base-changed scheme Frobenius convention; refreshed its verbatim citations. Maintainer reader (FIX): clause (2) restated for separated finite-type $X_0$, arbitrary $K\\in D^b_{ctf}$ and arbitrary $v$ (Weil and Frobenius-coefficient maps as instances), matching the generality of [d-curve-pieces] and the existing citer thm-trf-frobenius-local-term; graph-correspondence admissibility checked in Step 3; definition nodes of clause (2) added to stmt_deps.",
+  "blueprint": "Steps 1–2 realize the generic paragraph; Step 3 checks the curve setup and identification underlying (a) and (b); Step 4 uses the already stated induced-map compatibility for (c) and the final trace identity; Step 5 realizes the final componentwise integration paragraph. The generic invariant-decomposition clause also covers the current unit’s more general stable closed/open graph decomposition, without restricting it to a point.",
+  "tool_uses": [
+   {
+    "node": "thm-trf-frobenius-fixed-points",
+    "why": "Generic fixed-scheme description used only to identify the clopen point components on which the local terms are integrated; not a replacement trace-additivity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-trf-frobenius-fixed-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-ee6b3ebd7",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-ee6b3ebd7 (reviewer sub-agent of L); spot-checked: I read all of it: the process documents, error list A–H, packet, report, the main-20261015 and master blueprint texts for the item, lemma and unit, and the full statement of every cited node and of the citer thm-trf-frobenius-local-term. The Lean declaration traceClass_graph_eq_traceClass_add_traceClass (Localization.lean:258–273) ends in sorry and has no local-term clause, so it cannot be attached. There are no new nodes. Steps 1, 2, 4 and 5 are correct as written. Step 1 takes clause 1 directly from the statement of the existing same-unit lemma lem-trf-trace-triangle-compatibility (invariance, induced maps, triangle morphism, trace identity), as the blueprint proof does. Step 2 uses def-trf-local-term for clopen, proper components with additive restriction, then lem-trf-integration-linear at a=1. Step 4 uses the lemma's statement for all three squares, including the connecting one. I also checked the blueprint's adjunction argument (c) independently: the factorization holds and Hom(j_!N[1],Ri_*M)=0. Step 5 gets reduced clopen Spec k points from thm-trf-frobenius-fixed-points (m>=1) and properness from the point-component clause of def-trf-local-term. I accept the declared tool_uses entry thm-trf-frobenius-fixed-points: it is used only to identify the point components. I fixed three faults in fixes/dag/nodes/sec-trace-formula/prop-trf-trace-class-additivity.json. (1) C4/E1: clause 2 was restated for a smooth curve and a Weil complex only. The existing citer thm-trf-frobenius-local-term, step 3, uses that clause for any separated finite-type X0, any K in D^b_ctf and any v. Clause 2 now has that generality, a strengthening, with the Weil map u_m and the iterate psi_m named as instances. The proof is unchanged and stays inside the generality of d-curve-pieces (last paragraph), the fixed-point theorem and the lemma. (2) Step 3 never checked that the graph correspondence is admissible, which the lemma requires. It now does, citing def-trf-graph-correspondence, def-trf-frobenius-coefficient-morphism and def-trf-correspondence. (3) B3: the clause-2 notions had no definition nodes; def-trf-scheme-frobenius, def-trf-iterated-weil-map, def-trf-frobenius-coefficient-morphism and def-trf-graph-correspondence are now in stmt_deps. After the fix every cited id exists and is unmerged, each step's text citations match its uses, and the graph is acyclic. Edge cases: empty Z, U or F, zero or non-invertible v, and a single fixed point all work; m=0 is correctly excluded from clause 2. For maintainers: the lemma's imported proof points to the item's proof for the adjunction argument (a)–(c). Whoever splits the lemma must write that argument in general and must not cite this item. Also, the main-20261015 unit has m>=0 and a general Z, while the DAG unit record still has the older text; this is a unit-record mismatch, not a fault in this item.; 1 file(s) fixed by the reviewer"
+ }
 }

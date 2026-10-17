@@ -22,9 +22,191 @@
   "def-weil-exceptional-inverse-image",
   "def-weil-pbc-site-comparison-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the shift convention $(K[1])^r=K^{r+1}$, $d_{K[1]}=-d_K$. All pullbacks below use the specified constant-ring identifications. For pro-etale geometric pullback these identifications are isomorphisms by [prop-weil-pbc-proetale-constant-ring-map], and [def-weil-pbc-proetale-operations] identifies $Lu^*$ with exact termwise module inverse image. For etale geometric pullback use [prop-weil-pbc-inverse-image-modules-exact]; for $H_T=\\nu_T^*$ use [lem-sf-comparison-pullback-exact]. Thus their shift comparisons are the degreewise identities of [lem-weil-pbc-exact-functor-derived-factorization]. For any right derived functor computed by K-injectives, a resolution $s:K\\to I$ can be replaced for $K[1]$ by $s[1]:K[1]\\to I[1]$, by [lem-weil-pbc-kinjective-shift]. The resulting degreewise identification $u_*(I[1])=(u_*I)[1]$ is precisely the canonical derived shift: comparison with any other resolving choice is unique in the homotopy category by [lem-sp-kinjective-comparison-principle], and comparison maps also shift. We will use these representatives for calculations, keeping the given canonical shifts.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-pbc-proetale-operations",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-kinjective-shift",
+    "lem-sp-kinjective-comparison-principle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "lemma-derived-shift; canonical shifts calculated on shifted K-injective resolutions"
+   }
+  },
+  {
+   "text": "The ordinary derived adjunctions, including $H_T\\dashv U_T=R\\nu_{T,*}$, are compatible with these shifts. Here is the check rather than an appeal to exactness of the two functors. For an exact module inverse image $L\\dashv u_*$, the complex-level transpose is $a\\mapsto u_*(a)\\eta_M$, with inverse $b\\mapsto\\varepsilon_I L(b)$, by [lem-weil-pbc-termwise-adjunction-homotopy]. In degree $r$, its transpose at $(M[1],I[1])$ is the same map in degree $r+1$ as at $(M,I)$: the unit and counit have degree zero, and both differentials acquire the same minus sign. The canonical derived Hom bijection is the one characterized by these representatives and resolution comparisons in [lem-pc-pre-derived-adjoint-functors-general]. Shifting those representatives and quasi-isomorphisms therefore preserves that bijection. Apply this to the identity of $LM$: its transpose is the derived unit, so $\\chi_{Ru_*L}(M)\\eta_{M[1]}=\\eta_M[1]$. Apply it to the identity of $Ru_*K$: its inverse transpose is the derived counit, so $\\varepsilon_{K[1]}=\\varepsilon_K[1]\\chi_{LRu_*}(K)$. This proves clause (1) for the given ordinary unit, and also provides both comparison-adjunction equations needed below. The module, rather than merely abelian-sheaf, adjunction is the one used in step 1.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "lemma-pre-derived-adjoint-functors-general and lemma-pre-derived-adjoint-functors; shifted representative calculation"
+   }
+  },
+  {
+   "text": "The canonical direct-image composition map $\\kappa_{v,u}:R(vu)_*\\to Rv_*Ru_*$ commutes with shifts. Indeed [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] normalizes it on a K-injective $I$ by $v_*u_*I\\xrightarrow{v_*t}v_*J$, where $t:u_*I\\to J$ is a K-injective resolution. Use $I[1],J[1],t[1]$ for the shifted input; these are valid resolutions by step 1. The normalized arrow is then $v_*(t[1])=(v_*t)[1]$, which is exactly the required square for the composite shifts. For exact open extension on either site, sheaf-level composition, identity, and site-comparison maps also commute with shifts after termwise descent: their degree-$r$ component on $K[1]$ is their degree-$(r+1)$ component on $K$, and additivity gives the same negative differentials. For pro-etale open extension, exactness is [lem-weil-extension-by-zero-exact]; its composition map is obtained by transposing the identity $(j_2j_1)^*=j_1^*j_2^*$ under [lem-weil-extension-by-zero-adjunction]. For etale open-extension exactness use [lem-weil-pbc-extension-by-zero-exact], and for its composition use [lem-cbc-extension-zero-composition]. The cross-site open comparison is [lem-cbc-proetale-extension-zero-comparison]. In every case the two sides of the shift square are thus the same degree-zero chain map.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-extension-by-zero-exact",
+    "lem-weil-extension-by-zero-adjunction",
+    "lem-cbc-extension-zero-composition",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "lemma-shriek-composition, direct-image and open-extension composition identifications"
+   }
+  },
+  {
+   "text": "On the etale site consider a commutative proper/open square with vertical maps $r,p$ proper and horizontal maps $k,i$ open. Its named interchange $\\gamma^e:i_!Rr_*\\to Rp_*k_!$ has the normalization of [lem-cbc-proper-open-interchange-coherence]: on a K-injective representative $J$ it is $i_!r_*J\\cong p_*k_!J\\to p_*I$, for a K-injective resolution $k_!J\\to I$. Choose the shifted resolution $k_!J[1]\\to I[1]$ for $J[1]$. The sheaf-level proper/open identification is natural in the module, so its degree-$r$ component is the original component in degree $r+1$. The second arrow is the shift of the chosen resolution arrow. Consequently the whole representative is the shifted original arrow, proving the shift square for $\\gamma^e$ with the canonical composite shifts. This does not infer shift compatibility from mere naturality. The cited node supplies the normalization and invertibility on $D^+$ for finite $A$; the calculation supplies the extra shift equation. Its special case $r=1$, $k=j_1$, $i=j_2$, $p=u$ is the named etale proper-refinement map.",
+   "uses": [
+    "lem-cbc-proper-open-interchange-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "lemma-shriek-proper-and-open, first paragraph of proof, and its proper-refinement specialization"
+   }
+  },
+  {
+   "text": "For a proper map $u$, the named site direct-image comparison $b_u:H_VRu^e_*\\to Ru^p_*H_U$ is the mate specified in [lem-weil-pbc-comparison-direct-image-canonical-mate]. Write $a_u:H_ULu_e^*\\to Lu_p^*H_V$ for [lem-weil-pbc-comparison-pullback]. Its module realization comes from the same inverse-image comparison on sheaves, so it commutes with shifts by the degreewise calculation of step 3. Set $q=H_U\\varepsilon^e_u\\circ a_u^{-1}$. The mate formula is $b_u=Ru^p_*(q)\\circ\\eta^p_uH_VRu^e_*$. Steps 2 and 3 show that every factor here commutes with shifts. Composition and whiskering preserve the equation by [lem-weil-pbc-commshift-nattrans-comp-whisker], so $b_u$ does too. Combining $b_p$ with the termwise open comparison $e_j:H_{\\overline X}j^e_!\\to j^p_!H_X$ gives the named compact-support comparison\n$$c_c=Rp^p_*(e_j)\\circ b_pj^e_!:H_Y(Rp^e_*j^e_!)\\xrightarrow{\\sim}(Rp^p_*j^p_!)H_X.$$\nIts invertibility on the bounded-below etale-origin domain is [lem-sf-class-compact-support-comparison]. Thus $c_c$ has the shift equation with the specified derived shifts of the candidate, without redefining either shift.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "lem-sf-class-compact-support-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "finite-module site comparisons; counit-mate normalization and termwise open-extension comparison"
+   }
+  },
+  {
+   "text": "The named proper-refinement comparison on the pro-etale etale-origin domain has the normalization [lem-sf-proper-open-comparison-site-normalization]\n$$\\alpha^p_u e_{j_2}=Ru^p_*(e_{j_1})\\,b_u j^e_{1!}\\,H_{T_2}(\\alpha^e_u).$$\nSteps 3--5 give the shift equation for every factor on the right and for $e_{j_2}$. Cancel $e_{j_2}$ to obtain it for $\\alpha^p_u$ on $H_XL$. For an arbitrary witness $w:H_XL\\xrightarrow{\\sim}K$, the definition gives $\\alpha_u(K,L,w)=Ru_*j_{1!}(w)\\circ\\alpha^p_{u,L}\\circ j_{2!}(w)^{-1}$. The shifted witness is $w'=w[1]\\circ\\chi_{H_X}(L):H_X(L[1])\\to K[1]$. Naturality of the shift comparisons gives $\\chi_{Ru_*j_{1!}}(K)\\,Ru_*j_{1!}(w')=Ru_*j_{1!}(w)[1]\\,\\chi_{Ru_*j_{1!}H_X}(L)$ and the corresponding equation for $j_{2!}(w')$. Substitution of these two equations and the square already proved at $L$ cancels $w[1]$ and its inverse, giving the square at $(K,L,w)$. Now [def-sf-refinement-comparison-isomorphism] specifies a candidate comparison $\\theta_u$ as $\\kappa_{p_2,u}$ followed by $Rp_{2*}(\\alpha_u^{-1})$. Both factors commute with shifts. For clarity, if $\\chi_G\\tau_{[1]}=\\tau[1]\\chi_F$ and $\\tau$ is invertible, multiplying on the left by $\\tau[1]^{-1}$ and on the right by $\\tau_{[1]}^{-1}$ gives $\\chi_F\\tau_{[1]}^{-1}=\\tau[1]^{-1}\\chi_G$; this justifies every inverse used here. Comparisons through common refinements are composites of such arrows by [prop-compactification-coherence-detailed], so they too commute with shifts. For proper $f$, take the compactification $(1_X,f)$: its candidate is $Rf_*1_!$, and the identity-open comparison $1_!\\cong1$ is degreewise the identity. Comparing the chosen candidate to this candidate by $\\theta$, then using this identity, is exactly the specified $p_f:Rf_!\\to Rf_*$ of clause (2). This proves its shift equation and that of its inverse.",
+   "uses": [
+    "lem-sf-proper-open-comparison-site-normalization",
+    "def-sf-refinement-comparison-isomorphism",
+    "prop-compactification-coherence-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "lemma-shriek-proper-and-open and lemma-shriek-composition; proper normalization at the identity-open compactification"
+   }
+  },
+  {
+   "text": "Compute clause (3) on compatible compactifications. Starting from a compactification $Y\\xrightarrow{i}\\overline Y\\xrightarrow{s}Z$ of $g$, [lem-weil-pbc-compatible-compactification-triangle] supplies $X\\xrightarrow{a}\\overline X\\xrightarrow{p}\\overline Y$, $V=\\overline X\\times_{\\overline Y}Y$, $b:V\\hookrightarrow\\overline X$, $q:V\\to Y$, and $j:X\\hookrightarrow V$, with $a=bj$ and $f=qj$. On the etale site the canonical construction is the following displayed composite:\n$$Rs_*i_!Rq_*j_!\\xrightarrow{Rs_*\\gamma^e j_!}Rs_*Rp_*b_!j_!\\xrightarrow{\\kappa_{s,p}^{-1}}R(sp)_*b_!j_!\\xrightarrow{R(sp)_*\\operatorname{comp}_{b,j}}R(sp)_*a_!.$$\nThis is the proper/open normalization of [lem-amb-unbounded-compact-support-comparisons], restricted here to $D^+$. Each arrow commutes with shifts by steps 3--4. On pro-etale witnessed input, use the same composite with $\\gamma^p$ defined by the site comparisons of step 5: put $S_Q=i_!^p(b_q)\\circ e_i(Rq_*^e):H_{\\overline Y}i_!^eRq_*^e\\to i_!^pRq_*^pH_V$ and $T_Q=Rp_*^p(e_b)\\circ b_p(b_!^e):H_{\\overline Y}Rp_*^eb_!^e\\to Rp_*^pb_!^pH_V$. Then\n$$\\gamma^p_Q=T_Q\\circ H_{\\overline Y}(\\gamma^e_Q)\\circ S_Q^{-1}.$$\nEvery factor has its shift square by steps 3--5, so this formula proves the square for $\\gamma^p_Q$. It uses the specified counit-mate comparison $b$, rather than an arbitrary site isomorphism. The site direct-image comparisons respect identities and composition by [prop-weil-pbc-comparison-direct-image], and the open site comparisons respect open composition by step 3. Write $F_h^e$ and $P_h$ for the etale and pro-etale compact-support candidates on this tower, and $c_h:H_{\\operatorname{target}(h)}F_h^e\\to P_hH_{\\operatorname{source}(h)}$ for step 5's map. Inserting $c_c=Rp_*(e_j)b_pj_!$ into the displayed three-arrow composite, and cancelling each adjacent inverse comparison, gives, on $H_XL$,\n$$\\alpha^p_{g,f,H_XL}=c_{gf,L}\\,H_Z(\\alpha^e_{g,f,L})\\,c_{g,F_f^eL}^{-1}\\,P_g(c_{f,L}^{-1}).$$\nMore explicitly, the direct-image replacements are justified by\n$$\\kappa^p_{v,u}H\\circ b_{vu}=Rv_*^p(b_u)\\circ b_v(Ru_*^e)\\circ H(\\kappa^e_{v,u}),$$\nand the open-extension replacements by\n$$\\operatorname{comp}^p_{b,j}H_X\\circ b_!^p(e_j)\\circ e_b(j_!^e)=e_a\\circ H_{\\overline X}(\\operatorname{comp}^e_{b,j}).$$\nInsert $\\gamma^p_Q=T_QH(\\gamma^e_Q)S_Q^{-1}$ into the first arrow. The two displayed identities replace the second and third arrows, respectively. Naturality of $b_s$ moves it across $\\gamma^e_Q$; the resulting consecutive $b_q^{-1}b_q$, $e_i^{-1}e_i$ and $e_b^{-1}e_b$ factors cancel. The surviving outer factors are exactly $c_{gf}$ on the target and $c_g^{-1}P_g(c_f^{-1})$ on the source, giving the displayed equation. These formulas construct the canonical compact-support compositor of [thm-sf-comp-composition] on the compatible tower; they use the named proper/open arrows and the canonical direct-image/open-extension composition maps, rather than an unspecified isomorphism. The proper-refinement special cases agree with the prescribed pro-etale maps by the normalization in step 6. Choice-independence in [thm-sf-comp-composition] identifies its value at the originally chosen compactifications by those refinement comparisons. Step 6 shows the conjugating comparisons commute with shifts. Thus $\\alpha_{g,f}$ and its inverse have the required shift equations on the stated domain.",
+   "uses": [
+    "lem-weil-pbc-compatible-compactification-triangle",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "thm-sf-comp-composition",
+    "prop-weil-pbc-comparison-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "lemma-shriek-composition, compatible compactification diagram and four-line construction"
+   }
+  },
+  {
+   "text": "For clause (4), retain the compactification $c=(j,p)$ used in the definition and write $F^e=Rp^e_*j^e_!$, $G^e=f^{\\times}$, $P=Rp^p_*j^p_!$, $H_T=\\nu_T^*$, $U_T=R\\nu_{T,*}$. By [lem-weil-pbc-adjunction-shift-compatibility-unique], the right adjoint $G^e$ of $F^e$ has the unique shift adjoint to that of $F^e$, and its etale counit $\\varepsilon^e:F^eG^e\\to1$ commutes with these shifts. This is precisely the $G^e$ shift fixed in the statement. The two other factors of $R=H_XG^eU_Y$ carry the canonical shifts of step 1, and the comparison adjunction counit $v_Y:H_YU_Y\\to1$ commutes with shifts by step 2. Consequently every factor of the following natural map commutes with shifts:\n$$e_M:P H_XG^eU_YM\\xrightarrow{c_c(G^eU_YM)^{-1}}H_YF^eG^eU_YM\\xrightarrow{H_Y\\varepsilon^e_{U_YM}}H_YU_YM\\xrightarrow{v_{Y,M}}M.$$\nHere $c_c$ is exactly the map of step 5. Applying the composition/whiskering equations from [lem-weil-pbc-commshift-nattrans-comp-whisker] gives\n$$e_{M[1]}=e_M[1]\\,\\chi_{PR}(M).$$\nThis uses the composite shift of $H_XG^eU_Y$ specified in the question throughout.",
+   "uses": [
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "lemma-adjoint-is-exact, adjoint shift construction; explicit composite counit calculation"
+   }
+  },
+  {
+   "text": "Identify $e$ with the required constructible counit, including its normalization. By [lem-sf-proetale-constructible-origin], a bounded constructible $M$ has an etale origin $M\\cong H_YN$; by [lem-sf-comparison-tor-amplitude], finite Tor amplitude is preserved and reflected, so $N$ belongs to the etale finite-Tor category when $M$ does. The comparison unit $N\\to U_YH_YN$ is an isomorphism by [thm-weil-pbc-site-comparison]; by step 2 it is compatible with the canonical shifts, so the quasi-inverse $U_Y$ has the very shift used in step 8. The finite coefficient adjunction and its transport by this unit and $c_c$ are stated in [lem-pur-finite-coefficient-adjoint-comparisons]. The transported counit formula in [det-sp-et-proet-adjunction-transfer] says on $H_YN$ exactly $H_Y\\varepsilon^e_N\\circ c_c(G^eN)^{-1}$, after the equivalence identifications. To make the equivalence identification explicit, set $t=\\eta^\\nu_N:N\\xrightarrow{\\sim}U_YH_YN$. Naturality of $c_c$ and $\\varepsilon^e$ gives\n$$e_{H_YN}\\circ P H_XG^e(t)=v_{Y,H_YN}\\circ H_Y(t)\\circ H_Y(\\varepsilon^e_N)\\circ c_c(G^eN)^{-1}=H_Y(\\varepsilon^e_N)\\circ c_c(G^eN)^{-1},$$\nwhere the last equality is the comparison triangle identity $v_{Y,H_YN}\\circ H_Y(t)=1$. The isomorphism $P H_XG^e(t)$ is exactly the source identification from $PH_XG^eN$ to $PH_XG^eU_YH_YN$, so this is the stated transported-counit formula. Thus $e_{H_YN}=\\varepsilon_{f,H_YN}$, and naturality along $H_YN\\cong M$ gives $e_M=\\varepsilon_{f,M}$ for every $M\\in D^b_{ctf}(Y,A)$. These are the constructible maps fixed by [def-trf-admissibility]. If its compact-support functor is expressed at another compactification, the refinement comparison of step 6 is inserted on the left, and preserves the equation. This proves clause (4) for the given adjunction and the given shifts.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "thm-weil-pbc-site-comparison",
+    "lem-pur-finite-coefficient-adjoint-comparisons",
+    "det-sp-et-proet-adjunction-transfer",
+    "def-trf-admissibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "finite-coefficient comparison and transported adjunction; compare derived.tex, lemma-adjoint-is-exact"
+   }
+  },
+  {
+   "text": "All calculations take place on the required domains. The coefficient ring is finite and killed by a power of $\\ell$, with $\\ell$ invertible on every scheme. The field $k$ is Noetherian because its only ideals are $0$ and $k$; its one-affine spectrum is therefore Noetherian. Finite-type schemes over $k$ and the proper ambient schemes of a compactification are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied first to $\\operatorname{Spec}k$ and then to the proper maps; the starting schemes are qcqs by [lem-weil-pbc-qcqs-over-affine], since they are separated finite type over $\\operatorname{Spec}k$. Thus the compatible-tower and proper/open comparison hypotheses used above hold. The etale-origin categories are preserved by compact support by [thm-sf-comp-composition]; shifting a witness $H_TN\\cong K$ gives $H_T(N[1])\\cong K[1]$ by step 1, so every shift equation stays in its domain. Bounded constructible inputs have such witnesses by [lem-sf-proetale-constructible-origin]. For the exceptional counit the preservation and adjunction on finite-Tor constructibles are supplied by [lem-pur-finite-coefficient-adjoint-comparisons], so each term of steps 8--9 is defined there. No assertion about a right adjoint on all pro-etale complexes is needed. Combining the equations proved above gives exactly $\\chi_G(M)\\tau_{M[1]}=\\tau_M[1]\\chi_F(M)$ for all four specified transformations. The elementary inverse calculation in step 6 gives the two remaining inverse equations.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-sf-comp-composition",
+    "lem-sf-proetale-constructible-origin",
+    "lem-pur-finite-coefficient-adjoint-comparisons",
+    "lem-weil-pbc-qcqs-over-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "lemma-shriek-proper-and-open and lemma-shriek-composition, hypotheses; proetale.tex, bounded-below comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-pbc-proetale-operations",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-shift",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-cbc-extension-zero-composition",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sf-proper-open-comparison-site-normalization",
+  "def-sf-refinement-comparison-isomorphism",
+  "prop-compactification-coherence-detailed",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "thm-sf-comp-composition",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "thm-weil-pbc-site-comparison",
+  "lem-pur-finite-coefficient-adjoint-comparisons",
+  "det-sp-et-proet-adjunction-transfer",
+  "def-trf-admissibility",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-qcqs-over-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Canonical representative calculations following lemma-derived-shift, lemma-pre-derived-adjoint-functors-general and lemma-adjoint-is-exact; combined with more-etale.tex, lemma-shriek-proper-and-open and lemma-shriek-composition, and the finite-site comparison normalizations."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -123,10 +305,66 @@
    "results": "Directory CategoryTheory/Functor/Derived: OK 0 hits in the pinned Mathlib. Read Adjunction.lean directly; its derived-unit/counit factorization equations do not identify the geometric compact-support compositor or proper comparison.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "commShift.*(LowerShriek|ProperComparison)|lowerShriekComp|rightDerived.*CommShift",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match for the geometric four-clause assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical compact support derived direct image composition isomorphisms are compatible with translation of complexes",
+   "results": "TopCat.Presheaf.Pushforward.comp; CategoryTheory.Functor.IsTriangulated.instComp; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh; CategoryTheory.NatTrans.PullbackShift.natIsoComp; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; HomologicalComplex₂.shiftFunctor₁₂CommIso; CategoryTheory.Functor.CommShift.OfComp.iso",
+   "date": "2026-10-17",
+   "verdict": "no match for the geometric four-clause assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.CommShift, CategoryTheory.NatTrans.CommShift",
+   "results": "CategoryTheory.Adjunction.CommShift.commShift_counit; CategoryTheory.Adjunction.CommShift.commShift_unit; CategoryTheory.Adjunction.CommShift.mk'; CategoryTheory.Adjunction.CommShift.mk; these require an already shift-compatible adjunction and are covered by the existing generic adjoint-shift leaf",
+   "date": "2026-10-17",
+   "verdict": "no match for the geometric four-clause assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical finite coefficient compact support composition and proper comparison on pro etale derived categories commute with shifts",
+   "results": "CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh; Condensed.profiniteSolidCounit; Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit; Condensed.profiniteSolid; localCohomology.diagramComp; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; Condensed.profiniteSolidification; exact-derived or underived module-sheaf comparisons, not the named compactification comparisons",
+   "date": "2026-10-17",
+   "verdict": "no match for the geometric four-clause assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Units and counits of derived module sheaf adjunctions and proper open compactification comparisons preserve translation of cochain complexes",
+   "results": "SheafOfModules.unitToPushforwardObjUnit_val_app_apply; SheafOfModules.unitToPushforwardObjUnit; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; exact-derived or underived module-sheaf comparisons, not the named compactification comparisons",
+   "date": "2026-10-17",
+   "verdict": "no match for the geometric four-clause assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations induced by additive sheaf functors and right derived functor composition preserve suspension isomorphisms",
+   "results": "CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh; DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.mapDerivedCategoryFactorsh; DerivedCategory.singleFunctorIsoCompQ",
+   "date": "2026-10-17",
+   "verdict": "no exact match in pinned Mathlib for the four geometric comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans.CommShift\", \"rightDerived\"",
+   "results": "CategoryTheory.NatTrans.CommShift.rightDerivedNatTrans; CategoryTheory.NatTrans.CommShift.of_isRightDerivedFunctor; online RightDerivedCommShift candidates are absent from the pinned Derived directory, checked by reading its file list and RightDerived.lean:95--115",
+   "date": "2026-10-17",
+   "verdict": "no exact match in pinned Mathlib for the four geometric comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans|of_isRightDerivedFunctor|lowerShriek.*CommShift|CommShift.*lowerShriek",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; pinned RightDerived.lean:101 defines rightDerivedNatTrans and :105 its factorization, without a shift theorem; no geometric compact-support match",
+   "date": "2026-10-17",
+   "verdict": "no exact match in pinned Mathlib for the four geometric comparisons"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-global-operator-triangulated",
@@ -143,5 +381,159 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-finite-structural-maps-commshift",
+  "worker": "stage1",
+  "summary": "Proved the canonical shift squares on shifted resolutions, then expanded proper-refinement and compact-support composition maps, and identified the transported exceptional counit with its specified composite shift. Reused existing DAG tools throughout: no new nodes, no statement change, and no ambient pro-etale exceptional adjunction assumption.",
+  "blueprint": "Realizes lem-trf-global-operator-triangulated.proof.md, sentence 'Each of these constructions is a natural transformation of exact functors in the coefficient object': the ordinary initial unit, compact-support comparisons, and constructible exceptional counit. Expands the missing shift compatibility rather than inferring it from naturality.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic tool: Constant coefficients on the pro-etale site. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic tool: Inverse image of etale sheaves of modules over a constant ring is exact. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic tool: The comparison pullback is exact on sheaves of modules and commutes with cohomology sheaves. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-sp-kinjective-comparison-principle",
+    "why": "Generic tool: Comparison principle for a K-injective target. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic tool: An adjunction of additive functors induces an adjunction on the homotopy categories of complexes, termwise. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic tool: Pre-derived adjunction from essentially constant derived systems. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic tool: Canonical composition comparison for unbounded ringed-topos direct images. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-exact",
+    "why": "Generic tool: Exactness of extension by zero. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-adjunction",
+    "why": "Generic tool: Adjunction for extension by zero. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-cbc-extension-zero-composition",
+    "why": "Generic tool: Composition of open immersions. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic tool: Comparison of extension by zero with the site morphism. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-cbc-proper-open-interchange-coherence",
+    "why": "Generic tool: Proper/open interchange and its base-change and composition equations. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic tool: Canonical derived direct-image comparison is the invertible counit mate. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic tool: Comparison inverse image commutes with scheme pullback. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Generic tool: On the coefficient class the compact-support functor is computed on the étale site. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-sf-proper-open-comparison-site-normalization",
+    "why": "Generic tool: Normalization of the proper/open comparison under the site comparison. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "prop-compactification-coherence-detailed",
+    "why": "Generic tool: Compactification coherence. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-weil-pbc-compatible-compactification-triangle",
+    "why": "Generic tool: Compatible geometric compactifications of a composable pair. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Generic tool: Unbounded ordinary etale compact-support comparisons. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic tool: The composition law for $Rf_!$. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic tool: Constructible pro-étale coefficients are of étale origin. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Generic tool: Finite Tor amplitude under the site comparison. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic tool: Bounded-below site comparison. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-pur-finite-coefficient-adjoint-comparisons",
+    "why": "Generic tool: Finite-coefficient exceptional adjunction and coefficient mates over an arbitrary field. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "det-sp-et-proet-adjunction-transfer",
+    "why": "Generic tool: Transfer of adjunctions from étale to pro-étale finite coefficients. Used for the displayed construction or comparison, not to replace the trace-additivity unit route; that unit has no such foundational interface."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic exactness of etale open extension permits termwise descent of open comparisons; the trace-additivity unit has no such foundational interface."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "Generic compatibility of the named site direct-image comparison with composition identifies the transported compositor at compatible compactifications; no trace-unit node gives this site-comparison coherence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-cbc-extension-zero-composition",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sf-proper-open-comparison-site-normalization",
+  "prop-compactification-coherence-detailed",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "thm-sf-comp-composition",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "thm-weil-pbc-site-comparison",
+  "lem-pur-finite-coefficient-adjoint-comparisons",
+  "det-sp-et-proet-adjunction-transfer",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "prop-weil-pbc-comparison-direct-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-80f8fe1e6",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-80f8fe1e6 (reviewer sub-agent of L); spot-checked: I read the item (four clauses, unchanged and not weakened), the parent lem-trf-global-operator-triangulated and its main-20261015 proof sentence, the unit sk-i-additivity, and the full statements of all 36 proof_deps and 13 stmt_deps. I also read the proofs of lem-sf-class-compact-support-comparison and thm-sf-comp-composition, and checked Stacks tags 05SU, 0DVC, 0FND, 0A8D, 0F7B, 0F7J and 09AF against the tags file. The coefficient category is ordinary constant A=O_E/varpi^n modules on the small pro-etale sites, and Rf^!=nu_X^* f^x Rnu_{Y,*} matches def-weil-exceptional-inverse-image verbatim. Steps 1-4 are correct calculations: exact functors take degreewise-identity shifts, derived functors take shifted K-injective resolutions, the unit and counit components have degree 0 so shifting changes none of them, kappa is normalized by g_*j, and gamma^e has its K-injective normalization. Step 5: b_u=s_u(q)eta^p is the canonical mate, and c_c=Rp_*(e_j)b_p j_! is exactly the inverse of the comparison c_{G,alpha} that lem-sf-class's proof builds (identity witness). Step 6: the site-normalization equation, witness transport and theta_u are correct, and p_f is theta to (id,f). Step 7: gamma^p=T_Q H(gamma^e) S_Q^{-1} is literally the construction in step 5 of thm-sf-comp-composition's proof. I checked the types of the two coherence identities and the conjugation formula. That node's statement does not state this normalization; since clause (3) names that map, this is acceptable and not a C3 fault. Step 8: the adjoint shift of f^x comes from the uniqueness leaf (ii)-(iii). Step 9: I recomputed e_{H_YN} PH_XG^e(t)=H_Y(eps^e_N)c_c^{-1} by naturality and the triangle identity; it equals the transported counit of det-sp-et-proet-adjunction-transfer and lem-pur-finite-coefficient-adjoint-comparisons. Step 10: the Noetherian, qcqs and domain hypotheses are all present. Small cases (empty scheme, zero complexes, identity opens, n=1, a degree-0 sheaf shifted) behave correctly. There are no new nodes, no SGA citation, and a DFS over the snapshot DAG finds no cycle. I accept all 27 declared tool_uses as generic foundational interfaces that the sk-i-additivity unit does not supply. No fixes written."
  }
 }
