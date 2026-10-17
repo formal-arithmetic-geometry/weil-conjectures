@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-category-of-spaces"
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-right-fibration-section-limit"
  ],
  "proof": [
   {
@@ -205,5 +206,41 @@
   "group": "Q114",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-975a56303 (reviewer sub-agent of L); spot-checked: Read the item, the five cited statements (Whitehead inverse, Kan mapping invariance, def-cbc enhanced diagrams, def-coef-infinity-category-of-spaces, coherent-nerve infrastructure), the unit, the chapter and the main-20261015 ancestor. Kerodon is not archived in literature/, so I checked the Kerodon places against the mathematics rather than the pages. The statement is true and not weakened. Tested on: A empty, which forces B empty, with Fun(empty,empty)=Delta^0; disconnected and discrete complexes; identity f. Step 1: the Whitehead hypotheses match exactly, and it gives g and the homotopies H: gf=>1_A and J: fg=>1_B. Step 2: the outer-horn reversal fills Lambda^2_0 and is correct. Step 3: P_{0,2}={0,2}⊂{0,1,2} and union composition give the long edge 1_A->gf, so H^rev is correctly oriented, and the faces are f,g,1_A; the universe inclusion works by postcomposition. Fault (C5): delivered steps 2-3 reprove the full statement of the existing, reviewed node lem-coef-kan-coherent-nerve-inverse-equivalence in the same unit (Q138 pass, 2026-10-17). The report wrongly says no such node exists. Citing it makes no cycle. Fix: replaced steps 2-3 with a citation of that node plus an elementary universe-inclusion step. proof_deps are now the union of uses, and lem-cbc-kan-mapping-homotopy-invariance and its tool_use are removed. Remaining tool_use lem-cbc-kan-whitehead-inverse is accepted (generic Whitehead, no in-unit node). Statement and metadata unchanged; no new nodes; no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-cd3d04cb0",
+  "group": "Q48",
+  "result": "fix",
+  "note": "Full review recorded in review.md. Mathematics and verbatim main signature are correct. Complete fixes extract three inline naturality proofs into named sorry statements, update declaration records and independent review documentation. Original and corrected modules compile cleanly through scompile.py."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KanWeakEquivalenceSpaceEdge",
+  "declaration": "CategoryTheory.Spaces.kan_weak_equivalence_space_edge",
+  "declarations": [
+   "CategoryTheory.Spaces.space_universe_lift_kan",
+   "CategoryTheory.Spaces.spaceUniverseLowerVertex",
+   "CategoryTheory.Spaces.spaceUniverseLowerPaths",
+   "CategoryTheory.Spaces.space_universe_lift_hom_naturality",
+   "CategoryTheory.Spaces.spaceUniverseLiftHomSimplex",
+   "CategoryTheory.Spaces.spaceUniverseLiftObject",
+   "CategoryTheory.Spaces.space_universe_lift_action_naturality",
+   "CategoryTheory.Spaces.spaceUniverseLiftAction",
+   "CategoryTheory.Spaces.space_universe_lift_laws",
+   "CategoryTheory.Spaces.spaceUniverseLiftSimplex",
+   "CategoryTheory.Spaces.space_universe_lift_naturality",
+   "CategoryTheory.Spaces.space_universe_inclusion_naturality",
+   "CategoryTheory.Spaces.spaceUniverseInclusion",
+   "CategoryTheory.Spaces.kan_weak_equivalence_space_edge"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/KanWeakEquivalenceSpaceEdge.lean",
+  "statement": "theorem kan_weak_equivalence_space_edge {A B : SSet.{u}} [SSet.KanComplex A] [SSet.KanComplex B] (f : A ⟶ B) (hf : SSet.Enhanced.IsWeakHomotopyEquivalence f) : ∃ (g : B ⟶ A) (e d : infinityCategory.{u} _⦋1⦌) (t s : infinityCategory.{u} _⦋2⦌), SSet.Enhanced.RightFibrationLimit.IsSpaceEdge f e ∧ SSet.Enhanced.RightFibrationLimit.IsSpaceEdge g d ∧ infinityCategory.δ 2 t = e ∧ infinityCategory.δ 0 t = d ∧ infinityCategory.δ 1 t = infinityCategory.σ 0 (infinityCategory.δ 1 e) ∧ infinityCategory.δ 2 s = d ∧ infinityCategory.δ 0 s = e ∧ infinityCategory.δ 1 s = infinityCategory.σ 0 (infinityCategory.δ 0 e) ∧ SSet.Enhanced.IsEquivalenceEdge infinityCategory e ∧ (infinityCategory.{max u v}.δ 2 (spaceUniverseLiftSimplex.{u, v} 2 t) = spaceUniverseLiftSimplex.{u, v} 1 e ∧ infinityCategory.δ 0 (spaceUniverseLiftSimplex.{u, v} 2 t) = spaceUniverseLiftSimplex.{u, v} 1 d ∧ infinityCategory.δ 1 (spaceUniverseLiftSimplex.{u, v} 2 t) = infinityCategory.σ 0 (infinityCategory.δ 1 (spaceUniverseLiftSimplex.{u, v} 1 e)) ∧ infinityCategory.δ 2 (spaceUniverseLiftSimplex.{u, v} 2 s) = spaceUniverseLiftSimplex.{u, v} 1 d ∧ infinityCategory.δ 0 (spaceUniverseLiftSimplex.{u, v} 2 s) = spaceUniverseLiftSimplex.{u, v} 1 e ∧ infinityCategory.δ 1 (spaceUniverseLiftSimplex.{u, v} 2 s) = infinityCategory.σ 0 (infinityCategory.δ 0 (spaceUniverseLiftSimplex.{u, v} 1 e)) ∧ SSet.Enhanced.IsEquivalenceEdge infinityCategory (spaceUniverseLiftSimplex.{u, v} 1 e))",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Actual edges are identified using the published IsSpaceEdge predicate. The canonical arbitrary-containing-value-universe inclusion is constructed explicitly by relabeling subset paths and conjugating parametrized functions by ULift; its named well-definedness proofs are the universe clause of this node. Successor-only density helpers are downstream of this item and cannot be imported without a dependency cycle. Maintainer second reading: naturality proofs are named postponed helper theorems; the explicit data and main signature are unchanged.",
+  "fixed_by": "NT-stage2-Codex-cd3d04cb0"
  }
 }

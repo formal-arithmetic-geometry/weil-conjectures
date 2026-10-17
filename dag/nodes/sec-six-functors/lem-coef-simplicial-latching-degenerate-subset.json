@@ -260,5 +260,25 @@
   "group": "Q103",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-75dca58f9 (reviewer sub-agent of L); spot-checked: I read the item in full, the full statements of all three cited nodes, Stacks simplicial.tex lines 1790-1830 (017R lemma-splitting-simplicial-sets and the paragraph after it on non-functoriality), parent lem-coef-bisimplicial-reedy-division-calculus step 3, the unit record, and Mathlib Degenerate.lean (lines 36, 114, 217/225/233). The delivery has no new nodes, and the statement is unchanged and correct. L_n is the Reedy latching category of Delta^op at [n], with arrows rho: sigma -> sigma' when sigma = rho sigma', and the diagram is covariant. Degeneracy uses the arbitrary-map definition (SSet.degenerate). Step 2 correctly reduces this to a proper-surjection normal form by factoring f into a surjection and an injection and using uniqueness. Step 3's descent uses the arrow tau = rho sigma -> sigma in the right direction. Steps 4 and 5 give the colimit on D_nT and identify the induced map with the canonical lambda_n. Step 6 proves naturality without assuming nondegenerate simplices are preserved. Cases tested: n=0 (both sides empty), n=1 (lambda_1 = s_0 is injective), T=Delta^0 and Delta^1 at n=2 (counts agree), and the collapse Delta^1 -> Delta^0. All cited nodes are definitions or Mathlib leaves, so there is no route or tool-use issue. Only Stacks and Mathlib are used, no SGA. Searches over the DAG (latching+degenerate, 017R) and Mathlib (no 'latching' anywhere) found no duplicate. Searches recorded cover LeanSearch, Loogle, LeanFinder and grep, and proof_deps equals the union of the step uses. No coefficient category or base-change morphism is involved. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3b4aeed30",
+  "group": "Q20",
+  "result": "fix",
+  "note": "Mathematics and all clauses checked; original and corrected files compile cleanly. Complete fixes reuse the existing latching construction, resolve H4/H8 helper defects, and update the Lean record and report. Findings recorded in review.md; snapshot and branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialLatchingDegenerateSubset",
+  "declaration": "CategoryTheory.SimplicialLatching.simplicialLatchingMap_spec",
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialLatchingDegenerateSubset.lean",
+  "statement": "theorem simplicialLatchingMap_spec {T T' : SSet.{u}} (n : ℕ) : Function.Injective (latchingTo T n) ∧ Set.range (latchingTo T n) = T.degenerate n ∧ (∀ (σ : LatchingIndex n) (x : T _⦋σ.unop.obj.right.len⦌), latchingTo T n (colimit.ι (latchingDiagram T n) σ x) = T.map σ.unop.obj.hom.op x) ∧ (∀ (φ : T ⟶ T'), φ.app (Opposite.op ⦋n⦌) ∘ latchingTo T n = latchingTo T' n ∘ latchingMap φ n) ∧ (∀ (φ : T ⟶ T'), Set.MapsTo (φ.app (Opposite.op ⦋n⦌)) (T.degenerate n) (T'.degenerate n)) ∧ (n = 0 → IsEmpty (LatchingIndex n) ∧ IsEmpty (latching T n) ∧ IsEmpty (T.degenerate n))",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuse the already landed TensorCoendSkeletal proper-surjection latching constructions; no second latching category or canonical map is defined.",
+  "fixed_by": "NT-stage2-Codex-3b4aeed30"
  }
 }
