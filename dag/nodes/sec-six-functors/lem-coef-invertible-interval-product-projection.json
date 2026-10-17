@@ -11,9 +11,65 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "An $n$-simplex of $I$ is uniquely specified by a string $(a_0,\\ldots,a_n)$ of objects in $\\{0,1\\}$: all arrows between successive objects are unique. A simplicial operator selects or repeats entries. Define $\\mu:I\\times I\\to I$ by sending strings $(a_j)_j,(t_j)_j$ to $(b_j)_j$, where $b_j=0$ if $t_j=0$ and $b_j=a_j$ if $t_j=1$. This commutes with every selection or repetition of entries, so is a simplicial map. For the constant endpoint strings, $\\mu(a,0)=0$ and $\\mu(a,1)=a$. Set $X=R\\times I$ and let $s:R\\to X$ insert the constant $0$ string. Then $\\pi_Rs=1_R$, while $((r,a),t)\\mapsto(r,\\mu(a,t))$ is a simplicial map $X\\times I\\to X$ with endpoints $s\\pi_R$ and $1_X$. These are explicit degreewise identities, without a condition on $R$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.5.4, printed p.92, specialized to the invertible interval; explicit agent proof by its contraction. Proposition 1.2.7.3 and Proposition 2.2.5.8 supply the functor-category interpretation. Read online 2026-10-17; archive WANTED."
+   }
+  },
+  {
+   "text": "Fix a quasicategory $C$ in any sufficiently large universe, and put $E=\\operatorname{Fun}(R,C)$ and $D=\\operatorname{Fun}(X,C)$. The first assertion of [lem-coef-joyal-functor-equivalence-test], applied to $u=\\pi_R:X\\to R$, says that $D$ and $E$ are quasicategories; its domain need only be a small simplicial set. Precomposition defines $P=\\pi_R^*:E\\to D$ and $Q=s^*:D\\to E$. In degree $n$ these send a map to its composite with $\\pi_R\\times1_{\\Delta^n}$ or $s\\times1_{\\Delta^n}$, respectively. Thus $QP=1_E$ strictly, and $PQ$ sends $F:X\\times\\Delta^n\\to C$ to $F\\circ(s\\pi_R\\times1_{\\Delta^n})$.",
+   "uses": [
+    "lem-coef-joyal-functor-equivalence-test",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 3.6.8(ii)-(iii), printed pp.115-116, and Remark 3.6.5, printed p.114; read online 2026-10-17. Applied through the existing lem-coef-joyal-functor-equivalence-test; the interval contraction and its triangle witnesses are the explicit agent construction here. Archive WANTED."
+   }
+  },
+  {
+   "text": "Construct $K:D\\times I\\to D$ on an $n$-simplex $(F,t)$, with $F:X\\times\\Delta^n\\to C$ and $t:\\Delta^n\\to I$, by $K(F,t)=F\\circ\\kappa_t$. On an $m$-simplex $((r,a),\\beta)$ of $X\\times\\Delta^n$, where $\\beta:[m]\\to[n]$, put $$\\kappa_t((r,a),\\beta)=((r,\\mu(a,t\\beta)),\\beta).$$ Here $t\\beta$ is the restriction of the string $t$ along $\\beta$, and $\\mu$ is step 1's degreewise formula. Restricting along $\\gamma:[l]\\to[m]$ replaces $a$ by $a\\gamma$ and $t\\beta$ by $t\\beta\\gamma$; step 1's formula gives $\\mu(a,t\\beta)\\gamma=\\mu(a\\gamma,t\\beta\\gamma)$. Hence $\\kappa_t$ is a simplicial map, and restriction of $(F,t)$ along $\\alpha:[k]\\to[n]$ gives exactly the restriction of $K(F,t)$ along $\\alpha$. This verifies that $K$ itself is simplicial. Its endpoints are $PQ$ at $0$ and $1_D$ at $1$. Currying gives $\\widetilde K:I\\to\\operatorname{Fun}(D,D)$: an $n$-simplex $t$ is sent to $K\\circ(1_D\\times t):D\\times\\Delta^n\\to D$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.2.5.4, printed p.92, specialized to the invertible interval; explicit agent proof by its contraction. Proposition 1.2.7.3 and Proposition 2.2.5.8 supply the functor-category interpretation. Read online 2026-10-17; archive WANTED."
+   }
+  },
+  {
+   "text": "The two edges $0\\to1$ and $1\\to0$ in $I$ and its two $2$-simplices with vertex strings $(0,1,0)$ and $(1,0,1)$ have long edges the degenerate edges at $0$ and $1$. Their images under $\\widetilde K$ therefore give an edge $PQ\\to1_D$, its reverse, and both inverse-triangle witnesses in $\\operatorname{Fun}(D,D)$. By the definition in [def-cbc-enhanced-diagrams-cones], this is a coherent natural equivalence $PQ\\simeq1_D$. Together with the strict equality $QP=1_E$ (whose degenerate edges and triangles supply the other natural equivalence), it makes the specified map $P=\\pi_R^*$ a coherent functor equivalence with quasi-inverse $Q$. This holds for every test $C$. Condition (ii) implies condition (iii) in [lem-coef-joyal-functor-equivalence-test], so $h(\\pi_R^*)$ is an ordinary equivalence for every $C$. This is precisely the categorical-equivalence convention of [lem-coef-joyal-model-structure]. All products and strings stay small in the input universe; tests and their functor objects may be taken in any larger universe. If $R=\\varnothing$, both $D$ and $E$ are the one-point functor simplicial set and the same formulas apply; no vertex of $R$, horn filler of $R$, or finiteness assumption was used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-functor-equivalence-test",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 3.6.8(ii)-(iii), printed pp.115-116, and Remark 3.6.5, printed p.114; read online 2026-10-17. Applied through the existing lem-coef-joyal-functor-equivalence-test; the interval contraction and its triangle witnesses are the explicit agent construction here. Archive WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-joyal-functor-equivalence-test",
+  "lem-coef-joyal-model-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph 2 mapping-complex adjunction infrastructure; auxiliary interval product assertion extracted through lem-coef-join-slice-cocone-comparison step 3. Explicit nerve contraction proof; compare HTT Corollary 2.2.5.4 and Propositions 1.2.7.3, 2.2.5.8, read online; archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,10 +105,45 @@
    "results": "{\"t\": \"2026-10-17T08:11:22Z\", \"tool\": \"leansearch\", \"query\": \"The product of any simplicial set with the invertible interval nerve is a categorical mapping cylinder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"SSet.ι₀\", \"SSet.prodStdSimplex.objEquiv\", \"CategoryTheory.nerve\", \"SSet.ι₁\", \"SSet.ι₀_comp\", \"CategoryTheory.nerveFunctor\", \"SSet.prodStdSimplex.isoNerve\"], \"digest\": \"a2f330e3aa80bcb3\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean:39-222. WalkingIso, coherentIso and its inverse triangles are defined there, but no categorical-equivalence assertion for the product projection is present. The ordinary-category unitor/nerve results and abstract model-category cylinders do not specialize in one line to this simplicial-set statement."
+  },
+  {
+   "tool": "grep",
+   "query": "categoricalEquivalence|CategoricalEquivalence|walkingIso|WalkingIso|coherentIso",
+   "results": "{\"t\": \"2026-10-17T09:22:37Z\", \"tool\": \"grep\", \"query\": \"categoricalEquivalence|CategoricalEquivalence|walkingIso|WalkingIso|coherentIso\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/CoherentIso.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveCodiscrete.lean\"], \"digest\": \"f7f760539f5bd7b7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned walking-isomorphism definitions and inverse-triangle data, nerve/truncation equivalences, product-of-standard-simplex formulas, and homotopy-category natural-isomorphism constructors. Read CoherentIso.lean:39-214 and NerveCodiscrete.lean:27-65. None states categorical equivalence of the product projection or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simplicial set times the contractible two object groupoid nerve has categorically equivalent projection",
+   "results": "{\"t\": \"2026-10-17T09:22:37Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial set times the contractible two object groupoid nerve has categorically equivalent projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"SSet.ι₀_fst\", \"SSet.Truncated.nerve₂Adj\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.prodStdSimplex.isoNerve\", \"SSet.prodStdSimplex.objEquiv\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"SSet.instFiniteObjOppositeSimplexCategoryTensorObj\"], \"digest\": \"1748c0a7beffbc0f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned walking-isomorphism definitions and inverse-triangle data, nerve/truncation equivalences, product-of-standard-simplex formulas, and homotopy-category natural-isomorphism constructors. Read CoherentIso.lean:39-214 and NerveCodiscrete.lean:27-65. None states categorical equivalence of the product projection or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coherentIso\"",
+   "results": "{\"t\": \"2026-10-17T09:22:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"coherentIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.coherentIso\", \"SSet.coherentIso.hom\", \"SSet.coherentIso.inv\", \"SSet.coherentIso.invStructHom\", \"SSet.coherentIso.homInvId\", \"SSet.coherentIso.invHomId\", \"SSet.coherentIso.invStructHom_inv\", \"SSet.coherentIso.x₀\"], \"digest\": \"e682e30fb5e34353\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned walking-isomorphism definitions and inverse-triangle data, nerve/truncation equivalences, product-of-standard-simplex formulas, and homotopy-category natural-isomorphism constructors. Read CoherentIso.lean:39-214 and NerveCodiscrete.lean:27-65. None states categorical equivalence of the product projection or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any simplicial set R the projection R times the nerve of the walking isomorphism onto R is a categorical equivalence",
+   "results": "{\"t\": \"2026-10-17T09:22:47Z\", \"tool\": \"leanfinder\", \"query\": \"For any simplicial set R the projection R times the nerve of the walking isomorphism onto R is a categorical equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.OneTruncation₂.nerveEquiv\", \"SSet.stdSimplex.isoNerve\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_obj\", \"SSet.prodStdSimplex.isoNerve\", \"SSet.OneTruncation₂.ofNerve₂\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.OneTruncation₂.ofNerve₂.natIso_hom_app_map\", \"SSet.stdSimplex.isoNerve_hom_app_apply\"], \"digest\": \"5141f507af5e4292\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned walking-isomorphism definitions and inverse-triangle data, nerve/truncation equivalences, product-of-standard-simplex formulas, and homotopy-category natural-isomorphism constructors. Read CoherentIso.lean:39-214 and NerveCodiscrete.lean:27-65. None states categorical equivalence of the product projection or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible interval contraction induces inverse equivalences of functor quasicategories by precomposition",
+   "results": "{\"t\": \"2026-10-17T09:22:48Z\", \"tool\": \"leanfinder\", \"query\": \"An invertible interval contraction induces inverse equivalences of functor quasicategories by precomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.OneTruncation₂.ofNerve₂.natIso_inv_app_map\", \"SSet.Truncated.HomotopyCategory.mkNatIso_inv_app_mk\", \"SSet.OneTruncation₂.ofNerve₂\", \"CategoryTheory.nerve.homEquiv_symm_apply\", \"SSet.OneTruncation₂.nerveEquiv_symm_apply_map\", \"SSet.OneTruncation₂.nerveEquiv_symm_apply_obj\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\"], \"digest\": \"25f8bd7b8e88517c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned walking-isomorphism definitions and inverse-triangle data, nerve/truncation equivalences, product-of-standard-simplex formulas, and homotopy-category natural-isomorphism constructors. Read CoherentIso.lean:39-214 and NerveCodiscrete.lean:27-65. None states categorical equivalence of the product projection or specializes to it in one line."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-join-slice-cocone-comparison",
@@ -80,5 +171,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-invertible-interval-product-projection",
+  "worker": "stage1",
+  "summary": "Kept the complete arbitrary-simplicial-set statement. Constructed the interval contraction by strings of objects, its explicit parametrized precomposition on every simplex, and both inverse triangles. Reused the existing test-functor criterion rather than introducing any auxiliary lemma. Checked empty R and empty tests, universe changes, all cited statements, and both project and Mathlib searches. No new nodes and no statement correction.",
+  "blueprint": "Realizes the interval-product assertion in lem-coef-join-slice-cocone-comparison proof step 3, descending from prop-coef-integral-exceptional-adjoint proof paragraph 2 via the existing blueprint.from chain. The biduality unit and chapter routes are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-feccd5fcf",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-feccd5fcf (reviewer sub-agent of L); spot-checked: I read the whole item (4 steps, no new nodes), the full statements of def-cbc-enhanced-diagrams-cones, lem-coef-joyal-functor-equivalence-test and lem-coef-joyal-model-structure, steps 2-4 of the citer lem-coef-join-slice-cocone-comparison, and the unit record. The statement (R x N(0~1) -> R is a categorical equivalence for every small R) is true (HTT Cor. 2.2.5.4) and is exactly what the citer's step 3 uses. Edge cases checked: R empty, R = Delta^0, non-quasicategory R, empty C. Step 1: mu = coordinatewise min on {0,1}-strings is simplicial and gives the contraction with endpoints s*pi and 1. Step 2: the test node's first assertion gives that D and E are quasicategories, and QP = 1 holds strictly. Step 3: I checked kappa_t's compatibility with gamma and the parameter naturality (1 x alpha) o kappa_{t alpha} = kappa_t o (1 x alpha), so K is simplicial with endpoints PQ and 1. Step 4: the 2-simplices 010 and 101 have degenerate long edges and give both inverse witnesses, so P is a coherent functor equivalence; (ii) => (iii) of the test then gives the test-functor definition. No cycle (64-node traversal of the cited nodes). Both statement nodes are in the same unit and def-cbc is a notion, so no tool_uses are needed. Not a target node, so the base-change and coefficient checks do not apply. Duplicate candidates (quasicategory-invertible-interval, joyal-homotopy-exponentials, segal-categorical-equivalence-dk, coarse-nerve-gluing, the pushout-product nodes) state different things. Mathlib has no Joyal categorical-equivalence notion. HTT and Cisinski are not local; the worker recorded them as WANTED and marked the proof as agent-written. No fixes."
  }
 }
