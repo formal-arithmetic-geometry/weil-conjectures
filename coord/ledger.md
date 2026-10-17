@@ -15705,3 +15705,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:34 L: returned deliver/R2/Sheaf.Paper.GeometricFieldProfiniteDenseSubsite (reviewer RETURN: (the landing tools, head a34bf3ac3) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 - 00:34 L: merged deliver/A3/Sheaf.AlgebraicGeometry.SmoothStrictLocalFieldModelCoeffData (stage 3; reviewer PASS; first push; landing 20261017T003412-L-3311904 (proof); batch 20261017T003410; modules 1; new nodes 0)
 - 00:34 L: merged deliver/A3/Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap (stage 3; reviewer PASS; after a return; landing 20261017T003413-L-3312155 (proof); batch 20261017T003410; modules 1; new nodes 0)
+- 00:34 L: merged deliver/B2/Sheaf.CategoryTheory.ModuleInverseImageAdjunction (stage 3; reviewer PASS; after a return; landing 20261017T003413-L-3312317 (proof); batch 20261017T003410; modules 1; new nodes 0)
