@@ -16,9 +16,129 @@
   "lem-weil-pbc-kinjective-shift",
   "lem-weil-pbc-adjunction-shift-compatibility-unique"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Q_Y,Q_X$ for localization, $v=f^*$ and $u=f_*$ on module sheaves. The module adjunction $v\\dashv u$ is supplied by [lem-weil-pbc-ringed-topoi-module-adjunction], and [lem-weil-pbc-termwise-adjunction-homotopy] supplies its termwise homotopy-category adjunction. Denote its Hom bijection by $T$, so $T(t)=u(t)\\circ\\eta^0_P$ for $t:vP\\to I$. For every integer $n$, $v(P[n])=(vP)[n]$ and $u(I[n])=(uI)[n]$: an additive functor carries $(-1)^n d$ to $(-1)^n$ times the image differential. The degree-$r$ component of the termwise unit at $P[n]$ is $\\eta^0_{P^{r+n}}$, the same as that of $\\eta^0_P[n]$. Consequently $T(t[n])=T(t)[n]$, including in homotopy classes.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules; termwise shift calculation expanded here"
+   }
+  },
+  {
+   "text": "Shifting preserves the resolution classes. For K-flat $P$ and any acyclic $E$, the map $\\operatorname{Tot}(E\\otimes P[n])\\to\\operatorname{Tot}(E\\otimes P)[n]$ multiplies the summand $E^i\\otimes P^{j+n}$ by $(-1)^{ni}$. In the first differential the signs agree because $(-1)^{n(i+1)}=(-1)^n(-1)^{ni}$; in the second differential both sides have sign $(-1)^{ni+i+n}$. This is an isomorphism, so the target and source are acyclic simultaneously. The definitions [def-pc-kflat-complex, def-pc-tensor-complex-sheaves] thus give K-flatness of $P[n]$; flatness of its terms is just reindexing. K-injective resolutions shift by [lem-weil-pbc-kinjective-shift]. Since $H^r(C[n])=H^{r+n}(C)$, shifted quasi-isomorphisms are quasi-isomorphisms. Localization commutes with these shifts by [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-kinjective-shift",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 06YL, definition-K-flat; explicit tensor signs; derived.tex Definition 070H and shift convention"
+   }
+  },
+  {
+   "text": "Let $\\alpha_P:LQ_YP\\to Q_XvP$ be the canonical left-derived comparison and $\\beta_I:Q_YuI\\to RQ_XI$ the right-derived comparison. The first is invertible for K-flat $P$ with flat terms by [lem-weil-pbc-ringed-topoi-derived-pullback]; the second is invertible for K-injective $I$ by [def-sfb-right-derived-functor]. Write $\\ell_A:L(A[n])\\to (LA)[n]$ and $r_B:R(B[n])\\to(RB)[n]$ for the comparisons in the item, with $n$ fixed. In the localization/termwise identifications of Steps 1–2 their defining equations on these representatives are\n$$\\alpha_P[n]\\circ\\ell_{Q_YP}=\\alpha_{P[n]},\\qquad r_{Q_XI}\\circ\\beta_{I[n]}=\\beta_I[n].$$\nThese equations also hold if $P,I$ differ from the chosen resolutions. Indeed, for a chosen resolution $p:P'\\to P$, naturality gives $Q_Xv(p)\\alpha_{P'}=\\alpha_P LQ_Y(p)$; both comparisons and $LQ_Y(p)$ are invertible. Apply this equality to $p[n]$ and cancel the same isomorphisms to obtain the first equation. For $I$, compare the chosen resolution $I\\to I'$ with the identity resolution of $I$. It is a homotopy equivalence by [lem-weil-pbc-kinjective-hom-derived], so naturality of $\\beta$, and then of its shifted version, gives the second equation by cancellation. Thus these are the specified resolution comparisons.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; Section 07A5; derived.tex Tag 070I; resolution-comparison equations expanded here"
+   }
+  },
+  {
+   "text": "Let $\\Phi_{A,B}:\\operatorname{Hom}(LA,B)\\to\\operatorname{Hom}(A,RB)$ be the canonical derived adjunction $L\\dashv R$. Apply [lem-pc-pre-derived-adjoint-functors-general] to $G=v,F=u$, with $M=P,K=I$ and both denominator morphisms identities. The cone leg is $\\alpha_P$, the cocone leg is $\\beta_I$. These legs represent the essentially constant systems of [lem-pc-derived-adjoint-functors]. For quasi-isomorphisms $t:P'\\to M$ put $u_t=\\alpha_{P'}L(Q_Yt)^{-1}$, a cone by naturality of $\\alpha$; take $t_0:P_0\\to M$ K-flat with flat terms [lem-pc-kflat-resolution] and $\\rho=L(Q_Yt_0)\\alpha_{P_0}^{-1}$, so $\\rho u_{t_0}=1$. Given $t$, cofilteredness and a further such resolution give $t_k:P_k\\to M$ with $P_k$ K-flat with flat terms and $a:P_k\\to P_0$, $b:P_k\\to P'$ over $M$; naturality of $\\alpha$ and invertibility of $\\alpha_{P_0},\\alpha_{P_k}$ give $u_t\\rho\\,Q_Xv(a)=Q_Xv(b)$, the transition map. Dually $p_s=R(Q_Xs)^{-1}\\beta_J$ for $s:I'\\to J$ is a representing cocone, using a K-injective resolution [prop-pur-kinjective-resolutions-exist]. At identity indices the legs are $\\alpha_P,\\beta_I$. The cited pre-derived node's normalization formula says, for a homotopy map $g:P\\to uI$, that $\\Phi^{-1}(\\beta_I Q_Yg)=Q_X(T^{-1}g)\\alpha_P$. Taking $g=T(t)$ gives\n$$\\Phi_{Q_YP,Q_XI}(Q_X(t)\\circ\\alpha_P)=\\beta_I\\circ Q_Y(T(t)).\\tag{*}$$\nThis formula covers every $a:LQ_YP\\to Q_XI$: $a\\alpha_P^{-1}$ has the form $Q_X(t)$ by the Hom bijection into K-injective $I$ of [lem-weil-pbc-kinjective-hom-derived], with $t:vP\\to I$ a homotopy class. Invertibility of $\\alpha_P$ is provided by [lem-weil-pbc-ringed-topoi-derived-pullback], and of $\\beta_I$ by [def-sfb-right-derived-functor]. No K-projectivity of $P$ or K-injectivity of $uI$ is used.",
+   "uses": [
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-pc-derived-adjoint-functors",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "def-sfb-right-derived-functor",
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0FND and 0DVC, canonical representative formula in lemma-pre-derived-adjoint-functors-general; Tag 09T5; Tag 070I"
+   }
+  },
+  {
+   "text": "For $A=Q_YP$, $B=Q_XI$ and $a=Q_X(t)\\alpha_P$, Step 3 gives $a[n]\\ell_A=Q_X(t[n])\\alpha_{P[n]}$. Formula $(*)$ for the shifted representatives, which are still in the resolution classes by Step 2, and $T(t[n])=T(t)[n]$ give\n$$\\begin{aligned}\n\\Phi_{A[n],B[n]}(a[n]\\ell_A)&=\\beta_{I[n]}Q_Y(T(t[n]))\\\\\n&=r_B^{-1}\\beta_I[n]Q_Y(T(t))[n]\\\\\n&=r_B^{-1}\\bigl(\\Phi_{A,B}(a)\\bigr)[n].\n\\end{aligned}$$\nThe second equality is precisely the right-hand comparison equation of Step 3. Every $a$ has the representation used here by Step 4, so this proves the displayed identity for all morphisms between these representatives.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND representative formula; explicit shifted calculation from Steps 1–4 (agent expansion)"
+   }
+  },
+  {
+   "text": "Every $A\\in D(R_Y)$ is isomorphic to $Q_YP$ for K-flat $P$ with flat terms by [lem-pc-kflat-resolution] and localization [def-weil-abstract-derived-category]. Every $B\\in D(R_X)$ is isomorphic to $Q_XI$ for K-injective $I$ by [prop-pur-kinjective-resolutions-exist]. Choose $h:Q_YP\\xrightarrow{\\sim}A$ and $k:Q_XI\\xrightarrow{\\sim}B$. For $a:LA\\to B$ put $a'=k^{-1}aL(h)$. Bifunctoriality of the adjunction gives $\\Phi(a')=R(k^{-1})\\Phi(a)h$. Naturality of $\\ell$ gives $a'[n]\\ell_{Q_YP}=k^{-1}[n](a[n]\\ell_A)L(h[n])$; naturality of $r$ gives $r_{Q_XI}^{-1}R(k^{-1})[n]=R(k^{-1}[n])r_B^{-1}$. Substitute these into Step 5 and cancel the precomposition by $h[n]$ and postcomposition by $R(k^{-1}[n])$. Hence, for all $A,B,a$,\n$$\\Phi_{A[n],B[n]}(a[n]\\ell_A)=r_B^{-1}\\bigl(\\Phi_{A,B}(a)\\bigr)[n].\\tag{**}$$\nThe only transport here is the displayed naturality equalities and cancellation of isomorphisms; it imposes no boundedness on either complex.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-abstract-derived-category",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS and Section 07A5; derived.tex Tag 0DVC bifunctoriality; explicit isomorphism cancellation"
+   }
+  },
+  {
+   "text": "In $(**)$ set $B=LA$ and $a=1_{LA}$. The definition of an adjunction Hom bijection gives $\\Phi_{A,LA}(1)=\\eta_A$ and $\\Phi_{A[n],(LA)[n]}(\\ell_A)=R(\\ell_A)\\eta_{A[n]}$. Thus\n$$r_{LA}\\circ R(\\ell_A)\\circ\\eta_{A[n]}=\\eta_A[n].$$\nThis is exactly compatibility with the unit as defined in [lem-weil-pbc-adjunction-shift-compatibility-unique]. The proof worked for each integer $n$, rather than only positive shifts.",
+   "uses": [
+    "lem-weil-pbc-adjunction-shift-compatibility-unique"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8D, lemma-adjoint-is-exact; unit specialization of the explicit Hom calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-adjunction-shift-compatibility-unique] (i) to the unit equality of Step 7. This gives, for every $B$,\n$$\\varepsilon_{B[n]}=\\varepsilon_B[n]\\circ\\ell_{RB}\\circ L(r_B).$$\nIts clause (ii) gives uniqueness of $r$ for the fixed $\\ell$, and identifies the inverse explicitly as\n$$r_B^{-1}=R(\\varepsilon_B[n])\\circ R(\\ell_{RB})\\circ\\eta_{(RB)[n]}.$$\nThe comparisons here are the canonical ones identified in Step 3. Existence of a compatible $r$ is Step 7, so for each $n$ the resolution comparison $r$ is the unique one compatible with the unit and $\\ell$. This proves both shift compatibility clauses and the claimed uniqueness; no coherence of $\\ell$ across different $n$ is used.",
+   "uses": [
+    "lem-weil-pbc-adjunction-shift-compatibility-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8D, lemma-adjoint-is-exact; abstract unit/counit and uniqueness clauses recorded in the cited Mathlib leaf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-kinjective-shift",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Tags 07A6 and 0FND/0DVC give the canonical adjunction; the comparison with resolution shifts is expanded explicitly, followed by Tag 0A8D and the existing Mathlib uniqueness leaf."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +181,45 @@
    "results": "CategoryTheory.InjectiveResolution.*; Functor.rightDerived_map_eq",
    "date": "2026-10-17",
    "verdict": "generalization: injective-resolution APIs, no ringed-topos projection statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived adjunction of sheaves on ringed topoi commutes with shifts of K flat and K injective resolutions",
+   "results": "CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans; CategoryTheory.sheafComposeNatIso; CategoryTheory.Adjunction.derived; CategoryTheory.Adjunction.derivedη; SheafOfModules.sheafificationCompPullback; CategoryTheory.Adjunction.derived_unit; CategoryTheory.Adjunction.derived'; CategoryTheory.Adjunction.derived'_unit",
+   "date": "2026-10-17",
+   "verdict": "generalization: abstract adjunction and shift APIs only; no ringed-topos resolution-comparison theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift|derivedη_fac_app|derivedε_fac_app",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "date": "2026-10-17",
+   "verdict": "no exact match: normalization equations exist, no derived CommShift theorem in this directory"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.CommShift",
+   "results": "CategoryTheory.Adjunction.CommShift.instId; CategoryTheory.Adjunction.CommShift; CategoryTheory.Adjunction.commShift_of_leftAdjoint; CategoryTheory.Adjunction.commShift_of_rightAdjoint; CategoryTheory.Adjunction.CommShift.commShift_counit; CategoryTheory.Adjunction.CommShift.commShift_unit; CategoryTheory.Adjunction.CommShift.mk'; CategoryTheory.Adjunction.CommShift.mk",
+   "date": "2026-10-17",
+   "verdict": "generalization: abstract adjunction and shift APIs only; no ringed-topos resolution-comparison theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adjunction on unbounded derived categories of ringed sites commutes with shifts via resolution comparison",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived adjunction between left and right derived functors has shift equivariant hom equivalence from resolutions",
+   "results": "CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; CategoryTheory.Adjunction.derived; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso; CategoryTheory.Adjunction.derived'; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+   "date": "2026-10-17",
+   "verdict": "generalization: abstract adjunction and shift APIs only; no ringed-topos resolution-comparison theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-ringed-projection-mate-exact",
@@ -83,5 +238,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-derived-adjunction-shift",
+  "worker": "stage1",
+  "summary": "Expanded the shift compatibility of the canonical ringed-topos derived adjunction via the normalized Hom bijection on K-flat sources and K-injective targets, explicit shift signs and comparison equations, naturality on arbitrary objects, then the existing Mathlib unit/counit uniqueness theorem. No new nodes and no statement change.",
+  "blueprint": "Realizes the first paragraph of lemma-weil-pbc-perfect-projection-formula: closure under shifts and the compatible projection-formula maps used under cones; supplies the canonical derived-adjunction ingredient of lem-weil-pbc-ringed-projection-mate-exact.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic normalized pre-derived Hom bijection; the proper-base-change unit does not supply its representative formula."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Generic everywhere-defined derived adjunction stipulated by the item; no replacement of the proper-base-change route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic resolution theorem for module sheaves needed to represent arbitrary source objects."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic additive adjunction on homotopy categories, used for its explicit termwise Hom formula."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic K-injective resolution theorem for module sheaves on small sites, needed to represent arbitrary targets and the cocone; no node of the proper-base-change unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-95db772c0",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-95db772c0 (reviewer sub-agent of L); spot-checked: The full item and every cited statement were read; the statement is unchanged and correct. It covers arbitrary small ringed sites, any (possibly non-flat) structure map and unbounded D of module sheaves. The conclusion matches clauses (i) and (ii) of lem-weil-pbc-adjunction-shift-compatibility-unique with the same unit orientation. Sources checked: Stacks 07A6 (sites-cohomology l.3990, adjunction only) and 0A8D (derived l.2290, mate formula for the right-adjoint shift). Step 2 shift signs recomputed and correct: summand multiplied by (-1)^{ni}, giving (-1)^{n(i+1)} on the first differential and (-1)^{ni+i+n} on the second. Steps 1, 3, 5, 6 and 7 checked line by line: T(t[n])=T(t)[n]; the resolution comparison equations; the domains in (**); naturality and cancellation; unit equation r R(l) eta=eta[n]. Edge cases checked: n=0, n<0, a non-flat ring map on the one-point topos, the zero ring. No duplicates: lem-weil-pbc-derived-adjunction-commshift is narrower (etale, D^+); lem-trf-adjoint-mate and lem-sc-pinned-projection-counit-exact-shift state other things. No new nodes. Three repairs in fixes/: (1) E5, Step 4 only asserted that alpha and beta are the representing cone and cocone legs of lem-pc-pre-derived-adjoint-functors-general and that the essential-constancy hypotheses hold. I wrote out the cone u_t=alpha L(Qt)^{-1} with retraction rho and the transition identity, plus the dual cocone p_s=R(Qs)^{-1}beta_J, and added uses lem-pc-kflat-resolution and prop-pur-kinjective-resolutions-exist. (2) E1, Step 8 invoked clause (iii), which needs a coherent CommShift structure on L that nobody proved and the statement does not need. It is replaced by existence from Step 7 plus uniqueness from (ii). (3) prop-pur-kinjective-resolutions-exist is off-route (sk-def-sf-operations) and was undeclared; I added it to split_report.tool_uses and accept it. The four declared tool_uses are accepted. Side note: lem-pc-derived-adjoint-functors has a placeholder proof citing new-* nodes; this item uses only its statement.; 1 file(s) fixed by the reviewer"
  }
 }
