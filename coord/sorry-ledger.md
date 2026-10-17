@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **1350**, closure **68**, holes in definitions **36**, definitions with undetermined data **27** (closure **0**).
+Holes now: library **1327**, closure **57**, holes in definitions **36**, definitions with undetermined data **27** (closure **0**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -27,16 +27,16 @@ Definitions with holes (def/instance/structure field):
 - `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic::AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp` (instance, line 390)
 - `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic::AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt` (instance, line 199)
 - `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic::AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme` (instance, line 183)
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible` (instance, line 396)
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidal_boundedConstructible` (instance, line 390)
+- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible` (instance, line 426)
+- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidal_boundedConstructible` (instance, line 420)
 - `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal::AlgebraicGeometry.ProEtale.CondensedRing.isIso_leftDerivedUpperStarTensor` (instance, line 343)
 - `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal::AlgebraicGeometry.ProEtale.CondensedRing.isLeftDerivedFunctor₂_upperStarTensor` (instance, line 302)
 - `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal::AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensorLeftCounit` (def, line 312)
 - `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal::AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar` (instance, line 370)
 - `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal::AlgebraicGeometry.ProEtale.CondensedRing.upperStarTensorCounit` (def, line 252)
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek::AlgebraicGeometry.ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj` (instance, line 186)
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek::AlgebraicGeometry.ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj` (instance, line 203)
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek::AlgebraicGeometry.ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj` (instance, line 194)
+- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek::AlgebraicGeometry.ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj` (instance, line 188)
+- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek::AlgebraicGeometry.ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj` (instance, line 205)
+- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek::AlgebraicGeometry.ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj` (instance, line 196)
 - `WeilConjectures.SmoothPurity.Defs::AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso` (def, line 88)
 - `WeilConjectures.TraceFormula.Slop.Basic::AlgebraicGeometry.ProEtale.CondensedRing.Slop.boundedConstructibleLowerShriekComp` (def, line 144)
 - `WeilConjectures.TraceFormula.Slop.Basic::AlgebraicGeometry.ProEtale.CondensedRing.Slop.unitEndRingEquiv` (def, line 159)
@@ -77,24 +77,24 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 1139 | 29 |
-| WeilConjectures | 211 | 39 |
+| Sheaf | 1118 | 20 |
+| WeilConjectures | 209 | 37 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 1678 | 824 | 854 | 725 | 19 |
-| 660345513 (Application of proof-dependency imports) | library | 1674 | 822 | 852 | 671 | 19 |
-| 660345513 (Application of proof-dependency imports) | closure | 1433 | 66 | 1367 | 604 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 1679 | 811 | 868 | 734 | 18 |
+| 660345513 (Application of proof-dependency imports) | library | 1675 | 809 | 866 | 680 | 18 |
+| 660345513 (Application of proof-dependency imports) | closure | 1434 | 56 | 1378 | 604 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3764 |
+| proved | 3774 |
 | decomposed | 52 |
 | moved | 4044 |
 | pruned | 134 |
-| other | 616 |
+| other | 618 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
 
@@ -103,42 +103,42 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | <unknown> | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | A2 | 123 | 121 | 89 | 32 | 63/123 (51.2%) |
 | A3 | 132 | 127 | 84 | 43 | 58/132 (43.9%) |
-| A4 | 77 | 81 | 52 | 29 | 39/77 (50.6%) |
+| A4 | 78 | 83 | 52 | 31 | 39/78 (50.0%) |
 | B2 | 134 | 140 | 88 | 52 | 55/134 (41.0%) |
-| B3 | 150 | 158 | 91 | 67 | 63/150 (42.0%) |
-| B4 | 71 | 74 | 47 | 27 | 32/71 (45.1%) |
-| C1 | 147 | 150 | 110 | 40 | 74/147 (50.3%) |
+| B3 | 151 | 159 | 91 | 68 | 63/151 (41.7%) |
+| B4 | 72 | 75 | 47 | 28 | 32/72 (44.4%) |
+| C1 | 148 | 151 | 110 | 41 | 74/148 (50.0%) |
 | C2 | 128 | 123 | 86 | 37 | 59/128 (46.1%) |
 | C3 | 120 | 125 | 80 | 45 | 56/120 (46.7%) |
-| C4 | 62 | 63 | 35 | 28 | 23/62 (37.1%) |
+| C4 | 63 | 64 | 35 | 29 | 23/63 (36.5%) |
 | D2 | 146 | 145 | 91 | 54 | 63/146 (43.2%) |
 | D3 | 117 | 135 | 72 | 63 | 52/117 (44.4%) |
 | D4 | 73 | 70 | 47 | 23 | 28/73 (38.4%) |
 | E1 | 162 | 191 | 107 | 84 | 82/162 (50.6%) |
 | E2 | 128 | 123 | 85 | 38 | 60/128 (46.9%) |
-| E3 | 119 | 134 | 95 | 39 | 59/119 (49.6%) |
+| E3 | 120 | 135 | 95 | 40 | 59/120 (49.2%) |
 | E4 | 54 | 61 | 27 | 34 | 19/54 (35.2%) |
 | F1 | 150 | 155 | 108 | 47 | 72/150 (48.0%) |
 | F2 | 152 | 164 | 99 | 65 | 62/152 (40.8%) |
 | F3 | 102 | 102 | 63 | 39 | 43/102 (42.2%) |
 | F4 | 65 | 61 | 43 | 18 | 29/65 (44.6%) |
 | G1 | 142 | 142 | 114 | 28 | 76/142 (53.5%) |
-| G2 | 140 | 138 | 91 | 47 | 63/140 (45.0%) |
+| G2 | 141 | 138 | 91 | 47 | 63/141 (44.7%) |
 | G3 | 103 | 106 | 66 | 40 | 45/103 (43.7%) |
-| G4 | 58 | 50 | 31 | 19 | 20/58 (34.5%) |
+| G4 | 59 | 50 | 31 | 19 | 20/59 (33.9%) |
 | H1 | 140 | 139 | 106 | 33 | 74/140 (52.9%) |
 | H2 | 114 | 111 | 92 | 19 | 66/114 (57.9%) |
 | H3 | 122 | 137 | 99 | 38 | 68/122 (55.7%) |
-| H4 | 59 | 56 | 42 | 14 | 31/59 (52.5%) |
+| H4 | 60 | 59 | 42 | 17 | 31/60 (51.7%) |
 | J1 | 125 | 133 | 75 | 58 | 53/125 (42.4%) |
-| J2 | 105 | 107 | 70 | 37 | 51/105 (48.6%) |
+| J2 | 106 | 108 | 70 | 38 | 51/106 (48.1%) |
 | J3 | 120 | 126 | 77 | 49 | 54/120 (45.0%) |
 | J4 | 62 | 53 | 40 | 13 | 27/62 (43.5%) |
 | K1 | 122 | 139 | 89 | 50 | 61/122 (50.0%) |
 | K2 | 123 | 121 | 84 | 37 | 65/123 (52.8%) |
 | K3 | 109 | 109 | 77 | 32 | 56/109 (51.4%) |
 | K4 | 66 | 53 | 35 | 18 | 24/66 (36.4%) |
-| M1 | 141 | 144 | 92 | 52 | 65/141 (46.1%) |
+| M1 | 142 | 147 | 92 | 55 | 65/142 (45.8%) |
 | M2 | 131 | 135 | 104 | 31 | 70/131 (53.4%) |
 | M3 | 109 | 111 | 72 | 39 | 52/109 (47.7%) |
 | M4 | 46 | 50 | 24 | 26 | 17/46 (37.0%) |
@@ -156,7 +156,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | Q4 | 48 | 51 | 27 | 24 | 21/48 (43.8%) |
 | R1 | 126 | 129 | 98 | 31 | 67/126 (53.2%) |
 | R2 | 123 | 131 | 75 | 56 | 52/123 (42.3%) |
-| R3 | 97 | 94 | 65 | 29 | 42/97 (43.3%) |
+| R3 | 98 | 95 | 65 | 30 | 42/98 (42.9%) |
 | R4 | 60 | 51 | 41 | 10 | 26/60 (43.3%) |
 | S1 | 124 | 126 | 106 | 20 | 69/124 (55.6%) |
 | S2 | 125 | 130 | 102 | 28 | 66/125 (52.8%) |
@@ -208,24 +208,24 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 |---|---:|---:|---|
 | WeilConjectures.PoincareDuality.Poincare | 0 | 1 | G3 |
 | WeilConjectures.SmoothPurity.Defs | 0 | 1 | G1 |
-| WeilConjectures.PoincareDuality.Verdier | 1 | 1 | G4 |
-| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek | 1 | 3 | G2 |
-| WeilConjectures.PoincareDuality.ProjectionFormula | 2 | 5 | C1 |
-| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible | 2 | 5 | A4 |
+| WeilConjectures.PoincareDuality.Verdier | 1 | 1 | D2 |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek | 1 | 3 | C1 |
+| WeilConjectures.PoincareDuality.ProjectionFormula | 2 | 5 | — |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible | 2 | 3 | B4 |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition | 2 | 2 | H2 |
 | WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory | 3 | 1 | C4 |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs | 3 | 2 | C3 |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic | 3 | 7 | C2 |
-| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal | 3 | 5 | — |
-| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence | 4 | 3 | H4 |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal | 3 | 5 | A3 |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence | 4 | 3 | — |
 | Sheaf.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal | 5 | 1 | XR291a8355654e3127 |
 | Sheaf.Paper.CondensedQbarPullbackCube | 5 | 5 | E1 |
 | Sheaf.Paper.StrictHenselizationPointEvaluationPointed | 5 | 1 | D4 |
 | WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal | 5 | 2 | D3 |
-| Sheaf.AlgebraicGeometry.CondensedQbarScalarBasisSections | 6 | 1 | B4 |
 | Sheaf.Paper.CoefficientExchangeFromComparisons | 7 | 3 | A4 |
-| Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine | 8 | 1 | — |
-| Sheaf.Paper.CondensedFiniteFamilyHomDescent | 9 | 1 | C1 |
+| Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine | 8 | 1 | B2 |
+| Sheaf.Paper.FiniteDiscreteCoefficientSquareCoherence | 10 | 1 | XRaf46747ed5a82c85 |
+| Sheaf.Paper.IntegralResidueTensorRouteModel | 11 | 1 | A2 |
 
 Modules pruned since the imports baseline:
 
