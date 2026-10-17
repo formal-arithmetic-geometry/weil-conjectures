@@ -15746,3 +15746,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:10 L: merged deliver/E3/Sheaf.Paper.StrictHenselizationPointEvaluationComparison (stage 3; reviewer PASS; after a return; landing 20261017T011040-L-3883151 (proof); batch 20261017T011037; modules 1; new nodes 0)
 - 01:10 L: merged deliver/E3/WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal (stage 3; reviewer PASS; after a return; landing 20261017T011040-L-3883286 (proof); batch 20261017T011037; modules 1; new nodes 0)
 - 01:10 L: merged deliver/K2/Sheaf.AlgebraicGeometry.CoherentStalkMapExtends (stage 3; reviewer PASS; after a return; landing 20261017T011041-L-3883422 (proof); batch 20261017T011037; modules 1; new nodes 0)
+- 01:10 L: merged deliver/M1/Sheaf.AlgebraicGeometry.TorsionLocalModelRestriction (stage 3; reviewer PASS; after a return; landing 20261017T011041-L-3883533 (proof); batch 20261017T011037; modules 1; new nodes 0)
