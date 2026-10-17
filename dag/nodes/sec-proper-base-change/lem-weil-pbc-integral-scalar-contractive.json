@@ -12,12 +12,14 @@
  ],
  "proof": [
   {
-   "text": "Generalize the proved continuous-ring comparison construction from CondensedFieldLfpLocalTriviality to any totally disconnected topological ring in Type 0. Define its adjoint using the existing profiniteTestProjection |X[S]|→S and reuse profiniteTestProjection_natural from the same module. It is a ring homomorphism. On an affine weakly contractible test object, the point-components comparison and unchanged sheafification sections make it an isomorphism; the affine weakly contractible covering family detects that it is an isomorphism on all test objects. Import and reuse its existing generic projection naturality, point-components target naturality, affine weakly contractible detection and pushforward-ring helpers; only the coefficient-ring generalization is proved here.",
+   "text": "Construct the continuous-ring comparison by adjunction from composition with the existing profiniteTestProjection, reusing its naturality and the pushforward-ring and affine weakly contractible detection helpers of CondensedFieldContinuousRealization. For an affine Spec R, explicitly identify maps to Spec LC(S,Z) with continuous maps to S: the forward map is the first spectrum coordinate, and the inverse is Spec of LocallyConstant.liftPrimeSpectrum (Int.castRingHom R). For the inverse law, localize at every prime. The characteristic idempotent of the fibre of a locally constant function maps to one, so the function equals its constant value locally; equality in all prime localizations proves equality in R. Transport along the affine isoSpec and the already proved relativeMapEquiv, then use the connected-components universal property. Projection naturality gives target naturality of this normalized correspondence. Bundle the actual component quotient using pointLanComponents and use the proved generic kanTerminal lemma: the inverse image of its identity is terminal in the Kan indexing category. Its composite with the test projection is the component quotient. Thus the Kan comparison is bijective, since continuous functions into a totally disconnected coefficient ring factor uniquely and continuously through connected components. The existing weakly contractible sheafification theorem makes the sheafification unit invertible. Left-adjoint uniqueness identifies the original comparison with this sheafified Kan comparison. Affine weakly contractible covers detect the resulting isomorphism globally.",
    "uses": [
+    "lem-weil-pbc-locally-constant-prime-spectrum",
     "lem-weil-pbc-proetale-point-components-maps",
+    "lem-weil-pbc-point-lan-affine-evaluation",
     "lem-weil-pbc-proetale-sheafification-wcontractible-sections",
     "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-    "lem-weil-pbc-condensed-lfp-local-triviality"
+    "lem-weil-pbc-condensed-field-continuous-realization"
    ],
    "elementary": false
   },
@@ -40,17 +42,19 @@
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-locally-constant-prime-spectrum",
   "lem-weil-pbc-proetale-point-components-maps",
+  "lem-weil-pbc-point-lan-affine-evaluation",
   "lem-weil-pbc-proetale-sheafification-wcontractible-sections",
   "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-  "def-weil-pbc-continuous-integral-coefficients",
-  "lem-weil-pbc-condensed-lfp-local-triviality"
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "def-weil-pbc-continuous-integral-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemma 4.2.12, Section 6.8, continuous coefficient realization and integral units",
-  "note": "Fully proved. Only the already proved continuous comparison helpers are generalized from the field-local-triviality module; its remaining finite-free-cover sorry is neither copied nor used. The comparison is constructed, not chosen from an existence sorry. Return repair: generic coefficient-independent helpers are imported directly from CondensedFieldLfpLocalTriviality rather than copied. No field local-freeness assertion is applied. Fresh second reading: also remove the renamed projection construction and its naturality proof, using existing profiniteTestProjection and profiniteTestProjection_natural directly."
+  "note": "K1 repair, 2026-10-17: closes comparison_basis_isIso without new sorries. Reconstructs the normalized affine map correspondence from the current, proved liftPrimeSpectrum API instead of the removed profiniteLocallyConstantHomEquiv and canonicalComponentArrow helpers. Reuses generic kanTerminal, relativeMapEquiv, componentMapEquiv and the comparison/detection support already in the library. The comparison is an actual construction with proved inverse laws; no data is chosen from an undetermined existence theorem. Uses the existing point-components theorem only for the profinite structure on the actual quotient, and the existing weakly contractible sheafification theorem as a dependency. Local field freeness is not used."
  },
  "mathlib_searches": [
   {
@@ -124,13 +128,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261015T235420-L-3518326",
-  "kind": "interface",
+  "landing": "20261017T003423-L-3315826",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
