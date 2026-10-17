@@ -27,16 +27,115 @@
   "lem-coef-joyal-model-structure",
   "lem-coef-cartesian-mapping-simplex-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We first fix the mapping-space comparison used below. Write $\\mathfrak C$ for the subset-poset coherent realization. For a quasicategory $Z$, [lem-coef-coherent-nerve-comparison] gives a locally Kan replacement $\\mathfrak C[Z]\\to R\\mathfrak C[Z]$, fixing objects, and its Quillen equivalence gives a categorical equivalence $u_Z:Z\\to N_{\\mathrm{hc}}R\\mathfrak C[Z]$: it is adjoint to the weak equivalence $\\mathfrak C[Z]\\to R\\mathfrak C[Z]$, with cofibrant source $Z$ and fibrant target. By [lem-coef-joyal-quasicategory-characterizations], $u_Z$ is a functor equivalence. By [lem-cbc-enhanced-functor-cone-calculus] it induces equivalences of mapping spaces. The enriched-mapping comparison of [lem-coef-coherent-nerve-comparison] therefore gives a natural zigzag of weak homotopy equivalences between $\\mathfrak C[Z](a,b)$ and $\\operatorname{Map}_Z(a,b)$; its composition compatibility is the composition compatibility explicitly included in that node, together with functoriality of $u_Z$.\n\nConsequently, if $r>0$, $p:Z\\to\\Delta^r$ is an inner fibration of quasicategories, $e:b\\to c$ is $p$-cartesian over $r-1\\to r$, and $p(a)\\leq r-1$, then postcomposition\n$$\\mathfrak C[Z](a,b)\\longrightarrow\\mathfrak C[Z](a,c)$$\nis a weak homotopy equivalence. Here is the dualization and base calculation: reversing ordered vertices interchanges the last-horn cartesian condition with the first-horn cocartesian condition, so apply [lem-coef-infinity-cocartesian-mapping-criterion] to $p^{\\mathrm{op}}$ and $e^{\\mathrm{op}}$. In the subset-poset formula reversal identifies $\\mathfrak C[W^{\\mathrm{op}}]$ with $\\mathfrak C[W]^{\\mathrm{op}}$: a subset is sent to its reversed subset and union composition becomes opposite composition. The preceding natural mapping-space comparisons thus turn that criterion into a homotopy pullback square on the enriched mapping homotopy types, with bottom row from $\\mathfrak C[\\Delta^r](p(a),r-1)$ to $\\mathfrak C[\\Delta^r](p(a),r)$. Each is the nerve of a subset poset with least element consisting of its endpoints, hence contractible (adjoining that least element gives a contraction of the nerve). A homotopy pullback over these contractible spaces has equivalent upper corners. This proves the asserted postcomposition equivalence; no claim is made that the unreplaced enriched mapping sets are Kan.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, Theorem 2.2.5.1 and the composition-compatible mapping comparison; cartesian dual of the existing cocartesian mapping criterion. Preparatory argument for Proposition 3.2.2.10."
+   }
+  },
+  {
+   "text": "Use the simplex, operator, marking and vertex-fiber construction clauses of [lem-coef-cartesian-mapping-simplex-presentation]. We prove by induction on $r\\geq0$ that every map satisfying the hypotheses over $\\Delta^r$ is a categorical equivalence, without yet making arbitrary base changes. For $r=0$ the mapping simplex is $A_0$ and the map is the assumed fibre equivalence. For $r>0$ put $H=\\Delta^{\\{0,\\ldots,r-1\\}}$, $Y_-=Y\\times_{\\Delta^r}H$, $Y_+=Y_r$, $M_-=M(A_0\\leftarrow\\cdots\\leftarrow A_{r-1})$ and $M_+=A_r$. Restricting $q$ gives maps $q_-:M_-\\to Y_-$ and $q_+:A_r\\to Y_r$. The map $Y_-\\to H$ is a cartesian fibration: each horn problem projects to one for $p$ with the prescribed simplex of $H$, and its filler pairs with that simplex; a cartesian lift of an edge of $H$ also pairs with that edge, and its last-horn fillers pair in the same way. Its total simplicial set is a quasicategory, since an inner horn projects to one in $H$, is filled there, and then lifts through the inner fibration. The restriction $q_-$ preserves the specified marked edges and has exactly the original fibre maps. Thus the induction hypothesis applies to $q_-$; the hypothesis at $r$ applies to $q_+$.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-cartesian-mapping-simplex-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.2.10, induction and initial-face restriction; elementary horn-pullback verification."
+   }
+  },
+  {
+   "text": "Put $C=\\mathfrak C[M]$, $D=\\mathfrak C[Y]$ and $F=\\mathfrak C[q]$. The full enriched subcategories on vertices over $0,\\ldots,r-1$ are exactly $\\mathfrak C[M_-]$ and $\\mathfrak C[Y_-]$, and those on vertices over $r$ are $\\mathfrak C[A_r]$ and $\\mathfrak C[Y_r]$. To check fullness from the coherent-realization definition, a generator from vertices $i$ to $j$ of a simplex uses only the subinterval $[i,j]$ and its subsets. Projecting that interval to $[r]$ is monotone. If its endpoints lie in the initial face, that whole interval lies there; if both project to $r$, it lies in the final fibre. A composite word cannot leave either region and return, and the simplex face/degeneracy and union relations restrict to the same relations in that region. There are no generators or words going from the final region to the initial one. Hence both $C,D$ have empty mapping sets in that direction. By [lem-coef-rigidification-equivalence-detection], the categorical equivalences $q_-,q_+$ from step 2 give Dwyer--Kan equivalences on these two full enriched subcategories. Thus $F$ induces weak homotopy equivalences on all same-region mapping sets and is essentially surjective on each region. The only mapping sets not yet checked go from an initial-region vertex to a final-region vertex.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-rigidification-equivalence-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.2.10, the decomposition into initial and final full enriched subcategories; explicit generator argument for fullness."
+   }
+  },
+  {
+   "text": "Let $x\\in C_-$ and $y\\in C_+$, and regard $y$ as a vertex of $A_r$. Let $y'\\in A_{r-1}$ be its image and $e:y'\\to y$ the marked edge with second coordinate $s_0y$. The enriched functor $F$ gives a strictly commuting square whose top and bottom maps are respectively $[e]\\circ-:C(x,y')\\to C(x,y)$ and $[q(e)]\\circ-:D(Fx,Fy')\\to D(Fx,Fy)$, and whose vertical maps are those induced by $F$ on the indicated mapping sets. The left vertical map is a weak homotopy equivalence by step 3. The top map is a weak homotopy equivalence by [lem-coef-mapping-simplex-final-edge], since $x$ lies before the final fibre; its statement allows arbitrary simplicial sets $A_i$. The edge $q(e)$ is $p$-cartesian by the assumption that $q$ carries every marked edge to a $p$-cartesian edge and $p(qx)\\leq r-1$, so the bottom map is a weak homotopy equivalence by step 1. The two composites around the square agree, so their bijections on components and isomorphisms on all based homotopy groups make the right vertical map a weak homotopy equivalence as well.",
+   "uses": [
+    "lem-coef-mapping-simplex-final-edge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.2.10, mixed mapping-set square, using Lemma 3.2.2.9; source printed p. 184 (PDF page 202)."
+   }
+  },
+  {
+   "text": "Every object of $D$ belongs to one of its two regions. The essential surjectivity of the restricted functors in step 3 therefore supplies, for every object of $D$, an isomorphism in $\\pi_0D$ to some $F$-image. All mapping sets are weakly equivalent under $F$: the same-region cases were checked in step 3, the forward mixed cases in step 4, and the reverse mixed cases are the identity of empty simplicial sets. This is precisely a Dwyer--Kan equivalence as defined in [lem-coef-coherent-nerve-comparison]. By [lem-coef-rigidification-equivalence-detection], $q$ is a categorical equivalence. This completes the dimension induction, using no assertion about arbitrary pullbacks during that induction.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-rigidification-equivalence-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Conclusion of Proposition 3.2.2.10, detection by coherent realization."
+   }
+  },
+  {
+   "text": "Use the same construction clauses of [lem-coef-cartesian-mapping-simplex-presentation]. For an arbitrary simplex $\\sigma:\\Delta^r\\to\\Delta^n$, write its monotone vertex map as $\\alpha:[r]\\to[n]$. The pullback $M(A)\\times_{\\Delta^n}\\Delta^r$ is the mapping simplex for $B_j=A_{\\alpha(j)}$, with transition the composite original transition; repeated values of $\\alpha$ give identity transitions. Indeed its $k$-simplices are exactly $(\\beta,a)$ with $\\beta:[k]\\to[r]$ and $a\\in(A_{\\alpha\\beta(k)})_k$, and its operators are exactly the original restriction followed by the indicated chain transition. This is an isomorphism in every degree, commuting with all operators. The specified marked edges remain the edges with degenerate second coordinate. The pullback $Y_\\sigma\\to\\Delta^r$ is a cartesian fibration by the horn-and-pairing argument in step 2, including cartesian lifts and quasicategory total space. A marked edge maps to the pair of the original $p$-cartesian edge and its specified base edge; its last-horn lifts again pair, so it is cartesian in the pullback. Its fibre maps are precisely $A_{\\alpha(j)}\\to Y_{\\alpha(j)}$, all categorical equivalences. Steps 2-5 therefore apply in dimension $r$ to prove that $q_\\sigma$ is a categorical equivalence. This includes noninjective $\\alpha$; no fibrancy assumption on the $A_i$ has been introduced.",
+   "uses": [
+    "lem-coef-cartesian-mapping-simplex-presentation",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.2.2.2 and the paragraph following Proposition 3.2.2.8: explicit mapping-simplex pullback formula and preservation of the quasi-equivalence hypotheses."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-simplexwise-categorical-base-change] to $M(A)\\xrightarrow{q}Y\\xrightarrow{p}\\Delta^n$. Step 6 verifies its hypothesis for every standard simplex over the base. It follows that $q_T$ is a categorical equivalence for every small $T\\to\\Delta^n$, with no restriction that $T$ be a quasicategory or that this map be injective. If $T$ is empty both pullbacks are empty. If $n=0$, the induction begins with the given fibre equivalence, and the same simplexwise argument still proves its product/base-change assertion; it is not inferred from unproved right properness. If some fibres are empty, the corresponding quantifications over their vertices and mapping-set pairs are empty and essential surjectivity on that region still follows from the given fibre equivalence. All constructions stay in a universe containing the given small simplicial sets.",
+   "uses": [
+    "lem-cbc-simplexwise-categorical-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.2.2.7(2), obtained from Proposition 3.2.2.8 and the dimension induction of Proposition 3.2.2.10."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "def-coef-infinity-fibrations",
+  "lem-coef-cartesian-mapping-simplex-presentation",
+  "lem-coef-rigidification-equivalence-detection",
+  "lem-coef-mapping-simplex-final-edge",
+  "lem-cbc-simplexwise-categorical-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "place": "Auxiliary foundation below the opening compactification choice, following the proof of HTT Proposition 3.2.2.7(2) through 3.2.2.8-3.2.2.10, read online. HTT is not archived under literature/; WANTED recorded in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
    "query": "quasiEquivalence|mappingSimplex|mapping.simplex|categoricalEquivalence",
    "results": "{\"t\": \"2026-10-16T21:39:44Z\", \"tool\": \"grep\", \"query\": \"quasiEquivalence|mappingSimplex|mapping.simplex|categoricalEquivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
-   "verdict": "no match: the returned declarations concern ordinary fibered categories, homotopy categories of simplicial sets, subcomplexes, Kan fibrations, or model-category cylinders; none states the quasicategorical mapping-simplex comparison."
+   "verdict": "no match: this query returned zero hits."
   },
   {
    "tool": "leansearch",
@@ -65,10 +164,45 @@
    "results": "{\"t\": \"2026-10-16T21:39:45Z\", \"tool\": \"leanfinder\", \"query\": \"Universal categorical equivalence of iterated mapping cylinders presenting a cartesian fibration over the simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cylinder.instIsFibrantIOfIsVeryGood\", \"HomotopicalAlgebra.Cylinder.trans\", \"HomotopicalAlgebra.Cylinder.IsVeryGood.fibration_π\", \"HomotopicalAlgebra.Cylinder.instIsFibrantIOfFactorizationDataOfIsStableUnderCompositionFibrations\", \"HomotopicalAlgebra.Cylinder.IsVeryGood\", \"HomotopicalAlgebra.Cylinder.IsGood\", \"HomotopicalAlgebra.Cylinder.instIsGoodTrans\", \"HomotopicalAlgebra.Cylinder.instIsVeryGoodOfFactorizationData\"], \"digest\": \"4c5ed5ba4e4426d0\"}",
    "date": "2026-10-16",
    "verdict": "no match: the returned declarations concern ordinary fibered categories, homotopy categories of simplicial sets, subcomplexes, Kan fibrations, or model-category cylinders; none states the quasicategorical mapping-simplex comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingSimplex|mapping.simplex|quasiEquivalence|categoricalEquivalence",
+   "results": "{\"t\": \"2026-10-16T22:39:55Z\", \"tool\": \"grep\", \"query\": \"mappingSimplex|mapping.simplex|quasiEquivalence|categoricalEquivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: this query returned zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base changes of a mapping simplex quasi-equivalence to a cartesian fibration are categorical equivalences",
+   "results": "{\"t\": \"2026-10-16T22:39:55Z\", \"tool\": \"leansearch\", \"query\": \"Base changes of a mapping simplex quasi-equivalence to a cartesian fibration are categorical equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"CategoryTheory.TwoSquare.isIso_lanBaseChange_app\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HasFibers.instIsEquivalenceFibFiberInducedFunctor\"], \"digest\": \"92ceb8a6325570ab\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are ordinary fibre-category equivalences, standard-simplex/homotopy-category formulas, generic cylinders, or Kan-Quillen fibrations. None states the universal categorical comparison for mapping simplices."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Equivalence\"",
+   "results": "{\"t\": \"2026-10-16T22:39:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Equivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"SSet.opEquivalence\", \"SSet.opEquivalence_functor\", \"SSet.opEquivalence_inverse\", \"SSet.opEquivalence_counitIso\", \"SSet.opEquivalence_unitIso\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.equivalence\", \"SSet.Truncated.FundamentalGroupoid.equivalenceFreeGroupoid\", \"SSet.Truncated.instIsEquivalenceFundamentalGroupoidMapFundamentalGroupoidOfIsIsoOfNatNat\"], \"digest\": \"14f64800d0a906a4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are ordinary fibre-category equivalences, standard-simplex/homotopy-category formulas, generic cylinders, or Kan-Quillen fibrations. None states the universal categorical comparison for mapping simplices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-equivalence from a mapping simplex to a cartesian fibration is a categorical equivalence after every simplicial base change",
+   "results": "{\"t\": \"2026-10-16T22:39:57Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi-equivalence from a mapping simplex to a cartesian fibration is a categorical equivalence after every simplicial base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsEquivalenceαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"SSet.hoFunctor.unitHomEquiv\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"SimplexCategory.SkeletalFunctor.isEquivalence\", \"CategoryTheory.SimplicialObject.cechNerveEquiv\"], \"digest\": \"63c744875d7a85fd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are ordinary fibre-category equivalences, standard-simplex/homotopy-category formulas, generic cylinders, or Kan-Quillen fibrations. None states the universal categorical comparison for mapping simplices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal categorical equivalence of iterated mapping cylinders presenting a cartesian fibration over the simplex",
+   "results": "{\"t\": \"2026-10-16T22:41:26Z\", \"tool\": \"leanfinder\", \"query\": \"Universal categorical equivalence of iterated mapping cylinders presenting a cartesian fibration over the simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cylinder.instIsFibrantIOfIsVeryGood\", \"HomotopicalAlgebra.Cylinder.trans\", \"HomotopicalAlgebra.Cylinder.IsVeryGood.fibration_π\", \"HomotopicalAlgebra.Cylinder.instIsFibrantIOfFactorizationDataOfIsStableUnderCompositionFibrations\", \"HomotopicalAlgebra.Cylinder.IsVeryGood\", \"HomotopicalAlgebra.Cylinder.IsGood\", \"HomotopicalAlgebra.Cylinder.instIsGoodTrans\", \"HomotopicalAlgebra.Cylinder.instIsVeryGoodOfFactorizationData\"], \"digest\": \"4c5ed5ba4e4426d0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits are ordinary fibre-category equivalences, standard-simplex/homotopy-category formulas, generic cylinders, or Kan-Quillen fibrations. None states the universal categorical comparison for mapping simplices."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-cartesian-mapping-simplex-comparison",
@@ -88,5 +222,54 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-mapping-simplex-universal-equivalence",
+  "worker": "stage1",
+  "summary": "Repaired returned head 712da5e48a against the current DAG: revalidated the corrected mapping-simplex construction interface and narrowed its two quotations to the actual construction clauses. Reused the now-existing lem-coef-mapping-simplex-final-edge and removed the unlanded duplicate. The seven-step HTT dimension induction, enriched two-region decomposition, mixed mapping-set square and explicit noninjective simplex pullback remain in the item. Only the generic simplexwise detection theorem is newly stated, unsplit; zero Mathlib leaves. Statement and unit route unchanged.",
+  "blueprint": "Opening compactification-choice sentence of thm-cbc-finite-level-proetale, through the existing coherent-choice ancestry; specifically the underlying categorical comparison needed by lem-cbc-cartesian-mapping-simplex-comparison. The blueprint paragraph does not itself state the auxiliary result.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-coherent-nerve-comparison",
+    "why": "Generic coherent realization, locally Kan replacement and composition-compatible mapping comparison; not supplied by the compact-support unit."
+   },
+   {
+    "node": "lem-coef-joyal-quasicategory-characterizations",
+    "why": "Generic characterization of categorical equivalences between quasicategories as coherent functor equivalences, used for the derived-unit mapping comparison."
+   },
+   {
+    "node": "lem-coef-infinity-cocartesian-mapping-criterion",
+    "why": "Generic mapping-square criterion for a cartesian edge after explicit opposite dualization; the unit has no such mapping criterion."
+   },
+   {
+    "node": "lem-coef-cartesian-mapping-simplex-presentation",
+    "why": "Existing mapping-simplex construction and operator formula; used as a notion, without invoking its presentation or marked-equivalence conclusion."
+   },
+   {
+    "node": "lem-coef-rigidification-equivalence-detection",
+    "why": "Generic equivalence-detection theorem for coherent realization, used to convert the inductive categorical statements and the final Dwyer--Kan equivalence."
+   },
+   {
+    "node": "lem-coef-mapping-simplex-final-edge",
+    "why": "Generic final-edge enriched mapping-set equivalence, HTT Lemma 3.2.2.9, for arbitrary simplicial chains. It replaces an unlanded duplicate in step 4; the compact-support unit does not supply this mapping calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-cartesian-mapping-simplex-presentation",
+  "lem-coef-rigidification-equivalence-detection",
+  "lem-coef-mapping-simplex-final-edge"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-cfb7e13cf",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-cfb7e13cf (reviewer sub-agent of L); spot-checked: I read the whole item, the new node and every cited statement, plus HTT §3.2.2 pp.179-184 (Def 3.2.2.6, Props 3.2.2.7-3.2.2.10, Lemma 3.2.2.9). The item statement is unchanged from the base (checked against the base file read-only) and matches 3.2.2.7(2) clause by clause. New node lem-cbc-simplexwise-categorical-base-change is exactly HTT 3.2.2.8; I tested it with S empty, S a point (where it holds because categorical equivalences are stable under products) and T empty. Its harder direction uses cell induction and left properness, so it is a real lemma and not a restated clause. B1-B9 pass and the searches are recorded. An rg duplicate search found no match: marked-mapping-simplex-descent, cocartesian-categorical-base-change, infinity-cellular-natural-equivalence and joyal-filtered-equivalences are all different statements. Step checks: step 1 gets the u_Z zigzag from the Quillen equivalence, the characterizations and cone-calculus, dualizes the cocartesian criterion through the subset reversal C[Z^op]=C[Z]^op, and the poset nerves in the bottom row are contractible. Step 2 states the induction with base and step, and its horn-pairing checks are elementary. In step 3 the restricted subcategories are full by a monotonicity argument on words, and the detection node gives the DK equivalences. Step 4 cites lem-coef-mapping-simplex-final-edge with the same M, the same e and x before the final fibre, and the bottom map comes from step 1 because q(e) is cartesian. Step 5 covers all mapping pairs and gives a DK equivalence, hence a categorical equivalence by detection. Step 6 is the Remark 3.2.2.2 pullback formula, valid also for noninjective alpha. Step 7 applies the new node. proof_deps equals the union of the uses lists, there is no cycle (checked by reachability), and no SGA is used. I accept the six declared tool_uses from sk-prop-sf-biduality-general as generic black boxes. The worker's note that HTT p.183 swaps the inductive-hypothesis and assumption labels is correct. No fixes needed."
  }
 }
