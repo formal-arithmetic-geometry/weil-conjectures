@@ -264,5 +264,23 @@
     }
    ]
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8ff3ee460",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Checked every clause of the WeilOne.lean statement against the node and the main-20261015 sk-thm-weil1 source: finite type is QuasiCompact+LocallyOfFiniteType on f; normalized integral A,B with B*Z=A; integral lift with constant coefficient 1; Q(T) membership via the def-weil-rational-power-series witness formula; Euler product over Mathlib closedPoints with degreeOver in the Pi topology. No stronger assumptions; the shared universe u is forced by the recorded zeta API. Edge cases checked: empty scheme, Spec k, Spec F_{q^r}, A^1, nonreduced and nonseparated schemes. nt_compile (local side overlay) is clean apart from sorry; axioms show the single sorry. A probe derived the Euler clause from upstream zetaSeries_eq_tprod plus finitePoints_eq_closedPoints. Node differs from the shared node only in lean; lean.statement is verbatim in the file; no definitions; docstrings carry the source place, the blueprint tag and both proof steps; the declaration name is fresh and existing upstream theorems are partial only; the report has Worker report and Second reading by Q45 sections. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilOne",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.zetaSeries_rational_and_eulerProduct",
+  "file": "lean/Sheaf/Paper/WeilOne.lean",
+  "statement": "theorem Hom.zetaSeries_rational_and_eulerProduct {k : Type u} [Field k] [Finite k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [QuasiCompact f] [LocallyOfFiniteType f] : (∃ A B : Polynomial ℤ, B.coeff 0 = 1 ∧ (B.map (Int.castRingHom ℚ) : PowerSeries ℚ) * f.zetaSeries = (A.map (Int.castRingHom ℚ) : PowerSeries ℚ)) ∧ ((∃ Z : PowerSeries ℤ, PowerSeries.constantCoeff Z = 1 ∧ PowerSeries.map (Int.castRingHom ℚ) Z = f.zetaSeries) ∧ (∃ P Q : Polynomial ℚ, Q.coeff 0 ≠ 0 ∧ (Q : PowerSeries ℚ) * f.zetaSeries = (P : PowerSeries ℚ))) ∧ f.zetaSeries = ∏' x : closedPoints X, (1 - PowerSeries.X ^ f.degreeOver x.1 : PowerSeries ℚ)⁻¹",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
