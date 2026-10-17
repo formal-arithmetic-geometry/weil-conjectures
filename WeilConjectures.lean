@@ -4485,11 +4485,14 @@ public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ClosedPullbackLimi
 public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ExtensionZeroProducts
 public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.Sequence
 public import WeilConjectures.SixFunctors.ProEtale.RingSheaf.BaseChange
+public import WeilConjectures.SixFunctors.ProEtale.RingSheaf.BaseChangeIso
 public import WeilConjectures.SixFunctors.ProEtale.RingSheaf.Defs
+public import WeilConjectures.SixFunctors.ProEtale.RingSheaf.DerivedLimits
 public import WeilConjectures.SixFunctors.ProEtale.RingSheaf.Limits
 public import WeilConjectures.SixFunctors.ProEtale.RingSheaf.OpenBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.RingSheaf.OpenClosed
 public import WeilConjectures.SixFunctors.ProEtale.RingSheaf.ProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.RingSheaf.UpperStarSquare
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
