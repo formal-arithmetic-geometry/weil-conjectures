@@ -138,5 +138,41 @@
   "group": "Q71",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-5ea60db1b (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-trf-oriented-slice-localization, every cited statement, the user lem-trf-oriented-product-points-conservative, unit sk-i-curve-zero, main-20261015 lem-trf-local-term-locality, and Illusie–Laszlo–Orgogozo Exp. XI 1.7–1.12, 2.1–2.5 with the proof of 2.5, and 2.7 (printed pp. 174–181). The new node is ILO XI 1.10(b) (equivalence (1.b) and localization arrow (1.c)) for a representable triple. Its object is H_Z=(U→V←W)^a=p1^*U×_{(gp2)^*V}p2^*W, matching the explicit formula of the universal node. It adds no hypotheses, is true for every triple, and is statement-only. It is a more general, separately sourced theorem rather than a restatement of an item clause, since steps 2–3 prove the other two clauses. Duplicate search found nothing that states it: rg for oriented/overleftarrow/localiz/slice/h_U; nearest are the global universal node, the pointed affine-neighbourhood limit, and lem-weil-pbc-localized-sheaves-over-representable (one site only). Step 1 takes exactly what the new node states. Step 3 is correct: the terminal slice object is id_{H_Z}, so sections are Hom(H_Z,F)=Hom(h_Z,F)=F(Z) by the sheafification adjunction and Yoneda, naturally in F. Edge case U=∅: both sides are degenerate and F(Z) is a singleton, which is consistent. Step 2 follows the construction in the proof of ILO 2.5: affine final objects, affine fibre products, type-(c) base change stays affine, PT1 holds, and finite composites are finite. FIX (C1/C3): step 2 identified Sh of the affine triple site with U_Et⃖×_{V_Et}W_Et without citing the independence-of-sites clause of lem-trf-oriented-product-universal, and used 'affine fibre products are affine' and 'étale is stable under base change' with no node. I added lem-trf-oriented-product-universal (same unit, already a stmt_dep), lem-weil-pbc-fibre-product-affine-spectra and lem-weil-pbc-etale-scheme-base-change (both mathlib leaves) to step 2's uses and proof_deps. I rewrote the step text to check that the affine sites meet that node's hypotheses and to spell out quasi-compactness/coherence. A cycle check is acyclic. I also added the missing lean_audit {none,none} to the new node. No tool_uses are needed: lem-weil-pbc-affine-etale-site-topos is slopmaster2-closed, and the other off-unit citations are mathlib leaves. Minor point, not changed: the inherited statement uses 'coherent' with no definition node; step 2 now proves it in the SGA 4 VI 2.4.5 sense. Nothing dropped.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-866c75448",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, universes, edge cases, docstrings, route-pivot compliance, report sections, and compiler evidence checked; no substantive findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.OrientedAffineSliceSite",
+  "file": "lean/Sheaf/CategoryTheory/Sites/OrientedAffineSliceSite.lean",
+  "declaration": "CategoryTheory.oriented_affine_slice_site",
+  "declarations": [
+   "CategoryTheory.schemeEtaleSite",
+   "CategoryTheory.schemeEtaleDown",
+   "CategoryTheory.schemeEtaleBaseChange",
+   "CategoryTheory.schemeOrientedProductTopology",
+   "CategoryTheory.orientedTripleRepresentable",
+   "CategoryTheory.sliceInverseImage",
+   "CategoryTheory.sliceProjection",
+   "CategoryTheory.geometricSliceProjection",
+   "CategoryTheory.tripleFirstToMiddle",
+   "CategoryTheory.tripleSecondToMiddle",
+   "CategoryTheory.sliceTerminal",
+   "CategoryTheory.affineTripleProperty",
+   "CategoryTheory.affineTripleTopology",
+   "CategoryTheory.affineGeneratorFamily",
+   "CategoryTheory.sliceSectionEvaluation",
+   "CategoryTheory.oriented_affine_slice_site"
+  ],
+  "statement": "theorem oriented_affine_slice_site {X Y S : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (Z : OrientedProduct.Triples (schemeEtaleBaseChange f) (schemeEtaleBaseChange g)) [IsAffine ((schemeEtaleDown X).obj Z.left.1).left] [IsAffine ((schemeEtaleDown Y).obj Z.left.2).left] [IsAffine ((schemeEtaleDown S).obj Z.right).left] : ∃ (e : CostructuredArrow (𝟭 (Sheaf (schemeOrientedProductTopology f g) (Type (u + 1)))) (orientedTripleRepresentable f g Z) ≌ Sheaf (schemeOrientedProductTopology (tripleFirstToMiddle f g Z) (tripleSecondToMiddle f g Z)) (Type (u + 1))), Nonempty (e.functor ⋙ geometricSliceProjection (orientedTripleRepresentable f g Z) e ≅ sliceProjection (orientedTripleRepresentable f g Z)) ∧ HasFiniteLimits (affineTripleProperty f g Z).FullSubcategory ∧ (∀ (T : (affineTripleProperty f g Z).FullSubcategory) (R : Sieve T), R ∈ affineTripleTopology f g Z T → ∃ (I : Type (u + 1)) (_ : Finite I) (E : I → (affineTripleProperty f g Z).FullSubcategory) (r : ∀ i, E i ⟶ T), affineGeneratorFamily f g Z T E r ∧ Sieve.generate (Presieve.ofArrows E r) ∈ affineTripleTopology f g Z T ∧ Sieve.generate (Presieve.ofArrows E r) ≤ R) ∧ Nonempty (Sheaf (affineTripleTopology f g Z) (Type (u + 1)) ≌ Sheaf (schemeOrientedProductTopology (tripleFirstToMiddle f g Z) (tripleSecondToMiddle f g Z)) (Type (u + 1))) ∧ (∀ (F : Sheaf (schemeOrientedProductTopology f g) (Type (u + 1))), Function.Bijective (sliceSectionEvaluation f g Z F) ∧ (∀ {G : Sheaf (schemeOrientedProductTopology f g) (Type (u + 1))} (α : F ⟶ G) (s : sliceTerminal (orientedTripleRepresentable f g Z) ⟶ (sliceInverseImage (orientedTripleRepresentable f g Z)).obj F), sliceSectionEvaluation f g Z G (s ≫ (sliceInverseImage (orientedTripleRepresentable f g Z)).map α) = α.hom.app (Opposite.op Z) (sliceSectionEvaluation f g Z F s)))",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
