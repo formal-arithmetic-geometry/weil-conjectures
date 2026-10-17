@@ -12,43 +12,313 @@
   "def-weil-finite-type-morphism",
   "def-weil-closed-immersion",
   "def-trf-log-regular-pair",
-  "def-weil-regular-scheme"
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-over-noetherian] over the field $F$ to see that $V$ is Noetherian. For any point $p$ of $V$ or of one of the given smooth intersections, [lem-weil-pbc-geometric-regularity-smooth-field-criterion], with the field extension $F/F$, makes its ordinary local ring regular. For a geometric point over $p$, [lem-exc-affine-strict-local-ring-comparison], applied to an affine open containing $p$, identifies the strict local ring (the pointed-neighbourhood colimit) with an algebraic strict henselization of the ordinary local ring relative to the separable closure of $\\kappa(p)$ in $\\Omega$, compatibly with the maps from the affine coordinate ring. That strict henselization is regular by [lem-sc-strict-henselization-regular]. Thus both ordinary and strict local rings used below are Noetherian regular local rings. For each smooth codimension-one component $Z_i\\hookrightarrow V$, use the codimension-one case of [lem-pur-smooth-pair-local-coordinates] to obtain a local equation $t_i$ generating its ideal and a nonzerodivisor. These are separate applications to individual components, not simultaneous coordinate choices. Around a fixed geometric point $\\bar v$ on $r$ components, take a common open neighbourhood $W$ for these finitely many equations, and remove all components not through $\\bar v$. On $W$ the complement $U$ of $|Z|$ is $D(T)$, where $T=t_1\\cdots t_r$ (empty product $1$).",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-sc-strict-henselization-regular",
+    "lem-pur-smooth-pair-local-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 0BIA, lemma-strict-normal-crossings, converse: first choose individual effective Cartier equations. Regularity: varieties.tex Tag 038X, lemma-geometrically-regular-smooth; more-algebra.tex Tag 06LN, lemma-henselization-regular; coordinates: more-morphisms.tex Tag 0FUE, lemma-etale-local-structure. Stalk comparison: etale-cohomology.tex Tag 04HX, lemma-describe-etale-local-ring."
+   }
+  },
+  {
+   "text": "Fix any point $p\\in W$ and let $J=\\{i:t_i(p)=0\\}$, $s=|J|$. Put $R=\\mathcal O_{W,p}$, with maximal ideal $\\mathfrak m$, residue field $\\kappa$, and $d=\\dim R$. The scheme-theoretic intersection $Y_J$ has local ring $R/I$, where $I=(t_i:i\\in J)$, and it is regular by Step 1. The smooth codimension-$s$ hypothesis says that the local topological dimensions of $W$ and $Y_J$ at $p$ differ by $s$. Apply [lem-weil-pbc-dimension-at-point-local-ring-trdeg] to affine neighbourhoods in both schemes: their residue fields at $p$ agree, so subtracting the identical transcendence-degree terms gives $\\dim(R/I)=d-s$. By [lem-weil-pbc-regular-local-cotangent-dimension], the natural surjection $\\mathfrak m/\\mathfrak m^2\\to(\\mathfrak m/I)/(\\mathfrak m/I)^2$ has kernel $(I+\\mathfrak m^2)/\\mathfrak m^2$ of dimension $s$. The $s$ classes of the specified $t_i$ span this kernel because they generate $I$; they are therefore linearly independent. Extend them to a $\\kappa$-basis of $\\mathfrak m/\\mathfrak m^2$, and lift the remaining basis vectors to $R$. By [lem-weil-pbc-nakayama-local-generators] the resulting $d$ elements generate $\\mathfrak m$, hence form a regular system of parameters. This proves the simultaneous assertion for the actual component equations. For $J=\\varnothing$, $I=0$ and the argument just chooses a parameter system of $R$.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "lem-weil-pbc-regular-local-cotangent-dimension",
+    "lem-weil-pbc-nakayama-local-generators",
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 0BIA, lemma-strict-normal-crossings, converse, with the local-dimension subtraction from algebra.tex Tag 00P1, lemma-dimension-at-a-point-finite-type-field, and cotangent basis argument as in Tag 00NR, lemma-regular-quotient-regular. Nakayama: Tag 00DV, lemma-NAK."
+   }
+  },
+  {
+   "text": "At a geometric point $\\bar w$ over $p$, let $A$ be the strict local ring; by [lem-exc-affine-strict-local-ring-comparison] it is, as an algebra over the affine coordinate ring, an algebraic strict henselization $R^{\\mathrm{sh}}$ of $R$, so the chosen elements of the coordinate ring have the same images in both. The canonical cotangent isomorphism of [lem-sc-strict-henselization-cotangent-dimension] takes the basis just chosen to a basis after extending the residue field. Apply [lem-weil-pbc-nakayama-local-generators] to the maximal ideal of the Noetherian local ring $A$. Those same $d$ elements generate it. Since $A$ is regular by Step 1, [lem-weil-pbc-regular-local-cotangent-dimension] gives $\\dim A=d$. Thus $(t_i:i\\in J)$ is part of a regular system of parameters of $A$. Now [lem-weil-pbc-regular-local-generators-regular-sequence] yields that $A/(t_i:i\\in J)$ is regular of dimension $\\dim A-s$. This argument applies at every $\\bar w$ of $W$, with its own set $J$, rather than assuming a fixed number of components through all points.",
+   "uses": [
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-sc-strict-henselization-cotangent-dimension",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-regular-local-cotangent-dimension",
+    "lem-weil-pbc-regular-local-generators-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06LN, lemma-henselization-regular, proof (minimal generators remain minimal); algebra.tex Tag 00NQ, lemma-regular-ring-CM."
+   }
+  },
+  {
+   "text": "Use the stalk and divisorial definitions [def-trf-log-regular-pair, def-weil-pbc-geometric-stalks]. At $\\bar w$, the inclusion $M\\subset\\mathcal O_W$ identifies $M_{\\bar w}$ with precisely $\\{f\\in A:f\\text{ is a unit in }A[1/T]\\}$. Indeed a germ of a divisorial section has an affine pointed etale representative $\\operatorname{Spec}B\\to W$; its inverse on $D(T)\\subset\\operatorname{Spec}B$ gives an inverse in $B[1/T]$ and hence in $A[1/T]$. Conversely represent $f\\in A$ at such a neighbourhood. If $f$ is invertible in $A[1/T]$, there are $g\\in A$ and $n\\ge0$ with $fg=T^n$: a localization inverse gives this after multiplication by a power of $T$. The elements and this one equality descend to a common pointed etale neighbourhood, since $A$ is its ring colimit. There $f$ is invertible on $D(T)$, so represents a section of $M$. Equality of two such germs in $A$ likewise means equality after refinement; thus this identification is injective as well. The same finite inverse equation shows that the stalk of $\\mathcal O_W^\\times$ is $A^\\times$.",
+   "uses": [
+    "def-trf-log-regular-pair",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, 1.4, printed p. 69; explicit finite-witness calculation of its divisorial stalk."
+   }
+  },
+  {
+   "text": "The sections $t_i$ define $\\alpha:P=\\mathbf N^r\\to M(W)$. At $\\bar w$ put $K=\\{1,\\ldots,r\\}\\setminus J$. The $t_i$ for $i\\in K$ are units in $A$; those for $i\\in J$ form part of a parameter system by Step 3. Apply [lem-trf-regular-local-ufd-boundary-factorization] to $A$ and the latter tuple. Step 4 then gives $M_{\\bar w}=\\{u\\prod_{i\\in J}t_i^{a_i}:u\\in A^\\times,\\ a_i\\ge0\\}$. The parameters are pairwise nonassociate: association would make two of their cotangent basis vectors proportional. Unique factorization makes this expression unique, including the unit coefficient. Since a product in a commutative ring is a unit only if each factor is a unit, $\\alpha^{-1}(A^\\times)=\\mathbf N^K$. In the chart pushout, absorb each unit coordinate into the coefficient: $(n,u)\\mapsto(n|_J,u\\prod_{i\\in K}t_i^{n_i})$. This identifies $P\\oplus_{\\mathbf N^K}A^\\times$ with $\\mathbf N^J\\oplus A^\\times$, and the displayed unique expression identifies the latter with $M_{\\bar w}$. This proves the full pushout condition of [def-trf-log-regular-pair] at every point of the one chart. Consequently $\\overline M_{\\bar w}\\cong\\mathbf N^J$; only at the chosen centre is $J=\\{1,\\ldots,r\\}$ and its rank $r$.",
+   "uses": [
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "def-trf-log-regular-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, 1.1, 1.4 and 1.5(i), printed pp. 69–70; the local factorization input is more-algebra.tex Tag 0AG0, lemma-regular-local-UFD."
+   }
+  },
+  {
+   "text": "For $J=\\{i:t_i(p)=0\\}$, a monomial in Step 5 is a nonunit exactly when at least one exponent with index in $J$ is positive. Thus the ideal generated by all images of nonunits of $M_{\\bar w}$ is exactly $I_{\\bar w}=(t_i:i\\in J)$: every nonunit is divisible by one such $t_i$, and each such $t_i$ is itself a nonunit section. Step 3 supplies regularity of $A/I_{\\bar w}$ and $\\dim A=\\dim(A/I_{\\bar w})+|J|$. Step 5 gives group completion $\\mathbf Z^J$, of rank $|J|$. This verifies precisely the quotient and dimension conditions of [def-trf-log-regular-pair], also when $J$ is empty.",
+   "uses": [
+    "def-trf-log-regular-pair"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, 1.2 and 1.5(i), printed pp. 69–70."
+   }
+  },
+  {
+   "text": "The monoid $\\mathbf N^r$ is generated by its basis, embeds in $\\mathbf Z^r$, and is saturated there: if $na$ has every coordinate nonnegative for $n>0$, so does $a$. Hence the charts constructed above are fine saturated. Step 5 shows the log structure is trivial exactly where $J$ is empty, namely $U$. The open $U$ is dense: at each ordinary local ring, which is a domain by [lem-sc-regular-local-domain], the local product of boundary parameters is nonzero and its distinguished open contains the generic point. This includes the empty-divisor case $T=1$. Together with Step 6, the definition [def-trf-log-regular-pair] proves log regularity. At $\\bar v$ the parameter and quotient claims are Steps 2–3 and its characteristic is $\\mathbf N^r$ by Step 5.",
+   "uses": [
+    "lem-sc-regular-local-domain",
+    "def-trf-log-regular-pair"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, 1.1–1.5(i), printed pp. 69–70; algebra.tex Tag 00NP, lemma-regular-domain."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-log-regular-pair",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-regular-system-of-parameters",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-pur-smooth-pair-local-coordinates",
+  "lem-sc-regular-local-domain",
+  "lem-sc-strict-henselization-cotangent-dimension",
+  "lem-sc-strict-henselization-regular",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-weil-pbc-regular-local-generators-regular-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI, 1.1–1.5(i); expanded using Stacks 0BIA, 0FUE, 00P1, 00KU, 00DV, 06LN, 00NQ and 0AG0. The cotangent and stalk/pushout arguments are supplied explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A smooth scheme with a strict normal crossings divisor is a log regular pair.",
-   "results": "{\"t\": \"2026-10-17T15:53:19Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth scheme with a strict normal crossings divisor is a log regular pair.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\"], \"digest\": \"bb908a2da0c60570\"}; Read the returned signatures: the smooth-chart, normalization, regular-sequence dimension and manifold results do not define divisorial log regularity or prove this logarithmic-geometric assertion. No match.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "normalCrossing|normal_crossing|strict.*crossing|sncDivisor",
-   "results": "{\"t\": \"2026-10-17T15:53:20Z\", \"tool\": \"grep\", \"query\": \"normalCrossing|normal_crossing|strict.*crossing|sncDivisor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: the smooth-chart, normalization, regular-sequence dimension and manifold results do not define divisorial log regularity or prove this logarithmic-geometric assertion. No match.",
-   "date": "2026-10-17",
+   "query": "A smooth finite type scheme with a reduced effective Cartier divisor whose smooth components meet transversely has local chart N^r for the divisorial log structure and is log regular",
+   "results": "top=['AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth', 'AlgebraicGeometry.IsSmooth.exists_isStandardSmooth', 'AlgebraicGeometry.IsSmoothOfRelativeDimension', 'AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension', 'AlgebraicGeometry.IsSmooth', 'AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension', 'AlgebraicGeometry.isSmooth_iff', 'AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion']; note=",
+   "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"normalCrossings\"",
-   "results": "{\"t\": \"2026-10-17T15:53:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalCrossings\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: the smooth-chart, normalization, regular-sequence dimension and manifold results do not define divisorial log regularity or prove this logarithmic-geometric assertion. No match.",
-   "date": "2026-10-17",
+   "query": "LogRegular, NormalCrossing, Divisorial",
+   "results": "top=[]; note=loogle: unknown identifier 'LogRegular'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalCrossing|normal_crossing|logRegular|divisorial",
+   "results": "top=[]; note=",
+   "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "A reduced divisor with smooth transverse intersections on a smooth scheme defines a logarithmically regular divisorial log structure.",
-   "results": "{\"t\": \"2026-10-17T15:53:28Z\", \"tool\": \"leansearch\", \"query\": \"A reduced divisor with smooth transverse intersections on a smooth scheme defines a logarithmically regular divisorial log structure.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsReduced.mk\", \"AlgebraicGeometry.IsReduced.of_openCover\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsReduced.component_reduced\"], \"digest\": \"f60543c6f39f13aa\"}; Read the returned signatures: the smooth-chart, normalization, regular-sequence dimension and manifold results do not define divisorial log regularity or prove this logarithmic-geometric assertion. No match.",
-   "date": "2026-10-17",
+   "query": "Regular local equations for smooth transverse divisor components form a monomial chart for the divisorial log structure",
+   "results": "top=['AlgebraicGeometry.IsSmooth.recOn', 'AlgebraicGeometry.IsSmooth.casesOn', 'IsManifold.locallyRingedSpace', 'Algebra.smoothLocus', 'AlgebraicGeometry.IsSmooth.exists_isStandardSmooth', 'smoothSheafCommRing.instLocalRing_stalk', 'AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth', 'Algebra.IsStandardSmooth.localization_away']; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At a point of a regular scheme where r smooth divisor components meet transversely, the divisorial log structure has characteristic monoid N^r and regular stratum quotient",
+   "results": "top=['AlgebraicGeometry.IsSmooth.exists_isStandardSmooth', 'AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension', 'Algebra.smoothLocus', 'Algebra.IsSmoothAt', 'Algebra.smoothLocus_eq_compl_support_inter', 'Algebra.IsSmoothAt.exists_notMem_smooth', 'Algebra.IsSmoothAt.exists_notMem_isStandardSmooth', 'Algebra.IsStandardSmooth.relativeDimension']; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, IsSmooth, CartierDivisor",
+   "results": "top=[]; note=loogle: unknown identifier 'IsSmooth'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularLocalRing|strictNormalCrossings|CartierDivisor",
+   "results": "top=[]; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*parameter|transverse|normal.*cross",
+   "results": "top=[]; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "UniqueFactorization|UFD|factorial",
+   "results": "top=['Mathlib/RingTheory/Bezout.lean', 'Mathlib/RingTheory/Bezout.lean', 'Mathlib/RingTheory/Binomial.lean', 'Mathlib/RingTheory/Binomial.lean', 'Mathlib/RingTheory/Binomial.lean', 'Mathlib/RingTheory/Binomial.lean', 'Mathlib/RingTheory/Binomial.lean', 'Mathlib/RingTheory/Localization/NumDen.lean']; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "regular local ring is a unique factorization domain",
+   "results": "top=['IsDiscreteValuationRing.of_ufd_of_unique_irreducible', 'PrincipalIdealRing.to_uniqueFactorizationMonoid', 'IsDiscreteValuationRing.HasUnitMulPowIrreducibleFactorization.toUniqueFactorizationMonoid', 'UniqueFactorizationMonoid.instIsIntegrallyClosed', 'UniqueFactorizationMonoid.iff_exists_prime_mem_of_isPrime', 'tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain', 'IsPrincipalIdealRing.of_isDedekindDomain_of_uniqueFactorizationMonoid', 'IsDiscreteValuationRing.aux_pid_of_ufd_of_unique_irreducible']; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth transverse intersections give local regular parameters for divisor components",
+   "results": "top=['AlgebraicGeometry.IsSmooth.exists_isStandardSmooth', 'AlgebraicGeometry.isSmoothOfRelativeDimension_comp', 'AlgebraicGeometry.IsSmooth.casesOn', 'AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth', 'AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension', 'AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension', 'Algebra.Smooth.exists_span_eq_top_isStandardSmooth', 'AlgebraicGeometry.IsSmooth.recOn']; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularSystemOfParameters, IsRegularLocalRing",
+   "results": "top=[]; note=loogle: unknown identifier 'IsRegularSystemOfParameters'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, UniqueFactorizationMonoid",
+   "results": "top=[]; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian regular local ring is a unique factorization domain and every height-one prime is principal",
+   "results": "top=['tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain', 'IsDedekindRing', 'IsDedekindDomainDvr', 'IsDedekindDomain', 'IsDedekindDomain.isPrincipalIdealRing', 'IsDedekindDomainDvr.isDedekindDomain', 'IsDedekindDomain.isDedekindDomainDvr', 'IsPrincipalIdealRing.of_isDedekindDomain_of_uniqueFactorizationMonoid']; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth transverse divisor components have local equations forming part of a regular system of parameters at every geometric point",
+   "results": "top=['Algebra.Smooth.exists_span_eq_top_isStandardSmooth', 'Algebra.IsStandardSmooth', 'AlgebraicGeometry.IsSmooth.exists_isStandardSmooth', 'RingHom.Smooth.locally_isStandardSmooth', 'AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension', 'Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial', 'Algebra.smoothLocus', 'Algebra.IsSmoothAt']; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular local ring is a unique factorization domain and local equations in a regular parameter system factor monomials",
+   "results": "top=['IsDiscreteValuationRing.HasUnitMulPowIrreducibleFactorization', 'IsDiscreteValuationRing.HasUnitMulPowIrreducibleFactorization.toUniqueFactorizationMonoid', 'IsDiscreteValuationRing.ofHasUnitMulPowIrreducibleFactorization', 'PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit', 'IsDiscreteValuationRing.HasUnitMulPowIrreducibleFactorization.of_ufd_of_unique_irreducible', 'PowerSeries.IsWeierstrassFactorization.elim', 'PowerSeries.instUniqueFactorizationMonoidOfIsPrincipalIdealRingOfIsDomain', 'PowerSeries.IsWeierstrassFactorization.unique']; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "UniqueFactorizationMonoid, IsRegularLocalRing",
+   "results": "top=[]; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.local.*UFD|UniqueFactorizationMonoid|factorial",
+   "results": "top=['Mathlib/RingTheory/PrincipalIdealDomain.lean', 'Mathlib/RingTheory/PrincipalIdealDomain.lean', 'Mathlib/RingTheory/PowerSeries/Exp.lean', 'Mathlib/RingTheory/PowerSeries/Exp.lean', 'Mathlib/RingTheory/PowerSeries/Exp.lean', 'Mathlib/RingTheory/PowerSeries/Exp.lean', 'Mathlib/RingTheory/PowerSeries/Exp.lean', 'Mathlib/RingTheory/PowerSeries/Ideal.lean']; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "regular local ring is a unique factorization domain",
+   "results": "top=['IsDiscreteValuationRing.of_ufd_of_unique_irreducible', 'PrincipalIdealRing.to_uniqueFactorizationMonoid', 'IsDiscreteValuationRing.HasUnitMulPowIrreducibleFactorization.toUniqueFactorizationMonoid', 'UniqueFactorizationMonoid.instIsIntegrallyClosed', 'UniqueFactorizationMonoid.iff_exists_prime_mem_of_isPrime', 'tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain', 'IsPrincipalIdealRing.of_isDedekindDomain_of_uniqueFactorizationMonoid', 'IsDiscreteValuationRing.aux_pid_of_ufd_of_unique_irreducible']; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularLocalRing|smooth.*regular",
+   "results": "top=[]; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSmooth, IsRegularLocalRing",
+   "results": "top=[]; note=loogle: unknown identifier 'IsSmooth'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The strict local ring of a smooth finite type scheme over an algebraically closed field is regular",
+   "results": "top=['AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth', 'Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing', 'AlgebraicGeometry.IsSmooth.exists_isStandardSmooth', 'AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension', 'Algebra.IsSmoothAt.exists_notMem_isStandardSmooth', 'AlgebraicGeometry.Scheme.instFieldCarrierResidueField', 'Algebra.IsSmoothAt', 'Algebra.IsSmoothAt.exists_notMem_smooth']; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The strict local ring of a smooth finite type scheme over an algebraically closed field is regular",
+   "results": "top=['AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth', 'Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing', 'AlgebraicGeometry.IsSmooth.exists_isStandardSmooth', 'AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension', 'Algebra.IsSmoothAt.exists_notMem_isStandardSmooth', 'AlgebraicGeometry.Scheme.instFieldCarrierResidueField', 'Algebra.IsSmoothAt', 'Algebra.IsSmoothAt.exists_notMem_smooth']; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSmooth, IsRegularLocalRing",
+   "results": "top=[]; note=loogle: unknown identifier 'IsSmooth'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularLocalRing|smooth.*regular",
+   "results": "top=[]; note=",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth finite type scheme over a field has regular strict local rings",
+   "results": "top=['AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth', 'AlgebraicGeometry.IsSmooth.casesOn', 'AlgebraicGeometry.Scheme.mk.noConfusion', 'AlgebraicGeometry.IsSmooth.recOn', 'AlgebraicGeometry.IsSmooth', 'AlgebraicGeometry.IsSmooth.mk', 'AlgebraicGeometry.isSmooth_iff', 'Algebra.IsSmoothAt']; note=",
+   "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-pair-projective-resolution",
@@ -60,7 +330,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), nearby-duality alteration reduction; The smooth base and relative strict normal crossings divisor input to the nodal resolution step.",
+   "place": "Historical blueprint lem-trf-local-term-locality, proof (1) and (2), specialization to the normal cone (§§1.3–1.4): the nearby-duality geometric input expanded through lem-trf-trace-specialization → lem-trf-specialization-cohomological-comparison → lem-trf-nearby-cycle-verdier-duality → lem-trf-plurinodal-alteration → lem-trf-nodal-pair-projective-resolution. This node supplies the smooth normal-crossings base case of the last reduction; it does not assert that the current blueprint explicitly states this auxiliary chart theorem.",
    "via": [
     "lem-trf-nodal-pair-projective-resolution",
     "lem-trf-plurinodal-alteration",
@@ -71,5 +341,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-snc-divisorial-log-chart",
+  "worker": "stage1",
+  "summary": "Repairs all return points: proves simultaneous component parameters by codimension, cotangent dimensions and Nakayama; replaces strict-local regularity child by existing tools; computes divisorial stalks by finite localization witnesses and chart pushouts with varying component sets; corrects the retained UFD child source and full blueprint ancestry. The item statement is unchanged.",
+  "blueprint": "Historical blueprint lem-trf-local-term-locality, proof (1) and (2), specialization to the normal cone (§§1.3–1.4): the nearby-duality geometric input expanded through lem-trf-trace-specialization → lem-trf-specialization-cohomological-comparison → lem-trf-nearby-cycle-verdier-duality → lem-trf-plurinodal-alteration → lem-trf-nodal-pair-projective-resolution. This node supplies the smooth normal-crossings base case of the last reduction; it does not assert that the current blueprint explicitly states this auxiliary chart theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-smooth-pair-local-coordinates",
+    "why": "Only the separate codimension-one smooth immersions use this generic coordinate tool; no simultaneous-coordinate conclusion is taken from it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Finiteness tool to verify the locally Noetherian hypothesis of the log-pair definition."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+    "why": "Use its smooth-to-regular direction with the identity field extension, for the ambient scheme and smooth intersections."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Generic strict-local regularity tool, replacing the redundant new child."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "why": "Generic local dimension formula converts the given codimension of smooth intersections to a local-ring dimension difference."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-cotangent-dimension",
+    "why": "Converts regularity into cotangent dimensions for the simultaneous-parameter argument."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-local-generators",
+    "why": "Lifts a cotangent basis to generators of a Noetherian maximal ideal."
+   },
+   {
+    "node": "lem-sc-strict-henselization-cotangent-dimension",
+    "why": "Preserves the specified parameter basis when passing to a strict local ring."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Regular quotient and exact dimension drop for a parameter prefix."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Checks density of the open boundary complement in regular local rings."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Identifies the geometric stalk of the structure sheaf (pointed-neighbourhood colimit) with the algebraic strict henselization to which the strict-henselization regularity and cotangent tools apply (Stacks 04HX); no node of sk-i-curve-zero states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-smooth-pair-local-coordinates",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-geometric-regularity-smooth-field-criterion",
+  "lem-sc-strict-henselization-regular",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-sc-strict-henselization-cotangent-dimension",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-sc-regular-local-domain",
+  "lem-exc-affine-strict-local-ring-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-7f7385495",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-7f7385495 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full, along with the ILO VI 1.1–1.5 and Stacks 0AG0/04HX sources; the seven-step proof is correct. Step 2 shows the actual component equations form part of a regular system of parameters: the dimension formula gives dim R/I = d−s, so their cotangent classes are independent, and Nakayama lifts an extended basis. Step 3 passes this to the strict local ring through the cotangent isomorphism, Nakayama and the regular-sequence lemma. Step 4 identifies the divisorial stalk by one finite inverse equation. Step 5 builds the pushout chart at each point with characteristic N^J; Steps 6 and 7 cover the ideal, rank, fs, triviality locus and density. Edge cases checked: empty Z, dimension 0, one divisor, the axes in A^2 (ranks 2, 1, 0 from one chart) and nonclosed points. The intersection hypothesis is read scheme-theoretically, as in 0BIA and as Step 2 states; with the reduced reading, two tangent curves would be a counterexample. The new node lem-trf-regular-local-ufd-boundary-factorization is true (0AG0 plus fg=T^n factoring), statement-only and self-contained with a correct source. It is not a duplicate (DAG grep for UFD/factorial/0AG0; this Mathlib has no regular-local UFD) and does not restate a clause of the item. Fault repaired (C1): Steps 1 and 3 used the identification of the geometric stalk with the algebraic strict henselization (Stacks 04HX) without a node. They now cite the existing reviewed lem-exc-affine-strict-local-ring-comparison, added to proof_deps and to tool_uses with a reason; it creates no cycle. Statement unchanged; no node dropped. I accept the declared tool uses as generic tools; no SGA source is cited.; 1 file(s) fixed by the reviewer"
  }
 }
