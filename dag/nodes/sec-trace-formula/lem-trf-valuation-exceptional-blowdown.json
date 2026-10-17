@@ -24,9 +24,117 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $Z=C_z$ and $x=f(z)$. The semistable source $Y$ has geometrically reduced geometric fibres. Because $T=\\operatorname{Spec}V$ is normal integral and affine, [lem-trf-geometrically-reduced-eta-normal] applies to $Y\\to T$: it gives that $Y$ is reduced and $\\eta$-normal. The normalization $Y^\\nu\\to Y$ supplied by [lem-trf-valuation-curve-projective-preparation] is a finite $\\eta$-modification; by $\\eta$-normality it is an isomorphism, so $Y$ is normal. Now [lem-trf-valuation-curve-projective-preparation] gives the finite normalization $X^\\nu\\to X$ and, since the source $Y$ is normal, the unique factorization of $f$ through $X^\\nu$. Closedness of the image of a fibre generic point is unchanged by this finite replacement: a point above a closed point lies in a finite zero-dimensional fibre and is closed, and a finite morphism sends closed points to closed points. Thus the original set $B_f$ is unchanged. Work near the image of $Z$ in $X^\\nu$, localize $T$ beneath that point, and use the affine neighbourhood and normal projective compactification supplied by the preparation lemma. We now have a normal projective target, a normal proper source with geometrically reduced fibres, and a closed base point $s$ such that $Z\\subset Y_s$. The restricted source and marking remain semistable near $Z$; outside that neighbourhood no semistability is asserted. We will construct an intermediate model that is an isomorphism wherever $f$ is an isomorphism, so the locality clause will return the diagram to the original $X$.",
+   "uses": [
+    "lem-trf-geometrically-reduced-eta-normal",
+    "lem-trf-valuation-curve-projective-preparation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Proposition 4.4.6, printed p. 32, first reduction paragraph"
+   }
+  },
+  {
+   "text": "The exceptional component is geometrically a projective line and its boundary in $Y_s$ has at most two branches. The polar-section lemma includes the descent $Z\\simeq\\mathbf P^1_{\\kappa(s)}$. Apply that lemma to obtain divisors $P_i$ through the other closed-fibre components, $P=m\\sum P_i$, $L=\\mathcal O_Y(P)$, and the sections $e=1$ and $a$. The value of $a$ is nonzero at every $p_i$, whereas the zero set of $e$ is $P$. Consequently their common zero set has empty closed fibre. This set is closed in the proper $T$-curve $Y$, so its image is closed in $T$; a nonempty closed subset of the spectrum of a local ring contains its closed point. Therefore the common zero set is empty.",
+   "uses": [
+    "lem-trf-valuation-curve-projective-preparation",
+    "lem-trf-valuation-nodal-polar-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Proposition 4.4.6, printed pp. 32--33, choice and lifting of the polar section"
+   }
+  },
+  {
+   "text": "The sections define a morphism $u:Y\\to\\mathbf P^1_T$ explicitly: on the open where $e$ generates $L$ use affine coordinate $a/e$, and on the open where $a$ generates $L$ use $e/a$; these functions are reciprocal on the intersection. On $Z$, the divisor $P$ is absent, so $a/e$ is a global regular function on $\\mathbf P^1_{\\kappa(s)}$. Such a function is constant: it is a polynomial in $t$ on one standard affine chart and a polynomial in $t^{-1}$ on the other, so their common Laurent polynomial has only degree zero. Thus both $f$ and $u$ are constant on $Z$. On each other component $Z_i$, $a/e$ has a pole of exact order $m$ at $p_i$, while being finite at its generic point; hence $u|_{Z_i}$ is nonconstant. It follows that the relative graph $(f,u):Y\\to\\mathbf P^1_X$ contracts exactly $Z$ among the components of $Y_s$.",
+   "uses": [
+    "lem-trf-valuation-nodal-polar-section"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Proposition 4.4.6, printed p. 33, the relative projective-line morphism"
+   }
+  },
+  {
+   "text": "Restrict $u$ from the proper compactification to the preimage of the original affine neighbourhood. Its source and target still have their original smooth generic fibres. Normalize this restricted graph image, obtaining $Y\\xrightarrow{h}Y_1\\xrightarrow{f_1}X$ from the normalized-graph lemma. These are normal $\\eta$-modifications with $f_1h=f$, and a component is contracted exactly when both $f$ and $u$ are constant on it. Thus among the components of the prepared closed fibre only $Z$ is contracted. The construction is an isomorphism wherever $f$ is an isomorphism, so projective preparation spreads and glues it back to the original diagram. Its support lies over generalizations of $x$. The other points of $B_f$ over $x$ are the other components of that same localized closed fibre, and are not contracted; those with a different closed image are outside this support. Hence, relative to the unchanged original $X$, $Z$ is the only component with closed image contracted by $h$. This does not assert that no component over a nonclosed point of $X$ is contracted.",
+   "uses": [
+    "lem-trf-valuation-curve-projective-preparation",
+    "lem-trf-valuation-normalized-graph-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Proposition 4.4.6, printed pp. 32--33, normalized image and return from the local projective setting"
+   }
+  },
+  {
+   "text": "On $Y_1$ take $E_1$ to be the schematic closure of $D_\\eta$. The horizontal-curve-models lemma gives a multipointed curve and the $\\eta$-modification $(Y_1,E_1)\\to(X,D)$. Apply it also to $h:Y\\to Y_1$: its generic marking has closure $E$, since the flat marking $E$ is the unique flat closed subscheme with that generic fibre. Thus $h:(Y,E)\\to(Y_1,E_1)$ is an $\\eta$-modification of pairs and the equality $f_1h=f$ holds also on markings.",
+   "uses": [
+    "lem-trf-valuation-horizontal-curve-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Proposition 4.4.6, printed p. 33, define the marking accordingly; Remark 4.1 and Section 4.2"
+   }
+  },
+  {
+   "text": "Let $v$ be a closed point of $Y_1$ where $h$ is not an isomorphism, and let $t$ be its image in $T$. The graph lemma makes $F=h^{-1}(v)$ positive-dimensional and connected. It is supported on a closed subset of $Y_t$. This fibre is of finite type over the field $\\kappa(t)$, hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; its closed subset $|F|$ is Noetherian and has finitely many irreducible components by [lem-weil-pbc-noetherian-finitely-many-components]. Each one-dimensional component is an entire component of the pure one-dimensional curve $Y_t$, contracted by $h$. Properness of $f_1$ makes $f_1(v)$ closed in the original $X$. Step 4 therefore forces every such component to be $Z$, and $v=h(Z)$. Any remaining irreducible component of $|F|$ would be a closed singleton disjoint from $Z$ and from the other components: a point on another component would not be maximal irreducible. Since there are finitely many components, that singleton would be both open and closed in $|F|$, contrary to connectedness. Thus $|F|=|Z|$ and $F_{\\mathrm{red}}=Z$ as reduced subcurves of $Y_t$. This argument imposes no condition on embedded associated points of $F$.",
+   "uses": [
+    "lem-trf-valuation-normalized-graph-model",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Lemma 4.4.5, printed p. 32; Lemma 4.4.2 and Lemma 5.1(i)"
+   }
+  },
+  {
+   "text": "The local-criterion lemma applies at the point $v=h(Z)$ of Step 6: $Y_1$ is normal, $h$ is an $\\eta$-modification of multipointed curves, and every point of $F$ lies in the original semistable source. Its reduced subcurve is $Z$, which after geometric base change is one smooth projective line, with tree incidence graph and at most two boundary plus marking points by exceptionality. Hence $(Y_1,E_1)$ is semistable at $v$. At any other closed point $h$ is an isomorphism on a neighbourhood; uniqueness of the flat generic marking closure from Step 5 identifies the pairs there, so semistability is inherited from $(Y,E)$. Finally the semistable locus is open by the same criterion lemma. Its closed complement is empty: any nonempty closed subset of the quasi-compact scheme $Y_1$ has a closed point (a minimal nonempty closed subset exists by quasi-compactness applied to descending chains; the $T_0$ property then makes it a singleton). Thus $(Y_1,E_1)$ is semistable everywhere.",
+   "uses": [
+    "lem-trf-valuation-exceptional-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Lemma 4.4.5, printed p. 32; Lemma 4.4.2 and Lemma 5.1(i)"
+   }
+  },
+  {
+   "text": "Finally use the fibre-generic isomorphism clause of finite-fibre-valuation-domination for $h:Y\\to Y_1$, whose target is normal with smooth generic fibre. Each generic point of a fibre of $Y_1$ has a unique preimage and $h$ is an isomorphism near it. Conversely, a noncontracted fibre component of $Y$ maps onto a fibre component of $Y_1$: its image is a closed irreducible curve in a pure one-dimensional fibre. Thus the fibre generic points of $Y_1$ correspond exactly to the noncontracted fibre generic points of $Y$. Under this correspondence $f_1(h(w))=f(w)$, so closedness in the original $X$ agrees in both directions. By Step 4 exactly $z$ is removed from the closed-image set. This gives the required bijection $B_f\\setminus\\{z\\}\\simeq B_{f_1}$ and the contraction and factorization already constructed give all the other clauses.",
+   "uses": [
+    "lem-trf-finite-fibre-valuation-domination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Definition of exceptional blow-down and Lemma 4.4.5, printed p. 32; Lemma 4.2.1, printed p. 26"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-finite-fibre-valuation-domination",
+  "lem-trf-geometrically-reduced-eta-normal",
+  "lem-trf-valuation-curve-projective-preparation",
+  "lem-trf-valuation-exceptional-local-criterion",
+  "lem-trf-valuation-horizontal-curve-models",
+  "lem-trf-valuation-nodal-polar-section",
+  "lem-trf-valuation-normalized-graph-model",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Agent-expanded construction following online Temkin Proposition 4.4.6 and Lemma 4.4.5; local archival PDF absent, see WANTED in report.md"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +170,73 @@
    "results": "[leanfinder] OK 8 hit(s); top=[\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.reduction\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\"]; returned signatures do not state the claimed marked-curve criterion or contraction. General properness, generic-point, valuative-criterion and Weierstrass results do not specialize to it in one line.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional blowdown construction for semistable multipointed curves over a finite height valuation ring",
+   "results": "Hits: WeierstrassCurve.minimal, WeierstrassCurve.exists_isMinimal, WeierstrassCurve.IsMinimal, WeierstrassCurve.reduction, WeierstrassCurve.IsGoodReduction, AlgebraicGeometry.ValuativeCommSq.K, AlgebraicGeometry.ValuativeCriterion.Existence.eq, AlgebraicGeometry.Proj.valuativeCriterion_existence; read the returned signatures; none supplies the asserted relative-curve theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "exceptional semistable curve contraction",
+   "results": "loogle: Unknown identifier `exceptional`; No hits",
+   "date": "2026-10-18",
+   "verdict": "invalid query; not used as evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|semistable|blowdown",
+   "results": "No hits; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "contract an exceptional rational component in a semistable curve",
+   "results": "Hits: WeierstrassCurve.IsGoodReduction.congr_simp, WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction, WeierstrassCurve.isGoodReduction_iff, WeierstrassCurve.IsGoodReduction.goodReduction, WeierstrassCurve.IsGoodReduction.mk, WeierstrassCurve.instIsIntegralOfIsMinimal, WeierstrassCurve.instIsMinimalMinimal, WeierstrassCurve.IsGoodReduction.casesOn; read the returned signatures; none supplies the asserted relative-curve theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relative linear system on a semistable curve contracts one exceptional P1 fibre component and no other component",
+   "results": "Hits: WeierstrassCurve.IsMinimal, WeierstrassCurve.exists_isMinimal, WeierstrassCurve.minimal, WeierstrassCurve.IsGoodReduction, WeierstrassCurve.instIsMinimalMinimal, WeierstrassCurve.isMinimal_iff, WeierstrassCurve.IsMinimal.val_Δ_maximal, WeierstrassCurve.exists_isIntegral; read the returned signatures; none supplies the asserted relative-curve theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsExceptional P1 contraction",
+   "results": "loogle: Unknown identifier `IsExceptional`; No hits",
+   "date": "2026-10-18",
+   "verdict": "invalid query; not used as evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*linear system|contracts.*component|P1",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean; searched Mathlib/AlgebraicGeometry; read the returned signatures; none supplies the asserted relative-curve theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A meromorphic section with poles on other fibre components defines a morphism to P1 contracting exactly one exceptional component",
+   "results": "Hits: Meromorphic, MeromorphicOn, MeromorphicAt, MeromorphicOn.inv_iff, Meromorphic.meromorphicAt, MeromorphicAt.iff_eventuallyEq_zpow_smul_analyticAt, tendsto_cobounded_of_meromorphicOrderAt_neg, MeromorphicNFOn; read the returned signatures; none supplies the asserted relative-curve theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"semistable\"",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-semistable-stable-contraction",
@@ -93,5 +264,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-exceptional-blowdown",
+  "worker": "stage1",
+  "summary": "Repair of E2/C4 on returned head ce789cec79: delete the false no-embedded-associated-points clause from the normalized graph input. Steps 6--7 use connectedness and finite irreducible decomposition to identify only the reduced support, then apply the exceptional-tree semistability criterion. Item statement unchanged; four statement-only input nodes retained.",
+  "blueprint": "The inherited semistable-alteration branch of lem-trf-local-term-locality, Proof (1)--(2): this item supplies the single-component step inside Temkin Proposition 4.4.6. The unit sk-i-curve-zero and its contraction/locality route are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q80-f4285e7c7",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q80-f4285e7c7 (reviewer sub-agent of L); spot-checked: Read the full item, four new nodes, cited statements, unit route, required instructions, and Temkin source locations. Verified all eight steps, hypotheses, edge cases, duplicate searches, corrected embedded-point issue, and route restrictions. Review written to review.md; no repairs required."
  }
 }

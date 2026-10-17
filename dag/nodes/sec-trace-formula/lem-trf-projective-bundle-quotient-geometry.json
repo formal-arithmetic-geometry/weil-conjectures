@@ -20,9 +20,183 @@
   "def-nagata-relative-projective-space",
   "def-pc-projective-space-twist"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work over an affine open $U=\\operatorname{Spec}R\\subseteq S$ and put $M=\\mathcal E(U)$, $A=\\operatorname{Sym}_R M$. The canonical graded algebra [def-trf-canonical-symmetric-graded-algebra] has degree-$d$ part spanned by products of $d$ elements of $M$. Thus the images $e=\\iota(m)$, for all $m\\in M$, generate $A_+$ as an ideal. By [lemma-nagata-relative-proj-exists], $p^{-1}U=\\operatorname{Proj}A$; by [prop-nagata-proj-standard-open], its opens $D_+(e)=\\operatorname{Spec}H_e$, $H_e=(A_e)_0$, cover it. On base overlaps choose affine refinements using [lem-weil-pbc-affine-opens-basis]. All subsequent comparisons use the restriction maps of this canonical algebra and the compatible affine identifications in the relative-Proj existence statement.",
+   "uses": [
+    "def-trf-canonical-symmetric-graded-algebra",
+    "lemma-nagata-relative-proj-exists",
+    "prop-nagata-proj-standard-open",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OB (definition-projective-bundle), 01O4 (lemma-apply-relative), 01NY (lemma-relative-proj), and 01M4 (lemma-standard-open)"
+   }
+  },
+  {
+   "text": "On $D_+(e)$ the affine twist [def-weil-pbc-proj-twisting-sheaf] is $(A_e)_1$. Multiplication by $e$ identifies it with $H_e$: its inverse sends $a/e^k$ of degree one to $a/e^{k+1}$ of degree zero. The composites are identities in the localized ring, including when a chart is empty. On $D_+(e)\\cap D_+(f)$ its generators satisfy $e=(e/f)f$, with $e/f$ a unit; this overlap is $D(f/e)$ inside the $e$ chart by [lem-weil-pbc-proj-basic-open-intersection]. These identifications are the restriction maps of the affine twisting module, since both act on homogeneous fractions. On changing the base affine, the coefficient restriction sends $a/e^k$ to $\\overline a/\\overline e^k$, and sends the frame $e$ to $\\overline e$. Hence the local free modules and their inverses agree under base restriction, by the canonical-algebra restriction data of [def-trf-canonical-symmetric-graded-algebra]. Their cocycle on every triple overlap is $(e/f)(f/g)=e/g$. Glue them by [lem-weil-pbc-site-module-sheaf-gluing] on the Zariski open site of $P$. This gives exactly the specified affine twists, a global module $\\mathcal O_P(1)$ locally free of rank one, hence invertible by [def-sc-invertible-module].",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-weil-pbc-proj-basic-open-intersection",
+    "def-trf-canonical-symmetric-graded-algebra",
+    "lem-weil-pbc-site-module-sheaf-gluing",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NR (lemma-glue-relative-proj-twists), 01MS (lemma-when-invertible), and 01OB; degree-one localization calculation"
+   }
+  },
+  {
+   "text": "The section $m\\in M$ maps on each chart to $\\iota(m)/1\\in(A_e)_1$, the degree-one section map of [def-weil-pbc-proj-twisting-sheaf]. These maps respect localization and restriction on the base, so define $\\mathcal E\\to p_*\\mathcal O_P(1)$. Adjunction [lem-pc-module-pullback-adjunction] gives $q_P:p^*\\mathcal E\\to\\mathcal O_P(1)$. On $D_+(e)$, it sends the pulled-back $m$ with $\\iota(m)=e$ to the frame $e$ of Step 2. It is therefore surjective on that chart, hence on their cover and thus globally. For an arbitrary $a:T\\to P$ over $S$, tensor pullback [def-pc-module-pullback] takes a local frame to a local frame. Pulling back these local surjections consequently gives a surjection $h^*\\mathcal E\\to a^*\\mathcal O_P(1)$ onto an invertible module.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01OA (section-projective-bundle), canonical maps immediately after Definition 01OB"
+   }
+  },
+  {
+   "text": "Conversely, let $q:h^*\\mathcal E\\twoheadrightarrow\\mathcal L$ be a quotient in the statement. Adjunction [lem-pc-module-pullback-adjunction] gives $\\mathcal E\\to h_*\\mathcal L$. Include this into the degree-one summand of the commutative algebra $h_*(\\bigoplus_{d\\ge0}\\mathcal L^{\\otimes d})$. The universal property [lem-weil-pbc-quasi-coherent-symmetric-algebra] extends it uniquely to an algebra map from $\\operatorname{Sym}\\mathcal E$. It preserves degrees: a product of $d$ generators goes to the tensor product of their $d$ images; these span the degree-$d$ piece by [def-trf-canonical-symmetric-graded-algebra]. Adjunction, degree by degree, gives the induced graded map $\\psi:h^*\\operatorname{Sym}\\mathcal E\\to\\bigoplus_{d\\ge0}\\mathcal L^{\\otimes d}$ with $\\psi_1=q$. Since $q$ is surjective, $U(\\psi)=T$. The scheme case of [lem-trf-space-line-module-proj-map] therefore gives its canonical $S$-morphism $r:T\\to P$. The next steps check its quotient and the inverse property explicitly, rather than presuming either from that node.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "def-trf-canonical-symmetric-graded-algebra",
+    "lem-trf-space-line-module-proj-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA (quotient-functor discussion) and 01O9 (lemma-invertible-map-into-relative-proj)"
+   }
+  },
+  {
+   "text": "Here is an explicit construction from $q$ that will identify $r$ without using any unrecorded property of that morphism. Choose $U=\\operatorname{Spec}R\\subset S$ and an affine $W=\\operatorname{Spec}B\\subset h^{-1}U$ trivializing $\\mathcal L$, with frame $l$; such $W$ cover $T$ by [def-sc-invertible-module] and [lem-weil-pbc-affine-opens-basis]. By [lem-weil-pbc-module-pullback-affine-sections], $(h^*\\mathcal E)(W)=M\\otimes_R B$. The same affine-sections formula on principal affine neighborhoods shows that the $m\\otimes1$ generate the source stalks. Write $q(m\\otimes1)=b_m l$. The principal opens $W_m=D(b_m)$ cover $W$: surjectivity says that the $b_m$ generate the unit ideal in every stalk, and if all lay in the maximal ideal of a stalk they could not generate $1$. For $e=\\iota(m)$, write $b(a)\\in B$ for the coefficient of $l^{\\otimes d}$ in $\\psi(a)$, $a\\in A_d$. The formula $a/e^d\\mapsto b(a)/b_m^d$ defines an $R$-algebra map $H_e\\to B[1/b_m]$. It is well defined: apply the algebra map $A\\to B$, $\\iota(v)\\mapsto b_v$, to a localization relation and invert $b_m$. Addition and multiplication of fractions are respected. The affine-spectrum correspondence [def-weil-affine-spectrum] gives a morphism $W_m\\to D_+(e)\\subset P$ over $S$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01O4 via the affine construction of Tag 01NA (lemma-apply); homogeneous-fraction formulas in 01O9"
+   }
+  },
+  {
+   "text": "The maps of Step 5 glue. Indeed, on $W_m\\cap W_n$ the fraction $f/e$, with $f=\\iota(n)$, maps to $b_n/b_m$, a unit. By [lem-weil-pbc-proj-basic-open-intersection], the two maps land in $D_+(e)\\cap D_+(f)$. Their homomorphisms agree there: a degree-zero homogeneous fraction maps in either case to its value under $b$, with the denominator inverted. Changing the frame to $l'=u l$ replaces the coefficient $b(a)$ of degree $d$ by $u^{-d}b(a)$, so leaves $b(a)/b_m^d$ unchanged. On an affine refinement of two base opens, coefficient restriction gives exactly the same formula, using the canonical restrictions of [def-trf-canonical-symmetric-graded-algebra] and the target identifications of [lemma-nagata-relative-proj-exists]. Thus [lem-weil-pbc-scheme-morphism-gluing] yields a morphism $a_q:T\\to P$, independent of all choices. These are precisely the homogeneous-fraction formulas for the usual canonical morphism from a graded map into powers of an invertible module. Since the scheme clause of [lem-trf-space-line-module-proj-map] identifies its morphism with that usual construction, $a_q=r_{\\mathcal L,\\psi}$.",
+   "uses": [
+    "lem-weil-pbc-proj-basic-open-intersection",
+    "def-trf-canonical-symmetric-graded-algebra",
+    "lemma-nagata-relative-proj-exists",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-trf-space-line-module-proj-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01O4 and 01O9, affine-chart construction and its gluing; quotient discussion in 01OA"
+   }
+  },
+  {
+   "text": "On $W_m$, the line $a_q^*\\mathcal O_P(1)$ has the frame pulled back from $e$ on $D_+(e)$. Send that frame to $q(m)=b_m l$, which is a frame of $\\mathcal L$ there. This is an isomorphism of free rank-one modules. It carries $a_q^*q_P(v)$ to $q(v)$ for every local section $v$: in the $e$ frame the former has coefficient $\\iota(v)/e$, which pulls back to $b_v/b_m$, and multiplying this by $b_m l$ gives $b_v l$. On an overlap with the $f$ frame, the transition $e=(e/f)f$ pulls back to $b_m l=(b_m/b_n)b_n l$. Hence these isomorphisms agree and glue, along with their inverses, by the sheaf axiom. The same equality covers changes of frame and base. We obtain a quotient-compatible isomorphism $a_q^*\\mathcal O_P(1)\\cong\\mathcal L$, using tensor pullback [def-pc-module-pullback] and the homogeneous-fraction description [def-weil-pbc-proj-twisting-sheaf].",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01OA, inverse quotient constructions; degree-one part of theta in Tag 01O9"
+   }
+  },
+  {
+   "text": "Start now with any $S$-morphism $a:T\\to P$ and pull back $q_P$. On the inverse image of each degree-one chart $D_+(e)$ over an affine base, use the pulled-back $e$ as frame. The quotient coefficients are $a^*(v/e)$; in particular the coefficient of $e$ is $1$. The construction of Steps 5--6 therefore recovers the restriction of $a$, since its map on every homogeneous fraction $c/e^d$ is $a^*(c/e^d)$: express $c$ as a sum of products of $d$ degree-one elements using [def-trf-canonical-symmetric-graded-algebra]. On affine refinements equality of these ring maps gives equality of scheme maps by [def-weil-affine-spectrum], and [lem-weil-pbc-scheme-morphism-gluing] gives equality globally. In the other direction Step 7 recovers the quotient pair up to exactly the required compatible isomorphism. If $v:\\mathcal L\\simeq\\mathcal L'$ carries $q$ to $q'$, choose the frame $v(l)$ for $\\mathcal L'$; all coefficients $b_m$ agree, so their constructed maps agree. Thus the two constructions descend to isomorphism classes and are inverse bijections.",
+   "uses": [
+    "def-trf-canonical-symmetric-graded-algebra",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01OA, inverse bijections, expanding the appeal to 01O4"
+   }
+  },
+  {
+   "text": "For $u:T'\\to T$, tensor pullback [def-pc-module-pullback] carries each quotient frame $q(m)$ on $W_m$ to a quotient frame on $u^{-1}W_m$. Its coefficient map sends $b(a)/b_m^d$ to $u^*b(a)/(u^*b_m)^d$. This is also the composite chart map for $a_q\\circ u$. Affine refinements and uniqueness of scheme gluing [lem-weil-pbc-scheme-morphism-gluing] give $a_{u^*q}=a_q\\circ u$; the isomorphisms of Step 7 agree because both send the pulled-back frame $e$ to $u^*q(m)$. No flatness is used: pulling back a locally invertible frame preserves it. For an open $V\\subset S$, [lemma-nagata-relative-proj-exists] identifies the restrictions of $P$ and $\\mathbf P_V(\\mathcal E|_V)$ on every affine open of $V$, compatibly on further restriction and with the base maps. These identify the schemes over $V$; restriction to $V$ is the fibre product with the open subscheme by the universal property [def-pc-fibre-product]. The fraction description in [def-weil-pbc-proj-twisting-sheaf] identifies their twists and their degree-one quotient maps. Thus the claimed open-base identification respects both the quotient and the twist.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lemma-nagata-relative-proj-exists",
+    "def-pc-fibre-product",
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01OA, functoriality of the quotient construction; Tags 01NQ and 01NR, restriction and twist gluing"
+   }
+  },
+  {
+   "text": "The separatedness theorem [lem-trf-projective-bundle-separated] applies to the present quasi-coherent $\\mathcal E$: its statement requires neither finite type nor local freeness. It gives that $p:\\operatorname{Proj}_S(\\operatorname{Sym}\\mathcal E)\\to S$ is separated. This is the same structural morphism as in Step 1, with the canonical symmetric grading.",
+   "uses": [
+    "lem-trf-projective-bundle-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01OD (lemma-projective-bundle-separated)"
+   }
+  },
+  {
+   "text": "Finally take $\\mathcal E=\\mathcal O_S^{\\oplus(r+1)}$ with its standard basis. The definition [def-nagata-relative-projective-space] uses precisely the symmetric algebra and symmetric grading of this free module for $\\mathbf P^r_S$; on an affine base it is the standard graded polynomial algebra $A[T_0,\\ldots,T_r]$. Thus its relative Proj is $P$, with the same standard charts. Step 2 makes the twist free on the chart $D_+(T_i)$ with frame $T_i$, satisfying $T_i=(T_i/T_j)T_j$. These are the transition rules of [def-pc-projective-space-twist], so the frame-preserving maps and their inverses glue to identify the twists. By [def-weil-pbc-proj-twisting-sheaf], over $\\operatorname{Spec}A$ the resulting module is exactly $\\widetilde{A[T_0,\\ldots,T_r](1)}$. This proves all the asserted projective-space identifications, including $r=0$.",
+   "uses": [
+    "def-nagata-relative-projective-space",
+    "def-pc-projective-space-twist",
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01OE (lemma-projective-space-bundle), with Definition 01OB and the standard degree-one twist"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-canonical-symmetric-graded-algebra",
+  "lemma-nagata-relative-proj-exists",
+  "prop-nagata-proj-standard-open",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-weil-pbc-proj-basic-open-intersection",
+  "lem-weil-pbc-site-module-sheaf-gluing",
+  "def-sc-invertible-module",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-trf-space-line-module-proj-map",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-pc-fibre-product",
+  "lem-trf-projective-bundle-separated",
+  "def-nagata-relative-projective-space",
+  "def-pc-projective-space-twist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA/01OB, quotient-functor discussion; 01O4 and its affine degree-one localization argument; 01O9; 01OD; 01OE. Chart calculations and gluing are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +232,31 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Grassmannian.projective_quotient\", \"module\": \"Mathlib.RingTheory.Grassmannian\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {M : Type v} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {k : ℕ}\\n  (self : Module.Grassmannian R M k), Module.Projective R (M ⧸ self.toSubmodule)\", \"doc\": \"For any commutative ring $ R $, any $ R $-module $ M $ with additive commutative group structure, and any natural number $ k $, if $ p $ is a rank $ k $ submodule of $ M $ (i.e., an element of the Gra\"}\n  {\"name\": \"Module.Invertible.instProjective\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Projective R M\", \"doc\": \"Every invertible module over a commutative semiring is a projective module. Specifically, if $ M $ is an invertible module over a commutative semiring $ R $, then $ M $ is projective, meaning it is a \"}\n  {\"name\": \"instInvertibleReprₛ\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Module.Invertible R (Finite.reprₛ R M)\", \"doc\": \"For a finitely generated module $ M $ over a commutative semiring $ R $, the quotient representation of $ M $ (constructed as $ R^n $ modulo the kernel congruence of a surjective module map) is an inv\"}\n  {\"name\": \"Projectivization.rep\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Basic\", \"type\": \"(v : ℙ K V) : V\", \"doc\": \"The function maps each element of the projectivization of a module $ V $ over a division ring $ K $ to a representative non-zero vector in $ V $, selected via the quotient construction that identifies\"}\n  {\"name\": \"LinearAlgebra.Projectivization.termℙ\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Basic\", \"type\": \": Lean.ParserDescr✝\", \"doc\": \"The notation $\\\\mathbb{P}$ for projective spaces in linear algebra.\"}\n  {\"name\": \"Submodule.projective_units\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(I : (Submodule R A)ˣ) : Projective R I\", \"doc\": \"Every invertible submodule of an $ R $-module $ A $ is a projective $ R $-module. This instance asserts that if a submodule $ I $ is a unit in the idempotent semiring structure of submodules of $ A $,\"}\n  {\"name\": \"Projectivization.mk''\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Basic\", \"type\": \"(H : Submodule K V) (h : finrank K H = 1) : ℙ K V\", \"doc\": \"The projectivization of a module $ V $ over a division ring $ K $ is in bijection with the set of one-dimensional submodules of $ V $, specifically those submodules whose finite rank as $ K $-modules \"}\n  {\"name\": \"Projectivization.Subspace\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Subspace\", \"type\": \"(K : Type u_1) → (V : Type u_2) → [inst : Field K] → [inst_1 : AddCommGroup V] → [Module K V] → Type u_2\", \"doc\": \"Given a field $ K $ and a vector space $ V $ over $ K $, this constructs the type of projective subspaces of $ V $, which are equivalence classes of non-zero vectors under scalar multiplication by non\"}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective bundle of a quasi coherent module represents line bundle quotients naturally for arbitrary schemes",
+   "results": "8 hits: Module.Grassmannian.projective_quotient, AlgebraicGeometry.Proj.toSheafedSpace/fromOfGlobalSections, and linear-algebra Projectivization declarations; no relative quotient classification.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms to Proj symmetric algebra classify surjections onto invertible sheaves without finite generation",
+   "results": "8 hits: absolute Proj.fromOfGlobalSections, Proj, toSpecZero, awayToΓ, ProjIsoSpecTopComponent.toSpec_surjective, ProjectiveSpectrum.Proj.toSpec, valuativeCriterion_existence, lift_awayMapₐ_awayMapₐ_surjective; no line-bundle quotient classification.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projective bundle represents invertible quotient sheaves",
+   "results": "8 hits: Module.Invertible.instProjective, Module.Grassmannian.projective_quotient, instInvertibleReprₛ and linear-algebra Projectivization declarations; none is the item.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-relative-ample-very-ample",
@@ -89,5 +284,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-projective-bundle-quotient-geometry",
+  "worker": "stage1",
+  "summary": "Split without new nodes. Constructed the twist and tautological quotient on degree-one charts, wrote both quotient-to-morphism and inverse calculations, checked arbitrary pullback and open-base restriction, and used the existing unrestricted projective-bundle separatedness node. Preserved the statement and inherited searches. No finite-type, local-freeness, flatness, or separated-base assumption was added.",
+  "blueprint": "Historical lem-trf-local-term-locality proof (1)--(2), via the recorded alteration/fibrewise-ampleness route and lem-trf-relative-ample-very-ample: supplies exactly the projective-bundle quotient/evaluation geometry of that helper. The whole-blueprint search found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-relative-proj-exists",
+    "why": "Generic Existence and affine compatibility of relative Proj interface used for the chart/sheaf construction; this unit has no separate version, and no step of the unit proof is replaced."
+   },
+   {
+    "node": "prop-nagata-proj-standard-open",
+    "why": "Generic Standard affine opens of Proj interface used for the chart/sheaf construction; this unit has no separate version, and no step of the unit proof is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-site-module-sheaf-gluing",
+    "why": "Generic Gluing module sheaf objects over a covering of a ringed site interface used for the chart/sheaf construction; this unit has no separate version, and no step of the unit proof is replaced."
+   },
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "Generic The tensor-formula pullback of modules is left adjoint to pushforward interface used for the chart/sheaf construction; this unit has no separate version, and no step of the unit proof is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "why": "Generic The symmetric algebra of a quasi-coherent module: universal property and sections over affine opens interface used for the chart/sheaf construction; this unit has no separate version, and no step of the unit proof is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic Sections of the pullback of a quasi-coherent module over an affine open interface used for the chart/sheaf construction; this unit has no separate version, and no step of the unit proof is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-relative-proj-exists",
+  "prop-nagata-proj-standard-open",
+  "lem-weil-pbc-site-module-sheaf-gluing",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q25-594b7c737",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-594b7c737 (reviewer sub-agent of L); spot-checked: Reviewed the complete delivery, all eleven proof steps, nineteen cited DAG statements, exact Stacks sources 01OB/01OA/01O4/01O9/01OD/01OE, edge cases, hypotheses, base-change morphisms, coefficient categories, route-pivot restrictions, and Mathlib searches. No mathematical or structural fault found; review written to review.md."
  }
 }
