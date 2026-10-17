@@ -15,11 +15,179 @@
   "def-pc-perfect-ring-complex"
  ],
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $c_R$ for termwise constant realization. First identify its unit on modules at $s$. For any $R$-module $V$ with discrete topology, $U\\mapsto C(|U|,V)$ is a sheaf by [lem-cbc-continuous-functions-fpqc-sheaf], since the pro-etale coverings are fpqc [def-weil-pbc-proetale-site]. The constant-presheaf map to this sheaf is locally surjective: the open fibres of a locally constant function cover $U$. It is locally injective: on a nonempty $U$ equal constant functions have equal values, and on the empty scheme use its empty covering. Thus [lem-cbc-set-presheaf-sheafification-local-bijection] identifies its sheafification with this function sheaf. This identification respects addition and the constant-ring action by [lem-pc-sites-module-sheafification-interface]. At $U=s$, a function on the one-point space is a unique constant. Consequently the constant-value map $\\eta_V:V\\to\\Gamma_s c_R(V)$ is an isomorphism, natural in every linear map. This applies to arbitrary modules, not just finite ones, and to every coefficient ring used below. For finite $R$, functions into the discrete ring factor through connected components, and continuity is equivalent by the quotient topology; this also identifies the coefficient sheaf specified in [def-weil-pbc-proetale-modules] with the constant ring sheaf.",
+   "uses": [
+    "lem-cbc-continuous-functions-fpqc-sheaf",
+    "def-weil-pbc-proetale-site",
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, discrete case, p. 30; explicit local-bijection verification"
+   }
+  },
+  {
+   "text": "The constant-presheaf/evaluation adjunction extends to module sheaves by [lem-pc-sites-module-sheafification-interface]: a map $V\\to F(s)$ assigns on $U$ the restriction of that section along $U\\to s$, and conversely a sheaf map is evaluated on constant sections at $s$. These operations are inverse. This gives $c_R\\dashv\\Gamma_s$, with counit $\\epsilon_F:c_R\\Gamma_sF\\to F$ sending a constant section $x$ to $x|_U$. The functor $c_R$ is exact by [def-sfb-site-derived-constant-module-functor] and $\\Gamma_s$ is exact by [lem-weil-point-proetale-sections-exact]. Hence the termwise unit and counit descend to derived categories, with their naturality and triangle identities, by [lem-weil-pbc-localization-universal-property]. The unit remains an isomorphism by step 1. In particular $\\Gamma_s c_R(C)\\cong C$ for every ordinary complex $C$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "def-sfb-site-derived-constant-module-functor",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Tag 093J, lemma-constant-exact; derived localization of the explicit unit and counit"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-ring-constructible-derived-origin], choose a bounded constructible etale complex $L$ with $\\nu_s^*L\\cong M$. The exact equivalence of [lem-weil-pbc-geometric-point-pullback-stalk](1) identifies etale $A$-module sheaves at the algebraically closed point with ordinary $A$-modules, with inverse the constant sheaf functor: its counit is the natural constant-sheaf isomorphism of [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant], which respects the module operations by naturality. Apply these inverse equivalences termwise to obtain $L\\cong c_{A,\\mathrm{et}}C_0$, where $C_0=\\Gamma(s_{\\mathrm{et}},L)$. By [lem-sfb-geometric-inverse-image-constant-module], $\\nu_s^*c_{A,\\mathrm{et}}C_0\\cong c_AC_0$ termwise, hence $M\\cong c_AC_0$. The counit of step 2 is an isomorphism on every such object: on $c_AC_0$ its inverse is $c_A\\eta_{C_0}$ by the triangle identity. Thus, putting $C=\\Gamma_sM$, the specified natural counit $\\epsilon_M:c_AC\\xrightarrow{\\sim}M$ is an isomorphism; no choice of an etale origin enters this specified map.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "lem-sfb-geometric-inverse-image-constant-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL, lemma-compare-constructible-derived; etale-cohomology.tex Tag 04JQ, lemma-equivalence-abelian-sheaves-point; sites.tex Tag 0H7J, constant objects under inverse image"
+   }
+  },
+  {
+   "text": "The complex $C$ is bounded with finite cohomology modules. Indeed the exact point equivalence in step 3 takes the bounded constructible cohomology of $L$ to finite $A$-modules: a constructible sheaf on the one-point scheme is locally constant with finite module value, and this value is its stalk, which [lem-weil-pbc-geometric-point-pullback-stalk] identifies with sections. Equivalently apply the cohomology formula in [lem-weil-point-proetale-sections-exact] to $M\\cong c_AC_0$. The finite ring $A$ is Noetherian, since any ideal is generated by its finite set of elements.",
+   "uses": [
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL and the bounded constructible convention; elementary finite-ring Noetherian check"
+   }
+  },
+  {
+   "text": "Constant realization commutes with ordinary tensor products. To see the actual map, a bilinear map of constant modules into a sheaf $H$ is, by the adjunction in step 2, precisely an $R$-bilinear map $V\\times W\\to\\Gamma_sH$: the two descriptions agree on constant local sections, which locally generate the constant sheaves. The tensor universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] therefore gives the unique isomorphism $c_R(V)\\otimes_{R_s}c_R(W)\\cong c_R(V\\otimes_RW)$ taking $v\\otimes w$ to the constant section $v\\otimes w$. The functor $c_R$ preserves direct sums because it is a left adjoint, so these maps also identify total tensor complexes, with differential $d(v\\otimes w)=dv\\otimes w+(-1)^{\\deg v}v\\otimes dw$.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, tensor universal property; constant-sheaf adjunction of step 2"
+   }
+  },
+  {
+   "text": "Let $V$ be any ordinary $A$-module. Choose K-flat resolutions with flat terms of $C$ and $V[0]$ using [lem-pc-kflat-resolution] on the one-object site. Their constant realizations are K-flat with flat terms by clause (1) of [lem-sfb-constant-realization-derived-scalar-extension], applied also to the identity coefficient map. The ordinary tensor calculation [lem-pc-source-kflat-module-tensor-model], the sheaf tensor calculation [lem-weil-pbc-site-derived-tensor-descent], and step 5 give $c_A(C\\otimes_A^LV)\\cong c_AC\\otimes_{A_s}^Lc_AV\\cong M\\otimes_{A_s}^Lc_AV$. Choose a Tor interval $[a,b]$ for $M$ as in [det-def-sfb-constructible-tor-amplitude]. The last complex has no cohomology outside $[a,b]$, since $c_AV$ is a degree-zero module sheaf. Apply the exact $\\Gamma_s$ and the unit isomorphism of step 2. It follows that $H^q(C\\otimes_A^LV)=0$ for $q\\notin[a,b]$. Since $V$ was arbitrary, this is ordinary finite Tor amplitude for $C$. No conservativity of sections on arbitrary pro-etale sheaves is asserted or needed.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sfb-constant-realization-derived-scalar-extension",
+    "lem-pc-source-kflat-module-tensor-model",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "det-def-sfb-constructible-tor-amplitude",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 0G7E and 06YU; K-flat calculation of ordinary and sheaf tensor, followed by the Tor test"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion], step 4 makes $C$ pseudo-coherent over the commutative Noetherian ring $A$. Step 6 verifies the finite Tor dimension hypothesis for every ordinary module, so [lem-pc-ring-pseudo-coherent-finite-tor-perfect] gives an isomorphism $P\\cong C$ in $D(A)$ for a bounded complex $P$ of finitely generated projective $A$-modules. This is precisely the ordinary perfectness required by [def-pc-perfect-ring-complex]. Neither locality of $A$ nor freeness of these projectives is assumed.",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066E, lemma-Noetherian-pseudo-coherent (2), and Tag 0658, lemma-perfect"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-constant-realization-derived-scalar-extension] for $u:A\\to B$ and $C=\\Gamma_sM$, with its specified isomorphism $\\kappa_C:T_s(c_AC)\\xrightarrow{\\sim}c_B(C\\otimes_A^LB)$. Define\n$$S_M=\\Gamma_s(T_s\\epsilon_M)\\circ\\Gamma_s(\\kappa_C^{-1})\\circ\\eta_{C\\otimes_A^LB}.$$\nIts source is $C\\otimes_A^LB$ and its target is $\\Gamma_sT_sM$. Each factor is an isomorphism: $\\eta$ by step 2, $\\kappa$ by the cited theorem, and $T_s\\epsilon_M$ by step 3 and the functoriality of [lem-pur-derived-change-of-rings]. This constructs the comparison without choosing a projective model or an etale origin. Each factor is natural in $M$, so the displayed formula is natural in $M$.",
+   "uses": [
+    "lem-sfb-constant-realization-derived-scalar-extension",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E and Tag 0D6D, constant-realization scalar comparison; explicit mate under the constant/sections adjunction"
+   }
+  },
+  {
+   "text": "To identify this with the canonical sections--tensor map, use $P\\cong C$ from step 7 and the natural isomorphism $c_AP\\cong M$ from step 3. Projective modules are flat by [lem-weil-pbc-projective-module-flat], and $P$ is K-flat by [lem-pc-module-bounded-flat-kflat]. Clause (1) of [lem-sfb-constant-realization-derived-scalar-extension] makes $c_AP$ K-flat and computes its coefficient change termwise; [lem-pur-derived-change-of-rings] computes the ordinary change on $P$ termwise as well. In the formula of step 8 the unit sends $x\\otimes b$ to its constant section, $\\kappa^{-1}$ identifies that section with the tensor of the two constant sections, and the counit restricts $x$ to the given sheaf. Thus the resulting chain map is exactly $\\Gamma_s(c_AP)\\otimes_AB\\to\\Gamma_s(c_AP\\otimes_{A_s}B_s)$, $x\\otimes b\\mapsto x\\otimes b$. The maps commute with differentials by bilinearity. This proves the asserted normalization on every bounded finite-projective constant complex, as well as identifying the comparison on $M$ by its natural construction.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-sfb-constant-realization-derived-scalar-extension",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E and K-flat computation; more-algebra.tex Tag 064K; explicit pure-tensor calculation"
+   }
+  },
+  {
+   "text": "For the identity map, the formula of step 9 sends $x\\otimes a$ to the section $ax$, so under both tensor unit identifications it is the identity. For $A\\xrightarrow{u}B\\xrightarrow{v}D$, each $P^i\\otimes_AB$ is finite projective over $B$: choose finitely many generators, split the resulting surjection $A^r\\to P^i$ by projectivity, and tensor its splitting to get a splitting from $B^r$. The resulting bounded complex $c_B(P\\otimes_AB)$ represents $T_sM$ by step 9. It lies in $D^b_c(s,B)$: by [lem-sfb-geometric-inverse-image-constant-module] it is termwise $\\nu_s^*$ of the constant etale complex with the same finite $B$-modules, whose cohomology sheaves are constant with finite values on the one stratum $s$. If $P$ lives in degrees $[a,b]$, it has Tor amplitude in $[a,b]$: it is K-flat with flat terms by clause (1) of [lem-sfb-constant-realization-derived-scalar-extension]; for a degree-zero $B_s$-module $N$ take a flat-term K-flat resolution $F\\to N$ [lem-pc-kflat-resolution], so [lem-weil-pbc-site-derived-tensor-descent] computes the derived tensor by $\\operatorname{Tot}(c_B(P\\otimes_AB)\\otimes F)$, quasi-isomorphic to the termwise tensor with $N$ since tensoring with a K-flat complex keeps the cone of $F\\to N$ acyclic; that complex vanishes outside $[a,b]$. Thus the successive comparisons have their stated domains. So these models compute the successive changes. On a generator $(x\\otimes b)\\otimes d$, both the successive sections maps and the map for $v\\circ u$, under associativity, give the section $x\\otimes v(b)d$. Hence the chain maps agree. Clause (3) of [lem-sfb-constant-realization-derived-scalar-extension] identifies these associativity maps with the specified derived transitivity identifications; naturality of $\\epsilon$ and the triangle identities from step 2 cancel the intermediate constant/sections unit and counit. This gives the composition law for $M$, independently of the model.",
+   "uses": [
+    "lem-sfb-constant-realization-derived-scalar-extension",
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; explicit identity and successive coefficient calculations on the bounded projective model"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-site",
+  "det-def-sfb-constructible-tor-amplitude",
+  "lem-cbc-continuous-functions-fpqc-sheaf",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "lem-pc-kflat-resolution",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-constant-realization-derived-scalar-extension",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "lem-weil-point-proetale-sections-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace-coeff/thm-trf-finite-coefficient-map.proof.md",
+  "place": "Expansion of the point-realization argument behind the final coefficient-naturality sentence; uses Stacks 09AL, 04JQ, 066E, 0658, 06YS, 0G7E and 0D6D and Bhatt--Scholze Lemma 4.2.12. The blueprint itself gives no separate point-realization proof."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-trf-finite-coefficient-map",
@@ -77,6 +245,48 @@
    "results": "12 hits, principally PresheafOfModulesOfCommRing.Monoidal.tensorObj and its component formulas, and CategoryTheory.Sheaf.tensorUnit_isSheaf/tensorProd_isSheaf. These supply underived tensor constructions, not perfect point sections or derived scalar comparison.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sections.*tensor|tensor.*sections|perfect.*constructible",
+   "results": "6 hits; Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean, Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean, Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean, Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean, Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Metric.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern underived constant/presheaf/condensed functors, etale algebras or affine structure-sheaf sections; none supplies this point-realization, ordinary perfectness and derived scalar-extension package"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections on an algebraically closed pro etale point of bounded constructible finite Tor amplitude complexes are perfect and commute with derived tensor of coefficient rings",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.Scheme.ΓSpecIso_inv, AlgebraicGeometry.Scheme.ΓSpecIso, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, AlgebraicGeometry.AffineScheme.Γ, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.StructureSheaf.to_global_factors",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern underived constant/presheaf/condensed functors, etale algebras or affine structure-sheaf sections; none supplies this point-realization, ordinary perfectness and derived scalar-extension package"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"tensor\"",
+   "results": "12 hits; PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern underived constant/presheaf/condensed functors, etale algebras or affine structure-sheaf sections; none supplies this point-realization, ordinary perfectness and derived scalar-extension package"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of bounded constructible finite Tor amplitude complexes on an algebraically closed pro etale point are perfect and commute with derived scalar extension",
+   "results": "8 hits; Algebra.Etale.formallyEtale, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.comp, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.basicOpen_subset_etaleLocus_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern underived constant/presheaf/condensed functors, etale algebras or affine structure-sheaf sections; none supplies this point-realization, ordinary perfectness and derived scalar-extension package"
+  },
+  {
+   "tool": "grep",
+   "query": "proEtale.*(tensor|perfect)|constant.*(sections|evaluation)|sections.*constant",
+   "results": "14 hits; Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern underived constant/presheaf/condensed functors, etale algebras or affine structure-sheaf sections; none supplies this point-realization, ordinary perfectness and derived scalar-extension package"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The global sections functor sends constructible perfect constant sheaf complexes to perfect module complexes and commutes with extension of scalars",
+   "results": "8 hits; CondensedMod.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.functor, CondensedMod.LocallyConstant.functorToPresheaves, Condensed.free, LightCondensed.free, CondensedMod.ofSheafCompHaus, LightCondensed.instIsGrothendieckAbelianLightCondMod",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern underived constant/presheaf/condensed functors, etale algebras or affine structure-sheaf sections; none supplies this point-realization, ordinary perfectness and derived scalar-extension package"
   }
  ],
  "blueprint": {
@@ -87,5 +297,114 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-point-complex-scalar-extension",
+  "worker": "stage1",
+  "summary": "Kept the full statement for arbitrary finite coefficient rings. Expanded the point-realization argument into ten steps: constant sections and derived counit; etale-origin constant realization; ordinary Tor testing and perfectness; the specified scalar comparison, its projective-model normalization, and identity/composition. Reused existing generic nodes throughout; no new nodes. No attachment, coefficient-category substitution or source-route change.",
+  "blueprint": "Realizes the compact-cohomology/stalk scalar-extension clause of thm-trf-finite-coefficient-map and its proof final sentence, all the constructions being natural in the coefficient ring. The ordinary point realization missing from that sketch is supplied explicitly.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-continuous-functions-fpqc-sheaf",
+    "why": "The general continuous-function sheaf theorem identifies constant sections at a point; the trace coefficient unit has no such sheaf theorem."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-interface",
+    "why": "The arbitrary-site module sheafification universal property constructs the constant/sections adjunction; it is a generic sheaf tool absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic uniqueness of localization of natural transformations descends the termwise unit and counit; it does not replace a geometric route."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "The exact ordinary point evaluation needed here is the generic geometric-point sections theorem, not a trace theorem."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "The finite-ring comparison supplies etale origin for the stated ordinary coefficient category; no trace-unit node supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "The etale point module equivalence is used to obtain an ordinary complex; this is generic point geometry absent from the trace unit."
+   },
+   {
+    "node": "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "why": "Its natural constant-sheaf counit identifies the inverse of the point equivalence; it is generic point geometry."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "The comparison inverse image carries constant modules to constant modules; generic geometric-morphism compatibility is needed for etale origin."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "The arbitrary-site bilinear universal property identifies the constant-module tensor comparison on pure tensors."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "K-flat resolutions on the one-object site provide the ordinary module tensor models for the Tor test."
+   },
+   {
+    "node": "lem-sfb-constant-realization-derived-scalar-extension",
+    "why": "The generic arbitrary-site constant-realization comparison supplies K-flat preservation, the actual coefficient comparison, and its transitivity; the trace unit does not provide these foundational facts."
+   },
+   {
+    "node": "lem-pc-source-kflat-module-tensor-model",
+    "why": "The ordinary-module K-flat tensor calculation is a homological-algebra tool needed for the ordinary Tor test."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "The sheaf K-flat tensor calculation identifies the Tor test on constant module sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "The generic Noetherian cohomology criterion converts bounded finite cohomology to pseudo-coherence; no trace-unit theorem supplies it for arbitrary finite rings."
+   },
+   {
+    "node": "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+    "why": "The ring-level perfectness criterion converts the verified ordinary Tor condition to a bounded projective model."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "The arbitrary ring-sheaf change-of-rings theorem computes scalar extension on K-flat models."
+   },
+   {
+    "node": "lem-weil-pbc-projective-module-flat",
+    "why": "Generic projective-implies-flat algebra is needed to compute the normalization on bounded projective models."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic bounded-flat K-flatness justifies the ordinary projective tensor model."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-continuous-functions-fpqc-sheaf",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-constant-realization-derived-scalar-extension",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-module-bounded-flat-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-8f7e723e1",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-8f7e723e1 (reviewer sub-agent of L); spot-checked: Verdict FIX: one fault repaired in step 10. I read everything in full: the item, its statement and all 10 steps; the statement of each of the 25 cited nodes (all exist, none merged); unit sk-p-trace-coeff; the main-20261015 blueprint for thm-trf-finite-coefficient-map; and the parent's steps 4, 5 and 7, which use this item. Sources checked: Bhatt-Scholze Lemma 4.2.12 (p.30, a discrete T gives the constant sheaf) and Stacks 09AL, 04JQ, 0658 and 093J at their labels, plus the tag labels of 066E, 0G7E, 0D6D, 03CY and 06YS. Statement: unchanged and not weakened. It covers arbitrary finite rings, uses the ordinary coefficient category of def-weil-pbc-proetale-modules (step 1 identifies its Cont(pi0,Lambda)^# ring with the constant ring sheaf), and tests Tor against every module sheaf. 'Canonical' is pinned down by the normalization clause plus naturality, because every M is isomorphic to a constant bounded finite-projective complex (steps 3 and 7). Small cases tested: zero ring; F3xF3 -> F3, where the model is projective but not free; non-flat Z/9 -> Z/3, where underived tensor is applied only to the projective model and A/3 over Z/9 is correctly outside the domain; u = id. Step checks: sheaf of continuous functions (local bijection, including the empty cover); c -| Gamma_s and descent by localization (2),(3); etale origin, then the point equivalence, then constant inverse image, then the triangle identity, so epsilon is an isomorphism; finite cohomology; 066E(2) and 0658 give perfectness; types of S = Gamma(T eps) o Gamma(kappa^-1) o eta checked; normalization x(x)b -> x(x)b; identity and composition via clause (3). Fault (C1/C2): step 10 marked elementary and cited only clause (1) for T_sM in D^b_ctf(s,B), but the etale-origin constructibility needs lem-sfb-geometric-inverse-image-constant-module and the Tor bound needs lem-pc-kflat-resolution and lem-weil-pbc-site-derived-tensor-descent. Fix: those three added to uses (already in proof_deps and tool_uses), elementary set to false, argument written out (1925 chars). No new nodes. Duplicate search found no node for arbitrary finite rings: lem-trf-point-sections-finite-reduction, lem-pod-point-sections-derived-reduction, lem-pod-point-sections-reconstruction, lem-trf-finite-tor-amplitude-perfect, thm-pod-point-perfectness and lem-sf-point-fibre-derived-tensor cover only A_{E,n}/O_E. All 18 declared tool_uses accepted as generic machinery that replaces no step of the unit. No SGA source cited.; 1 file(s) fixed by the reviewer"
  }
 }

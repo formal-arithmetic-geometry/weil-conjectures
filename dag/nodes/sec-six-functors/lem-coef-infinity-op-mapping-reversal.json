@@ -12,9 +12,137 @@
   "lem-coef-infinity-pinch-comparison",
   "lem-coef-infinity-mapping-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\vartheta_n:\\Delta^n\\to(\\Delta^n)^{\\mathrm{op}}$ for the map which sends an $m$-simplex $\\gamma:[m]\\to[n]$ to $\\gamma^\\vee$. The identities $(\\beta\\alpha)^\\vee=\\beta^\\vee\\alpha^\\vee$ and $(\\alpha^\\vee)^\\vee=\\alpha$ show that opposite is a functor, is involutive, and commutes with degreewise products. The map $\\vartheta_n$ is an isomorphism and sends face $i$ to face $n-i$. Consequently a horn $\\Lambda_i^n\\to\\mathcal C^{\\mathrm{op}}$ reverses to $\\Lambda_{n-i}^n\\to\\mathcal C$. For $0<i<n$ the latter is inner and has a filler, whose reversal fills the original horn. Thus $\\mathcal C^{\\mathrm{op}}$ is a quasicategory. The same calculation with all horn indices proves that opposite preserves Kan complexes. These conclusions use precisely the horn definitions of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/003L",
+    "place": "Notation 1.4.2.1, Construction 1.4.2.2, Proposition 1.4.2.6 and Variant 1.4.2.8; explicit operator calculation"
+   }
+  },
+  {
+   "text": "Use the fixed-vertex simplicial sets $H$ defined in [lem-cbc-simplicial-composition-spine]. For every $k\\geq1$ and list $x_0,\\ldots,x_k$, define\n$$R_k:H_{\\mathcal C^{\\mathrm{op}}}(x_0,\\ldots,x_k)\\longrightarrow H_{\\mathcal C}(x_k,\\ldots,x_0)^{\\mathrm{op}}$$\nby sending $\\sigma:\\Delta^k\\times\\Delta^m\\to\\mathcal C^{\\mathrm{op}}$ in degree $m$ to $\\sigma^{\\mathrm{op}}(\\vartheta_k\\times\\vartheta_m)$. For $\\alpha:[l]\\to[m]$, the identity $\\vartheta_m\\Delta(\\alpha)=(\\Delta(\\alpha^\\vee))^{\\mathrm{op}}\\vartheta_l$ verifies the simplicial operators, including degeneracies. Repeating reversal gives its inverse. A restriction along $\\beta:[j]\\to[k]$ becomes restriction along $\\beta^\\vee$, by the same identity in the first factor. Postcomposition with any functor $G:\\mathcal C\\to\\mathcal D$ commutes strictly with these formulas. In particular $R_1$ identifies $U_{\\mathcal C^{\\mathrm{op}}}(x,y)$ with $U_{\\mathcal C}(y,x)^{\\mathrm{op}}$. The opposite on this last mapping simplicial set is essential.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/003L",
+    "place": "Construction 1.4.2.2 applied to the multiarrow fibers of Kerodon 01PF, Notation 4.6.8.1; explicit calculation"
+   }
+  },
+  {
+   "text": "For any simplicial set $K$, define\n$$r_K:|K^{\\mathrm{op}}|\\longrightarrow|K|,\\qquad [a,(t_0,\\ldots,t_m)]\\longmapsto[a,(t_m,\\ldots,t_0)].$$\nIf $b_m$ denotes coordinate reflection on the topological simplex, then $b_m|\\alpha|=|\\alpha^\\vee|b_l$ for $\\alpha:[l]\\to[m]$: the coefficient at $j$ on both sides is $\\sum_{\\alpha(i)=m-j}t_i$ (on the right, substitute $i=l-h$ in the sum indexed by $\\alpha^\\vee(h)=j$). Hence the formula respects the realization quotient of [def-cbc-enhanced-diagrams-cones]. It is continuous on each characteristic simplex, so continuous on the quotient; its inverse is the same formula for $K^{\\mathrm{op}}$. Naturality follows by applying a simplicial map to $a$. Under the finite-product homeomorphism of [lem-coef-realization-finite-limits], $r_{K\\times L}$ is $r_K\\times r_L$: composing with each projection proves the assertion. Thus reflection respects all maps, products, and restriction diagrams used below.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/003L",
+    "place": "Example 1.4.2.5; barycentric reflection and its quotient/product calculation"
+   }
+  },
+  {
+   "text": "Use $\\operatorname{Sing}$ and the unit $u_K$ of [lem-cbc-realization-singular-unit-weak]. The natural zigzag\n$$K^{\\mathrm{op}}\\xrightarrow{u_{K^{\\mathrm{op}}}}\\operatorname{Sing}|K^{\\mathrm{op}}|\\xrightarrow{\\operatorname{Sing}(r_K)}\\operatorname{Sing}|K|\\xleftarrow{u_K}K$$\nconsists of weak homotopy equivalences: both units are such by that node, with no Kan or nonemptiness requirement; the middle map is a simplicial isomorphism because $r_K$ is a homeomorphism. The two singular complexes are Kan. Indeed, the realization--singular adjunction and realized horn-pair homeomorphism of [lem-coef-realization-finite-limits] identify a singular horn with a continuous map from $D^{m-1}\\times\\{0\\}$; precompose it with the projection $D^{m-1}\\times[0,1]\\to D^{m-1}\\times\\{0\\}$ to extend over the whole simplex. This applies for $m\\geq1$, including both outer horns for $m=1$. The unit is natural since $|f|[a,t]=[f(a),t]$.",
+   "uses": [
+    "lem-cbc-realization-singular-unit-weak",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0142",
+    "place": "Theorem 3.6.4.1, and Example 1.4.2.5 (003L); singular horn fillers written using the cited realized-pair theorem"
+   }
+  },
+  {
+   "text": "For either quasicategory $\\mathcal B=\\mathcal C$ or $\\mathcal C^{\\mathrm{op}}$, [lem-coef-infinity-pinch-comparison] supplies Kan complexes $M_{\\mathcal B}(a,b)$, $U_{\\mathcal B}(a,b)$ and the actual natural homotopy equivalence $j_{\\mathcal B,a,b}$. This map is also a weak homotopy equivalence in the stated realization convention: realize its inverse and its two simplicial cylinder homotopies, using [lem-coef-simplicial-realization-cylinder] for the ordinary-product cylinders, then apply [lem-coef-homotopy-equivalence-weak]. Consequently, putting $K=U_{\\mathcal C}(y,x)$, the required zigzag is\n$$M_{\\mathcal C^{\\mathrm{op}}}(x,y)\\xrightarrow{j}U_{\\mathcal C^{\\mathrm{op}}}(x,y)\\xrightarrow{R_1}K^{\\mathrm{op}}\\xrightarrow{u}\\operatorname{Sing}|K^{\\mathrm{op}}|\\xrightarrow{\\operatorname{Sing}(r_K)}\\operatorname{Sing}|K|\\xleftarrow{u}K\\xleftarrow{j}M_{\\mathcal C}(y,x).$$\nAll its objects are Kan, by steps 1 and 4 and the pinch node, and all arrows are weak homotopy equivalences. Every arrow commutes with the maps induced by $G$, by step 2, step 3, the unit formula, and the naturality assertion of the pinch node. No natural choice of an inverse is required.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-simplicial-realization-cylinder",
+    "lem-coef-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Proposition 4.6.5.10; natural right-pinch maps followed by the explicit reflection/unit zigzag"
+   }
+  },
+  {
+   "text": "For clarity this zigzag represents, on realizations, exactly the reflection comparison of step 3. Define $\\varepsilon_T:|\\operatorname{Sing}T|\\to T$ by $[s,t]\\mapsto s(t)$. It respects the quotient relations, is continuous there, is natural in $T$, and satisfies $\\varepsilon_{|A|}|u_A|=1_{|A|}$. For Kan $A$, the unit $u_A$ has a simplicial homotopy inverse by [lem-cbc-kan-whitehead-inverse], since step 4 proves that its source and target are Kan and that it is weak. Realizing its inverse homotopies by [lem-coef-simplicial-realization-cylinder] shows that $|u_A|$ is invertible in continuous homotopy classes. Thus $[\\varepsilon_{|A|}]=[|u_A|]^{-1}$. Naturality of $\\varepsilon$ gives\n$$[\\varepsilon_{|K|}]\\,[|\\operatorname{Sing}(r_K)|]\\,[|u_{K^{\\mathrm{op}}}|]=[r_K].$$\nSo the middle three arrows of step 5 realize to $[r_K]$, with the stated orientations. Write $\\bar R_k=r_H|R_k|$ for the corresponding homeomorphism on realized $H$ spaces. Products of these comparisons are the comparisons of products by step 3. This identifies the zigzag used, rather than merely asserting existence of some equivalence. The same Whitehead node makes every arrow of step 5 invertible in simplicial homotopy classes, since its Kan and weak-equivalence hypotheses were all checked there.",
+   "uses": [
+    "lem-cbc-realization-singular-unit-weak",
+    "lem-cbc-kan-whitehead-inverse",
+    "lem-coef-simplicial-realization-cylinder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0142",
+    "place": "Unit formula of Theorem 3.6.4.1 and the Kan Whitehead theorem (00UB); evaluation calculation"
+   }
+  },
+  {
+   "text": "Write $\\theta,\\ell$ for the consecutive-edge and long-edge maps of [lem-coef-infinity-mapping-composition], and use primes for $\\mathcal C^{\\mathrm{op}}$. On the reversed triple $(d,b,a)$, step 2 gives the exact identities after realization\n$$|\\theta_{d,b,a}|\\bar R_2=\\tau(\\bar R_1\\times\\bar R_1)|\\theta'_{a,b,d}|,\\qquad |\\ell_{d,b,a}|\\bar R_2=\\bar R_1|\\ell'_{a,b,d}|,$$\nwhere $\\tau$ exchanges the two inputs. Explicitly the old edges $12,01,02$ become $01,12,02$, respectively; hence the swap, including when vertices coincide. By the composition node both $\\theta$ maps are homotopy equivalences and arrow composition has class $[\\ell][\\theta]^{-1}$. Multiplying the first equality by these inverses and using the second gives\n$$\\bar R_1\\,C'_{a,b,d}=C_{d,b,a}\\,\\tau(\\bar R_1\\times\\bar R_1)$$\nin homotopy classes. Here and below realization of the homotopies uses [lem-coef-simplicial-realization-cylinder]. If $J=[j]$, the same node characterizes right-pinched composition by $Jc=C(J\\times J)$. Conjugating this equation by the zigzag of step 5 (whose arrow part is $\\bar R_1$ by step 6) proves that it carries $c'$ to $c$ with the inputs exchanged. This is an equality of space morphism classes, not merely a statement about their components. Finally [lem-cbc-kan-realization-mapping-classes] detects equality of these classes on realizations: its bijection applies with source the product of the two Kan mapping spaces and target the Kan output mapping space. Choose homotopy inverses to the zigzag arrows as in step 6; naturality of that bijection identifies their realized classes with the inverses used above. Its injectivity gives exactly the asserted equality in simplicial homotopy classes, independent of those choices.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-simplicial-realization-cylinder",
+    "lem-cbc-kan-realization-mapping-classes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Construction 4.6.8.9; reversal of the three edge restrictions and cancellation in the defining composition equation"
+   }
+  },
+  {
+   "text": "The identity vertex is a degenerate edge. Its reversal is the same degenerate edge at the same vertex, $j$ fixes that vertex by its explicit pinch formula, and $r_K$ fixes every realized vertex. The unit $u$ sends a vertex to its constant singular simplex, so the identity class also survives every arrow of the zigzag. Now fix an edge in either input of the composition equation in step 7. By [lem-coef-infinity-mapping-composition], these restrictions are exactly precomposition and postcomposition. Since reversal swaps the two inputs and reverses the endpoints of the fixed edge, precomposition becomes postcomposition by the reversed edge and postcomposition becomes precomposition. This argument covers identities and repeated objects without a nonidentity assumption.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Proposition 4.6.8.11 and Notation 4.6.8.15; identity and fixed-input restriction calculation"
+   }
+  },
+  {
+   "text": "Retain witnesses, rather than only the equation of classes. A triangle witness is a simplex $\\sigma$ in $H_{\\mathcal C^{\\mathrm{op}}}(a,b,d)$, with its three edge restrictions. For every degree $m$, $R_2(\\sigma)=\\sigma^{\\mathrm{op}}(\\vartheta_2\\times\\vartheta_m)$ reverses its vertices and the three edge restrictions exactly as in step 7. The same formula for $R_k$ retains higher simplices and the face and degeneracy witnesses of [lem-cbc-simplicial-composition-spine]. On realization its value on a parameterized simplex is\n$$\\bar R_k[\\sigma,t]=[R_k(\\sigma),b_m(t)].$$\nFor $m=1$, this says to reverse the parameter inside the reversed simplex, so the endpoints of the resulting path are precisely the images of the original endpoints. Thus it compares the homotopy itself. For a functor $G$, one has $(G^{\\mathrm{op}}\\sigma)^{\\mathrm{op}}(\\vartheta_k\\times\\vartheta_m)=G\\bigl(\\sigma^{\\mathrm{op}}(\\vartheta_k\\times\\vartheta_m)\\bigr)$. Hence the witness and its image under $G$ are compared by the same formula. In particular, if $s$ is a chosen triangle-family representing composition before applying $G$, and $s'$ is such a family in the target, a specified homotopy between $G s$ and $s'(G\\times G)$ is carried to its reversed triangle-family homotopy. Applying long-edge restriction gives the comparison of commutation homotopies for composition; fixing either input gives the asserted precomposition and postcomposition squares. The natural pinch maps and natural unit zigzags commute with these restrictions. This concerns the transported specified witness, and does not identify two independently chosen homotopies.",
+   "uses": [
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Notation 4.6.8.1, Remark 4.6.8.7 and Construction 4.6.8.9; explicit parameterized triangle and functor calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-realization-finite-limits",
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-coef-simplicial-realization-cylinder",
+  "lem-coef-homotopy-equivalence-weak",
+  "lem-cbc-kan-whitehead-inverse",
+  "lem-coef-infinity-mapping-composition",
+  "lem-cbc-kan-realization-mapping-classes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/003L",
+  "place": "Explicit simplex and barycentric reversal, using the natural pinch and multiarrow composition constructions (01L5, 01PF), Milnor unit theorem (0142) and Kan Whitehead (00UB). Sources read online, not archived under literature/; WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,10 +178,45 @@
    "results": "{\"t\": \"2026-10-17T08:15:25Z\", \"tool\": \"leanfinder\", \"query\": \"Right pinched mapping spaces and opposite infinity categories exchange precomposition and postcomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex.objEquiv_symm_comp\", \"SSet.yonedaEquiv_comp\", \"SSet.ι₀_comp\", \"SSet.ι₁_comp\", \"SSet.opFunctor_map\", \"CategoryTheory.NatTrans.rightOpWhiskerRight\", \"CategoryTheory.NatTrans.unop_whiskerRight\", \"SSet.op_map\"], \"digest\": \"ff8e4ed8e2eb2b3d\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second phrasing; the hits are simplicial op maps or ordinary-category opposite/cone declarations, not this quasicategory comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "pinched|pinch|mappingSpace|morphismSpace",
+   "results": "{\"t\": \"2026-10-17T11:18:40Z\", \"tool\": \"grep\", \"query\": \"pinched|pinch|mappingSpace|morphismSpace\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SSet/Op.lean:19-28 (realization comparison is a TODO), 47-71 and 95-112 (opposite functor only); semantic hits are simplex operators, ordinary bicategory opposites or two-truncated edge composition, not Kan mapping spaces with this natural coherent reversal."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Opposite quasicategories reverse mapping spaces and composition through arrow mapping spaces",
+   "results": "{\"t\": \"2026-10-17T11:18:40Z\", \"tool\": \"leansearch\", \"query\": \"Opposite quasicategories reverse mapping spaces and composition through arrow mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.op\", \"Bicategory.Opposite.opFunctor\", \"Quiver.Hom.unmop\", \"Bicategory.Opposite.unopFunctor\", \"MulOpposite\", \"CategoryTheory.CategoryStruct.opposite\", \"CategoryTheory.Arrow.opEquiv\", \"CategoryTheory.Category.opposite\"], \"digest\": \"02171f17b549438f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SSet/Op.lean:19-28 (realization comparison is a TODO), 47-71 and 95-112 (opposite functor only); semantic hits are simplex operators, ordinary bicategory opposites or two-truncated edge composition, not Kan mapping spaces with this natural coherent reversal."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.op, SSet.opEquivalence",
+   "results": "{\"t\": \"2026-10-17T11:18:40Z\", \"tool\": \"loogle\", \"query\": \"SSet.op, SSet.opEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SSet/Op.lean:19-28 (realization comparison is a TODO), 47-71 and 95-112 (opposite functor only); semantic hits are simplex operators, ordinary bicategory opposites or two-truncated edge composition, not Kan mapping spaces with this natural coherent reversal."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Opposite quasicategories reverse mapping spaces and composition through arrow mapping spaces",
+   "results": "{\"t\": \"2026-10-17T11:18:51Z\", \"tool\": \"leanfinder\", \"query\": \"Opposite quasicategories reverse mapping spaces and composition through arrow mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.opFunctor\", \"SSet.op\", \"SSet.op_map\", \"SSet.opEquivalence_functor\", \"SSet.opEquivalence\", \"Bicategory.Opposite.op2\", \"SSet.opEquivalence_inverse\", \"SSet.opFunctor_map\"], \"digest\": \"a2d105dab5137d8c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SSet/Op.lean:19-28 (realization comparison is a TODO), 47-71 and 95-112 (opposite functor only); semantic hits are simplex operators, ordinary bicategory opposites or two-truncated edge composition, not Kan mapping spaces with this natural coherent reversal."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right pinched morphism Kan complexes of opposite infinity categories interchange precomposition and postcomposition",
+   "results": "{\"t\": \"2026-10-17T11:22:13Z\", \"tool\": \"leanfinder\", \"query\": \"Right pinched morphism Kan complexes of opposite infinity categories interchange precomposition and postcomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.yonedaEquiv_comp\", \"SSet.comp_app\", \"SSet.Edge.CompStruct.map_simplex\", \"SSet.ι₀_comp\", \"SSet.ι₁_comp\", \"SSet.Truncated.comp_app\", \"SSet.comp_app_assoc\", \"SSet.Edge.CompStruct.map\"], \"digest\": \"396dabf0465b598e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SSet/Op.lean:19-28 (realization comparison is a TODO), 47-71 and 95-112 (opposite functor only); semantic hits are simplex operators, ordinary bicategory opposites or two-truncated edge composition, not Kan mapping spaces with this natural coherent reversal."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-grothendieck-limits-colimits",
@@ -78,5 +241,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-op-mapping-reversal",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Nine explicit steps retain the opposite on the arrow mapping parameter, construct a natural weak-equivalence zigzag through singular realizations, prove the exact swapped-edge composition equations, and retain parameterized triangle/functor witnesses. Reused existing foundations; no new nodes.",
+  "blueprint": "Proof paragraph 2, opposite-category dual for limits: identify right-pinched mapping spaces in the opposite quasicategory with reversed mapping spaces, compatibly with composition and identities.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "Generic multiarrow spaces and their natural coherent witnesses; this unit has no independent definition of their full simplicial family."
+   },
+   {
+    "node": "lem-cbc-realization-singular-unit-weak",
+    "why": "Generic realization--singular unit weak equivalence supplies a natural bridge from an opposite Kan complex to the original one; no theorem of this unit provides it."
+   },
+   {
+    "node": "lem-cbc-kan-whitehead-inverse",
+    "why": "Generic Kan Whitehead inverse identifies the explicit unit zigzag with barycentric reflection on realizations; no theorem of this unit provides it."
+   },
+   {
+    "node": "lem-cbc-kan-realization-mapping-classes",
+    "why": "Generic comparison of simplicial and realized homotopy classes detects the composition-class equality; no node of this unit states that comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-composition-spine",
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-cbc-kan-whitehead-inverse",
+  "lem-cbc-kan-realization-mapping-classes"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-ecb2f972c",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-ecb2f972c (reviewer sub-agent of L); spot-checked: I read the whole item, all nine steps and the statement of every cited node. There are no new nodes and the statement is unchanged. I recomputed the key formulas. Step 1: (βα)^∨=β^∨α^∨, face i goes to face n−i, inner horns stay inner, and opposite preserves Kan complexes. Step 2: R(α^*σ)=(α^∨)^*R(σ) through θ_mΔ(α^∨)=Δ(α)^opθ_l, so R_1 gives U_{C^op}(x,y)≅U_C(y,x)^op. Step 3: b_m|α|=|α^∨|b_l (coefficient Σ_{α(i)=m−j}t_i), so the reflection respects the realization quotient, and products are handled by projections. Step 4: Sing T is Kan by retracting along the realized horn pair, and the units are weak with no hypothesis on K. Steps 5 and 6: the pinch maps are weak via the cylinder node and lem-coef-homotopy-equivalence-weak. ε_{|A|}|u_A|=id, so the middle arrows realize to r_K, and every Whitehead hypothesis (Kan, weak) holds. Step 7: on Δ^2 the edges map 12→01, 01→12, 02→02, which gives R̄_1C'=Cτ(R̄_1×R̄_1) and φc'=cτ(φ×φ). This is brought back to simplicial classes by the mapping-classes bijection with Kan target M. Steps 8 and 9 (identity vertex, swap of pre/postcomposition, transport of witnesses with the parameter reflected) are correct. I tested nerves of ordinary categories, x=y, empty mapping spaces and dimension-0/1 parameters. Shape checks: proof_deps is the union of uses, TeX is escaped once, steps are under 2000 characters, there is no cycle (closure of 123 nodes), no SGA is cited, and blueprint from.place is filled with same_as []. Kerodon 003L, 01L5, 01PF, 0142 and 00UB are not archived; they are listed as WANTED and proof_origin is agent. I accept the four sk-prop-sf-cbc tool uses (spine, Milnor unit, Kan Whitehead, mapping-class comparison); they are generic tools already recorded by most nodes of this unit. Overlap noted but not a fault: lem-coef-infinity-relative-cone-equivalence (4) states the bare equivalence, and the unsplit lem-coef-infinity-opposite-subdivision-kan-zigzag gives an Ex^∞ zigzag. The item is pre-existing and strictly stronger than both (composition, identities, witnesses), and neither depends on it. No changes made."
  }
 }
