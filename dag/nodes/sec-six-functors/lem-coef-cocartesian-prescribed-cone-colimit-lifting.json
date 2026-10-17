@@ -29,19 +29,22 @@
    }
   },
   {
-   "text": "By the fiber hypothesis, choose a colimit cocone $c':J^{\\triangleright}\\to E_s$ whose restriction to $J$ is $h'$. Regard $c'$ as a diagram in $E$ by the fiber inclusion. This choice is available also for $J=\\varnothing$, when it is an initial object of $E_s$; no filteredness or contractibility of $J$ is used.",
+   "text": "By the fiber hypothesis, in the sense of [def-cbc-enhanced-diagrams-cones], the coherent cocone category $P_{h'}$ of $h':J\\to E_s$ in the quasicategory $E_s$ has an initial object $\\iota$. Let $J_{h'}$ be the join slice of [lem-coef-join-slice-cocone-comparison] for $a=h'$, $L=J$ and $\\mathcal E=E_s$: its vertices are exactly the simplicial maps $J^{\\triangleright}\\to E_s$ restricting to $h'$ on $J$. By that node the comparison $J_{h'}\\to P_{h'}$, sending such a map to its induced coherent cocone, is a functor equivalence; choose a quasi-inverse $G$ and an equivalence edge from the image of $c'=G(\\iota)$ to $\\iota$. Precomposition with an equivalence edge is a homotopy equivalence of mapping spaces, since its component class is invertible and composition is associative and unital up to homotopy [lem-coef-infinity-mapping-composition]; hence the coherent cocone of $c'$ is again initial, i.e. colimiting. By the last clause of [lem-coef-join-slice-cocone-comparison] $c'$ is also initial in $J_{h'}$. Thus $c':J^{\\triangleright}\\to E_s$ is a colimit cocone with $c'|_J=h'$ exactly. Regard $c'$ as a diagram in $E$ by the fiber inclusion. This choice is available also for $J=\\varnothing$, when $c'$ is an initial object of $E_s$; no filteredness or contractibility of $J$ is used.",
    "uses": [
     "def-coef-infinity-fibrations",
-    "def-coef-infinity-relative-cone"
+    "def-coef-infinity-relative-cone",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-coef-infinity-mapping-composition"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-    "place": "Corollary 4.3.1.11 proof, p. 267: assumption (1) and the choice of a colimit $q'_0$ in the fiber."
+    "place": "Corollary 4.3.1.11 proof, p. 267: assumption (1) and the choice of a colimit $\\bar q'_0:K^{\\triangleright}\\to X_s$ of $q'_0$ in the fiber; the strict join form of the chosen cocone uses the join-slice/coherent-cocone comparison (HTT Proposition 4.2.1.5)."
    }
   },
   {
-   "text": "For every edge $f:s\\to s'$ of $B$, the transported cocone $f_!c'$ is colimiting in $E_{s'}$, because $f_!$ preserves $J$-indexed colimits by hypothesis. Hence [lem-coef-infinity-fiber-relative-colimit-criterion], applied to $c'$ and $p$, says that the inclusion of $c'$ into $E$ is a $p$-colimit diagram. In particular the cone vertex of $c'$ is a valid relative colimit apex for the transported diagram.",
+   "text": "For every edge $f:s\\to s'$ of $B$, the transported cocone $f_!c'$ is colimiting in $E_{s'}$, because $f_!$ preserves $J$-indexed colimits by hypothesis: the coherent cocone induced by $f_!c'$ is $f_!$ applied to the coherent cocone of $c'$, since precomposition with $J\\times\\Delta^1\\to J^{\\triangleright}$ commutes with postcomposition by $f_!$. Hence [lem-coef-infinity-fiber-relative-colimit-criterion], applied to $c'$ and $p$, says that the inclusion of $c'$ into $E$ is a $p$-colimit diagram. In particular the cone vertex of $c'$ is a valid relative colimit apex for the transported diagram.",
    "uses": [
     "lem-coef-infinity-fiber-relative-colimit-criterion"
    ],
@@ -94,6 +97,7 @@
   }
  ],
  "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
   "def-coef-infinity-relative-cone",
   "lem-coef-infinity-anodyne-cocones",
@@ -104,12 +108,13 @@
   "lem-coef-infinity-pointwise-cocartesian-transport",
   "lem-coef-infinity-relative-cone-constant-test",
   "lem-coef-infinity-right-anodyne-product",
-  "lem-coef-inner-anodyne-pushout-product"
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-join-slice-cocone-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-  "place": "Corollary 4.3.1.11 and its proof, printed pp. 266-267; Proposition 4.3.1.9-4.3.1.10 for transport invariance and fiberwise criterion."
+  "place": "Expanded argument following Corollary 4.3.1.11 and Propositions 4.3.1.9-4.3.1.10, printed pp. 264-267; source read online, archival copy WANTED. Existing DAG mapping-space and anodyne lemmas supply the detailed proof."
  },
  "mathlib_searches": [
   {
@@ -195,10 +200,45 @@
    "results": "{\"t\": \"2026-10-17T02:24:49Z\", \"tool\": \"leanfinder\", \"query\": \"Relative left Kan extension along inclusion of a simplicial set into its right cone over a cocartesian fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.rightExtensionInclusion\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.Truncated.rightExtensionInclusion_left\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.Truncated.rightExtensionInclusion_right_as\"], \"digest\": \"439a66151d2f3850\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned rightExtensionInclusion and StrictSegal declarations are ordinary right Kan extensions of simplicial objects; the geometric realization hit is an ordinary left Kan extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a specified cone in the base of a cocartesian infinity fibration to a relative colimit using colimits in fibers",
+   "results": "{\"t\": \"2026-10-17T07:44:20Z\", \"tool\": \"leanfinder\", \"query\": \"Lift a specified cone in the base of a cocartesian infinity fibration to a relative colimit using colimits in fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LiftsToColimit.toLiftableCocone\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit\", \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone\", \"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit_ι_app\", \"CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone_ι_app\"], \"digest\": \"02f3eb6fa09268d1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category CreatesColimit/LiftsToColimit and Grothendieck fiberwise-colimit APIs require ordinary categories; the base cocone for CreatesColimit is itself colimiting. Read Creates.lean:239-253 and FiberedCategory/Cocartesian.lean:43-77. No coherent relative-colimit theorem for arbitrary prescribed quasicategorical base cones."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cocartesian\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-17T07:44:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cocartesian\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits for the quoted Cocartesian/colimit pattern."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?colimit|cocartesian|coCartesian",
+   "results": "{\"t\": \"2026-10-17T07:44:20Z\", \"tool\": \"grep\", \"query\": \"relative.?colimit|cocartesian|coCartesian\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits in AlgebraicTopology/Quasicategory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative colimit lifting for quasicategory cocartesian fibrations with colimit preserving fiber transport",
+   "results": "{\"t\": \"2026-10-17T07:44:21Z\", \"tool\": \"leansearch\", \"query\": \"Relative colimit lifting for quasicategory cocartesian fibrations with colimit preserving fiber transport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CreatesColimit.lifts\", \"CategoryTheory.LiftsToColimit\", \"CategoryTheory.liftColimit\", \"CategoryTheory.liftsToColimitOfCreates\", \"CategoryTheory.LiftsToColimit.mk\", \"CategoryTheory.inhabitedLiftsToColimit\", \"CategoryTheory.liftedColimitIsColimit\", \"CategoryTheory.Over.isColimitLiftCocone\"], \"digest\": \"c30c74f6b3bcb3b1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category CreatesColimit/LiftsToColimit and Grothendieck fiberwise-colimit APIs require ordinary categories; the base cocone for CreatesColimit is itself colimiting. Read Creates.lean:239-253 and FiberedCategory/Cocartesian.lean:43-77. No coherent relative-colimit theorem for arbitrary prescribed quasicategorical base cones."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of relative left Kan extensions from a simplicial set to its cone over a prescribed map to the base",
+   "results": "{\"t\": \"2026-10-17T07:44:24Z\", \"tool\": \"leanfinder\", \"query\": \"Existence of relative left Kan extensions from a simplicial set to its cone over a prescribed map to the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.Truncated.rightExtensionInclusion\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"CategoryTheory.SimplicialObject.instIsLeftKanExtensionOppositeTruncatedSimplexCategoryObjSkAppTruncatedUnitSkAdjTruncation\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\"], \"digest\": \"790fd01855d73e69\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned geometric realization and coskeleton Kan extension APIs concern ordinary functor categories, not relative cone universality in a quasicategory."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cocartesian-relative-cylinder-extension",
@@ -232,17 +272,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-cocartesian-prescribed-cone-colimit-lifting",
   "worker": "stage1",
-  "summary": "Retained the statement and Steps 1-3; repaired the cone-on-cylinder inner-anodyne lift and proved relative universality by the full cocartesian mapping square, the constant-target criterion, explicit coherent-square triangles and homotopy-pullback pasting. No new nodes or Mathlib leaves.",
+  "summary": "Continued the existing six-step proof after checking HTT 4.3.1.9-4.3.1.11 and every cited node statement. Retained the strict cone construction and mapping-square argument, added actual logged Mathlib searches, marked the expanded proof as agent-written pending an archived source, and set status split. No new nodes, statement changes, or Mathlib leaves. Reviewed long Steps 4 and 6 as explicit routine constructions using existing anodyne and mapping-space lemmas; report gives the details.",
   "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, through the existing accessible-functor-category infrastructure: the local HTT Corollary 4.3.1.11 input is realized by cocartesian transport (Step 1), fiber colimit and preservation (Steps 2-3), the strict cone-on-cylinder lift (Step 4), and relative universality (Steps 5-6).",
   "tool_uses": []
  },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q129-25df41e61",
-  "group": "Q129",
+  "reviewer": "NT-cc-NO-424a363e1",
+  "group": "NO",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-25df41e61 (reviewer sub-agent of L); spot-checked: Read the item in full: statement, six steps, 12 cited node statements, the parent's Step 4, and HTT 4.3.1.9-4.3.1.11 (pp. 264-267, from a local PDF copy). The statement matches HTT Cor. 4.3.1.11 hypothesis by hypothesis, with exact v|_J=h and pv=g. Checked on J empty, J a point and p=id. Steps 2, 3, 5 and 6 are correct. Steps 5 and 6 are adjacent squares from the mapping criterion for p_J and the constant test for c', pasted with coherent triangles from Q∘(a×id); this is 4.3.1.9 in the needed special case. In Step 4, D→T^▷ is the pushout-join of the right anodyne J×{1}→J×Δ^1 with ∅→Δ^0, so it is inner anodyne; the report is right that HTT's 'inner fibration' should read inner anodyne. Repaired two small faults in fixes/dag/nodes/sec-six-functors/<item>.json. (1) C3/E1: Step 1 applied lem-coef-infinity-pointwise-cocartesian-transport, whose hypothesis needs mapping-space cocartesian lifts, but p is horn-cocartesian; I added lem-coef-infinity-cocartesian-mapping-criterion and def-coef-infinity-fibrations to its uses, with one sentence. (2) Step 4 treated the saturated meaning of inner anodyne (lem-coef-infinity-anodyne-cocones) as the same as the lifting-class meaning; I replaced that sentence with the elementary inclusion. Statement, stmt_deps and proof_deps are unchanged. No new nodes. No duplicate in the DAG: checked relative-cone-equivalence, fiber-relative-colimit-criterion, local-fiber test, filtered-fiber cone lifting and relative-cocone-parameters. Acyclic. All citations are in unit sk-prop-sf-biduality-general or are definitions or a Mathlib leaf; no tool_uses; no SGA.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-424a363e1 (reviewer sub-agent of L); spot-checked: Read in full: the item and its 6 steps, all 14 cited node statements, the parent's Step 4, HTT 4.3.1.9-4.3.1.11 (pp. 264-267, local PDF copy) and HTT 4.2.1.5. The statement matches HTT Cor. 4.3.1.11 hypothesis by hypothesis: J arbitrary, base cone arbitrary, v|_J=h and pv=g strict. Tested on J empty, J a point, p=id, B a point and B empty. No new nodes. Fault repaired (C1/C2): Step 2 was marked elementary but turned the def-cbc fiber hypothesis (an initial coherent cocone in the comma cocone category) into a strict join cocone c':J^▷→E_s with c'|_J=h'. That is the slice/fat-slice comparison (HTT 4.2.1.5), which is not elementary. Fixed by citing the existing same-unit node lem-coef-join-slice-cocone-comparison (no cycle) and lem-coef-infinity-mapping-composition, and setting elementary false. Step 3 gains one clause linking preservation of coherent cocones to the join form. proof_deps updated; the statement is unchanged. Steps 1, 3, 4, 5 and 6 are correct: the anodyne pushout-join, the gluing over gρ, the identity ρκ=id at time 0, the adjacent mapping squares, and α_0≃α_1λ from Q∘(a×id). Long Steps 4 and 6 are each one construction or argument with all non-elementary inputs cited, so they stay. Not duplicates: grothendieck-limits-colimits, marked-sections-pointwise-limits. No tool_uses, no SGA. Left unchanged: two stmt_deps added at stage 2 for the Lean predicates.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.CocartesianPrescribedConeColimitLifting",
