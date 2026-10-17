@@ -11,9 +11,109 @@
   "def-weil-finite-integral-morphism",
   "def-trf-projective-bundle-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal E=h_*\\mathcal O_T$, including its natural commutative $\\mathcal O_S$-algebra structure. The finite-morphism definition [def-weil-finite-integral-morphism] gives that $\\mathcal E$ is quasi-coherent of finite type, that $h$ is affine, and that over every affine $V=\\operatorname{Spec}R\\subseteq S$ the inverse image is $\\operatorname{Spec}A$, where $A=\\mathcal E(V)$ is a finite $R$-algebra. We construct a closed immersion into $\\mathbf P_S(\\mathcal E)$, as required by [def-trf-projective-bundle-morphism].",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-trf-projective-bundle-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0B3I (lemma-finite-projective), canonical embedding into P(h_*O_T); explicit graded-quotient verification by the worker"
+   }
+  },
+  {
+   "text": "Form a graded sheaf algebra $\\mathcal B$ with $\\mathcal B_0=\\mathcal O_S$ and $\\mathcal B_n=\\mathcal E$ for each $n\\ge1$. Write $a[n]$ for $a$ in its degree-$n$ copy. For positive $m,n$, define $a[m]b[n]=(ab)[m+n]$; let degree zero act through the given $\\mathcal O_S$-algebra structure and take the unit in degree zero. Associativity, commutativity, unitality and restriction compatibility follow directly from those of $\\mathcal E$, giving precisely [def-weil-pbc-graded-sheaf-structures]. Its underlying sheaf is the categorical sum $\\mathcal O_S\\oplus\\bigoplus_{n\\ge1}\\mathcal E$, hence is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-coproduct-closure]. For an affine $V=\\operatorname{Spec}R$, the tilde/global-sections equivalence and preservation of coproducts in [lem-weil-pbc-affine-tilde-gamma-adjunction] identify $\\mathcal B(V)$ with $C=R\\oplus\\bigoplus_{n\\ge1}A[n]$, with the displayed multiplication. Denote the global degree-one section $1_{\\mathcal E}[1]$ by $t$.",
+   "uses": [
+    "def-weil-pbc-graded-sheaf-structures",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0B3I (lemma-finite-projective), canonical embedding into P(h_*O_T); explicit graded-quotient verification by the worker"
+   }
+  },
+  {
+   "text": "The inclusion $\\mathcal E\\to\\mathcal B_1$ induces a sheaf-algebra map $q:\\operatorname{Sym}(\\mathcal E)\\to\\mathcal B$ by [lem-weil-pbc-quasi-coherent-symmetric-algebra]. It is degree preserving for the symmetric-degree grading [lem-weil-pbc-symmetric-algebra-graded]: a product of $n$ degree-one generators goes to their product in $\\mathcal B_n$. It is surjective in every degree. Degree zero is the identity on $\\mathcal O_S$; for $n\\ge1$ each local $a[n]$ is the image of $j(a)j(1)^{n-1}$. By Step 2, $\\mathcal B$ and $\\operatorname{Sym}(\\mathcal E)$ are graded $\\mathcal O_S$-algebras whose underlying modules are quasi-coherent, i.e. quasi-coherent algebras [def-weil-pbc-quasi-coherent-algebra], so both relative Proj schemes [def-nagata-relative-proj] are defined. Thus the surjective graded-map clause of [prop-nagata-relative-proj-functoriality] supplies a closed immersion $\\iota:\\operatorname{Proj}_S(\\mathcal B)\\hookrightarrow\\operatorname{Proj}_S(\\operatorname{Sym}(\\mathcal E))=\\mathbf P_S(\\mathcal E)$ over $S$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "lem-weil-pbc-symmetric-algebra-graded",
+    "prop-nagata-relative-proj-functoriality",
+    "def-weil-pbc-quasi-coherent-algebra",
+    "def-nagata-relative-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0B3I (lemma-finite-projective), canonical embedding into P(h_*O_T); explicit graded-quotient verification by the worker"
+   }
+  },
+  {
+   "text": "On an affine $V$ use $C=R\\oplus\\bigoplus_{n\\ge1}A[n]$ from Step 2 and $t=1_A[1]$. Every positive-degree homogeneous element satisfies $a[n]^2=t\\,(a^2)[2n-1]$. If a homogeneous prime contains $t$, primality therefore forces it to contain every positive-degree homogeneous element and hence $C_+$. Such a prime is excluded from $\\operatorname{Proj}(C)$ by [def-pc-proj]. Consequently the entire Proj is the single standard open $D_+(t)$. By [prop-nagata-proj-standard-open] it is canonically $\\operatorname{Spec}(C_{(t),0})$. This calculation uses no integrality, reducedness, or cancellation.",
+   "uses": [
+    "def-pc-proj",
+    "prop-nagata-proj-standard-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0B3I (lemma-finite-projective), canonical embedding into P(h_*O_T); explicit graded-quotient verification by the worker"
+   }
+  },
+  {
+   "text": "Compute $C_{(t),0}$ with the fraction convention of [def-nagata-homogeneous-localization-degree-zero]. Every fraction can be represented as $a[m]/t^m$ with $m\\ge1$: for a degree-zero numerator $r\\in R$, multiply numerator and denominator by $t$ to obtain $\\eta(r)[1]/t$. The map $a[m]/t^m\\mapsto a$ is well defined, since multiplication by $t$ on every positive-degree copy of $A$ is the identity on its coefficient, so the localization equality of two such fractions is exactly equality of their coefficients. Its inverse is $a\\mapsto a[1]/t$. The product and sum formulas show these are inverse $R$-algebra maps, and the degree-zero structure map becomes $\\eta:R\\to A$. Thus the chart of Step 4 is canonically $\\operatorname{Spec}A=h^{-1}(V)$ over $V$, using spectrum functoriality [def-weil-affine-spectrum]. The argument also applies when $A=0$: both localizations and both spectra are then zero or empty as appropriate.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0B3I (lemma-finite-projective), canonical embedding into P(h_*O_T); explicit graded-quotient verification by the worker"
+   }
+  },
+  {
+   "text": "Relative Proj restricts to the affine Proj of its section algebra, compatibly with further restriction and structure maps, by [prop-nagata-relative-proj-functoriality]. The local isomorphisms of Steps 4--5 commute with restriction: on every affine refinement of an overlap, the same formula sends $a[m]/t^m$ to the restricted section $a$, and $t$ restricts to the degree-one unit. The inverse formulas commute as well. Apply [lem-weil-pbc-scheme-morphism-gluing] to both families. Their two composites are identities on the affine-base open covers, hence are identities by uniqueness in that node. This gives an $S$-isomorphism $T\\simeq\\operatorname{Proj}_S(\\mathcal B)$. Composing it with the closed immersion of Step 3 is a closed immersion (the homeomorphism onto a closed set and sheaf-surjection conditions of [def-weil-closed-immersion] are preserved under precomposition with an isomorphism). Since $\\mathcal E$ is finite type quasi-coherent by Step 1, [def-trf-projective-bundle-morphism] now says exactly that $h$ is projective in the required convention.",
+   "uses": [
+    "prop-nagata-relative-proj-functoriality",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-closed-immersion",
+    "def-trf-projective-bundle-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0B3I (lemma-finite-projective), canonical embedding into P(h_*O_T); explicit graded-quotient verification by the worker"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-nagata-relative-proj",
+  "def-pc-proj",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "prop-nagata-proj-standard-open",
+  "prop-nagata-relative-proj-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0B3I (lemma-finite-projective): same module E=h_*O_T and canonical embedding; worker gives a graded-quotient chart verification instead of the source proof's projective-space/proper-image calculation. Uses Constructions Tags 01M4, 01N0 and 07ZI."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +142,31 @@
    "results": "no hits",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProjective|ProjectiveBundle|finite.*projective|projective.*finite",
+   "results": "msearch.py with subdirectory AlgebraicGeometry: 0 hits in Mathlib/AlgebraicGeometry. This corrects the overly prefixed subdirectory in the inherited grep; no absence conclusion is drawn from that earlier invalid path.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite scheme morphism factors as a closed embedding into the relative Proj of the symmetric algebra of its direct image structure module",
+   "results": "8 hits: Proj.fromOfGlobalSections and its toSpecZero lemmas, specTargetImageFactorization, Proj, and properness/finite-type results for Proj. These are absolute graded-ring results; none states the projective-bundle factorization for arbitrary finite scheme morphisms.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsProper",
+   "results": "9 hits, including instIsProperOfIsFinite, IsProper.instOfIsFinite, IsFinite.iff_isProper_and_isAffineHom, and ZariskisMainTheorem results. These give properness or finiteness criteria, not a closed embedding in a relative projective bundle.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-stein-smooth-generic-curve",
@@ -57,7 +178,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Stein-factorization step: the finite morphism S_0 -> S is projective in the EGA/ILO projective-bundle convention.",
+   "place": "Stein-factorization step: the finite morphism S_0 -> S is projective in the EGA/ILO projective-bundle convention, using the pushforward module and affine Proj embedding of Tag 0B3I.",
    "via": [
     "lem-trf-dejong-relative-marked-semistable",
     "lem-trf-relative-marked-nodal-reduction",
@@ -69,5 +190,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-projective-bundle",
+  "worker": "stage1",
+  "summary": "Constructed the finite-type quasi-coherent module E=h_*O_T. Explicitly formed B_0=O_S, B_n=E for n>0 and the graded surjection Sym(E) onto B. Proved from the homogeneous-prime definition and degree-zero fractions that Proj(B) is T, compatibly on affine overlaps; the existing surjective-Proj theorem then embeds T into P(E). No new nodes, hypotheses, or statement changes. The fraction comparison and prime calculation are elementary steps written in full.",
+  "blueprint": "Supplies the finite-projectivity tool in the existing Stein-factorization/alteration branch below lem-trf-local-term-locality, retaining the source's witness E=h_*O_T and its canonical embedding. The local embedding is checked with an explicit homogeneous quotient, not a new black-box finite-projectivity clause.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "why": "Quasi-coherence of the explicit graded algebra with pieces O_S and copies of h_*O_T; the trace-formula unit contains no module coproduct result."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Affine quasi-coherent correspondence and preservation of coproducts identify the section ring of the explicit graded algebra; this generic affine module tool is not supplied by the trace unit."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "why": "Universal property gives the graded algebra surjection used for the projective-bundle embedding; no trace-unit statement supplies this algebra construction."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-graded",
+    "why": "The symmetric-degree grading checks that the quotient map preserves degrees, needed for relative Proj functoriality."
+   },
+   {
+    "node": "prop-nagata-relative-proj-functoriality",
+    "why": "The generic surjective graded-map closed immersion and compatible affine restrictions produce the embedding and glue the explicit chart calculation."
+   },
+   {
+    "node": "prop-nagata-proj-standard-open",
+    "why": "The generic homogeneous-localization chart identifies Proj(B) with its single affine chart; it is not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic scheme-map gluing and its uniqueness glue the explicitly compatible chart maps and inverse maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "prop-nagata-relative-proj-functoriality",
+  "prop-nagata-proj-standard-open",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N8-3ba4f25e5",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-3ba4f25e5 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited node's statement, including def-nagata-relative-proj, def-nagata-affine-proj and def-weil-pbc-quasi-coherent-algebra. The item statement matches Stacks morphisms.tex Tag 0B3I (morphisms-lemma-finite-projective) read with Definition 01W8(1), with no hypothesis added and the statement unchanged. The steps check: E=h_*O_T is quasi-coherent of finite type (def-weil-finite-integral-morphism). B has B_0=O_S and B_n=E, and its sections over an affine are C=R plus positive copies of A, by the tilde/Gamma clauses (2)-(4). Sym(E)->B is graded and surjective because a[n]=q(j(a)j(1)^{n-1}), so functoriality clause (3) gives the closed immersion. In Step 4, a[n]^2=t(a^2)[2n-1] puts every prime containing t over C_+, so Proj C=D_+(t); the cover clause alone would not do this, since t does not generate C_+. In Step 5, C_(t),0 is A: equality of fractions a[m]/t^m comes down to equality of coefficients. Step 6 glues on affine refinements and never assumes an overlap is affine. I tested S empty, A=0, A=R, A=R/I, k[eps] over k, RxR, and R->A not injective; all work. Duplicate search (rg for 0B3I, lemma-finite-projective and finite/projective wording) found no node stating this; the hits are citers or unrelated statements. There are no new nodes. I accept the seven declared tool_uses as generic black boxes: none replaces a step of the sk-i-curve-zero route. The source typo the report notes (R[x]->Sym(A) where A is meant) is real and does not affect the delivery. One fix, B3/C4: Step 3 formed Proj_S(B) without citing the relative-Proj definition or the quasi-coherent-algebra hypothesis. I added [def-weil-pbc-quasi-coherent-algebra] and [def-nagata-relative-proj] to Step 3's text and uses and recomputed proof_deps, in fixes/dag/nodes/sec-trace-formula/lem-trf-finite-projective-bundle.json.; 1 file(s) fixed by the reviewer"
  }
 }
