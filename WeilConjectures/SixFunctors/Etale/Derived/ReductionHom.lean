@@ -106,12 +106,15 @@ lemma nonempty_iso_derivedExtendScalars_of_isDerivedBaseChange {K : 𝐃(X, Λ)}
     {η : K ⟶ (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ).obj K'}
     (hη : Sheaf.IsDerivedBaseChange η) :
     Nonempty ((derivedExtendScalars hφ ha X).obj K ≅ K') := by
-  let adj := derivedExtendScalarsAdjunction hφ ha X
   have := Sheaf.IsDerivedBaseChange.isIso
     (isDerivedBaseChange_derivedExtendScalarsAdjunction_unit hφ ha X K) hη
-    ((adj.homEquiv K K').symm η) (by rw [← Adjunction.homEquiv_unit, Equiv.apply_symm_apply])
-  exact ⟨asIso ((adj.homEquiv K K').symm η)⟩
+    (((derivedExtendScalarsAdjunction hφ ha X).homEquiv K K').symm η)
+    (((derivedExtendScalarsAdjunction hφ ha X).homEquiv_unit K K' _).symm.trans
+      (Equiv.apply_symm_apply _ η))
+  exact ⟨asIso (((derivedExtendScalarsAdjunction hφ ha X).homEquiv K K').symm η)⟩
 
+set_option maxHeartbeats 1000000 in
+-- the kernel takes long to check the instances of the derived tensor product
 /-- The derived extension of scalars is monoidal: `(K ⊗ᴸ M) ⊗ᴸ_Λ Λ' ≅ (K ⊗ᴸ_Λ Λ') ⊗ᴸ (M ⊗ᴸ_Λ Λ')`,
 naturally in `M`. -/
 noncomputable def derivedExtendScalarsTensorIso (K : 𝐃(X, Λ)) :
@@ -122,6 +125,8 @@ noncomputable def derivedExtendScalarsTensorIso (K : 𝐃(X, Λ)) :
   have := Sheaf.preservesFlat_extendScalars X.smallEtaleTopology hφ ha
   (asIso (Sheaf.extendScalars X.smallEtaleTopology φ).leftDerivedTensorComparisonOfKFlat).app K
 
+set_option maxHeartbeats 1000000 in
+-- the kernel takes long to check the instances of the derived tensor product
 /-- The extension–restriction adjunction for internal homs:
 `RHom_Λ(K, Res N) ≅ Res RHom_{Λ'}(K ⊗ᴸ_Λ Λ', N)`, naturally in `N`. Both sides are right
 adjoint to `M ↦ (K ⊗ᴸ M) ⊗ᴸ_Λ Λ' ≅ (K ⊗ᴸ_Λ Λ') ⊗ᴸ (M ⊗ᴸ_Λ Λ')`. -/
@@ -163,7 +168,7 @@ lemma nonempty_iso_derivedRestrictScalars_derivedExtendScalars (L : 𝐃(X, Λ))
       (asIso (F.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj P'))) ≪≫
     R.mapDerivedCategory.mapIso
       (_root_.DerivedCategory.Qh.mapIso ((F.mapHomotopyCategoryFactors _).app P') ≪≫
-        (_root_.DerivedCategory.quotientCompQhIso _).app _) ≪≫
+        (_root_.DerivedCategory.quotientCompQhIso _).app ((F.mapHomologicalComplex _).obj P')) ≪≫
     R.mapDerivedCategoryFactors.app _ ≪≫
     _root_.DerivedCategory.Q.mapIso
       ((Functor.mapHomologicalComplexCompIso
@@ -173,7 +178,8 @@ lemma nonempty_iso_derivedRestrictScalars_derivedExtendScalars (L : 𝐃(X, Λ))
     ((_root_.DerivedCategory.quotientCompQhIso _).app _).symm ≪≫
     _root_.DerivedCategory.Qh.mapIso
       (Functor.Monoidal.μIso (HomotopyCategory.quotient _ (ComplexShape.up ℤ)) P' S).symm ≪≫
-    (asIso ((_root_.DerivedCategory.tensorLeftCounit _).app _)).symm ≪≫
+    (asIso ((_root_.DerivedCategory.tensorLeftCounit ((HomotopyCategory.quotient _ _).obj P')).app
+      ((HomotopyCategory.quotient _ _).obj S))).symm ≪≫
     tensorIso e ((_root_.DerivedCategory.quotientCompQhIso _).app S ≪≫
       ((_root_.DerivedCategory.singleFunctorIsoCompQ _ 0).app c).symm)⟩
 
