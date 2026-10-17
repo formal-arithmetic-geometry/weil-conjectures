@@ -19,22 +19,16 @@
  ],
  "proof": [
   {
-   "text": "On every quasi-compact étale open of Y, properness gives a finite cohomological-amplitude bound for g and the higher direct images commute with filtered colimits of sheaves. Thus the finite-amplitude K-injective computation of the total right derived functor identifies its coproduct comparison with an isomorphism on each such open. Restriction to these opens is exact and jointly detects isomorphisms, so the local comparisons assemble to the global coproduct comparison.",
-   "uses": [
-    "lem-weil-pbc-cohomology-filtered-colimit",
-    "lem-grothendieck-derived-has-coproducts"
-   ],
-   "elementary": false
+   "text": "Retired auxiliary obligation, not a proof of the historical statement. Its sole caller was the unused AlgebraicGeometry.Etale.CompactificationUpperShriek namespace, now withdrawn. The active AlgebraicGeometry.Etale.rightDerivedUpperShriek is defined in WeilConjectures.SixFunctors.Etale.Derived.UpperShriek with an explicit left-adjoint hypothesis for general coefficients. Its finite-module-coefficient instance uses the already proved isLeftAdjoint_rightDerivedLowerShriekOfCompactification in LowerShriekLeftAdjoint, which retains the compactification, coproduct-preservation and Brown-representability route. A consumer source scan and compiled-expression audit find no external caller of the withdrawn namespace. The unit sk-prop-sf-cbc has empty realized arrays; no realized statement or proof step is withdrawn.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-cohomology-filtered-colimit",
-  "lem-grothendieck-derived-has-coproducts"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-etale-exceptional-adjoint.md",
-  "place": "Proof, first paragraph"
+  "document": "coord/changes/etale-compactification-upper-shriek-retirement.md",
+  "place": "H1 retirement of unused auxiliary route; consumer audit and existing active finite-coefficient implementation"
  },
  "mathlib_searches": [
   {
@@ -84,16 +78,6 @@
  },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ProperEtaleDerivedLowerStarCoproducts",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProperEtaleDerivedLowerStarCoproducts.lean",
-  "declaration": "AlgebraicGeometry.Etale.proper_rightDerivedLowerStar_preservesCoproducts_for_grothendieck",
-  "statement": "theorem proper_rightDerivedLowerStar_preservesCoproducts_for_grothendieck {Z Y : Scheme.{u}} (g : Z ⟶ Y) [IsProper g] : ∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) ((g)_*[A]).rightDerivedFunctor",
-  "branch": "sheaf-dag",
-  "by": "F4",
-  "date": "2026-10-17"
- },
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -105,14 +89,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F4",
+  "reviewer": "C-b9f5f",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261016T221610-L-1615266",
+  "landing": "20261017T003421-L-3315038",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Withdrawal of the sorry'd item theorem and retirement of the unused Etale.CompactificationUpperShriek namespace (unclaimed module) matched against a compiled-term audit of 399/402 downstream modules (0 references), compiles of Etale.Derived.UpperShriek and 3 ProEtale UpperShriek modules against the delivered modules, the change record's Users table, and the node diff (only proof/proof_deps/proof_origin/lean changed)"
  },
  "lean_audit": {
   "master": {
