@@ -14,9 +14,76 @@
   "def-weil-pbc-projective-module",
   "def-trf-mittag-leffler-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F=\\bigoplus_{p\\in P}R$, explicitly the module of finitely supported families of coefficients indexed by the underlying set of $P$. Define $v:F\\to P$ by $v((r_p)_p)=\\sum_p r_pp$. This is $R$-linear and surjective since the family with coefficient $1$ at $p$ and zero elsewhere maps to $p$. Set $K=\\ker(v)$ and let $u:K\\to F$ be inclusion. Thus $u$ is injective and $\\operatorname{im}(u)=\\ker(v)$, giving $0\\to K\\to F\\to P\\to0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DK, lemma-lift-ML, proof: first sentence, choosing the free cover; explicit construction."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-flat-projective-reduction-completion-splitting] with $E=F$ and $M=P$ to the sequence just constructed. Its two extra hypotheses are exactly the assumed flatness of $P$ and projectivity of $P/IP$ over $R/I$. Consequently the quotient-level map $r=\\widehat v:\\widehat F\\to P^\\wedge$ has an $R$-linear section $s:P^\\wedge\\to\\widehat F$ with $r\\circ s=\\mathrm{id}_{P^\\wedge}$. In particular, $s$ is injective and, after tensoring with any module $Q$, $\\mathrm{id}_Q\\otimes s$ is still split injective: its left inverse is $\\mathrm{id}_Q\\otimes r$. The analogous assertion holds for $s\\otimes\\mathrm{id}_Q$, by the tensor universal property [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "lem-trf-flat-projective-reduction-completion-splitting",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DK, lemma-lift-ML, proof: second sentence, splitting the completed sequence."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-completed-free-flat-mittag-leffler] to the set underlying $P$. The ring $R$ is Noetherian and $I$-adically complete by hypothesis, and its module $F$ is precisely the finitely supported family module in that statement. It follows that $\\widehat F$ is flat over $R$ and Mittag-Leffler. No finite generation of $P$ or of the indexing set is assumed.",
+   "uses": [
+    "lem-trf-completed-free-flat-mittag-leffler"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DK, lemma-lift-ML, proof: last sentence, the completed-free-module case."
+   }
+  },
+  {
+   "text": "For any injective $R$-linear map $f:Q_1\\to Q_2$, let $z\\in Q_1\\otimes_R P^\\wedge$ satisfy $(f\\otimes\\mathrm{id})z=0$. Naturality of the tensor maps gives $(f\\otimes\\mathrm{id}_{\\widehat F})(\\mathrm{id}_{Q_1}\\otimes s)z=(\\mathrm{id}_{Q_2}\\otimes s)(f\\otimes\\mathrm{id}_{P^\\wedge})z=0$. Since $\\widehat F$ is flat, $(\\mathrm{id}_{Q_1}\\otimes s)z=0$; applying $\\mathrm{id}_{Q_1}\\otimes r$ gives $z=0$. Thus tensoring $f$ with $P^\\wedge$ is injective, which is exactly flatness by [def-weil-pbc-flat-ring-map]. The naturality identity is verified on $q\\otimes p$ and hence on all tensors by [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DK, lemma-lift-ML, proof: third sentence, direct-summand inheritance of flatness, written from the definition."
+   }
+  },
+  {
+   "text": "Fix any set $J$ and family $(Q_j)_{j\\in J}$, and use the canonical maps $\\theta$ of [def-trf-mittag-leffler-module]. If $z\\in P^\\wedge\\otimes_R\\prod_jQ_j$ satisfies $\\theta_{P^\\wedge,(Q_j)}(z)=0$, then $\\theta_{\\widehat F,(Q_j)}((s\\otimes\\mathrm{id})z)=(\\prod_j(s\\otimes\\mathrm{id}_{Q_j}))\\theta_{P^\\wedge,(Q_j)}(z)=0$. This identity holds on $p\\otimes(q_j)_j$ since both sides have $j$-coordinate $s(p)\\otimes q_j$, and extends by linearity [def-weil-pbc-module-tensor-product]. The Mittag-Leffler property of $\\widehat F$ makes its $\\theta$ injective, so $(s\\otimes\\mathrm{id})z=0$. Applying $r\\otimes\\mathrm{id}$ gives $z=0$, as $rs=\\mathrm{id}$. This proves the required Mittag-Leffler condition for $P^\\wedge$, including empty $J$.",
+   "uses": [
+    "def-trf-mittag-leffler-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DK, lemma-lift-ML, proof: third sentence, direct-summand inheritance of Mittag-Leffler, written from the tensor criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-flat-projective-reduction-completion-splitting",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-completed-free-flat-mittag-leffler",
+  "def-weil-pbc-flat-ring-map",
+  "def-trf-mittag-leffler-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05DK, lemma-lift-ML, proof, with the elementary retract arguments expanded."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +119,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"AdicCompletion.sum\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {ι : Type u_6} →\\n        (M : ι → Type u_7) →\\n          [inst_1 : (i : ι) → AddCommGroup (M i)] →\\n            [inst_2 : (i : ι) → Module R (M i)] →\\n              [DecidableEq ι] →\\n                (DirectSum ι fun j => AdicCompletion \", \"doc\": \"A linear map from the direct sum of the $I$-adic completions of a family of $R$-modules $\\\\{M_j\\\\}_{j \\\\in \\\\iota}$ to the $I$-adic completion of their direct sum. This map is defined over the $I$-adic co\"}\n  {\"name\": \"AdicCompletion.sum_lof\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {ι : Type u_6} (M : ι → Type u_7)\\n  [inst_1 : (i : ι) → AddCommGroup (M i)] [inst_2 : (i : ι) → Module R (M i)] [inst_3 : DecidableEq ι] (j : ι)\\n  (x : AdicCompletion I (M j)),\\n  (AdicCompletion.sum I M) ((DirectSum.lof (AdicCompletion I R) ι (fun i\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and a family of $ R $-modules $\\\\{M_j\\\\}_{j \\\\in \\\\iota}$ with decidable index equality, the composition of the I-adic completion sum map with the direct sum \"}\n  {\"name\": \"AdicCompletion.sumEquivOfFintype\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {ι : Type u_6} →\\n        (M : ι → Type u_7) →\\n          [inst_1 : (i : ι) → AddCommGroup (M i)] →\\n            [inst_2 : (i : ι) → Module R (M i)] →\\n              [Fintype ι] →\\n                [DecidableEq ι] →\\n                  (Dire\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, a finite index type $ \\\\iota $, and a family of $ R $-modules $ \\\\{M_i\\\\}_{i \\\\in \\\\iota} $, this constructs a linear equivalence between the $ I $-adic comp\"}\n  {\"name\": \"AdicCompletion.sumInv\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {ι : Type u_6} →\\n        (M : ι → Type u_7) →\\n          [inst_1 : (i : ι) → AddCommGroup (M i)] →\\n            [inst_2 : (i : ι) → Module R (M i)] →\\n              [Fintype ι] →\\n                AdicCompletion I (DirectSum ι fun j => M \", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, a finite index type $ \\\\iota $, and a family of $ R $-modules $ \\\\{M_i\\\\}_{i \\\\in \\\\iota} $, this constructs a linear equivalence between the $ I $-adic comp\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [IsNoetherianRing R] →\\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I \", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"IsAdicComplete\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the proposition that $ M $ is adic complete with respect to $ I $.\"}",
    "date": "2026-10-18",
    "verdict": "no match: flat_of_isNoetherian completes the base ring, not an arbitrary flat module with projective reduction, and gives no module Mittag-Leffler assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "completion of flat module with projective reduction over complete Noetherian ring is flat Mittag Leffler",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M], Function.Bijective ⇑(AdicCompletion.ofTensorProduct I M)\", \"doc\": \"If $ R $ is a Noetherian ring, $ I $ is an ideal of $ R $, and $ M $ is a finitely generated $ R $-module, then the natural linear map from the tensor product of the $ I $-adic completion of $ R $ wit\"}\n  {\"name\": \"IsAdicComplete.toIsPrecomplete\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} {M : Type u_4} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  [self : IsAdicComplete I M], IsPrecomplete I M\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, if $ M $ is adic complete with respect to $ I $, then $ M $ is precomplete with respect to $ I $.\"}\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M],\\n  ↑(AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) = AdicCompletion.ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : TensorProduct R (AdicCompletion I R) M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) x = (AdicCompletion.o\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}\n  {\"name\": \"AdicCompletion.map_exact\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {I : Ideal R} {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : Type u} [inst_5 : AddCommGroup P]\\n  [inst_6 : Module R P] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N} {g : N \", \"doc\": \"If $ f : M \\\\to N $ and $ g : N \\\\to P $ are $ R $-linear maps forming an exact sequence (i.e., $ \\\\operatorname{im} f = \\\\ker g $), then their induced $ I $-adic completions $ \\\\hat{f} : \\\\hat{M} \\\\to \\\\hat{\"}\n  {\"name\": \"AdicCompletion.map_injective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N},\\n  Function.Injective ⇑f → Function.Injective ⇑(AdicCompletion.map I f\", \"doc\": \"If $ f : M \\\\to N $ is an injective $ R $-linear map between $ R $-modules, then the induced map between the $ I $-adic completions of $ M $ and $ N $ is also injective, where $ R $ is a commutative ri\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the completion-flat instance concerns the base ring, not arbitrary flat modules, and none of the hits gives the module Mittag-Leffler assertion; the existing second-phrasing search is retained."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete, Module.Projective, Module.Flat",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: the completion-flat instance concerns the base ring, not arbitrary flat modules, and none of the hits gives the module Mittag-Leffler assertion; the existing second-phrasing search is retained."
+  },
+  {
+   "tool": "grep",
+   "query": "Mittag|mittag|AdicCompletion.*[Ff]lat|[Pp]rojective.*AdicCompletion",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"line\": \"21\", \"text\": \"* `F.IsMittagLeffler` states that the functor `F` satisfies the Mittag-Leffler\"}\n  {\"file\": \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"line\": \"26\", \"text\": \"  cofiltered, then it is Mittag-Leffler if `F` is, see `IsMittagLeffler.toPreimages`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"line\": \"34\", \"text\": \"* `isMittagLeffler_of_exists_finite_range` shows that if `J` is cofiltered and for all `j`,\"}\n  {\"file\": \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"line\": \"36\", \"text\": \"  `F` is Mittag-Leffler.\"}\n  {\"file\": \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"line\": \"37\", \"text\": \"* `surjective_toEventualRanges` shows that if `F` is Mittag-Leffler, then `F.toEventualRanges`\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean\", \"line\": \"24\", \"text\": \"as well as the infinite sum representation of cotangent (also known as the Mittag-Leffler\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean\", \"line\": \"69\", \"text\": \"section MittagLeffler\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean\", \"line\": \"239\", \"text\": \"end MittagLeffler\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Flat.lean\", \"line\": \"24\", \"text\": \"  Since `R` is Noetherian, `AdicCompletion I R` is `R`-flat so `A` is a retract\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Exactness.lean\", \"line\": \"27\", \"text\": \"All results are proven directly without using Mittag-Leffler systems.\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the completion-flat instance concerns the base ring, not arbitrary flat modules, and none of the hits gives the module Mittag-Leffler assertion; the existing second-phrasing search is retained."
+  },
+  {
+   "tool": "leansearch",
+   "query": "flat Mittag Leffler completion projective reduction modulo ideal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.map_val_apply\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"(f : M →ₗ[R] N) {n : ℕ} (x : AdicCompletion I M) : (map I f x).val n = f.reduceModIdeal (I ^ n) (x.val n)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $, and an $ R $-linear map $ f : M \\to N $, the induced linear map between the $ I $-adic completions of $ M $ and $ N $ satisf\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"Module.Flat.projective_of_finitePresentation\", \"module\": \"Mathlib.RingTheory.Flat.EquationalCriterion\", \"type\": \"[Flat R M] [FinitePresentation R M] : Projective R M\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $ and $ M $ is finitely presented, then $ M $ is a projective module over $ R $.\"}\n  {\"name\": \"Module.flat_of_localized_maximal\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \"(h : ∀ (P : Ideal R) [P.IsMaximal], Flat R (LocalizedModule P.primeCompl M)) : Flat R M\", \"doc\": \"Let $ R $ be a commutative semiring and $ M $ an $ R $-module. If for every maximal ideal $ P $ of $ R $, the localization of $ M $ at the complement of $ P $ is a flat $ R $-module, then $ M $ is fla\"}\n  {\"name\": \"AdicCompletion.induction_on\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{p : AdicCompletion I M → Prop} (x : AdicCompletion I M) (h : ∀ (f : AdicCauchySequence I M), p (mk I M f)) : p x\", \"doc\": \"For any property $ p $ on the $ I $-adic completion of an $ R $-module $ M $, if $ p $ holds for all elements obtained by applying the canonical map from $ I $-adic Cauchy sequences to the completion,\"}\n  {\"name\": \"AdicCompletion.module\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Module (AdicCompletion I R) (AdicCompletion I M)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, the $ I $-adic completion of $ M $ admits a scalar multiplication by the $ I $-adic completion of $ R $, making it a module ove\"}\n  {\"name\": \"Module.Flat.of_projective\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"[Projective R M] : Flat R M\", \"doc\": \"Every projective module over a commutative semiring is flat. Specifically, if $ M $ is a projective module over a commutative semiring $ R $, then $ M $ satisfies the flatness condition, meaning tenso\"}\n  {\"name\": \"Module.FaithfullyFlat.iff_flat_and_ideal_smul_eq_top\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \": FaithfullyFlat R M ↔ (Flat R M ∧ ∀ (I : Ideal R), I • (⊤ : Submodule R M) = ⊤ → I = ⊤)\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is faithfully flat if and only if $ M $ is flat and for every ideal $ I $ of $ R $, the condition $ I \\\\cdot M = M $ implies $ I = R $.\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the completion-flat instance concerns the base ring, not arbitrary flat modules, and none of the hits gives the module Mittag-Leffler assertion; the existing second-phrasing search is retained."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-flat-pure-complete-projective",
@@ -86,5 +181,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-completion-flat-mittag-leffler",
+  "worker": "stage1",
+  "summary": "Followed Tag 05DK: constructed a free cover, applied the general completed-sequence splitting lemma, applied the completed-free-module lemma, and proved both retract inheritance assertions directly using tensor maps. Created two source lemmas as statement-only nodes; retained the statement and its existing searches.",
+  "blueprint": "Historical ancestry through lem-trf-local-flat-pure-complete-projective to lem-trf-local-term-locality, proof (1)--(2) semistable-alteration/projectivity supporting machinery: the sentence in Tag 05DP that the completion is Mittag-Leffler. This split realizes its Tag 05DK input in the order of that source proof. The current main-20261015 ancestor no longer explicitly mentions this historical machinery; no unit or ancestor route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q50-c7c816384",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q50-c7c816384 (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, unit route, DAG context, cited definitions, and Stacks Tags 05DK, 05D3, and 05DJ. The statements and five proof steps are correct, hypotheses match, edge cases check out, searches and blueprint metadata are present, and no duplicates, cycles, route-pivot machinery, or batch-5 violations were found. Review written to review.md."
  }
 }
