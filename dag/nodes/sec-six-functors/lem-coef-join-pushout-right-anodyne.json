@@ -29,7 +29,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-right-anodyne"
+  "def-coef-infinity-right-anodyne",
+  "lem-coef-infinity-pushout-join-saturation"
  ],
  "proof": [
   {
@@ -347,5 +348,23 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-3fc431986 (reviewer sub-agent of L); spot-checked: I read the item, all four cited statements (def-cbc-enhanced-diagrams-cones, def-coef-infinity-right-anodyne, def-weil-pbc-simplicial-set, lem-coef-kan-quillen-right-proper), the parent lem-coef-contractible-join-right-anodyne and how its Step 3 uses the item, the unit, the chapter and the blueprint ancestor. Source: HTT 4.2.3.5 is not archived under literature/ and network access is blocked here, so I could not read the cited page. The proof is correctly marked by=agent with a WANTED line. I checked every step myself from the cited statements. Statement: monomorphisms i and j with j a realization weak equivalence, conclusion right anodyne (horns 0<i<=n). It is the Joyal lemma, unweakened, with no Kan hypothesis. Small cases checked: n=0,m=1,k=0 gives Lambda^2_1 and k=1 gives Lambda^2_2; identity maps; A empty; B empty. Steps: 1, the degreewise union and intersection A0*B0 are correct. 2, isomorphisms and retracts are handled. 3, pushouts: the complement (A-A0)x(B-B0) maps bijectively, also for a non-injective attaching map, in both variables. 4-5, the P and Q chains: the successor intersections are D(X_a->X_{a+1},j), the chains are continuous, and the endpoints are right. 6, coproduct closure follows from pushouts and transfinite composition. 7, Delta^n*Delta^m is Delta^N and the domain is Lambda^N_{n+1+k}, checked for pure and mixed simplices and for n=0. 8, the horn index p lies between 1 and N. 9-10 use only the statement of the Kan-Quillen node: trivial cofibrations are horn-cell retracts and monomorphisms are boundary-cell composites. proof_deps equals the union of the uses, and there is no cycle. There are no new nodes. No duplicate: pushout-join-saturation and anodyne-cocones are for inner anodyne maps, the product nodes are not joins, and cone-mono covers only B=Delta^0. The only cited statement is in the item's own unit. Accepted tool uses: the two definition nodes, as notions only. Not a target node, so the base-change morphism and coefficient category checks do not apply. No SGA source is used. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6eec1862",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Node diff vs base: only lean record and stmt_deps (+lem-coef-infinity-pushout-join-saturation, a node already landed with a lean record that owns orderedJoinFunctor/pushoutJoin; allowed, no cycle). Dependency node files identical to base. Statement matches HTT 4.2.3.5 and the node clause by clause: SSet.{u} A0 A B0 B; Mono i, Mono j (degreewise injective); IsWeakHomotopyEquivalence j (realization pi0/pi_r); conclusion SSet.rightAnodyneExtensions (pushoutJoin i j) with pushoutJoin's (A,B,K,L):=(A0,A,B0,B), giving the true pushout (A0*B)+_(A0*B0)(A*B0)->A*B; right-anodyne class uses horn n i with 0<i. No extra assumptions or universe restriction. Edge cases checked: empty factors, j iso, n=0, outer horns giving right horn p=n+1+k>=1. No hollow defs, only sorry, source-place and blueprint docstrings present, lean.statement matches signature, no duplicate found. nt_compile.py --json on snapshot text: rc=0, no errors or warnings. Cosmetic only: report text 'HTT Lemma the project server' should read 4.2.3.5."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicTopology.JoinPushoutRightAnodyne",
+  "file": "lean/Sheaf/AlgebraicTopology/JoinPushoutRightAnodyne.lean",
+  "declaration": "SSet.Enhanced.join_pushout_right_anodyne",
+  "statement": "theorem join_pushout_right_anodyne {A₀ A B₀ B : SSet.{u}} (i : A₀ ⟶ A) (j : B₀ ⟶ B) (hi : Mono i) (hjMono : Mono j) (hj : IsWeakHomotopyEquivalence j) : rightAnodyneExtensions (pushoutJoin i j)",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-17"
  }
 }

@@ -28,7 +28,8 @@
  "stmt_deps": [
   "lem-coef-bisimplicial-reedy-division-calculus",
   "lem-coef-segal-dk-diagonal-equivalence",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "def-coef-segal-space"
  ],
  "proof": [
   {
@@ -187,5 +188,24 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-fb6e41545 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all six steps and every cited statement (classifier, division calculus, dk-diagonal, Kan–Quillen, path comparison, pullback invariance, Reedy model structure), plus def-coef-homotopy-segal-space and def-cbc for the path-model hofib and the graph definition of composition. Joyal–Tierney 4.2 and Rezk 6.2/6.4 are not in literature/; they are listed as WANTED and proof_origin is agent. No new nodes. All uses are in unit sk-prop-sf-biduality-general, so no tool_uses. proof_deps equals the union of the uses. No cycle: 260 nodes visited, the item never reached. Small cases agree: empty X; terminal X; the discrete nerve of a category, where both conditions hold iff every isomorphism is an identity; and a nontrivial group, where p is a Kan fibration but not trivial. Step 1: the S_n/T_n induction (cu=u'a holds through the last-X_1 coordinate) and 2-out-of-3 are correct. Step 2: the strict and homotopy hom-spaces agree through the path-comparison P, which is literally the def-cbc hofib. The trivial spine fibration is surjective on vertices (n=0 lifting), and the same σ gives the same composite in both conventions, so X_eq is the same. Step 3: (E×F(0)×cΔ^q)=J⊠Δ^q, so (X^E)_0=J\\X and εc=s_0. Steps 4–6: 2-out-of-3 with pc=id, and p is a Kan fibration because u_0 is mono. No duplicate among the joyal-walking-isomorphism-fibration-test, complete-segal-dk-levelwise, segal-equivalence-outer-horn and rezk-local-model nodes. FIX: added one sentence to step 1 (which already cites lem-coef-reedy-model-structure). It identifies the division-calculus vertical Reedy fibrancy with the classifier's Reedy fibrancy: δ_n\\X is the matching map X_n→M_nX because ∂Δ^n is the colimit of its proper faces. The step's 'Reedy-fibrant' conclusion relied on that identification without stating it. No statement, dependency or provenance change.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-703d3f8ea",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: X:BSet.{u}; vertical Reedy fibrancy = verticalFibrations (terminal.from X) (outer matching maps); hSegal on Functor.curry.obj X (outer = first coordinate, consistent with leftDivision and SegalSpace.row); J = Mathlib coherentIso = nerve of WalkingIso (codiscrete on ULift Bool); u0 = yonedaEquiv.symm coherentIso.x₀; p = leftMap u0 (𝟙 X) : J\\X → Δ[0]\\X; trivial Kan fibration = Fibration ∧ Enhanced.IsWeakHomotopyEquivalence (exactly the Kan–Quillen weakEquivalenceStructure). Completeness reuses landed SegalSpace.IsComplete: IsSegal conjunct follows from the hypotheses (node step 1), the factor exists and is unique, and strict-fibre equivalenceArrows equals the hX iso components by node step 2. stmt_deps gains only the landed def-coef-segal-space (brief §5; same unit; no cycle). Statement/proof/source unchanged; lean.statement verbatim in the file. No definitions; single sorry; source and blueprint docstrings; six-step proof docstring; one universe u, autoImplicit false. Edge cases: empty X, terminal X, discrete nerve, nontrivial group, degree-0 lifting. nt_compile.py --json on the side overlay: exit 0, no errors or warnings (warn.sorry=false). Worker report and second-reading sections present. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CompleteSegalWalkingIsomorphism",
+  "declaration": "SSet.BisimplicialDivision.complete_segal_walking_isomorphism",
+  "file": "lean/Sheaf/AlgebraicTopology/CompleteSegalWalkingIsomorphism.lean",
+  "statement": "theorem complete_segal_walking_isomorphism (X : BSet.{u}) (hReedy : verticalFibrations (terminal.from X)) (hSegal : HomotopySegal.IsHomotopySegalSpace (Functor.curry.obj X)) : CategoryTheory.SegalSpace.IsComplete X ↔ Fibration (leftMap (SSet.yonedaEquiv.symm coherentIso.x₀) (𝟙 X)) ∧ Enhanced.IsWeakHomotopyEquivalence (leftMap (SSet.yonedaEquiv.symm coherentIso.x₀) (𝟙 X))",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing completeness and equivalence-component definitions of def-coef-segal-space, added as a landed statement dependency. Under vertical Reedy fibrancy the strict and path-model mapping fibres have identical component categories, as detailed in the proof docstring. The actual division restriction has target Delta[0] backslash X, canonically X_0; trivial Kan fibration is expressed as Kan fibration and the recorded realization weak equivalence."
  }
 }
