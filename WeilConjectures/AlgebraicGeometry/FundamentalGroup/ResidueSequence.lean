@@ -94,6 +94,43 @@ lemma residue_eq_add_of_galoisCharacter_eq_add {T T₁ T₂ : EtaleTorsor (ULift
     show T.galoisCharacter j = T₁.galoisCharacter j + T₂.galoisCharacter j from funext h]
   exact kummerResidue_add z hξΩ hx₁ hf₁ hχ₁ hx₂ hf₂ hχ₂
 
+/-- Blueprint `lem-wf-open-curve-residue-sequence`: the residues are compatible with the
+reduction of coefficients `ℤ / N d → ℤ / N`.
+
+If the Galois character of a `ℤ / N`-torsor `T'` is the reduction of that of a
+`ℤ / N d`-torsor `T`, then the residues of `T'` are the reductions of those of `T`, along the
+transition map `Hom(μ_{N d}, ℤ / N d) → Hom(μ_N, ℤ / N)` induced by `ξ ↦ ξ ^ d`. -/
+theorem residue_eq_castHom_of_galoisCharacter {d : ℕ} [NeZero (N * d)]
+    [NeZero ((N * d : ℕ) : k)] [HasEnoughRootsOfUnity k (N * d)]
+    {T : EtaleTorsor (ULift.{u + 1} (ZMod (N * d))) U} {T' : EtaleTorsor (ULift.{u + 1} (ZMod N)) U}
+    (h : ∀ σ, T'.galoisCharacter j σ =
+      ZMod.castHom (dvd_mul_right N d) (ZMod N) (T.galoisCharacter j σ))
+    (z : C) (ξ : rootsOfUnity (N * d) k) (ξ' : rootsOfUnity N k)
+    (hξ : ((ξ' : kˣ) : k) = ((ξ : kˣ) : k) ^ d) :
+    T'.residue j p z (Additive.ofMul ξ') =
+      ZMod.castHom (dvd_mul_right N d) (ZMod N) (T.residue j p z (Additive.ofMul ξ)) := by
+  have hξN : ((ξ : kˣ) : k) ^ (N * d) = 1 := by
+    rw [← Units.val_pow_eq_pow_val, (mem_rootsOfUnity _ _).1 ξ.2, Units.val_one]
+  obtain ⟨x, f, hx, hf, hχ⟩ := T.exists_kummerElement j p hξN
+  set ξΩ := algebraMap C.functionField Ω (p.functionFieldConstants ((ξ : kˣ) : k)) with hξΩdef
+  have hξΩ : ξΩ ^ (N * d) = 1 := by rw [hξΩdef, ← map_pow, ← map_pow, hξN, map_one, map_one]
+  rw [T.residue_eq_ord j p z (Additive.ofMul ξ) hx hf hχ]
+  rw [T'.residue_eq_ord j p z (Additive.ofMul ξ') (x := x ^ d) (f := f) (pow_ne_zero _ hx)
+    (by rw [hf, ← pow_mul, mul_comm]) ?_]
+  · rw [map_intCast]
+  · intro σ
+    have hξ' : algebraMap C.functionField Ω
+        (p.functionFieldConstants (((Additive.ofMul ξ').toMul : kˣ) : k)) = ξΩ ^ d := by
+      rw [hξΩdef, ← map_pow, ← map_pow, ← hξ]
+      rfl
+    rw [hξ', map_pow, hχ σ, h σ, mul_pow, ← pow_mul, ← pow_mul, ZMod.castHom_apply,
+      ZMod.cast_eq_val, ZMod.val_natCast]
+    congr 1
+    set a := (T.galoisCharacter j σ).val
+    conv_lhs => rw [← Nat.mod_add_div a N]
+    rw [show (a % N + N * (a / N)) * d = d * (a % N) + N * d * (a / N) by ring, pow_add,
+      pow_mul ξΩ (N * d), hξΩ, one_pow, mul_one]
+
 end Residue
 
 section H1
@@ -148,11 +185,39 @@ noncomputable def restrictH1 :
       monodromy_pullback j s _ G G', monodromy_out, monodromy_out, monodromy_out,
       sheafHEquivContinuousMonoidHom_add, ContinuousMonoidHom.mul_apply]
 
+lemma restrictH1_apply
+    (x : Sheaf.H ((constantSheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (AddCommGrpCat.of M)) 1) :
+    restrictH1 M j x = classH1 M U ⟦((classH1Equiv M C).symm x).out.pullback j⟧ :=
+  rfl
+
 lemma restrictH1_classH1 (T : EtaleTorsor M C) :
     restrictH1 M j (classH1 M C ⟦T⟧) = classH1 M U ⟦T.pullback j⟧ := by
   have h : ((classH1Equiv M C).symm (classH1 M C ⟦T⟧)).out.IsIsomorphic T := by
     rw [← classH1_eq_classH1_iff, classH1_out]
   exact classH1_eq_classH1_iff.2 (h.pullback j)
+
+/-- Blueprint `lem-wf-open-curve-residue-sequence`: the restriction maps are compatible with the
+maps `H¹(-, M) → H¹(-, M')` induced by a homomorphism of coefficients `φ : M →+ M'`, for
+instance the reduction `ℤ / ℓⁿ⁺¹ → ℤ / ℓⁿ`. -/
+theorem restrictH1_map {M' : Type (u + 1)} [AddCommGroup M'] [Finite M'] [TopologicalSpace M']
+    [DiscreteTopology M'] (φ : M →+ M')
+    (x : Sheaf.H ((constantSheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (AddCommGrpCat.of M)) 1) :
+    restrictH1 M' j (Sheaf.H.map ((constantSheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}).map
+      (AddCommGrpCat.ofHom φ)) 1 x) =
+      Sheaf.H.map ((constantSheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}).map
+        (AddCommGrpCat.ofHom φ)) 1 (restrictH1 M j x) := by
+  let s := genericGeometricPoint (C := C) j
+  obtain ⟨G, _, _⟩ := exists_isFundamentalGroup s
+  obtain ⟨G', _, _⟩ := exists_isFundamentalGroup (s ≫ j)
+  apply (sheafHEquivContinuousMonoidHom M' s G).injective
+  refine ContinuousMonoidHom.ext fun g ↦ Multiplicative.toAdd.injective ?_
+  rw [sheafHEquivContinuousMonoidHom_map]
+  rw [restrictH1_apply, restrictH1_apply, sheafHEquivContinuousMonoidHom_classH1,
+    sheafHEquivContinuousMonoidHom_classH1]
+  rw [monodromy_pullback j s _ G G', monodromy_pullback j s _ G G', monodromy_out, monodromy_out,
+    sheafHEquivContinuousMonoidHom_map]
 
 variable [IsLocallyNoetherian C] {k : Type u} [Field k] (p : C ⟶ Spec (.of k)) (N : ℕ) [NeZero N]
   [NeZero (N : k)] [HasEnoughRootsOfUnity k N]
@@ -185,6 +250,27 @@ lemma residueH1_classH1 (T : EtaleTorsor (ULift.{u + 1} (ZMod N)) U)
     rw [← classH1_eq_classH1_iff, classH1_out]
   exact congrFun (residue_eq_of_isIsomorphic j p h) z.1
 
+omit [ConnectedSpace C] in
+/-- Blueprint `lem-wf-open-curve-residue-sequence`: the residue maps are compatible with the
+reduction of coefficients `ℤ / N d → ℤ / N`, along the transition map
+`Hom(μ_{N d}, ℤ / N d) → Hom(μ_N, ℤ / N)` induced by `ξ ↦ ξ ^ d`. -/
+theorem residueH1_map_castHom {d : ℕ} [NeZero (N * d)] [NeZero ((N * d : ℕ) : k)]
+    [HasEnoughRootsOfUnity k (N * d)]
+    (x : Sheaf.H ((constantSheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (AddCommGrpCat.of (ULift.{u + 1} (ZMod (N * d))))) 1)
+    (z : ↥(Set.range j.base)ᶜ) (ξ : rootsOfUnity (N * d) k) (ξ' : rootsOfUnity N k)
+    (hξ : ((ξ' : kˣ) : k) = ((ξ : kˣ) : k) ^ d) :
+    residueH1 j p N (Sheaf.H.map ((constantSheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}).map
+      (AddCommGrpCat.ofHom (ZMod.castHom (dvd_mul_right N d) (ZMod N)).toAddMonoidHom.uliftMap))
+        1 x) z (Additive.ofMul ξ') =
+      ZMod.castHom (dvd_mul_right N d) (ZMod N) (residueH1 j p (N * d) x z (Additive.ofMul ξ)) := by
+  let s := genericGeometricPoint (C := C) j
+  obtain ⟨G, _, _⟩ := exists_isFundamentalGroup s
+  let τ : fiber (genericGeometricPoint (C := C) j) ≅ fiber s := Iso.refl _
+  refine residue_eq_castHom_of_galoisCharacter j p (fun σ ↦ ?_) z.1 ξ ξ' hξ
+  rw [galoisCharacter_eq_monodromy j _ τ G, galoisCharacter_eq_monodromy j _ τ G, monodromy_out,
+    monodromy_out, sheafHEquivContinuousMonoidHom_map]
+  rfl
 end H1
 
 section Curve
