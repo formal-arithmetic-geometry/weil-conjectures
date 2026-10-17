@@ -13,7 +13,7 @@ public import Mathlib.Topology.Algebra.OpenSubgroup
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.AbelianSheavesGModules
 import WeilConjectures.FieldTheory.OpenSubgroupFixedField
-import WeilConjectures.FieldTheory.FixingSubgroupKrullTopology
+import WeilConjectures.Mathlib.FieldTheory.KrullTopology
 
 /-!
 # Restricted subgroup representations and the fixed-field comparison
@@ -249,7 +249,9 @@ theorem nonempty_primaryFixedFieldComparison
     ⟨IsSepClosure.sep_closed K, Algebra.isSeparable_tower_top_of_isSeparable K L Ks⟩
   let e : H.toSubgroup ≃* Gal(Ks/L) :=
     (MulEquiv.subgroupCongr hfix.symm).trans L.fixingSubgroupEquiv
-  have hc := IntermediateField.continuous_fixingSubgroupEquiv K Ks L
+  have hc : Continuous L.fixingSubgroupEquiv ∧ Continuous L.fixingSubgroupEquiv.symm :=
+    ⟨L.fixingSubgroupContinuousMulEquiv.continuous,
+      L.fixingSubgroupContinuousMulEquiv.symm.continuous⟩
   have he : Continuous e := by
     exact hc.1.comp (continuous_subtype_val.subtype_mk _)
   have hi : Continuous e.symm := by

@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.TensorProduct.Maps
 import WeilConjectures.AlgebraicGeometry.FunctionField
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateModel
 import WeilConjectures.AlgebraicGeometry.SeparatedAffineFunctionFieldSurjectiveCore
 import WeilConjectures.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import WeilConjectures.RingTheory.LocalDomainDimOnePrincipalLocalization
@@ -82,6 +83,6 @@ theorem Scheme.separated_affine_functionField_surjective
       (fun _ _ => Commute.all _ _)
   change Function.Surjective f
   let hclosed := Scheme.isClosedImmersion_specMap_tensor_functionField X U hU x hx hdim
-  exact @surjective_of_isClosedImmersion_specMap _ _ (CommRingCat.ofHom f.toRingHom) hclosed
+  exact @surjective_of_isClosedImmersion_SpecMap _ _ (CommRingCat.ofHom f.toRingHom) hclosed
 
 end AlgebraicGeometry
