@@ -188,6 +188,7 @@ section BoundaryModule
 
 variable {k : Type u} [Field k] [IsAlgClosed k] {l : ℕ}
 
+omit [IsAlgClosed k] in
 /-- Iterating the transition maps `Hom(μ_{lⁿ⁺¹}, ℤ / lⁿ⁺¹) → Hom(μ_{lⁿ}, ℤ / lⁿ)` of a
 compatible system. -/
 lemma castHom_eq_of_compatible (hl : l.Prime)
@@ -247,5 +248,46 @@ theorem eq_zero_of_compatible_of_smul_eq_self (hl : l.Prime) {Q : ℕ} (hQ : 2 �
   rw [sub_mul, one_mul, this, sub_self]
 
 end BoundaryModule
+
+end AlgebraicGeometry.Scheme.EtaleTorsor
+
+namespace AlgebraicGeometry.Scheme.EtaleTorsor
+
+section FixedSystems
+
+variable {C U : Scheme.{u}} [IsIntegral C] [IsLocallyNoetherian C] (j : U ⟶ C)
+  [IsOpenImmersion j] [Nonempty U] {k : Type u} [Field k] [IsAlgClosed k]
+  (p : C ⟶ Spec (.of k))
+
+/-- Blueprint `lem-wf-open-curve-residue-sequence` (as used in
+`prop-wf-open-curve-h1-no-frobenius-fixed`): the residues of a compatible Frobenius-fixed system
+vanish.
+
+Let `E_C` be an automorphism of `C` fixing `z`, semilinear over `σ₀` with `σ₀(x) ^ Q = x` for some
+`Q ≥ 2` (a power `Φ_Q` of the geometric Frobenius), restricting to `E_U` on `U`. Let `(t_n)` be
+`ℤ / lⁿ`-torsors on `U` whose Galois characters are compatible under reduction and which are all
+fixed by `E_U`. Then the residues `r_n = res_z(t_n)` form a compatible element of
+`lim_n ℤ / lⁿ(-1)` fixed by `Φ_Q`, which acts there as `Q`; hence they vanish. -/
+theorem residue_eq_zero_of_compatible_of_isIsomorphic_mapIso (EC : C ≅ C) (EU : U ≅ U)
+    (hE : EU.hom ≫ j = j ≫ EC.hom) (σ₀ : k ≃+* k)
+    (hσ₀ : EC.hom ≫ p = p ≫ Spec.map (CommRingCat.ofHom (σ₀ : k →+* k)))
+    {Q : ℕ} (hQ2 : 2 ≤ Q) (hQ : ∀ x : k, σ₀ x ^ Q = x) (z : C) (hz : EC.hom z = z)
+    {l : ℕ} (hl : l.Prime) [∀ n, NeZero (l ^ n)] [∀ n, NeZero ((l ^ n : ℕ) : k)]
+    (t : ∀ n : ℕ, EtaleTorsor (ULift.{u + 1} (ZMod (l ^ n))) U)
+    (ht : ∀ n σ, (t n).galoisCharacter j σ = ZMod.castHom (pow_dvd_pow l (Nat.le_add_right n 1))
+      (ZMod (l ^ n)) ((t (n + 1)).galoisCharacter j σ))
+    (hfix : ∀ n, ((t n).mapIso EU).IsIsomorphic (t n)) (n : ℕ) :
+    (t n).residue j p z = 0 := by
+  refine eq_zero_of_compatible_of_smul_eq_self hl hQ2 (fun n ↦ (t n).residue j p z)
+    (fun m ξ ξ' hξ ↦ ?_) (fun m ↦ ?_) n
+  · have : NeZero (l ^ m * l) := inferInstanceAs (NeZero (l ^ (m + 1)))
+    have : NeZero ((l ^ m * l : ℕ) : k) := inferInstanceAs (NeZero ((l ^ (m + 1) : ℕ) : k))
+    exact residue_eq_castHom_of_galoisCharacter (N := l ^ m) (d := l) j p (ht m) z ξ ξ' hξ
+  · have h : ((t m).mapIso EU.symm).IsIsomorphic (t m) :=
+      (((hfix m).mapIso EU.symm).symm.trans ⟨Iso.refl _, by simp, fun _ ↦ by simp⟩)
+    rw [← residue_mapIso_symm_eq_smul j p EC EU hE σ₀ hσ₀ Q hQ z hz,
+      residue_eq_of_isIsomorphic j p h]
+
+end FixedSystems
 
 end AlgebraicGeometry.Scheme.EtaleTorsor
