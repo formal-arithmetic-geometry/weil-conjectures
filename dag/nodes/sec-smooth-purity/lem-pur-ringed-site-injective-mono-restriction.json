@@ -200,5 +200,23 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-f3f99dad9 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement unchanged, five steps, 11 Mathlib searches of all three kinds, and the blueprint fields. It matches Stacks 093X (sites-cohomology.tex l.1962-2009) hypothesis by hypothesis: ringed site with commutative O (conventions l.51), a monomorphism m, and I injective in Mod(O), with surjective restriction as the conclusion. I checked the tag-to-label mappings for 093X, 03DI, 03EJ, 03CY, 03EI and 03DA in tags/tags. Every cited statement says what its step takes. Step 1: free-Yoneda leaf (beta -> beta_U(e_id)) plus the module-sheafification adjunction. Step 2: I checked naturality of e_phi -> e_{m phi} by hand. Step 3: m monic gives a coordinatewise injection, hence a mono in PMod. Step 4: the ringed-site sheafification leaf preserves finite limits, hence monos, for the actual O, not just a constant ring. Step 5: Mod(O) is abelian on a small site, and the identification works because the unit satisfies a^#.eta_W = eta_T.a, giving b_t(e_m) = I(m)(t). Small cases all hold: m = id, O = 0, an empty covering of T (both sides zero), and Z/2 on a point, where the module is injective but not abelian-injective and the proof never uses abelian injectivity. Monicity is used only in Step 3. No new nodes. The nearest DAG node, lem-weil-pbc-injective-sheaf-mono-restriction, is the abelian special case (O = Z_C), not a duplicate. All cited nodes are Mathlib leaves or definitions, so there is no route departure and no tool_uses. Blueprint ancestry is thm-pur-with-support-exactness Steps 3-4 via the parent, consistent with main-20261015. No SGA source, no cycle, no target touched. Minor and not counted: the item has no lean_audit field, carried over from its Q55 creation. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3b3b52868",
+  "group": "Q19",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes, verbatim signature and docstrings checked; per-file compilation reproduced cleanly. H11 placeholder second reading repaired with a complete replacement report under fixes/. Full findings recorded in review.md."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedSiteInjectiveMonoRestriction",
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteInjectiveMonoRestriction.lean",
+  "declaration": "CategoryTheory.injective_ringed_site_mono_restriction",
+  "statement": "theorem injective_ringed_site_mono_restriction {C : Type u} [SmallCategory C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) (O : Sheaf J.toGrothendieck CommRingCat.{u}) (I : ringedSiteModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj O)) [Injective I] {W T : C} (m : W ⟶ T) [Mono m] : Function.Surjective (I.val.map m.op).hom",
+  "by": "Q19",
+  "date": "2026-10-17",
+  "branch": "newtargets-dag"
  }
 }

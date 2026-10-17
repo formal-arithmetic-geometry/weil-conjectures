@@ -8,7 +8,10 @@
   "place": "Agent auxiliary path-space comparison for the coherent-comma expansion of the proof of Proposition 3.1.3.2, printed p. 348; HA motivates the mapping comparison but does not state this path-coordinate lemma separately. Online 2017 edition read; archive WANTED. No Stacks tag states this coherent Kan-space formulation."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-source-gluing",
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-suspension-square-comparison"
  ],
  "proof": [
   {
@@ -359,5 +362,41 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-3e7365e10 (reviewer sub-agent of L); spot-checked: I read the item, all 14 steps and every cited statement in full. All 14 steps are correct, and the statement is unchanged and holds on small cases. Checks made: pasting identifies L x^h_B T with S x^h_U R using legs f and gh. The path formula (f alpha)^{-1} gamma (g beta) has the right endpoints f(s) to gh(r). The inverse is the constant-path insertion j. The identity-leg fiber {(s, delta: s to gh(r))} is contractible, and empty R, S, V, M are handled. Steps 1-6 are sound: the fibration and trivial-fibration lifts transpose to anodyne pushout-products. The relative horn fillers Lambda^2_0 and Lambda^2_1 agree on j(Q) through s_0 gamma and s_1 gamma. j is a trivial cofibration, which gives the homotopy jc ~ 1 relative to Q over T. The lifting square for F commutes, the fibration-invariance node gives F_T, and cF_T lies over T. The returned E5/C4 point is repaired. Step 7 defines rho_{i,q} and its strict fibers and proves them trivial fibrations. Steps 8-9 build C1, C2, C_F and C_H as pullbacks of those maps. Steps 10-12 construct naturality from pointwise limiting cones in Fun(K,S), using the presheaf-limits, nerve-pullback-recognition, space-edge and pointwise-equivalences nodes, each within its statement. The min homotopy from i_L e to a, lying over H, checks. Steps 13-14 are correct; pi is a pullback of ev_1. Every cited node is in unit sk-prop-sf-biduality-general, a definition, or a Mathlib leaf, so there are no tool_uses and no SGA. The item is not a target node, so the base-change and coefficient checks do not apply. The delivery adds no new nodes. I searched for duplicates: homotopy-pullback-pasting, the two pullback-invariance nodes, mapping-path-square-rectification and quillen-b-path-minmax state different things. The Kerodon, HTT and HA sources are online only and archive WANTED, so I could not read them at the cited place; proof_origin is correctly agent. One fault, C2: Step 7 was marked elementary although it uses two lemmas and a transposition argument. I set it to elementary false in fixes/dag/nodes/sec-six-functors/lem-coef-relative-comma-coordinate-contraction.json and changed nothing else.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d97812036",
+  "group": "N7",
+  "result": "pass",
+  "note": "Independent statement, dependency, edge-case, docstring, report, and scompile audits completed; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.RelativeCommaCoordinateContraction",
+  "file": "lean/Sheaf/AlgebraicTopology/RelativeCommaCoordinateContraction.lean",
+  "declaration": "SSet.Enhanced.relative_comma_coordinate_contraction",
+  "declarations": [
+   "SSet.Enhanced.homotopyPullbackPath",
+   "SSet.Enhanced.homotopyPullbackEndpoint",
+   "SSet.Enhanced.IsConstantPathSection",
+   "SSet.Enhanced.CoordinateContractionTriangles",
+   "SSet.Enhanced.canonicalCoordinateContraction",
+   "SSet.Enhanced.relative_comma_coordinate_contraction",
+   "SSet.Enhanced.IsIdentityFiberComparison",
+   "SSet.Enhanced.identity_fiber_comparison_existsUnique",
+   "SSet.Enhanced.identityFiberComparison",
+   "SSet.Enhanced.relative_comma_coordinate_contraction_identity",
+   "SSet.Enhanced.relative_comma_coordinate_contraction_canonical",
+   "SSet.Enhanced.commaHorizontalFace",
+   "SSet.Enhanced.commaVerticalFace",
+   "SSet.Enhanced.CoherentCommaFamily",
+   "SSet.Enhanced.relative_comma_coordinate_contraction_families"
+  ],
+  "statement": "theorem relative_comma_coordinate_contraction {S V R U : SSet.{u}} [KanComplex S] [KanComplex V] [KanComplex R] [KanComplex U] (f : S ⟶ U) (g : V ⟶ U) (h : R ⟶ V) : ∀ {M : SSet.{u}} [KanComplex M] (p : M ⟶ S ⨯ V) (e : M ⟶ simplicialHomotopyPullback f g) (he : IsWeakHomotopyEquivalence e) (H : SSet.Homotopy (e ≫ homotopyPullbackEndpoint f g) p), ∃ c : simplicialHomotopyPullback p (prod.map (𝟙 S) h) ⟶ simplicialHomotopyPullback f (h ≫ g), IsWeakHomotopyEquivalence c ∧ Nonempty (SSet.Homotopy (c ≫ homotopyPullbackEndpoint f (h ≫ g)) (sourceAttachmentPullbackSnd p (prod.map (𝟙 S) h)))",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair F1–F6: coherent comparison of arbitrary K-families in Fun(K,Spaces), retaining the specified cospan transformation and its endpoint homotopy; strict coordinates and relative horn fillers; canonical coordinate-determined fiber map; existing pullback projections reused; all 14 proof steps in the main docstring. Helpers belong to this node. The only choice in a definition is from a unique map characterized in every degree."
  }
 }

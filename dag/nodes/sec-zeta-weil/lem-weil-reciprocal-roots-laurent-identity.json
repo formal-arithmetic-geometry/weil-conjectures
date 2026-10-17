@@ -175,5 +175,23 @@
   "group": "Q141",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-f06a6d4da (reviewer sub-agent of L); spot-checked: PASS, no changes made. I read the item and all six cited statements in full. The delivery creates no new nodes. Source: blueprint master prop-duality-reciprocity ## Proof steps 2-3; the proof text is identical to main-20261015. With the item's P=P_{2d-i}, Q=P_i and c=q^d, the reciprocal roots of P are q^d/α and those of Q are the α, so the hypothesis direction and clauses 1-2 match the blueprint's D_iD_{2d-i}=q^{db_i} and its Laurent identity. No hypothesis is added and nothing is weakened. Step 1: the factorization node clause 2 applies with K=L and ι=id. Step 2: the leading coefficients are (-1)^n∏α and (-1)^n c^n/∏α, so D_P=∏α, D_Q=c^n/∏α and the signs are correct. Step 3: the factor identity -αc⁻¹T⁻¹(1-cα⁻¹T)=1-αc⁻¹T⁻¹ checks by expansion, and c⁻ⁿ∏α=D_Q⁻¹. Step 4: evaluation at t≠0 is elementary and matches the Lean eval_inv_mul_inv form. Small cases: n=0 and n=1 by hand; n=3 with exact rationals (α=(2,3,-1/2), c=5, three values of t) by a python Fraction script. Route: the only statement used is in unit sk-def-roots, which the unit cites; no tool_uses; no SGA; the item is not a target node. Duplicates: lem-weil-reciprocal-polynomial, polynomial-reflection-multiplicative, similitude-pairing-reciprocity and alternating-product-reciprocity are related but none states this item; the only citer is prop-duality-reciprocity, which uses it consistently; same_as=[] is right. The two sorry-free slopmaster2 lemmas cover clause 1's product (lc P·lc Q=c^n) and clause 3 only, so splitting rather than attaching is right. Minor: two mathlib_searches records show 0 hits for names that exist in Mathlib (Reverse.lean:332 eval₂_reverse_mul_pow, Splits.lean:299/403); they don't change the no-exact-match verdict."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-302eccfe7",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Statement, dependencies, source correspondence, edge cases, docstrings, report sections, and local/server scompile evidence all checked; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Polynomial.ReciprocalRootsLaurentIdentity",
+  "declaration": "Polynomial.reciprocal_roots_laurent_identity",
+  "file": "lean/Sheaf/Algebra/Polynomial/ReciprocalRootsLaurentIdentity.lean",
+  "statement": "theorem reciprocal_roots_laurent_identity {L : Type u} [Field L] [IsAlgClosed L] (P Q : L[X]) (hP0 : P.coeff 0 = 1) (hQ0 : Q.coeff 0 = 1) (α : Fin P.natDegree → Lˣ) (hP : P = ∏ j, (1 - C (α j : L) * X)) (c : L) (hc : c ≠ 0) (hQ : Q = ∏ j, (1 - C (c * (α j : L)⁻¹) * X)) : Q.natDegree = P.natDegree ∧ (-1 : L) ^ P.natDegree * P.coeff P.natDegree ≠ 0 ∧ (-1 : L) ^ Q.natDegree * Q.coeff Q.natDegree ≠ 0 ∧ ((-1 : L) ^ P.natDegree * P.coeff P.natDegree) * ((-1 : L) ^ Q.natDegree * Q.coeff Q.natDegree) = c ^ P.natDegree ∧ (∑ k ∈ P.support, LaurentPolynomial.C (P.coeff k * c⁻¹ ^ k) * LaurentPolynomial.T (-(k : ℤ))) = LaurentPolynomial.C ((-1 : L) ^ P.natDegree) * LaurentPolynomial.T (-(P.natDegree : ℤ)) * LaurentPolynomial.C ((-1 : L) ^ Q.natDegree * Q.coeff Q.natDegree)⁻¹ * Polynomial.toLaurent Q ∧ ∀ t : L, t ≠ 0 → P.eval (c⁻¹ * t⁻¹) = t ^ (-(P.natDegree : ℤ)) * (Q.coeff P.natDegree)⁻¹ * Q.eval t",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
