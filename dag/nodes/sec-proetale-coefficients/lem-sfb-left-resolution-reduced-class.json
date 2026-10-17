@@ -1,0 +1,68 @@
+{
+ "id": "lem-sfb-left-resolution-reduced-class",
+ "kind": "statement",
+ "title": "Reduced left-resolution datum from a class of covers",
+ "statement": "Let $A$ be an abelian category [def-sp-abelian]. Let $\\mathcal F$ be a class of objects containing zero and closed under isomorphisms, finite biproducts and direct summands. Suppose $P:A\\to A$ has values in $\\mathcal F$ and $\\epsilon:P\\Rightarrow\\operatorname{id}_A$ has epimorphic components. Then there exist a preadditive category $C$ with a zero object and finite coproducts, a fully faithful additive functor $\\iota:C\\to A$ with $\\iota(X)\\in\\mathcal F$ for every object $X$ of $C$, a functor $Q:A\\to C$ preserving zero morphisms, and a natural transformation $\\pi: \\iota Q\\Rightarrow\\operatorname{id}_A$ with epimorphic components.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+  "place": "Proof, first three sentences: direct-summand reduction of the functorial cover class; supporting Mathlib.Algebra.Homology.LeftResolution.Reduced.lean, definitions LeftResolution.karoubi and LeftResolution.reduced.; the datum is the full subcategory of A on the class, which is idempotent complete because the class is closed under direct summands, with LeftResolution.reduced applied to (P, epsilon)."
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "From an abelian category and a class closed under isomorphisms finite biproducts and direct summands with a functorial epimorphic cover, construct an idempotent complete full additive subcategory and a zero preserving cover functor",
+   "results": "CategoryTheory.Idempotents.isIdempotentComplete_of_abelian (Mathlib/CategoryTheory/Idempotents/Basic); CategoryTheory.Abelian.LeftResolution.karoubi.F', LeftResolution.karoubi, LeftResolution.karoubi.F (Mathlib/Algebra/Homology/LeftResolution/Reduced); CategoryTheory.Idempotents.Karoubi.karoubi_hasFiniteBiproducts (Mathlib/CategoryTheory/Idempotents/Biproducts); CategoryTheory.Abelian.LeftResolution.instEpiKaroubiAppπObjToKaroubi (Mathlib/Algebra/Homology/LeftResolution/Reduced)",
+   "date": "2026-10-18",
+   "verdict": "no exact match: Mathlib supplies idempotent completion and the reduced LeftResolution construction, but not the class-to-subcategory packaging in this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "LeftResolution.reduced, LeftResolution.karoubi, functorExtension₂",
+   "results": "unknown identifier LeftResolution.reduced; no hits",
+   "date": "2026-10-18",
+   "verdict": "unavailable/invalid identifier: the qualified project declaration is not accepted by Loogle; the valid source grep is recorded separately."
+  },
+  {
+   "tool": "grep",
+   "query": "LeftResolution.reduced|karoubi.F|direct summand [Mathlib/Algebra/Homology/LeftResolution]",
+   "results": "Mathlib/Algebra/Homology/LeftResolution/Reduced.lean:52 karoubi.F'; :59 karoubi.F; :61 PreservesZeroMorphisms; :73-83 retractArrow and epi transfer",
+   "date": "2026-10-18",
+   "verdict": "generalization: the source contains the idempotent-completion/retract machinery, not the full class packaging."
+  },
+  {
+   "tool": "leansearch",
+   "query": "idempotent complete full subcategory of an abelian category closed under direct summands with a zero preserving functorial epimorphism",
+   "results": "CategoryTheory.Idempotents.Karoubi; CategoryTheory.IsIdempotentComplete.mk; CategoryTheory.IsIdempotentComplete; Idempotents.instIsIdempotentCompleteKaroubi; Idempotents.isIdempotentComplete_of_abelian",
+   "date": "2026-10-18",
+   "verdict": "no exact match: only generic idempotent-completion declarations were returned."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-functorial-bounded-above-class-resolution",
+  "date": "2026-10-18",
+  "group": "Q12"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-derived-tensor-hom",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-derived-monoidal",
+   "place": "Proof, first three sentences: the direct-summand reduction of the class of functorial covers to a zero-preserving left-resolution datum.",
+   "via": [
+    "lem-sfb-functorial-bounded-above-class-resolution",
+    "lem-sfb-kflat-derivability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

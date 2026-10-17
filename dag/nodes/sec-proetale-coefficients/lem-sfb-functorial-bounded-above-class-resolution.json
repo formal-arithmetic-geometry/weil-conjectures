@@ -11,9 +11,42 @@
   "def-sp-abelian",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-left-resolution-reduced-class] to the given class $\\mathcal F$, cover functor $P$ and epimorphism $\\epsilon$; its hypotheses are exactly those of the item ($A$ abelian [def-sp-abelian]; $\\mathcal F$ contains zero and is closed under isomorphisms, finite biproducts and direct summands; $P$ has values in $\\mathcal F$; $\\epsilon$ is epimorphic). No additivity or preservation of zero morphisms of $P$ is needed. We obtain a preadditive category $C$ with a zero object and finite coproducts, a fully faithful additive functor $\\iota:C\\to A$ with $\\iota(X)\\in\\mathcal F$ for every object $X$ of $C$, a zero-preserving functor $Q:A\\to C$, and an epimorphic natural transformation $\\pi:\\iota Q\\Rightarrow\\operatorname{id}_A$.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-sfb-left-resolution-reduced-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Proof, first three sentences: reduction of the cover class to a zero-preserving left-resolution datum."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-left-resolution-bounded-minus] to $A,C,\\iota,Q,\\pi$ from step 1, whose hypotheses are exactly the conclusions of step 1. It supplies one functor $S$ on the full bounded-above subcategory and one natural augmentation $a:S\\Rightarrow\\iota_-$, so maps between complexes with different upper bounds are handled by the same functor. Every $a_L$ is a quasi-isomorphism, and every upper bound $b$ of $L$ is an upper bound of $S(L)$, which is the item's bound clause. Every term of $S(L)$ is isomorphic to $\\iota(X)$ for some object $X$ of $C$; by step 1, $\\iota(X)\\in\\mathcal F$, so the term lies in $\\mathcal F$ because $\\mathcal F$ is closed under isomorphisms. This gives the statement.",
+   "uses": [
+    "lem-sfb-left-resolution-bounded-minus",
+    "lem-sfb-left-resolution-reduced-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Proof, first three sentences: bounded-above functorial resolution stages and their upper-bound preservation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "lem-sfb-left-resolution-reduced-class",
+  "lem-sfb-left-resolution-bounded-minus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+  "place": "Proof, first three sentences; functorial bounded-above stages and the zero-preserving reduction."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -164,7 +197,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-kflat-derivability",
@@ -176,12 +209,28 @@
  "blueprint": {
   "from": {
    "node": "lem-sfb-derived-monoidal",
-   "place": "Proof, first three sentences: the bounded-above stages of the functorial K-flat construction. Objectwise counterpart: Stacks Tag 05T7, derived-lemma-subcategory-left-resolution (literature/stacks-project/derived.tex). Functorial strengthening: WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean:32-273, minusResolutionFunctor and minusResolutionNatTrans; reduction is Mathlib/Algebra/Homology/LeftResolution/Reduced.lean:53-154.",
+   "place": "Proof, first three sentences: the bounded-above stages of the functorial K-flat construction.",
    "via": [
     "lem-sfb-kflat-derivability"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sfb-functorial-bounded-above-class-resolution",
+  "worker": "stage1",
+  "group": "Q12",
+  "summary": "Split the functorial bounded-above resolution into the direct-summand reduction to a zero-preserving left-resolution datum and the bounded-minus totalization/augmentation construction. The item statement is unchanged; the latter construction is the project FromJoel implementation and acts on the full bounded-above category, so no common bound is added.",
+  "blueprint": "First three sentences of lem-sfb-derived-monoidal.proof.md: step 1 realizes the direct-summand reduction, and step 2 realizes the bounded-above functorial stages, their quasi-isomorphic augmentation, and upper-bound preservation."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-f9d56d718",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-f9d56d718 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the parent lem-sfb-kflat-derivability, unit sk-def-sfb-derived-tensor-hom, the blueprint lem-sfb-derived-monoidal proof (first three sentences), FromJoel LeftResolution/CochainComplexMinus.lean l.1-140 and 200-275, and Mathlib LeftResolution/Reduced.lean l.1-160 and Basic.lean l.30-60. Both new statements are true. reduced-class is the Karoubi/reduced construction: C is the full subcategory on F, which is idempotent complete because F is closed under direct summands. bounded-minus is minusResolutionFunctor/NatTrans; I checked the upper bound (IsStrictlyLE instance, l.134), the quasi-isomorphism (l.202-224) and that the hypotheses match the Lean variables. Small cases: free abelian groups with P(M)=Z[M], where P(0)=Z is not 0 and the reduced Q(M)=Z[M]/Z[0]; L=0; M[0]; a map M[0]->N[1]. Neither node duplicates an existing one: subcategory-left-resolution, truncation-resolution-system, unbounded-kflat-existence and trf-finite-filtered were each read. The split is not a relabelling: step 1's zero-preserving reduction is real content and follows the source's own decomposition. Two faults repaired. (1) C4/C3/E1: step 2 concluded that the terms lie in F from the essential image of iota, but reduced-class only stated iota(QM) in F, so the step leaned on the construction remark rather than the statement. Fix: reduced-class now states iota(X) in F for every X in C (true for the full subcategory), and step 2 cites it with iso-closure; uses updated. (2) B1: reduced-class had a proof-sketch sentence in its statement; removed and moved into source.place. The item statement is unchanged; no tool_uses; no SGA.; 2 file(s) fixed by the reviewer"
  }
 }
