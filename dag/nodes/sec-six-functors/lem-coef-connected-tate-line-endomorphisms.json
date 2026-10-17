@@ -2,7 +2,7 @@
  "id": "lem-coef-connected-tate-line-endomorphisms",
  "kind": "statement",
  "title": "Shifted Tate-line endomorphisms on a connected geometric scheme",
- "statement": "Let $k$ be an algebraically closed field, $N\\ge1$ invertible in $k$, and $B$ a commutative $\\mathbf Z/N$-algebra. Let $Y$ be a nonempty connected $k$-scheme [def-weil-connected-scheme]. On its small etale site let $B_Y(1)=\\mu_{N,Y}\\otimes_{\\mathbf Z/N}B_Y$ and $L=B_Y(r)[d]$ for integers $r\\ge0$ and $d$, with tensor-power Tate twist [lem-asd-etale-finite-twist-pullback] and derived shift in [def-weil-pbc-derived-categories]. Then the scalar map\n$$B\\longrightarrow\\operatorname{End}_{D(Y_{\\mathrm{et}},B)}(L),\\qquad b\\longmapsto b\\,1_L$$\nis a bijection. In particular, for any $B$-linear functor [def-weil-linear-category] $G:D(Y_{\\mathrm{et}},B)\\to D((\\operatorname{Spec}k)_{\\mathrm{et}},B)$ and any isomorphism $G(L)\\cong B_{\\operatorname{Spec}k}$, an endomorphism $v:L\\to L$ is an isomorphism whenever $G(v)$ is an isomorphism. Here $B$-linear means $G(bf)=bG(f)$ on every morphism group.",
+ "statement": "Let $k$ be an algebraically closed field, $N\\ge1$ invertible in $k$, and $B$ a commutative $\\mathbf Z/N$-algebra. Let $Y$ be a nonempty connected $k$-scheme [def-weil-connected-scheme]. On its small etale site let $B_Y(1)=\\mu_{N,Y}\\otimes_{\\mathbf Z/N}B_Y$ and $L=B_Y(r)[d]$ for integers $r\\ge0$ and $d$, with tensor-power Tate twist [lem-asd-etale-finite-twist-pullback] and derived shift in [def-weil-pbc-derived-categories]. Give $D(Y_{\\mathrm{et}},B)$ and $D((\\operatorname{Spec}k)_{\\mathrm{et}},B)$ the $B$-linear structure induced from their abelian categories of $B$-module sheaves [lem-weil-linear-abelian-derived-category]. Then the scalar map\n$$B\\longrightarrow\\operatorname{End}_{D(Y_{\\mathrm{et}},B)}(L),\\qquad b\\longmapsto b\\,1_L$$\nis a bijection. In particular, for any $B$-linear functor [def-weil-linear-category] $G:D(Y_{\\mathrm{et}},B)\\to D((\\operatorname{Spec}k)_{\\mathrm{et}},B)$ and any isomorphism $G(L)\\cong B_{\\operatorname{Spec}k}$, an endomorphism $v:L\\to L$ is an isomorphism whenever $G(v)$ is an isomorphism. Here $B$-linear means $G(bf)=bG(f)$ on every morphism group.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
   "place": "Proof, affine-space Tate rank-one reduction: endomorphisms of the shifted line and scalar detection; extracted retained scalar argument, agent-written"
@@ -11,11 +11,71 @@
   "lem-asd-etale-finite-twist-pullback",
   "def-weil-pbc-derived-categories",
   "def-weil-connected-scheme",
-  "def-weil-linear-category"
+  "def-weil-linear-category",
+  "lem-weil-linear-abelian-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-asd-etale-finite-twist-pullback] with $A=B$, $m=N$, $T=Y$: $NB=0$, and $N$ is invertible on $Y$ because it is invertible in $k$. Thus $F=B_Y(r)$ is locally free of rank one over $B_Y$. The shifts of [def-weil-abstract-derived-category] cancel: applying $[-d]$ to a map $F[d]\\to F[d]$ and $[d]$ to a map $F\\to F$ gives inverse correspondences, preserving composition, and they preserve scalar multiplication because the shift functors are $B$-linear [lem-weil-linear-abelian-derived-category]. By [lem-weil-pbc-derived-single-fully-faithful], maps between these degree-zero sheaves in the derived category are exactly module-sheaf maps. Choose local bases $e_i$ on an etale trivializing cover $U_i\\to Y$. A module-sheaf endomorphism $f$ is uniquely given on $U_i$ by $f(e_i)=a_i e_i$, $a_i\\in B_Y(U_i)$, since on every further etale restriction $f(te_i)=t f(e_i)$. On $U_i\\times_YU_j$ write $e_j=u_{ij}e_i$ with $u_{ij}$ a unit (the inverse change of basis supplies its inverse). Linearity gives $a_j u_{ij}=u_{ij}a_i$, hence $a_j=a_i$ by commutativity and cancellation of the unit. The sheaf axiom for $B_Y$ glues the $a_i$ to a unique $a\\in B_Y(Y)$. Conversely each such $a$ acts on $F$, so this gives the scalar bijection $\\Gamma(Y_{\\mathrm{et}},B_Y)\\to\\operatorname{End}_{D(Y_{\\mathrm{et}},B)}(L)$. Addition, composition and the identity become addition, multiplication and $1$ of sections by the same basis calculation.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-weil-abstract-derived-category",
+    "lem-weil-linear-abelian-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XS, lemma-negative-exts (2), degree-zero full faithfulness; agent-written local-basis calculation using the Tate-line statement and the sheaf axiom"
+   }
+  },
+  {
+   "text": "The underlying additive sheaf of rings $B_Y$ is the constant sheaf with value the abelian group $(B,+)$. Since $Y$ is nonempty and connected, [lem-weil-pbc-constant-sheaf-sections-connected] identifies its global sections with $B$, and the identification is induced by the constant-section map. The local calculation in Step 1 is compatible with addition and multiplication, so it upgrades to a ring isomorphism $B\\xrightarrow{\\sim}\\operatorname{End}_{D(Y_{\\mathrm{et}},B)}(L)$, exactly the displayed scalar map. This proves the first assertion, including the zero ring and the case $r=0$.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-sections-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P5, remark-constant-locally-constant-maps, specialized to the additive group of B; agent-written ring-compatibility calculation"
+   }
+  },
+  {
+   "text": "Let $G$ and $v$ be as in the second assertion. By the $B$-linearity in [def-weil-linear-category] of $G$ between the $B$-linear categories of [lem-weil-linear-abelian-derived-category], and Step 2, write $v=b\\,1_L$ and obtain $G(v)=b\\,1_{G(L)}$. Transporting along the chosen isomorphism $G(L)\\cong B_{\\operatorname{Spec}k}$ gives the scalar endomorphism $b\\,1_{B_{\\operatorname{Spec}k}}$. Apply Steps 1–2 to the nonempty connected scheme $\\operatorname{Spec}k$: its endomorphism ring is $B$, so the inverse of this scalar endomorphism corresponds to some $c\\in B$ and satisfies $bc=1=cb$. Thus $b$ is a unit in $B$.",
+   "uses": [
+    "def-weil-linear-category",
+    "lem-weil-pbc-constant-sheaf-sections-connected",
+    "lem-weil-linear-abelian-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
+    "place": "Agent-written scalar-unit argument for the extracted item; parent proof paragraph beginning \"The Tate rank-one object\" supplies its rank-one context"
+   }
+  },
+  {
+   "text": "The scalar map $c\\mapsto c\\,1_L$ is multiplicative, and the scalar corresponding to $b^{-1}$ is a two-sided inverse to $v=b\\,1_L$. Hence $v$ is an isomorphism whenever $G(v)$ is an isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
+    "place": "Agent-written scalar-unit argument for the extracted item; parent proof paragraph beginning \"The Tate rank-one object\" supplies its rank-one context"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-linear-category",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-linear-abelian-derived-category",
+  "lem-weil-pbc-constant-sheaf-sections-connected",
+  "lem-weil-pbc-derived-single-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-dualizing.md",
+  "place": "Agent-written proof of the extracted scalar claim. The parent paragraph beginning \"The Tate rank-one object\" supplies the context, not the scalar argument; degree-zero comparison follows Stacks Tag 06XS and constant sections follow Tag 03P5."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +111,38 @@
    "results": "8 hits; top: ModuleCat.Tilde.isUnit_toStalk, StandardEtalePair.homEquiv_apply_coe, StandardEtalePair.homEquiv, Algebra.instIsStandardEtale, Algebra.FormallyEtale.subsingleton_kaehlerDifferential, Algebra.FormallyEtale.subsingleton_h1Cotangent, StandardEtalePair.instFormallyEtaleRing, Algebra.IsStandardSmooth.subsingleton_h1Cotangent; digest 1b501b3549e7eb83",
    "date": "2026-10-17",
    "verdict": "no match: module rank-one/Schur statements do not give the connected etale sheaf/derived endomorphism identification; Schur also requires a field and simplicity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "endomorphisms of a shifted Tate line on a nonempty connected scheme are scalars",
+   "results": "8 hits; top: CategoryTheory.endomorphism_simple_eq_smul_id, CategoryTheory.PreGaloisCategory.exists_autMap, CategoryTheory.PreGaloisCategory.autMap_unique, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, CategoryTheory.PreGaloisCategory.autMap, CategoryTheory.PreGaloisCategory.FibreFunctor.end_isUnit, AlgebraicGeometry.AffineSpace.homOverEquiv; subdirectory argument: (all Mathlib); digest edda5d8f7b320fad",
+   "date": "2026-10-17",
+   "verdict": "no match: the Schur result assumes a simple object over an algebraically closed field and finite dimensional endomorphisms; PreGalois results concern fibre functors, not arbitrary B-module sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Linear, DerivedCategory.singleFunctor, Module.End",
+   "results": "0 hits; top: none; subdirectory argument: (all Mathlib); digest 4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "verdict": "no match: the combined pattern returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*sheaf|endomorphism.*line|connected.*sections",
+   "results": "0 hits; top: none; subdirectory argument: Mathlib/AlgebraicGeometry; digest 4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits in the recorded Mathlib/AlgebraicGeometry subdirectory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "global sections and endomorphisms of a constant rank one etale sheaf on a connected scheme",
+   "results": "8 hits; top: CategoryTheory.Sheaf.Γ, CategoryTheory.HasGlobalSectionsFunctor, CategoryTheory.Sheaf.ΓObjEquivHom, AlgebraicGeometry.Scheme.ΓSpecIso, CategoryTheory.Sheaf.IsConstant.mk, CategoryTheory.constantSheafΓAdj, CategoryTheory.Sheaf.ΓHomEquiv, AlgebraicGeometry.LocallyRingedSpace.Γ_obj; subdirectory argument: (all Mathlib); digest 48aab589bb1665b5",
+   "date": "2026-10-17",
+   "verdict": "no match: these declarations construct global sections or their adjunction, but do not identify connected etale constant sections or derived Tate-line endomorphisms."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-finite-dualizing",
@@ -71,5 +159,35 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-connected-tate-line-endomorphisms",
+  "worker": "stage1",
+  "summary": "Reused the existing four-step split and logged searches. Checked arbitrary coefficient rings, made scalar extraction and overlap cancellation explicit, cited the derived shift definition, and corrected the proof attribution: the scalar argument is agent-written rather than present in the parent blueprint. Existing Tate-line, full-faithfulness and connected-section nodes supply all non-elementary inputs. No new nodes.",
+  "blueprint": "Serves the scalar-endomorphism and detection argument extracted from lem-coef-finite-dualizing by Q41, in the context of the paragraph beginning \"The Tate rank-one object at A reduces to the one at B\". The archived parent proof motivates rank-one twists but omits this scalar argument; the item supplies it explicitly without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constant-sheaf-sections-connected",
+    "why": "Its statement computes global sections of the constant coefficient sheaf on a connected scheme, the scalar-section input required by the extracted argument; no node in this biduality unit supplies that site calculation."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Step 1 takes only its statement that the ordinary etale finite Tate power B_Y(r) is locally free of rank one over B_Y; it lies in unit sk-prop-sf-cbc outside this unit's route, and the parent lem-coef-finite-dualizing already records it as a tool for the same Tate sheaves."
+   }
+  ],
+  "blueprint_snapshot": "main-20261015"
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-sheaf-sections-connected",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-e6a7eba45",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-e6a7eba45 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement, the unit route, the parent lem-coef-finite-dualizing (steps 3 and 5), Stacks 06XS (derived.tex l.8713-8727) and 03P5 (etale-cohomology.tex l.2437-2456), and the blueprint master parent paragraph 'The Tate rank-one object' (l.47-58, and its main-20261015 copy). That paragraph does not contain the scalar argument, so the agent-written proof origin is correct. The statement is true: End(B_Y(r)[d]) = End of an invertible B_Y-module = Gamma(Y,B_Y), which is B on a connected Y. I tested B=0, N=1, r=0, d of both signs, Y=Spec k and Y=A^r. Connectedness and nonemptiness are both needed: two points give B x B, and the empty scheme breaks injectivity. In step 1 the local-basis gluing (a_j u_ij = u_ij a_i, so a_j = a_i) is correct. Step 2 is correct: the connected-sections node holds for any abelian group, and the module structure goes through the same constant-section map. Step 3 applies the already-proved first assertion on Spec k, so it is not circular. No duplicate exists: lem-pur-lisse-rank-one-aut covers only finite-stage pro-etale sheaves on separated finite-type schemes. No new nodes and no SGA. Three faults, all repaired in fixes/dag/nodes/sec-six-functors/lem-coef-connected-tate-line-endomorphisms.json. (1) B3/C4: the statement's b*1_L and 'B-linear functor' use the B-linear structure of the derived categories with no node for it. I added a citation to the on-route Mathlib leaf lem-weil-linear-abelian-derived-category (DerivedCategory.instLinear, instLinearShiftFunctorInt) and added it to stmt_deps; the meaning is unchanged. (2) C4: step 1 credited shift linearity to def-weil-abstract-derived-category, which says nothing about linearity. Steps 1 and 3 now cite the leaf, and proof_deps is updated. (3) C8: lem-asd-etale-finite-twist-pullback (unit sk-prop-sf-cbc, not on the route) was used without declaring it. I added it to split_report.tool_uses for its rank-one clause, as the parent already does. I accept that tool use. The declared tool use of lem-weil-pbc-constant-sheaf-sections-connected is on route through sk-thm-p1, so the declaration is harmless.; 1 file(s) fixed by the reviewer"
  }
 }
