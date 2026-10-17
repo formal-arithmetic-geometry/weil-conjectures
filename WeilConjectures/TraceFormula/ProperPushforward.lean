@@ -49,7 +49,11 @@ so `h` is proper (`ProperPushforwardDiagram.isProper_fixMap`, blueprint
 For the kernel maps of a proper pushforward diagram (blueprint
 `def-trf-kernel-pushforward-maps`) we construct the trace `τ_f : Rf_* ω_X ⟶ ω_Y`
 (`lowerStarDualizingComplexTrace`) and the multiplication
-`μ_f : Rf_* M ⊗ Rf_* N ⟶ Rf_* (M ⊗ N)` (`lowerStarTensorMap`).
+`μ_f : Rf_* M ⊗ Rf_* N ⟶ Rf_* (M ⊗ N)` (`lowerStarTensorMap`). For a commutative square
+`g ≫ b = c ≫ f` with `g`, `f` proper we construct the composition isomorphism
+`Ξ : Rb_! Rg_* ≅ Rf_* Rc_!` (`lowerStarLowerShriekCompIso`) and its mate, the exchange map
+`E : Rg_* Rc^! ⟶ Rb^! Rf_*` (`lowerStarUpperShriekExchange`); the exceptional half `δ` above is
+`E` for the square `g ≫ b₁ = c₁ ≫ f`.
 
 -/
 
@@ -112,6 +116,51 @@ noncomputable def lowerStarTensorMap (f : X ⟶ Y)
           f).counit.app N))
 
 end ProperMaps
+
+section Exchange
+
+variable (ℓ) {C D X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType C.hom] [QuasiCompact C.hom] [IsSeparated C.hom]
+  [LocallyOfFiniteType D.hom] [QuasiCompact D.hom] [IsSeparated D.hom]
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  {c : C ⟶ X} {g : C ⟶ D} {b : D ⟶ Y} {f : X ⟶ Y} [IsProper g.left] [IsProper f.left]
+
+/-- The *composition isomorphism* `Ξ : Rb_! Rg_* ≅ Rf_* Rc_!` of a commutative square
+`g ≫ b = c ≫ f` with proper `g` and `f` (blueprint `def-trf-kernel-pushforward-maps`, item 9):
+```
+Rb_! Rg_* ≅ Rb_! Rg_! ≅ R(g ≫ b)_! = R(c ≫ f)_! ≅ Rf_! Rc_! ≅ Rf_* Rc_!,
+```
+using `Rg_! ≅ Rg_*`, `Rf_! ≅ Rf_*` and the composition isomorphisms of the lower shriek. -/
+noncomputable def lowerStarLowerShriekCompIso (w : g ≫ b = c ≫ f) :
+    boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g ⋙
+        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ b ≅
+      boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ c ⋙
+        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f :=
+  Functor.isoWhiskerRight (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).symm _ ≪≫
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ g b).symm ≪≫
+    eqToIso (by rw [w]) ≪≫
+    boundedConstructibleLowerShriekComp_padicAlgCl ℓ c f ≪≫
+    Functor.isoWhiskerLeft _ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f)
+
+/-- The *exchange map* `E : Rg_* Rc^! ⟶ Rb^! Rf_*` of a commutative square `g ≫ b = c ≫ f` with
+proper `g` and `f` (blueprint `def-trf-kernel-pushforward-maps`, item 9): the exceptional adjoint
+of
+```
+Rb_! Rg_* Rc^! ≅ Rf_* Rc_! Rc^! --Rf_* ε_c--> Rf_*,
+```
+that is, the mate of the composition isomorphism `lowerStarLowerShriekCompIso` for the
+adjunctions `Rc_! ⊣ Rc^!` and `Rb_! ⊣ Rb^!`. No cartesian condition on the square is needed. -/
+noncomputable def lowerStarUpperShriekExchange (w : g ≫ b = c ≫ f) :
+    boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c ⋙
+        boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g ⟶
+      boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
+        boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ b :=
+  mateEquiv (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ c)
+    (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ b)
+    (lowerStarLowerShriekCompIso ℓ w).hom
+
+end Exchange
 
 namespace Correspondence
 
@@ -198,24 +247,16 @@ noncomputable def pushforwardCoeffUnit :
 (blueprint `def-trf-coefficient-pushforward`, item 2): the adjoint for `Rb₁_! ⊣ Rb₁^!` of
 ```
 Rb₁_! Rg_* Rc₁^! K ≅ Rb₁_! Rg_! Rc₁^! K ≅ R(g ≫ b₁)_! Rc₁^! K = R(c₁ ≫ f)_! Rc₁^! K
-  ≅ Rf_! Rc₁_! Rc₁^! K --Rf_! ε_{c₁}--> Rf_! K ≅ Rf_* K,
+  ≅ Rf_! Rc₁_! Rc₁^! K ≅ Rf_* Rc₁_! Rc₁^! K --Rf_* ε_{c₁}--> Rf_* K,
 ```
 using `Rg_! ≅ Rg_*`, `Rf_! ≅ Rf_*` for the proper `g`, `f` and the composition isomorphisms of
-the lower shriek. -/
+the lower shriek: the exchange map `lowerStarUpperShriekExchange` of the square
+`g ≫ b₁ = c₁ ≫ f` at `K`. -/
 noncomputable def pushforwardCoeffCounit :
     (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ P.g).obj
         ((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.c₁).obj K) ⟶
       (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ P.b₁).obj P.coeff :=
-  (boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ P.b₁).homEquiv _ _
-    ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ P.b₁).map
-        ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ P.g).inv.app _) ≫
-      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ P.g P.b₁).inv.app _ ≫
-      eqToHom (by rw [P.w₁]) ≫
-      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c.c₁ P.f).hom.app _ ≫
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ P.f).map
-        ((boundedConstructibleUpperShriekAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
-          c.c₁).counit.app K) ≫
-      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ P.f).hom.app K)
+  (lowerStarUpperShriekExchange ℓ P.w₁).app K
 
 /-- The *coefficient pushforward* `[f, g]_! u = δ ∘ Rg_* u ∘ γ : Lb₂^* K' ⟶ Rb₁^! K'` of the
 coefficient map of `c` along a proper pushforward diagram (blueprint
