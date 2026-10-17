@@ -375,6 +375,58 @@ theorem unitTensorFinite (hfd : J.HasFiniteDisjointRefinements W) :
     simp only [Fin.append_left, Fin.append_right, ← e₁, ← e₂]
     abel
 
+include hW in
+/-- If the terminal object has finite disjoint refinements, morphisms from the unit of sheaves
+of modules to a coproduct factor through a finite subcoproduct. -/
+theorem unitFactorsThroughFiniteCoproducts (hfd : J.HasFiniteDisjointRefinements W) :
+    UnitFactorsThroughFiniteCoproducts (Sheaf J (ModuleCat.{max u v} R)) := by
+  classical
+  intro K X _ x
+  let a := presheafToSheaf J (ModuleCat.{max u v} R)
+  let adj := sheafificationAdjunction J (ModuleCat.{max u v} R)
+  let ψ : (∐ fun k ↦ (X k).obj) ⟶ (∐ X).obj := Sigma.desc fun k ↦ (Sigma.ι X k).hom
+  -- the sheafification of `ψ` is an isomorphism
+  have hc := isColimitOfPreserves a (colimit.isColimit (Discrete.functor fun k ↦ (X k).obj))
+  let e : Discrete.functor (fun k ↦ (X k).obj) ⋙ a ≅ Discrete.functor X :=
+    Discrete.natIso fun k ↦ asIso (adj.counit.app (X k.as))
+  have hc' := (IsColimit.precomposeInvEquiv e _).symm hc
+  let f : (Cocone.precompose e.inv).obj (a.mapCocone (colimit.cocone _)) ⟶
+      colimit.cocone (Discrete.functor X) :=
+    { hom := a.map ψ ≫ adj.counit.app _
+      w := fun ⟨k⟩ ↦ by
+        dsimp
+        rw [Category.assoc, ← Functor.map_comp_assoc]
+        erw [Sigma.ι_desc]
+        erw [adj.counit.naturality]
+        simp [e] }
+  have hiso : IsIso (a.map ψ) := by
+    have := IsColimit.hom_isIso hc' (colimit.isColimit _) f
+    have : IsIso f.hom := (Cocone.forget _).map_isIso f
+    have : IsIso (a.map ψ ≫ adj.counit.app _) := inferInstanceAs (IsIso f.hom)
+    exact IsIso.of_isIso_comp_right _ (adj.counit.app _)
+  have : Presheaf.IsLocallySurjective J ψ := ((J.W_iff _).2 hiso).isLocallySurjective
+  obtain ⟨p, hp⟩ := Presheaf.surjective_app_of_hasFiniteDisjointRefinements ψ
+    (Sheaf.isSeparated _) hfd (fun _ _ _ hf t ↦ hf.exists_map_sigma_eq X t)
+    (x.hom.app (op W) (unitSection J W))
+  have hp' : p ∈ ⨆ d : Discrete K, LinearMap.range (((Sigma.ι (fun k ↦ (X k).obj) d.as).app
+      (op W)).hom) := by
+    have h := ModuleCat.iSup_range_ι_app_eq_top
+      (isColimitOfPreserves ((evaluation _ _).obj (op W)) (colimit.isColimit
+        (Discrete.functor fun k ↦ (X k).obj)))
+    rw [_root_.eq_top_iff] at h
+    exact h Submodule.mem_top
+  obtain ⟨S, hS⟩ := Submodule.exists_finset_of_mem_iSup _ hp'
+  obtain ⟨μ, hμ⟩ := (Submodule.mem_iSup_finset_iff_exists_sum _ _).1 hS
+  choose b hb using fun d ↦ (μ d).2
+  choose y hy using fun k ↦ exists_unitHom_eq hW (X k) (b ⟨k⟩)
+  refine ⟨S.image Discrete.as, y, unit_hom_ext hW ?_⟩
+  rw [sum_hom_app_unitSection, ← hp, ← hμ, map_sum,
+    Finset.sum_image (fun _ _ _ _ h ↦ Discrete.ext h)]
+  refine Finset.sum_congr rfl fun d _ ↦ ?_
+  rw [← hb d, ← ConcreteCategory.comp_apply, ← NatTrans.comp_app, Sigma.ι_desc,
+    ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ConcreteCategory.comp_apply,
+    hy]
+
 end Terminal
 
 end Sheaf
