@@ -952,7 +952,6 @@ public import WeilConjectures.AlgebraicGeometry.ExtPullbackHomComplex
 public import WeilConjectures.AlgebraicGeometry.ExtPullbackResolutionSections
 public import WeilConjectures.AlgebraicGeometry.FiberDegreeBound
 public import WeilConjectures.AlgebraicGeometry.FiberDegreeOfSplitCofan
-public import WeilConjectures.AlgebraicGeometry.FiberDimensionBound
 public import WeilConjectures.AlgebraicGeometry.FibreDimension
 public import WeilConjectures.AlgebraicGeometry.FibreProductPointResidueField
 public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
@@ -2103,7 +2102,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.BrownRepresentability.Grothendieck
 public import WeilConjectures.CategoryTheory.DerivedCategory.BrownRepresentability.ModuleCat
 public import WeilConjectures.CategoryTheory.DerivedCategory.CohomologicalSupport
-public import WeilConjectures.CategoryTheory.DerivedCategory.CompactGenerators
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.AdicTower
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Completion
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
@@ -2260,7 +2258,6 @@ public import WeilConjectures.CategoryTheory.FinitePrecoverage
 public import WeilConjectures.CategoryTheory.FinitePresieveFilteredColimit
 public import WeilConjectures.CategoryTheory.Functor.KanExtension.ProjectionFormula
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.AcyclicSwallowing
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Brown
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.CardinalGenerated
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.CardinalGeneratedCover
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Coefficients
@@ -2437,7 +2434,6 @@ public import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSection
 public import WeilConjectures.CategoryTheory.Sites.CoinduceZMod
 public import WeilConjectures.CategoryTheory.Sites.ConstantForget
 public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
-public import WeilConjectures.CategoryTheory.Sites.DerivedBrown
 public import WeilConjectures.CategoryTheory.Sites.EquivariantEvaluation
 public import WeilConjectures.CategoryTheory.Sites.FlatExtendScalars
 public import WeilConjectures.CategoryTheory.Sites.FlatLocalRelations
@@ -2497,9 +2493,6 @@ public import WeilConjectures.CategoryTheory.StageSystem.Functor
 public import WeilConjectures.CategoryTheory.SubobjectHomologyStep
 public import WeilConjectures.CategoryTheory.TowerSplitEnvelope
 public import WeilConjectures.CategoryTheory.TransportScalarActionDiagrams
-public import WeilConjectures.CategoryTheory.Triangulated.Brown.Basic
-public import WeilConjectures.CategoryTheory.Triangulated.Brown.CompactObject
-public import WeilConjectures.CategoryTheory.Triangulated.Brown.Representability
 public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.Basic
 public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.Localization
 public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.Telescope
@@ -2800,7 +2793,6 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Trace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Basic
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.TmpTest
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Transport
 public import WeilConjectures.EtaleCohomology.TateTwist.Basic
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass
@@ -4116,7 +4108,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integr
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaAssoc
-public import WeilConjectures.SixFunctors.Etale.Derived.ProperCoproducts
 public import WeilConjectures.SixFunctors.Etale.Derived.ProperOpenComparison.ClopenSection
 public import WeilConjectures.SixFunctors.Etale.Derived.ProperOpenComparison.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.ProperOpenComparison.Defs

@@ -81,6 +81,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f]
   [IsSeparated f]
 
+variable (Λ) in
 /-- Blueprint `def-pur-td-datum`: Trace–diagonal datum
 
 For `f : X ⟶ Y` with `W = X ×_Y X`, projections `p₁, p₂` and diagonal `Δ`, and an object
@@ -101,7 +102,7 @@ structure TraceDiagonalDatum (L : DerivedCategoryModule Λ X) where
 
 namespace TraceDiagonalDatum
 
-variable {Λ f} {L : DerivedCategoryModule Λ X} (d : TraceDiagonalDatum Λ f L)
+variable {f} {L : DerivedCategoryModule Λ X} (d : TraceDiagonalDatum Λ f L)
 
 /-- Blueprint `def-pur-td-datum`: Trace–diagonal datum
 

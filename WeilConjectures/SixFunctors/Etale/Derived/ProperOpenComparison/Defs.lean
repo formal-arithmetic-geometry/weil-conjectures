@@ -103,7 +103,7 @@ lemma openImmersionLowerShriekToLowerStarPlus_app
 
 /-- The counit `D⁺j^* R⁺j_* ⟶ 𝟭` is an isomorphism for an open immersion `j`: in the adjoint
 triple `D⁺j_! ⊣ D⁺j^* ⊣ R⁺j_*` the unit of the first adjunction is an isomorphism. -/
-instance isIso_derivedPlus_counit_of_isOpenImmersion :
+instance isIso_counit_derivedPlus_of_isOpenImmersion :
     IsIso (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).derivedPlus.counit :=
   (Adjunction.Triple.mk (derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
       (ModuleCat.{u + 1} Λ) j)

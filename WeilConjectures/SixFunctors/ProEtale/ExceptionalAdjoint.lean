@@ -8,7 +8,7 @@ module
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Brown
+public import WeilConjectures.CategoryTheory.DerivedCategory.BrownRepresentability.Grothendieck
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarCoproducts
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
@@ -164,7 +164,7 @@ theorem HasAmbientExceptionalRightAdjoint.isLeftAdjoint {f : X ⟶ Y} [HasCompac
   have (K : Type (u + 1)) :=
     preservesColimitsOfShape_rightDerivedLowerStar_of_isZero A c.g N
       (fun F r hr ↦ hN (.mk (𝟙 Y)) (𝟙 c.Z) c.g (IsPullback.id_horiz c.g) F r hr) K
-  exact IsGrothendieckAbelian.isLeftAdjoint_of_preservesCoproducts
+  exact DerivedCategory.isLeftAdjoint_of_preservesCoproducts
     (D((c.i)_!open[A]) ⋙ R((c.g)_*[A]))
 
 section Admissibility

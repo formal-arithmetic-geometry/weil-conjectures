@@ -51,7 +51,7 @@ variable {T S R : Scheme.{u}} (g₁ : T ⟶ S) (g₂ : S ⟶ R) (g₁₂ : T ⟶
   [Etale g₁] [Etale g₂] [Etale g₁₂]
 
 /-- The composition isomorphism of the restriction functors along étale morphisms. -/
-noncomputable def localizationRestrictionComp :
+noncomputable def localizationRestrictionComp' :
     localizationRestriction A g₁₂ inferInstance ≅
       localizationRestriction A g₂ inferInstance ⋙ localizationRestriction A g₁ inferInstance :=
   (Functor.sheafPushforwardContinuousComp' (F := MorphismProperty.Over.map ⊤ (P := @Etale)
@@ -60,18 +60,18 @@ noncomputable def localizationRestrictionComp :
     (MorphismProperty.Over.mapComp (Q := ⊤) (P := @Etale) (hf := inferInstance)
       (hg := inferInstance) g₁₂ hg).symm A _ _ _).symm
 
-lemma localizationRestrictionComp_hom_app_hom_app (P : Sheaf R.smallEtaleTopology A)
+lemma localizationRestrictionComp'_hom_app_hom_app (P : Sheaf R.smallEtaleTopology A)
     (U : T.Etale) :
-    ((localizationRestrictionComp A g₁ g₂ g₁₂ hg).hom.app P).hom.app (op U) =
+    ((localizationRestrictionComp' A g₁ g₂ g₁₂ hg).hom.app P).hom.app (op U) =
       P.obj.map ((MorphismProperty.Over.mapComp (Q := ⊤) (P := @Etale) (hf := inferInstance)
         (hg := inferInstance) g₁₂ hg).inv.app U).op := by
-  simp [localizationRestrictionComp]
+  simp [localizationRestrictionComp']
 
 /-- The identification of the pullback along an étale morphism with the restriction is
 compatible with the composition isomorphisms. -/
 lemma upperStarIsoLocalizationRestriction_comp (P : Sheaf R.smallEtaleTopology A) :
     (upperStarIsoLocalizationRestriction A g₁₂ inferInstance).hom.app P ≫
-        (localizationRestrictionComp A g₁ g₂ g₁₂ hg).hom.app P =
+        (localizationRestrictionComp' A g₁ g₂ g₁₂ hg).hom.app P =
       (upperStarComp A g₁ g₂ g₁₂ hg).hom.app P ≫
         ((g₁)^*[A]).map ((upperStarIsoLocalizationRestriction A g₂ inferInstance).hom.app P) ≫
         (upperStarIsoLocalizationRestriction A g₁ inferInstance).hom.app
@@ -101,7 +101,7 @@ lemma upperStarIsoLocalizationRestriction_comp (P : Sheaf R.smallEtaleTopology A
   obtain ⟨U⟩ := U
   subst hg
   simp [localizationRestrictionLowerStarAdjunction_unit_app_hom_app', lowerStar_map_hom_app,
-    lowerStarComp_hom_app_hom_app, localizationRestrictionComp_hom_app_hom_app]
+    lowerStarComp_hom_app_hom_app, localizationRestrictionComp'_hom_app_hom_app]
   simp only [localizationRestriction_obj_obj_map, ← Functor.map_comp, ← op_comp]
   congr 1
   apply Quiver.Hom.unop_inj
@@ -111,7 +111,7 @@ lemma upperStarIsoLocalizationRestriction_comp (P : Sheaf R.smallEtaleTopology A
 
 /-- The inverse form of `AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction_comp`. -/
 lemma localizationRestrictionComp_hom_app_eq (P : Sheaf R.smallEtaleTopology A) :
-    (localizationRestrictionComp A g₁ g₂ g₁₂ hg).hom.app P =
+    (localizationRestrictionComp' A g₁ g₂ g₁₂ hg).hom.app P =
       (upperStarIsoLocalizationRestriction A g₁₂ inferInstance).inv.app P ≫
         (upperStarComp A g₁ g₂ g₁₂ hg).hom.app P ≫
         ((g₁)^*[A]).map ((upperStarIsoLocalizationRestriction A g₂ inferInstance).hom.app P) ≫
@@ -120,13 +120,13 @@ lemma localizationRestrictionComp_hom_app_eq (P : Sheaf R.smallEtaleTopology A) 
   rw [← upperStarIsoLocalizationRestriction_comp, Iso.inv_hom_id_app_assoc]
 
 lemma localizationRestrictionComp_inv_app_eq (P : Sheaf R.smallEtaleTopology A) :
-    (localizationRestrictionComp A g₁ g₂ g₁₂ hg).inv.app P =
+    (localizationRestrictionComp' A g₁ g₂ g₁₂ hg).inv.app P =
       (upperStarIsoLocalizationRestriction A g₁ inferInstance).inv.app
           ((localizationRestriction A g₂ inferInstance).obj P) ≫
         ((g₁)^*[A]).map ((upperStarIsoLocalizationRestriction A g₂ inferInstance).inv.app P) ≫
         (upperStarComp A g₁ g₂ g₁₂ hg).inv.app P ≫
         (upperStarIsoLocalizationRestriction A g₁₂ inferInstance).hom.app P := by
-  rw [← cancel_epi ((localizationRestrictionComp A g₁ g₂ g₁₂ hg).hom.app P),
+  rw [← cancel_epi ((localizationRestrictionComp' A g₁ g₂ g₁₂ hg).hom.app P),
     Iso.hom_inv_id_app, localizationRestrictionComp_hom_app_eq]
   simp only [Category.assoc, Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc,
     Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_app]
@@ -265,10 +265,10 @@ end Descent
 lemma localizationRestrictionComp_inv_app_hom_app {T S R : Scheme.{u}} (g₁ : T ⟶ S)
     (g₂ : S ⟶ R) (g₁₂ : T ⟶ R) (hg : g₁₂ = g₁ ≫ g₂) [Etale g₁] [Etale g₂] [Etale g₁₂]
     (P : Sheaf R.smallEtaleTopology A) (U : T.Etale) :
-    ((localizationRestrictionComp A g₁ g₂ g₁₂ hg).inv.app P).hom.app (op U) =
+    ((localizationRestrictionComp' A g₁ g₂ g₁₂ hg).inv.app P).hom.app (op U) =
       P.obj.map ((MorphismProperty.Over.mapComp (Q := ⊤) (P := @Etale) (hf := inferInstance)
         (hg := inferInstance) g₁₂ hg).hom.app U).op := by
-  simp [localizationRestrictionComp]
+  simp [localizationRestrictionComp']
 
 section PullbackDescent
 
@@ -282,9 +282,9 @@ of restrictions along `w = p ≫ v`. -/
 noncomputable def compRestriction :
     (localizationRestriction A w inferInstance).obj P ⟶
       (localizationRestriction A w inferInstance).obj Q :=
-  (localizationRestrictionComp A p v w hw).hom.app P ≫
+  (localizationRestrictionComp' A p v w hw).hom.app P ≫
     (localizationRestriction A p inferInstance).map ψ ≫
-      (localizationRestrictionComp A p v w hw).inv.app Q
+      (localizationRestrictionComp' A p v w hw).inv.app Q
 
 /-- The étale `X`-scheme `W` is the image of the étale `Z`-scheme `g : W ⟶ Z`. -/
 noncomputable def mapMkIso {W : X.Etale} (g : W.left ⟶ Z) [Etale g] (hg : g ≫ w = W.hom) :
@@ -304,7 +304,7 @@ lemma descentComponent_eq_compRestriction {W : X.Etale} (q : W ⟶ Scheme.Etale.
       (Scheme.Etale.mk g) := MorphismProperty.Over.isoMk (Iso.refl _) (by simp [liftEtale, hg])
   rw [descentComponent, hom_app_eq_of_iso v ψ k]
   simp only [compRestriction, ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
-    localizationRestrictionComp_hom_app_hom_app, localizationRestrictionComp_inv_app_hom_app,
+    localizationRestrictionComp'_hom_app_hom_app, localizationRestrictionComp_inv_app_hom_app,
     localizationRestriction_map_hom_app, localizationRestriction_obj_obj_map, Category.assoc,
     ← Functor.map_comp, ← Functor.map_comp_assoc, ← op_comp, Quiver.Hom.unop_op]
   congr 3

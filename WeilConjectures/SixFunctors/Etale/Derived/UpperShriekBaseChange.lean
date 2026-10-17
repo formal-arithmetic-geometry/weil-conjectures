@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 public import WeilConjectures.SixFunctors.OpenClosed.Derived
 
 /-!
@@ -98,21 +98,6 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
-
-/-- The base-change comparison `β : Lg'^* Rf^! ⟶ Rf'^! Lg^*` of the exceptional inverse image for
-a cartesian square `g' ≫ f = f' ≫ g`, with torsion coefficients: the mate, under the exceptional
-adjunctions `Rf_! ⊣ Rf^!` and `Rf'_! ⊣ Rf'^!`, of the inverse of the compact-support base change
-isomorphism `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*`
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`). Its transpose under
-`Rf'_! ⊣ Rf'^!` is `Rf'_! Lg'^* Rf^! K ≅ Lg^* Rf_! Rf^! K ⟶ Lg^* K`, the second map being `Lg^*`
-of the counit. -/
-noncomputable def rightDerivedUpperShriekBaseChangeMap [HasCompactification f]
-    [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) :
-    R(f)^![ModuleCat.{u + 1} Λ] ⋙ L((g')^*[ModuleCat.{u + 1} Λ]) ⟶
-      L((g)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')^![ModuleCat.{u + 1} Λ] :=
-  haveI := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
-  (mateEquiv (rightDerivedUpperShriekAdjunction _ f) (rightDerivedUpperShriekAdjunction _ f')
-    (TwoSquare.mk _ _ _ _ (inv (rightDerivedLowerShriekBaseChangeMap Λ sq)))).natTrans
 
 /-- For an open immersion `g`, the derived extension by zero `D(g_!)` is left adjoint to the
 derived pullback `Lg^*`: the adjunction `D(g_!) ⊣ D(g^*)` transported along `Lg^* ≅ D(g^*)`. -/
@@ -372,7 +357,10 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso_mateEquiv
     (rightDerivedUpperShriekAdjunction _ f) (adjJ'.comp adjp')
     (rightDerivedUpperShriekAdjunction _ f') (Iso.refl (R(f)_![ModuleCat.{u + 1} Λ]))
     (rightDerivedLowerShriekIso Λ c') (TwoSquare.vComp α β')
-  unfold rightDerivedUpperShriekBaseChangeMap
+  have hEx := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
+  show IsIso (mateEquiv (rightDerivedUpperShriekAdjunction _ f)
+    (rightDerivedUpperShriekAdjunction _ f')
+    (TwoSquare.mk _ _ _ _ (inv (rightDerivedLowerShriekBaseChangeMap Λ sq)))).natTrans
   rw [twoSquare_inv_rightDerivedLowerShriekBaseChangeMap]
   exact this
 

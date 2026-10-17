@@ -29,7 +29,7 @@ No constructibility is used anywhere.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.exists_distTriang_closedSupport`
-- `AlgebraicGeometry.Etale.isIso_derivedUpperStarLowerStarAdjunction_counit_of_isOpenImmersion`
+- `AlgebraicGeometry.Etale.isIso_counit_derivedUpperStarLowerStarAdjunction_of_isOpenImmersion`
 - `AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_of_disjoint`
 -/
 
@@ -91,7 +91,7 @@ The levelwise pullback `D(g^*)` has the exact left adjoint `D(g_!)` with inverti
 (`AlgebraicGeometry.Etale.isIso_derivedOpenImmersionLowerShriekUpperStarAdjunction_unit`), so in
 the adjoint triple `D(g_!) ⊣ D(g^*) ⊣ Rg_*` the counit of the second adjunction is invertible
 too; and `Lg^* ≅ D(g^*)`. -/
-instance isIso_derivedUpperStarLowerStarAdjunction_counit_of_isOpenImmersion {V T : Scheme.{u}}
+instance isIso_counit_derivedUpperStarLowerStarAdjunction_of_isOpenImmersion {V T : Scheme.{u}}
     (g : V ⟶ T) [IsOpenImmersion g] : IsIso (derivedUpperStarLowerStarAdjunction A g).counit := by
   have : IsIso (mapDerivedUpperStarLowerStarAdjunction A g).counit :=
     (Adjunction.Triple.mk (derivedOpenImmersionLowerShriekUpperStarAdjunction A g)

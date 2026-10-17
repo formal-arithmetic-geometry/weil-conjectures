@@ -433,7 +433,7 @@ lemma lowerStarFactor_assoc (f : W ⟶ Z) (g : Z ⟶ Y) (h : Y ⟶ X) {fg : W �
       Functor.whiskerLeft (f)_*[A] (lowerStarFactor A e₂).hom ≫
         (lowerStarFactor A e₄).hom := by
   subst e₁ e₂ e₃
-  have key := congrArg Iso.hom (lowerStarComp_assoc A f g h)
+  have key := congrArg Iso.hom (legacy_lowerStarComp_assoc A f g h)
   simp only [Iso.trans_hom, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom] at key
   rw [lowerStarFactor_rfl, lowerStarFactor_rfl, lowerStarFactor_rfl,
     ← lowerStarComp_trans_lowerStarCongr]

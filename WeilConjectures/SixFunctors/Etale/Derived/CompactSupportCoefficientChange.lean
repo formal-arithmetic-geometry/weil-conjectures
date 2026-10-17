@@ -102,7 +102,7 @@ noncomputable def compactSupportCoefficientChangeIso :
       derivedTensorRight _ X ((L((f)^*[ModuleCat.{u + 1} Λ])).obj (constantQuotient Λ J Y)) ⋙
         R(f)_![ModuleCat.{u + 1} Λ]) ≪≫
     Functor.isoWhiskerRight ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).flip.mapIso
-      (leftDerivedUpperStarSingleConstantSheafIso Λ f (ModuleCat.of Λ (Λ ⧸ J)))) _
+      (leftDerivedUpperStarSingleConstantSheafIso (ModuleCat.{u + 1} Λ) f (ModuleCat.of Λ (Λ ⧸ J)))) _
 
 /-- The component of the coefficient change at `K` is the projection map at `(Λ ⧸ J)_Y`,
 followed by `Lf^* (Λ ⧸ J)_Y ≅ (Λ ⧸ J)_X`. -/
@@ -112,7 +112,7 @@ lemma compactSupportCoefficientChangeIso_hom_app
       ((projectionMap (ModuleCat.{u + 1} Λ) f).app K).app (constantQuotient Λ J Y) ≫
         (R(f)_![ModuleCat.{u + 1} Λ]).map
           (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).map
-            (leftDerivedUpperStarSingleConstantSheafIso Λ f _).hom) := by
+            (leftDerivedUpperStarSingleConstantSheafIso (ModuleCat.{u + 1} Λ) f _).hom) := by
   simp [compactSupportCoefficientChangeIso]
 
 end Etale
