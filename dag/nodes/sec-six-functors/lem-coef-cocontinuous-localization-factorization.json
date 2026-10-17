@@ -1,7 +1,7 @@
 {
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-segal-localization-model",
@@ -9,9 +9,102 @@
   "group": "N8"
  },
  "mathlib_match": null,
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $i:\\mathcal A_S\\hookrightarrow\\mathcal A$ for the full inclusion. By [lem-coef-presentable-infinity-adjoints], $\\mathcal A_S$ is presentable, its reflector is left adjoint to $i$, and its small colimits are obtained by reflecting the corresponding ambient colimits. Both categories are presentable and $L$ has a right adjoint, so the same node's adjoint criterion says that $L$ preserves all small colimits. Put $W=\\langle S\\rangle$, the class in [lem-coef-infinity-small-localization-saturation]. That statement identifies $W$ with the arrows inverted by $L$, and puts every unit $\\eta_A:A\\to iLA$ in $W$. The adjunction is the one in the question; the small-set reflector and its adjunction may be identified with it by their mapping-space universal property.",
+   "uses": [
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-infinity-small-localization-saturation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.4.20, setup; Proposition 5.5.4.15 for the inverted class; read online, not archived in literature/"
+   }
+  },
+  {
+   "text": "The counit $\\epsilon:Li\\to\\mathrm{id}$ is an equivalence. To check this directly, for $B,Z\\in\\mathcal A_S$ fullness and the mapping-space adjunction in [lem-coef-presentable-infinity-adjoints] give $\\operatorname{Map}_{\\mathcal A_S}(B,Z)\\simeq\\operatorname{Map}_{\\mathcal A}(iB,iZ)\\simeq\\operatorname{Map}_{\\mathcal A_S}(LiB,Z)$. This equivalence is precomposition with $\\epsilon_B$: the triangle identity $i\\epsilon_B\\,\\eta_{iB}\\simeq1_{iB}$ identifies its adjunction transpose with $i$ of the given map. Yoneda full faithfulness for the opposite category from [lem-coef-infinity-yoneda-presheaf-limits] detects that $\\epsilon_B$ is an equivalence. The pointwise criterion in [lem-cbc-enhanced-functor-cone-calculus] then makes $\\epsilon$ an equivalence of functors. This uses no presentability or adjoint-functor theorem for $\\mathcal E$.",
+   "uses": [
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.4.20; elementary full-inclusion counit argument using Section 5.2.7; read online, not archived in literature/"
+   }
+  },
+  {
+   "text": "Fix a cocontinuous $F:\\mathcal A\\to\\mathcal E$ that inverts $S$, and put $T=\\{f:F(f)\\text{ is an equivalence}\\}$. It contains $S$ and all equivalences and satisfies two-out-of-three, since functors preserve inverses and composition. It is retract closed: if $u:P\\to Q$ is a retract of an invertible $v:P'\\to Q'$ with sections $a,b$ and retractions $r,t$, its inverse is $rv^{-1}b$; the identities follow from $va=bu$, $ur=tv$, $ra=1$, $tb=1$ in the homotopy category. Apply this to $F$ of a retract diagram. Also $T$ is pushout closed. Indeed $F$ takes a pushout of $f$ to a pushout of $Ff$. Mapping this latter square into any $e\\in\\mathcal E$ gives a pullback square of spaces by [lem-coef-infinity-yoneda-presheaf-limits]. When $Ff$ is invertible the resulting pullback projection is an equivalence (pull back its inverse). The same node's Yoneda full faithfulness, applied to the opposite category, detects that the pushed-out arrow is an equivalence.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.11 and Definition 5.5.4.5; elementary closure verification; read online, not archived in literature/"
+   }
+  },
+  {
+   "text": "The class $T$ is closed under small colimits in the arrow infinity category. For a small diagram of arrows in $T$, [lem-coef-infinity-yoneda-presheaf-limits] computes its colimit at its source and target. Cocontinuity of $F$ identifies the resulting arrow with the colimit of the transformed diagram of arrows in $\\mathcal E$. This diagram is a transformation between its source and target diagrams with equivalence components, so it is an equivalence by [lem-cbc-enhanced-functor-cone-calculus]. Applying the colimit functor to it and its inverse gives inverse arrows. Thus its colimit is an equivalence. Step 3 and this observation show that $T$ contains $S$ and has every closure property in the definition of $W$ in [lem-coef-infinity-small-localization-saturation]. Minimality gives $W\\subseteq T$. In particular every $F\\eta_A$ is invertible.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-small-localization-saturation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.11 and the last paragraph of Proposition 5.5.4.20; read online, not archived in literature/"
+   }
+  },
+  {
+   "text": "Define $G=Fi$. Let $q:J\\to\\mathcal A_S$ be small and let $c=\\operatorname{colim}_{\\mathcal A}iq$ with cocone $\\iota_j:iq_j\\to c$. The colimit formula of [lem-coef-presentable-infinity-adjoints] gives the colimit cocone $\\lambda_j=L\\iota_j\\,\\epsilon_{q_j}^{-1}:q_j\\to Lc$. The counit is invertible by Step 2, and the triangle identity gives $i\\epsilon_{q_j}^{-1}\\simeq\\eta_{iq_j}$. Naturality of the unit therefore gives $i\\lambda_j\\simeq iL\\iota_j\\,\\eta_{iq_j}\\simeq\\eta_c\\,\\iota_j$, coherently in $j$. Applying $F$, the map $F\\eta_c:Fc\\to FiLc$ is an equivalence by Step 4 and compares the cocones $F\\iota$ and $Fi\\lambda$ on the same diagram $Fiq$. For any $e\\in\\mathcal E$, precomposition with $F\\eta_c$ identifies $\\operatorname{Map}(FiLc,e)$ with $\\operatorname{Map}(Fc,e)$. Since $F\\iota$ is colimiting, the latter is $\\lim_{j\\in J^{\\mathrm{op}}}\\operatorname{Map}(Fiq_j,e)$. The coherent identity above says that this composite is exactly the map induced by $Fi\\lambda$. The colimit criterion of [lem-coef-infinity-yoneda-presheaf-limits] therefore proves that $Fi\\lambda$ is colimiting. This includes $J=\\varnothing$ and proves that $Fi$ preserves all small colimit cocones.",
+   "uses": [
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.4.20; explicit check that the restriction to local objects is cocontinuous; read online, not archived in literature/"
+   }
+  },
+  {
+   "text": "For a cocontinuous $G:\\mathcal A_S\\to\\mathcal E$, the composite $GL$ is cocontinuous because $L$ is, by Step 1. Every $s\\in S$ lies in $W$, and the criterion of [lem-coef-infinity-small-localization-saturation] makes $Ls$ an equivalence. Its image under $G$ is an equivalence. Thus precomposition with $L$ takes the left-hand full functor category into the right-hand full functor category. Step 5 shows that restriction along $i$ defines a functor in the other direction. Precomposition acts on coherent diagrams of functors by composition, so these are functors on the full categories, including their higher simplices.",
+   "uses": [
+    "lem-coef-infinity-small-localization-saturation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.4.20; the forward direction; read online, not archived in literature/"
+   }
+  },
+  {
+   "text": "On the right-hand full category, whiskering the unit gives the natural transformation $F\\mapsto F\\eta:F\\to FiL$; all its object components are equivalences by Step 4. On the left-hand full category, whiskering the counit gives $G\\mapsto G\\epsilon:GLi\\to G$, an equivalence by Step 2. Both are natural transformations of the two precomposition composites, not merely choices of equivalences on their objects: composing a coherent parameter simplex of functors with the fixed unit or counit supplies that simplex of transformations, compatibly with its faces and degeneracies. The componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus] therefore makes them natural equivalences. They exhibit the two precomposition functors as inverse equivalences of full coherent functor categories, hence identify natural transformations and all higher simplices. If $H:\\mathcal E\\to\\mathcal E'$ is cocontinuous, postcomposition preserves the two full categories and carries the comparisons to $(HF)\\eta$ and $(HG)\\epsilon$ by associativity of composition. This is the asserted naturality in the target. All shapes used were small in the fixed universe; no colimit over the object collection of $\\mathcal A$ or $\\mathcal E$ was taken.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.4.20; explicit comparison on full coherent functor categories; read online, not archived in literature/"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-small-localization-saturation",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-presentable-infinity-adjoints"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2 via the recorded algebroid tensor/localization ancestry. General factorization proof follows the argument of HTT Proposition 5.5.4.20 (pp. 484-485), read online but not archived, with explicit unit/counit and colimit-cocone checks; Haugseng Lemma 8.3 is its tensor-product application."
+ },
  "id": "lem-coef-cocontinuous-localization-factorization",
  "kind": "statement",
  "title": "Cocontinuous functors factor through a small reflective localization",
@@ -60,6 +153,41 @@
    "results": "{\"t\": \"2026-10-17T07:58:42Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction along a reflective localization yields equivalence of cocontinuous infinity functors with generator inverting functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv\", \"CategoryTheory.Equivalence.isDenseSubsite_functor_of_isCocontinuous\", \"CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.of_isLocalization_of_isLocalization\", \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac\"], \"digest\": \"fd17ef20bd102730\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary categorical localization and cocontinuous functors of sites do not state the coherent infinity-categorical cocontinuous equivalence for an arbitrary cocomplete target."
+  },
+  {
+   "tool": "grep",
+   "query": "cocontinuous|preservesColimits|reflective|localization",
+   "results": "{\"t\": \"2026-10-17T11:24:14Z\", \"tool\": \"grep\", \"query\": \"cocontinuous|preservesColimits|reflective|localization\", \"sub\": \"CategoryTheory/Localization\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/Construction.lean\", \"Mathlib/CategoryTheory/Localization/Construction.lean\", \"Mathlib/CategoryTheory/Localization/Construction.lean\"], \"digest\": \"39b9fe976641ed48\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read hits; Localization/Predicate.lean:313-326 and Presentable/OrthogonalReflection.lean give ordinary Category/Hom-set analogues, and the site-cocontinuity hits concern covering sieves. None states the quasicategorical equivalence with all coherent transformations for arbitrary cocomplete targets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal property of an accessible reflective localization for colimit preserving functors into an arbitrary cocomplete infinity category",
+   "results": "{\"t\": \"2026-10-17T11:24:15Z\", \"tool\": \"leansearch\", \"query\": \"Universal property of an accessible reflective localization for colimit preserving functors into an arbitrary cocomplete infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hasColimitsOfShape_of_reflective\", \"CategoryTheory.Functor.IsLocalization.mk'\", \"CategoryTheory.IsUniversalColimit.of_mapCocone\", \"CategoryTheory.hasColimits_of_reflective\", \"CategoryTheory.Limits.isColimitOfReflects\", \"CategoryTheory.Localization.StrictUniversalPropertyFixedTarget\", \"CategoryTheory.Localization.strictUniversalPropertyFixedTargetQ\", \"CategoryTheory.IsUniversalColimit.map_reflective\"], \"digest\": \"d5a104c88d86727f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read hits; Localization/Predicate.lean:313-326 and Presentable/OrthogonalReflection.lean give ordinary Category/Hom-set analogues, and the site-cocontinuity hits concern covering sieves. None states the quasicategorical equivalence with all coherent transformations for arbitrary cocomplete targets."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.fac, CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits",
+   "results": "{\"t\": \"2026-10-17T11:24:16Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Localization.fac, CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read hits; Localization/Predicate.lean:313-326 and Presentable/OrthogonalReflection.lean give ordinary Category/Hom-set analogues, and the site-cocontinuity hits concern covering sieves. None states the quasicategorical equivalence with all coherent transformations for arbitrary cocomplete targets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cocontinuous functors from a presentable infinity category localization at a small set of arrows to any locally small cocomplete target are exactly cocontinuous functors inverting the arrows with coherent transformations",
+   "results": "{\"t\": \"2026-10-17T11:24:23Z\", \"tool\": \"leanfinder\", \"query\": \"Cocontinuous functors from a presentable infinity category localization at a small set of arrows to any locally small cocomplete target are exactly cocontinuous functors inverting the arrows with coherent transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocontinuous\", \"CategoryTheory.Functor.inducedTopology_isCocontinuous\", \"CategoryTheory.Functor.IsDenseSubsite.instIsCocontinuous\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac\", \"CategoryTheory.ran_isSheaf_of_isCocontinuous\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"CategoryTheory.Equivalence.isDenseSubsite_functor_of_isCocontinuous\"], \"digest\": \"5607c543ef02f9ec\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read hits; Localization/Predicate.lean:313-326 and Presentable/OrthogonalReflection.lean give ordinary Category/Hom-set analogues, and the site-cocontinuity hits concern covering sieves. None states the quasicategorical equivalence with all coherent transformations for arbitrary cocomplete targets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Colimit preserving functors inverting generators of a reflective subcategory factor through the reflector by restriction to local objects; infinity categorical natural equivalence",
+   "results": "{\"t\": \"2026-10-17T11:35:52Z\", \"tool\": \"leanfinder\", \"query\": \"Colimit preserving functors inverting generators of a reflective subcategory factor through the reflector by restriction to local objects; infinity categorical natural equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.OrthogonalReflection.isLocal_reflectionObj\", \"CategoryTheory.OrthogonalReflection.isLocal_isLocal_reflection\", \"CategoryTheory.unitCompPartialBijective\", \"CategoryTheory.Localization.liftingLift\", \"CategoryTheory.ObjectProperty.isLocalization_isColocal\", \"CategoryTheory.Localization.LeftBousfield.isLocalization\", \"CategoryTheory.Localization.fac\", \"CategoryTheory.ObjectProperty.isLocalization_isLocal\"], \"digest\": \"fa4a805def53b391\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read hits; Localization/Predicate.lean:313-326 and Presentable/OrthogonalReflection.lean give ordinary Category/Hom-set analogues, and the site-cocontinuity hits concern covering sieves. None states the quasicategorical equivalence with all coherent transformations for arbitrary cocomplete targets."
   }
  ],
  "blueprint": {
@@ -78,5 +206,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cocontinuous-localization-factorization",
+  "worker": "stage1",
+  "summary": "Kept the statement and gave seven proof steps using existing nodes only: saturation of the inverted class, units inverted by F, preservation of actual colimit cocones by Fi, the forward direction, the fully faithful counit, and the two natural comparisons on the full coherent functor categories. No presentability of the target is used. No new nodes or Mathlib leaves.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: coherent factorization of separately cocontinuous functors through the small reflective localizations used in Haugseng Lemma 8.3.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "The componentwise equivalence criterion is used in Steps 2, 4 and 7 for coherent transformations and their colimit images. No localization or adjoints statement in this unit supplies that generic coherent-functor criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-c9cb3843b",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-c9cb3843b (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the 4 proof dependencies and 2 statement-dependency definitions in full, plus the citer's steps 12-13, the unit record and the main-20261015 ancestor proof. The statement is unchanged; it is HTT 5.5.4.20 for a locally small cocomplete target and it is true. I checked it on S empty, Spaces with S={empty->pt}, Spaces with S={pt+pt->pt} (where A_S is the poset [1]) and an empty target. Step 2: the transpose of the precomposition with eps_B is i(f), and Yoneda on A_S^op detects that eps_B is invertible. Step 3: the retract inverse r v^-1 b satisfies both identities; pushout closure goes through mapping spaces and pullbacks. Step 4: colimits of arrows are computed on source and target, then cone calculus applies, then minimality of <S> gives W in T. Step 5: i lambda_j = eta_c iota_j follows from the triangle identity, Step 2 and naturality of eta, so F i lambda = F eta_c . F iota is colimiting, including J empty. Steps 6-7: the forward direction and the two whiskered comparisons with invertible components are correct; cone calculus is applied to large shapes after enlarging the universe, the same convention sibling nodes use. proof_deps equals the union of uses and there is no cycle. The off-unit use of lem-cbc-enhanced-functor-cone-calculus is a generic black box already accepted in the three sibling nodes; I accept it. lem-coef-system-localization-universal and lem-coef-enhanced-localization-universal do not duplicate the item. HTT and Haugseng are WANTED and proof_origin is agent; no SGA source is used. No fixes, no new nodes."
  }
 }
