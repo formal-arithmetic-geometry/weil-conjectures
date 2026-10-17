@@ -31,16 +31,25 @@
    "text": "Identify derived tensor with a single degree-zero object using BifunctorSingle, the quotient's strong monoidal comparison, and localization uniqueness. Use symmetry in the generic derived category to put the coefficient on the right, and specialize to integral residue reduction.",
    "uses": [],
    "elementary": false
+  },
+  {
+   "text": "Keep the standard single/quotient comparison and derived braiding as explicit named data. The defining left-derived comparison equation gives derivedTensorPresentationIso_fac. Specialize the balanced counit and its proved left-derived property to the named residue reduction/restriction functor. Its named data unfold to the same original canonical constructor.",
+   "uses": [
+    "lem-weil-pbc-integral-reduction-tensor"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-integral-reduction-tensor"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
-  "note": "Repair of the returned D3 delivery: reuse the canonical API of IntegralReductionTensor in place, removing the copied tensor-linearity and counit constructions; keep only the new derived tensor/single-object comparison and residue specialization."
+  "by": "worker",
+  "group": "A3",
+  "date": "2026-10-18",
+  "document": "Bhatt--Scholze and the existing derived-functor constructions",
+  "place": "Remark 6.8.15 and proof of Lemma 6.5.9(5), p. 51",
+  "note": "Proved canonical construction equations and the categorical counit normalization; no split-off statements."
  },
  "mathlib_searches": [
   {
@@ -102,17 +111,23 @@
   "module": "Sheaf.Paper.IntegralResidueTensorPresentation",
   "file": "lean/Sheaf/Paper/IntegralResidueTensorPresentation.lean",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeTensorIso",
-  "statement": "def residueExchangeTensorIso (T : Scheme.{u}) :\n    residueExchangeReduction ℓ E T ⋙ residueExchangeRestriction ℓ E T ≅\n      tensorRight (residueExchangeCoefficient ℓ E T)",
+  "statement": "noncomputable def residueExchangeTensorIso (T : Scheme.{u}) :\n    letI : MonoidalCategory (residueExchangeDerived (integralCoeff ℓ E) T) :=\n      CategoryTheory.tensorPresentationMonoidal\n    residueExchangeReduction ℓ E T ⋙ residueExchangeRestriction ℓ E T ≅\n      tensorRight (residueExchangeCoefficient ℓ E T)",
   "branch": "sheaf-dag",
-  "by": "D3",
-  "date": "2026-10-16",
+  "by": "A3",
+  "date": "2026-10-18",
   "declarations": [
    "CategoryTheory.genericTensorLeft_preservesKFlatQuasiIso",
    "CategoryTheory.homotopyTensorSingleIso",
    "CategoryTheory.derivedTensorSingleIso",
    "CategoryTheory.derivedTensorPresentationIso",
    "CategoryTheory.Mod.residueDerivedTensorIso",
-   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeTensorIso"
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeTensorIso",
+   "CategoryTheory.tensorPresentationMonoidal",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeTensorCounit",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeTensorCounit_isLeftDerivedFunctor",
+   "CategoryTheory.homotopySingleComparisonIso",
+   "CategoryTheory.derivedTensorPresentationBraiding",
+   "CategoryTheory.derivedTensorPresentationIso_fac"
   ]
  },
  "reviewed": {
@@ -126,14 +141,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "X-56663",
-  "group": "D3",
+  "reviewer": "C-52ed5",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261016T101204-L-2230257",
+  "landing": "20261017T213021-L-1678945",
   "kind": "interface",
-  "note": "independent Codex review: Delivered overlay and DAG records matched against the packet, repository baseline, clean import-order compilation, forced-adaptation failure/recompile, and direct importer compilation"
+  "note": "independent cc review: 5 delivered modules (clean compile) + 9 direct importers compiled against them; axioms of core/parent/new equations = standard only; residueExchangeTensorIso and core statement changes matched with their 3 change records and the unchanged parent statement; node diffs limited to proof/lean fields"
  },
  "lean_audit": {
   "master": {

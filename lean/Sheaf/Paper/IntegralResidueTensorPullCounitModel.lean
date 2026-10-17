@@ -107,5 +107,5 @@ theorem integralResidue_tensorPullCounit_model {X Y : Scheme.{u}} (f : X ⟶ Y)
   unfold residueExchangeTensorPullIso
   simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
   rw [integralResidue_tensorPullCounit_core ℓ E f P]
-  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.hom_inv_id_app_assoc, residueExchangeTensorCounit, id_eq]
 end AlgebraicGeometry.ProEtale.CondensedRing

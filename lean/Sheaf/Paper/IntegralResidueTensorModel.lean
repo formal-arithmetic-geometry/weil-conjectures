@@ -32,9 +32,31 @@ variable {C : Type u₁} [Category.{v + 1} C] [Abelian C] [IsGrothendieckAbelian
   [Abelian.HasFunctorialFlatResolution D]
   (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
 
-local instance : BraidedCategory (DerivedCategory D) :=
+-- Preserve the closed proof appearing in previously compiled consumer signatures.
+set_option linter.auxLemma false in
+theorem instBraidedCategoryDerivedCategory_sheaf._proof_1 : IsRightCancelAdd ℤ :=
+  inferInstance
+
+-- Keep the existing local instance name for already compiled consumers.
+local instance instBraidedCategoryDerivedCategory_sheaf :
+    BraidedCategory (DerivedCategory D) :=
   DerivedMonoidal.braidedCategory (DerivedCategory.Qh (C := D))
     (HomotopyCategory.quasiIso D (.up ℤ))
+
+attribute [local instance] CategoryTheory.derivedTensorPresentationBraiding
+
+/-- The existing derived monoidal structure, with its base-category data fixed.
+Source: the derived tensor construction used by `tensorModelTarget` below.
+(blueprint: new-integral-residue-tensor-model) -/
+noncomputable abbrev tensorModelDerivedMonoidal : MonoidalCategory (DerivedCategory D) :=
+  inferInstance
+
+/-- The existing homotopy monoidal structure, with its base-category data fixed.
+Source: the homotopy tensor construction used by `tensorModelTarget` below.
+(blueprint: new-integral-residue-tensor-model) -/
+noncomputable abbrev tensorModelHomotopyMonoidal :
+    MonoidalCategory (HomotopyCategory D (.up ℤ)) :=
+  inferInstance
 
 /-- The fixed coefficient concentrated in degree zero in the homotopy category.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.
@@ -49,8 +71,75 @@ Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor compariso
 noncomputable def tensorModelCoefficientIso (B : C) :
     (DerivedCategory.singleFunctor C 0).obj B ≅
       DerivedCategory.Qh.obj (tensorModelCoefficient B) :=
-  (DerivedCategory.singleFunctorIsoCompQ C 0).app B ≪≫
-    (DerivedCategory.quotientCompQhIso C).symm.app _
+  CategoryTheory.homotopySingleComparisonIso B
+
+omit [MonoidalCategory D] [MonoidalClosed D] [MonoidalPreadditive D]
+  [BraidedCategory D] [Abelian.HasFunctorialFlatResolution D] in
+set_option backward.isDefEq.respectTransparency false in
+/-- The single-object comparison commutes with the exact-functor counit.
+
+Expand the exact single comparison, use the counit factorization through the
+map on derived categories, and apply naturality of the single/quotient comparisons.
+The inverse coefficient isomorphism is the resulting homotopy comparison.
+
+Source: Bhatt--Scholze, Remark 6.8.15; exact-functor single comparison.
+(blueprint: new-integral-residue-tensor-model) -/
+theorem tensorModelCoefficientIso_counit (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (B : C) (B' : D)
+    (e : F.obj B ≅ B') :
+    let c := F.singleFunctorCompLeftDerivedFunctorIso.app B ≪≫
+      (DerivedCategory.singleFunctor D 0).mapIso e
+    let eH := (F.mapHomotopyCategoryFactors (.up ℤ)).app
+        ((CochainComplex.singleFunctor C 0).obj B) ≪≫
+      (HomotopyCategory.quotient D (.up ℤ)).mapIso
+        ((F.mapCochainComplexSingleFunctor 0).app B ≪≫
+          (HomologicalComplex.single D (.up ℤ) 0).mapIso e)
+    c.inv ≫ F.leftDerivedFunctor.map (Functor.tensorModelCoefficientIso B).hom ≫
+      F.leftDerivedFunctorCounit.app (Functor.tensorModelCoefficient B) =
+      (Functor.tensorModelCoefficientIso B').hom ≫ DerivedCategory.Qh.map eH.inv := by
+  dsimp only
+  have h := NatTrans.congr_app F.leftDerivedFunctorIsoMapDerivedCategory_hom_fac
+    (Functor.tensorModelCoefficient B)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at h
+  rw [← h]
+  simp only [Functor.singleFunctorCompLeftDerivedFunctorIso, NatIso.trans_app, Iso.trans_inv,
+    Iso.trans_hom, Iso.app_inv, Functor.isoWhiskerLeft_inv,
+    Functor.whiskerLeft_app, Functor.mapIso_inv, Functor.tensorModelCoefficientIso,
+    CategoryTheory.homotopySingleComparisonIso,
+    Category.assoc]
+  erw [F.leftDerivedFunctorIsoMapDerivedCategory.hom.naturality_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
+  simp only [Functor.tensorModelCoefficient, Functor.mapDerivedCategoryFactorsh_hom_app,
+    DerivedCategory.singleFunctorIsoCompQ, Iso.refl_hom, Iso.app_hom, NatTrans.id_app,
+    Iso.symm_hom, Category.id_comp, Functor.map_comp, Category.assoc]
+  erw [← F.mapDerivedCategory.map_comp_assoc, Iso.inv_hom_id_app,
+    F.mapDerivedCategory.map_id, Category.id_comp,
+    F.mapDerivedCategorySingleFunctor_inv_app_mapDerivedCategoryFactors_hom_app_assoc]
+  erw [DerivedCategory.quotientCompQhIso_inv_naturality_assoc,
+    DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
+  rfl
+
+/-- The ordinary tensor model built from a functor on derived categories and
+its counit to the homotopy image of F. The definition uses those named data directly.
+Source: Bhatt--Scholze, Remark 6.8.15; the standard tensor/counit comparison.
+(blueprint: new-integral-residue-tensor-model) -/
+@[irreducible] noncomputable def tensorModelTargetWith
+    (G : DerivedCategory C ⥤ DerivedCategory D)
+    (γ : DerivedCategory.Qh ⋙ G ⟶
+      F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (B : C) (P : HomotopyCategory C (.up ℤ)) :
+    G.obj (DerivedCategory.Qh.obj P) ⊗
+        G.obj ((DerivedCategory.singleFunctor C 0).obj B) ⟶
+      DerivedCategory.Qh.obj
+        ((F.mapHomotopyCategory (.up ℤ)).obj (tensorModelCoefficient B) ⊗
+          (F.mapHomotopyCategory (.up ℤ)).obj P) :=
+  (β_ (G.obj ((DerivedCategory.singleFunctor C 0).obj B))
+    (G.obj (DerivedCategory.Qh.obj P))).inv ≫
+    ((G.map (tensorModelCoefficientIso B).hom ≫ γ.app (tensorModelCoefficient B)) ⊗ₘ
+      γ.app P) ≫
+    LaxMonoidal.μ (DerivedCategory.Qh (C := D))
+      ((F.mapHomotopyCategory (.up ℤ)).obj (tensorModelCoefficient B))
+      ((F.mapHomotopyCategory (.up ℤ)).obj P)
 
 /-- Compare the derived target with the ordinary tensor after applying F.
 The final tensor factor is K-flat on the representatives used below.
@@ -62,14 +151,7 @@ Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor compariso
       DerivedCategory.Qh.obj
         ((F.mapHomotopyCategory (.up ℤ)).obj (tensorModelCoefficient B) ⊗
           (F.mapHomotopyCategory (.up ℤ)).obj P) :=
-  (β_ (F.leftDerivedFunctor.obj ((DerivedCategory.singleFunctor C 0).obj B))
-    (F.leftDerivedFunctor.obj (DerivedCategory.Qh.obj P))).inv ≫
-    ((F.leftDerivedFunctor.map (tensorModelCoefficientIso B).hom ≫
-      F.leftDerivedFunctorCounit.app (tensorModelCoefficient B)) ⊗ₘ
-      F.leftDerivedFunctorCounit.app P) ≫
-    LaxMonoidal.μ (DerivedCategory.Qh (C := D))
-      ((F.mapHomotopyCategory (.up ℤ)).obj (tensorModelCoefficient B))
-      ((F.mapHomotopyCategory (.up ℤ)).obj P)
+  tensorModelTargetWith F F.leftDerivedFunctor F.leftDerivedFunctorCounit B P
 
 /-- The target comparison is invertible on representatives with K-flat image.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.
@@ -84,7 +166,7 @@ theorem tensorModelTarget_isIso (B : C) (P : HomotopyCategory C (.up ℤ))
   have : IsIso (LaxMonoidal.μ (DerivedCategory.Qh (C := D))
       ((F.mapHomotopyCategory (.up ℤ)).obj (tensorModelCoefficient B))
       ((F.mapHomotopyCategory (.up ℤ)).obj P)) := ‹_›
-  unfold tensorModelTarget
+  unfold tensorModelTarget tensorModelTargetWith
   infer_instance
 
 variable [F.IsLeftAdjoint] [F.Monoidal]
@@ -113,6 +195,9 @@ end CategoryTheory.Functor
 local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+attribute [local instance 20000] sheafBraidedCategory
+attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCategory
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 

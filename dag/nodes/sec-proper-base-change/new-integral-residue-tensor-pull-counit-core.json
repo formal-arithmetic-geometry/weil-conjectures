@@ -16,42 +16,44 @@
  },
  "proof": [
   {
-   "text": "Expand residueExchangeTensorModelTarget and residueExchangeCoefficientPullIso using the fixed exact-F comparison and the ordinary restricted-regular pullback isomorphism.",
+   "text": "Use the proved coefficient-pullback counit equation for the ordinary residue coefficient and the named exact pullback. This identifies the inverse coefficient comparison followed by pullback of the single comparison and the named pullback counit.",
    "uses": [
     "def-weil-pbc-integral-residue-tensor-pull-presentation",
-    "new-integral-residue-tensor-model",
-    "new-integral-residue-scalar-counit-model"
+    "new-integral-residue-tensor-model"
    ],
    "elementary": false
   },
   {
-   "text": "Use naturality of the tensorator and of the lax map of DerivedCategory.Qh to move the coefficient comparison to the first factor, then apply the defining counit equation of derivedTensorPresentationIso.",
+   "text": "Prove the generic tensor diagram normalization for any derived functor G and counit gamma satisfying that coefficient equation. Move the coefficient map through inverse braiding and the tensor product, use naturality of the tensor presentation, then naturality of the Qh tensor map. Apply the defining tensor-presentation counit equation.",
    "uses": [
     "new-integral-residue-tensor-presentation",
-    "lem-weil-pbc-integral-reduction-tensor"
+    "new-integral-residue-tensor-model"
    ],
    "elementary": false
   },
   {
-   "text": "Reassociate the resulting maps to obtain the displayed factorization through the inverse X tensor presentation.",
-   "uses": [],
-   "elementary": true
+   "text": "Specialize the proved generic normalization to the named residue pullback and balanced tensor counit, and cancel the X presentation. Use the actual category instances in the paper presentation constructor on X and Y, so its derived tensor comparison has exactly the intended data. The kernel checks the generic theorem application and its conversion to the concrete statement; this avoids repeated elaborator conversion of large monoidal dictionaries.",
+   "uses": [
+    "lem-weil-pbc-integral-reduction-tensor",
+    "new-integral-residue-tensor-presentation",
+    "new-integral-residue-tensor-model"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-integral-residue-tensor-pull-presentation",
   "new-integral-residue-tensor-model",
-  "new-integral-residue-scalar-counit-model",
   "new-integral-residue-tensor-presentation",
   "lem-weil-pbc-integral-reduction-tensor"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "B4",
-  "date": "2026-10-17",
+  "group": "A3",
+  "date": "2026-10-18",
   "document": "Bhatt--Scholze and the existing derived-functor constructions",
   "place": "Remark 6.8.15 and proof of Lemma 6.5.9(5), p. 51",
-  "note": "Strict intermediate factorization for the target tensor-pull counit identity."
+  "note": "Proved canonical construction equations and the categorical counit normalization; no split-off statements."
  },
  "mathlib_searches": [
   {
@@ -108,10 +110,10 @@
   "declarations": [
    "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorPullCounit_core"
   ],
-  "statement": "theorem integralResidue_tensorPullCounit_core {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ)) :\n    let F := (f)^*⟦integralCoeff ℓ E⟧\n    let B := residueExchangeOrdinaryCoefficient ℓ E Y\n    let B' := residueExchangeOrdinaryCoefficient ℓ E X\n    let A := Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)\n    let SX := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (coefficientMap (integralReductionMap ℓ E) X)\n    letI := residueOrdinaryUpperStarMonoidal A f\n    let e : F.obj B ≅ B' :=\n      residueOrdinaryRestrictedRegularPullIso (integralCoeff ℓ E) A\n        (integralReductionMap ℓ E) f\n    let eH : (F.mapHomotopyCategory (.up ℤ)).obj (Functor.tensorModelCoefficient B) ≅\n      Functor.tensorModelCoefficient B' := (F.mapHomotopyCategoryFactors (.up ℤ)).app\n        ((CochainComplex.singleFunctor _ 0).obj B) ≪≫\n      (HomotopyCategory.quotient _ (.up ℤ)).mapIso\n        ((F.mapCochainComplexSingleFunctor 0).app B ≪≫\n          (HomologicalComplex.single _ (.up ℤ) 0).mapIso e)\n    let φX := coefficientMap (integralReductionMap ℓ E) X\n    let H := residueExchangeReduction ℓ E X ⋙ residueExchangeRestriction ℓ E X\n    let εX : DerivedCategory.Qh ⋙ H ⟶\n        (tensorLeft B').mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh := by\n      unfold H B' residueExchangeOrdinaryCoefficient\n        residueExchangeReduction integralReduction residueExchangeRestriction\n      exact Mod.tensorPresentationDerivedCounit φX\n    let M := DerivedCategory.Qh.obj P\n    let a : (residueExchangeUpperStar (integralCoeff ℓ E) f).obj M ⟶\n        DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj P) :=\n      (residueExchangeUpperStarCounit (integralCoeff ℓ E) f).app P\n    let N :=\n      ((curriedTensor (residueExchangeDerived (integralCoeff ℓ E) X)).flip.mapIso\n        (residueExchangeCoefficientPullIso ℓ E f).symm).hom.app\n          ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj M) ≫\n        residueExchangeTensorModelTarget ℓ E f P\n    let R := H.map a ≫\n      εX.app ((F.mapHomotopyCategory (.up ℤ)).obj P) ≫\n      DerivedCategory.Qh.map\n        ((homotopyTensorSingleIso B').inv.app ((F.mapHomotopyCategory (.up ℤ)).obj P) ≫\n          eH.inv ▷ (F.mapHomotopyCategory (.up ℤ)).obj P)\n    N = (residueExchangeTensorIso ℓ E X).inv.app\n      ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj M) ≫ R",
+  "statement": "theorem integralResidue_tensorPullCounit_core {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ)) :\n    let F := (f)^*⟦integralCoeff ℓ E⟧\n    let B := residueExchangeOrdinaryCoefficient ℓ E Y\n    let B' := residueExchangeOrdinaryCoefficient ℓ E X\n    let A := Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)\n    let e : F.obj B ≅ B' :=\n      residueOrdinaryRestrictedRegularPullIso (integralCoeff ℓ E) A\n        (integralReductionMap ℓ E) f\n    let eH : (F.mapHomotopyCategory (.up ℤ)).obj (Functor.tensorModelCoefficient B) ≅\n      Functor.tensorModelCoefficient B' := (F.mapHomotopyCategoryFactors (.up ℤ)).app\n        ((CochainComplex.singleFunctor _ 0).obj B) ≪≫\n      (HomotopyCategory.quotient _ (.up ℤ)).mapIso\n        ((F.mapCochainComplexSingleFunctor 0).app B ≪≫\n          (HomologicalComplex.single _ (.up ℤ) 0).mapIso e)\n    let H := residueExchangeReduction ℓ E X ⋙ residueExchangeRestriction ℓ E X\n    let εX : DerivedCategory.Qh ⋙ H ⟶\n        (tensorLeft B').mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh :=\n      residueExchangeTensorCounit ℓ E X\n    let M := DerivedCategory.Qh.obj P\n    let a : (residueExchangeUpperStar (integralCoeff ℓ E) f).obj M ⟶\n        DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj P) :=\n      (residueExchangeUpperStarCounit (integralCoeff ℓ E) f).app P\n    let N :=\n      ((curriedTensor (residueExchangeDerived (integralCoeff ℓ E) X)).flip.mapIso\n        (residueExchangeCoefficientPullIso ℓ E f).symm).hom.app\n          ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj M) ≫\n        residueExchangeTensorModelTarget ℓ E f P\n    let R := H.map a ≫\n      εX.app ((F.mapHomotopyCategory (.up ℤ)).obj P) ≫\n      DerivedCategory.Qh.map\n      ((homotopyTensorSingleIso B').inv.app ((F.mapHomotopyCategory (.up ℤ)).obj P) ≫\n          eH.inv ▷ (F.mapHomotopyCategory (.up ℤ)).obj P)\n    N = (residueExchangeTensorIso ℓ E X).inv.app\n      ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj M) ≫ R",
   "branch": "sheaf-dag",
-  "by": "B4",
-  "date": "2026-10-17"
+  "by": "A3",
+  "date": "2026-10-18"
  },
  "reviewed": {
   "date": "2026-10-17",
@@ -126,11 +128,11 @@
  "reviewed_proof": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B4",
+  "reviewer": "C-52ed5",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261017T142722-L-3876109",
+  "landing": "20261017T213021-L-1678945",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: 5 delivered modules (clean compile) + 9 direct importers compiled against them; axioms of core/parent/new equations = standard only; residueExchangeTensorIso and core statement changes matched with their 3 change records and the unchanged parent statement; node diffs limited to proof/lean fields"
  }
 }

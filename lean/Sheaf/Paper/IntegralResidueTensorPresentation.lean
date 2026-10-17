@@ -50,19 +50,39 @@ instance genericTensorLeft_preservesKFlatQuasiIso (B : C) :
   exact (Functor.FullyFaithful.ofFullyFaithful
     ((Functor.whiskeringLeft _ _ _).obj q)).preimageIso pre
 
+/-- The canonical comparison from a degree-zero derived object to its homotopy
+representative. This is the standard single/quotient comparison, kept as one map.
+Source: the single-object and quotient localization comparisons.
+(blueprint: new-integral-residue-tensor-presentation) -/
+@[irreducible] noncomputable def homotopySingleComparisonIso (B : C) :
+    (DerivedCategory.singleFunctor C 0).obj B ≅
+      DerivedCategory.Qh.obj ((HomotopyCategory.quotient C (.up ℤ)).obj
+        ((HomologicalComplex.single C (.up ℤ) 0).obj B)) :=
+  (DerivedCategory.singleFunctorIsoCompQ C 0).app B ≪≫
+    (DerivedCategory.quotientCompQhIso C).symm.app _
+
 @[irreducible] noncomputable def derivedTensorSingleIso (B : C) :
     (tensorLeft B).leftDerivedFunctor ≅
       tensorLeft ((DerivedCategory.singleFunctor C 0).obj B) := by
   let P := (HomotopyCategory.quotient C (.up ℤ)).obj
     ((HomologicalComplex.single C (.up ℤ) 0).obj B)
   let eB : (DerivedCategory.singleFunctor C 0).obj B ≅ DerivedCategory.Qh.obj P :=
-    (DerivedCategory.singleFunctorIsoCompQ C 0).app B ≪≫
-      (DerivedCategory.quotientCompQhIso C).symm.app _
+    homotopySingleComparisonIso B
   exact Functor.leftDerivedNatIso (tensorLeft B).leftDerivedFunctor
       (tensorLeft (DerivedCategory.Qh.obj P)) (tensorLeft B).leftDerivedFunctorCounit
       (DerivedCategory.tensorLeftQhObjCounit P) (HomotopyCategory.quasiIso C (.up ℤ))
       (Functor.isoWhiskerRight (homotopyTensorSingleIso B).symm DerivedCategory.Qh) ≪≫
     (curriedTensor (DerivedCategory C)).mapIso eB.symm
+
+/-- The fixed braiding used by the derived tensor comparisons.
+Its data are the existing derived monoidal braiding; the name lets the
+presentation and model use exactly the same instance.
+Source: the canonical braided structure on the derived tensor product.
+(blueprint: new-integral-residue-tensor-presentation) -/
+@[instance_reducible] noncomputable def derivedTensorPresentationBraiding :
+    BraidedCategory (DerivedCategory C) :=
+  DerivedMonoidal.braidedCategory (DerivedCategory.Qh (C := C))
+    (HomotopyCategory.quasiIso C (.up ℤ))
 
 @[irreducible] noncomputable def derivedTensorPresentationIso (B : C)
     (H : DerivedCategory C ⥤ DerivedCategory C)
@@ -70,11 +90,55 @@ instance genericTensorLeft_preservesKFlatQuasiIso (B : C) :
       (tensorLeft B).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
     [H.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso C (.up ℤ))] :
     H ≅ tensorRight ((DerivedCategory.singleFunctor C 0).obj B) := by
-  let : BraidedCategory (DerivedCategory C) := DerivedMonoidal.braidedCategory
-    (DerivedCategory.Qh (C := C)) (HomotopyCategory.quasiIso C (.up ℤ))
+  let : BraidedCategory (DerivedCategory C) := derivedTensorPresentationBraiding
   exact Functor.leftDerivedUnique (tensorLeft B).leftDerivedFunctor H ε
       (tensorLeft B).leftDerivedFunctorCounit (HomotopyCategory.quasiIso C (.up ℤ)) ≪≫
     derivedTensorSingleIso B ≪≫ BraidedCategory.tensorLeftIsoTensorRight _
+
+noncomputable section NormalizationAPI
+
+attribute [local instance] derivedTensorPresentationBraiding
+
+/-- The tensor presentation is normalized by its balanced tensor counit.
+
+Cancel the braiding and the two standard single comparisons. The defining
+left-derived natural-transformation equation then gives the stated counit.
+
+Source: Bhatt--Scholze, Remark 6.8.15; canonical derived tensor comparison.
+(blueprint: new-integral-residue-tensor-presentation) -/
+theorem derivedTensorPresentationIso_fac (B : C)
+    (H : DerivedCategory C ⥤ DerivedCategory C)
+    (ε : DerivedCategory.Qh ⋙ H ⟶
+      (tensorLeft B).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    [H.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso C (.up ℤ))]
+    (P : HomotopyCategory C (.up ℤ)) :
+    (derivedTensorPresentationIso B H ε).hom.app (DerivedCategory.Qh.obj P) ≫
+      (β_ ((DerivedCategory.singleFunctor C 0).obj B) (DerivedCategory.Qh.obj P)).inv ≫
+      (homotopySingleComparisonIso B).hom ▷ DerivedCategory.Qh.obj P ≫
+      Functor.LaxMonoidal.μ DerivedCategory.Qh ((HomotopyCategory.quotient C (.up ℤ)).obj
+        ((HomologicalComplex.single C (.up ℤ) 0).obj B)) P =
+      ε.app P ≫ DerivedCategory.Qh.map ((homotopyTensorSingleIso B).inv.app P) := by
+  simp only [derivedTensorPresentationIso, derivedTensorSingleIso, Iso.trans_hom,
+    NatTrans.comp_app, BraidedCategory.tensorLeftIsoTensorRight,
+    Category.assoc, Iso.hom_inv_id_assoc]
+  simp only [Functor.mapIso_hom, Iso.symm_hom,
+    curriedTensor_map_app]
+  rw [← comp_whiskerRight_assoc, Iso.inv_hom_id, id_whiskerRight, Category.id_comp]
+  change _ ≫ _ ≫ (DerivedCategory.tensorLeftQhObjCounit
+    ((HomotopyCategory.quotient C (.up ℤ)).obj
+        ((HomologicalComplex.single C (.up ℤ) 0).obj B))).app P = _
+  simp only [Functor.leftDerivedNatIso_hom, Functor.leftDerivedNatTrans_app,
+    Functor.leftDerivedUnique, Functor.leftDerivedNatTrans_app_assoc,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Iso.symm_hom,
+    Iso.refl_hom, NatTrans.id_app, Category.id_comp]
+
+end NormalizationAPI
+
+/-- The derived monoidal structure for the fixed generic base-category data.
+Source: the derived tensor construction above.
+(blueprint: new-integral-residue-tensor-presentation) -/
+noncomputable abbrev tensorPresentationMonoidal : MonoidalCategory (DerivedCategory C) :=
+  inferInstance
 
 end CategoryTheory
 
@@ -95,23 +159,51 @@ restricted regular module, using the canonical balanced tensor counit. -/
   letI := Mod.tensorPresentationDerivedCounit_isLeftDerivedFunctor φ
   exact CategoryTheory.derivedTensorPresentationIso _ _ (Mod.tensorPresentationDerivedCounit φ)
 
+
 end CategoryTheory.Mod
 
 local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+attribute [local instance 20000] sheafBraidedCategory
+
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- The canonical tensor presentation of restricted derived coefficient reduction.
-The data are obtained from the canonical balanced-tensor left-derived presentation
-of integral reduction, followed by derived symmetry; no duplicate tensor-linearity
-lemma is introduced here.
--/
+/-- The fixed balanced tensor counit, retaining the named reduction functor.
+Source: Bhatt--Scholze, Lemma 6.5.9(3), and the canonical balanced tensor counit.
+(blueprint: new-integral-residue-tensor-presentation) -/
+@[irreducible] noncomputable def residueExchangeTensorCounit (T : Scheme.{u}) :
+    DerivedCategory.Qh ⋙ (residueExchangeReduction ℓ E T ⋙ residueExchangeRestriction ℓ E T) ⟶
+      (tensorLeft ((Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).obj
+        (Mod.regular (condensedRingObj
+          (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) T)))).mapHomotopyCategory
+            (.up ℤ) ⋙ DerivedCategory.Qh := by
+  unfold residueExchangeReduction integralReduction residueExchangeRestriction
+  exact Mod.tensorPresentationDerivedCounit (coefficientMap (integralReductionMap ℓ E) T)
+
+/-- The named counit presents the same left-derived tensor functor.
+Source: the canonical balanced tensor left-derived property.
+(blueprint: new-integral-residue-tensor-presentation) -/
+theorem residueExchangeTensorCounit_isLeftDerivedFunctor (T : Scheme.{u}) :
+    (residueExchangeReduction ℓ E T ⋙ residueExchangeRestriction ℓ E T).IsLeftDerivedFunctor
+      (residueExchangeTensorCounit ℓ E T) (HomotopyCategory.quasiIso _ (.up ℤ)) := by
+  unfold residueExchangeTensorCounit residueExchangeReduction integralReduction
+    residueExchangeRestriction
+  exact Mod.tensorPresentationDerivedCounit_isLeftDerivedFunctor
+    (coefficientMap (integralReductionMap ℓ E) T)
+
+/-- The canonical tensor presentation, using the fixed named functor and counit.
+Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
+(blueprint: new-integral-residue-tensor-presentation) -/
 @[irreducible] noncomputable def residueExchangeTensorIso (T : Scheme.{u}) :
+    letI : MonoidalCategory (residueExchangeDerived (integralCoeff ℓ E) T) :=
+      CategoryTheory.tensorPresentationMonoidal
     residueExchangeReduction ℓ E T ⋙ residueExchangeRestriction ℓ E T ≅
       tensorRight (residueExchangeCoefficient ℓ E T) := by
-  unfold residueExchangeReduction integralReduction residueExchangeRestriction
-  exact Mod.residueDerivedTensorIso (coefficientMap (integralReductionMap ℓ E) T)
+  letI : MonoidalCategory (residueExchangeDerived (integralCoeff ℓ E) T) :=
+    CategoryTheory.tensorPresentationMonoidal
+  have := residueExchangeTensorCounit_isLeftDerivedFunctor ℓ E T
+  exact derivedTensorPresentationIso _ _ (residueExchangeTensorCounit ℓ E T)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

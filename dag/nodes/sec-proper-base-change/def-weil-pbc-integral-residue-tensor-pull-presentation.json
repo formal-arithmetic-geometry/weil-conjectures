@@ -12,13 +12,29 @@
   "new-integral-residue-tensor-presentation",
   "new-integral-residue-ordinary-monoidal"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "The ordinary restricted-regular pullback comparison is exactly the comparison in the derived single-object constructor. Unfolding proves its defining equation. Apply the model coefficient-counit equation to this exact ordinary pullback and ordinary coefficient isomorphism to obtain the named coefficient-pullback counit equation. The tensor pull presentation is the X tensor presentation followed by the inverse coefficient isomorphism.",
+   "uses": [
+    "new-integral-residue-ordinary-tensor-square",
+    "new-integral-residue-tensor-model",
+    "new-integral-residue-tensor-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-ordinary-tensor-square",
+  "new-integral-residue-tensor-model",
+  "new-integral-residue-tensor-presentation"
+ ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
-  "note": "A4: explicit counit-normalized computation and descent; original unit route retained."
+  "by": "worker",
+  "group": "A3",
+  "date": "2026-10-18",
+  "document": "Bhatt--Scholze and the existing derived-functor constructions",
+  "place": "Remark 6.8.15 and proof of Lemma 6.5.9(5), p. 51",
+  "note": "Proved canonical construction equations and the categorical counit normalization; no split-off statements."
  },
  "mathlib_searches": [
   {
@@ -83,12 +99,15 @@
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeCoefficientPullIso",
   "declarations": [
    "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeCoefficientPullIso",
-   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeTensorPullIso"
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeTensorPullIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueRestrictedRegularPullIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueRestrictedRegularPullIso_def",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeCoefficientPullIso_counit"
   ],
   "statement": "def residueExchangeCoefficientPullIso\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    (residueExchangeUpperStar (integralCoeff ℓ E) f).obj\n        (residueExchangeCoefficient ℓ E Y) ≅ residueExchangeCoefficient ℓ E X",
   "branch": "sheaf-dag",
-  "by": "A4",
-  "date": "2026-10-16"
+  "by": "A3",
+  "date": "2026-10-18"
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -101,14 +120,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "X-50c91",
-  "group": "A4",
+  "reviewer": "C-52ed5",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261016T134405-L-3314624",
+  "landing": "20261017T213021-L-1678945",
   "kind": "interface",
-  "note": "independent Codex review: Matched Lean signatures, relocated construction bodies, DAG statements and proof dependencies against the baseline; all seven modules and sole direct importer Sheaf.Paper.IntegralResidueTensorSquare compile cleanly; axiom checks show only standard axioms and expected sorryAx dependencies."
+  "note": "independent cc review: 5 delivered modules (clean compile) + 9 direct importers compiled against them; axioms of core/parent/new equations = standard only; residueExchangeTensorIso and core statement changes matched with their 3 change records and the unchanged parent statement; node diffs limited to proof/lean fields"
  },
  "lean_audit": {
   "master": {
