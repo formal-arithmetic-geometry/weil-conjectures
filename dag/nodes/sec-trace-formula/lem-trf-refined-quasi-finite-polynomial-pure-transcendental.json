@@ -14,7 +14,8 @@
   "def-pc-fibre-product",
   "def-weil-residue-field",
   "def-kun-dimension",
-  "def-sbc-affine-space"
+  "def-sbc-affine-space",
+  "pqf-def-quasifinite"
  ],
  "proof": [
   {
@@ -321,5 +322,23 @@
   "group": "Q69",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q69-376d103ab (reviewer sub-agent of L); spot-checked: Mathematics and citations pass review. The item’s created metadata incorrectly names item lem-trf-etale-finite-smooth-local-structure and group Q29; corrected full JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-refined-quasi-finite-polynomial-pure-transcendental.json. Detailed review is in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-37cf42fa4",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, docstrings, edge cases, route-pivot compliance, and server-backed per-file compilation all checked; no defects found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RefinedQuasiFinitePolynomialPureTranscendental",
+  "declaration": "AlgebraicGeometry.exists_refined_quasiFinite_polynomial_pureTranscendental",
+  "file": "lean/Sheaf/AlgebraicGeometry/RefinedQuasiFinitePolynomialPureTranscendental.lean",
+  "statement": "theorem exists_refined_quasiFinite_polynomial_pureTranscendental {Z S : Scheme.{u}} [IsAffine Z] [IsAffine S] (p : Z ⟶ S) [LocallyOfFiniteType p] [QuasiCompact p] (z : Z) : ∃ n : ℕ, topologicalKrullDimAt (p.asFiber z) = (n : WithBot ℕ∞) ∧ ∃ (U : S.Opens) (V : Z.Opens), IsAffineOpen U ∧ p z ∈ U ∧ IsAffineOpen V ∧ ∃ (z₀ : V.toScheme) (q : V.toScheme ⟶ AffineSpace (ULift.{u} (Fin n)) U.toScheme), V.ι z₀ = z ∧ q ≫ (AffineSpace (ULift.{u} (Fin n)) U.toScheme ↘ U.toScheme) ≫ U.ι = V.ι ≫ p ∧ q.IsQuasiFinite ∧ ∃ r : ℕ, r ≤ n ∧ ∃ e : (AffineSpace (ULift.{u} (Fin n)) U.toScheme).residueField (q z₀) ≃+* FractionRing (MvPolynomial (Fin r) (U.toScheme.residueField ((AffineSpace (ULift.{u} (Fin n)) U.toScheme ↘ U.toScheme) (q z₀)))), ∀ a : U.toScheme.residueField ((AffineSpace (ULift.{u} (Fin n)) U.toScheme ↘ U.toScheme) (q z₀)), e ((Scheme.Hom.residueFieldMap (AffineSpace (ULift.{u} (Fin n)) U.toScheme ↘ U.toScheme) (q z₀)).hom a) = algebraMap _ _ a",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
