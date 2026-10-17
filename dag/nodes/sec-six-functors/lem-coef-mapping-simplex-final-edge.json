@@ -199,5 +199,29 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-306d44c98 (reviewer sub-agent of L); spot-checked: I read all of it against the HTT text extraction: the item, all 5 steps, both new nodes and every cited node's statement. Sources were HTT Lemma 3.2.2.9 and Remark 3.2.2.5 (pp. 179–183), Cor. 2.2.5.6 and Prop. A.3.2.4. The item statement matches Lemma 3.2.2.9: the simplex formula, the transition direction, e=((n-1≤n),s_0y):y'→y, x over an index <n, n>0, and no fibrancy. I tested n=1 with point fibres, a disconnected A_0, and A_n empty. Step 1's vertex lift, edge transport and ladder are correct. In Step 2 I checked the inner-horn filtration of K⊂Δ^n myself (each missing simplex appears in exactly one pair, n-1 is inner, the faces are already present). The pushout-product with ∅→A_n, the small-object change of convention, the degreewise identity M=M_-∐(A_n×Δ^n) and the trivial cofibration C_0→C are also correct. Step 3 is exactly HTT's second square: E→D is a cofibration because the transition is a monomorphism, and Bergner left properness applies. Steps 4 and 5 are elementary and correct: a co-Yoneda computation of the mixed hom and two two-out-of-three squares. Step 2 is long but is one argument with every part written out; I found no hidden lemma and no existing node for it. Both new nodes are true, self-contained, statement-only and strictly smaller than the item, and neither is a duplicate. The termwise node is HTT Remark 3.2.2.5, distinct from the Cartesian mapping-simplex nodes. The Bergner node is A.3.2.4 for S = simplicial sets with the Kan–Quillen structure, distinct from the fixed-object left-proper node and not covered by the all-cofibrant node. The blueprint searches found 0 nodes. FIX: in Step 2 I removed the spine-lemma argument (an off-unit tool use from sk-prop-sf-cbc). It only proved a categorical equivalence that the explicit filtration already gives in stronger form. I removed lem-cbc-spine-inner-anodyne from the step's uses, proof_deps and tool_uses, and Step 2's Joyal use (Step 1 still cites that node). I added one sentence: inner-horn pushouts and composites lift against inner fibrations, which is the hypothesis the pushout-product node needs. No tool_uses remain.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MappingSimplexFinalEdge",
+  "declaration": "CategoryTheory.mappingSimplex_final_edge",
+  "declarations": [
+   "CategoryTheory.mappingSimplexFinalEdge",
+   "CategoryTheory.coherentNerveIntervalArrow",
+   "CategoryTheory.mappingSimplex_final_edge"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/MappingSimplexFinalEdge.lean",
+  "statement": "theorem mappingSimplex_final_edge (R : CoherentNerveComparisonStatement.{u}) {n : ℕ} (A : SimplexChain.{u} (n + 1)) (y : (A.obj (op (Fin.last (n + 1)))) _⦋0⦌) (x : (mappingSimplex A) _⦋0⦌) (hx : x.1 0 < Fin.last (n + 1)) : IsWeakHomotopyEquivalence (eHomWhiskerLeft SSet (((R.adjunction.unit.app (mappingSimplex A)).app _ x).obj (.mk (ULift.up 0))) (coherentNerveIntervalArrow ((R.adjunction.unit.app (mappingSimplex A)).app _ (mappingSimplexFinalEdge A y))))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Second reading replaces the unconstrained presentation and endomorphism by the existing mappingSimplex construction, its specified final degenerate-fibre edge, and enriched postcomposition with the image of that edge under the coherent-realization adjunction unit. Positive dimension is written n + 1. The coherent-realization datum is universally supplied through the existing dependency interface; no arbitrary map or existence-based choice is made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aecdd08ce",
+  "group": "NK",
+  "result": "pass",
+  "note": "All 11 clauses match the node and HTT 3.2.2.9: chain SimplexChain (n+1) for n>0; the existing mappingSimplex with the node's operator formula; final edge base n..n+1 with fibre simplex s_0 y, so y' = t(y) follows from the operator; x any vertex over an index < last; [e] is the adjunction-unit image of the edge evaluated on the full path {0,1}; the map is Mathlib eHomWhiskerLeft enriched postcomposition C[M](x,y') -> C[M](x,y); conclusion is SSet.Enhanced.IsWeakHomotopyEquivalence; no fibrancy, Kan or nonemptiness assumptions. The R : CoherentNerveComparisonStatement binder pins the realization on simplices and makes it colimit-preserving, so it is the standard realization up to isomorphism; six landed modules use the same binder. Edge cases checked: dimension 1, empty fibres (vacuous), disconnected or non-Kan fibres, non-injective transitions; a single universe u, all variables bound. Helpers carry real data; docstrings give source and blueprint and carry the five proof steps; only sorry. lean.statement matches the file verbatim; dependency node records are unchanged; the report has both required sections. nt_compile.py --json: exit 0, no errors or warnings (1.7 s). Observation, not a fault: importing CartesianMappingSimplexPresentation for mappingSimplex means its reverse proof import is omitted per section 3(7); stage 3 will need to split that module."
  }
 }
