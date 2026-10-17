@@ -3,46 +3,167 @@
  "blueprint": {
   "is": "thm-sf-biduality-class",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Verdier biduality on the coefficient class",
- "statement": "Let $X$ be separated of finite type over $\\Fbar$, and let\n$\\Lambda=A_{E,n},\\mathcal O_E,E$, or $\\Qlb$.\nUse the constructible coefficient categories of the blueprint and put\n$\\omega_{X,\\Lambda}=Ra_X^!\\Lambda$,\n$D_{X,\\Lambda}=R\\mathcal Hom_\\Lambda(-,\\omega_{X,\\Lambda})$.\nThen $D_{X,\\Lambda}$ is an exact contravariant anti-equivalence\nof $D^b_{ctf}(X,\\Lambda)$, and the evaluation-defined map\n\n$$\nK\\longrightarrow D_{X,\\Lambda}D_{X,\\Lambda}K\n$$\n\nis a natural isomorphism. At the integral and field stages this is\nthe whole specified category $D^b_c(X,\\Lambda)$.\n\nAt finite coefficients, an input Tor interval $[a,b]$ gives\n$[-b-2\\dim X,-a]$ for its dual. At integral coefficients the\nsame assertion holds for the uniform Tor intervals of the finite\nreductions. In particular the finite or integral dualizing object\nhas interval $[-2\\dim X,0]$. Field objects may be computed from\nany integral representative and then localized.",
+ "statement": "Let $X$ be separated of finite type over $\\Fbar$, and let\n$\\Lambda=A_{E,n},\\mathcal O_E,E$, or $\\Qlb$.\nUse the constructible coefficient categories of the blueprint and put\n$\\omega_{X,\\Lambda}=Ra_X^!\\Lambda$,\n$D_{X,\\Lambda}=R\\mathcal Hom_\\Lambda(-,\\omega_{X,\\Lambda})$.\nThen $D_{X,\\Lambda}$ is an exact contravariant anti-equivalence\nof $D^b_{ctf}(X,\\Lambda)$, and the evaluation-defined map\n\n$$\nK\\longrightarrow D_{X,\\Lambda}D_{X,\\Lambda}K\n$$\n\nis a natural isomorphism. At the integral and field stages this is\nthe whole specified category $D^b_c(X,\\Lambda)$.\n\nFor every integer $d\\ge0$ with $\\dim X\\le d$, at finite\ncoefficients an input Tor interval $[a,b]$ with integers $a\\le b$\ngives $[-b-2d,-a]$ for its dual. At integral coefficients the same\nassertion holds for the uniform Tor intervals of the finite reductions.\nIn particular the finite or integral dualizing object has interval\n$[-2d,0]$ (uniformly on finite reductions in the integral case).\nFor nonempty $X$ one may take $d=\\dim X$; for empty $X$ one may\ntake $d=0$. Field objects may be computed from any integral\nrepresentative at a finite coefficient field and then localized.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-sf-biduality-class.md",
   "place": "node thm-sf-biduality-class, order 2156"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-sf-setting",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-derived-internal-hom",
+  "def-kun-topological-krull-dimension"
+ ],
  "proof": [
   {
-   "text": "The finite-stage anti-equivalence is [thm-fix-general-biduality],\nwith its independent bound from\n[lem-weil-verdier-preservation-strata]. The normalized-tower\nargument and the integral evaluation comparison give\n[thm-coef-integral-verdier], including the same reduction bounds.\nIts domain is the whole integral constructible category by\n[lem-coef-integral-residue-tor].\nThe exact scalar localization and the common finite coefficient\nstage give respectively [thm-coef-rational-verdier] and\n[thm-coef-qbar-verdier]. Those proofs transport the evaluation\nmap itself, so the resulting isomorphism is the stated double-dual\nmap at every coefficient stage.",
+   "text": "At $A=A_{E,n}$, with $n\\ge1$ and $\\ell\\ne p$ fixed by [def-sf-setting], apply [thm-fix-general-biduality] to $Y=X$. It gives the exact contravariant anti-equivalence and the natural isomorphism $\\delta_K:K\\to D_XD_XK$ on the finite-Tor constructible category. For an integer $d\\ge0$ with $\\dim X\\le d$, [lem-weil-verdier-preservation-strata] applied to the ordinary etale dual $R\\mathcal Hom_A(K,a_X^{\\times}A)$ gives $[-b-2d,-a]$ from an input interval $[a,b]$. This is the finite-stage dual in the statement: [lem-weil-finite-duality-site-comparison] identifies $\\nu_X^*a_X^{\\times}A$ with $Ra_X^!A$ and identifies internal Hom, evaluation, and its double-dual transpose. The Tor interval is unchanged by this comparison by clauses (i) and (ii) of [lem-sf-comparison-tor-amplitude]. Thus the bound is valid in the etale finite category of [def-sf-setting] and in its pro-etale comparison, with no ambient pro-etale adjoint assumption.",
    "uses": [
+    "def-sf-setting",
     "thm-fix-general-biduality",
     "lem-weil-verdier-preservation-strata",
-    "thm-coef-integral-verdier",
-    "lem-coef-integral-residue-tor",
-    "thm-coef-rational-verdier",
-    "thm-coef-qbar-verdier"
+    "lem-weil-finite-duality-site-comparison",
+    "lem-sf-comparison-tor-amplitude"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-sf-biduality-class.proof.md",
+    "place": "Proof, sole paragraph; expanded coefficient-stage assembly"
+   }
+  },
+  {
+   "text": "Put $R=\\mathcal O_E$ and $A_n=R/(\\varpi_E^n)$. For $K\\in D^b_c(X,R)$ the bounded residue reduction $K_1$ has cohomology in some finite interval $[a,b]$. By [lem-coef-integral-residue-tor] every $K_n$ has Tor amplitude in that same interval, so the uniform finite-Tor subcategory is the whole integral category. Apply [thm-coef-integral-verdier]: its exact anti-equivalence is the ambient internal Hom into the integral dualizing object, its canonical comparisons are $(D_{X,R}K)_n\\cong D_{X,n}K_n$, and for any given uniform input interval $[a,b]$ its output reductions have interval $[-b-2d,-a]$. Its statement also says that these comparisons identify the reduction of the actual evaluation-defined $\\delta_K$ with $\\delta_{K_n}$, and that $\\delta_K$ itself is a natural isomorphism. Thus both the domain and the specified double-dual map are exactly those required here.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "thm-coef-integral-verdier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-sf-biduality-class.proof.md",
+    "place": "Proof, sole paragraph; expanded coefficient-stage assembly"
+   }
+  },
+  {
+   "text": "For the finite dualizing-object bound take $K=A_X[0]$ in step 1. It is constructible by [def-sf-setting] and has Tor interval $[0,0]$: for every degree-zero module sheaf $M$, $A_X[0]\\otimes_A^L M=M[0]$. Computing internal Hom into a K-injective representative $I$ of $\\omega_X$, the map $\\mathcal Hom_A(A_X,I)\\to I$, $h\\mapsto h(1)$, is a degreewise isomorphism, with inverse $x\\mapsto(a\\mapsto ax)$. Hence $D_X(A_X)=\\omega_X$, and step 1 gives $[-2d,0]$. For integral coefficients [prop-coef-integral-dualizing] identifies $\\omega_{X,R}$ with the derived-complete tower of $Ra_{X,n}^!A_n$, precisely the value $Ra_{X,R}^!R$ of [def-weil-exceptional-inverse-image], and gives uniform reduction interval $[-2d,0]$. This also identifies the integral dualizing object used in step 2 with the notation of this item.",
+   "uses": [
+    "def-sf-setting",
+    "def-pur-derived-internal-hom",
+    "prop-coef-integral-dualizing",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-sf-biduality-class.proof.md",
+    "place": "Proof, sole paragraph; expanded coefficient-stage assembly"
+   }
+  },
+  {
+   "text": "For $E$ coefficients, an object is represented by an integral object $K_R$ in the raw scalar localization [def-weil-rationalization-karoubi]. Apply [thm-coef-rational-verdier]: its dual is the localization of $D_{X,R}K_R$, its anti-equivalence is exact, and its evaluation and $\\delta$ are the rationalizations of the integral maps. By [lem-coef-rational-operations] this dual is $R\\mathcal Hom_E(-,\\omega_{X,E})$ with $\\omega_{X,E}=Ra_{X,E}^!E$, and these identifications preserve evaluation. Therefore the natural isomorphism is the evaluation-defined map in the statement. If $u$ is an isomorphism between two integral representatives after localization, functoriality gives the isomorphism $D(u)$ between their localized duals, so the result can be computed from either representative. By [def-weil-finite-tor-amplitude], $D^b_{ctf}(X,E)$ is $D^b_c(X,E)$.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "thm-coef-rational-verdier",
+    "lem-coef-rational-operations",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-sf-biduality-class.proof.md",
+    "place": "Proof, sole paragraph; expanded coefficient-stage assembly"
+   }
+  },
+  {
+   "text": "For $\\Qlb$ coefficients use the common-stage category of [def-weil-algebraically-closed-coefficients]. Every object is a pair $(E,K_E)$, and a morphism is represented over a common finite extension. By [thm-coef-qbar-verdier] the functor sends $(E,K_E)$ to $(E,D_{X,E}K_E)$ and is an exact anti-equivalence; its statement identifies it with internal Hom into $Ra_X^!\\Qlb$ and explicitly gives descended evaluation and its natural biduality isomorphism. In particular $\\delta_{(E,K_E)}$ is represented by $\\delta_{K_E}$, and its inverse by $\\delta_{K_E}^{-1}$. Their composites are identities already at that finite stage. The scalar-extension comparisons commute with evaluation and $\\delta$, so enlarging the common field gives the same maps in the colimit. Step 4 computes $D_{X,E}K_E$ from any integral representative, which proves the last assertion also at $\\Qlb$. Finally $D^b_{ctf}(X,\\Qlb)=D^b_c(X,\\Qlb)$ by [def-weil-finite-tor-amplitude].",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "thm-coef-qbar-verdier",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-sf-biduality-class.proof.md",
+    "place": "Proof, sole paragraph; expanded coefficient-stage assembly"
+   }
   }
  ],
  "proof_deps": [
+  "def-sf-setting",
   "thm-fix-general-biduality",
   "lem-weil-verdier-preservation-strata",
-  "thm-coef-integral-verdier",
+  "lem-weil-finite-duality-site-comparison",
+  "lem-sf-comparison-tor-amplitude",
   "lem-coef-integral-residue-tor",
+  "thm-coef-integral-verdier",
+  "def-pur-derived-internal-hom",
+  "prop-coef-integral-dualizing",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-rationalization-karoubi",
   "thm-coef-rational-verdier",
+  "lem-coef-rational-operations",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-algebraically-closed-coefficients",
   "thm-coef-qbar-verdier"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-sf-biduality-class.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-sf-biduality-class.proof.md",
+  "place": "Proof, sole paragraph"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Verdier biduality exact contravariant anti-equivalence constructible finite Tor coefficient stages",
+   "results": "8 hits: CategoryTheory.Functor.map_distinguished_op_exact; CochainComplex.exactAt_op; CategoryTheory.Functor.exact_tfae; CategoryTheory.TwoSquare.guitartExact_op_iff; CategoryTheory.TwoSquare.instGuitartExactOppositeOp; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Abelian.Ext.mapExactFunctor; HomologicalComplex.ExactAt.unop. None states Verdier biduality on constructible finite-Tor coefficient categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEquivalence, DerivedCategory, biduality",
+   "results": "0 hits; loogle: unknown identifier 'biduality'; no candidate theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "verdierDual|dualizingComplex|biduality [Mathlib/]",
+   "results": "0 hits in Mathlib/. No project-specific Verdier duality declaration in Mathlib.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact contravariant Verdier duality anti-equivalence on bounded constructible finite Tor complexes",
+   "results": "8 hits: HomologicalComplex.ExactAt.unop; CategoryTheory.Equivalence.rightOp; HomologicalComplex.unopEquivalence_functor; HomologicalComplex.opEquivalence_inverse; CategoryTheory.ShortComplex.opEquiv_inverse; CategoryTheory.ShortComplex.opEquiv; HomologicalComplex.unopEquivalence; CategoryTheory.Equivalence.leftOp. None states Verdier duality on constructible finite-Tor coefficient categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Dualizing|dualizing|Verdier|Bidual",
+   "results": "25 hits: Mathlib/Tactic/Translate/ToDual.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/Algebra/Homology/SpectralObject/Page.lean, Mathlib/Algebra/Homology/SpectralObject/Basic.lean, Mathlib/Algebra/Homology/SpectralObject/Cycles.lean. No declaration states constructible Verdier biduality; results concern generic order duals, sheaf internal Homs, or Verdier localization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived internal Hom dualizing object duality equivalence constructible sheaves",
+   "results": "8 hits: LightCondensed.ihomPoints, CategoryTheory.Sheaf.ΓHomEquiv, LightCondensed.ihomPoints_symm_apply, LightCondensed.ihomPoints_apply, LightCondensed.ihomPoints_symm_comp, LightCondensed.ihom_map_val_app, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite. No declaration states constructible Verdier biduality; results concern generic order duals, sheaf internal Homs, or Verdier localization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dual\", \"iso\"",
+   "results": "12 hits: OrderIso.dualDual, OrderIso.dual, OrderIso.symm_dual, OrderHom.dualIso, OrderIso.dualDual_apply, OrderIso.coe_dualDual, OrderIso.dual_apply, OrderIso.dualDual_symm_apply. No declaration states constructible Verdier biduality; results concern generic order duals, sheaf internal Homs, or Verdier localization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -71,5 +192,21 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-sf-biduality-class",
+  "worker": "stage1",
+  "summary": "Second reading expanded the coefficient-stage assembly into five explicit steps, citing the finite site/Tor comparisons, rational operations identification, and integral dualizing-object identification. Corrected noninteger empty-scheme Tor endpoints by quantifying over a nonnegative integer dimension bound d. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the sole proof paragraph of current blueprint thm-sf-biduality-class (order 2500): step 1 finite duality and bound; step 2 integral domain, duality and evaluation; step 3 dualizing-unit consequence; steps 4 and 5 rational localization and common finite-field descent with the actual evaluation maps.",
+  "statement_dispute": "STATEMENT-DISPUTED: the source permits X empty but uses dim X in integer Tor endpoints; def-kun-topological-krull-dimension gives dim(empty)=-infinity. Replaced these endpoints by a bound d>=0 with dim X<=d, as in the cited finite and integral bounds. This retains the sharp nonempty case and adds the intended empty case without excluding it."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-eb0e927b8",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-eb0e927b8 (reviewer sub-agent of L); spot-checked: Read the item in full, all 17 cited statements (and the blueprint_update texts where present), the main-20261015 and master blueprint text/proof (identical apart from order and directory), the unit sk-prop-sf-biduality-general and the chapter. There are no new nodes. Step 1: thm-fix-general-biduality gives the finite anti-equivalence and delta on either site. lem-weil-verdier-preservation-strata gives [-b-2d,-a] for d in N with dim X<=d. lem-weil-finite-duality-site-comparison and lem-sf-comparison-tor-amplitude (i)/(ii) carry this to the pro-etale reading with no ambient adjoint. Step 2: lem-coef-integral-residue-tor gives D^b_c=D^b_ctf, and thm-coef-integral-verdier states the uniform bound, the reduction comparisons, the identification of the actual delta_K and that it is an isomorphism. Step 3: Hom(A_X,I)->I is degreewise an isomorphism, so D(A_X)=omega and the bound is [-2d,0]. prop-coef-integral-dualizing is the R lim Res_n Ra_n^! A_n formula of def-weil-exceptional-inverse-image at the unit. Step 4: thm-coef-rational-verdier with lem-coef-rational-operations (D_E=RHom_E(-,Ra^!E), evaluation preserved); representative independence holds by functoriality. Step 5: thm-coef-qbar-verdier at a common finite stage. The statement change (for every integer d>=0 with dim X<=d) fixes a real defect, since dim of the empty scheme is -infinity. It equals the source bound at d=dim X for nonempty X and weakens nothing; a<=b is already implicit in the Tor-interval definitions. Small cases checked: the point, A^1, the integral R/varpi (Tor [-1,0] goes to [0,1]), the empty X and the zero object. Every statement used lies in the own unit or in sk-prop-sf-rf-shriek-preservation, so there are no tool_uses. No cycle (transitive traversal), no duplicate (checked thm-trf-verdier-biduality, def-sf-coefficient-duality, prop-functor-package), no SGA. Remark only: the report says blueprint_snapshot/update metadata was added, but the item carries neither field and source still names the master path. The two texts are identical and these fields are not split-owned, so nothing was changed."
+ }
 }

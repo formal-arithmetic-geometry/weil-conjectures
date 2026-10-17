@@ -32,9 +32,115 @@
   "def-coef-infinity-fibrations",
   "def-coef-infinity-relative-join"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the degreewise join summands and block operators of [def-coef-infinity-relative-cone], and unpack the degreewise pullback of [def-coef-infinity-relative-join] with second map $\\mathrm{id}_S$. An $m$-simplex of $Y$ is specified uniquely by a base simplex $\\sigma\\in S_m$, a monotone parameter $\\epsilon:[m]\\to[1]$, and, if $I=\\epsilon^{-1}(0)=[0,k]$ is nonempty, a simplex $a\\in X_k$ with $u(a)=\\sigma|_I$. Indeed the final join factor is forced to be $\\sigma|_{\\epsilon^{-1}(1)}$, so it is not additional data. If $I$ is empty the simplex is $i_S(\\sigma)$; if $I=[m]$ it is $i_X(a)$ and $u(a)=\\sigma$. Faces restrict these data: delete a vertex of $I$ to restrict $a$, delete a final-block vertex to leave $a$ unchanged, and use the pure final-factor simplex when no initial vertex remains. This is exactly the simplicial-operator formula of that definition; it applies also to degeneracies.",
+   "uses": [
+    "def-coef-infinity-relative-join",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02RH",
+    "place": "Special-case coordinate calculation for Construction 5.2.3.1, used in Lemma 5.2.3.17. Direct argument supplied by the worker from the cited definitions, not an application of the general lemma."
+   }
+  },
+  {
+   "text": "We first check when a horn parameter extends. For $n\\geq2$ and $0<i<n$, every consecutive edge $\\{j,j+1\\}$ belongs to $\\Lambda_i^n$: when $n=2$ these are its two faces, and when $n\\geq3$ choose an omitted vertex different from $i,j,j+1$. Thus any map $\\Lambda_i^n\\to\\Delta^1$ assigns a weakly increasing list of vertex values. The resulting monotone $[n]\\to[1]$ defines its extension. It agrees on every simplex of the horn, since a simplex of $\\Delta^1$ is precisely a monotone list and is determined by its vertices. For $\\Lambda_0^n$, $n\\geq3$, any edge $\\{r,s\\}$ omits at least two vertices, so one can choose a vertex $t\\notin\\{r,s\\}$ with $t\\neq0$. The present face $d_t$ contains this edge. In particular each consecutive edge is present, so the vertex values are weakly increasing and define the extension, whose restrictions agree with the horn because simplices of $\\Delta^1$ are determined by their vertices. For $\\Lambda_0^2$, the edges present are $01$ and $02$. If the values at $0,1$ agree, the inequality on $02$ makes the full list monotone. In particular an initial edge lying entirely in either pure factor gives an extension for every $n\\geq2$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-join"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02RH",
+    "place": "Parameter check in the initial-horn argument of Lemma 5.2.3.16; explicit dimension-two case. Direct argument supplied by the worker from the cited definitions, not an application of the general lemma."
+   }
+  },
+  {
+   "text": "Here is the mixed-horn calculation, to be reused below. Suppose $h:\\Lambda_i^n\\to Y$, $n\\geq2$, $0\\leq i<n$, lies over a specified $\\sigma:\\Delta^n\\to S$, and its parameter extends to $\\epsilon:[n]\\to[1]$ with both values occurring. Write $I=[0,k]$ for the zero block, so $k<n$. The face $d_n$ is present because $i\\neq n$, and contains all of $I$; its initial-factor datum supplies $a\\in X_k$ over $\\sigma|_I$. Use $(\\sigma,\\epsilon,a)$ from Step 1 as the filler. To check each other prescribed face $d_j$, $j\\neq i,n$, compare with $d_n$ on their intersection. If $I\\setminus\\{j\\}$ is nonempty, that intersection contains exactly the same initial block as $d_j$, namely $I\\setminus\\{j\\}$ if $j\\in I$, and $I$ otherwise. Equality on the intersection therefore forces the initial datum of $d_j$ to be the corresponding restriction of $a$. If that block is empty, $d_j$ has no initial datum. Its other data are already the restrictions of $\\sigma$ and $\\epsilon$. Thus every prescribed face agrees, hence the filler restricts to all of $h$; the faces and their restrictions cover the horn by its definition. This includes the case $k=n-1$, where $d_n$ is a pure $X$-simplex.",
+   "uses": [
+    "def-coef-infinity-relative-join",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02RH",
+    "place": "Explicit mixed case of the lifting arguments in Lemmas 5.2.3.13 and 5.2.3.16. Direct argument supplied by the worker from the cited definitions, not an application of the general lemma."
+   }
+  },
+  {
+   "text": "To prove that $\\pi$ is an inner fibration, take any inner-horn problem over a fixed $\\sigma:\\Delta^n\\to S$. Step 2 extends its parameter. If all parameter values are zero, Step 1 identifies the entire problem with an inner-horn problem for $u:X\\to S$, which has a filler since the assumed cocartesian fibration $u$ is an inner fibration by [def-coef-infinity-fibrations]. If all values are one, the filler is $i_S(\\sigma)$ by Step 1. If both values occur, Step 3 supplies the filler. These cases exhaust the monotone parameters and prove the required right lifting property.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-coef-infinity-relative-join"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02RH",
+    "place": "Special case of Lemma 5.2.3.13, proved directly rather than cited as a theorem. Direct argument supplied by the worker from the cited definitions, not an application of the general lemma."
+   }
+  },
+  {
+   "text": "Now let an inner horn in $Y$ be given without a specified base filler. Compose it with $\\pi$. Since $S$ is a quasicategory, the definition in [def-cbc-enhanced-diagrams-cones] gives a base simplex $\\sigma$ extending that horn. Step 4 then gives a filler in $Y$ over this $\\sigma$. Hence $Y$ is a quasicategory. In particular the inner fibration of Step 4 has quasicategories as both source and target, as required in the definition of cocartesian fibration.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02RH",
+    "place": "Quasicategory check needed to interpret the fibration in Lemma 5.2.3.17. Direct argument supplied by the worker from the cited definitions, not an application of the general lemma."
+   }
+  },
+  {
+   "text": "Let $e:x\\to x'$ be a $u$-cocartesian edge. In an arbitrary $\\Lambda_0^n$ lifting problem for $\\pi$, $n\\geq2$, whose edge $01$ is $i_X(e)$, the parameter values at $0,1$ are both zero. Step 2 extends the parameter. If all its values are zero, Step 1 identifies the given horn with an $X$-horn whose initial edge is exactly $e$, and the defining $u$-cocartesian horn property from [def-coef-infinity-fibrations] supplies a filler over the prescribed base simplex. If some value is one, the parameter is mixed and Step 3 supplies a filler. The constant-one case is excluded by the value at $0$. Thus $i_X(e)$ has every defining outer-horn lift and is $\\pi$-cocartesian.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-coef-infinity-relative-join"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02RH",
+    "place": "Pure initial-factor edge case of Lemma 5.2.3.16, specialized and proved by horns. Direct argument supplied by the worker from the cited definitions, not an application of the general lemma."
+   }
+  },
+  {
+   "text": "Every edge $i_S(\\alpha)$ in the final factor is $\\pi$-cocartesian. Indeed, for any defining $\\Lambda_0^n$ problem with initial edge $i_S(\\alpha)$, its parameter values at $0,1$ are one. Step 2 gives a monotone extension, necessarily constant one. By Step 1 the entire horn is therefore the final-factor inclusion of its base horn, and $i_S(\\sigma)$ for the prescribed base simplex $\\sigma$ is a filler. This is precisely the cocartesian-edge criterion in [def-coef-infinity-fibrations]; no condition on $\\alpha$ is needed.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-coef-infinity-relative-join"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02RH",
+    "place": "Pure final-factor edge case of Lemma 5.2.3.16; explicit specialization to the identity map of S. Direct argument supplied by the worker from the cited definitions, not an application of the general lemma."
+   }
+  },
+  {
+   "text": "It remains to produce cocartesian lifts with every prescribed source. By Step 1 in degree zero each vertex of $Y$ is either $i_X(x)$ or $i_S(s)$. For $i_X(x)$ and a base edge $\\alpha:u(x)\\to t$, the assumed cocartesian fibration $u$ supplies a $u$-cocartesian edge with source $x$ over $\\alpha$; its inclusion is $\\pi$-cocartesian by Step 6. For $i_S(s)$ and $\\alpha:s\\to t$, use $i_S(\\alpha)$, which is $\\pi$-cocartesian by Step 7. Together with Steps 4 and 5 this is exactly the definition of cocartesian fibration in [def-coef-infinity-fibrations]. Step 6 gives the required preservation clause.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-coef-infinity-relative-join"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02RH",
+    "place": "Source-by-source lift construction of Lemma 5.2.3.17; the base projection in the opening of Lemma 7.3.4.5 (02ZR). Direct argument supplied by the worker from the cited definitions, not an application of the general lemma."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-relative-join",
+  "def-coef-infinity-relative-cone",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02RH",
+  "place": "Direct degreewise proof for the special case in this node; compare Lemmas 5.2.3.13, 5.2.3.16, 5.2.3.17 and the opening of Lemma 7.3.4.5 (02ZR). Online sources read; archival copy WANTED. No general relative-join preservation theorem is invoked."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -98,10 +204,66 @@
    "results": "{\"t\": \"2026-10-16T23:21:00Z\", \"tool\": \"grep\", \"query\": \"[Rr]elative[Jj]oin|[Cc]ocartesian|[Ii]so[Ff]ibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\", \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\"], \"digest\": \"91a483950b001010\"}",
    "date": "2026-10-17",
    "verdict": "No match (independent second reading). Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:39-105: these fibrations lift all horns (Quillen/Kan), not cocartesian edges over a quasicategory. The generic cylinder results assume a supplied model structure and state no relative-join projection theorem. The grep hits in CategoryTheory/FiberedCategory/Cocartesian.lean:40-77 require ordinary Category instances and Hom-set uniqueness. None is an exact match or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative join of a cocartesian fibration with its base projects cocartesianly and the original inclusion preserves cocartesian edges",
+   "results": "{\"t\": \"2026-10-17T00:25:53Z\", \"tool\": \"leanfinder\", \"query\": \"The relative join of a cocartesian fibration with its base projects cocartesianly and the original inclusion preserves cocartesian edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_comp\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.fac\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_comp_map\"], \"digest\": \"24c5eea2e544c98d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category IsCocartesian/IsStronglyCocartesian hits require Category instances and Hom-set uniqueness (Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:47-74). CategoryTheory.Join.Basic:49-85 is the ordinary categorical join. The second semantic query yields ordinary Over cones and StrictSegal Kan extensions (AlgebraicTopology/SimplicialSet/Coskeletal.lean:67-176), with no relative join or cocartesian fibration assertion. The focused AlgebraicTopology grep and SSet/Cocartesian Loogle query give no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?join|cocartesian",
+   "results": "{\"t\": \"2026-10-17T00:33:35Z\", \"tool\": \"grep\", \"query\": \"relative.?join|cocartesian\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category IsCocartesian/IsStronglyCocartesian hits require Category instances and Hom-set uniqueness (Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:47-74). CategoryTheory.Join.Basic:49-85 is the ordinary categorical join. The second semantic query yields ordinary Over cones and StrictSegal Kan extensions (AlgebraicTopology/SimplicialSet/Coskeletal.lean:67-176), with no relative join or cocartesian fibration assertion. The focused AlgebraicTopology grep and SSet/Cocartesian Loogle query give no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative join of a cocartesian fibration with the base preserves cocartesian edges",
+   "results": "{\"t\": \"2026-10-17T00:33:36Z\", \"tool\": \"leansearch\", \"query\": \"Relative join of a cocartesian fibration with the base preserves cocartesian edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.of_comp_iso\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsCocartesian.fac_assoc\", \"CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\", \"CategoryTheory.Join.edge\"], \"digest\": \"9337379d8b6f1921\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category IsCocartesian/IsStronglyCocartesian hits require Category instances and Hom-set uniqueness (Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:47-74). CategoryTheory.Join.Basic:49-85 is the ordinary categorical join. The second semantic query yields ordinary Over cones and StrictSegal Kan extensions (AlgebraicTopology/SimplicialSet/Coskeletal.lean:67-176), with no relative join or cocartesian fibration assertion. The focused AlgebraicTopology grep and SSet/Cocartesian Loogle query give no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cocartesian fibration of quasicategories stays cocartesian after adjoining a terminal object to each fiber by relative join",
+   "results": "{\"t\": \"2026-10-17T00:33:44Z\", \"tool\": \"leanfinder\", \"query\": \"Cocartesian fibration of quasicategories stays cocartesian after adjoining a terminal object to each fiber by relative join\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_comp\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian.comp\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.universal_property\"], \"digest\": \"713304bfa51f24c0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category IsCocartesian/IsStronglyCocartesian hits require Category instances and Hom-set uniqueness (Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:47-74). CategoryTheory.Join.Basic:49-85 is the ordinary categorical join. The second semantic query yields ordinary Over cones and StrictSegal Kan extensions (AlgebraicTopology/SimplicialSet/Coskeletal.lean:67-176), with no relative join or cocartesian fibration assertion. The focused AlgebraicTopology grep and SSet/Cocartesian Loogle query give no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The simplicial relative cone X star over S S projects to S as a cocartesian fibration",
+   "results": "{\"t\": \"2026-10-17T00:33:46Z\", \"tool\": \"leanfinder\", \"query\": \"The simplicial relative cone X star over S S projects to S as a cocartesian fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.liftCone_π_app\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"CategoryTheory.Over.liftCone\", \"CategoryTheory.Functor.RightExtension.coneAtFunctor\", \"CategoryTheory.Over.liftCone_pt\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\"], \"digest\": \"27035fd043b9ad1f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category IsCocartesian/IsStronglyCocartesian hits require Category instances and Hom-set uniqueness (Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:47-74). CategoryTheory.Join.Basic:49-85 is the ordinary categorical join. The second semantic query yields ordinary Over cones and StrictSegal Kan extensions (AlgebraicTopology/SimplicialSet/Coskeletal.lean:67-176), with no relative join or cocartesian fibration assertion. The focused AlgebraicTopology grep and SSet/Cocartesian Loogle query give no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Cocartesian|cocartesian|relativeJoin|relative_join",
+   "results": "{\"t\": \"2026-10-17T02:13:48Z\", \"tool\": \"grep\", \"query\": \"Cocartesian|cocartesian|relativeJoin|relative_join\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\", \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\"], \"digest\": \"91a483950b001010\"}",
+   "date": "2026-10-17",
+   "verdict": "No match on independent second reading. Loogle returned zero hits. Global grep returned ordinary-category cocartesian morphisms and a monoidal-category comment. LeanFinder returned Quillen fibrations (all horns, not cocartesian lifts), ordinary-category IsCocartesian, and StrictSegal truncated-simplex Kan extensions. Read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-74, AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:44-96 and AlgebraicTopology/SimplicialSet/Coskeletal.lean:60-84. No declaration states this relative join projection theorem or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"cocartesian\"",
+   "results": "{\"t\": \"2026-10-17T02:13:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"cocartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match on independent second reading. Loogle returned zero hits. Global grep returned ordinary-category cocartesian morphisms and a monoidal-category comment. LeanFinder returned Quillen fibrations (all horns, not cocartesian lifts), ordinary-category IsCocartesian, and StrictSegal truncated-simplex Kan extensions. Read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-74, AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:44-96 and AlgebraicTopology/SimplicialSet/Coskeletal.lean:60-84. No declaration states this relative join projection theorem or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of simplicial sets obtained by adjoining a terminal vertex in every fiber of an inner fibration has cocartesian lifts",
+   "results": "{\"t\": \"2026-10-17T02:13:51Z\", \"tool\": \"leanfinder\", \"query\": \"A map of simplicial sets obtained by adjoining a terminal vertex in every fiber of an inner fibration has cocartesian lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"CategoryTheory.Functor.IsCocartesian\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.modelCategoryQuillen.fibrations_eq\"], \"digest\": \"40ed4da4ca3618d0\"}",
+   "date": "2026-10-17",
+   "verdict": "No match on independent second reading. Loogle returned zero hits. Global grep returned ordinary-category cocartesian morphisms and a monoidal-category comment. LeanFinder returned Quillen fibrations (all horns, not cocartesian lifts), ordinary-category IsCocartesian, and StrictSegal truncated-simplex Kan extensions. Read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-74, AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:44-96 and AlgebraicTopology/SimplicialSet/Coskeletal.lean:60-84. No declaration states this relative join projection theorem or specializes to it in one line."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-relative-join-simplex-extension",
@@ -109,5 +271,20 @@
   "group": "Q102"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-relative-join-cocartesian-projection",
+  "worker": "stage1",
+  "summary": "Checked the exact statement and its three definition dependencies; proved all clauses directly by degreewise horn calculations. Mixed horns with missing face i<n are filled using the initial block already specified by d_n. Explicitly checked the exceptional two-dimensional outer-horn parameter and the pure-factor cases. No new nodes or Mathlib leaves, no statement change.",
+  "blueprint": "Realizes the cocartesian relative-join projection input to lem-coef-infinity-relative-join-simplex-extension, through the recorded ancestry to paragraph 2 (the displayed derived coefficient adjunction) of prop-coef-integral-exceptional-adjoint. Only the below-unit technical horn proof is expanded; the unit and chapter route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NW-d17808b4b",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-d17808b4b (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the report and the full statements of all four cited definitions. Those are def-coef-infinity-relative-join, def-coef-infinity-relative-cone (join blocks), def-coef-infinity-fibrations and def-cbc-enhanced-diagrams-cones. I also read the parent node lem-coef-infinity-relative-join-simplex-extension, whose step uses exactly the three stated clauses, and paragraph 2 of the blueprint ancestor prop-coef-integral-exceptional-adjoint (main-20261015). Kerodon 02RH/02ZR is not archived in literature/; it is recorded as WANTED, and proof_origin is agent, so I judged the proof directly against the definitions. The statement is the special case of Kerodon 5.2.3.17 with the square (u, id), composed with the projection to S as in the opening of 02ZR. Its hypotheses match the definition of cocartesian fibration (source and base quasicategories), and the statement is unchanged. Step checks: (1) the normal form (sigma, epsilon, a) holds because u*id preserves join summands, so the final block is forced to be sigma restricted to it. (2) The horn parameter extends: consecutive edges lie in some present face for inner horns and for Lambda_0^n with n>=3. For Lambda_0^2 an extension needs v(0)=v(1); the values (0,1,0) give a counterexample otherwise, and only the equal case is used. (3) For a mixed horn with i<n, the face d_n is present and contains the whole initial block. Comparing each face d_j with d_n on their intersection forces its initial datum to be a restriction of the X-simplex from d_n. I checked this by hand in all n=2 cases. (4)-(5) Inner fibration: the three parameter cases are exhaustive. The quasicategory proof fills in S first and then lifts, so it is not circular. (6)-(7) Initial edges use exactly the cocartesian-edge definition, and final edges are filled by i_S(sigma). (8) Every vertex is i_X(x) or i_S(s), so the lifts exist. Edge cases checked: X empty, S empty, S a point, u = id, degenerate base edges. There are no new nodes. No existing DAG node states that the projection X star_S S -> S is cocartesian, so there is no duplicate. proof_deps equals the union of the uses, all cited nodes are split and unmerged, and there is no cycle. Only definitions are cited, so there is no route question, and there are no tool_uses. The 17 Mathlib searches are recorded with no match. One minor remark: the item has no lean_audit field, as with its sibling node from the same parent split. Preflight passed, so I made no change. No fixes were written."
+ }
 }
