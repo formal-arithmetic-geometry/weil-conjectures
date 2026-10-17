@@ -12,13 +12,13 @@
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
+| `WeilConjectures.PoincareDuality.ProjectionFormula` | 2 | 5 | repair |
+| `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | repair |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 3 | disputed |
 | `WeilConjectures.PoincareDuality.Poincare` | 0 | 1 | proof |
 | `WeilConjectures.SmoothPurity.Defs` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek` | 1 | 3 | proof |
-| `WeilConjectures.PoincareDuality.ProjectionFormula` | 2 | 5 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal` | 3 | 9 | proof |
-| `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorPullCounitModel` | 13 | 1 | proof |
 | `Sheaf.Paper.IntegralResiduePullFlatModelMateNormalized` | 15 | 1 | proof |
 
