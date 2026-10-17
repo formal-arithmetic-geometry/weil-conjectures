@@ -102,9 +102,10 @@ theorem isIso_reductionModIdeal_map_projectionMap_of_finite (hϖ : ϖ ∈ nonZer
       (((projectionMap (ModuleCat.{u + 1} Λ) f).app K).app L)) := by
   obtain ⟨Kn, -, Ln, -, -, -, ⟨e⟩⟩ :=
     exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap hϖ n f K L
-  have : IsIso (((projectionMap (ModuleCat.{u + 1} (Λ ⧸ Ideal.span {ϖ} ^ n)) f).app Kn).app Ln) :=
-    hasProjectionFormula_of_finite _ f Kn Ln
-  exact (isIso_iff_of_arrow_mk_iso e).2 inferInstance
+  have h := hasProjectionFormula_of_finite (Λ ⧸ Ideal.span {ϖ} ^ n) f Kn Ln
+  rw [HasProjectionFormula, HasProjectionFormulaOfCompactification, ← projectionMap] at h
+  exact ((MorphismProperty.isomorphisms _).arrow_mk_iso_iff e).2
+    (Functor.map_isIso (derivedRestrictScalars (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) Y) _)
 
 end Etale
 

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
+public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
 
 /-!
 
@@ -170,29 +171,24 @@ theorem nonempty_iso_verdierDual_leftDerivedUpperStar :
       verdierDual _ aY ⋙ R(f)^![ModuleCat.{u + 1} Λ]) := by
   obtain ⟨e₁⟩ := nonempty_rightDerivedUpperShriek_derivedHom_iso_of_finite Λ f
   obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ f aY
-  exact ⟨NatIso.ofComponents
-    (fun K ↦ ((RHom(X)[ModuleCat.{u + 1} Λ]).obj
-        (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K.unop))).mapIso e₂.symm ≪≫
-      ((e₁.app K).app (dualizingComplex _ aY)).symm)
-    (fun {K K'} g ↦ by
-      have h := congr_app (e₁.inv.naturality g) (dualizingComplex _ aY)
-      dsimp [verdierDual] at h ⊢
-      simp only [Category.assoc, h, ← NatTrans.naturality_assoc]
-      rfl)⟩
+  exact ⟨Functor.isoWhiskerLeft _ ((RHom(X)[ModuleCat.{u + 1} Λ]).flip.mapIso e₂.symm) ≪≫
+    (Functor.isoWhiskerRight e₁
+      ((CategoryTheory.evaluation _ _).obj (dualizingComplex _ aY))).symm⟩
 
 end Finite
 
 section Orientation
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {k : Type u} [Field k]
+  [PerfectField k]
   [HasInvertibleExponent Λ (Spec (.of k))] {X Y : Scheme.{u}} {d : ℕ} {f : X ⟶ Y}
-  [IsSeparated f] [HasCompactification f] (aY : Y ⟶ Spec (.of k)) [IsSeparated aY]
+  [HasCompactification f] (aY : Y ⟶ Spec (.of k)) [IsSeparated aY]
   [LocallyOfFiniteType aY] [QuasiCompact aY] [HasCompactification aY]
   [HasCompactification (f ≫ aY)] [QuasiCompact (f ≫ aY)]
 
 /-- Blueprint `cor-sf-duality-pullback`: Duality against pullback, oriented smooth case.
 
-Let `Y` be separated of finite type over a field `k`, let `Λ` be a finite coefficient ring
+Let `Y` be separated of finite type over a perfect field `k`, let `Λ` be a finite coefficient ring
 whose exponent is invertible on `k`, and let `f : X ⟶ Y` be separated, smooth of pure relative
 dimension `d`, with an orientation `o`. Then for `K ∈ Dᵇctf(Y, Λ)`
 
@@ -212,7 +208,7 @@ theorem Orientation.nonempty_iso_verdierDual_leftDerivedUpperStar (o : Orientati
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj ((verdierDual _ aY).obj (op K)))) := by
   have := o.smoothOfRelativeDimension
   have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom (f ≫ aY)
-  obtain ⟨e⟩ := nonempty_iso_verdierDual_leftDerivedUpperStar Λ f aY
+  obtain ⟨e⟩ := _root_.AlgebraicGeometry.Etale.nonempty_iso_verdierDual_leftDerivedUpperStar Λ f aY
   obtain ⟨φ⟩ := nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor Λ (d := d) f
     ((verdierDual _ aY).obj (op K)) (constructibleFiniteTor_verdierDual Λ aY hK)
   exact ⟨e.app (op K) ≪≫ (smoothPurityIso Λ f _ o.twistShiftIso.symm φ).symm⟩

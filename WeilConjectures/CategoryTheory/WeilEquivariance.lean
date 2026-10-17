@@ -26,13 +26,14 @@ counit of the adjunction are equivariant
 (`CategoryTheory.Adjunction.isWeilEquivariant_counit`,
 `CategoryTheory.Adjunction.isWeilEquivariant_unit`).
 
-**Duals.** Let `C` be monoidal closed and `G` a monoidal autoequivalence. A Weil datum `φ_ω` on an
-object `ω` and an invertible Weil datum `φ_A` on `A` give the *dual Weil datum*
+**Duals.** Let `C` be monoidal closed and `G` a monoidal endofunctor. A Weil datum `φ_ω` on an
+object `ω` and an invertible Weil datum `φ_A` on `A` give the *dual Weil datum* on `[A, ω]`
+(`CategoryTheory.MonoidalClosed.dualWeilDatum`), the tensor-hom adjoint of
 ```
-G [A, ω] ≅ [G A, G ω] ──[G A, φ_ω]──▶ [G A, ω] ──[φ_A⁻¹, ω]──▶ [A, ω]
+A ⊗ G [A, ω] ──φ_A⁻¹ ⊗ 1──▶ G A ⊗ G [A, ω] ──μ──▶ G (A ⊗ [A, ω]) ──G ev──▶ G ω ──φ_ω──▶ ω;
 ```
-on `[A, ω]` (`CategoryTheory.MonoidalClosed.dualWeilDatum`), the first map being the internal-hom
-comparison of the equivalence `G`. The evaluation `A ⊗ [A, ω] ⟶ ω` is equivariant
+for an autoequivalence `G` it is `G [A, ω] ≅ [G A, G ω] ──[G A, φ_ω]──▶ [G A, ω] ──[φ_A⁻¹, ω]──▶
+[A, ω]`, the first map being the internal-hom comparison of `G`. The evaluation `A ⊗ [A, ω] ⟶ ω` is equivariant
 (`CategoryTheory.MonoidalClosed.isWeilEquivariant_ev`), and the tensor-hom adjoint
 `B ⟶ [A, ω]` of an equivariant pairing `A ⊗ B ⟶ ω` is equivariant
 (`CategoryTheory.MonoidalClosed.isWeilEquivariant_curry`). No integral lattice of `φ_A` is
@@ -164,17 +165,19 @@ end Adjunction
 namespace MonoidalClosed
 
 variable {C : Type*} [Category* C] [MonoidalCategory C] [MonoidalClosed C] (G : C ⥤ C)
-  [G.Monoidal] [G.IsEquivalence]
+  [G.Monoidal]
 
 /-- The *dual Weil datum* on `[A, ω]` of an invertible Weil datum `φ_A : G A ≅ A` and a Weil
-datum `φ_ω : G ω ⟶ ω`:
+datum `φ_ω : G ω ⟶ ω`: the tensor-hom adjoint of
 ```
-G [A, ω] ≅ [G A, G ω] ──[G A, φ_ω]──▶ [G A, ω] ──[φ_A⁻¹, ω]──▶ [A, ω]
+A ⊗ G [A, ω] ──φ_A⁻¹ ⊗ 1──▶ G A ⊗ G [A, ω] ──μ──▶ G (A ⊗ [A, ω]) ──G ev──▶ G ω ──φ_ω──▶ ω.
 ```
-the first map being the internal-hom comparison of the monoidal equivalence `G`. -/
+When `G` is an equivalence this is `G [A, ω] ≅ [G A, G ω] ⟶ [G A, ω] ⟶ [A, ω]`, the first map
+being the internal-hom comparison of `G`. -/
 noncomputable def dualWeilDatum {A ω : C} (φA : G.obj A ≅ A) (φω : G.obj ω ⟶ ω) :
     G.obj ((ihom A).obj ω) ⟶ (ihom A).obj ω :=
-  (Functor.Monoidal.ihomObjIso G A ω).hom ≫ (ihom (G.obj A)).map φω ≫ (pre φA.inv).app ω
+  curry (φA.inv ▷ G.obj ((ihom A).obj ω) ≫ LaxMonoidal.μ G A ((ihom A).obj ω) ≫
+    G.map ((ihom.ev A).app ω) ≫ φω)
 
 /-- The tensor product `G (A ⊗ B) ≅ G A ⊗ G B ──φ_A ⊗ φ_B──▶ A ⊗ B` of two Weil data. -/
 noncomputable def tensorWeilDatum {A B : C} (φA : G.obj A ⟶ A) (φB : G.obj B ⟶ B) :
@@ -186,12 +189,9 @@ noncomputable def tensorWeilDatum {A B : C} (φA : G.obj A ⟶ A) (φB : G.obj B
 lemma isWeilEquivariant_ev {A ω : C} (φA : G.obj A ≅ A) (φω : G.obj ω ⟶ ω) :
     IsWeilEquivariant G (tensorWeilDatum G φA.hom (dualWeilDatum G φA φω))
       φω ((ihom.ev A).app ω) := by
-  rw [IsWeilEquivariant, tensorWeilDatum, dualWeilDatum, ← cancel_epi (LaxMonoidal.μ G _ _)]
-  simp only [Category.assoc, Monoidal.μ_δ_assoc, MonoidalCategory.whiskerLeft_comp,
-    id_tensor_pre_app_comp_ev]
-  rw [← whisker_exchange_assoc, ← whisker_exchange_assoc, hom_inv_whiskerRight_assoc,
-    ihom.ev_naturality]
-  exact (LaxMonoidal.ihomComparison_ev_assoc G A ω φω).symm
+  rw [IsWeilEquivariant, tensorWeilDatum, dualWeilDatum]
+  simp only [Category.assoc, whiskerLeft_curry_ihom_ev_app, hom_inv_whiskerRight_assoc,
+    Monoidal.δ_μ_assoc]
 
 /-- **The adjoint of a Weil pairing is Weil equivariant**: if `b : A ⊗ B ⟶ ω` is equivariant for
 `φ_A ⊗ φ_B` and `φ_ω`, then its tensor-hom adjoint `B ⟶ [A, ω]` is equivariant for `φ_B` and
@@ -200,25 +200,14 @@ lemma isWeilEquivariant_curry {A B ω : C} (φA : G.obj A ≅ A) (φB : G.obj B 
     (φω : G.obj ω ⟶ ω) {b : A ⊗ B ⟶ ω}
     (hb : IsWeilEquivariant G (tensorWeilDatum G φA.hom φB) φω b) :
     IsWeilEquivariant G φB (dualWeilDatum G φA φω) (curry b) := by
-  have hev := isWeilEquivariant_ev G φA φω
-  rw [IsWeilEquivariant, tensorWeilDatum] at hev hb
+  rw [IsWeilEquivariant, tensorWeilDatum] at hb
   rw [IsWeilEquivariant]
   apply uncurry_injective
-  rw [← cancel_epi (φA.hom ▷ G.obj B), uncurry_eq, uncurry_eq]
-  calc φA.hom ▷ G.obj B ≫ A ◁ (G.map (curry b) ≫ dualWeilDatum G φA φω) ≫ (ihom.ev A).app ω
-      = G.obj A ◁ G.map (curry b) ≫ (LaxMonoidal.μ G A _ ≫ OplaxMonoidal.δ G A _) ≫
-          φA.hom ▷ _ ≫ A ◁ dualWeilDatum G φA φω ≫ (ihom.ev A).app ω := by
-        simp only [Monoidal.μ_δ, Category.id_comp, MonoidalCategory.whiskerLeft_comp,
-          Category.assoc,
-          whisker_exchange_assoc]
-    _ = G.obj A ◁ G.map (curry b) ≫ LaxMonoidal.μ G A _ ≫ G.map ((ihom.ev A).app ω) ≫ φω := by
-        rw [hev]
-        simp only [Category.assoc]
-    _ = φA.hom ▷ G.obj B ≫ A ◁ (φB ≫ curry b) ≫ (ihom.ev A).app ω := by
-        rw [LaxMonoidal.μ_natural_right_assoc, ← Functor.map_comp_assoc,
-          whiskerLeft_curry_ihom_ev_app, hb]
-        simp only [Category.assoc, Monoidal.μ_δ_assoc, MonoidalCategory.whiskerLeft_comp,
-          whiskerLeft_curry_ihom_ev_app]
+  rw [uncurry_eq, uncurry_eq, MonoidalCategory.whiskerLeft_comp, Category.assoc, dualWeilDatum,
+    whiskerLeft_curry_ihom_ev_app, whisker_exchange_assoc, LaxMonoidal.μ_natural_right_assoc,
+    ← Functor.map_comp_assoc, whiskerLeft_curry_ihom_ev_app, hb]
+  simp only [Category.assoc, MonoidalCategory.whiskerLeft_comp, whiskerLeft_curry_ihom_ev_app,
+    Monoidal.μ_δ_assoc, inv_hom_whiskerRight_assoc]
 
 end MonoidalClosed
 

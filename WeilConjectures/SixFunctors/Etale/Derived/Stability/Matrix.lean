@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHom
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.HomDevissage
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriekConstructible
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
@@ -37,6 +38,10 @@ constructible complexes `Dᵇc` and the constructible complexes of finite Tor am
   on the pro-étale site, `RHom(ν^* K, ν^* M)` lies in `Dctf` for `K, M ∈ Dctf(X_ét)`.
 - `AlgebraicGeometry.Etale.torAmplitudeIn_preservation`: the Tor-amplitude intervals of these
   operations.
+- `AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom_of_field`
+  (`det-rem-sf-matrix-hom-devissage`, in
+  `WeilConjectures.SixFunctors.Etale.Derived.Stability.HomDevissage`): `RHom` preserves `Dctf`
+  over an arbitrary field, by dévissage.
 
 ## Implementation notes
 

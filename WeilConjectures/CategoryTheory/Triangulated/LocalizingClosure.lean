@@ -49,8 +49,10 @@ class IsLocalizing (P : ObjectProperty C) : Prop extends P.IsTriangulated,
 
 attribute [instance] IsLocalizing.isClosedUnderCoproducts
 
-/-- The *localizing closure* of `P`: the smallest localizing property of objects containing `P`,
-i.e. the intersection of all localizing properties containing `P`. -/
+/-- The *localizing closure* `Loc(P)` of `P`: the smallest full triangulated subcategory closed
+under isomorphisms and under coproducts indexed by `Type w` containing `P`, i.e. the
+intersection of all localizing properties containing `P`. For `P = Dctf(X, Λ)` in
+`D(X_proét, Λ)` this is `Loc(Dctf(X, Λ))`. -/
 def localizingClosure (P : ObjectProperty C) : ObjectProperty C :=
   fun X ↦ ∀ (Q : ObjectProperty C) [Q.IsLocalizing.{w}], P ≤ Q → Q X
 

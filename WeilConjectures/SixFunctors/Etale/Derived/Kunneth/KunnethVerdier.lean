@@ -251,7 +251,8 @@ theorem nonempty_iso_rightDerivedUpperShriek_pullbackFst
     subst hπ
     exact ⟨c ≪≫ (R(φ)^![ModuleCat.{u + 1} Λ]).mapIso
         (externalProductUnitRightIso Λ a (𝟙 _) M).symm ≪≫ e.symm ≪≫
-      externalProductMapIso _ a' b' ((rightDerivedUpperShriekIdIso (ModuleCat.{u + 1} Λ) X).app M) (Iso.refl _)⟩
+      externalProductMapIso _ a' b'
+        ((rightDerivedUpperShriekIdIso (ModuleCat.{u + 1} Λ) X).app M) (Iso.refl _)⟩
   have hφπ : pullback.mapOverBase (𝟙 X) b a (𝟙 (Spec (.of k))) ≫ π =
       pullback.fst (𝟙 X ≫ a) (b ≫ 𝟙 (Spec (.of k))) := by
     rw [hπ, pullback.mapOverBase_fst, Category.comp_id]
@@ -298,12 +299,12 @@ theorem nonempty_iso_kunnethVerdier [HasInvertibleExponent Λ (Spec (.of k))] {X
 /-- The Künneth–Verdier isomorphism over `k` for all separated finite-type `k`-schemes
 (`thm-trf-kunneth-verdier`), in the form of `AlgebraicGeometry.Etale.KunnethVerdier`. -/
 theorem kunnethVerdier [HasInvertibleExponent Λ (Spec (.of k))] : KunnethVerdier Λ k :=
-  fun _ _ a b _ _ _ _ _ _ _ _ hM hN ↦ nonempty_iso_kunnethVerdier Λ a b hM hN
+  ⟨fun _ _ a b _ _ _ _ _ _ _ _ hM hN ↦ nonempty_iso_kunnethVerdier Λ a b hM hN⟩
 
 /-- Verdier duality commutes with external products over `k` (`rem-sf-kv-formal`):
 `𝔻_{X ×_k Y} (P ⊠ Q) ≅ 𝔻_X P ⊠ 𝔻_Y Q`, from the Künneth–Verdier isomorphism by
 `AlgebraicGeometry.Etale.verdierDualExternalProduct_iff_kunnethVerdier`. -/
-theorem verdierDualExternalProduct [HasInvertibleExponent Λ (Spec (.of k))] :
+theorem verdierDualExternalProduct [PerfectField k] [HasInvertibleExponent Λ (Spec (.of k))] :
     VerdierDualExternalProduct Λ k :=
   (kunnethVerdier Λ).verdierDualExternalProduct
 

@@ -96,6 +96,21 @@ lemma isIso_rightDerivedUpperShriekDerivedTensorMap_iff {X Y : Scheme.{u}} (f : 
       IsIso (rightDerivedUpperShriekTensorMap f M N) :=
   Iff.rfl
 
+/-- The proposition that the tensor map `τ_f(M, N) : Rf^! M ⊗ᴸ Lf^* N ⟶ Rf^!(M ⊗ᴸ N)` is an
+isomorphism. Stated for a general coefficient category, so that its specialization to a finite
+ring of coefficients does not involve comparing monoidal structures. -/
+def IsIsoRightDerivedUpperShriekTensorMap {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] [IsIso (projectionMap A f)]
+    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) : Prop :=
+  IsIso (rightDerivedUpperShriekTensorMap f M N)
+
+lemma isIsoRightDerivedUpperShriekTensorMap_iff {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] [IsIso (projectionMap A f)]
+    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    IsIsoRightDerivedUpperShriekTensorMap f M N ↔
+      IsIso (rightDerivedUpperShriekTensorMap f M N) :=
+  Iff.rfl
+
 section Composition
 
 variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z) (w : f ≫ g = h)
@@ -194,8 +209,8 @@ def IsExceptionalKunneth {T S : Scheme.{u}} (g : T ⟶ S) [HasCompactification g
     {q : P ⟶ S} {r : P ⟶ W} (_ : IsPullback q r b c) {q' : Q ⟶ T} {h : Q ⟶ P}
     (sq : IsPullback q' h g q) [HasCompactification h] [QuasiCompact h],
     (∀ N, IsIso ((rightDerivedUpperShriekBaseChangeMap Λ sq).app N)) ∧
-      ∀ N M, IsIso (rightDerivedUpperShriekTensorMap h ((L((q)^*[ModuleCat.{u + 1} Λ])).obj N)
-        ((L((r)^*[ModuleCat.{u + 1} Λ])).obj M))
+      ∀ N M, IsIsoRightDerivedUpperShriekTensorMap (A := ModuleCat.{u + 1} Λ) h
+        ((L((q)^*[ModuleCat.{u + 1} Λ])).obj N) ((L((r)^*[ModuleCat.{u + 1} Λ])).obj M)
 
 variable {Λ k}
 
@@ -217,12 +232,14 @@ theorem isExceptionalKunneth_of_smoothOfRelativeDimension {T S : Scheme.{u}} (g 
   intro W P Q b c _ _ _ _ q r sqP q' h sq _ _
   have : HasInvertibleExponent Λ T := .of_hom (g ≫ b)
   have : HasInvertibleExponent Λ Q := .of_hom (h ≫ q ≫ b)
+  have := smoothOfRelativeDimension_isStableUnderBaseChange (n := d)
   have : SmoothOfRelativeDimension d h := MorphismProperty.of_isPullback sq ‹_›
   refine ⟨fun N ↦ ?_, fun N M ↦ ?_⟩
   · have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ g d sq
     infer_instance
-  · exact isIso_rightDerivedUpperShriekTensorMap_of_forall (projectionMapAssociativity Λ h)
-      (isIso_dualizingComplexTensorMapOfIsIso_of_smoothOfRelativeDimension Λ h d) _ _
+  · exact (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).2
+      (isIso_rightDerivedUpperShriekTensorMap_of_forall (projectionMapAssociativity Λ h)
+        (isIso_dualizingComplexTensorMapOfIsIso_of_smoothOfRelativeDimension Λ h d) _ _)
 
 /-- **Closed immersions** satisfy the exceptional Künneth formula
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isClosedImmersion`,
@@ -232,7 +249,8 @@ theorem isExceptionalKunneth_of_isClosedImmersion {T S : Scheme.{u}} (i : T ⟶ 
     [IsClosedImmersion i] : IsExceptionalKunneth Λ k i := by
   intro W P Q b c _ _ _ _ q r sqP q' h sq _ _
   exact ⟨isIso_rightDerivedUpperShriekBaseChangeMap_of_isClosedImmersion Λ b c sqP i sq,
-    isIso_rightDerivedUpperShriekTensorMap_pullback_of_isClosedImmersion Λ b c sqP i sq⟩
+    fun N M ↦ (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).2
+      (isIso_rightDerivedUpperShriekTensorMap_pullback_of_isClosedImmersion Λ b c sqP i sq N M)⟩
 
 /-- **Composition.** The exceptional Künneth property is stable under composition, by the
 composition laws of the base change maps
@@ -240,8 +258,8 @@ composition laws of the base change maps
 tensor maps (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekTensorMap_comp`). -/
 theorem IsExceptionalKunneth.comp {T T₂ S : Scheme.{u}} (g₁ : T ⟶ T₂) (g₂ : T₂ ⟶ S)
     [HasCompactification g₁] [HasCompactification g₂] [HasCompactification (g₁ ≫ g₂)]
-    [QuasiCompact g₁] [QuasiCompact g₂] (h₁ : IsExceptionalKunneth Λ k g₁)
-    (h₂ : IsExceptionalKunneth Λ k g₂) : IsExceptionalKunneth Λ k (g₁ ≫ g₂) := by
+    [QuasiCompact g₁] [QuasiCompact g₂] (hg₁ : IsExceptionalKunneth Λ k g₁)
+    (hg₂ : IsExceptionalKunneth Λ k g₂) : IsExceptionalKunneth Λ k (g₁ ≫ g₂) := by
   intro W P Q b c _ _ _ _ q r sqP q' h sq _ _
   obtain ⟨E, hPF, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
   have sq₂ : IsPullback (pullback.fst g₂ q) (pullback.snd g₂ q) g₂ q :=
@@ -254,17 +272,22 @@ theorem IsExceptionalKunneth.comp {T T₂ S : Scheme.{u}} (g₁ : T ⟶ T₂) (g
     sq₂.paste_vert sqP
   have : HasCompactification h₁ := .of_isPullback sq₁
   have : QuasiCompact h₁ := MorphismProperty.of_isPullback sq₁ ‹_›
-  have H₁ := h₁ (g₂ ≫ b) c sqP₂ sq₁
-  have H₂ := h₂ b c sqP sq₂
+  have H₁ := hg₁ (g₂ ≫ b) c sqP₂ sq₁
+  have H₂ := hg₂ b c sqP sq₂
   refine ⟨fun N ↦ ?_, fun N M ↦ ?_⟩
   · have := H₂.1 N
     exact (isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff sq₁ sq₂ sq rfl hw N
       (H₁.1 _)).2 inferInstance
-  · have := H₂.2 N M
-    have := H₁.2 ((R(g₂)^![ModuleCat.{u + 1} Λ]).obj N) M
+  · refine (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).2 ?_
+    have := (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).1 (H₂.2 N M)
+    have := (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).1
+      (H₁.2 ((R(g₂)^![ModuleCat.{u + 1} Λ]).obj N) M)
     have := H₂.1 N
-    have := isIso_rightDerivedUpperShriekTensorMap_of_iso_left h₁
-      (asIso ((rightDerivedUpperShriekBaseChangeMap Λ sq₂).app N))
+    let e₁ : (L((pullback.fst g₂ q)^*[ModuleCat.{u + 1} Λ])).obj
+        ((R(g₂)^![ModuleCat.{u + 1} Λ]).obj N) ≅ (R(pullback.snd g₂ q)^![ModuleCat.{u + 1} Λ]).obj
+          ((L((q)^*[ModuleCat.{u + 1} Λ])).obj N) :=
+      asIso ((rightDerivedUpperShriekBaseChangeMap Λ sq₂).app N)
+    have := isIso_rightDerivedUpperShriekTensorMap_of_iso_left h₁ e₁
       (N := (L((pullback.snd g₂ q ≫ r)^*[ModuleCat.{u + 1} Λ])).obj M)
     have := isIso_rightDerivedUpperShriekTensorMap_of_iso_right h₁
       ((leftDerivedUpperStarComp _ (pullback.snd g₂ q) r).app M)
@@ -278,7 +301,7 @@ quasi-compact open immersions and every `u_i ≫ g` satisfies the exceptional K�
 then so does `g`: through the composition laws, the canonical maps of `u_i ≫ g` determine
 `Ru_i^!`, hence `Lu_i^*`, of those of `g`, and isomorphisms descend along the family. -/
 theorem IsExceptionalKunneth.of_jointlySurjective {T S : Scheme.{u}} (g : T ⟶ S)
-    [HasCompactification g] {ι : Type u} {U : ι → Scheme.{u}} (u : ∀ i, U i ⟶ T)
+    [HasCompactification g] [QuasiCompact g] {ι : Type u} {U : ι → Scheme.{u}} (u : ∀ i, U i ⟶ T)
     [∀ i, IsOpenImmersion (u i)] [∀ i, QuasiCompact (u i)] [∀ i, HasCompactification (u i ≫ g)]
     (hu : ∀ x : T, ∃ (i : ι) (y : U i), u i y = x) (H : ∀ i, IsExceptionalKunneth Λ k (u i ≫ g)) :
     IsExceptionalKunneth Λ k g := by
@@ -291,9 +314,10 @@ theorem IsExceptionalKunneth.of_jointlySurjective {T S : Scheme.{u}} (g : T ⟶ 
     IsPullback.of_hasPullback _ _
   have sqi (i : ι) : IsPullback (pullback.fst (u i) q') (v i ≫ h) (u i ≫ g) q :=
     (sqv i).paste_vert sq
-  have hv (z : Q) : ∃ (i : ι) (y : pullback (u i) q'), v i y = z := by
+  have (i : ι) : HasInvertibleExponent Λ (pullback (u i) q') := .of_hom (v i ≫ h ≫ q ≫ b)
+  have hv (z : Q) : ∃ (i : ι) (y : ↥(pullback (u i) q')), v i y = z := by
     obtain ⟨i, y, hy⟩ := hu (q' z)
-    obtain ⟨t, -, ht⟩ := Scheme.Pullback.exists_preimage_pullback y z hy
+    obtain ⟨t, -, ht⟩ := Scheme.Pullback.exists_preimage_pullback (f := u i) (g := q') y z hy
     exact ⟨i, t, ht⟩
   have (i : ι) : HasCompactification (u i) := (Compactification.ofIsOpenImmersion _).hasCompactification
   have (i : ι) : HasCompactification (v i) := (Compactification.ofIsOpenImmersion _).hasCompactification
@@ -310,11 +334,66 @@ theorem IsExceptionalKunneth.of_jointlySurjective {T S : Scheme.{u}} (g : T ⟶ 
       inferInstance).1 ((H i b c sqP (sqi i)).1 N)
     exact isIso_leftDerivedUpperStar_map_of_isIso_rightDerivedUpperShriek_map (v i) (hθ i)
       (hω i) _ this
-  · refine isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective Λ v hv _ fun i ↦ ?_
+  · refine (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).2 ?_
+    refine isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective Λ v hv _ fun i ↦ ?_
     exact isIso_leftDerivedUpperStar_map_of_isIso_rightDerivedUpperShriek_map (v i) (hθ i)
       (hω i) _ (isIso_map_rightDerivedUpperShriekTensorMap_of_comp (v i) h (v i ≫ h) rfl
         (E _ _ _ rfl) (hPF _ _ _ rfl) (projectionMapAssociativity Λ (v i)) (hθ i) _ _
-        ((H i b c sqP (sqi i)).2 N M))
+        ((isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).1 ((H i b c sqP (sqi i)).2 N M)))
+
+/-- A morphism locally of finite type between affine schemes factors as a closed immersion into
+an affine space of finite dimension followed by the projection. -/
+lemma exists_isClosedImmersion_affineSpace {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y]
+    (f : X ⟶ Y) [LocallyOfFiniteType f] :
+    ∃ (s : Type u) (_ : Finite s) (c : X ⟶ 𝔸(s; Y)),
+      IsClosedImmersion c ∧ c ≫ 𝔸(s; Y) ↘ Y = f := by
+  have hft : f.appTop.hom.FiniteType := HasRingHomProperty.appTop @LocallyOfFiniteType f ‹_›
+  letI := f.appTop.hom.toAlgebra
+  obtain ⟨t, ht⟩ := hft.out
+  refine ⟨t, inferInstance, AffineSpace.homOfVector f (fun x : t ↦ x.1),
+    AffineSpace.isClosedImmersion_homOfVector f _ ?_, AffineSpace.homOfVector_over f _⟩
+  have h₁ := Algebra.adjoin_eq_ring_closure (R := Γ(Y, ⊤)) (A := Γ(X, ⊤)) (t : Set Γ(X, ⊤))
+  rw [ht, Algebra.top_toSubring] at h₁
+  have hA : Set.range ⇑(ConcreteCategory.hom f.appTop) =
+      Set.range ⇑(algebraMap Γ(Y, ⊤) Γ(X, ⊤)) := rfl
+  have hB : Set.range (fun x : t ↦ x.1) = (t : Set Γ(X, ⊤)) := by
+    ext
+    simp
+  rw [hA, hB, ← h₁]
+
+/-- **The exceptional Künneth formula.** Every quasi-compact morphism `g : T ⟶ S` admitting a
+compactification, with `S` of finite type over `k`, satisfies the exceptional Künneth formula
+(`AlgebraicGeometry.Etale.IsExceptionalKunneth`): locally on `T`, `g` is a closed immersion into
+an affine space over an affine open `V` of `S`, followed by the projection and the open
+immersion of `V`. -/
+theorem isExceptionalKunneth {T S : Scheme.{u}} (g : T ⟶ S) [HasCompactification g]
+    [QuasiCompact g] (b : S ⟶ Spec (.of k)) [LocallyOfFiniteType b] [QuasiCompact b] :
+    IsExceptionalKunneth Λ k g := by
+  have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace b
+  have : IsNoetherian S := { __ := LocallyOfFiniteType.isLocallyNoetherian b }
+  have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace (g ≫ b)
+  have : IsNoetherian T := { __ := LocallyOfFiniteType.isLocallyNoetherian (g ≫ b) }
+  have hx (x : T) : ∃ (V : S.Opens) (U : T.Opens), IsAffineOpen V ∧ IsAffineOpen U ∧ x ∈ U ∧
+      U ≤ g ⁻¹ᵁ V := by
+    obtain ⟨_, ⟨V, hV, rfl⟩, hxV, -⟩ :=
+      S.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (g x)) isOpen_univ
+    obtain ⟨_, ⟨U, hU, rfl⟩, hxU, hUV⟩ := T.isBasis_affineOpens.exists_subset_of_mem_open
+      (show x ∈ (g ⁻¹ᵁ V : Set T) from hxV) (g ⁻¹ᵁ V).isOpen
+    exact ⟨V, U, hV, hU, hxU, hUV⟩
+  choose V U hV hU hxU hUV using hx
+  refine IsExceptionalKunneth.of_jointlySurjective Λ k g (fun x ↦ (U x).ι)
+    (fun x ↦ ⟨x, ⟨x, hxU x⟩, by simp⟩) fun x ↦ ?_
+  have : IsAffine (U x) := hU x
+  have : IsAffine (V x) := hV x
+  obtain ⟨s, _, c, _, hc⟩ := exists_isClosedImmersion_affineSpace (g.resLE (V x) (U x) (hUV x))
+  have : HasCompactification (V x).ι :=
+    (Compactification.ofIsOpenImmersion _).hasCompactification
+  have h₁ := isExceptionalKunneth_of_isClosedImmersion Λ k c
+  have h₂ := isExceptionalKunneth_of_smoothOfRelativeDimension Λ k (𝔸(s; V x) ↘ V x) (Nat.card s)
+  have h₃ := isExceptionalKunneth_of_smoothOfRelativeDimension Λ k (V x).ι 0
+  refine (IsExceptionalKunneth.comp Λ k c _ h₁
+    (IsExceptionalKunneth.comp Λ k _ _ h₂ h₃)).of_eq ?_
+  rw [← Category.assoc, hc, Scheme.Hom.resLE_comp_ι]
 
 end Etale
 

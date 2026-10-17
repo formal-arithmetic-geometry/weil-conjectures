@@ -63,7 +63,7 @@ classification of these objects.
 
 - `AlgebraicGeometry.Etale.isIso_reductionModIdeal_maximalIdealShrink_pow_map_projectionMap`:
   the reductions modulo `𝔪_Eⁿ` of the projection map are isomorphisms.
-- `AlgebraicGeometry.Etale.isIso_completion_map_projectionMap` (`sk-thm-sf-pf-adic`): the
+- `AlgebraicGeometry.Etale.isIso_completion_map_projectionMap`: the
   projection formula at the integral stage.
 - `AlgebraicGeometry.Etale.isIso_completion_map_projectionMap_of_derivedCompleteIntegral`
   (`thm-sf-pf-adic`): the same, together with the compatibility with all finite reductions.
@@ -194,7 +194,9 @@ theorem isIso_completion_map_of_isIso_reductionModIdeal
   exact _root_.DerivedCategory.isIso_derivedCompletion_map_of_smulInvertible _ hI hT
     (isIso_smul_id_of_isZero_reductionModIdeal hϖ C hC)
 
-/-- Blueprint `sk-thm-sf-pf-adic`: Projection formula: the derived-complete stage.
+/-- **The projection formula at the integral stage of the étale model** (the étale-site form of
+the old blueprint `sk-thm-sf-pf-adic`; the pro-étale statement of the current blueprint is in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaAdic`).
 
 At the integral stage of the `ℓ`-adic formalism, where the coefficients are the ring of
 integers `𝒪_E` of an extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`, the projection map

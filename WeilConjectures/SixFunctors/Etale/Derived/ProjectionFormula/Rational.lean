@@ -31,7 +31,7 @@ isomorphisms to isomorphisms.
   projection formula over `E` for rationalizations of `𝒪_E`-objects.
 - `AlgebraicGeometry.Etale.isIso_reductionModIdeal_pow_map_projectionMap` (`thm-sf-pf-field`):
   the reductions modulo `𝔪_Eⁿ` of the integral representative are isomorphisms.
-- `AlgebraicGeometry.Etale.hasProjectionFormula_field` (`sk-thm-sf-pf-field`): both together.
+- `AlgebraicGeometry.Etale.hasProjectionFormula_field`: both together.
 
 ## Implementation notes
 
@@ -104,8 +104,9 @@ theorem isIso_reductionModIdeal_pow_map_projectionMap (f : X ⟶ Y) [HasCompacti
       (((projectionMap 𝐌 f).app K).app L)) :=
   isIso_reductionModIdeal_maximalIdealShrink_pow_map_projectionMap l E f K L n
 
-/-- Blueprint `sk-thm-sf-pf-field`: Projection formula: rational and algebraically closed
-stages.
+/-- **The projection formula at the rational stage of the étale model** (the étale-site form of
+the old blueprint `sk-thm-sf-pf-field`; the pro-étale statement of the current blueprint is in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaField`).
 
 Let `f : X ⟶ Y` admit a compactification and let `E/ℚ_ℓ` be a finite extension inside `ℚ̄_ℓ`.
 Let `K` and `L` be the rationalizations of objects of `D(X_ét, 𝒪_E)` and `D(Y_ét, 𝒪_E)` (in the

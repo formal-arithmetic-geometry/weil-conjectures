@@ -176,6 +176,46 @@ lemma projectionMap_app_app (M : 𝔻(X)) (L : 𝔻(Y)) :
             (L((p)^*⟦Λ⟧).obj L)) :=
   rfl
 
+/-! The two sides of the projection map are triangulated in each variable. -/
+
+noncomputable instance (M : 𝔻(X)) :
+    ((R((p)_*⟦Λ⟧) ⋙ curriedTensor 𝔻(Y)).obj M).CommShift ℤ :=
+  inferInstanceAs (Functor.CommShift ((curriedTensor 𝔻(Y)).obj (R((p)_*⟦Λ⟧).obj M)) ℤ)
+
+instance (M : 𝔻(X)) : ((R((p)_*⟦Λ⟧) ⋙ curriedTensor 𝔻(Y)).obj M).IsTriangulated :=
+  inferInstanceAs (Functor.IsTriangulated ((curriedTensor 𝔻(Y)).obj (R((p)_*⟦Λ⟧).obj M)))
+
+noncomputable instance (L : 𝔻(Y)) :
+    ((R((p)_*⟦Λ⟧) ⋙ curriedTensor 𝔻(Y)).flip.obj L).CommShift ℤ :=
+  inferInstanceAs (Functor.CommShift (R((p)_*⟦Λ⟧) ⋙ (curriedTensor 𝔻(Y)).flip.obj L) ℤ)
+
+instance (L : 𝔻(Y)) : ((R((p)_*⟦Λ⟧) ⋙ curriedTensor 𝔻(Y)).flip.obj L).IsTriangulated :=
+  inferInstanceAs (Functor.IsTriangulated (R((p)_*⟦Λ⟧) ⋙ (curriedTensor 𝔻(Y)).flip.obj L))
+
+noncomputable instance (M : 𝔻(X)) : (((Functor.postcompose₂.obj R((p)_*⟦Λ⟧)).obj
+    ((((Functor.whiskeringLeft₂ _).obj (𝟭 _)).obj L((p)^*⟦Λ⟧)).obj
+      (curriedTensor 𝔻(X)))).obj M).CommShift ℤ :=
+  inferInstanceAs
+    (Functor.CommShift ((L((p)^*⟦Λ⟧) ⋙ (curriedTensor 𝔻(X)).obj M) ⋙ R((p)_*⟦Λ⟧)) ℤ)
+
+instance (M : 𝔻(X)) : (((Functor.postcompose₂.obj R((p)_*⟦Λ⟧)).obj
+    ((((Functor.whiskeringLeft₂ _).obj (𝟭 _)).obj L((p)^*⟦Λ⟧)).obj
+      (curriedTensor 𝔻(X)))).obj M).IsTriangulated :=
+  inferInstanceAs
+    (Functor.IsTriangulated ((L((p)^*⟦Λ⟧) ⋙ (curriedTensor 𝔻(X)).obj M) ⋙ R((p)_*⟦Λ⟧)))
+
+noncomputable instance (L : 𝔻(Y)) : (((Functor.postcompose₂.obj R((p)_*⟦Λ⟧)).obj
+    ((((Functor.whiskeringLeft₂ _).obj (𝟭 _)).obj L((p)^*⟦Λ⟧)).obj
+      (curriedTensor 𝔻(X)))).flip.obj L).CommShift ℤ :=
+  inferInstanceAs (Functor.CommShift
+    ((curriedTensor 𝔻(X)).flip.obj (L((p)^*⟦Λ⟧).obj L) ⋙ R((p)_*⟦Λ⟧)) ℤ)
+
+instance (L : 𝔻(Y)) : (((Functor.postcompose₂.obj R((p)_*⟦Λ⟧)).obj
+    ((((Functor.whiskeringLeft₂ _).obj (𝟭 _)).obj L((p)^*⟦Λ⟧)).obj
+      (curriedTensor 𝔻(X)))).flip.obj L).IsTriangulated :=
+  inferInstanceAs (Functor.IsTriangulated
+    ((curriedTensor 𝔻(X)).flip.obj (L((p)^*⟦Λ⟧).obj L) ⋙ R((p)_*⟦Λ⟧)))
+
 end ProjectionMap
 
 section BaseChange

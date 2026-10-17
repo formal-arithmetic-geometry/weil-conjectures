@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.HomTriangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Generation
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.VerdierPreservation
 
 /-!
 # Internal Hom preserves `Dctf`, by dévissage
@@ -109,9 +110,32 @@ lemma constructibleFiniteTor_derivedHom_singleFunctor_of_isFiniteLocallyConstant
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
       (((RHom(X)[ModuleCat.{u + 1} Λ]).obj
         (op ((_root_.DerivedCategory.singleFunctor _ 0).obj P))).obj M) := by
+  let K := (_root_.DerivedCategory.singleFunctor
+    (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj P
   obtain ⟨D, hD, ⟨_⟩⟩ := exists_exactPairing_singleFunctor_of_isFiniteLocallyConstantSheaf Λ P hP
-  exact (constructibleFiniteTor _ X).prop_of_iso
-    (MonoidalClosed.ihomObjIsoTensor D _ M).symm (constructibleFiniteTor_tensor Λ X hD hM)
+  obtain ⟨_⟩ := nonempty_exactPairing_swap D K
+  have hKd : IsDualizable K := ⟨⟨D⟩⟩
+  obtain ⟨e⟩ := nonempty_iso_coefficientDual_tensor hKd M
+  have hDual : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+      ((coefficientDual (ModuleCat.{u + 1} Λ) X).obj (op K)) :=
+    (constructibleFiniteTor _ X).prop_of_iso (coefficientDualIsoOfExactPairing D K).symm hD
+  exact (constructibleFiniteTor _ X).prop_of_iso e (constructibleFiniteTor_tensor Λ X hDual hM)
+
+/-- If `RHom(K, L)` lies in `Dctf(X, Λ)`, so does `RHom(K⟦n⟧, L) ≅ RHom(K, L)⟦-n⟧`. -/
+lemma constructibleFiniteTor_derivedHom_shift {X : Scheme.{u}}
+    {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj L)) (n : ℤ) :
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op (K⟦n⟧))).obj L) := by
+  have h : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+      ((((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj L)⟦-n⟧) :=
+    (constructibleFiniteTor _ X).le_shift (-n) _ hK
+  let e : ((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op (K⟦n⟧))).obj L ≅
+      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj L)⟦-n⟧ :=
+    (derivedHomShiftIso (ModuleCat.{u + 1} Λ) K n).app L ≪≫
+      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).commShiftIso (-n)).app L
+  exact (constructibleFiniteTor _ X).prop_of_iso e.symm h
 
 /-- For `L ∈ Dctf(X, Λ)`, the objects `K` with `RHom(K, L) ∈ Dctf(X, Λ)` form a thick
 subcategory of `D(X_ét, Λ)`: `RHom(-, L)` is exact (`lem-sf-hom-triangulated`) and turns
@@ -121,15 +145,53 @@ lemma isTriangulated_inverseImage_derivedHom_left {X : Scheme.{u}}
     ObjectProperty.IsTriangulated (fun K ↦ constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
       (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj L)) where
   exists_zero := ⟨0, isZero_zero _, (constructibleFiniteTor _ X).prop_of_isZero
-    (letI := _root_.DerivedCategory.braidedCategory
-      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    MonoidalCategory.isZero_ihom_obj_of_isZero (isZero_zero _) L)⟩
-  isStableUnderShiftBy n := ⟨fun K hK ↦ (constructibleFiniteTor _ X).prop_of_iso
-    ((derivedHomShiftIso (ModuleCat.{u + 1} Λ) K n).app L ≪≫
-      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).commShiftIso (-n)).app L).symm
-    ((constructibleFiniteTor _ X).le_shift (-n) _ hK)⟩
+    (isZero_derivedHom_obj_of_isZero _ (isZero_zero _) L)⟩
+  isStableUnderShiftBy n := ⟨fun _ hK ↦ constructibleFiniteTor_derivedHom_shift Λ hK n⟩
   ext₂' T hT h₁ h₃ := ObjectProperty.le_isoClosure _ _
     (derivedHom_mem_of_distTriang_left (constructibleFiniteTor _ X) L T hT h₁ h₃)
+
+/-- The generator case of `det-rem-sf-matrix-hom-devissage`: for `j : U ⟶ Ū` an open
+immersion, `g : Ū ⟶ X` a closed immersion, `P` a lisse flat sheaf on `U` and `L ∈ Dctf(X, Λ)`,
+`RHom(Rg_* Rj_! P, L) ≅ Rg_* Rj_* RHom(P, Rj^! Rg^! L)` lies in `Dctf(X, Λ)`. -/
+lemma constructibleFiniteTor_derivedHom_rightDerivedLowerStar_rightDerivedLowerShriek
+    {k : Type u} [Field k] {X Ubar U : Scheme.{u}} (aX : X ⟶ Spec (.of k))
+    [LocallyOfFiniteType aX] [QuasiCompact aX] [HasInvertibleExponent Λ X]
+    (j : U ⟶ Ubar) [IsOpenImmersion j] [HasCompactification j] [QuasiCompact j]
+    (g : Ubar ⟶ X) [IsClosedImmersion g]
+    (P : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf P]
+    (hP : ObjectProperty.flat P)
+    {L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hL : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X L) :
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op ((R((g)_*[ModuleCat.{u + 1} Λ])).obj
+        ((R(j)_![ModuleCat.{u + 1} Λ]).obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj P))))).obj L) := by
+  have : HasInvertibleExponent Λ Ubar := .of_hom g
+  let P₀ := (_root_.DerivedCategory.singleFunctor
+    (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj P
+  let N := (R(j)_![ModuleCat.{u + 1} Λ]).obj P₀
+  let M := (R(g)^![ModuleCat.{u + 1} Λ]).obj L
+  have hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Ubar M :=
+    constructibleFiniteTor_rightDerivedUpperShriek Λ aX g hL
+  have hjM := constructibleFiniteTor_rightDerivedUpperShriek Λ (g ≫ aX) j hM
+  have hH := constructibleFiniteTor_derivedHom_singleFunctor_of_isFiniteLocallyConstantSheaf Λ P
+    hP hjM
+  have hjH := constructibleFiniteTor_rightDerivedLowerStar Λ (j ≫ g ≫ aX) (g ≫ aX) j rfl hH
+  -- `Rj_* RHom(P, Rj^! M) ≅ RHom(Rj_! P, M)`
+  have h₁ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Ubar
+      (((RHom(Ubar)[ModuleCat.{u + 1} Λ]).obj (op N)).obj M) :=
+    (constructibleFiniteTor _ Ubar).prop_of_iso
+      (((derivedHomRightDerivedLowerShriekIsoOfFinite Λ j).app (op P₀)).app M) hjH
+  have h₂ := constructibleFiniteTor_rightDerivedLowerStar Λ (g ≫ aX) aX g rfl h₁
+  -- `Rg_* RHom(N, Rg^! L) ≅ RHom(Rg_! N, L)`
+  have h₃ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op ((R(g)_![ModuleCat.{u + 1} Λ]).obj N))).obj L) :=
+    (constructibleFiniteTor _ X).prop_of_iso
+      (((derivedHomRightDerivedLowerShriekIsoOfFinite Λ g).app (op N)).app L) h₂
+  -- `Rg_! ≅ Rg_*`
+  exact (constructibleFiniteTor _ X).prop_of_iso
+    (((RHom(X)[ModuleCat.{u + 1} Λ]).flip.obj L).mapIso
+      ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ g).app N).op).symm h₃
 
 /-- Blueprint `det-rem-sf-matrix-hom-devissage`: Internal Hom preserves finite Tor amplitude by
 dévissage.
@@ -166,37 +228,11 @@ theorem constructibleFiniteTor_derivedHom_of_field {k : Type u} [Field k] {X : S
     ⟨fun e hK ↦ (constructibleFiniteTor _ X).prop_of_retract (e.op.map F) hK⟩
   refine ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek Λ X Q
     (fun str i Ubar j _ _ g _ _ _ P _ hP ↦ ?_) K hK
-  -- the generator `Rg_* Rj_! P`
-  let U := str.domain i
-  have : HasInvertibleExponent Λ Ubar := .of_hom g
-  have : TopologicalSpace.NoetherianSpace U :=
+  have : TopologicalSpace.NoetherianSpace (str.domain i) :=
     (str.immersion i).isEmbedding.isInducing.noetherianSpace
   have : QuasiCompact j := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
-  let N := (R(j)_![ModuleCat.{u + 1} Λ]).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj P)
-  -- `RHom(Rg_* N, L) ≅ Rg_* RHom(N, Rg^! L)`
-  let e₁ : (((RHom(X)[ModuleCat.{u + 1} Λ]).obj
-      (op ((R((g)_*[ModuleCat.{u + 1} Λ])).obj N))).obj L) ≅
-      (R((g)_*[ModuleCat.{u + 1} Λ])).obj (((RHom(Ubar)[ModuleCat.{u + 1} Λ]).obj (op N)).obj
-        ((R(g)^![ModuleCat.{u + 1} Λ]).obj L)) :=
-    F.mapIso ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ g).app N).op ≪≫
-      (((derivedHomRightDerivedLowerShriekIsoOfFinite Λ g).app (op N)).app L).symm
-  -- `RHom(Rj_! P, M) ≅ Rj_* RHom(P, Rj^! M)`
-  let M := (R(g)^![ModuleCat.{u + 1} Λ]).obj L
-  let e₂ : ((RHom(Ubar)[ModuleCat.{u + 1} Λ]).obj (op N)).obj M ≅
-      (R((j)_*[ModuleCat.{u + 1} Λ])).obj (((RHom(U)[ModuleCat.{u + 1} Λ]).obj
-        (op ((_root_.DerivedCategory.singleFunctor _ 0).obj P))).obj
-          ((R(j)^![ModuleCat.{u + 1} Λ]).obj M)) :=
-    (((derivedHomRightDerivedLowerShriekIsoOfFinite Λ j).app
-      (op ((_root_.DerivedCategory.singleFunctor _ 0).obj P))).app M).symm
-  have hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Ubar M :=
-    constructibleFiniteTor_rightDerivedUpperShriek Λ aX g hL
-  have hjM := constructibleFiniteTor_rightDerivedUpperShriek Λ (g ≫ aX) j hM
-  have hH := constructibleFiniteTor_derivedHom_singleFunctor_of_isFiniteLocallyConstantSheaf Λ P
-    hP hjM
-  have hjH := constructibleFiniteTor_rightDerivedLowerStar Λ (j ≫ g ≫ aX) (g ≫ aX) j rfl hH
-  exact (constructibleFiniteTor _ X).prop_of_iso e₁.symm
-    (constructibleFiniteTor_rightDerivedLowerStar Λ (g ≫ aX) aX g rfl
-      ((constructibleFiniteTor _ Ubar).prop_of_iso e₂.symm hjH))
+  exact constructibleFiniteTor_derivedHom_rightDerivedLowerStar_rightDerivedLowerShriek Λ aX j g
+    P hP hL
 
 end Etale
 

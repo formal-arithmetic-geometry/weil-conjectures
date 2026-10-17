@@ -59,7 +59,7 @@ instance commShift_leftDerivedUpperStarTensor_app (K : 𝔻(Y)) :
 instance commShift_leftDerivedUpperStarTensor_flipApp (L : 𝔻(Y)) :
     NatTrans.CommShift (F₁ := (curriedTensor 𝔻(Y)).flip.obj L ⋙ L((p)^*⟦Λ⟧))
       (F₂ := L((p)^*⟦Λ⟧) ⋙ (curriedTensor 𝔻(X)).flip.obj (L((p)^*⟦Λ⟧).obj L))
-      (NatTrans.flipApp (leftDerivedUpperStarTensor Λ p) L) ℤ :=
+      (Adjunction.comparisonFlipApp (leftDerivedUpperStarTensor Λ p) L) ℤ :=
   sorry
 
 /-- The image of a morphism under the derived tensor product commutes with the shifts in the
@@ -82,6 +82,6 @@ instance commShift_projectionMap_flipApp (L : 𝔻(Y)) :
       (F₂ := (curriedTensor 𝔻(X)).flip.obj (L((p)^*⟦Λ⟧).obj L) ⋙ R((p)_*⟦Λ⟧))
       (NatTrans.flipApp (projectionMap Λ p) L) ℤ :=
   Adjunction.commShift_rightAdjointProjectionMapFlipApp (derivedUpperStarLowerStarAdjunction Λ p)
-    (leftDerivedUpperStarTensor Λ p) L ℤ
+    (leftDerivedUpperStarTensor Λ p) ℤ L
 
 end AlgebraicGeometry.ProEtale.CondensedRing

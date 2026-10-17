@@ -182,8 +182,9 @@ theorem constructibleFiniteTor_externalProduct {B X Y : Scheme.{u}} (f : X ⟶ B
 At `P = Λ_X`, `Q = Λ_Y` this is `ω_{X ×_k Y} ≅ ω_X ⊠ ω_Y`. The three product comparisons
 `α`, `β`, `κ` of `sk-def-sf-kv-maps` follow from it formally, given biduality
 (`AlgebraicGeometry.Etale.VerdierDualExternalProduct.nonempty_iso_kunnethVerdier`, ...). -/
-def VerdierDualExternalProduct (k : Type u) [Field k] : Prop :=
-  ∀ ⦃X Y : Scheme.{u}⦄ (a : X ⟶ Spec (.of k)) (b : Y ⟶ Spec (.of k))
+structure VerdierDualExternalProduct (k : Type u) [Field k] : Prop where
+  /-- `𝔻(P ⊠ Q) ≅ 𝔻P ⊠ 𝔻Q` for `P ∈ Dctf(X, Λ)`, `Q ∈ Dctf(Y, Λ)`. -/
+  nonempty_iso : ∀ ⦃X Y : Scheme.{u}⦄ (a : X ⟶ Spec (.of k)) (b : Y ⟶ Spec (.of k))
     [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]
     [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b]
     ⦃P : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))⦄
@@ -197,7 +198,7 @@ def VerdierDualExternalProduct (k : Type u) [Field k] : Prop :=
 
 namespace VerdierDualExternalProduct
 
-variable {Λ} {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))]
+variable {Λ} {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))]
   (hδ : VerdierDualExternalProduct Λ k)
 include hδ
 
@@ -223,7 +224,7 @@ theorem nonempty_iso_kunnethVerdier {X Y : Scheme.{u}} (a : X ⟶ Spec (.of k))
   have hDM := constructibleFiniteTor_verdierDual Λ a hM
   obtain ⟨e₂⟩ := nonempty_iso_verdierDual_leftDerivedUpperStar_obj Λ (pullback.fst a b) a
     (pullback.fst a b ≫ a) rfl ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op M))
-  obtain ⟨e₃⟩ := hδ a b hDM hN
+  obtain ⟨e₃⟩ := hδ.nonempty_iso a b hDM hN
   exact ⟨externalProductMapIso _ a b e₁ (Iso.refl _) ≪≫ e₃.symm ≪≫
     (derivedHomVerdierDualIso _ (pullback.fst a b ≫ a) _ _).symm ≪≫
     ((RHom(pullback a b)[ModuleCat.{u + 1} Λ]).obj _).mapIso
@@ -260,11 +261,11 @@ theorem nonempty_iso_externalHom {Z₁ Z₂ : Scheme.{u}} (c₁ : Z₁ ⟶ Spec 
   have hT₂ := constructibleFiniteTor_tensor Λ _ hDN₂ hE₂
   have hNN := constructibleFiniteTor_externalProduct Λ c₁ c₂ hN₁ hN₂
   obtain ⟨b₃⟩ := nonempty_iso_verdierDual_verdierDual Λ (pullback.fst c₁ c₂ ≫ c₁) hNN
-  obtain ⟨e₃⟩ := hδ c₁ c₂ hT₁ hT₂
+  obtain ⟨e₃⟩ := hδ.nonempty_iso c₁ c₂ hT₁ hT₂
   obtain ⟨e₄⟩ := nonempty_iso_externalProduct_derivedTensor (ModuleCat.{u + 1} Λ) c₁ c₂
     ((verdierDual (ModuleCat.{u + 1} Λ) c₁).obj (op N₁)) E₁
     ((verdierDual (ModuleCat.{u + 1} Λ) c₂).obj (op N₂)) E₂
-  obtain ⟨e₅⟩ := hδ c₁ c₂ hN₁ hN₂
+  obtain ⟨e₅⟩ := hδ.nonempty_iso c₁ c₂ hN₁ hN₂
   exact ⟨externalProductMapIso _ c₁ c₂
       (((RHom(Z₁)[ModuleCat.{u + 1} Λ]).obj _).mapIso b₁ ≪≫ derivedHomVerdierDualIso _ c₁ _ _)
       (((RHom(Z₂)[ModuleCat.{u + 1} Λ]).obj _).mapIso b₂ ≪≫ derivedHomVerdierDualIso _ c₂ _ _) ≪≫
@@ -306,17 +307,18 @@ theorem nonempty_iso_exceptional {X₁ X₂ Y₁ Y₂ : Scheme.{u}} (b₁ : Y₁
     ((verdierDual (ModuleCat.{u + 1} Λ) b₂).obj (op N₂))
   have hP₁ := constructibleFiniteTor_leftDerivedUpperStar _ f₁ hDN₁
   have hP₂ := constructibleFiniteTor_leftDerivedUpperStar _ f₂ hDN₂
-  obtain ⟨e₃⟩ := hδ (f₁ ≫ b₁) (f₂ ≫ b₂) hP₁ hP₂
+  obtain ⟨e₃⟩ := hδ.nonempty_iso (f₁ ≫ b₁) (f₂ ≫ b₂) hP₁ hP₂
   obtain ⟨e₄⟩ := nonempty_iso_leftDerivedUpperStar_mapOverBase_externalProduct
     (ModuleCat.{u + 1} Λ) b₁ b₂ f₁ f₂ ((verdierDual (ModuleCat.{u + 1} Λ) b₁).obj (op N₁))
     ((verdierDual (ModuleCat.{u + 1} Λ) b₂).obj (op N₂))
   obtain ⟨e₅⟩ := nonempty_iso_verdierDual_leftDerivedUpperStar_obj Λ
     (pullback.mapOverBase f₁ f₂ b₁ b₂) (pullback.fst b₁ b₂ ≫ b₁)
-    (pullback.fst (f₁ ≫ b₁) (f₂ ≫ b₂) ≫ f₁ ≫ b₁) (by simp)
+    (pullback.fst (f₁ ≫ b₁) (f₂ ≫ b₂) ≫ f₁ ≫ b₁)
+    (by simp [-pullback.fst_comp_eq_toBase, -pullback.snd_comp_eq_toBase])
     (externalProduct (ModuleCat.{u + 1} Λ) b₁ b₂
       ((verdierDual (ModuleCat.{u + 1} Λ) b₁).obj (op N₁))
       ((verdierDual (ModuleCat.{u + 1} Λ) b₂).obj (op N₂)))
-  obtain ⟨e₆⟩ := hδ b₁ b₂ hDN₁ hDN₂
+  obtain ⟨e₆⟩ := hδ.nonempty_iso b₁ b₂ hDN₁ hDN₂
   exact ⟨externalProductMapIso _ (f₁ ≫ b₁) (f₂ ≫ b₂)
       ((R(f₁)^![ModuleCat.{u + 1} Λ]).mapIso b₁' ≪≫ p₁.symm)
       ((R(f₂)^![ModuleCat.{u + 1} Λ]).mapIso b₂' ≪≫ p₂.symm) ≪≫ e₃.symm ≪≫
@@ -332,8 +334,9 @@ end VerdierDualExternalProduct
 `p_X`, `p_Y` of `X ×_k Y`, and `M ∈ Dctf(X, Λ)`, `N ∈ Dctf(Y, Λ)`,
 
 `M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`. -/
-def KunnethVerdier (k : Type u) [Field k] : Prop :=
-  ∀ ⦃X Y : Scheme.{u}⦄ (a : X ⟶ Spec (.of k)) (b : Y ⟶ Spec (.of k))
+structure KunnethVerdier (k : Type u) [Field k] : Prop where
+  /-- `M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)` for `M ∈ Dctf(X, Λ)`, `N ∈ Dctf(Y, Λ)`. -/
+  nonempty_iso : ∀ ⦃X Y : Scheme.{u}⦄ (a : X ⟶ Spec (.of k)) (b : Y ⟶ Spec (.of k))
     [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]
     [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b]
     ⦃M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))⦄
@@ -356,12 +359,13 @@ pullback (`cor-sf-duality-pullback`) give
 `𝔻(P ⊠ Q) ≅ RHom(p_Y^* Q, 𝔻(p_X^* P)) ≅ RHom(p_Y^* Q, Rp_X^! 𝔻P)`, and `κ` for the pair
 `(𝔻P, Q)` identifies the latter with `𝔻P ⊠ 𝔻Q`. Biduality is not needed in this direction,
 only that `𝔻_X` preserves `Dctf` (`sk-prop-sf-biduality-general`). -/
-theorem KunnethVerdier.verdierDualExternalProduct [HasInvertibleExponent Λ (Spec (.of k))]
+theorem KunnethVerdier.verdierDualExternalProduct [PerfectField k]
+    [HasInvertibleExponent Λ (Spec (.of k))]
     (h : KunnethVerdier Λ k) : VerdierDualExternalProduct Λ k := by
-  intro X Y a b _ _ _ _ _ _ P Q hP hQ
+  refine ⟨fun X Y a b _ _ _ _ _ _ P Q hP hQ ↦ ?_⟩
   obtain ⟨e₁⟩ := nonempty_iso_verdierDual_leftDerivedUpperStar_obj Λ (pullback.fst a b) a
     (pullback.fst a b ≫ a) rfl P
-  obtain ⟨e₂⟩ := h a b (constructibleFiniteTor_verdierDual Λ a hP) hQ
+  obtain ⟨e₂⟩ := h.nonempty_iso a b (constructibleFiniteTor_verdierDual Λ a hP) hQ
   exact ⟨(derivedHomVerdierDualIso _ (pullback.fst a b ≫ a) _ _).symm ≪≫
     ((RHom(pullback a b)[ModuleCat.{u + 1} Λ]).obj _).mapIso e₁ ≪≫ e₂.symm⟩
 
@@ -375,9 +379,10 @@ products, `𝔻_{X ×_k Y} (P ⊠ Q) ≅ 𝔻_X P ⊠ 𝔻_Y Q`. The forward imp
 `AlgebraicGeometry.Etale.KunnethVerdier.verdierDualExternalProduct`; the backward one,
 `AlgebraicGeometry.Etale.VerdierDualExternalProduct.nonempty_iso_kunnethVerdier`, uses
 biduality (`sk-prop-sf-biduality-general`) to write `Rp_X^! M ≅ 𝔻(p_X^* 𝔻M)`. -/
-theorem verdierDualExternalProduct_iff_kunnethVerdier [HasInvertibleExponent Λ (Spec (.of k))] :
+theorem verdierDualExternalProduct_iff_kunnethVerdier [IsAlgClosed k]
+    [HasInvertibleExponent Λ (Spec (.of k))] :
     VerdierDualExternalProduct Λ k ↔ KunnethVerdier Λ k :=
-  ⟨fun h _ _ a b _ _ _ _ _ _ _ _ hM hN ↦ h.nonempty_iso_kunnethVerdier a b hM hN,
+  ⟨fun h ↦ ⟨fun _ _ a b _ _ _ _ _ _ _ _ hM hN ↦ h.nonempty_iso_kunnethVerdier a b hM hN⟩,
     KunnethVerdier.verdierDualExternalProduct⟩
 
 end Field

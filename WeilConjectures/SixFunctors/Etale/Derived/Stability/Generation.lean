@@ -19,8 +19,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 This file computes the Tor amplitude of a flat sheaf placed in degree `0`, shows that
 `Dctf(X, Λ)` is a thick subcategory of `D(X_ét, Λ)` for a finite ring `Λ`, and proves that it is
 generated, as a thick subcategory, by the objects `Rg_* Rj_! L` for lisse flat sheaves `L` on the
-strata of stratifications of `X` (`sk-lem-sf-ctf-generation`). Over a finite-type scheme over a
-field, `Dctf(X, Λ)` is exactly the thick envelope of these generators
+strata of stratifications of `X` (`sk-lem-sf-flat-model`, complement). Over a finite-type scheme
+over a field, `Dctf(X, Λ)` is exactly the thick envelope of these generators
 (`lem-trf-devissage-generation`).
 
 This file is part of `WeilConjectures.SixFunctors.Etale.Derived.Stability`, whose module
@@ -172,11 +172,12 @@ lemma hasTorAmplitudeIn_of_torAmplitudeIn {X : Scheme.{u}} {a b : ℤ}
   · exact (_root_.DerivedCategory.isGE_iff _ a).1 h₁ q hq
   · exact (_root_.DerivedCategory.isLE_iff _ b).1 h₂ q hq
 
-/-- The dévissage step of `sk-lem-sf-ctf-generation`: a thick subcategory containing the
-generators `Rg_* Rj_! L` contains `Rι_* F` for every flat constructible sheaf `F` on a closed
-subscheme `ι : Z ⟶ X`. By Noetherian induction on the support `T = ι(Z)`: `F` is lisse on a dense
-open `V ⊆ Z`, and the open–closed triangle `j_! j^* F ⟶ F ⟶ i_* i^* F` for `V` and its closed
-complement exhibits `Rι_* F` as an extension of a generator and of the direct image of the flat
+/-- The dévissage step of the generation statement (`sk-lem-sf-flat-model`): a thick
+subcategory containing the generators `Rg_* Rj_! L` contains `Rι_* F` for every flat
+constructible sheaf `F` on a closed subscheme `ι : Z ⟶ X`. By Noetherian induction on the
+support `T = ι(Z)`: `F` is lisse on a dense open `V ⊆ Z`, and the open–closed triangle
+`j_! j^* F ⟶ F ⟶ i_* i^* F` for `V` and its closed complement exhibits `Rι_* F` as an
+extension of a generator and of the direct image of the flat
 constructible sheaf `i^* F` from a closed subscheme with smaller support. -/
 theorem prop_rightDerivedLowerStar_of_flat (X : Scheme.{u}) [IsNoetherian X]
     (P : ObjectProperty
@@ -245,7 +246,8 @@ theorem prop_rightDerivedLowerStar_of_flat (X : Scheme.{u}) [IsNoetherian X]
       (ih _ hlt (V.closedComplement ≫ ι) rfl _
         (Functor.PreservesFlat.flat_obj (F := (V.closedComplement)^*[_]) hF))
 
-/-- Blueprint `sk-lem-sf-ctf-generation`: Finite/open generation of `Dctf`.
+/-- Blueprint `sk-lem-sf-flat-model`: Flat models and generators, the complement (generation
+over a Noetherian base; formerly `sk-lem-sf-ctf-generation`).
 
 Let `X` be a Noetherian scheme and `Λ` a finite ring. Then `Dctf(X, Λ)` is generated as a
 thick subcategory by the objects `Rg_* Rj_! L`, where `U` is a stratum of a stratification of
@@ -307,7 +309,7 @@ theorem ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek (Λ : Typ
   exact P.prop_of_iso ((rightDerivedLowerStarIdIso Λ X).app _)
     (prop_rightDerivedLowerStar_of_flat Λ X P hP ⊤ (𝟙 X) (by simp) (Pc.X n) (hPflat n))
 
-/-- The generators of `Dctf(X, Λ)` of `sk-lem-sf-ctf-generation` and
+/-- The generators of `Dctf(X, Λ)` of the generation complement of `sk-lem-sf-flat-model` and
 `lem-trf-devissage-generation`: the objects isomorphic to `Rg_* Rj_! L`, where `U` is a stratum of
 a stratification of `X`, `j : U ⟶ Ū` is an open immersion and `g : Ū ⟶ X` a closed immersion
 with image the closure of `U`, and `L` is a lisse (finite locally constant) flat sheaf of

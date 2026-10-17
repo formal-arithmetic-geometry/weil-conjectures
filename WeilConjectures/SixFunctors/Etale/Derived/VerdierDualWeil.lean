@@ -27,13 +27,15 @@ Verdier dual, and proves that the structure maps are equivariant
   `Rf_! ⊣ Rf^!` are equivariant.
 * The *dualizing Weil datum* on `ω_X = Ra^! Λ_S` is the transport of the canonical datum on
   `Λ_S` (`AlgebraicGeometry.Etale.dualizingComplexWeilDatum`).
-* The *dual Weil datum* on `𝔻_X K = RHom(K, ω_X)` of a strict Weil datum `φ : Lg^* K ≅ K` is
+* The *dual Weil datum* on `𝔻_X K = RHom(K, ω_X)` of a strict Weil datum `φ : Lg^* K ≅ K` and a
+  datum `φ_ω` on `ω_X` is the transpose of
   ```
-  Lg^* 𝔻 K ≅ RHom(Lg^* K, Lg^* ω) ──RHom(φ⁻¹, φ_ω)──▶ 𝔻 K
+  K ⊗ᴸ Lg^* 𝔻 K ──φ⁻¹ ⊗ 1──▶ Lg^* K ⊗ᴸ Lg^* 𝔻 K ≅ Lg^*(K ⊗ᴸ 𝔻 K) ──ev──▶ Lg^* ω ──φ_ω──▶ ω
   ```
-  (`AlgebraicGeometry.Etale.verdierDualWeilDatum`), the first map being the internal-hom
-  comparison of the monoidal autoequivalence `Lg^*`. Evaluation `K ⊗ᴸ 𝔻 K ⟶ ω` is equivariant,
-  and so is the adjoint `M ⟶ 𝔻 K` of any equivariant pairing `K ⊗ᴸ M ⟶ ω`.
+  (`AlgebraicGeometry.Etale.verdierDualWeilDatum`; for the dualizing datum
+  `AlgebraicGeometry.Etale.verdierDualWeilDatumOfIsPullback`); for an automorphism `g` it is
+  `Lg^* 𝔻 K ≅ RHom(Lg^* K, Lg^* ω) ──RHom(φ⁻¹, φ_ω)──▶ 𝔻 K`. Evaluation `K ⊗ᴸ 𝔻 K ⟶ ω` is
+  equivariant, and so is the adjoint `M ⟶ 𝔻 K` of any equivariant pairing `K ⊗ᴸ M ⟶ ω`.
 
 ## Main definitions
 
@@ -41,7 +43,9 @@ Verdier dual, and proves that the structure maps are equivariant
 - `AlgebraicGeometry.Etale.upperShriekBaseChangeMap`: the exceptional base change.
 - `AlgebraicGeometry.Etale.upperShriekMateWeilDatum`,
   `AlgebraicGeometry.Etale.dualizingComplexWeilDatum`,
-  `AlgebraicGeometry.Etale.verdierDualWeilDatum` (`cor-coef-verdier-weil-equivariance`).
+  `AlgebraicGeometry.Etale.verdierDualWeilDatum`,
+  `AlgebraicGeometry.Etale.verdierDualWeilDatumOfIsPullback`
+  (`cor-coef-verdier-weil-equivariance`).
 
 ## Main statements
 
@@ -53,7 +57,10 @@ Verdier dual, and proves that the structure maps are equivariant
 
 ## Implementation notes
 
-The statements hold for any finite coefficient ring `Λ` on the small étale site; they only use
+The statements hold for any finite coefficient ring `Λ` on the small étale site (the dual Weil
+datum for any coefficient category, its monoidal structures being the generic ones: specialising
+them to `ModuleCat Λ` before building the datum makes the kernel compare two instance paths of
+the derived monoidal structure, which does not terminate in reasonable time); they only use
 the compact-support base change isomorphism, the adjunction `Rf_! ⊣ Rf^!`, the monoidality of
 `Lg^*` and the closed structure, and no integral lattice of the Weil structure. The biduality
 `K ⟶ 𝔻 𝔻 K` is the adjoint of the evaluation composed with the symmetry, so its equivariance
@@ -63,7 +70,7 @@ is not formalised.
 
 @[expose] public section
 
-universe u
+universe u' u
 
 open CategoryTheory Limits MonoidalCategory Opposite
 
@@ -179,53 +186,80 @@ noncomputable def dualizingComplexWeilDatum {g : X ⟶ X} (sq : IsPullback g a a
       dualizingComplex (ModuleCat.{u + 1} Λ) a :=
   upperShriekMateWeilDatum sq (leftDerivedUpperStarUnitIso _ h).hom
 
-variable (g : X ≅ X)
+end Duality
+
+section DualWeilDatum
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+  {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
+  {g : X ⟶ X} [(g)^*[A].PreservesFlat]
 
 attribute [local instance] leftDerivedUpperStarMonoidal
 
-variable {Λ} in
 /-- Blueprint `cor-coef-verdier-weil-equivariance`: the *dual Weil datum* on the Verdier dual
-`𝔻_X K = RHom(K, ω_X)` of a strict Weil datum `φ : Lg^* K ≅ K`,
+`𝔻_X K = RHom(K, ω_X)` of a strict Weil datum `φ : Lg^* K ≅ K` and a Weil datum
+`φ_ω : Lg^* ω_X ⟶ ω_X` on the dualizing complex (in the application, the dualizing Weil datum
+`AlgebraicGeometry.Etale.dualizingComplexWeilDatum`; see
+`AlgebraicGeometry.Etale.verdierDualWeilDatumOfIsPullback`): the tensor-hom adjoint of
 ```
-Lg^* 𝔻 K ≅ RHom(Lg^* K, Lg^* ω) ──RHom(Lg^* K, φ_ω)──▶ RHom(Lg^* K, ω) ──RHom(φ⁻¹, ω)──▶ 𝔻 K,
+K ⊗ᴸ Lg^* 𝔻 K ──φ⁻¹ ⊗ 1──▶ Lg^* K ⊗ᴸ Lg^* 𝔻 K ≅ Lg^*(K ⊗ᴸ 𝔻 K) ──Lg^* ev──▶ Lg^* ω ──φ_ω──▶ ω,
 ```
-the first map being the internal-hom comparison for the monoidal autoequivalence `Lg^*` and
-`φ_ω` the dualizing Weil datum (`AlgebraicGeometry.Etale.dualizingComplexWeilDatum`). Only `φ`
-and its inverse enter; no integral lattice is used. -/
-noncomputable def verdierDualWeilDatum (sq : IsPullback g.hom a a h)
-    {K : DerivedCategoryModule Λ X} (φ : (L((g.hom)^*[ModuleCat.{u + 1} Λ])).obj K ≅ K) :
-    (L((g.hom)^*[ModuleCat.{u + 1} Λ])).obj
-        ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K)) ⟶
-      (verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K) :=
-  MonoidalClosed.dualWeilDatum L((g.hom)^*[ModuleCat.{u + 1} Λ]) φ (dualizingComplexWeilDatum sq)
+which for an automorphism `g` is `Lg^* 𝔻 K ≅ RHom(Lg^* K, Lg^* ω) ⟶ RHom(Lg^* K, ω) ⟶ 𝔻 K`
+(`CategoryTheory.MonoidalClosed.dualWeilDatum`). Only `φ` and its inverse enter; no integral
+lattice is used.
+
+The statements are made for a general coefficient category `A`, in which the monoidal structure
+of `D(X_ét)` and of `Lg^*` are those of the generic constructions. -/
+noncomputable def verdierDualWeilDatum {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (φ : (L((g)^*[A])).obj K ≅ K)
+    (φω : (L((g)^*[A])).obj (dualizingComplex A a) ⟶ dualizingComplex A a) :
+    (L((g)^*[A])).obj ((verdierDual A a).obj (op K)) ⟶ (verdierDual A a).obj (op K) :=
+  MonoidalClosed.dualWeilDatum L((g)^*[A]) φ φω
 
 /-- Blueprint `cor-coef-verdier-weil-equivariance`: **evaluation is Weil equivariant**. For a
-strict Weil datum `φ` on `K`, the evaluation `K ⊗ᴸ 𝔻_X K ⟶ ω_X` is equivariant for the tensor
-product of `φ` with the dual datum (`AlgebraicGeometry.Etale.verdierDualWeilDatum`) and the
-dualizing datum. -/
-theorem isWeilEquivariant_verdierDual_evaluation (sq : IsPullback g.hom a a h)
-    {K : DerivedCategoryModule Λ X} (φ : (L((g.hom)^*[ModuleCat.{u + 1} Λ])).obj K ≅ K) :
-    IsWeilEquivariant L((g.hom)^*[ModuleCat.{u + 1} Λ])
-      (MonoidalClosed.tensorWeilDatum _ φ.hom (verdierDualWeilDatum g sq φ))
-      (dualizingComplexWeilDatum sq)
-      ((ihom.ev K).app (dualizingComplex (ModuleCat.{u + 1} Λ) a)) :=
-  MonoidalClosed.isWeilEquivariant_ev _ φ _
+strict Weil datum `φ` on `K` and a Weil datum `φ_ω` on `ω_X`, the evaluation
+`K ⊗ᴸ 𝔻_X K ⟶ ω_X` is equivariant for the tensor product of `φ` with the dual datum
+(`AlgebraicGeometry.Etale.verdierDualWeilDatum`) and `φ_ω`. -/
+theorem isWeilEquivariant_verdierDual_evaluation
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (φ : (L((g)^*[A])).obj K ≅ K)
+    (φω : (L((g)^*[A])).obj (dualizingComplex A a) ⟶ dualizingComplex A a) :
+    IsWeilEquivariant L((g)^*[A])
+      (MonoidalClosed.tensorWeilDatum _ φ.hom (verdierDualWeilDatum A a φ φω)) φω
+      ((ihom.ev K).app (dualizingComplex A a)) :=
+  MonoidalClosed.isWeilEquivariant_ev _ φ φω
 
 /-- Blueprint `cor-coef-verdier-weil-equivariance`: **the transpose of an equivariant pairing is
-equivariant**. For a strict Weil datum `φ` on `K`, a Weil datum `ψ` on `M` and a pairing
-`b : K ⊗ᴸ M ⟶ ω_X` equivariant for `φ ⊗ ψ` and the dualizing datum, the tensor–hom transpose
-`M ⟶ 𝔻_X K` is a morphism of Weil objects to the dual datum. -/
-theorem isWeilEquivariant_verdierDual_curry (sq : IsPullback g.hom a a h)
-    {K M : DerivedCategoryModule Λ X} (φ : (L((g.hom)^*[ModuleCat.{u + 1} Λ])).obj K ≅ K)
-    (ψ : (L((g.hom)^*[ModuleCat.{u + 1} Λ])).obj M ⟶ M)
-    {b : K ⊗ M ⟶ dualizingComplex (ModuleCat.{u + 1} Λ) a}
-    (hb : IsWeilEquivariant L((g.hom)^*[ModuleCat.{u + 1} Λ])
-      (MonoidalClosed.tensorWeilDatum _ φ.hom ψ) (dualizingComplexWeilDatum sq) b) :
-    IsWeilEquivariant L((g.hom)^*[ModuleCat.{u + 1} Λ]) ψ (verdierDualWeilDatum g sq φ)
-      (MonoidalClosed.curry b) :=
-  MonoidalClosed.isWeilEquivariant_curry _ φ ψ _ hb
+equivariant**. For a strict Weil datum `φ` on `K`, a Weil datum `ψ` on `M`, a Weil datum `φ_ω` on
+`ω_X` and a pairing `b : K ⊗ᴸ M ⟶ ω_X` equivariant for `φ ⊗ ψ` and `φ_ω`, the tensor–hom
+transpose `M ⟶ 𝔻_X K` is a morphism of Weil objects to the dual datum. -/
+theorem isWeilEquivariant_verdierDual_curry
+    {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (φ : (L((g)^*[A])).obj K ≅ K)
+    (ψ : (L((g)^*[A])).obj M ⟶ M)
+    (φω : (L((g)^*[A])).obj (dualizingComplex A a) ⟶ dualizingComplex A a)
+    {b : K ⊗ M ⟶ dualizingComplex A a}
+    (hb : IsWeilEquivariant L((g)^*[A]) (MonoidalClosed.tensorWeilDatum _ φ.hom ψ) φω b) :
+    IsWeilEquivariant L((g)^*[A]) ψ (verdierDualWeilDatum A a φ φω) (MonoidalClosed.curry b) :=
+  MonoidalClosed.isWeilEquivariant_curry _ φ ψ φω hb
 
-end Duality
+end DualWeilDatum
+
+section Dualizing
+
+variable [Finite Λ] {X S : Scheme.{u}} {a : X ⟶ S} [HasCompactification a] [QuasiCompact a]
+  {h : S ⟶ S}
+
+variable {Λ} in
+/-- Blueprint `cor-coef-verdier-weil-equivariance`: the dual Weil datum on the Verdier dual
+`𝔻_X K` of a strict Weil datum `φ : Lg^* K ≅ K` for the dualizing Weil datum
+(`AlgebraicGeometry.Etale.dualizingComplexWeilDatum`) of a cartesian square
+`g ≫ a = a ≫ h`: `AlgebraicGeometry.Etale.verdierDualWeilDatum` at `φ_ω` the dualizing datum. -/
+noncomputable def verdierDualWeilDatumOfIsPullback {g : X ⟶ X} (sq : IsPullback g a a h)
+    {K : DerivedCategoryModule Λ X} (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ≅ K) :=
+  verdierDualWeilDatum (ModuleCat.{u + 1} Λ) a φ (dualizingComplexWeilDatum sq)
+
+end Dualizing
 
 end Etale
 

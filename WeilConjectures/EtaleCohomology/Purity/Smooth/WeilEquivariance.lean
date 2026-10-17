@@ -100,6 +100,7 @@ section Purity
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
   {d : ℕ} (f : X ⟶ Y) [HasCompactification f]
+  [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
   (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅ (twistShift Λ X d).obj (constantComplex Λ X))
   (Φ : L((f)^*[ModuleCat.{u + 1} Λ]) ⋙
       (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
@@ -199,7 +200,7 @@ noncomputable def smoothCoefficientTrace (K : DerivedCategoryModule Λ Y)
 
 variable [QuasiCompact f]
 
-variable {Λ} in
+variable {Λ f} in
 /-- Blueprint `def-pur-compact-support-transport`: Compact-support transport of a Weil datum.
 
 For a cartesian square `g_X ≫ f = f ≫ g_Y` and a Weil datum `φ_M : Lg_X^* M ⟶ M`, the datum
@@ -296,6 +297,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {k₀ :
   [Finite k₀] {X₀ Y₀ : Scheme.{u}} {aX : X₀ ⟶ Spec (.of k₀)} {aY : Y₀ ⟶ Spec (.of k₀)}
   {f₀ : X₀ ⟶ Y₀} {hf₀ : f₀ ≫ aY = aX} (D : PurityFrobeniusDatum Λ f₀ hf₀) {d : ℕ}
   [HasCompactification (Hom.geometricFiberMap f₀ hf₀)]
+  [HasInvertibleExponent Λ aX.geometricFiber] [HasInvertibleExponent Λ aY.geometricFiber]
   (θ : dualizingComplex (ModuleCat.{u + 1} Λ) (Hom.geometricFiberMap f₀ hf₀) ≅
     (twistShift Λ aX.geometricFiber d).obj (constantComplex Λ aX.geometricFiber))
   (Φ : L((Hom.geometricFiberMap f₀ hf₀)^*[ModuleCat.{u + 1} Λ]) ⋙
@@ -369,6 +371,7 @@ section Compatibilities
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
   {d : ℕ} (f : X ⟶ Y) [HasCompactification f]
+  [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
   (θ : dualizingComplex (ModuleCat.{u + 1} Λ) f ≅ (twistShift Λ X d).obj (constantComplex Λ X))
   (Φ : L((f)^*[ModuleCat.{u + 1} Λ]) ⋙
       (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
