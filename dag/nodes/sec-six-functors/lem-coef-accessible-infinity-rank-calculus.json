@@ -309,5 +309,23 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-d6c314d36 (reviewer sub-agent of L); spot-checked: I read in full the item, all 11 cited statements (each existing, unmerged and reviewed), the unit and chapter records, both users and the HTT places. HTT is not archived, so I checked 5.4.2.9, 5.4.2.8, 5.3.1.18 and the factorization in 5.4.2.4 from my knowledge of the text. The statement matches HTT 5.4.2.9 and its proof, and is neither weakened nor strengthened; 'beta uncountable' adds nothing because alpha<beta with alpha infinite already forces it. Step 1: the enlargement node with lambda=alpha, kappa=beta has exactly our hypotheses. Step 2: D=Fun(C,S_V)^op has all U-small colimits (objectwise limits plus opposite clause 4). The opposite Yoneda map j is fully faithful, preserves existing colimits and reflects them by the mapping-space chain. Step 3: the cofinality node's cocomplete-target hypothesis is checked in D; preservation and then reflection give G=Fu->x. Step 4: all hypotheses of the subset node hold; each B is nonempty because the empty subset needs an upper bound. Step 5: the nerve checks are elementary (cone point at an upper bound; at most max(aleph0,|B|)<beta strict chains; the containment clause gives N(A) as the union of the N(B)). Step 6: stage colimits exist by alpha-filtered colimits. Step 7: every hypothesis of the assembly node holds in D. Step 8: the full subcategory contains the whole cocone; descend by the quasi-inverse k, then transfer colimit-ness by the componentwise equivalence and Yoneda naturality, then reflect. Relative-cone clause (1) would be a slightly cleaner citation, but no change is needed. Step 9: the compact-stage factorization with gamma=beta gives sv~1. Step 10: ri=sdev~sv~1. I found no cycle, no duplicate (searched the DAG and the blueprint; same_as [] confirmed) and no new nodes. The ancestor and via chain are correct and no SGA source is used. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus as a generic coherent-diagram calculus. Outside this delivery, the cofinality node's source misnumbers HTT 5.3.1.18 as 5.3.1.16; that is for the node's owner. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AccessibleInfinityRankCalculus",
+  "declaration": "SSet.Presentability.accessible_infinity_rank_calculus",
+  "file": "lean/Sheaf/CategoryTheory/AccessibleInfinityRankCalculus.lean",
+  "statement": "theorem accessible_infinity_rank_calculus (α β : Cardinal.{u}) (hα : α.IsRegular) (hβ : β.IsRegular) (hlt : α < β) (huncountable : Cardinal.aleph0 < β) (hsharp : ∀ (a b : Cardinal.{u}), a < β → b < α → a ^ b < β) (C : SSet.{max (u + 1) v}) [SSet.Quasicategory C] (hC : IsKappaAccessible C α) : IsKappaAccessible C β ∧ ∀ (x : C _⦋0⦌), IsKappaCompact C β x → ∃ (I : SSet.{max (u + 1) v}) (hI : SSet.Quasicategory I), IsKappaSmall β I ∧ @IsKappaFiltered α I hI ∧ ∃ (F : I ⟶ C), (∀ (j : I _⦋0⦌), IsKappaCompact C α (F.app (op ⦋0⦌) j)) ∧ ∃ (t : (SSet.Enhanced.coconeCategory F) _⦋0⦌), SSet.Enhanced.IsColimiting F t ∧ ∃ (i r : C _⦋1⦌) (h : C _⦋2⦌), C.δ 1 i = x ∧ C.δ 0 i = t.1.1 ∧ C.δ 1 r = t.1.1 ∧ C.δ 0 r = x ∧ C.δ 2 h = i ∧ C.δ 0 h = r ∧ C.δ 1 h = C.σ 0 x",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3d73c596",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Read the item node, the def-coef-presentable-infinity-category node and full module (IsKappaSmall/Filtered/Compact/Accessible), coconeCategory/IsColimiting/IsEquivalenceEdge, the report (real Worker report and Second reading by Q52) and the HTT 5.4.2.9/5.4.2.4 places. Every clause matches: regular α<β in Cardinal.{u}, aleph0<β, sharp a^b<β quantified exactly, hC : IsKappaAccessible C α, conclusion IsKappaAccessible C β, and for each β-compact x a β-small α-filtered quasicategory index with an actual diagram of α-compact vertices, a colimiting cocone in C with apex t.1.1, and edges i, r with a triangle δ2=i, δ0=r, δ1=σ0 x (same orientation as IsEquivalenceEdge, so r∘i≃id_x). Universes use the dependency's max(u+1) v convention with no silent restriction. No definitions; one theorem whose proof is sorry; source and blueprint docstrings present; ten-step proof docstring. lean.statement verbatim; node differs from the side clone only by the lean record; imports match the recorded proof-dep modules. nt_compile --json: exit 0, no errors or warnings. No findings."
  }
 }

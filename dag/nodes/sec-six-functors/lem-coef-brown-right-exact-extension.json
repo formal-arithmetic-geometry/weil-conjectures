@@ -30,7 +30,8 @@
   "place": "Dual of Proposition 7.5.6 (last assertion), printed pp. 372-373; right exactness is dual to Definition 7.5.2. No Stacks tag states this infinity-categorical result. Read online on 2026-10-17; not archived in literature/."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-localization-interface"
  ],
  "proof": [
   {
@@ -332,5 +333,24 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-83d1aa624 (reviewer sub-agent of L); spot-checked: Read in full the item, its five steps, the full statements of all nine cited nodes, and the unit sk-prop-sf-biduality-general. Source: Cisinski's book is not in literature/ (the WANTED line stands) and network is blocked, so I read a local text copy at /tmp/catlr-nd/c.txt at Def 7.5.2, Ex 7.5.4, Prop 7.5.6 with its full proof (pp. 370-373), Prop 7.3.28 (p. 357) and Def 7.1.2. Statement: the item is exactly the dual of the last assertion of 7.5.6, read as preservation of finite coherent colimits via 7.3.28. It is unchanged, with nothing weakened. Step 1: every hypothesis of brown-fibrant-localization-pullbacks holds on A^op; C-then-W factorization is the dual of W-then-F. Step 2: uses only two clauses of brown-left-fractions. The isofibration node gives actual coherent span equivalences. Each naturality square is two 2-simplices, so mapping-composition gives [h_x]=[q(f)]. The fiber over the fixed vertices is UxU, so a single Kan edge gives the transformation, and the componentwise criterion makes it an equivalence. The step correctly avoids brown-finite-direct-rectification, which cites this item and would make a cycle. Step 3: endpoint isofibration plus the invariance clause of terminal-pullback-criterion, and contractibility of initial objects, carry the argument; F's preservation is never assumed. Step 4: the pushout over 0 is the coproduct, because a homotopy pullback over a contractible base is the product; this is routine in the cited path-space model and I accept it inside the step. Step 5: limits-products-pullbacks applied to F^op; it covers kappa=aleph_0 and the empty product. No new nodes; no duplicate or generalization found in the DAG; no cycle. Accepted tool_use for the merge to record: lem-cbc-enhanced-functor-cone-calculus, which is off the unit's route but is the generic cone calculus already accepted on sibling nodes of this unit. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BrownRightExactExtension",
+  "declaration": "SSet.Enhanced.brown_right_exact_extension",
+  "file": "lean/Sheaf/CategoryTheory/BrownRightExactExtension.lean",
+  "statement": "theorem brown_right_exact_extension (A : Type u) [Category.{v} A] (zero : A) (hzero : CategoryTheory.Limits.IsInitial zero) (C W : MorphismProperty A) (hCiso : MorphismProperty.isomorphisms A ≤ C) (hWiso : MorphismProperty.isomorphisms A ≤ W) [C.IsStableUnderComposition] [W.HasTwoOutOfThreeProperty] [W.IsStableUnderRetracts] (hcof : ∀ X : A, C (hzero.to X)) [MorphismProperty.HasFactorization C W] (hpush : ∀ (X Y Z : A) (i : X ⟶ Y) (f : X ⟶ Z), C i → HasPushout i f) [C.IsStableUnderCobaseChange] [(C ⊓ W).IsStableUnderCobaseChange] (L : SSet.{max u v t}) (q : largeNerve.{u, v, t} A ⟶ L) (hq : IsLocalization W q) (hL : ∀ (K : SSet.{max u v t}) (_ : K.Finite) (F : K ⟶ L), ∃ c : (coconeCategory F) _⦋0⦌, IsColimiting F c) (E : SSet.{max u v t}) [Quasicategory E] (hE : ∀ (K : SSet.{max u v t}) (_ : K.Finite) (F : K ⟶ E), ∃ c : (coconeCategory F) _⦋0⦌, IsColimiting F c) (T : largeNerve.{u, v, t} A ⟶ E) (hTW : Inverts W T) (hTzero : IsInitial E (object T zero)) (hTpush : ∀ {X Y Z P : A} (i : X ⟶ Y) (f : X ⟶ Z) (a : Y ⟶ P) (b : Z ⟶ P) (hP : IsPushout i f a b), C i → IsColimitEdge (diagram T (span i f)) (object T P) (transformation T hP.cocone.ι)) (Tbar : L ⟶ E) (hTbar : AreNaturallyEquivalent (q ≫ Tbar) T) : ∀ (K : SSet.{max u v t}) (_ : K.Finite) (F : K ⟶ L) (c : (coconeCategory F) _⦋0⦌), IsColimiting F c → ∃ d : (coconeCategory (F ≫ Tbar)) _⦋0⦌, d.1.1 = Tbar.app _ c.1.1 ∧ d.1.2 = ((ihom Δ[1]).map ((ihom K).map Tbar)).app _ c.1.2 ∧ IsColimiting (F ≫ Tbar) d",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the published coherent-localization interface and the canonical ordinary-diagram/cocone helpers in its module. The finite-Reedy theorem itself is not used: these are construction definitions, not a dependence on that downstream theorem. The extension is universally quantified with its coherent comparison, and preservation fixes both image-cocone coordinates."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ffde85c0",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: Brown hypotheses via Mathlib MorphismProperty classes (cobase-change orientation checked), IsLocalization on the entire functor category, finite coherent colimits in L and E, hTW/hTzero (SSet.Enhanced.IsInitial confirmed by #check), hTpush as IsColimitEdge of the actual coherent span and cocone (satisfiable), any Tbar with a coherent comparison, conclusion pinning both image-cocone coordinates. Universes u v t explicit; edge cases (empty shape, all pushout legs) covered. Docstrings carry source, blueprint tag and five proof steps; one sorry theorem, no defs; statement verbatim; lines <=95; proof-dep modules imported non-publicly; added landed stmt_dep allowed. nt_compile local overlay rc 0, clean; error control confirms real elaboration. Observation, not a defect: diagram/transformation/IsColimitEdge are recorded under lem-coef-finite-reedy-localization, which cannot be a stmt_dep without a DAG cycle (path verified); same convention as the landed dual brown-fibrant-localization-pullbacks."
  }
 }
