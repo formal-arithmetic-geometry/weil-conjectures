@@ -44,7 +44,7 @@ private theorem square_paste {C : Type*} [Category C]
   rw [← Category.assoc, he, Category.assoc, h₂]
 
 attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
-  derivedPullback DerivedCategory.Qh
+  DerivedCategory.Qh
 
 set_option maxHeartbeats 800000 in
 -- Comparing the composite pushforward objects requires extra elaboration.

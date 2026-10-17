@@ -25,7 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 attribute [local irreducible] CategoryTheory.Functor.rightDerivedFunctorUnit
   CategoryTheory.Functor.rightDerivedFunctor CategoryTheory.Adjunction.comp
-  derivedPullback Scheme.Modules.tensorPullback DerivedCategory.Qh
+  Scheme.Modules.tensorPullback DerivedCategory.Qh
 private theorem counit_of_normalization
     {C D H J : Type*} [Category* C] [Category* D] [Category* H] [Category* J]
     {T : C ⥤ D} {U : D ⥤ C} {L : H ⥤ J} {R : J ⥤ H}
