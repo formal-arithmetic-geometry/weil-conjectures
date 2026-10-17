@@ -1,0 +1,81 @@
+{
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-scalar-six-ctf",
+  "date": "2026-10-17",
+  "group": "Q123"
+ },
+ "status": "unsplit",
+ "id": "lem-sfb-local-model-cohomology-descent",
+ "kind": "statement",
+ "title": "Cohomology bounds descend from finite local models",
+ "statement": "Let $S$ be a quasi-compact scheme [def-pc-scheme, def-weil-pbc-quasi-compact-scheme]. Let $\\Gamma$ be a commutative condensed ring [sk-def-sfb-condensed-ring], put $R=\\Gamma(*)$ and $\\Gamma_T=p_T^*\\Gamma$ [sk-def-sfb-pulled-back-coefficients] for schemes $T$. Let $Q\\in D(\\operatorname{Mod}(\\Gamma_S))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Suppose $\\{V_i\\to S\\}_{i=1}^n$ is a finite covering family of $S_{\\mathrm{proét}}$ [sk-def-pe-site]. Fix integers $r\\le s$ and scalar cochain complexes $Q_i^\\bullet$ with $Q_i^q=0$ for $q\\notin[r,s]$. Assume $Q|_{V_i}\\simeq\\Gamma_{V_i}\\otimes_R Q_i^\\bullet$ in the derived category, where scalar modules mean constant sheaves as in [det-def-sfb-constructible-local-model]. Assume each functor $M\\mapsto\\Gamma_{V_i}\\otimes_R M$ on $R$-modules is exact and every $H^q(Q_i^\\bullet)$ is finitely presented over $R$ [def-sc-finitely-presented-module]. Then $H^q(Q)=0$ for $q\\notin[r,s]$, and\n$$H^q(Q)|_{V_i}\\simeq\\Gamma_{V_i}\\otimes_R H^q(Q_i^\\bullet).$$\nIn particular each $H^q(Q)$ has a finite constant local model [det-def-sfb-constructible-local-model] and is constructible on the single stratum $S$, so $Q\\in\\Dbc(S,\\Gamma)$ [det-def-sfb-constructible-tor-amplitude].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+  "place": "(2) Local models, global bounds: exact scalar extension, finite scalar cohomology, and descent by the sheaf axiom"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "sk-def-pe-site",
+  "det-def-sfb-constructible-local-model",
+  "def-sc-finitely-presented-module",
+  "det-def-sfb-constructible-tor-amplitude"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded flat complex on a finite cover has global Tor amplitude bound",
+   "results": "DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_iff; generic derived-category boundedness only",
+   "date": "2026-10-17",
+   "verdict": "no match: no constructible sheaf descent theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsGE, DerivedCategory.IsLE",
+   "results": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-17",
+   "verdict": "no match: generic t-structure API does not state this sheaf theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedCategory.isGE_Q_obj_iff|CochainComplex.isZero_of_isGE (subdirectory of Mathlib/: CategoryTheory)",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "local cohomology of a bounded complex on a finite affine cover vanishes outside the common term interval and preserves finite Tor amplitude",
+   "results": "localCohomology; DerivedCategory.isGE_Q_obj_iff; CochainComplex.isZero_of_isGE; no constructible sheaf result",
+   "date": "2026-10-17",
+   "verdict": "no match: only generic local cohomology and derived boundedness results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a complex of sheaves has finitely presented constant local models and global boundedness from a finite cover and exact scalar extension",
+   "results": "SheafOfModules.IsFinitePresentation; SheafOfModules.isFinitePresentation; SheafOfModules.Presentation.IsFinite; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "date": "2026-10-17",
+   "verdict": "no match: the listed general APIs do not assert this local pro-etale sheaf statement"
+  }
+ ],
+ "mathlib_match": null,
+ "blueprint": {
+  "from": {
+   "node": "det-prop-scalar-six-ctf",
+   "place": "(2) Local models: cohomology sheaves are locally H^q(Q_0) tensor the coefficient sheaf, hence constructible; finite local intervals give the global bound",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

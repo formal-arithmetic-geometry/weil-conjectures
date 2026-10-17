@@ -2,7 +2,7 @@
  "id": "lem-trf-dnc-generic-local-system-devissage",
  "kind": "statement",
  "title": "Finite-cover exact sequence for a local system on the complement of a divisor",
- "statement": "Fix the finite coefficient ring $A=A_{E,n}$ and algebraically closed field $k$ of [def-trf-coefficient-conventions], and use sheaves of $A$-modules on small etale sites [def-weil-pbc-etale-site]. Let $X$ be a normal separated finite-type $k$-scheme [def-weil-finite-type-morphism], where normal means that every local ring is an integrally closed domain. Let $f\\in\\Gamma(X,\\mathcal O_X)$ and let $i:Z=V(f)\\hookrightarrow X$ be an effective principal Cartier divisor, meaning that $f$ is a non-zero-divisor in every local ring [def-weil-closed-immersion]. Put $U=X\\setminus Z$ and let $j:U\\hookrightarrow X$ be the open immersion [def-weil-open-immersion]. For a generic point $\\xi$ of a component of $Z$, every constructible etale sheaf $F$ [def-weil-pbc-constructible-complexes] on $X$ with $i^*F=0$ becomes $j_!G$ for a finite locally constant sheaf $G$ on $U$ after replacing $X$ by an open neighbourhood of $\\xi$ (and restricting $Z,U,i,j,F$).\n\nFor any finite locally constant $G$ on $U$, there is a finite etale surjection $p:U'\\to U$ trivializing $G$ [def-weil-finite-integral-morphism, def-weil-etale-morphism]. Let $q:X'\\to X$ be the normalization extending $p$: on each component of $X$ it is the disjoint union of the relative spectra of the integral closures of $\\mathcal O_X$ in the function fields of the components of $U'$. Then $q$ is finite, $X'$ is normal, $Z'=q^{-1}Z$ is an effective principal Cartier divisor, and $U'=X'\\setminus Z'$. With $j':U'\\hookrightarrow X'$ and $G'=\\operatorname{coker}(G\\to p_*p^*G)$, the sheaf $G'$ is finite locally constant and there is a short exact sequence\n$$0\\longrightarrow j_!G\\longrightarrow q_*j'_!p^*G\\longrightarrow j_!G'\\longrightarrow0.$$\nMoreover $Rq_*j'_!p^*G=q_*j'_!p^*G$ and $q^*j_!G=j'_!p^*G$. Geometric stalks of $q_*$ are finite products of the stalks over the given geometric point; $q_*$ is exact on etale $A$-module sheaves. Each point of $Z'$ over a generic point of a component of $Z$ is generic in a component of $Z'$.",
+ "statement": "Fix the finite coefficient ring $A=A_{E,n}$ and algebraically closed field $k$ of [def-trf-coefficient-conventions], and use sheaves of $A$-modules on small etale sites [def-weil-pbc-etale-site]. Let $X$ be a normal separated finite-type $k$-scheme [def-weil-finite-type-morphism], where normal means that every local ring is an integrally closed domain. Let $f\\in\\Gamma(X,\\mathcal O_X)$ and let $i:Z=V(f)\\hookrightarrow X$ be an effective principal Cartier divisor, meaning that $f$ is a non-zero-divisor in every local ring [def-weil-closed-immersion]. Put $U=X\\setminus Z$ and let $j:U\\hookrightarrow X$ be the open immersion [def-weil-open-immersion]. For a generic point $\\xi$ of a component of $Z$, every constructible etale sheaf $F$ [def-weil-pbc-constructible-complexes] on $X$ with $i^*F=0$ becomes $j_!G$ for a finite locally constant sheaf $G$ on $U$ after replacing $X$ by an open neighbourhood of $\\xi$ (and restricting $Z,U,i,j,F$).\n\nFor any finite locally constant $G$ on $U$, there is a finite etale surjection $p:U'\\to U$ trivializing $G$ [def-weil-finite-integral-morphism, def-weil-etale-morphism]. Let $q:X'\\to X$ be the normalization extending $p$: on each component of $X$ it is the disjoint union of the relative spectra of the integral closures of $\\mathcal O_X$ in the function fields of the components of $U'$. Then $q$ is finite, $X'$ is normal, $Z'=q^{-1}Z$ is an effective principal Cartier divisor, and $U'=X'\\setminus Z'$. With $j':U'\\hookrightarrow X'$ and $G'=\\operatorname{coker}(G\\to p_*p^*G)$, the sheaf $G'$ is finite locally constant and there is a short exact sequence\n$$0\\longrightarrow j_!G\\longrightarrow q_*j'_!p^*G\\longrightarrow j_!G'\\longrightarrow0.$$\nMoreover $Rq_*j'_!p^*G=q_*j'_!p^*G$ and $q^*j_!G=j'_!p^*G$. Geometric stalks of $q_*$ are finite products of the stalks over the given geometric point; $q_*$ is exact on etale $A$-module sheaves. Each point of $Z'$ over a generic point of a component of $Z$ is generic in a component of $Z'$.\n\nHere normalization is [def-fin-normalization-extension], extension by zero is [def-weil-pbc-extension-by-zero], ordinary direct image is [def-weil-pbc-direct-image], and inverse image is [def-weil-pbc-inverse-image]; derived functors are taken in the derived categories of [def-weil-pbc-derived-categories].",
  "source": {
   "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
   "place": "Claim 3.2.3 proof, second paragraph: finite coefficient sheaf, finite etale trivialization, normalization, and induction on k"
@@ -15,11 +15,179 @@
   "def-weil-pbc-etale-site",
   "def-weil-open-immersion",
   "def-weil-finite-integral-morphism",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "def-fin-normalization-extension",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record the local geometry used below. Finite type over the field makes $X$ Noetherian by [lem-weil-pbc-finite-type-over-noetherian] (a field is Noetherian since its only ideals are $0$ and itself). On any affine open $T$, [lem-sbc-normal-sections-finite-product] writes $\\Gamma(T,\\mathcal O_X)$ as a finite product of integrally closed domains. The spectra of the factors are disjoint open-and-closed integral normal pieces: a prime of a finite product contains all but one factor idempotent. Thus the irreducible components of $X$ are locally open and disjoint, hence globally open and closed; quasi-compactness makes their number finite. We can work componentwise, and near the chosen $\\xi$ we can work on an integral affine neighbourhood. Empty $X$ and empty $Z$ have no generic point to check.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sbc-normal-sections-finite-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Claim 3.2.3, first sentence; local geometry expanded using Stacks Tags 01T6 and 0357"
+   }
+  },
+  {
+   "text": "On the integral component through $\\xi$, the non-zero-divisor $f$ is nonzero and vanishes at $\\xi$. Therefore $\\xi$ is not the generic point $\\eta$ of $X$, and its local dimension is positive by [lem-sc-scheme-stalk-dimension-generalization-chains]. Apply [lem-sbc-locally-principal-support-dimension-one] to the principal ideal $(f)$ at $\\xi$. It produces a generalization $\\xi'$ in $V(f)$ with local dimension one. Since $\\xi$ is generic in a component of $V(f)$, any such generalization in $V(f)$ equals $\\xi$. Hence $\\dim\\mathcal O_{X,\\xi}=1$. The chain formula now says that the only strict generalization of $\\xi$ is $\\eta$.",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "lem-sbc-locally-principal-support-dimension-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Claim 3.2.3, shrinking about the generic point; Stacks Tag 0BJG"
+   }
+  },
+  {
+   "text": "Apply [prop-constructible-generic-constancy] to the constructible module sheaf $F$ to obtain a dense open $V\\subseteq X$ where $F$ is finite locally constant. Use the module category throughout; its constructibility is precisely the finite lisse stratification in [def-weil-pbc-constructible-complexes]. Put $B=X\\setminus V$. By [lem-sc-noetherian-closed-subset-finite-components], the closed subset $B\\cap U$ of the Noetherian open $U$ has finitely many irreducible components with generic points $b_1,\\ldots,b_s$. None is $\\eta$, because $V$ is dense. Its closure in $X$ is the union of the $\\overline{\\{b_a\\}}$. If this union contained $\\xi$, some $b_a\\in U$ would strictly generalize $\\xi$ and differ from $\\eta$, contrary to Step 2. Remove that union, retaining an open neighbourhood of $\\xi$. On its complement of $Z$, $G=j^*F$ is now finite locally constant. The localization triangle [lem-cbc-open-closed-recollement] has third term $i_*i^*F=0$, so its counit identifies $F$ with $j_!G$. All these restrictions retain $\\xi$.",
+   "uses": [
+    "prop-constructible-generic-constancy",
+    "def-weil-pbc-constructible-complexes",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-cbc-open-closed-recollement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Claim 3.2.3, general case: replacing X by an open subset containing the generic point"
+   }
+  },
+  {
+   "text": "Now take any finite locally constant $G$ on $U$, independently of the preceding shrinking. By [fin2-lem-lisse-trivialized-finite-etale], choose a finite etale surjection $p:U'\\to U$ for which $p^*G$ is constant with finite module fibre on each connected component. This is the componentwise meaning of trivialization when $U$ is disconnected. Thus $p^*G$ is finite locally constant, and [lem-weil-pbc-etale-finite-pushforward-locally-constant] makes $H=p_*p^*G$ finite locally constant. Since the finite ring $A$ is Noetherian (every ascending chain of its finitely many ideals stabilizes), [lem-weil-pbc-locally-constant-derived-serre] implies that $G'=\\operatorname{coker}(G\\to H)$ is locally constant of finite type. A module generated by $r$ elements over finite $A$ is a quotient of the finite set $A^r$, so $G'$ is finite locally constant in the finite-stalk sense as well.",
+   "uses": [
+    "fin2-lem-lisse-trivialized-finite-etale",
+    "lem-weil-pbc-etale-finite-pushforward-locally-constant",
+    "lem-weil-pbc-locally-constant-derived-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Claim 3.2.3, finite etale covering and local-system cokernel; Stacks Tags 095B and 093U"
+   }
+  },
+  {
+   "text": "The natural map $G\\to H$ is the unit for $p^*\\dashv p_*$. At a geometric point $\\bar u$, the restriction-of-germs formula [lem-weil-pbc-finite-stalk-formula-restriction] identifies $H_{\\bar u}$ with the product of $(p^*G)_{\\bar u'}$ over the finite geometric fibre. Under [lem-weil-pbc-inverse-image-stalk-germ], the component of the unit at each $\\bar u'$ sends a germ $a$ to that same germ $a$. The unit is therefore the diagonal $G_{\\bar u}\\to\\prod_{\\bar u'}G_{\\bar u}$, which is injective because $p$ is surjective and the fibre is nonempty. Exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact] gives zero stalks for its kernel, and [lemma-weil-pbc-geometric-stalk-conservative] makes that kernel zero. Thus $0\\to G\\to H\\to G'\\to0$ is short exact. These stalk maps are $A$-linear: germ restriction and pullback commute with multiplication by every scalar, so the abelian-group stalk statements apply to the same module sheaves.",
+   "uses": [
+    "lem-weil-pbc-finite-stalk-formula-restriction",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Claim 3.2.3, natural embedding; Stacks Tags 03QP and 03Q1 with the unit map identified"
+   }
+  },
+  {
+   "text": "Construct $X'$ componentwise as stated. Each component of normal $X$ is integral by Step 1, and its open $U$ is nonempty and normal because a non-zero-divisor cannot vanish at its generic point. The source $U'$ is Noetherian (finite over the finite-type $U$); [lem-fin-etale-normal-components] splits its restriction over each such component into finitely many normal integral open-and-closed pieces $P$. Each $P\\to U$ is connected finite etale, with a finite extension $k(P)/k(X)$. Use [def-fin-normalization-extension] to form the normalization in this extension. It is finite by [lem-fin-normalization-extension-finite], and [lem-fin-normalization-extends-cover] identifies its restriction to $U$ with $P$. Taking their finite disjoint union gives precisely the stated $q$, which is finite and satisfies $q^{-1}U=U'$. On an affine chart the integral closure of its coordinate domain in $k(P)$ has integrally closed domain localizations by [lem-sbc-integral-closure-finite-normal-product], applied to the singleton product consisting of the field $k(P)$. Thus all local rings of $X'$ are integrally closed domains.",
+   "uses": [
+    "lem-fin-etale-normal-components",
+    "def-fin-normalization-extension",
+    "lem-fin-normalization-extension-finite",
+    "lem-fin-normalization-extends-cover",
+    "lem-sbc-integral-closure-finite-normal-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Claim 3.2.3, normalization extending the finite etale cover; Stacks Tags 035H, 035L and 033C"
+   }
+  },
+  {
+   "text": "On such an affine normalization chart $B\\subseteq k(P)$ over $R\\subseteq k(X)$, the image of $f$ is nonzero, because $R\\to k(P)$ is injective and $f$ is nonzero on the component. Since $B$ is a domain, multiplication by $f$ is injective, also after localization. Consequently $Z'=q^{-1}Z=V(q^*f)$ is an effective principal Cartier divisor. Its complement is $q^{-1}U=U'$ from Step 6, so the square with $j,j'$ and $q,p$ is cartesian.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Claim 3.2.3, pullback of the principal divisor under normalization"
+   }
+  },
+  {
+   "text": "Apply the exact functor $j_!$ of [lem-weil-pbc-extension-by-zero-exact] to the short exact sequence of Step 5. The finite-open comparison [lemma-weil-pbc-finite-pushforward-extension-zero] for the cartesian square of Step 7 identifies $j_!H=j_!p_*p^*G$ with $q_*j'_!p^*G$. Its maps commute with each scalar action by naturality, so this abelian-sheaf comparison is an isomorphism of $A$-module sheaves. Substituting it yields the stated short exact sequence with first arrow the extension of the unit. The module-sheaf base-change isomorphism [lem-weil-pbc-etale-shriek-base-change-modules], applied to the same square, gives $q^*j_!G\\cong j'_!p^*G$.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lemma-weil-pbc-finite-pushforward-extension-zero",
+    "lem-weil-pbc-etale-shriek-base-change-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Claim 3.2.3, the cokernel after extension by zero; Stacks Tags 03DJ, 0GJ1 and 03S6"
+   }
+  },
+  {
+   "text": "For any module sheaf $L$ on $X'$, [lem-weil-pbc-finite-stalk-formula-restriction] gives $(q_*L)_{\\bar x}=\\prod_{q\\bar x'=\\bar x}L_{\\bar x'}$, with finite index set. As in Step 5 these restriction maps are $A$-linear. Finite products of short exact sequences of modules are exact: kernels are componentwise and any tuple in a product of quotients has a tuple of lifts. Apply this to stalks of a short exact sequence and use [prop-weil-pbc-geometric-stalks-exact] and [lemma-weil-pbc-geometric-stalk-conservative] to conclude that $q_*$ is exact on $A$-module sheaves. Its positive right derived functors vanish by the exact-direct-image assertion [lemma-weil-pbc-finite-direct-image-exact]; equivalently, applying this exact functor to an injective resolution gives a resolution of its ordinary image. Hence $Rq_*j'_!p^*G=q_*j'_!p^*G$. No flatness or freeness of the finite module fibres is used.",
+   "uses": [
+    "lem-weil-pbc-finite-stalk-formula-restriction",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lemma-weil-pbc-finite-direct-image-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Claim 3.2.3, finite direct image; Stacks Tag 03QP (including all finite module coefficients)"
+   }
+  },
+  {
+   "text": "Finally let $x'\\in Z'$ map to a generic point $\\xi$ of a component of $Z$. On an affine chart write $R\\to B$ for the finite integral map and $\\mathfrak q$ for $x'$, contracting to the prime $\\mathfrak p$ of $\\xi$, which is minimal over $(f)$. If a prime $\\mathfrak r\\subseteq\\mathfrak q$ of $B$ contains $f$, its contraction contains $f$ and lies in $\\mathfrak p$, hence equals $\\mathfrak p$ by minimality. Incomparability [pqf-lem-incomparability] then gives $\\mathfrak r=\\mathfrak q$. Thus $\\mathfrak q$ is minimal among primes containing $f$ in $B$, exactly the condition for $x'$ to be generic in a component of $V(f)=Z'$. This argument permits ramification and nonreduced $Z$ and $Z'$.",
+   "uses": [
+    "pqf-lem-incomparability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Claim 3.2.3, generic vanishing after finite normalization; Stacks Tag 00GT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-fin-normalization-extension",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-constructible-complexes",
+  "fin2-lem-lisse-trivialized-finite-etale",
+  "lem-cbc-open-closed-recollement",
+  "lem-fin-etale-normal-components",
+  "lem-fin-normalization-extends-cover",
+  "lem-fin-normalization-extension-finite",
+  "lem-sbc-integral-closure-finite-normal-product",
+  "lem-sbc-locally-principal-support-dimension-one",
+  "lem-sbc-normal-sections-finite-product",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-weil-pbc-etale-finite-pushforward-locally-constant",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-finite-stalk-formula-restriction",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-locally-constant-derived-serre",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-pushforward-extension-zero",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "pqf-lem-incomparability",
+  "prop-constructible-generic-constancy",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Claim 3.2.3 proof, general-case paragraph; finite-cover devissage, expanded with the cited Stacks facts"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +223,31 @@
    "results": "8 hits: LightCondMod.LocallyConstant.adjunction, CompHausLike.LocallyConstant.adjunction_unit, CompHausLike.LocallyConstant.adjunction_counit, CompHausLike.LocallyConstant.adjunction, CompHausLike.LocallyConstant.incl_of_counitAppApp, CompHausLike.LocallyConstant.counit_app_val, CompHausLike.LocallyConstant.unit, CompHausLike.LocallyConstant.counit",
    "date": "2026-10-17",
    "verdict": "no match: read the returned signatures; structure-sheaf specialization, smooth-locus charts, and condensed locally constant adjunctions do not state this etale geometric assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A constructible etale sheaf zero on a principal divisor is generically extension by zero of a local system with finite normalization cover exact sequence.",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally constant etale module sheaf embeds into the direct image of its finite etale trivializing cover, extended by zero along a divisor via finite normalization.",
+   "results": "8 hits: ModuleCat.Tilde.exists_const, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, ModuleCat.Tilde.res_const, AlgebraicGeometry.exists_lift_of_germInjective_aux, SheafOfModules.IsFiniteType.exists_localGeneratorsData, ModuleCat.Tilde.toOpen, SheafOfModules.localGeneratorsDataOfIsFiniteType, ModuleCat.Tilde.const",
+   "date": "2026-10-17",
+   "verdict": "no match: returned names and signatures concern structure-sheaf germs, scheme normalization, or condensed/profinite locally constant objects, not the stated etale finite-cover exact sequence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite monodromy etale local systems are trivialized by a finite etale cover and the adjunction unit to its direct image has finite locally constant cokernel.",
+   "results": "8 hits: LightCondMod.isDiscrete_tfae, CompHausLike.LocallyConstant.incl_of_counitAppApp, CondensedMod.isDiscrete_tfae, LightCondSet.isDiscrete_tfae, CompHausLike.LocallyConstant.counit_app_val, Condensed.finFree, CompHausLike.LocallyConstant.counit, Profinite.exists_locallyConstant_finite_aux",
+   "date": "2026-10-17",
+   "verdict": "no match: returned names and signatures concern structure-sheaf germs, scheme normalization, or condensed/profinite locally constant objects, not the stated etale finite-cover exact sequence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-dnc-generic-zero-section-vanishing",
@@ -78,5 +267,139 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-dnc-generic-local-system-devissage",
+  "worker": "stage1",
+  "summary": "Completed the retained unsplit item using only existing DAG nodes. Wrote the generic-boundary shrinking argument, identified the unit on stalks as a nonempty diagonal, constructed the componentwise finite normalization, extended the short exact sequence, and proved the generic-point assertion by integral incomparability. No mathematical statement change and no new nodes. Preserved inherited searches and added actual retained-log results.",
+  "blueprint": "Ancestor lem-trf-local-term-locality, proof paragraphs (1),(2): Varshavsky Claim 3.2.3 general-case finite etale trivialization, normalization and cokernel devissage; Steps 1–3 justify its shrinking, Steps 4–5 its local systems, Steps 6–7 its normalization, Steps 8–10 the precise finite direct-image identities used by the parent.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Finite-type field schemes are Noetherian, needed for finite component decompositions. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "lem-sbc-normal-sections-finite-product",
+    "why": "Normal affine charts decompose into finite products of normal domains. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "why": "Converts local dimension one into the exclusion of intermediate generalizations. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "lem-sbc-locally-principal-support-dimension-one",
+    "why": "Produces the dimension-one generalization in a principal closed support. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "prop-constructible-generic-constancy",
+    "why": "Gives a dense open where the constructible module sheaf is lisse. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "Makes the bad locus a finite union of irreducible closed sets. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "lem-cbc-open-closed-recollement",
+    "why": "Identifies a sheaf vanishing on the closed complement with extension by zero. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "fin2-lem-lisse-trivialized-finite-etale",
+    "why": "Trivializes a local system with the same arbitrary finite coefficient ring, not only prime-field coefficients. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-finite-pushforward-locally-constant",
+    "why": "Preserves module local constancy under the finite etale direct image. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-locally-constant-derived-serre",
+    "why": "Makes the cokernel locally constant over the Noetherian finite coefficient ring. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-stalk-formula-restriction",
+    "why": "Computes finite direct images and the components of the unit on geometric stalks. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Identifies the unit on germs with the diagonal map, not merely an unspecified stalk isomorphism. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Detects kernels and exact sequences on geometric stalks. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Detects zero kernels and isomorphisms from geometric stalks. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "lem-fin-etale-normal-components",
+    "why": "Splits the finite etale cover into normal integral pieces over each integral base component. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "lem-fin-normalization-extension-finite",
+    "why": "Finiteness of normalization in the finite generic field extension. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "lem-fin-normalization-extends-cover",
+    "why": "Recovers the prescribed finite etale cover on the normal open. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "lem-sbc-integral-closure-finite-normal-product",
+    "why": "Gives normal localizations of the affine integral closures, with fields as singleton products. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Extends the local-system short exact sequence. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-pushforward-extension-zero",
+    "why": "Identifies its middle term with finite direct image of extension by zero. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-shriek-base-change-modules",
+    "why": "Gives the pullback identity in the same module coefficient category. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Exact finite direct image has no positive derived functors. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   },
+   {
+    "node": "pqf-lem-incomparability",
+    "why": "Proves that every point over a generic divisor point is itself generic in the inverse-image divisor. This is a generic tool; no result of sk-i-curve-zero replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sbc-normal-sections-finite-product",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-sbc-locally-principal-support-dimension-one",
+  "prop-constructible-generic-constancy",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-cbc-open-closed-recollement",
+  "fin2-lem-lisse-trivialized-finite-etale",
+  "lem-weil-pbc-etale-finite-pushforward-locally-constant",
+  "lem-weil-pbc-locally-constant-derived-serre",
+  "lem-weil-pbc-finite-stalk-formula-restriction",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-fin-etale-normal-components",
+  "lem-fin-normalization-extension-finite",
+  "lem-fin-normalization-extends-cover",
+  "lem-sbc-integral-closure-finite-normal-product",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lemma-weil-pbc-finite-pushforward-extension-zero",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "pqf-lem-incomparability"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-af2d96d44",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-af2d96d44 (reviewer sub-agent of L); spot-checked: Read all of it: the item, all 10 steps, the statements of all 27 cited nodes (including the blueprint_update statements of the 8 that have one), the parent lem-trf-dnc-generic-zero-section-vanishing and its Step 4, unit sk-i-curve-zero, and the main-20261015 ancestor lem-trf-local-term-locality. Source checked: Varshavsky arXiv math/0505564, §3.2.2 and Claim 3.2.3 (local PDF). The statement is faithful to the general-case paragraph of Claim 3.2.3: shrink so that F=j_!G with G a local system, take a finite etale trivialization and the normalization X'->X, then the cokernel G' and its exact sequence. The source writes f_! for the finite map; the item writes q_*, which is the same functor for a finite map. The item also states what the parent's Step 4 uses: q finite, X' normal, Z' principal Cartier, Rq_*=q_*, q^*j_!G=j'_!p^*G, the finite stalk formula and exactness, and that points of Z' over a generic point of Z are generic in Z'. Nothing is weakened. This is not a target node and no coefficient categories are identified: everything is etale A-module sheaves, with explicit A-linearity remarks where abelian-sheaf lemmas are used. Hypotheses checked step by step. Step 2: 0BJG applies at xi because dim>0 via eta; maximality of xi in V(f) gives local dimension 1, and the chain formula then excludes any intermediate generalization. Step 3: the bad-locus closure misses xi by Step 2, and the recollement triangle has third term 0. Step 5: the unit is the diagonal on stalks by 03QP and 03Q1, and the fibre is nonempty. Step 6: the normal-components, normalization-finite, extends-cover and integral-closure-product lemmas each apply with their hypotheses met. Step 7 is genuinely elementary. Step 8: the finite-open comparison square matches the node's square, and 03S6 is applied with f=q. Step 10: the incomparability argument is correct. Small cases checked: Kummer cover on A^1 with divisor V(t^r), G=0, the identity cover, disconnected U, empty Z, nonreduced divisor. No new nodes; an rg search found no duplicate. I accept all 23 declared tool_uses: each is a generic black box and none replaces a step of the unit's route. FIX: Step 8's final sentence, 'This also identifies the first arrow with the unit into q_*q^*j_!G', asserts a compatibility that no cited statement gives (C4/E5). It is not part of the statement and the parent does not use it, so I deleted it. The corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-dnc-generic-local-system-devissage.json; no other field changes.; 1 file(s) fixed by the reviewer"
  }
 }

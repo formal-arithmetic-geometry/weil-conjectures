@@ -1,0 +1,94 @@
+{
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-scalar-six-ctf",
+  "date": "2026-10-17",
+  "group": "Q123"
+ },
+ "status": "unsplit",
+ "id": "lem-sfb-local-model-tor-bound-descent",
+ "kind": "statement",
+ "title": "Tor bounds descend from bounded flat local models",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $\\Gamma$ be a commutative condensed ring [sk-def-sfb-condensed-ring], and put $\\Gamma_T=p_T^*\\Gamma$ for schemes $T$ [sk-def-sfb-pulled-back-coefficients]. Let $Q\\in D(\\operatorname{Mod}(\\Gamma_S))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Suppose $\\{g_i:V_i\\to S\\}_{i=1}^n$ is a finite covering family of $S_{\\mathrm{proét}}$ [sk-def-pe-site]. Fix integers $r\\le s$ and cochain complexes $L_i^\\bullet$ of $\\Gamma_{V_i}$-modules [def-pc-cochain-complex-modules], with $L_i^q=0$ for $q\\notin[r,s]$, all terms flat [def-pc-flat-sheaf-modules], and isomorphisms $g_i^*Q\\simeq L_i^\\bullet$ in the derived category. Then for every $\\Gamma_S$-module $N$ placed in degree zero,\n$$g_i^*(Q\\otimes^{\\mathbf L}_{\\Gamma_S}N)\\simeq L_i^\\bullet\\otimes_{\\Gamma_{V_i}}g_i^*N.$$\nHere $g_i^*$ is the exact inverse-image functor with the pulled-back coefficient ring. The tensor on the right is ordinary tensor of complexes. Moreover $H^q(Q\\otimes^{\\mathbf L}_{\\Gamma_S}N)=0$ for every $q\\notin[r,s]$ and every $N$. Equivalently, $Q$ has Tor amplitude in $[r,s]$ [det-def-sfb-constructible-tor-amplitude].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+  "place": "(2) Local models, global bounds: K-flat local tensor calculation and checking vanishing on a cover"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "sk-def-pe-site",
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "det-def-sfb-constructible-tor-amplitude"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded flat complex on a finite cover has global Tor amplitude bound",
+   "results": "DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_iff; generic derived-category boundedness only",
+   "date": "2026-10-17",
+   "verdict": "no match: no constructible sheaf descent theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsGE, DerivedCategory.IsLE",
+   "results": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-17",
+   "verdict": "no match: generic t-structure API does not state this sheaf theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedCategory.isGE_Q_obj_iff|CochainComplex.isZero_of_isGE (subdirectory of Mathlib/: CategoryTheory)",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "local cohomology of a bounded complex on a finite affine cover vanishes outside the common term interval and preserves finite Tor amplitude",
+   "results": "localCohomology; DerivedCategory.isGE_Q_obj_iff; CochainComplex.isZero_of_isGE; no constructible sheaf result",
+   "date": "2026-10-17",
+   "verdict": "no match: only generic local cohomology and derived boundedness results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded flat complex on a finite pro-etale cover has global Tor amplitude bound for a module sheaf",
+   "results": "Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing; Algebra.Smooth.flat; Algebra.FormallyEtale.instTensorProduct; Algebra.FormallySmooth.iff_injective_lTensor_residueField; Algebra.FormallyUnramified.flat_of_restrictScalars; Algebra.FormallyEtale.comp; CategoryTheory.isZero_Tor'_succ_of_projective; Algebra.etaleLocus_eq_compl_support",
+   "date": "2026-10-17",
+   "verdict": "no match: the listed general APIs do not assert this local pro-etale sheaf statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsGE, DerivedCategory.IsLE, Tor amplitude",
+   "results": "0 hits; loogle: Unknown identifier `Tor`",
+   "date": "2026-10-17",
+   "verdict": "unavailable: invalid identifier in Loogle query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "vanishing outside a common interval descends from bounded K-flat local models on a finite pro-etale cover",
+   "results": "AlgebraicGeometry.Flat.instMorphismRestrict; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget; RingHom.Flat.propertyIsLocal; Module.isLocallyConstant_rankAtStalk; AlgebraicGeometry.Flat.instResLE; AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact; Module.flat_of_isLocalized_span; AlgebraicGeometry.flat_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: the listed general APIs do not assert this local pro-etale sheaf statement"
+  }
+ ],
+ "mathlib_match": null,
+ "blueprint": {
+  "from": {
+   "node": "det-prop-scalar-six-ctf",
+   "place": "(2) Local models: Q has Tor amplitude in the amplitude of Q_0, since tensoring with a complex of flat modules is computed termwise",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

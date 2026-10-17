@@ -62,18 +62,11 @@
    }
   },
   {
-   "text": "By [lem-kun-stalk-as-pullback], $K_s$ is the stalk complex of $K$. For the algebraically closed field $\\Omega$, the Galois group in [lem-exc-abelian-sheaves-gmodules] is trivial, so geometric stalk $S:\\Ab(s_{\\Et})\\to\\Ab$ is an additive equivalence. Let $C_T$ denote the constant-sheaf functor of [def-kun-constant-sheaf] on a scheme $T$. The canonical constant-germ map gives $S C_s M\\cong M$ naturally in $M$ by [lem-weil-pbc-constant-sheaf-geometric-stalk]. Thus $C_s$ is a quasi-inverse of $S$: the inverse image under the fully faithful $S$ of this isomorphism gives $C_s S G\\cong G$ naturally in $G$. These additive equivalences preserve kernels and cokernels, so they extend termwise to equivalences of derived categories. Put $M=S K_s\\in D^+(\\mathbf Z)$; then $K_s\\cong C_s M$.\nFor any $T$, natural maps from the constant presheaf with value an abelian group $N$ to a sheaf $G$ correspond to homomorphisms $N\\to G(T)$: every component is forced by restriction along the unique $U\\to T$. Sheafification's universal property [def-weil-pbc-sheafification] gives $C_T\\dashv\\Gamma(T,-)$. Since $C_s$ is an equivalence, its right adjoint is $S$, so $S\\cong\\Gamma(s,-)$. The canonical pullback comparison [lem-kun-pullback-constant] identifies $h^{-1}C_s$ with $C_Z$. For a sheaf $G$ on $Z$, these adjunctions give\n$$\\operatorname{Hom}(N,S h_*G)=\\operatorname{Hom}(C_sN,h_*G)=\\operatorname{Hom}(h^{-1}C_sN,G)=\\operatorname{Hom}(C_ZN,G)=\\operatorname{Hom}(N,\\Gamma(Z,G)).$$\nConsequently $S h_*\\cong\\Gamma(Z,-)$ and, after taking derived functors, $S Rh_*\\cong R\\Gamma(Z,-)$. The Hom identifications are those of the constant-section adjunction, so their derived units and counits agree. The canonical tensor constraints also agree: on constants they send the local tensor of sections with values $m,n$ to the constant section with value $m\\otimes n$; sheafification extends this equality, and K-flat representatives give the derived equality. Hence the adjunct of counit tensored with identity defining $\\mathrm{PF}_h$ in [def-kun-projection-formula-map] is exactly the map of [def-kun-constant-projection-morphism] for $Z$ and $\\Lambda=\\mathbf Z$:\n$$R\\Gamma(Z,E_s)\\otimes^L_{\\mathbf Z}M\\longrightarrow R\\Gamma(Z,E_s\\otimes^L_{\\mathbf Z}\\underline M).$$\nBoth $E_s$ and $M$ are bounded below, by exact inverse image [prop-weil-pbc-inverse-image-modules-exact] and exactness of $S$. Since $Z$ is qcqs by Step 2, [lem-kun-0f0e] makes this canonical map an isomorphism.",
+   "text": "By [lem-kun-stalk-as-pullback], $K_s$ is the stalk complex of $K$. Apply [lem-kun-geometric-point-derived-constants] to the algebraically closed field $\\Omega$ of Step 2. With $S_D$ its exact geometric-stalk equivalence, put $M=S_DK_s$. The lemma gives $K_s\\cong C_sM$ and preserves the lower bound of $K_s$, so $M\\in D^+(\\mathbf Z)$. Exact inverse image [prop-weil-pbc-inverse-image-modules-exact] also gives $E_s\\in D^+(Z_{\\Et})$.",
    "uses": [
     "lem-kun-stalk-as-pullback",
-    "lem-exc-abelian-sheaves-gmodules",
-    "def-kun-constant-sheaf",
-    "def-kun-projection-formula-map",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-kun-0f0e",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "def-weil-pbc-sheafification",
-    "lem-kun-pullback-constant",
-    "def-kun-constant-projection-morphism"
+    "lem-kun-geometric-point-derived-constants",
+    "prop-weil-pbc-inverse-image-modules-exact"
    ],
    "elementary": false,
    "source": {
@@ -82,8 +75,33 @@
    }
   },
   {
-   "text": "Steps 3 and 4 show that the projection map is an isomorphism after inverse image to every geometric point of $Y$. Exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact] identifies the stalk of each cohomology morphism $\\mathcal H^i(\\mathrm{PF}_f(E,K))$ with the $i$th cohomology of this stalk map. It is therefore an isomorphism at every geometric stalk. By [lemma-weil-pbc-geometric-stalk-conservative] each cohomology morphism is an isomorphism of abelian sheaves. The cone then has zero cohomology in every degree, hence is zero in the derived category, proving that the original canonical map is invertible.",
+   "text": "For $h:Z\\to s$, [lem-kun-geometric-point-derived-sections-adjunction] supplies the natural isomorphism $\\beta:S_D Rh_*\\cong R\\Gamma(Z,-)$, using the canonical comparison $h^{-1}C_s\\cong C_Z$. Its stated counit identity identifies the derived constant-section adjunction with the composite of the geometric-point equivalence and $h^{-1}\\dashv Rh_*$. Thus these are the specified canonical identifications for $E_s$ and $E_s\\otimes^L h^{-1}C_sM$, without a choice of an abstract isomorphism of their objects.",
    "uses": [
+    "lem-kun-geometric-point-derived-sections-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0F, lemma-projection-formula-proper, proof"
+   }
+  },
+  {
+   "text": "Apply the commuting square of [lem-kun-geometric-point-projection-comparison] to $E_s$ and $M$. Its vertical arrows are exactly the comparisons of the preceding step. The scheme $Z$ is qcqs by Step 2, and $E_s,M$ are bounded below by Step 4. Hence [lem-kun-0f0e] makes its bottom arrow $R\\Gamma(Z,E_s)\\otimes^L_{\\mathbf Z}M\\to R\\Gamma(Z,E_s\\otimes^L_{\\mathbf Z}C_ZM)$ an isomorphism. The square gives that $S_D\\mathrm{PF}_h(E_s,C_sM)$ is an isomorphism. The equivalence of [lem-kun-geometric-point-derived-constants] reflects isomorphisms, and naturality in $K_s\\cong C_sM$ identifies this with the desired assertion that $\\mathrm{PF}_h(E_s,K_s)$ is an isomorphism.",
+   "uses": [
+    "lem-kun-geometric-point-projection-comparison",
+    "lem-kun-0f0e",
+    "lem-kun-geometric-point-derived-constants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0F, lemma-projection-formula-proper, proof"
+   }
+  },
+  {
+   "text": "Steps 3–6 show that the projection map is an isomorphism after inverse image to every geometric point of $Y$. Since the stalk at a geometric point is the inverse image along it [lem-kun-stalk-as-pullback], exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact] identifies the stalk of each cohomology morphism $\\mathcal H^i(\\mathrm{PF}_f(E,K))$ with the $i$th cohomology of this stalk map. It is therefore an isomorphism at every geometric stalk. By [lemma-weil-pbc-geometric-stalk-conservative] each cohomology morphism is an isomorphism of abelian sheaves. The cone then has zero cohomology in every degree, hence is zero in the derived category, proving that the original canonical map is invertible.",
+   "uses": [
+    "lem-kun-stalk-as-pullback",
     "prop-weil-pbc-geometric-stalks-exact",
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
@@ -109,14 +127,10 @@
   "def-kun-unbounded-exchange",
   "def-weil-pbc-derived-exchange",
   "lem-kun-stalk-as-pullback",
-  "lem-exc-abelian-sheaves-gmodules",
-  "def-kun-constant-sheaf",
-  "def-kun-projection-formula-map",
+  "lem-kun-geometric-point-derived-constants",
+  "lem-kun-geometric-point-derived-sections-adjunction",
+  "lem-kun-geometric-point-projection-comparison",
   "lem-kun-0f0e",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "def-weil-pbc-sheafification",
-  "lem-kun-pullback-constant",
-  "def-kun-constant-projection-morphism",
   "prop-weil-pbc-geometric-stalks-exact",
   "lemma-weil-pbc-geometric-stalk-conservative"
  ],
@@ -177,7 +191,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -210,10 +224,10 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-kunneth-ordinary",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-kun-0f0f",
   "worker": "stage1",
-  "summary": "Statement unchanged. Replaced the invalid globally free-sheaf resolution argument by Stacks 0F0F: integral boundedness and torsion closure, proper base change on geometric fibers, the existing integral constant-complex formula, and stalk conservativity. Added one statement-only auxiliary tensor lemma after DAG/blueprint/project/Mathlib searches. Report flags the incorrect generic tensor-connectivity node and reversed inequalities in the source proof. Second reading makes absolute quasi-separatedness and the canonical constant-functor adjunction/tensor comparison explicit, using existing nodes only. Maintainer review makes the equality of bounded-below and unbounded exchange mates explicit and declares the constant-sheaf stalk computation as an additional generic tool use.",
+  "summary": "Repair of the human re-split return: statement and Lean record unchanged, retained Steps 1–3 and the final stalk-conservativity argument. Replaced the 2464-character Step 4 by three short cited steps, extracting the normalized derived constant/stalk equivalence, the derived pushforward/global-sections adjunction identification, and canonical projection-morphism compatibility into three statement-only nodes. The proper-base-change to geometric-fibre constant-projection route is unchanged.",
   "blueprint": "Realizes the displayed integral projection-formula assertion and the whole ## Proof of lem-kun-0f0f. Replaces the node-level free-sheaf argument (not a unit-level step): arbitrary etale sheaves need not be generated by global constants, and finite sums/shifts do not generate all bounded-below complexes. The unit explicitly specifies 0F0F and has no additional proof steps.",
   "tool_uses": [
    {
@@ -225,16 +239,8 @@
     "why": "The existing bounded-below torsion proper base-change theorem is the geometric-stalk input of the integral projection formula; no node of this unit replaces this theorem."
    },
    {
-    "node": "lem-exc-abelian-sheaves-gmodules",
-    "why": "The field-site equivalence identifies sheaves over the geometric point with abelian groups; this is a generic field-site tool."
-   },
-   {
     "node": "lemma-weil-pbc-geometric-stalk-conservative",
     "why": "Geometric stalks detect sheaf isomorphisms, used after taking every cohomology sheaf; this is a generic etale-sheaf tool."
-   },
-   {
-    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "why": "The canonical constant-germ isomorphism identifies the inverse to the geometric-point equivalence in Step 4; this is a generic stalk computation and no statement in this unit replaces it."
    }
   ]
  },
@@ -246,12 +252,12 @@
   "lem-weil-pbc-constant-sheaf-geometric-stalk"
  ],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q02-1c072b3f5",
-  "group": "Q02",
+  "reviewer": "NT-cc-Q93-f2741b0c1",
+  "group": "Q93",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q02-1c072b3f5 (reviewer sub-agent of L); spot-checked: Read the mathematics and cited sources in full; the integral formula and auxiliary lemma check out. Corrected exchange-map citations, a missing tool-use declaration, and new-node metadata. Complete fixes and review.md are written. The review separately records an inherited downstream DAG cycle.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-f2741b0c1 (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item, all seven steps, the three new statement-only nodes and every cited statement. Checked the item against Stacks 0F0F (etale-cohomology.tex l.19001), 0F0E (l.18938), 04JQ, 07A6, 0B56 and 07A4, and against the blueprint text in master and main-20261015, which is identical with no blueprint_update. The item statement and Lean record are unchanged and match Stacks hypothesis by hypothesis: proper f, E in D+ with torsion cohomology, K in D+, the canonical 0B56 map. Integer coefficients D(Ab)=D(T_et,Z) are used throughout. Steps 1-6 hold. Step 1: bounds and torsion via the integral derived tensor bound. Step 2: Z is qcqs. Step 3: bounded-below proper base change applies to E and F, and the naturality square holds with the bounded and unbounded exchanges identified as the same mate. Steps 4-6: the geometric-point equivalence, beta as the conjugate of gamma (counit identity direction checked) and the projection square, so 0F0E's canonical map (the PF of def-kun-constant-projection-morphism) is invertible for qcqs Z, E_s and M bounded below; S_D reflects isomorphisms and PF is natural in K. The three new nodes are true (tested on Z empty, Z=s, M=0, M=Z), are not restatements of the item, and are not duplicates: lem-weil-pbc-geometric-point-pullback-stalk and lem-exc-abelian-sheaves-gmodules state only the abelian equivalence, and lem-sf-point, lem-trf-* and lem-pod-* are other settings. No SGA source is cited, and the graph is acyclic. Two fixes, in fixes/dag/nodes/sec-smooth-purity/lem-kun-0f0f.json: (1) Step 7 now cites lem-kun-stalk-as-pullback, which it uses to identify a stalk with the inverse image (C1); (2) removed the stale split_report.tool_uses entries lem-exc-abelian-sheaves-gmodules and lem-weil-pbc-constant-sheaf-geometric-stalk, which no step cites any more. Accepted tool_uses: prop-weil-pbc-inverse-image-modules-exact, thm-weil-pbc-bounded-below, lemma-weil-pbc-geometric-stalk-conservative.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-16",

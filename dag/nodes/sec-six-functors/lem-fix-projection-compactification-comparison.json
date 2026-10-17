@@ -26,9 +26,158 @@
   "def-exchange-projection",
   "def-weil-finite-tor-amplitude"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "At finite coefficients set $T=K\\otimes^L Lf^*L$. By [lem-sf-pullback-tor-amplitude], $Lf^*L$ is constructible of finite Tor amplitude. Apply [lem-sf-tensor-ctf](i), with its finite-Tor first factor $Lf^*L$ and bounded constructible second factor $K$, and tensor symmetry, to obtain $T\\in D^b_c(X,A_n)$. By [lem-sf-proetale-constructible-origin](ii), $T$ has an etale-origin witness. Use the witnessed input $K$ of the statement and this witnessed $T$ throughout the finite comparison calculation. Thus every comparison inverted below is on the domain of [prop-compactification-coherence-detailed]; no unrestricted compactification comparison on the unbounded pro-etale category is used.",
+   "uses": [
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "lem-sf-proetale-constructible-origin",
+    "prop-compactification-coherence-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Finite coefficient domains for K and K tensor Lf*L."
+   }
+  },
+  {
+   "text": "We first work at a fixed finite coefficient $A_n$ in the ambient pro-etale categories, retaining the etale-origin witnesses wherever a comparison is inverted. Put $J_j=j_!$, $P_u=Lu^*$, $S_u=Ru_*$. Write $\\gamma_j:J_jM\\otimes N\\to J_j(M\\otimes P_jN)$ for the canonical open tensor map and $\\pi_u:S_uM\\otimes N\\to S_u(M\\otimes P_uN)$ for the ordinary counit projection. By [def-exchange-projection], $\\operatorname{PF}^{(j,p)}=S_p\\gamma_j\\,\\pi_p$, including $P_jP_p\\cong P_f$. For a refinement $u:c_1\\to c_2$, put $a_M:J_{j_2}M\\to S_uJ_{j_1}M$ for the proper/open comparison and $C_M:S_{p_1}J_{j_1}M\\to S_{p_2}S_uJ_{j_1}M$ for direct-image composition. [def-sf-refinement-comparison-isomorphism] identifies its comparison as $\\theta_u=S_{p_2}(a^{-1})C$. Thus its inverse is $\\sigma_u=C^{-1}S_{p_2}a$. The maps $a$ are the unit-normalized proper/open maps: [lem-sf-proper-open-comparison-site-normalization] fixes the finite pro-etale comparison as the transport of the finite proper/open map, and [lem-cbc-strict-tower-proper-open-calculus] fixes that map by the proper/open adjunction normalization (including the clopen section, rather than a Cartesian-square assumption).",
+   "uses": [
+    "def-exchange-projection",
+    "def-sf-refinement-comparison-isomorphism",
+    "lem-sf-proper-open-comparison-site-normalization",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Expand the specified projection and refinement transformations, with the directions fixed."
+   }
+  },
+  {
+   "text": "The counit formula for a composite gives its projection formula. Suppress the conjugate direct-image and pullback compositors of [fix-prop-adjunctions](3), and let $M$ be on $\\overline X_1$, $N$ on $Y$. Then\n$$\\pi_{p_2u;M,N}=S_{p_2}(\\pi_{u;M,P_{p_2}N})\\,\\pi_{p_2;S_uM,N}.$$\nIndeed, transpose the right-hand side under $P_uP_{p_2}\\dashv S_{p_2}S_u$. Its transpose is\n$$(\\varepsilon_{u,M}\\otimes1)\\,\\mu_{u;S_uM,P_{p_2}N}\\,P_u((\\varepsilon_{p_2,S_uM}\\otimes1)\\mu_{p_2;S_{p_2}S_uM,N}).$$\nNaturality of $\\mu_u$ moves $P_u\\varepsilon_{p_2}$ to the first tensor factor. The counit becomes $\\varepsilon_u\\,P_u\\varepsilon_{p_2}$ by [fix-prop-adjunctions](3), and the two $\\mu$ factors become $\\mu_{p_2u}$ by [lem-pur-derived-pullback-tensor-iso]. This is exactly the defining transpose of $\\pi_{p_2u}$ in [def-exchange-projection]. The adjunction bijection proves the equality. The same three-line transpose calculation holds on the simultaneous derived system models, whose direct-image compositors are conjugate to the pullback compositors by [lem-sf-integral-compactification-system-realization].",
+   "uses": [
+    "fix-prop-adjunctions",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-exchange-projection",
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Counit compatibility in the compactification-independence sentence; direct-image composition expanded."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-proper-open-tensor-compatibility] to the commutative proper/open square with $U=W=X$, $r=1_X$, $V=\\overline X_1$, $Z=\\overline X_2$, $k_1=j_1$, $i=j_2$, $p=u$. It applies to this square even when $u^{-1}(j_2(X))$ has an additional open-and-closed component: it does not require the square itself to be Cartesian. With $N=P_{p_2}L$ and $T=K\\otimes P_fL$ it gives\n$$a_T\\,\\gamma_{j_2;K,P_{p_2}L}\n=S_u(\\gamma_{j_1;K,P_{p_1}L})\\,\\pi_{u;J_{j_1}K,P_{p_2}L}\\,(a_K\\otimes1).$$\nThe pullback identifications are $P_{j_2}P_{p_2}\\cong P_f\\cong P_{j_1}P_uP_{p_2}$; the identity-map projection is identity by its unit/counit definition. This supplies the tensor compatibility of $a$, an assertion not supplied by mere functoriality of the compactification comparisons. The new lemma gives exactly the same equality in the derived category of coefficient systems, before taking any limit.",
+   "uses": [
+    "lem-sf-proper-open-tensor-compatibility",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compatibility with j_!: proper/open tensor square, specialized to a refinement."
+   }
+  },
+  {
+   "text": "Read all functors through $C$ and set $S=S_{p_2}$, $B=S_u$, $M=J_{j_1}K$. In these coordinates $\\sigma_u=S(a)$, and step 3 writes $\\operatorname{PF}^{c_1}=SB(\\gamma_{j_1})\\,S(\\pi_u)\\,\\pi_{p_2;BM,L}$. Therefore\n$$\\begin{aligned}\n\\operatorname{PF}^{c_1}(\\sigma_{u,K}\\otimes1)\n&=SB(\\gamma_{j_1})S(\\pi_u)\\pi_{p_2;BM,L}(S(a_K)\\otimes1)\\\\\n&=S\\bigl(B(\\gamma_{j_1})\\pi_u(a_K\\otimes1)\\bigr)\\pi_{p_2;J_{j_2}K,L}\\\\\n&=S(a_T\\gamma_{j_2})\\pi_{p_2;J_{j_2}K,L}\n=\\sigma_{u,T}\\operatorname{PF}^{c_2}.\n\\end{aligned}$$\nThe second line is naturality of the counit-defined $\\pi_{p_2}$ in its first argument; the third is step 4. Reinserting the conjugate compositors gives the equality for the specified $\\sigma_u$, not for an arbitrary functor isomorphism. Since $\\sigma_u=\\theta_u^{-1}$ on the witnessed domain of [prop-compactification-coherence-detailed], multiplication by $\\theta_{u,T}$ on the left and by $\\theta_{u,K}\\otimes1$ on the right gives $\\theta_{u,T}\\operatorname{PF}^{c_1}=\\operatorname{PF}^{c_2}(\\theta_{u,K}\\otimes1)$. Only a refinement comparison is inverted here.",
+   "uses": [
+    "def-exchange-projection",
+    "prop-compactification-coherence-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Paste the explicit proper/open square with the proper counit-projection composite."
+   }
+  },
+  {
+   "text": "Choose a common refinement $d$ of $c_1,c_2$ by [prop-compactification-coherence-detailed], with comparisons $t_i:Rf_!^d\\to Rf_!^{c_i}$. Write $P_d,P_i$ for their projection maps and evaluate comparison subscripts at $K$ or $T=K\\otimes P_fL$. Step 5 gives $t_{i,T}P_d=P_i(t_{i,K}\\otimes1)$. The prescribed comparison is $\\rho=t_2t_1^{-1}$ by the same coherence theorem. Consequently\n$$\\rho_TP_1=t_{2,T}t_{1,T}^{-1}P_1=t_{2,T}P_d(t_{1,K}^{-1}\\otimes1)=P_2(t_{2,K}t_{1,K}^{-1}\\otimes1)=P_2(\\rho_K\\otimes1).$$\nThis is precisely the desired finite-coefficient equality. Choice independence and the cocycle law identify this comparison with the stated $\\rho$; they are not being used as a substitute for the projection calculation.",
+   "uses": [
+    "prop-compactification-coherence-detailed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Remove the choice through a common refinement."
+   }
+  },
+  {
+   "text": "At the integral stage, [lem-coef-integral-residue-tor] gives uniformly finite-Tor reductions for both $K$ and $L$. Use their normalized derived systems in [lem-sf-integral-compactification-system-realization]. We verify its intermediate-domain condition. Open extension on systems is exact. Its cohomology has the same finite constructible stratification on the open and zero on the closed complement; adjoining that complement shows constructibility without changing the cohomological interval. The open tensor comparison of [lem-sf-open-tensor-normalization], applied to coefficient quotients, shows $J_j(M)_m\\otimes^L_{A_m}A_n\\cong J_j(M_m\\otimes^L_{A_m}A_n)\\cong J_j(M_n)$, hence normalization. The same tensor comparison with an arbitrary coefficient-module sheaf shows that open extension preserves Tor bounds: restrict the sheaf, tensor on the open, and extend the resulting cohomology, which is zero outside the prescribed interval. Its finite levels have etale-origin witnesses by [lem-sf-proetale-constructible-origin]. Proper direct images have uniform cohomological bounds and constructibility by [lem-sf-integral-direct-image-constructible]; the completed pullback and tensor outputs are constructible by [lem-pur-integral-operations-preserve-constructible]. For those integral outputs, [lem-coef-integral-residue-tor] again supplies uniform finite-level Tor bounds. The proper and open operations on their normalized systems are exactly the realizations in the cited realization lemma. Consequently every intermediate expression in the refinement calculation satisfies that lemma's bounds. This uses no finite-Tor assumption added to $K$: it is a consequence of its integral constructibility over the DVR.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-open-tensor-normalization",
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-integral-direct-image-constructible",
+    "lem-pur-integral-operations-preserve-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Integral input and intermediate domains."
+   }
+  },
+  {
+   "text": "All schemes in a compactification or refinement are finite type over the field, hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian], and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Their open immersions are thus quasi-compact. By [lem-cbc-completed-extension-zero-comparison], open extension preserves completeness, and its completed comparison is the specified one from strict finite open-extension diagrams. Retain the compatible etale-origin witnesses at all finite reductions required by the integral domains of [fix-lem-exchanges]. Repeat steps 3-5 as an identity in the derived category of systems, using [lem-sf-proper-open-tensor-compatibility] in that category. By [lem-sf-integral-compactification-system-realization], the realization isomorphisms intertwine the units, counits, open maps, tensor and composition maps, proper/open comparisons, and their whiskerings. Applying its total-limit functor to that actual system identity therefore gives the integral refinement identity with the completed tensor and pullback of the statement. The common-refinement algebra of step 6 then applies to the completed comparisons of [fix-lem-exchanges](4), giving the integral assertion. No equality of integral maps is deduced merely from equality at finite levels.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-cbc-completed-extension-zero-comparison",
+    "lem-sf-proper-open-tensor-compatibility",
+    "lem-sf-integral-compactification-system-realization",
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Realization of the derived-system identity with all specified maps."
+   }
+  },
+  {
+   "text": "At $E$, apply the raw scalar-localization functor to the integral equality. By [def-exchange-projection] the rational projection map is exactly the image of its integral composite, and [fix-lem-exchanges](4) uses the same rationalized refinement comparisons. A functor preserves the displayed composition and tensor comparisons, so it sends the proved equality to the required rational equality, including morphisms written with a scalar denominator. At $\\overline{\\mathbf Q}_\\ell$, represent the two inputs and the finitely many maps in the square at one common finite coefficient field, as in [def-exchange-projection] and [def-weil-algebraically-closed-coefficients]. The rational equality there gives equality of the represented morphism classes. Enlarging the field carries the specified units, counits, open tensor and comparison maps to their specified counterparts by the scalar-extension data in [def-exchange-projection]; hence the equality is independent of this common presentation. This proves all stated coefficient stages without an assertion that finite evaluations detect equality of integral maps, and without inverting either projection map.",
+   "uses": [
+    "def-exchange-projection",
+    "fix-lem-exchanges",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Rationalization and common finite coefficient stage."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-sf-proetale-constructible-origin",
+  "prop-compactification-coherence-detailed",
+  "def-exchange-projection",
+  "def-sf-refinement-comparison-isomorphism",
+  "lem-sf-proper-open-comparison-site-normalization",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "fix-prop-adjunctions",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-proper-open-tensor-compatibility",
+  "lem-coef-integral-residue-tor",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-cbc-completed-extension-zero-comparison",
+  "fix-lem-exchanges",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence: compatibility of refinement comparisons with counits and j_!; expanded through the normalized proper/open interchange, using the open restriction argument of the following paragraph."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -36,10 +185,45 @@
    "results": "Topology/Compactification/OnePoint/*, Topology/Compactification/StoneCech.lean, Topology/Maps/Proper/UniversallyClosed.lean, Topology/Category/{Stonean,CompHaus,LightProfinite}/*, RingTheory/WittVector/Identities.lean, Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, NumberTheory/MulChar/Basic.lean:144 (extension by zero of characters)",
    "date": "2026-10-17",
    "verdict": "no match: topological compactifications and unrelated identities; Mathlib has no etale compact-support direct image or projection transformation. LeanSearch/Loogle/LeanFinder are not reachable from the review machine and were not run."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived projection transformation for compactly supported direct image is independent of the compactification under the common refinement comparison",
+   "results": "Profinite.NobelingProof.proj_eq_of_subset; Profinite.NobelingProof.projRestricts_eq_comp; Profinite.NobelingProof.proj_comp_of_subset; Profinite.IndexFunctor.map_comp_π_app; Profinite.NobelingProof.projRestricts_comp_projRestrict; Profinite.NobelingProof.ProjRestricts; AbstractCompletion.compare_comp_eq_compare; Profinite.NobelingProof.coe_πs'",
+   "date": "2026-10-17",
+   "verdict": "no match: the listed results do not state compatibility of proper/open interchange with the derived counit projection morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, MonoidalCategory",
+   "results": "No hits; loogle: unknown identifier 'MonoidalCategory'",
+   "date": "2026-10-17",
+   "verdict": "no match: Loogle returned unknown identifier MonoidalCategory; the corrected qualified tensor-adjunction search is recorded in the new dependency."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|shriekIso",
+   "results": "No hits (Mathlib/CategoryTheory)",
+   "date": "2026-10-17",
+   "verdict": "no match: the listed results do not state compatibility of proper/open interchange with the derived counit projection morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula natural transformation commutes with changing compactification",
+   "results": "CategoryTheory.Abelian.LeftResolution.π_naturality; CategoryTheory.CategoryOfElements.map_π; CategoryTheory.Abelian.LeftResolution.π_naturality_assoc; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transform_obj_obj_snd_map; HomologicalComplex.natTransHomologyπ; CompHausLike.pullback.cone_π; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transform_map_app_snd_app; CategoryTheory.Abelian.LeftResolution.karoubi.π'",
+   "date": "2026-10-17",
+   "verdict": "no match: the listed results do not state compatibility of proper/open interchange with the derived counit projection morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing a Nagata compactification intertwines the natural projection morphism for lower shriek",
+   "results": "AlgebraicGeometry.Scheme.toSpecΓ_naturality; AlgebraicGeometry.Scheme.toSpecΓ_naturality_assoc; AlgebraicGeometry.Scheme.Hom.ι_toNormalization; AlgebraicGeometry.Scheme.Hom.ι_fromNormalization; AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι; AlgebraicGeometry.Scheme.Opens.toSpecΓ_naturality_assoc; AlgebraicGeometry.Scheme.Opens.toSpecΓ_naturality; AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero",
+   "date": "2026-10-17",
+   "verdict": "no match: the listed results do not state compatibility of proper/open interchange with the derived counit projection morphisms"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "maintainer-reader",
@@ -60,5 +244,124 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-rem-sf-pf-done"
+ "unit": "sk-rem-sf-pf-done",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-fix-projection-compactification-comparison",
+  "worker": "stage1",
+  "summary": "N8 retained the statement and ancestry, expanded the counit-composition calculation and the actual refinement algebra, isolated general proper/open tensor compatibility as one statement-only lemma, and distinguished finite, derived-system, integral and localized coefficient stages. The finite etale Lean identity is only partial coverage, not an attachment.",
+  "blueprint": "Realizes the tensor-and-counit sentence of lem-fix-weil-operations through the compactification-independence sentence of prop-sf-pf-coherence; the step involving proper/open tensor compatibility is exposed as a separate smaller lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Generic Pullback preserves finite Tor amplitude used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Generic The derived tensor product on the finite-Tor subcategories used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic Constructible pro-étale coefficients are of étale origin used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "prop-compactification-coherence-detailed",
+    "why": "Generic Compactification coherence used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "def-exchange-projection",
+    "why": "Generic Exchange and projection transformations used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "def-sf-refinement-comparison-isomorphism",
+    "why": "Generic Comparison isomorphism of compact-support candidates along a refinement used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "lem-sf-proper-open-comparison-site-normalization",
+    "why": "Generic Normalization of the proper/open comparison under the site comparison used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Generic Normalized proper/open calculus on strict pro-etale towers used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Generic Adjunctions of the datum used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic Derived pullback commutes with derived tensor product on the constructible categories used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "lem-sf-integral-compactification-system-realization",
+    "why": "Generic Coherent integral realization of compactification expressions and their maps used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Generic The residue reduction controls integral Tor amplitude used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic Open-extension unit normalization for derived tensor and base change used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Generic The integral derived direct image of a constructible complex along a finite-type morphism is constructible used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic Integral pullback and completed tensor product preserve constructibility used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic A locally Noetherian scheme is quasi-separated (Stacks 01OY) used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "lem-cbc-completed-extension-zero-comparison",
+    "why": "Generic Completed extension-by-zero base change used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "fix-lem-exchanges",
+    "why": "Generic Exchange functoriality: naturality, identities, and pasting used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   },
+   {
+    "node": "def-weil-algebraically-closed-coefficients",
+    "why": "Generic Algebraically closed coefficient category used for the explicit operation, normalization or coefficient/domain assertion in this comparison calculation; the interface remark unit supplies no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-sf-proetale-constructible-origin",
+  "prop-compactification-coherence-detailed",
+  "def-exchange-projection",
+  "def-sf-refinement-comparison-isomorphism",
+  "lem-sf-proper-open-comparison-site-normalization",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "fix-prop-adjunctions",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-coef-integral-residue-tor",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-cbc-completed-extension-zero-comparison",
+  "fix-lem-exchanges",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N8-a297da22f",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-a297da22f (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-sf-proper-open-tensor-compatibility, the statements of all 21 cited nodes, the main-20261015 source sentence in prop-sf-pf-coherence.proof.md (word for word), the from-place in lem-fix-weil-operations.proof.md (lines 27-37) and Stacks 0GL1. No SGA is cited. The item statement is unchanged; its PF and rho agree with def-exchange-projection and prop-compactification-coherence-detailed. Step 1: the witness domain for K and for T = K⊗Lf^*L comes from pullback-tor-amplitude, tensor-ctf(i) and constructible-origin(ii). Step 2: theta_u = S(a^{-1})C, direction checked. a is alpha_u of def-weil-pbc-proper-open-comparison (the j2!-adjunct of the inverse open-restriction/clopen iso), reached through site-normalization, strict-tower and lem-cbc-proper-open-interchange-coherence, and this is exactly the new node's Gamma with r=1. Step 3: the composite projection formula was re-derived from fix-prop-adjunctions(3) and the mu composition clause. Step 4: the specialization U=W=X, r=1, p=u was type-checked; the non-Cartesian clopen component is allowed. Steps 5-6: the naturality and common-refinement algebra was redone and is correct. Steps 7-9: integral Tor bounds come from residue-tor; system identities are transported by c_V of the realization lemma, which intertwines maps, so nothing is inferred from finite evaluations; the rational and Qbar stages go through functoriality. New node: s=(k1,r) is clopen (b is an open immersion; q is separated and qs=r is proper), so lambda is well defined. Edge cases (identity verticals, identity horizontals, empty U, the refinement case) hold. I believe it is true via the fully faithful J_i adjunction. It is not a duplicate of the proper/open, projection-coherence or system-realization nodes, and not a relabelling (it has no f, no rho and no coefficient stages). B1/B2/B9 are fine and the searches are recorded. The 20 tool_uses are accepted: the unit is a remark with no steps or uses. No cycle. One note for the next splitter: the new node's sentence identifying Gamma with the normalized proper/open map is an assertion that its split must prove. No fixes."
+ }
 }

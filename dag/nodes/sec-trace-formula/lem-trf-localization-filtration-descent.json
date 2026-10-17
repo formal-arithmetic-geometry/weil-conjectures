@@ -1,0 +1,96 @@
+{
+ "id": "lem-trf-localization-filtration-descent",
+ "kind": "statement",
+ "title": "Canonical localization filtration descends to filtered derived objects",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $i:Z\\hookrightarrow X$ a closed immersion with complementary open immersion $j:U\\hookrightarrow X$, and $\\Lambda$ a finite commutative ring. Use the ordinary abelian categories of sheaves of modules over the constant ring $\\Lambda$ on the small etale sites [def-weil-sheaf-of-modules-category]. Here inverse image, direct image and extension by zero are those of [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image] and [def-weil-pbc-extension-by-zero]. The bounded filtered derived localization means bounded cochain complexes with finite decreasing filtrations by subcomplexes [def-weil-abstract-derived-category, def-sp-filtration, def-sp-filtered-complex-subquotients], localized at chain maps inducing quasi-isomorphisms on every graded complex. Suppose that $j^{-1}$, $i^{-1}$, $j_!$ and $i_*$ are exact and that, for every bounded complex $B^\\bullet$ of sheaves of $\\Lambda$-modules on $X_{\\mathrm{Et}}$, the degreewise localization sequence\n$$0\\to j_!j^{-1}B^\\bullet\\to B^\\bullet\\to i_*i^{-1}B^\\bullet\\to0,$$\nformed from the counit of $j_!\\dashv j^{-1}$ and the unit of $i^{-1}\\dashv i_*$, is exact. The assignment\n$$F^0B^\\bullet=B^\\bullet,\\qquad F^1B^\\bullet=j_!j^{-1}B^\\bullet,\\qquad F^2B^\\bullet=0$$\nsends quasi-isomorphisms to quasi-isomorphisms on every associated graded complex. It therefore descends to a functorial section of the forgetful functor from the bounded filtered derived localization to the bounded derived category. The descended filtered object is canonically independent of the chosen representative, and its graded pieces are $i_*i^{-1}B^\\bullet$ in degree $0$ and $j_!j^{-1}B^\\bullet$ in degree $1$.",
+ "source": {
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Example 5.2.3, construction of the canonical filtered object"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A general exact subfunctor of the identity on an abelian category induces a canonical two step filtration on bounded complexes and descends to the derived category",
+   "results": "8 hits: HasDerivedCategory.standard; DerivedCategory.Q; HasDerivedCategory; DerivedCategory; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib has ordinary derived localization and exact functors but no canonical open-closed filtered section"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact.singleTriangle CategoryTheory.exactFunctor",
+   "results": "0 hits; application type mismatch in the Loogle pattern",
+   "date": "2026-10-17",
+   "verdict": "invalid pattern: Loogle returned an application type mismatch; not evidence of absence; use the successful quoted-name search below"
+  },
+  {
+   "tool": "grep",
+   "query": "shortExact|exactFunctor|filtration.*derived|derived.*filtration",
+   "results": "25 hits including ShortExact and exactFunctor files, but no filtered derived localization construction",
+   "date": "2026-10-17",
+   "verdict": "no match: only ordinary exactness/short-complex infrastructure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A short exact sequence of exact endofunctors gives a natural two step filtration on the bounded derived category",
+   "results": "8 hits: CategoryTheory.exactFunctor, CategoryTheory.ShortComplex.ShortExact.exact, CategoryTheory.ExactFunctor, CategoryTheory.ShortComplex.ShortExact.singleTriangle, CategoryTheory.ShortComplex.ShortExact.mk, CategoryTheory.ShortComplex.ShortExact.mk', CategoryTheory.Functor.exact_tfae, CategoryTheory.exactFunctor_le_leftExactFunctor",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary exact-functor/localization or scheme/topological results do not state this filtered sheaf or invariant-support comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The termwise filtration by an exact subfunctor of identity descends under quasi isomorphisms to a canonical section of the forgetful functor on filtered derived categories",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.left_fac_of_isStrictlyGE, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary exact-functor/localization or scheme/topological results do not state this filtered sheaf or invariant-support comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact subfunctor of the identity with exact quotient gives a canonical filtration on derived complexes",
+   "results": "8 hits: CategoryTheory.exactFunctor_le_leftExactFunctor, CategoryTheory.ExactFunctor.of, HomologicalComplexUpToQuasiIso.Q, HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso, CategoryTheory.LeftExactFunctor.ofExact, CategoryTheory.ShortComplex.exact_map_iff_of_faithful, CategoryTheory.ShortComplex.Exact.recOn, DerivedCategory.instFullSingleFunctor",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary exact-functor/localization or scheme/topological results do not state this filtered sheaf or invariant-support comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Filtered\", \"ShortComplex\"",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration combining filtered objects and short complexes"
+  }
+ ],
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-invariant-localization-filtered-lift",
+  "date": "2026-10-17",
+  "group": "Q12"
+ },
+ "mathlib_match": null,
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof paragraph (1): Example 5.2.3 canonical filtered origin of open--closed additivity",
+   "via": [
+    "lem-trf-invariant-localization-filtered-lift"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

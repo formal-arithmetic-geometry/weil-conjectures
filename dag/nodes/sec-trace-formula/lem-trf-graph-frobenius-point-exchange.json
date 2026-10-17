@@ -2,7 +2,7 @@
  "id": "lem-trf-graph-frobenius-point-exchange",
  "kind": "statement",
  "title": "Ordinary Frobenius exchange followed by point transport is pullback",
- "statement": "Fix the finite-field datum $p,a,q,k_0,k$ of [def-weil-finite-field-fiber] and the finite coefficient ring $A=\\mathcal O_E/\\varpi_E^n$, with $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ finite and $n\\geq1$, of [def-trf-coefficient-conventions]. Let $Y_0$ be proper of finite type over $k_0$, put $Y=Y_0\\times_{k_0}k$ and $s=\\operatorname{Spec}k$, and write $a_Y:Y\\to s$. Put $\\gamma=(z\\mapsto z^q)^{-1}$, $g_Y=\\operatorname{id}_{Y_0}\\times\\operatorname{Spec}(\\gamma)$ and $h=\\operatorname{Spec}(\\gamma)$ [def-trf-scheme-frobenius]. For each $m\\geq1$ the relation $a_Yg_Y^m=h^ma_Y$ specifies the Frobenius Cartesian square [lem-weil-frobenius-square-cartesian]. Use derived pullback [def-weil-derived-pullback-tensor-hom] and direct image [def-weil-derived-direct-image] at $A$. For $M\\in D^b_{ctf}(Y,A)$ let\n$$\ne_{m,M}:L(h^m)^*Ra_{Y*}M\\longrightarrow Ra_{Y*}L(g_Y^m)^*M\n$$\nbe the direct-image exchange mate of [def-weil-frobenius-square-exchange], with the Frobenius automorphisms replaced by their $m$-th powers, and let $\\iota^{(m)}$ be the restriction--colimit-insertion--derived-pullback point transport [def-weil-frobenius-point-transport] along $h^m$. Use the point fiber [def-weil-finite-coefficient-point] and $R\\Gamma(Y,-)=\\operatorname{Fib}_s(Ra_{Y*}(-))$ [def-weil-ordinary-compact-cohomology]. Let $\\rho_{g_Y^m,M}:R\\Gamma(Y,M)\\to R\\Gamma(Y,L(g_Y^m)^*M)$ be ordinary pullback induced by its adjunction unit and the canonical constant-sheaf identification. Then\n$$\n\\operatorname{Fib}_s(e_{m,M})\\circ\\iota^{(m)}_{Ra_{Y*}M}=\\rho_{g_Y^m,M}\n$$\nin $D(A)$, naturally in $M$. In particular this uses the semilinear base map $h^m$, without assuming that $g_Y^m$ is a $k$-morphism.",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ of [def-weil-finite-field-fiber] and the finite coefficient ring $A=\\mathcal O_E/\\varpi_E^n$, with $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ finite and $n\\geq1$, of [def-trf-coefficient-conventions]. Let $Y_0$ be proper of finite type over $k_0$, put $Y=Y_0\\times_{k_0}k$ and $s=\\operatorname{Spec}k$, and write $a_Y:Y\\to s$. Put $\\gamma=(z\\mapsto z^q)^{-1}$, $g_Y=\\operatorname{id}_{Y_0}\\times\\operatorname{Spec}(\\gamma)$ and $h=\\operatorname{Spec}(\\gamma)$ [def-trf-scheme-frobenius]. For each $m\\geq1$ the relation $a_Yg_Y^m=h^ma_Y$ specifies the Frobenius Cartesian square [lem-weil-frobenius-square-cartesian]. Use derived pullback [def-weil-derived-pullback-tensor-hom] and direct image [def-weil-derived-direct-image] at $A$. For $M\\in D^b_{ctf}(Y,A)$ let\n$$\ne_{m,M}:L(h^m)^*Ra_{Y*}M\\longrightarrow Ra_{Y*}L(g_Y^m)^*M\n$$\nbe the direct-image exchange mate of [def-weil-frobenius-square-exchange], with the Frobenius automorphisms replaced by their $m$-th powers, and let $\\iota^{(m)}$ be the restriction--colimit-insertion--derived-pullback point transport [def-weil-frobenius-point-transport] along $h^m$. Use the point fiber [def-weil-finite-coefficient-point] and $R\\Gamma(Y,-)=\\operatorname{Fib}_s(Ra_{Y*}(-))$ [def-weil-ordinary-compact-cohomology]. Let $\\rho_{g_Y^m,M}:R\\Gamma(Y,M)\\to R\\Gamma(Y,L(g_Y^m)^*M)$ be ordinary cohomology pullback, induced by the pullback/direct-image adjunction unit $M\\to R(g_Y^m)_*L(g_Y^m)^*M$ [def-weil-derived-direct-image], the canonical constant-sheaf identification $(g_Y^m)^{-1}A_Y\\cong A_Y$ defining the module pullback, and the canonical identification $R\\Gamma(Y,R(g_Y^m)_*N)\\cong R\\Gamma(Y,N)$ of global sections of a direct image with global sections on the source. Then\n$$\n\\operatorname{Fib}_s(e_{m,M})\\circ\\iota^{(m)}_{Ra_{Y*}M}=\\rho_{g_Y^m,M}\n$$\nin $D(A)$, naturally in $M$. In particular this uses the semilinear base map $h^m$, without assuming that $g_Y^m$ is a $k$-morphism.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
   "place": "Step 2: the semilinear ordinary exchange/point-transport mate and derived adjunction calculation"
@@ -19,9 +19,111 @@
   "def-weil-finite-coefficient-point",
   "def-weil-ordinary-compact-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $a=a_Y$, $g=g_Y^m$ and $b=h^m$. By [lem-weil-frobenius-square-cartesian], the Frobenius maps are scheme isomorphisms and $ag=ba$; iterating the equality proves the same assertions for their powers. For an object $u:U\\to s$, put $W_U=Y\\times_{s,a,u}U$ and $T_U=Y\\times_{s,a,bu}U$. The square identification is $d_U:W_U\\xrightarrow{\\sim}T_U$, $(y,v)\\mapsto(g(y),v)$, with inverse $(y,v)\\mapsto(g^{-1}(y),v)$. All identities here are identities of schemes, and require no assertion that $g$ is over $s$. By [lem-weil-proetale-isomorphism-inverse-image], inverse image along $g$ or $b$ is the exact site relabelling $F(V\\xrightarrow{v}Y)\\mapsto F(V\\xrightarrow{gv}Y)$ (respectively on $s$). By the finite-level construction in [def-weil-derived-pullback-tensor-hom], module pullback is this inverse image with the constant $A$-action transported; its tensor comparison sends $x$ to $x\\otimes1$. Thus derived pullback along these maps is computed termwise.",
+   "uses": [
+    "lem-weil-frobenius-square-cartesian",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
+    "place": "Step 2; explicit power-square and site relabelling calculation"
+   }
+  },
+  {
+   "text": "Use [def-weil-pbc-proetale-operations] to represent $M$ by a K-injective complex $I$ and $Ra_*M$ by $a_*I$. Its pullback functor $a^*$ is exact. Hence $a_*I$ is K-injective by [lem-weil-pbc-right-adjoint-preserves-kinjective]. The exact equivalence $g^*$ is also a right adjoint to its exact inverse equivalence (unit and counit are the inverse equivalence isomorphisms), so the same lemma makes $g^*I$ K-injective. Consequently $Ra_*Lg^*M$ is represented by $a_*g^*I$. By [lem-weil-point-proetale-sections-exact], evaluation at $s$ is exact on all module complexes. Therefore both cohomology objects in question are represented by $I(Y)$ and $(g^*I)(Y)$, using the direct-image formula of [def-weil-proetale-module-direct-image]. These computations take place in the ambient derived categories, so do not require a constructible resolution term by term.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-proetale-module-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives; application to the finite-level operations"
+   }
+  },
+  {
+   "text": "Let $e^0_F:b^*a_*F\\to a_*g^*F$ denote the underived mate with transpose $a^*b^*a_*F\\xrightarrow{\\theta}g^*a^*a_*F\\xrightarrow{g^*\\varepsilon_a}g^*F$. The exchange of [def-weil-frobenius-square-exchange] is represented on $I$ by the termwise map $e^0_I$. Indeed, the fraction characterization of the derived adjunction in [lem-pc-pre-derived-adjoint-functors-general], applied to $a^*\\dashv a_*$, says that a chain map into the K-injective $a_*g^*I$ has derived transpose the class of its underived transpose. Take this chain map to be $e^0_I$; the counit at $I$ is the underived counit by that same characterization, using the identity resolution of $I$. The square comparison is termwise by [lem-weil-pbc-proetale-derived-pullback-composition]; exactness of these finite-coefficient pullbacks allows every complex as a representative. Its transpose is therefore exactly the transpose defining the ambient derived mate. Injectivity of the adjunction bijection identifies the two maps. This checks the specified mate, rather than choosing an exchange solely because it is an isomorphism.",
+   "uses": [
+    "def-weil-frobenius-square-exchange",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND, lemma-pre-derived-adjoint-functors-general; fraction characterization applied to the specified exchange mate"
+   }
+  },
+  {
+   "text": "Compute $e^0_F$ under relabelling. Its source at $u:U\\to s$ is $F(T_U\\xrightarrow{\\mathrm{pr}_Y}Y)$ and its target is $F(W_U\\xrightarrow{g\\mathrm{pr}_Y}Y)$. The map is restriction $F(d_U)$. Here is the mate calculation: in the colimit formula of [def-weil-proetale-inverse-image], the counit sends an insertion indexed by a map $V\\to a^{-1}U$ to restriction along that map. This is precisely the adjunction bijection of [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction]: on a colimit summand the adjunct is restriction followed by the given sheaf map. In the transpose $g^*\\varepsilon_a\\circ\\theta$ above, the fibre-product comparison replaces $T_U$ by $W_U$ through $d_U$, and the counit then restricts along $d_U$. Thus the adjunct at $U$ is $F(d_U)$. The tensor factor is unchanged: $z\\otimes c$ is sent to $F(d_U)(z)\\otimes c$; in particular the insertion $z\\otimes1$ stays an insertion with scalar $1$. The formulas commute with restrictions and hence with sheafification. This proves the claimed section formula directly from the mate, with the direct-image sections interpreted by [def-weil-proetale-module-direct-image].",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-proetale-module-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00VE and 00WX, lemma-adjoints-u and lemma-adjoint-sheaves: restriction formula for the colimit counit; explicit mate evaluation"
+   }
+  },
+  {
+   "text": "Specialize the section formula to $U=s$, $u=\\mathrm{id}$. Under relabelling, the restriction--insertion map of [def-weil-frobenius-point-transport] on $a_*F$ sends $t\\in F(Y)$ to $F(\\pi_Y)(t)\\in F(T_s)$, where $\\pi_Y:T_s=Y\\times_{s,a,b}s\\to Y$: the restriction along $b:(s,b)\\to(s,\\mathrm{id})$ induces precisely $\\pi_Y$ in the direct-image definition. Colimit insertion is the relabelling identification at this index, and the derived-pullback comparison appends the tensor scalar $1$. Applying $e^0_F(s)$ now gives $F(d_s)F(\\pi_Y)(t)=F(\\pi_Yd_s)(t)=F(g)(t)$, because $\\pi_Yd_s=g$. Apply this degreewise to $F=I^r$. These are chain maps, so steps 2--3 give that $\\operatorname{Fib}_s(e_{m,M})\\circ\\iota^{(m)}_{Ra_*M}$ is represented by $I(Y)\\xrightarrow{I(g)}I(Y\\xrightarrow{g}Y)$. The fibre functor is exactly this evaluation by [def-weil-finite-coefficient-point].",
+   "uses": [
+    "def-weil-frobenius-point-transport",
+    "def-weil-proetale-module-direct-image",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
+    "place": "Step 2; explicit evaluation of the restriction--insertion--pullback point transport"
+   }
+  },
+  {
+   "text": "Finally the adjunction-unit pullback on global sections is the same map. Since $g_*$ is exact and right adjoint to the exact $g^*$, $g_*g^*I$ is K-injective by the argument of step 2, so $Ra_*Rg_*Lg^*M$ is represented by $a_*g_*g^*I$; by [def-weil-proetale-module-direct-image] its value at $s$ is $(g^*I)(Y\\times_{Y,g}Y)$, and the projection $Y\\times_{\\mathrm{id},Y,g}Y\\to Y$ to the source factor is an isomorphism of objects over the source copy of $Y$, giving the global-sections identification $(g_*G)(Y)=G(Y)$ of the statement. The unit $F\\to g_*g^*F$, evaluated at the final object $Y$ and followed by this identification, inserts a section at the final-object index of the inverse-image colimit. Under the relabelling identification $(g^*F)(Y)=F(Y\\xrightarrow{g}Y)$ this is restriction along the arrow $g:(Y,g)\\to(Y,\\mathrm{id})$, namely $F(g)$, with tensor scalar $1$. This follows by applying the colimit adjunction formula of step 4 to the identity of $g^*F$. The canonical constant-sheaf identification acts identically on each $c\\in A$, so introduces no coefficient automorphism. The derived-adjunction computation of step 3, now for the exact equivalence $g$, identifies the degreewise unit map on $I$ with the ordinary pullback $\\rho_{g,M}$. With $R\\Gamma(Y,-)=\\operatorname{Fib}_sRa_*(-)$ as in [def-weil-ordinary-compact-cohomology], step 5 proves the required equality in $D(A)$. All restriction, insertion, counit and tensor maps commute with maps of complexes; the derived adjunction is bifunctorial, so their equality descends through resolutions naturally in $M$.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-proetale-module-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00VE and 00WX, colimit adjunction unit; derived identification by Tag 0FND"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-proetale-module-direct-image",
+  "def-weil-frobenius-square-exchange",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "def-weil-frobenius-point-transport",
+  "def-weil-finite-coefficient-point",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
+  "place": "Step 2; explicit finite-level K-injective and colimit-adjunction calculation using Stacks Tags 00VE, 00WX, 08BJ and 0FND"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +166,45 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFibers.pullbackMap\", \"TopCat.Presheaf.stalkPullbackHom\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"CategoryTheory.Limits.pullbackComparison\", \"TopCat.Presheaf.stalkPullbackInv\", \"HasFibers.pullbackMap.isCartesian\", \"AlgebraicGeometry.Scheme.Cover.pullbackHom_map\"], \"digest\": \"1fa10b1818f5a3be\", \"sub\": \"\"}",
    "date": "2026-10-17",
    "verdict": "no match: generic mate formulas, scheme pullback comparisons and stalk maps do not identify this specified derived point-transport composite"
+  },
+  {
+   "tool": "grep",
+   "query": "(baseChange|exchange|mate).*(globalSections|pointTransport)|(globalSections|pointTransport).*(baseChange|exchange|mate)",
+   "results": "{\"t\": \"2026-10-17T10:12:26Z\", \"tool\": \"grep\", \"query\": \"(baseChange|exchange|mate).*(globalSections|pointTransport)|(globalSections|pointTransport).*(baseChange|exchange|mate)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general mates, structure-sheaf pullbacks and topological presheaf section formulas do not state this specified pro-etale derived point-transport comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The exchange map on derived global sections composed with geometric point transport is the adjunction unit cohomology pullback",
+   "results": "{\"t\": \"2026-10-17T10:12:26Z\", \"tool\": \"leansearch\", \"query\": \"The exchange map on derived global sections composed with geometric point transport is the adjunction unit cohomology pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.Over.mapPullbackAdj_unit_app\", \"CategoryTheory.Over.mapPullbackAdj_unit_app\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_unit\", \"CategoryTheory.ChosenPullbacksAlong.iso_mapPullbackAdj_unit_app\", \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk\", \"AlgebraicGeometry.Scheme.toSpecΓ\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom\"], \"digest\": \"aa7b4f5340aa9a87\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general mates, structure-sheaf pullbacks and topological presheaf section formulas do not state this specified pro-etale derived point-transport comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-17T10:12:26Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general mates, structure-sheaf pullbacks and topological presheaf section formulas do not state this specified pro-etale derived point-transport comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image base change mate followed by point transport equals pullback on global cohomology for a semilinear scheme automorphism",
+   "results": "{\"t\": \"2026-10-17T10:12:30Z\", \"tool\": \"leanfinder\", \"query\": \"Derived direct image base change mate followed by point transport equals pullback on global cohomology for a semilinear scheme automorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\"], \"digest\": \"ff97d958d687f605\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general mates, structure-sheaf pullbacks and topological presheaf section formulas do not state this specified pro-etale derived point-transport comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pulling back a global section is restriction and insertion into the inverse image colimit and agrees with the base change adjunction mate at the final object",
+   "results": "{\"t\": \"2026-10-17T10:12:31Z\", \"tool\": \"leanfinder\", \"query\": \"Pulling back a global section is restriction and insertion into the inverse image colimit and agrees with the base change adjunction mate at the final object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjUnitToUnit\", \"TopCat.Presheaf.pullback_obj_obj_ext\", \"TopCat.Presheaf.pullback_obj_obj_ext_iff\", \"CategoryTheory.Sheaf.ΓRes_map\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\"], \"digest\": \"e1f3f2eebdda7700\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: general mates, structure-sheaf pullbacks and topological presheaf section formulas do not state this specified pro-etale derived point-transport comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-trf-graph-frobenius-operator",
@@ -84,5 +221,99 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-graph-frobenius-point-exchange",
+  "worker": "stage1",
+  "summary": "Computed the specified finite-level direct-image exchange on a K-injective representative, evaluated the point transport and the mate by restriction along the Frobenius square identification, and identified the resulting chain map with ordinary adjunction-unit pullback. No new nodes or statement correction.",
+  "blueprint": "Realizes prop-trf-graph-frobenius-operator proof Step 2, the ordinary exchange/point-transport calculation before the open-square exchange.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-frobenius-square-cartesian",
+    "why": "Generic finite-coefficient site/derived-operation interface used in the explicit ordinary exchange calculation; the Weil unit supplies no replacement for this construction."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic finite-coefficient site/derived-operation interface used in the explicit ordinary exchange calculation; the Weil unit supplies no replacement for this construction."
+   },
+   {
+    "node": "def-weil-derived-pullback-tensor-hom",
+    "why": "Generic finite-coefficient site/derived-operation interface used in the explicit ordinary exchange calculation; the Weil unit supplies no replacement for this construction."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "Generic finite-coefficient site/derived-operation interface used in the explicit ordinary exchange calculation; the Weil unit supplies no replacement for this construction."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic finite-coefficient site/derived-operation interface used in the explicit ordinary exchange calculation; the Weil unit supplies no replacement for this construction."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic finite-coefficient site/derived-operation interface used in the explicit ordinary exchange calculation; the Weil unit supplies no replacement for this construction."
+   },
+   {
+    "node": "def-weil-proetale-module-direct-image",
+    "why": "Generic finite-coefficient site/derived-operation interface used in the explicit ordinary exchange calculation; the Weil unit supplies no replacement for this construction."
+   },
+   {
+    "node": "def-weil-frobenius-square-exchange",
+    "why": "Generic finite-coefficient site/derived-operation interface used in the explicit ordinary exchange calculation; the Weil unit supplies no replacement for this construction."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic finite-coefficient site/derived-operation interface used in the explicit ordinary exchange calculation; the Weil unit supplies no replacement for this construction."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic finite-coefficient site/derived-operation interface used in the explicit ordinary exchange calculation; the Weil unit supplies no replacement for this construction."
+   },
+   {
+    "node": "def-weil-proetale-inverse-image",
+    "why": "Generic finite-coefficient site/derived-operation interface used in the explicit ordinary exchange calculation; the Weil unit supplies no replacement for this construction."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "why": "Generic finite-coefficient site/derived-operation interface used in the explicit ordinary exchange calculation; the Weil unit supplies no replacement for this construction."
+   },
+   {
+    "node": "def-weil-frobenius-point-transport",
+    "why": "Generic finite-coefficient site/derived-operation interface used in the explicit ordinary exchange calculation; the Weil unit supplies no replacement for this construction."
+   },
+   {
+    "node": "def-weil-finite-coefficient-point",
+    "why": "Generic finite-coefficient site/derived-operation interface used in the explicit ordinary exchange calculation; the Weil unit supplies no replacement for this construction."
+   },
+   {
+    "node": "def-weil-ordinary-compact-cohomology",
+    "why": "Generic finite-coefficient site/derived-operation interface used in the explicit ordinary exchange calculation; the Weil unit supplies no replacement for this construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-proetale-module-direct-image",
+  "def-weil-frobenius-square-exchange",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "def-weil-frobenius-point-transport",
+  "def-weil-finite-coefficient-point",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-6b44cf7c1",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-6b44cf7c1 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, every cited statement, the parent blueprint proof (main-20261015 prop-trf-graph-frobenius-operator, Step 2), the landed parent DAG node (steps 3-6) and the sibling lem-trf-graph-frobenius-unit-comparison. Setting: finite coefficients A, the ambient D(Y_proet,A) and M in D^b_ctf. The exchange is the ambient mate of def-weil-frobenius-square-exchange item 1 / def-weil-pbc-ambient-ringed-exchange with the semilinear base b=h^m (ag=ba), and no k-linearity of g is used. The statement is true. Recomputed on sections: iota takes t in M(Y) to its restriction along pi_Y in M(T_s); the exchange then restricts along d_s with pi_Y d_s=g; this equals the unit at the final object, i.e. restriction along g. Tested on Y empty, M=0, Y_0=Spec k_0 (exchange is the identity, rho=iota) and Y_0=Spec F_{q^2} (both sides swap the two coordinates of A^2). Step checks: (1) d_U and its inverse verified by hand. (2) K-injectivity of a_*I and g^*I: the right-adjoint-of-exact hypotheses hold. (3) Fraction formula with identity resolutions gives derived mate = class of underived mate. (4) Colimit insertion carried by theta to index d_U, then the 00WX counit restricts along d_U; elementary is acceptable. (5) The insertion index (s,b),(id,id) is initial in I_s, so insertion is the relabelling isomorphism; pi_Y d_s=g. (6) Derived unit = underived unit. No duplicate found by rg (transport-iso and cohomology-transport do not state tau=rho). No new nodes, no SGA. Tool uses accepted: square-cartesian, isomorphism-inverse-image, right-adjoint-preserves-kinjective, point-sections-exact, pre-derived-adjoint-functors-general, derived-pullback-composition. One FIX, in fixes/dag/nodes/sec-trace-formula/lem-trf-graph-frobenius-point-exchange.json: a named, clarifying statement correction. rho was defined by the 'adjunction unit and constant-sheaf identification', which omits the needed identification RGamma(Y,Rg_*N)=RGamma(Y,N); that identification is in the sibling unit-comparison node and in parent step 3, and parent step 4 needs the two rho to agree. The statement now names the unit, the constant-sheaf identification and the global-sections identification; the map is unchanged and nothing is weakened. Step 6 now proves that identification (g_*g^*I is K-injective; the value at s is (g^*I)(Y x_{Y,g} Y), identified with (g^*I)(Y)), and def-weil-proetale-module-direct-image was added to its uses (proof_deps unchanged).; 1 file(s) fixed by the reviewer"
  }
 }

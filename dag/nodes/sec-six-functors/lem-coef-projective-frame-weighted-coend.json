@@ -12,9 +12,154 @@
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-combinatorial-injective-diagram-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $E(A,K)$ for the double coend of the statement, for any cosimplicial $J$-diagram $A$. A map $E(A,K)\\to T$ is exactly a family of maps $A_j^n\\to T$ indexed by $x\\in K(j)_n$, satisfying the $J$ and simplex relations. Equivalently it is a natural simplicial map $K\\to R_AT$. The assignments in both directions are inverse on each coprojection and commute with maps of $K,T$. This proves the asserted adjunction, including its precomposition operators. All coends exist because $J$ and $\\Delta$ are small and $\\mathcal M$ is cocomplete. The same coprojection description shows that $E$ preserves colimits separately in its two arguments.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Lemma 19.2.14 and its preceding adjointness calculation; explicit copower adjunction"
+   }
+  },
+  {
+   "text": "First consider $u:X\\to Y$ in the projective model on $\\mathcal M^J$ and an objectwise injection $v:S\\to T$ of set presheaves. For a map $p:Z\\to Z'$ in $\\mathcal M$, lifting $u\\square_Jv$ against $p$ is equivalent, by [lem-coef-parametrized-adjunction-corner-lifting] applied to the parametrized adjunction $\\operatorname{Hom}_{\\mathcal M}(X\\odot_JS,Z)\\cong\\operatorname{Hom}_{\\mathcal M^J}(X,Z^{S(-)})$ given by the coprojection calculation of Step 1, to lifting $u$ against the $J$-diagram map with component\n$$Z^{T(j)}\\longrightarrow Z^{S(j)}\\times_{(Z')^{S(j)}}(Z')^{T(j)},$$\nwhere powers mean products, and presheaf restriction induces its covariant $J$ action. At $j$ choose a complement to $S(j)\\subseteq T(j)$; this map is isomorphic to an identity on $Z^{S(j)}$ times the product of copies of $p$ over that complement. Products and pullbacks of maps in a right lifting class remain in that class: each lifting problem is solved componentwise. Thus the displayed map is an objectwise trivial fibration if $p$ is trivial, and an objectwise fibration if $p$ is a fibration. By the projective lifting axioms, $u\\square_Jv$ is a cofibration when $u$ is a cofibration, and is a trivial cofibration when $u$ is trivial. Complements need not be natural; only the classification of each component uses them.",
+   "uses": [
+    "lem-coef-parametrized-adjunction-corner-lifting",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "Agent lifting calculation for projective diagrams paired with injective set weights"
+   }
+  },
+  {
+   "text": "If $i:K\\hookrightarrow L$ is objectwise monic, its relative simplicial latching maps $\\delta_ni$ are objectwise injections: by [lem-coef-simplicial-latching-degenerate-subset], naturally in $j$ the latching presheaf maps injectively onto the subset of degenerate $n$-simplices, and a simplex $x$ of $K(j)$ that is degenerate in $L(j)$ is already degenerate in $K(j)$: write $x=L(j)(\\sigma)y$ with $\\sigma:[n]\\twoheadrightarrow[r]$, $r<n$, choose a section $\\delta$ of $\\sigma$, and then $y=L(j)(\\delta)x\\in K(j)_r$. Hence $K(j)_n\\cap D_nL(j)=D_nK(j)$. Apply [lem-coef-weighted-coend-skeletal-filtration] to a Reedy projective cofibration $f:A\\to A'$. Step 2 shows each transition in its filtration is a cofibration. They are trivial cofibrations if $f$ is Reedy trivial, since its relative latching maps are then projective trivial cofibrations by [lem-coef-reedy-model-structure]. Pushouts and countable composites of left lifting classes remain in the class, by successively constructing lifts and using the colimit at the last stage. Thus the corner $E(f,i)$ is a cofibration, trivial whenever $f$ is Reedy trivial. Taking $f:0\\to V$ proves that $L_V$ preserves every objectwise monomorphism.",
+   "uses": [
+    "lem-coef-weighted-coend-skeletal-filtration",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-simplicial-latching-degenerate-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "§§19.2–19.4, agent projective/injective adaptation"
+   }
+  },
+  {
+   "text": "Fix any $K$. Taking $i:\\varnothing\\to K$ in Step 3 shows that $F_K:A\\mapsto E(A,K)$ sends Reedy projective trivial cofibrations to trivial cofibrations. It therefore preserves weak equivalences between Reedy projective cofibrant objects. Indeed, for such a weak equivalence $f:A\\to A'$, apply [lem-coef-brown-split-factorizations] in the Reedy projective model category to obtain $f=pi$, $ps=1$ with $i,s$ cofibrations and $p$ a trivial fibration. Two-out-of-three makes both $i,s$ trivial. Then $F_Ki,F_Ks$ are weak equivalences; $F_Kp F_Ks=1$ makes $F_Kp$ weak by two-out-of-three, and hence $F_Kf$ is weak. No fibrancy assumption is used.",
+   "uses": [
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "§§19.2–19.4, agent projective/injective adaptation"
+   }
+  },
+  {
+   "text": "Each $V_j$ is a cosimplicial resolution. To check the cofibrancy assertion, evaluation at $j$ is left Quillen on the projective model: its right adjoint sends $Z$ at $k$ to $\\prod_{\\operatorname{Hom}_J(k,j)}Z$, so preserves objectwise fibrations and trivial fibrations by componentwise lifting. Evaluation commutes with latching colimits, and therefore sends the projective cofibrations $L_nV\\to V^n$ to cofibrations. Homotopical constancy is a hypothesis. The colimit-preserving functor $T_j(K)=V_j^\\bullet\\otimes_\\Delta K$ sends $\\partial\\Delta^n\\to\\Delta^n$ to this evaluated latching map and sends simplex collapses to the structure maps $V_j^n\\to V_j^0$. By [lem-coef-simplicial-boundary-collapse-test], $T_j$ sends horns to trivial cofibrations and all weak equivalences to weak equivalences.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "§§19.2–19.4, agent projective/injective adaptation"
+   }
+  },
+  {
+   "text": "The same coend $G(K)=E(V,K)$, considered on the projective model of simplicial presheaves, is left Quillen. For $h_j(k)=\\operatorname{Hom}_J(k,j)$, the $J$-relations give $G(h_j\\times S)\\cong V_j^\\bullet\\otimes_\\Delta S$, by applying $V(a)$ on the summand indexed by $a:k\\to j$, with inverse the identity-arrow summand. The boundary and horn generators in [lem-coef-simplicial-presheaf-projective-model] are therefore sent to cofibrations and trivial cofibrations by Step 5. Equivalently the right adjoint $R_V$ sends (trivial) fibrations to objectwise (trivial) Kan fibrations, by testing boundaries and horns through this displayed identification. The projective weak factorization systems then give the Quillen assertion. Applying exactly the Brown split argument of Step 4 in this projective presheaf model shows that $G$ preserves weak equivalences between projectively cofibrant presheaves.",
+   "uses": [
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-simplicial-boundary-collapse-test",
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "§§19.2–19.4, agent projective/injective adaptation"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-framed-projective-diagram-resolution] to $V$, obtaining $PV\\xrightarrow{\\varepsilon}V$, Reedy projective cofibrant at the source and target and a weak equivalence in that model. Step 4 yields natural weak equivalences $E(PV,K)\\to E(V,K)$ for every $K$, without any cofibrancy requirement on the weight.",
+   "uses": [
+    "lem-coef-framed-projective-diagram-resolution",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "§§19.2–19.4, agent projective/injective adaptation"
+   }
+  },
+  {
+   "text": "Put $I=J^{\\mathrm{op}}$. Apply [lem-coef-free-bar-cell-filtration] to the $I$-diagram $K$ to obtain the functorial projectively cofibrant presheaf\n$$QK(j)=\\int^{[p]}\\coprod_{j\\to j_0\\to\\cdots\\to j_p}K(j_p)\\times\\Delta^p.$$\nIts faces are numbered in $I$: $d_0$ applies the contravariant $K$ action at $j_p$, $d_p$ composes the arrows at the $j$ end, and internal faces compose the intervening arrows. At each $j$ its augmented simplicial bar object has the terminal extra-degeneracy maps and identities stated in that node. This bar object is Reedy cofibrant in $\\mathrm{sSet}$: latching objects in $\\mathrm{sSet}$ are computed in each inner degree $r$, where [lem-coef-simplicial-latching-degenerate-subset] applied to the simplicial set $[p]\\mapsto P_p(j)_r$ identifies the latching set with the degenerate subset, the subcoproduct indexed by chains containing an identity internal arrow. The inclusion is a monomorphism, hence a cofibration by [lem-coef-kan-quillen-right-proper]. The presheaf-model node says the Kan model is simplicial. Thus [lem-coef-simplicial-realization-extra-degeneracy] applies and makes $QK(j)\\to K(j)$ weak. For an objectwise weak equivalence $a:K\\to L$, naturality of these augmentations and two-out-of-three make $Qa$ objectwise weak. Both its endpoints are projectively cofibrant, so Step 6 makes $E(V,Qa)$ weak.",
+   "uses": [
+    "lem-coef-free-bar-cell-filtration",
+    "lem-coef-simplicial-realization-extra-degeneracy",
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-reedy-model-structure",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-latching-degenerate-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "§§19.2–19.4, agent projective/injective adaptation"
+   }
+  },
+  {
+   "text": "There is a natural isomorphism $E(PV,K)\\cong E(V,QK)$. Expand the formula defining $PV$ in [lem-coef-framed-projective-diagram-resolution] and interchange its coproducts and coequalizers. The $J$-coend replaces the last arrow $j_p\\to j$ and its $K(j)$-label by $K(j_p)$. The remaining $\\Delta$-coend uses\n$$\\int^{[n]}(\\Delta^n)_r\\times K(j_p)_n\\cong K(j_p)_r,$$\nwhose map sends $(\\alpha:[r]\\to[n],x)$ to $K(\\alpha)x$, with inverse $x\\mapsto(1_{[r]},x)$. Both sides consequently have the same coprojections\n$$\\coprod_{j_0\\to\\cdots\\to j_p}V_{j_0}^r\\cdot(K(j_p)_r\\times(\\Delta^p)_r)$$\nand the same arrow, simplex and bar-face relations: $d_0$ applies the contravariant $K$ action at $j_p$, $d_p$ applies $V$ at $j_0$, and the interior faces compose arrows. The final-vertex numbering in the definition of $P$ is essential here. This also proves naturality in $K$. Thus Step 8 makes $E(PV,a)$ a weak equivalence. In the natural commutative square with horizontal maps $E(PV,a)$ and $E(V,a)$, both vertical maps are weak equivalences by Step 7. Two-out-of-three proves that $E(V,a)$ is weak for every objectwise weak equivalence $a$.",
+   "uses": [
+    "lem-coef-framed-projective-diagram-resolution",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "§§19.2–19.4, agent projective/injective adaptation"
+   }
+  },
+  {
+   "text": "If $a$ is also objectwise monic, Step 3 makes $E(V,a)$ a cofibration and Step 9 makes it weak, hence it is a trivial cofibration. The injective model structure exists by [lem-coef-combinatorial-injective-diagram-model], since the Kan model is combinatorial by [lem-coef-simplicial-presheaf-projective-model]. Its cofibrations and trivial cofibrations are exactly the two classes just treated. Together with Step 1 this proves the stated Quillen adjunction. For $J=\\varnothing$ the source diagram category has one object, $L_V$ is the initial object of $\\mathcal M$, $R_V$ the unique diagram, and the only image map is an identity, so all clauses hold. The argument nowhere assumes simplicial enrichment or properness of $\\mathcal M$.",
+   "uses": [
+    "lem-coef-combinatorial-injective-diagram-model",
+    "lem-coef-simplicial-presheaf-projective-model",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+    "place": "§§19.2–19.4, agent projective/injective adaptation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-combinatorial-injective-diagram-model",
+  "lem-coef-framed-projective-diagram-resolution",
+  "lem-coef-free-bar-cell-filtration",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-parametrized-adjunction-corner-lifting",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-simplicial-boundary-collapse-test",
+  "lem-coef-simplicial-latching-degenerate-subset",
+  "lem-coef-simplicial-presheaf-projective-model",
+  "lem-coef-simplicial-realization-extra-degeneracy",
+  "lem-coef-weighted-coend-skeletal-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/hirschhornloc.pdf",
+  "place": "Projective/injective adaptation of Hirschhorn §§16.4–16.5 and 19.2–19.4; explicit bar comparison. Source not installed under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +209,38 @@
    "results": "6 hits; ; CategoryTheory.Functor.instPreservesLimitsOfSizeOppositeTypeWeightedLimFlipObjOfHasColimitsOfSize, CategoryTheory.Functor.instPreservesLimitsOfShapeOppositeTypeWeightedLimFlipObjOfHasColimitsOfShape, CategoryTheory.Functor.instPreservesLimitsOfSizeOppositeTypeWeightedLimOfHasColimitsOfSize, CategoryTheory.Functor.instPreservesLimitsOfShapeOppositeTypeWeightedLimOfHasColimitsOfShape, CategoryTheory.Functor.instPreservesLimitsOfSizeOppositeFullSubcategoryTypeHasWeightedLimitWeightedLimFlipObj'OfHasColimitsOfSizeOfHasWeightedLimFlipObj, CategoryTheory.Functor.instPreservesLimitsOfShapeOppositeFullSubcategoryTypeHasWeightedLimitWeightedLimFlipObj'OfHasColimitsOfShapeOfHasWeightedLimFlipObj; digest 737db510139277b3",
    "date": "2026-10-17",
    "verdict": "no match: inspected the returned signatures and available pinned source. Cofibrant replacements and homotopy classes, additive derived functors, Dold–Kan formulas, simplicial-set cofibrations, and ordinary weighted limits do not state the projective-frame/injective-weight coend Quillen theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Reedy cofibrant cosimplicial diagram in a projective model category gives a weighted coend left Quillen functor on injective simplicial set diagrams",
+   "results": "0 hits; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Coend, ModelCategory, Reedy",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.Coend'; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected signatures and pinned source; ordinary coends, skeletal adjunctions, Cech constructions and cofibrant replacements do not give this relative filtration or framed bar comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "coend|Reedy|pushout.*product",
+   "results": "25 hits; ; Mathlib/GroupTheory/PushoutI.lean, Mathlib/GroupTheory/PushoutI.lean, Mathlib/GroupTheory/PushoutI.lean, Mathlib/RingTheory/IsTensorProduct.lean, Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells.lean, Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells.lean, Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells.lean, Mathlib/AlgebraicTopology/RelativeCellComplex/Basic.lean; digest cb3e5570c9e5de24",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected signatures and pinned source; ordinary coends, skeletal adjunctions, Cech constructions and cofibrant replacements do not give this relative filtration or framed bar comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "weighted coend of a Reedy cofibrant cosimplicial diagram preserves objectwise monomorphisms and weak equivalences",
+   "results": "8 hits; ; SSet.modelCategoryQuillen.cofibration_of_mono, SSet.modelCategoryQuillen.cofibrations_eq, SSet.modelCategoryQuillen.cofibration_iff, SSet.modelCategoryQuillen.instCategoryWithCofibrations, SSet.modelCategoryQuillen.mono_of_cofibration, HomotopicalAlgebra.isCofibrant_of_cofibration, HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations, HomotopicalAlgebra.BifibrantObject.instIsCofibrantObjι; digest 3a746adbb9ef0b31",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected signatures and pinned source; ordinary coends, skeletal adjunctions, Cech constructions and cofibrant replacements do not give this relative filtration or framed bar comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-scat-framed-diagram-adjunction",
@@ -100,5 +273,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-projective-frame-weighted-coend",
+  "worker": "stage1",
+  "summary": "Proved projective-resolution/injective-weight interchange by a relative Reedy coend filtration and explicit framed-bar/projective-weight comparison. Reused existing boundary-collapse, Brown and simplicial bar nodes. No statement change; two statement-only inputs. Resumption repair: removed a cyclic citation to the broad simplicial-bar resolution; its simplicial-set instance instead uses the independent free-bar cell filtration and extra-degeneracy theorem.",
+  "blueprint": "Foundation for paragraph 2 of prop-coef-integral-exceptional-adjoint, its displayed derived Hom/derived inverse-limit calculation, through the retained ancestry of framed diagram adjunctions.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N9-ab1b3395e",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-ab1b3395e (reviewer sub-agent of L); spot-checked: I read the item, its 10 steps, both new nodes, every cited statement and the parent citer's steps 2 and 8. The math is correct. Hirschhorn is not under literature/; it is cited by URL, the same convention 29 existing DAG nodes use, and the proof is marked as agent-written. So I checked each step against the cited node statements rather than the source pages. Step 2 is the lifting test, with component maps 1×p^{C(j)}. Step 3 rests on K_n∩D_nL=D_nK and the filtration transitions λ_nf□δ_ni. Steps 4 and 6 are Brown arguments. Step 5 uses the right adjoint of evaluation and the boundary-collapse test. Step 8 follows the extra-degeneracy identities of the free-bar node, read with C=J^op (c_0=j_p). In Step 9 I expanded both coends myself: both give ∫^p∫^r∐V^r_{j_0}·(K(j_p)_r×Δ^p_r), with d_0 the K action at j_p and d_p the V action. Step 10 applies the injective model. The cases J=∅, J=*, K=∅ hold. There is no cycle: the item is not reachable from any of its dependencies (212 nodes checked). The new nodes are true statements with statement only; I tested the skeletal filtration on J=* with Δ^0 and Δ^1 weights, and the framed resolution on J=*, where PA=A. Neither duplicates tensor-coend-skeletal-pushouts, simplicial-bar-projective-resolution, free-bar-cell-filtration or presheaf-simplex-hocolim-resolution, and neither restates a clause of the item. Two citation repairs are in fixes/: (1) Steps 3 and 8 now cite the same-unit node lem-coef-simplicial-latching-degenerate-subset for 'latching set = degenerate subset', which replaces lem-weil-pbc-simplicial-set-nondegenerate-decomposition from another unit; that node gives only unique decomposition. The section argument is now written out, and the now-unneeded tool_uses entry is removed. (2) Step 2 now cites lem-coef-parametrized-adjunction-corner-lifting and is marked non-elementary. proof_deps was recomputed; no statement changed and no node was dropped.; 1 file(s) fixed by the reviewer"
  }
 }

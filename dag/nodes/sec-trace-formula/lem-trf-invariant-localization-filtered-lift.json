@@ -17,16 +17,17 @@
  ],
  "proof": [
   {
-   "text": "Work on the small etale site, as required by the statement's definition of the filtered construction. The constructible-origin equivalence of [lem-sf-proetale-constructible-origin] identifies the ordinary bounded constructible coefficient objects, and [sk-prop-sf-comparison] gives fully faithful comparison on their bounded-below derived categories. The filtered objects and operations on the pro-etale side in this statement are their stipulated transports. For a bounded complex $B$ representing $K$, apply [lem-weil-pbc-open-closed-short-exact] in every degree: the natural counit and unit give $0\\to j_!j^*B\\to B\\to i_*i^*B\\to0$. By [prop-weil-pbc-inverse-image-modules-exact] and [lem-weil-pbc-extension-by-zero-exact], a quasi-isomorphism of representatives induces quasi-isomorphisms on the subcomplexes. The exactness of $i_*$ in [lem-cbc-open-closed-recollement] gives the same for the quotients. Thus $B\\mapsto(B,F^1B=j_!j^*B)$ descends to a section of forgetting the filtration, independent of the representative up to its canonical derived isomorphism. Its grades are $K_Z=i_*i^*K$ in filtration degree $0$ and $K_U=j_!j^*K$ in degree $1$. The finite-stage preservation statements of [prop-functor-package] put the two grades and the underlying object in $D^b_{ctf}$. The unfiltered statement is about the pro-etale operations of [def-trf-coefficient-conventions], so the etale realization must be compared with them: by [det-ctf-finite-comparison-localizing], $\\nu^*$ commutes, through its canonical comparisons, with inverse images, direct images, extension by zero along open immersions and the compactification composite $Rf_!=Rp_*j_!$, on bounded constructible finite-Tor etale complexes (which lie in the localizing closure there). Hence for $T_{\\mathrm{et}}=Rc_{1!}c_2^{-1}$ on the etale side, $\\nu_X^*T_{\\mathrm{et}}M\\simeq Rc_{1!}c_2^*\\nu_X^*M$ naturally in $M$; together with the full faithfulness of [sk-prop-sf-comparison] this identifies, for bounded constructible etale $M,N$ and every $q$, $\\operatorname{Hom}_{D(X_{\\mathrm{et}},A)}(T_{\\mathrm{et}}M,N[q])$ with $\\operatorname{Hom}_{D(X,A)}(Rc_{1!}c_2^*\\nu^*M,\\nu^*N[q])$, compatibly with the maps induced by morphisms in $M$ and $N$. All unfiltered Hom groups and maps below are read through this identification; in particular the target of the forgetful map in the statement is the etale Hom group of $T_{\\mathrm{et}}K$ and $K$. Denote the localization arrows by $a:K_U\\to K$ and $b:K\\to K_Z$.",
+   "text": "Work on the small etale site. The constructible-origin equivalence [lem-sf-proetale-constructible-origin], the fully faithful comparison [sk-prop-sf-comparison], and [det-ctf-finite-comparison-localizing] identify the etale and stipulated pro-etale Hom groups and operations used below. The degreewise short exact sequence [lem-weil-pbc-open-closed-short-exact], exact inverse images [prop-weil-pbc-inverse-image-modules-exact], exact extension by zero [lem-weil-pbc-extension-by-zero-exact], and exact closed direct image [lem-cbc-open-closed-recollement] verify every hypothesis of [lem-trf-localization-filtration-descent], so $B\\mapsto(B,F^1B=j_!j^*B)$ descends canonically, with grades $K_Z=i_*i^*K$ in degree $0$ and $K_U=j_!j^*K$ in degree $1$. The finite-stage preservation statements [prop-functor-package] put these objects in $D^b_{ctf}$. Denote the localization arrows by $a:K_U\\to K$ and $b:K\\to K_Z$.",
    "uses": [
     "lem-sf-proetale-constructible-origin",
     "sk-prop-sf-comparison",
+    "det-ctf-finite-comparison-localizing",
+    "lem-trf-localization-filtration-descent",
+    "prop-functor-package",
     "lem-weil-pbc-open-closed-short-exact",
     "prop-weil-pbc-inverse-image-modules-exact",
     "lem-weil-pbc-extension-by-zero-exact",
-    "lem-cbc-open-closed-recollement",
-    "prop-functor-package",
-    "det-ctf-finite-comparison-localizing"
+    "lem-cbc-open-closed-recollement"
    ],
    "elementary": false,
    "source": {
@@ -74,15 +75,14 @@
    }
   },
   {
-   "text": "Write $v_U=\\operatorname{gr}^1\\widetilde u:TK_U\\to K_U$ and $v_Z=\\operatorname{gr}^0\\widetilde u:TK_Z\\to K_Z$. Functoriality of the filtration truncation triangles in [lem-trf-filtered-derived-hom-calculus], and the graded operation comparisons of [lem-trf-filtered-derived-operation-lifts], identify the image under $T$ of the localization triangle with the filtration truncation triangle of $T\\widetilde K$: its first and third terms have respectively only grade $1$ and only grade $0$, so the uniqueness clause of the truncation theorem applies. They therefore give the two equations\n$$a v_U=\\widehat u\\,T(a),\\qquad v_ZT(b)=b\\widehat u.$$\nEach equation determines its graded map uniquely. For the open equation use Step 2 and $j_!\\dashv j^*$ in [lem-cbc-open-closed-recollement]: after identifying $TK_U=j_!M_U$, composition with $a$ identifies both Hom sets with $\\operatorname{Hom}_U(M_U,j^*K)$ because $j^*a$ is the identity. For the closed equation, compact-support base change [prop-functor-package] identifies $i^*T(a)$ with zero and $i^*T(b)$ with an isomorphism: on $W=C\\times_{c_1,X}Z$, the sheaf $c_2^*a$ is zero and $c_2^*b$ is an isomorphism, since the image of $c_2|_W$ lies in $Z$. To justify the latter assertion scheme-theoretically, replace $W$ by $W_{\\mathrm{red}}$; this does not change the coefficient category by [i-topology]. On each affine chart the pullback of the ideal of the reduced closed subscheme $Z$ lies in every prime, hence is zero in the reduced ring. Thus $c_2|_{W_{\\mathrm{red}}}$ factors through $Z$. The closed immersion $i$ is proper by [lem-weil-pbc-closed-immersion-proper]. The counit $i^*i_*\\to\\mathrm{id}$ is an isomorphism by proper base change for the self-Cartesian square of the closed immersion $i$ (both other legs are identities). Consequently $c_2^*b$ is an isomorphism there. Ordinary adjunction [fix-prop-adjunctions] now identifies precomposition with $T(b)$ on maps into $K_Z=i_*i^*K$ with precomposition with the isomorphism $i^*T(b)$, proving the claimed uniqueness.",
+   "text": "Write $v_U=\\operatorname{gr}^1\\widetilde u:TK_U\\to K_U$ and $v_Z=\\operatorname{gr}^0\\widetilde u:TK_Z\\to K_Z$. Functoriality and uniqueness of the filtration truncation triangles in [lem-trf-filtered-derived-hom-calculus], together with the graded comparisons in [lem-trf-filtered-derived-operation-lifts], identify the image under $T$ of the localization triangle with the filtration truncation triangle. Since the first and third terms have only grades $1$ and $0$, respectively, this gives\n$$a v_U=\\widehat u\\,T(a),\\qquad v_ZT(b)=b\\widehat u.$$\nThe open equation determines $v_U$ uniquely by Step 2 and $j_!\\dashv j^*$: after $TK_U\\simeq j_!M_U$, composition with $a$ identifies both Hom sets with $\\operatorname{Hom}_U(M_U,j^*K)$. For the closed equation, put $W=C\\times_{c_1,X}Z$ and $Y=W_{\\mathrm{red}}$. The leg factorizations $d_1,d_2:Y\\to Z$ and the natural comparison of [lem-trf-invariant-closed-basechange-identification] give $i^*T(a)=0$ and $i^*T(b)$ invertible; [fix-prop-adjunctions] then gives uniqueness by ordinary adjunction. Thus each equation determines its graded map uniquely.",
    "uses": [
     "lem-trf-filtered-derived-hom-calculus",
     "lem-trf-filtered-derived-operation-lifts",
     "lem-cbc-open-closed-recollement",
     "prop-functor-package",
-    "i-topology",
     "fix-prop-adjunctions",
-    "lem-weil-pbc-closed-immersion-proper"
+    "lem-trf-invariant-closed-basechange-identification"
    ],
    "elementary": false,
    "source": {
@@ -122,21 +122,23 @@
  "proof_deps": [
   "lem-sf-proetale-constructible-origin",
   "sk-prop-sf-comparison",
+  "det-ctf-finite-comparison-localizing",
+  "lem-trf-localization-filtration-descent",
+  "prop-functor-package",
   "lem-weil-pbc-open-closed-short-exact",
   "prop-weil-pbc-inverse-image-modules-exact",
   "lem-weil-pbc-extension-by-zero-exact",
   "lem-cbc-open-closed-recollement",
-  "prop-functor-package",
   "sbc-prop-extension-by-zero-and-arbitrary-base-change",
   "fix-prop-adjunctions",
   "lem-trf-filtered-derived-hom-calculus",
   "lem-weil-pbc-module-sheaves-enough-injectives",
   "lem-trf-filtered-derived-operation-lifts",
   "thm-nagata-compactification",
+  "lem-trf-invariant-closed-basechange-identification",
   "i-topology",
-  "lem-weil-pbc-closed-immersion-proper",
   "def-trf-coefficient-pushforward",
-  "det-ctf-finite-comparison-localizing"
+  "lem-weil-pbc-closed-immersion-proper"
  ],
  "proof_origin": {
   "by": "document",
@@ -188,7 +190,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-term-locality",
@@ -210,8 +212,8 @@
   "date": "2026-10-17",
   "item": "lem-trf-invariant-localization-filtered-lift",
   "worker": "stage1",
-  "summary": "Expanded the invariant-localization filtered lift into seven sourced steps. Reused the existing filtered operation lifts; added only the general filtered derived Hom/truncation calculus. Proved support vanishing in every cochain degree and negative-filtration vanishing before taking H^0; identified both graded maps by explicit ordinary adjunction and unit formulas, including reduced closed source. No statement change.",
-  "blueprint": "Realizes the open--closed reduction in proof paragraphs (1) and (2) of lem-trf-local-term-locality, namely the filtered lifting needed before trace additivity. The detailed source is Varshavsky §5.3.3 after swapping the legs.",
+  "summary": "Repaired the returned split by extracting the two non-elementary arguments flagged in Steps 1 and 5: canonical descent of the open--closed filtration and invariant closed-support reduction/base-change identification. The original route and statement are unchanged; the shortened Steps 1 and 5 cite these new statement-only nodes.",
+  "blueprint": "Realizes the open--closed reduction in proof paragraphs (1) and (2) of lem-trf-local-term-locality, including Example 5.2.3 filtration descent and the §5.3.3 closed graded-map identification after swapping Varshavsky’s legs.",
   "tool_uses": [
    {
     "node": "lem-trf-filtered-derived-operation-lifts",
@@ -260,9 +262,9 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q13-2f200f806",
-  "group": "Q13",
+  "reviewer": "NT-cc-Q12-dff0e6983",
+  "group": "Q12",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-2f200f806 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-trf-filtered-derived-hom-calculus and every cited statement in full. Checked them against Varshavsky Def. 1.5.1, §§1.5.6, 1.5.9, Prop. 1.5.10, §§5.1.2–5.1.5 (Lemma 5.1.4(i)), 5.2.3, 5.3.2 and 5.3.3 (equation (5.2)). The item statement is correct once Varshavsky's legs are swapped to this project's convention: invariance c_2(c_1^{-1}Z)⊂Z, closed source c_1^{-1}(Z)_red, open inclusion c_2^{-1}(U)⊂c_1^{-1}(U). Nothing is weakened. The new node is a true, self-contained general statement with no proof content: the graded vanishing in the uniqueness clause is equivalent to Varshavsky's DF^{≥r}/DF^{≤r-1} condition, and gr^rH=⊕_a RHom(gr^aP,gr^{a+r}Q) matches 5.1.4(i). Tested on pure grades and on the crossed case P in grade 1, Q in grade 0 (filtered Hom is 0). It is not a duplicate: rg found only operation-lift, tensor and trace nodes. All seven steps check: the only negative grade is gr^{-1}=RHom(TK_U,K_Z), which vanishes in every degree. The Step 7 mate formula agrees with the unfolded def-trf-coefficient-pushforward for (i,h_Z). The reduced-source factorization goes through i-topology. I accept the declared tool uses (sbc extension-by-zero base change, operation-lifts, i-topology and the generic étale sheaf facts). No SGA source is cited. One fault (E1/C1), repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-invariant-localization-filtered-lift.json: the filtered construction lives on the étale site, but the stated Hom target uses pro-étale Rc_{1!}c_2^*. No step cited the theorem that ν^* commutes with these operations. Step 1 now cites det-ctf-finite-comparison-localizing (ν^* commutes with g^*, Rg_*, j_!, Rp_*j_! over F̄_q at finite A) and, with sk-prop-sf-comparison, identifies the Hom groups. Steps 3 and 4 refer to that identification, and Step 4 names the general first clause of operation-lifts. proof_deps is updated and a tool_uses entry is added for the off-route node. The statement and the new node are unchanged.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-dff0e6983 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, every cited statement, and Varshavsky §§1.5.6, 1.5.9, Ex. 5.2.3, 5.3.1 and 5.3.3 with eq. (5.2). Once Varshavsky's legs are swapped to this project's convention, the item statement matches the source: invariance c_2(c_1^{-1}Z)⊆Z, closed source c_1^{-1}(Z)_red, open inclusion c_2^{-1}(U)⊆c_1^{-1}(U). The statement is unchanged and nothing is weakened. The étale-to-pro-étale comparison goes through constructible-origin, sk-prop-sf-comparison and det-ctf, with no silent change of coefficient category. All seven steps check: only gr^{-1}=RHom(TK_U,K_Z) occurs and it vanishes in every degree; Step 5 proves both uniquenesses by adjunction; the Step 6 adjoint computation and the Step 7 mate/triangle-identity computation agree with the unfolded def-trf-coefficient-pushforward for (i,h_Z). All steps are at most 2000 characters. New node lem-trf-invariant-closed-basechange-identification is true: the reduced fibre gives the factorization; θ is arbitrary base change plus i-topology; i^*K_U=0 gives i^*T(a)=0; i^*η_i is invertible so i^*T(b) is too. I tested it on Z=∅, Z=X_red and a nonreduced fibre. It is statement-only and not a duplicate or a relabelling of an item clause. New node lem-trf-localization-filtration-descent is Ex. 5.2.3. It is not a duplicate of the pro-étale, D^+ node lem-trf-localization-filtered-section-exchange, which I record as a future merge candidate. One fix (E/B2): its exactness hypothesis was stated for a single representative B, but descent needs it for every bounded complex. I reworded the hypothesis to quantify over all B and to name the counit and unit; only the statement changed, in fixes/dag/nodes/sec-trace-formula/lem-trf-localization-filtration-descent.json. Every citation exists and is unmerged, uses equal proof_deps, and no SGA source is cited. All eight declared tool uses are accepted; the other citations are on the unit route or are closed or Mathlib leaves.; 1 file(s) fixed by the reviewer"
  }
 }

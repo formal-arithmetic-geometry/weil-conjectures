@@ -83,11 +83,9 @@
    }
   },
   {
-   "text": "The image of $\\bar\\phi:X\\to\\phi_!X$ in $\\mathcal L$ is cocartesian by the intrinsic criterion in [lem-coef-cocartesian-straightening]. To check it, fix $Z\\in H(e)$ and $g:d\\to e$. On the homotopy fibres over $g$ and $g\\phi$, the map induced by precomposition with $\\bar\\phi$ becomes, by step 5,\n$$\\operatorname{Map}_{H(e)_\\infty}(g_!\\phi_!X,Z)\\longrightarrow\\operatorname{Map}_{H(e)_\\infty}((g\\phi)_!X,Z),$$\nwhich is the identity under strict functoriality of $H$. More precisely, if $I_e:H(e)_\\infty\\to\\mathcal L$ is the fibre inclusion, the equivalence of step 5 sends $h$ to $I_e(h)\\bar g_{\\phi_!X}$. Precomposing once more with $\\bar\\phi_X$ gives $I_e(h)\\bar g_{\\phi_!X}\\bar\\phi_X=I_e(h)\\overline{g\\phi}_X$, the equivalence of step 5 for $g\\phi$. This equality holds on the ordinary lifts and gives the coherent homotopy on localized mapping spaces by step 1. Thus the assertion concerns the actual precomposition map. Hence the whole square is a homotopy pullback: its bottom spaces are discrete and its homotopy fibres are the displayed equivalences, using [lem-coef-kan-quillen-right-proper]. Such lifts exist for every base arrow and every source, so $p$ is intrinsically a cocartesian fibration and has a simplicial cocartesian replacement over $NC$, as that straightening node explicitly permits. Write $\\mathcal P_c=\\mathcal L\\times_{NC}\\{c\\}$ for the intrinsic fibre, to distinguish it from the localized slice $\\mathcal L_c$ of step 3. At $\\phi=1_c$, step 5 identifies the mapping spaces of $H(c)_\\infty$ with the homotopy fibres over $1_c$ of the mapping spaces of $\\mathcal L$. These are precisely the mapping spaces between its image objects in $\\mathcal P_c$, so the canonical map $H(c)_\\infty\\to\\mathcal P_c$ is fully faithful. It is essentially surjective also for the intrinsic homotopy fibre: an object there is represented by an object $Z\\in H(a)$ and a base isomorphism $\\sigma:a\\to c$. The ordinary lift $Z\\to\\sigma_!Z$ lies in $W_T$, since its component is an identity and its base is invertible. Its image therefore identifies that fibre object with the object $\\sigma_!Z$ represented by $H(c)$. The object-fixing hammock replacement represents all objects of $\\mathcal L$, so this accounts for every fibre object, including after a cocartesian replacement over $NC$. By [lem-coef-infinity-full-essential-image] this is a fibre equivalence.",
+   "text": "Apply [lem-coef-discrete-base-cocartesian-recognition] to $p:\\mathcal L\\to NC$ with $D_c=H(c)_\\infty$, $i_c$ the localized fibre inclusion, and $u_{\\phi,X}$ the image of the ordinary lift $\\bar\\phi_X$. Step 1's object-fixing hammock model represents every vertex by an original object. Identity lifts are identities and $\\bar g_{\\phi_!X}\\bar\\phi_X=\\overline{g\\phi}_X$ before localization, supplying the prescribed triangles. A lift of a base isomorphism lies in $W_T$, since its component is an identity, so its image is an equivalence. Step 5 supplies exactly the lemma's mapping equivalence $h\\mapsto i_d(h)u_{\\phi,X}$, with its endpoint naturality; it gives more than an equivalence of abstract homotopy types. Universes are fixed in step 1. The lemma therefore proves that these images are cocartesian, that $p$ admits a simplicial cocartesian representative, and that the canonical functors $J_c:H(c)_\\infty\\to\\mathcal P_c:=\\mathcal L\\times_{NC}\\{c\\}$ are equivalences of intrinsic fibres.",
    "uses": [
-    "lem-coef-cocartesian-straightening",
-    "lem-coef-kan-quillen-right-proper",
-    "lem-coef-infinity-full-essential-image"
+    "lem-coef-discrete-base-cocartesian-recognition"
    ],
    "elementary": false,
    "source": {
@@ -96,14 +94,34 @@
    }
   },
   {
-   "text": "Apply [lem-coef-cocartesian-straightening] to $p$. Its classifying diagram has the localized fibres just identified, and its transport is localized $\\phi_!$, because its chosen lifts are the images of $\\bar\\phi$. These identifications are coherent. By step 1 the localization $q:NT\\to\\mathcal L$ lies over $NC$, and by step 6 it carries every ordinary cocartesian arrow $\\bar\\phi$ to a cocartesian arrow of $p$. The ordinary opfibration $NT\\to NC$ is a cocartesian fibration with these lifts, classified by the strict diagram $NH$ of nerves: for a fibre arrow $t:X\\to X'$ over $c$ the equality $\\bar\\phi_{X'}t=(\\phi_!t)\\bar\\phi_X$ is the ordinary naturality square, and for a composable string the strict equalities $\\bar\\psi\\bar\\phi=\\overline{\\psi\\phi}$ hold before localization. Hence $q$ is a morphism of $\\operatorname{coCart}(NC)$, and by the equivalence $\\operatorname{St}_{NC}$ of [lem-coef-cocartesian-straightening] it corresponds to a coherent transformation $\\theta:NH\\to\\operatorname{St}(p)$ in $\\operatorname{Fun}(NC,\\operatorname{Cat}_\\infty)$ whose component at $c$ is the fibre functor $H(c)\\to\\mathcal P_c$, namely the localization at $W_c$ followed by the fibre equivalence of step 6. Now use [lem-coef-system-localization-universal]: localization $L$ is left adjoint to $G(\\mathcal E)=(\\mathcal E,\\operatorname{Eq}(\\mathcal E))$, and its value on $(NH(c),W_c)$ is canonically the hammock localization of [lem-coef-hammock-infinity-localization], both having the same universal property. Postcomposition with this adjunction is an adjunction between $\\operatorname{Fun}(NC,\\mathsf{WCat}_\\infty)$ and $\\operatorname{Fun}(NC,\\operatorname{Cat}_\\infty)$; its left adjoint sends the relative diagram $c\\mapsto(NH(c),W_c)$ (transitions preserve $W$) to $H_\\infty=L\\circ(H,W)$, the diagram obtained by localizing every fibre and transition functor, and its unit $\\lambda:NH\\to H_\\infty$ has the fibre localizations as components. Every component of $\\theta$ inverts $W_c$, so $\\theta$ is a transformation $(H,W)\\to G\\circ\\operatorname{St}(p)$ and factors as $\\theta=\\bar\\theta\\lambda$ for a coherent transformation $\\bar\\theta:H_\\infty\\to\\operatorname{St}(p)$, unique up to a contractible space of choices. Its components $H(c)_\\infty\\to\\mathcal P_c$ are the equivalences of step 6, so by the vertexwise criterion of [lem-cbc-enhanced-functor-cone-calculus] $\\bar\\theta$ is an equivalence, and its transport components are the localized $\\phi_!$. Thus $\\operatorname{St}(p)\\simeq H_\\infty$, and straightening gives $\\mathcal L\\simeq\\int_C H_\\infty$ over $NC$. Reverse opposites to return to $B,F$. Explicitly, for every target infinity category $\\mathcal D$, taking opposites gives $\\operatorname{Fun}(\\mathcal L^{\\mathrm{op}},\\mathcal D)\\simeq\\operatorname{Fun}(\\mathcal L,\\mathcal D^{\\mathrm{op}})^{\\mathrm{op}}$, reversing coherent transformations as well as arrows. Restriction along $q^{\\mathrm{op}}$ corresponds under this identification to the opposite of restriction along $q$; the latter identifies $\\operatorname{Fun}(\\mathcal L,\\mathcal D^{\\mathrm{op}})$ with the full subcategory of $\\operatorname{Fun}(NT,\\mathcal D^{\\mathrm{op}})$ carrying $W_T$ to equivalences. The universal property of [lem-coef-hammock-infinity-localization] therefore identifies the localization of $(T^{\\mathrm{op}},W_T^{\\mathrm{op}})$ with $\\mathcal L^{\\mathrm{op}}$, naturally; cocartesian lifts then become Cartesian lifts. This gives the asserted comparison over $NB$. The covariant mapping formula in step 5 becomes exactly\n$$\\coprod_{f:b\\to c}\\operatorname{Map}_{F(b)_\\infty}(X,f^*Y).$$\nThe ordinary factorization $(f,u)=(f,1)\\circ(1,u)$ shows the specified action on arrows; hammock composition and strict composition of the ordinary lifts give its composition and higher coherences. Its fibre restriction is the original localization functor by construction.",
+   "text": "Apply [lem-coef-grothendieck-classifier-localization] to the same strict relative diagram $H$, its total category $T$, the cocartesian family $p$ of step 6, and $q:NT\\to\\mathcal L$ of step 1. Each $W_c$, the weak equivalences of the opposite model structure on $H(c)$, is a wide subcategory containing all isomorphisms (model-category weak equivalences contain the isomorphisms and are closed under composition by two-out-of-three), and the diagram's transitions preserve $W$ by hypothesis. The lemma's localization unit $\\lambda_c$ and the hammock localization $H(c)_\\infty$ of step 6 are both universal localizations of $(NH(c),W_c)$ (by [lem-coef-system-localization-universal] and [lem-coef-hammock-infinity-localization]), so they are identified by the unique comparison under $NH(c)$, and $J_c$ is transported along it. Step 6 proves that $q$ preserves the chosen ordinary lifts. Its fibre restriction is fibre localization followed by $J_c$, by the construction of $i_c$ in step 6. Thus every hypothesis of the cited lemma holds, including the intrinsic-fibre equivalences. It gives a coherent equivalence $H_\\infty\\simeq\\operatorname{St}_{NC}(p)$ compatible with $q$ and the fibre localization units, hence an equivalence $\\int_C H_\\infty\\simeq\\mathcal L$ over $NC$. This includes the full classifying-diagram coherences and identifies the transport with localized $\\phi_!$.",
    "uses": [
-    "lem-coef-cocartesian-straightening",
-    "lem-coef-hammock-infinity-localization",
+    "lem-coef-grothendieck-classifier-localization",
     "lem-coef-system-localization-universal",
-    "lem-cbc-enhanced-functor-cone-calculus"
+    "lem-coef-hammock-infinity-localization"
    ],
    "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Corollary 4.22 and the classifying-diagram identification, proved here by the slice adjunction and straightening; opposite convention as in the item source."
+   }
+  },
+  {
+   "text": "Reverse opposites to return to $B,F$. For any target infinity category $\\mathcal D$, reversing all arrows and transformations gives $\\operatorname{Fun}(\\mathcal L^{\\mathrm{op}},\\mathcal D)\\simeq\\operatorname{Fun}(\\mathcal L,\\mathcal D^{\\mathrm{op}})^{\\mathrm{op}}$. The full functor-category universal property of [lem-coef-hammock-infinity-localization], applied with target $\\mathcal D^{\\mathrm{op}}$, identifies the latter with $\\operatorname{Fun}_{W_T}(NT,\\mathcal D^{\\mathrm{op}})^{\\mathrm{op}}\\simeq\\operatorname{Fun}_{W_T^{\\mathrm{op}}}(NT^{\\mathrm{op}},\\mathcal D)$. These equivalences commute with restriction, so $q^{\\mathrm{op}}$ exhibits the localization of $(E,W_E)=(T^{\\mathrm{op}},W_T^{\\mathrm{op}})$. Taking opposites in the mapping-square characterization in [lem-coef-cocartesian-straightening] turns the cocartesian family into a Cartesian family. Its classifying diagram is $F_\\infty$ by step 7, since its fibres are the opposite localizations and its transport is localized $f^*$. This proves the asserted comparison over $NB$.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Corollary 4.22 and the classifying-diagram identification, proved here by the slice adjunction and straightening; opposite convention as in the item source."
+   }
+  },
+  {
+   "text": "The covariant mapping formula in step 5, after reversing source and target, is precisely $\\coprod_{f:b\\to c}\\operatorname{Map}_{F(b)_\\infty}(X,f^*Y)$. The ordinary factorization $(f,u)=(f,1)\\circ(1,u)$ gives the required arrow action. Fibre restriction is the original localization functor by step 7's compatibility with its units. The construction uses functors and coherent transformations throughout, so composition and higher coherences are those of the localized diagram; their compatibility is part of step 7's comparison, not inferred just from agreement on objects or individual arrows.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "https://arxiv.org/html/1312.3881v4",
     "place": "Corollary 4.22 and the classifying-diagram identification, proved here by the slice adjunction and straightening; opposite convention as in the item source."
@@ -126,8 +144,9 @@
   "lem-cbc-enhanced-functor-cone-calculus",
   "lem-coef-cocartesian-straightening",
   "lem-coef-coherent-nerve-comparison",
+  "lem-coef-discrete-base-cocartesian-recognition",
+  "lem-coef-grothendieck-classifier-localization",
   "lem-coef-hammock-infinity-localization",
-  "lem-coef-infinity-full-essential-image",
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-system-localization-universal"
  ],
@@ -300,7 +319,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enriched-fibre-assembly",
@@ -313,12 +332,12 @@
   "date": "2026-10-17",
   "item": "lem-coef-grothendieck-fibre-localization",
   "worker": "stage1",
-  "summary": "No project Lean attachment or Mathlib match. Proved the unchanged statement by lifting full hammocks over a fixed base arrow to the ordinary base slice, then localizing its explicit relative adjunction to the target fibre and applying existing straightening. Created no nodes. The proposed source four-arrow auxiliary reduction fails for the constant terminal diagram over [2]; recorded the explicit counterexample and supplied the slice proof instead. Maintainer reader (2026-10-17): step 7's coherent identification of the classifying diagram with the pointwise localization now cites lem-coef-system-localization-universal (diagram-level localization adjunction) and the vertexwise criterion explicitly.",
+  "summary": "Repair of the human return of 2026-10-17: kept the statement, Lean record, slice-and-hammock route, steps 1–5 and former step 8 verbatim. Extracted the hidden arguments of former steps 6–7 into two statement-only nodes: discrete-base cocartesian recognition with intrinsic-fibre equivalence, and coherent Grothendieck classifying-diagram comparison. Replaced the long steps by checked applications, and wrote the remaining opposite-universal-property and arrow-formula deductions as short separate steps. All ten non-elementary/elementary proof steps are below 2000 characters. Preserved the previous source-error report and searches; genuine searches for both new nodes found no Mathlib match.",
   "blueprint": "Realizes paragraph 2 of prop-coef-integral-exceptional-adjoint: the coherent finite-coefficient adjunction before derived inverse limit, through the existing enriched-fibre-assembly / enriched-rectification chain. Both master proof paragraph 2 and the current main-20261015 statement were read. No chapter or unit route is replaced.",
   "tool_uses": [
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
-    "why": "Steps 7 and 8 use only the generic vertexwise equivalence criterion in a functor infinity category, with target Cat_infinity; no node of this unit provides that criterion and no geometric or coefficient proof route is replaced."
+    "why": "Final step 10 uses only the generic vertexwise equivalence criterion for a coherent transformation with values in Cat_infinity. No node of this unit supplies it; no coefficient or geometric proof route is replaced."
    }
   ]
  },
@@ -326,12 +345,12 @@
   "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-N0-5ab341cfd",
-  "group": "N0",
+  "reviewer": "NT-cc-NB-45f0600ba",
+  "group": "NB",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-5ab341cfd (reviewer sub-agent of L); spot-checked: Read the item, all eight steps, every cited statement, the citer lem-coef-enriched-fibre-assembly, the unit record, the master ancestor prop-coef-integral-exceptional-adjoint paragraph 2, and Haugseng 1312.3881v4 §4.2 (Def 4.12-4.17, Thm 4.19, Prop 4.20, Thm 4.21, Cor 4.22, Thm 4.6/Rem 4.7) online. The statement is unchanged and true; it is the Cartesian form of Haugseng 4.21/4.22 with base and fibres reversed. Base isos in W_E are already isomorphisms in E. Small cases checked: empty, terminal, discrete, [1] and a group base. Steps re-derived: step 2 slice adjunction (forced base alpha, r(a,u)=beta_!u by strictness, strict triangle identities; elementary is justified). Step 3 descends the unit and proves the localized adjunction. Step 4: hammock labels are uniquely forced right to left (leftward arrows have iso base) and reductions commute with lifting, giving an isomorphism; the component over a discrete set is a homotopy fibre. Step 6: cocartesian criterion via the composite-lift identity; fibre is fully faithful at phi=1 and essentially surjective via Z->sigma_!Z in W_T. Step 8 is straightening plus the vertexwise criterion. One gap, fixed: step 7's coherent identification St(p) ~ H_infinity used a diagram-level localization universal property that the single-category hammock node does not state. I rewrote it: q is a coCart(NC) morphism, straightening gives theta: NH->St(p), theta factors through NH->H_infinity by the L -| G adjunction of lem-coef-system-localization-universal (same unit, split, no cycle) applied in Fun(NC,-), and the factorization is an equivalence by the vertexwise criterion. Its uses now add lem-coef-system-localization-universal and lem-cbc-enhanced-functor-cone-calculus, and proof_deps was recomputed. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, for the generic vertexwise equivalence criterion only (why updated to steps 7-8). No new nodes and no duplicate found. The worker's source-error report on Haugseng 4.19 (terminal diagram over [2], three components against a contractible space) is internally correct for the stated word convention; I could not read Def 4.12's exact word. The proof does not depend on it. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-grothendieck-fibre-localization.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-45f0600ba (reviewer sub-agent of L); spot-checked: I read the item in full: its unchanged statement and all 10 steps. I also read both new nodes, every cited statement (hammock-infinity-localization, coherent-nerve-comparison, kan-quillen-right-proper, cocartesian-straightening, cbc-enhanced-functor-cone-calculus, def-cbc-enhanced-diagrams-cones, system-localization-universal), the unit sk-prop-sf-biduality-general and the citer lem-coef-enriched-fibre-assembly, plus Haugseng arXiv:1312.3881v4 Theorem 4.21, Corollary 4.22, Theorem 4.6 and Remark 4.7 online. Thm 4.21's proof is the discrete-base fibrewise homotopy-pullback check that the new recognition node states, and Cor 4.22 is the classifying comparison that the new classifier node states. Steps 1-6 and 8-10 check out: the slice adjunction is strict and elementary; step 3's localized adjunction comes from the full functor-category universal property; step 4's hammock lifting is unique, with leftward arrows over invertible bases; step 6 meets every recognition hypothesis, including the strict identity bar g bar phi = bar(g phi); step 9 gives Map_F(b)(X,f^*Y) and (f,1)(1,u)=(f,u). Both new nodes are true, self-contained and carry only statements. I tested empty, terminal and discrete bases, a one-object group base, and W = isomorphisms. Neither restates a clause of the item or duplicates an existing node (checked against cocartesian-mapping-criterion, strict-presentation-transport-representation, kan-relative-nerve, marked-relative-nerve-quillen, relative-functor-cocartesian-classifier and relative-grothendieck-localization). Searches cover all three kinds; the one rate-limited LeanSearch is honestly recorded as unavailable, and another LeanSearch succeeded. FIX: step 7 did not check the classifier's hypothesis that each W_c is a wide subcategory containing the isomorphisms, and did not identify lambda_c with H(c)_infinity. I added both checks, added system-localization-universal and hammock-infinity-localization to the step's uses and to proof_deps, and confirmed there is no cycle. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, for the vertexwise equivalence criterion only. Note for the maintainer: lem-coef-relative-grothendieck-localization (unsplit, NZ, 2026-10-17) generalizes this item when U is the isomorphisms; only one of the two may cite the other later, to avoid a cycle.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
