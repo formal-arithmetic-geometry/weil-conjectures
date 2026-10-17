@@ -1,11 +1,120 @@
 {
  "id": "lem-trf-affine-etale-cover-component-criterion",
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $X=\\operatorname{Spec}C$. By [lem-weil-pbc-spec-localization-away-basic-open], the $D(f)$ form a basis and $D(f)\\cong\\operatorname{Spec}C_f$ topologically. By [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact], each such spectrum and $X$ are quasi-compact. Also $D(f)\\cap D(g)=D(fg)$. Every quasi-compact open is a finite union of these basic opens, so intersections of two quasi-compact opens are finite unions of quasi-compact basic opens. Thus $X$ satisfies all three hypotheses of the component-intersection theorem used next.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E4 (lemma-standard-open), 00E8 (lemma-quasi-compact), 04PM (lemma-topology-spec); explicit verification of the hypotheses of Topology 005F"
+   }
+  },
+  {
+   "text": "Fix a connected component $Z$. By [lem-weil-pbc-quasicompact-components-clopen-intersection], $Z$ is the intersection of the clopen neighbourhoods of any of its points. Each such clopen contains all of $Z$, since $Z$ is connected. By [lem-weil-pbc-spec-clopen-idempotent], these neighbourhoods are precisely $D(e)$ for idempotents $e$ with $Z\\subseteq D(e)$. Thus $\\bigcap_eD(e)=\\bigcap_eV(1-e)=V(I_Z)$: the $1-e$ are exactly the idempotents vanishing on $Z$. Prime ideals of $C/I_Z$ correspond to primes of $C$ containing $I_Z$, with the same induced Zariski topology, proving the asserted underlying space. Moreover $C_Z=\\varinjlim_e C_e$, with the idempotents indexed by reverse inclusion of $D(e)$ and transition to $C_{ee'}$ from $C_e,C_{e'}$. Indeed $C_e=C/(1-e)$: inverting an idempotent makes it equal to $1$. These quotient maps are surjective and their directed union of kernels is exactly $I_Z$: for finitely many idempotents $d_i$ vanishing on $Z$, $e=\\prod_i(1-d_i)$ equals $1$ on $Z$ and kills every $d_i$. Thus every finite sum of multiples of the $d_i$ dies at this stage; conversely every kernel $(1-e)$ lies in $I_Z$. This proves the colimit assertion directly by the universal property of a quotient.",
+   "uses": [
+    "lem-weil-pbc-quasicompact-components-clopen-intersection",
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EG (lemma-connected-component), proof from Topology 005F and Algebra 00EE; explicit quotient-colimit calculation"
+   }
+  },
+  {
+   "text": "Assume (ii), and let the family in (i) be given. Refine its members by affine etale charts $V=\\operatorname{Spec}B\\to X$: an affine open of $U_a$ composed with $U_a\\to X$ is etale by [lem-weil-pbc-etale-composition-cancellation], clauses (1) and (2), and these charts still jointly cover $X$. For each $Z$, its closed point maps to a prime $\\mathfrak p$ of $C$. Choose a point $y$ of one chart $V$ above $\\mathfrak p$. Since $I_Z\\subseteq\\mathfrak p$, the map $C\\to\\kappa(y)$ factors through $C_Z$, giving a point of $V\\times_X\\operatorname{Spec}C_Z$ over the closed point. The base change is etale by [lem-weil-pbc-etale-ring-base-change]. Applying [lem-sbc-strict-henselian-etale-neighbourhood-section] to that point gives a section over all of $\\operatorname{Spec}C_Z$, equivalently, by the affine scheme/ring correspondence [def-weil-affine-spectrum], a $C_Z$-algebra map $C_Z\\otimes_CB\\to C_Z$, i.e. a $C$-algebra map $B\\to C_Z$. By [lem-weil-pbc-etale-algebra-finite-presentation-localization], $B$ is a finitely presented $C$-algebra. Apply [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] with base ring $C$ and the small directed system $C_e$ of step 2. The map factors as $B\\to C_e\\to C_Z$ for one idempotent $e$ with $Z\\subseteq D(e)$. The first map is a $C$-algebra map, so it is a section $D(e)=\\operatorname{Spec}C_e\\to V$ over $X$. In particular its composite to the original member $U_a$ is a section over this clopen neighbourhood of the whole component, not merely a section over the component quotient.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-sbc-strict-henselian-etale-neighbourhood-section",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QO (lemma-characterize-finite-presentation), (1) implies (3), and Tag 00U2 (lemma-etale); strict-local section input as stated in the cited project node"
+   }
+  },
+  {
+   "text": "The clopens $D(e)$ obtained in step 3 cover every component and hence $X$. Quasi-compactness from [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] gives a finite subcover $W_1,\\ldots,W_n$. Put $P_1=W_1$ and $P_j=W_j\\setminus\\bigcup_{i<j}W_i$. The $P_j$ are pairwise disjoint clopens with union $X$, each contained in $W_j$. Restrict the section on $W_j$ to $P_j$, and compose it with the chosen inclusion $U_{a(j)}\\to\\coprod_a U_a$. These maps glue over the disjoint open covering $\\{P_j\\}$ to a morphism from $X$ to the coproduct whose composite to $X$ is the identity on every $P_j$, hence is the identity. This proves (i). If $C=0$, $X$ is empty and its unique map to the covering coproduct is already a section.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E8 (lemma-quasi-compact); elementary finite disjoint refinement and gluing of scheme morphisms"
+   }
+  },
+  {
+   "text": "Assume (i), and fix a component $Z$. For $\\bar f\\in C_Z$, choose a lift $f\\in C$. The two maps $\\operatorname{Spec}C_f\\to X$ and $\\operatorname{Spec}C_{1-f}\\to X$ are etale by [lem-weil-pbc-etale-algebra-finite-presentation-localization], clause (2) applied to the identity $C\\to C$, and their images are $D(f),D(1-f)$ by [lem-weil-pbc-spec-localization-away-basic-open]. They cover $X$. A section provided by (i) partitions $X$ into the inverse images of the two summands, which are clopen. Connectedness forces the nonempty $Z$ to lie wholly in one part; the section identity then forces $Z\\subseteq D(f)$ or $Z\\subseteq D(1-f)$. By step 2, $D(\\bar f)=\\operatorname{Spec}C_Z$ or $D(1-\\bar f)=\\operatorname{Spec}C_Z$, so [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact], clause (ii), shows that $\\bar f$ or $1-\\bar f$ is a unit. Hence $C_Z$ is local: two distinct maximal ideals would give $u+v=1$ with $u$ in the first and $v$ in the second, contradicting this unit alternative for $u$. A maximal ideal exists because $\\operatorname{Spec}C_Z=Z$ is nonempty.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U2 (lemma-etale), localizations; Tags 00E4 and 00E0; agent argument deriving locality from the split Zariski cover"
+   }
+  },
+  {
+   "text": "For every faithfully flat etale $C$-algebra $B$, [lem-weil-pbc-faithfully-flat-surjective-spectrum] says $\\operatorname{Spec}B\\to X$ is surjective. Apply (i) to this singleton family to obtain a section. The affine scheme/ring correspondence [def-weil-affine-spectrum] turns it into a $C$-algebra retraction $B\\to C$. Therefore [lem-weil-pbc-split-etale-covers-maximal-local-criterion], applied to $C$ itself, implies that $C_{\\mathfrak m}$ is strictly henselian for every maximal ideal $\\mathfrak m\\subset C$. No cover-splitting assumption on a quotient of $C$ has been invoked.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-split-etale-covers-maximal-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097V (lemma-have-sections-strictly-henselian), using Algebra Tag 00HQ (lemma-ff-rings)"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak n$ be the unique maximal ideal of $C_Z$ from step 5 and $\\mathfrak m$ its inverse image in $C$. The quotient map makes $\\mathfrak m$ maximal. Each idempotent generator $d$ of $I_Z$ lies in $\\mathfrak m$, so $1-d\\notin\\mathfrak m$; since $d(1-d)=0$, $d$ becomes zero in $C_{\\mathfrak m}$. Thus $C\\to C_{\\mathfrak m}$ factors through $C_Z$. Conversely every $s\\notin\\mathfrak m$ maps outside $\\mathfrak n$ and is a unit in the local ring $C_Z$, so the quotient map extends to $C_{\\mathfrak m}\\to C_Z$ by the fraction construction [def-weil-pbc-localization-at-prime]. These maps are inverse: both composites fix the images of $C$, and fractions are determined by those images and inverses of denominators. Hence $C_Z\\cong C_{\\mathfrak m}$, which is strictly henselian by step 6. This proves (ii), completing the equivalence without treating locality as part of the component-ring construction.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO (definition-localization); agent calculation identifying the now-local component quotient with the corresponding maximal localization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "lem-sbc-strict-henselian-etale-neighbourhood-section",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-quasicompact-components-clopen-intersection",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-split-etale-covers-maximal-local-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Agent proof assembled from Algebra Tags 00EG, 00EE, 00E8, 00QO, 00U2, 00HQ; Topology Tag 005F; Pro-etale Tag 097V. The converse applies 097V to C and explicitly identifies a local component quotient with C_m; it does not invoke quotient inheritance 097U."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-artin-tensor-etale-acyclic",
@@ -29,35 +138,49 @@
   {
    "tool": "leanfinder",
    "query": "Every etale covering of an affine scheme has a section if and only if all connected components are spectra of strictly henselian local rings",
-   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.Etale, Algebra.etaleLocus_eq_univ_iff, Algebra.etaleLocus_eq_univ_iff_etale, AlgebraicGeometry.Scheme.AffineCover.X, Algebra.Etale.iff_exists_algEquiv_prod, AlgebraicGeometry.IsEtale, Algebra.etaleLocus. The hits describe affine covers, etale loci and finite-type etale algebras over fields; none gives this component criterion for arbitrary affine schemes.",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.Etale, Algebra.etaleLocus_eq_univ_iff, Algebra.etaleLocus_eq_univ_iff_etale, AlgebraicGeometry.Scheme.AffineCover.X, Algebra.Etale.iff_exists_algEquiv_prod, AlgebraicGeometry.IsEtale, Algebra.etaleLocus. These results concern etale charts/loci or geometric connectedness, and do not state the arbitrary-ring split-cover/component equivalence.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"Henselian\", \"Connected\"",
-   "results": "0 hits: none. The hits describe affine covers, etale loci and finite-type etale algebras over fields; none gives this component criterion for arbitrary affine schemes.",
+   "query": "Henselian, Connected",
+   "results": "0 hits: none; loogle: unknown identifier 'Henselian'.",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "no match (query rejected: unknown identifier)"
   },
   {
    "tool": "grep",
    "query": "strict.*hensel|acyclic.*etale|etale.*acyclic|cover.*split",
-   "results": "0 hits: none. The hits describe affine covers, etale loci and finite-type etale algebras over fields; none gives this component criterion for arbitrary affine schemes.",
+   "results": "0 hits: none; searched Mathlib/AlgebraicGeometry.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "An affine scheme has all etale covers split exactly when its connected components are strictly henselian",
-   "results": "8 hits: AlgebraicGeometry.Scheme.AffineCover.cover_X, AlgebraicGeometry.Scheme.AffineCover.mk, AlgebraicGeometry.isLocallyNoetherian_of_affine_cover, AlgebraicGeometry.Scheme.isAffine_affineCover, AlgebraicGeometry.isLocallyArtinian_iff_of_isOpenCover, AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover, AlgebraicGeometry.Scheme.AffineOpenCover.openCover_X, AlgebraicGeometry.Scheme.AffineCover.ctorIdx. The hits describe affine covers, etale loci and finite-type etale algebras over fields; none gives this component criterion for arbitrary affine schemes.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.AffineCover.cover_X, AlgebraicGeometry.Scheme.AffineCover.mk, AlgebraicGeometry.isLocallyNoetherian_of_affine_cover, AlgebraicGeometry.Scheme.isAffine_affineCover, AlgebraicGeometry.isLocallyArtinian_iff_of_isOpenCover, AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover, AlgebraicGeometry.Scheme.AffineOpenCover.openCover_X, AlgebraicGeometry.Scheme.AffineCover.ctorIdx. These results concern etale charts/loci or geometric connectedness, and do not state the arbitrary-ring split-cover/component equivalence.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
+   "tool": "leanfinder",
+   "query": "A family of etale morphisms covering Spec C admits a section componentwise when component rings are strictly henselian",
+   "results": "8 hits: StandardEtalePresentation.hasMap, StandardEtalePair.hasMap_X, StandardEtalePresentation, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePresentation.lift_bijective, Algebra.exists_etale_of_isEtaleAt, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial. These results concern etale charts/loci or geometric connectedness, and do not state the arbitrary-ring split-cover/component equivalence.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsStrictlyHenselianLocalRing, Scheme.Etale",
+   "results": "0 hits: none; loogle: unknown identifier 'IsStrictlyHenselianLocalRing'.",
+   "date": "2026-10-18",
+   "verdict": "no match (query rejected: unknown identifier)"
+  },
+  {
    "tool": "grep",
-   "query": "Henselian.*(component|cover|acyclic)|component.*Henselian|strictly.*hensel",
-   "results": "0 hits: none. The hits describe affine covers, etale loci and finite-type etale algebras over fields; none gives this component criterion for arbitrary affine schemes.",
+   "query": "strictly.*henselian|component.*ring|connected.*component",
+   "results": "12 hits: Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean; searched Mathlib/AlgebraicGeometry. These results concern etale charts/loci or geometric connectedness, and do not state the arbitrary-ring split-cover/component equivalence.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
@@ -78,5 +201,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-affine-etale-cover-component-criterion",
+  "worker": "stage1",
+  "summary": "Repair of all five returned faults. Supplied component-intersection citation and explicit filtered-colimit formula; spread affine etale sections with the existing finite-presentation factorization lemma; derived locality from split two-open Zariski covers; applied the maximal-local criterion to C itself and identified its maximal localization with the component quotient, removing the invalid application of (i) to quotient covers. Proof marked agent-written using local Stacks inputs. No statement change, new nodes, Lean edits or compilation.",
+  "blueprint": "Realizes the Artin joins input in the normal-cone specialization argument of lem-trf-local-term-locality: component rings are the strict-henselian pieces exactly when every affine étale cover splits, with sections allowed to vary over clopen pieces.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-localization-away-basic-open",
+    "why": "Basic-open basis and localization homeomorphism used to check the component-intersection hypotheses and the split two-open cover. This is a generic algebraic/topological tool below the Artin component criterion; no statement of the trace-formula unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "why": "Quasi-compact spectra for topology and finite gluing, and the criterion D(f)=Spec implies f is a unit. This is a generic algebraic/topological tool below the Artin component criterion; no statement of the trace-formula unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-quasicompact-components-clopen-intersection",
+    "why": "Exact component-as-intersection statement needed to identify the component quotient. This is a generic algebraic/topological tool below the Artin component criterion; no statement of the trace-formula unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-spec-clopen-idempotent",
+    "why": "Identifies clopen neighbourhoods with idempotent localizations, independently of any strict-local hypothesis. This is a generic algebraic/topological tool below the Artin component criterion; no statement of the trace-formula unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-base-change",
+    "why": "Base change of affine etale charts to component rings. This is a generic algebraic/topological tool below the Artin component criterion; no statement of the trace-formula unit supplies it."
+   },
+   {
+    "node": "lem-sbc-strict-henselian-etale-neighbourhood-section",
+    "why": "Section over Spec C_Z through a point above its closed point; used only in that stated scope. This is a generic algebraic/topological tool below the Artin component criterion; no statement of the trace-formula unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "why": "Affine etale algebra is finitely presented; principal localizations of the identity are etale. This is a generic algebraic/topological tool below the Artin component criterion; no statement of the trace-formula unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "why": "Factor the section B -> C_Z through one idempotent localization C_e. This is a generic algebraic/topological tool below the Artin component criterion; no statement of the trace-formula unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-principal-localization-open-immersion",
+    "why": "Identifies Spec C_e with the actual open subscheme D(e), needed for gluing sections. This is a generic algebraic/topological tool below the Artin component criterion; no statement of the trace-formula unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "Turns a faithfully flat etale C-algebra into a singleton cover to which (i) applies. This is a generic algebraic/topological tool below the Artin component criterion; no statement of the trace-formula unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-split-etale-covers-maximal-local-criterion",
+    "why": "Strict henselianity of all maximal localizations of C from retractions of its faithfully flat etale algebras. This is a generic algebraic/topological tool below the Artin component criterion; no statement of the trace-formula unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-quasicompact-components-clopen-intersection",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-sbc-strict-henselian-etale-neighbourhood-section",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-split-etale-covers-maximal-local-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-4f5db18e4",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-4f5db18e4 (reviewer sub-agent of L); spot-checked: I read the item in full: an unchanged statement and seven agent-written steps, with no new nodes. I also read the statements of all 13 proof deps and 3 stmt deps, the parent lem-trf-artin-tensor-etale-acyclic (both of its steps that use the item) and unit sk-i-curve-zero. Sources read: Stacks proetale.tex 097U/097V (lines 1424-1505), topology.tex 005F and algebra.tex 00EG. Hübner–Schmidt is not in the local literature; the WANTED request stays, and the proof is honestly marked as agent-written. Step checks: step 1 verifies the three hypotheses of the 005F node (it does not need sobriety). Step 2 checks the colimit formula C_Z = colim C_e, including that e = prod(1 - d_i) kills each d_i. Step 3 uses the strictly henselian section node with R = C_Z, then the 00QO factorization with R = C over that directed system, and the open immersion Spec C_e = D(e). Step 4 makes the cover disjoint and glues; it also covers C = 0. Step 5 derives that C_Z is local from the split cover D(f), D(1-f) and clause (ii) of the unit criterion; this correctly repairs the earlier false 'local by construction'. Step 6 uses faithfully flat surjectivity to get a singleton cover, then 097V applied to C itself. Step 7 checks the explicit isomorphism C_Z = C_m. Small cases tested: C = 0, a strictly henselian local ring, a product of two such rings, Z (both conditions fail), and k^N (components that are not open). The statement holds in each, and there is no duplicate anywhere in the DAG (I checked the 097U/097V carriers and the w-local and w-contractible nodes). One C1 fix, with the corrected item under fixes/dag/nodes/sec-trace-formula/. Step 3 now cites lem-weil-pbc-etale-composition-cancellation (clauses 1 and 2) for affine charts being etale over X, and def-weil-affine-spectrum for passing from a section to an algebra map; proof_deps was recomputed. Off-unit tool uses accepted: lem-sbc-strict-henselian-etale-neighbourhood-section, lem-weil-pbc-quasicompact-components-clopen-intersection and lem-weil-pbc-split-etale-covers-maximal-local-criterion. The other declared entries are Mathlib leaves. No SGA is cited.; 1 file(s) fixed by the reviewer"
  }
 }
