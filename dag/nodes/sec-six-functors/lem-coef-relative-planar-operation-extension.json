@@ -12,9 +12,82 @@
   "lem-coef-monoidal-block-projection-coherence",
   "lem-coef-infinity-relative-colimit-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a finite planar rooted tree with ordered external input list of length $r$. Each vertex is one of the operations $M_s$, and every external variable occurs in exactly one vertex subtree. Therefore the composite functor $T^r\\to T$ associated to the tree is separately cocontinuous: in a variable occurring at a given vertex, the corresponding inner operation preserves the relevant colimits and the outer operations preserve colimits in that input after the other inputs are fixed; composing the comparison maps gives preservation of the colimit. The same argument applies to all contractions and graftings, and to trees with nullary vertices. This is the elementary closure of separate cocontinuity under substitution on reduced input lists.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra §4.1.2, planar substitution operations and reduced external input lists"
+   }
+  },
+  {
+   "text": "For every $N\\geq0$ let $E_N=\\operatorname{Fun}_{\\mathrm{colim}}(T^N,T)$ and $F_N=\\operatorname{Fun}_R(C^N,T)$, full subcategories of the functor quasicategories $\\operatorname{Fun}(T^N,T)$ and $\\operatorname{Fun}(C^N,T)$, hence quasicategories. By the hypothesis with $Z=T$, restriction $G_N=(j^N)^*:E_N\\to F_N$ is a functor equivalence. By step 1 every tree composite of the $M_s$ with $N$ external inputs lies in $E_N$. Postcomposition with $j$ is a simplicial map $\\operatorname{Fun}(C^N,C)\\to\\operatorname{Fun}(C^N,T)$, so it carries every substitution equivalence and every tree-indexed higher simplex of $(t_s)$ with $N$ external inputs to a simplex of $\\operatorname{Fun}(C^N,T)$. Its vertices $j\\circ(\\text{tree composite of the }t_s)$ lie in $F_N$: whiskering the $\\theta_s$ along the tree (innermost vertices first) gives an equivalence edge $\\varepsilon_\\Gamma$ from $G_N(\\text{tree composite of the }M_s)$ to $j\\circ(\\text{tree composite of the }t_s)$, and $F_N$ is closed under equivalence because a cocone equivalent to a colimiting cocone is colimiting. Since $F_N$ is a full subcategory, the whole $j$-image of the coherence data of $(t_s)$ lies in $F_N$. For the corolla $\\Gamma$ with $N$ inputs, $\\varepsilon_\\Gamma=\\theta_N$; for $N=0$ the corolla is the nullary unit and $\\varepsilon=\\theta_0$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-monoidal-block-projection-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra §4.8.1, relative extension along an equivalence of finite-variable functor categories"
+   }
+  },
+  {
+   "text": "Lifting lemma. Let $G:E\\to F$ be a functor equivalence of quasicategories, $K\\subseteq L$ a simplicial subset of a finite simplicial set, $b:K\\to E$, $\\sigma:L\\to F$, and $\\varepsilon$ an equivalence edge of $\\operatorname{Fun}(K,F)$ from $Gb$ to $\\sigma|_K$. Claim: there are $\\tau:L\\to E$ with $\\tau|_K=b$ and an equivalence edge $\\eta$ of $\\operatorname{Fun}(L,F)$ from $G\\tau$ to $\\sigma$ with $\\eta|_K=\\varepsilon$, and the space of such pairs is contractible. Proof. Postcomposition with $G$, with its quasi-inverse and with the two natural equivalences, makes $\\operatorname{Fun}(L,G)$ and $\\operatorname{Fun}(K,G)$ functor equivalences (simplicial maps preserve the inverse-triangle witnesses). Restriction $\\operatorname{Fun}(L,F)\\to\\operatorname{Fun}(K,F)$ and $\\operatorname{Fun}(L,E)\\to\\operatorname{Fun}(K,E)$ are isofibrations by [lem-coef-infinity-isofibration-exponentiation]. Put $P=\\operatorname{Fun}(K,E)\\times_{\\operatorname{Fun}(K,F)}\\operatorname{Fun}(L,F)$. By [lem-coef-infinity-isofibration-pullback-equivalence] $P$ is a quasicategory and $P\\to\\operatorname{Fun}(L,F)$ is a functor equivalence; its composite with the comparison $c:\\operatorname{Fun}(L,E)\\to P$ is $\\operatorname{Fun}(L,G)$, so by [lem-coef-joyal-quasicategory-characterizations](2) and two-out-of-three in [lem-coef-joyal-model-structure] $c$ is a functor equivalence. Both $\\operatorname{Fun}(L,E)$ and $P$ are isofibred over $\\operatorname{Fun}(K,E)$ ($P$ as a pullback of an isofibration), so [lem-coef-infinity-isofibration-base-change] at the vertex $b$ gives a functor equivalence $\\operatorname{Fun}_b(L,E)\\to\\operatorname{Fun}_{Gb}(L,F)$ between the fibres, the categories of maps restricting to $b$, resp. $Gb$, with all simplices constant on $K$. Lifting the inverse of $\\varepsilon$ with source $\\sigma$ along the isofibration $\\operatorname{Fun}(L,F)\\to\\operatorname{Fun}(K,F)$ gives $\\sigma'$ with $\\sigma'|_K=Gb$ and an equivalence $\\sigma'\\simeq\\sigma$ restricting to $\\varepsilon$. Essential surjectivity of the fibre equivalence gives $\\tau$ with an equivalence $G\\tau\\simeq\\sigma'$ constant on $K$; to compose, fill the inner horn formed by these two edges by a $2$-simplex of $\\operatorname{Fun}(L,F)$ lying over the degenerate $2$-simplex on $\\varepsilon$ in $\\operatorname{Fun}(K,F)$ (restriction is an inner fibration by [lem-coef-infinity-isofibration-exponentiation]); its long edge is $\\eta$, and $\\eta|_K=\\varepsilon$ exactly. ($P$ is isofibred over $\\operatorname{Fun}(K,E)$ because lifting properties are stable under pullback.) The pairs $(\\tau,\\eta)$ form the homotopy fibre over $\\sigma'$ of the map of cores of a functor equivalence, which is contractible.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-equivalence",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-infinity-isofibration-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra §4.8.1, lifting structured data through restriction equivalences; the lifting lemma is assembled by the agent from the cited quasicategory nodes"
+   }
+  },
+  {
+   "text": "Inductive claim $(I_n)$: every coherence datum of $(t_s)$ of simplicial dimension $\\leq n$ (vertices are tree composites; edges are substitution, contraction, grafting and unary-identity equivalences and their inverses; higher simplices are the tree-indexed compatibilities, including those comparing a grafted tree's coherence with the substitution of the coherences of its pieces) with $N$ external inputs has a lift $\\tau:\\Delta^m\\to E_N$ ($m\\leq n$) of the same shape for $(M_s)$, with an equivalence $\\eta_\\tau:G_N\\tau\\simeq j\\circ(\\text{datum})$ in $\\operatorname{Fun}(\\Delta^m,F_N)$; lifts are compatible with faces and degeneracies, and $\\eta$ restricts on each face to the $\\eta$ of that face. Base $n=0$: the lift of a tree composite is the composite of the $M_s$ and $\\eta=\\varepsilon_\\Gamma$ from step 2. Step $n-1\\to n$: for a datum $\\sigma$ of dimension $n$ its faces have lifts by $(I_{n-1})$ which agree on common faces, hence glue to $b:\\partial\\Delta^n\\to E_N$, and their $\\eta$ glue to an equivalence $\\varepsilon$ in $\\operatorname{Fun}(\\partial\\Delta^n,F_N)$ from $G_Nb$ to $(j\\circ\\sigma)|_{\\partial\\Delta^n}$. Apply step 3 with $G=G_N$, $K=\\partial\\Delta^n\\subseteq L=\\Delta^n$: a filler $\\tau$ with $\\eta_\\tau$ restricting to $\\varepsilon$ exists, with contractible space of choices. The lifts in dimension $n$ are chosen independently given dimension $<n$, so the space of all lifts is the limit of a tower of maps with contractible fibres, hence contractible. Restrictions of the lifted data are therefore identified with the prescribed data of $(t_s)$ by the coherent equivalences $\\eta$, not equal to them; for edges ($n=1$) this is lifting the substitution equivalences, their inverses and the unary identity comparison.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-monoidal-block-projection-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra §4.1.3, homotopy-coherent tree compatibilities; §4.8.1, relative lifting"
+   }
+  },
+  {
+   "text": "For $r=0$ both sides of the hypothesis are $\\operatorname{Fun}(*,T)=T$ and $G_0$ is the identity, so the nullary unit $M_0$ with $\\theta_0$ and all coherences of trees with no external input are handled by the same induction with $F_0=T$; no unused variable is introduced, and nullary vertices inside larger trees were included in steps 1-4. The equivalences $\\eta$ of step 4, with the $\\theta_r$ on corollas, are exactly coherent equivalences $j\\circ(\\text{coherence of }t)\\simeq(\\text{coherence of }M)\\circ j^N$ compatible with all planar substitution, unit and higher tree simplices, i.e. $\\theta$ is a morphism of unital planar operation systems in the sense of [lem-coef-monoidal-block-projection-coherence]. All of this is on reduced external input lists; by the projection-pullback normal form of that node, the coherence of a general block is the pullback of the reduced one along the coordinate projection, so the lifted reduced data and the $\\theta_r$ determine the full system.",
+   "uses": [
+    "lem-coef-monoidal-block-projection-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Higher Algebra §§4.1.2–4.1.3 and §4.8.1; projection-pullback normal form"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-monoidal-block-projection-coherence",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-equivalence",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-infinity-isofibration-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Higher Algebra §§4.1.2–4.1.3 and §4.8.1; relative finite-variable extension extracted from Proposition 4.8.1.3"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,7 +119,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cocomplete-monoidal-tensor",
@@ -71,5 +144,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-relative-planar-operation-extension",
+  "worker": "stage1",
+  "summary": "No exact project declaration or Mathlib attachment exists. Step 1: separate cocontinuity of tree composites. Step 2: the j-image of the coherence data of (t_s) lies in F_N, with whiskered theta comparisons. Step 3: a relative lifting lemma through a functor equivalence of quasicategories, from the existing isofibration nodes. Step 4: induction over simplicial dimension lifting every substitution, inverse, unary and higher tree simplex with a coherent comparison and contractible choice. Step 5: nullary case and projection-pullback assembly. No new nodes. Reviewer FIX (NE cc review, 2026-10-18): steps 2-5 rewritten; lem-coef-infinity-relative-colimit-completion, which speaks only of P_R(C), is no longer cited in the proof for properties of the hypothesized equivalence for general T.",
+  "blueprint": "The item ancestry is prop-coef-integral-exceptional-adjoint. The steps realize the extracted relative extension in its paragraph 2: finite-variable restriction equivalences lift reduced-input substitution, units, inverses, and all higher tree simplices before projection pullback.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NE-b79bfb525",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-b79bfb525 (reviewer sub-agent of L); spot-checked: FIX: the statement is unchanged and no node is dropped. I read the item, the cited nodes (def-cbc-enhanced-diagrams-cones, lem-coef-monoidal-block-projection-coherence, lem-coef-infinity-relative-colimit-completion) and both citers (lem-coef-cocomplete-monoidal-tensor steps 4-5, lem-coef-strong-monoidal-operation-morphism-lifting). The statement is true and is not a restated clause of its parent; the parent uses it with T=P_R(C). It holds in the cases r=0, r=1 and j=id. HA 4.8.1.3 is online only and was not opened here (network blocked); the argument was checked mathematically. Three repairable faults. (1) C4: steps 2-5 cited lem-coef-infinity-relative-colimit-completion for full faithfulness and lifting of the hypothesized equivalence for a general T, but that node states these only for j_R:C->P_R(C). (2) C1/E5: the core lifting argument (a simplex with prescribed boundary lifts through a functor equivalence, with a coherent comparison and contractible choice) had no node. (3) D4/E3: step 4's induction was not stated, and its claim that restrictions are 'equal' to the prescribed data is false; they are only equivalent through whiskered theta. Repair in fixes/dag/nodes/sec-six-functors/lem-coef-relative-planar-operation-extension.json. Step 2: E_N and F_N are full functor subcategories, and the whiskered-theta comparisons put the j-image of the t-data in F_N. Step 3: a relative lifting lemma proved from existing same-unit nodes (isofibration-exponentiation, isofibration-pullback-equivalence, joyal-quasicategory-characterizations(2) with Joyal two-out-of-three, isofibration-base-change), with an inner-horn choice so that eta restricts exactly to epsilon on the boundary. Step 4: an explicit inductive claim (I_n) with face-compatible comparisons, and contractibility from a tower with contractible fibres. Step 5: the nullary case and projection-pullback assembly through block-projection. proof_deps updated; the completion node is kept only in stmt_deps, for notation. No cycle, no SGA, no tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }

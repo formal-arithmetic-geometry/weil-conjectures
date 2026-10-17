@@ -2,7 +2,7 @@
  "id": "lem-coef-representable-right-fibration-classifier",
  "kind": "statement",
  "title": "Representable right fibrations form the universal cocartesian family",
- "statement": "Use quasicategories, coherent functors and mapping spaces of [def-cbc-enhanced-diagrams-cones], cocartesian unstraightening of [lem-coef-cocartesian-straightening], and the right-fibration category $p:\\operatorname{RFib}\\to\\operatorname{Cat}_{\\mathcal U}$ of [lem-coef-day-relative-exponential-model]. Work in containing universes large enough for these categories and their unstraightenings. Let $\\operatorname{RSl}$ be the replete full subcategory of $\\operatorname{RFib}$ spanned by arrows equivalent over their base to $D_{/d}\\to D$, for $D$ a $\\mathcal U$-small infinity category and $d\\in D$. Let $U\\to\\operatorname{Cat}_{\\mathcal U}$ be the cocartesian unstraightening of the identity functor of $\\operatorname{Cat}_{\\mathcal U}$, performed in a larger universe. There is an equivalence $U\\simeq\\operatorname{RSl}$ over $\\operatorname{Cat}_{\\mathcal U}$, preserving cocartesian edges, whose fibre component sends $d\\in D$ to $D_{/d}\\to D$. Its composite with $\\operatorname{RSl}\\hookrightarrow\\operatorname{RFib}$ has fibre component the coherent Yoneda functor $d\\mapsto\\operatorname{Map}_D(-,d)$, under right-fibration classification. The inclusion preserves cocartesian edges. Thus for $h:D\\to E$, transport takes $D_{/d}\\to D$ to $E_{/h(d)}\\to E$; the edge is induced by applying $h$ to the slice arrows. More generally, the image of a morphism over $h$ with fibre component $v:h(d)\\to e$ acts on slice arrows by $a:x\\to d\\longmapsto v\\circ h(a):h(x)\\to e$. These descriptions specify a coherent functor on the entire unstraightening, including arbitrary simplicial parameters, composition and identity simplices, not just its effect on objects and edges.\n\nFinite products in $\\operatorname{RSl}$ are products of arrows, and both the projection to $\\operatorname{Cat}_{\\mathcal U}$ and the inclusion in $\\operatorname{RFib}$ preserve them. In the preceding equivalence the product comparison is the natural slice equivalence $(\\prod_iD_i)_{/(d_i)}\\simeq\\prod_i(D_i)_{/d_i}$ over $\\prod_iD_i$, with its projection cones. It is compatible with the displayed slice-action functors and all their simplicial parameters. The empty product is $*\\to *$.",
+ "statement": "Use quasicategories, coherent functors and mapping spaces of [def-cbc-enhanced-diagrams-cones], cocartesian unstraightening of [lem-coef-cocartesian-straightening], and the right-fibration category $p:\\operatorname{RFib}\\to\\operatorname{Cat}_{\\mathcal U}$ of [lem-coef-day-relative-exponential-model]. Work in containing universes large enough for these categories and their unstraightenings. Let $\\operatorname{RSl}$ be the replete full subcategory of $\\operatorname{RFib}$ spanned by arrows equivalent over their base to the join slice $D_{/d}\\to D$ of [lem-coef-infinity-slice-right-fibration], for $D$ a $\\mathcal U$-small infinity category and $d\\in D$. Let $U\\to\\operatorname{Cat}_{\\mathcal U}$ be the cocartesian unstraightening of the identity functor of $\\operatorname{Cat}_{\\mathcal U}$, performed in a larger universe. There is an equivalence $U\\simeq\\operatorname{RSl}$ over $\\operatorname{Cat}_{\\mathcal U}$, preserving cocartesian edges, whose fibre component sends $d\\in D$ to $D_{/d}\\to D$. Its composite with $\\operatorname{RSl}\\hookrightarrow\\operatorname{RFib}$ has fibre component the coherent Yoneda functor $d\\mapsto\\operatorname{Map}_D(-,d)$, under right-fibration classification. The inclusion preserves cocartesian edges. Thus for $h:D\\to E$, transport takes $D_{/d}\\to D$ to $E_{/h(d)}\\to E$; the edge is induced by applying $h$ to the slice arrows. More generally, the image of a morphism over $h$ with fibre component $v:h(d)\\to e$ acts on slice arrows by $a:x\\to d\\longmapsto v\\circ h(a):h(x)\\to e$. These descriptions specify a coherent functor on the entire unstraightening, including arbitrary simplicial parameters, composition and identity simplices, not just its effect on objects and edges.\n\nFinite products in $\\operatorname{RSl}$ are products of arrows, and both the projection to $\\operatorname{Cat}_{\\mathcal U}$ and the inclusion in $\\operatorname{RFib}$ preserve them. In the preceding equivalence the product comparison is the natural slice equivalence $(\\prod_iD_i)_{/(d_i)}\\simeq\\prod_i(D_i)_{/d_i}$ over $\\prod_iD_i$, with its projection cones. It is compatible with the displayed slice-action functors and all their simplicial parameters. The empty product is $*\\to *$.",
  "source": {
   "document": "https://arxiv.org/pdf/2006.08269",
   "place": "Chu–Haugseng, Free algebras through Day convolution, Definition 6.3, Corollaries 6.4–6.5, Remark 6.6, printed pp.13–14. Read online; archive WANTED. Explicit slice-arrow action and product-cone formulation are the agent expansion. No Stacks tag states this quasicategorical assertion."
@@ -10,11 +10,145 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-cocartesian-straightening",
-  "lem-coef-day-relative-exponential-model"
+  "lem-coef-day-relative-exponential-model",
+  "lem-coef-infinity-slice-right-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\pi:U\\to B=\\operatorname{Cat}_{\\mathcal U}$ be the given unstraightening of the identity, in a sufficiently large containing universe. Apply [lem-coef-fiberwise-arrow-target-cocartesian] to $\\pi$. It gives $t:A_\\pi\\to U$ and a cocartesian-preserving map $(t,s):A_\\pi\\to U\\times_B U$ over $U$. By [lem-coef-cocartesian-straightening], straighten this map over $U$. Its target is the diagram $u\\mapsto U_{\\pi(u)}$, identified with $\\pi(u)$ by the specified classification of $U$. We obtain a coherent transformation $L\\to\\pi$ of category-valued diagrams on $U$. Currying it gives a coherent functor $\\Phi:U\\to\\operatorname{Fun}(\\Delta^1,\\operatorname{Cat}_{\\mathcal U})$ over $B$. At $u=(D,d)$ it is source evaluation from the target-fixed arrow category of $D$ at $d$. This construction uses straightening on morphisms, not independent choices of an arrow functor on each edge.",
+   "uses": [
+    "lem-coef-fiberwise-arrow-target-cocartesian",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Corollary 6.4: expanded construction of the natural slice family, using Shah Notation 4.29 and Proposition 7.7."
+   }
+  },
+  {
+   "text": "By [lem-coef-infinity-arrow-target-right-fibration], each value of $\\Phi$ is a right fibration, so fullness gives a factorization through $\\operatorname{RFib}$. By [lem-coef-infinity-slice-arrow-equivalence], its value at $(D,d)$ is equivalent over $D$ to $D_{/d}\\to D$, hence the functor factors through the replete full subcategory $\\operatorname{RSl}$. The family over a fixed $D$ has transport by postcomposition, by step 1. The coherent classification and mapping-bifunctor clauses of [lem-coef-space-transport-classification] therefore identify its fibre functor with $j_D:d\\mapsto\\operatorname{Map}_D(-,d)$, including coherent transformations and higher simplices. This identifies the entire fibre functor, not only its objects.",
+   "uses": [
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Definition 6.3 and first sentence of the proof of Corollary 6.4."
+   }
+  },
+  {
+   "text": "For $h:D\\to E$ and $d\\in D$, the image under $\\Phi$ of cocartesian transport in $U$ is the slice square obtained by applying $h$ to arrows, by step 1. Under classification it is\n$$\\eta:j_D(d)\\longrightarrow h^*j_E(hd),\\qquad a\\longmapsto h(a).$$\nFor any $H\\in P(E)$, [lem-coef-infinity-pointwise-yoneda-evaluation] identifies composition with $\\eta$ with the identity comparison\n$$\\operatorname{Map}(j_E(hd),H)\\simeq H(hd)\\simeq\\operatorname{Map}(j_D(d),h^*H).$$\nIndeed evaluation of $\\eta$ on $\\operatorname{id}_d$ is $\\operatorname{id}_{hd}$, and the cited inverse formula sends $z\\in H(hd)$ on both sides to $a\\mapsto H(h(a))(z)$. These are equivalences of whole spaces, coherently in $H$. This is the universal property of the left Kan extension along $h^{\\mathrm{op}}$ in [lem-coef-infinity-space-valued-pointwise-lan]. Thus it recognizes this particular square and its unit, not just an abstract isomorphism $h_!j_D(d)\\simeq j_E(hd)$.",
+   "uses": [
+    "lem-coef-infinity-pointwise-yoneda-evaluation",
+    "lem-coef-infinity-space-valued-pointwise-lan"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proof of Corollary 6.4: representable left Kan extension and its actual unit."
+   }
+  },
+  {
+   "text": "To check that the square of step 3 is $p$-cocartesian, use the cartesian structure of [lem-coef-day-relative-exponential-model]. A square from $F$ over $D$ to $G$ over $E$ above $h$ factors through the cartesian lift of $G$, giving the mapping-space fibre $\\operatorname{Map}_{P(D)}(F,h^*G)$. For every subsequent $k:E\\to T$ and $G\\in P(T)$, step 3 applied to $k^*G$ says that precomposition by the actual square is an equivalence from $\\operatorname{Map}_{P(E)}(j_E(hd),k^*G)$ to $\\operatorname{Map}_{P(D)}(j_D(d),h^*k^*G)$. These are the fibres, over $k$, of the canonical map from the upper-left corner of the cocartesian criterion square to its homotopy pullback. Their identifications include composition by the base-change naturality of the right-fibration classifier. By [lem-coef-spaces-homotopy-fiber-detection] over the identity of $\\operatorname{Map}_{B}(E,T)$, that canonical map is an equivalence. The mapping-space criterion of [lem-coef-cocartesian-straightening] proves the desired cocartesian property. Thus $\\Phi$ preserves cocartesian edges.",
+   "uses": [
+    "lem-coef-day-relative-exponential-model",
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Corollary 6.4: identification of the representable transport square as cocartesian."
+   }
+  },
+  {
+   "text": "Every object of $\\operatorname{RSl}$ is equivalent over its base to a value of $\\Phi$. For such a value step 4 gives a $p$-cocartesian lift above every base arrow with target again in $\\operatorname{RSl}$; composing its source with the given fibre equivalence gives such a lift for the original object. Equivalences and their composites with cocartesian edges remain cocartesian by the mapping-space criterion, since precomposition by an equivalence gives equivalences in its square. Apply [lem-coef-cocartesian-full-restriction] to the replete full inclusion $\\operatorname{RSl}\\subseteq\\operatorname{RFib}$. It makes $\\operatorname{RSl}\\to B$ cocartesian and says that its cocartesian edges are exactly the ambient ones. In particular the inclusion preserves them.",
+   "uses": [
+    "lem-coef-cocartesian-full-restriction",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proof of Corollary 6.4: restriction to the replete full subcategory of representables."
+   }
+  },
+  {
+   "text": "Straighten $\\Phi:U\\to\\operatorname{RSl}$ using [lem-coef-cocartesian-straightening]. Its fibre at $D$ is the Yoneda functor onto the full essential image of representables in $P(D)$, by step 2. It is fully faithful by [lem-coef-infinity-yoneda-presheaf-limits], and this full-image functor is an equivalence by [lem-coef-infinity-full-essential-image]. The components of the straightened transformation are therefore equivalences. By [lem-coef-infinity-pointwise-equivalences] the transformation itself is an equivalence, and unstraightening gives the required equivalence $U\\simeq\\operatorname{RSl}$ over $B$. The inclusion has exactly the Yoneda fibre components already identified in step 2. This also identifies its classifying functor with the identity, as in Corollary 6.5.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-full-essential-image",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Last part of the proof of Corollary 6.4 and Corollary 6.5."
+   }
+  },
+  {
+   "text": "For a general edge of $U$ over $h:D\\to E$, factor it as a cocartesian lift followed by its fibre component $v:h(d)\\to e$. The fibrewise-arrow theorem used in step 1 sends $a:x\\to d$ to $v\\circ h(a)$. This is its transport functor, with its source projection to $E$, and hence is exactly the square $\\Phi$ assigns. Apply the same theorem after every simplicial base restriction in $U$: the resulting squares are the restrictions of one coherent transformation $L\\to\\pi$. Faces, degeneracies, composition and identity simplices are consequently the ones furnished by that transformation and its straightening. For two consecutive arrows the formula is $w\\circ k(v)\\circ kh(a)$, with the specified associativity simplex; all longer chains are supplied by its higher simplices. No strictly associative choice of composition in a quasicategory is being imposed.",
+   "uses": [
+    "lem-coef-fiberwise-arrow-target-cocartesian",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Corollaries 6.4-6.5, explicit slice action and higher-parameter expansion."
+   }
+  },
+  {
+   "text": "For a finite family $(D_i,d_i)$ put $D=\\prod_iD_i$ and $d=(d_i)$. The join-slice definition gives an isomorphism of simplicial sets over $D$,\n$$D_{/d}\\cong\\prod_i(D_i)_{/d_i}:$$\na simplex $\\Delta^{n+1}\\to\\prod_iD_i$ ending at $d$ is exactly its component simplices ending at $d_i$, and every simplicial operator restricts componentwise. Its cone maps are precisely the projection squares. Products of right fibrations in $\\operatorname{RFib}$ are products of arrows by [lem-coef-day-relative-exponential-model]. Their product is therefore again representable. Since $\\operatorname{RSl}$ is full, the same cone is a product there: its mapping-space universal property is the ambient one restricted to testing objects in $\\operatorname{RSl}$. Both its inclusion and its projection to $B$ preserve these products. For the empty family the same degreewise calculation is $*_{/*}=*$, giving $*\\to *$.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-day-relative-exponential-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Remark 6.6: product slices and their projection cones."
+   }
+  },
+  {
+   "text": "The comparison of step 8 commutes with the displayed slice action on every coordinate: a tuple $(a_i)$ is sent along $(h_i,v_i)$ to $(v_i\\circ h_i(a_i))$. In the target-fixed arrow model the comparison is also degreewise: $\\operatorname{Fun}(\\Delta^1,\\prod_iD_i)=\\prod_i\\operatorname{Fun}(\\Delta^1,D_i)$, and evaluation and its fibre at $(d_i)$ have the same coordinate projections. The fibrewise-arrow construction in step 1 is natural for the product projection functors by [lem-coef-fiberwise-arrow-target-cocartesian]. Thus straightening this comparison preserves the projection cones on entire parameter diagrams. The slice diagonal of [lem-coef-infinity-slice-arrow-equivalence] commutes with those projections, since its defining maps $\\rho_n$ are the same in each coordinate. This transports the comparison to the join-slice isomorphism of step 8. Under the equivalence in step 6 these cones are the product cones in $U$: an equivalence transports their mapping-space universal property. Hence this is the claimed product comparison, coherently compatible with the slice action, including the empty product.",
+   "uses": [
+    "lem-coef-fiberwise-arrow-target-cocartesian",
+    "lem-coef-infinity-slice-arrow-equivalence",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Remark 6.6 and Corollary 6.5: natural product-cone compatibility; agent expansion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cocartesian-full-restriction",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-day-relative-exponential-model",
+  "lem-coef-fiberwise-arrow-target-cocartesian",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-infinity-pointwise-yoneda-evaluation",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-space-valued-pointwise-lan",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-space-transport-classification",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/2006.08269",
+  "place": "Definition 6.3, Corollaries 6.4-6.5 and Remark 6.6; explicit coherent-family construction using Shah Notation 4.29 and Proposition 7.7. Online sources read; archival copies WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -89,10 +223,39 @@
    "date": "2026-10-17",
    "verdict": "no match: word-boundary search in CategoryTheory has no RFib/right-fibration classifier; broad RSl hits were unrelated substrings. The anonymous ordinary representable Kan instance was read at Mathlib/CategoryTheory/Limits/Presheaf.lean:420; ordinary cocartesian universal properties at FiberedCategory/Cocartesian.lean:55; ordinary Grothendieck construction at Grothendieck.lean:73,232. None is this infinity-categorical statement.",
    "subdirectory": "CategoryTheory/Limits/Presheaf.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(RSl|RFib|RightFibration|CocartesianFibration)\\b|representable.*right.fibration",
+   "results": "{\"t\": \"2026-10-17T17:55:20Z\", \"tool\": \"grep\", \"query\": \"\\\\b(RSl|RFib|RightFibration|CocartesianFibration)\\\\b|representable.*right.fibration\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures; these are ordinary CategoryTheory categories, arrows, slices or cocartesian morphisms, not the asserted quasicategorical construction. Ordinary candidates read at Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:55-74, Comma/Arrow.lean:34-40, Comma/Over/Basic.lean:370-415 and Limits/Presheaf.lean:420-421.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universal family of slice right fibrations over infinity categories is classified by the identity functor on Cat infinity",
+   "results": "{\"t\": \"2026-10-17T17:55:20Z\", \"tool\": \"leansearch\", \"query\": \"A universal family of slice right fibrations over infinity categories is classified by the identity functor on Cat infinity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.BasedFunctor.term𝟭\", \"CategoryTheory.functorial_id\", \"CategoryTheory.Over.iteratedSliceEquiv_counitIso\", \"CategoryTheory.Functor.FullyFaithful.id\", \"CategoryTheory.RepresentablyCoflat.id\", \"CategoryTheory.Over.iteratedSliceEquiv_unitIso\", \"CategoryTheory.Functor.whiskeringRightObjIdIso\", \"CategoryTheory.Pi.comapId\"], \"digest\": \"eded285daa33e0b7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures; these are ordinary CategoryTheory categories, arrows, slices or cocartesian morphisms, not the asserted quasicategorical construction. Ordinary candidates read at Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:55-74, Comma/Arrow.lean:34-40, Comma/Over/Basic.lean:370-415 and Limits/Presheaf.lean:420-421."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.yoneda, CategoryTheory.Functor.IsLeftKanExtension",
+   "results": "{\"t\": \"2026-10-17T17:55:20Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.yoneda, CategoryTheory.Functor.IsLeftKanExtension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap\"], \"digest\": \"17fb316b74da56fb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures; these are ordinary CategoryTheory categories, arrows, slices or cocartesian morphisms, not the asserted quasicategorical construction. Ordinary candidates read at Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:55-74, Comma/Arrow.lean:34-40, Comma/Over/Basic.lean:370-415 and Limits/Presheaf.lean:420-421."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable right fibrations over varying infinity categories form the cocartesian unstraightening of the identity functor, naturally by slice arrows",
+   "results": "{\"t\": \"2026-10-17T17:55:31Z\", \"tool\": \"leanfinder\", \"query\": \"Representable right fibrations over varying infinity categories form the cocartesian unstraightening of the identity functor, naturally by slice arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.map_self\", \"CategoryTheory.Functor.IsCocartesian.universal_property\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.domainCartesianLift\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\"], \"digest\": \"c5409570a31a1d2a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned signatures; these are ordinary CategoryTheory categories, arrows, slices or cocartesian morphisms, not the asserted quasicategorical construction. Ordinary candidates read at Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:55-74, Comma/Arrow.lean:34-40, Comma/Over/Basic.lean:370-415 and Limits/Presheaf.lean:420-421."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-day-model-yoneda-strong-monoidal",
@@ -119,5 +282,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-representable-right-fibration-classifier",
+  "worker": "stage1",
+  "summary": "Constructed the full coherent slice functor by straightening a generic fibrewise-arrow family. Identified its actual transport units using Yoneda evaluation, verified the cocartesian mapping-space criterion, applied the existing full-restriction theorem, and obtained the equivalence by fibrewise Yoneda. Proved products by the coordinatewise slice isomorphism, retaining projection cones and arbitrary simplicial parameters. One generic statement-only dependency; statement unchanged.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim, through the right-fibration Day-Yoneda enhancement. Preserves the inherited route and ancestry; no chapter or unit change."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-7ff9c8c85",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-7ff9c8c85 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node and all 14 cited nodes. Sources fetched and read: Chu–Haugseng arXiv:2006.08269 Def 6.3, Cor 6.4 (with proof), Cor 6.5, Rem 6.6 (pp.12–14), and Shah Notation 4.29 (p.34), Rem 7.4, Def 7.6, Prop 7.7 (with proof, pp.49–50). The statement matches CH 6.3–6.6, including the variance Map(-,d), slices over d and left Kan extension along h^op. The explicit slice action and product cones are marked as agent expansion and strengthen the source; the parent day-model-yoneda node uses them. New node lem-coef-fiberwise-arrow-target-cocartesian: A_p is Shah's O_S(D), and Fr^cocart(id)=ev1 is cocartesian by Prop 7.7 and Rem 7.4. I checked by hand the strict fibres, the transport formula, and that (t,s) preserves cocartesian edges (the source leg of a t-cocartesian edge is p-cocartesian). Small cases B=*, p=id and empty fibres hold. It is not a restatement of the item and not a duplicate: relative-slice-sections fixes the ambient category, lax-comma-target is non-fibrewise, arrow-target-cartesian needs pullbacks, and none states it. Steps 1–9 each use their cited statements as those statements say. The Yoneda composite in step 3 is the identity of H(hd). Step 4 is the cocartesian criterion over Map(E,T) with fibre detection at v=id. Step 5 meets the full-restriction hypotheses exactly. Step 8 is a degreewise join-slice isomorphism and genuinely elementary. All cited statements are in unit sk-prop-sf-biduality-general, so no tool_uses are needed. There is no cycle and no coefficient or base-change data. One B3 fault, fixed: the statement used D_{/d} with no defining node. I added the citation [lem-coef-infinity-slice-right-fibration] to the statement and to stmt_deps; the meaning is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
