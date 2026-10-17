@@ -8,8 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.GlobalHomPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.MixedHomTensorPullbackIso
-public import WeilConjectures.AlgebraicGeometry.MixedGlobalSectionsDirectImageIso
+public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 public import WeilConjectures.AlgebraicGeometry.MixedGlobalExtension
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import all WeilConjectures.AlgebraicGeometry.AffineMorphismHomOutOfPerfect

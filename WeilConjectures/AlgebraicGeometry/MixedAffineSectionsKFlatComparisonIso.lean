@@ -9,7 +9,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import WeilConjectures.AlgebraicGeometry.MixedGlobalExtension
-public import WeilConjectures.AlgebraicGeometry.MixedGlobalSectionsDirectImageIso
+public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 import WeilConjectures.AlgebraicGeometry.MixedAffineSectionsUnderivedChartModel
 import WeilConjectures.AlgebraicGeometry.MixedAffineSectionsChartModelFactorization
 

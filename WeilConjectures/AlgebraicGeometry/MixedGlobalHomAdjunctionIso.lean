@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.MixedGlobalSectionsDirectImageIso
+public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 public import WeilConjectures.AlgebraicGeometry.MixedHomDirectImageComparison
 import all WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 import WeilConjectures.AlgebraicGeometry.QCqsSheafRHomAdjunction

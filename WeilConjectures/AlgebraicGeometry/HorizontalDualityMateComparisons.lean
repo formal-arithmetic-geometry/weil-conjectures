@@ -61,34 +61,23 @@ def horizontalMateAmbientId (X : Scheme.{u}) : derivedPullback (𝟙 X) ≅ 𝟭
   (Classical.choose (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec
     (Classical.choose_spec exists_derivedPullbackComposition)))).2) X
 
-/-- Lift an ambient isomorphism between restricted functors. 
-(blueprint: lem-sc-horizontal-duality-mate-comparisons)
--/
-def horizontalMateLiftIso {A : Type*} [Category A] {X : Scheme.{u}}
-    {F G : A ⥤ schemeDerivedQCohCategory X}
-    (i : F ⋙ (schemeDerivedQCohProperty X).ι ≅ G ⋙ (schemeDerivedQCohProperty X).ι) :
-    F ≅ G :=
-  NatIso.ofComponents (fun K ↦
-    (schemeDerivedQCohProperty X).fullyFaithfulι.preimageIso (i.app K)) (by
-      intro K L φ
-      apply (schemeDerivedQCohProperty X).fullyFaithfulι.map_injective
-      simpa using i.hom.naturality φ)
-
 /-- Coherent composition comparison on quasi-coherent complexes. 
 (blueprint: lem-sc-horizontal-duality-mate-comparisons)
 -/
 def horizontalMateComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     horizontalMatePullback g ⋙ horizontalMatePullback f ≅
       horizontalMatePullback (f ≫ g) :=
-  horizontalMateLiftIso (Functor.isoWhiskerLeft (schemeDerivedQCohProperty Z).ι
-    (horizontalMateAmbientComp f g))
+  Functor.fullyFaithfulCancelRight (schemeDerivedQCohProperty X).ι
+    (Functor.isoWhiskerLeft (schemeDerivedQCohProperty Z).ι
+      (horizontalMateAmbientComp f g))
 
 /-- Coherent identity comparison on quasi-coherent complexes. 
 (blueprint: lem-sc-horizontal-duality-mate-comparisons)
 -/
 def horizontalMateId (X : Scheme.{u}) : horizontalMatePullback (𝟙 X) ≅ 𝟭 _ :=
-  horizontalMateLiftIso (Functor.isoWhiskerLeft (schemeDerivedQCohProperty X).ι
-    (horizontalMateAmbientId X))
+  Functor.fullyFaithfulCancelRight (schemeDerivedQCohProperty X).ι
+    (Functor.isoWhiskerLeft (schemeDerivedQCohProperty X).ι
+      (horizontalMateAmbientId X))
 
 /-- Pullback along a scheme isomorphism, with inverse the pullback along its inverse. 
 (blueprint: lem-sc-horizontal-duality-mate-comparisons)

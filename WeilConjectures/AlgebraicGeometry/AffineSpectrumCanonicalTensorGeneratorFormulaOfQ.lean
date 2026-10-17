@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.AffineSpectrumCanonicalTensorComparison
 import WeilConjectures.AlgebraicGeometry.AffineSpectrumCanonicalTensorComparisonOne
 @[expose] public section
 
-/-! Canonical spectrum tensor generator formula for a fixed chain isomorphism -/ 
+/-! Canonical spectrum tensor generator formula for a fixed chain isomorphism -/
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false

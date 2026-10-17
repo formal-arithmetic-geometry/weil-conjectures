@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.MixedHomTensorPullbackIso
+public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 import all WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorSuccessiveNormalization
 

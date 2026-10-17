@@ -165,7 +165,7 @@ theorem exists_normalizedInternalHomPullbackComparison
                 ((derivedInternalHom (Opens.grothendieckTopology S)
                   S.toRingedSpace.sheaf).obj (op K, L), K) ≫
               (derivedPullback g).map ((bS K).counit.app L))) := by
-  have h := exists_schemeHomTensorPullbackIso.{u, w} g
+  have h := exists_mixedHomTensorPullbackIso.{u, w} g
   obtain ⟨t, ht⟩ := h
   obtain ⟨γ, hγ⟩ := evaluationMate_exists
     (derivedInternalHom (Opens.grothendieckTopology S) S.sheaf)

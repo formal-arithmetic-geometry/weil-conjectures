@@ -236,7 +236,7 @@ def schemeHomOriginalTensorPullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (derivedPullback f).prod (derivedPullback f) ⋙ tensor (schemeDerivedCategory X) :=
   let δ := schemeHomPullbackCounitIso f
   Functor.isoWhiskerLeft (tensor (schemeDerivedCategory Y)) δ.symm ≪≫
-    Classical.choose (exists_schemeHomTensorPullbackIso f) ≪≫
+    Classical.choose (exists_mixedHomTensorPullbackIso f) ≪≫
     Functor.isoWhiskerRight (NatIso.prod δ δ) (tensor (schemeDerivedCategory X))
 
 set_option backward.isDefEq.respectTransparency true in
@@ -337,7 +337,7 @@ Source: Stacks, Tags 06YJ and 079U (blueprint: lem-pc-global-hom-original-counit
 theorem schemeHomOriginalTensorPullbackIso_originalCounit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsSchemeHomOriginalCounitTensorComparison f
       (fun A B ↦ (schemeHomOriginalTensorPullbackIso f).hom.app (A, B)) := by
-  have ht := Classical.choose_spec (exists_schemeHomTensorPullbackIso f)
+  have ht := Classical.choose_spec (exists_mixedHomTensorPullbackIso f)
   dsimp only [IsCanonicalPullbackTensorComparison] at ht
   dsimp only [IsSchemeHomOriginalCounitTensorComparison]
   refine ⟨?_, ?_⟩
@@ -352,7 +352,7 @@ theorem schemeHomOriginalTensorPullbackIso_originalCounit {X Y : Scheme.{u}} (f 
       ((HomotopyCategory.quotient _ (.up ℤ)).obj N)
     have he := originalCounitTensorEquation (derivedPullback f)
       (schemeHomPullbackCounitIso f)
-      ((Classical.choose (exists_schemeHomTensorPullbackIso f)).hom.app
+      ((Classical.choose (exists_mixedHomTensorPullbackIso f)).hom.app
         (DerivedCategory.Q.obj P, DerivedCategory.Q.obj N))
       (pullbackTensorModelMap Y P N) _ _ _ _ _ _ _ _ hU hA hB hc
     simpa only [schemeHomOriginalTensorPullbackIso, Iso.trans_hom, NatTrans.comp_app,

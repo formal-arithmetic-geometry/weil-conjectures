@@ -45,13 +45,13 @@ def schemeGlobalDerivedHom_pullback_comparison
           ((derivedPullback h).obj
             ((derivedInternalHom (Opens.grothendieckTopology S) S.sheaf).obj (op P, Q)))
           ((derivedPullback h).obj P) ((derivedPullback h).obj Q)).symm
-            ((schemeHomTensorPullbackIso h).inv.app
+            ((mixedHomTensorPullbackIso h).inv.app
               ((derivedInternalHom (Opens.grothendieckTopology S) S.sheaf).obj (op P, Q), P) ≫
               (derivedPullback h).map
                 ((schemeDerivedTensorHomEquiv S)
                   ((derivedInternalHom (Opens.grothendieckTopology S) S.sheaf).obj (op P, Q))
                   P Q (𝟙 _))))) ≫
-    (schemeGlobalSectionsDirectImageIso h).hom.app
+    (mixedGlobalSectionsDirectImageIso h).hom.app
       ((derivedInternalHom (Opens.grothendieckTopology T) T.sheaf).obj
         (op ((derivedPullback h).obj P), (derivedPullback h).obj Q))
 

@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
-public import WeilConjectures.AlgebraicGeometry.MixedHomTensorPullbackIso
+public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import WeilConjectures.AlgebraicGeometry.PerfectRHomTensorComparison
 import all WeilConjectures.AlgebraicGeometry.PerfectInternalHomPullbackIsIso
