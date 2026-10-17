@@ -12,9 +12,147 @@
   "def-weil-pbc-integral-closure",
   "def-weil-pbc-adic-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-local-completion-faithfully-flat], $A\\to H$ is faithfully flat, hence flat. By [lem-weil-pbc-adic-completion-noetherian], $H$ is Noetherian. By [lem-weil-pbc-local-completion-local-ring], $H$ is local with maximal ideal $\\mathfrak n=\\mathfrak mH$. By [lem-weil-pbc-noetherian-finitely-many-minimal-primes], list its distinct minimal primes as $\\mathfrak p_1,\\ldots,\\mathfrak p_r$. This list is nonempty: the prime $\\mathfrak n$ contains a minimal prime by [lem-weil-pbc-prime-contains-minimal-prime].",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "00MC (lemma-completion-faithfully-flat); 0316 (lemma-completion-Noetherian-Noetherian); 05GG (lemma-hathat-finitely-generated), 05GI (lemma-radical-completion); 00FR (lemma-Noetherian-irreducible-components); 00E0 (lemma-Zariski-topology), part (4)"
+   }
+  },
+  {
+   "text": "Put $C=H\\otimes_A B$, with maps $h\\mapsto h\\otimes1$ and $b\\mapsto1\\otimes b$. The map $B\\to C$ is faithfully flat directly from [def-weil-pbc-faithfully-flat-ring-map]: for any complex of $B$-modules $N_1\\to N_2\\to N_3$, the identifications $C\\otimes_BN_j\\cong H\\otimes_AN_j$, $(h\\otimes b)\\otimes x\\mapsto h\\otimes bx$, with inverse $h\\otimes x\\mapsto(h\\otimes1)\\otimes x$, identify its scalar extension with tensoring its underlying $A$-complex by $H$. Exactness of the underlying $A$-complex and of the $B$-complex is the same equality of kernels and images. Faithful flatness of $H$ therefore gives both directions of the required exactness equivalence.",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "00HB (definition-flat), parts (2) and (4); tensor products of algebras, Section 00CV"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-faithfully-flat-surjective-spectrum] to $B\\to C$ and the specified prime $\\mathfrak q$ to obtain a prime $Q\\subset C$ with $Q\\cap B=\\mathfrak q$. Its contraction to $H$ contains $\\mathfrak mH$: for $a\\in\\mathfrak m$, $\\iota(a)\\otimes1=1\\otimes a\\in Q$. This contraction is proper because $Q$ is prime; since $\\mathfrak mH=\\mathfrak n$ is maximal, it equals $\\mathfrak n$.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "00HQ (lemma-ff-rings), implication (1) to (2)"
+   }
+  },
+  {
+   "text": "Let $S=A\\setminus\\{0\\}$. For $s\\in S$, multiplication by $s$ on $A$ is injective because $A$ is a domain. Tensoring with the flat $A$-module $H$ preserves this injection by [lem-trf-flat-tensor-preserves-injection], so multiplication by $\\iota(s)$ on $H$ is injective. Thus $\\iota(s)$ is a nonzerodivisor, and [lem-pc-minimal-prime-avoids-nonzerodivisor] gives $\\iota(s)\\notin\\mathfrak p_i$ for every $i$. Consequently $A\\to H/\\mathfrak p_i$ is injective, and the formula $a/s\\mapsto\\overline{\\iota(a)}/\\overline{\\iota(s)}$ defines a compatible map $K\\to L_i:=\\operatorname{Frac}(H/\\mathfrak p_i)$.",
+   "uses": [
+    "lem-trf-flat-tensor-preserves-injection",
+    "lem-pc-minimal-prime-avoids-nonzerodivisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "00HB (definition-flat), and minimal primes and nonzerodivisors as in 00EU (lemma-minimal-prime-reduced-ring)"
+   }
+  },
+  {
+   "text": "The inclusion $B\\hookrightarrow K$ induces an injective map $C\\hookrightarrow H\\otimes_AK$ by [lem-trf-flat-tensor-preserves-injection]. Identify $H\\otimes_AK$ with $S^{-1}H$ by $h\\otimes(a/s)\\mapsto\\iota(a)h/s$; the inverse is $h/s\\mapsto h\\otimes(1/s)$. These maps respect the fraction relation of [def-weil-pbc-module-localization] and the tensor balancing relation and are inverse on the displayed generators. Write $\\alpha:C\\hookrightarrow S^{-1}H$ for this injection.",
+   "uses": [
+    "lem-trf-flat-tensor-preserves-injection",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "00DK (lemma-tensor-localization), explicit formula and proof"
+   }
+  },
+  {
+   "text": "For every $i$ let $T_i$ be the integral closure of $H/\\mathfrak p_i$ in $L_i$, and put $U=\\prod_{i=1}^rT_i$. The map $B\\to L_i$ of Step 4 lands in $T_i$: a monic equation for $b\\in B$ over $A$ becomes the same monic equation over $H/\\mathfrak p_i$. Thus [def-weil-pbc-integral-closure] and [lem-weil-pbc-algebra-tensor-base-change-universal-property] give a homomorphism $\\psi_i:C\\to T_i$, $h\\otimes b\\mapsto\\bar h\\,b_i$, where $b_i$ denotes the image of $b$ in $L_i$. Put $\\psi=(\\psi_i)_i:C\\to U$ and $D=\\psi(C)\\subset U$. If $\\alpha(c)=h/s$, its $i$-th component in $L_i$ is $\\bar h/\\overline{\\iota(s)}$, by the formula of Step 5.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-algebra-tensor-base-change-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "00GI (definition-integral), 00GP (definition-integral-closure), 00GO (lemma-integral-closure-is-ring); Section 00CV, tensor universal property"
+   }
+  },
+  {
+   "text": "The kernel of $\\psi$ consists of nilpotent elements. Indeed, if $\\psi(c)=0$ and $\\alpha(c)=h/s$, Step 4 shows the denominator is nonzero in every $H/\\mathfrak p_i$, so $h\\in\\mathfrak p_i$ for all $i$. Every prime of $H$ contains a minimal prime by [lem-weil-pbc-prime-contains-minimal-prime]; hence $h$ belongs to every prime. By [lem-weil-pbc-zero-locus-eq-iff-radical-eq] with $I=0$, $h^N=0$ for some $N\\ge1$. Thus $\\alpha(c^N)=(h/s)^N=0$, and injectivity of $\\alpha$ gives $c^N=0$. Since $Q$ is prime, $\\ker\\psi\\subset Q$. Accordingly $P:=\\psi(Q)$ is a proper prime ideal of $D$: for $\\psi(x)\\psi(y)\\in P$, choose $z\\in Q$ with $\\psi(xy)=\\psi(z)$; then $xy-z\\in\\ker\\psi\\subset Q$, so $x\\in Q$ or $y\\in Q$. Also $\\psi^{-1}(P)=Q$.",
+   "uses": [
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "00E0 (lemma-Zariski-topology), parts (4) and (7)"
+   }
+  },
+  {
+   "text": "The inclusion $D\\hookrightarrow U$ is integral. For $t=(t_i)_i\\in U$, choose a monic polynomial $f_i\\in(H/\\mathfrak p_i)[X]$ vanishing at $t_i$, by [def-weil-pbc-integral-closure]. Lift its coefficients to obtain a monic $F_i\\in H[X]$. The finite product $F=\\prod_iF_i$ is monic and annihilates $t$ in $U$, because its $i$-th coordinate has the vanishing factor $f_i(t_i)$. The image of $H$ in $U$ is contained in $D$ (it is $\\psi(h\\otimes1)$), so the same polynomial is a monic equation over $D$ for $t$.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "00GI (definition-integral) and 00GO (lemma-integral-closure-is-ring); finite product argument underlying the normalization decomposition"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-integral-injective-lying-over] to $D\\hookrightarrow U$ and $P$ to obtain a prime $M_U\\subset U$ with $M_U\\cap D=P$. Therefore $\\psi^{-1}(M_U)=Q$. By [lem-weil-pbc-product-prime-factor] there are an index $i$ and a prime $M\\subset T_i$ with $M_U=\\operatorname{pr}_i^{-1}(M)$. In particular the index set is nonempty; the empty-product case cannot support $M_U$.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-weil-pbc-product-prime-factor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "00GQ (lemma-integral-overring-surjective); 00ED (lemma-spec-product)"
+   }
+  },
+  {
+   "text": "Set $\\mathfrak p=\\mathfrak p_i$, $T=T_i$ and $j(b)=\\psi_i(1\\otimes b)$. Then $j^{-1}(M)=\\mathfrak q$: explicitly, $j(b)\\in M$ if and only if $\\psi(1\\otimes b)\\in M_U$, if and only if $1\\otimes b\\in Q$, if and only if $b\\in\\mathfrak q$. Likewise the inverse image of $M$ in $H$ is the contraction $Q\\cap H=\\mathfrak n$ from Step 3. Since the map $H\\to T_i$ factors through $H/\\mathfrak p_i$, the inverse image in that quotient is exactly $\\mathfrak n/\\mathfrak p_i$. Finally $j(a)=\\psi_i(1\\otimes a)=\\psi_i(\\iota(a)\\otimes1)$ for $a\\in A$, which is precisely the required $A$-algebra compatibility. The prime $\\mathfrak p_i$ is minimal by its choice in Step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Conclusion from the tensor balancing relation and contraction identities proved in Steps 1, 3, 6 and 9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-pc-minimal-prime-avoids-nonzerodivisor",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-algebra-tensor-base-change-universal-property",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-product-prime-factor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit tensor-product and finite-product proof of the component form of Swanson–Huneke Lemma 4.8.3; Stacks 00MC, 0316, 05GG, 05GI, 00FR, 00HB, 00HQ, 00DK, 00E0, 00GQ and 00ED supply the cited algebra facts."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +195,45 @@
    "results": "{\"t\": \"2026-10-17T21:17:50Z\", \"tool\": \"leanfinder\", \"query\": \"For a Noetherian local domain the map from its normalization to the normalization of its reduced completion is surjective on closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_surjective\", \"AdicCompletion.evalOneₐ_surjective\", \"surjective_of_isLocalization_isMaximal\", \"AdicCompletion.surjective_evalₐ\", \"AlgebraicGeometry.Scheme.residue_surjective\", \"PrimeSpectrum.piLocalizationToMaximal_surjective\", \"Ideal.surjectiveOnStalks_residueField\", \"IsDedekindDomain.HeightOneSpectrum.valuation_surjective\"], \"digest\": \"6536aa7e50af2e38\"}",
    "date": "2026-10-18",
    "verdict": "no match: hits concern integral lying over, localization, or surjectivity of completion projections; none lifts a prescribed normalization prime to a completed branch. The grep in RingTheory/AdicCompletion found no integralClosure or IsIntegralClosure occurrence."
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure|IsIntegralClosure",
+   "results": "{\"t\": \"2026-10-17T21:38:49Z\", \"tool\": \"grep\", \"query\": \"integralClosure|IsIntegralClosure\", \"sub\": \"RingTheory/AdicCompletion\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern local closed points, Dedekind localizations or valuations, or relative normalization, and do not assert this completed-branch lift; the adic-completion source grep has no integral-closure occurrence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization closed points lift to a branch of the completion of a Noetherian local domain",
+   "results": "{\"t\": \"2026-10-17T21:38:50Z\", \"tool\": \"leansearch\", \"query\": \"Normalization closed points lift to a branch of the completion of a Noetherian local domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.closedPoint\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"IsLocalRing.closedPoint.congr_simp\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"IsLocalRing.specializes_closedPoint\", \"IsLocalRing.comap_closedPoint\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"7544ac2c5b4d03da\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern local closed points, Dedekind localizations or valuations, or relative normalization, and do not assert this completed-branch lift; the adic-completion source grep has no integral-closure occurrence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"integralClosure\"",
+   "results": "{\"t\": \"2026-10-17T21:38:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"integralClosure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern local closed points, Dedekind localizations or valuations, or relative normalization, and do not assert this completed-branch lift; the adic-completion source grep has no integral-closure occurrence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed prime of the normalization of a Noetherian local domain lifts to the normalization of one minimal prime quotient of the completion",
+   "results": "{\"t\": \"2026-10-17T21:38:51Z\", \"tool\": \"leanfinder\", \"query\": \"A prescribed prime of the normalization of a Noetherian local domain lifts to the normalization of one minimal prime quotient of the completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"IsDedekindDomain.primesOverEquivPrimesOver\", \"IsDedekindDomain.primesOverEquivPrimesOver_apply\", \"IsDedekindDomain.HeightOneSpectrum.coe_algebraMap_mem\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletionIntegers_apply\"], \"digest\": \"5e4a0dae7b98cb86\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern local closed points, Dedekind localizations or valuations, or relative normalization, and do not assert this completed-branch lift; the adic-completion source grep has no integral-closure occurrence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalization of the reduced completion maps surjectively on the closed points of the birational integral closure",
+   "results": "{\"t\": \"2026-10-17T21:38:52Z\", \"tool\": \"leanfinder\", \"query\": \"The normalization of the reduced completion maps surjectively on the closed points of the birational integral closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.residue_surjective\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_surjective\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"surjective_of_isLocalization_isMaximal\", \"AlgebraicGeometry.pointsPi_surjective\"], \"digest\": \"9f4ab93d98aa7e5b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern local closed points, Dedekind localizations or valuations, or relative normalization, and do not assert this completed-branch lift; the adic-completion source grep has no integral-closure occurrence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-almost-finite-residue-field-degree",
@@ -88,5 +261,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-normalization-completed-branch-lift",
+  "worker": "stage1",
+  "summary": "Statement kept; exact project attachment search found none. Wrote the completed-branch lift using faithful-flat tensor base change, the explicit localization embedding, the nilpotent kernel of the map to the product of branch normalizations, lying over, and factor-prime selection. Reused existing DAG nodes only; no new nodes. Recorded fresh item Mathlib searches and checked every citation against its statement. No reducedness, excellence, or finite-normalization hypothesis was added.",
+  "blueprint": "Historical ancestry from lem-trf-local-term-locality, the Orgogozo 8.3.2 finite-type/Heinzer normalization auxiliary route recorded in blueprint.from.place, via lem-trf-almost-finite-residue-field-degree. This split realizes its birational normalization and completed-branch reduction; it makes no change to the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic Noetherian-completion theorem needed to enumerate branches; the trace-formula unit has no replacement for this commutative-algebra input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N4-ac5abcdad",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-ac5abcdad (reviewer sub-agent of L); spot-checked: Read the item, all ten steps, every cited statement, sources, and unit/chapter route. Verified regular branch denominators, nilpotent kernel, integral lying over, both contractions, and A-algebra compatibility; checked concrete small cases. No new nodes, circularity, prohibited dependencies, or long steps. Accepted the generic Noetherian-completion tool use. Detailed review written to review.md; no DAG repairs needed."
  }
 }

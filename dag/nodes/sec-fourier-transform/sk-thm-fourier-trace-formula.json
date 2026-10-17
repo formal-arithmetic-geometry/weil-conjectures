@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "sk-thm-fourier-trace-formula",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "thm-fd-fourier-trace"
+  ]
  },
  "kind": "statement",
  "title": "P8: the Fourier trace formula",
@@ -13,30 +15,167 @@
   "place": "node sk-thm-fourier-trace-formula, order 3050"
  },
  "stmt_deps": [
-  "sk-def-trace"
+  "sk-def-fourier-set",
+  "def-fd-transform",
+  "sk-def-trace",
+  "sk-def-char",
+  "def-weil-weil-sheaf-complex"
  ],
  "proof": [
   {
-   "text": "By P3 the stalk of $\\FT_\\psi(K)$ at the geometric point over $y$ is\n$H^*_c(\\Aone,K\\otimes^L\\mathcal L_{\\psi(xy)})[1]$. The\nGrothendieck–Lefschetz trace formula over $\\mathbf F_{q^n}$\n(thm:trf-grothendieck-lefschetz-qbar in the point-counting form\ncor:trf-point-counting) computes the trace of the Frobenius on that\ncomplex as the sum of the traces at the geometric points of the fibre, i.e. as $-\\sum_xt_{K\\otimes^L\\mathcal L_{\\psi(xy)}}(x)$, the sign being the shift\n$[1]$ of [sk-def-ft]. The trace of a tensor product is the product of the\ntraces, and the trace of the Artin–Schreier factor at $x$ is\n$\\psi(\\Tr_{\\mathbf F_{q^n}/k_0}(xy))$ by [sk-lem-as-properties].",
+   "text": "Use the adic coefficient convention of [sk-def-fourier-set] and the integral-transform definition [def-fd-transform], with rank $r=1$. Put $L=\\mathbf F_{q^n}$ ($n\\geq1$), and choose a common finite coefficient field $E$ containing the values of $\\psi$ and a model of the Weil complex $K$. This is the finite-stage interpretation of [def-weil-weil-sheaf-complex]. On $\\mathbf A^1\\times\\mathbf A^1$ the kernel of [def-fd-kernel] is $\\mathcal L_{\\psi,xy}$. Set $M=p_1^*K\\otimes_E^L\\mathcal L_{\\psi,xy}$. Pullback, tensor and $Rp_{2,!}$ have bounded constructible values by [prop-functor-package], and their Weil structures are supplied by [lem-fix-weil-operations]. Thus $\\operatorname{FT}_\\psi(K)=Rp_{2,!}M[1]$ is a Weil complex. All operations here are adic operations; no identification with discrete non-torsion coefficient sheaves on the small étale site is made.",
    "uses": [
-    "sk-def-ft",
+    "sk-def-fourier-set",
+    "def-fd-transform",
+    "def-weil-weil-sheaf-complex",
+    "def-fd-kernel",
+    "prop-functor-package",
+    "lem-fix-weil-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
+    "place": "Definition 1.2.1.1, pp. 140–141; finite-field setting of 1.1"
+   }
+  },
+  {
+   "text": "Fix $y\\in L$ and let $M_y$ be the restriction of $M$ to the fibre of $p_2$ over $y$. This fibre is $\\mathbf A^1_L$ before passage to $k$. The formula [lem-fd-stalk-formula] gives\n$$ (\\operatorname{FT}_\\psi(K))_{\\bar y}\\cong R\\Gamma_c(\\mathbf A^1_k,M_y)[1]. $$\nThe isomorphism is the compact-support exchange of [prop-functor-package], applied to the square cut out by $y$. Regard that square over $L$. Iterate the original Weil structures $n$ times; the $q^n$-Frobenius preserves the square because $y\\in L$. Exchange is equivariant by [lem-fix-weil-operations]. Consequently this isomorphism intertwines the local operator $F_y^{(n)}$ with the compact-support operator for the resulting $L$-Weil complex $M_y$, shifted by $[1]$. In the geometric-Frobenius convention of [def-weil-local-frobenius-trace], the return is $g^n\\bar y=\\bar y g_s^n$, with the point transports included, rather than an equality of geometric scheme points fixed pointwise. Restricting the iterated Weil map in this square uses exactly that return and those pullback-composition comparisons.",
+   "uses": [
+    "lem-fd-stalk-formula",
+    "prop-functor-package",
+    "lem-fix-weil-operations",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
+    "place": "Theorem 1.2.1.2 and its proof, p. 141; stalk form of the compact-support calculation"
+   }
+  },
+  {
+   "text": "Apply [thm-weil-grothendieck-lefschetz-trace] with base field $L$, scheme $Y_0=\\mathbf A^1_L$, Weil complex $M_y$, and exponent $1$. The line is separated and of finite type; $M_y$ is bounded constructible and has a finite coefficient-field model by step 1 and pullback in [prop-functor-package]. The theorem therefore gives the finite sum identity\n$$ \\sum_i(-1)^i\\operatorname{Tr}(F_{c,L}\\mid H_c^i(\\mathbf A^1_k,M_y))\n=\\sum_{x\\in L}t_{M_y}(x). $$\nIts local and global operators are the iterated original operators identified in step 2. We use the general Weil-complex trace identity, not the constant-coefficient point-counting corollary. No extra admissibility hypothesis is imported from the separate conditional formulation thm-trf-grothendieck-lefschetz-qbar.",
+   "uses": [
+    "thm-weil-grothendieck-lefschetz-trace",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
+    "place": "Formula 1.1.1.3, p. 137, applied over the finite extension; Theorem 1.2.1.2"
+   }
+  },
+  {
+   "text": "Write $\\psi_L=\\psi\\circ\\operatorname{Tr}_{L/k_0}=\\Psi\\circ\\operatorname{Tr}_{L/\\mathbf F_p}$ as in [sk-def-char]. By [def-fd-kernel], the kernel restricts on the fibre to the Artin–Schreier sheaf $N_y$ of the function $x\\mapsto xy$. Apply the general-function, closed-point clause of [sk-lem-as-properties] with finite base field $L$: at the $L$-rational point $x$ the residue field is $L$, so $N_y$ is a line in degree zero with Frobenius scalar\n$$ \\lambda_{x,y}=\\Psi(\\operatorname{Tr}_{L/\\mathbf F_p}(xy))=\\psi(\\operatorname{Tr}_{L/k_0}(xy)). $$\nThe same Artin–Schreier construction uses $\\Psi$ before and after this base extension. This includes $y=0$, when the sheaf is constant with scalar $1$; it does not apply the narrower lemma lem-fd-as-trace, whose parameter is required to lie in $k_0^\\times$.",
+   "uses": [
+    "sk-def-char",
+    "def-fd-kernel",
     "sk-lem-as-properties"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
+    "place": "Artin–Schreier trace formula 1.1.3.3 and pullback convention 1.1.3.6, pp. 139–140"
+   }
+  },
+  {
+   "text": "At $x\\in L$, the monoidal pullback comparison [lem-pur-derived-pullback-tensor-iso] identifies $(M_y)_{\\bar x}$ with $K_{\\bar x}\\otimes_E^L(N_y)_{\\bar x}$. Its Frobenius is $F_x^{(n)}\\otimes\\lambda_{x,y}$ by the tensor Weil structure of [lem-fix-weil-operations]. A basis of the degree-zero line $(N_y)_{\\bar x}$ identifies tensoring with it with the identity on complexes of vector spaces, so it is exact and $H^j((M_y)_{\\bar x})=H^j(K_{\\bar x})\\otimes_E(N_y)_{\\bar x}$. In a basis of each finite-dimensional $H^j(K_{\\bar x})$, the matrix of this operator is $\\lambda_{x,y}$ times the matrix of $F_x^{(n)}$. Taking its diagonal sum and then the finite alternating sum from [sk-def-trace] proves\n$$ t_{M_y}(x)=t_K(x)\\lambda_{x,y}. $$\nThis is the rank-one case proved directly, so no general tensor-product trace theorem is hidden here.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-fix-weil-operations",
+    "sk-def-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
+    "place": "Elementary rank-one calculation underlying 1.1.1.2, p. 137"
+   }
+  },
+  {
+   "text": "By [sk-def-trace] and the Frobenius-intertwining isomorphism of step 2,\n$$ t_{\\operatorname{FT}_\\psi(K)}(y)=\\sum_j(-1)^j\\operatorname{Tr}(F_{c,L}\\mid H^{j+1}_c(\\mathbf A^1_k,M_y)). $$\nSubstitute $i=j+1$ in this finite sum. Since $(-1)^{i-1}=-(-1)^i$, it is the negative of the left side in step 3. Substitute steps 3–5 to obtain\n$$ t_{\\operatorname{FT}_\\psi(K)}(y)=-\\sum_{x\\in L}t_K(x)\\psi(\\operatorname{Tr}_{L/k_0}(xy)). $$\nThis is the required formula, and [sk-def-trace] identifies the sum without the sign as the classical Fourier transform. All computations may be made at the common $E$-stage; the coefficient-field-independent trace identity in step 3 and the coefficient comparisons of [prop-functor-package] give the displayed $\\overline{\\mathbf Q}_\\ell$-valued formula.",
+   "uses": [
+    "sk-def-trace",
+    "prop-functor-package"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/laumon-transformation-de-fourier_PMIHES-1987-65.pdf",
+    "place": "Shift identity 1.1.1.1, p. 137, and conclusion of Theorem 1.2.1.2, p. 141"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-ft",
-  "sk-lem-as-properties"
+  "sk-def-fourier-set",
+  "def-fd-transform",
+  "def-weil-weil-sheaf-complex",
+  "def-fd-kernel",
+  "prop-functor-package",
+  "lem-fix-weil-operations",
+  "lem-fd-stalk-formula",
+  "def-weil-local-frobenius-trace",
+  "thm-weil-grothendieck-lefschetz-trace",
+  "sk-def-char",
+  "sk-lem-as-properties",
+  "lem-pur-derived-pullback-tensor-iso",
+  "sk-def-trace"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-thm-fourier-trace-formula/_section.md",
-  "place": "## Proof"
+  "place": "Formula of main-20261015; expanded unit proof following Laumon, Theorem 1.2.1.2, with explicit Weil equivariance and rank-one trace calculation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fourier.*trace|trace.*fourier|WeilComplex",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Fourier, trace",
+   "results": "Loogle reports unknown identifier Fourier; no matching declaration. The valid substring query was subsequently run.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Frobenius trace function of the Fourier Deligne transform of a Weil complex is the negative finite field Fourier transform of its trace function",
+   "results": "FiniteField.algebraMap_trace_eq_sum_pow; FiniteField.trace_to_zmod_nondegenerate; jacobiSum_nontrivial_inv; DirichletCharacter.IsPrimitive.fourierTransform_eq_inv_mul_gaussSum; gaussSum_frob; DirichletCharacter.fourierTransform_eq_gaussSum_mulShift; FDRep.character; FiniteField.trace_pow_card. These are finite-field algebra, finite sums, or representation characters, not a Weil-complex cohomological trace formula.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fourier Deligne transform trace function of a constructible Weil complex over a finite field",
+   "results": "FourierTransform.fourier, mk, fourierₗ, term𝓕, fourierₗ_apply; Real.fourierIntegral, fourier_eq, fourier_eq'. Generic Fourier notation and analytic integrals; no constructible Weil complex.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck Lefschetz cohomology with compact supports character sheaf Fourier sum Frobenius trace",
+   "results": "groupCohomology.Hilbert90.aux; continuousCohomology; CompHausLike.LocallyConstantModule.functor; groupCohomology.exists_mul_galRestrict_of_norm_eq_one; FDRep.char_orthonormal; FDRep.scalar_product_char_eq_finrank_equivariant; Rep.FiniteCyclicGroup.moduleCatCochainComplex; ContinuousCohomology.homogeneousCochains. None states an etale/adic compact-support or Fourier trace identity.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourier\", \"trace\"",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck.*Lefschetz|ArtinSchreier|fourierTransform",
+   "results": "25 displayed hits in analytic Fourier notation, circle characters, Gaussian/Poisson/measure-theoretic Fourier transforms, and Dirichlet-character Fourier sums; no Fourier–Deligne/sheaf trace declaration.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -128,5 +267,44 @@
     }
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "sk-thm-fourier-trace-formula",
+  "worker": "stage1",
+  "summary": "Expanded the one-paragraph sketch into six steps without new nodes: adic typing and Weil structures, Frobenius-compatible fibre identification, the general Weil-complex trace formula, Artin–Schreier scalar at every extension-field point including y=0, the elementary rank-one tensor trace calculation, and the shift sign. Corrected the constant-coefficient point-counting misuse and avoided the smaller Artin–Schreier lemma restricted to nonzero base-field parameters. The stale FourierTrace/LowerShriekOperations source audit cannot support attachment in this checkout.",
+  "blueprint": "Realizes all of the sole unit proof paragraph: P3/stalk in steps 1–2; Grothendieck–Lefschetz in step 3; Artin–Schreier character scalar in step 4; multiplicativity in step 5; shift [1] and the displayed formula in step 6. thm-fd-fourier-trace is an existing equivalent blueprint theorem, recorded in same_as but not used as a replacement for the argument.",
+  "tool_uses": [
+   {
+    "node": "prop-functor-package",
+    "why": "Generic bounded-constructibility, compact-support exchange and coefficient comparisons needed to type the stalk calculation; the Fourier unit does not restate the six-operation package."
+   },
+   {
+    "node": "lem-fix-weil-operations",
+    "why": "Generic Weil structures and equivariance of exchange/tensor make the geometric stalk isomorphism identify the actual Frobenius operators; the unit only sketches the underlying stalk."
+   },
+   {
+    "node": "thm-weil-grothendieck-lefschetz-trace",
+    "why": "The general Weil-complex trace formula is the black-box theorem explicitly invoked by the unit; the constant-coefficient point-counting corollary does not apply to the Fourier integrand."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic monoidality of adic derived pullback identifies the integrand stalk with the tensor of its two stalks; this is not a purity orientation or an alternative Fourier route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-functor-package",
+  "lem-fix-weil-operations",
+  "thm-weil-grothendieck-lefschetz-trace",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q113-ff294d7dd",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q113-ff294d7dd (reviewer sub-agent of L); spot-checked: Read the item, unit, chapter route, cited nodes, Laumon sources, and delivery materials in full. The six-step proof correctly handles adic coefficients, Frobenius-compatible stalk/base change, the general trace formula, Artin–Schreier scalars including y=0, tensor traces, and the shift sign. Small cases and route restrictions pass; no duplicate, circular, SGA-forbidden, pivot-machinery, or long-step fault found. Review written to review.md."
  }
 }

@@ -1,0 +1,97 @@
+{
+ "id": "lem-trf-localized-fibre-prime-factor",
+ "kind": "statement",
+ "title": "Primes of a localized polynomial fibre are irreducible factors",
+ "statement": "Let $R$ be a commutative ring, $f,g\\in R[t]$ [def-weil-polynomial-ring], with $f$ monic (leading coefficient $1$), and put $A=R[t]/(f)$ and $B=A_{g_A}$ [def-weil-ring-localization-away], where $g_A$ is the class of $g$. Let $\\mathfrak q$ be a prime ideal of $B$ and $\\mathfrak p$ its contraction to $R$. Put $k=\\kappa(\\mathfrak p)$ [def-weil-pbc-localization-at-prime] and let $\\rho:R[t]\\to k[t]$ apply $R\\to k$ to each coefficient. Write $f_k=\\rho(f)$, $g_k=\\rho(g)$ and $F=(k[t]/(f_k))_{[g_k]}$, with the canonical map $j:B\\to F$. There is a unique monic irreducible polynomial $h\\in k[t]$ (irreducible means nonzero and not a unit, and every factorization has a unit factor) such that $h\\mid f_k$, $h\\nmid g_k$, and $\\mathfrak q=j^{-1}(((h)/(f_k))F)$. Here $(h)/(f_k)$ is the image of the ideal $(h)$ in $k[t]/(f_k)$ and the trailing $F$ denotes extension of this ideal to $F$. Explicitly, for every $P\\in R[t]$ and $m\\ge0$, one has $[P]/g_A^m\\in\\mathfrak q$ if and only if $h\\mid\\rho(P)$ in $k[t]$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00UF, label lemma-standard-etale-finite-flat-Zariski, proof: paragraph beginning \"Let q subset R[x]/(f) be a prime ideal with g notin q\" and residue-field paragraph identifying q with an irreducible factor; explicit localization-membership form of that identification."
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A prime of (R[t]/f) localized at g contracting to p is the inverse image of the ideal of a unique monic irreducible factor of f over kappa(p), with membership of P/g^m equivalent to divisibility of its coefficient reduction",
+   "results": "{\"t\": \"2026-10-17T21:37:35Z\", \"tool\": \"leanfinder\", \"query\": \"A prime of (R[t]/f) localized at g contracting to p is the inverse image of the ideal of a unique monic irreducible factor of f over kappa(p), with membership of P/g^m equivalent to divisibility of its coefficient reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"NumberField.Ideal.primesOverSpanEquivMonicFactorsMod_symm_apply\", \"NumberField.Ideal.liesOver_primesOverSpanEquivMonicFactorsMod_symm\", \"NumberField.Ideal.primesOverSpanEquivMonicFactorsMod\", \"Polynomial.UniversalCoprimeFactorizationRing.exists_liesOver_residueFieldMap_bijective\", \"NumberField.Ideal.primesOverSpanEquivMonicFactorsMod_symm_apply_eq_span\", \"NumberField.Ideal.inertiaDeg_primesOverSpanEquivMonicFactorsMod_symm_apply\", \"NumberField.Ideal.ramificationIdx_primesOverSpanEquivMonicFactorsMod_symm_apply\"], \"digest\": \"51d4945e02308cab\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: NumberField Kummer-Dedekind requires a number field, an integer prime and conductor/exponent conditions; OverPrime.mem_normalizedFactors_of_isPrime requires Dedekind-domain finite torsion-free algebra data and only identifies an ideal factor. Neither is the stated arbitrary-ring residue-fibre classification, and the Loogle hits concern etale factor lifting or irreducibility descent, not this correspondence."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.IsPrime, Polynomial.Monic",
+   "results": "{\"t\": \"2026-10-17T21:37:36Z\", \"tool\": \"loogle\", \"query\": \"Ideal.IsPrime, Polynomial.Monic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Polynomial.Monic.irreducible_of_irreducible_map_of_isPrime_nilradical\"], \"digest\": \"9e4f55398739892e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: NumberField Kummer-Dedekind requires a number field, an integer prime and conductor/exponent conditions; OverPrime.mem_normalizedFactors_of_isPrime requires Dedekind-domain finite torsion-free algebra data and only identifies an ideal factor. Neither is the stated arbitrary-ring residue-fibre classification, and the Loogle hits concern etale factor lifting or irreducibility descent, not this correspondence."
+  },
+  {
+   "tool": "grep",
+   "query": "primesOverSpanEquivMonicFactorsMod|mem_normalizedFactors_of_isPrime",
+   "results": "{\"t\": \"2026-10-17T21:38:07Z\", \"tool\": \"grep\", \"query\": \"primesOverSpanEquivMonicFactorsMod|mem_normalizedFactors_of_isPrime\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DedekindDomain/PID.lean\", \"Mathlib/RingTheory/DedekindDomain/PID.lean\"], \"digest\": \"05c8395627702c0a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: NumberField Kummer-Dedekind requires a number field, an integer prime and conductor/exponent conditions; OverPrime.mem_normalizedFactors_of_isPrime requires Dedekind-domain finite torsion-free algebra data and only identifies an ideal factor. Neither is the stated arbitrary-ring residue-fibre classification, and the Loogle hits concern etale factor lifting or irreducibility descent, not this correspondence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prime ideals over p in a localized monic polynomial quotient correspond to irreducible polynomial factors over the residue field of p",
+   "results": "{\"t\": \"2026-10-17T21:37:37Z\", \"tool\": \"leansearch\", \"query\": \"Prime ideals over p in a localized monic polynomial quotient correspond to irreducible polynomial factors over the residue field of p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.primesOver.isPrime\", \"Ideal.primesOver\", \"NumberField.Ideal.liesOver_primesOverSpanEquivMonicFactorsMod_symm\", \"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"NumberField.Ideal.primesOverSpanEquivMonicFactorsMod\", \"NumberField.Ideal.ramificationIdx_primesOverSpanEquivMonicFactorsMod_symm_apply'\", \"NumberField.Ideal.ramificationIdx_primesOverSpanEquivMonicFactorsMod_symm_apply\", \"Ideal.Factors.liesOver\"], \"digest\": \"a514a12235884ed2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: NumberField Kummer-Dedekind requires a number field, an integer prime and conductor/exponent conditions; OverPrime.mem_normalizedFactors_of_isPrime requires Dedekind-domain finite torsion-free algebra data and only identifies an ideal factor. Neither is the stated arbitrary-ring residue-fibre classification, and the Loogle hits concern etale factor lifting or irreducibility descent, not this correspondence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classify a prime in a localization of R[X]/(f) by the irreducible factor in the polynomial ring over its base residue field",
+   "results": "{\"t\": \"2026-10-17T21:38:10Z\", \"tool\": \"leanfinder\", \"query\": \"Classify a prime in a localization of R[X]/(f) by the irreducible factor in the polynomial ring over its base residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.Ideal.primesOverSpanEquivMonicFactorsMod_symm_apply\", \"Polynomial.UniversalCoprimeFactorizationRing.exists_liesOver_residueFieldMap_bijective\", \"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"RingOfIntegers.monicFactorsMod\", \"NumberField.Ideal.primesOverSpanEquivMonicFactorsMod\", \"NumberField.Ideal.primesOverSpanEquivMonicFactorsMod_symm_apply_eq_span\", \"NumberField.Ideal.inertiaDeg_primesOverSpanEquivMonicFactorsMod_symm_apply\", \"NumberField.Ideal.liesOver_primesOverSpanEquivMonicFactorsMod_symm\"], \"digest\": \"6556f397850112aa\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: NumberField Kummer-Dedekind requires a number field, an integer prime and conductor/exponent conditions; OverPrime.mem_normalizedFactors_of_isPrime requires Dedekind-domain finite torsion-free algebra data and only identifies an ideal factor. Neither is the stated arbitrary-ring residue-fibre classification, and the Loogle hits concern etale factor lifting or irreducibility descent, not this correspondence."
+  },
+  {
+   "tool": "grep",
+   "query": "irreducible|comap|over",
+   "results": "{\"t\": \"2026-10-17T21:38:07Z\", \"tool\": \"grep\", \"query\": \"irreducible|comap|over\", \"sub\": \"NumberTheory/NumberField/Ideal\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/Asymptotics.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/Asymptotics.lean\", \"Mathlib/NumberTheory/NumberField/Ideal/Asymptotics.lean\"], \"digest\": \"43aa9a0bdab1a468\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: NumberField Kummer-Dedekind requires a number field, an integer prime and conductor/exponent conditions; OverPrime.mem_normalizedFactors_of_isPrime requires Dedekind-domain finite torsion-free algebra data and only identifies an ideal factor. Neither is the stated arbitrary-ring residue-fibre classification, and the Loogle hits concern etale factor lifting or irreducibility descent, not this correspondence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-standard-etale-finite-free-prime-lifts",
+  "date": "2026-10-18",
+  "group": "Q77"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Unit sk-i-curve-zero proof step 2, etale/ph descent input below lem-trf-local-term-locality; through the inherited refinement chain, Algebra Tag 00UF proof, residue-fibre identification of q with an irreducible factor f_1 avoiding g.",
+   "via": [
+    "lem-trf-standard-etale-finite-free-prime-lifts",
+    "lem-trf-etale-finite-free-open-refinement",
+    "lem-trf-fppf-local-finite-free-refinement",
+    "lem-trf-fppf-integral-surjective-refinement",
+    "lem-trf-fppf-finite-surjective-refinement",
+    "lem-trf-ph-affine-standard-sieve-basis",
+    "lem-trf-ph-etale-comparison-hypotheses",
+    "lem-trf-ph-big-etale-torsion-acyclicity",
+    "lem-trf-ph-etale-torsion-comparison",
+    "lem-trf-proper-hypercover-etale-descent",
+    "lem-trf-nearby-proper-hyperdescent",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

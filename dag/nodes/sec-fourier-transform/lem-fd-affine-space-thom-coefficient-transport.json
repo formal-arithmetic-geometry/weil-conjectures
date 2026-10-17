@@ -10,13 +10,108 @@
  "stmt_deps": [
   "def-pur-conventions",
   "def-sbc-affine-space",
+  "sbc-lem-affine-space-smooth",
   "def-weil-integral-rational-qbar-compact-support",
   "def-coefficient-twists-detailed",
   "det-sp-trace-basic"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every $m\\geq0$, the projection $\\pi_m:\\mathbf A^m_Y\\to Y$ is separated and of finite type, and it is smooth of pure relative dimension $m$ by [sbc-lem-affine-space-smooth]. Thus it is in the domain of the finite-coefficient purity and trace statements. At a finite coefficient level $A=A_{E,n}$, apply [thm-pur-vector-bundle-thom] to the trivial rank-$m$ vector bundle $\\mathbf A^m_Y\\to Y$ with its zero section. Its Thom morphism $A_Y\\to R\\pi_{m!}A_{\\mathbf A^m_Y}(m)[2m]$ is an isomorphism, with inverse the vector-bundle trace. Clause (2) of [det-sp-trace-basic] identifies this trace with the normalized affine-space integration map $t_{m,A}$ and says that its geometric-fibre origin class maps to $1$; for $m=0$ the same clause and the identification $\\mathbf A^0_Y=Y$ give the identity map. Hence the finite normalized map is an isomorphism in every degree $m$.",
+   "uses": [
+    "def-pur-conventions",
+    "def-sbc-affine-space",
+    "sbc-lem-affine-space-smooth",
+    "thm-pur-vector-bundle-thom",
+    "det-sp-trace-basic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.proof.md",
+    "place": "First paragraph: compact-support Thom computation on the affine fibre, specialized to the trivial rank-m bundle"
+   }
+  },
+  {
+   "text": "At integral coefficients, the map $t_{m,\\mathcal O_E}$ is the smooth trace of the same projection, expressed through the derived-complete compact-support construction of [def-weil-integral-rational-qbar-compact-support]. The integral purity comparison of [thm-pur-adic-reconstruction] has finite reductions equal to the normalized finite-level purity comparisons, and [prop-pur-adic-reconstruction-trace-coherence] states that the corresponding smooth traces commute with this reconstruction. The finite-reduction theorem [thm-pur-finite-reduction-of-purity] gives the same compatibility for the trace and affine orientation: under the canonical reduction comparison, the reduction of $t_{m,\\mathcal O_E}$ is exactly $t_{m,A_{E,n}}$ for every $n$. These form a morphism of the strict reduction towers defining the integral compact-support objects. Every component is an isomorphism by Step 1, so the induced map on derived limits is an isomorphism by [lem-weil-derived-limit-levelwise-iso]. Its normalization is inherited from the finite origin-class normalization in Step 1.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "thm-pur-adic-reconstruction",
+    "prop-pur-adic-reconstruction-trace-coherence",
+    "thm-pur-finite-reduction-of-purity",
+    "lem-weil-derived-limit-levelwise-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-trace/sk-def-sp-trace-properties.proof.md",
+    "place": "Clause (2), coefficient transport of the normalized affine-space trace through the coherent finite-level tower"
+   }
+  },
+  {
+   "text": "For $\\Lambda=E$, the rational category and its compact-support functor are obtained by scalar localization of the integral constructions. [thm-pur-rational-and-qbar-purity] transports the integral purity isomorphism to the rational and algebraically closed coefficient stages, while [prop-pur-rational-purity-trace-coherence] says that these transported purity maps commute with the smooth trace. The scalar-localization result [prop-weil-pbc-rational-transport] therefore identifies $t_{m,E}$ with the scalar transport of $t_{m,\\mathcal O_E}$, so it is an isomorphism. The same argument at a common finite stage, followed by the common-stage construction of [def-weil-algebraically-closed-coefficients] and the $\\overline{\\mathbf Q}_\\ell$ clause of [thm-pur-rational-and-qbar-purity], identifies $t_{m,\\overline{\\mathbf Q}_\\ell}$ with the scalar transport of the integral map and proves it is an isomorphism.",
+   "uses": [
+    "thm-pur-rational-and-qbar-purity",
+    "prop-pur-rational-purity-trace-coherence",
+    "prop-weil-pbc-rational-transport",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-trace/sk-def-sp-trace-properties.proof.md",
+    "place": "Clauses (2)-(3), rationalization and common-stage coefficient transport"
+   }
+  },
+  {
+   "text": "The transports are coherent when the finite coefficient field changes. For finite extensions $E\\subset F$, [lem-pur-adic-scalar-trace-coherence] gives the explicit equality identifying the $F$-integral trace with the scalar extension of the $E$-integral trace, after the canonical twist and compact-support comparisons. Its finite-level reductions are the corresponding coefficient comparisons from [lem-pur-compact-support-integral-coefficient-comparison], and in the prime-power finite model the same normalization is the finite-free trace-extension identity of [lem-pur-finite-universal-smooth-trace]. The associativity and unit laws for rational scalar extension in [prop-weil-pbc-scalar-extension] transport these equalities to successive finite coefficient fields and to the common algebraic closure. Thus all coefficient versions of $t_m$ satisfy the stated change-of-field compatibility.",
+   "uses": [
+    "lem-pur-adic-scalar-trace-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-finite-universal-smooth-trace",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-trace/sk-def-sp-trace-properties.proof.md",
+    "place": "Clause (2), coefficient transport and compatibility with change of finite coefficient field"
+   }
+  },
+  {
+   "text": "Finally, tensoring the isomorphism $t_{m,\\Lambda}:R\\pi_{m!}\\Lambda(m)[2m]\\to\\Lambda_Y$ with the inverse Tate twist and inverse cohomological shift gives $R\\pi_{m!}\\Lambda\\simeq\\Lambda_Y(-m)[-2m]$; this is the equivalent formulation in the statement. For $m=0$ all twists and shifts are units and the comparison is the identity already established in Step 1.",
+   "uses": [
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.proof.md",
+    "place": "Second paragraph: rewriting the Thom isomorphism as the untwisted compact-support formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "def-pur-conventions",
+  "def-sbc-affine-space",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-integral-rational-qbar-compact-support",
+  "det-sp-trace-basic",
+  "lem-pur-adic-scalar-trace-coherence",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-pur-finite-universal-smooth-trace",
+  "lem-weil-derived-limit-levelwise-iso",
+  "prop-pur-adic-reconstruction-trace-coherence",
+  "prop-pur-rational-purity-trace-coherence",
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-rational-transport",
+  "sbc-lem-affine-space-smooth",
+  "thm-pur-adic-reconstruction",
+  "thm-pur-finite-reduction-of-purity",
+  "thm-pur-rational-and-qbar-purity",
+  "thm-pur-vector-bundle-thom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-convolution-kernel/lem-fd-convolution-kernel.proof.md",
+  "place": "First and second paragraphs, with coefficient transport expanded using the normalized trace transport statements of the purity chapter"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,7 +157,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fd-convolution-kernel",
@@ -79,5 +174,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-fd-affine-space-thom-coefficient-transport",
+  "worker": "stage1",
+  "summary": "Expanded the imported coefficient-transport helper into five complete steps: finite trivial-bundle Thom computation and normalization, integral reduction-tower transport, rational and common-stage scalar transport, change-of-field coherence, and the equivalent untwisted formula. Added the affine-space smoothness node needed to type the trace. No new nodes were needed.",
+  "blueprint": "Steps 1–2 realize the first paragraph of lem-fd-convolution-kernel (the compact-support Thom computation and its normalized affine-space form). Steps 3–4 realize the coefficient transport required in that paragraph and in sk-def-sp-trace-properties clause (2). Step 5 realizes the equivalent twist/shift reformulation in the second paragraph.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q118-3a969a907",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q118-3a969a907 (reviewer sub-agent of L); spot-checked: Read the complete item, report, required coordination files, every cited node statement, and both cited blueprint proofs. Verified all hypotheses, finite Thom normalization, derived-limit reductions, rational/common-stage scalar transport, ramified coefficient changes, base-change comparisons, edge cases m=0 and m=1, duplicate checks, acyclicity, and route restrictions. No new nodes or repairs are needed; detailed review written to review.md."
  }
 }

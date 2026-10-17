@@ -1,0 +1,104 @@
+{
+ "id": "lem-trf-residue-factor-root-selection",
+ "kind": "statement",
+ "title": "A root over a residue prime avoids the localization polynomial",
+ "statement": "Let $k$ be a field [def-weil-field], let $f,g\\in k[t]$ [def-weil-polynomial-ring] with $f$ monic (leading coefficient $1$), and let $L$ be a field extension of $k$ [def-pc-field-extension]. Suppose that for a finite indexed family $(\\alpha_i)_{i\\in I}$ of elements of $L$ the coefficient image of $f$ in $L[t]$ equals $\\prod_{i\\in I}(t-\\alpha_i)$; the empty family is allowed. Let $f_1\\in k[t]$ be irreducible, meaning nonzero, not a unit, and with a unit factor in every factorization in $k[t]$. If $f_1\\mid f$ and $f_1\\nmid g$, then there is an index $i\\in I$ such that $f_1(\\alpha_i)=0$ and $g(\\alpha_i)\\ne0$, where evaluation uses the given map $k\\to L$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00UF, label lemma-standard-etale-finite-flat-Zariski, proof: final residue-field paragraph, selection of i with f_1(alpha-bar_i)=0 and g-bar(alpha-bar_i) nonzero."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring",
+  "def-pc-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a monic polynomial split over a field extension, a prime of a localization corresponds to a factor and one root avoids the localized polynomial",
+   "results": "Polynomial.Monic.exists_splits_map; Polynomial.exists_image_comap_of_monic; Polynomial.mem_lift_of_splits_of_roots_mem_range; no declaration states the residue-prime factor correspondence and root-avoidance lemma.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Splits, Ideal.Quotient, Localization.Away, irreducible",
+   "results": "loogle: unknown identifier 'Ideal.Quotient'; 0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducible.*factor|prime.*quotient.*polynomial|splits.*prod in Mathlib/",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A prime of k[T]/(f) localized at g is an irreducible factor of f not dividing g, and a root in a splitting field avoids g",
+   "results": "IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime; Polynomial.instInhabitedSplittingField; Polynomial.removeFactor; no exact statement",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An irreducible factor of a polynomial split into linear factors over a field extension has one of those roots, and that root is not a root of a polynomial not divisible by the factor",
+   "results": "{\"t\": \"2026-10-17T21:37:36Z\", \"tool\": \"leanfinder\", \"query\": \"An irreducible factor of a polynomial split into linear factors over a field extension has one of those roots, and that root is not a root of a polynomial not divisible by the factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdjoinRoot.mul_div_root_cancel\", \"Polynomial.rootOfSplits'\", \"Polynomial.rootOfSplits\", \"Polynomial.X_sub_C_mul_removeFactor\", \"Polynomial.Splits.dvd_iff_roots_le_roots\", \"Polynomial.Splits.dvd_of_roots_le_roots\", \"Irreducible.subsingleton_isRoot\", \"Polynomial.exists_eq_pow_rootMultiplicity_mul_and_not_dvd\"], \"digest\": \"b68d69116669284f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Splits.of_dvd (Splits.lean:476) and Splits.exists_eval_eq_zero (274) supply splitting and existence separately; selecting an entry of the given factor list and proving avoidance over the original base field additionally require evaluation of the product and irreducible-root divisibility. The combined statement is not a one-line specialization. Minpoly.Field.lean:80,136 addresses only divisibility/vanishing after a root is given."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Splits, Irreducible",
+   "results": "{\"t\": \"2026-10-17T21:37:37Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.Splits, Irreducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Polynomial.Splits.natDegree_le_one_of_irreducible\", \"Polynomial.Splits.degree_le_one_of_irreducible\", \"Polynomial.Splits.natDegree_eq_one_of_irreducible\", \"Polynomial.Splits.degree_eq_one_of_irreducible\", \"Polynomial.Irreducible.natDegree_dvd_finrank\", \"IsAlgClosure.of_splits\", \"Polynomial.Gal.galAction_isPretransitive\"], \"digest\": \"b2cde24771862b29\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Splits.of_dvd (Splits.lean:476) and Splits.exists_eval_eq_zero (274) supply splitting and existence separately; selecting an entry of the given factor list and proving avoidance over the original base field additionally require evaluation of the product and irreducible-root divisibility. The combined statement is not a one-line specialization. Minpoly.Field.lean:80,136 addresses only divisibility/vanishing after a root is given."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_eval_eq_zero|of_dvd|eval.*ne_zero",
+   "results": "{\"t\": \"2026-10-17T21:38:10Z\", \"tool\": \"grep\", \"query\": \"exists_eval_eq_zero|of_dvd|eval.*ne_zero\", \"sub\": \"Algebra/Polynomial\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Polynomial/Eval/Defs.lean\", \"Mathlib/Algebra/Polynomial/Eval/Defs.lean\", \"Mathlib/Algebra/Polynomial/Eval/Defs.lean\", \"Mathlib/Algebra/Polynomial/Eval/Defs.lean\", \"Mathlib/Algebra/Polynomial/Derivative.lean\", \"Mathlib/Algebra/Polynomial/Div.lean\", \"Mathlib/Algebra/Polynomial/Div.lean\", \"Mathlib/Algebra/Polynomial/Div.lean\"], \"digest\": \"246180ac743467fa\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Splits.of_dvd (Splits.lean:476) and Splits.exists_eval_eq_zero (274) supply splitting and existence separately; selecting an entry of the given factor list and proving avoidance over the original base field additionally require evaluation of the product and irreducible-root divisibility. The combined statement is not a one-line specialization. Minpoly.Field.lean:80,136 addresses only divisibility/vanishing after a root is given."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-standard-etale-finite-free-prime-lifts",
+  "date": "2026-10-18",
+  "group": "Q77"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 00UF proof, residue-field factor argument: choose a root of the irreducible factor corresponding to the prime and avoid the image of g",
+   "via": [
+    "lem-trf-standard-etale-finite-free-prime-lifts",
+    "lem-trf-etale-finite-free-open-refinement",
+    "lem-trf-fppf-local-finite-free-refinement",
+    "lem-trf-fppf-integral-surjective-refinement",
+    "lem-trf-fppf-finite-surjective-refinement",
+    "lem-trf-ph-affine-standard-sieve-basis",
+    "lem-trf-ph-etale-comparison-hypotheses",
+    "lem-trf-ph-big-etale-torsion-acyclicity",
+    "lem-trf-ph-etale-torsion-comparison",
+    "lem-trf-proper-hypercover-etale-descent",
+    "lem-trf-nearby-proper-hyperdescent",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

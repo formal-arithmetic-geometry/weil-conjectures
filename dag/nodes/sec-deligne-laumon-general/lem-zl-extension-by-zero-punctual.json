@@ -2,7 +2,7 @@
  "id": "lem-zl-extension-by-zero-punctual",
  "kind": "statement",
  "title": "Extension by zero is exact and preserves punctual weights",
- "statement": "Let $j:U_0\\hookrightarrow X_0$ be an open immersion of separated finite-type schemes over a finite field. For constructible $\\Qlb$-Weil sheaves, extension by zero $j_!$ is exact. At a geometric point of $U_0$ its stalk is the original stalk with its local Frobenius, and at a geometric point of the complement its stalk is zero. Consequently $j_!$ preserves punctual upper weight bounds and punctual purity.\nHere open immersion and constructible Weil sheaf conventions are [def-weil-open-immersion], [def-weil-constructible-heart], and [def-weil-weil-sheaf-complex], with weights as in [def-weil-punctual-weights].",
+ "statement": "Fix the finite-field datum $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$ of [def-weil-finite-field-fiber], a prime $\\ell\\ne\\operatorname{char}(k_0)$, and the coefficient and weight conventions of [def-weil-punctual-weights], including $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$. Let $j_0:U_0\\hookrightarrow X_0$ be an open immersion [def-weil-open-immersion] of separated finite-type $k_0$-schemes [def-weil-scheme-morphism-properties], and write $j:U\\hookrightarrow X$ for its base change to $k$. Use the constructible hearts [def-weil-constructible-heart] and Weil structures [def-weil-weil-sheaf-complex]. The rational/common-stage compact-support functor [def-weil-integral-rational-qbar-compact-support] along $j$ sends constructible $\\Qlb$-Weil sheaves to constructible $\\Qlb$-Weil sheaves and induces an exact functor $j_!$ on these sheaves.\nFor every geometric point $\\bar x$ of $X$, the coefficient fibre $(j_!\\mathcal F)_{\\bar x}$ is naturally $\\mathcal F_{\\bar u}$ if $\\bar x=j\\bar u$, and is zero if $\\bar x$ lies outside $U$. Here coefficient fibres are the adic rational/common-stage fibres of [lem-per-adic-heart-pullback-fibres]. At a closed point $x\\in|X_0|$ lying in $U_0$, this identification intertwines the local geometric Frobenius operators of [def-weil-local-frobenius-trace].\nConsequently, for every $w\\in\\mathbf R$, $j_!$ preserves punctual upper weight bounds (every local eigenvalue $\\alpha$ satisfies $|\\iota(\\alpha)|\\le q_x^{w/2}$) and punctual $\\iota$-purity of weight $w$ (the corresponding equality), where $q_x=\\#\\kappa(x)$ as in [def-weil-punctual-weights].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
   "place": "proof of (1) and (2), extension-by-zero exactness and stalk calculation"
@@ -13,11 +13,130 @@
   "def-weil-scheme-morphism-properties",
   "def-weil-constructible-heart",
   "def-weil-punctual-weights",
-  "def-weil-weil-sheaf-complex"
+  "def-weil-weil-sheaf-complex",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-per-adic-heart-pullback-fibres",
+  "def-weil-local-frobenius-trace"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pod-separated-finite-type-base-change], $U$ and $X$ are separated finite-type $k$-schemes. All the geometric hypotheses of the coefficient comparisons hold. The schemes $U$ and $X$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]: apply it over the field $k$, whose only ideals are $0$ and $k$. For every affine open $V\\subset X$, its intersection with $U$ is an open subscheme of the Noetherian scheme $X$, so is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Thus $j$ is quasi-compact. Choose a closed immersion $i:Z\\hookrightarrow X$ with image $X\\setminus U$ by [lem-weil-pbc-closed-subset-closed-subscheme]; the same choice may be made over $k_0$ and base changed. The finite-type, separated and prime-to-characteristic hypotheses are those of the statement; no properness of $j$ is required.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-closed-subset-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian); properties.tex Tags 01OW (lemma-locally-Noetherian), 01OZ (lemma-Noetherian-topology); schemes.tex Tag 01J3 (lemma-reduced-closed-subscheme)"
+   }
+  },
+  {
+   "text": "Fix a finite coefficient field $E$, write $R=\\mathcal O_E$, and let $K\\in D^b_c(U,R)$. With the compactification $(j,\\operatorname{id}_X)$, [def-weil-integral-rational-qbar-compact-support] defines $Rj_!K$ as the total derived limit of the extensions by zero of its reduction tower. The comparison $d_j(K)$ in [lem-sf-integral-open-reduction-comparison] identifies exactly this total limit with localized ringed-site extension by zero for the completed coefficient sheaves. It respects the strict quotient transitions and the open adjunction unit and counit. By [lem-pur-site-restriction-module-adjunction-exact] this latter functor is exact on module sheaves. In particular, for its termwise action, kernels, images and their quotients give $\\mathcal H^r(j_!K)=j_!\\mathcal H^r(K)$ in every degree. The total limit lies in $D^b_c(X,R)$ by [lem-sf-integral-compact-support-constructible], applied to the same compactification. Thus it is the genuine constructible integral functor, and preserves both standard cohomological bounds.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-integral-compact-support-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DJ (lemma-extension-by-zero-exact), together with Tag 0E8I and sites-cohomology Tag 0GL1 (lemma-j-shriek-and-tensor); strict completed comparison as stated in lem-sf-integral-open-reduction-comparison"
+   }
+  },
+  {
+   "text": "The classes $D^{\\le0}$ and $D^{\\ge0}$ in the rationalized category are the isomorphism closures of the corresponding integral classes, and at $\\Qlb$ they are the isomorphism closures of the finite-field-stage classes [def-weil-constructible-standard-tstructure]. The functor at $E$ is the rationalization of the functor of step 2, and at $\\Qlb$ it is $(E,K)\\mapsto(E,Rj_!K)$ [def-weil-integral-rational-qbar-compact-support]. Hence each of the two classes is preserved: choose a representative in the requisite class, apply step 2, then apply the functor to the representing isomorphism. Compatibility with coefficient extension and the descent of the functor and comparison maps are supplied by clause (1) of [prop-functor-package]. Their intersection, the constructible heart [def-weil-constructible-heart], is therefore preserved. This establishes that the output is a sheaf without treating $\\Qlb$ as a discrete non-torsion coefficient ring on the small etale site.",
+   "uses": [
+    "def-weil-constructible-standard-tstructure",
+    "def-weil-integral-rational-qbar-compact-support",
+    "prop-functor-package",
+    "def-weil-constructible-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+    "place": "proof (1), finite-stage and common-stage passage"
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-completed-extension-zero-comparison] first to base change along $j:U\\to X$, and then along $i:Z\\to X$. The pulled-back open immersions are respectively $\\operatorname{id}_U$ and $\\varnothing\\to Z$. At finite coefficients [lem-cbc-proetale-extension-zero] computes their extensions as the identity and zero. The completed comparison is induced by these finite maps, so gives $j^*Rj_!K\\simeq K$ and $i^*Rj_!K=0$ for integral $K$. These are the canonical comparisons, natural in $K$; the first restricts to the identity at every finite level. Rationalization and common-stage passage in step 3 give the same identities at $\\Qlb$. For a geometric point $\\bar x$ inside $U$, use its unique factorization $\\bar x=j\\bar u$; outside $U$, its map from a field factors through $i$. Apply the coefficient-fibre comparison $(h^*\\mathcal G)_{\\bar v}\\cong\\mathcal G_{h\\bar v}$ of [lem-per-adic-heart-pullback-fibres], with $h=j$ or $i$, to the sheaf $\\mathcal G=Rj_!\\mathcal F$. This proves the stated natural stalk formula for every geometric point, including points not over closed points of $X_0$.",
+   "uses": [
+    "lem-cbc-completed-extension-zero-comparison",
+    "lem-cbc-proetale-extension-zero",
+    "lem-per-adic-heart-pullback-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.1.12 (restriction identities), Lemma 6.8.2 and Proposition 6.8.14 (coefficient passage); completed comparison as stated in lem-cbc-completed-extension-zero-comparison"
+   }
+  },
+  {
+   "text": "Let $g_U,g_X$ be geometric Frobenius. Their squares with $j$, and the squares of their powers, are Cartesian by [lem-trf-frobenius-open-square]. The canonical base-change isomorphism $b:g_X^*j_!\\simeq j_!g_U^*$ of [prop-functor-package], with its coefficient compatibilities and equivariance, defines the output Weil structure by $\\theta'=j_!\\theta\\circ b$. A Weil morphism $a$ satisfies $a\\theta=\\theta_1 g_U^*a$ [def-weil-weil-sheaf-complex]; applying $j_!$ and naturality of $b$ gives the same equation for $j_!a$. Thus this is a functor on Weil sheaves. Restrict $b$ to $U$: it is the identity comparison under step 4, as it is at finite levels. Consequently $j^*\\theta'=\\theta$ under $j^*j_!\\simeq\\operatorname{id}$. For a closed $x\\in U_0$ of degree $d$, the pasted comparison for $g_X^d$ restricts in the same way, so $j^*(\\theta'^{[d]})=\\theta^{[d]}$. In the formula for $F_x$ of [def-weil-local-frobenius-trace], the geometric point, its return $g_X^d\\bar x=\\bar xg_s^d$, and the point transport are the same after factoring through $U$; naturality identifies the final map induced by $\\theta'^{[d]}$ with that induced by $\\theta^{[d]}$. Thus the stalk identification conjugates the two local operators. At a closed point outside $U_0$ the stalk is zero.",
+   "uses": [
+    "lem-trf-frobenius-open-square",
+    "prop-functor-package",
+    "def-weil-weil-sheaf-complex",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+    "place": "proof (2), same stalk with the same local Frobenius; canonical Frobenius-square construction as in def-trf-weil-extension-zero"
+   }
+  },
+  {
+   "text": "Take a short exact sequence of constructible Weil sheaves on $U_0$. Its images are constructible Weil sheaves by steps 3 and 5. At any geometric point inside $U$, naturality of step 4 identifies the image sequence, including both arrows, with the original stalk sequence; outside $U$ all three terms and both arrows are zero. Exactness and detection of short exact sequences by constructible coefficient fibres in [lem-dl-a1-constructible-fibres-exact] show that the image sequence is short exact, also after retaining its commuting Weil structures. This proves exactness of $j_!$.",
+   "uses": [
+    "lem-dl-a1-constructible-fibres-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S5 (proposition-describe-jshriek), stalkwise exactness argument; adic constructible coefficient detection as stated in lem-dl-a1-constructible-fibres-exact"
+   }
+  },
+  {
+   "text": "For a closed point $x\\in U_0$, its residue field and hence $q_x$ do not change under the open immersion. Step 5 gives identical local eigenvalues. Thus each inequality $|\\iota(\\alpha)|\\le q_x^{w/2}$, or equality $|\\iota(\\alpha)|=q_x^{w/2}$, is unchanged. For $x\\notin U_0$ the zero vector space has no eigenvalues, so both universally quantified conditions are vacuous. These are precisely the punctual upper bound specified in the statement and the purity condition of [def-weil-punctual-weights]. This includes the zero sheaf, empty open immersion and identity open immersion.",
+   "uses": [
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+    "place": "proof (2), extension by zero preserves punctual purity and upper bounds"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-integral-compact-support-constructible",
+  "def-weil-constructible-standard-tstructure",
+  "prop-functor-package",
+  "def-weil-constructible-heart",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-cbc-proetale-extension-zero",
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-trf-frobenius-open-square",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-local-frobenius-trace",
+  "lem-dl-a1-constructible-fibres-exact",
+  "def-weil-punctual-weights"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+  "place": "proof (1) and (2), expanded using Stacks Tags 03DJ, 03S5, 0E8I, 0GL1 and the existing completed-coefficient comparison nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +165,52 @@
    "results": "Generic open-immersion and zero-extension declarations; no exact Weil-sheaf theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero of constructible Weil sheaves is exact and preserves Frobenius eigenvalue weights",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, Profinite.NobelingProof.succ_exact, CondensedMod.IsSolid, CompHausLike.LocallyConstantModule.functor, Condensed.profiniteSolid, CondensedMod.ofSheafStonean, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CondensedMod.ofSheafProfinite",
+   "date": "2026-10-17",
+   "verdict": "no match: generic module/sheaf restriction, function extension or complex-index extension; none states this Weil-sheaf coefficient and weight assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Exact, CategoryTheory.Sheaf",
+   "results": "0 hits: . loogle: unknown identifier 'CategoryTheory.Functor.Exact'",
+   "date": "2026-10-17",
+   "verdict": "no match: generic module/sheaf restriction, function extension or complex-index extension; none states this Weil-sheaf coefficient and weight assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "extension.by.zero|lowerShriek|punctually",
+   "results": "1 hits: Mathlib/NumberTheory/MulChar/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: generic module/sheaf restriction, function extension or complex-index extension; none states this Weil-sheaf coefficient and weight assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of an etale sheaf along an open immersion is exact and has zero stalks outside the open",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.stalk_iso, AlgebraicGeometry.SurjectiveOnStalks.instOfIsOpenImmersion, AlgebraicGeometry.RingedSpace.res_zero, HomologicalComplex.isZero_extend_X, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.stalk_iso, AlgebraicGeometry.IsOpenImmersion.ΓIsoTop",
+   "date": "2026-10-17",
+   "verdict": "no match: generic module/sheaf restriction, function extension or complex-index extension; none states this Weil-sheaf coefficient and weight assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf extended by zero along an open embedding has the same stalk inside and zero outside; this functor preserves short exact sequences",
+   "results": "8 hits: TopCat.Presheaf.isSheaf_of_isOpenEmbedding, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_hom_eq_germ_apply, AlgebraicGeometry.PresheafedSpace.restrictStalkIso, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_germ_apply, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_germ_assoc, AlgebraicGeometry.PresheafedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_hom_eq_germ_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: generic module/sheaf restriction, function extension or complex-index extension; none states this Weil-sheaf coefficient and weight assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic module/sheaf restriction, function extension or complex-index extension; none states this Weil-sheaf coefficient and weight assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-quasi-finite",
@@ -66,5 +227,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-extension-by-zero-punctual",
+  "worker": "stage1",
+  "summary": "Expanded the extension-by-zero argument through its actual completed integral, rationalized and common-stage coefficient categories; reused all existing nodes and created none. Checked exactness on constructible fibres and wrote out the Frobenius-iterate comparison. Corrected the ill-defined reference to local Frobenius at arbitrary geometric points, retaining the full geometric-stalk formula and stating Frobenius equivariance at closed points. Made the punctual upper eigenvalue bound explicit.",
+  "blueprint": "lem-zl-quasi-finite.proof.md (1): extension by zero is exact and finite/common-stage passage; (2): same stalk and local Frobenius on the open, zero stalk on the complement, and punctual weight preservation. This item is a supporting node, not the unit key node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Supplies the Noetherian hypothesis required by the coefficient constructions; a generic finiteness tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Supplies quasi-compactness of the open immersion on each affine target chart."
+   },
+   {
+    "node": "lem-weil-pbc-closed-subset-closed-subscheme",
+    "why": "Supplies a closed complement for the restriction calculation."
+   },
+   {
+    "node": "lem-sf-integral-open-reduction-comparison",
+    "why": "Identifies the actual completed strict reduction-tower functor with exact ringed-site extension; the unit has no coefficient comparison of its own."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exactness of localized ringed-site extension by zero, with completed coefficient sheaves."
+   },
+   {
+    "node": "lem-sf-integral-compact-support-constructible",
+    "why": "Supplies constructible landing for the integral total limit."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Supplies compatible coefficient descent and canonical base change with Frobenius coherence, without replacing the unit weight argument."
+   },
+   {
+    "node": "lem-cbc-completed-extension-zero-comparison",
+    "why": "Supplies restriction/base-change identities at the completed integral stage."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Supplies the finite-level identity/zero computation and natural stalk prescription."
+   },
+   {
+    "node": "lem-per-adic-heart-pullback-fibres",
+    "why": "Supplies coefficient-fibre comparison on the rational/common-stage constructible heart."
+   },
+   {
+    "node": "lem-trf-frobenius-open-square",
+    "why": "Supplies the Cartesian geometric-Frobenius squares, including powers."
+   },
+   {
+    "node": "lem-dl-a1-constructible-fibres-exact",
+    "why": "Supplies exactness detection for adic constructible coefficient fibres, including Weil sheaves."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-integral-compact-support-constructible",
+  "prop-functor-package",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-cbc-proetale-extension-zero",
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-trf-frobenius-open-square",
+  "lem-dl-a1-constructible-fibres-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-025fb935a",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-025fb935a (reviewer sub-agent of L); spot-checked: Reviewed item, unit/chapter route, report, all cited node statements, and cited Stacks/Bhatt–Scholze sources. Seven proof steps are valid, hypotheses and coefficient categories match, Frobenius is correctly restricted to closed points, edge cases were checked, no forbidden route machinery or duplicate/new-node faults found. Review written to review.md."
  }
 }

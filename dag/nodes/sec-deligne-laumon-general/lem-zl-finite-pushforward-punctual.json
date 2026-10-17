@@ -16,9 +16,64 @@
   "def-weil-weil-sheaf-complex",
   "def-weil-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Base change the finite morphism to the fixed algebraic closure of the finite field. The rational finite-direct-image statement [lem-zl-finite-adic-direct-image] applies to this base change: the direct image of a constructible Qbar sheaf is in the constructible heart, the finite direct-image functor is exact, and for every geometric point y the stalk is naturally the direct sum of the stalks over the finite geometric fibre. Its naturality for semilinear automorphisms identifies the Weil/Frobenius operator on the direct-image stalk with the operator that permutes the fibre stalks.",
+   "uses": [
+    "lem-zl-finite-adic-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+    "place": "Finite stalk formula and Frobenius cycles, with relative residue degree and point transport made explicit"
+   }
+  },
+  {
+   "text": "Fix a closed point y of Y_0 and view the finite fibre over Spec kappa(y) as a finite scheme over that finite field. Apply [lem-a1-finite-weil-sections-decomposition] to the restriction of G to this fibre. Under the stalk identification of Step 1, the fibre decomposition is a direct sum of Frobenius-stable cyclic blocks. If x is a closed point of the fibre and e=[kappa(x):kappa(y)], the geometric Frobenius at y cyclically permutes the e stalk summands and its e-th power on each summand is the local Frobenius F_x. The same statement records that the geometric points in the block are exactly the lifts of x, so no reducedness or etaleness hypothesis is being added.",
+   "uses": [
+    "lem-zl-finite-adic-direct-image",
+    "lem-a1-finite-weil-sections-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+    "place": "Finite stalk formula and Frobenius cycles, with relative residue degree and point transport made explicit"
+   }
+  },
+  {
+   "text": "Let μ be an eigenvalue of the direct-image Frobenius on a nonzero cyclic block, and choose an eigenvector. A nonzero stalk component of that eigenvector has the same eigenvalue after taking the e-th power, so μ^e is an eigenvalue of F_x. Since the residue-field extension has degree e, q_x=q_y^e. If G has all local eigenvalues of weight at most w, then |ι(μ)|^e=|ι(μ^e)|≤q_x^{w/2}=q_y^{ew/2}; taking the nonnegative e-th root gives |ι(μ)|≤q_y^{w/2}. If G is punctually ι-pure of weight w, the inequality is an equality throughout and gives |ι(μ)|=q_y^{w/2}.",
+   "uses": [
+    "def-weil-punctual-weights",
+    "lem-a1-finite-weil-sections-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+    "place": "Displayed absolute-value calculation; elementary eigenvector argument on cyclic blocks"
+   }
+  },
+  {
+   "text": "The argument applies to every closed y and every eigenvalue μ of the direct-image local Frobenius. By the definitions in [def-weil-punctual-weights], these inequalities are exactly the punctual upper-weight assertion, and the equalities are exactly punctual ι-purity of weight w. If a fibre or stalk is zero there are no eigenvalues and the assertion is vacuous.",
+   "uses": [
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+    "place": "Final two sentences: mixed sheaf bound and the cohomological definition of D_le_w"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-punctual-weights",
+  "lem-a1-finite-weil-sections-decomposition",
+  "lem-zl-finite-adic-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+  "place": "Finite stalk formula and Frobenius-cycle calculation, specialized to a finite morphism and a sheaf"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,7 +126,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-quasi-finite",
@@ -83,10 +138,39 @@
  "blueprint": {
   "from": {
    "node": "lem-zl-quasi-finite",
-   "place": "Step (2), the finite pushforward of the extension-by-zero sheaf preserves the local Frobenius weight bound and purity",
+   "place": "Step (2), the finite pushforward of the extension-by-zero sheaf preserves the local Frobenius weight bound and purity; realized here by the finite-stalk Frobenius-cycle calculation.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-finite-pushforward-punctual",
+  "worker": "stage1",
+  "summary": "Audited the finite pushforward punctual-weight statement against the current main-20261015 blueprint and the slopmaster2 source. No new nodes were needed: the existing rational finite-direct-image theorem supplies constructibility, exactness and the Frobenius-natural finite-stalk decomposition, while the existing finite-Weil-sections decomposition supplies the cyclic Frobenius blocks and return identity. The proof then performs the degree-normalized absolute-value calculation for both upper bounds and purity. The source declaration for the broader complex theorem is still sorry-backed, so this item is not an attachment.",
+  "blueprint": "Realizes the blueprint paragraph from “A finite morphism is proper” through the finite-stalk Frobenius-cycle displayed calculation, restricted to the sheaf-level punctual assertions.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-finite-adic-direct-image",
+    "why": "The Qbar finite-direct-image statement supplies the constructible-heart, exactness, finite-stalk decomposition and semilinear naturality needed by the sheaf-level weight argument; the quasi-finite unit has no replacement coefficient theorem."
+   },
+   {
+    "node": "lem-a1-finite-weil-sections-decomposition",
+    "why": "The finite-fibre cyclic Frobenius-block and return-operator statement is the generic finite-scheme calculation used in the blueprint; the quasi-finite unit has no replacement local linear-algebra statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-finite-adic-direct-image",
+  "lem-a1-finite-weil-sections-decomposition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q18-eaf49bf81",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-eaf49bf81 (reviewer sub-agent of L); spot-checked: Reviewed the item, unit, cited nodes, blueprint proof, coefficient categories, Frobenius base change, edge cases, route restrictions, and graph dependencies. No mathematical or structural faults found; review written to review.md."
  }
 }

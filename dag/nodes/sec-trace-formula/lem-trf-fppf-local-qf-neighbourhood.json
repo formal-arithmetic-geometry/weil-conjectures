@@ -13,9 +13,58 @@
   "def-sbc-locally-finite-presentation",
   "pqf-def-quasifinite"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $s$ lies in the image of $f$, the fibre $X_s$ is nonempty. Locally finite presentation implies locally finite type: the images of the finitely many polynomial variables generate each affine presentation algebra. Apply [lem-sbc-composite-fibre-local-models] with $a=\\mathrm{id}_X$ and the given $f$. Its affine fibre neighbourhoods show that $X_s$ is locally of finite type over $\\kappa(s)$, and its stalk assertion shows that every local ring of $X_s$ is Noetherian. Let $C_s$ be the locus in $X_s$ where depth equals Krull dimension. By this Noetherianity, $C_s$ is exactly the Cohen–Macaulay locus of [lem-trf-flat-lfp-cm-locus-fibre-dense], hence is dense and nonempty. By [lem-sbc-fibre-cohen-macaulay-locus-open], it is also open: it is the inverse image of that node's open locus under the fibre projection. Apply [lem-sc-lft-over-field-jacobson-space] with the closed subset equal to all of $X_s$. Its density of closed points implies that the nonempty open $C_s$ contains a point $x$ closed in $X_s$. This $x$ has a Noetherian Cohen–Macaulay fibre local ring, as required for the slice lemma.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-sbc-locally-finite-presentation",
+    "lem-trf-flat-lfp-cm-locus-fibre-dense",
+    "lem-sbc-fibre-cohen-macaulay-locus-open",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-sbc-composite-fibre-local-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0571 proof: choose a closed point in the nonempty fibre where the flat finite-presentation morphism is Cohen–Macaulay; Tag 045U and Tag 0478 supply openness/density of the relevant loci. The affine finite-type and Noetherian fibre inputs are Morphisms Tags 01T4 and 01T6, as carried by lem-sbc-composite-fibre-local-models."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-cm-closed-point-flat-quasifinite-slice] to $f$, $s$, and the closed Cohen–Macaulay point $x$. It gives a scheme $S'$, a morphism $h:S'\\to X$, and a point $z\\in S'_s$ with $h(z)=x$, such that the composite $g=f\\circ h$ is flat, locally of finite presentation, and locally quasi-finite.",
+   "uses": [
+    "lem-trf-cm-closed-point-flat-quasifinite-slice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0571 proof: apply Tag 0570 (lemma-slice-CM) to a closed Cohen–Macaulay point of the fibre."
+   }
+  },
+  {
+   "text": "By construction $g=f\\circ h$, and $s=g(z)$ because $z\\in S'_s$. Thus $s\\in g(S')$, and all the asserted properties of $g$ hold.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0571 statement, after the slice is constructed."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "lem-sbc-composite-fibre-local-models",
+  "lem-sbc-fibre-cohen-macaulay-locus-open",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-trf-cm-closed-point-flat-quasifinite-slice",
+  "lem-trf-flat-lfp-cm-locus-fibre-dense"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0571, lemma-qf-fp-flat-neighbourhood-dominates-fppf, proof; the closed Cohen–Macaulay point is supplied by Tags 045U and 0478, and the slice by Tag 0570."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,7 +96,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-fppf-local-qf-refinement",
@@ -79,5 +128,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-fppf-local-qf-neighbourhood",
+  "worker": "stage1",
+  "summary": "Audited Stacks Tag 0571. The pointwise construction is split into choosing a closed Cohen–Macaulay point in the nonempty fibre using the existing fibrewise density, openness, and Jacobson nodes, applying the existing Tag 0570 CM-slice node, and checking the composite and image-point clauses. No new nodes were needed; the local Noetherianity of fibre stalks follows on finite-type affine fibre charts over the residue field.",
+  "blueprint": "Tag 0571, lemma-qf-fp-flat-neighbourhood-dominates-fppf, statement and proof, serving the pointwise input in Tag 0572 under lem-trf-local-term-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-fibre-cohen-macaulay-locus-open",
+    "why": "The proof needs openness of the unrestricted fibre Cohen–Macaulay locus, a generic smooth-base-change tool not supplied by the trace-formula unit."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "The proof needs density of closed points in a locally finite-type fibre over a field, a generic scheme-topology tool."
+   },
+   {
+    "node": "lem-sbc-composite-fibre-local-models",
+    "why": "Applied with the identity first morphism, its statement supplies finite-type affine fibre neighbourhoods and Noetherian fibre stalks over an arbitrary base. This is a generic scheme-theoretic input to the Tag 0571 point selection, not a replacement of the trace-formula unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-fibre-cohen-macaulay-locus-open",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sbc-composite-fibre-local-models"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-ef2c31230",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-ef2c31230 (reviewer sub-agent of L); spot-checked: Read the item and cited mathematics in full. Stacks 0571, 045U, 0478, and 0570 support the argument. Repaired step 1’s missing Noetherian fibre-stalk citation using an existing node and clarified the locus identification. Statement unchanged; no new nodes, missing dependencies, cycles, or long steps. Corrected JSON and concrete checks are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
  }
 }

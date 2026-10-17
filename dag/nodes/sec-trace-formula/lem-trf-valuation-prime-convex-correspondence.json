@@ -10,8 +10,55 @@
  "stmt_deps": [
   "def-weil-field"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "The valuation-ring alternative applied to any quotient y/x makes the relation [x]≤[y] total; multiplying representatives by units does not change membership in A, and multiplication in K^× descends to the quotient. Thus Γ is a totally ordered abelian group and the value-group notation in the statement is well defined. The subgroup H is convex exactly when it contains every element lying between two of its elements.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IE, algebra-definition-value-group, and Tag 00IH, algebra-lemma-ideals-valuation-ring; the quotient-order verification is the elementary argument preceding Tag 00IH."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-valuation-ring-ideal-correspondence]. It gives an inclusion-preserving bijection between ideals of A and ideals of Γ, and carries prime ideals of A to prime ideals of the positive cone Γ_{≥0}.",
+   "uses": [
+    "lem-trf-valuation-ring-ideal-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IH, lemma-ideals-valuation-ring."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-ordered-group-prime-ideal-convex-correspondence] to Γ. Its formulas I_H={γ≥0:γ∉H} and H_I={γ:|γ|∉I} are inverse; upward closure and primality make H_I a subgroup and convex, while convexity makes I_H a prime ideal. Inclusion is reversed, so this is an order anti-isomorphism from prime positive-cone ideals to convex subgroups.",
+   "uses": [
+    "lem-trf-ordered-group-prime-ideal-convex-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IE, algebra-definition-value-group, for the ordered-group ideal definitions; the displayed inverse formulas and their elementary verification are written out in the cited ordered-group node."
+   }
+  },
+  {
+   "text": "Composing the inclusion-preserving prime correspondence of Step 2 with the order anti-isomorphism of Step 3 gives the claimed canonical order anti-isomorphism between prime ideals of A and convex subgroups of Γ. An order anti-isomorphism sends every strict chain of n inclusions to a strict chain of n inclusions, proving the final assertion.",
+   "uses": [
+    "lem-trf-valuation-ring-ideal-correspondence",
+    "lem-trf-ordered-group-prime-ideal-convex-correspondence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, p. 7, lines 401–416, correspondence and chain consequence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-valuation-ring-ideal-correspondence",
+  "lem-trf-ordered-group-prime-ideal-convex-correspondence"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
@@ -38,10 +85,17 @@
    "results": "6 hits in Mathlib valuation files, including primeSpectrumOrderEquiv and prime_idealOfLE, but no convex-subgroup correspondence.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "prime ideals of a valuation ring correspond to convex subgroups of its value group",
+   "results": "8 hits including ValuationSubring.prime_idealOfLE, ValuationSubring.primeSpectrumEquiv, Valuation.instIsPrimeSuppOfNontrivialOfNoZeroDivisors, Valuation.Integers.isPrincipal_iff_exists_eq_setOf_valuation_le, Valuation.integer, ValuationSubring.idealOfLE_ofPrime, Valuation.leIdeal, and Valuation.ideal_isPrincipal; none states the prime/convex-subgroup correspondence.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-height-rank",
@@ -69,5 +123,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-prime-convex-correspondence",
+  "worker": "stage1",
+  "summary": "Split the valuation-ring/value-group correspondence into the existing Stacks Tag 00IH ideal correspondence and a new ordered-group lemma translating prime positive-cone ideals into convex subgroups. The four item steps verify the value-group order, apply these two correspondences, and compose them to obtain the anti-isomorphism and strict-chain consequence. Temkin's PDF is unavailable locally; its cited §2.1 place is retained and reported as WANTED.",
+  "blueprint": "Realizes the ancestor's Temkin §2.1 sentence on the prime-ideal/value-group and convex-subgroup correspondences; Steps 2–4 implement the two correspondences and their composition."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q78-123e28b59",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q78-123e28b59 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, including all four item steps, three new nodes, Temkin §2.1, Stacks Tags 00IE/00IH, edge cases, duplicate search, and route checks. The delivered item JSON has stale creation metadata: created.item is lem-trf-valuation-height-rank and created.group is Q19. A corrected whole JSON is under fixes/dag/nodes/sec-trace-formula/lem-trf-valuation-prime-convex-correspondence.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
  }
 }

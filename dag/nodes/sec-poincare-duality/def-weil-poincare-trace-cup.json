@@ -1,77 +1,144 @@
 {
-  "id": "def-weil-poincare-trace-cup",
-  "blueprint": {
-    "is": "def-weil-poincare-trace-cup",
-    "from": null,
-    "same_as": null
+ "id": "def-weil-poincare-trace-cup",
+ "blueprint": {
+  "is": "def-weil-poincare-trace-cup",
+  "from": null,
+  "same_as": [
+   "sk-def-trace-cup",
+   "def-pod-trace-cup-reading"
+  ]
+ },
+ "kind": "definition",
+ "title": "Poincare trace and cup-product pairing",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber]: distinct primes $p,\\ell$, an integer $a\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$, its fixed algebraic closure $k$, and $\\Ql=\\mathbf Q_\\ell$ with a chosen algebraic closure $\\Qlb$. Let $X_0/k_0$ be smooth, proper and geometrically connected of pure dimension $d\\geq0$ [def-weil-geometric-hypotheses]. Put $X=X_0\\times_{k_0}k$, $s=\\operatorname{Spec}k$ and $a_X:X\\to s$.\n\nUse the coefficient objects, cohomology and point functor of [def-weil-ordinary-compact-cohomology], the Tate twists of [def-coefficient-twists-detailed], and the derived pullback, tensor and Hom of [def-weil-derived-pullback-tensor-hom]. Thus $\\Ql_X$ is the rationalized completed coefficient unit, not the discrete non-torsion constant sheaf on the small etale site. Write $Ra_{X*}$ for [def-weil-derived-direct-image], $Ra_{X!}$ for the rational-stage construction of [def-weil-integral-rational-qbar-compact-support], and $Ra_X^!$ for the constructible exceptional inverse image of [def-weil-exceptional-inverse-image]. Its constructible adjunction supplies the counit $\\varepsilon:Ra_{X!}Ra_X^!\\Ql_s\\to\\Ql_s$; no ambient pro-etale exceptional-adjoint datum is assumed. Fix an orientation isomorphism\n$$\\eta_X:Ra_X^!\\Ql_s\\xrightarrow{\\sim}\\Ql_X(d)[2d].$$\nAll the following traces are relative to this chosen isomorphism.\n\nDefine the oriented derived trace by the actual composite\n$$T_X:Ra_{X!}(\\Ql_X(d)[2d])\n \\xrightarrow{Ra_{X!}(\\eta_X^{-1})}Ra_{X!}Ra_X^!\\Ql_s\n \\xrightarrow{\\varepsilon}\\Ql_s.$$\nApplying $H^0\\operatorname{Fib}_s$ and the shift comparison gives\n$$\\operatorname{tr}_X:H_c^{2d}(X,\\Ql(d))\\longrightarrow\\Ql.$$\nHere $H_c^{2d}(X,\\Ql(d))=H^0\\operatorname{Fib}_s(Ra_{X!}(\\Ql_X(d)[2d]))$ uses the cohomological shift convention.\n\nTo specify untwisting, put $L=\\Ql(d)$ at the coefficient point. This is a one-dimensional line; negative twists are its dual, using [def-coefficient-twists-detailed] and the rank-one twist property [lem-pur-twist-sheaf-locally-free]. Use the projection isomorphism [fix-prop-projection-formula] at $(a_X,\\Ql_X,\\Ql_s(d))$, the pullback identification $La_X^*\\Ql_s(d)=\\Ql_X(d)$, and the point tensor identification [lem-sf-point-fibre-derived-tensor]. They specify\n$$\\phi:H_c^{2d}(X,\\Ql)\\otimes_{\\Ql}L\\xrightarrow{\\sim}H_c^{2d}(X,\\Ql(d)).$$\nDefine $\\tau_X:H_c^{2d}(X,\\Ql)\\to L^\\vee=\\Ql(-d)$ by\n$$\\tau_X(v)(t)=\\operatorname{tr}_X(\\phi(v\\otimes t)).$$\nFor the proper $X$, let $\\kappa:Ra_{X!}\\xrightarrow{\\sim}Ra_{X*}$ be the canonical proper comparison [prop-weil-proper-compact-coincidence], and write $h_n=H^n\\operatorname{Fib}_s(\\kappa_{\\Ql_X})$. Define the ordinary untwisted trace by\n$$\\operatorname{tr}^{(-d)}_X=\\tau_X\\circ h_{2d}^{-1}:\nH^{2d}(X,\\Ql)\\longrightarrow\\Ql(-d).$$\n\nThe multiplication $m:\\Ql_X\\otimes^L_{\\Ql}\\Ql_X\\to\\Ql_X$ defines the ordinary cup product with the following explicit support convention. Use the mixed-support product $\\mu_c$ of [def-pod-mixed-support-cup-product] at $K=L=\\Ql_X$, and the proper comparison $h_n$ just fixed. For $x\\in H^i(X,\\Ql)$, $y\\in H^j(X,\\Ql)$ set\n$$x\\smile y=h_{i+j}\\bigl(H_c^{i+j}(m)(\\mu_c(h_i^{-1}x,y))\\bigr).$$\nHere $\\mu_c$ on classes is induced by its displayed morphism of coefficient complexes: tensor representatives $\\Ql[-i]\\to R\\Gamma_c(X,\\Ql)$ and $\\Ql[-j]\\to R\\Gamma(X,\\Ql)$ and then compose with that morphism. All maps are $\\Ql$-linear in each input, so this defines\n$$\\smile:H^i(X,\\Ql)\\otimes_{\\Ql}H^j(X,\\Ql)\\longrightarrow H^{i+j}(X,\\Ql)\\qquad(i,j\\in\\mathbf Z).$$\nGraded commutativity is the separate property recorded in [lem-pod-cup-product-graded-commutativity], a forward reference rather than an assumption of this definition.\n\nFor each integer $i$ with $0\\leq i\\leq2d$, define the trace–cup pairing by\n$$\\langle x,y\\rangle_i=\\operatorname{tr}^{(-d)}_X(x\\smile y):\nH^i(X,\\Ql)\\times H^{2d-i}(X,\\Ql)\\longrightarrow\\Ql(-d).$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-def-trace-cup/def-weil-poincare-trace-cup.md",
+  "place": "node def-weil-poincare-trace-cup, order 2421"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-ordinary-compact-cohomology",
+  "def-coefficient-twists-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-exceptional-inverse-image",
+  "lem-pur-twist-sheaf-locally-free",
+  "fix-prop-projection-formula",
+  "lem-sf-point-fibre-derived-tensor",
+  "prop-weil-proper-compact-coincidence",
+  "def-pod-mixed-support-cup-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cupProduct|poincare|traceMap",
+   "results": "Only Mathlib/Dynamics/Ergodic/Conservative.lean:37, the Poincare recurrence theorem, unrelated to cohomology.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   },
-  "kind": "definition",
-  "title": "Poincare trace and cup-product pairing",
-  "statement": "Let $p$ be prime, let $a\\in\\mathbf Z_{\\geq1}$, put $q=p^a$, and set\n$k_0=\\Fq$, and let $k=\\Fbar$ be the fixed algebraic closure of $k_0$. Fix a\nprime $\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$, and choose an algebraic\nclosure $\\Qlb$ of $\\Ql$. Let $X_0/k_0$ be smooth, proper, and geometrically\nconnected of pure dimension $d\\in\\mathbf Z_{\\geq0}$. Put\n$X=X_0\\times_{k_0}k$, and let $a_X:X\\to\\Spec k$ be its structure morphism.\nWrite $H^i(X,-)$ and $H_c^i(X,-)$ for the ordinary and compactly supported\ncohomology groups, and, for every integer $m$, write $\\Ql(m)$ for the Tate\ntwist [def-coefficient-twists-detailed] of degree $m$. Write $Ra_X^!$ for\nthe constructible exceptional inverse image of\n[def-weil-exceptional-inverse-image] at $\\Ql$ and $\\Qlb$ — defined for every\nseparated finite-type morphism, so no admissibility hypothesis on $a_X$ is\nimposed (the ambient notion of [def-weil-exceptional-adjoint-admissibility]\nis not used) — and $\\otimes^L$ for the derived tensor product, using the\nderived pullback/tensor/Hom notation. Choose an\norientation isomorphism for the smooth structure morphism $a_X:X\\to\\Spec k$,\n\n$$\n \\eta_X:Ra_X^!\\Ql\\xrightarrow{\\sim}(\\Ql)_X(d)[2d],\n$$\n\nwhere $\\Ql(d)$ uses the Tate twist [def-coefficient-twists-detailed] of degree $d$. We\nuse $Ra_{X*}$ and $Ra_{X!}$ for the derived direct image and the\ncompact-support direct image [def-compact-support-direct-image-detailed],\nrespectively. Through $\\eta_X$, the counit $Ra_{X!}Ra_X^!\\Ql\\to\\Ql$ defines\nthe trace map\n\n$$\n \\operatorname{tr}_X:H_c^{2d}(X,\\Ql(d))\\longrightarrow\\Ql.\n$$\n\nFor the proper structure morphism, use the compact-support direct image\n[def-compact-support-direct-image-detailed] comparison and, after untwisting, write\n\n$$\n \\operatorname{tr}^{(-d)}_X:H^{2d}(X,\\Ql)\\longrightarrow\\Ql(-d).\n$$\n\nThe multiplication $(\\Ql)_X\\otimes^L(\\Ql)_X\\to(\\Ql)_X$ defines, for all\nintegers $i,j$, cup products\n\n$$\n\\smile:H^i(X,\\Ql)\\otimes_{\\Ql}H^j(X,\\Ql)\n \\longrightarrow H^{i+j}(X,\\Ql).\n$$\n\nFor $x\\in H^i(X,\\Ql)$ and $y\\in H^j(X,\\Ql)$, the cup product is\ngraded-commutative:\n\n$$\n y\\smile x=(-1)^{ij}x\\smile y\n \\qquad\n (x\\in H^i(X,\\Ql),\\ y\\in H^j(X,\\Ql)).\n$$\n\nFor every integer $i$ with $0\\leq i\\leq2d$, and for every $x\\in H^i(X,\\Ql)$\nand $y\\in H^{2d-i}(X,\\Ql)$, define\n\n$$\n \\langle x,y\\rangle_i=\n \\operatorname{tr}^{(-d)}_X(x\\smile y):\n H^i(X,\\Ql)\\times H^{2d-i}(X,\\Ql)\n \\longrightarrow\\Ql(-d).\n$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-def-trace-cup/def-weil-poincare-trace-cup.md",
-    "place": "node def-weil-poincare-trace-cup, order 2421"
+  {
+   "tool": "loogle",
+   "query": "\"cupProduct\"",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   },
-  "stmt_deps": [
-    "def-coefficient-twists-detailed",
-    "def-weil-exceptional-inverse-image",
-    "def-weil-exceptional-adjoint-admissibility",
-    "def-compact-support-direct-image-detailed",
-    "def-weil-derived-direct-image",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-derived-tensor",
-    "def-weil-finite-field-fiber",
-    "def-weil-geometric-hypotheses",
-    "def-weil-ordinary-compact-cohomology"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2421,
-  "blueprint_uses": [
-    "def-coefficient-twists-detailed",
-    "def-compact-support-direct-image-detailed",
-    "def-weil-derived-direct-image",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-derived-tensor",
-    "def-weil-exceptional-adjoint-admissibility",
-    "def-weil-exceptional-inverse-image",
-    "def-weil-finite-field-fiber",
-    "def-weil-geometric-hypotheses",
-    "def-weil-ordinary-compact-cohomology"
-  ],
-  "uses_not_cited": [
-    "def-weil-derived-direct-image",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-derived-tensor",
-    "def-weil-finite-field-fiber",
-    "def-weil-geometric-hypotheses",
-    "def-weil-ordinary-compact-cohomology"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "leanfinder",
+   "query": "Poincare trace on top degree l-adic compactly supported cohomology and the trace cup product pairing of a smooth proper variety",
+   "results": "LinearMap.trace_eq_contract and related finite-dimensional trace-form identities; cyclic group cohomology. None constructs geometric l-adic trace or cup.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   },
-  "chapter": "sec-poincare-duality",
-  "unit": "sk-def-trace-cup",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $p$ be prime, let $a\\in\\mathbf Z_{\\geq1}$, put $q=p^a$, and set\n$k_0=\\Fq$, and let $k=\\Fbar$ be the fixed algebraic closure of $k_0$. Fix a\nprime $\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$, and choose an algebraic\nclosure $\\Qlb$ of $\\Ql$. Let $X_0/k_0$ be smooth, proper, and geometrically\nconnected of pure dimension $d\\in\\mathbf Z_{\\geq0}$. Put\n$X=X_0\\times_{k_0}k$, and let $a_X:X\\to\\Spec k$ be its structure morphism.\nWrite $H^i(X,-)$ and $H_c^i(X,-)$ for the ordinary and compactly supported\ncohomology groups, and, for every integer $m$, write $\\Ql(m)$ for the Tate\ntwist [def-coefficient-twists-detailed] of degree $m$. Write $Ra_X^!$ for\nthe constructible exceptional inverse image of\n[def-weil-exceptional-inverse-image] at $\\Ql$ and $\\Qlb$, which is defined\nfor every separated finite-type morphism (no admissibility\nhypothesis in the sense of [def-weil-exceptional-adjoint-admissibility] is\nimposed on $a_X$), and $\\otimes^L$ for the derived tensor product, using the\nderived pullback/tensor/Hom notation. Choose an\norientation isomorphism for the smooth structure morphism $a_X:X\\to\\Spec k$,\n\n$$\n \\eta_X:Ra_X^!\\Ql\\xrightarrow{\\sim}(\\Ql)_X(d)[2d],\n$$\n\nwhere $\\Ql(d)$ uses the Tate twist [def-coefficient-twists-detailed] of degree $d$. We\nuse $Ra_{X*}$ and $Ra_{X!}$ for the derived direct image and the\ncompact-support direct image [def-compact-support-direct-image-detailed],\nrespectively. Through $\\eta_X$, the counit $Ra_{X!}Ra_X^!\\Ql\\to\\Ql$ defines\nthe trace map\n\n$$\n \\operatorname{tr}_X:H_c^{2d}(X,\\Ql(d))\\longrightarrow\\Ql.\n$$\n\nFor the proper structure morphism, use the compact-support direct image\n[def-compact-support-direct-image-detailed] comparison and, after untwisting, write\n\n$$\n \\operatorname{tr}^{(-d)}_X:H^{2d}(X,\\Ql)\\longrightarrow\\Ql(-d).\n$$\n\nThe multiplication $(\\Ql)_X\\otimes^L(\\Ql)_X\\to(\\Ql)_X$ defines, for all\nintegers $i,j$, cup products\n\n$$\n\\smile:H^i(X,\\Ql)\\otimes_{\\Ql}H^j(X,\\Ql)\n \\longrightarrow H^{i+j}(X,\\Ql).\n$$\n\nFor $x\\in H^i(X,\\Ql)$ and $y\\in H^j(X,\\Ql)$, the cup product is\ngraded-commutative:\n\n$$\n y\\smile x=(-1)^{ij}x\\smile y\n \\qquad\n (x\\in H^i(X,\\Ql),\\ y\\in H^j(X,\\Ql)).\n$$\n\nFor every integer $i$ with $0\\leq i\\leq2d$, and for every $x\\in H^i(X,\\Ql)$\nand $y\\in H^{2d-i}(X,\\Ql)$, define\n\n$$\n \\langle x,y\\rangle_i=\n \\operatorname{tr}^{(-d)}_X(x\\smile y):\n H^i(X,\\Ql)\\times H^{2d-i}(X,\\Ql)\n \\longrightarrow\\Ql(-d).\n$$",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leansearch",
+   "query": "Poincare trace and cup product pairing in l-adic cohomology",
+   "results": "Algebra.traceForm, LinearMap.IsPerfPair and trace_eq_contract, RootPairing declarations; no geometric trace/cup construction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shiftProduct\"",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cupProduct|cup_product|shiftProduct|gradedComm_of_tmul_of|comm_coe_tmul_coe",
+   "results": "Seven hits, all in Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean (114,133,143,197,270) and Internal.lean (378,381). Read External.lean:100-124 and Internal.lean:370-384; no cohomology product or shifted-unit product theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2421,
+ "blueprint_uses": [
+  "def-coefficient-twists-detailed",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-tensor",
+  "def-weil-exceptional-adjoint-admissibility",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "uses_not_cited": [
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-tensor",
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-trace-cup",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $p$ be prime, let $a\\in\\mathbf Z_{\\geq1}$, put $q=p^a$, and set\n$k_0=\\Fq$, and let $k=\\Fbar$ be the fixed algebraic closure of $k_0$. Fix a\nprime $\\ell\\neq p$, write $\\Ql=\\mathbf Q_\\ell$, and choose an algebraic\nclosure $\\Qlb$ of $\\Ql$. Let $X_0/k_0$ be smooth, proper, and geometrically\nconnected of pure dimension $d\\in\\mathbf Z_{\\geq0}$. Put\n$X=X_0\\times_{k_0}k$, and let $a_X:X\\to\\Spec k$ be its structure morphism.\nWrite $H^i(X,-)$ and $H_c^i(X,-)$ for the ordinary and compactly supported\ncohomology groups, and, for every integer $m$, write $\\Ql(m)$ for the Tate\ntwist [def-coefficient-twists-detailed] of degree $m$. Write $Ra_X^!$ for\nthe constructible exceptional inverse image of\n[def-weil-exceptional-inverse-image] at $\\Ql$ and $\\Qlb$, which is defined\nfor every separated finite-type morphism (no admissibility\nhypothesis in the sense of [def-weil-exceptional-adjoint-admissibility] is\nimposed on $a_X$), and $\\otimes^L$ for the derived tensor product, using the\nderived pullback/tensor/Hom notation. Choose an\norientation isomorphism for the smooth structure morphism $a_X:X\\to\\Spec k$,\n\n$$\n \\eta_X:Ra_X^!\\Ql\\xrightarrow{\\sim}(\\Ql)_X(d)[2d],\n$$\n\nwhere $\\Ql(d)$ uses the Tate twist [def-coefficient-twists-detailed] of degree $d$. We\nuse $Ra_{X*}$ and $Ra_{X!}$ for the derived direct image and the\ncompact-support direct image [def-compact-support-direct-image-detailed],\nrespectively. Through $\\eta_X$, the counit $Ra_{X!}Ra_X^!\\Ql\\to\\Ql$ defines\nthe trace map\n\n$$\n \\operatorname{tr}_X:H_c^{2d}(X,\\Ql(d))\\longrightarrow\\Ql.\n$$\n\nFor the proper structure morphism, use the compact-support direct image\n[def-compact-support-direct-image-detailed] comparison and, after untwisting, write\n\n$$\n \\operatorname{tr}^{(-d)}_X:H^{2d}(X,\\Ql)\\longrightarrow\\Ql(-d).\n$$\n\nThe multiplication $(\\Ql)_X\\otimes^L(\\Ql)_X\\to(\\Ql)_X$ defines, for all\nintegers $i,j$, cup products\n\n$$\n\\smile:H^i(X,\\Ql)\\otimes_{\\Ql}H^j(X,\\Ql)\n \\longrightarrow H^{i+j}(X,\\Ql).\n$$\n\nFor $x\\in H^i(X,\\Ql)$ and $y\\in H^j(X,\\Ql)$, the cup product is\ngraded-commutative:\n\n$$\n y\\smile x=(-1)^{ij}x\\smile y\n \\qquad\n (x\\in H^i(X,\\Ql),\\ y\\in H^j(X,\\Ql)).\n$$\n\nFor every integer $i$ with $0\\leq i\\leq2d$, and for every $x\\in H^i(X,\\Ql)$\nand $y\\in H^{2d-i}(X,\\Ql)$, define\n\n$$\n \\langle x,y\\rangle_i=\n \\operatorname{tr}^{(-d)}_X(x\\smile y):\n H^i(X,\\Ql)\\times H^{2d-i}(X,\\Ql)\n \\longrightarrow\\Ql(-d).\n$$",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "def-weil-poincare-trace-cup",
+  "worker": "stage1",
+  "summary": "Expanded the counit/orientation composite, rational-stage compact support, basis-free untwisting and directed proper comparison, and the multiplication-induced cup via the existing mixed-support construction. Removed the unused ambient-admissibility dependency. Extracted graded commutativity as a forward property reference rather than assuming a theorem inside a definition. No exact project attachment and no Mathlib leaf covers the rational geometric construction.",
+  "blueprint": "Realizes all construction paragraphs of main-20261015 def-weil-poincare-trace-cup: chosen orientation, trace, untwisting/proper comparison, cup and trace–cup pairing. The graded-commutativity assertion is retained as the separate statement-only property node. The source definition has no proof steps.",
+  "extracted_claims": [
+   "lem-pod-cup-product-graded-commutativity"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-bdaef9512",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-bdaef9512 (reviewer sub-agent of L); spot-checked: The mathematics and edge cases check out, but the item source still cites the obsolete literature/blueprint/master definition despite the required main-20261015 update. Corrected complete JSON is in fixes/dag/nodes/sec-poincare-duality/def-weil-poincare-trace-cup.json; review.md records all source, dependency, route, and small-case checks.; 1 file(s) fixed by the reviewer"
+ }
 }

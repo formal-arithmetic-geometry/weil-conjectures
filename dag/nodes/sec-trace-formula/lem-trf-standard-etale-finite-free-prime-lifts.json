@@ -14,9 +14,130 @@
   "def-weil-affine-spectrum",
   "def-weil-surjective-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $R=0$, take $C=0$ and $r=0$. Then $\\operatorname{Spec}R$ and $\\operatorname{Spec}C$ are empty, the structural map is surjective, and there are no primes $\\mathfrak q$ or $\\mathfrak q'$ to check. Assume henceforth that $R\\ne0$. Apply [lem-weil-pbc-monic-finite-free-splitting-extension] to the monic polynomial $f$. We obtain a nonzero commutative $R$-algebra $C$, finite and free as an $R$-module, and elements $\\alpha_1,\\ldots,\\alpha_n\\in C$ such that the image of $f$ in $C[t]$ is $\\prod_i(t-\\alpha_i)$. The basis can be chosen finite: for finitely many module generators take the union of their finite coordinate supports in any free basis; if a basis vector were outside that union, it could not be in their span, by uniqueness of coordinates over the nonzero ring $R$. Reindex this finite basis by $\\{1,\\ldots,r\\}$; since $C\\ne0$, this basis is nonempty, so $r\\ge1$.",
+   "uses": [
+    "lem-weil-pbc-monic-finite-free-splitting-extension",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF proof, first paragraph, using Tag 03HS (lemma-adjoin-roots)"
+   }
+  },
+  {
+   "text": "The structure map $R\\to C$ is injective: if $a\\mapsto0$, then multiplication by $a$ is zero on the free $R$-module $C$; evaluating it on any basis vector and using uniqueness of coordinates gives $a=0$. Because $C$ is finite as an $R$-module, [lem-weil-pbc-finite-algebra-is-integral] makes $C$ integral over $R$. Applying [lem-weil-pbc-integral-injective-lying-over] gives surjectivity of $\\operatorname{Spec}C\\to\\operatorname{Spec}R$. The chosen finite basis is exactly the asserted $R$-module basis indexed by $\\{1,\\ldots,r\\}$.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-injective-lying-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF proof, clause (2), with integrality and lying-over written out"
+   }
+  },
+  {
+   "text": "Fix primes $\\mathfrak q\\subset B$ and $\\mathfrak q'\\subset C$ with common contraction $\\mathfrak p\\subset R$, and put $k=\\kappa(\\mathfrak p)$ and $L=\\kappa(\\mathfrak q')$ using [def-weil-pbc-localization-at-prime]. Write $\\lambda:C\\to L$ for the residue map. Its kernel is $\\mathfrak q'$: membership $d/1\\in\\mathfrak q'C_{\\mathfrak q'}$ is equivalent, after clearing the finitely many denominators in a sum of ideal generators, to $sd\\in\\mathfrak q'$ for some $s\\notin\\mathfrak q'$; primality gives $d\\in\\mathfrak q'$. Conversely $d\\in\\mathfrak q'$ plainly has zero residue. Thus $R\\to L$ has kernel $\\mathfrak p$, and the formula $r/s\\mapsto\\lambda(r)/\\lambda(s)$, $s\\notin\\mathfrak p$, descends to a unital map $k\\to L$. Fractions with equal representatives have equal images by cross multiplication; elements of $\\mathfrak pR_{\\mathfrak p}$ map to zero. This makes $L/k$ a field extension [def-pc-field-extension].",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, label lemma-standard-etale-finite-flat-Zariski, proof; elementary details omitted in its final sentence supplied explicitly."
+   }
+  },
+  {
+   "text": "Let $\\rho:R[t]\\to k[t]$ denote coefficient reduction and set $f_k=\\rho(f)$, $g_k=\\rho(g)$. Apply [lem-trf-localized-fibre-prime-factor] to $\\mathfrak q$. It gives a monic irreducible $h\\in k[t]$ with $h\\mid f_k$, $h\\nmid g_k$ and the explicit test $[P]/\\bar g^{\\,m}\\in\\mathfrak q\\Longleftrightarrow h\\mid\\rho(P)$ for all $P\\in R[t]$ and $m\\ge0$. This supplies the localized-fibre prime/factor correspondence, including its contraction to the original ring, rather than treating it as part of the root-map universal property.",
+   "uses": [
+    "lem-trf-localized-fibre-prime-factor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, label lemma-standard-etale-finite-flat-Zariski, proof; elementary details omitted in its final sentence supplied explicitly."
+   }
+  },
+  {
+   "text": "Put $a_i=\\lambda(\\alpha_i)\\in L$. Coefficient reduction of the factorization of Step 1 yields $(f_k)_L=\\prod_i(t-a_i)$: the map on coefficients preserves each finite sum and product in the convolution formula for polynomial multiplication [def-weil-polynomial-ring], and sends $t-\\alpha_i$ to $t-a_i$. In particular it preserves the empty product. For any $P=\\sum_j b_jt^j\\in R[t]$, evaluation is compatible with the two coefficient maps by the explicit identity $\\lambda(P(\\alpha_i))=\\sum_j\\lambda(b_j)a_i^j=\\rho(P)(a_i)$, where the last evaluation uses $k\\to L$ from Step 3. Thus both the reduced splitting and the value of every polynomial use that same field embedding.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, label lemma-standard-etale-finite-flat-Zariski, proof; elementary details omitted in its final sentence supplied explicitly."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-residue-factor-root-selection] to $k\\subset L$, $f_k,g_k,h$ and the factor list $a_i$ of Step 5. It supplies an index $i$ with $h(a_i)=0$ and $g_k(a_i)\\ne0$. Set $\\alpha=\\alpha_i$, $a=a_i$ and $c=g(\\alpha)\\in C$. Step 5 gives $\\lambda(c)=g_k(a)\\ne0$, hence $c\\notin\\mathfrak q'$ by Step 3. Also $f(\\alpha)=0$ by evaluating the factorization in $C$ at its $i$th root. In $C_c$, the image of $g(\\alpha)=c$ is a unit. The hypothesis that $f'$ is invertible in $B$ is precisely the standard-etale pair condition stated in [lem-weil-pbc-standard-etale-pair-maps]. Its root-map universal property, applied to the image of $\\alpha$ in $C_c$, gives the $R$-algebra map $\\varphi:B\\to C_c$. Explicitly it sends $[P]/\\bar g^{\\,m}$ to $P(\\alpha)/c^m$.",
+   "uses": [
+    "lem-trf-residue-factor-root-selection",
+    "lem-weil-pbc-standard-etale-pair-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, label lemma-standard-etale-finite-flat-Zariski, proof; elementary details omitted in its final sentence supplied explicitly."
+   }
+  },
+  {
+   "text": "For every $H\\in k[t]$, we claim $H(a)=0$ if and only if $h\\mid H$. The forward implication has the following complete Bezout argument. If $h\\nmid H$, every common divisor of $h,H$ is a unit: a nonunit divisor of the irreducible $h$ has a unit complementary factor, so is associated to $h$ and would force $h\\mid H$. By the equivalence stated in [def-weil-coprime-polynomials], there are $U,V\\in k[t]$ with $Uh+VH=1$. If $H(a)=0$, evaluation in $L$ gives $1=U(a)h(a)+V(a)H(a)=0$, a contradiction. Conversely $H=hJ$ immediately gives $H(a)=h(a)J(a)=0$. Thus the evaluation kernel over the residue field is exactly $(h)$, including for $H=0$.",
+   "uses": [
+    "def-weil-coprime-polynomials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, label lemma-standard-etale-finite-flat-Zariski, proof; elementary details omitted in its final sentence supplied explicitly."
+   }
+  },
+  {
+   "text": "We now prove the required equality on every element, using the fraction model [def-weil-ring-localization-away]. Since $c\\notin\\mathfrak q'$, for any $d\\in C$ and $m\\ge0$ we have $d/c^m\\in\\mathfrak q'C_c$ if and only if $d\\in\\mathfrak q'$. For the only nontrivial direction, express ideal membership as a finite sum with numerators in $\\mathfrak q'$, put this sum over a common power of $c$, and use the fraction-equality rule to multiply the resulting equality by another power of $c$. It follows that $c^N d\\in\\mathfrak q'$ for some $N$; primality and $c\\notin\\mathfrak q'$ give $d\\in\\mathfrak q'$. Every $b\\in B$ has the form $[P]/\\bar g^{\\,m}$. For this element the explicit map formula of Step 6, the kernel computation of Step 3, and the coefficient/evaluation identity of Step 5 give\n$$\\varphi(b)\\in\\mathfrak q'C_c\\ \\Longleftrightarrow\\ P(\\alpha)\\in\\mathfrak q'\\ \\Longleftrightarrow\\ \\rho(P)(a)=0\\ \\Longleftrightarrow\\ h\\mid\\rho(P)\\ \\Longleftrightarrow\\ b\\in\\mathfrak q.$$\nThe penultimate equivalence is Step 7; the last is the membership clause of [lem-trf-localized-fibre-prime-factor] used in Step 4. This proves $\\varphi^{-1}(\\mathfrak q'C_c)=\\mathfrak q$ in the original localized rings.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-trf-localized-fibre-prime-factor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF, label lemma-standard-etale-finite-flat-Zariski, proof; elementary details omitted in its final sentence supplied explicitly."
+   }
+  },
+  {
+   "text": "The preceding construction works for every pair of primes over a common contraction, and the zero-ring case already supplied the allowed rank $r=0$. For nonzero $R$ the construction has $r\\ge1$, including constant monic polynomials (where the factorization is the empty product and there are no primes of $B$ when the quotient is zero). This proves all clauses, including the explicitly allowed zero-ring and constant-polynomial edge cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UF proof, conclusion and edge cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-monic-finite-free-splitting-extension",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "def-weil-pbc-localization-at-prime",
+  "def-pc-field-extension",
+  "lem-trf-localized-fibre-prime-factor",
+  "def-weil-polynomial-ring",
+  "lem-trf-residue-factor-root-selection",
+  "lem-weil-pbc-standard-etale-pair-maps",
+  "def-weil-coprime-polynomials",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00UF, label lemma-standard-etale-finite-flat-Zariski; follows its splitting-and-residue-factor route and supplies the omitted reduction and prime-kernel details in Steps 3, 5, 7, 8."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +180,38 @@
    "results": "{\"t\": \"2026-10-17T20:56:20Z\", \"tool\": \"grep\", \"query\": \"standard.etale|exists_splits_map\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\"], \"digest\": \"b247766ecfd0ede2\"}",
    "date": "2026-10-18",
    "verdict": "no match: standard etale presentations, their localizations and maps from roots are present, but none constructs a finite free faithfully flat algebra with all prescribed prime lifts. Polynomial splitting alone does not give these lifts in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A standard etale algebra is dominated by a finite free faithfully flat algebra with prescribed prime lifts",
+   "results": "StandardEtalePresentation; Algebra.Etale.exists_subalgebra_fg; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; Algebra.instEtaleOfIsStandardEtale; StandardEtalePair.instEtaleRing; no exact finite-free prescribed-lifts theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "StandardEtalePair, Module.Free, PrimeSpectrum.comap",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "standard.etale.*finite.*(flat|free)|finite.*(flat|free).*standard.etale in Mathlib/",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A standard etale algebra has a finite free faithfully flat splitting algebra with local maps realizing every prime",
+   "results": "Algebra.IsStandardEtale; Algebra.IsStandardEtale.mk; Algebra.IsStandardEtale.nonempty_standardEtalePresentation; StandardEtalePair.homEquiv; no exact theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-finite-free-open-refinement",
@@ -94,5 +243,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-standard-etale-finite-free-prime-lifts",
+  "worker": "stage1",
+  "summary": "Repaired returned Step 3 by adding the statement-only residue-fibre prime/factor correspondence with an explicit fraction-membership criterion. Retained and researched the earlier root-selection sublemma. Wrote out the residue field embedding, coefficient reduction and evaluation, the irreducible-root kernel by Bezout, and prime contraction on all fractions; no extra elementary nodes. The item statement and source route are unchanged.",
+  "blueprint": "Inherited sk-i-curve-zero proof step 2 etale/ph descent route below lem-trf-local-term-locality: Tag 00UF as invoked by Tag 02LG. Steps 1-2 construct the finite-free cover and prove surjectivity; Steps 3-8 supply every detail of the prescribed prime lift; Step 9 handles the edge cases."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q77-2c530e41c",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q77-2c530e41c (reviewer sub-agent of L); spot-checked: Reviewed all nine steps, both new nodes, cited statements, and Stacks 00UF/03HS/02LG/02LI. Prime contraction, residue-field compatibility, and edge cases check out; no circularity, duplicate, or forbidden dependency found. Clarified the root-selection statement’s family and definitions in fixes/. Full findings are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

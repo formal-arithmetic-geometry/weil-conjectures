@@ -10,48 +10,98 @@
  "stmt_deps": [
   "def-weil-pbc-henselization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The quotient map R\\to R/I makes R/I a cyclic R-module, hence a finite module; [lem-weil-pbc-finite-ring-map-quasi-finite] therefore supplies the finite-type and quasi-finite-at-\\mathfrak q hypotheses for [lem-trf-henselization-quasi-finite-ring], with A=R, B=R/I, \\mathfrak p=\\mathfrak m, and \\mathfrak q=\\mathfrak m/I. Since R and R/I are local, their localizations at these maximal primes are themselves. The tensor product R^h\\otimes_R(R/I) identifies with R^h/IR^h, and the prime corresponding to \\mathfrak q is the maximal ideal, so the localization in the cited lemma is this quotient. Its conclusion is therefore that R^h/IR^h is the ordinary henselization of R/I.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-map-quasi-finite",
+    "lem-trf-henselization-quasi-finite-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 05WQ, Lemma quotient-henselization (lines 43616--43624), explicitly as the special case of Tag 05WR"
+   }
+  },
+  {
+   "text": "The quotient map R^h to R^h/IR^h is surjective by the definition of an ideal quotient. The structure map R to R^h is local, so IR^h is contained in the maximal ideal of the local ring R^h; consequently the quotient map R^h to R^h/IR^h is local. Because I maps to zero under the composite R to R^h to R^h/IR^h, that composite factors canonically through R/I, giving exactly the stated compatibility of structure maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 05WQ, Lemma quotient-henselization, with the canonical quotient and structure maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-ring-map-quasi-finite",
+  "lem-trf-henselization-quasi-finite-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 05WQ, Lemma quotient-henselization (lines 43616--43624)"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "HenselianLocalRing [subdirectory Mathlib/RingTheory]",
-   "results": "none",
+   "tool": "leanfinder",
+   "query": "Henselization of a local ring modulo an ideal in the maximal ideal is henselization of the quotient",
+   "results": "instHenselianRingMaximalIdeal; IsAdicComplete.henselianRing; HenselianRing; HenselianLocalRing; IsLocalRing.residue_def; HenselianLocalRing.toIsLocalRing; IsLocalRing.finite_quotient_iff; HenselianRing.jac",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Function.Surjective, IsLocalHom",
+   "results": "0 hits",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "HenselianLocalRing [subdirectory Mathlib/RingTheory/Henselian]",
-   "results": "none",
+   "query": "henseli[sz]ation.*quotient|quotient.*henseli[sz]ation [subdirectory Mathlib/RingTheory]",
+   "results": "0 hits",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "Henselization of a local ring modulo an ideal in the maximal ideal is henselization of the quotient",
-   "results": "instHenselianRingMaximalIdeal, IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing, IsLocalization.AtPrime.equivQuotMaximalIdeal.congr_simp, HenselianLocalRing.TFAE, HenselianRing.recOn, HenselianRing.casesOn, IsLocalRing.residue, IsLocalRing.ResidueField",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "HenselianLocalRing, IsLocalization, Function.Surjective",
-   "results": "none",
+   "results": "instHenselianRingMaximalIdeal; IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing; IsLocalization.AtPrime.equivQuotMaximalIdeal.congr_simp; HenselianLocalRing.TFAE; HenselianRing.recOn; HenselianRing.casesOn; IsLocalRing.residue; IsLocalRing.ResidueField",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "For a local ring and ideal in the maximal ideal, the ordinary henselization modulo the extended ideal is the henselization of the quotient",
-   "results": "instHenselianRingMaximalIdeal, HenselianRing, IsAdicComplete.henselianRing, HenselianLocalRing, Ideal.quotientToQuotientRangePowQuotSuccAux_mk, HenselianLocalRing.toIsLocalRing, HenselianRing.jac, Ideal.quotientToQuotientRangePowQuotSuccAux",
+   "query": "ordinary henselization quotient by ideal contained in maximal ideal universal property",
+   "results": "HenselianRing; instHenselianRingMaximalIdeal; HenselianLocalRing; IsAdicComplete.henselianRing; HenselianRing.is_henselian; HenselianRing.jac; HenselianLocalRing.toIsLocalRing; Ideal.quotientToQuotientRangePowQuotSuccAux_mk",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, Ideal.Quotient, IsLocalHom",
+   "results": "0 hits; invalid query: unknown identifier Ideal.Quotient",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Henselian.*quotient|quotient.*Henselian [subdirectory Mathlib/RingTheory]",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ordinary henselization universal property survives quotient ideal inside maximal ideal",
+   "results": "instHenselianRingMaximalIdeal; HenselianLocalRing.is_henselian; HenselianLocalRing; HenselianLocalRing.TFAE; HenselianRing; HenselianRing.is_henselian; HenselianRing.recOn; HenselianRing.casesOn",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-henselizations-common-normal-cover",
@@ -71,5 +121,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-henselization-quotient-at-prime",
+  "worker": "stage1",
+  "summary": "Checked the target against Stacks Algebra Tag 05WQ. The source directly gives compatibility of ordinary henselization with quotienting a local ring by an ideal in the maximal ideal; the remaining surjectivity, locality, and structure-map compatibility are the elementary properties of the canonical ideal quotient. No additional node is needed.",
+  "blueprint": "Realizes the quotient-compatibility clause used in the quotient reduction to a normal domain in Theorem 6.3, as cited by the common-normal-cover route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-ring-map-quasi-finite",
+    "why": "Step 1 uses this cross-unit lemma only as the generic fact that a finite quotient map is finite type and quasi-finite at every prime; the sk-i-curve-zero route has no local ring-map finiteness lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-ring-map-quasi-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q13-0db3abe73",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-0db3abe73 (reviewer sub-agent of L); spot-checked: The mathematics and source checks pass, including I=0 and I=m edge cases. Step 1 uses the cross-unit finite-map lemma as a generic tool but the submitted split_report omitted the required tool_uses declaration. A complete corrected item JSON adding that declaration is under fixes/dag/nodes/sec-trace-formula/lem-trf-henselization-quotient-at-prime.json.; 1 file(s) fixed by the reviewer"
  }
 }
