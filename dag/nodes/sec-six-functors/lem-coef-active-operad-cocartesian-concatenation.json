@@ -86,14 +86,11 @@
    }
   },
   {
-   "text": "Let $y$ and $w$ have lengths $k,l$, so $u,b$ lie over $\\langle k+l\\rangle$. For any color coordinate $i$ in the first block, compose $t_1$ and $r_1$ with the inert color projection $y\\to y_i$; for a coordinate in the second block use $w\\to w_i$. These composites are $p_E$-cocartesian by [lem-coef-infinity-cocartesian-composition-initiality] and the operad axioms. Apply [lem-coef-infinity-pointwise-cocartesian-transport] to the pullback of $p_E$ along the corresponding inert base edge $\\Delta^1\\to S$. This pullback is an inner fibration over the quasicategory $\\Delta^1$ and hence has quasicategorical total space. Every identity has its degenerate lift; the only nonidentity base edge is the chosen inert edge and has lifts from every source by the operad axiom. Its chosen lifts remain cocartesian: an outer-horn lifting problem in the pullback is the same problem for $p_E$ with its base coordinate fixed. Thus this pullback is cocartesian, and the mapping criterion identifies its convention with that of the pointwise-transport theorem. Write $d_i=y_i$ or $w_i$, and denote these two cocartesian composites by $R_i:u\\to d_i$ and $T_i:b\\to d_i$; they satisfy $T_i\\delta\\simeq R_i$. Let $\\rho_{i!}$ be transport along the chosen inert base edge. The transport theorem gives comparison equivalences $c_R:\\rho_{i!}u\\to d_i$ and $c_T:\\rho_{i!}b\\to d_i$: each compares two cocartesian lifts from the same source, so the initial-lift uniqueness assertion of [lem-coef-infinity-cocartesian-composition-initiality] makes it invertible. Compatibility of transport with precomposition identifies $c_T\\circ\\rho_{i!}(\\delta)\\simeq c_R$. Hence $\\rho_{i!}(\\delta)\\simeq c_T^{-1}c_R$, with inverse $c_R^{-1}c_T$, and this component is an equivalence. Thus every component of $\\delta$ under the fiber Segal equivalence $\\mathcal E^\\otimes_{\\langle k+l\\rangle}\\simeq(\\mathcal E^\\otimes_{\\langle1\\rangle})^{k+l}$ of [lem-coef-operadic-approximation-restriction] is an equivalence. An inverse is given componentwise under its quasi-inverse, so $\\delta$ is an equivalence. When $k+l=0$, that fiber is terminal and the same conclusion holds with no components. Finally the associative and unital composition classes of [lem-coef-infinity-mapping-composition] make precomposition by an equivalence and by its inverse homotopy-inverse maps on all target mapping spaces; therefore the mapping pullback square for $\\gamma$ is also the one for $\\delta\\gamma=g$, up to these equivalences. By [lem-coef-infinity-cocartesian-mapping-criterion], $g=e\\oplus f$ is $q$-cocartesian.",
+   "text": "Let $y,w$ have lengths $k,l$, so $u,b$ lie over $\\langle k+l\\rangle$. Compose the inert block projections $t_j,r_j$ of step 4 with the relevant inert color projection of $y$ or $w$. The composition assertion of [lem-coef-infinity-cocartesian-composition-initiality] makes the resulting edges $R_i:u\\to d_i$ and $T_i:b\\to d_i$ $p_E$-cocartesian, where $d_i=y_i$ or $w_i$. They lie over the same inert color map $\\rho_i$ and satisfy $T_i\\delta\\simeq R_i$. By the operad axioms in [lem-coef-operadic-approximation-restriction], every source over the initial vertex of $\\rho_i$ admits a $p_E$-cocartesian lift of $\\rho_i$. The only other edges of $\\Delta^1$ are identities, which have degenerate lifts by the composition-initiality node. Thus [lem-coef-infinity-cocartesian-base-restriction], with $h=\\rho_i:\\Delta^1\\to S$, supplies a cocartesian fibration $E_i=\\Delta^1\\times_S\\mathcal E^\\otimes\\to\\Delta^1$ and says that $R_i,T_i$ remain cocartesian there. No global cocartesianness of $p_E$ is assumed.",
    "uses": [
-    "lem-coef-operadic-approximation-restriction",
     "lem-coef-infinity-cocartesian-composition-initiality",
-    "lem-coef-infinity-pointwise-cocartesian-transport",
-    "lem-coef-infinity-cocartesian-mapping-criterion",
-    "lem-coef-infinity-mapping-composition",
-    "def-coef-infinity-fibrations"
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-infinity-cocartesian-base-restriction"
    ],
    "elementary": false,
    "source": {
@@ -102,7 +99,33 @@
    }
   },
   {
-   "text": "Induct on the number of given edges. For zero edges the concatenated arrow is the identity of the empty tuple and is cocartesian by the degenerate-edge clause of [lem-coef-infinity-cocartesian-composition-initiality]. For one edge it is the given edge. The induction step concatenates the first $r$ arrows, already active and cocartesian, with the next arrow and applies steps 4-5; a disjoint union of active pointed maps is active because no non-basepoint is sent to the basepoint. The associativity and permutation equivalences from step 2 identify all other parenthesizations and orders. Cocartesianness is unchanged by these equivalences: composing with their inverses identifies the mapping-square tests, using the associative and unital composition homotopies of [lem-coef-infinity-mapping-composition]. Identity arrows of any tuple $Z$ are active and cocartesian by the same degenerate-edge clause. Applying the binary case to $(e,1_Z)$ and $(1_Z,e)$ gives the two final assertions. Empty source blocks are allowed in all the finite pointed-set formulas, so nullary active arrows and the empty context have never been excluded.",
+   "text": "Apply [lem-coef-infinity-cocartesian-transport-square] to $E_i\\to\\Delta^1$, the source edge $\\delta:u\\to b$, target edge $1_{d_i}$, and square $T_i\\delta\\simeq R_i$. For its transport $F_i$, it gives comparison equivalences $c_R:F_i(u)\\to d_i$ and $c_T:F_i(b)\\to d_i$ with $c_TF_i(\\delta)\\simeq c_R$. Hence $F_i(\\delta)\\simeq c_T^{-1}c_R$ is an equivalence. Indeed $c_R^{-1}c_T$ is its inverse by the associative and unital composition homotopies of [lem-coef-infinity-mapping-composition]. These are exactly the inert color transports giving the fiber Segal equivalence in [lem-coef-operadic-approximation-restriction].",
+   "uses": [
+    "lem-coef-infinity-cocartesian-transport-square",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-operadic-approximation-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.2.4.8, printed p. 212: detect the vertical comparison under its inert color projections; nullary target case is the terminal zero fiber."
+   }
+  },
+  {
+   "text": "Under the fiber Segal equivalence of [lem-coef-operadic-approximation-restriction], every component of $\\delta$ is an equivalence by step 6. Taking their inverses and applying the quasi-inverse of the Segal equivalence gives an inverse for $\\delta$ and its two inverse homotopies. If $k+l=0$, the fiber is equivalent to the terminal category, so its unique empty tuple of components gives the same conclusion. Finally precomposition by $\\delta$ and its inverse gives homotopy-inverse maps on all target mapping spaces, by the associative and unital homotopies of [lem-coef-infinity-mapping-composition]. Thus the mapping square for $g=\\delta\\gamma$ is identified with the homotopy-pullback square for $\\gamma$. The mapping criterion [lem-coef-infinity-cocartesian-mapping-criterion] makes $g=e\\oplus f$ $q$-cocartesian.",
+   "uses": [
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.2.4.8, printed p. 212: detect the vertical comparison under its inert color projections; nullary target case is the terminal zero fiber."
+   }
+  },
+  {
+   "text": "Induct on the number of given edges. For zero edges the concatenated arrow is the identity of the empty tuple and is cocartesian by the degenerate-edge clause of [lem-coef-infinity-cocartesian-composition-initiality]. For one edge it is the given edge. The induction step concatenates the first $r$ arrows, already active and cocartesian, with the next arrow and applies steps 4-7; a disjoint union of active pointed maps is active because no non-basepoint is sent to the basepoint. The associativity and permutation equivalences from step 2 identify all other parenthesizations and orders. Cocartesianness is unchanged by these equivalences: composing with their inverses identifies the mapping-square tests, using the associative and unital composition homotopies of [lem-coef-infinity-mapping-composition]. Identity arrows of any tuple $Z$ are active and cocartesian by the same degenerate-edge clause. Applying the binary case to $(e,1_Z)$ and $(1_Z,e)$ gives the two final assertions. Empty source blocks are allowed in all the finite pointed-set formulas, so nullary active arrows and the empty context have never been excluded.",
    "uses": [
     "lem-coef-infinity-cocartesian-composition-initiality",
     "lem-coef-infinity-cocartesian-mapping-criterion",
@@ -116,10 +139,11 @@
   }
  ],
  "proof_deps": [
-  "def-coef-infinity-fibrations",
   "lem-coef-active-operad-envelope-cocartesian",
+  "lem-coef-infinity-cocartesian-base-restriction",
   "lem-coef-infinity-cocartesian-composition-initiality",
   "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-cocartesian-transport-square",
   "lem-coef-infinity-homotopy-pullback-pasting",
   "lem-coef-infinity-mapping-composition",
   "lem-coef-infinity-pointwise-cocartesian-transport",
@@ -211,7 +235,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-relative-operadic-terminal-active-mapping",
@@ -224,15 +248,15 @@
   "date": "2026-10-17",
   "item": "lem-coef-active-operad-cocartesian-concatenation",
   "worker": "stage1",
-  "summary": "Preserved the statement. Constructed the coherent active concatenation through a generic active-arrow-envelope theorem, with explicit fiber identification, block tensor, unit and strong naturality. Expanded the binary cocartesian comparison through mapping-square cancellation and inert color projections, followed by finite induction including empty and nullary cases. One new statement-only generic envelope construction, not an item-clause restatement; all other foundations reuse existing nodes. No matching project Lean declaration or Mathlib leaf.",
-  "blueprint": "Realizes the inherited prop-coef-integral-exceptional-adjoint proof paragraph 2, finite-coefficient mapping-complex adjunction before inverse limit, through the existing terminal-active-mapping ancestry. Steps 1-2 realize HA Corollary 2.2.4.5 / Remark 2.2.4.6; steps 3-5 expand Remark 2.2.4.8; step 6 handles finite families and identity contexts."
+  "summary": "Repaired the human re-split request: retained the statement, Lean record, route, steps 1-4 and final induction. Replaced former step 5 by short applications of two statement-only general lemmas: cocartesian base restriction with image-edge lifts, and natural transport comparison squares. Kept Segal detection and mapping-square transfer as an elementary step with the inverse written out. No exact project attachment or Mathlib match found.",
+  "blueprint": "Historical prop-coef-integral-exceptional-adjoint proof paragraph 2, middle derived mapping-complex adjunction before inverse limit, through the inherited terminal-active-mapping ancestry. HA Corollary 2.2.4.5 and Remark 2.2.4.6 supply steps 1-2; Remark 2.2.4.8 is expanded by steps 3-7; step 8 is the existing finite-family induction."
  },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q07-32fef26d1",
-  "group": "Q07",
+  "reviewer": "NT-cc-Q105-49acc2ab5",
+  "group": "Q105",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-32fef26d1 (reviewer sub-agent of L); spot-checked: PASS: I read the full mathematics, made no fixes and dropped no nodes. Source: HA (18 Sept 2017), using a copy already fetched by another review on this machine and placed in /tmp. Places read: Def 2.1.2.10, Constr 2.2.4.1, Rem 2.2.4.3, Prop 2.2.4.4, Cor 2.2.4.5, Rem 2.2.4.6 and 2.2.4.8 (printed pp. 211-212), and Lemma 2.2.4.15(1)-(4), Lemma 2.2.4.16 and the proof of 2.2.4.4 (pp. 216-217). New node lem-coef-active-operad-envelope-cocartesian: its hypotheses match HA's fibration of infinity-operads (inner fibration plus isofibration lift, i.e. a categorical fibration). Its conclusions are exactly Prop 2.2.4.4 and Lemma 2.2.4.15(3)-(4). It is statement-only, introduces its own objects, has correct blueprint ancestry and nine recorded searches. The rg duplicate search over envelope, 2.2.4, active and concatenation found no duplicate, and the node does not restate any item clause. Item: the statement matches HA 2.2.4.5-2.2.4.8. Its extra clause, that an operad map preserves concatenation, is true and proved in step 2 by the inert-source criterion. Step checks: step 1 identifies the fiber, mu_m h = mu_n iff h is active. Step 2 computes the block tensor and the unit. Step 3 uses pasting of mapping squares, so inert edges are q-cocartesian, with the converse. Step 4 factors g = delta gamma through a cocartesian lift and gets r_j q-cocartesian, then inert, by cancellation. Step 5 shows delta is an equivalence through the operad Segal equivalence, including k+l=0. Step 6 is a finite induction covering the identity contexts. Every cited statement says what its step takes from it. proof_deps equals the union of uses, the graph is acyclic, and every cited statement node is in unit sk-prop-sf-biduality-general, so no tool_uses are needed. Minor point: step 4 states the block-projection squares of e plus f briefly. Step 2 justifies them, so this is not a gap."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-49acc2ab5 (reviewer sub-agent of L); spot-checked: I read the whole delivery against HA (Sept 2017) Construction 2.2.4.1, Remark 2.2.4.3, Prop 2.2.4.4, Cor 2.2.4.5 and Remarks 2.2.4.6-2.2.4.8 (pp. 211-212), and HTT 2.4.1.3, 2.4.1.9, 2.4.1.12, 2.4.2.13 and 2.4.4.2, from the PDFs already fetched to /tmp. Item: the statement is unchanged and matches HA 2.2.4.5/2.2.4.8. Steps 1-4 and 8 are correct: the fiber identity mu_m h = mu_n iff h is active, the block concatenation, the inert/q-cocartesian equivalence by mapping-square pasting, the factorization g = delta gamma with r_j cancellation, and the finite induction including the empty and nullary cases. New step 5: R_i and T_i are p_E-cocartesian over the same rho_i, and the base-restriction hypotheses hold for h = rho_i: Delta^1 -> S (inert lifts plus degenerate lifts). New step 6: the transport square with x=u, y=b, x'=y'=d_i and v=1 gives F_i(delta) ~ c_T^-1 c_R, which is HA's componentwise-equivalence sentence. Step 7 is honestly elementary: the Segal equivalence reflects equivalences, the k+l=0 fiber is terminal, and the mapping criterion finishes. New node base-restriction is true: pullback of an inner fibration is inner, preservation is the dual of HTT 2.4.1.3(2), and reflection follows from the lift hypothesis as in HTT 2.4.1.12 and 2.4.2.13. New node transport-square is true: comparisons are equivalences by initiality, and naturality follows from the lambda-naturality and fiber formula of the transport node (HTT 2.4.4.2 dual). Both new nodes are statement-only, self-contained, strictly smaller than the item, and record leansearch, leanfinder and grep searches. A whole-DAG statement scan found no duplicates; nearest were categorical-base-change, left-cone-restriction, cartesian-fibration-pullback, local-transport-section-colimits and composition-initiality. No blueprint snapshot mentions cocartesian, so same_as=[] is right. All cited statements are in unit sk-prop-sf-biduality-general, so no tool_uses are needed. There is no cycle, proof_deps equals the union of the step uses, and nothing cites SGA. Minor: the report mentions a citations.json that is not in the delivery; this is harmless. No fixes."
  }
 }

@@ -78,25 +78,12 @@
    }
   },
   {
-   "text": "We need the following pointwise test, derived from existing statements rather than assumed. If $Z$ is a quasicategory and $K$ any small simplicial set, then $\\operatorname{Fun}(K,Z)$ is a quasicategory by [lem-cbc-internal-hom-quasicategory]. Suppose an edge $e$ of this functor object has equivalence components at every vertex of $K$. A horn $\\Lambda_0^r\\to\\operatorname{Fun}(K,Z)$, $r\\geq2$, whose first edge is $e$, is adjoint to a map $K\\times\\Lambda_0^r\\to Z$ whose distinguished vertical edge at every vertex of $K$ is an equivalence. Apply [lem-cbc-invertible-prism-extension] with $A=\\varnothing$, $B=K$, $Q=Z$ to extend this map to $K\\times\\Delta^r$. Currying supplies the horn filler. Therefore $e$ has the outer-horn extension property for every $r\\geq2$, and the converse clause of [lem-cbc-equivalence-outer-horn-filling] makes $e$ an equivalence. This proof works in any sufficiently large universe containing $K$ and $Z$.",
-   "uses": [
-    "lem-cbc-internal-hom-quasicategory",
-    "lem-cbc-invertible-prism-extension",
-    "lem-cbc-equivalence-outer-horn-filling"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "https://kerodon.net/tag/01HV",
-    "place": "Theorem 4.6.2.8 (01HV), functor-equivalence interpretation of the explicit homotopies; derived pointwise test; explicit argument supplied here, not archived under literature/."
-   }
-  },
-  {
-   "text": "For every quasicategory $\\mathcal E$, put $\\mathcal A=\\operatorname{Fun}(P,\\mathcal E)$ and $\\mathcal B=\\operatorname{Fun}(Q,\\mathcal E)$; both are quasicategories by [lem-cbc-internal-hom-quasicategory]. Precomposition gives $c^*:\\mathcal B\\to\\mathcal A$ and $s^*:\\mathcal A\\to\\mathcal B$, with $s^*c^*=1_{\\mathcal B}$. We turn the zigzag of Step 4 into one coherent natural equivalence while keeping its vertex components degenerate. Let $V\\subseteq P$ be the simplicial subset of constant simplices at vertices of $P$; distinct vertices give distinct constant simplices by vertex restriction. Put $B=P\\times\\mathcal A$ and $A_0=V\\times\\mathcal A\\subseteq B$, in a larger universe if necessary. The two homotopies in Step 4, followed by evaluation, define a map $B\\times\\Lambda_0^2\\to\\mathcal E$: on edge $01$ use $\\bar g\\Rightarrow1_P$, and on edge $02$ use $\\bar g\\Rightarrow sc$. For an $r$-simplex $F:P\\times\\Delta^r\\to\\mathcal E$, this evaluates as $(x,t,z)\\mapsto F(H(x,t),z)$; thus it is compatible with every parameter operator. On $A_0\\times\\Lambda_0^2$ both edges are constant in the horn coordinate because the homotopies fix $V$. Prescribe the extension to $A_0\\times\\Delta^2$ by evaluation with the triangle coordinate ignored. At each vertex $(x,F)$ of $B$, the distinguished edge $01$ maps to the degenerate edge at $F(x)$. Apply [lem-cbc-invertible-prism-extension] with its $A=A_0$, $B=B$, $n=2$, $Q=\\mathcal E$. Restrict its filler to edge $12$ and curry the $P$ coordinate: this gives a coherent transformation $1_{\\mathcal A}\\Rightarrow c^*s^*$ whose component at every vertex $x$ of $P$ is degenerate, since the filler agrees with the prescribed map on $A_0\\times\\Delta^2$. Step 5 with $K=P$, $Z=\\mathcal E$ makes its component at each object $F$ an equivalence in $\\mathcal A$. Apply Step 5 again with $K=\\mathcal A$, $Z=\\mathcal A$, enlarging the universe if necessary; the transformation itself is an equivalence edge in $\\operatorname{Fun}(\\mathcal A,\\mathcal A)$, with both inverse-triangle witnesses. Together with $s^*c^*=1_{\\mathcal B}$ this proves that $s^*$ is a coherent quasi-inverse of the actual restriction $c^*$. Hence the desired full functor equivalence holds for every pair of standard simplices.",
+   "text": "Let $\\mathcal A=\\operatorname{Fun}(P,\\mathcal E)$ and $\\mathcal B=\\operatorname{Fun}(Q,\\mathcal E)$, quasicategories by [lem-cbc-internal-hom-quasicategory]. The maps $c,s$ give $c^*:\\mathcal B\\to\\mathcal A$ and $s^*:\\mathcal A\\to\\mathcal B$ with $s^*c^*=1$. Let $V\\subseteq P$ consist of the constant simplices at vertices, and put $B=P\\times\\mathcal A$, $A_0=V\\times\\mathcal A$. Evaluate the two homotopies of Step 4 to obtain a map $B\\times\\Lambda_0^2\\to\\mathcal E$, using $\\bar g\\Rightarrow1_P$ on $01$ and $\\bar g\\Rightarrow sc$ on $02$. Explicitly, a simplex $F:P\\times\\Delta^r\\to\\mathcal E$ is sent to $(x,t,z)\\mapsto F(H(x,t),z)$, which commutes with restriction of every coordinate. On $A_0$ both homotopies are constant in $t$; extend there to $A_0\\times\\Delta^2$ by evaluation ignoring the triangle coordinate. These prescriptions agree on the overlap. At every vertex $(x,F)$ of $B$, edge $01$ is degenerate. Thus [lem-cbc-invertible-prism-extension] applies to $A_0\\subseteq B$, $n=2$, $Q=\\mathcal E$. Curry edge $12$ of its filler to obtain a coherent transformation $\\eta:1_{\\mathcal A}\\Rightarrow c^*s^*$. Its evaluation at every vertex $x$ of $P$ is degenerate, since the filler has the prescribed restriction on $A_0$. By [lem-coef-infinity-pointwise-equivalences] with $K=P$, each $\\eta_F$ is an equivalence in $\\mathcal A$; by the same statement with $K=\\mathcal A$, $\\eta$ is an equivalence edge in $\\operatorname{Fun}(\\mathcal A,\\mathcal A)$. Enlarge the universe for these products and functor objects. Together with $s^*c^*=1$ this makes $s^*$ a coherent quasi-inverse to $c^*$, in exactly the sense of [def-cbc-enhanced-diagrams-cones]. This proves the simplex-pair case.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "lem-cbc-internal-hom-quasicategory",
     "lem-cbc-invertible-prism-extension",
-    "lem-cbc-equivalence-outer-horn-filling"
+    "lem-coef-infinity-pointwise-equivalences"
    ],
    "elementary": false,
    "source": {
@@ -105,7 +92,7 @@
    }
   },
   {
-   "text": "For each fixed $m\\geq0$, apply [lem-coef-infinity-cellular-natural-equivalence] to the functors $P_m(Y)=\\Delta^m\\diamond Y$ and $Q_m(Y)=\\Delta^m\\star Y$ with natural transformation $c_{\\Delta^m,Y}$. Step 2 proves preservation of injections and all small connected colimits, and identifies $c_{\\Delta^m,\\varnothing}$ as the identity. Step 6 proves the simplex hypotheses for every $\\Delta^n$, with the full functor-equivalence convention required by the cited criterion. Consequently, for every small $Y$ and every quasicategory $\\mathcal E$ in a sufficiently large universe, $c_{\\Delta^m,Y}^*$ is a functor equivalence.",
+   "text": "For each fixed $m\\geq0$, apply [lem-coef-infinity-cellular-natural-equivalence] to the functors $P_m(Y)=\\Delta^m\\diamond Y$ and $Q_m(Y)=\\Delta^m\\star Y$ with natural transformation $c_{\\Delta^m,Y}$. Step 2 proves preservation of injections and all small connected colimits, and identifies $c_{\\Delta^m,\\varnothing}$ as the identity. Step 5 proves the simplex hypotheses for every $\\Delta^n$, with the full functor-equivalence convention required by the cited criterion. Consequently, for every small $Y$ and every quasicategory $\\mathcal E$ in a sufficiently large universe, $c_{\\Delta^m,Y}^*$ is a functor equivalence.",
    "uses": [
     "lem-coef-infinity-cellular-natural-equivalence"
    ],
@@ -116,7 +103,7 @@
    }
   },
   {
-   "text": "Now fix any small $Y$ and apply [lem-coef-infinity-cellular-natural-equivalence] to $P^Y(X)=X\\diamond Y$ and $Q^Y(X)=X\\star Y$ and their natural comparison. Step 2 verifies the preservation hypotheses and the identity $c_{\\varnothing,Y}$; Step 7 verifies every standard-simplex hypothesis. The criterion therefore gives, for every small $X$, exactly the required functor equivalence $c_{X,Y}^*$. No finiteness, quasicategory or nonemptiness condition on either factor entered the argument. In particular if a factor is empty the comparison was already the identity in Step 2.",
+   "text": "Now fix any small $Y$ and apply [lem-coef-infinity-cellular-natural-equivalence] to $P^Y(X)=X\\diamond Y$ and $Q^Y(X)=X\\star Y$ and their natural comparison. Step 2 verifies the preservation hypotheses and the identity $c_{\\varnothing,Y}$; Step 6 verifies every standard-simplex hypothesis. The criterion therefore gives, for every small $X$, exactly the required functor equivalence $c_{X,Y}^*$. No finiteness, quasicategory or nonemptiness condition on either factor entered the argument. In particular if a factor is empty the comparison was already the identity in Step 2.",
    "uses": [
     "lem-coef-infinity-cellular-natural-equivalence"
    ],
@@ -130,10 +117,10 @@
  "proof_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-simplicial-set",
-  "lem-cbc-equivalence-outer-horn-filling",
   "lem-cbc-internal-hom-quasicategory",
   "lem-cbc-invertible-prism-extension",
-  "lem-coef-infinity-cellular-natural-equivalence"
+  "lem-coef-infinity-cellular-natural-equivalence",
+  "lem-coef-infinity-pointwise-equivalences"
  ],
  "proof_origin": {
   "by": "agent",
@@ -252,10 +239,38 @@
    "results": "{\"t\": \"2026-10-16T19:38:17Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, \\\"join\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "no match: valid Loogle query returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, \"join\"",
+   "results": "{\"t\": \"2026-10-17T07:24:38Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, \\\"join\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Join.mapPairEquiv and isEquivalenceMapPair concern joins of ordinary categories (Join/Basic.lean:634,651); Truncated.HomotopyCategory.functorEquiv (NerveAdjunction.lean:288) concerns ordinary nerves. Neither states a blunt-to-sharp comparison for arbitrary simplicial sets and quasicategory targets; the focused grep and Loogle returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The comparison from the blunt join of arbitrary simplicial sets to their sharp join induces an equivalence of functor quasicategories",
+   "results": "{\"t\": \"2026-10-17T07:24:39Z\", \"tool\": \"leanfinder\", \"query\": \"The comparison from the blunt join of arbitrary simplicial sets to their sharp join induces an equivalence of functor quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.isEquivalenceMapPair\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.QCat.bicategory\", \"CategoryTheory.Nerve.quasicategory\"], \"digest\": \"1c1a034d71637bd8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Join.mapPairEquiv and isEquivalenceMapPair concern joins of ordinary categories (Join/Basic.lean:634,651); Truncated.HomotopyCategory.functorEquiv (NerveAdjunction.lean:288) concerns ordinary nerves. Neither states a blunt-to-sharp comparison for arbitrary simplicial sets and quasicategory targets; the focused grep and Loogle returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "blunt|fat.?join|sharp.?join",
+   "results": "{\"t\": \"2026-10-17T07:24:43Z\", \"tool\": \"grep\", \"query\": \"blunt|fat.?join|sharp.?join\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Join.mapPairEquiv and isEquivalenceMapPair concern joins of ordinary categories (Join/Basic.lean:634,651); Truncated.HomotopyCategory.functorEquiv (NerveAdjunction.lean:288) concerns ordinary nerves. Neither states a blunt-to-sharp comparison for arbitrary simplicial sets and quasicategory targets; the focused grep and Loogle returned zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along the fat join to ordinary join comparison is an equivalence of infinity categories of diagrams",
+   "results": "{\"t\": \"2026-10-17T07:24:50Z\", \"tool\": \"leansearch\", \"query\": \"Restriction along the fat join to ordinary join comparison is an equivalence of infinity categories of diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.isEquivalenceMapPair\", \"CategoryTheory.Join.mapPairEquiv\", \"CategoryTheory.Join.costructuredArrowEquiv\", \"CategoryTheory.Join.mkNatTrans.congr_simp\", \"instIsEquivalenceLightDiagram'LightDiagramToLightFunctor\", \"CategoryTheory.Join.inclRightFullyFaithful\", \"CategoryTheory.Join.opEquiv\", \"CategoryTheory.Join.mkNatIso_hom\"], \"digest\": \"5918c79a51096ef9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Join.mapPairEquiv and isEquivalenceMapPair concern joins of ordinary categories (Join/Basic.lean:634,651); Truncated.HomotopyCategory.functorEquiv (NerveAdjunction.lean:288) concerns ordinary nerves. Neither states a blunt-to-sharp comparison for arbitrary simplicial sets and quasicategory targets; the focused grep and Loogle returned zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-slice-arrow-equivalence",
@@ -268,16 +283,12 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-blunt-sharp-join-equivalence",
   "worker": "stage1",
-  "summary": "Zero new nodes. Constructed a section for every pair of standard simplices and explicit monotone maps giving a zigzag of homotopies relative to both pure factors. Derived the pointwise-equivalence test from existing prism and outer-horn statements, obtained a coherent functor quasi-inverse, verified degreewise injections and connected-colimit preservation, and applied the existing cellular criterion in each variable. Statement and statement dependencies are unchanged. Discarded an early self-review draft that would have repackaged the theorem as universal-property children.",
-  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient adjunction: coherent enhancement of coefficient diagrams, via the finite-shape generation argument and the right-pinch comparison used in lem-coef-infinity-anodyne-cocones. The total slice diagonal equivalence used before taking fibers in the proof of Kerodon Proposition 4.6.5.10. Supporting general blunt-to-sharp join comparison, Kerodon Theorem 4.6.2.8, used in the diagram-class proof of Theorem 4.6.4.19. This is generic coherent-diagram infrastructure under the historical ancestry, not a literal assertion in the ancestor paragraph. Steps 1-4 construct the generic join comparison and its simplex-pair witnesses; Steps 5-6 prove the full functor equivalence; Steps 7-8 extend to arbitrary shapes. The main-20261015 ancestor proof has the paragraph beginning For K in D^b_c(X,R), but does not itself state a join theorem.",
+  "summary": "Q124 retained the existing normal-form, connected-colimit, ordinal section and relative homotopy calculations. Replaced the inline generic pointwise-equivalence argument by the existing same-unit lem-coef-infinity-pointwise-equivalences, and applied it twice to the explicit relative prism filler. Seven steps, no new nodes, no Mathlib leaves, and no statement change. The sole formerly long non-elementary step is now an explicit single prism application with all boundary data and hypotheses exposed.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, displayed derived coefficient adjunction: coherent enhancement of coefficient diagrams, via the finite-shape generation argument and the right-pinch comparison used in lem-coef-infinity-anodyne-cocones. The total slice diagonal equivalence used before taking fibers in the proof of Kerodon Proposition 4.6.5.10. Supporting general blunt-to-sharp join comparison, Kerodon Theorem 4.6.2.8, used in the diagram-class proof of Theorem 4.6.4.19. This is generic coherent-diagram infrastructure under the historical ancestry, not a literal assertion in the ancestor paragraph. Steps 1-4 give the comparison and simplex-pair homotopies, Step 5 their coherent functor inverse, Steps 6-7 the two cellular extensions. Historical ancestry is retained: main-20261015 moves the ancestor to sk-thm-sf-package and its text states integral adjunction, not this generic join theorem.",
   "tool_uses": [
    {
     "node": "lem-cbc-invertible-prism-extension",
-    "why": "Generic extension over a prism with equivalence vertical edges proves the pointwise-equivalence test; the assigned unit contains no such horn-extension statement and no biduality step is replaced."
-   },
-   {
-    "node": "lem-cbc-equivalence-outer-horn-filling",
-    "why": "Generic converse outer-horn criterion turns the explicitly constructed fillers into an equivalence edge; no statement of the assigned unit supplies this criterion."
+    "why": "The explicit simplex-pair zigzag is filled relative to its vertex subcomplex using this generic invertible-prism extension; no theorem of the assigned biduality unit supplies that extension and no unit step is replaced."
    }
   ]
  },
@@ -286,12 +297,12 @@
   "lem-cbc-equivalence-outer-horn-filling"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NC-36e2df0ed",
-  "group": "NC",
+  "reviewer": "NT-cc-Q124-129b8015c",
+  "group": "Q124",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-36e2df0ed (reviewer sub-agent of L); spot-checked: I read all 8 steps of the item and the statements of all 6 cited nodes in full. Statement: unchanged and true. It is the Joyal blunt-to-sharp join comparison (Kerodon 01HR/01HV/05YH, HTT 4.2.1.2) in its functor-equivalence form, with no added hypotheses on X or Y. Edge cases hold: an empty factor gives the identity, and Delta^0 blunt-join Delta^0 = Delta^1. Step 1: the normal form X_r + Y_r + X_r x T_r x Y_r is correct and c is well defined and natural. Step 2: degreewise connected-colimit and injection preservation is correct in both variables, and the empty case gives the identity. Steps 3-4: I checked by hand, and by script for m,n<=3, that f, k, g and h are monotone, that fk=1 (so cs=1), that g<=1 and g<=kf, and that the homotopies keep a on layer 0 and b on layer 1, so they descend and are constant on the pure parts. Step 5: the cited prism extension (with A empty) and the converse outer-horn clause apply with every hypothesis met (r>=2). Step 6: the two homotopies agree at horn vertex 0, the prescription on V x A agrees with them on the overlap, the distinguished edges are degenerate, and edge 12 gives 1 => c*s*. Two applications of Step 5 make this an equivalence edge, which matches the functor-equivalence definition in def-cbc-enhanced-diagrams-cones. Steps 7-8: every hypothesis of lem-coef-infinity-cellular-natural-equivalence (same unit, unsplit, plausible) is supplied. DAG: no cycle and no new nodes. The only citer is lem-coef-infinity-slice-arrow-equivalence. Neither lem-coef-infinity-blunt-join-comparison nor lem-coef-infinity-join-cone-calculus duplicates the item. I accept the declared generic tool uses of lem-cbc-invertible-prism-extension and lem-cbc-equivalence-outer-horn-filling (unit sk-prop-sf-cbc). Kerodon is not archived, so the proof is correctly marked by: agent and the report carries a WANTED line. No SGA is cited. No fixes were made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-129b8015c (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and the full statements of all 8 cited nodes. The statement is unchanged and is Kerodon 01HR/01HV/05YH (HTT 4.2.1.2) with no added hypotheses; the blunt and sharp joins and the comparison c match blunt-join-comparison, pushout-join-saturation and Kerodon. Step 1 normal form and naturality are correct. Step 2 is correct: the constant summand survives only nonempty connected colimits, other summands commute with all colimits, injections are preserved, and an empty factor gives the identity. Steps 3-4 checked by script for m,n<=3: f, k, g, h=kf are monotone, fk=1, g<=1 and g<=h; the maps preserve the [1]-coordinate and their image depends only on a (layer 0) or b (layer 1), so the homotopies descend and are constant on the pure parts, which hold every vertex. Step 5: the Lambda^2_0 data on P x Fun(P,E) with evaluation on sk_0 P x Fun(P,E) meets every hypothesis of the invertible-prism lemma (degenerate 01 edges). Edge 12 gives eta: 1=>c*s* with degenerate vertex components. lem-coef-infinity-pointwise-equivalences (same unit, landed, stated for any small K, both directions) is applied with K=P and then K=Fun(P,E), so eta is an equivalence edge; with s*c*=1 this is the functor-equivalence notion of def-cbc-enhanced-diagrams-cones. Steps 6-7 supply every hypothesis of the same-unit cellular criterion. Edge cases (empty factors, m=n=0, degree 0, empty E) hold. No cycle and no new nodes; the 'diamond'/'blunt' candidates are not duplicates. I accept the declared tool use of lem-cbc-invertible-prism-extension. No SGA source. Note for the merge: the node-level tool_uses still lists lem-cbc-equivalence-outer-horn-filling, which the proof no longer uses; it is maintainer-owned, so I left it."
  },
  "lean": {
   "module": "Sheaf.AlgebraicTopology.BluntSharpJoinEquivalence",

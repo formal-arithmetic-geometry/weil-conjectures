@@ -54,16 +54,16 @@
    }
   },
   {
-   "text": "We next establish the coherent adjoint variance used in clause (2), independently of presentability of a total category. Take a coherent diagram $H:S^{\\mathrm{op}}\\to\\operatorname{Cat}_\\infty$ with right-adjoint arrows and unstraighten it to a Cartesian fibration $p:E\\to S$, using the opposite of [lem-coef-cocartesian-straightening] in a universe containing the base and all total categories. Write $f^*:E_t\\to E_s$ for transport along $f:s\\to t$, and choose its left adjoint $f_!$. For $x\\in E_s$, the unit $x\\to f^*f_!x$ followed by the Cartesian lift $f^*f_!x\\to f_!x$ gives $u:x\\to f_!x$ over $f$. It is cocartesian: for each $z\\in E_v$, compare $\\operatorname{Map}_E(f_!x,z)$ with $\\operatorname{Map}_E(x,z)\\times^h_{\\operatorname{Map}_S(s,v)}\\operatorname{Map}_S(t,v)$. Both lie over $\\operatorname{Map}_S(t,v)$. Over $g:t\\to v$ the Cartesian mapping criterion (the opposite of the cocartesian criterion) identifies their fibers with $\\operatorname{Map}_{E_t}(f_!x,g^*z)$ and $\\operatorname{Map}_{E_s}(x,f^*g^*z)$. The comparison is the adjunction equivalence. Fiber detection over this SAME base proves the comparison is an equivalence, so the mapping criterion proves $u$ is cocartesian. This constructs all cocartesian lifts, making $p$ a bifibration. For the reverse construction, start with a cocartesian fibration with left-adjoint transports $f_!$ and choose right adjoints $f^*$. For $y\\in E_t$, compose the cocartesian lift $f^*y\\to f_!f^*y$ over $f:s\\to t$ with the counit $f_!f^*y\\to y$ to obtain $w:f^*y\\to y$ over $f$. Test the Cartesian mapping comparison $\\operatorname{Map}_E(z,f^*y)\\to\\operatorname{Map}_E(z,y)\\times^h_{\\operatorname{Map}_S(v,t)}\\operatorname{Map}_S(v,s)$ for $z\\in E_v$. Over $g:v\\to s$, cocartesian lifts identify its fibers with $\\operatorname{Map}_{E_s}(g_!z,f^*y)$ and $\\operatorname{Map}_{E_t}(f_!g_!z,y)$; the comparison is the adjunction equivalence. Fiber detection over $\\operatorname{Map}_S(v,s)$ and the Cartesian mapping criterion make $w$ Cartesian. This supplies every required Cartesian lift. No accessibility or presentability of $S$ is used.",
+   "text": "For clause (2), take a coherent diagram $H:S^{\\mathrm{op}}\\to\\operatorname{Cat}_\\infty$ whose arrows admit left adjoints. The opposite form of [lem-coef-cocartesian-straightening], in a universe containing the base and total categories, unstraightens it to a cartesian fibration $p:E\\to S$ with transports $f^*:E_t\\to E_s$ given by $H$. Each $f^*$ has a left adjoint by the hypothesis on $H$, so [lem-coef-cartesian-left-adjoint-transport] makes this same $p$ cocartesian as well, with covariant transport over $f$ equivalent to that left adjoint. Conversely, unstraighten a diagram $S\\to\\operatorname{Cat}_\\infty$ whose arrows admit right adjoints to a cocartesian fibration $q:X\\to S$ with transports $f_!$. By the horn definitions of [def-coef-infinity-fibrations], passing to opposites exchanges $\\Lambda^n_0$ with $\\Lambda^n_n$ and the edge $\\{0,1\\}$ with $\\{n-1,n\\}$, so $q^{\\mathrm{op}}:X^{\\mathrm{op}}\\to S^{\\mathrm{op}}$ is a cartesian fibration whose cartesian transport over $f^{\\mathrm{op}}$ is $(f_!)^{\\mathrm{op}}$; if $f_!\\dashv g$, then $g^{\\mathrm{op}}\\dashv(f_!)^{\\mathrm{op}}$ with unit and counit exchanged. Thus [lem-coef-cartesian-left-adjoint-transport] applied to $q^{\\mathrm{op}}$ makes $q^{\\mathrm{op}}$ cocartesian, that is, $q$ cartesian. Either kind of adjoint-valued diagram therefore gives a map which is both cartesian and cocartesian, without any presentability assumption on $S$ or $E$. The adjunction between its two transports is identified in step 5.",
    "uses": [
     "lem-coef-cocartesian-straightening",
-    "lem-coef-infinity-cocartesian-mapping-criterion",
-    "lem-coef-spaces-homotopy-fiber-detection"
+    "lem-coef-cartesian-left-adjoint-transport",
+    "def-coef-infinity-fibrations"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-    "place": "HTT Corollaries 5.2.2.4–5.2.2.5; the mapping-space proof of the local-to-global cocartesian criterion."
+    "place": "Corollary 5.2.2.5 and its opposite dual, applied to the two straightenings; the hidden local-to-global bifibration lemma is now a separate statement node."
    }
   },
   {
@@ -81,7 +81,7 @@
    }
   },
   {
-   "text": "For a small $C$ admitting $\\lambda$-small colimits, [lem-coef-ind-kappa-presentability] makes $\\operatorname{Ind}_\\lambda(C)$ presentable and $\\lambda$-accessible, with a fully faithful Yoneda functor $j$ preserving $\\lambda$-small colimits and taking values in compact objects. If $x$ is any $\\lambda$-compact object of this Ind category, choose its filtered presentation by representables from the same node. Apply [lem-coef-infinity-compact-stage-factorization] to $1_x$: it is a homotopy retract of some $j(c)$. Since $\\lambda$ is uncountable, every countable simplicial set is $\\lambda$-small. The new general retraction-colimit lemma therefore applies to $j$, proving $x\\simeq j(c\\prime)$ for some $c\\prime\\in C$. Hence $j$ identifies $C$ with the full compact subcategory. This is the exact point at which uncountability replaces the separate idempotent-completeness condition; no assertion for $\\lambda=\\omega$ is made.",
+   "text": "For a small $C$ admitting $\\lambda$-small colimits, [lem-coef-ind-kappa-presentability] makes $\\operatorname{Ind}_\\lambda(C)$ presentable and $\\lambda$-accessible, with a fully faithful Yoneda functor $j$ preserving $\\lambda$-small colimits and taking values in compact objects. If $x$ is any $\\lambda$-compact object of this Ind category, choose its filtered presentation by representables from the same node. Apply [lem-coef-infinity-compact-stage-factorization] to $1_x$: it is a homotopy retract of some $j(c)$. Since $\\lambda$ is uncountable, every countable simplicial set is $\\lambda$-small. Therefore [lem-coef-infinity-retract-colimit] applies to $j$, proving $x\\simeq j(c\\prime)$ for some $c\\prime\\in C$. Hence $j$ identifies $C$ with the full compact subcategory. This is the exact point at which uncountability replaces the separate idempotent-completeness condition; no assertion for $\\lambda=\\omega$ is made.",
    "uses": [
     "lem-coef-ind-kappa-presentability",
     "lem-coef-infinity-compact-stage-factorization",
@@ -121,7 +121,9 @@
  ],
  "proof_deps": [
   "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
   "def-coef-presentable-infinity-category",
+  "lem-coef-cartesian-left-adjoint-transport",
   "lem-coef-cocartesian-straightening",
   "lem-coef-compact-small-colimits",
   "lem-coef-ind-kappa-extension",
@@ -133,8 +135,7 @@
   "lem-coef-infinity-retract-colimit",
   "lem-coef-infinity-yoneda-presheaf-limits",
   "lem-coef-locally-small-infinity-size-calculus",
-  "lem-coef-presentable-infinity-adjoints",
-  "lem-coef-spaces-homotopy-fiber-detection"
+  "lem-coef-presentable-infinity-adjoints"
  ],
  "proof_origin": {
   "by": "agent",
@@ -207,7 +208,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-small-right-adjoint-diagram-compact-model",
@@ -239,17 +240,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-compact-model-pr-duality",
   "worker": "stage1",
-  "summary": "Eight-step proof of fixed-rank adjoint variance and compact-object/Ind equivalence. Reused compact-colimit closure, compact-stage factorization, size calculus, coherent straightening, the interval adjunction and Ind extension. Added only the general retract-closed-image theorem for countable-colimit-preserving full embeddings. Repaired the draft cycle by constructing the bifibration directly with the mapping criterion, rather than citing the downstream presentable-total-fibration theorem. Statement unchanged. Second reader expanded the reverse lift construction in step 4 and the Yoneda inverse and diagram calculations in step 5. Maintainer reader: added the missing definition citation [def-cbc-enhanced-cartesian-fibration] for the infinity category of infinity categories used to form Pr^L, Pr^R and Cat^rex; no mathematical change.",
-  "blueprint": "Proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim (supporting operadic-algebra presentability via the presentable Cartesian fibration theorem), through step 3 of lem-coef-small-right-adjoint-diagram-compact-model (the compact-object diagram F_0 and H = Ind^R F_0^op); GHN arXiv:1501.02161v3 proof of Theorem 10.3, final paragraph, and Definition 10.4.",
+  "summary": "Dedicated repair of the return in coord/returns/NP.md: the general Cartesian/cocartesian adjoint-transport criterion (HTT 5.2.2.5 and its dual) formerly proved inline in step 4 is now cited from the existing statement node lem-coef-cartesian-left-adjoint-transport (Kerodon 02FP), the dual direction by passage to opposites; the duplicate new node proposed by the delivery was dropped at maintainer review. Kept the statement, Lean record, all seven other proof steps, ancestry, inherited searches, and proof route unchanged. No new Mathlib leaf.",
+  "blueprint": "Proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim (supporting operadic-algebra presentability via the presentable Cartesian fibration theorem), through step 3 of lem-coef-small-right-adjoint-diagram-compact-model (the compact-object diagram F_0 and H = Ind^R F_0^op); GHN arXiv:1501.02161v3 proof of Theorem 10.3, final paragraph, and Definition 10.4. The existing adjoint-transport criterion lem-coef-cartesian-left-adjoint-transport supports clause (2); other realization steps retained.",
   "tool_uses": []
  },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q30-97dcec667",
-  "group": "Q30",
+  "reviewer": "NT-cc-NP-de626de69",
+  "group": "NP",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-97dcec667 (reviewer sub-agent of L); spot-checked: FIX: the item and new node are mathematically correct and the DAG is acyclic. One B3 fault fixed: the item statement used Cat_∞ without citing a definition node; added [def-cbc-enhanced-cartesian-fibration] to the statement and stmt_deps (fixes/dag/nodes/sec-six-functors/lem-coef-compact-model-pr-duality.json), with no mathematical change. Graph and route: all 15 cited nodes exist and are unmerged. The item is not in the closure of its own dependencies (558 nodes); the draft cycle through lem-coef-presentable-cartesian-fibration is gone. Every cited statement is in unit sk-prop-sf-biduality-general apart from the definition def-cbc-enhanced-diagrams-cones, so no tool_uses are needed. The parent lem-coef-small-right-adjoint-diagram-compact-model uses clauses (1)-(3) in steps 2 and 4 exactly as stated. Statement against HTT: (1) is HTT 5.5.7.2, (2) is HTT 5.5.3.4 at rank λ, (3) is HTT 5.5.7.8/5.5.7.10. The λ-uncountable hypothesis takes the place of HTT's idempotent completeness (Remark 5.5.7.9, Cor. 4.4.5.16), so nothing is weakened. Steps: Step 1 has all hypotheses of stage factorization, size calculus and compact-small-colimits, including the empty colimit. Step 2 meets the ind-kappa-extension hypotheses, and its Yoneda detection uses no large limit. Step 3 is correct in both directions. Step 4 is HTT 5.2.2.5 written out, with variance and fibers over the same Map_S(t,v) checked. Step 5 is HTT 5.5.3.4's Yoneda argument, and natural equivalences stay in the subcategory. Step 6 uses countable < λ and the new lemma. Steps 7 and 8 restrict and extend correctly; θ is fully faithful by steps 2 and 7, essentially surjective by step 6, and its quasi-inverse comes from full-essential-image. New node lem-coef-infinity-retract-colimit: true by HTT 4.4.5.7, 4.4.5.12 and 4.4.5.14. The coherent idempotent lifts along the full embedding; Idem has one nondegenerate simplex per dimension, so it is countable, and its preserved colimit is x. It holds for identity and terminal cases and fails without the preservation hypothesis (free modules inside all modules). It is statement-only, self-contained and smaller than the item, not a clause restatement. DAG grep for idempotent, retract, HTT 4.4.5 and 5.2.2.5 found no duplicate (nearest: lem-countable-coproducts-idempotent-complete, the size calculus, stage factorization, accessible-ind-colimit-extension, compact-generated-filtered-hull, compact-pushout-retract-descent). Mathlib hits are ordinary-category only, so it is not a leaf. Not split-owned, for the maintainer: the item's source URL host is a typo, math.ias.harvard.edu instead of www.math.ias.edu. HTT is not archived locally (WANTED); I read it from my own knowledge of the cited sections.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-de626de69 (reviewer sub-agent of L); spot-checked: I read the full item (8 steps), the new node and the statements of all 15 cited nodes, and checked them against HTT 5.2.2.5, 5.5.3.4, 5.5.7.2 and 5.5.7.8-10. The repair's idea is right: the inline general lemma that a cartesian fibration with left-adjoint transports is also cocartesian (and its dual) is taken out of step 4. But C5 fails. The existing node lem-coef-cartesian-left-adjoint-transport (Q48, same unit, Kerodon 02FP, unsplit) already states that a cartesian fibration of quasicategories whose f^* have left adjoints is cocartesian, with transport equal to L_f, and assumes no presentability. Clause (2) of the new node is its opposite. The only-if directions are unused. Its closure has 6 nodes and does not reach the item, so citing it makes no cycle. The new node is true (HTT 5.2.2.5; checked on Delta^1 with E_0=*, E_1=empty, where neither adjoint nor lift exists), but it duplicates the existing node, so I dropped it. Fixed in fixes/dag/nodes/sec-six-functors/lem-coef-compact-model-pr-duality.json: (1) step 4 now cites lem-coef-cartesian-left-adjoint-transport, and gets the dual by passing to q^op. By def-coef-infinity-fibrations, opposites swap Lambda^n_0 and Lambda^n_n, so the transport is (f_!)^op, and if f_! has right adjoint g then g^op is left adjoint to (f_!)^op. (2) Step 6's unbracketed 'new general retraction-colimit lemma' is now [lem-coef-infinity-retract-colimit]. (3) proof_deps and the split_report summary and blueprint text are updated. No reference to the dropped node remains. Steps 1-3 and 5-8 were checked hypothesis by hypothesis: lambda uncountable makes countable shapes lambda-small in step 6, filtered indices are nonempty, and every Yoneda detection uses small presentations. The statement is not weakened. All citations are in the unit, so no tool_uses. Not split-owned: the source URL host typo math.ias.harvard.edu.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
