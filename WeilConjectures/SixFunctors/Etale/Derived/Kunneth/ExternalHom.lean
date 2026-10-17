@@ -115,8 +115,16 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
-attribute [local instance] _root_.DerivedCategory.symmetricCategory
-  leftDerivedUpperStarBraidedFunctor
+variable (A) in
+/-- The derived braiding `AlgebraicGeometry.Etale.derivedBraidedCategory` is symmetric
+(`DerivedCategory.symmetricCategory`). Used so that the symmetric structure has syntactically
+the braiding of `AlgebraicGeometry.Etale.leftDerivedUpperStarBraidedFunctor`. -/
+local instance derivedSymmetricCategory (X : Scheme.{u}) :
+    SymmetricCategory (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) where
+  toBraidedCategory := derivedBraidedCategory A X
+  symmetry := (_root_.DerivedCategory.symmetricCategory _).symmetry
+
+attribute [local instance] leftDerivedUpperStarBraidedFunctor
 
 /-- **`β` under the exceptional inverse image, abstractly.** Let `g : P' ⟶ P` be the base change
 of `g₁ : Z₁' ⟶ Z₁` along `p₁ : P ⟶ Z₁`, with `p₁' : P' ⟶ Z₁'`, and let `p₂ : P ⟶ Z₂`. Given an

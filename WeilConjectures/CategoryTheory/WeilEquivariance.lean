@@ -35,8 +35,8 @@ object `ω` and an invertible Weil datum `φ_A` on `A` give the *dual Weil datum
 A ⊗ G [A, ω] ──φ_A⁻¹ ⊗ 1──▶ G A ⊗ G [A, ω] ──μ──▶ G (A ⊗ [A, ω]) ──G ev──▶ G ω ──φ_ω──▶ ω;
 ```
 for an autoequivalence `G` it is `G [A, ω] ≅ [G A, G ω] ──[G A, φ_ω]──▶ [G A, ω] ──[φ_A⁻¹, ω]──▶
-[A, ω]`, the first map being the internal-hom comparison of `G`. The evaluation `A ⊗ [A, ω] ⟶ ω` is equivariant
-(`CategoryTheory.MonoidalClosed.isWeilEquivariant_ev`), and the tensor-hom adjoint
+[A, ω]`, the first map being the internal-hom comparison of `G`. The evaluation
+`A ⊗ [A, ω] ⟶ ω` is equivariant (`CategoryTheory.MonoidalClosed.isWeilEquivariant_ev`), and the tensor-hom adjoint
 `B ⟶ [A, ω]` of an equivariant pairing `A ⊗ B ⟶ ω` is equivariant
 (`CategoryTheory.MonoidalClosed.isWeilEquivariant_curry`). No integral lattice of `φ_A` is
 needed: the construction only uses `φ_A` and its inverse.
@@ -51,7 +51,7 @@ dual Weil datum is invertible (`CategoryTheory.MonoidalClosed.isWeilEquivariant_
 
 namespace CategoryTheory
 
-open Category MonoidalCategory Functor
+open Category MonoidalCategory CategoryTheory.Functor
 
 /-- A morphism `u : M ⟶ N` is *equivariant* for Weil data `φ_M : G M ⟶ M` and `φ_N : G N ⟶ N`
 if `G u ≫ φ_N = φ_M ≫ u`. -/
