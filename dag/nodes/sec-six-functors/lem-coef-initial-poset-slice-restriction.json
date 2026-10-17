@@ -12,9 +12,115 @@
   "lem-coef-infinity-slice-right-fibration",
   "def-weil-pbc-trivial-kan-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=T^{\\mathrm{op}}$ and $B=N(P)$. Define reversal of a simplicial set by $(X^{\\mathrm{op}})_n=X_n$ and $X^{\\mathrm{op}}(\\alpha)=X(\\alpha^{\\mathrm{rev}})$, where $\\alpha^{\\mathrm{rev}}(j)=n-\\alpha(m-j)$ for $\\alpha:[m]\\to[n]$. Reversing a chain identifies $B^{\\mathrm{op}}$ with $N(T)$. From the ordered-block formula for joins, reversing the blocks gives $(X\\star Y)^{\\mathrm{op}}\\cong Y^{\\mathrm{op}}\\star X^{\\mathrm{op}}$: a mixed simplex $(x\\in X_u,y\\in Y_v)$ is sent to $(y,x)$ with the reversed operators. These identifications commute with maps and preserve pure-factor faces.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Elementary ordered-block reversal preparing the opposite of Proposition 4.3.6.4."
+   }
+  },
+  {
+   "text": "The vertex $t$ is greatest in $P$. For $i:\\{t\\}\\hookrightarrow B$, [lem-coef-infinity-cone-mono-right-anodyne] makes $e=i\\star\\operatorname{id}_{\\Delta^0}:\\{t\\}^{\\triangleright}\\hookrightarrow B^{\\triangleright}$ right anodyne. Let $a:\\{t\\}\\to\\{t\\}^{\\triangleright}$ and $b:B\\to B^{\\triangleright}$ be base inclusions, and let $q:\\{t\\}^{\\triangleright}\\to\\{t\\}$ be constant. Define $G:B^{\\triangleright}\\to B$ by sending the new cone vertex to $t$ and each old vertex to itself: on a chain ending in the new vertex, replace that vertex by $t$. This is a simplicial map since every element of $P$ is at most $t$; repetitions produce degenerate chains. Then $Gb=\\operatorname{id}_B$ and $qa=\\operatorname{id}_{\\{t\\}}$. The pairs $(a,b):i\\to e$ and $(q,G):e\\to i$ are arrow maps since $ea=bi$ and $Ge=iq$, and their composite is the identity. Thus $i$ is a retract of $e$, and is right anodyne by the retract closure in the cited statement.",
+   "uses": [
+    "lem-coef-infinity-cone-mono-right-anodyne",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02J5",
+    "place": "Corollary 4.7.3.22, (2) to (3), explicit retract for the nerve of a poset; cone input is Lemma 4.3.7.8 (0196)."
+   }
+  },
+  {
+   "text": "For the arbitrary inclusion $L\\hookrightarrow M$, apply the pushout-join clause of [lem-coef-infinity-anodyne-cocones] to $i:\\{t\\}\\hookrightarrow B$ from Step 2 and $L^{\\mathrm{op}}\\hookrightarrow M^{\\mathrm{op}}$. It gives an inner anodyne inclusion from $(\\{t\\}\\star M^{\\mathrm{op}})\\amalg_{\\{t\\}\\star L^{\\mathrm{op}}}(B\\star L^{\\mathrm{op}})$ to $B\\star M^{\\mathrm{op}}$. Reversal changes the horn $\\Lambda_i^n\\hookrightarrow\\Delta^n$ to $\\Lambda_{n-i}^n\\hookrightarrow\\Delta^n$; hence it preserves inner horns. It preserves pushouts, transfinite compositions and retract diagrams because it only reindexes simplicial operators and leaves the sets in each degree unchanged. The weakly saturated inner-anodyne class in that cited statement is therefore preserved. Applying Step 1 identifies the reversed inclusion with\n$$j:D=(L\\star N(T))\\amalg_{L\\star\\{t\\}}(M\\star\\{t\\})\\hookrightarrow M\\star N(T),$$\nso $j$ is inner anodyne. Both hypotheses of the cited join clause hold: $i$ is right anodyne and the second map is degreewise injective.",
+   "uses": [
+    "lem-coef-infinity-anodyne-cocones",
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Proposition 4.3.6.4, right-anodyne first-variable clause, with explicit reversal to the left-anodyne second-variable clause."
+   }
+  },
+  {
+   "text": "For any simplicial set $A$, the definition in [lem-coef-infinity-slice-right-fibration] identifies maps $A\\to\\mathcal E_{/p}$ with maps $A\\star N(T)\\to\\mathcal E$ restricting to $p$ on $N(T)$. Explicitly, from $f:A\\to\\mathcal E_{/p}$, send a mixed simplex $(a\\in A_u,z\\in N(T)_v)$ to the value of $f_u(a):\\Delta^u\\star N(T)\\to\\mathcal E$ on the mixed simplex $(\\operatorname{id}_{[u]},z)$; on the pure $N(T)$ summand use $p$, and on the pure $A$ summand use the source of $f$. Conversely, restrict the join map along $\\sigma\\star\\operatorname{id}$ for each $\\sigma:\\Delta^n\\to A$. The displayed simplicial operators make these constructions inverse and compatible with restriction. The pullback defining $\\mathcal E_{0,/p}$ adds exactly a source map $A\\to\\mathcal E_0$ whose composite with $\\mathcal E_0\\hookrightarrow\\mathcal E$ is the pure $A$ restriction.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018F",
+    "place": "Join-slice definition carried by lem-coef-infinity-slice-right-fibration; explicit mixed-simplex verification of its parameter interpretation."
+   }
+  },
+  {
+   "text": "By Step 4, $h$ gives $H:L\\star N(T)\\to\\mathcal E$ over $p$, and $v$ gives $V:M\\star\\{t\\}\\to\\mathcal E$ over $p(t)$. The identity $rh=v|_L$ says exactly $H|_{L\\star\\{t\\}}=V|_{L\\star\\{t\\}}$, including pure $L$ faces and higher simplices. Hence $H$ and $V$ define $w:D\\to\\mathcal E$ on the pushout in Step 3. Concretely, its degreewise union has intersection $L\\star\\{t\\}$, as seen by intersecting pure and mixed summands of the join formula. It contains all of $N(T)$ and all of $M$, and $w$ equals $p$ on the first and the source of $v$ on the second. This remains valid when $L$ or $M$ is empty, since $\\varnothing\\star N(T)=N(T)$.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.1.2.5 proof, printed pp.62-63: translate lifting data into the pushout join; here with reversed orientation and arbitrary parameter inclusion."
+   }
+  },
+  {
+   "text": "The quasicategory condition of [def-cbc-enhanced-diagrams-cones] extends a map into $\\mathcal E$ across every inner horn. The class of maps across which every map into $\\mathcal E$ extends contains isomorphisms and is closed under the operations defining inner anodyne maps in [lem-coef-infinity-anodyne-cocones]: across a pushout, extend on the attached summand and glue; along a transfinite composition, choose compatible extensions at successor stages and take their degreewise union at a limit stage; for an arrow retract $u\\to u'\\to u$, precompose the given domain map with the domain retraction, extend across $u'$, and restrict along the codomain section. Therefore $w$ extends across the inner anodyne $j$ of Step 3 to $W:M\\star N(T)\\to\\mathcal E$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-anodyne-cocones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/018J",
+    "place": "Inner-anodyne weak saturation, with the lifting-class closure argument supplied explicitly."
+   }
+  },
+  {
+   "text": "The extension $W$ equals $p$ on $N(T)$, equals $H$ on $L\\star N(T)$, and equals $V$ on $M\\star\\{t\\}$. Under the inverse construction of Step 4 it gives $\\widetilde v:M\\to\\mathcal E_{/p}$ with $\\widetilde v|_L=h$ and $r\\widetilde v=v$. Its pure $M$ restriction is exactly the source map of $v$, which already factors through $\\mathcal E_0$; pair this same source map with $\\widetilde v$ in the defining pullback to obtain $M\\to\\mathcal E_{0,/p}$. Thus every source simplex and the entire prescribed boundary are fixed, with no need to infer membership from vertices.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Dual of Proposition 2.1.2.5; pullback restriction of the source, as used in Proposition 5.3.5.15(a)."
+   }
+  },
+  {
+   "text": "Steps 3--7 solve the stated lifting problem for every inclusion $L\\subseteq M$. Taking $L=\\varnothing$ and $M=\\Delta^0$ proves vertex surjectivity. Taking $L=\\partial\\Delta^n$ and $M=\\Delta^n$ for each $n\\geq1$ proves all the other lifting clauses of [def-weil-pbc-trivial-kan-fibration]. Hence $r$ is a trivial Kan fibration over $\\mathcal E_0$. The construction uses only simplicial sets, the least-element property, and inner horn filling in $\\mathcal E$; it assumes no limits or colimits in $\\mathcal E$ or $\\mathcal E_0$.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NL, label definition-trivial-kan; dimension zero is vertex surjectivity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-infinity-anodyne-cocones",
+  "lem-coef-infinity-cone-mono-right-anodyne",
+  "lem-coef-infinity-slice-right-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 2.1.2.5, opposite orientation, and Proposition 5.3.5.15(a); explicit poset-cone retract from Kerodon 02J5 and 0196 and pushout join from Kerodon 018J. Online sources read; archival copies WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -99,10 +205,31 @@
    "results": "{\"t\": \"2026-10-17T01:13:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"cone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "No match. Loogle returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "joinFunctor|pushoutJoin|leftAnodyne|rightAnodyne",
+   "results": "{\"t\": \"2026-10-17T03:05:06Z\", \"tool\": \"grep\", \"query\": \"joinFunctor|pushoutJoin|leftAnodyne|rightAnodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No full match. Read Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean:38-96 and Quasicategory/Basic.lean:34-46. These give the general inner-anodyne class, its closure operations and inner horn filling; none constructs this ordered join or the least-vertex slice restriction. The redundant helper is removed in favor of existing DAG cone and pushout-join statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"innerAnodyneExtensions\"",
+   "results": "{\"t\": \"2026-10-17T03:05:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"innerAnodyneExtensions\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeInnerAnodyneExtensions\", \"SSet.instIsStableUnderCobaseChangeInnerAnodyneExtensions\", \"SSet.instIsStableUnderCoproductsInnerAnodyneExtensions\", \"SSet.instIsStableUnderRetractsInnerAnodyneExtensions\", \"SSet.instIsStableUnderTransfiniteCompositionInnerAnodyneExtensions\", \"SSet.instRespectsIsoInnerAnodyneExtensions\", \"SSet.instRespectsIsoStrongInnerAnodyneExtensions\", \"SSet.innerAnodyneExtensions\"], \"digest\": \"b97f00b65ea0e3df\"}",
+   "date": "2026-10-17",
+   "verdict": "No full match. Read Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean:38-96 and Quasicategory/Basic.lean:34-46. These give the general inner-anodyne class, its closure operations and inner horn filling; none constructs this ordered join or the least-vertex slice restriction. The redundant helper is removed in favor of existing DAG cone and pushout-join statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leibniz join of a monomorphism with a left horn inclusion is inner anodyne",
+   "results": "{\"t\": \"2026-10-17T03:05:08Z\", \"tool\": \"leanfinder\", \"query\": \"Leibniz join of a monomorphism with a left horn inclusion is inner anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.horn₃₁.ι₂_desc\", \"SSet.horn₃₂.ι₁_desc\", \"SSet.horn₃₁.ι₃_desc\", \"SSet.horn₃₂.ι₃_desc\", \"SSet.Quasicategory.hornFilling\"], \"digest\": \"fbc03b40823eb6d0\"}",
+   "date": "2026-10-17",
+   "verdict": "No full match. Read Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean:38-96 and Quasicategory/Basic.lean:34-46. These give the general inner-anodyne class, its closure operations and inner horn filling; none constructs this ordered join or the least-vertex slice restriction. The redundant helper is removed in favor of existing DAG cone and pushout-join statements."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-ind-finite-poset-realization",
@@ -131,5 +258,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-initial-poset-slice-restriction",
+  "worker": "stage1",
+  "summary": "Second reading removes the redundant left-anodyne join helper and writes eight steps using existing cone and pushout-join nodes. The proof constructs the opposite-poset retract, computes reversal on joins and horns, glues arbitrary parameter data, expands inner-anodyne extension closure, and preserves all source simplices in the defining pullback. Zero new nodes; the item statement and hypotheses are unchanged.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, paragraph beginning For K in D^b_c(X,R): inherited auxiliary presentable-category infrastructure for the derived coefficient adjunction. This split realizes the supporting HTT Proposition 5.3.5.15(a) initial-vertex restriction in finite-poset realization, including its prescribed-boundary relative form; this combinatorial fact is not literal text of the blueprint paragraph."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NG-e6dc68541",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-e6dc68541 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the full statements of the 5 cited nodes, both citers (ind-finite-poset-realization steps 4-6, symmetric-operadic-left-horn-filling step 4), the report and the source places. HTT 2.1.2.5/5.3.5.15(a) and Kerodon 02J5/0196/018J are cited by URL and not archived, so proof_origin is agent with WANTED recorded; step 8 cites Stacks 08NL, label definition-trivial-kan. The statement is unchanged and true. The least vertex is initial, so this is the left-anodyne orientation in the diagram variable of Delta^n * N(T). Tested on T={t}, on T={t<u} in an ordinary-category nerve (r is bijective, nerve is 2-coskeletal), on empty E_0, and on t only greatest (the statement fails there, so the hypothesis is used). The E_0 restriction is a pullback of the unrestricted map. Step 2: G is monotone because t is greatest in T^op, and the arrow retract identities hold; cone-mono's right-anodyne class is the same as anodyne-cocones'. Step 3: both hypotheses of the pushout-join clause hold, reversal sends Lambda^n_i to Lambda^n_{n-i} and is an automorphism of sSet, and the reversed domain is exactly D. Steps 4-7: the slice correspondence, the intersection (L*N(T)) cap (M*{t}) = L*{t}, closure of the extension class under pushout, transfinite composition and retract, and the E_0 source all check. Step 8 matches the trivial-Kan definition, with n=0 giving vertex surjectivity. All cited statements are in unit sk-prop-sf-biduality-general apart from one definition and one Mathlib leaf; no tool_uses; no SGA; no cycle. Zero new nodes: the snapshot confirms the helper was dropped. Duplicate search: lem-coef-cofinal-relative-join-slice-restriction (unsplit, 2026-10-17) is a generalization whose dual clause specializes to this item. It is not the same statement and is unproved, so I kept the item and noted the overlap for the maintainer. No fixes."
  }
 }

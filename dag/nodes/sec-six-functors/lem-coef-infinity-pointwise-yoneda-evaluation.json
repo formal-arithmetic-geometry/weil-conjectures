@@ -19,16 +19,115 @@
  },
  "kind": "statement",
  "title": "Infinity Yoneda evaluation at the identity",
- "statement": "Fix universes $\\mathcal U\\in\\mathcal U'$, and use quasicategories, mapping spaces and coherent transformations as in [def-cbc-enhanced-diagrams-cones]. Let $\\mathcal E$ be a $\\mathcal U'$-small quasicategory and have $\\mathcal U$-small mapping spaces, let $\\mathcal S$ denote the infinity category of $\\mathcal U$-small spaces, and let $a\\in\\mathcal E$. Write $h_a(x)=\\operatorname{Map}_{\\mathcal E}(x,a)$ for the coherent representable presheaf. For every coherent presheaf $P:\\mathcal E^{\\mathrm{op}}\\to\\mathcal S$, evaluation at $\\operatorname{id}_a$ induces an equivalence of spaces\n$$\\operatorname{Map}_{\\operatorname{Fun}(\\mathcal E^{\\mathrm{op}},\\mathcal S)}(h_a,P)\\simeq P(a),\\qquad \\alpha\\longmapsto\\alpha_a(\\operatorname{id}_a).$$\nIts inverse sends $p\\in P(a)$ to the coherent transformation whose component at $x$ is $f\\mapsto P(f)(p)$ for $f:x\\to a$. Thus for any coherent transformation $\\alpha:h_a\\to P$, its component maps are homotopic to $f\\mapsto P(f)(\\alpha_a(\\operatorname{id}_a))$, coherently in $x$ and in parameters in the mapping spaces. Dually, for $Q:\\mathcal E\\to\\mathcal S$ and $h^a(x)=\\operatorname{Map}_{\\mathcal E}(a,x)$, evaluation gives $\\operatorname{Map}_{\\operatorname{Fun}(\\mathcal E,\\mathcal S)}(h^a,Q)\\simeq Q(a)$ with inverse $q\\mapsto(f\\mapsto Q(f)(q))$. These are equivalences of full spaces of coherent transformations, not just bijections on homotopy classes.",
+ "statement": "Fix universes $\\mathcal U\\in\\mathcal U'$, and use quasicategories, mapping spaces and coherent transformations as in [def-cbc-enhanced-diagrams-cones]. Let $\\mathcal E$ be a $\\mathcal U'$-small quasicategory and have $\\mathcal U$-small mapping spaces, let $\\mathcal S$ denote the infinity category of $\\mathcal U$-small spaces, and let $a\\in\\mathcal E$. Form the concrete rigidification functors of [def-coef-infinity-category-of-spaces] for $\\mathcal E$ and $\\mathcal E^{\\mathrm{op}}$ first in $\\mathcal S_{\\mathcal U\\prime}$, the infinity category of $\\mathcal U\\prime$-small spaces. Each admits a coherent $\\mathcal S$-valued model: this means a functor into $\\mathcal S$ equipped with a coherent natural equivalence, after the inclusion $\\mathcal S\\hookrightarrow\\mathcal S_{\\mathcal U\\prime}$, to the corresponding concrete functor. Choose any such models; their distinguished identity points correspond under these equivalences to the singular identity vertices, up to the specified homotopies. Write $h_a(x)=\\operatorname{Map}_{\\mathcal E}(x,a)$ for the resulting coherent representable presheaf; mapping-space notation here denotes its value up to the comparison equivalence, rather than equality of underlying simplicial sets. For every coherent presheaf $P:\\mathcal E^{\\mathrm{op}}\\to\\mathcal S$, evaluation at $\\operatorname{id}_a$ induces an equivalence of spaces\n$$\\operatorname{Map}_{\\operatorname{Fun}(\\mathcal E^{\\mathrm{op}},\\mathcal S)}(h_a,P)\\simeq P(a),\\qquad \\alpha\\longmapsto\\alpha_a(\\operatorname{id}_a).$$\nIts inverse sends $p\\in P(a)$ to the coherent transformation whose component at $x$ is $f\\mapsto P(f)(p)$ for $f:x\\to a$. Thus for any coherent transformation $\\alpha:h_a\\to P$, its component maps are homotopic to $f\\mapsto P(f)(\\alpha_a(\\operatorname{id}_a))$, coherently in $x$ and in parameters in the mapping spaces. Dually, for $Q:\\mathcal E\\to\\mathcal S$ and $h^a(x)=\\operatorname{Map}_{\\mathcal E}(a,x)$, evaluation gives $\\operatorname{Map}_{\\operatorname{Fun}(\\mathcal E,\\mathcal S)}(h^a,Q)\\simeq Q(a)$ with inverse $q\\mapsto(f\\mapsto Q(f)(q))$. These are equivalences of full spaces of coherent transformations, not just bijections on homotopy classes.",
  "source": {
   "document": "https://kerodon.net/tag/03M5",
   "place": "Kerodon Proposition 8.3.1.3 (03M5), with evaluation defined in Notation 8.3.1.2 (03M4); apply also to the opposite category. Definition 5.6.6.1 (038A) gives the action on a universal element, and Theorem 5.6.6.13 (038J) supplies the coherent representable functor. Read online; not archived in literature/. These are Kerodon identifiers; no corresponding Stacks tag states this infinity-categorical assertion."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces"
  ],
- "proof": null,
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Work first covariantly in $C$, with $a\\in C$, and take the actual rigidification functor $H$ of [def-coef-infinity-category-of-spaces]. Put $A=\\mathfrak C[C]$, $M_x=\\operatorname{Map}^{R}_C(a,x)$, and let $\\eta\\in H(a)$ be the singular identity vertex. Let $\\lambda_x$ be the identity-action cocone and $e_x:M_x\\to H(x)$ its point map, exactly as specified in [lem-coef-rigidification-identity-action]. That lemma identifies the actual map by the equation\n$$[e_x][p_{M_x}]=[u_{a,x}][\\theta_{C,a,x}].$$\nBoth $p_{M_x}$ and $\\theta_{C,a,x}$ are weak homotopy equivalences by [lem-coef-pinched-rigidification-resolution]; $u_{a,x}$ is a weak homotopy equivalence for the arbitrary simplicial set $A(a,x)$ by [lem-cbc-realization-singular-unit-weak]. Hence $[e_x]$ is invertible. The weak-equivalence clause of [lem-coef-rigidification-identity-action] asserts this conclusion for the actual simplicial point map $e_x$. As spaces are considered up to weak homotopy equivalence, it is an equivalence of full spaces. This proves that $\\eta$ is a universal identity element for the defined functor. It is a theorem proved here, not an additional hypothesis or a change of the definition. Take the value universe here to be $\\mathcal U\\prime$, so the concrete $H$ is defined: its rigidification is a colimit over a $\\mathcal U\\prime$-small simplex category and all its mapping simplicial sets and singular realizations are $\\mathcal U\\prime$-small. Local smallness does not imply that these concrete values are $\\mathcal U$-small. Step 5 will construct coherent smaller models using the proved equivalences $e_x$ and $\\mathcal U$-small Kan complexes weakly equivalent to $M_x$.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-rigidification-identity-action",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-cbc-realization-singular-unit-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.4 opening paragraph and Proposition 2.2.4.1; Section 5.1.3 construction. Identity-action formula and two-out-of-three expanded explicitly."
+   }
+  },
+  {
+   "text": "For $x\\in C$, [lem-coef-infinity-slice-right-fibration] identifies the strict fiber $\\{a\\}\\times_C C_{/x}$ with $M_x$. Its universal-arrow family is the right-pinch prism of [lem-coef-infinity-pinch-comparison]. Thus the local cocone induced by the point $\\eta:*\\to H(a)$ is exactly $\\lambda_x$ of [lem-coef-rigidification-identity-action], not an arbitrarily chosen cocone with apex $H(x)$. Step 1 proves that its point map $e_x$ is a weak equivalence. By [lem-coef-space-point-cocone-criterion], this actual cocone is colimiting. Apply that criterion with $\\mathcal W=\\mathcal U\\prime$. Here $M_x\\subseteq C_{n+1}$ degreewise is $\\mathcal U\\prime$-small because $C$ is, while $H(x)$ is $\\mathcal U\\prime$-small by Step 1; no $\\mathcal U$-smallness of $M_x$ is used in this step. No colimit indexed by the whole ambient category is used.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-rigidification-identity-action",
+    "lem-coef-space-point-cocone-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03M9",
+    "place": "Lemma 8.3.1.7, proof: actual identity-action cocone on the mapping-space index; with Example 7.1.2.10."
+   }
+  },
+  {
+   "text": "Take $K=\\Delta^0$, $\\delta:K\\to C$ the vertex $a$, $F_0=*$, $F=H$, and $\\beta=\\eta$ in [lem-coef-pointwise-lan-mapping-property]. Its local indexing object at $x$ is exactly $M_x$, and its local cocone is the one proved colimiting in Step 2. For every $Q:C\\to\\mathcal S_{\\mathcal U\\prime}$, the conclusion gives an equivalence\n$$\\operatorname{Map}_{\\operatorname{Fun}(C,\\mathcal S_{\\mathcal U\\prime})}(H,Q)\\longrightarrow\\operatorname{Map}_{\\mathcal S_{\\mathcal U\\prime}}(*,Q(a)),\\qquad\\alpha\\longmapsto\\alpha_a\\eta.$$\nThe case $K=\\Delta^0$ of [lem-coef-space-point-cocone-criterion] identifies the target with $Q(a)$ by its family-of-points map. The resulting equivalence is consequently the specified evaluation $\\Phi(\\alpha)=\\alpha_a(\\operatorname{id}_a)$. All functor categories are formed in a universe containing $\\mathcal U'$, as permitted by the cited theorem; this establishes evaluation first for the concrete larger-valued functor, before the descent in Step 5.",
+   "uses": [
+    "lem-coef-pointwise-lan-mapping-property",
+    "lem-coef-space-point-cocone-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03M5",
+    "place": "Proposition 8.3.1.3, proof via Lemma 8.3.1.7 and Proposition 7.3.6.1; Notation 8.3.1.2 specifies evaluation."
+   }
+  },
+  {
+   "text": "Let $\\Phi$ be the full-space evaluation equivalence from Step 3, and choose a homotopy inverse $s$ with both inverse homotopies. For a transformation $\\alpha:H\\to Q$, its naturality, evaluated on the right-pinch arrow family and the point $\\eta$, gives a homotopy of maps on the whole space $M_x$:\n$$\\alpha_x\\circ e_x\\simeq\\bigl(f\\longmapsto Q(f)(\\alpha_a(\\eta))\\bigr).$$\nHere $e_x$ is the comparison of [lem-coef-rigidification-identity-action]. It is not being replaced by a right-pinched composition law on the different complex $H(x)$. To check the stated homotopy with parameters, first apply the natural right-pinch map of [lem-coef-infinity-pinch-comparison] in $\\operatorname{Fun}(C,\\mathcal S_{\\mathcal U\\prime})$. This sends the full right-pinched transformation space to the fixed-endpoint arrow space; its internal evaluation supplies a map $C\\times T\\times\\Delta^1\\to\\mathcal S_{\\mathcal U\\prime}$ for the whole parameter space $T$. Evaluate it on the prism $M_x\\times\\Delta^1\\to C$, and evaluate its constant starting value on $\\eta$. The square is the simplicial map $(m,s,t)\\mapsto\\alpha(j(m,s),t)$ from $M_x\\times\\Delta^1\\times\\Delta^1$ to $\\mathcal S$, where $j$ is the pinch prism. Its boundaries at $t=0,1$ are respectively the $H$-action and $Q$-action, and at $s=0,1$ they are respectively the constant families $\\alpha_a$ and $\\alpha_x$. The two triangle faces of the square compare its two composite paths. Precomposing their common starting point with $\\eta$ gives exactly the two maps in the displayed homotopy. For an arbitrary simplex of the transformation mapping space, do the same with that simplex as an additional factor. The evaluation and restriction maps of [def-cbc-enhanced-diagrams-cones] commute with faces and degeneracies, so these are restrictions of one parameterized naturality square. The point-family equivalence of [lem-coef-space-point-cocone-criterion] turns it into the displayed homotopy of Kan-space maps, compatibly with every parameter. Step 1 makes $e_x$ an equivalence and identifies its identity point. Substituting $\\alpha=s(q)$ and using $\\Phi s\\simeq\\operatorname{id}$ therefore says that the inverse transformation has component $f\\mapsto Q(f)(q)$, where the mapping-space notation for the value of the representable is interpreted through the proved $e_x$. The other inverse homotopy $s\\Phi\\simeq\\operatorname{id}$ proves reconstruction for every $\\alpha$. This produces the inverse on the whole space $Q(a)$, rather than choosing transformations separately for its vertices, and proves the larger-valued covariant clause with all coherence parameters.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-rigidification-identity-action",
+    "lem-coef-space-point-cocone-criterion",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/038A",
+    "place": "Definition 5.6.6.1 specifies action on an element; parameterized naturality gives the inverse formula once Step 3 proves evaluation is an equivalence."
+   }
+  },
+  {
+   "text": "Descend to the stipulated smaller value universe without asserting that the concrete $H(x)$ has a small underlying set. Let $\\iota:\\mathcal S_{\\mathcal U}\\to\\mathcal S_{\\mathcal U\\prime}$ be inclusion. By the coherent-nerve definition in [def-coef-infinity-category-of-spaces], it is a full simplicial subset: every enriched simplex whose vertices are smaller Kan complexes has exactly the same enriched Hom data in either universe. Hence its right-pinched mapping spaces are literally identical, so it is fully faithful. For each $x$, the map $e_x:M_x\\to H(x)$ of Step 1 is a weak equivalence between Kan complexes ($M_x$ is Kan by [lem-coef-infinity-pinch-comparison]). We first produce a $\\mathcal U$-small Kan complex $Y_x$ and a weak equivalence $g_x:Y_x\\to H(x)$; the mapping-space hypothesis of the statement concerns $\\operatorname{Map}_{\\mathcal E}$, and is not assumed to make $M_x$ itself a $\\mathcal U$-small simplicial set. Covariant case $C=\\mathcal E$: the hypothesis gives a $\\mathcal U$-small Kan complex $Y_x$ and a weak equivalence between $Y_x$ and $M_x=\\operatorname{Map}_{\\mathcal E}(a,x)$ (take $Y_x=M_x$ when $M_x$ is literally $\\mathcal U$-small); if it points from $M_x$ to $Y_x$, replace it by the simplicial inverse of [lem-cbc-kan-whitehead-inverse], which is again a weak equivalence. Call the resulting map $k_x:Y_x\\to M_x$. Contravariant case $C=\\mathcal E^{\\mathrm{op}}$: take a $\\mathcal U$-small Kan complex $Y'$ with a weak equivalence $Y'\\to\\operatorname{Map}_{\\mathcal E}(x,a)$ as just described, and put $Y_x=Y'^{\\mathrm{op}}$. Order reversal carries $\\Lambda^n_i$ to $\\Lambda^n_{n-i}$, so opposites of Kan complexes are Kan; the barycentric reversal $|T^{\\mathrm{op}}|\\cong|T|$ written out in Step 6 shows that opposites of weak equivalences are weak equivalences, and opposites of simplicial homotopies are simplicial homotopies because $(\\Delta^1)^{\\mathrm{op}}\\cong\\Delta^1$. Interval reversal gives $U_{\\mathcal E^{\\mathrm{op}}}(a,x)=U_{\\mathcal E}(x,a)^{\\mathrm{op}}$ (Step 6). Compose $Y'^{\\mathrm{op}}\\to\\operatorname{Map}_{\\mathcal E}(x,a)^{\\mathrm{op}}\\xrightarrow{j^{\\mathrm{op}}}U_{\\mathcal E^{\\mathrm{op}}}(a,x)$ with a homotopy inverse of the homotopy equivalence $j_{\\mathcal E^{\\mathrm{op}},a,x}:M_x\\to U_{\\mathcal E^{\\mathrm{op}}}(a,x)$; both $j$ maps are those of [lem-coef-infinity-pinch-comparison]. This gives a weak equivalence $k_x:Y_x\\to M_x$. In both cases put $g_x=e_xk_x$, a weak equivalence of Kan complexes with $\\mathcal U$-small source. By [lem-cbc-kan-whitehead-inverse] it has a simplicial inverse and two homotopies. Apply [lem-cbc-kan-mapping-homotopy-invariance] to the identity of each source to see that the enriched mapping complexes are Kan. Reverse the homotopy edges with outer horn fillers in these Kan complexes. The reversed homotopies give an equivalence edge in $\\mathcal S_{\\mathcal U\\prime}$ directly: for vertices $(Y_x,H(x),Y_x)$ the enriched $(0,2)$ Hom of $\\mathfrak C[\\Delta^2]$ is $\\Delta^1$, and the reversed homotopy from the identity to the composite supplies its map into $\\operatorname{Fun}(Y_x,Y_x)$; the other homotopy supplies the triangle on $(H(x),Y_x,H(x))$. Thus $H$ lands in the full replete essential image $\\mathcal T$ of $\\iota$. Apply [lem-coef-infinity-full-essential-image], in auxiliary universes containing these categories, to obtain a coherent quasi-inverse $L:\\mathcal T\\to\\mathcal S_{\\mathcal U}$ and equivalences. Put $h^a=LH$ and write $v:\\iota h^a\\simeq H$ for the resulting equivalence. This constructs the small model rather than choosing its values independently. A quasi-inverse of $v_a$, applied to $\\eta$, gives the distinguished point $\\eta_0\\in h^a(a)$ and a homotopy $v_a(\\eta_0)\\simeq\\eta$. For every $Q:C\\to\\mathcal S_{\\mathcal U}$, the internal-hom definition in [def-cbc-enhanced-diagrams-cones] gives the equality of full transformation spaces for two smaller-valued diagrams: every simplex of $C\\times\\Delta^n\\to\\mathcal S_{\\mathcal U\\prime}$ with these fixed-endpoint diagrams has all its vertices in the full smaller subcategory. Precomposition with $v$ and its inverse therefore identifies the larger evaluation equivalence of Step 3 with the required smaller one for $h^a,Q$, since evaluation at $\\eta_0$ followed by $v_a$ is evaluation at $\\eta$ up to the specified homotopy. To verify this on full mapping spaces, let $w$ be an inverse of $v$ in the functor quasicategory. The two composite precomposition maps are homotopic to precomposition by $vw$ and $wv$ by associativity in [lem-coef-infinity-mapping-composition], and then to identity maps by the inverse triangles and its unit laws. Thus actual composition with $v$ and $w$ gives the inverse maps and both homotopies. For any other small model with a specified equivalence to $H$, the same composition gives the same conclusion; uniqueness of a choice is not assumed. Applying that equivalence to the displayed homotopy of Step 4 yields precisely $f\\mapsto Q(f)(q)$, with its full parameters, for the small-model covariant clause.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-kan-whitehead-inverse",
+    "lem-coef-infinity-full-essential-image",
+    "lem-cbc-kan-mapping-homotopy-invariance",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01JX",
+    "place": "Theorem 4.8.4.1 on the full essential image; the universe inclusion is checked directly on enriched simplices. Agent-written size descent following the concrete comparison, preserving the original small value universe."
+   }
+  },
+  {
+   "text": "For the contravariant clause apply Steps 1--5 to $C=\\mathcal E^{\\mathrm{op}}$, $Q=P$, and the object $a$. Opposite mapping-space conventions agree as spaces as follows. Put $U_D(x,y)=\\{x\\}\\times_D\\operatorname{Fun}(\\Delta^1,D)\\times_D\\{y\\}$. Reversal of the interval gives $U_{\\mathcal E^{\\mathrm{op}}}(a,x)=U_{\\mathcal E}(x,a)^{\\mathrm{op}}$. By [lem-coef-infinity-pinch-comparison] both right-pinched models map into these arrow spaces by natural homotopy equivalences. For a Kan complex $T$, reversal of barycentric coordinates gives a natural homeomorphism $|T^{\\mathrm{op}}|\\cong|T|$: it sends $[t,(r_0,\\ldots,r_n)]$ to $[t,(r_n,\\ldots,r_0)]$. The realization identifications of [def-cbc-enhanced-diagrams-cones] make this well-defined, and it is its own inverse. It follows that $\\operatorname{Map}_{\\mathcal E^{\\mathrm{op}}}(a,x)$ models $\\operatorname{Map}_{\\mathcal E}(x,a)$ as a space. The coherent representable is the one on the opposite category, before taking this pointwise comparison; reversing the composition diagrams turns its postcomposition action into precomposition. In particular its distinguished point is still $\\operatorname{id}_a$. Therefore the small-model evaluation equivalence of Step 5 becomes\n$$\\operatorname{Map}_{\\operatorname{Fun}(\\mathcal E^{\\mathrm{op}},\\mathcal S)}(h_a,P)\\simeq P(a).$$\nThe coherent small model on the opposite category is defined by Step 5, with its identity point corresponding to the singular identity. The arrow $a\\to x$ in $\\mathcal E^{\\mathrm{op}}$ is $f:x\\to a$ in $\\mathcal E$, so the Step 4 inverse reads $p\\mapsto(f\\mapsto P(f)(p))$, with the same two inverse homotopies and simplicial parameter coherence. Only equivalences of models are used, not a strict identification of left- and right-pinched simplicial sets.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03MY",
+    "place": "Remark 8.3.3.6, opposite duality; explicit interval and barycentric reversal checks retained."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "lem-cbc-kan-mapping-homotopy-invariance",
+  "lem-cbc-kan-whitehead-inverse",
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-pinched-rigidification-resolution",
+  "lem-coef-pointwise-lan-mapping-property",
+  "lem-coef-rigidification-identity-action",
+  "lem-coef-space-point-cocone-criterion"
+ ],
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -183,10 +282,59 @@
    "results": "{\"t\": \"2026-10-16T20:12:02Z\", \"tool\": \"leanfinder\", \"query\": \"Enriched Yoneda equivalence for homotopy coherent simplicial functors with Kan complex values\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.yonedaEquiv\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv\", \"SSet.hoFunctor.unitHomEquiv\", \"SSet.yonedaEquiv_comp\", \"CategoryTheory.Enriched.FunctorCategory.homEquiv\", \"CategoryTheory.enrichedNatTransYonedaTypeIsoYonedaNatTrans\", \"CategoryTheory.enrichedFunctorTypeEquivFunctor\"], \"digest\": \"7e33263a1ceb6064\"}",
    "date": "2026-10-16",
    "verdict": "no match: independent second reading. Ordinary Yoneda and its inverse formula concern Category-valued hom sets and Type-valued presheaves (CategoryTheory/Yoneda.lean:724-745); the simplicial hom equivalence concerns vertices of strict simplicial enrichment (SimplicialCategory/Basic.lean:65); Sites/Monoidal.lean:51 assumes an ordinary indexing category. None supplies coherent infinity-functor mapping spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda equivalence for functors enriched in Kan complexes evaluating natural transformations on an identity morphism",
+   "results": "{\"t\": \"2026-10-17T01:19:41Z\", \"tool\": \"leanfinder\", \"query\": \"Yoneda equivalence for functors enriched in Kan complexes evaluating natural transformations on an identity morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaEquiv_apply\", \"CategoryTheory.Enriched.FunctorCategory.functorHomEquiv_id\", \"SSet.yonedaEquiv\", \"SSet.yonedaEquiv_comp\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv\", \"SSet.stdSimplex.yonedaEquiv_map\", \"CategoryTheory.enrichedNatTransYonedaTypeIsoYonedaNatTrans\"], \"digest\": \"8317a6ea0392f653\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ordinary Yoneda.lean:724-745,808-813 and Quasicategory/Basic.lean:30-66. The returned declarations concern ordinary hom sets, ordinary enriched functor categories, or simplex Yoneda, not full transformation spaces of space-valued infinity functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"yonedaEvaluation\"",
+   "results": "{\"t\": \"2026-10-17T01:19:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"yonedaEvaluation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaEvaluation\", \"CategoryTheory.coyonedaEvaluation\", \"CategoryTheory.coyonedaEvaluation_map_down\", \"CategoryTheory.yonedaEvaluation_map_down\"], \"digest\": \"c6e81187a8ce23c4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ordinary Yoneda.lean:724-745,808-813 and Quasicategory/Basic.lean:30-66. The returned declarations concern ordinary hom sets, ordinary enriched functor categories, or simplex Yoneda, not full transformation spaces of space-valued infinity functors."
+  },
+  {
+   "tool": "grep",
+   "query": "yoneda|representable|unstraighten",
+   "results": "{\"t\": \"2026-10-17T01:19:40Z\", \"tool\": \"grep\", \"query\": \"yoneda|representable|unstraighten\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\"], \"digest\": \"700e11c067c34ace\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read ordinary Yoneda.lean:724-745,808-813 and Quasicategory/Basic.lean:30-66. The returned declarations concern ordinary hom sets, ordinary enriched functor categories, or simplex Yoneda, not full transformation spaces of space-valued infinity functors."
+  },
+  {
+   "tool": "grep",
+   "query": "essImage.*liftFunctor|liftFunctor.*essImage|essentially.*small",
+   "results": "{\"t\": \"2026-10-17T02:58:30Z\", \"tool\": \"grep\", \"query\": \"essImage.*liftFunctor|liftFunctor.*essImage|essentially.*small\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: EssentialImage.lean:177-194 uses ordinary Category and NatIso, not quasicategories and coherent equivalences; the simplicial-set hits are homotopy-category/ordinary-nerve or universe-lift constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"essImage\" \"liftFunctor\"",
+   "results": "{\"t\": \"2026-10-17T02:58:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"essImage\\\" \\\"liftFunctor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  \\\"essImage\\\"\\nbut this term has type\\n  String\\n\\nNote: Expected a function because this term is being applied to the argument\\n  \\\"liftFunctor\\\"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "query parse failure, not a no-match result; corrected query was run separately and its ordinary-category hits were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy coherent diagram of essentially small Kan complexes is naturally equivalent to a diagram of small Kan complexes through change of universe",
+   "results": "{\"t\": \"2026-10-17T02:58:30Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopy coherent diagram of essentially small Kan complexes is naturally equivalent to a diagram of small Kan complexes through change of universe\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.OneTruncation₂.nerveEquiv\", \"SSet.hoFunctor.terminalIso\", \"SSet.hoFunctor.unitHomEquiv\", \"SSet.uliftFunctor\", \"SSet.Truncated.HomotopyCategory.descOfTruncation\", \"SSet.hoFunctor\", \"SSet.Truncated.uliftFunctor\"], \"digest\": \"d123784def5467fe\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: EssentialImage.lean:177-194 uses ordinary Category and NatIso, not quasicategories and coherent equivalences; the simplicial-set hits are homotopy-category/ordinary-nerve or universe-lift constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"essImage.liftFunctor\"",
+   "results": "{\"t\": \"2026-10-17T02:58:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"essImage.liftFunctor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.essImage.liftFunctor\", \"CategoryTheory.Functor.essImage.liftFunctorCompIso\", \"CategoryTheory.Functor.essImage.liftFunctor_obj\", \"CategoryTheory.Functor.essImage.liftFunctorCompIso_hom_app\", \"CategoryTheory.Functor.essImage.liftFunctorCompIso_inv_app\", \"CategoryTheory.Functor.essImage.liftFunctor_map\"], \"digest\": \"a044a45c84abceec\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: EssentialImage.lean:177-194 uses ordinary Category and NatIso, not quasicategories and coherent equivalences; the simplicial-set hits are homotopy-category/ordinary-nerve or universe-lift constructions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-pointwise-adjoint-criterion",
@@ -207,5 +355,44 @@
    "missing": []
   }
  },
- "lead_note": "Q09 maintenance 2026-10-17: the former proof reduces pointwise Yoneda to lem-coef-infinity-yoneda-evaluation, but the repaired coherent evaluation uses model/classification foundations that require this pointwise theorem. That reduction is circular in the repaired graph. The complete old split and review are archived at coord/reports/maintenance/Q09-pointwise-yoneda-before.json. Stage 1 is reopened; prove this pointwise foundation independently of the coherent Yoneda item and of any prerequisite that reaches this foundation. Read the route note; the assertion and its universe hypotheses are unchanged."
+ "lead_note": "Q09 maintenance 2026-10-17: the former proof reduces pointwise Yoneda to lem-coef-infinity-yoneda-evaluation, but the repaired coherent evaluation uses model/classification foundations that require this pointwise theorem. That reduction is circular in the repaired graph. The complete old split and review are archived at coord/reports/maintenance/Q09-pointwise-yoneda-before.json. Stage 1 is reopened; prove this pointwise foundation independently of the coherent Yoneda item and of any prerequisite that reaches this foundation. Read the route note; the assertion and its universe hypotheses are unchanged.",
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/03M5",
+  "place": "Pointwise Kan-extension route of Proposition 8.3.1.3. Step 1 supplies its universal-element hypothesis for the project-defined rigidification functor using HTT Section 2.2.4 and the singular-realization unit. The explicit action comparison is isolated as a smaller statement-only lemma, with its argument in report.md; no model/classification or free-cocompletion theorem is used. The second reader supplies the coherent small-model descent through the existing full-essential-image theorem, instead of assuming concrete rigidification values are small."
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-pointwise-yoneda-evaluation",
+  "worker": "stage1",
+  "summary": "Second-reader repair: identity-action comparison, actual pointwise cocones, Kan-extension evaluation, parameterized inverse, coherent small-model descent, and opposite duality. Three new statement-only inputs; no Mathlib leaves. STATEMENT-DISPUTED size issue corrected explicitly: local smallness alone does not make rigidification values small; the same original small value universe is recovered using the existing full-essential-image theorem.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint: identity evaluation extracts the universal finite-coefficient adjunction map. New foundational inputs realize this place without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-realization-singular-unit-weak",
+    "why": "The characteristic-simplex unit for arbitrary simplicial sets supplies the concrete weak equivalence A(a,x) -> Sing|A(a,x)| in the pointwise comparison. This generic topological theorem does not replace a geometric step of the biduality unit and no node in that unit states this particular unit theorem."
+   },
+   {
+    "node": "lem-cbc-kan-whitehead-inverse",
+    "why": "Generic Kan Whitehead inverse turns the proved weak equivalence from a small mapping space into equivalence triangles in the larger space category, needed to descend the concrete rigidification functor to a coherent small-valued model. Its closure is independent of this item."
+   },
+   {
+    "node": "lem-cbc-kan-mapping-homotopy-invariance",
+    "why": "Its Kan assertion for internal mapping complexes allows reversing the two Whitehead homotopies before inserting the equivalence triangles in the coherent nerve. Applied to identity maps only; no colimit or geometric route replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-cbc-kan-whitehead-inverse",
+  "lem-cbc-kan-mapping-homotopy-invariance"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-42e601a7a",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-42e601a7a (reviewer sub-agent of L); spot-checked: I read the whole item, all three new nodes, every cited statement, the unit record and paragraph 2 of the main-20261015 proof of prop-coef-integral-exceptional-adjoint. HTT and the Kerodon tags are not archived, and the delivery records WANTED lines for them. I checked the cited facts against the standard results: HTT 2.2.4.1 (Hom^R vs C[S] via the Q-resolution); pointwise Kan extensions have the mapping-space universal property; the colimit of the constant point diagram is |K|; the full essential image; and Yoneda via pointwise Kan extensions. The statement was changed by the second reader, contrary to the report's first section and the Q09 lead_note. I accept the change. I verified the counterexample: for the poset a<i<x with |I| not U-small, C[N P](a,x) has |I| vertices, so the concrete Sing|C[C](a,x)| is not U-small, and def-coef-infinity-category-of-spaces gives no S_U-valued representable for a U'-small E. The corrected statement keeps both universes, both variances, the evaluation and inverse formulas and parameter coherence, adds the existence of small models and holds for every model. All five direct citers are satisfied. Steps 1-4 and 6 check out: the p/theta/u weak equivalences, with no Kan assumption on A(a,x); the slice fiber equals M_x; the prism equals the beta-induced cocone; the Kan-extension node with K=Delta^0, F0=*, beta=eta; the parameterized naturality square; and interval and barycentric reversal. Fault found (E1): Step 5 used 'M_x U-small' literally. For E^op, M_x=Map^R_{E^op}(a,x) is a left-pinched object of E, and the hypothesis on Map_E does not make it a U-small simplicial set; under the project's 'equivalent to a small space' reading it fails even covariantly. Step 2 made the same unneeded claim. I repaired this in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-pointwise-yoneda-evaluation.json, changing only proof text and adding pinch-comparison to Step 5's uses (proof_deps unchanged). Step 5 now builds a U-small Kan complex Y_x with a weak equivalence k_x:Y_x->M_x: from the hypothesis in the covariant case, and in the op case through Y'^op, j^op, U_{E^op}(a,x)=U_E(x,a)^op and a homotopy inverse of j. It then runs the Whitehead and equivalence-edge construction on e_x k_x. Step 2 now uses only U'-smallness. New nodes: none is a duplicate or a restated clause of the item, and each is statement-only, self-contained and has its three search kinds recorded. rigidification-identity-action (tested on Delta^0, discrete with x!=a, BG and the thin poset) is true and strictly smaller than the item, with no transformation-space claim; space-point-cocone-criterion (tested on K empty, point and S^1) is true and distinct from left-fibration-colimit-realization, which needs space-transport classification that leads back to the item; pointwise-lan-mapping-property (tested on K empty and K=Delta^0) is true. The overlay closure has 290 nodes, with no missing or merged node and no cycle, and no dependency reaches the item. I accept the three declared tool_uses (singular-unit-weak, kan-whitehead-inverse, kan-mapping-homotopy-invariance) as generic black boxes outside the sk-prop-sf-cbc route. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ }
 }
