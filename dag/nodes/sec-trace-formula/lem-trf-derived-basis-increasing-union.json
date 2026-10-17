@@ -11,9 +11,149 @@
   "def-pc-scheme",
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $\\lambda=0$, the covering equation gives $X=\\varnothing$, and the zero complex is the required object. Hence assume $\\lambda>0$. Regard each open as its open subscheme with the restricted structure sheaf. The site of its open subsets is small, since the opens form a subset of the power set of its underlying set. Every object of the derived category is represented by a complex, and [prop-pur-kinjective-resolutions-exist] on this site supplies a K-injective representative $I_\\alpha$ of $K_\\alpha$. Fix these identifications. Restriction to any smaller open is exact by [lem-sc-derived-open-restriction-adjunction-exact] and preserves K-injectives by [lem-sc-derived-k-injective-restrict-open]. The exact-functor theorem [lem-sf-exact-functor-derived-triangulated] identifies termwise restriction with derived restriction, including shifts. We will construct chain maps $f_{\\beta\\alpha}:I_\\beta\\to I_\\alpha|_{W_\\beta}$ representing $(r_\\beta^\\alpha)^{-1}$ and satisfying the strict equation $f_{\\gamma\\alpha}=(f_{\\beta\\alpha}|_{W_\\gamma})f_{\\gamma\\beta}$.",
+   "uses": [
+    "def-pc-derived-category",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-sc-derived-k-injective-restrict-open",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B (lemma-glueing-increasing-union), first paragraph; K-injective existence as in Tag 071B; restriction Tag 08BS"
+   }
+  },
+  {
+   "text": "For an open inclusion $j:V\\hookrightarrow O$, use the normalized extension by zero of [lem-weil-pbc-module-extension-by-zero-adjunction]. Its unit $G\\to(j_!G)|_V$ induces the isomorphism on every stalk in $V$ specified in clause (3). It is therefore an isomorphism by [lem-weil-pbc-sets-sheaf-iso-on-stalks]: the inverse of a bijective module map is module-linear. We identify this restriction with $G$ using that unit. Adjunction applies degreewise to chain maps, since its naturality carries the chain-map equation to the chain-map equation. For $W_\\beta\\subset W_\\gamma\\subset O$, a chain map $f_{\\beta\\gamma}$ consequently induces $T^O_{\\beta\\gamma}:j_{\\beta,O,!}I_\\beta\\to j_{\\gamma,O,!}I_\\gamma$, whose adjoint is $f_{\\beta\\gamma}$ followed by the restricted unit for $j_{\\gamma,O,!}$. Under the interior stalk identifications its stalk at $x\\in W_\\beta$ is $(f_{\\beta\\gamma})_x$. Naturality of the units and the adjunction bijection show that the strict equations for $f$ give $T^O_{\\gamma\\delta}T^O_{\\beta\\gamma}=T^O_{\\beta\\delta}$: both adjoints are the restricted unit followed by $(f_{\\gamma\\delta}|_{W_\\beta})f_{\\beta\\gamma}$. Thus the already constructed maps define an actual diagram of complexes on every common ambient open $O$.",
+   "uses": [
+    "lem-weil-pbc-module-extension-by-zero-adjunction",
+    "lem-weil-pbc-sets-sheaf-iso-on-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B, extension-by-zero transition maps; Sheaves Tag 00A7 (lemma-j-shriek-modules)"
+   }
+  },
+  {
+   "text": "We construct the $f_{\\beta\\alpha}$ by transfinite recursion. There are no incoming maps at $\\alpha=0$; $W_0=\\varnothing$. If $\\alpha=\\delta+1$, the complex $I_\\alpha|_{W_\\delta}$ is K-injective by [lem-sc-derived-k-injective-restrict-open]. The Hom bijection of [lem-weil-pbc-kinjective-hom-derived] represents $(r_\\delta^\\alpha)^{-1}$ by a chain map $f_{\\delta\\alpha}$. For $\\beta<\\delta$ define $f_{\\beta\\alpha}=(f_{\\delta\\alpha}|_{W_\\beta})f_{\\beta\\delta}$. The original cocycle gives $[f_{\\beta\\alpha}]=(r_\\beta^\\alpha)^{-1}$, and the prior strict equations imply the new strict equations by associativity. This handles every successor without making independent, potentially incoherent choices for the earlier indices.",
+   "uses": [
+    "lem-sc-derived-k-injective-restrict-open",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B, successor step of the recursion"
+   }
+  },
+  {
+   "text": "Suppose $0<\\alpha<\\lambda$ is a limit and the strict system has been constructed below $\\alpha$. Using Step 2 on $O=W_\\alpha$, form the termwise colimit $C_\\alpha=\\varinjlim_{\\beta<\\alpha}j_{\\beta,\\alpha,!}I_\\beta$. These module colimits exist by [lem-weil-pbc-module-sheaves-colimits-forgetful]; the differential is induced by the differentials of the diagram and squares to zero since its composite is zero on every coprojection. Restricting a coprojection and precomposing with the unit of Step 2 gives $s_\\beta:I_\\beta\\to C_\\alpha|_{W_\\beta}$. The cocone equation and the definition of $T$ give the strict equation $s_\\gamma=(s_\\beta|_{W_\\gamma})f_{\\gamma\\beta}$ for $\\gamma<\\beta<\\alpha$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B, non-successor step: definition of the termwise colimit and its coprojections"
+   }
+  },
+  {
+   "text": "Fix $x\\in W_\\beta$. By [lem-weil-pbc-module-stalk-filtered-colimit], degreewise the stalk of $C_\\alpha$ is the colimit of the stalks of its diagram, with its indicated coprojections. The tail $\\beta\\le\\gamma<\\alpha$ gives the same colimit: a cocone on this tail extends to an earlier index by its map to $\\max(\\beta,\\gamma)$, uniquely; the cocone equations verify this extension. By the normalized stalk formula of [lem-weil-pbc-module-extension-by-zero-adjunction], the tail is the diagram $(I_\\gamma)_x$, and its transition maps are $(f_{\\gamma\\delta})_x$. They are quasi-isomorphisms: their derived classes are the given inverse isomorphisms, so their maps on cohomology sheaves are isomorphisms, and [lem-weil-pbc-module-stalk-exact] identifies the kernels and images defining stalk cohomology with the stalks of those sheaves.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-filtered-colimit",
+    "lem-weil-pbc-module-extension-by-zero-adjunction",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B, stalk display for C and restriction to the tail; Modules Tag 01AG (lemma-abelian)"
+   }
+  },
+  {
+   "text": "Here is the cohomology calculation in that tail, using [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. A cycle in the colimit complex is represented in some degree at one index; its differential is zero at some later index, so it is represented by a cycle there. A cycle which becomes a boundary is represented, together with a primitive, at a common later index where the boundary equation holds. Thus $H^n(\\varinjlim_\\gamma(I_\\gamma)_x)=\\varinjlim_\\gamma H^n((I_\\gamma)_x)$. Equivalently, apply exactness to the sequences of cycles, terms and boundaries. Since all transition maps on cohomology are isomorphisms, the canonical map from $H^n((I_\\beta)_x)$ to this colimit is an isomorphism: an element at $\\gamma\\ge\\beta$ is the image of its inverse under the transition isomorphism, and equality is tested at a common later index. Hence $(s_\\beta)_x$ is a quasi-isomorphism. By stalkwise detection of exactness in [lem-weil-pbc-module-stalk-exact], its induced maps on cohomology sheaves have zero kernel and cokernel; therefore $s_\\beta$ is a quasi-isomorphism on $W_\\beta$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B, explanation after the stalk display: exactness of filtered colimits; Algebra Tag 00DB (lemma-directed-colimit-exact)"
+   }
+  },
+  {
+   "text": "The opens $W_\\beta$ for $\\beta<\\alpha$ cover $W_\\alpha$, by continuity. Their intersection is the smaller of the two opens, so they have the intersection-refinement property. On $W_\\beta$ define $a_\\beta=(r_\\beta^\\alpha)^{-1}[s_\\beta]^{-1}:C_\\alpha|_{W_\\beta}\\to K_\\alpha|_{W_\\beta}$. For $\\gamma<\\beta$ the equations $s_\\gamma=(s_\\beta|_{W_\\gamma})f_{\\gamma\\beta}$ and $(r_\\gamma^\\alpha)^{-1}=((r_\\beta^\\alpha)^{-1}|_{W_\\gamma})(r_\\gamma^\\beta)^{-1}$ give $a_\\gamma=a_\\beta|_{W_\\gamma}$, since $[f_{\\gamma\\beta}]=(r_\\gamma^\\beta)^{-1}$. This also shows equality when two indices have the same open, so the family is well defined on the set of distinct opens. Both local objects are isomorphic to $K_\\beta$, so their cross negative Hom groups vanish by the hypothesis. Apply [lem-trf-derived-basis-local-hom-glue] to $M=C_\\alpha$, $N=K_\\alpha$ and this family, obtaining $a:C_\\alpha\\to K_\\alpha$. Apply it to the inverse family to obtain $b$ in the reverse direction. Hom injectivity applied to $ba$ and $ab$ gives the identities, so $a$ is an isomorphism. This uses the uniqueness/Hom assertion, without assuming effectivity of the desired increasing-union descent.",
+   "uses": [
+    "lem-trf-derived-basis-local-hom-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B, identification of C with K_alpha, using the uniqueness mechanism of Tags 0D66 and 0D68; corrects the printed reference to Tag 0D6A"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-kinjective-hom-derived], represent the class $a:C_\\alpha\\to K_\\alpha=QI_\\alpha$ by a chain map $t:C_\\alpha\\to I_\\alpha$. Put $f_{\\beta\\alpha}=(t|_{W_\\beta})s_\\beta$. Its derived class is $a_\\beta[s_\\beta]=(r_\\beta^\\alpha)^{-1}$. Moreover $(f_{\\beta\\alpha}|_{W_\\gamma})f_{\\gamma\\beta}=(t|_{W_\\gamma})(s_\\beta|_{W_\\gamma})f_{\\gamma\\beta}=(t|_{W_\\gamma})s_\\gamma=f_{\\gamma\\alpha}$ as chain maps, by Step 4. Thus the recursion also closes at each nonzero limit. The morphism represented by t has direction $C_\\alpha\\to K_\\alpha$, which is the direction needed to compose the coprojections into $I_\\alpha$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B, choice of tau and definition of the new transition maps; comparison direction corrected"
+   }
+  },
+  {
+   "text": "After this recursion, Step 2 on $O=X$ supplies a strict diagram $j_{\\alpha,X,!}I_\\alpha$, $\\alpha<\\lambda$. Set $L=\\varinjlim_{\\alpha<\\lambda}j_{\\alpha,X,!}I_\\alpha$ termwise, using [lem-weil-pbc-module-sheaves-colimits-forgetful], and write $s_\\alpha:I_\\alpha\\to L|_{W_\\alpha}$ for its restricted coprojections. They satisfy $s_\\beta=(s_\\alpha|_{W_\\beta})f_{\\beta\\alpha}$. For each $x\\in W_\\alpha$ the tail $\\alpha\\le\\gamma<\\lambda$ is nonempty and filtered; its stalk diagram has the normalized terms $(I_\\gamma)_x$ and quasi-isomorphism transitions. Apply exactly the calculation of Steps 5 and 6 to this diagram: stalks commute with this small filtered colimit, cohomology of its stalk complexes commutes with the colimit, and the map from the first term is a quasi-isomorphism. Stalkwise exactness then makes $s_\\alpha$ a quasi-isomorphism. This argument includes a successor $\\lambda$, when the tail may have a last element; continuity at the final index is not required.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-module-stalk-filtered-colimit",
+    "lem-weil-pbc-module-extension-by-zero-adjunction",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B, final colimit and its stalk verification"
+   }
+  },
+  {
+   "text": "Take $K=QL$ and let $r_\\alpha=[s_\\alpha]^{-1}:K|_{W_\\alpha}\\to K_\\alpha$. Inverting the strict coprojection equation and using $[f_{\\beta\\alpha}]=(r_\\beta^\\alpha)^{-1}$ gives $r_\\beta=r_\\beta^\\alpha\\circ(r_\\alpha|_{W_\\beta})$, as required. The cases where all opens are empty, repeated opens, or $\\lambda=1$ use the same equations (every module on the empty space is zero). No boundedness or quasi-coherence assumption has been used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B, concluding compatibility of the isomorphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-module-extension-by-zero-adjunction",
+  "lem-weil-pbc-sets-sheaf-iso-on-stalks",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-module-stalk-filtered-colimit",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-trf-derived-basis-local-hom-glue"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D6B (cohomology-lemma-glueing-increasing-union), with its two limit-stage slips corrected: use the Hom/uniqueness mechanism of 0D66 and 0D68 rather than existence in 0D6A, and represent the comparison C_alpha to K_alpha, not its inverse."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +196,31 @@
    "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/AlgebraicGeometry",
    "date": "2026-10-18",
    "verdict": "no match: hits give ordinary sheaf/space gluing, scheme open covers and representative-complex existence; none gives continuous-ordinal derived gluing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue compatible derived category objects along a continuous increasing ordinal open cover with vanishing negative self extensions",
+   "results": "{\"t\": \"2026-10-17T21:36:19Z\", \"tool\": \"leanfinder\", \"query\": \"Glue compatible derived category objects along a continuous increasing ordinal open cover with vanishing negative self extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.IsGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.IsLE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\"], \"digest\": \"4a4b4be911305df1\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: derived boundedness/representatives and ordinary space/sheaf gluing only; none states continuous ordinal gluing of derived objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible objects of derived categories over increasing open subsets glue by transfinite recursion",
+   "results": "{\"t\": \"2026-10-17T21:36:37Z\", \"tool\": \"leansearch\", \"query\": \"Compatible objects of derived categories over increasing open subsets glue by transfinite recursion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.GlueData.recOn\", \"AlgebraicGeometry.SheafedSpace.GlueData.recOn\", \"TopCat.Sheaf.interUnionPullbackConeLift\", \"TopCat.GlueData.ofOpenSubsets\", \"AlgebraicGeometry.PresheafedSpace.GlueData.recOn\", \"AlgebraicGeometry.SheafedSpace.GlueData.rec\", \"TopCat.GlueData.casesOn\", \"TopCat.GlueData.recOn\"], \"digest\": \"c43c3eb0bd28ac7c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: derived boundedness/representatives and ordinary space/sheaf gluing only; none states continuous ordinal gluing of derived objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"glue\"",
+   "results": "{\"t\": \"2026-10-17T21:36:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"glue\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: derived boundedness/representatives and ordinary space/sheaf gluing only; none states continuous ordinal gluing of derived objects"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-derived-basis-bbd-descent",
@@ -89,5 +250,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-derived-basis-increasing-union",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Expanded Stacks 0D6B into normalized extension-by-zero diagrams, strict transfinite chain-map construction, explicit stalk/cohomology calculations, Hom descent at limits, and the final compatibility equation. Reused all supporting DAG results; no new nodes. Corrected the source comparison direction and its incorrect finite-case citation in the proof.",
+  "blueprint": "Realizes the inherited supporting BBD component of lem-trf-local-term-locality proof (1)--(2), through the polynomial-chart relative-duality ancestry: precisely the continuous-increasing-cover input cited by lem-trf-derived-basis-bbd-descent step 6. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Supplies K-injective representatives on the small site of opens of a scheme. The trace zero-stalk unit does not state this tool; it is used inside its assigned BBD supporting component."
+   },
+   {
+    "node": "lem-sc-derived-open-restriction-adjunction-exact",
+    "why": "Supplies exact module restriction and its exact left adjoint on ringed spaces. The trace zero-stalk unit does not state this tool; it is used inside its assigned BBD supporting component."
+   },
+   {
+    "node": "lem-sc-derived-k-injective-restrict-open",
+    "why": "Ensures the restricted target of a successor-stage lift is K-injective. The trace zero-stalk unit does not state this tool; it is used inside its assigned BBD supporting component."
+   },
+   {
+    "node": "lem-weil-pbc-module-extension-by-zero-adjunction",
+    "why": "Supplies normalized extension-by-zero adjunction and interior/exterior stalk formulas. The trace zero-stalk unit does not state this tool; it is used inside its assigned BBD supporting component."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Supplies the termwise small module colimits used in limit and final constructions. The trace zero-stalk unit does not state this tool; it is used inside its assigned BBD supporting component."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-filtered-colimit",
+    "why": "Identifies stalks of these colimits with the filtered colimits of stalks. The trace zero-stalk unit does not state this tool; it is used inside its assigned BBD supporting component."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Transfers cohomology to stalk complexes and detects quasi-isomorphisms stalkwise. The trace zero-stalk unit does not state this tool; it is used inside its assigned BBD supporting component."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-weil-pbc-module-extension-by-zero-adjunction",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-module-stalk-filtered-colimit",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-b4a5d542e",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-b4a5d542e (reviewer sub-agent of L); spot-checked: Read the complete item, report, unit/route, all cited node statements, and Stacks Tag 0D6B. The statement and ten-step ordinary derived proof are sound; source direction and finite-case slips are correctly repaired. Edge cases and tool uses check out, with no new nodes, route-pivot machinery, SGA citations, duplicates, or target binding changes. Review written to review.md."
  }
 }

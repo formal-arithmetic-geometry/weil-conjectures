@@ -11,41 +11,63 @@
   "def-weil-finite-integral-morphism",
   "def-sbc-locally-finite-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the definition of a finite morphism, $p$ is affine [def-weil-finite-integral-morphism]. Applying the affine-morphism permanence statement [lem-weil-pbc-affine-morphism-permanence] gives that $p$ is quasi-compact and separated, hence quasi-separated. The definition of a morphism of finite presentation [def-sbc-locally-finite-presentation] is local finite presentation together with quasi-compactness and quasi-separatedness. Combining these properties with the hypothesis that $p$ is locally of finite presentation proves that $p$ is of finite presentation.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057T, proof paragraph beginning “Since \\pi is finite we conclude that it is also separated and quasi-compact”; Morphisms Definition Tag 01TP (definition-finite-presentation), with Tags 01TR and 01TQ as background."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 057T, complete proof of the finite-morphism finite-presentation assertion; conclusion uses Morphisms Definition Tag 01TP."
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "finite presentation of modules under etale pullback finite pushforward and stalk localization",
-   "results": "Algebra.Etale.finitePresentation, RingHom.finitePresentation_isLocal, RingHom.Etale.ofLocalizationSpan, RingHom.Etale.ofLocalizationSpanTarget, RingHom.Etale.propertyIsLocal, Algebra.FormallyEtale.localization_map, Algebra.FormallyEtale.localization_base, Algebra.exists_etale_of_isEtaleAt",
+   "tool": "leansearch",
+   "query": "finite morphism locally of finite presentation is of finite presentation",
+   "results": "AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset; AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE; AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation; AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE; RingHom.FinitePresentation; CommRingCat.isFinitelyPresentable_hom; AlgebraicGeometry.IsFinite.instLocallyOfFiniteType; AlgebraicGeometry.IsFinite.recOn",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "no exact match"
   },
   {
    "tool": "loogle",
-   "query": "Module.FinitePresentation",
-   "results": "Module.FinitePresentation, instFinitePresentation, instFiniteOfFinitePresentation, Module.FinitePresentation.of_subsingleton, instFinitePresentationForall, Module.finitePresentation_of_finite, Module.finitePresentation_iff_finite, Module.finitePresentation_of_projective",
+   "query": "IsFinite LocallyOfFinitePresentation QuasiCompact QuasiSeparated",
+   "results": "loogle returned 0 hits: unknown identifier IsFinite",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "no match (unknown identifier)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite morphism locally of finite presentation is finite presentation",
+   "results": "AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation; AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation; AlgebraicGeometry.IsFinite.instLocallyOfFiniteType; RingHom.finitePresentation_isLocal; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; AlgHom.FinitePresentation.of_comp_finiteType; RingHom.FiniteType.of_finitePresentation; AlgHom.FiniteType.of_finitePresentation",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
   },
   {
    "tool": "grep",
-   "query": "finite.*presentation|FinitePresentation [RingTheory/Finiteness]",
-   "results": "Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean, Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean, Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean, Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean, Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean",
+   "query": "finite.*presentation|IsFinite.*QuasiCompact|IsAffineHom.*QuasiCompact [Mathlib/AlgebraicGeometry/Morphisms]",
+   "results": "25 textual hits, including Mathlib/AlgebraicGeometry/Morphisms/Affine.lean:58 (IsAffineHom implies QuasiCompact), Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean and related files; no single theorem for the complete implication",
    "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "finite presentation of modules under etale pullback finite pushforward and stalk localization",
-   "results": "SheafOfModules.isFinitePresentation, Algebra.Etale.finitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.Presentation.IsFinite.mk, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk, AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom",
-   "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "no exact match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-elementary-devissage-finite-presentation",
@@ -64,5 +86,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-morphism-finite-presentation",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against Stacks Tag 057T and split its proof into the direct definition argument: finite morphisms are affine, affine morphisms are quasi-compact and separated, and finite presentation is local finite presentation plus quasi-compactness and quasi-separatedness. No new node is needed because the affine permanence statement already exists as a Mathlib leaf; the item has no sorry-free project declaration in slopmaster2.",
+  "blueprint": "The single step realizes the paragraph of lem-trf-local-term-locality proving that a finite locally finitely presented morphism is of finite presentation."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-e905ac76f",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-e905ac76f (reviewer sub-agent of L); spot-checked: The mathematical split and single proof step are correct. Repair the incomplete source citation by applying fixes/dag/nodes/sec-trace-formula/lem-trf-finite-morphism-finite-presentation.json, which adds Morphisms Tag 01TP for the finite-presentation definition.; 1 file(s) fixed by the reviewer"
  }
 }
