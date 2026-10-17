@@ -13,9 +13,161 @@
   "def-sbc-smooth-morphisms",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on any of the etale chart neighbourhoods in the hypothesis. If the comparison is etale, it is smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]. Apply [lem-trf-fs-chart-free-factorization] to $g:P\\to Q$, obtaining $R=P\\oplus\\mathbf N^r$ and an injective $h:R\\to Q$ with $h^{\\rm gp}$ an isomorphism. Both $R$ and $Q$ are fs: for $R$ the finite generation, cancellation and saturation conditions hold componentwise. This reduces the monoid change to adjoining coordinate generators followed by extending a monoid inside its own group completion. No injectivity on sharp characteristic monoids is asserted or needed.",
+   "uses": [
+    "lem-trf-fs-chart-free-factorization",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.9, final injective-chart test; algebraic factorization supplied by the agent."
+   }
+  },
+  {
+   "text": "Take an affine chart $Y_0=\\operatorname{Spec}C$ on the chosen base neighbourhood and put $W=\\operatorname{Spec}C[t_1,\\ldots,t_r]$, with associated log chart $R=P\\oplus\\mathbf N^r\\to C[t]$ sending $(p,(n_i))$ to $\\alpha(p)\\prod_i t_i^{n_i}$. This is an fs log structure by [def-trf-fs-log-blowup]. The polynomial algebra is finite type over the Noetherian ring $C$, so [lem-weil-pbc-finite-type-algebra-noetherian] makes $W$ locally Noetherian. Expanding finite sums of monomials gives $\\mathbf Z[R]=\\mathbf Z[P][t_1,\\ldots,t_r]$, and hence\n$$W\\times_{\\operatorname{Spec}\\mathbf Z[R]}\\operatorname{Spec}\\mathbf Z[Q]\n=Y_0\\times_{\\operatorname{Spec}\\mathbf Z[P]}\\operatorname{Spec}\\mathbf Z[Q]=:Z.$$\nOn rings the identification sends $c\\otimes[q]$ to itself, and evaluates $t_i$ as $[q_i]$; these maps are inverse because the tensor relations already impose $t_i=[q_i]$.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.8--1.9, chart reduction; explicit monoid-ring calculation."
+   }
+  },
+  {
+   "text": "We check that $W$ is log regular. At a geometric point $\\bar w$ over $\\bar y$, put $A=\\mathcal O_{Y_0,\\bar y}$, $B=\\mathcal O_{W,\\bar w}$, and let $I\\subset A$ be the ideal of the nonunit base log sections. Set $K=\\{i:t_i\\in\\mathfrak m_B\\}$, $k=|K|$, and $\\rho=\\operatorname{rank}\\overline M_{Y_0,\\bar y}^{\\rm gp}$. The associated-chart pushout in [def-trf-fs-log-blowup] shows directly that the characteristic at $\\bar w$ is $\\overline M_{Y_0,\\bar y}\\oplus\\mathbf N^K$: the other coordinates map to units, whereas a product involving a nonunit factor cannot be a unit in a local ring. Thus its nonunit ideal is $J=IB+(t_i:i\\in K)$ and its rank is $\\rho+k$. The coordinate assertion of [lem-trf-smooth-geometric-stalk-algebra] gives flat local maps $A\\to B$ and $A/I\\to B/J$ with regular closed fibres $F$ and $F_K$, where $\\dim F=\\dim F_K+k$. Since $A/I$ is regular, [lem-weil-pbc-flat-over-regular-with-regular-fibre] makes $B/J$ regular. Applying [lem-weil-pbc-flat-height-formula] to these two maps gives\n$$\\dim B=\\dim A+\\dim F=\\dim(A/I)+\\rho+\\dim F_K+k=\\dim(B/J)+\\rho+k.$$\nThis is precisely the definition of log regularity at $\\bar w$.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-trf-smooth-geometric-stalk-algebra",
+    "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+    "lem-weil-pbc-flat-height-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 031E (lemma-flat-over-regular-with-regular-fibre), 00ON (lemma-dimension-base-fibre-equals-total); coordinate case of ILO VI 1.8."
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar z$ of $Z$ and let $\\bar w$ be its image in $W$. Set $A=\\mathcal O^{\\rm sh}_{W,\\bar w}$ and $Z_A=\\operatorname{Spec}A\\times_W Z$. The point lifts to $Z_A$ using the chosen geometric base point. Let $B=(A\\otimes_{\\mathbf Z[R]}\\mathbf Z[Q])_{\\mathfrak q}$ at this lift; this is an ordinary local ring over the strict local base $A$. The ring $A$ is Noetherian by [lem-sc-strict-henselization-noetherian], and $B$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian] and [lem-weil-pbc-localization-noetherian]. Put $F=\\{q:[q]\\in B^\\times\\}$ and $G=h^{-1}(F)=\\alpha^{-1}(A^\\times)$; the equality holds because $A\\to B$ is local. These are faces. By [lem-trf-fs-face-sharpening], $S=R_G/G^{\\rm gp}$ and $T=Q_F/F^{\\rm gp}$ are sharp fs with finite free group completions. Set $I=(\\alpha(r):r\\notin G)A$ and $J=([q]:q\\notin F)B$. Inverting $F$ and killing its complementary monomials leaves precisely $\\mathbf Z[F^{\\rm gp}]$; on the base it inverts $G$ and kills $R\\setminus G$. Thus\n$$B/J\\cong\\left((A/I)\\otimes_{\\mathbf Z[G^{\\rm gp}]}\\mathbf Z[F^{\\rm gp}]\\right)_{\\mathfrak p},$$\nwith $[g]$ acting by $\\alpha(g)$ and the induced prime $\\mathfrak p$. The associated-stalk pushout [def-trf-fs-log-blowup] identifies the characteristics with $S$ and $T$. The same characteristics persist under strict henselization, since local maps reflect units.",
+   "uses": [
+    "lem-sc-strict-henselization-noetherian",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-trf-fs-face-sharpening",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.8, corrected face-localized stratum calculation; VIII 3.1.1--3.1.5."
+   }
+  },
+  {
+   "text": "Step 3 gives log regularity of $W$, so at its geometric point $\\bar w$ the ring $A$ already satisfies regularity of $A/I$ and $\\dim A=\\dim(A/I)+\\operatorname{rank}S^{\\rm gp}$. Apply [lem-trf-log-regular-sharp-chart] to choose a chart $a:S\\to A$ inducing this characteristic, and then [lem-trf-log-regular-completed-chart]. Allow the latter's replacement of $a$ by another chart inducing the same characteristic. It gives a monomial-compatible presentation of $\\widehat A$ as $k[[S]][[t]]$ or $V[[S]][[t]]/(\\theta)$, with $\\theta\\equiv p$ modulo the nonzero monomials and the parameters. The original localized chart $\\alpha:R_G\\to A$ and $a\\circ(R_G\\to S)$ lift the same characteristic. In the associated integral log monoid their quotient is a unique unit; these units multiply, by cancellation. Hence there is a character $\\epsilon:R^{\\rm gp}\\to A^\\times$ such that $\\alpha(r)=\\epsilon(r)a(\\bar r)$ for $r\\in R_G$. Extending from $R_G$ to its group completion gives the indicated domain $R^{\\rm gp}$. This explicitly retains the possible unit twist rather than assuming that the two chosen charts coincide.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-trf-log-regular-sharp-chart",
+    "lem-trf-log-regular-completed-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6; ordinary/geometric local comparison uses Stacks 05WS, 06LN, 06LK."
+   }
+  },
+  {
+   "text": "The homomorphism $h:R\\to Q$ has isomorphic group completions by step 1. Its inverse unit face at $\\mathfrak q$ is exactly $G$, as checked in step 4, and the completed presentation of $A$ is compatible with the sharp chart $a$ and unit character $\\epsilon$ constructed in step 5. Apply [lem-trf-formal-monoid-extension-model]. It gives, with the same $T=Q_F/F^{\\rm gp}$ and the nonunit ideal $J$, a pair isomorphism\n$$(\\widehat B,J\\widehat B)\\cong(H,L)\\quad\\hbox{or}\\quad(H/(\\eta),L(H/(\\eta))),\\qquad H=D[[T]],$$\nwhere $D$ is complete regular local, $L$ is generated by the nonzero $T$-monomials, and in the second case $\\overline\\eta\\in D$ is a regular parameter. Apply [lem-trf-formal-monoid-ring-dimension]. Writing $e=0$ in the first case and $e=1$ in the second gives\n$$\\dim\\widehat B=\\dim D+\\operatorname{rank}T^{\\rm gp}-e,\\qquad\\dim(\\widehat B/J\\widehat B)=\\dim D-e.$$\nThe same node makes the stratum quotient regular (it is $D$ or $D/(\\overline\\eta)$). These equalities give both dimension bounds. No finiteness or flatness of $A\\to B$, and no asserted chain of monomial primes, is used.",
+   "uses": [
+    "lem-trf-formal-monoid-extension-model",
+    "lem-trf-formal-monoid-ring-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6 models used for the independent toric calculation; formal monoid extension and dimension inputs are explicitly separated."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-local-completion-quotient], $\\widehat B/J\\widehat B$ is the completion of $B/J$. Both rings are Noetherian local, so [lem-weil-pbc-completion-regular-local] and [lem-weil-pbc-completion-dimension] give regularity of $B/J$ and\n$$\\dim B=\\dim(B/J)+\\operatorname{rank}T^{\\rm gp}.$$\nThe closed-immersion theorem [lem-trf-closed-immersion-strict-localization-cartesian] identifies $B^{\\rm sh}/JB^{\\rm sh}$ with $(B/J)^{\\rm sh}$. By [lem-sc-strict-henselization-regular] and [lem-sc-strict-henselization-dimension], the quotient is regular and the same dimension equality holds for $B^{\\rm sh}$. Finally [lem-trf-ind-etale-strict-local-invariance], explicitly including arbitrary base change of the structural map of a strict localization, identifies the strict localization of $Z_A$ at the lifted geometric point with that of $Z$ at $\\bar z$. Thus $B^{\\rm sh}=\\mathcal O_{Z,\\bar z}$ canonically; the identification is over $Z$ and preserves each chart monomial and its nonunit ideal. The characteristic remains $T$ by step 4 and [def-trf-fs-log-blowup]. This proves log regularity of the $Q$-chart on $Z$. If the chart base change is empty there are no points to check.",
+   "uses": [
+    "lem-weil-pbc-local-completion-quotient",
+    "lem-weil-pbc-completion-regular-local",
+    "lem-weil-pbc-completion-dimension",
+    "lem-trf-closed-immersion-strict-localization-cartesian",
+    "lem-sc-strict-henselization-regular",
+    "lem-sc-strict-henselization-dimension",
+    "def-trf-fs-log-blowup",
+    "lem-trf-ind-etale-strict-local-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Stacks 00MA (completion-tensor), 07NY (completion-regular), 07NV (completion-dimension), 05WS (quotient-strict-henselization), 06LN, 06LK."
+   }
+  },
+  {
+   "text": "The comparison $c:X_0\\to Z$ is smooth by hypothesis and step 1. Its log structure is the pullback of the associated $Q$-chart: both structures are obtained by associating a log structure to that same chart, and the universal pushout defining associated stalks gives the identification. At a geometric point of $X_0$ over one of $Z$, write $A=\\mathcal O_{Z,\\bar z}$, $B=\\mathcal O_{X_0,\\bar x}$, and $I\\subset A$ for the nonunit log ideal. A local ring map has inverse image of the units equal to the units; hence the associated-stalk pushout identifies the two characteristics, of rank $\\rho$, and the source nonunit ideal is $IB$. By [lem-trf-smooth-geometric-stalk-algebra], $A\\to B$ and $A/I\\to B/IB$ are flat local maps with the same regular closed fibre $F$. Log regularity of $Z$ gives regular $A/I$ and $\\dim A=\\dim(A/I)+\\rho$. Now [lem-weil-pbc-flat-over-regular-with-regular-fibre] makes $B/IB$ regular, while two applications of [lem-weil-pbc-flat-height-formula] give\n$$\\dim B=\\dim A+\\dim F=\\dim(A/I)+\\rho+\\dim F=\\dim(B/IB)+\\rho.$$\nThus $X_0$ is log regular. The charts cover the geometric points of $X$, so the geometric-stalk definition gives log regularity of $X$ itself.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-trf-smooth-geometric-stalk-algebra",
+    "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+    "lem-weil-pbc-flat-height-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 031E and 00ON, applied to the strict smooth comparison in ILO VI 1.8."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-log-regular-divisorial-structure] to the locally Noetherian fs log regular scheme just obtained. Its triviality locus $U$ is open dense and the structural map identifies $M_X$ with $\\mathcal O_X\\cap j_*\\mathcal O_U^\\times$. Put $D=X\\setminus U$. This identification gives exactly the divisorial log structure of [def-trf-log-regular-pair]; it is fs, log regular, and has triviality locus exactly $U$. Consequently $(X,D)$ is a log regular pair, including the empty-scheme and empty-boundary cases.",
+   "uses": [
+    "lem-trf-log-regular-divisorial-structure",
+    "def-trf-log-regular-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.4, printed p. 69; VIII 3.4.1, printed p. 110."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fs-chart-free-factorization",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "def-trf-fs-log-blowup",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-trf-smooth-geometric-stalk-algebra",
+  "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-trf-fs-face-sharpening",
+  "lem-trf-log-regular-sharp-chart",
+  "lem-trf-log-regular-completed-chart",
+  "lem-trf-formal-monoid-extension-model",
+  "lem-trf-formal-monoid-ring-dimension",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-completion-dimension",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-strict-henselization-dimension",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-trf-log-regular-divisorial-structure",
+  "def-trf-log-regular-pair"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6 and 1.8--1.9 and 1.4: explicit coordinate and strict-smooth arguments; independent completed-local toric models and formal monoid dimension inputs. The unavailable Kato proof is not claimed to have been read."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,10 +217,24 @@
    "results": "{\"t\": \"2026-10-17T17:53:42Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of fine saturated log schemes with injective chart group map, torsion free cokernel, and smooth underlying monoid algebra comparison preserves log regularity.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\"], \"digest\": \"740f3ede791c90ea\"}; Read the returned signatures: ordinary scheme smoothness has no fs log structures, logarithmic regularity or divisorial recovery.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogRegular|LogSmooth|LogStructure|log.regular|log.smooth",
+   "results": "{\"t\": \"2026-10-17T18:14:02Z\", \"tool\": \"grep\", \"query\": \"LogRegular|LogSmooth|LogStructure|log.regular|log.smooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The results concern ordinary scheme germ injectivity, not logarithmic structures or regularity. No match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective torsion free chart morphism of fine saturated log schemes over a log regular base has log regular source and the source log structure is divisorial on its dense triviality locus",
+   "results": "{\"t\": \"2026-10-17T18:14:04Z\", \"tool\": \"leanfinder\", \"query\": \"An injective torsion free chart morphism of fine saturated log schemes over a log regular base has log regular source and the source log structure is divisorial on its dense triviality locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.IsGermInjective\", \"AlgebraicGeometry.injective_isZariskiLocalAtTarget\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.stalkMap_injective_of_isOpenMap_of_injective\", \"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"AlgebraicGeometry.Scheme.IsGermInjective.Spec\", \"AlgebraicGeometry.Scheme.IsGermInjectiveAt.cond\"], \"digest\": \"194121550099322a\"}; The results concern ordinary scheme germ injectivity, not logarithmic structures or regularity. No match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-log-regularity",
@@ -92,5 +258,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-log-smooth-log-regular",
+  "worker": "stage1",
+  "summary": "Repair E4/C1 and E5/D5/C1: corrected the stratum tensor product and used a strict-local base. Reused the independently delivered sharp/completed chart nodes; added independent formal monoid extension and dimension inputs. Completion and ind-etale strict-local invariance transfer their conclusions to the required geometric stalk. Retained the accepted factorization, coordinate and strict-smooth/divisorial arguments.",
+  "blueprint": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: the injective chart at the end of ILO VI Proposition 1.9, using VI 1.8 and VI 1.4. The inherited ancestry is historical; the current sk-i-curve-zero proof has removed the nearby-duality route. The group-isomorphism chart case now uses independent local algebra models to avoid the former dependency cycle.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+    "why": "Ordinary commutative-algebra regularity ascent for the stratum quotient of a flat local map; no log theorem or replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Hilbert basis theorem for the auxiliary affine polynomial chart; a generic finiteness tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Converts the allowed etale comparison to an ordinary smooth comparison; a generic morphism-property tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-height-formula",
+    "why": "Ordinary Noetherian local algebra: comparison with completion or strict henselization, including its quotient. Used as a generic tool, with no change to the logarithmic route."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Ordinary Noetherian local algebra: comparison with completion or strict henselization, including its quotient. Used as a generic tool, with no change to the logarithmic route."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dimension",
+    "why": "Ordinary Noetherian local algebra: comparison with completion or strict henselization, including its quotient. Used as a generic tool, with no change to the logarithmic route."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-quotient",
+    "why": "Ordinary Noetherian local algebra: comparison with completion or strict henselization, including its quotient. Used as a generic tool, with no change to the logarithmic route."
+   },
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "Ordinary Noetherian local algebra: comparison with completion or strict henselization, including its quotient. Used as a generic tool, with no change to the logarithmic route."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Ordinary Noetherian local algebra: comparison with completion or strict henselization, including its quotient. Used as a generic tool, with no change to the logarithmic route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Ordinary localization of a Noetherian chart ring; generic commutative algebra, not a replacement of a unit proof."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Noetherianity of the strict local base before applying ordinary finite-type local algebra; generic local algebra with no change to the logarithmic route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-strict-henselization-dimension",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sc-strict-henselization-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-88f82ebea",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-88f82ebea (reviewer sub-agent of L); spot-checked: I read the item, the four new nodes, every cited statement, unit sk-i-curve-zero, ILO VI 1.1-1.9 (pp. 69-71) and VIII 3.1.x, and the Stacks tags. The item matches VI 1.8 and 1.4 in the injective, torsion-free chart case of VI 1.9 and is not weakened. There is no cycle: toric-refinement cites the item, and the item's closure does not reach it. All 9 steps check against what the cited statements say. Step 4's corrected stratum formula is (A/I) tensored over Z[G^gp] with Z[F^gp]; I verified it by hand. Step 5's unit character comes from integrality of M_w. In step 6 every hypothesis of the model node holds. Step 7 transfers regularity and dimension through 07NY, 07NV, the closed-immersion lemma, 06LN, 06LK and ind-etale invariance. Steps 3 and 8 use 031E and 00ON with I contained in m_A. I checked all four new statements independently and found them true. Factorization: the image of Q is saturated and an interior primitive vector completes to a basis inside it. Smooth geometric stalk: flatness via 01VB and 01VF, and regular-sequence codimension. Formal model: after rescaling by the twist, completion gives D[[T]] with D the completed localized torus ring with the t variables, and the parameter condition on eta holds even for imperfect residue fields. Dimension: Hilbert-Samuel 00KQ. Test cases: rank 0, unit-only R=Q=Z, the blowup chart N^2 in <e1,e2-e1> at closed and generic exceptional points, V[[x,y]]/(p-xy), and T={0}. No duplicates, no restated clauses, no SGA citation. I accept the 11 declared sk-thm-p1/sk-thm-br commutative-algebra tool_uses. One fix (B5): the source of lem-trf-smooth-geometric-stalk-algebra now gives the missing Stacks tags 01VB and 06LK.; 1 file(s) fixed by the reviewer"
  }
 }

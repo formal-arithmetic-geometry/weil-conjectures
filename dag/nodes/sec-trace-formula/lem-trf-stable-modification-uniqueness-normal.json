@@ -21,9 +21,95 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record uniqueness of any curve comparison over $X$. On an affine open $\\operatorname{Spec}A$ of the integral base, every affine chart $\\operatorname{Spec}B$ of the flat source has $B\\hookrightarrow B\\otimes_A\\operatorname{Frac}(A)$: apply [lem-sc-flat-invertible-sections-torsion-free] with the invertible module $\\mathcal O$ on each chart to see that multiplication by each nonzero element of $A$ is injective. If two $X$-morphisms from this source to $Y_i$ agree on the generic fibre, their equalizer is closed because $f_i$ is separated, by [def-weil-proper-morphism]. Its ideal restricts to zero in those generic localizations, hence is zero. Thus the morphisms agree. The same argument applies to the flat markings with proper target over $D$. Work over affine opens of $T$ for existence; the comparisons obtained there will agree on overlaps by this argument. No separatedness over $T$ is being assumed.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-sc-flat-invertible-sections-torsion-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 1.2 and Corollary 1.3(i): uniqueness and locality of the comparison; expanded closed-diagonal argument."
+   }
+  },
+  {
+   "text": "On an affine open of $T$, apply [lem-trf-stable-curve-diagram-noetherian-model] with $J=J_{\\mathrm{st}}=\\{1,2\\}$. This gives a dominant map to a normal integral affine scheme $T_0$ of finite type over $\\mathbf Z$, a pair $(X_0,D_0)$ and stable modifications $f_{i,0}:(Y_{i,0},E_{i,0})\\to(X_0,D_0)$ whose diagram pulls back to the original one. Their generic identifications, flatness, semistability, properness and stability are all part of that node, and all total spaces are reduced. It suffices to construct inverse comparisons for this diagram and then pull them back. In the next three steps write $T,X,Y_i,E_i,f_i$ for this finite-type diagram.",
+   "uses": [
+    "lem-trf-stable-curve-diagram-noetherian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Theorem 1.2, first paragraph, printed p. 35; §3.1 and Lemma 5.1(ii)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-geometrically-reduced-eta-normal] to each $Y_i\\to T$. Its hypotheses hold because $T$ is normal and integral and $Y_i$ is the curve of a semistable multipointed pair. Consequently each $Y_i$ is $\\eta$-normal. This is partial normality relative to the generic fibre; no normality of the nodal geometric fibres is asserted.",
+   "uses": [
+    "lem-trf-geometrically-reduced-eta-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 3.5.2 and proof of Theorem 1.2, printed pp. 20--21, 35."
+   }
+  },
+  {
+   "text": "Consider any finite-height valuation ring $V$ of $K=k(T)$ centred on $T$ with the prescribed generic map. By [lem-trf-semistable-marked-base-change], the pulled-back pairs are multipointed, the source pairs remain semistable and the geometric stability conditions persist. Their pair maps remain proper by [lem-weil-pbc-proper-fp-permanence](b) and are generic isomorphisms. They are indeed modifications: [lem-trf-stable-curve-diagram-noetherian-model] supplies a dense open of $T$ over whose preimage both pair maps are isomorphisms before this base change. Its inverse image in $\\operatorname{Spec}V$ contains the generic point. Flatness over the domain $V$ makes the preimages of that open schematically dense by the injectivity argument of Step 1. Apply [lem-trf-valuation-semistable-dominates-stable] first with $f_2$ stable and $f_1$ semistable, then with their roles reversed. This gives $Y_{1,V}\\to Y_{2,V}$ and $Y_{2,V}\\to Y_{1,V}$ over $X_V$. The valuation comparison node explicitly permits the fraction field $K$, without assuming it separably closed.",
+   "uses": [
+    "lem-trf-semistable-marked-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-trf-stable-curve-diagram-noetherian-model",
+    "lem-trf-valuation-semistable-dominates-stable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.5.1, uniqueness part, and the valuation comparison in the proof of Theorem 1.2, printed pp. 33, 35."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-valuative-domination-eta-normal] to $C=X$, with $(a,b)=(f_2,f_1)$, and then with $(a,b)=(f_1,f_2)$. The base is integral of finite type over $\\mathbf Z$; all three curve schemes are reduced, flat and of finite type by Step 2; the maps are $\\eta$-modifications. Step 3 supplies $\\eta$-normality of the source in each application, and Step 4 supplies the comparisons for every finite-height centred valuation ring required by this criterion. Obtain curve morphisms $g:Y_1\\to Y_2$ and $h:Y_2\\to Y_1$ over $X$ with their prescribed generic identifications. Step 1 gives $hg=1$ and $gh=1$, since both composites have the same generic fibre as the identity. Therefore $g$ is an isomorphism of curves over $X$.",
+   "uses": [
+    "lem-trf-valuative-domination-eta-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 5.2, proof of Theorem 1.2, and proof of Corollary 1.3(i), printed pp. 34--35."
+   }
+  },
+  {
+   "text": "The curve isomorphism preserves the markings scheme-theoretically. Restrict $g$ to $E_1$. The ideal of $E_2\\hookrightarrow Y_2$ pulls back to an ideal with zero image on $(E_1)_\\eta$, since the generic maps are the prescribed maps of pairs. On affine charts of $E_1$, flatness over the integral base embeds the chart ring into its generic localization ([lem-sc-flat-invertible-sections-torsion-free] with the structure sheaf, as in Step 1), so this ideal has zero image already on $E_1$. The quotient-ring description of a closed immersion therefore gives a factorization $g_E:E_1\\to E_2$. Its composite to $D$ agrees with $f_{1,D}$: the two maps have the same composite to $X$, and $D\\hookrightarrow X$ is a closed immersion and hence a monomorphism. Apply the same argument to $h$. The composites on markings are identities because they become identities after the closed immersions into the curves. This yields an isomorphism of pairs over $(X,D)$. Pull back the finite-type comparisons to each affine open of the original $T$. They agree on overlaps by Step 1 and therefore glue: the continuous maps and the maps of structure sheaves agree locally. Uniqueness follows again from Step 1, and the generic pair map is the identity under the given identifications.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sc-flat-invertible-sections-torsion-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Corollary 1.3(i), proof on printed p. 35; the marking and open-gluing arguments are written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-trf-geometrically-reduced-eta-normal",
+  "lem-trf-semistable-marked-base-change",
+  "lem-trf-stable-curve-diagram-noetherian-model",
+  "lem-trf-valuation-semistable-dominates-stable",
+  "lem-trf-valuative-domination-eta-normal",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Temkin, proof of Theorem 1.2 and Corollary 1.3(i), printed p. 35, read online at the source URL; PDF absent from the local archive. The marking, affine-locality and arbitrary-valuation descent details are explicit additions."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +138,38 @@
    "results": "hits=0; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned statements: none gives this lemma; general flatness, etaleness, valuation, constructibility and Proj hits supply only parts of the notions.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stable modifications of marked relative curves over a normal integral scheme are uniquely isomorphic",
+   "results": "hits=8; top=['AlgebraicGeometry.Scheme.Hom.normalization.hom_ext', 'AlgebraicGeometry.ValuativeCriterion.uniqueness', 'AlgebraicGeometry.ValuativeCriterion.Existence.eq', 'AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom', \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", 'AlgebraicGeometry.IsSeparated.valuativeCriterion', 'AlgebraicGeometry.Scheme.PartialMap.ext_iff', 'AlgebraicGeometry.Scheme.PartialMap.ext']; note=; digest=5bdb7bdf308c0cef. No hit states uniqueness of stable relative-curve modifications; separated extensionality is only a building block.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two stable semistable modifications of a pointed curve over a normal base are uniquely isomorphic",
+   "results": "hits=8; top=['CategoryTheory.Pseudofunctor.StrongTrans.Hom.ext_iff', 'CategoryTheory.Pseudofunctor.StrongTrans.Modification.ext_iff', 'AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom', 'CategoryTheory.Pseudofunctor.StrongTrans.Hom.of.inj', 'AlgebraicGeometry.IsSeparated.isStableUnderBaseChange', 'AlgebraicGeometry.isSmooth_isStableUnderBaseChange', 'WeierstrassCurve.IsGoodReduction.congr_simp', 'AlgebraicGeometry.IsProper.isStableUnderBaseChange']; note=; digest=0848ee86f9b2191a. No hit states uniqueness of stable relative-curve modifications; separated extensionality is only a building block.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Normal\"",
+   "results": "hits=12; top=['AlgebraicGeometry.Scheme.Hom.normalization', 'AlgebraicGeometry.Scheme.Hom.normalizationOpenCover', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization', 'AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization', 'AlgebraicGeometry.Scheme.Hom.fromNormalization', 'AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization', 'AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization']; note=; digest=d48a5d2f8710c873. No hit states uniqueness of stable relative-curve modifications; separated extensionality is only a building block.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stable.modification|stableModification|multipointed",
+   "results": "hits=0; top=[]; note=; digest=4f53cda18c2baa0c. No hit states uniqueness of stable relative-curve modifications; separated extensionality is only a building block.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-temkin-stable-modification",
@@ -81,5 +195,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-stable-modification-uniqueness-normal",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Split uniqueness into normal finite-type diagram approximation, generic normality, finite-height valuation comparison, and a general valuative domination criterion. Explicit closed-diagonal, marking-ideal and gluing arguments finish the isomorphism of pairs. Four statement-only nodes, no Mathlib leaves. Temkin read online; local PDF missing and requested in the report.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Uniqueness of stable modifications over a normal integral base. Realizes uniqueness used to glue the stable models in the Temkin semistable-alteration input; follows Theorem 1.2 then Corollary 1.3(i). No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-flat-invertible-sections-torsion-free",
+    "why": "Generic torsion-free sections tool applied with the structure sheaf; supplies generic injectivity for flat curves and markings without properness or nonemptiness assumptions."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic proper-base-change tool used to check the valuation pullbacks are proper; this curve-zero unit has no general scheme-morphism permanence theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-7e12cdc27",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-7e12cdc27 (reviewer sub-agent of L); spot-checked: I read the item, the four new nodes, every cited node's statement, the unit sk-i-curve-zero, the chapter record and the parent's use of the item (temkin-stable-modification Step 5). The item statement and stmt_deps are byte-identical to the side-DAG base, so nothing is weakened. Temkin arXiv:0707.3953v3 is not in literature/ and network access is blocked, so I could not open it. I checked every Temkin-sourced claim mathematically instead; the place numbers are unverified, and the maintainer should promote the PDF. Step checks: (1) the equalizer of the separated f_2 is closed, and the torsion-free lemma with L=O gives B -> B_(A\\0) injective, so the ideal vanishes. (2) The diagram node's outputs (normal finite-type T0, stability, reducedness, dense isomorphism open U0) cover everything later steps use. (3) Y_i0 over T0 is flat, finitely presented and has nodal (reduced) fibres, so it is eta-normal. (4) Base change keeps the pair multipointed with smooth/etale generic fibres, the source semistable and the maps stable and proper; the preimage of U0 is schematically dense by flatness, and the valuation node applies in both directions. (5) The domination node's hypotheses and its valuation quantifier match exactly; Step 1 then gives gh=1 and hg=1. (6) The markings factor by the ideal argument and the monomorphism, and the affine pieces glue by Step 1. New nodes: limit plus normalization argument checked (A_lambda normalization is finite and inside A because A is normal). Eta-normality tested on R[x,y]/(xy-pi) and V[x,a/x]. The valuation comparison for arbitrary K holds: V->W is faithfully flat, height is preserved, and the two pullbacks agree on W(x)_V W by flatness and separatedness, so fpqc descent applies; tested at height 0 and on a DVR blow-up. Domination tested with S a field and S of dimension 1. None of the new nodes duplicates an existing node or restates the item (rg over dag/nodes). The tool uses lem-sc-flat-invertible-sections-torsion-free and lem-weil-pbc-proper-fp-permanence (a Mathlib leaf) are accepted. FIX (C1): Step 6 used flat-generic injectivity uncited and was marked elementary; it now cites lem-sc-flat-invertible-sections-torsion-free and is marked non-elementary. Corrected item in fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
  }
 }
