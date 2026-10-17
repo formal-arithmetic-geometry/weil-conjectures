@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallyBijective
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZeroSections
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingleZero
 
@@ -233,7 +234,7 @@ theorem Etale.isIso_upperStarSectionsMap (G : Sheaf S.smallEtaleTopology (Module
     [QuasiCompact (φ.left ≫ pullback.fst V.hom p)]
     [GeometricallyConnected (φ.left ≫ pullback.fst V.hom p)] :
     IsIso (Etale.upperStarSectionsMap _ p G φ) :=
-  sorry
+  (ConcreteCategory.isIso_iff_bijective _).2 (Etale.bijective_moduleCat_unit_map_of_flat Λ p G φ)
 
 /-- Blueprint `sbc-lem-degree-zero-flat-base-change`: degree-zero flat base change.
 

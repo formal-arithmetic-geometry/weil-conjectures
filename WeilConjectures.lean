@@ -2550,10 +2550,13 @@ public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.ConstantUnit
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.FiniteSubsum
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Generators
+public import WeilConjectures.ConstructibleSheaf.FinitePushforward.GenericFactorization
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.GenericPoint
+public import WeilConjectures.ConstructibleSheaf.FinitePushforward.LisseGeneric
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.MayerVietoris
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.PointSplitting
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Presentation
+public import WeilConjectures.ConstructibleSheaf.FinitePushforward.RadicialEtale
 public import WeilConjectures.ConstructibleSheaf.FiniteTypePushforward
 public import WeilConjectures.ConstructibleSheaf.FreeLifting
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
@@ -4126,6 +4129,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZeroSections
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.ClosedOpen
