@@ -130,5 +130,42 @@
   "group": "Q122",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-b98de9bc9 (reviewer sub-agent of L); spot-checked: Read the whole delivery: one commit with the item and its report, no new nodes. The main-20261015 definition (main-20261017 only adds a lean field) is kept in full, in order: ordinary j_*F in the qbar category, then [1], with Rj_*F kept separate. I read all 11 stmt_deps and the pair, rational and complete coefficient categories they rest on. Hypotheses hold: U_0 and C_0 are Noetherian, separated and finite-dimensional with ell invertible, as def-pod-lisse-l-adic-sheaves and def-weil-pbc-qbar-category require. Citing def-pod-lisse-l-adic-sheaves (clauses 1, 2 and 4, Weil II 1.1.1 b-d) makes the blueprint's finite-ring lisse pointer precise without changing its meaning; the finite-ring node stays for the finite levels. The direct-image formula with its module action is exactly what def-weil-pbc-proetale-operations and def-weil-pbc-direct-image state. This matches unit Steps 2-3 (levelwise limit; the tower need not be adic), and the item claims neither constructibility nor exactness. The shifts check against def-weil-abstract-derived-category ((K[1])^r=K^{r+1}) and def-weil-pbc-common-stage-cones ((E,K)[1]=(E,K[1])). Small cases checked: j=id, F=0, empty C_0, disconnected C_0. No cycle (the 2072-node closure excludes the item), no duplicate definition (d-real-boundary agrees with it), no SGA, no tool_uses. Etale.middleExtension is the generic small-etale (j)_*[A], so it is rightly not attached. FIX: the statement now says the structure morphism C_0 -> Spec k_0 is smooth, where it only said 'C_0 is smooth'; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CurveMiddleExtension",
+  "declaration": "AlgebraicGeometry.Scheme.curveMiddleExtension",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.MiddleExtensionCurve",
+   "AlgebraicGeometry.Scheme.MiddleExtensionCurve.baseProperties",
+   "AlgebraicGeometry.Scheme.MiddleExtensionCurve.noetherianU",
+   "AlgebraicGeometry.Scheme.MiddleExtensionCurve.noetherianC",
+   "AlgebraicGeometry.Scheme.MiddleExtensionCurve.absoluteSeparatedU",
+   "AlgebraicGeometry.Scheme.MiddleExtensionCurve.coefficientUnits",
+   "AlgebraicGeometry.Scheme.MiddleExtensionCurve.LisseSheaf",
+   "AlgebraicGeometry.Scheme.MiddleExtensionCurve.CoefficientCategory",
+   "AlgebraicGeometry.Scheme.middleExtensionIntegerMap_mem",
+   "AlgebraicGeometry.Scheme.middleExtensionIntegerMap",
+   "AlgebraicGeometry.Scheme.middleExtensionLevelFunctor",
+   "AlgebraicGeometry.Scheme.middleExtensionIntegralSheaf",
+   "AlgebraicGeometry.Scheme.middleExtensionIntegralComplex",
+   "AlgebraicGeometry.Scheme.middleExtensionIntegralComplex_mem",
+   "AlgebraicGeometry.Scheme.curveMiddleExtension",
+   "AlgebraicGeometry.Scheme.shiftedCurveMiddleExtension"
+  ],
+  "file": "lean/Sheaf/Paper/CurveMiddleExtension.lean",
+  "statement": "def curveMiddleExtension {D : WeilConjectures.FiniteFieldDatum.{u}} (c : MiddleExtensionCurve D) (hl : l ≠ D.p) (F : c.LisseSheaf l hl Qbar) : c.CoefficientCategory l hl Qbar",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The finite-stage ordinary direct images are completed and placed in degree zero, rationalized at their original finite coefficient stage, then shifted by the existing pair shift. Helpers bundle the stated curve hypotheses and derive the domain instances; no extra hypotheses or object choices are introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-132e707f3",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Node diff touches only the lean field; lean.statement matches the signature verbatim; report has a real Worker report and Second reading by Q126. Every clause is matched: FiniteFieldDatum, prime l with hl : l ≠ D.p, Qbar : Type (u+1) with IsAlgClosure (the universe the recorded lisse and pbcQbarCategory interfaces need, an equivalent explicit binder); a dense k0-open immersion of separated finite-type schemes (LocallyOfFiniteType+QuasiCompact, IsSeparated, IsOpenImmersion, DenseRange); Smooth C.hom; IsPureDimension 1. F is the recorded LisseAlgebraicSheaf. j_* is Etale.lowerStar at each finite level, moved by canonical maps (comparisonUpperStar, the integral-normalized qbarStageFieldEquiv map, pbcAssociatedModule, pbcExtend along pbcCompletedScalar), then an ordinary limit, degree 0, and pbcStageLocalization at the model's own stage in pbcQbarCategory; the [1] uses the recorded pair shift; no Rj_* is used. The four sorry proofs are named theorems with proof docstrings; the stage-membership theorem is a proof the definition needs and is true. Edge cases (j=id, F=0, empty or disconnected C, torsion lattices, universes) are covered. Etale.middleExtension is generic and not a duplicate. nt_compile.py --json on the snapshot against the side overlay: rc 0, clean, 29.1 s. Minor: two statement-dependency imports are unreferenced, which the rules allow."
  }
 }

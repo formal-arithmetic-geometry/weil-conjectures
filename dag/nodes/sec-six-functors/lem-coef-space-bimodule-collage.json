@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-category-of-spaces",
-  "lem-coef-complete-segal-quasicategory-comparison"
+  "lem-coef-complete-segal-quasicategory-comparison",
+  "lem-coef-infinity-adjunction-mapping-equivalence"
  ],
  "proof": [
   {
@@ -196,5 +197,40 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-e92589f5c (reviewer sub-agent of L); spot-checked: I read all of it: the contract, the report, the item, the new node, every cited node's full statement, the unit sk-prop-sf-biduality-general and the blueprint ancestor prop-coef-integral-exceptional-adjoint. The item's statement is identical to the base and is not weakened. All cited proof nodes are in the same unit, so there is no route departure and no tool_uses entry. There is no cycle and no SGA source. HTT places checked: 2.3.1.3/2.3.1.4, 1.1.5.10, 2.2.5.1, 2.2.5.6, 4.2.4.4 and A.3.3. Step checks: step 2's associativity on a mixed triple is exactly the condition that the two actions of M commute, and triples through a reverse hom are vacuous because those homs are empty. Step 3 meets the hypotheses of the triangular lemma (identity resolutions are local trivial fibrations; reverse homs are empty), and N(a,b)->M(a,b) is a trivial Kan fibration onto a Kan complex, so N(a,b) is Kan and the resolved collage is locally Kan. Step 4 uses the locally Kan mapping-space clause, and the endpoint fibers are the full subcategories. Step 5's one-crossing description plus the comparison R is sound. The new node lem-coef-strict-bimodule-rectification is true: take Bergner fibrant-cofibrant replacements, use the product rigidification of lem-coef-joyal-homotopy-exponentials, then enriched-diagram rectification into Kan sSet. It is smaller than the item and duplicates neither the one-variable rectification nor the triangular lemma. Edge cases (empty C or D, empty H, a point) hold. Three fixes under fixes/: (1) item stmt_deps restored to the base list; the new node stays a proof dependency only. (2) In the item's steps the strict collage and its resolution were named D and C, clashing with the statement's C and D; renamed to \\mathcal K and \\widetilde{\\mathcal K}, added $ delimiters, and spelled out a few one-line checks. (3) In the new node: wrong HTT URL corrected and the places 2.2.5.6 and 4.2.4.4 added; statement TeX delimited; made explicit that M's values are U-small and that N_hc M is a functor into S_U.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpaceBimoduleCollage",
+  "declaration": "SSet.SpaceBimoduleCollage.space_bimodule_collage",
+  "declarations": [
+   "SSet.SpaceBimoduleCollage.Correspondence",
+   "SSet.SpaceBimoduleCollage.homSubcomplex",
+   "SSet.SpaceBimoduleCollage.correspondenceEnrichment",
+   "SSet.SpaceBimoduleCollage.correspondences",
+   "SSet.SpaceBimoduleCollage.bimodules",
+   "SSet.SpaceBimoduleCollage.vertexMap",
+   "SSet.SpaceBimoduleCollage.vertexCorrespondence",
+   "SSet.SpaceBimoduleCollage.edgeMap",
+   "SSet.SpaceBimoduleCollage.HasStringPresentation",
+   "SSet.SpaceBimoduleCollage.Realization",
+   "SSet.SpaceBimoduleCollage.Classifier",
+   "SSet.SpaceBimoduleCollage.restrict",
+   "SSet.SpaceBimoduleCollage.reindex",
+   "SSet.SpaceBimoduleCollage.space_bimodule_collage"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SpaceBimoduleCollage.lean",
+  "statement": "theorem space_bimodule_collage : (∀ (C D : SSet.{u}) [Quasicategory C] [Quasicategory D] (H : SSet.uliftFunctor.{u + 1, u}.obj (C.op ⊗ D) ⟶ Spaces.infinityCategory.{u}), Nonempty (Realization H)) ∧ ∃ E : ∀ (C D : SSet.{u}) [Quasicategory C] [Quasicategory D], Classifier C D, (∀ (C D : SSet.{u}) [Quasicategory C] [Quasicategory D], Quasicategory (correspondences C D) ∧ Quasicategory (bimodules C D) ∧ ∀ P : SSet.{u}, Enhanced.IsFunctorEquivalence ((ihom (SSet.uliftFunctor.{u + 1, u}.obj P)).map (E C D).inverse)) ∧ (∀ (C D C' D' : SSet.{u}) [Quasicategory C] [Quasicategory D] [Quasicategory C'] [Quasicategory D'] (f : C' ⟶ C) (g : D' ⟶ D), Enhanced.AreNaturallyEquivalent (reindex (E C D) (E C' D') f g ≫ (E C' D').map) ((E C D).map ≫ restrict f g))",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "A single postponed theorem. Full framed correspondences and their simplicial mapping objects give a coherent classifier, normalized on actual mixed twisted-arrow couplings and on transformations. Complete Segal strings use the existing classification diagram and homotopy Segal comparisons. Endpoint reindexing is the explicit transport of ordinary coherent restriction through the classifier. All helper data are explicit structures or constructions belonging to the collage notion; no auxiliary theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df99dbff3",
+  "group": "N8",
+  "result": "pass",
+  "note": "Read the node, report, module and every dependency declaration (AdjunctBifunctorModel/adjunctCoupling/AdjunctTransport, twistedArrowMap, Enhanced.mappingSpace/IsFunctorEquivalence/AreNaturallyEquivalent, Classification.diagram, the complete-Segal comparison). Node diff vs base: only lean record plus a landed stmt_dep (lem-coef-infinity-adjunction-mapping-equivalence), no cycle (closure 428 nodes), statement unchanged, lean.statement verbatim. All clauses rendered: small total over Delta[1] with strict pullback fibers C,D; mixed mapping weak equivalence to the u-small value of H; reverse mapping spaces empty in all degrees; both actions fixed coherently by AdjunctBifunctorModel with diagram = H; complete Segal presentation via Classification.diagram; Classifier with unit/counit normalized on vertices and edges by the actual coupling; equivalence for every small parameter P; restriction square for arbitrary f,g. Checked that the correspondence homs are Kan (pointwise-identity transformations over an isofibration), so Quasicategory(correspondences) holds; strict fibers attainable via the cograph. Edge cases (empty C/D/H, point, empty P) covered. No hollow definitions, one sorry, source and blueprint docstrings on all 14 declarations, universes bound. nt_compile --json at the library path: clean (15.5 s / 25.0 s), axioms only sorryAx plus the standard ones. Observations only: the string and reindex conjuncts are weak but faithful; the report text has 'Definition the project server' where 2.3.1.3 was replaced (module and node carry correct places)."
  }
 }

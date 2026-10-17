@@ -222,5 +222,39 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-b5661eecb (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the new node lem-coef-ordinal-inverse-diagram-model, every cited statement, the parent lem-coef-flexible-weight-enriched-lift (steps 4 and 6), the Kan-tower sibling, the unit sk-prop-sf-biduality-general and the blueprint ancestor prop-coef-integral-exceptional-adjoint (paragraph 2). New node: it is the Reedy structure on the inverse category theta^op, from HTT A.2.9 / Hirschhorn 15.3.4. HTT is not archived and is marked WANTED, so I checked it from my own knowledge. With an inverse shape, latching objects are initial, so cofibrations and trivial cofibrations are objectwise, and fibrations are given by relative matching maps with M_alpha = lim_{beta<alpha}. I tested theta = 0, 1, 2, omega and omega+1. It is not a duplicate: lem-coef-reedy-model-structure allows only N-valued degrees, the injective-model node needs combinatoriality and gives no matching test, and the latching-lifting node is a lifting statement only. It does not restate the item, and its form (statement only, searches, blueprint from/via) is correct. Item: the statement is unchanged except for the Cat-infinity definition reference, which is meaning-preserving. Edge cases checked: lambda=1, successor and limit lambda, empty stages, K empty. Step 1: zero stage, successor matching object = X_alpha, isofibration = clause (1) of the characterizations node, and an isomorphism at limit stages. Steps 2-3: the Quillen check and the derived counit with X fibrant. Step 5: elementary. Step 6: corner map with A empty gives Fun(K,X_{a+1}) -> Fun(K,X_a). Step 7: naturality. All of these are correct. One E5 fault: Step 4 moved from the Joyal localization to the Cat-infinity of def-cbc-enhanced-cartesian-fibration (coherent nerve of the strict diagram) only by saying 'all comparisons are natural'. Fixed in fixes/dag/nodes/sec-six-functors/lem-coef-transfinite-isofibration-limit.json: Step 4 now spells out the argument. The unit Q -> N_hc R C[Q] is a categorical equivalence, from the Quillen-equivalence clause with a locally Kan target. Clause (2) of lem-coef-joyal-quasicategory-characterizations then makes it an equivalence in Cat-infinity. The vertex-component clause of the cone-calculus node makes it an equivalence of cones over the ordinary category I^<|. lem-coef-joyal-quasicategory-characterizations is added to Step 4's uses; it was already in proof_deps. The already-reviewed lem-coef-degreewise-cartesian-pullback-cat-infinity uses the coherent-nerve identification the same way. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, a generic limit criterion from the cbc unit. No SGA, no cycle, no node dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TransfiniteIsofibrationLimit",
+  "declaration": "SSet.Enhanced.transfinite_isofibration_limit",
+  "declarations": [
+   "SSet.Enhanced.ordinalInitialSegmentCov",
+   "SSet.Enhanced.ordinalInitialSegment",
+   "SSet.Enhanced.ordinalRestriction",
+   "SSet.Enhanced.ordinalRestrictionCone",
+   "SSet.Enhanced.ordinalLimitComparison",
+   "SSet.Enhanced.ordinalQuasicategoryDiagram",
+   "SSet.Enhanced.ordinalFunctorDiagram",
+   "SSet.Enhanced.ordinalFunctorComparison",
+   "SSet.Enhanced.ordinalFunctorPreMap",
+   "SSet.Enhanced.IsStrictOrdinalSimplex",
+   "SSet.Enhanced.ordinalConeSimplex",
+   "SSet.Enhanced.IsInducedOrdinalCone",
+   "SSet.Enhanced.ordinalFunctorQuasicategory",
+   "SSet.Enhanced.transfinite_isofibration_limit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TransfiniteIsofibrationLimit.lean",
+  "statement": "theorem transfinite_isofibration_limit {ord : Ordinal.{u}} (hord : ord ≠ 0) (X : ord.ToTypeᵒᵖ ⥤ SSet.{u}) (hX : ∀ i : ord.ToTypeᵒᵖ, Quasicategory (X.obj i)) (hsucc : ∀ i : ord.ToType, ¬ IsMax i → SSet.Enhanced.IsIsofibration (X.map (homOfLE (Order.le_succ i)).op)) (hlim : ∀ i : ord.ToType, Order.IsSuccLimit i → IsIso (ordinalLimitComparison X i)) : (Quasicategory (limit X) ∧ ∃ t : (coneCategory (strictCoherentDiagram (ordinalQuasicategoryDiagram X hX))) _⦋0⦌, IsInducedOrdinalCone X hX (limit.cone X) t ∧ IsLimiting (strictCoherentDiagram (ordinalQuasicategoryDiagram X hX)) t) ∧ (∀ (K : SSet.{u}), IsIso (ordinalFunctorComparison K X) ∧ ∃ t : (coneCategory (strictCoherentDiagram (ordinalQuasicategoryDiagram (ordinalFunctorDiagram K X) (ordinalFunctorQuasicategory K X hX)))) _⦋0⦌, IsInducedOrdinalCone (ordinalFunctorDiagram K X) (ordinalFunctorQuasicategory K X hX) ((ihom K).mapCone (limit.cone X)) t ∧ IsLimiting (strictCoherentDiagram (ordinalQuasicategoryDiagram (ordinalFunctorDiagram K X) (ordinalFunctorQuasicategory K X hX))) t) ∧ (∀ {Y : ord.ToTypeᵒᵖ ⥤ SSet.{u}} (_hY : ∀ i : ord.ToTypeᵒᵖ, Quasicategory (Y.obj i)) (_hsuccY : ∀ i : ord.ToType, ¬ IsMax i → IsIsofibration (Y.map (homOfLE (Order.le_succ i)).op)) (_hlimY : ∀ i : ord.ToType, Order.IsSuccLimit i → IsIso (ordinalLimitComparison Y i)) (a : X ⟶ Y) (i : ord.ToTypeᵒᵖ), limMap a ≫ limit.π Y i = limit.π X i ≫ a.app i) ∧ (∀ (K : SSet.{u}) (i : ord.ToTypeᵒᵖ), ordinalFunctorComparison K X ≫ limit.π (ordinalFunctorDiagram K X) i = (ihom K).map (limit.π X i)) ∧ (∀ (K : SSet.{u}) {Y : ord.ToTypeᵒᵖ ⥤ SSet.{u}} (_hY : ∀ i : ord.ToTypeᵒᵖ, Quasicategory (Y.obj i)) (_hsuccY : ∀ i : ord.ToType, ¬ IsMax i → IsIsofibration (Y.map (homOfLE (Order.le_succ i)).op)) (_hlimY : ∀ i : ord.ToType, Order.IsSuccLimit i → IsIso (ordinalLimitComparison Y i)) (a : X ⟶ Y), (ihom K).map (limMap a) ≫ ordinalFunctorComparison K Y = ordinalFunctorComparison K X ≫ limMap (Functor.whiskerRight a (ihom K))) ∧ (∀ {K K' : SSet.{u}} (r : K' ⟶ K), (MonoidalClosed.pre r).app (limit X) ≫ ordinalFunctorComparison K' X = ordinalFunctorComparison K X ≫ limMap (ordinalFunctorPreMap r X))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-36b01c6c3",
+  "group": "NB",
+  "result": "pass",
+  "note": "Read node (unchanged except new lean record; one commit, 3 files), deps EnhancedDiagramsCones (coneCategory/IsLimiting), IsofibrationExponentiation (IsIsofibration), EnhancedCartesianFibration (CatInfinity, strictCoherentDiagram), and the full module. Hypotheses match: Ordinal.{u} ord≠0, strict functor ord.ToTypeᵒᵖ⥤SSet, all stages quasicategories, successor isofibrations for ¬IsMax (α+1<λ), IsIso of canonical limit.lift comparison at IsSuccLimit stages. Conclusions match: Quasicategory (limit X); IsInducedOrdinalCone fixes apex and all coherent simplices of the strict projection cone (direction consistent with coneCategory, satisfiable) plus IsLimiting in CatInfinity; for all K IsIso(limit.post) and limiting exponentiated mapCone; projection identity and naturality in tower maps (same hypotheses on Y) and in K'→K; no surjectivity. Edge cases λ=1,2,ω,ω+1, empty stages, K=∅ covered; single universe u (levelParams probe). Docstrings/source/blueprint/7 proof steps present, only sorry, no hollow defs, imports per rule, lines ≤97, lean.statement verbatim, all 14 declarations listed. nt_compile --json clean in 6.4 s. Notes only: Mathlib IsWellOrderContinuous (on X.rightOp)/principalSegIio phrasing possible; second reading is a self-review."
  }
 }
