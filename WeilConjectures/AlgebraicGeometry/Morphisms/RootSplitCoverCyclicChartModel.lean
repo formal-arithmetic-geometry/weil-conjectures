@@ -84,7 +84,7 @@ theorem root_split_cover_cyclic_chart_model
       root_split_cover_on_divisor_charts R g n hn hg p hj d y hy δ hδ
     refine ⟨S, ψ, z, hψ, hz, m, e, he, γ, hγ⟩
   · obtain ⟨S, φ, z, hφ, hz, hunit, γ, hγ⟩ :=
-      root_split_cover_away_divisor_charts R g n hn p hj d y hy δ hδ
+      root_split_cover_away_divisor_charts R g n hn p d y hy δ hδ
     refine ⟨S, φ, z, hφ, hz, d, fun _ ↦ 1, ?_, γ, hγ⟩
     intro k
     exact ⟨Nat.zero_lt_one, by simp⟩
