@@ -63,15 +63,28 @@ lemma adicConstant_one_str {S : Scheme.{u}} [S.Over (Spec (CommRingCat.of k₀))
     rwa [IsIso.Iso.inv_inv] at this
   exact IsMonHom.one_hom (f := (adicConstantSheafLowerStarIso l e).hom)
 
-/-- The unit section of the pullback of `ℚ̄_ℓ` is compatible with the Weil structure. -/
-lemma upperStar_adicConstant_one_str :
-    ε ((σX).inv)_*[W] ≫ ((σX).inv)_*[W].map (ε (φ̄)^*[W] ≫
-        (φ̄)^*[W].map (η : 𝟙_ _ ⟶ adicConstantSheaf l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber)) ≫
-        ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj (ProEtaleWeilSheaf.adicConstant k₀ l Y)).str.hom.hom =
-      ε (φ̄)^*[W] ≫ (φ̄)^*[W].map
-        (η : 𝟙_ _ ⟶ adicConstantSheaf l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber) := by
-  set ιX := upperStarIsoLowerStarInv W σX
-  set ιY := upperStarIsoLowerStarInv W σY
+/-- A section of a pro-étale Weil sheaf is compatible with the Weil structure in pushforward form
+if and only if it is in pullback form. -/
+lemma unit_str_iff {S : Scheme.{u}} [S.Over (Spec (CommRingCat.of k₀))]
+    (P : ProEtaleWeilSheaf k₀ l S) (e : 𝟙_ _ ⟶ P.carrier.X) :
+    ε ((S ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[W] ≫
+        ((S ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[W].map e ≫
+        P.str.hom.hom = e ↔
+      ε ((S ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[W] ≫
+        ((S ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[W].map e ≫
+        frobeniusStr P = e := by
+  set ι' := upperStarIsoLowerStarInv W (S ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+  have hu := NatTrans.IsMonoidal.unit (τ := ι'.hom)
+  rw [frobeniusStr, ι'.hom.naturality_assoc, reassoc_of% hu]
+
+
+/-- The pullback of a section compatible with the Weil structure is compatible with the Weil
+structure, in pullback form. -/
+lemma upperStar_unit_frobeniusStr (P : ProEtaleWeilSheaf k₀ l Y) (e : 𝟙_ _ ⟶ P.carrier.X)
+    (he : ε ((σY).hom)^*[W] ≫ ((σY).hom)^*[W].map e ≫ frobeniusStr P = e) :
+    ε ((σX).hom)^*[W] ≫ ((σX).hom)^*[W].map (ε (φ̄)^*[W] ≫ (φ̄)^*[W].map e) ≫
+        frobeniusStr ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj P) =
+      ε (φ̄)^*[W] ≫ (φ̄)^*[W].map e := by
   set ψ := (upperStarComp W (σX).hom φ̄).symm ≪≫
     upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
       φ (comp_over φ (Spec (CommRingCat.of k₀)))).symm ≪≫
@@ -79,34 +92,25 @@ lemma upperStar_adicConstant_one_str :
   have hψ : NatTrans.IsMonoidal ψ.hom := by
     simp only [ψ, Iso.trans_hom, Iso.symm_hom]
     infer_instance
-  set P := (ProEtaleWeilSheaf.upperStar k₀ l φ).obj (ProEtaleWeilSheaf.adicConstant k₀ l Y)
-  have hs : P.str.hom.hom = ιX.inv.app _ ≫ frobeniusStr P := by
-    rw [frobeniusStr, Iso.inv_hom_id_app_assoc]
-  have hfs : frobeniusStr P = ψ.hom.app _ ≫
-      (φ̄)^*[W].map (frobeniusStr (ProEtaleWeilSheaf.adicConstant k₀ l Y)) := by
+  have hfs : frobeniusStr ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj P) = ψ.hom.app _ ≫
+      (φ̄)^*[W].map (frobeniusStr P) := by
     rw [frobeniusStr_upperStar]
     simp [ψ]
-  have hY := adicConstant_one_str (k₀ := k₀) (l := l) (S := Y)
-  have hιXY := NatTrans.IsMonoidal.unit (τ := ιY.hom)
-  have hι := NatTrans.IsMonoidal.unit (τ := ιX.inv)
   have hψu := NatTrans.IsMonoidal.unit (τ := ψ.hom)
-  simp only [Functor.LaxMonoidal.comp_ε, Functor.comp_map] at hψu
-  have hYfs : ε ((σY).hom)^*[W] ≫ ((σY).hom)^*[W].map
-      (η : 𝟙_ _ ⟶ adicConstantSheaf l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≫
-      frobeniusStr (ProEtaleWeilSheaf.adicConstant k₀ l Y) =
-        (η : 𝟙_ _ ⟶ adicConstantSheaf l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber) := by
-    rw [frobeniusStr]
-    erw [ιY.hom.naturality_assoc]
-    erw [reassoc_of% hιXY]
-    exact hY
-  rw [hs, hfs]
-  erw [ιX.inv.naturality_assoc]
-  erw [reassoc_of% hι]
-  rw [Functor.map_comp_assoc]
-  erw [ψ.hom.naturality_assoc]
-  erw [reassoc_of% hψu]
-  rw [← Functor.map_comp, ← Functor.map_comp]
-  erw [hYfs]
+  simp only [Functor.LaxMonoidal.comp_ε] at hψu
+  have hn := ψ.hom.naturality e
+  simp only [Functor.comp_map] at hn
+  rw [hfs, Functor.map_comp_assoc, reassoc_of% hn, reassoc_of% hψu, ← Functor.map_comp,
+    ← Functor.map_comp, he]
+
+/-- The pullback of a section compatible with the Weil structure is compatible with the Weil
+structure. -/
+lemma upperStar_unit_str (P : ProEtaleWeilSheaf k₀ l Y) (e : 𝟙_ _ ⟶ P.carrier.X)
+    (he : ε ((σY).inv)_*[W] ≫ ((σY).inv)_*[W].map e ≫ P.str.hom.hom = e) :
+    ε ((σX).inv)_*[W] ≫ ((σX).inv)_*[W].map (ε (φ̄)^*[W] ≫ (φ̄)^*[W].map e) ≫
+        ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj P).str.hom.hom =
+      ε (φ̄)^*[W] ≫ (φ̄)^*[W].map e :=
+  (unit_str_iff _ _).2 (upperStar_unit_frobeniusStr φ P e ((unit_str_iff P e).1 he))
 
 end ProEtaleWeilSheaf
 
