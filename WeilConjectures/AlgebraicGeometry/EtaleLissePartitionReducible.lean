@@ -33,25 +33,25 @@ private lemma lisse_open_comp {X Y : Scheme.{u}}
     IsLisseEtaleSheafOfSets ((etaleSetPullback (U.ι ≫ g)).obj F) := by
   have hopen : IsLisseEtaleSheafOfSets
       ((etaleSetPullback U.ι).obj ((etaleSetPullback g).obj F)) := by
-    refine ⟨isLocallyConstantEtaleSheafOfSets_open_pullback _ U hF.1, ?_⟩
-    intro Ω _ _ s
+    refine isFiniteLocallyConstantSheafOfTypes_of_finite_sheafFiber
+      (isLocallyConstantEtaleSheafOfSets_open_pullback _ U hF.1) fun Ω _ _ s ↦ ?_
     obtain ⟨c, hc, _⟩ := etaleSetInverseImageStalkGerm Y U U.ι
       ((etaleSetPullback g).obj F) Ω s
-    have := hF.2 Ω (s ≫ U.ι)
+    have := hF.finite_sheafFiber Ω (s ≫ U.ι)
     exact Finite.of_injective c hc.1
   obtain ⟨c, _⟩ := etaleSetInverseImageCompositionUnits.2.2
   have transport : ∀ {V : Scheme.{u}}
       {G H : Sheaf V.smallEtaleTopology (Type (u + 1))}, (G ≅ H) →
       IsLisseEtaleSheafOfSets G → IsLisseEtaleSheafOfSets H := by
     intro V G H e hG
-    obtain ⟨⟨𝒰, h𝒰⟩, hfin⟩ := hG
-    refine ⟨⟨𝒰, fun i ↦ ?_⟩, ?_⟩
+    obtain ⟨𝒰, h𝒰⟩ := hG.1
+    refine isFiniteLocallyConstantSheafOfTypes_of_finite_sheafFiber ⟨𝒰, fun i ↦ ?_⟩
+      fun Ω _ _ s ↦ ?_
     · have := h𝒰 i
       exact Sheaf.isConstant_congr _
         ((V.smallEtaleTopology.overPullback (Type (u + 1))
           (𝒰.etalePrecoverageToEtale i)).mapIso e)
-    · intro Ω _ _ s
-      have := hfin Ω s
+    · have := hG.finite_sheafFiber Ω s
       exact Finite.of_equiv _
         (((pointSmallEtale s).sheafFiber (A := Type (u + 1))).mapIso e).toEquiv
   exact transport ((c X Y U g U.ι).app F) hopen

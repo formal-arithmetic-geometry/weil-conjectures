@@ -36,15 +36,15 @@ namespace AlgebraicGeometry.Scheme
 private theorem lisse_of_iso {T : Scheme.{u}}
     {F G : Sheaf T.smallEtaleTopology (Type (u + 1))}
     (e : F ≅ G) (hF : IsLisseEtaleSheafOfSets F) : IsLisseEtaleSheafOfSets G := by
-  obtain ⟨⟨𝒰, h𝒰⟩, hfin⟩ := hF
-  refine ⟨⟨𝒰, ?_⟩, ?_⟩
+  obtain ⟨𝒰, h𝒰⟩ := hF.1
+  refine isFiniteLocallyConstantSheafOfTypes_of_finite_sheafFiber ⟨𝒰, ?_⟩
+    fun Ω _ _ t ↦ ?_
   · intro i
     have := h𝒰 i
     exact Sheaf.isConstant_congr _
       ((T.smallEtaleTopology.overPullback (Type (u + 1))
         (𝒰.etalePrecoverageToEtale i)).mapIso e)
-  · intro Ω _ _ t
-    have := hfin Ω t
+  · have := hF.finite_sheafFiber Ω t
     exact Finite.of_equiv _
       (((pointSmallEtale t).sheafFiber (A := Type (u + 1))).mapIso e).toEquiv
 

@@ -125,12 +125,12 @@ theorem isLisseEtaleSheafOfSets_of_etale_surjective_pullback
           (NatIso.op (MorphismProperty.Over.mapComp
             (Q := ⊤) (𝒰.map_prop i) (inferInstance : Etale p)).symm) F.obj)
     exact Sheaf.isConstant_congr (𝒰.X i).smallEtaleTopology c
-  · intro Ω _ _ s
+  · refine ⟨fun Ω _ _ s ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).mpr ?_⟩
     obtain ⟨t, ht⟩ := p.surjective (s default)
     obtain ⟨a, ha, _⟩ := exists_fac_of_etale_of_isSepClosed p s t ht
     obtain ⟨c, hc, _⟩ := AlgebraicGeometry.etaleSetInverseImageStalkGerm Y T p F Ω a
     have : Finite ((pointSmallEtale a).sheafFiber.obj ((etaleSetPullback p).obj F)) :=
-      hF.2 Ω a
+      hF.finite_sheafFiber Ω a
     have hfinite : Finite ((pointSmallEtale (a ≫ p)).sheafFiber.obj F) :=
       Finite.of_surjective c hc.2
     simpa only [ha] using hfinite
