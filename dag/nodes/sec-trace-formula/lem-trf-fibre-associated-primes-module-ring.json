@@ -192,5 +192,29 @@
   "group": "Q84",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q84-7b28f1af6 (reviewer sub-agent of L); spot-checked: Read the required instructions, packet/report, item, unit/chapter route, cited DAG statements, and Stacks Tags 05BY, 05BZ, and 05E0. Verified all four proof steps, hypotheses, annihilator and primality calculations, fibre-prime correspondence, edge cases, route compliance, and absence of hidden long lemmas or duplicate nodes. Wrote review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FibreAssociatedPrimesModuleRing",
+  "declaration": "RingTheory.fibre_associated_primes_module_ring",
+  "declarations": [
+   "RingTheory.fibreRingMap",
+   "RingTheory.fibre_associated_primes_module_ring"
+  ],
+  "file": "lean/Sheaf/TraceFormula/FibreAssociatedPrimesModuleRing.lean",
+  "statement": "theorem fibre_associated_primes_module_ring (A : Type u) (B : Type v) [CommRing A] [CommRing B] [Algebra A B] (p : Ideal A) [p.IsPrime] (L : Type w) [AddCommGroup L] [Module (B ⊗[A] p.ResidueField) L] : Set.BijOn (Ideal.comap (fibreRingMap A B p)) (annihilatorAssociatedPrimes (B ⊗[A] p.ResidueField) L) (@annihilatorAssociatedPrimes B _ L _ (Module.compHom L (fibreRingMap A B p))) ∧ (∀ z : L, Ideal.comap (fibreRingMap A B p) (@Submodule.colon (B ⊗[A] p.ResidueField) L _ _ inferInstance (⊥ : @Submodule (B ⊗[A] p.ResidueField) L _ _ inferInstance) {z}) = @Submodule.colon B L _ _ (Module.compHom L (fibreRingMap A B p)) (⊥ : @Submodule B L _ _ (Module.compHom L (fibreRingMap A B p))) {z} ∧ @Submodule.colon (B ⊗[A] p.ResidueField) L _ _ inferInstance (⊥ : @Submodule (B ⊗[A] p.ResidueField) L _ _ inferInstance) {z} = Ideal.map (fibreRingMap A B p) (@Submodule.colon B L _ _ (Module.compHom L (fibreRingMap A B p)) (⊥ : @Submodule B L _ _ (Module.compHom L (fibreRingMap A B p))) {z}) ∧ ((@Submodule.colon (B ⊗[A] p.ResidueField) L _ _ inferInstance (⊥ : @Submodule (B ⊗[A] p.ResidueField) L _ _ inferInstance) {z}).IsPrime ↔ (@Submodule.colon B L _ _ (Module.compHom L (fibreRingMap A B p)) (⊥ : @Submodule B L _ _ (Module.compHom L (fibreRingMap A B p))) {z}).IsPrime)) ∧ (∀ q : Ideal B, q ∈ @annihilatorAssociatedPrimes B _ L _ (Module.compHom L (fibreRingMap A B p)) → q.comap (algebraMap A B) = p)",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The module also declares the canonical source-oriented tensor inclusion fibreRingMap used for j : B →+* B ⊗[A] κ(p).",
+  "fixed_by": "NT-stage2-cc-d1a6030b4"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1a6030b4",
+  "group": "Q96",
+  "result": "fix",
+  "note": "Every node clause is rendered exactly: contraction BijOn Ass_C(L)->Ass_B(L) with the B-structure given by Module.compHom along includeLeft (b ↦ b⊗1); per-z comap equality, J=IC via Ideal.map, prime iff; associated B-primes contract to p. No extra hypotheses or universe restriction. lean.statement matches the file verbatim. Matches Stacks 05E0/05BY/05BZ; dependencies read; edge cases z=0, empty fibre, zero L hold; no duplicate in Mathlib or the side project. nt_compile is clean for both the delivered and fixed files. Only fix: the fibreRingMap docstring wrongly said 'second factor'; complete corrected file at fixes/FibreAssociatedPrimesModuleRing.lean, docstring only."
  }
 }

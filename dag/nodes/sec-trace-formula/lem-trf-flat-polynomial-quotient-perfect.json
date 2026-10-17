@@ -260,5 +260,23 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-30108ce96 (reviewer sub-agent of L); spot-checked: Read the complete item, report, chapter/unit route, all cited DAG statements, and Stacks Tags 067J, 068Y, 068X, 0658, 066Q, 00FN, 00LP, 00LY/00M3, and 0BZW. The five steps correctly derive R-Tor amplitude from flatness, transfer the bound over the polynomial ring, and obtain the finite projective resolution. Edge cases A=0, zero base, n=0, redundant variables, polynomial A, and a singular base were checked. No new nodes, duplicates, circularity, long-step issues, forbidden SGA citations, or route-pivot machinery were found. Corrected ordinary ring/module dependency typing is sound. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FlatPolynomialQuotientPerfect",
+  "declaration": "DerivedCategory.flat_polynomial_quotient_perfect",
+  "statement": "theorem flat_polynomial_quotient_perfect {R : Type u} {A : Type u} [CommRing R] [CommRing A] [IsNoetherianRing R] [IsNoetherianRing A] (φ : R →+* A) (hφflat : RingHom.Flat φ) (hφfinite : RingHom.FiniteType φ) (n : ℕ) [HasDerivedCategory.{wR} (ModuleCat.{u} R)] [HasDerivedCategory.{wP} (ModuleCat.{u} (MvPolynomial (Fin n) R))] (p : MvPolynomial (Fin n) R →+* A) (hp : Function.Surjective p) (hpc : p.comp (MvPolynomial.C : R →+* MvPolynomial (Fin n) R) = φ) : IsPerfectRingComplex (R := MvPolynomial (Fin n) R) (C := Q.obj ((CochainComplex.singleFunctor (ModuleCat.{u} (MvPolynomial (Fin n) R)) 0).obj (@ModuleCat.of (MvPolynomial (Fin n) R) _ A _ (Module.compHom A p)))) ∧ ∃ a b : ℤ, a ≤ b ∧ torAmplitudeIn (ModuleCat.{u} R) a b (Q.obj ((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj (@ModuleCat.of R _ A _ (Module.compHom A φ))))",
+  "branch": "newtargets-dag",
+  "by": "Q117",
+  "date": "2026-10-17",
+  "file": "lean/Sheaf/TraceFormula/FlatPolynomialQuotientPerfect.lean",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7a8bf8ea4",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Read node, 8 stmt deps and their Lean records, IsPerfectRingComplex, torAmplitudeIn, BoundedFiniteTorPerfect consumer, report (Worker report + Second reading present), module. Every hypothesis matches (CommRing/IsNoetherianRing R and A, RingHom.Flat, RingHom.FiniteType, surjective p : MvPolynomial (Fin n) R →+* A with p.comp C = φ). Conclusions: IsPerfectRingComplex of A[0] via Module.compHom A p, and ∃ a ≤ b with torAmplitudeIn over R via Module.compHom A φ; not narrowed to [0,0]. Independent localization universes wR/wP; R and A share u, which ModuleCat.{u} forces and which loses no case. Edge cases n=0, A=0, R=0 and a=b allowed. No hollow definition, sorry only, source/blueprint docstrings with the 5 proof steps, lean.statement verbatim. nt_compile --json: exit 0 in 3.6 s, no diagnostics; a probe copy confirmed the tool reports errors. Axioms: propext, sorryAx, Classical.choice, Quot.sound. No findings."
  }
 }

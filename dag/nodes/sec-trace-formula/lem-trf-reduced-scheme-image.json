@@ -166,5 +166,24 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-93c0956ae (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, and unit/chapter route. Repaired C1/C5 by citing the existing Stacks 0356 reduced-source factorization lemma in both factorization and minimality steps. Statement unchanged; no new nodes. Edge cases and dependency checks passed. Accepted tool use and corrected JSON are documented in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ReducedSchemeImage",
+  "declaration": "AlgebraicGeometry.schemeTheoreticImage_reduced",
+  "file": "lean/Sheaf/TraceFormula/ReducedSchemeImage.lean",
+  "statement": "theorem schemeTheoreticImage_reduced (U X : Scheme.{u}) (f : U ⟶ X) [IsReduced U] : IsClosedImmersion f.imageι ∧ IsReduced f.image ∧ f.ker = vanishingIdeal (TopologicalSpace.Closeds.mk (closure (Set.range f)) isClosed_closure) ∧ Set.range f.imageι = closure (Set.range f) ∧ ∀ (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i], (∃ g : U ⟶ Z, g ≫ i = f) → ∃! h : f.image ⟶ Z, h ≫ i = f.imageι",
+  "by": "Q43",
+  "date": "2026-10-17",
+  "existing": false,
+  "branch": "newtargets-dag",
+  "fixed_by": "NT-stage2-cc-2a46728b0"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a46728b0",
+  "group": "Q43",
+  "result": "fix",
+  "note": "Statement correct against node and Stacks 056B (morphisms.tex 977-988): arbitrary f, only [IsReduced U]. Mathlib Hom.ker is ofIdeals of the componentwise kernels for arbitrary f, so f.image/imageι is the general scheme-theoretic image; the ker = vanishingIdeal(closure range f) clause matches the dependency's T_red; reducedness, range and minimality (unique factor through every closed immersion that f factors through) clauses verified true. The open-subscheme 'in particular' clause is the instance f := V.ι (Opens.range_ι; Stacks definition-scheme-theoretically-dense (1)). Edge cases (empty U, constant map, closed/dense open immersion, identity) and universes fine; lean.statement verbatim; no added hypotheses; sorry only; report has both sections. nt_compile --json clean (4.0 s delivered, 7.4 s fixed). Only finding, H8 minor: the docstring omitted node proof step 3 (open-subscheme specialisation). fixes/ReducedSchemeImage.lean adds it as step 4 plus a module-docstring sentence; signature and node JSON unchanged."
  }
 }

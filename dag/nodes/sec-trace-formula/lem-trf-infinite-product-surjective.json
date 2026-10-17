@@ -203,5 +203,23 @@
   "group": "Q73",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q73-3e9965df4 (reviewer sub-agent of L); spot-checked: The mathematics and source checks pass, but the item JSON had incorrect created metadata: created.item named lem-trf-fppf-integral-surjective-refinement and created.group named N6. Corrected full JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-infinite-product-surjective.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InfiniteProductSurjective",
+  "declaration": "AlgebraicGeometry.infinite_product_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/InfiniteProductSurjective.lean",
+  "statement": "theorem infinite_product_surjective (S : Scheme.{u}) (J : Type u) (T : J → Scheme.{u}) (g : ∀ j : J, T j ⟶ S) (h_affine : ∀ j : J, IsAffineHom (g j)) (h_surjective : ∀ j : J, Surjective (g j)) : ∃ c : Cone (ProductsFromFiniteCofiltered.liftToFinsetObj (Discrete.functor (fun j : J => Over.mk (g j)))), Nonempty (IsLimit c) ∧ (∀ F : (Finset (Discrete J))ᵒᵖ, IsAffineHom (c.π.app F).left) ∧ (∀ (Y : Over S) (hY : ∀ j : J, Y ⟶ Over.mk (g j)), ∃! q : Y ⟶ c.pt, (∀ j : J, q ≫ (c.π.app (op ({Discrete.mk j} : Finset (Discrete J))) ≫ Pi.π (fun x : ({Discrete.mk j} : Finset (Discrete J)) => Over.mk (g x.1.as)) ⟨Discrete.mk j, by simp⟩) = hY j)) ∧ Surjective c.pt.hom",
+  "branch": "newtargets-dag",
+  "by": "Q118",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a68eb6e88",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Matches node and Stacks 0CNJ: S, J : Type u, T, g, IsAffineHom and Surjective hypotheses exactly, no extra assumptions. The conclusion repeats the exists_affine_infinite_product conclusion word for word plus Surjective c.pt.hom. The existential form means the same as the 'every product' form because products over S are unique up to isomorphism. Edge cases: empty J gives the identity of S, empty S is vacuous, universes match the dependency. Only the lean field of the item changed and the statement is verbatim; report has both sections; docstrings give source and blueprint; proof is sorry only; lines under 100 characters. nt_compile.py --json was clean twice (3.4 s and 3.2 s), and a test file confirmed that mode reports errors. Minor notes only: the report mentions a sidecar that is not in the commit, and the universal Fan form would be more uniform."
  }
 }

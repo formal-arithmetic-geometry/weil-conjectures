@@ -171,5 +171,23 @@
   "group": "Q07",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q07-50fc146c6 (reviewer sub-agent of L); spot-checked: Read the full delivery and cited statements; checked Stacks 05BA/05B9, all four steps, scalar actions, edge cases, duplicates, route, and acyclic dependency closure. Accepted the relative-flat-extension generic tool use. No new nodes, long-step violations, or repairs. Detailed checks written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.EtaleLocalRingFlatness",
+  "declaration": "AlgebraicGeometry.etale_local_ring_flatness",
+  "file": "lean/Sheaf/TraceFormula/EtaleLocalRingFlatness.lean",
+  "statement": "theorem etale_local_ring_flatness {T S : Scheme.{u}} (e : T ⟶ S) [Etale e] (t : T) (M : Type v) [AddCommMonoid M] [Module (T.presheaf.stalk t) M] : @Module.Flat (S.presheaf.stalk (e t)) M _ _ (Module.compHom M (e.stalkMap t).hom) ↔ Module.Flat (T.presheaf.stalk t) M",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-09cf03381",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Single commit adds only the lean record to the item node, the module Sheaf/TraceFormula/EtaleLocalRingFlatness.lean and the report (real Worker report and Second reading by Q93). Statement matches node and Stacks 05BA clause by clause: Etale e on Scheme.{u}, t : T, arbitrary M : Type v module over T.presheaf.stalk t with no finiteness, flatness over S.presheaf.stalk (e t) through explicit Module.compHom along (e.stalkMap t).hom iff Module.Flat over the T stalk. No extra assumptions or universe restriction; edge cases (empty T, zero module, identity) covered. lean.statement verbatim. Own Mathlib and project searches find no existing equivalence (only one-way FormallyUnramified.flat_of_restrictScalars and Flat.stalkMap). Theorem only, proof sorry; module and declaration docstrings carry source place, blueprint id and the four proof steps; lines under 100; autoImplicit false. nt_compile --json clean (6.0 s, no error or warning; a control error run confirms diagnostics are shown). Minor non-blocking notes: the private ModuleStalkFunctor import is unused by the statement (kept as the dependency marker); the module universe is more general than the ModuleCat.{u} interface of the step-2 dependency (stage-3 concern)."
  }
 }

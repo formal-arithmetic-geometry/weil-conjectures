@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-weil-field",
-  "def-trf-rational-rank"
+  "def-trf-rational-rank",
+  "lem-trf-torsionfree-rationalization-injective"
  ],
  "proof": [
   {
@@ -138,5 +139,23 @@
   "group": "Q50",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q50-1d3521515 (reviewer sub-agent of L); spot-checked: Read the full packet, item, cited nodes, unit route, Temkin source at §2.1 pp. 7–8, and Mathlib declarations. The convex-chain proof is correct in all steps, including torsion-free rationalization, largest-index contradiction, cardinal dimension, and edge cases. The independent-family node is an exact Mathlib specialization; the torsion-free node is correctly statement-only. Temkin supplies context rather than the exact lemma, which is explicitly agent-written and fully expanded. No duplicate, circular split, route-pivot violation, SGA citation, or repair is needed."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ConvexChainRationalRank",
+  "declaration": "AddCommGroup.convexChainRationalRank",
+  "file": "lean/Sheaf/TraceFormula/ConvexChainRationalRank.lean",
+  "statement": "theorem convexChainRationalRank (Γ : Type u) [AddCommGroup Γ] [LinearOrder Γ] [AddLeftMono Γ] (n : ℕ) (H : Fin (n + 1) → AddSubgroup Γ) (hconvex : ∀ i : Fin (n + 1), ∀ {h₁ h₂ x : Γ}, h₁ ∈ H i → h₂ ∈ H i → h₁ ≤ x → x ≤ h₂ → x ∈ H i) (hstrict : ∀ i : Fin n, H i.castSucc < H i.succ) : Cardinal.lift.{u} (Cardinal.mk (Fin n)) ≤ AddCommGroup.rationalRank Γ",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f9e0ceb22",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Item AddCommGroup.convexChainRationalRank matches node clause by clause: AddCommGroup+LinearOrder+AddLeftMono = totally ordered abelian group; H : Fin (n+1) → AddSubgroup with inline convexity for every member and strict castSucc<succ; conclusion Cardinal.lift.{u}(mk (Fin n)) ≤ landed AddCommGroup.rationalRank (cardinal-valued, lift only a universe transport). Edge cases n=0, Γ=0, infinite rank covered; all variables bound. Dependency module for lem-trf-torsionfree-rationalization-injective (base lean null, in the item's proof-dep closure) gives the real map g ↦ 1⊗g into ℚ⊗[ℤ]G and exact injectivity under the integer torsion-free hypothesis; node changed only in lean with note; no Mathlib duplicate. Item stmt_deps gained that self-stated node (allowed by stage2_delivery.py, no cycle; logically a proof dep, noted only). No hollow def, proofs sorry, docstrings with source/blueprint/proof steps, imports per stage-2 rule 7, lines ≤100, lean.statement verbatim, report has Worker report/Dependency modules/Second reading sections. nt_compile.py --json on both siblings: clean (2.2 s, 1.7 s, rc=0); control run confirmed diagnostics are reported and #check shows the expected signatures."
  }
 }

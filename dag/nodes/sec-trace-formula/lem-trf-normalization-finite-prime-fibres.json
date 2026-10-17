@@ -245,5 +245,23 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-ba980c0ba (reviewer sub-agent of L); spot-checked: Full review written to review.md. Item and six steps match Swanson–Huneke Proposition 4.8.2 and Lemma 4.8.3; all cited DAG statements, hypotheses, route, edge cases, and Mathlib searches were checked. No repairs or dropped nodes needed."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.NormalizationFinitePrimeFibres",
+  "declaration": "RingTheory.normalization_finite_prime_fibres",
+  "statement": "theorem normalization_finite_prime_fibres (R : Type u) [CommRing R] [IsNoetherianRing R] [IsDomain R] (p : Ideal R) [p.IsPrime] : Set.Finite {Q : Ideal (integralClosure R (FractionRing R)) | Q.IsPrime ∧ Q.comap (algebraMap R (integralClosure R (FractionRing R))) = p} ∧ Set.ncard {Q : Ideal (integralClosure R (FractionRing R)) | Q.IsPrime ∧ Q.comap (algebraMap R (integralClosure R (FractionRing R))) = p} ≤ Set.ncard (minimalPrimes (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p)))",
+  "by": "Q15",
+  "date": "2026-10-18",
+  "file": "lean/Sheaf/TraceFormula/NormalizationFinitePrimeFibres.lean",
+  "branch": "newtargets-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-70d4d32cd",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: CommRing, IsNoetherianRing, IsDomain R; N = integralClosure R (FractionRing R); fibre = primes Q with comap = p; Set.Finite plus ncard <= ncard (minimalPrimes (AdicCompletion (maximalIdeal R_p) R_p)). The separate finiteness conjunct blocks the ncard=0 escape; the completion is Noetherian, so the right-hand count is real. No extra hypotheses or universe restriction. Edge cases p=0 and R a field are covered. The node changed only in lean, the dependency nodes are byte-identical to the side clone, and lean.statement is verbatim in the file. Imports are the 3 stated proof-dependency Sheaf modules. Docstrings carry the source place, blueprint id and the six proof steps; proof is sorry only. Second reading is the post-2026-10-17 placeholder (convention, 579 landed). No duplicate in Mathlib or the project. nt_compile.py rc=0, no diagnostics. Source checked as recorded in the node; local PDF WANTED. No findings."
  }
 }

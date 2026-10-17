@@ -161,5 +161,24 @@
   "group": "Q90",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q90-d9a99e163 (reviewer sub-agent of L); spot-checked: Mathematics and source route check out. Repair the item metadata (`created.item`/group incorrectly name Q72’s different item) and define the given map φ before its use in Steps 2–3. Corrected DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-associated-primes-fibre-bound.json; review.md records source, hypothesis, edge-case, route, duplicate, and tool-use checks.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.AssociatedPrimesFibreBound",
+  "declaration": "RingTheory.associatedPrimes_fibre_bound",
+  "file": "lean/Sheaf/TraceFormula/AssociatedPrimesFibreBound.lean",
+  "statement": "theorem associatedPrimes_fibre_bound (R : Type u) (S : Type v) (P : Type w) [CommRing R] [CommRing S] [Algebra R S] [AddCommGroup P] [Module S P] [Module R P] [IsScalarTower R S P] [IsNoetherianRing R] [IsNoetherianRing S] [Module.Finite S P] [Module.Flat R P] (Q : Type x) [AddCommGroup Q] [Module R Q] [Module.Finite R Q] (q : Ideal S) (hq : letI : Module S (Q ⊗[R] P) := (TensorProduct.comm R Q P).toAddEquiv.module S q ∈ annihilatorAssociatedPrimes S (Q ⊗[R] P)) : letI : Module S (Q ⊗[R] P) := (TensorProduct.comm R Q P).toAddEquiv.module S let p : Ideal R := q.comap (algebraMap R S) letI : p.IsPrime := by dsimp only [p] dsimp only [RingTheory.annihilatorAssociatedPrimes] at hq exact hq.1.comap (algebraMap R S) letI : Module S (P ⊗[R] p.ResidueField) := by exact TensorProduct.leftModule q ∈ annihilatorAssociatedPrimes S (P ⊗[R] p.ResidueField)",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-d6d6c22dd"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6d6c22dd",
+  "group": "Q41",
+  "result": "fix",
+  "note": "Read node, 6 stmt deps, Stacks 05C2/05E0 (algebra.tex 15880-15916), module, report, citer lem-trf-flat-completion-universally-injective. Hypotheses match the node; S-actions on Q⊗P (via TensorProduct.comm) and P⊗κ(p) (leftModule) checked by rfl; p = comap, primality from hq.1; lean.statement verbatim; no hollow defs, sorry only, docstrings with source and blueprint. Delivered and fixed files compile cleanly via nt_compile --json (error reporting confirmed). Finding: Q : Type w tied Q to P's universe for no reason (deps use independent universes); fixes/AssociatedPrimesFibreBound.lean adds universe x with (Q : Type x). The 'equivalently' fibre-ring clause is not a separate conjunct; accepted as a reformulation covered by the separate node lem-trf-fibre-associated-primes-module-ring."
  }
 }
