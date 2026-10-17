@@ -7,10 +7,85 @@
   "date": "2026-10-17",
   "group": "Q70"
  },
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "Put $r_n(i)=n-i$ and $\\alpha^\\vee=r_n\\alpha r_m$ for $\\alpha:[m]\\to[n]$. Since $(\\alpha\\beta)^\\vee=\\alpha^\\vee\\beta^\\vee$ and $(\\alpha^\\vee)^\\vee=\\alpha$, the degreewise opposite construction in the statement is a covariant involution on simplicial sets and maps. There is an isomorphism $\\Delta^n\\cong(\\Delta^n)^{\\mathrm{op}}$ sending a degree-$k$ simplex $\\theta:[k]\\to[n]$ to $r_n\\theta r_k$. It takes the horn missing face $i$ to the horn missing face $n-i$, since omission of vertex $j$ becomes omission of vertex $n-j$. Thus any inner-horn problem in $\\mathcal D^{\\mathrm{op}}$ reverses to the inner horn with index $n-i$ in $\\mathcal D$, has a filler there, and reverses back to a filler. In particular $\\mathcal D^{\\mathrm{op}}$ is a quasicategory. The same argument, allowing all horn indices, shows that opposite preserves Kan complexes. The horn and Kan conventions used here are exactly those of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Opposite-category dual of Proposition 4.6.5.10; explicit horn reversal"
+   }
+  },
+  {
+   "text": "Write $A=\\operatorname{Map}_{\\mathcal D^{\\mathrm{op}}}(b,a)$, using the right-pinched convention of [def-cbc-enhanced-diagrams-cones]. Reversing a simplex $\\sigma:\\Delta^{m+1}\\to\\mathcal D$ means taking its opposite and precomposing with $\\Delta^{m+1}\\cong(\\Delta^{m+1})^{\\mathrm{op}}$ from step 1. A simplex in $L_{\\mathcal D}(a,b)$ then has its initial face constant at $b$ and its last vertex $a$, so this gives a degreewise bijection with $A$. It is a simplicial isomorphism $\\Phi:L_{\\mathcal D}(a,b)\\cong A^{\\mathrm{op}}$: if $\\alpha^L:[k+1]\\to[m+1]$ fixes $0$ and sends $i+1$ to $\\alpha(i)+1$, direct evaluation at $i\\leq k$ and at $k+1$ gives $(\\alpha^L)^\\vee=(\\alpha^\\vee)^+$, where $(-)^+$ extends a map by sending the new last vertex to the new last vertex. This is precisely the right-pinched operator for $\\alpha^\\vee$, that is, the $\\alpha$-operator of $A^{\\mathrm{op}}$. Reversal twice is the identity, so the bijections and their inverses respect every face and degeneracy.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Construction 4.6.5.1 (01KX) and opposite reversal of pinched simplices"
+   }
+  },
+  {
+   "text": "Write $B=U_{\\mathcal D^{\\mathrm{op}}}(b,a)$, with $U$ defined in [lem-coef-infinity-pinch-comparison]. A degree-$m$ simplex of $U_{\\mathcal D}(a,b)$ is a map $h:\\Delta^m\\times\\Delta^1\\to\\mathcal D$ constant at $a,b$ on the two endpoint layers. Apply opposite to $h$ and reverse both standard-simplex factors as in step 1. Products are degreewise, so the resulting map into $\\mathcal D^{\\mathrm{op}}$ is constant at $b,a$ on the two layers. This gives a bijection $\\Psi_m$ to $B_m$. For a parameter operator $\\alpha$, reversing $\\alpha\\times\\mathrm{id}$ gives $\\alpha^\\vee\\times\\mathrm{id}$, hence $\\Psi_m$ assemble to a simplicial isomorphism $\\Psi:U_{\\mathcal D}(a,b)\\cong B^{\\mathrm{op}}$. Again reversing twice is the inverse. Swapping the product factors identifies these formulas with the internal-functor convention of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Construction 4.6.5.7 (01L2), with explicit reversal of the ordinary arrow fiber"
+   }
+  },
+  {
+   "text": "Let $\\lambda_m(i,0)=0$, $\\lambda_m(i,1)=i+1$ be the left-pinch order map, and let $\\rho_m(i,0)=i$, $\\rho_m(i,1)=m+1$ be the right-pinch order map of [lem-coef-infinity-pinch-comparison]. For every monotone $\\alpha:[k]\\to[m]$, $\\lambda_m(\\alpha\\times\\mathrm{id})=\\alpha^L\\lambda_k$: both sides are $0$ on the lower layer and $\\alpha(i)+1$ on the upper layer. Thus $j^L$ is simplicial. Moreover,\n$$r_{m+1}\\rho_m(r_m(i),1-t)=\\lambda_m(i,t)\\quad(t=0,1),$$\nsince the left side is respectively $0$ and $i+1$. The two maps agree as maps of the product poset, so their nerve maps agree in every simplicial degree. Consequently the isomorphisms just constructed satisfy $\\Psi j^L=(j_{\\mathcal D^{\\mathrm{op}},b,a})^{\\mathrm{op}}\\Phi$. This proves the claimed identification of the actual specified maps, not merely an equivalence between their sources and targets.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Construction 4.6.5.7 (01L2); conjugation identity for the two explicit pinch maps"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-pinch-comparison] to the quasicategory $\\mathcal D^{\\mathrm{op}}$ and its vertices $b,a$. It says that $A,B$ are Kan complexes and $j:A\\to B$ is a homotopy equivalence. Step 1 makes $A^{\\mathrm{op}},B^{\\mathrm{op}}$ Kan. If $g:B\\to A$ is a homotopy inverse of $j$, its opposite is an inverse up to homotopy of $j^{\\mathrm{op}}$: applying opposite to either cylinder homotopy and using the degreewise product identity gives a homotopy with parameter $(\\Delta^1)^{\\mathrm{op}}$; precompose with the simplex-reversal isomorphism $\\Delta^1\\cong(\\Delta^1)^{\\mathrm{op}}$. This only interchanges the two homotopy endpoints, and yields the required homotopies between $g^{\\mathrm{op}}j^{\\mathrm{op}}$ and the identity and between $j^{\\mathrm{op}}g^{\\mathrm{op}}$ and the identity. If homotopies are expressed as finite chains of cylinder homotopies, apply this operation to each member of the chain. The isomorphisms and equality of step 4 therefore give the claimed homotopy equivalence $j^L$ of Kan complexes. This argument also covers empty mapping complexes; it never chooses a vertex in either fiber.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Proposition 4.6.5.10, right-handed assertion applied to the opposite quasicategory; explicit reversal of inverse homotopies"
+   }
+  },
+  {
+   "text": "For a simplicial functor $F:\\mathcal D\\to\\mathcal D'$ with $F(a)=a'$ and $F(b)=b'$, postcomposition sends left-pinched simplices and fixed-endpoint arrow simplices to the corresponding simplices with endpoints $a',b'$. On every degree-$m$ simplex $\\sigma$, associativity of composition gives $F(\\sigma\\lambda_m)=(F\\sigma)\\lambda_m$. Thus $U(F)j^L_{\\mathcal D,a,b}=j^L_{\\mathcal D',a',b'}L(F)$ strictly in each degree, proving the requested naturality. No choice of homotopy inverse enters this equation.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Construction 4.6.5.7 (01L2), explicit postcomposition naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-pinch-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01L5",
+  "place": "Proposition 4.6.5.10 and Construction 4.6.5.7 (01L2), expanded by the explicit opposite, operator, pinch-map and homotopy calculations. Read online; archival copy WANTED."
+ },
  "mathlib_match": null,
  "id": "lem-coef-infinity-left-pinch-comparison",
  "kind": "statement",
@@ -73,6 +148,41 @@
    "results": "{\"t\": \"2026-10-17T08:42:13Z\", \"tool\": \"leansearch\", \"query\": \"Opposite quasicategory identifies left and right pinched mapping spaces and yields a natural equivalence to arrow fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Arrow.opEquiv\", \"CategoryTheory.Equivalence.leftOp\", \"CategoryTheory.Equivalence.op\", \"MulOpposite.opEquiv\", \"Quiver.Hom.opEquiv\", \"CategoryTheory.simplicialCosimplicialEquiv\", \"Quiver.Hom.opEquiv_apply\", \"CategoryTheory.opEquiv\"], \"digest\": \"a8363cacd44d8771\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits concern truncated edge homotopies, ordinary-category arrows, or general opposite operations; none gives the natural all-dimensional left-pinch comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "pinch|mapping.?space",
+   "results": "{\"t\": \"2026-10-17T13:20:37Z\", \"tool\": \"grep\", \"query\": \"pinch|mapping.?space\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits state quasicategory horn filling, two-truncated edge homotopies, ordinary arrow opposites, or simplex reversal, not the all-dimensional left-pinch equivalence. Read Quasicategory/TwoTruncated.lean:78-87 and SimplicialSet/Op.lean:42-89. Targeted grep has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Opposite quasicategory identifies left and right pinched mapping spaces and yields a natural equivalence to arrow fibers",
+   "results": "{\"t\": \"2026-10-17T13:20:37Z\", \"tool\": \"leansearch\", \"query\": \"Opposite quasicategory identifies left and right pinched mapping spaces and yields a natural equivalence to arrow fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Arrow.opEquiv\", \"CategoryTheory.Equivalence.leftOp\", \"CategoryTheory.Equivalence.op\", \"MulOpposite.opEquiv\", \"Quiver.Hom.opEquiv\", \"CategoryTheory.simplicialCosimplicialEquiv\", \"Quiver.Hom.opEquiv_apply\", \"CategoryTheory.opEquiv\"], \"digest\": \"a8363cacd44d8771\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits state quasicategory horn filling, two-truncated edge homotopies, ordinary arrow opposites, or simplex reversal, not the all-dimensional left-pinch equivalence. Read Quasicategory/TwoTruncated.lean:78-87 and SimplicialSet/Op.lean:42-89. Targeted grep has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\"",
+   "results": "{\"t\": \"2026-10-17T13:20:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.quasicategory_of_hasLiftingProperty\", \"SSet.Quasicategory.hasLiftingProperty\", \"SSet.quasicategory_iff_hasLiftingProperty\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.mk\"], \"digest\": \"af1f493b99a7f28e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits state quasicategory horn filling, two-truncated edge homotopies, ordinary arrow opposites, or simplex reversal, not the all-dimensional left-pinch equivalence. Read Quasicategory/TwoTruncated.lean:78-87 and SimplicialSet/Op.lean:42-89. Targeted grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The left pinched mapping space of a quasicategory is naturally homotopy equivalent to the fixed endpoint arrow mapping space",
+   "results": "{\"t\": \"2026-10-17T13:20:39Z\", \"tool\": \"leanfinder\", \"query\": \"The left pinched mapping space of a quasicategory is naturally homotopy equivalent to the fixed endpoint arrow mapping space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopicR.homotopicL\", \"SSet.Truncated.HomotopicL.homotopicR\", \"SSet.Truncated.homotopicL_iff_homotopicR\", \"SSet.Truncated.HomotopicL.refl\", \"SSet.Truncated.HomotopyCategory₂.homMk\", \"SSet.Truncated.HomotopicL\", \"SSet.Truncated.HomotopicL.congr_homotopyCategory₂HomMk\", \"SSet.Truncated.HomotopicR\"], \"digest\": \"2b56890e564ab942\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits state quasicategory horn filling, two-truncated edge homotopies, ordinary arrow opposites, or simplex reversal, not the all-dimensional left-pinch equivalence. Read Quasicategory/TwoTruncated.lean:78-87 and SimplicialSet/Op.lean:42-89. Targeted grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Opposite quasicategory right mapping complex identifies with the left mapping complex and maps equivalently to the arrow fiber",
+   "results": "{\"t\": \"2026-10-17T13:20:57Z\", \"tool\": \"leanfinder\", \"query\": \"Opposite quasicategory right mapping complex identifies with the left mapping complex and maps equivalently to the arrow fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.rightOp_right_map\", \"CategoryTheory.SimplicialObject.Augmented.rightOp_left\", \"CategoryTheory.SimplicialObject.Augmented.rightOp_right_obj\", \"SSet.op_map\", \"SSet.opEquivalence_functor\", \"CategoryTheory.TwoSquare.structuredArrowRightwardsOpEquivalence.functor_obj_left_right\", \"CategoryTheory.TwoSquare.structuredArrowRightwardsOpEquivalence.functor_obj_right_as\", \"CategoryTheory.TwoSquare.structuredArrowRightwardsOpEquivalence_functor\"], \"digest\": \"e27818997d6e60d4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits state quasicategory horn filling, two-truncated edge homotopies, ordinary arrow opposites, or simplex reversal, not the all-dimensional left-pinch equivalence. Read Quasicategory/TwoTruncated.lean:78-87 and SimplicialSet/Op.lean:42-89. Targeted grep has no hits."
   }
  ],
  "blueprint": {
@@ -93,5 +203,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-left-pinch-comparison",
+  "worker": "stage1",
+  "summary": "Proved the left-pinch statement without changing it, by explicit reversal of the existing right-pinch comparison. Checked all simplex operators, endpoint conventions, the conjugation formula and strict naturality. Reused both existing statement dependencies, created no nodes, and avoided the general opposite-calculus node because its dependencies return to this item. Repeated Mathlib searches with the prescribed logged command and read the candidate source definitions.",
+  "blueprint": "Realizes the left-pinch comparison and fixed-endpoint naturality needed by the horn-cocartesian mapping criterion, in the ancestry of prop-coef-integral-exceptional-adjoint, proof paragraph 2 (the finite-coefficient mapping-complex adjunction). The current main-20261015 blueprint paragraph was read; no unit route was replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-d9e3f576d",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-d9e3f576d (reviewer sub-agent of L); spot-checked: I read the item, both cited statements (def-cbc-enhanced-diagrams-cones and lem-coef-infinity-pinch-comparison, split and reviewed), the right-fibration-fibers definition of homotopy equivalence, both citers and the blueprint ancestor paragraph. The statement fits Kerodon Hom^L = C_{X/} x_C {Y}; the source is not archived, so WANTED is filed and proof_origin is agent. The left-pinch map λ(i,0)=0, λ(i,1)=i+1 is monotone and lands in U. I recomputed every step. Step 1: (αβ)^∨=α^∨β^∨, and reversal sends horn i to horn n-i, so D^op is a quasicategory and opposites of Kan complexes are Kan. Step 2: (α^L)^∨=(α^∨)^+, checked at j=k+1 and at j≤k, and the endpoints swap correctly. Step 3: h'(i,t)=h(m-i,1-t), compatible with α^∨×id. Step 4: r_{m+1}ρ_m(m-i,1-t)=λ_m(i,t) gives 0 and i+1, and maps of poset nerves agree once they agree on vertices. Step 5: the right-pinch theorem applied to D^op,b,a, with cylinder homotopies reversed through degreewise products and Δ^1≅(Δ^1)^op; this matches the cylinder notion of homotopy equivalence and allows empty spaces. Step 6: strict naturality by associativity. Edge cases m=0, m=1, a=b, empty spaces and the terminal quasicategory all pass. Same-unit route, no tool_uses. My own closure computation confirms the claimed cycle through lem-coef-simplicial-opposite-homotopy-calculus, and the right-pinch closure (95 nodes) does not contain the item, so the graph stays acyclic. No duplicate found by rg for left-pinch/01L5/Hom^L. Not a restated clause. Three kinds of Mathlib search are logged. No SGA. This is not a target node, so no base-change or coefficient-category issue arises. No fixes."
  }
 }

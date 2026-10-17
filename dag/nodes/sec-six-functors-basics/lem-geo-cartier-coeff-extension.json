@@ -1,11 +1,94 @@
 {
  "id": "lem-geo-cartier-coeff-extension",
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the derived coefficient adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction] to the constant ring-sheaf map $A_Z\\to B_Z$. The coefficient unit on $D$ gives a map $i_*A_D\\to\\operatorname{Res}_{A\\to B}(i_*B_D)$ by the direct-image functor, and its adjoint is precisely the specified morphism $\\alpha_{A,B}:(i_*A_D)\\otimes^\\mathbf L_{A_Z}B_Z\\to i_*B_D$. The normalization in the adjunction identifies this as the adjunct of $x\\mapsto x\\otimes1$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraph 4, apply derived extension from the source coefficient ring to the target coefficient ring"
+   }
+  },
+  {
+   "text": "Take a geometric point $\\bar z:\\operatorname{Spec}\\Omega\\to Z$. The closed immersion $i$ is finite: over an affine open $\\operatorname{Spec}R$ of $Z$ it is $\\operatorname{Spec}(R/I)\\to\\operatorname{Spec}R$ [def-weil-closed-immersion], and $R/I$ is a cyclic $R$-module. Its geometric fibre $D\\times_Z\\operatorname{Spec}\\Omega=\\operatorname{Spec}(\\Omega\\otimes_RR/I)$ is $\\operatorname{Spec}\\Omega$ (one point $\\bar d$ over $\\bar z$) if $\\bar z$ lies on $D$ and is empty otherwise, as $\\Omega\\otimes_RR/I$ is a quotient of the field $\\Omega$. By the finite-stalk formula [lemma-weil-pbc-finite-stalk-formula] and the geometric stalk of a constant sheaf [lem-weil-pbc-constant-sheaf-geometric-stalk], the stalk of $i_*A_D$ at $\\bar z$ is $(A_D)_{\\bar d}=A$ when $\\bar z$ lies on $D$ and is $0$ otherwise; likewise $(i_*B_D)_{\\bar z}$ is $B$ or $0$, the map $(i_*A_D)_{\\bar z}\\to(i_*B_D)_{\\bar z}$ induced by the coefficient unit is the ring map $A\\to B$ or $0$, and $(B_Z)_{\\bar z}=B$. On a K-flat flat-term representative $P$ of $i_*A_D$ the complex $P\\otimes_{A_Z}B_Z$ computes both the change of rings and the derived tensor product over $A$ with $B_Z$; stalks are inverse images [lem-kun-stalk-as-pullback], which are monoidal [lem-kun-inverse-image-monoidal]: the stalk of the derived tensor is $(i_*A_D)_{\\bar z}\\otimes_A^{\\mathbf L}B$, namely $A\\otimes_AB=B$ on $D$ ($A$ is free of rank one) and $0$ off $D$. By the normalized adjunct formula $x\\otimes b\\mapsto b\\,g(x)$ of Step 1, the stalk of $\\alpha_{A,B}$ is the multiplication $A\\otimes_AB\\to B$, $a\\otimes b\\mapsto ab$, an isomorphism, in the first case and the zero map $0\\to0$ in the second. Stalks are exact [prop-weil-pbc-geometric-stalks-exact], so each $\\mathcal H^q(\\alpha_{A,B})$ is an isomorphism on all geometric stalks, hence an isomorphism [lemma-weil-pbc-geometric-stalk-conservative], and $\\alpha_{A,B}$ is a quasi-isomorphism (an isomorphism in $D(Z_{\\Et},B)$) without any flatness assumption on $A\\to B$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-constant-sheaf",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "lem-kun-stalk-as-pullback",
+    "lem-kun-inverse-image-monoidal",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proposition etale-cohomology-proposition-finite-higher-direct-image-zero (Tag 03QP), part (1): stalks of a finite direct image; stalk calculation at geometric points"
+   }
+  },
+  {
+   "text": "For a commutative square of coefficient maps $A\\to B\\to B'$, the coefficient units on $D$ and their direct images commute with the maps induced by $B\\to B'$. The adjunction bijections are natural in both variables, and their normalized representative formula sends a map to the termwise balanced map $x\\otimes b\\mapsto b\\,g(x)$. Therefore taking adjuncts shows that $\\alpha_{A,B}$ is natural in the coefficient homomorphism.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, derived coefficient adjunction and its naturality"
+   }
+  },
+  {
+   "text": "When the coefficient map is $A\\to A$, the coefficient unit is the identity on $i_*A_D$. The normalized unit in [lem-pur-sheaf-ring-derived-coefficient-adjunction] is represented by $x\\mapsto x\\otimes1$, which is the identity under the canonical identification $K\\otimes_A^{\\mathbf L}A\\cong K$. Thus the stalkwise isomorphism of Step 2 is the identity and $\\alpha_{A,A}=1$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, normalized unit for derived change of rings"
+   }
+  },
+  {
+   "text": "Let $A\\to B\\to C$ be composable. On a K-flat flat-term representative $P$ of $i_*A_D$, the canonical transitivity map of [lem-sfb-successive-derived-quotient-normalization] is represented by $((x\\otimes b)\\otimes c)\\mapsto x\\otimes b c$, and that node says that the composite of the two scalar-extension units equals the unit for $A\\to C$. By the normalized adjunct formula of [lem-pur-sheaf-ring-derived-coefficient-adjunction], both $\\alpha_{B,C}\\circ(\\alpha_{A,B}\\otimes_B^{\\mathbf L}C)$ (transported across this transitivity isomorphism) and $\\alpha_{A,C}$ are adjuncts of the same coefficient-unit map $i_*A_D\\to\\operatorname{Res}_{A\\to C}(i_*C_D)$. Uniqueness of adjuncts gives the displayed composition identity, and the same argument gives coherence for iterated coefficient maps.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D and Tag 0G7E, composition of derived pullbacks; normalized scalar-extension units"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-direct-image",
+  "lem-kun-inverse-image-monoidal",
+  "lem-kun-stalk-as-pullback",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Paragraph 4, supported source identification in finite coefficient extension"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-lem-geo-cartier",
@@ -75,5 +158,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-geo-cartier-coeff-extension",
+  "worker": "stage1",
+  "summary": "Checked that no sorry-free declaration states this comparison. The proof now constructs the specified map by the derived coefficient adjunction, proves it by a geometric-stalk calculation for the supported constant sheaves (so no coefficient flatness is used), and derives coefficient naturality, the identity case, and the transitivity equation from normalized adjuncts and the canonical derived scalar-extension associator. No new nodes were needed; all non-elementary ingredients are existing DAG statements.",
+  "blueprint": "Realizes sk-lem-geo-cartier proof paragraph 4: derived extension from the source coefficient ring to the target, supported source identification, and coefficient-composition coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic derived change-of-rings adjunction with normalized unit and adjunct formula; the unit sk-lem-geo-cartier cites no unit and has no node for it."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic transitivity isomorphism of derived scalar extensions and composite units, named in the statement itself."
+   },
+   {
+    "node": "lem-kun-stalk-as-pullback",
+    "why": "Generic geometric-point interpretation of stalks for the stalk calculation."
+   },
+   {
+    "node": "lem-kun-inverse-image-monoidal",
+    "why": "Generic compatibility of etale inverse image with derived tensor, used at a geometric point."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-stalk-formula",
+    "why": "Generic stalk formula for finite direct images, applied to the closed immersion."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Generic geometric stalk of a constant sheaf."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic detection of isomorphisms of etale sheaves on geometric stalks, applied to cohomology sheaves."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-kun-stalk-as-pullback",
+  "lem-kun-inverse-image-monoidal",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-76d3aa681",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-76d3aa681 (reviewer sub-agent of L); spot-checked: I read the whole item and every node it cites, unit sk-lem-geo-cartier with blueprint paragraph 4, parent step 5 and the Stacks sources (07A6, 0D6D, 0G7E, 07A4, 0H7J, 03P5, 03QP(1) at etale-cohomology.tex l.8245). Statement: as far as I can tell it is unchanged (I did not run git) and it is true. It is a closed immersion with finite rings A->B->C and no flatness, in the ordinary etale constant-ring D(Z_et,-) category, the same as the parent's etale steps. The morphism is specified as the adjunct of i_* of the coefficient unit. It generalizes lem-asd-supported-kummer-scalar-source (Z/N->A only, no coherence) rather than duplicating it. Small cases D empty, D=Z, A=B, B=0 and nonflat Z/4->Z/2->F_4 all check, including (a.b).c=abc on both sides of the composition identity. Steps 1, 3, 4 and 5 are correct from the normalized unit and adjunct formulas and from the transitivity node's unit equality; I checked the adjunct computation for step 5. Faults repaired in fixes/: (C4/C1) step 2 cited the global-sections node lem-weil-pbc-constant-sheaf-sections-locally-constant and no node for the closed-pushforward stalk, which is not elementary on D (03QP). It now proves that i is finite and that its geometric fibre is one point or empty, and cites lemma-weil-pbc-finite-stalk-formula, lem-weil-pbc-constant-sheaf-geometric-stalk and prop-weil-pbc-geometric-stalks-exact, computing the stalk map as multiplication A(x)_A B->B. Step 3: removed an unproved parenthetical about naturality in closed immersions. proof_deps are recomputed. The unit cites no units, so I declared and accept split_report.tool_uses for 7 generic tools: the derived coefficient adjunction, successive derived normalization, stalk-as-pullback, inverse-image monoidality, the finite stalk formula, the constant-sheaf stalk and stalk conservativity. No new nodes, no statement, target or blueprint field changed, no SGA.; 1 file(s) fixed by the reviewer"
  }
 }

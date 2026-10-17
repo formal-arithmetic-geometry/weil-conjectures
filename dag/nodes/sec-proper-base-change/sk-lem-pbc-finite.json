@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sk-lem-pbc-finite",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite morphisms",
- "statement": "Let $u:V\\to W$ be finite. For an abelian sheaf $F$ and a geometric point\n$\\bar w:\\operatorname{Spec}(\\Omega)\\to W$, with $\\Omega$ algebraically\nclosed, one has\n\n$$\n(u_*F)_{\\bar w}\\simeq\n\\prod_{\\substack{\\bar v:\\operatorname{Spec}(\\Omega)\\to V\\\\ u\\bar v=\\bar w}}F_{\\bar v}.\n$$\n\nThe product is finite. The functor $u_*$ on abelian sheaves is exact, and its\nformation commutes with arbitrary base change. Consequently, for every base\nchange $W'\\to W$ and every constant coefficient ring $\\Lambda$, the derived\nexchange [sk-def-exchange] is an isomorphism in $D^+(W'_{\\Et},\\Lambda)$ for\nevery $K\\in D^+(V_{\\Et},\\Lambda)$.",
+ "statement": "Let $u:V\\to W$ be finite [sk-def-conv]. For an abelian sheaf $F$ [def-weil-pbc-abelian-etale-sheaves] and a geometric point\n$\\bar w:\\operatorname{Spec}(\\Omega)\\to W$, with $\\Omega$ algebraically\nclosed [def-weil-geometric-point], one has\n\n$$\n(u_*F)_{\\bar w}\\simeq\n\\prod_{\\substack{\\bar v:\\operatorname{Spec}(\\Omega)\\to V\\\\ u\\bar v=\\bar w}}F_{\\bar v}.\n$$\n\nHere stalks are [def-weil-pbc-geometric-stalks], direct image is [def-weil-pbc-direct-image], and the indexing set is the geometric fibre [def-weil-pbc-geometric-fibre]. The product is finite. The functor $u_*$ on abelian sheaves is exact, and its\nformation commutes with arbitrary base change. Consequently, for every base\nchange $W'\\to W$ and every constant commutative coefficient ring $\\Lambda$, the derived\nexchange [sk-def-exchange] is an isomorphism in $D^+(W'_{\\Et},\\Lambda)$ for\nevery $K\\in D^+(V_{\\Et},\\Lambda)$, with the module derived categories of [def-weil-pbc-derived-categories].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-lem-pbc-finite/_section.md",
   "place": "node sk-lem-pbc-finite, order 1057",
@@ -19,30 +19,265 @@
   ]
  },
  "stmt_deps": [
+  "sk-def-conv",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-fibre",
   "sk-def-exchange",
-  "sk-def-conv"
+  "def-weil-pbc-derived-categories"
  ],
  "proof": [
   {
-   "text": "After passage to the strict henselization of $W$ at $\\bar w$, the finite\nscheme $V$ is a finite disjoint union of strictly henselian local schemes. On\neach such local scheme, sections of an étale sheaf are its stalk at the\nclosed geometric point. Indeed, every étale neighbourhood of that point admits\na section, so a germ extends to a global section, and two extensions agreeing\nas germs agree after such a section. This also makes sections exact on\nabelian sheaves. The strict-local description of direct image therefore gives\nthe displayed formula; see Stacks Project, Tag 03QP. Geometric stalks are\nconservative and finite products of abelian groups are exact, so $u_*$ is\nexact.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [lem-weil-pbc-finite-stalk-formula-restriction] to $u:V\\to W$, $F$, and $\\bar w$. Its set $P(\\bar w)$ is exactly the indexing set in the statement, it is finite, and its isomorphism has component $r_{u,\\bar v,F}:(u_*F)_{\\bar w}\\to F_{\\bar v}$ given by restriction of germs. This proves the displayed formula, including finiteness. These maps are natural in $F$: applying a morphism of sheaves to a representative section before taking its germ gives the same result as applying its stalk map afterward. This uses only the sectionwise definition of the map $u_*F\\to u_*G$ in [def-weil-pbc-direct-image]. Thus a sequence is carried on stalks to the corresponding finite product of sequences. The cited finite-stalk lemma packages the blueprint's strict-henselization calculation, rather than requiring a new copy of that calculation here.",
+   "uses": [
+    "lem-weil-pbc-finite-stalk-formula-restriction",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP, proposition-finite-higher-direct-image-zero (1), with Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian"
+   }
   },
   {
-   "text": "In a cartesian base-change square, the two geometric fibres are canonically\nthe same after using the same geometric field. The underived exchange is the\nidentity on the corresponding factors of the displayed formula. It is\ntherefore an isomorphism of sheaves on $W'_{\\Et}$. Both direct images in the\nsquare are exact, so their derived functors and the exchange can be computed\nterm by term. The same argument applies to sheaves of modules.",
-   "uses": [],
-   "elementary": null
+   "text": "Let $0\\to A\\to B\\to C\\to0$ be a short exact sequence of abelian sheaves on $V_{\\Et}$. By [prop-weil-pbc-geometric-stalks-exact] each sequence at $\\bar v$ is short exact. Under the natural formula of step 1, the sequence of stalks of its direct image is their finite product. It is short exact: kernels and injectivity are checked coordinate by coordinate, and a tuple in the product of the $C_{\\bar v}$ has a lift obtained by choosing a lift in each of the finitely many $B_{\\bar v}$. The empty product is the zero group and has the same property. Direct image is already additive and left exact by [def-weil-pbc-direct-image]. For $Q=\\operatorname{coker}(u_*B\\to u_*C)$, exactness of stalks gives $Q_{\\bar w}=0$ for every $\\bar w$. The map $0\\to Q$ is therefore an isomorphism by [lemma-weil-pbc-geometric-stalk-conservative], so $Q=0$. This proves that $u_*$ is exact.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "def-weil-pbc-direct-image",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP, proposition-finite-higher-direct-image-zero; Tag 03PU, theorem-exactness-stalks"
+   }
+  },
+  {
+   "text": "Write a base-change square as $V'\\xrightarrow{g'}V$, $u':V'\\to W'$, $g:W'\\to W$, with $ug'=gu'$. Its cartesian identification is [def-weil-pbc-cartesian-square]. The morphism $u'$ is finite by [lem-weil-pbc-finite-morphism-permanence](a), so steps 1 and 2 apply to it. Fix $\\bar w':\\operatorname{Spec}\\Omega\\to W'$ with $\\Omega$ algebraically closed and put $\\bar w=g\\bar w'$. The map $\\bar v'\\mapsto g'\\bar v'$ is a bijection from the lifts of $\\bar w'$ through $u'$ to the lifts of $\\bar w$ through $u$: its inverse sends $\\bar v$ to the unique map with projections $(\\bar v,\\bar w')$, given by the fibre-product universal property. By [lem-weil-pbc-inverse-image-stalk-germ], the stalk of $g^{-1}u_*F$ at $\\bar w'$ identifies with $(u_*F)_{\\bar w}$, and the factor $(g'^{-1}F)_{\\bar v'}$ identifies with $F_{g'\\bar v'}$. Consequently both sides of the underived exchange identify with the finite product $\\prod_{u\\bar v=\\bar w}F_{\\bar v}$. It remains to check the actual exchange map under these identifications.",
+   "uses": [
+    "def-weil-pbc-cartesian-square",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-inverse-image-stalk-germ"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0959, lemma-finite-pushforward-commutes-with-base-change, proof; Tag 03Q1, lemma-stalk-pullback (3)"
+   }
+  },
+  {
+   "text": "Use the representative formula of [def-weil-pbc-underived-exchange]. A germ in the source of step 3, after the inverse-image stalk identification, is represented by $s\\in(u_*F)(U)=F(V\\times_WU)$ at a pointed etale neighbourhood $(U,\\bar a)$ of $\\bar w$ [def-weil-pbc-geometric-stalks]. To represent its inverse-image germ at $\\bar w'$, pull $s$ back to $U'=U\\times_WW'$ through the adjunction unit. The exchange sends this representative to the unit pullback of $s$ on $V'\\times_{W'}U'$, using its canonical map to $V\\times_WU$. At the point $\\bar v'$ over $\\bar w'$, restriction to its germ is the $\\bar v'$-component of the target finite-stalk isomorphism [lem-weil-pbc-finite-stalk-formula-restriction]. The unit-germ formula of [lem-weil-pbc-inverse-image-stalk-germ], applied to $g'$, sends this germ to the germ of the original $s$ at $(V\\times_WU,(g'\\bar v',\\bar a))$. That is precisely $r_{u,g'\\bar v',F}$ of the original germ. Every source germ has such a representative, so each coordinate of the exchange is this identity after the reindexing of step 3. Hence it is an isomorphism on every geometric stalk, and therefore an isomorphism of sheaves by [lemma-weil-pbc-geometric-stalk-conservative]. This proves compatibility with arbitrary base change, including the specified map, not merely the existence of an isomorphism of its endpoints.",
+   "uses": [
+    "def-weil-pbc-underived-exchange",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-finite-stalk-formula-restriction",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0959, lemma-finite-pushforward-commutes-with-base-change, proof; Tag 03Q1, lemma-stalk-pullback (3)"
+   }
+  },
+  {
+   "text": "Now let $\\Lambda$ be any commutative ring and work with sheaves of modules over its constant sheaf. By [lem-weil-pbc-module-sheaves-colimits-forgetful], forgetting to abelian sheaves is faithful and preserves kernels and cokernels. It also reflects zero objects (the identity of an object with underlying zero sheaf is zero by faithfulness), and therefore reflects exactness and isomorphisms. By the module clause of [def-weil-pbc-direct-image], module direct image commutes with this forgetful functor. Thus step 2 proves exactness of both $u_*$ and $u'_* $ on module sheaves. Inverse image is exact and its underlying abelian functor, unit and counit agree with the abelian ones by [prop-weil-pbc-inverse-image-modules-exact]. Finally [lem-weil-pbc-underived-exchange-module-linear] identifies the module underived exchange with the same map after forgetting. Step 4 and reflection of isomorphisms prove that it is an isomorphism of module sheaves, natural in the module sheaf. This uses no torsion or invertibility hypothesis on $\\Lambda$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-pbc-direct-image",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-underived-exchange-module-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA, lemma-abelian, and 03DB, lemma-limits-colimits; etale-cohomology.tex Tag 0959, lemma-finite-pushforward-commutes-with-base-change"
+   }
+  },
+  {
+   "text": "For $K\\in D^+(V_{\\Et},\\Lambda)$ choose a bounded below injective representative $K\\simeq QI$ as supplied by [def-weil-pbc-direct-image], and choose an injective replacement $j:g'^{-1}I\\to J$. The resolution clause of [sk-def-exchange], made precise for the same module mate by [lem-weil-pbc-derived-exchange-module-termwise], identifies the specified derived exchange, up to its canonical source and target isomorphisms, with the localization of\n$$g^{-1}u_*I\\xrightarrow{\\Ex^0_I}u'_*g'^{-1}I\\xrightarrow{u'_*(j)}u'_*J.$$\nThe first arrow is a morphism of complexes by naturality and is an isomorphism in every degree by step 5, hence is an isomorphism of complexes (the degreewise inverses commute with the differentials). The functor $u'_*$ is exact by step 5; [lem-weil-pbc-exact-functor-derived-functor] implies that it computes its derived functor on every complex and preserves quasi-isomorphisms. Thus $u'_*(j)$ is a quasi-isomorphism. Both arrows become isomorphisms after localization, so the exchange of [sk-def-exchange] is an isomorphism with the required endpoints in $D^+(W'_{\\Et},\\Lambda)$. No preservation of injectives by $g'^{-1}$ is asserted or needed.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "sk-def-exchange",
+    "lem-weil-pbc-derived-exchange-module-termwise",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0736, lemma-base-change-map-flat-case, and Tag 07A7, remark-base-change; derived.tex Tag 015F, lemma-right-derived-exact-functor"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-derived-exchange-module-termwise",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-stalk-formula-restriction",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-underived-exchange-module-linear",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "sk-def-exchange"
+ ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-lem-pbc-finite/_section.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03QP (proposition-finite-higher-direct-image-zero), 0959 (lemma-finite-pushforward-commutes-with-base-change); derived extension via sites-cohomology.tex Tags 0736/07A7 and derived.tex Tag 015F"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lowerStarSheafFiberIsoPi|preservesHomology_lowerStar_of_isFinite|isIso_baseChangeMap_of_isFinite",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the complete finite etale stalk, exactness and arbitrary derived exchange statement; the hits give scheme geometry or generic site infrastructure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale direct image for a finite morphism is exact and commutes with arbitrary base change",
+   "results": {
+    "hits": 8,
+    "top": [
+     "RingHom.Etale.isStableUnderBaseChange",
+     "Algebra.Etale.baseChange",
+     "AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme",
+     "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+     "RingHom.Etale",
+     "AlgebraicGeometry.Scheme.Etale",
+     "Algebra.Etale.finitePresentation",
+     "AlgebraicGeometry.IsEtale"
+    ],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the complete finite etale stalk, exactness and arbitrary derived exchange statement; the hits give scheme geometry or generic site infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerStar\", \"isFinite\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the complete finite etale stalk, exactness and arbitrary derived exchange statement; the hits give scheme geometry or generic site infrastructure only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite morphism of schemes, etale pushforward is exact and its stalk is the finite product of stalks over the geometric fibre, and commutes with arbitrary base change",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite",
+     "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+     "AlgebraicGeometry.Scheme.instHasPullbacksEtale",
+     "AlgebraicGeometry.Scheme.instCategoryEtale",
+     "AlgebraicGeometry.IsEtale.instFormallyUnramified",
+     "AlgebraicGeometry.IsEtale"
+    ],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the complete finite etale stalk, exactness and arbitrary derived exchange statement; the hits give scheme geometry or generic site infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|stalk|sheafPushforward",
+   "results": {
+    "hits": 21,
+    "top": [
+     "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Pretopology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Pretopology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Pretopology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Pretopology.lean"
+    ],
+    "directory": "AlgebraicGeometry/Sites",
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the complete finite etale stalk, exactness and arbitrary derived exchange statement; the hits give scheme geometry or generic site infrastructure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stalk of direct image of an etale abelian sheaf along a finite scheme morphism equals product over its geometric fibre",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Hom.stalkMap",
+     "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso",
+     "AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'",
+     "AlgebraicGeometry.PresheafedSpace.Hom.stalkMap",
+     "AlgebraicGeometry.Scheme.stalkMap_germ",
+     "AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap",
+     "AlgebraicGeometry.Scheme.stalkMap_germ_apply",
+     "AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite"
+    ],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the complete finite etale stalk, exactness and arbitrary derived exchange statement; the hits give scheme geometry or generic site infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPushforward\", \"PreservesHomology\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the complete finite etale stalk, exactness and arbitrary derived exchange statement; the hits give scheme geometry or generic site infrastructure only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite pushforward on the small etale site has no higher direct images; the Beck Chevalley map is invertible for all changes of base",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.smallEtaleTopology",
+     "AlgebraicGeometry.Scheme.etaleTopology",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "AlgebraicGeometry.Scheme.smallEtalePretopology",
+     "LightProfinite.instWEqualsLocallyBijectiveCoherentTopology",
+     "CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat",
+     "CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits",
+     "CategoryTheory.Functor.sheafPushforwardCocontinuous"
+    ],
+    "directory": "",
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match for the complete finite etale stalk, exactness and arbitrary derived exchange statement; the hits give scheme geometry or generic site infrastructure only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -75,5 +310,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-lem-pbc-finite",
+  "worker": "stage1",
+  "summary": "Reused the existing finite stalk formula with its restriction components; proved exactness by coordinate lifting, arbitrary underived exchange by an explicit germ computation, module extension by the exact faithful forgetful functor, and the specified derived mate by its existing termwise comparison. No new nodes and no claimed Mathlib leaf; no proof compiler was run. Statement only gains definition references and makes the source convention that the coefficient ring is commutative explicit.",
+  "blueprint": "main-20261015 sk-lem-pbc-finite.proof.md paragraph 1 is realized by steps 1-2, using the existing strict-local finite-stalk lemma; paragraph 2 by steps 3-6, with the actual germ map and the module derived representative comparison specified.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-stalk-formula-restriction",
+    "why": "Existing restriction-component form of the finite-stalk calculation appearing in this unit, with exactly arbitrary finite schemes and algebraically closed geometric fields; reuse avoids duplicating its strict-local proof."
+   },
+   {
+    "node": "lem-weil-pbc-underived-exchange-module-linear",
+    "why": "Generic module linearity and equality with the underlying abelian underived mate for arbitrary constant commutative coefficients; it enables the unit's final sentence on modules, without replacing the finite-morphism argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-stalk-formula-restriction",
+  "lem-weil-pbc-underived-exchange-module-linear"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-d986a9e4e",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-d986a9e4e (reviewer sub-agent of L); spot-checked: Read the item (6 steps, no new nodes), the unit record, the main-20261015 unit folder (it contains lem-weil-pbc-finite-stalk-formula-restriction as this unit's 03QP lemma), Stacks 03QP and 0959 at their text, and every cited stored statement. Statement: verbatim plus definition references and 'commutative', which sk-def-pbc-conventions and sk-def-exchange already fix, so it is not weakened; coefficient category is Mod(Λ_T) with D^+(T_Et,Λ), as in sk-def-exchange. Step 1: stalk formula and finiteness from the restriction lemma, with the same finite hypotheses; naturality is sectionwise. Step 2: exactness by coordinatewise lifting, cokernel stalks and conservativity; empty fibre handled. Step 3: u' finite by permanence(a); lift bijection via α. Step 4: I recomputed the germ: representative s ↦ η_g(s) ↦ restriction along V'×_{W'}U' → V×_WU, then c_{g',v̄',F} gives r_{u,g'v̄',F}, so the actual exchange map is the identity coordinatewise (makes 0959 precise). Step 5: the faithful exact forgetful functor reflects isomorphisms; module unit/counit and module-linear exchange are cited. Step 6: the termwise lemma identifies the sk-def-exchange mate with Q(Ex^0_I then u'_*(j)); both are invertible. uses equal proof_deps, the traversal shows no cycle, and there are no SGA citations. I accept both declared tool uses: finite-stalk-formula-restriction and underived-exchange-module-linear. Small cases checked: V empty, disjoint union, nilpotent, purely inseparable, Λ=0, Λ=Z. Note: the existing clause-level nodes lemma-weil-pbc-finite-direct-image-exact, lemma-weil-pbc-finite-exchange and prop-weil-pbc-finite-morphism are not mentioned in the report; none states the conjunction with the module mate, so same_as [] stands. No fixes."
  }
 }
