@@ -115,6 +115,64 @@ theorem etale_of_smooth_of_diagonal [IsNoetherianRing R₀] [Algebra.Smooth R₀
   have ha : τ (algebraMap O R (algebraMap R₀ O a)) = algebraMap O R (algebraMap R₀ O a) := by
     rw [IsScalarTower.algebraMap_apply R₀ B O, hOR, hτ₀, Algebra.TensorProduct.comm_tmul,
       Algebra.algebraMap_eq_smul_one a, TensorProduct.tmul_smul, TensorProduct.smul_tmul']
-  sorry
+  -- the point of the fibre of the second projection
+  obtain ⟨⟨β, s⟩, hbs⟩ := IsLocalization.mk'_surjective P.primeCompl b
+  dsimp only at hbs
+  subst hbs
+  let A := Localization.AtPrime (fiberPrime q P hP)
+  have hβ : algebraMap (q.Fiber B) A (1 ⊗ₜ β) ≠ 0 := by
+    intro h0
+    apply hb
+    have h1 := congrArg (fiberLocalRingHom q P hP)
+      (IsLocalization.mk'_spec O β s)
+    rw [map_mul, fiberLocalRingHom_algebraMap, fiberLocalRingHom_algebraMap, h0] at h1
+    have hs : (1 : q.ResidueField) ⊗ₜ (s : B) ∈ (fiberPrime q P hP).primeCompl := fun hs ↦
+      s.2 ((SetLike.ext_iff.1 (comap_fiberPrime q P hP) (s : B)).1 hs)
+    exact ((IsLocalization.map_units A ⟨_, hs⟩).mul_left_eq_zero).1 h1
+  obtain ⟨E, _, _, ψ, hψu, hψP, hψβ⟩ := exists_diagonal_fiber q P hP β hβ
+  let ψR : R →+* E := IsLocalization.lift (M := Δ.primeCompl) (S := R) fun x ↦ hψu x.1 x.2
+  have hψR (x : Bt) : ψR (algebraMap Bt R x) = ψ x := IsLocalization.lift_eq _ _
+  set y := τ (algebraMap O R (IsLocalization.mk' O β s))
+  have hC1 (n : ℕ) : y ^ n ∉ (maximalIdeal O).map (algebraMap O R) := by
+    intro hn
+    let g := ψR.comp τ.toRingHom
+    have hJ : (maximalIdeal O).map (algebraMap O R) ≤ RingHom.ker g := by
+      rw [← Localization.AtPrime.map_eq_maximalIdeal, Ideal.map_map, Ideal.map_le_iff_le_comap]
+      intro m hm
+      rw [Ideal.mem_comap, RingHom.mem_ker, RingHom.comp_apply, RingHom.comp_apply,
+        RingEquiv.toRingHom_eq_coe, RingEquiv.coe_toRingHom, hOR, hτ₀,
+        Algebra.TensorProduct.comm_tmul, hψR]
+      exact hψP m hm
+    have h0 : g (y ^ n) = 0 := hJ hn
+    have hgy : g y = ψR (algebraMap O R (IsLocalization.mk' O β s)) := by
+      simp only [g, y, RingHom.comp_apply, RingEquiv.toRingHom_eq_coe, RingEquiv.coe_toRingHom,
+        hτ]
+    have hz : ψR (algebraMap O R (IsLocalization.mk' O β s)) *
+        ψR (algebraMap O R (algebraMap B O s)) = ψ (β ⊗ₜ 1) := by
+      rw [← map_mul, ← map_mul, IsLocalization.mk'_spec, hOR, hψR]
+    apply hψβ n
+    rw [← hz, mul_pow, ← hgy, ← map_pow, h0, zero_mul]
+  -- the prime of the completion
+  let I := RingHom.ker (algebraMap R O)
+  have hI : I ≠ ⊤ := RingHom.ker_ne_top _
+  have : Module.FaithfullyFlat R (AdicCompletion I R) := faithfullyFlat_adicCompletion I hI
+  have hC2 : algebraMap R (AdicCompletion I R) y ∉
+      ((maximalIdeal O).map (algebraMap O (AdicCompletion I R))).radical := by
+    rintro ⟨n, hn⟩
+    rw [IsScalarTower.algebraMap_eq O R (AdicCompletion I R), ← Ideal.map_map, ← map_pow] at hn
+    apply hC1 n
+    rw [← Ideal.comap_map_eq_self_of_faithfullyFlat (B := AdicCompletion I R)
+      ((maximalIdeal O).map (algebraMap O R))]
+    exact hn
+  rw [Ideal.radical_eq_sInf, Submodule.mem_sInf] at hC2
+  push Not at hC2
+  obtain ⟨Q, ⟨hJQ, hQ⟩, hyQ⟩ := hC2
+  have hQO : Ideal.comap (algebraMap O (AdicCompletion I R)) Q = maximalIdeal O :=
+    le_antisymm (IsLocalRing.le_maximalIdeal
+      (Ideal.comap_ne_top (algebraMap O (AdicCompletion I R)) hQ.ne_top))
+      (Ideal.map_le_iff_le_comap.1 hJQ)
+  have : IsNoetherianRing R := IsLocalization.isNoetherianRing Δ.primeCompl R inferInstance
+  have : IsNoetherianRing O := IsLocalization.isNoetherianRing P.primeCompl O inferInstance
+  exact etale_of_diagonal (O := O) (R := R) τ hτ hτμ ha hT Q hQO hyQ
 
 end RingTheory.DepthTwo
