@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.Algebra.Homology.HomologicalComplex
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.IsFlatOver
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 import WeilConjectures.AlgebraicGeometry.FinitelyPresentedComplexDescent
@@ -30,18 +31,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
-
-private theorem flatOver_of_iso {X S : Scheme.{u}} (f : X ⟶ S)
-    {M N : X.Modules} (e : M ≅ N) (hN : N.IsFlatOver f) : M.IsFlatOver f := by
-  intro V U hU
-  let : Module Γ(S, V.1) Γ(M, U.1) := Module.compHom _ (f.appLE V.1 U.1 hU).hom
-  let : Module Γ(S, V.1) Γ(N, U.1) := Module.compHom _ (f.appLE V.1 U.1 hU).hom
-  let eU := (SheafOfModules.evaluation X.ringCatSheaf (op U.1)).mapIso e
-  let eR := (ModuleCat.restrictScalars (f.appLE V.1 U.1 hU).hom).mapIso eU
-  have : Module.Flat Γ(S, V.1) ((ModuleCat.restrictScalars
-      (f.appLE V.1 U.1 hU).hom).obj
-      ((SheafOfModules.evaluation X.ringCatSheaf (op U.1)).obj N)) := hN V U hU
-  exact Module.Flat.of_linearEquiv eR.toLinearEquiv
 
 private theorem supportProper_of_iso {X S : Scheme.{u}} (f : X ⟶ S)
     [LocallyOfFiniteType f] {M N : X.Modules} (e : M ≅ N)
@@ -132,7 +121,7 @@ theorem finite_flat_proper_support_descent
         (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj (H.X n)).IsFlatOver
         (pullback.snd f (c.π.app (op i))) := by
     intro n
-    exact flatOver_of_iso _ (e n) (hG_flat n)
+    exact (hG_flat n).of_iso (e n).symm
   have hH_support : ∀ n : ℤ, Scheme.Modules.HasSupportProperOver
       (pullback.snd f (c.π.app (op i)))
       ((Scheme.Modules.moduleBaseChange f
