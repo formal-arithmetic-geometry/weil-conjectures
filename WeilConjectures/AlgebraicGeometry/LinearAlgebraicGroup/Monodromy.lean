@@ -337,7 +337,9 @@ end DegreeDatum
 
 /-- A represented degree datum adds to a degree datum a representation `ρ : W → GL n k` on
 `n → k`.
-(blueprint: `sk-d-monodromy`) -/
+Its tuple `(ρ, H_geom, G_arith, G^[m])` (`rep`, `geometricMonodromy`, `arithmeticMonodromy`,
+`degreeComponent`) is the monodromy data of `ρ`.
+(blueprint: `sk-d-monodromy`, `def-wf-monodromy-data`) -/
 structure RepresentedDegreeDatum (W : Type*) [Group W] (n k : Type*) [Fintype n] [DecidableEq n]
     [Field k] extends DegreeDatum W where
   /-- The representation. -/
@@ -1016,7 +1018,7 @@ The group theory is then `exists_pos_mem_center_mul_inv_mem`: with `K` the norma
 in `G(k)`, of index `e`, factor `Fᵉ = c h`; then `cᵉ` is central in `K`, and the product of its
 conjugates by representatives of `G(k) ⧸ K` is central in `G(k)` and lies in `H Fᴺ` for
 `N = e³`.
-(blueprint: `sk-p-central`) -/
+(blueprint: `sk-p-central`, `p-central`) -/
 theorem exists_isPositiveCentralPair (hD : D.IsSemisimple) :
     ∃ (N : ℕ) (z : GL n k), D.IsPositiveCentralPair N z := by
   have hG₀ : zeroLocus (identityComponent D.arithmeticMonodromy) k ≤

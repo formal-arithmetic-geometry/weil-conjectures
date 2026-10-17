@@ -137,7 +137,8 @@ lemma Scheme.Hom.finrankΓ_SpecMap (R S : Type u) [CommRing R] [CommRing S] [Alg
     Iso.inv_hom_id, Category.id_comp]
   rfl
 
-lemma Scheme.Hom.appLE_top_top {Y X : Scheme.{u}} (f : Y ⟶ X) (h : (⊤ : Y.Opens) ≤ f ⁻¹ᵁ ⊤) :
+lemma Scheme.Hom.appLE_top_top_fiberDegree {Y X : Scheme.{u}} (f : Y ⟶ X)
+    (h : (⊤ : Y.Opens) ≤ f ⁻¹ᵁ ⊤) :
     f.appLE ⊤ ⊤ h = f.appTop :=
   f.appLE_eq_app
 
@@ -164,7 +165,7 @@ lemma Scheme.Hom.nonempty_algEquiv_tensorProduct_Γ_of_isPullback :
   have hiso := isIso_pushoutSection_of_isAffineOpen H hUST hUSX hUY
     (isAffineOpen_top _) (isAffineOpen_top _) (isAffineOpen_top _)
   have P := (isIso_pushoutSection_iff H hUST hUSX hUY).mp hiso
-  simp only [Scheme.Hom.appLE_top_top] at P
+  simp only [Scheme.Hom.appLE_top_top_fiberDegree] at P
   -- Precompose with the identifications `Γ(Spec K, ⊤) ≅ K` and `Γ(Spec L, ⊤) ≅ L`.
   have P' : IsPushout (CommRingCat.ofHom (algebraMap K Γ(X, ⊤)))
       (CommRingCat.ofHom (algebraMap K L))

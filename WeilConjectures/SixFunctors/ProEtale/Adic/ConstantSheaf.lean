@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Sites.SheafQuasiCompact
 public import Mathlib.CategoryTheory.Sites.Subsheaf
 public import Mathlib.NumberTheory.Padics.Complex
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Iso
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 
 /-!
 # The constant `ℓ`-adic sheaf `ℚ̄_ℓ` on the pro-étale site

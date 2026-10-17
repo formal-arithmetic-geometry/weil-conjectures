@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationMap
+public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap
 public import WeilConjectures.SixFunctors.Adic.Reduction
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift

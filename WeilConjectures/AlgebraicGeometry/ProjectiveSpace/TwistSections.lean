@@ -17,13 +17,14 @@ public import WeilConjectures.Topology.Sheaves.CechComparison
 /-!
 # The Čech complex of the twisting sheaves on projective space
 
-Let `k` be a field and `Uᵢ = D₊(xᵢ)` the standard opens of `ℙ(n; Spec k)`. For a nonempty set
-`s` of coordinates, the sections of `𝒪(m)` over `U_s = ⋂_{i ∈ s} Uᵢ` are the degree-`m` part
-of `k[xᵢ, xⱼ⁻¹ : j ∈ s]`: every section is uniquely a finite `k`-linear combination of Laurent
-monomials `xᵉ` with `∑ eᵢ = m` and `eᵢ ≥ 0` for `i ∉ s`, and the restriction maps are the
-inclusions. Hence the Čech complex of `𝒪(m)` on the standard covering is the monomial Čech
-complex `ProjectiveSpace.monomialCechComplex n k m` (`ProjectiveSpace.cechComplexTwistIso`);
-this is the first step of the blueprint proof of `lem-pc-projective-space-twist-cohomology`.
+Let `k` be a commutative ring and `Uᵢ = D₊(xᵢ)` the standard opens of `ℙ(n; Spec k)`. For a
+nonempty set `s` of coordinates, the sections of `𝒪(m)` over `U_s = ⋂_{i ∈ s} Uᵢ` are the
+degree-`m` part of `k[xᵢ, xⱼ⁻¹ : j ∈ s]`: every section is uniquely a finite `k`-linear
+combination of Laurent monomials `xᵉ` with `∑ eᵢ = m` and `eᵢ ≥ 0` for `i ∉ s`, and the
+restriction maps are the inclusions. Hence the Čech complex of `𝒪(m)` on the standard covering
+is the monomial Čech complex `ProjectiveSpace.monomialCechComplex n k m`
+(`ProjectiveSpace.cechComplexTwistIso`); this is the first step of the blueprint proof of
+`lem-pc-projective-space-twist-cohomology`.
 
 The computation goes through the integral model `Proj ℤ[Tᵢ]`, of which `ℙ(n; Spec k)` is the
 base change and `𝒪(m)` the pullback of the twisting sheaf:
@@ -447,13 +448,13 @@ lemma preimage_basicOpenInt_range {p : ℕ} (σ : Fin (p + 1) → n) :
   rintro _ ⟨l, rfl⟩
   exact (iInf_le (fun l ↦ standardOpen n S (σ l)) l) hx
 
-variable (k : Type u) [Field k] (m : ℤ)
+variable (k : Type u) [CommRing k] (m : ℤ)
 
 /-- The `k`-linear map sending a finitely supported family of coefficients `(cₑ)` to the section
 `∑ cₑ xᵉ` of `𝒪(m)` over `⋂_{i ∈ s} D₊(xᵢ) ⊆ ℙ(n; Spec k)`. -/
 noncomputable def twistMonomialLinearMap (s : Set n) :
     (laurentExponents s m →₀ k) →ₗ[k] (ModuleCat.restrictScalars
-      (Scheme.globalSectionsRingHom k (X := ℙ(n; Spec (.of k))))).obj
+      ((Scheme.ΓSpecIso (.of k)).inv ≫ (ℙ(n; Spec (.of k)) ↘ Spec (.of k)).appTop).hom).obj
         ((twist n (Spec (.of k)) m).presheafModuleCat.obj
           (op (toProjInt n (Spec (.of k)) ⁻¹ᵁ basicOpenInt n s))) :=
   Finsupp.linearCombination k fun e ↦ twistMonomialSection (Spec (.of k)) s e
@@ -510,7 +511,7 @@ variable (k m) in
 complex of `𝒪(m)` on the standard covering of `ℙ(n; Spec k)`, as a `k`-linear map. -/
 noncomputable def monomialCechToCech (p : ℕ) :
     ProjectiveSpace.MonomialCechCochain n k m p →ₗ[k] (ModuleCat.restrictScalars
-      (Scheme.globalSectionsRingHom k (X := ℙ(n; Spec (.of k))))).obj
+      ((Scheme.ΓSpecIso (.of k)).inv ≫ (ℙ(n; Spec (.of k)) ↘ Spec (.of k)).appTop).hom).obj
         (((cechComplexFunctor (standardOpen n (Spec (.of k)))).obj
           (twist n (Spec (.of k)) m).presheafModuleCat).X p) where
   toFun := monomialCechToCechFun k m p
@@ -528,7 +529,7 @@ noncomputable def monomialCechToCech (p : ℕ) :
       (twist n (Spec (.of k)) m).presheafModuleCat fun σ ↦ ?_
     change _ = TopCat.Presheaf.cechComplexFunctorπ (standardOpen n (Spec (.of k)))
       (twist n (Spec (.of k)) m).presheafModuleCat p σ
-      (Scheme.globalSectionsRingHom k (X := ℙ(n; Spec (.of k))) r •
+      (((Scheme.ΓSpecIso (.of k)).inv ≫ (ℙ(n; Spec (.of k)) ↘ Spec (.of k)).appTop).hom r •
         monomialCechToCechFun k m p c)
     rw [(TopCat.Presheaf.cechComplexFunctorπ (standardOpen n (Spec (.of k)))
       (twist n (Spec (.of k)) m).presheafModuleCat p σ).hom.map_smul,
@@ -623,13 +624,14 @@ lemma bijective_monomialCechToCech (p : ℕ) :
 
 variable (n k m) in
 /-- **The Čech complex of `𝒪(m)` on the standard covering of `ℙ(n; Spec k)` is the monomial Čech
-complex**, as complexes of `k`-vector spaces: the section `∑ cₑ xᵉ` over `U_σ` corresponds to the
+complex**, as complexes of `k`-modules: the section `∑ cₑ xᵉ` over `U_σ` corresponds to the
 family of coefficients `(cₑ)`.
 
 (blueprint: `lem-pc-projective-space-twist-cohomology`) -/
 noncomputable def cechComplexTwistIso :
     ((ModuleCat.restrictScalars
-        (Scheme.globalSectionsRingHom k (X := ℙ(n; Spec (.of k))))).mapHomologicalComplex _).obj
+        ((Scheme.ΓSpecIso (.of k)).inv ≫
+          (ℙ(n; Spec (.of k)) ↘ Spec (.of k)).appTop).hom).mapHomologicalComplex _).obj
       ((cechComplexFunctor (standardOpen n (Spec (.of k)))).obj
         (twist n (Spec (.of k)) m).presheafModuleCat) ≅
       ProjectiveSpace.monomialCechComplex n k m :=

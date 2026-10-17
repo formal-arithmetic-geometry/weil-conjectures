@@ -103,4 +103,23 @@ theorem Etale.hasTorsionBaseChange_of_isProper {X Y : Scheme.{u}} (f : X ⟶ Y) 
   Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper Λ
     (Etale.hasTorsionBaseChange_projectiveLine Λ) f
 
+/-- **Injective acyclicity gives bounded-below base change, arbitrary coefficients.** Let `Λ` be
+a commutative ring and `f : X ⟶ Y` proper. Assume injective acyclicity `IA(f)` over `Λ`: for every
+cartesian square over `f` and every torsion injective sheaf `I` of `Λ`-modules on `X_ét`,
+`Rᵠf'_*(g'^* I) = 0` for `q > 0`. Then `f` has the base change property: the derived base change
+map is an isomorphism on every `K ∈ D⁺(X_ét, Λ)` with torsion cohomology sheaves.
+
+For a coefficient ring which is torsion as an additive group this is the direct argument
+`AlgebraicGeometry.Etale.HasInjectiveAcyclicity.hasTorsionBaseChange`: resolve `K` by injectives,
+which are torsion and hence `f'_*`-acyclic after base change. Over an arbitrary `Λ` a torsion sheaf
+need not embed into a torsion injective sheaf, so that argument does not apply. The conclusion is
+instead the proper base change theorem
+`AlgebraicGeometry.Etale.hasTorsionBaseChange_of_isProper`, which needs no acyclicity hypothesis.
+(blueprint: `lem-weil-pbc-injective-acyclicity-bounded-below`) -/
+@[stacks 0A4B]
+theorem Etale.HasInjectiveAcyclicity.hasTorsionBaseChange_of_isProper {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [IsProper f] (_hf : Etale.HasInjectiveAcyclicity Λ f) :
+    Etale.HasTorsionBaseChange Λ f :=
+  Etale.hasTorsionBaseChange_of_isProper Λ f
+
 end AlgebraicGeometry

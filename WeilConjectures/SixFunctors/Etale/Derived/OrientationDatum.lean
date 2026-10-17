@@ -6,8 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
-public import WeilConjectures.SixFunctors.ProEtale.Derived.Comparison
-public import WeilConjectures.SixFunctors.ProEtale.Derived.Duality
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Duality
 
 /-!
 # Orientation data

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Hom
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.InternalHom
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.InternalHom
 
 /-!
 # The internal hom of `ℚ̄_ℓ,X`-modules is local

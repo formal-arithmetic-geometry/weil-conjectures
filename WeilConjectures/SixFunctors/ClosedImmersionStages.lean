@@ -6,14 +6,14 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationMap
+public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap
 public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
 public import WeilConjectures.Mathlib.CategoryTheory.Idempotents.FunctorExtension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
-public import WeilConjectures.SixFunctors.ProEtale.Derived.ClosedImmersionUpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedUpperShriek
 
 /-!
 # The direct image along a closed immersion is fully faithful at every coefficient stage

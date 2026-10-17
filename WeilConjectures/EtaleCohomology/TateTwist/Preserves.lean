@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.EtaleCohomology.TateTwist.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
-public import WeilConjectures.SixFunctors.ProEtale.Derived.ComparisonMonoidal
-public import WeilConjectures.SixFunctors.ProEtale.Derived.HomComparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
 
 /-!
 # Tate twists preserve the finiteness conditions

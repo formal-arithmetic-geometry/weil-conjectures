@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.PicardGroup
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
-public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
+public import WeilConjectures.ConstructibleSheaf.StalkZeroLocus
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 
@@ -49,8 +49,7 @@ constructible without finiteness hypotheses on `X`: for an open immersion `j` it
 
 ## TODO
 
-Prove `IsFiniteLocallyConstantSheaf.tensorObj` and
-`IsFiniteLocallyConstantSheaf.ihom_unit`.
+Prove `IsFiniteLocallyConstantSheaf.tensorObj` and `IsFiniteLocallyConstantSheaf.ihom_unit`.
 -/
 
 @[expose] public section
@@ -83,18 +82,16 @@ pullback of `F` to the stratum. -/
 theorem IsConstructibleSheaf.isFiniteSheaf (hF : IsConstructibleSheaf F) : IsFiniteSheaf F where
   isFinitelyGenerated_sheafFiber Ω _ _ s := by
     obtain ⟨S, hS⟩ := hF.exists_stratification
-    have hmem : s (IsLocalRing.closedPoint _) ∈ ⋃ i, S.stratum i := by
-      rw [S.iUnion_stratum_eq_univ]; trivial
-    obtain ⟨i, hi⟩ := Set.mem_iUnion.1 hmem
-    have : SurjectiveOnStalks (S.immersion i) := by
-      rw [← (S.immersion i).liftCoborder_ι]; infer_instance
-    obtain ⟨t, rfl⟩ := exists_comp_eq_of_mem_range (S.immersion i) s
-      (by rw [S.range_immersion]; exact hi)
-    have := hS i
+    obtain ⟨i, hi⟩ := Set.mem_iUnion.mp
+      (S.iUnion_stratum_eq_univ ▸ Set.mem_univ (s.base (IsLocalRing.closedPoint Ω)))
+    rw [← S.range_immersion] at hi
+    obtain ⟨t, rfl⟩ := IsImmersion.exists_comp_eq_of_field (S.immersion i) s hi
+    have := (hS i).toIsFiniteSheaf
     exact (IsFiniteSheaf.isFinitelyGenerated_sheafFiber (FA := FA) (CA := CA)
       (F := (Etale.upperStar A (S.immersion i)).obj F) Ω t).of_iso
-      ((Etale.upperStarCompSheafFiberIso A (S.immersion i) t).app F)
+        ((Etale.upperStarCompSheafFiberIso A (S.immersion i) t).app F)
 
+omit [HasSmallSiteSheafify A] in
 /-- A constructible locally constant sheaf is finite locally constant. -/
 theorem IsConstructibleSheaf.isFiniteLocallyConstantSheaf (hF : IsConstructibleSheaf F)
     (hF' : IsLocallyConstantSheaf F) :

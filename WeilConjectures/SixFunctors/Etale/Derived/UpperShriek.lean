@@ -5,11 +5,12 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
-public import WeilConjectures.CategoryTheory.Sites.DerivedBrown
+public import WeilConjectures.SixFunctors.Etale.Derived.CompactificationUpperShriek
+
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.Etale.Derived.ProperCoproducts
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBoundedBelow
 
 /-!
 
@@ -32,8 +33,9 @@ which is taken as an instance argument.
   on the unbounded derived categories.
 
 - `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek` : `Rf^!` exists and preserves bounded
-  below objects (an instance for torsion coefficients and a quasi-compact target); and
-  `AlgebraicGeometry.Etale.HasBoundedBelowUpperShrieks`, the same for every `f`.
+  below objects, an instance for torsion coefficients over a quasi-compact base; and
+  `AlgebraicGeometry.Etale.HasBoundedBelowUpperShrieks`, the same for every `f` with
+  quasi-compact target.
 
 ## Implementation notes
 
@@ -45,11 +47,8 @@ which is taken as an instance argument.
   only at the torsion coefficients `ModuleCat Λ`, `[Finite Λ]`
   (`isLeftAdjoint_rightDerivedLowerShriek`). That instance is the blueprint theorem
   `thm-amb-etale-exceptional-adjoint` of the smooth-purity chapter (Brown representability,
-  Stacks `0F5Y`, applied to the coproduct-preserving `Rf_!`). It is proved from Brown
-  representability for sheaves of modules
-  (`CategoryTheory.Sheaf.isLeftAdjoint_of_preservesCoproducts`)
-  and the preservation of coproducts by the proper direct image
-  (`AlgebraicGeometry.Etale.preservesColimitsOfShape_rightDerivedLowerStar_of_isProper`).
+  Stacks `0F5Y`, applied to the coproduct-preserving `Rf_!`), proved in
+  `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint`.
 * `Rf^!` is `Functor.rightAdjoint`, i.e. an arbitrary choice of right adjoint extracted from
   the instance, not a construction. Only the adjunction `rightDerivedUpperShriekAdjunction`
   should be used about it; it has no definitional content.
@@ -59,11 +58,11 @@ which is taken as an instance argument.
   through the finite cohomological amplitude of `Rf_!`, and the bounded below exceptional
   functor of the blueprint is the constructible one of `sk-prop-sf-existence` (c). That `Rf^!`
   preserves `D⁺` is recorded, together with the existence of `Rf^!`, by the hypothesis class
-  `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek`, which the pro-étale `Rf^!` assumes; it
-  is an instance for torsion coefficients and a quasi-compact target
-  (`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`, in
-  `WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBoundedBelow`, whose proof needs the
-  finiteness of étale cohomology and is kept out of this file).
+  `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek`, which the pro-étale adjunction for
+  `Rf^!` assumes; it is an instance for torsion coefficients when `Y` is quasi-compact
+  (`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`). Quasi-compactness is needed: for
+  `Y = ⊔ₙ Spec k` and `X = ⊔ₙ ℙⁿ_k`, `f` proper, `Rf^! Λ` is `Λ(n)[2n]` on `ℙⁿ_k`, which is not
+  bounded below.
 
 ## TODO
 
@@ -79,8 +78,6 @@ universe u' u
 
 open CategoryTheory Abelian Limits
 
-open scoped CategoryTheory.Functor
-
 namespace AlgebraicGeometry
 
 open Scheme
@@ -95,8 +92,7 @@ section TorsionCoefficients
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `thm-amb-etale-exceptional-adjoint` and `sk-prop-sf-existence` (a): The ordinary
-ambient exceptional adjoint.
+/-- Blueprint `thm-amb-etale-exceptional-adjoint`: The ordinary ambient exceptional adjoint.
 
 For torsion coefficients `Λ`, the derived lower shriek `Rf_! : D(X_ét, Λ) ⥤ D(Y_ét, Λ)` is a
 left adjoint; its right adjoint is the exceptional inverse image `Rf^!`.
@@ -107,21 +103,10 @@ cohomological dimension, locally on `Y` bounded by twice the fibre dimension of 
 cohomology sheaves commute with filtered colimits, so `Rg_*` preserves coproducts on the
 unbounded derived category. Brown representability for the derived category of the
 Grothendieck abelian category of étale sheaves of `Λ`-modules (Stacks `0F5Y`) then gives the
-right adjoint [SGA 4, Exp. XVIII, Thm 3.1.4].
-
-The blueprint states `sk-prop-sf-existence` (a) for a general Grothendieck abelian coefficient
-category, but its proof needs `Rg_*` to preserve coproducts, which blueprint
-`lem-amb-proper-coproducts` only provides for torsion coefficients. -/
+right adjoint [SGA 4, Exp. XVIII, Thm 3.1.4]. -/
 instance isLeftAdjoint_rightDerivedLowerShriek [Finite Λ] :
-    (R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint := by
-  let c := HasCompactification.compactification f
-  let adj := mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) c.g
-  let := adj.rightAdjointCommShift ℤ
-  have := adj.commShift_of_leftAdjoint ℤ
-  have := adj.isTriangulated_rightAdjoint
-  have (K : Type (u + 1)) := preservesColimitsOfShape_rightDerivedLowerStar_of_isProper c.g Λ K
-  exact Sheaf.isLeftAdjoint_of_preservesCoproducts _ _
-    (D((c.i)_!open[ModuleCat.{u + 1} Λ]) ⋙ R((c.g)_*[ModuleCat.{u + 1} Λ]))
+    (R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint :=
+  isLeftAdjoint_rightDerivedLowerShriekOfCompactification Λ _
 
 end TorsionCoefficients
 
@@ -167,7 +152,7 @@ This is what the constructible pro-étale `Rf^!`
 (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`) needs of the étale one. Neither half
 holds for an arbitrary coefficient category: both rest on the finite cohomological amplitude of
 the proper direct image, that is, on torsion coefficients, where the class is the instance
-`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek` (for a quasi-compact target). Note that `Rf^!` is not left t-exact:
+`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`. Note that `Rf^!` is not left t-exact:
 the bound it produces is shifted by the cohomological amplitude of `Rf_!`, which is why the
 condition is about `t.plus` rather than about `IsGE n` for a fixed `n`. -/
 class HasBoundedBelowUpperShriek : Prop extends (R(f)_![A]).IsLeftAdjoint where
@@ -183,20 +168,39 @@ lemma plus_rightDerivedUpperShriek_obj [HasBoundedBelowUpperShriek A f]
     DerivedCategory.TStructure.t.plus ((R(f)^![A]).obj K) :=
   HasBoundedBelowUpperShriek.plus_rightDerivedUpperShriek_obj K hK
 
-/-- `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek` for every morphism admitting a
-compactification: the coefficients have exceptional inverse images preserving bounded below
-objects.
+/-- For torsion coefficients and a quasi-compact target `Y`, `Rf_!` is a left adjoint
+(`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`) and `Rf^!` preserves bounded
+below objects. The second half holds because `Rf_!` has finite cohomological amplitude, bounded
+by twice the fibre dimension of the compactification, which is bounded as `Y` is
+quasi-compact: if `Rf_!` sends `D^{≤ 0}` into `D^{≤ N}` then `Rf^!` sends `D^{≥ 0}` into
+`D^{≥ -N}`, by adjunction [SGA 4, Exp. XVIII, 3.1.7]. Without quasi-compactness of `Y` this
+fails: for `Y = ⊔ₙ Spec k` and `X = ⊔ₙ ℙⁿ_k`, `Rf^! Λ` restricts to `Λ(n)[2n]` on `ℙⁿ_k`. -/
+instance hasBoundedBelowUpperShriek [CompactSpace Y] (Λ : Type (u + 1)) [CommRing Λ]
+    [Finite Λ] : HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f where
+  plus_rightDerivedUpperShriek_obj :=
+    plus_obj_of_rightDerivedLowerShriek_adjunction Λ f (Adjunction.ofIsLeftAdjoint _)
 
-Warning: this is a hypothesis which torsion coefficients do *not* satisfy, since it quantifies
-over morphisms with a non-quasi-compact target (see the counterexample in
-`WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBoundedBelow`). For torsion coefficients,
-the condition holds for every `f` with quasi-compact target
-(`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`, in that file). -/
+/-- The coefficients have exceptional inverse images along every morphism admitting a
+compactification, preserving bounded below objects when the target is quasi-compact:
+`Rf_!` is a left adjoint for every such `f`, and
+`AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek` holds when moreover the target is
+quasi-compact. This holds for torsion coefficients
+(`AlgebraicGeometry.Etale.hasBoundedBelowUpperShrieks`). -/
 class HasBoundedBelowUpperShrieks : Prop where
-  hasBoundedBelowUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
-    HasBoundedBelowUpperShriek A f
+  isLeftAdjoint {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
+    (R(f)_![A]).IsLeftAdjoint
+  hasBoundedBelowUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    [CompactSpace Y] : HasBoundedBelowUpperShriek A f
 
-attribute [instance] HasBoundedBelowUpperShrieks.hasBoundedBelowUpperShriek
+attribute [instance] HasBoundedBelowUpperShrieks.isLeftAdjoint
+  HasBoundedBelowUpperShrieks.hasBoundedBelowUpperShriek
+
+/-- Torsion coefficients have exceptional inverse images, preserving bounded below objects over
+a quasi-compact target. -/
+instance hasBoundedBelowUpperShrieks (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
+    HasBoundedBelowUpperShrieks (ModuleCat.{u + 1} Λ) where
+  isLeftAdjoint _ _ := inferInstance
+  hasBoundedBelowUpperShriek _ _ _ := inferInstance
 
 end BoundedBelow
 

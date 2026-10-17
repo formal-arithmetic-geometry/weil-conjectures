@@ -1,0 +1,1029 @@
+% !TEX program = pdflatex
+% Build: pdflatex -interaction=nonstopmode condensed_coefficient_sections_EN.tex (twice)
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=24.5mm,headheight=15pt]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{booktabs,array,enumitem}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage[unicode,colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{bookmark}
+\setlength{\parskip}{2.5pt}
+\setlength{\parindent}{1.25em}
+\setlist[enumerate]{leftmargin=2.3em,itemsep=2pt,topsep=3pt}
+\setlist[itemize]{leftmargin=2.3em,itemsep=2pt,topsep=3pt}
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\ProFin}{\mathrm{ProFin}}
+\newcommand{\Cond}{\mathrm{Cond}}
+\newcommand{\Sh}{\mathrm{Sh}}
+\newcommand{\CAlg}{\mathrm{CAlg}}
+\newcommand{\Mod}{\mathrm{Mod}}
+\newcommand{\CRing}{\mathrm{CRing}}
+\newcommand{\Sch}{\mathrm{Sch}}
+\newcommand{\Ring}{\mathrm{Ring}}
+\newcommand{\D}{\mathrm D}
+\newcommand{\LC}{\mathrm{LC}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Map}{\mathrm{Map}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\proet}{\mathrm{pro\acute{e}t}}
+\newcommand{\OO}{\mathcal O}
+\newcommand{\FF}{\mathcal F}
+\newcommand{\MM}{\mathcal M}
+\newcommand{\I}{\mathcal I}
+\newcommand{\ringunder}[1]{\underline{#1}}
+\newcommand{\Qlbar}{\overline{\mathbb Q}_{\ell}}
+\newcommand{\Zlbar}{\overline{\mathbb Z}_{\ell}}
+\newcommand{\xo}[1]{\left(#1\right)}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize Sectionwise condensed coefficient rings}
+\fancyhead[R]{\footnotesize \thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\title{\bfseries Sectionwise Condensed Coefficient Rings\\[3pt]
+  and Their Pullback to the Pro-\'{e}tale Site\\[5pt]
+  \large A pullback-oriented lax Cartesian coefficient system}
+\author{Technical construction notes}
+\date{October 2026}
+\begin{document}
+\maketitle
+\vspace{-1.5em}
+\begin{abstract}
+Fix a prime $\ell$.  All coefficient rings in these notes are defined
+\emph{by their sections on profinite test spaces}, rather than by limits,
+colimits, or algebraic localizations of sheaves.  For the four local
+coefficient rings $\mathbb Z_\ell$, $\mathbb Q_\ell$, $\mathcal O_E$ and
+$E$, the defining sections are continuous functions $C(S,T)$ with the
+usual local-field topologies.  For $\overline{\mathbb Q}_\ell$, a section
+is instead an equivalence class of a finite extension $E/\mathbb Q_\ell$
+and a continuous map $S\to E$.  We verify the sheaf axioms directly and
+only \emph{afterwards} record the familiar limit, localization, and
+filtered-colimit descriptions as comparison isomorphisms.  We construct
+the canonical geometric morphism $p_X:X_{\proet}\to *_{\proet}$ from
+$S\mapsto X[S]$, describe the pulled-back ring sheaves explicitly,
+and exhibit their coherent structure maps
+$f^{-1}A_Y\xrightarrow{\sim}A_X$.  The orientation is fixed as part
+of the definition of a pullback-oriented lax Cartesian coefficient
+system.  No six-operation formalism is developed.
+\end{abstract}
+\begingroup\small\setlength{\parskip}{0pt}\tableofcontents\endgroup
+
+\section{Precise scope and the meaning of ``lax Cartesian''}
+
+We work in a fixed size universe, or equivalently with a suitably large
+regular cardinal so that the pro-\'{e}tale sites used below are essentially
+small.  Let $\mathscr S$ be a category of schemes closed under the base
+changes required below.  We use ordinary sheaves of sets, abelian groups,
+and commutative rings; there is no need for solid modules or analytic rings.
+
+For $X\in\mathscr S$, write $X_{\proet}$ for the pro-\'{e}tale site of
+Bhatt--Scholze: its objects are weakly \'{e}tale morphisms $U\to X$ and
+its coverings are fpqc covering families.  The notation
+$\Sh(X_{\proet})$ refers to the associated topos.
+
+\begin{definition}[The direction used throughout]\label{def:direction}
+Let $\mathscr R(X)$ denote the category of commutative ring objects in
+$\Sh(X_{\proet})$.  For $f:X\to Y$, let
+$f^{-1}:\mathscr R(Y)\to\mathscr R(X)$ be the inverse-image functor.
+A \emph{pullback-oriented lax Cartesian ring system} is the following data:
+\begin{enumerate}
+\item an object $A_X\in\mathscr R(X)$ for every $X$;
+\item for every $f:X\to Y$, a ring morphism
+\begin{equation}\label{eq:lax-direction}
+     \boxed{\quad\theta_f:f^{-1}A_Y\longrightarrow A_X\quad};
+\end{equation}
+\item unit and composition coherences, made explicit in
+  Definition~\ref{def:lax-formal}.
+\end{enumerate}
+If every $\theta_f$ is invertible, we call the system
+\emph{Cartesian} (in this pullback-oriented convention).
+\end{definition}
+
+\begin{remark}[Convention warning: lax versus oplax]\label{rem:convention}
+The direction in \eqref{eq:lax-direction} is intentional.  For a
+contravariant pseudofunctor $\mathscr R:\mathscr S^{\mathrm{op}}\to\mathsf{Cat}$,
+the usual \emph{Grothendieck Cartesian fibration} over $\mathscr S$ has
+arrows over $f:X\to Y$ corresponding to maps
+$A_X\to f^{-1}A_Y$ in $\mathscr R(X)$---the reverse direction.
+Our convention can be expressed using fiberwise opposite categories, or as
+one chosen orientation of a lax/oplax natural transformation.
+Authors do not uniformly attach the word ``lax'' to the same orientation.
+Here we \emph{define} the convention by \eqref{eq:lax-direction}.
+The distinction disappears for the coefficient systems constructed below,
+since all their structural arrows are isomorphisms.  Also, this use of
+``lax Cartesian'' is \emph{not} the separate notion of a lax Cartesian
+\emph{symmetric monoidal structure} on a category-valued functor.
+\end{remark}
+
+\section{A condensed ring, constructed by its sections}
+
+\subsection{The pro-\'{e}tale site of a point}
+
+Let $\ProFin$ be the category of profinite sets and continuous maps.
+Equip it with the Grothendieck topology in which
+$\{S_i\to S\}_{i=1}^r$ is a covering family precisely when
+$\coprod_i S_i\to S$ is surjective.  Define
+\[
+    *_{\proet}:=(\ProFin,J),\qquad
+    \Cond(\mathrm{Set})=\Sh(*_{\proet}),\qquad
+    \Cond(\mathrm{Ab})=\Sh(*_{\proet},\mathrm{Ab}).
+\]
+A \emph{condensed commutative ring} is simply a sheaf of commutative rings
+on this site.  Equivalently, it is a commutative unital ring object of
+$\Cond(\mathrm{Set})$, or a commutative algebra object of
+$\Cond(\mathrm{Ab})$ with its sheaf tensor product.
+
+The following explicit construction will be used for every coefficient.
+
+\begin{definition}[Continuous-function condensed ring]\label{def:cond-T}
+Let $T$ be a Hausdorff topological commutative ring.  Define a presheaf
+of rings $\ringunder T$ on $\ProFin$ by
+\begin{equation}\label{eq:point-sections}
+      \boxed{\quad \ringunder T(S):=C(S,T)
+       =\{a:S\to T\mid a\text{ is continuous}\}.\quad}
+\end{equation}
+For a continuous map $u:S'\to S$, the restriction map is
+\[
+      u^*:C(S,T)\longrightarrow C(S',T),\qquad a\longmapsto a\circ u.
+\]
+The ring operations, constants, and unit are defined pointwise:
+\[
+(a+b)(s)=a(s)+b(s),\quad
+(ab)(s)=a(s)b(s),\quad 1_S(s)=1_T.
+\]
+\end{definition}
+
+\begin{proposition}[The sheaf axiom, without abstraction]\label{prop:sheaf}
+The presheaf $S\mapsto C(S,T)$ is a sheaf of commutative rings on
+$*_{\proet}$.  A continuous ring homomorphism $T\to T'$ gives a morphism
+of condensed rings $\ringunder T\to\ringunder{T'}$ by postcomposition.
+\end{proposition}
+\begin{proof}
+A finite jointly surjective family is equivalent, for the sheaf axiom, to
+a surjection $q:S'\twoheadrightarrow S$ of profinite sets.  Since $S'$ is
+compact and $S$ is Hausdorff, $q$ is a topological quotient map.  Thus a
+continuous $a:S'\to T$ descends to a continuous $S\to T$ if and only if
+$a$ is constant on the fibers of $q$, i.e., if and only if
+$\operatorname{pr}_1^*a=\operatorname{pr}_2^*a$ on $S'\times_S S'$.
+Consequently
+\[
+ C(S,T)\xrightarrow{\sim}
+ \operatorname{Eq}\bigl(
+ C(S',T)\rightrightarrows C(S'\times_S S',T)\bigr).
+\]
+This is an equalizer of rings because all operations are pointwise.
+Postcomposition clearly respects restrictions, descent, and ring operations.
+\end{proof}
+
+\begin{example}[Sections with finite values]\label{ex:finite-test}
+If $A$ is a finite discrete commutative ring and $S$ is profinite, a
+section of $\ringunder A$ is a locally constant function $a:S\to A$.
+Equivalently, there is a finite quotient $q:S\twoheadrightarrow S_0$
+and a function $a_0:S_0\to A$ with $a=a_0\circ q$.  Addition and
+multiplication simply combine these finite tables of values on a common
+finite quotient.  This description does not invoke a categorical
+limit or colimit.
+\end{example}
+
+\begin{remark}[The methodological rule]
+We distinguish \emph{definitions of coefficients} from \emph{identities
+subsequently satisfied by those coefficients}.  Every definition in the
+next section specifies a ring of actual sections, restriction by
+precomposition, and pointwise or finite-stage ring operations.  Some
+limits, colimits, and localization identities will be proved later;
+none of them is used to define a coefficient ring.
+\end{remark}
+
+\section{Five coefficient rings defined by their sections}
+
+Fix a prime $\ell$.  We work inside a fixed algebraic closure
+$\Qlbar$ of $\mathbb Q_\ell$, so that all finite extensions below are
+actual subfields of one field.  We use the usual $\ell$-adic topology
+on $\mathbb Z_\ell$ and $\mathbb Q_\ell$ and the usual local-field
+topologies on $\OO_E$ and $E$.
+
+\subsection{\texorpdfstring{The condensed $\mathbb Z_\ell$}{The condensed Zl}: continuous integral sections}
+
+\begin{definition}\label{def:Zl}
+For each profinite set $S$, \emph{define}
+\begin{equation}\label{eq:Zl-def}
+  \boxed{\quad \ringunder{\mathbb Z_\ell}(S):=C(S,\mathbb Z_\ell).\quad}
+\end{equation}
+For a continuous map $u:S'\to S$, define $u^*a=a\circ u$.
+Addition, multiplication, zero, and one are defined pointwise.  Thus
+$\ringunder{\mathbb Z_\ell}$ is a condensed commutative ring by
+Proposition~\ref{prop:sheaf}.
+\end{definition}
+
+Here is a fully explicit alternative description of a \emph{section},
+not a second definition of the ring.  To $a\in C(S,\mathbb Z_\ell)$
+associate its residue functions
+\[
+   a_n:S\longrightarrow\mathbb Z/\ell^n\mathbb Z,
+   \qquad a_n(s)=a(s)\bmod\ell^n.
+\]
+Every $a_n$ is locally constant and
+$a_{n+1}(s)\bmod\ell^n=a_n(s)$.  Conversely, any family of locally
+constant functions $(a_n)_{n\geq1}$ satisfying these pointwise
+congruences specifies a unique continuous $\mathbb Z_\ell$-valued
+function: at each $s$ the residues specify an $\ell$-adic integer, and
+continuity follows because the residue maps define the topology.
+Operations are computed residue by residue:
+\[
+ (a+b)_n=a_n+b_n,\qquad (ab)_n=a_nb_n.
+\]
+Notice that the \emph{object defined} in \eqref{eq:Zl-def} is the
+continuous-function ring, not the inverse limit of a tower of sheaves.
+
+\subsection{\texorpdfstring{The condensed $\mathbb Q_\ell$}{The condensed Ql}: continuous rational sections}
+
+\begin{definition}\label{def:Ql}
+For every profinite $S$, \emph{define}
+\begin{equation}\label{eq:Ql-def}
+   \boxed{\quad\ringunder{\mathbb Q_\ell}(S):=C(S,\mathbb Q_\ell).\quad}
+\end{equation}
+Again restrictions are given by precomposition and ring operations
+are pointwise.  The field carries its ordinary nonarchimedean topology.
+\end{definition}
+
+\begin{lemma}[Uniform denominators]\label{lem:uniform-denominator}
+A function $a:S\to\mathbb Q_\ell$ belongs to
+$\ringunder{\mathbb Q_\ell}(S)$ if and only if there exist an integer
+$N\geq0$ and $b\in C(S,\mathbb Z_\ell)$ such that
+\[
+                   a(s)=\ell^{-N}b(s)\quad(s\in S).
+\]
+In particular, the integer $N$ is \emph{uniform in $s$}.
+\end{lemma}
+\begin{proof}
+The image of a continuous function on a profinite set is compact in
+$\mathbb Q_\ell$, hence bounded.  Therefore some $\ell^N a(S)$ is
+contained in $\mathbb Z_\ell$, and multiplication by $\ell^N$ is
+continuous.  The converse is immediate.
+\end{proof}
+
+Thus rational sections admit a second \emph{concrete representation}
+by pairs $(N,b)$ with $b:S\to\mathbb Z_\ell$ continuous, where
+\[
+  (N,b)\sim(M,c)\quad\Longleftrightarrow\quad
+                     \ell^M b=\ell^N c
+\]
+as functions on $S$.  Sums and products are calculated after choosing
+a common denominator; for example, with $K=\max(N,M)$,
+\[
+ (N,b)+(M,c)=\bigl(K,\ell^{K-N}b+\ell^{K-M}c\bigr),\qquad
+ (N,b)(M,c)=(N+M,bc).
+\]
+The pairs are merely a presentation of the ring already defined by
+continuous functions.
+
+\subsection{\texorpdfstring{The condensed $\OO_E$ and $E$}{The condensed OE and E}: integral and rational sections}
+
+Let $E/\mathbb Q_\ell$ be a finite extension, let $\OO_E$ be its ring
+of integers, and choose a uniformizer $\varpi_E$.
+
+\begin{definition}\label{def:OE-E}
+For each profinite set $S$, \emph{define} two rings by
+\begin{equation}\label{eq:OE-E-def}
+  \boxed{\quad
+   \ringunder{\OO_E}(S):=C(S,\OO_E),\qquad
+   \ringunder E(S):=C(S,E).
+  \quad}
+\end{equation}
+Restriction is precomposition and arithmetic is pointwise in the
+target topological ring.  Both are condensed commutative rings.
+\end{definition}
+
+An integral section $a\in C(S,\OO_E)$ is concretely determined by its
+locally constant residues
+\[
+ a_n:S\to\OO_E/\varpi_E^n,\qquad
+ a_{n+1}\bmod\varpi_E^n=a_n.
+\]
+Conversely every compatible family of such residue functions gives a
+unique continuous $\OO_E$-valued section.  A rational section
+$c\in C(S,E)$ has \emph{one uniform denominator}:
+\[
+ \exists N\geq0,\ b\in C(S,\OO_E),\qquad c=\varpi_E^{-N}b.
+\]
+The proof is the same compactness argument as for
+Lemma~\ref{lem:uniform-denominator}.  The choice of $\varpi_E$ is
+used only in the alternative presentations, not in the definitions
+\eqref{eq:OE-E-def}.
+
+If $E\subset F$ are two finite subextensions of $\Qlbar$, the
+continuous inclusions yield actual morphisms of condensed rings
+\begin{equation}\label{eq:finite-transitions}
+ \ringunder{\OO_E}\longrightarrow\ringunder{\OO_F},\qquad
+ \ringunder E\longrightarrow\ringunder F,
+\end{equation}
+whose component on $S$ is simply postcomposition with the inclusion.
+No extra comparison isomorphism is needed to compose these maps.
+
+\subsection{\texorpdfstring{The condensed $\overline{\mathbb Q}_\ell$}{The condensed Qbarl}: explicit finite-field data}
+
+The algebraic closure requires a \emph{different primary definition}.
+We do \emph{not} begin by assigning to $\Qlbar$ a topology and then
+considering all continuous maps $S\to\Qlbar$.
+
+\begin{definition}[Algebraic-closure sections]\label{def:Qbar}
+For each profinite $S$, let $\mathscr P(S)$ be the set of pairs
+\[
+ (E,a),\qquad
+ \mathbb Q_\ell\subset E\subset\Qlbar,\quad [E:\mathbb Q_\ell]<\infty,
+ \qquad a\in C(S,E).
+\]
+Declare $(E,a)\sim(F,b)$ if there exists a finite extension
+$L\subset\Qlbar$ containing both $E$ and $F$ such that the functions
+$S\to L$ induced by $a$ and $b$ are equal.  Define
+\begin{equation}\label{eq:Qbar-def}
+ \boxed{\quad
+  \ringunder{\Qlbar}(S):=\mathscr P(S)/{\sim}.
+ \quad}
+\end{equation}
+For $u:S'\to S$, define $u^*[(E,a)]=[(E,a\circ u)]$.
+To define the ring operations, select any finite common extension
+$L\supset E,F$ and set
+\begin{align}\label{eq:Qbar-arithmetic}
+ [(E,a)]+[(F,b)]&:=[(L,a+b)],\\
+ [(E,a)]\cdot[(F,b)]&:=[(L,ab)].
+\end{align}
+The zero and one are the classes of the constant maps to
+$0,1\in\mathbb Q_\ell$.  These definitions are independent of the
+chosen common finite extension.
+\end{definition}
+
+The equivalence relation is especially concrete.  Since all fields
+are subfields of the fixed $\Qlbar$, two pairs are equivalent exactly
+when
+\[
+                      a(s)=b(s)\text{ in }\Qlbar
+                    \quad\text{for every }s\in S.
+\]
+As a nontrivial example, the identity map
+$\mathbb Z_\ell	o\mathbb Q_\ell$ represents a section on the
+profinite space $S=\mathbb Z_\ell$; it is not locally constant and its
+image is infinite.
+The useful distinction is that \emph{each representative is a continuous
+map into one finite local field}; we have not defined a notion of
+continuity into the naked set $\Qlbar$ itself.
+
+\begin{proposition}[Direct sheaf verification]\label{prop:Qbar-sheaf}
+The assignment $S\mapsto\ringunder{\Qlbar}(S)$, with restrictions
+and operations from Definition~\ref{def:Qbar}, is a condensed
+commutative ring.  Its underlying ring of sections at a singleton is
+$\ringunder{\Qlbar}(*)\cong\Qlbar$.
+\end{proposition}
+\begin{proof}
+A common finite extension exists for any \emph{finite} set of
+representatives, by taking their compositum.  Hence
+\eqref{eq:Qbar-arithmetic} is well-defined, and the ring axioms can
+all be checked inside one finite field containing the finitely many
+representatives occurring in any given identity.
+
+For the sheaf condition, consider a finite jointly surjective family
+$\{S_i\to S\}_{i=1}^r$ and matching sections
+$[(E_i,a_i)]\in\ringunder{\Qlbar}(S_i)$.  Choose a common finite
+field $L$ containing all $E_i$.  The $a_i$, regarded as continuous
+$L$-valued functions, agree on every overlap
+$S_i\times_S S_j$.  Since the surjection
+$\coprod_iS_i\twoheadrightarrow S$ is a quotient map, they descend
+to a unique continuous function $a:S\to L$.  The class $[(L,a)]$
+is the unique glued section.  Thus finite-cover descent holds, and
+the empty-object condition is immediate.  Evaluation on a singleton
+identifies the classes of pairs $(E,a)$ with the elements of the
+algebraic closure.
+\end{proof}
+
+\begin{remark}[Why this is not simply $C(S,\Qlbar)$]
+The symbol $C(S,\Qlbar)$ does not have a meaning until one chooses a
+topology on $\Qlbar$.  The metric topology inherited from
+$\mathbb C_\ell$ admits continuous maps whose values do not lie in
+any one finite extension.  For example, after choosing primitive
+$\ell^n$-th roots of unity $\zeta_{\ell^n}$, the sequence
+$\ell^n\zeta_{\ell^n}$ tends to $0$ in the metric topology, although
+no finite extension contains all its terms.  Such a function on a
+profinite convergent sequence is \emph{not} one of our sections.
+One can separately compare our ring to continuous functions for a
+carefully specified final topology, but this is not part of its
+definition, and we do not need that comparison in what follows.
+\end{remark}
+
+\subsection{Limit, localization and colimit identities --- theorems, not definitions}
+
+Now that the five coefficient rings have been defined as actual
+section functors, their familiar algebraic descriptions can be
+\emph{proved} and may safely be used later.
+
+\begin{proposition}[Comparison identities]\label{prop:comparison-only}
+There are natural isomorphisms of condensed commutative rings
+\begin{align}
+ \ringunder{\mathbb Z_\ell}
+   &\simeq\varprojlim_n\ringunder{\mathbb Z/\ell^n\mathbb Z},
+      \label{eq:Zl-comparison}\\
+ \ringunder{\mathbb Q_\ell}
+   &\simeq\ringunder{\mathbb Z_\ell}[1/\ell],
+      \label{eq:Ql-comparison}\\
+ \ringunder{\OO_E}
+   &\simeq\varprojlim_n\ringunder{\OO_E/\varpi_E^n},
+      \label{eq:OE-comparison}\\
+ \ringunder E
+   &\simeq\ringunder{\OO_E}[1/\varpi_E],
+      \label{eq:E-comparison}\\
+ \ringunder{\Qlbar}
+   &\simeq\varinjlim_{E/\mathbb Q_\ell\ \mathrm{finite}}\ringunder E.
+      \label{eq:Qbar-comparison}
+\end{align}
+\emph{None} of these isomorphisms is taken as a definition.
+\end{proposition}
+\begin{proof}
+The first and third identities follow by taking compatible residue
+functions: the bijections are natural in the profinite test space and
+preserve ring operations.  The second and fourth follow from the
+uniform-denominator statements, again naturally in the test space.
+For the last identity, the right-hand side has on each profinite test
+space exactly the classes of pairs $(E,a)$ specified in
+Definition~\ref{def:Qbar}.  This uses that filtered colimits of
+sheaves on the profinite point are computed sectionwise: its coverings
+are finite, and filtered colimits commute with finite-limit sheaf
+conditions.  The comparison map is the identity on the explicit
+representatives and respects all ring operations.
+\end{proof}
+
+\begin{remark}[What these comparisons do not assert]
+The inverse image of a geometric morphism is not claimed to preserve
+arbitrary inverse limits.  In the next section, integral inverse-limit
+identities \emph{after} pullback will be checked from the concrete
+continuous-function description.  Filtered-colimit descriptions after
+pullback must be understood as statements about \emph{sheaves}, not
+necessarily as sectionwise identities on non-quasi-compact objects.
+\end{remark}
+
+\section{\texorpdfstring{The geometric morphism $p_X$ from the profinite point}{The geometric morphism pX from the profinite point}}
+
+\subsection{\texorpdfstring{Explicitly attach a pro-\'{e}tale $X$-scheme to $S$}{Explicitly attach a pro-etale X-scheme to S}}
+
+For a finite set $I$, define the finite \'{e}tale $X$-scheme
+\begin{equation}\label{eq:finite-XI}
+          X[I]:=\coprod_{i\in I} X.
+\end{equation}
+If $S=\varprojlim_i S_i$ is a profinite set expressed as an inverse
+limit of finite discrete sets, define
+\begin{equation}\label{eq:XS}
+   \boxed{\quad X[S]:=\varprojlim_i X[S_i]
+             =\varprojlim_i\coprod_{s\in S_i}X.\quad}
+\end{equation}
+The transition morphisms are finite \'{e}tale over $X$ and hence affine;
+the inverse limit exists as an $X$-scheme and is pro-\'{e}tale over $X$.
+This construction is independent of the chosen presentation of $S$ up
+to a unique canonical isomorphism.  A continuous map $u:S\to T$ induces
+an $X$-morphism $X[u]:X[S]\to X[T]$.
+
+\begin{lemma}[Properties of profinite test objects]\label{lem:XS}
+The functor
+\begin{equation}\label{eq:site-functor}
+             u_X:\ProFin\longrightarrow X_{\proet},
+                      \qquad S\longmapsto X[S]
+\end{equation}
+preserves finite limits and sends jointly surjective finite covering
+families to pro-\'{e}tale coverings.  In particular,
+\[
+ X[*]\simeq X,\qquad
+ X[S\times T]\simeq X[S]\times_X X[T],\qquad
+ X[S\sqcup T]\simeq X[S]\sqcup X[T].
+\]
+\end{lemma}
+\begin{proof}
+Each statement is immediate for finite sets, where $X[I]$ is a finite
+disjoint union of copies of $X$.  The general statements follow by
+passing to inverse limits through finite quotients.  Surjectivity on
+finite fibers is stable under base change to $X$, so the resulting
+families cover in the pro-\'{e}tale topology.
+\end{proof}
+
+\subsection{The direction of the site morphism}
+
+\begin{proposition}[The canonical map to the point]\label{prop:pX}
+The continuous left-exact functor $u_X$ of \eqref{eq:site-functor}
+induces a geometric morphism of topoi
+\begin{equation}\label{eq:pX}
+     \boxed{\quad
+       p_X:\Sh(X_{\proet})\longrightarrow
+          \Sh(*_{\proet})=\Cond(\mathrm{Set}).\quad}
+\end{equation}
+Its inverse-image functor
+\[
+  p_X^{-1}:\Cond(\mathrm{Set})\longrightarrow\Sh(X_{\proet})
+\]
+preserves finite limits and all colimits.  On sheaves of abelian groups
+it is exact and strong symmetric monoidal; in particular, it takes
+condensed commutative rings to commutative ring sheaves on $X_{\proet}$.
+\end{proposition}
+\begin{proof}
+The direction of the geometric morphism is opposite to the direction
+of the site functor $u_X$.  Concretely, $p_X^{-1}F$ is obtained by
+left Kan extension of the presheaf $F$ along $u_X$ (in the appropriate
+opposite categories), followed by sheafification.  The general theory
+of morphisms of sites supplies its right adjoint and left exactness.
+A geometric inverse image preserves all colimits because it is a left
+adjoint; preserving finite limits makes it exact on abelian sheaves.
+Since tensor products of abelian sheaves are formed by sheafifying the
+presheaf tensor product, the inverse image is strong symmetric monoidal.
+\end{proof}
+
+\begin{remark}[Why one must not just precompose]
+It would be incorrect to define $p_X^{-1}F$ by writing
+$F(U)$ for an arbitrary weakly \'{e}tale $U\to X$: such a $U$ is not an
+object of the profinite-point site.  The left Kan extension and
+sheafification are essential in the abstract definition; the next
+subsection explains why the answer nevertheless has a very simple
+continuous-function description for our particular rings.
+\end{remark}
+
+\subsection{Compute the inverse image of continuous-function coefficients}
+
+Recall that $X_{\proet}$ has a basis of w-contractible affine objects
+$U\to X$.  For such a $U$, the connected-component space $\pi_0(U)$
+is profinite; in fact the property of being w-contractible makes
+covers of these basis objects split.
+
+\begin{lemma}[Point-pullback formula on the basis]\label{lem:point-eval}
+For a condensed set, abelian group, or ring $F$ and a w-contractible
+affine $U\in X_{\proet}$, there is a natural identification
+\begin{equation}\label{eq:point-eval}
+             (p_X^{-1}F)(U)\simeq F(\pi_0(U)).
+\end{equation}
+\end{lemma}
+\begin{proof}[Explanation]
+For any profinite set $S$ there is a natural bijection
+\[
+      \Hom_X(U,X[S])\simeq C(\pi_0(U),S).
+\]
+For finite $S$ this means that a morphism to a finite disjoint union
+of copies of $X$ amounts to a finite clopen decomposition of $U$;
+the general case follows by its finite quotients.  In the
+inverse-image site computation, these identifications reduce the
+value on a w-contractible affine to evaluation of $F$ at the
+profinite set $\pi_0(U)$.  The splitting of coverings on this basis
+ensures that sheafification does not change that value.  This is the
+usual point-to-pro-\'{e}tale inverse-image calculation (compare
+\cite[Example~3.1]{HRS} and \cite[Section~4.2]{BS}).
+\end{proof}
+
+\begin{proposition}[Continuous-function pullback]\label{prop:continuous-X}
+For $T\in\{\mathbb Z_\ell,\mathbb Q_\ell,\OO_E,E\}$, there is a
+natural isomorphism of ring sheaves
+\begin{equation}\label{eq:continuous-X}
+ \boxed{\quad
+    p_X^{-1}\ringunder T
+        \xrightarrow{\sim}
+          \bigl[U\longmapsto C(|U|,T)\bigr]^\#.
+ \quad}
+\end{equation}
+In fact the indicated continuous-function presheaf is already a
+sheaf on $X_{\proet}$.
+\end{proposition}
+\begin{proof}
+Each of the four topological rings is Hausdorff and totally
+disconnected.  On a w-contractible affine $U$, every continuous
+$|U|\to T$ factors uniquely through the profinite connected-component
+space $\pi_0(U)$, so
+\[
+ C(|U|,T)\simeq C(\pi_0(U),T)
+   =\ringunder T(\pi_0(U))
+   \simeq(p_X^{-1}\ringunder T)(U).
+\]
+The identifications respect restrictions and ring operations, so they
+extend from the basis to all of $X_{\proet}$.  The sheaf property of
+$U\mapsto C(|U|,T)$ is \cite[Lemma~4.2.12]{BS}; the inverse-image
+identification is also given in \cite[Example~3.1]{HRS}.
+\end{proof}
+
+\subsection{What the five pulled-back ring sheaves actually are}
+
+For \emph{any} condensed commutative ring $\Lambda$ already defined on
+the point, define its pullback to $X$ by
+\begin{equation}\label{eq:LambdaX}
+                  \boxed{\quad\Lambda_X:=p_X^{-1}\Lambda.\quad}
+\end{equation}
+This is a definition by inverse image of a \emph{previously defined}
+ring object, not a limit or colimit definition of coefficients.
+
+For the four topological local rings, Proposition~\ref{prop:continuous-X}
+gives the concrete formula, on every pro-\'{e}tale object $U$:
+\begin{align*}
+ \mathbb Z_{\ell,X}(U)&=C(|U|,\mathbb Z_\ell),
+ &\mathbb Q_{\ell,X}(U)&=C(|U|,\mathbb Q_\ell),\\
+ \OO_{E,X}(U)&=C(|U|,\OO_E),
+ &E_X(U)&=C(|U|,E).
+\end{align*}
+All equalities here refer to the canonical sheaf identifications, not
+to an arbitrary choice of presentation.
+
+\begin{proposition}[The algebraic-closure pullback is locally finite-stage]
+\label{prop:Qbar-X}
+Let
+\[
+                    \mathcal B_X:=p_X^{-1}\ringunder{\Qlbar}.
+\]
+For an arbitrary $U\in X_{\proet}$, a section of $\mathcal B_X(U)$
+may be described by \emph{local finite-field data}:
+\begin{enumerate}
+ \item a pro-\'{e}tale covering family $\{U_i\to U\}$;
+ \item finite subextensions $E_i/\mathbb Q_\ell$ in $\Qlbar$;
+ \item continuous functions $a_i:|U_i|\to E_i$;
+ \item agreement of $a_i$ and $a_j$, as functions with values in
+       $\Qlbar$, on $U_i\times_U U_j$.
+\end{enumerate}
+Two such sets of data determine the same section precisely when they
+agree after a common refinement of covers.  Addition and
+multiplication are performed locally after enlarging the finitely
+many fields appearing in a given arithmetic operation on an overlap.
+On a w-contractible affine $U$ there is the particularly simple formula
+\begin{equation}\label{eq:Qbar-X-basis}
+ \boxed{\quad
+ \mathcal B_X(U)\simeq
+  \{(E,a)\mid E/\mathbb Q_\ell\ \mathrm{finite},\,
+                a\in C(|U|,E)\}/{\sim}.
+ \quad}
+\end{equation}
+\end{proposition}
+\begin{proof}
+The comparison \eqref{eq:Qbar-comparison}, which was \emph{proved after}
+constructing the condensed ring, together with preservation of
+colimits by $p_X^{-1}$, identifies $\mathcal B_X$ with the sheaf
+associated to the presheaf of finite-stage pairs
+$U\mapsto\{(E,a:|U|\to E)\}/{\sim}$.  By the definition of
+sheafification this means exactly locally defined pairs satisfying
+descent on overlaps, modulo refinement.  On a w-contractible affine,
+Lemma~\ref{lem:point-eval} gives
+$\mathcal B_X(U)\simeq\ringunder{\Qlbar}(\pi_0(U))$.
+Continuous functions on $|U|$ with values in any $E$ factor through
+$\pi_0(U)$, yielding \eqref{eq:Qbar-X-basis}.
+\end{proof}
+
+\begin{remark}[A global section need not have one finite field]
+For non-quasi-compact $U$, the fields $E_i$ appearing in the local
+representatives of a section can grow without bound over infinitely
+many connected components.  Thus it would be incorrect to replace
+the locally finite-stage description by one global representative
+$(E,a)$ for arbitrary $U$.  Nor do we write
+$\mathcal B_X(U)=C(|U|,\Qlbar)$ without an independently specified
+topology and comparison theorem.
+\end{remark}
+
+\begin{remark}[Identities after pullback, not new definitions]
+As consequences of Proposition~\ref{prop:comparison-only} and the
+continuous-function calculation, one has canonical \emph{sheaf}
+isomorphisms
+\[
+\begin{gathered}
+ \mathbb Z_{\ell,X}\simeq
+    \varprojlim_n(\mathbb Z/\ell^n)_X,\qquad
+ \OO_{E,X}\simeq
+    \varprojlim_n(\OO_E/\varpi_E^n)_X,\\
+ \mathbb Q_{\ell,X}\simeq\mathbb Z_{\ell,X}[1/\ell],\qquad
+ E_X\simeq\OO_{E,X}[1/\varpi_E],\qquad
+ \mathcal B_X\simeq\varinjlim_E E_X.
+\end{gathered}
+\]
+The inverse-limit statements are special properties checked from
+continuous functions, not instances of a general inverse-limit
+preservation principle for $p_X^{-1}$.  The last filtered colimit is
+taken in sheaves and does not require one uniform finite field on
+all of a non-quasi-compact $U$.
+\end{remark}
+
+\section{Functorial pullback along a map of schemes}
+
+\subsection{A natural identity before taking any sheaves}
+
+Let $f:X\to Y$ be a scheme morphism.  For each finite set $I$,
+\[
+        X\times_Y\Bigl(\coprod_{i\in I}Y\Bigr)
+                   \simeq\coprod_{i\in I}X.
+\]
+Taking inverse limits over a finite-quotient presentation of a
+profinite set $S$ yields a canonical isomorphism
+\begin{equation}\label{eq:basechange-XS}
+               \boxed{\quad
+                X\times_Y Y[S]\xrightarrow{\sim}X[S].\quad}
+\end{equation}
+This is natural in $S$ and $f$, and compatible with iterated base change.
+
+The scheme morphism $f$ induces a geometric morphism, also written $f$,
+\[
+   f:\Sh(X_{\proet})\longrightarrow\Sh(Y_{\proet}),
+\]
+using base change of weakly \'{e}tale objects $V\to Y$ to
+$X\times_Y V\to X$.  Formula~\eqref{eq:basechange-XS} provides a
+canonical comparison of geometric morphisms
+\begin{equation}\label{eq:triangle}
+        p_X\ \cong\ p_Y\circ f.
+\end{equation}
+The comparison is coherent for identity maps and compositions of
+scheme morphisms, because it comes directly from ordinary fiber-product
+associativity.
+
+\begin{theorem}[The fundamental coefficient pullback]
+\label{thm:alpha}
+For every condensed commutative ring $\Lambda$ and every $f:X\to Y$
+there is a canonical isomorphism of \emph{ring sheaves}
+\begin{equation}\label{eq:alpha}
+   \boxed{\quad
+        \alpha_f^\Lambda:
+        f^{-1}\Lambda_Y=f^{-1}p_Y^{-1}\Lambda
+                 \xrightarrow{\sim}p_X^{-1}\Lambda=\Lambda_X.\quad}
+\end{equation}
+These isomorphisms are natural in $\Lambda$, and satisfy the
+composition coherence of Theorem~\ref{thm:cart-section}.
+\end{theorem}
+\begin{proof}
+Apply inverse image to the canonical isomorphism of geometric
+morphisms \eqref{eq:triangle}.  Both inverse-image functors are exact
+strong symmetric monoidal functors on abelian sheaves, so the resulting
+comparison is an isomorphism of commutative ring objects.
+The coefficient naturality and all coherence conditions follow from
+the corresponding statements for \eqref{eq:basechange-XS}.
+\end{proof}
+
+\subsection{The comparison on explicit sections}
+
+For $T\in\{\mathbb Z_\ell,\mathbb Q_\ell,\OO_E,E\}$, let
+$V\to Y$ be pro-\'{e}tale and set $V_X=X\times_YV$.  A continuous
+section $h\in C(|V|,T)$ has the obvious base-changed section
+\begin{equation}\label{eq:precomposition-function}
+ h\longmapsto h\circ|\operatorname{pr}_V|
+                         \in C(|V_X|,T).
+\end{equation}
+For $\Qlbar$, a local representative $(E,a)$ is similarly sent to
+$(E,a\circ|\operatorname{pr}_V|)$; this commutes with the equivalence
+relation, refinement, restrictions, and finite-stage arithmetic.
+These explicit maps are compatible with the canonical isomorphism
+$\alpha_f^\Lambda$ in Theorem~\ref{thm:alpha}.  Thus the direction
+$f^{-1}\Lambda_Y\to\Lambda_X$ is both geometrically canonical and
+concretely visible on sections.
+
+\section{The pullback-oriented lax Cartesian system}
+
+\subsection{The formal unit and composition axioms}
+
+The categories of ring sheaves, together with geometric inverse images,
+form a contravariant pseudofunctor
+\begin{equation}\label{eq:R-pseudo}
+ \mathscr R:\mathscr S^{\mathrm{op}}\longrightarrow\mathsf{Cat},
+ \qquad \mathscr R(X):=\CRing(\Sh(X_{\proet})),
+ \qquad \mathscr R(f):=f^{-1}.
+\end{equation}
+For a composable pair
+$X\xrightarrow{f}Y\xrightarrow{g}Z$, write
+\[
+    c_{f,g}:f^{-1}g^{-1}\xRightarrow{\sim}(g\circ f)^{-1}
+\]
+for the canonical composition constraint of the pseudofunctor.
+
+\begin{definition}[Coherent lax Cartesian coefficient data]
+\label{def:lax-formal}
+A pullback-oriented lax Cartesian ring system
+$(A_X,\theta_f)$ satisfies:
+\begin{enumerate}
+\item \emph{Unit:} $\theta_{\id_X}=\id_{A_X}$, after the canonical
+  identification $\id_X^{-1}A_X\simeq A_X$;
+\item \emph{Composition:} for $X\xrightarrow fY\xrightarrow gZ$,
+  the following equality of ring-sheaf morphisms holds:
+\begin{equation}\label{eq:coherence}
+   \boxed{\quad
+   \theta_{g\circ f}\circ c_{f,g,A_Z}
+      =\theta_f\circ f^{-1}(\theta_g):
+            f^{-1}g^{-1}A_Z\longrightarrow A_X.\quad}
+\end{equation}
+\end{enumerate}
+The same equation is required coherently for triple compositions;
+in a strictification it is an equality, and for an ordinary
+pseudofunctor it is read together with its standard associativity
+constraint.
+\end{definition}
+
+\begin{theorem}[The coefficient rings form a Cartesian system]
+\label{thm:cart-section}
+For any condensed commutative ring $\Lambda$, put
+\[
+       A_X=p_X^{-1}\Lambda,
+       \qquad \theta_f:=\alpha_f^\Lambda.
+\]
+Then $(A_X,\theta_f)$ is a pullback-oriented lax Cartesian ring system.
+In fact every $\theta_f$ is an isomorphism, so it is Cartesian.
+Explicitly, for $X\xrightarrow fY\xrightarrow gZ$ the diagram
+\begin{equation}\label{eq:coherence-diag}
+\begin{tikzcd}[column sep=large,row sep=large]
+ f^{-1}g^{-1}\Lambda_Z
+    \arrow[r,"f^{-1}(\alpha_g^\Lambda)"]
+    \arrow[d,"c_{f,g}"']
+  & f^{-1}\Lambda_Y \arrow[d,"\alpha_f^\Lambda"]\\
+ (g\circ f)^{-1}\Lambda_Z
+    \arrow[r,"\alpha_{g\circ f}^\Lambda"']
+  & \Lambda_X
+\end{tikzcd}
+\end{equation}
+commutes, and the identity constraint is the identity.
+\end{theorem}
+\begin{proof}
+The objects and structural maps have been constructed in
+\eqref{eq:LambdaX} and \eqref{eq:alpha}.  For an identity map $X\to X$,
+the base-change isomorphism $X\times_XX[S]\simeq X[S]$ is the identity.
+For a composition $X\to Y\to Z$, both paths in
+\eqref{eq:coherence-diag} are induced by the canonical identification
+\[
+ X\times_Y\bigl(Y\times_Z Z[S]\bigr)
+                   \xrightarrow{\sim}X\times_ZZ[S].
+\]
+The associativity law of fiber products supplies the triple-composition
+coherence.  All $\alpha_f^\Lambda$ are isomorphisms by
+Theorem~\ref{thm:alpha}.
+\end{proof}
+
+\begin{corollary}[Functoriality in the coefficient ring]
+\label{cor:coeff-functor}
+A morphism $a:\Lambda\to\Lambda'$ of condensed commutative rings
+induces a morphism of Cartesian coefficient systems,
+\[
+       a_X:=p_X^{-1}a:\Lambda_X\longrightarrow\Lambda'_X,
+\]
+in the sense that for every $f:X\to Y$ the square
+\begin{equation}\label{eq:coeff-square}
+\begin{tikzcd}[column sep=large,row sep=large]
+ f^{-1}\Lambda_Y \arrow[r,"\alpha_f^\Lambda"]
+                \arrow[d,"f^{-1}a_Y"']
+       & \Lambda_X \arrow[d,"a_X"]\\
+ f^{-1}\Lambda'_Y \arrow[r,"\alpha_f^{\Lambda'}"']
+       & \Lambda'_X
+\end{tikzcd}
+\end{equation}
+commutes.  In particular, all inclusions and localizations among
+$\mathbb Z_\ell$, $\mathbb Q_\ell$, $\OO_E$, $E$, and $\Qlbar$
+are compatible with scheme pullback.
+\end{corollary}
+\begin{proof}
+Apply the naturality in $\Lambda$ of the geometric comparison
+$p_X\cong p_Y\circ f$.
+\end{proof}
+
+\subsection{The associated module systems, explicitly}
+
+It is often useful to formulate the lax structure not only for rings
+but also for modules, since it makes the next categorical layer immediate.
+For a general pullback-oriented lax ring system $(A_X,\theta_f)$,
+let
+\[
+   \MM_A(X)=\Mod_{A_X}\bigl(\Sh(X_{\proet},\mathrm{Ab})\bigr).
+\]
+Define the module pullback along $f:X\to Y$ by the familiar formula
+\begin{equation}\label{eq:module-pullback}
+    f_A^*M
+    := A_X\otimes_{f^{-1}A_Y}f^{-1}M,
+\end{equation}
+where the ring homomorphism giving the algebra structure on $A_X$ is
+\emph{exactly} $\theta_f:f^{-1}A_Y\to A_X$.
+The coherence~\eqref{eq:coherence} identifies the iterated pullback
+$f_A^*g_A^*$ canonically with $(g\circ f)_A^*$.
+For general noninvertible $\theta_f$, the tensor product in
+\eqref{eq:module-pullback} need not be exact; nothing here asserts
+otherwise.
+
+For the coefficients $A_X=\Lambda_X$ pulled back from the point,
+$\theta_f$ is an isomorphism.  Therefore the formula simplifies to
+\begin{equation}\label{eq:module-simple}
+      \boxed{\quad
+        f_\Lambda^*M\simeq f^{-1}M,
+     \quad}
+\end{equation}
+with the $\Lambda_X$-action transported along
+$\alpha_f^\Lambda$.  It is consequently exact on sheaves of modules,
+strong symmetric monoidal, and compatible with compositions.
+
+\begin{definition}[Pullback-oriented lax module section]
+A lax module section over a fixed coefficient system $A$ consists of
+$M_X\in\MM_A(X)$ for every $X$ and $A_X$-linear morphisms
+\[
+          \rho_f:f_A^*M_Y\longrightarrow M_X
+\]
+for every $f:X\to Y$, satisfying the same unit and composition
+identities as in Definition~\ref{def:lax-formal}, with the module
+pullback comparison in place of $c_{f,g}$.  It is Cartesian when every
+$\rho_f$ is invertible.
+\end{definition}
+
+\begin{proposition}[Concrete Cartesian sections from the point]
+\label{prop:point-module}
+Let $N$ be a module over the condensed ring $\Lambda$ on
+$*_{\proet}$.  For every $X$, put $N_X=p_X^{-1}N$, with its natural
+$\Lambda_X$-module structure.  Then the canonical isomorphisms
+\begin{equation}\label{eq:point-module}
+       f_\Lambda^*N_Y\xrightarrow{\sim}N_X
+\end{equation}
+make $(N_X)$ into a Cartesian module section.
+In particular, taking $N=\Lambda$ gives the unit section
+$X\mapsto\Lambda_X$.
+\end{proposition}
+\begin{proof}
+The isomorphisms~\eqref{eq:point-module} follow from
+$f^{-1}p_Y^{-1}N\simeq p_X^{-1}N$ and
+\eqref{eq:module-simple}.  Their units and compositions are the same
+canonical identifications used in Theorem~\ref{thm:cart-section}.
+\end{proof}
+
+\begin{remark}[The category-valued system is a different datum]
+The assignment $X\mapsto\MM_\Lambda(X)$ with pullbacks
+$f_\Lambda^*$ is a contravariant \emph{pseudofunctor of categories}.
+An individual family $(M_X,\rho_f)$ is a lax or Cartesian
+\emph{section} of that pseudofunctor.  These should not be conflated.
+If one subsequently works with derived or stable categories, the same
+coherence of $\alpha_f^\Lambda$ supplies the underlying geometric
+pullback pseudofunctor; no exceptional functor is needed for this
+coefficient-level construction.
+\end{remark}
+
+\section{Minimal implementation checklist}
+
+The constructions can be reused in the following order.  The first
+stage \emph{only} uses concrete sections; comparison isomorphisms are
+subsequent results.
+\begin{enumerate}
+ \item \textbf{Four topological coefficient functors.}
+ $\ringunder T(S)=C(S,T)$ for
+ $T=\mathbb Z_\ell,\mathbb Q_\ell,\OO_E,E$;
+ restriction is precomposition and operations are pointwise.
+ \item \textbf{Define the algebraic-closure coefficient functor:}
+ $\ringunder{\Qlbar}(S)$ consists of equivalence classes $[(E,a)]$
+ where $a:S\to E$ is continuous and $E$ is finite over
+ $\mathbb Q_\ell$; implement arithmetic in a common finite extension.
+ \item \textbf{Prove the sheaf conditions directly:}
+ continuous functions descend through profinite quotient maps;
+ finitely many $\Qlbar$-representatives admit one common finite field.
+ \item \textbf{Record (do not define by) comparison identities:}
+ the ordinary limit, rational localization, and finite-field colimit
+ formulas from Proposition~\ref{prop:comparison-only}.
+ \item \textbf{Build profinite test objects over schemes:}
+ $X[S]$ using finite quotients of $S$, and construct
+ $p_X:X_{\proet}\to*_{\proet}$.
+ \item \textbf{Define pulled-back coefficients:}
+ $A_X=p_X^{-1}\Lambda$; for the four local fields calculate
+ $C(|U|,T)$, and for $\Qlbar$ use the locally finite-stage
+ data of Proposition~\ref{prop:Qbar-X}.
+ \item \textbf{Construct the coherent pullback maps:}
+ $\alpha_f^\Lambda:f^{-1}A_Y\xrightarrow{\sim}A_X$,
+ with unit, composition, and coefficient-change naturality.
+ \item \textbf{Fix the lax orientation:}
+ general structure maps are $\theta_f:f^{-1}A_Y\to A_X$;
+ for coefficients pulled back from the point, all $\theta_f$
+ are the invertible maps $\alpha_f^\Lambda$.
+\end{enumerate}
+
+\noindent\textbf{Conclusion.}
+Every coefficient ring is specified concretely on the profinite point,
+including $\Qlbar$ by \emph{finite-extension representatives} rather
+than by a preliminary topology or a categorical colimit.  Passing to
+$X_{\proet}$ is one uniform geometric inverse-image construction.
+The resulting ring sheaves, together with
+$f^{-1}A_Y\xrightarrow{\sim}A_X$, constitute a coherent Cartesian
+coefficient system in the chosen pullback-oriented lax convention.
+
+\begin{thebibliography}{9}
+\bibitem{BS}
+B.~Bhatt and P.~Scholze, \emph{The pro-\'{e}tale topology for schemes},
+Ast\'{e}risque \textbf{369} (2015), 99--201, especially
+Sections~4.1--4.3 and Lemmas~4.2.12, 4.3.7.
+\url{https://arxiv.org/abs/1309.1198}.
+\bibitem{HRS}
+T.~Hemo, T.~Richarz and J.~Scholbach,
+\emph{Constructible sheaves on schemes},
+Advances in Mathematics \textbf{429} (2023), 109179,
+especially Example~3.1 and Lemma~5.6.
+\url{https://arxiv.org/abs/2305.18131}.
+\bibitem{ScholzeCond}
+P.~Scholze, \emph{Lectures on Condensed Mathematics},
+particularly the definition of condensed sets and the
+continuous-function construction.
+\url{https://people.mpim-bonn.mpg.de/scholze/Condensed.pdf}.
+\bibitem{GHN}
+D.~Gepner, R.~Haugseng and T.~Nikolaus,
+\emph{Lax colimits and free fibrations in $\infty$-categories},
+Documenta Mathematica \textbf{22} (2017), 1225--1266.
+For the distinction between sections of Cartesian fibrations and
+(op)lax limits.
+\end{thebibliography}
+\end{document}

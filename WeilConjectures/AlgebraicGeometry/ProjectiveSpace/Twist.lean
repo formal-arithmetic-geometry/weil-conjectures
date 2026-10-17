@@ -101,7 +101,13 @@ Since `toProjInt` commutes with `map n f` for any `f : S ⟶ T`, `𝒪(m)` commu
 change (`pullbackMapTwistIso`). On the standard opens `Uᵢ = D₊(xᵢ)` it is free of rank one,
 and it is glued along the transition units `ProjectiveSpace.transitionUnit`.
 
-(blueprint: `def-pc-projective-space-twist`) -/
+The cocycle rule for these units on triple intersections is
+`ProjectiveSpace.transitionUnit_mul_transitionUnit` (blueprint `lem-pc-twist-cocycle`), the section
+`xᵢ` of `𝒪(1)` is `ProjectiveSpace.coordinateSection`, and the identifications
+`𝒪(d) ⊗ 𝒪(e) ≅ 𝒪(d + e)`, `𝒪(0) ≅ 𝒪` are `ProjectiveSpace.nonempty_tensorObj_twist_iso`
+(blueprint `lem-pc-twist-tensor`); for a module `ℱ`, `ℱ(d)` stands for `ℱ ⊗ 𝒪(d)`.
+
+(blueprint: `def-pc-projective-space-twist`, `rem-ptr-pc-projective-space-twist-17`) -/
 def twist (m : ℤ) : (ℙ(n; S)).Modules :=
   (Scheme.Modules.pullback (toProjInt n S)).obj
     (Proj.twist (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) m)

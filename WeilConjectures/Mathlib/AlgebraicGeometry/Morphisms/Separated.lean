@@ -334,6 +334,11 @@ lemma Scheme.isSeparated_of_isSeparatingPair {ι : Type*} (U : ι → X.Opens)
 
 end SeparatingPair
 
+/-- A scheme admitting a separated morphism to a separated scheme is separated. -/
+lemma Scheme.isSeparated_of_isSeparated_hom {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f]
+    [Y.IsSeparated] : X.IsSeparated :=
+  ⟨by rw [← terminal.comp_from f]; infer_instance⟩
+
 section SchemeTheoreticallyDominant
 
 /-- **Morphisms into a separated target agreeing on a scheme-theoretically dominant

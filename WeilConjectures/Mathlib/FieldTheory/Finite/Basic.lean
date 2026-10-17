@@ -213,4 +213,31 @@ theorem sub_pow_card_eq_of_pow_card_sub_eq (ψ : k →+* A) {x y : A}
 
 end ArtinSchreier
 
+variable (k : Type*) [Field k] [Finite k]
+variable (K : Type*) [Field K] [Algebra k K] [Algebra.IsAlgebraic k K]
+
+/-- The geometric Frobenius of an algebraic extension `K` of a finite field `k`, the
+inverse of the arithmetic Frobenius `x ↦ x ^ #k`
+(`FiniteField.frobeniusAlgEquivOfAlgebraic`). It is characterized by
+`FiniteField.geometricFrobenius_pow_card`: it is the unique `#k`-th root. -/
+noncomputable def geometricFrobenius : K ≃ₐ[k] K :=
+  letI : Fintype k := Fintype.ofFinite k
+  (frobeniusAlgEquivOfAlgebraic k K).symm
+
+@[simp]
+theorem geometricFrobenius_pow_card (x : K) : geometricFrobenius k K x ^ Nat.card k = x := by
+  let : Fintype k := Fintype.ofFinite k
+  rw [Nat.card_eq_fintype_card]
+  exact (frobeniusAlgEquivOfAlgebraic k K).apply_symm_apply x
+
+/-- The geometric Frobenius of an algebraic extension of a finite field `k` is
+characterized as the inverse of raising to the `#k`-th power. -/
+theorem geometricFrobenius_eq_iff {x y : K} :
+    geometricFrobenius k K x = y ↔ y ^ Nat.card k = x := by
+  refine ⟨fun h ↦ h ▸ geometricFrobenius_pow_card k K x, fun h ↦ h ▸ ?_⟩
+  let : Fintype k := Fintype.ofFinite k
+  rw [Nat.card_eq_fintype_card]
+  exact (frobeniusAlgEquivOfAlgebraic k K).symm_apply_apply y
+
+
 end FiniteField

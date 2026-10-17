@@ -48,7 +48,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 namespace Etale
 
-open DerivedCategory
+open _root_.DerivedCategory
 
 /-- The identity isomorphism `L(𝟙 X)^* ≅ 𝟭` of the derived pullback on étale sheaves. -/
 noncomputable def leftDerivedUpperStarId (X : Scheme.{u}) : L((𝟙 X)^*[A]) ≅ 𝟭 _ :=
