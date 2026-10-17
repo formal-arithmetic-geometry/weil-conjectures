@@ -12,9 +12,121 @@
   "def-coef-infinity-fibrations",
   "lem-coef-cocartesian-straightening"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $p$ is a cocartesian fibration, it is an inner fibration and, by [lem-coef-infinity-cocartesian-equivalence-lift], an isofibration. By [lem-coef-infinity-isofibration-exponentiation] applied to the degreewise injection $\\varnothing\\hookrightarrow\\Delta^1$, $\\operatorname{Fun}(\\Delta^1,p):\\operatorname{Fun}(\\Delta^1,E)\\to\\operatorname{Fun}(\\Delta^1,B)$ is an isofibration of quasicategories. Hence its degreewise pullback $A_p\\to B$ along $c$ is an inner fibration over the quasicategory $B$, so $A_p$ is a quasicategory, and by [lem-coef-infinity-isofibration-pullback-limit] the defining square is a pullback of infinity categories. Applied instead to $\\{1\\}\\hookrightarrow\\Delta^1$, the same lemma makes the corner map $\\kappa:\\operatorname{Fun}(\\Delta^1,E)\\to E\\times_{B,\\operatorname{ev}_1}\\operatorname{Fun}(\\Delta^1,B)$ an isofibration. Since $\\operatorname{ev}_1\\circ c=\\mathrm{id}_B$, the degreewise pullback of $\\kappa$ along $(\\mathrm{id}_E,c\\circ p):E\\to E\\times_B\\operatorname{Fun}(\\Delta^1,B)$ is exactly $t:A_p\\to E$ (an $n$-simplex of either is a simplex $y$ of $E$ with a simplex of $\\operatorname{Fun}(\\Delta^1,E)$ over the constant arrow at $p(y)$ with target $y$). So $t$ is an inner fibration between quasicategories.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-equivalence-lift",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/shah-thesis2.pdf",
+    "place": "Definition 7.6 and Proposition 7.7, construction of the relative arrow object."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-pointwise-cocartesian-transport] with $K=\\Delta^1$ (its hypotheses hold: $p$ is an inner fibration with cocartesian lifts, and the horn-cocartesian edges of [def-coef-infinity-fibrations] satisfy its mapping-space condition by [lem-coef-infinity-cocartesian-mapping-criterion]). Then $p_{\\Delta^1}=\\operatorname{Fun}(\\Delta^1,p)$ is a cocartesian fibration whose cocartesian edges are exactly those with $p$-cocartesian components at both vertices, and its fibre over the constant diagram at $b$ is $\\operatorname{Fun}(\\Delta^1,E_b)$. The projection $A_p\\to B$ is the degreewise pullback of $p_{\\Delta^1}$ along $c$; a $\\Lambda^n_0$-lifting problem for it whose first edge maps to a $p_{\\Delta^1}$-cocartesian edge is solved by solving the image problem for $p_{\\Delta^1}$ and pairing the filler with the given simplex of $B$, and a cocartesian lift of $c(h)$ from an object of $A_p$ is a lift of $h$ in $A_p$. Hence $A_p\\to B$ is a cocartesian fibration, its fibre at $b$ is $\\operatorname{Fun}(\\Delta^1,E_b)$, and the cocartesian lift over $h:b\\to b'$ of an arrow $a:z\\to x$ of $E_b$ is a square $\\lambda_a:a\\to h_!(a)$ with $p$-cocartesian components $\\chi_z:z\\to h_!z$ and $\\chi_x:x\\to h_!x$. By [lem-coef-cocartesian-straightening] its straightening has value $\\operatorname{Fun}(\\Delta^1,E_b)$ at $b$ and transport $h_!$ applied to arrows, and the base-change clause of that lemma identifies this classification with $p$'s on all simplices of $B$.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "def-coef-infinity-fibrations",
+    "lem-coef-cocartesian-straightening",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/shah-thesis2.pdf",
+    "place": "Definition 7.6 and Proposition 7.7, fibrewise classification of the free S-cocartesian fibration."
+   }
+  },
+  {
+   "text": "At a vertex b of B, the pullback condition forces the image of an arrow in Fun(Delta^1,E) to be the constant arrow at b. Thus both endpoints lie in E_b, and taking the fibre of A_p -> B gives Fun(Delta^1,E_b). For x in E_b, the fibre of t over x is obtained by imposing ev_1=x, namely Fun(Delta^1,E_b) x_{ev_1,E_b} {x}; the remaining projection is ev_0, which is s.",
+   "uses": [
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/shah-thesis2.pdf",
+    "place": "Notation 4.29 and Definition 7.6, fibre identification."
+   }
+  },
+  {
+   "text": "Let $u:x\\to y$ lie over $h:b\\to b'$ and choose a $p$-cocartesian edge $\\chi_x:x\\to h_!x$ over $h$. By [lem-coef-infinity-cocartesian-mapping-criterion] the mapping-space square of $\\chi_x$ at the test object $y$ is a homotopy pullback; the fibre of $\\operatorname{Map}_E(h_!x,y)\\to\\operatorname{Map}_B(b',b')$ over $\\mathrm{id}_{b'}$ is $\\operatorname{Map}_{E_{b'}}(h_!x,y)$ by [lem-coef-infinity-edge-pullback-mapping-fiber] ($K=\\Delta^0$, degenerate edge), so $u$ has a factorization $u\\simeq\\bar u\\circ\\chi_x$ with $\\bar u:h_!x\\to y$ in $E_{b'}$, unique up to contractible choice. For $a:z\\to x$ in $E_b$ take the square $\\lambda_a:a\\to h_!(a)$ of step 2 and compose it in $\\operatorname{Fun}(\\Delta^1,E)$ with the square $h_!(a)\\to\\bar u\\circ h_!(a)$ whose source component is $\\mathrm{id}_{h_!z}$ and target component $\\bar u$ (an edge of $\\operatorname{Fun}(\\Delta^1,E_{b'})$). The composite $\\sigma:a\\to\\bar u\\circ h_!(a)$ lies over the constant square at $h$, so it is an edge of $A_p$ over $h$; its source component is $\\chi_z$ and its target component is $\\bar u\\chi_x\\simeq u$; adjusting by this equivalence inside the target fibre (an inner horn filling in $E$ over the degenerate edge) gives an edge with $t(\\sigma)=u$.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-edge-pullback-mapping-fiber",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/shah-thesis2.pdf",
+    "place": "Proposition 7.7 and Remark 7.4, cocartesian factorization and arrow-square mapping spaces."
+   }
+  },
+  {
+   "text": "We show that $\\sigma$ is $t$-cocartesian; by step 1 $t$ is an inner fibration, so by [lem-coef-infinity-cocartesian-mapping-criterion] it suffices that for each object $c:w\\to v$ of $A_p$, lying over the constant arrow at some $b''$, the square with rows $\\operatorname{Map}_{A_p}(a',c)\\to\\operatorname{Map}_{A_p}(a,c)$ (precomposition with $\\sigma$, where $a'=\\bar u h_!(a)$) and $\\operatorname{Map}_E(y,v)\\to\\operatorname{Map}_E(x,v)$ (precomposition with $u$) is a homotopy pullback. (i) Right-pinched mapping spaces are defined degreewise by sets of maps $\\Delta^{n+1}\\to-$, so $\\operatorname{Map}_{A_p}(a,c)=\\operatorname{Map}_B(b,b'')\\times_{\\operatorname{Map}_{\\operatorname{Arr}B}(cb,cb'')}\\operatorname{Map}_{\\operatorname{Arr}E}(a,c)$ strictly. By [lem-coef-infinity-edge-pullback-mapping-fiber](3) with $K=\\Delta^1$, the right map is a Kan fibration of Kan complexes, so this strict pullback is a homotopy pullback; by [lem-coef-infinity-arrow-morphism-square] for the identity arrows of $B$, $\\operatorname{Map}_{\\operatorname{Arr}B}(cb,cb'')\\simeq\\operatorname{Map}_B(b,b'')\\times^h_{\\operatorname{Map}_B(b,b'')}\\operatorname{Map}_B(b,b'')$ and $c$ induces an equivalence onto it. Hence $\\operatorname{Map}_{A_p}(a,c)\\to\\operatorname{Map}_{\\operatorname{Arr}E}(a,c)\\simeq\\operatorname{Map}_E(z,w)\\times^h_{\\operatorname{Map}_E(z,v)}\\operatorname{Map}_E(x,v)$ is an equivalence, naturally, with $t$ the projection to $\\operatorname{Map}_E(x,v)$ (arrow-morphism-square, endpoint compatibility). (ii) By [lem-coef-infinity-homotopy-pullback-pasting], the required square is a homotopy pullback iff, for every $f:y\\to v$, precomposition with $\\chi_z$ induces an equivalence $\\operatorname{hofib}_{f\\bar u h_!(a)}(c_*:\\operatorname{Map}_E(h_!z,w)\\to\\operatorname{Map}_E(h_!z,v))\\to\\operatorname{hofib}_{fua}(c_*:\\operatorname{Map}_E(z,w)\\to\\operatorname{Map}_E(z,v))$, using $fua\\simeq f\\bar u h_!(a)\\chi_z$ from $\\lambda_a$. (iii) Since $\\chi_z$ is $p$-cocartesian, [lem-coef-infinity-cocartesian-mapping-criterion] at the test objects $w$ and $v$ gives homotopy pullbacks $\\operatorname{Map}_E(h_!z,-)\\simeq\\operatorname{Map}_E(z,-)\\times^h_{\\operatorname{Map}_B(b,b'')}\\operatorname{Map}_B(b',b'')$, and since $p(c)=\\mathrm{id}_{b''}$ the map $c_*$ lies over the identity of $\\operatorname{Map}_B(b',b'')\\to\\operatorname{Map}_B(b,b'')$. Pasting ([lem-coef-infinity-homotopy-pullback-pasting]) these two homotopy pullbacks shows the square formed by $c_*$ and $\\chi_z^*$ is a homotopy pullback, which is (ii). This is where the constant-arrow condition defining $A_p$ is used: for an arbitrary arrow $c$ of $E$ the argument fails. Every object $a$ over every edge $u$ of $E$ has such a $\\sigma$, so $t$ is a cocartesian fibration.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-edge-pullback-mapping-fiber",
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/shah-thesis2.pdf",
+    "place": "Proposition 7.7, proof that target evaluation is cocartesian."
+   }
+  },
+  {
+   "text": "Under the fibre description of step 3, $\\sigma$ sends $a:z\\to x$ to $\\bar u\\circ h_!(a):h_!z\\to y$, so transport for $t$ is the displayed formula. The projection $\\mathrm{pr}_1:E\\times_BE\\to E$ is the degreewise pullback of $p$ along $p$; by the horn definition in [def-coef-infinity-fibrations] an edge $(u,e)$ is $\\mathrm{pr}_1$-cocartesian when $e$ is $p$-cocartesian (a $\\Lambda^n_0$-problem for $\\mathrm{pr}_1$ is the same as one for $p$ on the second factor), and such lifts exist, so $\\mathrm{pr}_1$ is a cocartesian fibration. $(t,s)$ sends $\\sigma$ to $(u,\\chi_z)$, which is $\\mathrm{pr}_1$-cocartesian. Any other $t$-cocartesian edge with source $a$ over $u$ is $\\sigma$ followed by an equivalence in the fibre $t^{-1}(y)$, whose source component is an equivalence of $E_{b'}$; so its source component is $\\chi_z$ followed by an equivalence and is again $p$-cocartesian (composition of cocartesian edges, [lem-coef-infinity-pointwise-cocartesian-transport] with $K=\\Delta^0$). Hence $(t,s)$ preserves cocartesian edges over $E$.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-arrow-morphism-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/shah-thesis2.pdf",
+    "place": "Remark 7.4, explicit source/target transport formula."
+   }
+  },
+  {
+   "text": "All constructions above are made by degreewise pullbacks of coherent functor simplicial sets. Applying them to K x Delta^n for an arbitrary simplicial parameter K gives the same factorization, pasting and mapping-space pullback in every degree; the identity and composition simplices are retained because cocartesian transport and composition are coherent in the straightening. Pulling the entire construction back along B' -> B proves naturality under base change. A functor of cocartesian fibrations preserving cocartesian edges carries chi, h_!, bar u and the pasted square to the corresponding data, proving the asserted naturality for such functors. No colimit is used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/shah-thesis2.pdf",
+    "place": "Remark 7.4, coherence and base-change naturality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-coef-infinity-cocartesian-equivalence-lift",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-edge-pullback-mapping-fiber",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-pointwise-cocartesian-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/shah-thesis2.pdf",
+  "place": "Notation 4.29, Definition 7.6, Proposition 7.7 and Remark 7.4; archival PDF unavailable, so the proof is reconstructed from the stated cocartesian mapping-space criterion."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,10 +171,38 @@
    "results": "{\"t\": \"2026-10-17T17:55:49Z\", \"tool\": \"leanfinder\", \"query\": \"For a family of infinity categories, the slice categories at all objects assemble coherently; along an arrow over a base change, transport is base change followed by postcomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.iteratedSliceForward_map\", \"CategoryTheory.Over.iteratedSliceBackward_map\", \"CategoryTheory.Over.iteratedSliceBackward\", \"CategoryTheory.Over.iteratedSliceForward\", \"CategoryTheory.Over.iteratedSliceBackward_obj\", \"CategoryTheory.Over.iteratedSliceForwardNaturalityIso\", \"CategoryTheory.Over.iteratedSliceEquivOverMapIso\", \"CategoryTheory.Over.iteratedSliceEquiv_functor\"], \"digest\": \"c09ce1e0acb4ae8c\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected the returned signatures; these are ordinary CategoryTheory categories, arrows, slices or cocartesian morphisms, not the asserted quasicategorical construction. Ordinary candidates read at Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:55-74, Comma/Arrow.lean:34-40, Comma/Over/Basic.lean:370-415 and Limits/Presheaf.lean:420-421."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fiberwise arrow target evaluation cocartesian fibration",
+   "results": "CategoryTheory.Functor.IsCocartesian.map; CategoryTheory.Functor.IsCocartesian.toIsHomLift; CategoryTheory.Functor.IsCocartesian; ordinary 1-categorical declarations only",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsCocartesian, CategoryTheory.Arrow",
+   "results": "none",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fiberwise.?arrow|target.?evaluation|IsCocartesian [Mathlib/CategoryTheory]",
+   "results": "Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:21,55,60,79,81; ordinary 1-categorical declarations only",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "target evaluation on the fiberwise arrow category of a cocartesian fibration",
+   "results": "HasFibers.* and CategoryTheory.Grothendieck.* ordinary declarations; none states the quasicategorical item",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-representable-right-fibration-classifier",
@@ -90,5 +230,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-fiberwise-arrow-target-cocartesian",
+  "worker": "stage1",
+  "summary": "The item is not present as a finished declaration and is not duplicated in the DAG. I split its proof into the pullback/quasicategory construction, fibrewise arrow classification, target-fibre identification, cocartesian factorization and mapping-space criterion, explicit transport and joint source-target preservation, and coherent parameter/base-change naturality. All non-elementary inputs are existing nodes in the same unit; no new nodes were needed. Mathlib searches found only ordinary 1-categorical cocartesian declarations, so the item is not a Mathlib leaf. Maintainer reader (2026-10-18): steps 1, 2, 4, 5 and 6 rewritten to cite the same-unit tools that carry them (pointwise cocartesian transport for K=Delta^1, the cocartesian mapping criterion, the edge-pullback mapping-fiber Kan fibration, homotopy-pullback pasting), to prove t an inner fibration, and to write out the mapping-space computation in A_p; statement unchanged.",
+  "blueprint": "The seven steps realize the coherent slice-family construction in paragraph 2 of prop-coef-integral-exceptional-adjoint, before representability and Kan-unit recognition."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-488daeb1f",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-488daeb1f (reviewer sub-agent of L); spot-checked: I read the whole item and verified the statement myself: Shah's thesis is not in literature/, so the proof is agent-written. The statement is true. The key point is that t is cocartesian over every edge u of E, not only over p-cocartesian edges, because every test object c of A_p lies over an identity of B. I checked the small cases B=Δ⁰ (classical ev_1, fibre E_{/x}), an identity edge, empty E and p=id. The fibre, the transport formula ū∘h_!(a), and preservation of cocartesian edges by (t,s) into E×_B E are all correct. Three repairable faults, all fixed in fixes/dag/nodes/sec-six-functors/lem-coef-fiberwise-arrow-target-cocartesian.json with the statement unchanged. (a) Step 2 said n-simplices of A_p lie in a single fibre, which is false for n≥1, and it asserted that A_p→B is cocartesian without proof; it is rewritten through lem-coef-infinity-pointwise-cocartesian-transport with K=Δ¹ and the pullback along c. (b) Step 5 computed mapping spaces in Arr(E), never reduced Map_{A_p} to them, and never used p(c)=id; it is rewritten with lem-coef-infinity-edge-pullback-mapping-fiber (3) for K=Δ¹, arrow-morphism-square, lem-coef-infinity-cocartesian-mapping-criterion and lem-coef-infinity-homotopy-pullback-pasting. (c) Step 1 used the wrong inclusion ({1}→Δ¹ where ∅→Δ¹ is needed) and never showed t is an inner fibration; t is now the pullback of the {1}→Δ¹ corner isofibration along (id,cp). Step 6 now proves that pr_1:E×_B E→E is cocartesian and that every t-cocartesian edge is preserved. Step 4 now cites the p_{Δ¹}-cocartesian square it uses. The four added proof_deps are split nodes of unit sk-prop-sf-biduality-general, so no tool_uses are needed; the dependency closure (734 nodes) does not contain the item, so there is no cycle. No new nodes, no SGA, and this is not a target node. Duplicate candidates read: lax-comma-target-fibration, arrow-source-fibers, arrow-target-cartesian-pullbacks, cbc-enhanced-relative-exponential, relative-functor-cocartesian-classifier, relative-slice-sections, pointwise-cocartesian-transport. None states the item.; 1 file(s) fixed by the reviewer"
  }
 }

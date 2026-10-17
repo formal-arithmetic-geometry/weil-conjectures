@@ -11,11 +11,72 @@
   "def-sp-double-complex-total",
   "def-weil-abstract-derived-category",
   "def-sp-spectral-sequence",
+  "def-sp-filtration",
+  "def-sp-convergence"
+ ],
+ "proof": [
+  {
+   "text": "Put $b=a-1$ and form $D^{q,j}=B^{q,j}\\oplus A^{q,j+1}$ with $d_v(b_0,x)=(d_{B,v}b_0+u x,-d_{A,v}x)$ and $d_h(b_0,x)=(d_{B,h}b_0,d_{A,h}x)$. The cone definition gives $d_v^2=0$; directly, its first component is $d_{B,v}^2b_0+d_{B,v}ux-ud_{A,v}x=0$. Also $d_h^2=0$, and $d_hd_v=d_vd_h$ componentwise because the original differentials commute and $u$ commutes with both. Thus $D$ is a commuting double complex whose column $q$ is $C_q$. It vanishes for $q<0$ or $j<b$, so in total degree $n$ only $0\\le q\\le n-b$ contribute. Give its finite total the differential $d_h+(-1)^qd_v$ and the decreasing column filtration $F^p\\operatorname{Tot}(D)^n=\\bigoplus_{q\\ge p}D^{q,n-q}$ as in the cited total-complex definition.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definitions definition-double-complex and definition-associated-simple-complex; column filtration in section-double-complex; cone convention in derived.tex, Definition 014E (definition-cone)."
+   }
+  },
+  {
+   "text": "On the summand $D^{q,j}$, define $T:\\operatorname{Tot}(D)\\to\\operatorname{Cone}(\\operatorname{Tot}(u))$ by $T(b_0,x)=(b_0,(-1)^q x)$; finite rearrangement of summands identifies the target in degree $n$ with $\\operatorname{Tot}(B)^n\\oplus\\operatorname{Tot}(A)^{n+1}$. This is invertible by the same sign formula and preserves the column filtration. For $b_0$ the differential on both sides is $d_{B,h}b_0+(-1)^qd_{B,v}b_0$. On $x$ the three components of $T d$ are $(-1)^q u x$ in $B^{q,j+1}$, $(-1)^{q+1}d_{A,h}x$ in $A^{q+1,j+1}$, and $-d_{A,v}x$ in $A^{q,j+2}$. The cone differential applied to $T(0,x)$ has exactly these three components, by $d_{\\operatorname{Cone}}(b,y)=(d_{\\operatorname{Tot}B}b+\\operatorname{Tot}(u)y,-d_{\\operatorname{Tot}A}y)$. Hence $T$ is an isomorphism of filtered cochain complexes, and identifies their cohomology and image filtrations.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone; explicit component calculation using homology.tex, definition-associated-simple-complex."
+   }
+  },
+  {
+   "text": "Relabel the internal degree by setting $\\widetilde D^{q,k}=D^{q,k+b}$ with the same horizontal and vertical differentials. This is first-quadrant since $q,k\\ge0$ on its support. Relabelling, without introducing a cochain-shift sign, identifies $\\operatorname{Tot}(\\widetilde D)^m$ with $\\operatorname{Tot}(D)^{m+b}$ and their differentials and column filtrations, since the total sign depends only on $q$. Apply the first spectral sequence of [thm-sp-double-complex-spectral-sequences] to $\\widetilde D$ in the abelian category of $\\Lambda$-modules. Its first page is $\\widetilde E_1^{q,k}=H^k(\\widetilde D^{q,\\bullet})=H^{k+b}(C_q)$ and it converges to $H^{q+k+b}(\\operatorname{Tot}(D))$. Write $j=k+b$, and use $T$ from step 2, to obtain exactly the asserted spectral sequence and abutment. The same theorem gives stabilization for page index $s>\\max(q,j-b+1)$ and the finite image filtration: in total degree $n\\ge b$, $F^0H^n=H^n$ and $F^{n-b+1}H^n=0$. For $n<b$ the total degree-$n$ term is zero, so its cohomology and entire filtration are zero. Thus convergence and finiteness hold for every integer $a$ and every total degree.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0130 (lemma-ss-double-complex) and 0132 (lemma-first-quadrant-ss), applied after the explicit translation j=k+(a-1)."
+   }
+  },
+  {
+   "text": "Assume the column-cone vanishing through $r$ and fix $n\\le r$. For every $q\\ge0$ on the total-degree-$n$ diagonal, $j=n-q\\le r$, so $E_1^{q,n-q}=0$; entries outside the support also vanish. By the spectral-sequence page rule $E_{s+1}=H(E_s)$, a zero entry remains zero on the next page (its kernel is zero and its incoming image is a submodule of zero), hence on every later page and at stabilization. Convergence from step 3 identifies each $F^qH^n/F^{q+1}H^n$ with this zero stable entry. A finite filtration with all successive quotients zero has equal consecutive steps; its zero end therefore equals its whole-module end. Thus $H^n(\\operatorname{Cone}(\\operatorname{Tot}(u)))=0$ for every $n\\le r$.",
+   "uses": [
+    "def-sp-spectral-sequence",
+    "def-sp-filtration",
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0132 (lemma-first-quadrant-ss); page recurrence and finite-filtration argument written explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-double-complex-total",
+  "thm-sp-double-complex-spectral-sequences",
+  "def-sp-spectral-sequence",
   "def-sp-filtration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 0130 and 0132; explicit column-cone construction, signed cone-total isomorphism and internal-degree translation by Q42."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +113,54 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CochainComplex.isZero_of_isGE\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : CochainComplex C ℤ) (n i : ℤ),\\n  autoParam (i < n) CochainComplex.isZero_of_isGE._auto_1 →\\n    ∀ [K.IsGE n] [inst_3 : HomologicalComplex.HasHomology K i],\\n      CategoryTheory.Li\", \"doc\": \"For a cochain complex $ K $ bounded below at an integer $ n $, the homology at every index $ i < n $ is zero. Specifically, if $ K $ satisfies the boundedness condition $ \\\\text{IsGE}(n) $, then for al\"}\n  {\"name\": \"CochainComplex.isZero_of_isStrictlyGE\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : CochainComplex C ℤ) (n i : ℤ),\\n  autoParam (i < n) CochainComplex.isZero_of_isStrictlyGE._auto_1 →\\n    ∀ [K.IsStrictlyGE n], CategoryTheory.Limits.IsZero (K.X i)\", \"doc\": \"If a cochain complex $ K $ is strictly supported in degrees $ \\\\geq n $, then for every integer $ i < n $, the object $ K^i $ at degree $ i $ is a zero object in the category $ \\\\mathcal{C} $.\"}\n  {\"name\": \"CochainComplex.isStrictlyGE_iff\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"(n : ℤ) : K.IsStrictlyGE n ↔ ∀ (i : ℤ) (_ : i < n := by lia), IsZero (K.X i)\", \"doc\": \"A cochain complex $ K $ is strictly supported starting at degree $ n $ if and only if for every integer $ i $ less than $ n $, the object $ K.X(i) $ is zero.\"}\n  {\"name\": \"CochainComplex.isStrictlyGE_of_ge\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"(p q : ℤ) (hpq : p ≤ q) [K.IsStrictlyGE q] : K.IsStrictlyGE p\", \"doc\": \"For integers $p$ and $q$ with $p \\\\leq q$, if a cochain complex $K$ is strictly supported in degrees $\\\\geq q$, then it is also strictly supported in degrees $\\\\geq p$.\"}\n  {\"name\": \"CochainComplex.isStrictlyLE_of_le\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"(p q : ℤ) (hpq : p ≤ q) [K.IsStrictlyLE p] : K.IsStrictlyLE q\", \"doc\": \"If a cochain complex $ K $ is strictly supported by the embedding $ \\\\text{embeddingUpIntLE}(p) $ and $ p \\\\leq q $, then $ K $ is also strictly supported by $ \\\\text{embeddingUpIntLE}(q) $. This means t\"}\n  {\"name\": \"CochainComplex.isStrictlyGE_of_iso\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"(n : ℤ) [K.IsStrictlyGE n] : L.IsStrictlyGE n\", \"doc\": \"If cochain complexes $ K $ and $ L $ are isomorphic and $ K $ is strictly supported in degrees $ \\\\geq n $, then $ L $ is also strictly supported in degrees $ \\\\geq n $.\"}\n  {\"name\": \"CochainComplex.isStrictlyLE_iff\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"(n : ℤ) : K.IsStrictlyLE n ↔ ∀ (i : ℤ) (_ : n < i), IsZero (K.X i)\", \"doc\": \"A cochain complex $ K $ is strictly supported below an integer $ n $ if and only if for every integer $ i $ satisfying $ n < i $, the object $ K.X(i) $ at index $ i $ is a zero object in the category.\"}\n  {\"name\": \"CochainComplex.isZero_of_isStrictlyLE\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : CochainComplex C ℤ) (n i : ℤ),\\n  autoParam (n < i) CochainComplex.isZero_of_isStrictlyLE._auto_1 →\\n    ∀ [K.IsStrictlyLE n], CategoryTheory.Limits.IsZero (K.X i)\", \"doc\": \"In a category $\\\\mathcal{C}$ with zero morphisms, if a cochain complex $K$ is strictly supported at degree $n$ (via the embedding $n \\\\mapsto p - n$), then for every integer $i > n$, the object $K^i$ at\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned signatures are component/finiteness infrastructure, ordinary Cech nerves, homological bounds or mapping-cone infrastructure, not this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "cone.*total|total.*cone|columnFiltration.*[Cc]onver",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-17",
+   "verdict": "no match: cone constructions, spectral objects or cohomological bounds, not the column-cone spectral sequence and truncated vanishing theorem",
+   "subdirectory": "Algebra/Homology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mapping cone of a total double complex map has a convergent spectral sequence with column cone cohomology as its first page",
+   "results": "OK 8 hit(s): CochainComplex.mappingCone, HomotopyCategory.spectralObjectMappingCone, HomotopyCategory.spectralObjectMappingCone_δ'_app, CochainComplex.mappingCone.triangle_obj₁, CochainComplex.mappingCone.descHomotopy, CochainComplex.mappingCone.fst, CochainComplex.mappingCone.map_eq_mapOfHomotopy, CochainComplex.mappingCone.d_snd_v",
+   "date": "2026-10-17",
+   "verdict": "no match: cone constructions, spectral objects or cohomological bounds, not the column-cone spectral sequence and truncated vanishing theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"total\"",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-17",
+   "verdict": "no match: cone constructions, spectral objects or cohomological bounds, not the column-cone spectral sequence and truncated vanishing theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of bounded below double cochain complexes the column cone spectral sequence converges to the cohomology of the cone of the total morphism",
+   "results": "OK 8 hit(s): CochainComplex.mappingCone.homologySequenceδ_triangleh, CochainComplex.mappingCone.liftCochain_descCochain, CochainComplex.cm5b.i_f_comp_assoc, CochainComplex.mappingCone.inl_v_descCochain_v, CochainComplex.mappingCone.inr_f_descCochain_v, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat, CochainComplex.mappingCone.inl_v_desc_f_assoc, CochainComplex.mappingCone.inr_f_desc_f_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: cone constructions, spectral objects or cohomological bounds, not the column-cone spectral sequence and truncated vanishing theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "spectralSequence|SpectralSequence",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-17",
+   "verdict": "no match: cone constructions, spectral objects or cohomological bounds, not the column-cone spectral sequence and truncated vanishing theorem",
+   "subdirectory": "Algebra/Homology/TotalComplex"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A column filtration spectral sequence of a bounded below bicomplex whose column cohomology vanishes up to degree r has total cohomology zero up to degree r",
+   "results": "OK 8 hit(s): CochainComplex.isZero_of_isGE, CochainComplex.isZero_of_isLE, DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, CochainComplex.exactAt_of_isGE, CochainComplex.isGE_iff, DerivedCategory.isLE_iff, CochainComplex.exactAt_of_isLE",
+   "date": "2026-10-17",
+   "verdict": "no match: cone constructions, spectral objects or cohomological bounds, not the column-cone spectral sequence and truncated vanishing theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nearby-finite-base-descent",
@@ -78,5 +183,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-bounded-below-cech-cone-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement and existing blueprint ancestry. Constructed the double complex of column cones, checked the signed filtered isomorphism to the cone of the total map, translated the internal bound a-1 to a first-quadrant bicomplex, and applied the existing double-complex spectral-sequence theorem. Wrote the finite-filtration vanishing argument explicitly. No new nodes or Mathlib leaves; read and recorded six fresh Mathlib searches.",
+  "blueprint": "Supporting input to the normal-cone specialization argument of lem-trf-local-term-locality, proof (1) and (2), through the retained nearby-cycle finite-surjective descent chain; realizes the column-cone input to step 5 of lem-trf-nearby-finite-base-descent. This supporting lemma does not re-realize or change the unit statement.",
+  "tool_uses": [
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "Generic first-quadrant spectral-sequence, stabilization and finite-abutment theorem, applied to the explicitly relabelled double complex of column cones. The trace-formula unit has no such homological-algebra theorem; its normal-cone specialization route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-8ea71bd41",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-8ea71bd41 (reviewer sub-agent of L); spot-checked: I read the item, all six cited node statements, Stacks 0130/0132 (homology.tex lemma-first-quadrant-ss, which assumes only finite diagonals) and 014E (derived.tex definition-cone, the same matrix as def-weil-abstract-derived-category), the parent step 5 of lem-trf-nearby-finite-base-descent, and unit sk-i-curve-zero. The statement is unchanged and not weakened: arbitrary integer a, supports q>=0 and j>=a, finite diagonals. I recomputed every step. Step 1: the column-cone double complex has d_v^2=0 and d_h d_v=d_v d_h because u commutes with both differentials, and its support is j>=a-1. Step 2: T=(b,(-1)^q x) is checked on all three A-components ((-1)^q u x, (-1)^{q+1} d_h x, -d_v x) against the cone of Tot u; it is filtered and self-inverse. Step 3: shifting the index by a-1 gives a first-quadrant double complex, and the cited theorem's statement gives E_1, F^{n-b+1}H^n=0, stabilization and convergence. Step 4: a zero E_1 entry stays zero on every page, and a finite filtration with zero graded pieces gives H^n=0 for n<=r. Small cases agree: zero complexes; A=Lambda at (0,a) with B=0, which shows the a-1 bound is needed; u=id; r<a-1; negative a. No new nodes. The nearby nodes lem-sp-first-quadrant-vertical-cone-filtration, lem-sp-bounded-below-second-filtration and lem-weil-pbc-bounded-below-total-column-comparison are not duplicates, since none gives vanishing only through degree r. Searches cover three kinds. I accept the tool_use of thm-sp-double-complex-spectral-sequences as a generic homological tool; the unit route is unchanged. No SGA. No fixes."
  }
 }

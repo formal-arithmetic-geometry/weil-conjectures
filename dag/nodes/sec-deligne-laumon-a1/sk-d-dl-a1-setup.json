@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "sk-d-dl-a1-setup",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "rem-dl-a1-conventions"
+  ]
  },
  "kind": "definition",
  "title": "Affine-line and weight conventions",
@@ -12,13 +14,32 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-d-dl-a1-setup/_section.md",
   "place": "node sk-d-dl-a1-setup, order 3066"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-sbc-affine-space",
+  "def-sc-p1-standard",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-frobenius-detailed",
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-punctual-weights",
+  "def-wf-tate-twist",
+  "lem-tw-tate-twist-weight-shift",
+  "def-wf-middle-extension",
+  "lem-wf-boundary-stalk-invariants",
+  "lem-dl-a1-curve-intermediate-extension",
+  "d-real-boundary",
+  "def-wf-fundamental-representation",
+  "lem-dl-a1-lisse-extension-inertia",
+  "cor-galois-lisse-representations",
+  "rem-dl-a1-conventions"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -80,5 +101,20 @@
    ],
    "open": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "sk-d-dl-a1-setup",
+  "worker": "stage1",
+  "summary": "Audited the affine-line setup sentence by sentence against the main-20261015 blueprint, the unit record, the existing conventions node rem-dl-a1-conventions, and the slopmaster2 Defs.lean declarations. The item is a definition with no proof steps: all notions in its statement are supplied by existing definition or statement nodes. The two exact predicates owned by the source declarations are attached rather than recreated; no new node was needed.",
+  "blueprint": "Realizes the complete sk-d-dl-a1-setup text: finite-field/affine-line and Frobenius conventions; punctual purity and Tate weight shift; ordinary direct-image stalks and curve intermediate extension; the extension-at-infinity and geometric-constancy conditions. The existing rem-dl-a1-conventions node is recorded as the same setup in a more detailed form."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-b931fc8eb",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-b931fc8eb (reviewer sub-agent of L); spot-checked: FIX: I added four citations to stmt_deps; nothing else in the item changed. Checks: (1) The item statement matches main-20261015 sk-d-dl-a1-setup/_section.md (order 3066) word for word. The delivery creates no new node, and the unit record's realized fields are correct (statement [item], no steps). (2) rem-dl-a1-conventions (order 3067, same unit, already reviewed) states this setup sentence by sentence with citations. Recording it in same_as and citing it is correct; it is a blueprint node, not a created duplicate. (3) I checked each clause against the node it comes from. Pure of weight w and the punctual upper bound: def-weil-punctual-weights. '(-1) raises weights by two': lem-tw-tate-twist-weight-shift with n=-1; with geometric Frobenius, Qlb(-1) has eigenvalue q, weight 2. Stalks at missing points: lem-wf-boundary-stalk-invariants (smooth curve A1, F lisse, closed boundary point). j_{!*}(F[1])=(j_*F)[1]: lem-dl-a1-curve-intermediate-extension (A1 is smooth, geometrically connected, separated). Unramified at infinity iff trivial inertia: lem-dl-a1-lisse-extension-inertia with C0=U0∪{∞}. I tested it on the constant, Kummer and Artin-Schreier sheaves. Geometrically constant: cor-galois-lisse-representations; Qlb(-1) shows the Frobenius module can be nontrivial. (4) The two slopmaster2 predicates (Defs.lean lines 63-102) are sorry-free and match clauses 6 and 7. They cover only part of the item, so the node stays split. (5) Fix (C4/B3): clauses 6 and 7 were supported only through rem-dl-a1-conventions. I added d-real-boundary, def-wf-fundamental-representation, lem-dl-a1-lisse-extension-inertia and cor-galois-lisse-representations, all already in rem-dl-a1-conventions' closure. No cycle. (6) Batch-5 check: the closure of the item's dependencies is contained in rem-dl-a1-conventions' existing closure. It reaches neither thm-trf-grothendieck-lefschetz-qbar, sk-thm-trace-transport, sk-thm-sf-verdier-exchange, nt-target-poincare-isiso nor any target. Every flagged citation is a general definition or a general lemma: lisse sheaves, punctual weights, Tate twist and its weight shift, ordinary direct image, inertia-invariant stalks, the conventions node, and the lisse-sheaf/pi1 correspondence. None is one of the two assumed results or a step of their proofs, so no nt-assume leaf is needed. No SGA source is cited, no tool_uses are needed, and no target is weakened.; 1 file(s) fixed by the reviewer"
  }
 }

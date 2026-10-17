@@ -1,0 +1,124 @@
+{
+ "id": "lem-trf-commutative-monoid-sheafification",
+ "kind": "statement",
+ "title": "Sheafification of presheaves of commutative monoids and underlying sets",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology], with all objects, arrows, and coefficient sets in a common universe. A presheaf of commutative monoids on $\\mathcal C$ is a contravariant functor whose values are commutative monoids and whose restrictions are monoid homomorphisms; it is a sheaf if its underlying presheaf of sets satisfies the sheaf condition. Every such presheaf $P$ has a sheafification $\\eta:P\\to P^\\#$ [def-weil-pbc-sheafification] in commutative monoids: $P^\\#$ is a sheaf of commutative monoids, $\\eta$ preserves multiplication and identity, and for every sheaf of commutative monoids $H$, composition with $\\eta$ is a bijection\n$$\\operatorname{Hom}_{\\mathrm{Sh}({\\mathcal C},\\mathrm{CMon})}(P^\\#,H)\\xrightarrow{\\sim}\\operatorname{Hom}_{\\mathrm{PSh}({\\mathcal C},\\mathrm{CMon})}(P,H).$$\nMoreover, writing $|-|$ for the underlying presheaf of sets, $|P^\\#|$ with unit $|\\eta|$ is the set-valued sheafification of $|P|$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YR, section-sheaves-algebraic-structures, assertions (alpha), (beta), (gamma), (epsilon), applied to commutative monoids with their forgetful functor to sets."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafifyComposeIso|sheafificationAdjunction|HasSheafify|CommMonCat",
+   "results": "{\"t\": \"2026-10-17T18:11:51Z\", \"tool\": \"grep\", \"query\": \"sheafifyComposeIso|sheafificationAdjunction|HasSheafify|CommMonCat\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/EpiMono.lean\", \"Mathlib/CategoryTheory/Sites/EpiMono.lean\", \"Mathlib/CategoryTheory/Sites/EpiMono.lean\", \"Mathlib/CategoryTheory/Sites/EpiMono.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\"], \"digest\": \"70908f6bb676206a\"}",
+   "date": "2026-10-18",
+   "verdict": "match: sheafificationAdjunction gives the universal property; sheafifyComposeIso and sheafComposeIso_hom_fac identify the underlying set sheafification; the concrete HasSheafify instance supplies existence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of a presheaf of commutative monoids exists and commutes with the forgetful functor to sets.",
+   "results": "{\"t\": \"2026-10-17T18:11:52Z\", \"tool\": \"leansearch\", \"query\": \"Sheafification of a presheaf of commutative monoids exists and commutes with the forgetful functor to sets.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.sheafify\", \"CategoryTheory.GrothendieckTopology.sheafify\", \"CategoryTheory.presheafToSheaf\", \"CategoryTheory.sheafification\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"CategoryTheory.plusPlusSheaf\", \"CategoryTheory.plusPlusAdjunction\", \"CategoryTheory.instHasSheafifyOfPreservesLimitsForgetOfHasFiniteLimitsOfSmallOppositeCover\"], \"digest\": \"78314faa69e1fc58\"}",
+   "date": "2026-10-18",
+   "verdict": "generalization: the concrete-category sheafification and adjunction results apply to CommMonCat; underlying-set compatibility verified in sheafifyComposeIso"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.sheafificationAdjunction",
+   "results": "{\"t\": \"2026-10-17T18:11:52Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.sheafificationAdjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.sheafificationAdjunction\", \"CategoryTheory.sheafification_reflective\", \"CategoryTheory.sheafificationAdjunction_unit_app\", \"CategoryTheory.isIso_sheafificationAdjunction_counit\", \"CategoryTheory.instIsIsoFunctorOppositeHomFullSubcategoryIsSheafAppSheafCounitSheafificationAdjunction\", \"CategoryTheory.sheafificationAdjunction_counit_app_val\", \"PresheafOfModules.toSheaf_map_sheafificationAdjunction_counit_app\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\"], \"digest\": \"c92c18332632c883\"}",
+   "date": "2026-10-18",
+   "verdict": "match: sheafificationAdjunction gives the universal property; sheafifyComposeIso and sheafComposeIso_hom_fac identify the underlying set sheafification; the concrete HasSheafify instance supplies existence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presheaf of commutative monoids on a small site has a sheafification whose underlying sheaf of sets is the set sheafification, and monoid maps to sheaves factor uniquely.",
+   "results": "{\"t\": \"2026-10-17T18:12:02Z\", \"tool\": \"leanfinder\", \"query\": \"A presheaf of commutative monoids on a small site has a sheafification whose underlying sheaf of sets is the set sheafification, and monoid maps to sheaves factor uniquely.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.sheafify_isSheaf\", \"CategoryTheory.GrothendieckTopology.sheafification_obj\", \"PresheafOfModules.sheafification\", \"CategoryTheory.plusPlusSheaf_obj_val\", \"CategoryTheory.instHasSheafifyType\", \"CategoryTheory.sheafification_obj\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"PresheafOfModules.toPresheaf_map_toSheafify\"], \"digest\": \"33e515972c112908\"}",
+   "date": "2026-10-18",
+   "verdict": "generalization: the concrete-category sheafification and adjunction results apply to CommMonCat; underlying-set compatibility verified in sheafifyComposeIso"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafifyComposeIso|toSheafify_sheafifyComposeIso|PreservesSheafification",
+   "results": "{\"t\": \"2026-10-17T18:12:11Z\", \"tool\": \"grep\", \"query\": \"sheafifyComposeIso|toSheafify_sheafifyComposeIso|PreservesSheafification\", \"sub\": \"CategoryTheory/Sites/PreservesSheafification.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"16\", \"21\", \"25\", \"32\", \"61\"], \"digest\": \"0b67a6b9b389e2c8\"}",
+   "date": "2026-10-18",
+   "verdict": "match: sheafificationAdjunction gives the universal property; sheafifyComposeIso and sheafComposeIso_hom_fac identify the underlying set sheafification; the concrete HasSheafify instance supplies existence"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*HasSheafify|HasSheafify J D|sheafificationAdjunction",
+   "results": "{\"t\": \"2026-10-17T18:12:11Z\", \"tool\": \"grep\", \"query\": \"instance.*HasSheafify|HasSheafify J D|sheafificationAdjunction\", \"sub\": \"CategoryTheory/Sites/Sheafification.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"50\", \"54\", \"65\", \"76\", \"80\"], \"digest\": \"c692b943702affc7\"}",
+   "date": "2026-10-18",
+   "verdict": "match: sheafificationAdjunction gives the universal property; sheafifyComposeIso and sheafComposeIso_hom_fac identify the underlying set sheafification; the concrete HasSheafify instance supplies existence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.sheafifyComposeIso",
+   "results": "{\"t\": \"2026-10-17T18:12:11Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.sheafifyComposeIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.sheafifyComposeIso\", \"CategoryTheory.sheafComposeIso_hom_fac\", \"CategoryTheory.sheafComposeIso_inv_fac\", \"CategoryTheory.sheafComposeIso_hom_fac_assoc\", \"CategoryTheory.sheafComposeIso_inv_fac_assoc\", \"CategoryTheory.constantCommuteCompose_hom_app_hom\"], \"digest\": \"0593c6ad29255b08\"}",
+   "date": "2026-10-18",
+   "verdict": "match: sheafificationAdjunction gives the universal property; sheafifyComposeIso and sheafComposeIso_hom_fac identify the underlying set sheafification; the concrete HasSheafify instance supplies existence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification commutes with the forgetful functor from commutative monoids to sets because it preserves limits and filtered colimits.",
+   "results": "{\"t\": \"2026-10-17T18:12:18Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification commutes with the forgetful functor from commutative monoids to sets because it preserves limits and filtered colimits.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafificationCompForgetCompToPresheaf\", \"PresheafOfModules.sheafificationCompToSheaf\", \"CategoryTheory.plusPlusIsoSheafify\", \"CategoryTheory.plusPlusFunctorIsoSheafification\", \"CategoryTheory.sheafificationNatIso_hom_app_val\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"PresheafOfModules.sheafification\"], \"digest\": \"889c5a053e0f3cb2\"}",
+   "date": "2026-10-18",
+   "verdict": "generalization: the concrete-category sheafification and adjunction results apply to CommMonCat; underlying-set compatibility verified in sheafifyComposeIso"
+  },
+  {
+   "tool": "grep",
+   "query": "def sheafificationAdjunction|def sheafifyComposeIso|lemma sheafComposeIso_hom_fac|HasSheafify J D :=|HasSheafify.mk",
+   "results": "{\"t\": \"2026-10-17T18:12:26Z\", \"tool\": \"grep\", \"query\": \"def sheafificationAdjunction|def sheafifyComposeIso|lemma sheafComposeIso_hom_fac|HasSheafify J D :=|HasSheafify.mk\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/LeftExact.lean\", \"Mathlib/CategoryTheory/Sites/LeftExact.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"Mathlib/CategoryTheory/Sites/Sheafification.lean\", \"Mathlib/CategoryTheory/Sites/Sheafification.lean\"], \"digest\": \"55a2e7d7ef856907\"}",
+   "date": "2026-10-18",
+   "verdict": "match: sheafificationAdjunction gives the universal property; sheafifyComposeIso and sheafComposeIso_hom_fac identify the underlying set sheafification; the concrete HasSheafify instance supplies existence"
+  },
+  {
+   "tool": "grep",
+   "query": "forget_preservesLimits|forget_preservesFilteredColimits|forget_reflects_isos",
+   "results": "{\"t\": \"2026-10-17T18:12:26Z\", \"tool\": \"grep\", \"query\": \"forget_preservesLimits|forget_preservesFilteredColimits|forget_reflects_isos\", \"sub\": \"Algebra/Category/MonCat\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/MonCat/FilteredColimits.lean\", \"Mathlib/Algebra/Category/MonCat/FilteredColimits.lean\", \"Mathlib/Algebra/Category/MonCat/Limits.lean\", \"Mathlib/Algebra/Category/MonCat/Limits.lean\", \"Mathlib/Algebra/Category/MonCat/Limits.lean\", \"Mathlib/Algebra/Category/MonCat/Limits.lean\", \"Mathlib/Algebra/Category/MonCat/Limits.lean\", \"Mathlib/Algebra/Category/MonCat/Basic.lean\"], \"digest\": \"9c1c8297329d06ef\"}",
+   "date": "2026-10-18",
+   "verdict": "match: sheafificationAdjunction gives the universal property; sheafifyComposeIso and sheafComposeIso_hom_fac identify the underlying set sheafification; the concrete HasSheafify instance supplies existence"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.sheafificationAdjunction, CategoryTheory.sheafifyComposeIso, CategoryTheory.sheafComposeIso_hom_fac",
+  "file": "Mathlib/CategoryTheory/Sites/Sheafification.lean",
+  "how": "specializes in one line per clause: take A = CommMonCat.{u}, B = Type u and F = forget CommMonCat, where the small site data lie in Type u. Existence is the concrete HasSheafify instance in Mathlib/CategoryTheory/Sites/LeftExact.lean:308-311 (CategoryTheory.instHasSheafifyOfPreservesLimitsForgetOfHasFiniteLimitsOfSmallOppositeCover). The universal property is CategoryTheory.sheafificationAdjunction at Sheafification.lean:80, with presheafToSheaf at :73 and unit toSheafify. Underlying sets are CategoryTheory.sheafifyComposeIso at Mathlib/CategoryTheory/Sites/PreservesSheafification.lean:233, normalized on the unit by CategoryTheory.sheafComposeIso_hom_fac at :239. Its PreservesSheafification hypothesis is supplied by the concrete forgetful instance at :305-314. The standard CommMonCat instances read are forget_preservesLimits at Mathlib/Algebra/Category/MonCat/Limits.lean:331, forget_preservesFilteredColimits at FilteredColimits.lean:347, and forget_reflects_isos at Basic.lean:498; CommMonCat has small limits and filtered colimits in those same files. Thus the site-cover limits and filtered cover-poset colimits required by the concrete instances exist and are preserved. All identifications preserve the unit, so the actual underlying monoid sheaf with its underlying unit is the set sheafification. The clause that a presheaf of commutative monoids is a sheaf exactly when its underlying presheaf of sets is one is CategoryTheory.Presheaf.isSheaf_iff_isSheaf_forget at Mathlib/CategoryTheory/Sites/Sheaf.lean:730-731, with s = forget CommMonCat, using HasLimits CommMonCat, the forget_preservesLimits and forget_reflects_isos instances above.",
+  "line": 80
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-associated-log-universal-stalks",
+  "date": "2026-10-18",
+  "group": "Q35"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Fine-log chart-spreading input, through lem-trf-log-regular-sharp-chart, to the monoidal-resolution ancestry of lem-trf-local-term-locality, proof (1)--(2); Travaux de Gabber VI, 3.7(a), printed p. 75, final sentence extending the restriction of a splitting to a chart. General sheafification input for the associated-log pushout construction.",
+   "via": [
+    "lem-trf-associated-log-universal-stalks",
+    "lem-trf-fine-log-stalk-chart-spreading",
+    "lem-trf-log-regular-sharp-chart",
+    "lem-trf-free-characteristic-regular-boundary",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
