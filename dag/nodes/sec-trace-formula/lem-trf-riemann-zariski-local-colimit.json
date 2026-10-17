@@ -251,5 +251,43 @@
   "group": "Q32",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q32-75229484b (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited statements; checked Temkin §3.2 and local Stacks sources. All eight steps establish the unchanged statement, including both restricted systems and the actual limit maps. No new nodes, circularity, hidden long steps, or forbidden machinery. Accepted the closed-immersion base-change tool use. Detailed checks are in review.md; no fixes required."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1f0c037da",
+  "group": "Q23",
+  "result": "fix",
+  "note": "Review written to review.md; three complete replacements supplied in fixes/. Mathematics and exact signature pass. Fixed helper citations, omitted declaration records, and placeholder second reading. Corrected module compiled cleanly through scompile.py; repository unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.RiemannZariskiLocalColimit",
+  "declaration": "AlgebraicGeometry.RiemannZariski.riemann_zariski_local_colimit",
+  "declarations": [
+   "AlgebraicGeometry.RiemannZariski.CenteredQuasiModel",
+   "AlgebraicGeometry.RiemannZariski.CenteredRefinement",
+   "AlgebraicGeometry.RiemannZariski.CenteredQuasiModelIso",
+   "AlgebraicGeometry.RiemannZariski.CenteredQuasiModel.localToValuation",
+   "AlgebraicGeometry.RiemannZariski.CenteredQuasiModel.localToField",
+   "AlgebraicGeometry.RiemannZariski.CenteredRefinement.localMap",
+   "AlgebraicGeometry.RiemannZariski.CenteredLocalSystem",
+   "AlgebraicGeometry.RiemannZariski.CenteredLocalSystem.ringMap",
+   "AlgebraicGeometry.RiemannZariski.CenteredLocalSystem.intoV",
+   "AlgebraicGeometry.RiemannZariski.CenteredLocalSystemData",
+   "AlgebraicGeometry.RiemannZariski.CenteredLocalSystemData.ringDiagram",
+   "AlgebraicGeometry.RiemannZariski.CenteredLocalSystemData.ringCocone",
+   "AlgebraicGeometry.RiemannZariski.CenteredLocalSystemData.schemeDiagram",
+   "AlgebraicGeometry.RiemannZariski.CenteredLocalSystemData.schemeCone",
+   "AlgebraicGeometry.RiemannZariski.LocalColimitData",
+   "AlgebraicGeometry.RiemannZariski.riemann_zariski_local_colimit"
+  ],
+  "file": "lean/Sheaf/TraceFormula/RiemannZariskiLocalColimit.lean",
+  "statement": "theorem riemann_zariski_local_colimit (T : Scheme.{u}) [hT : IsIntegral T] (t : T ⟶ Spec (.of (ULift.{u} ℤ))) [LocallyOfFiniteType t] [QuasiCompact t] (L : Type u) [Field L] [Algebra T.functionField L] [IsSepClosure T.functionField L] (V : ValuationSubring L) (s : Spec (.of V) ⟶ T) (hs : Spec.map (CommRingCat.ofHom V.subtype) ≫ s = Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T)) : Nonempty (LocalColimitData (fun _ : CenteredQuasiModel (T := T) (L := L) (Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T)) V s ↦ True) (η := Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T)) (V := V) (s := s)) ∧ (∀ (U₀ : CenteredQuasiModel (T := T) (L := L) (η := Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T)) (V := V) (s := s)), Nonempty (LocalColimitData (fun U ↦ Nonempty (@CenteredRefinement T L _ _ V s U₀ U)) (η := Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T)) (V := V) (s := s))) ∧ (∀ (U₀ : CenteredQuasiModel (T := T) (L := L) (η := Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T)) (V := V) (s := s)) (W : U₀.model.X.Opens) (hW : IsAffineOpen W) (hx : U₀.centre ∈ W), Nonempty (LocalColimitData (fun U ↦ IsAffine U.model.X ∧ ∃ r : @CenteredRefinement T L _ _ V s U₀ U, ∃ f : U.model.X ⟶ W.toScheme, f ≫ W.ι = r.hom) (η := Spec.map (CommRingCat.ofHom (algebraMap T.functionField L)) ≫ T.fromSpecStalk (genericPoint T)) (V := V) (s := s)))",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The transition maps and valuation maps are definitionally the stalk map of the selected refinement and the canonical map induced by the valuation lift; no arbitrary maps are data. CenteredLocalSystem.complete gives representative coverage for every admissible centred quasi-model, while CenteredLocalSystemData records localness, injectivity, identities, composition and cocone compatibility of those canonical maps.",
+  "fixed_by": "NT-stage2-Codex-1f0c037da"
  }
 }

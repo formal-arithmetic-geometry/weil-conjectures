@@ -191,5 +191,28 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-37101c2db (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks curves.tex Tag 0CBY (lemma-etale-local-structure-nodal-family, both proofs) and 0C59/0C5A, and against ILO Exposé VI §§1.6–1.8 and Prop. 1.9 with its proof, pp. 70–71. I also read the statements of the cited nodes lem-pur-smooth-pair-local-coordinates (0FUE), lem-trf-nodal-family-fitting-singular, def-trf-log-regular-pair and def-trf-nodal-geometric-fibres. The statement is true without properness. I tested it on the DVR case uv=π, on Y=A² with T the axes and uv=st, and on the cases T empty, D empty and a smooth fibre. Steps 2 and 4 are correct: a=0 and b=1 by relative dimension, and h=εα(a) from the stalk pushout chart spread out étale-locally, as in ILO's 'h = εa'. Fixes: (1) C1: step 3 used Tag 0CBY, which is proved by Artin approximation, by tag only, and no DAG node states it. I added the statement-only node lem-trf-nodal-family-etale-local-model (unsplit; created.item = this item; blueprint.from = lem-trf-local-term-locality) and step 3 now cites it. (2) E5: Tag 0CBY gives only some point of U over x, not one sent to u=v=0. I wrote out why it is: smoothness is invariant under étale maps on the source and under étale base change, and the Jacobian of uv−h vanishes only at u=v=0 when h=0. I also wrote out the explicit shrinking V∖Z, and in step 1 derived the equidimensional-fibre hypothesis of the fitting-singular lemma. (3) I added def-weil-geometric-point and def-sbc-affine-space to stmt_deps. Accepted tool use: lem-pur-smooth-pair-local-coordinates, a generic étale-coordinate theorem. The new node records only Mathlib greps, which found nothing; LeanSearch and Loogle could not be run on this machine and were not recorded. No duplicate was found in dag/nodes, and no SGA source is used.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-11b573f50",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Reviewed packet, node, dependencies, source-backed Lean module, report sections, edge cases, route-pivot compliance, and compile evidence; no substantive defects found."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.TraceFormula.NodalEtaleChart",
+  "declaration": "AlgebraicGeometry.exists_nodal_etale_chart",
+  "declarations": [
+   "AlgebraicGeometry.nodalOrigin",
+   "AlgebraicGeometry.exists_nodal_etale_chart"
+  ],
+  "file": "lean/Sheaf/SixFunctors/TraceFormula/NodalEtaleChart.lean",
+  "statement": "theorem exists_nodal_etale_chart {X Y : Scheme.{u}} (f : X ⟶ Y) [IsLocallyNoetherian X] [IsLocallyNoetherian Y] {U₀ : Scheme.{u}} (j : U₀ ⟶ Y) [IsOpenImmersion j] (hU : DenseRange j) (hlog : IsDivisorialFineSaturatedLogRegularPair Y U₀ j hU) [Flat f] [LocallyOfFinitePresentation f] (hNodal : HasNodalGeometricFibres f) (D : Scheme.{u}) (i : D ⟶ X) (hCartier : IsEffectiveCartierCenter i) [Etale (i ≫ f)] (hD : ∀ d : D, i d ∈ f.smoothLocus) (hSmooth : ∀ x : X, f x ∈ Set.range j → x ∈ f.smoothLocus) : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X), ∃ (V : Y.Etale) (W : Scheme.{u}) (v : W ⟶ X) (w : W ⟶ V.left) (xW : Spec (.of Ω) ⟶ W), Etale v ∧ v ≫ f = w ≫ V.hom ∧ xW ≫ v = x ∧ ∃ hunit : ∀ (Ω' : Type u) [Field Ω'] [IsAlgClosed Ω'] (t' : Spec (.of Ω') ⟶ Y), IsUnit.submonoid (strictLocalRing Y t') ≤ divisorialStalk j t', ∃ (P : Type u) (_ : CommMonoid P) (c : P →* divisorialSections j V), IsFineSaturatedMonoid P ∧ (∀ (Ω' : Type u) [Field Ω'] [IsAlgClosed Ω'] (t' : Spec (.of Ω') ⟶ Y) (w' : (Scheme.pointSmallEtale t').fiber.obj V), IsDivisorialStalkChart (divisorialStalk j t') (hunit Ω' t') ((divisorialGerm j t' V w').comp c)) ∧ (((Scheme.SpecToEquivOfField Ω X x).1 ∈ f.smoothLocus ∧ (Scheme.SpecToEquivOfField Ω X x).1 ∉ Set.range i ∧ Smooth w ∧ ∀ z : W, z ∉ Set.range (pullback.snd (C := Scheme.{u}) i v)) ∨ ((Scheme.SpecToEquivOfField Ω X x).1 ∈ Set.range i ∧ ∃ e : W ⟶ AffineSpace (ULift (Fin 1)) V.left, Etale e ∧ e ≫ (AffineSpace.over (ULift (Fin 1)) V.left).hom = w ∧ ∃ g : pullback (C := Scheme.{u}) i v ⟶ (AffineSpace (ULift (Fin 1)) V.left).zeroLocusSubscheme {AffineSpace.coord V.left (ULift.up 0)}, IsPullback g (pullback.snd (C := Scheme.{u}) i v) ((AffineSpace (ULift (Fin 1)) V.left).zeroLocusSubschemeι {AffineSpace.coord V.left (ULift.up 0)}) e) ∨ ((Scheme.SpecToEquivOfField Ω X x).1 ∉ f.smoothLocus ∧ (∀ z : W, z ∉ Set.range (pullback.snd (C := Scheme.{u}) i v)) ∧ ∃ (h : Γ(V.left, ⊤)) (m : W ⟶ pullback nodalModelBaseMap (nodalBaseMap h)), Etale m ∧ m ≫ pullback.snd nodalModelBaseMap (nodalBaseMap h) = w ∧ nodalOrigin h (m (Scheme.SpecToEquivOfField Ω W xW).1) ∧ (∀ z : V.left, z ∈ Set.range (pullback.snd (C := Scheme.{u}) j V.hom) → IsUnit ((V.left.presheaf.germ ⊤ z trivial) h)) ∧ ∃ (ε : Γ(V.left, ⊤)ˣ) (a : P), h = ε.1 * (c a).1))",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned H3: geometric-point lifts and smoothness off the boundary are explicit; the marked coordinate has an etale map and scheme-theoretic Cartesian zero-locus square; both unmarked branches remove the marking; one common fs chart precedes all alternatives; the nodal origin means vanishing in the residue field."
  }
 }

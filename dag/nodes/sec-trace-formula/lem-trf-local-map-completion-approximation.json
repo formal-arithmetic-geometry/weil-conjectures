@@ -16,7 +16,8 @@
   "def-weil-pbc-adic-completion",
   "def-weil-etale-morphism",
   "def-weil-residue-field",
-  "pqf-def-locnoeth"
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-fs-adic-completion-map-local"
  ],
  "proof": [
   {
@@ -194,5 +195,27 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-8c9964c59 (reviewer sub-agent of L); spot-checked: Read the required materials, item, new child, cited statements, unit route, and Stacks Tags 0CAU, 0CAR, and 07PV. Verified hypotheses, completion/base-change maps, residue-field locality, denominator calculation, edge cases, searches, duplicates, and route compliance. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-219046948",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, docstrings, edge cases, route compliance, report sections, and per-file compilation all checked successfully."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.LocalMapCompletionApproximation",
+  "declaration": "AlgebraicGeometry.exists_etale_approximation_of_local_map",
+  "declarations": [
+   "AlgebraicGeometry.localMapCompletionMap",
+   "AlgebraicGeometry.exists_etale_approximation_of_local_map"
+  ],
+  "file": "lean/Sheaf/TraceFormula/LocalMapCompletionApproximation.lean",
+  "statement": "theorem exists_etale_approximation_of_local_map {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) [IsLocallyNoetherian S] [LocallyOfFiniteType f] [LocallyOfFiniteType g] (x : X) (y : Y) (hxy : g y = f x) (hG : IsGRing (S.presheaf.stalk (f x))) (θ : Y.presheaf.stalk y →+* AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x)) [IsLocalHom θ] (hθ : (hxy ▸ θ.comp (g.stalkMap y).hom) = (algebraMap (X.presheaf.stalk x) (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x))).comp (f.stalkMap x).hom) : ∀ (N : ℕ), 1 ≤ N → ∃ (U : Scheme.{u}) (p : U ⟶ X) (u : U) (hpu : p u = x), IsIso (p.residueFieldMap u) ∧ Etale p ∧ ∃ (q : U ⟶ Y) (hqy : q u = y), p ≫ f = q ≫ g ∧ ∀ (a : Y.presheaf.stalk y), localMapCompletionMap (p.stalkMap u).hom (hpu.symm ▸ θ a) - AdicCompletion.of (IsLocalRing.maximalIdeal (U.presheaf.stalk u)) (U.presheaf.stalk u) ((q.stalkMap u).hom (hqy.symm ▸ a)) ∈ Ideal.map (algebraMap (U.presheaf.stalk u) (AdicCompletion (IsLocalRing.maximalIdeal (U.presheaf.stalk u)) (U.presheaf.stalk u))) ((IsLocalRing.maximalIdeal (U.presheaf.stalk u)) ^ N)",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
