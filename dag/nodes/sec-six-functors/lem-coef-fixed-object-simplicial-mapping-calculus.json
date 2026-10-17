@@ -13,9 +13,106 @@
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-fixed-object-free-arrow-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the small set O. The cited fixed-object free-calculus node supplies the category sCat_O and its model structure with local weak equivalences and local Kan fibrations, with functorial factorizations. By the sorted-theory identification, sCat_O is equivalent to the category of strict simplicial T_O-algebras for the O×O-sorted theory T_O, with evaluation at the sort ((u,v)) naturally isomorphic to the mapping set A↦A(u,v); this holds for u=v and for O=∅. The sorted-algebra model node therefore gives a model structure on sCat_O whose weak equivalences and fibrations are those detected by every evaluation A↦A(u,v), i.e. exactly the local weak equivalences and local Kan fibrations. A model structure is determined by its weak equivalences and fibrations (cofibrations are the maps with the left lifting property against trivial fibrations), so it is the fixed-object model structure. Its generating cofibrations and trivial cofibrations are F_s(∂Δ^m)→F_s(Δ^m) and F_s(Λ_i^m)→F_s(Δ^m) for the left adjoint F_s of evaluation at s=(u,v). The free-arrow adjunction exhibits F^O_{u,v} as a left adjoint of the same evaluation functor, so F_s≅F^O_{u,v} naturally, and the generating cells are the free-arrow maps F^O_{u,v}(∂Δ^m)→F^O_{u,v}(Δ^m) and F^O_{u,v}(Λ_i^m)→F^O_{u,v}(Δ^m), including u=v; for O=∅ the generating families are empty.",
+   "uses": [
+    "lem-coef-fixed-object-simplicial-free-calculus",
+    "lem-coef-cone-sorted-theory-identification",
+    "lem-coef-sorted-simplicial-algebra-model",
+    "lem-coef-fixed-object-free-arrow-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Section 7.1 and Proposition 7.2, printed pp.276-277."
+   }
+  },
+  {
+   "text": "For B∈sCat_O and a small simplicial set K, set (B^K)(u,v)=Fun(K,B(u,v)); define composition by the diagonal K→K×K followed by the two mapping maps and B-composition, and let the identities be the constant maps at id_u. Associativity and units hold pointwise, so this is a simplicial category with object set O, functorial in K (contravariantly) and B. Limits in sCat_O are computed on mapping sets (the forgetful functors to the mapping sets are the sorted evaluations, which create limits of finite-product-preserving functors), and K↦Fun(K,B(u,v)) turns colimits of simplicial sets into limits; hence K↦B^K turns colimits into limits, and (B^K)^L≅B^{K×L} by currying, compatibly with the diagonal compositions. Define the tensor explicitly: (K⊗C)_n is the coproduct in ordinary categories with object set O (free product amalgamating identities) of copies C_n^{(k)} of C_n, one for each k∈K_n, and a simplicial operator α sends the copy indexed by k to the copy indexed by α^*k by α^* on arrows. A map K⊗C→B is, degreewise, a functor C_n→B_n for every k∈K_n, compatible with simplicial operators; equivalently, for all u,v a simplicial map K×C(u,v)→B(u,v) which for fixed k preserves composition and identities; by currying, a map of simplicial sets C(u,v)→Fun(K,B(u,v)) preserving the diagonal composition and constant identities, i.e. a map C→B^K. This gives Hom(K⊗C,B)≅Hom(C,B^K), naturally in K,C,B. The empty O case: sCat_∅ has one object and every construction is that object.",
+   "uses": [
+    "lem-coef-cone-sorted-theory-identification",
+    "lem-coef-sorted-simplicial-algebra-model",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Section 7.1, displayed cotensor and tensor construction, printed p.276."
+   }
+  },
+  {
+   "text": "Define Map_O(C,B)_n=Hom_sCat_O(C,B^{Δ^n}). A simplicial operator α:[m]→[n] acts by restriction along Δ^m→Δ^n. Since K↦B^K turns colimits into limits (step 2) and K is the colimit of its simplices, Hom_sSet(K,Map_O(C,B))≅Hom(C,B^K) naturally. Given maps C→D^{Δ^n} and D→B^{Δ^n}, apply (−)^{Δ^n} to the second, use (B^{Δ^n})^{Δ^n}=B^{Δ^n×Δ^n} and the diagonal Δ^n→Δ^n×Δ^n to obtain C→B^{Δ^n}; the identity is the constant identity functor. Associativity and the simplicial identities reduce to associativity, units and functoriality of restriction, and vertices of Map_O(C,B) are the maps C→B. Using (B^K)^{Δ^n}≅B^{K×Δ^n} and the natural bijection just proved, Map_O(C,B^K)_n=Hom(C,B^{K×Δ^n})≅Hom(K×Δ^n,Map_O(C,B))=[K,Map_O(C,B)]_n, and with step 2, Map_O(K⊗C,B)_n=Hom(K⊗C,B^{Δ^n})≅Hom(C,B^{K×Δ^n})≅[K,Map_O(C,B)]_n, compatibly with simplicial operators. These are the enriched tensor and cotensor isomorphisms of the simplicial tensor-cotensor definition, with universal elements given by the identities of K⊗C and B^K.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Section 7.1, mapping-complex construction, printed p.276."
+   }
+  },
+  {
+   "text": "For a free generating cell F^O_{u,v}(i), with i a boundary or horn inclusion, and a simplicial monomorphism j, the new free-cell node, whose tensor is the one of step 2, identifies the tensor pushout product with F^O_{u,v}(i□j) and states that it is a cofibration, trivial if i is a horn inclusion or j is a weak homotopy equivalence. (Its hypotheses are exactly these; the trivial cases come from the anodyne pushout-product node, applied to i□j or, by the symmetry of the product, j□i, and anodyne maps are the trivial Kan cofibrations; F^O_{u,v} preserves cofibrations and trivial cofibrations since its right adjoint, evaluation at (u,v), preserves local Kan fibrations and trivial fibrations.) Hence every generating cofibration tensored with a simplicial monomorphism is a cofibration, trivial when the simplicial map is weak, and every generating trivial cofibration gives a trivial cofibration.",
+   "uses": [
+    "lem-coef-fixed-object-simplicial-sm7-free-cell",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-fixed-object-free-arrow-adjunction",
+    "lem-coef-fixed-object-simplicial-free-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Section 7.1 and Proposition 7.2, printed pp.276-277."
+   }
+  },
+  {
+   "text": "Apply the generator-extension lemma for the simplicial model axiom to the enrichment, tensors and cotensors of steps 2-3, with S the free boundary cells and T the free horn cells of step 1. By the free-arrow adjunction a map has the right lifting property against S (resp. T) exactly when each evaluation at (u,v) has it against all boundary (resp. horn) inclusions, i.e. is a trivial Kan fibration (resp. a Kan fibration) by the Kan node; so S^□=F∩W (trivial fibrations) and T^□=F (fibrations), as the sorted-algebra model node also states. The previous step verifies its pushout-product hypotheses for every monomorphism. It follows that the tensor-cotensor enrichment satisfies the simplicial model axiom: for every cofibration C→D and local Kan fibration B→B′, the corner map Map_O(D,B)→Map_O(C,B)×_{Map_O(C,B′)}Map_O(D,B′) is a Kan fibration, trivial if either input is a local weak equivalence. This is exactly the simplicial model-category assertion in the item.",
+   "uses": [
+    "lem-coef-simplicial-sm7-generator-extension",
+    "lem-coef-sorted-simplicial-algebra-model",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-fixed-object-free-arrow-adjunction",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 7.2, printed p.277."
+   }
+  },
+  {
+   "text": "For u,v∈O, the free-arrow adjunction gives Hom_sCat_O(F^O_{u,v}(K),B^{Δ^n})≅Hom_sSet(K,Fun(Δ^n,B(u,v))). By the cartesian closed adjunction for simplicial sets this is Fun(K,B(u,v))_n, naturally in n, K and B. These degreewise identifications commute with restriction and composition because both sides evaluate a functor on the length-one generators. Thus Map_O(F^O_{u,v}(K),B)≅Fun(K,B(u,v)). The free-arrow functor sends boundary and horn generating cofibrations to the corresponding fixed-object generating cells, so it is left Quillen; evaluation at (u,v), being objectwise on mapping sets, preserves local fibrations and trivial fibrations. This proves the simplicial Quillen adjunction and the asserted natural isomorphism, including loops and the empty-object case.",
+   "uses": [
+    "lem-coef-fixed-object-free-arrow-adjunction",
+    "lem-coef-fixed-object-simplicial-free-calculus",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Section 7.1 and Proposition 7.2, printed pp.276-277."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-simplicial-tensor-cotensor",
+  "lem-coef-cone-sorted-theory-identification",
+  "lem-coef-fixed-object-free-arrow-adjunction",
+  "lem-coef-fixed-object-simplicial-free-calculus",
+  "lem-coef-fixed-object-simplicial-sm7-free-cell",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-simplicial-sm7-generator-extension",
+  "lem-coef-sorted-simplicial-algebra-model",
+  "lem-coef-sset-anodyne-pushout-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+  "place": "Expanded fixed-object simplicial enrichment and SM7 proof following Section 7.1 and Proposition 7.2; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,7 +158,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-relative-cut-nerve-diagrams",
@@ -73,7 +170,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, middle derived mapping-complex comparison of prop-coef-integral-exceptional-adjoint: supporting the cut-comparison reconstruction of ordered operations; simplicial mapping complexes in the fixed-object presentation, before taking the inverse limit.",
+   "place": "Proof paragraph 2, middle derived mapping-complex comparison of prop-coef-integral-exceptional-adjoint: the fixed-object simplicial model mapping calculus, including cotensors, the corner map and the free-arrow Quillen adjunction.",
    "via": [
     "lem-coef-relative-cut-nerve-diagrams",
     "lem-coef-colored-operation-section-reconstruction",
@@ -88,5 +185,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-fixed-object-simplicial-mapping-calculus",
+  "worker": "stage1",
+  "summary": "Read the imported fixed-object statement against its Dwyer–Kan source and retained all clauses, including empty O and loop cases. Added one genuine intermediate node for the free-cell tensor pushout-product calculation. The proof now constructs cotensors and tensors, checks the enriched mapping simplicial sets, invokes the generator SM7 extension for the corner map, and derives the free-arrow simplicial Quillen adjunction and mapping-space isomorphism. Mathlib searches found no declaration of the enriched fixed-object result or its free-cell calculation.",
+  "blueprint": "Realizes the middle derived mapping-complex comparison paragraph of prop-coef-integral-exceptional-adjoint: fixed-object cotensors, simplicial mapping complexes, SM7 corner lifting, and the free-arrow Quillen adjunction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NI-4d6205f16",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-4d6205f16 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, the unit sk-prop-sf-biduality-general and the blueprint ancestor. Dwyer-Kan §7.1/Prop 7.2 is not stored locally (WANTED is recorded); I checked its mathematics independently. The item statement is true and unchanged; edge cases O=∅, u=v and K=∅ were checked. Fixes, in fixes/dag/nodes/sec-six-functors/: (1) C1/C3 in step 1: it took the generating cells from the free-calculus node's proof. Their source is the existing reviewed node lem-coef-cone-sorted-theory-identification, now cited together with the free-arrow adjunction (F_s ≅ F^O_{u,v} as left adjoints of the same evaluation). (2) E3 in step 5: it said S^□ = cofibrations ∩ weak equivalences, but the generator-extension lemma needs F∩W. The step now proves S^□ = F∩W and T^□ = F from the free-arrow adjunction and the Kan node. (3) B2/B3 in the new node: it used a tensor pushout product without defining the tensor (the tensor was defined only in the parent). The statement now defines X⊗C explicitly and writes out both pushout-product maps. Also step 2 now gives the explicit degreewise tensor formula, and step 3 now derives the enriched tensor and cotensor isomorphisms that def-coef-simplicial-tensor-cotensor requires; it cites that definition and is no longer marked elementary. The new node is not a restatement (it covers generator cells only) and is not a duplicate (rg search over dag/nodes). It is true: X⊗F(Y) ≅ F(X×Y) degreewise, F preserves pushouts and is left Quillen, and the anodyne pushout-product leaf gives triviality. All cited nodes are in the unit, so there are no tool_uses. No cycle, no drop.; 2 file(s) fixed by the reviewer"
  }
 }

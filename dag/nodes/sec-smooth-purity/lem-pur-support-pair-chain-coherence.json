@@ -13,9 +13,68 @@
   "def-sp-injective-resolutions",
   "def-sp-left-exact-additive"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let b:I→RJ be the degreewise adjoint of h; it is a chain map because the adjunction bijection is natural in both variables and h is a chain map (the adjoint of d_J∘h^n is R(d_J)∘b^n and that of h^{n+1}∘L(d_I) is b^{n+1}∘d_I). Each b^n is a morphism of sheaves I^n→RJ^n, so for the arrow m:V→T of 𝒞 naturality of b^n gives J^n(u(m))∘b^n_T=b^n_V∘I^n(m), where (RJ^n)(m)=J^n(u(m)). Hence J(m′)∘J(t)∘b_T=J(t∘m′)∘b_T=J(u(m)∘s)∘b_T=J(s)∘J(u(m))∘b_T=J(s)∘b_V∘I(m), using the relation u(m)∘s=t∘m′ and contravariance of J. That is, the composite I(T)→J(uT)→J(T′) followed by restriction to V′ equals restriction I(T)→I(V) followed by I(V)→J(uV)→J(V′). These maps commute with differentials because b is a chain map and the differentials of J are sheaf maps, natural in the object. This is the pair-functoriality asserted in Milne, Section 9, Theorem 9.4, written degreewise.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Section 9, Theorem 9.4, pp. 65-67 (naturality of pair maps)"
+   }
+  },
+  {
+   "text": "The commutative square in Step 1 sends the kernel A_m(I)=ker(I(T)→I(V)) into A_m′(J)=ker(J(T′)→J(V′)). The universal property of a kernel gives a unique map A_m(I)→A_m′(J) whose composite with the kernel inclusion is the T-component map. Together with the T- and V-component maps this is a morphism of the three-term diagrams D_m(I)→D_m′(J); compatibility with both structure arrows is exactly the commutative square already checked. This is a direct degreewise argument in the abelian categories of abelian groups.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Section 9, Theorem 9.4, pp. 65-67 (restriction-kernel map)"
+   }
+  },
+  {
+   "text": "Let c:I→RJ be the degreewise adjoint of the degree -1 map z. Applying the same evaluation and restriction composites to h-h′=d_Jz+z d_{LI} and using functoriality of differentials gives b-b′=d_{RJ}c+c d_I, and the corresponding equality after evaluation at T and V′. Restricting this equality to kernels gives a degree -1 homotopy between the two kernel-component maps; the T- and V-components are homotopies as well, and the structure squares commute with them. Hence all three diagram maps are homotopic and induce identical maps on cohomology.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Section 9, Theorem 9.4, pp. 65-67, with the chain-level homotopy refinement stated here"
+   }
+  },
+  {
+   "text": "A bounded-below complex of injective objects is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. Therefore the target J is K-injective, and [lem-weil-pbc-kinjective-hom-derived] identifies morphisms Q(LI)→QJ with homotopy classes of chain maps LI→J. It supplies a representative h for every derived morphism a and says that two such representatives differ by a chain homotopy. Since L is additive and preserves kernels and cokernels, it is exact and the complexes LI remain bounded below, so the stated hypotheses apply.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 070I (lemma-K-injective), together with the Mathlib K-injective comparison used by the existing leaf nodes"
+   }
+  },
+  {
+   "text": "Apply Steps 1--3 to any representative h of a; by Step 3 changing h within its homotopy class does not change any of the three cohomology maps. Composition: for chain maps g:I″→I on 𝒞 and g′:J→J″ on 𝒟, naturality of the adjunction in each variable gives that the adjoint of g′∘h∘L(g) is R(g′)∘b∘g, so its T-component is J″(t)∘g′_{uT}∘b_T∘g_T=g′_{T′}∘J(t)∘b_T∘g_T (naturality of g′ at t), and likewise at V. Hence the diagram map of g′∘h∘L(g) is the composite D_{m′}(g′)∘(diagram map of h)∘D_m(g), where D_m(g), D_{m′}(g′) are the diagram maps of the identity adjunction with t,s identities (Steps 1--2 for u=id). Representatives: if I″ is another bounded-below injective representative and φ:QI″≅QI the given identification, by [lem-weil-pbc-bounded-below-injectives-kinjective] and [lem-weil-pbc-kinjective-hom-derived] φ is Q(g) for a chain map g:I″→I, unique up to homotopy, and g is a homotopy equivalence with homotopy inverse ḡ. Since L is additive, L(g) is a homotopy equivalence (L carries homotopies d z+z d to homotopies), so Q(Lg) is the induced identification Q(LI″)≅Q(LI) and a″=a∘Q(Lg) is represented by h∘L(g). By the composition identity its diagram map is (map of h)∘D_m(g), and by Step 3 applied to g∘ḡ≃id, ḡ∘g≃id, H(D_m(g)) is an isomorphism with inverse H(D_m(ḡ)), the canonical identification of the three cohomology groups. Similarly for J″ with g′:J→J″ representing the identification, a″=Q(g′)∘a represented by g′∘h, whose diagram map is D_{m′}(g′)∘(map of h). Thus after transport along these canonical isomorphisms the cohomology maps agree, and they depend only on a.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 070I (homotopy equivalence of quasi-isomorphisms between K-injectives), and literature/milne-lectures-on-etale-cohomology_LEC.pdf Section 9, Theorem 9.4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Section 9, Theorem 9.4, pp. 65-67; chain-level refinement written from the adjunction and kernel definitions"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,10 +131,38 @@
    "results": "{\"t\": \"2026-10-17T08:36:06Z\", \"tool\": \"leanfinder\", \"query\": \"For an exact sheaf inverse image, a derived morphism induces canonical composable maps on global sections and kernels of restriction to a subobject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.Sheaf.ΓRes_map\", \"CategoryTheory.Sheaf.ΓRes_map_assoc\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\"], \"digest\": \"fdc5ba4f12f6a8c1\"}; Read Injective/Resolution.lean:160-206, Sites/GlobalSections.lean:95-170, Sites/MayerVietorisSquare.lean:225-266. These give ordinary resolution comparison, section restriction, or free-sheaf Mayer-Vietoris exactness, not adjoint maps on restriction kernels and their simultaneous homotopies/composition.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoint chain maps between injective sheaf resolutions induce homotopy independent functorial maps on kernels of restriction to an open subobject",
+   "results": "CategoryTheory.InjectiveResolution.descHomotopy and related injective-resolution homotopy declarations; none states adjoint maps on restriction kernels.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.kernel.map, CategoryTheory.InjectiveResolution.descHomotopy",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*restriction|adjoint.*chain map [CategoryTheory]",
+   "results": "0 hits in Mathlib CategoryTheory.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial derived maps of kernels of restriction of sheaf sections under a morphism of site pairs",
+   "results": "CategoryTheory.Sheaf.ΓRes, CategoryTheory.Limits.kernel.map and related generic declarations; none states the full item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-with-support-exactness",
@@ -92,5 +179,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-support-pair-chain-coherence",
+  "worker": "stage1",
+  "summary": "Audited the imported statement against its Milne Section 9 source and split its proof into the explicit degreewise adjunction/evaluation map, kernel universal-property, homotopy, K-injective representative, and representative-independence steps. No new nodes were needed: the only non-elementary inputs are the existing Mathlib leaves for bounded-below injectives and derived morphisms into K-injectives.",
+  "blueprint": "Realizes the parent thm-pur-with-support-exactness proof Step 7 sentence that invokes chain-coherence: its evaluation maps, support-kernel map, homotopy invariance, and independence of bounded-below injective representatives. The chain-level details are the agent-formulated refinement recorded in the item's source place."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-2b8cd1e81",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-2b8cd1e81 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement (unchanged) and all 5 steps. I also read the parent thm-pur-with-support-exactness (Steps 7, 8 and 12 use the item) and the sibling lem-pur-support-pair-composition; there is no cycle. I checked the statement of every cited node: the two Mathlib leaves bounded-below-injectives-kinjective and kinjective-hom-derived, plus def-weil-pbc-sites-and-cohomology, def-weil-abstract-derived-category, def-sp-injective-resolutions and def-sp-left-exact-additive. Sources: Milne LEC Theorem 9.4, pp. 65-67, only asserts that the sequence is functorial in the pair, so proof_origin=agent is correct. Stacks derived.tex lemma-K-injective (070I) gives Hom_K = Hom_D into a K-injective complex. Steps 2-4 are correct; Steps 1 and 5 needed repair. Step 1 credited the square to naturality of the adjunction bijection. It actually comes from naturality of the sheaf map b at m together with u(m)s=tm'. I wrote out J(m')J(t)b_T=J(s)J(u(m))b_T=J(s)b_V I(m). Step 5 hid the composition identity behind 'agree after transport' (delivery error E5), and it claimed exactness of L where only additivity is used. I replaced it with the explicit composition identity: the adjoint of g'∘h∘L(g) is R(g')∘b∘g. The new text also lifts the identification to a homotopy equivalence g using the two leaves, uses that L(g) is a homotopy equivalence because L is additive, and writes out the transported representatives h∘Lg and g'∘h. The uses lists and proof_deps did not change. Edge cases checked: V=T, V'=T', the identity adjunction, z=0 and zero complexes. There are no new nodes and no duplicates (rg for restriction-kernel and adjoint candidates). The only proof dependencies are Mathlib leaves, so the route is not left and no tool_uses were accepted. No SGA source is cited, the statement is unchanged and nothing is weakened.; 1 file(s) fixed by the reviewer"
  }
 }

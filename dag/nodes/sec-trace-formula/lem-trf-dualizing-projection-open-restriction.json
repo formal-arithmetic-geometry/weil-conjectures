@@ -2,7 +2,7 @@
  "id": "lem-trf-dualizing-projection-open-restriction",
  "kind": "statement",
  "title": "Open restriction of the dualizing product-square exchange",
- "statement": "Fix the finite coefficient conventions [def-trf-coefficient-conventions], $s=\\operatorname{Spec}k$ and $A=A_{E,n}$, and let $j:X\\hookrightarrow Y$ be an open immersion of separated finite-type $k$-schemes [def-weil-open-immersion, def-weil-scheme-morphism-properties]. Use the constructible exceptional adjunctions of [def-trf-admissibility]. For $Z=X,Y$, let $a_Z:Z\\to s$ be the structure map, let $p_{1,Z},p_{2,Z}:Z\\times_s Z\\to Z$ be the projections, and put $\\omega_Z=a_Z^!A_s$ [def-trf-dualizing-complex]. Let\n$$B_{Z,M}=(\\operatorname{Ex}_{!,a_Z,a_Z}(M))^{-1}:Rp_{1,Z!}p_{2,Z}^*M\\xrightarrow{\\sim}a_Z^*Ra_{Z!}M$$\nuse the normalized compact-support exchange of [def-exchange-projection], invertible on these domains by [prop-functor-package](4). Define $\\chi_Z:p_{2,Z}^*\\omega_Z\\to p_{1,Z}^!A_Z$ to be the $Rp_{1,Z!}\\dashv p_{1,Z}^!$ transpose of\n$$a_Z^*(\\varepsilon_{a_Z,A_s}^!)\\circ B_{Z,\\omega_Z}.$$\nWrite $J=j\\times_s j$. Identify $j^!$ with $j^*$ and $J^!$ with $J^*$ as right adjoints of extension by zero, using the open adjunctions of [prop-exc-open-adjoint]. These open identifications and exceptional and pullback composition give\n$$J^*p_{2,Y}^*\\omega_Y\\cong p_{2,X}^*\\omega_X,\\qquad J^*p_{1,Y}^!A_Y\\cong p_{1,X}^!A_X,$$\nwhere $j^*\\omega_Y\\cong j^!a_Y^!A_s\\cong\\omega_X$. Under these specific identifications, $J^*\\chi_Y=\\chi_X$. No properness of $X$ or $Y$ is assumed.",
+ "statement": "Fix the finite coefficient conventions [def-trf-coefficient-conventions], $s=\\operatorname{Spec}k$ and $A=A_{E,n}$, and let $j:X\\hookrightarrow Y$ be an open immersion of separated finite-type $k$-schemes [def-weil-open-immersion, def-weil-scheme-morphism-properties]. Use the constructible exceptional adjunctions of [def-trf-admissibility]. For $Z=X,Y$, let $a_Z:Z\\to s$ be the structure map, let $p_{1,Z},p_{2,Z}:Z\\times_s Z\\to Z$ be the projections, and put $\\omega_Z=a_Z^!A_s\\in D^b_{ctf}(Z,A)$, the dualizing object for every separated finite-type $Z$ of [def-fix-six-functor-datum](5); the constructible exceptional functor preserves this category by [def-trf-admissibility]. For every $M\\in D^b_{ctf}(Z,A)$ [def-weil-finite-tor-amplitude], use an etale-origin representative as supplied by [lem-sf-proetale-constructible-origin], and let\n$$B_{Z,M}=(\\operatorname{Ex}_{!,a_Z,a_Z}(M))^{-1}:Rp_{1,Z!}p_{2,Z}^*M\\xrightarrow{\\sim}a_Z^*Ra_{Z!}M$$\nuse the normalized compact-support exchange of [def-exchange-projection], invertible on these bounded finite-Tor constructible inputs by [prop-functor-package](4), or [thm-cbc-finite-level-proetale] on their etale-origin representatives. In particular $M=\\omega_Z$ is allowed. All the displayed maps are in the finite-coefficient constructible categories; no unrestricted ambient exceptional adjunction is asserted. Define $\\chi_Z:p_{2,Z}^*\\omega_Z\\to p_{1,Z}^!A_Z$ to be the $Rp_{1,Z!}\\dashv p_{1,Z}^!$ transpose of\n$$a_Z^*(\\varepsilon_{a_Z,A_s}^!)\\circ B_{Z,\\omega_Z}.$$\nWrite $J=j\\times_s j$. Identify $j^!$ with $j^*$ and $J^!$ with $J^*$ as right adjoints of extension by zero, using the open adjunctions of [prop-exc-open-adjoint]. These open identifications and exceptional and pullback composition give\n$$J^*p_{2,Y}^*\\omega_Y\\cong p_{2,X}^*\\omega_X,\\qquad J^*p_{1,Y}^!A_Y\\cong p_{1,X}^!A_X,$$\nwhere $j^*\\omega_Y\\cong j^!a_Y^!A_s\\cong\\omega_X$. Under these specific identifications, $J^*\\chi_Y=\\chi_X$. No properness of $X$ or $Y$ is assumed.",
  "source": {
   "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
   "place": "Lemma 4.2.4(f), first sentence of the proof (locality of the product-square dualizing exchange), with projection indices interchanged; explicit finite-coefficient open-restriction formulation"
@@ -12,14 +12,132 @@
   "def-weil-open-immersion",
   "def-weil-scheme-morphism-properties",
   "def-trf-admissibility",
-  "def-trf-dualizing-complex",
   "def-exchange-projection",
   "prop-functor-package",
-  "prop-exc-open-adjoint"
+  "prop-exc-open-adjoint",
+  "def-fix-six-functor-datum",
+  "def-weil-finite-tor-amplitude",
+  "lem-sf-proetale-constructible-origin",
+  "thm-cbc-finite-level-proetale"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use $\\omega_Z$ for all separated finite-type $Z$ as defined in [def-fix-six-functor-datum](5), not a definition requiring properness. The constant unit $A_s$ has Tor amplitude $[0,0]$; the specified exceptional functors of [def-trf-admissibility] take it to $\\omega_Z\\in D^b_{ctf}(Z,A)$. Pullbacks and compact-support images stay in the indicated finite-Tor constructible domains by [prop-functor-package] and [def-trf-admissibility]. Bounded constructible inputs have etale-origin representatives by [lem-sf-proetale-constructible-origin], so clause (4) of the package applies to $B_{Z,M}$ for every stated $M$, including $\\omega_Z$. The adjunction of [prop-exc-open-adjoint] identifies $j^!$ with $j^*$ and every other open exceptional pullback with restriction. Exceptional composition therefore gives $j^*\\omega_Y\\simeq\\omega_X$ and the endpoint identifications in the statement. The product corners are finite type over the Noetherian field spectrum, hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Every open in a Noetherian space is quasi-compact (the finite unions from a cover have a maximal member), so the corners are qcqs. The separated finite-type projections admit compactifications by [thm-nagata-compactification].",
+   "uses": [
+    "def-fix-six-functor-datum",
+    "def-trf-admissibility",
+    "prop-functor-package",
+    "lem-sf-proetale-constructible-origin",
+    "prop-exc-open-adjoint",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.2.4(f), locality sentence; constructible finite-coefficient typing and open-composition identifications"
+   }
+  },
+  {
+   "text": "Factor $J=u v$ through $W=X\\times_sY$, where $u=j\\times1_Y:W\\hookrightarrow Y\\times_sY$, $v=1_X\\times j:X\\times_sX\\hookrightarrow W$, and write $r:W\\to X$, $q:W\\to Y$. The square $(u,r;p_{1,Y},j)$ is Cartesian; the square with top $J$ and bottom $j$ is generally not. Put $e_Y=\\varepsilon_{a_Y,A_s}^!$ and $t_Y=a_Y^*e_Y\\circ B_{Y,\\omega_Y}$. Let $\\delta_M:j^*Rp_{1,Y!}p_{2,Y}^*M\\xrightarrow{\\sim}Rr_!q^*M$ be compact-support exchange. The inverse exchange for the rectangle is\n$$B^r_M:Rr_!q^*M\\xrightarrow{\\sim}a_X^*Ra_{Y!}M.$$\nApply the horizontal pasting equation of [fix-lem-exchanges](2) to base change of $a_Y$ first along $a_Y$ and then along $j$. With the maps normalized by [def-exchange-projection], it gives\n$$B^r_M=j^*B_{Y,M}\\circ\\delta_M^{-1}.$$\nBoth sides are maps over $X$. Invertibility is [prop-functor-package](4); nothing here asserts $B^r_{\\omega_Y}=B_{X,\\omega_X}$.",
+   "uses": [
+    "fix-lem-exchanges",
+    "def-exchange-projection",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.2.4(f), locality reduction before (4.7); first product factor restricted"
+   }
+  },
+  {
+   "text": "Set $\\alpha=u^*\\chi_Y:q^*\\omega_Y\\to r^!A_X$, using exceptional composition for $p_{1,Y}u=jr$. Its $Rr_!\\dashv r^!$ adjunct is\n$$t_r=j^*t_Y\\circ\\delta_{\\omega_Y}^{-1}=a_X^*e_Y\\circ B^r_{\\omega_Y}.$$\nTo check the actual comparison, use the Hom bijections\n$$\\operatorname{Hom}_W(H,u^*p_{1,Y}^!A_Y)\\cong\\operatorname{Hom}_{Y\\times Y}(u_!H,p_{1,Y}^!A_Y)\\cong\\operatorname{Hom}_Y(Rp_{1,Y!}u_!H,A_Y)\\cong\\operatorname{Hom}_Y(j_!Rr_!H,A_Y)\\cong\\operatorname{Hom}_X(Rr_!H,j^*A_Y).$$\nTake $H=q^*\\omega_Y$. The first adjunct of $u^*\\chi_Y$ is $\\chi_Y\\circ\\varepsilon_u$ by naturality of the open counit. Apply [lem-amb-shriek-open-exchange-adjoint] on etale representatives with its $f=p_{1,Y}$, base open $j$ and source open $u$: it states exactly that the adjunct of $Rp_{1,Y!}\\varepsilon_u$, after compact-support composition, is $\\delta^{-1}$. Its Noetherian and compactification hypotheses were verified in Step 1. The equation of [lem-amb-compact-support-site-comparison-open] transports this specified inverse exchange and the open evaluation counits to our pro-etale representatives. Consequently the displayed Hom chain sends $\\alpha$ to $j^*t_Y\\circ\\delta^{-1}$. These are the composite Hom bijections of [def-weil-pbc-composite-adjunction], with the exceptional comparison normalized as in [def-trf-admissibility].",
+   "uses": [
+    "def-trf-admissibility",
+    "prop-exc-open-adjoint",
+    "lem-amb-shriek-open-exchange-adjoint",
+    "lem-amb-compact-support-site-comparison-open",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.2.4(f), exceptional-adjoint argument of diagram (4.7); explicit open-adjunction calculation"
+   }
+  },
+  {
+   "text": "Put $N=j^*\\omega_Y\\simeq\\omega_X$ and $c=\\varepsilon_{j,\\omega_Y}:j_!N\\to\\omega_Y$. The open base-change isomorphism of [lem-sf-open-tensor-normalization] for the Cartesian square $(v,p_{2,X};q,j)$ is\n$$\\beta_N:q^*j_!N\\xrightarrow{\\sim}v_!p_{2,X}^*N.$$\nIt has its specified open-unit normalization. Consequently\n$$q^*c\\circ\\beta_N^{-1}=\\varepsilon_{v,q^*\\omega_Y}:v_!v^*q^*\\omega_Y\\to q^*\\omega_Y.$$\nIndeed, transpose both sides by $v_!\\dashv v^*$: the first becomes $v^*q^*\\varepsilon_j$ composed with the pulled-back open unit, hence the identity by the triangle identity; the second is the identity by definition of the counit. The adjunction is [prop-exc-open-adjoint]. Since $j_!N$ is finite-Tor constructible by [lem-trf-open-ctf], all subsequent occurrences of $B^r_{j_!N}$ lie in the domain fixed in Step 1.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "prop-exc-open-adjoint",
+    "lem-trf-open-ctf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.2.4(f), locality sentence; second product factor, open base change and its counit normalization"
+   }
+  },
+  {
+   "text": "Use naturality and vertical pasting in [fix-lem-exchanges](1),(2) for $a_X=a_Yj$. Under $Ra_{X!}\\simeq Ra_{Y!}j_!$ and $Rp_{1,X!}\\simeq Rr_!v_!$, their inverse-exchange equations are\n$$B^r_{\\omega_Y}\\circ Rr_!q^*c=a_X^*Ra_{Y!}c\\circ B^r_{j_!N},$$\n$$B^r_{j_!N}\\circ Rr_!(\\beta_N^{-1})=B_{X,N}.$$\nThe first is naturality evaluated at the particular morphism $c:j_!N\\to\\omega_Y$. The second is the inverse of the vertical pasting equation for the square of $a_Y$ over $a_X$, with the square of $j$ over $q$ above it: the composite square is $a_X$ over itself. Its open-exchange component is precisely $\\beta_N$ by [def-exchange-projection] and [lem-sf-open-tensor-normalization]. Substituting the equality from Step 4 gives the well-typed identity\n$$B^r_{\\omega_Y}\\circ Rr_!\\varepsilon_{v,q^*\\omega_Y}=a_X^*Ra_{Y!}c\\circ B_{X,N}.$$\nIt is an equality of maps $Rp_{1,X!}p_{2,X}^*N\\to a_X^*Ra_{Y!}\\omega_Y$ on $X$, with the displayed compact-support composition comparisons inserted.",
+   "uses": [
+    "fix-lem-exchanges",
+    "def-exchange-projection",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.2.4(f), diagram (4.7), inverse compact-support exchange and the pasted square"
+   }
+  },
+  {
+   "text": "The structural counits obey\n$$e_X=e_Y\\circ Ra_{Y!}c:Ra_{X!}\\omega_X\\simeq Ra_{Y!}j_!N\\to A_s.$$\nThis is the composite-counit formula $\\varepsilon_2\\circ H\\varepsilon_1$ of [def-weil-pbc-composite-adjunction], with $F=j_!$, $G=j^*$, $H=Ra_{Y!}$, $I=a_Y^!$, evaluated at $A_s$. The exceptional composition in [def-trf-admissibility] is specified as the conjugate of compact-support composition, so this is the actual $a_X$ counit under $N\\simeq\\omega_X$, not a counit chosen afterwards. This does not identify a pullback of $e_Y$ with $e_X$: both $e_Y$ and $e_X$ live over $s$.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-trf-admissibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.2.4(f), right part of diagram (4.7); structural exceptional counits"
+   }
+  },
+  {
+   "text": "The map $v^*\\alpha=J^*\\chi_Y$ has source $p_{2,X}^*N$ and target $p_{1,X}^!A_X$. Under the composite adjunction $Rr_!v_!\\dashv v^*r^!$ its adjunct is\n$$t_r\\circ Rr_!\\varepsilon_{v,q^*\\omega_Y}.$$\nThis follows immediately by applying the composite Hom bijection of [def-weil-pbc-composite-adjunction] first to the open restriction $v^*\\alpha$ and then to $\\alpha$: the first adjunct is $\\alpha\\circ\\varepsilon_v$. By Steps 3, 5 and 6 the displayed composite equals\n$$a_X^*e_Y\\circ a_X^*Ra_{Y!}c\\circ B_{X,N}=a_X^*e_X\\circ B_{X,\\omega_X}.$$\nThe latter is the defining adjunct of $\\chi_X$. The adjunction of [def-trf-admissibility] is a Hom bijection, so its injectivity proves $J^*\\chi_Y=\\chi_X$ under exactly the open and composition identifications in the statement.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-trf-admissibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 4.2.4(f), conclusion by exceptional adjointness after diagram (4.7)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-fix-six-functor-datum",
+  "def-trf-admissibility",
+  "def-weil-pbc-composite-adjunction",
+  "fix-lem-exchanges",
+  "lem-amb-compact-support-site-comparison-open",
+  "lem-amb-shriek-open-exchange-adjoint",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-proetale-constructible-origin",
+  "lem-trf-open-ctf",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "prop-exc-open-adjoint",
+  "prop-functor-package",
+  "thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Lemma 4.2.4(f), locality sentence and diagram (4.7), with the omitted open-locality calculation expanded through X times Y and the projection indices interchanged"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,7 +176,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-cohomological-evaluation-calculus",
@@ -78,5 +196,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-dualizing-projection-open-restriction",
+  "worker": "stage1",
+  "summary": "Repair of return 8f2a73ab89: replaced the improper proper-only dualizing citation by the general existing operation datum, quantified the finite-Tor constructible input of B with etale origin, replaced the ill-typed J*B and false Cartesian square by a two-open factorization through X times Y, and wrote the exchange-pasting and composite-counit identities that compare actual adjuncts. No new nodes.",
+  "blueprint": "The steps realize the imported blueprint extraction from Lemma 4.2.4(f): locality of the product-square exchange and the adjointness conclusion after open restriction.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic finite-coefficient etale/proetale constructible equivalence supplies the witnessed base-change domain; no trace-formula node supplies this site comparison."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic open base-change normalization identifies the actual exchange map and its open counit; the trace-formula unit does not construct this map."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Generic formula for composite Hom bijections and counits fixes the two adjunction computations; this is categorical notation, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-amb-shriek-open-exchange-adjoint",
+    "why": "Generic etale compact-support open-base-change adjunct identity; fixes the actual comparison in the rectangular first restriction, which is not constructed in the trace-formula unit."
+   },
+   {
+    "node": "lem-amb-compact-support-site-comparison-open",
+    "why": "Generic etale/proetale transport of that inverse exchange, preserving open evaluation counits, on witnessed bounded-below inputs."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian hypothesis check for applying the etale open-exchange adjunct lemma."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic compactification existence for the separated finite-type projections in the open-exchange adjunct lemma."
+   },
+   {
+    "node": "lem-trf-open-ctf",
+    "why": "Generic finite-coefficient preservation of bounded constructibility and finite Tor amplitude by open extension, for the intermediate input j_!N; the trace-formula unit does not construct it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-open-tensor-normalization",
+  "def-weil-pbc-composite-adjunction",
+  "lem-amb-shriek-open-exchange-adjoint",
+  "lem-amb-compact-support-site-comparison-open",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-nagata-compactification",
+  "lem-trf-open-ctf"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-91d2a1d2b",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-91d2a1d2b (reviewer sub-agent of L); spot-checked: I read in full the item, its seven steps, every cited statement and Varshavsky Lemma 4.2.4(f) (p.34: 'The assertion is local', diagram (4.7)). The delivery has no new nodes and I made no changes. Statement: replacing the proper-only def-trf-dualizing-complex with def-fix-six-functor-datum(5), and quantifying M in D^b_ctf, are recorded in the report. They add no hypothesis, the conclusion is unchanged, and both citers are unaffected. The new factorisation J=u∘v through W=X×Y is right: I checked that both squares are Cartesian, and the two-point example confirms the old square was not. Each step checked by hand. Step 2: horizontal pasting gives B^r=j^*B_Y∘δ^{-1}. Step 3: lem-amb-shriek-open-exchange-adjoint with f=p1Y, the base open j and the source open u gives the adjunct j^*t_Y∘C^{-1}, and the Hom chain is the conjugate of compact-support composition. Step 4: the triangle identity gives q^*c∘β^{-1}=ε_v. Step 5: vertical pasting with the composite square a_X over a_X (legs rv=p1X and p2X) gives B_X,N=B^r_{j_!N}∘Rr_!β^{-1}. Step 6: the composite counit gives e_X=e_Y∘Ra_Y!c. Step 7: by adjunction injectivity, J^*χ_Y=χ_X. Hypotheses: Noetherian corners via the Mathlib leaf; compactifiability via Nagata; D^+ étale-origin witnesses for transport and invertibility; j_!N in D^b_ctf via lem-trf-open-ctf. One detail is left implicit: that the composition comparisons are compatible with the étale→pro-étale transport. That comes from the transported package, so I do not count it as a gap. The graph is acyclic and every cited id exists and is unmerged. The dualizing-exchange duplicate search over dag/nodes and blueprint_refs found nothing. I accept all eight declared tool_uses; only lem-sf-open-tensor-normalization and lem-trf-open-ctf are off-route, and both are generic tools. No SGA source is used. Details are in review.md."
  }
 }

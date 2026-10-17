@@ -10,11 +10,75 @@
   "lem-coef-composable-bimodule-operad-segal",
   "lem-coef-infinity-pointwise-cocartesian-transport"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathsf{BM}$ for the planar operad with colours $v,m,t$ and unique operations $v^r\\to v$, $t^s\\to t$, $v^rmt^s\\to m$ ($r,s\\geq0$). The coherent left action of $\\mathcal V$ on $\\mathcal M$ is a coherent functor on $N(\\mathsf{BM}^\\otimes)$ whose value at a list is the product of the colour fibres $\\mathcal V,\\mathcal M,*$ and whose value at a block operation is the iterated tensor/action, with the assumed associativity and unit coherences as its higher simplices. Apply [lem-coef-cocartesian-straightening] (in an enlarged universe) to obtain the action-valued target $q:\\mathcal E^\\otimes\\to N(\\mathsf{BM}^\\otimes)$: a cocartesian fibration whose fibre over a list is that product and whose cocartesian transport along an operator is the corresponding block tensor/action functor. By the mapping-space pullback square of that node, maps over an operator $\\alpha$ from $x$ to $y$ are maps $\\alpha_!x\\to y$ in a product fibre, hence a product over the output blocks; with the product decompositions of [def-coef-monoidal-infinity-category] this makes $\\mathcal E^\\otimes$ (over $N(\\Delta^{\\mathrm{op}})$ through $N(\\mathsf{BM}^\\otimes)$) a nonsymmetric infinity operad with inert transports the coordinate projections, and its restriction over the lists in $v$ is $\\mathcal V^\\otimes$. Let $g:\\mathsf{Chain}_2^\\otimes\\to\\mathsf{BM}^\\otimes$ send $a_0,a_1,p$ to $v$, $q$ to $m$ and $a_2$ to $t$; every allowed block has an allowed output type. The map $\\mathsf{BM}_{01}\\to\\mathsf{Ass}_1$ sending $a_0,p,a_1$ to $a_1$ and each operation to the unique operation of the same arity respects composition and identities because $\\mathsf{Ass}_1$ has one operation of each arity, and it sends inert operators to inert operators. Composing the algebra $A:N(\\mathsf{Ass}_1^\\otimes)\\to\\mathcal V^\\otimes$ with it gives an inert-preserving lift over $g|_{\\mathsf{BM}_{01}}$ with values $(A,A,A)$: the regular bimodule, both actions being multiplication. The coherent left $A$-module $Q$ gives the lift over $g|_{\\mathsf{BM}_{12}}$ with values $(A,Q,*)$, the terminal right factor being the trivial one. Both restrict to $A$ on $\\mathsf{Ass}_1$, since $\\mathsf{Ass}_1\\to\\mathsf{BM}_{01}\\to\\mathsf{Ass}_1$ is the identity. The relative restriction equivalence of [lem-coef-composable-bimodule-operad-segal] for $v=q$ and this $g$ (essential surjectivity) supplies an inert-preserving lift $F:N(\\mathsf{Chain}_2^\\otimes)\\to\\mathcal E^\\otimes$ with a coherent equivalence $qF\\simeq g$ and values $A,A,A,Q,*$ on $a_0,a_1,p,q,a_2$.",
+   "uses": [
+    "lem-coef-composable-bimodule-operad-segal",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.4.2.7 and Example 4.4.2.12; the relative restriction equivalence for Chain_2"
+   }
+  },
+  {
+   "text": "Let $W$ be the subcategory of $\\mathsf{Chain}_2^\\otimes$ on the words $a_1^kq$ ($k\\geq0$) with the operators over interval maps $f:[m]\\to[n]$ satisfying $f(0)=0$ and $f(m)=n$; an output $a_1$ then receives a block of $a_1$'s (possibly empty) and the last output receives a block $a_1^rq\\to q$. These operators contain identities and are closed under composition (composites of endpoint-preserving interval maps are endpoint-preserving), so $W$ is a category, small and countable. For each word the unique operation $a_1^kq\\to q$ of $\\mathsf{Chain}_2$ (total contraction) gives an arrow $g(a_1^kq)=v^km\\to m$ in $\\mathsf{BM}^\\otimes$; these form a natural transformation $\\beta:g|_W\\to\\operatorname{const}(m)$, because both composite block substitutions are the unique operation of $\\mathsf{BM}$ of that type. Compose the equivalence $qF|_W\\simeq g|_W$ of step 1 with $\\beta$ to get $\\gamma:qF|_W\\to\\operatorname{const}(m)$. Now apply [lem-coef-infinity-pointwise-cocartesian-transport] to $q$ (an inner fibration between quasicategories with all cocartesian lifts, by step 1 and the intrinsic criterion of [lem-coef-cocartesian-straightening]), $K=N(W)$ in the conventions of [def-cbc-enhanced-diagrams-cones], $F|_W$ and $\\gamma$. Since $\\gamma$ ends at a constant diagram, its fibre $\\mathcal F_G$ is $\\operatorname{Fun}(N(W),\\mathcal E_m)=\\operatorname{Fun}(N(W),\\mathcal M)$; the transported diagram is $X:N(W)\\to\\mathcal M$, with cocartesian vertex components, so $X(a_1^kq)$ is the transport of $F(a_1^kq)$ along total contraction. No colimit is taken.",
+   "uses": [
+    "lem-coef-composable-bimodule-operad-segal",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.4.2.7, restriction to the retained-middle-word category and total contraction"
+   }
+  },
+  {
+   "text": "Since $F$ is inert-preserving, its inert edges from $F(a_1^kq)$ to its letters are cocartesian over the coordinate projections; by the product decomposition of the fibre of $\\mathcal E^\\otimes$ over $v^km$ (step 1, Segal decomposition of [def-coef-monoidal-infinity-category]) the object $F(a_1^kq)$ is the tuple $(A,\\ldots,A,U_AQ)$ in $\\mathcal V^k\\times\\mathcal M$, the last entry being the value of $F$ at $q$, whose underlying object is $U_AQ$. By [lem-coef-cocartesian-straightening] transport along the total contraction $v^km\\to m$ is the iterated action functor $(v_1,\\ldots,v_k,x)\\mapsto v_1\\otimes\\cdots\\otimes v_k\\otimes x$, any parenthesization being related to any other by the specified tensor and action coherences. Hence $X(a_1^kq)\\simeq A^{\\otimes k}\\otimes U_AQ$; for $k=0$ it is $U_AQ$.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.2.2.6 (ordered tensor convention) and Construction 4.4.2.7 (word evaluation)"
+   }
+  },
+  {
+   "text": "Let $f=h:[k+2]\\to[k+1]$, $h(0)=h(1)=0$, $h(j)=j-1$ for $2\\leq j\\leq k+2$. It is monotone with $h(0)=0$ and $h(k+2)=k+1$, so it is an arrow $\\phi:a_1^kq\\to a_1^{k+1}q$ of $W$. Its output blocks are: for $j=1$, inputs $h(0)+1,\\ldots,h(1)$, which is empty, so the operation is the nullary $a_1$ operation; for $2\\leq j\\leq k+1$, the single input $j-1$, an $a_1$, with the identity; for $j=k+2$, the single input $k+1=q$, with the identity. (For $k=0$: $q\\to a_1q$ with blocks $\\emptyset\\to a_1$ and $q\\to q$.) Factor $F(\\phi)$ as a cocartesian edge $F(a_1^kq)\\to g(\\phi)_!F(a_1^kq)$ over $g(\\phi)$ followed by a map $\\psi$ in the fibre over $v^{k+1}m$. By the product decomposition of step 1, $g(\\phi)_!F(a_1^kq)=(\\mathbf1,A,\\ldots,A,U_AQ)$, the nullary block transporting to the tensor unit as in [def-coef-monoidal-infinity-category], and $\\psi$ has components the values of $F$ on the single block operations: on the nullary $a_1$ operation the unit $\\eta_A:\\mathbf1\\to A$ of the algebra $A$ (this is what the unit of the algebra $A$ is in the operadic model), and identities elsewhere. By the composition clause of [lem-coef-infinity-pointwise-cocartesian-transport], the transport of $F(a_1^kq)$ along total contraction agrees with the transport of $g(\\phi)_!F(a_1^kq)$ along total contraction, compatibly with the precomposition maps; so $X(\\phi)$ is the transport of $\\psi$, i.e. $\\eta_A\\otimes\\operatorname{id}_{A^{\\otimes k}\\otimes U_AQ}$ precomposed with the unit equivalence $A^{\\otimes k}\\otimes U_AQ\\simeq\\mathbf1\\otimes A^{\\otimes k}\\otimes U_AQ$ of step 3. This map lives in $\\mathcal M$; $W$ has no prefix colour, so no external left action is involved, and no linearity or colimit is used or asserted.",
+   "uses": [
+    "lem-coef-composable-bimodule-operad-segal",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.2.2.6 (ordered operator convention) and Example 4.4.2.12 (unit-valued action operator)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-composable-bimodule-operad-segal",
+  "lem-coef-infinity-pointwise-cocartesian-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Supporting coherent-bar foundation for the displayed adjunction calculation; the regular-word specialization is written out here from Higher Algebra Constructions 4.2.2.6 and 4.4.2.7."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-two-sided-coherent-bar-construction",
@@ -148,5 +212,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-two-sided-bar-leading-unit-extension",
+  "worker": "stage1",
+  "summary": "Checked the exact statement against the four cited coherent-category nodes and the Higher Algebra route. No new node is needed: the regular lift, restriction/transport, Segal word evaluation, and leading-unit operator are four explicit steps using only those existing statements. The item remains a standalone coherent lemma with no colimit hypothesis or external-action linearity claim. Mathlib searches already recorded on the imported item found no match.",
+  "blueprint": "Second paragraph of prop-coef-integral-exceptional-adjoint.proof.md, the displayed coefficient-adjunction calculation and the sentence defining the adjunction maps; this split realizes its supporting regular-word evaluation, including the leading-unit operator, along the existing via chain."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NK-af8967596",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-af8967596 (reviewer sub-agent of L); spot-checked: The background search for Higher Algebra has now finished: there is no copy anywhere on this machine, so the HA places cited by the item could not be read. The item correctly records agent origin and a WANTED line for it. Otherwise the verdict is unchanged. I read the item, its 4 cited nodes, the parent lem-coef-two-sided-coherent-bar-construction, the sibling regular-word-identification node, the unit and the blueprint proof place in full. The delivery has no new nodes and no duplicates. Small cases check: at k=0, h=(0,0,1) gives eta tensor id; for general k, h keeps both endpoints. Fault 1 (C1/E1): the proof used the action-valued target E^otimes over N(BM^otimes) without citing it, so the cocartesian-lift and Segal hypotheses were unchecked. Repaired by citing lem-coef-cocartesian-straightening (same unit, no cycle). Fault 2 (E5): step 4 hid the evaluation behind 'consequently'. Repaired with a cocartesian/fibrewise factorization and the composition clause of the transport lemma. Step texts are now in TeX. Statement unchanged; there are no tool_uses. Corrected whole file: fixes/dag/nodes/sec-six-functors/lem-coef-two-sided-bar-leading-unit-extension.json.; 1 file(s) fixed by the reviewer"
  }
 }

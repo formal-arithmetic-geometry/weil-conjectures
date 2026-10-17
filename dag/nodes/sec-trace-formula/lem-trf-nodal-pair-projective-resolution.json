@@ -20,9 +20,95 @@
   "def-weil-pbc-scheme-reduction",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The projective morphism $f$ is proper by [lem-kun-projective-implies-proper], hence finite type by [def-weil-proper-morphism]. Composing with $Y\\to\\operatorname{Spec}F$ using [lem-sfb-finite-type-composition-base-change] shows that $X$ is finite type over $F$. The spectrum of a field is Noetherian (its only ideals are $0$ and the unit ideal); apply [lem-weil-pbc-finite-type-over-noetherian] first to $Y\\to\\operatorname{Spec}F$, then to $f$, to obtain that $Y$ and $X$ are Noetherian.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Preliminary finiteness/properness checks; Stacks 01WC, 01T3 and 01T6."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-snc-divisorial-log-chart] to $(Y,T)$. Its hypotheses are exactly the given smoothness, finite type, reduced Cartier condition and smooth codimension-$r$ intersections. It identifies the divisorial characteristic monoid with $\\mathbf N^r$ at an $r$-fold intersection and proves that $(Y,|T|)$ is log regular, including when $T$ is empty.",
+   "uses": [
+    "lem-trf-snc-divisorial-log-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, 1.4--1.5(i), pp. 69--70."
+   }
+  },
+  {
+   "text": "Put $B=|D|\\cup f^{-1}|T|$. Apply [lem-trf-nodal-log-regularity] with the Noetherian schemes of step 1 and the log regular base of step 2. Properness was checked in step 1; flatness, finite presentation, connected one-dimensional nodal geometric fibres, and smoothness off $T$ are the given hypotheses. The marked divisor is etale over $Y$ and lies in the relative smooth locus as required; finite etaleness is stronger than the etaleness used here. Therefore $B$ is nowhere dense and $(X,B)$ is log regular. This step does not assume that the two local branches of a node are globally separate.",
+   "uses": [
+    "lem-trf-nodal-log-regularity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, Proposition 1.9, pp. 70--71."
+   }
+  },
+  {
+   "text": "Use [lem-trf-log-regular-desingularization] for the integral finite-type $F$-scheme $X$ and its log regular boundary $B$. Obtain a proper $F$-morphism $p:X_1\\to X$, integral regular finite-type $X_1$, and the normal crossings Cartier divisor $B_1=(p^{-1}B)_{\\rm red}$. The map is an isomorphism over $U=X\\setminus B$, with dense inverse image of $U$. At this point the boundary is only normal crossings; its irreducible components may still have self-intersections.",
+   "uses": [
+    "lem-trf-log-regular-desingularization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.4.8--3.4.9 and 4.1.1; Expose VI, 1.7."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-normal-crossings-strictification] to $(X_1,B_1)$. Its hypotheses require regularity and normal crossings, both supplied in step 4, and finite type over the same algebraically closed field $F$. It yields a proper $q:\\widetilde X\\to X_1$, with $\\widetilde X$ integral and smooth over $F$, and $B_2=(q^{-1}B_1)_{\\rm red}$ strict normal crossings in the smooth-intersection sense stated in the item. The isomorphism over $X_1\\setminus|B_1|$ includes the inverse image of $U$.",
+   "uses": [
+    "lem-trf-normal-crossings-strictification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 4.1.2--4.1.8, pp. 117--118."
+   }
+  },
+  {
+   "text": "Set $r=p\\circ q$. It is proper by [lem-weil-pbc-proper-composition]. Both maps are isomorphisms over the nonempty dense open $U=X\\setminus B$ (nonemptiness follows from step 3 and the integrality of $X$); their composite is an isomorphism there. Its inverse image is a nonempty open of the integral scheme $\\widetilde X$, hence is dense, so this is birational in the required sense. Finally, inverse images of sets compose and reduction does not change a closed subset [def-weil-pbc-scheme-reduction], so $|q^{-1}B_1|=q^{-1}p^{-1}B=r^{-1}B$. The corresponding reduced closed subschemes are therefore equal, giving $(r^{-1}(|D|\\cup f^{-1}|T|))_{\\rm red}=B_2$, the strict normal crossings divisor of step 5.",
+   "uses": [
+    "lem-weil-pbc-proper-composition",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Conclusion by composition and equality of reduced closed subschemes with the same support."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-trf-snc-divisorial-log-chart",
+  "lem-trf-nodal-log-regularity",
+  "lem-trf-log-regular-desingularization",
+  "lem-trf-normal-crossings-strictification",
+  "lem-weil-pbc-proper-composition",
+  "def-weil-pbc-scheme-reduction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X, proof of Lemma 2.2, pp. 149--150; the nodal-pair modification is realized by VI 1.4--1.9, VIII 3.4.8--3.4.9 and VIII 4.1.1--4.1.8. These available proofs replace the unavailable Vidal reference for this step."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +140,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-plurinodal-alteration",
@@ -76,5 +162,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-nodal-pair-projective-resolution",
+  "worker": "stage1",
+  "summary": "Kept the full statement unchanged. Split the nodal-pair modification into divisorial log charts on the base, log regularity of the marked nodal curve, regular modification of a log regular pair, and strictification of its normal crossings boundary. Used the available ILO proofs rather than the unavailable Vidal source. Kept regular versus smooth and normal versus strict normal crossings distinct; no global branch separation was assumed. Created one definition and four statement-only geometric lemmas; the properness/finite-type/composition facts reuse existing nodes.",
+  "blueprint": "Realizes the nearby-duality alteration input in lem-trf-local-term-locality proof (1)--(2), through the plurinodal field-pair induction: Expose X proof of Lemma 2.2, the sentence successively applying the nodal-curve modification and the following smooth-field-pair remark.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic projective-implies-proper implication for the original nodal family; the unit has no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finiteness consequence to verify the Noetherian hypotheses of the nodal log regularity theorem; no unit-specific substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-2af2ddddb",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-2af2ddddb (reviewer sub-agent of L); spot-checked: I read the whole delivery against ILO Gabber VI 1.1-1.9 (including the proof of Prop 1.9), VIII 3.4.1-3.4.10, VIII 4.1-4.1.8 with Rem 4.2.2, X Lemma 2.2 (pp.149-150), and Stacks 0B8X, 0BIA and 0CBY. The item statement is unchanged and not weakened. It is not a target, so no base-change morphism or coefficient category is involved. Its six steps check out. (1) Projective implies proper and of finite type, the composite is of finite type, and X and Y are Noetherian; each cited statement says this. (2) The SNC chart lemma's hypotheses are exactly the item's hypotheses on (Y,T). (3) The nodal lemma's hypotheses were checked one by one. It matches VI 1.9 and adds only hypotheses (connected, nonempty, finitely presented, Noetherian). (4) Kato-Niziol desingularization by saturated log blow-ups (VIII 3.4.6(i), 3.4.9, VI 1.7) needs no characteristic-zero input. (5) Strictification is VIII 4.1.6-4.1.8; regular becomes smooth by 0B8X because F is perfect. Its normal-crossings input has the same definition as the output of (4). (6) Proper composition holds. Birationality uses the nonempty dense open U=X\\B. The boundary equality uses only that reduction is the identity on underlying sets. Tests: empty T and D; T empty forcing f smooth; uv=t, uv=t^n and uv=t1t2. For the chart lemma: in the UFD strict local ring, the boundary-unit monoid is units times monomials, so the characteristic monoid is N^r. All five new nodes are true, statement-only and unsplit, with correct created/blueprint fields and four recorded searches. None restates a clause of the item. rg over the DAG (log regular, normal crossings, nodal, snc, desingularization) found no duplicate. Accepted tool uses: lem-kun-projective-implies-proper, and lem-weil-pbc-finite-type-over-noetherian (a Mathlib leaf, so declaring it was harmless). FIX (B3, two missing definition citations): lem-trf-log-regular-desingularization now cites def-weil-closed-immersion and def-weil-etale-morphism, and lem-trf-normal-crossings-strictification now cites def-weil-etale-morphism, inline and in stmt_deps. The corrected files are under fixes/dag/nodes/sec-trace-formula/. No SGA source is used.; 2 file(s) fixed by the reviewer"
  }
 }

@@ -12,9 +12,103 @@
   "lem-coef-joyal-model-structure",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $X^{(0)}=X$ and $a_0=a$. Given the small simplicial map $a_t:X^{(t)}\\to Y$, take the set $I_t$ of all tuples $(n,i,u,v)$ with $n\\geq2$, $0<i<n$, $u:\\Lambda_i^n\\to X^{(t)}$, $v:\\Delta^n\\to Y$, $a_tu=v|_{\\Lambda_i^n}$, and $rv:\\Delta^n\\to\\Delta^1$ nonconstant. It is a small set: there are countably many $(n,i)$ and sets of maps between small simplicial sets. Define\n$$X^{(t+1)}=X^{(t)}\\amalg_{\\coprod_{I_t}\\Lambda_i^n}\\coprod_{I_t}\\Delta^n.$$\nThe maps $a_t$ and the listed $v$ induce $a_{t+1}$. Form $M=\\operatorname{colim}_{t<\\omega}X^{(t)}$, with $j:X\\to M$ and $k:M\\to Y$ induced by these compatible maps. The sectionwise-colimit lemma applies to set-valued presheaves on the small simplex category, so these pushouts and this colimit are computed degreewise. Explicitly a set pushout is the disjoint union modulo the attaching relations, and a sequential colimit is the disjoint union modulo the transition relations; both are small sets. Simplicial operators descend through the relations. Thus all stages and $M$ are small simplicial sets, $kj=a$, and all maps are over $\\Delta^1$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-weil-pbc-presheaf-colimits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent expansion of proof paragraph beginning “For K”, through the retained operadic mapping-cylinder refinement: construction of the countable relative cell sequence"
+   }
+  },
+  {
+   "text": "Each coproduct of horn inclusions is degreewise injective. In a pushout $A\\amalg_H B$ with $H\\hookrightarrow B$ injective, the old elements of $A$ remain distinct: the only identifications replace an element of $H\\subseteq B$ by its specified image in $A$. Equivalently its underlying set can be chosen as $A\\amalg(B\\setminus H)$. Consequently every transition $X^{(t)}\\to X^{(t+1)}$ and $j$ is degreewise injective.\nFor a cell let $\\alpha:[n]\\to[1]$ be its nonconstant interval coordinate. Both sets of endpoint vertices are nonempty. Any simplex of $\\Delta^n$ with constant coordinate has image in a pure endpoint face $S\\subsetneq[n]$. There exists $q\\notin S$ with $q\\ne i$: otherwise $S=[n]\\setminus\\{i\\}$ and monotonicity of $\\alpha$ would make a nonconstant sequence constant after deletion of an interior index, which is impossible since indices $0,n$ remain. Hence this simplex lies in the face omitting $q$, and therefore in $\\Lambda_i^n$. No complement $\\Delta^n_m\\setminus(\\Lambda_i^n)_m$ contains an endpoint simplex. Choose the pushouts in the displayed set form. Inductively both endpoint subobjects remain literally $X_e$, with unchanged operators and maps. Their union at $\\omega$ is again $X_e$, so $j_e$ and $k_e$ are identities under the stipulated identification $X_e=Y_e$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-weil-pbc-presheaf-colimits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent expansion of proof paragraph beginning “For K”, through the retained operadic mapping-cylinder refinement: degreewise injectivity and fixed endpoint fibres"
+   }
+  },
+  {
+   "text": "Consider an inner-horn lifting problem for $k$ with upper map $u:\\Lambda_i^n\\to M$ and lower simplex $v:\\Delta^n\\to Y$. If $rv$ is nonconstant, $u$ factors through some finite stage. Indeed, the horn is the union of its finitely many faces $\\Delta^{[n]\\setminus\\{q\\}}$, $q\\ne i$. The restriction to each such face is determined by the image of its top simplex: all its other simplices are obtained by precomposition. Choose one stage containing these finitely many images. On the intersections the face maps agree at that stage, since its inclusion into $M$ is degreewise injective; they therefore glue to a map $\\Lambda_i^n\\to X^{(t)}$. The same equality with $v$ holds after $a_t$, since $k$ restricts to $a_t$. The tuple occurs in $I_t$, so its adjoined simplex at stage $t+1$ fills the original square.\nIf $rv$ is constant at $e$, the entire upper horn lies in $M_e=X_e$ and the lower simplex lies in $Y_e$. Since $k_e$ is the identity, $v$, regarded as a simplex of $M_e$, is the required filler. These two cases prove that $k$ is an inner fibration, with no assumption that $a$ is injective.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent expansion of proof paragraph beginning “For K”, through the retained operadic mapping-cylinder refinement: every relative inner horn receives a filler"
+   }
+  },
+  {
+   "text": "The simplicial set $M$ is a quasicategory. Given any inner horn in $M$, first fill its image in $Y$, which is a quasicategory by hypothesis, and then lift that chosen filler through the inner fibration $k$ of step 3. This gives a simplex of $M$ extending the original horn. This verification does not presume that the initial $X$ is a quasicategory.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent expansion of proof paragraph beginning “For K”, through the retained operadic mapping-cylinder refinement: fibrancy of the constructed middle object"
+   }
+  },
+  {
+   "text": "By the Joyal model-structure lemma each inner horn is a trivial cofibration and therefore has the left lifting property against every Joyal fibration. Fix such a fibration $p:E\\to B$ and a lifting square from $j:X\\to M$ to $p$. Extend its given map $X^{(0)}\\to E$ recursively. At stage $t$, the existing map supplies the upper map of a lifting square for each horn indexed by $I_t$, and the fixed map $M\\to B$ supplies its lower simplex. The lifting property of $p$ gives a filler for each square. Choose these fillers for the small family $I_t$. The pushout universal property of step 1 gives the extension $X^{(t+1)}\\to E$; the extensions agree on all earlier stages. The colimit supplies a diagonal $M\\to E$ in the original square. Thus $j$ has the left lifting property against every Joyal fibration. By the weak factorization system (trivial cofibrations, fibrations) in that same node, $j$ is a trivial cofibration, hence a categorical equivalence. This explicitly checks closure for this cell sequence rather than assuming a categorical equivalence is preserved by arbitrary colimits.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "lem-weil-pbc-presheaf-colimits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent expansion of proof paragraph beginning “For K”, through the retained operadic mapping-cylinder refinement: categorical equivalence of the relative cell inclusion"
+   }
+  },
+  {
+   "text": "To apply the Joyal-fibration characterization, let $m$ be a vertex of $M$ and $b:k(m)\\to y$ an equivalence edge in $Y$. Its inverse edge maps under $r$ to an inverse for the edge $r(b)$, with the inverse equations witnessed by the images of the two triangles. In $\\Delta^1$ the edge $0\\to1$ has no reverse edge, so $r(b)$ is degenerate at some endpoint $e$. The edge $b$, its inverse and the two inverse triangles are all in $Y_e$: all their vertices have coordinate $e$, and a simplex of $\\Delta^1$ with all vertices $e$ is constant. Also $m\\in M_e$. Since $k_e:M_e\\to Y_e$ is the identity, the same edge, inverse and triangles in $M_e$ give an equivalence edge with source exactly $m$ lying over $b$. Both $M,Y$ are quasicategories, and $k$ is an inner fibration by step 3. Clause (1) of the cited characterization therefore makes $k$ a Joyal fibration.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent expansion of proof paragraph beginning “For K”, through the retained operadic mapping-cylinder refinement: lifting equivalences at their prescribed source"
+   }
+  },
+  {
+   "text": "The original $a$ is a categorical equivalence by hypothesis and $a=kj$, while $j$ is a categorical equivalence by step 5. Two-out-of-three in the Joyal model structure shows that $k$ is a categorical equivalence. Together with step 6 this makes $k$ a trivial Joyal fibration. Steps 1 and 2 give precisely the required countable continuous composite of pushouts of small coproducts of mixed inner horns, the monomorphism $j$, and unchanged endpoint fibres. If either endpoint fibre is empty, there are no horns or simplices in that fibre requiring separate choices; the same construction and arguments apply. No step uses injectivity of $a$. The additional inner-fibration hypothesis on $r$ is compatible with the proof; the construction in fact only needs the stated quasicategory hypothesis on $Y$.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent expansion of proof paragraph beginning “For K”, through the retained operadic mapping-cylinder refinement: two-out-of-three and all conclusions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-weil-pbc-presheaf-colimits-sectionwise",
+  "def-coef-infinity-fibrations",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Proof paragraph beginning “For K”, through the retained endpoint-fixed operadic mapping-cylinder refinement; explicit mixed-inner-horn small-object construction using existing Joyal interfaces. HTT is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +144,59 @@
    "results": "Search log: {\"t\": \"2026-10-17T08:47:35Z\", \"tool\": \"loogle\", \"query\": \"SSet.innerAnodyneExtensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeInnerAnodyneExtensions\", \"SSet.instIsStableUnderCobaseChangeInnerAnodyneExtensions\", \"SSet.instIsStableUnderCoproductsInnerAnodyneExtensions\", \"SSet.instIsStableUnderRetractsInnerAnodyneExtensions\", \"SSet.instIsStableUnderTransfiniteCompositionInnerAnodyneExtensions\", \"SSet.instRespectsIsoInnerAnodyneExtensions\", \"SSet.innerAnodyneExtensions\", \"SSet.Subcomplex.Pairing.innerAnodyneExtensions\"], \"digest\": \"1e41fe895e33b68d\"}",
    "date": "2026-10-17",
    "verdict": "no match: closure properties of inner anodyne maps do not supply a factorization that fixes both endpoint fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A categorical equivalence over the simplicial interval which is identity on endpoint fibers factors by attaching mixed inner horns into a trivial Joyal fibration",
+   "results": "OK 8 hits. SSet.Truncated.liftOfStrictSegal.hσ'₀; SSet.horn.yonedaEquiv_ι; SSet.modelCategoryQuillen.horn_ι_mem_J; SSet.modelCategoryQuillen.J; SSet.IsStrictSegal; SSet.Quasicategory.hornFilling; SSet.horn.spineId_map_hornInclusion; SSet.StrictSegal",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state the relative endpoint-preserving construction or its trivial Joyal-fibration conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet, InnerFibration, Joyal",
+   "results": "OK 0 hits. ; loogle: unknown identifier 'InnerFibration'",
+   "date": "2026-10-17",
+   "verdict": "no usable result: Loogle rejected unqualified InnerFibration; repeated with SSet.innerFibrations and SSet.innerAnodyneExtensions."
+  },
+  {
+   "tool": "grep",
+   "query": "innerAnodyne|InnerFibration|[Jj]oyal|innerHorn",
+   "results": "OK 10 hits. Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean; Mathlib/AlgebraicTopology/SimplicialSet",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state the relative endpoint-preserving construction or its trivial Joyal-fibration conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Factor a categorical equivalence of simplicial sets over Delta one by a countable sequence of mixed inner horn attachments preserving endpoint fibers",
+   "results": "OK 8 hits. SimplexCategory.instHasStrongEpiMonoFactorisations; SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration; SimplexCategoryGenRel.exists_P_σ_P_δ_factorization; SSet.Quasicategory; SSet.modelCategoryQuillen.J; SSet.modelCategoryQuillen.fibrations_eq; SSet.modelCategoryQuillen.instCategoryWithFibrations; SSet.modelCategoryQuillen.J_le_monomorphisms",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state the relative endpoint-preserving construction or its trivial Joyal-fibration conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For simplicial sets a weak equivalence fixing the fibers over the two vertices of Delta one admits an inner anodyne factorization fixing those fibers followed by a trivial categorical fibration",
+   "results": "OK 8 hits. SSet.modelCategoryQuillen.J; SSet.modelCategoryQuillen.instCategoryWithFibrations; SSet.modelCategoryQuillen.I; SSet.modelCategoryQuillen.instCategoryWithCofibrations; SSet.modelCategoryQuillen.fibrations_eq; SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration; SSet.modelCategoryQuillen.fibration_iff; HomotopicalAlgebra.ModelCategory.cm5a",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state the relative endpoint-preserving construction or its trivial Joyal-fibration conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.innerFibrations, SSet.innerAnodyneExtensions",
+   "results": "OK 0 hits. ",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state the relative endpoint-preserving construction or its trivial Joyal-fibration conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "Joyal|joyal|categorical[Ee]quivalence|factorization",
+   "results": "OK 1 hits. Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean; Mathlib/AlgebraicTopology/Quasicategory",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state the relative endpoint-preserving construction or its trivial Joyal-fibration conclusion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-operadic-mapping-cylinder",
@@ -80,5 +223,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-endpoint-fixed-inner-horn-refinement",
+  "worker": "stage1",
+  "summary": "Gave the actual countable mixed-inner-horn construction, proved no endpoint simplex is added, checked finite-stage horn factorization explicitly, and used the existing Joyal model-structure and equivalence-lifting characterization to obtain a trivial fibration. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the middle derived mapping-complex comparison in the proof paragraph beginning “For K” of prop-coef-integral-exceptional-adjoint, through the existing coherent free-module/operadic mapping-cylinder ancestry. The seven steps supply the retained endpoint-fixed inner-horn refinement, not a replacement of the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NP-c4253ad7e",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-c4253ad7e (reviewer sub-agent of L); spot-checked: I read all seven steps and checked each against the statements of the five cited nodes (def-cbc-enhanced-diagrams-cones, the presheaf-colimit Mathlib leaf combinedIsColimit, def-coef-infinity-fibrations, lem-coef-joyal-model-structure, and clause (1) of lem-coef-joyal-quasicategory-characterizations). Checks: (1) I_t is small and the pushouts and colimit are degreewise by the leaf. (2) A nonconstant monotone α has α(0)=0 and α(n)=1, so a constant-coordinate simplex misses 0 or n, and since i≠0,n it lies in Λ^n_i. So no endpoint simplex is added and M_e=X_e literally. (3) The finite-stage gluing of horn faces is correct, and the constant case is filled by v because k_e is the identity. (4) M is a quasicategory, without fibrancy of X. (5) j has the left lifting property against Joyal fibrations by stagewise lifts, so it is a trivial cofibration by the weak factorization system stated in the Joyal node. (6) An equivalence edge in Y has degenerate image in Δ¹, because the witness 2-simplex vertices x,y,x force r(x)=r(y), so its lift lies in M_e=Y_e with the prescribed source; clause (1) then makes k a Joyal fibration. (7) Two-out-of-three on a=kj. The statement is unchanged; the extra hypothesis that r is an inner fibration is unused but harmless. I tested a=id on Δ¹, X=Λ²₁→Δ², non-injective a and empty endpoint fibres. The item is a strictly smaller lemma than parent step 3 of lem-coef-symmetric-operadic-mapping-cylinder, not a restatement of it. There are no new nodes, no duplicate in the 361 inner-horn nodes of the DAG, no cycle, and no SGA source. All cited theorems are in the item's unit or are a Mathlib leaf, so no tool_uses are needed. Notes for the maintainer: the item's source field, which is the maintainer's, cites HTT Cor. 2.2.5.4 where the fibration criterion is Cor. 2.4.6.5. The report wrongly says the main-20261015 ancestor file is absent; it is under sk-thm-sf-package, with the paragraph beginning 'For K' unchanged in substance. No fixes."
  }
 }

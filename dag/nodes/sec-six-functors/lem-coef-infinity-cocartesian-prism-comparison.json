@@ -14,9 +14,83 @@
   "def-coef-infinity-fibrations",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $c:\\Delta^2\\to\\Delta^1$, $c(0)=0$, $c(1)=c(2)=1$, and $r=cp$. We check the lifting assertions needed for this particular collapse directly. Given an inner-horn problem for $r$, the images under $p$ of its vertices form a monotone sequence in $[2]$: for dimension two the horn contains the successive edges, and in higher dimensions it contains every edge. This sequence defines a simplex of $\\Delta^2$ extending the projected horn. Its composite with $c$ is the prescribed simplex of $\\Delta^1$, since both have the same vertices. The inner-fibration property of $p$ supplies the required lift, so $r$ is an inner fibration. Now fix a vertical edge $e=h|_{\\Delta^1\\times\\{x\\}}$. In a $\\Lambda^m_0$ problem for $r$ with first edge $e$, the first two $p$-vertex values are $0,1$. For $m\\geq3$ all edges are already present, so again these values extend uniquely to a simplex of $\\Delta^2$. For $m=2$, the only missing edge is $1\\to2$ in the domain: the prescribed base simplex for $r$ forces the last vertex to have $p$-value $1$ or $2$, hence to be at least the second value $1$. The monotone extension therefore exists in this case too. Apply the stipulated $p$-cocartesian lifting property of $e$ over this extension. Its filler solves the original $r$-problem, proving that $e$ is $r$-cocartesian.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 2.4.4.6 proof, printed p. 308 (PDF page index 307), the two prism maps; HTT section 3.2.2, especially Definition 3.2.2.6 and Proposition 3.2.2.7(2), printed pp. 179–180."
+   }
+  },
+  {
+   "text": "Write $r_{01}:\\mathcal C_{01}\\to\\Delta^1$ for the restricted projection. An inner horn over this edge is an inner horn for $p$; its filler pairs with the specified base simplex, so lies in $\\mathcal C_{01}$. The same pairing applies to the outer horns testing the vertical edges of $h$, so they are $r_{01}$-cocartesian. All fibers and $\\mathcal C_{01}$ are quasicategories: fill the projected inner horn in their simplex base, then use the inner fibration and pair the filler. For each of $r_{01}$ and $r$, the only nondegenerate base edge has source $0$, and the chosen edges of $h$ supply a cocartesian lift from every vertex over $0$. Degenerate base edges lift to degenerate edges, which are cocartesian by [lem-coef-infinity-cocartesian-composition-initiality]. Thus both maps are cocartesian fibrations. Define $K^{\\mathrm{op}}$ by reversing the order of vertices in every simplicial operator; this is involutive, preserves degreewise products and gluings, and sends $\\Lambda_i^m$ to $\\Lambda_{m-i}^m$. Reversing the two fibrations and identifying $(\\Delta^1)^{\\mathrm{op}}$ with $\\Delta^1$ therefore gives cartesian fibrations with fibers respectively $(\\mathcal C_1^{\\mathrm{op}},\\mathcal C_0^{\\mathrm{op}})$ and $(D^{\\mathrm{op}},\\mathcal C_0^{\\mathrm{op}})$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 2.4.4.6 proof, printed p. 308 (PDF page index 307), the two prism maps; HTT section 3.2.2, especially Definition 3.2.2.6 and Proposition 3.2.2.7(2), printed pp. 179–180."
+   }
+  },
+  {
+   "text": "Use the explicit simplices and operators of [lem-coef-cartesian-mapping-simplex-presentation]. After the reversal in Step 2, the two pushouts are the length-one mapping simplices for the chains $\\mathcal C_1^{\\mathrm{op}}\\xleftarrow{F^{\\mathrm{op}}}\\mathcal C_0^{\\mathrm{op}}$ and $D^{\\mathrm{op}}\\xleftarrow{(\\iota F)^{\\mathrm{op}}}\\mathcal C_0^{\\mathrm{op}}$, respectively, where $\\iota:\\mathcal C_1\\hookrightarrow D$. Here is the degreewise identification, for each of these two chains $P\\leftarrow Q$: the reversed cylinder is glued along its $0$-end to $P$. Over a monotone $\\alpha:[m]\\to[1]$, its $m$-simplices are $P_m$ if $\\alpha(m)=0$, and $Q_m$ otherwise. For $\\theta:[k]\\to[m]$, apply $\\theta^*$ to this coordinate, followed by the chain transition precisely when $\\alpha(m)=1$ and $\\alpha\\theta(k)=0$. These are exactly the cited mapping-simplex operators, including repetitions. The induced maps $q_A:A^{\\mathrm{op}}\\to\\mathcal C_{01}^{\\mathrm{op}}$ and $q_B:B^{\\mathrm{op}}\\to\\mathcal C^{\\mathrm{op}}$ have identity vertex-fiber maps. A marked edge over a constant base edge maps to a degenerate edge; a marked edge over $0\\to1$ maps to a reversed vertical edge of $h$. The former are cartesian by reversing the degenerate-edge clause cited in Step 2, and the latter are cartesian by Steps 1–2. Thus both maps satisfy every marked-edge and fiber hypothesis of the mapping-simplex comparison.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-cartesian-mapping-simplex-presentation",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 2.4.4.6 proof, printed p. 308 (PDF page index 307), the two prism maps; HTT section 3.2.2, especially Definition 3.2.2.6 and Proposition 3.2.2.7(2), printed pp. 179–180."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-mapping-simplex-universal-equivalence] twice with $n=1$ and $T=\\Delta^1$ mapped identically to the base. The cartesian fibrations are those of Step 2 and the chain maps are $q_A,q_B$ of Step 3. The vertex-fiber maps are identities, hence categorical equivalences by the functor-test definition, and every marked edge has the required image. The theorem gives categorical equivalences $A^{\\mathrm{op}}\\to\\mathcal C_{01}^{\\mathrm{op}}$ and $B^{\\mathrm{op}}\\to\\mathcal C^{\\mathrm{op}}$.",
+   "uses": [
+    "lem-cbc-mapping-simplex-universal-equivalence",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 2.4.4.6 proof, printed p. 308 (PDF page index 307), the two prism maps; HTT section 3.2.2, especially Definition 3.2.2.6 and Proposition 3.2.2.7(2), printed pp. 179–180."
+   }
+  },
+  {
+   "text": "Reversal preserves categorical equivalences directly from the definition in [lem-coef-joyal-model-structure]: the degreewise product formula gives $\\operatorname{Fun}(K^{\\mathrm{op}},Z)\\cong\\operatorname{Fun}(K,Z^{\\mathrm{op}})^{\\mathrm{op}}$, naturally in $K$. The category generated by reversed edges and reversed triangle relations is the opposite generated category, and an equivalence of ordinary categories stays an equivalence after taking opposites. Test the equivalences of Step 4 on the quasicategory $Z^{\\mathrm{op}}$ for each quasicategory $Z$ and use involutivity. This gives exactly $A\\to\\mathcal C_{01}$ and $B\\to\\mathcal C$. All constructions and tests above allow empty fibers. In particular if $\\mathcal C_0$ is empty, then $A=\\mathcal C_1=\\mathcal C_{01}$ and $B=D=\\mathcal C$. If $p=\\mathrm{id}_{\\Delta^2}$, the first map is an isomorphism and the second is $\\Lambda^2_1\\hookrightarrow\\Delta^2$, as required. No step used lifts over $1\\to2$ or $0\\to2$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 2.4.4.6 proof, printed p. 308 (PDF page index 307), the two prism maps; HTT section 3.2.2, especially Definition 3.2.2.6 and Proposition 3.2.2.7(2), printed pp. 179–180."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-mapping-simplex-universal-equivalence",
+  "lem-coef-cartesian-mapping-simplex-presentation",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-joyal-model-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Expansion of Lemma 2.4.4.6 proof, printed p. 308, using the existing HTT mapping-simplex comparison. Sources read online; archival copies WANTED. The base-collapse horn calculation and explicit opposite mapping-simplex identifications are written out by Q131."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +133,52 @@
    "results": "{\"t\": \"2026-10-17T08:42:47Z\", \"tool\": \"loogle\", \"query\": \"SSet, stdSimplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: horn₂₁.isPushout and the other HornColimits hits describe gluing the BASE horn, not either categorical equivalence of total spaces. FiberedCategory.Cocartesian concerns ordinary functors and unique factorization, not quasicategorical edges. HomotopicalAlgebra.Cylinder.trans glues model-category cylinder objects over one object; it does not give these transport comparisons. The Loogle query with cocartesian was unresolved (unknown identifier), not evidence of absence; the second name query and semantic queries were also read. No exact or one-line specialization found."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian.*prism|mapping.?simplex|mapping.?cylinder.*equiv",
+   "results": "{\"t\": \"2026-10-17T10:36:28Z\", \"tool\": \"grep\", \"query\": \"cocartesian.*prism|mapping.?simplex|mapping.?cylinder.*equiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the retained results. Ordinary-category cocartesian morphisms, model-category cylinders, and simplex/opposite formulas do not state either quasicategorical prism comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mapping cylinder of a chosen cocartesian transport functor is categorically equivalent to the total quasicategory over the interval",
+   "results": "{\"t\": \"2026-10-17T10:36:29Z\", \"tool\": \"leansearch\", \"query\": \"The mapping cylinder of a chosen cocartesian transport functor is categorically equivalent to the total quasicategory over the interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map.congr_simp\", \"CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\", \"HomotopicalAlgebra.Cylinder.noConfusionType\", \"CategoryTheory.Grothendieck.toTransport\", \"HomotopicalAlgebra.Cylinder.instIsCofibrantI\", \"HomotopicalAlgebra.Precylinder.I\"], \"digest\": \"45255b39a4d37fa7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the retained results. Ordinary-category cocartesian morphisms, model-category cylinders, and simplex/opposite formulas do not state either quasicategorical prism comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Cocartesian\"",
+   "results": "{\"t\": \"2026-10-17T10:36:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Cocartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the retained results. Ordinary-category cocartesian morphisms, model-category cylinders, and simplex/opposite formulas do not state either quasicategorical prism comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chosen cocartesian transport in a quasicategory gives categorical equivalences from mapping cylinder pushouts to the interval and triangle total spaces",
+   "results": "{\"t\": \"2026-10-17T10:36:30Z\", \"tool\": \"leanfinder\", \"query\": \"Chosen cocartesian transport in a quasicategory gives categorical equivalences from mapping cylinder pushouts to the interval and triangle total spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Precylinder.trans_I\", \"HomotopicalAlgebra.Cylinder.trans_I\", \"HomotopicalAlgebra.Precylinder.trans_i₁\", \"HomotopicalAlgebra.Cylinder.trans_i₁\", \"HomotopicalAlgebra.Precylinder.trans_i₀\", \"HomotopicalAlgebra.Precylinder.trans\", \"HomotopicalAlgebra.Cylinder.trans_π\", \"HomotopicalAlgebra.Cylinder.trans_i₀\"], \"digest\": \"5bbacf6c57254592\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the retained results. Ordinary-category cocartesian morphisms, model-category cylinders, and simplex/opposite formulas do not state either quasicategorical prism comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCocartesian|mapping.?simplex|categoricalEquivalence|categorical equivalence",
+   "results": "{\"t\": \"2026-10-17T10:37:03Z\", \"tool\": \"grep\", \"query\": \"IsCocartesian|mapping.?simplex|categoricalEquivalence|categorical equivalence\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\"], \"digest\": \"3248c3b169be6d8c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the retained results. Ordinary-category cocartesian morphisms, model-category cylinders, and simplex/opposite formulas do not state either quasicategorical prism comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Opposite mapping simplex over the interval with cartesian marked edges and identical vertex fibers gives a categorical equivalence",
+   "results": "{\"t\": \"2026-10-17T10:37:03Z\", \"tool\": \"leanfinder\", \"query\": \"Opposite mapping simplex over the interval with cartesian marked edges and identical vertex fibers gives a categorical equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.opObjEquiv\", \"SSet.stdSimplex.objEquiv\", \"SSet.stdSimplex.obj₀Equiv\", \"SSet.stdSimplex.map_apply\", \"SSet.prodStdSimplex.objEquiv\", \"SSet.stdSimplex.obj₀Equiv_symm_apply\", \"SimplexCategory.II_obj\", \"SSet.op_map\"], \"digest\": \"ebd4402060e04c81\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the retained results. Ordinary-category cocartesian morphisms, model-category cylinders, and simplex/opposite formulas do not state either quasicategorical prism comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-cocartesian-inner-horn-comparison",
@@ -72,7 +188,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "HA Lemma 2.4.4.6, proof, printed p. 308: the two displayed prism comparison maps following the choice of h. This serves the prism subargument in Step 4 of the inner-horn comparison in the inherited operadic-extension branch of prop-coef-integral-exceptional-adjoint. Underlying mapping-simplex theorem: HTT Definition 3.2.2.6 and Proposition 3.2.2.7(2), printed pp. 180–181 (https://people.math.harvard.edu/~lurie/papers/HTT.pdf).",
+   "place": "HA Lemma 2.4.4.6 proof, printed p. 308: the two displayed prism comparison maps following the choice of h, using the length-one case of HTT Proposition 3.2.2.7(2).",
    "via": [
     "lem-coef-infinity-cocartesian-inner-horn-comparison",
     "lem-coef-operadic-correspondence-kan-filling",
@@ -89,5 +205,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-cocartesian-prism-comparison",
+  "worker": "stage1",
+  "summary": "Retained the earlier split and searches after a successful initial dry run; expanded the previously implicit base-collapse horn argument, corrected both reversed chains to use opposite fibers, supplied the actual mapping-simplex degree/operator formula and the degenerate-edge citation, and verified the two applications of the existing HTT comparison. No statement change and no new nodes.",
+  "blueprint": "Realizes the two displayed prism comparisons in HA Lemma 2.4.4.6 proof, printed p. 308, serving the inherited inner-horn subargument below prop-coef-integral-exceptional-adjoint.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-mapping-simplex-universal-equivalence",
+    "why": "Generic HTT mapping-simplex categorical-equivalence comparison, applied to the two explicit reversed length-one chains; it supplies the tool for the inherited prism route, without replacing that route."
+   },
+   {
+    "node": "lem-coef-cartesian-mapping-simplex-presentation",
+    "why": "Only the explicit degreewise simplices, simplicial operators and marking of the mapping simplex are used to identify the two pushouts; its existence theorem is not used."
+   },
+   {
+    "node": "lem-coef-infinity-cocartesian-composition-initiality",
+    "why": "Only its degenerate-edge clause supplies identity-edge lifts and the images of constant-base marked edges; its composition and initiality assertions are not used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-mapping-simplex-universal-equivalence",
+  "lem-coef-cartesian-mapping-simplex-presentation",
+  "lem-coef-infinity-cocartesian-composition-initiality"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-4f50609cb",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-4f50609cb (reviewer sub-agent of L); spot-checked: PASS: I read the item in full (statement unchanged, five steps), all six cited statements, the one citer (step 3 of lem-coef-infinity-cocartesian-inner-horn-comparison) and the unit. There are no new nodes and no fixes. HA 2.4.4.6 and HTT 3.2.2.6/3.2.2.7 are not under literature/: WANTED is recorded and proof_origin is agent, so I checked their mathematics directly rather than from the PDFs. Step 1: for m≥3 every horn contains all edges; for m=2 the edges 01 and 12 (inner horn), or 01 and 02 together with the base forcing p(v2)∈{1,2} (Λ^2_0 horn), give monotone p-values. So r=cp is an inner fibration and h_x is r-cocartesian. Step 2: restricting to C_01 by pairing works. Degenerate edges are cocartesian by the clause of composition-initiality, which needs an inner fibration of quasicategories; that holds. Reversal swaps Λ_0 and Λ_m and gives cartesian fibrations with fibres (C_1^op, C_0^op) and (D^op, C_0^op). Step 3: A^op and B^op agree degree by degree with M^m(P←Q). Over α the simplices are P_r if α(r)=0 and Q_r otherwise, and the transition applies exactly when α(r)=1 and αθ(s)=0. Marked edges go to degenerate edges or to the reversed h_x, both cartesian. Step 4: every hypothesis of lem-cbc-mapping-simplex-universal-equivalence holds with n=1, T=Δ^1 and identity fibre maps. Step 5: Fun(K^op,Z) ≅ Fun(K,Z^op)^op and h(S^op)=(hS)^op, so u is a categorical equivalence iff u^op is. Edge cases checked: C_0 empty gives isomorphisms; p=id_{Δ^2} gives an isomorphism and Λ^2_1→Δ^2; C_1 empty forces C_0 empty. No duplicate: rg 'prism' over the DAG finds only different lemmas. No cycle, no SGA source, and this is not a target node. Accepted tool_use: lem-cbc-mapping-simplex-universal-equivalence, from sk-prop-sf-cbc, used as a generic black box. The other two declared tool_uses are nodes of the item's own unit and need no record; they are harmless. Minor: source.place gives HTT pp. 180–181 while the steps give pp. 179–180 (maintainer metadata, immaterial)."
  }
 }
