@@ -102,6 +102,68 @@ lemma μ_comp_map_μ_comp_leftDerivedUpperStarComp_inv_app {T S R : Scheme.{u}} 
 
 end Braided
 
+section BaseChange
+
+variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A]
+  {FC : A → A → Type*} {CC : A → Type (u + 1)}
+  [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+
+attribute [local instance high] SymmetricCategory.toBraidedCategory
+
+attribute [local instance] _root_.DerivedCategory.symmetricCategory
+  leftDerivedUpperStarBraidedFunctor
+
+/-- **`β` under the exceptional inverse image, abstractly.** Let `g : P' ⟶ P` be the base change
+of `g₁ : Z₁' ⟶ Z₁` along `p₁ : P ⟶ Z₁`, with `p₁' : P' ⟶ Z₁'`, and let `p₂ : P ⟶ Z₂`. Given an
+invertible base change map `Ex : Lp₁^* Rg₁_! ⟶ Rg_! Lp₁'^*` compatible with the projection maps,
+whose mate `Lp₁'^* Rg₁^! ⟶ Rg^! Lp₁^*` is invertible, and assuming that the projection maps are
+invertible and associative and that the tensor maps of `Rg^!` at `(Lp₁^* M, Lp₂^* N)` are
+invertible, `Rg^!` of the external Hom map of `(E₁, L₁, E₂, L₂)` is an isomorphism if and only if
+the external Hom map of `(Lg₁^* E₁, Rg₁^! L₁, E₂, L₂)` over `P'` is. -/
+theorem isIso_map_externalIhomMap_iff_of_baseChange {Z₁ Z₂ P Z₁' P' : Scheme.{u}}
+    {p₁ : P ⟶ Z₁} {p₂ : P ⟶ Z₂} {g₁ : Z₁' ⟶ Z₁} [HasCompactification g₁] {p₁' : P' ⟶ Z₁'}
+    {g : P' ⟶ P} [HasCompactification g] [IsIso (projectionMap A g)]
+    [IsIso (projectionMap A g₁)] (sq : CommSq p₁' g g₁ p₁)
+    (Ex : R(g₁)_![A] ⋙ L((p₁)^*[A]) ⟶ L((p₁')^*[A]) ⋙ R(g)_![A]) [IsIso Ex]
+    (hEx : ∀ (M : _root_.DerivedCategory (Sheaf Z₁'.smallEtaleTopology A))
+      (N : _root_.DerivedCategory (Sheaf Z₁.smallEtaleTopology A)),
+      (L((p₁)^*[A])).map (((projectionMap A g₁).app M).app N) ≫ Ex.app (M ⊗ (L((g₁)^*[A])).obj N) ≫
+        (R(g)_![A]).map (δ L((p₁')^*[A]) M ((L((g₁)^*[A])).obj N)) ≫
+        (R(g)_![A]).map ((L((p₁')^*[A])).obj M ◁ derivedSquareUpperStarIsoInvApp A sq N) =
+      δ L((p₁)^*[A]) ((R(g₁)_![A]).obj M) N ≫ Ex.app M ▷ (L((p₁)^*[A])).obj N ≫
+        ((projectionMap A g).app ((L((p₁')^*[A])).obj M)).app ((L((p₁)^*[A])).obj N))
+    (hBC : ∀ N, IsIso ((mateEquiv (rightDerivedUpperShriekAdjunction A g₁)
+      (rightDerivedUpperShriekAdjunction A g) (inv Ex)).natTrans.app N))
+    (hτ : ∀ M N, IsIso ((rightDerivedUpperShriekAdjunction A g).projectionTensorMap
+      (fun M N ↦ ((projectionMap A g).app M).app N) ((L((p₁)^*[A])).obj M)
+      ((L((p₂)^*[A])).obj N)))
+    (hassoc : ProjectionMapAssociativity A g)
+    (E₁ L₁ : _root_.DerivedCategory (Sheaf Z₁.smallEtaleTopology A))
+    (E₂ L₂ : _root_.DerivedCategory (Sheaf Z₂.smallEtaleTopology A)) :
+    IsIso ((R(g)^![A]).map (MonoidalClosed.externalIhomMap
+      (L((p₁)^*[A])) (L((p₂)^*[A])) E₁ L₁ E₂ L₂)) ↔
+      IsIso (MonoidalClosed.externalIhomMap (L((p₁')^*[A])) (L((g ≫ p₂)^*[A]))
+        ((L((g₁)^*[A])).obj E₁) ((R(g₁)^![A]).obj L₁) E₂ L₂) := by
+  have : ∀ N, IsIso (derivedSquareUpperStarIsoInvApp A sq N) := fun N ↦ by
+    unfold derivedSquareUpperStarIsoInvApp
+    infer_instance
+  exact Adjunction.isIso_map_externalIhomMap_iff (rightDerivedUpperShriekAdjunction A g)
+    (fun M N ↦ ((projectionMap A g).app M).app N) (rightDerivedUpperShriekAdjunction A g₁)
+    (fun M N ↦ ((projectionMap A g₁).app M).app N)
+    (projectionMap_app_app_naturality_left g) (projectionMap_app_app_naturality_left g₁)
+    Ex (inv Ex) (fun M ↦ by simp [NatIso.isIso_inv_app])
+    (fun N ↦ derivedSquareUpperStarIsoInvApp A sq N) hEx
+    (projectionMap_app_app_naturality_right g) hassoc.assoc
+    (leftDerivedUpperStarComp _ g p₂ (g ≫ p₂) rfl).symm
+    (μ_comp_map_μ_comp_leftDerivedUpperStarComp_inv_app _ g p₂) E₁ L₁ E₂ L₂
+
+end BaseChange
+
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (k : Type u) [Field k]
 
 -- Search the braiding of `ModuleCat Λ` through its symmetric structure, as in the generic
@@ -149,45 +211,10 @@ theorem isIso_map_externalIhomMap_iff_of_isPullback {Z₁ Z₂ P Z₁' P' : Sche
         ((R(g₁)^![ModuleCat.{u + 1} Λ]).obj L₁) E₂ L₂) := by
   obtain ⟨hBC, hτ⟩ := isExceptionalKunneth Λ k g₁ c₁ c₁ c₂ sqP sq
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
-  have hlib : ∀ (M : _root_.DerivedCategory (Sheaf Z₁'.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-      (N : _root_.DerivedCategory (Sheaf Z₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
-      (L((p₁)^*[ModuleCat.{u + 1} Λ])).map (((projectionMap _ g₁).app M).app N) ≫
-        (rightDerivedLowerShriekBaseChangeMap Λ sq).app
-          (M ⊗ (L((g₁)^*[ModuleCat.{u + 1} Λ])).obj N) ≫
-        (R(g)_![ModuleCat.{u + 1} Λ]).map
-          (δ L((p₁')^*[ModuleCat.{u + 1} Λ]) M ((L((g₁)^*[ModuleCat.{u + 1} Λ])).obj N)) ≫
-        (R(g)_![ModuleCat.{u + 1} Λ]).map ((L((p₁')^*[ModuleCat.{u + 1} Λ])).obj M ◁
-          derivedSquareUpperStarIsoInvApp _ sq.toCommSq N) =
-      δ L((p₁)^*[ModuleCat.{u + 1} Λ]) ((R(g₁)_![ModuleCat.{u + 1} Λ]).obj M) N ≫
-        (rightDerivedLowerShriekBaseChangeMap Λ sq).app M ▷
-          (L((p₁)^*[ModuleCat.{u + 1} Λ])).obj N ≫
-        ((projectionMap _ g).app ((L((p₁')^*[ModuleCat.{u + 1} Λ])).obj M)).app
-          ((L((p₁)^*[ModuleCat.{u + 1} Λ])).obj N) :=
-    fun M N ↦ projectionMap_rightDerivedLowerShriekBaseChangeMap Λ sq M N
-  have : ∀ N, IsIso (derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} Λ) sq.toCommSq N) :=
-    fun N ↦ by
-      unfold derivedSquareUpperStarIsoInvApp
-      infer_instance
-  have : ∀ M N, IsIso
-      ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) g).projectionTensorMap
-      (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) g).app M).app N)
-      ((L((p₁)^*[ModuleCat.{u + 1} Λ])).obj M) ((L((p₂)^*[ModuleCat.{u + 1} Λ])).obj N)) :=
-    fun M N ↦ hτ M N
-  have : ∀ N, IsIso ((mateEquiv (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) g₁)
-      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) g)
-      (inv (rightDerivedLowerShriekBaseChangeMap Λ sq))).natTrans.app N) := hBC
-  refine Adjunction.isIso_map_externalIhomMap_iff
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) g)
-    (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) g).app M).app N)
-    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) g₁)
-    (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) g₁).app M).app N)
-    (projectionMap_app_app_naturality_left g) (projectionMap_app_app_naturality_left g₁)
-    (rightDerivedLowerShriekBaseChangeMap Λ sq) (inv (rightDerivedLowerShriekBaseChangeMap Λ sq))
-    (fun M ↦ by simp [NatIso.isIso_inv_app])
-    (fun N ↦ derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} Λ) sq.toCommSq N) hlib
-    (projectionMap_app_app_naturality_right g) (projectionMapAssociativity Λ g).assoc
-    (leftDerivedUpperStarComp _ g p₂ (g ≫ p₂) rfl).symm (fun X Y ↦ ?_) E₁ L₁ E₂ L₂
-  exact μ_comp_map_μ_comp_leftDerivedUpperStarComp_inv_app _ g p₂ X Y
+  exact isIso_map_externalIhomMap_iff_of_baseChange sq.toCommSq
+    (rightDerivedLowerShriekBaseChangeMap Λ sq)
+    (projectionMap_rightDerivedLowerShriekBaseChangeMap Λ sq) hBC (fun M N ↦ hτ M N)
+    (projectionMapAssociativity Λ g) E₁ L₁ E₂ L₂
 
 /-- The ranges of the base changes, along a morphism `q`, of complementary open and closed
 immersions are complementary. -/

@@ -75,7 +75,7 @@ noncomputable def reductionModIdealDerivedTensorIso {X : Scheme.{u}}
     (K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (reductionModIdeal Λ X J).obj (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj M) ≅
       ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj ((reductionModIdeal Λ X J).obj M) :=
-  α_ K M (constantSingle (ModuleCat.{u + 1} Λ) X (ModuleCat.of Λ (Λ ⧸ J)))
+  derivedTensorAssociator _ X K M _
 
 /-- Blueprint `lem-coef-finite-direct-image`: Finite coefficient change for direct image.
 
@@ -99,7 +99,13 @@ theorem isIso_rightDerivedLowerStarReductionModIdealMap_app {X Y : Scheme.{u}}
   obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le aX
   have := isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle Λ aX aY f hf d hd K b
     (ModuleCat.of Λ (Λ ⧸ J))
-  exact inferInstanceAs (IsIso (_ ≫ _))
+  -- the second factor is built through `-⊗ᴸ-` so that its instances match those of the map
+  change IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app K).app
+      (constantSingle (ModuleCat.{u + 1} Λ) Y (ModuleCat.of Λ (Λ ⧸ J))) ≫ _)
+  exact @IsIso.comp_isIso _ _ _ _ _ _ _ this ((R((f)_*[ModuleCat.{u + 1} Λ])).mapIso
+    (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).mapIso
+      (leftDerivedUpperStarSingleConstantSheafIso (ModuleCat.{u + 1} Λ) f
+        (ModuleCat.of Λ (Λ ⧸ J))))).isIso_hom
 
 /-- Blueprint `thm-coef-finite-hom`: Finite coefficient change for internal Hom.
 
@@ -129,7 +135,7 @@ theorem nonempty_iso_reductionModIdeal_derivedHom_of_constructibleFiniteTor {X :
     Nonempty ((reductionModIdeal Λ X J).obj ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj M) ≅
       (RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj ((reductionModIdeal Λ X J).obj M)) :=
   have := isIso_derivedHomTensorMap_reductionModIdeal Λ J aX hK hM
-  ⟨asIso (derivedHomTensorMap K M _)⟩
+  ⟨@asIso _ _ _ _ _ this⟩
 
 /-- Blueprint `lem-coef-finite-dualizing`: Finite coefficient change for the dualizing object.
 
@@ -145,6 +151,7 @@ theorem nonempty_iso_reductionModIdeal_dualizingComplex [HasInvertibleExponent �
         (constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k)) (ModuleCat.of Λ (Λ ⧸ J)))) :=
   sorry
 
+omit [Finite Λ] in
 /-- The unit `Λ_X` lies in `Dctf(X, Λ)`. -/
 lemma constructibleFiniteTor_tensorUnit (X : Scheme.{u}) :
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (𝟙_ _) :=
@@ -287,7 +294,7 @@ theorem constructibleFiniteTor_stability_reductionModIdeal {X Y : Scheme.{u}}
     fun K M ↦ ⟨reductionModIdealDerivedTensorIso Λ J K M⟩,
     fun K hK ↦
       have := isIso_rightDerivedLowerStarReductionModIdealMap_app Λ J aX aY f hf hK
-      ⟨asIso ((rightDerivedLowerStarReductionModIdealMap Λ J f).app K)⟩,
+      ⟨@asIso _ _ _ _ _ this⟩,
     fun K ↦ ⟨eS.app K⟩,
     fun K M hK hM ↦
       nonempty_iso_reductionModIdeal_derivedHom_of_constructibleFiniteTor Λ J aX hK hM,
