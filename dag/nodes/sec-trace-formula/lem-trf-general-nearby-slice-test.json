@@ -2,7 +2,7 @@
  "id": "lem-trf-general-nearby-slice-test",
  "kind": "statement",
  "title": "General specialization slices test the ordinary nearby comparison",
- "statement": "Let $f:X\\to S$ be a finite-type morphism of schemes [def-weil-finite-type-morphism], $\\Lambda$ a finite commutative ring annihilated by an integer invertible on $S$, and $K\\in D^b(X_{\\mathrm{Et}},\\Lambda)$ [def-weil-abstract-derived-category]. Use the vanishing topos, exact inverse images and ordinary comparison $\\beta$ of [def-trf-oriented-nearby-cycles]. Choose geometric points $a,b$ of $S$ and a geometric specialization $b\\to a$ [def-weil-geometric-point], represented by an $S$-map $S_{(b)}\\to S_{(a)}$ between strict localizations [def-weil-pbc-strict-henselization-limit]. Put $X_{(a)}=X\\times_SS_{(a)}$, $X_{(b)}=X\\times_SS_{(b)}$, $X_a=X\\times_Sa$, and let $i_a:X_a\\to X_{(a)}$ and $j_b:X_{(b)}\\to X_{(a)}$ be the canonical maps. The specialization defines a geometric morphism $e_{a,b}:(X_a)_{\\mathrm{Et}}\\to V_f$, and there is a canonical natural isomorphism\n$$e_{a,b}^*R\\Psi_fK\\simeq i_a^*Rj_{b,*}(K|_{X_{(b)}}).$$\nFor any $g:T\\to S$ and compatible specialization $b_T\\to a_T$ above $b\\to a$, let $h:X_{a_T}\\to X_a$ be the fibre map, and write $i_{a_T},j_{b_T}$ for the analogous maps over $T$. The pullback along $e_{a_T,b_T}$ of the ordinary comparison for $g$ is identified with the ordinary sliced comparison\n$$h^*i_a^*Rj_{b,*}(K|_{X_{(b)}})\\longrightarrow i_{a_T}^*Rj_{b_T,*}(K_T|_{X_{T,(b_T)}}).$$\nFor any integer $r$, the ordinary comparison cone on $V_{f_T}$ has $H^q=0$ for $q\\le r$ if and only if every such sliced comparison cone on $X_{a_T}$ does. The assertion permits arbitrary $T$, and also holds after an arbitrary preliminary base change of $(f,K)$. The generic strict localization $S_{(b)}$ in these formulas is not replaced by the geometric point $b$.",
+ "statement": "Let $f:X\\to S$ be a finite-type morphism of schemes [def-weil-finite-type-morphism], $\\Lambda$ a finite commutative ring annihilated by an integer invertible on $S$, and $K\\in D^b(X_{\\mathrm{Et}},\\Lambda)$ [def-weil-abstract-derived-category]. Use the vanishing topos, exact inverse images and ordinary comparison $\\beta$ of [def-trf-oriented-nearby-cycles]. Choose geometric points $a,b$ of $S$ and a geometric specialization $b\\to a$ [def-weil-geometric-point], represented by an $S$-map $S_{(b)}\\to S_{(a)}$ between strict localizations [def-weil-pbc-strict-henselization-limit]. Put $X_{(a)}=X\\times_SS_{(a)}$, $X_{(b)}=X\\times_SS_{(b)}$, $X_a=X\\times_Sa$, and let $i_a:X_a\\to X_{(a)}$ and $j_b:X_{(b)}\\to X_{(a)}$ be the canonical maps. The specialization defines a geometric morphism $e_{a,b}:(X_a)_{\\mathrm{Et}}\\to V_f$, and there is a canonical natural isomorphism\n$$e_{a,b}^*R\\Psi_fK\\simeq i_a^*Rj_{b,*}(K|_{X_{(b)}}).$$\nFor any $g:T\\to S$ and compatible specialization $b_T\\to a_T$ above $b\\to a$, let $h:X_{a_T}\\to X_a$ be the fibre map, and write $i_{a_T},j_{b_T}$ for the analogous maps over $T$. The pullback along $e_{a_T,b_T}$ of the ordinary comparison for $g$ is identified with the ordinary sliced comparison\n$$h^*i_a^*Rj_{b,*}(K|_{X_{(b)}})\\longrightarrow i_{a_T}^*Rj_{b_T,*}(K_T|_{X_{T,(b_T)}}).$$\nFor any integer $r$, the ordinary comparison cone on $V_{f_T}$ has $\\mathcal H^q=0$ for $q\\le r$ if and only if, for every geometric specialization $b\\to a$ of $S$ and every compatible specialization $b_T\\to a_T$ above it (equivalently, every geometric specialization of $T$, with $b\\to a$ its image in $S$), the sliced comparison cone on $X_{a_T}$ has $\\mathcal H^q=0$ for $q\\le r$; a single fixed pair $b\\to a$ does not suffice. The assertion permits arbitrary $T$, and also holds after an arbitrary preliminary base change of $(f,K)$. The generic strict localization $S_{(b)}$ in these formulas is not replaced by the geometric point $b$.",
  "source": {
   "document": "literature/orgogozo-modifications-cycles-proches.pdf",
   "place": "Lemma 3.1.1, p. 6, first proof paragraph and the first displayed sliced comparison; the pointwise explanation immediately below it. Author PDF read online; local archival PDF WANTED.",
@@ -16,9 +16,72 @@
   "def-weil-pbc-strict-henselization-limit",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the inputs after arbitrary base change. For any $u:U\\to S$, put $X_U=X\\times_SU$ and $K_U=u_X^*K$. By lem-sfb-finite-type-composition-base-change (2), the projection $f_U:X_U\\to U$ is of finite type, with no hypothesis on $u$ (affinewise: the finitely many generators of each chart algebra $B$ over $A$ still generate $B\\otimes_AA'$ over $A'$, and quasi-compactness is preserved). The constant-coefficient inverse image is exact and termwise by the oriented-nearby-cycles definition. The exact-functor cohomology isomorphism gives $\\mathcal H^q(K_U)=u_X^*\\mathcal H^q(K)$, so the same finite interval bounds $K_U$. An integer killing $\\Lambda$ still kills it, and its inverse on $S$ pulls back to an inverse on $U$. Consequently the specialization-slice lemma applies to $f,K$ and to every $f_U,K_U$, including $U=T$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-trf-oriented-nearby-cycles",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.1.1, printed p. 6: first proof paragraph, sliced comparison and pointwise explanation; section 1, printed p. 2: strict-local Milnor tubes. The input checks are elementary from affine finite generation and exact inverse image; cohomology uses Stacks homology.tex Tag 010N (lemma-exact-functor)."
+   }
+  },
+  {
+   "text": "Since $D^b\\subset D^+$, apply lem-trf-nearby-specialization-slice to $f,K$. Its specialization morphism is the required $e_{a,b}$, and its canonical isomorphism is exactly $e_{a,b}^*R\\Psi_fK\\simeq i_a^*Rj_{b,*}(K|_{X_{(b)}})$. Fix $g:T\\to S$ and denote the induced map $V_{f_T}\\to V_f$ by $v$. The compatibility clause of that same lemma, applied to the chosen compatible specialization over $T$, identifies $e_{a_T,b_T}^*(\\beta_{g,K})$ with the displayed ordinary sliced comparison. In particular its source is $h^*i_a^*Rj_{b,*}(K|_{X_{(b)}})$ and its target is $i_{a_T}^*Rj_{b_T,*}(K_T|_{X_{T,(b_T)}})$. Here $\\beta_{g,K}:v^*R\\Psi_fK\\to R\\Psi_{f_T}K_T$ is the counit-mate comparison of the definition; no invertibility is used. The generic side in the cited lemma is the entire strict localization $S_{(b)}$, so there is no replacement by the geometric point $b$.",
+   "uses": [
+    "lem-trf-nearby-specialization-slice",
+    "def-trf-oriented-nearby-cycles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.1.1, printed p. 6: first proof paragraph, sliced comparison and pointwise explanation; section 1, printed p. 2: strict-local Milnor tubes."
+   }
+  },
+  {
+   "text": "Let $C_g$ be a cone of $\\beta_{g,K}$ on $V_{f_T}$. For a slice $e=e_{a_T,b_T}$, its sheaf inverse image is exact by lem-trf-nearby-specialization-slice. Apply lem-sf-exact-functor-derived-triangulated to this exact functor between the abelian categories of constant-$\\Lambda$-module sheaves. It carries the distinguished triangle defining $C_g$ to a distinguished triangle with first arrow $e^*\\beta_{g,K}$; thus $e^*C_g$ is a cone of the sliced comparison from step 2. Concretely the cone convention in def-weil-abstract-derived-category has degree $q$ term $B^q\\oplus A^{q+1}$ and differential $\\left(\\begin{smallmatrix}d_B&\\alpha\\\\0&-d_A\\end{smallmatrix}\\right)$. The additive termwise inverse image preserves this direct sum and this differential, giving precisely the cone for $e^*\\alpha$, with no degree shift or truncation change. The conclusion concerns the isomorphism class of each cone; it does not require a functorial choice of cones in the derived category.",
+   "uses": [
+    "lem-trf-nearby-specialization-slice",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), termwise exact functor; definition-cone and definition-distinguished-triangle, cone convention as in def-weil-abstract-derived-category."
+   }
+  },
+  {
+   "text": "Apply the cohomology-vanishing clause of lem-trf-nearby-specialization-slice to $f_T$ and $A=C_g$. It says that $\\mathcal H^q(C_g)=0$ for every $q\\le r$ if and only if $\\mathcal H^q(e_{a_T,b_T}^*C_g)=0$ for every $q\\le r$ and every geometric specialization slice over $T$. By step 3 these are exactly the sliced comparison cones in the statement. All specializations over $T$ occur: take $(a,b)$ to be their images over $S$. The quantifier here ranges over all such choices of $(a,b)$ as well; it does not keep one specialization of $S$ fixed. This proves both implications with the same integer $r$, including negative $r$. The cited lemma imposes no Noetherian or finite-type condition on $T$. Finally start instead with any $U\\to S$ and $(f_U,K_U)$: step 1 verifies the inputs, and the successive-base-change compatibility in the cited lemma identifies the comparison maps used in steps 2--3 with those of this new pair. The identical cone argument proves the assertion after every preliminary base change.",
+   "uses": [
+    "lem-trf-nearby-specialization-slice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.1.1, printed p. 6: first proof paragraph, sliced comparison and pointwise explanation; section 1, printed p. 2: strict-local Milnor tubes. Section 3.1 immediately preceding Lemma 3.1.1 explains the universal variant."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-trf-oriented-nearby-cycles",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-trf-nearby-specialization-slice",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+  "place": "Lemma 3.1.1, printed p. 6: first proof paragraph, sliced comparison and pointwise explanation; section 1, printed p. 2: strict-local Milnor tubes. Exact-functor cone passage supplied by Stacks derived.tex Tag 015F and the cone definition."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,10 +117,45 @@
    "results": "{\"t\": \"2026-10-17T16:20:42Z\", \"tool\": \"leanfinder\", \"query\": \"The cone of nearby cycle base change vanishes exactly when all closed fibre strict localization specialization comparisons vanish\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"CochainComplex.mappingCone.isZero_X_iff\", \"Profinite.NobelingProof.succ_exact\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"CochainComplex.isLE_iff\", \"CochainComplex.isGE_iff\", \"CochainComplex.exactAt_of_isLE\"], \"digest\": \"10909d975f5ce0ee\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits concern ordinary specialization stalks, complex restrictions, or normed-ring units, not the nearby-cycle slice identification or comparison-cone test."
+  },
+  {
+   "tool": "grep",
+   "query": "nearby.?cycle|vanishing.?topos|Milnor.?tube",
+   "results": "{\"t\": \"2026-10-17T17:54:17Z\", \"tool\": \"grep\", \"query\": \"nearby.?cycle|vanishing.?topos|Milnor.?tube\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary topological or scheme stalk specializations, structure sheaves, or categorical cones/global sections, not oriented nearby-cycle slice comparisons or their cohomology test."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of nearby cycles to specialization slices detects vanishing of the cone of base change",
+   "results": "{\"t\": \"2026-10-17T17:54:17Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of nearby cycles to specialization slices detects vanishing of the cone of base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.stalkSpecializes\", \"AlgebraicGeometry.StructureSheaf.res_const'\", \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso\", \"CategoryTheory.Sheaf.coneΓ_π_app\", \"CategoryTheory.Sheaf.ΓRes\", \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\", \"AlgebraicGeometry.opensCone_π_app\", \"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\"], \"digest\": \"5095dfc201ecd584\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary topological or scheme stalk specializations, structure sheaves, or categorical cones/global sections, not oriented nearby-cycle slice comparisons or their cohomology test."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nearbyCycles\"",
+   "results": "{\"t\": \"2026-10-17T17:54:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"nearbyCycles\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary topological or scheme stalk specializations, structure sheaves, or categorical cones/global sections, not oriented nearby-cycle slice comparisons or their cohomology test."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The vanishing topos has conservative closed fibre specialization slice pullbacks for all strict local generizations",
+   "results": "{\"t\": \"2026-10-17T17:54:19Z\", \"tool\": \"leanfinder\", \"query\": \"The vanishing topos has conservative closed fibre specialization slice pullbacks for all strict local generizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap\", \"AlgebraicGeometry.universallyClosed_eq_universallySpecializing\", \"AlgebraicGeometry.Scheme.le_iff_specializes\", \"CompHausLike.HasExplicitPullbacks\", \"TopCat.Presheaf.stalkSpecializes_stalkPushforward_apply\"], \"digest\": \"df461488f61bc994\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary topological or scheme stalk specializations, structure sheaves, or categorical cones/global sections, not oriented nearby-cycle slice comparisons or their cohomology test."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary nearby cycle base change comparison is computed on geometric specialization slices by i inverse image R j direct image",
+   "results": "{\"t\": \"2026-10-17T17:54:20Z\", \"tool\": \"leanfinder\", \"query\": \"Ordinary nearby cycle base change comparison is computed on geometric specialization slices by i inverse image R j direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap\", \"AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap\", \"TopCat.Presheaf.stalkSpecializes_stalkPushforward_apply\", \"TopCat.Presheaf.stalkSpecializes_stalkPushforward\", \"AlgebraicGeometry.PresheafedSpace.stalkMap.stalkSpecializes_stalkMap\", \"TopCat.Presheaf.stalkSpecializes_stalkPushforward_assoc\", \"AlgebraicGeometry.Scheme.Hom.map_appLE\", \"TopCat.Presheaf.stalkSpecializes_stalkFunctor_map\"], \"digest\": \"6ab9b2ab48c86f83\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary topological or scheme stalk specializations, structure sheaves, or categorical cones/global sections, not oriented nearby-cycle slice comparisons or their cohomology test."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nearby-proper-hyperdescent",
@@ -80,5 +178,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-general-nearby-slice-test",
+  "worker": "stage1",
+  "summary": "Reused the already existing, more general lem-trf-nearby-specialization-slice rather than creating another nearby-cycle slice node. Checked all base-changed inputs, identified the ordinary comparison itself, passed its cone through exact termwise inverse image with the correct cone convention, and applied the existing all-slices cohomology criterion without a degree loss. No statement change, new node or attachment.",
+  "blueprint": "lem-trf-local-term-locality, proof of (1) and (2), normal-cone specialization: the Orgogozo nearby-cycle base-change input, via the existing ancestry recorded in blueprint.from. This split supplies precisely the general sliced-comparison test at the start of Orgogozo Lemma 3.1.1.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-8ab671213",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-8ab671213 (reviewer sub-agent of L); spot-checked: I read the item in full, the statements of all cited nodes, the unit sk-i-curve-zero and the chapter route, the single citer (lem-trf-nearby-proper-hyperdescent), and ILO Exposé XI 1.8–1.12, 2.2–2.3 and 4.1–4.4 in the local PDF. Orgogozo's paper is not in the local literature and reviewers have no network access, so I could not reread Lemma 3.1.1; the WANTED line stays. Instead I checked the slice formula at stalks: both sides compute RΓ(X_(x)×_{S_(a)}S_(b),K). The points (x,b,c) give every point of V_f. The coefficient category is the same in both nodes: D(Mod Λ_X) on the small étale site, and the item's D^b lies inside the node's D^+. β is the counit mate, as in ILO 1.9/4.3. The item is a corollary of the existing same-unit lem-trf-nearby-specialization-slice. The split uses that node's statement clauses (slice isomorphism, compatibility over T, exact e^*, detection of H^{≤r}) and adds a correct cone passage. For the cone, e^*C(α)=C(e^*α) termwise by lem-sf-exact-functor-derived-triangulated, with no shift. There are no new nodes, no cycle (checked by traversal), no duplicates beyond the reused general node, no SGA source and no tool_uses. Two repairs are in fixes/: (1) C1/E5: step 1 only argued finite type for an affine open of U that maps into an affine open of S; it now cites the Mathlib leaf lem-sfb-finite-type-composition-base-change (2), with proof_deps updated. (2) B2/E3: the statement's sentence 'every such sliced comparison cone', after choosing a fixed b→a, can be read with b→a fixed. That reading is false, since slices above one pair are not conservative on V_{f_T}. I rewrote the sentence to quantify over every specialization b→a of S and every compatible b_T→a_T, writing 𝓗^q. This is the reading the proof and the citer use, so it is a clarification, not a weakening. Small cases checked: X=∅, Λ=0, T=∅, g=id, punctual S, strictly henselian trait, negative r.; 1 file(s) fixed by the reviewer"
  }
 }
