@@ -13,9 +13,59 @@
   "def-pc-fppf-site",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P(T)=U(T)/j(R(T))$ and $Q=P^\\#=U/R$. The assumption that $j(R(T))$ is already an equivalence relation means that $[a]=[b]$ in $P(T)$ if and only if there is $r\\in R(T)$ with $sr=a$ and $tr=b$; no chain of generated relations is needed. For a section $(a,b)$ of $h_U\\times_Qh_U$ over $T$, the classes $[a],[b]\\in P(T)$ have equal images in $Q(T)$. Apply the final assertion of [lem-weil-pbc-site-sheafification-sections-local] to $P$ on the big fppf site (with set values in a universe containing its objects and arrows). It gives an fppf covering $\\{T_i\\to T\\}$ on which $[a|_{T_i}]=[b|_{T_i}]$. By the defining equivalence relation there are $r_i\\in R(T_i)$ with $sr_i=a|_{T_i}$ and $tr_i=b|_{T_i}$. Hence the canonical map is locally surjective. Conversely any such relation sections give equality in $Q$ locally, and then globally by the separatedness of $Q$. This proves the local-witness assertion of Tag 045Y rather than assuming its omitted proof.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-fibre-product",
+    "def-pc-fppf-site",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 045Y (lemma-quotient-pre-equivalence), whose proof is omitted; its hint is completed using Sites Tags 00WB (theorem-plus) and 00WK (lemma-sections-sheafification) via the cited existing local-sections lemma"
+   }
+  },
+  {
+   "text": "The same canonical morphism is locally injective. Suppose two sections r,r' of h_R over an S-scheme T have equal images in h_U x_Q h_U. After restricting to any member of a covering on which the equality is witnessed, their composites with s and t are equal. Thus j r=(s r,t r) and j r'=(s r',t r') are equal as maps to U x_S U. Since j is a monomorphism, r=r' on that member. This is exactly the local-injectivity condition for a morphism of sheaves of sets.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 045Y, monomorphism hypothesis together with the definition of a monomorphism of schemes"
+   }
+  },
+  {
+   "text": "Apply the sheaf local-bijection criterion [lem-galois-set-sheaf-local-bijection-isomorphism] to the canonical map. Step 1 supplies local surjectivity and Step 2 supplies local injectivity, so the criterion gives that h_R -> h_U x_Q h_U is an isomorphism.",
+   "uses": [
+    "lem-galois-set-sheaf-local-bijection-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Sites/LocallyBijective.lean",
+    "place": "Sheaf.isLocallyBijective_iff_isIso, specialized to sheaves of sets"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-pc-scheme",
+  "def-weil-pbc-sheafification",
+  "lem-galois-set-sheaf-local-bijection-isomorphism",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 045Y and the quotient-sheaf definition immediately preceding it; the final categorical step is Mathlib Sheaf.isLocallyBijective_iff_isIso"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,7 +97,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-relation-quotient",
@@ -66,5 +116,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-relation-kernel-pair",
+  "worker": "stage1",
+  "summary": "Split the kernel-pair identification into the Tag 045Y local-witness argument, the monomorphism argument for local injectivity, and the sheaf local-bijection criterion. The statement and hypotheses are unchanged; no new nodes were created because the local-witness assertion is the proof's central clause rather than an independent DAG item. Maintainer-reader repair: cite the existing sheafification local-equality theorem and explicitly derive the relation witnesses from equality of quotient classes; normalize doubled TeX backslashes in the statement.",
+  "blueprint": "Realizes the ancestor lem-trf-local-term-locality sentence: Groupoids Tag 045Y identifies local equality in the sheaf quotient with relation sections, and monicity identifies the relation with the kernel pair.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-set-sheaf-local-bijection-isomorphism",
+    "why": "Its statement is the generic sheaf-of-sets criterion converting the local injectivity and local surjectivity established in Steps 1 and 2 into an isomorphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-set-sheaf-local-bijection-isomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q73-7a1bbe9e0",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q73-7a1bbe9e0 (reviewer sub-agent of L); spot-checked: Repaired Step 1’s missing sheafification local-equality citation and supplied the omitted quotient-class argument; corrected doubled TeX backslashes. Checked all three steps, cited statements, sources, edge cases, duplicate candidates, and dependency closure. No new nodes or weakened statements. Corrected JSON is under fixes/dag/nodes; full findings are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
