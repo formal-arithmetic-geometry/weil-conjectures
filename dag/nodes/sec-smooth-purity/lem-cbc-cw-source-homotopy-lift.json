@@ -229,5 +229,23 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-4333781ab (reviewer sub-agent of L); spot-checked: I read the whole delivery and checked it against Kerodon Lemma 3.6.3.11 (tag 0140), read online, and Remark 013T. The item's statement is unchanged and matches the source hypothesis by hypothesis: an arbitrary weak equivalence w:A->B, a CW source K, and an unbased homotopy from w v to u. Both uses in the parent Whitehead node agree with it. Step 1, the skeletal induction with exact restriction and the empty base case, is elementary and correct. Step 2 builds alpha_e, beta_e and h_e with the required endpoint identities, which are exactly the new lemma's hypotheses; n=0 is covered. Steps 3 and 5 use the Mathlib leaf lem-cbc-quotient-cylinder-continuity (Topology.IsQuotientMap.continuous_lift_prod_left, CompactOpen.lean:584-598, which needs only a locally compact Y) on the attaching quotient q_n and on the global characteristic-map quotient, each with T=I. These applications are correct, and the descent and well-definedness checks are written out. Step 4 is elementary. proof_deps equals the union of the uses, both cited nodes are in unit sk-prop-sf-cbc, and no tool_uses are needed. The new node lem-cbc-weak-equivalence-relative-disk-extension is the single-cell homotopy extension lifting property (HELP) for (D^n, S^{n-1}): a true statement and exactly the inductive-step lifting problem in 0140. It is strictly smaller than the item (one cell with fixed boundary data), not a restated clause, and a statement only. I tested it at n=0, n=1, w=id and A empty. An rg search of the DAG found no duplicate: lem-coef-topological-serre-model, kan-realization-serre, cubical-open-box-pair and model-right-homotopy-extension each differ. There is no cycle and no SGA citation. One repair: the new node lacked the lean_audit field required by brief section 3. I added it with state none for master and slopmaster2 in fixes/dag/nodes/sec-smooth-purity/lem-cbc-weak-equivalence-relative-disk-extension.json and changed nothing else.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Topology.CWSourceHomotopyLift",
+  "declaration": "Topology.cw_source_homotopy_lift",
+  "file": "lean/Sheaf/Topology/CWSourceHomotopyLift.lean",
+  "statement": "theorem cw_source_homotopy_lift {K : Type u} {A : Type v} {B : Type w} [TopologicalSpace K] [T2Space K] [TopologicalSpace A] [TopologicalSpace B] (hK : Nonempty (Topology.CWComplex (Set.univ : Set K))) (w : C(A, B)) (hcomponents : Function.Bijective (SSet.Enhanced.componentsMap w)) (hgroups : ∀ (n : ℕ), 1 ≤ n → ∀ (a : A), Function.Bijective (SSet.Enhanced.homotopyGroupMap w n a)) (u : C(K, B)) : ∃ (v : C(K, A)) (H : C(K × I, B)), (∀ k : K, H (k, 0) = w (v k)) ∧ (∀ k : K, H (k, 1) = u k)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c36380a84",
+  "group": "NP",
+  "result": "pass",
+  "note": "Read the node (only lean differs from the shared node), the Kerodon 0140 / Remark 3.6.3.4 source place, the def-cbc-enhanced-diagrams-cones declarations componentsMap and homotopyGroupMap (EnhancedDiagramsCones.lean:73-94, same encoding as IsWeakHomotopyEquivalence), and Mathlib's classical CWComplex class. Every clause is exact: CW K encoded as T2Space plus Nonempty CWComplex univ (Hausdorff is part of the classical notion and Mathlib omits it deliberately, so this is not stronger); arbitrary A and B in independent universes; component bijection; positive based-group bijections at every point; existential continuous v and ordinary-product homotopy H with the node's endpoint orientation. lean.statement is verbatim. Edge cases checked: empty K/A/B, n=0 via components, infinitely many cells. Single sorry theorem, no hollow definitions, source and blueprint docstrings, proof docstring follows the five steps, report has both required sections. nt_compile.py --json on the snapshot text: rc 0, no diagnostics. No findings, no fixes."
  }
 }
