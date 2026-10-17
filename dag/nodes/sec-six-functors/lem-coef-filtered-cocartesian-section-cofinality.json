@@ -29,7 +29,8 @@
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-cocartesian-section-colimits"
  ],
  "proof": [
   {
@@ -325,5 +326,29 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-d8b35cecf (reviewer sub-agent of L); spot-checked: Read HTT 5.4.4.1, 5.4.4.2 (pp.431-433), Cor 4.3.1.11 and Lem 4.3.2.13 from the HTT text already on this machine; HTT is not in the project literature, and the report correctly records it as WANTED. The item statement matches 5.4.4.2 clause by clause (lambda<kappa is HTT's kappa<tau; the exponent condition is kappa<<tau; the extra 'uncountable' is implied), and it is unchanged and not weakened. I checked all 8 steps against the statements of the 16 cited nodes. Step 1: inner horns are trivial cofibrations, and the WFS is closed under pushout and countable composition. Step 2: every hypothesis of base-invariance clause (2), in its opposite form, is supplied by the marked model; restriction is a trivial fibration via the pushout-product leaf; new edges are composites, handled by composition-initiality. Step 4: the cone 'repeat the final vertex' is a genuine simplicial map; cone lifting with rho=kappa; the counts mu^nu and 2^(nu+aleph0) are below kappa, and lambda=omega is treated separately. Step 5: lambda-regular factoring through one stage; empty A gives nonemptiness. Step 6: all pairs (x,z) are covered. Step 7: the join formula map works, including Z empty. Step 8: I checked the J formula on operators, its t=0/t=1/Z x Delta^1 restrictions and the fixed source y; the comma is a quasicategory via isofibration exponentiation plus pullback; filtered implies contractible; the transfer through the equivalence v~t uses the space-test (3)=>(1)=>(3). New cone-lifting node: exactly HTT 5.4.4.1, true, B1-B7 OK. New cylinder node: I verified it is true (T_a is a quasicategory, K is full in T_a, the comma at x equals L_x, terminal objects at K-vertices, 4.3.1.11 then 4.3.2.13), with correct initial-object hypotheses for empty L_x. Neither new node duplicates relative-kan-existence, fiber-relative-colimit-criterion, grothendieck-limits-colimits, relative-right-kan-restriction or the others I opened; relative-kan-existence is a likely ingredient when the cylinder node is split later. BFS over 384 dependency nodes found no cycle and no missing node. I accept the tool uses def-cbc-enhanced-diagrams-cones and lem-cbc-enhanced-functor-cone-calculus as generic. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FilteredCocartesianSectionCofinality",
+  "declaration": "SSet.Enhanced.filtered_cocartesian_section_cofinality",
+  "declarations": [
+   "SSet.Enhanced.sectionEvaluation_comp_base",
+   "SSet.Enhanced.sectionFiberEvaluation",
+   "SSet.Enhanced.filtered_cocartesian_section_cofinality"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FilteredCocartesianSectionCofinality.lean",
+  "statement": "theorem filtered_cocartesian_section_cofinality (lam κ : Cardinal.{u}) (hlam : lam.IsRegular) (hκ : κ.IsRegular) (hlamκ : lam < κ) (huncountable : Cardinal.aleph0 < κ) (hpower : ∀ μ ν : Cardinal.{u}, μ < κ → ν < lam → μ ^ ν < κ) {X Y : SSet.{max (u + 1) v}} (q : Y ⟶ X) (hX : IsKappaSmall κ X) (hq : cocartesianFibrationOver q) (hfibers : ∀ x : X _⦋0⦌, ∃ h : Quasicategory (fiber q x), @IsKappaFiltered κ (fiber q x) h ∧ ∀ (I : SSet.{max (u + 1) v}) (hI : Quasicategory I), IsKappaSmall κ I → @IsKappaFiltered lam I hI → HasInfinityColimitsOfShape I (fiber q x)) (htransport : ∀ (x x' : X _⦋0⦌) (e : X _⦋1⦌), X.δ 1 e = x → X.δ 0 e = x' → ∀ f : fiber q x ⟶ fiber q x', IsCocartesianTransport e f → ∀ (I : SSet.{max (u + 1) v}) (hI : Quasicategory I), IsKappaSmall κ I → @IsKappaFiltered lam I hI → PreservesInfinityColimitsOfShape I f) : (∃ h : Quasicategory (sectionCategory q (𝟙 X)), @IsKappaFiltered κ (sectionCategory q (𝟙 X)) h) ∧ ∀ (x : X _⦋0⦌) (y : (fiber q x) _⦋0⦌), IsContractible (comma (sectionCategory q (𝟙 X)) (fiber q x) (sectionFiberEvaluation q x) y false)",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "All sections over an arbitrary simplicial base, in an unrestricted containing universe; filteredness and cofinality use the recorded coherent notions. Evaluation is the canonical lift into the existing strict fiber. The auxiliary equation is the named construction obligation for this map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b081a89ef",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Statement matches node and HTT 5.4.4.2 clause by clause: regular lam<kappa, uncountable kappa, mu^nu<kappa, kappa-small X (nondegenerate simplices), arbitrary simplicial base via cocartesianFibrationOver, kappa-filtered fibers with existence of kappa-small lam-filtered colimits, coherent IsCocartesianTransport preservation (same convention as landed cocartesian_section_colimits), all strict sections kappa-filtered, comma(..., y, false) = y->s(x) weakly contractible. Universes follow the def-coef-presentable convention; no extra assumptions. sectionFiberEvaluation is the canonical pullback.lift (real data); its sorry'd obligation sectionEvaluation_comp_base checked true. Section 1(B) repair of def-coef-infinity-fibrations is justified (old predicate requires Quasicategory instances); same formula, public re-export, only the lean record changed. stage2_delivery check_lean_text/check_record: no failures; statement verbatim; lines <=100; report sections present. nt_compile --json on both files: exit 0, no errors printed. Observations only: equivalent helper SSet.Marked.Over.relativeFibration exists in a lemma module (def node is the right owner); report has 'HTT Lemma the project server' redaction artifact."
  }
 }

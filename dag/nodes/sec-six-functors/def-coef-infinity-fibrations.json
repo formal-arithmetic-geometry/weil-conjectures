@@ -113,34 +113,26 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-e9cdf6511 (reviewer sub-agent of L); spot-checked: The definition is correct; one source citation was imprecise and is fixed. HTT is not archived locally and the network is blocked, so I checked against the standard HTT definitions rather than the PDF. The horn ranges match HTT Def 2.0.0.3: inner 0<i<n, left 0<=i<n, right 0<i<=n, all with n>=1. The cartesian and cocartesian edge clauses (Lambda^n_n with final edge, Lambda^n_0 with edge {0,1}, n>=2) match the horn criterion of HTT Def 2.4.1.1 / Remark 2.4.1.4. The fibration clauses match Def 2.4.2.1 (fixed target for cartesian, fixed source for cocartesian). The item restricts the fibrations to quasicategories; every consumer (monoidal-infinity-category, complete-algebroid, kan-relative-nerve) has a quasicategorical base, so no target is weakened. Both stmt_deps say what the item uses: Stacks tags 016A/0174/0175 checked in tags/tags; Scholze Six-Functor Formalisms pp.13-14, Defs 2.1-2.2, checked locally. Small cases checked: n=1, n=2, N([1])->Delta^0 inner but not left, empty total space, identity map, base Delta^0. blueprint_refs search 'fibration' finds 0 nodes. A scan of all DAG statements finds only consumers and theorem nodes; lem-coef-infinity-grothendieck-limits-colimits restates the notion inline but is a theorem, not a duplicate. Pinned Mathlib has only SSet.InnerFibration (InnerFibration.lean:64-71) and no left/right/cartesian fibrations, so mathlib_match null is correct. The blueprint from/via chain is consistent with the main-20261015 proof paragraph 2 of prop-coef-integral-exceptional-adjoint. No route or tool use, no SGA source, unit realized fields untouched. FIX: the report says HTT Remark 2.4.1.4 was added, but source.place lacked it. I corrected source.place (only that field changed) in fixes/dag/nodes/sec-six-functors/def-coef-infinity-fibrations.json.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.CategoryTheory.InfinityFibrations",
-  "declaration": "SSet.Enhanced.cocartesianFibration",
+  "module": "Sheaf.CategoryTheory.InfinityFibrationsOverSimplicialBases",
+  "declaration": "SSet.Enhanced.cocartesianFibrationOver",
   "declarations": [
-   "SSet.Enhanced.leftFibration",
-   "SSet.Enhanced.rightFibration",
-   "SSet.Enhanced.IsCocartesianEdge",
-   "SSet.Enhanced.IsCartesianEdge",
-   "SSet.Enhanced.cocartesianFibration",
-   "SSet.Enhanced.cartesianFibration",
-   "SSet.Enhanced.fiber",
-   "SSet.Enhanced.preservesCocartesianEdges",
-   "SSet.Enhanced.preservesCartesianEdges"
+   "SSet.Enhanced.cocartesianFibrationOver"
   ],
-  "file": "lean/Sheaf/CategoryTheory/InfinityFibrations.lean",
-  "statement": "def cocartesianFibration {E B : SSet.{u}} (p : E ⟶ B) [Quasicategory E] [Quasicategory B] : Prop",
+  "file": "lean/Sheaf/CategoryTheory/InfinityFibrationsOverSimplicialBases.lean",
+  "statement": "def cocartesianFibrationOver {E B : SSet.{u}} (p : E ⟶ B) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q70",
-  "date": "2026-10-16",
+  "by": "Q30",
+  "date": "2026-10-17",
   "existing": false,
-  "note": "Uses Mathlib HasLiftingProperty and InnerFibration directly; defines the remaining horn, edge, lift, fiber and preservation clauses without postponed proofs."
+  "note": "The previous cocartesianFibration predicate requires Quasicategory instances for both total space and base, so cannot express the arbitrary simplicial bases explicitly required by this consumer and HTT 5.4.4.2. The new module publicly reexports the existing full fibration/edge/fiber/preservation interface and gives exactly its same inner-horn and cocartesian edge-lift condition without those instance parameters. The existing predicates and modules remain usable."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-5c5b542db",
-  "group": "Q70",
+  "reviewer": "NT-stage2-cc-b081a89ef",
+  "group": "Q30",
   "result": "pass",
-  "note": "All 11 node clauses match the Lean exactly: Mathlib InnerFibration used directly; left/right horn ranges (1<=n, i<last / 0<i) exact; (co)cartesian edge tests from n>=2 on Λ^n_0/Λ^n_n with edge {0,1}/{n-1,n} via mkOfSucc; the edge map a exists uniquely because the horn keeps that face, so the condition is not vacuous; fibrations conjoin InnerFibration with the node's quasicategory hypotheses and correct δ1 source/δ0 target; fiber is the strict pullback with const b ({b}×_B E, canonically iso, same as RightFibrationFibers); preservation is over the base via h≫q=p. Only the lean field differs from the shared node; lean.statement verbatim; 9 declarations listed. No duplicate in Mathlib, the side Sheaf/WeilConjectures trees or DAG definitions (the others are consumers). No sorry, axiom or hollow definition; source/blueprint docstrings throughout; u bound, autoImplicit false. nt_compile.py --json on the snapshot file: rc 0, no errors or warnings. Side remark: the stage-1 source.place lacks the Remark 2.4.1.4 the earlier review claimed to add; the module docstrings cite it, and the field is outside this delivery."
+  "note": "Statement matches node and HTT 5.4.4.2 clause by clause: regular lam<kappa, uncountable kappa, mu^nu<kappa, kappa-small X (nondegenerate simplices), arbitrary simplicial base via cocartesianFibrationOver, kappa-filtered fibers with existence of kappa-small lam-filtered colimits, coherent IsCocartesianTransport preservation (same convention as landed cocartesian_section_colimits), all strict sections kappa-filtered, comma(..., y, false) = y->s(x) weakly contractible. Universes follow the def-coef-presentable convention; no extra assumptions. sectionFiberEvaluation is the canonical pullback.lift (real data); its sorry'd obligation sectionEvaluation_comp_base checked true. Section 1(B) repair of def-coef-infinity-fibrations is justified (old predicate requires Quasicategory instances); same formula, public re-export, only the lean record changed. stage2_delivery check_lean_text/check_record: no failures; statement verbatim; lines <=100; report sections present. nt_compile --json on both files: exit 0, no errors printed. Observations only: equivalent helper SSet.Marked.Over.relativeFibration exists in a lemma module (def node is the right owner); report has 'HTT Lemma the project server' redaction artifact."
  },
  "lean_audit": {
   "master": {

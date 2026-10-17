@@ -227,5 +227,40 @@
   "group": "Q69",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-dd3f5f95e (reviewer sub-agent of L); spot-checked: I read the statement, all four steps, both cited nodes (def-nagata-category; lem-coef-fixed-object-simplicial-free-calculus, statement and all steps), the parent lem-coef-free-factor-hammock-pushout (all 7 steps) and the unit. I also read Dwyer-Kan JPAA 17 printed pp.20-21 from the cited URL scan. Prop 3.2's proof on p.21 gives the unique alternating factorization only for free D and W. The item's arbitrary-factor version is true and is needed, because the parent applies it to D*H(W,W)_k. Small-case tests: one-object free products of monoids (Z/2*Z/2), groupoids with invertible letters, a retraction r∘i=id with i∘r≠id, a(b1 b2)c with b1b2=id, loops, empty O, and a non-injective object map with image letters becoming identities. All clauses hold. No duplicate turned up in an rg search of dag/nodes; free-product-nerve-gluing, coproduct-augmentation and the fixed-object step 5 cover only other or special cases. Fixes, made in fixes/dag/nodes/sec-six-functors/lem-coef-free-factor-category-normal-form.json: (1) E5 in step 2: the left-to-right block normalizer did not merge blocks that become adjacent once an identity-composite block is deleted, which is the one nontrivial point of confluence. I replaced it with the van der Waerden action on reduced words and checked f·(g·w)=(fg)·w case by case. (2) Step 4 appealed to the fixed-object universal property for a target on O'. It now argues uniqueness by generation. (3) source.place and step 2's source place now say that DK states the result only for free factors. Statement, stmt_deps and proof_deps are unchanged. There are no new nodes and no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FreeFactorCategoryNormalForm",
+  "declaration": "CategoryTheory.FreeFactorCategoryNormalForm.free_factor_category_normal_form",
+  "declarations": [
+   "CategoryTheory.FreeFactorCategoryNormalForm.Hom",
+   "CategoryTheory.FreeFactorCategoryNormalForm.identity",
+   "CategoryTheory.FreeFactorCategoryNormalForm.compose",
+   "CategoryTheory.FreeFactorCategoryNormalForm.Fun",
+   "CategoryTheory.FreeFactorCategoryNormalForm.FunOver",
+   "CategoryTheory.FreeFactorCategoryNormalForm.FunOver.map",
+   "CategoryTheory.FreeFactorCategoryNormalForm.Word",
+   "CategoryTheory.FreeFactorCategoryNormalForm.Word.append",
+   "CategoryTheory.FreeFactorCategoryNormalForm.Word.Reduced",
+   "CategoryTheory.FreeFactorCategoryNormalForm.Step",
+   "CategoryTheory.FreeFactorCategoryNormalForm.Word.map",
+   "CategoryTheory.FreeFactorCategoryNormalForm.Coproduct",
+   "CategoryTheory.FreeFactorCategoryNormalForm.Word.eval",
+   "CategoryTheory.FreeFactorCategoryNormalForm.free_factor_category_normal_form"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FreeFactorCategoryNormalForm.lean",
+  "statement": "theorem free_factor_category_normal_form {O : Type u} (A B Q : Category.{v} O) (P : Coproduct A B Q) : (∀ (x y : O), Function.Injective (P.left.map (x := x) (y := y))) ∧ (∀ (x y : O), Function.Injective (P.right.map (x := x) (y := y))) ∧ (∀ (x y : O) (f : Hom Q x y), ∃! w : Word A B x y, w.Reduced ∧ w.eval P = f) ∧ (∀ (x y : O), WellFounded (fun v w : Word A B x y ↦ Step w v)) ∧ (∀ (x y : O) (w : Word A B x y), ∃ r : Word A B x y, r.Reduced ∧ Relation.ReflTransGen Step w r ∧ r.eval P = w.eval P) ∧ (∀ (x y : O) (w r s : Word A B x y), Relation.ReflTransGen Step w r → Relation.ReflTransGen Step w s → r.Reduced → s.Reduced → r = s) ∧ (∀ (x y z : O) (v : Word A B x y) (w : Word A B y z) (r : Word A B x z), v.Reduced → w.Reduced → r.Reduced → Relation.ReflTransGen Step (v.append w) r → compose Q (v.eval P) (w.eval P) = r.eval P) ∧ (∀ (O' : Type u') (A' B' Q' : Category.{v'} O') (P' : Coproduct A' B' Q') (k : O → O') (F : FunOver A A' k) (G : FunOver B B' k), ∃! H : FunOver Q Q' k, (∀ (x y : O) (f : Hom A x y), H.map (P.left.map f) = P'.left.map (F.map f)) ∧ (∀ (x y : O) (f : Hom B x y), H.map (P.right.map f) = P'.right.map (G.map f)) ∧ (∀ (x y : O) (w : Word A B x y) (r : Word A' B' (k x) (k y)), w.Reduced → r.Reduced → Relation.ReflTransGen Step (w.map F G) r → H.map (w.eval P) = r.eval P'))",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Mathlib Category and Functor are passed explicitly to represent two small categories on exactly the same object set. Word, Step, evaluation, and the ordinary fixed-object coproduct interface are helper declarations of this normal-form notion; no simplicial or Bergner theorem is needed. Second reading: the coproduct universal property tests Category.{max u v} O so that it includes the typed word category without equating object and morphism universes. The recorded fixed-object dependency module is imported."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-699ebddc4",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Node copy differs from the side clone only in lean; lean.statement matches the file verbatim; all 14 recorded declarations exist. Every node clause has a conjunct: faithful inclusions, unique reduced word, termination (reversed WellFounded Step), normalization, equality of reduced endpoints, composition by reduction, unique induced functor with the word rule (Word.map keeps identity images). No freeness/invertibility/finiteness hypotheses; universes u v u' v' independent; coproduct tested in max u v, which still determines it (word category plus ULift Q). Caveat, not a fault: Q shares hom universe v with A and B, so for u > v the hypothesis may be unsatisfiable; the node's one-universe smallness is covered. No duplicate: fixedObjectCategoryCoproduct is a chosen Cat.{u,u} pushout, IsDegreewiseCoproduct is the simplicial form; Mathlib has only monoid CoprodI. Helpers have real data, source/blueprint docstrings, only sorry is the theorem body, dependency import present. Edge cases: empty O, loops, inverse pairs/retractions, mid-word identity composites, non-injective k. nt_compile.py --json on the snapshot file: exit 0, no errors or warnings."
  }
 }
