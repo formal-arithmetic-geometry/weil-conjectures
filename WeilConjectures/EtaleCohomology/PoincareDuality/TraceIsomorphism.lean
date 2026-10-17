@@ -46,7 +46,9 @@ supports.
 - `AlgebraicGeometry.Etale.TateOrientation.bijective_untwistedTraceMap`: the untwisted trace
   `H^{2d}_c(X, Λ) ⟶ Λ(-d)` is bijective.
 - `AlgebraicGeometry.Etale.exists_tateOrientation_traceMap_pointClass`: for a suitable (the
-  normalized) orientation the trace sends every point class to `1`.
+  normalized) orientation the trace sends every point class to `1`. It rests on
+  `AlgebraicGeometry.Etale.pointClass_eq` (all `k`-points have the same class) and
+  `AlgebraicGeometry.Etale.isIso_traceMap_pointClass` (the trace of a point class is invertible).
 - `AlgebraicGeometry.Etale.traceIsomorphism` (`sk-cor-trace`): the trace isomorphism
   `H^{2d}(X, Λ) ≅ Λ(-d)` and the normalization of the trace by point classes.
 
