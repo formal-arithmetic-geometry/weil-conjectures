@@ -27,6 +27,9 @@ The same argument applied to the open subspaces shows that a noetherian space is
 connected (`TopologicalSpace.NoetherianSpace.locallyConnectedSpace`). Consequently, the preimage
 of a connected component of a noetherian subspace under a continuous map landing in it is open and
 closed (`TopologicalSpace.NoetherianSpace.isClopen_preimage_connectedComponentIn`).
+
+Finally, a dense open subset of a noetherian space contains the generic points of all irreducible
+components (`genericPoints_subset_of_isOpen_of_dense`).
 -/
 
 @[expose] public section
@@ -254,3 +257,14 @@ theorem exists_specializes_of_mem_closure [QuasiSober α] {S : Set α} (hS : IsO
   exact ⟨g, hgz'.mem_open hS hz'S, hgz⟩
 
 end TopologicalSpace.NoetherianSpace
+
+/-- In a Noetherian space, a dense open subset contains the generic points of all irreducible
+components: the complement of the other components is a nonempty open subset of a component,
+which meets the dense open. -/
+theorem genericPoints_subset_of_isOpen_of_dense [TopologicalSpace.NoetherianSpace α] {U : Set α}
+    (hU : IsOpen U) (hd : Dense U) : genericPoints α ⊆ U := by
+  intro c hc
+  obtain ⟨o, ho, hne, hoZ⟩ :=
+    TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent _ hc
+  obtain ⟨v, hvo, hvU⟩ := hd.inter_open_nonempty o ho hne
+  exact (specializes_iff_mem_closure.2 (hoZ hvo)).mem_open hU hvU
