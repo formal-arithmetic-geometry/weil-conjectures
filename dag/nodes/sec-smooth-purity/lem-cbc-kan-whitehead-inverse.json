@@ -220,5 +220,23 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-3e1d5c618 (reviewer sub-agent of L); spot-checked: I read all seven steps in full, and each is correct. Step 1: in P=A×_{B,ev0}Fun(Δ¹,B), ri=1 and pi=f, and evaluation is natural. Step 2: the corner-map leaf with ∂Δ¹⊂Δ¹ and B→Δ⁰ gives the fibration (ev0,ev1); together with A Kan this fills every horn for p, outer horns included. Step 3: the min-contraction is simplicial and stays in P, with endpoints ir and 1_P, so lem-cbc-simplicial-homotopy-equivalence-weak (either orientation allowed) makes |i| a weak equivalence. Step 4: two-out-of-three, realization of Kan fibrations as Serre fibrations, and the realized pair (Δⁿ,∂Δⁿ)≅(Dⁿ,Sⁿ⁻¹) for n≥0 give a strict continuous filler. Step 5: the new node gives both clauses of 08NL. Step 6: Stacks 08NM (simplicial.tex 5550-5581, read) gives a section s and the endpoint homotopy K from sp to 1, as in 08NS (5641-5664); the square commutes since psp=p. Step 7: g=rs, and H0=gf, H1=1, J0=fg, J1=1 by substitution. Item statement unchanged; it matches Kerodon 00UB, and the empty case is handled. It is not a target node, so the base-change morphism and coefficient category do not arise. No cycles: I traversed the dependencies of every cited node, and none reaches the item. The rejected alternatives (lem-cbc-realization-weak-equivalence, lem-cbc-kan-fibration-fiber-criterion, lem-coef-kan-quillen-right-proper) really are circular. The natural inputs for splitting the new node later (lem-coef-kan-minimal-factorization, lem-coef-kan-path-boundary-bijections) are not. New node lem-cbc-kan-relative-realization-lift is true: I checked the argument independently via the minimal-fibration retract, local triviality, the simplicial/realized obstruction class and a lift through the retraction. Small cases all hold: n=0, n=1, an empty fibre, and the non-Kan Δ¹→pt reverse-edge counterexample, which the horn hypothesis correctly excludes. It does not restate a clause of the item and is not circular: it assumes no weak equivalence and asserts no inverse or homotopy. DAG scan: no duplicate; the minimal-factorization and path-boundary nodes state something different. Statement only, self-contained TeX, honest agent-corollary Hovey source with the archive WANTED, three kinds of search recorded, blueprint fields correct. Accepted tool_uses: lem-coef-topological-serre-model, lem-coef-kan-realization-serre, lem-coef-realization-finite-limits, and lem-weil-pbc-trivial-kan-lifts-monomorphisms (a Mathlib leaf, so declaring it is redundant). No SGA source used. Non-blocking: the new node has no lean_audit key, as several landed unsplit nodes also lack it. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanWhiteheadInverse",
+  "declaration": "SSet.Enhanced.kan_whitehead_inverse",
+  "file": "lean/Sheaf/AlgebraicTopology/KanWhiteheadInverse.lean",
+  "statement": "theorem kan_whitehead_inverse {A B : SSet.{u}} [KanComplex A] [KanComplex B] (f : A ⟶ B) (hf : IsWeakHomotopyEquivalence f) : ∃ (g : B ⟶ A) (H : A ⊗ Δ[1] ⟶ A) (J : B ⊗ Δ[1] ⟶ B), SSet.ι₀ ≫ H = f ≫ g ∧ SSet.ι₁ ≫ H = 𝟙 A ∧ SSet.ι₀ ≫ J = g ≫ f ∧ SSet.ι₁ ≫ J = 𝟙 B",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-36fc0b2a4",
+  "group": "NC",
+  "result": "pass",
+  "note": "KanWhiteheadInverse.lean renders lem-cbc-kan-whitehead-inverse exactly. A B : SSet.{u} with KanComplex (Mathlib: all horns, outer included, no dimension-0 condition); f : A ⟶ B; hf : the recorded SSet.Enhanced.IsWeakHomotopyEquivalence (bijection on realization path components, and on pi_r for r>=1 at every source point). Conclusion: exists g, H : A⊗Δ[1]⟶A, J : B⊗Δ[1]⟶B with ι₀≫H=f≫g, ι₁≫H=𝟙A, ι₀≫J=g≫f, ι₁≫J=𝟙B; Mathlib ι₀/ι₁ = lift id (const 0/1), so the orientation is right and matches the forward lemma. No connectedness, nonemptiness or universe restriction; empty and disconnected cases covered. No duplicate: Mathlib's model-category Whitehead needs an absent ModelCategory, and the project grep found only the forward lemma. Imports = statement dependency (public) + stated proof-dependency modules; relative-lift is unstated and correctly not imported. Sorry-only, no defs, source and blueprint docstrings with the 7-step proof, lines <=100, lean.statement verbatim (diff). Report has Worker report and Second reading by NC. nt_compile.py --json on the snapshot against the side overlay: rc=0, no errors or warnings; a negative control gave rc=1. No findings, no fixes."
  }
 }

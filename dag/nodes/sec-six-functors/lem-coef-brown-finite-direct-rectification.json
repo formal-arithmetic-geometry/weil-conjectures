@@ -29,7 +29,8 @@
   "place": "Dual of Theorem 7.6.17, printed pp. 394-395 (PDF pp. 409-410), and the localization construction of section 7.1 (essential surjectivity on objects); ordinary all-cofibrant case of Definition 7.4.12. No Stacks tag states this coherent rectification result. Read online on 2026-10-17; not archived in literature/."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-localization-interface"
  ],
  "proof": [
   {
@@ -284,5 +285,23 @@
   "group": "Q50",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-c6f75d5e6 (reviewer sub-agent of L); spot-checked: I read the item, both delivered new nodes, every cited statement, the unit sk-prop-sf-biduality-general and the parent's uses (span and singleton representability only, both included). The item statement is unchanged; it involves no base-change morphism or coefficient category. The Cisinski CatLR source is not in literature/ and network access is blocked, so I could not open the cited places: I checked the mathematics directly, the WANTED line stays, and proof_origin is agent. Steps 1-8 are correct. Step 2: parameter-cone extension over the discrete vertex set gives an r-limit, and the bottom row is a product of equivalences, so the cone is an absolute limit; I checked every hypothesis of right-exact-extension applied to R_K^op (terminal object = constant 1 because M_k1=1, Reedy fibrations, retract closure, finite limits from the Brown node). Step 3: induction on outgoing chain length; S receives no non-identity arrows; B_s has smaller length, also with parallel arrows; lim_K X = lim_J X x_{prod M_s} prod X_s. Step 4: P_s exists, both refinements are used and give left and right inverses; I verified the refinement clause independently. Step 5: essential surjectivity is correct. Step 6: P_s->X_s is a trivial fibration, T_s->P_s a fibration, and t_s is the relative matching map, so s is a Reedy trivial fibration. Step 7: the triangle reversal for finite-colimit-approximation is correct. Step 8: the duality is formal. Reedy node: every clause checked (replacement, limits, the relative-matching iff via 2-out-of-3, restriction along B_k via j/K); it is not a duplicate of the model-category Reedy nodes. Slice node: C(b) is a Brown category, and the slice equivalence and section clause hold (tested on Kan complexes and b=1). Fault (C5), repaired: the slice node's first paragraph (object representability, trivial-fibration fractions, refinement of a q-invertible arrow) restated the existing same-unit lem-coef-brown-left-fractions with arrows reversed, the same reason the second reader dropped exact-approximation. I removed that paragraph and added retract closure to the slice node, which holds at its only use. Item step 1 now derives the Brown fractions from left-fractions applied to C^op, with the dualization written out; steps 4, 5 and 8 cite left-fractions and step 6 cites both; proof_deps is the exact union of uses. Left-fractions has no proof_deps, so there is no cycle. I accept the tool use lem-cbc-enhanced-functor-cone-calculus (generic componentwise-equivalence criterion). No SGA source is used, no target is touched, and no node is dropped. Corrected files are in fixes/dag/nodes/sec-six-functors/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BrownFiniteDirectRectification",
+  "declaration": "HomotopicalAlgebra.FiniteReedy.brown_finite_direct_rectification",
+  "statement": "theorem brown_finite_direct_rectification (A : Type u) [Category.{v} A] (zero : A) (hzero : IsInitial zero) (C W : MorphismProperty A) (hCiso : isomorphisms A ≤ C) (hWiso : isomorphisms A ≤ W) [C.IsStableUnderComposition] [W.IsStableUnderRetracts] [W.HasTwoOutOfThreeProperty] (hcof : ∀ X : A, C (hzero.to X)) [HasFactorization C W] (hpush : ∀ (X Y Z : A) (i : X ⟶ Y) (f : X ⟶ Z), C i → HasPushout i f) [C.IsStableUnderCobaseChange] [(C ⊓ W).IsStableUnderCobaseChange] (I : Type w) [Category.{z} I] [Finite I] [∀ i j : I, Finite (i ⟶ j)] (d : I → ℕ) (hd : IsDirect d) (L : SSet.{max u v w z t}) (q : largeNerve.{u, v, max w z t} A ⟶ L) (hq : IsLocalization.{u, v, max w z t} W q) : IsLocalization.{max w u v z, max w v, t} (W.functorCategory I) (comparison.{u, v, w, z, t} I A L q) ∧ (∀ (H : largeNerve.{w, z, max u v t} I ⟶ L), ∃ D : I ⥤ A, SSet.Enhanced.AreNaturallyEquivalent H (diagram.{u, v, w, z, t} q D)) ∧ ∀ x : L _⦋0⦌, ∃ X : A, EquivalentObjects L x (object.{u, v, max w z t} q X)",
+  "file": "lean/Sheaf/CategoryTheory/BrownFiniteDirectRectification.lean",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-400335bfa",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Read node (unchanged except lean and the added interface stmt_dep), source place, both stmt_dep nodes, FiniteReedyLocalization/EnhancedDiagramsCones declarations and the Mathlib classes. Every clause matches: initial object, isos, composition (W via HasTwoOutOfThreeProperty), retracts, 2-of-3, 0->X in C, HasFactorization C W, pushout existence plus CobaseChange for C and C⊓W, finite I with IsDirect, IsLocalization of the canonical comparison at W.functorCategory I, rectification by AreNaturallyEquivalent, and object representability. No extra hypotheses; universes independent; empty, singleton, span and parallel arrows admitted. lean.statement verbatim; docstrings have source, blueprint tag and the 8-step proof; only sorry; report sections present. nt_compile --json: exit 0, no warnings (1.6 s). Accepted: comparison/diagram/IsDirect are definitions recorded under downstream finite-reedy node, same as four landed siblings (no logical cycle); PDF page offset is bibliographic only."
  }
 }

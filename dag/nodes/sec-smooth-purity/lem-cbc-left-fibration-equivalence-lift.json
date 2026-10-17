@@ -230,5 +230,23 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-4c201d3c0 (reviewer sub-agent of L); spot-checked: I read the item, both cited definitions (def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations), the parent, the unit and the delivery-errors list A–F. I read Kerodon 019K (Prop 4.4.2.11) and 01EW (Ex 4.4.1.11) online; they are not archived, and the proof is correctly marked agent. The statement matches those sources, and the parent uses exactly the reflection clause and the prescribed-target clause. Step 1: the Lambda^2_0 lift of (u, id_X) over (r(u), id) gives v and the triangle A=(u,v,id_X). Step 2: I checked every face and shared edge of the two horns. In Lambda^3_1 on (X,Y,X,Y) the faces are d0=B, d2=s1u, d3=A, and the filler's d1 is H=(id_X,w,u). In Lambda^2_3 on (Y,X,X,Y) the faces are d0=H, d1=B, d3=s1v, and the filler's d2 is (v,u,id_Y). Both horns are inner and are filled in the quasicategory L, so Step 2 gives exactly the definition's two inverse witnesses. Step 3: the Lambda^1_0 lift of e from x satisfies r(lift)=e exactly and is an equivalence by Steps 1-2. Step 4: lift the inverse e' from y, then fill Lambda^2_0 with v and id_y; edge 12 is x->y over e exactly, and reflection makes it an equivalence. I checked the empty, identity and ordinary-nerve cases. The delivery creates no new nodes. I searched for duplicates with rg and found none: equivalence-outer-horn-filling, isofibration-exponentiation and right-fibration-fibers state different things. The unit has no steps and the only cited nodes are definitions, so there is no route issue and no tool_uses. One minor point needs no fix: Step 2's uses omits def-coef-infinity-fibrations, which comes in through Step 1 and is already in proof_deps. I made no changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LeftFibrationEquivalenceLift",
+  "declaration": "SSet.Enhanced.left_fibration_equivalence_lift",
+  "file": "lean/Sheaf/CategoryTheory/LeftFibrationEquivalenceLift.lean",
+  "statement": "theorem left_fibration_equivalence_lift {L M : SSet.{u}} [Quasicategory L] [Quasicategory M] (r : L ⟶ M) (hr : leftFibration r) : (∀ a : L _⦋1⦌, IsEquivalenceEdge M (r.app _ a) → IsEquivalenceEdge L a) ∧ InnerFibration r ∧ (∀ (x : L _⦋0⦌) (e : M _⦋1⦌), M.δ 1 e = r.app _ x → IsEquivalenceEdge M e → ∃ a : L _⦋1⦌, L.δ 1 a = x ∧ IsEquivalenceEdge L a ∧ r.app _ a = e) ∧ (∀ (y : L _⦋0⦌) (e : M _⦋1⦌), M.δ 0 e = r.app _ y → IsEquivalenceEdge M e → ∃ (x : L _⦋0⦌) (a : L _⦋1⦌), L.δ 1 a = x ∧ L.δ 0 a = y ∧ IsEquivalenceEdge L a ∧ r.app _ a = e)",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ee5a4bc5a",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Checked all four parts of the statement against the node and Kerodon 019K/01EW. IsEquivalenceEdge and leftFibration match the dependency nodes. The isofibration is written out to avoid a dependency cycle and equals IsIsofibration minus its quasicategory hypotheses, so there is no duplicate notion. In the prescribed-target part, m0 is implicit and follows from the strict image equality. Edge cases (empty source or base, degenerate edges, dimensions 1 and 2) and the single universe u are fine. One theorem, proof only sorry, no definitions. Both docstrings carry the source place and blueprint marker; the declaration docstring gives the four proof steps and I checked the 3-horn faces. lean.statement appears verbatim; no statement change; report has both required sections. nt_compile.py --json: clean, exit code 0; a control run with an injected error was reported. Only a cosmetic artifact in the report text; no fixes."
  }
 }
