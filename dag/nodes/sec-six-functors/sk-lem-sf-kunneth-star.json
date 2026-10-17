@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "sk-lem-sf-kunneth-star",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lem-trf-ordinary-kunneth"
+  ]
  },
  "kind": "statement",
  "title": "Ordinary Künneth with an identity factor",
@@ -30,35 +32,255 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-sf-setting",
+  "sk-def-sf-categories",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image"
+ ],
  "proof": [
   {
-   "text": "Write $p_X:X\\times Z\\to X$, $p_Z:X\\times Z\\to Z$ and $p_Y:Y\\times Z\\to Y$,\n$p_Z':Y\\times Z\\to Z$ for the projections, so that\n$p_Z=p_Z'\\circ(f\\times\\operatorname{id}_Z)$ and the square with vertical maps\n$f\\times\\operatorname{id}_Z$ and $f$ is Cartesian. The canonical comparison\nis the composite of the base-change map\n$p_Y^*Rf_*L\\to R(f\\times\\operatorname{id}_Z)_*p_X^*L$ and the projection map\n$R(f\\times\\operatorname{id}_Z)_*(p_X^*L)\\otimes^L_\\Lambda p_Z'^*Q\\to R(f\\times\\operatorname{id}_Z)_*(L\\boxtimes Q)$, where\n$L\\boxtimes Q=p_X^*L\\otimes^L_\\Lambda(f\\times\\operatorname{id}_Z)^*p_Z'^*Q$.\nNeither factor is an instance of a general theorem of this blueprint: $Z$ is\nan arbitrary finite-type $k$-scheme, so the projection $p_Y$ is smooth only\nwhen $Z$ is, and smooth base change does not apply; and the projection\nformula for the ordinary direct image $Rf_*$ is not an isomorphism in general\n(the compact-support formula of [sk-rem-sf-pf-done] concerns $Rf_!$). The\nstatement is instead the ordinary external-product theorem with one\nmorphism, [0F1N](https://stacks.math.columbia.edu/tag/0F1N)\n([lem-kun-0f1n], with its bounded form\n[0F1J](https://stacks.math.columbia.edu/tag/0F1J), [lem-kun-0f1j]), valid for\narbitrary finite-type schemes over a field in which $N$ is invertible and for\narbitrary $\\mathbf Z/N$-complexes, and it belongs to the same circle as the\nKünneth theorem [sk-prop-sf-kunneth-ordinary]\n([0F1P](https://stacks.math.columbia.edu/tag/0F1P)), which supplies its\ngeometric input: truncations and flat resolutions reduce $L$ to a flat\nmodule sheaf and $Q$ to a single constructible sheaf, which embeds into a\nfinite sum of $\\pi_{i*}$ of constant sheaves for finite morphisms $\\pi_i$;\nboth sides commute with the exact functors\n$(\\operatorname{id}\\times\\pi_i)_*$, so dimension shifting in the\ncohomological degree reduces to constant $Q$, i.e. to the base change\n$p_Y^*Rf_*L\\cong R(f\\times\\operatorname{id}_Z)_*p_X^*L$ along the projection\nfrom a product over the separably closed $k$, which is where the Künneth\ntheorem enters. *Coefficient transport.* 0F1N is stated for\n$\\mathbf Z/N$-modules; at the finite stage $\\Lambda=A_{E,n}$ the bounded flat\n$A$-model of $L$ ([sk-lem-sf-flat-model]) and the $\\varpi_E$-adic filtration\nof the cohomology sheaves of $Q$ reduce the assertion, both sides being exact\nin $Q$ and $-\\otimes_A^LQ$ being underived on a flat model, to coefficients in\nthe finite field $\\kappa=A/(\\varpi_E)$, with $L$ a complex of flat\n$\\kappa$-module sheaves; the argument of 0F1J is linear over its\ncoefficient field and applies verbatim with $\\kappa$ in place of\n$\\mathbf F_\\ell$. Both steps are natural in $L$ and $Q$, so the isomorphism\nis the canonical comparison; [sk-prop-sf-comparison] transports it to the\npro-étale site. The same statement is SGA 5, III, 1.1 and 1.6.4.",
+   "text": "Work with the standing $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$ and coefficient stages of [sk-def-sf-setting], and first with $A=A_{E,n}$ on the small étale sites. Put $W=Y\\times_k Z$, $V=X\\times_k Z$, $u=f\\times\\operatorname{id}_Z$, and let $r:W\\to Y$, $s:W\\to Z$, $a:V\\to X$, $b:V\\to Z$ be the projections. External product means $r^{-1}Rf_*L\\otimes_A^Ls^{-1}Q$ on $W$ and $a^{-1}L\\otimes_A^Lb^{-1}Q$ on $V$. Define $\\alpha_A(L,Q)$ to be the $u^{-1}\\dashv Ru_*$ adjunct of $a^{-1}\\varepsilon_{f,L}\\otimes1_{b^{-1}Q}$, after the inverse-image composition and tensor identifications. Expanding [def-kun-unbounded-exchange] and [def-kun-projection-formula-map] shows this is exactly the comparison of the statement. Tensor symmetry [lem-kun-tensor-sym] allows the $Q$ factor to be placed first. It is a natural transformation of exact functors in each variable: inverse image is exact, its derived functor is triangulated, derived tensor is triangulated, and so is right derived direct image. The adjunct formula commutes with shifts and triangles because it uses only the natural counit and tensor. The morphism $f$ is qcqs: finite type gives quasi-compactness, and separatedness gives quasi-separatedness by [lem-pc-separated-quasi-separated]. The same applies to $u$ by base change [lem-weil-pbc-qcqs-morphism-permanence].",
    "uses": [
-    "sk-rem-sf-pf-done",
+    "sk-def-sf-setting",
+    "def-kun-unbounded-exchange",
+    "def-kun-projection-formula-map",
+    "lem-kun-tensor-sym",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-kun-derived-tensor-triangulated",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/lem-trf-ordinary-kunneth.proof.md",
+    "place": "Opening comparison formula; Stacks 0F1J, exact functors in both variables"
+   }
+  },
+  {
+   "text": "We use coefficient restriction with its actual derived normalization. For a homomorphism $R\\to B$ of constant commutative coefficient rings, restriction $\\operatorname{Res}:\\operatorname{Mod}(B)\\to\\operatorname{Mod}(R)$ is exact and conservative: its kernels, cokernels and cohomology have the same underlying abelian sheaves. For every scheme morphism $v$, the two factorizations of $(\\operatorname{Sh}(\\text{source}_{\\mathrm{et}}),B)\\to(\\operatorname{Sh}(\\text{target}_{\\mathrm{et}}),R)$, first changing rings and first applying $v$, give by [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] a natural identification $Rv_*^R\\operatorname{Res}H=\\operatorname{Res}Rv_*^BH$. The normalization in that statement identifies it with the identity on underlying direct-image complexes. It respects coefficient endomorphisms and counits: both counits are induced by the same evaluation of a pulled-back section. Thus the adjunct formula in step 1 is preserved when the coefficient restriction and the balanced tensor maps below are used. This does not assume that restriction preserves injectives.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; coefficient transport normalization"
+   }
+  },
+  {
+   "text": "Set $F=\\mathbf F_\\ell$. Apply [lem-kun-0f1n] with its $K=k$, its upper row $Z\\leftarrow Z\\times_kY\\leftarrow Z\\times_kX$, its lower row $\\operatorname{Spec}k\\leftarrow Y\\xleftarrow{f}X$, and its objects $E=Q$, $F_{mathrm{there}}=L$. All schemes in that diagram are finite type over $k$ and $\\ell$ is invertible in $k$. With the canonical swap of the product factors and tensor symmetry, its displayed arrow is $\\alpha_F(L,Q)$, since its adjunct is $1_Q\\otimes\\varepsilon_f$. It is therefore an isomorphism for all complexes of $F$-module sheaves; boundedness of their restrictions is unnecessary. In the bounded flat-factor case the same substitution is exactly [lem-kun-0f1j], where the finite Tor bound is required on $Q$ (the object on $Z$), not on $L$.",
+   "uses": [
     "lem-kun-0f1n",
     "lem-kun-0f1j",
-    "sk-lem-sf-flat-model",
-    "sk-prop-sf-comparison"
+    "lem-kun-tensor-sym"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0F1N and 0F1J, lemma-punctual-base-change-upgrade-unbounded and lemma-punctual-base-change-upgrade"
+   }
+  },
+  {
+   "text": "Let $B$ be a finite field of characteristic $\\ell$, in particular the residue field $\\kappa=A/(\\varpi_E)$. Apply step 3 to the $F$-restrictions of $B$-complexes $L,Q$. Naturality in multiplication by $b\\in B$ on each input makes the arrow $B\\otimes_F B$-linear. Let $e\\in B\\otimes_F B$ be the diagonal idempotent of [lem-pur-finite-field-derived-tensor-summand]. Its statement identifies the image of $e$ on each tensor with the restriction of the tensor over $B$. Step 2 identifies the direct images before and after coefficient restriction. Additive derived direct image preserves the splitting $C=eC\\oplus(1-e)C$ (apply the functor to the inclusion and retraction equations), and inverse image does likewise. Hence the $e$-summand of the isomorphism in step 3 has precisely the two endpoints of $\\operatorname{Res}\\alpha_B(L,Q)$. It is that map: the balanced tensor morphism sends $1_Q\\otimes\\varepsilon_f$ over $F$ to $1_Q\\otimes\\varepsilon_f$ over $B$, so their adjuncts agree. The summand map is invertible and restriction is conservative, proving $\\alpha_B$ invertible. No assertion that $\\otimes_F^L=\\otimes_B^L$ is made.",
+   "uses": [
+    "lem-pur-finite-field-derived-tensor-summand",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/lem-trf-ordinary-kunneth.proof.md",
+    "place": "Coefficient transport, finite-field direct-summand alternative; algebra.tex Tag 0C2X (lemma-separable-algebraic-diagonal)"
+   }
+  },
+  {
+   "text": "For $A=A_{E,n}$ choose the bounded flat constructible étale model of $Q$ supplied by [lem-sf-flat-model]. Its finite stupid truncation filtration and [lem-weil-pbc-complex-ses-triangle] express it as finite extensions of shifts of flat constructible $A$-sheaves. The exact-functor property in step 1 and [lem-sf-triangle-two-out-of-three] reduce the claim to $Q$ a single flat $A$-sheaf. Keep this $Q$ fixed. The finite cohomological truncation triangles [lem-sf-derived-truncation-triangle], together with [lem-sf-derived-concentrated-single], express the bounded complex $L$ as finite extensions of $\\mathcal H^j(L)[-j]$. We may therefore assume $L=H[0]$ is a single constructible $A$-sheaf; $H$ need not have finite Tor amplitude. Neither the statement of 0F1J nor that of 0F1N is applied with $A$ coefficients in this reduction.",
+   "uses": [
+    "lem-sf-flat-model",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-sf-triangle-two-out-of-three",
+    "lem-sf-derived-truncation-triangle",
+    "lem-sf-derived-concentrated-single"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/lem-trf-ordinary-kunneth.proof.md",
+    "place": "Coefficient transport: bounded flat resolution and truncations; the two variables are reduced in the order dictated by 0F1J"
+   }
+  },
+  {
+   "text": "Write $t=\\varpi_E\\bmod\\varpi_E^n$. The finite filtration $H\\supset tH\\supset\\cdots\\supset t^nH=0$ has quotients $H_i=t^iH/t^{i+1}H$ killed by $t$, hence honest sheaves of $\\kappa=A/(t)$-modules. The exact sequences $0\\to t^{i+1}H\\to t^iH\\to H_i\\to0$ give triangles by [lem-weil-pbc-complex-ses-triangle]. Downward induction from $t^nH=0$ and [lem-sf-triangle-two-out-of-three] reduce the assertion to every $L=\\operatorname{Res}_{A\\to\\kappa}H_i$. This is a filtration of the actual sheaves $\\mathcal H^j(L)$; no multiplication image of a derived object and no termwise filtration of an unspecified representative is used. The coefficient datum [def-weil-l-adic-coefficient-extension] gives the DVR quotient, finite residue field and $t^n=0$.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-sf-triangle-two-out-of-three"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/lem-trf-ordinary-kunneth.proof.md",
+    "place": "Coefficient transport: finite uniformizer filtration of the cohomology sheaves"
+   }
+  },
+  {
+   "text": "For a sheaf $H$ of $\\kappa$-modules and the flat sheaf $Q$, put $\\bar Q=Q\\otimes_A\\kappa$. This is flat over $\\kappa$: tensoring a short exact sequence of $\\kappa$-sheaves with $\\bar Q$ is tensoring its restriction with the flat $Q$. The canonical map induced by $q\\mapsto\\bar q$, $\\operatorname{Res}N\\otimes_A Q\\longrightarrow\\operatorname{Res}(N\\otimes_\\kappa\\bar Q)$, $n\\otimes q\\mapsto n\\otimes\\bar q$, is an isomorphism for every $\\kappa$-sheaf $N$: its inverse is induced by $n\\otimes\\bar q\\mapsto n\\otimes q$ on representatives, and is well-defined because $tN=0$, so changing $q$ by an element of $tQ$ changes the tensor by zero. Apply these maps termwise to representatives and to inverse images; flat factors are K-flat by [lem-kun-kflat-criteria]. Step 2 identifies $Rf_*^A\\operatorname{Res}H$ with $\\operatorname{Res}Rf_*^\\kappa H$ and likewise $Ru_*$. Consequently both endpoints of $\\alpha_A(\\operatorname{Res}H,Q)$ identify with the restrictions of those of $\\alpha_\\kappa(H,\\bar Q)$. Inverse-image flatness follows from [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] on a one-term flat model. The two arrows agree because the balanced maps send the adjunct $a^{-1}\\varepsilon_f\\otimes1_Q$ to $a^{-1}\\varepsilon_f\\otimes1_{\\bar Q}$, and step 2 preserves that counit. Step 4 makes the latter map invertible. The finite inductions of steps 5–6 now prove $\\alpha_A(L,Q)$ on the étale site. Its inverse is natural, being the inverse of this fixed natural comparison, independent of all model or filtration choices.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-kun-kflat-criteria",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/lem-trf-ordinary-kunneth.proof.md",
+    "place": "Coefficient transport, balanced tensor identity and counit normalization"
+   }
+  },
+  {
+   "text": "For the pro-étale interpretation at finite level, [lem-sf-proetale-constructible-origin](ii) gives $L\\simeq\\nu_X^*L_e$ and $Q\\simeq\\nu_Z^*Q_e$ with bounded constructible étale $L_e,Q_e$; [lem-sf-comparison-tor-amplitude](ii) gives their finite Tor amplitude. The comparison of [sk-prop-sf-comparison] is fully faithful on $D^+$; [lem-weil-pbc-comparison-pullback] identifies the projection pullbacks and the tensor-pullback theorem [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies their external tensors. Apply [lem-weil-pbc-comparison-direct-image-canonical-mate] to the qcqs $f$ and $u$: it identifies their direct images and states the counit normalization. Under these identifications $\\nu_W^*\\alpha_A(L_e,Q_e)$ is the pro-étale comparison, because its adjunct is again $a^{-1}\\varepsilon_f\\otimes1$; the normalization in the cited mate statement gives exactly this equality. Thus the finite-level pro-étale comparison is invertible. All complexes to which the bounded-below comparison is applied are bounded below: the inputs are bounded, their external tensors have finite Tor amplitude, and right derived direct image of an exact-inverse-image adjunction preserves the lower bound.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "sk-prop-sf-comparison",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/lem-trf-ordinary-kunneth.proof.md",
+    "place": "Final sentence: transport to the pro-étale site; Tags 09AK, 099V, 099W and counit-normalized direct image"
+   }
+  },
+  {
+   "text": "At $\\Lambda=\\mathcal O_E$ use the completed integral operations, not tensor with a discrete constant integral ring. By [lem-pur-integral-operations-preserve-constructible] pullback and completed tensor preserve the integral constructible category and have the displayed finite reductions. By [lem-sf-integral-direct-image-constructible], applied to $f$ and $u$, direct image preserves that category and its reductions agree with finite-level direct image. Thus both endpoints of the integral comparison are derived complete and their reductions are exactly the finite-level endpoints for $L_n,Q_n$. Their reductions have finite Tor amplitude by [def-weil-finite-tor-amplitude]. The comparison maps reduce to the same counit-defined finite maps: [lem-fix-operation-reduction] explicitly preserves the units, counits and tensor associators, so taking the adjunct of $a^*\\varepsilon_f\\otimes1$ gives the reduced adjunct $a_n^*\\varepsilon_{f_n}\\otimes1$. These maps commute with all transition maps by that same comparison statement. The completed operations are functorial derived limits [lem-pur-integral-operations-well-defined] and the direct image is the reduction-tower limit [def-weil-derived-direct-image]; the integral comparison is the induced morphism of their Roos triangles. Each level is invertible by step 8. Apply [lem-weil-derived-limit-levelwise-iso] to conclude it is invertible.",
+   "uses": [
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-sf-integral-direct-image-constructible",
+    "def-weil-finite-tor-amplitude",
+    "lem-fix-operation-reduction",
+    "lem-pur-integral-operations-well-defined",
+    "def-weil-derived-direct-image",
+    "lem-weil-derived-limit-levelwise-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/lem-trf-ordinary-kunneth.proof.md",
+    "place": "Higher coefficient stages in the standing setting: finite-level realization and completed integral passage"
+   }
+  },
+  {
+   "text": "For $\\Lambda=E$, [def-weil-rationalization-karoubi] gives the same objects as at integral coefficients and scalar-localized Hom groups. The operations and comparisons are their rationalizations by [lem-fix-operation-reduction]. The inverse of the integral comparison from step 9 therefore gives an inverse after rationalization. For $\\Lambda=\\overline{\\mathbf Q}_\\ell$, choose a common finite coefficient field for $L,Q$ using [def-weil-algebraically-closed-coefficients]; that definition also represents the morphism and its compositions at a common finite field. Represent the comparison and its inverse over that field. Their two inverse equations remain true in the directed Hom colimits, and coefficient compatibility in [lem-fix-operation-reduction] identifies this class with the stated comparison. Naturality at both stages follows by the same passage of the counit-defined natural maps. This completes every coefficient stage of the unchanged statement.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/lem-trf-ordinary-kunneth.proof.md",
+    "place": "Standing coefficient stages: rationalization and common finite field passage"
+   }
   }
  ],
  "proof_deps": [
-  "sk-rem-sf-pf-done",
+  "sk-def-sf-setting",
+  "def-kun-unbounded-exchange",
+  "def-kun-projection-formula-map",
+  "lem-kun-tensor-sym",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-kun-0f1n",
   "lem-kun-0f1j",
-  "sk-lem-sf-flat-model",
-  "sk-prop-sf-comparison"
+  "lem-pur-finite-field-derived-tensor-summand",
+  "lem-sf-flat-model",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sf-triangle-two-out-of-three",
+  "lem-sf-derived-truncation-triangle",
+  "lem-sf-derived-concentrated-single",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-kun-kflat-criteria",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "sk-prop-sf-comparison",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-sf-integral-direct-image-constructible",
+  "def-weil-finite-tor-amplitude",
+  "lem-fix-operation-reduction",
+  "lem-pur-integral-operations-well-defined",
+  "def-weil-derived-direct-image",
+  "lem-weil-derived-limit-levelwise-iso",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/lem-trf-ordinary-kunneth.proof.md",
+  "place": "Steps 1–2, coefficient reduction expanded with the existing finite-field tensor-summand lemma; main-20261015 sketch final site passage and standing higher coefficient stages"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Kunneth\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic etaleness or diagram external products do not state the étale derived direct-image comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Kunneth|Künneth|externalProduct.*rightDerivedLowerStar",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic etaleness or diagram external products do not state the étale derived direct-image comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kunneth\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic etaleness or diagram external products do not state the étale derived direct-image comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale derived direct image commutes with exterior tensor products over a field",
+   "results": "Hits: Algebra.FormallyEtale.instTensorProduct, Algebra.Etale.baseChange, RingHom.Etale.isStableUnderBaseChange, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.comp, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp, RingHom.Etale",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic etaleness or diagram external products do not state the étale derived direct-image comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"externalProduct\"",
+   "results": "Hits: CategoryTheory.MonoidalCategory.ExternalProduct.«term_⊠_», CategoryTheory.MonoidalCategory.externalProduct, CategoryTheory.MonoidalCategory.externalProductBifunctor, CategoryTheory.MonoidalCategory.externalProductBifunctorCurried, CategoryTheory.MonoidalCategory.prodCompExternalProduct, CategoryTheory.MonoidalCategory.externalProductBifunctor_obj_obj, CategoryTheory.MonoidalCategory.externalProductBifunctorCurried_obj_obj_obj_obj, CategoryTheory.MonoidalCategory.externalProductCompDiagIso",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic etaleness or diagram external products do not state the étale derived direct-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale derived direct image commutes with exterior tensor products over a field",
+   "results": "Hits: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.Extension.tensorCotangentSpace, Algebra.Extension.CotangentSpace.map_tmul, KaehlerDifferential.tensorKaehlerEquiv_left_inv, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic etaleness or diagram external products do not state the étale derived direct-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kunneth formula for sheaves with finite coefficients and an identity morphism",
+   "results": "Hits: CategoryTheory.sheafToPresheaf_δ, CategoryTheory.sheafToPresheaf_μ, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.ihomPoints_symm_comp, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, CategoryTheory.Sheaf.tensorProd_isSheaf, LightCondensed.internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic etaleness or diagram external products do not state the étale derived direct-image comparison"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -111,5 +333,109 @@
    "missing": [],
    "open": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-lem-sf-kunneth-star",
+  "worker": "stage1",
+  "summary": "Replaced the earlier coefficient-transport restatement by an explicit finite-field projector and finite-filtration proof, reusing existing nodes only. Corrected the variable order in the Stacks application, distinguished étale and pro-étale realization and completed integral/rational/common-stage passage, and repaired unit realization nesting. The Lean theorem is sorry_here and proves only Nonempty of an isomorphism, so is not an attachment to the natural canonical-map assertion. No new nodes.",
+  "blueprint": "Opening comparison and Stacks 0F1N/0F1J specialization (steps 1–3); finite-field coefficient transport and bounded flat model/uniformizer filtration (steps 4–7); final pro-étale passage (step 8); all coefficient stages already quantified in the setting (steps 9–10).",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic coefficient, derived-category, or site-comparison tool used in the displayed step; it supplies the stated compatibility or finite induction, not a replacement geometric Künneth route."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic coefficient, derived-category, or site-comparison tool used in the displayed step; it supplies the stated compatibility or finite induction, not a replacement geometric Künneth route."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic coefficient, derived-category, or site-comparison tool used in the displayed step; it supplies the stated compatibility or finite induction, not a replacement geometric Künneth route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic coefficient, derived-category, or site-comparison tool used in the displayed step; it supplies the stated compatibility or finite induction, not a replacement geometric Künneth route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic coefficient, derived-category, or site-comparison tool used in the displayed step; it supplies the stated compatibility or finite induction, not a replacement geometric Künneth route."
+   },
+   {
+    "node": "lem-pur-finite-field-derived-tensor-summand",
+    "why": "Generic coefficient, derived-category, or site-comparison tool used in the displayed step; it supplies the stated compatibility or finite induction, not a replacement geometric Künneth route."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic coefficient, derived-category, or site-comparison tool used in the displayed step; it supplies the stated compatibility or finite induction, not a replacement geometric Künneth route."
+   },
+   {
+    "node": "lem-sf-triangle-two-out-of-three",
+    "why": "Generic coefficient, derived-category, or site-comparison tool used in the displayed step; it supplies the stated compatibility or finite induction, not a replacement geometric Künneth route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic coefficient, derived-category, or site-comparison tool used in the displayed step; it supplies the stated compatibility or finite induction, not a replacement geometric Künneth route."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Generic coefficient, derived-category, or site-comparison tool used in the displayed step; it supplies the stated compatibility or finite induction, not a replacement geometric Künneth route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic coefficient, derived-category, or site-comparison tool used in the displayed step; it supplies the stated compatibility or finite induction, not a replacement geometric Künneth route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic coefficient, derived-category, or site-comparison tool used in the displayed step; it supplies the stated compatibility or finite induction, not a replacement geometric Künneth route."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic coefficient, derived-category, or site-comparison tool used in the displayed step; it supplies the stated compatibility or finite induction, not a replacement geometric Künneth route."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Generic coefficient, derived-category, or site-comparison tool used in the displayed step; it supplies the stated compatibility or finite induction, not a replacement geometric Künneth route."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic coefficient, derived-category, or site-comparison tool used in the displayed step; it supplies the stated compatibility or finite induction, not a replacement geometric Künneth route."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Generic coefficient, derived-category, or site-comparison tool used in the displayed step; it supplies the stated compatibility or finite induction, not a replacement geometric Künneth route."
+   },
+   {
+    "node": "lem-weil-derived-limit-levelwise-iso",
+    "why": "Generic coefficient, derived-category, or site-comparison tool used in the displayed step; it supplies the stated compatibility or finite induction, not a replacement geometric Künneth route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pur-finite-field-derived-tensor-summand",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sf-triangle-two-out-of-three",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-fix-operation-reduction",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-derived-limit-levelwise-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-226b47292",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-226b47292 (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote no fixes. It is one commit (item, unit realized/realized_by, report) with no new nodes and proof_deps equal to the union of the steps' uses. The statement is word for word the main-20261015 blueprint statement, not weakened. Source checks: I read Stacks 0F1N (etale-cohomology.tex l.20878ff) and 0F1J (l.20705ff, statement and proof). In step 3 the substitution X:=Z, S':=Y, T:=X, g:=f gives p=s, f'=r, h=f×id, e=a, with n=ℓ invertible in k and all schemes of finite type over k. That yields α_{F_ℓ} up to tensor symmetry for unbounded complexes. The comparison is the adjunct of a^{-1}ε_f⊗1, matching the exchange and projection-map definitions and 0F1J's adjunct description. In step 4 the separability idempotent of lem-pur-finite-field-derived-tensor-summand works on any site with unbounded inputs. I checked it for B=F_ℓ (e=1) and B=F_{ℓ²} (diagonal factor of B×B). The report's source error is correct: freeness alone does not give the projector (F[ε]/ε² is free but not separable). In steps 5–7 the flat model goes on Q and the t-adic filtration on the cohomology of L. This is the variable order of the Stacks 0F1J proof ('p^{-1}E⊗_{Z/n}…=p^{-1}(E/ℓE)⊗_{F_ℓ}… by flatness of E'), and the inverse balanced map is well defined because tN=0. In step 8 the étale-origin, Tor-transfer and canonical-mate statements cover finite discrete Λ, qcqs maps and D^+ inputs. Steps 9–10 use completed integral operations, finite-reduction isomorphisms, preservation of counits by lem-fix-operation-reduction, the levelwise derived-limit lemma, rationalization and common-stage Hom colimits. The Roos-triangle sentence in step 9 is brief but acceptable at stage 1. The coefficient categories are kept apart: étale at the finite stage as in sk-def-sf-setting, then pro-étale and the completed integral, rational and Q̄_ℓ categories. Edge cases: f=id, Q=0, empty schemes, n=1. There is no cycle; the only user is sk-thm-sf-kunneth-verdier. All off-route statements are declared in tool_uses, and I accept them as generic tools. No SGA is used. The slopmaster2 Lean is a sorry theorem asserting only Nonempty, correctly not attached. One redundancy: the reviewed sibling lem-trf-ordinary-kunneth, in the same unit, states the pro-étale finite stage, and steps 1–8 prove it again. I do not count this as a fault, because the item must also prove the étale finite stage and the higher stages, and the report records the sibling under same_as."
  }
 }
