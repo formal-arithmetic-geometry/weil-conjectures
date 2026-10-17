@@ -4,7 +4,7 @@
  "unit": "sk-i-curve-zero",
  "kind": "statement",
  "title": "Adic quotients of a finite-type localization are unchanged after completing the local base",
- "statement": "Let (R, m) be a Noetherian local ring, let R^ be its m-adic completion, let C be a finite-type R-algebra, and let q be a prime of C containing mC. Put D=C tensor_R R^. If Q is a prime of D whose contraction to C is q and whose contraction to R^ is the maximal ideal, then for every n\\geq1 the canonical local map C_q \\to D_Q induces an isomorphism C_q/(q C_q)^n \\to D_Q/(Q D_Q)^n. The isomorphisms are compatible with the quotient transition maps. The notions of Noetherian ring, completion, finite-type morphism, localization at a prime, and tensor product are those of [def-weil-pbc-noetherian-ring], [def-weil-pbc-adic-completion], [def-weil-finite-type-morphism], [def-weil-pbc-localization-at-prime], and [def-weil-module-base-change].",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative Noetherian local ring (local means having the unique maximal ideal $\\mathfrak m$) [def-weil-pbc-noetherian-ring], and let $\\widehat R=\\varprojlim_n R/\\mathfrak m^n$ be its $\\mathfrak m$-adic completion with canonical map $\\iota:R\\to\\widehat R$ [def-weil-pbc-adic-completion]. Let $C$ be a finite-type $R$-algebra [def-weil-pbc-finite-type-algebra], and let $\\mathfrak q$ be a prime ideal of $C$ containing $\\mathfrak mC$. Put $D=C\\otimes_R\\widehat R$ [def-weil-module-base-change, def-weil-pbc-module-tensor-product], with multiplication $(c\\otimes a)(c'\\otimes a')=cc'\\otimes aa'$ and unit $1\\otimes1$, and structural maps $c\\mapsto c\\otimes1$, $a\\mapsto1\\otimes a$. If $Q$ is a prime ideal of $D$ whose contraction to $C$ is $\\mathfrak q$ and whose contraction to $\\widehat R$ is its maximal ideal, then for every $n\\geq1$ the canonical local map $C_{\\mathfrak q}\\to D_Q$ [def-weil-pbc-localization-at-prime] induces an isomorphism\n$$C_{\\mathfrak q}/(\\mathfrak qC_{\\mathfrak q})^n\\xrightarrow{\\sim}D_Q/(QD_Q)^n.$$\nThese isomorphisms commute with the quotient transition maps for all $n\\geq1$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tag 00MA(3), together with the finite-type affine localization and quotient calculation written in the proof of this node"
@@ -12,16 +12,91 @@
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-adic-completion",
-  "def-weil-finite-type-morphism",
+  "def-weil-pbc-finite-type-algebra",
   "def-weil-pbc-localization-at-prime",
-  "def-weil-module-base-change"
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Write $f:C\\to D$, $c\\mapsto c\\otimes1$. Since $R$ is Noetherian, its ideal $\\mathfrak m$ is finitely generated. For each $n\\geq1$, apply the completion-mod-power statement to $(R,\\mathfrak m)$: the projection $\\pi_n:\\widehat R\\to R/\\mathfrak m^n$ is a surjective $R$-algebra map, $\\pi_n\\iota$ is reduction, and $\\ker\\pi_n=\\mathfrak m^n\\widehat R$. Also $\\widehat R$ is local with maximal ideal $\\mathfrak m\\widehat R$ by the local-completion statement. Thus all these assertions apply to the particular completion in the hypotheses.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-local-completion-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG (lemma-hathat-finitely-generated), case M=R; Tag 05GI (lemma-radical-completion)"
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$ and put $E_n=C/\\mathfrak q^n$. Because $\\mathfrak mC\\subseteq\\mathfrak q$, products of $n$ elements of $\\mathfrak m$ act as zero on $E_n$; hence the structural map $R\\to E_n$ factors through $R/\\mathfrak m^n$. Compose this factor with $\\pi_n$ to obtain $\\theta_n:\\widehat R\\to E_n$. The $R$-balanced bilinear map $(c,a)\\mapsto\\bar c\\theta_n(a)$ defines an $R$-linear map $b_n:D\\to E_n$ by the tensor-product universal property. It is a ring map: on pure tensors multiplicativity is $\\overline{cc'}\\theta_n(aa')=(\\bar c\\theta_n(a))(\\bar c'\\theta_n(a'))$, and distributivity gives the assertion for finite sums; it preserves the unit as well. Since $b_n(f(c))=\\bar c$, it kills $\\mathfrak q^nD$ and induces $\\beta_n:D/\\mathfrak q^nD\\to E_n$. Conversely $f$ induces $\\alpha_n:E_n\\to D/\\mathfrak q^nD$, and $\\beta_n\\alpha_n=1$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG (lemma-hathat-finitely-generated), quotient calculation using the tensor universal property in Tag 00CX (lemma-tensor-product)"
+   }
+  },
+  {
+   "text": "For $a\\in\\widehat R$, choose $r\\in R$ representing $\\pi_n(a)$. Step 1 gives $a-\\iota(r)\\in\\mathfrak m^n\\widehat R$. Write this difference as a finite sum $\\sum_j\\iota(t_j)a_j$ with $t_j\\in\\mathfrak m^n$ and $a_j\\in\\widehat R$. For every $c\\in C$, balancing gives $c\\otimes(a-\\iota(r))=\\sum_j ct_j\\otimes a_j\\in\\mathfrak q^nD$, since $t_jC\\subseteq\\mathfrak q^n$. Therefore in $D/\\mathfrak q^nD$ the class of $c\\otimes a$ equals that of $cr\\otimes1$, which is $\\alpha_n\\beta_n$ of the former class. Pure tensors generate $D$ additively, so $\\alpha_n\\beta_n=1$. Thus $\\alpha_n$ is a ring isomorphism for every $n$, induced by $f$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG (lemma-hathat-finitely-generated), kernel formula and explicit inverse calculation"
+   }
+  },
+  {
+   "text": "At $n=1$ we have $D/\\mathfrak qD\\cong C/\\mathfrak q$ with the map from $C$ equal to reduction. Since $f^{-1}(Q)=\\mathfrak q$, the ideal $Q$ contains $\\mathfrak qD$. If $d\\in Q$, surjectivity of $\\alpha_1$ gives $c\\in C$ with $d-f(c)\\in\\mathfrak qD$. Then $f(c)\\in Q$, so $c\\in\\mathfrak q$ and $d\\in\\mathfrak qD$. Consequently $Q=\\mathfrak qD$. Extension of ideals commutes with taking powers: both $(\\mathfrak qD)^n$ and $\\mathfrak q^nD$ are generated by the images of products of $n$ elements of $\\mathfrak q$. In particular $Q^n=\\mathfrak q^nD$, and $\\alpha_n$ identifies the prime $\\mathfrak q/\\mathfrak q^n$ of $E_n$ with $Q/Q^n$ of $D/Q^n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG (lemma-hathat-finitely-generated), elementary ideal calculation after the n=1 quotient comparison"
+   }
+  },
+  {
+   "text": "Since $f^{-1}(Q)=\\mathfrak q$, the map $f$ induces $f_{\\mathrm{loc}}:C_{\\mathfrak q}\\to D_Q$, $c/s\\mapsto f(c)/f(s)$. The inverse image of $QD_Q$ is $\\mathfrak qC_{\\mathfrak q}$: a fraction is in the maximal ideal exactly when its numerator is in the prime, by the localization-at-prime description. Apply the localization-of-a-quotient statement to $(C,\\mathfrak q^n,\\mathfrak q/\\mathfrak q^n)$ and $(D,Q^n,Q/Q^n)$. It identifies the desired source and target with $(C/\\mathfrak q^n)_{\\mathfrak q/\\mathfrak q^n}$ and $(D/Q^n)_{Q/Q^n}$, respectively. Here $\\mathfrak q^nC_{\\mathfrak q}=(\\mathfrak qC_{\\mathfrak q})^n$ and $Q^nD_Q=(QD_Q)^n$ by the same product-of-generators calculation as in Step 4. The isomorphism $\\alpha_n$ and its inverse carry the complements of these primes to each other. On fractions they induce inverse maps $\\bar c/\\bar s\\mapsto\\overline{f(c)}/\\overline{f(s)}$ and its inverse. Under the quoted identifications this is exactly the map induced by $f_{\\mathrm{loc}}$, so that map on quotients is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT (proposition-localize-quotient), applied at the two primes; Tag 00CO (definition-localization)"
+   }
+  },
+  {
+   "text": "For $k\\geq n\\geq1$, both composites from $C_{\\mathfrak q}/(\\mathfrak qC_{\\mathfrak q})^k$ to $D_Q/(QD_Q)^n$ send the class of every fraction $c/s$ to the class of $f(c)/f(s)$. Such classes exhaust the source. Thus the square of quotient transition maps commutes. In particular all the isomorphisms are induced by the one canonical local map, as asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT (proposition-localize-quotient), explicit fraction formula and quotient transitions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-localization-at-prime-of-quotient"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00MA(3); affine finite-type quotient and localization argument supplied here because 0GDX assumes the completed-local map"
+  "place": "Tag 05GG (lemma-hathat-finitely-generated) and Tag 00CT (proposition-localize-quotient); explicit tensor and fraction calculations supplied here. Tag 00MA(3) is not applied to the possibly nonfinite R-module C/q^n."
  },
  "mathlib_searches": [
   {
@@ -44,10 +119,59 @@
    "results": "AdicCompletion.piEquivFin, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.piEquivOfFintype_apply, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.mk_ofAlgEquiv_symm",
    "date": "2026-10-17",
    "verdict": "no match: supporting completion APIs only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change to the completion of a noetherian local ring induces isomorphisms on all maximal ideal power quotients of a finite type local algebra",
+   "results": "Algebra.Unramified.baseChange; AdicCompletion.transitionMapₐ; IsAdicComplete.liftRingHom; Algebra.FiniteType.baseChange; AdicCompletion.mkₐ; AdicCompletion.liftRingHom.congr_simp; Algebra.FinitePresentation.baseChange; Ideal.quotientRangePowQuotSuccInclusionEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match: supporting completion/tensor APIs only; none states the finite-level localized algebra comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian local ring R, a finite type R algebra C and a prime q over the closed point, completion of R does not change C localized at q modulo powers of its maximal ideal",
+   "results": "IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion; IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion; IsDedekindDomain.HeightOneSpectrum.adicCompletion; IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletionIntegers_apply; isLocalRing_of_isAdicComplete_maximal; IsDedekindDomain.HeightOneSpectrum.coe_algebraMap_mem; IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers; IsDedekindDomain.HeightOneSpectrum.coe_mem_adicCompletionIntegers",
+   "date": "2026-10-17",
+   "verdict": "no match: supporting completion/tensor APIs only; none states the finite-level localized algebra comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, TensorProduct",
+   "results": "AdicCompletion.ofTensorProduct; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfPiFintype; AdicCompletion.ofTensorProductInvOfPiFintype; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProduct_surjective_of_finite; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian; AdicCompletion.ofTensorProduct_tmul",
+   "date": "2026-10-17",
+   "verdict": "no match: supporting completion/tensor APIs only; none states the finite-level localized algebra comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*base.change|base.change.*completion|quotient.*[Tt]ensor|[Tt]ensor.*quotient",
+   "results": "Mathlib/RingTheory/QuotSMulTop.lean; Mathlib/RingTheory/QuotSMulTop.lean; Mathlib/RingTheory/QuotSMulTop.lean; Mathlib/RingTheory/QuotSMulTop.lean; Mathlib/RingTheory/QuotSMulTop.lean; Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean; Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean; Mathlib/RingTheory/Etale/QuasiFinite.lean; searched Mathlib/RingTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: supporting completion/tensor APIs only; none states the finite-level localized algebra comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If R is a noetherian local ring with completion B and C is an R algebra then C tensor B modulo the nth power of a prime ideal over the maximal ideal is C modulo that prime power",
+   "results": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian; AdicCompletion.ofTensorProduct_surjective_of_finite; AdicCompletion.ofTensorProduct",
+   "date": "2026-10-17",
+   "verdict": "no match: supporting completion/tensor APIs only; none states the finite-level localized algebra comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*equiv|equiv.*quotient|ker.*eval|eval.*ker",
+   "results": "Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/LocalRing.lean; Mathlib/RingTheory/AdicCompletion/LocalRing.lean; Mathlib/RingTheory/AdicCompletion/LocalRing.lean; searched Mathlib/RingTheory/AdicCompletion",
+   "date": "2026-10-17",
+   "verdict": "no match: supporting completion/tensor APIs only; none states the finite-level localized algebra comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*equiv|equiv.*quotient|ker.*eval|eval.*ker",
+   "results": "Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/LocalRing.lean; Mathlib/RingTheory/AdicCompletion/LocalRing.lean; Mathlib/RingTheory/AdicCompletion/LocalRing.lean; searched Mathlib/RingTheory/AdicCompletion",
+   "date": "2026-10-17",
+   "verdict": "no match: supporting completion/tensor APIs only; none states the finite-level localized algebra comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-completed-local-base-change",
@@ -73,5 +197,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-type-base-change-adic-quotients",
+  "worker": "stage1",
+  "summary": "Proved all finite-level isomorphisms by an explicit inverse using the existing completion kernel leaf, proved Q=qD, localized using the existing quotient-localization leaf, and checked transitions on fractions. No new nodes. Corrected the finite-type-algebra definition reference and wrote the tensor ring structure explicitly; no mathematical hypothesis or conclusion changed.",
+  "blueprint": "Auxiliary finite-level ring calculation in the inherited completed-local-base-change branch below lem-trf-local-term-locality (proof of (1) and (2), specialization-to-normal-cone route). The current blueprint has no direct statement of this auxiliary calculation; its inherited ancestry through the completed-local comparison is retained. Steps 1-4 supply the finite-level calculation, Step 5 the local comparison, Step 6 its compatibility.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-ae7f0c5fe",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-ae7f0c5fe (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, and unit/chapter route. Verified all six steps against Stacks 05GG, 05GI, and 00CT, including Q=qD, the canonical localized morphism, and transition compatibility. Edge cases pass; no new nodes, long steps, circularity, forbidden machinery, or repairs. Detailed checks are in review.md."
  }
 }
