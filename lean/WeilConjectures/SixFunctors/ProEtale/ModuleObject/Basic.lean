@@ -14,6 +14,8 @@ public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 
+import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
+
 /-!
 
 # Condensed coefficient rings and their canonical coefficient morphisms
@@ -203,8 +205,44 @@ instance : RepresentablyFlat profiniteToProEt.{u} :=
 /-- The functor `S ↦ Spec LC(S, ℤ)` sends finite jointly surjective families to pro-étale
 coverings. See the module docstring. -/
 lemma coverPreserving_profiniteToProEt :
-    CoverPreserving (coherentTopology Profinite.{u}) (ProEt.topology specZ) profiniteToProEt :=
-  sorry
+    CoverPreserving (coherentTopology Profinite.{u}) (ProEt.topology specZ) profiniteToProEt := by
+  classical
+  constructor
+  intro T R hR
+  obtain ⟨ι, hι, S, f, hf, hRf⟩ :=
+    (coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily R).mp hR
+  have hsurj := ((Profinite.effectiveEpiFamily_tfae S f).out 0 2).mp hf
+  have hgeom : ∀ q : profiniteToScheme.obj T,
+      ∃ i, q ∈ Set.range (profiniteToScheme.map (f i)) := by
+    intro q
+    obtain ⟨⟨t, p⟩, rfl⟩ := LocallyConstant.toPrimeSpectrum_surjective q
+    obtain ⟨i, s, hs⟩ := hsurj t
+    refine ⟨i, LocallyConstant.toPrimeSpectrum (s, p), ?_⟩
+    subst t
+    rfl
+  have hwe (i : ι) : WeaklyEtale (profiniteToScheme.map (f i)) := by
+    have : WeaklyEtale (profiniteToScheme.map (f i) ≫
+        toSpecZ (profiniteToScheme.obj T)) := by
+      rw [comp_toSpecZ]
+      infer_instance
+    exact WeaklyEtale.of_comp _ (toSpecZ (profiniteToScheme.obj T))
+  let C := Scheme.Cover.mkOfCovers (P := @WeaklyEtale) ι
+    (fun i ↦ profiniteToScheme.obj (S i)) (fun i ↦ profiniteToScheme.map (f i))
+    hgeom hwe
+  have (i : C.I₀) : QuasiCompact (C.f i) := by
+    change QuasiCompact (Spec.map _)
+    infer_instance
+  have : Finite C.I₀ := hι
+  have hcov : Presieve.ofArrows (fun i ↦ profiniteToProEt.obj (S i))
+      (fun i ↦ profiniteToProEt.map (f i)) ∈ ProEt.precoverage specZ (profiniteToProEt.obj T) := by
+    rw [ProEt.precoverage, Precoverage.mem_comap_iff, Presieve.map_ofArrows]
+    exact (Scheme.Cover.ofQuasiCompactCover C).mem₀
+  apply (ProEt.topology specZ).superset_covering _
+    (Precoverage.generate_mem_toGrothendieck hcov)
+  rw [Sieve.generate_le_iff]
+  intro W g hg
+  obtain ⟨i⟩ := hg
+  exact R.image_mem_functorPushforward profiniteToProEt (hRf i)
 
 instance isContinuous_profiniteToProEt :
     profiniteToProEt.IsContinuous (coherentTopology Profinite.{u}) (ProEt.topology specZ) :=

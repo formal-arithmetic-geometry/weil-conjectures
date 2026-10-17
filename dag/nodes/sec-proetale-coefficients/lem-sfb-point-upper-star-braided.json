@@ -1,241 +1,270 @@
 {
-  "id": "lem-sfb-point-upper-star-braided",
-  "blueprint": {
-    "is": "lem-sfb-point-upper-star-braided",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "$p^*$ is braided",
-  "statement": "By [lem-sfb-point-upper-star-unit] and [lem-sfb-point-upper-star-tensor],\n$p^*$ is strong monoidal. It is moreover braided: under the tensor comparison\nisomorphisms, $p^*$ of the symmetry $F\\otimes G\\cong G\\otimes F$ is the\nsymmetry $p^*F\\otimes p^*G\\cong p^*G\\otimes p^*F$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-braided.md",
-    "place": "node lem-sfb-point-upper-star-braided, order 1546"
-  },
-  "stmt_deps": [
-    "def-sfb-point-upper-star",
+ "id": "lem-sfb-point-upper-star-braided",
+ "blueprint": {
+  "is": "lem-sfb-point-upper-star-braided",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "$p^*$ is braided",
+ "statement": "By [lem-sfb-point-upper-star-unit] and [lem-sfb-point-upper-star-tensor],\n$p^*$ is strong monoidal. It is moreover braided: under the tensor comparison\nisomorphisms, $p^*$ of the symmetry $F\\otimes G\\cong G\\otimes F$ is the\nsymmetry $p^*F\\otimes p^*G\\cong p^*G\\otimes p^*F$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-braided.md",
+  "place": "node lem-sfb-point-upper-star-braided, order 1546"
+ },
+ "stmt_deps": [
+  "def-sfb-point-upper-star",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-point-upper-star-unit",
+  "lem-sfb-point-upper-star-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Put $L=p^*$ and $R=p_*$, with $L\\dashv R$ as in [def-sfb-point-adjunction], between the two categories of abelian sheaves with tensor product [sk-def-sfb-sheaf-tensor]. By [lem-sfb-point-upper-star-unit], $R$ has its canonical restriction lax monoidal structure and $L$ its adjunction-induced oplax structure, with invertible unit comparison $L\\mathbf Z\\to\\mathbf Z$. By [lem-sfb-point-upper-star-tensor], every tensor comparison $\\delta_{F,G}:L(F\\otimes G)\\to LF\\otimes LG$ is invertible. Use their inverses as the strong monoidal structure maps. Its associativity and unit identities follow by composing the oplax coherence identities with these inverse comparison maps and cancelling each comparison with its inverse. More explicitly, put $m_{F,G}=\\delta_{F,G}^{-1}$ and $j=\\iota^{-1}$, where $\\iota:L\\mathbf1\\to\\mathbf1$ is the oplax unit map. Write $\\alpha,\\lambda,\\rho$ for associator and unitors. The oplax associativity identity is\n$$\n(\\operatorname{id}\\otimes\\delta_{G,H})\\circ\\delta_{F,G\\otimes H}\\circ L(\\alpha_{F,G,H})\n=\\alpha_{LF,LG,LH}\\circ(\\delta_{F,G}\\otimes\\operatorname{id})\\circ\\delta_{F\\otimes G,H}.\n$$\nPrecompose with $m_{F\\otimes G,H}\\circ(m_{F,G}\\otimes\\operatorname{id})$ and postcompose with $m_{F,G\\otimes H}\\circ(\\operatorname{id}\\otimes m_{G,H})$. Cancelling the inverse pairs gives\n$$\nL(\\alpha_{F,G,H})\\circ m_{F\\otimes G,H}\\circ(m_{F,G}\\otimes\\operatorname{id})\n=m_{F,G\\otimes H}\\circ(\\operatorname{id}\\otimes m_{G,H})\\circ\\alpha_{LF,LG,LH}.\n$$\nThe two oplax unit identities are $L(\\lambda_F)=\\lambda_{LF}\\circ(\\iota\\otimes\\operatorname{id})\\circ\\delta_{\\mathbf1,F}$ and $L(\\rho_F)=\\rho_{LF}\\circ(\\operatorname{id}\\otimes\\iota)\\circ\\delta_{F,\\mathbf1}$. Precomposing them with $m_{\\mathbf1,F}\\circ(j\\otimes\\operatorname{id})$ and $m_{F,\\mathbf1}\\circ(\\operatorname{id}\\otimes j)$, respectively, gives $L(\\lambda_F)\\circ m_{\\mathbf1,F}\\circ(j\\otimes\\operatorname{id})=\\lambda_{LF}$ and $L(\\rho_F)\\circ m_{F,\\mathbf1}\\circ(\\operatorname{id}\\otimes j)=\\rho_{LF}$. These are the strong monoidal coherence identities.",
+   "uses": [
+    "def-sfb-point-adjunction",
     "sk-def-sfb-sheaf-tensor",
     "lem-sfb-point-upper-star-unit",
     "lem-sfb-point-upper-star-tensor"
-  ],
-  "proof": [
-    {
-      "text": "Put $L=p^*$ and $R=p_*$, with $L\\dashv R$ as in [def-sfb-point-adjunction], between the two categories of abelian sheaves with tensor product [sk-def-sfb-sheaf-tensor]. By [lem-sfb-point-upper-star-unit], $R$ has its canonical restriction lax monoidal structure and $L$ its adjunction-induced oplax structure, with invertible unit comparison $L\\mathbf Z\\to\\mathbf Z$. By [lem-sfb-point-upper-star-tensor], every tensor comparison $\\delta_{F,G}:L(F\\otimes G)\\to LF\\otimes LG$ is invertible. Use their inverses as the strong monoidal structure maps. Its associativity and unit identities follow by composing the oplax coherence identities with these inverse comparison maps and cancelling each comparison with its inverse. More explicitly, put $m_{F,G}=\\delta_{F,G}^{-1}$ and $j=\\iota^{-1}$, where $\\iota:L\\mathbf1\\to\\mathbf1$ is the oplax unit map. Write $\\alpha,\\lambda,\\rho$ for associator and unitors. The oplax associativity identity is\n$$\n(\\operatorname{id}\\otimes\\delta_{G,H})\\circ\\delta_{F,G\\otimes H}\\circ L(\\alpha_{F,G,H})\n=\\alpha_{LF,LG,LH}\\circ(\\delta_{F,G}\\otimes\\operatorname{id})\\circ\\delta_{F\\otimes G,H}.\n$$\nPrecompose with $m_{F\\otimes G,H}\\circ(m_{F,G}\\otimes\\operatorname{id})$ and postcompose with $m_{F,G\\otimes H}\\circ(\\operatorname{id}\\otimes m_{G,H})$. Cancelling the inverse pairs gives\n$$\nL(\\alpha_{F,G,H})\\circ m_{F\\otimes G,H}\\circ(m_{F,G}\\otimes\\operatorname{id})\n=m_{F,G\\otimes H}\\circ(\\operatorname{id}\\otimes m_{G,H})\\circ\\alpha_{LF,LG,LH}.\n$$\nThe two oplax unit identities are $L(\\lambda_F)=\\lambda_{LF}\\circ(\\iota\\otimes\\operatorname{id})\\circ\\delta_{\\mathbf1,F}$ and $L(\\rho_F)=\\rho_{LF}\\circ(\\operatorname{id}\\otimes\\iota)\\circ\\delta_{F,\\mathbf1}$. Precomposing them with $m_{\\mathbf1,F}\\circ(j\\otimes\\operatorname{id})$ and $m_{F,\\mathbf1}\\circ(\\operatorname{id}\\otimes j)$, respectively, gives $L(\\lambda_F)\\circ m_{\\mathbf1,F}\\circ(j\\otimes\\operatorname{id})=\\lambda_{LF}$ and $L(\\rho_F)\\circ m_{F,\\mathbf1}\\circ(\\operatorname{id}\\otimes j)=\\rho_{LF}$. These are the strong monoidal coherence identities.",
-      "uses": [
-        "def-sfb-point-adjunction",
-        "sk-def-sfb-sheaf-tensor",
-        "lem-sfb-point-upper-star-unit",
-        "lem-sfb-point-upper-star-tensor"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/_section.md",
-        "place": "step 3; lem-sfb-point-upper-star-unit and lem-sfb-point-upper-star-tensor, statements"
-      }
-    },
-    {
-      "text": "We check the braiding identity for the canonical lax tensor map $\\mu_{A,B}:RA\\otimes RB\\to R(A\\otimes B)$, for arbitrary abelian sheaves $A,B$ on $(\\operatorname{Spec}\\mathbf Z)_{\\mathrm{pro\\acute et}}$. By [def-sfb-point-lower-star], restriction evaluates at $u(S)=\\operatorname{Spec}LC(S,\\mathbf Z)$. Before sheafification on the profinite site, $\\mu_{A,B}$ is the natural presheaf map whose component at $S$ is $A(uS)\\otimes_{\\mathbf Z}B(uS)\\to(A\\otimes B)(uS)$, the component of the sheafification unit for the objectwise tensor product. The target $R(A\\otimes B)$ is a sheaf. Thus [def-weil-pbc-sheafification] extends this map uniquely to $RA\\otimes RB$. By [sk-def-sfb-sheaf-tensor] and the explicit construction in [det-def-sfb-sheaf-tensor-structure], the symmetry on sheaves is induced from the objectwise symmetry, and sheafification preserves it. Precompose the two maps $R(\\beta_{A,B})\\circ\\mu_{A,B}$ and $\\mu_{B,A}\\circ\\beta_{RA,RB}$ with the source sheafification unit. At each $S$, both send $a\\otimes b$ to the image of $b\\otimes a$ in $(B\\otimes A)(uS)$. They therefore agree on the whole objectwise tensor product, and uniqueness in the sheafification universal property gives $R(\\beta_{A,B})\\circ\\mu_{A,B}=\\mu_{B,A}\\circ\\beta_{RA,RB}$. This proves the needed lax braided identity without asserting that restriction commutes with sheafification.",
-      "uses": [
-        "def-sfb-point-lower-star",
-        "def-weil-pbc-sheafification",
-        "sk-def-sfb-sheaf-tensor",
-        "det-def-sfb-sheaf-tensor-structure"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/_section.md",
-        "place": "tensor definition and clause 1; sheafification uniqueness is Stacks Tag 00WH, sites-proposition-sheafification-adjoint"
-      }
-    },
-    {
-      "text": "Write $e:\\operatorname{Id}\\to RL$ for the adjunction unit and $\\Phi_{H,K}:\\operatorname{Hom}(LH,K)\\cong\\operatorname{Hom}(H,RK)$ for the adjunction bijection of [def-sfb-point-adjunction]. Its formula is $\\Phi_{H,K}(h)=R(h)\\circ e_H$. Unpacking the adjunction-induced oplax structure in [lem-sfb-point-upper-star-unit] gives $\\Phi_{F\\otimes G,LF\\otimes LG}(\\delta_{F,G})=\\mu_{LF,LG}\\circ(e_F\\otimes e_G)$. This is the defining mate formula, rather than an additional compatibility theorem. For $f:H'\\to H$ and $k:K\\to K'$, the same formula and naturality of $e$ give $\\Phi(k\\circ h)=R(k)\\circ\\Phi(h)$ and $\\Phi(h\\circ L(f))=\\Phi(h)\\circ f$.",
-      "uses": [
-        "def-sfb-point-adjunction",
-        "lem-sfb-point-upper-star-unit"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/_section.md",
-        "place": "step 3, adjunction-induced oplax comparison; expansion of the inherited node proof sentence about mates"
-      }
-    },
-    {
-      "text": "For condensed abelian groups $F,G$, compare maps $L(F\\otimes G)\\to LG\\otimes LF$ under the bijection $\\Phi$ of step 3. The lax braided identity of step 2, followed by naturality of the symmetry in the symmetric monoidal structures of [sk-def-sfb-sheaf-tensor], gives the explicit calculation\n$$\n\\begin{aligned}\n\\Phi(\\beta_{LF,LG}\\circ\\delta_{F,G})\n&=R(\\beta_{LF,LG})\\circ\\mu_{LF,LG}\\circ(e_F\\otimes e_G)\\\\\n&=\\mu_{LG,LF}\\circ\\beta_{RLF,RLG}\\circ(e_F\\otimes e_G)\\\\\n&=\\mu_{LG,LF}\\circ(e_G\\otimes e_F)\\circ\\beta_{F,G}\\\\\n&=\\Phi(\\delta_{G,F}\\circ L(\\beta_{F,G})).\n\\end{aligned}\n$$\nThe last equality is the precomposition identity from step 3. Both sides have source $F\\otimes G$ and target $R(LG\\otimes LF)$, so injectivity of the adjunction bijection [def-sfb-point-adjunction] yields $\\beta_{LF,LG}\\circ\\delta_{F,G}=\\delta_{G,F}\\circ L(\\beta_{F,G})$.",
-      "uses": [
-        "sk-def-sfb-sheaf-tensor",
-        "def-sfb-point-adjunction"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-braided.proof.md",
-        "place": "braided assertion; explicit expansion of the inherited proof sentence: compatibility is the mate under the adjunction"
-      }
-    },
-    {
-      "text": "By [lem-sfb-point-upper-star-tensor], $\\delta_{F,G}$ and $\\delta_{G,F}$ are isomorphisms. Compose the identity of step 4 on the right with $\\delta_{F,G}^{-1}$ and on the left with $\\delta_{G,F}^{-1}$ to obtain\n$$L(\\beta_{F,G})\\circ\\delta_{F,G}^{-1}=\\delta_{G,F}^{-1}\\circ\\beta_{LF,LG}.$$\nThis is exactly preservation of the symmetry by the strong monoidal structure from step 1. Together with the invertible unit comparison of [lem-sfb-point-upper-star-unit], it proves the whole statement.",
-      "uses": [
-        "lem-sfb-point-upper-star-tensor",
-        "lem-sfb-point-upper-star-unit"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-braided.proof.md",
-        "place": "strong monoidal and braided assertions; expansion of the inherited final sentence about inverse tensor comparisons"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-sfb-point-adjunction",
-    "sk-def-sfb-sheaf-tensor",
-    "lem-sfb-point-upper-star-unit",
-    "lem-sfb-point-upper-star-tensor",
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/_section.md",
+    "place": "step 3; lem-sfb-point-upper-star-unit and lem-sfb-point-upper-star-tensor, statements"
+   }
+  },
+  {
+   "text": "We check the braiding identity for the canonical lax tensor map $\\mu_{A,B}:RA\\otimes RB\\to R(A\\otimes B)$, for arbitrary abelian sheaves $A,B$ on $(\\operatorname{Spec}\\mathbf Z)_{\\mathrm{pro\\acute et}}$. By [def-sfb-point-lower-star], restriction evaluates at $u(S)=\\operatorname{Spec}LC(S,\\mathbf Z)$. Before sheafification on the profinite site, $\\mu_{A,B}$ is the natural presheaf map whose component at $S$ is $A(uS)\\otimes_{\\mathbf Z}B(uS)\\to(A\\otimes B)(uS)$, the component of the sheafification unit for the objectwise tensor product. The target $R(A\\otimes B)$ is a sheaf. Thus [def-weil-pbc-sheafification] extends this map uniquely to $RA\\otimes RB$. By [sk-def-sfb-sheaf-tensor] and the explicit construction in [det-def-sfb-sheaf-tensor-structure], the symmetry on sheaves is induced from the objectwise symmetry, and sheafification preserves it. Precompose the two maps $R(\\beta_{A,B})\\circ\\mu_{A,B}$ and $\\mu_{B,A}\\circ\\beta_{RA,RB}$ with the source sheafification unit. At each $S$, both send $a\\otimes b$ to the image of $b\\otimes a$ in $(B\\otimes A)(uS)$. They therefore agree on the whole objectwise tensor product, and uniqueness in the sheafification universal property gives $R(\\beta_{A,B})\\circ\\mu_{A,B}=\\mu_{B,A}\\circ\\beta_{RA,RB}$. This proves the needed lax braided identity without asserting that restriction commutes with sheafification.",
+   "uses": [
     "def-sfb-point-lower-star",
     "def-weil-pbc-sheafification",
+    "sk-def-sfb-sheaf-tensor",
     "det-def-sfb-sheaf-tensor-structure"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-braided.proof.md",
-    "place": "three-sentence blueprint proof and unit _section.md step 3; explicit restriction, mate, and inverse-comparison calculations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/_section.md",
+    "place": "tensor definition and clause 1; sheafification uniqueness is Stacks Tag 00WH, sites-proposition-sheafification-adjoint"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "braided.*[Aa]dj|[Aa]dj.*braided|ofOplax|[Cc]olax.*[Bb]raid",
-      "results": "Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/CommMon_.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Bicategory/NaturalTransformation/Oplax.lean; Mathlib/CategoryTheory/Bicategory/NaturalTransformation/Oplax.lean; Mathlib/CategoryTheory/Bicategory/NaturalTransformation/Oplax.lean; directory Mathlib/CategoryTheory",
-      "date": "2026-10-16",
-      "verdict": "no match: Monoidal.ofOplaxMonoidal supplies strong monoidality only, not the point inverse image or its braiding"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Functor.Braided, CategoryTheory.Adjunction",
-      "results": "CategoryTheory.Adjunction.mapCommMon; CategoryTheory.Adjunction.mapCommMon_counit; CategoryTheory.Adjunction.mapCommMon_unit; CategoryTheory.Adjunction.mapCommGrp; CategoryTheory.Adjunction.mapCommGrp_counit; CategoryTheory.Adjunction.mapCommGrp_unit",
-      "date": "2026-10-16",
-      "verdict": "no match: lifting an already braided adjunction to commutative objects assumes the desired property"
-    },
-    {
-      "tool": "leansearch",
-      "query": "A left adjoint to a lax braided monoidal functor has a braided oplax monoidal structure",
-      "results": "CategoryTheory.Adjunction.rightAdjointLaxMonoidal; CategoryTheory.Functor.LaxBraided.toLaxMonoidal; CategoryTheory.LaxBraidedFunctor.laxBraided; CategoryTheory.Functor.Monoidal.toOplaxMonoidal; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε; CategoryTheory.Functor.OplaxMonoidal.ofBifunctor; CategoryTheory.Adjunction.IsMonoidal; CategoryTheory.Adjunction.instIsMonoidal",
-      "date": "2026-10-16",
-      "verdict": "no match: adjunction monoidal structure and braided definitions are partial ingredients, not the asserted braided point pullback"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A left adjoint of a lax braided monoidal functor is oplax braided; if its unit and tensor comparison maps are isomorphisms then the left adjoint is braided monoidal",
-      "results": "CategoryTheory.Adjunction.mapCommMon; CategoryTheory.Adjunction.mapCommMon_counit; CategoryTheory.Adjunction.mapCommMon_unit; CategoryTheory.Adjunction.instIsMonoidal; CategoryTheory.BraidedCategory.ofFullyFaithful; CategoryTheory.Functor.LaxBraided; CategoryTheory.Functor.Braided.braided; CategoryTheory.Functor.Braided.toMonoidal",
-      "date": "2026-10-16",
-      "verdict": "no match: mapCommMon assumes that the left adjoint is already braided; the other hits give structures or unrelated transport"
-    },
-    {
-      "tool": "grep",
-      "query": "LaxBraided|leftAdjointOplaxMonoidal",
-      "results": "none; directory Mathlib/CategoryTheory/Sites",
-      "date": "2026-10-16",
-      "verdict": "no match: no hits in CategoryTheory/Sites"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction.leftAdjointOplaxMonoidal",
-      "results": "CategoryTheory.Adjunction.leftAdjointOplaxMonoidal; CategoryTheory.Adjunction.instIsMonoidal_1; CategoryTheory.Adjunction.leftAdjointOplaxMonoidal_η; CategoryTheory.Adjunction.leftAdjointOplaxMonoidal_δ",
-      "date": "2026-10-16",
-      "verdict": "no match for item: leftAdjointOplaxMonoidal gives the induced oplax structure and defining mate formula, but no braided conclusion"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Restriction of sheaves of abelian groups is lax symmetric monoidal for the sheafified tensor product and its left adjoint preserves the tensor symmetry",
-      "results": "CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf; CategoryTheory.Sheaf.monoidalCategory; CategoryTheory.Sheaf.symmetricCategory; CategoryTheory.sheafToPresheaf_μ; CategoryTheory.Sheaf.instBraidedFunctorOppositePresheafToSheaf; CategoryTheory.sheafToPresheaf_δ; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite; CategoryTheory.Sheaf.braidedCategory",
-      "date": "2026-10-16",
-      "verdict": "no match: sheaf monoidal and braided structures are already represented by sk-def-sfb-sheaf-tensor; cartesian inclusion results concern another tensor product"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The left adjoint of a symmetric lax monoidal functor has an oplax tensor comparison commuting with the braiding",
-      "results": "CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc; CategoryTheory.Adjunction.IsMonoidal; CategoryTheory.Adjunction.isMonoidal_comp; CategoryTheory.Adjunction.mapCommMon_counit; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc",
-      "date": "2026-10-16",
-      "verdict": "no match for item: the adjunction compatibility and mate formulas are ingredients; mapCommMon assumes braidedness"
-    },
-    {
-      "tool": "grep",
-      "query": "braiding|Braided",
-      "results": "no hits in CategoryTheory/Monoidal/Functor.lean",
-      "date": "2026-10-16",
-      "verdict": "no braided adjunction theorem in CategoryTheory/Monoidal/Functor.lean; its ofOplaxMonoidal and leftAdjointOplaxMonoidal provide structures only"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ",
-      "results": "CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ",
-      "date": "2026-10-16",
-      "verdict": "partial ingredient: formula under IsMonoidal, not the braided point pullback conclusion"
-    },
-    {
-      "tool": "grep",
-      "query": "LaxBraided|[Oo]plax.*[Bb]raid",
-      "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean",
-      "date": "2026-10-16",
-      "verdict": "no whole-item match: definitions, compositions, cartesian constructions, and functors on monoid objects; none states braidedness of this left adjoint"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "lean_not_found"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1546,
-  "blueprint_uses": [
+  {
+   "text": "Write $e:\\operatorname{Id}\\to RL$ for the adjunction unit and $\\Phi_{H,K}:\\operatorname{Hom}(LH,K)\\cong\\operatorname{Hom}(H,RK)$ for the adjunction bijection of [def-sfb-point-adjunction]. Its formula is $\\Phi_{H,K}(h)=R(h)\\circ e_H$. Unpacking the adjunction-induced oplax structure in [lem-sfb-point-upper-star-unit] gives $\\Phi_{F\\otimes G,LF\\otimes LG}(\\delta_{F,G})=\\mu_{LF,LG}\\circ(e_F\\otimes e_G)$. This is the defining mate formula, rather than an additional compatibility theorem. For $f:H'\\to H$ and $k:K\\to K'$, the same formula and naturality of $e$ give $\\Phi(k\\circ h)=R(k)\\circ\\Phi(h)$ and $\\Phi(h\\circ L(f))=\\Phi(h)\\circ f$.",
+   "uses": [
     "def-sfb-point-adjunction",
+    "lem-sfb-point-upper-star-unit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/_section.md",
+    "place": "step 3, adjunction-induced oplax comparison; expansion of the inherited node proof sentence about mates"
+   }
+  },
+  {
+   "text": "For condensed abelian groups $F,G$, compare maps $L(F\\otimes G)\\to LG\\otimes LF$ under the bijection $\\Phi$ of step 3. The lax braided identity of step 2, followed by naturality of the symmetry in the symmetric monoidal structures of [sk-def-sfb-sheaf-tensor], gives the explicit calculation\n$$\n\\begin{aligned}\n\\Phi(\\beta_{LF,LG}\\circ\\delta_{F,G})\n&=R(\\beta_{LF,LG})\\circ\\mu_{LF,LG}\\circ(e_F\\otimes e_G)\\\\\n&=\\mu_{LG,LF}\\circ\\beta_{RLF,RLG}\\circ(e_F\\otimes e_G)\\\\\n&=\\mu_{LG,LF}\\circ(e_G\\otimes e_F)\\circ\\beta_{F,G}\\\\\n&=\\Phi(\\delta_{G,F}\\circ L(\\beta_{F,G})).\n\\end{aligned}\n$$\nThe last equality is the precomposition identity from step 3. Both sides have source $F\\otimes G$ and target $R(LG\\otimes LF)$, so injectivity of the adjunction bijection [def-sfb-point-adjunction] yields $\\beta_{LF,LG}\\circ\\delta_{F,G}=\\delta_{G,F}\\circ L(\\beta_{F,G})$.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "def-sfb-point-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-braided.proof.md",
+    "place": "braided assertion; explicit expansion of the inherited proof sentence: compatibility is the mate under the adjunction"
+   }
+  },
+  {
+   "text": "By [lem-sfb-point-upper-star-tensor], $\\delta_{F,G}$ and $\\delta_{G,F}$ are isomorphisms. Compose the identity of step 4 on the right with $\\delta_{F,G}^{-1}$ and on the left with $\\delta_{G,F}^{-1}$ to obtain\n$$L(\\beta_{F,G})\\circ\\delta_{F,G}^{-1}=\\delta_{G,F}^{-1}\\circ\\beta_{LF,LG}.$$\nThis is exactly preservation of the symmetry by the strong monoidal structure from step 1. Together with the invertible unit comparison of [lem-sfb-point-upper-star-unit], it proves the whole statement.",
+   "uses": [
     "lem-sfb-point-upper-star-tensor",
     "lem-sfb-point-upper-star-unit"
-  ],
-  "blueprint_lean": [
-    "AlgebraicGeometry.ProEtale.laxBraided_pointUpperStar"
-  ],
-  "blueprint_lean_not_found": [
-    "AlgebraicGeometry.ProEtale.laxBraided_pointUpperStar"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lem-sfb-point-upper-star-braided",
-    "worker": "stage1",
-    "summary": "Kept the statement and supplied five steps: the invertible oplax comparisons give strong monoidality, restriction is lax braided by a sheafification-unit calculation, the induced tensor comparison is written as an explicit adjunction mate, the braiding identity is checked under that bijection, and the comparisons are inverted. Reused existing nodes, including the precise sheafification universal property. No new nodes or Mathlib leaves. No project proof exists in slopmaster2. Second reading supplies the coherence equations, cites the explicit construction of the sheaf symmetry, and identifies the separate current blueprint proof file.",
-    "blueprint": "Realizes sk-def-sfb-pullback-from-point, step 3, strong monoidal and braided clauses. Step 1 writes the inverse-comparison coherence identities. Steps 2--4 expand the restriction and mate sentences of lem-sfb-point-upper-star-braided.proof.md; step 5 expands its final inverse-comparison sentence.",
-    "tool_uses": []
-  },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-Q53-78957c9ae",
-    "group": "Q53",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q53-78957c9ae (reviewer sub-agent of L); spot-checked: Read the complete item, report, dependency statements, and current blueprint sources. All five steps check: inverse coherence, sheafification symmetry, adjunction mates, and braided comparison. No new nodes, circularity, coefficient substitution, or repairs. Source locations, edge cases, DAG overlap checks, and target scope are recorded in review.md."
-  },
-  "chapter": "sec-proetale-coefficients",
-  "unit": "sk-def-sfb-pullback-from-point",
-  "lean": {
-    "existing": true,
-    "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
-    "declaration": "AlgebraicGeometry.ProEtale.laxBraided_pointUpperStar",
-    "declarations": [
-      "AlgebraicGeometry.ProEtale.monoidal_pointUpperStar",
-      "AlgebraicGeometry.ProEtale.laxBraided_pointUpperStar"
-    ],
-    "statement": "noncomputable instance laxBraided_pointUpperStar : pointUpperStar.{u}.LaxBraided",
-    "branch": "slopmaster2",
-    "by": "Q01",
-    "date": "2026-10-17",
-    "note": "The published pro-etale framework already supplies the exact structures for this statement. monoidal_pointUpperStar gives the strong monoidal structure on p^*, while laxBraided_pointUpperStar states the braiding compatibility and explicitly documents that p^* is braided because it is strong monoidal. These are the canonical tensor comparison maps from the recorded point-upper-star unit and tensor dependencies; no duplicate module is needed."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-3331ba1d4",
-    "group": "Q01",
-    "result": "pass",
-    "note": "Existing binding to AlgebraicGeometry.ProEtale.monoidal_pointUpperStar and laxBraided_pointUpperStar in WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic, exact. The monoidal structure is built from the adjunction's oplax structure with the recorded unit and tensor comparisons (isIso_η, isIso_δ). LaxBraided.braided is the symmetry square with mu = inv delta (compiled by simp). The instance monoidal and braided structures on both sheaf categories are rfl-equal to sfbSheafTensorStructure (sk-def-sfb-sheaf-tensor). The statement field matches the source verbatim and agrees with blueprint_lean. No extra hypotheses or universe restriction. Only the lean field and the report changed, and both report sections are present. nt_compile check file: no errors; standard axioms only. No findings."
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-braided.proof.md",
+    "place": "strong monoidal and braided assertions; expansion of the inherited final sentence about inverse tensor comparisons"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-sfb-point-adjunction",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-point-upper-star-unit",
+  "lem-sfb-point-upper-star-tensor",
+  "def-sfb-point-lower-star",
+  "def-weil-pbc-sheafification",
+  "det-def-sfb-sheaf-tensor-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-braided.proof.md",
+  "place": "three-sentence blueprint proof and unit _section.md step 3; explicit restriction, mate, and inverse-comparison calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "braided.*[Aa]dj|[Aa]dj.*braided|ofOplax|[Cc]olax.*[Bb]raid",
+   "results": "Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/CommMon_.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Bicategory/NaturalTransformation/Oplax.lean; Mathlib/CategoryTheory/Bicategory/NaturalTransformation/Oplax.lean; Mathlib/CategoryTheory/Bicategory/NaturalTransformation/Oplax.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: Monoidal.ofOplaxMonoidal supplies strong monoidality only, not the point inverse image or its braiding"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Braided, CategoryTheory.Adjunction",
+   "results": "CategoryTheory.Adjunction.mapCommMon; CategoryTheory.Adjunction.mapCommMon_counit; CategoryTheory.Adjunction.mapCommMon_unit; CategoryTheory.Adjunction.mapCommGrp; CategoryTheory.Adjunction.mapCommGrp_counit; CategoryTheory.Adjunction.mapCommGrp_unit",
+   "date": "2026-10-16",
+   "verdict": "no match: lifting an already braided adjunction to commutative objects assumes the desired property"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A left adjoint to a lax braided monoidal functor has a braided oplax monoidal structure",
+   "results": "CategoryTheory.Adjunction.rightAdjointLaxMonoidal; CategoryTheory.Functor.LaxBraided.toLaxMonoidal; CategoryTheory.LaxBraidedFunctor.laxBraided; CategoryTheory.Functor.Monoidal.toOplaxMonoidal; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε; CategoryTheory.Functor.OplaxMonoidal.ofBifunctor; CategoryTheory.Adjunction.IsMonoidal; CategoryTheory.Adjunction.instIsMonoidal",
+   "date": "2026-10-16",
+   "verdict": "no match: adjunction monoidal structure and braided definitions are partial ingredients, not the asserted braided point pullback"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left adjoint of a lax braided monoidal functor is oplax braided; if its unit and tensor comparison maps are isomorphisms then the left adjoint is braided monoidal",
+   "results": "CategoryTheory.Adjunction.mapCommMon; CategoryTheory.Adjunction.mapCommMon_counit; CategoryTheory.Adjunction.mapCommMon_unit; CategoryTheory.Adjunction.instIsMonoidal; CategoryTheory.BraidedCategory.ofFullyFaithful; CategoryTheory.Functor.LaxBraided; CategoryTheory.Functor.Braided.braided; CategoryTheory.Functor.Braided.toMonoidal",
+   "date": "2026-10-16",
+   "verdict": "no match: mapCommMon assumes that the left adjoint is already braided; the other hits give structures or unrelated transport"
+  },
+  {
+   "tool": "grep",
+   "query": "LaxBraided|leftAdjointOplaxMonoidal",
+   "results": "none; directory Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match: no hits in CategoryTheory/Sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointOplaxMonoidal",
+   "results": "CategoryTheory.Adjunction.leftAdjointOplaxMonoidal; CategoryTheory.Adjunction.instIsMonoidal_1; CategoryTheory.Adjunction.leftAdjointOplaxMonoidal_η; CategoryTheory.Adjunction.leftAdjointOplaxMonoidal_δ",
+   "date": "2026-10-16",
+   "verdict": "no match for item: leftAdjointOplaxMonoidal gives the induced oplax structure and defining mate formula, but no braided conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of abelian groups is lax symmetric monoidal for the sheafified tensor product and its left adjoint preserves the tensor symmetry",
+   "results": "CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf; CategoryTheory.Sheaf.monoidalCategory; CategoryTheory.Sheaf.symmetricCategory; CategoryTheory.sheafToPresheaf_μ; CategoryTheory.Sheaf.instBraidedFunctorOppositePresheafToSheaf; CategoryTheory.sheafToPresheaf_δ; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite; CategoryTheory.Sheaf.braidedCategory",
+   "date": "2026-10-16",
+   "verdict": "no match: sheaf monoidal and braided structures are already represented by sk-def-sfb-sheaf-tensor; cartesian inclusion results concern another tensor product"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The left adjoint of a symmetric lax monoidal functor has an oplax tensor comparison commuting with the braiding",
+   "results": "CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc; CategoryTheory.Adjunction.IsMonoidal; CategoryTheory.Adjunction.isMonoidal_comp; CategoryTheory.Adjunction.mapCommMon_counit; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match for item: the adjunction compatibility and mate formulas are ingredients; mapCommMon assumes braidedness"
+  },
+  {
+   "tool": "grep",
+   "query": "braiding|Braided",
+   "results": "no hits in CategoryTheory/Monoidal/Functor.lean",
+   "date": "2026-10-16",
+   "verdict": "no braided adjunction theorem in CategoryTheory/Monoidal/Functor.lean; its ofOplaxMonoidal and leftAdjointOplaxMonoidal provide structures only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ",
+   "results": "CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ",
+   "date": "2026-10-16",
+   "verdict": "partial ingredient: formula under IsMonoidal, not the braided point pullback conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "LaxBraided|[Oo]plax.*[Bb]raid",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Mon.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: definitions, compositions, cartesian constructions, and functors on monoid objects; none states braidedness of this left adjoint"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1546,
+ "blueprint_uses": [
+  "def-sfb-point-adjunction",
+  "lem-sfb-point-upper-star-tensor",
+  "lem-sfb-point-upper-star-unit"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.ProEtale.laxBraided_pointUpperStar"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.ProEtale.laxBraided_pointUpperStar"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-sfb-point-upper-star-braided",
+  "worker": "stage1",
+  "summary": "Kept the statement and supplied five steps: the invertible oplax comparisons give strong monoidality, restriction is lax braided by a sheafification-unit calculation, the induced tensor comparison is written as an explicit adjunction mate, the braiding identity is checked under that bijection, and the comparisons are inverted. Reused existing nodes, including the precise sheafification universal property. No new nodes or Mathlib leaves. No project proof exists in slopmaster2. Second reading supplies the coherence equations, cites the explicit construction of the sheaf symmetry, and identifies the separate current blueprint proof file.",
+  "blueprint": "Realizes sk-def-sfb-pullback-from-point, step 3, strong monoidal and braided clauses. Step 1 writes the inverse-comparison coherence identities. Steps 2--4 expand the restriction and mate sentences of lem-sfb-point-upper-star-braided.proof.md; step 5 expands its final inverse-comparison sentence.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q53-78957c9ae",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q53-78957c9ae (reviewer sub-agent of L); spot-checked: Read the complete item, report, dependency statements, and current blueprint sources. All five steps check: inverse coherence, sheafification symmetry, adjunction mates, and braided comparison. No new nodes, circularity, coefficient substitution, or repairs. Source locations, edge cases, DAG overlap checks, and target scope are recorded in review.md."
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-pullback-from-point",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AlgebraicGeometry.ProEtale.laxBraided_pointUpperStar",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.monoidal_pointUpperStar",
+   "AlgebraicGeometry.ProEtale.laxBraided_pointUpperStar"
+  ],
+  "statement": "noncomputable instance laxBraided_pointUpperStar : pointUpperStar.{u}.LaxBraided",
+  "branch": "slopmaster2",
+  "by": "Q01",
+  "date": "2026-10-17",
+  "note": "The published pro-etale framework already supplies the exact structures for this statement. monoidal_pointUpperStar gives the strong monoidal structure on p^*, while laxBraided_pointUpperStar states the braiding compatibility and explicitly documents that p^* is braided because it is strong monoidal. These are the canonical tensor comparison maps from the recorded point-upper-star unit and tensor dependencies; no duplicate module is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3331ba1d4",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Existing binding to AlgebraicGeometry.ProEtale.monoidal_pointUpperStar and laxBraided_pointUpperStar in WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic, exact. The monoidal structure is built from the adjunction's oplax structure with the recorded unit and tensor comparisons (isIso_η, isIso_δ). LaxBraided.braided is the symmetry square with mu = inv delta (compiled by simp). The instance monoidal and braided structures on both sheaf categories are rfl-equal to sfbSheafTensorStructure (sk-def-sfb-sheaf-tensor). The statement field matches the source verbatim and agrees with blueprint_lean. No extra hypotheses or universe restriction. Only the lean field and the report changed, and both report sections are present. nt_compile check file: no errors; standard axioms only. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261017T011039-L-3882952",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AddCommGrpCat.hasFunctorialFlatResolution",
+   "AlgebraicGeometry.ProEtale.coverPreserving_profiniteToProEt",
+   "AlgebraicGeometry.ProEtale.hasLeftKanExtension_op_profiniteToProEt",
+   "AlgebraicGeometry.ProEtale.isIso_δ_pointUpperStar",
+   "AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar",
+   "AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp",
+   "AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt",
+   "AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme"
+  ],
+  "sorry_after": [
+   "AddCommGrpCat.hasFunctorialFlatResolution",
+   "AlgebraicGeometry.ProEtale.hasLeftKanExtension_op_profiniteToProEt",
+   "AlgebraicGeometry.ProEtale.isIso_δ_pointUpperStar",
+   "AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar",
+   "AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp",
+   "AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt",
+   "AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme"
+  ]
+ }
 }

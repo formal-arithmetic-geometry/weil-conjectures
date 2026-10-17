@@ -1,104 +1,123 @@
 {
-  "id": "def-weil-pbc-profinite-locally-constant-hom-equiv",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-qbar",
-      "place": "Section 4 proof of lem:point-eval, affine Hom correspondence with profinite test objects; reuse the closed locally constant ring construction.",
-      "via": [
-        "lem-weil-pbc-proetale-point-components-maps",
-        "lem-weil-pbc-condensed-point-basis-evaluation",
-        "lem-weil-pbc-condensed-lfp-local-triviality",
-        "lem-weil-pbc-condensed-sheaf-ext-continuity",
-        "prop-weil-pbc-qbar-condensed-two-colimit",
-        "nt-target-proetale-qbar"
-      ]
-    },
-    "same_as": []
+ "id": "def-weil-pbc-profinite-locally-constant-hom-equiv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Section 4 proof of lem:point-eval, affine Hom correspondence with profinite test objects; reuse the closed locally constant ring construction.",
+   "via": [
+    "lem-weil-pbc-proetale-point-components-maps",
+    "lem-weil-pbc-condensed-point-basis-evaluation",
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
   },
-  "kind": "definition",
-  "title": "The existing locally constant ring Hom equivalence",
-  "statement": "Let $R$ be a commutative ring in universe $u$ and $S$ a profinite space, meaning compact Hausdorff and totally disconnected. Use [def-weil-affine-spectrum] and the universe convention [def-weil-size-convention]. Write $\\operatorname{LC}(S,\\mathbf Z)$ for the ring of locally constant integer-valued functions. The existing canonical equivalence identifies continuous maps $\\pi_0(\\operatorname{Spec}R)\\to S$ with unital ring homomorphisms $\\operatorname{LC}(S,\\mathbf Z)\\to R$. It sends a continuous function to the ring homomorphism obtained by gluing the integer values along its finite clopen partitions. Its inverse sends $\\varphi$ to the factor through connected components of the first coordinate of $\\operatorname{Spec}(\\varphi)$ under the homeomorphism in [lem-weil-pbc-locally-constant-prime-spectrum]. This is the already proved definition profiniteLocallyConstantHomEquiv, not a new construction or proof obligation.",
-  "source": {
-    "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Basic.lean",
-    "place": "private noncomputable def profiniteLocallyConstantHomEquiv, lines 259-290; its inverse uses profiniteSpectrumProjection, lines 220-226. Closed construction added by the landed F2-proetale-basic-instance-proofs change. The paper construction it implements is RefactorInstruction Section 4, proof of lem:point-eval."
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The existing locally constant ring Hom equivalence",
+ "statement": "Let $R$ be a commutative ring in universe $u$ and $S$ a profinite space, meaning compact Hausdorff and totally disconnected. Use [def-weil-affine-spectrum] and the universe convention [def-weil-size-convention]. Write $\\operatorname{LC}(S,\\mathbf Z)$ for the ring of locally constant integer-valued functions. The existing canonical equivalence identifies continuous maps $\\pi_0(\\operatorname{Spec}R)\\to S$ with unital ring homomorphisms $\\operatorname{LC}(S,\\mathbf Z)\\to R$. It sends a continuous function to the ring homomorphism obtained by gluing the integer values along its finite clopen partitions. Its inverse sends $\\varphi$ to the factor through connected components of the first coordinate of $\\operatorname{Spec}(\\varphi)$ under the homeomorphism in [lem-weil-pbc-locally-constant-prime-spectrum]. This is the already proved definition profiniteLocallyConstantHomEquiv, not a new construction or proof obligation.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Basic.lean",
+  "place": "private noncomputable def profiniteLocallyConstantHomEquiv, lines 259-290; its inverse uses profiniteSpectrumProjection, lines 220-226. Closed construction added by the landed F2-proetale-basic-instance-proofs change. The paper construction it implements is RefactorInstruction Section 4, proof of lem:point-eval."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-size-convention",
+  "lem-weil-pbc-locally-constant-prime-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ring homomorphisms from locally constant integer-valued functions on a profinite set to a commutative ring correspond to continuous maps from its prime spectrum",
+   "results": "Service unavailable: Internal Server Error (msearch.py, 2026-10-16).",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
   },
-  "stmt_deps": [
-    "def-weil-affine-spectrum",
-    "def-weil-size-convention",
-    "lem-weil-pbc-locally-constant-prime-spectrum"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Ring homomorphisms from locally constant integer-valued functions on a profinite set to a commutative ring correspond to continuous maps from its prime spectrum",
-      "results": "Service unavailable: Internal Server Error (msearch.py, 2026-10-16).",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Ring homomorphisms from locally constant integer-valued functions on a profinite set S to a commutative ring R correspond to continuous maps from connected components of Spec R to S",
-      "results": "8 Mathlib hits, including AlgebraicGeometry.pointsPi and AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv; no exact locally constant ring Hom correspondence. Repository search found the exact closed private definition in ModuleObject.Basic.",
-      "date": "2026-10-16",
-      "verdict": "no Mathlib match; exact existing library definition"
-    },
-    {
-      "tool": "loogle",
-      "query": "LocallyConstant, RingHom",
-      "results": "11 hits in Mathlib.Topology.LocallyConstant.Algebra, including constRingHom, evalRingHom, comapRingHom, mapRingHom and their evaluation lemmas. These supply operations, not this equivalence.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "liftPrimeSpectrum|LocallyConstant.*HomEquiv",
-      "results": "msearch.py Mathlib grep: 0 hits. Direct rg of lean/WeilConjectures finds profiniteLocallyConstantHomEquiv in SixFunctors/ProEtale/ModuleObject/Basic.lean. Blueprint searches for locally constant and ring homomorphisms found no node with this equivalence.",
-      "date": "2026-10-16",
-      "verdict": "exact existing library definition; no Mathlib match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.Paper.ProEtalePointComponentsMaps",
-    "date": "2026-10-16",
-    "group": "E2"
+  {
+   "tool": "leanfinder",
+   "query": "Ring homomorphisms from locally constant integer-valued functions on a profinite set S to a commutative ring R correspond to continuous maps from connected components of Spec R to S",
+   "results": "8 Mathlib hits, including AlgebraicGeometry.pointsPi and AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv; no exact locally constant ring Hom correspondence. Repository search found the exact closed private definition in ModuleObject.Basic.",
+   "date": "2026-10-16",
+   "verdict": "no Mathlib match; exact existing library definition"
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "lean": {
-    "existing": true,
-    "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
-    "declaration": "AlgebraicGeometry.ProEtale.profiniteLocallyConstantHomEquiv",
-    "statement": "private noncomputable def profiniteLocallyConstantHomEquiv\n    (R : CommRingCat.{u}ᵒᵖ) (S : Profinite.{u}) :\n    (Profinite.of (ConnectedComponents (PrimeSpectrum R.unop)) ⟶ S) ≃\n      (R ⟶ profiniteToCommRingCatOp.obj S)",
-    "branch": "sheaf-dag",
-    "by": "E2",
-    "date": "2026-10-16",
-    "note": "Already closed in the adopted library on sheaf-dag; available by import all. No Lean module is added or changed for this node. This helper was introduced by F2 on sheaf-dag, rather than by the original slopmaster2 snapshot."
+  {
+   "tool": "loogle",
+   "query": "LocallyConstant, RingHom",
+   "results": "11 hits in Mathlib.Topology.LocallyConstant.Algebra, including constRingHom, evalRingHom, comapRingHom, mapRingHom and their evaluation lemmas. These supply operations, not this equivalence.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "E2",
-    "result": "pass",
-    "landing": "20261015T181521-L-748175",
-    "kind": "proof",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "E2",
-    "result": "pass",
-    "landing": "20261015T181521-L-748175",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "tool": "grep",
+   "query": "liftPrimeSpectrum|LocallyConstant.*HomEquiv",
+   "results": "msearch.py Mathlib grep: 0 hits. Direct rg of lean/WeilConjectures finds profiniteLocallyConstantHomEquiv in SixFunctors/ProEtale/ModuleObject/Basic.lean. Blueprint searches for locally constant and ring homomorphisms found no node with this equivalence.",
+   "date": "2026-10-16",
+   "verdict": "exact existing library definition; no Mathlib match"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtalePointComponentsMaps",
+  "date": "2026-10-16",
+  "group": "E2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AlgebraicGeometry.ProEtale.profiniteLocallyConstantHomEquiv",
+  "statement": "private noncomputable def profiniteLocallyConstantHomEquiv\n    (R : CommRingCat.{u}ᵒᵖ) (S : Profinite.{u}) :\n    (Profinite.of (ConnectedComponents (PrimeSpectrum R.unop)) ⟶ S) ≃\n      (R ⟶ profiniteToCommRingCatOp.obj S)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-16",
+  "note": "Already closed in the adopted library on sheaf-dag; available by import all. No Lean module is added or changed for this node. This helper was introduced by F2 on sheaf-dag, rather than by the original slopmaster2 snapshot."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261015T181521-L-748175",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261017T011039-L-3882952",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AddCommGrpCat.hasFunctorialFlatResolution",
+   "AlgebraicGeometry.ProEtale.coverPreserving_profiniteToProEt",
+   "AlgebraicGeometry.ProEtale.hasLeftKanExtension_op_profiniteToProEt",
+   "AlgebraicGeometry.ProEtale.isIso_δ_pointUpperStar",
+   "AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar",
+   "AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp",
+   "AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt",
+   "AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme"
+  ],
+  "sorry_after": [
+   "AddCommGrpCat.hasFunctorialFlatResolution",
+   "AlgebraicGeometry.ProEtale.hasLeftKanExtension_op_profiniteToProEt",
+   "AlgebraicGeometry.ProEtale.isIso_δ_pointUpperStar",
+   "AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar",
+   "AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp",
+   "AlgebraicGeometry.ProEtale.preservesFiniteLimits_profiniteToProEt",
+   "AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme"
+  ]
+ }
 }
