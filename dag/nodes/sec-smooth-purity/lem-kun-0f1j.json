@@ -598,5 +598,27 @@
   "group": "N9",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-e5d5a77fd (reviewer sub-agent of L); spot-checked: I read all of lem-kun-0f1j: the item, all 10 steps and the statements of all 51 cited nodes. I checked it against Stacks etale-cohomology.tex 0F1I/0F1J (l.20596-20877), the main-20261015 proof, and the unit record. The unit has no steps and is not keyed to this item. The statement is unchanged and matches 0F1J hypothesis by hypothesis: Z/n-module sheaves, tor amplitude in [a,inf], E and F in D+, g qcqs, canonical map adjoint to the counit of g. There are no new nodes and no cycle. Step 2 is correct: the tail is K-flat by the split-sequence argument, and for q<N+b both H^q and H^(q+1) of the tail images vanish. This replaces the blueprint's false derived-tensor-t-est citation; the Z/l^2 counterexample is right. In Step 3, C_M=I/J_M is zero below M. Step 4's annihilator induction and its F_l-injective acyclicity argument are correct, and the repair that resolves the formed tensor sheaf for h is correct. Step 5 really is needed, because lem-kun-0f1i is stated only for finite type; every hypothesis of lem-kun-0ezt is met by the subalgebra system with constant bottom row and the torsion condition from zn-invertible-orders. Step 7 uses the qcqs finite-coefficient colimit node instead of 03SA. In Step 8, X'_i=X_i x_K S', so Step 5 applies, and the Stacks display that drops rho_* is correctly retyped. I redid the Step 9 chase: injectivity holds for all sheaves first, then surjectivity by induction on q; it uses only naturality and needs no constructible cokernel. Step 10 uses stalk conservativity and conservative forgetting of coefficients. Fix (C4): Step 8 cited lem-weil-pbc-derived-leray-composition for R(h rho)_* = pi'_* Rh_{i,*}, but that node states RGamma/Leray compatibility. I replaced it with def-weil-pbc-derived-direct-image-composition, which states R(u o v)_* = Ru_* Ru_* composition on D+, in the text, uses and proof_deps, and removed its tool_use entry. I accept the other 33 declared tool uses as generic tools; no SGA is cited. The corrected file is fixes/dag/nodes/sec-smooth-purity/lem-kun-0f1j.json and the review is in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9efb77273",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Stacks 0F1J: field K, 1≤n, IsUnit (n:K), IsPullback p f' aX aS and IsPullback e h g f', only [QuasiCompact g][QuasiSeparated g], E and F in D+ over ULift (ZMod n) (project u+1 convention), lower tor amplitude via the recorded hasTorAmplitudeGE, conclusion IsIso. The map is the h-adjoint of leftDerivedUpperStarTensorComparison, then derivedSquareUpperStarIso (instantiation and direction re-derived), then Le^*(counit of g), all canonical upstream declarations; #print axioms shows the map sorry-free and the theorem's only sorry is the postponed proof. Statement field verbatim; docstrings with source, blueprint and all 10 proof steps; report has Worker report and Second reading by Q06; node unchanged apart from lean. nt_compile.py on the snapshot file: exit 0, no errors or warnings. Edge cases n=1, negative a, empty schemes and degenerate squares covered. Pre-existing gap noted, no change needed here: def-weil-quasi-separated-morphism has no lean record; Mathlib QuasiSeparated is the exact notion."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PunctualTensorBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.isIso_punctualTensorBaseChangeMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.punctualTensorBaseChangeMap",
+   "AlgebraicGeometry.Etale.isIso_punctualTensorBaseChangeMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PunctualTensorBaseChange.lean",
+  "statement": "theorem isIso_punctualTensorBaseChangeMap (K : Type u) [Field K] (n : ℕ) (hn : 1 ≤ n) (hnK : IsUnit (n : K)) {X X' Y S' T : Scheme.{u}} (aX : X ⟶ Spec (CommRingCat.of K)) (aS : S' ⟶ Spec (CommRingCat.of K)) (p : X' ⟶ X) (h : Y ⟶ X') (e : Y ⟶ T) (f' : X' ⟶ S') (g : T ⟶ S') (left : IsPullback p f' aX aS) (right : IsPullback e h g f') [QuasiCompact g] [QuasiSeparated g] (E : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))))) (F : _root_.DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))))) (a : ℤ) (hE : DerivedCategory.hasTorAmplitudeGE (ULift.{u + 1} (ZMod n)) X a (_root_.DerivedCategory.Plus.ι.obj E)) : IsIso (punctualTensorBaseChangeMap (ULift.{u + 1} (ZMod n)) p h e f' g right.toCommSq (_root_.DerivedCategory.Plus.ι.obj E) (_root_.DerivedCategory.Plus.ι.obj F))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

@@ -26,7 +26,10 @@
   "place": "Kerodon Tag 05V5, Corollary 7.7.3.23, universality of colimits in spaces (with the base-change meaning of universality); read online. No Stacks tag covers space-valued infinity categories."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-space-base-change",
+  "lem-coef-infinity-sifted-colimit-calculus"
  ],
  "proof": [
   {
@@ -271,5 +274,24 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-25b5a219e (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-coef-spaces-slice-cartesian-closure, every cited statement and the report in full. Checked the sources online, since no Kerodon copy is archived. Tag 05UY (Prop 7.7.3.17) says S is locally cartesian closed and matches the new node, which is statement-only (B1), self-contained and allows empty fibers. Tag 05V5 (Cor 7.7.3.23) is proved by combining 05UY with 05V3, which is the route the six steps follow. Step 1: relative-slice-sections says the source functor creates colimits, and S has colimits of all small shapes, the empty one included. Step 2: the cone-calculus formula with K=Δ^0 gives the slice hofib formula and slice pullbacks. Step 3: the pullback 1_B×_{[a,a]}[a,y] represents Map_{/A}(f^*T,Y), naturally in T; I checked the hofib over e∘!, the transpose to pr_A, and the step from iterated fibers to the slice over A. Step 4: the dual colimit criterion is applied to L as the slice colimit, so there is no circularity. Steps 5 and 6 are genuinely elementary (initial objects are unique; the empty shape). Edge cases tested: J empty, f=id, A or B empty, coproducts, and the cover R→S^1 over the pushout presentation of S^1. New node edge cases: B=pt, X empty, Y empty. The dependency graph is acyclic and the item statement is unchanged. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc), a generic mapping-space and initial-object black box that replaces no route; every other citation is in the same unit. No duplicate of the new node: presheaf-cocompletion is only the B=pt case, and the two relative-exponential nodes fix their target. Note for the maintainer, not a fault here: the existing unsplit node lem-coef-space-universal-colimits-cartesian-pushouts states the item in unsliced form as its first clause, so its later split should cite this item. No fixes, no drops."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6a556a81",
+  "group": "NB",
+  "result": "pass",
+  "note": "Read the packet, check-brief2, both delivered modules, both node records and the dependency declarations (comma/commaSubcomplex, cone/cocone categories, IsLimiting/IsColimiting, Has/PreservesInfinityColimitsOfShape, IsInfinityImageCocone) against Kerodon 05V5/05UY/05V1. Clause match: universe u with S = infinityCategory.{u}; J an arbitrary SSet.{u} lifted to u+1; f an edge with endpoints A=0 and B=1; spaceSlice = comma(id, b, outgoing=true), i.e. arrows into b; colimit existence over B is a conclusion. SpaceBaseChange square traced: corners f*X, A, X, B; top edge is the pulled-back structure arrow, bottom X->B, right edge constant f; each object-square is limiting with apex and cylinder fixed. Real data with no choice, and Nonempty is true. Preservation fixes the image apex and cylinder, which is the node's equivalent form. Empty J, f=id, empty A/B and pointless spaces are covered. Item changed only in stmt_deps (new def node plus two landed nodes, DAG acyclic) and lean; statement unchanged. New node fields conform to section 5; lean.statement verbatim for both nodes; no sorry in definitions; docstrings carry source and blueprint; six proof steps present; proof-only imports consistent. No duplicate notion: space category reused; rightVertexSlice/smallSpaceSlice is the join model in lemma modules; PointedModelStability.IsPullbackSquare is a lemma-module helper, not a DAG definition. nt_compile.py --json on both files: exit 0, no errors (sorry warnings suppressed by the tool; a broken control file gave exit 1). Only cosmetic finding: a garbled phrase in the report's New nodes section."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpaceUniversalColimits",
+  "declaration": "SSet.Enhanced.space_universal_colimits",
+  "file": "lean/Sheaf/CategoryTheory/SpaceUniversalColimits.lean",
+  "statement": "theorem space_universal_colimits (J : SSet.{u}) (f : (Δ[1] : SSet.{u + 1}) ⟶ infinityCategory.{u}) : HasInfinityColimitsOfShape (SSet.uliftFunctor.{u + 1}.obj J) (spaceSlice (f.app _ (stdSimplex.obj₀Equiv.symm 1))) ∧ Nonempty (SpaceBaseChange f) ∧ ∀ P : SpaceBaseChange f, PreservesInfinityColimitsOfShape (SSet.uliftFunctor.{u + 1}.obj J) P.pullback",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The statement uses the canonical infinity category and concrete coherent base-change structure; the infinity-category dependency supplies its S_W nerve and corepresented functor."
  }
 }

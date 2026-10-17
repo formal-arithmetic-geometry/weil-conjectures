@@ -1,0 +1,124 @@
+{
+ "id": "def-coef-space-base-change",
+ "kind": "definition",
+ "title": "Coherent space slices and base-change functors",
+ "status": "split",
+ "statement": "Use simplicial sets, Kan complexes, coherent diagrams, coherent comma categories and limiting cones from [def-cbc-enhanced-diagrams-cones]. Fix a universe $\\mathcal U$ and use the infinity category $\\mathcal S_{\\mathcal U}$ of small spaces from [def-coef-infinity-category-of-spaces], formed in the next universe; write $\\mathcal S=\\mathcal S_{\\mathcal U}$. For a vertex $b$, define $\\mathcal S_{/b}$ as the coherent comma simplicial set $(\\mathrm{id}_{\\mathcal S}\\downarrow b)$, retaining the entire family of structure arrows. A coherent square is a map from the nerve of the subset poset $\\mathcal P(\\{0,1\\})$ to $\\mathcal S$. Its pullback condition means that its specified cone from the empty-subset vertex to the three nonempty-subset vertices is limiting; the cone cylinder sends $(p,t)$ to $\\varnothing$ at $t=0$ and to $p$ at $t=1$. For an edge $f:A\\to B$ in $\\mathcal S$, a base-change functor along $f$ consists of a simplicial functor $G:\\mathcal S_{/B}\\to\\mathcal S_{/A}$ and a coherent family of squares parametrized by $\\mathcal S_{/B}$. The top horizontal edge is exactly the structure-arrow family after $G$, the bottom horizontal edge is exactly the structure-arrow family over $B$, the right vertical edge is the constant family $f$, and each object-square is a pullback in the preceding sense. These are data and a universal-property predicate, with no choice of $G$ from a mere existence theorem.",
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces"
+ ],
+ "source": {
+  "document": "https://kerodon.net/tag/00TZ",
+  "place": "Construction 3.1.6.1 (coherent nerve of Kan complexes); Section 7.7.1 and Proposition 7.7.3.19 (05V1) for the canonical slice pullback functor; the subset-poset square and its specified cone are an explicit model of that pullback universal property."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "anima|KanComplex|SimplicialNerve",
+   "results": "{\"t\": \"2026-10-16T23:22:05Z\", \"tool\": \"grep\", \"query\": \"anima|KanComplex|SimplicialNerve\", \"sub\": \"AlgebraicTopology/SimplicialNerve.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"24\", \"28\", \"29\", \"32\", \"34\"], \"digest\": \"022b3e5a23334453\"}",
+   "date": "2026-10-16",
+   "verdict": "Mathlib supplies SimplicialNerve, the full-subcategory enrichment and simplicial internal hom; use these primitives. It does not instantiate the coherent nerve of small Kan complexes or define the coherent slice pullback-functor interface. The SimplicialNerve module explicitly lists the anima construction as a project."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The infinity category of small spaces is the homotopy coherent nerve of Kan complexes with simplicial mapping spaces",
+   "results": "{\"t\": \"2026-10-16T23:22:06Z\", \"tool\": \"leansearch\", \"query\": \"The infinity category of small spaces is the homotopy coherent nerve of Kan complexes with simplicial mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"CategoryTheory.nerveFunctor\", \"SSet.instQuasicategoryOfKanComplex\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerveFunctor_obj\"], \"digest\": \"60d9da5db391aad2\"}",
+   "date": "2026-10-16",
+   "verdict": "Mathlib supplies SimplicialNerve, the full-subcategory enrichment and simplicial internal hom; use these primitives. It does not instantiate the coherent nerve of small Kan complexes or define the coherent slice pullback-functor interface. The SimplicialNerve module explicitly lists the anima construction as a project."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define the quasicategory of anima as the simplicial nerve of the simplicial category of Kan complexes and coherent pullback functors on its slices",
+   "results": "{\"t\": \"2026-10-16T23:22:06Z\", \"tool\": \"leanfinder\", \"query\": \"Define the quasicategory of anima as the simplicial nerve of the simplicial category of Kan complexes and coherent pullback functors on its slices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"SSet.QCat\", \"SSet.Quasicategory\", \"SSet.instQuasicategoryOfKanComplex\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.QCat.bicategory\", \"CategoryTheory.nerveFunctor_obj\", \"CategoryTheory.nerveFunctor\"], \"digest\": \"e6db0a492f3f3eca\"}",
+   "date": "2026-10-16",
+   "verdict": "Mathlib supplies SimplicialNerve, the full-subcategory enrichment and simplicial internal hom; use these primitives. It does not instantiate the coherent nerve of small Kan complexes or define the coherent slice pullback-functor interface. The SimplicialNerve module explicitly lists the anima construction as a project."
+  },
+  {
+   "tool": "grep",
+   "query": "smallSpaces|SpaceBaseChange|IsSpacePullbackSquare|corepresent|infinityCategory in lean/Sheaf, dag/nodes, and WeilConjectures",
+   "results": "Repair search (2026-10-17): dag/nodes/sec-six-functors/def-coef-infinity-category-of-spaces.json already owns the coherent space category and concrete corepresented functor. Its landed module Sheaf.CategoryTheory.InfinityCategoryOfSpaces defines CategoryTheory.Spaces.infinityCategory and corepresented; read the full module and confirmed the source through scompile.py --source. No SpaceBaseChange or IsSpacePullbackSquare declaration exists outside this delivery. EnhancedDiagramsCones supplies comma, coneCategory and IsLimiting and is reused.",
+   "date": "2026-10-17",
+   "verdict": "Reuse the existing space-category definition node. Only coherent space slices and the coherent base-change data interface are introduced by this new node; no duplicate smallSpaces definition remains."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-space-universal-colimits",
+  "date": "2026-10-16",
+  "group": "NB"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim: the category of small spaces and canonical base change used in universality of coherent colimits.",
+   "via": [
+    "lem-coef-space-universal-colimits",
+    "lem-coef-labelled-spine-prism-horn-calculus",
+    "lem-coef-segal-external-local-equivalences",
+    "lem-coef-algebroid-bilinear-colimits",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpaceBaseChange",
+  "declaration": "SSet.Enhanced.SpaceBaseChange",
+  "file": "lean/Sheaf/CategoryTheory/SpaceBaseChange.lean",
+  "statement": "structure SpaceBaseChange (f : (Δ[1] : SSet.{u + 1}) ⟶ infinityCategory.{u})",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.Enhanced.spaceSlice",
+   "SSet.Enhanced.spaceSliceArrows",
+   "SSet.Enhanced.spaceSquare",
+   "SSet.Enhanced.spaceCospan",
+   "SSet.Enhanced.spaceCospanInclusion",
+   "SSet.Enhanced.spaceSquareInterpolation",
+   "SSet.Enhanced.spaceSquarePrism",
+   "SSet.Enhanced.spaceSquareAxis",
+   "SSet.Enhanced.spaceSquareEdge",
+   "SSet.Enhanced.IsSpacePullbackSquare",
+   "SSet.Enhanced.SpaceBaseChange"
+  ],
+  "note": "The coherent space object is imported from Sheaf.CategoryTheory.InfinityCategoryOfSpaces as CategoryTheory.Spaces.infinityCategory; this module defines only the coherent slice, square, limiting predicate and base-change structure."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6a556a81",
+  "group": "NB",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6a556a81",
+  "group": "NB",
+  "result": "pass",
+  "note": "Read the packet, check-brief2, both delivered modules, both node records and the dependency declarations (comma/commaSubcomplex, cone/cocone categories, IsLimiting/IsColimiting, Has/PreservesInfinityColimitsOfShape, IsInfinityImageCocone) against Kerodon 05V5/05UY/05V1. Clause match: universe u with S = infinityCategory.{u}; J an arbitrary SSet.{u} lifted to u+1; f an edge with endpoints A=0 and B=1; spaceSlice = comma(id, b, outgoing=true), i.e. arrows into b; colimit existence over B is a conclusion. SpaceBaseChange square traced: corners f*X, A, X, B; top edge is the pulled-back structure arrow, bottom X->B, right edge constant f; each object-square is limiting with apex and cylinder fixed. Real data with no choice, and Nonempty is true. Preservation fixes the image apex and cylinder, which is the node's equivalent form. Empty J, f=id, empty A/B and pointless spaces are covered. Item changed only in stmt_deps (new def node plus two landed nodes, DAG acyclic) and lean; statement unchanged. New node fields conform to section 5; lean.statement verbatim for both nodes; no sorry in definitions; docstrings carry source and blueprint; six proof steps present; proof-only imports consistent. No duplicate notion: space category reused; rightVertexSlice/smallSpaceSlice is the join model in lemma modules; PointedModelStability.IsPullbackSquare is a lemma-module helper, not a DAG definition. nt_compile.py --json on both files: exit 0, no errors (sorry warnings suppressed by the tool; a broken control file gave exit 1). Only cosmetic finding: a garbled phrase in the report's New nodes section."
+ }
+}

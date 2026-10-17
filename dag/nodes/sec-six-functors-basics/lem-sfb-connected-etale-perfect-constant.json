@@ -384,5 +384,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-402ada405",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Read node, 14 statement deps and their lean records, the module, the report (Worker report + Second reading by Q37 present), and the exact declarations used: Etale.derivedTensor (real K-flat curriedTensor), IsLocallyConstantSheaf, IsWeaklyContractible (locally surjective = epi), ProEtale.comparisonUpperStar/upperStar, ProEt.topology; Stacks 09BI/09C6/090K. Every hypothesis matches (nonempty connected X; Noetherian R, no finiteness; bounded; locally constant with f.g. geometric stalks; Tor interval a<=b over all degree-0 sheaves) and every conclusion matches (perfect E; etale cover with Etale.upperStar L ≅ constant E; E ≅ derived stalk at every geometric point with E outside the quantifier; affine weakly contractible W: pullback of comparison ≅ constant E, no extra hypothesis on W). geometricStalk = sheafFiber.mapDerivedCategory, real data, no duplicate found. Fixed-scalar ModuleCat realization and R:Type(u+1) accepted (equivalent; standard published API); stage-3 use by the parent lemma will need the existing transports. Only lean field changed; lean.statement verbatim; lines <=100; theorem proof only sorry; docstrings carry source and blueprint. nt_compile.py ran twice, exit 0, no errors/warnings (warn.sorry=false in lakefile, confirmed). Minor: unneeded public import of DerivedStalk; docstring compresses the comparison/etale-restriction step. No fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ConnectedEtalePerfectConstant",
+  "declaration": "AlgebraicGeometry.Etale.connected_etale_perfect_constant",
+  "declarations": [
+   "AlgebraicGeometry.Etale.geometricStalk",
+   "AlgebraicGeometry.Etale.connected_etale_perfect_constant"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ConnectedEtalePerfectConstant.lean",
+  "statement": "theorem connected_etale_perfect_constant (R : Type (u + 1)) [CommRing R] [IsNoetherianRing R] (X : Scheme.{u}) [Nonempty X] [ConnectedSpace X] (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) (hbounded : ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) q).obj L)) (hlisse : ∀ q : ℤ, IsLocallyConstantSheaf ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) q).obj L) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X), Module.Finite R (((pointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} R)).obj ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) q).obj L))) (hTor : ∃ a b : ℤ, a ≤ b ∧ ∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) (q : ℤ), q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) q).obj (((derivedTensor (ModuleCat.{u + 1} R) X).obj L).obj ((DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) 0).obj F)))) : ∃ (E : _root_.DerivedCategory (ModuleCat.{u + 1} R)), DerivedCategory.IsPerfectRingComplex E ∧ ∃ (𝒰 : Scheme.Cover.{u} Scheme.etalePrecoverage X), (∀ i : 𝒰.I₀, Nonempty ((Etale.upperStar (ModuleCat.{u + 1} R) (𝒰.f i)).mapDerivedCategory.obj L ≅ ((constantSheaf (𝒰.X i).smallEtaleTopology (ModuleCat.{u + 1} R)).mapDerivedCategory.obj E))) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X), Nonempty (E ≅ ((geometricStalk R x).obj L))) ∧ (∀ (W : X.ProEt) [IsAffine W.left], (hW : (Scheme.ProEt.topology X).IsWeaklyContractible.{u + 1} W) → Nonempty (((ProEtale.upperStar (ModuleCat.{u + 1} R) W.hom).mapDerivedCategory.obj ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory.obj L)) ≅ ((constantSheaf (Scheme.ProEt.topology W.left) (ModuleCat.{u + 1} R)).mapDerivedCategory.obj E)))",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical derived geometric stalk helper is the exact recorded geometric sheaf fibre functor mapped to derived categories. Constant coefficients are realized by ModuleCat-valued sheaves; the comparison and restrictions use the published arbitrary-coefficient geometric inverse-image functors."
  }
 }

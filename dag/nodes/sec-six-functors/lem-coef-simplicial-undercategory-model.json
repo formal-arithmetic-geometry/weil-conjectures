@@ -339,5 +339,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d6a78e9e",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Read node, dependency lem-coef-simplicial-model-nerve-localization and its SatisfiesSM7/cornerMap/SimplicialTensorCotensor declarations, the HTT A.3.7.1 source place, module, and report (both required sections present). Hypotheses are exactly the dependency's binders; no cofibrancy, properness or combinatorial assumption on A. Conclusion gives the model, enrichment and tensor/cotensor structures on Under A, with W/C/F tested on the underlying arrow, limits/colimits, both functorial factorizations and SM7. Initial object 1_A, terminal object A->1, cofibrant iff a.hom is a cofibration, fibrant iff a.right is fibrant. The mapping object is iso to the strict pullback Map(X,Y) x_{Map(A,Y)} {b}, compatible with arrows and degreewise composition. Tensor is the pushout A + _{A(x)K} X(x)K via canonical collapse and tensorMap; cotensor is the transpose of const b. Universes u,v independent; nothing left unbound. No Mathlib or project duplicate (Mathlib has Over only, Under is a TODO). Helpers are canonical, not hollow; proof docstring covers all 12 steps; only sorry; lean.statement verbatim; all 9 declarations present; node unchanged except lean. nt_compile --json: 26 modules, item 2.1 s, exit 0, no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialUndercategoryModel",
+  "declaration": "CategoryTheory.simplicial_undercategory_model",
+  "declarations": [
+   "CategoryTheory.SimplicialUndercategory.tensorTranspose",
+   "CategoryTheory.SimplicialUndercategory.tensorCollapse",
+   "CategoryTheory.SimplicialUndercategory.cotensorTranspose",
+   "CategoryTheory.SimplicialUndercategory.tensorObject",
+   "CategoryTheory.SimplicialUndercategory.cotensorObject",
+   "CategoryTheory.SimplicialUndercategory.mappingFiber",
+   "CategoryTheory.SimplicialUndercategory.mappingProjection",
+   "CategoryTheory.SimplicialUndercategory.MappingCompatibility",
+   "CategoryTheory.simplicial_undercategory_model"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialUndercategoryModel.lean",
+  "statement": "theorem simplicial_undercategory_model (M : Type u) [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] [MorphismProperty.HasFunctorialFactorization (cofibrations M) (trivialFibrations M)] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations M) (fibrations M)] [SimplicialCategory M] (T : SimplicialTensorCotensor M) (_hSM7 : SatisfiesSM7 M) (A : M) : ∃ (m : ModelCategory (Under A)) (S : SimplicialCategory (Under A)) (U : @SimplicialTensorCotensor (Under A) _ S), HasLimits (Under A) ∧ HasColimits (Under A) ∧ MorphismProperty.HasFunctorialFactorization ((cofibrations M).inverseImage (Under.forget A)) ((trivialFibrations M).inverseImage (Under.forget A)) ∧ MorphismProperty.HasFunctorialFactorization ((trivialCofibrations M).inverseImage (Under.forget A)) ((fibrations M).inverseImage (Under.forget A)) ∧ @SatisfiesSM7 (Under A) _ m S ∧ (∀ (a b : Under A) (f : a ⟶ b), (m.categoryWithCofibrations.cofibrations f ↔ Cofibration f.right) ∧ (m.categoryWithFibrations.fibrations f ↔ Fibration f.right) ∧ (m.categoryWithWeakEquivalences.weakEquivalences f ↔ WeakEquivalence f.right)) ∧ Nonempty (IsInitial (Under.mk (𝟙 A))) ∧ Nonempty (IsTerminal (Under.mk (terminal.from A))) ∧ (∀ a : Under A, (m.categoryWithCofibrations.cofibrations (Under.homMk (U := Under.mk (𝟙 A)) (V := a) a.hom (by simp)) ↔ Cofibration a.hom) ∧ (m.categoryWithFibrations.fibrations (Under.homMk (U := a) (V := Under.mk (terminal.from A)) (terminal.from a.right) (by simp)) ↔ IsFibrant a.right)) ∧ (∃ e : ∀ a b : Under A, @sHom (Under A) _ S a b ≅ mappingFiber a b, MappingCompatibility S e) ∧ (∀ (a : Under A) (K : SSet.{v}), @SimplicialTensorCotensor.tensor (Under A) _ S U K a = tensorObject T K a) ∧ (∀ (b : Under A) (K : SSet.{v}), @SimplicialTensorCotensor.cotensor (Under A) _ S U K b = cotensorObject T K b)",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

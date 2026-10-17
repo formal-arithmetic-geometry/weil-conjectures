@@ -250,5 +250,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e1500cf1",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Read the node, both statement deps and their Lean (SimplicialModelNerveLocalization: SatisfiesSM7/cornerMap/MappingPresentation/MappingFormulas; KanQuillenRightProper), the HTT A.3.7.1 source place, the module and report (Worker report + Second reading by Q69 present). All 9 clauses match: inherited completeness/functorial-factorization/SM7 conventions, left properness via pushout.inr w i without cofibrancy, an arbitrary fibrant test class closed under weak equivalences between fibrant objects (iff), derived maps via functorial cofibrant replacement Q (derivable from MappingFormulas clause 1 via ε.app Z; independent of Q; Q exists), strict map eHomWhiskerRight SSet i Z (direction checked in Mathlib), trivial Kan fibration = modelCategoryQuillen.I.rlp as in the Kan-Quillen dep, n=0 included. No IsCofibrant on A or B; universes u,v free; autoImplicit false. Single theorem `by sorry`, no definitions, source/blueprint docstrings with all 8 proof steps, lean.statement verbatim, only the node's lean field changed, no name collision. nt_compile.py --json (side overlay): rc 0, no errors or warnings, module 1.5 s. No defects."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CofibrationLocalMappingTest",
+  "declaration": "CategoryTheory.cofibration_local_mapping_test",
+  "file": "lean/Sheaf/CategoryTheory/CofibrationLocalMappingTest.lean",
+  "statement": "theorem cofibration_local_mapping_test {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] [MorphismProperty.HasFunctorialFactorization (cofibrations M) (trivialFibrations M)] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations M) (fibrations M)] [SimplicialCategory M] (_T : SimplicialTensorCotensor M) (_hSM7 : SatisfiesSM7 M) (_leftProper : ∀ {A B C : M} (w : A ⟶ B) (i : A ⟶ C), WeakEquivalence w → Cofibration i → WeakEquivalence (pushout.inr w i)) (Q : M ⥤ M) (_ε : Q ⟶ 𝟭 M) (_hQ : ∀ X : M, IsCofibrant (Q.obj X) ∧ Fibration (_ε.app X) ∧ WeakEquivalence (_ε.app X)) (tests : ObjectProperty M) (_fibrant : ∀ Z : M, tests Z → IsFibrant Z) (_closed : ∀ {X Y : M} (w : X ⟶ Y), WeakEquivalence w → IsFibrant X → IsFibrant Y → (tests X ↔ tests Y)) {A B : M} (i : A ⟶ B) (_hi : Cofibration i) : (∀ Z : M, tests Z → SSet.Enhanced.IsWeakHomotopyEquivalence (eHomWhiskerRight SSet (Q.map i) Z)) ↔ (∀ Z : M, tests Z → SSet.modelCategoryQuillen.I.rlp (eHomWhiskerRight SSet i Z))",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Derived precomposition is the actual enriched map induced by any functorial cofibrant replacement Q with trivial-fibration augmentation; the tests are already fibrant. No arbitrary mapping-space functor or comparison map is assumed. No cofibrancy is imposed on A or B."
  }
 }
