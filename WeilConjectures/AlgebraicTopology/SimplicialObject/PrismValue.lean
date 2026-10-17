@@ -77,8 +77,10 @@ def prismIndex {Δ : SimplexCategory} {n : ℕ} (f : Δ ⟶ ⦋n⦌) (g : Δ ⟶
 lemma isPrismIndex_prismIndex {Δ : SimplexCategory} {n : ℕ} (f : Δ ⟶ ⦋n⦌) (g : Δ ⟶ ⦋1⦌) :
     IsPrismIndex f g (prismIndex f g) := by
   intro x
-  refine ⟨fun hx ↦ Finset.le_sup (f := fun x ↦ (f.toOrderHom x).val) (by simpa using hx),
-    fun hx ↦ Finset.sup_le fun y hy ↦ ?_⟩
+  refine ⟨fun hx ↦ Finset.le_sup (f := fun x ↦ (f.toOrderHom x).val)
+    (Finset.mem_filter.2 ⟨Finset.mem_univ _, hx⟩), fun hx ↦ ?_⟩
+  show (Finset.univ.filter fun x ↦ (g.toOrderHom x).val = 0).sup (fun x ↦ (f.toOrderHom x).val) ≤ _
+  refine Finset.sup_le fun y hy ↦ ?_
   simp only [Finset.mem_filter, Finset.mem_univ, true_and] at hy
   have hyx : y ≤ x := by
     by_contra h
@@ -114,13 +116,15 @@ lemma sumHom_comp_prism {Δ : SimplexCategory} {m n : ℕ} {f : Δ ⟶ ⦋m⦌} 
     sumHom f g ≫ prism θ k = sumHom (f ≫ θ) g := hom_ext_val fun x ↦ by
   simp only [comp_toOrderHom, OrderHom.comp_coe, Function.comp_apply, prism_apply, sumHom_val]
   rcases Nat.le_one_iff_eq_zero_or_eq_one.1 (val_le_one g x) with h | h
-  · rw [prismFun_of_le _ _ _ (by simp only [sumHom_val, h]; exact (hk x).1 h), Fin.val_castSucc,
-      h]
-    exact congrArg Fin.val (toOrderHom_congr θ (by simp [h]))
+  · rw [prismFun_of_le _ _ _ (by simp only [sumHom_val, h]; exact (hk x).1 h), Fin.val_castSucc]
+    calc _ = (θ.toOrderHom (f.toOrderHom x)).val :=
+          congrArg Fin.val (toOrderHom_congr θ (by simp [h]))
+      _ = _ := by simp [h]
   · rw [prismFun_of_lt _ _ _ (by simp only [sumHom_val, h]; have := (hk x).2 h; omega),
-      Fin.val_succ, h]
-    congr 1
-    exact congrArg Fin.val (toOrderHom_congr θ (by simp [h]))
+      Fin.val_succ]
+    calc _ = (θ.toOrderHom (f.toOrderHom x)).val + 1 :=
+          congrArg (· + 1) (congrArg Fin.val (toOrderHom_congr θ (by simp [h])))
+      _ = _ := by simp [h]
 
 lemma IsPrismIndex.comp_right {Δ : SimplexCategory} {m n : ℕ} {f : Δ ⟶ ⦋m⦌} {g : Δ ⟶ ⦋1⦌}
     {k : Fin (m + 1)} (hk : IsPrismIndex f g k) (θ : ⦋m⦌ ⟶ ⦋n⦌) :
@@ -163,10 +167,14 @@ def switch {n : ℕ} (g : ⦋n⦌ ⟶ ⦋1⦌) : Fin (n + 2) :=
 
 lemma sw_switch {n : ℕ} (g : ⦋n⦌ ⟶ ⦋1⦌) : sw (switch g) = g := hom_ext_val fun x ↦ by
   rw [sw_val]
+  have hs : (switch g).val = (Finset.univ.filter fun x ↦ (g.toOrderHom x).val = 0).sup
+      fun x : Fin (n + 1) ↦ x.val + 1 := rfl
+  rw [hs]
   rcases Nat.le_one_iff_eq_zero_or_eq_one.1 (val_le_one g x) with h | h
   · rw [h, if_pos]
     exact Nat.lt_of_lt_of_le (Nat.lt_succ_self _)
-      (Finset.le_sup (f := fun x : Fin (n + 1) ↦ x.val + 1) (by simpa using h))
+      (Finset.le_sup (f := fun x : Fin (n + 1) ↦ x.val + 1)
+        (Finset.mem_filter.2 ⟨Finset.mem_univ _, h⟩))
   · rw [h, if_neg]
     refine not_lt.2 (Finset.sup_le fun y hy ↦ ?_)
     simp only [Finset.mem_filter, Finset.mem_univ, true_and] at hy
@@ -227,18 +235,14 @@ lemma prism_comp_σ {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) (k : Fin (m + 1)) :
   · rw [prismFun_of_le _ _ _ hx, σ_val, if_pos (by
       simpa using toOrderHom_val_mono θ (a := ⟨x.val, by simp; omega⟩) (b := k) hx)]
     simp only [Fin.val_castSucc]
-    congr 2
-    apply Fin.ext
-    rw [σ_val, if_pos hx]
-    rfl
+    exact congrArg Fin.val (toOrderHom_congr θ (by rw [σ_val, if_pos hx]))
   · rw [prismFun_of_lt _ _ _ (by omega), σ_val, if_neg (by
-      simpa using toOrderHom_val_mono θ (a := k) (b := ⟨x.val - 1, by simp at *; omega⟩)
-        (by simp only; omega))]
+      have := toOrderHom_val_mono θ (a := k) (b := ⟨x.val - 1, by simp at *; omega⟩)
+        (by simp only; omega)
+      simp only [Fin.val_succ]
+      omega)]
     simp only [Fin.val_succ, Nat.add_sub_cancel]
-    congr 2
-    apply Fin.ext
-    rw [σ_val, if_neg hx]
-    rfl
+    exact congrArg Fin.val (toOrderHom_congr θ (by rw [σ_val, if_neg hx]))
 
 lemma prism_comp_side {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) (k : Fin (m + 1)) :
     prism θ k ≫ side (θ.toOrderHom k) = side k := hom_ext_val fun x ↦ by
@@ -312,9 +316,10 @@ lemma pathValue_map {T : C} {m n : ℕ} {Δ : SimplexCategory} (z : T ⟶ pathOb
   rw [pathValue_eq z (hk.comp_right θ), pathValue, Category.assoc]
   erw [pathMapObj_pathH_assoc]
   rw [pathMap, Category.assoc, ← V.map_comp, ← op_comp, sumHom_comp_prism hk]
+  rfl
 
 lemma pathValue_σ_side {T : C} {r : ℕ} (z : T ⟶ pathObj a b r) (l : Fin (r + 1)) :
-    pathValue a b z (σ l) (side l) = z ≫ pathH a b r l := by
+    pathValue a b z (SimplexCategory.σ l) (side l) = z ≫ pathH a b r l := by
   rw [pathValue_eq z (isPrismIndex_σ_side l), sumHom_σ_side, op_id, V.map_id,
     Category.comp_id]
 
