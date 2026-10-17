@@ -167,5 +167,27 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-1684b7cbb (reviewer sub-agent of L); spot-checked: Read Limits 0C4W (lemma-descend-unramified, l.1794, Situation l.1739) and Algebra 0C4F (lemma-colimit-unramified, l.47571). The item statement matches 0C4W. The only difference is that every S_i is assumed qcqs; the proof does not use this, the parent's Noetherian stages satisfy it, and the node is not a target. The new node lem-trf-colimit-unramified-algebra matches 0C4F exactly. It is pure algebra, statement-only and not a restated clause of the item. No duplicate turned up in grep/regex sweeps for 0C4F/0C4W/unramified+colimit. Small cases hold: Z[1/n]->Q with Z[i], a constant system, B_0[x], an empty source and the identity. Repairable faults fixed by rewriting the item's proof (statement unchanged): (1) the proof used Stacks notation (Y_0, f_0, S_0) that did not match the statement (U_0, V_0, g_0, S_{i_0}), and B_0, C_0, R_0 were never defined; (2) three citations were missing: lem-weil-pbc-qcqs-morphism-permanence(1) for quasi-compactness of g_0^{-1}(Y_{j,0}), lem-weil-pbc-lft-affine-pairs for finite type of arbitrarily chosen affine charts (the definition gives only some cover), and lem-weil-pbc-fibre-product-affine-spectra for X_{jk,i}=Spec(R_i⊗C_0); also, unramifiedness of the restriction now cites the restriction clause (2) of lem-weil-pbc-unramified-base-change-open instead of 'by hypothesis'; (3) the change from stage i_{jk} to i is now written as an explicit tensor identity and base change. The new node's blueprint.from place/via was corrected to the chapter convention. Route: sk-i-curve-zero reaches sk-thm-p1, the added nodes are Mathlib leaves, no tool_uses are needed, and there is no cycle or SGA citation. Corrected files are in fixes/dag/nodes/sec-trace-formula/; details are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.UnramifiedLimitDescent",
+  "declaration": "AlgebraicGeometry.unramified_limit_descent",
+  "declarations": [
+   "AlgebraicGeometry.baseChangeHom",
+   "AlgebraicGeometry.unramified_limit_descent"
+  ],
+  "file": "lean/Sheaf/TraceFormula/UnramifiedLimitDescent.lean",
+  "statement": "theorem unramified_limit_descent {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] (c : Cone D) (hc : IsLimit c) (i₀ : I) (U₀ V₀ : Scheme.{u}) [CompactSpace U₀] [QuasiSeparatedSpace U₀] [CompactSpace V₀] [QuasiSeparatedSpace V₀] (u₀ : U₀ ⟶ D.obj (op i₀)) (v₀ : V₀ ⟶ D.obj (op i₀)) (g₀ : U₀ ⟶ V₀) (hg₀ : g₀ ≫ v₀ = u₀) [LocallyOfFiniteType g₀] (hg : IsUnramified (baseChangeHom u₀ v₀ g₀ (c.π.app (op i₀)) hg₀)) : ∃ (i : I) (h : i₀ ≤ i), IsUnramified (baseChangeHom u₀ v₀ g₀ (D.map (homOfLE h).op) hg₀)",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4d83f28c2",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Reviewed the complete immutable snapshot, source Tag 0C4W, all statement dependencies, declarations, docstrings, edge cases, route-pivot compliance, report sections, and exact statement equality. Both Lean files reproduced cleanly via scompile.py; no substantive or landing defects found. See review.md."
  }
 }

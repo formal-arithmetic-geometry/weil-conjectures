@@ -288,5 +288,27 @@
   "group": "N2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-5aaf0aba2 (reviewer sub-agent of L); spot-checked: PASS with no fixes; review.md is written. I read the delivery and the cited sources in full: algebra.tex Tag 05WR (statement and proof), more-algebra.tex Tag 092Z (Olivier's theorem), the main-20261015 blueprint statement and proof of ind-etale stability, and the statement of every cited node, including the two blueprint_update texts. The statement is equivalent to 05WR. Stacks' separable closure is replaced by the induced separable closures inside Omega, which gives the same kernel because the embedding into Omega is injective. The explicit finite-type hypothesis is part of the quasi-finite definition, as in Stacks. Nothing is weakened. Step 1: the map epsilon is well defined because functoriality (1) gives the kappa(p)-algebra identification and the geometric points are compatible; n contracts to m_R and to q. Step 2: the 00PN four-rings hypotheses hold because the tensor map is an isomorphism. Step 3: 04GJ applies; the four-rings lemma applied to the quotient onto the residual factor C_0 rules that factor out; the chosen prime is maximal by the finite-domain argument; 04GH(2) then makes D henselian. Step 4: E is separably closed by the finite-extension lemma, and purely inseparable over K by 030K with separable part equal to K, including characteristic 0. Step 5: the affine-chart lemma applies with the identity chart; base change, localization as a colimit of the C_f, and composition are all valid. Step 6: g is well defined by functoriality (3); g inverse of m_H equals n; the map D to H is a local B-algebra map; the relative ind-etale clause makes it weakly etale; the 092Z node's hypotheses hold exactly, so it is an isomorphism compatible with h. This valid agent route replaces the 08HV-plus-uniqueness ending of 05WR and is declared by=agent. Step 7: the localization identification is elementary, and the finite case follows from 00PM. Edge cases checked: B=A_f, a purely inseparable field extension over an imperfect field, a split etale double cover, and nonreduced fibres or several local factors. All cited units lie on the route of sk-i-curve-zero, so the six declared tool_uses are harmless; I accept them. There is no cycle, no new node, and no duplicate (05WR and strict-henselization search over dag/nodes)."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.StrictHenselizationQuasiFiniteRing",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselization_quasiFinite_ring",
+  "file": "lean/Sheaf/TraceFormula/StrictHenselizationQuasiFiniteRing.lean",
+  "statement": "theorem strictHenselization_quasiFinite_ring {A : Type u} {B : Type u} [CommRing A] [CommRing B] [Algebra A B] [Algebra.FiniteType A B] (q : PrimeSpectrum B) (hq : Algebra.IsQuasiFiniteAtPrime A B q) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (pbar : Spec (.of Ω) ⟶ Spec (.of A)) (qbar : Spec (.of Ω) ⟶ Spec (.of B)) (qbar_point : qbar (IsLocalRing.closedPoint Ω) = q) (compat : qbar ≫ Spec.map (CommRingCat.ofHom (algebraMap A B)) = pbar) : letI := strictHenselizationAlgebra pbar ∃ (_ : IsLocalRing (strictHenselizationRing pbar)), ∃ (_ : IsLocalRing (strictHenselizationRing qbar)), ∃ (φ : strictHenselizationRing pbar →+* strictHenselizationRing qbar), Spec.map (CommRingCat.ofHom φ) = strictHenselizationMap (Spec.map (CommRingCat.ofHom (algebraMap A B))) qbar ≫ eqToHom (congrArg strictHenselizationScheme compat) ∧ ∃ (_ : IsLocalHom φ), (@Module.Finite (strictHenselizationRing pbar) (strictHenselizationRing qbar) _ _ φ.toAlgebra.toModule) ∧ (@Module.Finite (IsLocalRing.ResidueField (strictHenselizationRing pbar)) (IsLocalRing.ResidueField (strictHenselizationRing qbar)) _ _ (IsLocalRing.ResidueField.map φ).toAlgebra.toModule) ∧ @IsPurelyInseparable (IsLocalRing.ResidueField (strictHenselizationRing pbar)) (IsLocalRing.ResidueField (strictHenselizationRing qbar)) _ _ (IsLocalRing.ResidueField.map φ).toAlgebra ∧ ∃ (ε : TensorProduct A (strictHenselizationRing pbar) B →+* Ω), (∀ (r : strictHenselizationRing pbar) (b : B), ε (TensorProduct.tmul A r b) = strictHenselizationPointEvaluation pbar r * ((ΓSpecIso (.of Ω)).hom.hom (qbar.appTop.hom ((ΓSpecIso (.of B)).inv.hom b)))) ∧ ∃ (hε : (RingHom.ker ε).IsPrime), ∃ (e : strictHenselizationRing qbar ≃+* Localization.AtPrime (RingHom.ker ε)), (∀ r : strictHenselizationRing pbar, e (φ r) = algebraMap (TensorProduct A (strictHenselizationRing pbar) B) (Localization.AtPrime (RingHom.ker ε)) (TensorProduct.tmul A r 1)) ∧ (∀ b : B, e ((ΓSpecIso (strictHenselizationRing qbar)).hom.hom ((strictHenselizationStructuralMap qbar).appTop.hom ((ΓSpecIso (.of B)).inv.hom b))) = algebraMap (TensorProduct A (strictHenselizationRing pbar) B) (Localization.AtPrime (RingHom.ker ε)) (TensorProduct.tmul A 1 b))",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.strictHenselizationAlgebra",
+   "AlgebraicGeometry.Scheme.strictHenselization_quasiFinite_ring"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-88dfa3fe6",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, docstrings, edge cases, and canonical localization constraints checked; per-file scompile passed cleanly."
  }
 }

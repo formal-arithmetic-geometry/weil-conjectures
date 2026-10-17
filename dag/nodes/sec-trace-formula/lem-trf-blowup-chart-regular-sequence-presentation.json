@@ -201,5 +201,23 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-2f402bd92 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited DAG statements, unit route, Stacks Tags 0BIQ and 0G8S, and required governance files. Verified all five proof steps, hypotheses, signs, localization kernel argument, edge cases, searches, route restrictions, and accepted tool use. Wrote review.md; no faults found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BlowupChartRegularSequencePresentation",
+  "declaration": "AlgebraicGeometry.blowupChartRegularSequencePresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/BlowupChartRegularSequencePresentation.lean",
+  "statement": "theorem blowupChartRegularSequencePresentation {R : Type u} [CommRing R] (s : ℕ) (a : Fin (s + 1) → R) (hreg : RingTheory.Sequence.IsRegular R (List.ofFn a)) : ∃ e : (MvPolynomial (Fin s) R ⧸ Ideal.span (Set.range (fun i : Fin s ↦ MvPolynomial.C (a 0) * MvPolynomial.X i - MvPolynomial.C (a i.succ)))) ≃ₐ[R] AlgebraicGeometry.AffineBlowup.chartRing (Ideal.span (Set.range a)) (a 0), ∀ i : Fin s, ((e (Ideal.Quotient.mk _ (MvPolynomial.X i)) : AlgebraicGeometry.AffineBlowup.chartRing (Ideal.span (Set.range a)) (a 0)) : Localization.Away (a 0)) = AlgebraicGeometry.AffineBlowup.chartFraction (a 0) 1 (a i.succ)",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a4e141f70",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Statement and proof plan match Stacks Tag 0BIQ; dependencies and chart definition checked; report/docstrings complete; edge cases and universes reviewed; mandated scompile passed."
  }
 }
