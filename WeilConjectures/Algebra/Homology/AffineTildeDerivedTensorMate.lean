@@ -165,11 +165,10 @@ private theorem affineTildeDerivedTensorToPushforward_factor
         (affineTildeTensorCoefficientComplexMap R A B D M m φ ψ hφ hψ) := by
   rfl
 
-attribute [local irreducible] tilde Functor.mapDerivedCategory
-  affineTildePushforwardComparison Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit
-  Scheme.Modules.tensorPullback affineBaseChangeTildeRepresentativeIso
-  affineTildeTensorOrdinarySourceIso schemeDerivedBaseChangeMap derivedPullback
-  affineTildeTensorDerivedCounit affineTildeTensorOrdinaryTargetMap
+attribute [local irreducible] tilde Functor.mapDerivedCategory affineTildePushforwardComparison
+  Functor.rightDerivedFunctor Functor.rightDerivedFunctorUnit Scheme.Modules.tensorPullback
+  affineBaseChangeTildeRepresentativeIso affineTildeTensorOrdinarySourceIso
+  schemeDerivedBaseChangeMap affineTildeTensorDerivedCounit affineTildeTensorOrdinaryTargetMap
   affineTildeDerivedTensorToPushforward
 
 

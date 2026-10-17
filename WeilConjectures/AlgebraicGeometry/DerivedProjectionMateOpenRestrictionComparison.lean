@@ -32,9 +32,8 @@ set_option backward.isDefEq.respectTransparency.types true
 
 namespace AlgebraicGeometry
 
-attribute [local irreducible] schemeDerivedTensorMonoidal
-  HasDerivedCategory.ofIsGrothendieckAbelian Functor.mapDerivedCategory
-  DerivedCategory.homologyFunctor
+attribute [local irreducible] schemeDerivedTensorMonoidal HasDerivedCategory.ofIsGrothendieckAbelian
+  Functor.mapDerivedCategory DerivedCategory.homologyFunctor
 
 private theorem mate_square
     {C D CO DO : Type*} [Category* C] [Category* D] [Category* CO] [Category* DO]
