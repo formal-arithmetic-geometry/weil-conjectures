@@ -65,9 +65,8 @@ theorem IsFilteredTwoColimit.transport [∀ i, (F i).IsEquivalence] (hc' : c'.Is
       Functor.mapIso_inv, Functor.mapIso_hom, Iso.app_inv, Iso.app_hom, Functor.map_comp,
       Category.assoc]
     rw [hg']
-    simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id, Category.id_comp,
-      Category.assoc]
-    simp [← Functor.map_comp]
+    simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+    simp
   homInj k x y g g' h := by
     obtain ⟨k', hk, h'⟩ := hc'.homInj k ((F k).obj x) ((F k).obj y) ((F k).map g) ((F k).map g') h
     refine ⟨k', hk, (F k').map_injective ?_⟩
