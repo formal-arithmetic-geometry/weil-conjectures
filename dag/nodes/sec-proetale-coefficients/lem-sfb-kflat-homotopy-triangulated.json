@@ -318,10 +318,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-f30940916",
-  "group": "Q20",
+  "reviewer": "NT-stage2-Codex-c779296df",
+  "group": "Q100",
   "result": "fix",
-  "note": "H3: conclusion lacked the node's clause 'K-flatness is invariant under cochain homotopy equivalence, so P(qL) that L is K-flat is well-defined' (source: kFlat_quotient_obj_iff; used by citer lem-sfb-kflat-derivability step 7). Delivered IsTriangulated of the iso-closure ∃L, K≅qL ∧ L K-flat only gives cones homotopy-equivalent to some K-flat complex. Fixed by adding conjunct ∀ {L L'}, HomotopyEquiv L L' → L.IsKFlatForTotalTensor → L'.IsKFlatForTotalTensor; hypotheses and triangulated conjunct unchanged. H8: docstrings cited a nonexistent document; now cite lem-sfb-derived-monoidal.proof.md (proof, first three sentences) plus upstream decls, with the intended proof in five steps (node proof is empty). Hypotheses match the node exactly, no extra assumptions, universes u v free and bound. Upstream instIsTriangulatedIntUpKFlatQuasiIso needs extra GradedObject instances and another K-flat notion, so it is not an existing match; no duplicate in the side tree. nt_compile per file: delivered file clean 8.9 s, fixed file clean 6.1 s; a deliberately broken copy fails, so the clean runs are real. Fixes: KFlatHomotopyTriangulated.lean, lean-record.json (verbatim statement and note), report.md with a correction section."
+  "note": "Mathematical statement, dependencies, universes, and edge cases pass. Complete fixes clarify the cone proof docstring (H8) and expand the second-reading report (H11). Original and corrected modules compile cleanly through scompile.py; theorem signature unchanged. Details in review.md."
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.KFlatHomotopyTriangulated",
@@ -329,7 +329,7 @@
   "file": "lean/Sheaf/Algebra/Homology/KFlatHomotopyTriangulated.lean",
   "statement": "theorem kFlat_homotopy_isTriangulated {A : Type u} [Category.{v, u} A] [Abelian A] [MonoidalCategory A] [MonoidalPreadditive A] [HasColimits A] [∀ (X : A), PreservesColimits (tensorLeft X)] [∀ (X : A), PreservesColimits (tensorRight X)] : (∀ {L L' : CochainComplex A ℤ}, HomotopyEquiv L L' → L.IsKFlatForTotalTensor → L'.IsKFlatForTotalTensor) ∧ ObjectProperty.IsTriangulated (fun K : HomotopyCategory A (.up ℤ) => ∃ (L : CochainComplex A ℤ), Nonempty (K ≅ (HomotopyCategory.quotient A (.up ℤ)).obj L) ∧ L.IsKFlatForTotalTensor)",
   "branch": "newtargets-dag",
-  "by": "Q20",
+  "by": "Q100",
   "date": "2026-10-18",
   "existing": false,
   "note": "Second-reader fix (maintainer review): the delivered conclusion was only ObjectProperty.IsTriangulated of the isomorphism closure of q(K-flat complexes), which omits the node's clause that K-flatness is invariant under cochain homotopy equivalence (so P(qL) iff L is K-flat; upstream HomotopyCategory.kFlat_quotient_obj_iff). Added that clause as a first conjunct via Mathlib HomotopyEquiv; the triangulated conjunct and all hypotheses are unchanged. Docstrings now cite the node's source document lem-sfb-derived-monoidal.proof.md.",

@@ -151,5 +151,31 @@
   }
  },
  "chapter": "sec-deligne-laumon-general",
- "unit": "sk-d-dl-general-weights"
+ "unit": "sk-d-dl-general-weights",
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d664aaf34",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Audited node, source, dependencies, declarations, edge cases, report sections, and scompile evidence; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.MixedWeightsStability",
+  "declaration": "FrobeniusModule.mixedOfWeightsAtMost_stability",
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_mono",
+   "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_epi",
+   "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_shortExact",
+   "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_retract",
+   "FrobeniusModule.mixedOfWeightsAtMost_stability"
+  ],
+  "file": "lean/Sheaf/Paper/MixedWeightsStability.lean",
+  "statement": "theorem mixedOfWeightsAtMost_stability (p a ell : ℕ) [Fact p.Prime] (ha : 1 ≤ a) [Fact ell.Prime] (hellp : ell ≠ p) (Qlb : Type v) [Field Qlb] [Algebra ℚ_[ell] Qlb] (hQ : IsAlgClosure ℚ_[ell] Qlb) (iota : Qlb ≃+* ℂ) (w : ℝ) : (∀ (A : FrobeniusModule.{u₁, v} Qlb) (B : FrobeniusModule.{u₂, v} Qlb) (f : A.carrier →ₗ[Qlb] B.carrier), (∀ x : A.carrier, f (A.frobenius x) = B.frobenius (f x)) → Function.Injective f → IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota B w → IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota A w) ∧ (∀ (A : FrobeniusModule.{u₁, v} Qlb) (B : FrobeniusModule.{u₂, v} Qlb) (g : A.carrier →ₗ[Qlb] B.carrier), (∀ x : A.carrier, g (A.frobenius x) = B.frobenius (g x)) → Function.Surjective g → IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota A w → IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota B w) ∧ (∀ (A : FrobeniusModule.{u₁, v} Qlb) (B : FrobeniusModule.{u₂, v} Qlb) (C : FrobeniusModule.{u₃, v} Qlb) (f : A.carrier →ₗ[Qlb] B.carrier) (g : B.carrier →ₗ[Qlb] C.carrier), (∀ x : A.carrier, f (A.frobenius x) = B.frobenius (f x)) → (∀ x : B.carrier, g (B.frobenius x) = C.frobenius (g x)) → Function.Injective f → Function.Exact f g → Function.Surjective g → IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota A w → IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota C w → IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota B w) ∧ (∀ (A : FrobeniusModule.{u₁, v} Qlb) (B : FrobeniusModule.{u₂, v} Qlb) (i : A.carrier →ₗ[Qlb] B.carrier) (r : B.carrier →ₗ[Qlb] A.carrier), (∀ x : A.carrier, i (A.frobenius x) = B.frobenius (i x)) → (∀ x : B.carrier, r (B.frobenius x) = A.frobenius (r x)) → r.comp i = LinearMap.id → IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota B w → IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota A w)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Mixed record: all four sheaf clauses are exact existing declarations in the live upstream recorded punctual-weight module. The new theorem supplies all four analogues for the current finite stable-filtration Frobenius-module predicate. The sheaf clauses use the concrete constructible pro-etale Weil-sheaf category required by the recorded punctual-weight declaration, not the upstream derived category of Weil sheaves. Live source was read via scompile.py --source: the local slopmaster2 snapshot omits of_shortExact and of_retract."
+ }
 }
