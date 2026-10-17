@@ -15,6 +15,7 @@ Source: Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7.
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency.types false
+set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Abelian
 namespace AlgebraicGeometry.Scheme.Modules
