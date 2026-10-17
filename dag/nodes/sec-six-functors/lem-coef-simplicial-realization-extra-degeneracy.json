@@ -12,9 +12,46 @@
   "lem-coef-reedy-model-structure",
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Define $r:\\Delta\\to\\Delta$ by $r[n]=[n]$ and $r(\\alpha)(i)=n-\\alpha(m-i)$ for $\\alpha:[m]\\to[n]$. Reversing both orders preserves monotonicity, $r(\\beta\\alpha)=r(\\beta)r(\\alpha)$, and $r^2=1$. For $Z=X\\circ r^{\\mathrm{op}}$, the faces are $d_i^Z=d_{n-i}^X$ on $Z_n$ and the degeneracies are $s_i^Z=s_{n-i}^X$ on $Z_n$. Set $h_n=t_n$ and $h_{-1}=t_{-1}$. The given identities become $d_0^Zh_n=1$, $d_1^Zh_0=t_{-1}\\varepsilon$, $d_{i+1}^Zh_{n+1}=h_nd_i^Z$, and $s_{i+1}^Zh_n=h_{n+1}s_i^Z$; for example the last identity is the given $s_{n-i}^Xt_n=t_{n+1}s_{n-i}^X$. Thus these are first-face extra-degeneracy data on $Z$, with the original augmentation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-coef-simplicial-extra-degeneracy-prism] to $Z$ and these $h_n$. It supplies $a_n=Z(q_n)t_{-1}$, $\\varepsilon a=1$, and prism maps $K_j^n:Z_n\\to Z_{n+1}$ with $d_0^ZK_0^n=1$ and $d_{n+1}^ZK_n^n=a_n\\varepsilon_n$. The unique $q_n:[n]\\to[0]$ is fixed by $r$, so $a_n=X(q_n)t_{-1}$ is also a simplicial section for $X$. Put $H_j^n=K_{n-j}^n$. Then $d_0^XH_0^n=a_n\\varepsilon_n$ and $d_{n+1}^XH_n^n=1$. Substituting $i\\mapsto n+1-i$ and $j\\mapsto n-j$ in the face prism relations for $K$ interchanges their two strict-inequality cases and preserves the middle equality; substituting $i\\mapsto n+1-i$ in the degeneracy relations interchanges their two cases. Hence $H$ is a combinatorial homotopy connecting $1_X$ to $a\\varepsilon$. The section is formed with ordinary degeneracies, not by iterating the $t_n$.",
+   "uses": [
+    "lem-coef-simplicial-extra-degeneracy-prism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [lem-coef-reedy-model-structure], $X_0$ is cofibrant. Since $\\varepsilon_0t_{-1}=1_Y$, the initial arrow to $Y$ is a retract of the initial arrow to $X_0$, and the retract axiom makes $Y$ cofibrant. The constant diagram $\\operatorname{const}Y$ is Reedy-cofibrant: its degree-zero latching object is initial; for $n>0$ the latching indexing category is nonempty and connected because the unique surjection $[n]\\twoheadrightarrow[0]$ maps to every other surjection in the opposite indexing category. A constant diagram on such an index has colimit $Y$, so its latching map is $1_Y$. Cofibrations include identities by the lifting-property definition in [lem-coef-simplicial-model-nerve-localization].",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-coef-reedy-realization-homotopy-invariance] to $f=\\varepsilon:X\\to\\operatorname{const}Y$ and $g=a$. Step 3 verifies both Reedy-cofibrancy assumptions. Step 2 supplies the combinatorial homotopy between $gf$ and $1_X$; for $fg=1$ the constant prism homotopy has degree-raising maps $s_j$ (all identity maps on the constant object). Therefore $|\\varepsilon|:|X|\\to|\\operatorname{const}Y|$ is a weak equivalence. Finally $|\\operatorname{const}Y|\\cong Y$: the map to $Y$ collapses each $\\Delta^n$ to $\\Delta^0$, and the inverse is inclusion of the degree-zero summand $Y\\otimes\\Delta^0\\cong Y$. The coend relation for $q_n:[n]\\to[0]$ identifies every degree-$n$ inclusion with this inverse after collapse, so the composites are identities. Under this isomorphism $|\\varepsilon|$ is exactly the augmentation-induced map in the statement. No fibrancy or nonemptiness is used.",
+   "uses": [
+    "lem-coef-reedy-realization-homotopy-invariance"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-extra-degeneracy-prism",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-reedy-realization-homotopy-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+  "place": "Second-reader proof of Proposition 3.12 in the simplicial model setting of Section 19.1, using the exact general-category Mathlib extra-degeneracy homotopy. Dugger leaves the contraction argument as an exercise; the index reversal, correct section and cofibrancy checks are written here."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -109,7 +146,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-bar-projective-resolution",
@@ -138,5 +175,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-realization-extra-degeneracy",
+  "worker": "Q10 second reader",
+  "summary": "Preserved the item statement. Corrected the false helper section and tensor/prism confusion, made the contraction helper an exact general-category Mathlib leaf, and wrote reversal, cofibrancy and coend-identification arguments. Two new nodes, one Mathlib leaf.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md paragraph beginning For K, middle derived finite-level coefficient adjunction in the displayed R Hom / R lim calculation; simplicial bar/model-category foundation along the existing recorded ancestry. No route change."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-511fe4814",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-511fe4814 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, all cited statements, the parent's citing step and the pinned Mathlib files ExtraDegeneracy.lean (lines 72-83, 126, 142, 174) and SimplicialObject/Homotopy.lean (lines 50-67). Item statement: unchanged and true. Its hypotheses are the 'last extra degeneracy' identities, with no fibrancy or nonemptiness assumption. Step 1: I checked each reversal identity (d_0^Z=d_{n+1}^X on Z_{n+1}, d_1^Z=d_0^X on Z_1, faces j=n+1-i, degeneracies s_{n-i}); they are exactly the Mathlib ExtraDegeneracy fields. Step 2: Mathlib's homotopy is Homotopy(X.hom >> section_, 1), which gives d_0K_0=1 and d_{n+1}K_n=a*eps. Reindexing H_j=K_{n-j} swaps the endpoints and the strict face and degeneracy cases. I verified this index by index. Step 3: objectwise cofibrancy comes from the Reedy node and retract closure makes Y cofibrant. For n>0, q_n is initial in the latching category, so the latching map is the identity. Step 4: g=a, fg=1 with the constant homotopy s_j (matching Homotopy.refl), and |const Y| is isomorphic to Y through the q_n coend relation. Prism node: an exact general-category Mathlib leaf. I compared all seven prism relations field by field, and the line numbers agree with the pinned Mathlib. It generalizes the set-valued leaf lem-coef-extra-degeneracy-contraction, which rests on the same declaration but is needed here for M-valued objects. Realization node: true (|A tensor Delta^1| is isomorphic to |A| tensor Delta^1, |A| is cofibrant by the skeletal induction and SM7, this is a good cylinder, so |f| is invertible in Ho(M)). It is strictly more general than the item and not a clause of it. I read the candidate duplicates (realization-cylinder, resolution-interval-tensor, canonical-hocolim-degree-reduction, boundary-collapse-test, cosimplicial-frame-mapping, split-augmentation-colimit) and none matches. I agree with the second reader's STATEMENT-DISPUTED correction of the iterated section. Route stays in sk-prop-sf-biduality-general; blueprint from/via are correct; there are no SGA citations and no tool_uses. Not a target node, so the base-change morphism check does not apply. No fixes."
  }
 }
