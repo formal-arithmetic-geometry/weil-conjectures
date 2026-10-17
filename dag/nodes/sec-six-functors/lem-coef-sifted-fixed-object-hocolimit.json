@@ -30,7 +30,8 @@
  "stmt_deps": [
   "lem-coef-coherent-nerve-comparison",
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "def-coef-infinity-category-of-spaces"
  ],
  "proof": [
   {
@@ -224,5 +225,35 @@
   "group": "N2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-1df6bbec3 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-coef-segal-realization-coherent-nerve, every cited statement, the parent's use of the item (enriched-marked-realization step 2), the unit, the chapter and the ancestor proof paragraph 2 in full. The item statement is unchanged and matches the parent's use. Small cases tested: terminal J; empty J (excluded by the empty-product clause); empty O; the one-object bar case; and a discrete two-object J, which shows siftedness is needed. Steps 1-5 are correct: replacement R; tuple-labelled Segal nerve; sifted commutation with finite products including n=0; coproduct of colimiting cocones by the dual mapping-space criterion; realization plus theta; and the e_A = N_hc(R eta_A) Dwyer-Kan comparison, which identifies the specified cocone, not just its apex. The new node is true (Rezk Thm 7.2 complete-Segal localization; Bergner CSS functors sections 4-6 and Three models Thms 6.3/8.6). It is not a duplicate: I compared it with complete-segal-quasicategory-comparison, rezk-explicit-completion, complete-segal-dk-levelwise, rezk-local-model and algebroid-equivalence-nerve. It has no siftedness hypothesis, so it is not a restatement of the item. Neither it nor the item's other dependencies reach the item, so there is no cycle. Three small faults fixed in fixes/: (1) B3: the new node used 'the infinity category of small spaces' with no definition node; it now cites def-coef-infinity-category-of-spaces in the statement and stmt_deps. (2) C2: Step 4 called 'maps out of a disjoint union are families' elementary with no model of S cited. Every existing colimits-in-S node reaches the item, so the step now writes out the strict computation in S = N_hc(Kan) (Fun(coprod P_t,T) = prod Fun(P_t,T), and right-pinched simplices as functors C[N(J)xDelta^{m+1}] -> Kan with summand-preserving source maps) and adds def-coef-infinity-category-of-spaces and lem-coef-coherent-nerve-comparison to its uses; proof_deps is again the union of the uses. (3) Step 1 said 'by the cited realization theorem'; it now names the definition RN_hc(A)=N_hc(RA) in the cited comparison. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, as the generic cocone mapping-space and vertexwise-equivalence criterion. HA 1.3.4.10 and the Rezk/Bergner papers are not archived (listed as WANTED), and both proof_origin entries are correctly marked agent-written. No SGA cited; no target touched.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiftedFixedObjectHocolimit",
+  "declaration": "CategoryTheory.sifted_fixed_object_hocolimit",
+  "declarations": [
+   "CategoryTheory.fixedKanPath",
+   "CategoryTheory.fixedKanPath_laws",
+   "CategoryTheory.fixedKanSimplex",
+   "CategoryTheory.fixedKanNerve",
+   "CategoryTheory.FixedMappingCocone",
+   "CategoryTheory.FixedObjectCocone",
+   "CategoryTheory.fixedDerivedLocalization",
+   "CategoryTheory.SiftedFixedObjectHocolimitStatement",
+   "CategoryTheory.sifted_fixed_object_hocolimit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SiftedFixedObjectHocolimit.lean",
+  "statement": "theorem sifted_fixed_object_hocolimit (N : CoherentNerveComparisonStatement.{u}) {O J : Type u} [Category.{u} J] {D : J ⥤ SCat.{u}} (H : FixedObjectCocone O J D) : SiftedFixedObjectHocolimitStatement N H",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Saved packet repaired: mapping cocones are natural weak-equivalence replacements of the original enriched Hom cocones; canonical ordinary-to-coherent Kan nerve fixes every simplex; homotopy siftedness is expressed by its nonempty/cofinal-diagonal comma criterion; the equivalent general calculus theorem is downstream, so is not imported or added as a cyclic dependency. The conclusion uses the whole localized derived-nerve cocone and coherent naturality triangles. Degreewise universe transport preserves the original localization and imposes no universe equality."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ff1375ef",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Read node, report, all 218 lines of SiftedFixedObjectHocolimit.lean and the dependency declarations (CoherentNerveComparisonStatement derived_nerve/qcat_localization, FiniteReedy diagram/object/transformation/IsColimitEdge/Composes, Enhanced comma/coconeCategory/IsColimiting/IsWeakHomotopyEquivalence, Spaces.infinityCategory, IsInfinitySifted). Clause match exact: fixed object set via type equalities plus identity-on-objects, strict cocone, siftedness = token-identical body of IsInfinitySifted (diagonal under-comma, HTT 5.5.8.1, equivalent to the node's finite-product gloss by HTT 5.5.8.12; import avoided because of a real DAG cycle, confirmed by BFS), mapping cocones pinned to the actual Hom data with a natural Kan replacement, colimiting edge in N_hc(Kan), conclusion IsColimitEdge of the specified derived-nerve cocone in Cat-infinity via ULift transport plus qcat_localization, naturality as coherent Composes triangles. fixedKanNerve is real data matching IsStrictKanSimplex/IsOrdinaryNerveMap; its laws are a named sorry well-definedness lemma (allowed by stage-2 §2). Edge cases: empty O, empty Homs, empty J excluded by siftedness, n=0. Universes u and u+1, all bound. Node diff only lean plus landed stmt_dep def-coef-infinity-category-of-spaces; statement verbatim; 9 declarations recorded; docstrings and proof steps present; lines at most 96. nt_compile.py --json against the side overlay: clean, 1.9 s, no warnings. Cosmetic only: report text has dotted citation numbers scrubbed to 'the project server'."
  }
 }
