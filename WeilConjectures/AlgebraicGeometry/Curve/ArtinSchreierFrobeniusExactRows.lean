@@ -12,8 +12,8 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 
-import WeilConjectures.AlgebraicGeometry.ArtinSchreierSchemeSectionData
-import WeilConjectures.AlgebraicGeometry.ArtinSchreierSchemeSectionExact
+import WeilConjectures.AlgebraicGeometry.ArtinSchreierSequence
+import WeilConjectures.AlgebraicGeometry.BaseChangeCurve
 import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierPullbackRows
 import WeilConjectures.AlgebraicGeometry.Curve.AdditiveScalarBaseChange
 import WeilConjectures.AlgebraicGeometry.ArtinSchreier
@@ -179,19 +179,21 @@ theorem exists_artinSchreier_frobenius_exact_rows
         ∀ x, b' (Sheaf.H.map q 1 (Etale.cohomologyMap ι' G 1 x)) =
           1 ⊗ₜ[k] b x := by
   classical
-  have hp : (p : Γ(C, ⊤)) = 0 := by
-    let ρ : k →+* Γ(C, ⊤) := f.appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom
-    simpa only [map_natCast, map_zero] using congrArg ρ (CharP.cast_eq_zero k p)
-  have hp' : (p : Γ(C', ⊤)) = 0 := by
-    simpa only [map_natCast, map_zero] using congrArg ι'.appTop hp
-  let G := (sheafCompose C.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj
-    (Scheme.Modules.etaleTensorSectionsSheaf (Scheme.Modules.unit C))
-  let G' := (sheafCompose C'.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj
-    (Scheme.Modules.etaleTensorSectionsSheaf (Scheme.Modules.unit C'))
-  obtain ⟨a, wp, i, z, ha, hwp, hi⟩ := C.exists_artinSchreier_section_data p hp
-  obtain ⟨a', wp', i0, z0, ha', hwp', hi0⟩ := C'.exists_artinSchreier_section_data p hp'
-  have hs := C.artinSchreier_section_data_shortExact p hp G a wp i z ha hwp hi
-  have hs0 := C'.artinSchreier_section_data_shortExact p hp' G' a' wp' i0 z0 ha' hwp' hi0
+  have hp0 : 0 < p := (Fact.out : p.Prime).pos
+  let : C.Over (Spec (.of k)) := ⟨f⟩
+  let bk := Spec.map (CommRingCat.ofHom (algebraMap k k'))
+  have hcurve := (baseChange_curve (k' := k') f).1
+  have : IsCurve (pullback.snd f bk) := hcurve
+  have hdim : topologicalKrullDim C' ≤ 1 := by
+    rw [IsHomeomorph.topologicalKrullDim_eq _ (Scheme.homeoOfIso h.isoPullback).isHomeomorph]
+    exact IsCurve.krullDim_le_one (f := pullback.snd f bk)
+  have : IsSeparated f' := IsSeparated.isStableUnderBaseChange.of_isPullback h inferInstance
+  have : LocallyOfFiniteType f' :=
+    locallyOfFiniteType_isStableUnderBaseChange.of_isPullback h inferInstance
+  have : QuasiCompact f' := quasiCompact_isStableUnderBaseChange.of_isPullback h inferInstance
+  have : IsCurve f' := { krullDim_le_one := hdim }
+  obtain ⟨G, -, a, wp, i, z, ha, hwp, hi, hs⟩ := artinSchreier_shortExact f p hp0
+  obtain ⟨G', -, a', wp', i0, z0, ha', hwp', hi0, hs0⟩ := artinSchreier_shortExact f' p hp0
   obtain ⟨q, i', z', hs', hiq, hwpq, hq⟩ :=
     exists_artinSchreier_pullback_rows ι' p G G' a a' ha ha' wp wp' hwp hwp'
       i i0 hi hi0 z0 hs0
