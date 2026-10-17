@@ -425,10 +425,20 @@ variable {C₁ C₁' C₂ C C' : Type*} [Category* C₁] [Category* C₁'] [Cate
   (Ex : L₁ ⋙ F₁ ⟶ F₁' ⋙ L) [IsIso Ex] (ξ : TwoSquare F₁' L₁ L F₁)
   (hExξ : ∀ M : C₁', Ex.app M ≫ ξ.natTrans.app M = 𝟙 _)
   (κ : ∀ N : C₁, F₁'.obj (G₁.obj N) ⟶ G.obj (F₁.obj N)) [∀ N, IsIso (κ N)]
-  (hEx : ∀ (M : C₁') (N : C₁), F₁.map (π₁ M N) ≫ Ex.app (M ⊗ G₁.obj N) ≫
+
+omit [MonoidalClosed C₁] [MonoidalClosed C₁'] [MonoidalClosed C₂] [MonoidalClosed C]
+  [MonoidalClosed C'] [∀ M N, IsIso (π M N)] [∀ M N, IsIso (π₁ M N)] [IsIso Ex]
+  [∀ N, IsIso (κ N)] in
+/-- The compatibility of the base change map `Ex : L₁ ⋙ F₁ ⟶ F₁' ⋙ L` with the projection maps
+`π₁` of `L₁` and `π` of `L`, through the comonoidal structures of `F₁`, `F₁'` and the comparison
+maps `κ N : F₁' G₁ N ⟶ G F₁ N`. -/
+def ProjectionExchange : Prop :=
+  ∀ (M : C₁') (N : C₁), F₁.map (π₁ M N) ≫ Ex.app (M ⊗ G₁.obj N) ≫
     L.map (Functor.OplaxMonoidal.δ F₁' M (G₁.obj N)) ≫ L.map (F₁'.obj M ◁ κ N) =
       Functor.OplaxMonoidal.δ F₁ (L₁.obj M) N ≫ Ex.app M ▷ F₁.obj N ≫
-        π (F₁'.obj M) (F₁.obj N))
+        π (F₁'.obj M) (F₁.obj N)
+
+variable (hEx : ProjectionExchange π π₁ Ex κ)
 
 omit [MonoidalClosed C] [MonoidalClosed C'] [G.Braided] in
 include hπ hExξ hEx in
