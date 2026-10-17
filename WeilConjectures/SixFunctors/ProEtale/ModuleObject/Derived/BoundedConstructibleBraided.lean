@@ -13,14 +13,14 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 # The braiding of the derived tensor product on bounded constructible complexes
 
 The derived category `D(Mod_{Λ_X})` of module objects over a commutative condensed ring `Λ`
-carries the braiding `DerivedCategory.braidedCategory` of the derived tensor product: the
+carries the braiding `DerivedCategory.braidedCategory'` of the derived tensor product: the
 symmetry of `Mod_{Λ_X}`, with the Koszul sign rule on complexes, descended along K-flat
 resolutions. The bounded constructible complexes `Dᵇc(X)⟦Λ⟧` form a full monoidal subcategory
 (`ProEtale.CondensedRing.isMonoidal_boundedConstructible`), and the braiding restricts to it
 (`ObjectProperty.fullBraidedSubcategory`).
 
 Since other braidings of derived categories are assumed as instances elsewhere,
-`DerivedCategory.braidedCategory` is not an instance, and neither is its restriction
+`DerivedCategory.braidedCategory'` is not an instance, and neither is its restriction
 `ProEtale.CondensedRing.boundedConstructibleBraiding`; it is meant to be used as a local
 instance.
 
@@ -55,9 +55,9 @@ noncomputable instance monoidalCategory_boundedConstructible :
     MonoidalCategory (Dᵇc(X.left)⟦Λ⟧) :=
   inferInstance
 
-attribute [local instance] DerivedCategory.braidedCategory in
+attribute [local instance] DerivedCategory.braidedCategory' in
 /-- The Koszul braiding of the derived tensor product on `Dᵇc(X)⟦Λ⟧`: the restriction
-(`ObjectProperty.fullBraidedSubcategory`) of the braiding `DerivedCategory.braidedCategory` of
+(`ObjectProperty.fullBraidedSubcategory`) of the braiding `DerivedCategory.braidedCategory'` of
 `D(Mod_{Λ_X})`. It is not an instance, see the module docstring. -/
 @[instance_reducible]
 noncomputable def boundedConstructibleBraiding : BraidedCategory (Dᵇc(X.left)⟦Λ⟧) :=

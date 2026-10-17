@@ -188,11 +188,11 @@ variable [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalClosed C]
   [MonoidalPreadditive C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
 
 open Functor.LaxMonoidal in
-/-- The braiding `DerivedCategory.braidedCategory` on objects `Qh K`, `Qh M`:
+/-- The braiding `DerivedCategory.braidedCategory'` on objects `Qh K`, `Qh M`:
 `β_{Qh K, Qh M} ≫ μ_{M, K} = μ_{K, M} ≫ Qh β_{K, M}`, where `β_{K, M}` is the Koszul braiding of
 the homotopy category. -/
 lemma braidedCategory_braiding_hom_μ_Qh (K M : HomotopyCategory C (.up ℤ)) :
-    letI := braidedCategory C
+    letI := braidedCategory' C
     (β_ (Qh.obj K) (Qh.obj M)).hom ≫ μ Qh M K = μ Qh K M ≫ Qh.map (β_ K M).hom :=
   DerivedMonoidal.braiding_hom_μ Qh (HomotopyCategory.quasiIso C (.up ℤ)) K M
 
