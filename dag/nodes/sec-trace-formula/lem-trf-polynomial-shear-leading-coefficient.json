@@ -189,5 +189,23 @@
   "group": "Q87",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q87-d437b1265 (reviewer sub-agent of L); spot-checked: Read the item, all four steps, sole cited definition, report, and unit/chapter route in full. Verified Stacks 051M–051N and checked bounded weights and sparse expansions over F₂ and Z/6Z. No missing hypotheses, mathematical gaps, duplicate new nodes, prohibited dependencies, or repairs. Detailed findings are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7e1ef836e",
+  "group": "N2",
+  "result": "pass",
+  "note": "Statement, source proof, dependency, edge cases, docstrings, report sections, route-pivot criteria, and scompile.py evidence all verified."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.PolynomialShearLeadingCoefficient",
+  "declaration": "Algebra.exists_polynomial_shear_leading_coefficient",
+  "file": "lean/Sheaf/TraceFormula/PolynomialShearLeadingCoefficient.lean",
+  "statement": "theorem exists_polynomial_shear_leading_coefficient (R : Type u) [CommRing R] (m : ℕ) (g : MvPolynomial (Fin (m + 1)) R) (hg : ¬ ∃ r : R, g = MvPolynomial.C r) : ∃ (e : Fin m → ℕ) (d : ℕ) (a : R) (b : Fin d → MvPolynomial (Fin m) R), (∀ i, 0 < e i) ∧ 0 < d ∧ (∃ ν : (Fin (m + 1) →₀ ℕ), MvPolynomial.coeff ν g = a ∧ a ≠ 0) ∧ MvPolynomial.aeval (R := R) (fun i : Fin (m + 1) ↦ if h : i ≠ Fin.last m then (MvPolynomial.X (Fin.castSucc (i.castPred h)) : MvPolynomial (Fin (m + 1)) R) + (MvPolynomial.X (Fin.last m) : MvPolynomial (Fin (m + 1)) R) ^ (e (i.castPred h)) else (MvPolynomial.X (Fin.last m) : MvPolynomial (Fin (m + 1)) R)) g = (MvPolynomial.C a : MvPolynomial (Fin (m + 1)) R) * (MvPolynomial.X (Fin.last m) : MvPolynomial (Fin (m + 1)) R) ^ d + ∑ j : Fin d, MvPolynomial.rename Fin.castSucc (b j) * (MvPolynomial.X (Fin.last m) : MvPolynomial (Fin (m + 1)) R) ^ (j : ℕ)",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

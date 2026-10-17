@@ -554,17 +554,17 @@
   "file": "lean/Sheaf/SixFunctors/IntegralDualizing.lean",
   "statement": "theorem prop_coef_integral_dualizing (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] (d : ℕ) (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) : ∃ (ω : sfIntegralConstructibleCategory l E X) (T : NormalizedDVRTower l E X D hl), (∀ n : ℕ, Nonempty (T.M n ≅ integralDualizingFiniteTerm (l := l) (E := E) (D := D) (X := X) n)) ∧ (∃ (e : ∀ n : ℕ, T.M n ≅ integralDualizingFiniteTerm (l := l) (E := E) (D := D) (X := X) n), (∀ {m n : ℕ} (h : n ≤ m), T.tau h ≫ (normalizedDVRRes l E X h).map (e n).hom = (e m).hom ≫ (Adjunction.ofIsRightAdjoint (normalizedDVRRes l E X h)).homEquiv _ _ (integralDualizingFiniteComparison l E D X hl h))) ∧ Nonempty (ω.obj ≅ (integralDualizingLimit l E X).obj T.tower) ∧ IntegralDualizingLimitPresentation l E D hl X T ω.obj ∧ (∀ n : ℕ, HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1)) ((scalarReductionDerivedExtension l E X n).obj ω.obj) (-(2 * (d : ℤ))) 0) ∧ Nonempty (integralDualizingGlobalHom l E X ω.obj ≅ (integralDualizingCompactSections l E D hl X).op ⋙ coefficientDerivedDual (integralDualizingCoefficients l E)) ∧ ∀ K : sfIntegralConstructibleCategory l E X, Nonempty ((K.obj ⟶ ω.obj) ≃ ((integralDualizingLimit l E (Spec (.of D.k))).obj ((integralDualizingCompactTower l E D hl X).obj K.obj) ⟶ (DerivedCategory.singleFunctor (scalarReductionSource l E (Spec (.of D.k))) 0).obj (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E (Spec (.of D.k))))))",
   "branch": "newtargets-dag",
-  "by": "Q48",
-  "date": "2026-10-17",
+  "by": "Q117",
+  "date": "2026-10-18",
   "existing": false,
   "note": "Returned-delivery repair: the tower square now explicitly uses the scalar-adjunction adjunct of integralDualizingFiniteComparison under derived extension adjoint normalizedDVRRes. Its dependency module defines that comparison via the actual counit-defined ordinary-etale u and normalized pro-etale transport, and states its isomorphism, counit, unit and cocycle clauses. The remaining integral clauses and natural-language node are retained. Return a70a30e779c8 repair: import and use finiteFieldDatumPrimeUnit from Sheaf.Paper.DirectImagesConstructible instead of restating it."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-7b0ffd74d",
-  "group": "Q48",
+  "reviewer": "NT-stage2-Codex-45008c8bd",
+  "group": "Q117",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable files, sources, all statement dependencies, canonical maps, clauses, universes, edge cases and route-pivot compliance. Both modules compiled through scompile.py without errors or warnings. No delivery changes required."
+  "note": "All statement clauses, dependencies, universes, edge cases, route-pivot constraints, docstrings, report sections, and compiler evidence checked; no errors found."
  }
 }
