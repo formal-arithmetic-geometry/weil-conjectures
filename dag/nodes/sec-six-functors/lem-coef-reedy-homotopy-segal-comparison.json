@@ -10,7 +10,9 @@
  "stmt_deps": [
   "lem-coef-segal-dk-diagonal-equivalence",
   "lem-coef-bisimplicial-reedy-division-calculus",
-  "def-coef-segal-space"
+  "def-coef-segal-space",
+  "def-coef-homotopy-segal-space",
+  "lem-coef-segal-inverse-evaluation"
  ],
  "proof": [
   {
@@ -248,5 +250,24 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-09bd514bb (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and every cited statement in full (division calculus, def-coef-segal-space, def-coef-homotopy-segal-space, Kan path comparison, homotopy-pullback invariance, Kan model structure, segal-dk, and the hofib convention of def-cbc-enhanced-diagrams-cones). Step 1: X->* checked against the any-monomorphism division clause. Delta^n\\X is X_n with the outer coordinate first; A = empty set, the boundary and the vertex set give Kan X_n, strict Reedy matching fibrations and v_n, with v_1=(d_1,d_0). Step 2: the spine division object is S_r with d_0 matched to d_1, and the fibrations come from the stated monomorphisms. Step 3: the induction is stated explicitly. H_{r+1}=P(H_r->X_0, d_1) has the right path orientation. The first map uses path comparison (S_r, X_1, X_0 Kan; d_1 a fibration). The second uses invariance with (c_r, id, id); H_r Kan is the induction hypothesis, and H_{r+1} is Kan by the comparison node. Step 4: a_r = c_r b_r, then two-out-of-three. Step 5: P(v_n, x) is exactly T_X(x). Step 6: the fixed-triple fiber map is the pullback of the trivial fibration b_2, and lifting against the empty set into Delta^0 gives sigma. Step 7: the composition-graph clause plus the j bijections; identities are s_0 with constant paths. Step 8: the category isomorphism gives the same invertible components. proof_deps equals the union of step uses; there is no cycle; all cited nodes are in unit sk-prop-sf-biduality-general. There are no new nodes. I found no DAG duplicate, no blueprint same_as (no Segal/Reedy anywhere in main-20261015) and no Segal spaces in Mathlib (only StrictSegal). Rezk 4.1/5.1-5.7 has no archival copy (WANTED); proof_origin is agent, and the statement is consistent with Rezk's conventions. No SGA. Edge cases: empty space, discrete nerves, BG; a constant nondiscrete K is excluded by Reedy fibrancy. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ReedyHomotopySegalComparison",
+  "declaration": "CategoryTheory.SegalSpace.reedy_homotopy_segal_comparison",
+  "file": "lean/Sheaf/CategoryTheory/ReedyHomotopySegalComparison.lean",
+  "statement": "theorem reedy_homotopy_segal_comparison (X : Space.{u}) (hR : SSet.BisimplicialDivision.verticalFibrations (terminal.from X)) (hX : SSet.HomotopySegal.IsHomotopySegalSpace (Functor.curry.obj X)) : IsSegal X ∧ ∃ c : ∀ x y : (row X ⦋0⦌) _⦋0⦌, mappingSpace X x y ⟶ SSet.HomotopySegal.simplexFiber (Functor.curry.obj X) 1 ![x, y], (∀ (x y : (row X ⦋0⦌) _⦋0⦌) (q : SimplexCategoryᵒᵖ) (a : (mappingSpace X x y).obj q), ((c x y).app q a).1 = ((pullback.fst (endpoints X) (SSet.const (X := 𝟙_ SSet.{u}) (x, y))).app q a, (SSet.const (X := mappingSpace X x y) ![x, y] ≫ SSet.Enhanced.constantDiagrams Δ[1] (SSet.HomotopySegal.vertexPower (Functor.curry.obj X) 1)).app q a)) ∧ (∀ x y : (row X ⦋0⦌) _⦋0⦌, SSet.Enhanced.IsWeakHomotopyEquivalence (c x y) ∧ Function.Bijective (SSet.mapπ₀ (c x y))) ∧ (∀ x : (row X ⦋0⦌) _⦋0⦌, ∃ a : (mappingSpace X x x) _⦋0⦌, (pullback.fst (endpoints X) (SSet.const (X := 𝟙_ SSet.{u}) (x, x))).app (op ⦋0⦌) a = ((Functor.curry.obj X).map (SimplexCategory.σ 0).op).app (op ⦋0⦌) x ∧ SSet.mapπ₀ (c x x) (SSet.π₀.mk a) = SSet.HomotopySegal.identity (Functor.curry.obj X) x) ∧ (∀ (x y z : (row X ⦋0⦌) _⦋0⦌) (f : SSet.π₀ (mappingSpace X x y)) (g : SSet.π₀ (mappingSpace X y z)) (h : SSet.π₀ (mappingSpace X x z)), (∃ (t : (row X ⦋2⦌) _⦋0⦌) (a : (mappingSpace X x y) _⦋0⦌) (b : (mappingSpace X y z) _⦋0⦌) (d : (mappingSpace X x z) _⦋0⦌), SSet.π₀.mk a = f ∧ SSet.π₀.mk b = g ∧ SSet.π₀.mk d = h ∧ (pullback.fst (endpoints X) (SSet.const (X := 𝟙_ SSet.{u}) (x, y))).app (op ⦋0⦌) a = ((Functor.curry.obj X).map (SimplexCategory.δ 2).op).app (op ⦋0⦌) t ∧ (pullback.fst (endpoints X) (SSet.const (X := 𝟙_ SSet.{u}) (y, z))).app (op ⦋0⦌) b = ((Functor.curry.obj X).map (SimplexCategory.δ 0).op).app (op ⦋0⦌) t ∧ (pullback.fst (endpoints X) (SSet.const (X := 𝟙_ SSet.{u}) (x, z))).app (op ⦋0⦌) d = ((Functor.curry.obj X).map (SimplexCategory.δ 1).op).app (op ⦋0⦌) t) ↔ SSet.HomotopySegal.Composes (Functor.curry.obj X) x y z (SSet.mapπ₀ (c x y) f) (SSet.mapπ₀ (c y z) g) (SSet.mapπ₀ (c x z) h)) ∧ equivalenceArrows X = SSet.SegalInverse.invertibleArrows (Functor.curry.obj X)",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of immutable head 1aca55456dcd: retain vertical Reedy fibrancy; specify both comparison coordinates in every inner degree; preserve degeneracy identities and the complete strict triangle composition graph on mapping components; identify the full subcomplexes of invertible edge components. No natural-language statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3470cd4a3",
+  "group": "Q24",
+  "result": "fix",
+  "note": "Mathematics and Lean statement pass; per-file compile reproduced cleanly. review.md records all checks. Complete replacement report in fixes/ supplies the independent second reading and missing LeanSearch evidence. Snapshot and branch unchanged."
  }
 }

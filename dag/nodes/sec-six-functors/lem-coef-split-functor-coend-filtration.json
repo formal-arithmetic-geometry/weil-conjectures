@@ -341,5 +341,35 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-85eef5d66 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 16 steps, its three cited definition leaves (simplicial-set, category-colimit, and trivial-kan-fibration's simplex/boundary sentence), the parent framed-projective-diagram-resolution steps 4 and 8, which use the item with i=∂Δ^n→Δ^n and i=K×{k}→K×Δ^1, and unit sk-prop-sf-biduality-general. The statement is unchanged apart from the added boundary-definition citation: no hypothesis added or dropped. It is the classical latching pushout-product skeletal filtration for a split simplicial diagram of colimit-preserving functors, and its cell N_p(A_p)→N_p(L×Δ^p) is right. I recomputed every step: the boundary is the colimit of its proper faces (ordered-image factorisation); the cocone condition for e_p; the b_p/e_p overlap via the relation for ρδ; Step 7's reduction of the proper-surjection relations to the ι_q components via j_{r,τ}, T(σ)j_{r,τ}=j_{p,τσ} and the lower relation for τ; Step 8's epi-mono factorisation covering every α with a or b equal to p; the coproduct reduction to E_{p-1}⊔_{N_p(X×∂)}N_p(X×Δ^p); the relative pushouts Z_p and their colimit with initial map R_T(i); and naturality. Edge cases checked: p=0, empty K or L, i=id, p=1 and non-monic i. Every step is elementary from the definitions. There are no new nodes. Not duplicates: tensor-coend-skeletal-pushouts (needs enriched tensors), weighted-coend-skeletal-filtration (weighted ⊙_J form) and truncated-coend-skeleton-image (simplicial sets only). No cycle and no route departure, because only definitions and Mathlib leaves are cited; tool_uses is empty. Dugger is not local: it is recorded as WANTED and proof_origin is agent, which is acceptable since the proof is self-contained. Mathlib searches are recorded in all three kinds with no match. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.SplitFunctorCoendFiltration",
+  "declaration": "CategoryTheory.SplitFunctorCoend.exists_relativeFiltration",
+  "declarations": [
+   "CategoryTheory.SplitFunctorCoend.Data",
+   "CategoryTheory.SplitFunctorCoend.coendDiagram",
+   "CategoryTheory.SplitFunctorCoend.realization",
+   "CategoryTheory.SplitFunctorCoend.realizationι",
+   "CategoryTheory.SplitFunctorCoend.boundarySquare",
+   "CategoryTheory.SplitFunctorCoend.boundaryMap",
+   "CategoryTheory.SplitFunctorCoend.cell",
+   "CategoryTheory.SplitFunctorCoend.RelativeFiltration",
+   "CategoryTheory.SplitFunctorCoend.exists_relativeFiltration"
+  ],
+  "file": "lean/Sheaf/SixFunctors/SplitFunctorCoendFiltration.lean",
+  "statement": "theorem exists_relativeFiltration (C : Type v) [Category.{w} C] [HasColimitsOfSize.{u, u} C] : Nonempty (RelativeFiltration.{u} C)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The theorem asserts existence of the complete natural filtration witness. The witness retains the actual Mathlib coend, its canonical functorial action, the relative pushout-product cell, the K-leg and codimension-one-face attaching formulas, and naturality of the filtration, cocone, initial identification and attaching squares. All helper data are real Mathlib constructions; only the existence theorem has sorry. Stage 0 denotes Z_{-1}."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e4a324b07",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Independent review recorded in review.md. Statements, dependencies, source, canonical constructions, universes, edge cases, docstrings, and verbatim signature checked. Immutable module compiled cleanly through scompile.py in sandbox and library paths. No defects found; branch unchanged."
  }
 }
