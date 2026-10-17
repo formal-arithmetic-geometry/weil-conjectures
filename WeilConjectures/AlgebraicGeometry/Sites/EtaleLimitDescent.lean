@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.RingHom.Etale
 public import Mathlib.RingTheory.Smooth.StandardSmoothOfFree
+public import WeilConjectures.Algebra.Category.Ring.FilteredColimitsFiniteData
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
@@ -48,29 +49,6 @@ namespace CommRingCat
 
 variable {J : Type uJ} [Category.{vJ} J] [IsFiltered J] (F : J ⥤ CommRingCat.{u})
   (c : Cocone F) [PreservesColimit F (forget CommRingCat)] (hc : IsColimit c)
-
-include hc in
-/-- Finitely many elements of a stage of a filtered colimit of rings which vanish in the colimit
-vanish at a common later stage. -/
-lemma exists_map_eq_zero_of_finset {j : J} (s : Finset (F.obj j))
-    (hs : ∀ x ∈ s, c.ι.app j x = 0) : ∃ (k : J) (α : j ⟶ k), ∀ x ∈ s, F.map α x = 0 := by
-  classical
-  induction s using Finset.induction_on with
-  | empty => exact ⟨j, 𝟙 j, by simp⟩
-  | insert a s _ ih =>
-    obtain ⟨k, α, hα⟩ := ih fun x hx ↦ hs x (Finset.mem_insert_of_mem hx)
-    obtain ⟨k', β, _, hβ⟩ := Concrete.isColimit_exists_of_rep_eq F hc a 0
-      (by rw [hs a (Finset.mem_insert_self a s), map_zero])
-    rw [map_zero] at hβ
-    let l := IsFiltered.leftToMax k k'
-    let r := IsFiltered.rightToMax k k'
-    let m := IsFiltered.coeqHom (α ≫ l) (β ≫ r)
-    have hm : α ≫ l ≫ m = β ≫ r ≫ m := by
-      simpa only [Category.assoc] using IsFiltered.coeq_condition (α ≫ l) (β ≫ r)
-    refine ⟨_, α ≫ l ≫ m, fun x hx ↦ ?_⟩
-    rcases Finset.mem_insert.1 hx with rfl | hx
-    · rw [hm, Functor.map_comp, CommRingCat.comp_apply, hβ, map_zero]
-    · rw [Functor.map_comp, CommRingCat.comp_apply, hα x hx, map_zero]
 
 include hc in
 /-- A polynomial over a stage of a filtered colimit of rings which vanishes over the colimit
