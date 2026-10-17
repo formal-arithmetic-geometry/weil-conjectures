@@ -2,7 +2,7 @@
  "id": "lem-coef-cocartesian-horn-completion-comparison",
  "kind": "statement",
  "title": "All-section and transport comparisons over an inner-horn completion",
- "statement": "Use simplicial sets, quasicategories, internal functor categories and coherent natural equivalences of [def-cbc-enhanced-diagrams-cones], the smallness convention of [def-coef-presentable-infinity-category], and cocartesian fibrations over arbitrary simplicial bases and marked inverse equivalences as in [lem-coef-marked-relative-cartesian-model]. Fix an uncountable regular cardinal $\\kappa$. Let $i:X\\hookrightarrow X'$ be a monomorphism of $\\kappa$-small simplicial sets, with $X'$ a quasicategory, obtained as a countable composite of pushouts of coproducts of inner horn inclusions $\\Lambda_j^n\\hookrightarrow\\Delta^n$, $0<j<n$. Let $q:Y\\to X$ and $q':Y'\\to X'$ be cocartesian fibrations, and suppose $u:Y\\to i^*Y'$ over $X$ preserves cocartesian edges and has an inverse up to coherent natural equivalences over $X$, also preserving cocartesian edges. The total spaces may be arbitrarily large in a fixed containing universe. Write $\\Gamma(q)_n=\\{s:X\\times\\Delta^n\\to Y\\mid qs=\\operatorname{pr}_X\\}$, and similarly for the other fibrations.\n\nThe simplicial sets $\\Gamma(q)$, $\\Gamma(i^*q')$ and $\\Gamma(q')$ are quasicategories. Postcomposition $u_*:\\Gamma(q)\\to\\Gamma(i^*q')$ and restriction $i^*:\\Gamma(q')\\to\\Gamma(i^*q')$ are functor equivalences; restriction has the right lifting property against every simplicial monomorphism in the containing universe. For every vertex $x\\in X$, $u$ gives a fiber equivalence $u_x:Y_x\\to Y'_{i(x)}$, and the identities $\\operatorname{ev}_x u_*=u_x\\operatorname{ev}_x$ and $\\operatorname{ev}_x i^*=\\operatorname{ev}_{i(x)}$ hold. Thus quasi-inverses give evaluation squares commuting up to coherent natural equivalence.\n\nFor every old edge $e:x\\to z$, the fiber equivalences intertwine its transport functors up to coherent natural equivalence. Here transport along an edge means a functor on the initial fiber with a cylinder into the total space over that edge, restricting to the initial inclusion and the final fiber inclusion composed with the functor, whose vertex edges are cocartesian. Let $\\mathcal J$ be any collection of quasicategorical indexing shapes in the containing universe. If every fiber of $q$ admits all $J$-indexed colimits for $J\\in\\mathcal J$ and every edge transport of $q$ preserves them, then every fiber of $q'$ admits these colimits and every edge transport of $q'$ preserves them. No filteredness of fibers or section categories is assumed or asserted.",
+ "statement": "Use simplicial sets, quasicategories, internal functor categories and coherent natural equivalences of [def-cbc-enhanced-diagrams-cones], the smallness convention of [def-coef-presentable-infinity-category], and cocartesian fibrations over arbitrary simplicial bases and marked inverse equivalences as in [lem-coef-marked-relative-cartesian-model]. Fix an uncountable regular cardinal $\\kappa$. Let $i:X\\hookrightarrow X'$ be a monomorphism of $\\kappa$-small simplicial sets, with $X'$ a quasicategory, obtained as a countable composite of pushouts of coproducts of inner horn inclusions $\\Lambda_j^n\\hookrightarrow\\Delta^n$, $0<j<n$. Let $q:Y\\to X$ and $q':Y'\\to X'$ be cocartesian fibrations, and suppose $u:Y\\to i^*Y'$ over $X$ preserves cocartesian edges and has an inverse up to coherent natural equivalences over $X$, also preserving cocartesian edges. The total spaces may be arbitrarily large in a fixed containing universe. Write $\\Gamma(q)_n=\\{s:X\\times\\Delta^n\\to Y\\mid qs=\\operatorname{pr}_X\\}$, and similarly for the other fibrations.The simplicial sets $\\Gamma(q)$, $\\Gamma(i^*q')$ and $\\Gamma(q')$ are quasicategories. Postcomposition $u_*:\\Gamma(q)\\to\\Gamma(i^*q')$ and restriction $i^*:\\Gamma(q')\\to\\Gamma(i^*q')$ are functor equivalences; restriction has the right lifting property against every simplicial monomorphism in the containing universe. For every vertex $x\\in X$, $u$ gives a fiber equivalence $u_x:Y_x\\to Y'_{i(x)}$, and the identities $\\operatorname{ev}_x u_*=u_x\\operatorname{ev}_x$ and $\\operatorname{ev}_x i^*=\\operatorname{ev}_{i(x)}$ hold. Thus quasi-inverses give evaluation squares commuting up to coherent natural equivalence.For every old edge $e:x\\to z$, the fiber equivalences intertwine its transport functors up to coherent natural equivalence. Here transport along an edge means a functor on the initial fiber with a cylinder into the total space over that edge, restricting to the initial inclusion and the final fiber inclusion composed with the functor, whose vertex edges are cocartesian. Let $\\mathcal J$ be any collection of quasicategorical indexing shapes in the containing universe. If every fiber of $q$ admits all $J$-indexed colimits for $J\\in\\mathcal J$ and every edge transport of $q$ preserves them, then every fiber of $q'$ admits these colimits and every edge transport of $q'$ preserves them. No filteredness of fibers or section categories is assumed or asserted.",
  "source": {
   "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
   "place": "HTT Lemma 5.4.4.2, opening base-replacement argument; Corollary 3.3.1.2, Proposition 3.3.1.5, Proposition 2.3.2.4 and cocartesian composition in Proposition 2.4.1.7; all-section and new-edge preservation comparisons expanded from the returned Step 2. Read online; not archived in literature/. No Stacks tag states this simplicial or quasicategorical assertion."
@@ -12,9 +12,129 @@
   "def-coef-presentable-infinity-category",
   "lem-coef-marked-relative-cartesian-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The given inclusion is a countable composite of pushouts of coproducts of inner horn inclusions, hence it has the left lifting property against every inner fibration by the inner-horn cell-generation theorem; every inner horn inclusion is itself in this class. Since $X'$ is a quasicategory and $q'$ is an inner fibration, $Y'$ is a quasicategory: an inner horn in $Y'$ is filled first in $X'$ and then lifted along $q'$. No such claim is made for $Y$: $X$ need not be a quasicategory, and then neither need $Y$ be (for $X=Y=\\Lambda^2_1\\subset X'=Y'=\\Delta^2$ with identity maps all hypotheses hold and $Y$ is not a quasicategory). For every vertex $x$ of $X$, however, the fiber $Y_x=Y\\times_X\\{x\\}$ is a quasicategory, since every inner horn in it lies over a degenerate simplex of $X$ and is filled over that simplex by the inner fibration $q$; likewise for $i^*Y'$ and $Y'$.",
+   "uses": [
+    "lem-coef-inner-horn-cell-generation",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.4.2 opening base-replacement argument; inner-horn cell generation and quasicategory conventions"
+   }
+  },
+  {
+   "text": "Quasicategory of sections. Let $p:E\\to S$ be any inner fibration of simplicial sets and $a:K\\to S$ a small map, and put $\\operatorname{Fun}_{/S}(K,E)_n=\\{s:K\\times\\Delta^n\\to E\\mid ps=a\\operatorname{pr}_K\\}$. An inner horn $\\Lambda^n_j\\to\\operatorname{Fun}_{/S}(K,E)$ is a map $K\\times\\Lambda^n_j\\to E$ over $a\\operatorname{pr}_K$; the inclusion $K\\times\\Lambda^n_j\\to K\\times\\Delta^n$ is the pushout-product of $\\varnothing\\to K$ with the inner anodyne $\\Lambda^n_j\\hookrightarrow\\Delta^n$, hence inner anodyne by the inner-anodyne pushout-product theorem, and $p$ supplies the filler over $a\\operatorname{pr}_K$. Applied to $(q,\\mathrm{id}_X)$, $(q',i)$ and $(q',\\mathrm{id}_{X'})$ this shows that $\\Gamma(q)$, $\\Gamma(i^*q')=\\operatorname{Fun}_{/X'}(X,Y')$ and $\\Gamma(q')$ are quasicategories; no quasicategory hypothesis on $X$ or $Y$ is used. (For the last two, the relative functor-category statement gives the same conclusion.) Lifting for restriction. For a small parameter simplicial set $A$, a map $X'\\times A\\to Y'$ over $X'$ is a family of sections, and a map $X\\times A\\to i^*Y'$ over $X$ is the same as a map $X\\times A\\to Y'$ over $i\\operatorname{pr}_X$. Given a square for a monomorphism $A\\hookrightarrow B$, the two maps glue to the pushout $(X'\\times A)\\amalg_{X\\times A}(X\\times B)$. Its map to $X'\\times B$ is the pushout-product of $i$ with $A\\hookrightarrow B$, hence is inner anodyne by the inner-anodyne pushout-product theorem, and the inner fibration $q'$ supplies an extension over $\\operatorname{pr}_{X'}$. Therefore $i^*:\\Gamma(q')\\to\\Gamma(i^*q')$ has the right lifting property against every monomorphism, i.e. it is a trivial fibration of the Joyal model structure, hence a categorical equivalence between quasicategories. A categorical equivalence between quasicategories is a functor equivalence: test the defining equivalences $h\\operatorname{Fun}(-,C)$ with $C=\\Gamma(q')$ and $C=\\Gamma(i^*q')$.",
+   "uses": [
+    "lem-coef-inner-anodyne-pushout-product",
+    "lem-coef-inner-horn-cell-generation",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-cocartesian-full-restriction",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.4.4.2 opening restriction argument, expanded by the internal-functor pushout-product calculation"
+   }
+  },
+  {
+   "text": "Choose the coherent inverse $v:i^*Y'\\to Y$ over $X$ and the two coherent natural equivalences supplied in the hypothesis. Postcomposition gives $u_*:\\Gamma(q)\\to\\Gamma(i^*q')$ and $v_*$ in the other direction; postcomposing the two displayed equivalences gives coherent natural equivalences $v_*u_*\\simeq\\mathrm{id}$ and $u_*v_*\\simeq\\mathrm{id}$. Thus $u_*$ is a functor equivalence. The relative functor construction is the internal simplicial mapping construction, so these are equivalences on all higher simplices, not merely on vertices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT 5.4.4.2, comparison map and coherent inverse"
+   }
+  },
+  {
+   "text": "For every vertex $x$ of $X$, restriction to the fiber gives $u_x:Y_x\\to Y'_{i(x)}$. Restricting $u,v$ and their coherent inverse equations to the degree-zero fiber gives quasi-inverse functors and coherent natural equivalences, so $u_x$ is a fiber equivalence. The evaluation identities are strict identities of restrictions: $\\operatorname{ev}_x(u_*s)=u_x(\\operatorname{ev}_xs)$ and $\\operatorname{ev}_x(i^*t)=\\operatorname{ev}_{i(x)}t$. Hence the quasi-inverses produce the asserted coherent evaluation squares.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT 5.4.4.2 evaluation comparison"
+   }
+  },
+  {
+   "text": "Fix an old edge $e:x\\to z$ of $X$ and pull back along $e:\\Delta^1\\to X$: $Y_e=Y\\times_X\\Delta^1\\to\\Delta^1$ and $Y'_e=Y'\\times_{X'}\\Delta^1\\to\\Delta^1$ (via $i e$). These are inner fibrations over the quasicategory $\\Delta^1$, so $Y_e,Y'_e$ are quasicategories, and an edge of $Y$ over $e$ that is $q$-cocartesian is cocartesian for the pullback, because a horn lifting problem over $\\Delta^1$ composes to one over $X$ and the filler over $X$ together with the given map to $\\Delta^n\\to\\Delta^1$ is a filler in the pullback; hence $Y_e\\to\\Delta^1$ and $Y'_e\\to\\Delta^1$ are cocartesian fibrations of quasicategories, with fibers $Y_x,Y_z$ and $Y'_{i(x)},Y'_{i(z)}$. The map $u$ restricts to $u_e:Y_e\\to Y'_e$ over $\\Delta^1$, preserving these cocartesian edges. Choose cocartesian transports $F_e:Y_x\\to Y_z$ and $F'_e:Y'_{i(x)}\\to Y'_{i(z)}$ with their coherent lifts $\\lambda,\\lambda'$ (pointwise cocartesian transport with $K=Y_x$, resp. $K=Y'_{i(x)}$). Then $u_e\\lambda$ is a coherent transformation from $Y_x\\to Y'_e$ (the composite $u_x$) to $u_zF_e$ with cocartesian components over $e$, and $\\lambda'u_x$ is another such lift of the same transformation with target $F'_eu_x$. By the pointwise transport statement both are cocartesian edges of $\\operatorname{Fun}(Y_x,Y'_e)$ over the same edge, so the universal comparison is an equivalence $F'_eu_x\\simeq u_zF_e$ in the fiber $\\operatorname{Fun}(Y_x,Y'_{i(z)})$, i.e. a coherent natural equivalence. On each morphism $g:y\\to y'$ of $Y_x$, the cocartesian transport-square lemma applied in $Y'_e$ to $R=u_e\\lambda_y$, $T=u_e\\lambda_{y'}$, the morphism $u_x g$ and the image under $u_e$ of the naturality square of $\\lambda$ at $g$ gives the compatibility $u_zF_e(g)\\,c_R\\simeq c_T\\,F'_e(u_xg)$ of these comparisons, with all higher coherences retained. Thus the fiber equivalences intertwine transport on every old edge.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-cocartesian-transport-square",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.1.7 and Lemma 5.4.4.2 transport comparison"
+   }
+  },
+  {
+   "text": "Inner horn inclusions $\\Lambda^n_j\\hookrightarrow\\Delta^n$ ($n\\ge2$) are bijective on vertices, so pushouts of coproducts of them and countable composites add no vertices; as $i$ is a monomorphism, every vertex of $X'$ is $i(x)$ for a unique old vertex $x$, and the fiber of $q'$ over $i(x)$ equals $(i^*Y')_x$. Let $J\\in\\mathcal J$ and $D:J\\to Y'_{i(x)}$, and let $v_x$ be the quasi-inverse of $u_x$ from Step 4. By hypothesis $v_xD$ has a colimiting cocone $\\mu$ in $Y_x$. Since $u_x$ is an equivalence it induces equivalences of all mapping spaces, and of the coherent cocone spaces $\\operatorname{Map}_{\\operatorname{Fun}(J,-)}(G,\\Delta_Jc)$, so $u_x\\mu$ is colimiting: the initial-object criterion of colimits in [def-cbc-enhanced-diagrams-cones] is invariant under such equivalences. The coherent equivalence $u_xv_xD\\simeq D$ is an equivalence edge of $\\operatorname{Fun}(J,Y'_{i(x)})$, and composing $u_x\\mu$ with it gives a colimiting cocone on $D$ by the colimit-cocone transport lemma. Therefore every fiber of $q'$ admits every $J$-indexed colimit for $J\\in\\mathcal J$. The same two facts show that a functor coherently equivalent to a composite of colimit-preserving functors and equivalences preserves these colimits.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-colimit-cocone-transport-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT 5.4.4.2 fiberwise transfer; coherent cocone criterion"
+   }
+  },
+  {
+   "text": "Write $X=X_0\\subseteq X_1\\subseteq\\cdots$, $X'=\\bigcup_mX_m$, each $X_{m+1}$ a pushout of a coproduct of inner horn inclusions along $X_m$. Inductive claim $P(m)$: for every edge $e$ of $X_m$, a (any) transport $F'_e$ of $q'$ along $e$ preserves the $J$-indexed colimits, $J\\in\\mathcal J$. Base $P(0)$: for an old edge, Step 5 gives $F'_e\\simeq u_zF_ev_x$ with $F_e$ colimit preserving by hypothesis and $u_z,v_x$ equivalences, so $F'_e$ preserves them by Step 6. Inductive step: an edge of $X_{m+1}$ not in $X_m$ is the image of an edge of some attached $\\Delta^n$ not in $\\Lambda^n_j$. For $n\\ge3$ every edge $\\{a,b\\}$ of $\\Delta^n$ lies in a face $d_k$, $k\\notin\\{a,b\\}$, $k\\neq j$, hence in the horn, so only cells with $n=2$, $j=1$ add edges, and the new edge $w$ is the long edge of a $2$-simplex $\\sigma$ of $X_{m+1}$ whose edges $e_1,e_2$ lie in $X_m$. For $y\\in Y'$ over the source, take a cocartesian lift $\\alpha$ of $e_1$ and a cocartesian lift $\\beta$ of $e_2$ from its target, fill the inner horn $(\\alpha,\\beta)$ over $\\sigma$ by the inner fibration $q'$ (with $X'$, $Y'$ quasicategories), and the long edge is cocartesian by the composition statement. By the coherent composition clause of pointwise transport, $F'_w\\simeq F'_{e_2}F'_{e_1}$ coherently; both factors preserve the colimits by $P(m)$, so $F'_w$ does by Step 6. Every edge of $X'$ lies in some $X_m$, since the colimit is computed degreewise. Hence every edge transport of $q'$ preserves the transferred $J$-indexed colimits; degenerate edges have transports equivalent to the identity.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-cocartesian-transport-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Proposition 2.3.2.4 and Proposition 2.4.1.7, new-edge induction in the horn completion"
+   }
+  },
+  {
+   "text": "The preceding equivalences and transport comparisons prove all three asserted conclusions simultaneously: $\\Gamma(q)$, $\\Gamma(i^*q')$ and $\\Gamma(q')$ are quasicategories; $u_*$ and $i^*$ are functor equivalences with the stated lifting property; evaluations and old-edge transports commute up to the displayed coherent equivalences; and the fiberwise colimit and transport hypotheses pass to $q'$. No filteredness condition has been introduced, so the final clause is exactly the stated scope.",
+   "uses": [
+    "lem-coef-cocartesian-full-restriction",
+    "lem-coef-inner-anodyne-pushout-product",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT 5.4.4.2 conclusions and 2.3.2.4 transport composition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-cocartesian-full-restriction",
+  "lem-coef-colimit-cocone-transport-equivalence",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-cocartesian-transport-square",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-inner-horn-cell-generation",
+  "lem-coef-joyal-model-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Expanded proof of HTT Lemma 5.4.4.2 opening base-replacement argument, with HTT 2.3.2.4, 2.4.1.7 and 5.4.4.2; online source not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +177,38 @@
    "results": "{\"t\": \"2026-10-17T08:45:04Z\", \"tool\": \"grep\", \"query\": \"cocartesian|sectionCategory|section.*restrict\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: Basic.lean:33-57 gives quasicategory horn filling and InnerFibration.lean:56-93 gives inner fibrations, not equivalence of all sections together with transport comparison. CategoryTheory/FiberedCategory/Cocartesian.lean:47-78 concerns ordinary categories. StrictSegal coskeletal Kan extensions and abstract trivial-fibration classes do not give this assertion by one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cocartesian fibrations over an inner horn completion have equivalent section quasicategories and transport comparisons",
+   "results": "SSet.Quasicategory.hornFilling and related horn fillers in Mathlib/AlgebraicTopology/Quasicategory/Basic; no section or transport comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, cocartesian, section",
+   "results": "0 hits (query parser accepted no matching declaration).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian|innerAnodyne|Fun.*section AlgebraicTopology",
+   "results": "Hits are inner-anodyne closure in Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean:43-50 and PushoutProduct.lean:55-77; no relative section theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sections of a cocartesian fibration along a countable inner horn cell map is a trivial fibration and preserves fiber transport colimits",
+   "results": "HomotopicalAlgebra.trivialFibrations and generic small-object declarations; no quasicategorical section comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-filtered-cocartesian-section-cofinality",
@@ -88,5 +236,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cocartesian-horn-completion-comparison",
+  "worker": "stage1",
+  "summary": "Completed the previously unsplit comparison lemma. The proof uses the existing inner-horn cell and pushout-product results for the relative section restriction, the coherent inverse for postcomposition, the cocartesian transport-square comparison for fibers and old edges, and induction over horn cells for new-edge transports. No new DAG nodes were needed; the item remains statement-exact and no Lean declaration attaches. Maintainer reader repair (2026-10-17): Step 1 no longer claims that the total space over the non-quasicategory base X is a quasicategory (false: X=Y=Λ^2_1); Step 2 proves all three section objects are quasicategories by the pushout-product argument; Step 5 pulls back to Δ^1 before using the transport lemmas; Step 6 adds essential surjectivity via lem-coef-colimit-cocone-transport-equivalence; Step 7 states the induction and notes only 2-dimensional cells add edges. The tool use for a definition node was removed.",
+  "blueprint": "Realizes the repair-extraction clause in prop-coef-integral-exceptional-adjoint, proof paragraph 2, through the HTT 5.4.4.2 base-replacement comparison and the cited HTT 2.3.2.4/2.4.1.7 transport facts."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-5065a269e",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-5065a269e (reviewer sub-agent of L); spot-checked: Read in full: the item, all 8 steps, the statement of every cited node, the parent lem-coef-filtered-cocartesian-section-cofinality (its Step 2 uses this item) and unit sk-prop-sf-biduality-general. HTT is not archived, so Lemma 5.4.4.2 could not be checked at the cited place; proof_origin is correctly 'agent' and WANTED is recorded. The statement is true and is not weakened. Every clause was checked on the small case X=Λ^2_1 ⊂ X'=Δ^2 and on empty X, empty fibers and empty J. The rg search over dag/nodes found no duplicate, and the split does not restate its parent. Faults repaired in fixes/dag/nodes/sec-six-functors/lem-coef-cocartesian-horn-completion-comparison.json: (1) Step 1 wrongly claimed the total space Y is a quasicategory. This is false when the base X is not a quasicategory: X=Y=Λ^2_1 with identity maps meets every hypothesis. As a result Step 2's proof that Γ(q) is a quasicategory relied on lem-coef-cocartesian-full-restriction, whose hypotheses fail for q over X. Steps 1-2 now prove that all three section objects are quasicategories by the pushout-product argument (lem-coef-inner-anodyne-pushout-product and cell-generation). (2) Step 5 applied the transport lemmas, which are stated for quasicategories, over X. It now first pulls back to Δ^1 and checks that cocartesian edges stay cocartesian. The comparison comes from pointwise transport with K=Y_x, and the naturality on morphisms from the transport-square lemma, with roles matched. (3) Step 6 never produced colimits for diagrams outside the image of u_x. It now uses the quasi-inverse v_x and the existing same-unit node lem-coef-colimit-cocone-transport-equivalence. Step 7 is rewritten as an explicit induction P(m) over the filtration and notes that only 2-dimensional inner horn cells add edges. proof_deps recomputed. The delivery's only tool use, for the definition node def-cbc-enhanced-diagrams-cones, was removed: a definition is a notion, not route. No tool uses accepted. No new nodes, nothing to drop.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -13,9 +13,59 @@
   "def-trf-coefficient-pushforward",
   "def-trf-admissibility"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $L=Rb_{1!}$, $R=b_1^!$, $G=Rg_*$, $H=Rc_{1!}$, $P=Rf_*$, $M=c_2^*K$ and $N=c_1^!K$. Throughout, $a\\circ b$ means first $b$, then $a$. The specified constructible adjunctions and their natural units and counits are those of [def-trf-admissibility]; in particular $v=\\varepsilon_{c_1,K}\\circ H(u)$. By [def-trf-coefficient-pushforward], $\\Xi_1:LG\\xrightarrow{\\sim}PH$ is the specified natural proper composition comparison, $\\delta:GN\\to R(PK)$ is the transpose of\n$$q=P(\\varepsilon_{c_1,K})\\circ\\Xi_{1,N}:LGN\\to PK,$$\nand $[f,g]_!u=\\delta\\circ G(u)\\circ\\gamma$. The proper comparisons in [prop-functor-package](3) apply because $f,g$ are proper, at the finite coefficient stage and on the stated constructible domains. Only these proper maps are identified with their compact-support images.",
+   "uses": [
+    "def-trf-admissibility",
+    "def-trf-coefficient-pushforward",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§0.3(a), ordinary and exceptional adjunctions; §1.1.6(a)(ii), displayed proper-pushforward composite, with legs interchanged"
+   }
+  },
+  {
+   "text": "Let $\\eta,\\epsilon$ be the unit and counit for $L\\dashv R$ of [def-trf-admissibility]. Since $\\delta=R(q)\\circ\\eta_{GN}$, counit naturality and the triangle identity give\n$$\\epsilon_{PK}\\circ L(\\delta)=q\\circ\\epsilon_{LGN}\\circ L(\\eta_{GN})=q.$$\nPut $m=G(u)\\circ\\gamma$. The inverse adjunction bijection sends the pushed coefficient map $\\delta\\circ m$ to\n$$\\epsilon_{PK}\\circ L(\\delta\\circ m)=q\\circ L(m)\n=P(\\varepsilon_{c_1,K})\\circ\\Xi_{1,N}\\circ LG(u)\\circ L(\\gamma).$$\nThus this is its exceptional adjoint. This is a direct expansion of the adjunction formulas, rather than a separate mate-compatibility theorem.",
+   "uses": [
+    "def-trf-admissibility",
+    "def-trf-coefficient-pushforward"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§0.3(a), expansion of adjoint morphisms and the counit; §1.1.6(a)(ii), proper pushforward"
+   }
+  },
+  {
+   "text": "The composition comparison of [thm-sf-comp-composition] is a canonical natural isomorphism. Its bounded-below etale-origin domain contains $M,N$: the constructible pullback and exceptional functors of [def-trf-admissibility] put these objects in $D^b_{ctf}$, and [lem-sf-proetale-constructible-origin](ii) supplies etale-origin witnesses. Combining the two composition comparisons with the natural proper comparisons specified in [def-trf-coefficient-pushforward] gives $\\Xi_1$. Its naturality, evaluated at $u:M\\to N$, says\n$$\\Xi_{1,N}\\circ LG(u)=PH(u)\\circ\\Xi_{1,M}.$$\nSubstitute this into Step 2 and use functoriality of $P$:\n$$\\begin{aligned}\nq\\circ L(m)\n&=P(\\varepsilon_{c_1,K})\\circ PH(u)\\circ\\Xi_{1,M}\\circ L(\\gamma)\\\\\n&=P(\\varepsilon_{c_1,K}\\circ H(u))\\circ\\Xi_{1,M}\\circ L(\\gamma)\n=P(v)\\circ\\Xi_{1,M}\\circ L(\\gamma).\n\\end{aligned}$$\nThis is precisely the three-arrow formula in the statement. No Cartesian base-change isomorphism was invoked: $\\gamma$ was retained as its ordinary unit/counit map. Properness of the structure morphisms was never used.",
+   "uses": [
+    "def-trf-coefficient-pushforward",
+    "thm-sf-comp-composition",
+    "def-trf-admissibility",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.1.6(a)(ii), displayed pushforward formula; §1.5.9 and §5.3.3, use for closed extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-admissibility",
+  "def-trf-coefficient-pushforward",
+  "prop-functor-package",
+  "thm-sf-comp-composition",
+  "lem-sf-proetale-constructible-origin"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§0.3(a) and §1.1.6(a)(ii), displayed proper-pushforward composite, with legs interchanged; expanded counit and naturality calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +94,66 @@
    "results": "0 hits: ; Mathlib/CategoryTheory; these are ordinary adjunctions or scalar/topological base change, not the stated compact-support coefficient-map comparison",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.NatTrans.naturality",
+   "results": "{\"t\": \"2026-10-17T10:35:55Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.homEquiv, CategoryTheory.NatTrans.naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary sheaf/module pushforwards or linear-map adjoints, not exceptional coefficient pushforward on finite-Tor derived constructible complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological.correspondence|pushforwardCoeff|exceptional.*adjoint",
+   "results": "{\"t\": \"2026-10-17T10:35:56Z\", \"tool\": \"grep\", \"query\": \"cohomological.correspondence|pushforwardCoeff|exceptional.*adjoint\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary sheaf/module pushforwards or linear-map adjoints, not exceptional coefficient pushforward on finite-Tor derived constructible complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoint of a properly pushed cohomological correspondence is ordinary exchange followed by proper composition and pushforward of its exceptional adjoint",
+   "results": "{\"t\": \"2026-10-17T10:35:56Z\", \"tool\": \"leansearch\", \"query\": \"Adjoint of a properly pushed cohomological correspondence is ordinary exchange followed by proper composition and pushforward of its exceptional adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousLinearMap.adjoint_comp\", \"SheafOfModules.PullbackConstruction.adjunction\", \"LinearMap.adjoint_comp\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"TopCat.Presheaf.pushforwardToOfIso\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj\"], \"digest\": \"28e7586e70449a9b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary sheaf/module pushforwards or linear-map adjoints, not exceptional coefficient pushforward on finite-Tor derived constructible complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional adjoint of proper pushforward of a cohomological correspondence using naturality of compact support composition",
+   "results": "{\"t\": \"2026-10-17T10:35:57Z\", \"tool\": \"leanfinder\", \"query\": \"Exceptional adjoint of proper pushforward of a cohomological correspondence using naturality of compact support composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"SheafOfModules.pushforwardPushforwardAdj\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'\"], \"digest\": \"eba91a1b07ec15ac\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary sheaf/module pushforwards or linear-map adjoints, not exceptional coefficient pushforward on finite-Tor derived constructible complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of adjunction counits and a natural isomorphism of composed functors computes the transpose of a pushed cohomological correspondence",
+   "results": "{\"t\": \"2026-10-17T10:37:05Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of adjunction counits and a natural isomorphism of composed functors computes the transpose of a pushed cohomological correspondence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app\", \"CategoryTheory.Adjunction.CommShift.CompatibilityCounit\", \"CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift\", \"CategoryTheory.Adjunction.RightAdjointCommShift.iso'\", \"CategoryTheory.PullbackShift.adjunction_counit\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\"], \"digest\": \"c506b108b9d17a54\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary sheaf/module pushforwards or linear-map adjoints, not exceptional coefficient pushforward on finite-Tor derived constructible complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exceptional adjoint of proper pushforward coefficient correspondence composite ordinary unit compact-support composition pushforward",
+   "results": "{\"t\": \"2026-10-17T11:19:10Z\", \"tool\": \"leanfinder\", \"query\": \"exceptional adjoint of proper pushforward coefficient correspondence composite ordinary unit compact-support composition pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\"], \"digest\": \"d57f95ef47bc5b1b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf-module or slice-category adjunctions, not this derived constructible coefficient comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.homEquiv, Adjunction.counit, Functor.map",
+   "results": "{\"t\": \"2026-10-17T11:19:11Z\", \"tool\": \"loogle\", \"query\": \"Adjunction.homEquiv, Adjunction.counit, Functor.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Adjunction.homEquiv'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: query rejected for unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*adjoint|pushforwardCoeff|proper.*coefficient",
+   "results": "{\"t\": \"2026-10-17T11:19:11Z\", \"tool\": \"grep\", \"query\": \"exceptional.*adjoint|pushforwardCoeff|proper.*coefficient\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary sheaf-module or slice-category adjunctions, not this derived constructible coefficient comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-triangle-compatibility",
@@ -64,5 +170,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-proper-coefficient-adjoint",
+  "worker": "stage1",
+  "summary": "Preserved the statement, ancestry, and inherited searches. Added three explicit steps: unfold the proper coefficient pushforward and its defining exceptional transpose, compute the transpose of its composite using counit naturality and the triangle identity, then use naturality of the proper composition comparison at u. No new nodes or Lean attachments. The constructible adjunction of def-trf-admissibility avoids the stronger optional ambient hypothesis in fix-prop-adjunctions(2). On continuation, cited the defining transpose again in step 2 and the canonical natural composition theorem with its etale-origin domain check in step 3; preserved maintainer-owned creation and unit metadata.",
+  "blueprint": "Realizes the inherited ancestor lem-trf-trace-triangle-compatibility, induced morphisms / closed pushforward paragraph (current proof step 4): the proper pushforward of u restricted to Z has exactly the asserted exceptional adjoint. The present more general proper diagram is the same calculation before specialization to (i,g). The unit sk-i-additivity and inherited blueprint.from are retained.",
+  "tool_uses": [
+   {
+    "node": "def-trf-coefficient-pushforward",
+    "why": "Unfolds the existing proper coefficient pushforward and its specified comparison; this is exactly the closed pushforward construction used by the sk-i-additivity route, not an alternative route."
+   },
+   {
+    "node": "def-trf-admissibility",
+    "why": "Supplies the specified constructible exceptional adjunction, natural counits, and triangle identities at finite A; these are generic operation data used in the unit proof."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Uses clause (3) only to identify proper direct images with compact-support direct images for f and g on the stated constructible domains; the unit has no separate proof of this operation law."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic natural compact-support composition supplies naturality of the specified Xi_1; the additivity unit uses these operations but does not construct them."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic etale-origin comparison checks the domain of the compact-support composition theorem on the bounded constructible inputs M and N; it replaces no additivity argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-coefficient-pushforward",
+  "def-trf-admissibility",
+  "prop-functor-package",
+  "thm-sf-comp-composition",
+  "lem-sf-proetale-constructible-origin"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-727ec21d1",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-727ec21d1 (reviewer sub-agent of L); spot-checked: I read the item, its 3 steps and every cited statement in full: def-trf-coefficient-pushforward, def-trf-admissibility, prop-functor-package(3), thm-sf-comp-composition, lem-sf-proetale-constructible-origin(ii), plus fix-prop-adjunctions and thm-sf-ambient-adjoint-class for the adjunction normalization. I also read Varshavsky §0.3(a), §1.1.6(a)(ii), §1.5.9 and §5.3.3. Source: with the legs interchanged and the non-Cartesian standard BC of case (ii) taken as gamma, Varshavsky's [f]_!(u) is exactly Rf_*v o Xi_1 o Rb_{1!}gamma, so the statement is faithful. It is unchanged, and it assumes neither a Cartesian square nor properness over k. Step 1 correctly unfolds delta as the transpose of q=P(eps_{c1}) o Xi_{1,N}. Step 2 is genuinely elementary: counit naturality plus the triangle identity give eps o L(delta)=q. Step 3 checks the domain: M=c_2^*K and N=c_1^!K are ctf, of etale origin by (ii), and Rg_! preserves that class, so the composition iso is natural. Naturality at u then gives P(v) o Xi_{1,M} o L(gamma). Reading the definition's counits as the specified admissibility adjunction is consistent, because it is the same functor with the same Hom bijections. Small cases: the identity diagram (the formula gives v), u=0, K=0, empty C, and the ancestor's closed-immersion use. proof_deps equals the union of the step uses, and there is no cycle. I searched by grep for duplicates and found none: candidates such as trace-proper-compatibility, trace-source-exchange, trace-map-exchange, reduced-closed-basechange-mate and open-extension-adjoint all state other things. The delivery creates no new nodes and cites no SGA. Accepted tool_uses: prop-functor-package, thm-sf-comp-composition, lem-sf-proetale-constructible-origin. The two definition entries in tool_uses are not needed but do no harm. The citations.json named in the report is not on the branch, which does not affect the DAG. No fixes."
  }
 }

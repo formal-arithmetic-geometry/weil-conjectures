@@ -13,9 +13,114 @@
   "lem-coef-infinity-monomorphism-boundary-cells",
   "lem-coef-simplicial-projective-model-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For composable operators $[t]\\xrightarrow{\\eta}[s]\\xrightarrow{\\theta}[r]$, the successive label is $g\\circ p(x_{\\theta(s)}\\to x_r)\\circ p(x_{\\theta\\eta(t)}\\to x_{\\theta(s)})=g\\circ p(x_{\\theta\\eta(t)}\\to x_r)$, by composition in the nerve. Identity operators act identically. Postcomposition in $c$ commutes with these operators. A degenerate edge projects to a degenerate edge of $X$, so is marked; postcomposition changes only its label and preserves marking. For a marked map $f:X\\to Y$ over $N(C)$, define $L_C(f)(c)(x,g)=(f(x),g)$. Since $p_Yf=p_X$, this commutes with the operators, the action and marking. Thus these formulas define the stated functor on marked objects over $N(C)$.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "§3.2.5, explicit last-vertex construction underlying Lemma 3.2.5.15(2)."
+   }
+  },
+  {
+   "text": "The colimit of a small diagram of marked simplicial sets over $N(C)$ is its degreewise set colimit, with marked edges the images of marked edges of its terms. Indeed a compatible family of marked simplicial maps induces unique maps on the set colimits, their operators are well defined, and those maps preserve exactly these image markings; degeneracies are included because every vertex has a representative. The same construction objectwise gives colimits of marked $C$-diagrams. In degree $r$, decompose $X_r$ into its fibres $X_{r,\\tau}$ over $\\tau\\in N(C)_r$. The pairs formula becomes $\\coprod_\\tau X_{r,\\tau}\\times C(\\tau(r),c)$. A colimit over this fixed base is computed independently on each fibre; multiplying a set by a fixed set preserves colimits, since it is a coproduct of copies indexed by that set. The resulting bijections commute with operators and actions. For an edge labelled $g$, marking on both sides means that its $X$-edge is the image of a marked edge; its representative can be paired with that same $g$. Hence $L_C$ preserves small colimits as marked diagrams, including the empty colimit.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "§3.2.5, direct colimit calculation for the explicit functor; compare Remarks 3.2.5.13–14."
+   }
+  },
+  {
+   "text": "Fix $c$, $r$ and $\\sigma:\\Delta^n\\to N(C)$. A simplex in $L_C((\\Delta^n)^\\flat)(c)_r$ is $(z,g)$, where $z:[r]\\to[n]$ is monotone and $g:\\sigma(z(r))\\to c$. Those with $z$ not surjective form exactly the lower-left boundary term. If $z$ is surjective, $z(r)=n$, and the remaining pairs are uniquely $(z,h)$ with $h:\\sigma(n)\\to c$; they are precisely the complement of the upper-left term in the upper-right free diagram. The vertical map on its boundary is $(h,z)\\mapsto(z,h\\circ\\sigma(z(r)\\to n))$. Thus the set pushout consists of the lower-left term together with those remaining pairs, exactly the lower-right term. This argument requires no injectivity or cancellation of composition in $C$. The formula commutes with operators: after $\\theta:[s]\\to[r]$, both labels are $h\\circ\\sigma(z(\\theta(s))\\to n)$; it also commutes with postcomposition. Every marking in these minimally marked objects is a degenerate edge, and its labelled pair is the degeneracy of the corresponding labelled vertex. Step 2's description of marked colimits now proves the boundary square is a pushout of marked diagrams. For $n=0$ it simply identifies $F_{\\sigma(0)}((\\Delta^0)^\\flat)$ with $L_C((\\Delta^0)^\\flat)$.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.5.15(2), explicit boundary-cell refinement; skeletal use in Lemma 3.2.5.17(2)(E)."
+   }
+  },
+  {
+   "text": "In the marking square both horizontal maps are identities on underlying simplicial sets. Its top map marks exactly one nondegenerate edge in the $h$-copy for each $h:\\sigma(1)\\to c$. The vertical map sends this edge to $(\\operatorname{id}_{[1]},h)$: its last vertex is $1$, so the last-vertex arrow is the identity. These are exactly all nondegenerate edges of $L_C(\\Delta^1)(c)$. Its lower map marks precisely these edges, since their $\\Delta^1$-projections are the newly marked edge. All other markings were already present. Therefore the pushout markings, which are the images of the two marking sets, agree exactly with the lower-right markings. This proves the marking square by step 2, with compatibility in $c$ inherited from postcomposition. The calculation holds also when the base edge $\\sigma$ is degenerate.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.5.15(2), explicit marking-cell refinement; marking pushouts in Lemma 3.2.5.17(2)(D)."
+   }
+  },
+  {
+   "text": "Both $i_n:(\\partial\\Delta^n)^\\flat\\to(\\Delta^n)^\\flat$ and $j:(\\Delta^1)^\\flat\\to(\\Delta^1)^\\sharp$ are cofibrations in $\\mathsf M$, since their underlying maps are injective. Regard $C$ as enriched with discrete mapping sets. The free-evaluation adjunction of the projective-calculus node identifies a lifting problem for $F_b(i_n)$ or $F_b(j)$ against an objectwise trivial fibration $q$ with a lifting problem against its component $q_b$ in $\\mathsf M$. The latter has a lift by the cofibration/trivial-fibration weak factorization system. Thus all these free maps are projective cofibrations. We will use their closure under coproducts, pushouts and small continuous transfinite composites directly from this same lifting characterization: solve a coproduct square summandwise, solve a pushout square on the original attaching map and extend by its universal property, and solve a transfinite square successively extending the previous lift and using the colimit cocone at limits. All resulting diagonal maps commute with the square by construction.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.5.15(2), cofibration lifting characterization; free evaluation in the projective model."
+   }
+  },
+  {
+   "text": "Identify the underlying injective map $i:X\\to Y$ with the inclusion of its image and retain all markings of $X$. Apply the boundary-cell decomposition node to the underlying inclusion. At stage $n$ attach all missing nondegenerate $n$-simplices, minimally marked, along their minimally marked boundaries. Every boundary already belongs to the preceding stage by that node; the base map on each attached cell is its actual simplex $\\sigma:\\Delta^n\\to N(C)$ from $Y$. The marked pushout therefore has exactly the previous markings and the new degenerate edges, by step 2. Starting from $X$, this constructs an object $Y_0$ whose underlying simplicial set is $Y$ and whose markings are precisely those of $X$ and the degenerate edges of $Y$. By preservation of colimits (step 2), the image of every skeletal attaching square under $L_C$ is a pushout of the coproduct of the squares in step 3. Its attaching maps are the free cofibrations of step 5. The sequential limit is continuous. The closure argument of step 5 proves that $L_C(X)\\to L_C(Y_0)$ is a projective cofibration.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.5.15(2), relative skeletal filtration; compare Lemma 3.2.5.17(2)(E)."
+   }
+  },
+  {
+   "text": "For every edge $e$ marked in $Y$ but not in $Y_0$, use its map $\\Delta^1\\to Y$ to attach $j$ over the base edge $p_Y(e)$. The coproduct of all these marking attachments, pushed out along their maps to $Y_0$, changes no underlying simplices and adds exactly the missing markings, so its result is $Y$. Step 2 carries this square to a pushout of the coproduct of the marking squares of step 4. The upper maps are free maps $F_{p_Y(e)(1)}(j)$, projective cofibrations by step 5. Hence $L_C(Y_0)\\to L_C(Y)$, and its composite with $L_C(X)\\to L_C(Y_0)$, are projective cofibrations. The set of missing markings can be empty. This construction retains marked edges of $X$ from the outset; it does not replace the given source by its minimal marking.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.5.15(2), relative marking step; compare Lemma 3.2.5.17(2)(D)."
+   }
+  },
+  {
+   "text": "Apply the proved monomorphism clause to $\\varnothing\\to X$ over $N(C)$. By step 2 its image is the initial map to $L_C(X)$, so that diagram is projectively cofibrant by definition. Choose a universe containing $C$, $X$ and $Y$: the labels $C(b,c)$ and all cell indexing sets are small, and the skeletal sequence and the coproduct of marking attachments are small colimits. This covers $C=\\varnothing$, empty $X$, dimension-zero cells, arbitrary infinite simplicial sets, and constant or degenerate base simplices; no fibrancy assumption occurs.",
+   "uses": [
+    "lem-coef-simplicial-projective-model-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Conclusion of Lemma 3.2.5.15(2); projectively cofibrant objects used in Lemma 3.2.5.17(2)(F)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-simplicial-projective-model-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Explicit degreewise cell proof of the construction in §3.2.5, refining Lemma 3.2.5.15(2); compare Lemma 3.2.5.17(2)(D)–(F)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -79,10 +184,59 @@
    "results": "8 hits; ; CategoryTheory.IsFiltered.of_right_adjoint, CategoryTheory.IsCofiltered.of_left_adjoint, CategoryTheory.instReflectiveSSetCatNerveFunctor, SSet.Truncated.nerve₂Adj, HomotopicalAlgebra.RelativeCellComplex, HomotopicalAlgebra.RelativeCellComplex.Cells, CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor, SSet.skAdj",
    "date": "2026-10-17",
    "verdict": "no match: generic RelativeCellComplex and ordinary nerve adjunctions do not give these marked free boundary squares."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projective cofibrancy of marked slice diagram L_C(X) via free boundary and marking attachments",
+   "results": "8 hits; HomotopicalAlgebra.PathObject.instIsCofibrantPOfIsVeryGood, HomotopicalAlgebra.BifibrantObject.instIsCofibrantObjι, HomotopicalAlgebra.CofibrantObject.instIsCofibrantResolutionObj, HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjι, HomotopicalAlgebra.IsCofibrant, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionObj, HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism, HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary simplicial sets or generic cofibrant objects, not the marked slice diagram and its free-cell squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "Projective.cofibration, SSet.modelCategoryQuillen.cofibration_of_mono",
+   "results": "0 hits; ; loogle: unknown identifier 'Projective.cofibration'",
+   "date": "2026-10-17",
+   "verdict": "unavailable: loogle: unknown identifier 'Projective.cofibration'"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*cofibr|free.*evaluation|boundary.*simplex",
+   "results": "0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "unavailable as an absence test: Mathlib was repeated as a subdirectory; the corrected root grep below was run without that subdirectory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "marked relative nerve slice diagram is projectively cofibrant by cellular filtration",
+   "results": "8 hits; HomotopicalAlgebra.IsCofibrant, HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations, HomotopicalAlgebra.CofibrantObject.mk, SSet.modelCategoryQuillen.instCategoryWithCofibrations, SSet.modelCategoryQuillen.cofibrations_eq, HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj, SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration, SSet.modelCategoryQuillen.mono_of_cofibration",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary simplicial sets or generic cofibrant objects, not the marked slice diagram and its free-cell squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCofibrant\", \"Functor\"",
+   "results": "1 hits; HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary simplicial sets or generic cofibrant objects, not the marked slice diagram and its free-cell squares."
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*cofibr|relative.?nerve|MarkedSSet|marked.*simplicial",
+   "results": "0 hits; ",
+   "date": "2026-10-17",
+   "verdict": "no match: no marked relative-nerve/projective-cofibrancy construction in the Mathlib source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The last vertex slice pullback of a marked simplicial set gives a projectively cofibrant diagram by free simplex boundary attachments",
+   "results": "8 hits; SSet.modelCategoryQuillen.J, SSet.modelCategoryQuillen.I, SSet.instFinitePullback, CategoryTheory.Arrow.cechNerve, SSet.horn.isColimit, CategoryTheory.Arrow.cechNerve_obj, CategoryTheory.SimplicialObject.cechNerve, CategoryTheory.Arrow.cechNerve_map",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary simplicial sets or generic cofibrant objects, not the marked slice diagram and its free-cell squares."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-relative-nerve-cone-left-comparison",
@@ -94,7 +248,7 @@
  "blueprint": {
   "from": {
    "node": "thm-cbc-finite-level-proetale",
-   "place": "Proof opening of thm-cbc-finite-level-proetale, via the relative-nerve presentation of enhanced diagrams: the free boundary and marking-cell calculation in the inherited comparison proof step 3.",
+   "place": "Proof opening of thm-cbc-finite-level-proetale: the relative-nerve presentation and its explicit free boundary and marking-cell attachments in the inherited comparison proof step 3.",
    "via": [
     "lem-cbc-relative-nerve-cone-left-comparison",
     "lem-cbc-marked-relative-nerve-quillen",
@@ -108,5 +262,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-relative-nerve-projective-cofibrancy",
+  "worker": "stage1",
+  "summary": "Expanded the free boundary square and marking square by direct degreewise calculations; proved colimit preservation, free-cell cofibrancy by evaluation lifting, and relative skeletal/marking filtration retaining the original source markings. Four existing nodes supply all non-elementary input. No new nodes. Corrected an imprecise source-place description without changing the statement.",
+  "blueprint": "Realizes the parent proof opening on the relative-nerve presentation: the simplex-boundary pushout, the marking-cell pushout, and the resulting projective-cofibrancy filtration.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-marked-point-cartesian-model",
+    "why": "Generic absolute marked-model structure and its cofibration/trivial-fibration lifting classes; no compact-support node supplies this model-category input."
+   },
+   {
+    "node": "lem-coef-infinity-monomorphism-boundary-cells",
+    "why": "Generic relative simplicial skeletal filtration by boundaries, used with its exact degreewise-injectivity hypothesis."
+   },
+   {
+    "node": "lem-coef-simplicial-projective-model-calculus",
+    "why": "Generic enriched projective model structure and free-evaluation adjunction, specialized to the ordinary small category with discrete mapping sets."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-simplicial-projective-model-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-941438503",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-941438503 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement and stmt_deps are identical to the live base, which I only read; there are no new nodes. All four cited statements are read in full: lem-coef-marked-point-cartesian-model, def-cbc-enhanced-diagrams-cones, lem-coef-infinity-monomorphism-boundary-cells (leaf SSet.relativeCellComplexOfMono) and lem-coef-simplicial-projective-model-calculus. Parent step 5 uses only the ∅→X clause, which step 8 supplies. HTT is not local (WANTED is recorded; the proof is marked agent-written), so I checked the steps from first principles. Step 1: the labels compose through the functor p(x), and degenerate edges are marked. Step 2: colimits in sSet^+/N(C) are degreewise; L_C(X)(c)_r=∐_τ X_{r,τ}×C(τ(r),c) preserves them, and the marking is checked both ways. Step 3: the complement of L_C(∂Δ^n) is the pairs with surjective z, so z(r)=n and the label is h; the set pushout of an injection gives C⊔(B∖A) with no cancellation needed, operators commute, and all markings are degenerate. Step 4: the nondegenerate edges of L_C(Δ^1)(c) are exactly (id,h), so the marking pushout is exact, including for a degenerate σ. Step 5: the free diagram is ∐_{C(b,c)}K by X⊗K=X×K^♯, the adjunction transposes the lifting problem to q_b, and the closure arguments are explicit. Steps 6–7: relative skeleton from the leaf's exact injective hypothesis while keeping X's markings, then one marking pushout. Edge cases tested: n=0, n=1 with non-mono composition, C terminal, C empty, empty hom-sets, degenerate base edges. The statement is true and not weakened. No circularity: nothing on the via chain is cited. Duplicate search (rg 'projectively cofibrant', 'C_{/c}') found only different nodes: marked-relative-nerve-quillen (left-adjoint existence only), locally-constant-presheaf-slice, cone-presheaf-adjunction. The searches are recorded honestly, with one bad grep marked as not evidence of absence. I accept the three declared tool_uses: generic model-category nodes that the parent already carries. Minor, unchanged: the pre-existing source.place still names Lemma 3.2.5.17(2) loosely, but the step sources and proof_origin give the precise attribution. No fixes written."
  }
 }

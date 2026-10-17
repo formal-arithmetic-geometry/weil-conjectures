@@ -15,9 +15,76 @@
   "prop-weil-pbc-proetale-constant-exact",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an index $\\alpha$ and a geometric point $\\bar u:\\operatorname{Spec}\\Omega\\to U_\\alpha$, with image $\\bar y=u_\\alpha\\circ\\bar u$ in $Y$. Exactness of the constant-coefficient inverse image gives canonical identifications\n$$\n\\mathcal H^q(u_\\alpha^*K)\\cong u_\\alpha^*\\mathcal H^q(K)\n$$\nfor every $q$, and [lem-pur-proetale-inverse-image-stalk] identifies the stalk of the right side at $\\bar u$ with the stalk of $\\mathcal H^q(K)$ at $\\bar y$. The isomorphism $u_\\alpha^*K\\cong L_\\alpha[n_\\alpha]$ induces isomorphisms of cohomology sheaves, and $\\mathcal H^q(L_\\alpha[n_\\alpha])$ is $L_\\alpha$ for $q=-n_\\alpha$ and $0$ otherwise. Hence the stalk of $\\mathcal H^q(K)$ at $\\bar y$ is zero for $q\\ne-n_\\alpha$ and is isomorphic to the stalk $(L_\\alpha)_{\\bar u}$ for $q=-n_\\alpha$.\n\nIt remains to see $(L_\\alpha)_{\\bar u}\\cong A$. By [def-weil-proetale-locally-constant-sheaf] there is a covering family $\\{v_j:V_j\\to U_\\alpha\\}_{j\\in J}$ of the pro-etale site with isomorphisms $L_\\alpha|_{V_j}\\cong\\underline A_{V_j}$; its arrows are weakly etale and it is an fpqc covering by [def-weil-pbc-proetale-site]. Lift $\\bar u$ to some $V_j$: form $Z_j=\\operatorname{Spec}\\Omega\\times_{U_\\alpha}V_j$ with projections $q_j:Z_j\\to\\operatorname{Spec}\\Omega$ and $r_j:Z_j\\to V_j$ [def-pc-fibre-product]. By [lem-galois-fpqc-covering-base-change] the $q_j$ form an fpqc covering of $\\operatorname{Spec}\\Omega$, so some $Z_j$ is nonempty by the joint-surjectivity clause of [def-weil-pbc-fpqc-covering]; this $q_j$ is weakly etale by [lem-weil-pbc-weakly-etale-composition-base-change]. Since $\\Omega$ is algebraically closed, [lem-fix-weakly-etale-algclosed-section] gives a section $s$ of $q_j$, and $\\bar v=r_j\\circ s$ satisfies $v_j\\circ\\bar v=\\bar u\\circ q_j\\circ s=\\bar u$. By [lem-weil-proetale-weakly-etale-localization] the localized site $U_{\\alpha,\\mathrm{proet}}/V_j$ is $V_{j,\\mathrm{proet}}$, with $A_{U_\\alpha}|_{V_j}=A_{V_j}$, and $L_\\alpha|_{V_j}(W\\to V_j)=L_\\alpha(W\\to U_\\alpha)$. In the colimit of [def-weil-proetale-geometric-stalk], pointed neighbourhoods of $\\bar u$ that factor through $(V_j,\\bar v)$ are cofinal: any $(W,\\bar w)$ is refined by $(W\\times_{U_\\alpha}V_j,(\\bar w,\\bar v))$, whose projection to $W$ is weakly etale by [lem-weil-pbc-weakly-etale-composition-base-change], and two maps of one neighbourhood are equalized by the filteredness that this definition asserts. These neighbourhoods are exactly the pointed neighbourhoods of $\\bar v$ in $V_{j,\\mathrm{proet}}$, with the same section sets. Hence $(L_\\alpha)_{\\bar u}\\cong(L_\\alpha|_{V_j})_{\\bar v}\\cong(\\underline A_{V_j})_{\\bar v}\\cong A$, the last isomorphism by [lem-weil-proetale-constant-sheaf-stalk]. As $A\\ne0$, the stalk of $\\mathcal H^q(K)$ at $\\bar y$ is nonzero exactly for $q=-n_\\alpha$.\n\nIf $\\operatorname{im}(u_\\alpha)\\cap\\operatorname{im}(u_\\beta)$ is nonempty, choose a point $y$ in it and a geometric point $\\bar y$ over $y$. The more precise clause of [lem-weil-pbc-etale-cover-geometric-point-lift] lifts this same $\\bar y$ to both $U_\\alpha$ and $U_\\beta$. By the preceding paragraph, the same stalk of $K$ is nonzero exactly in degree $-n_\\alpha$ and exactly in degree $-n_\\beta$, so $n_\\alpha=n_\\beta$.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-abstract-derived-category",
+    "lem-pur-proetale-inverse-image-stalk",
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "def-weil-proetale-locally-constant-sheaf",
+    "lem-weil-proetale-constant-sheaf-stalk",
+    "def-weil-proetale-geometric-stalk",
+    "def-pc-fibre-product",
+    "def-weil-pbc-proetale-site",
+    "lem-galois-fpqc-covering-base-change",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-fix-weakly-etale-algclosed-section",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-a1-inv/prop-pur-a1-invariance.proof.md",
+    "place": "Step 1, lines 16--25: local rank-one shape forces a unique shift on overlaps"
+   }
+  },
+  {
+   "text": "By the Mathlib leaf [lem-weil-pbc-etale-morphism-open-map], every $u_\\alpha$ is an open map, so each $\\operatorname{im}(u_\\alpha)$ is open. Hence each $Y_n$, being a union of such images, is open. Step 1 shows that two images carrying different shifts are disjoint; consequently the $Y_n$ are pairwise disjoint. Joint surjectivity of the family gives $\\bigcup_nY_n=|Y|$. The complement of $Y_n$ is the union of the other $Y_m$, so it is open; therefore every $Y_n$ is also closed.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-a1-inv/prop-pur-a1-invariance.proof.md",
+    "place": "Step 1, lines 23--26: etale images are open and the shift function is locally constant"
+   }
+  },
+  {
+   "text": "Let $S=\\{q\\in\\mathbf Z\\mid\\mathcal H^q(K)\\ne0\\}$. This is finite by the bounded-cohomology hypothesis. If $Y_n\\ne\\varnothing$, choose an index $\\alpha$ with $n_\\alpha=n$ and a geometric point of the nonempty scheme $U_\\alpha$. The already established stalk calculation of Step 1 gives a nonzero stalk of $\\mathcal H^{-n}(K)$, because the stalk of $L_\\alpha$ is $A\\ne0$. Thus $-n\\in S$. Therefore only finitely many $Y_n$ are nonempty. The same definition gives $\\operatorname{im}(u_\\alpha)\\subseteq Y_{n_\\alpha}$ for every nonempty $U_\\alpha$; empty covering members can be discarded.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-a1-inv/prop-pur-a1-invariance.proof.md",
+    "place": "Step 1, lines 16--34: bounded cohomology gives finite shift range and reduction to the surviving pieces"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-proetale-locally-constant-sheaf",
+  "lem-fix-weakly-etale-algclosed-section",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-pur-proetale-inverse-image-stalk",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-weil-pbc-proetale-constant-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-a1-inv/prop-pur-a1-invariance.proof.md",
+  "place": "Step 1, expanded for the extracted shift-locus statement"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +120,38 @@
    "results": "8 hits: DerivedCategory.TStructure.t, CochainComplex.isZero_of_isStrictlyGE, CochainComplex.isStrictlyGE_iff, DerivedCategory.IsGE, CochainComplex.isGE_shift, CochainComplex.HomComplex.Cochain.rightShift_zero, CochainComplex.HomComplex.Cochain.leftUnshift_zero, CochainComplex.HomComplex.Cochain.rightUnshift_zero",
    "date": "2026-10-17",
    "verdict": "no match: bounded-complex/t-structure results and IsLocallyConstant.isClopen_fiber do not construct the degree function from etale-local presentations; the stalk comparison and nonzero cohomology argument are additional mathematics"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite clopen shift loci for etale-local rank-one complexes",
+   "results": "8 hits: Algebra.isOpen_etaleLocus, Algebra.etaleLocus, Algebra.QuasiFiniteAt.isClopen_singleton, Algebra.etaleLocus_eq_compl_support, Algebra.etaleLocus_eq_univ_iff_etale, Algebra.mem_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.isOpen_unramifiedLocus.",
+   "date": "2026-10-17",
+   "verdict": "no match: no hit constructs the shift partition from etale-local derived presentations"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, IsLocallyConstant, IsClopen",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "shift.*clopen|clopen.*shift|cohomology.*locally [AlgebraicGeometry/]",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite clopen shift loci for etale locally rank one complexes",
+   "results": "8 hits: Algebra.isOpen_etaleLocus, Algebra.etaleLocus, isClopen_iInter_of_finite, isClopen_iUnion_of_finite, isClopen_biInter_finset, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus, isClopen_biUnion_finset, TopologicalSpace.Clopens.casesOn.",
+   "date": "2026-10-17",
+   "verdict": "no match: generic clopen operations do not prove the derived shift-locus statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-pur-a1-invariance",
@@ -73,5 +168,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-etale-local-shift-partition",
+  "worker": "stage1",
+  "summary": "Expanded the extracted shift-locus argument into three steps: exact pullback and stalk comparison, with geometric-point lifting and the constant-sheaf stalk calculation, identify the unique nonzero cohomology degree on overlaps; the existing Mathlib open-map leaf gives openness, and disjoint exhaustive open loci are clopen. Bounded cohomological support then gives finiteness. Removed the prior duplicate open-image Mathlib node and retained all previous search records. No new nodes. Maintainer reader (2026-10-17): Step 1 now writes out the lift of the geometric point into a pro-etale trivializing member (fpqc base change, weakly etale base change, section over an algebraically closed field) and the localization/cofinality identification of the stalk of $L_\\alpha$ with $A$.",
+  "blueprint": "Realizes main-20261015 prop-pur-a1-invariance.proof.md Step 1, lines 16--34: unique local shift, openness/local constancy, finite reduction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "why": "Generic lifting of one fixed geometric point to both specified etale covering members; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-proetale-constant-sheaf-stalk",
+    "why": "Generic computation of the constant rank-one local model stalk as A; no node of this unit states it."
+   },
+   {
+    "node": "def-weil-proetale-geometric-stalk",
+    "why": "Definition of the pointed-neighbourhood colimit used in the local trivialization calculation."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic exact constant-coefficient inverse image, used to commute cohomology and pullback."
+   },
+   {
+    "node": "def-weil-derived-cohomology-sheaves",
+    "why": "Definition of cohomology sheaves of complexes used in the local degree computation."
+   },
+   {
+    "node": "def-weil-proetale-locally-constant-sheaf",
+    "why": "Definition of local constant module models used for the assumed rank-one trivializations."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Complex cohomology and shift conventions for the elementary single-degree calculation."
+   },
+   {
+    "node": "lem-fix-weakly-etale-algclosed-section",
+    "why": "Generic section of a nonempty weakly etale scheme over an algebraically closed field, used to lift the geometric point into a pro-etale trivializing member; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of the localized pro-etale site and constant ring at a trivializing member with that member's own site; no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "def-weil-proetale-geometric-stalk",
+  "prop-weil-pbc-proetale-constant-exact",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-abstract-derived-category",
+  "lem-fix-weakly-etale-algclosed-section",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-23301488a",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-23301488a (reviewer sub-agent of L); spot-checked: I read the item in full, all cited node statements, the unit sk-prop-a1-inv, main-20261015 prop-pur-a1-invariance Step 1, the parent's Step 3 (the only citer), Stacks 0F6C and the Mathlib lines (UniversallyOpen.lean:48 and :147, Etale.lean:111/114, EtalePoint.lean:37). The statement is correct. It needs A nonzero for the H^{-n} nonzero clause, uses joint surjectivity for the union and the lifts, and uses bounded cohomology for finiteness. I checked it on the empty Y, on empty members with unbounded n_alpha, on Spec k-bar with K=A[3], and on two components with different shifts. It is not a restatement of a parent clause and has no duplicate in the DAG. Steps 2 and 3 are correct. Step 1 (C1/E5): computing the stalk of L_alpha at the geometric point required lifting it into a pro-etale (weakly etale) trivializing member, and nothing cited gave this; the etale lifting leaf does not cover it. I repaired it in fixes/dag/nodes/sec-smooth-purity/lem-pur-etale-local-shift-partition.json. The lift now goes through lem-galois-fpqc-covering-base-change, def-weil-pbc-fpqc-covering, lem-weil-pbc-weakly-etale-composition-base-change, def-pc-fibre-product and lem-fix-weakly-etale-algclosed-section. The stalk identification now cites lem-weil-proetale-weakly-etale-localization and writes out the cofinality argument. I recomputed proof_deps and checked there is no cycle. I accept these off-unit tool uses: prop-weil-pbc-proetale-constant-exact, lem-weil-proetale-constant-sheaf-stalk, lem-fix-weakly-etale-algclosed-section, lem-weil-proetale-weakly-etale-localization. There are no new nodes and no statement change.; 1 file(s) fixed by the reviewer"
  }
 }

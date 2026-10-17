@@ -2,7 +2,7 @@
  "id": "lem-coef-unstraightening-strict-base-change",
  "kind": "statement",
  "title": "Strict base naturality of the enriched cone unstraightening",
- "statement": "Use simplicial sets, internal functor simplicial sets and weak homotopy equivalences of [def-cbc-enhanced-diagrams-cones], right fibrations of [def-coef-infinity-fibrations], the coherent realization $\\mathfrak C$ and $Q^\\bullet\\to\\Delta^\\bullet$ of [lem-coef-pinched-cube-latching], and the cone adjunction $L_S\\dashv U_S$ and enriched projective presheaf category $\\mathcal P_S$ of [lem-coef-cone-presheaf-adjunction]. All bases and diagrams are small in fixed universes enlarged as necessary. For a base $S$, present an object $X\\to S$ by the presheaf on the category of simplices of $S$ whose value at $\\sigma:\\Delta^n\\to S$ is the set $\\{x\\in X_n:p(x)=\\sigma\\}$, with restriction induced by simplex operators. Morphisms of the simplex category are monotone maps $\\theta:[m]\\to[n]$ with $\\tau=\\sigma\\theta$. In this presentation pullback along $u:T\\to S$ is precomposition by $\\tau\\mapsto u\\tau$, also on all parameterized maps defining the slice mapping simplicial sets. Diagram restriction is $u^*F=F\\circ\\mathfrak C[u]^{\\mathrm{op}}$.\n\nEquip $U_S$ with its canonical simplicial enrichment: a parameterized enriched map $F\\times K\\to G$ is sent to the composite $U_SF\\times K\\to U_S(F\\times K)\\to U_SG$, where the first map uses $K\\to\\operatorname{Sing}_QK$ and the cone product identification $U_S(F\\times K)\\cong U_SF\\times\\operatorname{Sing}_QK$, with $(\\operatorname{Sing}_QK)_n=\\operatorname{Hom}(Q^n,K)$. The simplexwise cone formula defines, in the displayed presheaf presentations, an equality of simplicial enriched functors\n$$u^*U_S=U_Tu^*.$$\nThese equalities include equality on parameterized maps, identities and composition, and are compatible by equality with identity base maps and composites of base maps. Restriction of diagrams and of slice simplicial categories is strictly functorial in the base. Diagram restriction preserves projectively fibrant objects and objectwise weak homotopy equivalences. Pullback preserves right fibrations and maps between them which are weak homotopy equivalences on every vertex fiber. No slice model structure, right-fibration classification, or quasicategory assumption on the bases is imposed.",
+ "statement": "Use simplicial sets, internal functor simplicial sets and weak homotopy equivalences of [def-cbc-enhanced-diagrams-cones], right fibrations of [def-coef-infinity-fibrations], the coherent realization $\\mathfrak C$ and $Q^\\bullet\\to\\Delta^\\bullet$ of [lem-coef-pinched-cube-latching], and the cone adjunction $L_S\\dashv U_S$ and enriched projective presheaf category $\\mathcal P_S$ of [lem-coef-cone-presheaf-adjunction]. All bases and diagrams are small in fixed universes enlarged as necessary. For a base $S$, present an object $X\\to S$ by the presheaf on the category of simplices of $S$ whose value at $\\sigma:\\Delta^n\\to S$ is the set $\\{x\\in X_n:p(x)=\\sigma\\}$, with restriction induced by simplex operators. Morphisms of the simplex category are monotone maps $\\theta:[m]\\to[n]$ with $\\tau=\\sigma\\theta$. In this presentation pullback along $u:T\\to S$ is precomposition by $\\tau\\mapsto u\\tau$, also on all parameterized maps defining the slice mapping simplicial sets. Diagram restriction is $u^*F=F\\circ\\mathfrak C[u]^{\\mathrm{op}}$.\n\nFor the strict equality, use the following normalized cone-label coordinates on this presheaf presentation of $U_S$. Over $\\sigma:\\Delta^n\\to S$, put $B_n=\\mathfrak C[\\Delta^{n+1}]$ and $v=n+1$; a label is a family of simplicial maps $b_i:B_n(i,v)\\to F(\\sigma i)$ for $0\\leq i\\leq n$, satisfying $b_i(z\\circ h)=F(\\mathfrak C[\\sigma](h))(b_j(z))$ for $h\\in B_n(i,j)$ and $z\\in B_n(j,v)$ in every degree. Operators restrict these families along the functors extending simplex operators by the last vertex. These coordinates are canonically isomorphic to the raw enriched-natural-transformation coordinates of [lem-coef-cone-presheaf-adjunction]; throughout the displayed strict equality, $U_S$ denotes this normalized representative. Thus equality is asserted for specified representatives, and the raw representatives have the corresponding canonical isomorphism.\n\nEquip $U_S$ with its canonical simplicial enrichment: a parameterized enriched map $F\\times K\\to G$ is sent to the composite $U_SF\\times K\\to U_S(F\\times K)\\to U_SG$, where the first map uses $K\\to\\operatorname{Sing}_QK$ and the cone product identification $U_S(F\\times K)\\cong U_SF\\times\\operatorname{Sing}_QK$, with $(\\operatorname{Sing}_QK)_n=\\operatorname{Hom}(Q^n,K)$. The simplexwise cone formula defines, in the displayed presheaf presentations, an equality of simplicial enriched functors\n$$u^*U_S=U_Tu^*.$$\nThese equalities include equality on parameterized maps, identities and composition, and are compatible by equality with identity base maps and composites of base maps. Restriction of diagrams and of slice simplicial categories is strictly functorial in the base. Diagram restriction preserves projectively fibrant objects and objectwise weak homotopy equivalences. Pullback preserves right fibrations and maps between them which are weak homotopy equivalences on every vertex fiber. No slice model structure, right-fibration classification, or quasicategory assumption on the bases is imposed.",
  "source": {
   "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
   "place": "Proposition 2.2.1.1, Remark 2.2.2.12 and the commutative restriction comparisons in Proposition 2.2.3.11, printed pp.74,78,84. The strict presheaf presentation is the explicit expansion previously inline in item Step 3. Reading copy HTT.pdf and HTT.txt retained in the sandbox; archival copy WANTED. No Stacks tag states this result."
@@ -13,9 +13,92 @@
   "lem-coef-pinched-cube-latching",
   "lem-coef-cone-presheaf-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First justify the normalized coordinates. Put $A=\\mathfrak C[S]$ and form the simplicial category $E_F$ with old subcategory $A$, one new vertex $v$, maps $E_F(s,v)=F(s)$, empty reverse mapping sets, and identity endomorphisms of $v$; composition is the presheaf action. The action axioms give its category axioms. The old-subcategory and cone-vertex assertions of [lem-coef-cone-boundary-projective-cells] identify the relative cone defining $L_S$. Consequently an enriched map $L_S(\\sigma)\\to F$ is exactly a functor from that relative cone to $E_F$ fixing $A$ and $v$: its only variable components are the maps into $v$, and their functor equations are enriched naturality. The defining pushout universal property identifies these functors with functors $B_n\\to E_F$ fixed on $\\mathfrak C[\\Delta^n]$ by $\\mathfrak C[\\sigma]$. Their remaining components are exactly the displayed $b_i$, with exactly the displayed action equations. Restricting components and extending by the pushout give inverse functions. They commute with simplex operators because both operations are precomposition. This supplies a canonical isomorphism to the raw $U_S$, rather than assuming raw sets of natural transformations for different bases are equal.",
+   "uses": [
+    "lem-coef-cone-presheaf-adjunction",
+    "lem-coef-cone-boundary-projective-cells"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "§2.2.1 construction, p.73; elementary mapping-out expansion of its cone pushout"
+   }
+  },
+  {
+   "text": "Over $\\tau:\\Delta^n\\to T$, both $u^*U_SF$ and normalized $U_T(u^*F)$ now have literally the same maps $b_i:B_n(i,v)\\to F(u\\tau i)$. Their equations use the same action of $F$ on $\\mathfrak C[u\\tau](h)=\\mathfrak C[u](\\mathfrak C[\\tau](h))$. Their operators restrict along the same last-vertex extensions of monotone maps. Therefore these presheaves, and their ordinary actions on maps of diagrams, are equal. This proves objectwise strict base change without identifying different raw domains of natural transformations.",
+   "uses": [
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.1.1, p.74; explicit cone-label verification"
+   }
+  },
+  {
+   "text": "For the enrichment, first check the constant-diagram factor. In cone-label coordinates, maps into the constant diagram $K$ are functors $B_n$ into the two-object simplicial category with old endomorphism $\\Delta^0$, new endomorphism $\\Delta^0$, old-to-new mapping set $K$, and empty reverse mapping set, with the initial face sent to the old vertex. By the pushout universal property these are maps $Q^n\\to K$. Indeed $\\mathfrak C$ preserves colimits directly from its simplex-colimit definition: maps $\\mathfrak C[X]\\to E$ are compatible functors on simplices, equivalently maps $X\\to N(E)$ where $N(E)_m=\\operatorname{Fun}(\\mathfrak C[\\Delta^m],E)$; this mapping-out description carries colimits in $X$ to limits of sets. Apply it to the pushout defining $J^n$ in [lem-coef-pinched-cube-latching]. The description of its old and new mapping sets follows also from [lem-coef-cone-boundary-projective-cells] with $S=\\Delta^0$. Thus the labels over each fixed $\\sigma$ are canonically $\\operatorname{Hom}(Q^n,K)$, naturally in simplex operators. The underlying total object is $U_S(\\mathrm{const}\\,K)\\cong S\\times\\operatorname{Sing}_QK$ over $S$; it is this label identification, not the total object, that is independent of $S$.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-cone-boundary-projective-cells"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 2.2.2.12, p.78; elementary constant-factor mapping-out calculation"
+   }
+  },
+  {
+   "text": "A label for $F\\times K$ is exactly a pair of labels for $F$ and for the constant diagram $K$: project its components to the factors; conversely pair the components. The action equations hold coordinatewise. Step 3 therefore gives $U_S(F\\times K)\\cong U_SF\\times\\operatorname{Sing}_QK$ over $S$. Let $\\pi_i:B_n(i,v)\\to Q^n$ be induced by the quotient $\\Delta^{n+1}\\to J^n$, and let $q_n:Q^n\\to\\Delta^n$ be the natural maps of [lem-coef-pinched-cube-latching]. For $k:\\Delta^n\\to K$, the constant-factor component at $i$ is $kq_n\\pi_i$. A parameterized map $a:F\\times K\\to G$ sends $(b,k)$ to the components $z\\mapsto a_{\\sigma i}(b_i(z),(kq_n\\pi_i)(z))$, in every degree. This commutes with operators by naturality of $q$, $\\pi_i$ and $a$. Identity maps leave $b_i(z)$ fixed. For a subsequent parameterized map $c:G\\times H\\to J$ and $h:\\Delta^n\\to H$, both composite constructions have component $z\\mapsto c_{\\sigma i}(a_{\\sigma i}(b_i(z),(kq_n\\pi_i)(z)),(hq_n\\pi_i)(z))$. Thus composition and units agree, also for a shared parameter via its diagonal. These formulas before and after base restriction use the identical component $a_{u\\tau i}$ and hence prove equality on every parameterized map.",
+   "uses": [
+    "lem-coef-cone-presheaf-adjunction",
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 2.2.2.12, p.78; pairing/projection and parameter formulas"
+   }
+  },
+  {
+   "text": "For $V\\xrightarrow{w}T\\xrightarrow{u}S$ and $\\rho:\\Delta^n\\to V$, every normalized label and action in Steps 2–4 uses $F(uw\\rho i)$ and the action of $F$ on $\\mathfrak C[uw\\rho]$. Associativity of precomposition and functoriality of $\\mathfrak C$ make these the same formulas as two successive restrictions. An identity base map changes none of them. The slice mapping simplicial set in degree $r$ consists of the component maps on $X_m\\times(\\Delta^r)_m$ for every $m$, commuting with operators; restriction reindexes only the base simplex label. That reindexing is also strictly associative and unital. This proves the asserted identity/composite laws for both enriched restriction functors and the equality between them.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.1.1 and restriction squares of Proposition 2.2.3.11; identities in normalized coordinates"
+   }
+  },
+  {
+   "text": "Diagram restriction retains the very same value $F(ut)$ at each vertex $t$. Thus objectwise weak homotopy equivalences and Kan values, hence projective fibrancy, are preserved by the objectwise classes of [lem-coef-cone-presheaf-adjunction]. For a right-horn lifting problem in $T\\times_S E\\to T$, project its upper horn map to $E$ and compose its lower simplex map with $u$. The right-fibration property supplies a simplex in $E$ over that composite. Pair it with the prescribed simplex in $T$ to obtain a filler in the pullback; its restrictions are the original horn pair. At a vertex $t$, a fiber simplex is a pair consisting of the unique constant simplex at $t$ and a simplex of $E$ over $u(t)$, so projection identifies this fiber with $E_{u(t)}$, naturally on maps. Fiberwise weak equivalences are consequently preserved. This uses arbitrary simplicial bases and all right horns of the cited definition, without a slice model structure.",
+   "uses": [
+    "lem-coef-cone-presheaf-adjunction",
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Preservation assertions in the proof of Proposition 2.2.3.11; direct component and lifting calculations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-cone-boundary-projective-cells",
+  "lem-coef-cone-presheaf-adjunction",
+  "lem-coef-pinched-cube-latching"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Explicit universal-property and normalized-coordinate proof of the comparisons of Proposition 2.2.1.1 and Remark 2.2.2.12; elementary preservation clauses used in Proposition 2.2.3.11. Blueprint paragraph 2 is ancestry only and contains no cone-coordinate argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,10 +148,94 @@
    "results": "Logged 17 hit(s): Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean; Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean; Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean; Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean; Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean; Mathlib/AlgebraicTopology/ModelCategory/Instances.lean; Mathlib/AlgebraicTopology/ModelCategory/Instances.lean; Mathlib/AlgebraicTopology/ModelCategory/Instances.lean. Search subdirectory: AlgebraicTopology. Recorded hit names inspected; related declaration sources checked.",
    "date": "2026-10-17",
    "verdict": "no match: none states enriched cone unstraightening or its strict base naturality. The generic model fibration base-change instance (Instances.lean:123) has no unstraightening; StrictSegal and product unit identities have different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "unstraighten|straightening|SingQ|conePresheaf",
+   "results": "Recorded search returned 0 hits: . ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned general sheaf-cone, enriched-cone, Cech-nerve and StrictSegal extension statements do not construct coherent cone unstraightening or its base restriction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of enriched simplicial presheaves commutes with the cone unstraightening functor",
+   "results": "Recorded search returned 8 hits: CategoryTheory.Sheaf.ΓRes, CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom, CategoryTheory.Sheaf.coneΓ_π_app, CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivFunctor_map_hom, CategoryTheory.Enriched.HasConicalLimit.of_equiv, CategoryTheory.Limits.coneOfConeUncurry_pt, CategoryTheory.Sheaf.isColimitSheafifyCocone. ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned general sheaf-cone, enriched-cone, Cech-nerve and StrictSegal extension statements do not construct coherent cone unstraightening or its base restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial cone unstraightening is strictly natural under pullback of the base simplicial set, including enriched maps",
+   "results": "Recorded search returned 8 hits: SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃, SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂, SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁, SSet.Truncated.liftOfStrictSegal.naturalityProperty, SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift, SSet.Truncated.liftOfStrictSegal.naturalityProperty_eq_top, SSet.Truncated.liftOfStrictSegal, CategoryTheory.SimplicialNerve. ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned general sheaf-cone, enriched-cone, Cech-nerve and StrictSegal extension statements do not construct coherent cone unstraightening or its base restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unstraightening of a simplicial presheaf described by cone transformations on each simplex and restriction in the base",
+   "results": "Recorded search returned 8 hits: SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift, SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁, SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂, SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃, LightProfinite.Extend.functor_obj, CategoryTheory.SimplicialNerve, SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂, instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex. ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned general sheaf-cone, enriched-cone, Cech-nerve and StrictSegal extension statements do not construct coherent cone unstraightening or its base restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict base naturality of the enriched cone unstraightening under pullback of simplicial sets",
+   "results": "Recorded search returned 8 hits: SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃, CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom_π_app, SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂, SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁, CategoryTheory.Enriched.HasConicalPullbacks, SSet.Truncated.liftOfStrictSegal.naturalityProperty, CategoryTheory.Enriched.HasConicalPullback, CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom_pt. ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned general sheaf-cone, enriched-cone, Cech-nerve and StrictSegal extension statements do not construct coherent cone unstraightening or its base restriction."
+  },
+  {
+   "tool": "loogle",
+   "query": "unstraightening, simplicial presheaf, right fibration, base change",
+   "results": "Recorded search returned 0 hits: . loogle: unknown identifier 'unstraightening'",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned general sheaf-cone, enriched-cone, Cech-nerve and StrictSegal extension statements do not construct coherent cone unstraightening or its base restriction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of enriched simplicial presheaves commutes strictly with cone unstraightening and preserves projective fibrations and weak equivalences",
+   "results": "Recorded search returned 8 hits: CategoryTheory.Enriched.FunctorCategory.coneFunctorEnrichedHom, TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, CategoryTheory.Sheaf.coneΓ_π_app, CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom, CategoryTheory.Enriched.HasConicalLimit.of_equiv, CategoryTheory.Sheaf.isColimitSheafifyCocone, CategoryTheory.PreservesFiniteLimitsOfFlat.fac, CategoryTheory.SmallObject.SuccStruct.restrictionLTOfCoconeIso. ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned general sheaf-cone, enriched-cone, Cech-nerve and StrictSegal extension statements do not construct coherent cone unstraightening or its base restriction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simplicial presheaf cone unstraightening is naturally isomorphic to restriction in the base, strictly equal in cone label coordinates",
+   "results": "Recorded search returned 8 hits: CategoryTheory.Sheaf.coneΓ_π_app, AlgebraicGeometry.PresheafedSpace.restrictTopIso, AlgebraicGeometry.PresheafedSpace.toRestrictTop, CategoryTheory.SmallObject.SuccStruct.restrictionLTOfCoconeIso, CategoryTheory.Presheaf.conesEquivSieveCompatibleFamily, CategoryTheory.Limits.Cones.ext.congr_simp, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverseObj, CategoryTheory.Limits.PullbackCone.isoMk. ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned general sheaf-cone, enriched-cone, Cech-nerve and StrictSegal extension statements do not construct coherent cone unstraightening or its base restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "unstraighten|straightening|conePresheaf",
+   "results": "Recorded search returned 0 hits: . ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned general sheaf-cone, enriched-cone, Cech-nerve and StrictSegal extension statements do not construct coherent cone unstraightening or its base restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized cone labels for unstraightening commute strictly with pullback of simplicial bases and parameterized maps",
+   "results": "Recorded search returned 8 hits: SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃, SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂, SimplicialObject.Splitting.IndexSet.fac_pull_assoc, SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁, SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift, CategoryTheory.SimplicialObject.augmentedCechNerve_obj_left_map, CategoryTheory.Arrow.mapCechNerve_app, CategoryTheory.SimplicialObject.augmentedCechNerve_map_left_app. ",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned general sheaf-cone, enriched-cone, Cech-nerve and StrictSegal extension statements do not construct coherent cone unstraightening or its base restriction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Enriched, SSet",
+   "results": "Recorded search returned 0 hits: . loogle: unknown identifier 'CategoryTheory.Enriched'",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned general sheaf-cone, enriched-cone, Cech-nerve and StrictSegal extension statements do not construct coherent cone unstraightening or its base restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "coneΓ_π_app|restrictTopIso|conesEquivSieveCompatibleFamily|fac_aux₃|coneFunctorEnrichedHom",
+   "results": "22 hits. Relevant definitions inspected: Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:336, Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:169, Mathlib/CategoryTheory/Sites/Sheaf.lean:100. Other hits are ordinary ringed-space restriction isomorphisms and references to these declarations.",
+   "date": "2026-10-17",
+   "verdict": "no match: enrichedHom limits, strict Segal coskeleton lifts and sieve-compatible ordinary presheaf families have different statements; none supplies cone unstraightening."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-unstraightening-homotopy-descent",
@@ -98,5 +265,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-unstraightening-strict-base-change",
+  "worker": "stage1",
+  "summary": "Repaired the saved four-step split to six explicit coordinate calculations. Clarified that strict equality uses normalized cone labels, canonically isomorphic to raw cone natural transformations; the latter alone give a natural isomorphism. Expanded the cone-pushout comparison, constant-parameter factor, pairing and composition formulas, and horn fillers. Reused the existing cone-boundary projective-cells statement; no new nodes. Final review retained the base factor in the constant-diagram calculation and made parameterized composition explicit on each mapping-space component.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint: derived coefficient adjunction and limit comparison. The coherent-diagram comparison is an extracted foundational tool, not text asserted to occur verbatim in that paragraph."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N6-e48c0b2c9",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-e48c0b2c9 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, the corrected paragraph and all six steps. I also read all five cited statements, the citer homotopy-descent Step 3, and HTT §2.2.1, Prop 2.2.1.1 (pp.73-74), Rem 2.2.2.12 (p.78) and Prop 2.2.3.11 (pp.83-84). The worker's statement correction is right and is not a weakening. Raw U_S simplices are transformations indexed by the objects of C[S], so for S two points, T one point and F terminal, the sets are different singletons, and HTT 2.2.1.1 claims only isomorphisms. The added paragraph asserts equality for normalized cone labels b_i:B_n(i,v)->F(σi) and keeps the canonical isomorphism for raw labels. Every clause is kept, and the citer, which needs only a strictly base-natural model, is unaffected. Step checks: Step 1: the collage E_F plus the cone-boundary clauses (A=C[S], old subcategory exact, M(v,c) empty, M(v,v)=pt) and the pushout universal property give exactly the labels and action equations. Step 2: both sides use F(uτi) and F(C[u]C[τ]h)=F(C[uτ]h), so they are equal. Step 3: C[J^n]=C[Δ^{n+1}] glued to C[Δ^0] along C[Δ^n], and cone-boundary with S=Δ^0 gives labels Hom(Q^n,K) and total object S×Sing_Q K. Step 4: π_i(z∘h)=π_j(z) holds, the action equation for a(b_i, kq_nπ_i) holds, and composition and units agree, matching HTT 2.2.2.12. Step 5: strict functoriality by precomposition. Step 6: Kan values are preserved, right-horn fillers come by pairing, and fibers are E_{u(t)}. Edge cases checked: empty S, S=Δ^0, n=0, and the discrete two-point base. All citations are in unit sk-prop-sf-biduality-general, there is no SGA, no cycle and no new node. rg over the DAG for unstraighten and Sing_Q found no duplicate. FIX: source.place still claimed a local HTT reading copy, contradicting the report and literature/. I corrected it in fixes/dag/nodes/sec-six-functors/lem-coef-unstraightening-strict-base-change.json. No tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -102,19 +102,27 @@
    }
   },
   {
-   "text": "For a refinement $u:d\\to e$, put $V=\\overline X_d\\times_{\\overline X_e}X$, with open $b:V\\to\\overline X_d$, projection $q:V\\to X$, and the section $s:X\\to V$ induced by $j_d$. By [lem-weil-pbc-proper-open-section], $s$ identifies $X$ with an open-and-closed component of $V$ and $qs=1$. There is a canonical open-restriction isomorphism $j_e^*Ru_*N\\cong Rq_*b^*N$ on unbounded inputs. Here is its construction, not an invocation of an etale comparison: choose a K-injective resolution $N\\to I$ using [lem-pur-kinjective-degreewise-existence]; restriction to an open preserves K-injectivity, since for any acyclic $C$ its Hom into $b^*I$ is the Hom of $b_!C$ into $I$, which is zero by exactness of $b_!$ and [def-pur-kinjective-complex]. The sheaf adjunction [lem-weil-extension-by-zero-adjunction] extends termwise to chain maps and homotopies, and [lem-weil-extension-by-zero-exact] makes its left adjoint preserve acyclic complexes. Open restriction is exact by [def-weil-pbc-proetale-operations]; its interpretation as restriction of the localized site is [lem-weil-proetale-weakly-etale-localization]. The section formula [def-weil-proetale-module-direct-image] identifies $j_e^*u_*I$ with $q_*b^*I$ termwise. The computation on K-injectives [lem-weil-pbc-kinjective-total-derived] gives the asserted comparison. Applied to $N=j_{d!}K$, the Cartesian open square with sides $j_d,b,s,1_X$ gives $b^*j_{d!}K=s_!K$ by [lem-cbc-proetale-extension-zero-base-change]. Here the component calculation is explicit: for every site object $W\\to V$, its two inverse-image opens over $sX$ and $V\\setminus sX$ cover $W$ with empty overlap. The sheaf axiom identifies its sections with the product of the sections on those two opens. Restriction and gluing therefore identify module sheaves, complexes and chain homotopies on $V$ with pairs on those components; exactness is componentwise, and $s_!K$ is $(K,0)$ by its defining extension presheaf. For an acyclic pair $(C_1,C_2)$, maps into $(I,0)$ are exactly maps $C_1\\to I$ and hence null-homotopic when $I$ is K-injective on $X$. Thus $(I,0)$ is K-injective on $V$. The direct-image section formula gives $(q_*s_!I)(W)=I(W)$ for $W\\to X$, since $qs=1$ and the complementary component contributes zero. We obtain a natural isomorphism $\\lambda_u:j_e^*Ru_*j_{d!}K\\cong K$, normalized by restriction to this component.",
+   "text": "For a refinement $u:d\\to e$, put $V=\\overline X_d\\times_{\\overline X_e}X$, with open $b:V\\to\\overline X_d$, projection $q:V\\to X$, and section $s:X\\to V$. By [lem-weil-pbc-proper-open-section], $s$ is a clopen section of $q$. Use the direct-image clause of [lem-weil-pbc-ringed-projection-restriction] with the constant coefficient sheaf $A_{\\overline X_e}$ and the site object $X\\to\\overline X_e$. The identification of geometric open restriction with localized restriction is [lem-weil-proetale-weakly-etale-localization]. It gives the canonical natural isomorphism $j_e^*Ru_*N\\cong Rq_*b^*N$ on all unbounded inputs. For $N=j_{d!}K$, the Cartesian square with sides $j_d,b,s,1_X$ gives $b^*j_{d!}K\\cong s_!K$ by [lem-cbc-proetale-extension-zero-base-change].",
    "uses": [
     "lem-weil-pbc-proper-open-section",
-    "lem-pur-kinjective-degreewise-existence",
-    "lem-weil-extension-by-zero-adjunction",
-    "lem-weil-extension-by-zero-exact",
-    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-ringed-projection-restriction",
     "lem-weil-proetale-weakly-etale-localization",
-    "def-pur-kinjective-complex",
-    "def-weil-proetale-module-direct-image",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-cbc-proetale-extension-zero-base-change",
-    "def-weil-extension-by-zero"
+    "lem-cbc-proetale-extension-zero-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
+    "place": "Clause (b), conditional ambient adjoint and compactification independence; expanded agent proof"
+   }
+  },
+  {
+   "text": "Apply [lem-sp-clopen-section-component] to the clopen section $s$ of $q$. Choose a K-injective resolution $K\\to J$ on $X$ by [lem-pur-kinjective-degreewise-existence]; the Grothendieck hypothesis is supplied by [lem-pur-ringed-site-grothendieck-abelian]. Exactness of $s_!$ [lem-weil-extension-by-zero-exact] makes $s_!K\\to s_!J$ a quasi-isomorphism. The component lemma makes $s_!J$ K-injective and gives the natural chain isomorphism $q_*s_!J\\cong J$, by restriction to the $X$ component. Computation of total derived image on K-injectives [lem-weil-pbc-kinjective-total-derived] therefore gives $Rq_*s_!K\\cong K$. Composing with step 6 gives $\\lambda_u:j_e^*Ru_*j_{d!}K\\cong K$, with exactly this component normalization. Naturality of the component chain isomorphism and derived comparison makes $\\lambda_u$ natural in $K$.",
+   "uses": [
+    "lem-sp-clopen-section-component",
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-weil-extension-by-zero-exact",
+    "lem-weil-pbc-kinjective-total-derived"
    ],
    "elementary": false,
    "source": {
@@ -137,11 +145,13 @@
    }
   },
   {
-   "text": "For the identity refinement, $\\alpha_1$ is the identity under the identity direct-image comparison, since its restriction is $1_K$. For composable refinements $u:d\\to e$, $v:e\\to h$, compare $\\alpha_{vu}$ with $Rv_*(\\alpha_u)\\circ\\alpha_v$, using the canonical $R(vu)_*\\cong Rv_*Ru_*$ of [lem-weil-derived-direct-image-composition]. They are equal: both source and target are supported on $j_hX$ by step 7 (the target identifies with $R(vu)_*j_{d!}K$), and restricting to $X$ gives the identity under $\\lambda_{vu}$. To check that normalization, take a K-injective resolution on $\\overline X_d$. Direct image preserves K-injectives by [lem-weil-pbc-right-adjoint-preserves-kinjective], applied to its exact inverse-image left adjoint in [def-weil-pbc-proetale-operations], and open restriction preserves them by step 6. Thus the successive direct images and restrictions are computed on this common model: every open restriction is literal restriction of sections, the component $X$ is the same component in the iterated fibre product, and both composites there are $1_K$; the associativity normalization of the cited composition isomorphism identifies the two models. Thus, writing the composition comparison implicitly, $\\lambda_{vu}\\circ j_h^*(Rv_*\\alpha_u\\circ\\alpha_v)=1_K=\\lambda_{vu}\\circ j_h^*\\alpha_{vu}$; here naturality of restriction on sections gives the first equality. Full faithfulness from step 7 gives equality before restriction. Thus the proper/open comparisons satisfy identity and composition equations, as actual maps rather than merely unspecified isomorphisms.",
+   "text": "For the identity refinement, $\\alpha_1$ is the identity under the identity direct-image comparison, since its restriction is $1_K$. For composable refinements $u:d\\to e$, $v:e\\to h$, compare $\\alpha_{vu}$ with $Rv_*(\\alpha_u)\\circ\\alpha_v$, using the canonical $R(vu)_*\\cong Rv_*Ru_*$ of [lem-weil-derived-direct-image-composition]. They are equal: both source and target are supported on $j_hX$ by step 8 (the target identifies with $R(vu)_*j_{d!}K$), and restricting to $X$ gives the identity under $\\lambda_{vu}$. To check that normalization, take a K-injective resolution on $\\overline X_d$. Direct image preserves K-injectives by [lem-weil-pbc-right-adjoint-preserves-kinjective], applied to its exact inverse-image left adjoint in [def-weil-pbc-proetale-operations], and open restriction preserves them by [lem-pur-kinjective-restrict-localized] under the site identification [lem-weil-proetale-weakly-etale-localization]. Thus the successive direct images and restrictions are computed on this common model: every open restriction is literal restriction of sections, the component $X$ is the same component in the iterated fibre product, and both composites there are $1_K$; the associativity normalization of the cited composition isomorphism identifies the two models. Thus, writing the composition comparison implicitly, $\\lambda_{vu}\\circ j_h^*(Rv_*\\alpha_u\\circ\\alpha_v)=1_K=\\lambda_{vu}\\circ j_h^*\\alpha_{vu}$; here naturality of restriction on sections gives the first equality. Full faithfulness from step 8 gives equality before restriction. Thus the proper/open comparisons satisfy identity and composition equations, as actual maps rather than merely unspecified isomorphisms.",
    "uses": [
     "lem-weil-derived-direct-image-composition",
     "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "def-weil-pbc-proetale-operations"
+    "def-weil-pbc-proetale-operations",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-weil-proetale-weakly-etale-localization"
    ],
    "elementary": false,
    "source": {
@@ -150,7 +160,7 @@
    }
   },
   {
-   "text": "For $u:d\\to e$, proper composition and step 7 give $F_d=R(p_d)_*j_{d!}\\cong R(p_e)_*Ru_*j_{d!}\\xrightarrow{R(p_e)_*\\alpha_u^{-1}}R(p_e)_*j_{e!}=F_e$; call the composite $\\theta_u$. By [lem-weil-derived-direct-image-composition] and step 8, $\\theta_1=1$ and $\\theta_{vu}=\\theta_v\\theta_u$. The category of compactifications is cofiltered by [lem-cbc-compactifiable-cofiltered], applicable because $f$ is separated finite type, has the given compactification, and its open is quasi-compact by step 1. Hence for any $d,e$ choose a common refinement $r$ with arrows $a:r\\to d$, $b:r\\to e$ and set $\\theta_{d,e}=\\theta_b\\theta_a^{-1}$. For two such choices, choose a further common refinement and then equalize the two resulting parallel arrows to $d$ and to $e$; functoriality of the $\\theta_u$ makes the two expressions equal after cancelling the invertible maps from that further refinement. Thus the comparison is independent of the choice. For three objects, compute through one common refinement and cancel the map to the middle object: $\\theta_{e,h}\\theta_{d,e}=\\theta_{d,h}$. These comparisons agree with those of individual refinements.",
+   "text": "For $u:d\\to e$, proper composition and step 8 give $F_d=R(p_d)_*j_{d!}\\cong R(p_e)_*Ru_*j_{d!}\\xrightarrow{R(p_e)_*\\alpha_u^{-1}}R(p_e)_*j_{e!}=F_e$; call the composite $\\theta_u$. By [lem-weil-derived-direct-image-composition] and step 9, $\\theta_1=1$ and $\\theta_{vu}=\\theta_v\\theta_u$. The category of compactifications is cofiltered by [lem-cbc-compactifiable-cofiltered], applicable because $f$ is separated finite type, has the given compactification, and its open is quasi-compact by step 1. Hence for any $d,e$ choose a common refinement $r$ with arrows $a:r\\to d$, $b:r\\to e$ and set $\\theta_{d,e}=\\theta_b\\theta_a^{-1}$. For two such choices, choose a further common refinement and then equalize the two resulting parallel arrows to $d$ and to $e$; functoriality of the $\\theta_u$ makes the two expressions equal after cancelling the invertible maps from that further refinement. Thus the comparison is independent of the choice. For three objects, compute through one common refinement and cancel the map to the middle object: $\\theta_{e,h}\\theta_{d,e}=\\theta_{d,h}$. These comparisons agree with those of individual refinements.",
    "uses": [
     "lem-weil-derived-direct-image-composition",
     "lem-cbc-compactifiable-cofiltered"
@@ -162,7 +172,7 @@
    }
   },
   {
-   "text": "Fix the chosen compactification, denoted $c$ in the following comparison formulas (distinct from the integer bound), and abbreviate $t_d=\\theta_{d,c}:F_d\\cong F_c$, so $t_c=1$ and $t_d=t_e\\theta_u$ for $u:d\\to e$. Define $G_d=G_c$ for every $d$, and $\\Phi^d(h)=\\Phi^c(h\\circ t_{d,K}^{-1})$. These are natural bijections, hence give adjunctions by [lem-weil-pbc-adjunction-of-natural-bijection]. Their units and counits are explicitly $\\eta^d_K=G_c(t_{d,K}^{-1})\\eta^c_K$ and $\\varepsilon^d_L=\\varepsilon^c_L\\,t_{d,G_cL}$. Set every right-adjoint comparison $\\rho_u:G_e\\to G_d$ equal to $1_{G_c}$. From $t_d=t_e\\theta_u$ we get $t_e^{-1}=\\theta_u t_d^{-1}$, hence $\\eta^e_K=G_c(\\theta_{u,K})\\eta^d_K$ and $\\varepsilon^d_L=\\varepsilon^e_L\\theta_{u,G_cL}$. These are exactly the two compatibility equations in [def-weil-ambient-exceptional-adjoint], with $\\rho_u=1$. Identity and composite comparisons for the right adjoints are identities, while those for the left adjoints were checked in step 9. Together with the given integer $c$ and its FullCD condition, this constructs every component of the stated ambient datum.",
+   "text": "Fix the chosen compactification, denoted $c$ in the following comparison formulas (distinct from the integer bound), and abbreviate $t_d=\\theta_{d,c}:F_d\\cong F_c$, so $t_c=1$ and $t_d=t_e\\theta_u$ for $u:d\\to e$. Define $G_d=G_c$ for every $d$, and $\\Phi^d(h)=\\Phi^c(h\\circ t_{d,K}^{-1})$. These are natural bijections, hence give adjunctions by [lem-weil-pbc-adjunction-of-natural-bijection]. Their units and counits are explicitly $\\eta^d_K=G_c(t_{d,K}^{-1})\\eta^c_K$ and $\\varepsilon^d_L=\\varepsilon^c_L\\,t_{d,G_cL}$. Set every right-adjoint comparison $\\rho_u:G_e\\to G_d$ equal to $1_{G_c}$. From $t_d=t_e\\theta_u$ we get $t_e^{-1}=\\theta_u t_d^{-1}$, hence $\\eta^e_K=G_c(\\theta_{u,K})\\eta^d_K$ and $\\varepsilon^d_L=\\varepsilon^e_L\\theta_{u,G_cL}$. These are exactly the two compatibility equations in [def-weil-ambient-exceptional-adjoint], with $\\rho_u=1$. Identity and composite comparisons for the right adjoints are identities, while those for the left adjoints were checked in step 10. Together with the given integer $c$ and its FullCD condition, this constructs every component of the stated ambient datum.",
    "uses": [
     "lem-weil-pbc-adjunction-of-natural-bijection",
     "def-weil-ambient-exceptional-adjoint"
@@ -175,40 +185,40 @@
   }
  ],
  "proof_deps": [
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "def-weil-pbc-proetale-site",
-  "lem-weil-proetale-module-direct-image-left-exact",
-  "def-weil-full-cohomological-dimension",
-  "lem-sp-kinjective-computes",
+  "def-weil-ambient-exceptional-adjoint",
   "def-weil-derived-direct-image",
-  "lemma-nagata-open-immersion-qc-over-separated-target",
-  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-  "lem-weil-pbc-profinite-point-pullback",
-  "def-weil-pbc-constant-sheaf",
-  "lem-weil-pbc-derived-functor-injective-vanishing",
-  "lem-pur-kinjective-degreewise-existence",
-  "lem-kun-grothendieck-derived-coproducts",
-  "lem-kun-finite-cd-acyclic-complex",
-  "prop-exc-open-adjoint",
-  "lem-weil-extension-by-zero-exact",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-grothendieck-derived-brown-right-adjoint",
-  "lem-weil-pbc-proper-open-section",
-  "lem-weil-extension-by-zero-adjunction",
-  "def-weil-pbc-proetale-operations",
-  "lem-weil-proetale-weakly-etale-localization",
-  "def-pur-kinjective-complex",
-  "def-weil-proetale-module-direct-image",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-cbc-proetale-extension-zero-base-change",
   "def-weil-extension-by-zero",
+  "def-weil-full-cohomological-dimension",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-proetale-site",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-grothendieck-derived-brown-right-adjoint",
+  "lem-kun-finite-cd-acyclic-complex",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sp-clopen-section-component",
+  "lem-sp-kinjective-computes",
   "lem-sp-proper-open-derived-support",
   "lem-weil-derived-direct-image-composition",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-cbc-compactifiable-cofiltered",
+  "lem-weil-extension-by-zero-exact",
   "lem-weil-pbc-adjunction-of-natural-bijection",
-  "def-weil-ambient-exceptional-adjoint"
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-proper-open-section",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-projection-restriction",
+  "lem-weil-proetale-module-direct-image-left-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "prop-exc-open-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
@@ -386,7 +396,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "cor-exc-base-change-open-immersion-general",
   "by": "worker",
@@ -395,11 +405,11 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-existence",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-sp-fullcd-ambient-adjoint",
   "worker": "stage1",
-  "summary": "Split FullCD-to-unbounded-coproducts through the existing bounded-below condensed continuity theorem specialized to finite partial sums of sheaves, acyclic terms and Brown; constructed normalized refinement comparisons from a smaller proper-support obligation and transported the adjunction explicitly. Second reading removed a redundant new higher-image node. One genuine statement-only obligation remains.",
-  "blueprint": "Ancestor cor-exc-base-change-open-immersion-general, proof first and second sentences, missing ambient adjunction for the chosen proper part; unit sk-prop-sf-existence clause (b). Steps 1–5 prove its coproduct/adjoint claim; 6–10 provide the extra ambient refinement coherence required by the updated datum.",
+  "summary": "Repair of the human return: preserved the statement, Lean record and FullCD/Brown/compactification route; replaced former step 6 by short localization and clopen-component steps. Reused the existing unbounded ringed-site restriction theorem instead of creating its duplicate. One new statement-only node extracts the pro-etale clopen sheaf/complex product, K-injective insertion and section formula; corrected all subsequent step references.",
+  "blueprint": "Ancestor cor-exc-base-change-open-immersion-general, proof first and second sentences, missing ambient adjunction for the chosen proper part; unit sk-prop-sf-existence clause (b). Steps 1–5 prove coproduct preservation and Brown adjoint; new steps 6–7 carry the refinement open-restriction and clopen component calculations; steps 8–11 establish coherence and compactification independence.",
   "tool_uses": [
    {
     "node": "lem-pur-ringed-site-grothendieck-abelian",
@@ -427,7 +437,7 @@
    },
    {
     "node": "lem-weil-extension-by-zero-exact",
-    "why": "Steps 4 and 6: exactness of the open extension functor; a sheaf operation tool."
+    "why": "Steps 4 and 7: exactness of the open extension functor; a sheaf operation tool."
    },
    {
     "node": "lem-grothendieck-derived-brown-right-adjoint",
@@ -438,16 +448,12 @@
     "why": "Step 6: the section in the proper/open fibre product is clopen; an elementary geometric tool independent of cohomological comparison."
    },
    {
-    "node": "lem-weil-extension-by-zero-adjunction",
-    "why": "Step 6: sheaf-level open adjunction supplies the Hom-complex calculation preserving K-injectivity under restriction."
-   },
-   {
     "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "Steps 6 and 7: identifies open restriction with localization of the pro-etale site and fixes its section calculation."
+    "why": "Steps 6, 8 and 9: identifies open restriction with localization of the pro-etale site and fixes its section calculation."
    },
    {
     "node": "lem-weil-pbc-kinjective-total-derived",
-    "why": "Step 6: computation of a total derived functor on K-injective resolutions; generic homological algebra."
+    "why": "Step 7: computation of a total derived functor on K-injective resolutions; generic homological algebra."
    },
    {
     "node": "lem-cbc-proetale-extension-zero-base-change",
@@ -455,11 +461,23 @@
    },
    {
     "node": "lem-weil-derived-direct-image-composition",
-    "why": "Steps 8 and 9: ordinary finite-level unbounded direct-image composition, including identity and associativity, for constructing coherent refinement comparisons."
+    "why": "Steps 9 and 10: ordinary finite-level unbounded direct-image composition, including identity and associativity, for constructing coherent refinement comparisons."
    },
    {
     "node": "lem-cbc-compactifiable-cofiltered",
-    "why": "Step 9: cofilteredness for already supplied compactifications over an arbitrary base, used only to remove the choice of common refinement."
+    "why": "Step 10: cofilteredness for already supplied compactifications over an arbitrary base, used only to remove the choice of common refinement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-restriction",
+    "why": "Step 6 uses only its generic unbounded ringed-site direct-image localization clause, specialized to constant finite coefficients and an open site object; no smooth-purity existence-unit node states this comparison."
+   },
+   {
+    "node": "prop-exc-open-adjoint",
+    "why": "Steps 4 and 8: the derived open adjunction j_! -| j^* on the full ordinary pro-etale derived categories, used for coproduct preservation of j_! and full faithfulness of j_{e!}; a generic sheaf-operation tool, no existence-unit node states it."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Step 9: termwise restriction of a K-injective complex to a localized site stays K-injective; generic homological algebra on ringed sites."
    }
   ]
  },
@@ -478,15 +496,18 @@
   "lem-weil-pbc-kinjective-total-derived",
   "lem-cbc-proetale-extension-zero-base-change",
   "lem-weil-derived-direct-image-composition",
-  "lem-cbc-compactifiable-cofiltered"
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-weil-pbc-ringed-projection-restriction",
+  "prop-exc-open-adjoint",
+  "lem-pur-kinjective-restrict-localized"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q34-eebdf8020",
-  "group": "Q34",
+  "reviewer": "NT-cc-Q58-2d139784c",
+  "group": "Q58",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-eebdf8020 (reviewer sub-agent of L); spot-checked: Read all ten steps, the new support lemma, cited statements, unit route, and source passages. Mathematical split accepted; coefficient categories and canonical maps remain distinct and unchanged. Recorded 15 accepted tool uses in the corrected parent JSON. Full checks and source locations are in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-2d139784c (reviewer sub-agent of L); spot-checked: Read in full: the item, all 11 steps, every cited statement, unit sk-prop-sf-existence (route {sk-prop-sf-existence, sk-prop-sf-comparison}), ancestor cor-exc-base-change-open-immersion-general (master and main-20261015), the blueprint proof of lem-weil-pbc-clopen-section-direct-image, and Stacks 09AE (proetale.tex:5050). The repaired steps 6-7 are correct. Step 6: lem-weil-pbc-proper-open-section (T1=Xbar_d, T2=Xbar_e) makes s a clopen section of q. lem-weil-pbc-ringed-projection-restriction, applied at the site object j_e, gives an unbounded iso j_e^*Ru_* = Rq_*b^* once the sites are identified (lem-weil-proetale-weakly-etale-localization). The square (X,1,s,j_d,b) is Cartesian because V contains j_d(X), so lem-cbc-proetale-extension-zero-base-change gives b^*j_{d!}K = s_!K. Step 7: s_! of a K-injective resolution, the new component lemma and lem-weil-pbc-kinjective-total-derived together give lambda_u. Steps 1-5 and 8-11 checked again; in step 11 I verified the unit and counit equations of def-weil-ambient-exceptional-adjoint with rho=1 by direct computation. New node lem-sp-clopen-section-component is true. The clopen decomposition W = W_X disjoint-union W_Z gives Mod(V) = Mod(X) x Mod(Z), s_! is (M,0), K-injectivity is preserved because Hom_K((K_X,K_Z),(I,0)) = Hom_K(K_X,I), and q_*s_!M(W) = M(W). Tested on Z empty, X empty and the fold map X+X -> X. It is statement-only, has three kinds of Mathlib search, correct blueprint.from (via the item), and is strictly smaller than the item. It is not a duplicate of lem-weil-pbc-clopen-section-direct-image (etale D^+ only), lem-pur-finite-clopen-derived-decomposition (finite type over Fq-bar only), lem-weil-pbc-etale-sheaf-clopen-product, the recollement nodes or the proper-open coherence nodes. Accepted the tool uses listed in review.md, including the new lem-weil-pbc-ringed-projection-restriction. FIX (bookkeeping only): in the item's split_report.tool_uses I declared the missing off-route uses prop-exc-open-adjoint (steps 4 and 8) and lem-pur-kinjective-restrict-localized (step 9), dropped lem-weil-extension-by-zero-adjunction (no longer cited) and corrected five stale step numbers. In the new node, blueprint.from.place now says step 7 instead of 'former step 6'. The report lists a citations.json that is not in the commit; it is not a DAG file. No statement changed and no target weakened.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-16",
