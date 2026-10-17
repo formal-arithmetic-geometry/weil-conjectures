@@ -147,5 +147,23 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-136a3bad0 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is self-contained (valuation ring defined inline, stmt_dep def-weil-field) and true. I tested it on A=F (rank 0), on Z_(p) (Gamma=Z, rank 1) and on F_2 (A=F forced). The parent lem-trf-abhyankar-finite-type-field-height (step 3) applies it to A cap F and uses exactly the bound rrk<=1. Step 1 (F_p): since x^{p-1}=1, x=(x^{-1})^{p-2}, so A=F; the p=2 case also holds. Step 3: Gamma is cyclic by unique factorization, given that at most one prime is non-invertible. Steps 1 and 3 are correct and elementary. One repairable fault, in step 2: it defined a nonunit as a nonzero non-invertible element and then claimed a sum of nonunits is a nonunit. That is false for r+(-r)=0, and the phrase 'zero causes no issue' did not fix it. The inverse computations and the Bezout argument themselves are correct. I rewrote step 2 using m={a in A: a=0 or a^{-1} not in A}, proving closure under A-multiples and under addition and that 1 is not in m, and aligned step 3's wording. The fix file is fixes/dag/nodes/sec-trace-formula/lem-trf-prime-field-valuation-rank.json; only the proof texts changed. There are no new nodes, no citations and no tool_uses, so there is no route issue on sk-i-curve-zero. An rg search of dag/nodes for prime field / prime subfield / rational rank / valuation ring with Q or F_p found no duplicate. Temkin (arXiv 0707.3953, §2.1 Cor 2.1.3(i)) is not in literature/, so I could not check the cited place; it is correctly reported as WANTED with proof_origin=agent. The proof does not depend on that source. The Mathlib searches cover all three kinds and their no-match verdict is plausible.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-79637f485",
+  "group": "NA",
+  "result": "pass",
+  "note": "Wrote review.md. Verified snapshot statements, dependency declarations, source, edge cases, universes, verbatim signature, documentation, uniqueness, and route-pivot compliance. Prescribed scompile.py rerun passed both checks without Lean diagnostics; wrapper discrepancy documented."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PrimeFieldValuationRank",
+  "declaration": "ValuationSubring.rationalRank_le_one_of_prime_field",
+  "file": "lean/Sheaf/RingTheory/PrimeFieldValuationRank.lean",
+  "statement": "theorem rationalRank_le_one_of_prime_field (F : Type u) [Field F] (hprime : Nonempty (F ≃+* ℚ) ∨ ∃ p : ℕ, Nat.Prime p ∧ Nonempty (F ≃+* ZMod p)) (A : ValuationSubring F) : Module.rank ℚ (TensorProduct ℤ ℚ (Additive A.ValueGroupˣ)) ≤ 1",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
