@@ -2,7 +2,7 @@
  "id": "lem-coef-ind-right-adjoint-coherent",
  "kind": "statement",
  "title": "Coherent right-adjoint Ind construction at a regular cardinal",
- "statement": "Use the universes, coherent infinity categories, spaces and colimits of [def-cbc-enhanced-diagrams-cones], the filtered completion and compactness conventions of [def-coef-presentable-infinity-category] and [lem-coef-ind-kappa-presentability], and mapping-space adjunctions of [lem-coef-presentable-infinity-adjoints]. Fix an infinite regular cardinal $\\lambda$ in the smaller universe. Let $\\operatorname{Cat}^{\\mathrm{rex}(\\lambda)}_\\infty$ be the infinity category whose objects are small infinity categories admitting all $\\lambda$-small colimits and whose morphisms preserve those colimits. For every such $C$, let $\\operatorname{Ind}_\\lambda(C)$ be the full subcategory of $\\operatorname{Fun}(C^{\\mathrm{op}},\\mathcal S)$ spanned by small $\\lambda$-filtered colimits of representables. Write $j_C:C\\to\\operatorname{Ind}_\\lambda(C)$ for its Yoneda embedding. If $u:C\\to D$ is a morphism in $\\operatorname{Cat}^{\\mathrm{rex}(\\lambda)}_\\infty$, write $j_D:D\\to\\operatorname{Ind}_\\lambda(D)$ for the target Yoneda embedding and let $L_u:\\operatorname{Ind}_\\lambda(C)\\to\\operatorname{Ind}_\\lambda(D)$ be the essentially unique extension of $j_Du$ along $j_C$ preserving small $\\lambda$-filtered colimits. Then $L_u$ has a right adjoint $u^*:\\operatorname{Ind}_\\lambda(D)\\to\\operatorname{Ind}_\\lambda(C)$ preserving small $\\lambda$-filtered colimits. The assignments $C\\mapsto\\operatorname{Ind}_\\lambda(C)$ and $u\\mapsto u^*$ form a coherent contravariant functor $\\operatorname{Cat}^{\\mathrm{rex}(\\lambda),\\mathrm{op}}_\\infty\\to\\operatorname{Cat}_\\infty$, including all higher simplices.",
+ "statement": "Use the universes, coherent infinity categories, spaces and colimits of [def-cbc-enhanced-diagrams-cones], the filtered completion and compactness conventions of [def-coef-presentable-infinity-category] and [lem-coef-ind-kappa-presentability], mapping-space adjunctions of [lem-coef-presentable-infinity-adjoints], and the infinity category $\\operatorname{Cat}_\\infty$ of quasicategories of [def-cbc-enhanced-cartesian-fibration], formed in a universe containing all the Ind categories below. Fix an infinite regular cardinal $\\lambda$ in the smaller universe. Let $\\operatorname{Cat}^{\\mathrm{rex}(\\lambda)}_\\infty$ be the infinity category whose objects are small infinity categories admitting all $\\lambda$-small colimits and whose morphisms preserve those colimits. For every such $C$, let $\\operatorname{Ind}_\\lambda(C)$ be the full subcategory of $\\operatorname{Fun}(C^{\\mathrm{op}},\\mathcal S)$ spanned by small $\\lambda$-filtered colimits of representables. Write $j_C:C\\to\\operatorname{Ind}_\\lambda(C)$ for its Yoneda embedding. If $u:C\\to D$ is a morphism in $\\operatorname{Cat}^{\\mathrm{rex}(\\lambda)}_\\infty$, write $j_D:D\\to\\operatorname{Ind}_\\lambda(D)$ for the target Yoneda embedding and let $L_u:\\operatorname{Ind}_\\lambda(C)\\to\\operatorname{Ind}_\\lambda(D)$ be the essentially unique extension of $j_Du$ along $j_C$ preserving small $\\lambda$-filtered colimits. Then $L_u$ has a right adjoint $u^*:\\operatorname{Ind}_\\lambda(D)\\to\\operatorname{Ind}_\\lambda(C)$ preserving small $\\lambda$-filtered colimits. The assignments $C\\mapsto\\operatorname{Ind}_\\lambda(C)$ and $u\\mapsto u^*$ form a coherent contravariant functor $\\operatorname{Cat}^{\\mathrm{rex}(\\lambda),\\mathrm{op}}_\\infty\\to\\operatorname{Cat}_\\infty$, including all higher simplices.",
  "source": {
   "document": "https://arxiv.org/html/1501.02161v3",
   "place": "Definition 10.4, lines 896-899 (the coherent Ind functor into presentable categories and right adjoints preserving filtered colimits). Read online 2026-10-17; no Stacks tag states this infinity-categorical result."
@@ -11,13 +11,111 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-presentable-infinity-category",
   "lem-coef-ind-kappa-presentability",
+  "lem-coef-presentable-infinity-adjoints",
+  "lem-coef-ind-kappa-extension",
+  "def-cbc-enhanced-cartesian-fibration"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal P(C)=\\operatorname{Fun}(C^{\\mathrm{op}},\\mathcal S)$ and denote the full inclusion of the given Ind category by $i_C$. Enlarge the ambient universe to contain $\\mathcal S$ and these functor categories. Compose the restriction to small categories of the coherent opposite functor $C\\mapsto C^{\\mathrm{op}}$, $u\\mapsto u^{\\mathrm{op}}$ of [lem-coef-cat-infinity-opposite-involution] with the internal-Hom functor $\\operatorname{Fun}(-,\\mathcal S)$, contravariant in its first variable, of the cartesian closed $\\operatorname{Cat}_\\infty$; this gives the coherent presheaf functor $C\\mapsto\\mathcal P(C)$, $u\\mapsto P_u=(-)\\circ u^{\\mathrm{op}}$, contravariant in $C$. Here taking opposites reverses the simplex order, and the internal-Hom action in the source variable is precomposition. In the internal functor model precomposition sends an $n$-simplex $h:D^{\\mathrm{op}}\\times\\Delta^n\\to\\mathcal S$ to $h\\circ(u^{\\mathrm{op}}\\times1)$. Thus its action retains all coherent transformations. The natural exponential construction supplies this functor as $C$ and $u$ vary, including their higher simplices; the identity and composition comparisons are the ones of this internal-Hom functor.",
+   "uses": [
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-cat-infinity-opposite-involution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Sections 3.1.3–3.1.4 (internal Hom and cartesian compatibility); GHN Definition 9.11 (the presheaf functor)"
+   }
+  },
+  {
+   "text": "For $X\\in\\operatorname{Ind}_\\lambda(D)$ the presheaf Ind criterion says that $X$ takes every $\\lambda$-small colimiting cocone in $D$ to a limiting cone of spaces. If $q:K\\to C$ has such a colimit $c$, then $u q\\to u(c)$ is colimiting because $u$ preserves these colimits. Consequently\n$$ (P_uX)(c)=X(u(c))\\simeq\\lim_{k\\in K^{\\mathrm{op}}}X(u(q(k)))=\\lim_{k\\in K^{\\mathrm{op}}}(P_uX)(q(k)). $$\nThe same criterion applied to $C$ shows $P_uX\\in\\operatorname{Ind}_\\lambda(C)$. This includes $K=\\varnothing$: $u$ preserves the initial object and $X$ takes it to a contractible space. Restricting $P_u$ to the indicated full subcategories therefore defines a coherent functor $R_u:\\operatorname{Ind}_\\lambda(D)\\to\\operatorname{Ind}_\\lambda(C)$ with $i_C R_u=P_u i_D$.",
+   "uses": [
+    "lem-coef-infinity-presheaf-ind-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.5.4, equivalence of (1) and (3); GHN Definition 10.4"
+   }
+  },
+  {
+   "text": "Both Ind categories are presentable by the Ind presentability theorem, which also says that $j_D$ preserves $\\lambda$-small colimits. Thus $j_Du$ preserves these colimits. Apply the filtered-completion extension theorem with source $C$, target $\\operatorname{Ind}_\\lambda(D)$ and functor $j_Du$. It supplies precisely the functor $L_u$ in the statement, with $L_uj_C\\simeq j_Du$, and its final clause shows that $L_u$ preserves all small colimits. The adjoint functor theorem now supplies a coherent mapping-space right adjoint $T_u$, with unit, counit and triangle identities.",
+   "uses": [
+    "lem-coef-ind-kappa-presentability",
+    "lem-coef-ind-kappa-extension",
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.3.5.10, Proposition 5.3.5.14, and Corollary 5.5.2.9(1)"
+   }
+  },
+  {
+   "text": "For $c\\in C$ and $X\\in\\operatorname{Ind}_\\lambda(D)$ use fullness of the two Ind inclusions, the Yoneda evaluation equivalence, and the mapping-space adjunction from step 3 to obtain\n$$ (i_C T_u X)(c)\\simeq\\operatorname{Map}_{\\operatorname{Ind}_\\lambda(C)}(j_Cc,T_uX)\\simeq\\operatorname{Map}_{\\operatorname{Ind}_\\lambda(D)}(L_uj_Cc,X)\\simeq\\operatorname{Map}_{\\mathcal P(D)}(j_Du(c),i_DX)\\simeq(i_DX)(u(c))=(i_C R_uX)(c). $$\nAll equivalences here are coherent in $(c,X)$: this is part of the Yoneda evaluation and adjunction statements, and $L_uj_C\\simeq j_Du$ is an equivalence of coherent functors. Currying gives an equivalence $i_CT_u\\simeq i_CR_u$ of functors to $\\mathcal P(C)$. A coherent transformation is an equivalence precisely when it is so at every vertex. Since $\\operatorname{Ind}_\\lambda(C)$ is full in $\\mathcal P(C)$, this equivalence and its inverse lie in that full subcategory, so $T_u\\simeq R_u$. Substituting this equivalence into the adjunction identifies $R_u$ as a right adjoint to $L_u$; hence take $u^*=R_u$.",
+   "uses": [
+    "lem-coef-infinity-yoneda-evaluation",
+    "lem-coef-presentable-infinity-adjoints",
+    "lem-coef-ind-kappa-extension",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.1.3.1 (Yoneda evaluation), Proposition 5.3.5.13 (restriction as right adjoint); Corollary 5.5.2.9(1)"
+   }
+  },
+  {
+   "text": "Let $I$ be any small $\\lambda$-filtered infinity category and $X:I\\to\\operatorname{Ind}_\\lambda(D)$ a coherent diagram. For every $c\\in C$, the objects $j_Cc$ and $j_Du(c)$ are $\\lambda$-compact by the Ind theorem. By the definition of compactness their covariant mapping-space functors send these filtered colimiting cocones to colimiting cocones of spaces. Applying Yoneda evaluation and the formula of step 2, the canonical comparison for $R_u$ is therefore identified, after testing by $j_Cc$, with the chain\n$$\\operatorname{Map}(j_Cc,\\operatorname{colim}_I R_uX)\\simeq\\operatorname{colim}_{i\\in I}\\operatorname{Map}(j_Cc,R_uX_i)\\simeq\\operatorname{colim}_{i\\in I}\\operatorname{Map}(j_Du(c),X_i)\\simeq\\operatorname{Map}(j_Du(c),\\operatorname{colim}_I X)\\simeq\\operatorname{Map}(j_Cc,R_u(\\operatorname{colim}_I X)).$$\nThese are the maps induced by the given cocones, hence prove that the actual comparison $\\operatorname{colim}_I R_uX\\to R_u(\\operatorname{colim}_I X)$ induces an equivalence on every such mapping space. Yoneda evaluation identifies these tests with evaluations of its image under $i_C$ at all $c$. The functor-category equivalence criterion makes that image an equivalence of presheaves, and fullness of $i_C$ makes the comparison itself an equivalence. Thus $u^*$ preserves all small $\\lambda$-filtered colimits. This uses only the compactness of the Yoneda objects, not the assertion that every compact object is representable.",
+   "uses": [
+    "lem-coef-ind-kappa-presentability",
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-yoneda-evaluation",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Propositions 5.3.5.3 and 5.3.5.5 (filtered closure and compactness of representables); Proposition 5.1.3.1 (Yoneda evaluation)"
+   }
+  },
+  {
+   "text": "Restrict the coherent presheaf functor of step 1 to $\\operatorname{Cat}^{\\mathrm{rex}(\\lambda)}_\\infty$ in the source and to the full subcategory $\\operatorname{Ind}_\\lambda(C)\\subseteq\\mathcal P(C)$ in each value. Step 2 proves precisely the invariance needed for this restriction. For clarity, restricting a diagram to invariant full subcategories keeps every simplex of its transformation data whose object-vertices have been retained: fullness puts all these simplices in the smaller functor categories, and face and degeneracy operators are inherited. In particular the presheaf identity, composition and higher comparison data restrict together. For $C\\xrightarrow{u}D\\xrightarrow{v}E$, the comparison is the restriction of\n$$P_uP_v(X)=(X\\circ v^{\\mathrm{op}})\\circ u^{\\mathrm{op}}=X\\circ(vu)^{\\mathrm{op}}=P_{vu}(X),$$\nand the identity is precomposition with $1_{C^{\\mathrm{op}}}$. These are the comparisons inside the coherent internal-Hom functor, so their higher compatibilities also restrict; no separate choice of right adjoints is being made on edges. By step 4 its edge values are right adjoints to the specified $L_u$, and step 5 gives their filtered-colimit preservation. This is the required coherent contravariant functor, for the fixed infinite regular $\\lambda$, including $\\lambda=\\omega$.",
+   "uses": [
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Definition 9.11 and Definition 10.4; restriction of the coherent presheaf functor, using HTT Corollary 5.3.5.4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-cat-infinity-colimits-cartesian-closure",
+  "lem-coef-cat-infinity-opposite-involution",
+  "lem-coef-ind-kappa-extension",
+  "lem-coef-ind-kappa-presentability",
+  "lem-coef-infinity-presheaf-ind-criterion",
+  "lem-coef-infinity-yoneda-evaluation",
   "lem-coef-presentable-infinity-adjoints"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1501.02161v3",
+  "place": "Definition 10.4, expanded using the presheaf restriction construction of Definition 9.11 and HTT Corollary 5.3.5.4, Proposition 5.3.5.10, Proposition 5.3.5.13 and Corollary 5.5.2.9(1); read online, archival copies WANTED in report.md."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-ind-presheaf-fibration-accessibility",
@@ -69,6 +167,62 @@
    "results": "{\"t\": \"2026-10-17T03:34:37Z\", \"tool\": \"leanfinder\", \"query\": \"Ind completion restriction of scalars right adjoint compact objects infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod.LocallyConstant.adjunction\", \"ModuleCat.instIsRightAdjointRestrictScalars\", \"Condensed.freeForgetAdjunction\", \"Condensed.profiniteSolidification\", \"LightCondensed.freeForgetAdjunction\", \"Rep.instIsLeftAdjointIndFunctor\", \"LightCondMod.LocallyConstant.adjunction\", \"Condensed.profiniteSolidCounit\"], \"digest\": \"18128c6fbec74b10\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent reader inspected the returned types; they concern ordinary module or representation adjunctions and ordinary categorical stacks, not the coherent infinity-categorical Ind or relative-cone statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Ind.*(rightAdjoint|IsRightAdjoint)|Quasicategory.*(Ind|Accessible)",
+   "results": "{\"t\": \"2026-10-17T04:04:08Z\", \"tool\": \"grep\", \"query\": \"Ind.*(rightAdjoint|IsRightAdjoint)|Quasicategory.*(Ind|Accessible)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and ordinary Ind source; ordinary categories and Type-valued presheaves do not state the coherent space-valued infinity-categorical result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ind completion of infinity categories right adjoint functor preserves filtered colimits",
+   "results": "{\"t\": \"2026-10-17T04:04:08Z\", \"tool\": \"leansearch\", \"query\": \"Ind completion of infinity categories right adjoint functor preserves filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.PreservesFilteredColimits\", \"CategoryTheory.instPreservesLimitsOfShapeFunctorIndLimOfFinCategoryOfHasLimitsOfShape\", \"CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits\", \"CategoryTheory.Limits.isIndObject_colimit\", \"CategoryTheory.Functor.instPreservesLimitsOfSizeOfIsRightAdjoint\", \"CategoryTheory.Limits.PreservesFilteredColimitsOfSize\", \"CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint\", \"CategoryTheory.Limits.ReflectsFilteredColimitsOfSize\"], \"digest\": \"9631a6dd90b9b9ca\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and ordinary Ind source; ordinary categories and Type-valued presheaves do not state the coherent space-valued infinity-categorical result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ind\", \"rightAdjoint\"",
+   "results": "{\"t\": \"2026-10-17T04:04:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Ind\\\", \\\"rightAdjoint\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"TopModuleCat.instIsRightAdjointModuleCatIndiscrete\", \"Rep.instIsRightAdjointCoindFunctor\", \"Rep.instIsRightAdjointSubtypeMemSubgroupIndFunctorSubtype\"], \"digest\": \"d459d5c85cdf7807\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and ordinary Ind source; ordinary categories and Type-valued presheaves do not state the coherent space-valued infinity-categorical result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Ind completion of small infinity categories admitting kappa small colimits is contravariantly functorial by right adjoints preserving kappa filtered colimits",
+   "results": "{\"t\": \"2026-10-17T04:04:09Z\", \"tool\": \"leanfinder\", \"query\": \"The Ind completion of small infinity categories admitting kappa small colimits is contravariantly functorial by right adjoints preserving kappa filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Ind.inclusion\", \"CategoryTheory.Ind.leftExactFunctorEquivalence\", \"CategoryTheory.instPreservesFiniteColimitsIndYoneda\", \"CategoryTheory.Ind.lim\", \"CategoryTheory.Ind\", \"CategoryTheory.Ind.yoneda\", \"CategoryTheory.instHasFilteredColimitsInd\", \"CategoryTheory.instCategoryInd\"], \"digest\": \"e146fcd7a1553c63\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and ordinary Ind source; ordinary categories and Type-valued presheaves do not state the coherent space-valued infinity-categorical result."
+  },
+  {
+   "tool": "grep",
+   "query": "def leftExactFunctorEquivalence|def inclusion|def Ind|def yoneda|PreservesFilteredColimits",
+   "results": "{\"t\": \"2026-10-17T04:04:22Z\", \"tool\": \"grep\", \"query\": \"def leftExactFunctorEquivalence|def inclusion|def Ind|def yoneda|PreservesFilteredColimits\", \"sub\": \"CategoryTheory/Limits/Indization\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Indization/IndObject.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\"], \"digest\": \"51ec40305913cb35\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and ordinary Ind source; ordinary categories and Type-valued presheaves do not state the coherent space-valued infinity-categorical result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of space valued presheaves along a colimit preserving infinity functor preserves Ind objects and filtered colimits",
+   "results": "{\"t\": \"2026-10-17T04:04:24Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of space valued presheaves along a colimit preserving infinity functor preserves Ind objects and filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instPreservesFiniteColimitsIndYoneda\", \"CategoryTheory.Limits.isIndObject_colimit\", \"CategoryTheory.instHasFilteredColimitsInd\", \"CategoryTheory.instRepresentablyCoflatIndYoneda\", \"CategoryTheory.Limits.IndizationClosedUnderFilteredColimitsAux.isFiltered\", \"CategoryTheory.instPreservesLimitsIndYoneda\", \"CategoryTheory.instPreservesColimitsOfShapeFunctorIndLimOfFinCategoryOfHasColimitsOfShape\", \"CategoryTheory.instCreatesColimitsOfShapeIndFunctorOppositeTypeInclusionOfIsFiltered\"], \"digest\": \"52fe8b610bd504ba\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and ordinary Ind source; ordinary categories and Type-valued presheaves do not state the coherent space-valued infinity-categorical result."
+  },
+  {
+   "tool": "grep",
+   "query": "Quasicategory|quasicategor|Ind.*[Rr]ight|[Rr]ight.*Ind",
+   "results": "{\"t\": \"2026-10-17T04:13:57Z\", \"tool\": \"grep\", \"query\": \"Quasicategory|quasicategor|Ind.*[Rr]ight|[Rr]ight.*Ind\", \"sub\": \"CategoryTheory/Limits/Indization\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Indization/Equalizers.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\", \"Mathlib/CategoryTheory/Limits/Indization/Category.lean\"], \"digest\": \"747e6c4157fcb0ef\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independently inspected returned signatures and Mathlib/CategoryTheory/Limits/Indization/Category.lean:59-135; ordinary categories and Type-valued presheaves do not state this coherent space-valued result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition on infinity categorical presheaves restricts to an accessible right adjoint on filtered completions",
+   "results": "{\"t\": \"2026-10-17T04:14:00Z\", \"tool\": \"leanfinder\", \"query\": \"Precomposition on infinity categorical presheaves restricts to an accessible right adjoint on filtered completions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits\", \"CategoryTheory.IsFiltered.of_isRightAdjoint\", \"CategoryTheory.MorphismProperty.isRightAdjoint_ι_isLocal\", \"CategoryTheory.OrthogonalReflection.isRightAdjoint_ι\", \"CategoryTheory.IsFiltered.of_right_adjoint\", \"CategoryTheory.Limits.isIndObject_of_isFiltered_of_finallySmall\", \"CategoryTheory.Limits.IsIndObject.isFiltered\", \"CategoryTheory.Limits.isIndObject_iff\"], \"digest\": \"fccab4ddffc0a310\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independently inspected returned signatures and Mathlib/CategoryTheory/Limits/Indization/Category.lean:59-135; ordinary categories and Type-valued presheaves do not state this coherent space-valued result."
   }
  ],
  "blueprint": {
@@ -89,5 +243,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-ind-right-adjoint-coherent",
+  "worker": "stage1",
+  "summary": "Six-step split using only existing nodes: coherent presheaf functor, Ind preservation by restriction, colimit-preserving Ind extension and adjoint existence, Yoneda identification of its right adjoint, pointwise filtered-colimit preservation, and restriction of every coherence simplex. Fixed infinite regular cardinal retained, including omega. No new nodes and no attachment. Server item copied read-only because local shared mirror lacks this recently created node.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2 mapping-complex adjunction: auxiliary Ind construction of its presentable fiber diagram, via lem-coef-ind-presheaf-fibration-accessibility; realizes GHN Definition 10.4 used in that auxiliary construction. No chapter or unit route changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-85219b0d5",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-85219b0d5 (reviewer sub-agent of L); spot-checked: Read in full: the item, every cited node statement, the parent lem-coef-ind-presheaf-fibration-accessibility (step 1), the citer lem-coef-ghn-ind-presheaf-cartesian-realization, the unit sk-prop-sf-biduality-general and the ancestor prop-coef-integral-exceptional-adjoint. GHN v3 Def 9.11/10.4 and HTT are online-only and network access is blocked here, so I could not open them. I checked the mathematics independently against HTT 5.3.5.4/5.3.5.10/5.3.5.13/5.5.2.9. The statement is true (u^* is restriction along u) and is not weakened. Small cases: lambda=omega with FinSet->* (Ind(FinSet)=Set, u^* gives the singleton); C=D=*; identity and composite functors; the colimit hypothesis on u is necessary. Step checks: step 2 applies the Ind criterion forward in D and backward in C, including K empty. Step 3 meets all hypotheses of the presentability, extension (final clause) and adjoint nodes. Step 4's Yoneda/adjunction chain is natural in (c,X) and lifts by fullness. Step 5 uses compactness of j_C c and j_D u(c). Step 6 restricts to invariant replete full subcategories in the right order, P_uP_v=P_{vu}. Two faults repaired. (1) B3: the statement's target Cat_infty cited no definition; I added def-cbc-enhanced-cartesian-fibration to stmt_deps plus one cited clause, meaning unchanged. (2) C1: step 1 needs the coherent functor C->C^op on Cat_infty, which is not elementary in the coherent-nerve model and is stated by no DAG node (rg/blueprint search). I added the statement-only node lem-coef-cat-infinity-opposite-involution (created.item = this item; blueprint from prop-coef-integral-exceptional-adjoint, via [item]+its via; same_as []). Its Mathlib grep finds only the strict SSet.opFunctor; LeanSearch and Loogle are recorded as unavailable. Step 1 now cites it and proof_deps was recomputed. Acyclicity was checked and all ids exist. Not a duplicate: the compact-model and small-right-adjoint-diagram nodes cover only uncountable lambda. Accepted tool use for the maintainer to record: lem-cbc-enhanced-functor-cone-calculus (generic componentwise-equivalence and full-subcategory criterion, steps 4-6). Minor and left unchanged: HTT 5.1.3.1 is cited for Yoneda evaluation where Lemma 5.5.2.1 is meant.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
