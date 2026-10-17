@@ -12,9 +12,156 @@
   "def-coef-complete-algebroid",
   "lem-coef-enriched-category-tensor-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal C=\\operatorname{Cat}_{\\mathcal V}$, with the closed symmetric monoidal structure of the tensor-calculus node. Its internal Homs are the complete enriched functor categories, including their transformation objects. Add its tensor unit $e=(\\Delta^0)_{\\mathcal V}$ to the prescribed family. Include each requested $E^S$ using that node's cotensors. If closure under repeated requested cotensors is needed, adjoin all finite iterates: a countable union of small sets of words in a small set is small. Let $O$ index this enlarged family. Increase the ambient universe to contain all its hom quasicategories and specified data; small indexing shapes retain their original universe.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Remark 9.5 and the cotensors in the cited tensor-calculus statement; finite-iteration closure is elementary."
+   }
+  },
+  {
+   "text": "The free-enrichment adjunction $L=(-)_{\\mathcal V}\\dashv U$ is strong symmetric monoidal. Indeed its object pairs agree with those of $L(K\\times H)$; on homs the comparison is $(A\\otimes\\mathbf1)\\otimes(B\\otimes\\mathbf1)\\simeq(A\\times B)\\otimes\\mathbf1$ for spaces $A,B$, by expanding the two colimits and using separate colimit preservation of tensor. Units and compositions use the same unit constraints, so the comparisons and their coherence diagrams agree. Completion is understood in the tensor-calculus statement. Apply closed self-enrichment and change of base to this adjunction, with $\\mathcal D=\\mathrm{Cat}_\\infty$. We obtain a categorical algebra $\\mathcal H$ on the discrete set $O$ with $\\mathcal H(p,q)=U\\operatorname{Fun}_{\\mathcal V}(E_p,E_q)$. Its horizontal composition is composition of enriched functors and transformations, with all higher coherences. No completeness of the discrete object set $O$ is needed.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-closed-self-enrichment-base-change",
+    "lem-coef-cat-infinity-colimits-cartesian-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Corollary 7.4.10, applying change of enriching base to the closed structure supplied by Haugseng Remark 9.5."
+   }
+  },
+  {
+   "text": "Apply fixed-object Joyal rectification to $\\mathcal H$, then take a fibrant model $\\mathscr P$ on $O$. Retain the resulting equivalence of categorical algebras, including its hom equivalences $\\mathscr P(p,q)\\simeq\\mathcal H(p,q)$, units and horizontal composition coherences. Each hom is now a quasicategory, while composition and identities in $\\mathscr P$ are strict. Specified functor and transformation simplices are represented through these equivalences, not through a passage to homotopy categories. A specified coherent diagram is a map of its coherent categorical algebra into $\\mathcal H$; the equivalence transports that map, together with its identification with the original diagram. For a cofibrant source model and the fibrant target, model-localization surjectivity represents it by a strict map. This replaces models of the data, with their equivalences retained; it does not claim strictification on every unchanged noncofibrant source.",
+   "uses": [
+    "lem-coef-joyal-fixed-object-rectification",
+    "lem-coef-model-localization-map-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Proposition 5.2 and the transferred fixed-object model structure; coherent diagram comparison is its mapping-space clause."
+   }
+  },
+  {
+   "text": "Define $U_{\\mathscr P}(p)=\\mathscr P(e,p)$. For an $n$-simplex $f$ of $\\mathscr P(p,q)$, composition gives the family of maps $\\mathscr P(e,p)\\times\\Delta^n\\to\\mathscr P(e,q)$. Currying defines a simplicial map to $\\operatorname{Fun}(\\mathscr P(e,p),\\mathscr P(e,q))$. Associativity and units in $\\mathscr P$ make these maps a strict simplicial functor to $\\mathsf{qCat}$. Moreover $\\mathscr P(e,p)\\simeq U[e,E_p]_{\\mathcal C}\\simeq UE_p$, since $e$ is the tensor unit. Under these comparisons, the action is enriched evaluation at objects: postcomposition by $F$ sends $x:e\\to E_p$ to $Fx:e\\to E_q$. The same formula on every parameter simplex forgets enrichment on transformations. Compatibility follows from the categorical-algebra comparison of Step 3, so no separate strictification of an independently chosen forgetful functor is being assumed.",
+   "uses": [
+    "lem-coef-closed-self-enrichment-base-change",
+    "lem-coef-joyal-fixed-object-rectification",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Closed self-enrichment, unit internal Hom and adjoint change of base; representable simplicial functor constructed explicitly."
+   }
+  },
+  {
+   "text": "For a requested shape $S$, replace it by its freely generated infinity category $S^{\\mathrm{cat}}$ and write $p^S$ for the already included $E_p^S=[L(S^{\\mathrm{cat}}),E_p]_{\\mathcal C}$. The tensor-calculus cotensor identity and the mixed internal-Hom comparison give\n$$\\mathscr P(q,p^S)\\simeq U[E_q,E_p^S]_{\\mathcal C}\\simeq U[L(S^{\\mathrm{cat}}),[E_q,E_p]_{\\mathcal C}]_{\\mathcal C}\\simeq\\operatorname{Fun}(S^{\\mathrm{cat}},U[E_q,E_p]_{\\mathcal C})\\simeq\\operatorname{Fun}(S,\\mathscr P(q,p)).$$\nThe final equivalence also uses that functor categories preserve equivalences of targets: $\\operatorname{Fun}(S,-)$ represents the exponential in the Joyal homotopy category, so a categorical equivalence of quasicategories induces one of functor quasicategories. Currying and the evaluation clauses of the cited statements identify the evaluation maps and all parameter simplices. These are coherent comparisons, as requested; strict simplicial cotensor isomorphisms in $\\mathscr P$ are not required.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-closed-self-enrichment-base-change",
+    "lem-coef-joyal-fixed-object-rectification",
+    "lem-coef-simplicial-shape-categorification",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-joyal-homotopy-exponentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Remark 9.5, cotensor identity and closed adjunction; extension to simplicial shapes is the cited categorification statement."
+   }
+  },
+  {
+   "text": "The walking monad has one object and endomorphism monoid $D=N(\\Delta_+)$. It is cofibrant in the fixed-object Joyal model. To see its cells explicitly, an $n$-simplex is a chain $S_0\\to\\cdots\\to S_n$ of finite ordinals. Decompose each $S_i$ into the ordered fibers of its composite to $S_n$. This decomposes the entire chain uniquely under ordinal sum into chains whose last ordinal is a singleton; if $S_n$ is empty the whole chain is the unit. Hence its degreewise monoid is free on the singleton-ending chains. Degeneracies repeat one level of the chain and preserve these generators. Adjoin the nondegenerate generators in increasing dimension; their faces already lie in the preceding skeleton, and all degeneracies are forced. This is a sequence of free monoid boundary cells, including dimension zero. Adding identity-only objects for the other members of $O$ gives a cofibrant $D_O$ in $\\mathrm{sCat}_O$.",
+   "uses": [
+    "def-coef-coherent-monad-modules",
+    "lem-coef-joyal-fixed-object-rectification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Sections 2.1--2.2 and 6.1.1: direct ordinal-chain cell verification for Mnd, not an appeal to a Kan-enriched rectification theorem."
+   }
+  },
+  {
+   "text": "A specified enriched walking-monad action, with its object label, determines a map from the categorical algebra represented by $D_O$ to $\\mathcal H$. Via fixed-object rectification it is a morphism $D_O\\to\\mathscr P$ in the localized model category, with its prescribed comparison to that action. Step 6 makes the source cofibrant and Step 3 makes the target fibrant. The model-localization surjectivity lemma supplies an actual simplicial functor representing this morphism; its localization is connected to the prescribed morphism in the full mapping space. Retain such a path as the identification of actions. Composing with the strict $U_{\\mathscr P}$ therefore gives an equivalent underlying action, together with its coherences. This addresses already coherent monad data and requires no adjunction-extension theorem or choice of triangle witnesses.",
+   "uses": [
+    "def-coef-coherent-monad-modules",
+    "lem-coef-joyal-fixed-object-rectification",
+    "lem-coef-model-localization-map-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Proposition 5.2 plus the cited cofibrant-source/fibrant-target model-localization surjectivity statement."
+   }
+  },
+  {
+   "text": "For the tensor clause, a tensor $K\\odot x$ represents $y\\mapsto[K,E(x,y)]_{\\mathcal V}$. For an enriched functor $F$, its canonical comparison $c_{F,K,x}:K\\odot Fx\\to F(K\\odot x)$ is the mate of $K\\to E(x,K\\odot x)\\to E'(Fx,F(K\\odot x))$. By tensor-preserving functors we mean those for which these comparisons are equivalences, with their coherent tensor identifications. For an enriched transformation $\\alpha:F\\to G$, enriched naturality applied to that same universal element yields\n$$\\alpha_{K\\odot x}c_{F,K,x}\\simeq c_{G,K,x}(K\\odot\\alpha_x).$$\nApplying the natural tensor adjunction to parameter simplices gives the entire compatibility family. The space of choices of mates with their prescribed evaluation is contractible, because it is a fiber of an equivalence of mapping spaces. Thus retaining specified coherent tensor comparisons compatible with evaluation introduces no independent arbitrary action on tensor objects.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Closed enriched evaluation and currying of the tensor-calculus node; explicit tensor-mate naturality argument."
+   }
+  },
+  {
+   "text": "Let $O_t$ index the specified tensored categories and their requested cotensors; the cotensor mapping-object lemma makes the latter tensored. In each hom on $O_t$ restrict to the full subcategory on tensor-preserving functors. Step 8 identifies its transformations with transformations compatible with the tensor comparisons, including their higher simplices. The composite comparison is $c_{GF,K,x}=G(c_{F,K,x})c_{G,K,Fx}$ up to the prescribed coherences; the identity comparison is the unit constraint. Equivalences are closed under these operations, so this restriction is a categorical subalgebra. Apply fixed-object rectification on $O_t$, retaining its inclusion into $\\mathcal H|_{O_t}$; the target is $\\mathscr P|_{O_t}$. This restriction is permitted by the rectification statement. Replace the fibrant source by a cofibrant replacement mapping to it by a trivial fibration; that replacement is still fibrant. Model-localization surjectivity then represents the map to the unrestricted fibrant presentation by an actual simplicial functor. Use this replacement as the tensor-preserving presentation. Composing its represented simplicial functor with the unrestricted $U_{\\mathscr P}$ supplies the strict underlying-category functor. The representable construction uses only the unrestricted probe $e$, so it imposes no tensor-preservation condition on functors out of $e$. Specified comparison and compatibility simplices are retained by the hom equivalences and the diagram identification, as in Steps 3 and 7.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-joyal-fixed-object-rectification",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-model-localization-map-surjective",
+    "lem-coef-enriched-cotensor-mapping-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Fixed-object rectification applied to the explicitly described tensor-preserving subalgebra and its inclusion."
+   }
+  },
+  {
+   "text": "The enriched cotensor mapping-object lemma supplies tensors in $E^S$ computed pointwise, with their full enriched universal property; ordinary pointwise monoidal structures alone would not suffice. Restrict the comparison of Step 5. Under currying, $F:Q\\to E^S$ corresponds to its diagram of functors $F_s:Q\\to E$, and its tensor comparison evaluates to $c_{F_s,K,x}$. The comparison is an equivalence exactly when every such component is, by the componentwise criterion in the tensor-calculus node. The same currying on parameter simplices gives compatible transformations. Hence the equivalence of Step 5 restricts to the full subcategories of tensor-preserving functors. Forgetting the comparisons is the subalgebra inclusion retained in Step 9. All model changes retain their equivalences with the original data; no independently fixed pair of adjunction triangle witnesses has been prescribed.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-closed-self-enrichment-base-change",
+    "lem-coef-joyal-fixed-object-rectification",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-enriched-cotensor-mapping-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Cotensor identity and componentwise equivalence criterion in the cited tensor calculus, restricted to tensor-preserving functors."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-coherent-monad-modules",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-cat-infinity-colimits-cartesian-closure",
+  "lem-coef-closed-self-enrichment-base-change",
+  "lem-coef-enriched-category-tensor-calculus",
+  "lem-coef-enriched-cotensor-mapping-objects",
+  "lem-coef-joyal-fixed-object-rectification",
+  "lem-coef-joyal-homotopy-exponentials",
+  "lem-coef-model-localization-map-surjective",
+  "lem-coef-simplicial-shape-categorification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Supporting enriched coefficient-adjunction foundation for paragraph 2; argument combines closed self-enrichment, Joyal fixed-object rectification and representability of the underlying category. External primary sources are specified step by step."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +197,38 @@
    "results": "{\"t\": \"2026-10-17T12:04:20Z\", \"tool\": \"leanfinder\", \"query\": \"Strict simplicial presentation of enriched functor infinity categories compatible with composition and cotensors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CatEnriched.instStrict\", \"CategoryTheory.CatEnrichedOrdinary.instStrict\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.SimplicialThickening.functor\", \"SSet.QCat.strictBicategory\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialThickening.functor_comp\", \"CategoryTheory.EnrichedCat.str\"], \"digest\": \"422e730fe35dd055\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Enriched/Basic.lean:58-67 and Enriched/EnrichedCat.lean:37-95 (ordinary enriched categories and a bicategory), AlgebraicTopology/SimplicialNerve.lean:54-204 and SimplicialCategory/SimplicialObject.lean (simplicial primitives). Hits do not present complete enriched infinity-categories with full enriched transformation quasicategories and compatible cotensors. The second semantic query also has only these primitives."
+  },
+  {
+   "tool": "grep",
+   "query": "simplicial.*enrich|enrich.*simplicial|EnrichedCat",
+   "results": "{\"t\": \"2026-10-17T13:00:47Z\", \"tool\": \"grep\", \"query\": \"simplicial.*enrich|enrich.*simplicial|EnrichedCat\", \"sub\": \"CategoryTheory/Enriched\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Enriched/Opposite.lean\", \"Mathlib/CategoryTheory/Enriched/Opposite.lean\", \"Mathlib/CategoryTheory/Enriched/Opposite.lean\", \"Mathlib/CategoryTheory/Enriched/Opposite.lean\", \"Mathlib/CategoryTheory/Enriched/Opposite.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\"], \"digest\": \"e2e3e5cb8238613f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only ordinary enrichment, simplicial primitives and the homotopy bicategory of quasicategories; read Enriched/Basic.lean:58-67, Enriched/EnrichedCat.lean:37-95 and Quasicategory/StrictBicategory.lean:14-31,49-70. No compatible enriched infinity-category presentation theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict simplicial models of categories enriched in infinity categories with enriched functor categories",
+   "results": "{\"t\": \"2026-10-17T13:00:47Z\", \"tool\": \"leansearch\", \"query\": \"Strict simplicial models of categories enriched in infinity categories with enriched functor categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.functorEnrichedCategory\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialCategory\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedOrdinaryCategory\", \"SSet.QCat.strictBicategory\", \"CategoryTheory.Enriched.FunctorCategory.enrichedOrdinaryCategory\", \"CategoryTheory.SimplicialObject\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\"], \"digest\": \"22c7db3af74f43e5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only ordinary enrichment, simplicial primitives and the homotopy bicategory of quasicategories; read Enriched/Basic.lean:58-67, Enriched/EnrichedCat.lean:37-95 and Quasicategory/StrictBicategory.lean:14-31,49-70. No compatible enriched infinity-category presentation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EnrichedCategory, SSet",
+   "results": "{\"t\": \"2026-10-17T13:00:47Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.EnrichedCategory, SSet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\"], \"digest\": \"bb23677efe80a488\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only ordinary enrichment, simplicial primitives and the homotopy bicategory of quasicategories; read Enriched/Basic.lean:58-67, Enriched/EnrichedCat.lean:37-95 and Quasicategory/StrictBicategory.lean:14-31,49-70. No compatible enriched infinity-category presentation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally quasicategorical simplicial category presents enriched infinity categories retaining natural transformations cotensors and an underlying category functor",
+   "results": "{\"t\": \"2026-10-17T13:00:55Z\", \"tool\": \"leanfinder\", \"query\": \"A locally quasicategorical simplicial category presents enriched infinity categories retaining natural transformations cotensors and an underlying category functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"SSet.QCat\", \"SSet.QCat.bicategory\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialCategory\", \"CategoryTheory.SimplicialNerve\", \"SSet.QCat.strictBicategory\", \"CategoryTheory.Nerve.quasicategory\"], \"digest\": \"2a024a0e661cc77f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only ordinary enrichment, simplicial primitives and the homotopy bicategory of quasicategories; read Enriched/Basic.lean:58-67, Enriched/EnrichedCat.lean:37-95 and Quasicategory/StrictBicategory.lean:14-31,49-70. No compatible enriched infinity-category presentation theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-linear-monad-tensor-enrichment",
@@ -75,5 +250,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-enriched-simplicial-presentation",
+  "worker": "stage1",
+  "summary": "Q144 splits the presentation existence by closed self-enrichment, fixed-object Joyal rectification, a representable strict forgetful functor, the cotensor adjunction, an explicit walking-monad cofibrancy calculation and tensor-mate naturality. Three generic statement-only foundational nodes; no Mathlib leaves or attachment. No change to the assertion or unit route.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: enriched derived mapping-complex adjunction. This item is supporting infrastructure below that step via the inherited coefficient-monad ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic full-functor-category and equivalence calculus for the cotensor comparisons and full tensor-preserving hom subcategories; not a replacement of a coefficient step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-5759c00ad",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-5759c00ad (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement and the sources at the cited places. Item statement and stmt_deps are unchanged from base; the delivery is one commit; there is no cycle and no missing or merged dependency. Sources checked: Gepner-Haugseng 1312.3178 Cor 7.4.9, Cor 7.4.10 and Remark 7.4.8, where completeness is only expected and the new node correctly does not claim it, plus §5.7 and Lemma 4.3.9 for change of enrichment and the adjoint lax structure. Haugseng 1312.3881v4 Lemma 3.20, Def 5.1 and Prop 5.2 assume a left proper tractable biclosed monoidal model category with the monoid axiom. The paper does not list the Joyal model, so I checked those hypotheses for Joyal sSet myself (all objects cofibrant, cartesian pushout-product), and the specialization holds. Haugseng 2311.13362 Remark 9.5 gives the complete internal Hom. Mathematical checks: I proved the mixed internal-Hom comparison R[LX,B]≃[X,RB] by Yoneda for strong monoidal L. Free enrichment is strong monoidal by separate colimit preservation, and completion is needed (K=pt, V=D(Z) gives a non-complete K_V). The end formula is right for K=∅, Δ^0 and Δ^1 (pullback), and pointwise tensors follow because [A,-] preserves limits. In Step 6 the unique fiber decomposition of chains in Δ_+ makes N(Δ_+) a simplicial computad, so it is cofibrant. In Step 9 a cofibrant replacement taken as a trivial fibration stays fibrant. Step 10 restricts the Step 5 equivalence by the componentwise criterion. No duplicates: checked against lem-coef-fixed-object-enriched-rectification (Ch(Z)), lem-coef-simplicial-interval-lifting (Kan model, not Joyal), lem-coef-enrichment-change-adjunction and lem-coef-coherent-end-twisted-arrow-formula (space-valued). The declared tool use of lem-cbc-enhanced-functor-cone-calculus is accepted. FIX (one repair): Step 5 used that Fun(S,-) preserves categorical equivalences of target quasicategories, which no cited node states. I added lem-coef-joyal-homotopy-exponentials (same unit) to Step 5's uses and proof_deps, with one clause in the text, in fixes/dag/nodes/sec-six-functors/lem-coef-enriched-simplicial-presentation.json.; 1 file(s) fixed by the reviewer"
  }
 }

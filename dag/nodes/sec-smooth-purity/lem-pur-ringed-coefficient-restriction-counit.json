@@ -1,0 +1,88 @@
+{
+ "id": "lem-pur-ringed-coefficient-restriction-counit",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "title": "Derived ringed-topos counit under coefficient restriction",
+ "statement": "Let $f:\\operatorname{Sh}(\\mathcal X)\\to\\operatorname{Sh}(\\mathcal Y)$ be a morphism of topoi presented by small sites [def-weil-size-convention]. Let $A$ be a commutative ring, let $A_X,A_Y$ be its constant ring sheaves [def-weil-pbc-constant-sheaf], and identify $f^{-1}A_Y=A_X$. Let $R_X,R_Y$ be sheaves of commutative $A_X,A_Y$-algebras, with a compatible structural map $c:f^{-1}R_Y\\to R_X$. Write $D(A_W),D(R_W)$ for the ordinary unbounded derived categories of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category] and $U_W:D(R_W)\\to D(A_W)$ for exact coefficient restriction [def-pc-sheaf-restrict-scalars]. Let $Q_A=f^{-1}$ on constant-$A$ complexes and $Q_R=Lf_R^*$ be derived module pullback along $c$, computed with flat-term K-flat resolutions [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Let $F_A=Rf_{*,A}$ and $F_R=Rf_{*,R}$ be K-injective derived direct images, with the canonical derived module adjunctions and counits $\\varepsilon_A,\\varepsilon_R$ [def-weil-pbc-projection-formula-arrows].\n\nLet $\\kappa:U_YF_R\\xrightarrow{\\sim}F_AU_X$ be the canonical comparison of the two factorizations of $(\\operatorname{Sh}(\\mathcal X),R_X)\\to(\\operatorname{Sh}(\\mathcal Y),A_Y)$, normalized by the K-injective derived-composition maps of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Let $\\tau:Q_AU_Y\\to U_XQ_R$ be the canonical scalar-unit comparison: for a flat-term K-flat $R_Y$-complex $P$ it is the class of the degreewise map $f^{-1}U_YP\\to U_X(R_X\\otimes_{f^{-1}R_Y}f^{-1}P)$ sending $x$ to $1\\otimes x$, with the canonical resolution identifications. Then for every $K\\in D(R_X)$ one has the equality in $D(A_X)$\n$$U_X(\\varepsilon_{R,K})\\circ\\tau_{F_RK}=\\varepsilon_{A,U_XK}\\circ Q_A(\\kappa_K).$$\nThe comparisons are natural in $K$ and in compatible homomorphisms of the $A$-algebra sheaves. No boundedness, flatness of $A_W\\to R_W$, adic completeness, or constructibility hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent consequence of Tag 0D6E (lemma-derived-pushforward-composition) and Tag 07A6 (lemma-adjoint), with the ordinary tensor adjunction of Tag 03D7 (sites-modules, lemma-adjoint-pullback-pushforward-modules): counit normalization for the two factorizations through constant coefficients."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-projection-formula-arrows",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative square of ringed topoi with horizontal restriction of coefficient rings the canonical unbounded derived direct image composition comparison respects the derived pullback direct image counit",
+   "results": "SheafOfModules.pullbackComp; SheafOfModules pullback unit identities; CategoryTheory.Adjunction.derived_counit and derived'_counit (Functor/Derived/Adjunction). These concern ordinary sheaves or abstract derived counits, not the identification of the specified K-injective composition comparison with the scalar-unit counit square.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The counit of derived inverse image direct image commutes with coefficient restriction under the canonical comparison of the two composite morphisms of ringed topoi",
+   "results": "CategoryTheory.Adjunction.derivedε; CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app. The restriction here is generally not fully faithful, and the ordinary sheaf theorem does not state the unbounded K-injective comparison normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_counit_app",
+   "results": "CategoryTheory.Adjunction.comp_counit_app, Mathlib/CategoryTheory/Adjunction/Basic.lean:580; formal composite counit only, without identification of the derived-composition normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_counit|counit.*restrict|restrict.*counit|conjugateEquiv.*counit",
+   "results": "22 hits, notably CategoryTheory/Adjunction/Restrict.lean:70, Basic.lean:580, Mates.lean:285 and 291. Read these formulas: formal adjunction statements, not the ringed-topos K-injective normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed topoi and a finite free constant algebra B over A, scalar direct image projection for R to R tensor A B restricts to the constant coefficient projection, with composite adjunction counits",
+   "results": "SheafOfModules.unitToPushforwardObjUnit and pushforwardSections_unitHomEquiv (Sheaf/PullbackFree); ModuleCat scalar counit formulas; Scheme.Modules open-immersion counits. No unbounded ringed coefficient-restriction counit identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_extendScalarsComp|projection.*mate|counit.*adjunction",
+   "results": "ModuleCat/ChangeOfRings.lean:992,1009 and Monoidal/Closed.lean:68. Read the scalar composition formula at 992: ordinary modules only.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-ordinary-adjunction-scalar-compatibility",
+  "date": "2026-10-17",
+  "group": "Q152"
+ },
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-adjunctions",
+   "place": "Proof Step 1, ordinary derived adjunction: counit compatibility of the two coefficient-restriction/direct-image factorizations, used in the finite-free scalar calculation.",
+   "via": [
+    "lem-pur-ordinary-adjunction-scalar-compatibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

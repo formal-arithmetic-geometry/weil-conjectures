@@ -3,7 +3,7 @@
  "blueprint": {
   "from": {
    "node": "prop-sf-dualizable",
-   "place": "prop-sf-dualizable.proof.md, middle sentence: \"the dual ... is again bounded with finite projective terms, so ... is quasi-isomorphic\"; degree-zero comparison for the scalar-localized terms of that bounded model",
+   "place": "prop-sf-dualizable.proof.md, first sentence: choose a bounded finite-projective model and use [lem-sf-hom-finite-projective] for its dual; this node makes the degree-zero finite-projective Hom comparison explicit after scalar localization and a retraction.",
    "via": []
   },
   "same_as": [],
@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Rational ordinary-to-derived Hom comparison for a finite-projective summand",
- "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology], let $A$ be a commutative ring, let $t\\in A$, and let $R$ be a sheaf of commutative $A$-algebras. Write $D(R)$ for the derived category of sheaves of $R$-modules [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category] and $Q_t:D(R)\\to D(R)[1/t]$ for its scalar localization [def-weil-linear-scalar-localization]. Fix a K-injective resolution $j:R[0]\\to I$ [def-pur-derived-internal-hom]. For an $R$-module sheaf $F$ put $B(F)=\\mathcal Hom_R(F,R)[0]$ and $T(F)=\\mathcal Hom_R^\\bullet(F[0],I)$ [def-pur-hom-complex]; postcomposition with $j$ gives the chain map $c_F:B(F)\\to T(F)$. Suppose that for some integer $m\\geq0$ there are morphisms $i:Q_t(F[0])\\to Q_t(R^{\\oplus m}[0])$ and $p:Q_t(R^{\\oplus m}[0])\\to Q_t(F[0])$ with $pi=1$. Then $Q_t(c_F)$ is an isomorphism. Moreover $Q_t(B(F))$ is a direct summand of $Q_t(R^{\\oplus m}[0])$. The comparison $c_F$ is natural under module maps, and this naturality extends $A[1/t]$-linearly to maps in the scalar localization of the degree-zero module subcategory.",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology], let $A$ be a commutative ring, let $t\\in A$, and let $R$ be a sheaf of commutative $A$-algebras. Write $D(R)$ for the derived category of sheaves of $R$-modules [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category], with the $A$-linear structure induced by $A\\to R$ [lem-weil-linear-abelian-derived-category], and $Q_t:D(R)\\to D(R)[1/t]$ for its scalar localization [def-weil-linear-scalar-localization]. Fix a K-injective resolution $j:R[0]\\to I$ [def-pur-derived-internal-hom]. For an $R$-module sheaf $F$ put $B(F)=\\mathcal Hom_R(F,R)[0]$ and $T(F)=\\mathcal Hom_R^\\bullet(F[0],I)$ [def-pur-hom-complex]; postcomposition with $j$ gives the chain map $c_F:B(F)\\to T(F)$. Suppose that for some integer $m\\geq0$ there are morphisms $i:Q_t(F[0])\\to Q_t(R^{\\oplus m}[0])$ and $p:Q_t(R^{\\oplus m}[0])\\to Q_t(F[0])$ with $pi=1$. Then $Q_t(c_F)$ is an isomorphism. Moreover $Q_t(B(F))$ is a direct summand of $Q_t(R^{\\oplus m}[0])$ in the same sense as in the hypothesis: there are morphisms $i':Q_t(B(F))\\to Q_t(R^{\\oplus m}[0])$ and $p':Q_t(R^{\\oplus m}[0])\\to Q_t(B(F))$ of $D(R)[1/t]$ with $p'i'=1$. The comparison $c_F$ is natural under module maps, and this naturality extends $A[1/t]$-linearly to maps in the scalar localization of the degree-zero module subcategory.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 08JI (lemma-Rhom-complex-of-direct-summands-finite-free), finite-free/direct-summand comparison, extended to scalar-localized retractions; serves current blueprint prop-sf-dualizable.proof.md, middle sentence about the bounded dual model. The rational extension is agent-written, not asserted verbatim by the Stacks lemma."
@@ -22,11 +22,68 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-linear-scalar-localization",
   "def-pur-derived-internal-hom",
-  "def-pur-hom-complex"
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "lem-weil-linear-abelian-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $E=R^{\\oplus m}$. Apply the bounded-above finite-projective sheaf Hom model [lem-weil-pbc-ringed-site-bounded-free-rhom-model] to $E[0]$ and $R[0]$; with both bounds equal to $0$, it identifies the derived internal Hom from $E[0]$ to $R[0]$ with $\\mathcal Hom_R^\\bullet(E[0],R[0])$. By the definition of derived internal Hom [def-pur-derived-internal-hom], the same object is represented by $T(E)=\\mathcal Hom_R^\\bullet(E[0],I)$, and the comparison between these representatives is postcomposition with the resolution map $j$, namely $c_E$. Evaluation on the standard basis identifies $c_E$ with the direct sum of $m$ copies of $j$; since $j:R[0]\\to I$ is a K-injective resolution, this is an isomorphism in $D(R)$. Applying $Q_t$ preserves this isomorphism. The case $m=0$ is the same calculation with zero complexes.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free; degree-zero finite-free specialization, with the K-injective model from Section 08J7"
+   }
+  },
+  {
+   "text": "For a module map $u:F\\to G$, both $B$ and $T$ act by precomposition, and the square expressing $c$-naturality, $c_F\\circ B(u)=T(u)\\circ c_G$, commutes because on a homogeneous local section $\\phi$ and $x$ both routes send it to $j(\\phi(u(x)))$. Thus $c$ is a natural transformation between the contravariant functors $B$ and $T$ on the degree-zero module subcategory; both functors are $A$-linear, since precomposition with $au$ is $a$ times precomposition with $u$, and $D(R)$ and $Q:\\mathrm{CoCh}\\to D(R)$ are $A$-linear [lem-weil-linear-abelian-derived-category]. By full faithfulness of $M\\mapsto M[0]$ [lem-weil-pbc-derived-single-fully-faithful], $\\operatorname{Hom}_{D(R)}(F[0],G[0])=\\operatorname{Hom}_R(F,G)$, so every morphism $F[0]\\to G[0]$ of $D(R)$ is a module map and $B$, $T$, $c$ are defined on the full subcategory of $D(R)$ of degree-zero objects. The scalar localization has Hom modules $\\operatorname{Hom}_{D(R)}(K,L)\\otimes_A A[1/t]$ and composition $(f\\otimes a)\\circ(g\\otimes b)=(f\\circ g)\\otimes ab$ [def-weil-linear-scalar-localization]. Extending $B$, $T$ by $u\\otimes a\\mapsto B(u)\\otimes a$, $T(u)\\otimes a$ (well defined by $A$-linearity) and $c$ by $c_F\\otimes1$ makes the same naturality square commute for every localized morphism $u\\otimes a$, both sides being $(c_F\\circ B(u))\\otimes a=(T(u)\\circ c_G)\\otimes a$; the identity and composition laws follow from the displayed localization formulas.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "def-weil-linear-scalar-localization",
+    "lem-weil-linear-abelian-derived-category",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Sections 08J7 and 0A8X, functoriality of internal Hom and Hom-complex; scalar-localized extension is written out from the definition"
+   }
+  },
+  {
+   "text": "Work now in the localized category and abbreviate the images of $c_E$ and of all maps by the same letters. Applying the contravariant functors $B$ and $T$ to the given $i:F[0]\\to E[0]$ and $p:E[0]\\to F[0]$ gives maps $B(p):B(F)\\to B(E)$, $B(i):B(E)\\to B(F)$, $T(p):T(F)\\to T(E)$, and $T(i):T(E)\\to T(F)$, with $B(i)B(p)=1$ and $T(i)T(p)=1$. Naturality from the preceding step gives $T(p)c_F=c_EB(p)$ and $T(i)c_E=c_FB(i)$. Since $c_E$ is invertible by Step 1, define $d=B(i)\\circ c_E^{-1}\\circ T(p):T(F)\\to B(F)$. Then $d c_F=B(i)c_E^{-1}T(p)c_F=B(i)c_E^{-1}c_EB(p)=B(i)B(p)=1$ and $c_Fd=c_FB(i)c_E^{-1}T(p)=T(i)c_Ec_E^{-1}T(p)=T(i)T(p)=1$, so $c_F=Q_t(c_F)$ is an isomorphism. The maps $i'=B(p):B(F)\\to B(E)$ and $p'=B(i):B(E)\\to B(F)$ satisfy $p'i'=B(i)B(p)=1$, so they exhibit $Q_t(B(F))$ as a direct summand of $Q_t(B(E))$ in the sense of the statement, and evaluation on the standard basis gives the module isomorphism $\\mathcal Hom_R(R^{\\oplus m},R)\\cong R^{\\oplus m}$, hence $B(E)\\cong R^{\\oplus m}[0]$; composing $i'$, $p'$ with this isomorphism and its inverse gives the required maps to and from $Q_t(R^{\\oplus m}[0])$. For $m=0$ both sides are zero objects.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI, finite-free/direct-summand comparison; the localized retraction and inverse formula are the explicit scalar-extension argument for this node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-weil-linear-scalar-localization",
+  "lem-weil-linear-abelian-derived-category",
+  "lem-weil-pbc-derived-single-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JI together with the scalar-localized retraction extension written explicitly in the item proof"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -114,7 +171,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -131,5 +188,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-rational-term-hom-comparison",
+  "worker": "stage1",
+  "summary": "Split the degree-zero rational Hom comparison into the finite-free calculation, A[1/t]-linear naturality, and the explicit retraction transfer. Added the missing ordinary sheaf-Hom definition dependency, retained the imported statement, and used the existing bounded-free ringed-site RHom model rather than creating a duplicate node.",
+  "blueprint": "Realizes the first sentence of prop-sf-dualizable.proof.md: the degree-zero finite-projective dual/Hom calculation used to identify the dual model. The scalar-localized retraction is the agent-written elaboration needed for the imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "why": "Generic ringed-site finite-projective Hom model used for the finite-free case; the six-functor unit names the finite-projective calculation but does not restate this arbitrary-site theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-0e712b8fe",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-0e712b8fe (reviewer sub-agent of L); spot-checked: I read the whole item and checked it against every source, and the mathematics holds. Sources checked: Stacks 08JI (sites-cohomology.tex lines 11959-12015), the current blueprint prop-sf-dualizable and its proof, unit sk-prop-sf-dualizable-biduality, every cited node, and both citers (prop-sf-dualizable steps 5/6/8 and lem-pod-coefficient-dual-perfect step 6). The delivery has no new nodes and no SGA citation, and I found no duplicate in the DAG. Small cases tested: m=0 forces F to be killed by a power of t, so both sides are zero after localization; Z/2 over Z with t=2 is not an isomorphism integrally but is after inverting 2; F=R gives c=j. Step 1 is correct: the comparison for R^m is the direct sum of m copies of j. Step 3's variance is correct. Fixes are in fixes/dag/nodes/sec-six-functors/lem-sf-rational-term-hom-comparison.json. (1) C1, missing citations: the statement and step 2 use the A-linear structure of D(R) and that every map F[0]->G[0] in D(R) comes from a module map; neither was cited. I added lem-weil-linear-abelian-derived-category (also to stmt_deps) and lem-weil-pbc-derived-single-fully-faithful. Both are Mathlib leaves, so no cycle and no off-route proof. (2) E3: step 3 wrote the inverse as d=T(p)c_E^{-1}B(i), which does not type-check in the composition order used everywhere else. Corrected to d=B(i)c_E^{-1}T(p), with both cancellations written out; the report repeats the same slip. (3) Statement: the proof only shows that B(F) is a retract (maps with composite 1) in the raw localization, which may not be idempotent complete. The statement now says direct summand in the same sense as the hypothesis, which is exactly what both citers use, so nothing they need is weakened. Accepted tool_use: lem-weil-pbc-ringed-site-bounded-free-rhom-model, the generic ringed-site Hom model of Stacks 08JI, which no node of this unit gives.; 1 file(s) fixed by the reviewer"
  }
 }

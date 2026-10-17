@@ -18,9 +18,161 @@
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $T=X_{(x)}$, $B=S_{(s)}$, $j:T\\to X$ and $h=f_{(x)}:T\\to B$. Both $T$ and $B$ are affine by [def-weil-pbc-strict-henselization-limit]. An affine scheme is separated by [lem-weil-pbc-affine-source-morphism-separated] applied to its structural map. Thus [lem-weil-pbc-affine-source-separated-target-affine-morphism] makes $h$ affine, and [lem-weil-pbc-affine-morphism-permanence](3) makes it qcqs. Put $A=\\mathbf Z/m\\mathbf Z$. Every $\\Lambda$-sheaf $G$ has an underlying $A$-module sheaf $G_A$ with the same abelian sheaf, since $mG=0$. By [lem-sbc-higher-direct-image-forget-comparison] for $\\Lambda$ and for $A$, the underlying abelian sheaves of $R^qh_*G$ and $R^qh_*G_A$ are isomorphic. Consequently it suffices to prove the assertion for $A$-module sheaves. Here $A$ is finite, even when $\\Lambda$ is infinite.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sbc-higher-direct-image-forget-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/Illusie-nearby-cycles28.pdf",
+    "place": "Corollary 1.15: coefficient reduction and affine strict-local geometry; Stacks 01S7 (lemma-affine-separated)"
+   }
+  },
+  {
+   "text": "We first prove the bound for $j^*F$ with $F$ any $A$-module sheaf on $X$. Fix $q>2N$. Apply [lem-trf-gabber-nearby-cycle-dimension-bound] with coefficient ring $A$: it gives $\\mathcal H^qR\\Psi_f(F[0])=0$. The integer, fibre bound and locally-finite-type hypothesis are exactly those of the item. Applying the point functor at any specialization triple $(x,s\\leftarrow t_0)$ and then [lem-trf-oriented-point-cohomology] with second scheme $S$ and second morphism $1_S$ gives\n$$H^q(T\\times_B S_{(t_0)},F|_{T\\times_B S_{(t_0)}})=0.$$\nThe specialization here is the supplied map $S_{(t_0)}\\to B$. Taking cohomology after the point functor is legitimate: [lem-pe-constant-left-module-inverse-image] proves exactness for constant-module inverse image along any geometric morphism and its compatibility with forgetting scalars. The complex $F[0]$ is bounded below, as required by the oriented-point formula.",
+   "uses": [
+    "lem-trf-gabber-nearby-cycle-dimension-bound",
+    "lem-trf-oriented-point-cohomology",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/Illusie-nearby-cycles28.pdf",
+    "place": "Theorem 1.14 and formula (1.3.1), the stalk form of (1.12.6)"
+   }
+  },
+  {
+   "text": "Let $\\rho:B=S_{(s)}\\to S$ be the structural map and let $t:\\operatorname{Spec}\\Omega\\to B$ be any geometric point; put $t_0=\\rho t$, with this same algebraically closed field. We verify the local affine hypothesis of the current [lem-trf-ind-etale-strict-local-invariance]. By [lem-weil-pbc-strict-henselization-functoriality](1), $B=\\operatorname{Spec}H$ is local and its closed point maps to $s$. Choose an affine open $V=\\operatorname{Spec}R$ of $S$ containing $s$. Its inverse image contains the closed point of $B$, hence all of $B$: a basic open containing the maximal ideal of a local ring is defined by a unit. Thus $\\rho$ factors through $V$. This factorization supplies a ring map $a:R\\to H$, and [lem-weil-pbc-strict-henselization-affine-chart-ind-etale], with the identity $\\operatorname{Spec}H=B$, says $a$ is ind-etale. The whole affine $B$ and $V$ therefore verify the invariance lemma's hypothesis near every $t$, including nonclosed points. It gives the canonical isomorphism $e:B_{(t)}\\xrightarrow{\\sim}S_{(t_0)}$ over $S$. If $b:B_{(t)}\\to B$ is the structural map, set $c=b e^{-1}:S_{(t_0)}\\to B=S_{(s)}$. Since $e$ is over $S$, $c$ is an $S$-morphism and is precisely an allowed specialization in step 2. Moreover $ce=b$. The fibre-product universal property consequently identifies the tube in step 2 with $T\\times_B B_{(t)}$, together with its projection to $T$. Thus the vanishing in step 2 applies to every strict-local stalk tube of $h$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-trf-ind-etale-strict-local-invariance",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX (lemma-describe-etale-local-ring), the affine-chart ind-etale presentation, and the current ind-etale strict-local invariance statement; explicit specialization supplying Illusie (1.12.7)."
+   }
+  },
+  {
+   "text": "The strict-local stalk formula [prop-weil-pbc-strict-henselization-stalk-formula], applied to the qcqs morphism $h$ and the torsion underlying abelian sheaf of $j^*F$, identifies each stalk of its $q$-th abelian higher direct image with the zero group from step 3. To identify that group with the underlying group of module cohomology use [lem-pe-left-module-derived-evaluation-forget] at the final object of the Milnor tube; inverse images commute with forgetting by [lem-pe-constant-left-module-inverse-image]. The higher-image forgetting comparison [lem-sbc-higher-direct-image-forget-comparison] now identifies these with the stalks of the forgotten $A$-module sheaf $R^qh_*j^*F$. Hence [lemma-weil-pbc-geometric-stalk-conservative], applied to its map to zero, gives $R^qh_*j^*F=0$. Forgetting the module action reflects the zero sheaf, since an abelian group with one element has a unique module structure.",
+   "uses": [
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "lem-pe-left-module-derived-evaluation-forget",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks 03Q9 (theorem-higher-direct-images); coefficient evaluation and geometric-stalk detection"
+   }
+  },
+  {
+   "text": "It remains to pass from restrictions to arbitrary sheaves on $T$. By [lem-weil-pbc-affine-scheme-qcqs], $T$ is qcqs, and the finite ring $A$ permits [lem-weil-pbc-module-sheaf-colimit-constructible]: write $G_A=\\varinjlim_\\alpha C_\\alpha$ over a small filtered category with every $C_\\alpha$ constructible. The qcqs morphism $h$ satisfies the hypotheses of [lem-sbc-higher-direct-image-large-filtered-colimit], so $R^qh_*G_A=\\varinjlim_\\alpha R^qh_*C_\\alpha$. We will show that each term on the right is zero by making $C_\\alpha$ a retract of an ambient restriction. This use of finite coefficients is on $A$, not an unsupported finiteness assertion about $\\Lambda$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "lem-sbc-higher-direct-image-large-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks 03SA (lemma-torsion-colimit-constructible), finite-coefficient constructible approximation and filtered continuity"
+   }
+  },
+  {
+   "text": "Fix one constructible $A$-sheaf $C$ on $T$. In the affine pointed-neighbourhood limit of [def-weil-pbc-strict-henselization-limit], all stages are qcqs by [lem-weil-pbc-affine-scheme-qcqs]. All transition maps are affine: their sources and targets are affine, so separatedness of the targets and [lem-weil-pbc-affine-source-separated-target-affine-morphism] apply. Use [lem-weil-pbc-cofiltered-limit-directed-reindex] to put this small cofiltered limit over a directed set without changing its limit or its stages. Then [lem-weil-pbc-constructible-module-limit-descent] gives a pointed affine etale neighbourhood $u:U\\to X$, its canonical projection $a:T\\to U$, and a constructible $A$-sheaf $C_U$ with $a^*C_U\\cong C$. The projections satisfy $ua=j$. No assertion that an arbitrary $G_A$ descends to a single stage has been made.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+    "lem-weil-pbc-cofiltered-limit-directed-reindex",
+    "lem-weil-pbc-constructible-module-limit-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks 09YU (lemma-category-is-colimit), essential surjectivity for finite-ring module sheaves"
+   }
+  },
+  {
+   "text": "Form $P=T\\times_XU$ with projections $v:P\\to T$, $b:P\\to U$. The map $\\sigma=(1_T,a):T\\to P$ is a section of $v$ because $ua=j$. The affine source $U$ makes $u$ separated by [lem-weil-pbc-affine-source-morphism-separated]. Its base change $v$ is separated by [lem-weil-pbc-separated-base-change] and etale by [lem-weil-pbc-etale-scheme-base-change]. Therefore [lem-weil-pbc-etale-section-clopen-immersion] identifies $\\sigma$ with an open-and-closed component of $P$. In particular $P=\\sigma(T)\\amalg P_1$, with $v|_{\\sigma(T)}$ the identity after that identification, and $\\sigma^*b^*C_U=a^*C_U\\cong C$.",
+   "uses": [
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-section-clopen-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks 02GO (base change of etale maps); section of separated etale map is clopen"
+   }
+  },
+  {
+   "text": "Put $F=u_!C_U$, an $A$-module sheaf on $X$. By [lem-weil-pbc-etale-shriek-base-change-modules], $j^*F\\cong v_!b^*C_U$. The clopen decomposition of step 7 splits this sheaf as $C\\oplus E$, where $E=(v|_{P_1})_!((b^*C_U)|_{P_1})$. Here is the elementary splitting argument: for an etale test object over $T$, separate any lift to $P$ into its inverse images of the two clopen parts. These form a disjoint open cover. In the sum-extension formula [def-weil-pbc-etale-sum-extension], the terms on the first part give $C$ and those on the second part give $E$. Sheaf gluing along this disjoint cover gives mutually inverse maps with $C\\oplus E$. Inclusion of the first summand and projection back to it compose to $1_C$. Thus $C$ is a retract of $j^*F$.",
+   "uses": [
+    "lem-weil-pbc-etale-shriek-base-change-modules",
+    "def-weil-pbc-etale-sum-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks 03S6 (lemma-shriek-base-change); explicit splitting over a disjoint clopen cover"
+   }
+  },
+  {
+   "text": "Apply $R^qh_*$ to the retraction $C\\to j^*F\\to C$. Functoriality preserves its composite $1_C$. Step 4 says $R^qh_*j^*F=0$, so the identity of $R^qh_*C$ factors through zero and is zero. Hence $R^qh_*C=0$. Step 5 now expresses $R^qh_*G_A$ as a colimit of zero objects, which is zero: the zero cocone has a unique map into every cocone. Finally step 1 identifies the underlying abelian sheaf of $R^qh_*G$ with zero, and hence $R^qh_*G=0$ as a $\\Lambda$-module sheaf. The argument holds for every $G$ and $q>2N$. If $m=1$, every unital module sheaf is already zero; if $X$ has no geometric point, the asserted quantification is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/Illusie-nearby-cycles28.pdf",
+    "place": "Corollary 1.15: retractions, filtered colimit and restoration of the coefficient action"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-trf-gabber-nearby-cycle-dimension-bound",
+  "lem-trf-oriented-point-cohomology",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "def-pc-fibre-product",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "lem-sbc-higher-direct-image-large-filtered-colimit",
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "lem-weil-pbc-constructible-module-limit-descent",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "def-weil-pbc-etale-sum-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/Illusie-nearby-cycles28.pdf",
+  "place": "Corollary 1.15 (printed p. 16), following its Theorem 1.14 and bounded-below stalk formulas (1.3.1), (1.12.6)-(1.12.7); the omitted limit argument is expanded using Stacks 03SA, 09YU and 03S6. Local Illusie PDF WANTED; author PDF read online."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +215,94 @@
    "results": "12 general derived-functor existence/universal-property hits including CategoryTheory.Functor.HasRightDerivedFunctor, totalRightDerived and IsRightDerivedFunctor; none asserts an etale strict-local dimension bound. Logged 10:27:54Z.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|cohomological.*dimension",
+   "results": "{\"t\": \"2026-10-17T14:13:10Z\", \"tool\": \"grep\", \"query\": \"cohomologicalDimension|cohomological.*dimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern general derived categories, scheme limits, group cohomology or bibliographic mentions of Gabber; no nearby-cycle dimension theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "nearbyCycles|vanishingTopos|Gabber|strict.*local.*cohomolog",
+   "results": "{\"t\": \"2026-10-17T14:13:10Z\", \"tool\": \"grep\", \"query\": \"nearbyCycles|vanishingTopos|Gabber|strict.*local.*cohomolog\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean\"], \"digest\": \"e1086e1d312c63b1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern general derived categories, scheme limits, group cohomology or bibliographic mentions of Gabber; no nearby-cycle dimension theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gabber cohomological dimension bound for nearby cycles with torsion coefficients",
+   "results": "{\"t\": \"2026-10-17T14:13:10Z\", \"tool\": \"leansearch\", \"query\": \"Gabber cohomological dimension bound for nearby cycles with torsion coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.coboundaries₁_le_cocycles₁\", \"groupCohomology.coboundaries₁\", \"groupCohomology.coboundaries₂_le_cocycles₂\", \"CategoryTheory.projectiveDimension_ne_top_iff\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"CochainComplex.isStrictlyGE_of_ge\", \"CategoryTheory.IsGrothendieckAbelian.ab4OfSize\", \"groupCohomology.isCoboundary₁_of_mem_coboundaries₁\"], \"digest\": \"2e653b5eba007a09\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern general derived categories, scheme limits, group cohomology or bibliographic mentions of Gabber; no nearby-cycle dimension theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\"",
+   "results": "{\"t\": \"2026-10-17T14:13:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.HasRightDerivedFunctor\", \"CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension'\", \"CategoryTheory.Functor.HasRightDerivedFunctor.mk\", \"CategoryTheory.Functor.totalRightDerived\", \"CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension\", \"CategoryTheory.Functor.hasRightDerivedFunctor_iff\", \"CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso\", \"CategoryTheory.Functor.IsRightDerivedFunctor\"], \"digest\": \"a76fcf1e7b9a51a3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern general derived categories, scheme limits, group cohomology or bibliographic mentions of Gabber; no nearby-cycle dimension theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of a sheaf on a strict localization vanish above twice the relative fibre dimension",
+   "results": "{\"t\": \"2026-10-17T14:13:19Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct images of a sheaf on a strict localization vanish above twice the relative fibre dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\"], \"digest\": \"5a08632f8d93fcdc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern general derived categories, scheme limits, group cohomology or bibliographic mentions of Gabber; no nearby-cycle dimension theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type morphism of schemes whose fibres have dimension at most N, the etale nearby cycle functor on torsion module sheaves vanishes in degrees greater than 2N",
+   "results": "{\"t\": \"2026-10-17T14:13:20Z\", \"tool\": \"leanfinder\", \"query\": \"For a locally finite type morphism of schemes whose fibres have dimension at most N, the etale nearby cycle functor on torsion module sheaves vanishes in degrees greater than 2N\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.isZero_of_isLE\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\"], \"digest\": \"1848db7ca1ae1dd3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern general derived categories, scheme limits, group cohomology or bibliographic mentions of Gabber; no nearby-cycle dimension theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|cohomological.*dimension",
+   "results": "{\"t\": \"2026-10-17T15:50:44Z\", \"tool\": \"grep\", \"query\": \"cohomologicalDimension|cohomological.*dimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read current hits; these are general derived-category bounds, group cohomology, affine-limit section vanishing or bibliography entries, not nearby-cycle cohomological dimension"
+  },
+  {
+   "tool": "grep",
+   "query": "nearbyCycles|vanishingTopos|Gabber|strict.*local.*cohomolog",
+   "results": "{\"t\": \"2026-10-17T15:50:44Z\", \"tool\": \"grep\", \"query\": \"nearbyCycles|vanishingTopos|Gabber|strict.*local.*cohomolog\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean\"], \"digest\": \"f19fe95b18f095d6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read current hits; these are general derived-category bounds, group cohomology, affine-limit section vanishing or bibliography entries, not nearby-cycle cohomological dimension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gabber cohomological dimension bound for nearby cycles with torsion coefficients",
+   "results": "{\"t\": \"2026-10-17T15:50:45Z\", \"tool\": \"leansearch\", \"query\": \"Gabber cohomological dimension bound for nearby cycles with torsion coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.coboundaries₁_le_cocycles₁\", \"groupCohomology.coboundaries₁\", \"groupCohomology.coboundaries₂_le_cocycles₂\", \"CategoryTheory.projectiveDimension_ne_top_iff\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"CochainComplex.isStrictlyGE_of_ge\", \"CategoryTheory.IsGrothendieckAbelian.ab4OfSize\", \"groupCohomology.isCoboundary₁_of_mem_coboundaries₁\"], \"digest\": \"2e653b5eba007a09\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read current hits; these are general derived-category bounds, group cohomology, affine-limit section vanishing or bibliography entries, not nearby-cycle cohomological dimension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\"",
+   "results": "{\"t\": \"2026-10-17T15:50:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.HasRightDerivedFunctor\", \"CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension'\", \"CategoryTheory.Functor.HasRightDerivedFunctor.mk\", \"CategoryTheory.Functor.totalRightDerived\", \"CategoryTheory.Functor.HasRightDerivedFunctor.hasLeftKanExtension\", \"CategoryTheory.Functor.hasRightDerivedFunctor_iff\", \"CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso\", \"CategoryTheory.Functor.IsRightDerivedFunctor\"], \"digest\": \"a76fcf1e7b9a51a3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read current hits; these are general derived-category bounds, group cohomology, affine-limit section vanishing or bibliography entries, not nearby-cycle cohomological dimension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type morphism of schemes whose fibres have dimension at most N, the etale nearby cycle functor on torsion module sheaves vanishes in degrees greater than 2N",
+   "results": "{\"t\": \"2026-10-17T15:50:47Z\", \"tool\": \"leanfinder\", \"query\": \"For a locally finite type morphism of schemes whose fibres have dimension at most N, the etale nearby cycle functor on torsion module sheaves vanishes in degrees greater than 2N\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.isZero_of_isLE\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\"], \"digest\": \"1848db7ca1ae1dd3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read current hits; these are general derived-category bounds, group cohomology, affine-limit section vanishing or bibliography entries, not nearby-cycle cohomological dimension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of a sheaf on a strict localization vanish above twice the relative fibre dimension",
+   "results": "{\"t\": \"2026-10-17T15:50:48Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct images of a sheaf on a strict localization vanish above twice the relative fibre dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\"], \"digest\": \"5a08632f8d93fcdc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read current hits; these are general derived-category bounds, group cohomology, affine-limit section vanishing or bibliography entries, not nearby-cycle cohomological dimension"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-type-torsion-universal-star",
@@ -88,5 +324,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-gabber-strict-local-torsion-bound",
+  "worker": "stage1",
+  "summary": "Expanded the arbitrary-sheaf limit reduction: forget to the finite coefficient ring Z/m, prove the bound on ambient restrictions with Gabber nearby-cycle vanishing and bounded-below Milnor-tube stalk formulas, descend constructible sheaves and realize them as retracts of ambient etale sum extensions, then pass to filtered colimits. One new statement-only node is the named Gabber nearby-cycle theorem. No statement changes. Repair of landing refusal: revalidated the current Q51 ind-etale invariance statement; step 3 now verifies its local affine hypothesis by the existing affine-chart ind-etale lemma and explicitly constructs c=b e^{-1} using the same geometric field. Restored missing citation evidence and search log through actual msearch reruns; no mathematical statement changed.",
+  "blueprint": "The same normal-cone external-product comparison and universal (*) input specified in blueprint.from.place; realizes the fixed-morphism strict-local bound used there, following the source corollary rather than changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Generic strict-local geometry, coefficient comparison, constructible descent or sheaf continuity tool used in the explicit limit reduction; this trace-formula unit supplies no replacement for this statement."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic strict-local geometry, coefficient comparison, constructible descent or sheaf continuity tool used in the explicit limit reduction; this trace-formula unit supplies no replacement for this statement."
+   },
+   {
+    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+    "why": "Generic strict-local geometry, coefficient comparison, constructible descent or sheaf continuity tool used in the explicit limit reduction; this trace-formula unit supplies no replacement for this statement."
+   },
+   {
+    "node": "lem-pe-left-module-derived-evaluation-forget",
+    "why": "Generic strict-local geometry, coefficient comparison, constructible descent or sheaf continuity tool used in the explicit limit reduction; this trace-formula unit supplies no replacement for this statement."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic strict-local geometry, coefficient comparison, constructible descent or sheaf continuity tool used in the explicit limit reduction; this trace-formula unit supplies no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "why": "Generic strict-local geometry, coefficient comparison, constructible descent or sheaf continuity tool used in the explicit limit reduction; this trace-formula unit supplies no replacement for this statement."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-large-filtered-colimit",
+    "why": "Generic strict-local geometry, coefficient comparison, constructible descent or sheaf continuity tool used in the explicit limit reduction; this trace-formula unit supplies no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-module-limit-descent",
+    "why": "Generic strict-local geometry, coefficient comparison, constructible descent or sheaf continuity tool used in the explicit limit reduction; this trace-formula unit supplies no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-shriek-base-change-modules",
+    "why": "Generic strict-local geometry, coefficient comparison, constructible descent or sheaf continuity tool used in the explicit limit reduction; this trace-formula unit supplies no replacement for this statement."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Step 3 needs the local strict-henselization ring and the image of its closed point to factor the structural map through an affine chart."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "why": "Step 3 applies the exact existing ind-etale chart statement to verify the current invariance hypothesis; this is a generic strict-local geometric tool."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Step 3 uses the fibre-product universal property to identify the two tubes with their maps to T."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-pe-constant-left-module-inverse-image",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "lem-sbc-higher-direct-image-large-filtered-colimit",
+  "lem-weil-pbc-constructible-module-limit-descent",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "def-pc-fibre-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-269b86b27",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-269b86b27 (reviewer sub-agent of L); spot-checked: Read all of the item's nine steps, the new node and every cited statement, with local Stacks 03SA(3), 09YU(3), 03S6 and 04HX. Caveat: Illusie Thm 1.14/Cor 1.15 is not in the local literature and network access is blocked, so I could not verify it verbatim; the WANTED entry stands. I cross-checked against ILO XVIII-A/B, which is consistent but not the cited statement, and tested the new node on small cases (identity with N=0, A^1 over an algebraically closed field with N=1, m=1, empty X). Step checks: (1) T and B are affine, h is affine and qcqs, and the forget comparison applied for Lambda and for A=Z/m gives the same underlying sheaf. (2) The new Gabber node with A, the oriented-point formula with Y=S, g=1 and bounded-below F[0], and exact z^* together kill the tube cohomology. (3) The local B factors through an affine chart; the chart lemma gives ind-etale, which is exactly the invariance hypothesis; e: B_(t)≅S_(t0) over S, c=b e^{-1} is an S-specialization with ce=b, so the tubes agree. (4) Stalk formula for qcqs h and torsion sheaf, derived-evaluation forget, forget comparison and conservativity. (5) 03SA for finite A with filtered-colimit continuity. (6) Affine qcqs stages with affine transitions, directed reindexing, then 09YU descent of each constructible C only. (7) Separated etale base change makes the section clopen. (8) 03S6 with an elementary clopen splitting gives a retract. (9) Retract of zero, colimit of zeros, then restore Lambda. No hypothesis is smuggled in. No cycle: the DFS over 1684 dependency nodes never reaches the item, and oriented-nearby-strict-local-description was rightly avoided because it would close one. The new node is statement-only, self-contained, has six real searches of all three kinds, correct blueprint.from/via, and is not a duplicate or a restated clause (global vanishing-topos theorem vs strict-local corollary). Accepted all 12 declared tool_uses as generic tools; def-pc-fibre-product's declaration was unneeded but harmless. No SGA. One cosmetic point left unchanged: step 7 names etale-cohomology.tex for 02GO, which is in morphisms.tex. No changes."
  }
 }

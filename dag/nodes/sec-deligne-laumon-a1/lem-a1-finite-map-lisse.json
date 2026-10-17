@@ -16,9 +16,138 @@
   "def-weil-derived-direct-image",
   "prop-weil-operations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a finite coefficient field $E\\subset\\Qlb$ and a lisse $E$-sheaf $F_E$ representing the underlying sheaf $\\mathcal F$, using [def-pod-lisse-l-adic-sheaves](4). The scheme $Y$ is of finite type over the Noetherian scheme $\\operatorname{Spec}k$, hence Noetherian [lem-weil-pbc-finite-type-over-noetherian]; being covered by finitely many spectra of Noetherian rings, its underlying space satisfies the ascending chain condition on open subsets. So there are finitely many open-and-closed connected components of $Y$, by [lem-sfb-noetherian-connected-components-open]. On each nonempty component, [cor-galois-lisse-representations](2) identifies $F_E$ with a continuous finite-dimensional representation of its profinite fundamental group. By [lem-pod-profinite-stable-lattice], choose an invariant finite free $\\mathcal O_E$-lattice; the same equivalence gives its lisse integral system $(M_n)_n$, with $M_n$ locally free of finite rank over $A_n=\\mathcal O_E/\\varpi_E^n$ and $M_{n+1}\\otimes_{A_{n+1}}A_n\\cong M_n$. (The stalk of $M_n$ at the base point is $\\Lambda/\\varpi_E^n\\Lambda$, free over $A_n$, by the transition isomorphisms; on a connected component the isomorphism class of the stalks of a locally constant sheaf is constant, the locus where it is a given class being open and closed, so every local value of $M_n$ is free.) Assemble these systems over the finitely many components. Via [lem-sf-proetale-locally-constant-origin] regard the levels on the pro-etale site. By [lem-sfb-integral-lisse-reduction-equivalence], their inverse limit $M$ is locally finite free over the completed coefficient ring, with $M/\\varpi_E^nM\\cong M_n$. This is the integral realization of the chosen lattice and represents $F_E$ after rationalization. No Frobenius-stable lattice is required: the lattice is chosen only for the underlying geometric sheaf.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-noetherian-connected-components-open",
+    "cor-galois-lisse-representations",
+    "lem-pod-profinite-stable-lattice",
+    "lem-sf-proetale-locally-constant-origin",
+    "lem-sfb-integral-lisse-reduction-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1), pp. 59-60; also Stanford L19, Proposition 1.1.9, p. 3"
+   }
+  },
+  {
+   "text": "The geometric-fibre map $g$ is finite and etale: finiteness is stable under base change by [lem-weil-pbc-finite-morphism-permanence](a), and etaleness by [lem-weil-pbc-etale-base-change-finite-limits](1). Apply [lem-weil-pbc-finite-etale-etale-local-split] at every point of $X$. This gives an etale covering family $u:U\\to X$ with $Y_U=Y\\times_XU\\cong\\coprod_{j\\in J_U}U$, where $J_U$ is finite and may be empty; write $t_j:U\\to Y$ for the sheet maps. Work separately on these covering members; a single global constant degree or a globally split cover is not assumed.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-finite-etale-etale-local-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 04HN, lemma-finite-etale-etale-local; Morphisms Tags 01WL and 02GO"
+   }
+  },
+  {
+   "text": "For an $A_n$-module sheaf $G$ on $Y_{\\mathrm{proet}}$, compute direct image on the slice over a splitting member $U$. By [lem-weil-proetale-weakly-etale-localization] this is restriction to $U_{\\mathrm{proet}}$. For an object $V\\to U$, [def-weil-proetale-module-direct-image] gives $(g_*G)(V)=G(Y\\times_XV)=\\prod_{j\\in J_U}(t_j^*G)(V)$: the second equality is the sheaf axiom for the finite disjoint clopen covering of $Y\\times_XV$. These equalities respect restrictions and scalar multiplication coordinate by coordinate, so $(g_*G)|_U\\cong\\prod_j t_j^*G$. Each $t_j$ is etale, and its restriction functor is exact by [lem-weil-pbc-proetale-restriction-injectives]. A finite product preserves kernels componentwise and preserves epimorphisms: locally lift each of the finitely many coordinates, then take a common refinement of their covering families. Thus the displayed finite product is exact. Exactness can be checked on the covering family $U\\to X$ by local lifting of sections, so $g_*$ on these constant-coefficient module sheaves is exact.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-proetale-module-direct-image",
+    "lem-weil-pbc-proetale-restriction-injectives"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Proof of Tag 095B, lemma-pushforward-locally-constant: localization and finite-product calculation"
+   }
+  },
+  {
+   "text": "Set $N_n=g_*M_n$ at finite coefficient level. The exact-functor theorem [lem-weil-pbc-exact-functor-derived-functor] and step 3 give $Rg_{*,n}M_n\\cong N_n[0]$. On the etale site, [lem-weil-pbc-etale-finite-pushforward-locally-constant] gives a finite locally constant module sheaf $g_*M_n^{\\mathrm{et}}$. Its pro-etale pullback is $N_n$: on a splitting member the etale finite-exchange isomorphism [lemma-weil-pbc-finite-exchange] and the calculation of step 3 both identify the canonical comparison with the same finite product of the pulled-back sheet restrictions. The comparison is the identity in every coordinate, so these local identifications glue. Moreover $N_n$ is locally finite free over $A_n$: on a splitting member refine the finitely many locally free sheet trivializations, and the product becomes a finite direct sum of finite free modules. Tensoring this finite sum with $A_n$ gives $N_{n+1}\\otimes_{A_{n+1}}A_n\\cong N_n$. The isomorphism is induced by the pushed transition map, since its $j$-th coordinate is exactly the transition map on the $j$-th sheet. This also proves compatibility with successive reductions. All transition maps are epimorphisms.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-etale-finite-pushforward-locally-constant",
+    "lemma-weil-pbc-finite-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095B, lemma-pushforward-locally-constant; Tag 0959, lemma-finite-pushforward-commutes-with-base-change; Derived Categories Tag 015F"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-integral-lisse-reduction-equivalence] to $(N_n)_n$: $N=\\varprojlim_nN_n$ is locally finite free over $\\widehat{\\mathcal O}_{E,X}$ with reductions $N/\\varpi_E^nN\\cong N_n$. The corresponding etale tower from step 4 is a lisse $\\mathcal O_E$-system in [def-pod-lisse-l-adic-sheaves](1). The pro-etale towers $(M_n)_n$ and $(N_n)_n$ have epimorphic transitions; [det-pe-milnor-epimorphic] therefore identifies their ordinary inverse limits with their derived inverse limits. For $M$ and $N$, ordinary reduction is also derived reduction: locally they are finite free completed-coefficient modules, so multiplication by $\\varpi_E^n$ is injective and its cokernel is the indicated $A_n$-module; the two-term resolution of the quotient computes the derived tensor. Consequently the defining formula [def-weil-derived-direct-image] gives $Rg_*M=R\\varprojlim_n Rg_{*,n}M_n\\cong R\\varprojlim_nN_n\\cong N[0]$. The tower comparison is coherent because step 4 used the actual transitions. Also $g_*M=\\varprojlim_ng_*M_n=N$ directly from the sectionwise formula [def-weil-proetale-module-direct-image], since inverse limits of sheaves are sectionwise. Thus the identification is with the underived direct image. For $P\\in\\{M,N\\}$, with $P_n=P\\otimes^L A_n=P/\\varpi_E^nP$, the reduction map $c:P\\to\\prod_nP_n$ is injective with image $\\varprojlim_nP_n=\\ker(1-T)$ (by the equivalence above, $P\\cong\\varprojlim_nP_n$), and $1-T$ is an epimorphism by [det-pe-milnor-epimorphic]; this short exact sequence gives a Roos triangle with first map $c$, so $P$ is derived complete [def-weil-derived-complete]. Its reductions $P_n$ are locally constant with finite stalks in degree zero, constructible with the single stratum, uniformly in $n$; hence $P\\in D^b_c(-,\\mathcal O_E)$ with amplitude $[0,0]$. For $M$ this is the hypothesis of the defining formula used above; for $N$ it is the conclusion.",
+   "uses": [
+    "lem-sfb-integral-lisse-reduction-equivalence",
+    "def-pod-lisse-l-adic-sheaves",
+    "det-pe-milnor-epimorphic",
+    "def-weil-derived-direct-image",
+    "def-weil-proetale-module-direct-image",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-derived-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1), p. 59; integral reconstruction and the finite-level definition of direct image"
+   }
+  },
+  {
+   "text": "Rationalize the isomorphism of step 5 and pass to the $\\Qlb$ common-stage category, exactly as prescribed in [def-weil-derived-direct-image]. This gives $Rg_*\\mathcal F=g_*\\mathcal F$ represented by the lisse sheaf $(N\\otimes E)\\otimes_E\\Qlb$ of [def-pod-lisse-l-adic-sheaves](2),(4). The finite-sheet formula also verifies the scalar-extension comparisons used here: for a finite coefficient-field extension, tensoring a finite direct sum of sheet restrictions gives the same sum after extension; each comparison is the identity on the extended coordinates, hence is compatible with transitions and composites of extensions. The output is bounded constructible and lies in degree zero, by step 5 and the rational/common-stage convention; hence it lies in the constructible heart [def-weil-constructible-heart]. This argument includes rank zero, a missing fibre (the empty product is the zero module), and disconnected schemes with varying degree and rank.",
+   "uses": [
+    "def-weil-derived-direct-image",
+    "def-pod-lisse-l-adic-sheaves",
+    "def-weil-constructible-heart"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(4), pp. 59-60; rational and common-stage conventions of the direct-image definition"
+   }
+  },
+  {
+   "text": "Finally apply [prop-weil-operations] to $Rg_*\\mathcal F$ on the bounded constructible domain just proved. Its Weil isomorphism is $L\\Phi_X^*Rg_*\\mathcal F\\xrightarrow{\\mathrm{Ex}_*}Rg_*L\\Phi_Y^*\\mathcal F\\xrightarrow{Rg_*\\theta}Rg_*\\mathcal F$. The hypothesis that $g_0$ is a $k_0$-morphism supplies its Frobenius compatibility; no continuity of an arithmetic Galois action is being imposed. The forgetful functor has the underlying direct image calculated in steps 5-6. Since that object is in the constructible heart and is lisse, [def-weil-weil-sheaf-complex](3) makes this equivariant lift a constructible lisse Weil sheaf on $X_0$, as claimed.",
+   "uses": [
+    "prop-weil-operations",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Definition 1.1.7 and following paragraph, p. 2 (operations on Weil sheaves)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-lisse-l-adic-sheaves",
+  "lem-sfb-noetherian-connected-components-open",
+  "cor-galois-lisse-representations",
+  "lem-pod-profinite-stable-lattice",
+  "lem-sf-proetale-locally-constant-origin",
+  "lem-sfb-integral-lisse-reduction-equivalence",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-proetale-module-direct-image",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-etale-finite-pushforward-locally-constant",
+  "lemma-weil-pbc-finite-exchange",
+  "det-pe-milnor-epimorphic",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-constructible-heart",
+  "prop-weil-operations",
+  "def-weil-weil-sheaf-complex",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-derived-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-reduction-lisse-pure.proof.md",
+  "place": "Opening sentence, lissity clause; expanded using Stacks 04HN, 095B, 015F and Bhatt-Scholze Proposition 6.8.4"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,10 +176,52 @@
    "results": "No matches in Mathlib/AlgebraicGeometry.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale direct image preserves lisse adic sheaves",
+   "results": "AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.IsEtaleAt.comp, AlgebraicGeometry.Scheme.instCategoryEtale, RingHom.Etale.toAlgebra, AlgebraicGeometry.Scheme.Etale.forget",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicLisseSheaf, IsFinite, IsEtale",
+   "results": "loogle: unknown identifier 'IsAdicLisseSheaf'",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(lisse|locallyConstant).*([Pp]ushforward|lowerStar)|finite.*etale",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite etale pushforward of locally constant sheaves of modules",
+   "results": "SheafOfModules.pushforward, TopCat.Sheaf.pushforward, PresheafOfModules.pushforward₀, SheafOfModules.pushforward_map_val, AlgebraicGeometry.Scheme.Modules.pushforward, TopCat.Sheaf.pushforward_sheaf_of_sheaf, PresheafOfModules.pushforward₀_obj, SheafOfModules.pushforwardSections",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]isse|IsLocallyConstant|locally.constant",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "direct image along a finite covering sends local systems to local systems",
+   "results": "CompHausLike.LocallyConstant.functor, CompHausLike.LocallyConstant.functor_map_val, CompHausLike.LocallyConstant.functor_obj_val, TopologicalSpace.Fiber.instFiniteFiberCoeLocallyConstant, Profinite.exists_locallyConstant_finite_aux, Condensed.isColimitLocallyConstantPresheaf, LightCondensed.isColimitLocallyConstantPresheaf, Profinite.exists_locallyConstant_finite_nonempty",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-reduction-lisse-pure",
@@ -67,5 +238,99 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-a1-finite-map-lisse",
+  "worker": "stage1",
+  "summary": "Expanded the finite-etale lissity assertion by choosing geometric integral lattices, computing direct images as finite sheet products, checking quotient-transition compatibility, realizing the pushed tower, and only then applying the Weil equivariant lift. Reused existing nodes throughout; no new nodes and no statement change.",
+  "blueprint": "Realizes the lissity clause in the opening sentence of lem-a1-reduction-lisse-pure.proof.md; it supplies no punctual-purity argument and does not alter the affine-line unit.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-noetherian-connected-components-open",
+    "why": "Decompose the Noetherian geometric source into finitely many connected components to choose integral lattices; no such topological tool occurs in the affine-line unit."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Translate only the underlying geometric lisse sheaf into a continuous representation to choose a lattice; no weight or affine-line argument is replaced."
+   },
+   {
+    "node": "lem-pod-profinite-stable-lattice",
+    "why": "Choose a free integral lattice for a continuous representation of the geometric profinite fundamental group."
+   },
+   {
+    "node": "lem-sf-proetale-locally-constant-origin",
+    "why": "Relate finite locally constant etale coefficient sheaves to their pro-etale realizations."
+   },
+   {
+    "node": "lem-sfb-integral-lisse-reduction-equivalence",
+    "why": "Realize normalized finite locally free coefficient towers as locally free completed-coefficient sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Finiteness of the geometric base change of g_0."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Etaleness of the geometric base change of g_0."
+   },
+   {
+    "node": "lem-weil-pbc-finite-etale-etale-local-split",
+    "why": "Split a finite etale morphism locally on the target; the affine-line unit contains no scheme-level splitting lemma."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Read the direct-image formula on the slice site over an etale splitting member."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-restriction-injectives",
+    "why": "Use its exactness of restriction clause only, for the etale sheet maps."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Identify an exact finite-level module direct image with its right-derived functor."
+   },
+   {
+    "node": "lem-weil-pbc-etale-finite-pushforward-locally-constant",
+    "why": "Finite coefficient local constancy of the etale pushed lattice levels."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-exchange",
+    "why": "Identify the finite etale direct image on a splitting cover in the etale site, for the etale/pro-etale comparison."
+   },
+   {
+    "node": "det-pe-milnor-epimorphic",
+    "why": "Remove higher inverse-limit cohomology for the epimorphic lattice towers."
+   },
+   {
+    "node": "prop-weil-operations",
+    "why": "Add the standard Frobenius structure only after bounded constructibility of this direct image is proved."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-noetherian-connected-components-open",
+  "cor-galois-lisse-representations",
+  "lem-pod-profinite-stable-lattice",
+  "lem-sf-proetale-locally-constant-origin",
+  "lem-sfb-integral-lisse-reduction-equivalence",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-proetale-restriction-injectives",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-etale-finite-pushforward-locally-constant",
+  "lemma-weil-pbc-finite-exchange",
+  "det-pe-milnor-epimorphic",
+  "prop-weil-operations"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-fdb73d6b6",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-fdb73d6b6 (reviewer sub-agent of L); spot-checked: Read in full: the item and all 7 steps, the statement of each of the 22 cited nodes, the main-20261015 proof of lem-a1-reduction-lisse-pure, and the Stacks lemmas 04HN, 095B, 0959 and 015F. In the blueprint, lissity was only claimed through lem-a1-finite-map-purity, which proves purity alone, so this item fills a real gap. The statement is true and unchanged. Small cases checked: empty source or target, the identity, a split cover with sheets of different ranks, disconnected targets with varying degree, and the zero sheaf. Coefficient category: the steps keep the pro-etale D^b_c of def-weil-derived-direct-image and use the etale towers only for the def-pod lissity clause. Batch-5 check: cor-galois-lisse-representations (the lisse sheaf / pi_1-representation dictionary) and lem-pod-profinite-stable-lattice (stable lattice for a compact group) are general foundations. Their closures contain no trace-formula or Poincare-duality theorem node, and neither assumption leaf states or implies them. They are also genuinely needed, because a lattice taken straight from the definition can have torsion stalks, and then the levels are not locally free. Accepted. Two faults, fixed in fixes/dag/nodes/sec-deligne-laumon-a1/lem-a1-finite-map-lisse.json. (1) C1 in step 1: the Noetherian property of Y was used without a node, so I cited lem-weil-pbc-finite-type-over-noetherian, and I added why every local value of M_n is free. (2) E1/E3 in step 5: the claim that N is derived complete because its reductions are constructible does not follow, and the input M was never shown to lie in D^b_c(Y,O_E), which the definition of Rg_* requires. I replaced this with the Roos-triangle argument for both M and N (P is the limit of P_n, and 1-T is an epimorphism by det-pe-milnor-epimorphic), citing def-weil-derived-complete. The declared tool_uses are accepted. There are no new nodes, no duplicate found among about 10 candidate nodes, and no SGA source.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -3,11 +3,219 @@
  "kind": "statement",
  "chapter": "sec-smooth-purity",
  "unit": "sk-lem-sf-mate",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The coefficient rings O_B are Noetherian discrete valuation rings by [lem-weil-l-adic-extension-integers-dvr], and their completion ideals are principal. The small-site convention is already part of the statement. A field is Noetherian, so [lem-weil-pbc-finite-type-over-noetherian] makes X and Y Noetherian; [lem-kun-dimension-finite-type] makes them finite dimensional. Since their characteristic is p distinct from ell, ell is invertible. These verify the hypotheses of the completed-adjunction and scalar-comparison inputs, including the scheme hypotheses of [prop-weil-pbc-scalar-extension]. For the constructible direct-image theorem, use the given k-structure on Y and give X the composite structure X \\to Y \\to \\operatorname{Spec} k; f is then a k-morphism by definition. This new structure on X is finite type by [lem-sfb-finite-type-composition-base-change], clause (1) (Stacks 01T3). The pro-etale sites, coefficient sheaves and constructibility conditions depend on the underlying schemes, so changing this auxiliary structure does not change any object or functor in the item.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "prop-weil-pbc-scalar-extension",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+    "place": "Proof Step 1; coefficient and scheme hypotheses for the extracted ordinary-adjunction scalar argument."
+   }
+  },
+  {
+   "text": "For B=E,L, [lem-sp-completed-pullback-adjunction] supplies completion as a reflector and the constant-coefficient completed adjunction. Its Hom bijection first precomposes with the completion unit and then applies the ordinary derived inverse-image/direct-image adjunction. Transport by [lem-weil-pbc-constant-completion-equivalence]; its statement identifies the finite-reduction towers and completion units. The right-functor comparison of [lem-pur-completed-coefficient-pushforward-comparison] identifies the transported right adjoint with the actual ringed-topos F_B. Thus this is exactly the h_B specified in the item, on all derived-complete inputs. Write eta_B and epsilon_B for its unit and counit, and lambda_B for the completion unit preceding P_B.",
+   "uses": [
+    "lem-sp-completed-pullback-adjunction",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-pur-completed-coefficient-pushforward-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+    "place": "Proof Step 1; Stacks Tag 099N, proetale-lemma-pushforward-Noetherian-case (1),(2),(5)."
+   }
+  },
+  {
+   "text": "Both factors of the Hom bijection in Step 2 are O_B-linear. Precomposition with lambda_B is linear, and its inverse is linear because it is a bijective linear map. For the ordinary factor, the tensor-formula module adjunction of [lem-weil-pbc-ringed-topoi-module-adjunction] is linear: the adjunct sends x to the image of 1 tensor x, and the inverse sends s tensor x to s times that image. On a K-injective target these formulas are termwise formulas for chain maps and respect chain homotopies; [prop-pur-kinjective-resolutions-exist] and [lem-weil-pbc-kinjective-hom-derived] make these actual derived Hom sets; [lem-weil-pbc-right-adjoint-preserves-kinjective] applies to constant-coefficient direct image because its left adjoint is exact. Multiplying a chain map by a scalar commutes with both formulas. Restriction along the constant-to-completed ring map preserves these scalar actions, and the equivalence of [lem-weil-pbc-constant-completion-equivalence] therefore transports the same linear bijection. This proves O_B-linearity of h_B and its inverse.",
+   "uses": [
+    "lem-sp-completed-pullback-adjunction",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+    "place": "Proof Step 1; agent calculation of linearity using Stacks Tags 03D7, 070I and 099N."
+   }
+  },
+  {
+   "text": "Put A=O_E, B=O_L, t=varpi_E and v=varpi_L. Choose an A-basis e_1,...,e_d of B by [lem-sfb-local-field-integral-basis]. In the DVR B, t=u v^e with u a unit and e>=1 by [lem-weil-l-adic-extension-integers-dvr]; t has positive valuation since the coefficient absolute values are compatible. The ideals (t^n)B=(v^{en}) are cofinal with the v-powers: a compatible family at en determines its m-component by reducing any term en>=m, independently of that choice. Modulo t^n the basis identifies B/t^nB with (A/t^n)^d. These are inverse maps of constant sheaves, and inverse limits commute with the finite coordinate tuples by their universal property. Thus the actual ring map\nR_W tensor_{A_W} B_W \\to S_W, r tensor b |\\to r b,\nis an isomorphism: in the chosen basis it is the inverse-limit coordinate isomorphism R_W^d \\to S_W. Multiplication agrees because the basis multiplication constants are in A, and the same constants occur in every quotient. This proves S_W=R_W tensor_{A_W}B_W as A_W-algebras, not just abstract finite freeness. The structural maps send each constant e_i to itself and commute with the quotient projections [def-weil-completed-integral-coefficients, def-weil-pbc-completed-pullback]. Hence the identification holds on both sides of f, with their specified structure maps. Tensor extension is exact since its restriction is a finite direct sum.",
+   "uses": [
+    "lem-sfb-local-field-integral-basis",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-completed-integral-coefficients",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+    "place": "Agent coefficient calculation expanding Proof Step 1; Stacks 07A6, 0D6E, 0B56 and 099N with Bhatt-Scholze Lemma 6.8.2(1)."
+   }
+  },
+  {
+   "text": "Work first over the discrete constant rings O_E and O_L, so ordinary inverse image is exact. Write Q_B for this inverse image and C_W^0 for coefficient tensor. Reassociation gives a^0:C_X^0 Q_E \\to Q_L C_Y^0. The projection construction in [def-weil-pbc-projection-formula-arrows], with the free coefficient O_L in degree zero, is the adjunct of tensoring the ordinary counit with the identity. The change-of-rings adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction] tests an O_L-map with induced source by precomposition with x \\to x tensor 1. In this test, the two orders of taking the ordinary f-adjunct and the coefficient adjunct agree: both are the module-adjunction map of [lem-weil-pbc-ringed-topoi-module-adjunction], sending m tensor s to s times the ordinary counit image of m. For the derived test choose an O_L K-injective target by [prop-pur-kinjective-resolutions-exist]. Its O_E restriction is K-injective by [lem-weil-pbc-right-adjoint-preserves-kinjective], since the finite-free coefficient extension is exact. [lem-weil-pbc-kinjective-hom-derived] therefore transfers the chain-map calculation to derived Hom sets, and [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] identifies the two coefficient-restriction/direct-image factorizations. Consequently the ordinary O_L-transpose of the constant-coefficient projection comparison b^0 is C_X^0(epsilon_E^0) composed with (a^0) inverse. Equality is tested through an adjunction bijection with induced source, not by assuming derived restriction is faithful.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+    "place": "Proof Step 1; explicit scalar/unit calculation. Stacks Tags 03D7, 07A6, 0D6E, 08BJ and 070I; projection map Tag 0B56 in sites-cohomology.tex, equation-projection-formula-map."
+   }
+  },
+  {
+   "text": "Write U^A_W:D(R_W)\\toD(A_W) and U^B_W:D(S_W)\\toD(B_W). The pushout of Step 4 gives the canonical isomorphism\nj_W:U^B_W C_W K \\to C_W^0 U^A_W K,\nby k tensor(r tensor b) |\\to rk tensor b, with inverse k tensor b |\\to k tensor(1 tensor b). Both tensor functors are exact after restriction, so these are maps on all complexes and on their derived categories. They send the coefficient-adjunction unit to x |\\to x tensor 1. Use b with the explicit coefficient-unit normalization in the statement. Under the comparison U^A_YF_E=F_AU^A_X and U^B_YF_L=F_BU^B_X, its coefficient adjunct is F_A of that same unit. The two paths to this target comparison agree: they are the two factorizations of the identical structural A_Y \\to f_*S_X map. To check the normalization on transposes use [lem-pur-ringed-coefficient-restriction-counit], once for A_W \\to R_W and once for B_W \\to S_W; its displayed counit equation identifies the scalar-unit pullback map with the K-injective-normalized direct-image comparison. The coefficient adjunct of b^0 is also F_A of x |\\to x tensor 1 by Step 5. Injectivity of C_Y^0 dashv coefficient restriction [lem-pur-sheaf-ring-derived-coefficient-adjunction] therefore gives\nF_B(j_X) composed with U^B_Y(b_K) = b^0_{U^A_XK} composed with C_Y^0(kappa_E,K) composed with j_Y,\nwhere the target of U^B_Y(b_K) is identified with F_B U^B_X C_XK and kappa_E is U^A_YF_E=F_AU^A_X. This is equality of the specified B-linear derived maps; restriction is not assumed faithful.",
+   "uses": [
+    "lem-pur-ringed-coefficient-restriction-counit",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pur-completed-coefficient-pushforward-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+    "place": "Agent coefficient calculation expanding Proof Step 1; Stacks 07A6, 0D6E, 0B56 and 099N with Bhatt-Scholze Lemma 6.8.2(1)."
+   }
+  },
+  {
+   "text": "The scalar and completion comparisons respect the actual completion units. Indeed, in the constant model C_W^0 is tensor with the finite free A-module B. In a basis this is a finite biproduct. A finite biproduct of strict quotient towers has the finite biproduct of their derived limits: the diagonal/limit Hom adjunction, or the product universal property on K-injective tower resolutions, gives the canonical map and its inverse. That map sends the strict quotient augmentation to the same augmentation. Reassociation sends x tensor b to x tensor b at every quotient, including the tower transitions. Thus completion of C_X^0 Q_A agrees, with its unit, with Q_B C_Y^0 followed by B-completion. The t- and v-adic towers have the cofinal identification of Step 4; alternatively their local vanishing conditions are identical since inverting t is inverting v. [lem-weil-finite-free-completed-scalar-comparison] fixes the completion map chi as the strict quotient augmentation with zero shifted-product component, and [lem-weil-pbc-constant-completion-equivalence] carries it to the constant completion unit. Consequently the a fixed in the statement, after transport and precomposition with the unit, is exactly a^0 of Step 5; the source and target chi maps cancel by naturality. This verifies the actual comparison, not a choice from its finite reductions.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sp-completed-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+    "place": "Agent coefficient calculation expanding Proof Step 1; Stacks 07A6, 0D6E, 0B56 and 099N with Bhatt-Scholze Lemma 6.8.2(1)."
+   }
+  },
+  {
+   "text": "Put q_K=C_X(epsilon_E,K) composed with a_{F_EK}^{-1}. Precompose its constant-coefficient presentation with the B-completion unit. By Step 7 and the reflector Hom bijection of [lem-sp-completed-pullback-adjunction], epsilon_E,K composed with its completion unit is epsilon_E^0,K. Thus the result is C_X^0(epsilon_E^0,K) composed with (a^0)^{-1}. Step 5 computes this as the ordinary transpose of b^0. Step 6 identifies that very b^0 with the specified completed-ring b under the canonical direct-image and scalar comparisons. Since the target is complete, precomposition with the completion unit is a bijection on Hom by the same reflector adjunction; its injectivity proves h_L^{-1}(b_K)=q_K. The equivalences and right-functor comparison of Step 2 identify the transported maps with the original completed-ring maps. In particular no arbitrary isomorphism with the endpoints of b is substituted.",
+   "uses": [
+    "lem-sp-completed-pullback-adjunction",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-pur-completed-coefficient-pushforward-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+    "place": "Agent coefficient calculation expanding Proof Step 1; Stacks 07A6, 0D6E, 0B56 and 099N with Bhatt-Scholze Lemma 6.8.2(1)."
+   }
+  },
+  {
+   "text": "Let v:M \\to F_E K. Naturality of the inverse Hom bijection, the identity of Step 8, and naturality of a inverse give successively h_L inverse(b_K composed with C_Y(v)) = h_L inverse(b_K) composed with P_L C_Y(v) = C_X(epsilon_E,K) composed with a_{F_E K} inverse composed with P_L C_Y(v) = C_X(epsilon_E,K composed with P_E(v)) composed with a_M inverse = C_X(h_E inverse(v)) composed with a_M inverse. This is the requested inverse equation. Set v=h_E(u) and apply h_L to obtain the requested forward equation. These are naturality and inverse-bijection identities, with every composition typed by a:C_X P_E \\to P_L C_Y.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+    "place": "Proof Step 1; formal Hom-bijection calculation following the established transpose normalization."
+   }
+  },
+  {
+   "text": "For the identity coefficient extension use the unit comparison in [prop-weil-pbc-scalar-extension]. For E \\subset L \\subset Lprime, that statement identifies both iterated pullback comparisons with the direct a and both iterated direct-image comparisons with the direct b under its tensor associators. Applying Step 9 twice therefore gives the direct equation: the source is conjugated by the composite a inverse, and the target is postcomposed with the composite b. [lem-weil-pbc-mate-pasting], clause (1), also identifies the composite transpose normalization of Step 8 with the direct one. The associator sends ((x tensor s) tensor t) to x tensor st, and the stated pentagon makes the identification independent of parenthesization in longer towers.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+    "place": "Proof Step 1; identity and tower coherence of the ordinary-adjunction scalar equations."
+   }
+  },
+  {
+   "text": "For the bounded constructible clause, [def-weil-derived-complete-integral-detailed] specifies the common bounded interval for all reductions. [lem-pur-integral-operations-preserve-constructible], clause (1), places P_B M in the integral constructible category. [lem-sf-integral-direct-image-constructible] places the tower direct image there, with uniform amplitude; [lem-pur-completed-coefficient-pushforward-comparison] identifies that tower direct image with the ordinary F_B K of this item. Use the k-structure X \\to Y \\to \\operatorname{Spec} k verified in Step 1, so f is a k-morphism of finite-type k-schemes as this cited statement requires. This changes neither its coefficient category nor its tower. The field and ell-invertible hypotheses were also checked there. [lem-weil-integral-scalar-extension-constructible] places scalar-extended objects in the same bounded constructible categories. Since these categories are full, the previously established bijections and equations restrict to their actual Hom groups.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-sf-integral-direct-image-constructible",
+    "lem-pur-completed-coefficient-pushforward-comparison",
+    "lem-weil-integral-scalar-extension-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+    "place": "Proof Step 1; verification of constructible domains before rationalization."
+   }
+  },
+  {
+   "text": "By [def-weil-rationalization-karoubi], rationalization leaves objects unchanged and replaces each integral Hom group H by H tensor_{O_B} B. By Step 3, tensoring h_B and its inverse gives inverse bijections on these groups. On a rational morphism u tensor r with r in E, the coefficient functor is exactly C_X(u) tensor r, with r viewed in L. The equality of Step 9 tensor r is therefore the forward rational equation. On v tensor r it is the inverse equation. Finite sums of such tensors give every element of the localized Hom group, so linearity proves both equations for every rational morphism; no integrality of a rational numerator is assumed. The same tensoring of Step 10 preserves identity and tower coherence. This uses raw localization, with no idempotent completion.",
+   "uses": [
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+    "place": "Proof Step 1; explicit rational Hom localization after the integral calculation."
+   }
+  },
+  {
+   "text": "The common-stage transition identifications are the balanced tensor associators fixed in the statement. The comparison of [lem-weil-scalar-extension-composition] and the associator of [prop-weil-pbc-scalar-extension] are thus the same ordinary tensor map conjugated by chi. Explicitly, expand the iterated comparison by its input and output chi maps. Naturality moves an intermediate chi through scalar extension and cancels each chi^{-1}chi pair. The remaining map sends ((x tensor s) tensor t) to x tensor st in both presentations. This identifies the common-stage transition maps with the associators used in Step 10, including identity extension. [def-weil-algebraically-closed-coefficients] represents each Hom element over one common finite field, and equality means agreement after further common extension. Define its adjunct by the rational h at that field. Steps 10 and 12, using the identified associators, show that extending a representative and taking its adjunct commute. Two eventually equal representatives therefore have eventually equal adjuncts. Apply the same reasoning to inverse adjuncts; both composites are the identity already at the representing field. This proves independence of field and representative.",
+   "uses": [
+    "lem-weil-scalar-extension-composition",
+    "prop-weil-pbc-scalar-extension",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+    "place": "Agent coefficient calculation expanding Proof Step 1; Stacks 07A6, 0D6E, 0B56 and 099N with Bhatt-Scholze Lemma 6.8.2(1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-projection-formula-arrows",
+  "def-weil-rationalization-karoubi",
+  "lem-kun-dimension-finite-type",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-ringed-coefficient-restriction-counit",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-local-field-integral-basis",
+  "lem-sp-completed-pullback-adjunction",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-scalar-extension-composition",
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+  "place": "Agent repair of the ordinary-adjunction coefficient calculation in fix-prop-adjunctions Step 1: completed coefficient pushout, restriction/counit normalization, completion units, and tensor associators."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "fix-prop-adjunctions",
@@ -15,7 +223,7 @@
   "group": "Q89"
  },
  "title": "Scalar compatibility of the ordinary completed adjunction",
- "statement": "Fix distinct primes $p,\\ell$, the field $k=\\overline{\\mathbf F}_q$ of characteristic $p$, and finite coefficient fields $E\\subset L$ inside $\\overline{\\mathbf Q}_\\ell$, with valuation rings $\\mathcal O_E\\subset\\mathcal O_L$ and chosen uniformizers [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a separated finite-type morphism between finite-type $k$-schemes [def-weil-scheme-morphism-properties]. Work on the small pro-etale sites [def-weil-pbc-proetale-site]. For $B=E,L$ and $W=X,Y$, write $R_{B,W}=\\widehat{\\mathcal O}_{B,W}$ [def-weil-completed-integral-coefficients] and let $\\mathcal D_{B,W}$ be the full category of derived-complete $R_{B,W}$-module complexes [def-weil-derived-complete, def-weil-abstract-derived-category]. Put $P_B=Lf^*_{\\mathrm{comp},B}$ as in [def-weil-pbc-completed-pullback], and let $F_B=Rf_{*,R_B}$ be ordinary ringed-topos derived direct image. Let\n$$h_B:\\operatorname{Hom}(P_BM,K)\\xrightarrow{\\sim}\\operatorname{Hom}(M,F_BK)$$\nbe the canonical completed adjunction bijection: transport the constant-coefficient completion/ordinary-adjunction composite of [lem-sp-completed-pullback-adjunction] through [lem-weil-pbc-constant-completion-equivalence], with right-functor identification [lem-pur-completed-coefficient-pushforward-comparison]. This fixes the bijection independently of any constructible restriction.\n\nFor $W=X,Y$, write $C_W(-)=-\\otimes^L_{R_{E,W}}R_{L,W}$ for scalar extension. On complete inputs this is the strict-tower integral scalar extension under the canonical comparison of [lem-weil-finite-free-completed-scalar-comparison]. Use precisely the canonical comparisons of [prop-weil-pbc-scalar-extension],\n$$a:C_XP_E\\xrightarrow{\\sim}P_LC_Y,\\qquad b:C_YF_E\\xrightarrow{\\sim}F_LC_X.$$\nThe bijections $h_B$ and their inverses are $\\mathcal O_B$-linear. For $M\\in\\mathcal D_{E,Y}$, $K\\in\\mathcal D_{E,X}$, $u:P_EM\\to K$ and $v:M\\to F_EK$, one has\n$$h_L\\bigl(C_X(u)\\circ a_M^{-1}\\bigr)=b_K\\circ C_Y\\bigl(h_E(u)\\bigr),$$\n$$h_L^{-1}\\bigl(b_K\\circ C_Y(v)\\bigr)=C_X\\bigl(h_E^{-1}(v)\\bigr)\\circ a_M^{-1}.$$\nThese equalities use the given tensor/completion and ringed-topos comparisons, and respect identity extensions and towers $E\\subset L\\subset L'$ under their tensor associators. On bounded constructible objects [def-weil-derived-complete-integral-detailed], raw scalar localization [def-weil-rationalization-karoubi] gives the same equalities for the localized bijections and rational scalar extension. Consequently, for the common finite-stage Hom sets of [def-weil-algebraically-closed-coefficients], taking the $h_B$-adjunct or inverse adjunct of a representative is independent of the common finite coefficient field and of the representative.",
+ "statement": "Fix distinct primes $p,\\ell$, the field $k=\\overline{\\mathbf F}_q$ of characteristic $p$, and finite coefficient fields $E\\subset L$ inside $\\overline{\\mathbf Q}_\\ell$, with valuation rings $\\mathcal O_E\\subset\\mathcal O_L$ and chosen uniformizers [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a separated finite-type morphism between finite-type $k$-schemes [def-weil-scheme-morphism-properties]. Work on the small pro-etale sites [def-weil-pbc-proetale-site]. For $B=E,L$ and $W=X,Y$, write $R_{B,W}=\\widehat{\\mathcal O}_{B,W}$ [def-weil-completed-integral-coefficients] and let $\\mathcal D_{B,W}$ be the full category of derived-complete $R_{B,W}$-module complexes [def-weil-derived-complete, def-weil-abstract-derived-category]. Put $P_B=Lf^*_{\\mathrm{comp},B}$ as in [def-weil-pbc-completed-pullback], and let $F_B=Rf_{*,R_B}$ be ordinary ringed-topos derived direct image. Let\n$$h_B:\\operatorname{Hom}(P_BM,K)\\xrightarrow{\\sim}\\operatorname{Hom}(M,F_BK)$$\nbe the canonical completed adjunction bijection: transport the constant-coefficient completion/ordinary-adjunction composite of [lem-sp-completed-pullback-adjunction] through [lem-weil-pbc-constant-completion-equivalence], with right-functor identification [lem-pur-completed-coefficient-pushforward-comparison]. This fixes the bijection independently of any constructible restriction.\n\nFor $W=X,Y$, write $C_W(-)=-\\otimes^L_{R_{E,W}}R_{L,W}$ for scalar extension. On complete inputs this is the strict-tower integral scalar extension under the canonical comparison of [lem-weil-finite-free-completed-scalar-comparison]. Use precisely the canonical comparisons of [prop-weil-pbc-scalar-extension],\n$$a:C_XP_E\\xrightarrow{\\sim}P_LC_Y,\\qquad b:C_YF_E\\xrightarrow{\\sim}F_LC_X.$$\nHere the normalization of these canonical comparisons is fixed as follows. Put $V_W=\\operatorname{Res}_{R_{E,W}\\to R_{L,W}}$, and let $\\eta^c_W:1\\to V_WC_W$ be the coefficient-adjunction unit $x\\mapsto x\\otimes1$ [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Let $d:V_YF_L\\xrightarrow{\\sim}F_EV_X$ be the comparison of the two ringed-topos factorizations [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. The map $b_K$ is the coefficient-adjunction transpose of\n$$F_EK\\xrightarrow{F_E(\\eta^c_{X,K})}F_EV_XC_XK\\xrightarrow{d_{C_XK}^{-1}}V_YF_LC_XK.$$\nThe map $a$ is ordinary pullback/tensor reassociation followed by the unit-compatible completion comparison. All coefficient associators here and in the common-stage construction are the balanced tensor maps $((x\\otimes s)\\otimes t)\\mapsto x\\otimes st$, transported by the specified $\\chi$ comparisons [lem-weil-scalar-extension-composition].\nThe bijections $h_B$ and their inverses are $\\mathcal O_B$-linear. For $M\\in\\mathcal D_{E,Y}$, $K\\in\\mathcal D_{E,X}$, $u:P_EM\\to K$ and $v:M\\to F_EK$, one has\n$$h_L\\bigl(C_X(u)\\circ a_M^{-1}\\bigr)=b_K\\circ C_Y\\bigl(h_E(u)\\bigr),$$\n$$h_L^{-1}\\bigl(b_K\\circ C_Y(v)\\bigr)=C_X\\bigl(h_E^{-1}(v)\\bigr)\\circ a_M^{-1}.$$\nThese equalities use the given tensor/completion and ringed-topos comparisons, and respect identity extensions and towers $E\\subset L\\subset L'$ under their tensor associators. On bounded constructible objects [def-weil-derived-complete-integral-detailed], raw scalar localization [def-weil-rationalization-karoubi] gives the same equalities for the localized bijections and rational scalar extension. Consequently, for the common finite-stage Hom sets of [def-weil-algebraically-closed-coefficients], taking the $h_B$-adjunct or inverse adjunct of a representative is independent of the common finite coefficient field and of the representative.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
   "place": "Proof Step 1, derived ordinary adjunction and coefficient transport; extracted finite-free scalar-naturality argument of the reviewed DAG proof step 3. Completed adjunction input: Stacks Tag 099N, proetale-lemma-pushforward-Noetherian-case (2),(5). Finite-free completed coefficient presentation: Bhatt-Scholze, Lemma 6.8.2(1), pp. 58-59. The compatibility is an agent-derived consequence, not a verbatim theorem in those sources."
@@ -36,41 +244,51 @@
   "prop-weil-pbc-scalar-extension",
   "def-weil-derived-complete-integral-detailed",
   "def-weil-rationalization-karoubi",
-  "def-weil-algebraically-closed-coefficients"
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-scalar-extension-composition"
  ],
  "mathlib_searches": [
   {
-   "tool": "leansearch",
+   "tool": "leanfinder",
    "query": "The canonical completed pullback direct image adjunction Hom bijection commutes with finite free extension of adic coefficient rings and rationalization",
-   "results": "SheafOfModules.pullbackPushforwardAdjunction; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; neither concerns completed adic derived adjunction compatibility.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The Hom equivalence of a completed inverse image direct image adjunction is natural under finite free change of coefficient rings; the scalar extension comparison commutes with adjunction units and counits",
-   "results": "ModuleCat.homEquiv_extendScalarsComp and extendRestrictScalarsAdj concern module scalar adjunctions, not completed derived site adjunctions.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "An additive linear adjunction commutes with finite free coefficient extension through matrices and rationalization",
-   "results": "Earlier logged search read: moritaEquivalenceMatrix, IsBaseChange.endHom_toMatrix, MatrixModCat.fromMatrixLinear_apply_coe. Matrix/category equivalences do not state adic adjunction compatibility.",
+   "results": "AdicCompletion.ofAlgEquiv_comp_liftRingHom, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofAlgEquiv_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofLinearEquiv_apply, AdicCompletion.mk_smul_top_ofAlgEquiv_symm (Mathlib/RingTheory/AdicCompletion/*); none states completed derived-site adjunction compatibility.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "CategoryTheory.Adjunction.homEquiv",
-   "results": "homEquiv, comp_homEquiv and unit/counit formulas. These give abstract adjunction identities, without adic coefficient comparisons.",
+   "results": "CategoryTheory.Adjunction.homEquiv, homEquiv_apply, homEquiv_counit, homEquiv_symm_apply, comp_homEquiv (Mathlib/CategoryTheory/Adjunction/Basic.lean); abstract Hom equivalence only, without completed coefficient comparisons.",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "homEquiv.*(linear|add)|map.*homEquiv|homEquiv.*map",
-   "results": "CategoryTheory/Adjunction/Additive.lean:52-75 gives homAddEquiv and additivity; Basic.lean:227-244 gives naturality. Read these sources; no completed coefficient extension equation.",
+   "results": "Mathlib/CategoryTheory/Adjunction/Basic.lean:227-244 and related Adjunction files; abstract naturality/additivity, no completed coefficient extension equation.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Hom equivalence of a completed inverse image direct image adjunction is natural under finite free change of coefficient rings; the scalar extension comparison commutes with adjunction units and counits",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; neither concerns completed adic derived adjunction compatibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive linear adjunction commutes with finite free coefficient extension through matrices and rationalization",
+   "results": "IsBaseChange.linearMapLeftRightHom_toMatrix, IsBaseChange.endHom_toMatrix, MatrixModCat.fromMatrixLinear, MatrixModCat.fromMatrixLinear_apply_coe, moritaEquivalenceMatrix, ModuleCat.matrixEquivalence_counitIso, ModuleCat.homEquiv_extendScalarsComp, Module.Basis.restrictScalars_toMatrix; matrix/Morita results do not state adic adjunction compatibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PullbackConstruction.adjunction|homEquiv_extendScalarsComp",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:101,111 (references to PullbackConstruction.adjunction); Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:992,1009 (homEquiv_extendScalarsComp). Read the coefficient-adjunction identity at 992: this is ordinary ModuleCat scalar composition, not completed derived-site scalar compatibility.",
    "date": "2026-10-17",
    "verdict": "no match"
   }
@@ -83,5 +301,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-ordinary-adjunction-scalar-compatibility",
+  "worker": "stage1",
+  "summary": "Repair of the returned eleven-step split: explicitly normalized the canonical b by its coefficient-adjunction unit (not by a choice of the ordinary f-mate); proved the completed coefficient pushout with a quotient-compatible basis; calculated the restriction of b using a new generic ringed-topos counit comparison; then completed the constant projection transpose through the reflector. Verified the auxiliary k-structure for direct-image preservation and identified common-stage tensor associators. Thirteen proof steps, one statement-only generic counit node.",
+  "blueprint": "Realizes fix-prop-adjunctions proof Step 1: derived ordinary adjunction and coefficient transport, including the extracted finite-free scalar-naturality argument and the rational/common-stage passage.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-completed-pullback-adjunction",
+    "why": "The item transports the generic completed inverse-image/direct-image adjunction; this unit does not construct the completion Hom bijection."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "The item uses the equivalence between constant and completed coefficient categories to define h_B."
+   },
+   {
+    "node": "lem-pur-completed-coefficient-pushforward-comparison",
+    "why": "The item needs the completed ringed-topos direct-image identification F_B, which is a generic coefficient comparison."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "The item identifies ordinary completed tensor with the strict-tower scalar extension."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "The item uses the canonical scalar comparisons and their identity, associator and composition coherence."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "The item uses the generic formal mate-pasting equation to compare the scalar-extended adjunct composites."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-constructible",
+    "why": "The rationalized bounded-constructible clause requires preservation by integral scalar extension."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Supplies Noetherian DVR hypotheses of the completed adjunction and principal completion ideals."
+   },
+   {
+    "node": "lem-sfb-local-field-integral-basis",
+    "why": "Supplies a coefficient basis, to check exact coefficient extension and the degree-zero strict-perfect package without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Supplies the generic tensor-formula module Hom bijection used in the scalar/unit and linearity calculation."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Supplies the normalized extension/restriction Hom bijection and its x tensor 1 unit for the comparison test."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Supplies the K-injective-normalized identification of the two coefficient restriction/direct-image factorizations."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Supplies completed-pullback preservation before restricting and rationalizing the Hom bijections."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Supplies constructibility and uniform boundedness of the integral tower direct image, identified with F_B by the completed coefficient comparison."
+   },
+   {
+    "node": "lem-pur-ringed-coefficient-restriction-counit",
+    "why": "The ordinary unit route needs the generic K-injective-normalized counit equation for coefficient restriction; this helper concerns arbitrary ringed topoi and unbounded complexes, not the item scalar equations."
+   },
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "Identifies the canonical common-stage scalar comparisons with the balanced tensor associators fixed in the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-completed-pullback-adjunction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "prop-weil-pbc-scalar-extension",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-local-field-integral-basis",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-pur-ringed-coefficient-restriction-counit",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-2276ea90f",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-2276ea90f (reviewer sub-agent of L); spot-checked: I read the item in full (statement and all 13 steps), the new node lem-pur-ringed-coefficient-restriction-counit, all 39 cited node statements, fix-prop-adjunctions (its DAG Step 3 and blueprint main-20261015 proof Step 1), unit sk-lem-sf-mate and its route. Sources checked: Stacks 099N (proetale l.4336, clauses 1-5), 0D6E (sites-cohomology l.4011), 07A6 (l.3990), 03D7 and 01T3 labels, Bhatt-Scholze Lemma 6.8.2(1) p.58. Statement: the types check. With u=epsilon_{E,K} the first equation says the canonical b (coefficient transpose of F_E(eta^c) followed by d^{-1}) is the mate of a^{-1}. This is the Beck-Chevalley agreement of the two mates in a commuting square of adjunctions, so it is true; the second equation follows by naturality. Coefficient categories are kept apart (completed R_B modules vs discrete constant, bounded constructible, raw rationalization, common stage). Step 1 correctly gives X the composite k-structure (finite type by Stacks 01T3), which lem-sf-integral-direct-image-constructible needs in Step 11. Step 4's pushout S_W=R_W tensor B_W checks with a basis, t^n O_L=v^{en} and finite limits. Steps 5-8 compute the constant projection transpose, identify the completed b with b^0 through the injective coefficient-adjunction test, and transport through the completion reflector. Step 9 is genuinely elementary. Steps 10, 12 and 13 cover towers, rationalization and the common stage. Small cases L=E, f=id, X empty, K=0 and ramified E in L are fine. New node: statement only, 3 search kinds recorded, blueprint.from correct, no SGA. I verified it on K-injective and K-flat representatives: both sides equal the sheaf counit followed by UI->J, with no flatness used. It is strictly smaller than the item and not a clause of it. It does not duplicate lem-kun-derived-adjoint-square-comparison (that node needs exact left adjoints), lem-weil-proetale-direct-image-restriction-of-scalars, lem-sbc-restrict-scalars-pullback-square-comparison or lem-sbc-completed-operations-linear-natural-exchange. proof_deps equals the union of uses; every cited id exists and is unmerged; no cycle. The off-route uses (lem-sfb-local-field-integral-basis, lem-sp-completed-pullback-adjunction) are declared, and lem-kun-dimension-finite-type is Lean-closed. All 16 declared tool_uses accepted. Minor remark, not a fault: Step 6 describes its use of the new node only briefly. No fixes."
  }
 }
