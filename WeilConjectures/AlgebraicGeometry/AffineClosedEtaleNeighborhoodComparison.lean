@@ -130,7 +130,6 @@ theorem Etale.affine_closed_etale_neighborhood_comparison
       rw [(cohomologyPullbackFunctorial e.hom k tG q).2.1 x, ← Sheaf.H.map_comp_apply,
         Iso.hom_inv_id_app]
       rw [Sheaf.H.map_id_apply]
-      rfl
     rw [heq]
     exact (hiso ((upperStarComp AddCommGrpCat.{u + 1} e.hom k).app tG).symm).comp
       ((cohomologyMap_bijective e.hom _ q).comp hk)
@@ -152,13 +151,13 @@ theorem Etale.affine_closed_etale_neighborhood_comparison
     ext x
     simp only [AddCommGrpCat.hom_comp, AddCommGrpCat.hom_ofHom, AddMonoidHom.coe_comp,
       Function.comp_apply, φ]
-    rw [cohomologyMap_map]
-    erw [(cohomologyPullbackFunctorial kk (Spec.map (c.ι.app a))
-      (((v a)^*[AddCommGrpCat.{u + 1}]).obj G) q).2.1]
-    rw [← Sheaf.H.map_comp_apply, ← Sheaf.H.map_comp_apply]
+    dsimp only [Functor.comp_obj, s]
+    rw [cohomologyMap_map, (cohomologyPullbackFunctorial kk (Spec.map (c.ι.app a))
+      (((v a)^*[AddCommGrpCat.{u + 1}]).obj G) q).2.1, ← Sheaf.H.map_comp_apply,
+      ← Sheaf.H.map_comp_apply]
     congr 2
-    erw [Etale.upperStarComp_hom_app_map_upperStarComp_inv_app_assoc AddCommGrpCat.{u + 1}
-      kk (Spec.map (c.ι.app a)) (v a) (s a) t i rfl (wt a) (hs a) G, Iso.hom_inv_id_app,
-      Category.comp_id]
+    rw [Etale.upperStarComp_hom_app_map_upperStarComp_inv_app_assoc AddCommGrpCat.{u + 1}
+      kk (Spec.map (c.ι.app a)) (v a) (kk ≫ Spec.map (c.ι.app a)) t i rfl (wt a) (hs a) G,
+      Iso.hom_inv_id_app, Category.comp_id]
 
 end AlgebraicGeometry
