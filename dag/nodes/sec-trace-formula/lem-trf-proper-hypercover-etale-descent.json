@@ -14,9 +14,146 @@
   "def-weil-abstract-derived-category",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Prove by induction that $a_n$ is proper. The case $n=0$ is the matching-map assumption. Suppose $U_j\\to X$ is proper for $j<n$. Express the finite matching limit $M_n$ as the equalizer of the two compatibility maps from the finite product $P$ of the objects in its face diagram to the finite product $Q$ of their targets. Products over $X$ are proper by iterating proper base change and composition (the empty product is $X$). The diagonal $Q\\to Q\\times_XQ$ is closed because $Q\\to X$ is separated, by the definition of properness. Thus $M_n\\to P$ is a closed immersion, being its pullback along the pair of compatibility maps. Closed immersions into proper schemes are proper. Hence $M_n\\to X$ is proper, and composing with the assumed proper $U_n\\to M_n$ proves the induction step. This equalizer description follows directly from the fibre-product universal property: a map to $P$ factors through it exactly when its components obey every face compatibility.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "section-proper-hypercovering-spaces, termwise properness from the finite matching diagrams; geometric facts Tags 01W3, 01W4, 01W5."
+   }
+  },
+  {
+   "text": "For $Y\\to X$, put $U'_j=U_j\\times_XY$. The matching object for $U'_\\bullet$ is $M'_n=M_n\\times_XY$: maps over $Y$ from a test scheme $T$ to either side are exactly compatible families of maps $T\\to U_j$ over $X$, with the given map $T\\to Y$. This identifies both the representing schemes and their matching maps. The latter are the base changes of $U_n\\to M_n$, so properness and surjectivity follow from the cited stability statements. For $n=0$ the same argument says $M'_0=Y$. This also shows the termwise augmentations over $Y$ are proper.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "section-proper-hypercovering-spaces; matching limits by their universal property; properness 01W4 and surjectivity 01S1."
+   }
+  },
+  {
+   "text": "Work first with an abelian $K\\in D^+(X_{\\mathrm{Et}})$ with torsion cohomology. On $(\\mathrm{Sch}/X)_{ph}$ every matching singleton is covering by the defining generators of the ph topology. Thus the given augmented simplicial scheme is a hypercover in this site. Apply the general site hypercover descent theorem, with $\\mathcal C=(\\mathrm{Sch}/X)_{ph}$ and terminal object $X/X$, to the complex $E=h_X^{-1}K$. Its conclusion gives the actual unit $E\\to Rb_*b^{-1}E$ as an isomorphism. Slicing at the terminal object changes nothing, and slicing at $U_n/X$ gives $(\\mathrm{Sch}/U_n)_{ph}$, since objects, morphisms and covering sieves in the two descriptions are the same. Inverse image is exact, so $E$ is bounded below.",
+   "uses": [
+    "def-trf-ph-scheme-site",
+    "lem-trf-site-hypercover-derived-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DHL proof, application of Tag 0D8N; proper singleton covers are built into the ph topology (0DES)."
+   }
+  },
+  {
+   "text": "Use the simplicial comparison square to obtain $h$ with components $h_n=h_{U_n}$ and $a h\\simeq h_X b$. Set $A=a^{-1}K$ on the total etale topos, so $A_n=a_n^{-1}K$. All these component complexes are bounded below with torsion cohomology: inverse image is exact and sends an equation $m s=0$ locally to the same equation. The total inverse image is exact as well. The square identifies $h^{-1}A$ with $b^{-1}h_X^{-1}K$.",
+   "uses": [
+    "lem-trf-simplicial-ph-etale-square",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DHJ and the comparison square used at the beginning of the proof of Tag 0DHL."
+   }
+  },
+  {
+   "text": "For each $n$, apply the ph/etale torsion comparison on the scheme $U_n$ to $A_n$. It gives that $\\eta_{h_n,A_n}:A_n\\to Rh_{n,*}h_n^{-1}A_n$ is an isomorphism. The total-site derived component formula identifies the restriction of $\\eta_{h,A}$ with precisely this component unit. Restriction is exact, so each cohomology sheaf of the cone of $\\eta_{h,A}$ restricts to zero in every degree $n$. A total sheaf is a family of its components; hence these cohomology sheaves are zero. Thus the actual unit $\\eta_{h,A}:A\\to Rh_*h^{-1}A$ is an isomorphism.",
+   "uses": [
+    "lem-trf-ph-etale-torsion-comparison",
+    "lem-trf-total-site-derived-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DHL proof, first equality: component comparison 0DE5 and derived component formula 0D97."
+   }
+  },
+  {
+   "text": "The categories of abelian sheaves here are Grothendieck, by the ring-sheaf theorem applied to the integer sheaf. Their inverse images are exact. Write $\\eta_f$ for the ordinary derived unit. The composite-unit formula and the comparison square identify the following two maps to the same derived direct image:\n$$Ra_*(\\eta_{h,a^{-1}K})\\circ\\eta_{a,K}\n=Rh_{X,*}(\\eta_{b,h_X^{-1}K})\\circ\\eta_{h_X,K}.$$\nThe first factor on the left is an isomorphism by step 5. The first factor on the right is an isomorphism by step 3, and its second factor is an isomorphism by the ph/etale comparison on $X$. Therefore $\\eta_{a,K}$ is an isomorphism. This proves the abelian assertion with its unit normalization: the conclusion follows for the specified morphism, not merely from an abstract isomorphism between its source and target.",
+   "uses": [
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-trf-simplicial-ph-etale-square",
+    "lem-trf-ph-etale-torsion-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DHL displayed chain of four equalities; composite-unit normalization in sites-cohomology.tex Tag 0D6E."
+   }
+  },
+  {
+   "text": "For the constant ring $\\Lambda$, use the generic inverse-image theorem to identify the exact module pullback with abelian inverse image after forgetting scalars. Apply the ringed coefficient-restriction counit theorem with $A=\\mathbf Z$ and $R_X,R_Y$ the constant $\\Lambda$ sheaves on the source and target of the augmentation. It gives $\\kappa:V_YRf_{*,\\Lambda}\\simeq Rf_{*,\\mathbf Z}V_X$ and $\\tau:f^{-1}V_Y\\simeq V_Xf^*_{\\Lambda}$, with the stated counit equation. Here $f=a$, $X$ denotes the total topos, and $Y$ the base topos. To check the unit rather than merely the objects, transpose $\\kappa_{f^*L}\\circ V_Y\\eta_{\\Lambda,L}$ under the abelian derived adjunction. The counit equation changes this transpose to $V_X\\varepsilon_{\\Lambda,f^*L}\\circ\\tau_{Rf_*f^*L}\\circ f^{-1}V_Y\\eta_{\\Lambda,L}$. Naturality of $\\tau$ changes it to $V_X(\\varepsilon_{\\Lambda,f^*L}\\circ f^*\\eta_{\\Lambda,L})\\circ\\tau_L=\\tau_L$, by the triangle identity. This is also the transpose of $Rf_{*,\\mathbf Z}(\\tau_L)\\circ\\eta_{\\mathbf Z,V_YL}$. Thus the forgotten module unit is exactly the abelian unit under these comparisons.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-pur-ringed-coefficient-restriction-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Canonical ringed coefficient restriction via 0D6J and the adjunctions; the unit identity is the transpose of the cited counit identity."
+   }
+  },
+  {
+   "text": "Put $K=V_XL$ on the base scheme (now subscripts denote schemes again). Scalar forgetting is exact by the module-sheaf theorem, so $H^q(K)=V_XH^q(L)$. It is conservative on derived objects: if the forgotten cone has zero cohomology, the original cohomology module sheaves have zero underlying abelian sheaves and hence are zero. Since $m\\Lambda=0$, every term and cohomology sheaf of $K$ is killed by $m$. Step 6 applies. Step 7 identifies its unit with the forgotten module unit, so conservativity proves that the module unit $L\\to Ra_*a^*L$ is an isomorphism. The generic site-level results in step 7 apply to the total topos as well; no preservation of injectives by scalar forgetting is asserted.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0D6J coefficient comparison, with exact/conservative forgetting and torsion checked directly."
+   }
+  },
+  {
+   "text": "Finally let $Y\\to X$ be arbitrary and let $L_Y$ be any bounded-below constant-$\\Lambda$ complex on $Y_{\\mathrm{Et}}$. Step 2 supplies all matching hypotheses for $U_\\bullet\\times_XY\\to Y$. Repeat steps 3--8 with this scheme, this augmented diagram and $L_Y$. They give the ordinary unit $L_Y\\to Ra_{Y,*}a_Y^*L_Y$ as an isomorphism. No claim that $L_Y$ is pulled back from $X$ was used; this proves the asserted universal statement for every complex on every base change.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DHL applied after arbitrary base change, using step 2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-surjective-base-change",
+  "def-trf-ph-scheme-site",
+  "lem-trf-site-hypercover-derived-descent",
+  "lem-trf-simplicial-ph-etale-square",
+  "def-trf-geometric-morphism",
+  "lem-trf-ph-etale-torsion-comparison",
+  "lem-trf-total-site-derived-components",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pur-ringed-coefficient-restriction-counit",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0DHL, lemma-cohomological-descent-for-ph-hypercovering, scheme version; torsion restriction as required by 0DE5 and coefficient comparison 0D6J."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +189,45 @@
    "results": "{\"t\": \"2026-10-17T16:20:39Z\", \"tool\": \"leanfinder\", \"query\": \"The augmentation of a proper surjective hypercover of schemes is universally of cohomological descent for etale torsion complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompactCover.homCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.Scheme.GlueData.oneHypercover\", \"AlgebraicGeometry.QuasiCompactCover\", \"AlgebraicGeometry.Scheme.Cover.add_toPreZeroHypercover\", \"AlgebraicGeometry.QuasiCompactCover.of_hom\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\"], \"digest\": \"5d1bc7f3a2a323e8\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits describe one-step hypercover data and ordinary sheaf gluing, not torsion derived etale descent along a proper hypercover."
+  },
+  {
+   "tool": "grep",
+   "query": "properHypercover|cohomologicalDescent|phHypercover",
+   "results": "{\"t\": \"2026-10-17T17:55:09Z\", \"tool\": \"grep\", \"query\": \"properHypercover|cohomologicalDescent|phHypercover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the results are 0/1-hypercover sheaf gluing and generic derived adjunction formulas; none gives proper torsion etale hyperdescent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper hypercover of schemes gives universal cohomological descent for bounded below torsion etale sheaves",
+   "results": "{\"t\": \"2026-10-17T17:55:09Z\", \"tool\": \"leansearch\", \"query\": \"Proper hypercover of schemes gives universal cohomological descent for bounded below torsion etale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.OneHypercover.mk'\", \"CategoryTheory.GrothendieckTopology.OneHypercover.toPreOneHypercover\", \"CategoryTheory.GrothendieckTopology.OneHypercover.mk\", \"CategoryTheory.GrothendieckTopology.OneHypercover\", \"CategoryTheory.GrothendieckTopology.OneHypercover.mk'_toPreOneHypercover\", \"CategoryTheory.GrothendieckTopology.instIsGeneratedByOneHypercovers\", \"CategoryTheory.GrothendieckTopology.Cover.oneHypercover\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.hom_ext\"], \"digest\": \"1bf7de186cecf18c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the results are 0/1-hypercover sheaf gluing and generic derived adjunction formulas; none gives proper torsion etale hyperdescent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hypercover\"",
+   "results": "{\"t\": \"2026-10-17T17:55:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"Hypercover\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.PreZeroHypercover\", \"CategoryTheory.PreZeroHypercover.empty\", \"CategoryTheory.Precoverage.ZeroHypercover\", \"CategoryTheory.PreZeroHypercover.HasPullbacks\", \"CategoryTheory.PreZeroHypercover.I₀\", \"CategoryTheory.PreZeroHypercover.instCategory\", \"CategoryTheory.PreZeroHypercover.presieve₀\", \"CategoryTheory.PreZeroHypercover.shrink\"], \"digest\": \"6c4634469355a972\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the results are 0/1-hypercover sheaf gluing and generic derived adjunction formulas; none gives proper torsion etale hyperdescent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived adjunction unit for a proper surjective hypercover is an isomorphism on torsion etale complexes",
+   "results": "{\"t\": \"2026-10-17T17:55:11Z\", \"tool\": \"leanfinder\", \"query\": \"Derived adjunction unit for a proper surjective hypercover is an isomorphism on torsion etale complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derived_unit\", \"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\", \"LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction\", \"CategoryTheory.instIsIsoAppToRightDerivedZero\"], \"digest\": \"df8a67cd83ccf433\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the results are 0/1-hypercover sheaf gluing and generic derived adjunction formulas; none gives proper torsion etale hyperdescent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper hypercover of schemes gives universal cohomological descent for bounded below torsion etale sheaves",
+   "results": "{\"t\": \"2026-10-17T17:55:13Z\", \"tool\": \"leanfinder\", \"query\": \"Proper hypercover of schemes gives universal cohomological descent for bounded below torsion etale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompactCover\", \"AlgebraicGeometry.Scheme.GlueData.oneHypercover\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.QuasiCompactCover.of_hom\", \"CategoryTheory.GrothendieckTopology.HOneHypercover\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac\"], \"digest\": \"b2ccba83f10f7041\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the results are 0/1-hypercover sheaf gluing and generic derived adjunction formulas; none gives proper torsion etale hyperdescent."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nearby-proper-hyperdescent",
@@ -78,5 +250,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-proper-hypercover-etale-descent",
+  "worker": "stage1",
+  "summary": "Expanded the ph/etale proof of Stacks 0DHL into nine steps, including geometric induction, arbitrary-base-change matching maps, explicit composite units, and conservative forgetting of arbitrary constant torsion module coefficients, using the existing arbitrary-topos restriction-counit theorem. Five new statement-only inputs, searched separately; no statement change and no Lean attachment.",
+  "blueprint": "Normal-cone specialization in clauses (1) and (2) of lem-trf-local-term-locality, through the retained Orgogozo ancestry. The first descent isomorphism of Orgogozo Lemma 3.1.1 is realized by steps 3--8; steps 1--2 and 9 justify its proper and universal use.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic geometric stability needed to express a finite matching limit as a closed subscheme of a proper product; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic surjectivity stability needed for universal matching maps; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic derived-adjunction normalization applies to the exact inverse images on ph and etale topoi; the unit has no general-topos substitute."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Applied to the integer sheaf on the total and base sites, this supplies the Grothendieck hypotheses for the generic derived-adjunction normalization."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic site-level constant coefficient pullback, including total sites; scheme-level comparisons are insufficient."
+   },
+   {
+    "node": "lem-pur-ringed-coefficient-restriction-counit",
+    "why": "Generic arbitrary-topos scalar restriction and its counit equation, specialized to Z and constant Lambda; its unit mate is written out in step 7."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Only exactness of forgetting modules on the base and total sites is used, as a homological tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pur-ringed-coefficient-restriction-counit",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-05ef95801",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-05ef95801 (reviewer sub-agent of L); spot-checked: I read the item, its 9 steps and all 5 new nodes in full, and the statements of every cited node. Sources checked in Stacks: section-proper-hypercovering-spaces, 0DHJ and 0DHL with their proofs (scheme version permitted there), 0D8N, 0D97, 09WG, 0D99, 0DE5 (needs torsion), section-ph and 0DBQ. Item statement unchanged and not weakened: it is the scheme version of 0DHL for constant torsion Lambda (m Lambda=0). Torsion is needed because the comparison 0DE5/0DGU that 0DHL relies on assumes it; 0DHL's own unrestricted wording does not hold as printed. Steps checked: (1) M_n is an equalizer of proper products, cut out by a closed diagonal; the induction is correct. (2) Matching maps base-change correctly. (3) Proper surjective singletons cover in ph, so the site descent node applies with finite limits, a small site and E in D+. (4)-(6) Square, component units and composite-unit equation: I checked the directions; eta_a is shown invertible itself, not just its endpoints isomorphic. (7) I redid the transpose with the ringed counit theorem (A=Z, R=constant Lambda, c invertible); it holds. (8) Forgetting is exact and conservative, and the forgotten complex is torsion. (9) Every Y and every L_Y covered. New nodes: def-trf-ph-scheme-site has the same sheaves as Stacks ph by 0DBQ, so the same topology. lem-trf-ph-etale-torsion-comparison is exactly 0DE5. lem-trf-site-hypercover-derived-descent is the D+ case of 0D8N. lem-trf-simplicial-ph-etale-square is the scheme version of 0DHJ. lem-trf-total-site-derived-components is 0D97+09WG, and its unit claim checked. None restates a clause of the item. rg duplicate search found none: the closest nodes (lem-trf-simplicial-derived-image-spectral-sequence, ringed-hypercover-injective-augmentation, lem-cbc hypersheaf nodes, thm-weil-pbc-hypercover-cohomology) are all different statements. No SGA cited. All 7 declared tool_uses accepted. Two clarifications written to fixes/ (both are needed for step 5's hypothesis check): the square node now says h is induced by the site morphisms V->V/U_n, compatible with the structure maps through canonical fibre-product isomorphisms, with (h^{-1}G)_n=h_{U_n}^{-1}G_n. The total-components node now allows the simplicial laws and the commutation of the h_n to hold through specified coherent canonical isomorphisms, which the etale and ph simplicial sites need. Details in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
