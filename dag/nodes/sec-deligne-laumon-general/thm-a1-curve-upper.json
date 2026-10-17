@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-a1-curve-upper",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Compact-support upper bound on a curve",
@@ -14,28 +14,144 @@
  },
  "stmt_deps": [
   "def-weil-ordinary-compact-cohomology",
-  "def-weil-punctual-weights"
+  "def-weil-punctual-weights",
+  "d-real-setup",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-frobenius-module-weights"
  ],
  "proof": [
   {
-   "text": "Apply [prop-a1-middle-extension-curve-upper] to the identity open\nimmersion $C_0\\hookrightarrow C_0$; its middle extension is\n$\\mathcal F$ itself, giving the bound $H_c^r(C,\\mathcal F)\\leq w+r$.",
+   "text": "Put $U_0=C_0$ and $j=\\operatorname{id}_{C_0}$. Its image is the whole curve, so it is a dense open immersion and both its source and target are the given smooth geometrically connected curve. The middle extension of [def-wf-middle-extension] is ordinary $j_*\\mathcal F$, not $Rj_*\\mathcal F$. For the identity map, ordinary direct image evaluates $\\mathcal F$ on the same site objects with the same restrictions, hence $j_*\\mathcal F=\\mathcal F$; the induced Weil structure is the same Frobenius isomorphism. Thus this equality is an equality of Weil sheaves, not just an identification after forgetting Frobenius.",
+   "uses": [
+    "def-wf-middle-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-open-line/thm-a1-curve-upper.proof.md",
+    "place": "Proof: identity open immersion and its middle extension"
+   }
+  },
+  {
+   "text": "Apply [prop-a1-middle-extension-curve-upper] to this dense open immersion and the original lisse sheaf $\\mathcal F$. The source and target are smooth and geometrically connected, and punctual $\\iota$-purity of weight $w$ is exactly the hypothesis already given. For every degree $r$ it gives weights at most $w+r$ on $H_c^r(C,j_*\\mathcal F)$. Substituting the identity middle extension from step 1 makes this the asserted bound on $H_c^r(C,\\mathcal F)$, with its same Frobenius action. No affineness, properness, ramification condition, irreducibility or nonzero-rank assumption is used.",
    "uses": [
     "prop-a1-middle-extension-curve-upper"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-open-line/thm-a1-curve-upper.proof.md",
+    "place": "Proof: identity open immersion and its middle extension"
+   }
   }
  ],
  "proof_deps": [
+  "def-wf-middle-extension",
   "prop-a1-middle-extension-curve-upper"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-l-dl-general-open-line/thm-a1-curve-upper.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-open-line/thm-a1-curve-upper.proof.md",
+  "place": "Proof: identity open immersion and its middle extension"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hasWeightsAtMost.*compact|compact.*[Ww]eight|[Ww]eil[Ss]heaf",
+   "results": {
+    "hits": 1,
+    "top": [
+     "Mathlib/Analysis/MeanInequalities.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "No match: the first regexp found only the unrelated weighted Holder inequality Mathlib/Analysis/MeanInequalities.lean:944 (source read); the second found no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Weil\", \"weight\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "No match: zero hits for the combined Weil and weight name fragments."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Deligne upper weight bound for compactly supported etale cohomology of pure lisse sheaves on curves",
+   "results": {
+    "hits": 8,
+    "top": [
+     "ModularFormClass.exists_bound",
+     "MvPowerSeries.weightedOrder_le",
+     "PrimeSpectrum.ConstructibleSetData.degBound",
+     "BoundingSieve.multSum",
+     "CuspFormClass.exists_bound",
+     "LieModule.iSup_ucs_eq_genWeightSpace_zero",
+     "LieModule.Weight.instFintype.congr_simp",
+     "BoundingSieve.weights_nonneg"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "No match: the eight results concern modular-form growth, multivariate power-series weights, constructible-set degree bounds, sieve weights and Lie weights, not lisse Weil sheaves or their compact-support cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported cohomology of a smooth geometrically connected curve with a pure lisse Weil sheaf of weight w has Frobenius weights at most w plus the cohomological degree",
+   "results": {
+    "hits": 8,
+    "top": [
+     "WittVector.isocrystal_classification",
+     "WittVector.instIsocrystalStandardOneDimIsocrystal",
+     "WittVector.instModuleFractionRingStandardOneDimIsocrystal",
+     "WittVector.StandardOneDimIsocrystal.frobenius_apply",
+     "WittVector.exists_frobenius_solution_fractionRing",
+     "WittVector.instAddCommGroupStandardOneDimIsocrystal",
+     "LieModule.exists₂_genWeightSpace_smul_add_eq_bot",
+     "WittVector.Isocrystal.toModule"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "No match: the first phrasing returns Witt-vector isocrystals and Lie-module weights; the second returns polynomial Mahler measures, class-number/discriminant bounds and Dirichlet L-functions. None is an upper weight theorem for cohomology of curves."
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*weight|weight.*Frobenius|PunctuallyPure|compactlySupportedCohomology",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "No match: the first regexp found only the unrelated weighted Holder inequality Mathlib/Analysis/MeanInequalities.lean:944 (source read); the second found no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Riemann hypothesis for curves over finite fields: eigenvalues on degree r compact support cohomology of a pure local system have absolute value at most q to the power (w+r)/2",
+   "results": {
+    "hits": 8,
+    "top": [
+     "Polynomial.cardPowDegreeIsAdmissible",
+     "NumberField.hermiteTheorem.boundOfDiscBdd",
+     "Polynomial.one_le_mahlerMeasure_of_ne_zero",
+     "Polynomial.finite_mahlerMeasure_le",
+     "Polynomial.norm_root_le_one_of_mahlerMeasure_eq_one",
+     "NumberField.Units.dirichletUnitTheorem.seq_norm_le",
+     "Polynomial.card_mahlerMeasure_le_prod",
+     "DirichletCharacter.norm_LFunction_product_ge_one"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "No match: the first phrasing returns Witt-vector isocrystals and Lie-module weights; the second returns polynomial Mahler measures, class-number/discriminant bounds and Dirichlet L-functions. None is an upper weight theorem for cohomology of curves."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -629,5 +745,20 @@
   }
  },
  "chapter": "sec-deligne-laumon-general",
- "unit": "sk-l-dl-general-open-line"
+ "unit": "sk-l-dl-general-open-line",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-a1-curve-upper",
+  "worker": "stage1",
+  "summary": "Expanded the identity-open-immersion specialization into its elementary Weil-equivariant identification and the application of the existing all-curve middle-extension estimate. Added the existing definition nodes for curves, lisse adic sheaves, Weil sheaves and Frobenius-module weights. No new nodes. The recorded Lean audit names files/declarations absent from the supplied source snapshot; no finished attachment was found.",
+  "blueprint": "Realizes the entire identity-immersion proof in the current main-20261015 thm-a1-curve-upper.proof.md and the unchanged master proof. This auxiliary general-curve node is not the unit key statement (which concerns opens of P1); its cited middle-extension proposition is in sk-thm-dl-a1-upper, an explicitly allowed unit dependency."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-593c55e7d",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-593c55e7d (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote review.md; there are no fixes and no new nodes. It is one commit with the item and its report. The statement is the same word for word as master (order 2828) and main-20261015 (order 3172), and the steps follow the blueprint's one-sentence proof: apply prop-a1-middle-extension-curve-upper to the identity open immersion. Step 1 is elementary. I read def-wf-middle-extension: it defines the middle extension as the ordinary pushforward, (j_*G)(V)=G(V x_C U). For j=id this gives a canonical isomorphism id_*F = F that is compatible with Frobenius, so it is an isomorphism of Weil sheaves. The step calls it an equality, which is harmless because H_c^r is a functor. Step 2: I read the prop's full statement (a dense open immersion of smooth geometrically connected curves, F lisse and punctually iota-pure of weight w, a bound of w+r for every r). With U_0=C_0 and j=id every hypothesis holds, and the conclusion is exactly the item's. The prop's unit sk-thm-dl-a1-upper is cited by the item's unit sk-l-dl-general-open-line, so the route is respected and no tool_use is needed. I computed the dependency closure of the prop and of def-wf-middle-extension: neither reaches thm-a1-curve-upper, so there is no cycle. All six statement dependencies exist, are unmerged and define what they are cited for; d-real-setup's curve convention matches the prop. proof_deps equals the union of the step uses. I checked the zero sheaf, a constant sheaf on P^1 (proper, empty boundary) and on A^1 (H_c^2 of weight 2), and degrees outside [0,2]; nothing is weakened. The duplicate grep found only narrower nodes (opens of P^1, the line), the downstream general-sheaf node and the generalization actually used. Minor: the report's remark that def-wf-middle-extension uses the finite-coefficient lisse convention applies only to its blueprint_update text, not to the current DAG statement. The stale slopmaster2 lean_audit is left for the maintainer to refresh. No SGA source is used and no coefficient category is identified with another."
+ }
 }

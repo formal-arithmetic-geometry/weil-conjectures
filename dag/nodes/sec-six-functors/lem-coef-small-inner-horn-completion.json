@@ -11,9 +11,110 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-inner-anodyne-pushout-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct the displayed pushout in each degree as the quotient of the disjoint union of $(X_r)_m$ and the sets $(\\Delta^n)_m$ labelled by $(n,i,a)$, identifying each horn simplex with its image under $a$. Because every horn inclusion is injective, this quotient has the set presentation\n$$ (X_{r+1})_m=(X_r)_m\\amalg\\coprod_{(n,i,a)}((\\Delta^n)_m\\setminus(\\Lambda_i^n)_m). $$\nThis is a presentation of sets; the simplicial operators on a new simplex use its attached simplex and, if its restriction lies in the horn, the attaching map. The quotient relations are preserved by every simplicial operator, so these operators are well-defined and satisfy the simplicial identities. In particular $X_r\\to X_{r+1}$ is injective in each degree. Each set of attaching maps is a subset of $\\prod_{m\\geq0}\\operatorname{Set}((\\Lambda_i^n)_m,(X_r)_m)$; it and the countable union over $(n,i)$ belong to $\\mathcal U$. Closure of a Grothendieck universe under these products, disjoint unions and quotients proves by induction that every $X_r$ is $\\mathcal U$-small. The countable degreewise union is $RX$, is $\\mathcal U$-small, and contains $X$ degreewise injectively. Its filtration is exactly the required countable inner-horn cell presentation.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01BM",
+    "place": "Proposition 4.1.3.2, degreewise pushout construction, specialized to the map to a point; explicit quotient and universe check by the agent."
+   }
+  },
+  {
+   "text": "Every map $b:\\Lambda_i^n\\to RX$ factors through a finite stage. Indeed the horn is the union of the finitely many $(n-1)$-faces $d_k\\Delta^{n-1}$ for $k\\ne i$, by [def-cbc-enhanced-diagrams-cones]. Choose a stage containing the image under $b$ of the top simplex of each such face, and take the maximum of these finitely many stages. All their restrictions then lie in this same $X_r$. On overlaps the restricted maps agree in $X_r$, since they agree in $RX$ and $X_r\\to RX$ is injective. Thus they give $a:\\Lambda_i^n\\to X_r$ with composite $b$. The simplex labelled $(n,i,a)$ in $X_{r+1}$ fills $b$ in $RX$. This works for every $n\\geq2$ and $0<i<n$, proving that $RX$ is a quasicategory. The finite-stage argument uses the displayed finite face cover, not a claim that the horn has finitely many simplices in all degrees.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01BM",
+    "place": "Proposition 4.1.3.2, final finite-horn factorization argument, and Corollary 4.1.3.3; the face-cover argument expands finiteness directly."
+   }
+  },
+  {
+   "text": "For $f:X\\to Y$, set $f_0=f$. Given $f_r$, send the old summand $X_r$ by $f_r$ followed by $Y_r\\to Y_{r+1}$, and send the attached copy of $\\Delta^n$ labelled $(n,i,a)$ identically onto the attached copy labelled $(n,i,f_ra)$. On that copy's horn the two prescriptions agree, so they descend through the pushout to $f_{r+1}$. The stage maps commute with the inclusions and hence induce $R(f)$ on the union. The identity relabels every cell by the same label. For $g:Y\\to Z$, the two successive relabellings send $(n,i,a)$ to $(n,i,g_rf_ra)$, exactly the relabelling for $gf$; induction on $r$ proves equality on old summands too. Thus $R(1)=1$ and $R(gf)=R(g)R(f)$, and $R(f)j_X=j_Yf$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01BM",
+    "place": "Proposition 4.1.3.2, functoriality of simultaneous attachment; explicit identity and composition check."
+   }
+  },
+  {
+   "text": "Fix any containing universe $\\mathcal W$ large enough for the test simplicial sets. The filtration of step 1 is also a $\\mathcal W$-small continuous transfinite composite (of shape $\\omega$) of pushouts of small coproducts of inner horn inclusions. Apply [lem-coef-inner-horn-cell-generation] in $\\mathcal W$. This cell map is a retract of itself, so the equality of classes in that node puts $j_X$ in the class of maps having the left lifting property against every $\\mathcal W$-small inner fibration. This proves the asserted lifting meaning of inner anodyne, including the case $\\mathcal W=\\mathcal V$. In particular for a quasicategory $E$ in that universe, the map $E\\to\\Delta^0$ is an inner fibration by the horn definition in [lem-coef-inner-anodyne-pushout-product], and every inner anodyne map extends into $E$.",
+   "uses": [
+    "lem-coef-inner-horn-cell-generation",
+    "lem-coef-inner-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean",
+    "place": "Lines 43 and 89-92, instantiated in the universe of the test objects; the same cell presentation is used, rather than a new small-object replacement."
+   }
+  },
+  {
+   "text": "We will use the actual exponential correspondence for the internal functor objects of [def-cbc-enhanced-diagrams-cones]. A map $t:P\\to\\operatorname{Fun}(K,E)$ gives $\\widehat t:K\\times P\\to E$ by\n$$\\widehat t_m(k,p)=t_m(p)_m(k,\\operatorname{id}_{[m]}).$$\nConversely, from $v:K\\times P\\to E$ define $t_m(p):K\\times\\Delta^m\\to E$ by sending an $s$-simplex $(k,\\theta:[s]\\to[m])$ to $v_s(k,P(\\theta)p)$. Naturality in every monotone map shows that both formulas are simplicial. Substituting one into the other returns $v$ on each $(k,p)$; in the other direction naturality of $t$ returns the value of $t_m(p)$ on every $(k,\\theta)$. Hence the formulas are inverse, and commute exactly with restriction in $K$, precomposition in $P$ and postcomposition in $E$. They apply to arbitrary simplicial sets $P,K$, not only simplices or quasicategories.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00J9",
+    "place": "Degreewise expansion of the internal-Hom adjunction used in Proposition 1.5.7.6; both inverse formulas are checked directly from the definition."
+   }
+  },
+  {
+   "text": "Let $K$ be any simplicial set in the test universe and $E$ a quasicategory there. A horn $\\Lambda_i^n\\to\\operatorname{Fun}(K,E)$ corresponds by step 5 to $K\\times\\Lambda_i^n\\to E$. The inclusion $h:\\Lambda_i^n\\hookrightarrow\\Delta^n$ is inner anodyne: every lifting problem against an inner fibration is precisely one of its defining horn problems. Apply [lem-coef-inner-anodyne-pushout-product] with $i=h$ and $j:\\varnothing\\hookrightarrow K$. Its pushout-product is $\\Lambda_i^n\\times K\\to\\Delta^n\\times K$; permuting factors gives $K\\times\\Lambda_i^n\\to K\\times\\Delta^n$. The extension into $E$ exists since $E\\to\\Delta^0$ is an inner fibration. Its adjoint is a filler for the original horn. Consequently $\\operatorname{Fun}(K,E)$ is a quasicategory; take $K=X$ and $K=RX$.",
+   "uses": [
+    "lem-coef-inner-anodyne-pushout-product",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00J9",
+    "place": "Theorem 1.5.3.7 via the pushout-product argument of Lemma 1.5.7.5 / HTT Corollary 2.3.2.4; no additional functor-category closure theorem is assumed."
+   }
+  },
+  {
+   "text": "Consider a commutative square with left side a degreewise monomorphism $u:P\\hookrightarrow Q$ and right side the actual restriction $j_X^*$. By step 5, its top and bottom maps are respectively maps\n$$RX\\times P\\to E,\\qquad X\\times Q\\to E,$$\nwhose restrictions agree on $X\\times P$. Thus they define a single map from\n$$T=(X\\times Q)\\amalg_{X\\times P}(RX\\times P)$$\nto $E$. Step 4 and [lem-coef-inner-anodyne-pushout-product], applied in the universe containing $P,Q,E$, say that $T\\to RX\\times Q$ is inner anodyne. Since $E\\to\\Delta^0$ is an inner fibration, the map $T\\to E$ extends to $RX\\times Q\\to E$. Its adjoint $Q\\to\\operatorname{Fun}(RX,E)$ is a diagonal in the original square. Restriction to $RX\\times P$ recovers the top map, and restriction to $X\\times Q$ recovers the bottom map, so both triangles commute as actual simplicial maps.",
+   "uses": [
+    "lem-coef-inner-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00J9",
+    "place": "Proposition 1.5.7.6; all-monomorphism lifting proved by the displayed pushout-product, retaining strict triangles."
+   }
+  },
+  {
+   "text": "The size and lifting assertions are stable under further enlargement: maps between two fixed $\\mathcal U$-small simplicial sets form a subset of a $\\mathcal U$-small product of function sets. Passing to a larger universe adds no functions between these fixed sets and therefore no labels $(n,i,a)$. Using the degreewise quotient presentation of step 1 at each stage and the union at the limit gives the same objects and the same relabelling maps. Step 4 applies the existing cell-generation theorem in each chosen test universe, and steps 6-7 apply the pushout-product theorem there, so arbitrary larger test objects are covered without asserting that inner anodyne lifting in the smaller universe alone implies lifting in the larger one. Finally every inner horn with $n\\geq2$ is nonempty (it contains vertices); hence no map from it to $\\varnothing$ exists. Starting from $X=\\varnothing$ there are no attachments at any stage and $R\\varnothing=\\varnothing$. The resulting restriction is the identity on $\\operatorname{Fun}(\\varnothing,E)=\\Delta^0$, consistent with all preceding assertions.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-inner-horn-cell-generation",
+    "lem-coef-inner-anodyne-pushout-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01BM",
+    "place": "Agent universe-absoluteness and empty-case verification for the explicit construction of Proposition 4.1.3.2; the lifting theorems are reapplied in each containing universe."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-inner-horn-cell-generation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Foundational expansion for paragraph 2, the derived adjunction calculation, through step 3 of lem-coef-cat-infinity-colimits-cartesian-closure. Construction checked against online Kerodon 4.1.3.2-4.1.3.3 (01BM), lifting against 1.5.7.6 (00J9), and the two cited pinned Mathlib leaves; no archived source for the full theorem is present."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -70,10 +171,58 @@
    "date": "2026-10-17",
    "verdict": "no match: hits concern QCat, horn filling, nerves or general small-object arguments; none states this replacement with internal-Hom lifting against all monomorphisms in larger universes.",
    "sub": ""
+  },
+  {
+   "tool": "grep",
+   "query": "replacement|hasFactorization|innerAnodyneExtensions|IsStableUnderTransfiniteComposition",
+   "results": "{\"t\": \"2026-10-17T08:21:45Z\", \"tool\": \"grep\", \"query\": \"replacement|hasFactorization|innerAnodyneExtensions|IsStableUnderTransfiniteComposition\", \"sub\": \"AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\"], \"digest\": \"f889ba79443f2d41\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: read Inner/Basic.lean:38-53,80-98 and Inner/PushoutProduct.lean:103-109. The closure and pushout-product results are existing DAG leaves; neither states this explicit functorial completion with all clauses.",
+   "sub": "AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Countably attaching every inner horn gives functorial same universe quasicategory replacement whose internal Hom restriction is a trivial fibration",
+   "results": "{\"t\": \"2026-10-17T08:21:46Z\", \"tool\": \"leansearch\", \"query\": \"Countably attaching every inner horn gives functorial same universe quasicategory replacement whose internal Hom restriction is a trivial fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.recOn\", \"HomotopicalAlgebra.trivialFibrations_sub_fibrations\", \"SSet.Quasicategory.hornFilling\", \"SSet.quasicategory_of_filler\", \"HomotopicalAlgebra.CofibrantObject.instFibrationPResolutionObj\", \"SSet.Quasicategory.mk\", \"SSet.Quasicategory.casesOn\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"16e619a398e279fe\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits for quasicategory horn filling, nerves, QCat and Kan/Quillen fibrations. None constructs the specified countable inner-horn replacement with strict internal-Hom restriction lifting and universe clauses; Kan Quillen fibrations use all horns.",
+   "sub": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.innerAnodyneExtensions, SSet.Quasicategory",
+   "results": "{\"t\": \"2026-10-17T08:21:46Z\", \"tool\": \"loogle\", \"query\": \"SSet.innerAnodyneExtensions, SSet.Quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: hits, when present, give the definition and closure/cell-presentation facts for inner anodyne maps, already carried by lem-coef-inner-horn-cell-generation; they do not give the specified replacement and its strict internal-Hom restriction together.",
+   "sub": ""
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial countable attachment of all inner horns gives a small quasicategory completion and restriction of internal functor simplicial sets lifts against every monomorphism in larger universes",
+   "results": "{\"t\": \"2026-10-17T08:21:48Z\", \"tool\": \"leanfinder\", \"query\": \"Functorial countable attachment of all inner horns gives a small quasicategory completion and restriction of internal functor simplicial sets lifts against every monomorphism in larger universes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.QCat\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Quasicategory.hornFilling'\", \"SSet.quasicategory_of_filler\", \"SSet.Truncated.Quasicategory₂\", \"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory\"], \"digest\": \"f38823e7b456379c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits for quasicategory horn filling, nerves, QCat and Kan/Quillen fibrations. None constructs the specified countable inner-horn replacement with strict internal-Hom restriction lifting and universe clauses; Kan Quillen fibrations use all horns.",
+   "sub": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.innerAnodyneExtensions",
+   "results": "{\"t\": \"2026-10-17T08:22:12Z\", \"tool\": \"loogle\", \"query\": \"SSet.innerAnodyneExtensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeInnerAnodyneExtensions\", \"SSet.instIsStableUnderCobaseChangeInnerAnodyneExtensions\", \"SSet.instIsStableUnderCoproductsInnerAnodyneExtensions\", \"SSet.instIsStableUnderRetractsInnerAnodyneExtensions\", \"SSet.instIsStableUnderTransfiniteCompositionInnerAnodyneExtensions\", \"SSet.instRespectsIsoInnerAnodyneExtensions\", \"SSet.innerAnodyneExtensions\", \"SSet.Subcomplex.Pairing.innerAnodyneExtensions\"], \"digest\": \"1e41fe895e33b68d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: hits, when present, give the definition and closure/cell-presentation facts for inner anodyne maps, already carried by lem-coef-inner-horn-cell-generation; they do not give the specified replacement and its strict internal-Hom restriction together.",
+   "sub": ""
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small object argument factorization using inner horn inclusions to freely construct a fibrant quasicategory by a countable sequence of pushouts",
+   "results": "{\"t\": \"2026-10-17T08:22:21Z\", \"tool\": \"leanfinder\", \"query\": \"Small object argument factorization using inner horn inclusions to freely construct a fibrant quasicategory by a countable sequence of pushouts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory.hornFilling'\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.horn.isColimit\"], \"digest\": \"df48a49c43b5bd63\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits for quasicategory horn filling, nerves, QCat and Kan/Quillen fibrations. None constructs the specified countable inner-horn replacement with strict internal-Hom restriction lifting and universe clauses; Kan Quillen fibrations use all horns.",
+   "sub": ""
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cat-infinity-colimits-cartesian-closure",
@@ -100,5 +249,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-small-inner-horn-completion",
+  "worker": "stage1",
+  "summary": "Expanded the countable all-inner-horns construction with explicit set quotients, size bounds, finite-face factorization, functorial relabelling, universe-wise cell-generation lifting, the actual exponential adjunction, quasicategory closure and strict all-monomorphism restriction lifting. Reused the existing inner-horn-cell-generation and pushout-product Mathlib leaves; no new nodes and no statement change. Checked empty input and larger test universes.",
+  "blueprint": "Realizes the foundational small-colimit/internal-Hom input to paragraph 2 (derived coefficient-adjunction calculation) of prop-coef-integral-exceptional-adjoint via step 3 of lem-coef-cat-infinity-colimits-cartesian-closure. The explicit completion is the existing item, not a replacement of the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-d87a428a3",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-d87a428a3 (reviewer sub-agent of L); spot-checked: PASS: I read the whole item, all eight steps, the full statements of the three cited nodes and the Mathlib source behind the two leaves. Leaf sources: Inner/Basic.lean:43 says innerAnodyneExtensions = innerFibrations.llp; lines 89-92 give the equality with retracts of transfinite composites of pushouts of coproducts of inner horn inclusions. Inner/PushoutProduct.lean:103-109 (innerAnodyneExtensions_pushoutObjObjι', which needs Mono j and an inner anodyne i) and InnerFibration.lean:64 match the node conventions exactly. The statement is unchanged and is exactly what step 3 of the parent lem-coef-cat-infinity-colimits-cartesian-closure uses. Step checks: (1) the degreewise pushout set presentation and injectivity hold because horn inclusions are injective, and the 𝒰-size bound holds by countable products and unions; (2) a horn map factors through a finite stage by the cover by the n-1 faces other than the i-th and injectivity on overlaps (checked for Λ²₁); (3) relabelling (n,i,a)↦(n,i,f_r a) is strictly functorial and natural; (4) cell-generation applied in each universe 𝒲 puts j_X in the LLP class, and E→Δ⁰ is an inner fibration; (5) both exponential formulas are correct against Fun(K,E)_n=Hom(K×Δ^n,E); (6) pushout-product with a horn inclusion and ∅→K shows Fun(K,E) is a quasicategory; (7) pushout-product with A=X, B=RX, C=P, D=Q gives the T→RX×Q extension and strict triangles; (8) universe stability, and the empty case gives R∅=∅ and Fun(∅,E)=Δ⁰. Small cases checked: X=∅, E=∅, X=Λ²₁, and X already a quasicategory. There are no new nodes. DAG duplicate scan: filtered-inner-horn-factorization, isofibration-exponentiation, coherent-inner-anodyne-equivalences and discrete-inner-cell-transfer are not duplicates; lem-cbc-internal-hom-quasicategory covers only step 6's clause, and reproving it from an in-unit leaf is allowed. Route: the cited statements are leaves in unit sk-prop-sf-biduality-general and the definition is a notion; no tool_uses; no SGA. Not a target node, so there is no base-change morphism to check. HTT and Kerodon are online only, with WANTED recorded and proof_origin agent. Every step was checked independently. Minor: step 8 is marked elementary although it re-applies two leaves; it is a summary, so I accept it. No fixes."
  }
 }

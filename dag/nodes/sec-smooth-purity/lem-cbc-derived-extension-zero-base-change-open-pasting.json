@@ -14,9 +14,105 @@
   "lem-weil-pbc-inverse-image-composition-module-linear",
   "lem-weil-pbc-extension-by-zero-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in sheaves of $\\Lambda$-modules on the small étale sites. Write $L_a=a_!$, $R_a=a^{-1}$ for $a=k,j,l=j\\circ k$ and their primed versions, and $P_V=g_V^{-1},P_U=g_U^{-1},P_X=g^{-1}$. All the adjunctions $L_a\\dashv R_a$ exist by [lem-weil-pbc-extension-by-zero-adjunction]. Let $r:R_kR_j\\xrightarrow{\\sim}R_l$ and $r':R_{k'}R_{j'}\\xrightarrow{\\sim}R_{l'}$ be the inverse-image comparisons. Write $s_k:P_VR_k\\to R_{k'}P_U$, $s_j:P_UR_j\\to R_{j'}P_X$, and $s_l:P_VR_l\\to R_{l'}P_X$ for the cartesian inverse-image identifications. Explicitly $s_j=c_{g,j\\prime}^{-1}\\circ c_{j,g_U}$ using $jg_U=gj\\prime$, and similarly for $s_k,s_l$. The associativity of these comparisons, clause (1) of [lem-weil-pbc-derived-inverse-image-composition], gives\n$$r'P_X\\circ(R_{k'}s_j)\\circ(s_kR_j)=s_l\\circ(P_Vr).$$\nIndeed, both paths reorder $g_V^{-1}k^{-1}j^{-1}$ to $(j'k')^{-1}g^{-1}$ along the two commuting squares. The coherence equation is an equality on abelian sheaves; every arrow lifts to modules by [lem-weil-pbc-inverse-image-composition-module-linear], so the same equality holds on modules. No condition on $g$ besides the two cartesian squares is used.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "def-cbc-open-immersion-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0B65 and 0DV0; inverse-image composition from Modules on Sites Tag 03D8 (lemma-push-pull-composition-modules)"
+   }
+  },
+  {
+   "text": "Put $t_a=(b^a)^{-1}:L_{a'}P_{\\mathrm{source}}\\to P_{\\mathrm{target}}L_a$. By [lem-cbc-extension-zero-base-change], its transpose under $L_{a'}\\dashv R_{a'}$ is $s_{a,L_aM}\\circ P_{\\mathrm{source}}(\\eta_{a,M})$. The mate definition [def-weil-pbc-adjunction-mate] therefore gives, at $G$,\n$$t_a^\\flat{}_G=R_{a'}P_{\\mathrm{target}}(\\varepsilon_{a,G})\\circ s_{a,L_aR_aG}\\circ P_{\\mathrm{source}}(\\eta_{a,R_aG})\n=s_{a,G}\\circ P_{\\mathrm{source}}(R_a\\varepsilon_{a,G}\\circ\\eta_{a,R_aG})=s_{a,G}.$$\nThe middle equality is naturality of $s_a$ at $\\varepsilon_{a,G}$; the last is the triangle identity. This applies to $k,j,l$, since all three squares are cartesian. Thus $t_k,t_j,t_l$ are exactly the inverse mates of $s_k,s_j,s_l$, respectively.",
+   "uses": [
+    "lem-cbc-extension-zero-base-change",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6 (lemma-shriek-base-change); categories.tex Tag 0B65, mate formula"
+   }
+  },
+  {
+   "text": "Use the composite adjunction $L_jL_k\\dashv R_kR_j$ of [def-weil-pbc-composite-adjunction]. Its unit is $R_k(\\eta_{j,L_kM})\\circ\\eta_{k,M}$. The canonical comparison $c:L_jL_k\\to L_l$ is obtained by [lem-weil-pbc-conjugate-iso-unit-equation] using the right-adjoint identification $r^{-1}:R_l\\to R_kR_j$. In particular its unit equation is\n$$(R_kR_j)(c_M)\\circ R_k(\\eta_{j,L_kM})\\circ\\eta_{k,M}=r^{-1}_{L_lM}\\circ\\eta_{l,M}.$$\nThis is the canonical composition comparison of [lem-cbc-extension-zero-composition], which is the unit-compatible comparison for the restriction models $\\rho_a$ of [lem-weil-pbc-extension-by-zero-adjunction] with the equality $\\rho_k\\rho_j=\\rho_l$ and the transported units $\\theta_a\\circ\\eta_a$. Indeed, put $\\theta_k*\\theta_j=\\rho_k(\\theta_j)\\circ\\theta_kR_j:R_kR_j\\to \\rho_k\\rho_j$. By naturality of $\\theta_k*\\theta_j$ at $c_M$, the restriction-model unit equation $\\rho_k\\rho_j(c_M)\\circ(\\theta_k*\\theta_j)_{L_jL_kM}\\circ R_k(\\eta_{j,L_kM})\\circ\\eta_{k,M}=\\theta_{l,L_lM}\\circ\\eta_{l,M}$ is equivalent to the displayed equation with $r^{-1}$ replaced by $(\\theta_k*\\theta_j)^{-1}\\circ\\theta_l$. That transformation equals $r^{-1}$ by [lem-cbc-open-inverse-image-restriction-composition], so the two comparisons coincide by the uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation]. By the conjugate definition [def-weil-pbc-adjunction-conjugate], the equation says $c^c=r^{-1}$: composing with the counit gives this conjugate, and the triangle identity cancels the unit. The identical construction for the primed pair gives $(c')^c=(r')^{-1}$, hence $((c')^{-1})^c=r'$ by the inverse law in that same definition.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-composite-adjunction",
+    "lem-cbc-extension-zero-composition",
+    "lem-cbc-open-inverse-image-restriction-composition",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0B65 (lemma-transformation-between-functors-and-adjoints) and 0DV0 (lemma-compose-counits)"
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-weil-pbc-mate-pasting] with $L_1=L_k$, $L_3=L_j$, $L_2=L_{k'}$, $L_4=L_{j'}$, $G=P_V$, $H=P_U$, $K=P_X$, $\\alpha=t_k$, and $\\beta=t_j$. The four adjunction hypotheses were verified in Step 1. The pasted square is\n$$T=(t_jL_k)\\circ(L_{j'}t_k):L_{j'}L_{k'}P_V\\to P_XL_jL_k.$$\nStep 2 identifies its mate as\n$$T^\\flat=(R_{k'}s_j)\\circ(s_kR_j):P_VR_kR_j\\to R_{k'}R_{j'}P_X.$$\nThis uses composite adjunctions exactly as specified in Step 3; neither comparison $c,c'$ has yet been suppressed.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+    "place": "mateEquiv_hcomp, line 209; generic adjunction-pasting formula, clause (2) of the cited node"
+   }
+  },
+  {
+   "text": "Change from composite extension adjunctions to those of $l,l'$ by forming\n$$D=(P_Xc)\\circ T\\circ((c')^{-1}P_V):L_{l'}P_V\\to P_XL_l.$$\nClauses (3a),(3b) of [lem-weil-pbc-mate-pasting] and Step 3 give\n$$D^\\flat=(r'P_X)\\circ T^\\flat\\circ(P_Vr^{-1})=s_l.$$\nThe second equality substitutes Step 4 and then cancels $P_Vr$ against $P_Vr^{-1}$ in the coherence equation of Step 1. The mate bijection of [def-weil-pbc-adjunction-mate] is injective. Since $t_l^\\flat=s_l$ by Step 2, it follows that $D=t_l$.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+    "place": "mateEquiv_conjugateEquiv_vcomp, line 486; conjugateEquiv_mateEquiv_vcomp, line 505; mateEquiv bijectivity"
+   }
+  },
+  {
+   "text": "All factors of $D$ are isomorphisms, by [lem-cbc-extension-zero-base-change] and [lem-cbc-extension-zero-composition]. Inverting $D=t_l$ at $F$ and using that functors preserve inverses yields\n$$b^l_{g,F}=c'_{P_VF}\\circ j'_!(b^k_{g_U,F})\\circ b^j_{g,k_!F}\\circ g^{-1}(c_F^{-1}).$$\nPrecompose both sides with $g^{-1}(c_F)$; cancellation gives precisely\n$$c'_{g_V^{-1}F}\\circ j'_!(b^k_{g_U,F})\\circ b^j_{g,k_!F}=b^{j\\circ k}_{g,F}\\circ g^{-1}(c_F).$$\nEvery inverse-image identification is the module-linear one fixed in Step 1.",
+   "uses": [
+    "lem-cbc-extension-zero-base-change",
+    "lem-cbc-extension-zero-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/cor-cbc-derived-extension-zero-base-change.proof.md",
+    "place": "Proof, 'pasting properties of the construction', open-immersion composition direction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-open-immersion-square",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-cbc-extension-zero-base-change",
+  "lem-cbc-extension-zero-composition",
+  "lem-cbc-open-inverse-image-restriction-composition",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/cor-cbc-derived-extension-zero-base-change.proof.md",
+  "place": "Proof, final clause 'pasting properties of the construction'; detailed mate calculation using Stacks Tags 03S6, 0B65, 0DV0 and Mathlib mateEquiv_hcomp and conjugation laws"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -28,9 +124,9 @@
   {
    "tool": "loogle",
    "query": "openImmersionLowerShriekComp, openImmersionLowerShriekBaseChangeMap",
-   "results": "loogle: unknown identifier 'openImmersionLowerShriekComp'",
+   "results": "Inherited search record: Loogle reported unknown identifier 'openImmersionLowerShriekComp'; this is not evidence of absence. Valid name searches in this delivery find the generic mate theorem.",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "unavailable"
   },
   {
    "tool": "leanfinder",
@@ -45,10 +141,59 @@
    "results": "none",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composable open immersions extension by zero base change compatibility with composition comparison",
+   "results": "AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq; AlgebraicGeometry.Scheme.Hom.comp_appIso; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; no etale extension-by-zero theorem",
+   "date": "2026-10-17",
+   "verdict": "no match for the etale sheaf statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "extension by zero open immersion base change composition",
+   "results": "Invalid Loogle pattern: <input>:1:10: expected end of input; not evidence of absence. Replaced by the valid quoted mateEquiv_hcomp name search.",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersionLowerShriek|extension.?zero.*composition",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compatibility of extension by zero base change with composition of open immersions",
+   "results": "AlgebraicGeometry.isOpenImmersion_isMultiplicative; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.IsOpenImmersion.comp; no etale extension-by-zero theorem",
+   "date": "2026-10-17",
+   "verdict": "no match for the etale sheaf statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_hcomp\"",
+   "results": "CategoryTheory.mateEquiv_hcomp; CategoryTheory.Bicategory.mateEquiv_hcomp",
+   "date": "2026-10-17",
+   "verdict": "generic mate-pasting tools found; reused via existing lem-weil-pbc-mate-pasting, not a one-line specialization of the geometric statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exchange isomorphism for sheaves supported on an open subset commutes with composing two open embeddings",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict_invApp_apply; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_inv_app'_assoc; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match for the small-etale extension-by-zero identity"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv_conjugateEquiv_vcomp|conjugateEquiv_mateEquiv_vcomp",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-17",
+   "verdict": "generic mate-pasting tools found; reused via existing lem-weil-pbc-mate-pasting, not a one-line specialization of the geometric statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "cor-cbc-derived-extension-zero-base-change",
@@ -60,10 +205,49 @@
  "blueprint": {
   "from": {
    "node": "cor-cbc-derived-extension-zero-base-change",
-   "place": "Returned split, Step 3, paragraph beginning 'Also check pasting in the open-immersion direction'; expands the blueprint proof's 'pasting properties of the construction'.",
+   "place": "Proof, final clause: 'the named compatibilities are the functoriality, identity, and pasting properties of the construction in [lem-cbc-extension-zero-base-change]', pasting in the open-immersion direction (composable open immersions); used by Step 6 of the corollary's split.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-derived-extension-zero-base-change-open-pasting",
+  "worker": "stage1",
+  "summary": "Proved the unchanged underived open-pasting identity in six steps: specify the coherent module inverse-image square, identify the inverse exchange as its mate by an explicit unit-counit calculation, fix both composition comparisons by their unit equations, apply generic mate pasting, change adjunctions using the conjugates of c and c′, and invert the resulting equation. No new nodes. The proof uses the statements of existing generic categorical tools rather than their proofs.",
+  "blueprint": "Realizes the final 'pasting properties of the construction' sentence of main-20261015 cor-cbc-derived-extension-zero-base-change.proof.md, specifically composition in the open-immersion direction; retains the item's ancestor and historic unit binding.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Supplies the small-etale module adjunction needed to form mates; the cbc route invokes this adjunction as a categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Ensures every inverse-image comparison and equality used with module sheaves lifts from the abelian-sheaf comparison."
+   },
+   {
+    "node": "lem-weil-pbc-derived-inverse-image-composition",
+    "why": "Only clause (1), the sheaf-level associativity of inverse-image comparisons, is used as the generic coherence tool; no derived assertion or alternative proof route is used."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic uniqueness and unit equation of a comparison of left adjoints specifies the composition comparisons used in the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-a69b13ad2",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-a69b13ad2 (reviewer sub-agent of L); spot-checked: I read the whole delivery and all six steps are correct after three small repairs. (1) Step 3 said its c (the comparison matching units relative to the inverse-image iso r^{-1}) 'specifies' the canonical comparison of lem-cbc-extension-zero-composition. That node builds its c in the restriction model, where rho_k rho_j = rho_l holds strictly. The two agree only if the restriction identification theta is compatible with c_{j,k}, and no node states that. Fix: new statement-only node lem-cbc-open-inverse-image-restriction-composition (source Stacks sites 03EH and etale-cohomology after 03S3; DAG searched with rg, no existing node), plus an added argument in Step 3: by naturality of theta, the restriction-model unit equation is equivalent to the inverse-model equation with r^{-1} replaced by (theta_k*theta_j)^{-1} theta_l, which equals r^{-1} by the new node, so uniqueness identifies the two c's. (2) The item's blueprint.from.place pointed to a returned split rather than the blueprint text; it now names the final 'pasting properties of the construction' clause of the main-20261015 cor-cbc-derived-extension-zero-base-change proof. (3) Step 6 said 'postcompose' where it is a precomposition; reworded. proof_deps recomputed. Checks: the coefficient category is Lambda-modules on small etale sites with Lambda finite, the same as the parent; b is the inverse of the mate in lem-cbc-extension-zero-base-change, as the item uses. I recomputed Step 2 (t^flat = s by naturality and the triangle identity), Step 3 (c^c = r^{-1}, ((c')^{-1})^c = r'), the clause (2), (3a) and (3b) substitutions of mate-pasting in Steps 4-5 with all types, and Step 1 coherence from clause (1) associativity. Edge cases F=0, V empty, k or j = id, g = id all hold. No duplicate in the DAG and no SGA source. I accept the four declared tool uses as generic foundations.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

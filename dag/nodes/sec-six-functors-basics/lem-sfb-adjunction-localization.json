@@ -1,0 +1,70 @@
+{
+ "id": "lem-sfb-adjunction-localization",
+ "kind": "statement",
+ "title": "Adjunctions descend through localization with their unit and counit",
+ "statement": "Let $\\mathcal C_1,\\mathcal C_2,\\mathcal D_1,\\mathcal D_2$ be categories, $W_i$ classes of morphisms of $\\mathcal C_i$, and $Q_i:\\mathcal C_i\\to\\mathcal D_i$ localizations at $W_i$ in the sense of [lem-weil-pbc-localization-universal-property]. Let $L:\\mathcal C_1\\to\\mathcal C_2$ and $R:\\mathcal C_2\\to\\mathcal C_1$ be adjoint, $L\\dashv R$, with unit $\\eta:1\\to RL$ and counit $\\varepsilon:LR\\to1$. Suppose functors $\\bar L:\\mathcal D_1\\to\\mathcal D_2$, $\\bar R:\\mathcal D_2\\to\\mathcal D_1$ are supplied with natural isomorphisms $p:\\bar LQ_1\\xrightarrow{\\sim}Q_2L$ and $q:\\bar RQ_2\\xrightarrow{\\sim}Q_1R$. Then there is an adjunction $\\bar L\\dashv\\bar R$ whose unit and counit satisfy, for $X\\in\\mathcal C_1$ and $Y\\in\\mathcal C_2$,\n$$\n\\bar\\eta_{Q_1X}=\\bar R(p_X^{-1})\\circ q_{LX}^{-1}\\circ Q_1(\\eta_X),\\qquad\n\\bar\\varepsilon_{Q_2Y}=Q_2(\\varepsilon_Y)\\circ p_{RY}\\circ\\bar L(q_Y).\n$$\nIn particular these induced maps satisfy both triangle identities on the whole localized categories.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 04VG, lemma-properties-left-localization, for the underlying localization universal property. The adjunction statement and the two normalization formulas are stated exactly in Mathlib/CategoryTheory/Localization/Adjunction.lean:89,118,125 (CategoryTheory.Adjunction.localization, localization_unit_app, localization_counit_app); unlike Tag 04VG this includes adjunction descent."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def localization|localization_unit_app|localization_counit_app",
+   "results": "9 hits: Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/FiniteProducts.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/HasLocalization.lean, Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean, Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean. Source read: Mathlib/CategoryTheory/Localization/Adjunction.lean:33-131.",
+   "date": "2026-10-17",
+   "verdict": "match: CategoryTheory.Adjunction.localization (line 89), localization_unit_app (line 118), localization_counit_app (line 125), exact match to the adjunction and its two normalization formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.localization",
+   "results": "3 hits: CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.localization_counit_app, CategoryTheory.Adjunction.localization_unit_app. Source read: Mathlib/CategoryTheory/Localization/Adjunction.lean:33-131.",
+   "date": "2026-10-17",
+   "verdict": "match: CategoryTheory.Adjunction.localization (line 89), localization_unit_app (line 118), localization_counit_app (line 125), exact match to the adjunction and its two normalization formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adjunction descends to localizations if both adjoint functors induce functors on the localized categories",
+   "results": "8 hits: CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.localization_unit_app, CategoryTheory.Localization.HasProductsOfShapeAux.adj, CategoryTheory.Adjunction.localization_counit_app, CategoryTheory.Adjunction.isLocalization_leftAdjoint, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived'_unit. Source read: Mathlib/CategoryTheory/Localization/Adjunction.lean:33-131.",
+   "date": "2026-10-17",
+   "verdict": "match: CategoryTheory.Adjunction.localization (line 89), localization_unit_app (line 118), localization_counit_app (line 125), exact match to the adjunction and its two normalization formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction between categories induces an adjunction on their localizations when both functors descend, with unit and counit induced by the original adjunction",
+   "results": "8 hits: CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.Localization.ε, CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.localization_unit_app, CategoryTheory.Adjunction.localization_counit_app, CategoryTheory.Adjunction.Localization.ε_app, CategoryTheory.Adjunction.Localization.η_app, CategoryTheory.Adjunction.isLocalization_rightAdjoint. Source read: Mathlib/CategoryTheory/Localization/Adjunction.lean:33-131.",
+   "date": "2026-10-17",
+   "verdict": "match: CategoryTheory.Adjunction.localization (line 89), localization_unit_app (line 118), localization_counit_app (line 125), exact match to the adjunction and its two normalization formulas."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.localization",
+  "file": "Mathlib/CategoryTheory/Localization/Adjunction.lean",
+  "line": 89,
+  "how": "exact, one declaration per clause: Adjunction.localization (line 89) gives the adjunction and its triangle identities; Adjunction.localization_unit_app (line 118) and Adjunction.localization_counit_app (line 125) give the two formulas. In the file G=L, F=R, G'=bar L, F'=bar R, L₁=Q₁, L₂=Q₂; CatCommSq.iso G L₁ L₂ G' is p.symm and CatCommSq.iso F L₂ L₁ F' is q.symm. Lines 33-131 read in full."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-derived-open-immersion-shriek-iso",
+  "date": "2026-10-17",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-coefficient-comparisons",
+ "blueprint": {
+  "from": {
+   "node": "def-sfb-derived-open-immersion-shriek-iso",
+   "place": "Ambient adjunction input D(j_!) ⊣ D(j^*): descent of the termwise unit, counit and triangle identities through cochain localization, in the Extension by zero paragraph of the coefficient-comparisons unit.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

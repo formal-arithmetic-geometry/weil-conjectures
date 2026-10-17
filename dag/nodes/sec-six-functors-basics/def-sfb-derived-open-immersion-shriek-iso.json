@@ -23,21 +23,45 @@
  ],
  "proof": [
   {
-   "text": "For each coefficient ring $B=\\Lambda,\\Lambda'$, the exact extension by zero $j_!^B$ and its adjunction $j_!^B\\dashv j_B^*$ are supplied by [sk-def-sfb-module-lower-shriek]. Write $F_B=D(j_!^B)$ and $G_B=D(j_B^*)$. Here $D$ is localization of cochain complexes at quasi-isomorphisms, using only the opening unbounded-localization convention of the current [sk-def-sfb-derived-categories]. Its conditional assertions about resolution-computed derived functors are not needed: we construct the termwise functor directly as follows. To construct $F_B$ without any resolution hypotheses, apply exactness of $j_!^B$ to $0\\to Z^nC\\to C^n\\to B^{n+1}C\\to0$ and $0\\to B^nC\\to Z^nC\\to H^nC\\to0$. These exact sequences identify the cycles and boundaries of $j_!^BC$ with $j_!^BZ^nC$ and $j_!^BB^nC$, and give $H^n(j_!^BC)\\cong j_!^BH^n(C)$, naturally in $C$. Consequently termwise $j_!^B$ preserves quasi-isomorphisms. Let $Q_U^B,Q_X^B$ be the cochain localization functors defining the unbounded derived categories. Apply clause (1) of [lem-weil-pbc-localization-universal-property] to $Q_X^B\\circ\\mathrm{CoCh}(j_!^B)$: it sends every quasi-isomorphism to an isomorphism, so it descends to $F_B$ with its termwise factorization isomorphism. The termwise pullbacks $G_\\Lambda,G_{\\Lambda'}$, including their factorization isomorphisms, are the functors appearing in [def-sfb-derived-comap-upper-star-iso] specialized to $f=j$. Apply the underived adjunction degreewise to cochain complexes: its natural unit $\\eta^B$ and counit $\\varepsilon^B$ are chain maps, since their naturality equations applied to each differential are exactly the chain-map equations. The two triangle identities hold in each degree. With the termwise factorization identifications, clause (2) of [lem-weil-pbc-localization-universal-property] descends $Q_U^B\\eta^B$ to $\\bar\\eta^B:1\\to G_BF_B$ and $Q_X^B\\varepsilon^B$ to $\\bar\\varepsilon^B:F_BG_B\\to1$. On $Q_U^BC$ and $Q_X^BE$, respectively, the composites $\\bar\\varepsilon^B_{F_B(-)}\\circ F_B(\\bar\\eta^B)$ and $G_B(\\bar\\varepsilon^B)\\circ\\bar\\eta^B_{G_B(-)}$ are the images of the degreewise triangle identities, hence identities. Clause (3) of the same localization statement makes these identities of natural transformations on the whole derived categories. Thus these descended maps define $F_B\\dashv G_B$, precisely the ambient levelwise adjunction required in the statement.",
+   "text": "For each $B=\\Lambda,\\Lambda'$, [sk-def-sfb-module-lower-shriek] supplies the exact functor $j_!^B$ and the adjunction $j_!^B\\dashv j_B^*$. Apply [lem-weil-pbc-exact-functor-derived-factorization] to $j_!^B$: its termwise cochain functor preserves quasi-isomorphisms and induces $F_B=D(j_!^B)$ with a natural factorization $F_BQ_U^B\\cong Q_X^B\\mathrm{CoCh}(j_!^B)$. This replaces the inline cycles-and-boundaries argument by the exact-functor lemma. Here $Q_U^B,Q_X^B$ are the cochain localizations defining the unbounded categories, using only that convention of [sk-def-sfb-derived-categories]. The levelwise $G_B=D(j_B^*)$ and its factorization are those already occurring in [def-sfb-derived-comap-upper-star-iso] for $f=j$. No resolution hypothesis is used.",
    "uses": [
     "sk-def-sfb-module-lower-shriek",
+    "lem-weil-pbc-exact-functor-derived-factorization",
     "sk-def-sfb-derived-categories",
-    "def-sfb-derived-comap-upper-star-iso",
-    "lem-weil-pbc-localization-universal-property"
+    "def-sfb-derived-comap-upper-star-iso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-open-immersion-shriek-iso.md",
-    "place": "Definition, ambient adjunction input; coefficient-comparisons unit proof, Extension by zero paragraph. Descent expanded by lem-weil-pbc-localization-universal-property: Stacks Tag 04VG, categories.tex, lemma-properties-left-localization (3), for functor descent; natural-transformation descent and equality detection are the fully faithful precomposition formulation, as in Mathlib CategoryTheory/Localization/Predicate.lean:278-292."
+    "place": "Definition, ambient adjunction input $D(j_!)\\dashv D(j^*)$; coefficient-comparisons unit proof, Extension by zero paragraph (main-20261015 sk-def-sfb-coefficient-comparisons.proof.md:31-35). Levelwise functors and their factorizations through cochain localization: Stacks Tag 015F, derived.tex, lemma-right-derived-exact-functor, via lem-weil-pbc-exact-functor-derived-factorization."
    }
   },
   {
-   "text": "Apply [def-sfb-conjugate-pull-iso] with $\\mathcal A=D(\\Mod_{\\Lambda_X})$, $\\mathcal B=D(\\Mod_{\\Lambda'_X})$, $\\mathcal A'=D(\\Mod_{\\Lambda_U})$, and $\\mathcal B'=D(\\Mod_{\\Lambda'_U})$. Set $E_1=T^X$, $E_2=T^U$, $\\mathrm{Res}_1=D(\\operatorname{Res}_{a_X})$, $\\mathrm{Res}_2=D(\\operatorname{Res}_{a_U})$, $U_1=F_\\Lambda$, $U_2=F_{\\Lambda'}$, $L_1=G_\\Lambda$ and $L_2=G_{\\Lambda'}$. The two coefficient adjunctions are part of [sk-def-sfb-coefficient-change] (equivalently the derived extension/restriction adjunction of [sk-def-sfb-derived-extension-of-scalars]); the two open adjunctions are step 1. The isomorphism of [def-sfb-derived-comap-upper-star-iso] for $f=j$ is exactly $e:\\mathrm{Res}_2L_2\\cong L_1\\mathrm{Res}_1$. Its conjugate therefore has source $E_1U_1=T^X D(j_!^\\Lambda)$ and target $U_2E_2=D(j_!^{\\Lambda'})T^U$. Define the comparison in this node to be that conjugate. This specifies the actual natural isomorphism, not merely its existence. All four categories are unbounded, and none of the cited inputs assumes flatness of $a$; hence the construction requires no such hypothesis.",
+   "text": "The functor $j_!^B$ is additive because it is exact ([sk-def-sfb-module-lower-shriek]); $j_B^*$ is additive by [def-sfb-module-upper-star]. Apply clause (a) of [lem-weil-pbc-termwise-adjunction-homotopy] to $j_!^B\\dashv j_B^*$. It supplies an adjunction of the termwise cochain functors whose unit and counit are the degreewise sheaf unit and counit. Thus the chain-map equations and the two triangle identities on complexes are supplied by that lemma, rather than proved inline.",
+   "uses": [
+    "sk-def-sfb-module-lower-shriek",
+    "def-sfb-module-upper-star",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-open-immersion-shriek-iso.md",
+    "place": "Definition, ambient adjunction input $D(j_!)\\dashv D(j^*)$; coefficient-comparisons unit proof, Extension by zero paragraph (main-20261015 sk-def-sfb-coefficient-comparisons.proof.md:31-35). Termwise adjunction of complexes: clause (a) of lem-weil-pbc-termwise-adjunction-homotopy (Stacks Tag 08BJ, derived.tex, lemma-adjoint-preserve-K-injectives, proof)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-adjunction-localization] to the cochain adjunction from step 2, with $Q_1=Q_U^B$, $Q_2=Q_X^B$, $\\bar L=F_B$, $\\bar R=G_B$ and the two factorization isomorphisms from step 1. It gives $F_B\\dashv G_B$ on the unbounded derived categories. Its unit and counit formulas identify the maps with the localized degreewise unit and counit, and its triangle identities hold on the whole derived categories. This is precisely the ambient levelwise adjunction required by the statement, for each of the two coefficient rings.",
+   "uses": [
+    "lem-sfb-adjunction-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-open-immersion-shriek-iso.md",
+    "place": "Definition, ambient adjunction input $D(j_!)\\dashv D(j^*)$; coefficient-comparisons unit proof, Extension by zero paragraph (main-20261015 sk-def-sfb-coefficient-comparisons.proof.md:31-35). Descent of the adjunction through localization: Mathlib/CategoryTheory/Localization/Adjunction.lean:89,118,125, via lem-sfb-adjunction-localization."
+   }
+  },
+  {
+   "text": "Apply [def-sfb-conjugate-pull-iso] with $\\mathcal A=D(\\Mod_{\\Lambda_X})$, $\\mathcal B=D(\\Mod_{\\Lambda'_X})$, $\\mathcal A'=D(\\Mod_{\\Lambda_U})$, and $\\mathcal B'=D(\\Mod_{\\Lambda'_U})$. Set $E_1=T^X$, $E_2=T^U$, $\\mathrm{Res}_1=D(\\operatorname{Res}_{a_X})$, $\\mathrm{Res}_2=D(\\operatorname{Res}_{a_U})$, $U_1=F_\\Lambda$, $U_2=F_{\\Lambda'}$, $L_1=G_\\Lambda$ and $L_2=G_{\\Lambda'}$. The two coefficient adjunctions are part of [sk-def-sfb-coefficient-change] (equivalently the derived extension/restriction adjunction of [sk-def-sfb-derived-extension-of-scalars]); the two open adjunctions are supplied by steps 1–3. The isomorphism of [def-sfb-derived-comap-upper-star-iso] for $f=j$ is exactly $e:\\mathrm{Res}_2L_2\\cong L_1\\mathrm{Res}_1$. Its conjugate therefore has source $E_1U_1=T^X D(j_!^\\Lambda)$ and target $U_2E_2=D(j_!^{\\Lambda'})T^U$. Define the comparison in this node to be that conjugate. This specifies the actual natural isomorphism, not merely its existence. All four categories are unbounded, and none of the cited inputs assumes flatness of $a$; hence the construction requires no such hypothesis.",
    "uses": [
     "def-sfb-conjugate-pull-iso",
     "sk-def-sfb-coefficient-change",
@@ -53,9 +77,12 @@
  ],
  "proof_deps": [
   "sk-def-sfb-module-lower-shriek",
+  "lem-weil-pbc-exact-functor-derived-factorization",
   "sk-def-sfb-derived-categories",
   "def-sfb-derived-comap-upper-star-iso",
-  "lem-weil-pbc-localization-universal-property",
+  "def-sfb-module-upper-star",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-sfb-adjunction-localization",
   "def-sfb-conjugate-pull-iso",
   "sk-def-sfb-coefficient-change",
   "sk-def-sfb-derived-extension-of-scalars"
@@ -63,7 +90,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/def-sfb-derived-open-immersion-shriek-iso.md",
-  "place": "Definition; unit Extension by zero paragraph, with descent of the ambient adjunction expanded explicitly by the localization universal property."
+  "place": "Definition; unit Extension by zero paragraph, with the ambient adjunction $D(j_!)\\dashv D(j^*)$ obtained by localizing the termwise cochain adjunction (steps 1-3: lem-weil-pbc-exact-functor-derived-factorization, lem-weil-pbc-termwise-adjunction-homotopy (a), lem-sfb-adjunction-localization)."
  },
  "mathlib_searches": [
   {
@@ -131,7 +158,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -160,25 +187,36 @@
   "date": "2026-10-17",
   "item": "def-sfb-derived-open-immersion-shriek-iso",
   "worker": "stage1",
-  "summary": "Revalidated the returned delivery against every current cited statement, especially the revised sk-def-sfb-derived-categories. Step 1 now explicitly limits that citation to its unbounded-localization convention; exactness gives preservation of quasi-isomorphisms by the displayed cycle/boundary calculation, and localization descends the unit, counit and triangles without resolution hypotheses. Step 2 substitutes the four adjunctions into conjugation. Preserved the geometric statement and route, repaired the dangling unit citation, and refreshed the report and citation evidence; no new nodes. Independent second reading: made the functor supplied to localization explicit, corrected the source pinpoint to Tag 04VG with the separate fully faithful precomposition attribution, and repeated semantic and source searches; all statements and dependencies are retained.",
-  "blueprint": "Realizes the complete definition at order 1745 and the Extension by zero paragraph (step 4) of sk-def-sfb-coefficient-comparisons. The parenthetical sk-prop-sfb-module-derived-factorization is a unit record: its open-adjunction clause is expanded in step 1 rather than cited as a nonexistent DAG node.",
+  "summary": "Repair of the human return of 2026-10-17: extracted all three arguments hidden in former step 1. Reused lem-weil-pbc-exact-functor-derived-factorization for preservation of quasi-isomorphisms and factorization, and lem-weil-pbc-termwise-adjunction-homotopy (a) for the complex adjunction. Added only the generic Mathlib leaf lem-sfb-adjunction-localization for descent and the two normalized adjunction maps. Replaced step 1 by three short cited applications; retained the final conjugation step, changing only its reference to the preceding steps. The statement, Lean record, audit, coefficient category, and no-flatness clause are unchanged.",
+  "blueprint": "Realizes the entire definition at order 1745 and step 4 (Extension by zero) of sk-def-sfb-coefficient-comparisons, retaining the original route: levelwise open adjunctions, then conjugation of derivedComapUpperStarIso.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-localization-universal-property",
-    "why": "Generic localization descent of unit and counit, and equality detection, supplies the missing ambient levelwise adjunction without restricting schemes or coefficients or replacing the unit conjugation route."
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic exact-functor factorization on unbounded derived categories; supplies the first formerly inline argument without resolution hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Clause (a) gives the degreewise complex adjunction from the supplied underived open adjunction; no node of the coefficient-comparison unit states this generic argument."
+   },
+   {
+    "node": "def-sfb-module-upper-star",
+    "why": "Defines the same module pullback and explicitly states its additivity, required by the generic termwise-adjunction lemma."
    }
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-localization-universal-property"
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "def-sfb-module-upper-star"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q06-463dc0b8e",
-  "group": "Q06",
+  "reviewer": "NT-cc-Q22-ff3baecef",
+  "group": "Q22",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-463dc0b8e (reviewer sub-agent of L); spot-checked: I read the whole item, the unit sk-def-sfb-coefficient-comparisons, unit sk-prop-sfb-module-derived-factorization clause 6 and the main-20261015 blueprint item at order 1745. The statement matches the source. The only changes are that X and U are now named as schemes and that a citation which pointed to a unit, not a DAG node, was replaced. No hypothesis was added, none was dropped and none was weakened. The coefficient category is layer B, D(Mod(Sh(X_proet,Ab),Lambda_X)). Step 1 builds the adjunction D(j_!) ⊣ D(j^*) on the unbounded derived categories. Exactness of j_! comes from sk-def-sfb-module-lower-shriek. The calculation of cycles, boundaries and cohomology shows that termwise j_! preserves quasi-isomorphisms. lem-weil-pbc-localization-universal-property clause (1) then descends the functor, clause (2) descends the unit and counit, and clause (3) extends the triangle identities from objects of the form Q(C) to all objects. I checked this against Stacks 04VG (categories.tex:4406) and Mathlib Localization/Predicate.lean:274-290. The pullback j^* is the same module pullback that def-sfb-derived-comap-upper-star-iso uses. The step uses no resolutions, no boundedness and no flatness. Step 2 puts these adjunctions into def-sfb-conjugate-pull-iso (A=D(Lambda_X), B=D(Lambda'_X), A'=D(Lambda_U), B'=D(Lambda'_U)). I checked every functor's domain and codomain. The isomorphism e is def-sfb-derived-comap-upper-star-iso at f=j, from D(Lambda'_X) to D(Lambda_U). Its conjugate is T^X D(j_!) ≅ D(j_!) T^U, the stated direction. sk-def-sfb-coefficient-change supplies T ⊣ D(Res) for any a. The localization lemma is a Mathlib leaf, so it is a tool, not part of the route. The declared tool_use is not needed, but it is accurate and I accept it. There are no new nodes. None of def-sfb-open-immersion-shriek-iso, def-sfb-dc-open-lower-shriek-adjunction, def-sfb-finite-derived-extension-by-zero-adjunction (layer A) or det-prop-scalar-six-pullback (2) states the item. Edge cases pass: j = id, U empty, the nonflat map Z to Z/2, and unbounded complexes. One minor remark, not a fault: step 1 repeats what the existing leaf lem-weil-pbc-exact-functor-derived-factorization already states. No fixes were written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-ff3baecef (reviewer sub-agent of L); spot-checked: I read the whole item, the new leaf, every cited statement, blueprint order 1745, the unit proof's Extension by zero paragraph (proof.md:31-35), Mathlib Localization/Adjunction.lean:33-131, Stacks 04VG (categories.tex:4406), Stacks 015F (derived.tex:5884) and master ChangeOfCoefficients.lean:298-309 with OpenImmersionLowerShriek.lean:79-81. The statement is unchanged. Its coefficient category is layer B D(Mod_{Lambda_X}) and it has the same conjugate square and direction as master derivedOpenImmersionShriekIso. Neither master nor the item assumes flatness. Master builds its adjunction with mapDerivedCategoryAdjunction. That has the same unit on Q(K) as the item's adjunction from Adjunction.localization, so the conjugate is the same isomorphism. Step 1: j_! is exact for any condensed ring by sk-def-sfb-module-lower-shriek, and lem-weil-pbc-exact-functor-derived-factorization (015F) then gives F_B with its factorization. G_B is the levelwise D(j^*) named in the statement of def-sfb-derived-comap-upper-star-iso. Its factorization is part of what 'levelwise' means in sk-def-sfb-derived-categories, so I accept it. Step 2: j_! is additive because exact, and j^* is additive by def-sfb-module-upper-star. Clause (a) of lem-weil-pbc-termwise-adjunction-homotopy gives the adjunction on complexes. Step 3: I checked the orientations p: Lbar Q1 ≅ Q2 L and q: Rbar Q2 ≅ Q1 R against CatCommSq.iso. They are its symm, and the unit and counit formulas match localization_unit_app (line 118) and localization_counit_app (line 125) exactly. Step 4: with A=D(Lambda_X), B=D(Lambda'_X), A'=D(Lambda_U), B'=D(Lambda'_U), e is derived-comap-upper-star-iso at f=j, mapping B to A', and the conjugate is T^X D(j_!) ≅ D(j_!) T^U. New leaf lem-sfb-adjunction-localization: an exact Mathlib match with one declaration per clause, statement only, self-contained, cites the localization definition node. Tested on Q=id, on empty categories and with W = all morphisms. Duplicate search through rg found nothing that states it: lem-sc-localization-nested-adjunction-mate, lem-sc-derived-open-shriek-derived-adjunction, def-sfb-dc-open-lower-shriek-adjunction, lem-pc-derived-adjoint-functors and the localization universal property all state other things. No existing node states the layer-B ambient adjunction either, since unit sk-prop-sfb-module-derived-factorization clause 6 has no realizing node. Accepted tool_uses: lem-weil-pbc-termwise-adjunction-homotopy (a black box for its clause (a); no node of the route gives it) and def-sfb-module-upper-star (a definition). lem-weil-pbc-exact-functor-derived-factorization is a Mathlib leaf. No SGA is cited and there is no cycle. FIX: in the item, the source.place of steps 1-3 and proof_origin.place still described the old route (lem-weil-pbc-localization-universal-property, 04VG, Predicate.lean). I rewrote them to name the unit paragraph and 015F, 08BJ and Localization/Adjunction.lean:89,118,125. Nothing else changed.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
