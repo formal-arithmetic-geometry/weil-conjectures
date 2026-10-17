@@ -13,9 +13,85 @@
   "def-trf-oriented-nearby-cycles",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an arbitrary scheme map $g:T\\to S$ and put $f_T:X_T=X\\times_ST\\to T$. By [lem-sfb-finite-type-composition-base-change](2), $f_T$ is of finite type, hence locally of finite type [def-weil-finite-type-morphism]. Let $t\\in T$ and $s=g(t)$. If the fibre $(X_T)_t$ [def-pc-scheme-fibre] is empty its dimension is $-\\infty$. Otherwise pick $x'\\in(X_T)_t$; by the first clause of [lem-sc-fibre-dimension-after-base-change] (applied to $f$, which is locally of finite type, and $g$), $(X_T)_t\\cong X_s\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(t)$. The fibre $X_s$ is of finite type over $\\kappa(s)$ by [lem-sfb-finite-type-composition-base-change](2) applied to $f$ and $\\operatorname{Spec}\\kappa(s)\\to S$. By [def-weil-geometric-fibre] the geometric fibre is $X_{\\bar s}=X_s\\times_{\\kappa(s)}\\overline{\\kappa(s)}$. Two applications of [lem-kun-dimension-extension] (with $L=\\overline{\\kappa(s)}$ and with $L=\\kappa(t)$, the residue map $\\kappa(s)\\to\\kappa(t)$ being a field extension) give $\\dim(X_T)_t=\\dim X_s=\\dim X_{\\bar s}\\le d$; here the dimension of [def-kun-dimension] is the topological Krull dimension of the underlying space [def-kun-topological-krull-dimension], and an isomorphism of schemes is a homeomorphism. So every scheme-theoretic fibre of $f_T$ has topological Krull dimension at most $d$.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-finite-type-morphism",
+    "def-pc-scheme-fibre",
+    "lem-sc-fibre-dimension-after-base-change",
+    "def-weil-geometric-fibre",
+    "lem-kun-dimension-extension",
+    "def-kun-dimension",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Proposition 2.3, p. 3: hypothesis 'fibres de dimension inférieure à N' for an arbitrary base S, verified for f_T"
+   }
+  },
+  {
+   "text": "Since $m\\Lambda=0$, the unit map $\\mathbf Z\\to\\Lambda$ factors through $\\mathbf Z/m\\mathbf Z$, so $\\Lambda$ is a commutative $\\mathbf Z/m\\mathbf Z$-algebra. By Step 1, [lem-trf-gabber-nearby-cycle-dimension-bound] applies to $f_T$ with $N=d$ (it assumes no Noetherian hypothesis, no invertibility of $m$ and no quasi-compactness). For every sheaf $F$ of $\\Lambda$-modules on $X_{T,\\mathrm{Et}}$ it gives $\\mathcal H^i(R\\Psi_{f_T}(F[0]))=0$ for $i>2d$. For $T=S$, $g=\\mathrm{id}$, this is the first assertion, writing $R^i\\Psi_fF=\\mathcal H^i(R\\Psi_f(F[0]))$.",
+   "uses": [
+    "lem-trf-gabber-nearby-cycle-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Proposition 2.3, p. 3: H^i Psi_f F = 0 for i > 2N, after arbitrary base change"
+   }
+  },
+  {
+   "text": "By [def-trf-oriented-nearby-cycles], $R\\Psi_{f_T}=R\\psi_{f_T,*}$ is the K-injective total right derived functor of the module direct image $\\psi_{f_T,*}:\\operatorname{Mod}(\\Lambda_{X_{T,\\mathrm{Et}}})\\to\\operatorname{Mod}(\\Lambda_{V_{f_T}})$. This functor is additive and left exact, being a right adjoint by [lem-weil-pbc-ringed-topoi-module-adjunction], and both module categories are Grothendieck abelian with K-injective resolutions by [prop-pur-kinjective-resolutions-exist]. Hence [lem-pc-right-derived-functor-triangulated] makes $R\\Psi_{f_T}$ an exact triangulated functor commuting with shifts. For a sheaf $F$, $F[0]$ is bounded below with no cohomology in negative degrees, so [lem-weil-pbc-derived-functor-negative-vanishing] gives $\\mathcal H^i(R\\Psi_{f_T}(F[0]))=0$ for $i<0$. With Step 2, $\\mathcal H^i(R\\Psi_{f_T}(F[0]))=0$ for $i\\notin[0,2d]$, for every $\\Lambda$-module sheaf $F$.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-derived-functor-negative-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Section 2.2, p. 3: Psi_f K a priori in D^+, lands in D^b by Proposition 2.3"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-bounded-heart-amplitude] to $T'=R\\Psi_{f_T}:D(X_{T,\\mathrm{Et}},\\Lambda)\\to D(V_{f_T},\\Lambda)$, exact triangulated by Step 3, with $\\mathcal S$ the class of all $\\Lambda$-module sheaves on $X_{T,\\mathrm{Et}}$ (closed under isomorphism, contains $0$) and $[c,d']=[0,2d]$, the hypothesis being Step 3. For $K\\in D(X_{T,\\mathrm{Et}},\\Lambda)$ with $\\mathcal H^r(K)=0$ for $r\\notin[a,b]$, $a\\le b$, it gives $\\mathcal H^i(R\\Psi_{f_T}K)=0$ for $i\\notin[a,b+2d]$. If $a>b$, $K$ is acyclic, so $K\\cong0$ in the derived category and $R\\Psi_{f_T}K\\cong0$. Taking $T=S$ gives the second assertion; since $T\\to S$ was arbitrary, with the same $d,a,b$, both bounds hold after every base change, including non-Noetherian $T$.",
+   "uses": [
+    "lem-pur-bounded-heart-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Section 2.2 and Proposition 2.3, p. 3: bounded-complex consequence by truncation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "lem-sc-fibre-dimension-after-base-change",
+  "def-weil-geometric-fibre",
+  "lem-kun-dimension-extension",
+  "def-kun-dimension",
+  "def-kun-topological-krull-dimension",
+  "lem-trf-gabber-nearby-cycle-dimension-bound",
+  "def-trf-oriented-nearby-cycles",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-pur-bounded-heart-amplitude"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+  "place": "Proposition 2.3, p. 3 (proof communicated by Gabber), and Section 2.2; bounded-complex consequence by the existing amplitude lemma"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +130,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-orgogozo-good-modification",
@@ -76,5 +152,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nearby-dimension-bound",
+  "worker": "stage1",
+  "summary": "Audited the imported statement against Orgogozo Proposition 2.3 (p. 3) and Section 2.2. Step 1 checks the fibre-dimension hypothesis after arbitrary base change through existing base-change and field-extension dimension nodes; Step 2 applies the existing Gabber nearby-cycle bound; Step 3 records the lower bound and triangulated structure of RPsi; Step 4 applies the existing amplitude lemma lem-pur-bounded-heart-amplitude for bounded complexes. Statement unchanged; no new nodes. Reviewer FIX (Q73 cc review): rewrote the steps to cite these nodes instead of uncited facts and a hand-made truncation induction.",
+  "blueprint": "Realizes the uniform nearby-cycle bound used in the arithmetic-model and truncation paragraph of lem-trf-orgogozo-good-modification, inherited through lem-trf-local-term-locality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-91c5cc8d6",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-91c5cc8d6 (reviewer sub-agent of L); spot-checked: I read the item, every cited node statement and Orgogozo Prop. 2.3 and §2.2 (pp. 3-4; author PDF from the URL in the node, since no local copy exists). The source assumes nothing about S, so the arbitrary-base-change clause is Prop. 2.3 applied to f_T, and the bounded-complex clause is the D^b remark of §2.2. The statement is correct, is not weakened and is left as it was. There are no new nodes. Three repairable faults: (1) C1/E5, step 1: the base change of a finite-type map being of finite type and the fibre-dimension comparison were used with no node, and the argument had the direction wrong ((X_T)_t = X_s ⊗ κ(t), with κ(t) not algebraically closed). (2) C1/C4, step 2: the lower bound in degrees ≥ 0 was uncited, and the claim that RΨ is triangulated was attributed to def-trf-oriented-nearby-cycles, which does not state it. (3) C5, steps 2-3: the truncation induction re-proves the existing lem-pur-bounded-heart-amplitude, and the long exact sequences were uncited. Fix: whole corrected item in fixes/dag/nodes/sec-trace-formula/lem-trf-nearby-dimension-bound.json, four steps. Step 1 cites lem-sfb-finite-type-composition-base-change(2), lem-sc-fibre-dimension-after-base-change, def-weil-geometric-fibre and lem-kun-dimension-extension. Step 2 cites lem-trf-gabber-nearby-cycle-dimension-bound with N=d. Step 3 cites lem-weil-pbc-ringed-topoi-module-adjunction, prop-pur-kinjective-resolutions-exist, lem-pc-right-derived-functor-triangulated and lem-weil-pbc-derived-functor-negative-vanishing. Step 4 cites lem-pur-bounded-heart-amplitude with [c,d]=[0,2d], and the case a>b is handled. proof_deps is exactly the union of the steps' uses; every cited id exists; no cycle; no SGA. Edge cases checked: d=0, a=b, a>b, zero sheaf and complex, empty fibres, T=S, non-Noetherian T, transcendental residue extensions. Tool uses for the maintainer to record: lem-sc-fibre-dimension-after-base-change, lem-kun-dimension-extension, def-kun-dimension, lem-pc-right-derived-functor-triangulated, lem-weil-pbc-derived-functor-negative-vanishing, lem-pur-bounded-heart-amplitude, plus lem-weil-pbc-ringed-topoi-module-adjunction and prop-pur-kinjective-resolutions-exist (both already dependencies of the definition). Still open: local copies of the Orgogozo and Illusie PDFs are WANTED; Illusie Thm 1.14 (the Gabber node's source) was not read, only that node's statement was used.; 1 file(s) fixed by the reviewer"
  }
 }

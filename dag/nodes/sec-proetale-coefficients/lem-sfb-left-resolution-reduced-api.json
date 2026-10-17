@@ -1,0 +1,74 @@
+{
+ "id": "lem-sfb-left-resolution-reduced-api",
+ "kind": "statement",
+ "title": "Reduced left resolutions preserve zero morphisms",
+ "statement": "Let $A$ and $C$ be preadditive categories [def-weil-preadditive-category], let $\\iota:C\\to A$ be an additive functor, and assume that $A$ and $C$ are idempotent complete: for every object $X$ and every endomorphism $p$ of $X$ with $p\\circ p=p$ there are an object $Y$ and maps $i:Y\\to X$, $e:X\\to Y$ with $e\\circ i=\\mathrm{id}_Y$ and $i\\circ e=p$. A left resolution of $\\iota$ is a pair $(F,\\pi)$ of a functor $F:A\\to C$ and a natural transformation $\\pi:\\iota\\circ F\\Rightarrow\\operatorname{id}_A$ all of whose components $\\pi_M:\\iota(F(M))\\to M$ are epimorphisms. If $\\iota$ admits a left resolution $(F,\\pi)$, then it admits a left resolution $(F',\\pi')$ (Mathlib's $\\Lambda.\\mathrm{reduced}$) whose functor $F':A\\to C$ preserves zero morphisms: $F'(0_{M,N})=0_{F'(M),F'(N)}$ for all objects $M,N$ of $A$.",
+ "source": {
+  "document": "Mathlib/Algebra/Homology/LeftResolution/Reduced.lean",
+  "place": "Reduced.lean lines 120-129 (docstring, def reduced at line 123, instance Λ.reduced.F.PreservesZeroMorphisms at line 127); the structure LeftResolution with field epi_π_app is Mathlib/Algebra/Homology/LeftResolution/Basic.lean lines 34-43."
+ },
+ "stmt_deps": [
+  "def-weil-preadditive-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given an additive functor between idempotent complete preadditive categories and a LeftResolution, the reduced LeftResolution has a functor preserving zero morphisms",
+   "results": "CategoryTheory.Abelian.LeftResolution.reduced and CategoryTheory.Abelian.LeftResolution.instPreservesZeroMorphismsFReduced in Mathlib/Algebra/Homology/LeftResolution/Reduced",
+   "date": "2026-10-18",
+   "verdict": "match: the reduced declaration and its generated zero-preservation instance state the construction and property"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.LeftResolution.reduced, CategoryTheory.Abelian.LeftResolution.instPreservesZeroMorphismsFReduced",
+   "results": "CategoryTheory.Abelian.LeftResolution.instPreservesZeroMorphismsFReduced in Mathlib.Algebra.Homology.LeftResolution.Reduced",
+   "date": "2026-10-18",
+   "verdict": "match: the instance has type Λ.reduced.F.PreservesZeroMorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "noncomputable def reduced|instPreservesZeroMorphismsFReduced [Mathlib/Algebra/Homology/LeftResolution]",
+   "results": "Mathlib/Algebra/Homology/LeftResolution/Reduced.lean:123 noncomputable def reduced; :127 instance Λ.reduced.F.PreservesZeroMorphisms",
+   "date": "2026-10-18",
+   "verdict": "match: source lines give both declarations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "LeftResolution.reduced has a zero preserving functor",
+   "results": "CategoryTheory.Abelian.LeftResolution.instPreservesZeroMorphismsFReduced and CategoryTheory.Abelian.LeftResolution.reduced in Mathlib.Algebra.Homology.LeftResolution.Reduced",
+   "date": "2026-10-18",
+   "verdict": "match: the returned declarations state the reduced construction and zero-preserving functor"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.LeftResolution.reduced",
+  "file": "Mathlib/Algebra/Homology/LeftResolution/Reduced.lean",
+  "how": "exact: CategoryTheory.Abelian.LeftResolution.reduced (Reduced.lean line 123, under [Preadditive C] [Preadditive A] [ι.Additive] [IsIdempotentComplete A] [IsIdempotentComplete C]) produces the left resolution, the instance at Reduced.lean line 127 gives Λ.reduced.F.PreservesZeroMorphisms, and the structure field LeftResolution.epi_π_app (Basic.lean line 43) gives epimorphic components; IsIdempotentComplete is Mathlib/CategoryTheory/Idempotents/Basic.lean lines 54-58.",
+  "line": 123
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-left-resolution-reduced-class",
+  "date": "2026-10-18",
+  "group": "Q56"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-derived-tensor-hom",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-derived-monoidal",
+   "place": "Proof, first three sentences: the direct-summand reduction of the functorial cover class, using the reduced LeftResolution construction.",
+   "via": [
+    "lem-sfb-left-resolution-reduced-class",
+    "lem-sfb-functorial-bounded-above-class-resolution",
+    "lem-sfb-kflat-derivability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

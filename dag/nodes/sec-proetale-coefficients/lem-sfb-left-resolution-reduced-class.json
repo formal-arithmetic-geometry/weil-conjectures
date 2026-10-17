@@ -10,9 +10,41 @@
  "stmt_deps": [
   "def-sp-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let C be the full subcategory of A whose objects are exactly the members of F, and let iota:C \\to A be its inclusion. Since A is abelian [def-sp-abelian], it is preadditive and has a zero object and finite biproducts; because F contains zero and is closed under finite biproducts, C inherits a zero object and finite coproducts (which are biproducts in a preadditive category), and iota is fully faithful and additive. The inclusion has iota(X) in F by construction. The ambient category A is idempotent complete by [lem-sfb-abelian-idempotent-complete]. If an idempotent in C splits in A, its retract object is a direct summand of an object of F, hence lies in F; fullness then makes the splitting maps morphisms of C. Thus C is idempotent complete as well.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-sfb-abelian-idempotent-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Proof, third sentence (K-flat resolutions), as made precise by the parent chain; argument written by an agent after Mathlib/Algebra/Homology/LeftResolution/Reduced.lean lines 105-129."
+   }
+  },
+  {
+   "text": "Regard P as a functor Q0:A \\to C by taking Q0(M) to be the same object P(M), now equipped with its membership in F, and taking its action on morphisms from P. The given epsilon is then a natural transformation iota Q0 \\Rightarrow id_A with epimorphic components, so (Q0, epsilon) is a LeftResolution of iota. Apply the reduced left-resolution API [lem-sfb-left-resolution-reduced-api] to this datum and the idempotent-complete categories A and C. Its reduced resolution supplies a functor Q:A -> C preserving zero morphisms and a natural transformation pi:iota Q \\Rightarrow id_A with epimorphic components. Since every object of C was chosen from F, iota(X) lies in F for all X, giving all the required data.",
+   "uses": [
+    "lem-sfb-left-resolution-reduced-api"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Proof, third sentence (K-flat resolutions), as made precise by the parent chain; argument written by an agent after Mathlib/Algebra/Homology/LeftResolution/Reduced.lean lines 105-129."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "lem-sfb-abelian-idempotent-complete",
+  "lem-sfb-left-resolution-reduced-api"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+  "place": "Serves the third sentence of the proof ('the countable coproducts and the exact Z-indexed colimits used to build K-flat resolutions [sk-def-sfb-derived-categories]') through lem-sfb-kflat-derivability and lem-sfb-functorial-bounded-above-class-resolution; the blueprint text does not contain this argument. Written by an agent following the module docstring and lines 105-129 of Mathlib/Algebra/Homology/LeftResolution/Reduced.lean."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,7 +76,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-functorial-bounded-above-class-resolution",
@@ -56,7 +88,7 @@
  "blueprint": {
   "from": {
    "node": "lem-sfb-derived-monoidal",
-   "place": "Proof, first three sentences: the direct-summand reduction of the class of functorial covers to a zero-preserving left-resolution datum.",
+   "place": "Proof, first three sentences: direct-summand reduction of the functorial cover class to a zero-preserving left-resolution datum.",
    "via": [
     "lem-sfb-functorial-bounded-above-class-resolution",
     "lem-sfb-kflat-derivability"
@@ -64,5 +96,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sfb-left-resolution-reduced-class",
+  "worker": "stage1",
+  "summary": "Constructed the full subcategory on the cover class, checked its additive and idempotent-complete structure using abelian idempotent splitting and closure under direct summands, packaged P and epsilon as a LeftResolution, and applied Mathlib's reduced construction to obtain a zero-preserving functor and epimorphic natural transformation. Added two Mathlib leaves for the reduced API and abelian idempotent completeness; no statement changes.",
+  "blueprint": "Realizes the first three sentences of lem-sfb-derived-monoidal.proof.md: direct-summand reduction of the cover class and application of LeftResolution.reduced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-c9dfc3118",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-c9dfc3118 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the mathematics is correct. Step 1: the full subcategory C on F gets a zero object, biproducts and an additive fully faithful inclusion from def-sp-abelian. It is idempotent complete because Mathlib isIdempotentComplete_of_abelian (Idempotents/Basic.lean:116) splits idempotents in A, and closure under summands, isomorphisms and fullness then puts the splitting in C. Step 2: P corestricted to C together with epsilon is a Mathlib LeftResolution of the inclusion. The hypotheses of Reduced.lean def reduced (l.123: preadditive, additive iota, both categories idempotent complete) hold, the instance at l.127 gives preservation of zero morphisms, and epi_π_app (Basic.lean:43) gives epimorphic components. I tested Ab with projectives and P = free module, where P(0) = Z is not 0, and the case F = {0}. The parent uses the item with exactly its hypotheses. The two new nodes are not restatements or duplicates: I grepped dag/nodes for idempotent complete, karoubian, isIdempotentComplete and LeftResolution. There are no route issues, no tool_uses and no SGA. Fixes: (1) lem-sfb-left-resolution-reduced-api: the statement now defines idempotent complete and left resolution inline instead of pointing at the Mathlib construction (B2/B3). It drops the fully-faithful hypothesis that Mathlib does not need, so the leaf is exact, and how/source now give each declaration with its line. (2) The item's proof_origin was by=document, citing blueprint sentences that contain no such argument. It is now by=agent, following Reduced.lean l.105-129, and serves the blueprint's third sentence (K-flat resolutions) through the parent chain. The step source places are updated to match.; 2 file(s) fixed by the reviewer"
  }
 }
