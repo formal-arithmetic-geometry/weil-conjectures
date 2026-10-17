@@ -10,6 +10,9 @@ public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.OpenImmersion
 public import WeilConjectures.WeilSheaf.Triangle
 
+import WeilConjectures.WeilSheaf.OpenImmersionRestriction
+import WeilConjectures.WeilSheaf.StalkUpperStar
+
 /-!
 # Stalks of the extension by zero of a Weil sheaf
 
@@ -77,6 +80,17 @@ theorem subsingleton_stalk_extensionByZero (G : WeilSheaf k₀ l U) (x : X.finit
   exact ModuleCat.subsingleton_of_isZero ((WeilCoefficients.toModuleCat l).map_isZero
     ((Sheaf.Γ _ _).map_isZero hz'))
 
+private lemma stalkAt_eq_of_degree_eq (F : WeilSheaf k₀ l X)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    {m n : ℕ} (h : m = n)
+    (hm : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
+    (hn : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).hom =
+      (specGeometricFrobenius k₀ ^ n).hom ≫ s) :
+    F.stalkAt s m hm = F.stalkAt s n hn := by
+  subst n
+  rfl
+
 /-- **The stalks of the extension by zero inside `U`** (blueprint:
 `lem-cbc-proetale-extension-zero`, `(j_!K)_x̄ = K_x̄` for a geometric point `x̄` of `U`): the
 geometric stalk of `j₀!G` at a closed point `j z` of `U`, with its local Frobenius, is that of
@@ -84,8 +98,61 @@ geometric stalk of `j₀!G` at a closed point `j z` of `U`, with its local Frobe
 theorem nonempty_equiv_stalk_extensionByZero (G : WeilSheaf k₀ l U) (z : U.finitePoints) :
     Nonempty ((((extensionByZero j).obj G).stalk
       ⟨j.base z.1, (Scheme.Hom.mem_finitePoints_iff_of_isIso j z.1).2 z.2⟩).Equiv
-        (G.stalk z)) :=
-  sorry
+        (G.stalk z)) := by
+  let J := Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀)))
+  let t := (U ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint z
+  let x : X.finitePoints :=
+    ⟨j.base z.1, (Scheme.Hom.mem_finitePoints_iff_of_isIso j z.1).2 z.2⟩
+  let s := (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x
+  have hdeg : (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 =
+      (U ↘ Spec (CommRingCat.of k₀)).degreeOver z.1 := by
+    rw [← Scheme.Hom.degreeOver_comp_of_isIso j (X ↘ Spec (CommRingCat.of k₀)) z.1,
+      comp_over]
+  have ht := Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
+    (U ↘ Spec (CommRingCat.of k₀)) z
+  have ht' : (t ≫ J) ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
+      (U ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).hom =
+      (specGeometricFrobenius k₀ ^ (U ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).hom ≫
+        (t ≫ J) := by
+    rw [Category.assoc, Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_pow,
+      ← Category.assoc, ht, Category.assoc]
+  have : IsIso (𝟙 _ : (J)^*[WeilCoefficients.{u} l].obj
+      ((extensionByZero j).obj G).obj.carrier.X ⟶
+      ((upperStar j).obj ((extensionByZero j).obj G)).obj.carrier.X) :=
+    inferInstanceAs (IsIso (𝟙 ((J)^*[WeilCoefficients.{u} l].obj
+      ((extensionByZero j).obj G).obj.carrier.X)))
+  obtain ⟨e₁⟩ := nonempty_equiv_stalkAt_of_upperStar (φ := j) (F := ((extensionByZero j).obj G))
+    (G := (upperStar j).obj ((extensionByZero j).obj G)) (θ := 𝟙 _)
+    (upperStar_frobeniusStr_compatible j ((extensionByZero j).obj G)) t _ ht ht'
+  obtain ⟨e⟩ : Nonempty ((upperStar j).obj ((extensionByZero j).obj G) ≅ G) :=
+    nonempty_upperStar_extensionByZero_iso j G
+  obtain ⟨e₂⟩ := nonempty_equiv_stalkAt_of_iso t _ ht e
+  have hbase := Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberProj_base
+    (X ↘ Spec (CommRingCat.of k₀)) x
+  have hss' : (s ≫ (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
+      (IsLocalRing.closedPoint (AlgebraicClosure k₀)) =
+      ((t ≫ J) ≫ (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
+        (IsLocalRing.closedPoint (AlgebraicClosure k₀)) := by
+    rw [hbase, Category.assoc, Scheme.Hom.geometricFiberMap_comp_geometricFiberProj,
+      ← Category.assoc]
+    exact (congrArg j.base
+      (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberProj_base _ z)).symm
+  have hmem : (s ≫ (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
+      (IsLocalRing.closedPoint (AlgebraicClosure k₀)) ∈ X.finitePoints := by
+    rw [hbase]
+    exact x.2
+  have hs := Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
+    (X ↘ Spec (CommRingCat.of k₀)) x
+  rw [hdeg] at hs
+  obtain ⟨e₀⟩ := ((extensionByZero j).obj G).nonempty_equiv_stalkAt s (t ≫ J) hss' hmem _ hs ht'
+  change Nonempty ((((extensionByZero j).obj G).stalk x).Equiv (G.stalk z))
+  have heq : ((extensionByZero j).obj G).stalk x = ((extensionByZero j).obj G).stalkAt s
+      ((U ↘ Spec (CommRingCat.of k₀)).degreeOver z.1) hs :=
+    stalkAt_eq_of_degree_eq ((extensionByZero j).obj G) s hdeg
+      (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow _ x) hs
+  dsimp only [J] at e₀
+  rw [heq]
+  exact ⟨e₀.trans (e₁.trans e₂)⟩
 
 /-- The extension by zero `j₀!G` of a Weil sheaf punctually `ι`-pure of weight `w` is punctually
 `ι`-pure of weight `w`: its stalks at the closed points of `U` are those of `G`, with the same
