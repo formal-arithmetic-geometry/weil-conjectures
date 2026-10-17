@@ -274,5 +274,32 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-97891f143 (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps, the statement of each of the 12 cited nodes, the unit and chapter records, and the report. The delivery has no new nodes: the coslice-test node is dropped and nothing cites it. Statement unchanged and correct: the right Kan extension along a right (hence cartesian) fibration is the fibrewise limit, because E_b is initial in E_{b/} by cartesian pullback. Dual of Kerodon 02ZL/0309, HTT 4.3.3. Checked on B=pt, p=id and E empty. Step 1: u=p^op is a left fibration by horn-index reversal; Phi_T is an equivalence, so q with Phi_T(q)≃G exists. Step 2: currying for R=Pi_uY verified degreewise. Step 3: lem-coef-left-fibration-right-anodyne-base-change (Cisinski 4.4.11) is applied with exactly its hypotheses. The pullback along the right fibration {0}->Delta^1 instead gives ∅->{0}, which is not right anodyne, so the left-fibration hypothesis is needed and is correctly used. Steps 4-5: enriched adjunction with Kan mapping complexes, and Map^R_{N_hc A}(a,b)=Sing_Q A(a,b) because C[J^n] has no y->x morphisms; the Q-resolution span comes from the pinched-resolution node. Step 6: R_b = Gamma(Y|E_b^op), and section-limit plus cone-straightening (Phi≃m_q, base pullback, fibre evaluation) identify the counit on each fibre with the limit cone on G_b. Steps 7-8: universal property, naturality, and the empty/identity/size cases. proof_deps equals the union of uses. A DFS shows no cited closure reaches the item. Duplicate search over the DAG found no node with the same statement. All references are HTT/Cisinski/Kerodon, online only and listed as WANTED; no SGA. Tool use accepted: lem-cbc-enhanced-functor-cone-calculus, a generic mapping-space fact from another unit. Recorded for maintenance: the blueprint ancestor mismatch on prop-coef-integral-exceptional-adjoint. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RightFibrationFiberwiseKan",
+  "declaration": "SSet.Enhanced.rightFibration_fiberwise_kan",
+  "declarations": [
+   "SSet.Enhanced.rightKanPrecomposition",
+   "SSet.Enhanced.rightKanFiberCounitEdge",
+   "SSet.Enhanced.rightKanFiberDiagram",
+   "SSet.Enhanced.IsRightKanFiberComponent",
+   "SSet.Enhanced.rightKanComparison",
+   "SSet.Enhanced.rightFibration_fiberwise_kan"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RightFibrationFiberwiseKan.lean",
+  "statement": "theorem rightFibration_fiberwise_kan {B E : SSet.{u}} [Quasicategory B] [Quasicategory E] (p : E ⟶ B) (hp : rightFibration p) (G : SSet.uliftFunctor.{u + 1, u}.obj E ⟶ CategoryTheory.Spaces.infinityCategory.{u}) (hlim : ∀ b : B _⦋0⦌, ∃ t : (coneCategory (rightKanFiberDiagram p G b)) _⦋0⦌, IsLimiting (rightKanFiberDiagram p G b) t) : ∃ (R : SSet.uliftFunctor.{u + 1, u}.obj B ⟶ CategoryTheory.Spaces.infinityCategory.{u}) (η : (mappingSpace ((ihom (SSet.uliftFunctor.{u + 1, u}.obj E)).obj CategoryTheory.Spaces.infinityCategory.{u}) ((rightKanPrecomposition p).app _ (diagramVertex R)) (diagramVertex G)) _⦋0⦌), (∀ b : B _⦋0⦌, IsRightKanFiberComponent p G R b η) ∧ (∀ F : SSet.uliftFunctor.{u + 1, u}.obj B ⟶ CategoryTheory.Spaces.infinityCategory.{u}, IsWeakHomotopyEquivalence (rightKanComparison p R G η F))",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-0a31b4134"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a31b4134",
+  "group": "Q23",
+  "result": "fix",
+  "note": "Item, 8 proof steps, all 4 stmt deps (EnhancedDiagramsCones mappingSpace/coneCategory/IsLimiting, infinityCategory.{u}, rightFibration/fiber, rightFibration_fibers) and the helper declarations adjunctComposition (Classical.choose of mapping_composition, pinned down up to homotopy, so the weak-equivalence statement does not depend on the choice) and enhanced_functor_cone_calculus (Prop instance only) were read. Clause check correct: quasicategories, rightFibration, u+1 ulift with no universe equality, counit edge Rp->G, fibre cone with apex R(b) and restricted counit edge, IsLimiting, canonical whole-mapping-space comparison with the right argument order; edge cases (empty fibre, E, B; p=id) fine; no hollow definitions, sorry-only, docstrings and blueprint tags present, no duplicates in Mathlib or the side tree. F1 (H3): the node's hypothesis 'if each G_b has a limit in S_U' was missing from the Lean (statement stronger than the node, and the citer lem-coef-right-fibration-constant-right-kan discharges this hypothesis); fixed by adding hlim : forall b, exists t in coneCategory (rightKanFiberDiagram p G b), IsLimiting. F2 (H9): removed the unused public import InfinityMappingComposition; added non-public proof-plan imports RightAnodyne, KanCoherentNerveQuasicategory, LeftFibrationRightAnodyneBaseChange, PinchedRigidificationResolution, RightFibrationSectionLimit, SimplicialRightFibrationPresentation. nt_compile --json: delivered file EXIT 0 clean (reproduced); fixes/RightFibrationFiberwiseKan.lean EXIT 0 clean, lines <=100. lean.statement is re-read from the fixed module; declaration names unchanged."
  }
 }
