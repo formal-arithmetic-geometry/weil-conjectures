@@ -15,9 +15,95 @@
   "def-coef-infinity-relative-cone",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Prove (i) using the family incidence axiom, without any space hypothesis on the one-fibers. Write the inert vertex restrictions of b as v_0,...,v_r. For each v_j the category C_j of arrows a_0 to v_j across the parameter edge 0 to t, with a_0 in A_[0], is contractible and is a space: constancy over [0] identifies it with the slice of the space A_[0] over a chosen inverse image of v_j. Its contraction is composition to the identity arrow of that inverse image; all its arrows are equivalences since A_[0] is a space. This description also applies to diagrams of such arrows. In particular the choices of an identification between two endpoint lifts, compatible with their arrows to v_j, form a contractible space.\nFor an active arrow u:a to b with base opposite to lambda:[r] to [m], lambda(0)=0 and lambda(r)=m. Put m_i=lambda(i)-lambda(i-1). Restrict a by its stationary inert cocartesian maps to the subintervals [lambda(i-1),lambda(i)]. The cocartesian mapping criterion of [lem-coef-infinity-cocartesian-mapping-criterion] factors the composites a to b to b_i through these restrictions, producing active arrows a_i to b_i. It applies across the parameter edge because the stationary inert maps are cocartesian for the whole pi. These factorizations and the same factorizations on coherent triangles give the cutting functor R:J_b to the product of J_{b_i}.\nHere is its inverse construction. Given active arrows u_i:a_i to b_i with source lengths m_i, use their endpoint arrows to v_i to identify the final endpoint of a_i with the initial endpoint of a_{i+1} in C_i. The Segal fiber-product equivalence in the generalized-operad definition of [def-coef-operadic-correspondence] glues the a_i to a in A_[m], m=sum_i m_i. For m_i=0 it glues a vertex, with the two endpoint legs retained. Set lambda(j)=sum_{i<=j}m_i. The arrows from a to a_i to b_i and the endpoint arrows now form the full incidence cone over the base map lambda opposite. The relative pi-limit axiom at b in [def-coef-operadic-correspondence] supplies u:a to b, with exactly this cone up to coherent equivalence. Its base is active. Choices in the gluing are contractible relative to the given endpoint and incidence data.\nTo check morphisms, a triangle in each J_{b_i} includes an active source-change map; write its opposite as h_i between the corresponding input ordinals. Since each h_i preserves endpoints, the translated h_i glue to a unique monotone map h on the concatenated intervals. Endpoint compatibilities lie in the C_i and glue by their contractions. The Segal equivalence for A and the relative pi-limit at b then identify the spaces of these triangles and their compatibility homotopies with the corresponding space for the glued arrow. Apply this argument to coherent diagrams, not only individual triangles: the functor/cone mapping-space calculus of [lem-cbc-enhanced-functor-cone-calculus] tests the same universal properties with any simplicial parameter. Thus gluing gives a coherent inverse to R. Cutting after gluing recovers each u_i; gluing after cutting recovers u by the same Segal and relative-limit universal properties. Their component equivalences are natural equivalences by the cited functor calculus. This proves the equivalence of categories, including arity-changing active source morphisms, rather than merely a product of operation spaces. The zero-output case is dealt with in step 5.",
+   "uses": [
+    "def-coef-operadic-correspondence",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, step (1), printed pp.336–337, output-product equivalence; generalized nonsymmetric expansion using Gepner–Haugseng Definition A.3.1(2), Definition A.3.2 and Theorem A.3.4."
+   }
+  },
+  {
+   "text": "For (ii) take E=P_act and E_0=A_act, the full subcategory of E on the parameter-zero vertices. E is a quasicategory: fill an inner horn in P; for a two-dimensional horn the new edge is the composite of two active base maps and is active, and in higher dimensions all edges are already specified. The subcategory E_0 is full in E since a simplex with all parameter vertices zero lies in A. Identify X_sigma^a with E_0 times_E E_{/sigma}. Indeed an active mixed arrow a to sigma(0), followed by an active arrow of sigma, has active composite. Moreover if h:a to a' is a source edge and both a to sigma(0) and a' to sigma(0) are active, their triangle forces h to be active: on opposite ordinals, composing an endpoint-preserving map with h^op has endpoints 0 and the full input length only if h^op has those endpoints. This includes length zero. The same test on all edges gives the identification on every simplex. Apply [lem-coef-initial-poset-slice-restriction] to T=[d], least element 0, the diagram sigma in E, and this E_0. Its source-restricted target slice is exactly J_{sigma(0)}. It gives the asserted restriction map and lifting of every monomorphism over E_0; in particular every simplicial boundary, including dimension zero, lifts. No left-fibration model of an unspecified extension fiber is used.",
+   "uses": [
+    "def-coef-operadic-correspondence",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-initial-poset-slice-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, step (1), printed p.336, first-vertex restriction using the left-anodyne inclusion {B} in sigma; the source-restricted general statement is lem-coef-initial-poset-slice-restriction."
+   }
+  },
+  {
+   "text": "For (iii), first construct the active reflector. The source projection X_sigma to A is the pullback of the right fibration P_{/sigma} to P of [lem-coef-infinity-slice-right-fibration], so X_sigma is a quasicategory. Its active part is full: the endpoint calculation of step 2 forces every source edge between active cones to be active. For an object x of X_sigma with initial mixed edge a to sigma(0), let its base be opposite to lambda:[r] to [m]. Factor it by the interval [lambda(0),lambda(r)]: the first base arrow is inert, with opposite j mapping to lambda(0)+j, and the second is active. Lift the first arrow at a by a stationary globally pi-cocartesian edge e:a to a'. Cocartesianness extends the entire cone from a to sigma across e, not just its first edge. Explicitly its outer-horn lifting criterion fills the triangles with e and each edge of the cone and then all higher simplices containing e; the space of compatible factorizations is contractible by [lem-coef-infinity-cocartesian-mapping-criterion]. The resulting cone x' has source a' still in A and every mixed edge active, since the arrows of sigma are active. The factorization gives a unit x to x' in X_sigma.\nFor an active cone y with source c over [l], a map x to y is a source map h:a to c and the coherent cone triangle. If beta:[r] to [l] is the opposite of the active mixed base map of y, the base triangle says lambda=h^op beta. Since beta preserves endpoints, h^op(0)=lambda(0) and h^op(l)=lambda(r). Monotonicity forces its image into that interval. Consequently h factors uniquely on the base through e by h'^op(j)=h^op(j)-lambda(0). The globally cocartesian mapping criterion gives an equivalence of the spaces of such factorizations including the entire cone triangle. For precision about the slice mapping spaces, [lem-cbc-right-fibration-morphism-space] applied to X_sigma to A expresses them as homotopy fibers of transport of the cone; taking that fiber of the cocartesian mapping equivalence gives Map_{X_sigma^a}(x',y) equivalent to Map_{X_sigma}(x,y), naturally in y. The dual pointwise adjoint criterion [lem-coef-infinity-pointwise-adjoint-criterion] therefore assembles x' and these units into a left adjoint to X_sigma^a included in X_sigma.\nApply [lem-coef-cofinal-relative-join-slice-restriction] to this full inclusion, its left adjoint, the inner fibration p:V^tensor to Delta^op supplied by the monoidal definition, and f=F composed with source evaluation. Its displayed right join-coslice restriction is exactly the map in (iii), with f restricted to X_sigma^a. It is a trivial Kan fibration with every prescribed boundary and the entire base fixed. This uses right join-coslices, whose simplices extend X_sigma star Delta^k; it does not use the left-cone comparison on L_tau in the family-cell lemma.",
+   "uses": [
+    "def-coef-operadic-correspondence",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-cbc-right-fibration-morphism-space",
+    "lem-coef-infinity-pointwise-adjoint-criterion",
+    "lem-coef-cofinal-relative-join-slice-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, step (1), printed p.336: the active full subcategory has a left adjoint, and relative right join-coslice restriction is a trivial Kan fibration. Interval-factorization expansion for the nonsymmetric base and stationary global lifts."
+   }
+  },
+  {
+   "text": "Check the diagram and cone compatibility in (i). For an object u:a to b, the cutting construction records the stationary inert maps a to a_i over the consecutive intervals. An inert-preserving F sends each to a p-cocartesian inert map F(a) to F(a_i). By [def-coef-monoidal-infinity-category], the Segal coordinates of F(a) are precisely the ordered lists of the Segal coordinates of the F(a_i), in order; its arity is m=sum_i m_i. On a source-change morphism the base map is the glued h of step 1, so the same identification is over Delta^op and agrees with composition. Shared endpoint restrictions were retained in C_i in step 1; applying F sends them to the zero-fiber of V^tensor, which is terminal by the arity-zero Segal condition. Thus the identifications respect both legs at every shared vertex. For an induced cone from an inert-preserving family diagram, its edge to the i-th output is the image of a to b to b_i, factored through a_i. These are exactly the edges and triangles of its factor cones. The relative mapping-space product in the monoidal definition identifies the full cone with this concatenated cone, including its compatibility homotopies. With any simplicial parameter the same coordinate projections identify the transformations and higher simplices, by [lem-cbc-enhanced-functor-cone-calculus]. This proves the stated naturality for source diagrams and for induced cones whenever their inert projections are preserved. In (ii) restriction simply deletes the last vertices of sigma; in (iii) restriction simply deletes X_sigma outside its active part. Hence these restriction maps are the specified simplicial maps, independent of the choices made in proving their lifting properties.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "def-coef-operadic-correspondence",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, step (1), printed p.337, identification of the source cocone with the concatenation diagram; generalized incidence endpoints from Gepner–Haugseng Definition A.3.1(2)."
+   }
+  },
+  {
+   "text": "If r=0, an active base map [m] to [0] has opposite [0] to [m] preserving both endpoints, so m=0. Every object and simplex of J_b therefore lies over [0]. Constancy of the zero-fiber correspondence on the parameter edge 0 to t identifies J_b with the slice of A_[0] over an inverse image of b. That space is contractible by the identity-arrow contraction used in step 1. After F its source lies in V^tensor_[0], the terminal zero-fiber, and is the empty tuple. If r=1, cutting has a single block and both composites of the comparison are the identity up to the universal identifications in step 1. For d=0 the map in (ii) is the identity on J_b; step 3 still applies to the full incoming slice. If J_{sigma(0)} is empty, step 2's map to it forces X_sigma^a to be empty. The reflector of step 3 then forces X_sigma to be empty as well; both relative coslice comparisons reduce to the identity comparison of V^tensor over Delta^op. No nonemptiness hypothesis was inserted. Finally the conclusion of (iii) is solely the relative coslice restriction given in step 3; the definition [def-coef-infinity-relative-cone] imposes no existence of a p-colimit. The whole proof therefore assumes no colimits in V^tensor.",
+   "uses": [
+    "def-coef-operadic-correspondence",
+    "def-coef-monoidal-infinity-category",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3, step (1), empty-product and active-factorization cases; Gepner–Haugseng Definition A.3.2 for the constant zero fiber."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-relative-cone",
+  "def-coef-monoidal-infinity-category",
+  "def-coef-operadic-correspondence",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-right-fibration-morphism-space",
+  "lem-coef-cofinal-relative-join-slice-restriction",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-pointwise-adjoint-criterion",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-initial-poset-slice-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Theorem 3.1.2.3, step (1), printed pp.336–337; read independently online by NJ second reader. Detailed nonsymmetric interval-factorization and endpoint-gluing expansion using Gepner–Haugseng Definitions A.3.1–A.3.2 and Theorem A.3.4. Online sources remain WANTED for archival."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,10 +174,31 @@
    "results": "{\"t\": \"2026-10-17T01:50:22Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of cocones to the active source of an operadic family is a trivial Kan fibration by inert active factorization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"CategoryTheory.SmallObject.SuccStruct.ofCocone_map_to_top\", \"HomotopicalAlgebra.instCofibrationMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations_1\", \"CategoryTheory.SmallObject.SuccStruct.arrowMap_ofCocone_to_top\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit_ι_app\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit\", \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone\"], \"digest\": \"f464725d2f806018\"}",
    "date": "2026-10-17",
    "verdict": "no match: displayed declarations concern ordinary-category cocartesian morphisms, ordinary comma functors and strict simplicial cones, not active-source reflection or its exact coslice restriction in an infinity-operadic family. The clarified global inert-lift hypothesis motivated this new search."
+  },
+  {
+   "tool": "grep",
+   "query": "active|inert|operadic",
+   "results": "{\"t\": \"2026-10-17T03:06:19Z\", \"tool\": \"grep\", \"query\": \"active|inert|operadic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Tactic/ClickSuggestions.lean\", \"Mathlib/Tactic/ITauto.lean\", \"Mathlib/NumberTheory/NumberField/Completion/Ramification.lean\", \"Mathlib/NumberTheory/NumberField/Completion/Ramification.lean\", \"Mathlib/NumberTheory/NumberField/Completion/Ramification.lean\", \"Mathlib/NumberTheory/NumberField/Completion/Ramification.lean\", \"Mathlib/NumberTheory/NumberField/Completion/Ramification.lean\", \"Mathlib/Tactic/ClickSuggestions/Unfold.lean\"], \"digest\": \"6407a30591f24c8b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. The semantic hits are ordinary-category reflections and small-object factorizations; grep finds simplex-category interval maps, tactic comments, inertia terminology and an operads bibliography entry, not this quasicategorical active-slice comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inert active factorization defines a reflective full subcategory of an infinity category slice and cofinal restriction of cocones",
+   "results": "{\"t\": \"2026-10-17T03:06:20Z\", \"tool\": \"leanfinder\", \"query\": \"Inert active factorization defines a reflective full subcategory of an infinity category slice and cofinal restriction of cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.OrthogonalReflection.isLocal_reflectionObj\", \"CategoryTheory.SmallObject.functorialFactorizationData\", \"CategoryTheory.SmallObject.hasFunctorialFactorization\", \"CategoryTheory.OrthogonalReflection.isLocal_isLocal_reflection\", \"CategoryTheory.MorphismProperty.instHasFunctorialFactorizationLlpRlp\", \"CategoryTheory.OrthogonalReflection.reflection\", \"CategoryTheory.IsCofiltered.SmallCofilteredIntermediate.factoring\", \"CategoryTheory.OrthogonalReflection.isRightAdjoint_ι\"], \"digest\": \"41eb90657c1fdf62\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. The semantic hits are ordinary-category reflections and small-object factorizations; grep finds simplex-category interval maps, tactic comments, inertia terminology and an operads bibliography entry, not this quasicategorical active-slice comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(Operad|operadic|inert)\\b|active.*slice|Segal.*cone",
+   "results": "{\"t\": \"2026-10-17T03:07:23Z\", \"tool\": \"grep\", \"query\": \"\\\\b(Operad|operadic|inert)\\\\b|active.*slice|Segal.*cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean\", \"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"Mathlib/Tactic/CategoryTheory/Slice.lean\", \"Mathlib/Tactic/Linter/FlexibleLinter.lean\", \"Mathlib/Tactic/Linter/FlexibleLinter.lean\", \"Mathlib/Tactic/Linter/FlexibleLinter.lean\", \"Mathlib/Tactic/Linter/FlexibleLinter.lean\", \"Mathlib/Tactic/Linter/FlexibleLinter.lean\"], \"digest\": \"7d4215f5acba4ccd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. The semantic hits are ordinary-category reflections and small-object factorizations; grep finds simplex-category interval maps, tactic comments, inertia terminology and an operads bibliography entry, not this quasicategorical active-slice comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-correspondence-kan-filling",
@@ -117,5 +224,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-active-incidence-comparison",
+  "worker": "stage1",
+  "summary": "Second reader repaired the five-step split without new nodes or statement changes: derive the active-slice product from family incidence universal properties; use the exact initial-poset slice theorem for first-vertex restriction; construct the active reflector by interval factorization and apply the exact relative right-coslice theorem. Retain all endpoint, zero-arity and empty-source cases.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, derived coefficient mapping-complex adjunction before R lim: operadic free extension in the fixed-object rectification chain, specifically the active incidence and comma-cone comparison used by the operadic Kan-extension construction. This realizes the HA Theorem 3.1.2.3 step-(1) comparison in the current family/incidence convention.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent-diagram and mapping-space calculus used to check endpoint gluing, natural inverse functors, and induced cones; it assumes no geometric or coefficient theorem."
+   },
+   {
+    "node": "lem-cbc-right-fibration-morphism-space",
+    "why": "Generic mapping-space formula for a right fibration, applied to the source projection of a join slice to pass the globally cocartesian mapping equivalence to coherent cone morphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-right-fibration-morphism-space"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-41285bc7b",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-41285bc7b (reviewer sub-agent of L); spot-checked: I read the item, all five steps and every cited statement in full. The delivery is the item and its report only, with no new nodes. The statement is unchanged and correct. It keeps the requirement that stationary inert lifts are cocartesian for the whole family: step 1 needs it to factor across the parameter edge 0->t, and step 3 needs it for the active reflector. Small cases I tested: r=0 (an active [m]->[0] forces m=0, so J_b is a contractible slice of A_[0]), r=1, r=2 with endpoint gluing, d=0, and empty J_{sigma(0)}. Step 1: the composite base factors uniquely as an interval inclusion followed by an active map. The cocartesian criterion lifts this, and Segal gluing plus the relative pi-limit gives the inverse. Step 2: P_act is a quasicategory and source edges between active cones are forced active (h^op preserves endpoints). So X^a equals E_0 x_E E_{/sigma}, and lem-coef-initial-poset-slice-restriction applies; it is true because {0} in Delta^d is left anodyne. Step 3: the interval factorization gives the reflection x->x'. A map into an active cone has its base inside the interval, so it factors through e. The mapping-space step is terse; I filled it in: e^* on cone fibers is an inclusion of a union of components, so the homotopy fibers agree. The pointwise adjoint criterion and the cofinal relative coslice lemma (HA p.336, HTT 2.1.2.5/4.1.3.1, orientation checked) then give exactly (iii). Steps 4 and 5 hold by the Segal coordinates of V^tensor, V^tensor_[0] = pt, and the reflector argument for empty sources. The 11 proof_deps equal the union of the step uses and none depends on the item, so there is no cycle. Both declared tool uses (lem-cbc-enhanced-functor-cone-calculus, lem-cbc-right-fibration-morphism-space) are generic and accepted. lem-coef-symmetric-family-active-slice-calculus is the symmetric (Fin_*) analogue, not a duplicate. No SGA source. HA, Gepner–Haugseng and HTT are not archived under literature/ (WANTED); I checked them from my knowledge of the texts, not against an archived copy. Minor report inaccuracies, with no DAG effect: citations.json is listed but not delivered, and the first review section describes the replaced proof. No fixes."
  }
 }

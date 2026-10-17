@@ -12,9 +12,237 @@
   "def-coef-infinity-fibrations",
   "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in a universe containing $K,E$ and all displayed small constructions. Pulling a right horn square back along any simplicial map gives a right horn square for $q$, so every pullback remains a right fibration. The total space $E$ is a quasicategory: first fill the projected inner horn in $K$, then lift that filler against $q$. Use [lem-coef-simplicial-right-fibration-presentation] with base $K$. Its last mapping-complex clause, applied to $Z=K$ and $Y=E$, says exactly that $\\Gamma(q)$ is Kan. Its fibre clauses give that every $E_k$ is Kan, including the empty fibre. This does not impose a Kan condition on the base.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "2.2.3.11–12; setup for the right-handed version of 3.3.3.4"
+   }
+  },
+  {
+   "text": "Put $A=\\mathfrak C[K]^{\\mathrm{op}}$. Use the explicit cone adjunction $T\\dashv U$ and projective model structure of [lem-coef-simplicial-right-fibration-presentation]. The initial map to $E$ is a slice cofibration, so $T(E)$ is projectively cofibrant. Factor $T(E)\\to1$ as a trivial cofibration $T(E)\\to F$ followed by a fibration. Then $F$ is cofibrant-fibrant. The Quillen-equivalence criterion in that same node makes the adjoint $\\eta:E\\to U(F)$ a contravariant weak equivalence. Both its ends are right fibrations, so the fibrewise test makes it a homotopy equivalence over $K$. In particular it induces equivalences on every fibre and on $\\operatorname{Fun}_{/K}(Z,-)$ for every $Z$: postcompose with a homotopy inverse, and whisker its two inverse homotopies with $Z$. Take $Z=K$ for the section comparison.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "2.2.1.2 and 2.2.3.11–12; functorial bifibrant presentation of this given fibration"
+   }
+  },
+  {
+   "text": "Reversal of the ordered subset-poset realization identifies $\\mathfrak C[K^{\\mathrm{op}}]$ with $A$. The enriched functor $F:A\\to\\mathbf{Kan}_{\\mathcal V}$ therefore transposes to a coherent functor $m_F:K^{\\mathrm{op}}\\to\\mathcal S_{\\mathcal V}$. This is a construction from the realization/nerve adjunction, not rectification of a previously given arbitrary coherent diagram. The natural fibre comparisons of [lem-coef-simplicial-right-fibration-presentation], combined with $\\eta_k$, identify $m_F(k)=F(k)$ with $E_k$. Check transport using that node's simplex formula: an element over $a:k\\to l$ is a natural map from the cone weight $T_a$ to $F$. Restricting this map to the two endpoint weights gives its two fibre values. The generator from $k$ to the cone vertex factors through $l$ along one endpoint of the subset-poset interval; the other endpoint is the direct generator. Applying the natural map into $F$ gives the homotopy between its source fibre value and $F(a)$ of its target fibre value. For a simplex $k_0\\to\\cdots\\to k_n$, subsets containing both endpoints give all such factorization homotopies, and composition is union of subsets. Thus restriction along faces and degeneracies gives exactly the higher coherences of $m_F$. Under $\\eta$, these are the coherences of actual lifts in $E$. To make the values literally $E_k$, not just equivalent representatives, fix the equivalences $E_k\\simeq F(k)$ furnished by $\\eta$ and the natural fibre comparison, and choose their inverse data $F(k)\\simeq E_k$. These are inverse data for fixed comparisons, not freely chosen fibre automorphisms. Homotopy inverse maps and their inverse homotopies give equivalence edges in the coherent nerve of $\\mathbf{Kan}$: the two inverse triangles are the enriched maps on the subset-poset interval for $\\Delta^2$. Put $K_0^{\\mathrm{disc}}=\\coprod_{k\\in K_0}\\Delta^0$, embedded in $K^{\\mathrm{op}}$. By [lem-coef-kan-coherent-nerve-quasicategory], $\\mathcal S_{\\mathcal V}$ is a quasicategory. Apply [lem-coef-infinity-isofibration-exponentiation] to this embedding: restriction from its coherent diagram category to its discrete vertex diagram category is an isofibration. Lift the prescribed equivalence from $(F(k))_k$ to $(E_k)_k$ with source $m_F$. This produces $m_q$ with $m_q(k)=E_k$ and a coherent equivalence $\\alpha:m_F\\to m_q$. Its transport is the conjugate of the action computed above, hence agrees with right-fibration lifting. This is a precise coherent replacement of the fibre values; it does not appeal to diagram rectification.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "def-coef-infinity-category-of-spaces",
+    "def-coef-coherent-nerve-infrastructure",
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-kan-coherent-nerve-quasicategory",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "2.2.2–2.2.3: cone-weight simplex formula and fibre transport, checked on its subset generators"
+   }
+  },
+  {
+   "text": "The lift comparisons just used have contractible compatible choices, rather than a uniqueness assertion only on components. For a standard simplex, $\\{n\\}\\hookrightarrow\\Delta^n$ is right anodyne by [lem-coef-infinity-terminal-anodyne]: every right-pinched mapping space into its last vertex is the singleton. Apply [lem-coef-infinity-right-fibration-exponentiation] to the pullback of $q$ over this simplex. Its restriction map on lift complexes is a trivial Kan fibration. A prescribed target, or a family of targets, has a nonempty contractible fibre of extensions. For a parameter boundary $\\partial\\Delta^r\\subseteq\\Delta^r$, the pushout-product of that boundary and this right-anodyne inclusion is right anodyne by [lem-coef-infinity-right-anodyne-product]; hence relative comparisons extend too. These relative extensions supply the comparison homotopies between the transport data in Step 3 and any other compatible lifting construction, including comparisons of comparisons in every dimension. The data are taken relative to the fixed targets; automorphisms of fibre objects are not counted as free new choices. In particular the functorial model factorization in Step 2 can be replaced without changing the normalized transport up to coherent equivalence. All maps of fibrations carry the displayed lifts and comparisons to lifts and comparisons of the same base simplices. For the literal-value normalization at the end of Step 3, contractibility has a second precise description. By [lem-coef-infinity-core-kan-fibration], restriction on the cores of the two diagram quasicategories is a Kan fibration. Pull it back along the specified vertex-equivalence path. The space of lifts with specified initial diagram is contractible: the endpoint inclusion $\\{0\\}\\hookrightarrow\\Delta^1$ is a trivial cofibration of Kan-model simplicial sets; its exponential corner against that Kan fibration is a trivial Kan fibration. Indeed a boundary lifting problem for the corner transposes to a lifting problem for the pushout-product of $\\partial\\Delta^r\\hookrightarrow\\Delta^r$ and $\\{0\\}\\hookrightarrow\\Delta^1$ against that Kan fibration. The latter endpoint inclusion is a horn inclusion, hence anodyne; [lem-coef-sset-anodyne-pushout-product] makes the pushout-product anodyne and provides the filler, including $r=0$. The endpoint inclusion is a weak equivalence and cofibration by [lem-coef-kan-quillen-right-proper]. The same statement with $\\partial\\Delta^r$ parameters supplies comparisons in every dimension. Thus the replacement with values $E_k$, including $\\alpha$, has contractible compatible choices relative to the chosen fibre equivalences. This does not assert that the space of all equivalences $F(k)\\simeq E_k$, without a normalization, is contractible. Changes of the enriched presentation also have a normalized contractible comparison space. For two bifibrant presentations $F,F'$ and fixed equivalences $E\\simeq U(F)$, $E\\simeq U(F')$, the full-faithfulness assertion of [lem-coef-simplicial-right-fibration-presentation] is a weak equivalence between the Kan mapping complexes $\\underline{\\operatorname{Nat}}(F,F')$ and $\\operatorname{Fun}_{/K}(U(F),U(F'))$. The comparison specified by the two fixed equivalences is a point of the latter complex. The space of its lifts, with the specified comparison homotopy, is the homotopy fibre of this weak equivalence and is contractible. Explicitly [lem-coef-spaces-homotopy-fiber-detection] compares it with the homotopy fibre of the identity on the target, whose points are paths ending at the specified point and whose contraction shrinks such paths to that endpoint. Composition of comparison maps projects to composition of the fixed comparisons over $K$, and the same contractible fibres give all higher comparison homotopies. Choices of inverses to the fixed equivalences are normalized in the same way by the composition equivalence of mapping complexes. This supplies coherent comparison of different factorization choices without invoking a general coherent-diagram rectification equivalence. Apply this last normalized-inverse argument also to the fixed fibre comparisons in Step 3: composition with a fixed equivalence induces an equivalence of Kan mapping complexes, so its homotopy fibre over the identity is the contractible space of inverse maps together with their inverse homotopies. Thus varying those inverse data adds no unnormalized automorphism choices.",
+   "uses": [
+    "lem-coef-infinity-terminal-anodyne",
+    "lem-coef-infinity-right-fibration-exponentiation",
+    "lem-coef-infinity-right-anodyne-product",
+    "def-weil-pbc-trivial-kan-fibration",
+    "lem-coef-infinity-core-kan-fibration",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-coef-sset-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Right-handed lift uniqueness; 2.1.2 and 2.2.3, with explicit relative parameter comparisons"
+   }
+  },
+  {
+   "text": "Let $v$ be the last vertex of $K\\star\\Delta^0$, and put $W(k)=\\mathfrak C[K\\star\\Delta^0](k,v)$, contravariantly in $k$. The formula for the cone adjunction in [lem-coef-cone-presheaf-adjunction], at the identity $K\\to K$, gives the literal equality $T(K)=W$: its defining pushout along $\\mathfrak C[K]\\to\\mathfrak C[K]$ changes nothing. Since $T$ takes monomorphisms to projective cofibrations, applying it to $\\varnothing\\hookrightarrow K$ makes $W$ projectively cofibrant. Reversing ordered labels identifies $W$ with the weight $W_{K^{\\mathrm{op}}}$ used in [lem-coef-coherent-weight-limit-recognition]. Reversal also identifies its collage with the left cone on $K^{\\mathrm{op}}$: the new vertex has only an identity endomorphism, no incoming maps from the boundary, and outgoing mapping sets $W(k)$. Thus an enriched natural map $W\\to\\operatorname{Fun}(L,F(-))$ specifies the enriched functor on this collage and therefore an actual join cone with apex $L$ and boundary $m_F$.",
+   "uses": [
+    "lem-coef-cone-presheaf-adjunction",
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-coherent-weight-limit-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Definitions 5.2.8–9; reversing the join and mapping-set variance"
+   }
+  },
+  {
+   "text": "The augmentation $W\\to1$ is objectwise a weak equivalence. Here are the missing details. $K\\star\\Delta^0$ is a quasicategory: an inner horn whose vertices all lie in $K$ fills in $K$, and one whose vertices are all $v$ is constant. In a mixed horn the vertices split into an initial $K$-block and a nonempty final $v$-block. Some face deleting a $v$-vertex belongs to the horn: if there is only one such vertex, its index is the last index and cannot be the missing inner face. That face specifies the entire initial $K$-simplex. Its ordered join with the required constant $v$-block fills the horn; intersections with the chosen face force each other prescribed face to have the same initial simplex or its indicated face. This includes repeated cone vertices. The right-pinched mapping space from $k$ to $v$ is literally a singleton, because its entire initial face is the constant simplex at $k$, and a mixed join simplex is determined by that initial simplex and its final constant cone block. Apply the mapping-set comparison of [lem-coef-pinched-rigidification-resolution] to these two vertices of this quasicategory. It identifies $W(k)$ by a weak equivalence with the $Q$-realization of that singleton. The same node identifies that $Q$-realization weakly with the singleton. Two-out-of-three proves the assertion. This argument also shows why no global completeness theorem for spaces is needed.",
+   "uses": [
+    "lem-coef-pinched-rigidification-resolution",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "2.2.4.1 and 2.2.2.7: contractibility of the ordered-cone weight"
+   }
+  },
+  {
+   "text": "In the simplicial projective model structure factor $W\\to1$ as a trivial cofibration $j:W\\to P$ followed by a fibration $P\\to1$. Since $W$ is cofibrant, $P$ is cofibrant-fibrant; since $W\\to1$ is an objectwise weak equivalence, so is $P\\to1$. All $P(k)$ are consequently contractible Kan complexes. The functor $U$ of [lem-coef-simplicial-right-fibration-presentation] carries this map between objectwise Kan diagrams to a fibrewise equivalence. Moreover $U(1)=K$: over each base simplex there is exactly one map $T_\\sigma\\to1$. Hence $r:U(P)\\to K$ is a homotopy equivalence of right fibrations over $K$. Choose the section canonically from the ordinary cone adjunction, rather than independently: let $u:K\\to U(W)$ be its unit at $K$, using $T(K)=W$ from Step 5, and set $s=U(j)u:K\\to U(P)$. Then $rs=1_K$, since the only map $K\\to K$ over $K$ is the identity; if $t$ is any homotopy inverse of $r$, then $s\\simeq trs=t$ using $tr\\simeq1$ and $rs=1$, so $sr\\simeq tr\\simeq1$. Its section space is contractible because postcomposition with $r$ is an equivalence from $\\operatorname{Fun}_{/K}(K,U(P))$ to $\\operatorname{Fun}_{/K}(K,K)=\\Delta^0$. This particular $s$ is the adjoint of $j$.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-cone-presheaf-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "2.2.3.11–12: the constant-source cofibrant presentation; Riehl–Verity 5.2.9"
+   }
+  },
+  {
+   "text": "The Dwyer–Kan full-faithfulness clause of [lem-coef-simplicial-right-fibration-presentation] gives a weak equivalence of Kan complexes\n$$\\underline{\\operatorname{Nat}}(P,F)\\longrightarrow\\operatorname{Fun}_{/K}(U(P),U(F)).$$\nRestriction along $s$ is a homotopy equivalence from its target to $\\Gamma(U(F))$: its inverse precomposes with $r$, and the composite in the other direction is homotopic to the identity using $sr\\simeq1$. Also precomposition with the trivial cofibration $j:W\\to P$ gives a trivial Kan fibration\n$$\\underline{\\operatorname{Nat}}(P,F)\\longrightarrow L:=\\underline{\\operatorname{Nat}}(W,F),$$\nby the simplicial projective model axiom with the fibration $F\\to1$. Thus Step 2 and these comparisons give a zigzag of equivalences $\\Gamma(q)\\simeq L$. We use the simplicial full-faithfulness assertion, not an incorrect claim that the ordinary cone adjunction is an isomorphism of enriched mapping objects.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "2.2.3.11: mapping-complex comparison; simplicial projective lifting axiom"
+   }
+  },
+  {
+   "text": "The object $L$ is a small Kan complex, by the simplicial model axiom applied to $0\\to W$ and $F\\to1$. Evaluation defines a weighted cone $W(k)\\times L\\to F(k)$. For every Kan complex $X$, currying and the objectwise naturality equations give a simplicial isomorphism\n$$\\operatorname{Fun}(X,L)\\cong\\underline{\\operatorname{Nat}}(W,\\operatorname{Fun}(X,F(-))).$$\nIndeed a degree-$n$ map $X\\times\\Delta^n\\to L$ is exactly a family $W(k)\\times X\\times\\Delta^n\\to F(k)$ commuting with every action in $A$. The right-hand side has the identical family and equations. This identifies the map with postcomposition by the weighted evaluation cone. Consequently this cone is a weighted homotopy limit in $\\mathbf{Kan}_{\\mathcal V}$, without invoking limits of arbitrary coherent diagrams.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "def-coef-infinity-category-of-spaces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Definition 4.1.8: verification of its weighted mapping property by explicit currying"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-coherent-weight-limit-recognition] with $Y=K^{\\mathrm{op}}$, $\\mathcal D=\\mathbf{Kan}_{\\mathcal V}$, and the weighted cone of Step 9. Its local Kan hypothesis holds: the internal function complex from any simplicial set to a Kan complex is Kan, as asserted for $\\mathbf{Kan}$ by [lem-coef-kan-coherent-nerve-quasicategory]. The recognition theorem says that the actual join cone obtained from weighted evaluation exhibits $L$ as a limit of $m_F$ in $\\mathcal S_{\\mathcal V}$. The fixed-boundary and fixed-vertex comparison of [lem-coef-infinity-join-cone-calculus] turns this join cone into the coherent-transformation convention of the item without changing the boundary or the vertex.",
+   "uses": [
+    "lem-coef-coherent-weight-limit-recognition",
+    "lem-coef-kan-coherent-nerve-quasicategory",
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.jhu.edu/~eriehl/recognizing.pdf",
+    "place": "Theorem 6.1.4, with the fixed-boundary join/fat-cone comparison"
+   }
+  },
+  {
+   "text": "Identify the cone and all its parameters by using the unit $u$ from Step 7. The simplicial structure on $U$ supplies a simplicial map\n$$c:L=\\underline{\\operatorname{Nat}}(W,F)\\longrightarrow\\Gamma(U(F)),\\qquad c(\\ell)=U(\\ell)u.$$\nFor an $n$-simplex $h:P\\times\\Delta^n\\to F$, the enriched composition law gives the equality of $n$-simplices\n$$U(h)s=U(h)U(j)u=U(h\\circ(j\\times1_{\\Delta^n}))u=c(j^*h).$$\nThus the triangle between the two maps out of $\\underline{\\operatorname{Nat}}(P,F)$ in Step 8 and $c$ commutes in every degree; two-out-of-three makes $c$ a weak equivalence. This does not require a simplicially enriched adjunction $T\\dashv U$.\n\nTo check the cones, over a simplex $\\sigma:\\Delta^r\\to K$ the unit $u$ is precisely the map $T_\\sigma\\to T(K)=W$ induced by $\\sigma$ and the ordinary adjunction. It sends every direct cone generator, and every subset labeling a factorization of it, to that same generator or subset in $\\mathfrak C[K\\star\\Delta^0]$. Hence, for a vertex $\\ell:W\\to F$, the section $c(\\ell)$ is represented over $\\sigma$ by $T_\\sigma\\to W\\xrightarrow{\\ell}F$. Evaluating at $k$ gives $\\ell_k(g_k)$, under the natural fibre comparison, where $g_k$ is the direct edge $k\\to v$. The subset containing an intermediate vertex gives the homotopy between this value and transport of the value at that vertex; unions of subsets give the iterated compatibilities. These are exactly the weighted cone of Step 9, not a separate cone with the same vertex values.\n\nFor parameters the identity above is an identity of simplicial maps. On each copy of $Q^r$ in the fibre calculation, [lem-coef-pinched-rigidification-resolution] identifies the comparison by the map induced by the same $J^r\\to K\\star\\Delta^0$; its maps $Q^r\\to\\Delta^r$ commute with every simplex operator. Thus the generator calculation commutes with restriction of the base simplex, restriction of the parameter simplex, and their intersections. Step 4 supplies the relative comparisons when passing from this specified presentation to the normalized lift transport. Postcomposition with $\\eta$ preserves these evaluations and simplex lifts, and $\\alpha$ of Step 3 changes the fibre representatives with its fixed comparisons. The evaluation cone on $\\Gamma(q)$ is consequently equivalent to the limiting weighted-evaluation cone under the apex equivalences $\\Gamma(q)\\simeq\\Gamma(U(F))\\xleftarrow{c}L$ and the boundary equivalence $\\alpha:m_F\\to m_q$.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-cone-presheaf-adjunction",
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-infinity-right-fibration-exponentiation",
+    "lem-coef-infinity-right-anodyne-product",
+    "lem-coef-infinity-join-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Cone adjunction and its unit; HTT Remark 2.2.2.12 (simplicial unstraightening), with the subset-poset realization and natural Q comparison; identifies the actual evaluation cone in all degrees."
+   }
+  },
+  {
+   "text": "Apply the limiting-cone mapping criterion of [lem-cbc-enhanced-functor-cone-calculus] to this evaluation cone. Step 11 identifies it with the limiting cone of Step 10 along an equivalence of apices and the coherent diagram equivalence $\\alpha:m_F\\to m_q$ of Step 3. Postcomposition with $\\alpha$ on the transformation spaces has inverse given by $\\alpha^{-1}$ and their inverse homotopies. Precomposition by an apex equivalence has an inverse given by its inverse and inverse homotopies, so the criterion remains an equivalence for every testing object $X\\in\\mathcal S_{\\mathcal V}$. It gives exactly\n$$\\operatorname{Map}_{\\mathcal S_{\\mathcal V}}(X,\\Gamma(q))\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K^{\\mathrm{op}},\\mathcal S_{\\mathcal V})}(\\Delta X,m_q).$$\nThe map is induced by the evaluation cone, hence by sending an $X$-family of sections to its fibre values and transport homotopies; it retains all higher parameters. This proves the full limit assertion, independently of any separately asserted completeness of spaces.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-coef-infinity-category-of-spaces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "3.3.3.4, strengthened to the evaluation-induced coherent mapping property"
+   }
+  },
+  {
+   "text": "For a map $f:E\\to E'$ over $K$, evaluation satisfies $\\operatorname{ev}_k(f\\circ h)=f_k\\circ\\operatorname{ev}_k(h)$ in every parameter degree. Applying $f$ to the lift over a base simplex gives a lift in $E'$ with the image target; the relative comparison spaces of Step 4 identify it coherently with the chosen target transport. Thus the same equation holds for the entire cones, not just the vertex maps. For $u:J\\to K$, evaluation of a restricted section is $\\operatorname{ev}_j(h\\circ(u\\times1))=\\operatorname{ev}_{u(j)}(h)$, and the fibre and simplex lift diagrams of $u^*E$ are the corresponding pullbacks of those of $E$. The exact base-change isomorphism $u^*U(F)\\cong U_J(F\\circ\\mathfrak C[u]^{\\mathrm{op}})$ in [lem-coef-simplicial-right-fibration-presentation] verifies this also in the construction used above. These equalities commute with successive $f$'s and $u$'s, since they are equations of composition of simplicial maps. The higher comparisons are the relative lift comparisons already constructed. The equivalence of Step 12 is consequently natural for maps of right fibrations and restrictions of the base.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "lem-coef-infinity-right-fibration-exponentiation",
+    "lem-coef-infinity-right-anodyne-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Naturality of 3.3.3.4, with explicit equations for the chosen evaluation map"
+   }
+  },
+  {
+   "text": "Finally take the concrete slice. By [lem-coef-infinity-slice-right-fibration], $C_{/c}\\to C$ is a right fibration and its fibre over $v(k)$ is exactly the right-pinched Kan complex $\\operatorname{Map}_C(v(k),c)$. Pullback gives the right fibration $q:E=K\\times_CC_{/c}\\to K$ with $E_k=\\operatorname{Map}_C(v(k),c)$. The coherent functor $k\\mapsto\\operatorname{Map}_C(v(k),c)$ of the statement is the corepresented functor $h_c$ of [def-coef-infinity-category-of-spaces] for the quasicategory $C^{\\mathrm{op}}$, composed with $v^{\\mathrm{op}}$; under the reversal isomorphism $\\mathfrak C[C^{\\mathrm{op}}]\\cong\\mathfrak C[C]^{\\mathrm{op}}$ of [lem-coef-simplicial-right-fibration-presentation] it is the transpose of $H=H^c\\circ\\mathfrak C[v]^{\\mathrm{op}}:A\\to\\mathbf{Kan}_{\\mathcal V}$, with $H^c(x)=\\operatorname{Sing}|\\mathfrak C[C](x,c)|$; this uses naturality of the rigidification/nerve unit, $N_{\\mathrm{hc}}(H^c)\\eta_{C^{\\mathrm{op}}}v^{\\mathrm{op}}=N_{\\mathrm{hc}}(H)\\eta_{K^{\\mathrm{op}}}$. By definition its action along $a:k\\to l$ is precomposition with the vertex $v(a)\\in\\mathfrak C[C](v(k),v(l))$.\n\nConstruct a comparison map. An $n$-simplex of $E$ is a pair of $\\sigma:\\Delta^n\\to K$ and $\\tau:\\Delta^n\\star\\Delta^0\\to C$ with $\\tau|_{\\Delta^n}=v\\sigma$ and last vertex $c$. Define $\\varepsilon:E\\star\\Delta^0\\to C$ by $v\\sigma$ on pure simplices of $E$, by $c$ on the cone vertex, and on a mixed simplex $(\\sigma,\\tau)$ followed by a constant cone block by $\\tau$ precomposed with the collapse of that block. It commutes with all join operators, and $\\varepsilon|_E=vq$. Together with $v:K\\to C$ it defines a map $(E\\star\\Delta^0)\\amalg_EK\\to C$ sending the cone vertex to $c$. Since $\\mathfrak C$ preserves colimits, this gives an enriched functor $M_q\\to\\mathfrak C[C]$ and therefore a natural map $\\psi:T(E)\\to\\mathfrak C[C](v(-),c)$ on $A$. Follow it by the singular units $\\mathfrak C[C](x,c)\\to\\operatorname{Sing}|\\mathfrak C[C](x,c)|$, which are weak homotopy equivalences by [lem-cbc-realization-singular-unit-weak], and call the composite $\\psi':T(E)\\to H$.\n\n$\\psi$ is an objectwise weak equivalence. Fix $k$. [lem-coef-right-straightening-fiber-comparison] gives the weak homotopy equivalence $\\operatorname{St}_{\\Delta^0}(E_k)(*)\\to T(E)(k)$, induced by the fibre inclusion, because $q$ is a right fibration and $T$ is its $\\operatorname{St}_K$. Elementarily $\\operatorname{St}_{\\Delta^0}(E_k)(*)=|E_k|_Q$. The cone construction preserves colimits of simplicial sets pointed at the cone vertex, so $(E_k\\star\\Delta^0)\\amalg_{E_k}\\{*\\}$ is the colimit, over the simplices of $E_k$, of the bipointed $J^n$ of [lem-coef-pinched-rigidification-resolution]. All the simplicial categories $\\mathfrak C[J^n]$ have the two objects $x=*$, $y=v$ and no composable pair of non-identity morphisms. Hence their colimit has mapping set from $*$ to $v$ the colimit of the $Q^n$, namely $|E_k|_Q$; if $E_k=\\varnothing$ both are empty. The composite $|E_k|_Q\\to T(E)(k)\\xrightarrow{\\psi_k}\\mathfrak C[C](v(k),c)$ is, on the copy of $Q^n$ indexed by $e\\in(E_k)_n$, the mapping-set map induced by $\\varepsilon e:J^n\\to C$. That simplex is exactly $e$ regarded as an $n$-simplex of $\\operatorname{Map}^R_C(v(k),c)$. So the composite is $\\theta_{C,v(k),c}$, a weak homotopy equivalence by [lem-coef-pinched-rigidification-resolution]. Two-out-of-three makes $\\psi_k$, hence $\\psi'_k$, weak homotopy equivalences.\n\nTransfer to $F$. Each $H(k)$ is a Kan complex [def-coef-infinity-category-of-spaces], so $H\\to1$ is a projective fibration. The map $i:T(E)\\to F$ of Step 2 is a projective trivial cofibration, so $\\psi'$ extends to $\\varphi:F\\to H$ with $\\varphi i=\\psi'$. Since $i$ and $\\psi'$ are objectwise weak equivalences, so is $\\varphi$ [lem-coef-simplicial-right-fibration-presentation]. Each $\\varphi_k$ is a weak homotopy equivalence of Kan complexes. By [lem-cbc-kan-mapping-homotopy-invariance] with $Z=F(k)$, precomposition with $\\varphi_k$ is bijective on components, giving $g$ with $g\\varphi_k\\simeq1$. Then with $Z=H(k)$, from $(\\varphi_kg)\\varphi_k\\simeq\\varphi_k$ we get $\\varphi_kg\\simeq1$. These homotopies give the two inverse triangles in $N_{\\mathrm{hc}}\\mathbf{Kan}_{\\mathcal V}$, so $\\varphi_k$ is an equivalence edge of $\\mathcal S_{\\mathcal V}$. The enriched transformation $\\varphi$ is a simplicial functor $A\\times[1]\\to\\mathbf{Kan}_{\\mathcal V}$, and $[1]=\\mathfrak C[\\Delta^1]$. Precomposing with $\\mathfrak C[K^{\\mathrm{op}}\\times\\Delta^1]\\to\\mathfrak C[K^{\\mathrm{op}}]\\times\\mathfrak C[\\Delta^1]$, induced by the two projections, and transposing gives a coherent transformation $m_F\\to m_H$ whose components are the $\\varphi_k$. By the vertex criterion of [lem-cbc-enhanced-functor-cone-calculus] it is an equivalence in $\\operatorname{Fun}(K^{\\mathrm{op}},\\mathcal S_{\\mathcal V})$. Composed with $\\alpha^{-1}$ of Step 3, it gives $m_q\\simeq m_F\\simeq m_H=(k\\mapsto\\operatorname{Map}_C(v(k),c))$. Precomposition with $v(a)$ is the edge action of $m_H$, and the edge action of $m_q$ is lifting in $E$; this equivalence identifies the two, with all higher simplices. On components this agrees with [lem-coef-infinity-mapping-composition]. An edge of $E$ over $a$ is a $2$-simplex of $C$ with edges $v(a)$, a target map $g:v(l)\\to c$, and $w:v(k)\\to c$, so $[w]=[g][v(a)]$. This uses concrete slices and the constructed transport only; it asserts no classification of all space-valued functors.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-simplicial-right-fibration-presentation",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-realization-singular-unit-weak",
+    "lem-coef-right-straightening-fiber-comparison",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-pinched-cube-latching",
+    "lem-cbc-kan-mapping-homotopy-invariance",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Concrete join-slice clause: HTT 2.2.4.1 and Cisinski CatLR §4.2, checked directly on simplices"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-simplicial-right-fibration-presentation",
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-coherent-nerve-infrastructure",
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-kan-coherent-nerve-quasicategory",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-terminal-anodyne",
+  "lem-coef-infinity-right-fibration-exponentiation",
+  "lem-coef-infinity-right-anodyne-product",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-coef-sset-anodyne-pushout-product",
+  "lem-coef-cone-presheaf-adjunction",
+  "lem-coef-coherent-weight-limit-recognition",
+  "lem-coef-pinched-rigidification-resolution",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-coef-right-straightening-fiber-comparison",
+  "lem-cbc-kan-mapping-homotopy-invariance",
+  "lem-coef-infinity-mapping-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Direct enriched cone-weight proof of the opposite 3.3.3.4, using Riehl–Verity 5.2.9 and 6.1.4, without the cyclic general diagram-rectification/co-Yoneda chain."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,10 +299,38 @@
    "results": "{\"t\": \"2026-10-17T02:01:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"fibration\\\", \\\"sections\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "No match: semantic results concern strict Segal right Kan extensions, ordinary limits in SSet, and Kan-Quillen horn fibrations. None identifies a section Kan complex with a coherent limit of fibre transport. Read Mathlib/CategoryTheory/Limits/Types/Limits.lean:189-210 for the ordinary Type-valued comparison; Loogle and grep have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Kan complex of sections of a right fibration over a quasicategory is the coherent limit of its contravariant fibre transport",
+   "results": "{\"t\": \"2026-10-17T02:30:58Z\", \"tool\": \"leanfinder\", \"query\": \"The Kan complex of sections of a right fibration over a quasicategory is the coherent limit of its contravariant fibre transport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtension\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.Truncated.rightExtensionInclusion\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.hasLimits\"], \"digest\": \"75c877dc78bbb962\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Types.isLimitEquivSections in Mathlib/CategoryTheory/Limits/Types/Limits.lean:61–76 concerns ordinary Type-valued functors. Strict Segal right Kan extensions and ordinary limits of simplicial sets do not give coherent fibre transport or its section Kan complex. No right-fibration declaration was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sections\", \"limit\"",
+   "results": "{\"t\": \"2026-10-17T02:32:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"sections\\\", \\\"limit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.hasLimit_iff_small_sections\", \"CategoryTheory.Limits.Types.limitEquivSections\", \"CategoryTheory.Limits.Types.isLimitEquivSections\", \"CategoryTheory.Limits.Types.limNatIsoSectionsFunctor\", \"CategoryTheory.Limits.Types.limitEquivSections_apply\", \"CategoryTheory.Limits.Types.limitEquivSections_symm_apply\", \"CategoryTheory.Limits.Types.isLimitEquivSections_symm_apply\", \"CategoryTheory.Limits.Types.isLimitEquivSections_apply\"], \"digest\": \"c1ed1a97c818bf26\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Types.isLimitEquivSections in Mathlib/CategoryTheory/Limits/Types/Limits.lean:61–76 concerns ordinary Type-valued functors. Strict Segal right Kan extensions and ordinary limits of simplicial sets do not give coherent fibre transport or its section Kan complex. No right-fibration declaration was found."
+  },
+  {
+   "tool": "grep",
+   "query": "RightFibration|rightFibration|right_fibration|limitEquivSections",
+   "results": "{\"t\": \"2026-10-17T02:32:38Z\", \"tool\": \"grep\", \"query\": \"RightFibration|rightFibration|right_fibration|limitEquivSections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"Mathlib/Algebra/Category/MonCat/Limits.lean\"], \"digest\": \"d5408d5e1f0219f4\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Types.isLimitEquivSections in Mathlib/CategoryTheory/Limits/Types/Limits.lean:61–76 concerns ordinary Type-valued functors. Strict Segal right Kan extensions and ordinary limits of simplicial sets do not give coherent fibre transport or its section Kan complex. No right-fibration declaration was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The space of lifts of the identity functor through a right fibration is the limit of its space valued transport diagram",
+   "results": "{\"t\": \"2026-10-17T02:32:39Z\", \"tool\": \"leansearch\", \"query\": \"The space of lifts of the identity functor through a right fibration is the limit of its space valued transport diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.idLiftsCone\", \"CategoryTheory.Bicategory.RightLift.alongId\", \"CategoryTheory.LiftsToLimit.mk\", \"CategoryTheory.Functor.pointwiseRightKanExtension_lift_app\", \"CategoryTheory.Functor.liftOfIsRightKanExtension\", \"CategoryTheory.LiftsToLimit.rec\", \"HasFibers.homLift\", \"CategoryTheory.idLiftsCocone\"], \"digest\": \"e3337202c01ba616\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: Types.isLimitEquivSections in Mathlib/CategoryTheory/Limits/Types/Limits.lean:61–76 concerns ordinary Type-valued functors. Strict Segal right Kan extensions and ordinary limits of simplicial sets do not give coherent fibre transport or its section Kan complex. No right-fibration declaration was found."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coherent-diagram-coyoneda",
@@ -103,5 +359,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-right-fibration-section-limit",
+  "worker": "stage1",
+  "summary": "Preserved every statement clause; constructed fibre transport via the existing noncircular simplicial right-fibration presentation, computed sections using a bifibrant replacement of the explicit coherent cone weight, proved its weighted mapping property, and applied one new general weighted-limit recognition theorem. Checked evaluations, higher parameters, both naturalities, concrete slices, and small cases. No general diagram rectification, space-valued classification, or cyclic completeness theorem is cited.",
+  "blueprint": "Proof paragraph 2, inverse-limit mapping-space calculation: mapping out of the small free-diagram colimit, without using space-valued straightening or model rectification. Steps 1–14 expand the section/limit input in paragraph 2 of the ancestor, preserving the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic limiting-cone mapping-space criterion in Step 12, also used by this item’s parent; no statement of this unit supplies that criterion."
+   },
+   {
+    "node": "lem-cbc-realization-singular-unit-weak",
+    "why": "Step 14: generic fact that the unit X -> Sing|X| is a weak homotopy equivalence, needed to compare with the Sing|C[C](-,c)| model of the represented functor; no node of this unit states it."
+   },
+   {
+    "node": "lem-cbc-kan-mapping-homotopy-invariance",
+    "why": "Step 14: generic Whitehead-type fact giving homotopy inverses for weak equivalences of Kan complexes via precomposition on Fun(-,Z); no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-cbc-kan-mapping-homotopy-invariance"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-23485e8a1",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-23485e8a1 (reviewer sub-agent of L); spot-checked: I read the item, the new node, all 23 cited statements, the parent coyoneda step 9 and twisted-arrow step 2. I checked the sources at the cited places: HTT Cor. 3.3.3.3, 3.3.3.4 and Rem. 3.3.3.5 (p. 216; 3.3.3.4 is only a homotopy-category statement, and 3.3.3.5 concerns 3.3.3.3), and Riehl–Verity arXiv 1808.09834 Def. 4.1.8, Def. 5.2.8, Lemma 5.2.9 and Thm 6.1.4 with Cor. 6.1.16. The new recognition node states 6.1.4 faithfully: any Kan-enriched target, homotopy mapping condition only, no strict limit needed. The item statement is unchanged. Steps 1–13 check, including T(K)=W cofibrant via T(∅) initial, weak contractibility of W via Map^R(k,v)=pt and θ, the identity U(h)s=c(j*h) and 2-of-3, enriched currying in Step 9, and Step 12 transfer. No cycles: the closures of all deps avoid the item and its parent, and lem-coef-space-transport-classification is correctly avoided because its closure is cyclic. No duplicates: right-fibration-cone-section-criterion is 3.3.3.3 via straightening, and cbc-cocartesian-sections-limit has an ordinary base and is Cat_inf-valued. Small cases checked: K empty, a point, Delta^1, N(G); Y empty, a point, Delta^1. Three repairs: (1) E5: Step 14 (concrete slice) never constructed a comparison with a defined represented functor. I rewrote it, fully cited: the tautological epsilon: E*Delta^0 -> C gives psi: T(E) -> C[C](v(-),c), a weak equivalence via lem-coef-right-straightening-fiber-comparison, |E_k|_Q, and theta of pinched-rigidification; extend along T(E) -> F, get equivalence edges via lem-cbc-kan-mapping-homotopy-invariance, and identify the target with h_c for C^op composed with v^op. I added the cbc tool uses lem-cbc-realization-singular-unit-weak and lem-cbc-kan-mapping-homotopy-invariance (accepted); lem-cbc-enhanced-functor-cone-calculus is also accepted. (2) B3: the new node called a join cone a 'limit cone' with no definition. Its meaning is now fixed via lem-coef-infinity-join-cone-calculus, added to stmt_deps. (3) The item source place wording for HTT 3.3.3.4/3.3.3.5 is corrected. proof_deps is regenerated and equals the union of step uses.; 2 file(s) fixed by the reviewer"
  }
 }
