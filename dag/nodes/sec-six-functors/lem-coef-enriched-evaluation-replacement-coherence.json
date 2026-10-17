@@ -227,19 +227,30 @@
  "lean": {
   "module": "Sheaf.CategoryTheory.EnrichedEvaluationReplacementCoherence",
   "declaration": "CategoryTheory.enriched_evaluation_replacement_coherence",
+  "declarations": [
+   "CategoryTheory.CoherentEvaluation.interval",
+   "CategoryTheory.CoherentEvaluation.NerveProduct",
+   "CategoryTheory.CoherentEvaluation.edgeArrow",
+   "CategoryTheory.CoherentEvaluation.componentEdge",
+   "CategoryTheory.CoherentEvaluation.diagramComponent",
+   "CategoryTheory.CoherentEvaluation.Comparison",
+   "CategoryTheory.enriched_evaluation_replacement_coherence"
+  ],
   "file": "lean/Sheaf/CategoryTheory/EnrichedEvaluationReplacementCoherence.lean",
-  "statement": "theorem enriched_evaluation_replacement_coherence (A : Type u) [Category.{u} A] [ModelCategory A] [SimplicialCategory A] (B I : CoherentNerve.SCat.{u}) (_hB : CoherentNerve.IsLocallyKan B) [EnrichedOrdinaryCategory SSet.{u} (EnrichedFunctor SSet.{u} I A)] (H₀ H₁ : EnrichedFunctor SSet.{u} B (EnrichedFunctor SSet.{u} I A)) (q : H₀ ⟶ H₁) (h₀ : ∀ (b : B) (i : I), IsCofibrant ((H₀.obj b).obj i) ∧ IsFibrant ((H₀.obj b).obj i)) (h₁ : ∀ (b : B) (i : I), IsCofibrant ((H₁.obj b).obj i) ∧ IsFibrant ((H₁.obj b).obj i)) (hq : ∀ (b : B) (i : I), WeakEquivalence (enrichedEvaluationComponent q b i)) (K : SSet.{u}) (a : K ⟶ CoherentNerve.nerveFunctor.obj I) : ∃ e₀ e₁ : EnrichedFunctor SSet.{u} (SSet.MarkedCone.productIndex B I) (SimplicialModelLocalization.Bif A), (∀ (b : B) (i : I), (e₀.obj (b, i)).obj = (H₀.obj b).obj i) ∧ (∀ (b : B) (i : I), (e₁.obj (b, i)).obj = (H₁.obj b).obj i) ∧ ∃ E₀ E₁ : CoherentNerve.nerveFunctor.obj B ⟶ (ihom K).obj (SimplicialNerve (SimplicialModelLocalization.Bif A)), (∀ (b : (CoherentNerve.nerveFunctor.obj B) _⦋0⦌) (k : K _⦋0⦌), (((SSet.Enhanced.evaluation K (SimplicialNerve (SimplicialModelLocalization.Bif A)) k).app _ (E₀.app _ b)).obj (.mk (ULift.up (0 : Fin 1)))).obj = (e₀.obj (b.obj (SimplicialThickening.mk (ULift.up (0 : Fin 1))), (a.app _ k).obj (SimplicialThickening.mk (ULift.up (0 : Fin 1))))).obj) ∧ (∀ (b : (CoherentNerve.nerveFunctor.obj B) _⦋0⦌) (k : K _⦋0⦌), (((SSet.Enhanced.evaluation K (SimplicialNerve (SimplicialModelLocalization.Bif A)) k).app _ (E₁.app _ b)).obj (.mk (ULift.up (0 : Fin 1)))).obj = (e₁.obj (b.obj (SimplicialThickening.mk (ULift.up (0 : Fin 1))), (a.app _ k).obj (SimplicialThickening.mk (ULift.up (0 : Fin 1))))).obj) ∧ ∃ η : ((ihom (CoherentNerve.nerveFunctor.obj B)).obj ((ihom K).obj (SimplicialNerve (SimplicialModelLocalization.Bif A)))) _⦋1⦌, ((ihom (CoherentNerve.nerveFunctor.obj B)).obj ((ihom K).obj (SimplicialNerve (SimplicialModelLocalization.Bif A)))).δ 1 η = SSet.Enhanced.diagramVertex E₀ ∧ ((ihom (CoherentNerve.nerveFunctor.obj B)).obj ((ihom K).obj (SimplicialNerve (SimplicialModelLocalization.Bif A)))).δ 0 η = SSet.Enhanced.diagramVertex E₁ ∧ SSet.Enhanced.IsEquivalenceEdge ((ihom (CoherentNerve.nerveFunctor.obj B)).obj ((ihom K).obj (SimplicialNerve (SimplicialModelLocalization.Bif A)))) η ∧ (∀ (b : (CoherentNerve.nerveFunctor.obj B) _⦋0⦌) (k : K _⦋0⦌), HEq (coherentNerveEdgeArrow (twiceCurriedEvaluationEdge η b k)) (enrichedEvaluationComponent q (b.obj (SimplicialThickening.mk (ULift.up (0 : Fin 1)))) ((a.app _ k).obj (SimplicialThickening.mk (ULift.up (0 : Fin 1))))))",
+  "statement": "theorem enriched_evaluation_replacement_coherence (A : Type u) [Category.{u} A] [ModelCategory A] [SimplicialCategory A] [HasLimits A] [HasColimits A] [MorphismProperty.HasFunctorialFactorization (cofibrations A) (trivialFibrations A)] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations A) (fibrations A)] (_T : SimplicialTensorCotensor A) (_hSM7 : SimplicialModelLocalization.SatisfiesSM7 A) (B I : SCat.{u}) (_hB : IsLocallyKan B) (E : SimplicialDiagramEnrichment (underlying I) A) (H : Fin 2 → EnrichedFunctor SSet.{u} B E.Diagrams) (q : GradedNatTrans (𝟙_ (Center SSet.{u})) (H 0) (H 1)) (_h : ∀ (j : Fin 2) (b : B) (i : I), IsCofibrant ((SimplicialDiagramEnrichment.value ((H j).obj b)).obj i) ∧ IsFibrant ((SimplicialDiagramEnrichment.value ((H j).obj b)).obj i)) (_hq : ∀ (b : B) (i : I), WeakEquivalence (SimplicialDiagramEnrichment.component (CoherentEvaluation.diagramComponent E q b) i)) (K : SSet.{u}) (a : K ⟶ CoherentNerve.nerveFunctor.obj I) : Nonempty (CoherentEvaluation.Comparison E H q K a)",
   "branch": "newtargets-dag",
-  "by": "NS",
+  "by": "NE",
   "date": "2026-10-17",
-  "existing": false
+  "existing": false,
+  "note": "Replaces the earlier vertex-only interface with the full node statement: the actual enriched-end diagram category, Mathlib graded enriched natural transformation, simplicial model axioms, evaluation on complete mapping objects, enriched interval functor, product comparisons and exact nerve/currying formula. Component arrows are compared after the bifibrant inclusion, avoiding heterogeneous equality of different arrow encodings. No mathematical node statement changed.",
+  "fixed_by": "NT-stage2-Codex-c1b1616cd"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-442f71936",
-  "group": "NS",
-  "result": "pass",
-  "note": "All node clauses match Lean; dependencies and source checked; helpers are non-hollow; report sections present; repeated scompile.py compiles cleanly; no fixes needed."
+  "reviewer": "NT-stage2-Codex-c1b1616cd",
+  "group": "NE",
+  "result": "fix",
+  "note": "Wrote review.md and complete replacements under fixes/. No mathematical mismatch found; hypotheses, conclusions, dependencies, universes and edge cases checked. Replaced the placeholder second reading, corrected a citation and added the module declaration list. Original and fixed modules compiled cleanly through scompile.py. Snapshot and branch unchanged."
  }
 }

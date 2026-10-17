@@ -282,16 +282,16 @@
   "file": "lean/Sheaf/Algebra/Homology/DerivedScalarExtensionCounitShift.lean",
   "statement": "theorem derivedScalarExtension_counitShift {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] {R S : Sheaf J CommRingCat.{r}} (φ : R ⟶ S) [HasDerivedCategory.{wR} (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R))] [HasDerivedCategory.{wS} (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J S))] (E : ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R) ⥤ ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J S)) (h : ∀ M : ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R), E.obj M = changeOfRings.{v, u, r} φ M) (hmap : ∀ {M N : ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R)} (f : M ⟶ N), E.map f = eqToHom (h M) ≫ changeOfRingsHom.{v, u, r} φ M f ≫ eqToHom (h N).symm) [E.Additive] (F : DerivedCategory (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R)) ⥤ DerivedCategory (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J S))) (ε : DerivedCategory.Qh ⋙ F ⟶ E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) [F.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R)) (.up ℤ))] : ∃ σ : shiftFunctor _ (1 : ℤ) ⋙ F ≅ F ⋙ shiftFunctor _ (1 : ℤ), (∀ P : HomotopyCategory (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R)) (.up ℤ), F.map ((DerivedCategory.Qh.commShiftIso (1 : ℤ)).hom.app P) ≫ σ.hom.app (DerivedCategory.Qh.obj P) ≫ (shiftFunctor _ (1 : ℤ)).map (ε.app P) = ε.app ((shiftFunctor _ (1 : ℤ)).obj P) ≫ DerivedCategory.Qh.map (((E.mapHomotopyCategory (.up ℤ)).commShiftIso (1 : ℤ)).hom.app P) ≫ (DerivedCategory.Qh.commShiftIso (1 : ℤ)).hom.app ((E.mapHomotopyCategory (.up ℤ)).obj P)) ∧ (∀ τ : shiftFunctor _ (1 : ℤ) ⋙ F ≅ F ⋙ shiftFunctor _ (1 : ℤ), (∀ P : HomotopyCategory (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R)) (.up ℤ), F.map ((DerivedCategory.Qh.commShiftIso (1 : ℤ)).hom.app P) ≫ τ.hom.app (DerivedCategory.Qh.obj P) ≫ (shiftFunctor _ (1 : ℤ)).map (ε.app P) = ε.app ((shiftFunctor _ (1 : ℤ)).obj P) ≫ DerivedCategory.Qh.map (((E.mapHomotopyCategory (.up ℤ)).commShiftIso (1 : ℤ)).hom.app P) ≫ (DerivedCategory.Qh.commShiftIso (1 : ℤ)).hom.app ((E.mapHomotopyCategory (.up ℤ)).obj P)) → τ = σ) ∧ F.Additive ∧ ∀ T : Triangle (DerivedCategory (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R))), T ∈ distTriang _ → Triangle.mk (F.map T.mor₁) (F.map T.mor₂) (F.map T.mor₃ ≫ σ.hom.app T.obj₁) ∈ distTriang _",
   "branch": "newtargets-dag",
-  "by": "Q65",
+  "by": "NM",
   "date": "2026-10-17",
   "existing": false
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-c07e9f943",
-  "group": "Q65",
+  "reviewer": "NT-stage2-Codex-9dce4475a",
+  "group": "NM",
   "result": "pass",
-  "note": "Statement, dependencies, source alignment, edge cases, docstrings, report sections, and per-file scompile evidence all checked successfully."
+  "note": "Wrote review.md. Checked immutable statement, dependencies, sources, universes, edge cases, canonical shifts, uniqueness, docstrings, and records. Compilation reproduced cleanly through scompile.py. No defects found; branch head unchanged."
  }
 }
