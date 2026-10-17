@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.OverlapConjugateRestriction
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import WeilConjectures.AlgebraicGeometry.OverlapModelChartFactorization
 import WeilConjectures.AlgebraicGeometry.OverlapBaseChangeFormula
-import WeilConjectures.AlgebraicGeometry.OverlapBaseChangeFormula
 
 /-! # Restricting a stage morphism through a commutative model diagram
 
