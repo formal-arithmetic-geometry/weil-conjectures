@@ -1,0 +1,92 @@
+{
+ "id": "lem-trf-derived-coinduction-adjunction",
+ "kind": "statement",
+ "title": "Derived coinduction is right adjoint to restriction of scalars",
+ "statement": "Let $R\\to B$ be a homomorphism of commutative rings, and let $U:D(B)\\to D(R)$ be restriction of scalars on the ordinary unbounded module derived categories [def-weil-abstract-derived-category]. For $K\\in D(R)$ choose a K-injective representative $I$ as in [def-pur-derived-internal-hom] and put $C_B(K)=\\operatorname{Hom}_R^\\bullet(B[0],I)$ with $B$-action $(b\\cdot h)(b')=h(b'b)$. This construction, with the canonical comparisons between K-injective representatives, is independent of the choices and defines a functor $C_B:D(R)\\to D(B)$ right adjoint to $U$. Its underlying $R$-object is canonically $U C_B(K)=R\\operatorname{Hom}_R(B[0],K)$. The counit $U C_B(K)\\to K$ is represented by evaluation $h\\mapsto h(1)$ into $I$. The functor $U$ is conservative: a morphism in $D(B)$ is an isomorphism if its restriction is an isomorphism in $D(R)$. No boundedness or flatness assumption on the ring map or on $K$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0A70 (lemma-right-adjoint) and 0A71 (lemma-RHom-ext), section Trivial duality for a ring map, lines 2198-2248. The counit is the ordinary Hom/restriction counit degreewise; restriction reflects acyclicity because kernels, images and cohomology are unchanged as underlying modules."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictCoextendScalarsAdj|derived.*coinduction|Hom_R.*evaluation",
+   "sub": "Algebra",
+   "results": "{\"t\": \"2026-10-17T21:51:52Z\", \"tool\": \"grep\", \"query\": \"restrictCoextendScalarsAdj|derived.*coinduction|Hom_R.*evaluation\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"57d8ba2fdb6186c1\"} Read returned signatures and ChangeOfRings.lean:605-680; ordinary ModuleCat coextension and representation adjunctions do not state the unbounded derived K-injective construction or the perfect-algebra comparison. Contraction.lean gives only ordinary module tensor-Hom.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.restrictCoextendScalarsAdj",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T21:51:53Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat.restrictCoextendScalarsAdj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ModuleCat.restrictCoextendScalarsAdj\"], \"digest\": \"4b167a90eb1d92c5\"} Read returned signatures and ChangeOfRings.lean:605-680; ordinary ModuleCat coextension and representation adjunctions do not state the unbounded derived K-injective construction or the perfect-algebra comparison. Contraction.lean gives only ordinary module tensor-Hom.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a ring map R to B the derived coinduction RHom_R(B,-) with its B action is right adjoint to restriction of scalars",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T21:51:53Z\", \"tool\": \"leansearch\", \"query\": \"For a ring map R to B the derived coinduction RHom_R(B,-) with its B action is right adjoint to restriction of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.instIsRightAdjointRestrictScalars\", \"ModuleCat.instIsLeftAdjointRestrictScalars\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.instIsRightAdjointCoextendScalars\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"Rep.indResAdjunction\", \"ModuleCat.restrictScalars\", \"Rep.instIsRightAdjointCoindFunctor\"], \"digest\": \"4a190b222ace34d5\"} Read returned signatures and ChangeOfRings.lean:605-680; ordinary ModuleCat coextension and representation adjunctions do not state the unbounded derived K-injective construction or the perfect-algebra comparison. Contraction.lean gives only ordinary module tensor-Hom.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived restriction-coextension adjunction computed by K-injective complexes for a ring homomorphism",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T21:51:54Z\", \"tool\": \"leanfinder\", \"query\": \"Unbounded derived restriction-coextension adjunction computed by K-injective complexes for a ring homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Adjunction.derived\", \"Ext\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CochainComplex.IsKInjective.Qh_map_bijective\"], \"digest\": \"59a0691c2867ebc9\"} Read Adjunction.lean:40-175. The abstract derived adjunction requires pre-existing derived functors and compatibility instances. It does not construct module K-injective coinduction, its scalar identification, or conservativity in a one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coinduction Hom_R(B,I) with B-action is right adjoint to restriction of scalars and evaluation at 1 is the counit",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T21:51:55Z\", \"tool\": \"leanfinder\", \"query\": \"Derived coinduction Hom_R(B,I) with B-action is right adjoint to restriction of scalars and evaluation at 1 is the counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.resCoindAdjunction_counit_app_hom_hom\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"Rep.resCoindAdjunction\", \"Rep.instIsRightAdjointCoindFunctor\", \"Rep.coindResAdjunction\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"Rep.coindResAdjunction_counit_app\", \"Rep.resCoindAdjunction_unit_app_hom_hom\"], \"digest\": \"b80da3949d9958dd\"} Read returned signatures and ChangeOfRings.lean:605-680; ordinary ModuleCat coextension and representation adjunctions do not state the unbounded derived K-injective construction or the perfect-algebra comparison. Contraction.lean gives only ordinary module tensor-Hom.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-perfect-algebra-coinduction-tensor",
+  "date": "2026-10-18",
+  "group": "Q70"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Clauses (1) and (2), normal-cone specialization argument, specifically the sentence \"Varshavsky's theorem is proved by specialization to the normal cone of Z\"; technical algebraic duality input reached through trace specialization, relative duality, and algebraic shriek calculus in the recorded via chain. This node supplies the coinduction adjunction and evaluation counit used in the perfect-algebra comparison.",
+   "via": [
+    "lem-trf-perfect-algebra-coinduction-tensor",
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

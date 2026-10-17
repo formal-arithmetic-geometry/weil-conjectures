@@ -16,9 +16,119 @@
   "def-weil-pbc-etale-site",
   "def-trf-geometric-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $n$ be the support of $\\bar n$ and choose an affine open $U=\\operatorname{Spec}B$ containing $n$. It contains $\\eta$ because every nonempty open contains the generic point. The ring $B$ is a domain by [def-pc-integral-scheme], and is a normal ring in [def-weil-pbc-normal-ring]: its local rings are the corresponding local rings of $N$, all normal by hypothesis. In this affine chart $\\eta$ corresponds to $(0)$ and $K=\\kappa(\\eta)=B_{(0)}=\\operatorname{Frac}B$, since localization at $(0)$ inverts precisely the nonzero elements of the domain and has zero maximal ideal [def-weil-pbc-localization-at-prime].",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-sc-generic-point",
+    "def-weil-pbc-normal-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ2, section-specialization, reduction to an affine neighbourhood; affine ring identifications are elementary from the definitions."
+   }
+  },
+  {
+   "text": "Put $N_{(\\bar n)}=\\operatorname{Spec}C$ using [def-weil-pbc-strict-henselization-limit]. By [lem-weil-pbc-etale-local-ring-triples](2)-(3), the same $B$-algebra $C$, with its structural map $B\\to C$, is the filtered colimit of the etale $B$-algebras in the residue-triple diagram at $n$. [lem-weil-pbc-strict-henselization-triples](1)-(2) says this colimit is local. Thus [lem-weil-pbc-etale-colimit-normal-local-domain] applies to the normal domain $B$ and gives that $C$ is a normal domain and $B\\to C$ is injective. In particular both rings are nonzero; this argument does not assume that every stage of the colimit is nonzero.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 04HX (lemma-describe-etale-local-ring), 04GW (algebra.tex, lemma-strict-henselization-different), 04GP (algebra.tex, lemma-strict-henselization), and 06DI (more-algebra.tex, lemma-henselization-normal)."
+   }
+  },
+  {
+   "text": "The presentation in Step 2 makes $B\\to C$ ind-etale by [def-weil-pbc-ind-etale-algebra]. The prime $(0)\\subset C$ contracts to $(0)\\subset B$ by injectivity. Apply [lem-trf-ind-etale-residue-separable] at that prime. Since the residue fields at the zero prime of a domain are their fraction fields [def-weil-pbc-localization-at-prime], it gives a separable algebraic extension $L=\\operatorname{Frac}C$ of $K=\\operatorname{Frac}B$. Only algebraicity will be needed below; $L/K$ is not assumed normal or finite.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-trf-ind-etale-residue-separable",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 092R (more-algebra.tex, lemma-weakly-etale-residue-field-extensions), together with Tag 097N (proetale.tex, lemma-ind-etale-implies)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed], the specified embedding $K\\to\\overline K$ extends to $L\\to\\overline K$. Restrict this embedding to $C$. Taking its spectrum gives a map $a:\\operatorname{Spec}\\overline K\\to\\operatorname{Spec}C=N_{(\\bar n)}$ whose composite to $U\\subset N$ is $\\bar\\eta$, since its restriction to $B\\subset K$ is the specified one [def-weil-affine-spectrum]. The bijection [lem-trf-point-arrows-strict-local-lifts] sends $a$ to an arrow $\\bar\\eta\\Rightarrow\\bar n$. This proves nonemptiness without choosing an automorphism or assuming a finite extension.",
+   "uses": [
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "def-weil-affine-spectrum",
+    "lem-trf-point-arrows-strict-local-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09GU (fields.tex, lemma-map-into-algebraic-closure) and Tag 0GJ2 (section-specialization)."
+   }
+  },
+  {
+   "text": "Given $u,v:\\bar\\eta\\Rightarrow\\bar n$, [lem-trf-point-arrows-strict-local-lifts] gives corresponding lifts, hence $B$-algebra maps $f_u,f_v:C\\to\\overline K$ [def-weil-affine-spectrum]. Each is injective: if $0\\ne c\\in C$, algebraicity of $c\\in L$ over $K$ gives a relation $a_0+a_1c+\\cdots+a_dc^d=0$ with $a_i\\in B$ and $a_0\\ne0$, by taking a minimal polynomial over $K$ (whose constant term is nonzero) and clearing denominators. If $f_u(c)=0$, applying $f_u$ gives $a_0=0$ in $\\overline K$, contrary to the fixed embedding $B\\subset K\\subset\\overline K$; the same argument applies to $f_v$. Therefore the fraction formula $\\iota_u(c/d)=f_u(c)/f_u(d)$, and similarly for $v$, extends them uniquely to $K$-embeddings $\\iota_u,\\iota_v:L\\to\\overline K$.",
+   "uses": [
+    "lem-trf-point-arrows-strict-local-lifts",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Agent argument from the algebraic extension of Step 3 and the strict-local lifts of Tag 0GJ2."
+   }
+  },
+  {
+   "text": "Let $M=\\iota_v(L)\\subset\\overline K$. The isomorphism $h=\\iota_u\\iota_v^{-1}:M\\to\\iota_u(L)\\subset\\overline K$ fixes $K$. The extension $\\overline K/M$ is algebraic because $\\overline K/K$ is algebraic [def-weil-algebraic-closure]. Apply [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] to $M\\subset\\overline K$, with target $\\overline K$ and base homomorphism $h$. It gives a field homomorphism $\\tau:\\overline K\\to\\overline K$ extending $h$, hence fixing $K$, with $\\tau\\iota_v=\\iota_u$. This homomorphism is surjective: for any $x\\in\\overline K$, its minimal polynomial over $K$ has a finite nonempty set $R$ of distinct roots in $\\overline K$; $\\tau$ fixes its coefficients and injectively sends $R$ into $R$, so permutes $R$, and $x\\in R$ has a preimage. Thus $\\tau$ is a $K$-automorphism. This works for inseparable minimal polynomials too, since $R$ is the set of distinct roots.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09GU (fields.tex, lemma-map-into-algebraic-closure); the finite-root-set surjectivity argument is the algebraic-closure argument of Tag 09GV (fields.tex, lemma-algebraic-closures-isomorphic)."
+   }
+  },
+  {
+   "text": "Let $a_u,a_v:\\operatorname{Spec}\\overline K\\to N_{(\\bar n)}$ be the two lifts. On coordinate rings $f_u=\\tau f_v$, so $a_u=a_v\\circ\\operatorname{Spec}\\tau$ by [def-weil-affine-spectrum]. Since $\\tau$ fixes $K$, the automorphism $r_\\tau$ of the generic topos point in [lem-trf-point-arrows-strict-local-lifts] is defined. Its equivariance formula gives $u=\\Theta(a_u)=\\Theta(a_v\\circ\\operatorname{Spec}\\tau)=v\\circ r_\\tau$. Set $\\sigma=r_\\tau$. Finally associativity gives $(u\\circ\\sigma_1)\\circ\\sigma_2=u\\circ(\\sigma_1\\circ\\sigma_2)$ and the identity acts trivially, so this is the stated transitive right precomposition action with target fixed. No uniqueness or freeness is used.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-trf-point-arrows-strict-local-lifts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ2, section-specialization, germ formula and its equivariance under reparametrizing the source geometric point."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-trf-ind-etale-residue-separable",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "def-weil-affine-spectrum",
+  "lem-trf-point-arrows-strict-local-lifts",
+  "def-weil-algebraic-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Agent expansion of the normal-base transitivity assertion in Orgogozo Lemma 8.3.2, printed p. 18 (paper read online; local PDF WANTED), using Stacks Tags 0GJ2, 04HX, 06DI, 092R, 097N, 09GU and 09GV. The strict-local point-arrow converse is separated as an unsplit auxiliary."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +164,45 @@
    "results": "{\"t\": \"2026-10-17T21:20:22Z\", \"tool\": \"leanfinder\", \"query\": \"A normal scheme has geometrically unibranch strict localizations and the generic Galois group is transitive on their generic geometric lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\"], \"digest\": \"d177d0466cd04c53\"}",
    "date": "2026-10-18",
    "verdict": "no match: ordinary specialization, normalizations, absoluteGaloisGroup and finite Galois-ring facts do not state generic geometric-arrow transitivity"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*transitiv|transitiv.*generic|specialization.*arrow",
+   "results": "{\"t\": \"2026-10-17T21:49:34Z\", \"tool\": \"grep\", \"query\": \"generic.*transitiv|transitiv.*generic|specialization.*arrow\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Zariski specialization maps, finite Galois actions on primes and integral-closure lifts do not state transitivity of etale topos point arrows"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricPoint\", \"IsPretransitive\"",
+   "results": "{\"t\": \"2026-10-17T21:49:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"GeometricPoint\\\", \\\"IsPretransitive\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Zariski specialization maps, finite Galois actions on primes and integral-closure lifts do not state transitivity of etale topos point arrows"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The absolute Galois group of the function field of a normal scheme is transitive on geometric specialization maps from its geometric generic point",
+   "results": "{\"t\": \"2026-10-17T21:49:34Z\", \"tool\": \"leansearch\", \"query\": \"The absolute Galois group of the function field of a normal scheme is transitive on geometric specialization maps from its geometric generic point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.isPretransitive_of_isGalois\", \"Field.absoluteGaloisGroup\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois\", \"Ideal.exists_smul_eq_of_isGaloisGroup\", \"Field.instGroupAbsoluteGaloisGroup\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveAutCarrierVFintypeCatFunctorObjActionFunctorToActionOfIsGalois\", \"Field.instTopologicalSpaceAbsoluteGaloisGroup\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\"], \"digest\": \"d272d9be6cbf69f3\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Zariski specialization maps, finite Galois actions on primes and integral-closure lifts do not state transitivity of etale topos point arrows"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a normal integral scheme the automorphisms of a geometric generic point act transitively on specialization arrows to a fixed geometric point",
+   "results": "{\"t\": \"2026-10-17T21:49:36Z\", \"tool\": \"leanfinder\", \"query\": \"On a normal integral scheme the automorphisms of a geometric generic point act transitively on specialization arrows to a fixed geometric point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.range_fromSpecStalk\", \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\", \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk_assoc\"], \"digest\": \"d70d65fe2f943e65\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Zariski specialization maps, finite Galois actions on primes and integral-closure lifts do not state transitivity of etale topos point arrows"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic geometric lifts to a strict henselization of a normal local domain are conjugate under function field Galois automorphisms",
+   "results": "{\"t\": \"2026-10-17T21:49:39Z\", \"tool\": \"leanfinder\", \"query\": \"Generic geometric lifts to a strict henselization of a normal local domain are conjugate under function field Galois automorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"galLiftEquiv_apply\", \"galLiftEquiv\", \"galRestrict'_galLift\", \"galLiftEquiv_symm_apply\", \"galLift\", \"galLiftEquiv_algebraMap_apply\", \"galLift_comp\", \"galLift_galRestrict'\"], \"digest\": \"b028a77fe37eb2ec\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Zariski specialization maps, finite Galois actions on primes and integral-closure lifts do not state transitivity of etale topos point arrows"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-point-normalized-stratum",
@@ -83,5 +228,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-normal-generic-arrow-transitivity",
+  "worker": "stage1",
+  "summary": "Expanded the normal-base assertion via the normal domain C of the strict localization, its algebraic fraction-field extension, embeddings into the fixed algebraic closure, and a direct finite-root-set proof that the extended field embedding is an automorphism. All non-elementary point-arrow reconstruction content is isolated in one general statement-only auxiliary. Reused the existing ind-etale residue and algebraic embedding lemmas; the statement is unchanged and no Noetherian hypothesis was added.",
+  "blueprint": "Normal-base Aut(s′)-transitivity on Hom(s′,t′) in Orgogozo Lemma 8.3.2, used through the nearby-cycle finiteness branch under lem-trf-local-term-locality (1)-(2); same ancestor and via chain preserved. This is below the unit route, not a replacement of its normal-cone argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-local-ring-triples",
+    "why": "Identifies the scheme strict-local ring with the affine-chart residue-triple colimit compatibly with structure maps; no node of this unit supplies that comparison."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Gives locality of the residue-triple colimit; used as general strict-henselization algebra, not to replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "why": "Gives normality and injectivity for the local ind-etale algebra over the normal affine domain; this generic tool is not supplied by another node of this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-etale-colimit-normal-local-domain"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q03-9ef2913ce",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q03-9ef2913ce (reviewer sub-agent of L); spot-checked: Read the item, auxiliary node, cited statements, unit/chapter route, Orgogozo Lemma 8.3.2, and Stacks tags 0GJ2, 04HX, 06DI, 092R, 097N, 09GU, 09GV. Verified all seven steps, hypotheses, algebraic embedding and automorphism arguments, edge cases, searches, duplicate checks, blueprint route, and tool uses. Review written to review.md; no repairs required."
  }
 }

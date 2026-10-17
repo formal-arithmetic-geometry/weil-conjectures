@@ -13,9 +13,115 @@
   "def-pc-perfect-ring-complex",
   "lem-pc-derived-tensor-second-factor-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-derived-coinduction-adjunction]. For arbitrary $K$ it supplies $C_B(K)$, $U C_B(K)=R\\operatorname{Hom}_R(B,K)$, the adjunction $U\\dashv C_B$, and its evaluation-at-$1$ counit. In particular $D_B=C_B(R[0])$ is a genuine object of $D(B)$; to identify the comparison required in the statement we will exhibit a $B$-linear representative whose counit composite is tensor evaluation.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 and 0A71, ordinary unbounded coinduction adjunction and its scalar restriction"
+   }
+  },
+  {
+   "text": "Choose a complex representing $K$ and a K-flat resolution $F$ of it by [lem-pc-kflat-resolution], specialized to the small one-object ringed site. Choose K-injective resolutions $R[0]\\to J$ and $q:F\\otimes_R J\\to I$ using [def-pur-derived-internal-hom]. Since $F$ is K-flat, $F\\to F\\otimes_R J$ is a quasi-isomorphism by [def-pc-module-kflat-complex]; thus $I$ represents $K$. Set $V=\\operatorname{Hom}_R^\\bullet(B,J)$ with its coinduction $B$-action. By Step 1, $V$ represents $D_B$ and $\\operatorname{Hom}_R^\\bullet(B,I)$ represents $C_B(K)$. By [lem-pc-derived-tensor-second-factor-functor], $F\\otimes_R V$ represents $K\\otimes_R^{\\mathbf L}D_B$, even though $V$ need not be K-flat.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pur-derived-internal-hom",
+    "def-pc-module-kflat-complex",
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 0A94; K-flat and K-injective resolutions, specialized to ordinary modules"
+   }
+  },
+  {
+   "text": "Define $t:F\\otimes_R V\\to\\operatorname{Hom}_R^\\bullet(B,I)$ by $t(f\\otimes h)(b)=q(f\\otimes h(b))$. This is balanced and $B$-linear: $t(f\\otimes bh)(b')=q(f\\otimes h(b'b))=(b\\,t(f\\otimes h))(b')$. For homogeneous $f$ of degree $a$, the differential of its value is $q(df\\otimes h(b)+(-1)^a f\\otimes dh(b))$, exactly the total-tensor differential; there is no contribution from $d_B$ since $B$ is in degree zero. Evaluation at $1$ gives $q(f\\otimes h(1))$. Hence under Step 2's identifications its counit composite is precisely tensoring $K$ with $D_B\\to R[0]$. By the adjunction in [lem-trf-derived-coinduction-adjunction], $Qt$ is the comparison specified in the item. Forgetting the $B$-action leaves the usual Hom/tensor evaluation comparison, with the same formula and these K-flat/K-injective models.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 and 0A71; explicit verification of evaluation normalization"
+   }
+  },
+  {
+   "text": "By [def-pc-perfect-ring-complex], choose a bounded complex $P$ of finitely generated projective $R$-modules with $QP\\simeq B[0]$. Since $P$ is bounded above and projective, [lem-pc-ring-derived-map-representative] realizes this isomorphism by a chain map $p:P\\to B[0]$. Its localization is an isomorphism, so it induces isomorphisms on every cohomology module and is a quasi-isomorphism, using [lem-weil-pbc-unbounded-derived-iso-cohomology]. This construction gives an actual map for precomposition below; no $B$-action or algebra structure on $P$ is needed.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-pc-ring-derived-map-representative",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Perfect complexes and Tag 0A66 (projective source Hom); derived.tex Tag 05RT for the cohomology criterion"
+   }
+  },
+  {
+   "text": "For any complex $N$, put $D=\\operatorname{Hom}_R^\\bullet(P,R[0])$. The degreewise normalized isomorphisms of [lem-pc-perfect-ring-hom-tensor-degrees] assemble to a chain isomorphism $A_N:D\\otimes N\\simeq\\operatorname{Hom}^\\bullet_R(P,N)$ by [lem-pc-perfect-ring-hom-tensor-differential]. Thus the composite $F\\otimes\\operatorname{Hom}(P,N)\\xrightarrow{1\\otimes A_N^{-1}}F\\otimes D\\otimes N\\xrightarrow{\\text{symmetry}}D\\otimes F\\otimes N\\xrightarrow{A_{F\\otimes N}}\\operatorname{Hom}(P,F\\otimes N)$ is a chain isomorphism. It is exactly $e(f\\otimes h)(x)=f\\otimes h(x)$: for degrees $|f|=a,|\\lambda|=r,|n|=s$, the symmetry and final normalization give $(-1)^{ar+r(a+s)}=(-1)^{rs}$, the input normalization of $A_N(\\lambda\\otimes n)$. Boundedness and finite projectivity are used only for $P$; no bound on $F,N$ is used. This is a direct composition of the two cited normalized statements, not an assertion that an arbitrary tensor-Hom isomorphism is evaluation.",
+   "uses": [
+    "lem-pc-perfect-ring-hom-tensor-degrees",
+    "lem-pc-perfect-ring-hom-tensor-differential"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATK, lemma-internal-hom-evaluate-tensor-isomorphism, case (1); explicit normalized finite-projective calculation"
+   }
+  },
+  {
+   "text": "Precomposition with $p$ gives a square with top $t$, bottom $\\operatorname{Hom}(P,q)\\circ e$ for $N=J$, left vertical $1_F\\otimes p^*:F\\otimes\\operatorname{Hom}(B,J)\\to F\\otimes\\operatorname{Hom}(P,J)$, and right vertical $p^*:\\operatorname{Hom}(B,I)\\to\\operatorname{Hom}(P,I)$. The square commutes: both composites evaluate on $f,h,x$ to $q(f\\otimes h(p(x)))$. Both $p^*$ maps are quasi-isomorphisms by [lem-pur-rhom-well-defined], with identity as its K-injective-target comparison and $p$ as its source quasi-isomorphism. Tensoring the first with $F$ preserves that property by [def-pc-module-kflat-complex]. The bottom map is a quasi-isomorphism: $e$ is an isomorphism by Step 5, and $\\operatorname{Hom}(P,q)$ is one by the canonical, covariantly natural Hom model of [lem-pod-projective-hom-evaluation-model], since $q$ is a quasi-isomorphism and $P$ is bounded above projective. On cohomology the two vertical maps and bottom map are isomorphisms, so commutativity implies that $t$ is a quasi-isomorphism. Its underlying $R$-map is therefore an isomorphism in $D(R)$, and conservativity in [lem-trf-derived-coinduction-adjunction] makes $Qt$ an isomorphism in $D(B)$.",
+   "uses": [
+    "lem-pur-rhom-well-defined",
+    "def-pc-module-kflat-complex",
+    "lem-pod-projective-hom-evaluation-model",
+    "lem-trf-derived-coinduction-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A66 and Tag 0ATK case (1); sites-cohomology.tex Tag 0A95 for precomposition into K-injectives"
+   }
+  },
+  {
+   "text": "The comparison is natural and independent of these resolutions because it is the adjunct of the canonical tensor-counit map, by Step 3. More explicitly, for $u:K\\to K'$ in $D(R)$, the two naturality composites have the same adjunct $u\\circ(1_K\\otimes\\epsilon_R)$, by functoriality of tensor [lem-pc-derived-tensor-second-factor-functor] and the adjunction [lem-trf-derived-coinduction-adjunction]; its Hom bijection therefore makes them equal. The formula in Step 3 identifies the underlying scalar comparison with ordinary perfect evaluation, proving the final clause as well. Only $P$ was bounded and finite projective. The complexes representing $K$, its K-flat resolution, and its K-injective replacement were arbitrary unbounded complexes; neither flatness of $B/R$ nor Noetherianity was used.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-trf-derived-coinduction-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZE and Tags 0A70, 0A71; naturality of the evaluation-normalized comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-kflat-complex",
+  "def-pc-perfect-ring-complex",
+  "def-pur-derived-internal-hom",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-kflat-resolution",
+  "lem-pc-perfect-ring-hom-tensor-degrees",
+  "lem-pc-perfect-ring-hom-tensor-differential",
+  "lem-pc-ring-derived-map-representative",
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-pur-rhom-well-defined",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0BZE, proved here by explicit ordinary-projective evaluation instead of the source's DG resolution argument; uses Tags 0A70, 0A71, more-algebra.tex Tags 0A66 and 0ATK, and the cited normalized chain calculations."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +164,74 @@
    "results": "{\"t\": \"2026-10-17T21:18:06Z\", \"tool\": \"leanfinder\", \"query\": \"Right adjoint to scalar restriction for a finite projective resolution of an algebra is tensor product with its dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.instIsRightAdjointRestrictScalars\", \"ModuleCat.instIsRightAdjointCoextendScalars\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"ModuleCat.instIsLeftAdjointRestrictScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\"], \"digest\": \"10aa2a02e21eebf1\"} Read the returned signatures: The hits are ordinary dualTensorHomEquiv, ordinary scalar extension/restriction/coextension adjunctions, and cotangent modules. Read ChangeOfRings.lean lines 520-680: coextendScalars is ordinary Hom, not derived coinduction or the perfect-algebra formula.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect algebra over a commutative ring has derived coinduction given by tensor with the algebra-valued dual",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T21:43:58Z\", \"tool\": \"leanfinder\", \"query\": \"A perfect algebra over a commutative ring has derived coinduction given by tensor with the algebra-valued dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.tensorCotangent\", \"Algebra.Extension.tensorH1Cotangent\", \"Algebra.FormallySmooth.of_perfectField\", \"Algebra.Extension.tensorCotangentInvFun\", \"Algebra.H1Cotangent\", \"Algebra.FormallyUnramified.sec\", \"Algebra.FormallyUnramified.elem\", \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\"], \"digest\": \"6b6af3ea763c2318\"} Read returned signatures and ChangeOfRings.lean:605-680; ordinary ModuleCat coextension and representation adjunctions do not state the unbounded derived K-injective construction or the perfect-algebra comparison. Contraction.lean gives only ordinary module tensor-Hom.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, ModuleCat.restrictScalars, dualTensorHomEquiv",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T21:43:59Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, ModuleCat.restrictScalars, dualTensorHomEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No results.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coinduct|coinduction|derived.*[Hh]om|[Hh]om.*derived",
+   "sub": "Algebra",
+   "results": "{\"t\": \"2026-10-17T21:43:59Z\", \"tool\": \"grep\", \"query\": \"coinduct|coinduction|derived.*[Hh]om|[Hh]om.*derived\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/CartanCriterion.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Ext/HasExt.lean\", \"Mathlib/Algebra/Category/ModuleCat/Ext/Basic.lean\", \"Mathlib/Algebra/Category/ModuleCat/Ext/DimensionShifting.lean\", \"Mathlib/Algebra/Category/ModuleCat/Ext/Finite.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\"], \"digest\": \"33312d86c100bf29\"} Read returned signatures and ChangeOfRings.lean:605-680; ordinary ModuleCat coextension and representation adjunctions do not state the unbounded derived K-injective construction or the perfect-algebra comparison. Contraction.lean gives only ordinary module tensor-Hom.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coinduction RHom of an algebra perfect as a module equals derived tensor with its derived dual",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T21:44:00Z\", \"tool\": \"leansearch\", \"query\": \"Derived coinduction RHom of an algebra perfect as a module equals derived tensor with its derived dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"lTensorHomEquivHomLTensor\", \"dualTensorHomEquiv\", \"dualTensorHomEquivOfBasis\", \"LinearMap.IsPerfPair.dualEval\", \"TensorProduct.AlgebraTensorModule.dualDistrib\", \"dualTensorHom\", \"IsBaseChange.dual\", \"Module.dual_projective\"], \"digest\": \"3ce43d71d82b5987\"} Read returned signatures and ChangeOfRings.lean:605-680; ordinary ModuleCat coextension and representation adjunctions do not state the unbounded derived K-injective construction or the perfect-algebra comparison. Contraction.lean gives only ordinary module tensor-Hom.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint to scalar restriction for a finite projective algebra is tensor with its derived dual",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T21:45:38Z\", \"tool\": \"leanfinder\", \"query\": \"Right adjoint to scalar restriction for a finite projective algebra is tensor with its derived dual\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.instIsRightAdjointRestrictScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.instIsRightAdjointCoextendScalars\", \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\"], \"digest\": \"5f3657de3a7ee6aa\"} Read returned signatures and ChangeOfRings.lean:605-680; ordinary ModuleCat coextension and representation adjunctions do not state the unbounded derived K-injective construction or the perfect-algebra comparison. Contraction.lean gives only ordinary module tensor-Hom.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect bounded complex B over R: RHom_R(B,K) is naturally B-valued dual tensor K",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T21:45:39Z\", \"tool\": \"leansearch\", \"query\": \"Perfect bounded complex B over R: RHom_R(B,K) is naturally B-valued dual tensor K\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"dualTensorHomEquiv\", \"dualTensorHomEquivOfBasis\", \"dualTensorHom\", \"dualTensorHomEquivOfBasis_apply\", \"FGModuleCat.rightDual\", \"LinearMap.IsPerfPair.dualEval\", \"Module.Invertible.linearEquivDual\", \"CharacterModule.dual_rTensor_conj_homEquiv\"], \"digest\": \"672abb353ce07147\"} Read returned signatures and ChangeOfRings.lean:605-680; ordinary ModuleCat coextension and representation adjunctions do not state the unbounded derived K-injective construction or the perfect-algebra comparison. Contraction.lean gives only ordinary module tensor-Hom.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualTensorHomEquiv|coextendScalars|restrictCoextendScalarsAdj",
+   "sub": "Algebra/Category/ModuleCat",
+   "results": "{\"t\": \"2026-10-17T21:45:39Z\", \"tool\": \"grep\", \"query\": \"dualTensorHomEquiv|coextendScalars|restrictCoextendScalarsAdj\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\"], \"digest\": \"ca48538a2838836f\"} Read returned signatures and ChangeOfRings.lean:605-680; ordinary ModuleCat coextension and representation adjunctions do not state the unbounded derived K-injective construction or the perfect-algebra comparison. Contraction.lean gives only ordinary module tensor-Hom.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def dualTensorHomEquiv|theorem dualTensorHomEquiv",
+   "sub": "LinearAlgebra",
+   "results": "{\"t\": \"2026-10-17T21:52:55Z\", \"tool\": \"grep\", \"query\": \"def dualTensorHomEquiv|theorem dualTensorHomEquiv\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Contraction.lean\", \"Mathlib/LinearAlgebra/Contraction.lean\", \"Mathlib/LinearAlgebra/Contraction.lean\", \"Mathlib/LinearAlgebra/Contraction.lean\", \"Mathlib/LinearAlgebra/Contraction.lean\"], \"digest\": \"539da270a40a8c24\"} Read Contraction.lean:160-235: ordinary finite-projective module tensor-Hom, not derived coinduction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-algebraic-shriek-calculus",
@@ -73,7 +243,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Algebraic upper shriek: polynomial models, coinduction, composition and flat base change. Technical input for the algebraic calculus: perfect-algebra evaluation and tensor formula used for the one-variable refinement and the open-immersion calculation.",
+   "place": "Clauses (1) and (2), normal-cone specialization argument, specifically the sentence \"Varshavsky's theorem is proved by specialization to the normal cone of Z\"; technical algebraic duality input reached through trace specialization, relative duality, and algebraic shriek calculus in the recorded via chain. This node proves the perfect-algebra tensor/coinduction input for the one-variable refinement and open-immersion calculation.",
    "via": [
     "lem-trf-algebraic-shriek-calculus",
     "lem-trf-relative-duality-polynomial-chart",
@@ -91,5 +261,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-perfect-algebra-coinduction-tensor",
+  "worker": "stage1",
+  "summary": "Kept the imported statement and its unbounded hypotheses unchanged. Gave seven explicit steps using a B-linear chain map and a commuting projective-source comparison square, with signs checked by the existing normalized tensor-Hom nodes. Created one genuine smaller auxiliary node for ordinary unbounded derived coinduction, its counit and scalar identification. Retained imported searches and added the actual Q70 searches.",
+  "blueprint": "Clauses (1) and (2), normal-cone specialization argument, specifically the sentence \"Varshavsky's theorem is proved by specialization to the normal cone of Z\"; technical algebraic duality input reached through trace specialization, relative duality, and algebraic shriek calculus in the recorded via chain. This node proves the perfect-algebra tensor/coinduction input for the one-variable refinement and open-immersion calculation.",
+  "tool_uses": [
+   {
+    "node": "def-pc-module-kflat-complex",
+    "why": "Generic ordinary-module derived algebra input: K-flat complexes of modules over a commutative ring. It does not replace the curve/trace route; the current unit has no generic statement of this input."
+   },
+   {
+    "node": "def-pc-perfect-ring-complex",
+    "why": "Generic ordinary-module derived algebra input: Perfect complexes over a commutative ring. It does not replace the curve/trace route; the current unit has no generic statement of this input."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Generic ordinary-module derived algebra input: Derived internal Hom on a ringed site. It does not replace the curve/trace route; the current unit has no generic statement of this input."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Generic ordinary-module derived algebra input: Derived tensor over R with a complex of A-modules. It does not replace the curve/trace route; the current unit has no generic statement of this input."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ordinary-module derived algebra input: Existence of K-flat resolutions on a ringed site. It does not replace the curve/trace route; the current unit has no generic statement of this input."
+   },
+   {
+    "node": "lem-pc-perfect-ring-hom-tensor-degrees",
+    "why": "Generic ordinary-module derived algebra input: Signed tensor-dual evaluation is invertible in each degree. It does not replace the curve/trace route; the current unit has no generic statement of this input."
+   },
+   {
+    "node": "lem-pc-perfect-ring-hom-tensor-differential",
+    "why": "Generic ordinary-module derived algebra input: Signed tensor-dual evaluation commutes with differentials. It does not replace the curve/trace route; the current unit has no generic statement of this input."
+   },
+   {
+    "node": "lem-pc-ring-derived-map-representative",
+    "why": "Generic ordinary-module derived algebra input: Maps from bounded projective complexes are represented by chain maps. It does not replace the curve/trace route; the current unit has no generic statement of this input."
+   },
+   {
+    "node": "lem-pod-projective-hom-evaluation-model",
+    "why": "Generic ordinary-module derived algebra input: Projective Hom-complex model with its derived evaluation. It does not replace the curve/trace route; the current unit has no generic statement of this input."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic ordinary-module derived algebra input: The Hom complex into K-injective complexes respects quasi-isomorphisms. It does not replace the curve/trace route; the current unit has no generic statement of this input."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Generic ordinary-module derived algebra input: Isomorphisms in the unbounded derived category detected by cohomology. It does not replace the curve/trace route; the current unit has no generic statement of this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-module-kflat-complex",
+  "def-pc-perfect-ring-complex",
+  "def-pur-derived-internal-hom",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-kflat-resolution",
+  "lem-pc-perfect-ring-hom-tensor-degrees",
+  "lem-pc-perfect-ring-hom-tensor-differential",
+  "lem-pc-ring-derived-map-representative",
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-pur-rhom-well-defined",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q70-60c44cdf4",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q70-60c44cdf4 (reviewer sub-agent of L); spot-checked: Reviewed the item, auxiliary node, cited statements, source tags, unit route, edge cases, duplicate candidates, Mathlib searches, and route-pivot constraints. No mathematical or structural fault found; review.md records the checks."
  }
 }

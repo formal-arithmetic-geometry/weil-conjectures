@@ -13,9 +13,78 @@
   "def-weil-pbc-noetherian-ring",
   "def-sc-finitely-presented-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $u$ is universally injective, its defining condition holds for every $R$-module, hence for every finitely presented $R$-module. This proves the forward implication.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058K, theorem-universally-exact-criteria, (1) implies (2): restriction of the class of test modules."
+   }
+  },
+  {
+   "text": "For the reverse implication, suppose that $\\mathrm{id}_P\\otimes u$ is injective for every finitely presented $R$-module $P$. Fix an arbitrary $R$-module $Q$. Apply [lem-trf-module-directed-colimit-fp] to write $Q$ as a colimit of a small nonempty directed system $(Q_i,a_{ij})$ with finitely presented stages and colimit maps $a_i:Q_i\\to Q$. Thus every map $\\mathrm{id}_{Q_i}\\otimes u$ is injective by the hypothesis.",
+   "uses": [
+    "lem-trf-module-directed-colimit-fp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HA, lemma-module-colimit-fp, applied to the arbitrary test module Q."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-tensor-commutes-with-colimits], the maps $a_i\\otimes1_M$ exhibit $Q\\otimes_R M$ as the colimit of the modules $Q_i\\otimes_R M$; likewise $a_i\\otimes1_N$ exhibit $Q\\otimes_R N$ as the colimit of $Q_i\\otimes_R N$. These are colimits over the same small directed set from Step 2.",
+   "uses": [
+    "lem-weil-pbc-tensor-commutes-with-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DD, lemma-tensor-products-commute-with-limits, including its assertion identifying the colimit maps."
+   }
+  },
+  {
+   "text": "Let $x\\in Q\\otimes_R M$ satisfy $(\\mathrm{id}_Q\\otimes u)(x)=0$. By [lem-weil-pbc-filtered-colimit-modules-elementwise] applied to the first colimit in Step 3, write $x=(a_i\\otimes1_M)(x_i)$ for some $x_i\\in Q_i\\otimes_R M$. Set $y_i=(\\mathrm{id}_{Q_i}\\otimes u)(x_i)$. The maps $(\\mathrm{id}_Q\\otimes u)(a_i\\otimes1_M)$ and $(a_i\\otimes1_N)(\\mathrm{id}_{Q_i}\\otimes u)$ agree: both send $q_i\\otimes m$ to $a_i(q_i)\\otimes u(m)$, and pure tensors generate by [def-weil-pbc-module-tensor-product]. Hence $y_i$ maps to zero in the second colimit. The vanishing assertion of [lem-weil-pbc-filtered-colimit-modules-elementwise] gives $j\\ge i$ with $(a_{ij}\\otimes1_N)(y_i)=0$. The same pure-tensor computation gives $(\\mathrm{id}_{Q_j}\\otimes u)((a_{ij}\\otimes1_M)(x_i))=0$. Since $Q_j$ is finitely presented, the test hypothesis implies $(a_{ij}\\otimes1_M)(x_i)=0$. Applying $a_j\\otimes1_M$ yields $x=0$, since $a_j a_{ij}=a_i$ and the induced tensor maps compose, again by [def-weil-pbc-module-tensor-product]. The kernel is zero, so $\\mathrm{id}_Q\\otimes u$ is injective. As $Q$ was arbitrary, $u$ is universally injective.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00D6 and 00D7, lemma-directed-colimit and lemma-zero-directed-limit: a representative becomes zero at a later stage; naturality is checked here on pure tensors."
+   }
+  },
+  {
+   "text": "Finally suppose $R$ is Noetherian. By [lem-sc-noetherian-finite-module-finite-presentation], every finite $R$-module is finitely presented. Conversely, in a presentation $R^m\\to R^n\\to P\\to0$ as in [def-sc-finitely-presented-module], the images of the $n$ standard basis vectors generate $P$, because the map $R^n\\to P$ is surjective. Thus $P$ is finite in the sense of [def-weil-finitely-generated-module]. Consequently the finite and finitely presented test modules form the same class over $R$, so the equivalence already proved gives exactly the stated Noetherian variant.",
+   "uses": [
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "def-sc-finitely-presented-module",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FP, lemma-Noetherian-finite-type-is-finite-presentation, part (1); the reverse implication is the finite generating set in the definition of a finite presentation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finitely-presented-module",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-trf-module-directed-colimit-fp",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-tensor-commutes-with-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Direct filtered-colimit proof of the injectivity criterion of Tag 058K (1) iff (2), using Tags 00HA, 00DD, 00D6, 00D7; Tag 00FP (1) for the Noetherian variant."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +113,38 @@
    "results": "25 hits in RingTheory, ordinary tensor injectivity and flatness only; no universal exactness criterion",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "universallyInjective|UniversallyInjective|PureMono|pure.*[Ii]nject|[Ii]nject.*pure",
+   "results": "{\"t\": \"2026-10-17T21:51:28Z\", \"tool\": \"grep\", \"query\": \"universallyInjective|UniversallyInjective|PureMono|pure.*[Ii]nject|[Ii]nject.*pure\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Pure.lean\"], \"digest\": \"9f6d8f01b600a0f7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern flat tensor factors, restrictions to finitely generated submodules, or local freeness; none asserts universal injectivity of a fixed arbitrary map from finitely presented tensor tests"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal injectivity of a module homomorphism can be tested on finitely presented tensor factors",
+   "results": "{\"t\": \"2026-10-17T21:51:29Z\", \"tool\": \"leansearch\", \"query\": \"Universal injectivity of a module homomorphism can be tested on finitely presented tensor factors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.rTensor_injective_of_forall_fg_rTensor_injective\", \"Module.FaithfullyFlat.lTensor_injective_iff_injective\", \"TensorProduct.rTensor_injective_of_forall_vanishesTrivially\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"Module.FaithfullyFlat.tensorProduct_mk_injective\", \"LinearMap.rTensor_injective_of_fg\", \"Module.Flat.rTensor_preserves_injective_linearMap\", \"IsTensorProduct.map_id_injective_of_flat_right\"], \"digest\": \"d29b047acbb1783a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern flat tensor factors, restrictions to finitely generated submodules, or local freeness; none asserts universal injectivity of a fixed arbitrary map from finitely presented tensor tests"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Function.Injective, Module.FinitePresentation",
+   "results": "{\"t\": \"2026-10-17T21:51:29Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, Function.Injective, Module.FinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Module.free_of_maximalIdeal_rTensor_injective\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Module.exists_basis_of_basis_baseChange\"], \"digest\": \"9bf7269afdb0a664\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern flat tensor factors, restrictions to finitely generated submodules, or local freeness; none asserts universal injectivity of a fixed arbitrary map from finitely presented tensor tests"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear map is pure injective if tensoring it with every finitely presented module is injective",
+   "results": "{\"t\": \"2026-10-17T21:51:30Z\", \"tool\": \"leanfinder\", \"query\": \"A linear map is pure injective if tensoring it with every finitely presented module is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_iff\", \"LinearMap.rTensor_injective_of_fg\", \"Module.Flat.iff_lTensor_preserves_injective_linearMapₛ\", \"Module.Flat.iff_lTensor_preserves_injective_linearMap\", \"Module.Flat.iff_lTensor_preserves_injective_linearMap'\", \"Module.Flat.iff_rTensor_preserves_injective_linearMapₛ\", \"Module.Flat.iff_rTensor_preserves_injective_linearMap'\", \"Module.Flat.iff_rTensor_injective\"], \"digest\": \"c2c2ea14653006ec\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern flat tensor factors, restrictions to finitely generated submodules, or local freeness; none asserts universal injectivity of a fixed arbitrary map from finitely presented tensor tests"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flat-completion-universally-injective",
@@ -59,7 +156,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Supporting commutative-algebra input in the proof of the item, following the Tag 05DM reduction to fibre associated primes and finite tensor tests.",
+   "place": "The finite tensor-test input in Tag 05DM used by lem-trf-flat-completion-universally-injective, beneath the local-term locality proof through the inherited flatification chain; realize Tag 058K by a direct filtered-colimit argument (Tags 00HA, 00DD, 00D6, 00D7), with Tag 00FP (1) for finite modules over a Noetherian ring.",
    "via": [
     "lem-trf-flat-completion-universally-injective",
     "lem-trf-local-flat-pure-complete-projective",
@@ -79,5 +176,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-universal-injective-finite-test",
+  "worker": "stage1",
+  "summary": "Split in five steps: restrict tests; present an arbitrary test module as a small directed colimit of finitely presented modules; tensor the colimit in each target module; chase a kernel representative to a later stage where the tested map is injective; identify finite and finitely presented modules over a Noetherian ring. One new statement-only foundation, Tag 00HA, supplies the presentation. Existing Mathlib leaves supply tensor preservation of colimits, representatives/eventual vanishing, and the Noetherian finite-presentation theorem. The item statement is unchanged.",
+  "blueprint": "Supplies the finite tensor-test reduction of the Tag 05DM completion input along the inherited proof chain below lem-trf-local-term-locality; changes no chapter or unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q128-4a93cae75",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q128-4a93cae75 (reviewer sub-agent of L); spot-checked: Read the item, new node, cited statements, and Stacks sources in full. All five proof steps are sound; canonical tensor maps, eventual vanishing, Noetherian hypotheses, edge cases, duplicates, and route checked. Corrected only the new node’s missing audit metadata and merge default. Full findings in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

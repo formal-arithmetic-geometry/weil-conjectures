@@ -17,9 +17,128 @@
   "def-pur-sheaf-tensor-product",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since f is proper and Spec(R) is affine, the proper-basic lemma makes X quasi-compact. We will construct affine nonvanishing neighbourhoods for every closed point, then show that their union is X.",
+   "uses": [
+    "pqf-lem-proper-basic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5U, lemma-vanshing-gives-ample (3) => (1), and Tag 0B5P, lemma-quasi-compact-h1-zero-invertible, hypothesis (1)."
+   }
+  },
+  {
+   "text": "Fix a point x whose singleton is closed in X. Apply the common-free-generator lemma with M=N=L and W=X to choose an affine open U containing x and a generator e of L on U. Put Z=X minus U and Z' = Z union {x}. The reduced-induced-closed-subscheme lemma gives quasi-coherent ideal sheaves I=I_Z and J=I_{Z'}. Its explicit vanishing-ideal formula gives J contained in I, I restricted to U equal to O_U, and I restricted to X minus {x} equal to J restricted there. At x the inclusion J_x into I_x=O_{X,x} has image m_x, because vanishing at x means having zero image in its residue field. Both Z and Z' are closed; in particular J is among the ideal sheaves quantified in the hypothesis.",
+   "uses": [
+    "lem-pc-invertible-common-free-generator",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5P, proof, choice of x,U,Z,Z' and reduced ideals; Schemes lemma-reduced-closed-subscheme (Tag 01J3)."
+   }
+  },
+  {
+   "text": "In the abelian category of module sheaves put Q=I/J, the sheafification of the sectionwise quotient. The inclusion and its cokernel give 0 -> J -> I -> Q -> 0. For each n>=1 put M_n=L^{tensor n}. Tensoring this sequence by M_n gives 0 -> J tensor M_n -> I tensor M_n -> Q tensor M_n -> 0, and I tensor M_n -> M_n is injective. Here is the local verification, so no flatness assertion is implicit: on any open V where M_n has generator a, each map F tensor M_n -> F is f tensor (r a) |-> r f, with inverse f |-> f tensor a. Under these identifications both the sequence and the inclusion into M_n are the original exact sequence and I -> O_X. These identifications commute with every map in the sequence. Exactness follows locally on this covering: kernels are sectionwise, and cokernels are sheafified sectionwise cokernels. Such a cover exists because powers of an invertible module are invertible.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-ample-invertible-module",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5P, proof, the two displayed short exact sequences; the tensor sequence is checked in local generators."
+   }
+  },
+  {
+   "text": "Choose n>=1 with H^1(X,J tensor M_n)=0, using the hypothesis for the quasi-coherent ideal J, and write M=M_n. Construct q_n in Gamma(X,Q tensor M) explicitly on the open cover {U, X minus {x}}. On U use the image of e^{tensor n} under M|_U=(I tensor M)|_U -> (Q tensor M)|_U, using I|_U=O_U. On X minus {x} use zero: there I=J, hence Q=0 and Q tensor M=0. The two sections agree on U minus {x}, since this quotient sheaf is zero there, and therefore glue by the sheaf axiom. At x their germ is the class of e^{tensor n} modulo m_x M_x. In its generator coordinate this class is 1 in kappa(x), which is nonzero.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5P, proof, choice of n and the residue-one quotient section. Gluing on U and X minus {x} expands the source's identification of global quotient sections with A/m."
+   }
+  },
+  {
+   "text": "The category of O_X-module sheaves is abelian with enough injectives. Global sections is additive and left exact: an element lies in the sectionwise kernel exactly when its image is zero. Apply the right-derived universal delta-functor lemma to Gamma(X,-) and the short exact sequence of step 3 at the selected n. Its R^0 Gamma = Gamma identification and exactness give Gamma(X,I tensor M) -> Gamma(X,Q tensor M) -> H^1(X,J tensor M). The last group is zero by the chosen n, so the boundary of q_n is zero; exactness gives t in Gamma(X,I tensor M) mapping to q_n. Denote by s its image in Gamma(X,M) under the inclusion I tensor M -> M. This uses only H^1 vanishing for J at this one n, not eventual vanishing or vanishing for I.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5P, proof, existence of the global lift s from the chosen H^1 vanishing; Cohomology of Sheaves, cohomology long exact sequence."
+   }
+  },
+  {
+   "text": "The value of s at x is the nonzero class of e^{tensor n}, so x belongs to X_s. At any z in Z, trivialize M on a neighbourhood with generator a. Since s comes from I tensor M, its coordinate in this generator is a section of I, and the vanishing-ideal formula makes its residue at z zero. Thus s has zero value at every z in Z and X_s is contained in U. On U write s=f e^{tensor n}, with f in O_X(U). The definition of X_s says that for y in U, y belongs to X_s exactly when f has nonzero residue at y, equivalently its germ is a unit in the local ring O_{X,y}. Consequently X_s=U_f. The affine-principal-open lemma (0) says that U_f is affine. This completes the construction for every closed point x.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5P, proof, x in X_s contained in U and X_s=D(f) affine."
+   }
+  },
+  {
+   "text": "Let W be the union of X_s over all positive powers and sections whose nonvanishing open is affine. Each X_s is open by the ampleness-definition node, and steps 2--6 show that W contains every closed point. The underlying space of X is Kolmogorov: if two points had the same closure, that irreducible closed subset would have two generic points, contrary to the scheme-sobriety lemma; distinct closures are distinguished by an open complement. Apply the quasi-compact Kolmogorov closed-point lemma to the closed subset X minus W of the quasi-compact space X. If nonempty, it contains a point closed in X, contradicting that all closed points lie in W. Hence W=X.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-sc-scheme-sober",
+    "lem-sc-quasi-compact-kolmogorov-closed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5P, final paragraph, the closed-point covering argument; the cited closed-point lemma applies directly to a closed subset of X."
+   }
+  },
+  {
+   "text": "X is quasi-compact by step 1. The equality W=X gives, for every point of X, a positive power of L and a section of that power with affine nonvanishing locus containing the point. These are precisely the two clauses of absolute ampleness. Therefore L is ample.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5P, final sentence; Tag 0B5U (3) => (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-invertible-common-free-generator",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "pqf-def-cohomology",
+  "pqf-lem-proper-basic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0B5U, lemma-vanshing-gives-ample (3) => (1), expanded by the full proof of Tag 0B5P, lemma-quasi-compact-h1-zero-invertible."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +174,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}\nRead the returned statements: no statement of this node or one-line generalization. ",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper scheme over affine Noetherian base, H1 vanishing for every ideal after a tensor power of an invertible sheaf implies the sheaf is ample",
+   "results": "No matching criterion; only quasi-compact scheme basic-open restriction lemmas such as AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsProper, IsAffineOpen, basicOpen, IsAmple",
+   "results": "0 hits; unknown identifier IsProper.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ample|IsProper in Mathlib/AlgebraicGeometry/Morphisms",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomological criterion for ampleness ideal twist H1",
+   "results": "Returned unrelated cotangent H1 and basic algebraic-geometry declarations, but no ampleness criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-proper-integral-curve-ample-degree",
@@ -87,5 +234,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-ideal-twist-vanishing-implies-ample",
+  "worker": "stage1",
+  "summary": "Repair D1/D2 and F2/F5: the item now carries the reduced-ideal construction, local tensor-exactness check, explicit glued residue-one quotient section, H1 lift, affine principal nonvanishing neighbourhood and closed-point covering argument. No replacement criterion lemma is introduced; all inputs are existing nodes. Corrected the supporting Stacks tag to 0B5P and rewrote the report against these eight actual steps.",
+  "blueprint": "Expands the 0B5U criterion used by the 0B5X curve-degree argument in the inherited local-term-locality ancestry; follows the reduced-ideal and twisted H1 construction of 0B5P without changing any unit route.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "Properness supplies quasi-compactness over an affine base, a generic geometric tool independent of the local-term route."
+   },
+   {
+    "node": "lem-pc-invertible-common-free-generator",
+    "why": "Only the affine local trivialization of an invertible module is used; no step of the curve local-term unit supplies this generic local tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Supplies the explicit quasi-coherent reduced vanishing ideals of two closed subsets; this generic scheme construction is not an alternative local-term proof."
+   },
+   {
+    "node": "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "why": "Verifies the abelian/enough-injectives hypotheses for the global-sections long exact sequence, a generic homological tool."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Gives long exactness and R^0 Gamma=Gamma for the residue-one lift; this is a generic homological tool absent from the curve local-term unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-proper-basic",
+  "lem-pc-invertible-common-free-generator",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q88-308199201",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q88-308199201 (reviewer sub-agent of L); spot-checked: Read the required guidance, packet, item, report, unit route, cited node statements, and Stacks sources 0B5U, 0B5P, and 01J3. The eight-step split correctly supplies the reduced-ideal construction, tensor exactness, quotient-section gluing, H¹ lift, affine principal open, and closed-point covering argument. Hypotheses and edge cases check; no duplicate, circular, long hidden lemma, route-pivot, or citation fault found. Review written to review.md."
  }
 }
