@@ -263,5 +263,31 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-94ec239f5 (reviewer sub-agent of L); spot-checked: I read the item, the new node and the full statements of every cited node (simplicial-interval-lifting, def-weil-pbc-category-colimit, def-weil-pbc-simplicial-set), and checked the sources: Stacks categories.tex 002F (line 1310) and 002U (line 1590), and Mathlib Cat/Colimit.lean:35-38, which states HasColimits Cat.{v,v}. The item's statement is unchanged and true, because taking the object set of a category preserves colimits (it has the codiscrete category K(X) as right adjoint). The seven steps are correct and complete. Step 3 proves the object bijection both ways through K(X) and colimit uniqueness. Steps 4-5 build the simplicial operators and check them, including the identity case, after every cocone leg. Step 6 gives the enriched universal property, and step 7 shows that evaluation preserves colimits. Nothing uses the cocompleteness clause or the proof of the interval-lifting node. I tested the empty diagram, one object, coproducts of discrete categories, a coequalizer identifying objects (where the Cat colimit adds composites, and the proof never assumes hom sets are set colimits), a loop-creating pushout, and degrees 0 and 1. The new node lem-coef-small-category-colimits is an exact Mathlib leaf, Cat.instHasColimits, with the universe and strictness matching. It meets B1-B7, all three kinds of search are recorded, and it restates no clause of the item. An rg search of the DAG found no duplicate among the simplicial-category colimit candidates. The declared tool_use of lem-coef-simplicial-interval-lifting is not needed, since that node is in the same unit and only its definition is used; I do not accept it as a cross-unit tool use. The Riehl–Verity source is not in the local literature: the delivery records it as WANTED and marks the proof as written by an agent, which is correct. This is not a target node, so no base-change morphism or coefficient category is involved. I made no changes."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicTopology.SimplicialCategoryDegreewiseColimits",
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialCategoryDegreewiseColimits.lean",
+  "declaration": "CategoryTheory.CoherentNerve.simplicial_category_degreewise_colimits",
+  "declarations": [
+   "CategoryTheory.CoherentNerve.simplicialCategoryDegreeDiagram",
+   "CategoryTheory.CoherentNerve.simplicialCategoryObjectDiagram",
+   "CategoryTheory.CoherentNerve.simplicialCategoryObjectCocone",
+   "CategoryTheory.CoherentNerve.simplicialCategoryObjectColimitMap",
+   "CategoryTheory.CoherentNerve.simplicialCategoryDegreeCocone",
+   "CategoryTheory.CoherentNerve.simplicial_category_degreewise_colimits"
+  ],
+  "statement": "theorem simplicial_category_degreewise_colimits (I : Type u) [Category.{u} I] (D : I ⥤ SCat.{u}) : ∃ (c : Cocone D), Nonempty (IsColimit c) ∧ Function.Bijective (simplicialCategoryObjectColimitMap c) ∧ (∀ n : SimplexCategoryᵒᵖ, Nonempty (IsColimit (simplicialCategoryDegreeCocone c n))) ∧ (∀ (n m : SimplexCategoryᵒᵖ) (a : n ⟶ m) (x : (colimit (simplicialCategoryObjectDiagram D) : Type u)), (CategoryTheory.CoherentNerve.degreeRestriction c.pt a).obj (simplicialCategoryObjectColimitMap c x) = simplicialCategoryObjectColimitMap c x)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-17"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7700a916e",
+  "group": "NL",
+  "result": "pass",
+  "note": "Read the node, all 3 stmt_deps, the report, the module and the declarations it uses (SCat/sCatCategory; Degree/degreeCategory/degreeFunctor; degreeRestriction). Every clause is rendered: an existing SCat colimit cocone c; a bijective canonical map from the Type-colimit of object sets O to Ob c.pt; for every n the degree cocone is a strict Cat.{u,u} colimit (equivalent to 'evaluation preserves colimits', since any colimit is isomorphic to c); operators identity on objects (true by definition). One universe u, small I, no extra hypotheses; empty and object-identifying diagrams covered. Helpers are real data without sorry; docstrings carry source and blueprint and the theorem docstring the proof steps; statement verbatim; node changed only in lean; no name collisions; searches recorded. nt_compile --json: exit 0, 3.6 s, no warnings. Non-blocking note: the imported helper modules (CofibrantSimplicialInversion, DiagonalCoherentNerveComparison) are proof-dependency descendants of this item; move the degree helpers to an upstream definitions module before stage 3."
  }
 }
