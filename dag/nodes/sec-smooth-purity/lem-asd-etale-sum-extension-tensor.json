@@ -311,5 +311,28 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-87e2e2721 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the statements of all 30 cited nodes, the blueprint thm-asd-smooth-tensor proof paragraph 3 (both the main-20261015 and master copies) and Stacks 0GKF (more-etale.tex l.1808). The item's statement and stmt_deps are byte-identical to the live unsplit node, so nothing was weakened. The delivery creates no new nodes, and proof_deps equals the union of the steps' uses. Step 3: I redid the Koszul computation; the two (-1)^{pq} signs cancel, and the inverse map is b⊗(s,m) ↦ (s,s^*b⊗m), consistent with the Psi component formula of lem-pur-etale-sum-tensor-totalization. Steps 2 and 4: the cited statements explicitly give K-flat flat-term preservation under v^* and v_! and the per-site resolving-class equivalence; the mixed-site descent one variable at a time through localization (2)/(3) is valid. Step 5: I checked that the fold corresponds to 1_{v^*H} under the presheaf Hom bijection with (v^*H)(W,s)=H(W). Step 6: I recomputed both composites on b⊗(s,c); each gives b⊗c with no permutation and no sign, and generator detection is by the bilinear universal property plus sheafification uniqueness. One mild point, accepted: theta is identified with the termwise c^{-1}, read from the model-based definitions in the statement of lem-weil-pbc-ringed-topoi-derived-tensor-pullback. Edge cases checked: v=id, open immersions, empty V or zero ring, odd bidegrees, unbounded totals. No duplicate found among the slice, open-immersion, pro-etale and compact-support projection nodes, and no cycle. All 13 off-unit citations are declared generic tools and I accept them. No fixes were made; review.md is written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7d518521c",
+  "group": "Q17",
+  "result": "fix",
+  "note": "Statement, dependencies, canonical maps, counit identity, universes and edge cases verified; per-file compilation passed. H11 placeholder second reading repaired with a complete replacement report in fixes/lem-asd-etale-sum-extension-tensor.report.md. Review recorded in review.md; immutable delivery unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSumExtensionTensor",
+  "declaration": "AlgebraicGeometry.Etale.isIso_etaleSumExtensionTensorComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSumExtensionTensor.lean",
+  "statement": "theorem isIso_etaleSumExtensionTensorComparison (A : Type (u + 1)) [CommRing A] [Finite A] {V T : Scheme.{u}} (v : V ⟶ T) [Etale v] [IsSeparated v] [LocallyOfFiniteType v] [QuasiCompact v] [IsNoetherian V] [IsNoetherian T] (B : DerivedCategoryModule A T) (M : DerivedCategoryModule A V) : IsIso (etaleSumExtensionTensorComparison A v B M) ∧ ∀ C : DerivedCategoryModule A T, etaleSumExtensionTensorComparison A v B ((upperStar (ModuleCat.{u + 1} A) v).mapDerivedCategory.obj C) ≫ ((derivedTensor (ModuleCat.{u + 1} A) T).obj B).map (((etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategoryAdjunction).counit.app C) = (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategory.map (etaleSumExtensionTensorPullbackIso A v B C).hom ≫ ((etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategoryAdjunction).counit.app (((derivedTensor (ModuleCat.{u + 1} A) T).obj B).obj C)",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleSumExtensionTensorPullbackIso",
+   "AlgebraicGeometry.Etale.etaleSumExtensionTensorComparison",
+   "AlgebraicGeometry.Etale.isIso_etaleSumExtensionTensorComparison"
+  ]
  }
 }

@@ -239,5 +239,46 @@
   "group": "Q131",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-4f50609cb (reviewer sub-agent of L); spot-checked: PASS: I read the item in full (statement unchanged, five steps), all six cited statements, the one citer (step 3 of lem-coef-infinity-cocartesian-inner-horn-comparison) and the unit. There are no new nodes and no fixes. HA 2.4.4.6 and HTT 3.2.2.6/3.2.2.7 are not under literature/: WANTED is recorded and proof_origin is agent, so I checked their mathematics directly rather than from the PDFs. Step 1: for m≥3 every horn contains all edges; for m=2 the edges 01 and 12 (inner horn), or 01 and 02 together with the base forcing p(v2)∈{1,2} (Λ^2_0 horn), give monotone p-values. So r=cp is an inner fibration and h_x is r-cocartesian. Step 2: restricting to C_01 by pairing works. Degenerate edges are cocartesian by the clause of composition-initiality, which needs an inner fibration of quasicategories; that holds. Reversal swaps Λ_0 and Λ_m and gives cartesian fibrations with fibres (C_1^op, C_0^op) and (D^op, C_0^op). Step 3: A^op and B^op agree degree by degree with M^m(P←Q). Over α the simplices are P_r if α(r)=0 and Q_r otherwise, and the transition applies exactly when α(r)=1 and αθ(s)=0. Marked edges go to degenerate edges or to the reversed h_x, both cartesian. Step 4: every hypothesis of lem-cbc-mapping-simplex-universal-equivalence holds with n=1, T=Δ^1 and identity fibre maps. Step 5: Fun(K^op,Z) ≅ Fun(K,Z^op)^op and h(S^op)=(hS)^op, so u is a categorical equivalence iff u^op is. Edge cases checked: C_0 empty gives isomorphisms; p=id_{Δ^2} gives an isomorphism and Λ^2_1→Δ^2; C_1 empty forces C_0 empty. No duplicate: rg 'prism' over the DAG finds only different lemmas. No cycle, no SGA source, and this is not a target node. Accepted tool_use: lem-cbc-mapping-simplex-universal-equivalence, from sk-prop-sf-cbc, used as a generic black box. The other two declared tool_uses are nodes of the item's own unit and need no record; they are harmless. Minor: source.place gives HTT pp. 180–181 while the steps give pp. 179–180 (maintainer metadata, immaterial)."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-41dd9d2bd",
+  "group": "Q85",
+  "result": "fix",
+  "note": "Wrote review.md and complete fixes. Mathematics and main signature accepted; moved four compatibility proofs to named sorry lemmas, supplied independent reading, and corrected report citations. Original and replacement modules compiled cleanly through scompile.py."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityCocartesianPrismComparison",
+  "declaration": "SSet.Enhanced.cocartesian_prism_comparison",
+  "declarations": [
+   "SSet.Enhanced.prismEdge01",
+   "SSet.Enhanced.prismEdge12",
+   "SSet.Enhanced.prismFiber",
+   "SSet.Enhanced.prismFace01",
+   "SSet.Enhanced.prismFace12",
+   "SSet.Enhanced.prismFiberInclusion",
+   "SSet.Enhanced.prismFiberOneToFace01",
+   "SSet.Enhanced.prismFiberOneToFace12",
+   "SSet.Enhanced.prismFaceInclusion",
+   "SSet.Enhanced.prismPushoutA",
+   "SSet.Enhanced.prismPushoutB",
+   "SSet.Enhanced.prismTransportToFace01",
+   "SSet.Enhanced.prismComparisonA",
+   "SSet.Enhanced.prismComparisonB",
+   "SSet.Enhanced.cocartesian_prism_comparison",
+   "SSet.Enhanced.prismFiberOneToFace01_condition",
+   "SSet.Enhanced.prismFiberOneToFace12_condition",
+   "SSet.Enhanced.prismComparisonA_condition",
+   "SSet.Enhanced.prismComparisonB_condition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityCocartesianPrismComparison.lean",
+  "statement": "theorem cocartesian_prism_comparison {C : SSet.{u}} (p : C ⟶ Δ[2]) [Quasicategory C] (hp : InnerFibration p) (h : prismFiber p 0 ⊗ Δ[1] ⟶ C) (F : prismFiber p 0 ⟶ prismFiber p 1) (hbase : h ≫ p = (CartesianMonoidalCategory.snd (prismFiber p 0) Δ[1]) ≫ prismEdge01) (hzero : SSet.ι₀ ≫ h = prismFiberInclusion p 0) (hone : SSet.ι₁ ≫ h = F ≫ prismFiberInclusion p 1) (hcocart : ∀ (x : (prismFiber p 0) _⦋0⦌), IsCocartesianEdge p (lift (SSet.const x) (𝟙 Δ[1]) ≫ h)) : (∀ (Z : SSet.{max u v}), Z.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map (prismComparisonA p h F hbase hone))).app Z)).toFunctor).IsEquivalence) ∧ (∀ (Z : SSet.{max u v}), Z.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map (prismComparisonB p h F hone))).app Z)).toFunctor).IsEquivalence)",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical prism fibers and face pullbacks reuse the recorded fiber and Mathlib pullbacks; the two pushouts and induced comparison maps have explicit real data. The cylinder uses C_0 × Δ¹, canonically the source order Δ¹ × C_0 with factors exchanged. Categorical equivalence is exactly the enlarged-universe homotopy-category restriction test of exists_joyal_model_structure.",
+  "fixed_by": "NT-stage2-Codex-41dd9d2bd"
  }
 }

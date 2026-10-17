@@ -398,17 +398,17 @@
   "file": "lean/Sheaf/CategoryTheory/ModelEquivalenceTransport.lean",
   "statement": "theorem model_equivalence_transport {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D] [ModelCategory D] [HasLimitsOfSize.{w, w} D] [HasColimitsOfSize.{w, w} D] (E : C ≌ D) (hD : CombinatorialModelCategory.{u', v', w} D) (hproper : (weakEquivalences D).IsStableUnderCobaseChangeAgainst (cofibrations D)) : ∃ M : ModelCategory C, M.categoryWithCofibrations.cofibrations = (cofibrations D).inverseImage E.functor ∧ M.categoryWithFibrations.fibrations = (fibrations D).inverseImage E.functor ∧ M.categoryWithWeakEquivalences.weakEquivalences = (weakEquivalences D).inverseImage E.functor ∧ @CombinatorialModelCategory.{u, v, w} C _ M ∧ HasLimitsOfSize.{w, w} C ∧ HasColimitsOfSize.{w, w} C ∧ (M.categoryWithWeakEquivalences.weakEquivalences).IsStableUnderCobaseChangeAgainst M.categoryWithCofibrations.cofibrations ∧ (IsLocallyPresentable.{w} C ↔ IsLocallyPresentable.{w} D) ∧ (∀ (X T : C) (hT : IsTerminal T), M.categoryWithFibrations.fibrations (hT.from X) ↔ fibrations D (terminal.from (E.functor.obj X))) ∧ (∀ (X A : C) (hA : IsInitial A), M.categoryWithCofibrations.cofibrations (hA.to X) ↔ cofibrations D (initial.to (E.functor.obj X))) ∧ (∀ I : MorphismProperty D, I.IsSmall.{w} → I.rlp = trivialFibrations D → (I.strictMap E.inverse).IsSmall.{w} ∧ (I.strictMap E.inverse).rlp = M.categoryWithFibrations.fibrations ⊓ M.categoryWithWeakEquivalences.weakEquivalences) ∧ (∀ J : MorphismProperty D, J.IsSmall.{w} → J.rlp = fibrations D → (J.strictMap E.inverse).IsSmall.{w} ∧ (J.strictMap E.inverse).rlp = M.categoryWithFibrations.fibrations)",
   "branch": "newtargets-dag",
-  "by": "Q36",
-  "date": "2026-10-17",
+  "by": "Q11",
+  "date": "2026-10-18",
   "existing": false,
   "note": "The node is stated in five theorem clauses in this module: ordinary model transport, normalized functorial factorizations, twisted simplicial transport including the canonical pushout-product arrow, identity/opposite parameters, and Quillen adjunction transport. IsKanParameterEquivalence and TwistedComparisons spell out this node's parameter and coherence hypotheses. Existing combinatorial, tensor/cotensor, and pushout-product interfaces are reused through three added landed statement dependencies; no dependency module or statement correction."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-d653cfebf",
-  "group": "Q36",
-  "result": "fix",
-  "note": "Lean is correct and compiles cleanly (nt_compile --json on the snapshot module against the side overlay: rc 0, no warnings). Each clause was read against the node and dependency declarations: model transport (classes, left properness, CombinatorialModelCategory, local presentability iff, fibrant/cofibrant detection, G(I)/G(J) generators via strictMap), normalised functorial factorizations, twisted simplicial pushout-product axiom with the whole-arrow iso, refl and SSet.opEquivalence parameters (opEquivalence.functor = opFunctor checked by rfl), Quillen transport. Universes independent; the shared SSet hom universe is forced by SimplicialCategory. Node changed only in lean and stmt_deps; the three added stmt_deps are landed nodes with no cycle back to the item; lean.statement verbatim up to whitespace; no hollow definitions, proofs exactly sorry, docstrings present. Only fault, H11: the 'Second reading by Q36' section admits there was no independent reading. Fix: fixes/lem-coef-model-equivalence-transport.report.md is the original report plus a labelled, independent clause-by-clause second reading; no Lean or record change."
+  "reviewer": "NT-stage2-Codex-430967674",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Independent review recorded in review.md. All statement clauses, six dependencies, coherence conditions, universes, edge cases, and pilot gates checked. Per-file scompile.py reproduction passed without errors or warnings. No fixes required; snapshot and branch unchanged."
  }
 }

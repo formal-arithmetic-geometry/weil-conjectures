@@ -311,5 +311,35 @@
   "group": "Q111",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-3bf373c5e (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery adds no new nodes, and proof_deps equals the union of the step uses. The statement is unchanged and type-checks; it uses the module/pro-étale coefficients of def-weil-pbc-proetale-operations, which matches parent step 6, and does not identify them with the abelian-étale analogue lem-weil-pbc-kinjective-unit-leray. Step 1: 08BJ applies with v=h^* (exact) and u=h_*, so h_*J is K-injective; resolutions come from prop-pur on small sites. Step 2: the termwise adjunct is u=h_*(j)η_I, and t_JΓ_Y(u)=w holds degreewise by naturality of t. Step 3: 0FND (derived.tex l.9517) with s=t=id gives p_id=b_J^{-1} and u_id=c_I, hence Rh_*(f)η=b_J^{-1}Q(u). Step 4: the K-injective map computation with identity resolutions applies to any derived morphism. Step 5: 0D6E (l.4011) with the terminal ringed topos (Set,A). I recomputed κ=RΓ_Y(b_J^{-1})a_H^{-1}Q(t_J^{-1})a_J, so λ=κ^{-1} matches the stated formula, and naturality gives the square for f. Step 6: I redid the substitution and it is correct. Edge cases tested: h=id, j=0, empty X or Y, non-quasi-isomorphism j, A=0. The tag/label mapping is correct for 0FND, 08BJ, 08J6 (l.2305), 07A6 (l.3990) and 0D6E. blueprint from.place matches main-20261015 prop-trf-graph-frobenius-operator, Step 1. No duplicate found in the DAG. No SGA source is used. I accept all seven declared tool_uses as generic homological-algebra tools outside sk-d-weil's cited units (sk-d-corr/operator/setup/six). No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-83b7a5d93",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Canonical pro-etale interfaces and statement match the node; helpers are non-hollow, universes and edge cases checked, and scompile.py passed with only the permitted theorem sorry."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleUnitLerayChainFormula",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_unit_leray_chain_formula",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleUnitLeraySections",
+   "AlgebraicGeometry.Scheme.proEtaleUnitLeraySections_additive",
+   "AlgebraicGeometry.Scheme.proEtaleUnitLerayDirectImageIso",
+   "AlgebraicGeometry.Scheme.proEtaleUnitLerayPushforward_preservesKInjective",
+   "AlgebraicGeometry.Scheme.proEtaleUnitLerayFixedTerminalIso",
+   "AlgebraicGeometry.Scheme.proEtaleUnitLerayTerminalIso",
+   "AlgebraicGeometry.Scheme.proEtaleUnitLerayIso",
+   "AlgebraicGeometry.Scheme.proEtaleUnitLeraySectionUnit",
+   "AlgebraicGeometry.Scheme.proEtale_unit_leray_chain_formula"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleUnitLerayChainFormula.lean",
+  "statement": "theorem proEtale_unit_leray_chain_formula {X Y : Scheme.{u}} (h : X ⟶ Y) (I : CochainComplex (proEtaleRingModules Y (proEtaleConstantRing Y A)) ℤ) (J : CochainComplex (proEtaleRingModules X (proEtaleConstantRing X A)) ℤ) [I.IsKInjective] [J.IsKInjective] (j : ((proEtaleConstantRingPullback A h).mapHomologicalComplex (.up ℤ)).obj I ⟶ J) : ((proEtaleUnitLeraySections A Y).rightDerivedFunctorObjQIso I).hom ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (proEtaleUnitLeraySectionUnit A h) (.up ℤ)).app I ≫ ((proEtaleUnitLeraySections A X).mapHomologicalComplex (.up ℤ)).map j) ≫ ((proEtaleUnitLeraySections A X).rightDerivedFunctorObjQIso J).inv = (proEtaleUnitLeraySections A Y).rightDerivedFunctor.map ((proEtaleConstantRingAdjunction A h).mapDerivedCategoryRightDerivedAdjunction.unit.app (DerivedCategory.Q.obj I)) ≫ (proEtaleUnitLerayIso A h).hom.app ((proEtaleConstantRingDerivedPullback A h).obj (DerivedCategory.Q.obj I)) ≫ (proEtaleUnitLeraySections A X).rightDerivedFunctor.map ((proEtaleConstantRingPullback A h).mapDerivedCategoryFactors.hom.app I ≫ DerivedCategory.Q.map j)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of return L at immutable head 3d3dc164808d: both ordinary and derived units now use proEtaleConstantRingAdjunction, j and c_I use proEtaleConstantRingPullback, and Lh^* is proEtaleConstantRingDerivedPullback. Deleted the private direct image and adjunction. The terminal iso for proEtaleConstantRingPushforward is constructed from adjunction cancellation of the coefficient map, the existing section-normalized realization comparison and actual terminal base change. Leray is rightDerivedFunctorCompIso' of that iso. No statement correction or dependency repair."
  }
 }
