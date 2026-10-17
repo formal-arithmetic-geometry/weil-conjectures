@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Invertible
 
 /-!
 # The derived Poincaré pairing at the integral stage and its reductions
@@ -65,8 +66,10 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
 theorem isDualizable_reductionModIdeal {X : Scheme.{u}} {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
     (n : ℕ) {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : IsDualizable K) :
-    IsDualizable ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ n)).obj K) :=
-  hK.tensorObj (isDualizable_constantSingle_quotient_span_pow hϖ n X)
+    IsDualizable ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ n)).obj K) := by
+  rw [reductionModIdeal, Functor.flip_obj_obj]
+  exact DerivedCategory.isDualizable_derivedTensor hK
+    (isDualizable_constantSingle_quotient_span_pow hϖ n X)
 
 variable {k : Type u} [Field k] [IsSepClosed k] {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
   [HasCompactification a] [(R(a)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {d : ℕ}
