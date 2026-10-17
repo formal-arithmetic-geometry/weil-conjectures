@@ -77,17 +77,16 @@ is used. All witnesses occur only in this theorem's existential conclusion. -/
 theorem GaloisCover.stalk_normalization_trait_section_localized_root_chart {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
-    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c]
     (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S)
     (G : Type (u + 1)) [Group G] [Finite G]
     (hG : IsUnit (Nat.card G : Γ(S, ⊤)))
     {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)
     (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)
-    (sη : Spec S.functionField ⟶ Cη) (hsq : sη ≫ q = 𝟙 _)
+    (sη : Spec S.functionField ⟶ Cη)
     (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ)
     (Z : GaloisCover G Cη)
-    (U : S.Opens) (hηU : genericPoint S ∈ U)
+    (U : S.Opens)
     (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)
     (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j)
     (hψ : IsPullback ψ Z.π PA.obj.hom jU)
@@ -140,7 +139,7 @@ theorem GaloisCover.stalk_normalization_trait_section_localized_root_chart {S C 
   intro hn x hx
   have hchart := GaloisCover.stalk_normalization_trait_divisor_charts
       (S := S) (C := C) (Cη := Cη)
-      hS c σ hσ G hG q j hCη Z U hηU jU PA ψ hjU hψ
+      c σ hσ G hG q j hCη Z U jU PA ψ hjU hψ
       s hs hmin hdvr
   dsimp only at hchart
   have hchartn := hchart hn
@@ -154,10 +153,16 @@ theorem GaloisCover.stalk_normalization_trait_section_localized_root_chart {S C 
     (ρ ϖ₀) hf m e he α hα
   dsimp only at hlocal
   obtain ⟨k, R₀, hR₀, f₀, hf₀, P, hP, β, hβ, hflat, hJ⟩ := hlocal
-  have hgeneric := GaloisCover.trait_divisor_chart_section_generic_factor
-    hS c σ hσ G hG q j hCη sη hsq hsj Z U hηU jU PA ψ hjU hψ
-    s hs hmin hdvr hn x hx R φ y ρ ϖ₀ hφ hy hϖ₀ hρ m e he α hα k
-  exact ⟨R₀, hR₀, f₀, e k, he k, hf₀, P, hP, β, hβ, hflat, hJ, hgeneric⟩
+  letI : IsDiscreteValuationRing (S.presheaf.stalk s) := hdvr
+  obtain ⟨A, hAd, hAdvr, δ, -, -, hAmax, -, -, ε, -, g, hg, hgπ⟩ :=
+    GaloisCover.trait_divisor_chart_section_generic_factor (G := G) c σ hσ j sη hsj Z U jU PA ψ
+      hjU hψ s x hx R φ y ρ ϖ₀ hφ hy hϖ₀ hρ m e α hα k
+  have hϖ : algebraMap A (FractionRing A) (δ ϖ₀) ≠ 0 := by
+    refine (map_ne_zero_iff _ (IsFractionRing.injective A (FractionRing A))).mpr fun h0 ↦ ?_
+    exact IsDiscreteValuationRing.not_a_field' (R := A) (by rw [hAmax, h0, Ideal.span_zero])
+  exact ⟨R₀, hR₀, f₀, e k, he k, hf₀, P, hP, β, hβ, hflat, hJ, A, hAd, hAdvr, FractionRing A,
+    inferInstance, inferInstance, inferInstance, δ ϖ₀, Units.mk0 _ hϖ,
+    Spec.map (CommRingCat.ofHom ε), hAmax, rfl, g, hg, hgπ⟩
 
 
 end AlgebraicGeometry.Scheme

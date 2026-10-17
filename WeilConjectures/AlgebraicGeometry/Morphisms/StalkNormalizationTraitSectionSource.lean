@@ -93,7 +93,7 @@ theorem GaloisCover.stalk_normalization_trait_section_source {S C : Scheme.{u}}
     (hG : IsUnit (Nat.card G : Γ(S, ⊤)))
     {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)
     (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)
-    (sη : Spec S.functionField ⟶ Cη) (hsq : sη ≫ q = 𝟙 _)
+    (sη : Spec S.functionField ⟶ Cη)
     (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ)
     (Z : GaloisCover G Cη) (hZ : ∃ z : Spec S.functionField ⟶ Z.P, z ≫ Z.π = sη)
     (U : S.Opens) (hηU : genericPoint S ∈ U)
@@ -127,9 +127,9 @@ theorem GaloisCover.stalk_normalization_trait_section_source {S C : Scheme.{u}}
     (pullback.fst c (S.fromSpecStalk s))
   let : IsFinite n := hn
   let : Flat n := GaloisCover.stalk_normalization_trait_flat
-    hS c G hG q j hCη Z U hηU jU PA ψ hjU hψ s hs hmin hdvr hn
+    c G hG q j hCη Z U jU PA ψ hjU hψ s hs hmin hdvr hn
   obtain ⟨V, hxV, hV⟩ := GaloisCover.stalk_normalization_trait_section_unramified
-    hS c σ hσ G hG q j hCη sη hsq hsj Z hZ U hηU jU PA ψ hjU hψ
+    c σ hσ G hG q j hCη sη hsj Z hZ U jU PA ψ hjU hψ
     s hs hmin hdvr hn x hx
   let : FormallyUnramified (V.ι ≫ n) := hV
   refine ⟨V, hxV, ?_⟩

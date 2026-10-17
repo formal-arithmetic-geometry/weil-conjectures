@@ -62,17 +62,16 @@ uniformizer as its coordinate. -/
 theorem GaloisCover.stalk_normalization_trait_section_cyclic_data {S C : Scheme.{u}}
     [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
-    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c]
     (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S)
     (G : Type (u + 1)) [Group G] [Finite G]
     (hG : IsUnit (Nat.card G : Γ(S, ⊤)))
     {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)
     (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)
-    (sη : Spec S.functionField ⟶ Cη) (hsq : sη ≫ q = 𝟙 _)
+    (sη : Spec S.functionField ⟶ Cη)
     (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ)
     (Z : GaloisCover G Cη) (hZ : ∃ z : Spec S.functionField ⟶ Z.P, z ≫ Z.π = sη)
-    (U : S.Opens) (hηU : genericPoint S ∈ U)
+    (U : S.Opens)
     (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)
     (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j)
     (hψ : IsPullback ψ Z.π PA.obj.hom jU)
@@ -110,7 +109,7 @@ theorem GaloisCover.stalk_normalization_trait_section_cyclic_data {S C : Scheme.
   intro hn x hx
   have hchart := GaloisCover.stalk_normalization_trait_section_chart_generic_factor
     (S := S) (C := C) (Cη := Cη)
-    hS c σ hσ G hG q j hCη sη hsq hsj Z U hηU jU PA ψ hjU hψ s hs hmin hdvr
+    c σ hσ G hG q j hCη sη hsj Z U jU PA ψ hjU hψ s hs hmin hdvr
   have hc := hchart hn x hx
   obtain ⟨D, hD, β, hβlocal, hβflat, t, e, K, hK, ord, π, b,
     he, hgen, hpow, hπ, g, hg, hw⟩ := hc
