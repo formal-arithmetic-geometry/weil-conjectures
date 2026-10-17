@@ -25,16 +25,14 @@ the cases of tensor products and exterior powers are `Representation.HasGradedPi
 `Representation.CompositionSeries.hasGradedPieces_tprod` and
 `Representation.CompositionSeries.hasGradedPieces_exteriorPower`.
 
-## Main definitions
-
-- `Subrepresentation.dualAnnihilator`: the annihilator `U^⊥` of a subrepresentation, a
-  subrepresentation of the contragredient.
-- `Subrepresentation.subquotientDualEquiv`: the equivalence `U^⊥ / S^⊥ ≅ (S / U)^∨`.
+The annihilator `Subrepresentation.dualAnnihilator` and the equivalence
+`Subrepresentation.subquotientDualEquiv : U^⊥ / S^⊥ ≅ (S / U)^∨` are in
+`WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation`, and
+`Representation.IsIrreducible.dual` is in
+`WeilConjectures.Mathlib.RepresentationTheory.Irreducible`.
 
 ## Main results
 
-- `Representation.IsIrreducible.dual`: the contragredient of a finite-dimensional irreducible
-  representation is irreducible.
 - `Representation.HasGradedPieces.dual`: the dual filtration of the contragredient has as graded
   pieces the contragredients of the graded pieces.
 - `Representation.CompositionSeries.exists_equiv_dual`: the composition factors of `ρ^∨` are the
@@ -45,130 +43,7 @@ the cases of tensor products and exterior powers are `Representation.HasGradedPi
 
 @[expose] public section
 
-open Module
-
 namespace Representation
-
-variable {k : Type*} [Field k] {W : Type*} [Group W] {V V' : Type*} [AddCommGroup V] [Module k V]
-  [AddCommGroup V'] [Module k V'] {ρ : Representation k W V} {σ : Representation k W V'}
-
-/-- Equivalent representations have equivalent contragredients. -/
-noncomputable def Equiv.dualCongr (e : ρ.Equiv σ) : ρ.dual.Equiv σ.dual :=
-  .mk e.toLinearEquiv.symm.dualMap fun w ↦ by
-    refine LinearMap.ext fun f ↦ LinearMap.ext fun x ↦ ?_
-    simp only [LinearEquiv.coe_coe, LinearEquiv.dualMap_apply, dual_apply, Dual.transpose_apply,
-      LinearMap.comp_apply]
-    congr 1
-    exact (e.symm.apply_apply w⁻¹ x).symm
-
-end Representation
-
-namespace Subrepresentation
-
-variable {k : Type*} [Field k] {W : Type*} [Group W] {V : Type*} [AddCommGroup V] [Module k V]
-  {ρ : Representation k W V}
-
-/-- The *annihilator* `U^⊥` of a subrepresentation `U`: the linear forms vanishing on `U`, a
-subrepresentation of the contragredient representation. -/
-def dualAnnihilator (U : Subrepresentation ρ) : Subrepresentation ρ.dual where
-  toSubmodule := U.toSubmodule.dualAnnihilator
-  apply_mem_toSubmodule w f hf := by
-    rw [Submodule.mem_dualAnnihilator] at hf ⊢
-    intro x hx
-    rw [Representation.dual_apply, Dual.transpose_apply, LinearMap.comp_apply]
-    exact hf _ (U.apply_mem_toSubmodule w⁻¹ hx)
-
-theorem mem_dualAnnihilator {U : Subrepresentation ρ} {f : Dual k V} :
-    f ∈ U.dualAnnihilator ↔ ∀ x ∈ U, f x = 0 :=
-  Submodule.mem_dualAnnihilator f
-
-theorem dualAnnihilator_antitone : Antitone (dualAnnihilator : Subrepresentation ρ → _) :=
-  fun _ _ h ↦ Submodule.dualAnnihilator_anti (toSubmodule_le_toSubmodule.2 h)
-
-@[simp]
-theorem dualAnnihilator_bot : (⊥ : Subrepresentation ρ).dualAnnihilator = ⊤ :=
-  toSubmodule_injective Submodule.dualAnnihilator_bot
-
-@[simp]
-theorem dualAnnihilator_top : (⊤ : Subrepresentation ρ).dualAnnihilator = ⊥ :=
-  toSubmodule_injective Submodule.dualAnnihilator_top
-
-/-- For `U ≤ S`, a linear form on `V` vanishing on `U` induces a linear form on the subquotient
-`S / U`. -/
-noncomputable def dualAnnihilatorToDualSubquotient (U S : Subrepresentation ρ) :
-    U.dualAnnihilator.toSubmodule →ₗ[k]
-      Dual k (S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype) where
-  toFun f := Submodule.liftQ _ ((f : Dual k V) ∘ₗ S.toSubmodule.subtype) fun x hx ↦
-    mem_dualAnnihilator.1 f.2 x hx
-  map_add' _ _ := Submodule.linearMap_qext _ rfl
-  map_smul' _ _ := Submodule.linearMap_qext _ rfl
-
-@[simp]
-theorem dualAnnihilatorToDualSubquotient_apply_mk (U S : Subrepresentation ρ)
-    (f : U.dualAnnihilator.toSubmodule) (x : S.toSubmodule) :
-    dualAnnihilatorToDualSubquotient U S f (Submodule.Quotient.mk x) = (f : Dual k V) x :=
-  rfl
-
-theorem ker_dualAnnihilatorToDualSubquotient (U S : Subrepresentation ρ) :
-    LinearMap.ker (dualAnnihilatorToDualSubquotient U S) =
-      S.dualAnnihilator.toSubmodule.comap U.dualAnnihilator.toSubmodule.subtype := by
-  ext f
-  simp only [LinearMap.mem_ker, Submodule.mem_comap, Submodule.subtype_apply]
-  refine ⟨fun h ↦ mem_dualAnnihilator.2 fun x hx ↦ ?_, fun h ↦ Submodule.linearMap_qext _ ?_⟩
-  · simpa using congr($h (Submodule.Quotient.mk ⟨x, hx⟩))
-  · exact LinearMap.ext fun x ↦ mem_dualAnnihilator.1 h x x.2
-
-theorem dualAnnihilatorToDualSubquotient_surjective {U S : Subrepresentation ρ} (h : U ≤ S) :
-    Function.Surjective (dualAnnihilatorToDualSubquotient U S) := by
-  intro φ
-  obtain ⟨g, hg⟩ := LinearMap.exists_extend (φ ∘ₗ Submodule.mkQ _ : S.toSubmodule →ₗ[k] k)
-  have hgU : g ∈ U.dualAnnihilator := mem_dualAnnihilator.2 fun x hx ↦ by
-    have := congr($hg ⟨x, h hx⟩)
-    simp only [LinearMap.comp_apply, Submodule.subtype_apply, Submodule.mkQ_apply] at this
-    rw [this]
-    exact (congrArg φ ((Submodule.Quotient.mk_eq_zero _).2 hx)).trans (map_zero φ)
-  exact ⟨⟨g, hgU⟩, Submodule.linearMap_qext _ hg⟩
-
-/-- **The contragredient of a subquotient.** For subrepresentations `U ≤ S`, the subquotient
-`U^⊥ / S^⊥` of the contragredient representation is the contragredient of the subquotient `S / U`.
-(blueprint: part L3 of `sk-r-linear-library`) -/
-noncomputable def subquotientDualEquiv {U S : Subrepresentation ρ} (h : U ≤ S) :
-    (U.dualAnnihilator.subquotient S.dualAnnihilator).Equiv (S.subquotient U).dual :=
-  .mk ((Submodule.quotEquivOfEq _ _ (ker_dualAnnihilatorToDualSubquotient U S).symm).trans
-    ((dualAnnihilatorToDualSubquotient U S).quotKerEquivOfSurjective
-      (dualAnnihilatorToDualSubquotient_surjective h))) fun w ↦ by
-    refine Submodule.linearMap_qext _ (LinearMap.ext fun f ↦ Submodule.linearMap_qext _
-      (LinearMap.ext fun x ↦ ?_))
-    rfl
-
-end Subrepresentation
-
-namespace Representation
-
-section Irreducible
-
-variable {k : Type*} [Field k] {W : Type*} [Group W] {V : Type*} [AddCommGroup V] [Module k V]
-  {ρ : Representation k W V}
-
-/-- The contragredient of a finite-dimensional irreducible representation is irreducible: the
-annihilator in `V` of an invariant subspace of `V^∨` is invariant, hence `0` or `V`.
-(blueprint: part L3 of `sk-r-linear-library`) -/
-theorem IsIrreducible.dual [FiniteDimensional k V] (h : ρ.IsIrreducible) :
-    ρ.dual.IsIrreducible := by
-  obtain ⟨hV, hU⟩ := isIrreducible_iff.1 h
-  refine isIrreducible_iff.2 ⟨(Module.nontrivial_dual_iff k).2 hV, fun T hT ↦ ?_⟩
-  have hC : ∀ g, ∀ v ∈ T.dualCoannihilator, ρ g v ∈ T.dualCoannihilator := fun g v hv ↦ by
-    rw [Submodule.mem_dualCoannihilator] at hv ⊢
-    intro f hf
-    have := hv _ (hT g⁻¹ f hf)
-    simp only [dual_apply, inv_inv] at this
-    exact this
-  rw [← Subspace.dualCoannihilator_dualAnnihilator_eq (W := T)]
-  rcases hU _ hC with h | h <;> rw [h]
-  · exact Or.inr Submodule.dualAnnihilator_bot
-  · exact Or.inl Submodule.dualAnnihilator_top
-
-end Irreducible
 
 namespace HasGradedPieces
 
@@ -221,12 +96,6 @@ namespace ConstituentsLE
 
 variable {k : Type*} [Field k] {W : Type*} [Group W] {V V' : Type*} [AddCommGroup V] [Module k V]
   [AddCommGroup V'] [Module k V'] {ρ : Representation k W V} {σ : Representation k W V'}
-
-/-- The constituents of a subquotient of `σ` are constituents of `σ`. -/
-theorem subquotient (S U : Subrepresentation σ) : ConstituentsLE (S.subquotient U) σ :=
-  ((of_equiv (Subrepresentation.quotientComapSubtypeEquiv U S).symm).trans
-    (of_surjective _ (Subrepresentation.mkQ_surjective _))).trans
-    (of_injective S.subtype S.subtype_injective)
 
 /-- **Constituents of contragredients.** If every constituent of the finite-dimensional
 representation `ρ` is a constituent of `σ`, then every constituent of the contragredient `ρ^∨` is
