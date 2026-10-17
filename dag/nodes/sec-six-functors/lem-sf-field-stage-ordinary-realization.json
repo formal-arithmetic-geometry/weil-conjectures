@@ -1,0 +1,102 @@
+{
+ "id": "lem-sf-field-stage-ordinary-realization",
+ "kind": "statement",
+ "title": "Bounded ordinary constant-field realization of field-stage complexes",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$ as in [def-weil-algebraically-closed-coefficients], and a scheme $Y$. Use a small representative of $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], constant ring sheaves $R_Y$ [def-weil-pbc-constant-sheaf], and their ordinary derived categories. For each finite coefficient field $E\\subset\\Qlb$, let $R_E=\\mathcal O_E$, with uniformizer $\\varpi_E$, as in [def-weil-l-adic-coefficient-extension], and put $B_E=\\widehat{\\mathcal O}_{E,Y}$ [def-weil-completed-integral-coefficients]. The compatible maps from the constant sheaf $(R_E)_Y$ to its constant quotient sheaves give a ring-sheaf map $u_E:(R_E)_Y\\to B_E$. Let $U_E:D(\\operatorname{Mod}(B_E))\\to D(Y_{\\mathrm{proet}},R_E)$ be termwise restriction of scalars along $u_E$ [def-pc-sheaf-restrict-scalars].\n\nThere are functors\n$$J_E:D^b_c(Y,E)\\longrightarrow D(Y_{\\mathrm{proet}},E)$$\nfrom the raw scalar localizations [def-weil-rationalization-karoubi], specified on the integral objects $C\\in D^b_c(Y,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed] by\n$$J_E(C)=U_E(C)\\otimes^L_{(R_E)_Y}E_Y,$$\nusing ordinary derived tensor [def-weil-derived-tensor], and on a scalar-localized morphism $f\\otimes a$, $a\\in E$, by $J_E(f\\otimes a)=a\\,J_E(f)$. These formulas give well-defined $E$-linear functors, and every $J_E(C)$ is cohomologically bounded [def-weil-derived-cohomology-sheaves].\n\nFor each inclusion $E\\subset L$ of finite coefficient fields there is a natural isomorphism\n$$J_L(C\\otimes_E L)\\cong J_E(C)\\otimes^L_{E_Y}L_Y,$$\nwhere $C\\otimes_E L$ is the transition functor of [def-weil-rationalization-karoubi]. The isomorphisms are compatible with identity inclusions and with composition for $E\\subset L\\subset M$. Consequently the formulas\n$$J_{\\Qlb}(E,C)=J_E(C)\\otimes^L_{E_Y}(\\Qlb)_Y$$\nand, for a morphism represented over a common finite field $L$, its image under $J_L$ followed by scalar extension to $(\\Qlb)_Y$, give a well-defined $\\Qlb$-linear functor\n$$J_{\\Qlb}:D^b_c(Y,\\Qlb)\\longrightarrow D(Y_{\\mathrm{proet}},\\Qlb)$$\nfrom the common-stage category [def-weil-algebraically-closed-coefficients]. Its values are cohomologically bounded. All coefficient sheaves in the targets of $J_E$ and $J_{\\Qlb}$ are the discrete constant sheaves; no assertion that these target objects have constructible cohomology as constant-coefficient sheaves is made.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C2 (lemma-describe-constructible-complexes), assertion (1) and its proof, for the boundedness ingredient. The realization and finite-field compatibility are a comparison obligation extracted from literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-field-tor-amplitude.proof.md, first two sentences; compare Bhatt--Scholze, Proposition 6.8.14(1),(2), pp. 61–62, after restriction to constant coefficient sheaves. This precise functor statement is an agent formulation, not a verbatim assertion of Tag 09C2.",
+  "external": [
+   {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1),(2), pp. 61–62; rationalization and finite-coefficient-field descent, followed here by restriction to constant coefficients"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-tensor",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rationalization|rationalisation|derived.complete|Constructible.*[Rr]ealiz|[Rr]ealiz.*[Cc]onstructible",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rationalized adic constructible derived category has a bounded ordinary constant field sheaf realization compatible with extension of coefficient fields",
+   "results": "8 hits: instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, CategoryTheory.constantSheaf, LightCondensed.IsDiscrete, instAbelianCondensedMod, CondensedSet.LocallyConstant.functorFullyFaithful, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app', Condensed.discreteUnderlyingAdj, CategoryTheory.Sheaf.isConstant_iff_mem_essImage",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, DerivedCategory",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar localization of bounded constructible derived complete integral sheaves admits a bounded realization in the derived category of sheaves over the constant fraction field, compatible with finite coefficient extensions",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.isFinitePresentation, LightCondensed.instIsGrothendieckAbelianLightCondMod",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Flat.*homology|homology.*Flat|PreservesHomology|IsStrictlyGE.*IsStrictlyLE",
+   "results": "25 hits: Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverting the uniformizer in a derived complete complex with uniformly bounded reductions gives a cohomologically bounded complex of constant field module sheaves",
+   "results": "8 hits: BDeRhamPlus, BDeRham, CochainComplex.cm5b.I, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.cm5b.instIsStrictlyGEI, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-field-tor-amplitude",
+  "date": "2026-10-17",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "lem-weil-field-tor-amplitude",
+   "place": "Proof, second sentence: the bounded constructibility imposed in the rationalized and common-stage categories gives cohomological bounds; make precise the ordinary constant-field realization in which the first sentence computes tensor cohomology.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -26,14 +26,16 @@
  ],
  "proof": [
   {
-   "text": "Check the geometric and coefficient hypotheses first. A field is Noetherian since its only ideals are zero and the unit ideal. By [lem-weil-pbc-finite-type-over-noetherian], $X,Y,S$ are Noetherian, and so is every ambient compactification scheme: its proper structural map is of finite type over its Noetherian target. Properness includes separatedness and finite type [def-weil-proper-morphism]. The separatedness and local finite type of $gf$ follow from [lem-weil-pbc-proper-fp-permanence](e); quasi-compactness follows by taking a finite affine cover of $g^{-1}(W)$ for an affine $W\\subset S$ and then finite affine covers of its inverse images under $f$ [def-weil-finite-type-morphism]. The compactifications in the statement therefore have exactly the type required by [def-amb-etale-compact-support]. A finite ring is a torsion ring: its additive group has finite exponent. In particular, the unbounded, finite-ring assertion of [lem-amb-unbounded-proper-open-interchange] applies; no invertible prime is needed.",
+   "text": "Check the geometric and coefficient hypotheses first. A field is Noetherian since its only ideals are zero and the unit ideal. By [lem-weil-pbc-finite-type-over-noetherian], $X,Y,S$ are Noetherian, and so is every ambient compactification scheme: its proper structural map is of finite type over its Noetherian target. Properness includes separatedness and finite type [def-weil-proper-morphism]. The separatedness and local finite type of $gf$ follow from [lem-weil-pbc-proper-fp-permanence](e); quasi-compactness follows by taking a finite affine cover of $g^{-1}(W)$ for an affine $W\\subset S$ and then finite affine covers of its inverse images under $f$ [def-weil-finite-type-morphism]. The compactifications in the statement therefore have exactly the type required by [def-amb-etale-compact-support]. A finite ring is a torsion ring: its additive group has finite exponent. In particular, the unbounded, finite-ring assertion of [lem-amb-unbounded-proper-open-interchange] applies; no invertible prime is needed. The morphisms $f,g,gf$ are separated of finite type between these Noetherian schemes and have compactifications: $(1_X,f)$ for the proper $f$, and those chosen in the statement for $g,gf$, which exist by [def-asd-compactifiable] since all schemes are of finite type over $k$. Hence every hypothesis of [lem-amb-unbounded-compact-support-comparisons] holds for $f$, $g$, $gf$ and the composable pair $(f,g)$.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "def-weil-proper-morphism",
     "lem-weil-pbc-proper-fp-permanence",
     "def-weil-finite-type-morphism",
     "def-amb-etale-compact-support",
-    "lem-amb-unbounded-proper-open-interchange"
+    "lem-amb-unbounded-proper-open-interchange",
+    "def-asd-compactifiable",
+    "lem-amb-unbounded-compact-support-comparisons"
    ],
    "elementary": false,
    "source": {
@@ -54,15 +56,14 @@
    }
   },
   {
-   "text": "For $u:c_1\\to c_2$ and $v:c_2\\to c_3$, the vertical-pasting and identity assertions of [lem-amb-unbounded-proper-open-interchange], with all left proper maps identities, give $\\gamma_{vu}=(Rv_*\\gamma_u)\\gamma_v$ and $\\gamma_{1}=1$, with the specified direct-image compositors inserted. Whiskering by the proper structural direct image, as in step 2, gives $C_{vu}=C_uC_v$ and $C_1=1$. The cofilteredness statement [lem-cbc-compactifiable-cofiltered] supplies both common refinements and equalizers of parallel arrows. For $d\\xrightarrow{u_1}c_1$, $d\\xrightarrow{u_2}c_2$, set $I_{12}=C_{u_2}^{-1}C_{u_1}:F_{c_1}\\to F_{c_2}$. For two such choices, first dominate their refinement objects and then equalize the resulting two pairs of arrows to $c_1,c_2$. The equation $C_{vu}=C_uC_v$ makes both expressions equal, since the extra invertible factor from the common dominating object cancels. For three compactifications choose a single dominating object and write all three comparisons this way. Direct cancellation gives $I_{23}I_{12}=C_{u_3}^{-1}C_{u_2}C_{u_2}^{-1}C_{u_1}=I_{13}$. Also $I_{11}=1$ and $I_{21}=I_{12}^{-1}$. These equations prove choice independence and the cocycle condition for the actual maps of step 2, and justify the notation $Rh_!$.",
+   "text": "Apply [lem-amb-unbounded-compact-support-comparisons] to $h\\in\\{f,g,gf\\}$. Its proper-refinement comparisons are the maps $Rr_{2,*}j_{2,!}\\to Rr_{1,*}j_{1,!}$ whose proper/open sheaf identification restricts to the identity on $T$; by step 2 these are exactly the maps $C_u$ specified in the item. That statement gives: $C_u$ is a natural isomorphism on all of $D(T_{\\mathrm{et}},A)$, $C_1=1$, $C_{vu}=C_uC_v$, and for $d\\xrightarrow{u_1}c_1$, $d\\xrightarrow{u_2}c_2$ the comparison $I_{12}=C_{u_2}^{-1}C_{u_1}:F_{c_1}\\to F_{c_2}$ through a common refinement does not depend on that refinement and satisfies the cocycle identity $I_{23}I_{12}=I_{13}$. With $c_1=c_2$ and $u_1=u_2$ this gives $I_{11}=1$, and the cocycle gives $I_{21}=I_{12}^{-1}$. This is the coherence asserted in the item and justifies the notation $Rh_!$, the compactification-independent functor of that node.",
    "uses": [
-    "lem-amb-unbounded-proper-open-interchange",
-    "lem-cbc-compactifiable-cofiltered"
+    "lem-amb-unbounded-compact-support-comparisons"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7C, lemma-shriek-proper-and-open-compose; Tag 0F7I, lemma-shriek-well-defined, final two paragraphs"
+    "place": "Tags 0F7I (lemma-shriek-well-defined) and 0F7J (lemma-shriek-composition), as stated for finite rings in the unbounded case by the existing node lem-amb-unbounded-compact-support-comparisons"
    }
   },
   {
@@ -78,32 +79,14 @@
    }
   },
   {
-   "text": "Construct the composition comparison on compatible models. Fix $d=(i:Y\\hookrightarrow\\overline Y,s:\\overline Y\\to S)$ for $g$ and any compactification of $gf$. By [lem-cbc-compactifiable-compatible-tower], choose $e=(a:X\\hookrightarrow\\overline X,p:\\overline X\\to\\overline Y)$ compactifying $if$. Its statement supplies $V=\\overline X\\times_{\\overline Y}Y$, $b:V\\hookrightarrow\\overline X$, $q:V\\to Y$ and $j:X\\hookrightarrow V$ with $pb=iq$, $bj=a$, $qj=f$, and all the required proper/open properties. The square with horizontal maps $b,i$ has the unbounded interchange isomorphism $\\Gamma:i_!Rq_*\\to Rp_*b_!$ of [lem-amb-unbounded-proper-open-interchange]. Whisker it by $Rs_*$ and $j_!$. The canonical direct-image composition of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] and the degreewise open composition of [lem-cbc-extension-zero-composition] give the natural isomorphism\n$$D_{d,e}: (Rs_*i_!)(Rq_*j_!)\\xrightarrow{Rs_*\\Gamma j_!}Rs_*Rp_*b_!j_!\\xrightarrow{\\sim}R(sp)_*a_!.$$\nThese are exactly the candidates of [def-amb-etale-compact-support] for $g,f,gf$. Use step 4 and $I_{(1_X,f),(j,q)}$ to identify the second input candidate with $Rf_*$. Finally use the comparisons of step 3 for $g$ and $gf$. This gives $\\alpha_{g,f}:Rg_!Rf_*\\xrightarrow{\\sim}R(gf)_!$ with precisely the proper/open composition normalization in the statement.",
+   "text": "The same node [lem-amb-unbounded-compact-support-comparisons] gives, for the composable pair $X\\xrightarrow{f}Y\\xrightarrow{g}S$, a natural isomorphism $\\alpha'_{g,f}:Rg_!Rf_!\\xrightarrow{\\sim}R(gf)_!$, independent of compactification choices and compatible with the refinement comparisons. Its stated normalization is the proper/open tower comparison: for compactifications $(i,s)$ of $g$ and $(a,p)$ of $if$, with $V=\\overline X\\times_{\\overline Y}Y$, $b:V\\hookrightarrow\\overline X$, $q:V\\to Y$ and $j:X\\hookrightarrow V$, it is $Rs_*$ of the interchange $Di_!Rq_*\\to Rp_*Db_!$ followed by the direct-image and open-extension composition identifications. This is the compactification composition comparison named in the item. Let $\\nu:Rf_*\\xrightarrow{\\sim}Rf_!$ be the normalization of step 4, given by the comparisons $I$ from the candidate of $(1_X,f)$. Put $\\alpha_{g,f}=\\alpha'_{g,f}\\circ(Rg_!\\nu):Rg_!Rf_*\\xrightarrow{\\sim}R(gf)_!$. It is a composite of natural isomorphisms, so it is natural in the input complex. Changing any compactification changes $\\nu$, $Rg_!$, $R(gf)_!$ and $\\alpha'_{g,f}$ by the comparisons $I$ of step 3, and these comparisons are compatible with $\\alpha'_{g,f}$ by the cited statement. Hence $\\alpha_{g,f}$ is compatible with the proper-refinement identifications and independent of the choices. No boundedness or constructibility condition enters, because the cited statement and step 4 hold on the whole unbounded category.",
    "uses": [
-    "lem-cbc-compactifiable-compatible-tower",
-    "lem-amb-unbounded-proper-open-interchange",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-cbc-extension-zero-composition",
-    "def-amb-etale-compact-support"
+    "lem-amb-unbounded-compact-support-comparisons"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, lemma-shriek-composition, compatible compactifications and first displayed computation"
-   }
-  },
-  {
-   "text": "Verify compatibility with refinement of a whole tower. Any two towers have a common refining tower by [lem-cbc-compactifiable-compatible-tower], so consider a tower indexed by $1$ mapping to one indexed by $2$. The cited statement supplies proper maps $u:\\overline Y_1\\to\\overline Y_2$, $v:\\overline X_1\\to\\overline X_2$, $w:V_1\\to V_2$ with $ui_1=i_2$, $va_1=a_2$, $wj_1=j_2$, $vb_1=b_2w$, $p_2v=up_1$, $q_2w=q_1$, and $s_2u=s_1$. For this calculation abbreviate $I_i=i_{i!}$, $J_i=j_{i!}$, $B_i=b_{i!}$, $P_i=Rp_{i*}$, $L_i=Rq_{i*}$, $M=Ru_*$, $H=Rv_*$ and $H'=Rw_*$. Write $\\gamma_A:J_2\\to H'J_1$, $\\gamma_D:I_2\\to MI_1$, $\\gamma_E:B_2J_2\\to HB_1J_1$, $\\gamma_F:B_2H'\\to HB_1$ for the interchange maps of the four refinement squares, and $\\gamma_B:I_2L_2\\to P_2B_2$, $\\gamma_C:I_1L_1\\to P_1B_1$ for the two model squares. Every square has proper verticals and open horizontals; the refinement squares need not be cartesian. The two pasting laws in [lem-amb-unbounded-proper-open-interchange] say\n$$\\gamma_E=(\\gamma_FJ_1)(B_2\\gamma_A),\\qquad(M\\gamma_C)(\\gamma_DL_1)=(P_2\\gamma_F)(\\gamma_BH').$$\nNaturality of $\\gamma_B$ at $\\gamma_A$ says\n$$(P_2B_2\\gamma_A)(\\gamma_BJ_2)=(\\gamma_BH'J_1)(I_2L_2\\gamma_A).$$\nSubstitute these equalities to obtain\n$$(P_2\\gamma_E)(\\gamma_BJ_2)=(M\\gamma_CJ_1)(\\gamma_DL_1J_1)(I_2L_2\\gamma_A).$$\nComposition is read right to left. Applying $Rs_{2,*}$ and inserting the canonical direct-image compositors of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] and the open compositors of [lem-cbc-extension-zero-composition] identifies this with\n$$C_{gf}D_2=D_1(C_gF_{f,1})(F_{g,2}C_f).$$\nHere $F_{f,i}=L_iJ_i$, $F_{g,i}=Rs_{i,*}I_i$, $D_i=D_{d_i,e_i}$, and $C_f,C_g,C_{gf}$ are precisely the comparisons from model $2$ to model $1$ constructed in step 2. Thus the composition map intertwines all three specified refinement comparisons. Compare two towers through their common refining tower and cancel invertible comparisons using the cocycle in step 3. The normalized map of step 5 is independent of all tower and compactification choices. All its factors are natural transformations on unbounded derived categories, so naturality in the input complex is also established; no boundedness or constructibility hypothesis entered the argument.",
-   "uses": [
-    "lem-cbc-compactifiable-compatible-tower",
-    "lem-amb-unbounded-proper-open-interchange",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-cbc-extension-zero-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, lemma-shriek-composition, comparison of two towers and squares A--F; Tags 0F7C and 0F7D, vertical and horizontal proper/open pasting"
+    "place": "Tags 0F7I (lemma-shriek-well-defined) and 0F7J (lemma-shriek-composition), as stated for finite rings in the unbounded case by the existing node lem-amb-unbounded-compact-support-comparisons"
    }
   }
  ],
@@ -114,11 +97,10 @@
   "def-weil-finite-type-morphism",
   "def-amb-etale-compact-support",
   "lem-amb-unbounded-proper-open-interchange",
+  "def-asd-compactifiable",
+  "lem-amb-unbounded-compact-support-comparisons",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-cbc-compactifiable-cofiltered",
-  "def-weil-pbc-extension-by-zero",
-  "lem-cbc-compactifiable-compatible-tower",
-  "lem-cbc-extension-zero-composition"
+  "def-weil-pbc-extension-by-zero"
  ],
  "proof_origin": {
   "by": "document",
@@ -240,7 +222,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-delta-proper-pushforward",
   "by": "worker",
@@ -249,11 +231,11 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-sf-unbounded-compact-support-proper-composition",
   "worker": "stage1",
-  "summary": "Split the unbounded proper compact-support composition into six steps following Stacks 0F7H--0F7J. Reused the existing unbounded ordinary etale proper/open calculus and geometric refinement/tower statements; created no duplicate nodes. Verified the precise K-injective map, refinement identity/composition and common-refinement cocycle, proper normalization via the trivial compactification, and tower-refinement compatibility by explicit pasting equations. Statement unchanged; no Lean attachment covers all its clauses.",
-  "blueprint": "Realizes the first paragraph of lem-weil-delta-proper-pushforward: the composition of ambient right adjoints requires the normalized unbounded compact-support composition, and the proper coincidence Rf_!=Rf_*; the containing unit has no proof steps and this is not its key node.",
+  "summary": "Split by specialization of the existing general node lem-amb-unbounded-compact-support-comparisons (finite ring, unbounded ordinary small-etale categories, Noetherian schemes, the same proper/open refinement maps and tower normalization) to proper f, plus the identity-compactification normalization Rf_!=Rf_*. Steps 1-2 check hypotheses and identify the specified K-injective refinement map with the interchange map; step 3 takes coherence from the existing node; step 4 normalizes the proper case; step 5 takes the composition isomorphism from the existing node. (Maintainer-reader FIX of 2026-10-17: replaced the re-proof of the existing node's tower calculation and dropped the unneeded new grid-transport node of the delivery.)",
+  "blueprint": "Realizes the first paragraph of lem-weil-delta-proper-pushforward: composition of ambient right adjoints requires the normalized unbounded compact-support composition and the proper coincidence Rf_!=Rf_*; steps 3 and 5 take this from the existing unbounded comparison node, step 4 supplies Rf_!=Rf_*.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
@@ -272,16 +254,8 @@
     "why": "Generic ordinary unbounded ringed-topos derived composition identifies the proper factors without changing to a pro-etale or bounded-below category."
    },
    {
-    "node": "lem-cbc-compactifiable-cofiltered",
-    "why": "Generic geometric common refinements and equalizers establish the choice-independent comparison cocycle; they replace no biduality step."
-   },
-   {
-    "node": "lem-cbc-compactifiable-compatible-tower",
-    "why": "Generic geometry supplies compatible compactifications and common refining towers, including the intermediate proper refinement w required for composition independence."
-   },
-   {
-    "node": "lem-cbc-extension-zero-composition",
-    "why": "Generic extension-by-zero composition is applied degreewise to join the two open factors of a compatible tower."
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "The general unbounded finite-ring compact-support comparison and composition statement (Stacks 0F7I/0F7J) of which this item is the proper-f specialization; no node of sk-prop-sf-biduality-general states it, and it does not replace a step of that unit's route."
    }
   ]
  },
@@ -292,15 +266,16 @@
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-cbc-compactifiable-cofiltered",
   "lem-cbc-compactifiable-compatible-tower",
-  "lem-cbc-extension-zero-composition"
+  "lem-cbc-extension-zero-composition",
+  "lem-amb-unbounded-compact-support-comparisons"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q16-0e8e96685",
-  "group": "Q16",
+  "reviewer": "NT-cc-Q59-28d848235",
+  "group": "Q59",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-0e8e96685 (reviewer sub-agent of L); spot-checked: Read the full item, all six steps, cited statements, unit/chapter route, and source passages. Verified the unbounded torsion-ring scope, canonical refinement maps, cocycle, proper normalization, and tower compatibility; checked archived master target categories and morphisms. No repairs needed. Seven declared tool uses accepted; detailed checks recorded in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-28d848235 (reviewer sub-agent of L); spot-checked: Read the item (statement and 11 steps), the new node, the unit sk-prop-sf-biduality-general, the ancestor lem-weil-delta-proper-pushforward, every cited statement, and Stacks more-etale.tex 0F7J lines 3158-3345 (squares A-E, gamma_A..gamma_E, the C_2->C_1 square). The delivered mathematics is correct. I checked pk=ir for squares A-F, the horizontal pasting gamma_E=(gamma_F J_1)(B_2 gamma_A), the vertical pasting via the outer square (q_2w=q_1, p_2v=up_1), and the whisker identity with theta=gamma_B, eta=gamma_A, and recomputed the grid equation. All types in the transport equation check (s_2u=s_1, r_2v=r_1); edge cases (identity refinements, empty schemes, non-Cartesian squares) are fine. Two faults. (1) C5/brief section 2: the existing reviewed node lem-amb-unbounded-compact-support-comparisons (sec-smooth-purity, reviewed pass by Q110 on 2026-10-17) already states the general result: finite ring A, unbounded D(T_et,A), Noetherian schemes, refinement comparisons restricting to the identity on X, coherence and cocycle, and alpha_{g,f}:Rg_!Rf_!~R(gf)_! independent of choices, with the same proper/open tower normalization. Its proof steps 3-6 are the same tau_u and A/D/E/F calculation. The item is its proper-f specialization plus Rf_!=Rf_* via (1_X,f), so delivery steps 3 and 6-10 and the new node re-prove that node. (2) B2: step 6 uses H' (=Rw_*) without defining it. FIX: wrote a corrected item under fixes/ with 5 steps: old steps 1, 2 and 4, a new step 3 taking the coherence from the existing node (its comparisons are step 2's C_u, a map fixed by its adjoint since X is open and closed in u^{-1}(X)), and a new step 5 setting alpha=alpha' after Rg_! applied to nu. Statement and stmt_deps unchanged; proof_deps is the union of the step uses; tool_uses accepted: the existing comparisons node, the interchange node, the kappa compositor node and two Mathlib leaves. No cycle (checked over the whole DAG). Batch-5 flag (new node -> lem-amb-unbounded-proper-open-interchange -> ... -> lem-pod-lisse-module-sheaves-as-module-objects): genuinely outside both assumptions. It is compact-support formalism (0F7B) that neither nt-assume node gives, and the path reaches the PD chapter only through proper base change, the cd bound and finite monodromy, ending at a general FLC module-object lemma that is no step of PD or the trace formula. The item already cited the interchange in unchanged steps 1-2. The newly cited comparisons node reaches the same general PD-chapter nodes and no trace-formula node, nt-assume node or batch-4 target. The flagged node is dropped. No SGA citation.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-16",

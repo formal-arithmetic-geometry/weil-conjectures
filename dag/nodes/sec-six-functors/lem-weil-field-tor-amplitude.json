@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-weil-field-tor-amplitude",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite Tor amplitude at field coefficients",
- "statement": "Let $F$ be a field, let $Y$ be a scheme, and let $K$ be a bounded\nconstructible complex at a field coefficient stage: an object of the\nrationalized category $D^b_c(Y,E)$ of [def-weil-rationalization-karoubi] with\n$F=E$, or an object of the common-stage category $D^b_c(Y,\\Qlb)$ of\n[def-weil-algebraically-closed-coefficients] with $F=\\Qlb$. Then $K$ has\nfinite Tor amplitude in the sense of [def-weil-finite-tor-amplitude]: there\nare integers $a\\leq b$ such that\n\n$$\n \\mathcal H^r\\bigl(K\\otimes^L_FM\\bigr)=0\n \\qquad(r\\in\\mathbf Z\\setminus[a,b])\n$$\n\nfor every sheaf $M$ of $F$-modules placed in degree zero, the derived tensor\nproduct being that of [def-weil-derived-tensor].",
+ "statement": "Let $Y$ be a scheme and let $F$ and $K$ be at a field coefficient stage: either $F=E$ for a finite extension $E/\\mathbf Q_\\ell$ and $K\\in D^b_c(Y,E)$ in the raw rationalized category [def-weil-rationalization-karoubi], or $F=\\Qlb$ and $K\\in D^b_c(Y,\\Qlb)$ in the common-stage category [def-weil-algebraically-closed-coefficients], with the coefficient datum of those definitions. Then $K\\in D^b_{ctf}(Y,F)$, with this field-stage subcategory defined in [def-weil-finite-tor-amplitude].\n\nFor the ordinary constant-coefficient meaning of the tensor-vanishing assertion, let $K_F=J_F(K)\\in D(Y_{\\mathrm{proet}},F)$ be the explicitly specified realization of [lem-sf-field-stage-ordinary-realization], and let $F_Y$ be the discrete constant ring sheaf [def-weil-pbc-constant-sheaf]. Then $K_F$ has finite Tor amplitude [def-weil-proetale-tor-amplitude]: there are integers $a\\le b$ such that, for every sheaf $M$ of $F_Y$-modules placed in degree zero,\n$$\\mathcal H^r(K_F\\otimes^L_{F_Y}M)=0\\qquad(r\\in\\mathbf Z\\setminus[a,b]).$$\nHere the tensor product is the ordinary derived tensor of [def-weil-derived-tensor] and $\\mathcal H^r$ is the cohomology sheaf of [def-weil-derived-cohomology-sheaves].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-field-tor-amplitude.md",
   "place": "node lem-weil-field-tor-amplitude, order 2060"
@@ -16,34 +16,116 @@
   "def-weil-rationalization-karoubi",
   "def-weil-algebraically-closed-coefficients",
   "def-weil-finite-tor-amplitude",
-  "def-weil-derived-tensor"
+  "lem-sf-field-stage-ordinary-realization",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-derived-tensor",
+  "def-weil-derived-cohomology-sheaves"
  ],
  "proof": [
   {
-   "text": "Over a field $F$ every $F$-module is flat, so a sheaf $M$ of $F$-modules\nplaced in degree zero is K-flat and the derived tensor product of\n[def-weil-derived-tensor] is computed by the ordinary tensor product; hence\n$\\mathcal H^r(K\\otimes^L_FM)\\cong\\mathcal H^r(K)\\otimes_FM$ for every\n$r\\in\\mathbf Z$. The bounded constructibility imposed in\n[def-weil-rationalization-karoubi] and in\n[def-weil-algebraically-closed-coefficients] gives integers $a\\leq b$ with\n$\\mathcal H^r(K)=0$ for $r\\notin[a,b]$; on this interval the vanishing\nrequired by [def-weil-finite-tor-amplitude] holds vacuously in the remaining\ndegrees, and off it both sides vanish. Such a pair $a\\leq b$ is therefore a\nfinite Tor amplitude interval for $K$.",
+   "text": "At field stages [def-weil-finite-tor-amplitude] defines $D^b_{ctf}(Y,E)=D^b_c(Y,E)$ and $D^b_{ctf}(Y,\\Qlb)=D^b_c(Y,\\Qlb)$. Thus the assumed membership of $K$ in the appropriate bounded constructible field-stage category is exactly its membership in $D^b_{ctf}(Y,F)$.",
    "uses": [
-    "def-weil-derived-tensor",
-    "def-weil-rationalization-karoubi",
-    "def-weil-algebraically-closed-coefficients",
     "def-weil-finite-tor-amplitude"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-field-tor-amplitude.proof.md",
+    "place": "Proof, field-flatness computation and boundedness sentence, with the ordinary realization made explicit"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-field-stage-ordinary-realization] to the given field-stage object. It supplies the well-defined ordinary object $K_F=J_F(K)$ and its cohomological boundedness, including when $K$ is represented by a finite-stage pair $(E,C)$ at $F=\\Qlb$. Choose integers $a\\le b$ such that $\\mathcal H^r(K_F)=0$ for $r\\notin[a,b]$. The choice concerns $K_F$ alone and precedes any choice of the test sheaf $M$.",
+   "uses": [
+    "lem-sf-field-stage-ordinary-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-field-tor-amplitude.proof.md",
+    "place": "Proof, field-flatness computation and boundedness sentence, with the ordinary realization made explicit"
+   }
+  },
+  {
+   "text": "Fix any sheaf $M$ of $F_Y$-modules in degree zero. Choose a complex representing $K_F$ and a K-flat resolution $P^\\bullet$ of that complex by [lem-pc-kflat-resolution], with the site $Y_{\\mathrm{proet}}$ and ring sheaf $F_Y$. By [def-weil-derived-tensor], $P^\\bullet\\otimes_{F_Y}M$ represents $K_F\\otimes^L_{F_Y}M$. Apply [lem-exc-constant-field-sheaf-tensor-cohomology] with $\\kappa=F$, $C^\\bullet=P^\\bullet$ and $N=M$. Its hypotheses concern an arbitrary small site, an arbitrary field and an arbitrary module sheaf, so it applies on the chosen small pro-etale site without a constructibility or finite-dimensionality hypothesis on $M$. Since $P^\\bullet$ represents $K_F$, it gives\n$$\\mathcal H^r(K_F\\otimes^L_{F_Y}M)\\cong\\mathcal H^r(P^\\bullet)\\otimes_{F_Y}M\\cong\\mathcal H^r(K_F)\\otimes_{F_Y}M.$$\nFor $r\\notin[a,b]$, Step 2 makes the last sheaf zero: every local tensor generator with first component in the zero module is zero. The interval is independent of $M$, so this is Tor amplitude in $[a,b]$ by [def-weil-proetale-tor-amplitude].",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-derived-tensor",
+    "lem-exc-constant-field-sheaf-tensor-cohomology",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-field-tor-amplitude.proof.md",
+    "place": "Proof, field-flatness computation and boundedness sentence, with the ordinary realization made explicit"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-finite-tor-amplitude",
+  "lem-sf-field-stage-ordinary-realization",
+  "lem-pc-kflat-resolution",
   "def-weil-derived-tensor",
-  "def-weil-rationalization-karoubi",
-  "def-weil-algebraically-closed-coefficients",
-  "def-weil-finite-tor-amplitude"
+  "lem-exc-constant-field-sheaf-tensor-cohomology",
+  "def-weil-proetale-tor-amplitude"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-field-tor-amplitude.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-field-tor-amplitude.proof.md",
+  "place": "Proof, with the missing realization and sheaf-level tensor-cohomology comparison isolated as cited statements"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteTorAmplitude|torAmplitude|tensor.*homology|homology.*tensor",
+   "results": "3 hits: Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every bounded complex of sheaves of vector spaces over a field has finite Tor amplitude",
+   "results": "8 hits: HomologicalComplex.instHasLimitsOfShape, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, HomologicalComplex.instHasLimit, HomologicalComplex.instHasFiniteLimits, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, SheafOfModules.Finite.hasFiniteLimits, SheafOfModules.hasLimitsOfSize, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, Module.Flat",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of sheaves of vector spaces over a constant field has finite Tor amplitude because tensoring with any module sheaf commutes with cohomology",
+   "results": "8 hits: CategoryTheory.Sheaf.instIsGrothendieckAbelian, LightCondensed.instIsGrothendieckAbelianLightCondMod, DerivedCategory.IsGE, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsGEObjSingleFunctor, CategoryTheory.Sheaf.H, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Flat.*homology|homology.*Flat|PreservesHomology|IsStrictlyGE.*IsStrictlyLE",
+   "results": "25 hits: Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverting the uniformizer in a derived complete complex with uniformly bounded reductions gives a cohomologically bounded complex of constant field module sheaves",
+   "results": "8 hits: BDeRhamPlus, BDeRham, CochainComplex.cm5b.I, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.cm5b.instIsStrictlyGEI, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -68,5 +150,34 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-rf-shriek-preservation"
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-field-tor-amplitude",
+  "worker": "stage1",
+  "summary": "Made the ill-typed adic-to-ordinary tensor expression precise using an explicitly constructed constant-field realization, whose boundedness and coefficient compatibility are one new unsplit comparison lemma. Reused the existing general constant-field sheaf tensor-cohomology lemma and a K-flat resolution; retained the categorical field-stage finite-Tor assertion without adding hypotheses.",
+  "blueprint": "The original first sentence is realized by Step 3 using the existing constant-field cohomology lemma. The second sentence is Step 2, with its missing ordinary realization isolated in lem-sf-field-stage-ordinary-realization. Step 1 makes explicit the actual field-stage subcategory convention.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General K-flat resolution on a ringed site, needed to compute the ordinary derived tensor; the item unit contains no replacement resolution theorem."
+   },
+   {
+    "node": "lem-exc-constant-field-sheaf-tensor-cohomology",
+    "why": "General arbitrary-small-site constant-field tensor-cohomology comparison, which exactly gives the calculation quoted in the blueprint; no theorem of the item unit gives this sheaf-level result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-exc-constant-field-sheaf-tensor-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-1fb4d75c5",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-1fb4d75c5 (reviewer sub-agent of L); spot-checked: I read the whole item, the new node lem-sf-field-stage-ordinary-realization, all cited statements, the master and main-20261015 blueprint text (they are the same), unit sk-prop-sf-rf-shriek-preservation, Stacks 09C2 (lemma-describe-constructible-complexes) and Bhatt–Scholze Prop. 6.8.14. STATEMENT-DISPUTED is confirmed. The blueprint applies def-weil-derived-tensor, which is over the discrete constant ring A_Y, to objects of the raw localization of D(Mod(hat O_{E,Y})) or of the pair category, so the formula is ill-typed. The repair is not a weakening. It keeps the categorical clause K in D^b_ctf(Y,F), and that is all both citers use (prop-base-linear and lem-fd-inversion use the item only for the finite-Tor domain of the projection formula). It also keeps the ordinary-tensor clause for the explicit realization J_F(K), with no new hypotheses and with both cases E and Qlb. Step 1 is pure substitution of the definition's field-stage equalities (the definition's ℓ-invertible preamble only matters at torsion stages). Step 2 gets boundedness from the new node, with the interval chosen before M. Step 3 is correct: a K-flat resolution, then lem-exc-constant-field-sheaf-tensor-cohomology, whose hypotheses (small site, any field, any module sheaf) hold on Y_proet. I checked that the new node is true: C is bounded because it is derived complete with uniform reduction bounds on the replete topos (the same argument as 09C2(1)); E_Y is flat over (O_E)_Y; the finite-free O_L/O_E comparison holds (cf. lem-weil-finite-free-completed-scalar-comparison); and J_Qlb on the pair category is well defined. I tested the zero object, the torsion object (A_{E,1})_Y, which goes to 0, the unit object, the empty scheme and the identity extension. The new node is statement-only and self-contained, sources are read and honestly marked as agent formulation, it has no SGA citation, and it does not duplicate lem-weil-pbc-condensed-e-realization, lem-sfb-etale-local-monodromy-realization, def-sfb-site-derived-constant-module-functor or the other existing realization nodes. It does not restate a parent clause and is not circular. I accept the tool_uses lem-pc-kflat-resolution and lem-exc-constant-field-sheaf-tensor-cohomology as generic black boxes. No changes were made."
+ }
 }
