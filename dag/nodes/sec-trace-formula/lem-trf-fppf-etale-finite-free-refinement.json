@@ -191,5 +191,26 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-a32496d57 (reviewer sub-agent of L); spot-checked: Step 3 cited the wrong theorem: `lem-weil-pbc-etale-local-finite-multiple-points` (Tag 02LM) does not provide the claimed unique lift. I wrote a corrected DAG JSON under fixes/dag/nodes/sec-trace-formula/lem-trf-fppf-etale-finite-free-refinement.json citing the exact Tag 02LK node, with the proof wording and proof_deps updated. Full review and source checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FppfEtaleFiniteFreeRefinement",
+  "declaration": "AlgebraicGeometry.Scheme.exists_etale_finiteLocallyFree_refinement",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.exists_etale_finiteLocallyFree_refinement"
+  ],
+  "file": "lean/Sheaf/TraceFormula/FppfEtaleFiniteFreeRefinement.lean",
+  "statement": "theorem exists_etale_finiteLocallyFree_refinement (S : Scheme.{u}) {I : Type v} (S_i : I → Scheme.{u}) (f : ∀ i : I, S_i i ⟶ S) (hf : Presieve.ofArrows S_i f ∈ Scheme.fppfPrecoverage S) : ∃ (A : Type v) (S' V : A → Scheme.{u}) (e : ∀ a : A, S' a ⟶ S) (p : ∀ a : A, V a ⟶ S' a) (i : A → I) (r : ∀ a : A, V a ⟶ S_i (i a)), (∀ a : A, Etale (e a)) ∧ (∀ a : A, Surjective (p a)) ∧ (∀ a : A, (p a).IsFiniteLocallyFree) ∧ (∀ s : S, ∃ a : A, ∃ x : S' a, e a x = s) ∧ (∀ a : A, (r a) ≫ f (i a) = (p a) ≫ e a)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d07d8a5ab",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Statement, dependencies, source proof, edge cases, docstrings, report sections, and scompile evidence all checked; no corrections required."
  }
 }
