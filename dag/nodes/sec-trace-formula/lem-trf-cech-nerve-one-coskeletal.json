@@ -12,9 +12,96 @@
   "def-weil-pbc-simplicial-object",
   "def-weil-pbc-simplicial-coskeleton"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work with the concrete fibre-product model: for $U\\in\\mathcal C$, $E_q(U)$ is the set of tuples $(x_0,\\ldots,x_q)$ in $F(U)^{q+1}$ with $f_U(x_i)=f_U(x_j)$ for all $i,j$. Restriction along $r:V\\to U$ applies $F(r)$ to every coordinate; naturality of $f$ preserves the equalities. For $\\alpha:[m]\\to[q]$, set $E(\\alpha)(x_0,\\ldots,x_q)=(x_{\\alpha(0)},\\ldots,x_{\\alpha(m)})$. Selecting coordinates respects identity and composition and commutes with restrictions, so this is the simplicial presheaf in the statement, with faces deleting and degeneracies repeating coordinates. Its augmentation $e_q:E_q\\to G$ sends a tuple to the common value $f(x_i)$; coordinate selection preserves this value.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 018I (lemma-cosk-minus-one), fibre-product model from example-fibre-products-simplicial-object"
+   }
+  },
+  {
+   "text": "A $1$-truncated map $h:\\mathrm{sk}_1T\\to\\mathrm{sk}_1E$ has $h_0=g:T_0\\to F$. Commuting with the two faces forces $h_1=(g d_1,g d_0)$, because on $E_1$ the maps $d_1,d_0$ are respectively the first and second coordinate. Such a tuple lies in $F\\times_GF$ exactly when $fgd_0=fgd_1$. Conversely this equality defines that presheaf map $h_1$, and $h_1s_0=(g,g)$ since $d_0s_0=d_1s_0=\\mathrm{id}$; hence it also commutes with the degeneracy. These equations check every operator between $[0]$ and $[1]$: besides identities they are the two vertex inclusions, the unique collapse, and the two constant endomorphisms of $[1]$, which are their composites. This gives the asserted bijection between truncated maps and the displayed set of $g$.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 018I, first diagram of the proof; degeneracy and constant-operator checks expanded"
+   }
+  },
+  {
+   "text": "Now fix $g:T_0\\to F$ with $fgd_0=fgd_1$. For $0\\leq i\\leq q$ let $v_i^q=T([0]\\to[q],0\\mapsto i):T_q\\to T_0$. If $i<j$, the map $\\beta_{ij}:[1]\\to[q]$ with endpoints $i,j$ gives $v_i^q=d_1T(\\beta_{ij})$ and $v_j^q=d_0T(\\beta_{ij})$. Composing the assumed equality with $T(\\beta_{ij})$ gives $fgv_i^q=fgv_j^q$. Thus define $H_q:T_q\\to E_q$ by $H_q(t)=(gv_0^q(t),\\ldots,gv_q^q(t))$; its coordinates have equal image under $f$. For $q=0$ the formula is simply $H_0=g$, with no pairwise condition to check. Each $gv_i^q$ is a presheaf map, so the tuple formula commutes with restrictions along every $V\\to U$ and defines a presheaf map $H_q$.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 018I, construction of g_{n,i} and the edge diagram"
+   }
+  },
+  {
+   "text": "For any order-preserving $\\alpha:[m]\\to[q]$ and any $0\\leq i\\leq m$, functoriality gives $v_i^mT(\\alpha)=v_{\\alpha(i)}^q$, since $\\alpha\\circ(0\\mapsto i)=(0\\mapsto\\alpha(i))$. The $i$th coordinate of $H_mT(\\alpha)$ is therefore $gv_{\\alpha(i)}^q$, which is also the $i$th coordinate of $E(\\alpha)H_q$. Equality of all coordinates gives $H_mT(\\alpha)=E(\\alpha)H_q$. Consequently $H$ is a simplicial map; this verifies both faces and degeneracies, including non-injective $\\alpha$, rather than leaving simplicial compatibility implicit.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 018I, the sentence leaving verification of the simplicial morphism to the reader, written out"
+   }
+  },
+  {
+   "text": "If $H':T\\to E$ is any simplicial map with $H'_0=g$, naturality for the vertex inclusion $[0]\\to[q]$ says $\\operatorname{pr}_iH'_q=gv_i^q$. Equality of tuples forces $H'_q=H_q$ in every degree. Conversely any simplicial map gives the edge equality by its degree-one component, as in Step 2. Thus $H\\mapsto H_0$ is a bijection from full simplicial maps to exactly the same set of $g$ as for truncated maps. The construction in Steps 3--4 restricts in degree one to $(gd_1,gd_0)$, so these two bijections identify the restriction map itself with the identity on that set. This proves precisely the restriction bijection in the statement.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 018I, uniqueness and both displayed morphism bijections"
+   }
+  },
+  {
+   "text": "The restriction bijection says directly that $(E,\\mathrm{id}_{\\mathrm{sk}_1E})$ satisfies the defining universal property of a $1$-coskeleton of $\\mathrm{sk}_1E$, so the required coskeleton exists. For any chosen representative $(K,\\varepsilon)$ of that coskeleton, let $\\eta:E\\to K$ correspond to $\\mathrm{id}_{\\mathrm{sk}_1E}$, so $\\varepsilon\\,\\mathrm{sk}_1\\eta=\\mathrm{id}$. By Step 5 with $T=K$, there is a unique $b:K\\to E$ restricting to $\\varepsilon$. Then $\\mathrm{sk}_1(b\\eta)=\\varepsilon\\,\\mathrm{sk}_1\\eta=\\mathrm{id}$, so injectivity in Step 5 gives $b\\eta=\\mathrm{id}_E$. Also $\\varepsilon\\,\\mathrm{sk}_1(\\eta b)=\\mathrm{sk}_1b=\\varepsilon$, so injectivity in the defining coskeleton bijection with source $K$ gives $\\eta b=\\mathrm{id}_K$. Hence the canonical map $\\eta$ is an isomorphism, without invoking an uncited representability theorem.",
+   "uses": [
+    "def-weil-pbc-simplicial-coskeleton"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 018I, last assertion, expanded using the universal property of coskeleton (section-coskeleton, equation-cosk)"
+   }
+  },
+  {
+   "text": "Finally let $a:T\\to G$ be the given augmentation, meaning a simplicial map to the constant simplicial presheaf $G$, and suppose $fg=a_0$. Its naturality gives $fgd_0=a_0d_0=a_1=a_0d_1=fgd_1$, so Steps 3--5 supply the unique $H$ with $H_0=g$. For every vertex, $a_0v_i^q=a_q$ by the same naturality. Therefore $e_qH_q=fgv_i^q=a_q$ for every $q$, so $H$ commutes with the augmentations. The formula for $H_q$ is exactly the vertex tuple already constructed, proving every clause of the final assertion.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 018I and Tag 018J (remark-augmentation), augmented comparison and vertex formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-simplicial-coskeleton"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 018I (lemma-cosk-minus-one), its explicit vertex-tuple proof; Tag 018J (remark-augmentation). The omitted simplicial-operator verification and the final universal-property argument are expanded."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,10 +151,52 @@
    "results": "{\"t\": \"2026-10-17T20:26:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCoskeletal\\\", \\\"cechNerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
    "verdict": "no match: Cech nerve constructors and the augmented Cech adjunction give the canonical map, but not ordinary 1-coskeletality; the nerve-of-category result is 2-coskeletality."
+  },
+  {
+   "tool": "grep",
+   "query": "cechNerve|IsCoskeletal|cosk",
+   "results": "{\"t\": \"2026-10-17T20:39:50Z\", \"tool\": \"grep\", \"query\": \"cechNerve|IsCoskeletal|cosk\", \"sub\": \"AlgebraicTopology/CechNerve.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"22\", \"23\", \"25\", \"29\", \"56\"], \"digest\": \"7062eafd30fc0a68\"}",
+   "date": "2026-10-18",
+   "verdict": "no exact match: Arrow.cechNerve constructs the nerve, cechNerveEquiv is an augmented-arrow adjunction (CechNerve.lean:153--177), and the category-nerve result in SimplicialSet/Coskeletal.lean is 2-coskeletality. None gives the ordinary 1-coskeletal restriction bijection here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative Cech nerve of a map is 1 coskeletal; morphisms into the nerve correspond to maps in degrees zero and one",
+   "results": "{\"t\": \"2026-10-17T20:39:50Z\", \"tool\": \"leansearch\", \"query\": \"The relative Cech nerve of a map is 1 coskeletal; morphisms into the nerve correspond to maps in degrees zero and one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Arrow.cechConerve\", \"CategoryTheory.Arrow.cechNerve\", \"CategoryTheory.cechNerveTerminalFrom\", \"CategoryTheory.CosimplicialObject.cechConerve\", \"CategoryTheory.CosimplicialObject.cechConerve_obj\", \"CategoryTheory.Arrow.cechConerve_obj\", \"CategoryTheory.SimplicialObject.cechNerve_obj\", \"CategoryTheory.SimplicialObject.cechNerve\"], \"digest\": \"677e3e7350403315\"}",
+   "date": "2026-10-18",
+   "verdict": "no exact match: Arrow.cechNerve constructs the nerve, cechNerveEquiv is an augmented-arrow adjunction (CechNerve.lean:153--177), and the category-nerve result in SimplicialSet/Coskeletal.lean is 2-coskeletality. None gives the ordinary 1-coskeletal restriction bijection here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechNerve\", \"cosk\"",
+   "results": "{\"t\": \"2026-10-17T20:39:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"cechNerve\\\", \\\"cosk\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no exact match: Arrow.cechNerve constructs the nerve, cechNerveEquiv is an augmented-arrow adjunction (CechNerve.lean:153--177), and the category-nerve result in SimplicialSet/Coskeletal.lean is 2-coskeletality. None gives the ordinary 1-coskeletal restriction bijection here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Cech nerve of a map of presheaves is 1-coskeletal: maps into it are determined by degree zero maps equalized after applying the two faces and the base map",
+   "results": "{\"t\": \"2026-10-17T20:39:58Z\", \"tool\": \"leanfinder\", \"query\": \"The Cech nerve of a map of presheaves is 1-coskeletal: maps into it are determined by degree zero maps equalized after applying the two faces and the base map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.cechNerve_map\", \"CategoryTheory.Nerve.instIsCoskeletalNerveOfNatNat\", \"CategoryTheory.SimplicialObject.cechNerve\", \"CategoryTheory.Arrow.cechNerve_map\", \"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\", \"CategoryTheory.SimplicialObject.cechNerveEquiv\", \"CategoryTheory.Arrow.mapCechNerve_app\", \"CategoryTheory.Arrow.cechNerve\"], \"digest\": \"b09e4985cbadf317\"}",
+   "date": "2026-10-18",
+   "verdict": "no exact match: Arrow.cechNerve constructs the nerve, cechNerveEquiv is an augmented-arrow adjunction (CechNerve.lean:153--177), and the category-nerve result in SimplicialSet/Coskeletal.lean is 2-coskeletality. None gives the ordinary 1-coskeletal restriction bijection here."
+  },
+  {
+   "tool": "grep",
+   "query": "isCoskeletal|cosk.*[Cc]ech|[Cc]ech.*cosk|cechNerveEquiv|cechNerveAdjunction",
+   "results": "{\"t\": \"2026-10-17T20:40:04Z\", \"tool\": \"grep\", \"query\": \"isCoskeletal|cosk.*[Cc]ech|[Cc]ech.*cosk|cechNerveEquiv|cechNerveAdjunction\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean\"], \"digest\": \"a9fda01798cf5bcd\"}",
+   "date": "2026-10-18",
+   "verdict": "no exact match: Arrow.cechNerve constructs the nerve, cechNerveEquiv is an augmented-arrow adjunction (CechNerve.lean:153--177), and the category-nerve result in SimplicialSet/Coskeletal.lean is 2-coskeletality. None gives the ordinary 1-coskeletal restriction bijection here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The nerve of an equivalence relation is 1 coskeletal, and a simplicial map to a relative Cech nerve extends uniquely from its zero dimensional component",
+   "results": "{\"t\": \"2026-10-17T20:40:06Z\", \"tool\": \"leanfinder\", \"query\": \"The nerve of an equivalence relation is 1 coskeletal, and a simplicial map to a relative Cech nerve extends uniquely from its zero dimensional component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.instIsCoskeletalNerveOfNatNat\", \"SSet.OneTruncation₂.nerve_hom_ext\", \"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.SimplicialObject.IsCoskeletal\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.toNerve₂.ext\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\"], \"digest\": \"28ac7d487fd63e4d\"}",
+   "date": "2026-10-18",
+   "verdict": "no exact match: Arrow.cechNerve constructs the nerve, cechNerveEquiv is an augmented-arrow adjunction (CechNerve.lean:153--177), and the category-nerve result in SimplicialSet/Coskeletal.lean is 2-coskeletality. None gives the ordinary 1-coskeletal restriction bijection here."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-site-hypercover-free-resolution",
@@ -94,5 +223,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-cech-nerve-one-coskeletal",
+  "worker": "stage1",
+  "summary": "Expanded the explicit Stacks 018I proof into seven elementary steps, checking truncated degeneracies, all simplicial operators, presheaf restriction, uniqueness, the canonical coskeleton isomorphism and augmentation compatibility. Retained the statement and its three definition dependencies. No new nodes: all arguments are coordinate equalities or direct applications of the two cited definitions. Read all cited statements and verified their quoted content; no project attachment or exact Mathlib theorem was found.",
+  "blueprint": "Serves the normal-cone specialization descent input of lem-trf-local-term-locality via the existing ancestor chain: specifically Step 4 of lem-trf-site-hypercover-free-resolution, which uses 1-coskeletality and the vertex-tuple map K^1 to K^0 in the Stacks 01GE argument. Preserves the sk-i-curve-zero route; no unit or chapter changes."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q17-5247a090d",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q17-5247a090d (reviewer sub-agent of L); spot-checked: Reviewed item and all seven steps against Stacks Tags 018I/018J, cited definitions, unit/chapter route, blueprint ancestry, searches, and edge cases. The tuple construction, 1-coskeletal Hom bijection, canonical isomorphism, and augmentation clause are correct; no hidden lemma, duplicate node, route violation, or repair is needed. Wrote review.md."
  }
 }

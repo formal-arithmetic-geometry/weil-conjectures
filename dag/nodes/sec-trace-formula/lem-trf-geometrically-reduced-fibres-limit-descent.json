@@ -15,9 +15,62 @@
   "def-pc-base-change",
   "def-weil-geometric-fibre"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $p_a:S\\to S_a$ and $p_{ia}:S_i\\to S_a$ for the system projections. Define $E_a=\\{s_a\\in S_a\\mid (Y_a)_{\\bar s_a}\\text{ is reduced}\\}$. Apply [lem-trf-geometric-reduced-fibre-locus-constructible] to $q_a:Y_a\\to S_a$. Its quasi-compactness and local finite presentation are part of the assumed finite presentation, and its base is qcqs by hypothesis. Thus $E_a$ is constructible in $S_a$.",
+   "uses": [
+    "lem-trf-geometric-reduced-fibre-locus-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0579, lemma-geometrically-reduced-constructible; Tag 05FG, lemma-Noetherian-approximation-geometrically-reduced, proof defining E."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-geometric-reduced-fibre-locus-base-change] to $q_a$ and $p_a$. Since $Y=Y_a\\times_{S_a}S$ with projection $q$, its reduced-geometric-fibre locus is $p_a^{-1}(E_a)$. The hypothesis says this locus is all of $S$. Hence every $s\\in S$ satisfies $p_a(s)\\in E_a$, so $p_a(S)\\subseteq E_a$. No surjectivity of $p_a$ is asserted or needed.",
+   "uses": [
+    "lem-trf-geometric-reduced-fibre-locus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0576, lemma-base-change-fibres-geometrically-reduced; Tag 05FG, proof showing h(S) is contained in E."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-limit-contained-in-constructible] for the given inverse system $(S_i)$, its limit $S$, the index $a$, and the constructible subset $E_a$. All its hypotheses are present: the stages are qcqs, the transition morphisms are affine, and Step 2 gives the required image containment. It supplies $b\\ge a$ such that $p_{ia}(S_i)\\subseteq E_a$ for every $i\\ge b$. This applies to the original system directly, so no reindexing or preservation-of-limit assertion is needed.",
+   "uses": [
+    "lem-weil-pbc-limit-contained-in-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05F4, lemma-limit-contained-in-constructible, in Situation 086P."
+   }
+  },
+  {
+   "text": "Fix $i\\ge b$. By [lem-trf-geometric-reduced-fibre-locus-base-change] applied to $q_a$ and $p_{ia}$, the reduced-geometric-fibre locus of $q_i$ is $p_{ia}^{-1}(E_a)$. Step 3 says every point of $S_i$ maps into $E_a$, so this inverse image is all of $S_i$. Thus every geometric fibre of $q_i$ is reduced. The same $b$ works for all $i\\ge b$, as required. If the limit, a stage, or any fibre is empty, the set equalities and containments used above still hold; no nonemptiness of these schemes was introduced.",
+   "uses": [
+    "lem-trf-geometric-reduced-fibre-locus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0576, lemma-base-change-fibres-geometrically-reduced, applied at every later stage."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-geometric-reduced-fibre-locus-constructible",
+  "lem-trf-geometric-reduced-fibre-locus-base-change",
+  "lem-weil-pbc-limit-contained-in-constructible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05FG, lemma-Noetherian-approximation-geometrically-reduced, proof after choosing a model: constructible good locus, base-change equality and Limits Tag 05F4. The same argument applies to the given qcqs affine-transition system."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,7 +116,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-normal-approximation-finite-eta-modification",
@@ -92,5 +145,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-geometrically-reduced-fibres-limit-descent",
+  "worker": "stage1",
+  "summary": "Retained the statement, including no flatness hypothesis and empty fibres. Wrote the constructible-locus argument in four steps using the existing 05F4 node and two statement-only inputs (0579 on qcqs bases and 0576). Checked their sources, geometric-fibre conventions, the full DAG and blueprint, and Mathlib search hits. No finished project declaration states the item.",
+  "blueprint": "Serves the inherited lem-trf-local-term-locality proof (1)--(2) nearby-cycle/semistable-alteration ancestry, specifically Temkin Proposition 3.5.2 noetherian reduction and Remark 3.1.1(i) as recorded in blueprint.from.place. This is a generic algebraic-geometric approximation tool; it does not replace the contracting-correspondence argument of the current blueprint.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-contained-in-constructible",
+    "why": "Generic inverse-limit image-containment theorem (Stacks 05F4) used as a black box after proving constructibility and image containment; no node of sk-i-curve-zero supplies this scheme approximation tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-limit-contained-in-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q18-67aa18931",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-67aa18931 (reviewer sub-agent of L); spot-checked: Read all three nodes and cited mathematics in full. Stacks 0579, 0576 and 05F4 support every step, including arbitrary base change and all later stages. Checked geometric-fibre conventions, edge cases, duplicate candidates, unit route and dropped-node closure. No repairs needed; detailed checks and accepted tool use are in review.md."
  }
 }

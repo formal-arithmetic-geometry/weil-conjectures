@@ -11,55 +11,97 @@
   "def-weil-pbc-finite-type-algebra",
   "def-weil-pbc-ring-map-quasi-finite-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose generators $b_1,\\ldots,b_m$ for $B$ as an $A$-algebra and $c_1,\\ldots,c_n$ for $C$ as a $B$-algebra [def-weil-pbc-finite-type-algebra]. If $g:B\\to C$ is the second map, the elements $g(b_1),\\ldots,g(b_m),c_1,\\ldots,c_n$ generate $C$ as an $A$-algebra: substitute polynomial expressions in the $b_i$ for the coefficients of a polynomial in the $c_j$. Thus the composite is of finite type, as in Stacks Tag 00F4(1), used in Tag 00PO.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00PO, proof and Lemma Tag 00F4 (lemma-compose-finite-type), lines 540-594 and 30348-30349"
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak r\\subset C$ and let $\\mathfrak q$ and $\\mathfrak p$ be its successive inverse images in $B$ and $A$. Write $\\varphi:A\\to B$ for the first map. For $F=B\\otimes_A\\kappa(\\mathfrak p)$ and $j:B\\to F$, the point $\\overline{\\mathfrak q}$ is isolated by [def-weil-pbc-ring-map-quasi-finite-at-prime]. Choose a basic open $D(t)=\\{\\overline{\\mathfrak q}\\}$ in $\\operatorname{Spec}F$ [def-weil-affine-spectrum]. By the fibre-ring description in [def-weil-pbc-localization-at-prime], every element of $F$ is $j(b)/j(\\varphi(a))$ with $b\\in B$ and $a\\in A\\setminus\\mathfrak p$: lift it to a fraction in the localization of $B$ at the image of $A\\setminus\\mathfrak p$ and then reduce modulo $\\mathfrak p$. The denominator is a unit, so $D(t)=D(j(b))$. The bijection [lem-weil-pbc-fibre-ring-primes-bijection] and the identity $j(b)\\notin\\mathfrak Q\\iff b\\notin j^{-1}(\\mathfrak Q)$ give $b\\notin\\mathfrak q$, with $\\mathfrak q$ the only prime of $B$ over $\\mathfrak p$ avoiding $b$. Apply the identical argument to $B\\to C$, $\\mathfrak q$, and $\\mathfrak r$ to obtain $c\\notin\\mathfrak r$ such that $\\mathfrak r$ is the only prime of $C$ over $\\mathfrak q$ avoiding $c$. This is the elementary translation between conditions (1) and (3) of Tag 00PK, used in Tag 00PO.",
+   "uses": [
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-ring-primes-bijection",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00PO, proof, lines 30350-30357; Lemma Tag 00PK (lemma-isolated-point-fibre), condition (3), lines 30195-30230; Remark Tag 00E6 (remark-fundamental-diagram), lines 3422-3451, for the localization/quotient description"
+   }
+  },
+  {
+   "text": "Write $b'=g(b)\\in C$, where $g:B\\to C$ is the second map. Both $b'$ and $c$ avoid $\\mathfrak r$, so $b'c\\notin\\mathfrak r$. If a prime $\\mathfrak s\\subset C$ contracts to $\\mathfrak p$ in $A$ and avoids $b'c$, then $g^{-1}(\\mathfrak s)$ lies over $\\mathfrak p$ and avoids $b$, hence equals $\\mathfrak q$ by Step 2. Also $c\\notin\\mathfrak s$, so the other witness from Step 2 forces $\\mathfrak s=\\mathfrak r$. Under [lem-weil-pbc-fibre-ring-primes-bijection] for $A\\to C$, the basic open $D(j(b'c))$ in $\\operatorname{Spec}(C\\otimes_A\\kappa(\\mathfrak p))$ is therefore exactly $\\{\\overline{\\mathfrak r}\\}$ [def-weil-affine-spectrum]. Thus the fibre point is isolated. Step 1 supplies the finite-type hypothesis of [def-weil-pbc-ring-map-quasi-finite-at-prime], proving quasi-finiteness at the arbitrary prime $\\mathfrak r$ and hence the conclusion.",
+   "uses": [
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "lem-weil-pbc-fibre-ring-primes-bijection",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00PO, proof, lines 30354-30360; Lemma Tag 00PK, condition (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "lem-weil-pbc-fibre-ring-primes-bijection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00PO (lemma-quasi-finite-composition), lines 30342-30360; the isolated-point-to-basic-open translation is written out from Tag 00PK"
+ },
  "mathlib_searches": [
   {
+   "tool": "leansearch",
+   "query": "a composition of finite type ring maps that are quasi-finite at every prime is quasi-finite at every prime",
+   "results": "RingHom.QuasiFinite.comp; RingHom.QuasiFinite.stableUnderComposition; AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite; RingHom.QuasiFinite.of_comp; RingHom.QuasiFinite.of_finite; AlgebraicGeometry.instLocallyQuasiFiniteCompScheme; RingHom.QuasiFinite.of_isIntegral_of_finiteType; RingHom.QuasiFinite",
+   "date": "2026-10-17",
+   "verdict": "candidate only: Mathlib's predicate is module-finiteness of residue fibres, not the DAG's isolated-fibre definition"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma-quasi-finite-composition|stableUnderComposition [Mathlib/RingTheory]",
+   "results": "none (0 hits)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
    "tool": "leanfinder",
-   "query": "composition of quasi-finite finite-type ring maps is quasi-finite at every prime",
-   "results": "Hits include RingHom.QuasiFinite.comp (Mathlib/RingTheory/RingHom/QuasiFinite.lean:37) and stableUnderComposition (:55). Read RingHom.QuasiFinite (:24-25) and Algebra.QuasiFinite (Mathlib/RingTheory/QuasiFinite/Basic.lean:67-69): the predicate says each residue-field fibre is module-finite, and does not include finite type. The DAG uses finite type and isolated fibre primes.",
-   "date": "2026-10-18",
-   "verdict": "candidate, not a one-line match: the equivalence between fibrewise module-finiteness and isolated-point quasi-finiteness under finite type is a separate bridge (delivery-errors B8)"
+   "query": "composition of finite type quasi-finite ring maps is quasi-finite at every prime",
+   "results": "RingHom.QuasiFinite.comp; RingHom.QuasiFinite.stableUnderComposition; RingHom.QuasiFinite.of_comp; RingHom.QuasiFinite.of_isIntegral_of_finiteType; Algebra.QuasiFinite.trans; RingHom.EssFiniteType.comp; RingHom.EssFiniteType.stableUnderComposition; RingHom.EssFiniteType.of_comp",
+   "date": "2026-10-17",
+   "verdict": "candidate only: Mathlib's predicate differs from isolated-fibre quasi-finiteness"
   },
   {
    "tool": "loogle",
-   "query": "RingHom.QuasiFinite, RingHom.QuasiFinite.stableUnderComposition",
-   "results": "Hits include RingHom.QuasiFinite.comp (Mathlib/RingTheory/RingHom/QuasiFinite.lean:37) and stableUnderComposition (:55). Read RingHom.QuasiFinite (:24-25) and Algebra.QuasiFinite (Mathlib/RingTheory/QuasiFinite/Basic.lean:67-69): the predicate says each residue-field fibre is module-finite, and does not include finite type. The DAG uses finite type and isolated fibre primes.",
-   "date": "2026-10-18",
-   "verdict": "candidate, not a one-line match: the equivalence between fibrewise module-finiteness and isolated-point quasi-finiteness under finite type is a separate bridge (delivery-errors B8)"
+   "query": "RingHom.QuasiFinite.comp, RingHom.EssFiniteType.comp",
+   "results": "none (0 hits)",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "lemma-quasi-finite-composition|stableUnderComposition|QuasiFinite.*comp [Mathlib/RingTheory]",
-   "results": "Hits include RingHom.QuasiFinite.comp (Mathlib/RingTheory/RingHom/QuasiFinite.lean:37) and stableUnderComposition (:55). Read RingHom.QuasiFinite (:24-25) and Algebra.QuasiFinite (Mathlib/RingTheory/QuasiFinite/Basic.lean:67-69): the predicate says each residue-field fibre is module-finite, and does not include finite type. The DAG uses finite type and isolated fibre primes.",
-   "date": "2026-10-18",
-   "verdict": "candidate, not a one-line match: the equivalence between fibrewise module-finiteness and isolated-point quasi-finiteness under finite type is a separate bridge (delivery-errors B8)"
-  },
-  {
-   "tool": "leansearch",
-   "query": "a composition of quasi-finite ring maps is quasi-finite",
-   "results": "Hits include RingHom.QuasiFinite.comp (Mathlib/RingTheory/RingHom/QuasiFinite.lean:37) and stableUnderComposition (:55). Read RingHom.QuasiFinite (:24-25) and Algebra.QuasiFinite (Mathlib/RingTheory/QuasiFinite/Basic.lean:67-69): the predicate says each residue-field fibre is module-finite, and does not include finite type. The DAG uses finite type and isolated fibre primes.",
-   "date": "2026-10-18",
-   "verdict": "candidate, not a one-line match: the equivalence between fibrewise module-finiteness and isolated-point quasi-finiteness under finite type is a separate bridge (delivery-errors B8)"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For finite type ring maps every prime is isolated in its fibre and this property is preserved by composition",
-   "results": "Hits: RingHom.EssFiniteType.comp_iff, Algebra.QuasiFinite.iff_finite_primesOver, Algebra.QuasiFinite.isDiscrete_comap_preimage_singleton, Algebra.QuasiFinite.finite_primeSpectrum, Algebra.QuasiFinite.iff_finite_comap_preimage_singleton, Algebra.QuasiFinite.finite_comap_preimage_singleton, Algebra.QuasiFinite.finite_primesOver, Algebra.QuasiFinite.isDiscrete_comap_preimage",
-   "date": "2026-10-18",
-   "verdict": "candidate only: requires the bridge from isolated fibre primes to the Mathlib fibrewise module-finite predicate"
-  },
-  {
-   "tool": "grep",
-   "query": "IsQuasiFiniteAtPrime|quasiFiniteAt_iff_isOpen_singleton_fiber|iff_finite_comap_preimage_singleton [Mathlib/RingTheory]",
-   "results": "Hits: Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean",
-   "date": "2026-10-18",
-   "verdict": "candidate only: requires the bridge from isolated fibre primes to the Mathlib fibrewise module-finite predicate"
+   "query": "QuasiFinite.*comp|EssFiniteType.*comp [Mathlib/RingTheory]",
+   "results": "none (0 hits)",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-refined-quasi-finite-polynomial-pure-transcendental",
@@ -94,5 +136,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-quasi-finite-composition",
+  "worker": "stage1",
+  "summary": "Split along Stacks Algebra Tag 00PO in three steps: finite-type composition; for a prime of C choose principal-open witnesses b and c for the isolated fibre points of the two maps; the image b in C makes D(cb) contain only the chosen prime, proving quasi-finiteness of the composite. No new nodes were needed because the definitions and fibre-prime correspondence already exist. Mathlib searches found RingHom.QuasiFinite.comp, but Mathlib uses a different fibrewise module-finiteness predicate, so this item is not a Mathlib leaf.",
+  "blueprint": "The steps realize the Stacks Tag 00PO composition proof; blueprint ancestor is lem-trf-local-term-locality and no same_as blueprint node was found."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q84-3cba7eff7",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q84-3cba7eff7 (reviewer sub-agent of L); spot-checked: Read the full item and cited mathematics against Stacks 00PO, 00PK, 00F3–00F4 and 00E6. Corrected generator wording, explicit fibre denominator clearing, and missing step citations; statement unchanged. No new nodes, cycles, or forbidden dependencies. Whole corrected JSON saved under fixes/dag/nodes/sec-trace-formula/; detailed checks in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

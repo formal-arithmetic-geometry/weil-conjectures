@@ -12,41 +12,83 @@
   "def-weil-pbc-regular-system-of-parameters",
   "def-nagata-blowup-chart-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix one $i\\in J\\setminus\\{j\\}$ and put $H=J\\setminus\\{j,i\\}$ and $B=R/(t_i)$; bars denote images in $B$. Setting only $u_i$ equal to zero in the defining presentation makes the relation $t_i-t_j u_i$ become $t_i=0$, and leaves every $u_h$ for $h\\in H$ untouched. Thus, by the quotient universal property, $$A_j/(u_i)\\cong B[u_h\\mid h\\in H]/(\\bar t_h-\\bar t_j u_h\\mid h\\in H).$$ Explicitly, the isomorphism sends each coefficient $r$ to its class $\\bar r$ and each surviving variable $u_h$ to the same variable; the reverse assignment is well-defined because $t_i=t_j u_i=0$ in $A_j/(u_i)$. Order the original parameters with $t_i$ first, $t_j$ next, the $t_h$ for $h\\in H$ next, and the remaining parameters last. The regular-parameter lemma gives a regular sequence in this order. By the definition of regular sequence its tail over $B$ is regular, and so is the initial segment $(\\bar t_j,(\\bar t_h)_{h\\in H})$ of that tail. For $I_i=(\\bar t_j,\\bar t_h\\mid h\\in H)\\subset B$, the chart-presentation lemma identifies the displayed quotient with $B[I_i/\\bar t_j]$, taking $u_h$ to $\\bar t_h/\\bar t_j$ and the image of $t_j$ to the chart generator. Since $\\bar t_j\\in I_i$, the chart-generator lemma gives injectivity of multiplication by $t_j$ on this individual quotient. This proves the assertion for every such $i$; if $J=\\{j\\}$ there is no $i$ and the assertion is vacuous.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-trf-blowup-chart-regular-sequence-presentation",
+    "lemma-nagata-chart-generator-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 4.2.9 coordinate-chart computation, printed p. 121, expanded for each individual coordinate using Stacks Tags 00NQ (lemma-regular-ring-CM) and 0BIQ (lemma-blowup-regular-sequence)"
+   }
+  },
+  {
+   "text": "Let $k\\notin J$ and put $B=R/(t_k)$, with bars denoting images in $B$. Taking the quotient of the displayed presentation by $t_k$ gives $$A_j/(t_k)\\cong B[u_h\\mid h\\in J\\setminus\\{j\\}]/(\\bar t_h-\\bar t_j u_h\\mid h\\in J\\setminus\\{j\\}).$$ The coefficient and variable maps in the two directions give this identification directly. Order the original parameters with $t_k$ first, then $t_j$, then the other $t_h$ for $h\\in J$, and finally the remaining parameters. The regular-parameter lemma makes this a regular sequence. Hence, by the definition of regular sequence, the tail over $B$ is regular and so is its initial segment $(\\bar t_j,(\\bar t_h)_{h\\in J\\setminus\\{j\\}})$. Put $I_k=(\\bar t_h:h\\in J)\\subset B$. The chart-presentation lemma identifies the displayed quotient with $B[I_k/\\bar t_j]$, sending $u_h$ to $\\bar t_h/\\bar t_j$. Since $\\bar t_j\\in I_k$, the chart-generator lemma gives injectivity of multiplication by $\\bar t_j$ on this algebra, which corresponds to multiplication by $t_j$ on $A_j/(t_k)$. When $J=\\{j\\}$ the polynomial variable set is empty and the chart is $B[(\\bar t_j)/\\bar t_j]=B$, with injectivity also given by regularity of the sequence $(t_k,t_j)$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-trf-blowup-chart-regular-sequence-presentation",
+    "lemma-nagata-chart-generator-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 4.2.9 coordinate-chart computation, printed p. 121, expanded for an outside-parameter quotient using Stacks Tags 00NQ (lemma-regular-ring-CM) and 0BIQ (lemma-blowup-regular-sequence)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-trf-blowup-chart-regular-sequence-presentation",
+  "lemma-nagata-chart-generator-regular"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 4.2.9 coordinate-chart computation, printed p. 121; algebraic nonzerodivisor check from the chart presentation and Stacks Tag 0BIQ"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "In the blowup chart of a regular sequence, the chart generator remains a nonzerodivisor after quotienting by a coordinate",
-   "results": "Regular-sequence localization declarations only; no blowup-coordinate statement.",
+   "results": "8 hits: RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev, IsRegular.quot_ofList_smul_nontrivial, IsRegular.cons', IsWeaklyRegular.cons', isRegular_cons_iff', isWeaklyRegular_cons_iff', and localization regular-sequence lemmas; none states the blowup-coordinate result.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "isRegular_awayAlgebraMap quotient coordinate blowup",
-   "results": "No hits; no corresponding Mathlib blowup theorem.",
+   "results": "0 hits; loogle reported unknown identifier isRegular_awayAlgebraMap.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "lemma-blowup-regular-sequence|isRegular_awayAlgebraMap",
-   "results": "No matching theorem in Mathlib/AlgebraicGeometry.",
+   "query": "lemma-blowup-regular-sequence|isRegular_awayAlgebraMap AlgebraicGeometry",
+   "results": "0 matching declarations in the Mathlib AlgebraicGeometry source.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "the blowup chart generator is a nonzerodivisor modulo a coordinate equation",
-   "results": "Only generic regular-sequence cons and quotient declarations; no chart-specific result.",
+   "results": "8 hits including MvPowerSeries.monomial_mem_nonzeroDivisors, MvPowerSeries.X_mem_nonzeroDivisors, and unrelated coordinate-ring declarations; no blowup-chart theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine blowup chart over a quotient by a parameter chart generator nonzerodivisor",
+   "results": "8 hits about affine covers, localization, ideal sheaves and affine-space coordinates; no affine blowup quotient nonzerodivisor theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-permissible-coordinate-chart",
@@ -58,12 +100,41 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Lemma 4.2.9 coordinate-chart proof: compute the strict-transform closures in the standard chart.",
+   "place": "Lemma 4.2.9 coordinate-chart proof: for each standard chart, the chart generator remains a nonzerodivisor after quotienting by a chart coordinate or by a parameter outside the center.",
    "via": [
     "lem-trf-permissible-coordinate-chart"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-chart-coordinate-nonzerodivisors",
+  "worker": "stage1",
+  "summary": "Repaired E4/E3 without changing the statement. Step 1 now fixes a single i, quotients by only u_i, and keeps all other chart variables: over B=R/(t_i) it is the t_j-chart for the regular sequence of remaining center parameters. The existing chart presentation and chart-generator injectivity lemmas prove the required individual-coordinate assertion. Step 2 retains the valid outside-parameter argument with its precise chart identification. Corrected J={j}: the first assertion is vacuous. No new nodes or Mathlib leaves; the recorded searches are retained.",
+  "blueprint": "Realizes ILO Exposé VIII, Lemma 4.2.9 coordinate-chart computation: the chart generator is a nonzerodivisor after the coordinate and outside-parameter quotients.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "The proof uses the regular-parameter permutation and tail-quotient consequences to obtain nonzerodivisors; this generic regular-local lemma is from sk-thm-p1."
+   },
+   {
+    "node": "lemma-nagata-chart-generator-regular",
+    "why": "Both steps use injectivity of the chart generator after identifying the precise quotient as an affine blowup chart; this generic blowup-chart lemma is from sk-lem-nagata-sketch-blowups."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lemma-nagata-chart-generator-regular"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-986aa0b87",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-986aa0b87 (reviewer sub-agent of L); spot-checked: Read the full item, report, route, parent, cited statements, ILO VIII Lemma 4.2.9, Stacks Tags 00NQ and 0BIQ, and relevant definitions. Both repaired quotient arguments are correct, retain the proper variables, satisfy all hypotheses, and handle singleton, two-parameter, full-center, and dimension-zero cases. No new nodes, duplicates, route violations, SGA citations, or hidden long-step lemmas remain. Review written to review.md."
  }
 }

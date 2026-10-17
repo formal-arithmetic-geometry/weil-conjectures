@@ -2,7 +2,7 @@
  "id": "lem-trf-infinite-product-surjective",
  "kind": "statement",
  "title": "Products of surjective affine morphisms are surjective",
- "statement": "Let $S$ be a scheme [def-pc-scheme], let $J$ be a small set, and let $g_j:T_j\\to S$ be surjective affine morphisms for $j\\in J$. For the product $T=\\prod_{j\\in J}T_j$ supplied by [lem-trf-affine-infinite-product-existence], the projection $T\\to S$ is surjective.",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $J$ be a small set, and let $g_j:T_j\\to S$ be surjective [def-weil-surjective-morphism] affine [pqf-def-affine-morphism] morphisms for $j\\in J$. For the product $T=\\prod_{j\\in J}T_j$ supplied by [lem-trf-affine-infinite-product-existence], the projection $T\\to S$ is surjective.",
  "source": {
   "document": "literature/stacks-project/limits.tex",
   "place": "Tag 0CNJ, lemma-infinite-product-surjective"
@@ -10,11 +10,88 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-weil-size-convention",
+  "lem-trf-affine-infinite-product-existence",
+  "def-weil-surjective-morphism",
+  "pqf-def-affine-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Fix $s\\in S$. By surjectivity [def-weil-surjective-morphism], for each $j\\in J$ there exists $t_j\\in T_j$ with $g_j(t_j)=s$; choose one such point for each $j$. The induced residue-field homomorphism $a_j:\\kappa(s)\\to\\kappa(t_j)$ makes $\\kappa(t_j)$ an extension of $\\kappa(s)$ [def-weil-residue-field, def-pc-field-extension]. This choice is over the small set $J$; if $J$ is empty there is simply no point to choose.",
+   "uses": [
+    "def-weil-surjective-morphism",
+    "def-weil-residue-field",
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNJ, lemma-infinite-product-surjective, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-family-common-extension-field] to $k=\\kappa(s)$ and $L_j=\\kappa(t_j)$ with the embeddings $a_j$ from Step 1. Obtain a field $K$, an embedding $b:\\kappa(s)\\to K$, and embeddings $e_j:\\kappa(t_j)\\to K$ with $e_j\\circ a_j=b$ for all $j$. The family need not be finite, and the residue-field extensions need not be algebraic.",
+   "uses": [
+    "lem-trf-family-common-extension-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNJ, lemma-infinite-product-surjective, proof"
+   }
+  },
+  {
+   "text": "For any scheme point $x$, write $j_x:\\operatorname{Spec}\\kappa(x)\\to X$ for its canonical point morphism. Set $q_j=j_{t_j}\\circ\\operatorname{Spec}(e_j):\\operatorname{Spec}K\\to T_j$ and $h=j_s\\circ\\operatorname{Spec}(b):\\operatorname{Spec}K\\to S$. These are morphisms by [lem-weil-pbc-morphism-from-spec-field] and [def-weil-affine-spectrum]. By [lem-weil-pbc-residue-field-point-naturality], $g_j\\circ j_{t_j}=j_s\\circ\\operatorname{Spec}(a_j)$. Functoriality of the contravariant spectrum and $e_j\\circ a_j=b$ now give explicitly $g_j\\circ q_j=j_s\\circ\\operatorname{Spec}(a_j)\\circ\\operatorname{Spec}(e_j)=j_s\\circ\\operatorname{Spec}(e_j\\circ a_j)=h$. Thus all the $q_j$ are morphisms over the same $S$-structure $h$.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-residue-field-point-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNJ, lemma-infinite-product-surjective, proof"
+   }
+  },
+  {
+   "text": "All the $g_j$ are affine, so [lem-trf-affine-infinite-product-existence] supplies their product in schemes over $S$. Apply its defining universal property to the $S$-scheme $(\\operatorname{Spec}K,h)$ and the compatible family $(q_j)_j$. It gives $q:\\operatorname{Spec}K\\to T$ with $p\\circ q=h$, where $p:T\\to S$ is the structure morphism. For $J=\\varnothing$ this is the same universal property of the terminal object in schemes over $S$; it still gives $p\\circ q=h$.",
+   "uses": [
+    "lem-trf-affine-infinite-product-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNJ, lemma-infinite-product-surjective, proof"
+   }
+  },
+  {
+   "text": "Let $\\xi$ be the unique point of $\\operatorname{Spec}K$ [def-weil-affine-spectrum]. The canonical morphism $j_s$ sends its unique source point to $s$ [lem-weil-pbc-morphism-from-spec-field]. Since $\\operatorname{Spec}(b)$ maps the unique point to the unique point, $h(\\xi)=s$. For $t=q(\\xi)$ the equality from Step 4 therefore gives $p(t)=(p\\circ q)(\\xi)=h(\\xi)=s$. As $s$ was arbitrary, $p$ is surjective by [def-weil-surjective-morphism]. If $S$ has no points, the same conclusion is vacuous.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNJ, lemma-infinite-product-surjective, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-surjective-morphism",
+  "def-weil-residue-field",
+  "def-pc-field-extension",
+  "lem-trf-family-common-extension-field",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-residue-field-point-naturality",
   "lem-trf-affine-infinite-product-existence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0CNJ, lemma-infinite-product-surjective, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +120,45 @@
    "results": "No declaration matching arbitrary scheme products.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointsPi_surjective|[Pp]roduct.*[Ss]urjective|[Ss]urjective.*[Pp]roduct",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean. ",
+   "date": "2026-10-18",
+   "verdict": "no match: pointsPi concerns maps from the spectrum of a product ring to one scheme; base-change surjectivity handles one pullback, not an arbitrary family"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An arbitrary product of surjective affine scheme morphisms over a fixed base is surjective",
+   "results": "8 hits: Function.Surjective.prodMap, AlgebraicGeometry.Surjective.mk, AlgebraicGeometry.Surjective, AlgebraicGeometry.Scheme.Hom.surjective, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, Function.Surjective.piMap, AlgebraicGeometry.instIsStableUnderCompositionSchemeSurjective, AlgebraicGeometry.pointsPi_surjective_of_isAffine. ",
+   "date": "2026-10-18",
+   "verdict": "no match: pointsPi concerns maps from the spectrum of a product ring to one scheme; base-change surjectivity handles one pullback, not an arbitrary family"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Surjective, CategoryTheory.Limits",
+   "results": "0 hits: . loogle: unknown identifier 'CategoryTheory.Limits'",
+   "date": "2026-10-18",
+   "verdict": "no match: pointsPi concerns maps from the spectrum of a product ring to one scheme; base-change surjectivity handles one pullback, not an arbitrary family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The product over a scheme S of any small family of surjective affine S-schemes is surjective over S",
+   "results": "8 hits: AlgebraicGeometry.pointsPi_surjective_of_isAffine, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.Scheme.isJointlySurjectivePreserving, AlgebraicGeometry.Surjective.instFstScheme, AlgebraicGeometry.Surjective.instSndScheme, AlgebraicGeometry.instSurjectiveDescI₀SchemeF. ",
+   "date": "2026-10-18",
+   "verdict": "no match: pointsPi concerns maps from the spectrum of a product ring to one scheme; base-change surjectivity handles one pullback, not an arbitrary family"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjectivity of arbitrary fiber products of affine schemes",
+   "results": "8 hits: AlgebraicGeometry.pointsPi_surjective_of_isAffine, AlgebraicGeometry.instIsAffineFiberOfIsAffineHom, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Hom.surjective, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom, AlgebraicGeometry.Surjective.surj, AlgebraicGeometry.AffineScheme.Spec_essSurj, AlgebraicGeometry.Surjective. ",
+   "date": "2026-10-18",
+   "verdict": "no match: pointsPi concerns maps from the spectrum of a product ring to one scheme; base-change surjectivity handles one pullback, not an arbitrary family"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-fppf-integral-surjective-refinement",
@@ -76,5 +188,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-infinite-product-surjective",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0CNJ using a common extension of all residue fields and the product universal property. Isolated the arbitrary-family field-extension assertion in one statement-only node; reused both existing point-morphism Mathlib leaves. Added missing affine/surjective notion references; no mathematical statement changed.",
+  "blueprint": "The product-surjectivity input in the final paragraph of Tag 0CNZ below lem-trf-local-term-locality; steps 1-5 expand the argument of Tag 0CNJ without replacing any unit-level step."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q73-3e9965df4",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q73-3e9965df4 (reviewer sub-agent of L); spot-checked: The mathematics and source checks pass, but the item JSON had incorrect created metadata: created.item named lem-trf-fppf-integral-surjective-refinement and created.group named N6. Corrected full JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-infinite-product-surjective.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
  }
 }

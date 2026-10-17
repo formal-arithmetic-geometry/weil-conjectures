@@ -13,9 +13,93 @@
   "def-weil-finite-integral-morphism",
   "lem-trf-affine-infinite-product-existence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $q:T\\to S$ for the structure map. By [def-weil-finite-integral-morphism], every $g_j$ is affine. Apply [lem-trf-affine-infinite-product-existence]. Its affine projection to the finite product indexed by the empty subset is precisely $q$, since that finite product is $S$. Thus $q$ is affine. For an arbitrary affine open $U=\\operatorname{Spec}A\\subseteq S$, put $X=q^{-1}(U)$ and $X_j=g_j^{-1}(U)$. By [pqf-def-affine-morphism] these are affine, say $X=\\operatorname{Spec}B$ and $X_j=\\operatorname{Spec}B_j$. The maps $A\\to B_j$ are integral by [def-weil-finite-integral-morphism].",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-trf-affine-infinite-product-existence",
+    "pqf-def-affine-morphism",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNK, lemma-infinite-product-integral, affine-piece hint, expanded using Tag 0CNI (lemma-infinite-product)"
+   }
+  },
+  {
+   "text": "The restricted projections exhibit $X$ as the product of the $X_j$ over $U$. Indeed, for any scheme $V\\to U$, a family of $U$-maps $V\\to X_j$ gives $S$-maps $V\\to T_j$ and hence a unique $S$-map $h:V\\to T$. Its composite to $S$ is the given map through $U$, so its image is contained in $q^{-1}(U)=X$. It factors uniquely through this open subscheme: restrict the codomain of its continuous map to $X$ and the sheaf map to opens of $X$; the local maps on stalks are the same. The same restriction identifies maps to $X_j$ with maps to $T_j$ over the given $V\\to U$. Uniqueness in the product $T$ gives uniqueness in $X$. This is just the definition of an open subscheme/open immersion [def-weil-open-immersion] and the product universal property.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-trf-affine-infinite-product-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNK, lemma-infinite-product-integral, affine-piece hint, expanded using Tag 0CNI (lemma-infinite-product)"
+   }
+  },
+  {
+   "text": "Let $\\iota_j:B_j\\to B$ be the $A$-algebra homomorphisms corresponding to the restricted projections. The ring $B$ is a coproduct of the $B_j$ in commutative $A$-algebras: for any commutative $A$-algebra $D$, the correspondence between ring homomorphisms and morphisms of spectra in [def-weil-affine-spectrum] identifies $A$-maps $B\\to D$ with $U$-maps $\\operatorname{Spec}D\\to X$, and $A$-maps $B_j\\to D$ with $U$-maps $\\operatorname{Spec}D\\to X_j$. Step 2 gives the required bijection between the former maps and families of the latter maps. Functoriality of $\\operatorname{Spec}$ identifies its restriction maps with precomposition by the $\\iota_j$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNK, lemma-infinite-product-integral, affine-piece hint, expanded using Tag 0CNI (lemma-infinite-product)"
+   }
+  },
+  {
+   "text": "Every element in every image $\\iota_j(B_j)$ is integral over $A$. Namely, if $b\\in B_j$ satisfies $b^n+\\sum_{k<n}a_kb^k=0$, using the structure map $A\\to B_j$ for its coefficients, then applying the $A$-algebra map $\\iota_j$ gives $\\iota_j(b)^n+\\sum_{k<n}a_k\\iota_j(b)^k=0$ in $B$. This is a monic equation over $A$, so proves the assertion directly from the definition of integral elements in [def-weil-pbc-integral-closure].",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNK, lemma-infinite-product-integral, affine-piece hint, expanded using Tag 0CNI (lemma-infinite-product)"
+   }
+  },
+  {
+   "text": "Let $C\\subseteq B$ be the integral closure of $A$ in $B$. The statement of [def-weil-pbc-integral-closure] says exactly that $C$ is a subring containing the image of $A$, with underlying set all elements integral over $A$; hence it is an $A$-algebra. Step 4 shows that each $\\iota_j$ factors as an $A$-algebra map $\\bar\\iota_j:B_j\\to C$ followed by the inclusion $e:C\\hookrightarrow B$. Apply the coproduct universal property of Step 3 with $D=C$ to obtain $r:B\\to C$ satisfying $r\\iota_j=\\bar\\iota_j$ for every $j$.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GO (lemma-integral-closure-is-ring), 00GP (definition-integral-closure); applied to the affine-piece hint of Limits Tag 0CNK"
+   }
+  },
+  {
+   "text": "The $A$-algebra maps $er$ and $\\operatorname{id}_B$ have the same composites with every $\\iota_j$, because $er\\iota_j=e\\bar\\iota_j=\\iota_j$. Uniqueness in Step 3 gives $er=\\operatorname{id}_B$. Consequently every $b\\in B$ equals $e(r(b))$, so belongs to $C$ and is integral over $A$. This holds for every affine open $U\\subseteq S$. Together with the affineness of $q$ from Step 1, [def-weil-finite-integral-morphism] now gives that $q$ is integral. The argument includes $J=\\varnothing$: the coproduct universal property is then the initial $A$-algebra property, and the same uniqueness calculation holds without any factor maps.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNK, lemma-infinite-product-integral, affine-piece hint, expanded using Tag 0CNI (lemma-infinite-product)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-trf-affine-infinite-product-existence",
+  "pqf-def-affine-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0CNK, lemma-infinite-product-integral: the omitted affine algebra argument is supplied explicitly by the coproduct universal property and integral closure (Algebra Tags 00GO, 00GP)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +128,52 @@
    "results": "No declaration matching arbitrary scheme products.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Arbitrary products of integral scheme morphisms over the same base are integral",
+   "results": "Eight hits: IsIntegralHom instances for binary coproduct, pullback projections, composition, multiplicativity, and base change; none states arbitrary products.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinite products of integral morphisms of schemes are integral",
+   "results": "Eight hits include Algebra.IsIntegral.prod (binary ring product), IsIntegral.prod and multiset_prod (products of elements), IsIntegralHom, its composition and affine-property instances, RingHom.IsIntegralElem.mul, and IsIntegralHom.mk; no arbitrary product theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegralHom, CategoryTheory.Limits",
+   "results": "Zero hits; query rejected with unknown identifier 'CategoryTheory.Limits'. This query supplies no evidence of absence.",
+   "date": "2026-10-18",
+   "verdict": "invalid query"
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*(pi|prod|limit)|(pi|prod|limit).*integral",
+   "results": "Searched AlgebraicGeometry. Eight hits: pullback projections and binary coproduct in Morphisms/Integral.lean, unrelated SpreadingOut/FunctionField/Normalization passages. Read Integral.lean:35–80 and 104–110; no arbitrary product theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The limit over finite subsets of the finite fibre products of integral schemes over S is integral over S",
+   "results": "Eight hits: integral pullback projections, binary coproduct, finite implies integral, base change, universally closed, multiplicative, normalization descent. None states this limit/product theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegralHom.*(limit|pi|Pi)|isIntegral.*(limit|pi|Pi)",
+   "results": "Searched AlgebraicGeometry. Three hits, all Morphisms/Integral.lean:71,75,105: binary pullback projections and binary coproduct; no arbitrary product theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-fppf-integral-surjective-refinement",
@@ -77,5 +203,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-infinite-product-integral",
+  "worker": "stage1",
+  "summary": "Expanded the omitted proof of Stacks Tag 0CNK on affine opens. The existing product-existence node gives the affine structure map (empty finite subset). Restriction gives a product over each affine open; full faithfulness of Spec gives its coordinate algebra coproduct. Mapping monic equations into that coproduct and factoring through the integral-closure subalgebra proves that every element is integral. The original statement and ancestry are unchanged. No new nodes, no Lean attachments, no statement dispute.",
+  "blueprint": "Serves lem-trf-local-term-locality through its recorded refinement ancestry: the integrality of the products in the final paragraph of Stacks Tag 0CNZ, as specified by blueprint.from.place. Steps 1–3 realize the affine-piece reduction in Tag 0CNK, and steps 4–6 supply its omitted algebra argument. The nearest blueprint ancestor has no separate product-integrality clause; this is a tool within its descendant refinement proof.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q72-4375c3a24",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q72-4375c3a24 (reviewer sub-agent of L); spot-checked: The proof and statement are mathematically correct, but Step 4 omitted def-weil-finite-integral-morphism from its uses despite relying on the integral A→B_j hypothesis established in Step 1. Corrected full DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-infinite-product-integral.json; review.md records all source, edge-case, route, and DAG checks.; 1 file(s) fixed by the reviewer"
  }
 }
