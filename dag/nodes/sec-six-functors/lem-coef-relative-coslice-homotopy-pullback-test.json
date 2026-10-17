@@ -11,7 +11,8 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
   "lem-coef-infinity-join-cocone-associativity",
-  "def-weil-pbc-trivial-kan-fibration"
+  "def-weil-pbc-trivial-kan-fibration",
+  "def-coef-infinity-relative-cone"
  ],
  "proof": [
   {
@@ -252,5 +253,30 @@
   "group": "Q83",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q83-8a1925f85 (reviewer sub-agent of L); spot-checked: Read the full packet, item, route, cited node statements, and cited sources. All seven proof steps are valid: relative-coslice left fibration, opposite Kan-fibration conversion, strict apex pullback construction, path-model comparison, fiber contractibility, and final trivial Kan fibration criterion. Hypotheses, base-change maps, empty cases, dimension-zero lifting, route, and duplicate searches checked. No new nodes or repairs needed; no SGA used."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeCosliceHomotopyPullbackTest",
+  "declaration": "SSet.Enhanced.relativeCoslice_homotopyPullback_test",
+  "declarations": [
+   "SSet.Enhanced.cosliceRestrictionFiber",
+   "SSet.Enhanced.coslicePostcomposeFiber",
+   "SSet.Enhanced.fullRelativeCosliceRestriction",
+   "SSet.Enhanced.relativeCoslice_homotopyPullback_test"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeCosliceHomotopyPullbackTest.lean",
+  "statement": "theorem relativeCoslice_homotopyPullback_test {A B C D : SSet.{u}} [Quasicategory C] [Quasicategory D] (q : C ⟶ D) (_hq : InnerFibration q) (j : A ⟶ B) [Mono j] (d : B ⟶ C) (P : C _⦋0⦌ → Prop) (_h : ∀ W : C _⦋0⦌, P W → KanComplex (fiber (coherentCosliceProjection d) W) ∧ KanComplex (fiber (coherentCosliceProjection (j ≫ d)) W) ∧ KanComplex (fiber (coherentCosliceProjection (d ≫ q)) (q.app _ W)) ∧ KanComplex (fiber (coherentCosliceProjection (j ≫ d ≫ q)) (q.app _ W)) ∧ IsHomotopyPullbackSquare (cosliceRestrictionFiber j d W) (coslicePostcomposeFiber d q W) (coslicePostcomposeFiber (j ≫ d) q W) (cosliceRestrictionFiber j (d ≫ q) (q.app _ W))) : modelCategoryQuillen.I.rlp (fullRelativeCosliceRestriction q j d P)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The three helper maps are actual pullback maps of the published sharp coslice restriction and postcomposition, with the given apex preserved. Adds the already landed def-coef-infinity-relative-cone for its canonical constant-path homotopy-pullback predicate; no independent notion, new node, dependency repair, or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-59795a9ef",
+  "group": "NC",
+  "result": "fix",
+  "note": "H11: original Second reading by NC was only a disclaimer; complete substantive replacement report supplied under fixes/. No Lean or mathematical defect found."
  }
 }

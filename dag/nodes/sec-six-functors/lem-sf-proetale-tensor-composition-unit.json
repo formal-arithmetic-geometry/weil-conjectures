@@ -14,7 +14,8 @@
   "def-weil-pbc-proetale-operations",
   "lem-weil-pbc-conjugate-iso-unit-equation",
   "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-profinite-coefficient-inverse-image"
  ],
  "proof": [
   {
@@ -238,5 +239,29 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-7817630fe (reviewer sub-agent of L); spot-checked: I read the item, all 8 cited statements, the sk-thm-sf-package route, the ancestor def-pur-scheme-geometric-frobenius (final paragraph, main-20261015), both citers, and the Stacks sources at their labels: 03CB at sites.tex:2764, 03D3, 03EK, 03EL at sites-modules.tex:3649, 0B65, 0DV0. The statement is unchanged and is what both citers use. d_{h,k} (restriction along q_U) runs from (kh)_* to k_*h_*, which is the delta direction of the conjugate-iso lemma. The unit equation matches the composite-adjunction unit k_*(eta^h)eta^k. Coefficients are those of def-weil-pbc-proetale-operations. Step 1: q is built by fibre-product uniqueness, and the 03CB hypotheses (continuity, exact u_s) are met; transporting the unit compatibility along q is a short re-indexing check. Step 2: I rechecked both balancing relations, TS=1 and ST=1, and that monoidality of a_{h,k} gives c_{kh}a=beta alpha; passing to sheafified iterated tensors is standard by the universal property of sheafification. Step 3: I verified d^0 rho_{kh}=k_*rho_h rho_k myself, via naturality of j^h, the c_{kh} identity, Step 1 and naturality of d^0. Step 4: computed section by section with c_h(1)=1, then the conjugate-iso uniqueness applied with correct types. Small cases checked: identity morphisms, M=0, M=R_V. No new nodes. No duplicate: the derived, constant-ring and integral composition nodes are different statements. The Mathlib conjugateEquiv_pullbackComp_inv is abstract, so it is correctly a candidate, not a match. All cited units are in the transitive route, so the 8 declared tool_uses are redundant; I accept them as harmless. No SGA. review_split.py: PASS. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleTensorCompositionUnit",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_tensor_composition_unit",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtalePullbackTensorGenerator",
+   "AlgebraicGeometry.Scheme.proEtalePullbackTensorScalar",
+   "AlgebraicGeometry.Scheme.proEtale_tensor_composition_unit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleTensorCompositionUnit.lean",
+  "statement": "theorem proEtale_tensor_composition_unit {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) (R_V : Sheaf (ProEt.topology V) CommRingCat.{u + 1}) (R_W : Sheaf (ProEt.topology W) CommRingCat.{u + 1}) (R_Z : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}) (c_k : (proEtaleSheafInverseImage k CommRingCat.{u + 1}).obj R_V ≅ R_W) (c_h : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj R_W ≅ R_Z) (c_hk : (proEtaleSheafInverseImage (h ≫ k) CommRingCat.{u + 1}).obj R_V ≅ R_Z) (hc_hk : c_hk = (proEtaleRingInverseImageComp h k).app R_V ≪≫ (proEtaleSheafInverseImage h CommRingCat.{u + 1}).mapIso c_k ≪≫ c_h) : ∃ (d : proEtaleRingModuleDirectImage (h ≫ k) R_V R_Z c_hk ≅ proEtaleRingModuleDirectImage h R_W R_Z c_h ⋙ proEtaleRingModuleDirectImage k R_V R_W c_k) (t : proEtaleRingModulePullback k R_V R_W c_k ⋙ proEtaleRingModulePullback h R_W R_Z c_h ≅ proEtaleRingModulePullback (h ≫ k) R_V R_Z c_hk), (∀ (N : proEtaleRingModules Z R_Z) (U : V.ProEt) (m : ((proEtaleRingModuleDirectImage (h ≫ k) R_V R_Z c_hk).obj N).val.obj (op U)), (d.hom.app N).val.app (op U) m = N.val.map ((MorphismProperty.Over.pullbackComp h k).inv.app U).op m) ∧ (∀ (M : proEtaleRingModules V R_V) (U : V.ProEt) (T : W.ProEt) (P : Z.ProEt) (p : T ⟶ (proEtaleBaseChange k).obj U) (q : P ⟶ (proEtaleBaseChange h).obj T) (m : M.val.obj (op U)) (a : R_W.obj.obj (op T)) (b : R_Z.obj.obj (op P)), (t.hom.app M).val.app (op P) (proEtalePullbackTensorGenerator h R_W R_Z c_h ((proEtaleRingModulePullback k R_V R_W c_k).obj M) T P q (proEtalePullbackTensorGenerator k R_V R_W c_k M U T p m a) b) = proEtalePullbackTensorGenerator (h ≫ k) R_V R_Z c_hk M U P (q ≫ (proEtaleBaseChange h).map p ≫ (MorphismProperty.Over.pullbackComp h k).inv.app U) m (proEtalePullbackTensorScalar h R_W R_Z c_h T P q a * b)) ∧ (∀ (M : proEtaleRingModules V R_V) (U : V.ProEt) (P : Z.ProEt) (p : P ⟶ (proEtaleBaseChange (h ≫ k)).obj U) (m : M.val.obj (op U)) (b : R_Z.obj.obj (op P)), (t.inv.app M).val.app (op P) (proEtalePullbackTensorGenerator (h ≫ k) R_V R_Z c_hk M U P p m b) = proEtalePullbackTensorGenerator h R_W R_Z c_h ((proEtaleRingModulePullback k R_V R_W c_k).obj M) ((proEtaleBaseChange k).obj U) P (p ≫ (MorphismProperty.Over.pullbackComp h k).hom.app U) (proEtalePullbackTensorGenerator k R_V R_W c_k M U ((proEtaleBaseChange k).obj U) (𝟙 _) m 1) b) ∧ (∀ M : proEtaleRingModules V R_V, (proEtaleRingModuleAdjunction k R_V R_W c_k).unit.app M ≫ (proEtaleRingModuleDirectImage k R_V R_W c_k).map ((proEtaleRingModuleAdjunction h R_W R_Z c_h).unit.app ((proEtaleRingModulePullback k R_V R_W c_k).obj M)) ≫ (proEtaleRingModuleDirectImage h R_W R_Z c_h ⋙ proEtaleRingModuleDirectImage k R_V R_W c_k).map (t.hom.app M) = (proEtaleRingModuleAdjunction (h ≫ k) R_V R_Z c_hk).unit.app M ≫ d.hom.app ((proEtaleRingModulePullback (h ≫ k) R_V R_Z c_hk).obj M)) ∧ (∀ t' : proEtaleRingModulePullback k R_V R_W c_k ⋙ proEtaleRingModulePullback h R_W R_Z c_h ⟶ proEtaleRingModulePullback (h ≫ k) R_V R_Z c_hk, (∀ M : proEtaleRingModules V R_V, ((proEtaleRingModuleAdjunction k R_V R_W c_k).comp (proEtaleRingModuleAdjunction h R_W R_Z c_h)).unit.app M ≫ (proEtaleRingModuleDirectImage h R_W R_Z c_h ⋙ proEtaleRingModuleDirectImage k R_V R_W c_k).map (t'.app M) = (proEtaleRingModuleAdjunction (h ≫ k) R_V R_Z c_hk).unit.app M ≫ d.hom.app ((proEtaleRingModulePullback (h ≫ k) R_V R_Z c_hk).obj M)) → t' = t.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q137",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Both tensor directions are specified on every inverse-image colimit generator, with arbitrary test objects, indexing arrows and local scalars; universal colimit and sheafification maps make these equivalent to the stated local formulas. The specified tensor-normalized module adjunction is used throughout. The five conclusion clauses specify restriction along q, the forward and inverse tensor formulas, the displayed composite-unit equation, and uniqueness among all natural transformations. c_hk and hc_hk name precisely the prescribed composite coefficient identification. The added landed statement dependency supplies only the existing real-data ring inverse-image composition mate, which has no finiteness hypothesis; no profinite specialization is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-10ca85cdc",
+  "group": "Q137",
+  "result": "fix",
+  "note": "Mathematics, dependencies, tensor formulas, universes, and verbatim item signature verified; snapshot compilation passed without warnings. Replaced the H11 placeholder second reading with a complete report in fixes/lem-sf-proetale-tensor-composition-unit.report.md. Review recorded in review.md; branch unchanged."
  }
 }
