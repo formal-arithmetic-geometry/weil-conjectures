@@ -21,6 +21,7 @@ import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 import WeilConjectures.SixFunctors.BaseChange.Derived
 import WeilConjectures.SixFunctors.BaseChange.Square
+import Sheaf.Paper.StrictHenselizationFunctoriality
 
 /-!
 # Specialization and cospecialization commute with fibre maps

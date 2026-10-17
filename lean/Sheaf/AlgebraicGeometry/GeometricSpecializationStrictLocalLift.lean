@@ -23,6 +23,7 @@ import Mathlib.AlgebraicGeometry.Stalk
 import Sheaf.AlgebraicGeometry.StrictHenselization
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+import Sheaf.Paper.StrictHenselizationFunctoriality
 
 /-!
 # Lifting geometric specializations to strict local schemes
