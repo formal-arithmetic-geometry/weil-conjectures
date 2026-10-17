@@ -155,6 +155,9 @@ theorem isIso_map_externalIhomMap_iff_of_isPullback {Z₁ Z₂ P Z₁' P' : Sche
       (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) g)
       (inv (rightDerivedLowerShriekBaseChangeMap Λ sq))).natTrans.app N) := hBC
   exact Adjunction.isIso_map_externalIhomMap_iff
+    (F₁ := L((p₁)^*[ModuleCat.{u + 1} Λ])) (F₂ := L((p₂)^*[ModuleCat.{u + 1} Λ]))
+    (F₁' := L((p₁')^*[ModuleCat.{u + 1} Λ])) (F₂' := L((g ≫ p₂)^*[ModuleCat.{u + 1} Λ]))
+    (G := L((g)^*[ModuleCat.{u + 1} Λ])) (G₁ := L((g₁)^*[ModuleCat.{u + 1} Λ]))
     (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) g)
     (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) g).app M).app N)
     (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) g₁)

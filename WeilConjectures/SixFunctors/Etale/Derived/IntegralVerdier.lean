@@ -34,7 +34,7 @@ blueprint therefore reads `[-b - 2d - 1, -a - 1]` in this convention.
 
 @[expose] public section
 
-universe u
+universe u' u
 
 open CategoryTheory Limits MonoidalCategory Opposite
 
@@ -53,11 +53,66 @@ local notation "𝐃(" X ", " Λ ")" =>
 
 attribute [local instance] derivedBraidedCategory
 
+section DoubleDual
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] (X : Scheme.{u})
+
+/-- The double-dual morphism `δ_K : K ⟶ RHom(RHom(K, ω), ω)` into an arbitrary object `ω` of
+`D(X_ét)`, written with `AlgebraicGeometry.Etale.derivedHom`: it is
+`CategoryTheory.MonoidalClosed.toIhomIhom` for the derived braiding. Stating results at a
+concrete coefficient ring through this constant keeps the instance-found monoidal closed
+structure out of their types (see `WeilConjectures.SixFunctors.Etale.Derived.TensorStructure`). -/
+noncomputable def derivedHomDoubleDual
+    (ω K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    K ⟶ ((derivedHom A X).obj (op (((derivedHom A X).obj (op K)).obj ω))).obj ω :=
+  MonoidalClosed.toIhomIhom ω K
+
+lemma derivedHomDoubleDual_eq (ω K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    derivedHomDoubleDual A X ω K = MonoidalClosed.toIhomIhom ω K :=
+  rfl
+
+end DoubleDual
+
 variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsNoetherianRing Λ]
   [IsAdicComplete I Λ] [Finite (Λ ⧸ I)] {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
   (hI : I = Ideal.span {ϖ}) {k : Type u} [Field k] [IsAlgClosed k]
   [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))] {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
   [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX]
+
+include hϖ hI in
+/-- Blueprint `prop-coef-integral-dualizing`: The integral dualizing object and its adjunction.
+
+For `a_X : X ⟶ Spec k` separated of finite type, `k` algebraically closed, there is a derived
+complete object `ω_{X, 𝒪_E} = R lim_n Res_n Ra_{X,n}^! A_n`, realised as the point of a homotopy
+limit cone `ω` of the tower `n ↦ Ra_X^!(Λ ⧸ Iⁿ)` (restriction of scalars commuting with
+`Ra_X^!`), such that:
+
+1. its reductions are `ω ⊗ᴸ A_n ≅ Ra_X^!(Λ ⧸ Iⁿ)`;
+2. `ω ∈ Dᵇc(X, 𝒪_E)`, and if `dim X ≤ d` its reductions have Tor amplitude in `[-2d - 1, 0]`
+   (the interval `[-2d, 0]` of the blueprint, measured over `A_n`; see the module
+   documentation);
+3. for `K ∈ Dᵇc(X, 𝒪_E)` there is an isomorphism of derived mapping complexes
+   `Ra_{X*} RHom(K, ω) ≅ RHom(Ra_{X!} K, Λ)`. -/
+theorem exists_isHomotopyLimit_dualizing :
+    ∃ ω : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
+        R(aX)^![ModuleCat.{u + 1} Λ]), Pretriangulated.IsHomotopyLimit ω ∧
+      (∀ n : ℕ, Nonempty ((reductionModIdeal Λ X (I ^ n)).obj ω.pt ≅
+        (R(aX)^![ModuleCat.{u + 1} Λ]).obj
+          ((DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I).obj (op n)))) ∧
+      DerivedCategory.boundedConstructibleIntegral I X ω.pt ∧
+      (∀ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞) → ∀ n : ℕ,
+        DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X (-2 * (d : ℤ) - 1) 0
+          ((reductionModIdeal Λ X (I ^ (n + 1))).obj ω.pt)) ∧
+      ∀ K : 𝐃(X, Λ), DerivedCategory.boundedConstructibleIntegral I X K →
+        Nonempty ((R((aX)_*[ModuleCat.{u + 1} Λ])).obj
+            (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj ω.pt) ≅
+          ((derivedHom (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj
+            (op ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K))).obj (constantComplex Λ (Spec (.of k)))) :=
+  sorry
+
+variable
   (ωX : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
     R(aX)^![ModuleCat.{u + 1} Λ]))
   (hωX : Pretriangulated.IsHomotopyLimit ωX)
@@ -90,7 +145,7 @@ theorem boundedConstructibleIntegral_derivedHom_dualizing {K : 𝐃(X, Λ)}
           (-b - 2 * (d : ℤ) - 1) (-a - 1)
           ((reductionModIdeal Λ X (I ^ (n + 1))).obj
             (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj ωX.pt))) ∧
-      IsIso (MonoidalClosed.toIhomIhom ωX.pt K) :=
+      IsIso (derivedHomDoubleDual (ModuleCat.{u + 1} Λ) X ωX.pt K) :=
   sorry
 
 include hϖ hI hωX in
@@ -109,7 +164,7 @@ theorem verdierDual_integralStage :
     (∀ {K : 𝐃(X, Λ)}, DerivedCategory.boundedConstructibleIntegral I X K →
       DerivedCategory.boundedConstructibleIntegral I X
           (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj ωX.pt) ∧
-        IsIso (MonoidalClosed.toIhomIhom ωX.pt K)) ∧
+        IsIso (derivedHomDoubleDual (ModuleCat.{u + 1} Λ) X ωX.pt K)) ∧
     ∀ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞) → ∀ (a b : ℤ) {K : 𝐃(X, Λ)},
       DerivedCategory.boundedConstructibleIntegral I X K →
       (∀ n : ℕ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
