@@ -14,9 +14,89 @@
   "def-weil-residue-field",
   "def-pc-geometrically-irreducible"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $Y=X_{\\mathrm{red}}$ and let $i:Y\\to X$ be its reduction map. By [lem-weil-pbc-reduction-universal-homeomorphism], $Y$ is reduced and $i$ is a surjective closed immersion inducing a homeomorphism after every base change. Its homeomorphism identifies the unique point $\\eta$ above $\\xi$ as a generic point and makes $Y$ irreducible. For every field extension $L/k$ it identifies $|Y_L|$ with $|X_L|$, so $Y$ is geometrically irreducible if and only if $X$ is. By [lem-weil-pbc-closed-immersion-residue-field-iso], $i$ induces an isomorphism $\\kappa(\\xi)\\to\\kappa(\\eta)$; this is a $k$-algebra isomorphism because the structure map of $Y$ is the composite through $X$. Thus it suffices to prove the equivalence for $Y$.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "def-sc-generic-point",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 054Q, proof of (2) implies (1), reduction to the reduced scheme; the same reduction may be made before both implications"
+   }
+  },
+  {
+   "text": "The reduced irreducible scheme $Y$ is integral by [def-pc-integral-scheme]. Write $K=\\mathcal O_{Y,\\eta}$. By [lem-sc-integral-function-field-affine-fraction], $K$ is a field and every nonempty affine open $U\\subseteq Y$ contains $\\eta$, with $\\Gamma(U,\\mathcal O_Y)$ a domain embedded in $K$ by the germ map. Since the maximal ideal of a field is zero, the residue-field definition identifies $K=\\kappa(\\eta)$, compatibly with $k$. The nonempty affine opens, ordered by reverse inclusion, form a nonempty directed poset: for two such opens their intersection contains $\\eta$ and has an affine neighbourhood of $\\eta$. They are cofinal among all open neighbourhoods of $\\eta$, since affine opens form a basis of a scheme. The stalk description [def-weil-pbc-module-stalk] therefore gives $K=\\varinjlim_{U}\\Gamma(U,\\mathcal O_Y)$ as $k$-algebras: every germ has an affine representative, and equality of two germs holds on a neighbourhood which can again be shrunk to an affine neighbourhood of $\\eta$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-weil-residue-field",
+    "def-weil-pbc-module-stalk",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 054Q, proof of (1) implies (2), stalk as filtered colimit; proof of (2) implies (1), affine domains and the generic field"
+   }
+  },
+  {
+   "text": "Assume $Y$ is geometrically irreducible over $k$. By [lem-zl-geometric-irreducibility-affine-local], every nonempty affine open $U$ has geometrically irreducible coordinate $k$-algebra $\\Gamma(U,\\mathcal O_Y)$. Apply clause (2) of [lem-zl-geometric-irreducibility-subalgebra-colimit] to the directed diagram in step 2. Its colimit $K$ is geometrically irreducible over $k$. Since $K=\\kappa(\\eta)$, this proves the forward implication for $Y$.",
+   "uses": [
+    "lem-zl-geometric-irreducibility-affine-local",
+    "lem-zl-geometric-irreducibility-subalgebra-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 054Q, proof of (1) implies (2), application of Tags 038G and 037N to the affine-neighbourhood colimit"
+   }
+  },
+  {
+   "text": "Conversely, assume $\\operatorname{Spec}\\kappa(\\eta)$ is geometrically irreducible over $k$. Identify this residue field with $K$ as in step 2. For every nonempty affine open $U\\subseteq Y$, [lem-sc-integral-function-field-affine-fraction] supplies the injective $k$-algebra germ map $\\Gamma(U,\\mathcal O_Y)\\to K$. Clause (1) of [lem-zl-geometric-irreducibility-subalgebra-colimit] implies that its source is geometrically irreducible over $k$. Applying the converse direction of [lem-zl-geometric-irreducibility-affine-local] to the irreducible scheme $Y$ shows that $Y$ is geometrically irreducible.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-zl-geometric-irreducibility-subalgebra-colimit",
+    "lem-zl-geometric-irreducibility-affine-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 054Q, proof of (2) implies (1), subalgebras of the generic field and the affine-local criterion"
+   }
+  },
+  {
+   "text": "Steps 3 and 4 give $Y$ geometrically irreducible over $k$ if and only if $\\operatorname{Spec}\\kappa(\\eta)$ is geometrically irreducible over $k$. The equivalence and the $k$-algebra residue-field isomorphism in step 1 transfer the two sides to $X$ and $\\operatorname{Spec}\\kappa(\\xi)$ respectively, proving the assertion for the original, possibly nonreduced scheme.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 054Q, equivalence (1) and (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "def-sc-generic-point",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-weil-residue-field",
+  "def-weil-pbc-module-stalk",
+  "def-pc-scheme",
+  "lem-zl-geometric-irreducibility-affine-local",
+  "lem-zl-geometric-irreducibility-subalgebra-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 054Q, lemma-geometrically-irreducible-function-field, proof of equivalence (1) and (2); move its reduction step before both implications, using 054M and closed-immersion residue-field invariance"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +129,50 @@
    "date": "2026-10-18",
    "verdict": "no match",
    "digest": "c1ae6e54f72f645e"
+  },
+  {
+   "tool": "grep",
+   "query": "geometricallyIrreducible.*(function|generic|stalk|residue)|geometrically_irreducible.*(function|generic|stalk|residue)",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean; No exact generic-residue-field criterion; functionField and integral-scheme facts give only intermediate notions.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "d8e6d7c9de625eb4"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric irreducibility is detected by the function field of an irreducible scheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.functionField, AlgebraicGeometry.Scheme.germToFunctionField, AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, Algebra.IsGeometricallyReduced.casesOn, Algebra.isGeometricallyReduced_iff, AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField; No exact generic-residue-field criterion; functionField and integral-scheme facts give only intermediate notions.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "e8ec041c3075b7d3"
+  },
+  {
+   "tool": "loogle",
+   "query": "GeometricallyIrreducible, Scheme.residueField",
+   "results": "0 hits: ; loogle: unknown identifier 'GeometricallyIrreducible'; No exact generic-residue-field criterion; functionField and integral-scheme facts give only intermediate notions.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric irreducibility of an irreducible scheme is equivalent to geometric irreducibility of the residue field at its generic point",
+   "results": "8 hits: AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.Scheme.functionField, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced, AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField, AlgebraicGeometry.Scheme.instFieldCarrierResidueField; No exact generic-residue-field criterion; functionField and integral-scheme facts give only intermediate notions.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "d15beef4db173049"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyIrreducible|IsGeometricallyIrreducible",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean; No exact generic-residue-field criterion; functionField and integral-scheme facts give only intermediate notions.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "6401ad12fe358e76"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-bertini-irreducible-member",
@@ -71,5 +191,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-generic-point-geometric-irreducibility",
+  "worker": "stage1",
+  "summary": "Verified 054Q (1) iff (2) with no reducedness or finite-type hypotheses. Reduce first using existing universal-homeomorphism and closed-immersion residue-field nodes; apply the existing integral generic-stalk/fraction-field node. The forward implication uses the affine-neighbourhood filtered colimit; the reverse uses the affine coordinate rings as subalgebras of the same generic field. Two new statement-only nodes state 038G (irreducible-source restriction) and 037N (subalgebras and directed colimits). All searches executed with msearch, no exact project attachment. Statement unchanged.",
+  "blueprint": "Current blueprint main-20261015, lem-zl-bertini-finite-cover-curve proof paragraph 3: apply Tag 0G4F to X and T; the generic-residue-field passage in the proof of 0G4F is carried by lem-zl-bertini-irreducible-member and this item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Generic reduction tool: identifies every field base change topologically; the unit has no separate reduction lemma."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "Generic closed-immersion tool: reduction preserves the actual generic residue field, not just a purely inseparable extension; not supplied in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-closed-immersion-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-abcd6345e",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-abcd6345e (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the Stacks sources: varieties.tex 054Q (ll.1446-1490), 038G (ll.1404-1442) and algebra.tex 037N (ll.11235-11257). The item matches 054Q (1)<=>(2) with no added hypotheses; the statement is unchanged. Step 1: the reduction node gives the homeomorphism after every base change, and Y_L = Y x_X X_L, so geometric irreducibility of Y and X agree; the closed-immersion node gives the k-linear isomorphism kappa(xi)=kappa(eta). Step 2: def-pc-integral-scheme makes Y integral; the fraction-field node states eta in U, that O(U) is a domain, that the stalk is a field and that the germ is injective; the affine opens give a directed cofinal system without assuming the intersection is affine. Steps 3 and 4 are exactly 054Q's two proofs, using 038G and 037N(1)/(3); reducing first avoids the nilpotent-kernel lemma. New node affine-local: 038G restricted to irreducible X; the restriction is needed, since (2) holds vacuously for the empty scheme but (1) fails. Tested on Spec C/R, A^1 and k[t,eps]/eps^2. New node subalgebra-colimit: true, including with non-injective transitions (a directed colimit is nonzero and its nilradical is prime). Duplicate search over dag/nodes (tags, labels, 'geometrically irreducible', colimit): no existing node states either result; the product nodes differ, and neither new node restates a clause of the item. Blueprint ancestry is bertini-finite-cover-curve paragraph 3 (0G4F) via the parent. No SGA. I accept tool_uses for the reduction-universal-homeomorphism and closed-immersion-residue-field-iso nodes (generic sk-thm-p1 tools; the unit has no substitute). No fixes."
  }
 }

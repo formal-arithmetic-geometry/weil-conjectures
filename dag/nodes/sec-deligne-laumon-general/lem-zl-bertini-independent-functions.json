@@ -15,9 +15,98 @@
   "def-kun-transcendence-degree",
   "def-weil-pbc-mv-polynomial-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $h=\\sum_{i=1}^n g_i x_i$, $C=A[x_1,\\ldots,x_n]$ and $B=k[X_1,\\ldots,X_n,Y,Z]$. These are finite type $k$-algebras: adjoining the finitely many variables to a finite generating set for $A$ gives a generating set for $C$. The polynomial universal property defines $\\varphi:B\\to C$ by $X_i\\mapsto x_i$, $Y\\mapsto h$, $Z\\mapsto g_2$. The ring $C$ is a domain: order monomials lexicographically and the largest monomial in a product of two nonzero polynomials has coefficient the product of their largest coefficients, which is nonzero in $A$. The maps $A\\hookrightarrow K$, $A[x]\\hookrightarrow K[x]\\hookrightarrow K(x)$ are injective (coefficientwise for the polynomial map, and by the definition of the fraction field). Thus a polynomial relation over $k$ among $x_1,\\ldots,x_n,h,g_2$ in $K(x)$ is exactly an element of $\\ker\\varphi$. It suffices to prove $\\ker\\varphi=0$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4E, lemma-algebraically-independent, proof; first paragraph, affine presentation and independence as injectivity"
+   }
+  },
+  {
+   "text": "Write $d=\\dim A$. The finite-type-domain dimension theorem shows that $d$ is a finite nonnegative integer. The finite-type Noetherianity theorem applies to $A$ and to $k$ (generated over itself by the empty set). Hence the polynomial dimension theorem gives $\\dim C=d+n$ and $\\dim B=n+2$: the only prime ideal of the field $k$ is $(0)$, so $\\dim k=0$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "lem-wf-affine-noetherian-components",
+    "lem-sf-noetherian-polynomial-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4E, lemma-algebraically-independent, proof; dimension calculation preceding the fibre inequality"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak m=(X_1-1,X_2,\\ldots,X_n,Y,Z)\\subset B$. Evaluation at $(1,0,\\ldots,0,0,0)$ gives $B/\\mathfrak m\\cong k$, so $\\mathfrak m$ is a rational maximal ideal. Its extended ideal is $J=(x_1-1,x_2,\\ldots,x_n,h,g_2)\\subset C$. The identity $h-g_1=g_1(x_1-1)+\\sum_{i=2}^n g_ix_i$ proves $J=(x_1-1,x_2,\\ldots,x_n,g_1,g_2)$. Evaluation $x_1\\mapsto1$, $x_i\\mapsto0$ for $i\\geq2$, followed by $A\\to A/(g_1,g_2)$, and the inclusion of constants modulo $J$ are inverse maps $C/J\\cong A/(g_1,g_2)$. The induced homeomorphism of spectra identifies $\\operatorname{Spec}(C/J)$ with $V(g_1,g_2)$: a prime of $A/(g_1,g_2)$ corresponds to its inverse image in $A$, a prime containing both generators. It preserves irreducible components and chains of irreducible closed subsets. Thus the hypothesis supplies an irreducible component $W$ of $\\operatorname{Spec}(C/J)$ with $\\dim W=d-2$. In particular this fibre is nonempty and $d\\geq2$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-irreducible-components",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4E, lemma-algebraically-independent, proof; last paragraph, the displayed fibre equations"
+   }
+  },
+  {
+   "text": "Suppose $P=\\ker\\varphi\\neq0$. It is a proper prime ideal because $C$ is a domain and $\\varphi$ is unital. The polynomial ring $B$ over $k$ is also a domain. Any strict chain of primes of $B/P$ pulls back to a strict chain of primes of $B$ all containing the nonzero ideal $P$. Prepending the strictly smaller prime $(0)$ increases its length by one. Since $\\dim B=n+2$, this proves $\\dim(B/P)\\leq n+1$. These dimensions are ordinary finite integers: $B/P$ is a nonzero finite type domain, and its dimension is bounded by the same chain argument.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4E, lemma-algebraically-independent, proof; first paragraph, dimension drop for a nondominant map"
+   }
+  },
+  {
+   "text": "Apply [lem-zl-finite-type-fibre-component-lower-bound] to the finite type $k$-algebras $B,C$, the homomorphism $\\varphi$, and the rational maximal ideal $\\mathfrak m$ of Step 3. The domain hypothesis for $C$ was verified in Step 1. Its ideal $J$ is exactly the extended ideal computed in Step 3. Hence that statement applies to the particular irreducible component $W$ supplied by the hypothesis, and yields $d-2=\\dim W\\geq\\dim C-\\dim(B/P)\\geq(d+n)-(n+1)=d-1$, a contradiction. Consequently $\\ker\\varphi=0$.",
+   "uses": [
+    "lem-zl-finite-type-fibre-component-lower-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4E, lemma-algebraically-independent, proof; first paragraph fibre lower bound and final paragraph contradiction"
+   }
+  },
+  {
+   "text": "Choose $c_2=1$ and $c_i=0$ for $i\\neq2$, which is permitted since $n\\geq2$. Then $\\sum_i c_i g_i=g_2$. By Step 1 and $\\ker\\varphi=0$, no nonzero polynomial over $k$ vanishes on $x_1,\\ldots,x_n,\\sum_i g_ix_i,g_2$ in $K(x_1,\\ldots,x_n)$. This is precisely the required algebraic independence. The choice uses only $0,1\\in k$, so the argument also applies when $k$ is finite.",
+   "uses": [
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4E, lemma-algebraically-independent, proof; choice of coefficients and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-kun-transcendence-degree",
+  "def-weil-affine-spectrum",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-sf-noetherian-polynomial-dimension",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "lem-wf-affine-noetherian-components",
+  "lem-zl-finite-type-fibre-component-lower-bound"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0G4E, lemma-algebraically-independent, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +139,42 @@
    "date": "2026-10-18",
    "verdict": "no match",
    "digest": "5469462938cb0a0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Codimension two common zeros of g1 and g2 imply algebraic independence of x1,...,xn, sum gi xi and g2 in the rational function field",
+   "results": "8 hits: algebraicIndependent_iff, AlgebraicIndepOn, MvPolynomial.algebraicIndependent_polynomial_aeval_X, algebraicIndependent_of_finite_type', AlgebraicIndependent.of_aeval, AlgebraicIndependent.option_iff, algebraicIndependent_of_set_of_finite, algebraicIndependent_comp_subtype",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give definitions and general independence criteria, not the codimension-two implication",
+   "digest": "5d6b89cf388e5aa2"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicIndependent.*(codim|height|linear)|[Bb]ertini",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration returned",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicIndependent\", MvPolynomial",
+   "results": "12 hits: algebraicIndependent_iff_injective_aeval, AlgebraicIndependent.aevalEquiv, AlgebraicIndependent.repr, AlgebraicIndependent.eq_zero_of_aeval_eq_zero, algebraicIndependent_iff, AlgebraicIndependent.aeval_comp_repr, AlgebraicIndependent.aevalEquiv_apply_coe, AlgebraicIndependent.aeval_repr",
+   "date": "2026-10-17",
+   "verdict": "no match: general evaluation injectivity and adjoin isomorphisms do not prove this implication",
+   "digest": "ee5b393bc4668aec"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic independence of generic linear forms sum gi xi and g2 when the ideal g1 g2 has a component of codimension two",
+   "results": "8 hits: algebraicIndependent_iff_ker_eq_bot, AlgebraicIndependent, AlgebraicIndependent.linearIndependent, AlgebraicIndepOn, algebraicIndependent_of_finite_type, algebraicIndependent_iff, algebraicIndependent_of_finite, AlgebraicIndependent.matroid",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give independence definitions and criteria; none uses the common-zero component hypothesis",
+   "digest": "7321e458787f458d"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-bertini-irreducible-member",
@@ -72,5 +193,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-bertini-independent-functions",
+  "worker": "stage1",
+  "summary": "Read Stacks 0G4E and split its explicit c_2=1 proof, with the special fibre written as a quotient isomorphism. Existing nodes provide finite dimension, Noetherianity and polynomial dimensions. Created only the general rational closed-fibre component lower bound from 0B2L; the dimension drop is proved directly by prepending the zero prime. No statement change and no exact Lean attachment.",
+  "blueprint": "The argument supplies the 0G4E input of Tag 0G4F used in paragraph 3 of the main-20261015 proof of lem-zl-bertini-finite-cover-curve, through lem-zl-bertini-irreducible-member.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "why": "Step 2 uses finiteness of the Krull dimension of a finite type domain over an arbitrary field; this generic algebraic tool is not stated in the Bertini unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NV-b6ca10d45",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-b6ca10d45 (reviewer sub-agent of L); spot-checked: Read the full maths of the item and the new node against Stacks 0G4E (more-morphisms.tex, lemma-algebraically-independent, lines 9011-9052) and 0B2L (varieties.tex lines 3953-4005, part (2)(a)). Item statement is unchanged and agrees with 0G4E hypothesis by hypothesis; no target weakened. New node lem-zl-finite-type-fibre-component-lower-bound is true. It follows from 0B2L (2)(a) with X=Spec C irreducible, Z=V(P)=Spec(B/P), fibre Spec(C/mC)=Spec(C/J), applied at the generic point of W (W is the only component through that point). Edge case m not containing P makes J=C, so the claim is vacuous; also checked isomorphism, projection, constant map and closed immersion. It is statement-only, self-contained, with correct definition citations, tag and label, blueprint from/via chain and recorded searches. Not a duplicate after reading the 0A3V, 02FZ, 0D4I, 02JS, 02FX and 00QH nodes, and it restates no clause of the item. Item steps checked: injectivity of B->C->K(x) is equivalent to independence; dim C=d+n and dim B=n+2 via the trdeg tool and two Mathlib leaves; identity h-g1=g1(x1-1)+sum_{i>=2} g_i x_i gives C/J = A/(g1,g2) and the component W of dim d-2; prepending the zero prime gives dim(B/P)<=n+1; the new node gives d-2>=d-1, contradiction; c=e2. proof_deps equals the union of uses. The parent irreducible-member uses the statement as written. Accepted tool_use: lem-weil-pbc-finite-type-domain-dimension-trdeg, used only for finiteness of dim A. No SGA citation; route through blueprint paragraph 3 of lem-zl-bertini-finite-cover-curve -> 0G4F -> 0G4E. No fixes."
  }
 }
