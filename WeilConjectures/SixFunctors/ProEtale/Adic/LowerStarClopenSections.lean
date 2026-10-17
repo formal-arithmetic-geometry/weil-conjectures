@@ -61,7 +61,7 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
-variable {ι : Type*} [Fintype ι] {Y S : Scheme.{u}} (g : Y ⟶ S) (s : ι → (S ⟶ Y))
+variable {ι : Type*} [Finite ι] {Y S : Scheme.{u}} (g : Y ⟶ S) (s : ι → (S ⟶ Y))
   [∀ i, IsOpenImmersion (s i)]
 
 /-- For a section `s` of `g` which is an open immersion, `g_* s_* s^* ≅ s^*`. -/
@@ -78,14 +78,16 @@ lemma preservesEpimorphisms_lowerStar_of_sections (hs : ∀ i, s i ≫ g = 𝟙 
     (hdisj : Pairwise fun i i' ↦ Disjoint (Set.range (s i).base) (Set.range (s i').base))
     (hcover : ⋃ i, Set.range (s i).base = Set.univ) :
     (g)_*[A].PreservesEpimorphisms := by
-  have (i : ι) : ((s i)^*[A] ⋙ (s i)_*[A] ⋙ (g)_*[A]).PreservesEpimorphisms :=
+  let := Fintype.ofFinite ι
+  have (i : ι) : (((s i)^*[A] ⋙ (s i)_*[A]) ⋙ (g)_*[A]).PreservesEpimorphisms :=
     Functor.PreservesEpimorphisms.of_iso
       (upperStarCompLowerStarCompLowerStarIsoOfComp A g (s i) (hs i)).symm
-  have := isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range A
+  have hiso (i : ι) := isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range A (s i)
+    (hclosed i)
   exact Functor.preservesEpimorphisms_of_sum_comp_eq_id (g)_*[A]
     (fun i ↦ (s i)^*[A] ⋙ (s i)_*[A]) (fun i ↦ (upperStarLowerStarAdjunction A (s i)).unit)
     (fun i ↦ Functor.whiskerLeft (s i)^*[A]
-      (@inv _ _ _ _ (openImmersionLowerShriekToLowerStar A (s i)) (this (s i) (hclosed i))) ≫
+      (@inv _ _ _ _ (openImmersionLowerShriekToLowerStar A (s i)) (hiso i)) ≫
       (openImmersionLowerShriekUpperStarAdjunction A (s i)).counit)
     (sum_clopenIdempotentSheaf A s hclosed hdisj hcover)
 
@@ -98,7 +100,9 @@ lemma preservesFiniteColimits_lowerStar_of_sections (hs : ∀ i, s i ≫ g = �
     (hcover : ⋃ i, Set.range (s i).base = Set.univ) :
     PreservesFiniteColimits (g)_*[A] := by
   have := preservesEpimorphisms_lowerStar_of_sections A g s hs hclosed hdisj hcover
-  refine ((Functor.preservesFiniteColimits_tfae (g)_*[A]).out 0 3).1 fun T hT ↦ ⟨?_, ?_⟩
+  refine ((Functor.preservesFiniteColimits_tfae (g)_*[A]).out 0 3).1 ?_
+  intro T hT
+  refine ⟨?_, ?_⟩
   · exact ((Functor.preservesFiniteLimits_iff_forall_exact_map_and_mono (g)_*[A]).1
       inferInstance T hT).1
   · have := hT.epi_g

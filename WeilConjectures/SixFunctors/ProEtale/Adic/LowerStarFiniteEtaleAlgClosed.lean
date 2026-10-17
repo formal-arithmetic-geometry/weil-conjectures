@@ -62,7 +62,7 @@ lemma Scheme.Hom.isOpenImmersion_of_comp_eq_id {Y S : Scheme.{u}} (a : Y ⟶ S) 
     (s : S ⟶ Y) (hs : s ≫ a = 𝟙 S) : IsOpenImmersion s := by
   have : IsIso (s ≫ a) := hs ▸ inferInstance
   have := isOpenImmersion_pullbackLift_of_etale a s
-  rw [← pullback.lift_snd (𝟙 S) s (by simp)]
+  rw [← pullback.lift_snd (f := s ≫ a) (g := a) (𝟙 S) s (by simp)]
   infer_instance
 
 /-- A section `s` of a separated morphism `a` is a closed immersion: it is the graph of `s` over
@@ -71,7 +71,7 @@ lemma Scheme.Hom.isClosedImmersion_of_comp_eq_id {Y S : Scheme.{u}} (a : Y ⟶ S
     (s : S ⟶ Y) (hs : s ≫ a = 𝟙 S) : IsClosedImmersion s := by
   have : IsIso (s ≫ a) := hs ▸ inferInstance
   have := isClosedImmersion_pullbackLift_of_isSeparated a s
-  rw [← pullback.lift_snd (𝟙 S) s (by simp)]
+  rw [← pullback.lift_snd (f := s ≫ a) (g := a) (𝟙 S) s (by simp)]
   infer_instance
 
 namespace ProEtale
@@ -87,7 +87,6 @@ theorem preservesFiniteColimits_adicLowerStar_of_isAlgClosed {K : Type u} [Field
   have : IsLocallyArtinian Y := .of_locallyQuasiFinite a
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace a
   have : Finite Y := finite_of_compact_of_discrete
-  let := Fintype.ofFinite Y
   choose s hs hy using fun y : Y ↦ a.exists_comp_eq_id_of_isClosed y (isClosed_discrete _)
   have hrange (y : Y) : Set.range (s y).base = {y} := by
     refine Set.ext fun z ↦ ⟨?_, ?_⟩
@@ -100,7 +99,7 @@ theorem preservesFiniteColimits_adicLowerStar_of_isAlgClosed {K : Type u} [Field
   refine preservesFiniteColimits_adicLowerStar_of_sections a s l hs (fun y ↦ ?_) (fun y y' h ↦ ?_)
     (Set.eq_univ_of_forall fun y ↦ Set.mem_iUnion.2 ⟨y, (hrange y).symm ▸ rfl⟩)
   · exact isClosed_discrete _
-  · rw [hrange, hrange]
+  · simp only [hrange]
     exact Set.disjoint_singleton.2 h
 
 end ProEtale
