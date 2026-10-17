@@ -253,5 +253,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.Projective",
+  "declaration": "AlgebraicGeometry.Scheme.proetale_wContractible_projective",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/Projective.lean",
+  "statement": "theorem proetale_wContractible_projective (X : Scheme.{u}) (D : Type u) [CommRing D] [IsWContractibleRing D] (f : Spec (.of D) ⟶ X) [WeaklyEtale f] : (∀ (F : Sheaf (ProEt.topology X) (Type (u + 1))) (φ : F ⟶ ((ProEt.topology X).uliftYoneda.{u + 1}.obj (ProEt.mk f))) [Epi φ], ∃ s : ((ProEt.topology X).uliftYoneda.{u + 1}.obj (ProEt.mk f)) ⟶ F, s ≫ φ = 𝟙 _) ∧ (∀ (F G : Sheaf (ProEt.topology X) (Type (u + 1))) (φ : F ⟶ G) [Epi φ], Function.Surjective (((sheafToPresheaf (ProEt.topology X) (Type (u + 1))).map φ).app (op (ProEt.mk f))))",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f6474bab8",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Delivery shape: one commit changing only the report, the new module Sheaf/AlgebraicGeometry/ProEtale/Projective.lean, and the item's lean record; lean.statement verbatim in the file. Statement matches node and blueprint source det-pe-wcb-projective.md clause by clause: X : Scheme.{u} with no extra assumptions; D : Type u [CommRing D] [IsWContractibleRing D] (recorded sk-def-pe-wlocal class, read); U = ProEt.mk f with [WeaklyEtale f] on Mathlib ProEt.topology (recorded mathlib_match, no pro-etale substitute); h_U = Mathlib uliftYoneda.{u+1} sheaf (canonical, no new def); clause 1 = section of every Epi onto h_U (s ≫ φ = 𝟙); clause 2 = surjectivity of the U-component of every Epi. Sheaf values in Type (u+1), the same convention as proetale_site_properties; universes checked with pp.universes, nothing collapsed. Edge cases included: zero ring / empty Spec D, empty sheaves; no characteristic or finiteness restriction. Gates: no definitions, only proof is sorry, module and theorem docstrings carry source place, blueprint tag and all six proof steps; imports follow convention. nt_compile.py --json on the local side overlay compiled the module clean in 2.5 s; a probe copy confirmed the tool reports messages. No existing declaration states the node (upstream IsWeaklyContractible / isWeaklyContractible_of_iso covers only clause 2, noted for stage 3). Cosmetic only: the Worker report still describes the first round (removed helper proetaleRepresentableSheaf); the second reading records that repair. No fixes needed."
  }
 }

@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "def-coef-infinity-relative-cone"
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-sifted-colimit-calculus",
+  "lem-coef-cocartesian-section-colimits"
  ],
  "proof": [
   {
@@ -241,5 +243,24 @@
   "group": "Q129",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-25df41e61 (reviewer sub-agent of L); spot-checked: Read the item in full: statement, six steps, 12 cited node statements, the parent's Step 4, and HTT 4.3.1.9-4.3.1.11 (pp. 264-267, from a local PDF copy). The statement matches HTT Cor. 4.3.1.11 hypothesis by hypothesis, with exact v|_J=h and pv=g. Checked on J empty, J a point and p=id. Steps 2, 3, 5 and 6 are correct. Steps 5 and 6 are adjacent squares from the mapping criterion for p_J and the constant test for c', pasted with coherent triangles from Q∘(a×id); this is 4.3.1.9 in the needed special case. In Step 4, D→T^▷ is the pushout-join of the right anodyne J×{1}→J×Δ^1 with ∅→Δ^0, so it is inner anodyne; the report is right that HTT's 'inner fibration' should read inner anodyne. Repaired two small faults in fixes/dag/nodes/sec-six-functors/<item>.json. (1) C3/E1: Step 1 applied lem-coef-infinity-pointwise-cocartesian-transport, whose hypothesis needs mapping-space cocartesian lifts, but p is horn-cocartesian; I added lem-coef-infinity-cocartesian-mapping-criterion and def-coef-infinity-fibrations to its uses, with one sentence. (2) Step 4 treated the saturated meaning of inner anodyne (lem-coef-infinity-anodyne-cocones) as the same as the lifting-class meaning; I replaced that sentence with the elementary inclusion. Statement, stmt_deps and proof_deps are unchanged. No new nodes. No duplicate in the DAG: checked relative-cone-equivalence, fiber-relative-colimit-criterion, local-fiber test, filtered-fiber cone lifting and relative-cocone-parameters. Acyclic. All citations are in unit sk-prop-sf-biduality-general or are definitions or a Mathlib leaf; no tool_uses; no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CocartesianPrescribedConeColimitLifting",
+  "declaration": "SSet.Enhanced.cocartesian_prescribed_cone_colimit_lifting",
+  "file": "lean/Sheaf/CategoryTheory/CocartesianPrescribedConeColimitLifting.lean",
+  "statement": "theorem cocartesian_prescribed_cone_colimit_lifting {J E B : SSet.{u}} [Quasicategory E] [Quasicategory B] (p : E ⟶ B) (hp : cocartesianFibration p) (hcolim : ∀ b : B _⦋0⦌, HasInfinityColimitsOfShape J (fiber p b)) (htransport : ∀ (b b' : B _⦋0⦌) (e : B _⦋1⦌), B.δ 1 e = b → B.δ 0 e = b' → ∀ T : fiber p b ⟶ fiber p b', IsCocartesianTransport e T → PreservesInfinityColimitsOfShape J T) (h : J ⟶ E) (g : rightJoinCone J ⟶ B) (hcomm : h ≫ p = rightJoinConeInclusion J ≫ g) : ∃ v : rightJoinCone J ⟶ E, rightJoinConeInclusion J ≫ v = h ∧ v ≫ p = g ∧ IsRelativeColimitDiagram p v",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing coherent colimit-existence, preservation and cocartesian transport predicates, whose landed owning nodes are added to stmt_deps. The shape is any simplicial set, both lifting equations are strict, and the base cone is arbitrary. No new notion or dependency repair is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60b2d6556",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Signature matches node/HTT Cor 4.3.1.11 clause by clause: arbitrary J (no instance), cocartesianFibration p, HasInfinityColimitsOfShape J on every strict fiber, PreservesInfinityColimitsOfShape J for every IsCocartesianTransport T over every edge (orientation checked), arbitrary g with strict hcomm; conclusion ∃ v with exact v|_J=h, v≫p=g, IsRelativeColimitDiagram. All used declarations read in side clone; no stronger assumptions; single universe u, all bound. Node diff vs side: only lean + two landed owning stmt_deps (acyclic, checked by traversal); statement and proof unchanged; lean.statement verbatim. No definitions, sole sorry, source/blueprint docstrings with six-step proof; report has Worker report and Second reading by Q62. nt_compile --json with side overlay rc=0, no errors or warnings. Edge cases J empty, B empty, empty fiber, degenerate edges OK. Cosmetic only: report.md has the theorem numbers 4.3.1.9-11 mangled into 'the project server'; node and docstrings are correct."
  }
 }

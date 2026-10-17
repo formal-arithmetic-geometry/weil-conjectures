@@ -207,5 +207,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClassicalZariskiLocal",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtaleClassical_zariskiLocal",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClassicalZariskiLocal.lean",
+  "statement": "theorem proEtaleClassical_zariskiLocal (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) : (∀ (I : Type w) (U : I → X.Opens), (⨆ i : I, U i) = ⊤ → (∀ i : I, IsClassical ((sheafCompose (Scheme.ProEt.topology (U i).toScheme) (forget (ModuleCat.{u + 1} Λ))).obj ((openImmersionRestriction (ModuleCat.{u + 1} Λ) (U i).ι).obj F))) → IsClassical ((sheafCompose (Scheme.ProEt.topology X) (forget (ModuleCat.{u + 1} Λ))).obj F)) ∧ (IsClassical ((sheafCompose (Scheme.ProEt.topology X) (forget (ModuleCat.{u + 1} Λ))).obj F) → ∀ U : X.Opens, IsClassical ((sheafCompose (Scheme.ProEt.topology U.toScheme) (forget (ModuleCat.{u + 1} Λ))).obj ((openImmersionRestriction (ModuleCat.{u + 1} Λ) U.ι).obj F)))",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c6fd5408",
+  "group": "NX",
+  "result": "pass",
+  "note": "Read the node, the blueprint statement and proof (sk-thm-pe-constructible-comparison-local.md/.proof.md), the module, the node record, the report and the statement dependency det-pe-classical-sheaves-modules. Both clauses match the node: X : Scheme.{u}, Λ : Type (u+1) [CommRing Λ], F a ModuleCat-valued sheaf on the real Scheme.ProEt.topology X (the dependency's encoding), an arbitrary open cover with free index universe w via ⨆ U i = ⊤, the existing IsClassical on underlying set sheaves, and the genuine sectionwise openImmersionRestriction (FiniteCoefficient/LowerShriek/Open/Defs.lean:260; no finiteness of Λ; its instances hold for ModuleCat). The converse covers all opens independently of any cover. Edge cases checked: empty cover/empty scheme, empty or repeated opens, zero ring, universes bound. IsClassicalModule exists but the item correctly follows the landed dependency's encoding. No definitions, one sorry, docstrings carry source/blueprint and all four proof steps, all proof imports present, node differs from base only in lean, statement verbatim. nt_compile --json rc=0, no errors or warnings. No findings."
  }
 }
