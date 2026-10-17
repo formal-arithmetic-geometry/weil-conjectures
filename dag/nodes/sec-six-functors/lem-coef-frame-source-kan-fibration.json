@@ -11,9 +11,40 @@
   "lem-coef-cosimplicial-frame-mapping",
   "lem-coef-reedy-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a horn inclusion $i:\\Lambda^n_k\\hookrightarrow\\Delta^n$ and a lifting square from it to the restriction map. By the frame tensor–Hom adjunction, the horn simplex in $H(B^\\bullet,Y)$ is a map $B^\\bullet\\otimes\\Lambda^n_k\\to Y$, while the simplex in $H(A^\\bullet,Y)$ is a map $A^\\bullet\\otimes\\Delta^n\\to Y$; their compatibility is exactly a map from the pushout $(A^\\bullet\\otimes\\Delta^n)\\amalg_{A^\\bullet\\otimes\\Lambda^n_k}(B^\\bullet\\otimes\\Lambda^n_k)$ to $Y$. The cited frame pushout-product node says that this map into $B^\\bullet\\otimes\\Delta^n$ is a trivial cofibration, because every horn inclusion $\\Lambda^n_k\\hookrightarrow\\Delta^n$ is a trivial cofibration of simplicial sets by the cited Kan–Quillen model-structure node (trivial cofibrations are the retracts of transfinite composites of pushouts of coproducts of horn inclusions, so in particular each horn inclusion is one). Since $Y$ is fibrant, the map to the terminal object has the right lifting property against it, producing an extension $B^\\bullet\\otimes\\Delta^n\\to Y$. Thus the restriction has the right lifting property against every horn. The cited cosimplicial-frame mapping node says both source and target are Kan complexes for fibrant $Y$, so this right lifting property is precisely a Kan fibration of Kan complexes.",
+   "uses": [
+    "lem-coef-frame-pushout-product",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey Proposition 5.4.3 and Corollary 5.4.4, printed pp.130-131 (PDF pp.139-140), via the tensor–Hom adjunction."
+   }
+  },
+  {
+   "text": "Let $(a,b):(A^\\bullet,B^\\bullet,u^\\bullet)\\to(A'^\\bullet,B'^\\bullet,u'^\\bullet)$ be a map of augmented pairs, so $u'^\\bullet a=b\\,u^\\bullet$ and the augmentations are compatible, and let $g:Y\\to Y'$ be a map of fibrant objects. Precomposition with $a^n,b^n$ and postcomposition with $g$ act degreewise on $H(-,-)_n=\\operatorname{Hom}_{\\mathcal M}((-)^n,-)$ and commute with simplex operators, and $u'^\\bullet a=b\\,u^\\bullet$ gives $a^*\\circ(u'^\\bullet)^*=(u^\\bullet)^*\\circ b^*$; postcomposition with $g$ commutes with every restriction. Identities and composites are preserved by associativity of composition. Hence the restriction maps $(u^\\bullet)^*$ form a natural transformation of functors of the augmented pair and the fibrant target, and by Step 1 each component is a Kan fibration of Kan complexes. The horn fillers of Step 1 are chosen and are not asserted to be natural; naturality concerns the restriction maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey Proposition 5.4.3, naturality of the framing adjunction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-frame-pushout-product",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-cosimplicial-frame-mapping"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Proposition 5.4.3 and Corollary 5.4.4, printed pp.130-131 (PDF pp.139-140), with Proposition 3.1.5 for the tensor–Hom adjunction; read online, not archived in literature/ (WANTED in the report)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -45,7 +76,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-model-undercategory-mapping-fiber",
@@ -57,7 +88,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, middle derived mapping-complex comparison: the restriction between compatible source frames must be a Kan fibration before its strict fiber computes the relative derived mapping space.",
+   "place": "Proof paragraph 2, middle derived mapping-complex comparison: restriction between compatible source frames is a Kan fibration before its strict fiber computes the relative derived mapping space.",
    "via": [
     "lem-coef-model-undercategory-mapping-fiber",
     "lem-coef-relative-cut-nerve-diagrams",
@@ -73,5 +104,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-frame-source-kan-fibration",
+  "worker": "stage1",
+  "summary": "Split the assertion using Hovey Proposition 5.4.3: a focused unsplit node records the trivial pushout product of a Reedy cofibration of cosimplicial frames with a simplicial trivial cofibration; the item then applies tensor–Hom adjunction to horn inclusions and uses fibrancy of the target. Naturality follows from functoriality of the same adjunction construction. No Mathlib declaration states either result.",
+  "blueprint": "Main-20261015 prop-coef-integral-exceptional-adjoint proof, paragraph 2, middle derived mapping-complex comparison before the strict fiber calculation."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N0-4b1977aff",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-4b1977aff (reviewer sub-agent of L); spot-checked: The mathematics is correct and was read in full. Read against Hovey, Model Categories (local pdftotext copy, since Hovey is not in literature/): Prop 3.1.5, Def 5.2.7, Rem 5.2.9, Prop 5.4.1, Prop 5.4.3 with its proof, Cor 5.4.4. New node lem-coef-frame-pushout-product states Hovey 5.4.3 exactly: a Reedy cofibration of frames on cofibrant objects, any simplicial trivial cofibration, and the same pushout orientation. It is true (5.4.1 gives the cofibration; 3.6.8 plus two-out-of-three gives the weak equivalence), was tested on Delta^0->Delta^1 and K=L, does not restate the item, and has no duplicate in the DAG (checked parametrized-adjunction-corner-lifting, resolution-interval-tensor, framed-projective-diagram-resolution, frame-bisimplicial-span and others). Item step 1 (horn lifting by adjunction against Y->*, Kan-ness from lem-coef-cosimplicial-frame-mapping) is correct, including n=1. Its hypotheses match the parent lem-coef-model-undercategory-mapping-fiber step 7. Everything stays in unit sk-prop-sf-biduality-general, so no tool_uses. Three repairs, as whole files in fixes/: (1) B3/C4: the new node cited def-coef-simplicial-tensor-cotensor (enriched tensors, not Hovey's frame tensor) and no node for sSet trivial cofibrations; it now defines A⊗K inline as in Hovey 3.1.5 and cites lem-coef-kan-quillen-right-proper instead. (2) C1: step 1 used 'horn inclusions are trivial cofibrations' with no node; it now cites lem-coef-kan-quillen-right-proper and proof_deps is updated. (3) E5: step 2 claimed the chosen horn fillers are natural; it is rewritten as naturality of the restriction maps, still elementary. Also proof_origin.by changed from document to agent, since Hovey is not archived (brief §4). The item statement is unchanged and not weakened; no SGA source used; no cycle.; 2 file(s) fixed by the reviewer"
  }
 }
