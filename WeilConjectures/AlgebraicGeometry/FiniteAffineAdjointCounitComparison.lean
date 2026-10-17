@@ -127,8 +127,7 @@ theorem finite_affine_adjoint_counit_comparison {X Y : Scheme.{u}}
       (R := moduleRings Y.toRingedSpace)
       (R' := moduleRings (directImageAlgebraSpace f))
       ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).rightDerivedFunctor ⊣ ρR)
-    (K : schemeDerivedQCohCategory Y) (hK : ∃ n : ℤ, K.obj.IsGE n)
-    (haK : ∃ n : ℤ, (a.obj K).obj.IsGE n) :
+    (K : schemeDerivedQCohCategory Y) (hK : ∃ n : ℤ, K.obj.IsGE n) :
     ∃ c : RingedSpace.derivedModuleDirectImage (toDirectImageAlgebraSpace f) ⋙
         (SheafOfModules.restrictScalars
           (R := moduleRings Y.toRingedSpace)
@@ -144,7 +143,6 @@ theorem finite_affine_adjoint_counit_comparison {X Y : Scheme.{u}}
           ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).rightDerivedFunctor.map
             φ.hom ≫ adjA.counit.app K.obj =
         comparison.inv.app (a.obj K) ≫ (adj.counit.app K).hom := by
-  have _ := haK
   obtain ⟨c⟩ := finite_affine_derived_factorization.{u, wX, wY, wA} f
   obtain ⟨E, ⟨eE⟩, _⟩ := finite_affine_derived_equivalence.{u, wX, wY, wA} f
   let G := RingedSpace.derivedModuleDirectImage (toDirectImageAlgebraSpace f)

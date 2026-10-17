@@ -95,8 +95,7 @@ theorem rightAdjoint_mate_scheme_iso_transport
         Arrow.mk ((schemeDerivedQCohProperty (pullback f' g)).ι.map
       (dualityEquationBaseChangeMap f' g b b' adjb adjb' hβ K)))) := by
   have hbase :=
-    rightAdjoint_mate_scheme_iso_transport_base f f' e he g a b d b'
-      adja adjb adjd adjb' hβ K r hr₁ hr₂
+    rightAdjoint_mate_scheme_iso_transport_base f f' e he g hβ r hr₁ hr₂
   refine ⟨hbase, ?_⟩
   exact
     rightAdjoint_mate_scheme_iso_transport_mate f f' e he g a b d b'

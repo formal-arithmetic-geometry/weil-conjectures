@@ -59,10 +59,9 @@ isomorphisms. No irreducibility assumption on the base is necessary.
 theorem fibre_dimension_eq_of_specializes_component_restrict
     {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)]
-    (x x' : X) (hx : f x ∈ U) (hx' : f x' ∈ U) (hsp : x' ⤳ x)
+    (x x' : X) (hx : f x ∈ U) (hsp : x' ⤳ x)
     (hcomponent : f.asFiber x ∈ genericPoints (f.fiber (f x))) :
     topologicalKrullDimAt (f.asFiber x') = topologicalKrullDimAt (f.asFiber x) := by
-  have _ := hx'
   obtain ⟨V, hxV, hV⟩ := exists_fibre_dimension_open_of_flat_restrict
     f U x hx hcomponent
   exact hV x' (hsp.mem_open V.isOpen hxV)

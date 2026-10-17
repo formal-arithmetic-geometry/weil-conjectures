@@ -25,7 +25,6 @@ open scoped CategoryTheory.TwoSquare
 namespace AlgebraicGeometry
 
 -- The fixed signature names hL and hs, although the conclusion does not depend on their proofs.
-set_option linter.unusedVariables false in
 /-- Direct-image and base comparisons compatible with a fixed canonical upper comparison.
 Source: Stacks Project, Tags 0ATM (ordinary base-change pasting), 08HY (the counit
 formula), 0D5S (pullback composition), and 0D5T (direct-image composition).
@@ -89,7 +88,7 @@ theorem rectangle_ordinary_geometric_direct
       @qcInverseBaseChange _ (pullback f g) S T _
         (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _
         (pullback.snd f g) _ _ h hβI
-    ∀ (s : U ⋙ L ≅ V) (hL : L.IsEquivalence) (hs : ∀ E : schemeDerivedQCohCategory X,
+    ∀ (s : U ⋙ L ≅ V) (_ : L.IsEquivalence) (_ : ∀ E : schemeDerivedQCohCategory X,
       (schemeDerivedQCohProperty (pullback (pullback.snd f g) h)).ι.map (s.hom.app E) =
         (let comp := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec
           (Classical.choose_spec exists_derivedPullbackComposition)))

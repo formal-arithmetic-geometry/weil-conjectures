@@ -87,10 +87,6 @@ theorem exists_higherDirectImage_limit_presheaf_class_cover {S : Scheme.{v}}
       (DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj
         (R+(((D.obj (op i)).hom)_*[AddCommGrpCat.{v + 1}]).obj
           ((DerivedCategory.Plus.singleFunctor _ 0).obj (F i))))
-    (hK : ∀ {i j : I} (f : i ⟶ j), K.map f =
-      (eK i).hom ≫ abelianHigherDirectImageMap (D.map f.op).left
-        (D.obj (op i)).hom (D.obj (op j)).hom (Over.w (D.map f.op)) p
-        (F i) (F j) (φ f) ≫ (eK j).inv)
     (η : K ⟶ (Functor.const I).obj
       ((DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj
         (R+((c.pt.hom)_*[AddCommGrpCat.{v + 1}]).obj
@@ -118,7 +114,6 @@ theorem exists_higherDirectImage_limit_presheaf_class_cover {S : Scheme.{v}}
                 T.obj.map f.op
                   ((toSheafify S.smallEtaleTopology P ≫ e.hom.hom).app (op U) z) := by
   classical
-  have _hK := @hK
   let T := (DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj
     (R+((c.pt.hom)_*[AddCommGrpCat.{v + 1}]).obj
       ((DerivedCategory.Plus.singleFunctor _ 0).obj (colimit H)))

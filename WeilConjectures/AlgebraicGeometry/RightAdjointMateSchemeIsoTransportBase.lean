@@ -60,34 +60,9 @@ theorem rightAdjoint_mate_scheme_iso_transport_base
     (f : P ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     (f' : U ⟶ S) [QuasiCompact f'] [QuasiSeparated f']
     (e : U ≅ P) (he : e.hom ≫ f = f') (g : T ⟶ S)
-    (a : schemeDerivedQCohCategory S ⥤ schemeDerivedQCohCategory P)
-    (b : schemeDerivedQCohCategory S ⥤ schemeDerivedQCohCategory U)
-    (d : schemeDerivedQCohCategory T ⥤ schemeDerivedQCohCategory (pullback f g))
-    (b' : schemeDerivedQCohCategory T ⥤ schemeDerivedQCohCategory (pullback f' g))
-    (adja : (schemeDerivedQCohProperty S).lift
-      ((schemeDerivedQCohProperty P).ι ⋙ schemeDerivedDirectImage f)
-      (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _
-        (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _
-        f _ _).fst E.obj E.property) ⊣ a)
-    (adjb : (schemeDerivedQCohProperty S).lift
-      ((schemeDerivedQCohProperty U).ι ⋙ schemeDerivedDirectImage f')
-      (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _
-        (quasiSeparatedSpace_of_quasiSeparated f') _ _ _ _
-        f' _ _).fst E.obj E.property) ⊣ b)
-    (adjd : (schemeDerivedQCohProperty T).lift
-      ((schemeDerivedQCohProperty (pullback f g)).ι ⋙ schemeDerivedDirectImage (pullback.snd f g))
-      (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _
-        (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _
-        (pullback.snd f g) _ _).fst E.obj E.property) ⊣ d)
-    (adjb' : (schemeDerivedQCohProperty T).lift
-      ((schemeDerivedQCohProperty (pullback f' g)).ι ⋙ schemeDerivedDirectImage (pullback.snd f' g))
-      (fun E ↦ (@schemeDerivedDirectImage_qcqs_hasRightAdjoint _ _ _
-        (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f' g)) _ _ _ _
-        (pullback.snd f' g) _ _).fst E.obj E.property) ⊣ b')
     (hβ : ∀ E : schemeDerivedQCohCategory U,
       IsIso (schemeDerivedBaseChangeMap f' (pullback.snd f' g) g
         (pullback.fst f' g) pullback.condition E.obj))
-    (K : schemeDerivedQCohCategory S)
     (r : pullback f' g ⟶ pullback f g)
     (hr₁ : r ≫ pullback.fst f g = pullback.fst f' g ≫ e.hom)
     (hr₂ : r ≫ pullback.snd f g = pullback.snd f' g) :
@@ -95,11 +70,6 @@ theorem rightAdjoint_mate_scheme_iso_transport_base
       IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g
         (pullback.fst f g) pullback.condition E.obj)) := by
   classical
-  have _ := adja
-  have _ := adjb
-  have _ := adjd
-  have _ := adjb'
-  have _ := K
   let ri : pullback f g ⟶ pullback f' g := pullback.lift
     (pullback.fst f g ≫ e.inv) (pullback.snd f g) (by
       rw [Category.assoc, ← he]

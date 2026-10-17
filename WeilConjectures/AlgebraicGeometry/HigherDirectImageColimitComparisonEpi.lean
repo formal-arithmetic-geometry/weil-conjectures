@@ -51,7 +51,7 @@ Proof:
    Consequently every section of the limit higher image lifts locally from a
    stage higher image, hence locally from the stage sheaf colimit. Local
    surjectivity is precisely epimorphy of the comparison in module sheaves.
-   The equations hK and hB ensure that the map is colimit.desc K B, transported
+   The equation hB ensures that the map is colimit.desc K B, with legs transported
    through eK and eB, rather than an unspecified comparison. No finite-cover
    gluing or assertion of injectivity is needed for this conclusion. -/
 theorem epi_higher_image_colimit_comparison
@@ -67,17 +67,13 @@ theorem epi_higher_image_colimit_comparison
     (eK : ∀ i : I, K.obj (op i) ≅
       higherDirectImage Λ ((D.obj i).hom ≫ k) q
         ((((D.obj i).hom)^*[ModuleCat.{u + 1} Λ]).obj G))
-    (hK : ∀ {i j : I} (f : j ⟶ i), K.map f.op =
-      (eK i).hom ≫ higherDirectImageOverMap Λ k G q (D.map f) ≫ (eK j).inv)
     (B : Cocone K)
     (eB : B.pt ≅ higherDirectImage Λ (c.pt.hom ≫ k) q
       (((c.pt.hom)^*[ModuleCat.{u + 1} Λ]).obj G))
     (hB : ∀ i : I, B.ι.app (op i) = (eK i).hom ≫
-      higherDirectImageOverMap Λ k G q (c.π.app i) ≫ eB.inv)
- :
+      higherDirectImageOverMap Λ k G q (c.π.app i) ≫ eB.inv) :
     Epi (colimit.desc K B) := by
   classical
-  have _hK := @hK
   let H := higherDirectImage Λ (c.pt.hom ≫ k) q
     (((c.pt.hom)^*[ModuleCat.{u + 1} Λ]).obj G)
   let A := sheafCompose S.smallEtaleTopology

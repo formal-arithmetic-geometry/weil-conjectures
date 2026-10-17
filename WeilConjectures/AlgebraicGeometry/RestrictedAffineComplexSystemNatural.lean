@@ -31,22 +31,22 @@ private theorem presentation_of_data
     (H : Iᵒᵖ ⥤ AddCommGrpCat.{u + 1}) (B : Cocone H)
     (D : I ⥤ Scheme.{u})
     (c : Cone D)
-    (_hc : IsLimit c)
-    (_compact : ∀ i : I, CompactSpace (D.obj i))
-    (_quasiSeparated : ∀ i : I, QuasiSeparatedSpace (D.obj i))
-    (_affine : ∀ (i j : I) (f : i ⟶ j), IsAffineHom (D.map f))
+    (hc : IsLimit c)
+    (hcompact : ∀ i : I, CompactSpace (D.obj i))
+    (hqs : ∀ i : I, QuasiSeparatedSpace (D.obj i))
+    (haffine : ∀ (i j : I) (f : i ⟶ j), IsAffineHom (D.map f))
     (F : ∀ i : I, CochainComplex (Sheaf (D.obj i).smallEtaleTopology
       AddCommGrpCat.{u + 1}) ℤ)
     (φ : ∀ {i j : I} (f : j ⟶ i),
       ((upperStar AddCommGrpCat.{u + 1} (D.map f)).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj (F i) ⟶ F j)
-    (_hidentity : ∀ i : I, φ (𝟙 i) =
+    (hidentity : ∀ i : I, φ (𝟙 i) =
       (NatIso.mapHomologicalComplex
         (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id i)))
         (ComplexShape.up ℤ)).hom.app (F i) ≫
       (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{u + 1} (D.obj i))
         (ComplexShape.up ℤ)).hom.app (F i))
-    (_hcomposition : ∀ (i j k : I) (f : j ⟶ i) (g : k ⟶ j),
+    (hcomposition : ∀ (i j k : I) (f : j ⟶ i) (g : k ⟶ j),
       φ (g ≫ f) =
         (NatIso.mapHomologicalComplex
           (upperStarComp AddCommGrpCat.{u + 1} (D.map g) (D.map f)
@@ -55,12 +55,12 @@ private theorem presentation_of_data
         ((upperStar AddCommGrpCat.{u + 1} (D.map g)).mapHomologicalComplex
           (ComplexShape.up ℤ)).map (φ f) ≫ φ g)
     (a : ℤ)
-    (_hbelow : ∀ (i : I) (n : ℤ), n < a → IsZero ((F i).X n))
+    (hbelow : ∀ (i : I) (n : ℤ), n < a → IsZero ((F i).X n))
     (G : Iᵒᵖ ⥤ CochainComplex (Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
     (eG : ∀ i : I, G.obj (op i) ≅
       ((upperStar AddCommGrpCat.{u + 1} (c.π.app i)).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj (F i))
-    (_hG : ∀ (i j : I) (f : j ⟶ i), G.map f.op =
+    (hG : ∀ (i j : I) (f : j ⟶ i), G.map f.op =
       (eG i).hom ≫
         (NatIso.mapHomologicalComplex
           (upperStarComp AddCommGrpCat.{u + 1} (c.π.app j) (D.map f)
@@ -75,7 +75,7 @@ private theorem presentation_of_data
         (DerivedCategory.Q.obj
           (((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
             (ComplexShape.up ℤ)).obj K)))
-    (_hP : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (hP : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y)
       (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ),
       P f K = (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} p).map
         ((rightDerivedGlobalSections AddCommGrpCat.{u + 1} Y).map
@@ -96,21 +96,21 @@ private theorem presentation_of_data
           ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryFactors.hom.app K)))
     (eH : ∀ i : I, H.obj (op i) ≅
       (cohomology AddCommGrpCat.{u + 1} (D.obj i) p).obj (DerivedCategory.Q.obj (F i)))
-    (_hH : ∀ (i j : I) (f : j ⟶ i), H.map f.op =
+    (hH : ∀ (i j : I) (f : j ⟶ i), H.map f.op =
       (eH i).hom ≫ P (D.map f) (F i) ≫
         (cohomology AddCommGrpCat.{u + 1} (D.obj j) p).map
           (DerivedCategory.Q.map (φ f)) ≫ (eH j).inv)
     (L : Cocone G)
-    (_hL : IsColimit L)
+    (hL : IsColimit L)
     (eB : B.pt ≅ (cohomology AddCommGrpCat.{u + 1} c.pt p).obj
       (DerivedCategory.Q.obj L.pt))
-    (_hB : ∀ i : I, B.ι.app (op i) ≫ eB.hom =
+    (hB : ∀ i : I, B.ι.app (op i) ≫ eB.hom =
       (eH i).hom ≫ P (c.π.app i) (F i) ≫
         (cohomology AddCommGrpCat.{u + 1} c.pt p).map
           (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i)))) :
     EtaleComplexCohomologyPresentation H B := by
-  exact ⟨D, c, _hc, _compact, _quasiSeparated, _affine, F, φ, _hidentity,
-    _hcomposition, a, _hbelow, G, eG, _hG, p, P, _hP, eH, _hH, L, _hL, eB, _hB,
+  exact ⟨D, c, hc, hcompact, hqs, haffine, F, φ, hidentity,
+    hcomposition, a, hbelow, G, eG, hG, p, P, hP, eH, hH, L, hL, eB, hB,
     trivial⟩
 
 private lemma identity_pair {C : Type*} [Category C] {X Y Z : C}

@@ -46,7 +46,7 @@ No choice of bases or comparison of cardinalities is used to identify the canoni
 theorem IsConnectedCurve.proper_pic_torsion_baseChange_bijective
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f]
-    (n : ℕ) [NeZero n] (_hn : (n : k) ≠ 0) :
+    (n : ℕ) [NeZero n] (hn : (n : k) ≠ 0) :
     ∃ F : {L : C.Pic // L ^ n = 1} →
         {L : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Pic // L ^ n = 1},
       Function.Bijective F ∧ ∀ L, (F L).val = Scheme.Pic.map
@@ -98,7 +98,7 @@ theorem IsConnectedCurve.proper_pic_torsion_baseChange_bijective
     map_one' := Subtype.ext (map_one p)
     map_mul' x y := Subtype.ext (map_mul p x.val y.val) }
   obtain ⟨hinj, hsurj⟩ := picZero_torsion_base_change f G hG G' hG' j
-    (fun _ ↦ rfl) n _hn
+    (fun _ ↦ rfl) n hn
   let F : {L : C.Pic // L ^ n = 1} → {L : D.Pic // L ^ n = 1} :=
     fun L ↦ ⟨p L.val, by rw [← map_pow, L.property, map_one]⟩
   refine ⟨F, ⟨?_, ?_⟩, fun _ ↦ rfl⟩

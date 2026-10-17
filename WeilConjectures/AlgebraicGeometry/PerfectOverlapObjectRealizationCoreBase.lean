@@ -27,7 +27,6 @@ Source: Stacks Project, Tags 09RE, 08DW and 0D5S.
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.unusedVariables false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -487,8 +486,6 @@ Source: Stacks Project, Tags 09RE, 08DW and 0D5S.
     [∀ (Z : Scheme.{u}) (U : Z.Opens),
       HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
     (j : I) (hij : i ≤ j)
-    (hstage : ∀ (U V : (pullback t (Spec.map (R.map (homOfLE hij)))).Opens),
-      ∃ k : I, j ≤ k)
     : Prop :=
     let Yj := pullback t (Spec.map (R.map (homOfLE hij)))
     let X := pullback t (Spec.map (c.ι.app i))
@@ -533,7 +530,7 @@ Source: Stacks Project, Tags 09RE, 08DW and 0D5S.
           (moduleRings X.toRingedSpace) (homOfLE (show P ⊓ Q ≤ Q from inf_le_right)))
     Nonempty (
       Σ data : (k : I) → (hjk : j ≤ k) →
-        perfectOverlapComparisonDataType R c hc i Z t j hij hstage
+        perfectOverlapComparisonDataType R c hc i Z t j hij (fun _ _ ↦ ⟨j, le_rfl⟩)
           U V hcover hU hV A B hA hB E φU φV k hjk,
       let K := {k : I // j ≤ k}
       let C : K → Type (u + 1) := fun k ↦

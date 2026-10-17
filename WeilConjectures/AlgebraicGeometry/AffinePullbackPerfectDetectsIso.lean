@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.PerfectGeneratorExists
 import WeilConjectures.AlgebraicGeometry.PerfectGeneratorPullback
+import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
 import WeilConjectures.AlgebraicGeometry.DerivedQCohCompactGeneration
 
 /-! # Isomorphisms detected by affine pullbacks of perfect complexes
@@ -57,7 +58,8 @@ theorem affinePullbackPerfect_detects_iso
   classical
   obtain ⟨P, hp, hqc, hgen, _⟩ := exists_perfect_generator X
   let M : schemeDerivedQCohCategory X := ⟨P, hqc⟩
-  obtain ⟨_, hgen'⟩ := perfect_generator_pullback g M hp hgen
+  obtain ⟨hX'⟩ := nonempty_derivedOpenLocalization.{u, w} X'
+  obtain ⟨_, _, hgen'⟩ := perfect_generator_pullback g M hp hgen
   let Q := (derivedPullback g).obj P
   obtain ⟨htri, _⟩ := schemeDerivedQCoh_compactlyGenerated X'
   let := htri

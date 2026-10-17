@@ -70,12 +70,12 @@ with the displayed condition. This also covers n = 1, when all three terms vanis
 theorem IsConnectedCurve.affine_kummer_degree_one_baseChange_bijective
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]
-    (n : ℕ) [NeZero n] (_hn : (n : k) ≠ 0)
+    (n : ℕ) [NeZero n] (hn : (n : k) ≠ 0)
     (φ : ((Etale.upperStar AddCommGrpCat.{u + 1}
       (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).mapShortComplex.obj
         (C.kummerSequence n)) ⟶
       (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).kummerSequence n)
-    (_hφ : φ.τ₂ = upperStarGmSheafToGmSheaf
+    (hφ : φ.τ₂ = upperStarGmSheafToGmSheaf
       (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))) :
     Function.Bijective ((Sheaf.H.map φ.τ₁ 1).comp
       (Etale.cohomologyMap
@@ -87,17 +87,17 @@ theorem IsConnectedCurve.affine_kummer_degree_one_baseChange_bijective
   let π := pullback.fst f b
   obtain ⟨hC, hP, ψ, hψ₂, hψ₃, hδ, hι, _, hPic, hUnits, hAff⟩ :=
     kummer_base_change_compatibility k K C f P π (pullback.snd f b)
-      (IsPullback.of_hasPullback f b) n _hn
+      (IsPullback.of_hasPullback f b) n hn
   have : Mono (P.kummerSequence n).f := hP.mono_f
   have hτ : ψ.τ₁ = φ.τ₁ := by
     apply (cancel_mono (P.kummerSequence n).f).1
-    rw [ψ.comm₁₂, φ.comm₁₂, hψ₂, _hφ]
+    rw [ψ.comm₁₂, φ.comm₁₂, hψ₂, hφ]
   let μ : Sheaf.H (C.rootsOfUnitySheaf n) 1 →+ Sheaf.H (P.rootsOfUnitySheaf n) 1 :=
     (Sheaf.H.map ψ.τ₁ 1).comp (Etale.cohomologyMap π (C.rootsOfUnitySheaf n) 1)
   have hnC : IsUnit (n : Γ(C, ⊤)) := by
-    simpa using _hn.isUnit.map ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom
+    simpa using hn.isUnit.map ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom
   have hnK : (n : K) ≠ 0 := by
-    simpa only [map_natCast] using ((map_ne_zero (algebraMap k K)).mpr _hn)
+    simpa only [map_natCast] using ((map_ne_zero (algebraMap k K)).mpr hn)
   have hnP : IsUnit (n : Γ(P, ⊤)) := by
     simpa using hnK.isUnit.map ((Scheme.ΓSpecIso (.of K)).inv ≫ (pullback.snd f b).appTop).hom
   let α := C.kummerδ₀ n hnC

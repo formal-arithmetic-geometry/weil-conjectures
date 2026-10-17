@@ -51,8 +51,6 @@ private theorem openShiftEquiv_natural (Y : Scheme.{u}) (B : Y.Opens)
     Adjunction.homEquiv_naturality_right_symm]
   exact (Category.assoc _ _ _).symm
 
-set_option linter.unusedVariables false in
--- The unchanged theorem type has the legacy unused let binder Z.
 /-- The Hom equivalences and their stage/apex compatibility after a chosen open
 localization. Source: Stacks Project, perfect.tex Tags 09RE and 079W.
 (blueprint: lem-pc-perfect-hom-open-stage-maps).
@@ -81,22 +79,18 @@ and hB.limitMap. Only the unshifted localization is left open in a separate modu
 theorem perfect_hom_open_stage_maps
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
-    (i : I) (X : Scheme.{u}) (s₀ : X ⟶ Spec (R.obj i))
-    [LocallyOfFinitePresentation s₀] [QuasiCompact s₀] [QuasiSeparated s₀]
+    (i : I) (X : Scheme.{u})
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
-    (W : X.Opens) (hW : IsCompact (W : Set X))
+    (W : X.Opens)
     (Y : Scheme.{u}) (t : Y ⟶ X) [IsOpenImmersion t]
-    (ht : W ≤ t.opensRange)
-    (s : Y ⟶ Spec (R.obj i)) (hs : s = t ≫ s₀)
+    (s : Y ⟶ Spec (R.obj i))
     [LocallyOfFinitePresentation s] [QuasiCompact s] [QuasiSeparated s]
     [∀ B : Y.Opens, HasDerivedCategory.{w}
       (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over B))]
-    (P Q : schemeDerivedCategory Y) (hP : Y.IsPerfect P) (hQ : Y.IsPerfect Q)
+    (P Q : schemeDerivedCategory Y)
     (F : Set.Ici i ⥤ schemeDerivedCategory Y) (d : Cocone F)
-    (h : PerfectHomPushPullData R c s Q F d) (n : ℤ)
-    :
+    (h : PerfectHomPushPullData R c s Q F d) (n : ℤ) :
     let B := t ⁻¹ᵁ W
-    let Z := B.toScheme
     let s' := B.ι ≫ s
     let P' := ((schemeMVDerivedRestriction Y B).obj P)⟦-n⟧
     let Q' := (schemeMVDerivedRestriction Y B).obj Q
@@ -114,11 +108,6 @@ theorem perfect_hom_open_stage_maps
         b (f ≫ (H.map (d.ι.app j))⟦n⟧') =
           perfectLimitMap R c s' j.property (e j f)) := by
   classical
-  have _ := hW
-  have _ := ht
-  have _ := hs
-  have _ := hP
-  have _ := hQ
   let B := t ⁻¹ᵁ W
   let L := schemeMVDerivedRestriction Y B
   let P' := (L.obj P)⟦-n⟧

@@ -99,13 +99,11 @@ theorem interior_fibre_closed_eq_empty_of_flat_restrict
     have := congrArg (fun y : U.toScheme ↦ U.ι y) hη'
     simpa [z', ηU] using this
   have hzU : g z ∈ U := by exact ht
-  have hzU' : g z' ∈ U := hz' ▸ hηU
   have hZdim := fibre_dimension_eq_of_specializes_component_restrict
-    g U z z' hzU hzU' hsp hzcomp
+    g U z z' hzU hsp hzcomp
   have hxU : f (i z) ∈ U := by simpa [g, Scheme.Hom.comp_apply] using hzU
-  have hxU' : f (i z') ∈ U := by simpa [g, Scheme.Hom.comp_apply] using hzU'
   have hXdim := fibre_dimension_eq_of_specializes_component_restrict
-    f U (i z) (i z') hxU hxU' (hsp.map i.continuous) hxcomp
+    f U (i z) (i z') hxU (hsp.map i.continuous) hxcomp
   have hlt := fibre_dimension_lt_of_closed_interior_eq_empty f i η hgeneric z' hz'
   have heq : topologicalKrullDimAt (g.asFiber z') =
       topologicalKrullDimAt (f.asFiber (i z')) := hZdim.trans (hdim.trans hXdim.symm)

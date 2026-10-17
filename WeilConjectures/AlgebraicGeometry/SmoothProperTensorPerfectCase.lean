@@ -104,6 +104,6 @@ theorem smoothProper_tensor_perfect_case
   obtain ⟨hRf, hO, hTensor, ⟨hm⟩, ⟨ha⟩⟩ :=
     smoothProper_tensor_perfect_case_data f hTor
   refine ⟨hRf, hO, hTensor, ⟨hm⟩, ⟨ha⟩, ?_⟩
-  exact smoothProper_tensor_perfect_case_core f hRf hO hTensor hm ha
+  exact smoothProper_tensor_perfect_case_core f hRf hO hTensor
 
 end AlgebraicGeometry

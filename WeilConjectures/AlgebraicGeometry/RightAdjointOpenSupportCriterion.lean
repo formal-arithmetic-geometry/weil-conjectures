@@ -44,8 +44,8 @@ private theorem supported_unit_isIso_iff
       (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-    (f : X ⟶ Y) (V : Y.Opens) (_hV : IsCompact (V : Set Y))
-    (U : X.Opens) (_hU : U = f ⁻¹ᵁ V)
+    (f : X ⟶ Y) (V : Y.Opens)
+    (U : X.Opens)
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]
     [HasDerivedCategory.{w}
@@ -343,7 +343,7 @@ theorem rightAdjoint_open_support_criterion
         (Scheme.Modules.overEquiv V))) inferInstance inferInstance).obj K.obj), hopen K⟩)
               (adjOpen.unit.app K.obj)))))))) := by
   have htest := rightAdjoint_open_unit_cone_test f V hV U hU hpush a adj adjOpen hopen
-  have hsupported := supported_unit_isIso_iff f V hV U hU hpush a adj adjOpen hopen
+  have hsupported := supported_unit_isIso_iff f V U hpush a adj adjOpen hopen
   have hb : (∀ K : schemeDerivedQCohCategory Y,
       (∃ n : ℤ, K.obj.IsGE n) → IsIso ((schemeOpenRestriction X U).mapDerivedCategory.map
       ((schemeDerivedQCohProperty X).ι.map (a.map (ObjectProperty.homMk (X := K)
@@ -380,7 +380,7 @@ theorem rightAdjoint_open_support_criterion
   constructor
   · intro hi
     apply hu.mpr
-    exact rightAdjoint_open_support_of_bounded f V hV U hU hpush a adj hsum (hb.mp hi)
+    exact rightAdjoint_open_support_of_bounded f V hV U hpush a adj hsum (hb.mp hi)
   · intro hi K _
     exact hi K
 
