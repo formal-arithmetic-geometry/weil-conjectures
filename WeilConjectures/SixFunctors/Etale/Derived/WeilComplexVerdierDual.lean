@@ -79,6 +79,7 @@ end Exchange
 
 namespace WeilComplex
 
+omit [Finite Λ] in
 /-- A morphism of strict Weil complexes whose underlying morphism is an isomorphism is an
 isomorphism of Weil complexes. -/
 lemma isIso_of_isIso_hom {X : Scheme.{u}} {g : X ≅ X} {K L : WeilComplex (ModuleCat.{u + 1} Λ) g}
@@ -92,7 +93,7 @@ lemma isIso_of_isIso_hom {X : Scheme.{u}} {g : X ≅ X} {K L : WeilComplex (Modu
           IsIso.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp] }
   exact ⟨⟨finv, Hom.ext (by simp [finv]), Hom.ext (by simp [finv])⟩⟩
 
-variable {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))]
+variable {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))]
   {X : Scheme.{u}} (g : X ≅ X) (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
   [QuasiCompact aX] [HasCompactification aX] {h : Spec (.of k) ⟶ Spec (.of k)} [IsIso h]
   (sq : IsPullback g.hom aX aX h)
@@ -105,12 +106,13 @@ noncomputable def dualizing : WeilComplex (ModuleCat.{u + 1} Λ) g where
     (constructibleFiniteTor_tensorUnit Λ _)⟩
   frobenius := ObjectProperty.isoMk _ (asIso (dualizingComplexWeilDatum sq))
 
+omit [IsSeparated aX] [LocallyOfFiniteType aX] in
 @[simp]
 lemma dualizing_frobenius_hom_hom :
     (dualizing g aX sq).frobenius.hom.hom = dualizingComplexWeilDatum (Λ := Λ) sq :=
   rfl
 
-variable [HasInvertibleExponent Λ X]
+variable [HasInvertibleExponent Λ X] [IsAlgClosed k]
 
 /-- Blueprint `cor-coef-verdier-weil-equivariance`: **Verdier duality preserves strict Weil
 complexes.** The Verdier dual `𝔻_X K = RHom(K, ω_X)` of a strict Weil complex `(K, φ)` is the
@@ -120,36 +122,59 @@ noncomputable def verdierDual (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     WeilComplex (ModuleCat.{u + 1} Λ) g :=
   ((internalHom g aX).obj (op K)).obj (dualizing g aX sq)
 
+omit [IsSeparated aX] in
 @[simp]
 lemma verdierDual_obj_obj (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     (verdierDual g aX sq K).obj.obj = (Etale.verdierDual (ModuleCat.{u + 1} Λ) aX).obj
       (op K.obj.obj) :=
   rfl
 
+omit [IsSeparated aX] in
 /-- The Weil structure of the Verdier dual of a strict Weil complex `(K, φ)` is the dual Weil
 datum `AlgebraicGeometry.Etale.verdierDualWeilDatumOfIsPullback` of `φ`. -/
 lemma verdierDual_frobenius_hom_hom (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     (verdierDual g aX sq K).frobenius.hom.hom =
       verdierDualWeilDatumOfIsPullback sq
         ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius) := by
-  rw [verdierDual, internalHom_obj_obj_frobenius, internalHomFrobenius_hom_hom,
-    verdierDualWeilDatumOfIsPullback, verdierDualWeilDatum, MonoidalClosed.dualWeilDatum_eq]
-  erw [Category.assoc, ← NatTrans.naturality]
-  rfl
+  change (internalHomFrobenius aX K (dualizing g aX sq)).hom.hom = _
+  rw [internalHomFrobenius_hom_hom, verdierDualWeilDatumOfIsPullback, verdierDualWeilDatum,
+    MonoidalClosed.dualWeilDatum_eq]
+  refine congrArg₂ (· ≫ ·) rfl ?_
+  exact ((RHom(X)[ModuleCat.{u + 1} Λ].map K.frobenius.inv.hom.op).naturality
+    (dualizingComplexWeilDatum sq)).symm
 
+omit [IsSeparated aX] in
+/-- The Weil structure of the Verdier dual, as an isomorphism of `D(X_ét)`, is the dual Weil
+datum. -/
+lemma mapIso_verdierDual_frobenius (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
+    haveI : IsIso (verdierDualWeilDatumOfIsPullback sq
+        ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius)) := by
+      rw [← verdierDual_frobenius_hom_hom]
+      exact inferInstanceAs (IsIso ((DerivedCategoryFiniteTor.ι _ X).mapIso
+        (verdierDual g aX sq K).frobenius).hom)
+    (DerivedCategoryFiniteTor.ι _ X).mapIso (verdierDual g aX sq K).frobenius =
+      asIso (verdierDualWeilDatumOfIsPullback sq
+        ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius)) :=
+  Iso.ext (verdierDual_frobenius_hom_hom g aX sq K)
+
+omit [IsSeparated aX] in
 /-- Blueprint `cor-coef-verdier-weil-equivariance`: the double-dual map `δ_K : K ⟶ 𝔻_X 𝔻_X K`
 is a morphism of strict Weil complexes: biduality is Weil equivariant
 (`AlgebraicGeometry.Etale.isWeilEquivariant_verdierDualDoubleDual`). -/
 noncomputable def verdierDualDoubleDual (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     K ⟶ verdierDual g aX sq (verdierDual g aX sq K) where
-  hom := ObjectProperty.homMk ((Etale.verdierDualDoubleDual (ModuleCat.{u + 1} Λ) aX).app K.obj.obj)
+  hom := ObjectProperty.homMk
+    ((Etale.verdierDualDoubleDual (ModuleCat.{u + 1} Λ) aX).app K.obj.obj)
   comm := by
+    have hK := mapIso_verdierDual_frobenius g aX sq K
     have := isWeilEquivariant_verdierDualDoubleDual (ModuleCat.{u + 1} Λ) aX
       ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius) (dualizingComplexWeilDatum sq)
-    ext
-    simp only [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom]
-    erw [verdierDual_frobenius_hom_hom, verdierDual_frobenius_hom_hom]
-    exact this.symm
+    apply ObjectProperty.hom_ext
+    refine Eq.trans ?_ (this.symm.trans ?_)
+    · rfl
+    · change _ = _ ≫ ((verdierDual g aX sq (verdierDual g aX sq K)).frobenius.hom.hom)
+      rw [verdierDual_frobenius_hom_hom, hK]
+      rfl
 
 /-- Blueprint `cor-coef-verdier-weil-equivariance`: **Verdier biduality for strict Weil
 complexes.** The double-dual map `K ⟶ 𝔻_X 𝔻_X K` is an isomorphism of strict Weil complexes, by
@@ -158,6 +183,8 @@ instance isIso_verdierDualDoubleDual (K : WeilComplex (ModuleCat.{u + 1} Λ) g) 
     IsIso (verdierDualDoubleDual g aX sq K) := by
   have : IsIso ((DerivedCategoryFiniteTor.ι _ X).map (verdierDualDoubleDual g aX sq K).hom) :=
     isIso_verdierDualDoubleDual_app Λ aX K.obj.property
+  have : (DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X).ReflectsIsomorphisms :=
+    inferInstanceAs (DerivedCategory.constructibleFiniteTor _ X).ι.ReflectsIsomorphisms
   have : IsIso (verdierDualDoubleDual g aX sq K).hom :=
     isIso_of_reflects_iso _ (DerivedCategoryFiniteTor.ι _ X)
   exact isIso_of_isIso_hom _
