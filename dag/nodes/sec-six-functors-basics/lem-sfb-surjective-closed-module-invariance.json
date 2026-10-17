@@ -335,5 +335,30 @@
   "group": "Q80",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-4227bccb2 (reviewer sub-agent of L); spot-checked: I read the item in full: all 8 steps and the statements of all 21 cited nodes. I read the unit sk-lem-sf-flat-model and how the parent det-sf-flat-model-generation uses the item in clause (2). Sources read: Stacks 09AB (proetale.tex l.4962) and 04DZ (etale-cohomology.tex l.6354). The statement is unchanged and true: a surjective closed immersion is integral, universally injective and surjective. I tested it on id, Spec k→Spec k[ε], a nil but not nilpotent ideal, the empty scheme, the zero ring and the zero module. Step checks: (1) universal homeomorphism and base change, with étale and pro-étale invariance for the actual unit and counit. (2) The module unit equals the abelian unit (lem-pe), which equals the set unit (adjunction-lifting lemma); the coefficient maps are canonical. (3) The counit follows from the triangle identity and reflection of isomorphisms. (4) lem-sfb-geometric-inverse-image-constant-module states exactly the constant-module comparison used. (5) The graph pair is initial, so the colimit is H(W); pro-étale restriction uses the object-restriction lemma; covers are preserved by base change (fpqc for pro-étale). (6) and (7) Reflection works by lifting covers, or by the Lean cover-refinement node with r_b weakly étale, plus full faithfulness of the base-changed pullback. (8) The models are literally unchanged. The declared tool_uses are acceptable; the other off-unit citations are Mathlib leaves or closed in slopmaster2. No cycle, no new nodes, no duplicate: lemma-constructible-universal-homeomorphism-invariance and the condensed nodes are narrower or about different coefficients. Batch-5 check on lem-trf-proetale-topological-invariance: it is Stacks 09AB, a general pro-étale topological-invariance result. Neither the trace formula nor Poincaré duality gives it. Its full closure (1146 nodes) contains no other sec-trace-formula or sec-poincare-duality node, no batch-4 target and no nt-assume leaf. The item's pro-étale clauses genuinely need it, so I accept the citation as outside the assumed statements. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2928568f7",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Reviewed statement, dependencies, source tags, declarations, helpers, edge cases, report sections, and scompile evidence; no substantive or mechanical findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SurjectiveClosedModuleInvariance",
+  "declaration": "AlgebraicGeometry.Scheme.sfbEtale_surjectiveClosed_module_invariance",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfbEtaleFiniteLocalModels",
+   "AlgebraicGeometry.Scheme.sfbProEtaleFiniteLocalModels",
+   "AlgebraicGeometry.Scheme.sfbEtale_surjectiveClosed_module_invariance",
+   "AlgebraicGeometry.Scheme.sfbProEtale_surjectiveClosed_module_invariance"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SurjectiveClosedModuleInvariance.lean",
+  "statement": "theorem sfbEtale_surjectiveClosed_module_invariance {T Y : Scheme.{u}} (h : T ⟶ Y) [IsClosedImmersion h] [Surjective h] (A : Type (u + 1)) [CommRing A] [Finite A] : IsIso (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) h).unit ∧ IsIso (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) h).counit ∧ (Etale.upperStar (ModuleCat.{u + 1} A) h).IsEquivalence ∧ (Etale.lowerStar (ModuleCat.{u + 1} A) h).IsEquivalence ∧ (∀ M : ModuleCat.{u + 1} A, Nonempty ((Etale.upperStar (ModuleCat.{u + 1} A) h).obj ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M) ≅ (constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M)) ∧ (∀ (H : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)) (projective : Bool), sfbEtaleFiniteLocalModels A H projective ↔ sfbEtaleFiniteLocalModels A ((Etale.upperStar (ModuleCat.{u + 1} A) h).obj H) projective)",
+  "branch": "newtargets-dag",
+  "by": "Q154",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Two theorem statements cover the etale and pro-etale clauses. The etale version uses the published fixed ModuleCat-valued presentation; the pro-etale version uses the recorded ordinary constant-ring module operations, with their actual normalized adjunction. The two finite-local-model helpers expand the local-model clauses of this node using existing localized constant sheaves; the Bool selects whether explicit finite-free retractions are required. No stalk-based replacement, etale-origin condition, Noetherian assumption, or uniform nilpotence bound."
  }
 }
