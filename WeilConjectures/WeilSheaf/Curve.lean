@@ -9,10 +9,12 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Curve.Boundary
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZero
+public import WeilConjectures.WeilSheaf.CohomologyZero
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.GeometricCoinvariants
 public import WeilConjectures.WeilSheaf.LFunction
+public import WeilConjectures.WeilSheaf.LissePoincarePairing
 public import WeilConjectures.WeilSheaf.LowerStarId
 public import WeilConjectures.WeilSheaf.TateTwistCohomology
 
@@ -140,15 +142,26 @@ Let `U₀` be a smooth geometrically connected affine curve and `ℱ` a lisse We
 with local generic fibre `V`. Then `H_c² (U, ℱ) ≅ V_{π₁(U)} (-1)` Frobenius-equivariantly, where
 the geometric coinvariants `V_{π₁(U)}` are `Γ(U, ℱ^∨)^∨`
 (`AlgebraicGeometry.WeilSheaf.geometricCoinvariants`) and `(-1)` multiplies the Frobenius by
-`q`. This follows from global Verdier duality on a smooth compactification and the description
-of global sections as invariants. -/
+`q`.
+
+Poincaré duality on the curve (the lisse case of `thm-pod-degreewise-perfectness-over-a-field`,
+`AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual`) is a perfect
+pairing `H_c²(U, ℱ) × H⁰(U, ℱ^∨) ⟶ ℚ̄_ℓ(-1)`, so `H_c²(U, ℱ) ≅ H⁰(U, ℱ^∨)^∨(-1)`
+(`FrobeniusModule.Equiv.ofIsPerfPair`); and `H⁰(U, ℱ^∨) = Γ(Ū, ℱ^∨)`
+(`AlgebraicGeometry.WeilSheaf.cohomologyZeroEquiv`). -/
 theorem nonempty_equiv_compactlySupportedCohomology_two [IsAffine U]
     [SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (U ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l U)
     (hF : F.IsLisse) :
     Nonempty ((F.compactlySupportedCohomology 2).Equiv
       ((F.geometricCoinvariants hF).tateTwist (Nat.card k₀) (-1))) := by
-  sorry
+  obtain ⟨P, hP, hPF⟩ :=
+    exists_isPerfPair_compactlySupportedCohomology_dual 1 F hF 2 0 (by norm_num)
+  have hq : (Nat.card k₀ : PadicAlgCl l) ^ (-(-1 : ℤ)) ≠ 0 :=
+    zpow_ne_zero _ (Nat.cast_ne_zero.2 Nat.card_pos.ne')
+  exact ⟨(FrobeniusModule.Equiv.ofIsPerfPair P hq fun x y ↦ by
+    rw [hPF, neg_neg, zpow_one, pow_one]).trans
+      ((cohomologyZeroEquiv (F.dual hF)).dual.rescale _)⟩
 
 /-- The compactly supported cohomology of a lisse Weil sheaf on a smooth geometrically
 connected affine curve vanishes outside degrees `1` and `2`. -/

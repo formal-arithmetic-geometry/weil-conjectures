@@ -4575,6 +4575,7 @@ public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.CohomologyExact
 public import WeilConjectures.WeilSheaf.CohomologyShift
+public import WeilConjectures.WeilSheaf.CohomologyZero
 public import WeilConjectures.WeilSheaf.ComplexWeights
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
@@ -4617,6 +4618,7 @@ public import WeilConjectures.WeilSheaf.LisseDuality
 public import WeilConjectures.WeilSheaf.LisseExtension
 public import WeilConjectures.WeilSheaf.LisseFiltration
 public import WeilConjectures.WeilSheaf.LisseLocus
+public import WeilConjectures.WeilSheaf.LissePoincarePairing
 public import WeilConjectures.WeilSheaf.LocalFrobenius
 public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.LocalizationRational
