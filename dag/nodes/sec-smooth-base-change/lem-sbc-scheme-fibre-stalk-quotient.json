@@ -27,34 +27,134 @@
   "document": "literature/stacks-project/schemes.tex",
   "place": "Schemes, Lemma Tag 0HA1 (lemma-local-ring-fibre), first isomorphism; its proof reduces to the affine case and Algebra, Remark Tag 0H9M (remark-local-ring-fibre)"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "grep",
-   "query": "rg -n 'fiberι.*stalkMap|stalkMap.*fiberι|Surjective.*stalkMap|stalkMap_surjective' and 'RingHom.ker.*stalkMap|stalkMap.*\\.ker' over Mathlib/AlgebraicGeometry; read Mathlib/AlgebraicGeometry/Fiber.lean lines 38-172",
-   "results": "Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean:38 SurjectiveOnStalks.stalkMap_surjective; Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean:33 IsPreimmersion extends SurjectiveOnStalks; Mathlib/AlgebraicGeometry/Fiber.lean:99 instance IsPreimmersion (f.fiberι y); no declaration computing the kernel of the stalk map of fiberι",
-   "date": "2026-10-17",
-   "verdict": "no match: Mathlib gives surjectivity of the fibre projection's stalk maps (IsPreimmersion of fiberι) but not the kernel m_t O_{Y,y}"
+   "text": "Choose an affine open $V=\\operatorname{Spec}A$ of $T$ containing $t$, and an affine open $U=\\operatorname{Spec}B$ of the open subscheme $g^{-1}(V)$ containing $y$. Such neighbourhoods exist by the local affine condition in [def-pc-scheme], applied also to the open subscheme. Let $\\varphi:A\\to B$ be the section map of the restricted morphism. By [def-weil-affine-spectrum] this restricted morphism is $\\operatorname{Spec}\\varphi$. Write $\\mathfrak p\\subset A$ and $\\mathfrak q\\subset B$ for $t$ and $y$. By [lem-weil-pbc-affine-open-stalk-localization], the germ maps identify $\\mathcal O_{T,t}$ with $A_{\\mathfrak p}$ and $\\mathcal O_{Y,y}$ with $B_{\\mathfrak q}$. These are identifications through the original affine opens, not newly chosen local rings.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0HA1 (lemma-local-ring-fibre), affine reduction; Tag 01IJ (definition-scheme), Tag 01HV (lemma-spec-sheaves)"
+   }
   },
   {
-   "tool": "leansearch",
-   "query": "stalk of the scheme-theoretic fibre is the local ring modulo the maximal ideal of the base point",
-   "results": "not run: network access is blocked for the maintainer reader on this machine",
+   "text": "The field identification $\\kappa(t)=A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}=\\kappa(\\mathfrak p)$ respects the map from $A$. Indeed the germ identification in step 1 is a local-ring isomorphism, so preserves the unique maximal ideal; taking its quotient gives that field identification. By [lem-weil-pbc-spec-residue-field-identification], in $V$ the canonical map $\\operatorname{Spec}\\kappa(t)\\to T$ is $\\operatorname{Spec}(A\\to\\kappa(\\mathfrak p))$. Its image is $t$, so it factors through $V$. Apply [lem-weil-pbc-open-fibre-product] with opens $U\\subset Y$, $V\\subset T$, and the whole $\\operatorname{Spec}\\kappa(t)$: it identifies $W=p^{-1}(U)\\subset Y_t$ with $U\\times_V\\operatorname{Spec}\\kappa(\\mathfrak p)$, compatibly with the first projection. By [lem-weil-pbc-fibre-product-affine-spectra], $W=\\operatorname{Spec}C$, where $C=B\\otimes_A\\kappa(\\mathfrak p)$, and its projection to $U$ is induced by $j:B\\to C$, $b\\mapsto b\\otimes1$. The point $y'$ exists uniquely by the homeomorphism clause of [def-pc-scheme-fibre]; it lies in $W$.",
+   "uses": [
+    "lem-weil-pbc-spec-residue-field-identification",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0HA1, affine reduction; Tag 01JR (lemma-open-fibre-product), Tags 01I4/01JQ (lemma-fibre-product-affine-schemes, lemma-fibre-product-affines); Tag 01HV (lemma-spec-sheaves)"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak Q\\subset C$ be the prime of $y'$ in $W$. The affine-stalk identifications of [lem-weil-pbc-affine-open-stalk-localization] identify $\\mathcal O_{Y_t,y'}$ with $C_{\\mathfrak Q}$. The germ formula and composition rule of [lem-weil-pbc-scheme-stalk-map-composition] identify the actual projection stalk map with\n$\\theta:B_{\\mathfrak q}\\to C_{\\mathfrak Q}$, $b/s\\mapsto j(b)/j(s)$: on the germ of $b$ it is the germ of $j(b)$, and a ring map sends the inverse germ of $s$ to the inverse germ of $j(s)$. This checks the formula on every fraction. Likewise $g^\\sharp_y$ sends $a/u\\in A_{\\mathfrak p}$ to $\\varphi(a)/\\varphi(u)\\in B_{\\mathfrak q}$. Locality of these stalk maps [def-weil-locally-ringed-space-morphism] gives $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$ and $j^{-1}(\\mathfrak Q)=\\mathfrak q$: a germ of a section is in the maximal ideal exactly when its numerator lies in the point's prime; units map to units, while maximal-ideal elements map into the maximal ideal.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-scheme-stalk-map-composition",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0HA1 and Tag 01HV (lemma-spec-sheaves); Tag 01HY (lemma-morphism-into-affine-where-point-goes); Sheaves Tag 008M (lemma-compose-f-maps-stalks)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fibre-ring-local-ring-natural-iso] to the commutative-ring map $\\varphi:A\\to B$, the prime $\\mathfrak p$, the fibre ring $C$, and its prime $\\mathfrak Q$. Its contracted prime is $\\mathfrak q$ by step 3. Its displayed map $\\theta$ is precisely the actual projection stalk map just computed, including its action on fractions. That node gives surjectivity of $\\theta$, kernel $\\mathfrak pB_{\\mathfrak q}$, and the induced isomorphism $B_{\\mathfrak q}/\\mathfrak pB_{\\mathfrak q}\\to C_{\\mathfrak Q}$ sending the class of $b/s$ to $j(b)/j(s)$. No finite-type, flatness, Noetherian or closed-point assumption is needed by that node.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-local-ring-natural-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H9M (remark-local-ring-fibre), natural local fibre-ring isomorphisms"
+   }
+  },
+  {
+   "text": "Finally [def-weil-pbc-localization-at-prime] identifies $\\mathfrak m_t$ with $\\mathfrak pA_{\\mathfrak p}$. Under the stalk map of step 3 each fraction $a/u$ with $a\\in\\mathfrak p$, $u\\notin\\mathfrak p$, maps to $\\varphi(a)/\\varphi(u)$, a multiple of $\\varphi(a)/1$, since $\\varphi(u)\\notin\\mathfrak q$. Conversely every generator $\\varphi(a)/1$ with $a\\in\\mathfrak p$ is the image of $a/1\\in\\mathfrak m_t$. Thus the ideal generated by the image of $\\mathfrak m_t$ is exactly $\\mathfrak pB_{\\mathfrak q}$. Transport the surjectivity, kernel and quotient isomorphism of step 4 through the germ isomorphisms of steps 1 and 3. Every $z\\in\\mathcal O_{Y,y}$ is represented by a fraction $b/s$; the fraction formula in step 4 therefore says that the induced isomorphism sends its class to $p^\\sharp_{y'}(z)$, as asserted.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0HA1 (lemma-local-ring-fibre), first isomorphism; Algebra Tag 0H9M (remark-local-ring-fibre)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-residue-field-identification",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-scheme-stalk-map-composition",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-weil-pbc-fibre-ring-local-ring-natural-iso",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 0HA1 (lemma-local-ring-fibre), affine reduction to Algebra Tag 0H9M (remark-local-ring-fibre); maps checked on germs and fractions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the scheme theoretic fibre is the local ring modulo the maximal ideal of the base point",
+   "results": "{\"t\": \"2026-10-17T07:58:13Z\", \"tool\": \"leanfinder\", \"query\": \"The stalk of the scheme theoretic fibre is the local ring modulo the maximal ideal of the base point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.Scheme.stalkClosedPointTo\", \"AlgebraicGeometry.Scheme.residue\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"AlgebraicGeometry.Scheme.residueField\", \"AlgebraicGeometry.instCanonicallyOverSpecStalkCommRingCatPresheaf\", \"AlgebraicGeometry.Scheme.stalkClosedPointTo_fromSpecStalk\", \"AlgebraicGeometry.instOverSpecStalkCommRingCatPresheaf\"], \"digest\": \"9780724fb8ef3c0d\"}",
    "date": "2026-10-17",
-   "verdict": "unavailable"
+   "verdict": "no match: inspected hits concern fibre definitions, residue fields or ideal-sheaf kernels, not this full projection-stalk kernel formula"
   },
   {
    "tool": "loogle",
    "query": "AlgebraicGeometry.Scheme.Hom.fiberι, AlgebraicGeometry.Scheme.Hom.stalkMap",
-   "results": "not run: network access is blocked for the maintainer reader on this machine",
+   "results": "{\"t\": \"2026-10-17T07:58:13Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.fiberι, AlgebraicGeometry.Scheme.Hom.stalkMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "unavailable"
+   "verdict": "no match: inspected hits concern fibre definitions, residue fields or ideal-sheaf kernels, not this full projection-stalk kernel formula"
+  },
+  {
+   "tool": "grep",
+   "query": "fiberι.*stalkMap|stalkMap.*fiberι|ker.*stalkMap|stalkMap.*ker",
+   "results": "{\"t\": \"2026-10-17T07:58:13Z\", \"tool\": \"grep\", \"query\": \"fiberι.*stalkMap|stalkMap.*fiberι|ker.*stalkMap|stalkMap.*ker\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern fibre definitions, residue fields or ideal-sheaf kernels, not this full projection-stalk kernel formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local ring of scheme fibre is quotient by maximal ideal of base stalk",
+   "results": "{\"t\": \"2026-10-17T07:58:14Z\", \"tool\": \"leansearch\", \"query\": \"Local ring of scheme fibre is quotient by maximal ideal of base stalk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.residueField\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.LocallyRingedSpace.residueField\", \"AlgebraicGeometry.Scheme.evaluation.congr_simp\", \"AlgebraicGeometry.LocallyRingedSpace.isLocalRing\", \"AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf\", \"AlgebraicGeometry.Scheme.residue\"], \"digest\": \"d0778e06dec06ccf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern fibre definitions, residue fields or ideal-sheaf kernels, not this full projection-stalk kernel formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel of the map from a scheme local ring to the stalk in its fiber equals the ideal generated by the maximal ideal of the base",
+   "results": "{\"t\": \"2026-10-17T08:00:10Z\", \"tool\": \"leanfinder\", \"query\": \"Kernel of the map from a scheme local ring to the stalk in its fiber equals the ideal generated by the maximal ideal of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop\", \"AlgebraicGeometry.LocallyRingedSpace.coe_toΓSpecSheafedSpace_hom_base_hom_apply_asIdeal\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι_app\", \"Ideal.ker_algebraMap_residueField\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι\", \"AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp\", \"AlgebraicGeometry.Scheme.Hom.ideal_ker_le\", \"smoothSheafCommRing.nonunits_stalk\"], \"digest\": \"2e54a32ed4dd3b3d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern fibre definitions, residue fields or ideal-sheaf kernels, not this full projection-stalk kernel formula"
+  },
+  {
+   "tool": "grep",
+   "query": "fiber|stalk",
+   "results": "{\"t\": \"2026-10-17T08:00:10Z\", \"tool\": \"grep\", \"query\": \"fiber|stalk\", \"sub\": \"AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"14\", \"16\", \"19\", \"20\", \"37\"], \"digest\": \"1b376a379a64d609\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern fibre definitions, residue fields or ideal-sheaf kernels, not this full projection-stalk kernel formula"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,5 +171,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sbc-scheme-fibre-stalk-quotient",
+  "worker": "stage1",
+  "summary": "Read Stacks 0HA1/0H9M and the affine restriction, tensor-product, stalk and residue-field sources. Kept the statement unchanged. Split into five steps using existing DAG nodes only, checking the actual stalk map on every fraction and identifying the two extended ideals explicitly. Refreshed all Mathlib searches with msearch.py; no full match.",
+  "blueprint": "The stated ancestry serves sbc-thm-universal-test-vanishing, proof paragraph 3: preservation of relative dimension one after slicing, via lem-sbc-composite-fibre-local-models. This split supplies exactly the scheme-fibre local-ring quotient used three times in that parent, following Stacks 0HA1. No unit-level route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-ring-local-ring-natural-iso",
+    "why": "Generic commutative-ring calculation identifying the map B_q to the localization of B tensor_A kappa(p), its kernel and quotient isomorphism; the current vanishing unit supplies no algebraic replacement. This is exactly the affine reduction in Stacks 0HA1 to 0H9M."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-ring-local-ring-natural-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-4db4b3af0",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-4db4b3af0 (reviewer sub-agent of L); spot-checked: I read the item, all 13 cited node statements, the parent's use of the item, and Stacks schemes.tex l.3545 (Tag 0HA1, lemma-local-ring-fibre) and algebra.tex l.3520 (Tag 0H9M, remark-local-ring-fibre); the tag-to-label mapping checks out. The statement matches the first isomorphism of 0HA1, made precise as the projection stalk map with its surjectivity, kernel and class formula. Nothing is added or dropped. Small cases all check: g=id; Spec Z[x] over Spec Z at (p,x) gives F_p[x]_(x), not the residue field; the generic point with m_t=0; and a nonreduced base k[eps]. Step 1: U is chosen inside g^{-1}(V), so preimages of affines are never assumed affine. Step 2: the hypotheses of open-fibre-product hold, the affine fibre-product and residue-field-identification nodes give exactly what is used, and the point y' comes from the homeomorphism clause of def-pc-scheme-fibre. Step 3: the germ formula, the localization clause and locality give the stalk map b/s -> j(b)/j(s) and both prime contractions, so the step is elementary. Step 4: natural-iso (split, reviewed 2026-10-10) has no extra hypotheses, its theta is the map computed in step 3, and its dependencies are pure algebra, so there is no cycle. Step 5: both containments for m_t O_{Y,y} = pB_q are written out. There are no new nodes. No duplicate exists at scheme level in the DAG, and Mathlib's Fiber.lean has no stalk computation. I accept the tool_use of lem-weil-pbc-fibre-ring-local-ring-natural-iso (unit sk-thm-p1): it is the generic 0H9M algebra that 0HA1 itself reduces to. No SGA is cited and no target is touched. No fixes were made."
  }
 }
