@@ -14,9 +14,123 @@
   "def-weil-pbc-bounded-derived-subcategories",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-trf-filtered-localization-injective-model] on the fixed filtration interval $[0,0]$. In the notation of [def-sp-filtration], an object then has $F^pM=M$ for $p\\leq0$ and $F^pM=0$ for $p\\geq1$. Its only nonzero graded object is $\\operatorname{gr}^0M=M$. Thus filtered maps and filtered homotopies are exactly ordinary maps and homotopies; filtered quasi-isomorphisms are exactly quasi-isomorphisms; filtered injectives are exactly injectives. The fixed-interval exact equivalence asserted by the cited node is therefore\n$$q_{\\mathcal A}:K^+(\\operatorname{Inj}\\mathcal A)\\xrightarrow{\\sim}D^+(\\mathcal A).$$\nIt also supplies the same equivalence for $\\mathcal A'$. This is a specialization of an existing stronger statement, not a new assertion about filtered categories.",
+   "uses": [
+    "lem-trf-filtered-localization-injective-model",
+    "def-sp-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TK, lemma-resolution-functor-quasi-inverse; equivalently Tag 015Q in the one-step filtration interval"
+   }
+  },
+  {
+   "text": "Write $q_{\\mathcal A}$ as part of an adjoint equivalence $q_{\\mathcal A}\\dashv h_{\\mathcal A}$ and give the quasi-inverse $h_{\\mathcal A}$ the shift isomorphisms conjugate to those of $q_{\\mathcal A}$ through the unit and counit; by this construction the unit and counit commute with the shifts. Since $q_{\\mathcal A}$ is exact, [lem-sf-triangulated-right-adjoint] shows that $h_{\\mathcal A}$ is exact; likewise for $h_{\\mathcal A'}$. Write $i_{\\mathcal A}$ for the full inclusion of injective complexes into $K^+(\\mathcal A)$ and $Q_{\\mathcal B}:K^+(\\mathcal B)\\to D^+(\\mathcal B)$ for localization. Set\n$$RF=Q_{\\mathcal B}F i_{\\mathcal A}h_{\\mathcal A},\\qquad RF'=Q_{\\mathcal B}F'i_{\\mathcal A'}h_{\\mathcal A'}.$$\nThe inclusions are exact: shifts retain injective terms, and the terms of a cone are finite sums of injectives, which are injective since a map into each summand extends separately across a monomorphism. Localization carries cone triangles to distinguished triangles [def-weil-abstract-derived-category]. Consequently these composites are exact, using the assumed exactness of $F,F'$ and the definition of an exact functor [def-weil-triangulated-category]. On an injective representative $I$, the equivalence identifies $RF(Q_{\\mathcal A}I)$ with $Q_{\\mathcal B}F(I)$, naturally for every homotopy class between injective representatives.",
+   "uses": [
+    "lem-trf-filtered-localization-injective-model",
+    "def-sp-injective-resolutions",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-sf-triangulated-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TK and 05TJ, lemma-resolution-functor-quasi-inverse and lemma-resolution-functor; paragraph lemma-j-is-exact"
+   }
+  },
+  {
+   "text": "For a bounded below representative $K$, choose $k:K\\to I$ and $k':EK\\to J$ using [lem-sc-bounded-below-injective-resolution-existence] in $\\mathcal A$ and $\\mathcal A'$. Exactness of $E$ gives its termwise derived functor and canonical shift comparison by [lem-sf-exact-functor-derived-triangulated]. These restrict to bounded below categories: a termwise image of a complex zero in degrees below $a$ is again zero there. It sends $k$ to a quasi-isomorphism: exactness identifies $E(\\ker d)/E(\\operatorname{im}d)$ with $E(\\ker d/\\operatorname{im}d)$, so $H^n(Ek)=E(H^n(k))$. Both $I,J$ are K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. From now on use the canonical localization comparisons to write $D^+E(QK)=Q(EK)$. No injectivity assertion about $EI$ occurs.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution-existence",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013K, lemma-injective-resolutions-exist; Tag 015F, lemma-right-derived-exact-functor; Tag 070J, lemma-bounded-below-injectives-K-injective"
+   }
+  },
+  {
+   "text": "Because $J$ is K-injective, [lem-weil-pbc-kinjective-hom-derived] lifts the derived morphism\n$$Q(k')\\,Q(Ek)^{-1}:Q(EI)\\longrightarrow QJ$$\nto a unique homotopy class $u:EI\\to J$. Here $D^+$ is the localization of $K^+$ as in the statement: for bounded below sources and bounded below injective targets, the bijection between homotopy classes and morphisms of this localization is the Hom clause of [lem-trf-filtered-localization-injective-model] on the interval $[0,0]$ (Step 1), and it agrees with the bounded below clause of [lem-weil-pbc-kinjective-hom-derived]; the same applies to every use of the Hom bijection below. The images of $u\\circ E(k)$ and $k'$ agree after localization; the same Hom bijection with source $EK$ and target $J$ shows they agree in the homotopy category. Thus any chain representative $u$ has the homotopy required in the statement, and all such representatives give the same $F'(u)$. Define the component $t_K=Q_{\\mathcal B}(F'(u)\\tau_I)$, using Step 2 to identify its source with $RF(K)$ and its target with $RF'(D^+E(K))$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-trf-filtered-localization-injective-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TG, lemma-morphisms-into-injective-complex; Tag 070I, lemma-K-injective, Hom bijection"
+   }
+  },
+  {
+   "text": "Let $\\alpha:QK\\to QL$ be any derived morphism. Choose resolutions $k_K:K\\to I_K$, $k_L:L\\to I_L$ and $k'_K:EK\\to J_K$, $k'_L:EL\\to J_L$ as above. By [lem-weil-pbc-kinjective-hom-derived], let $a:I_K\\to I_L$ and $b:J_K\\to J_L$ represent\n$$Qa=Qk_L\\,\\alpha\\,(Qk_K)^{-1},\\qquad Qb=Qk'_L\\,(D^+E)(\\alpha)\\,(Qk'_K)^{-1}.$$\nSubstituting $Qu_X=Qk'_X\\,Q(Ek_X)^{-1}$ and the exact-$E$ localization comparison gives $Q(bu_K)=Q(u_LEa)$. The Hom bijection with source $EI_K$ and K-injective target $J_L$ gives $bu_K=u_LEa$ in the homotopy category. Naturality of $\\tau$ at $a$ now gives\n$$F'(b)F'(u_K)\\tau_{I_K}=F'(u_L)F'(Ea)\\tau_{I_K}=F'(u_L)\\tau_{I_L}F(a).$$\nAfter $Q_{\\mathcal B}$ this is precisely naturality of $t$. The argument allowed every $\\alpha$, so it includes every $K\\to L[1]$, without restricting to chain maps between $K,L$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TG and 070I; comparison-square argument in lemma-resolution-functor"
+   }
+  },
+  {
+   "text": "For two choices of source resolution over $K$, the Hom bijection [lem-weil-pbc-kinjective-hom-derived] gives the unique comparison $a:I\\to\\widetilde I$ with $Qa=Q\\widetilde k\\,(Qk)^{-1}$; similarly it gives $b:J\\to\\widetilde J$. Both are homotopy equivalences: lift the inverse derived arrows by the same bijection, and its injectivity makes both composites identities. Their defining augmentation equations also hold up to homotopy by that bijection. Thus $F(a),F'(b)$ are isomorphisms in the homotopy category. The calculation of Step 5 with $\\alpha=1_{QK}$ says $F'(b)t_K=\\widetilde t_KF(a)$, with localization understood. These are exactly the canonical comparison isomorphisms from Step 2. Their uniqueness makes comparisons for three choices compose, so the component is independent of $I,J,k,k'$; uniqueness of $u$ in Step 4 handles its choice too. Choosing the representatives supplied by $h_{\\mathcal A},h_{\\mathcal A'}$ gives a natural transformation of the two fixed functors, and the preceding equality identifies every other computation with it.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TJ and 05TK, uniqueness of resolution comparisons; remark-big-localization immediately after 05TK"
+   }
+  },
+  {
+   "text": "Compute the component at $K[1]$ with $I[1],J[1],k[1],k'[1]$, identifying $E(K[1])$ with $(EK)[1]$ by the termwise shift isomorphism. The comparison is $u[1]$: shifting the homotopy $uE(k)\\simeq k'$ gives its defining equation. Denote the given shift isomorphisms for $F,F'$ by $s_F,s_{F'}$. The hypothesis on $\\tau$ is\n$$s_{F',EI}\\,\\tau_{I[1]}=\\tau_I[1]\\,s_{F,I},$$\nwith the termwise $E$ comparison inserted. Naturality of $s_{F'}$ at $u$ gives\n$$s_{F',J}\\,F'(u[1])\\tau_{I[1]}=(F'(u)\\tau_I)[1]\\,s_{F,I}.$$\nThese are the induced shift comparisons of Step 2 when computed with shifted resolutions, so this is the required shift square for $R\\tau$. Step 6 transfers it to any chosen resolutions of $K[1]$. The same calculation works for every integer shift and hence retains the coherence of the given shift structures.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "lemma-j-is-exact, displayed comparison for j(K[1]); agent calculation of the transformation shift square"
+   }
+  },
+  {
+   "text": "For identity comparison data take $E=1$, $F'=F$, $\\tau=1$ and $I=J$, $k=k'$, $u=1_I$; the component is the identity. Step 6 gives the identity for arbitrary choices. For composable data $(E,\\tau:F\\to F'E)$ and $(E',\\sigma:F'\\to F''E')$, choose $I,J,H$ resolving $K,EK,E'EK$, with comparisons $u:EI\\to J$ and $v:E'J\\to H$ satisfying $uE(k)\\simeq k'$ and $vE'(k')\\simeq k''$. Then $w=vE'(u)$ satisfies $w(E'E)(k)\\simeq k''$, since an additive termwise functor sends a homotopy $dh+hd$ to the same homotopy formula. It is therefore the comparison for the composite exact functor. Naturality of $\\sigma$ at $u$ gives\n$$F''(v)\\sigma_JF'(u)\\tau_I=F''(v)F''(E'u)\\sigma_{EI}\\tau_I=F''(w)(\\sigma_{EI}\\tau_I).$$\nThe left side computes the composite of the two derived comparisons and the right side computes the comparison of the composite data. Step 6 proves this for arbitrary choices. For three comparisons, both ways give the same iterated composite by associativity. Thus identity and composition are respected, with no requirement that $EI$ or $E'J$ be injective.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Agent comparison/pasting calculation extending the resolution-functor argument of Tags 05TJ and 05TK"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtration",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-sc-bounded-below-injective-resolution-existence",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-triangulated-right-adjoint",
+  "lem-trf-filtered-localization-injective-model",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05TG (lemma-morphisms-into-injective-complex), 05TJ (lemma-resolution-functor), 05TK (lemma-resolution-functor-quasi-inverse), and lemma-j-is-exact; explicit cross-category naturality, shift and pasting calculations by Q02."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -66,10 +180,45 @@
    "results": "Hits read: CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory, CategoryTheory.Functor.rightDerived, CategoryTheory.injectiveResolutions, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj. ",
    "date": "2026-10-17",
    "verdict": "no match: rightDerivedNatTrans treats already existing derived functors along one localization; exact-functor and object-resolution hits do not give this bounded-complex descent, cross-category comparison and shift compatibility in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans|injectiveObjectEquivalence|exists_quasiIso_injective",
+   "results": "4 hits: Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib subdirectory Algebra/Homology",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give object-level right-derived comparisons, the exact termwise derived functor, or resolution existence. None states the cross-category comparison for arbitrary exact homotopy functors with all shift and composition clauses as a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation between triangulated homotopy functors induces a shift compatible natural comparison on bounded below derived categories using injective resolutions",
+   "results": "8 hits: CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory, CategoryTheory.Pretriangulated.Triangle.functorHomMk, CategoryTheory.NatTrans.mapHomotopyCategory, CategoryTheory.NatTrans.CommShiftCore, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.ProjectiveResolution.leftDerivedToHomotopyCategory_app_eq",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give object-level right-derived comparisons, the exact termwise derived functor, or resolution existence. None states the cross-category comparison for arbitrary exact homotopy functors with all shift and composition clauses as a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"NatTrans\"",
+   "results": "12 hits: CategoryTheory.Functor.rightDerivedNatTrans_id, CategoryTheory.Functor.rightDerivedNatTrans, CategoryTheory.Functor.rightDerivedNatTrans_fac, CategoryTheory.Functor.rightDerivedNatTrans_app, CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.Functor.rightDerivedNatTrans_fac_assoc, CategoryTheory.Functor.rightDerivedNatTrans_app_assoc, CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give object-level right-derived comparisons, the exact termwise derived functor, or resolution existence. None states the cross-category comparison for arbitrary exact homotopy functors with all shift and composition clauses as a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor on the bounded below homotopy category descends by evaluating injective resolutions; a comparison across an exact functor is natural and compatible with shifts",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj, CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give object-level right-derived comparisons, the exact termwise derived functor, or resolution existence. None states the cross-category comparison for arbitrary exact homotopy functors with all shift and composition clauses as a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a triangulated functor defined on bounded below complexes of injectives to the derived category and derive comparison transformations across an exact additive functor",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.map_distinguished_exact",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give object-level right-derived comparisons, the exact termwise derived functor, or resolution existence. None states the cross-category comparison for arbitrary exact homotopy functors with all shift and composition clauses as a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-amb-relative-torsor-cohomology",
@@ -88,5 +237,35 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-amb-bounded-injective-fibre-descent",
+  "worker": "stage1",
+  "group": "Q02",
+  "summary": "Split into eight steps using existing nodes only. Specialized the existing filtered equivalence to filtration interval [0,0], then constructed the comparison via the K-injective Hom bijection and proved arbitrary-derived-morphism naturality, all choice independence, shift compatibility, and identity/composition by explicit equations. No change to the statement and no assumption that E preserves injectives.",
+  "blueprint": "Serves lem-amb-cartier-kummer-map proof clauses \"One may compute the cone on an injective resolution\" and \"All the cone maps and Kummer boundaries commute with pullback of the pair and its trivialized line bundle\", through step 10 of lem-amb-relative-torsor-cohomology: resolve the relative fibre functor and descend its natural comparison, including boundary shifts.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-filtered-localization-injective-model",
+    "why": "Its fixed interval [0,0] specialization supplies the exact bounded-injective equivalence; this is a generic resolution tool, not a replacement of the Cartier/Kummer unit route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic Hom bijection into a K-injective target proves the unique comparison and equality of homotopy classes; no scheme-specific route is imported."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-filtered-localization-injective-model",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-9f2b1382b",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-9f2b1382b (reviewer sub-agent of L); spot-checked: I read the whole item: the statement (unchanged), all 8 steps, every cited node's statement, the parent's steps 11, 13 and 14 that use it, and Stacks derived.tex at 05TG, 05TJ, lemma-j-is-exact, 05TK and remark-big-localization. The delivery has no new nodes. The mathematics is correct. I recomputed Q(b u_K)=Q(u_L E a)=Qk'_L D^+E(alpha) Q(Ek_K)^{-1} (step 5), the shift square s_{F',J}F'(u[1])tau_{I[1]}=F'(u)[1]tau_I[1]s_{F,I} (step 7), and w=vE'(u) with F''(v)sigma_J F'(u)tau_I=F''(w)sigma_{EI}tau_I (step 8). I tested E = forgetful Vect_Fp -> Ab, where EI is not injective and the proof still works because only J must be K-injective. Restricting lem-trf-filtered-localization-injective-model to the interval [0,0] really does give K^+(Inj) ~ D^+, so no duplicate node is needed. I made two citation repairs in fixes/: (C1) step 2 used, with no node, that a quasi-inverse of an exact equivalence is exact; it now builds an adjoint equivalence with conjugate shifts and cites the Mathlib leaf lem-sf-triangulated-right-adjoint. (C4) step 4 took the Hom bijection from lem-weil-pbc-kinjective-hom-derived, which states it for D and for D^+ as a subcategory of D, while the item uses D^+ as the localization of K^+; it now also cites the [0,0] Hom clause of lem-trf-filtered-localization-injective-model. proof_deps recomputed. I accept both declared tool_uses: they are generic homological tools and replace no step of the unit's route. No SGA source is used. I could not check the Mathlib-search records against the Codex search log from this machine.; 1 file(s) fixed by the reviewer"
  }
 }

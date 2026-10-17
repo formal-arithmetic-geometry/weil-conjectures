@@ -40,12 +40,11 @@
    }
   },
   {
-   "text": "We first establish open restriction for the derived direct image in the actual coefficient category. All rings on the corners are the pullbacks of the same condensed $\\Lambda$. Clause (1) of the current [sk-prop-sfb-cartesian-coefficients] gives the ring isomorphisms $\\alpha_f:f^{-1}\\Lambda_{\\mathrm{target}}\\xrightarrow{\\sim}\\Lambda_{\\mathrm{source}}$, and its final assertion makes module pullback exact: it is canonically naturally isomorphic to the lift of $f^{-1}$ with action transported along $\\alpha_f^{-1}$. We use that natural isomorphism, not a literal equality of the module functors with sheaf inverse image. The admissible coefficients here use precisely its finite-subextension condensed $\\Qlb$ convention. Only the untwisted assertions are used; the new Tate-twist hypotheses play no role. On module sheaves, [det-sf-open-closed-sequence-ring-sheaf](1),(4), applied to the Cartesian square of step 1, supplies the exact open adjunctions and $r^*i_!\\simeq j'_!p^*$. Apply these exact functors termwise. They descend through quasi-isomorphisms and give triangulated functors by [lem-weil-pbc-exact-functor-derived-factorization]; the termwise units and counits descend too, and their triangle identities remain identities, giving $i_!\\dashv i^*$ and $j'_!\\dashv j'^*$ on the unbounded derived categories. The adjunctions $p^*\\dashv Rp_*$ and $r^*\\dashv Rr_*$ are [sk-def-sfb-module-derived-pushpull], with $Lf^*=f^*$ by exactness. For $T\\in D(Y,\\Lambda)$ and $B\\in D(W,\\Lambda)$ the successive adjunctions therefore give natural bijections\n$$\n\\operatorname{Hom}(T,i^*Rr_*B)\\cong\\operatorname{Hom}(i_!T,Rr_*B)\\cong\\operatorname{Hom}(r^*i_!T,B)\\cong\\operatorname{Hom}(j'_!p^*T,B)\\cong\\operatorname{Hom}(p^*T,j'^*B)\\cong\\operatorname{Hom}(T,Rp_*j'^*B).\n$$\nThese identify $i^*Rr_*B$ with $Rp_*j'^*B$: apply the bijections and their inverses to the two identity maps; naturality shows that the resulting two arrows compose to the identities. This proves the required derived restriction formula without substituting a ringed-space theorem for a ringed-topos theorem.",
+   "text": "All coefficient sheaves are pulled back from the same condensed $\\Lambda$. The untwisted assertion of [sk-prop-sfb-cartesian-coefficients] identifies module pullback with sheaf inverse image with action transported along $\\alpha_f^{-1}$, and makes it exact. This uses the chapter's finite-subextension condensed ring for $\\Qlb$, not an identification with $C(-,\\Qlb)$. By [det-sf-open-closed-sequence-ring-sheaf](1),(4), the Cartesian square of step 1 has exact open functors and a natural isomorphism $r^*i_!\\simeq j'_!p^*$ on module sheaves. Here all schemes are qcqs and both opens are quasi-compact. Apply these functors and this isomorphism termwise. [lem-weil-pbc-exact-functor-derived-factorization] supplies their functors on the unbounded derived categories, with their termwise models and shift isomorphisms. The same termwise open base-change isomorphism therefore identifies the derived functors $r^*i_!$ and $j'_!p^*$; its degreewise components commute with shifts.",
    "uses": [
     "sk-prop-sfb-cartesian-coefficients",
     "det-sf-open-closed-sequence-ring-sheaf",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "sk-def-sfb-module-derived-pushpull"
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false,
    "source": {
@@ -54,7 +53,30 @@
    }
   },
   {
-   "text": "For $B=j'_!A$ the unit isomorphism $j'^*j'_!A\\simeq A$ of [det-sf-open-closed-sequence-ring-sheaf](1) and step 2 give a natural identification $i^*Rr_*j'_!A\\simeq Rp_*A$. Under the derived adjunction $i_!\\dashv i^*$ constructed in step 2, a map $i_!Rp_*A\\to Rr_*j'_!A$ corresponds to its restriction composed with the unit $Rp_*A\\to i^*i_!Rp_*A$, which is an isomorphism by the same node. Choose the map corresponding to $\\mathrm{id}_{Rp_*A}$. The bijection proves existence and uniqueness. This defines $\\iota_A$ for every unbounded $A$. Write $F=i_!Rp_*$ and $G=Rr_*j'_!$. For $f:A\\to A'$, both $G(f)\\circ\\iota_A$ and $\\iota_{A'}\\circ F(f)$ restrict to $Rp_*(f)$ under the natural identification of step 2; the same adjunction bijection, now between $F(A)$ and $G(A')$, makes them equal. For an integer $n$, identify $F(A[n])$ with $F(A)[n]$ and $G(A[n])$ with $G(A)[n]$ using the derived shift isomorphisms. The shifted map $\\iota_A[n]$ and $\\iota_{A[n]}$ then both restrict to the identity of $Rp_*(A[n])$: the open base-change isomorphism and units in step 2 are termwise maps, so commute with these shifts. Uniqueness gives their equality, proving compatibility with shifts as well as naturality.",
+   "text": "The open adjunctions $i_!\\dashv i^*$ and $j'_!\\dashv j'^*$ are adjunctions of additive functors, since all four are exact by step 2. Apply [lem-weil-pbc-termwise-adjunction-homotopy](a) to obtain the adjunctions on complexes with degreewise units and counits. Their functors factor through the localizations at quasi-isomorphisms by step 2. Thus [lem-sfb-adjunction-localization] gives $D(i_!)\\dashv D(i^*)$ and $D(j'_!)\\dashv D(j'^*)$ with the localized degreewise units and counits. Its normalization formulas also show that the open unit remains invertible, since the underived unit is invertible by [det-sf-open-closed-sequence-ring-sheaf](1). The degreewise units and counits commute with the termwise shift isomorphisms. Finally [sk-def-sfb-module-derived-pushpull] supplies $Lp^*\\dashv Rp_*$ and $Lr^*\\dashv Rr_*$; exactness from step 2 identifies these left derived pullbacks with $p^*$ and $r^*$.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-sfb-adjunction-localization",
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (2): the hidden termwise-adjunction and localization arguments, using Stacks 08BJ (lemma-adjoint-preserve-K-injectives) and the Mathlib localization adjunction with its normalized unit and counit."
+   }
+  },
+  {
+   "text": "For $T\\in D(Y,\\Lambda)$ and $B\\in D(W,\\Lambda)$, compose the adjunction bijections of step 3 with the open base-change isomorphism of step 2:\n$$\\operatorname{Hom}(T,i^*Rr_*B)\\cong\\operatorname{Hom}(i_!T,Rr_*B)\\cong\\operatorname{Hom}(r^*i_!T,B)\\cong\\operatorname{Hom}(j'_!p^*T,B)\\cong\\operatorname{Hom}(p^*T,j'^*B)\\cong\\operatorname{Hom}(T,Rp_*j'^*B).$$\nThis chain is natural in $T$ and $B$. Apply it and its inverse to the two identity arrows: naturality makes their composites identities. Hence it gives the natural restriction isomorphism $i^*Rr_*B\\simeq Rp_*j'^*B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (2): formal Hom calculation after the cited adjunction descent and open base change."
+   }
+  },
+  {
+   "text": "For $B=j'_!A$ the unit isomorphism $j'^*j'_!A\\simeq A$ of [det-sf-open-closed-sequence-ring-sheaf](1) and steps 2–4 give a natural identification $i^*Rr_*j'_!A\\simeq Rp_*A$. Under the derived adjunction $i_!\\dashv i^*$ constructed in steps 2–4, a map $i_!Rp_*A\\to Rr_*j'_!A$ corresponds to its restriction composed with the unit $Rp_*A\\to i^*i_!Rp_*A$, which is an isomorphism by the same node. Choose the map corresponding to $\\mathrm{id}_{Rp_*A}$. The bijection proves existence and uniqueness. This defines $\\iota_A$ for every unbounded $A$. Write $F=i_!Rp_*$ and $G=Rr_*j'_!$. For $f:A\\to A'$, both $G(f)\\circ\\iota_A$ and $\\iota_{A'}\\circ F(f)$ restrict to $Rp_*(f)$ under the natural identification of steps 2–4; the same adjunction bijection, now between $F(A)$ and $G(A')$, makes them equal. For an integer $n$, identify $F(A[n])$ with $F(A)[n]$ and $G(A[n])$ with $G(A)[n]$ using the derived shift isomorphisms. The shifted map $\\iota_A[n]$ and $\\iota_{A[n]}$ then both restrict to the identity of $Rp_*(A[n])$: the open base-change isomorphism and units in steps 2–4 are termwise maps, so commute with these shifts. Uniqueness gives their equality, proving compatibility with shifts as well as naturality.",
    "uses": [
     "det-sf-open-closed-sequence-ring-sheaf"
    ],
@@ -65,7 +87,7 @@
    }
   },
   {
-   "text": "First take $A\\in\\Dctf(\\overline X,\\Lambda)$. By [det-proper-image-localizing-open], $j'_!A\\in\\Dctf(W,\\Lambda)$. Let $c:Z\\hookrightarrow\\overline Y$ be the closed complement of $Y$, let $W_Z=W\\times_{\\overline Y}Z$, and write $c':W_Z\\to W$ and $r_Z:W_Z\\to Z$. These are again schemes and morphisms of the standing setting. Proper base change gives\n$$c^*Rr_*j'_!A\\simeq R(r_Z)_*c'^*j'_!A.$$\nFor finite $\\Lambda$ this is clause (2) of [det-thm-sfb-proper-base-change-finite]. For $\\mathcal O_E$ it is clause (3) of [det-thm-sfb-proper-base-change-integral], and for $E$ and $\\overline{\\mathbf Q}_\\ell$ clause (3) of [det-thm-sfb-proper-base-change-rational]. The latter two apply since $\\Dctf\\subset\\Dbc$ by [sk-def-sfb-constructible]; the cases $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$ are $E=\\mathbf Q_\\ell$. By step 1, $W_Z$ misses $\\overline X$. Clause (4) of [det-sf-open-closed-sequence-ring-sheaf] applied to $j'$ and $c'$ now identifies $c'^*j'_!$ with extension from the empty open, hence with zero (the sheaf axiom for the empty cover makes every module sheaf on the empty scheme zero). The same clause applied to $i$ and $c$ gives $c^*i_!=0$. Thus both restrictions of $\\iota_A$ to $Z$ are maps between zero objects; its restriction to $Y$ is the identity by step 3.",
+   "text": "First take $A\\in\\Dctf(\\overline X,\\Lambda)$. By [det-proper-image-localizing-open], $j'_!A\\in\\Dctf(W,\\Lambda)$. Let $c:Z\\hookrightarrow\\overline Y$ be the closed complement of $Y$, let $W_Z=W\\times_{\\overline Y}Z$, and write $c':W_Z\\to W$ and $r_Z:W_Z\\to Z$. These are again schemes and morphisms of the standing setting. Proper base change gives\n$$c^*Rr_*j'_!A\\simeq R(r_Z)_*c'^*j'_!A.$$\nFor finite $\\Lambda$ this is clause (2) of [det-thm-sfb-proper-base-change-finite]. For $\\mathcal O_E$ it is clause (3) of [det-thm-sfb-proper-base-change-integral], and for $E$ and $\\overline{\\mathbf Q}_\\ell$ clause (3) of [det-thm-sfb-proper-base-change-rational]. The latter two apply since $\\Dctf\\subset\\Dbc$ by [sk-def-sfb-constructible]; the cases $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$ are $E=\\mathbf Q_\\ell$. By step 1, $W_Z$ misses $\\overline X$. Clause (4) of [det-sf-open-closed-sequence-ring-sheaf] applied to $j'$ and $c'$ now identifies $c'^*j'_!$ with extension from the empty open, hence with zero (the sheaf axiom for the empty cover makes every module sheaf on the empty scheme zero). The same clause applied to $i$ and $c$ gives $c^*i_!=0$. Thus both restrictions of $\\iota_A$ to $Z$ are maps between zero objects; its restriction to $Y$ is the identity by step 5.",
    "uses": [
     "det-proper-image-localizing-open",
     "det-thm-sfb-proper-base-change-finite",
@@ -81,7 +103,7 @@
    }
   },
   {
-   "text": "The restrictions $i^*$ and $c^*$ are exact by the final untwisted assertion of the current [sk-prop-sfb-cartesian-coefficients], with coefficient actions transported along the inverse ring comparisons as in step 2. The cone of $\\iota_A$ for $A\\in\\Dctf$ therefore has cohomology sheaves whose two restrictions vanish, by step 4. Each such sheaf is zero by [lem-exc-open-closed-detection], so the cone is acyclic and $\\iota_A$ is an isomorphism. For the extension to $\\Loc(\\Dctf)$ use [det-sf-comp-coherence-single] first with compactification $(\\mathrm{id}_{\\overline X},p)$ to obtain exactness and coproduct preservation for $Rp_*$, then with $(i,\\mathrm{id}_{\\overline Y})$ for $i_!$, and with $(j',r)$ for $Rr_*j'_!$. Thus both functors $i_!Rp_*$ and $Rr_*j'_!$ have the hypotheses of [det-sf-determination-localizing]. The natural transformation $\\iota$ commutes with shifts by step 3. Its invertibility locus contains $\\Dctf$ by the preceding argument, so that cited determination lemma implies it contains all of $\\Loc(\\Dctf)$.",
+   "text": "The restrictions $i^*$ and $c^*$ are exact by the final untwisted assertion of the current [sk-prop-sfb-cartesian-coefficients], with coefficient actions transported along the inverse ring comparisons as in step 2. The cone of $\\iota_A$ for $A\\in\\Dctf$ therefore has cohomology sheaves whose two restrictions vanish, by step 6. Each such sheaf is zero by [lem-exc-open-closed-detection], so the cone is acyclic and $\\iota_A$ is an isomorphism. For the extension to $\\Loc(\\Dctf)$ use [det-sf-comp-coherence-single] first with compactification $(\\mathrm{id}_{\\overline X},p)$ to obtain exactness and coproduct preservation for $Rp_*$, then with $(i,\\mathrm{id}_{\\overline Y})$ for $i_!$, and with $(j',r)$ for $Rr_*j'_!$. Thus both functors $i_!Rp_*$ and $Rr_*j'_!$ have the hypotheses of [det-sf-determination-localizing]. The natural transformation $\\iota$ commutes with shifts by step 5. Its invertibility locus contains $\\Dctf$ by the preceding argument, so that cited determination lemma implies it contains all of $\\Loc(\\Dctf)$.",
    "uses": [
     "sk-prop-sfb-cartesian-coefficients",
     "lem-exc-open-closed-detection",
@@ -105,10 +127,12 @@
   "det-thm-sfb-proper-base-change-integral",
   "det-thm-sfb-proper-base-change-rational",
   "lem-exc-open-closed-detection",
+  "lem-sfb-adjunction-localization",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-proper-base-change",
   "lem-weil-pbc-proper-closed-image",
   "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
   "sk-def-sfb-constructible",
   "sk-def-sfb-module-derived-pushpull",
   "sk-prop-sfb-cartesian-coefficients"
@@ -116,7 +140,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
-  "place": "Proof clauses (1)--(3); the open restriction formula is expanded using the open base-change isomorphism and adjunction bijections."
+  "place": "Proof clauses (1)–(3); clause (2) expanded through existing termwise-adjunction and localization theorems, followed by the formal Hom calculation."
  },
  "mathlib_searches": [
   {
@@ -170,7 +194,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -191,8 +215,8 @@
   "date": "2026-10-17",
   "item": "det-sf-comp-composition-interchange",
   "worker": "stage1",
-  "summary": "Completed the existing sandbox split without new nodes. Fixed imported-node blueprint.from, replaced an inapplicable ringed-space restriction citation by a fully written adjunction calculation on ordinary pro-etale module derived categories, justified closed-complement vanishing by open base change, and made all three applications of the compactification functor lemma explicit. The standing-setting and admissible-coefficient conventions are named. All five steps have verbatim statement quotations for every cited input. Repair of landing L: rebased the retained split onto the current authoritative item metadata, re-read all 19 step/input statement pairs, replaced both obsolete Cartesian-coefficient quotations, and adjusted steps 2 and 5 to use its precise canonical lift and untwisted exactness assertion. The finite-subextension condensed Qlb convention agrees with the coefficients used here; no Tate-twist assertion is needed. The coefficient-definition comparison exposed an ambiguity in the imported Qlb convention; the statement now explicitly names the finite-subextension condensed ring fixed by the chapter, without identifying it with the larger topological condensed ring.",
-  "blueprint": "Realizes the blueprint proof clauses (1), (2), and (3), with clause (3) split into the Dctf closed-complement argument and the localizing-category propagation.",
+  "summary": "Repair of the 2026-10-17 long-step return. Reused the existing termwise-adjunction theorem and Mathlib adjunction-localization leaf for the two arguments hidden in former step 2. Separated exact functor/base-change setup, cited adjunction descent, and the remaining elementary Hom calculation. Retained the statement, coefficient convention, route and all other arguments; updated their internal step references. Retired the earlier undelivered derived-restriction draft because its Hom calculation is elementary after these existing inputs, and preserved it and its search log outside the delivery tree. Rebuilt every citation quote verbatim from current statements.",
+  "blueprint": "Realizes proof clauses (1), (2), (3): step 1 is (1), steps 2–5 are (2), steps 6–7 are (3). The hidden complex adjunction and localization in former step 2 now cite existing lem-weil-pbc-termwise-adjunction-homotopy(a) and lem-sfb-adjunction-localization; no unit route is replaced.",
   "tool_uses": [
    {
     "node": "det-sf-open-closed-sequence-ring-sheaf",
@@ -213,6 +237,10 @@
    {
     "node": "lem-weil-pbc-exact-functor-derived-factorization",
     "why": "Generic exact-functor localization and shift compatibility used to descend the exact open functors; no unit-specific localization theorem is supplied."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic clause (a) supplies the adjunction on cochain complexes from the exact open adjunction; the composition unit supplies no such theorem."
    }
   ]
  },
@@ -221,15 +249,16 @@
   "lem-exc-open-closed-detection",
   "det-sf-comp-coherence-single",
   "det-sf-determination-localizing",
-  "lem-weil-pbc-exact-functor-derived-factorization"
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q47-dff6a202e",
-  "group": "Q47",
+  "reviewer": "NT-cc-Q85-18918ff6a",
+  "group": "Q85",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-dff6a202e (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and every cited statement in full, against the main-20261015 blueprint statement and proof and Stacks 09AH (proetale.tex lemma-ses-associated-to-open, line 5135; it needs a quasi-compact open, which holds). There are no new nodes. proof_deps equals the union of the step uses. A dependency search finds no cycle. No SGA is cited.\n\nStatement: clauses 1-3 match the blueprint word for word. The two additions only fix the chapter's own setting and do not weaken anything: (a) the standing separated finite-type setting, which every coefficient-specific input already requires; (b) for Qlb, the finite-subextension ring of sk-def-sfb-qlbar-condensed, which the chapter's layer B cites and which sk-prop-sfb-cartesian-coefficients and the rational proper base change node use. I checked the convergent-sequence example: the two condensed rings differ, and the item does not claim they are equal.\n\nStep 1: proper base change, proper implies separated, proper into a separated target, and closed image, plus density, give r^{-1}(Y)=Xbar as open subschemes. Step 2: clause (4) of the ring-sheaf node applies (qcqs schemes, i quasi-compact, U' = Xbar by step 1); the termwise exact adjunctions descend, and the six Hom bijections give i^*Rr_*B = Rp_*j'^*B. Step 3: since the unit of i_! -| i^* is invertible, existence, uniqueness, naturality and shift compatibility follow; this step is genuinely elementary. Step 4: j'_!A is in Dctf(W), and Dctf is contained in Dbc. The finite clause (2), integral clause (3) and rational clause (3) of proper base change cover A, Z_l, O_E, Q_l, E and Qlb. Clause (4) of the ring-sheaf node with an empty open gives both vanishings over the closed complement. Step 5: the open/closed detection lemma kills each cohomology sheaf of the cone. det-sf-comp-coherence-single is applied three times, to (id,p), (i,id) and (j',r), and every hypothesis holds. The localizing determination lemma then gives the isomorphism on all of Loc(Dctf).\n\nEdge cases checked: all maps identities; p=id with W=Ybar; Y empty; A=0. Without the density hypothesis clause 1 fails.\n\nTool uses for L: the worker's five, plus det-thm-sfb-proper-base-change-{finite,integral,rational}. These give the Dctf case of the blueprint's cited sk-prop-proper-base-change-unbounded, which has no realized node; only the Dctf case is needed.\n\nFor maintenance: the literal wording of sk-def-localizing-closure gives the larger ring C(-,Qlb), so it should be aligned with the chapter's convention. The stored unit record still carries the old sec-smooth-purity text.\n\nNo fixes made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-18918ff6a (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and the statement of every one of the 22 cited nodes. Sources checked: blueprint main-20261015 det-sf-comp-composition-interchange (statement and proof (1)-(3)); Mathlib Localization/Adjunction.lean lines 80-131, where the CatCommSq orientation matches the unit/counit formulas of lem-sfb-adjunction-localization; Stacks 08BJ (derived.tex lemma-adjoint-preserve-K-injectives); Stacks 09AH (proetale.tex line 5135, which needs a quasi-compact open, as here). The return asked to shorten the 2076-character step 2; it is now steps 2-4. Step 2 sets up the exact open functors, their derived functors and the open base change via det-sf-open-closed clauses (1),(4), with U'=Xbar from step 1. Step 3 cites termwise-adjunction (a), the localization leaf and the pushpull adjunction; the open unit stays invertible. Step 4 is an elementary Hom chain plus Yoneda. All steps are under 2000 characters. proof_deps equals the union of the step uses. There are no new nodes and no cycle, no SGA is cited, and the statement is unchanged, with no weakening. Hypotheses checked: properness, separation and closed dense image in step 1. Dctf is preserved by j'_! and Dctf is contained in Dbc for finite, integral (Z_l is O_E with E=Q_l) and rational/Qlb proper base change along the closed complement. The empty base change is zero by clause (4). The detection lemma uses i quasi-compact. Coherence-single is applied to (id,p), (i,id) and (j',r), and determination-localizing to a shift-compatible iota. Edge cases checked: all maps identities, p=id, Y empty, A=0; dropping density breaks clause 1. Duplicate search: no existing open-restriction/Rr_* node; the retired draft was rightly not delivered. I accept the six split_report.tool_uses entries. For the maintainer: also record det-thm-sfb-proper-base-change-{finite,integral,rational} as tool uses (Dctf case of sk-prop-proper-base-change-unbounded). The stale unit record still carries old sec-smooth-purity metadata. No fixes."
  },
  "lean_audit": {
   "master": {

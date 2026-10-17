@@ -12,9 +12,85 @@
   "def-trf-admissibility",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F=Rf_!$, $H=Rh_!$, $E=e_!$ and $J=j_!$. For the open immersions $e$ and $j$, the factorizations $(e,\\mathrm{id}_P)$ and $(j,\\mathrm{id}_X)$ are compactifications, and the identity being proper, the compact-support direct image of [def-compact-support-direct-image-detailed] computed with them is $Re_!=R(\\mathrm{id}_P)_*e_!=e_!$ and likewise $Rj_!=j_!$; this is the identification of extension by zero with compact-support direct image used throughout. Since $V=t^{-1}(U)$, the square with arrows $(e,r,t,j)$ is Cartesian. Apply [lem-trf-open-square-exchange] to get the specified natural isomorphism $b_L:t^*JL\\xrightarrow{\\sim}Er^*L$, whose restriction to $V$ is the identity under the open-unit identifications. Compact-support composition in [prop-functor-package], applied to $fe=jh$, gives a natural isomorphism $C_N:FEN\\xrightarrow{\\sim}JHN$. The source identification in the statement is therefore $C_{r^*L}\\circ F(b_L)$. All these functors are on the finite-coefficient constructible finite-Tor domains specified in [def-trf-admissibility]; no integral or rational coefficient passage is involved.",
+   "uses": [
+    "lem-trf-open-square-exchange",
+    "prop-functor-package",
+    "def-trf-admissibility",
+    "def-compact-support-direct-image-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.1.6(a)(i), §1.5.9: Cartesian source-leg square and compact-support composition; legs interchanged"
+   }
+  },
+  {
+   "text": "Let $d_L:Eh^!L\\to f^!JL$ be the last arrow defining $z_X$. Write $\\varepsilon_f$ and $\\varepsilon_h$ for the exceptional counits of [def-trf-admissibility]. The definition of $d_L$ says\n$$\\varepsilon_{f,JL}\\circ F(d_L)=J(\\varepsilon_{h,L})\\circ C_{h^!L}.$$\nConsequently the exceptional transpose of $z_X=d_L\\circ E(z)\\circ b_L$ is\n$$\\begin{aligned}\n\\varepsilon_{f,JL}\\circ F(z_X)\n&=J(\\varepsilon_{h,L})\\circ C_{h^!L}\\circ FE(z)\\circ F(b_L)\\\\\n&=J(\\varepsilon_{h,L}\\circ H(z))\\circ C_{r^*L}\\circ F(b_L).\n\\end{aligned}$$\nThe second equality is naturality of $C$. Since $w=\\varepsilon_{h,L}\\circ H(z)$ by the same adjunction, this proves the first assertion with exactly the source identification of step 1.",
+   "uses": [
+    "def-trf-admissibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.1.6(a), pushforward formula, rewritten through the exceptional adjunction"
+   }
+  },
+  {
+   "text": "For the second assertion denote the open counits by $c_e:Ee^*\\to\\mathrm{id}$ and $c_j:Jj^*\\to\\mathrm{id}$. Their adjunctions and invertible units are [prop-weil-open-closed-recollement-adjunctions], applied to $e$ and $j$ with their closed complements. For $N\\in D^b_{ctf}(V,A)$ and $K\\in D^b_{ctf}(X,A)$, the two composite adjunctions [def-weil-pbc-composite-adjunction] give\n$$\\operatorname{Hom}(FEN,K)\\cong\\operatorname{Hom}(N,e^*f^!K),\\qquad\n\\operatorname{Hom}(JHN,K)\\cong\\operatorname{Hom}(N,h^!j^*K).$$\nThus the inverse conjugate of $C:FE\\simeq JH$ is the canonical $\\chi_K:e^*f^!K\\xrightarrow{\\sim}h^!j^*K$. This is the composition normalization stipulated in [def-trf-admissibility], using $e^!=e^*$ and $j^!=j^*$ as right adjoints of extension by zero. Expanding conjugation [def-weil-pbc-adjunction-conjugate] and the composite counits gives\n$$\\varepsilon_{f,K}\\circ F(c_{e,f^!K})\n=c_{j,K}\\circ J(\\varepsilon_{h,j^*K})\\circ JH(\\chi_K)\\circ C_{e^*f^!K}.\\tag{*}$$\nIndeed the left side is the counit of $FE\\dashv e^*f^!$; the first two arrows on the right are the counit of $JH\\dashv h^!j^*$, and inserting the defining unit--transformation--counit formula for the conjugate cancels its adjacent unit and counit by a triangle identity. This also shows why only $fe=jh$, not a Cartesian square for $f$, is needed here.",
+   "uses": [
+    "prop-weil-open-closed-recollement-adjunctions",
+    "def-weil-pbc-composite-adjunction",
+    "def-trf-admissibility",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.1.8(ii) and §1.1.9, open restriction via the two composite adjunctions"
+   }
+  },
+  {
+   "text": "Put $L=j^*K$, $Q=t^*K$, and identify $N=r^*L=e^*Q$ by pullback composition. Set $a=c_{j,K}$. Under $b_L$ the pullback of the open counit is the open counit on $P$:\n$$t^*(a)\\circ b_L^{-1}=c_{e,Q}:EN\\longrightarrow Q.\\tag{**}$$\nTo check this, transpose both arrows under $E\\dashv e^*$. The transpose of the right side is $\\mathrm{id}_{e^*Q}$. For the left side, the restriction-identity normalization of $b_L$ in [lem-trf-open-square-exchange] identifies its transpose with the pullback by $r$ of $j^*(c_{j,K})\\circ\\eta_{j,j^*K}=\\mathrm{id}_{j^*K}$, which is the triangle identity for the open adjunction in [prop-weil-open-closed-recollement-adjunctions]. The two transposes agree, proving (**).",
+   "uses": [
+    "lem-trf-open-square-exchange",
+    "prop-weil-open-closed-recollement-adjunctions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.1.6(a)(i) and §1.1.8(ii): open base change normalized by the open adjunction"
+   }
+  },
+  {
+   "text": "The restricted coefficient is $z=\\chi_K\\circ e^*(u):N\\to h^!j^*K$, so its exceptional transpose is $w=\\varepsilon_{h,L}\\circ H(z)$. The original transpose is $v=\\varepsilon_{f,K}\\circ F(u)$, by [def-trf-admissibility]. Using (**), naturality of $c_e$, then (*) and naturality of $C$, compute\n$$\\begin{aligned}\nv\\circ F(t^*a)\\circ F(b_L^{-1})\n&=\\varepsilon_{f,K}\\circ F(u)\\circ F(c_{e,Q})\\\\\n&=\\varepsilon_{f,K}\\circ F(c_{e,f^!K})\\circ FE(e^*u)\\\\\n&=a\\circ J(\\varepsilon_{h,L})\\circ JH(\\chi_K)\\circ C_{e^*f^!K}\\circ FE(e^*u)\\\\\n&=a\\circ J(\\varepsilon_{h,L}\\circ H(z))\\circ C_N\n=a\\circ J(w)\\circ C_N.\n\\end{aligned}$$\nThe open-counit naturality used here is part of the adjunction of [prop-weil-open-closed-recollement-adjunctions]. Composing on the right with $F(b_L)$ proves $v\\circ Rf_!t^*(a)=a\\circ j_!w$ under $C_N\\circ F(b_L)$, exactly as asserted. The computation never uses invertibility of $u$ or $z$.",
+   "uses": [
+    "def-trf-admissibility",
+    "prop-weil-open-closed-recollement-adjunctions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.5.9 and §5.3.3, open graded coefficient is characterized by compatibility with the open counit; explicit adjunction calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-open-square-exchange",
+  "prop-functor-package",
+  "def-trf-admissibility",
+  "def-compact-support-direct-image-detailed",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Explicit adjunction proof of the formulas of §§1.1.6(a)(i), 1.1.8(ii), 1.1.9 and 1.5.9 used in §5.3.3; legs interchanged"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +119,45 @@
    "results": "0 hits: ; Mathlib/CategoryTheory; these are ordinary adjunctions or scalar/topological base change, not the stated compact-support coefficient-map comparison",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological.correspondence|exceptional.*adjoint|lowerShriek.*exchange",
+   "results": "0 hits: ; directory Mathlib/CategoryTheory; read the returned signatures: generic adjunction or ordinary sheaf results, not the exceptional compact-support comparison with its open counit identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support adjunction extension by zero open immersion counit compatibility",
+   "results": "8 hits: HasCompactSupport.extend_zero, HasCompactSupport.continuous_extend_zero, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, CompHausLike.LocallyConstant.counit, CategoryTheory.Adjunction.CommShift.compatibilityUnit_isoZero, HasCompactSupport.tsupport_extend_zero, HasCompactSupport.is_zero_at_infty, CondensedSet.compactlyGeneratedAdjunction; read the returned signatures: generic adjunction or ordinary sheaf results, not the exceptional compact-support comparison with its open counit identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"homEquiv\"",
+   "results": "12 hits: CategoryTheory.Adjunction.CoreHomEquiv, CategoryTheory.Adjunction.CoreHomEquivUnitCounit, CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.homEquiv', CategoryTheory.Adjunction.CoreHomEquiv.homEquiv, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit; read the returned signatures: generic adjunction or ordinary sheaf results, not the exceptional compact-support comparison with its open counit identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional adjoint of extension by zero of a cohomological correspondence along an open immersion is extension by zero of the adjoint",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app; read the returned signatures: generic adjunction or ordinary sheaf results, not the exceptional compact-support comparison with its open counit identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of adjunction hom equivalence with respect to a morphism and composite adjunction counits for extension by zero of sheaves",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓHomEquiv_naturality_right, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, CategoryTheory.Sheaf.ΓObjEquivHom_naturality, CategoryTheory.sheafComposeNatTrans, CategoryTheory.sheafComposeNatTrans_fac; read the returned signatures: generic adjunction or ordinary sheaf results, not the exceptional compact-support comparison with its open counit identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-triangle-compatibility",
@@ -63,5 +174,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-open-extension-adjoint",
+  "worker": "stage1",
+  "summary": "Preserved the exact statement and all inherited records. Gave five explicit steps: normalized open base change and composition; the transpose of the defined extension; the composite-counit formula for arbitrary commuting open squares; pullback compatibility with the open counit; and the final naturality calculation. Reused six existing nodes and created none. Avoided the stronger ambient-adjoint hypothesis of fix-prop-adjunctions by using the specified constructible adjunction datum and the two ordinary open adjunctions.",
+  "blueprint": "lem-trf-trace-triangle-compatibility, Induced morphisms paragraph: steps 1–2 realize the three arrows in the extension-by-zero construction; steps 3–5 justify its open restriction and first triangle square, the open coefficient compatibility consumed by the graded identification in Varshavsky §5.3.3.",
+  "tool_uses": [
+   {
+    "node": "prop-functor-package",
+    "why": "Only compact-support composition for fe=jh is used; the trace-additivity unit has no generic composition theorem."
+   },
+   {
+    "node": "prop-weil-open-closed-recollement-adjunctions",
+    "why": "Open adjunctions, invertible open units and counit naturality normalize the restriction calculation; these are generic recollement tools."
+   },
+   {
+    "node": "lem-trf-open-square-exchange",
+    "why": "The canonical open base-change isomorphism with restriction equal to the identity supplies the source comparison; it is a tool, not an alternate trace-additivity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-functor-package",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "lem-trf-open-square-exchange"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-814523c12",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-814523c12 (reviewer sub-agent of L); spot-checked: Read the item in full, all cited statements (lem-trf-open-square-exchange, prop-functor-package cl.3, def-trf-admissibility with its blueprint_update, prop-weil-open-closed-recollement-adjunctions, def-weil-pbc-composite-adjunction, def-weil-pbc-adjunction-conjugate), unit sk-i-additivity and its transitive route, the parent lem-trf-trace-triangle-compatibility, and Varshavsky §1.1.6(a)(i), 1.1.8(ii), 1.1.9, 1.5.9 and 5.3.3 (his c1 is our t, his c2 is our f). Claim 1 matches the 1.1.6(a) push-forward through the Cartesian left square. Claim 2 is the §5.3.3 characterization of gr^1. Step 2 transpose computation checked. Step 3: checked by hand the mate identity eps_1∘tau_{R_1}=eps_2∘L_2(tau^c), with tau=C^{-1}, so (*) is correct and the f-square need not be Cartesian. Step 4: open triangle identity plus the restriction normalization of b. Step 5: every arrow typed. Edge cases checked: U=X, U or V empty, zero objects, a non-Cartesian G_m example, and the parent's application via c-invariance. No new nodes, no duplicates. Tool uses accepted: prop-functor-package (the in-route thm-sf-comp-composition is only on D^+_et) and lem-trf-open-square-exchange (generic open base change). Fix: step 1 silently used Re_!=e_! and Rj_!=j_!. Added that sentence, via the compactifications (e,id_P) and (j,id_X), and cited def-compact-support-direct-image-detailed in uses and proof_deps. No other change.; 1 file(s) fixed by the reviewer"
  }
 }

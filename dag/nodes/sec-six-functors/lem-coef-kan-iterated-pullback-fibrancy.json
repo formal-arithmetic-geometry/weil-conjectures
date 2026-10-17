@@ -18,9 +18,60 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We use simultaneous induction on the positive integer $k$: $P_k$ is Kan, $t_k$ is a Kan fibration, and, when $k\\geq2$, $\\pi_k:P_k\\to P_{k-1}$ is a Kan fibration. For $k=1$, $P_1=E$ is Kan and $t_1=t$ is a Kan fibration by hypothesis. For the induction step fix $k\\geq2$ and assume the assertions at $k-1$. All pullbacks and their coordinate maps are the degreewise ones of [def-cbc-enhanced-diagrams-cones]; in particular $t_k=t\\circ\\operatorname{pr}_E$ and $t_{k-1}\\circ\\pi_k=s\\circ\\operatorname{pr}_E$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00T0",
+    "place": "Definition 3.1.1.1; setup of the finite induction"
+   }
+  },
+  {
+   "text": "To prove the lifting property for $\\pi_k$, fix any horn inclusion $j:H=\\Lambda_i^n\\hookrightarrow D=\\Delta^n$, $n\\geq1$, $0\\leq i\\leq n$. A lifting problem consists of a map $(a,b):H\\to P_k$ and $v:D\\to P_{k-1}$ such that $v\\circ j=a$ and $t_{k-1}\\circ a=s\\circ b$. Apply the assumed lifting property of $s$ to $b:H\\to E$ over $t_{k-1}\\circ v:D\\to B$. It gives $\\widetilde b:D\\to E$ with $\\widetilde b\\circ j=b$ and $s\\circ\\widetilde b=t_{k-1}\\circ v$. Thus $(v,\\widetilde b):D\\to P_k$ is a simplicial map by the degreewise pullback definition, restricts to $(a,b)$ and projects to $v$. This solves every lifting problem for $\\pi_k$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00T0",
+    "place": "Definition 3.1.1.1 and Remark 3.1.1.6; explicit pullback lift"
+   }
+  },
+  {
+   "text": "For the endpoint map $t_k$, take a lifting problem with top map $(a,b):H\\to P_k$ and bottom map $c:D\\to B$, so $c\\circ j=t\\circ b$ and $t_{k-1}\\circ a=s\\circ b$. First lift $b$ through the fibration $t$ over $c$, obtaining $e:D\\to E$ with $e\\circ j=b$ and $t\\circ e=c$. Next apply the induction hypothesis that $t_{k-1}$ is a Kan fibration to the top map $a$ and bottom map $s\\circ e$; the needed equality on $H$ is $s\\circ e\\circ j=s\\circ b=t_{k-1}\\circ a$. Obtain $w:D\\to P_{k-1}$ with $w\\circ j=a$ and $t_{k-1}\\circ w=s\\circ e$. The pair $(w,e):D\\to P_k$ extends $(a,b)$ and its endpoint is $t\\circ e=c$. Hence $t_k$ is a Kan fibration. These are just two uses of the defining horn lifting properties, with the equality defining the pullback checked explicitly.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00T0",
+    "place": "Definition 3.1.1.1 and Remarks 3.1.1.6, 3.1.1.10; two successive horn lifts"
+   }
+  },
+  {
+   "text": "Finally, given a horn map $h:H\\to P_k$, first extend $\\pi_k\\circ h$ to $v:D\\to P_{k-1}$ by the Kan property of $P_{k-1}$. Apply the lifting property for $\\pi_k$ established in step 2 to $h$ and $v$ to obtain an extension $D\\to P_k$. This is exactly the Kan condition in [def-cbc-enhanced-diagrams-cones]. The simultaneous induction is complete. Only horns in positive dimensions were used; if $E$ or a pullback is empty, there are no horn maps into it, so the corresponding lifting and Kan conditions remain valid. If $B$ is empty, the maps $E\\to B$ force $E$, and hence all $P_k$, to be empty as well. No surjectivity on vertices or nonemptiness has been used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00T0",
+    "place": "Remark 3.1.1.11; explicit horn filling and completion of induction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/00T0",
+  "place": "Elementary horn-by-horn expansion of Definition 3.1.1.1 and Remarks 3.1.1.6, 3.1.1.10, 3.1.1.11; read online on 2026-10-17, not archived in literature/. The positive-integer simultaneous induction is written here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,10 +115,46 @@
    "results": "Actual search returned 8 hits: HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations, SSet.modelCategoryQuillen.instCategoryWithFibrations, HomotopicalAlgebra.FibrantBrownFactorization.mk', HomotopicalAlgebra.instFibrationFstOfIsFibrant, SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration, SSet.KanComplex, SSet.modelCategoryQuillen.fibrations_eq, SSet.instFinitePullback. ",
    "date": "2026-10-17",
    "verdict": "no match: read the finite-simplicial-set and abstract model path-object hits; none states the finite endpoint-matched tower theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "iterated.*pullback|pullback.*[Ff]ibration|isFibrant_of_fibration",
+   "results": "{\"t\": \"2026-10-17T10:11:57Z\", \"tool\": \"grep\", \"query\": \"iterated.*pullback|pullback.*[Ff]ibration|isFibrant_of_fibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\"], \"digest\": \"3975e85438dd584d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and the relevant pinned Mathlib sources. Binary pullback-fibration and fibrant-source lemmas require the finite induction and do not themselves state the recursive tower with its endpoint maps; path-object and strict-Segal results have different data and hypotheses.",
+   "subdirectory": "AlgebraicTopology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inductively defined pullback towers of fibrations between Kan complexes have Kan total spaces and fibrations to the base",
+   "results": "{\"t\": \"2026-10-17T10:11:57Z\", \"tool\": \"leansearch\", \"query\": \"Inductively defined pullback towers of fibrations between Kan complexes have Kan total spaces and fibrations to the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"Pullback.continuous_totalSpaceMk\", \"CategoryTheory.Limits.pullbackPullbackRightIsPullback\", \"Pullback.continuous_lift\", \"SSet.instFinitePullback\", \"CategoryTheory.IsPullback.lift\", \"inducing_pullbackTotalSpaceEmbedding\", \"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\"], \"digest\": \"3ca34c815deb47c1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and the relevant pinned Mathlib sources. Binary pullback-fibration and fibrant-source lemmas require the finite induction and do not themselves state the recursive tower with its endpoint maps; path-object and strict-Segal results have different data and hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.Fibration, CategoryTheory.Limits.pullback.fst",
+   "results": "{\"t\": \"2026-10-17T10:11:57Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.Fibration, CategoryTheory.Limits.pullback.fst\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\"], \"digest\": \"141db1627ee25c75\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and the relevant pinned Mathlib sources. Binary pullback-fibration and fibrant-source lemmas require the finite induction and do not themselves state the recursive tower with its endpoint maps; path-object and strict-Segal results have different data and hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite iterated fiber products of Kan fibrations have fibrant total space and fibrant endpoint projections",
+   "results": "{\"t\": \"2026-10-17T10:12:01Z\", \"tool\": \"leanfinder\", \"query\": \"Finite iterated fiber products of Kan fibrations have fibrant total space and fibrant endpoint projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.instFibrationFstOfIsFibrant\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.instFibrationSndOfIsFibrant\", \"HomotopicalAlgebra.isFibrant_of_fibration\", \"HomotopicalAlgebra.PathObject.IsGood.fibration_p\"], \"digest\": \"5ffd69b438b48862\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and the relevant pinned Mathlib sources. Binary pullback-fibration and fibrant-source lemmas require the finite induction and do not themselves state the recursive tower with its endpoint maps; path-object and strict-Segal results have different data and hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recursively composable chains in a span of Kan fibrations have Kan spaces and fibration maps given by deleting the last entry or taking its endpoint",
+   "results": "{\"t\": \"2026-10-17T10:13:53Z\", \"tool\": \"leanfinder\", \"query\": \"Recursively composable chains in a span of Kan fibrations have Kan spaces and fibration maps given by deleting the last entry or taking its endpoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegalCore.δ₀_spineToSimplex\", \"SSet.StrictSegalCore.spineToSimplex_succ\", \"SSet.StrictSegalCore.spineToSimplexAux\", \"SSet.spine_δ₀\", \"SSet.StrictSegalCore.map_mkOfSucc_zero_spineToSimplex\", \"SSet.Truncated.StrictSegal.spine_δ_arrow_gt\", \"SSet.StrictSegalCore.concat\", \"SSet.StrictSegal.spine_δ_arrow_gt\"], \"digest\": \"f329bc88cf168538\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and the relevant pinned Mathlib sources. Binary pullback-fibration and fibrant-source lemmas require the finite induction and do not themselves state the recursive tower with its endpoint maps; path-object and strict-Segal results have different data and hypotheses."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
@@ -87,5 +174,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-iterated-pullback-fibrancy",
+  "worker": "stage1",
+  "summary": "Kept the complete statement unchanged. Supplied a simultaneous induction with explicit horn lifts for each projection, for each last-coordinate endpoint map, and for Kan fibrancy. These elementary arguments create no nodes. Checked Kerodon 00T0 online, the imported definition, the blueprint ancestry, source attachment candidates and two phrasings of logged Mathlib searches; included the empty cases.",
+  "blueprint": "Realizes the existing blueprint.from place in prop-coef-integral-exceptional-adjoint, proof paragraph 2: elementary finite-pullback fibrancy underlying the classification-diagram strict-to-homotopy Segal comparison through lem-coef-quasicategory-classification-realization. No geometric/unit route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-dce3b3f44",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-dce3b3f44 (reviewer sub-agent of L); spot-checked: Read the item, the full statement of its only citation def-cbc-enhanced-diagrams-cones, the consumer lem-coef-quasicategory-classification-realization (steps 3-4) and Kerodon 00T0 online. Kerodon 00T0 is Subsection 3.1.1 'Kan Fibrations'; Definition 3.1.1.1 and Remarks 3.1.1.6 (pullback), 3.1.1.10 (composition) and 3.1.1.11 (Kan source over a Kan base) are numbered as cited. The source is not archived locally; the report has a WANTED line and proof_origin.by is agent. The statement is true and is not weakened. Its endpoint convention (the last E coordinate, matched to s) matches the consumer's step 4. The hypothesis that E is Kan is redundant but harmless. Step 1 states the simultaneous induction and its base before use. Step 2: the lift of b along s over t_{k-1}v has the right compatibility, and (v, b~) lies in P_k. Step 3: lifting along t over c first, then along t_{k-1} over s e, is correct, and every equality is checked. Step 4: Kan-ness of P_k follows from the induction plus step 2. Each step is a genuine one- or two-lift elementary argument from the degreewise-pullback and Kan definitions in the cited node. Edge cases tested: k=1, a point, discrete spans (no surjectivity is used), and empty E or B (vacuous, because horns in positive dimension are nonempty). The delivery creates no new nodes. Searched dag/nodes with rg for duplicates: the Kan-Quillen model nodes, kan-iterated-chain-comparison (a different claim), kan-fibration-tower-limit (an infinite limit) and the other Kan pullback nodes do not state this. Only a definition is cited, so the unit route is unaffected and no tool_uses are needed. No SGA is cited. Shape: one commit, the item plus a report with Review by Q12, and the blueprint fields are present. Minor issue, left unchanged: some mathlib_searches verdict texts mention the neighbouring item's constant-path comparison. No fixes."
  }
 }

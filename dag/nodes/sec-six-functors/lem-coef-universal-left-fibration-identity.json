@@ -105,18 +105,41 @@
    }
   },
   {
-   "text": "For a simplicial map $G:C\\to S$ write $h_G=h\\mathfrak C[G]$, even when the simplicial set $C$ is not a quasicategory. The presentation and rectification statements apply to all such $C$. Evaluation gives $N_{\\mathrm{hc}}(h_G)\\eta_C=G$ in the ambient space category, by naturality of the adjunction unit. A projective cofibrant replacement $Qh_G\\to h_G$ induces a coherent transformation of evaluated diagrams with weak-equivalence components; [lem-coef-simplicial-model-nerve-localization] inverts those components and [lem-cbc-enhanced-functor-cone-calculus] makes the transformation an equivalence in the entire category $\\operatorname{Fun}(C,\\mathcal S)$. Thus the comparison holds as a diagram on $C$, rather than as separately chosen equivalences at its vertices. For a map $v:C'\\to C$, restriction sends objectwise weak equivalences to objectwise weak equivalences, and its evaluated diagrams satisfy $N_{\\mathrm{hc}}(h_G\\mathfrak C[v])\\eta_{C'}=Gv$. The ordinary natural replacement maps become natural equivalences after localization, by the entire-functor-category universal property in [lem-coef-simplicial-model-nerve-localization]. Consequently these comparisons descend compatibly with restriction, independently of a choice of enriched replacement functor. For an $n$-simplex of $\\operatorname{Fun}(B,S)$, take $C=B\\times\\Delta^n$ and $G$ its adjoint, as in [def-cbc-enhanced-diagrams-cones]. The comparison between its normalized representative and $G^*W$ is the single pulled-back map $G^*\\delta$, following the cone-extension identification of step 2. For each simplex operator $\\alpha:[m]\\to[n]$, restriction along $1_B\\times\\Delta(\\alpha)$ gives exactly $(G(1_B\\times\\Delta(\\alpha)))^*\\delta$; the cone bijection itself commutes with these restrictions because both sides precompose with the same simplex map. These identities prove compatibility with every higher simplex in $F$. For a base map $u:B'\\to B$, the composition-compatible base-change isomorphisms of [lem-coef-simplicial-right-fibration-presentation] give $u^*U^{\\mathrm{cov}}_B h_F\\cong U^{\\mathrm{cov}}_{B'}(h_F\\mathfrak C[u])=U^{\\mathrm{cov}}_{B'}h_{Fu}$. Degreewise pullback triples give $u^*(F^*W)\\cong(Fu)^*W$, carrying the comparison to $(Fu)^*\\delta$. Applied also on $B\\times\\Delta^n$, these identities prove the asserted joint naturality and show that pullback along $u$ represents $F\\circ u$.",
+   "text": "For any simplicial map $G:C\\to S$, put $h_G=h\\mathfrak C[G]$. It is objectwise Kan by step 1. By [lem-coef-kan-diagram-localized-evaluation], evaluating a projectively cofibrant-fibrant replacement $Qh_G\\to h_G$ gives an equivalence of whole $C$-diagrams. The comparisons are independent of replacement and coherently compatible with restriction by [lem-coef-kan-diagram-evaluation-restriction]. Naturality of the adjunction unit gives $N_{\\mathrm{hc}}(h_G)\\eta_C=N_{\\mathrm{hc}}(h)\\eta_S G=G$ by step 1. The presentation base-change formula identifies $G^*p$ with $U^{\\mathrm{cov}}_C h_G$, and preservation of the replacement weak equivalence identifies this with the normalized representative $U^{\\mathrm{cov}}_C Qh_G$. The cited lemmas allow arbitrary simplicial $C$, including $B\\times\\Delta^n$.",
    "uses": [
-    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-diagram-localized-evaluation",
+    "lem-coef-kan-diagram-evaluation-restriction",
     "lem-coef-simplicial-right-fibration-presentation",
-    "lem-coef-enriched-diagram-rectification",
-    "lem-coef-simplicial-model-nerve-localization",
-    "lem-cbc-enhanced-functor-cone-calculus"
+    "lem-coef-coherent-nerve-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-    "place": "Proposition 2.2.1.1 and Proposition 4.2.4.4; explicit simplicial-parameter and iterated-pullback check."
+    "place": "HTT Propositions 2.2.1.1 and 4.2.4.4; whole-diagram evaluation and its restriction/replacement coherence are isolated in the two new general lemmas."
+   }
+  },
+  {
+   "text": "For an $n$-simplex of $\\operatorname{Fun}(B,S)$ take its adjoint $G:C=B\\times\\Delta^n\\to S$ as in [def-cbc-enhanced-diagrams-cones]. Step 6 gives its normalized representative on all of $C$. Its comparison to $G^*W$ is $G^*\\delta$, following the cone identification of step 2 and the equivalence of step 4. If $\\alpha:[m]\\to[n]$, restriction along $1_B\\times\\Delta(\\alpha)$ carries this map to $(G(1_B\\times\\Delta(\\alpha)))^*\\delta$: in each degree both maps send a pullback pair $(c,x)$ to $(c,\\delta(x))$. The cone bijection of step 2 also restricts by the same simplex map. The restriction coherence in [lem-coef-kan-diagram-evaluation-restriction] identifies the replacement/evaluation comparisons on these shapes. Hence the comparison is compatible with every higher simplex in $F$, not only its vertices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-diagram-evaluation-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.2.4.4; explicit simplex-parameter restriction of the comparison map, with replacement coherence supplied by the extracted lemma."
+   }
+  },
+  {
+   "text": "For a base map $u:B'\\to B$, the composition-compatible base-change isomorphisms of [lem-coef-simplicial-right-fibration-presentation] give $u^*U^{\\mathrm{cov}}_B h_F\\cong U^{\\mathrm{cov}}_{B'}(h_F\\mathfrak C[u])=U^{\\mathrm{cov}}_{B'}h_{Fu}$. For the arrow model, flattening a pullback triple gives $u^*(F^*W)\\cong(Fu)^*W$, carrying $(b',(b,w))$ to $(b',w)$, where $b=u(b')$. Both comparison maps send $w$ to $\\delta(w)$, so flattening commutes with them. The same equality holds after a parameter product with $\\Delta^n$. Together with steps 6 and 7, this proves joint naturality in $F$ and base maps, and that pullback along $u$ represents $F\\circ u$.",
+   "uses": [
+    "lem-coef-simplicial-right-fibration-presentation",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.2.1.1; explicit flattening of iterated pullback triples and its compatibility with the parameterized comparison."
    }
   }
  ],
@@ -129,6 +152,8 @@
   "lem-coef-infinity-right-fibration-fibers",
   "lem-coef-infinity-slice-arrow-equivalence",
   "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-kan-diagram-evaluation-restriction",
+  "lem-coef-kan-diagram-localized-evaluation",
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-simplicial-model-nerve-localization",
   "lem-coef-simplicial-presheaf-projective-model",
@@ -275,7 +300,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-transport-classification",
@@ -288,16 +313,16 @@
   "date": "2026-10-17",
   "item": "lem-coef-universal-left-fibration-identity",
   "worker": "stage1",
-  "summary": "No matching project Lean declaration or Mathlib theorem was found. Kept the full statement and fixed covariant normalization. Wrote the normalized universal-family proof by identifying its strict diagram with the counit followed by inclusion of Kan complexes, computing its unstraightening degree by degree as the join coslice, using the existing over-base slice-to-arrow equivalence, and checking replacements, fibers, simplicial parameters and iterated pullbacks. Reused existing nodes throughout; no new nodes and no parent classification citation.",
-  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: the first and last coherent R Hom comparisons. Supplies the universal-family normalization needed by the mapping-functor comparison beneath that paragraph."
+  "summary": "Repair of the human return: kept the entire statement, Lean record, normalization, route and first five proof steps verbatim; replaced old step 6 by three short steps using two new statement-only general lemmas, one for whole Kan-diagram evaluation and one for restriction coherence and replacement independence. Wrote the parameter and iterated-pullback checks explicitly. Two new unsplit nodes; no Mathlib leaves.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: the first and last coherent R Hom comparisons. Supplies the universal-family normalization needed by the mapping-functor comparison beneath that paragraph. The final three steps isolate and realize coherent naturality of these same comparisons under diagram parameters and base restriction."
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q50-c02a81299",
-  "group": "Q50",
+  "reviewer": "NT-cc-N2-e01a72676",
+  "group": "N2",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-c02a81299 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the full statement of all 13 cited nodes. The delivery adds no new nodes and leaves the statement unchanged and not weakened. The statement is correct (HTT 3.3.2 dualized): W is the source-fixed arrow model of S_{*/}->S, and its fibers are Map(*,K)≃K. I tested it on the empty base, empty K, contractible K and a two-point discrete K. Step 1: Fun(K,L) is Kan by the simplicial model axiom, Fun(Δ^0,K)≅K, and N_hc(ε)η=1 by the adjunction. Step 2: I checked the variance of the cone pushout: natural maps M_σ(-,v)->A^op(ε^op-,e) are exactly the functors extending ε^op that send v to e, which gives (S^op)_{/e} and, after opposites, S_{e/}. Step 3: the projective cofibrant replacement and rectification hypotheses hold (u=1, combinatorial simplicial Kan model in the containing universe), and h is not assumed cofibrant. Step 4: I recomputed the reversed ρ_n: (a,0)↦0 and (a,1)↦a+1, so the map lies strictly over S; the fiber criterion gives a homotopy equivalence over S. Steps 5 and 6: base change uses the composition-compatible isomorphisms of the presentation node, a fresh replacement is taken after restriction, homotopies pull back degreewise, and a single G^*δ works over B×Δ^n. A transitive closure over all dependencies (244 nodes) does not reach the item, so there is no cycle; the parent transport-classification is not used. A search found no duplicate. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc), used only for its generic pointwise test for equivalences of coherent transformations in steps 3, 5 and 6; nothing in sk-prop-sf-biduality-general states it, and it replaces no step of the unit's route. HTT 2.2.1/3.3.2/4.2.4.4 and Kerodon 01KQ/02VT/02GH/01HK are read online and not archived (the report marks them WANTED). No SGA is used. No changes and no fix files."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-e01a72676 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and both new nodes in full, and the full statement of all 13 cited nodes. The statement, Lean record and steps 1-5 are unchanged; the statement is not weakened. Steps rechecked: step 2 variance (A^op(εx,e)=A(e,εx), no maps out of the cone vertex, giving (S^op)_{/e} and after opposites S_{e/}); step 3 rectification hypotheses (u=1, combinatorial simplicial Kan model in the containing universe, h not assumed cofibrant); step 4 dual ρ_n, (a,0)↦0 and (a,1)↦a+1, so δ is strictly over S, then the fiber criterion; step 5 fresh replacement after restriction and unit naturality; steps 6-8 use the two new lemmas, the presentation base-change formula and strict degreewise pullback and flattening. lem-coef-kan-diagram-localized-evaluation is true by HTT 4.2.4.4 plus the localization statement already in the DAG (HA 1.3.4.20) plus the pointwise criterion. lem-coef-kan-diagram-evaluation-restriction is true: the evaluation identity under restriction holds strictly (unit naturality) and descends through the localization universal property. Neither node is a duplicate (compared with rectification, nerve-localization, chunk exponential, cone-straightening, enriched-presheaf-rectification and unstraightening-strict-base-change), and neither is a clause of the item. Both were tested on K=∅, K=Δ^0, discrete K, identity and composite restrictions. No cycle; no missing or merged citation; proof_deps equals the union of uses; all three search kinds are recorded. FIX: the localized-evaluation statement now gives the exact formula for evaluation on composable chains (C[K]×[n]→Kan_V sent to K×Δ^n→N_hc(C[K]×[n])→S_V), which the restriction node's 'exact identity' relies on. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, the generic pointwise criterion in steps 3 and 5. HTT and Kerodon are not archived, so the WANTED lines stand. No SGA.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
