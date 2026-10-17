@@ -104,9 +104,10 @@ theorem integralResidue_tensorGeometry {X Y : Scheme.{u}} (f : X ⟶ Y) :
     CategoryTheory.Functor.residue_exists_kFlatMap_iso (f)^*⟦integralCoeff ℓ E⟧ M
   have h : α.app (DerivedCategory.Qh.obj P) = β.app (DerivedCategory.Qh.obj P) := by
     have : IsIso (residueExchangeTensorModelTarget ℓ E f P) := by
-      delta residueExchangeTensorModelTarget residueExchangeUpperStar
-      exact Functor.tensorModelTarget_isIso (f)^*⟦integralCoeff ℓ E⟧
-        (residueExchangeOrdinaryCoefficient ℓ E Y) P hP
+      delta residueExchangeTensorModelTarget
+      with_unfolding_all
+        exact Functor.tensorModelTarget_isIso (f)^*⟦integralCoeff ℓ E⟧
+          (residueExchangeOrdinaryCoefficient ℓ E Y) P hP
     apply (cancel_mono (residueExchangeTensorModelTarget ℓ E f P)).mp
     simpa only [α, β, NatTrans.comp_app, Functor.whiskerRight_app,
       Functor.whiskerLeft_app, rightTensorComparison, Category.assoc] using

@@ -89,9 +89,10 @@ theorem integralResidue_tensorGeometry_component {X Y : Scheme.{u}} (f : X ⟶ Y
   let := residueExchangePullMonoidal ℓ E f
     (residueExchangeOrdinaryPullMonoidal ℓ E f) hFlat
   have : IsIso (residueExchangeTensorModelTarget ℓ E f P) := by
-    delta residueExchangeTensorModelTarget residueExchangeUpperStar
-    exact Functor.tensorModelTarget_isIso (f)^*⟦integralCoeff ℓ E⟧
-      (residueExchangeOrdinaryCoefficient ℓ E Y) P hFP
+    delta residueExchangeTensorModelTarget
+    with_unfolding_all
+      exact Functor.tensorModelTarget_isIso (f)^*⟦integralCoeff ℓ E⟧
+        (residueExchangeOrdinaryCoefficient ℓ E Y) P hFP
   apply (cancel_mono (residueExchangeTensorModelTarget ℓ E f P)).mp
   have hscalarModel :
       (residueExchangeRestrictPullIso ℓ E f).hom.app

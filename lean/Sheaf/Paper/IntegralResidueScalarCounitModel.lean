@@ -284,7 +284,7 @@ theorem integralResidue_scalarCounit_model {X Y : Scheme.{u}} (f : X ⟶ Y)
   have ho := residueOrdinaryTensorPull_homotopy (integralCoeff ℓ E)
     (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E))
     (integralReductionMap ℓ E) f P
-  unfold residueExchangeTensorModelMap Functor.tensorModelMap
+  unfold residueExchangeTensorModelMap Functor.tensorModelMapWith residueExchangeTensorCounit
   dsimp only [id]
   erw [tensor_counit_app ℓ E X, tensor_counit_app ℓ E Y]
   simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
@@ -299,6 +299,4 @@ theorem integralResidue_scalarCounit_model {X Y : Scheme.{u}} (f : X ⟶ Y)
   dsimp only [Functor.comp_map] at hn
   simp only [Functor.map_comp, Category.assoc]
   erw [← reassoc_of% hn]
-  unfold residueExchangeUpperStar residueExchangeUpperStarCounit
-  dsimp only [id]
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -171,6 +171,28 @@ theorem tensorModelTarget_isIso (B : C) (P : HomotopyCategory C (.up ℤ))
 
 variable [F.IsLeftAdjoint] [F.Monoidal]
 
+/-- The common map built directly from a named derived functor and two named counits.
+Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.
+(blueprint: new-integral-residue-tensor-model) -/
+@[irreducible] noncomputable def tensorModelMapWith
+    (G : DerivedCategory C ⥤ DerivedCategory D)
+    (γ : DerivedCategory.Qh ⋙ G ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (B : C) (H : DerivedCategory C ⥤ DerivedCategory C)
+    (ε : DerivedCategory.Qh ⋙ H ⟶
+      (tensorLeft B).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (P : HomotopyCategory C (.up ℤ)) :
+    G.obj (H.obj (DerivedCategory.Qh.obj P)) ⟶
+      DerivedCategory.Qh.obj
+        ((F.mapHomotopyCategory (.up ℤ)).obj (tensorModelCoefficient B) ⊗
+          (F.mapHomotopyCategory (.up ℤ)).obj P) :=
+  G.map (ε.app P) ≫ γ.app _ ≫
+    DerivedCategory.Qh.map
+      ((F.mapHomotopyCategory (.up ℤ)).map
+          ((CategoryTheory.homotopyTensorSingleIso B).inv.app P) ≫
+        ((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app
+          (tensorModelCoefficient B)).app P)
+
+
 /-- The common map: the tensor counit, the exact-F counit, then the ordinary
 comonoidal comparison.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.
@@ -183,12 +205,7 @@ noncomputable def tensorModelMap (B : C) (H : DerivedCategory C ⥤ DerivedCateg
       DerivedCategory.Qh.obj
         ((F.mapHomotopyCategory (.up ℤ)).obj (tensorModelCoefficient B) ⊗
           (F.mapHomotopyCategory (.up ℤ)).obj P) :=
-  F.leftDerivedFunctor.map (ε.app P) ≫ F.leftDerivedFunctorCounit.app _ ≫
-    DerivedCategory.Qh.map
-      ((F.mapHomotopyCategory (.up ℤ)).map
-          ((CategoryTheory.homotopyTensorSingleIso B).inv.app P) ≫
-        ((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app
-          (tensorModelCoefficient B)).app P)
+  tensorModelMapWith F F.leftDerivedFunctor F.leftDerivedFunctorCounit B H ε P
 
 end CategoryTheory.Functor
 
@@ -226,9 +243,10 @@ noncomputable def residueExchangeTensorModelTarget :
       DerivedCategory.Qh.obj
         (((f)^*⟦integralCoeff ℓ E⟧.mapHomotopyCategory (.up ℤ)).obj
             (Functor.tensorModelCoefficient (residueExchangeOrdinaryCoefficient ℓ E Y)) ⊗
-          ((f)^*⟦integralCoeff ℓ E⟧.mapHomotopyCategory (.up ℤ)).obj P) := by
-  unfold residueExchangeUpperStar
-  exact Functor.tensorModelTarget (f)^*⟦integralCoeff ℓ E⟧
+          ((f)^*⟦integralCoeff ℓ E⟧.mapHomotopyCategory (.up ℤ)).obj P) :=
+  Functor.tensorModelTargetWith (f)^*⟦integralCoeff ℓ E⟧
+    (residueExchangeUpperStar (integralCoeff ℓ E) f)
+    (residueExchangeUpperStarCounit (integralCoeff ℓ E) f)
     (residueExchangeOrdinaryCoefficient ℓ E Y) P
 
 /-- The explicit common map for the two routes in the residue square.
@@ -241,14 +259,13 @@ noncomputable def residueExchangeTensorModelMap :
       DerivedCategory.Qh.obj
         (((f)^*⟦integralCoeff ℓ E⟧.mapHomotopyCategory (.up ℤ)).obj
             (Functor.tensorModelCoefficient (residueExchangeOrdinaryCoefficient ℓ E Y)) ⊗
-          ((f)^*⟦integralCoeff ℓ E⟧.mapHomotopyCategory (.up ℤ)).obj P) := by
-  let := residueExchangeOrdinaryPullMonoidal ℓ E f
-  unfold residueExchangeUpperStar
-  exact Functor.tensorModelMap (f)^*⟦integralCoeff ℓ E⟧
+          ((f)^*⟦integralCoeff ℓ E⟧.mapHomotopyCategory (.up ℤ)).obj P) :=
+  letI := residueExchangeOrdinaryPullMonoidal ℓ E f
+  Functor.tensorModelMapWith (f)^*⟦integralCoeff ℓ E⟧
+    (residueExchangeUpperStar (integralCoeff ℓ E) f)
+    (residueExchangeUpperStarCounit (integralCoeff ℓ E) f)
     (residueExchangeOrdinaryCoefficient ℓ E Y)
     (residueExchangeReduction ℓ E Y ⋙ residueExchangeRestriction ℓ E Y)
-    (by
-      unfold residueExchangeReduction integralReduction residueExchangeRestriction
-      exact Mod.tensorPresentationDerivedCounit (coefficientMap (integralReductionMap ℓ E) Y)) P
+    (residueExchangeTensorCounit ℓ E Y) P
 
 end AlgebraicGeometry.ProEtale.CondensedRing
