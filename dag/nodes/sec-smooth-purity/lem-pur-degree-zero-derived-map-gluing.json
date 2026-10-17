@@ -268,5 +268,31 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-b888aed37 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements and source passages. All seven steps check out, including truncation naturality, coefficient restriction, unique sheaf-map gluing and empty-cover cases. No new nodes, duplicates or dependency cycles; five generic tool uses accepted. Target categories remain distinct and unchanged. Detailed checks recorded in review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DegreeZeroDerivedMapGluing",
+  "declaration": "AlgebraicGeometry.DegreeZeroMapGluing.degreeZeroDerivedMapGluing",
+  "declarations": [
+   "AlgebraicGeometry.DegreeZeroMapGluing.openComp",
+   "AlgebraicGeometry.DegreeZeroMapGluing.onSmallerOpen",
+   "AlgebraicGeometry.DegreeZeroMapGluing.HasCanonicalIdentifications",
+   "AlgebraicGeometry.DegreeZeroMapGluing.Conclusion",
+   "AlgebraicGeometry.DegreeZeroMapGluing.degreeZeroDerivedMapGluing"
+  ],
+  "file": "lean/Sheaf/Paper/DegreeZeroDerivedMapGluing.lean",
+  "statement": "theorem degreeZeroDerivedMapGluing (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u}) {I : Type wI} (U : I → T.Opens) (hU : iSup U = ⊤) : Conclusion (fun X : Scheme.{u} ↦ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (fun {_ _} f ↦ Etale.upperStar (ModuleCat.{u + 1} A) f) (fun {_ _ _} f g ↦ Etale.upperStarComp (ModuleCat.{u + 1} A) f g) T U ∧ Conclusion (fun X : Scheme.{u} ↦ Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) (fun {_ _} f ↦ ProEtale.upperStar (ModuleCat.{u + 1} A) f) (fun {_ _ _} f g ↦ ProEtale.upperStarComp (ModuleCat.{u + 1} A) f g) T U",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Both site cases are stated together, with the full formula expanded by Conclusion and HasCanonicalIdentifications. The concrete fixed-ring module sheaf categories are the established etale encoding and the canonically equivalent pro-etale coefficient encoding supplied by finiteCoefficientRealization. The helper definitions only package this node and construct its canonical overlap transport; no generic descent theorem or arbitrary restriction map is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d30fd4b0f",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Checked every node clause against Conclusion/HasCanonicalIdentifications. Covered: local-to-global concentration; the good-truncation roof, which pins e uniquely; naturality and restriction via the canonical comparison isos; the compat ↔ ∃! bijection with endpoints transported canonically by openComp; the H⁰ bijection and restriction square; and the equality test. Both sites use canonical upperStar/upperStarComp. Etale coefficients equal Etale.DerivedCategoryModule by rfl. Pro-etale uses the fixed-ring presentation, made equivalent by def-weil-pbc-proetale-modules' own finiteCoefficientRealization. Empty cover/scheme and zero ring are covered; wI is free; no forced universes. Gates: no hollow definitions; the only sorry is the main theorem; docstrings carry source and blueprint; lean.statement is verbatim; only the lean field changed. nt_compile: clean in 8.4 s; axioms are standard plus sorryAx. Non-blocking: the second reading was by the same worker."
  }
 }

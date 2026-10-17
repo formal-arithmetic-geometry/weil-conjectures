@@ -221,5 +221,25 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q23-f5de88adf (reviewer sub-agent of L); spot-checked: Read all required project documents, the item, cited nodes, unit/chapter route, blueprint sources, and HTT at Propositions 2.4.4.3, 2.2.4.1, 3.2.2.10, and 3.2.2.11. Verified all four proof steps, mapping-space calculation, Cartesian orientation, coherent composition map, edge cases including empty spaces and n=1, dependency/search records, duplicate absence, route, and SGA restriction. Wrote review.md. No repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CartesianMappingSimplexMixedEquivalence",
+  "declaration": "SSet.Pinched.cartesian_mapping_simplex_mixed_mapping_equivalence",
+  "statement": "theorem cartesian_mapping_simplex_mixed_mapping_equivalence {Y : SSet.{u}} (n : ℕ) (hn : 1 ≤ n) (p : Y ⟶ Δ[n]) (hp : Marked.Over.relativeFibration false p) (a b z : Y _⦋0⦌) (e : Δ[1] ⟶ Y) (hea : Y.δ 1 (SSet.yonedaEquiv e) = a) (heb : Y.δ 0 (SSet.yonedaEquiv e) = b) (hz : stdSimplex.obj₀Equiv (p.app (op ⦋0⦌) z) ≤ stdSimplex.obj₀Equiv (p.app (op ⦋0⦌) a)) (he : Enhanced.IsCartesianEdge p e) : Enhanced.IsWeakHomotopyEquivalence (enrichedPostcomposition (rigidification.obj Y) (vertex Y z) (vertex Y a) (vertex Y b) ((eqToHom (congrArg₂ (fun x y ↦ hom (rigidification.obj Y) (vertex Y x) (vertex Y y)) hea heb)).app _ (edgeVertex Y (SSet.yonedaEquiv e))))",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Stage-2 statement binding uses the canonical Pinched rigidification, vertex, edgeVertex, and enrichedPostcomposition interfaces. Reviewer fix: the Cartesian fibration is the arbitrary-base notion SSet.Marked.Over.relativeFibration false recorded by lem-coef-relative-marked-anodyne-calculus, with no quasicategory assumption on the total space (the earlier [Quasicategory Y] binder and Enhanced.cartesianFibration with a standard-simplex witness are removed); the proof dependency InfinityCartesianMappingCriterion is imported.",
+  "file": "lean/Sheaf/AlgebraicTopology/CartesianMappingSimplexMixedEquivalence.lean",
+  "fixed_by": "NT-stage2-cc-425a9d3ca"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-425a9d3ca",
+  "group": "Q50",
+  "result": "fix",
+  "note": "H3: the delivered signature added [Quasicategory Y] and used Enhanced.cartesianFibration (quasicategory-only, not a stmt_dep); the node uses the arbitrary-base cartesian fibration of lem-coef-relative-marked-anodyne-calculus, so the fix uses (hp : Marked.Over.relativeFibration false p) and drops the extra instance and the unused Mathlib Nerve import. H9/rule 7: added the missing import of proof dep Sheaf.CategoryTheory.InfinityCartesianMappingCriterion. Report: restored the garbled HTT numbers and added a fix section. Checked edge orientation, the hz order via obj0Equiv, the eqToHom transport of edgeVertex, that enrichedPostcomposition is real postcomposition, that Pinched.rigidification is the genuine coherent realization, edge cases (n=1, equal base vertices, degenerate or vertical edges, empty mapping sets, no Kan condition), universes, docstrings, sorry-only proof, no hollow defs, lean.statement verbatim. nt_compile: delivered module and fixed module both clean, probe clean, axioms propext/sorryAx/Classical.choice/Quot.sound. fixes/ holds the full module, the lean-record note and the report."
  }
 }

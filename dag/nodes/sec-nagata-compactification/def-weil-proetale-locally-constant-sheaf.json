@@ -146,19 +146,30 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-5c8bf76bd",
-  "group": "Q135",
+  "reviewer": "NT-stage2-cc-276776fd5",
+  "group": "Q105",
   "result": "pass",
-  "note": "Checked all hypotheses and eight conclusions against the node; all match. Shift sign correct (shift n gives degree -n). _hrank (locally isomorphic to the constant ring on a pro-etale cover) implies _hlocal (locally constant), so no stronger assumption. Edge cases hold: empty Y or empty index, empty members with any labels, A[3] gives degree -3, two components with different shifts, A=0 excluded; universes bound. Helper etaleLocalShiftLocus is a real set with source/blueprint docstrings. Theorem proof is only sorry; docstrings carry source place and proof steps; real pro-etale site used. lean.statement verbatim in file; no duplicate declaration. Item changes only lean plus one added landed stmt_dep (def-weil-pbc-proetale-operations, allowed). Report has Worker report and Second reading by Q135. Dependency def-weil-proetale-locally-constant-sheaf is re-pointed (1(B), with note) from NM's fixed-coefficient predicate to the original ringed-site IsLocallyConstantProEtaleModuleSheaf: needed, same notion. Side effect: NM's fixed-coefficient module loses its node record and landed lem-sf-proetale-lisse-finite-models uses it; the mirror situation existed before, so remark only. nt_compile.py: first run, dependency KFlat.lean hit the 60 s limit under load ~220; rerun rc=0, item compiled in 15.4 s with no errors or warnings."
+  "note": "All clauses match the node. Recorded declarations used: coefficientExtensionRing l E 1 = O_E/ϖ, scalarReductionDerivedExtension index 0 = exponent 1 over the same constant k_V, IsComplete none, IsWeaklyContractible at V, homologyFunctor, ringedSiteDerivedRestrictionOfUniverses. The conclusion is sheaf vanishing on every slice for arbitrary U and L. No added hypotheses or universe equalities. Both §1(B) dependency modules are faithful universe generalizations of the recorded constructions; no hollow data. Records verbatim, only lean changed in node files. Docstrings carry source, blueprint and the 6-step proof. All three files compile with no errors via nt_compile.py."
  },
  "lean": {
-  "module": "Sheaf.Paper.ProEtaleLocallyConstantSheaf",
-  "declaration": "AlgebraicGeometry.Scheme.IsLocallyConstantProEtaleModuleSheaf",
-  "statement": "noncomputable def IsLocallyConstantProEtaleModuleSheaf\n    (Y : Scheme.{t}) (A : Type t) [CommRing A]\n    (F : SheafOfModules.{t + 1}\n      ((sheafCompose (ProEt.topology Y)\n        (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj\n          ((constantSheaf (ProEt.topology Y) CommRingCat.{t + 1}).obj\n            (CommRingCat.of (ULift.{t + 1, t} A))))) : Prop",
+  "module": "Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses",
+  "declaration": "AlgebraicGeometry.Scheme.IsLocallyConstantProEtaleModuleSheafOfUniverses",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleConstantModulePresheafOfUniverses",
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingUnit_locallyBijectiveOfUniverses",
+   "AlgebraicGeometry.Scheme.proEtaleConstantModuleSheafOfUniverses",
+   "AlgebraicGeometry.Scheme.proEtaleConstantRingUnit_over_locallyBijectiveOfUniverses",
+   "AlgebraicGeometry.Scheme.proEtaleConstantModuleSheafOverOfUniverses",
+   "AlgebraicGeometry.Scheme.IsConstantProEtaleModuleSheafOfUniverses",
+   "AlgebraicGeometry.Scheme.IsLocallyConstantProEtaleModuleSheafWithModelsOfUniverses",
+   "AlgebraicGeometry.Scheme.IsLocallyConstantProEtaleModuleSheafOfUniverses"
+  ],
+  "file": "lean/Sheaf/Paper/ProEtaleLocallyConstantSheafOfUniverses.lean",
+  "statement": "def IsLocallyConstantProEtaleModuleSheafOfUniverses (Y : Scheme.{t}) (A : Type u) [CommRing A] (F : SheafOfModules.{max u (t + 1)} ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj ((constantSheaf (ProEt.topology Y) CommRingCat.{max u (t + 1)}).obj (CommRingCat.of (ULift.{t + 1, u} A))))) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q135",
+  "by": "Q105",
   "date": "2026-10-17",
-  "existing": true,
-  "note": "§1(B), exact existing interface repair. The recorded fixed ModuleCat-valued predicate cannot accept the intrinsic SheafOfModules objects in the recorded proEtaleDerivedCategory. Rebind to the existing ringed-site predicate already publicly imported by that fixed interface. It states exactly the node: a pro-etale cover with localized restrictions isomorphic to constant module sheaves, with arbitrary varying module models and no finiteness assumptions. No definition is duplicated, no underlying site or coefficient data is changed."
+  "existing": false,
+  "note": "§1(B): the recorded interface identifies coefficient and scheme universes. The same sheafification construction and coverwise localized-module isomorphisms are supplied with independent sizes t,u and module size max u (t+1). The helper with a model predicate permits the finite-dimensional specialization without a second definition of local constancy. No restriction on the module models is imposed by the primary declaration."
  }
 }

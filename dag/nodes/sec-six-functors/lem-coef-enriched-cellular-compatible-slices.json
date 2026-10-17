@@ -333,5 +333,30 @@
   "group": "Q60",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q60-2fc54b42c (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and source passages. All 14 steps check, including relative presentability, double-tensor composition witnesses and canonical intersection maps. No new nodes, circular dependencies or repairs. Target coefficient distinctions remain intact. Detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnrichedCellularCompatibleSlices",
+  "declaration": "CategoryTheory.CellularTree.enriched_cellular_compatible_slices",
+  "declarations": [
+   "CategoryTheory.CellularTree.enrichedSliceTargetMap",
+   "CategoryTheory.CellularTree.EnrichedDiagramSlice",
+   "CategoryTheory.CellularTree.IsEnrichedDiagramSliceExtension",
+   "CategoryTheory.CellularTree.enriched_cellular_compatible_slices"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnrichedCellularCompatibleSlices.lean",
+  "statement": "theorem enriched_cellular_compatible_slices {A : Type u} [Category.{v} A] [SimplicialCategory A] (κ : Cardinal.{v}) [Fact κ.IsRegular] (hκ : Cardinal.aleph0 < κ) [IsCardinalLocallyPresentable A κ] (tensor : SimplicialTensorCotensor A) {I : Type v} [EnrichedCategory SSet.{v} I] (hI : HasCardinalLT I κ) {F G : EnrichedFunctor SSet.{v} I A} (f : ∀ i : I, F.obj i ⟶ G.obj i) (hf : ∀ i j : I, F.map i j ≫ eHomWhiskerLeft SSet (F.obj i) (f j) = G.map i j ≫ eHomWhiskerRight SSet (f i) (G.obj j)) (L : MorphismProperty A) (hL : ∀ (P Q : A) (i : P ⟶ Q), L i → IsCardinalPresentable P κ ∧ IsCardinalPresentable Q κ) (hTensor : ∀ (i j : I) (P : A), IsCardinalPresentable P κ → IsCardinalPresentable (tensor.tensor (i ⟶[SSet.{v}] j) P) κ) (T : I → Type v) [∀ i : I, PartialOrder (T i)] [∀ i : I, WellFoundedLT (T i)] (trees : ∀ i : I, CellularTree L (F.obj i) (T i)) (good : ∀ i : I, (trees i).IsGood κ) (realization : ∀ i : I, subsetObj (trees i).diagram Set.univ ≅ Under.mk (f i)) (A₀ : ∀ i : I, Set (T i)) (M : EnrichedDiagramSlice f trees realization A₀) (E : ∀ i : I, Set (T i)) (hE : ∀ i : I, HasCardinalLT (E i) κ) : ∃ (B : ∀ i : I, Set (T i)) (N : EnrichedDiagramSlice f trees realization B) (N' : EnrichedDiagramSlice f trees realization (fun i ↦ B i ∩ A₀ i)), (∀ i : I, E i ⊆ B i ∧ HasCardinalLT (B i) κ) ∧ IsEnrichedDiagramSliceExtension f trees N' N (fun _ ↦ Set.inter_subset_left) ∧ IsEnrichedDiagramSliceExtension f trees N' M (fun _ ↦ Set.inter_subset_right)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses full simplicial-map naturality equations, not Mathlib EnrichedNatTrans, whose out field imposes ordinary naturality only. The slice helpers belong to the notion explicitly introduced by this node; all restricted objects and maps are the recorded CellularTree constructions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dec7672c0",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Read node, 4 stmt deps (colimit, SSet, SimplicialTensorCotensor, CellularTree Lean), module, report. Clause-by-clause: Category.{v} A with independent u, κ:Cardinal.{v} regular and >aleph0, IsCardinalLocallyPresentable, SimplicialCategory + recorded SimplicialTensorCotensor, I:Type v EnrichedCategory SSet with HasCardinalLT I κ, EnrichedFunctor F G, hf = SSet-level naturality (whisker directions checked against Mathlib; avoids ordinary-only EnrichedNatTrans), hTensor, hL, good trees with realization iso in Under (f i). EnrichedDiagramSlice: lower sets, enriched middle functor on exactly the subsetObj objects, root/target naturality as simplicial maps; extension uses canonical subsetMap. Conclusion ∃ B N N' with E⊆B, |B|<κ, N' extends to N and M. Edge cases (empty I/T/E/intersections, large homs, nonpresentable roots) admitted. No duplicate of the ordinary DiagramSlice, nothing hollow. Node differs only in lean; statement verbatim; 4 declarations present; all 14 steps verbatim in docstring; single sorry; source/blueprint docstrings. nt_compile --json rc=0, no errors or warnings (injected error confirmed detection). Report has Worker report and the standard 2026-10-17 Second reading by Q31 note. No findings."
  }
 }

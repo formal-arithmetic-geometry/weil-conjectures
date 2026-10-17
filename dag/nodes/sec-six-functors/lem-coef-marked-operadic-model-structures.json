@@ -28,7 +28,8 @@
   "def-coef-complete-algebroid",
   "lem-coef-nonsymmetric-operads-presentability",
   "lem-coef-model-infinity-derived-adjunction",
-  "lem-coef-marked-point-cartesian-model"
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-inert-operad-color-reconstruction"
  ],
  "proof": [
   {
@@ -254,5 +255,42 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MarkedOperadicModelStructures",
+  "declaration": "SSet.Enhanced.MarkedOperadic.marked_operadic_model_structures",
+  "declarations": [
+   "SSet.Enhanced.MarkedOperadic.base",
+   "SSet.Enhanced.MarkedOperadic.Objects",
+   "SSet.Enhanced.MarkedOperadic.expand",
+   "SSet.Enhanced.MarkedOperadic.expandMap",
+   "SSet.Enhanced.MarkedOperadic.tensor",
+   "SSet.Enhanced.MarkedOperadic.hom",
+   "SSet.Enhanced.MarkedOperadic.restriction",
+   "SSet.Enhanced.MarkedOperadic.postcomposition",
+   "SSet.Enhanced.MarkedOperadic.IsFibrant",
+   "SSet.Enhanced.MarkedOperadic.Enrichment",
+   "SSet.Enhanced.MarkedOperadic.Enrichment.operads",
+   "SSet.Enhanced.MarkedOperadic.Model",
+   "SSet.Enhanced.MarkedOperadic.EnrichedModelAxiom",
+   "SSet.Enhanced.MarkedOperadic.RestrictionAxiom",
+   "SSet.Enhanced.MarkedOperadic.FullAlgebraHom",
+   "SSet.Enhanced.MarkedOperadic.marked_operadic_model_structures"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/MarkedOperadicModelStructures.lean",
+  "statement": "theorem marked_operadic_model_structures : ∃ (K : SSet.Marked.CartesianModelStatement.{u}) (E : Enrichment.{u}) (G : Model E false) (O : Model E true), (∀ {A B : Objects.{u}} (i : A ⟶ B), G.model.categoryWithCofibrations.cofibrations i → O.model.categoryWithCofibrations.cofibrations i) ∧ (∀ {A B : Objects.{u}} (i : A ⟶ B), G.model.categoryWithCofibrations.cofibrations i → G.model.categoryWithWeakEquivalences.weakEquivalences i → O.model.categoryWithCofibrations.cofibrations i ∧ O.model.categoryWithWeakEquivalences.weakEquivalences i) ∧ EnrichedModelAxiom K G ∧ EnrichedModelAxiom K O ∧ RestrictionAxiom K G ∧ RestrictionAxiom K O ∧ (∀ P : Objects.{u}, IsFibrant true P → IsFibrant false P) ∧ (∀ A B : Objects.{u}, IsFibrant false A → IsFibrant false B → FullAlgebraHom A B)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Both structures are on the actual slice over the inert-marked simplex nerve. A single normalized marked enrichment and sharp enrichment are shared. Generalized fibrancy uses the unrestricted InertOperad.IsGeneralizedOperad, with no Kan zero-fiber condition; the added landed statement dependency owns that exact definition. The theorem includes full marked SM7, its restriction case, coherent localization of both models, the left Quillen identity criterion, and the entire algebra Hom with its simplex normalization."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e41a7bef5",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Every clause of the node is rendered against the recorded declarations: ordinary IsObject; unrestricted InertOperad.IsGeneralizedOperad with no Kan zero-fiber condition; slice over the inert-marked base; mono cofibrations; exact fibrant objects; coherent localization into the fibrant nerve; left Quillen identity criterion; shared normalized enrichment with full SM7 and the restriction axiom; full Alg_M(P) Hom including ordinary targets. Statement unchanged; the added landed stmt_dep is allowed. nt_compile clean (7.5 s). The only sorry is the main theorem; no hollow definitions; statement verbatim. Two non-blocking observations: relative-marked-model declarations reached only through imports, and the item's own operad nerve standing for the ordinary one."
  }
 }

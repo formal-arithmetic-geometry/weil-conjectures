@@ -145,5 +145,29 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-696ce682f (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. The delivered node metadata contradicts the worker report: created.item/group remain lem-coef-walking-module-weight-cells/N4, and split_report omits group NK. Corrected whole DAG JSON written under fixes/dag/nodes/sec-six-functors; review.md records all step, source, route, and edge-case checks.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.FreeModuleOrbitCellFiltration",
+  "declaration": "SSet.free_module_orbit_cell_filtration",
+  "declarations": [
+   "SSet.freeCellOrbitMap",
+   "SSet.freeModuleBoundaryCell",
+   "SSet.free_module_orbit_cell_filtration"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/FreeModuleOrbitCellFiltration.lean",
+  "statement": "theorem free_module_orbit_cell_filtration (M : SSet.{u}) [MonObj M] (J : Type u) [LinearOrder J] [OrderBot J] [OrderTop J] [SuccOrder J] [WellFoundedLT J] (X : CategoryTheory.Mod SSet M) (F : J ⥤ CategoryTheory.Mod SSet M) (ι : F ⟶ (Functor.const J).obj X) (hmono : ∀ (j : J) (k : ℕ), Function.Injective ((ι.app j).hom.app (op ⦋k⦌))) (htop : IsIso (ι.app ⊤)) (hcont : ∀ (j : J), Order.IsSuccLimit j → ∀ (k : ℕ) (x : (F.obj j).X _⦋k⦌), ∃ (i : J) (hi : i < j) (y : (F.obj i).X _⦋k⦌), ((F.map (homOfLE (le_of_lt hi))).hom.app (op ⦋k⦌)) y = x) (R : J → Type u) (n : ∀ j : J, R j → ℕ) (σ : ∀ (j : J) (r : R j), (F.obj (Order.succ j)).X _⦋n j r⦌) (hfaces : ∀ (j : J), ¬ IsMax j → ∀ (r : R j) (k : ℕ) (θ : ⦋k⦌ ⟶ ⦋n j r⦌), ¬ Function.Surjective θ.toOrderHom → (F.obj (Order.succ j)).X.map θ.op (σ j r) ∈ Set.range ((F.map (homOfLE (Order.le_succ j))).hom.app (op ⦋k⦌))) (horbit : ∀ (j : J), ¬ IsMax j → ∀ k : ℕ, Function.Injective (freeCellOrbitMap (n j) (σ j) k) ∧ Set.range (freeCellOrbitMap (n j) (σ j) k) = (Set.range ((F.map (homOfLE (Order.le_succ j))).hom.app (op ⦋k⦌)))ᶜ) : (∀ (j : J), ¬ IsMax j → ∃ (a : (∐ fun r : R j ↦ (CategoryTheory.Mod.free M).obj (boundary (n j r)).toSSet) ⟶ F.obj j) (b : (∐ fun r : R j ↦ (CategoryTheory.Mod.free M).obj (Δ[n j r] : SSet.{u})) ⟶ F.obj (Order.succ j)), (∀ r : R j, Sigma.ι (fun r : R j ↦ (CategoryTheory.Mod.free M).obj (Δ[n j r] : SSet.{u})) r ≫ b = CategoryTheory.Mod.freeDesc M (SSet.yonedaEquiv.symm (σ j r))) ∧ IsPushout (Limits.Sigma.map (fun r : R j ↦ freeModuleBoundaryCell M (n j r))) a b (F.map (homOfLE (Order.le_succ j)))) ∧ (∃ c : RelativeCellComplex.{u} (fun (_ : J) (d : ℕ) ↦ freeModuleBoundaryCell M d) (ι.app ⊥), c.F = F ∧ HEq c.incl ι) ∧ (IsInitial (F.obj ⊥) → Nonempty (RelativeCellComplex.{u} (fun (_ : J) (d : ℕ) ↦ freeModuleBoundaryCell M d) (ι.app ⊥)))",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the upstream Mod.free and Mod.freeDesc constructions; the bounded small well-order J represents [0,lambda], A is its bottom stage, and all stage inclusions are injective maps of simplicial modules. The orbit map is injective with range exactly the complement of the old stage. The conclusions retain the prescribed characteristic maps and the original continuous filtration."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50f38c049",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause of the node matches the Lean statement, with no stronger assumptions and the filtration retained. J is a small well-ordered type with bottom, top and successor standing for [0,lambda]; limits are Order.IsSuccLimit. The proper-face condition (all non-surjective operators land in the old stage) is equivalent to the node's. horbit says the orbit map (r,m,theta) -> m*theta*sigma_r is injective with image exactly the new simplices. In the pushout square b is fixed as Mod.freeDesc of the Yoneda map of sigma, and a is forced because the stage map is mono. The RelativeCellComplex.{u,u,0,u,u+1} keeps F and iota (c.F = F, HEq c.incl iota); the empty-A clause matches the node's definition. The mathematics was checked degreewise and the statement is true. Edge cases lambda=0, empty R, n=0, empty A and limit lambda are covered. The helpers are real definitions and the theorem's sorry is the only one. Docstrings carry the source place, blueprint tag and the five proof steps. lean.statement is verbatim the signature and only the lean field changed. nt_compile is clean (exit 0, about 7 s); a check copy confirmed the universes and the Mod.free/freeDesc definitions. The Second reading section holds the standard 2026-10-17 notice and was accepted. No findings."
  }
 }

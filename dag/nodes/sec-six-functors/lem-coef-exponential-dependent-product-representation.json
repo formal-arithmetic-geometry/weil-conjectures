@@ -27,7 +27,11 @@
   "place": "Proposition 7.7.3.13 (exponentials and the right adjoint to the product-to-slice functor), in the context of 05V1. Agent-extracted explicit representing-object comparison from former step 3 of lem-coef-space-universal-colimits; the source proves representability, while the displayed pullback and its coherent mapping-space identification are the auxiliary formulation to split. Read online; archival copy WANTED. Kerodon tag, not Stacks tag."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-model-infinity-derived-adjunction",
+  "def-coef-space-base-change",
+  "lem-coef-parametric-universal-arrows",
+  "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "proof": [
   {
@@ -247,5 +251,43 @@
   "group": "Q21",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q21-20f7015fe (reviewer sub-agent of L); spot-checked: Read all five proof steps and cited statements against Kerodon, HTT, lecture notes, and blueprint sources. Coherent naturality and slice mapping formulas are supported; 180 finite-set checks passed. No new nodes, duplicate, cycle, or repair needed. Accepted the declared cone-calculus tool use. Full findings are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExponentialDependentProductRepresentation",
+  "declaration": "SSet.Enhanced.exponential_dependent_product_representation",
+  "declarations": [
+   "SSet.Enhanced.coherentSlice",
+   "SSet.Enhanced.exponentialSliceSource",
+   "SSet.Enhanced.exponentialSliceArrow",
+   "SSet.Enhanced.exponentialVertexMap",
+   "SSet.Enhanced.ExponentialProductData",
+   "SSet.Enhanced.exponentialProduct",
+   "SSet.Enhanced.exponentialProjection",
+   "SSet.Enhanced.ExponentialIdentitySection",
+   "SSet.Enhanced.exponentialIntervalMin",
+   "SSet.Enhanced.exponentialSquareParameter",
+   "SSet.Enhanced.exponentialSquareTransformation",
+   "SSet.Enhanced.exponentialPullbackApex",
+   "SSet.Enhanced.IsExponentialPullback",
+   "SSet.Enhanced.exponentialProjectionSquare",
+   "SSet.Enhanced.ExponentialPullbackMate",
+   "SSet.Enhanced.ExponentialPullbackDomain",
+   "SSet.Enhanced.exponential_dependent_product_representation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ExponentialDependentProductRepresentation.lean",
+  "statement": "theorem exponential_dependent_product_representation (C : SSet.{u}) [Quasicategory C] (one a : C _⦋0⦌) (h : ExponentialProductData C one a) (e : ExponentialIdentitySection h) : (∀ (p : (coherentSlice C a) _⦋0⦌) (q : spaceSquare ⟶ C), IsExponentialPullback h e p q → (∃ epsilon : (coherentSlice C a) _⦋1⦌, ExponentialPullbackMate h e p q epsilon) ∧ ∀ epsilon : (coherentSlice C a) _⦋1⦌, ExponentialPullbackMate h e p q epsilon → UniversalArrowAt h.productToSlice true (exponentialPullbackApex q) p (diagramVertex (SSet.yonedaEquiv.symm epsilon))) ∧ CalculusTransportFormula (exponentialSliceSource C a) true ∧ (∃ t : (partialUniversalArrowSubcomplex h.productToSlice (fullSubcomplex (coherentSlice C a) (ExponentialPullbackDomain h e)).ι true).toSSet _⦋0⦌, ParametricUniversalArrow h.productToSlice (fullSubcomplex (coherentSlice C a) (ExponentialPullbackDomain h e)).ι true t.1 ∧ ∀ p : (fullSubcomplex (coherentSlice C a) (ExponentialPullbackDomain h e)).toSSet _⦋0⦌, ∃ (q : spaceSquare ⟶ C) (epsilon : (coherentSlice C a) _⦋1⦌), IsExponentialPullback h e p.1 q ∧ exponentialPullbackApex q = (evaluation _ C p).app _ t.1.1.1 ∧ ExponentialPullbackMate h e p.1 q epsilon ∧ diagramVertex (SSet.yonedaEquiv.symm epsilon) = (((ihom Δ[1]).map (evaluation _ (coherentSlice C a) p)).app _ t.1.1.2)) ∧ UniversalArrowRestrictionCompatibility h.productToSlice true",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of f4085d11d369: genuine fixed-object product adjunction, normalized identity-section triangle, actual limiting pullback square, relative mate diagrams fixing the evaluated arrow AND its homotopy over the base, canonical transport-fiber comparison, and a coherent partial counit with all simplicial parameters. Helpers belong to this representing-object comparison; their data are constructed. No change to the informal statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-136b9c166",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Read node, Kerodon 05UT source place, all 5 stmt-dep declarations (CoherentAdjunction order A⊣B, comma, spaceSquareEdge/IsSpacePullbackSquare, UniversalArrowAt/partialUniversalArrowSubcomplex/ParametricUniversalArrow, CalculusTransportFormula). Hypotheses match the node with no extra assumptions and one universe u. ExponentialPullbackMate checked face by face (Q target = e.triangle; A/B min-restrictions consistent; fillers exist by inner and left-equivalence horn lifting), so ε is the evaluation counit up to homotopy and conjunct 1 is true and non-vacuous; conjuncts 2-4 render the hofib equivalence and coherent naturality on the partial pullback domain. Edge cases (empty C, empty mapping spaces, p=id) are fine. Gates: helpers are real constructions with source/blueprint docstrings, theorem is the only sorry with a 5-step proof docstring, no duplicate notion. Node diff is lean+stmt_deps only; added deps are landed and acyclic; statement verbatim. nt_compile rc=0, 7.4 s, no messages. No findings."
  }
 }

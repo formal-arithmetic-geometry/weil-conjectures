@@ -113,26 +113,25 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "module": "Sheaf.SixFunctors.IntrinsicDerivedTensor",
-  "declaration": "AlgebraicGeometry.Scheme.proEtaleDerivedTensor",
+  "module": "Sheaf.SixFunctors.IntrinsicDerivedTensorOfUniverses",
+  "declaration": "SheafOfModules.ringedSiteDerivedTensorOfUniverses",
   "declarations": [
-   "AlgebraicGeometry.Scheme.proEtaleDerivedTensor",
-   "AlgebraicGeometry.Scheme.proEtaleDerivedTensorRing"
+   "SheafOfModules.ringedSiteDerivedTensorOfUniverses"
   ],
-  "file": "lean/Sheaf/SixFunctors/IntrinsicDerivedTensor.lean",
-  "statement": "def proEtaleDerivedTensor (Y : Scheme.{t}) (A : Type t) [CommRing A] (K L : proEtaleDerivedCategory Y A) : proEtaleDerivedCategory Y A",
+  "file": "lean/Sheaf/SixFunctors/IntrinsicDerivedTensorOfUniverses.lean",
+  "statement": "def ringedSiteDerivedTensorOfUniverses {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r}) [HasSheafify J AddCommGrpCat.{r}] [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasDerivedCategory.{w} (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))] (K L : DerivedCategory (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) : DerivedCategory (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))",
   "branch": "newtargets-dag",
-  "by": "Q18",
+  "by": "Q105",
   "date": "2026-10-17",
   "existing": false,
-  "note": "§1(B), the recorded generic ModuleCat-valued functor cannot be applied to the intrinsic ringed-site derived category used by this item. This module states the same derived tensor construction intrinsically on constant-coefficient pro-etale module sheaves, using the canonical chosen representative and the generalized K-flat resolution; it also supplies the ring-map specialization as proEtaleDerivedTensorRing. No coefficient universe is identified or extra finiteness/Tor hypothesis is added."
+  "note": "§1(B): the recorded intrinsic tensor takes coefficient and scheme data in the same universe and cannot apply to actual slice sites. This is its identical K-flat-resolve/total-tensor/localize construction for an arbitrary ringed site with independent object, morphism, coefficient and localization sizes. It specializes to the pro-etale site and its actual over-sites without changing any coefficient data or assuming flatness of the test object."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-fca041dc9",
-  "group": "Q18",
+  "reviewer": "NT-stage2-cc-276776fd5",
+  "group": "Q105",
   "result": "pass",
-  "note": "Wrote review.md. Checked all hypotheses, conclusions, dependencies, sources, universes, reduced-stratum and empty-cover cases. Both immutable Lean modules compiled cleanly through scompile.py with server confirmation. No corrections required; branch head unchanged."
+  "note": "All clauses match the node. Recorded declarations used: coefficientExtensionRing l E 1 = O_E/ϖ, scalarReductionDerivedExtension index 0 = exponent 1 over the same constant k_V, IsComplete none, IsWeaklyContractible at V, homologyFunctor, ringedSiteDerivedRestrictionOfUniverses. The conclusion is sheaf vanishing on every slice for arbitrary U and L. No added hypotheses or universe equalities. Both §1(B) dependency modules are faithful universe generalizations of the recorded constructions; no hollow data. Records verbatim, only lean changed in node files. Docstrings carry source, blueprint and the 6-step proof. All three files compile with no errors via nt_compile.py."
  }
 }

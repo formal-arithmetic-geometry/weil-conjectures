@@ -15,7 +15,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-category-colimit",
-  "lem-coef-lifting-class-closure"
+  "lem-coef-lifting-class-closure",
+  "lem-coef-small-direct-colimit-lifting"
  ],
  "proof": [
   {
@@ -240,5 +241,24 @@
   "group": "Q58",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q58-b95884d0f (reviewer sub-agent of L); spot-checked: Read the full item, report, unit/chapter route, cited nodes, blueprint, Hovey source, and Stacks colimit source. The six-step ordinal latching induction is mathematically sound, including empty, successor, limit, and noncontinuous cases. Hypotheses and citations match; no duplicate, circular, restated, or hidden long-step lemma was found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OrdinalLatchingDiagramLifting",
+  "declaration": "CategoryTheory.ordinalLatchingDiagramLifting",
+  "file": "lean/Sheaf/CategoryTheory/OrdinalLatchingDiagramLifting.lean",
+  "statement": "theorem ordinalLatchingDiagramLifting {J : Type w} [LinearOrder J] [WellFoundedLT J] {B : Type u} [Category.{v} B] [HasColimitsOfSize.{w, w} B] {D E U V : J ⥤ B} (f : D ⟶ E) (p : U ⟶ V) (hlift : ∀ a : J, HasLiftingProperty (directRelativeLatchingMap f a) (p.app a)) : HasLiftingProperty f p",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the previously landed directRelativeLatchingMap construction from lem-coef-small-direct-colimit-lifting. On a well-ordered preorder its incoming nonidentity-arrow category is canonically isomorphic to the strict predecessor category. Only that node's general definitions are used; its natural-number degree hypothesis is not assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b3c16bacf",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Node diff vs side base: only lean (statement verbatim) and stmt_deps (+landed lem-coef-small-direct-colimit-lifting, acyclic, allowed by brief-stage2 l.140). Clause check: J:Type w LinearOrder+WellFoundedLT (empty allowed) = small ordinal; HasColimitsOfSize.{w,w} B with independent w v u; D E U V, f, p; hlift ∀a HasLiftingProperty (directRelativeLatchingMap f a) (p.app a) uses canonical landed colimit.desc/colimMap/pushout.desc maps; conclusion HasLiftingProperty f p in J ⥤ B with correct triangles. Compiled probe confirms the latching index object mk g ≠ mk (𝟙 a) iff b<a, i.e. strict predecessors. No continuity/model/degree/finiteness assumption; empty, least-element and limit cases covered. No defs, only sorry, docstrings carry Hovey source + blueprint tag + six-step proof. nt_compile --json on the snapshot file: clean, 1.8 s, rc=0. Report has Worker report and Second reading by Q03 (an author self-check, content correct). No collision in side lean/Sheaf or Mathlib."
  }
 }

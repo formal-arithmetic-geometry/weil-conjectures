@@ -203,5 +203,23 @@
   "group": "NX",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-808aa4aca (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, route, and report; recorded checks in review.md. The linear reduction unit and composition maps prove the comparison with correct types and naturality. Edge cases pass; no cycles, hidden long steps, new duplicates, forbidden batch-5 dependencies, or target weakening. Accepted the declared module-composition tool use."
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.FinReductionOpenDirectImage",
+  "declaration": "AlgebraicGeometry.Etale.finReductionOpenDirectImage",
+  "file": "lean/Sheaf/SecSmoothPurity/FinReductionOpenDirectImage.lean",
+  "statement": "theorem finReductionOpenDirectImage (Λ : Type (u + 1)) [CommRing Λ] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] : Nonempty (lowerStar (ModuleCat.{u + 1} Λ) j ≅ upperStar (ModuleCat.{u + 1} Λ) (U.nilradical.subschemeι) ⋙ lowerStar (ModuleCat.{u + 1} Λ) ((U.nilradical.subschemeι ≫ j).liftNilradical) ⋙ lowerStar (ModuleCat.{u + 1} Λ) (X.nilradical.subschemeι))",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f1ef1db6b",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsOpenImmersion j; r,s = nilradical.subschemeι (recorded reduction); j_red = canonical liftNilradical with j_red≫r = s≫j; Nonempty NatIso lowerStar j ≅ upperStar s ⋙ lowerStar j_red ⋙ lowerStar r in node order (Λ-linear, natural in F); no extra hypotheses. Λ : Type (u+1)/ModuleCat.{u+1} forced by recorded lowerStar/upperStar IsGrothendieckAbelian.{u+1} and the lead's Mod(T_et,Λ) encoding decision. Node fields byte-identical except added lean; lean.statement verbatim in file; sorry-only; source/blueprint docstrings; no duplicate in side lean or Mathlib. nt_compile.py --json on snapshot file: clean, 4.0 s, no warnings. Minor: liftNilradical (existing upstream helper) not listed in reduction dep's declarations; no repair needed."
  }
 }

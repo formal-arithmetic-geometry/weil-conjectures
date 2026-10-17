@@ -165,5 +165,30 @@
   "group": "Q56",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q56-063486c03 (reviewer sub-agent of L); spot-checked: Step 3 incorrectly evaluates the unit equation on an arbitrary nested colimit generator, although that equation has domain F. Corrected DAG JSON is in fixes/dag/nodes/sec-six-functors/lem-trf-site-inverse-image-composition-generators.json, deriving the formula first on identity-index generators and transporting it via colimit coprojections and sheafification. Full source and cited-node review is in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteInverseImageCompositionGenerators",
+  "declaration": "CategoryTheory.site_inverse_image_composition_generators",
+  "declarations": [
+   "CategoryTheory.siteInverseImageGenerator",
+   "CategoryTheory.siteInverseImageNestedGenerator",
+   "CategoryTheory.SiteInverseImageCompositionGenerators",
+   "CategoryTheory.SiteInverseImageCompositionGeneratorsForSetsAndAbelianGroups",
+   "CategoryTheory.site_inverse_image_composition_generators"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SiteInverseImageCompositionGenerators.lean",
+  "statement": "theorem site_inverse_image_composition_generators {C D E : Type u} [SmallCategory C] [SmallCategory D] [SmallCategory E] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (L : GrothendieckTopology E) (v : C ⥤ D) (u : D ⥤ E) [v.IsContinuous J K] [u.IsContinuous K L] : SiteInverseImageCompositionGeneratorsForSetsAndAbelianGroups.{u, w} J K L v u",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b29786127",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Each clause matches the node: small sites in Type u with only the two IsContinuous hypotheses (composite continuity derived), Type and AddCommGrpCat in a free universe max u w, the constructed sheafPullback and sheafAdjunctionContinuous everywhere, a unique unit-compatible iso with the correct orientation, normalization indexed by φ ≫ u.map ψ, equality detection for every H and α, β, and naturality in F and restrictions. The generator is the unit then restriction; an rfl check shows the unit is the lan unit then toSheafify, so it is the canonical coprojection then sheafification. All clauses checked true by hand. No hollow def, proof is sorry, docstrings and blueprint ids present, node changed only in lean, statement verbatim, both report sections present, no name collisions. nt_compile --json is clean in about 8-9 s; axioms are standard plus sorryAx; removing any of the three Grp imports breaks the build. Minor: the private Adjunction.Unique import is redundant at stage 2."
  }
 }

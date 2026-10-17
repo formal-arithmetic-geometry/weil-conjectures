@@ -235,5 +235,29 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-9c762be3d (reviewer sub-agent of L); spot-checked: Read the item, all seven steps and the full statements of every cited node (def-coef-monoidal-infinity-category, lem-coef-cocartesian-relative-right-adjoint, lem-coef-infinity-pointwise-cocartesian-transport, lem-coef-infinity-mapping-composition, lem-coef-infinity-cocartesian-mapping-criterion, def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations). Also read the unit, the blueprint ancestor's paragraph 2 and the citer lem-coef-day-relative-exponential-model. The statement is the nonsymmetric specialization of HA 7.3.2.7: no hypothesis added, nothing weakened. HA is not archived, and the node correctly records proof_origin agent with WANTED. Checks: the index identity rho_j beta = rho_{a+j}; the counit-naturality cancellation along L(u) in Step 4 (both sides are vertical maps L_m e' -> d', and v_j ~ id via the inverse map h -> eps L(h)); the vertical-equivalence-is-cocartesian argument in Step 5; the mu_r tensor mate and the r=0 unit case in Step 6. Small cases tested: L=id, r=0, r=1, n=m=0, terminal categories. There are no new nodes and no duplicates; operadic-change-enrichment is only a presentable special case. Every cited statement lies on the unit's route, so there are no tool_uses. No SGA. One fix: Steps 3-4 apply the transport lemma, whose cocartesian notion is the mapping-square one, to the horn-cocartesian fibrations p and q without citing the bridge. I added lem-coef-infinity-cocartesian-mapping-criterion to Step 3 (one sentence) and to the uses of Steps 3 and 4. proof_deps is unchanged and still equals the union of the uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MonoidalRelativeAdjointInert",
+  "declaration": "SSet.Enhanced.monoidal_relative_right_adjoint_preserves_inert",
+  "declarations": [
+   "SSet.Enhanced.monoidalAdjointProductEdge",
+   "SSet.Enhanced.MonoidalAdjointSegalData",
+   "SSet.Enhanced.HasMonoidalOperationMates",
+   "SSet.Enhanced.monoidal_relative_right_adjoint_preserves_inert"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/MonoidalRelativeAdjointInert.lean",
+  "statement": "theorem monoidal_relative_right_adjoint_preserves_inert (E D : SSet.{u}) [Quasicategory E] [Quasicategory D] (p : E ⟶ monoidalSimplexBase.{u}) (q : D ⟶ monoidalSimplexBase.{u}) (hp : IsMonoidalInfinityCategory p) (hq : IsMonoidalInfinityCategory q) (L : E ⟶ D) (hL : IsStrongMonoidalInfinityFunctor p q L) (R₁ : monoidalUnderlying q ⟶ monoidalUnderlying p) (adj₁ : CoherentAdjunction (relativeFiberMap L hL.1.1 (monoidalBaseVertex 1)) R₁) : ∃ (R : D ⟶ E) (hR : R ≫ p = q) (adj : CoherentAdjunction L R) (vertical : RelativeCoherentAdjunction L hL.1.1 R hR adj), IsLaxMonoidalInfinityFunctor q p R ∧ (∃ (unary : CoherentAdjunction (relativeFiberMap L hL.1.1 (monoidalBaseVertex 1)) (relativeFiberMap R hR (monoidalBaseVertex 1))) (tri : AdjunctionTriangles _ _ unary), Nonempty (AdjunctionRestriction adj unary vertical.toAdjunctionTriangles tri (monoidalFiberInclusion p 1) (monoidalFiberInclusion q 1)) ∧ Nonempty (FiberAdjunctionDataCompatibility _ _ R₁ unary adj₁ tri)) ∧ (∀ n : ℕ, ∃ (fiberAdj : CoherentAdjunction (relativeFiberMap L hL.1.1 (monoidalBaseVertex n)) (relativeFiberMap R hR (monoidalBaseVertex n))) (tri : AdjunctionTriangles _ _ fiberAdj), Nonempty (AdjunctionRestriction adj fiberAdj vertical.toAdjunctionTriangles tri (monoidalFiberInclusion p n) (monoidalFiberInclusion q n)) ∧ Nonempty (MonoidalAdjointSegalData L hL.1.1 R hR R₁ adj₁ n fiberAdj)) ∧ HasMonoidalOperationMates p q L R adj",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a16d45a8d",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Each hypothesis and conclusion clause matches the node (HA Cor. 7.3.2.7, nonsymmetric). Relative adjunction is vertical; R is lax monoidal (inert-preserving); fibres agree with (R1)^n for all n including 0, with counit compatibility; unary fibre tied to adj1 by FiberAdjunctionDataCompatibility; operation mates checked: factorization, tensor/counit/mate triangles with correct faces and counit direction, so the mate is a real constraint. No extra assumptions or universe restriction, no hollow definitions, sorry-only, source and blueprint docstrings, imports per brief, node copy changes only lean, statement verbatim, no name collisions. nt_compile --json on the snapshot: rc=0, no errors or warnings. No findings."
  }
 }

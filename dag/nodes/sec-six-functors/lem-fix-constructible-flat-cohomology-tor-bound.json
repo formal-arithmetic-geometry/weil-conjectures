@@ -312,5 +312,30 @@
   "group": "Q81",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q81-1be9d49ca (reviewer sub-agent of L); spot-checked: The proof and statement pass the mathematical checks, but the source field incorrectly presents Tag 09C3 as asserting the slice-wise Tor bound. Corrected DAG JSON records the actual assembled route through Tags 08J5, 03ER, 03DJ, 03EL, 06YQ, 06YS, and 06YU. Full review: review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleFlatCohomologyTorBound",
+  "declaration": "WeilConjectures.constructible_flat_cohomology_tor_bound",
+  "declarations": [
+   "WeilConjectures.residueTorSliceAbSheafify",
+   "WeilConjectures.residueTorSliceAbLocallyBijective",
+   "WeilConjectures.residueTorGlobalDerived",
+   "WeilConjectures.residueTorSliceDerived",
+   "WeilConjectures.constructible_flat_cohomology_tor_bound"
+  ],
+  "file": "lean/Sheaf/Paper/ConstructibleFlatCohomologyTorBound.lean",
+  "statement": "theorem constructible_flat_cohomology_tor_bound (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (V : Scheme.{t}) [IsAffine V] (_hV : (ProEt.topology V).IsWeaklyContractible.{max u (t + 1)} (ProEt.mk (𝟙 V))) (K : DerivedCategory (scalarReductionSource l E V)) (_hcomplete : IntegralOnSlice.IsComplete l E V none K) (a b : ℤ) (_hab : a ≤ b) (_hbounded : ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((scalarReductionDerivedExtension l E V 0).obj K))) (_hlocal : ∀ q : ℤ, IsLocallyConstantProEtaleModuleSheafWithModelsOfUniverses V (Padic.coefficientExtensionRing l E 1) (fun M ↦ Module.Finite (ULift.{t + 1} (Padic.coefficientExtensionRing l E 1)) M) ((DerivedCategory.homologyFunctor _ q).obj ((scalarReductionDerivedExtension l E V 0).obj K))) : ∀ (U : V.ProEt) (L : SheafOfModules.{max u (t + 1)} ((integralCoefficientSheaf l E V 0).over U)) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj (SheafOfModules.ringedSiteDerivedTensorOfUniverses.{t + 1, t, max u (t + 1), (max u (t + 1)) + 1} ((integralCoefficientCommRingSheaf l E V 0).over U) (ringedSiteDerivedRestrictionOfUniverses.{t + 1, t, max u (t + 1), max u (t + 1), (max u (t + 1)) + 1, (max u (t + 1)) + 1} (integralCoefficientSheaf l E V 0) U ((scalarReductionDerivedExtension l E V 0).obj K)) ((DerivedCategory.singleFunctor _ 0).obj L)))",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-276776fd5",
+  "group": "Q105",
+  "result": "pass",
+  "note": "All clauses match the node. Recorded declarations used: coefficientExtensionRing l E 1 = O_E/ϖ, scalarReductionDerivedExtension index 0 = exponent 1 over the same constant k_V, IsComplete none, IsWeaklyContractible at V, homologyFunctor, ringedSiteDerivedRestrictionOfUniverses. The conclusion is sheaf vanishing on every slice for arbitrary U and L. No added hypotheses or universe equalities. Both §1(B) dependency modules are faithful universe generalizations of the recorded constructions; no hollow data. Records verbatim, only lean changed in node files. Docstrings carry source, blueprint and the 6-step proof. All three files compile with no errors via nt_compile.py."
  }
 }
