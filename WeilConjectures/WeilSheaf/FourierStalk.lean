@@ -14,16 +14,15 @@ public import WeilConjectures.WeilSheaf.Stalk
 At a `k₀`-rational point `a` of the dual line, the stalk of the Fourier–Deligne transform of a
 Weil complex `K` is the compactly supported cohomology of `K ⊗ ℒ_{ψ(a x)}`, shifted by one, with
 its Frobenius: this is the stalk formula of the transform, a consequence of compact support base
-change along `a : Spec k₀ ⟶ 𝔸¹`. At the origin the kernel `ℒ_{ψ(0 · x)}` is the constant sheaf,
-and tensoring with it does nothing.
+change along `a : Spec k₀ ⟶ 𝔸¹`. Tensoring with a lisse Weil sheaf isomorphic to the
+constant sheaf does nothing; this applies at the origin, where the kernel `ℒ_{ψ(0 · x)}` is
+constant.
 
 ## Main declarations
 
 - `AlgebraicGeometry.affineLine.rationalPoint`: the closed point `x = a` of `𝔸¹_{k₀}`.
 - `AlgebraicGeometry.nonempty_equiv_stalk_homologySheaf_fourierTransform_rationalPoint`: the
   stalk formula at rational points, stated with `sorry` (blueprint `lem-fd-stalk-formula`).
-- `AlgebraicGeometry.nonempty_iso_artinSchreier_zero`: `ℒ_{ψ(0 · x)} ≅ ℚ̄_ℓ`, stated with
-  `sorry` (blueprint `lem-fd-as-characters`).
 - `AlgebraicGeometry.WeilComplex.tensorLisseObjIsoOfIso`: tensoring with a Weil sheaf isomorphic
   to `ℚ̄_ℓ` is the identity.
 -/
@@ -73,14 +72,6 @@ noncomputable def tensorLisseObjIsoOfIso (F : WeilSheaf k₀ l X) (hF : F.IsLiss
   ObjectProperty.isoMk _ ((rightDerivedFunctorIhomFunctorDualIsoOfIso F hF e).app K.obj)
 
 end WeilComplex
-
-/-- `ℒ_{ψ(0 · x)}`, the Artin–Schreier sheaf of the zero function, is the constant Weil sheaf
-`ℚ̄_ℓ`: over the zero function the Artin–Schreier cover is split, `#k₀` copies of the line with
-trivial Frobenius, so all the isotypic summands of the pushforward are constant. It is the unit
-of the kernel family `ℒ_{ψ(a x)}`. (blueprint: `lem-fd-as-characters`, the case `f = 0`) -/
-theorem nonempty_iso_artinSchreier_zero (ψ : AddChar k₀ (PadicAlgCl l)) :
-    Nonempty (artinSchreier ψ 0 ≅ WeilSheaf.adicConstant k₀ l (affineLine k₀)) :=
-  sorry
 
 /-- **Stalks of the Fourier transform are fibre integrals**, at the `k₀`-rational points of the
 dual line: for a Weil complex `K` on `𝔸¹` and `a ∈ k₀`, the stalk of `𝓗ʳ FT_ψ(K)` at the point

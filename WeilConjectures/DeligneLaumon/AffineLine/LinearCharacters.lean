@@ -177,7 +177,9 @@ functions `f = x` and `g = y` of `𝔸² = 𝔸¹ ×_{k₀} 𝔸¹`, `ℒ_{ψ,f}
 `ℒ_{ψ,h} = h^* ℒ_ψ`; stated for the underlying sheaves on the geometric plane `𝔸²_{k̄}`, the tensor
 product being that of sheaves of `ℚ̄_ℓ`-modules.
 (blueprint: `lem-fd-as-characters`, the clause `ℒ_{ψ,f} ⊗ ℒ_{ψ,g} ≅ ℒ_{ψ,f+g}` for the coordinates
-`f = x`, `g = y` of `𝔸²`, after base change to `k̄`) -/
+`f = x`, `g = y` of `𝔸²`, after base change to `k̄`). The Weil version
+`AlgebraicGeometry.nonempty_iso_tensorObj_artinSchreierOf` realises the tensor product as
+`𝓗om(F^∨, G)`, whose identification with `Mod.tensorLeft` for lisse `F` is not available. -/
 theorem nonempty_iso_tensorLeft_upperStar_artinSchreier_add (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty ((Mod.tensorLeft ((Scheme.Hom.geometricFiberMap (affinePlane.snd k₀)
           (comp_over _ _))^*ᵃ[l].obj (artinSchreier ψ 1).obj.carrier)).obj
