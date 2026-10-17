@@ -2,18 +2,124 @@
  "id": "lem-sfb-left-resolution-bounded-minus",
  "kind": "statement",
  "title": "Bounded-above complexes resolved by a zero-preserving left resolution",
- "statement": "Let $A$ be an abelian category [def-sp-abelian], let $C$ be a preadditive category with a zero object and finite coproducts, and let $\\iota:C\\to A$ be fully faithful and additive. Suppose $Q:A\\to C$ is a functor preserving zero morphisms and $\\pi:\\iota Q\\Rightarrow\\operatorname{id}_A$ is a natural transformation with epimorphic components. On the full subcategory of integer cochain complexes whose terms vanish in all sufficiently large degrees, there are a functor $S$ to integer cochain complexes in $A$ and a natural transformation $a:S\\Rightarrow\\iota_-$, where $\\iota_-$ is the inclusion, such that every $a_L$ is a quasi-isomorphism, every term of $S(L)$ is isomorphic to an object in the essential image of $\\iota$, and every upper bound for $L$ is an upper bound for $S(L)$. This functor is defined on all maps in the bounded-above full subcategory, regardless of which upper-bound witnesses are chosen.",
+ "statement": "Let $A$ be an abelian category [def-sp-abelian], let $C$ be a preadditive category [def-weil-preadditive-category] with a zero object and finite coproducts, and let $\\iota:C\\to A$ be fully faithful and additive [def-weil-pbc-additive-functor]. Suppose $Q:A\\to C$ is a functor preserving zero morphisms and $\\pi:\\iota Q\\Rightarrow\\operatorname{id}_A$ is a natural transformation with epimorphic components. On the full subcategory of integer cochain complexes whose terms vanish in all sufficiently large degrees, there are a functor $S$ to integer cochain complexes in $A$ and a natural transformation $a:S\\Rightarrow\\iota_-$, where $\\iota_-$ is the inclusion, such that every $a_L$ is a quasi-isomorphism, every term of $S(L)$ is isomorphic to an object in the essential image of $\\iota$, and every upper bound for $L$ is an upper bound for $S(L)$. This functor is defined on all maps in the bounded-above full subcategory, regardless of which upper-bound witnesses are chosen.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
   "place": "Proof, first three sentences: bounded-above stages; supporting WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean:32-273, especially minusResolutionFunctor, minusResolutionNatTrans and quasiIso_minusResolutionNatTrans_app."
  },
  "stmt_deps": [
   "def-sp-abelian",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-weil-preadditive-category",
+  "def-weil-pbc-additive-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Package the given functor $Q$ and epimorphic natural transformation $\\pi$ as the left-resolution datum $\\Lambda$ for $\\iota$. The hypotheses on $C$, $\\iota$, and zero preservation are exactly the data required by the construction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean",
+    "place": "lines 32–36, where the LeftResolution variable and zero-preserving hypothesis are fixed"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-left-resolution-objectwise-cochain] to obtain the cochain-complex resolution functor and its objectwise quasi-isomorphic augmentation. Its complexes and their images under $\\iota$ vanish in every resolution degree $q>0$.",
+   "uses": [
+    "lem-sfb-left-resolution-objectwise-cochain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/Basic.lean",
+    "place": "cochainComplexFunctor, cochainComplexNatTransπ, and QuasiIso instances, lines 20–145"
+   }
+  },
+  {
+   "text": "For a bounded-above $K$ choose any upper bound $b$. [lem-sfb-left-resolution-bicomplex-total-exists] gives the resolution bicomplex, its vanishing for first degree $p>b$ and resolution degree $q>0$, and the existence of both required diagonal totals. The bicomplex and total are the constructions described in that node.",
+   "uses": [
+    "lem-sfb-left-resolution-objectwise-cochain",
+    "lem-sfb-left-resolution-bicomplex-total-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean",
+    "place": "bicomplexFunctor support and HasTotal instances, lines 48–108"
+   }
+  },
+  {
+   "text": "Write $T(K)=\\operatorname{Tot}(B_K)$ for the total in $C$, and define $S(K)=\\iota(T(K))$ by applying $\\iota$ termwise. On a cochain map $f:K\\to L$, set $S(f)=\\iota(\\operatorname{Tot}(B_f))$. The functor laws follow from those of the objectwise resolution and total.map. These totals and maps are chosen for the bicomplexes themselves, independently of any bound witness; the bounds only prove that the needed coproducts exist. Thus the construction acts on every map between bounded-above complexes, even with different bounds. If $n>b$, each diagonal summand of $T(K)^n$ is zero: otherwise its indices would satisfy $p\\le b$, $q\\le0$ and $n=p+q\\le b$. Hence the diagonal coproduct $T(K)^n$ is zero. The additive functor $\\iota$ preserves zero objects, so $S(K)^n$ is zero as well. For every $n$, the term $S(K)^n=\\iota(T(K)^n)$ itself is in the essential image of $\\iota$.",
+   "uses": [
+    "lem-sfb-left-resolution-objectwise-cochain",
+    "lem-sfb-left-resolution-bicomplex-total-exists"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean",
+    "place": "total upper-bound instance, lines 133–149; minusResolutionFunctor and its map_id/map_comp proofs, lines 226–237, followed by termwise application of ι"
+   }
+  },
+  {
+   "text": "The map $\\tau_K$ of [lem-sfb-left-resolution-totalized-augmentation] is natural in $K$ and a quasi-isomorphism: its naturality is the component calculation using $\\pi$-naturality, and its quasi-isomorphism is the bounded-column comparison applied to the objectwise quasi-isomorphisms from step 2.",
+   "uses": [
+    "lem-sfb-left-resolution-totalized-augmentation",
+    "lem-pc-bounded-above-double-complex-total-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean",
+    "place": "totalπ′ naturality and quasi-isomorphism, lines 160–206"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-left-resolution-additive-total-transport] with $F=\\iota$. The category $C$ has a zero object and finite coproducts by hypothesis, $A$ is preadditive because it is abelian, and $\\iota$ is additive. The bounds on $B_K$ from step 3 are exactly the two support hypotheses of that lemma. Its natural isomorphism $e_K=\\mathrm{mapTotalIso}_{\\iota,B_K}$ identifies $\\operatorname{Tot}(\\iota B_K)$ with $S(K)=\\iota(\\operatorname{Tot}(B_K))$, naturally for all maps between bounded-above complexes.",
+   "uses": [
+    "lem-sfb-left-resolution-additive-total-transport",
+    "lem-sfb-left-resolution-bicomplex-total-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/TotalComplexMap.lean",
+    "place": "mapTotalIso and its naturality, lines 118–145; bounded-minus support instance in CochainComplexMinus.lean:208–220"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-left-resolution-single-row-total] to identify the total of the row concentrated in degree $0$ with $K$, naturally in $K$.",
+   "uses": [
+    "lem-sfb-left-resolution-single-row-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/BicomplexRows.lean",
+    "place": "singleRow₀ObjTotal and its naturality, lines 170–182"
+   }
+  },
+  {
+   "text": "Write $r_K:\\operatorname{Tot}(\\operatorname{singleRow}_0(K))\\xrightarrow{\\sim}K$ for the isomorphism of step 7. Define $a_K=r_K\\circ\\tau_K\\circ e_K^{-1}:S(K)\\to K$. The first and last factors are isomorphisms and the middle factor is a quasi-isomorphism, so $a_K$ is a quasi-isomorphism. For $f:K\\to L$, the naturality equations from steps 5–7 give $f\\circ a_K=r_L\\circ\\operatorname{Tot}(\\operatorname{singleRow}_0(f))\\circ\\tau_K\\circ e_K^{-1}=r_L\\circ\\tau_L\\circ\\operatorname{Tot}(\\iota B_f)\\circ e_K^{-1}=a_L\\circ S(f)$. Thus these components define the required natural transformation; step 4 already proved the essential-image and upper-bound clauses.",
+   "uses": [
+    "lem-sfb-left-resolution-totalized-augmentation",
+    "lem-sfb-left-resolution-additive-total-transport",
+    "lem-sfb-left-resolution-single-row-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean",
+    "place": "definition of totalπ and minusResolutionNatTrans, and its quasi-isomorphism/naturality, lines 216–256"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-bounded-above-double-complex-total-comparison",
+  "lem-sfb-left-resolution-additive-total-transport",
+  "lem-sfb-left-resolution-bicomplex-total-exists",
+  "lem-sfb-left-resolution-objectwise-cochain",
+  "lem-sfb-left-resolution-single-row-total",
+  "lem-sfb-left-resolution-totalized-augmentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+  "place": "Proof, first three sentences; functorial bounded-above totalization and its natural quasi-isomorphic augmentation are implemented in CochainComplexMinus.lean:32-273."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,7 +151,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-functorial-bounded-above-class-resolution",
@@ -57,7 +163,7 @@
  "blueprint": {
   "from": {
    "node": "lem-sfb-derived-monoidal",
-   "place": "Proof, first three sentences: the bounded-above stages of the functorial resolution, including totalization, naturality, quasi-isomorphism, and preservation of the upper bound.",
+   "place": "Parent proof sentence beginning ‘So the K-flat complexes form a left derivability structure...’; the parent does not spell out bounded-minus totalization, which this node makes concrete via CochainComplexMinus.lean.",
    "via": [
     "lem-sfb-functorial-bounded-above-class-resolution",
     "lem-sfb-kflat-derivability"
@@ -65,5 +171,30 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sfb-left-resolution-bounded-minus",
+  "worker": "stage1",
+  "group": "Q54",
+  "summary": "Repaired the eight-step construction using five statement-only children: objectwise cochain resolution, bounded-minus bicomplex total existence, the intermediate totalized augmentation, additive total transport, and the single-row total identification. The transport child now assumes a zero object and finite coproducts in C and defines its preadditive bicomplex and signed total inline. Step 4 defines S(K) as the termwise image under iota of the C-valued total, proving the essential-image and upper-bound clauses directly. Step 6 verifies all transport hypotheses, step 8 gives the composite and its naturality with correct references to steps 5–7, and duplicate search records were removed. The source is CochainComplexMinus.lean and its cited total-complex interfaces.",
+  "blueprint": "Parent proof sentence beginning ‘So the K-flat complexes form a left derivability structure...’; the parent does not spell out bounded-minus totalization, which this node makes concrete via CochainComplexMinus.lean.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-double-complex-total-comparison",
+    "why": "Step 5 uses its columnwise quasi-isomorphism-to-total comparison theorem; the bounded-minus unit has no duplicate comparison node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-double-complex-total-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-367244e79",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-367244e79 (reviewer sub-agent of L); spot-checked: I read the item, all five new nodes, the parent, the unit, the blueprint proof lem-sfb-derived-monoidal, the cited nodes, and the FromJoel sources: LeftResolution/CochainComplexMinus.lean:32-256, Basic.lean:20-145, BicomplexColumns.lean:874-912, TotalComplexMap.lean:27-145, BicomplexRows.lean:85-182, and Mathlib LeftResolution/Basic.lean:100-135. The item's hypotheses match the source variables and the parent's step 2. All eight steps are correct. Step 4's upper bound holds: a nonzero diagonal term has p<=b and q<=0, so n<=b; the term S(K)^n=iota(T(K)^n) is in the essential image; and the functor never uses a chosen bound. Step 8's composite r o tau o e^{-1} and its naturality chain agree with minusResolutionNatTrans. Each new node is true, strictly smaller than the item, and not a duplicate: the transport node holds because the diagonal support lies in [n,b] and additive functors preserve finite coproducts, and the worker's {0,Z/2,Z/3} counterexample to the earlier version is valid. I tested K=0, K concentrated in one degree, and X=0. I accept the tool use lem-pc-bounded-above-double-complex-total-comparison: its hypotheses x0=b, y0=0, existing totals and columnwise quasi-isomorphisms match the use, but the item's citation is redundant because the totalized-augmentation child states its conclusion. No SGA source is used and no target is touched. Fixes, under fixes/dag/nodes/sec-proetale-coefficients: (1) B3/B2: def-weil-pbc-additive-functor is now cited in the item and three children. bicomplex-total-exists and totalized-augmentation named the resolution and augmentation constructed in another node without citing it, so they now cite lem-sfb-left-resolution-objectwise-cochain in the statement and stmt_deps. objectwise-cochain now states the kernel-iteration construction of R and its augmentation explicitly. (2) single-row-total cited the abelian-only cochain-complex definition for a preadditive category; the notion is now stated inline. No statement's meaning changed, nothing was dropped, and the graph stays acyclic.; 6 file(s) fixed by the reviewer"
  }
 }

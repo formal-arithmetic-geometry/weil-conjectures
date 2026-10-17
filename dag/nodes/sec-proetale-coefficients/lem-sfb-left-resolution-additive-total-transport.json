@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-left-resolution-additive-total-transport",
+ "kind": "statement",
+ "title": "Additive transport for uniformly bounded bicomplex totals",
+ "statement": "Let $C$ and $D$ be preadditive categories [def-weil-preadditive-category], assume that $C$ has a zero object and finite coproducts, and let $F:C\\to D$ be additive [def-weil-pbc-additive-functor]. Let $B$ be an integer-indexed commuting bicomplex in $C$: it consists of objects $B^{p,q}$ and maps $d_1:B^{p,q}\\to B^{p+1,q}$ and $d_2:B^{p,q}\\to B^{p,q+1}$ satisfying $d_1^2=d_2^2=0$ and $d_1d_2=d_2d_1$. Its diagonal total has terms $\\operatorname{Tot}(B)^n=\\bigoplus_{p+q=n}B^{p,q}$ and differential induced on the $(p,q)$ summand by $d_1+(-1)^p d_2$. Write $F B$ for the bicomplex obtained by applying $F$ to all objects and differentials. Assume that for some integer $b$, $B^{p,q}$ is a zero object whenever $p>b$ or $q>0$. Then the diagonal coproducts defining $\\operatorname{Tot}(B)$ and $\\operatorname{Tot}(F B)$ exist, $F$ preserves each diagonal coproduct of $B$, and the canonical `mapTotalIso` isomorphism identifies $\\operatorname{Tot}(F B)$ with $F(\\operatorname{Tot}(B))$, where $F$ acts termwise on the latter complex. These isomorphisms are natural for bicomplex maps between any two bicomplexes satisfying these bounds, even when their first-index upper bounds differ.",
+ "source": {
+  "document": "WeilConjectures/FromJoel/Algebra/Homology/TotalComplexMap.lean",
+  "place": "BicomplexColumns.lean:746 (finite-coproduct ambient hypothesis), 874–912 (coreHasTotalOfIsStrictlyLE, hasTotal_of_isStrictlyLE, preservesTotal_of_isStrictlyLE); TotalComplexMap.lean:33–145 (hasTotalOfPreserves, mapTotalIso and naturality); CochainComplexMinus.lean:208–220 (application to the resolution bicomplex)."
+ },
+ "stmt_deps": [
+  "def-weil-preadditive-category",
+  "def-weil-pbc-additive-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Additive functor preserves total complex of bounded bicomplex",
+   "results": "msearch returned 8 hits; top ['CategoryTheory.Functor.map₂HomologicalComplex_obj_obj', 'CategoryTheory.Functor.mapBifunctorHomologicalComplex_obj_obj_X_X', 'HomologicalComplex₂.totalFunctor', 'CategoryTheory.Functor.mapBifunctorHomologicalComplex_obj_obj_X_d', 'CategoryTheory.Functor.mapBifunctorHomologicalComplexObj_obj_X_X', 'CategoryTheory.Functor.mapBifunctorHomologicalComplexObj_obj_X_d', 'CategoryTheory.Functor.map₂HomologicalComplex_obj_map', 'CategoryTheory.Functor.mapBifunctorHomologicalComplexObj']",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.mapTotalIso",
+   "results": "msearch returned 0 hits; top []; loogle: unknown identifier 'HomologicalComplex₂.mapTotalIso'",
+   "date": "2026-10-18",
+   "verdict": "unavailable: the query uses project-specific identifiers that Loogle does not resolve; it does not establish absence."
+  },
+  {
+   "tool": "grep",
+   "query": "mapTotalIso|PreservesTotalComplex",
+   "results": "msearch returned 0 hits; top []",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "additive functor commutes with bicomplex totalization",
+   "results": "msearch returned 8 hits; top ['HomologicalComplex₂.total.map_comp', 'CategoryTheory.Functor.map₂CochainComplex', 'CategoryTheory.Functor.map₂HomologicalComplex', 'CategoryTheory.Functor.map₂HomologicalComplex_obj_obj', 'HomologicalComplex.mapBifunctor₁₂.ι_mapBifunctor₁₂Desc_assoc', 'CochainComplex.HasMapBifunctor.congr_simp', 'HomologicalComplex₂.totalFunctor_obj', 'HomologicalComplex.mapBifunctor₁₂.mapBifunctor₁₂Desc.congr_simp']",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor preserves the total of a bicomplex that is strictly bounded above in the first index and whose every row is strictly bounded above in the second index",
+   "results": "Generic mapBifunctor and total infrastructure; no exact bounded-total transport theorem in the search hits.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.preservesTotal_of_isStrictlyLE, HomologicalComplex₂.mapTotalIso",
+   "results": "0 hits; loogle reports unknown identifier for the project-specific preservesTotal lemma.",
+   "date": "2026-10-18",
+   "verdict": "unavailable: the query uses project-specific identifiers that Loogle does not resolve; it does not establish absence."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesTotal_of_isStrictlyLE|PreservesTotalComplex|mapTotalIso",
+   "results": "No Mathlib source hits; the declarations are in the project FromJoel source, while generic total infrastructure is in Mathlib.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive functor preserves diagonal coproducts and identifies the total of the mapped bounded bicomplex with the image of its total",
+   "results": "CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive and preservesFiniteBiproductsOfAdditive; generic preservation only, no exact bounded bicomplex theorem.",
+   "date": "2026-10-18",
+   "verdict": "generalization: additive functors preserve finite coproducts; the bounded-total assembly is project-specific."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a preadditive category with finite coproducts an additive functor commutes with the diagonal total of an integer bicomplex uniformly bounded above in both directions",
+   "results": "8 hits: CochainComplex.instHasMapBifunctorObjIntShiftFunctor; HomologicalComplex₂.instHasTotalIntObjUpCompShiftFunctor₁ShiftFunctor₂; generic bifunctor and total-shift infrastructure.",
+   "date": "2026-10-18",
+   "verdict": "no exact match: these declarations do not supply bounded diagonal total transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive",
+   "results": "1 hit: CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive, Mathlib.CategoryTheory.Preadditive.AdditiveFunctor; its conclusion is PreservesFiniteCoproducts F.",
+   "date": "2026-10-18",
+   "verdict": "partial match: preservation of existing finite coproducts only, not existence and the total-complex natural isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "mapTotalIso|PreservesTotalComplex|preservesFiniteCoproductsOfAdditive",
+   "results": "1 hit: Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean:213, preservesFiniteCoproductsOfAdditive. No mapTotalIso or PreservesTotalComplex hits.",
+   "date": "2026-10-18",
+   "verdict": "partial match: generic finite-coproduct preservation; the bounded bicomplex assembly is project-specific."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive functor from a preadditive category with finite coproducts preserves the total of an integer bicomplex bounded above in both indices",
+   "results": "8 hits: CategoryTheory.Functor.preservesFiniteBiproductsOfAdditive; CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive; CategoryTheory.Limits.preservesBiproduct_of_preservesCoproduct; map_sum and other additive-functor infrastructure.",
+   "date": "2026-10-18",
+   "verdict": "partial match: no theorem in these hits identifies the bounded bicomplex total with the image of its total."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-left-resolution-bounded-minus",
+  "date": "2026-10-18",
+  "group": "Q54"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-derived-tensor-hom",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-derived-monoidal",
+   "place": "Parent proof sentence beginning ‘So the K-flat complexes form a left derivability structure...’; the parent does not spell out bounded-minus totalization, which this node makes concrete via CochainComplexMinus.lean.",
+   "via": [
+    "lem-sfb-left-resolution-bounded-minus",
+    "lem-sfb-functorial-bounded-above-class-resolution",
+    "lem-sfb-kflat-derivability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
