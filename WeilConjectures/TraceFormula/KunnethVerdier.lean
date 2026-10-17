@@ -153,4 +153,27 @@ instance isIso_kunnethVerdierMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingOb
     IsIso (kunnethVerdierMap ℓ M N) :=
   sorry
 
+/-- **Verdier biduality for the dualizing complex** (blueprint `thm-trf-verdier-biduality`): for
+bounded constructible `M` on `Y`, the double-dual morphism `M ⟶ D_Y D_Y M`, the transpose of the
+evaluation `D_Y M ⊗ M ⟶ M ⊗ D_Y M ⟶ ω_Y`, is an isomorphism. It is the constructible biduality
+theorem (`isIso_verdierBiduality`, blueprint `thm-coef-qbar-verdier`). -/
+noncomputable def verdierBidualityIso (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    M ≅ verdierDual ℓ (toPoint Y) (verdierDual ℓ (toPoint Y) M) :=
+  haveI := isIso_verdierBiduality ℓ M
+  asIso (verdierBiduality ℓ (toPoint Y) M)
+
+lemma verdierBidualityIso_hom (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (verdierBidualityIso ℓ M).hom =
+      curry ((β_ _ M).hom ≫ (ihom.ev M).app (dualizingComplex ℓ Y)) :=
+  rfl
+
+/-- The biduality isomorphism is natural (blueprint `thm-trf-verdier-biduality`). -/
+@[reassoc]
+lemma verdierBidualityIso_hom_naturality {M M' : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
+    (f : M ⟶ M') :
+    f ≫ (verdierBidualityIso ℓ M').hom =
+      (verdierBidualityIso ℓ M).hom ≫
+        (pre ((pre f).app (dualizingComplex ℓ Y))).app (dualizingComplex ℓ Y) :=
+  toIhomIhom_naturality (dualizingComplex ℓ Y) f
+
 end AlgebraicGeometry.ProEtale.CondensedRing

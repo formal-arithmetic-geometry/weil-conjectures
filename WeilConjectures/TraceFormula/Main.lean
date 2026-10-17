@@ -679,6 +679,21 @@ theorem stalkFrobenius_unit (m : ℕ) (x : RationalPoint X)
     (fun a b ↦ boundedConstructibleUpperStarComp_hom_app_unit _ ℓ a b) hx (iterate_carrier _ m)
     _ _ _
 
+/-- **Constant coefficients have unit stalk trace** (blueprint `cor-trf-constant-stalk-trace`):
+at every rational point fixed by `Φ_m`, the local Frobenius of the constant Weil object
+`ℚ̄_ℓ,X` has trace `1`. -/
+theorem trace_stalkFrobenius_unit (m : ℕ) (x : RationalPoint X)
+    (hx : x ≫ frobeniusIterate Φ m = x)
+    [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
+      (unit ℓ Φ).carrier)] :
+    trace ((unit ℓ Φ).stalkFrobenius m x hx) = 𝟙 _ := by
+  rw [stalkFrobenius_unit]
+  exact (trace_eq_of_iso
+    (X := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj (unit ℓ Φ).carrier)
+    (X' := 𝟙_ _)
+    (Functor.Monoidal.εIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x)).symm
+    (𝟙 _) (𝟙 _) (by simp)).trans trace_id_tensorUnit
+
 end WeilBoundedConstructible
 
 /-- **Counting points** (blueprint `cor-trf-point-counting`): the trace of the global operator
@@ -694,7 +709,14 @@ theorem trace_globalOperator_unit_eq_card [IsAlgClosed k] [IsSeparated f₀]
     haveI := hΦ.isUniversalHomeomorphism m
     trace ((WeilBoundedConstructible.unit ℓ Φ).globalOperator m) =
       (Fintype.card (FixedPoint Φ m) :
-        End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧))) :=
-  sorry
+        End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧))) := by
+  have : ∀ x : RationalPoint X,
+      HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
+        (WeilBoundedConstructible.unit ℓ Φ).carrier) := fun x ↦
+    (WeilBoundedConstructible.nonempty_hasRightDual_stalk _ x).some
+  rw [trace_globalOperator_eq_sum_trace_stalkFrobenius hΦ _ m hm]
+  simp only [WeilBoundedConstructible.trace_stalkFrobenius_unit, Finset.sum_const,
+    Finset.card_univ]
+  exact nsmul_one (A := End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧))) _
 
 end AlgebraicGeometry.ProEtale.CondensedRing
