@@ -14,7 +14,8 @@
   "def-weil-residue-field",
   "def-weil-open-immersion",
   "def-pc-geometrically-irreducible",
-  "def-pc-integral-scheme"
+  "def-pc-integral-scheme",
+  "def-trf-purely-transcendental-extension"
  ],
  "proof": [
   {
@@ -176,5 +177,24 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-d0c4faa83 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the Stacks sources. The argument is in the proof of Tag 057K (more-morphisms.tex l.13481-13490, the paragraph 'Let T be the connected component'), using Varieties 04KV (l.1082), Varieties 056T (l.4617), the geometrically-normal definition (l.2105) and Properties 033M (l.960). The item statement matches the source exactly: open, quasi-compact, and geometrically integral, where reducedness comes from normality. Nothing is weakened. I tested it on A^1 at its generic point, on a disjoint union with a rational point, on r=0, on Spec C over R (shows the purely transcendental hypothesis is needed) and on the empty case. Both new nodes are true Stacks lemmas, given as statements only, not in Mathlib (checked Geometrically/*.lean) and not duplicates. lem-sbc-connected-rational-point-geometrically-connected is only the rational-point special case, and sbc-lem-smooth-geometrically-reduced only gives reduced fibres. Neither new node restates a clause of the item. Repairs, in fixes/: (1) B5: the step sources and proof_origin said Tag 052E, but the cited paragraph is in 057K; corrected. (2) B3: lem-trf-smooth-geometrically-normal cited def-pc-geometrically-irreducible for 'geometrically normal', which that node does not define; I wrote the Stacks definition into the statement (normal local rings of X_K for every K/k) and also made the 04KV node self-contained. (3) C1: steps 1 and 4 used Noetherianity of C and of T_K without a citation; I added the existing Mathlib leaves lem-wf-affine-noetherian-components, lem-kun-finite-union-noetherian and lem-sfb-noetherian-space-compact-subsets, and wrote out the UFD argument that k is algebraically closed in k(u_1..u_r). I accepted two tool uses and recorded them in split_report.tool_uses: rem-pc-regular-normal (2) for Tag 033M, and the Lean-closed lem-sfb-noetherian-connected-components-open. Not done: tools/check_dag.py was not run; a script check of ids and deps passed instead.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SmoothComponentPureTranscendental",
+  "declaration": "AlgebraicGeometry.exists_geometricallyIntegral_connectedComponent",
+  "file": "lean/Sheaf/TraceFormula/SmoothComponentPureTranscendental.lean",
+  "statement": "theorem exists_geometricallyIntegral_connectedComponent {k : Type u} [Field k] {C : Scheme.{u}} [C.Over (Spec (.of k))] [LocallyOfFiniteType (C ↘ Spec (.of k))] [QuasiCompact (C ↘ Spec (.of k))] [Smooth (C ↘ Spec (.of k))] (c : C) (htrans : @Algebra.IsPurelyTranscendentalExtension k (C.residueField c) _ _ ((C ↘ Spec (.of k)).residueFieldAlgebraMap c).toAlgebra) : ∃ T : C.Opens, (T : Set C) = connectedComponent c ∧ QuasiCompact T.ι ∧ GeometricallyIntegral (T.ι ≫ C ↘ Spec (.of k))",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-5b4a90e0a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5b4a90e0a",
+  "group": "Q23",
+  "result": "fix",
+  "note": "Mathematical statement matches the node and sources. Complete replacement module and report in fixes/ repair missing proof-dependency imports and expand proof docstrings. Original and corrected files compile cleanly through scompile.py. Full audit recorded in review.md; snapshot and branches unchanged."
  }
 }

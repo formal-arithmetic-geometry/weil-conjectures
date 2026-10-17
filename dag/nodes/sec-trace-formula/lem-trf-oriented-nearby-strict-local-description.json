@@ -305,10 +305,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-3e7d953b4",
-  "group": "Q68",
+  "reviewer": "NT-stage2-Codex-181c41af2",
+  "group": "Q40",
   "result": "pass",
-  "note": "Read node, 6 stmt deps, OrientedNearbyCycles dependency Lean (lift, baseChange, IsPsiGood, pullTensor, laxTensor, kunneth), strict-henselization canonical map, and the local-projection and triple-point-conservativity node statements (both hypothesis-free). Every clause matches. Hypotheses: CommRing Λ with mΛ=0, m≥1, LocallyOfFiniteType f; no extra assumptions; coefficient universe v independent of u. σ_x is the universal lift with closed-point counit orientation (not the identity at y). Description iso is a specified comparison with an isIso theorem. Ordinary, lax and external compatibilities are equations against the dependency's baseChange, laxTensor and kunneth. Test square: strictly local schemes, local maps, comm h≫g=g'≫k, induced map to fibre product a strict localization. Comparison is homEquiv of square ≫ h^*ε_g. Iff with IsPsiGood plus stability, true as stated. No hollow defs (the four .choose defs come from ∃! theorems). 15 sorries, each a named theorem with a Proof docstring. All 58 declarations carry source and blueprint tags and are recorded. Statement verbatim; only the lean field changed. nt_compile.py: rc=0, no messages, 8.8 s and 12.8 s. Minor notes: second reading is self-review; conservativity and ordinary-comparison equation are stated more generally but true; exactness and tensor preservation carried by dependency pullTensor; Zheng/Illusie not reopened (no network)."
+  "note": "Canonical strict-local constructions, comparison maps, conservativity, base-change criterion, stability, docstrings, dependencies, edge cases, and route-pivot constraints checked; per-file compile passed cleanly."
  },
  "lean": {
   "module": "Sheaf.Paper.OrientedNearbyStrictLocalDescription",
@@ -371,13 +371,14 @@
    "AlgebraicGeometry.OrientedNearbyCycles.strictLocalRestrictedComparison",
    "AlgebraicGeometry.OrientedNearbyCycles.strictLocalDescription_ordinaryComparison",
    "AlgebraicGeometry.OrientedNearbyCycles.strictLocalExternalComparison",
-   "AlgebraicGeometry.OrientedNearbyCycles.strictLocalDescription_externalProduct"
+   "AlgebraicGeometry.OrientedNearbyCycles.strictLocalDescription_externalProduct",
+   "AlgebraicGeometry.OrientedNearbyCycles.strictLocalDescription_baseChangeCriterion_core"
   ],
   "file": "lean/Sheaf/Paper/OrientedNearbyStrictLocalDescription.lean",
-  "statement": "theorem strictLocalDescription_baseChangeCriterion {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] (Λ : Type v) [CommRing Λ] (m : ℕ) (hm : 1 ≤ m) (hΛ : ∀ a : Λ, (m : Λ) * a = 0) (K : EtaleDerived X Λ) : (IsPsiGood f Λ K ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X), HasLocalizedBaseChange (Scheme.strictHenselizationMap f x) Λ (((etaleModules.{u, v} (Scheme.strictHenselizationStructuralMap x)).pull (Coeff.{u, v} Λ)).obj K)) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X), HasLocalizedBaseChange (Scheme.strictHenselizationMap f x) Λ (((etaleModules.{u, v} (Scheme.strictHenselizationStructuralMap x)).pull (Coeff.{u, v} Λ)).obj K) → ∀ S : StrictLocalTestSquare (Scheme.strictHenselizationMap f x), HasLocalizedBaseChange S.g' Λ (((etaleModules.{u, v} S.h).pull (Coeff.{u, v} Λ)).obj (((etaleModules.{u, v} (Scheme.strictHenselizationStructuralMap x)).pull (Coeff.{u, v} Λ)).obj K)))",
+  "statement": "theorem strictLocalDescription_baseChangeCriterion {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] (Λ : Type v) [CommRing Λ] (m : ℕ) (hm : 1 ≤ m) (hΛ : ∀ a : Λ, (m : Λ) * a = 0) (K : EtaleDerived X Λ) : (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X), PreservesFiniteLimits ((strictLocalSigmaModules.{u, v} f x).pull (Coeff.{u, v} Λ)) ∧ (∀ A B : VanishingDerived f Λ, IsIso ((pullTensor (strictLocalSigmaModules.{u, v} f x) (Coeff.{u, v} Λ)).hom.app (A, B))) ∧ IsIso (strictLocalDescriptionComparison.{u, v} f x Λ)) ∧ (∀ {A B : VanishingDerived f Λ} (a : A ⟶ B), IsIso a ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X), IsIso (((strictLocalSigmaModules.{u, v} f x).pull (Coeff.{u, v} Λ)).map a)) ∧ (∀ {X' Y' : Scheme.{u}} (f' : X' ⟶ Y') (h : X' ⟶ X) (k : Y' ⟶ Y) (comm : h ≫ f = f' ≫ k) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x' : Spec (.of Ω) ⟶ X') (L : EtaleDerived X Λ), ((strictLocalSigmaModules.{u, v} f' x').pull (Coeff.{u, v} Λ)).map (baseChange f f' h k comm Λ L) ≫ (strictLocalDescriptionComparison.{u, v} f' x' Λ).app (((etaleModules h).pull (Coeff Λ)).obj L) = strictLocalRestrictedComparison.{u, v} f f' h k comm x' Λ L) ∧ (∀ {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) (A B : EtaleDerived X Λ), IsIso (((strictLocalSigmaModules.{u, v} f x).pull (Coeff.{u, v} Λ)).map (laxTensor f Λ A B))) ∧ (∀ {X₁ X₂ : Scheme.{u}} (f₁ : X₁ ⟶ Y) (f₂ : X₂ ⟶ Y) [LocallyOfFiniteType f₁] [LocallyOfFiniteType f₂] (L₁ : EtaleDerived X₁ Λ) (L₂ : EtaleDerived X₂ Λ) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ pullback f₁ f₂), IsIso (((strictLocalSigmaModules.{u, v} (productMap f₁ f₂) x).pull (Coeff.{u, v} Λ)).map (kunneth f₁ f₂ Λ L₁ L₂))) ∧ (IsPsiGood f Λ K ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X), HasLocalizedBaseChange (Scheme.strictHenselizationMap f x) Λ (((etaleModules.{u, v} (Scheme.strictHenselizationStructuralMap x)).pull (Coeff.{u, v} Λ)).obj K)) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X), HasLocalizedBaseChange (Scheme.strictHenselizationMap f x) Λ (((etaleModules.{u, v} (Scheme.strictHenselizationStructuralMap x)).pull (Coeff.{u, v} Λ)).obj K) → ∀ S : StrictLocalTestSquare (Scheme.strictHenselizationMap f x), HasLocalizedBaseChange S.g' Λ (((etaleModules.{u, v} S.h).pull (Coeff.{u, v} Λ)).obj (((etaleModules.{u, v} (Scheme.strictHenselizationStructuralMap x)).pull (Coeff.{u, v} Λ)).obj K)))",
   "branch": "newtargets-dag",
-  "by": "Q68",
-  "date": "2026-10-17",
+  "by": "Q40",
+  "date": "2026-10-18",
   "existing": false,
   "note": "The full statement is rendered by the listed description, conservativity, ordinary/lax/external compatibility, and base-change-criterion declarations. Canonical auxiliary maps belong to this node and retain their scalar-insertion, counit, or projection normalizations."
  }
