@@ -39,7 +39,7 @@ No derived completeness condition is imposed.
 
 If the constructible `R`-modules are closed under kernels, cokernels and extensions, the
 bounded constructible complexes form a triangulated subcategory
-(`ProEtale.isTriangulated_boundedConstructible`). These closure hypotheses concern the
+(`ProEtale.isTriangulated_boundedConstructible_of_serre`). These closure hypotheses concern the
 coefficient ring as well as the scheme: noetherianity of the underlying space alone does
 not imply them for an arbitrary `R`. The definition `ProEtale.boundedConstructible` makes
 sense without them, on any scheme. Neither this definition nor its full subcategory is
@@ -171,6 +171,11 @@ instance (priority := 2000) isTriangulated_boundedConstructible_of_serre
     DerivedCategory.homologyProperty (IsConstructibleModuleObject R)).IsTriangulated
   infer_instance
 
+/- STATEMENT-DISPUTED: noetherianity of X alone does not imply this for arbitrary R.
+The square-zero coefficient ring k ⊕ V with V infinite dimensional has a map between
+rank-one free modules whose kernel is V and is not finitely generated. The signature is
+retained verbatim; the valid closure-dependent theorem above is fully proved. The integral
+p-adic specialization is in Sheaf.AlgebraicGeometry.PadicIntegersBoundedTriangulated. -/
 /-- The bounded constructible complexes on a topologically noetherian scheme form a triangulated
 subcategory. -/
 instance isTriangulated_boundedConstructible [TopologicalSpace.NoetherianSpace X] :

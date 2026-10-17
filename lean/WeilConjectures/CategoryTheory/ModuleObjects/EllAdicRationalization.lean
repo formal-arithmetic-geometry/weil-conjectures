@@ -13,6 +13,9 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
+import Sheaf.Paper.ContinuousIntegralScalarExact
+import Sheaf.AlgebraicGeometry.BoundedConstructibleExtendScalars
+
 /-!
 
 # Bounded constructible `E`-coefficients as `𝒪_E`-coefficients with `ℓ` inverted
@@ -49,9 +52,10 @@ functors (`ProEtale.rationalizationQCompEquivalenceIso`).
 
 The statement is made on bounded constructible complexes only: on the full derived categories
 `D(Mod_{𝒪_{E,X}}) ⥤ D(Mod_{E_X})` is not a localization at the morphisms with `ℓ`-power-torsion
-mapping cone in general. Noetherianity makes the bounded constructible complexes a triangulated
-subcategory (`ProEtale.isTriangulated_boundedConstructible`), on which the rationalization is
-defined.
+mapping cone in general. The rationalization statements below retain the upstream
+triangulated instance. Its arbitrary-coefficient form is disputed in its defining module;
+the valid integral-coefficient specialization is proved separately in
+`Sheaf.AlgebraicGeometry.PadicIntegersBoundedTriangulated`.
 
 Neither description is taken as a definition: `E_X` is defined by its sections, not as
 `𝒪_{E,X}[1/ℓ]`, following `WeilConjectures/RefactorInstruction.tex`. Finiteness of `E` is what
@@ -60,8 +64,6 @@ nonzero element divides a power of `ℓ`.
 
 ## Sorried input
 
-* `ProEtale.boundedConstructible_derivedExtendScalars_obj`: `L(extendScalars φ)` preserves
-  bounded constructible complexes.
 * `ProEtale.isLocalization_boundedConstructibleExtendScalars`: on bounded constructible
   complexes, `L(extendScalars φ)` is a localization functor for the morphisms with
   `ℓ`-power-torsion mapping cone.
@@ -114,14 +116,33 @@ noncomputable abbrev padicIntegersToPadicSubfield :
 /-! ### Extension of scalars on bounded constructible complexes -/
 
 /-- The derived extension of scalars `E ⊗ᴸ_{𝒪_E} - : D(Mod_{𝒪_{E,X}}) ⥤ D(Mod_{E_X})` preserves
-bounded constructible complexes. -/
+bounded constructible complexes.
+
+Source: the exact scalar-extension argument of the rationalization comparison, using
+`CondensedRing.integralScalarExtension_exact` and
+`boundedConstructible_leftDerivedExtendScalars_obj`.
+Proof: give E the norm induced by its fixed embedding. Its integral coefficient ring
+and inclusion agree definitionally with the continuous integral coefficients. Scalar
+extension is exact, so the generic finite-presentation and homology argument preserves
+constructibility and the same cohomological bounds. No noetherian assumption is needed.
+(blueprint: lem-sfb-extend-scalars-bounded-constructible) -/
 lemma boundedConstructible_derivedExtendScalars_obj
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)))
     (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X) K) :
     boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E.1) X)
       ((Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)).leftDerivedFunctor.obj K) :=
-  sorry
+  by
+    let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
+    let : NormedAlgebra ℚ_[ℓ] E.1 :=
+      { norm_smul_le c x := by
+          change ‖algebraMap E.1 (PadicAlgCl ℓ) (c • x)‖ ≤
+            ‖c‖ * ‖algebraMap E.1 (PadicAlgCl ℓ) x‖
+          rw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply, norm_mul,
+            PadicAlgCl.norm_extends] }
+    have : PreservesFiniteLimits (Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E)) :=
+      CondensedRing.integralScalarExtension_exact ℓ E.1 X
+    exact boundedConstructible_leftDerivedExtendScalars_obj _ _ _ K hK
 
 /-- The derived extension of scalars `E ⊗ᴸ_{𝒪_E} - : D_cons(X_proét, 𝒪_E) ⥤ D_cons(X_proét, E)`
 on bounded constructible complexes: the restriction of

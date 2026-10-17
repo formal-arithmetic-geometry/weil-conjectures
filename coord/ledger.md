@@ -15778,3 +15778,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:36 L: batch 20261017T021556 dependency take-out
 - 02:43 L: merged deliver/A2/Sheaf.Paper.IntegralResidueScalarGeometryBridge (stage 3; reviewer PASS; after a return; landing 20261017T024325-L-1172589 (interface); batch 20261017T024323; modules 3; new nodes 2; change records: coord/changes/integral-residue-ordinary-regular-pull-iso.md)
 - 02:43 L: merged deliver/C4/Sheaf.Paper.IntegralResiduePullFlatModel (stage 3; reviewer PASS; after a return; landing 20261017T024326-L-1172749 (proof); batch 20261017T024323; modules 1; new nodes 0)
+- 02:43 L: merged deliver/C4/WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory (stage 3; reviewer PASS; after a return; landing 20261017T024326-L-1172933 (interface); batch 20261017T024323; modules 3; new nodes 1; change records: coord/changes/C4-preserve-upstream-triangulation-interface.md)
