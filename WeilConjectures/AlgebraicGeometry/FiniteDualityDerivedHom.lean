@@ -114,9 +114,8 @@ theorem finite_duality_derived_hom {X Y : Scheme.{u}}
   obtain ⟨H, adjH, ι, hH⟩ :=
     exists_affine_derivedHom_evaluation_counit.{u, wY, wA} f
   obtain ⟨dH, hdH⟩ := hH K.obj
-  have haK := finiteTwistedInverse_boundedBelow f R comparison a adj K hK
   obtain ⟨c, φ, hφ⟩ :=
-    finite_affine_adjoint_counit_comparison.{u, wX, wY, wA} f R comparison a adj ρR adjA K hK haK
+    finite_affine_adjoint_counit_comparison.{u, wX, wY, wA} f R comparison a adj ρR adjA K hK
   let e := (adjA.rightAdjointUniq adjH).app K.obj
   let ρ := (SheafOfModules.restrictScalars
     (R := moduleRings Y.toRingedSpace)
