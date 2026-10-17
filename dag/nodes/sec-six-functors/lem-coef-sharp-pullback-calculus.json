@@ -12,13 +12,10 @@
  ],
  "proof": [
   {
-   "text": "Work in the functorial Kan--Quillen model structure of [lem-coef-kan-quillen-model-right-proper-core]. For a simplicial set $X$ write $X\\to RX\\to\\Delta^0$ for the functorial factorization into a trivial cofibration followed by a Kan fibration, so $RX$ is a Kan complex and $X\\to RX$ is a weak equivalence, natural in $X$. For a cospan of Kan complexes $U\\xrightarrow{u}W\\xleftarrow{v}V$, use the path-space model, formed from products and the internal functor simplicial set of [def-cbc-enhanced-diagrams-cones], namely $P(u,v)=U\\times_{W,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,W)\\times_{\\operatorname{ev}_1,W}V$. By [lem-coef-kan-pullback-path-comparison], if one leg is a Kan fibration, the constant-path map from the strict pullback to this path model is a weak equivalence. The theorem [lem-coef-kan-homotopy-pullback-invariance] says that $P$ carries every strictly commuting objectwise weak equivalence of Kan cospans to a weak equivalence. In particular, a weak-equivalence/fibration factorization gives a strict map of cospans from the original Kan cospan to its factored one; invariance and the constant-path comparison identify the latter strict pullback with the original path model. This uses neither Brown localization nor the full coherent Kan theorem. For an arbitrary commutative square with upper-left corner $Q$ over a cospan $X\\to Z\\xleftarrow{g}Y$, the definition in the statement therefore says: the square is homotopy cartesian iff $RQ\\to P(RX\\to RZ\\leftarrow RY)$, $q\\mapsto(q_X,\\text{constant path},q_Y)$, is a weak equivalence. Three consequences are used below. (a) If a map of commutative squares is a weak equivalence at all four corners, one square is homotopy cartesian iff the other is: apply $R$, the invariance of $P$, and two-out-of-three. (b) If $g$ is a Kan fibration (no hypothesis on the objects), the square is homotopy cartesian iff $Q\\to X\\times_ZY$ is a weak equivalence. Indeed, factor $Y\\to Z\\to RZ$ as a weak equivalence $Y\\to Y'$ followed by a Kan fibration $Y'\\to RZ$, so $Y'$ is Kan; the lifting axiom for the trivial cofibration $Y\\to RY$ against $Y'\\to RZ$ gives $RY\\to Y'$ over $RZ$ under $Y$, a weak equivalence by two-out-of-three. Then $X\\times_ZY\\to RX\\times_{RZ}Y'$ is a weak equivalence by [lem-coef-kan-pullback-fibration-invariance] (map of cospans $X\\to RX$, $Z\\to RZ$, $Y\\to Y'$, with Kan-fibration legs $g$ and $Y'\\to RZ$); $RX\\times_{RZ}Y'\\to P(RX\\to RZ\\leftarrow Y')$ is one by [lem-coef-kan-pullback-path-comparison]; and $P(RX\\to RZ\\leftarrow RY)\\to P(RX\\to RZ\\leftarrow Y')$ is one by [lem-coef-kan-homotopy-pullback-invariance]. The two composites $Q\\to P(RX\\to RZ\\leftarrow Y')$, through $X\\times_ZY$ and through $RQ$, agree degreewise (both send $q$ to the images of $q_X$ and $q_Y$ with the constant path, because $Y\\to RY\\to Y'$ is $Y\\to Y'$), and $Q\\to RQ$ is a weak equivalence, so two-out-of-three gives (b). In particular a strict pullback square along a Kan fibration is homotopy cartesian. (c) For arbitrary $g$, factor it as a weak equivalence $Y\\to Y_f$ followed by a Kan fibration $Y_f\\to Z$; by (a) applied to the map of squares that is the identity on $Q,X,Z$ and $Y\\to Y_f$ on the last corner, followed by (b), the square is homotopy cartesian iff $Q\\to X\\times_ZY_f$ is a weak equivalence. Edge cases: empty objects and non-Kan objects are allowed throughout, since the cited statements impose no nonemptiness or Kan hypothesis beyond those checked here.",
+   "text": "Fix a functorial fibrant replacement $r:\\mathrm{id}\\to R$ from [lem-coef-kan-quillen-model-right-proper-core]. By [lem-coef-kan-fibrant-path-recognition], for every commutative square $Q\\to X$ over $Y\\to Z$, its homotopy-cartesianness is equivalent to the constant-path comparison $RQ\\to RX\\times_{RZ,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,RZ)\\times_{\\operatorname{ev}_1,RZ}RY$ being a weak equivalence. This supplies the explicit bridge to the Kan path model used in the pasting steps below.",
    "uses": [
     "lem-coef-kan-quillen-model-right-proper-core",
-    "lem-coef-kan-pullback-path-comparison",
-    "lem-coef-kan-homotopy-pullback-invariance",
-    "lem-coef-kan-pullback-fibration-invariance",
-    "def-cbc-enhanced-diagrams-cones"
+    "lem-coef-kan-fibrant-path-recognition"
    ],
    "elementary": false,
    "source": {
@@ -27,7 +24,42 @@
    }
   },
   {
-   "text": "Let $p:E\\to B$ and first assume it is sharp. Let $u:A\\to A'$ be a weak equivalence over $B$, with structure maps $a:A\\to B$, $a':A'\\to B$ and $a'u=a$. Factor $p$ as a weak equivalence $E\\to E_f$ followed by a Kan fibration $E_f\\to B$. The strict pullback squares of $p$ along $a$ and $a'$ are homotopy cartesian by sharpness, so by Step 1(c), applied with the factored leg $p$, the maps $E\\times_BA\\to E_f\\times_BA$ and $E\\times_BA'\\to E_f\\times_BA'$ are weak equivalences. The map $E_f\\times_BA\\to E_f\\times_BA'$ is a weak equivalence by [lem-coef-kan-pullback-fibration-invariance], applied to the map of cospans $(\\mathrm{id}_{E_f},\\mathrm{id}_B,u)$ whose legs $E_f\\to B$ are Kan fibrations. The evident square of these four pullbacks commutes, so two-out-of-three gives that $E\\times_BA\\to E\\times_BA'$ is a weak equivalence. Conversely assume that pullback along $p$ carries every weak equivalence over $B$ to a weak equivalence. For any $t:T\\to B$ factor $t$ as a weak equivalence $T\\to T_f$ followed by a Kan fibration $T_f\\to B$. By hypothesis $E\\times_BT\\to E\\times_BT_f$ is a weak equivalence, and by Step 1(c), applied with the factored leg $t$, this says exactly that the strict pullback square $E\\times_BT\\to E$ over $T\\to B$ is homotopy cartesian. Hence $p$ is sharp. (Edge case: $u=\\mathrm{id}$ gives the identity; $T=\\varnothing$ gives empty pullbacks on both sides.)",
+   "text": "For a strictly commuting map of square diagrams which is a weak equivalence at every corner, apply [lem-coef-kan-homotopy-cartesian-invariance]. It preserves and reflects homotopy-cartesianness even when the original corners are not Kan.",
+   "uses": [
+    "lem-coef-kan-homotopy-cartesian-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 2, definition of homotopy-cartesian square (homotopy pullback via fibrant replacement in a right proper model category)"
+   }
+  },
+  {
+   "text": "For a square over $X\\to Z\\xleftarrow{g}Y$ with $g$ a Kan fibration, [lem-coef-kan-homotopy-cartesian-fibration-criterion] says that it is homotopy cartesian exactly when the canonical map $Q\\to X\\times_ZY$ is a weak equivalence. Only the leg $g$, not the objects, is required to be fibrant.",
+   "uses": [
+    "lem-coef-kan-homotopy-cartesian-fibration-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 2, definition of homotopy-cartesian square (homotopy pullback via fibrant replacement in a right proper model category)"
+   }
+  },
+  {
+   "text": "For arbitrary $g:Y\\to Z$, factor $g$ as $Y\\xrightarrow{\\sim}Y_f\\to Z$ with the last map a Kan fibration, using [lem-coef-kan-quillen-model-right-proper-core]. The induced map of squares is the identity on $Q,X,Z$ and the weak equivalence $Y\\to Y_f$ on the fourth corner. Apply [lem-coef-kan-homotopy-cartesian-invariance] and then [lem-coef-kan-homotopy-cartesian-fibration-criterion]. Thus the original square is homotopy cartesian if and only if $Q\\to X\\times_ZY_f$ is a weak equivalence. This is just the two successive applications, with no additional comparison lemma.",
+   "uses": [
+    "lem-coef-kan-quillen-model-right-proper-core",
+    "lem-coef-kan-homotopy-cartesian-invariance",
+    "lem-coef-kan-homotopy-cartesian-fibration-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://rezk.web.illinois.edu/rezk-sharp-maps.pdf",
+    "place": "Section 2, definition of homotopy-cartesian square (homotopy pullback via fibrant replacement in a right proper model category)"
+   }
+  },
+  {
+   "text": "Let $p:E\\to B$ and first assume it is sharp. Let $u:A\\to A'$ be a weak equivalence over $B$, with structure maps $a:A\\to B$, $a':A'\\to B$ and $a'u=a$. Factor $p$ as a weak equivalence $E\\to E_f$ followed by a Kan fibration $E_f\\to B$. The strict pullback squares of $p$ along $a$ and $a'$ are homotopy cartesian by sharpness, so by Step 4, applied with the factored leg $p$, the maps $E\\times_BA\\to E_f\\times_BA$ and $E\\times_BA'\\to E_f\\times_BA'$ are weak equivalences. The map $E_f\\times_BA\\to E_f\\times_BA'$ is a weak equivalence by [lem-coef-kan-pullback-fibration-invariance], applied to the map of cospans $(\\mathrm{id}_{E_f},\\mathrm{id}_B,u)$ whose legs $E_f\\to B$ are Kan fibrations. The evident square of these four pullbacks commutes, so two-out-of-three gives that $E\\times_BA\\to E\\times_BA'$ is a weak equivalence. Conversely assume that pullback along $p$ carries every weak equivalence over $B$ to a weak equivalence. For any $t:T\\to B$ factor $t$ as a weak equivalence $T\\to T_f$ followed by a Kan fibration $T_f\\to B$. By hypothesis $E\\times_BT\\to E\\times_BT_f$ is a weak equivalence, and by Step 4, applied with the factored leg $t$, this says exactly that the strict pullback square $E\\times_BT\\to E$ over $T\\to B$ is homotopy cartesian. Hence $p$ is sharp. (Edge case: $u=\\mathrm{id}$ gives the identity; $T=\\varnothing$ gives empty pullbacks on both sides.)",
    "uses": [
     "lem-coef-kan-pullback-fibration-invariance",
     "lem-coef-kan-quillen-model-right-proper-core"
@@ -39,7 +71,7 @@
    }
   },
   {
-   "text": "Sharpness is stable under arbitrary base change. Let $g:B'\\to B$ and $p':E'=E\\times_BB'\\to B'$. If $u:A\\to A'$ is a weak equivalence over $B'$, composing the structure maps with $g$ makes it a weak equivalence over $B$, and $E'\\times_{B'}A=E\\times_BA$, $E'\\times_{B'}A'=E\\times_BA'$ canonically and compatibly with $u$. By the forward direction of Step 2 for $p$ the induced map is a weak equivalence, so by the converse direction of Step 2, $p'$ is sharp. Taking $g$ to be the projection $B\\times K\\to B$, whose pullback of $p$ is canonically $p\\times\\mathrm{id}_K:E\\times K\\to B\\times K$, shows that $p\\times\\mathrm{id}_K$ is sharp for every simplicial set $K$ (including $K=\\varnothing$).",
+   "text": "Sharpness is stable under arbitrary base change. Let $g:B'\\to B$ and $p':E'=E\\times_BB'\\to B'$. If $u:A\\to A'$ is a weak equivalence over $B'$, composing the structure maps with $g$ makes it a weak equivalence over $B$, and $E'\\times_{B'}A=E\\times_BA$, $E'\\times_{B'}A'=E\\times_BA'$ canonically and compatibly with $u$. By the forward direction of Step 5 for $p$ the induced map is a weak equivalence, so by the converse direction of Step 5, $p'$ is sharp. Taking $g$ to be the projection $B\\times K\\to B$, whose pullback of $p$ is canonically $p\\times\\mathrm{id}_K:E\\times K\\to B\\times K$, shows that $p\\times\\mathrm{id}_K$ is sharp for every simplicial set $K$ (including $K=\\varnothing$).",
    "uses": [],
    "elementary": true,
    "source": {
@@ -48,9 +80,11 @@
    }
   },
   {
-   "text": "Consider a commutative square $E'\\to E$ over $B'\\to B$ with $p:E\\to B$ sharp, and put $P=B'\\times_BE$ with its projection $q:P\\to B'$. The square factors as the square $E'\\to P$ over $\\mathrm{id}_{B'}$ followed by the strict pullback square $P\\to E$ over $B'\\to B$, which is homotopy cartesian because $p$ is sharp. Apply the functorial replacement $R$ of Step 1 to this diagram of two adjacent strict squares; it consists of Kan complexes and strictly commuting squares, and by Step 1 each of the three squares (left, right, outer) is homotopy cartesian iff its $R$-image is a homotopy pullback in the path sense. The pasting criterion [lem-coef-infinity-homotopy-pullback-pasting], with the right square a homotopy pullback, says the left $R$-square is a homotopy pullback iff the outer one is. So the original square is homotopy cartesian iff the square $E'\\to P$ over $\\mathrm{id}_{B'}$ is. The identity $\\mathrm{id}_{B'}$ is a Kan fibration, so by Step 1(b) the latter square is homotopy cartesian iff $E'\\to P\\times_{B'}B'=P$, the canonical map, is a weak equivalence.",
+   "text": "Consider a commutative square $E'\\to E$ over $B'\\to B$ with $p:E\\to B$ sharp, and put $P=B'\\times_BE$ with its projection $q:P\\to B'$. The square factors as the square $E'\\to P$ over $\\mathrm{id}_{B'}$ followed by the strict pullback square $P\\to E$ over $B'\\to B$, which is homotopy cartesian because $p$ is sharp. Apply the functorial replacement $R$ of Step 1 to this diagram of two adjacent strict squares; it consists of Kan complexes and strictly commuting squares, and by Step 1 each of the three squares (left, right, outer) is homotopy cartesian iff its $R$-image is a homotopy pullback in the path sense. The pasting criterion [lem-coef-infinity-homotopy-pullback-pasting], with the right square a homotopy pullback, says the left $R$-square is a homotopy pullback iff the outer one is. So the original square is homotopy cartesian iff the square $E'\\to P$ over $\\mathrm{id}_{B'}$ is. The identity $\\mathrm{id}_{B'}$ is a Kan fibration, so by Step 3 the latter square is homotopy cartesian iff $E'\\to P\\times_{B'}B'=P$, the canonical map, is a weak equivalence.",
    "uses": [
-    "lem-coef-infinity-homotopy-pullback-pasting"
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-kan-fibrant-path-recognition",
+    "lem-coef-kan-homotopy-cartesian-fibration-criterion"
    ],
    "elementary": false,
    "source": {
@@ -59,9 +93,10 @@
    }
   },
   {
-   "text": "Assume also that $p':E'\\to B'$ is sharp and that the square $E'\\to E$ over $b:B'\\to B$ is homotopy cartesian. Let $t:T\\to B'$. The strict pullback square $E'\\times_{B'}T\\to E'$ over $t$ is homotopy cartesian because $p'$ is sharp. Paste it to the left of the given square: after the replacement $R$ of Step 1, [lem-coef-infinity-homotopy-pullback-pasting] (right square a homotopy pullback, left square a homotopy pullback) makes the outer rectangle, i.e. the square $E'\\times_{B'}T\\to E$ over $bt:T\\to B$, homotopy cartesian. Since $p$ is sharp, Step 4 applied to this outer square says this is equivalent to its canonical map $E'\\times_{B'}T\\to T\\times_BE$ being a weak equivalence; this canonical map is the induced comparison of the statement. This proves both formulations and their equivalence.",
+   "text": "Assume also that $p':E'\\to B'$ is sharp and that the square $E'\\to E$ over $b:B'\\to B$ is homotopy cartesian. Let $t:T\\to B'$. The strict pullback square $E'\\times_{B'}T\\to E'$ over $t$ is homotopy cartesian because $p'$ is sharp. Paste it to the left of the given square: after the replacement $R$ of Step 1, [lem-coef-infinity-homotopy-pullback-pasting] (right square a homotopy pullback, left square a homotopy pullback) makes the outer rectangle, i.e. the square $E'\\times_{B'}T\\to E$ over $bt:T\\to B$, homotopy cartesian. Since $p$ is sharp, Step 7 applied to this outer square says this is equivalent to its canonical map $E'\\times_{B'}T\\to T\\times_BE$ being a weak equivalence; this canonical map is the induced comparison of the statement. This proves both formulations and their equivalence.",
    "uses": [
-    "lem-coef-infinity-homotopy-pullback-pasting"
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-kan-fibrant-path-recognition"
    ],
    "elementary": false,
    "source": {
@@ -70,9 +105,10 @@
    }
   },
   {
-   "text": "Pasting: for two horizontally adjacent homotopy-cartesian squares (the hypothesis that the three vertical maps are sharp is not needed here), apply the replacement $R$ of Step 1 to the whole diagram and then [lem-coef-infinity-homotopy-pullback-pasting]; the outer $R$-rectangle is a homotopy pullback, so the outer rectangle is homotopy cartesian by Step 1. Products: let $E'\\to E$ over $b:B'\\to B$ be homotopy cartesian with $p,p'$ sharp, let $K$ be a simplicial set, and put $P=B'\\times_BE$ with $q:P\\to B'$. By Step 3, $q$ is sharp, and by Step 4 for the given square, $c:E'\\to P$ is a weak equivalence. The square $c:E'\\to P$ over $\\mathrm{id}_{B'}$ has sharp vertical maps $p',q$ and is homotopy cartesian by Step 4 applied with the sharp map $q$ (its canonical map is $c$). Apply Step 5 to it with $T=B'\\times K\\to B'$ the projection: $c\\times\\mathrm{id}_K:E'\\times K\\to P\\times K$ is a weak equivalence. Now $(B'\\times K)\\times_{B\\times K}(E\\times K)=P\\times K$ canonically, with $c\\times\\mathrm{id}_K$ as the canonical map of the product square, and $p\\times\\mathrm{id}_K$ is sharp by Step 3; Step 4 therefore makes the product square homotopy cartesian.",
+   "text": "Pasting: for two horizontally adjacent homotopy-cartesian squares (the hypothesis that the three vertical maps are sharp is not needed here), apply the replacement $R$ of Step 1 to the whole diagram and then [lem-coef-infinity-homotopy-pullback-pasting]; the outer $R$-rectangle is a homotopy pullback, so the outer rectangle is homotopy cartesian by Step 1. Products: let $E'\\to E$ over $b:B'\\to B$ be homotopy cartesian with $p,p'$ sharp, let $K$ be a simplicial set, and put $P=B'\\times_BE$ with $q:P\\to B'$. By Step 6, $q$ is sharp, and by Step 7 for the given square, $c:E'\\to P$ is a weak equivalence. The square $c:E'\\to P$ over $\\mathrm{id}_{B'}$ has sharp vertical maps $p',q$ and is homotopy cartesian by Step 7 applied with the sharp map $q$ (its canonical map is $c$). Apply Step 8 to it with $T=B'\\times K\\to B'$ the projection: $c\\times\\mathrm{id}_K:E'\\times K\\to P\\times K$ is a weak equivalence. Now $(B'\\times K)\\times_{B\\times K}(E\\times K)=P\\times K$ canonically, with $c\\times\\mathrm{id}_K$ as the canonical map of the product square, and $p\\times\\mathrm{id}_K$ is sharp by Step 6; Step 7 therefore makes the product square homotopy cartesian.",
    "uses": [
-    "lem-coef-infinity-homotopy-pullback-pasting"
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-kan-fibrant-path-recognition"
    ],
    "elementary": false,
    "source": {
@@ -92,11 +128,11 @@
  ],
  "proof_deps": [
   "lem-coef-infinity-homotopy-pullback-pasting",
-  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-fibrant-path-recognition",
+  "lem-coef-kan-homotopy-cartesian-fibration-criterion",
+  "lem-coef-kan-homotopy-cartesian-invariance",
   "lem-coef-kan-pullback-fibration-invariance",
-  "lem-coef-kan-pullback-path-comparison",
-  "lem-coef-kan-quillen-model-right-proper-core",
-  "def-cbc-enhanced-diagrams-cones"
+  "lem-coef-kan-quillen-model-right-proper-core"
  ],
  "proof_origin": {
   "by": "agent",
@@ -200,7 +236,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-rezk-diagonal-sharp",
@@ -260,16 +296,16 @@
   "date": "2026-10-17",
   "item": "lem-coef-sharp-pullback-calculus",
   "worker": "stage1",
-  "summary": "Audited the imported Rezk sharp-map statement against Proposition 2.7 and its Section 2 consequences. No existing declaration or Mathlib theorem states this calculus, so no new nodes were needed. Maintainer-reader repair (2026-10-17): Step 1 now fixes the fibrant-replacement model of homotopy pullbacks and derives, from the existing same-unit nodes lem-coef-kan-pullback-fibration-invariance, lem-coef-kan-pullback-path-comparison and lem-coef-kan-homotopy-pullback-invariance, that a square over a cospan with a Kan-fibration leg (arbitrary, possibly non-Kan objects) is homotopy cartesian iff its map to the strict pullback is a weak equivalence; Step 2 proves the weak-equivalence criterion from it; Step 3 proves base change through the criterion (the former identification of the base-changed pullback square with the original one was wrong); Steps 4-6 apply lem-coef-infinity-homotopy-pullback-pasting after the functorial replacement, prove the base-changed comparison by pasting plus Step 4, and the product clause by Steps 3-5; Step 7 identifies the final product square as a strict pullback of the sharp map p x id_L.",
-  "blueprint": "The steps realize paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md at the displayed derived coefficient adjunction, where the simplicial mapping-space/pullback calculus is the foundational comparison used before the inverse-limit adjunction.",
+  "summary": "Repaired the human return on the 3448-character first step. Extracted the fibrant-replacement/path recognition, objectwise-square invariance, and arbitrary-base Kan-fibration comparison as three statement-only nodes. The arbitrary-leg factorization is a short elementary application of the latter two nodes, rather than an extra node. Retained the six remaining returned-head steps and route with corrected step numbers and explicit bridge citations. The item statement and stage-2 Lean record are unchanged. Reused the preserved search log, correcting the earlier accidental association of LeanFinder records with LeanSearch results.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md, displayed derived coefficient adjunction: the sharp-map/pullback calculus is a foundational comparison along the inherited ancestry. Steps 1--4 extract the original step 1 setup and consequences (a)--(c); Steps 5--10 retain the original steps 2--7.",
   "tool_uses": []
  },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q15-504ae365b",
-  "group": "Q15",
+  "reviewer": "NT-cc-Q123-57b3e3ead",
+  "group": "Q123",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-504ae365b (reviewer sub-agent of L); spot-checked: All seven clauses of the item are true and the statement is unchanged; there are no new nodes. I checked them on small cases: p=id, B=pt, T empty, K→L=∅→L, and (E×L)×_{B×L}(B×K)≅E×K. The proof had four faults, all repaired in fixes/dag/nodes/sec-six-functors/lem-coef-sharp-pullback-calculus.json, which changes only proof, proof_deps and split_report.summary. C4: Steps 2 and 5 credited lem-coef-kan-quillen-right-proper with the claim that a strict pullback along a Kan fibration over a non-Kan base computes the homotopy pullback; that node only covers cospans of Kan complexes. The steps now cite the existing same-unit node lem-coef-kan-pullback-fibration-invariance. C1: Steps 4 and 6 applied the path-model pasting node (Kan complexes) to squares of arbitrary simplicial sets with no cited bridge. Step 1 now builds the comparison from lem-coef-kan-pullback-path-comparison and lem-coef-kan-homotopy-pullback-invariance and proves that a square with a Kan-fibration leg is homotopy cartesian iff its map to the strict pullback is a weak equivalence. E3: Step 3's first argument identified the pullback square of the base-changed map with the square for p, which is wrong; only the correct argument through the Step 2 criterion is kept. E5: Steps 5 and 6 were placeholders ('replacement cube', and a fibration B'×K→B' that does not exist for non-Kan K). Step 5 is now pasting plus Step 4. The product clause now goes through Steps 3–5 applied to the sharp map P=B'×_B E→B'. All five proof dependencies are split, reviewed and in unit sk-prop-sf-biduality-general; there is no cycle (closures checked), no tool_uses and no SGA citation. Rezk's paper is not archived and the URL refused connection from this server, so I could not check its numbering (Prop. 2.7); proof_origin stays agent and the WANTED line stays. The mathematics was checked independently, as set out in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-57b3e3ead (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes, every cited statement and the duplicate candidates in full; no fixes were needed. The item statement and its stage-2 Lean record are unchanged, and the old 3448-char Step 1 is now three statement-only nodes plus Steps 1-4 (longest step now 1377 chars). All three new nodes are true. (1) fibrant-path-recognition: checked via naturality of r, the right-proper fact that a strict pullback along fibrations computes the homotopy pullback, kan-homotopy-pullback-invariance and 2-of-3. (2) homotopy-cartesian-invariance: it requires a strictly commuting map of squares, and the proof goes through R, the path-model invariance and 2-of-3. (3) fibration-criterion: it requires only the leg g to be a Kan fibration and is a genuine lemma, since the forward direction needs independence of the factorization. Edge cases checked: g=id gives Q->X, Y empty, Z empty, non-Kan base Delta^1. Steps: Step 5 applies pullback-fibration-invariance to the cospan map (id,id,u), whose legs E_f->B are both fibrations, exactly as that node requires. Step 7 applies pasting only after R, so to Kan complexes, then the criterion with id_{B'}. Steps 8-9 meet every hypothesis of Steps 7 and 8; the product clause goes through the sharp q:P->B' and c x id_K, with no fibration B'xK->B' assumed. Steps 6 and 10 are honest elementary pullback identities. No new node restates a clause of the item. A sweep of the whole DAG for homotopy-cartesian, homotopy-pullback and fibrant-replacement statements found no duplicate. Every dependency is in unit sk-prop-sf-biduality-general, there is no cycle among the 147 transitive dependencies, there are no tool_uses, and there is no SGA. The base-change and coefficient-category check does not apply (a simplicial homotopy lemma, not a target). Residuals: Rezk is cited only by URL, the WANTED line is recorded, proof_origin is agent, and the Prop. 2.7 / Lemma 2.5 numbering could not be checked from this server."
  }
 }

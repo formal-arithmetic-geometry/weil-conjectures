@@ -16,9 +16,53 @@
   "def-kun-commutative-derived-exchange",
   "lem-weil-pbc-derived-inverse-image-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-kun-commutative-derived-exchange], each of $E_0$, $E_1$, $P$ and $Q$ is the mate of its displayed inverse-image comparison. In the orientation of that definition, $E_b$ is the mate of $\\theta_b:h_b^{-1}f_b^{-1}\\xrightarrow{\\sim}e_b^{-1}g_b^{-1}$, $P$ is the mate of $\\theta_P:g_1^{-1}s^{-1}\\xrightarrow{\\sim}a^{-1}g_0^{-1}$, and $Q$ is the mate of $\\theta_Q:h_1^{-1}x^{-1}\\xrightarrow{\\sim}y^{-1}h_0^{-1}$. These comparisons are defined for arbitrary commutative faces, so no cartesian or invertibility hypothesis has been introduced.",
+   "uses": [
+    "def-kun-commutative-derived-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change; Tag 0E47, remark-compose-base-change-horizontal"
+   }
+  },
+  {
+   "text": "Paste the inverse-image comparisons in the two possible orders. The composite corresponding to the left-hand side is $\\gamma=(e_1^{-1}\\theta_P)\\circ(\\theta_1\\,s^{-1})$, from $h_1^{-1}f_1^{-1}s^{-1}$ to $e_1^{-1}a^{-1}g_0^{-1}$. The composite corresponding to the right-hand side is $\\gamma'=(y^{-1}\\theta_0)\\circ(\\theta_Q\\,f_0^{-1})$, from $h_1^{-1}x^{-1}f_0^{-1}$ to $y^{-1}e_0^{-1}g_0^{-1}$. Let $\\sigma:x^{-1}f_0^{-1}\\xrightarrow{\\sim}f_1^{-1}s^{-1}$ be $(c^D_{s,f_1})^{-1}$ composed with transport along $f_0x=sf_1$ and with $c^D_{f_0,x}$, and let $\\tau:y^{-1}e_0^{-1}\\xrightarrow{\\sim}e_1^{-1}a^{-1}$ be defined in the same way from $e_0y=ae_1$. Each of $\\gamma\\circ(h_1^{-1}\\sigma)$ and $(\\tau\\,g_0^{-1})\\circ\\gamma'$ is a composite of whiskered isomorphisms $c^D$, their inverses and transports along the cube equations. By clause (3) of [lem-weil-pbc-derived-inverse-image-composition], the derived composition isomorphisms satisfy the associativity and unit identities. Hence both composites equal the transformation $h_1^{-1}x^{-1}f_0^{-1}\\to(f_0xh_1)^{-1}=(g_0ae_1)^{-1}\\to e_1^{-1}a^{-1}g_0^{-1}$ obtained from the triple composition isomorphisms, so $\\gamma\\circ(h_1^{-1}\\sigma)=(\\tau\\,g_0^{-1})\\circ\\gamma'$.",
+   "uses": [
+    "lem-weil-pbc-derived-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47, remark-compose-base-change-horizontal; Tag 07A7, remark-base-change"
+   }
+  },
+  {
+   "text": "Apply the mate-pasting identity [lem-weil-pbc-mate-pasting], clause 1, to the two pastings, with the adjunctions for $h_1$ and $g_0$ on the outside. The mate of $\\gamma$ is $E_1(a^{-1}K)\\circ f_1^{-1}P(K)$ and the mate of $\\gamma'$ is $Q(e_0^{-1}K)\\circ x^{-1}E_0(K)$. By the explicit unit-counit formula in [def-weil-pbc-adjunction-mate], mates are compatible with whiskering the two side functors by natural transformations. For $\\sigma$ this uses naturality of the unit $\\eta_{h_1}$, and for $\\tau$ it uses naturality of $\\tau$ against the counit $\\varepsilon_{g_0}$. So the mate of $\\gamma\\circ(h_1^{-1}\\sigma)$ is $(E_1(a^{-1}K)\\circ f_1^{-1}P(K))\\circ\\sigma_{Rg_{0,*}K}$, and the mate of $(\\tau g_0^{-1})\\circ\\gamma'$ is $Rh_{1,*}(\\tau_K)\\circ Q(e_0^{-1}K)\\circ x^{-1}E_0(K)$. Since mates are a well-defined assignment and the two transformations are equal by step 2, these two mates are equal. This is the displayed equality under the identifications $\\sigma$ and $\\tau$, for every $K$. The argument uses only units, counits and composition isomorphisms; no exchange map is cancelled or assumed invertible.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47, remark-compose-base-change-horizontal; Mathlib CategoryTheory.Adjunction.Mates mateEquiv_vcomp and mateEquiv_hcomp"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-commutative-derived-exchange",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E47, remark-compose-base-change-horizontal (the verification omitted there), together with Tag 07A7 and the mate identities in Mathlib/CategoryTheory/Adjunction/Mates.lean"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,7 +108,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-kun-0ezt",
@@ -81,5 +125,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-kun-derived-exchange-cube",
+  "worker": "stage1",
+  "summary": "Split the cube identity into three proof steps. The first expands the four exchanges as mates, the second compares the two inverse-image pastings using derived inverse-image coherence, and the third applies Mathlib mate-pasting and the mate bijection. No new node was needed; all supporting statements already exist.",
+  "blueprint": "Sole blueprint proof paragraph of lem-kun-0ezt: the canonical-map comparison uses derived cube pasting. The three steps realize that cube-pasting comparison explicitly.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-derived-inverse-image-composition",
+    "why": "Generic coherence of derived inverse-image composition identifies the two canonical inverse-image pastings; the Kunneth unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic mate-pasting is the categorical identity converting equality of pasted inverse-image comparisons into equality of exchange maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-eb7ac1e89",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-eb7ac1e89 (reviewer sub-agent of L); spot-checked: I read the item, all four cited statements and the sources in full: Stacks sites-cohomology.tex Tag 07A7 remark-base-change and Tag 0E47 remark-compose-base-change-horizontal, where the verification is omitted. The statement is true and well-typed. It needs only the six face equations, and no face has to be cartesian. Both sides agree once f_1^{-1}s^{-1} is identified with x^{-1}f_0^{-1} and y^{-1}e_0^{-1} with e_1^{-1}a^{-1}. Small cases checked: all comparison maps identities (P and Q become canonical identifications, so E_1=E_0), K=0, and the all-identity cube. The delivery creates no new nodes. My search for duplicates found none: sbc-lem-base-change-composition, sbc-lem-identity-and-base-change-composition and lem-kun-higher-exchange-coefficient-cube all state something different. Step 1: I checked the exchange orientations against def-kun-commutative-derived-exchange, namely (g_b,f_b,h_b,e_b) for E_b, (g_0,s,g_1,a) for P and (h_0,x,h_1,y) for Q. Step 3: clause 1 of lem-weil-pbc-mate-pasting gives each side as the mate of the pasted transformation gamma or gamma'. Fixed gap: gamma and gamma' have different source and target functors. Step 2 named only the target identification, and step 3 went from 'the mate assignment is a bijection' straight to equal mates. The proof also needs mates to be compatible with whiskering the side functors by sigma and tau, which follows from naturality of the unit for h_1 and naturality of tau against the counit for g_0. That is elementary from the explicit formula in def-weil-pbc-adjunction-mate, but it is not mate-pasting clause 3. The corrected item file in fixes/ rewrites steps 2 and 3 only: it defines sigma and tau, states gamma∘(h_1^{-1}sigma) = (tau g_0^{-1})∘gamma', and writes out the naturality argument. Statement, uses and proof_deps are unchanged. I accept the tool uses lem-weil-pbc-derived-inverse-image-composition (clause 3) and lem-weil-pbc-mate-pasting. No SGA source is cited.; 1 file(s) fixed by the reviewer"
  }
 }

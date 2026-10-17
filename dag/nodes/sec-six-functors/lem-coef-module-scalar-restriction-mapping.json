@@ -15,9 +15,129 @@
   "lem-coef-colored-operation-section-reconstruction",
   "lem-coef-module-scalar-restriction-coherence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $y=N(m)$. Apply [lem-coef-colored-operation-section-reconstruction] to the two-color operad described in [def-coef-left-module-operadic-encoding]. Thus transformations, with their higher parameter simplices, are maps on color objects together with operation-naturality simplices and their tree-contraction compatibilities. Fix the pure-algebra transformation $g$ on the left and the specified coherent composite $hg$ on the right. Denote these transformation spaces by $T_h(g)$ and $T_C(hg)$. The comparison in the assertion is over the space of $g$'s: its target is pulled back along $g\\mapsto hg$, retaining $g$ as part of the data. In particular it does not ask to recover $g$ from $hg$. A point on either side has a module-color map $f:y\\to x$. Throughout, fixed-component spaces mean homotopy fibers; the coherent paths specifying the components are retained. This agrees with the parameterized operation-data description and avoids replacing spaces by sets of homotopy classes.",
+   "uses": [
+    "lem-coef-colored-operation-section-reconstruction",
+    "def-coef-left-module-operadic-encoding",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definitions 4.2.1.7, 4.2.1.13 and 4.2.1.19; agent operation-data proof of the scalar-restriction comparison underlying Corollary 4.2.3.2, printed p. 527. The corollary is a check on the result, not a premise."
+   }
+  },
+  {
+   "text": "For every ordered operation with $r$ algebra inputs and one module input, put\n$$a_r=f\\,b^N_r,\\quad c_r=b^{L_h}_r(g^{\\otimes r}\\otimes f),\\quad d_r=b^{L_C}_r((hg)^{\\otimes r}\\otimes f).$$\nThe given scalar-restriction data of [lem-coef-module-scalar-restriction-coherence] identifies $b^{L_h}_r$ with $b^{L_C}_r(h^{\\otimes r}\\otimes1_x)$. Substitute this expression into $c_r$. Functoriality of the specified iterated tensor action composes the $g$'s with the $h$'s and composes $f$ with $1_x$, giving a specified path $\\sigma_r:c_r\\simeq d_r$ in $\\operatorname{Map}_{\\mathcal M}(D^{\\otimes r}\\otimes y,x)$. Thus the two naturality conditions are paths from $a_r$ to the two coherently identified endpoints. At $r=0$ the comparison uses the unit compatibility of $h$ and the identity constraint on $x$; it imposes no extra equation on $f$. Pure-algebra operations have the already specified composite transformation $hg$.",
+   "uses": [
+    "lem-coef-module-scalar-restriction-coherence",
+    "def-coef-left-module-operadic-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definitions 4.2.1.7, 4.2.1.13 and 4.2.1.19; agent operation-data proof of the scalar-restriction comparison underlying Corollary 4.2.3.2, printed p. 527. The corollary is a check on the result, not a premise."
+   }
+  },
+  {
+   "text": "Check the endpoint identification for the whole indexing system, not just one operation. A tree with module output has a unique module-input branch: at each vertex on it the other incoming subtrees have only algebra colors. Label those subtrees by the specified algebra transformation $h$, and label the module branch by the substitution data of $L_C$ and its module-color identity. This is exactly the tree construction supplied in [lem-coef-module-scalar-restriction-coherence]. Precompose the external algebra inputs by $g$ and the module input by $f$. A contraction within an algebra subtree uses the corresponding coherence of $g$, $h$, and their specified composite; a contraction meeting the module branch uses the substitution coherence just cited. Consequently the two restrictions on each contraction face are the same prescribed comparison. For a chain of contractions the higher comparison supplied by that node gives the prism between these faces. Grafting, permutations and insertion of identities use the corresponding clauses of that node. Forests are the products of their output-tree data by [lem-coef-colored-operation-section-reconstruction]; discarded inputs are omitted, while the subinterval trees before an input is discarded are retained. We have therefore identified the entire coherent endpoint system for the module-naturality data.",
+   "uses": [
+    "lem-coef-module-scalar-restriction-coherence",
+    "lem-coef-colored-operation-section-reconstruction",
+    "def-coef-left-module-operadic-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definitions 4.2.1.7, 4.2.1.13 and 4.2.1.19; agent operation-data proof of the scalar-restriction comparison underlying Corollary 4.2.3.2, printed p. 527. The corollary is a check on the result, not a premise."
+   }
+  },
+  {
+   "text": "Here is the boundary-lifting argument used to implement that identification on all the data. The mapping spaces carrying the operation and contraction comparisons are Kan by [lem-cbc-enhanced-functor-cone-calculus]. If $Z$ is any one of these spaces, $P\\subseteq Q$ a specified union of faces, and a boundary homotopy is prescribed on $P\\times\\Delta^1$, an existing comparison on $Q\\times\\{0\\}$ extends across $Q\\times\\Delta^1$. Indeed the inclusion\n$$(P\\times\\Delta^1)\\cup(Q\\times\\{0\\})\\hookrightarrow Q\\times\\Delta^1$$\nis the pushout-product of the monomorphism $P\\hookrightarrow Q$ and the endpoint horn $\\{0\\}\\hookrightarrow\\Delta^1$. It is anodyne by [lem-coef-sset-anodyne-pushout-product], so it lifts against $Z\\to *$. The same assertion with an additional parameter boundary follows by using that parameter boundary in the monomorphism. It follows that the space of these extensions is contractible whenever the prescribed data exist: lifting any boundary of parameters is the same pushout-product calculation, including the empty boundary for existence. Equivalently its map to a point is a trivial Kan fibration, by [lem-cbc-kan-fibration-fiber-criterion]. This argument is relative to any faces already fixed; it does not require their comparison spaces to be contractible.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-cbc-kan-fibration-fiber-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definitions 4.2.1.7, 4.2.1.13 and 4.2.1.19; agent operation-data proof of the scalar-restriction comparison underlying Corollary 4.2.3.2, printed p. 527. The corollary is a check on the result, not a premise."
+   }
+  },
+  {
+   "text": "For a point of $T_h(g)$ concatenate each operation-naturality path $a_r\\simeq c_r$ with $\\sigma_r$ to obtain $a_r\\simeq d_r$. For its higher tree data do the same pasting along the coherent endpoint prisms of step 3. Construct it in increasing simplex dimension, fixing all faces already constructed; step 4 supplies each relative prism. Include all tree indices at a given dimension and their parameter simplices in this construction. Faces for contractions, graftings and identities are the prescribed ones of step 3, so the lifts agree on their intersections. Degenerate simplices are assigned their already specified degeneracies. This defines the forward comparison of coherent data, with module component still $f$ and algebra component $hg$. Reversing each endpoint prism and concatenating with $\\sigma_r^{-1}$ gives the reverse construction with pure-algebra component the retained $g$. Inverting these paths is possible because their ambient mapping spaces are Kan: every edge there is an equivalence by [lem-coef-infinity-core-kan-fibration]. No inverse of the algebra map $h$ is used. The arbitrary parameter-boundary clause in step 4 makes the compatible choices contractible, rather than choosing unrelated fillers for individual families.",
+   "uses": [
+    "lem-coef-module-scalar-restriction-coherence",
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-core-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definitions 4.2.1.7, 4.2.1.13 and 4.2.1.19; agent operation-data proof of the scalar-restriction comparison underlying Corollary 4.2.3.2, printed p. 527. The corollary is a check on the result, not a premise."
+   }
+  },
+  {
+   "text": "The two composites paste an endpoint prism and its reverse. In each Kan comparison space the inverse-triangle homotopies contract these pastings to the constant prism; the algebra component remains the specified $g$ (respectively $hg$) and the module component remains $f$. Supply the contractions on all tree indices together, relative to their already fixed faces, using the parameter-boundary calculation of step 4. Its contractible extension spaces also fill the higher compatibilities between these contractions. This gives coherent inverse homotopies on the full transformation-data spaces. In particular the calculation proves an equivalence even when these spaces are empty; it never assumed the existence of a module map with prescribed $f$. Concatenation and the inverse triangles here are compositions and inverse witnesses in Kan mapping spaces, justified by [lem-coef-infinity-mapping-composition] and [lem-coef-infinity-core-kan-fibration].",
+   "uses": [
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-core-kan-fibration",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definitions 4.2.1.7, 4.2.1.13 and 4.2.1.19; agent operation-data proof of the scalar-restriction comparison underlying Corollary 4.2.3.2, printed p. 527. The corollary is a check on the result, not a premise."
+   }
+  },
+  {
+   "text": "Identify the forward map. A composite $N\\to L_h\\xrightarrow{e_h}L_C$ has color maps $(hg,1_xf)=(hg,f)$. Its naturality prism for an operation is the naturality prism of the first transformation pasted with that of $e_h$, evaluated on $(g,f)$. The latter is exactly $\\sigma_r$ by the definition of $e_h$ in the hypothesis and [lem-coef-module-scalar-restriction-coherence]. The same pasting for a chain of tree contractions is exactly the prism used in steps 3 and 5. Thus the forward map is the operation-data expression of postcomposition with $e_h$. Reconstruction identifies these pastings with coherent transformations and their composition by [lem-coef-colored-operation-section-reconstruction], including its contractible identified reconstruction spaces. This verifies the specified forward map rather than merely producing an abstract equivalence between two spaces.",
+   "uses": [
+    "lem-coef-module-scalar-restriction-coherence",
+    "lem-coef-colored-operation-section-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definitions 4.2.1.7, 4.2.1.13 and 4.2.1.19; agent operation-data proof of the scalar-restriction comparison underlying Corollary 4.2.3.2, printed p. 527. The corollary is a check on the result, not a premise."
+   }
+  },
+  {
+   "text": "Finally make the construction with a simplicial parameter $K$. The given scalar-restriction coherence and the reconstruction equivalence both hold over every $K$ and commute with restriction. All the expressions above are obtained by evaluating these fixed data, tensoring, composition and common diagonal restriction in the parameters; hence pulling back along $K'\\to K$ gives the same boundary prisms and the same comparison. Relative parameter boundaries were included in step 4, so the inverse comparisons and inverse homotopies exist coherently over the entire space of $g$'s. Precomposing a transformation out of $N$ pastes its operation prisms before those above. Associativity of this pasting, including its higher simplices, gives naturality in $N$; it is also natural in coherent changes of $g$. Alternatively the forward map is the postcomposition map identified in step 7, so all these naturality diagrams are its composition simplices. Pointwise equivalences are equivalences in the coherent functor category by [lem-cbc-enhanced-functor-cone-calculus], providing a coherent natural inverse. The displayed formula, the equivalence over $\\operatorname{Map}_{\\operatorname{Alg}(\\mathcal V)}(D,B)$ and all parameter compatibilities now follow. All lifting occurred in mapping spaces of the specified action; no cartesian-fibration property of $\\Theta$ and no presentability or colimit hypothesis entered.",
+   "uses": [
+    "lem-coef-module-scalar-restriction-coherence",
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definitions 4.2.1.7, 4.2.1.13 and 4.2.1.19; agent operation-data proof of the scalar-restriction comparison underlying Corollary 4.2.3.2, printed p. 527. The corollary is a check on the result, not a premise."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-colored-operation-section-reconstruction",
+  "def-coef-left-module-operadic-encoding",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-module-scalar-restriction-coherence",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-sset-anodyne-pushout-product",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-coef-infinity-mapping-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, middle derived mapping-complex comparison; operation-data scalar-restriction subargument in the created ancestry. HA definitions and Corollary 4.2.3.2 checked online; detailed proof here is agent-written."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,10 +173,45 @@
    "results": "8 hits: RestrictScalars, LinearMap.restrictScalarsₗ, LinearMap.restrictScalars, ContinuousLinearMap.restrictScalars, ModuleCat.restrictScalars, ModuleCat.RestrictScalars.map', ModuleCat.RestrictScalars.obj', ContinuousMultilinearMap.restrictScalars.  Retained previous successful search: ordinary and continuous linear scalar restriction only.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategory|quasi.category|infinity.operad|scalarRestriction_hom",
+   "results": "3 hits: Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean.  Mathlib/CategoryTheory/Monoidal/Mod.lean:387,409,445 only, read 363-415 and alias; ordinary scalarRestriction_hom does not state this item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod_.scalarRestriction_hom",
+   "results": "1 hits: CategoryTheory.Mod_.scalarRestriction_hom.  Alias checked at Mathlib/CategoryTheory/Monoidal/Mod.lean:445; actual lemma at lines 387-396. It transports ordinary B-linear morphisms to A-linear morphisms; no coherent transformation spaces.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "homotopy coherent module mapping space restriction of scalars",
+   "results": "8 hits: LinearMap.restrictScalarsₗ, CategoryTheory.Mod_.scalarRestriction, ModuleCat.restrictScalars.map_apply, RestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, RingCat.moduleCatRestrictScalarsPseudofunctor, PresheafOfModules.restrictScalarsObj, ContinuousLinearMap.restrictScalarsₗ.  Ordinary linear restriction, Mod_.scalarRestriction, and extension-restriction adjunction only; no quasicategorical operation-data assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent module transformations with fixed algebra map are unchanged by restricting the target module scalars along an algebra homomorphism",
+   "results": "8 hits: ModuleCat.restrictScalarsComp'App_hom_apply, ModuleCat.restrictScalarsId'App_hom_naturality, ModuleCat.restrictScalarsId'App_hom_naturality_assoc, ModuleCat.restrictScalarsCongr_hom_app, ModuleCat.restrictScalarsComp'_hom_app, ModuleCat.Algebra.instLinearRestrictScalars, ModuleCat.restrictScalarsComp'App_hom_naturality, ModuleCat.restrictScalars.map_apply.  Ordinary ModuleCat restriction functor and composition identities only; none states the infinity-operadic transformation-space comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian morphisms in the infinity category of left modules are precisely maps whose underlying module object is an equivalence",
+   "results": "8 hits: CategoryTheory.Functor.IsCartesian.mk, CategoryTheory.Functor.IsCartesian, CategoryTheory.IsMod_Hom, ModuleCat.homEquiv, CategoryTheory.Functor.IsCartesian.map, CategoryTheory.Functor.IsCartesian.map.congr_simp, CategoryTheory.Functor.IsCartesian.of_comp_iso, ModuleCat.matrixEquivalence.  Ordinary category IsCartesian and module Hom results only, no coherent left-module operation-data mapping comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-module-operad-encoding",
@@ -81,5 +236,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-module-scalar-restriction-mapping",
+  "worker": "stage1",
+  "summary": "Eight operation-data steps: identify all tree endpoints, lift relative prisms in Kan comparison spaces, construct forward and reverse maps with coherent inverse homotopies, and verify postcomposition and arbitrary parameter naturality. Statement unchanged; no new nodes. No use of the parent cartesian-fibration assertion.",
+  "blueprint": "Ancestor proof paragraph 2, middle mapping-complex comparison: the scalar-restriction mapping comparison needed before the conditional free-module/bar foundation. Steps 2-3 carry the ordered-operation and tree calculation; steps 4-6 give its higher inverse; steps 7-8 identify reconstruction and parameters.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Kan comparison spaces and pointwise equivalences in functor categories are generic tools; the current unit does not replace this quasicategory calculus."
+   },
+   {
+    "node": "lem-cbc-kan-fibration-fiber-criterion",
+    "why": "The boundary-filling criterion identifies the space of relative prism extensions as contractible; this is a generic simplicial-set tool, not a replacement of the coefficient route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-fibration-fiber-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NV-1475c095a",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-1475c095a (reviewer sub-agent of L); spot-checked: Read all eight steps of the item in full, plus the statement of every cited node: scalar-restriction-coherence, colored-operation-section-reconstruction, def-coef-left-module-operadic-encoding, def-cbc-enhanced-diagrams-cones, cbc-enhanced-functor-cone-calculus, sset-anodyne-pushout-product (Mathlib leaf), cbc-kan-fibration-fiber-criterion, infinity-core-kan-fibration and infinity-mapping-composition. Also read the parent lem-coef-module-operad-encoding step 7 and unit sk-prop-sf-biduality-general. Compared with the live side copy, the statement, stmt_deps, blueprint and created fields are unchanged; only the proof, proof_origin, searches, status, proof_deps and split_report changed. The statement says e_h is theta-cartesian over Map_Alg(D,B), keeping g as data. This matches HA Cor. 4.2.3.2 (not archived; WANTED filed, proof_origin agent) and adds no presentability hypothesis, so it is not weakened. Tested on h = id, a non-faithful h, r = 0 (unit compatibility only), empty spaces and pure-algebra trees. The steps use the cited statements, not their proofs. Reconstruction applies because LM^tensor is the category of operators of the ordered two-colour operad and the tensoring is cocartesian. The endpoint paths sigma_r follow from the coherence formula b^h_r = b^{L_C}(h^{tensor r} tensor 1_x) and functoriality of the action. Trees, forests and contractions are clauses of the coherence and reconstruction nodes. Step 4 is a correct relative homotopy extension: a pushout-product of a mono with an anodyne map, then boundary lifting gives a trivial Kan fibration and contractible fibres. Inverses come from Kan edges being equivalences. Step 7 identifies the forward map with postcomposition, and step 8 handles parameters and naturality through the componentwise criterion. No cycle: the dependency closure of 729 nodes does not reach the item, and the parent's cartesian conclusion is not used. proof_deps equals the union of the step uses. The six recorded searches (LeanSearch x3, LeanFinder, Loogle, grep) were real and found no match; the earlier rate-limited query is recorded as unavailable. No duplicate in the DAG and no new nodes. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-kan-fibration-fiber-criterion, both generic black-box tools from sk-prop-sf-cbc, which the unit does not reach. No SGA. No fixes."
  }
 }

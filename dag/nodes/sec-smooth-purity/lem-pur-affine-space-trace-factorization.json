@@ -14,11 +14,123 @@
   "def-pur-affine-line-purity-comparison",
   "def-pur-affine-space-comparison",
   "def-weil-exceptional-inverse-image",
-  "thm-sf-kunneth-relative"
+  "thm-sf-kunneth-relative",
+  "def-exchange-projection",
+  "def-weil-finite-tor-amplitude"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $m\\geq1$. Write $p=p_m:X_m\\to Y$, $q=q_m:X_{m+1}\\to X_m$ and $r:X_{m+1}\\to X_1$ for the first-$m$ and last-coordinate projections, respectively. Thus $pq=ar=p_{m+1}$ and $q$ is the base change of $a$ along $p$. The ordered definition [def-pur-affine-space-comparison] supplies these identifications and the twist identification $T_{m+1}=q^*T_m\\otimes^L r^*T$. All sources and bases are separated finite type. Each $T_j$ is bounded constructible of finite Tor amplitude: by [prop-weil-twist-preserves] its unshifted twist is locally free of rank one; shifting by $2j$ shifts its Tor interval. The assumption supplies this property for $V_j$, including $U=V_1$. Bounded constructible inputs have etale representatives by [lem-sf-proetale-constructible-origin]; [lem-sf-comparison-tor-amplitude] gives the finite-Tor property of those representatives. Consequently [lem-weil-finite-compact-projection-formula] applies to the four pairs $(q,r^*T,T_m)$, $(p,T_m,U)$, $(r,q^*T_m,T)$ and $(a,T,V_m)$. The exchanges for the two product squares are isomorphisms by [thm-cbc-finite-level-proetale]. The intermediate exceptional input $Rp^!A_Y$ of the ordered recursion is in $D^b_{ctf}$ by [thm-sf-preservation-class](2). Only the constructible adjunction already specified in the ordered definition is used.",
+   "uses": [
+    "def-pur-affine-space-comparison",
+    "prop-weil-twist-preserves",
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-weil-finite-compact-projection-formula",
+    "thm-cbc-finite-level-proetale",
+    "thm-sf-preservation-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Integration paragraph: coordinate tower and applicability of the projection formulas"
+   }
+  },
+  {
+   "text": "For any affine-line projection $u:L\\to B$, put $F_uK=u^*K\\otimes^L A_L(1)[2]$ and write $b_{u,K}:Ru_!F_uK\\to K$ for the defining transpose in [def-pur-affine-line-purity-comparison]. That definition gives $b_{u,K}=\\rho_K(1_K\\otimes t_B)\\Pi^u_K$, where $\\rho$ is the tensor-unit map and $\\Pi^u_K$ is precisely its two-symmetry inverse projection formula. It is natural in $K$, by the naturality in [lem-weil-finite-compact-projection-formula]. At $K=A_B$ the projection transformation is the tensor-unit identification: the proper factor has this normalization by [lem-weil-pbc-ringed-projection-mate-exact], while the open tensor comparison in [def-exchange-projection] sends $x\\otimes1$ to $x\\otimes1$ and is the identity after the unit identifications. The two symmetries in $\\Pi^u_{A_B}$ are also unit identifications. Hence $b_{u,A_B}=t_B$. The rank-one case of the recursion [def-pur-affine-space-comparison] is the specified line comparison (the rank-zero map and the composition with the identity are identities). The inverse Hom bijection takes that comparison back to $b_{a,A_Y}$. Therefore $I_1=t_Y$.",
+   "uses": [
+    "def-pur-affine-line-purity-comparison",
+    "lem-weil-finite-compact-projection-formula",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "def-exchange-projection",
+    "def-pur-affine-space-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Integration paragraph: the normalized affine-line trace, the base of the recursion"
+   }
+  },
+  {
+   "text": "Compute the actual transpose at the next stage. Abbreviate $\\gamma_m=\\gamma_{p,A_Y}:T_m\\to Rp^!A_Y$ and $\\alpha=\\alpha_{p,q}:Rp_!Rq_!\\xrightarrow{\\sim}R(pq)_!$. By [def-pur-affine-space-comparison], $\\gamma_{m+1}$ is $c_{p,q}^{-1}\\gamma_{q,Rp^!A_Y}F_q(\\gamma_m)$ after the fixed twist identification. Its transpose, written on $Rp_!Rq_!F_qT_m$, is\n$$\\varepsilon_{p,A_Y}\\,Rp_!\\bigl(\\varepsilon_{q,Rp^!A_Y}\\,Rq_!(\\gamma_{q,Rp^!A_Y})\\,Rq_!F_q(\\gamma_m)\\bigr).$$\nThis is the counit formula of [def-weil-pbc-composite-adjunction]; [lem-weil-pbc-mate-pasting](2),(3) applies because $c_{p,q}$ was defined as the conjugate of this same $\\alpha$. The inner counit and comparison give $b_{q,Rp^!A_Y}$. Naturality of $b_q$ (Step 2), applied to the map $\\gamma_m$, gives\n$$b_{q,Rp^!A_Y}\\,Rq_!F_q(\\gamma_m)=\\gamma_m\\,b_{q,T_m}.$$\nSubstitution and $I_m=\\varepsilon_{p,A_Y}Rp_!(\\gamma_m)$ yield the typed identity\n$$I_{m+1}=I_m\\,Rp_!(b_{q,T_m})\\,\\alpha^{-1}:V_{m+1}\\longrightarrow A_Y.$$\nHere $b_{q,T_m}$ has source $Rq_!T_{m+1}$ and target $T_m$; in particular no nonexistent untwisted line trace is being substituted.",
+   "uses": [
+    "def-pur-affine-space-comparison",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-mate-pasting",
+    "def-pur-affine-line-purity-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Integration paragraph: the composite counit is the recursively integrated trace"
+   }
+  },
+  {
+   "text": "Let $E:p^*U\\xrightarrow{\\sim}Rq_!r^*T$ be the canonical compact-support exchange for the base change of $a$ by $p$. The hypothesis on the specified line integrations says $p^*t_Y=t_{X_m}E$, so $t_{X_m}=p^*t_Y\\,E^{-1}$. The canonical line-pullback and tensor identifications of the ordered definition are used throughout. Applying the line-transpose definition at $K=T_m$ gives\n$$b_{q,T_m}=\\rho_{T_m}(1_{T_m}\\otimes p^*t_Y)(1_{T_m}\\otimes E^{-1})\\Pi^q_{T_m}.$$\nDefine, only as temporary maps in this proof,\n$$C=Rp_!(1_{T_m}\\otimes E^{-1})\\,Rp_!(\\Pi^q_{T_m})\\,\\alpha^{-1}:\nV_{m+1}\\longrightarrow Rp_!(T_m\\otimes p^*U),$$\n$$D=(\\operatorname{PF}_{p,T_m,U})^{-1}C:\nV_{m+1}\\longrightarrow V_m\\otimes U.$$\nThe inverses here are those justified in Step 1. Substituting the displayed expression for $b_{q,T_m}$ in Step 3 gives\n$$I_{m+1}=I_m\\,Rp_!\\bigl(\\rho_{T_m}(1_{T_m}\\otimes p^*t_Y)\\bigr)C.$$\nThis uses the assumed base-change equality only for $p:X_m\\to Y$, which is among its allowed changes of base.",
+   "uses": [
+    "def-pur-affine-line-purity-comparison",
+    "def-pur-affine-space-comparison",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Integration paragraph: pull the last-coordinate line trace back from the base"
+   }
+  },
+  {
+   "text": "Use naturality of the specified projection transformation [lem-weil-finite-compact-projection-formula] for the coefficient morphism $t_Y:U\\to A_Y$. Both coefficients belong to $D^b_{ctf}$, as checked in Step 1. If $P_W=\\operatorname{PF}_{p,T_m,W}$, naturality is\n$$Rp_!(1_{T_m}\\otimes p^*t_Y)\\,P_U=P_{A_Y}(1_{V_m}\\otimes t_Y).$$\nThe unit normalization $Rp_!(\\rho_{T_m})P_{A_Y}=\\rho_{V_m}$ follows exactly as in Step 2 from the proper counit-defined projection map [lem-weil-pbc-ringed-projection-mate-exact] and the open tensor comparison of [def-exchange-projection]. Multiply the naturality equality on the right by $P_U^{-1}C=D$ and insert it into Step 4. The result is\n$$I_{m+1}=I_m\\,\\rho_{V_m}(1_{V_m}\\otimes t_Y)D\n=\\rho_{A_Y}(I_m\\otimes t_Y)D.$$\nThe last equality is just naturality of the tensor unitor and the bifunctor law for tensoring morphisms. It remains to identify this particular $D$ with the product map in the statement.",
+   "uses": [
+    "lem-weil-finite-compact-projection-formula",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Integration paragraph: projection formula and evaluation of the recursively integrated trace"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-finite-forward-product-symmetry] to $(f,M)=(p,T_m)$ and $(g,N)=(a,T)$. Its bounded-below etale-origin conditions hold: the source $V_m\\otimes U$ is isomorphic to the assumed bounded constructible $V_{m+1}$ by the specified $\\kappa_{m,1}$; every tensor inside a compact-support functor is a bounded etale-origin complex tensored with a shifted Tate line, hence is bounded and of etale origin by [prop-weil-twist-preserves] and [lem-sf-proetale-constructible-origin]. Exchanges identify $Rq_!r^*T$ with $p^*U$ and $Rr_!q^*T_m$ with $a^*V_m$. The canonical tensor comparisons [lem-pur-derived-pullback-tensor-iso] give the identifications in both forward composites. Every arrow of those composites is invertible by Step 1 and the composition comparisons [thm-sf-comp-composition]. Inverting their symmetry equality identifies their inverse products.\nFor $(p,a)$ that inverse is exactly the map $\\kappa_{m,1}$ specified in [thm-sf-kunneth-relative]: only its displayed construction is being used, not its abstract-datum theorem. For $(a,p)$, restore the original external tensor order and the target order $V_m\\otimes U$. Expanding the inverse composite then gives, in order, $\\alpha^{-1}$, $Rp_!(\\Pi^q_{T_m})$, $Rp_!(1_{T_m}\\otimes E^{-1})$ and $P_U^{-1}$. This is $D$ from Step 4; the two symmetries in $\\Pi$ are precisely the source and target symmetries in that expansion. Thus $D=\\kappa_{m,1}$. Step 5 yields $I_{m+1}=(I_m\\otimes t_Y)\\kappa_{m,1}$ with the tensor-unit identification understood. Together with Step 2 this proves both assertions for every $m\\geq1$. No coordinate-permutation invariance has been invoked.",
+   "uses": [
+    "lem-pur-finite-forward-product-symmetry",
+    "prop-weil-twist-preserves",
+    "lem-sf-proetale-constructible-origin",
+    "lem-pur-derived-pullback-tensor-iso",
+    "thm-sf-comp-composition",
+    "thm-sf-kunneth-relative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+    "place": "Integration paragraph and the detailed composition-law Steps 3--4: identify the actual binary product before evaluating traces"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-pur-affine-line-purity-comparison",
+  "def-pur-affine-space-comparison",
+  "def-weil-pbc-composite-adjunction",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-finite-forward-product-symmetry",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "prop-weil-twist-preserves",
+  "thm-cbc-finite-level-proetale",
+  "thm-sf-comp-composition",
+  "thm-sf-kunneth-relative",
+  "thm-sf-preservation-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Integration on affine space, first paragraph: recursive trace and composite counit; binary product comparison expanded using a separate finite forward-product symmetry obligation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +166,38 @@
    "results": "No hits in Mathlib/AlgebraicGeometry (subdirectory argument AlgebraicGeometry).",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*(tensor|affine)|integrat.*kunneth|purity.*comp",
+   "results": "No hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fubini formula for etale compactly supported affine space integration and the ordered exceptional adjunction trace",
+   "results": "Returned MeasureTheory.integral_integral_swap_of_hasCompactSupport, MeasureTheory.lintegral_prod_symm, MeasureTheory.setIntegral_prod, MeasureTheory.lintegral_lintegral_symm, MeasureTheory.integral_fintype_prod_volume_eq_prod, MeasureTheory.intervalIntegral_integral_swap, MeasureTheory.lintegral_lintegral_swap, MeasureTheory.integral_fin_nat_prod_volume_eq_prod. The returned signatures concern ordinary tensor contractions, scheme pullback identities, measure integrals or generic adjunction composition; none constructs the etale integrations and their relative compact-support comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"comp\"",
+   "results": "Returned CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.comp_map_bijective_iff, CategoryTheory.Adjunction.left_triangle_components, CategoryTheory.Adjunction.map_comp_bijective_iff, CategoryTheory.Adjunction.right_triangle_components, CategoryTheory.Adjunction.compCoyonedaIso, CategoryTheory.Adjunction.compUliftCoyonedaIso, CategoryTheory.Adjunction.left_triangle_components_assoc. The returned signatures concern ordinary tensor contractions, scheme pullback identities, measure integrals or generic adjunction composition; none constructs the etale integrations and their relative compact-support comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional transpose of ordered affine line purity comparisons is the tensor product of the line integration maps under the compact support Kunneth isomorphism",
+   "results": "Returned map_dualTensorHom, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, TensorPower.pairingDual_tprod_tprod, PiTensorProduct.toDualContinuousMultilinearMap_apply_apply, TensorPower.pairingDual, dualTensorHom_prodMap_zero, zero_prodMap_dualTensorHom, PiTensorProduct.liftEquiv_symm_apply. The returned signatures concern ordinary tensor contractions, scheme pullback identities, measure integrals or generic adjunction composition; none constructs the etale integrations and their relative compact-support comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-pur-affine-space-composition-law",
@@ -74,5 +214,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-affine-space-trace-factorization",
+  "worker": "stage1",
+  "summary": "Expanded the ordered exceptional transpose into the pasted line counit, used the assumed base-change identity for the actual line trace, and applied projection-formula naturality. Extracted the independent finite forward compact-support product symmetry comparison; this avoids assuming a global abstract six-functor datum or citing the circular concrete Kunneth package. The statement and its normalization are unchanged.",
+  "blueprint": "Realizes ancestor prop-pur-affine-space-composition-law Proof Steps 3--4 and current sk-prop-an integration paragraph: the ordered trace recursion is proved in Steps 2--5 and its identification with the specified binary product in Step 6. The even-shift coordinate-permutation conclusion of the ancestor is not used.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Supplies etale witnesses for the bounded constructible finite inputs; the unit has no separate comparison theorem."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Reflects finite Tor amplitude to etale representatives before the concrete projection formula; no such reflection theorem is in this unit."
+   },
+   {
+    "node": "lem-weil-finite-compact-projection-formula",
+    "why": "Invertibility and naturality of the concrete finite projection map, including its witnessed pro-etale clause; the unit uses the projection formula as a generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Tensor-unit normalization of the counit-defined proper projection transformation; generic ringed-topos calculation."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "The generic pasting and adjunction-conjugation identities needed to compute the transpose of the ordered comparison."
+   },
+   {
+    "node": "prop-weil-twist-preserves",
+    "why": "Rank-one finite Tate lines and preservation of bounded constructible inputs; no purity isomorphism is taken from it."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Canonical finite pullback/tensor comparison with symmetry and composition, required to compare the two explicit forward products."
+   },
+   {
+    "node": "thm-sf-preservation-class",
+    "why": "Ensures the intermediate Rp_m^! A_Y is in the input category of the already defined affine-line comparison."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "The normalized finite compact-support composition comparison used in the ordered definition and product construction."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "Invertibility of the finite compact-support exchanges on witnessed bounded-below inputs."
+   },
+   {
+    "node": "thm-sf-kunneth-relative",
+    "why": "Only the explicitly specified binary product construction is used to identify the map named in the statement; no abstract-datum conclusion is applied."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-mate-pasting",
+  "prop-weil-twist-preserves",
+  "lem-pur-derived-pullback-tensor-iso",
+  "thm-sf-preservation-class",
+  "thm-sf-comp-composition",
+  "thm-cbc-finite-level-proetale",
+  "thm-sf-kunneth-relative"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-63b6f2957",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-63b6f2957 (reviewer sub-agent of L); spot-checked: Read the item, all six steps, the new node, every cited statement, the parent split, the sk-prop-an unit, the main-20261015 integration paragraph (Tr_{p_j}=Tr_{p_{j-1}}∘Rp_{j-1!}(Tr_{r_j})) and Stacks 0E48. Step 1: the four projection-formula pairs have ctf base coefficients (T_m, U, T, V_m); the exchanges are invertible by thm-cbc-finite-level-proetale; Rp^!A is ctf by thm-sf-preservation-class(2). Step 2: b_{a,A}=t_Y from the unit normalizations (ringed-mate-exact α_{R_Y}=1, open j_! map at the unit, unitor coherence). Step 3: recomputed I_{m+1}=I_m Rp_!(b_{q,T_m})α^{-1}, using the conjugate of α, the composite counit and naturality of b_q along γ_m; this is the blueprint recursion. Step 4: the base-change hypothesis applied with v=p. Step 5: PF naturality at t_Y plus unit normalization. Step 6: expanded both sides and checked that D^{-1}=S∘Ξ_{a,p}(T,T_m)∘σ while thm-sf-kunneth-relative's κ is Ξ_{p,a}(T_m,T)^{-1}, so the new lemma gives D=κ_{m,1}. The new lemma's hypotheses hold. The new node is statement-only and self-contained; its types check; it is the standard Künneth symmetry and holds for f=g=id and for zero inputs; it is strictly below the item, with no trace or exceptional functor. It is not a duplicate of lem-sf-kunneth-coherence (abstract datum, inverse maps). Confirmed by BFS that sk-thm-sf-kunneth-relative would close a cycle through prop-functor-package down to the parent; no cycle from the new node or any cited node. proof_deps equal the union of the uses; all ids exist; no SGA source. The 11 declared tool uses are accepted. No fixes."
  }
 }

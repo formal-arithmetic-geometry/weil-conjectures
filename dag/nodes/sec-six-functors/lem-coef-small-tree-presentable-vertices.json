@@ -11,9 +11,55 @@
   "def-weil-pbc-category-colimit",
   "def-coef-good-cellular-tree"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a downward-closed $E\\subseteq T$, the tree definition gives maps $r_t:M\\to D(t)$ and a diagram in $M/\\mathcal A$. Adjoin to its underlying diagram one new initial vertex with value $M$ and arrows $r_t$ to the vertices of $E$. A cocone on this augmented diagram with vertex $Z$ is precisely a map $u:M\\to Z$ and compatible maps $v_t:D(t)\\to Z$ satisfying $v_t r_t=u$. For each fixed $u$, the undercategory colimit property gives exactly one map $Y_E\\to Z$ respecting these maps and the root map. Thus the underlying object of $Y_E$ has the ordinary colimit universal property for the augmented diagram. Its morphisms consist of at most one per ordered pair in $E$, one root arrow per element of $E$, and the root identity, so their cardinality is at most $|E|^2+|E|+1<\\tau$: for infinite $E$ this cardinal is $|E|<\\tau$, and for finite $E$ it is finite. For $E=\\varnothing$, the augmented diagram consists only of $M$, giving $Y_\\varnothing\\cong M$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-coef-good-cellular-tree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition A.1.5.1 and Notation A.1.5.2, printed pp. 799-800; universal-property calculation for the undercategory colimit."
+   }
+  },
+  {
+   "text": "Prove by well-founded induction on $t\\in T$ that every vertex $D(t)$ is $\\tau$-presentable, assuming this for all strict predecessors. Let $B_t=\\{s:s<t\\}$. By Step 1, the predecessor object $Y_{<t}$ is the colimit of the augmented predecessor diagram with root value $M$. Its values are $\\tau$-presentable by the induction hypothesis and the assumed presentability of $M$, and its number of morphisms is less than $\\tau$. The Mathlib theorem [lem-coef-ordinary-small-colimit-presentable] therefore makes $Y_{<t}$ $\\tau$-presentable. The specified cell square in [def-coef-good-cellular-tree] identifies $D(t)$ with the colimit of the finite span $Y_{<t}\\leftarrow P_t\\to Q_t$. All three objects are $\\tau$-presentable, and the span has fewer than $\\tau$ morphisms, so the same theorem makes $D(t)$ $\\tau$-presentable. The case $B_t=\\varnothing$ is included because the augmented predecessor diagram is then just the one-object diagram on the root.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-coef-good-cellular-tree",
+    "lem-coef-ordinary-small-colimit-presentable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition A.1.5.1 and the compact endpoint observation after Lemma A.1.5.11, printed pp. 799-800 and 808-809; well-founded induction with the finite cell pushout."
+   }
+  },
+  {
+   "text": "After the induction, every value $D(t)$ is $\\tau$-presentable. Apply Step 1 to any downward-closed $E\\subseteq T$. The augmented diagram for $Y_E$ has fewer than $\\tau$ morphisms and all its values (the root and the vertices in $E$) are $\\tau$-presentable. By [lem-coef-ordinary-small-colimit-presentable], its colimit $Y_E$ is $\\tau$-presentable. This applies in particular to every predecessor colimit and to $E=T$, while Step 1 already identifies the empty case with the assumed presentable object $M$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-ordinary-small-colimit-presentable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation A.1.5.2 and Proposition A.1.5.12, printed pp. 799-800 and 808-809; closure of the restricted colimits under the same small-colimit argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-coef-good-cellular-tree",
+  "lem-coef-ordinary-small-colimit-presentable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Direct well-founded-induction expansion of Definition A.1.5.1, Notation A.1.5.2 and the compact endpoint observation after Lemma A.1.5.11 (printed pp. 799-800, 808-809); the small-colimit ingredient is Mathlib/CategoryTheory/Presentable/Limits.lean:185-195."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,7 +112,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-weak-saturation-tree-presentation",
@@ -78,7 +124,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph beginning For K in D^b_c(X,R), derived coefficient adjunction before the first displayed derived-limit comparison: the generic recognition input below the marked-point model uses a good-tree presentation of cofibrations. Extracted from returned Step 4: well-founded induction proving presentability of compact-root tree vertices and augmented restricted colimits.",
+   "place": "Proof paragraph beginning For K in D^b_c(X,R), derived coefficient adjunction before the first displayed derived-limit comparison: compact-root tree vertices and restricted-colimit presentability by well-founded induction.",
    "via": [
     "lem-coef-weak-saturation-tree-presentation",
     "lem-coef-accessible-intersection-generators",
@@ -96,5 +142,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-small-tree-presentable-vertices",
+  "worker": "stage1",
+  "summary": "No new child node is needed. The proof first computes each restricted undercategory colimit as an augmented ordinary colimit, then uses well-founded induction on the tree to apply the existing Mathlib small-colimit presentability theorem to predecessor diagrams and the finite cell pushouts, and finally applies it to every downward-closed restriction, including the empty and total cases.",
+  "blueprint": "Realizes the compact-root tree-vertex and restricted-colimit presentability induction extracted from prop-coef-integral-exceptional-adjoint, in the paragraph beginning For K in D^b_c(X,R) before the first displayed derived-limit comparison; the three steps correspond respectively to the augmented-colimit calculation, the well-founded vertex induction, and the restricted-colimit conclusion."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-95b2a4381",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-95b2a4381 (reviewer sub-agent of L); spot-checked: I read the item in full and compared it with the live copy: only the proof, proof_deps, proof_origin, split_report, status and blueprint.from.place changed; the statement and hypotheses are unchanged, so the target is not weakened. There are no new nodes. I read every cited statement: def-coef-good-cellular-tree, def-weil-pbc-category-colimit, and lem-coef-ordinary-small-colimit-presentable, the last against Mathlib Presentable/Limits.lean ll. 175-195 (isCardinalPresentable_of_isColimit, which needs LocallySmall, a regular κ, HasCardinalLT (Arrow K) κ and every value presentable). Step 1 is genuinely elementary: a cocone on the diagram with the root M adjoined is exactly a cocone in M/A, which identifies Y_E with that diagram's ordinary colimit. It has at most |E|^2+|E|+1 < τ arrows, and E = ∅ gives Y_∅ = M, as the tree definition says. Step 2 is a correctly set-up well-founded induction: Y_{<t} is presentable by Step 1 plus the leaf, using the presentable root and the induction hypothesis, and D(t) is the colimit of the 5-arrow span from the definition's pushout square, with P_t and Q_t presentable by hypothesis. Step 3 applies the leaf to every downward-closed E. Each hypothesis is used where stated and none is added. I tested empty T, one cell, a chain, two incomparable cells, and countable T with τ = ℵ_1. All citations are in the unit sk-prop-sf-biduality-general, so no tool_uses are needed. A search of every node statement for presentable with tree, cell or pushout found no duplicate. No SGA source is used, and there is no base-change or coefficient-category content to check. The only citer, lem-coef-weak-saturation-tree-presentation step 4, uses exactly the stated conclusion. Minor point: HTT is checked online only and is not archived; the report's WANTED line records this. No fixes."
  }
 }

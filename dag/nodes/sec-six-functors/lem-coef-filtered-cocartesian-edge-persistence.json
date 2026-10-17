@@ -12,9 +12,72 @@
   "def-coef-presentable-infinity-category",
   "lem-coef-cocartesian-straightening"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $z\\in E$ and write $b=p(z)$. Apply the fixed-base-change clause of [lem-coef-cat-infinity-filtered-finite-calculus] with $T=\\{b\\}\\to B$: the infinity-categorical fiber $E_b$ is the filtered colimit of $(E_j)_b$. Apply its object-representation clause to this fiber diagram to choose $z_j\\in(E_j)_b$ and an equivalence $r_jz_j\\simeq z$ in $E_b$. Filteredness, in the finite-cocone sense of [def-coef-presentable-infinity-category], gives a stage $k$ and arrows $u:i\\to k$, $v:j\\to k$. Set $x_k=D(u)x$, $y_k=D(u)y$, $e_k=D(u)e$, and $z_k=D(v)z_j$. The slice coherences and the fiber equivalence identify their bases with $p(r_i x)$, $p(r_i y)$ and $b$. Thus any specified arrow $g:p(r_i y)\\to b$ is a fixed base arrow for these objects and their further transition images. The coherent coslice $J=I_{k/}$ is small and filtered by the same finite-calculus statement.",
+   "uses": [
+    "lem-coef-cat-infinity-filtered-finite-calculus",
+    "def-coef-presentable-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition 3.3.2, proof of (ii), using the filtered-colimit mapping-space and common-stage calculation"
+   }
+  },
+  {
+   "text": "For $w:k\\to l$ in $J$, put $e_w=D(w)e_k$ and $z_w=D(w)z_k$. The coherent composition of $w$ with $u$ identifies $e_w$ with a transition image $D(wu)e$, so it is $p_l$-cocartesian by hypothesis. The intrinsic mapping-square criterion of [lem-coef-cocartesian-straightening], pulled back over the point $g$ of $\\operatorname{Map}_B(p(r_i y),b)$, gives an equivalence\n$$A_w:=\\operatorname{Map}^{g}_{E_l}(D(w)y_k,z_w)\\longrightarrow C_w:=\\operatorname{Map}^{g\\,p(e_w)}_{E_l}(D(w)x_k,z_w).$$\nIndeed the pullback square says that the comparison from its upper left corner to the homotopy pullback $P_w$ of the upper right corner along base precomposition is an equivalence. The only-if direction of [lem-coef-spaces-homotopy-fiber-detection], with bottom map the identity of $\\operatorname{Map}_B(p(r_i y),b)$, gives an equivalence of homotopy fibers over $g$; the homotopy fiber of $P_w$ over $g$ is that of the right vertical map over $g\\,p(e_w)$, since both are limits of the same cospan. This gives exactly these two homotopy fibers. These maps form a coherent transformation $A\\to C$ on $J$: [lem-coef-infinity-hom-bifunctor-functoriality] states coherent naturality of mapping-space maps and preservation of composition under every transition functor. The slice coherences identify the base maps and their homotopy fibers throughout this transformation. This uses only the images of $e$.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition 3.3.2, proof of (ii), mapping square for the image of a specified stage lift"
+   }
+  },
+  {
+   "text": "The pointwise-equivalence criterion of [lem-cbc-enhanced-functor-cone-calculus] makes $A\\to C$ an equivalence of $J$-diagrams of spaces. Its inverse transformation and the two inverse homotopies induce inverse maps between the colimits, so $\\operatorname{colim}_J A\\to\\operatorname{colim}_J C$ is an equivalence. These small space colimits exist by [lem-coef-spaces-small-colimits-universe]. Apply the relative mapping-space comparison of [lem-coef-cat-infinity-filtered-finite-calculus] to the two pairs $(y_k,z_k)$ and $(x_k,z_k)$ in the original diagram indexed by $I$. It identifies these two colimits with $\\operatorname{Map}^{g}_E(r_k y_k,r_k z_k)$ and $\\operatorname{Map}^{g\\,p(r_ke_k)}_E(r_k x_k,r_k z_k)$. Its stated naturality in precomposition and under maps to $B$ identifies the induced colimit map with precomposition by $r_ke_k$. The cocone identifies this edge with $r_i e$. Postcomposition with the fiber equivalence $r_kz_k\\simeq z$ gives inverse equivalences of the two relative mapping spaces, with inverse given by its inverse edge; their inverse homotopies remain over the base identity. We obtain the asserted relative precomposition equivalence for the original $z$ and $g$.",
+   "uses": [
+    "lem-coef-cat-infinity-filtered-finite-calculus",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-spaces-small-colimits-universe"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition 3.3.2, proof of (ii), passage from stage mapping squares to the colimit"
+   }
+  },
+  {
+   "text": "For fixed $z$, abbreviate $Y=\\operatorname{Map}_E(r_i y,z)$, $X=\\operatorname{Map}_E(r_i x,z)$, $S=\\operatorname{Map}_B(p(r_i y),p(z))$ and $T=\\operatorname{Map}_B(p(r_i x),p(z))$. Let $P=X\\times^h_T S$. Precomposition and its functoriality give a comparison $Y\\to P$ over $S$. For every vertex $g\\in S$, its homotopy-fiber map identifies with the map proved to be an equivalence in step 3: the fiber of $P\\to S$ at $g$ is the homotopy fiber of $X\\to T$ at $g\\,p(r_i e)$. This identification follows by the pullback universal property, since both sides are the limit of $X\\to T\\leftarrow\\{g\\,p(r_i e)\\}$. Apply [lem-coef-spaces-homotopy-fiber-detection] with bottom map $1_S$. It makes $Y\\to P$ an equivalence, including when $S$ or its fibers are empty. Hence the intrinsic mapping square is a homotopy pullback for every $z$. The characterization in [lem-coef-cocartesian-straightening] proves that $r_i(e)$ is $p$-cocartesian.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Proposition 3.3.2(ii), intrinsic cocartesian mapping criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-cat-infinity-filtered-finite-calculus",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-coef-spaces-small-colimits-universe"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Proposition 3.3.2(ii), especially the proof of the mapping square for a specified stage lift; source read online 2026-10-17 and not archived in literature."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +120,52 @@
    "results": "{\"t\": \"2026-10-17T07:30:40Z\", \"tool\": \"grep\", \"query\": \"quasicategor|[Ii]nfinity[Cc]ategor|[Cc]ocartesian.*[Cc]olimit|relative.*[Mm]apping\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\"], \"digest\": \"9d1214acb3d515f9\"}",
    "date": "2026-10-17",
    "verdict": "no match: Loogle and the first LeanFinder give ordinary CategoryTheory.Functor.IsCocartesian/IsStronglyCocartesian, read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:44-79. Other hits are ordinary universal-colimit pullbacks, ordinary filtered colimits of sets, or relative simplicial homotopies. The Quasicategory/StrictBicategory.lean:14-29 hits define a strict bicategory, not coherent filtered colimits or persistence of a relative cocartesian edge."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian|filtered.*colimit|IsCocartesian",
+   "results": "{\"t\": \"2026-10-17T08:26:13Z\", \"tool\": \"grep\", \"query\": \"cocartesian|filtered.*colimit|IsCocartesian\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Ind.lean\"], \"digest\": \"ded31dc3822362c9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only ordinary category-theory cocartesian predicates and filtered-colimit infrastructure; no infinity-categorical persistence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsCocartesian, CategoryTheory.Limits.FilteredColimit",
+   "results": "{\"t\": \"2026-10-17T08:26:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsCocartesian, CategoryTheory.Limits.FilteredColimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Limits.FilteredColimit'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: query contains unknown identifier CategoryTheory.Limits.FilteredColimit; not evidence of absence. The two successful LeanFinder phrasings and LeanSearch supplement grep."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimit of infinity categories over B preserves a cocartesian edge whose transition images are cocartesian",
+   "results": "{\"t\": \"2026-10-17T08:26:15Z\", \"tool\": \"leanfinder\", \"query\": \"Filtered colimit of infinity categories over B preserves a cocartesian edge whose transition images are cocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_comp\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian\"], \"digest\": \"e13f9ea8a1428f16\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary IsCocartesian/IsStronglyCocartesian or simplicial relative homotopy results, not the stated filtered infinity-categorical assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism satisfying the relative homotopy pullback mapping space universal property in all later quasicategories retains it in their filtered infinity categorical colimit",
+   "results": "{\"t\": \"2026-10-17T08:28:38Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism satisfying the relative homotopy pullback mapping space universal property in all later quasicategories retains it in their filtered infinity categorical colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.RelativeMorphism.Homotopy.rel\", \"SSet.RelativeMorphism.Homotopy.h₁\", \"SSet.modelCategoryQuillen.J\", \"SSet.RelativeMorphism.Homotopy.h₀\", \"SSet.RelativeMorphism.HomotopyClass\", \"SSet.RelativeMorphism.Homotopy.rel_assoc\", \"SSet.RelativeMorphism.Homotopy.h₁_assoc\", \"SSet.RelativeMorphism.Homotopy.h₀_assoc\"], \"digest\": \"601948f0dd506240\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary IsCocartesian/IsStronglyCocartesian or simplicial relative homotopy results, not the stated filtered infinity-categorical assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cocartesian morphisms persist under filtered colimits of infinity categories over a fixed base",
+   "results": "{\"t\": \"2026-10-17T08:28:38Z\", \"tool\": \"leansearch\", \"query\": \"Cocartesian morphisms persist under filtered colimits of infinity categories over a fixed base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits\", \"CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.mk\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits\", \"CategoryTheory.Limits.PreservesFilteredColimits\", \"CategoryTheory.MorphismProperty.instIsStableUnderFilteredColimitsIsomorphisms\"], \"digest\": \"3d73d5735867ee6a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary filtered-colimit/finite-limit and cocartesian infrastructure, not this quasicategorical statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsCocartesian",
+   "results": "{\"t\": \"2026-10-17T08:53:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsCocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map_self\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.of_comp_iso\"], \"digest\": \"60646e309b2723ac\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: 12 hits concern ordinary categories and their set-valued universal factorization, read Cocartesian.lean:44–79. They give no coherent filtered colimit theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-filtered-operadic-unstraightening",
@@ -86,5 +191,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-filtered-cocartesian-edge-persistence",
+  "worker": "stage1",
+  "summary": "Kept the exact statement. Four steps represent a testing object via the fixed-base-change fiber colimit, form the coherent stagewise relative precomposition equivalence, identify its colimit by natural relative mapping comparisons, and recover the intrinsic cocartesian square by homotopy-fiber detection. Seven existing dependencies, no new nodes or Mathlib leaves. Original search records are retained with six newly logged Q160 searches.",
+  "blueprint": "Realizes the extracted Proposition 3.3.2(ii) mapping-square argument in the ancestor proof: represent a testing object at a common later stage, use only transition images of the specified lift, and pass the relative mapping equivalence to the colimit.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic pointwise-equivalence criterion for coherent transformations, used to pass the stagewise equivalence to colimits of spaces; it replaces no unit-level route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-c4d6a1435",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-c4d6a1435 (reviewer sub-agent of L); spot-checked: I read the item, all 8 cited statements, the unit and Gepner–Haugseng arXiv:1312.3178v4 Prop. 3.3.2 with its proof (read online; not archived, so the WANTED and by:agent marking are correct). That proof shows the image of a stage cocartesian arrow is cocartesian: it uses filtered colimits of mapping spaces over α/I, stagewise pullbacks, and the fact that filtered colimits of spaces commute with finite limits. It uses only the transition images of the given edge, so the specified-edge statement is a faithful extraction. The statement is unchanged and true. Edge cases checked: I terminal, e an identity or equivalence, B terminal, empty relative fibers, B empty (vacuous). Step 1: the fixed-base-change clause with {b}→B and object representation give a representative in the fiber; filteredness gives a common stage k; I_{k/} is small and filtered by the cited statement. Step 2: e_w is equivalent to D(wu)e through the coherent 2-simplex, so it is cocartesian; the intrinsic square comes from cocartesian-straightening; coherence over J comes from hom-bifunctor functoriality. Step 3: cone-calculus gives the pointwise equivalence and small-colimits-universe the colimits; the relative-fiber clause of filtered-finite-calculus, applied at stage k, identifies the colimits; transport along r_k z_k ≃ z, an equivalence in the fiber, finishes it. Step 4: P = X×^h_T S, its fiber at g is hofib_{g p(e)}, fiber detection with v = id gives Y→P an equivalence, and the intrinsic criterion applies. No new nodes. I found no cycle among the 662 ancestors and no duplicate (rg over dag/nodes; nearest candidates read). Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, a generic pointwise-equivalence criterion. FIX: step 2 passed from the homotopy-pullback square to the equivalence on homotopy fibers over g without citing a node. It now cites the only-if direction of lem-coef-spaces-homotopy-fiber-detection with bottom map the identity, which was already in proof_deps, and spells out the fiber identification. That node is added to step 2's uses; proof_deps is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

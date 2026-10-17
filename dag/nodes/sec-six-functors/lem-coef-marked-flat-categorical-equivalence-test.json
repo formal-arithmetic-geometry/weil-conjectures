@@ -12,9 +12,106 @@
   "lem-coef-joyal-model-structure",
   "lem-coef-marked-point-cartesian-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First fix a universe containing the input simplicial sets. For every simplicial set $K$ and quasicategory $Q$, there is a natural identity $\\operatorname{Map}^{\\sharp}(K^\\flat,Q^\\natural)=\\operatorname{Fun}(K,Q)^\\simeq$. Indeed $\\operatorname{Map}^{\\flat}(K^\\flat,Q^\\natural)=\\operatorname{Fun}(K,Q)$ degree by degree: the only marked edges in $K^\\flat\\times(\\Delta^n)^\\flat$ are degenerate, so preservation of markings imposes no condition on a simplicial map. The marked-anodyne lifting calculus identifies its $\\operatorname{Map}^{\\sharp}$ with its core. For a quasicategory $C$, the point-model statement separately gives $\\operatorname{Map}^{\\sharp}(C^\\natural,Q^\\natural)=\\operatorname{Fun}(C,Q)^\\simeq$. Both identifications commute with restriction, since they leave the underlying simplicial maps unchanged.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.1.3.1 over a point; direct degreewise calculation of the minimal marking."
+   }
+  },
+  {
+   "text": "Let $t:A\\to B$ be categorical and fix a quasicategory $Q$. By the functor-equivalence test, $p=t^*:\\operatorname{Fun}(B,Q)\\to\\operatorname{Fun}(A,Q)$ admits a coherent quasi-inverse $s$, with equivalence edges between the two composites and the identities. Simplicial maps preserve equivalences because they preserve the inverse edges and their two witness triangles, so $p,s$ restrict to cores. The unit and counit restrict to simplicial homotopies on these cores: evaluation of either transformation on an equivalence edge of the source gives a square whose horizontal components and vertical source images are equivalences. Its two triangular faces express the diagonal as a composite of equivalences; the triangle calculus therefore makes every image edge an equivalence. Thus the evaluation maps on the core times $\\Delta^1$ land in the core. The simplicial-homotopy-equivalence lemma now shows that $p^\\simeq$ is a weak homotopy equivalence. The functor-cone calculus guarantees that all functor objects and cores used here are quasicategories and Kan complexes, respectively.",
+   "uses": [
+    "lem-coef-joyal-functor-equivalence-test",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-homotopy-category-triangle-calculus",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 1.2.7.3(3); the forward implication of Lemma 3.1.3.2, with restriction to cores written out."
+   }
+  },
+  {
+   "text": "Conversely suppose all the core tests for $t$ are weak homotopy equivalences. Fix $Q$ and put $D=\\operatorname{Fun}(B,Q)$, $E=\\operatorname{Fun}(A,Q)$, $p=t^*:D\\to E$. These are quasicategories by the functor-equivalence test. For every small simplicial set $K$, apply the hypothesis to the quasicategory $\\operatorname{Fun}(K,Q)$. Currying and interchanging the $K$ and $A$ or $B$ factors identifies the tested map with $\\operatorname{Fun}(K,D)^\\simeq\\to\\operatorname{Fun}(K,E)^\\simeq$, induced by postcomposition with $p$. In particular this map is bijective on components. Components of a simplicial set are vertices modulo finite edge paths, as follows directly from its realization by connected simplices. In these Kan cores a finite edge path can be replaced by a single edge in either orientation: reverse an edge by filling a two-dimensional outer horn with a degenerate side, and concatenate two edges by filling an inner two-horn. Edges of these cores are exactly coherent natural equivalences. Thus the component bijections just obtained are bijections on functors modulo coherent natural equivalence.",
+   "uses": [
+    "lem-coef-joyal-functor-equivalence-test",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.1.3.2 and the exponential argument in Proposition 3.1.3.3; explicit currying for arbitrary domains."
+   }
+  },
+  {
+   "text": "Take $K=E$ in the preceding component bijection. Surjectivity lifts the component of $1_E$ to a functor $s:E\\to D$ with $ps\\simeq1_E$. For $K=D$, the functors $sp$ and $1_D$ have images $psp$ and $p$ in the same component, by whiskering this natural equivalence with $p$. Injectivity of that component map gives $sp\\simeq1_D$. Therefore $s$ is a coherent quasi-inverse for the specified $p$. The equivalences are actual equivalence edges after the Kan horn concatenations of step 3. This construction applies for each $Q$, so condition (ii) of the functor-equivalence test implies that $t$ is categorical. Together with step 2 this proves the arbitrary-simplicial-set core-testing assertion.",
+   "uses": [
+    "lem-coef-joyal-functor-equivalence-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.1.3.2: the two test objects and inverse construction, applied after currying."
+   }
+  },
+  {
+   "text": "Now let $b:B\\to E$ with $E$ a quasicategory. For every test quasicategory $Q$, step 1 identifies restriction along $B^\\flat\\to E^\\natural$ with the specified map $\\operatorname{Fun}(E,Q)^\\simeq\\to\\operatorname{Fun}(B,Q)^\\simeq$. By the point-model definition, the marked map is a weak equivalence exactly when all these restriction maps are weak homotopy equivalences. Steps 2--4 identify precisely that condition with $b$ being categorical. The marked map exists since it only has to preserve degenerate edges.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.1.3.4 over a point, combined with Remark 3.1.3.1 and the core test proved above."
+   }
+  },
+  {
+   "text": "For $c:C\\to E$ between quasicategories, preservation of the inverse-triangle witnesses ensures that $c$ preserves equivalence edges and hence defines $C^\\natural\\to E^\\natural$. The natural-natural identity in step 1 identifies each marked restriction test with $\\operatorname{Fun}(E,Q)^\\simeq\\to\\operatorname{Fun}(C,Q)^\\simeq$. The point-model weak-equivalence test and steps 2--4 again give exactly the stated equivalence with $c$ categorical. No fibrant replacement of $C$ or $E$ is needed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.1.3.4 and Proposition 3.1.3.5 over a point; use the literal mapping-core identity."
+   }
+  },
+  {
+   "text": "All constructions above can be made in each containing universe. In steps 3--4 the new tests $\\operatorname{Fun}(K,Q)$, $D$ and $E$ are in that universe, since its small sets are closed under products, function sets and countable degree indexing. The functor-equivalence test quantifies over the same sufficiently large universes, and the point-model statement explicitly preserves its weak-equivalence tests under enlargement. Thus the proved equivalences persist under enlargement. No step selects a vertex of an input simplicial set: step 4 selects the identity functors, which exist even on the empty quasicategory. For $\\varnothing\\to\\varnothing$ every tested core is a point; for $\\varnothing\\to B$ with $B$ nonempty, the test $Q=\\varnothing$ is $\\varnothing\\to\\Delta^0$ and fails. This verifies that no implicit nonemptiness hypothesis has entered.",
+   "uses": [
+    "lem-coef-joyal-functor-equivalence-test",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Universe-relative application of the displayed tests; empty-domain and empty-target checks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-joyal-functor-equivalence-test",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-homotopy-category-triangle-calculus",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Remark 3.1.3.1, Lemma 3.1.3.2 and Proposition 3.1.3.3, read online; agent-written combination with existing DAG statements, no archived HTT copy in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +147,38 @@
    "results": "{\"t\": \"2026-10-17T08:30:50Z\", \"tool\": \"leansearch\", \"query\": \"Absolute marked weak equivalences between naturally marked quasicategories are precisely categorical equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.mem_weakEquivalences\", \"HomotopicalAlgebra.weakEquivalences\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.weakEquivalences\", \"HomotopicalAlgebra.weakEquivalences_over_def\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.weakEquivalences_op\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\"], \"digest\": \"829798fe0c0ee7b4\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned two-truncated homotopy categories, Kan-complex quasicategories and general model weak-equivalence predicates. None states the marked point-model/Joyal comparison. The JoyalTrick grep hits are a generic model recognition argument, not the Joyal model on simplicial sets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction on cores of functor quasicategories detects categorical equivalences of simplicial sets",
+   "results": "{\"t\": \"2026-10-17T09:35:47Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction on cores of functor quasicategories detects categorical equivalences of simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.core\", \"SSet.QCat.bicategory\", \"CategoryTheory.Iso.core\", \"SSet.QCat\", \"SSet.QCat.strictBicategory\", \"CategoryTheory.Equivalence.core_functor_obj_of\", \"SSet.Truncated.Quasicategory₂\", \"CategoryTheory.coreFunctor\"], \"digest\": \"c6b93912ef12a841\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoryTheory cores and two-truncated QCat constructions do not state this marked simplicial comparison; grep JoyalTrick is an abstract model recognition lemma, not Joyal simplicial equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A minimally marked simplicial map into a naturally marked quasicategory is a marked weak equivalence if and only if it is a categorical equivalence",
+   "results": "{\"t\": \"2026-10-17T09:40:43Z\", \"tool\": \"leansearch\", \"query\": \"A minimally marked simplicial map into a naturally marked quasicategory is a marked weak equivalence if and only if it is a categorical equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.mem_weakEquivalences\", \"HomotopicalAlgebra.mem_trivialCofibrations_iff\", \"HomotopicalAlgebra.WeakEquivalence.mk\", \"HomotopicalAlgebra.trivialFibrations_sub_weakEquivalences\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\"], \"digest\": \"6079eaa28c9f0da0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoryTheory cores and two-truncated QCat constructions do not state this marked simplicial comparison; grep JoyalTrick is an abstract model recognition lemma, not Joyal simplicial equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked simplicial weak equivalences into naturally marked quasicategories agree with Joyal categorical equivalences",
+   "results": "{\"t\": \"2026-10-17T09:40:44Z\", \"tool\": \"leanfinder\", \"query\": \"Marked simplicial weak equivalences into naturally marked quasicategories agree with Joyal categorical equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.QCat.bicategory\", \"SSet.OneTruncation₂.nerveEquiv\", \"SSet.StrictSegal.quasicategory\", \"SSet.Truncated.instCategoryHomotopyCategory₂\", \"SSet.Truncated.HomotopyCategory₂.instCategoryStruct\", \"SSet.instQuasicategoryOfKanComplex\"], \"digest\": \"4268494299b1c43b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoryTheory cores and two-truncated QCat constructions do not state this marked simplicial comparison; grep JoyalTrick is an abstract model recognition lemma, not Joyal simplicial equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cores of functor quasicategories detect categorical equivalences by testing all target quasicategories",
+   "results": "{\"t\": \"2026-10-17T10:14:54Z\", \"tool\": \"leanfinder\", \"query\": \"Cores of functor quasicategories detect categorical equivalences by testing all target quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.core\", \"CategoryTheory.coreFunctor\", \"CategoryTheory.Iso.core\", \"CategoryTheory.Equivalence.core_functor_obj_of\", \"SSet.QCat.bicategory\", \"SSet.QCat\", \"SSet.QCat.strictBicategory\", \"CategoryTheory.Nerve.quasicategory\"], \"digest\": \"38921ec3cefc3f81\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary CategoryTheory cores and two-truncated QCat constructions do not state this marked simplicial comparison; grep JoyalTrick is an abstract model recognition lemma, not Joyal simplicial equivalence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-cone-fiber-comparison",
@@ -82,5 +207,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-marked-flat-categorical-equivalence-test",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Reused existing functor-equivalence, marked-mapping and homotopy lemmas; wrote the core-testing inverse construction and the marking identifications explicitly. No new nodes, no Lean attachment, no compilation. Corrected the bibliographic proof route in this report: HTT 3.2.2.14 is about a mapping simplex and is not needed for the absolute result.",
+  "blueprint": "Serves prop-coef-integral-exceptional-adjoint proof paragraph 2, finite-coefficient derived mapping adjunction; follows the existing ancestry through cartesian cone-fiber comparison. Seven steps prove the extracted absolute marked/Joyal prerequisite without changing the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic pointwise-equivalence and core-Kan facts for coherent functor categories; the unit has no substitute."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic realization consequence of explicit simplicial homotopies, used only to turn the restricted quasi-inverse into a weak homotopy equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-35efb6aa3",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-35efb6aa3 (reviewer sub-agent of L); spot-checked: I read the delivery in full and wrote review.md; I made no changes. The statement is unchanged and true: absolute marked tests B^flat->E^natural and C^natural->E^natural, and the core test Fun(B,Q)^≃->Fun(A,Q)^≃ for categorical equivalence. Small cases agree on both sides: empty->empty, empty->nonempty fails at Q=empty, and Delta^1->Delta^0 is correctly separated. Step 1: the minimal product marking forces Map^flat(K^flat,Q^natural)=Fun(K,Q); the anodyne calculus says Map^sharp is its core, and the point model gives Map^sharp(C^natural,D^natural)=Fun(C,D)^≃. Step 2: the functor test (ii) supplies a quasi-inverse. I checked edge by edge that the unit and counit restrict to the cores, using the pointwise criterion of the cone calculus and the triangle calculus for diagonal edges; the simplicial-homotopy lemma then gives the weak equivalence. Steps 3-4: currying turns the test into postcomposition with p on Fun(K,D)^≃ and Fun(K,E)^≃, Kan cores turn component bijections into classes up to coherent natural equivalence, and K=E then K=D build s with ps≃1 and sp≃1 for the specified p, which is condition (ii). Steps 5-6 are elementary from the point-model definition. Step 7 bridges small C and larger universes through the point model's enlargement clause. A DFS over the dependencies (472 nodes) finds no cycle. An rg search of the DAG finds no duplicate; I read four candidates and none states this test. No new nodes and no SGA sources. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-simplicial-homotopy-equivalence-weak, both generic simplicial facts used as black boxes. Minor and not a fault: the maintainer-owned source field still cites HTT 3.2.2.14, which is not needed; the report flags it and gives the corrected references in proof_origin and the step sources. HTT is not archived, a WANTED line is filed, and proof_origin is agent-written."
  }
 }

@@ -6,11 +6,108 @@
   "def-weil-size-convention",
   "lem-coef-dgcat-finite-limit-sketch-signature"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-coef-dgcat-finite-limit-sketch-signature] for the specified category, equations and cones of $S_R$. A model and its morphisms mean the functors and natural transformations in [lem-coef-finite-limit-sketch-models]; no presentability conclusion of that node is used. Work in the universes of [def-weil-size-convention]. For each specified product or pullback vertex $T$ of a model $M$, the function taking an element of $M(T)$ to its tuple of projections is a bijection onto the corresponding product or compatible-tuples set: existence and uniqueness are exactly the limit-cone condition. In particular $M(B)$ identifies with $M(O)^2$, $M(p_n)$ with $(M(s_n),M(t_n))$, parallel pairs with pairs in a common fiber, and composable pairs with pairs $b,a$ satisfying $s(b)=t(a)$. These bijections respect every projection.",
+   "uses": [
+    "lem-coef-dgcat-finite-limit-sketch-signature",
+    "lem-coef-finite-limit-sketch-models",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Definition 1.1, printed p. 25; agent construction from the explicit signature: choose the signature and interpret its specified cones"
+   }
+  },
+  {
+   "text": "For a model $M$, set $\\operatorname{Ob}(\\mathcal C_M)=M(O)$ and $\\mathcal C_M(x,y)^n=\\{a\\in M(A_n):s_n(a)=x,\\ t_n(a)=y\\}$. Define zero by $M(z_n)$ at the unique point of $M(B)$ over $(x,y)$, and restrict negation, scalars and addition to this fiber using step 1. Endpoint preservation makes these operations well-defined. Evaluating each module equation of [lem-coef-dgcat-finite-limit-sketch-signature] on a tuple in this fiber proves the corresponding $R$-module axiom. Likewise $M(d_n)$ restricts to an $R$-linear map to degree $n+1$, and $d_{n+1}d_n=z_{n+2}p_n$ says on each element that its second differential is zero. All these sets are $\\mathcal U$-small, being subsets of values of $M$.",
+   "uses": [
+    "lem-coef-dgcat-finite-limit-sketch-signature"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Definition 1.1, printed p. 25; agent construction from the explicit signature: fiberwise modules and differential"
+   }
+  },
+  {
+   "text": "For $a\\in\\mathcal C_M(x,y)^p$ and $b\\in\\mathcal C_M(y,z)^q$, use the unique composable-pair lift of $(b,a)$ from step 1 and apply $M(c_{q,p})$ to define $ba\\in\\mathcal C_M(x,z)^{p+q}$. Define $1_x=M(1)(x)$. Evaluate the signature equations on composable triples and on parallel/composable tuples: they give associativity, both unit identities and bilinearity. The differential equations give $d(1_x)=0$ and $d(ba)=d(b)a+(-1)^q b\\,d(a)$, with $q=|b|$ as required. Thus steps 2 and 3 give precisely the dg-category data and axioms in the statement. No homotopy or quasi-equivalence is involved.",
+   "uses": [
+    "lem-coef-dgcat-finite-limit-sketch-signature"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Definition 1.1, printed p. 25; agent construction from the explicit signature: composition, units and the Leibniz sign"
+   }
+  },
+  {
+   "text": "Given a model morphism $\\alpha:M\\to N$, take its object map $\\alpha_O$ and send a homogeneous arrow $a$ to $\\alpha_{A_n}(a)$. Naturality for $s_n,t_n$ puts this arrow in $\\mathcal C_N(\\alpha_Ox,\\alpha_Oy)^n$. Naturality for projections forces $\\alpha_T$ on each auxiliary vertex to send each projected tuple to its componentwise image: compare all projections and use uniqueness in the target limit. Naturality for zero, addition, scalars, differential, composition and unit arrows therefore says exactly that these fiber maps are linear chain maps preserving composition and units. They define a strict dg functor. Identities and composites are preserved since their components on $O$ and $A_n$ are respectively identities and composites of functions. Denote this functor on model categories by $E$.",
+   "uses": [
+    "lem-coef-dgcat-finite-limit-sketch-signature"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Definition 1.1, printed p. 25; agent construction from the explicit signature: model natural transformations give strict dg functors"
+   }
+  },
+  {
+   "text": "Conversely, for a small $R$-linear dg category $\\mathcal C$ set $D(\\mathcal C)(O)=\\operatorname{Ob}(\\mathcal C)$ and $D(\\mathcal C)(A_n)=\\coprod_{x,y}\\mathcal C(x,y)^n$; use the two labels for endpoints. Interpret $B$, parallel pairs, composable pairs and every further tuple sort by their actual finite products or pullbacks of sets. Interpret the operation arrows by the labeled module operations, differential, units and composition of $\\mathcal C$. Interpret every tuple arrow by the tuple of its prescribed projections. The dg axioms give exactly the listed equations, and substituting a well-typed expression preserves each equation. Hence paths of generating arrows with equal class induce equal functions; this defines a functor on the presented indexing category. The designated cones are limit cones by construction, so this is a model. Every sort is $\\mathcal U$-small: labeled unions are indexed by a $\\mathcal U$-small set of object pairs and all auxiliary sorts are finite limits of $\\mathcal U$-small sets.",
+   "uses": [
+    "lem-coef-dgcat-finite-limit-sketch-signature"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Definition 1.1, printed p. 25; agent construction from the explicit signature: construct the model by labeled homogeneous arrows"
+   }
+  },
+  {
+   "text": "For a strict dg functor $F:\\mathcal C\\to\\mathcal D$, define $D(F)_O=F$ on objects and $D(F)_{A_n}(x,y,a)=(Fx,Fy,F(a))$. On auxiliary sorts use componentwise maps of compatible tuples. A source composable pair remains composable because its common endpoint has the same image under $F$; no injectivity of $F$ is required. Preservation of module operations, differential, units and composition verifies naturality for every operation arrow; the componentwise formulas verify it for projections and tuple arrows. Naturality for arbitrary paths follows by composing these squares, and the relations impose no further condition. Componentwise formulas also preserve identities and composites, defining the functor $D$ from dg categories to models.",
+   "uses": [
+    "lem-coef-dgcat-finite-limit-sketch-signature"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Definition 1.1, printed p. 25; agent construction from the explicit signature: strict dg functors give model natural transformations"
+   }
+  },
+  {
+   "text": "For every $\\mathcal C$, the functor $E D(\\mathcal C)\\to\\mathcal C$ is the identity on objects and on each degree sends the element $(x,y,a)$ of the fiber over $(x,y)$ to $a$. Its inverse inserts the labels $(x,y)$; these are mutually inverse linear chain maps preserving composition and units by their definitions. For $F:\\mathcal C\\to\\mathcal D$, both routes around the naturality square send $(x,y,a)$ to $F(a)$ and send $x$ to $Fx$. Thus these isomorphisms are natural in $\\mathcal C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Definition 1.1, printed p. 25; agent construction from the explicit signature: first inverse isomorphism, by inserting and forgetting labels"
+   }
+  },
+  {
+   "text": "For a model $M$, define $\\eta_M:M\\to D E(M)$ on $O$ by the identity and on $A_n$ by $a\\mapsto(s_n(a),t_n(a),a)$. The inverse forgets the two labels. On each auxiliary sort use its projection-tuple bijection from step 1, followed by these primary-sort bijections; its inverse is the unique lift of the corresponding tuple to $M$. These formulas commute with projections. They commute with operation arrows because the operations of $E(M)$ were defined using those same unique tuple lifts; for a tuple arrow, equality follows by comparing its prescribed projections. They consequently commute with all paths and give an isomorphism of models. For $\\alpha:M\\to N$, naturality on $A_n$ reads $a\\mapsto(\\alpha_Os_n(a),\\alpha_Ot_n(a),\\alpha_{A_n}(a))$ on both sides, by endpoint naturality. Naturality on every auxiliary sort follows by comparing projections. Thus $\\eta$ is a natural isomorphism. Together with step 7 this proves the claimed equivalence. Its evaluation comparisons are the identity on $O$ and the displayed label-insertion/forgetting bijections on $A_n$, natural for arbitrary object maps.",
+   "uses": [
+    "lem-coef-dgcat-finite-limit-sketch-signature"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/0710.4303",
+    "place": "Definition 1.1, printed p. 25; agent construction from the explicit signature: second inverse isomorphism and evaluation compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-dgcat-finite-limit-sketch-signature",
+  "lem-coef-finite-limit-sketch-models",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Paragraph 2, downstream explicit signature-model construction in the finite-adjunction-diagram/free-cell route; original elementary argument, with dg-category convention checked against Tabuada Definition 1.1."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dgcat-free-cell-calculus",
@@ -66,6 +163,41 @@
    "results": "{\"t\": \"2026-10-17T08:45:03Z\", \"tool\": \"grep\", \"query\": \"DifferentialObject|EnrichedCategory|finite.?limit.?sketch\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/FunctorHom.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\"], \"digest\": \"81ac6fa9cd210256\"}",
    "date": "2026-10-17",
    "verdict": "no match: generic limits, linear categories, enriched categories, and differential objects do not construct or identify this signature sketch. Read Mathlib/CategoryTheory/Enriched/EnrichedCat.lean:35-48 and Mathlib/Algebra/Homology/DifferentialObject.lean:85-150; the latter identifies differential objects with complexes, not models with dg categories."
+  },
+  {
+   "tool": "grep",
+   "query": "DGCat|DgCategory|DifferentialGradedCategory|FiniteLimitSketch|finite.limit.sketch",
+   "results": "{\"t\": \"2026-10-17T10:09:33Z\", \"tool\": \"grep\", \"query\": \"DGCat|DgCategory|DifferentialGradedCategory|FiniteLimitSketch|finite.limit.sketch\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned hits and Mathlib/CategoryTheory/Enriched/EnrichedCat.lean:35-48 and Mathlib/Algebra/Homology/DifferentialObject.lean:85-150. The former defines enriched categories; the latter identifies differential graded objects with complexes. Neither provides models of this explicit dg-category sketch or the evaluation-compatible equivalence. The other hits concern derived linear functors, connected components or profinite diagrams."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Models of the finite limit sketch for R-linear differential graded categories are equivalent to small dg categories with strict dg functors",
+   "results": "{\"t\": \"2026-10-17T10:09:35Z\", \"tool\": \"leanfinder\", \"query\": \"Models of the finite limit sketch for R-linear differential graded categories are equivalent to small dg categories with strict dg functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"HomotopyCategory.instLinearIntUpSingleFunctor\", \"DerivedCategory.instLinearSingleFunctor\", \"DerivedCategory.instLinearCochainComplexIntQ\", \"HomologicalComplex.dgoEquivHomologicalComplex_functor\", \"CategoryTheory.DifferentialObject.categoryOfDifferentialObjects\", \"DerivedCategory.instLinearHomotopyCategoryIntUpQh\", \"HomologicalComplex.dgoEquivHomologicalComplex\"], \"digest\": \"8552142a1c66054d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned hits and Mathlib/CategoryTheory/Enriched/EnrichedCat.lean:35-48 and Mathlib/Algebra/Homology/DifferentialObject.lean:85-150. The former defines enriched categories; the latter identifies differential graded objects with complexes. Neither provides models of this explicit dg-category sketch or the evaluation-compatible equivalence. The other hits concern derived linear functors, connected components or profinite diagrams."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedCategory\", \"HomologicalComplex\"",
+   "results": "{\"t\": \"2026-10-17T10:09:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedCategory\\\", \\\"HomologicalComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned hits and Mathlib/CategoryTheory/Enriched/EnrichedCat.lean:35-48 and Mathlib/Algebra/Homology/DifferentialObject.lean:85-150. The former defines enriched categories; the latter identifies differential graded objects with complexes. Neither provides models of this explicit dg-category sketch or the evaluation-compatible equivalence. The other hits concern derived linear functors, connected components or profinite diagrams."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A set valued model of an essentially algebraic theory of objects arrows differential and composition is a differential graded category",
+   "results": "{\"t\": \"2026-10-17T10:11:28Z\", \"tool\": \"leansearch\", \"query\": \"A set valued model of an essentially algebraic theory of objects arrows differential and composition is a differential graded category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.DifferentialObject.categoryOfDifferentialObjects\", \"CategoryTheory.DifferentialObject.noConfusionType\", \"CategoryTheory.DifferentialObject.ctorIdx\", \"CategoryTheory.GradedObject\", \"CategoryTheory.DifferentialObject\", \"CategoryTheory.DifferentialObject.concreteCategoryOfDifferentialObjects\", \"CategoryTheory.DifferentialObject.Hom.comp_f\", \"CategoryTheory.DifferentialObject.mk\"], \"digest\": \"65251e180e7c931b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned hits and Mathlib/CategoryTheory/Enriched/EnrichedCat.lean:35-48 and Mathlib/Algebra/Homology/DifferentialObject.lean:85-150. The former defines enriched categories; the latter identifies differential graded objects with complexes. Neither provides models of this explicit dg-category sketch or the evaluation-compatible equivalence. The other hits concern derived linear functors, connected components or profinite diagrams."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence between models of a many sorted finite limit sketch and differential graded categories via fibers of source and target maps",
+   "results": "{\"t\": \"2026-10-17T10:11:29Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalence between models of a many sorted finite limit sketch and differential graded categories via fibers of source and target maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsEquivalenceLightDiagram'LightDiagramToLightFunctor\", \"instIsEquivalenceLightDiagramLightProfiniteLightDiagramToLightProfinite\", \"CategoryTheory.decomposedEquiv_functor\", \"instIsEquivalenceLightProfiniteLightDiagramLightProfiniteToLightDiagram\", \"CategoryTheory.instIsEquivalenceDecomposedDecomposedTo\", \"LightDiagram'.toLightFunctor\", \"HomologicalComplex.dgoEquivHomologicalComplex\", \"CategoryTheory.GradedObject.comapEquiv\"], \"digest\": \"a215a2f48b388fa1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read returned hits and Mathlib/CategoryTheory/Enriched/EnrichedCat.lean:35-48 and Mathlib/Algebra/Homology/DifferentialObject.lean:85-150. The former defines enriched categories; the latter identifies differential graded objects with complexes. Neither provides models of this explicit dg-category sketch or the evaluation-compatible equivalence. The other hits concern derived linear functors, connected components or profinite diagrams."
   }
  ],
  "blueprint": {
@@ -83,5 +215,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dgcat-sketch-model-identification",
+  "worker": "stage1",
+  "summary": "Gave eight explicit steps constructing both functors and both natural inverse isomorphisms from the existing finite-limit signature. Checked all fiber operations, degree/sign conventions, presented-category relations, size bounds and arbitrary noninjective object maps. No new nodes: the remaining arguments are elementary evaluations of the cited signature and unique tuple lifts. Statement unchanged. Corrected the source attribution in the report: Tabuada Lemma 1.10 concerns cell maps, not this equivalence; Definition 1.1 provides the dg convention and the proof is original. Five fresh logged Mathlib searches read; no match.",
+  "blueprint": "Nearest ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: explicit model identification used through lem-coef-finite-adjunction-diagram-realization, cartesian section mates, enriched Yoneda, dg quasifunctor invariance, dgcat model structure and free-cell calculus. This proves the identification child of that route without replacing a unit step.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-98018104d",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-98018104d (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the full statements of its three cited nodes: dgcat-finite-limit-sketch-signature, finite-limit-sketch-models (only the definition of a model is used) and def-weil-size-convention. The delivery has no new nodes, so there is nothing to drop. The steps use only clauses the signature states explicitly: the sorts O, A_n, B, the parallel and composable pairs, z/neg/scalars/add/1/c_{q,p}/d, endpoint preservation, the module, associativity, unit and bilinearity equations, d^2=z p, and Leibniz with (-1)^q for b in A_q, which matches (-1)^{|b|}. Tuple arrows have prescribed projections. The fiber construction (steps 2-3), model morphisms to strict dg functors with auxiliary components forced by uniqueness of limits (step 4), the labeled-coproduct model with relations checked on generators (steps 5-6), and the two natural isomorphisms giving an equivalence (steps 7-8) are all correct, and their elementary flags are justified. Small cases tested: the empty dg category, a one-object dg algebra, R=0, characteristic 2, the degree bookkeeping p+q+1, and a non-injective object map. There is no cycle and no restated parent clause: the parent free-cell-calculus cites the item as its own step 1, not as a clause of its statement. An rg sweep for sketch, essentially-algebraic and dg-model nodes found no duplicate. A Mathlib grep for sketch/DGCat found no match, which agrees with the recorded searches. Non-blocking: the inherited node-level source.place still names Tabuada Lemma 1.10, which by the worker's own account does not state this result. The steps cite Def 1.1 and the proof is marked agent; the document is not local, so I made no edit. This auxiliary lemma involves no target, coefficient category or base-change morphism, and uses no SGA source."
  }
 }

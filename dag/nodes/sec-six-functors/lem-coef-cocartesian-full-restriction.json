@@ -11,9 +11,93 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $q=p|_R$. A filler in $E$ of an inner horn in $R$ has exactly the vertices already present in that horn, because $n\\geq2$ and every vertex of $\\Delta^n$ belongs to $\\Lambda_i^n$. All these vertices belong to $R$, so fullness puts the entire filler in $R$. Applying this first to the quasicategory $E$, and then to a specified lifting problem over $S$ for the inner fibration $p$, proves respectively that $R$ is a quasicategory and $q$ is an inner fibration.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definitions 2.0.0.3 and 2.4.2.1; elementary full-subset horn calculation"
+   }
+  },
+  {
+   "text": "If an edge $u$ in $R$ is $p$-cocartesian, solve any of its defining $\\Lambda_0^n$ lifting problems in $E$. Again $n\\geq2$, so the horn contains every vertex; its filler lies in $R$ by fullness. Hence $u$ is $q$-cocartesian. The assumed lift with source $x\\in R$ and target in $R$ is an edge of $R$, again by fullness, and is therefore a $q$-cocartesian lift over the prescribed base edge. Together with step 1 this proves that $q$ is a cocartesian fibration.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 2.4.1.4 and Definition 2.4.2.1, opposite dual; direct horn argument"
+   }
+  },
+  {
+   "text": "For reflection let $e:x\\to y$ in $R$ be $q$-cocartesian and put $\\alpha=p(e)$. Choose the lift $u:x\\to y_0$ over exactly $\\alpha$ supplied by the hypothesis, with $y_0\\in R$ and $u$ $p$-cocartesian. Step 2 makes $u$ $q$-cocartesian. Apply [lem-coef-infinity-cocartesian-composition-initiality] to $q$: both $u$ and $e$ are initial objects of $L_q(x,\\alpha)$, so their comparison gives a triangle with edges $u$, $v:y_0\\to y$, $e$, where $q(v)$ is the degenerate identity at $p(y)$ and $v$ is an equivalence in the fiber. Its inverse and inverse triangles are also in $E$, so $v$ is an equivalence in $E$. The initial-outer-horn assertion of [lem-cbc-inner-fibration-equivalence-outer-horn-lift], applied to the inner fibration $p$ and this equivalence $v$, gives every defining horn filler for $v$: thus $v$ is $p$-cocartesian. Now apply the composition clause of [lem-coef-infinity-cocartesian-composition-initiality] to the same triangle in $E$. Since $u$ and $v$ are $p$-cocartesian, so is $e$. This proves reflection, and step 2 proves preservation.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.1.7 and Remark 2.4.1.9, opposite duals; Proposition 2.4.1.5 for the equivalence-edge case, implemented by the cited relative outer-horn lemma"
+   }
+  },
+  {
+   "text": "For $Z=E,R$ put $p_Z=p,q$, respectively. A lifting problem for $\\operatorname{Fun}(K,Z)\\to\\operatorname{Fun}(K,S)$ against an inner horn is, by the degreewise exponential definition, exactly a lifting problem for $p_Z$ against $K\\times\\Lambda_i^n\\hookrightarrow K\\times\\Delta^n$. An inner horn inclusion has the left lifting property against every inner fibration, by the definition of inner fibration. Apply [lem-coef-inner-anodyne-pushout-product] to it and $\\varnothing\\hookrightarrow K$: the indicated product inclusion is inner anodyne, and hence has the left lifting property against $p_Z$. Thus the postcomposition map is an inner fibration. Pulling it back degreewise over the constant vertex $a:K\\to S$ gives the stated strict fiber. To fill an inner horn of this fiber, use the constant base simplex at $a$ in the lifting problem just solved. The resulting filler still has that exact base simplex. Consequently each strict fiber is a quasicategory. This argument applies to arbitrary small simplicial $K$, without requiring that $K$ be a quasicategory.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-inner-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.3.2.4 (inner-anodyne products) and the inner-fibration consequence of the dual of Proposition 3.1.2.1; exponential adjunction written out"
+   }
+  },
+  {
+   "text": "Write $T_Z=\\operatorname{Fun}_{/S}(K,Z)$. Its $n$-simplices are exactly maps $h:K\\times\\Delta^n\\to Z$ with $p_Zh=a\\operatorname{pr}_K$. Such an $h$ valued in $E$ factors through $R$ if and only if every vertex $h(k,i)$ belongs to $R$, by the definition of a full simplicial subcategory. For fixed $i$, these are precisely the object values of the diagram obtained by restriction to $K\\times\\{i\\}$. Therefore the inclusion $T_R\\hookrightarrow T_E$ is degreewise injective and consists of precisely those simplices all of whose diagram vertices take their object values in $R$. This is exactly the asserted full subcategory.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Elementary calculation with the degreewise exponential and full-subcategory definitions"
+   }
+  },
+  {
+   "text": "Fix diagrams $b,c\\in T_R$. An $n$-simplex of the right-pinched mapping simplicial set in $T_E$ is a map $\\Delta^{n+1}\\to T_E$ whose entire initial face is constant at $b$ and whose last vertex is $c$. Its vertices are all $b$ or $c$. Step 5 therefore puts the whole simplex in $T_R$, and its initial-face and last-vertex conditions are unchanged. The reverse inclusion is immediate, so these mapping simplicial sets are equal degreewise, with identical operators. For $t:L\\to K$, restriction sends $h$ to $h\\circ(t\\times\\mathrm{id})$, with base $at$; this preserves the vertex condition and commutes with every parameter restriction, including those defining the pinched mapping spaces. Thus the descriptions commute with precomposition. If $K=\\varnothing$, each product $K\\times\\Delta^n$ is empty and each strict fiber is the one-point simplicial set; both inclusions and their mapping-space equalities are identities, so the assertion includes this case.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Elementary full-subcategory, right-pinched mapping-space and precomposition calculations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-coef-inner-anodyne-pushout-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Full-subcategory horn argument and degreewise diagram calculation, with HTT Proposition 2.4.1.7 and Remark 2.4.1.9 (opposite duals) for reflection, and Corollary 2.3.2.4 for inner exponentiation. Read online; archival copy WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +134,46 @@
    "date": "2026-10-17",
    "verdict": "no match: Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:50-78 has ordinary universal properties IsCocartesian and IsStronglyCocartesian. The returned of_comp/map declarations concern ordinary morphisms. No result gives quasicategorical restriction, reflection, and strict relative diagram categories with coherent mapping spaces.",
    "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian|cocartesianFibration",
+   "results": "{\"t\": \"2026-10-17T10:10:27Z\", \"tool\": \"grep\", \"query\": \"cocartesian|cocartesianFibration\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\", \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\"], \"digest\": \"91a483950b001010\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cocartesian or fullness declarations do not state quasicategorical horn lifting, strict relative diagrams and right-pinched mapping simplices. Read Cocartesian.lean:46-78; ordinary Hom-set uniqueness is not this statement.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The strict category of diagrams over a fixed base in a transport stable full subcategory of a cocartesian fibration is full",
+   "results": "{\"t\": \"2026-10-17T10:10:28Z\", \"tool\": \"leansearch\", \"query\": \"The strict category of diagrams over a fixed base in a transport stable full subcategory of a cocartesian fibration is full\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.BasedCategory.instStrict\", \"CategoryTheory.CostructuredArrow.instFullOverToOver\", \"CategoryTheory.Limits.createsColimitFullSubcategoryInclusion\", \"CategoryTheory.MorphismProperty.instFullCostructuredArrowTopOverToOver\", \"CategoryTheory.CostructuredArrow.instFullCompPre\", \"CategoryTheory.StructuredArrow.instFullUnderToUnder\", \"CategoryTheory.Limits.Cocones.functoriality_full\", \"CategoryTheory.Limits.FormalCoproduct.instFullIncl\"], \"digest\": \"bcbfea1bc3f222f7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cocartesian or fullness declarations do not state quasicategorical horn lifting, strict relative diagrams and right-pinched mapping simplices. Read Cocartesian.lean:46-78; ordinary Hom-set uniqueness is not this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cocartesian\", \"Full\"",
+   "results": "{\"t\": \"2026-10-17T10:10:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cocartesian\\\", \\\"Full\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cocartesian or fullness declarations do not state quasicategorical horn lifting, strict relative diagrams and right-pinched mapping simplices. Read Cocartesian.lean:46-78; ordinary Hom-set uniqueness is not this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a cocartesian fibration of quasicategories to a full subcategory stable under transport reflects cocartesian edges",
+   "results": "{\"t\": \"2026-10-17T10:10:29Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of a cocartesian fibration of quasicategories to a full subcategory stable under transport reflects cocartesian edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\"], \"digest\": \"5173d50851ef0a76\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cocartesian or fullness declarations do not state quasicategorical horn lifting, strict relative diagrams and right-pinched mapping simplices. Read Cocartesian.lean:46-78; ordinary Hom-set uniqueness is not this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full simplicial subcategories and strict fibers of functor quasicategories preserve all right pinched mapping simplices",
+   "results": "{\"t\": \"2026-10-17T10:11:43Z\", \"tool\": \"leanfinder\", \"query\": \"Full simplicial subcategories and strict fibers of functor quasicategories preserve all right pinched mapping simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.instFullCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.nerveFunctor.full\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"SSet.Truncated.liftOfStrictSegal\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"CategoryTheory.Nerve.strictSegal\"], \"digest\": \"35dce61ee43b3cdd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cocartesian or fullness declarations do not state quasicategorical horn lifting, strict relative diagrams and right-pinched mapping simplices. Read Cocartesian.lean:46-78; ordinary Hom-set uniqueness is not this statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-monoidal-yoneda-embedding",
@@ -79,5 +199,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cocartesian-full-restriction",
+  "worker": "stage1",
+  "summary": "Proved the full restriction directly by horn fillers, reflected cocartesian edges by comparison of initial lifts, and computed strict relative diagram categories, pinched mapping simplices and precomposition degreewise. Reused existing generic lemmas; no new nodes and no statement change.",
+  "blueprint": "Realizes the full-image restriction and strict relative functor inclusion extracted from step 5 of lem-coef-monoidal-yoneda-embedding, in the coherent-enrichment chain serving proof paragraph 2 of prop-coef-integral-exceptional-adjoint. Preserves the existing blueprint ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "why": "The relative outer-horn filler along an equivalence is a generic quasicategory tool used only to recognize the comparison equivalence as p-cocartesian; the item unit has no separate equivalence-edge horn assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-c66f142f6",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-c66f142f6 (reviewer sub-agent of L); spot-checked: I read the full item (statement and all six steps), the statement of every cited node, the unit sk-prop-sf-biduality-general, the blueprint ancestor prop-coef-integral-exceptional-adjoint (proof paragraph 2) and the only citer, lem-coef-monoidal-yoneda-embedding (steps 9 and 10). The delivery is one commit containing the item and its report. It adds no new nodes and changes neither statement nor stmt_deps. proof_deps equals the union of the uses, there is no cycle, nothing cites a merged node and nothing cites SGA. Steps 1 and 2 are elementary and correct: for n>=2 every horn Λ^n_i contains all vertices, so by fullness the inner-horn and Λ^n_0 fillers stay in R. Step 3 is correct. Both u and e are initial lifts in L_q(x,α), and the cited composition-initiality statement gives the comparison 2-simplex (u,v,e) with v over 1_b and v an equivalence in the fiber, so v is also an equivalence in E. The relative outer-horn lemma then makes v p-cocartesian, and the composition clause applied to p makes e p-cocartesian. Step 4 is correct: the pushout-product Mathlib leaf with Λ^n_i→Δ^n and ∅→K shows Fun(K,Z)→Fun(K,S) is an inner fibration, and the constant base simplex makes each strict fiber a quasicategory for any small K. Steps 5 and 6 are correct: the vertices of K×Δ^n are pairs (k,i), so T_R is exactly the full subcategory of R-valued diagrams; the pinched mapping simplices have only b or c as vertices, so the mapping sets are equal; precomposition commutes with all of this; and K=∅ gives point fibers. Edge cases tested: R empty, R=E, S a point, nerves, identity base edges, K empty and K a point. Repleteness is retained but unused; nothing is weakened. The outer-horn lemma assumes small quasicategories, but the argument does not depend on size, so this is a remark, not a fault. HTT is not archived; it is listed as WANTED and the proof is marked as agent-written. I checked 2.4.1.5, 2.4.1.7, 2.3.2.4 and 3.1.2.1 from memory and they fit. The duplicate search turned up only the sk-prop-sf-cbc outer-horn pair, of which the relative one is the node cited, and the mapping-space-based pointwise-transport node, which uses a different notion and is not a duplicate. Accepted tool_use: lem-cbc-inner-fibration-equivalence-outer-horn-lift in step 3 only, as generic relative outer-horn filling along an equivalence. No fixes."
  }
 }
