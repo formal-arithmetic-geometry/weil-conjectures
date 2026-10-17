@@ -29,7 +29,11 @@
   "def-pc-fibre-product",
   "def-nagata-effective-cartier-ideal",
   "lem-asd-ordinary-supported-kummer",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-finite-p1-data",
+  "lem-amb-p1-diagonal-integrals"
  ],
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sp-tower-geometric",
@@ -306,5 +310,31 @@
   "group": "Q122",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q122-4123a5788 (reviewer sub-agent of L); spot-checked: Read all seven steps, cited statements, source passages, and chapter/unit route. Verified trace normalization, Cartier pullback, canonical exchange and mate-pasting compatibility, coefficient categories, edge cases, and absence of circular dependencies or whole-statement duplicates. No repairs needed; detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArbitraryBaseP1Integrals",
+  "declaration": "AlgebraicGeometry.Etale.arbitraryBaseP1_integrals",
+  "declarations": [
+   "AlgebraicGeometry.Etale.arbitraryBaseP1DiagonalTrace",
+   "AlgebraicGeometry.Etale.ArbitraryBaseP1DiagonalIntegrals",
+   "AlgebraicGeometry.Etale.ArbitraryBaseP1Splitting",
+   "AlgebraicGeometry.Etale.ArbitraryBaseP1BaseChange",
+   "AlgebraicGeometry.Etale.arbitraryBaseP1_integrals"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ArbitraryBaseP1Integrals.lean",
+  "statement": "theorem arbitraryBaseP1_integrals (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) : ∃ (t : OrdinaryFiniteTwistTransport A N hA) (d : ∀ (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))), ArbitraryBaseP1Splitting A N hA t T hT), ArbitraryBaseP1BaseChange A N hA t d ∧ ∀ (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))), ArbitraryBaseP1DiagonalIntegrals A N hA t S hS (d (ProjectiveLine S) ((map_natCast (ProjectiveLine S ↘ S).appTop.hom N) ▸ hS.map (ProjectiveLine S ↘ S).appTop.hom)).decomposition",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Compilation repair: explicit trace composition objects; the same two-component Kummer splitting is packaged in ArbitraryBaseP1Splitting, its two pullback equations in ArbitraryBaseP1BaseChange, and its supported diagonal normalization and both integrals in ArbitraryBaseP1DiagonalIntegrals. No mathematical hypothesis or clause changes; all helpers are in this item module."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0c404301f",
+  "group": "Q99",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, all 17 dependencies, sources, canonical maps, universes, edge cases, docstrings, report sections, and route-pivot compliance. Signature matches verbatim. Per-file scompile.py checks passed in 38.7s and 42.1s. No fixes needed; branch unchanged."
  }
 }

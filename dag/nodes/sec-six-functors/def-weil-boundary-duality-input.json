@@ -27,7 +27,8 @@
   "lem-cat-right-adjoint-composition",
   "lem-amb-etale-compact-comparisons",
   "thm-amb-etale-exceptional-adjoint",
-  "thm-weil-pbc-site-comparison"
+  "thm-weil-pbc-site-comparison",
+  "lem-amb-unbounded-compact-support-comparisons"
  ],
  "proof": [],
  "proof_deps": [],
@@ -128,5 +129,56 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-de4fb5d5f (reviewer sub-agent of L); spot-checked: Read in full: the contract documents, packet, report, the item, unit sk-prop-sf-biduality-general, both blueprint texts (master order 2129 and main-20261015 order 2473, which differ only in 'preservation of D^b_ctf'), the statements of all 11 cited nodes, and all nine proof steps of cor-weil-boundary-duality-discharge, the item's only user. No SGA is cited. Setting and coefficient category match the source: k = algebraic closure of F_q, l != p, A = A_{E,n} with n >= 1, small pro-etale sites, D^b_c from def-weil-finite-torsion-constructibility, D^b_ctf from def-weil-finite-tor-amplitude. Clause 1 keeps preservation as a separate condition. Clause 2 type-checks; the finite-Tor condition is needed because A_{E,n} has infinite global dimension for n >= 2. In the expanded compatibility both sides are maps i^*K -> D_Z Ri^! D_T K. Transposing to pairings shows the equation holds with the stated normalization of alpha, and that normalization is the r_K the discharge constructs in steps 3 and 7. Small cases checked: zero objects, Z=T, Z empty, and T=Spec k with n=1. No new nodes, so B and D are vacuous; no duplicate found; the empty proof is correct for a definition. FIX (C4, cited node does not state the fact): the item credited def-weil-exceptional-inverse-image with 'composition comparisons', but that node states only a chart-level Hom chain, and no DAG node states R(gf)^! = Rf^!Rg^! for these functors. The corrected file names that comparison as the right-adjoint mate [lem-cat-right-adjoint-composition] of the etale D^+ compact-support composition [lem-amb-etale-compact-comparisons] for the adjoints of [thm-amb-etale-exceptional-adjoint], transported along the D^+ unit isomorphism of [thm-weil-pbc-site-comparison]. This gives Ri^! omega_T = omega_Z, as discharge step 0 does. The four ids were added to stmt_deps and none of them reaches the item, so no cycle. No other change, no tool_uses, no drop.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.BoundaryDualityInput",
+  "declaration": "AlgebraicGeometry.ProEtale.BoundaryDualityInput",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.Operations",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.Operations.omega",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.Operations.dual",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.Operations.exceptional",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.Operations.delta",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.Operations.transpose",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.Operations.rightTensor",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.Operations.tensorModel",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.Operations.exchange",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.Assertions",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.FixedCategory",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.FixedEtaleCategory",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.comparison",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.comparisonRight",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.genericComparisonTensor",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.etaleOmega",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.omega",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.etaleOmegaComposition",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.derivedComparisonPullback",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.Piece",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.Piece.noetherianSpace",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.Piece.structureMap",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.Piece.structureMap_hasCompactification",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.Boundary",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.CanonicalOperations",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.Data",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.ctf",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput.finiteComposition",
+   "AlgebraicGeometry.ProEtale.BoundaryDualityInput"
+  ],
+  "file": "lean/Sheaf/SixFunctors/BoundaryDualityInput.lean",
+  "statement": "def BoundaryDualityInput (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (CommRingCat.of D.k)) [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The two clauses are stated on the recorded fixed-scalar small pro-etale categories, with ctf tested by sfIntrinsicDerivedEquivalence. Abstract categorical formulas avoid repeated kernel expansion; every operation used in them is fixed by CanonicalOperations HEq fields to its actual existing construction, including site square, evaluation, Koszul symmetry, tensor mate and compact-support composition. No arbitrary map or arbitrary isomorphism is substituted. All definitions contain real data; no theorem is proved.",
+  "fixed_by": "NT-stage2-Codex-df55ebd91"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-df55ebd91",
+  "group": "Q40",
+  "result": "fix",
+  "note": "Wrote review.md and complete fixes for the placeholder second-reading section (H1/H11) and non-verbatim signature formatting (H2). Mathematical clauses, dependencies, canonical maps, universes and edge cases checked. Immutable module compiled cleanly through scompile.py in both forms. Delivery head unchanged."
  }
 }

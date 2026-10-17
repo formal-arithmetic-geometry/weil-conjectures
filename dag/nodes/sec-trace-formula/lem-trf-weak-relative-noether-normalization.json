@@ -312,5 +312,24 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-34aa47b0e (reviewer sub-agent of L); spot-checked: I read Stacks 0GTE, all of the 0GTF proof, all of the 0GTG proof (more-morphisms.tex 8555-8883) and limits 05M5, plus the item, both new nodes and the statement of every cited node. The item statement is correct and unchanged apart from the added polynomial-ring citation. The N-variable proof implies the stated 0<=d<=N, and the A=0 and R=0 cases work. Steps 1-9 follow 0GTG. Step 3 uses 05M5 instead of 0EY2, which is valid because isomorphisms are closed immersions. The rescaling t->ft, the strict drop dim R/fR < dim R via a minimal prime avoiding f, and the f-in/f-not-in fibre identifications in step 8 all check. New node generic-principal-coordinate-dimension-drop is exactly the 0GTG intermediate result through V=D(f) by prime avoidance. It is true when d is only an upper bound, I tested it on k[s,x]/(sx), non-reduced and reducible bases and dim R=0, and it does not restate a clause of the item. New node power-perturbation-fibre-dimension is 0GTF with identical hypotheses, and its threshold is needed: x^n-x^m fails at n=m. Duplicate search by 0GTG/0GTF/0GTE/sum-is-ok/Noether normalization and dense/principal-open fibre wording found nothing; candidates read are listed in review.md. One fault, fixed (C1/C4): step 3 moved between quasi-finite (the isolated-point definition) and locally quasi-finite, citing only pqf-def-quasifinite. The fix adds the existing node pqf-lem-qf-locqf-qc to the step text, uses, proof_deps and split_report.tool_uses. It does not depend on the item, so no cycle. Accepted tool uses: 05M5 node, 00R1 node, separated-lqf-base-change clause 2, pqf-lem-qf-locqf-qc. The new nodes are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.WeakRelativeNoetherNormalization",
+  "declaration": "AlgebraicGeometry.weakRelativeNoetherNormalization",
+  "statement": "theorem weakRelativeNoetherNormalization {R A : Type u} [CommRing R] [CommRing A] [Algebra R A] (hft : LocallyOfFiniteType (Scheme.Spec.map (Opposite.op (CommRingCat.ofHom (algebraMap R A)))) ∧ QuasiCompact (Scheme.Spec.map (Opposite.op (CommRingCat.ofHom (algebraMap R A))))) (N : ℕ) (hN : ∀ y, topologicalKrullDim ((Scheme.Spec.map (Opposite.op (CommRingCat.ofHom (algebraMap R A)))).fiber y) ≤ (N : ℕ∞)) : ∃ d : ℕ, 0 ≤ d ∧ d ≤ N ∧ ∃ g : MvPolynomial (Fin d) R →ₐ[R] A, Scheme.Hom.IsQuasiFinite (Scheme.Spec.map (Opposite.op (CommRingCat.ofHom g.toRingHom)))",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/WeakRelativeNoetherNormalization.lean",
+  "fixed_by": "NT-stage2-Codex-d10655208"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d10655208",
+  "group": "Q31",
+  "result": "fix",
+  "note": "Statement and dependencies are correct; original and corrected modules compile successfully. Complete fixes repair H8’s missing step-by-step proof docstring and H9’s omitted proof-dependency imports. Signature unchanged. Full findings and compiler evidence are in review.md."
  }
 }
