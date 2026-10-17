@@ -12,7 +12,9 @@
   "lem-coef-marked-relative-cartesian-model",
   "lem-coef-simplicial-projective-model-calculus",
   "lem-coef-coherent-nerve-comparison",
-  "lem-coef-marked-cone-straightening-quillen"
+  "lem-coef-marked-cone-straightening-quillen",
+  "lem-coef-unmarked-relative-nerve-cone-comparison",
+  "lem-coef-marked-cone-generator-calculations"
  ],
  "proof": [
   {
@@ -493,5 +495,38 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-6c45820e8 (reviewer sub-agent of L); spot-checked: I read the item, its ten steps and the full statements of all 13 cited nodes. I also read the one citer, lem-cbc-marked-relative-nerve-quillen; its steps use exactly the item's clauses. Mechanical checks: no cycle, proof_deps equals the union of uses, no merged or missing ids, zero new nodes. A search of dag/nodes found no duplicate. The other relative-nerve and straightening nodes state different results. The generator-calculation node's L_u is the coherent-index cone construction, not the slice pullback. I accept the 12 declared tool_uses from sk-prop-sf-biduality-general: all are generic model-category or marked-simplicial tools, and no compact-support unit step is replaced. HTT is not archived locally, which the node correctly records as an agent-written proof with a WANTED entry. Checks: step 2's max-of-subsets map lands in L_C(X)(p(y_a)) with label p(y_{m_0})->p(y_a), agrees with the last-face rule, is compatible with union composition, and sends marked cone edges to marked edges. Step 3's free cell at p(x_n) has the correct last-face label, and the marking cell sits at p(x_1). The opposite argument uses Map^sharp(X^op,K^nat)=Map^sharp(X,(K^op)^nat)^op. The step 4 coend uses that L_C(X)_r is free, and the cone side uses N(u^op) substitution with counit naturality. I recomputed step 6 from the pushout C^op ⊔_{C[Δ^1]} C[Δ^2], with edges (x_0,g_1f)->(x_1,g_1). Step 7's small-object argument with finite horns is correct. Step 8 has L_[n](Sp[n])(i)=Sp[i], with σ_! applied only between cofibrant objects. Steps 5, 9 and 10 use colimit-comparison clauses (a)-(c) with their hypotheses met, including loop edges and the empty input. Repair: the cone node only asserts some natural T->id, while the item stipulates that a_* is that map. I appended to step 4 a proof that a natural T->id is unique. In Q^n every vertex J equals {max J,*}, naturality from Q^0 fixes the vertices, maps into a nerve are determined by vertices, and T(X) is the coend of the Q^n. Only this step's text changed, in fixes/dag/nodes/sec-smooth-purity/lem-cbc-relative-nerve-cone-left-comparison.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68ae4076d",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Checked all node clauses against the module. L_C is pinned to the landed unmarked comma pullback, marked iff the X-projection is marked. T_C is the opposite of St+ of X^op, with both opposites and the HTT 3.2.1.2 marking, actions and maps pinned. a_C has its underlying map pinned to op(alpha) followed by double-opposite removal, the canonical subset-maximum map; Marked.weak for all X and c; no fibrancy or cofibrancy hypothesis. Base change: Over.push with canonical units, Mathlib IsLeftKanExtension, the comparison square, naturality in X, identity and composite. Point case: an actual cone-pushout isomorphism fixed on both legs, equal to op(PointCalculation.augmentation) followed by double-opposite removal. The existential unmarked and point packages are fully normalized landed statements. A probe confirmed by rfl that the types on both sides of the HEq clauses agree. stmt_deps adds only two landed nodes, with no cycle (closure check), and the statement is unchanged. lean.statement is verbatim, there is one sorry, docstrings and blueprint tags are present, lines are at most 100 characters, and the imports are correct. nt_compile is clean (4.5 s, no warnings). Informational only: the Second reading section is the 2026-10-17 direct-delivery placeholder, and one report sentence has garbled place numbers. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MarkedRelativeNerveConeComparison",
+  "declaration": "SSet.MarkedRelativeNerveCone.marked_relative_nerve_cone_left_comparison",
+  "declarations": [
+   "SSet.MarkedRelativeNerveCone.oppositeValue",
+   "SSet.MarkedRelativeNerveCone.oppositeValueMap",
+   "SSet.MarkedRelativeNerveCone.doubleOppositeIso",
+   "SSet.MarkedRelativeNerveCone.sliceValue",
+   "SSet.MarkedRelativeNerveCone.coneValue",
+   "SSet.MarkedRelativeNerveCone.Diagrams",
+   "SSet.MarkedRelativeNerveCone.TargetChange",
+   "SSet.MarkedRelativeNerveCone.ComparisonStatement",
+   "SSet.MarkedRelativeNerveCone.pointInput",
+   "SSet.MarkedRelativeNerveCone.PointNormalization",
+   "SSet.MarkedRelativeNerveCone.Statement",
+   "SSet.MarkedRelativeNerveCone.marked_relative_nerve_cone_left_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/MarkedRelativeNerveConeComparison.lean",
+  "statement": "theorem marked_relative_nerve_cone_left_comparison : Nonempty Statement.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Lifts the landed normalized unmarked comparison to the actual cone and comma markings, with a final valuewise opposite. All underlying actions, input maps and change-of-base units are fixed to those canonical maps; ordinary IsLeftKanExtension supplies the comparison isomorphisms. The point comparison is explicitly identified with the existing PointCalculation augmentation via an isomorphism of actual cone pushouts fixed on both legs. The two added statement dependencies are already landed nodes, reused without changes. No object or map is chosen from a mere existence theorem."
  }
 }

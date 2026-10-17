@@ -177,5 +177,33 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-31dcb2711 (reviewer sub-agent of L); spot-checked: Read the item, its cited nodes, the parent's use (steps 5 and 8), the unit and HTT. HTT is not archived; I fetched the online PDF (April 2017) and read Notation 4.2.3.1 (pp. 248-249), Lemmas 4.2.3.5-4.2.3.6 (p. 251), and Notation 4.2.3.7, Proposition 4.2.3.8 with proof and Remark 4.2.3.9 (p. 252). The statement matches 4.2.3.8 hypothesis by hypothesis: I_z and D_z are Iσ and I0σ, and K_F is Notation 4.2.3.1. Direction check: K=Δ^0 gives {1}⊆Δ^1, which is Λ^1_1. The item is not a target, so no base-change morphism or coefficient category applies. Step 1: L_F, defined through roots in K_F, is closed under faces by the section argument, since no degeneracy crosses the cut; its endpoints are N(I) and K_F; the dimension-first order runs over all simplices; it is continuous at limits. Step 2: checked the characteristic map, the boundary going into L_F, the nondegeneracy criterion in both directions, the bijection on new nondegenerate simplices, and the degreewise pushout via Eilenberg-Zilber. The contractible-join lemma's hypothesis is exactly (1), and m=0 is fine. Step 3: B_0 consists of the chains whose first lift is degenerate; Δ^m⋆B_0 lands in L_F because those roots have dimension < m. The join-pushout lemma is applied with full-subcategory injectivity and hypothesis (2). Step 4: the closure clauses of the right-anodyne definition finish it. Long step 2 (2001 characters) is one pushout identification, written out where HTT says 'not difficult to see'. Its generic ingredients are a three-line K_F check and the cited unique-decomposition leaf, so it hides no lemma and is accepted. No new nodes. lem-coef-directed-decomposition-right-anodyne is the directed special case, not a duplicate. Accepted tool_use: the Mathlib leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition. No SGA. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc6c7f596",
+  "group": "Q44",
+  "result": "fix",
+  "note": "Statement matches node/HTT 4.2.3.8 clause by clause (I_z = SimplexLiftObj, D_z via Mathlib degenerate + ObjectProperty.ι, hnd IsContractible of nerve, hdeg IsWeakHomotopyEquivalence of nerveMap, conclusion rightAnodyneExtensions of canonical pure-upper map into recorded localColimitDecomposition); pureUpperSimplex checked canonical, sorry'd naturality true by coequalizer relations; no extra hypotheses; edge cases (empty K/I, m=0, nondegenerate z) OK; node unchanged outside lean, lean.statement verbatim, all theorems sorry, nothing hollow. Fixes: (1) H8 missing docstring on instance simplexLiftCategory added in fixes/DecompositionSimplexLiftRightAnodyne.lean; (2) report HTT numbers scrubbed to 'the project server' restored in fixes/<item>.report.md. nt_compile --json clean (rc 0, no messages) for delivered and fixed module."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DecompositionSimplexLiftRightAnodyne",
+  "declaration": "SSet.Enhanced.rightAnodyneExtensions_decompositionNerveInclusion",
+  "declarations": [
+   "SSet.Enhanced.SimplexLiftObj",
+   "SSet.Enhanced.SimplexLiftHom",
+   "SSet.Enhanced.SimplexLiftDegenerate",
+   "SSet.Enhanced.simplexLiftDegenerateInclusion",
+   "SSet.Enhanced.pureUpperSimplex",
+   "SSet.Enhanced.pureUpperNerveMap",
+   "SSet.Enhanced.decompositionNerveInclusion",
+   "SSet.Enhanced.rightAnodyneExtensions_decompositionNerveInclusion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DecompositionSimplexLiftRightAnodyne.lean",
+  "statement": "theorem rightAnodyneExtensions_decompositionNerveInclusion {K : SSet.{u}} {I : Type u} [Category.{u} I] (F : I ⥤ Over K) (hnd : ∀ (m : ℕ) (z : K _⦋m⦌), z ∈ K.nonDegenerate m → Enhanced.IsContractible (nerve (SimplexLiftObj F z))) (hdeg : ∀ (m : ℕ) (z : K _⦋m⦌), z ∈ K.degenerate m → Enhanced.IsWeakHomotopyEquivalence (nerveMap (simplexLiftDegenerateInclusion F z))) : rightAnodyneExtensions (decompositionNerveInclusion F)",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
