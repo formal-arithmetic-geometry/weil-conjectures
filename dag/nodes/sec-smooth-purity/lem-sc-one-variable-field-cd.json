@@ -17,68 +17,25 @@
  ],
  "proof": [
   {
-   "text": "Index by finite subsets $S\\subset F[x]\\setminus\\{0\\}$ ordered by inclusion, and put $h_S=\\prod_{h\\in S}h$ (empty product $1$) and $X_S=\\operatorname{Spec}F[x,1/h_S]$. For $S\\subset T$, the inclusion of localizations gives a transition map $X_T\\to X_S$. Every fraction $a/b\\in F(x)$ belongs to the stage $S=\\{b\\}$, so the filtered colimit of these rings is $F(x)$; by [lem-weil-pbc-spec-colimit-limit] (which also makes every transition map affine) $\\varprojlim_S X_S=\\operatorname{Spec}F(x)$. Each stage is affine, hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs].",
-   "uses": [
-    "lem-weil-pbc-spec-colimit-limit",
-    "lem-weil-pbc-affine-scheme-qcqs"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-one-variable-field-cd.md",
-    "place": "## Proof, first two sentences"
-   }
+   "text": "Reuse the existing proof of this same blueprint node, AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_one_ratFunc, from WeilConjectures.AlgebraicGeometry.Curve.TorsionCohomologicalDimension. It gives Subsingleton (Sheaf.H G q) for every locally torsion abelian etale sheaf G on Spec F(x) and q > 1. This is an application of an already-proved declaration, not a new dependency or a renamed sorry. Its existing proof realizes the curve, purely inseparable base-change, and affine-limit argument, indexing by the nonempty affine opens of Spec F[X].",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Write $L=\\overline F$. In characteristic zero every irreducible polynomial is separable, hence linear over the separably closed field $F$, so $L=F$. In characteristic $p>0$, the minimal polynomial of any $a\\in L$ has the form $g(T^{p^r})$ with $g$ irreducible and separable; $g$ is linear, so $a^{p^r}\\in F$. Here is the universal-homeomorphism check from [def-weil-universal-homeomorphism]: for any $F$-algebra $R$, the map $R\\to B=R\\otimes_F L$ is injective (extend $1$ to an $F$-basis of $L$), and each $b\\in B$ has a power $b^{p^n}\\in R$, by choosing one exponent for its finitely many coefficients in $L$. A prime $P\\subset R$ therefore has exactly one prime above it, namely $Q_P=\\{b\\in B:b^{p^n}\\in P\\text{ for an exponent with }b^{p^n}\\in R\\}$: independence of exponent and the ideal and prime properties follow by taking a common exponent and using Frobenius and primality of $P$. Under this bijection $D_B(b)$ corresponds to $D_R(b^{p^n})$, so it is a homeomorphism. Checking on affine opens of an arbitrary base change proves that $\\operatorname{Spec}L\\to\\operatorname{Spec}F$, and consequently $X_S\\times_F\\operatorname{Spec}L\\to X_S$, are universal homeomorphisms. By [thm-weil-pbc-universal-homeomorphism-invariance] their pullback equivalences preserve cohomology. On abelian sheaves these equivalences are exact and preserve torsion (a torsion sheaf is the filtered union of the kernels of multiplication by $n!$, and an additive equivalence preserves those kernels and their colimit); thus vanishing for every torsion sheaf in degrees $q>1$ is equivalent on the two schemes, as in [def-sc-etale-torsion-cd].",
+   "text": "Apply the natural comparison isomorphism of [lem-weil-pbc-sheafH-ext-derived-comparison] at Spec F(x), q, and G. Its inverse is injective from derived-section cohomology to Sheaf.H G q. The latter is a subsingleton by the preceding step, so injectivity gives that the former is a subsingleton. Quantifying over G, its local torsion proof, q and q > 1 is exactly the required derived-section bound. Neither the field hypotheses nor the local torsion condition change.",
    "uses": [
-    "thm-weil-pbc-universal-homeomorphism-invariance",
-    "def-sc-etale-torsion-cd",
-    "def-weil-universal-homeomorphism"
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-one-variable-field-cd.md",
-    "place": "## Proof, algebraic-closure and universal-homeomorphism sentences"
-   }
-  },
-  {
-   "text": "The base change of $X_S$ is $\\operatorname{Spec}L[x,1/h_S]$. Since $F\\to L$ is injective, $h_S$ stays nonzero. This algebra is generated over $L$ by $x$ and $1/h_S$, so the scheme is of finite type; it is separated since the diagonal of an affine scheme over a field is induced by the surjective multiplication map $A\\otimes_L A\\to A$. The Euclidean domain $L[x]$ has only the zero prime and maximal nonzero primes, so localization has dimension at most one. Hence all hypotheses of [lem-sc-arbitrary-curve-cd] hold with $e=1$, giving $\\operatorname{cd}_{\\rm tor}(X_S\\times_F\\operatorname{Spec}L)\\leq1$. Step 2 gives $\\operatorname{cd}_{\\rm tor}(X_S)\\leq1$, in the sense of [def-sc-etale-torsion-cd].",
-   "uses": [
-    "lem-sc-arbitrary-curve-cd",
-    "def-sc-etale-torsion-cd"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-one-variable-field-cd.md",
-    "place": "## Proof, “Over F̄ the bound is one ...”"
-   }
-  },
-  {
-   "text": "The finite-subset index is filtered (use $S\\cup T$), every $X_S$ is quasi-compact and quasi-separated, and every transition map is affine, as checked in step 1. Step 3 gives the uniform bound $c=1$. Thus [lem-sc-cd-affine-limit] applies to $\\varprojlim_S X_S=\\operatorname{Spec}F(x)$ and gives $\\operatorname{cd}_{\\rm tor}(\\operatorname{Spec}F(x))\\leq1$, which is precisely the asserted field bound by [def-sc-etale-torsion-cd].",
-   "uses": [
-    "lem-sc-cd-affine-limit",
-    "def-sc-etale-torsion-cd"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-one-variable-field-cd.md",
-    "place": "## Proof, final sentence"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-spec-colimit-limit",
-  "lem-weil-pbc-affine-scheme-qcqs",
-  "thm-weil-pbc-universal-homeomorphism-invariance",
-  "def-sc-etale-torsion-cd",
-  "def-weil-universal-homeomorphism",
-  "lem-sc-arbitrary-curve-cd",
-  "lem-sc-cd-affine-limit"
+  "lem-weil-pbc-sheafH-ext-derived-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-one-variable-field-cd.md",
-  "place": "## Proof"
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Curve/TorsionCohomologicalDimension.lean",
+  "place": "Scheme.hasTorsionCohomologicalDimensionLE_one_ratFunc, followed by Scheme.nonempty_sheafH_extDerivedIso from lean/WeilConjectures/AlgebraicGeometry/EtaleSheafHExtDerivedComparison.lean; reused by F3 on 2026-10-17. The source proof follows the blueprint curve/base-change/affine-limit route."
  },
  "mathlib_searches": [
   {
@@ -150,9 +107,7 @@
    }
   ]
  },
- "tool_uses": [
-  "thm-weil-pbc-universal-homeomorphism-invariance"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -178,5 +133,15 @@
   "by": "NC",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261017T041408-L-2535564",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

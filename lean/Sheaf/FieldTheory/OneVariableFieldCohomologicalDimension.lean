@@ -7,13 +7,8 @@ module
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.FieldTheory.RatFunc.Basic
 public import Sheaf.AlgebraicGeometry.Sites.CohomologicalDimension
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
-import Mathlib.CategoryTheory.MorphismProperty.Limits
-import Sheaf.AlgebraicGeometry.Sites.ArbitraryCurveCohomologicalDimension
-import Sheaf.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionAffineLimit
+import WeilConjectures.AlgebraicGeometry.Curve.TorsionCohomologicalDimension
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 /-!
 # Torsion étale cohomological dimension of a one-variable field
@@ -64,7 +59,13 @@ Proof plan:
    claimed field bound by def-sc-etale-torsion-cd. -/
 theorem hasTorsionEtaleCohomologicalDimensionLE_ratFunc
     (F : Type u) [Field F] [IsSepClosed F] :
-    HasTorsionEtaleCohomologicalDimensionLE (Spec (.of (RatFunc F))) 1 :=
-  sorry
+    HasTorsionEtaleCohomologicalDimensionLE (Spec (.of (RatFunc F))) 1 := by
+  intro G hG q hq
+  -- The source library already proves this node for Ext sheaf cohomology.
+  have : Subsingleton
+      ((CategoryTheory.Sheaf.functorH (Spec (.of (RatFunc F))).smallEtaleTopology q).obj G) :=
+    hasTorsionCohomologicalDimensionLE_one_ratFunc F G hG q hq
+  obtain ⟨e⟩ := nonempty_sheafH_extDerivedIso (Spec (.of (RatFunc F))) q
+  exact (e.app G).addCommGroupIsoToAddEquiv.symm.injective.subsingleton
 
 end AlgebraicGeometry.Scheme
