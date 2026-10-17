@@ -7,7 +7,7 @@
    "place": "step 3 of its split (source: Chapter II, §27, Remark 27.7, p. 156 (\"F acts as q^d on H^{2d}(X,Q_l)\", asserted) with Remark 27.4(a), p. 155, and the proof of Theorem 27.12, p. 158; the linear algebra that these leave implicit is [lem-weil-perfect-pairing-line-equivariance])",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Equivariant isomorphism from a perfect pairing against a line",
@@ -16,10 +16,78 @@
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-cor-hasse/prop-endpoints.md",
   "place": "## Proof, the sentence giving $H^{2d}(X,\\Ql)\\cong\\Ql(-d)$ with Frobenius eigenvalue $q^d$: the linear algebra that sentence leaves implicit (the perfect pairing $\\langle-,-\\rangle_0$ of [prop-poincare-pairing] against the line $H^0$ with its similitude), stated for abstract vector spaces. The same argument is Milne, Lectures on Etale Cohomology (literature/milne-lectures-on-etale-cohomology_LEC.pdf), proof of Theorem 27.12, p. 158, in the form $F_*=q^d/F^*$."
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Fix any $e\\in V$ with $e\\ne0$. By the meaning of dimension in [def-weil-vector-space-dimension], $V$ has a singleton basis $\\{b\\}$. Write $e=ab$; then $a\\ne0$, and every $x=tb$ has the unique expression $x=(ta^{-1})e$. Uniqueness follows because $se=s' e$ implies $(s-s')a=0$, hence $s=s'$. Thus $\\{e\\}$ is a basis. Put $T(y)=\\beta(e,y)$ and $J(y)(x)=\\beta(x,y)$. Bilinearity makes both maps linear, and the stated perfectness hypothesis says that $J:W\\to\\operatorname{Hom}_L(V,M)$ is bijective.",
+   "uses": [
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-cor-hasse/prop-endpoints.proof.md",
+    "place": "First two sentences: line-valued perfect pairing in degrees zero and top; singleton-basis argument written out."
+   }
+  },
+  {
+   "text": "If $T(y)=0$, then for every $x=se$ the equality $J(y)(x)=\\beta(se,y)=s\\beta(e,y)=0$ holds. Thus $J(y)=0=J(0)$, and injectivity of $J$ gives $y=0$. Applying this to $y-y'$ shows that $T(y)=T(y')$ implies $y=y'$; hence $T$ is injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-cor-hasse/prop-endpoints.proof.md",
+    "place": "Perfect pairing against the degree-zero line: injectivity of evaluation, expanded."
+   }
+  },
+  {
+   "text": "For $m\\in M$, define $f_m:V\\to M$ by $f_m(se)=sm$, using the unique coordinate of step 1. The formulas $f_m(se+te)=(s+t)m$ and $f_m(rse)=(rs)m$ show that $f_m$ is linear. Surjectivity of $J$ supplies $y\\in W$ with $J(y)=f_m$. Then $T(y)=J(y)(e)=f_m(e)=m$. Consequently $T$ is a bijective linear map, so its inverse is linear: apply injectivity of $T$ to $T(y+y')=T(y)+T(y')$ and $T(ry)=rT(y)$. Thus $T:W\\xrightarrow{\\sim}M$ is a linear isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-cor-hasse/prop-endpoints.proof.md",
+    "place": "Perfect pairing against the degree-zero line: surjectivity and the actual isomorphism, expanded."
+   }
+  },
+  {
+   "text": "By $\\dim_LM=1$ and [def-weil-vector-space-dimension], choose a singleton basis $\\{m_0\\}$ of $M$. Let $w_0=T^{-1}(m_0)$. It is nonzero since $T(0)=0$ and $m_0\\ne0$. For $y\\in W$, write $T(y)=sm_0$; injectivity of $T$ gives $y=sw_0$. If $sw_0=0$, applying $T$ gives $sm_0=0$, so $s=0$. Therefore $\\{w_0\\}$ is a basis of $W$, and the same definition of dimension gives $\\dim_LW=1$.",
+   "uses": [
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-cor-hasse/prop-endpoints.proof.md",
+    "place": "The isomorphism with the twist line: dimension consequence via an explicit singleton basis."
+   }
+  },
+  {
+   "text": "Substitute $x=e$ in the assumed compatibility and use $F_Ve=e$. This gives $T(F_Wy)=\\beta(e,F_Wy)=F_M\\beta(e,y)=F_M T(y)$ for every $y\\in W$. This proves equivariance of the specific map $\\beta(e,-)$, for the arbitrary nonzero $e$ fixed in step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-cor-hasse/prop-endpoints.proof.md",
+    "place": "Frobenius normalization sentence: equivariance of the specified evaluation map, not merely an abstract isomorphism."
+   }
+  },
+  {
+   "text": "Finally, for each $y\\in W$, step 5, $F_M=c\\,\\mathrm{id}_M$, and linearity of $T$ give $T(F_Wy)=cT(y)=T(cy)$. Injectivity of $T$ yields $F_Wy=cy$. Equality on every vector proves $F_W=c\\,\\mathrm{id}_W$. This calculation never divides by $c$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-cor-hasse/prop-endpoints.proof.md",
+    "place": "Frobenius action on the twist line: scalar action on the paired top-degree space, expanded."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-vector-space-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-cor-hasse/prop-endpoints.proof.md",
+  "place": "First three sentences, linear algebra implicit in the top-degree isomorphism and Frobenius scalar; expanded by the explicit singleton-basis calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -48,10 +116,45 @@
    "results": "exists_smul_eq_of_finrank_eq_one (line 564), finrank_eq_one_iff_of_nonzero (line 598), surjective_of_nonzero_of_finrank_eq_one (line 613)",
    "date": "2026-10-09",
    "verdict": "no match; these state that a nonzero vector spans a line and that an endomorphism of a line is a scalar, which proves the clause F_W = c·id once dim W = 1 is known"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.IsPerfPair, Module.finrank",
+   "results": "{\"t\": \"2026-10-17T09:05:58Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.IsPerfPair, Module.finrank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Module.finrank_of_isPerfPair\", \"LinearMap.finrank_eq_of_isPerfPair\", \"exteriorPower.instIsPerfPairWedgePairing\"], \"digest\": \"2727870b1476771b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: related perfect-pairing, dimension, or evaluation ingredients only; none states every clause for a line-valued pairing with arbitrary scalar c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect bilinear pairing V times W into a one dimensional vector space M with V one dimensional identifies W with M by evaluation at a nonzero vector; compatible scalar endomorphisms act by the same scalar",
+   "results": "{\"t\": \"2026-10-17T09:06:01Z\", \"tool\": \"leanfinder\", \"query\": \"A perfect bilinear pairing V times W into a one dimensional vector space M with V one dimensional identifies W with M by evaluation at a nonzero vector; compatible scalar endomorphisms act by the same scalar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.toPerfPair\", \"LinearMap.IsPerfPair\", \"RootPairing.isPerfPair_toLinearMap\", \"LinearMap.IsPerfPair.id\", \"LinearMap.toLinearMap_toPerfPair\", \"LinearMap.toPerfPair_apply\", \"LinearMap.IsPerfPair.ext\", \"Module.IsReflexive.of_isPerfPair\"], \"digest\": \"6e9498b8dac0d16e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: related perfect-pairing, dimension, or evaluation ingredients only; none states every clause for a line-valued pairing with arbitrary scalar c"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfPair|finrank_eq_one|exists_smul_eq_of_finrank_eq_one",
+   "results": "{\"t\": \"2026-10-17T09:06:51Z\", \"tool\": \"grep\", \"query\": \"IsPerfPair|finrank_eq_one|exists_smul_eq_of_finrank_eq_one\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Basic.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Basic.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Basic.lean\"], \"digest\": \"a093b18d101164f6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: related perfect-pairing, dimension, or evaluation ingredients only; none states every clause for a line-valued pairing with arbitrary scalar c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation at a nonzero vector in a one dimensional vector space is a linear isomorphism from Hom(V,M) to M",
+   "results": "{\"t\": \"2026-10-17T09:06:51Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation at a nonzero vector in a one dimensional vector space is a linear isomorphism from Hom(V,M) to M\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.applyₗ\", \"LinearMap.applyₗ'\", \"LinearMap.evalAddMonoidHom\", \"LinearEquiv.funUnique\", \"LinearMap.applyₗ'_apply_apply\", \"LinearMap.evalAddMonoidHom_apply\", \"LinearEquiv.funUnique_apply\", \"LinearMap.applyₗ_apply_apply\"], \"digest\": \"53ca6031956b869e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: related perfect-pairing, dimension, or evaluation ingredients only; none states every clause for a line-valued pairing with arbitrary scalar c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bilinear form perfect in both variables and valued in a line induces an isomorphism by fixing a nonzero vector in a one dimensional factor; if the first operator is identity then the second operator equals the target scalar",
+   "results": "{\"t\": \"2026-10-17T09:15:37Z\", \"tool\": \"leanfinder\", \"query\": \"A bilinear form perfect in both variables and valued in a line induces an isomorphism by fixing a nonzero vector in a one dimensional factor; if the first operator is identity then the second operator equals the target scalar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.toLinearMap_toPerfPair\", \"LinearMap.toPerfPair_apply\", \"RootPairing.isPerfPair_toLinearMap\", \"LinearMap.toPerfPair\", \"LinearMap.IsPerfPair.ext\", \"LinearMap.IsPerfPair\", \"LinearMap.IsPerfPair.ext_iff\", \"LinearMap.IsPerfPair.bijective_left\"], \"digest\": \"8bc70803a962457e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: related perfect-pairing, dimension, or evaluation ingredients only; none states every clause for a line-valued pairing with arbitrary scalar c"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,5 +174,21 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-cor-hasse"
+ "unit": "sk-cor-hasse",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-perfect-pairing-line-equivariance",
+  "worker": "stage1",
+  "summary": "Kept the statement and supplied six explicit elementary steps: singleton coordinates, injectivity, surjectivity, singleton basis of W, equivariance, and cancellation of the evaluation map. No new nodes; two existing dimension notions added as statement dependencies. Mathlib services and source read; no matching project attachment. The proof includes c=0 and arbitrary nonzero e.",
+  "blueprint": "Realizes prop-endpoints.proof.md first three sentences, expanding the perfect-pairing identification of top cohomology with the twist line and its Frobenius compatibility; follows the degree-zero/top-degree route of sk-cor-hasse.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-04dd99b6f",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-04dd99b6f (reviewer sub-agent of L); spot-checked: I read the whole item. It is unchanged, true and self-contained, with perfectness defined inline and stmt_deps limited to the dimension and finite-dimensional definition nodes. I read all six steps against the statement of def-weil-vector-space-dimension (dimension = size of a basis, basis-independent). Step 1 gets the unique coordinate along e = ab with a ≠ 0. Step 2 proves T = β(e,-) injective from injectivity of J. Step 3 builds f_m and uses surjectivity of J, so T is a linear iso. Step 4 shows W has a singleton basis {T^{-1}(m0)}. Step 5 substitutes x = e to get equivariance. Step 6 uses injectivity to get F_W = c·id, with no division by c. Every step is honestly elementary. Small cases: V = W = M = L with β = a·xy gives F_W = c, including c = 0 and over F_2; W = 0 is impossible; rescaling e is harmless. The statement matches its only use, prop-endpoints step 3 (L = Q_l, V = H^0, W = H^{2d}, M = Q_l(-d), c = q^d). Sources: prop-endpoints.md and .proof.md, identical in main-20261015 and master; Milne LEC Remark 27.7 (p. 156) and the proof of Thm 27.12 (p. 158) give only the motivation, so proof_origin by agent is correct. Duplicate search: lem-weil-similitude-pairing-reciprocity is scalar-valued, needs c ≠ 0 and has spectral conclusions, so it is no duplicate; no blueprint same_as. All three kinds of Mathlib search are recorded and none gives a full match. No new nodes, no tool_uses, no SGA, nothing changed under fixes."
+ }
 }
