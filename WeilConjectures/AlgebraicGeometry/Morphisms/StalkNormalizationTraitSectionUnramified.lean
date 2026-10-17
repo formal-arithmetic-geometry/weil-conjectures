@@ -98,7 +98,7 @@ theorem GaloisCover.stalk_normalization_trait_section_unramified {S C : Scheme.{
   have hm := GaloisCover.stalk_normalization_trait_section_maximalIdeal
     hS c σ hσ G hG q j hCη sη hsq hsj Z hZ U hηU jU PA ψ hjU hψ s hs hmin hdvr hn x hx
   have hr := GaloisCover.stalk_normalization_trait_section_residue_separable
-    hS c σ hσ G hG q j hCη sη hsq hsj Z U hηU jU PA ψ hjU hψ s hs hmin hdvr hn x hx
+    hS c σ hσ G hG q j hCη Z U hηU jU PA ψ hjU hψ s hs hmin hdvr hn x hx
   let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization
     (pullback.fst c (S.fromSpecStalk s))
   apply FormallyUnramified.exists_neighbourhood_of_stalkMap n x

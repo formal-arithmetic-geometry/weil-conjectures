@@ -69,9 +69,8 @@ theorem flat_stalk_of_regular_codimension_two_depth_two_extension
     (p : E ⟶ L) [IsFinite p] [Etale (p ∣_ V)]
     (hsource : ∀ z : E, p z ∉ V →
       (2 : ℕ∞) ≤ IsLocalRing.depth (R := E.presheaf.stalk z) (E.presheaf.stalk z))
-    (z : E) (hz : p z ∉ V) :
+    (z : E) :
     (p.stalkMap z).hom.Flat := by
-  have _ := hz
   obtain ⟨F, r, hfin, het, hdepth, e, he⟩ :=
     exists_finite_etale_depth_two_model V hboundary p
   have : IsFinite r := hfin

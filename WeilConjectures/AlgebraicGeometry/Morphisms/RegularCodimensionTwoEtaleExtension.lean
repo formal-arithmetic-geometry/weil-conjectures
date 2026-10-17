@@ -105,12 +105,7 @@ theorem exists_finite_etale_extension_of_regular_codimension_two_boundary
     infer_instance
   have : Flat p := by
     apply Flat.of_stalkMap
-    intro z
-    by_cases hz : p z ∈ V
-    · let zV : (p ⁻¹ᵁ V).toScheme := ⟨z, hz⟩
-      exact (RingHom.Flat.respectsIso.arrow_mk_iso_iff
-        (morphismRestrictStalkMap p V zV)).mp (Flat.stalkMap (p ∣_ V) zV)
-    · exact flat_stalk_of_regular_codimension_two_depth_two_extension V hboundary p hE z hz
+    exact flat_stalk_of_regular_codimension_two_depth_two_extension V hboundary p hE
   have : FormallyUnramified p :=
     formallyUnramified_of_flat_depth_two_finite_extension V p hE
   refine ⟨E, p, hp, Etale.of_formallyUnramified_of_flat p, e.symm, ?_⟩

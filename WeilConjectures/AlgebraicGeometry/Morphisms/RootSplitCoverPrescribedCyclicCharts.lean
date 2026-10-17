@@ -49,7 +49,7 @@ etale neighborhood. The equation remains the image of the original g throughout.
 Each e divides the unit n, hence is a unit. Etale base change preserves regularity
 of the base and quotient; flatness preserves the nonzerodivisor. Finite products
 combine the orbit charts. For d = 0 use the empty product; for n = 1 every orbit
-has length one. The point on V(g) excludes the zero ring and unit equation. -/
+has length one. -/
 theorem root_split_cover_prescribed_cyclic_charts
     (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))
     [IsRegularRing R] (hg : IsSMulRegular R g)
@@ -57,7 +57,7 @@ theorem root_split_cover_prescribed_cyclic_charts
     {Y : Scheme.{u}} (p : Y ⟶ Spec R)
     (hj : ∃ j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g),
       j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p)
-    (d : ℕ) (y : Spec R) (hy : g ∈ y.asIdeal) :
+    (d : ℕ) (y : Spec R) :
     let A := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C g)
     let N := Spec (CommRingCat.of A)
     let q := Spec.map (CommRingCat.ofHom (algebraMap R A))
@@ -84,7 +84,6 @@ theorem root_split_cover_prescribed_cyclic_charts
           γ.hom ≫ V.ι ≫ q = pullback.snd p ψ := by
   dsimp only
   intro δ hδ
-  have _ := hy
   obtain ⟨S, φ, z, hφ, hz, m, e, he, γ, hγ⟩ :=
     root_split_cover_cyclic_chart_model R g n hn hg p hj d y δ hδ
   obtain ⟨hS, hh, hSh⟩ := etale_regular_divisor_base_change R S φ g hg hφ

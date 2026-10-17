@@ -140,7 +140,7 @@ theorem GaloisCover.stalk_normalization_trait_section_localized_root_chart {S C 
   intro hn x hx
   have hchart := GaloisCover.stalk_normalization_trait_divisor_charts
       (S := S) (C := C) (Cη := Cη)
-      hS c σ hσ G hG q j hCη sη hsq hsj Z U hηU jU PA ψ hjU hψ
+      hS c σ hσ G hG q j hCη Z U hηU jU PA ψ hjU hψ
       s hs hmin hdvr
   dsimp only at hchart
   have hchartn := hchart hn
