@@ -303,5 +303,31 @@
   "group": "Q117",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-d51bcad91 (reviewer sub-agent of L); spot-checked: Read the item statement and all 7 steps in full, every cited node statement (with blueprint_update texts), the parent det-sf-flat-model-generation main-20261015 clause (2) and the unit complement, and Stacks etale-cohomology 0GJ1 (l.11612), 04CA (l.6702) and morphisms 01R8 (l.849). The parent needs j_!j^*F=a_{1!}L_1 and i_*a'_!=a_!; clauses 2 and 3 give exactly these. Coefficients are ordinary constant-A module sheaves on small étale sites throughout, so no derived or pro-étale identification is made. Step 1: roles (g,h,u,v) are correct, and the inverse of a_G=Ex^{-1}∘h_*η is the composite in the statement. Step 2: A-linearity by naturality under scalar endomorphisms plus local constancy. FIX: the claim that module units and counits match the abelian ones lacked a citation, so I added the existing lem-weil-pbc-extension-by-zero-adjunction (module adjunction with explicit transpose) to step 2 uses, proof_deps and split_report.tool_uses. Step 3: quasi-compactness and quasi-separatedness of the locally closed immersion in a Noetherian X are correct and elementary. Step 4: S×_XW≅S via (id,h); restrict-open and image-of-closed-immersion give a scheme-theoretic cartesian square, with factor maps matched via the mono. Step 5: the transpose equation plus lem-kun-04ca gives the identity on S. Step 6: q, r, s are built from the universal property; I checked rs=id and sr=id via c∘r∘s=i∘q∘r∘s=i∘d∘s=c and the mono property, and s∘j=j_D. Step 7: fibre-product associativity and transport along r. Small cases checked: S empty, closed, open, nonreduced ambient, Y=X. No new nodes, no duplicates (0GJ1, locally-closed and closure greps), no cycle; proof_deps equals the union of uses; no SGA. All 10 tool_uses accepted as generic tools. Confirmed the reported source error in def-nagata-scheme-theoretic-image's old 'largest' (should be 'smallest'), already corrected in its blueprint_update. Unit-record chapter mismatch is noted for maintenance.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b6744492f",
+  "group": "Q42",
+  "result": "fix",
+  "note": "Mathematics and verbatim Lean signature verified; original and fixed modules compile cleanly through scompile.py. Complete replacements in fixes/ repair H8 helper citations and H11 second-reading detail. Findings and compiler evidence recorded in review.md; snapshot and branch unchanged."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.EtaleLocallyClosedExtensionComparison",
+  "file": "lean/Sheaf/SixFunctors/EtaleLocallyClosedExtensionComparison.lean",
+  "declaration": "AlgebraicGeometry.etale_locallyClosed_extension_comparison",
+  "declarations": [
+   "AlgebraicGeometry.etaleLocallyClosedExtension",
+   "AlgebraicGeometry.etaleLocallyClosedExtensionRestrictionIso",
+   "AlgebraicGeometry.etaleFactorizationRestrictionIso",
+   "AlgebraicGeometry.etaleClosedCompositionRestrictionIso",
+   "AlgebraicGeometry.etale_locallyClosed_extension_comparison"
+  ],
+  "statement": "theorem etale_locallyClosed_extension_comparison {A : Type (u + 1)} [CommRing A] [Finite A] (X : Scheme.{u}) [IsNoetherian X] {Z W : Scheme.{u}} (g : Z ⟶ X) [IsClosedImmersion g] (u : W ⟶ X) [IsOpenImmersion u] : IsIso (Etale.finiteOpenComparison (ModuleCat.{u + 1} A) (IsPullback.of_hasPullback g u)) ∧ ∀ {S : Scheme.{u}} (a : S ⟶ X) [IsImmersion a], ∃ hqa : QuasiCompact a, (∀ {W' : Scheme.{u}} (h : S ⟶ W') (u' : W' ⟶ X) [IsClosedImmersion h] [IsOpenImmersion u'], (ha : h ≫ u' = a) → ∃ e : etaleLocallyClosedExtension (A := A) a hqa ≅ Etale.lowerStar (ModuleCat.{u + 1} A) h ⋙ Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) u', Functor.isoWhiskerRight e (Etale.upperStar (ModuleCat.{u + 1} A) a) ≪≫ etaleFactorizationRestrictionIso (A := A) a h u' ha = etaleLocallyClosedExtensionRestrictionIso (A := A) a hqa ∧ ∀ e' : etaleLocallyClosedExtension (A := A) a hqa ≅ Etale.lowerStar (ModuleCat.{u + 1} A) h ⋙ Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) u', Functor.isoWhiskerRight e' (Etale.upperStar (ModuleCat.{u + 1} A) a) ≪≫ etaleFactorizationRestrictionIso (A := A) a h u' ha = etaleLocallyClosedExtensionRestrictionIso (A := A) a hqa → e' = e) ∧ (∀ {Y : Scheme.{u}} (i : Y ⟶ X) [IsClosedImmersion i] (b : S ⟶ Y) [IsImmersion b], (ha : b ≫ i = a) → ∃ hqb : QuasiCompact b, ∃ e : etaleLocallyClosedExtension (A := A) b hqb ⋙ Etale.lowerStar (ModuleCat.{u + 1} A) i ≅ etaleLocallyClosedExtension (A := A) a hqa, Functor.isoWhiskerRight e (Etale.upperStar (ModuleCat.{u + 1} A) a) ≪≫ etaleLocallyClosedExtensionRestrictionIso (A := A) a hqa = etaleClosedCompositionRestrictionIso (A := A) a b i hqb ha ∧ ∀ e' : etaleLocallyClosedExtension (A := A) b hqb ⋙ Etale.lowerStar (ModuleCat.{u + 1} A) i ≅ etaleLocallyClosedExtension (A := A) a hqa, Functor.isoWhiskerRight e' (Etale.upperStar (ModuleCat.{u + 1} A) a) ≪≫ etaleLocallyClosedExtensionRestrictionIso (A := A) a hqa = etaleClosedCompositionRestrictionIso (A := A) a b i hqb ha → e' = e)",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-17",
+  "fixed_by": "NT-stage2-Codex-b6744492f"
  }
 }

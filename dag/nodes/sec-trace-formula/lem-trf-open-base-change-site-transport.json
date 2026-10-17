@@ -313,5 +313,23 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-50f3287c0 (reviewer sub-agent of L); spot-checked: I read all 8 steps in full against the statements of the 16 proof dependencies and 12 statement dependencies, Stacks 09AF (proetale.tex l.5076, proof by the adjunction j_proet^{-1}eps_*=eps_*j_et^{-1}) and main-20261015 lem-trf-weil-shriek-operator-fibres proof (β). No new nodes and the statement is unchanged; the source and target of S, T, beta^e and beta^p match. I redid the mate algebra by hand. Step 3: the unit normalization of lem-sf-open-comparison-unit-normalization makes a_j C_U(u_e) the transpose of e_j^{-1}, so mate(e_j^{-1})=a_j. Step 4: the adjunct descriptions in lem-cbc-extension-zero-base-change (with its degreewise module clause and cor-cbc-derived-*) and lem-sf-open-tensor-normalization (constant finite A) give mate(d_e)=c_e and mate(d_p)=c_p, in the right directions. Step 5: (*) is the composite/Cartesian compatibility of lem-weil-pbc-comparison-pullback applied to jr=qj'. Steps 6-7: mate-pasting clause (1) is instantiated correctly, and the whiskerings by a_r and a_q follow from naturality of the unit and counit. Step 8: the cancellations are correct. Exactness, termwise descent and D+ preservation (steps 1-2) are cited correctly, with Lambda finite commutative throughout. The edge cases (empty U, q=id, j=id) are consistent. No cycle; proof_deps equals the union of the uses; no SGA. Route: every cited statement is on the sk-d-weil-push route except lem-sf-open-tensor-normalization; I accept that tool use (no on-route node gives the pro-etale beta normalization), and the other 10 declared tool uses are on-route, so declaring them is redundant but harmless. One item for the maintainer: the existing unsplit node lem-fix-site-open-exchange (Q130, 2026-10-17) states the same equation, conjugated by a_q and J'_p a_r, without the Noetherian/qcqs hypotheses. This split never uses those hypotheses, so it proves that node too. They should be merged; drop_nodes cannot apply because both are existing nodes. Separately, the blueprint_update of lem-cbc-extension-zero-base-change describes the same canonical map by its forward construction; no action needed. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1be349d42",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source alignment, declarations, edge cases, docstrings, and report; scompile.py local/server compilation succeeded with only permitted sorry."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenBaseChangeSiteTransport",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.openBaseChangeSiteTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenBaseChangeSiteTransport.lean",
+  "statement": "theorem openBaseChangeSiteTransport [QuasiCompact r] [QuasiSeparated r] [QuasiCompact j'] [QuasiSeparated j'] [QuasiCompact j] [QuasiSeparated j] [QuasiCompact q] [QuasiSeparated q] [IsNoetherian U'] [IsNoetherian U] [IsNoetherian Z'] [IsNoetherian Z] (sq : IsPullback r j' j q) (M : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : (derivedPullbackComparison Λ q).hom.app ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.obj (DerivedCategory.Plus.ι.obj M)) ≫ (modulePullback Λ q).mapDerivedCategory.map ((derivedOpenComparison Λ j).hom.app (DerivedCategory.Plus.ι.obj M)) ≫ (singleBeta Λ r j' j q sq.toCommSq.w sq).hom.app ((H Λ U Λ (RingHom.id Λ)).mapDerivedCategory.obj (DerivedCategory.Plus.ι.obj M)) = (H Λ Z' Λ (RingHom.id Λ)).mapDerivedCategory.map ((Etale.mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} Λ) sq).inv.app (DerivedCategory.Plus.ι.obj M)) ≫ (derivedOpenComparison Λ j').hom.app ((Etale.upperStar (ModuleCat.{u + 1} Λ) r).mapDerivedCategory.obj (DerivedCategory.Plus.ι.obj M)) ≫ (moduleJ Λ j').mapDerivedCategory.map ((derivedPullbackComparison Λ r).hom.app (DerivedCategory.Plus.ι.obj M))",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
