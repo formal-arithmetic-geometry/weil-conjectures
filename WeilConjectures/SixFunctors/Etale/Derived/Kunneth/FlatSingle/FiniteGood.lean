@@ -95,6 +95,7 @@ lemma isIso_tensorBaseChangeMap_degenerate_iff_kunnethMap {X' Y : Scheme.{u}} (h
     NatIso.isIso_map_iff (rightDerivedLowerStarIdIso Λ X')]
   exact Iff.rfl
 
+set_option maxHeartbeats 2000000 in
 /-- **Finite pushforwards of the unit.** For a commutative square `h ≫ f' = e ≫ g` and a finite
 morphism `π' : X'ᵢ ⟶ X'` with base change `ρ : Yᵢ ⟶ Y` along `h`, the base change map
 `Rπ'_* Λ ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* Rπ'_* Λ ⊗ᴸ Le^* F)` is an isomorphism as soon as the derived
@@ -138,7 +139,7 @@ theorem isIso_tensorBaseChangeMap_rightDerivedLowerStar_unit {X' S' T Y X'ᵢ Y�
       kunnethMap (ModuleCat.{u + 1} Λ) hᵢ ρ π' h (ρ ≫ h) sq.w rfl (𝟙_ _)
         (L((e)^*[ModuleCat.{u + 1} Λ]).obj F)) := inferInstance
   rw [key] at hL
-  exact IsIso.of_isIso_comp_right _ _
+  exact (isIso_comp_right_iff _ _).mp hL
 
 end Etale
 

@@ -231,6 +231,14 @@ lemma finiteType_pairRight (i : Finset (A ⊕ B)) : Algebra.FiniteType K (pairRi
       rw [Finset.coe_union, Finset.coe_image, Finset.coe_preimage, Finset.coe_preimage]
       rfl⟩
 
+lemma finiteType_pairHom (i : Finset (A ⊕ B)) : ((pairHom φ).app i).hom.FiniteType := by
+  refine RingHom.FiniteType.of_comp_finiteType (f := algebraMap K (pairLeft K A B i)) ?_
+  have : ((pairHom φ).app i).hom.comp (algebraMap K (pairLeft K A B i)) =
+      algebraMap K (pairRight φ i) :=
+    RingHom.ext fun x ↦ Subtype.ext (by simp)
+  rw [this, RingHom.finiteType_algebraMap]
+  exact finiteType_pairRight φ i
+
 lemma exists_mem_pairLeft (x : A) : ∃ i, x ∈ pairLeft K A B i :=
   ⟨{Sum.inl x}, Algebra.subset_adjoin (by simp)⟩
 
@@ -266,7 +274,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_of_field {K : Type u} [Fiel
     {cS : Cone S} (hS : IsLimit cS) {cT : Cone T} (hT : IsLimit cT)
     (s : cS.pt ⟶ Spec (.of K)) (hs : ∀ i, cS.π.app i ≫ w.app i = s)
     (t : cT.pt ⟶ cS.pt) (ht : ∀ i, t ≫ cS.π.app i = cT.π.app i ≫ g.app i)
-    [QuasiCompact t] [QuasiSeparated t]
+    (htc : QuasiCompact t) (hts : QuasiSeparated t)
     {X' : Scheme.{u}} (b : X' ⟶ X) (p' : X' ⟶ cS.pt) (hpb : IsPullback b p' a s)
     {Y : Scheme.{u}} {e : Y ⟶ cT.pt} {h : Y ⟶ X'} (sq : IsPullback e h t p') (q : ℤ)
     (G : Sheaf (Spec (.of K)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -359,7 +367,9 @@ noncomputable def Scheme.isLimitConeSpecOfMonotone (Z : Scheme.{u}) [IsAffine Z]
     (F : ι →o Subalgebra R Γ(Z, ⊤)) (hcov : ∀ x, ∃ i, x ∈ F i) :
     IsLimit (Z.coneSpecOfMonotone F) :=
   (isLimitOfPreserves Scheme.Spec (Subalgebra.isColimitCoconeOfMonotone F hcov).op).ofIsoLimit
-    (Cone.ext Z.isoSpec.symm fun i ↦ by simp [Scheme.coneSpecOfMonotone_π_app])
+    (Cone.ext Z.isoSpec.symm fun i ↦ by
+      rw [Iso.symm_hom, Scheme.coneSpecOfMonotone_π_app, Scheme.isoSpec_inv_toSpecΓ_assoc]
+      rfl)
 
 /-- The general form of blueprint `lem-kun-0f1i-normal`, for given `K`-algebra structures on
 `Γ(S')` and `Γ(T)` compatible with `s` and `t`; see
@@ -386,7 +396,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine_of_algebra {K : T
         dsimp [S]
         rw [Category.comp_id, ← Spec.map_comp]
         rfl }
-  have hS := S'.isLimitConeSpecOfMonotone FB (Subalgebra.exists_mem_pairLeft _ _ _)
+  have hS := S'.isLimitConeSpecOfMonotone FB fun x ↦ Subalgebra.exists_mem_pairLeft x
   have hT := T.isLimitConeSpecOfMonotone FC (Subalgebra.exists_mem_pairRight φ)
   have hs (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) :
       (S'.coneSpecOfMonotone FB).π.app i ≫ w.app i = s := by
@@ -405,28 +415,29 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine_of_algebra {K : T
     simp [hφ]
   have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : LocallyOfFiniteType (w.app i) :=
     HasRingHomProperty.Spec_iff.2
-      (RingHom.finiteType_algebraMap.2 (Subalgebra.finiteType_pairLeft _ _ _ _))
-  have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : QuasiCompact (w.app i) := by
-    dsimp [w]
-    infer_instance
+      (RingHom.finiteType_algebraMap.2 (Subalgebra.finiteType_pairLeft i.unop))
+  have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) :
+      IsAffine (((Functor.const _).obj (Spec (.of K))).obj i) :=
+    inferInstanceAs (IsAffine (Spec (.of K)))
+  have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : IsAffine (S.obj i) :=
+    inferInstanceAs (IsAffine (Spec _))
+  have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : IsAffine (TD.obj i) :=
+    inferInstanceAs (IsAffine (Spec _))
   have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : IsSeparated (g.app i) := by
     dsimp [g]
     infer_instance
-  have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : QuasiCompact (g.app i) := by
-    dsimp [g]
-    infer_instance
   have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : LocallyOfFiniteType (g.app i) :=
-    HasRingHomProperty.Spec_iff.2 (RingHom.FiniteType.of_comp_finiteType
-      (f := algebraMap K (FB i.unop))
-      (RingHom.finiteType_algebraMap.2 (Subalgebra.finiteType_pairRight φ i.unop)))
+    HasRingHomProperty.Spec_iff.2 (Subalgebra.finiteType_pairHom φ i.unop)
   have {i j : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ} (f : i ⟶ j) : IsAffineHom (S.map f) := by
     dsimp [S]
     infer_instance
   have {i j : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ} (f : i ⟶ j) : IsAffineHom (TD.map f) := by
     dsimp [TD]
     infer_instance
+  have htc : @QuasiCompact T S' t := inferInstance
+  have hts : @QuasiSeparated T S' t := inferInstance
   exact Etale.isIso_baseChangeHomologyMap_of_isLimit_of_field Λ a n hn hΛ g w hS hT s hs t ht
-    b p' hpb sq q G
+    htc hts b p' hpb sq q G
 
 /-- Blueprint `lem-kun-0f1i-normal` (general form): base change for `X ×_K S' ⟶ S'` along a
 morphism of affine schemes.
@@ -452,8 +463,10 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine {K : Type u} [Fie
   let _ : Algebra K Γ(T, ⊤) := (t.appTop.hom.comp (algebraMap K Γ(S', ⊤))).toAlgebra
   refine Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine_of_algebra Λ a n hn hΛ s b p' hpb
     t sq q G { t.appTop.hom with commutes' := fun _ ↦ rfl } (fun _ ↦ rfl) ?_
-  rw [CommRingCat.ofHom_comp, Spec.map_comp, ← Scheme.toSpecΓ_naturality_assoc]
-  simp
+  have hK : CommRingCat.ofHom (algebraMap K Γ(S', ⊤)) =
+      (Scheme.ΓSpecIso (.of K)).inv ≫ s.appTop := rfl
+  rw [hK, Spec.map_comp, ← Scheme.toSpecΓ_naturality_assoc, toSpecΓ_SpecMap_ΓSpecIso_inv,
+    Category.comp_id]
 
 /-- Blueprint `lem-kun-0f1i-normal`: the normal integral case.
 
