@@ -63,7 +63,7 @@ Source: Stacks Project, Varieties, Tag 0BED, affine-open degree-zero calculation
 
 Multiplication on tensor sections and `O_Y`-linearity of the second projection's adjunction
 unit give `O_Y(V)`-linearity, and `externalSectionsComponent_naturality` gives naturality. -/
-def externalConstantSectionsTensorMap
+noncomputable def externalConstantSectionsTensorMap
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) :
@@ -71,6 +71,9 @@ def externalConstantSectionsTensorMap
       ((RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom).obj
         (externalCupCoefficients f g F G)).val where
   app V := ModuleCat.ofHom
+    (X := (picardConstantSectionsTensor k Y g (scalarObj f F (op ⊤)) G).obj V)
+    (Y := ((RingedSpace.moduleDirectImage (pullback.snd f g).toLRSHom.toShHom).obj
+      (externalCupCoefficients f g F G)).val.obj V)
     { toFun := fun x ↦ externalSectionsComponent f g F G V.unop
         (picardConstantTensorBalancedSections k Y g (scalarObj f F (op ⊤)) G V.unop x)
       map_add' := by intros; simp
