@@ -284,5 +284,23 @@
   "group": "Q51",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-76ec2fbcd (reviewer sub-agent of L); spot-checked: I read the delivery in full; it needs no repair and I wrote no fixes. The statement is true. The cone of multiplication by ϖ is M⊗^Lκ, because 0→R→R→κ→0 is a free resolution (ϖ≠0 in a domain). Small cases behave as expected: κ[0], R[0] and (R/ϖ²)[-3] give the predicted ranges, and Frac(R)[0] shows that the finite-generation hypothesis is needed and it is there. Step 1: the cone triangle comes from the cone clause of def-weil-abstract-derived-category, and lem-sf-derived-homology-long-exact gives the long exact sequence. From it, the passage to 0→H^i/ϖ→H^i(cone)→H^{i+1}[ϖ]→0 is elementary and correct. Step 2: def-sc-discrete-valuation-ring gives that R is local with maximal ideal (ϖ), so the Jacobson radical is (ϖ). lem-weil-pbc-nakayama-jacobson then applies with all its hypotheses met, matching Stacks 00DV lemma-NAK (2), which I read. I checked Milne LEC Th. 19.2 on p. 125, the Stacks tags 05RS/05RT/05RU/0147 against their labels, and the Mathlib declarations: Nakayama.lean:118, HomologySequence.lean:152-181 and DVR Basic.lean:58. All four cited nodes are Mathlib leaves, so the item makes no route use. The two declared tool_uses are therefore unnecessary, but their content is accurate and I accept them as harmless. The report's line that no exception is requested is slightly inconsistent with them; I left that unchanged. The from.place quotation of blueprint main-20261015 Step 4 is verbatim. Step 7 relies on the same passage, and the reference fits unit sk-lem-finite Step 3. The parent's use (Step 6, a=0, b=2e, C in D^b_fg(O_E)) matches the hypotheses. I searched the DAG for duplicates: the pro-étale Nakayama, tower and universal-coefficient nodes I read are different statements. There are no new nodes and no cycle. This is not a target node, so no base-change morphism had to be checked."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f6ba3d82a",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Node copy differs from base only in lean; lean.statement verbatim in file. Every node clause is matched: DVR via IsDiscreteValuationRing; uniformizer as maximalIdeal = span{ϖ}; D(R) via the recorded DerivedCategory/HasDerivedCategory.{w} over ModuleCat.{max u v} R; H^i via homologyFunctor; finite support and Module.Finite hypotheses kept; reduction as any distinguished triangle on the canonical ϖ • 𝟙 M, equivalent to the node's cone model since cones are unique up to iso; a ≤ b; closed Icc interval in premise and conclusion. No extra assumptions; universes bound and general. Math verified (cone LES gives H^i(M)/ϖ into H^i(N), then Nakayama); edge cases 0, R[0], κ[0], (R/ϖ²)[0], Frac(R)[0] (excluded by hfinite). Gates: no defs, sorry only, docstrings with source and blueprint id and both proof steps, lines ≤ 100, Mathlib imports only, name unused elsewhere, no pro-etale substitute. nt_compile.py --json at the library path: rc=0, clean, 1.4 s; a control run confirmed diagnostics are printed and #check shows the expected signature. Report has real Worker report and Second reading by Q110 sections. No findings requiring change."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedCategory.DVRComplexAmplitude",
+  "declaration": "DerivedCategory.cohomology_amplitude_of_uniformizer_cone",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedCategory/DVRComplexAmplitude.lean",
+  "statement": "theorem cohomology_amplitude_of_uniformizer_cone (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [HasDerivedCategory.{w} (ModuleCat.{max u v} R)] (ϖ : R) (hϖ : IsLocalRing.maximalIdeal R = Ideal.span {ϖ}) (M N : DerivedCategory (ModuleCat.{max u v} R)) (ι : M ⟶ N) (δ : N ⟶ M⟦(1 : ℤ)⟧) (hcone : Triangle.mk (ϖ • 𝟙 M) ι δ ∈ distTriang _) (hbounded : Set.Finite {i : ℤ | ¬ IsZero ((homologyFunctor (ModuleCat.{max u v} R) i).obj M)}) (hfinite : ∀ i : ℤ, Module.Finite R ((homologyFunctor (ModuleCat.{max u v} R) i).obj M)) (a b : ℤ) (hab : a ≤ b) (hN : ∀ i : ℤ, i ∉ Set.Icc a b → IsZero ((homologyFunctor (ModuleCat.{max u v} R) i).obj N)) : ∀ i : ℤ, i ∉ Set.Icc a b → IsZero ((homologyFunctor (ModuleCat.{max u v} R) i).obj M)",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

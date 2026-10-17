@@ -244,5 +244,23 @@
   "group": "Q94",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-51d76fc08 (reviewer sub-agent of L); spot-checked: Read the item, all nine steps, the full statements of the five cited nodes, unit sk-prop-sf-cbc, chapter sec-smooth-purity and the consumer lem-cbc-kan-whitehead-inverse. The statement (a continuous relative boundary filler for a Kan fibration gives a simplicial filler) is true and unchanged. I tested it on n=0, a discrete Kan set, non-Kan Delta^1->pt (which shows the Kan hypothesis is needed) and a nontrivial group-nerve loop. Step checks: the minimal-factorization hypotheses are only that p is Kan; the k-space pullback map is continuous because |Delta^n| is compact Hausdorff, and its boundary is |alpha| by naturality; the corner-map leaf, taken over Delta^0, gives a restriction Kan fibration that lifts an edge with either endpoint prescribed (I read SSet.fibration_pullbackObjObjπ, PushoutProduct.lean:70-93); the n=1 edge reversal uses Lambda^2_0 and composition uses Lambda^2_1; the contraction [n]x[1]->[n] preserves Lambda^n_n; the collar formulas agree at radius 1/2 and N is a based nullhomotopy because the segments from boundary points to e_n stay in |A|; the zigzag homotopies glue on the boundary of the d_n face; the final retract lift gives pc=b, including n=0. proof_deps equals the union of the steps' uses, the dependency closure is acyclic, and no new nodes were created. Searches for duplicates (lem-coef-kan-locally-trivial-realization, lem-cbc-terminal-boundary-extension, lem-coef-kan-quillen-right-proper, etc.) found none. Hovey is not in literature/: WANTED, proof marked by agent. No SGA source is used. One repairable fault: three off-route statements of unit sk-prop-sf-biduality-general (lem-coef-kan-minimal-factorization, lem-coef-realization-finite-limits, lem-coef-kan-realization-serre) were not declared in split_report.tool_uses. I accept them as generic tool uses and added the declarations in fixes/dag/nodes/sec-smooth-purity/lem-cbc-kan-relative-realization-lift.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df40c8ffa",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Clause-by-clause match of SSet.exists_lift_of_realization_boundary_lift with the node: horn RLP for all (m+1, i : Fin (m+2)) incl. outer horns; Mathlib boundary with boundary_zero = ⊥ for n=0; hab, continuous h with hbase/hboundary via toTop of the realized inclusion; strict ∃ c with c ≫ p = b and ι ≫ c = a; no Kan/weq/nonemptiness or extra universe assumptions; vars/universe bound. Node JSON differs from side clone only in lean; statement verbatim in file. No definitions, proof is sorry only, source+blueprint docstrings with all nine proof steps, proof-dep imports non-public, report has Worker report and Second reading by Q35. nt_compile.py --json on snapshot file: rc=0, no errors, item 2.2 s, deps overlay compiled. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanRelativeRealizationLift",
+  "declaration": "SSet.exists_lift_of_realization_boundary_lift",
+  "file": "lean/Sheaf/AlgebraicTopology/KanRelativeRealizationLift.lean",
+  "statement": "theorem exists_lift_of_realization_boundary_lift {E T : SSet.{u}} (p : E ⟶ T) (hp : ∀ (m : ℕ) (i : Fin (m + 2)), HasLiftingProperty (horn (m + 1) i).ι p) (n : ℕ) (a : (boundary n).toSSet ⟶ E) (b : (Δ[n] : SSet.{u}) ⟶ T) (hab : a ≫ p = (boundary n).ι ≫ b) (h : (toTop.obj (Δ[n] : SSet.{u})) → toTop.obj E) (hh : Continuous h) (hbase : (toTop.map p).hom ∘ h = (toTop.map b).hom) (hboundary : h ∘ (toTop.map (boundary n).ι).hom = (toTop.map a).hom) : ∃ c : (Δ[n] : SSet.{u}) ⟶ E, c ≫ p = b ∧ (boundary n).ι ≫ c = a",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
