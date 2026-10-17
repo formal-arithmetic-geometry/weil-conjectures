@@ -66,9 +66,9 @@ lemma braiding_quotient (K L : CochainComplex C ℤ) :
 Koszul braiding, with the hexagon identities proved. Its braiding is that of the instance
 `HomotopyCategory.MonoidalCategory.braidedCategory`
 (`HomotopyCategory.braiding_eq_monoidalCategoryBraiding`), whose hexagon identities are not
-proved yet; it is not an instance, to avoid a diamond, and is meant to be used as a local
-instance. -/
-noncomputable abbrev koszulBraidedCategory : BraidedCategory (HomotopyCategory C (.up ℤ)) where
+proved yet; it takes priority over that instance. -/
+noncomputable instance (priority := high) koszulBraidedCategory :
+    BraidedCategory (HomotopyCategory C (.up ℤ)) where
   braiding := braiding
   braiding_naturality_left {X Y} f Z := by
     obtain ⟨X, rfl⟩ := X.quotient_obj_surjective

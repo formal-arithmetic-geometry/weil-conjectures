@@ -28,8 +28,6 @@ This is used for blueprint `sk-p-trace`, together with `lem-trf-chain-supertrace
 
 @[expose] public section
 
-attribute [local instance] HomotopyCategory.koszulBraidedCategory
-
 universe v u
 
 open CategoryTheory Limits MonoidalCategory Functor.LaxMonoidal Functor.OplaxMonoidal

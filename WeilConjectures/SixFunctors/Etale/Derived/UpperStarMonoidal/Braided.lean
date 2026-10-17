@@ -52,8 +52,6 @@ elaborations of the monoidal structure (see the implementation notes of
 
 @[expose] public section
 
-attribute [local instance] HomotopyCategory.koszulBraidedCategory
-
 open CategoryTheory Category Limits MonoidalCategory HomologicalComplex
 
 open scoped CategoryTheory.Functor

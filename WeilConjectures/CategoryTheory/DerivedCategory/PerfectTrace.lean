@@ -60,8 +60,6 @@ The right hand side is an element of `R`, read in `End (𝟙_ D(R))` through the
 
 @[expose] public section
 
-attribute [local instance] HomotopyCategory.koszulBraidedCategory
-
 universe u
 
 open CategoryTheory Limits MonoidalCategory

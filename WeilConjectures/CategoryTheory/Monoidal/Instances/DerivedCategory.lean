@@ -71,7 +71,6 @@ any braided monoidal category can be applied to `DerivedCategory C`. The braidin
 homotopy category `HomotopyCategory.koszulBraidedCategory`. -/
 theorem nonempty_braidedCategory [Abelian.HasFunctorialFlatResolution C] :
     Nonempty (BraidedCategory (DerivedCategory C)) := by
-  let := HomotopyCategory.koszulBraidedCategory (C := C)
   exact ⟨DerivedMonoidal.braidedCategoryOfKFlat Qh
     (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))⟩
 

@@ -47,7 +47,6 @@ variable [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalClosed C]
 the Koszul sign rule on complexes, descended along K-flat resolutions. -/
 @[instance_reducible]
 noncomputable def braidedCategoryOfKFlat : BraidedCategory (DerivedCategory C) :=
-  letI := HomotopyCategory.koszulBraidedCategory (C := C)
   DerivedMonoidal.braidedCategoryOfKFlat Qh (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
 
 end DerivedCategory
