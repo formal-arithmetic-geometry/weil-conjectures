@@ -79,10 +79,33 @@ lemma genericStructHom_eq {W : C.Opens} (hW : IsAffineOpen W) [Nonempty W]
   rw [h1] at h2
   exact congrArg CommRingCat.Hom.hom (Spec.map_injective h2)
 
-set_option maxHeartbeats 800000 in
+omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))]
+  [ConnectedSpace C] [Smooth (C ↘ Spec (.of K))] [IsIntegral C] in
+/-- A ring endomorphism `σ` of `A` fixing the image of `R` and acting on `ε : k̄ ⟶ A` as `Frⁿ`
+lifts the `n`-th power of the geometric Galois Frobenius along a morphism `h : Spec A ⟶ C̄`
+given by `Spec A ⟶ Spec R ⟶ C` and `Spec ε`. -/
+lemma specMap_comp_eq_comp_geometricGaloisFrobenius_pow {A R : CommRingCat.{u}}
+    (g : Spec R ⟶ C) (alg : R ⟶ A) (σ : A ⟶ A) (hσalg : alg ≫ σ = alg)
+    (ε : CommRingCat.of (AlgebraicClosure K) ⟶ A) (n : ℕ)
+    (hσε : Spec.map σ ≫ Spec.map ε = Spec.map ε ≫ (specGeometricFrobenius K ^ n).hom)
+    (h : Spec A ⟶ (C ↘ Spec (.of K)).geometricFiber)
+    (hhproj : h ≫ (C ↘ Spec (.of K)).geometricFiberProj = Spec.map alg ≫ g)
+    (hhalg : h ≫ (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure = Spec.map ε) :
+    Spec.map σ ≫ h = h ≫ ((C ↘ Spec (.of K)).geometricGaloisFrobenius ^ n).hom := by
+  apply Scheme.Hom.geometricFiber_hom_ext
+  · rw [Category.assoc, Category.assoc,
+      Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj, hhproj,
+      ← Category.assoc, ← Spec.map_comp, hσalg]
+  · rw [Category.assoc, Category.assoc,
+      Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure,
+      hhalg, hσε, ← Category.assoc, hhalg]
+
+set_option maxHeartbeats 3200000 in
 -- the rewriting of morphisms between spectra of rings of invariants is slow
 set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
+omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))] [ConnectedSpace C]
+  [Smooth (C ↘ Spec (.of K))] in
 /-- **The Frobenius lift on `Spec B_Q^{I_Q}`.** Let `σ_F` be an element of the decomposition
 group of `Q` acting on the image of an embedding `ε₀ : k̄ ↪ Ω`, contained in `B_Q^{I_Q}` through
 `ε`, as the `n`-th power of the geometric Frobenius, and `h : Spec B_Q^{I_Q} ⟶ C̄` given by
@@ -130,8 +153,8 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
         Ideal.inertiaInvariantsMap C.functionField Q hσF (ε (r a))) = 0 := by
       rw [← map_sub]
       exact (hr _).2 h1
-    rw [map_sub, hσε (r a), sub_eq_zero, RingHom.congr_fun hrε (Φ (r a))] at h2
-    exact h2
+    exact (sub_eq_zero.1 ((RingHom.map_sub r _ _).symm.trans h2)).trans
+      ((congrArg r (hσε (r a))).trans (RingHom.congr_fun hrε (Φ (r a))))
   have hσalg : CommRingCat.ofHom (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q))
       ≫ CommRingCat.ofHom (Ideal.inertiaInvariantsMap C.functionField Q hσF) =
       CommRingCat.ofHom (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q)) :=
@@ -152,18 +175,14 @@ theorem exists_frobeniusLift_inertiaInvariants {W : C.Opens} (hW : IsAffineOpen 
       (Ideal.inertiaInvariantsToField_inertiaInvariantsMap hσF a).symm)
   refine ⟨Spec.map (CommRingCat.ofHom (Ideal.inertiaInvariantsMap C.functionField Q hσF)),
     ?_, ?_, ?_⟩
-  · apply Scheme.Hom.geometricFiber_hom_ext
-    · simp only [Category.assoc,
-        Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj, hhproj]
-      rw [specInertiaInvariantsTo, ← Spec.map_comp_assoc, hσalg]
-    · simp only [Category.assoc,
-        Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure]
-      simp only [← Category.assoc, hhalg]
-      rw [specGeometricFrobenius_pow_hom, ← hΦ, ← Spec.map_comp, ← Spec.map_comp, hσεc]
+  · exact specMap_comp_eq_comp_geometricGaloisFrobenius_pow hW.fromSpec _ _ hσalg _ n (by
+      rw [specGeometricFrobenius_pow_hom, ← hΦ, ← Spec.map_comp, ← Spec.map_comp, hσεc]) h
+      hhproj hhalg
   · rw [specGeometricFrobenius_pow_hom, ← hΦ, ← Spec.map_comp, ← Spec.map_comp, hrσc]
-  · rw [← Spec.map_comp, ← Spec.map_comp, htfc]
+  · rw [← Spec.map_comp, ← Spec.map_comp]
+    exact congrArg Spec.map htfc
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 3200000 in
 -- the construction assembles many morphisms of schemes over `C̄` and `Ū`
 set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
@@ -233,7 +252,8 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
       Spec.map (CommRingCat.ofHom r) :=
     pullback.lift_fst _ _ _
   have ht : (t.left ≫ pullback.fst h ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x))
-      (closedPoint (AlgebraicClosure K)) = closedPoint (Ideal.inertiaInvariants C.functionField Q) := by
+      (closedPoint (AlgebraicClosure K)) =
+        closedPoint (Ideal.inertiaInvariants C.functionField Q) := by
     rw [htl]
     exact specMap_closedPoint_of_forall_eq_zero_iff r hr
   -- the punctured neighbourhood

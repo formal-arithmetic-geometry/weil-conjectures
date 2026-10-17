@@ -2707,7 +2707,9 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryGeneric
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryGenericPoint
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryGenericRep
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryInertia
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryNeighbourhoodConstruction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryNeighbourhoodData
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryNeighbourhoodExistence
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryPurity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryStalk
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryStalkInvariants

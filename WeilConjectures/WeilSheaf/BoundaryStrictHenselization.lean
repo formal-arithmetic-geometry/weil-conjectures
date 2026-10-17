@@ -107,6 +107,15 @@ noncomputable def geometricFiberPointEmb (x : X.finitePoints) :
   have : Module.Finite k (X.residueField x.1) := Module.Finite.of_finite
   (IsAlgClosed.lift : X.residueField x.1 →ₐ[k] AlgebraicClosure k).toRingHom
 
+lemma geometricFiberPointEmb_comp_residueFieldAlgebraMap (x : X.finitePoints) :
+    (f.geometricFiberPointEmb x).comp (f.residueFieldAlgebraMap x.1) =
+      algebraMap k (AlgebraicClosure k) :=
+  letI := (f.residueFieldAlgebraMap x.1).toAlgebra
+  have : Finite (X.residueField x.1) := X.mem_finitePoints.1 x.2
+  have : Module.Finite k (X.residueField x.1) := Module.Finite.of_finite
+  RingHom.ext fun c ↦
+    (IsAlgClosed.lift : X.residueField x.1 →ₐ[k] AlgebraicClosure k).commutes c
+
 lemma geometricFiberPointOfFinitePoint_comp_geometricFiberProj (x : X.finitePoints) :
     f.geometricFiberPointOfFinitePoint x ≫ f.geometricFiberProj =
       Spec.map (CommRingCat.ofHom (f.geometricFiberPointEmb x)) ≫ X.fromSpecResidueField x.1 :=
@@ -186,7 +195,7 @@ noncomputable abbrev sectionsStructHom : k₀ →+* Γ(C, W) :=
 
 set_option maxHeartbeats 400000 in
 -- the codomain restrictions of the embedding of `k̄` unfold slowly
-omit [IsDedekindDomain Γ(C, W)] in
+omit [IsDedekindDomain Γ(C, W)] [Finite k₀] in
 include hxW in
 /-- **An algebraic closure of `k₀` in `B_Q^{I_Q}`.** Let `ε₀ : k̄ ⟶ Ω` be an embedding over `k₀`.
 Its image lies in `B_Q^{I_Q}`: it consists of elements integral over `k₀`, which are fixed by
@@ -310,6 +319,7 @@ noncomputable abbrev sectionsResidue : Γ(C, W) ⟶ C.residueField x.1 :=
   C.presheaf.germ W x.1 hxW ≫ C.residue x.1
 
 omit [Finite k₀] [C.Over (Spec (.of k₀))] [IsDedekindDomain Γ(C, W)] [IsGalois C.functionField Ω]
+  [IsIntegral C]
   [IsSepClosed Ω] [Nonempty W] [Q.LiesOver (hW.primeIdealOf ⟨x.1, hxW⟩).asIdeal] in
 lemma specMap_comp_fromSpecResidueField {L : CommRingCat.{u}} (ι : C.residueField x.1 ⟶ L) :
     Spec.map ι ≫ C.fromSpecResidueField x.1 =
@@ -378,6 +388,104 @@ lemma weaklyEtale_specInertiaInvariantsToGeometricFiber
     infer_instance
   exact WeaklyEtale.of_comp _ (C ↘ Spec (.of k₀)).geometricFiberProj
 
+omit [Finite k₀] [IsDedekindDomain Γ(C, W)] [Nonempty W] [IsGalois C.functionField Ω]
+  [IsSepClosed Ω] [Q.LiesOver (hW.primeIdealOf ⟨x.1, hxW⟩).asIdeal] in
+/-- The structure map of the residue field at `x ∈ W` factors through `Γ(C, W)`. -/
+lemma residueFieldAlgebraMap_eq_comp :
+    (C ↘ Spec (.of k₀)).residueFieldAlgebraMap x.1 =
+      (sectionsResidue x hxW).hom.comp (sectionsStructHom (k₀ := k₀) hW) := by
+  apply_fun (fun f ↦ Spec.map (CommRingCat.ofHom f)) using fun f g h ↦ by
+    simpa using congrArg CommRingCat.Hom.hom (Spec.map_injective h)
+  dsimp only
+  rw [Scheme.Hom.specMap_residueFieldAlgebraMap]
+  have h := specMap_comp_fromSpecResidueField hW x hxW (𝟙 _)
+  rw [Spec.map_id, Category.id_comp, Category.comp_id] at h
+  simp only [h, sectionsResidue, Category.assoc, CommRingCat.ofHom_comp, Spec.map_comp,
+    CommRingCat.ofHom_hom, Spec.map_preimage]
+
+omit [IsDedekindDomain Γ(C, W)] in
+/-- **The embedding of the residue field induced by a point over `x`.** For an embedding
+`ε₀ : k̄ ↪ Ω` over `k₀` and a maximal ideal `Q` over `x`, there is a `k₀`-embedding
+`ι₀ : κ(x) ↪ k̄` such that `ε₀(ι₀(ā)) ≡ a mod Q` for `a ∈ Γ(C, W)`. -/
+theorem exists_residueField_emb_compatible (ε₀ : AlgebraicClosure k₀ →+* Ω)
+    (hε₀ : ε₀.comp (algebraMap k₀ (AlgebraicClosure k₀)) =
+      (algebraMap Γ(C, W) Ω).comp (sectionsStructHom hW)) :
+    ∃ ι₀ : C.residueField x.1 →+* AlgebraicClosure k₀,
+      ι₀.comp ((C ↘ Spec (.of k₀)).residueFieldAlgebraMap x.1) =
+        algebraMap k₀ (AlgebraicClosure k₀) ∧
+      ∀ a : Γ(C, W), ∃ b ∈ Q,
+        (b : Ω) = ε₀ (ι₀ (sectionsResidue x hxW a)) - algebraMap Γ(C, W) Ω a := by
+  obtain ⟨ε, r, hrε, hr, hε, hφ⟩ := exists_algebraicClosure_inertiaInvariants hW Q x hxW _ hε₀
+  have := isStrictlyHenselianLocalRing_inertiaInvariants_of_isAffineOpen hW Q
+  have hgm (a : Γ(C, W)) :
+      r (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q) a) = 0 ↔
+        a ∈ (hW.primeIdealOf ⟨x.1, hxW⟩).asIdeal := by
+    rw [hr, algebraMap_inertiaInvariants_mem_nonunits_iff hW Q x hxW]
+  -- `r ∘ algebraMap` factors through the stalk at `x` and its residue field
+  let z' : W := ⟨x.1, hxW⟩
+  let _ : Algebra Γ(C, W) (C.presheaf.stalk z') := TopCat.Presheaf.algebra_section_stalk _ z'
+  have := hW.isLocalization_stalk z'
+  have hunit (s : (hW.primeIdealOf ⟨x.1, hxW⟩).asIdeal.primeCompl) :
+      IsUnit ((r.comp (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q))) s) :=
+    isUnit_iff_ne_zero.2 fun h ↦ s.2 ((hgm s).1 h)
+  let g' : C.presheaf.stalk z' →+* AlgebraicClosure k₀ := IsLocalization.lift hunit
+  have hg' (a : Γ(C, W)) : g' (algebraMap _ _ a) =
+      r (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q) a) :=
+    IsLocalization.lift_eq hunit a
+  have : IsLocalHom g' := ⟨fun y hy ↦ by
+    by_contra hns
+    obtain ⟨⟨a, s⟩, rfl⟩ :=
+      IsLocalization.mk'_surjective (hW.primeIdealOf ⟨x.1, hxW⟩).asIdeal.primeCompl y
+    have ha := (IsLocalization.AtPrime.mk'_mem_maximal_iff
+      (C.presheaf.stalk z') (hW.primeIdealOf ⟨x.1, hxW⟩).asIdeal a s).1
+      ((mem_maximalIdeal _).2 hns)
+    have h0 : g' (IsLocalization.mk' _ a s) = 0 :=
+      (IsLocalization.lift_mk'_spec _ _ _ _).2 (by
+        rw [mul_zero]
+        exact (hgm a).2 ha)
+    rw [h0] at hy
+    exact not_isUnit_zero hy⟩
+  let ι₀ : C.residueField x.1 →+* AlgebraicClosure k₀ := IsLocalRing.ResidueField.lift g'
+  have hι₀ (a : Γ(C, W)) : ι₀ (sectionsResidue x hxW a) =
+      r (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q) a) := by
+    change IsLocalRing.ResidueField.lift g' (IsLocalRing.residue _ (algebraMap _ _ a)) = _
+    rw [IsLocalRing.ResidueField.lift_residue_apply, hg']
+  refine ⟨ι₀, ?_, fun a ↦ ?_⟩
+  · refine RingHom.ext fun c ↦ ?_
+    have h1 := RingHom.congr_fun (residueFieldAlgebraMap_eq_comp hW x hxW) c
+    rw [RingHom.comp_apply, h1, RingHom.comp_apply, hι₀]
+    have h2 := RingHom.congr_fun hφ c
+    rw [RingHom.comp_apply, RingHom.comp_apply] at h2
+    rw [h2]
+    exact RingHom.congr_fun hrε _
+  · obtain ⟨c, hc⟩ : ∃ c, r (algebraMap Γ(C, W)
+        (Ideal.inertiaInvariants C.functionField Q) a) = c := ⟨_, rfl⟩
+    rw [hι₀, hc]
+    have hd : ¬ IsUnit
+        (ε c - algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q) a) := by
+      rw [← hr, map_sub, show r (ε c) = c from RingHom.congr_fun hrε c, hc, sub_self]
+    letI : Algebra k₀ Γ(C, W) := (sectionsStructHom (k₀ := k₀) hW).toAlgebra
+    letI : Algebra k₀ Ω := ((algebraMap Γ(C, W) Ω).comp (sectionsStructHom (k₀ := k₀) hW)).toAlgebra
+    have : IsScalarTower k₀ Γ(C, W) Ω := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+    let eK : AlgebraicClosure k₀ →ₐ[k₀] Ω :=
+      { toRingHom := ε₀, commutes' := RingHom.congr_fun hε₀ }
+    have hint : _root_.IsIntegral Γ(C, W) (ε₀ c - algebraMap Γ(C, W) Ω a) :=
+      (((Algebra.IsIntegral.isIntegral (R := k₀) c).map eK).tower_top).sub isIntegral_algebraMap
+    refine ⟨⟨_, hint⟩, ?_, rfl⟩
+    by_contra hb
+    apply hd
+    refine Ideal.isUnit_of_isUnit_coe _ Q ?_
+    have heq : ((ε c - algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q) a :
+        Ideal.inertiaInvariants _ Q) : Localization.AtPrime Q) =
+        algebraMap _ _ (⟨_, hint⟩ : integralClosure Γ(C, W) Ω) := by
+      apply Ideal.injective_atPrimeToField Q
+      rw [Ideal.atPrimeToField_algebraMap]
+      change Ideal.inertiaInvariantsToField _ Q
+        (ε c - algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q) a) = _
+      rw [map_sub, hε, AlgHom.commutes]
+    rw [heq]
+    exact IsLocalization.map_units _ (⟨_, hb⟩ : Q.primeCompl)
+
 section Punctured
 
 variable {U : Scheme.{u}} [U.Over (Spec (.of k₀))] (j : U ⟶ C) [IsOpenImmersion j]
@@ -424,7 +532,8 @@ theorem exists_iso_pullback_geometricFiberMap
       rw [← hϖ]
       exact ⟨fun h ↦ ⟨h, hW'⟩, fun h ↦ h.1⟩
     have h2 : (specInertiaInvariantsTo hW Q) q ∈ C.basicOpen ϖ ↔
-        Spec.map (CommRingCat.ofHom (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q)))
+        Spec.map (CommRingCat.ofHom
+          (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q)))
           q ∈ PrimeSpectrum.basicOpen ϖ := by
       rw [← hW.fromSpec_preimage_basicOpen]
       rfl
