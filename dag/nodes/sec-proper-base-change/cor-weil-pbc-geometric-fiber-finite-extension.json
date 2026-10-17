@@ -3,37 +3,112 @@
  "blueprint": {
   "is": "cor-weil-pbc-geometric-fiber-finite-extension",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite-extension geometric-fiber formula",
- "statement": "In the setup of the finite-level geometric-fiber corollary, let $E/\\Ql$ be\nfinite and let $K\\in\\Dbc(X,E)$. The $E$-coefficient exchange morphism is an\nisomorphism\n$$\n L\\bar y^*Rf_*K\\xrightarrow{\\sim}\n Ra_{\\bar y,*}Li_{\\bar y}^*K\n \\quad\\text{in }\\Dbc(\\operatorname{Spec}\\Omega,E).\n$$",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, with ring of integers $A=\\mathcal O_E$ and uniformizer $\\varpi$. Let $f:X\\to Y$ be proper [def-weil-proper-morphism], let $\\bar y:P=\\operatorname{Spec}\\Omega\\to Y$ be a geometric point [def-weil-geometric-point], and put $X_{\\bar y}=X\\times_Y P$, with projections $i_{\\bar y}:X_{\\bar y}\\to X$ and $a_{\\bar y}:X_{\\bar y}\\to P$ [def-pc-fibre-product]. Assume that $X,Y,X_{\\bar y},P$ are noetherian and finite-dimensional [def-pc-dimension], that $\\ell$ is invertible on all four schemes, that $a_{\\bar y}$ is proper, and that the geometric fibers of $f$ have dimension at most some $e\\geq0$, as required by [thm-weil-pbc-finite-extension]. Use the raw rational categories $\\Dbc(T,E)=\\Dbc(T_{\\Proet},A)[1/\\varpi]$ of [def-weil-pbc-rational-category]. For the cartesian square $(f,a_{\\bar y},\\bar y,i_{\\bar y},\\mathrm{id})$ [def-weil-pbc-cartesian-square], use the rational extensions of integral direct images and completed pullbacks and the specified rational exchange of [thm-weil-pbc-finite-extension]. For every $K\\in\\Dbc(X,E)$, this exchange morphism is an isomorphism\n$$\n L\\bar y^*Rf_*K\\xrightarrow{\\sim}Ra_{\\bar y,*}Li_{\\bar y}^*K\n \\quad\\text{in }\\Dbc(P,E).\n$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-geometric-fiber-finite-extension.md",
   "place": "node cor-weil-pbc-geometric-fiber-finite-extension, order 1358"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-geometric-point",
+  "def-pc-fibre-product",
+  "def-pc-dimension",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-rational-category",
+  "thm-weil-pbc-finite-extension"
+ ],
  "proof": [
   {
-   "text": "Specialize [thm-weil-pbc-finite-extension] to the geometric-point base\nchange.",
+   "text": "Set $Y'=P=\\operatorname{Spec}\\Omega$, $g=\\bar y$, $X'=X_{\\bar y}=X\\times_Y P$, $g'=i_{\\bar y}$, $f'=a_{\\bar y}$ and $\\alpha=\\mathrm{id}_{X\\times_Y P}$. By the defining projection equality for the fibre product [def-pc-fibre-product], $f i_{\\bar y}=\\bar y a_{\\bar y}$. Thus these data form the cartesian square of [def-weil-pbc-cartesian-square], with the geometric point of [def-weil-geometric-point] as its lower horizontal map. This is simply the square defining the geometric fibre, without changing either projection.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-cartesian-square",
+    "def-weil-geometric-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-geometric-fiber-finite-extension.md",
+    "place": "Proof: specialize thm-weil-pbc-finite-extension to the geometric-point base change (same statement in main-20261015, order 1418)"
+   }
+  },
+  {
+   "text": "For each of the four schemes use [def-weil-pbc-rational-category]: $\\Dbc(T,E)$ is the raw scalar localization of the integral constructible category, with the same objects and with Hom modules tensored from $A$ to $E$. The noetherian, finite-dimensional and invertibility assumptions in the statement place every scheme in the domain of this definition. In particular the given $K$ is an object of exactly the rational source category in [thm-weil-pbc-finite-extension], and the target category for $Y'=P$ is $\\Dbc(P,E)$.",
+   "uses": [
+    "def-weil-pbc-rational-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-geometric-fiber-finite-extension.md",
+    "place": "Proof: specialize thm-weil-pbc-finite-extension to the geometric-point base change (same statement in main-20261015, order 1418)"
+   }
+  },
+  {
+   "text": "Apply [thm-weil-pbc-finite-extension] to the square of step 1 and the object $K$ of step 2. Its scheme hypotheses hold by the explicit assumptions: all four schemes are noetherian and finite-dimensional with $\\ell$ invertible, both vertical maps $f$ and $a_{\\bar y}$ are proper, and the geometric fibers of $f$ have the stated bound $e$. The coefficient field is the given finite extension $E/\\mathbf Q_\\ell$. The theorem asserts that its specified rational exchange is an isomorphism for every such $K$. Substituting $g=\\bar y$, $g'=i_{\\bar y}$ and $f'=a_{\\bar y}$ into that exchange gives exactly $L\\bar y^*Rf_*K\\to Ra_{\\bar y,*}Li_{\\bar y}^*K$. The operations and exchange were defined in the statement to be those of that theorem for this square, so this is the specified morphism, and the isomorphism lies in its stated target $\\Dbc(P,E)$.",
    "uses": [
     "thm-weil-pbc-finite-extension"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-geometric-fiber-finite-extension.md",
+    "place": "Proof: specialize thm-weil-pbc-finite-extension to the geometric-point base change (same statement in main-20261015, order 1418)"
+   }
   }
  ],
  "proof_deps": [
-  "thm-weil-pbc-finite-extension",
-  "cor-weil-pbc-geometric-fiber-finite"
+  "def-pc-fibre-product",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-geometric-point",
+  "def-weil-pbc-rational-category",
+  "thm-weil-pbc-finite-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/cor-weil-pbc-geometric-fiber-finite-extension.md",
-  "place": "## Proof"
+  "place": "Proof: specialize thm-weil-pbc-finite-extension to the geometric-point base change (same statement in main-20261015, order 1418)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism of schemes the l-adic derived base change exchange map at a geometric point is an isomorphism for bounded constructible complexes over a finite extension of Q_l",
+   "results": "8 hits: AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme, CondensedMod.IsSolid.isIso_solidification_map, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, lightProfiniteToLightCondSetIsoTopCatToLightCondSet",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometricFiber.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*geometricFiber|constructible.*base.?[Cc]hange",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper base change for rational l-adic constructible complexes at a geometric point",
+   "results": "8 hits: AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, RingHom.IsStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange, KaehlerDifferential.cotangentComplexBaseChange_tmul, AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", CategoryTheory.IsIso",
+   "results": "6 hits: CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact, CategoryTheory.TwoSquare.instIsIsoFunctorRanBaseChangeOfGuitartExact, CategoryTheory.TwoSquare.isIso_lanBaseChange_app, CategoryTheory.TwoSquare.isIso_ranBaseChange_app, CategoryTheory.TwoSquare.isIso_lanBaseChange_app_iff, CategoryTheory.TwoSquare.isIso_ranBaseChange_app_iff",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the derived direct image of an l-adic constructible complex along a proper scheme morphism equals the cohomology of the geometric fiber",
+   "results": "8 hits: AlgebraicGeometry.Scheme.stalkMap_germ_apply, AlgebraicGeometry.Scheme.Hom.germ_stalkMap_apply, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc, TopCat.Presheaf.stalkSpecializes_stalkPushforward_apply, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, TopCat.Presheaf.stalkPushforward_germ_apply, TopCat.Presheaf.stalkPushforward_germ, TopCat.Presheaf.stalkPushforward_germ_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -62,5 +137,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "cor-weil-pbc-geometric-fiber-finite-extension",
+  "worker": "stage1",
+  "summary": "Expanded the geometric-point square and the raw rational category, then specialized the existing finite-extension theorem, checking every hypothesis and the identity of the exchange morphism. No new nodes. STATEMENT-DISPUTED: the imported setup omits restrictions required to form its rational categories; made those and the cited theorem hypotheses explicit.",
+  "blueprint": "Realizes the entire master proof sentence: Specialize thm-weil-pbc-finite-extension to the geometric-point base change; main-20261015 preserves the statement without a proof."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-a1e9b0126",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-a1e9b0126 (reviewer sub-agent of L); spot-checked: Read in full: the master statement and proof (order 1358) and the main-20261015 copy (order 1418, same statement and proof), the master and main-20261015 text of thm-weil-pbc-finite-extension, and the full DAG statements of every cited node. Also read, because they supply the hypotheses, cor-weil-pbc-geometric-fiber-finite, cor-weil-pbc-constructible-complete, prop-weil-pbc-rational-transport, def-weil-pbc-bounded-constructible-complete, prop-weil-pbc-preservation-constructible and thm-weil-pbc-complete-proetale. Coefficients: the raw localization Dbc(T_Proet,O_E)[1/varpi] is used throughout, with no identification with a condensed category. Base-change morphism: square (f, a_y, y, i_y, alpha=id), checked against the corner layout of def-weil-pbc-cartesian-square; substituting into the specified rational exchange gives exactly L y^* Rf_* K -> R a_{y,*} L i_y^* K in Dbc(Spec Omega,E). Statement change, accepted: the source's 'setup of the finite-level corollary' never makes the categories Dbc(T,E) defined (they need noetherian, finite-dimensional, ell invertible; example: Spec F_ell). The added hypotheses are exactly those of the parent theorem, and those on X_y and P (and a_y proper, the fibre bound) follow from X and Y, so nothing is weakened. Steps 1-2 are correctly marked elementary (fibre-product equality with alpha=id; unpacking the definition). Step 3 is a black-box application of thm-weil-pbc-finite-extension; every hypothesis was checked. Same unit, no tool_uses, no SGA. Edge cases checked: K=0, empty fibre, f=id, char Omega=ell (excluded), Omega any algebraically closed field. No new nodes; rg over dag/nodes found no duplicate (cor-weil-pbc-geometric-fiber-qbar cites this item). Fix (B3): the statement now cites def-pc-dimension for 'finite-dimensional' and dimension, in the text and in stmt_deps; the corrected item JSON is under fixes/dag/nodes/sec-proper-base-change/. Full checks are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

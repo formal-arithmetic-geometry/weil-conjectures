@@ -1,0 +1,81 @@
+{
+ "id": "lem-sfb-sheaf-tensor-unit-comparison",
+ "kind": "statement",
+ "title": "Sheaf tensor structure maps commute with unit comparisons before coherence",
+ "statement": "Let $C$ be an essentially small site and $\\mathcal A$ a Grothendieck abelian category with a closed symmetric monoidal structure additive in each variable. Let $\\mathrm{PSh}=\\mathrm{Fun}(C^{\\mathrm{op}},\\mathcal A)$ have the objectwise tensor $\\otimes_p$, unit $I$, associator $\\alpha^p$, unitors $\\lambda^p,\\rho^p$, and symmetry $\\beta^p$ of [det-def-sfb-sheaf-tensor-presheaf]. Let $a:\\mathrm{PSh}\\to\\mathrm{Sh}(C,\\mathcal A)$ be sheafification, $i$ the full inclusion, $\\eta_P:P\\to iaP$ its unit, and $\\epsilon_S:aiS\\to S$ the inverse of $\\eta_{iS}$, using [def-weil-pbc-sheafification]. Write $W=\\{g:a(g)\\text{ is invertible}\\}$; the tensor stability and unit comparisons are those of [det-def-sfb-sheaf-tensor-local-iso].\n\nFor sheaves set $F\\star G=a(iF\\otimes_piG)$, with $(u\\star v)=a(iu\\otimes_piv)$, and $J=aI$. Define the following maps, without assuming that they satisfy monoidal coherence:\n$$\n\\alpha^\\star_{F,G,H}=a(iF\\otimes_p\\eta_{iG\\otimes_piH})\\circ a(\\alpha^p_{iF,iG,iH})\\circ a(\\eta_{iF\\otimes_piG}\\otimes_piH)^{-1},\n$$\n$$\n\\lambda^\\star_F=\\epsilon_F\\circ a(\\lambda^p_{iF})\\circ a(\\eta_I\\otimes_piF)^{-1},\\qquad\n\\rho^\\star_F=\\epsilon_F\\circ a(\\rho^p_{iF})\\circ a(iF\\otimes_p\\eta_I)^{-1},\\qquad\n\\beta^\\star_{F,G}=a(\\beta^p_{iF,iG}).\n$$\nFor any presheaves $P,Q,R$, sheaves $F,G,H$, and arbitrary morphisms $f:P\\to iF$, $g:Q\\to iG$, $h:R\\to iH$, put\n$$d(f,g)=\\eta_{iF\\otimes_piG}\\circ(f\\otimes_pg):P\\otimes_pQ\\to i(F\\star G).$$\nThen the following four equalities hold as morphisms of presheaves:\n$$\ni(\\alpha^\\star_{F,G,H})\\circ d(d(f,g),h)=d(f,d(g,h))\\circ\\alpha^p_{P,Q,R},\n$$\n$$\ni(\\lambda^\\star_F)\\circ d(\\eta_I,f)=f\\circ\\lambda^p_P,\\qquad\ni(\\rho^\\star_F)\\circ d(f,\\eta_I)=f\\circ\\rho^p_P,\n$$\n$$\ni(\\beta^\\star_{F,G})\\circ d(f,g)=d(g,f)\\circ\\beta^p_{P,Q}.\n$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-structure.proof.md",
+  "place": "Second paragraph, first sentence (explicit four comparison identities)"
+ },
+ "stmt_deps": [
+  "det-def-sfb-sheaf-tensor-presheaf",
+  "def-weil-pbc-sheafification",
+  "det-def-sfb-sheaf-tensor-local-iso"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "toSheafify.*(associator|unitor|braid)|(associator|unitor|braid).*toSheafify|μ_natural|associator_hom_app|leftUnitor_hom_app",
+   "results": "{\"t\": \"2026-10-17T07:05:01Z\", \"tool\": \"grep\", \"query\": \"toSheafify.*(associator|unitor|braid)|(associator|unitor|braid).*toSheafify|μ_natural|associator_hom_app|leftUnitor_hom_app\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Pi/Monoidal.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Category/Cat.lean\"], \"digest\": \"dbddb90905c7f4f1\"}",
+   "date": "2026-10-17",
+   "verdict": "Related localization and cartesian-sheaf declarations; no exact match. Read Sites/Monoidal.lean:168-201, Localization/Monoidal/Basic.lean:124-126,214-247 and Braided.lean:57-64. Their tensors and comparison maps are abstract localization lifts, not the explicit reflected tensor and unit-map composites in this statement; identifying them requires a separate comparison, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.Monoidal.associator",
+   "results": "{\"t\": \"2026-10-17T07:05:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Localization.Monoidal.associator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.triangle_natTrans\", \"CategoryTheory.Localization.Monoidal.associator\", \"CategoryTheory.Localization.Monoidal.pentagon_natTrans\"], \"digest\": \"58b97e24b101cd5e\"}",
+   "date": "2026-10-17",
+   "verdict": "Related localization and cartesian-sheaf declarations; no exact match. Read Sites/Monoidal.lean:168-201, Localization/Monoidal/Basic.lean:124-126,214-247 and Braided.lean:57-64. Their tensors and comparison maps are abstract localization lifts, not the explicit reflected tensor and unit-map composites in this statement; identifying them requires a separate comparison, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a reflective localization with tensor stable local equivalences, the associator defined from inverses of reflected unit maps commutes with the canonical tensor comparison maps for arbitrary morphisms into local objects",
+   "results": "{\"t\": \"2026-10-17T07:05:02Z\", \"tool\": \"leansearch\", \"query\": \"For a reflective localization with tensor stable local equivalences, the associator defined from inverses of reflected unit maps commutes with the canonical tensor comparison maps for arbitrary morphisms into local objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.associator_hom_app\", \"CategoryTheory.associator_hom\", \"CategoryTheory.Localization.Monoidal.associator\", \"CategoryTheory.Localization.Monoidal.associator_naturality_assoc\", \"CategoryTheory.associator_inv\", \"CategoryTheory.Localization.associator\", \"CategoryTheory.Localization.Monoidal.triangle_aux₁_assoc\", \"CategoryTheory.Localization.Monoidal.associator_naturality\"], \"digest\": \"0a64ce1860b53c76\"}",
+   "date": "2026-10-17",
+   "verdict": "Related localization and cartesian-sheaf declarations; no exact match. Read Sites/Monoidal.lean:168-201, Localization/Monoidal/Basic.lean:124-126,214-247 and Braided.lean:57-64. Their tensors and comparison maps are abstract localization lifts, not the explicit reflected tensor and unit-map composites in this statement; identifying them requires a separate comparison, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For the tensor of sheaves defined by sheafification, the associator unitors and symmetry commute with canonical comparison maps from arbitrary presheaves to their sheaf tensor expressions, before assuming monoidal coherence",
+   "results": "{\"t\": \"2026-10-17T07:05:12Z\", \"tool\": \"leanfinder\", \"query\": \"For the tensor of sheaves defined by sheafification, the associator unitors and symmetry commute with canonical comparison maps from arbitrary presheaves to their sheaf tensor expressions, before assuming monoidal coherence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"CategoryTheory.Sheaf.monoidalCategory\", \"CategoryTheory.sheafToPresheaf_δ\", \"CategoryTheory.sheafToPresheaf_μ\", \"CategoryTheory.Sheaf.symmetricCategory\", \"CategoryTheory.sheafComposeIso_hom_fac_assoc\", \"CategoryTheory.sheafComposeIso_inv_fac_assoc\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\"], \"digest\": \"fa6beae7cfcc4556\"}",
+   "date": "2026-10-17",
+   "verdict": "Related localization and cartesian-sheaf declarations; no exact match. Read Sites/Monoidal.lean:168-201, Localization/Monoidal/Basic.lean:124-126,214-247 and Braided.lean:57-64. Their tensors and comparison maps are abstract localization lifts, not the explicit reflected tensor and unit-map composites in this statement; identifying them requires a separate comparison, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of canonical comparison from a parenthesized presheaf tensor to a sheafified tensor with respect to associativity left and right unit and symmetry maps, for arbitrary local equivalences at the leaves",
+   "results": "{\"t\": \"2026-10-17T07:05:13Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of canonical comparison from a parenthesized presheaf tensor to a sheafified tensor with respect to associativity left and right unit and symmetry maps, for arbitrary local equivalences at the leaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafToPresheaf_δ\", \"CategoryTheory.sheafToPresheaf_μ\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"CategoryTheory.Sheaf.monoidalCategory\", \"CategoryTheory.Sheaf.symmetricCategory\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"π_tensor_id_preserves_coequalizer_inv_colimMap_desc\", \"id_tensor_π_preserves_coequalizer_inv_colimMap_desc\"], \"digest\": \"4a0d9aa81e5b0699\"}",
+   "date": "2026-10-17",
+   "verdict": "Related localization and cartesian-sheaf declarations; no exact match. Read Sites/Monoidal.lean:168-201, Localization/Monoidal/Basic.lean:124-126,214-247 and Braided.lean:57-64. Their tensors and comparison maps are abstract localization lifts, not the explicit reflected tensor and unit-map composites in this statement; identifying them requires a separate comparison, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma (leftUnitor_hom_app|rightUnitor_hom_app|associator_hom_app)|lemma.*braid|tensorBifunctor|def μ",
+   "results": "{\"t\": \"2026-10-17T07:05:15Z\", \"tool\": \"grep\", \"query\": \"lemma (leftUnitor_hom_app|rightUnitor_hom_app|associator_hom_app)|lemma.*braid|tensorBifunctor|def μ\", \"sub\": \"CategoryTheory/Localization/Monoidal\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\"], \"digest\": \"ddbf01bac8ef9a81\"}",
+   "date": "2026-10-17",
+   "verdict": "Related localization and cartesian-sheaf declarations; no exact match. Read Sites/Monoidal.lean:168-201, Localization/Monoidal/Basic.lean:124-126,214-247 and Braided.lean:57-64. Their tensors and comparison maps are abstract localization lifts, not the explicit reflected tensor and unit-map composites in this statement; identifying them requires a separate comparison, not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-def-sfb-sheaf-tensor-structure",
+  "date": "2026-10-17",
+  "group": "Q104"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-sheaf-tensor",
+ "blueprint": {
+  "from": {
+   "node": "det-def-sfb-sheaf-tensor-structure",
+   "place": "proof, second paragraph: each sheaf structure map is the conjugate of the objectwise structure map by canonical isomorphisms; explicit compatibility for arbitrary leaf maps",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
