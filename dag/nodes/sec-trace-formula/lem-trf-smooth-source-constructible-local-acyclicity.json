@@ -16,9 +16,144 @@
   "def-pc-fibre-product",
   "def-weil-geometric-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=Y_{(y)}$, $C=S_{(s)}$, $D=S_{(t)}$, and $T=A\\times_C D=Y_{y,c}$. All three strict localizations are affine by [def-weil-pbc-strict-henselization-limit], hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Thus $c:D\\to C$ is qcqs by [lem-weil-pbc-qcqs-morphism-permanence](1), and its base change $j:T\\to A$ is qcqs by (3). If $S$ is empty there is no $x$, so the assertion is vacuous. Otherwise invertibility of $m$ forces $m\\ne0$; put $N=|m|\\ge1$. Then $N\\Lambda=0$, and the inverse of $m$ pulls back to an inverse of $m$ on $A$, so $N$ is invertible on $A$.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0GJQ (proposition-smooth-locally-acyclic), qcqs hypothesis in 0EZU (lemma-base-change-f-star-general-stalks); Tags 00E8 and 01KO for affine qcqs"
+   }
+  },
+  {
+   "text": "Let $E=X\\times_Y A$, with projections $p:E\\to X$ and $r:E\\to A$. It is a base change of $h$, hence smooth by [lem-pc-proper-base-change](2). The canonical closed-point lift $a$ of $y$ to $A$, composed with the field map from the geometric point $x$, gives $\\xi=(x,a)\\in E$. Apply [lem-weil-pbc-strict-base-closed-point-localizations] to $h:X\\to Y$, with $\\bar s=y$, $S'=A$, $\\bar x'=\\xi$ and the identity map between the common geometric fields. It gives $A_{(a)}\\simeq A$ and $E_{(\\xi)}\\simeq X_{(x)}$; its compatibility clause identifies the induced map to $A$ with $h_{(x)}:X_{(x)}\\to Y_{(y)}$ followed by the inverse of its middle isomorphism $\\varphi:A\\to Y_{(y)}$. Here $\\varphi$ is the identity of $A=Y_{(y)}$: both the functorial map $A_{(a)}\\to Y_{(y)}$ of [lem-weil-pbc-strict-henselization-functoriality](3) for the structure map $A\\to Y$ and the canonical map $A_{(a)}\\to A=Y_{(y)}$ are local, have the same composite to $Y$, and induce on residue fields the identity of $\\kappa(\\bar y)=\\kappa(a)=\\kappa(\\bar a)$ inside the common geometric field; by the uniqueness in (3) they are equal. Hence the map $E_{(\\xi)}\\simeq X_{(x)}\\to A$ is exactly $h_{(x)}$, and its composite to $C$ is the canonical map $X_{(x)}\\to Y_{(y)}\\to S_{(s)}$. Set $B=X_{(x)}$ and $V=B\\times_A T$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-strict-base-closed-point-localizations",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0GIP (lemma-base-change-strict-henselization-quasi-finite), case (2); the strict-base replacement in the first paragraph of the proof of etale-cohomology Tag 0GJQ"
+   }
+  },
+  {
+   "text": "The fibre-product universal property [def-pc-fibre-product] identifies $V=B\\times_A(A\\times_C D)$ with $B\\times_C D=X_{x,c}$. Explicitly, a map into the first product is a pair of maps to $B$ and $D$ whose maps to $C$ agree: its map to $A$ is forced to be $h_{(x)}$ of the map to $B$. The inverse sends such a pair to the map into $A\\times_C D$ given by $h_{(x)}$ and the map to $D$. Both composites fix the projections. Under this identification $u:V\\to T$ is exactly $h_{x,c}$. The projections to $Y$ satisfy $\\pi_Yu=h\\pi_X$, so the inverse-image composition isomorphisms [lem-weil-pbc-inverse-image-composition] identify $u^{-1}(L|_T)$ with $(h^*L)|_V$; for modules these are the same constant-coefficient inverse images by [prop-weil-pbc-inverse-image-modules-exact](1)--(3).",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-inverse-image-composition",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZU (lemma-base-change-f-star-general-stalks), fibre-product identification; inverse-image composition"
+   }
+  },
+  {
+   "text": "First let $F$ be any abelian etale sheaf on $T$ annihilated by $N$. Every element of every stalk is killed by $N$, which is invertible on $A$. Apply [sbc-thm-smooth-base-change] to the Cartesian square with smooth side $r:E\\to A$ and qcqs side $j:T\\to A$. For every $q\\ge0$ the canonical sheaf exchange is an isomorphism. Now apply [lem-weil-pbc-exchange-strict-local-cohomology] to this same square and take its test at $\\xi$. It gives the canonical pullback isomorphism\n$$H^q(A_{(a)}\\times_A T,F)\\longrightarrow H^q(E_{(\\xi)}\\times_A T,F).$$\nBy Step 2 these are $H^q(T,F)$ and $H^q(V,u^{-1}F)$, and the tested map is precisely $u^*$. Thus $u^*$ is an isomorphism in every nonnegative degree for every such $F$; no constructibility of $F$ is needed.",
+   "uses": [
+    "sbc-thm-smooth-base-change",
+    "lem-weil-pbc-exchange-strict-local-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0EYU (theorem-smooth-base-change), 0EZU (lemma-base-change-f-star-general-stalks), and the proof pattern of 0GJQ (proposition-smooth-locally-acyclic)"
+   }
+  },
+  {
+   "text": "Use abelian coefficients temporarily. On $D^+(T_{\\mathrm{Et}})$ put $P(K)=R\\Gamma(T,K)$ and $Q(K)=R\\Gamma(V,u^{-1}K)$, with $\\alpha_K:P(K)\\to Q(K)$ the canonical pullback. These are triangulated functors: use [def-weil-pbc-derived-inverse-image] and [lem-weil-pbc-derived-direct-image-triangulated] with the global-sections functors. The categories have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. The unit/Leray formula [lem-weil-pbc-cohomology-pullback-derived-unit](2) specifies $\\alpha$. It commutes with shifts and gives morphisms of distinguished triangles: on complexes the unit is degreewise, hence its map on $\\operatorname{Cone}(v)^i=K'^i\\oplus K^{i+1}$ is the direct sum of its maps on the two summands; naturality with $v$ makes it commute with the off-diagonal entry $v$ in the cone differential. The resolution comparisons preserve this equality in the derived category. Additivity of sections and the cone formula in [def-weil-abstract-derived-category] then give the three commuting triangle squares, including the shifted last square. This checks the triangle compatibility rather than inferring it from naturality alone.",
+   "uses": [
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 01F8 (lemma-functoriality), 01F9 (equation-functorial-derived), 01FB (remark-explain-arrow); derived.tex Tag 05SE (proposition-derived-functor) and cone definition"
+   }
+  },
+  {
+   "text": "For a sheaf $F$ killed by $N$ in degree zero, $H^q(\\alpha_F)$ is the map of Step 4, by [lem-weil-pbc-cohomology-pullback-derived-unit](2). It is an isomorphism for $q\\ge0$; in negative degrees both complexes have zero cohomology, since they are computed by nonnegative injective resolutions. Hence $\\alpha_F$ is an isomorphism, and so is $\\alpha_{F[-b]}$ for every integer $b$ by Step 5. For a bounded abelian complex $K$ whose cohomology is killed by $N$, choose bounds $a\\le b$ and induct on $b-a+1$. The zero complex is the base case. The standard truncation triangle [def-sbc-standard-tstructure-derived-category]\n$$\\tau_{\\le b-1}K\\longrightarrow K\\longrightarrow\\mathcal H^b(K)[-b]\\longrightarrow(\\tau_{\\le b-1}K)[1]$$\nhas first term with cohomology in $[a,b-1]$ and third term a shifted sheaf killed by $N$; these assertions follow immediately by taking kernels and images in the defining good truncations. By induction the first comparison is invertible, and the shifted-sheaf case gives the third. Step 5 supplies a morphism between the two image triangles; [lem-sf-triangle-morphism-iso] makes its middle arrow $\\alpha_K$ invertible. This proves the comparison for every bounded abelian $K$ with $N$-annihilated cohomology.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle) and Tag 014A (lemma-third-isomorphism-triangle); sheaf case from etale-cohomology Tags 0EYU and 0EZU"
+   }
+  },
+  {
+   "text": "Let $K=L|_T$ in the module derived category. By bounded constructibility [def-weil-pbc-constructible-complexes], $L$ has cohomology in a finite interval $[a,b]$. Exactness of constant-coefficient inverse image [prop-weil-pbc-inverse-image-modules-exact] gives the same bound for $K$. Forgetting coefficients is exact and commutes with cohomology by [lem-kun-unbounded-abelian-exchange-comparison], so its underlying abelian complex $K_{\\mathrm{Ab}}$ is bounded; every cohomology stalk is killed by $N$ since $N\\Lambda=0$. Step 6 makes its canonical pullback invertible. The terminal-object comparison [lem-pe-left-module-derived-evaluation-forget], applied on $T_{\\mathrm{Et}}$ and $V_{\\mathrm{Et}}$, identifies the forgotten module-derived sections with the abelian ones and explicitly commutes with the canonical global-cohomology pullback. Its hypotheses hold: the coefficient sheaves are constant, both sites have terminal objects, and enough injectives is [lem-weil-pbc-module-sheaves-enough-injectives]. Consequently the underlying abelian map of $R\\Gamma(T,K)\\to R\\Gamma(V,u^{-1}K)$ is the isomorphism of Step 6. It follows that the module map is an isomorphism: forgetting scalar structure detects kernels and cokernels degreewise, so it detects an acyclic cone and therefore a quasi-isomorphism in $D(\\Lambda)$. Step 3 now identifies this exact map and both coefficients with the map displayed in the item.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-kun-unbounded-abelian-exchange-comparison",
+    "lem-pe-left-module-derived-evaluation-forget",
+    "lem-weil-pbc-module-sheaves-enough-injectives"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), extended to bounded-below complexes by derived.tex Tag 05TA (proposition-enough-acyclics); constant-coefficient inverse images"
+   }
+  },
+  {
+   "text": "Finally $L\\mapsto L|_T$ is a functor, and $\\alpha$ is the unit-defined natural transformation of Step 5. For a morphism $L\\to L'$, naturality of the unit says that pullback after the induced map on $R\\Gamma(T,-)$ equals the induced map on $R\\Gamma(V,-)$ after pullback. The coefficient-forgetting comparisons in Step 7 are natural and commute with these pullbacks, while the inverse-image composition comparisons in Step 3 are natural in their coefficient. Hence these same equalities hold for the displayed $\\Lambda$-linear isomorphism, proving its naturality in $L$.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "lem-pe-left-module-derived-evaluation-forget",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01F8 (lemma-functoriality) and Tag 01F9 (equation-functorial-derived), naturality in the coefficient complex"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-strict-base-closed-point-localizations",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-inverse-image-composition",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "sbc-thm-smooth-base-change",
+  "lem-weil-pbc-exchange-strict-local-cohomology",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "def-weil-abstract-derived-category",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sf-triangle-morphism-iso",
+  "def-weil-pbc-constructible-complexes",
+  "lem-kun-unbounded-abelian-exchange-comparison",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "The smooth-base-change/strict-local argument of Tags 0GJQ, 0EYU and 0EZU; bounded-complex extension written out using derived.tex 08J5 and 014A and coefficient comparison sites-cohomology.tex 03FD."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,10 +182,45 @@
    "results": "8 hits: AlgebraicGeometry.IsSmooth.casesOn; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; AlgebraicGeometry.IsSmooth.recOn; AlgebraicGeometry.IsSmooth; AlgebraicGeometry.IsSmooth.mk; AlgebraicGeometry.isSmooth_isStableUnderBaseChange; AlgebraicGeometry.isSmoothOfRelativeDimension_comp; AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth. None states the requested local-acyclicity comparison.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "locally.?acyclic|smooth.*cohomology|smooth.*nearby|vanishing.?cycle",
+   "results": "{\"t\": \"2026-10-17T19:10:45Z\", \"tool\": \"grep\", \"query\": \"locally.?acyclic|smooth.*cohomology|smooth.*nearby|vanishing.?cycle\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern smoothness or etaleness of ordinary schemes and rings; none states strict-local etale cohomology invariance or the specified constructible-complex pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth base change gives equal cohomology of strict henselian local tubes for prime to characteristic torsion sheaves",
+   "results": "{\"t\": \"2026-10-17T19:10:45Z\", \"tool\": \"leansearch\", \"query\": \"Smooth base change gives equal cohomology of strict henselian local tubes for prime to characteristic torsion sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.baseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"Algebra.IsStandardSmooth.baseChange\"], \"digest\": \"21c8f6153d3b0e5b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern smoothness or etaleness of ordinary schemes and rings; none states strict-local etale cohomology invariance or the specified constructible-complex pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-17T19:10:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSmooth\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern smoothness or etaleness of ordinary schemes and rings; none states strict-local etale cohomology invariance or the specified constructible-complex pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth morphisms induce isomorphisms on etale hypercohomology of strict local tubes with arbitrary constructible torsion coefficients",
+   "results": "{\"t\": \"2026-10-17T19:10:47Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth morphisms induce isomorphisms on etale hypercohomology of strict local tubes with arbitrary constructible torsion coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.Etale.formallyEtale\"], \"digest\": \"0293a3290d0071bb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern smoothness or etaleness of ordinary schemes and rings; none states strict-local etale cohomology invariance or the specified constructible-complex pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology is invariant under pullback from a strict local base to the strict localization of a smooth scheme after arbitrary base change",
+   "results": "{\"t\": \"2026-10-17T19:10:59Z\", \"tool\": \"leanfinder\", \"query\": \"Etale cohomology is invariant under pullback from a strict local base to the strict localization of a smooth scheme after arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"Algebra.FormallyEtale.localization_map\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.FormallyEtale.localization_base\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\"], \"digest\": \"006c01a0234033e8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned declarations concern smoothness or etaleness of ordinary schemes and rings; none states strict-local etale cohomology invariance or the specified constructible-complex pullback."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-nearby-smooth-source-pullback",
@@ -74,5 +244,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-smooth-source-constructible-local-acyclicity",
+  "worker": "stage1",
+  "summary": "Retained the reviewed imported statement and its strict-local tubes S_(t), proved the sheaf case using existing smooth base change and strict-local exchange testing, then extended by finite truncation and the canonical module-to-abelian derived-evaluation comparison. Checked every cited statement and its hypotheses; no new nodes, no Lean attachment and no statement correction.",
+  "blueprint": "The smooth-source calculation in the normal-cone/nearby-cycle branch of lem-trf-local-term-locality, through the recorded ancestry: realizes smooth-base-change invariance of the strict-local cohomology map used by lem-trf-oriented-nearby-smooth-source-pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Its smooth-base-change permanence clause constructs the smooth E over the strict-local base; the curve-zero unit has no replacement for this generic geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-strict-base-closed-point-localizations",
+    "why": "Identifies the strict localizations after the strict-local base replacement, including their canonical structure maps; this is a generic geometric comparison required by the 0GJQ argument."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Checks qcqs for the strict-local specialization base change; it is a generic scheme tool."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Identifies the actual coefficient pullbacks and their naturality, a generic site-functor tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exactness and constant-ring identification for coefficient pullbacks, not a new curve-zero proof route."
+   },
+   {
+    "node": "sbc-thm-smooth-base-change",
+    "why": "The generic smooth base change theorem is the exact source input of 0GJQ, and no same-unit statement supplies arbitrary abelian sheaf exchange."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-strict-local-cohomology",
+    "why": "Identifies the canonical sheaf exchange with strict-local cohomology pullback (0EZU); the same-unit constant sliced cone comparison does not give this arbitrary-sheaf test."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "Triangulatedness of derived sections used for finite truncation, a generic homological tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Enough injectives for abelian and constant-ring module sheaves, needed by the derived sections and comparison tools."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "why": "Specifies the actual canonical derived pullback and its unit/Leray formula; generic functoriality tool."
+   },
+   {
+    "node": "lem-kun-unbounded-abelian-exchange-comparison",
+    "why": "Only its exact coefficient-forgetting/cohomology clause is used, not its square exchange theorem; generic coefficient tool."
+   },
+   {
+    "node": "lem-pe-left-module-derived-evaluation-forget",
+    "why": "Forgetting module-derived sections, explicitly compatible with canonical global-cohomology pullback; generic coefficient tool with no same-unit substitute."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Its uniqueness clause (3) shows the middle isomorphism of the closed-point localization lemma is the identity of Y_(y); a generic strict-localization tool with no curve-zero substitute (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-strict-base-closed-point-localizations",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-inverse-image-composition",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "sbc-thm-smooth-base-change",
+  "lem-weil-pbc-exchange-strict-local-cohomology",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lem-kun-unbounded-abelian-exchange-comparison",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N1-869fcf15e",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-869fcf15e (reviewer sub-agent of L); spot-checked: Read the item, all 27 cited statements, the parent (its step 2 is the only user) and Stacks 0GJQ/0EZU (etale-cohomology.tex l.19167 ff., l.16497 ff.). No SGA is cited. There are no new nodes. The statement is unchanged and true: smooth base change for X x_Y Y_(y) -> Y_(y) along the qcqs map T = Y_(y) x_{S_(s)} S_(t) -> Y_(y), followed by the 0EZU strict-local test at the lifted point, gives the sheaf case for any N-torsion F. That is the 0GJQ argument with an arbitrary sheaf in place of Z/n, honestly marked as agent-written. Truncation induction (triangle, base and step all stated), the scalar-forgetting comparison and conservativity carry it to bounded module complexes; constructibility is used only for boundedness. The coefficient category is the Lambda-module derived category, not silently identified with the abelian one. Small cases pass: empty S, h = id, t = s with c = id, L = 0, a shifted single sheaf. No duplicate found (0GJQ/local-acyclicity grep over the DAG; the smooth-local-acyclicity, locally-constant-torsion, geometric-fibre-test and nearby-smooth-source-exchange nodes all differ). I accept the 12 declared generic tool uses. One fault, fixed (E5/C3): Step 2 claimed the map E_(xi) ~ X_(x) -> A is h_(x) without showing that the middle isomorphism phi: A -> Y_(y) of lem-weil-pbc-strict-base-closed-point-localizations is the identity. Without it, neither V ~ X_{x,c} over S_(s) nor u = h_{x,c} follows. The fix adds the argument from the uniqueness clause (3) of lem-weil-pbc-strict-henselization-functoriality: the functorial map A_(a) -> Y_(y) and the canonical map j_A are both local, agree over Y and induce the identity on residue fields, so they are equal. It adds that citation to step 2 uses, proof_deps and split_report.tool_uses; the corrected node is under fixes/. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
