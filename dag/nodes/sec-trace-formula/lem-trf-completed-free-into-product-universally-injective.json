@@ -12,14 +12,62 @@
   "def-weil-pbc-adically-complete-ring",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "An element of the inverse limit is a compatible sequence $x_n=(x_{n,\\alpha})$ with $x_n$ finitely supported in $\\bigoplus_\\alpha R/I^n$. Completeness of $R$ gives, for each $\\alpha$, a unique $y_\\alpha\\in R$ reducing to $x_{n,\\alpha}$ for every $n$. The finite support of each $x_n$ says that only finitely many $y_\\alpha$ are nonzero modulo $I^n$. Conversely, such a family gives a compatible inverse-limit element. Equality is coordinatewise, so the canonical coordinate map $\\iota$ is injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 05BC, proof lines 6333--6350"
+   }
+  },
+  {
+   "text": "Fix a finite $R$-module $Q$. Choose a finite presentation $R^{\\oplus k}\\to R^{\\oplus m}\\to Q\\to0$, and write $q_1,\\ldots,q_m$ for the images of the standard generators. Let $\\varphi:R^{\\oplus k}\\to R^{\\oplus m}$ be the relation map. If an element represented by finitely many convergent coordinate families $(y_{j,\\alpha})_\\alpha$ maps to zero in $Q\\otimes_R\\prod_\\alpha R$, then for each $\\alpha$ the vector $(y_{1,\\alpha},\\ldots,y_{m,\\alpha})$ lies in $\\operatorname{im}(\\varphi)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 05BC, finite-module proof"
+   }
+  },
+  {
+   "text": "Apply the existing Artin--Rees node [lem-weil-pbc-artin-rees] to $N=\\operatorname{im}(\\varphi)\\subseteq R^{\\oplus m}$. It gives a constant $c$ such that every relation vector in $(I^rR)^{\\oplus m}$ has a preimage in $(I^{r-c}R)^{\\oplus k}$ for $r\\ge c$. Since the coordinate families are convergent, for each fixed $n$ all but finitely many relation vectors lie in $(I^{n+c}R)^{\\oplus m}$; choose their preimages in $(I^nR)^{\\oplus k}$, and choose arbitrary preimages for the remaining finitely many coordinates. The resulting preimage families are convergent, so they define an element of $\\bigoplus_{l=1}^k\\widehat F$ mapping to the original tensor element. Thus $Q\\otimes_R\\iota$ is injective.",
+   "uses": [
+    "lem-weil-pbc-artin-rees"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 05BC, finite-module proof lines 6351--6392; Algebra, Lemma 00IN"
+   }
+  },
+  {
+   "text": "The sequence $0\\to\\widehat F\\xrightarrow{\\iota}\\prod_\\alpha R\\to\\operatorname{Coker}(\\iota)\\to0$ is exact by Step 1. The existing criterion [lem-trf-universal-injective-finite-test] says that, over a Noetherian ring, injectivity after tensoring with every finite module is equivalent to universal injectivity. Therefore $\\iota$ is universally injective.",
+   "uses": [
+    "lem-trf-universal-injective-finite-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058K, universally-exact criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-artin-rees",
+  "lem-trf-universal-injective-finite-test"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 05BC, together with Algebra Tag 058K"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "adic completion of an arbitrary direct sum of copies of a Noetherian adically complete ring maps universally injectively into the product",
-   "results": "AdicCompletion.map_injective, AdicCompletion.sum, AdicCompletion.sum_lof, AdicCompletion.of_injective; no universal tensor-injectivity theorem for the infinite direct-sum completion.",
+   "results": "AdicCompletion.map_injective, AdicCompletion.sum, AdicCompletion.sum_lof, AdicCompletion.of_injective; no universal-tensor-injectivity theorem for the infinite direct-sum completion.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
@@ -32,7 +80,7 @@
   },
   {
    "tool": "grep",
-   "query": "completion.*direct.*sum",
+   "query": "completion.*direct.*sum in Mathlib",
    "results": "0 hits in Mathlib grep.",
    "date": "2026-10-18",
    "verdict": "no match"
@@ -46,7 +94,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-completed-free-flat-mittag-leffler",
@@ -58,25 +106,27 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Tag 05DJ proof, first sentence: apply More on Algebra Tag 05BC to the canonical map from the completed direct sum into the product.",
+   "place": "Tag 05BC proof, first sentence: apply More on Algebra Tag 05BC to the canonical map from the completed direct sum into the product, with its finite-module tensor argument.",
    "via": [
-    "lem-trf-completion-flat-mittag-leffler",
-    "lem-trf-local-flat-pure-complete-projective",
-    "lem-trf-local-noetherian-fibres-projective",
-    "lem-trf-local-generic-basis-universal-injective",
-    "lem-trf-free-subtraction-flatness",
-    "lem-trf-flattening-module-by-admissible-blowup",
-    "lem-trf-flattening-by-admissible-blowup",
-    "lem-trf-flatification-horizontal-curve-pair",
-    "lem-trf-dejong-relative-marked-semistable",
-    "lem-trf-relative-marked-nodal-reduction",
-    "lem-trf-plurinodal-alteration",
-    "lem-trf-nearby-cycle-verdier-duality",
-    "lem-trf-specialization-cohomological-comparison",
-    "lem-trf-trace-specialization"
+    "lem-trf-completed-free-into-product-universally-injective"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-completed-free-into-product-universally-injective",
+  "worker": "stage1",
+  "summary": "Audited the imported statement against More on Algebra Tag 05BC. The coordinate and Artin--Rees paragraphs are clauses of this item and remain proof steps; the only cited supporting results are the existing Artin--Rees node and existing Tag 058K finite-test node.",
+  "blueprint": "Realizes the Tag 05BC proof cited by lem-trf-local-term-locality: coordinate description/injectivity, the finite-module Artin--Rees argument, and reduction from finite tensor tests to universal injectivity."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-2f13fe2e9",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-2f13fe2e9 (reviewer sub-agent of L); spot-checked: Read the item, cited nodes, Tag 05BC and Tag 058K sources, unit route, and required stage documents. All hypotheses and four proof steps check out; edge cases and Artin–Rees lifting were verified. No new nodes, duplicates, cycles, route-pivot machinery, or SGA citations."
  }
 }

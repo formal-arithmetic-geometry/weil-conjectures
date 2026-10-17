@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-thm-picard-perfect",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Coherent base change for invertible sheaves",
@@ -25,36 +25,80 @@
  ],
  "proof": [
   {
-   "text": "*The lemma from the general form.* $f_T:C_T\\to T$ is proper and of\nfinite presentation (base change of the projective $C\\to\\Spec k$), and\n$\\cL$ is of finite presentation and flat over $T$ (invertible on the\n$T$-flat $C_T$). So [sk-thm-picard-coherence] (a) represents\n$Rf_{T,*}\\cL$ locally by a bounded complex of finite free modules whose\nformation commutes with every base change, i.e.\n$La^*Rf_{T,*}\\cL\\simeq Rf_{T',*}\\cL_{T'}$. This is proper coherent base\nchange for a flat finitely presented module, together with the openness\ncriterion for a perfect complex (Stacks Project, Tags 0B91 and 0B9S). One\nway to obtain the complex is to use a projective embedding, sufficiently\nlarge twists and a finite affine Čech complex; Serre vanishing supplies\nfinite locally free models. After such a model has been obtained,\nopenness is a matrix calculation: near a point where the fibre has a\nsingle cohomology group of rank $1$, cancel the differentials that are\ninvertible on the fibre; the remaining complex is a line bundle in\ndegree $0$. Precisely, the locus in question is $U_{0,1}$ of the general\nform (with $X=C_T$, $\\cF=\\cL$, $i=0$, $r=1$), which is open; on it\n$R^qf_{T,*}\\cL=0$ for $q\\ne0$ (in particular $R^1f_{T,*}\\cL=0$),\n$f_{T,*}\\cL$ is invertible, and, by the functorial characterization,\nits formation commutes with arbitrary base change $T'\\to U_{0,1}$. No\nNoetherian hypothesis enters the general form, which settles the case of\nan arbitrary test scheme as well.",
+   "text": "For the curve statement, base change of the projective morphism C→Spec(k) is proper and of finite presentation, and an invertible sheaf on C_T is finitely presented and flat over T. Applying [sk-thm-picard-coherence](a) gives, locally on T, a bounded complex K of finite free O_T-modules representing Rf_{T,*}𝓛, with the canonical derived pullback identification La^*Rf_{T,*}𝓛 ≃ Rf_{T′,*}𝓛_{T′} for every a:T′→T. The rank-one degree-zero locus is the case i=0,r=1 of the fixed-degree perfect-locus criterion [lem-pc-perfect-locus] (equivalently the open rank-locus of [lem-pc-flat-rf-open]); on it the complex is an invertible module in degree 0, so f_{T,*}𝓛 is invertible, R¹f_{T,*}𝓛=0, and taking cohomology of the derived pullback identification gives arbitrary base-change isomorphisms. This applies after descending a finitely presented line bundle to a finitely generated k-algebra, and the canonical derived base-change identification makes the resulting open independent of the chosen model.",
    "uses": [
-    "sk-thm-picard-coherence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*The general form.* Upper semicontinuity ([sk-thm-picard-semicon]) makes each condition\n$h^q(t)=0$ ($q\\neq i$) and $h^i(t)\\le r$ open, and locally only finitely\nmany $q$ matter (the complex $K^\\bullet$ below is bounded), so\n$U_{i,\\le r}$ is open. Over an affine open of $U_{i,\\le r}$ let\n$K^\\bullet=[K^a\\to\\dots\\to K^b]$ be the bounded complex of finite free\nmodules of the proof of [sk-thm-picard-semicon], whose formation\ncommutes with base change, so that\n$H^q(K^\\bullet\\otimes\\kappa(t))=H^q(X_t,\\cF_t)$. At $t\\in U_{i,\\le r}$\nthe complex $K^\\bullet\\otimes\\kappa(t)$ is exact outside degree $i$.\nIf $b>i$, then $d^{b-1}\\otimes\\kappa(t)$ is surjective, so by Nakayama\n$d^{b-1}$ is surjective near $t$ and, its target being free, split:\n$K^\\bullet$ is locally quasi-isomorphic to the shorter complex\n$[K^a\\to\\dots\\to\\ker d^{b-1}]$ of finite free modules. If $a<i$, then\n$d^a\\otimes\\kappa(t)$ is injective, so some maximal minor of $d^a$ is a\nunit near $t$, $d^a$ is a split injection there, and $K^\\bullet$ is\nlocally quasi-isomorphic to $[\\operatorname{coker}d^a\\to\\dots\\to K^b]$.\nAfter finitely many such steps $K^\\bullet$ is, near $t$, quasi-isomorphic\nto a single finite free module $M$ placed in degree $i$, and these\nreductions commute with base change. Hence $h^i(t')=\\operatorname{rk}M$\nfor all $t'$ near $t$, which gives the local constancy of $h^i$ on\n$U_{i,\\le r}$ (so $U_{i,r}$ is open and closed in $U_{i,\\le r}$), the\nlocal description $R^if_*\\cF=M$, the vanishing of $R^qf_*\\cF$ for\n$q\\neq i$, and the base-change isomorphisms. For the functorial\ncharacterization: if $Rf_{T',*}\\cF_{T'}\\cong\\mathcal E[-i]$ with $\\mathcal E$ locally\nfree of rank $r$, then every $t'\\in T'$ has $h^q(t')=r\\,\\delta_{q,i}$,\nand $h^q(t')=h^q(t)$ for $t$ the image of $t'$ (cohomology commutes with\nfield extension), so $T'\\to T$ factors through the open $U_{i,r}$; the\nconverse is base change. The detailed forms are Blueprint 50,\n`lem-pc-perfect-locus` and `lem-pc-flat-rf-open`.",
-   "uses": [
-    "sk-thm-picard-semicon",
+    "sk-thm-picard-coherence",
     "lem-pc-perfect-locus",
     "lem-pc-flat-rf-open"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-perfect/_section.md",
+    "place": "Proof, “The lemma from the general form”"
+   }
+  },
+  {
+   "text": "For the general form, [sk-thm-picard-coherence](a) supplies on an affine neighbourhood a bounded complex K=[K^a→⋯→K^b] of finite free modules whose formation commutes with every base change and whose fibre cohomology is H^q(X_t,𝓕_t). By [sk-thm-picard-semicon], each fibre dimension h^q is upper semicontinuous; because K is bounded, only finitely many q occur locally. Hence the conditions h^q=0 for q≠i and h^i≤r define an open locus U_{i,≤r}. At a point of this locus, the fibre complex is exact away from i. The standard finite-free cancellation criterion encoded by [lem-pc-perfect-locus] removes split surjective end differentials and split injective beginning differentials, compatibly after shrinking the base, until K is a single finite free module M in degree i. Thus Rf_*𝓕 is locally M[-i], its formation commutes with every base change, h^i is locally constant, and the exact-rank locus U_{i,r} is open in U_{i,≤r}; on it R^qf_*𝓕=0 for q≠i, R^if_*𝓕 is finite locally free of rank r, and the cohomological base-change maps are isomorphisms because they are induced by the canonical derived base-change isomorphism of coherence.",
+   "uses": [
+    "sk-thm-picard-coherence",
+    "sk-thm-picard-semicon",
+    "lem-pc-perfect-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-perfect/_section.md",
+    "place": "Proof, “The general form”, first paragraph"
+   }
+  },
+  {
+   "text": "For a morphism a:T′→T, if Rf_{T′,*}𝓕_{T′} is a finite locally free module of rank r placed in degree i, then every geometric fibre has h^q=r·δ_{q,i}; field extension preserves these dimensions, so the image lies in U_{i,r} and a factors through that open. Conversely, over U_{i,r} the local description from the preceding step and the canonical derived base-change isomorphism give the required finite locally free complex in degree i after every base change. This is also the functorial characterization in [lem-pc-flat-rf-open], and it shows that no reducedness assumption is needed.",
+   "uses": [
+    "lem-pc-flat-rf-open",
+    "sk-thm-picard-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-perfect/_section.md",
+    "place": "Proof, “The general form”, functorial characterization"
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-picard-coherence",
-  "sk-thm-picard-semicon",
+  "lem-pc-flat-rf-open",
   "lem-pc-perfect-locus",
-  "lem-pc-flat-rf-open"
+  "sk-thm-picard-coherence",
+  "sk-thm-picard-semicon"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-perfect/_section.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "open perfect locus bounded complex finite locally free derived base change",
+   "results": "Module.isOpen_freeLocus; Algebra.isOpen_smoothLocus; Algebra.isOpen_unramifiedLocus; Algebra.isOpen_etaleLocus; no theorem for the stated higher-direct-image perfect locus",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFiniteLocallyFreeOfRank, higherDirectImage, perfectLocus",
+   "results": "0 hits; unknown identifier IsFiniteLocallyFreeOfRank",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfectLocus|higherDirectImage|finite free complex in Mathlib/",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "backtick_citation",
@@ -249,5 +293,21 @@
    "missing": [],
    "open": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "sk-thm-picard-perfect",
+  "worker": "stage1",
+  "summary": "Repaired the imported split into three source-traceable steps. No new nodes were needed: the existing coherence node supplies bounded finite-free complexes and arbitrary derived base change, semicontinuity supplies openness of the bounded fibre conditions, and the existing perfect-locus and flat-Rf-open nodes supply the fixed-degree and functorial rank criteria. The item remains broader than each slopmaster2 declaration, so no exact attachment was claimed.",
+  "blueprint": "The steps realize the main-20261015 proof paragraphs “The lemma from the general form” and “The general form”: curve specialization and descent, bounded-complex openness and cancellation, then the functorial characterization.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q81-6b940b86e",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q81-6b940b86e (reviewer sub-agent of L); spot-checked: Read the complete item, unit, blueprint proofs, cited DAG nodes, and Stacks sources. All hypotheses, derived base-change morphisms, coefficient categories, edge cases, route constraints, and proof steps check; no duplicates, hidden target weakening, SGA/pivot violations, or repairs found."
  }
 }

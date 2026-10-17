@@ -13,11 +13,121 @@
   "def-pc-base-change",
   "def-wf-fundamental-representation",
   "def-galois-fibre-functor",
-  "lem-galois-pi1-functoriality"
+  "lem-galois-pi1-functoriality",
+  "def-pc-geometrically-irreducible"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $L=\\mathbf F_{q^m}$, $Y=X_0^{(m)}$, and $f:Y\\to X_0$. By the definition of geometric connectedness [def-pc-geometrically-irreducible], the base changes of $X_0$ to $k_0$, $L$, and $k$ are connected. In particular $X_0$, $Y$, and $X$ are connected. By the iterated-base-change identification in [def-pc-base-change], $Y\\times_L k=X_0\\times_{k_0}k=X$, with the same projections and the stipulated geometric points.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-weil/lem-wf-weil-group-constant-extension.md",
+    "place": "Proof, first paragraph: arithmetic fundamental group under constant extension"
+   }
+  },
+  {
+   "text": "The subfield $L\\subset k$ has $q^m$ elements and contains $k_0$ by [lem-weil-unique-subfield-of-closure]. Its elements form a finite spanning set over $k_0$, so $L/k_0$ is finite. For any finite subextension $E/k_0$ in $k$, a basis of length $d$ gives $Q=q^d$ elements in $E$. By [lem-weil-finite-field-pow-card] every $\\alpha\\in E$ satisfies $\\alpha^Q-\\alpha=0$. This polynomial has derivative $-1$, so its minimal-polynomial divisor is coprime to its derivative; thus $E/k_0$ is separable in the definition [def-weil-pbc-separable-algebraic-extension]. This applies to $L$. It also applies to $k_0(\\alpha)$ for every $\\alpha\\in k$, since $k/k_0$ is algebraic, and powers below the minimal-polynomial degree span $k_0(\\alpha)$. Consequently the given algebraic closure $k$ is also a separable closure of $k_0$. Finally $\\operatorname{Spec}L\\to\\operatorname{Spec}k_0$ is finite by the finite-module definition [def-weil-finite-integral-morphism].",
+   "uses": [
+    "lem-weil-unique-subfield-of-closure",
+    "lem-weil-finite-field-pow-card",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-weil/lem-wf-weil-group-constant-extension.md",
+    "place": "Proof, first paragraph: arithmetic fundamental group under constant extension"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-separable-extension-etale] to the finite separable extension $L/k_0$: $\\operatorname{Spec}L\\to\\operatorname{Spec}k_0$ is etale. Its pullback along $X_0\\to\\operatorname{Spec}k_0$ is exactly $f:Y\\to X_0$. It is finite by part (a) of [lem-weil-pbc-finite-morphism-permanence] and etale by [lem-weil-pbc-etale-scheme-base-change].",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GL (lemma-etale-over-field), 01WL (lemma-base-change-finite), and 02GO (lemma-base-change-etale)"
+   }
+  },
+  {
+   "text": "Apply the finite-etale clause of [thm-galois-fundamental] to $f$, with the compatible geometric points from step 1. It gives the continuous injective map $f_*:\\pi_1(Y,\\bar x)\\to G:=\\pi_1(X_0,\\bar x)$, whose image is the stabilizer of the marked point in the geometric fibre of $Y\\to X_0$. Denote this marked point by $e$. Thus it remains to calculate its stabilizer, rather than to descend arbitrary covers of $Y$.",
+   "uses": [
+    "thm-galois-fundamental"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-weil/lem-wf-weil-group-constant-extension.md",
+    "place": "Proof, first paragraph: arithmetic fundamental group under constant extension"
+   }
+  },
+  {
+   "text": "Put $p:X_0\\to\\operatorname{Spec}k_0$ and $r:G\\to\\operatorname{Gal}(k/k_0)$ for its canonical arithmetic map. The fibre-product universal property [def-pc-base-change] identifies the fibre of $Y=p^*(\\operatorname{Spec}L)$ at $\\bar x$ with the $k_0$-embeddings $L\\to\\Omega$, where $\\operatorname{Spec}\\Omega$ is the chosen geometric point. The map $k\\to\\Omega$ comes from $\\bar x\\to X$. Since all roots of $T^{q^m}-T$ already lie in $k$ by [lem-weil-unique-subfield-of-closure], these embeddings are exactly the embeddings $L\\to k$ followed by $k\\to\\Omega$; $e$ corresponds to the fixed inclusion $L\\subset k$. The equivariant fibre bijections of [lem-galois-pi1-functoriality] say that the $G$-action is the Galois action restricted along $r$. By [lem-exc-etale-field-galois-classification], applied with the separable closure $k$ justified in step 2, the stabilizer of this inclusion in $\\operatorname{Gal}(k/k_0)$ is $\\operatorname{Gal}(k/L)$. Hence $\\operatorname{Stab}_G(e)=r^{-1}(\\operatorname{Gal}(k/L))$. Together with step 4 this is the asserted image identification.",
+   "uses": [
+    "def-pc-base-change",
+    "lem-weil-unique-subfield-of-closure",
+    "lem-galois-pi1-functoriality",
+    "lem-exc-etale-field-galois-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 03QR (lemma-sheaves-point), 0BNE (lemma-fundamental-group-Galois-group), and 0BND (theorem-fundamental-group), part (3); fibre-product specialization written out here"
+   }
+  },
+  {
+   "text": "Let $r_Y:\\pi_1(Y)\\to\\operatorname{Gal}(k/L)$ be the arithmetic map for $Y/L$. Composing the two structural projections to $\\operatorname{Spec}k_0$ gives $r\\circ f_*=j\\circ r_Y$, where $j:\\operatorname{Gal}(k/L)\\hookrightarrow\\operatorname{Gal}(k/k_0)$ is inclusion. Indeed, on each finite etale $k_0$-cover both maps act on its pullback fibre by the same natural automorphism; this is the equivariant pullback formula of [lem-galois-pi1-functoriality], and equality of such automorphisms is componentwise equality by [def-galois-fibre-functor]. Since $j$ is injective, step 5 identifies $\\ker r_Y$ with $r^{-1}(\\operatorname{Gal}(k/L))\\cap\\ker r=\\ker r$.",
+   "uses": [
+    "lem-galois-pi1-functoriality",
+    "def-galois-fibre-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-weil/lem-wf-weil-group-constant-extension.md",
+    "place": "Proof, first paragraph: arithmetic fundamental group under constant extension"
+   }
+  },
+  {
+   "text": "Identify $\\ker r$ geometrically using the kernel clause of [lem-wf-weil-group-exact-sequence] for $X_0$. By [def-wf-weil-group], $W(X_0)$ is the inverse image of the cyclic Frobenius subgroup and its degree records the exponent. Thus an element of $G$ with $r(g)=1$ belongs to $W(X_0)$ with degree zero; conversely an element of degree zero has $r(g)=1$. The cited exact sequence identifies this degree-zero subgroup, with its natural inclusion, with $\\pi_1(X,\\bar x)$. Therefore $\\ker r=\\pi_1(X)$, and step 6 identifies $\\ker r_Y$ with that very subgroup. The identification respects the geometric map from $X$ because the projections $X\\to Y\\to X_0$ compose to the original projection and the geometric fibre equality in step 1 uses those projections.",
+   "uses": [
+    "lem-wf-weil-group-exact-sequence",
+    "def-wf-weil-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-weil/lem-wf-weil-group-constant-extension.md",
+    "place": "Proof, first paragraph: arithmetic fundamental group under constant extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-geometrically-irreducible",
+  "def-pc-base-change",
+  "lem-weil-unique-subfield-of-closure",
+  "lem-weil-finite-field-pow-card",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "thm-galois-fundamental",
+  "lem-galois-pi1-functoriality",
+  "lem-exc-etale-field-galois-classification",
+  "def-galois-fibre-functor",
+  "lem-wf-weil-group-exact-sequence",
+  "def-wf-weil-group"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-weil/lem-wf-weil-group-constant-extension.md",
+  "place": "First paragraph, corrected stabilizer argument using existing finite-etale and field-Galois nodes; final kernel calculation uses the existing Weil degree exact sequence."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +156,80 @@
    "results": "8 hits: Field.absoluteGaloisGroup, termGal(_/_), CategoryTheory.PreGaloisCategory.IsFundamentalGroup, CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, IsGaloisGroup.intermediateField, Field.instGroupAbsoluteGaloisGroup, FiniteField.Extension.frob, InfiniteGalois.proj; none states the scheme base-change result.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fundamental.*group|finite.*etale|FiniteField|Frobenius",
+   "results": "0 hits; mistaken redundant Mathlib/ directory prefix, superseded by corrected source searches",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite constant field extension changes arithmetic pi1 to inverse image of Gal and preserves geometric kernel",
+   "results": "FiniteField.Extension; FiniteField.instFieldExtension; FiniteField.instFiniteExtension_1; GaloisField.instIsGaloisOfFinite; FiniteField.natCard_algEquiv_extension; IsGalois.mem_range_algebraMap_iff_fixed; FiniteField.instFiniteExtension; FiniteGaloisIntermediateField.mk; no theorem for the stated arithmetic scheme base change",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "InfiniteGalois, FundamentalGroup, Scheme.FiniteEtale, FiniteField.Extension",
+   "results": "0 hits; loogle: unknown identifier 'InfiniteGalois'; no theorem for the stated arithmetic scheme base change",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "arithmetic fundamental group after finite constant field extension is inverse image of Gal(k/Fq^m)",
+   "results": "InfiniteGalois.proj; finGaloisGroupMap; Field.absoluteGaloisGroup; Field.absoluteGaloisGroupAbelianization; InfiniteGalois.asProfiniteGaloisGroupFunctor; fixedByFinite; finGaloisGroupFunctor; InfiniteGalois.profiniteGalGrp; no theorem for the stated arithmetic scheme base change",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "absoluteGaloisGroup|fundamentalGroup|FiniteEtale|Frobenius",
+   "results": "0 hits; mistaken redundant Mathlib/ directory prefix, superseded by corrected source searches",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "stabilizer of geometric point after base change from Fq to Fq^m is Gal of algebraic closure over Fq^m",
+   "results": "IsGaloisGroup.fixingSubgroup_bot; CategoryTheory.PreGaloisCategory.stabilizer_normal_of_isGalois; MulAction.stabilizer; IntermediateField.fixingSubgroup; IsFractionRing.stabilizerHom_surjective; IntermediateField.fixingSubgroup_bot; NumberField.ComplexEmbedding.IsConj.coe_stabilizer_mk; IsGaloisGroup.map_mulEquivAlgEquiv_fixingSubgroup; no theorem for the stated arithmetic scheme base change",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PreGaloisCategory, InfiniteGalois.proj, Scheme.FiniteEtale",
+   "results": "0 hits; loogle: unknown identifier 'Scheme.FiniteEtale'; no theorem for the stated arithmetic scheme base change",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant field extension of a geometrically connected finite type scheme and stabilizer subgroup in arithmetic fundamental group",
+   "results": "CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer; NumberField.InfinitePlace.IsUnramified.stabilizer_eq_bot; IsFractionRing.stabilizerHom_surjective; CategoryTheory.PreGaloisCategory.stabilizer_normal_of_isGalois; NumberField.InfinitePlace.card_stabilizer; IsFractionRing.stabilizerHom; CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat; CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected; no theorem for the stated arithmetic scheme base change",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fundamentalGroup|FiniteEtale|absoluteGaloisGroup",
+   "results": "0 hits; no theorem for the stated arithmetic scheme base change",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fiberIsoQuotientStabilizer|stabilizer_normal_of_isGalois",
+   "results": "Mathlib/CategoryTheory/Galois/GaloisObjects.lean; Mathlib/CategoryTheory/Galois/EssSurj.lean; Mathlib/CategoryTheory/Galois/EssSurj.lean; Mathlib/CategoryTheory/Galois/EssSurj.lean; read Galois/EssSurj.lean:108-113 and Galois/GaloisObjects.lean:102-112: abstract Galois-category action facts, not the arithmetic scheme theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-wf-weil-group-constant-extension",
@@ -66,5 +246,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-wf-weil-group-constant-extension-pi1-base-change",
+  "worker": "stage1",
+  "summary": "Kept the statement and added its explicit geometric-connectedness notion dependency. Replaced the erroneous cover-descent sentence of the blueprint with the finite-etale marked-fibre stabilizer calculation. Wrote finite-field separability and the restriction/kernel calculations explicitly, reused existing nodes throughout, and checked the exact clauses of all citations. No new nodes and no Lean changes.",
+  "blueprint": "Realizes the first paragraph of lem-wf-weil-group-constant-extension: arithmetic subgroup under constant extension and unchanged geometric kernel. The source cover-equivalence sentence is false (see report.md, Source error); the correct argument uses the connected finite-etale projection and its marked fibre. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-unique-subfield-of-closure",
+    "why": "Supplies the concrete finite subfield and its roots, needed for the constant cover; this unit only fixes the datum."
+   },
+   {
+    "node": "thm-galois-fundamental",
+    "why": "Generic finite-etale fundamental-group injection and marked-fibre stabilizer theorem, needed to compute the arithmetic subgroup; no theorem of this unit states that general fact."
+   },
+   {
+    "node": "lem-exc-etale-field-galois-classification",
+    "why": "Generic finite separable field-cover stabilizer calculation for the constant cover; the unit supplies no field Galois classification."
+   },
+   {
+    "node": "lem-galois-pi1-functoriality",
+    "why": "Generic equivariant pullback-fibre formula determines the arithmetic action and compatibility of structural maps; the unit does not prove functoriality."
+   },
+   {
+    "node": "lem-wf-weil-group-exact-sequence",
+    "why": "Only its geometric degree-zero kernel clause is used, exactly as in the parent blueprint first and second paragraphs; no new arithmetic exact-sequence lemma is created."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-unique-subfield-of-closure",
+  "thm-galois-fundamental",
+  "lem-exc-etale-field-galois-classification",
+  "lem-galois-pi1-functoriality",
+  "lem-wf-weil-group-exact-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q68-b932a49d9",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q68-b932a49d9 (reviewer sub-agent of L); spot-checked: Read the full item, unit/chapter route, cited DAG statements, blueprint, and recorded literature sources. The seven-step split is mathematically correct, checks all hypotheses and edge cases, uses the exact finite-etale base-change and stabilizer clauses, contains no long hidden lemma, no duplicate/new nodes, no forbidden SGA 4 or route-pivot machinery, and repairs the blueprint’s false cover-descent sentence via the marked-fibre argument. Review written to review.md."
  }
 }
