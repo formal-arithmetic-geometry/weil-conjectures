@@ -1,0 +1,76 @@
+{
+ "id": "lem-sfb-left-resolution-chain-complex-functor",
+ "kind": "statement",
+ "title": "Chain-complex construction from a left resolution",
+ "statement": "Let $A$ be an abelian category [def-sp-abelian], let $C$ be a category with zero morphisms (every $\\mathrm{Hom}(Y,Z)$ has a distinguished element $0$ with $g\\circ 0=0$ and $0\\circ f=0$), and let $\\iota:C\\to A$ be fully faithful. For a left-resolution datum $\\Lambda=(F,\\pi)$ for $\\iota$ [lem-sfb-left-resolution-reduced-api] (a functor $F:A\\to C$ and a natural transformation $\\pi:\\iota F\\Rightarrow\\operatorname{id}_A$ with epimorphic components), Mathlib's declaration `CategoryTheory.Abelian.LeftResolution.chainComplexFunctor` constructs a functor $A\\to\\operatorname{ChainComplex}(C,\\mathbb N)$. At an object $X$, its degree-$0$ term is $F(X)$, its degree-$1$ term is $F(\\ker(\\pi_X))$, and for $n\\ge0$ its degree-$(n+2)$ term is $F(\\ker\\iota(d_{n+1,n}))$; the differential $d_{1,0}$ is the unique map with $\\iota(d_{1,0})=\\pi_{\\ker\\pi_X}$ followed by the inclusion $\\ker\\pi_X\\to\\iota F(X)$, and $d_{n+2,n+1}$ the unique map with $\\iota(d_{n+2,n+1})=\\pi_{\\ker\\iota(d_{n+1,n})}$ followed by the kernel inclusion (`map_chainComplex_d_1_0`, `map_chainComplex_d`). On a morphism $f:X\\to Y$ it is $F(f)$ in degree $0$ and $F$ of the induced kernel maps in higher degrees.",
+ "source": {
+  "document": "Mathlib/Algebra/Homology/LeftResolution/Basic.lean",
+  "place": "lines 45-113 and 193-204 (chainComplex, chainComplexMap, chainComplexFunctor, map_chainComplex_d_1_0, map_chainComplex_d)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "lem-sfb-left-resolution-reduced-api"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Functorial chain complex from a left resolution, with terms built by iterated kernels",
+   "results": "CategoryTheory.Abelian.LeftResolution.chainComplexFunctor; chainComplex; chainComplexMap; chainComplexXIso; map_chainComplex_d",
+   "date": "2026-10-18",
+   "verdict": "match: the returned declarations give the functor, objectwise construction, maps, and differential formulas"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.LeftResolution.chainComplexFunctor",
+   "results": "CategoryTheory.Abelian.LeftResolution.chainComplexFunctor in Mathlib.Algebra.Homology.LeftResolution.Basic",
+   "date": "2026-10-18",
+   "verdict": "match: exact functor declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "chainComplexFunctor : A ⥤ ChainComplex C ℕ",
+   "results": "Mathlib/Algebra/Homology/LeftResolution/Basic.lean:20,193",
+   "date": "2026-10-18",
+   "verdict": "match: declaration and its module documentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A left resolution gives a functor to chain complexes whose terms are iterated kernels",
+   "results": "CategoryTheory.Abelian.LeftResolution.chainComplexFunctor; chainComplex; chainComplexMap; map_chainComplex_d_1_0; map_chainComplex_d",
+   "date": "2026-10-18",
+   "verdict": "match: returned declarations state the construction and formulas"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.LeftResolution.chainComplexFunctor",
+  "file": "Mathlib/Algebra/Homology/LeftResolution/Basic.lean",
+  "how": "exact: chainComplexFunctor (Basic.lean:193) with chainComplex (:60), chainComplexXZeroIso/chainComplexXOneIso (:67, :72, both Iso.refl), chainComplexXIso (:84), map_chainComplex_d_1_0 (:77), map_chainComplex_d (:88), chainComplexMap (:116) and chainComplexMap_f_0/_f_1/_f_succ_succ for the clauses; hypotheses [ι.Full] [ι.Faithful] [HasZeroMorphisms C] [Abelian A] (:55)",
+  "line": 193
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-left-resolution-objectwise-cochain",
+  "date": "2026-10-18",
+  "group": "N2"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-derived-tensor-hom",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-derived-monoidal",
+   "place": "The sentence introducing the functorial bounded-above resolution stages; this node records the Mathlib chain-complex construction underlying the cochain version.",
+   "via": [
+    "lem-sfb-left-resolution-objectwise-cochain",
+    "lem-sfb-left-resolution-bounded-minus",
+    "lem-sfb-functorial-bounded-above-class-resolution",
+    "lem-sfb-kflat-derivability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

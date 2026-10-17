@@ -13,9 +13,89 @@
   "def-weil-abstract-derived-category",
   "lem-sfb-left-resolution-reduced-api"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The displayed functor F and natural transformation π with epimorphic components are exactly a Mathlib LeftResolution datum for the fully faithful functor ι; the zero-morphism-preservation assumption is retained. Thus the hypotheses of the left-resolution chain construction apply.",
+   "uses": [
+    "lem-sfb-left-resolution-reduced-api"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/Basic.lean",
+    "place": "lines 30–42, together with the LeftResolution structure in Mathlib/Algebra/Homology/LeftResolution/Basic.lean:34–43"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-left-resolution-chain-complex-functor]. It gives a functorial chain complex in C whose degree-zero term is F(X), degree-one term is F(ker π_X), and whose subsequent terms are F applied to the successive kernels of the ι-images of the preceding differentials; its maps are induced by F and kernel maps.",
+   "uses": [
+    "lem-sfb-left-resolution-chain-complex-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/Basic.lean",
+    "place": "cochainComplexFunctor definition, lines 40–45, built from Mathlib chainComplexFunctor"
+   }
+  },
+  {
+   "text": "Extend this chain complex along ComplexShape.embeddingDownNat ($n\\mapsto -n$). By [lem-sfb-left-resolution-complex-extension], the result $R(X)$ is a functorial $\\mathbb Z$-indexed cochain complex whose term in degree $-n$ is canonically the chain degree-$n$ term, whose differential $R(X)^{-n-1}\\to R(X)^{-n}$ is the chain differential $d_{n+1,n}$ under these identifications, and whose terms in positive degrees are zero; on maps it is the chain map in each degree $-n$. Substituting the terms and differentials of [lem-sfb-left-resolution-chain-complex-functor] gives exactly the displayed formulas: $R(X)^0=F(X)$, $R(X)^{-1}=F(\\ker\\pi_X)$ with $\\iota(d^{-1})=\\pi_{\\ker\\pi_X}$ followed by the kernel inclusion (map_chainComplex_d_1_0), and $R(X)^{-n-1}=F(\\ker\\iota(d^{-n}))$ with $\\iota(d^{-n-1})$ the component of $\\pi$ followed by the kernel inclusion (map_chainComplex_d), the induced maps being $F$ of the kernel maps.",
+   "uses": [
+    "lem-sfb-left-resolution-chain-complex-functor",
+    "lem-sfb-left-resolution-complex-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/Basic.lean",
+    "place": "lines 40–45 and 105–116; Mathlib/Algebra/Homology/Embedding/Extend.lean:355–362"
+   }
+  },
+  {
+   "text": "The degree-zero map ι.map(F(X))→X is π_X. The differential into degree zero is, by map_chainComplex_d_1_0, the composite through π_{ker π_X} and the kernel inclusion, so π_X kills it by the kernel condition; hence these components define a cochain map to X[0]. Naturality follows from π.naturality and the functorial kernel maps in the chain-complex construction. This is precisely the augmentation cochain map and its naturality.",
+   "uses": [
+    "lem-sfb-left-resolution-reduced-api",
+    "lem-sfb-left-resolution-chain-complex-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/Basic.lean",
+    "place": "cochainComplexπ and cochainComplexNatTransπ, lines 71–108"
+   }
+  },
+  {
+   "text": "Since the target $X[0]$ is zero in every degree $\\ne0$, quasi-isomorphism at $q\\ne0$ means exactness of $\\iota R(X)$ at $q$, and at $q=0$ it means: the short complex $\\iota R(X)^{-1}\\to\\iota R(X)^0\\xrightarrow{\\pi_X}X$ is exact and $\\pi_X$ is epic (the outgoing differential of $R(X)^0$ goes to the zero term $R(X)^1$). Degree $0$: by step 3 the first map is $\\pi_{\\ker\\pi_X}$ followed by the kernel inclusion $\\ker\\pi_X\\to\\iota F(X)$; as $\\pi_{\\ker\\pi_X}$ is epic its image is $\\ker\\pi_X$, so the short complex is exact, and $\\pi_X$ is epic by hypothesis. Degree $-(n+1)$, $n\\ge0$: by [lem-sfb-left-resolution-complex-extension] the degrees $-(n+2),-(n+1),-n$ all lie in the image of the embedding, so the short complex of $R(X)$ at $-(n+1)$ is isomorphic to that of the chain complex at $n+1$; applying $\\iota$, exactness follows from [lem-sfb-left-resolution-chain-exactness]. Positive degrees: $R(X)^q=0$ for $q>0$ by [lem-sfb-left-resolution-complex-extension] and $\\iota$ sends zero objects to zero objects (as in step 6), so $\\iota R(X)$ is exact there. Hence the augmentation is a quasi-isomorphism in every degree.",
+   "uses": [
+    "lem-sfb-left-resolution-chain-exactness",
+    "lem-sfb-left-resolution-chain-complex-functor",
+    "lem-sfb-left-resolution-complex-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/Basic.lean",
+    "place": "QuasiIsoAt and QuasiIso instances for cochainComplexπ, lines 137–168"
+   }
+  },
+  {
+   "text": "Finally, [lem-sfb-left-resolution-complex-extension] gives strict support in degrees $\\le0$ for $R(X)$. Applying $\\iota$ termwise preserves zero objects: if $Z$ is a zero object of $C$, then $\\mathrm{Hom}_A(\\iota Z,\\iota Z)\\cong\\mathrm{Hom}_C(Z,Z)$ has one element because $\\iota$ is fully faithful, so $\\mathrm{id}_{\\iota Z}=0$ and $\\iota Z$ is a zero object of $A$. Hence $\\iota R(X)$ is strictly supported in degrees $\\le0$ as well.",
+   "uses": [
+    "lem-sfb-left-resolution-complex-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/Basic.lean",
+    "place": "the IsStrictlyLE instance at lines 109–116"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-left-resolution-reduced-api",
+  "lem-sfb-left-resolution-chain-complex-functor",
+  "lem-sfb-left-resolution-complex-extension",
+  "lem-sfb-left-resolution-chain-exactness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/Basic.lean",
+  "place": "lines 30–170, following the Mathlib chain-resolution and embedding APIs"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,7 +127,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-left-resolution-bounded-minus",
@@ -59,7 +139,7 @@
  "blueprint": {
   "from": {
    "node": "lem-sfb-derived-monoidal",
-   "place": "Parent proof sentence beginning ‘So the K-flat complexes form a left derivability structure...’; the parent does not spell out bounded-minus totalization, which this node makes concrete via CochainComplexMinus.lean.",
+   "place": "Parent proof sentence beginning ‘So the K-flat complexes form a left derivability structure...’; the parent does not spell out bounded-minus totalization, which this node makes concrete via CochainComplexMinus.lean; this node is its objectwise cochain-resolution stage.",
    "via": [
     "lem-sfb-left-resolution-bounded-minus",
     "lem-sfb-functorial-bounded-above-class-resolution",
@@ -68,5 +148,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sfb-left-resolution-objectwise-cochain",
+  "worker": "stage1",
+  "summary": "Split the objectwise cochain resolution into Mathlib leaves for the underlying chain-resolution functor, its positive-degree exactness, and extension by zero along embeddingDownNat. The six proof steps check construction, augmentation, quasi-isomorphism, and strict support against Basic.lean and the cited Mathlib declarations.",
+  "blueprint": "Realizes the parent lem-sfb-derived-monoidal proof sentence introducing functorial bounded-above resolution stages; no separate blueprint node states this objectwise construction."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N2-ded455a3f",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-ded455a3f (reviewer sub-agent of L); spot-checked: Read everything in full: the item, the three new Mathlib leaves, the FromJoel LeftResolution/Basic.lean source (lines 1-176), Mathlib LeftResolution/Basic.lean, Embedding/Extend.lean (lines 142, 150, 157, 206, 214, 355), ExtendHomology.lean:331, CochainComplex.lean:232 and Zero.lean:99. The item statement is identical to the base and true; the extra hypotheses (C preadditive, F preserves zero morphisms) are inherited and harmless. Steps 1-6 are correct and follow the source: augmentation at :71-80, naturality at :91-107, the IsGE argument at :117-131, the degree-0 argument at :137-156, and the quasi-iso at :158-167. Edge cases hold: at X=0 everything is zero because F(0) is zero, and the first negative degree matches map_chainComplex_d_1_0. No duplicates: an rg search over all node statements and matches turns up only chain-complex-map-zero and pbc-complex-extension-preserves-colimits, which state different facts. No route departure, no tool_uses and no SGA. Repairs are whole files in fixes/. (1) B9: the item's blueprint.from.via was overwritten with a self-reference and its place rewritten; restored the base via [bounded-minus, functorial-bounded-above-class-resolution, kflat-derivability], and the new nodes' via is now [item]+that. (2) The item's stmt_deps had gained the three lemma leaves; restored the base stmt_deps. (3) C4 for steps 3 and 5: the extension leaf did not identify the terms and differentials at the image or carry exactness across the extension. Enlarged it to four clauses, with one declaration per clause in its how (extendXIso, extend_d_eq, the IsStrictlyLE instance, extend_exactAt_iff, extendFunctor/extendMap_f), and rewrote the item's step texts 3, 5 and 6, adding the fully-faithful argument that ι preserves zero objects. Also fixed B3 tags in the leaves: reduced-api is now cited for the left-resolution datum, zero morphisms are defined inline instead of cited to the preadditive node, and the line numbers in the how fields are correct.; 4 file(s) fixed by the reviewer"
  }
 }

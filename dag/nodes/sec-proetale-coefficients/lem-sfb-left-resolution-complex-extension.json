@@ -1,0 +1,73 @@
+{
+ "id": "lem-sfb-left-resolution-complex-extension",
+ "kind": "statement",
+ "title": "Extension of a chain complex to a nonpositive cochain complex",
+ "statement": "Let $C$ be a category with zero morphisms (every $\\mathrm{Hom}(Y,Z)$ has a distinguished element $0$ with $g\\circ0=0$ and $0\\circ f=0$) and a zero object, and let $K$ be a chain complex in $C$ indexed by $\\mathbb N$, with differentials $d_{n+1,n}:K_{n+1}\\to K_n$. Its extension along $n\\mapsto-n$ (Mathlib's `K.extend ComplexShape.embeddingDownNat`) is a cochain complex $E$ indexed by $\\mathbb Z$ such that: (i) for $n\\in\\mathbb N$ there is a canonical isomorphism $E^{-n}\\cong K_n$, under which the differential $E^{-n-1}\\to E^{-n}$ is $d_{n+1,n}$; (ii) $E^q$ is a zero object for every $q>0$, i.e. $E$ is strictly supported in degrees $\\le0$; (iii) for $n\\in\\mathbb N$, $E$ is exact at $-n$ if and only if $K$ is exact at $n$; (iv) the extension is a functor from $\\mathbb N$-indexed chain complexes to $\\mathbb Z$-indexed cochain complexes, sending a chain map $\\varphi$ to the map that is $\\varphi_n$ in degree $-n$ (under (i)) and $0$ in positive degrees.",
+ "source": {
+  "document": "Mathlib/Algebra/Homology/Embedding/Extend.lean",
+  "place": "lines 355-362 (extendFunctor)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The extension of a chain complex along embeddingDownNat is strictly supported in degrees at most zero",
+   "results": "CochainComplex.instIsStrictlyLEExtendNatIntEmbeddingDownNatOfNat; HomologicalComplex.instIsStrictlySupportedExtend",
+   "date": "2026-10-18",
+   "verdict": "match: exact strict-support instance returned"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.instIsStrictlyLEExtendNatIntEmbeddingDownNatOfNat",
+   "results": "CochainComplex.instIsStrictlyLEExtendNatIntEmbeddingDownNatOfNat in Mathlib.Algebra.Homology.Embedding.CochainComplex",
+   "date": "2026-10-18",
+   "verdict": "match: exact declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsStrictlyLEExtendNatIntEmbeddingDownNatOfNat",
+   "results": "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean:232",
+   "date": "2026-10-18",
+   "verdict": "match: strict-support instance"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extending a chain complex by zero along the negative natural embedding yields a strictly nonpositive cochain complex",
+   "results": "CochainComplex.instIsStrictlyLEExtendNatIntEmbeddingDownNatOfNat; ComplexShape.Embedding.extendFunctor; HomologicalComplex.extendMap_f_eq_zero",
+   "date": "2026-10-18",
+   "verdict": "match: returned strict-support and functorial extension declarations"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CochainComplex.instIsStrictlyLEExtendNatIntEmbeddingDownNatOfNat",
+  "file": "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+  "how": "one declaration per clause, for the embedding ComplexShape.embeddingDownNat: (i) HomologicalComplex.extendXIso (Mathlib/Algebra/Homology/Embedding/Extend.lean:142) and HomologicalComplex.extend_d_eq (Extend.lean:157); (ii) the instance CochainComplex.IsStrictlyLE (X.extend embeddingDownNat) 0 (Mathlib/Algebra/Homology/Embedding/CochainComplex.lean:232, from isZero_extend_X, Extend.lean:150); (iii) HomologicalComplex.extend_exactAt_iff (Mathlib/Algebra/Homology/Embedding/ExtendHomology.lean:331); (iv) ComplexShape.Embedding.extendFunctor (Extend.lean:355) with HomologicalComplex.extendMap_f / extendMap_f_eq_zero (Extend.lean:206, :214)",
+  "line": 232
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-left-resolution-objectwise-cochain",
+  "date": "2026-10-18",
+  "group": "N2"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-derived-tensor-hom",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-derived-monoidal",
+   "place": "The bounded-minus support clause in the bounded-above resolution construction; this node records the Mathlib extension-by-zero fact used to pass from chain to cochain complexes.",
+   "via": [
+    "lem-sfb-left-resolution-objectwise-cochain",
+    "lem-sfb-left-resolution-bounded-minus",
+    "lem-sfb-functorial-bounded-above-class-resolution",
+    "lem-sfb-kflat-derivability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "id": "lem-sfb-left-resolution-chain-exactness",
+ "kind": "statement",
+ "title": "Exactness of the left-resolution chain complex in positive degrees",
+ "statement": "Let $A$ be an abelian category [def-sp-abelian], let $C$ be a category with zero morphisms (every $\\mathrm{Hom}(Y,Z)$ has a distinguished element $0$ with $g\\circ 0=0$ and $0\\circ f=0$), and let $\\iota:C\\to A$ be fully faithful. For a left-resolution datum $\\Lambda=(F,\\pi)$ for $\\iota$ [lem-sfb-left-resolution-reduced-api] (a functor $F:A\\to C$ and a natural transformation $\\pi:\\iota F\\Rightarrow\\operatorname{id}_A$ with epimorphic components) and an object $X$ of $A$, let $K=\\Lambda.\\mathrm{chainComplex}(X)$ be the $\\mathbb N$-indexed chain complex of [lem-sfb-left-resolution-chain-complex-functor]. Then the chain complex $\\iota K$ in $A$ obtained by applying $\\iota$ termwise is exact at every degree $n+1$, $n\\in\\mathbb N$: the image of $\\iota(d_{n+2,n+1})$ equals the kernel of $\\iota(d_{n+1,n})$ (Mathlib `CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ`).",
+ "source": {
+  "document": "Mathlib/Algebra/Homology/LeftResolution/Basic.lean",
+  "place": "lines 100-113, declaration exactAt_map_chainComplex_succ"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "lem-sfb-left-resolution-reduced-api",
+  "lem-sfb-left-resolution-chain-complex-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Applying a fully faithful functor to the chain complex of a left resolution is exact in positive degrees",
+   "results": "CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ; map_chainComplex_d; map_chainComplex_d_1_0",
+   "date": "2026-10-18",
+   "verdict": "match: exactness declaration returned"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ",
+   "results": "CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ in Mathlib.Algebra.Homology.LeftResolution.Basic",
+   "date": "2026-10-18",
+   "verdict": "match: exact declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "exactAt_map_chainComplex_succ",
+   "results": "Mathlib/Algebra/Homology/LeftResolution/Basic.lean:102",
+   "date": "2026-10-18",
+   "verdict": "match: declaration"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exactness of left resolution chain complex at successor degrees",
+   "results": "CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ; CategoryTheory.ProjectiveResolution.exact_succ; CategoryTheory.ProjectiveResolution.complex_exactAt_succ",
+   "date": "2026-10-18",
+   "verdict": "match: the first returned declaration is the exact left-resolution result"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ",
+  "file": "Mathlib/Algebra/Homology/LeftResolution/Basic.lean",
+  "how": "exact: exactAt_map_chainComplex_succ (Mathlib/Algebra/Homology/LeftResolution/Basic.lean:102), under [ι.Full] [ι.Faithful] [HasZeroMorphisms C] [Abelian A]; ι.PreservesZeroMorphisms by the instance preservesZeroMorphisms_of_full (Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.lean:99)",
+  "line": 102
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-left-resolution-objectwise-cochain",
+  "date": "2026-10-18",
+  "group": "N2"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-derived-tensor-hom",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-derived-monoidal",
+   "place": "The sentence asserting that each bounded-above resolution stage is a quasi-isomorphism; this node supplies the positive-degree exactness used for the objectwise cochain augmentation.",
+   "via": [
+    "lem-sfb-left-resolution-objectwise-cochain",
+    "lem-sfb-left-resolution-bounded-minus",
+    "lem-sfb-functorial-bounded-above-class-resolution",
+    "lem-sfb-kflat-derivability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
