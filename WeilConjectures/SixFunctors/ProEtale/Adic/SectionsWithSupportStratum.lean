@@ -47,6 +47,13 @@ section Flat
 
 variable {X : Scheme.{u}}
 
+instance (F : AdicSheaf l X) : (Mod.tensorLeft F).Additive :=
+  (Mod.ihomAdjunction F).left_adjoint_additive
+
+instance (F : AdicSheaf l X) : PreservesFiniteLimits (AdicSheaf.ihom F) :=
+  have := (Mod.ihomAdjunction F).rightAdjoint_preservesLimits
+  inferInstance
+
 
 /-- **Tensoring with a lisse sheaf preserves monomorphisms**: after pullback along a member `g`
 of a pro-étale cover trivialising `F`, it becomes tensoring with `ℚ̄_ℓⁿ`. -/
@@ -63,9 +70,11 @@ theorem IsAdicLisseSheaf.mono_tensorLeft_map {F : AdicSheaf l X} (hF : IsAdicLis
     have key := NatIso.naturality_2 (adicUpperStarTensorLeftIso l (g i) F) f
     change Mono ((Mod.tensorLeft F ⋙ (g i)^*ᵃ[l]).map f)
     rw [← key]
+    have h1 : Mono ((g i)^*ᵃ[l].map f) := Functor.map_mono _ f
     have := Mod.mono_tensorLeft_map_of_iso_biproduct e ((g i)^*ᵃ[l].map f)
-    exact mono_comp' inferInstance (mono_comp' this inferInstance)
-  exact (isZero_kernel_of_mono _).of_iso (PreservesKernel.iso (g i)^*ᵃ[l] _)
+    exact mono_comp' (IsIso.mono_of_iso ((adicUpperStarTensorLeftIso l (g i) F).app M).hom)
+      (mono_comp' this (IsIso.mono_of_iso ((adicUpperStarTensorLeftIso l (g i) F).app N).inv))
+  exact (isZero_kernel_of_mono ((g i)^*ᵃ[l].map ((Mod.tensorLeft F).map f))).of_iso (PreservesKernel.iso (g i)^*ᵃ[l] _)
 
 /-- **Tensoring with a lisse sheaf is exact**: it is right exact as a left adjoint, and it
 preserves monomorphisms (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.mono_tensorLeft_map`). -/
@@ -76,15 +85,25 @@ theorem IsAdicLisseSheaf.preservesFiniteLimits_tensorLeft {F : AdicSheaf l X}
   have := Functor.preservesHomology_of_preservesMonos_and_cokernels (Mod.tensorLeft F)
   exact Functor.preservesFiniteLimits_of_preservesHomology _
 
+/-- Tensoring with a lisse sheaf is exact. -/
+instance {F : AdicSheaf l X} [h : Fact (IsAdicLisseSheaf F)] :
+    PreservesFiniteLimits (Mod.tensorLeft F) :=
+  h.out.preservesFiniteLimits_tensorLeft
+
+/-- The internal hom out of a lisse sheaf is exact. -/
+instance {F : AdicSheaf l X} [h : Fact (IsAdicLisseSheaf F)] :
+    PreservesFiniteColimits (AdicSheaf.ihom F) :=
+  h.out.preservesFiniteColimits_ihom
+
+instance (F : AdicSheaf l X) : PreservesFiniteColimits (Mod.tensorLeft F) :=
+  have := (Mod.ihomAdjunction F).leftAdjoint_preservesColimits
+  inferInstance
+
 /-- The derived adjunction `L ⊗ - ⊣ 𝓗om(L, -)` for a lisse sheaf `L`, both functors being
 exact. -/
-noncomputable def IsAdicLisseSheaf.derivedTensorLeftIhomAdjunction {F : AdicSheaf l X}
-    (hF : IsAdicLisseSheaf F) :
+noncomputable def derivedTensorLeftIhomAdjunction (F : AdicSheaf l X)
+    [Fact (IsAdicLisseSheaf F)] :
     (Mod.tensorLeft F).mapDerivedCategory ⊣ (AdicSheaf.ihom F).mapDerivedCategory :=
-  have := hF.preservesFiniteLimits_tensorLeft
-  have := hF.preservesFiniteColimits_ihom
-  have := (Mod.ihomAdjunction F).leftAdjoint_preservesColimits
-  have := (Mod.ihomAdjunction F).rightAdjoint_preservesLimits
   (Mod.ihomAdjunction F).mapDerivedCategoryRightDerivedAdjunction.ofNatIsoRight
     (AdicSheaf.ihom F).rightDerivedFunctorIsoMapDerivedCategory
 
@@ -93,7 +112,7 @@ end Flat
 variable {Z U X S : Scheme.{u}}
   (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
   (hij : IsCompl (Set.range i.base) (Set.range j.base)) (v : S ⟶ Z) [IsOpenImmersion v]
-  {L : AdicSheaf l S} (hL : IsAdicLisseSheaf L)
+  (L : AdicSheaf l S) [Fact (IsAdicLisseSheaf L)]
 
 /-- The derived adjunction `u_! ⊣ u^*` along an open immersion `u`, both functors being exact. -/
 noncomputable def adicDerivedOpenImmersionLowerShriekAdjunction :
@@ -108,15 +127,12 @@ noncomputable def singleIsoMapDerivedCategoryTensorLeftSingleRegular :
       (Mod.tensorLeft L).mapDerivedCategory.obj
         ((DerivedCategory.singleFunctor (AdicSheaf l S) 0).obj
           (Mod.regular (adicConstantSheaf l S))) :=
-  have := hL.preservesFiniteLimits_tensorLeft
-  have := (Mod.ihomAdjunction L).leftAdjoint_preservesColimits
   (DerivedCategory.singleFunctor (AdicSheaf l S) 0).mapIso
       (Mod.tensorLeftObjRegularIso L).symm ≪≫
     ((Mod.tensorLeft L).mapDerivedCategorySingleFunctor 0).symm.app _
 
 variable [PreservesFiniteColimits (i)_*ᵃ[l]]
 
-include hL in
 /-- Blueprint `det-lem-formal-closed-support-stratum-hom`: **morphisms out of an extension by zero
 from a stratum.** For a closed immersion `i : Z ⟶ X` with quasi-compact open complement `j`, an
 open immersion `u : S ⟶ Z`, a lisse sheaf `L` of `ℚ̄_ℓ,S`-modules, `K ∈ D(X_proét, ℚ̄_ℓ)` and
@@ -137,9 +153,9 @@ noncomputable def homEquivStratum (K : DerivedCategory (AdicSheaf l X)) (q : ℤ
     (Iso.homCongr (Iso.refl _)
       (((adicSectionsWithSupport l i j hij).rightDerivedFunctor.commShiftIso q).app K)).trans <|
     ((adicDerivedOpenImmersionLowerShriekAdjunction v).homEquiv _ _).trans <|
-    (Iso.homCongr (singleIsoMapDerivedCategoryTensorLeftSingleRegular hL)
+    (Iso.homCongr (singleIsoMapDerivedCategoryTensorLeftSingleRegular L)
       ((((v)^*ᵃ[l]).mapDerivedCategory.commShiftIso q).app _)).trans <|
-    ((hL.derivedTensorLeftIhomAdjunction).homEquiv _ _).trans <|
+    ((derivedTensorLeftIhomAdjunction L).homEquiv _ _).trans <|
     Iso.homCongr (Iso.refl _) (((AdicSheaf.ihom L).mapDerivedCategory.commShiftIso q).app _)
 
 end ProEtale

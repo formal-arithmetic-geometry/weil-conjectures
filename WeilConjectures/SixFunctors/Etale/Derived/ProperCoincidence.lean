@@ -9,6 +9,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionRefinement
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
+public import WeilConjectures.SixFunctors.LowerShriek.Formalism.ProperCoincidence
 
 /-!
 # Proper coincidence: `Rf_! ≅ Rf_*` canonically
@@ -74,6 +76,8 @@ lemma rightDerivedLowerStarCompHom_refinement_assoc
 
 variable [HasSmallSiteSheafify A]
 
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A] in
 /-- On sheaves: the base change `(c.i)_! ⟶ (d.i)_! ⋙ q^*` of a refinement is compatible with the
 units of `(c.i)_! ⊣ (c.i)^*` and `(d.i)_! ⊣ (d.i)^*` through `(d.i)^* ≅ q^* ⋙ (c.i)^*`. -/
 lemma unit_comp_map_refinementOpenImmersionLowerShriekBaseChange
@@ -110,13 +114,14 @@ lemma derivedUnit_comp_map_refinementLowerShriekBaseChangeDerivedIso
       (derivedOpenImmersionLowerShriekUpperStarAdjunction A d.i).unit.app M ≫
         (Functor.mapDerivedCategoryNatIso (upperStarComp A c.i r.hom d.i r.i_hom.symm) ≪≫
           Functor.mapDerivedCategoryCompIso _ _).hom.app (D((d.i)_!open[A]).obj M) := by
-  haveI := r.isIso_openImmersionLowerShriekBaseChange A hcart
+  have := r.isIso_openImmersionLowerShriekBaseChange A hcart
   exact Adjunction.mapDerivedCategoryAdjunction_mate'
     (openImmersionLowerShriekUpperStarAdjunction A d.i)
     (openImmersionLowerShriekUpperStarAdjunction A c.i)
     (upperStarComp A c.i r.hom d.i r.i_hom.symm) (asIso (r.openImmersionLowerShriekBaseChange A))
     (fun K ↦ unit_comp_map_refinementOpenImmersionLowerShriekBaseChange A r K) M
 
+omit [HasSmallSiteSheafify A] in
 /-- The transpose of the comparison `D(j_!) ⟶ Rj_*` under `D(j^*) ⊣ Rj_*` is the inverse of the
 unit of `D(j_!) ⊣ D(j^*)`. -/
 @[reassoc]
@@ -228,7 +233,8 @@ omit [HasSmallSiteSheafify A] in
 /-- For a proper `f`, the forget-supports map `ψ_c : Rf_!(c) ⟶ Rf_*` of every compactification
 `c` is an isomorphism: the open immersion `c.i` is then also closed. -/
 instance isIso_rightDerivedLowerShriekOfCompactificationToLowerStar [IsProper f]
-    (c : Compactification f) : IsIso (rightDerivedLowerShriekOfCompactificationToLowerStar A c) := by
+    (c : Compactification f) :
+    IsIso (rightDerivedLowerShriekOfCompactificationToLowerStar A c) := by
   have := c.isClosedImmersion_openImmersion ‹_›
   unfold rightDerivedLowerShriekOfCompactificationToLowerStar
   infer_instance
@@ -277,9 +283,32 @@ theorem isIso_rightDerivedLowerShriekOfCompactificationToLowerStar_and_independe
           (HasCompactification.compactification f) =
       rightDerivedLowerShriekOfCompactificationToLowerStar (ModuleCat.{u + 1} Λ)
         (Compactification.ofIsProper f) :=
-  ⟨fun c ↦ inferInstance, fun c d ↦
+  ⟨fun _ ↦ inferInstance, fun c d ↦
     rightDerivedLowerShriekOfCompactificationIso_hom_comp_toLowerStar Λ c d,
     rightDerivedLowerShriekOfCompactificationIso_hom_comp_toLowerStar Λ _ _⟩
+
+
+omit [Finite Λ] in
+/-- Blueprint `cor-cbc-proper-coincidence`: Proper morphisms: compact supports equal direct image
+
+On `D⁺(-_ét, Λ)` with `Λ` finite: for a cartesian square `g' ≫ f = f' ≫ g` with `f`, `f'`
+proper and the trivial compactifications `(𝟙 X, f)`, `(𝟙 X', f')`, the compact-support exchange
+map `Ex_!` (`def-cbc-exchange-map`) is, under the identifications `Rf_! = (𝟙 X)_! ⋙ Rf_* ≅ Rf_*`
+and `Rf'_! ≅ Rf'_*`, the proper-base-change exchange map `Ex_*`
+(`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`, `def-weil-pbc-derived-exchange`).
+Consequently compact-support base change specializes to proper base change for proper `f`. -/
+theorem shriekBaseChange_ofIsProper_eq_derivedBaseChangeMapPlus
+    {X' Y' : Scheme.{u}} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X}
+    (sq : IsPullback g' f' f g) [IsProper f] [IsProper f']
+    (hi : IsPullback g' (Compactification.ofIsProper f').i (Compactification.ofIsProper f).i g') :
+    ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shriekBaseChange
+        (Compactification.ofIsProper f) (Compactification.ofIsProper f') g' hi sq).natTrans ≫
+        Functor.whiskerLeft ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).pb g')
+          ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shriekOfIsProperIso f').hom =
+      Functor.whiskerRight ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shriekOfIsProperIso f).hom
+          ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).pb g) ≫
+        derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq := by
+  rw [CompactSupportFormalism.shriekBaseChange_ofIsProper, derivedPlusFormalism_pfBaseChange]
 
 end Torsion
 
