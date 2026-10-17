@@ -31,6 +31,48 @@ namespace AlgebraicGeometry
 
 open Scheme Etale
 
+/-- Pulling back along `ι` and then along `kk`, with the composition isomorphisms through
+`t = ι ≫ v`, is pulling back along `kk ≫ ι`. -/
+private theorem cohomologyMap_comp_leg {Z T S X : Scheme.{u}} (kk : Z ⟶ T) (ι : T ⟶ S)
+    (v : S ⟶ X) (t : T ⟶ X) (i : Z ⟶ X) (hι : t = ι ≫ v) (hi : i = kk ≫ t)
+    (hs : i = (kk ≫ ι) ≫ v) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)
+    (y : Sheaf.H (((v)^*[AddCommGrpCat.{u + 1}]).obj G) q) :
+    Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} kk t i hi).inv.app G) q
+        (cohomologyMap kk (((t)^*[AddCommGrpCat.{u + 1}]).obj G) q
+          (Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} ι v t hι).inv.app G) q
+            (cohomologyMap ι (((v)^*[AddCommGrpCat.{u + 1}]).obj G) q y))) =
+      Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} (kk ≫ ι) v i hs).inv.app G) q
+        (cohomologyMap (kk ≫ ι) (((v)^*[AddCommGrpCat.{u + 1}]).obj G) q y) := by
+  rw [cohomologyMap_map, (cohomologyPullbackFunctorial kk ι
+    (((v)^*[AddCommGrpCat.{u + 1}]).obj G) q).2.1, ← Sheaf.H.map_comp_apply,
+    ← Sheaf.H.map_comp_apply]
+  congr 2
+  rw [Etale.upperStarComp_hom_app_map_upperStarComp_inv_app_assoc AddCommGrpCat.{u + 1}
+    kk ι v (kk ≫ ι) t i rfl hι hs G, Iso.hom_inv_id_app, Category.comp_id]
+
+/-- Pullback along a morphism is bijective on cohomology of `F'` if it is so on cohomology of
+an isomorphic sheaf `F`. -/
+private theorem cohomologyMap_bijective_of_iso {Y W : Scheme.{u}} (k : Y ⟶ W)
+    {F F' : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}} (ef : F ≅ F') (q : ℕ)
+    (h : Function.Bijective (cohomologyMap k F q)) :
+    Function.Bijective (cohomologyMap k F' q) := by
+  have hiso {V : Scheme.{u}} {M M' : Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}}
+      (α : M ≅ M') : Function.Bijective (Sheaf.H.map α.hom q) :=
+    Function.bijective_iff_has_inverse.mpr ⟨Sheaf.H.map α.inv q,
+      fun x ↦ by rw [← Sheaf.H.map_comp_apply, α.hom_inv_id, Sheaf.H.map_id_apply],
+      fun x ↦ by rw [← Sheaf.H.map_comp_apply, α.inv_hom_id, Sheaf.H.map_id_apply]⟩
+  have heq : ⇑(cohomologyMap k F' q) =
+      ⇑(Sheaf.H.map (((k)^*[AddCommGrpCat.{u + 1}]).map ef.hom) q) ∘
+        ⇑(cohomologyMap k F q) ∘ ⇑(Sheaf.H.map ef.inv q) := by
+    funext x
+    have hx : Sheaf.H.map ef.hom q (Sheaf.H.map ef.inv q x) = x := by
+      rw [← Sheaf.H.map_comp_apply, ef.inv_hom_id, Sheaf.H.map_id_apply]
+    calc cohomologyMap k F' q x
+        = cohomologyMap k F' q (Sheaf.H.map ef.hom q (Sheaf.H.map ef.inv q x)) := by rw [hx]
+      _ = _ := cohomologyMap_map k q ef.hom (Sheaf.H.map ef.inv q x)
+  rw [heq]
+  exact (hiso (((k)^*[AddCommGrpCat.{u + 1}]).mapIso ef)).comp (h.comp (hiso ef.symm))
+
 /-- Cohomology on a closed subscheme of an affine scheme is the filtered colimit of
 cohomology on its affine étale neighbourhoods, for a torsion sheaf of modules, with all maps
 the canonical pullback maps. There is no injectivity hypothesis and no restriction on the
@@ -107,19 +149,7 @@ theorem Etale.affine_closed_etale_neighborhood_comparison
     let F := ((t)^*[ModuleCat.{u + 1} Λ]).obj J
     have hgab := bijective_cohomologyMap_of_henselianRing Λ K F q
     obtain ⟨ef⟩ := pullback_forget_modules_iso Λ t J
-    have heq : ⇑(cohomologyMap k tG q) =
-        ⇑(Sheaf.H.map (((k)^*[AddCommGrpCat.{u + 1}]).map ef.hom) q) ∘
-          ⇑(cohomologyMap k ((sheafCompose _
-            (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) ∘
-          ⇑(Sheaf.H.map ef.inv q) := by
-      funext x
-      have hx : Sheaf.H.map ef.hom q (Sheaf.H.map ef.inv q x) = x := by
-        rw [← Sheaf.H.map_comp_apply, ef.inv_hom_id, Sheaf.H.map_id_apply]
-      calc cohomologyMap k tG q x
-          = cohomologyMap k tG q (Sheaf.H.map ef.hom q (Sheaf.H.map ef.inv q x)) := by rw [hx]
-        _ = _ := cohomologyMap_map k q ef.hom (Sheaf.H.map ef.inv q x)
-    rw [heq]
-    exact (hiso (((k)^*[AddCommGrpCat.{u + 1}]).mapIso ef)).comp (hgab.comp (hiso ef.symm))
+    exact cohomologyMap_bijective_of_iso k ef q hgab
   have hkk : Function.Bijective (cohomologyMap kk tG q) := by
     have heq : ⇑(cohomologyMap kk tG q) =
         ⇑(Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} e.hom k).inv.app tG) q) ∘
@@ -151,13 +181,6 @@ theorem Etale.affine_closed_etale_neighborhood_comparison
     ext x
     simp only [AddCommGrpCat.hom_comp, AddCommGrpCat.hom_ofHom, AddMonoidHom.coe_comp,
       Function.comp_apply, φ]
-    dsimp only [Functor.comp_obj, s]
-    rw [cohomologyMap_map, (cohomologyPullbackFunctorial kk (Spec.map (c.ι.app a))
-      (((v a)^*[AddCommGrpCat.{u + 1}]).obj G) q).2.1, ← Sheaf.H.map_comp_apply,
-      ← Sheaf.H.map_comp_apply]
-    congr 2
-    rw [Etale.upperStarComp_hom_app_map_upperStarComp_inv_app_assoc AddCommGrpCat.{u + 1}
-      kk (Spec.map (c.ι.app a)) (v a) (kk ≫ Spec.map (c.ι.app a)) t i rfl (wt a) (hs a) G,
-      Iso.hom_inv_id_app, Category.comp_id]
+    exact cohomologyMap_comp_leg kk (Spec.map (c.ι.app a)) (v a) t i (wt a) hi' (hs a) G q _
 
 end AlgebraicGeometry
