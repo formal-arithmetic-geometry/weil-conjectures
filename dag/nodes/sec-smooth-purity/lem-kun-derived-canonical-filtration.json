@@ -9,15 +9,99 @@
  },
  "stmt_deps": [
   "def-kun-finite-filtered-module-homotopy",
+  "lem-kun-filtered-tensor-localization",
   "def-weil-abstract-derived-category",
   "def-sp-filtration",
   "def-sp-filtered-complex-subquotients",
   "def-weil-pbc-bounded-derived-subcategories",
-  "def-sbc-standard-tstructure-derived-category"
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-kun-bounded-derived-roofs",
+  "lem-kun-canonical-truncation-filtration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $C\\in D^b(R)$. By [lem-kun-bounded-derived-roofs], choose a bounded cochain representative $K$ and an isomorphism $Q(K)\\cong C$. For a derived morphism $u:C\\to C'$, choose bounded representatives $K,L$ and a bounded roof $K\\xleftarrow{s}M\\xrightarrow{g}L$ for $u$, with $s$ a quasi-isomorphism. Thus all representative-level constructions below may be made with bounded complexes and bounded roofs; no termwise functorial representative is chosen.",
+   "uses": [
+    "def-weil-pbc-bounded-derived-subcategories",
+    "lem-kun-bounded-derived-roofs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05RW and 05S6; bounded-roof refinement from Mathlib.Algebra.Homology.DerivedCategory.Fractions"
+   }
+  },
+  {
+   "text": "For a bounded representative $K$, apply [lem-kun-canonical-truncation-filtration]. The subcomplexes $F^iK=\\tau_{\\le-i}K$ form a finite decreasing filtration, and every chain map preserves them. The quotient in filtration degree $i$ is the two-term complex $\\operatorname{im}d^{-i-1}\\hookrightarrow\\ker d^{-i}$, with its natural quasi-isomorphism to $H^{-i}(K)[i]$. A chain homotopy gives a filtration-preserving homotopy after truncation, so the class of $(K,F)$ is well defined in $\\mathcal H_f(R)$ for a bounded homotopy representative.",
+   "uses": [
+    "lem-kun-canonical-truncation-filtration",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118; canonical truncation-filtration paragraph in Tag 0H7Z"
+   }
+  },
+  {
+   "text": "By [lem-kun-filtered-tensor-localization], $\\mathcal D_f(R)$ is the stated localization of $\\mathcal H_f(R)$ at $W$. If $s: M\\to K$ is the denominator of a bounded roof from Step 1, [lem-kun-canonical-truncation-filtration] says that each $\\operatorname{gr}^i(s)$ is a quasi-isomorphism, so $s$ belongs to $W$ in [def-kun-finite-filtered-module-homotopy]. By [lem-kun-filtered-quasi-isomorphism-fractions], $W$ has two-out-of-three and a calculus of right fractions. The bounded common-refinement clause of [lem-kun-bounded-derived-roofs], together with the same filtration-preserving refinement maps, shows that equal derived roofs give equal localized filtered roofs. Therefore $K\\mapsto(K,F)$ and a roof $K\\xleftarrow{s}M\\xrightarrow{g}L\\mapsto Q_W(s)^{-1}Q_W(g)$ define a functor $\\mathcal T:D^b(R)\\to\\mathcal D_f(R)$, independent of all bounded representatives and refinements.",
+   "uses": [
+    "lem-kun-canonical-truncation-filtration",
+    "lem-kun-filtered-tensor-localization",
+    "def-kun-finite-filtered-module-homotopy",
+    "lem-kun-filtered-quasi-isomorphism-fractions",
+    "lem-kun-bounded-derived-roofs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05S2 and 05S6; canonical truncation construction in Tag 0H7Z"
+   }
+  },
+  {
+   "text": "The forgetful functor $\\omega:\\mathcal D_f(R)\\to D(R)$ sends the filtered roof in Step 3 to the same ordinary roof. On an object represented by $K$, the composite $\\omega\\mathcal T$ is $Q(K)$, and on a chain-map roof it is the original derived morphism. The bounded-roof independence from Steps 1 and 3 therefore supplies a natural isomorphism $\\omega\\mathcal T\\cong\\operatorname{incl}:D^b(R)\\to D(R)$ whose component at $C$ is the chosen identification $Q(K)\\cong C$.",
+   "uses": [
+    "lem-kun-bounded-derived-roofs",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05S2 and 05S6, localization functor and bounded representatives"
+   }
+  },
+  {
+   "text": "The graded functor on $\\mathcal D_f(R)$ is defined because every map in $W$ is a quasi-isomorphism on each graded quotient. The natural quasi-isomorphisms of Step 2 give, for every bounded representative $K$, canonical identifications $\\operatorname{gr}^i(K,F)\\cong H^{-i}(K)[i]$. Their chain-map and homotopy naturality, and the bounded-roof independence in Step 3, descend these identifications to a natural isomorphism $\\operatorname{gr}^i\\mathcal T(C)\\cong H^{-i}(C)[i]$. For a derived morphism $u$, the map is $H^{-i}(u)[i]$ by the representative roof formula, while the underlying map is $u$ by Step 4. This also proves independence of bounded representatives up to the required compatible natural isomorphism.",
+   "uses": [
+    "lem-kun-canonical-truncation-filtration",
+    "lem-kun-bounded-derived-roofs",
+    "lem-kun-filtered-quasi-isomorphism-fractions",
+    "def-kun-finite-filtered-module-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118; Tag 05S2 and Tag 0H7Z canonical graded comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-filtered-tensor-localization",
+  "def-kun-finite-filtered-module-homotopy",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-kun-bounded-derived-roofs",
+  "lem-kun-canonical-truncation-filtration",
+  "lem-kun-filtered-quasi-isomorphism-fractions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05RW, 05S2, 05S6 and homology Tag 0118; explicit representative-level functoriality extension"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,7 +140,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-kun-bounded-tensor-tor-spectral-sequence",
@@ -77,5 +161,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-kun-derived-canonical-filtration",
+  "worker": "stage1",
+  "summary": "Audited the imported canonical-filtration statement against Stacks Tags 0118, 05RW, 05S2, 05S6 and the bounded derived-category fraction APIs. Added two smaller statement-only nodes for bounded representatives/roofs and the good-truncation graded quotient, then split the construction into representative choice, truncation, localization, underlying comparison and graded naturality steps. The statement and hypotheses are unchanged.",
+  "blueprint": "Realizes the ancestor lem-kun-0f0f preliminary integral-homological-algebra paragraph on bounded roofs/common refinements and canonical-truncation homotopies, after the returned tensor-Tor auxiliary step."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q85-057de7e3c",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q85-057de7e3c (reviewer sub-agent of L); spot-checked: The item uses the localization H_f(R)[W^{-1}] without citing a node that defines this localization; only H_f and W are cited. I prepared a corrected whole item file adding lem-kun-filtered-tensor-localization to stmt_deps, proof_deps, and Step 3. Full mathematical and source checks are recorded in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -1,0 +1,72 @@
+{
+ "id": "lem-kun-bounded-derived-roofs",
+ "kind": "statement",
+ "title": "Bounded representatives and bounded roofs in the derived category",
+ "statement": "Let $R$ be a commutative ring and let $D^b(R)$ be the bounded derived category of $R$-modules [def-weil-pbc-bounded-derived-subcategories, def-weil-abstract-derived-category]. Every $C\\in D^b(R)$ admits integers $a\\le b$, a cochain complex of $R$-modules $K$ [def-weil-abstract-derived-category] with $K^n=0$ for $n<a$ or $n>b$, and an isomorphism $C\\cong Q(K)$ [def-weil-abstract-derived-category]. If $K$ and $L$ are bounded representatives of $C$ and $C'$, every morphism $u:C\\to C'$ in the derived localization is represented by a roof $K\\xleftarrow{s}M\\xrightarrow{g}L$ [def-weil-abstract-derived-category] with $M$ bounded and $s$ a quasi-isomorphism [def-weil-abstract-derived-category]. Any two such bounded roofs representing the same derived morphism have a common bounded refinement by quasi-isomorphisms [def-weil-abstract-derived-category]; hence the resulting roof class is independent of the bounded representatives and of the chosen refinement.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05RW (bounded complexes in the bounded derived category), 05S6 (bounded derived localization), together with the bounded fraction refinements in Mathlib.Algebra.Homology.DerivedCategory.Fractions."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-abstract-derived-category",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every object of the bounded derived category of modules has a bounded cochain representative and every morphism between bounded representatives has a bounded common roof refinement",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.HasDerivedCategory",
+   "date": "2026-10-17",
+   "verdict": "generalization: Mathlib supplies bounded representatives and bounded right/left factorizations, but not the combined bounded-roof independence statement verbatim."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, Mathlib.Algebra.Homology.DerivedCategory.TStructure",
+   "date": "2026-10-17",
+   "verdict": "match for bounded representative existence; bounded roof clause still requires the fraction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_iso_Q_obj_of_isGE_of_isLE|right.*fraction|common.*refinement",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:180,192; Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean:13,17,38,48",
+   "date": "2026-10-17",
+   "verdict": "generalization: localization fraction APIs and bounded representative theorem found, no exact combined declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded derived category objects represented by bounded complexes and morphisms represented by bounded roofs",
+   "results": "HasDerivedCategory; HasDerivedCategory.standard; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-17",
+   "verdict": "generalization: the separate Mathlib declarations provide the ingredients but not the complete statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-kun-derived-canonical-filtration",
+  "date": "2026-10-17",
+  "group": "Q85"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "blueprint": {
+  "from": {
+   "node": "lem-kun-0f0f",
+   "place": "Preliminary integral homological algebra: bounded roofs/common refinements used to make the canonical truncation filtration independent of representatives.",
+   "via": [
+    "lem-kun-derived-canonical-filtration",
+    "lem-kun-bounded-tensor-tor-spectral-sequence",
+    "lem-kun-integral-bounded-kunneth-exact",
+    "lem-kun-integral-derived-tensor-bounded-torsion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

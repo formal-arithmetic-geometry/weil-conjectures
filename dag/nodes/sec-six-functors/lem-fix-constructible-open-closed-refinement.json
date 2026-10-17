@@ -1,10 +1,146 @@
 {
  "chapter": "sec-six-functors",
  "unit": "sk-rem-sf-pf-done",
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Write $E_\\alpha=s_\\alpha(S_\\alpha)$. Since $E_\\alpha$ is constructible, it is retrocompact. Apply this to the quasi-compact open $W\\subseteq W$ itself: $E_\\alpha=E_\\alpha\\cap W$ is quasi-compact. An immersion is a closed immersion followed by an open immersion, each a homeomorphism onto its image; hence $S_\\alpha$ is homeomorphic to $E_\\alpha$ and is quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-constructible-is-retrocompact",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09YH, lemma-constructible-is-retrocompact; definition of immersion"
+   }
+  },
+  {
+   "text": "Apply the closed-immersion neighbourhood theorem to the given immersion $s_\\alpha$ with its now quasi-compact source. It supplies a quasi-compact open $O_\\alpha\\subseteq W$ and a closed immersion $S_\\alpha\\to O_\\alpha$ factoring $s_\\alpha$. Set $V_\\alpha=O_\\alpha\\setminus E_\\alpha$, an open subscheme of $O_\\alpha$. Boolean closure of constructible sets makes $W\\setminus E_\\alpha$ constructible. Its retrocompactness, evaluated on the quasi-compact open $O_\\alpha$ of $W$, proves $V_\\alpha=(W\\setminus E_\\alpha)\\cap O_\\alpha$ quasi-compact. This uses the original scheme structure on $S_\\alpha$.",
+   "uses": [
+    "lemma-nagata-immersion-shrink-to-closed-exists",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-constructible-is-retrocompact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZG, lemma-finite-type-closed-in-finite-presentation, shrinking argument in its proof; Topology Tags 005H and 09YH"
+   }
+  },
+  {
+   "text": "We will use quasi-separatedness of open and closed subschemes of a quasi-separated scheme $X$, as follows. For an open $U\\subseteq X$, affine opens of $U$ are affine opens of $X$; their intersections are quasi-compact by the affine-cover criterion for $X$, so the converse criterion makes $U$ quasi-separated. For a closed immersion $Z\\to X$, inverse images of an affine open cover of $X$ are affine by the closed-immersion affine description. An intersection of two such inverse images is homeomorphic to a closed subset of the quasi-compact intersection of the corresponding affine opens of $X$; it is quasi-compact by closed-subset compactness. The converse affine-cover criterion makes $Z$ quasi-separated.",
+   "uses": [
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-in-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KO, lemma-characterize-quasi-separated; affine description of closed immersions and Topology Tag 005C"
+   }
+  },
+  {
+   "text": "Choose $Z_\\alpha\\hookrightarrow W$ to be the reduced induced closed subscheme supported on $W\\setminus O_\\alpha$, using the closed-subscheme existence theorem. It is quasi-compact by closed-subset compactness and quasi-separated by step 3. The schemes $O_\\alpha,S_\\alpha,V_\\alpha$ are likewise quasi-separated by step 3 and quasi-compact by steps 1 and 2. Each of $O_\\alpha\\to W$, $Z_\\alpha\\to W$, $S_\\alpha\\to O_\\alpha$ and $V_\\alpha\\to O_\\alpha$ is quasi-compact: in every case its source is quasi-compact and target quasi-separated, so apply clause (1) of the qcqs morphism permanence theorem.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-closed-in-quasi-compact",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3, lemma-reduced-closed-subscheme; Tag 03GI, lemma-quasi-compact-permanence; Topology Tag 005C"
+   }
+  },
+  {
+   "text": "For these pullbacks the underlying images are exactly the set-theoretic inverse images. The open case is the open-preimage fibre-product theorem. For a closed immersion $Z\\to X$ and $f:T\\to X$, the fibre-product points theorem says that points over $t\\in T$ and $z\\in Z$ correspond to primes of $\\kappa(t)\\otimes_{\\kappa(f(t))}\\kappa(z)$. The residue-field theorem for a closed immersion identifies this ring with $\\kappa(t)$ whenever $f(t)$ is the image of $z$. It then has exactly one prime; if no such $z$ exists there is no point over $t$. Thus the image of $T\\times_XZ\\to T$ is precisely $f^{-1}(Z)$, including for nonreduced $Z$.",
+   "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-closed-immersion-residue-field-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product), 01JT (lemma-points-fibre-product); residue fields of closed immersions"
+   }
+  },
+  {
+   "text": "Here is the replacement of any current leaf $t:T\\to W$ for a single index $\\alpha$. Form $A=T\\times_WO_\\alpha$ and $D=T\\times_WZ_\\alpha$ with projections to $T$. Base change of open and closed immersions makes the first projection open and the second closed. Step 5 identifies their images with $t^{-1}(O_\\alpha)$ and its complement. Make them the two children of $T$. Next form $B=A\\times_{O_\\alpha}V_\\alpha$ and $C=A\\times_{O_\\alpha}S_\\alpha$ and make them the open and closed children of $A$. Again the images are complementary by step 5. Retain the projection $C\\to S_\\alpha$; its composite to $W$ is the structural map by the fibre-product identity. The three terminal pieces $D,B,C$ have images respectively outside $O_\\alpha$, in $O_\\alpha\\setminus E_\\alpha$, and in $E_\\alpha$. In particular only $C$ meets $E_\\alpha$. Empty children are allowed.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JY, lemma-base-change-immersion; binary pullback construction expanding Topology Tag 09Y4"
+   }
+  },
+  {
+   "text": "All four arrows to their parents in step 6 are quasi-compact by base-change stability applied to the four maps of step 4. If $T$ is quasi-compact, clause (2) of qcqs permanence gives quasi-compactness of $A,D$, and then of $B,C$. Quasi-separatedness follows from step 3, since each child is open or closed in its parent. In particular each open child is quasi-compact. Each vertex is a locally closed subscheme of $W$: maintain a presentation as a closed subscheme of an open subscheme of $W$. For an open child, restrict that presentation to an open subset of its ambient open (the topology on the closed subscheme is induced). Its inclusion is the base change of the old closed immersion. For a closed child, compose its closed immersion with the presentation of its parent, using closure of closed immersions under composition. The same argument starts from $W$ closed in itself. Every map from a descendant to an ancestor is quasi-compact by clause (1) of qcqs permanence, since its source is quasi-compact and target quasi-separated.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-comp",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01K5 (base change of quasi-compact morphisms), 01JY (immersions), 03GI (quasi-compact permanence); Morphisms Tag 01QS (closed immersion composition)"
+   }
+  },
+  {
+   "text": "Enumerate all strata in all the finitely many partitions as $\\alpha_1,\\ldots,\\alpha_N$, and start with the one-vertex tree $W$. After processing $r$ indices maintain: the tree is finite and binary; vertices are qcqs locally closed subschemes, with quasi-compact arrows; terminal images are disjoint and cover $W$; for each processed $\\alpha$, every terminal image either avoids $E_\\alpha$ or has a recorded factorization through $S_\\alpha$. These assertions hold for $r=0$. For $r+1$, replace every terminal vertex by the two pullback splits constructed in step 6: the open pullback is the inverse image supplied by the open-preimage fibre-product theorem, and the closed pullback is supplied by closed-immersion base change. The fibre-product projections and their commuting identities are those in the fibre-product statement. Each replacement has three terminal vertices, so finiteness persists. The qcqs and quasi-compact branch assertions persist by qcqs permanence, and the locally closed presentation persists under open restriction and composition of closed immersions. Its images partition the old image by the complementary open/closed construction. An old factorization through $S_\\alpha$ is retained by composing with the new projections, and an old disjointness condition persists under restriction. For the new index, $D,B$ avoid its image and $C$ has the recorded projection. This proves the invariant by induction. Terminate at $N$; if $N=0$ no replacement is made.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-closed-immersion-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y4, lemma-constructible-partition-refined-by-stratification, finite Boolean refinement realized by the pullbacks of steps 6 and 7"
+   }
+  },
+  {
+   "text": "Let $T$ be a nonempty final leaf and fix an original partition. Choose a point $x\\in T$; its image in $W$ lies in a stratum $E_\\alpha$ of that partition because the stratum images cover $W$. The final invariant rules out the alternative that $T$ avoids $E_\\alpha$. Its other alternative supplies a recorded morphism $T\\to S_\\alpha$, obtained from the fibre-product projection retained at the $\\alpha$-split and composed with the later fibre-product projections; the commuting identity in the fibre-product universal property shows that its composite with $s_\\alpha$ is the canonical map $T\\to W$. This proves the required factorization. Each split partitions the underlying image of its parent, so the nonempty leaves are disjoint and cover $W$. If $W$ is empty the one-vertex tree or the same construction has no nonempty leaves; an empty original partition can occur only in that case. If there are no original partitions, the required factorization condition is vacuous. Thus these cases also satisfy the statement.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y4, finite-refinement conclusion, with scheme-theoretic projections tracked throughout the induction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-constructible-subset",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-weil-pbc-closed-in-quasi-compact",
+  "lem-weil-pbc-constructible-is-retrocompact",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lemma-nagata-immersion-shrink-to-closed-exists"
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "id": "lem-fix-constructible-open-closed-refinement",
  "kind": "statement",
  "title": "Finite open–closed refinement through constructible strata",
@@ -104,6 +240,46 @@
    "results": "; 8 hits: AlgebraicGeometry.QuasiCompactCover, AlgebraicGeometry.Scheme.quasiCompactCover, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.QuasiCompactCover.of_finite, AlgebraicGeometry.QuasiCompactCover.inst, AlgebraicGeometry.Scheme.instFintypeI₀FiniteSubcover, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine",
    "date": "2026-10-17",
    "verdict": "no match: set constructibility, images/preimages or covering predicates do not supply the scheme-theoretic binary refinement and qcqs complements"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite binary tree of open and closed subscheme pullbacks refining finitely many constructible stratifications of a quasi compact quasi separated scheme",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.QuasiCompactCover, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.QuasiCompactCover.of_finite, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.QuasiCompactCover.inst, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.Scheme.instFintypeI₀FiniteSubcover",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not supply the binary scheme-theoretic refinement through each original immersion with qcqs vertices and quasi-compact branch maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite constructible stratification of a scheme refined by iterated open closed decompositions",
+   "subdirectory": "",
+   "results": "8 hits: Topology.IsConstructible, AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens, PrimeSpectrum.ConstructibleSetData, AlgebraicGeometry.Scheme.OpenCover.compactSpace, AlgebraicGeometry.Scheme.instInhabitedOpenCover, Topology.IsLocallyConstructible, AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen, AlgebraicGeometry.Scheme.affineBasisCover",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not supply the binary scheme-theoretic refinement through each original immersion with qcqs vertices and quasi-compact branch maps"
+  },
+  {
+   "tool": "grep",
+   "query": "stratif|refin.*[Cc]onstructible|[Cc]onstructible.*refin",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not supply the binary scheme-theoretic refinement through each original immersion with qcqs vertices and quasi-compact branch maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally closed constructible subscheme can be cut out as a closed subscheme of a quasi compact open with quasi compact open complement",
+   "subdirectory": "",
+   "results": "8 hits: Topology.IsLocallyConstructible.isConstructible, PrimeSpectrum.BasicConstructibleSetData, PrimeSpectrum.ConstructibleSetData, IsRetrocompact.isLocallyConstructible, Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover, Topology.IsConstructible.isLocallyConstructible, Topology.IsLocallyConstructible.isConstructible_of_subset_of_isCompact, Topology.IsLocallyConstructible.inter_of_isOpen_isCompact",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not supply the binary scheme-theoretic refinement through each original immersion with qcqs vertices and quasi-compact branch maps"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCompact|IsRetrocompact|IsConstructible",
+   "subdirectory": "Topology/Constructible.lean",
+   "results": "5 hits: 31, 33, 52, 54, 55",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits do not supply the binary scheme-theoretic refinement through each original immersion with qcqs vertices and quasi-compact branch maps"
   }
  ],
  "created": {
@@ -112,7 +288,11 @@
   "date": "2026-10-17",
   "group": "Q113"
  },
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tags 005H, 09YH, 09Y4: explicit binary scheme-theoretic refinement, with existing qcqs and immersion lemmas"
+ },
  "blueprint": {
   "from": {
    "node": "lem-fix-weil-operations",
@@ -123,5 +303,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-fix-constructible-open-closed-refinement",
+  "worker": "stage1",
+  "summary": "Preserved the statement and retained the complete binary refinement using the original closed strata, complementary pullbacks, and actual projection factorizations. Repaired returned steps 8 and 9 as non-elementary steps with explicit citations to the existing pullback, permanence, and projection statements; revalidated every citation against the current DAG. No new nodes or new searches; retained the existing report and search log.",
+  "blueprint": "Serves the evaluation/completed-tensor passage of lem-fix-weil-operations through step 3 of lem-fix-constructible-tensor-completion: finite residue-constructible partitions refined by actual open/closed pullbacks.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "Computes the point fibres of a closed immersion after base change. The item unit has no such general geometric lemma; this does not replace its coefficient-theoretic route."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-is-retrocompact",
+    "why": "Compactness of constructible stratum images and their complementary pieces. The item unit has no such general geometric lemma; this does not replace its coefficient-theoretic route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-weil-pbc-constructible-is-retrocompact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q89-fbf3d6692",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q89-fbf3d6692 (reviewer sub-agent of L); spot-checked: Read and checked all nine steps, cited statements, Stacks sources, shrinking declaration, and blueprint route. Scheme-theoretic projections handle nonreduced strata correctly; empty cases pass. No duplicates, cycles, long steps, or forbidden batch-5 dependencies found. Both declared geometry tool uses accepted. No repairs needed; details in review.md."
  }
 }

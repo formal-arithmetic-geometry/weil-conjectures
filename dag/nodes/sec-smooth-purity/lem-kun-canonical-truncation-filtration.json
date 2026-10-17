@@ -1,0 +1,73 @@
+{
+ "id": "lem-kun-canonical-truncation-filtration",
+ "kind": "statement",
+ "title": "Canonical truncation filtration and shifted cohomology graded pieces",
+ "statement": "Let $R$ be a commutative ring and let $K$ be a cochain complex of $R$-modules [def-weil-abstract-derived-category] with $K^n=0$ outside a finite interval. Define a decreasing filtration by good upper truncations $F^iK=\\tau_{\\le -i}K$ [def-sbc-standard-tstructure-derived-category, def-sp-filtration]. Then $F^aK=K$ and $F^bK=0$ for suitable integers $a<b$, so $(K,F)$ is a finite filtered complex [def-kun-finite-filtered-module-homotopy]. For every $i$, the quotient $F^iK/F^{i+1}K$ [def-sp-filtered-complex-subquotients] is the two-term complex $\\operatorname{im}(d^{-i-1})\\hookrightarrow\\ker(d^{-i})$ in degrees $-i-1,-i$, and the projection of cycles induces a natural quasi-isomorphism [def-weil-abstract-derived-category] $F^iK/F^{i+1}K\\xrightarrow{\\sim}H^{-i}(K)[i]$. These comparisons are natural for chain maps [def-weil-abstract-derived-category], and a chain homotopy [def-weil-abstract-derived-category] between chain maps induces a filtration-preserving chain homotopy between their truncation maps. Consequently a quasi-isomorphism [def-weil-abstract-derived-category] $K\\to L$ induces a quasi-isomorphism on every graded quotient.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0118 (good cochain truncations and their cohomology), together with Tag 05S6 and the canonical-truncation paragraph in Tag 0H7Z."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded cochain complex the good upper truncation filtration has graded piece the cohomology module shifted by its degree",
+   "results": "CochainComplex.truncGE; CochainComplex.truncLE; CochainComplex.πTruncGE; CochainComplex.shortComplexTruncLE; CochainComplex.ιTruncLE; quasi-isomorphism instances for truncations",
+   "date": "2026-10-17",
+   "verdict": "generalization: Mathlib has canonical truncation functors and quasi-isomorphism facts, but not this filtered quotient identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.shortComplexTruncLE_shortExact",
+   "results": "CochainComplex.shortComplexTruncLE_shortExact, Mathlib.Algebra.Homology.Embedding.CochainComplex",
+   "date": "2026-10-17",
+   "verdict": "match for the short exact canonical truncation row; the shifted graded identification is not a one-line Mathlib theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "truncLE|trunc.*homology|homology.*trunc",
+   "results": "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean:16,42,49-50; Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean:110-125; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:67-74",
+   "date": "2026-10-17",
+   "verdict": "generalization: truncation and homology-shift infrastructure found, no exact finite filtration theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "good truncation quotient of a bounded cochain complex is the cohomology object shifted",
+   "results": "ChainComplex.truncate; CochainComplex.truncate; CochainComplex.shortComplexTruncLE_shortExact; CochainComplex.truncGE",
+   "date": "2026-10-17",
+   "verdict": "generalization: Mathlib exposes truncation operations but not the stated filtration and naturality package."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-kun-derived-canonical-filtration",
+  "date": "2026-10-17",
+  "group": "Q85"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "blueprint": {
+  "from": {
+   "node": "lem-kun-0f0f",
+   "place": "Preliminary integral homological algebra: canonical truncation-filtration homotopies and the two-term quotient whose cohomology is the shifted graded piece.",
+   "via": [
+    "lem-kun-derived-canonical-filtration",
+    "lem-kun-bounded-tensor-tor-spectral-sequence",
+    "lem-kun-integral-bounded-kunneth-exact",
+    "lem-kun-integral-derived-tensor-bounded-torsion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
