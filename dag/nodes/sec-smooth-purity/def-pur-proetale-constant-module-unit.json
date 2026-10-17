@@ -1,0 +1,114 @@
+{
+ "id": "def-pur-proetale-constant-module-unit",
+ "kind": "definition",
+ "title": "Canonical rank-one comparison for intrinsic pro-etale constant modules",
+ "status": "split",
+ "statement": "For a scheme $X$ [def-pc-scheme] and a finite commutative ring $A$, use the small pro-etale site [def-weil-pbc-proetale-site] and its constant commutative ring sheaf $A_X$ [def-weil-pbc-constant-sheaf]. Write $M_X=A_X$ as its own ordinary module sheaf [def-weil-sheaf-of-modules-category], using Mathlib's rank-one module, and $C_X$ for the constant fixed-scalar sheaf of the rank-one $A$-module. Let $E_X$ be the canonical intrinsic coefficient realization used in [def-weil-extension-by-zero], obtained by module sheafification [def-weil-presheaf-modules-sheafification] along the constant-scalar unit; use its scalar-unit section map from [def-weil-proetale-inverse-image]. Define $c_X:E_X(C_X)\\simeq M_X$ to be the unique module-sheaf isomorphism whose component sends the realization of every constant section $a\\in A$ on every site object to the same scalar section of $A_X$. Such a unique isomorphism exists: both successive sheafifications have the same underlying associated abelian sheaf and the same constant scalar action. This defines the canonical rank-one comparison, including for the zero ring and the empty scheme.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-extension-by-zero",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; algebraic structures transported through sheafification as in sites.tex Tag 00YV; applied twice to the constant rank-one module."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "realization of constant module sheaf is the rank one module over the constant ring sheaf",
+   "results": "[leansearch] OK 8 hit(s). SheafOfModules, SheafOfModules.mk, CategoryTheory.constantSheaf, AlgebraicGeometry.Scheme.Modules, CategoryTheory.Sheaf.IsConstant.mk, CompHausLike.LocallyConstantModule.functor_obj_val, AlgebraicGeometry.StructureSheaf.res_const', CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule. No normalized comparison with the published pro-etale realization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant sheaf of rank one modules canonically isomorphic to unit sheaf of modules",
+   "results": "[leanfinder] OK 8 hit(s). SheafOfModules.unit_val, SheafOfModules.unit, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.unitHomEquiv, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, CondensedMod.LocallyConstant.functorIsoDiscreteAux₂, PresheafOfModules.unit. The actual unit is reused, but no normalized realization comparison is present.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unit",
+   "results": "[loogle] OK 12 hit(s): SheafOfModules.unit, unitHomEquiv, unit_val, unitHomEquiv_comp_apply, unitHomEquiv_symm_comp, unitHomEquiv_apply_coe, freeCofan, iotaFree, isColimitFreeCofan and free-map lemmas. No realization comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Uu]nit|[Uu]nit.*[Cc]onstant (Mathlib Algebra/Category/ModuleCat); constant-module-unit|ConstantModuleUnit|constant rank.one.*realization|rank.one realization (DAG, WeilConjectures, lean/Sheaf); blueprint_refs.py search \"constant module unit\"",
+   "results": "Mathlib msearch: [grep] OK 0 hit(s). blueprint_refs: 0 blueprint nodes match. Project search found generic SiteConstantModuleFunctor/Unit (constant-module construction and local bijectivity, not rank-one realization comparison) and etaleConstantModuleUnitIso (the unit of an etale equivalence, not a rank-one-object comparison). No pro-etale rank-one comparison; the definitions SheafOfModules.unit, constantSheaf and sfIntrinsicModuleEquivalence are reused.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-proetale-supported-constant-presentation",
+  "date": "2026-10-17",
+  "group": "Q13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-affine-line-orientation",
+   "place": "The supported constant source presentation used to identify supported Hom under pullback: specify the canonical ordinary rank-one coefficient comparison for the open counit and closed constant restriction.",
+   "via": [
+    "lem-pur-proetale-supported-constant-presentation",
+    "lem-pur-supported-hom-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleConstantModuleUnit",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleConstantModuleUnit",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleConstantModule",
+   "AlgebraicGeometry.Scheme.proEtaleFixedConstantModule",
+   "AlgebraicGeometry.Scheme.proEtaleConstantModuleUnit_existsUnique",
+   "AlgebraicGeometry.Scheme.proEtaleConstantModuleUnit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleConstantModuleUnit.lean",
+  "statement": "def proEtaleConstantModuleUnit (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A] : (sfIntrinsicModuleEquivalence X A).functor.obj (proEtaleFixedConstantModule X A) ≅ proEtaleConstantModule X A",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0dd46892",
+  "group": "Q13",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0dd46892",
+  "group": "Q13",
+  "result": "pass",
+  "note": "The Lean matches every node clause: finite comm ring A in Type u (the recorded interface's universe); arbitrary closed immersion i with j = i.openComplement.ι; the literal SheafOfModules.unit rank-one modules over proEtaleConstantRing; the recorded sfIntrinsicExtensionByZero and proEtaleConstantModuleDirectImage. ε is the open-adjunction transpose of the canonical restriction of constants, transported through the realization equivalence and the normalized rank-one isos; ρ is the sheafified a↦a map through the normalized sfIntrinsicDirectImageComparison.inv. The conclusion is ∃ ε≫ρ=0 with IsColimit of the cokernel cofork, the node's own equivalent form, with no extra clause and no qc or finiteness binder. New node def-pur-proetale-constant-module-unit is true and not a duplicate; its ∃!-then-choose definition is allowed by AGENTS.md (same pattern as sfIntrinsicDirectImageComparison) and has source and proof docstrings. The item node changes only lean plus three stmt_deps, all used to type ε and ρ. Statements match the files verbatim; one sorry per file, on theorems only; source and blueprint docstrings present; report sections real. Edge cases Z empty, Z = X, X empty and the zero ring are covered. nt_compile --json on both snapshot files exited 0 with no errors (11.7 s, 15.0 s)."
+ }
+}

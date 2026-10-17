@@ -214,5 +214,30 @@
   "group": "Q78",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q78-914633f38 (reviewer sub-agent of L); spot-checked: Reviewed the item, new node, unit/chapter route, cited DAG statements, Stacks Tags 07Z7/07Z8/07ZA, hypotheses, base-change morphism, coefficient category, edge cases, searches, duplicates, and long-step rule. Wrote review.md. No repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba6baeeb7",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Read node, Stacks 07Z8 and 07ZA(3), all stmt_deps records, Mathlib piScalarRight/IsLocalizedModule.isBaseChange/IsBaseChange.equiv, and PresentationFittingIdeal.lean in full. Kernel-row (n-k)-minor ideal with the top branch for n<=k matches the node; no f.g. kernel assumed; column embeddings only change signs. Conjuncts: (1) independence for every surjection; (2) every Algebra R A (any ring map), surjectivity and Ideal.map equality via the canonical baseChange plus piScalarRight; (3) LocalizedModule.Away via the canonical IsBaseChange equiv. No extra hypotheses; universes u v w independent and bound; lean.statement verbatim in the file. Edge cases n=0, n<=k, k=0, zero ring, g=0 and non-flat base change covered. Helpers have real data, source/blueprint docstrings and an 8-step proof plan; only sorry. No duplicate Fitting declaration in Mathlib, the project or the DAG. Reproduced clean compile with nt_compile.py --json (6.4 s, no diagnostics; a probe confirmed errors are reported). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PresentationFittingIdeal",
+  "declaration": "LinearMap.presentationFittingIdeal_independence_baseChange",
+  "declarations": [
+   "LinearMap.presentationFittingIdeal",
+   "LinearMap.baseChangePresentation",
+   "LinearMap.localizePresentationAway",
+   "LinearMap.presentationFittingIdeal_independence_baseChange"
+  ],
+  "file": "lean/Sheaf/RingTheory/PresentationFittingIdeal.lean",
+  "statement": "theorem presentationFittingIdeal_independence_baseChange {R : Type u} [CommRing R] {M : Type v} [AddCommGroup M] [Module R M] [Module.Finite R M] (k : ℕ) {n : ℕ} (π : (Fin n → R) →ₗ[R] M) (hπ : Function.Surjective π) : (∀ (n' : ℕ) (π' : (Fin n' → R) →ₗ[R] M), Function.Surjective π' → π.presentationFittingIdeal k = π'.presentationFittingIdeal k) ∧ (∀ (A : Type w) [CommRing A] [Algebra R A], Function.Surjective (π.baseChangePresentation A) ∧ (π.baseChangePresentation A).presentationFittingIdeal k = Ideal.map (algebraMap R A) (π.presentationFittingIdeal k)) ∧ (∀ g : R, Function.Surjective (π.localizePresentationAway g) ∧ (π.localizePresentationAway g).presentationFittingIdeal k = Ideal.map (algebraMap R (Localization.Away g)) (π.presentationFittingIdeal k))",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The three helper definitions give the ideal and the canonical base-changed/localized presentations introduced in this node, with real data. All ring maps are represented by arbitrary Algebra R A instances; algebraMap is the chosen ring map. The tensor factor order follows the recorded module-base-change dependency."
  }
 }

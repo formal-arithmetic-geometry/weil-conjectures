@@ -219,7 +219,8 @@
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "lem-cbc-proetale-extension-zero-comparison",
   "def-weil-pbc-derived-categories",
-  "lem-amb-unbounded-compact-support-comparisons"
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-sf-refinement-comparison-isomorphism"
  ],
  "mathlib_searches": [
   {
@@ -407,5 +408,36 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-acdbb00e8 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 10 steps, the new node, every cited statement, the DAG proof of thm-sf-comp-composition, and the main-20261015 construction of thm-sf-comp-composition and det-sf-comp-composition-interchange. I recomputed Steps 4-7 and 9 by hand. Step 4 applies the exchange transport with f=p, f'=r, g=i, g'=b and the open-unit normalization. Step 5 compares the two open-adjunction transposes. Step 7 uses the b composite law and the open composition law of e. Step 9 recomputes the mixed refinement square from lem-sf-proper-open-comparison-site-normalization and def-sf-refinement-comparison-isomorphism(b). All are correct, including for proper but nonfinite r and p. The new node lem-trf-proetale-composition-tower-normalization is true and statement-only. Its open-adjoint normalization is the one in the main-20261015 construction, where the map restricts over Y to the base-change identification. It is strictly smaller than the item and creates no cycle. Small cases checked: h=id, f=id, empty U, and gamma invertible by proper base change off V. It generalizes the finite-field-only lem-trf-compact-composition-tower-formula, which cannot serve here: wrong field, and it uses the proper-mate normalization. Coefficient categories are ordinary constant-Lambda etale and pro-etale throughout, with no silent identification. No statement was weakened and no SGA source is used. Fixes in the item: (1) Step 8 had a C4 citation gap: it did not show that the etale refinement map is the def-weil-pbc-proper-open-comparison alpha_u used in the site-normalization lemma. I added lem-amb-unbounded-compact-support-comparisons (its bounded-below restriction), lem-amb-etale-compact-comparisons and def-weil-pbc-proper-open-comparison, with a tool_uses entry for lem-amb-etale-compact-comparisons. (2) Step 6 named the naturality of gamma^p at the wrong morphism; it is now at e_{j,L}, with the square written out. proof_deps was regenerated. I accepted the declared generic tool uses, since unit sk-d-weil-push has no steps. The details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-541e0efe4",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Every hypothesis matches the node and none is stronger: field k, prime l invertible in k, E/Q_l finite, n:ℕ+, separated finite-type k-schemes and maps, the IsProper h ∨ IsProper f disjunction, arbitrary compactifications ch/cf/chf, L in D+. All three conclusions match: the composition square with the recorded compositors (Etale.unboundedEtaleLowerShriekCompIso; originCompositionAmbient), c = symm of compactSupportSiteComparison (b, then P(e)), correct order and direction; the refinement square with the actual def (b) refinement map; the proper case c = b under adjunction-built identity-open identifications. The statement is verbatim. Dependency repairs: cor-cbc-proper-coincidence now states that Ex_! equals the PBC exchange, using the recorded maps (the old record was only a Nonempty iso); the other three modules only migrate imports, plus two def (b) helpers in the owning refinement module. No hollow definitions; sorry only in theorems; docstrings and the 10 proof steps present. nt_compile --json on all 5 files: rc 0, clean. Direct importers: ProjectiveLineFullAdjunction compiles before and after; CompactificationCoherence, CompactCoefficientComposition, FiniteCoefficientDirectImage and EtaleGeometricBiduality fail at baseline from unrelated duplicate-import or DeltaRestriction errors, the same way with the delivery, so no regression. Observations only: the recorded pro-etale compositor and proper/open map are conjugations of the etale ones, so the squares are near-formal (inherited from thm-sf-comp-composition); E : Type (u+1) is a presentation convention, not a restriction."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperCompositionSiteTransport",
+  "declaration": "AlgebraicGeometry.ProEtale.properCompositionSiteTransport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.properTransportCoefficient",
+   "AlgebraicGeometry.ProEtale.properTransportCoefficient_finite",
+   "AlgebraicGeometry.ProEtale.properTransportComparison",
+   "AlgebraicGeometry.ProEtale.properTransportCandidateChange",
+   "AlgebraicGeometry.ProEtale.properTransportProEtaleComposition",
+   "AlgebraicGeometry.ProEtale.properTransportEtaleComposition",
+   "AlgebraicGeometry.ProEtale.properTransportComparisonAfterInner",
+   "AlgebraicGeometry.ProEtale.properCompositionSiteTransport",
+   "AlgebraicGeometry.ProEtale.properCompositionSiteTransport_refinement",
+   "AlgebraicGeometry.ProEtale.properCompositionSiteTransport_proper"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperCompositionSiteTransport.lean",
+  "statement": "theorem properCompositionSiteTransport (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] (_hl : IsUnit (l : k)) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ+) {U V W : Scheme.{u}} [U.Over (Spec (.of k))] [V.Over (Spec (.of k))] [W.Over (Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [IsSeparated (V ↘ Spec (.of k))] [IsSeparated (W ↘ Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [LocallyOfFiniteType (V ↘ Spec (.of k))] [QuasiCompact (V ↘ Spec (.of k))] [LocallyOfFiniteType (W ↘ Spec (.of k))] [QuasiCompact (W ↘ Spec (.of k))] (h : U ⟶ V) (f : V ⟶ W) [h.IsOver (Spec (.of k))] [f.IsOver (Spec (.of k))] [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (_hproper : IsProper h ∨ IsProper f) (ch : Compactification h) (cf : Compactification f) (chf : Compactification (h ≫ f)) (L : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (properTransportCoefficient l E n)))) : (comparisonUpperStar (ModuleCat.{u + 1} (properTransportCoefficient l E n)) W).mapDerivedCategory.map ((properTransportEtaleComposition (properTransportCoefficient l E n) h f ch cf chf).hom.app L.obj) ≫ (properTransportComparison (properTransportCoefficient l E n) chf L).hom = (properTransportComparisonAfterInner (properTransportCoefficient l E n) ch cf L).hom ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (properTransportCoefficient l E n)) cf).map (properTransportComparison (properTransportCoefficient l E n) ch L).hom ≫ (properTransportProEtaleComposition (properTransportCoefficient l E n) h f ch cf chf L).hom",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "All three clauses are named theorems: composition for arbitrary chosen compactifications with h proper OR f proper; the mixed square for the actual refinement map; and c=b under canonical identity-open proper identifications. Definitions assemble the specified canonical maps and bounded-below inclusion compatibilities. The added statement dependency is the already recorded refinement-comparison definition. No statement or split_report change."
  }
 }

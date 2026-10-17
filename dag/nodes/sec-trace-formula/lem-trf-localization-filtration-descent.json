@@ -16,7 +16,8 @@
   "def-sp-filtered-complex-subquotients",
   "def-weil-pbc-extension-by-zero",
   "def-weil-pbc-inverse-image",
-  "def-weil-pbc-direct-image"
+  "def-weil-pbc-direct-image",
+  "lem-trf-filtered-derived-hom-calculus"
  ],
  "proof": [
   {
@@ -182,5 +183,39 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q39-81b526581 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, Varshavsky §§5.1–5.2 and relevant Stacks passages. Repaired ambiguous filtration endpoints and supplied the missing forgetful-descent argument using finite filtered cones and existing lemmas. Clarified natural representative comparisons. Statement unchanged; no new nodes or cycles. Corrected JSON and detailed source checks are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-522c9cc00",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Re-delivery repairs the prior RETURN (F1/F2). T has F0=⊤, F2=⊥ and F1 = the degreewise image of the counit via e. S is pinned by d : q⋙S ≅ T⋙Q_F, omega by b, and gr p by isomorphisms; sectionIso is normalized by an explicit equation. The categories are DerivedCategory.Bounded and FiniteFiltered.Derived true (real localization at graded quasi-isos); hdegree covers only bounded complexes. Eight exactness binders on the recorded functors; Λ:Type(u+1) is the recorded coefficient convention, harmless for finite Λ; HasDerivedCategory.{u+2} is the standard model. Graded isomorphisms are abstract but the canonical ones follow from the pinned F1 and hdegree; the representative clause matches node step 4. Edge cases (empty U/Z, zero complex, p∉{0,1}) covered. lean.statement verbatim; node statement unchanged; added stmt_dep lem-trf-filtered-derived-hom-calculus is landed and acyclic (BFS). No hollow definitions, single sorry, docstrings with source/blueprint, no pro-etale. nt_compile of snapshot file: 6.5 s, exit 0, no errors or warnings. Non-blocking: unused RingedSiteModules import."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalizationFiltrationDescent",
+  "declaration": "AlgebraicGeometry.Etale.localization_filtration_descent",
+  "declarations": [
+   "AlgebraicGeometry.Etale.LocalizationCoefficients",
+   "AlgebraicGeometry.Etale.LocalizationSheaves",
+   "AlgebraicGeometry.Etale.localizationOpenStep",
+   "AlgebraicGeometry.Etale.localizationClosedStep",
+   "AlgebraicGeometry.Etale.localizationOpenStep_additive",
+   "AlgebraicGeometry.Etale.localizationClosedStep_additive",
+   "AlgebraicGeometry.Etale.localizationOpenStepComplex",
+   "AlgebraicGeometry.Etale.localizationClosedStepComplex",
+   "AlgebraicGeometry.Etale.LocalizationBoundedComplexes",
+   "AlgebraicGeometry.Etale.localizationBoundedInclusion",
+   "AlgebraicGeometry.Etale.localizationBoundedQuasiIso",
+   "AlgebraicGeometry.Etale.LocalizationFiltrationDescentData",
+   "AlgebraicGeometry.Etale.localization_filtration_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalizationFiltrationDescent.lean",
+  "statement": "theorem localization_filtration_descent (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U X Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i] (hcomplement : Set.range (i : Z → X) = (Set.range (j : U → X))ᶜ) [HasDerivedCategory.{u + 2} (LocalizationSheaves Λ X)] (hJinvL : PreservesFiniteLimits (Etale.openImmersionRestriction (LocalizationCoefficients Λ) j)) (hJinvC : PreservesFiniteColimits (Etale.openImmersionRestriction (LocalizationCoefficients Λ) j)) (hIL : PreservesFiniteLimits (Etale.upperStar (LocalizationCoefficients Λ) i)) (hIC : PreservesFiniteColimits (Etale.upperStar (LocalizationCoefficients Λ) i)) (hJL : PreservesFiniteLimits (Etale.openImmersionLowerShriek (LocalizationCoefficients Λ) j)) (hJC : PreservesFiniteColimits (Etale.openImmersionLowerShriek (LocalizationCoefficients Λ) j)) (hIstarL : PreservesFiniteLimits (Etale.lowerStar (LocalizationCoefficients Λ) i)) (hIstarC : PreservesFiniteColimits (Etale.lowerStar (LocalizationCoefficients Λ) i)) (hdegree : ∀ (B : LocalizationBoundedComplexes Λ X) (n : ℤ), ∃ hzero : ((Etale.openImmersionLowerShriekAdjunction (LocalizationCoefficients Λ) j).counit.app (B.obj.X n)) ≫ (Etale.upperStarLowerStarAdjunction (LocalizationCoefficients Λ) i).unit.app (B.obj.X n) = 0, (ShortComplex.mk ((Etale.openImmersionLowerShriekAdjunction (LocalizationCoefficients Λ) j).counit.app (B.obj.X n)) ((Etale.upperStarLowerStarAdjunction (LocalizationCoefficients Λ) i).unit.app (B.obj.X n)) hzero).ShortExact) : LocalizationFiltrationDescentData Λ j i",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of H3 at returned head 9ba3ac27feb6: the filtered target is now the actual CochainComplex.FiniteFiltered.Derived true localization of bounded complexes with finite filtrations, and the ordinary category is Mathlib DerivedCategory.Bounded. There is no arbitrary D or Presentation parameter. The conclusion includes the canonical filtration functor T, preservation of graded quasi-isomorphisms, and the descent comparison q ⋙ S ≅ T ⋙ Q; the first step is normalized to the actual counit image. The short exact sequence hypothesis now quantifies only over bounded complexes."
  }
 }

@@ -25,7 +25,12 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category",
   "lem-coef-projective-chains-monoidal-model",
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "def-coef-integral-derived-coefficients",
+  "def-coef-dg-derived-enrichment",
+  "lem-coef-dgcat-free-cell-calculus",
+  "lem-coef-algebroid-object-space-fibration",
+  "lem-coef-cat-infinity-opposite-involution"
  ],
  "proof": [
   {
@@ -296,5 +301,58 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-daa3cc358",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Every node clause checked against the Lean and the dependency declarations: localization at mappingwise quasi-isomorphisms with full coherent universal property and eta_S a functor equivalence; one coherent natural equivalence over all small sets with pinned arrows; comparison on cofibrant categories pinned for every arity including 0 (forward-order composition, Koszul convention consistent); functorial cofibrant replacement with cofibrant mapping complexes; natural mapping-object comparison on all of Cat S; degree-zero cohomology class pinned to the coefficient chain map and natural. Edge cases (S empty, singleton, zero complexes, empty/non-injective functions) covered; no extra assumptions or universe restrictions. Gates: no hollow definitions, 32 docstrings with source and blueprint, only the main theorem uses sorry, statement field verbatim, declaration list matches the file, no duplicate notion, five added landed statement deps with no cycle, commit touches 3 files. nt_compile: 23.7 s clean; one rerun hit the 60 s limit at load ~175; 34.3 s rc=0 with no diagnostics. Informational: second-reading section is the 2026-10-17 launcher placeholder; DgProjective reached through a transitive statement dependency."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FixedObjectEnrichedRectification",
+  "declaration": "SSet.Enhanced.Algebroid.FixedDG.fixed_object_enriched_rectification",
+  "declarations": [
+   "SSet.Enhanced.Algebroid.FixedDG.Cat",
+   "SSet.Enhanced.Algebroid.FixedDG.Hom",
+   "SSet.Enhanced.Algebroid.FixedDG.category",
+   "SSet.Enhanced.Algebroid.FixedDG.FF",
+   "SSet.Enhanced.Algebroid.FixedDG.TrivialFibration",
+   "SSet.Enhanced.Algebroid.FixedDG.Cofibrant",
+   "SSet.Enhanced.Algebroid.FixedDG.LocallyCofibrant",
+   "SSet.Enhanced.Algebroid.FixedDG.restrict",
+   "SSet.Enhanced.Algebroid.FixedDG.homComplex",
+   "SSet.Enhanced.Algebroid.FixedDG.source",
+   "SSet.Enhanced.Algebroid.FixedDG.objects",
+   "SSet.Enhanced.Algebroid.FixedDG.target",
+   "SSet.Enhanced.Algebroid.FixedDG.objectMap",
+   "SSet.Enhanced.Algebroid.FixedDG.algebra",
+   "SSet.Enhanced.Algebroid.FixedDG.pairEvaluation",
+   "SSet.Enhanced.Algebroid.FixedDG.bundle",
+   "SSet.Enhanced.Algebroid.FixedDG.bundleMap",
+   "SSet.Enhanced.Algebroid.FixedDG.sets",
+   "SSet.Enhanced.Algebroid.FixedDG.setVertex",
+   "SSet.Enhanced.Algebroid.FixedDG.setEdge",
+   "SSet.Enhanced.Algebroid.FixedDG.localizedHom",
+   "SSet.Enhanced.Algebroid.FixedDG.Rectification",
+   "SSet.Enhanced.Algebroid.FixedDG.Rectification.image",
+   "SSet.Enhanced.Algebroid.FixedDG.Rectification.homEdge",
+   "SSet.Enhanced.Algebroid.FixedDG.stringTensor",
+   "SSet.Enhanced.Algebroid.FixedDG.stringComposition",
+   "SSet.Enhanced.Algebroid.FixedDG.stringVertex",
+   "SSet.Enhanced.Algebroid.FixedDG.localizedMap",
+   "SSet.Enhanced.Algebroid.FixedDG.HasCofibrantNormalization",
+   "SSet.Enhanced.Algebroid.FixedDG.objectFamily",
+   "SSet.Enhanced.Algebroid.FixedDG.UnderlyingComparison",
+   "SSet.Enhanced.Algebroid.FixedDG.fixed_object_enriched_rectification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FixedObjectEnrichedRectification.lean",
+  "statement": "theorem fixed_object_enriched_rectification {E : SSet.{u + 2}} (p : E ⟶ monoidalSimplexBase.{u + 2}) (unit : UnitSection p) (D : IntegralDerivedCoefficients.{u} p) : ∃ R : Rectification D, HasCofibrantNormalization R ∧ Nonempty (UnderlyingComparison unit R)",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the actual fixed-object Mathlib enrichments, mappingwise quasi-isomorphisms, the recorded finite-power relative-nerve algebroids, and the full coherent localization universal property. Set-indexed functors and transformations into CatInfinity retain all restriction coherences. The normalization includes all active arities, functorial fixed-object cofibrant replacement, actual localized mapping chain maps and closed-arrow H^0 classes. All structures are conclusion data, with only the main theorem postponed."
  }
 }

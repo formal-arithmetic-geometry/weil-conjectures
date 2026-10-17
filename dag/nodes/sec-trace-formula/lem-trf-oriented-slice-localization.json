@@ -8,7 +8,8 @@
   "def-weil-pbc-etale-site",
   "lem-trf-oriented-product-universal",
   "def-weil-pbc-sheafification",
-  "def-pur-localized-ringed-site"
+  "def-pur-localized-ringed-site",
+  "lem-trf-oriented-affine-neighbourhood-limit"
  ],
  "proof": [
   {
@@ -256,5 +257,30 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-4f915e320 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's seven steps, every cited node's statement in full, ILO Travaux de Gabber XI 1.9–1.10(b) on printed pp. 175–176 (diagram 1.a, the equivalence m in (1.b), the localization arrow (1.c)), and the blueprint proof of lem-trf-local-term-locality in main-20261015. There are no new nodes. The statement matches the source and is not weakened. The source only asserts that m is an equivalence; the split proves it. Step 1 is correct: an object over Z is the same as an arrow A→U×_V B, and the componentwise etale-site localization applies because U, V, W are etale over X, S, Y. Step 2 is correct: in both sites the last component of a type-(c) cover is D×_B B'. Its terse claim that lifting commutes with pullback holds because the generating covers are stable under pullback up to isomorphism (pullbacks are componentwise), so every cover is a composite of generators whose intermediate objects already lie over Z. Step 3 is correct: Stacks 00Y1 is used without assuming subcanonicity, which matters because the triple site is not subcanonical. Steps 4 to 7 are correct: the fibre over eta(a) is F(T); the functor T↦T×Z preserves finite limits and covers; the canonical 2-morphism is recovered from the cited inverse-image formula, not from that node's proof; and I checked both round trips of the adjunction through the projection and diagonal identities, so t is j_Z. Small cases checked: the final triple, an empty component, a type-(c) map with B'=B, and h_Z not a sheaf. I found no duplicate in the DAG; the parent lem-trf-oriented-affine-slice-site is strictly larger. There is no cycle and the unit route is unchanged. I accept the three tool_uses, which the worker recorded itself: etale-site-localization-open (already proved in slopmaster2), and localized-sheaves-over-representable and left-exact-site-inverse-image-tensor, generic site lemmas that the trace-formula unit lacks. The left-exact one is already a recorded tool of lem-trf-oriented-product-universal in the same unit. No changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9f5ec2ec",
+  "group": "NF",
+  "result": "pass",
+  "note": "Repair of returned f646f851403d. H3 fixed: ∃ t : GeometricMorphism Q P with t.direct ⋙ sheafToPresheaf ≅ restriction along the real Comma.map orientedSliceBaseChange Z (components A×_X U, B×_S V, D×_Y W checked by rfl; structure arrows checked by simp through the canonical Over.pullbackComp isomorphisms), and ∃ e : Over H_Z ≌ Q with Over.star H_Z ⋙ e.functor ≅ t.inverse, giving the over-P and slice-projection = localization-morphism clauses of ILO XI 1.10(b)(1.b)-(1.c). H4 fixed: reuses landed OrientedEtaleTriples, orientedEtaleTopology, orientedEtaleAssociated, orientedTripleLeft/Right and Scheme.Hom.Etale. H8 fixed: source place and blueprint id on module and all defs; theorem docstring has all seven proof steps. H9 fixed: unused import removed. lean.statement verbatim; node differs from live only in lean and in stmt_deps gaining the landed lem-trf-oriented-affine-neighbourhood-limit (allowed by §5); no DAG cycle; no extra hypotheses; single universe u with Type (u+1) values as landed, no universe equality imposed. nt_compile --json: clean in 9.3 s; sorryAx only in the theorem, helpers sorry-free. Minor, not a fault: the def-pur-localized-ringed-site stmt_dep import is unused in the statement."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.OrientedProductSliceLocalization",
+  "file": "lean/Sheaf/CategoryTheory/Sites/OrientedProductSliceLocalization.lean",
+  "declaration": "CategoryTheory.OrientedProduct.oriented_slice_localization",
+  "declarations": [
+   "CategoryTheory.OrientedProduct.orientedSliceLeftBaseChangeIso",
+   "CategoryTheory.OrientedProduct.orientedSliceRightBaseChangeIso",
+   "CategoryTheory.OrientedProduct.orientedSliceBaseChange",
+   "CategoryTheory.OrientedProduct.oriented_slice_localization"
+  ],
+  "statement": "theorem oriented_slice_localization (X S Y : Scheme.{u}) (f : X ⟶ S) (g : Y ⟶ S) (U : X.Etale) (V : S.Etale) (W : Y.Etale) (a : U ⟶ f.Etale.obj V) (b : W ⟶ g.Etale.obj V) : ∃ (t : GeometricMorphism (Sheaf (orientedEtaleTopology (orientedTripleLeft (⟨(U, W), V, (a, b)⟩ : OrientedEtaleTriples f g)) (orientedTripleRight (⟨(U, W), V, (a, b)⟩ : OrientedEtaleTriples f g))) (Type (u + 1))) (Sheaf (orientedEtaleTopology f g) (Type (u + 1)))), Nonempty (t.direct ⋙ sheafToPresheaf (orientedEtaleTopology f g) (Type (u + 1)) ≅ sheafToPresheaf (orientedEtaleTopology (orientedTripleLeft (⟨(U, W), V, (a, b)⟩ : OrientedEtaleTriples f g)) (orientedTripleRight (⟨(U, W), V, (a, b)⟩ : OrientedEtaleTriples f g))) (Type (u + 1)) ⋙ (whiskeringLeft _ _ (Type (u + 1))).obj (orientedSliceBaseChange (⟨(U, W), V, (a, b)⟩ : OrientedEtaleTriples f g)).op) ∧ ∃ e : Over ((orientedEtaleAssociated f g).obj (⟨(U, W), V, (a, b)⟩ : OrientedEtaleTriples f g)) ≌ Sheaf (orientedEtaleTopology (orientedTripleLeft (⟨(U, W), V, (a, b)⟩ : OrientedEtaleTriples f g)) (orientedTripleRight (⟨(U, W), V, (a, b)⟩ : OrientedEtaleTriples f g))) (Type (u + 1)), Nonempty (Over.star ((orientedEtaleAssociated f g).obj (⟨(U, W), V, (a, b)⟩ : OrientedEtaleTriples f g)) ⋙ e.functor ≅ t.inverse)",
+  "by": "NF",
+  "date": "2026-10-17",
+  "branch": "newtargets-dag",
+  "note": "Repair of f646f851403d: reuse the landed scheme etale triple/topology/associated functors and Scheme.Hom.Etale. Construct the componentwise base-change site functor from canonical pullback composition isomorphisms. The geometric morphism t is existentially specified by its complete natural direct-image formula; the equivalence e is required to intertwine Over.star with t.inverse. Added the landed owning node of the reused wrappers to stmt_deps; no informal statement change."
  }
 }

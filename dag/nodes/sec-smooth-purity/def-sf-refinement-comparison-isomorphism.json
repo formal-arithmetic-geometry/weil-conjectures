@@ -96,21 +96,24 @@
    "AlgebraicGeometry.ProEtale.refinementComparisonAtWitness",
    "AlgebraicGeometry.ProEtale.RefinementFiniteLevelOrigin",
    "AlgebraicGeometry.ProEtale.refinementFiniteLevelFixedObject",
-   "AlgebraicGeometry.ProEtale.refinementComparisonIsomorphism"
+   "AlgebraicGeometry.ProEtale.refinementComparisonIsomorphism",
+   "AlgebraicGeometry.ProEtale.properTransportRefinementPlus",
+   "AlgebraicGeometry.ProEtale.properTransportRefinement"
   ],
   "file": "lean/Sheaf/Paper/RefinementComparisonIsomorphism.lean",
   "statement": "def refinementComparisonIsomorphism (K₀ : Type u) [Field K₀] (l : ℕ) [Fact l.Prime] (_hl : IsUnit (l : K₀)) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) (hn : 1 ≤ n) {X Y : Scheme.{u}} [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))] [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))] [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))] (f : X ⟶ Y) [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] {c₁ c₂ : Compactification f} (r : c₁.Refinement c₂) (O : RefinementFiniteLevelOrigin l E n hn X) : (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) c₁).obj (refinementFiniteLevelFixedObject l E n hn X O) ≅ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) c₂).obj (refinementFiniteLevelFixedObject l E n hn X O)",
   "branch": "newtargets-dag",
-  "by": "Q24",
-  "date": "2026-10-15",
-  "existing": false
+  "by": "Q44",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Section 1(B): the recorded interface exposes the refinement at a coefficient-realized witness but not its direct evaluation on a bounded-below comparison input in the arbitrary coefficient universe. The entire recorded construction is retained. Two definitions expose precisely that specialization and its ambient inclusion: inverse derived direct-image compositor followed by the proper image of the inverse normalized proper/open map. The finite-coefficient imports are updated to their current module paths. No witness is forgotten or arbitrary isomorphism selected."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-390f3e863",
-  "group": "Q24",
+  "reviewer": "NT-stage2-cc-541e0efe4",
+  "group": "Q44",
   "result": "pass",
-  "note": "Immutable delivery matches the node and dependencies; edge cases, universes, docstrings, source, and canonical constructions checked. All four files passed dependency-aware scompile.py compilation with server confirmation."
+  "note": "Every hypothesis matches the node and none is stronger: field k, prime l invertible in k, E/Q_l finite, n:ℕ+, separated finite-type k-schemes and maps, the IsProper h ∨ IsProper f disjunction, arbitrary compactifications ch/cf/chf, L in D+. All three conclusions match: the composition square with the recorded compositors (Etale.unboundedEtaleLowerShriekCompIso; originCompositionAmbient), c = symm of compactSupportSiteComparison (b, then P(e)), correct order and direction; the refinement square with the actual def (b) refinement map; the proper case c = b under adjunction-built identity-open identifications. The statement is verbatim. Dependency repairs: cor-cbc-proper-coincidence now states that Ex_! equals the PBC exchange, using the recorded maps (the old record was only a Nonempty iso); the other three modules only migrate imports, plus two def (b) helpers in the owning refinement module. No hollow definitions; sorry only in theorems; docstrings and the 10 proof steps present. nt_compile --json on all 5 files: rc 0, clean. Direct importers: ProjectiveLineFullAdjunction compiles before and after; CompactificationCoherence, CompactCoefficientComposition, FiniteCoefficientDirectImage and EtaleGeometricBiduality fail at baseline from unrelated duplicate-import or DeltaRestriction errors, the same way with the delivery, so no regression. Observations only: the recorded pro-etale compositor and proper/open map are conjugations of the etale ones, so the squares are near-formal (inherited from thm-sf-comp-composition); E : Type (u+1) is a presentation convention, not a restriction."
  }
 }

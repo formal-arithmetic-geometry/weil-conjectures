@@ -311,5 +311,23 @@
   "group": "Q52",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q52-be1b41879 (reviewer sub-agent of L); spot-checked: Read the item, helper, unit, blueprint route, all cited node statements, and cited sources. Verified hypotheses and all ten proof steps, including integral and reducible cases, density, reducedness, finite surjectivity, modifications, edge cases, searches, and route restrictions. Review written to review.md; no repair needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c737e701c",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read node, both stmt_deps (IsAlteration/IsModification in Sheaf.Paper.OrgogozoInductionData; Mathlib IsFinite), all 26 proof_dep lean records, the delivered module and node. Every clause matches: reduced+Noetherian hypotheses (IsNoetherian = qc + loc. Noetherian), IsAlteration a; exists T' S' u v p with IsModification u/v, IsFinite p, Surjective p, u ≫ a = p ≫ v, and IsIntegral S → reduced S', T' ∧ (IsIntegral T → IsIntegral S'). Shared witnesses are classically equivalent to the node's 'may be taken'. #check with full names confirms the scheme-level IsIntegral/Surjective/IsFinite; one universe; no auto-bound variables. Edge cases covered: empty S (no Nonempty hypothesis), reducible S/T. No duplicate statement (the of_etale refinement is a different result). lean.statement verbatim equal to the file signature; docstrings carry source place, blueprint tag and all 10 proof steps; proof-dep imports non-public; lines <=100; sorry only. nt_compile --json clean (exit 0; error detection confirmed with a deliberate error; axioms propext/sorryAx/choice/Quot.sound). Minor: docstring ids split at hyphens; inherited mis-recorded lem-pc-closed-imm-base-change declaration (outside this delivery). Orgogozo PDF unavailable locally; judged against the stage-1-reviewed node."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AlterationFiniteRefinement",
+  "declaration": "AlgebraicGeometry.Orgogozo.exists_finite_surjective_refinement",
+  "file": "lean/Sheaf/Paper/AlterationFiniteRefinement.lean",
+  "statement": "theorem exists_finite_surjective_refinement {T S : Scheme.{u}} [IsReduced T] [IsReduced S] [IsNoetherian T] [IsNoetherian S] (a : T ⟶ S) (ha : IsAlteration a) : ∃ (T' S' : Scheme.{u}) (u : T' ⟶ T) (v : S' ⟶ S) (p : T' ⟶ S'), IsModification u ∧ IsModification v ∧ IsFinite p ∧ Surjective p ∧ u ≫ a = p ≫ v ∧ (IsIntegral S → IsReduced S' ∧ IsReduced T' ∧ (IsIntegral T → IsIntegral S'))",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

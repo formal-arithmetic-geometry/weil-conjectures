@@ -242,5 +242,35 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-47d763d78 (reviewer sub-agent of L); spot-checked: Corrected fixes/dag/nodes/sec-smooth-purity/lem-pur-supported-hom-adjunction-transpose.json: created.item incorrectly named lem-pur-exterior-product-frame instead of the delivered item. Full mathematical review is recorded in review.md; no new nodes or mathematical gaps found.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-72836b559",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Read node, all statement-dep Lean (ProEtaleSupportedExteriorProduct, SupportCohomology, SupportedCohomologyHom, RHomDerivedRoof, PurityFiniteSetting), module, report. Clause-by-clause match: P.Coefficient=A_{E,n}; IsClosedImmersion i; IsLocallyNoetherian X; Scheme.ProEt.topology with fixed-ring module sheaves as in the recorded C_i dependency; C_i(A)=lowerStar(constantSheaf A) in degree 0; actual normalized supportedCoefficientDerivedAdjunction; arbitrary F in D+; a in Z unrestricted. Exists-chi plus SupportedHomEvaluationNormalization is equivalent to the canonical chi: unique because the derived unit is invertible on bounded-below injective complexes and naturality fixes the rest; exists because the RHS equals the exists_rhom_hom_derived_roof cocycle formula (identity resolution; quotientCompQhIso has identity components). Signs checked: rightShift, singleFunctors.shiftIso and mapDerivedCategorySingleFunctor carry no sign, consistent with node step 6. Class-of-morphism via singleFunctorCompHomologyFunctorIso at 1 covers all classes (A free of rank 1). Edge cases a<=0, empty Z/X, i=id, universes u/u+1 all bound. Gates: no hollow defs, single sorry (main theorem), source+blueprint docstrings with 6-step proof, node changed only by the added lean block, lean.statement verbatim, real Worker report and Second reading sections (the second reading is the same worker rereading, stated openly). nt_compile --json: clean, 29.0 s and 19.1 s. Minor, no action: duplicate Finite P.Coefficient instance (project pattern); H^a_Z via unbounded supportedSectionsDerived, canonically equal to derivedSupportSections on D+."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportedHomAdjunctionTranspose",
+  "declaration": "AlgebraicGeometry.ProEtale.supportedHom_adjunction_transpose",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.supportedHomCoefficientFinite",
+   "AlgebraicGeometry.ProEtale.supportedHomCohomologyFunctor",
+   "AlgebraicGeometry.ProEtale.supportedHomMorphismFunctor",
+   "AlgebraicGeometry.ProEtale.supportedHomDerivedUnit",
+   "AlgebraicGeometry.ProEtale.supportedHomCycleClass",
+   "AlgebraicGeometry.ProEtale.supportedHomClassOfMorphism",
+   "AlgebraicGeometry.ProEtale.supportedHomShiftedTranspose",
+   "AlgebraicGeometry.ProEtale.SupportedHomEvaluationNormalization",
+   "AlgebraicGeometry.ProEtale.supportedHom_adjunction_transpose"
+  ],
+  "file": "lean/Sheaf/Paper/SupportedHomAdjunctionTranspose.lean",
+  "statement": "theorem supportedHom_adjunction_transpose (P : WeilConjectures.PurityFiniteSetting.{u}) {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] [IsLocallyNoetherian X] (a : ℤ) : ∃ χ : supportedHomCohomologyFunctor P.Coefficient i a ≅ supportedHomMorphismFunctor P.Coefficient i a, SupportedHomEvaluationNormalization P.Coefficient i a χ ∧ ∀ (F : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))) (f : (DerivedCategory.singleFunctor (ModuleCat.{u + 1} P.Coefficient) a).obj (ModuleCat.of P.Coefficient P.Coefficient) ⟶ (supportedSectionsDerived P.Coefficient i).obj F.obj), χ.hom.app F (supportedHomClassOfMorphism P.Coefficient i F a f) = supportedHomShiftedTranspose P.Coefficient i F a f",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The natural isomorphism is specified existentially together with its injective-cocycle evaluation normalization. The equality is quantified over all morphisms A[-a] → RΓ_Z(F); evaluation of degree-a cohomology at 1 is the inverse of the stipulated class-to-morphism identification. Thus it states χ(x)=x^flat[a] for every class, with no arbitrary choice of an unnormalized supported-Hom isomorphism. Helpers only spell out the canonical unit, cycle class and shift comparisons of this node."
  }
 }

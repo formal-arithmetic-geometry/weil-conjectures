@@ -257,5 +257,27 @@
   "group": "Q66",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-d3c28a032 (reviewer sub-agent of L); spot-checked: Read the item, the parent lem-trf-orgogozo-good-modification and every cited statement, including the blueprint_update versions. Checked the Stacks sources locally: flat.tex Tags 081S and 081T (081T's proof ends 'some details omitted') and divisors.tex Tags 080M and 080N. The Orgogozo paper and RG71 I §5.3.3 are not in literature/; the report correctly lists them as WANTED and marks the proof as agent-written. The statement is not weakened, and the parent's three uses need exactly it. Step 1: the minimal-closed-subset argument shows every open of S is quasi-compact, and quasi-separatedness follows from the definition. Step 2: W, the intersection of the opens D_i where each q_i is an isomorphism, is nonempty, dense and quasi-compact because S is irreducible. Step 3: the elimination statement applies to (U_i, W, q_i) and all its hypotheses hold. If its density clause is read narrowly, the already-cited lemma-nagata-conrad-dense-in-admissible-blowup still gives topological density, which is all step 4 needs. Step 4 correctly writes out the omitted details of 081T: the strict transform is closed and the projection is a closed map, so the image is closed and contains a dense set; the open immersion is therefore surjective, hence an isomorphism, and gives h_i with q_i h_i = b_i. Step 5 applies the extension (080M) and common blow-up (080N) clauses with W inside U_i. Steps 6 and 7 follow from the fibre-product universal property and from properness, the isomorphism over W and density for the blow-up q, which are exactly the modification conditions. The finite-family and empty-family cases are correct. Edge cases tested: a field base, n=1, repeated opens, an empty U_i, a nonreduced V_i, and a non-separated S. There are no new nodes. A DAG grep for 081S/081T/081U/080M/080N, dominate and common modification found no duplicate. All cited off-unit statements are closed in slopmaster2, so they count as tools and the route is fine. Accepted the three declared tool_uses: the Noetherian minimal closed subset lemma, sk-lem-nagata-sketch-elimination and sk-lem-nagata-sketch-blowups. No SGA source is used, and no changes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15cfaa36c",
+  "group": "Q72",
+  "result": "fix",
+  "note": "Statement matches node lem-trf-modifications-zariski-refinement clause by clause: IsIntegral+IsNoetherian S, finite cover Fin n with ⨆U i=⊤, q i : V i ⟶ (U i).toScheme with recorded Orgogozo.IsModification (the explicit compactness argument is a Prop, so no extra assumption), conclusion ∃ S' p, IsModification p ∧ ∀ i ∃ a, a ≫ q i = pullback.snd p (U i).ι, plus the finite-family corollary. Edge cases checked: n=0 impossible on nonempty S, empty U_i, empty family via identity, single universe u. No defs; both proofs exactly sorry (#print axioms); docstrings carry source, blueprint id and the 7 proof steps; non-public imports are exactly the proof_deps modules; lines at most 92 chars; lean.statement verbatim; only the lean field changed; no duplicate declaration found. nt_compile.py --json compiled cleanly (rc=0, 5.8 s/10.5 s). Only finding H1/H11: the '## Second reading by Q72' section was a placeholder; fixes/lem-trf-modifications-zariski-refinement.report.md replaces the report with the worker report kept verbatim and a real clause-by-clause second reading."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ModificationsZariskiRefinement",
+  "declaration": "AlgebraicGeometry.Orgogozo.exists_modification_zariski_refinement",
+  "declarations": [
+   "AlgebraicGeometry.Orgogozo.exists_modification_zariski_refinement",
+   "AlgebraicGeometry.Orgogozo.exists_common_modification_refinement"
+  ],
+  "file": "lean/Sheaf/Paper/ModificationsZariskiRefinement.lean",
+  "statement": "theorem exists_modification_zariski_refinement (S : Scheme.{u}) [IsIntegral S] [IsNoetherian S] (n : ℕ) (U : Fin n → S.Opens) (hcover : (⨆ i, U i) = ⊤) (V : Fin n → Scheme.{u}) (q : ∀ i : Fin n, V i ⟶ (U i).toScheme) (hq : ∀ i : Fin n, @IsModification (V i) (U i).toScheme inferInstance inferInstance (isCompact_iff_compactSpace.mp (TopologicalSpace.NoetherianSpace.isCompact (U i : Set S))) (q i)) : ∃ (S' : Scheme.{u}) (p : S' ⟶ S), IsModification p ∧ ∀ i : Fin n, ∃ a : pullback p (U i).ι ⟶ V i, a ≫ q i = pullback.snd p (U i).ι",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

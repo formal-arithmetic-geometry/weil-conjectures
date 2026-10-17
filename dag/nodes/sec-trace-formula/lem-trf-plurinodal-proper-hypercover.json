@@ -18,7 +18,8 @@
   "def-kun-topological-krull-dimension",
   "def-pc-scheme-fibre",
   "pqf-def-locnoeth",
-  "def-weil-pbc-quasi-compact-scheme"
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-trf-proper-hypercover"
  ],
  "proof": [
   {
@@ -399,5 +400,27 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q82-8178c4ab7 (reviewer sub-agent of L); spot-checked: Reviewed item and both new nodes against Orgogozo Prop. 3.3.1/Lem. 3.3.2, de Jong Thm. 5.9, and Stacks Tag 02JX. All 12 steps, hypotheses, citations, edge cases, route constraints, searches, and duplicate checks pass; no SGA 4/4½ or forbidden batch-5 dependencies. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-38a015b1a",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Matched every hypothesis and conclusion of the node against exists_plurinodal_proper_hypercover: integral, excellent, Noetherian, finite-dimensional S and X; f proper dominant; T integral, Noetherian, excellent; IsAlteration a; Y a simplicial object over X ×_S T with IsProperHypercover; degree 0 isomorphic over T to an AlmostPlurinodalDatum; each tower's length equals the generic-fibre dimension; each degree finite type with its own fibre-dimension bound; dim T = dim S. No extra assumptions or universe restriction. New node def-trf-proper-hypercover: canonical matching cone from the existing proper-face diagram, choice-independent; checked against Stacks spaces-simplicial (degree 0 is the augmentation, degree 1 the fibre product, higher degrees the coskeleton term); no duplicate in the project's Lean or the DAG. SemistableTower.length is a real recursive definition. The only sorry is the item theorem. Docstrings carry the source place, blueprint tag and 12-step proof. Recorded statements appear verbatim in their files. nt_compile.py --json on both files: exit 0, no diagnostics. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PlurinodalProperHypercover",
+  "declaration": "AlgebraicGeometry.Orgogozo.exists_plurinodal_proper_hypercover",
+  "declarations": [
+   "AlgebraicGeometry.Orgogozo.SemistableTower.length",
+   "AlgebraicGeometry.Orgogozo.exists_plurinodal_proper_hypercover"
+  ],
+  "file": "lean/Sheaf/Paper/PlurinodalProperHypercover.lean",
+  "statement": "theorem exists_plurinodal_proper_hypercover {S X : Scheme.{u}} [IsIntegral S] [IsIntegral X] [IsNoetherian S] [IsNoetherian X] (hS : IsExcellentScheme S) (hX : IsExcellentScheme X) (hdimS : topologicalKrullDim S < ⊤) (hdimX : topologicalKrullDim X < ⊤) (f : X ⟶ S) [IsProper f] [IsDominant f] : ∃ (T : Scheme.{u}) (a : T ⟶ S) (_ : IsIntegral T) (_ : IsNoetherian T) (D : AlmostPlurinodalDatum T) (Y : SimplicialObject (Over (pullback f a))) (e : (Y.obj (op (SimplexCategory.mk 0))).left ≅ D.source), IsExcellentScheme T ∧ IsAlteration a ∧ IsProperHypercover Y ∧ e.hom ≫ D.morphism = (Y.obj (op (SimplexCategory.mk 0))).hom ≫ pullback.snd f a ∧ (∀ i : Fin D.count, ((D.towers i).length : WithBot ℕ∞) = topologicalKrullDim (f.fiber (genericPoint S))) ∧ (∀ n : ℕ, LocallyOfFiniteType ((Y.obj (op (SimplexCategory.mk n))).hom ≫ pullback.snd f a) ∧ QuasiCompact ((Y.obj (op (SimplexCategory.mk n))).hom ≫ pullback.snd f a) ∧ ∃ b : ℕ, ∀ t : T, topologicalKrullDim (((Y.obj (op (SimplexCategory.mk n))).hom ≫ pullback.snd f a).fiber t) ≤ (b : WithBot ℕ∞)) ∧ topologicalKrullDim T = topologicalKrullDim S",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

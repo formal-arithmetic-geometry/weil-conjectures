@@ -158,10 +158,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-85fb5df6a",
-  "group": "Q68",
-  "result": "fix",
-  "note": "Checked all 14 recorded dependency declarations, every hypothesis and conclusion clause against the node (Gabber Exposé X Thm 3.5 Steps 2/5), the edge cases (d=1, empty Z, field and DVR cases), the universes, and that lean.statement is verbatim the file's signature; docstrings, sorry-only proof and both report sections are present. Finding (H3): the field case of hbase was `Nonempty (Field A)`, a field structure unrelated to the given CommRing. A compiled test shows Nonempty (Field ℤ) holds while ¬IsField ℤ, so the theorem wrongly covered Spec ℤ. Fixed to `IsField A` in fixes/lean/Sheaf/AlgebraicGeometry/AlterationRelativeCurvePreparation.lean (line 48 only), and the report fix fixes/lem-trf-alteration-relative-curve-preparation.report.md documents it. The delivered and fixed modules both compile with nt_compile.py (about 2.5 s, no errors)."
+  "reviewer": "NT-stage2-cc-7ec971d37",
+  "group": "NL",
+  "result": "pass",
+  "note": "Re-delivery of the landed Q68 module, which already has the reviewer's IsField fix; it differs only by one docstring sentence and lean.by=NL. Every hypothesis and conclusion clause matches the node, which matches Gabber Expose X Thm 3.5 Steps 2/5: field-or-excellent-DVR base, generic point, proper dominant finite-type integral X, dim X_s=d>=1, nowhere-dense closed Z; excellent integral X1,Y; h proper, dominant, finite over a dense open; q IsHProjective, proper, dominant, finite type with dim Y_s=d-1; f proper dominant; h≫p=f≫q; generic fibre smooth of relative dimension 1 and integral; reduced h^-1 Z fibre finite and etale (empty allowed). No extra assumptions; one universe u; edge cases d=1, empty Z and both bases checked. All 14 dependency records agree with the declarations used; nothing hollow; sorry only; source and blueprint docstrings present; lean.statement matches the signature verbatim. nt_compile.py --json is clean (10.2 s, rc 0). The Second reading section is the standard 2026-10-17 placeholder, non-blocking."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.AlterationRelativeCurvePreparation",
@@ -169,7 +169,7 @@
   "file": "lean/Sheaf/AlgebraicGeometry/AlterationRelativeCurvePreparation.lean",
   "statement": "theorem alteration_relative_curve_preparation (A : Type u) [CommRing A] (hbase : IsField A ∨ ∃ hD : IsDomain A, Nonempty (@IsDiscreteValuationRing A inferInstance hD) ∧ IsExcellent A) (S : Scheme.{u}) (eS : S = Spec (.of A)) (s : S) (hs : IsGenericPoint s Set.univ) (X : Scheme.{u}) (p : X ⟶ S) [IsIntegral X] (hp : IsProper p) (hdom : DenseRange p.base) (hft : LocallyOfFiniteType p ∧ QuasiCompact p) (d : ℕ) (hd : topologicalKrullDim (p.fiber s) = (d : WithBot ℕ∞)) (hdpos : 1 ≤ d) (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i] (hZ : ∀ ξ : X, IsGenericPoint ξ Set.univ → ξ ∉ Set.range i.base) : ∃ (X₁ Y : Scheme.{u}) (h : X₁ ⟶ X) (q : Y ⟶ S) (f : X₁ ⟶ Y), IsIntegral X₁ ∧ (∀ U : X₁.Opens, IsAffineOpen U → IsExcellent Γ(X₁, U)) ∧ IsIntegral Y ∧ (∀ U : Y.Opens, IsAffineOpen U → IsExcellent Γ(Y, U)) ∧ IsProper h ∧ DenseRange h.base ∧ (∃ U : X.Opens, Dense (U : Set X) ∧ IsFinite (h ∣_ U)) ∧ IsHProjective q ∧ IsProper q ∧ DenseRange q.base ∧ (LocallyOfFiniteType q ∧ QuasiCompact q) ∧ topologicalKrullDim (q.fiber s) = ((d - 1 : ℕ) : WithBot ℕ∞) ∧ IsProper f ∧ DenseRange f.base ∧ h ≫ p = f ≫ q ∧ (∀ y : Y, IsGenericPoint y Set.univ → SmoothOfRelativeDimension 1 (f.fiberToSpecResidueField y) ∧ IsIntegral (f.fiber y) ∧ IsFinite (((((Limits.pullback h i).nilradical.subschemeι ≫ Limits.pullback.fst h i) ≫ f).fiberToSpecResidueField y)) ∧ Etale (((((Limits.pullback h i).nilradical.subschemeι ≫ Limits.pullback.fst h i) ≫ f).fiberToSpecResidueField y)))",
   "branch": "newtargets-dag",
-  "by": "Q68",
+  "by": "NL",
   "date": "2026-10-18",
   "existing": false,
   "fixed_by": "NT-stage2-cc-85fb5df6a"

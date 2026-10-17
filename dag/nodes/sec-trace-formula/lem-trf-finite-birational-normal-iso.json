@@ -141,5 +141,23 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-ce3a0a5dd (reviewer sub-agent of L); spot-checked: Read in full against the sources. Stacks morphisms.tex Tag 0AB1 (lemma-finite-birational-over-normal) matches the item clause by clause. Properties Tag 033L (lemma-integral-normal) is proved there only by citing Algebra Tag 030B (lemma-normality-is-local), and I read both. Item statement: kept. It is correct only when 'inducing' is read as f(generic point of X)=generic point of Y with the stalk map an isomorphism; an abstract field isomorphism would make it false (closed point of a non-discrete valuation ring of C whose residue field is C). That is the parent's reading, and Step 1 now says it explicitly. Small cases checked: identity; cusp normalisation (target normality needed); A^1 minus 0 into A^1 (finiteness needed); k[t^p]⊂k[t] (birationality needed). Every step's citations say what the step uses. There is no route issue (all deps are definitions or Mathlib leaves), no SGA, and no tool_uses. No existing node or Mathlib declaration states 0AB1. Three repairs, in the whole corrected file fixes/dag/nodes/sec-trace-formula/lem-trf-finite-birational-normal-iso.json: (1) removed the proof-only lem-trf-normal-affine-open-domain from stmt_deps; (2) added the missing finite-implies-integral citation lem-weil-pbc-finite-algebra-is-integral (Stacks 00GK) to Step 2; (3) folded the new node into Step 2 and dropped it. The new node is true (033L forward direction) and is not a duplicate or a restated clause, but it is a two-line consequence of the existing Mathlib leaves lem-weil-pbc-affine-open-stalk-localization (A_m isomorphic to O_{Y,y}) and lem-weil-pbc-normal-domain-of-local-normal (030B), so under rule C1 it is a step, not a node. I also wrote Step 1's generic-point and germ-compatibility argument and Step 3's target-local gluing in full; proof_deps is now the union of all uses.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b71dadbd",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0AB1 clause by clause: [IsIntegral X] [IsIntegral Y], (f : X ⟶ Y) [IsFinite f], f (genericPoint X) = genericPoint Y plus Function.Bijective of the generic stalk map transported by stalkCongr (canonical, not an abstract field iso), ∀ y, IsDomain ∧ IsIntegrallyClosed of Y's stalks, conclusion IsIso f; no extra hypotheses, single universe u, nothing auto-bound. Item node changed only by a complete lean record; statement field verbatim in file. Recorded deps used (IsIntegral, IsFinite, Scheme.functionField via the Sheaf FunctionField module, IsDomain/IsIntegrallyClosed inline form). No Mathlib/project duplicate (grepped Birational/, Normalization, IsIntegrallyClosed). Proof sorry only, no defs, module and theorem docstrings carry Tag 0AB1, blueprint id and the node's 3 steps; lines ≤100. nt_compile --json at the recorded path: clean in 8.2 s; check file confirmed the elaborated type, identity case hgeneric by rfl, axioms only sorryAx plus standard. Edge cases (empty scheme excluded by integrality, identity, cusp, A1 minus 0, k[t^p]) are fine. Minor non-blocking: short second-reading section, proof-only lemmas named collectively in the docstring."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteBirationalNormalIso",
+  "declaration": "AlgebraicGeometry.isIso_of_finite_birational_normal",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteBirationalNormalIso.lean",
+  "statement": "theorem isIso_of_finite_birational_normal {X Y : Scheme.{u}} [IsIntegral X] [IsIntegral Y] (f : X ⟶ Y) [IsFinite f] (hgeneric : f (genericPoint X) = genericPoint Y) (hbirational : Function.Bijective ((Y.presheaf.stalkCongr (Inseparable.of_eq hgeneric)).inv ≫ f.stalkMap (genericPoint X) : Y.functionField ⟶ X.functionField)) (hnormal : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y)) : IsIso f",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

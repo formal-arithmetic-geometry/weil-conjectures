@@ -248,13 +248,6 @@
  "lean": {
   "module": "Sheaf.Paper.CanonicalOriginCompactSupportComposition",
   "declaration": "AlgebraicGeometry.ProEtale.originComposition",
-  "statement": "def originComposition : originCompactSupport A f ⋙ originCompactSupport A g ≅ originCompactSupport A (f ≫ g)",
-  "file": "lean/Sheaf/Paper/CanonicalOriginCompactSupportComposition.lean",
-  "branch": "newtargets-dag",
-  "by": "Q31",
-  "date": "2026-10-16",
-  "existing": false,
-  "note": "The old record only asserted existence of an unbounded ordinary-etale isomorphism. The source node requires the canonical compositor on the full bounded-below pro-etale origin class, with unit laws and associativity. This module constructs the unique preimage of the canonical ordinary-etale compositor using the normalized compactification site comparison. It supplies the full origin functor and canonical coherence statements; the existing ordinary-etale API is reused. The originWitnessFixed adapter explicitly transports the recorded witness-retaining coefficient-sheaf category through the existing exact coefficient-realization equivalence; originCompositionWitnessed supplies the same normalized ambient compositor on that category.",
   "declarations": [
    "AlgebraicGeometry.ProEtale.originCompactSupport",
    "AlgebraicGeometry.ProEtale.originCompositionModel",
@@ -269,7 +262,14 @@
    "AlgebraicGeometry.ProEtale.originWitnessFixed_property",
    "AlgebraicGeometry.ProEtale.originWitnessFixed",
    "AlgebraicGeometry.ProEtale.originCompositionWitnessed"
-  ]
+  ],
+  "file": "lean/Sheaf/Paper/CanonicalOriginCompactSupportComposition.lean",
+  "statement": "def originComposition : originCompactSupport A f ⋙ originCompactSupport A g ≅ originCompactSupport A (f ≫ g)",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Section 1(B): the current recorded module imports the retired category-valued ProEtale paths, which collide with the finite-coefficient paths used by the canonical site comparison. This is an import-interface repair: three imports are changed to their FiniteCoefficient counterparts; every declaration body and mathematical signature is retained. The canonical full-origin compositor, witness-realization adapter and coherence statements remain the recorded ones."
  },
  "blueprint_lean": [
   "AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp"
@@ -401,11 +401,11 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-2309d8580 (reviewer sub-agent of L); spot-checked: Read the complete item and new lemma, all cited statements, master sources and Stacks comparisons. Checked coefficients, named-map normalization, refinement equations, units, associativity and edge cases. No repairs needed; four tool uses accepted. review.md records all checks and a separate inherited DAG cycle containing neither delivery node."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-e6d193a91",
-  "group": "Q31",
-  "result": "fix",
-  "note": "Wrote review.md and complete replacements under fixes/. Mathematics and canonical maps checked on both sites; verbatim signatures verified. Replaced one inline tactic proof with direct equality transport. All four fixed modules passed scompile.py server confirmation. Branch unchanged."
+  "reviewer": "NT-stage2-cc-541e0efe4",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Every hypothesis matches the node and none is stronger: field k, prime l invertible in k, E/Q_l finite, n:ℕ+, separated finite-type k-schemes and maps, the IsProper h ∨ IsProper f disjunction, arbitrary compactifications ch/cf/chf, L in D+. All three conclusions match: the composition square with the recorded compositors (Etale.unboundedEtaleLowerShriekCompIso; originCompositionAmbient), c = symm of compactSupportSiteComparison (b, then P(e)), correct order and direction; the refinement square with the actual def (b) refinement map; the proper case c = b under adjunction-built identity-open identifications. The statement is verbatim. Dependency repairs: cor-cbc-proper-coincidence now states that Ex_! equals the PBC exchange, using the recorded maps (the old record was only a Nonempty iso); the other three modules only migrate imports, plus two def (b) helpers in the owning refinement module. No hollow definitions; sorry only in theorems; docstrings and the 10 proof steps present. nt_compile --json on all 5 files: rc 0, clean. Direct importers: ProjectiveLineFullAdjunction compiles before and after; CompactificationCoherence, CompactCoefficientComposition, FiniteCoefficientDirectImage and EtaleGeometricBiduality fail at baseline from unrelated duplicate-import or DeltaRestriction errors, the same way with the delivery, so no regression. Observations only: the recorded pro-etale compositor and proper/open map are conjugations of the etale ones, so the squares are near-formal (inherited from thm-sf-comp-composition); E : Type (u+1) is a presentation convention, not a restriction."
  }
 }

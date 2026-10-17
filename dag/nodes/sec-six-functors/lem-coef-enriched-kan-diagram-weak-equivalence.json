@@ -9,7 +9,9 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-category-of-spaces"
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-coherent-nerve-infrastructure",
+  "lem-coef-pinched-rigidification-resolution"
  ],
  "proof": [
   {
@@ -169,5 +171,34 @@
   "group": "Q77",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-53069c8dd (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 4 steps, all 7 cited statements, the unit route, and the citer lem-coef-right-fibration-section-limit (steps 3 and 14 use the item). Source: HTT is not archived, so proof_origin=agent and the WANTED line are right; every fact that needs a source sits in an existing reviewed node. Statement check: C[Δ^1] is the walking arrow, so (F,G,φ) is exactly an enriched functor C[J]×C[Δ^1]→Kan. The adjunction comes from the colimit definition in def-coef-infinity-category-of-spaces. Edge cases J=∅, J=Δ^0, empty values and disconnected values all work. Step 2: the hypothesis of lem-cbc-kan-whitehead-inverse is word for word the def-cbc weak equivalence, and its homotopies are what lem-coef-kan-coherent-nerve-inverse-equivalence needs (V-small values). Step 3: lem-coef-kan-coherent-nerve-quasicategory plus lem-coef-infinity-pointwise-equivalences with K=J. Step 4 (restriction along u) is elementary. Not circular (checked by graph traversal), no new nodes, no duplicate: lem-coef-enriched-nerve-transformation is a different construction. lem-coef-kan-weak-equivalence-space-edge states clause 2, but citing it would close a cycle through its stmt_dep lem-coef-right-fibration-section-limit, which looks unused; that is for the maintainer, outside this delivery. Mathlib's SimplicialNerve.lean has only definitions, so not a leaf. No SGA and no base change involved. Fixes: (1) Step 2 now proves the second assertion for any weak equivalence f:X→Y of V-small Kan complexes, including the empty case; before, it argued only for the components φ_j (E5/C3). (2) The off-route tool use lem-cbc-kan-whitehead-inverse (unit sk-prop-sf-cbc) was undeclared (C8). I accept it as the generic simplicial Whitehead theorem, already recorded on lem-coef-kan-weak-equivalence-space-edge, and declared it in split_report.tool_uses. (3) Step 1 now writes out the endpoint and component restrictions via the adjunction. Statement and deps are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f7baf28b",
+  "group": "N2",
+  "result": "pass",
+  "note": "Checked every clause of the unchanged node statement against the Lean. m_F and m_G are built from F and G, not free binders. The transformation is the EnrichedKanIntervalWitness: the landed EnrichedIntervalFunctor (fixed endpoints and cross map) plus CoherentNerveEdge, with an entire-simplex formula, so every field is determined. Its edge is IsEquivalenceEdge in ihom(ulift J, ulift S) with delta-endpoints diagramVertex m_F and m_G. Each component equals the IsSpaceEdge of phi_j, which is unique. The second assertion keeps its weak-equivalence premise, allows empty Kan complexes and asserts IsEquivalenceEdge. Restriction naturality uses a determined phi' and w'. Edge cases (empty J, J a point, empty and disconnected values, all restrictions) pass. No universe equality is imposed; the ULift to u+1 is forced. Only the added stmt_deps and lean differ from the base node; both added nodes are landed and acyclic. lean.statement is verbatim and the 8 declarations are listed. No hollow definitions (the only proof inside a def calls a named sorry theorem). Docstrings carry the source, blueprint tag and four proof steps. Max line length 92, no pro-etale content. nt_compile --json on the snapshot is clean in 10-12 s; the tool was shown to report errors, and the dependency declarations were printed. Observation for the maintainer, not a fault of this delivery: the statement imports the module of its only citer RightFibrationSectionLimit for IsSpaceEdge, so the citer cannot import this item at stage 3. This ordering already exists through the recorded proof dependency kan-coherent-nerve-inverse-equivalence; a later stage-3 change should move IsSpaceEdge, EnrichedIntervalFunctor and CoherentNerveEdge into lower definition modules."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnrichedKanDiagramWeakEquivalence",
+  "declaration": "CategoryTheory.enriched_kan_diagram_weak_equivalence",
+  "declarations": [
+   "CategoryTheory.enrichedKanComponent",
+   "CategoryTheory.enrichedKanRealizedSimplex",
+   "CategoryTheory.enrichedKanTransposeSimplex",
+   "CategoryTheory.enrichedKanTransposeSimplex_naturality",
+   "CategoryTheory.enrichedKanTranspose",
+   "CategoryTheory.enrichedKanRestriction",
+   "CategoryTheory.EnrichedKanIntervalWitness",
+   "CategoryTheory.liftedSpaceEdge"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnrichedKanDiagramWeakEquivalence.lean",
+  "statement": "theorem enriched_kan_diagram_weak_equivalence (J : SSet.{u}) (F G : EnrichedFunctor SSet.{u} (SSet.Pinched.rigidification.obj J) Spaces.Kan.{u}) (φ : GradedNatTrans ((Center.ofBraided SSet.{u}).obj (𝟙_ SSet.{u})) F G) (hφ : ∀ j : J _⦋0⦌, SSet.Enhanced.IsWeakHomotopyEquivalence (enrichedKanComponent φ (SSet.Pinched.vertex J j))) : ∃ w : EnrichedKanIntervalWitness F G φ, SSet.Enhanced.IsEquivalenceEdge ((ihom (SSet.uliftFunctor.{u + 1, u}.obj J)).obj (SSet.uliftFunctor.{u + 1, u + 1}.obj Spaces.infinityCategory.{u})) w.edge ∧ ((ihom (SSet.uliftFunctor.{u + 1, u}.obj J)).obj (SSet.uliftFunctor.{u + 1, u + 1}.obj Spaces.infinityCategory.{u})).δ 1 w.edge = SSet.Enhanced.diagramVertex (enrichedKanTranspose F) ∧ ((ihom (SSet.uliftFunctor.{u + 1, u}.obj J)).obj (SSet.uliftFunctor.{u + 1, u + 1}.obj Spaces.infinityCategory.{u})).δ 0 w.edge = SSet.Enhanced.diagramVertex (enrichedKanTranspose G) ∧ (∀ j : J _⦋0⦌, liftedSpaceEdge (enrichedKanComponent φ (SSet.Pinched.vertex J j)) ((SSet.Enhanced.evaluation (SSet.uliftFunctor.{u + 1, u}.obj J) (SSet.uliftFunctor.{u + 1, u + 1}.obj Spaces.infinityCategory.{u}) (ULift.up j)).app _ w.edge)) ∧ (∀ (X Y : SSet.{u}) [SSet.KanComplex X] [SSet.KanComplex Y] (f : X ⟶ Y), SSet.Enhanced.IsWeakHomotopyEquivalence f → ∃ e : Spaces.infinityCategory.{u} _⦋1⦌, SSet.Enhanced.RightFibrationLimit.IsSpaceEdge f e ∧ SSet.Enhanced.IsEquivalenceEdge Spaces.infinityCategory e) ∧ (∀ {J' : SSet.{u}} (u : J' ⟶ J), enrichedKanTranspose (enrichedKanRestriction u F) = (SSet.uliftFunctor.{u + 1, u}.map u) ≫ enrichedKanTranspose F ∧ enrichedKanTranspose (enrichedKanRestriction u G) = (SSet.uliftFunctor.{u + 1, u}.map u) ≫ enrichedKanTranspose G ∧ ∃ (φ' : GradedNatTrans ((Center.ofBraided SSet.{u}).obj (𝟙_ SSet.{u})) (enrichedKanRestriction u F) (enrichedKanRestriction u G)) (w' : EnrichedKanIntervalWitness (enrichedKanRestriction u F) (enrichedKanRestriction u G) φ'), (∀ c, φ'.app c = φ.app ((SSet.Pinched.rigidification.map u).obj c)) ∧ w'.transpose = ((SSet.uliftFunctor.{u + 1, u}.map u) ⊗ₘ 𝟙 _) ≫ w.transpose)",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned 31ebdd7fc75c: restore the unchanged source/DAG statement; add the missing weak-equivalence premise; fix the interval transpose on whole enriched simplices via CoherentNerveEdge; assert restriction using an interval witness for the actual restricted enriched transformation. Remove the unused arbitrary adjunction parameter and record the landed coherent-nerve and rigidification primitives explicitly."
  }
 }

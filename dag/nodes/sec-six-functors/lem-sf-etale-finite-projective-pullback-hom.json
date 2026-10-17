@@ -143,10 +143,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-a4d9510ce",
-  "group": "ND",
+  "reviewer": "NT-stage2-cc-3288207e7",
+  "group": "NG",
   "result": "pass",
-  "note": "Node clauses map one-to-one to the Lean: finite comm ring A : Type (u+1) (project convention, brief l.75), arbitrary g : S' ⟶ S, M finite projective via Module.Finite+Module.Projective, F arbitrary in Sheaf S.smallEtaleTopology (ModuleCat A). The comparison is the canonical ihomComparison (mate of μ) of Etale.upperStar: real data, not hollow. Clauses: IsIso; naturality in M via MonoidalClosed.pre with correct variance; naturality in F; evaluation identity oriented as ihomComparison_ev. No extra hypotheses; one bound universe; edge cases M=0, A^r with r=0, idempotent summand, zero ring, F=0, g=id, S' empty all included. Same encoding as landed lem-weil-pbc-etale-pullback-internal-hom; no duplicate for general g. lean.statement verbatim; source and blueprint docstrings with proof steps; proof is sorry only; report has Worker report and Second reading by ND. nt_compile --json: clean in 3.5 s, error reporting confirmed with a control copy. Only minor note: unused imports."
+  "note": "Redelivery of the already-landed lem-sf-etale-finite-projective-pullback-hom (ND, batch 38ba3582a0): Lean statement and node identical except lean.by ND->NG and one added docstring sentence. Independently checked: A finite comm ring in Type (u+1); arbitrary g : S' ⟶ S; M finite projective via Module.Finite+Module.Projective; F arbitrary in Sheaf S.smallEtaleTopology (ModuleCat A); comparison = ihomComparison of strong monoidal Etale.upperStar (mate of μ, real data, axioms propext/choice/Quot.sound only); clauses IsIso, naturality in M (pre, correct variance, M' finite projective), naturality in F, evaluation equation as ihomComparison_ev. No stronger hypotheses, one bound universe, edge cases M=0, zero ring, F=0, g=id, empty schemes covered. Source Stacks 0GM7 proof of (1) read (typo Hom(h^*E,F) correctly read as Hom(h^*E,h^*F)). lean.statement verbatim; source/blueprint docstrings with proof steps; sorry only; report has Worker report and Second reading by NG. nt_compile --json clean (6.6 s), control copy reports an injected error. Stale ND reviewed_lean is replaced at landing; unused imports minor."
  },
  "lean": {
   "module": "Sheaf.SixFunctors.EtaleFiniteProjectivePullbackHom",
@@ -157,7 +157,7 @@
   ],
   "statement": "theorem finiteProjectivePullbackHom (A : Type (u + 1)) [CommRing A] [Finite A] {S S' : Scheme.{u}} (g : S' ⟶ S) (M : ModuleCat.{u + 1} A) [Module.Finite A M] [Module.Projective A M] (F : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)) : IsIso (finiteProjectivePullbackHomComparison A g M F) ∧ (∀ (M' : ModuleCat.{u + 1} A) [Module.Finite A M'] [Module.Projective A M'] (a : M' ⟶ M), (upperStar (ModuleCat.{u + 1} A) g).map ((MonoidalClosed.pre ((constantSheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)).map a)).app F) ≫ finiteProjectivePullbackHomComparison A g M' F = finiteProjectivePullbackHomComparison A g M F ≫ (MonoidalClosed.pre ((upperStar (ModuleCat.{u + 1} A) g).map ((constantSheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)).map a))).app ((upperStar (ModuleCat.{u + 1} A) g).obj F) ∧ (∀ (F' : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)) (b : F ⟶ F'), (upperStar (ModuleCat.{u + 1} A) g).map ((ihom ((constantSheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M)).map b) ≫ finiteProjectivePullbackHomComparison A g M F' = finiteProjectivePullbackHomComparison A g M F ≫ (ihom ((upperStar (ModuleCat.{u + 1} A) g).obj ((constantSheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M))).map ((upperStar (ModuleCat.{u + 1} A) g).map b)) ∧ ((Functor.LaxMonoidal.μ (upperStar (ModuleCat.{u + 1} A) g) ((constantSheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M) ((ihom ((constantSheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M)).obj F)) ≫ (upperStar (ModuleCat.{u + 1} A) g).map ((ihom.ev ((constantSheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M)).app F) = ((upperStar (ModuleCat.{u + 1} A) g).obj ((constantSheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M)) ◁ finiteProjectivePullbackHomComparison A g M F ≫ (ihom.ev ((upperStar (ModuleCat.{u + 1} A) g).obj ((constantSheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M))).app ((upperStar (ModuleCat.{u + 1} A) g).obj F)))",
   "branch": "newtargets-dag",
-  "by": "ND",
+  "by": "NG",
   "date": "2026-10-17",
   "existing": false,
   "file": "lean/Sheaf/SixFunctors/EtaleFiniteProjectivePullbackHom.lean"

@@ -242,5 +242,42 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-c3a2eadf5 (reviewer sub-agent of L); spot-checked: I read the whole item: its statement, all 8 steps, the full statements of all 8 cited nodes, and HA Def B.1.1, Rem B.1.5, Prop B.1.6 with its proof, and Lemmas B.1.11-B.1.12 with their proofs (local PDF, pp.1470-1474 and 1480-1481). The statement is the exact fully scaled specialization of HA: (i) is the Lambda^2_0 marking of B.1.11, and (ii) is the all-but-initial-edge marking of B.1.12. Under full scaling the (C0)/T conditions are vacuous or forced by the marked base. I tested the point pattern, K empty and K a point. Step 1 is a correct use of the cited small-object factorization: generators are monomorphisms and kappa bounds the domain sizes. Step 2 is correct: C1 makes r inner, C0 gives the horn definition of cocartesian edges, B0 gives marked lifts, and the inverse tetrahedron with A1 marks fibre equivalences. I also checked the join quasicategory argument. Step 3 uses the initiality node at statement level and applies A0 over the degenerate s1 base. Step 4 uses cancellation in the u=01, v=12, w=02 orientation. Step 5 is correct: I enumerated the missing simplices {y}*sigma and {x,y}*sigma attached along Lambda^n_0, n>=2, with first edge e marked over xz in S. Step 6 marks the yk legs by cancellation. Step 7 is correct: C2 with n=1 and twice with n=2 gives inverse 2-simplices in Z_z, which is exactly the equivalence definition of def-cbc-enhanced-diagrams-cones; A0 then marks xz. Step 8's retract equations hold. There is no cycle: I computed the dependency closure myself (507 nodes) and it excludes the item. The only citer is generator-product-cells, which uses (i) and (ii) as stated. There are no new nodes and no duplicates (marked-triangle-cancellation is the opposite orientation over a point, and pattern-anodyne-lifting-products states something else). All cited nodes are in the item's unit, so there are no tool_uses. No SGA is cited. I made no changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d567e593c",
+  "group": "Q128",
+  "result": "fix",
+  "note": "Statement matches node and HA B.1.11-B.1.12. Checked: pattern fields incl. full scaling; seven based generators (PatternCells.generators: B0=δ1, C2 final-subcone=left_cone, C0 n+2, C1 0<i<n); W = PatternCells.anodyne (isos, pushouts, u-small transfinite compositions, retracts in P.Object); (i) marking σ0∪{01,02} over t with all edges in S (degenerate edges in S by marked_degenerate); (ii) marking = all but initialEdge, f marked, restriction to {1}⋆K_α = left_cone α; both arrows identity-underlying over the given base. Edge cases: empty index, empty/point/infinite cone. No extra hypotheses or universe restriction. Nothing hollow; only the theorem proof is sorry. Importing the citer's PatternGeneratorProductCells is the documented listed-cycle-edge pattern (add_proof_imports.py) and avoids an H4 duplicate; accepted and recorded in lean.note. Fixes (signature byte-identical): added the stated proof-dep imports InfinityFibrationsCartesianRepair, FiniteInverseTetrahedron, InfinityCocartesianCompositionInitiality (2-statements §3 rule 7); removed the unused Mathlib AnodyneExtensions.Basic import; alias docstrings now cite the item's blueprint id; added Main definitions/statements. nt_compile --json: delivered and fixed modules both rc=0 with no diagnostics."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.PatternMarkingCancellation",
+  "declaration": "SSet.Enhanced.marking_cancellation",
+  "declarations": [
+   "SSet.Enhanced.initialEdge",
+   "SSet.Enhanced.coneN",
+   "SSet.Enhanced.coneNMap",
+   "SSet.Enhanced.triangleCancellationSource",
+   "SSet.Enhanced.triangleCancellationMap",
+   "SSet.Enhanced.finalConeInclusion",
+   "SSet.Enhanced.patternGenerators",
+   "SSet.Enhanced.W",
+   "SSet.Enhanced.triangleSourceObject",
+   "SSet.Enhanced.triangleTargetObject",
+   "SSet.Enhanced.triangleCancellationArrow",
+   "SSet.Enhanced.coneSourceObject",
+   "SSet.Enhanced.coneTargetObject",
+   "SSet.Enhanced.coneCancellationArrow",
+   "SSet.Enhanced.marking_cancellation"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/PatternMarkingCancellation.lean",
+  "statement": "theorem marking_cancellation (P : CategoricalPattern.{u}) : (∀ (t : (Δ[2] : SSet.{u}) ⟶ P.carrier), ∀ ht : (∀ e : (Δ[2] : SSet.{u}) _⦋1⦌, t.app _ e ∈ P.marked), W P (triangleCancellationArrow P t ht)) ∧ (∀ (α : P.index) (f : orderedJoinFunctor.obj ((Δ[1] : SSet.{u}), P.cone α) ⟶ P.carrier), ∀ hf : (∀ e, f.app _ e ∈ P.marked), finalConeInclusion (P.cone α) ≫ f = P.left_cone α → W P (coneCancellationArrow P α f hf))",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of the returned H3/H6 interface: reuse the explicit seven based generator families and based weak saturation from PatternCells, and state both cancellation arrows over their supplied base maps. All helpers have source and blueprint docstrings; the theorem docstring records all eight source proof steps. Reviewer fix (statement unchanged): stated proof-dependency imports added (stages/2-statements.md section 3 rule 7), the unused Mathlib anodyne import dropped, Main definitions/statements list and item blueprint ids in the alias docstrings. The import of PatternGeneratorProductCells (module of the citer lem-coef-pattern-generator-product-cells) owns the seven generators; that citer's proof-plan import of this module is therefore a listed cycle edge (add_proof_imports.py), to be used by moving the theorem in stage 3.",
+  "fixed_by": "NT-stage2-cc-d567e593c"
  }
 }

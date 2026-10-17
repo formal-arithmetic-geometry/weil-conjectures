@@ -9,7 +9,9 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-inner-anodyne-pushout-product"
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-inner-anodyne-slice-categorical-equivalence"
  ],
  "proof": [
   {
@@ -148,5 +150,30 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-c99fb31bf (reviewer sub-agent of L); spot-checked: I read the item, the new node, the parent lem-coef-pointwise-lan-mapping-property and the statement of every cited node, and checked them against Kerodon 02YL (Prop 7.3.1.14, Change of Diagram; read online, as no archival copy exists). Kerodon's proof goes through the slice fibration (018F), invariance of categorical equivalences under that pullback (029H), cofinality (02NC) and the colimit transfer (02XR).\n\nItem: the statement is 02YL(2) specialized to inner anodyne i. It is not weakened, and it fits the parent's use with the inner anodyne inclusion K into its horn completion. I checked the edge cases L=K=empty, C=point, and the inner horn of Delta^2.\n\nNew node lem-coef-inner-anodyne-slice-categorical-equivalence: true by 018F plus 029H (dual), since right fibrations are cartesian. It is statement-only, self-contained and strictly smaller than the item. It is a special case of lem-coef-cartesian-base-equivalence-invariance (1), but I verified that citing that node would close a cycle (cartesian-base -> kan-quillen-right-proper -> ... -> pointwise-lan-mapping-property -> item), so the separate node is justified. No other DAG node states it.\n\nFixes written under fixes/:\n(1) C4: step 3 applied lem-coef-infinity-relative-cone-constant-test, which concerns strict diagrams out of K-right-cone, to the item's coherent cocone. Step 3 is rewritten to use the dual cocone criterion of lem-cbc-enhanced-functor-cone-calculus, plus lem-coef-infinity-mapping-composition (same unit, no cycle) for the restriction triangle. Step 2 now covers every vertex z, and proof_deps is updated.\n(2) B9: the new node's blueprint.from.via is now the full chain (the item, then the item's own via).\n(3) The split_report summary said no new nodes were created and described the old route; it is rewritten. The off-unit tool use of lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc), which is generic and already accepted on many nodes of this unit, is accepted and added to split_report.tool_uses.\n\nThe new node's Loogle record is a malformed query rather than a real search, but LeanSearch, LeanFinder and grep still cover the three required kinds. No SGA source is used, and the graph stays acyclic after the fix.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f8605f23",
+  "group": "Q01",
+  "result": "fix",
+  "note": "Item statement checked clause by clause against the node and Kerodon 02YL(2): universe u arbitrary; innerAnodyneExtensions (llp of inner fibrations); quasicategory instances only on C and D; beta as K⊗Δ[1]→D with whole endpoint equations; slices are actual pullbacks of rightVertexSliceProjection (the whole initial face); canonical cocone via a triangle with edge01 = restricted beta, edge12 = F∘sliceArrowPrism in every degree, edge02 = the cocone, apex literally F(c). Endpoint consistency verified, so the triangle exists in Fun(J,D); the existential is equivalent to the canonical cocone being colimiting by 02YB, and matches the parent's hpointwise encoding. The slice-comparison module states exactly the Joyal hoFunctor test of exists_joyal_model_structure with the same free universe v; canonical pullback.map; sorry only. Finding (H4): lanIndexSlice (item module) duplicates innerAnodyneSliceIndex (imported slice module). FIX: fixes/InnerAnodynePointwiseLanInvariance.lean drops lanIndexSlice and uses innerAnodyneSliceIndex, theorem signature unchanged; fixes/<item>.lean-record.json updates declarations and note. nt_compile --json: delivered and fixed files rc=0 with no errors or warnings; a broken control run gives rc=1. Slice node was split on newtargets-dag since the base but its statement and lean are unchanged; merge writes only lean."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InnerAnodynePointwiseLanInvariance",
+  "declaration": "SSet.Enhanced.inner_anodyne_pointwise_lan_invariance",
+  "declarations": [
+   "SSet.Enhanced.IsCanonicalLanCocone",
+   "SSet.Enhanced.HasPointwiseLanColimitCocones",
+   "SSet.Enhanced.inner_anodyne_pointwise_lan_invariance"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InnerAnodynePointwiseLanInvariance.lean",
+  "statement": "theorem inner_anodyne_pointwise_lan_invariance {L K C D : SSet.{u}} [Quasicategory C] [Quasicategory D] (i : L ⟶ K) (hi : innerAnodyneExtensions i) (δ : K ⟶ C) (F₀ : K ⟶ D) (F : C ⟶ D) (β : K ⊗ Δ[1] ⟶ D) (hβ₀ : lift (𝟙 K) (SSet.const (stdSimplex.obj₀Equiv.symm 0)) ≫ β = F₀) (hβ₁ : lift (𝟙 K) (SSet.const (stdSimplex.obj₀Equiv.symm 1)) ≫ β = δ ≫ F) : HasPointwiseLanColimitCocones δ F₀ F β ↔ HasPointwiseLanColimitCocones (i ≫ δ) (i ≫ F₀) F ((i ▷ Δ[1]) ≫ β)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical pointwise cocones use the existing whole-face right vertex slice and the slice index SSet.Enhanced.innerAnodyneSliceIndex of lem-coef-inner-anodyne-slice-categorical-equivalence (an actual simplicial pullback), and the existing slice prism. Coherent composition is represented by triangles with both short edges prescribed in every degree and long edge exactly the cocone, with apex F(c); existence of a colimiting representative is independent of the triangle by Kerodon Warning 02YB. Adds the landed slice/prism owner and the slice comparison node to statement dependencies; no node statement is changed. Reviewer fix: the duplicate definition lanIndexSlice (identical to innerAnodyneSliceIndex) was removed.",
+  "fixed_by": "NT-stage2-cc-7f8605f23"
  }
 }

@@ -16,7 +16,10 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-extension-by-zero",
   "def-weil-proetale-module-direct-image",
-  "def-weil-pbc-exact-sequence"
+  "def-weil-pbc-exact-sequence",
+  "def-pur-proetale-constant-module-unit",
+  "lem-weil-extension-by-zero-adjunction",
+  "def-weil-proetale-inverse-image"
  ],
  "proof": [
   {
@@ -205,5 +208,29 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q53-3ff98e045 (reviewer sub-agent of L); spot-checked: Read the complete item, new node, cited statements, unit/chapter route, sources, and delivery report. The repaired finite-cover, kernel-gluing, and sheafification arguments are mathematically sound, cover edge cases, preserve all hypotheses, and use no forbidden SGA route. No repair file is needed; full checks are recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0dd46892",
+  "group": "Q13",
+  "result": "pass",
+  "note": "The Lean matches every node clause: finite comm ring A in Type u (the recorded interface's universe); arbitrary closed immersion i with j = i.openComplement.ι; the literal SheafOfModules.unit rank-one modules over proEtaleConstantRing; the recorded sfIntrinsicExtensionByZero and proEtaleConstantModuleDirectImage. ε is the open-adjunction transpose of the canonical restriction of constants, transported through the realization equivalence and the normalized rank-one isos; ρ is the sheafified a↦a map through the normalized sfIntrinsicDirectImageComparison.inv. The conclusion is ∃ ε≫ρ=0 with IsColimit of the cokernel cofork, the node's own equivalent form, with no extra clause and no qc or finiteness binder. New node def-pur-proetale-constant-module-unit is true and not a duplicate; its ∃!-then-choose definition is allowed by AGENTS.md (same pattern as sfIntrinsicDirectImageComparison) and has source and proof docstrings. The item node changes only lean plus three stmt_deps, all used to type ε and ρ. Statements match the files verbatim; one sorry per file, on theorems only; source and blueprint docstrings present; report sections real. Edge cases Z empty, Z = X, X empty and the zero ring are covered. nt_compile --json on both snapshot files exited 0 with no errors (11.7 s, 15.0 s)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleSupportedConstantPresentation",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_supported_constant_presentation",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleFixedOpenConstantMap",
+   "AlgebraicGeometry.Scheme.proEtaleOpenConstantCounit",
+   "AlgebraicGeometry.Scheme.proEtaleClosedConstantRestriction",
+   "AlgebraicGeometry.Scheme.proEtale_supported_constant_presentation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSupportedConstantPresentation.lean",
+  "statement": "theorem proEtale_supported_constant_presentation (A : Type u) [CommRing A] [Finite A] {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] : ∃ h : proEtaleOpenConstantCounit i.openComplement.ι A ≫ proEtaleClosedConstantRestriction i A = 0, Nonempty (IsColimit (CokernelCofork.ofπ (proEtaleClosedConstantRestriction i A) h))",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

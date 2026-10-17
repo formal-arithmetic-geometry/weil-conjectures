@@ -209,5 +209,34 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-257435375 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-constant-diagram-mapping-limit, and the statement of every node they cite. The source, Gepner–Haugseng arXiv:1312.3178 Def 3.1.13, Def 3.2.3 and Ex 3.2.4(3), is not in literature/ and the network is unavailable here, so I checked it from my own knowledge of it; the WANTED lines are correct. Item statement: inert maps, D_n (n edge objects and n+1 vertex objects; D_0 is the identity category; id_[1] is initial in D_1) and the pattern data all match GH, with no Kan condition on the zero fibre, and (ii) is the marking clause. Nothing is weakened, and no parent clause is restated. Steps: 1 (nerve and pattern data) is elementary and correct. 2: pullback of inner and cocartesian lifts; sections built from the straightening equivalence (identity ↔ point functor); choices equivalent by composition-initiality; local-global applies because a global inert lift exists. 3: dual constant test with terminal bottom row, the new node, the Yoneda cone criterion and limits in Cat_∞ give (iii) ⇔ the fibre comparison. 4: right-pinched mapping spaces in a nerve are discrete Hom sets, and the lower map is φ ↦ (αφ)_α. 5: limits commute with fibres, and the inner-fibration mapping map is a Kan fibration. 6: edge cases n=0, n=1, empty X and degenerate edges. All proof dependencies are in sk-prop-sf-biduality-general apart from the definition def-cbc. There is no cycle (857 nodes in the closure), no tool_uses and no SGA. New node: it is the end/limit formula for transformations out of a constant diagram, true for arbitrary small K. I tested K empty, a point, Δ^1 and a groupoid. It is statement-only, all three kinds of search are logged, and its blueprint from/via are correct. It is not a duplicate: I read right-fibration-section-limit, discrete-weight-coherent-cocones, yoneda-presheaf-limits, enhanced-functor-cone-calculus, pointwise-lan-mapping-property, spatial-mapping-interchange and grothendieck-coherent-end, and none states it. FIX (C1): Step 5's opening criterion (homotopy pullback iff the homotopy-fibre maps are equivalences) uses lem-coef-spaces-homotopy-fiber-detection (same unit, split) without citing it. It is now cited, with how it applies, in the step's uses and in proof_deps, and an ambiguous 'this last space' is reworded. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-generalized-operad-pattern-fibered.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-035afb563",
+  "group": "Q156",
+  "result": "pass",
+  "note": "Read the node, the 3 stmt_deps and their Lean (CategoricalPattern/IsCategoricalPatternFibered, InertOperad.Incidence/incidenceBase/IsGeneralizedOperad, MarkedOperadic.base/Objects/expand/IsFibrant, inertMarking, IsMonoidalInert, leftJoinCone/joinGenerator). The left side is the genuine 4-clause IsCategoricalPatternFibered on a constructed pattern (N(Delta^op), inert-or-degenerate marking, all 2-simplices scaled, ULift N index, cones nerve(D_n)), which fixes the prior H3. The right side IsGeneralizedOperad ∧ marking = inertMarking is exactly the cited convention IsFibrant false; inertMarking's degenerate edges are cocartesian over I given the inner-fibration clause. D_n: the full subcategory's arrows are automatically inert (checked case by case). generalizedIncidenceCone is Classical.choose of a true ∃!: it exists via the nerve of incidenceConeTarget and is unique because the apex/boundary/leg equations fix all edges of the join and the target is a nerve; allowed by AGENTS.md, not hollow. Only the lean field changed; statement verbatim; dependency nodes byte-identical to the side clone; docstrings follow the source and blueprint plus the 6 proof steps; only the node's two theorems are sorry; one universe, no restriction; edge cases n=0, n=1, empty X and degenerate edges covered; no Kan [0]-fiber condition. Source not archived and no network, so it was checked from the node text and knowledge of GH. nt_compile.py --json rc=0, 10.9 s, no errors or warnings. No blocking findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GeneralizedOperadPatternFibered",
+  "declaration": "SSet.Enhanced.generalized_operad_pattern_fibered",
+  "declarations": [
+   "SSet.Enhanced.generalizedIncidenceLeg",
+   "SSet.Enhanced.IsGeneralizedIncidenceCone",
+   "SSet.Enhanced.generalizedIncidenceCone_existsUnique",
+   "SSet.Enhanced.generalizedIncidenceCone",
+   "SSet.Enhanced.generalizedOperadPattern",
+   "SSet.Enhanced.generalizedOperadPatternObject",
+   "SSet.Enhanced.generalizedOperadPatternFibered",
+   "SSet.Enhanced.generalized_operad_pattern_fibered"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/GeneralizedOperadPatternFibered.lean",
+  "statement": "theorem generalized_operad_pattern_fibered (X : MarkedOperadic.Objects.{u}) : IsCategoricalPatternFibered generalizedOperadPattern (generalizedOperadPatternObject X) ↔ InertOperad.IsGeneralizedOperad X.hom.val ∧ X.left.marking = NonsymmetricOperad.inertMarking (MarkedOperadic.expand X)",
+  "branch": "newtargets-dag",
+  "by": "Q156",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of H3 at returned head 44f8fe3ed901: constructs the actual categorical pattern with the prescribed incidence cone maps, and uses IsCategoricalPatternFibered directly in the main equivalence. The unique-cone helper is the construction and inert-edge assertion of the node statement and its first proof step; it determines the map up to strict equality before the definition selects it. All four pattern conditions are retained by the recorded definition; the right side is the recorded generalized-operad predicate plus exact inert cocartesian marking."
  }
 }

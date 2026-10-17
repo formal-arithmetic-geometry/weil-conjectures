@@ -10,7 +10,10 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-relative-cone",
-  "lem-coef-join-slice-cocone-comparison"
+  "lem-coef-join-slice-cocone-comparison",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-kan-homotopy-coherent-cube-invariance"
  ],
  "proof": [
   {
@@ -254,5 +257,57 @@
   "group": "Q77",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-ac829706b (reviewer sub-agent of L); spot-checked: I read the item, all ten cited statements, the unit record and the parent's steps 2-3 in full. No new nodes; statement unchanged and still matches what the parent's step 2 uses. Edge cases K=empty and K=Delta^0 check out, and K need not be a quasicategory. Step 1: the join-slice fiber over W equals R_d(W) strictly; pinch comparison applied in Fun(T,C), which is a quasicategory by the functor-cone calculus. Both comparisons are precompositions, so they commute with restriction and q. Step 2: the cone-monomorphism lemma for the injection from empty to K gives Delta^0 into K^cone right anodyne; the anodyne-cocones lemma holds for any B, so apex evaluation is an equivalence. Step 3: I re-derived the contraction s. It is simplicial because retained blocks pull back to intersections of initial segments; it equals id at t=0, the apex at t=1, and fixes the apex. On K x Delta^1 it is the join-slice block collapse, so gamma is the cocone that comparison assigns to c, and s commutes with restriction along L to K. Step 4: I checked all four edges of F_tau. Both triangles lie in V(a,b,d) and share the diagonal; mapping-composition's homotopy equivalence theta and unit homotopy give tau ~ composite of Delta_S(tau_*) with eta. Step 5: restricting to K gives r ~ g E. q commutes strictly with F, theta and l; the resulting cube coherence is compressed but correct. Step 6: naturality checked degreewise. Step 7: the cube-invariance node (unsplit, already in the DAG, no cycle) matches the hypotheses steps 1, 2 and 5 provide. No cycle (the item's only citer is its parent), no duplicate found by rg over the DAG. All cited statements are in the item's unit except one definition and lem-cbc-enhanced-functor-cone-calculus. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, generic quasicategory/Kan closure, already accepted on four sibling nodes. Searches cover all three kinds. Agent origin with WANTED lines for HA, HTT and Kerodon, which are not in literature/; no SGA used. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00a3c128b",
+  "group": "NF",
+  "result": "pass",
+  "note": "Read node, all 6 stmt-dep declarations (EnhancedDiagramsCones comma/coconeCategory orientation, JoinSlice IsJoinCoconeComparison/κ/bluntSharpCylinderSimplex orientation, calculusFiber/Apex/CommaArrow, RightPinch arrowMappingSpace/rightPinchPrism, KanCubeSquare/KanCoherentCube), InfinityMappingComposition triangle convention, and the full 638-line module. Every node clause rendered: arbitrary K and q, strict sharp fibres, Kan conclusions, sharp restriction square, composition represented by the pinned variable-apex triangle span (gamma fixed by Contraction.boundary = canonical collapse), corner equivalences via cmp/apex evaluation/pinch/alpha, 3 SquareComparison cubes whose 12 faces commute strictly (constant side homotopies legitimate) with weak path-pullback comparison and homotopy, naturality in q, W (over whole apex category) and L->K. All existential data pinned by formulas; no over-strong claim. Edge cases K=empty, Delta0, empty fibres, identity q/j OK; single universe u. Gates: one sorry (owning theorem), no hollow defs, docstrings with source/blueprint, statement verbatim, stmt_deps extended by 3 landed proof deps (no cycle), only node JSON + new module touched; report Second-reading section is the post-10-17 placeholder (accepted). nt_compile --json: exit 0, no errors/warnings, 22.8 s."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ConeApexCoconeSpaceComparison",
+  "declaration": "SSet.Enhanced.ConeApex.cone_apex_cocone_space_comparison",
+  "declarations": [
+   "SSet.Enhanced.ConeApex.onFiber",
+   "SSet.Enhanced.ConeApex.Contraction",
+   "SSet.Enhanced.ConeApex.eta",
+   "SSet.Enhanced.ConeApex.arrows",
+   "SSet.Enhanced.ConeApex.arrowApex",
+   "SSet.Enhanced.ConeApex.arrowPath",
+   "SSet.Enhanced.ConeApex.triangles",
+   "SSet.Enhanced.ConeApex.triangleArrow",
+   "SSet.Enhanced.ConeApex.triangleApex",
+   "SSet.Enhanced.ConeApex.triangleLong",
+   "SSet.Enhanced.ConeApex.Row",
+   "SSet.Enhanced.ConeApex.Row.fiberMap",
+   "SSet.Enhanced.ConeApex.RowMap",
+   "SSet.Enhanced.ConeApex.RowMap.fiberLeft",
+   "SSet.Enhanced.ConeApex.RowMap.fiberRight",
+   "SSet.Enhanced.ConeApex.constantSquare",
+   "SSet.Enhanced.ConeApex.RowMap.square",
+   "SSet.Enhanced.ConeApex.SquareComparison",
+   "SSet.Enhanced.ConeApex.apex",
+   "SSet.Enhanced.ConeApex.CompositionModel",
+   "SSet.Enhanced.ConeApex.Model",
+   "SSet.Enhanced.ConeApex.Model.sharpRow",
+   "SSet.Enhanced.ConeApex.Model.rawRow",
+   "SSet.Enhanced.ConeApex.Model.wholeRow",
+   "SSet.Enhanced.ConeApex.Model.compositionRow",
+   "SSet.Enhanced.ConeApex.Model.sharpToRaw",
+   "SSet.Enhanced.ConeApex.Model.wholeToRaw",
+   "SSet.Enhanced.ConeApex.Model.wholeToComposition",
+   "SSet.Enhanced.ConeApex.NaturalMap",
+   "SSet.Enhanced.ConeApex.Comparisons",
+   "SSet.Enhanced.ConeApex.cone_apex_cocone_space_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ConeApexCoconeSpaceComparison.lean",
+  "statement": "theorem cone_apex_cocone_space_comparison : ∃ κ : ∀ L X : SSet.{u}, bluntJoin L X ⟶ orderedJoinFunctor.obj (L, X), (∀ L X : SSet.{u}, bluntJoinBaseIncl L X ≫ κ L X = orderedJoinInl L X) ∧ (∀ L X : SSet.{u}, pushout.inr _ (bluntJoinRightProjection L X) ≫ κ L X = orderedJoinInr L X) ∧ (∀ (L X : SSet.{u}) (n : SimplexCategory) (l : L.obj (op n)) (t : (Δ[1] : SSet.{u}).obj (op n)) (x : X.obj (op n)), (bluntJoinCylinderIncl L X ≫ κ L X).app (op n) ((l, t), x) = bluntSharpCylinderSimplex L X n l t x) ∧ ∃ cmp : ∀ {L E : SSet.{u}} (d : L ⟶ E), joinCocone d ⟶ coconeCategory d, (∀ (L E : SSet.{u}) (d : L ⟶ E), IsJoinCoconeComparison κ d (cmp d)) ∧ JoinCoconeComparisonNaturality cmp ∧ ∃ H : Contraction.{u}, ∃ models : ∀ {K C : SSet.{u}} [Quasicategory C] (c : rightJoinCone K ⟶ C), Model H cmp c, ∀ (K L C D : SSet.{u}) [Quasicategory C] [Quasicategory D] (j : L ⟶ K) (q : C ⟶ D) (c : rightJoinCone K ⟶ C) (c' : rightJoinCone L ⟶ D), c' = orderedJoinFunctor.map (j, 𝟙 (Δ[0] : SSet.{u})) ≫ c ≫ q → ∃ F : NaturalMap j q (models c) (models c'), Comparisons F",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Composition is represented by its normalized triangle span, with prescribed short edges, long edge, canonical right-pinch equivalences and actual apex evaluation. The result supplies a zigzag of coherent-square comparisons retaining weak equivalences of their path-pullback comparison arrows. All mathematical assertions are conclusions of the sole postponed theorem; helper definitions contain real data. The three added statement dependencies are already landed owners of the reused fiber, pinch and coherent-cube interfaces."
  }
 }

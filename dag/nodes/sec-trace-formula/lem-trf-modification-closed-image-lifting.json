@@ -239,5 +239,24 @@
   "group": "Q61",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-a5ae3e7c0 (reviewer sub-agent of L); spot-checked: Read the whole delivery and the source. Orgogozo's author PDF (fetched and run through pdftotext; the local archival PDF is still WANTED): Lemme 2.5 with its proof (p.4) and Lemme 3.2.1 with its proof (pp.7-8). The item statement matches 3.2.1 and asks slightly more (p is named a modification, and G->F' is an F-morphism); it is unchanged and not weakened. Steps checked: Step 3 uses the constructible-topology compactness of the Noetherian F, and all four cited nodes say what the step takes from them. In Step 4 the centres R_i miss the generic points of S, so U is dense; the iterated product blowup is U-admissible, proper and has a dense preimage of U, so it is a modification; empty F handled. Step 5: the strict-transform closed immersion, with the pulled-back centre equal to R_i, places only the generic point of T_j in Z~_i, which is correct. Step 6, the factorization through the function field, is correct and elementary. In Step 7, b_j is finite and surjective by base change. Step 8, the finite disjoint union, is finite and surjective even for nonreduced H. New nodes: lem-trf-alteration-blowup-finite is true (Lemme 2.5 in the reduced case via generic flatness, RG flattening and the strict transform) and is not a duplicate. lem-trf-finite-after-blowup (unsplit, Q52, not mentioned in the report) is the natural input when this node is split. lem-trf-closed-image-generic-alteration is true (closure of a closed point of the generic fibre). One fault (E3/C4): the generic-alteration statement did not say that W->Z is compatible with h, which Step 7 needs to make G_j->F' an F-morphism. Repaired in fixes/: the node statement now names a:W->Z with Z->X∘a = h∘j and replaces the undefined 'dominant, generically finite' with 'surjective, and finite over a dense open of Z', adding def-weil-finite-integral-morphism to stmt_deps. The item's Step 1 and Step 7 texts now carry this compatibility and the chain of equalities that gives the F-structure. The declared tool_uses are accepted (product-ideal blowup, spectral/constructible lemmas, surjective base change); the other Nagata lemmas are closed in slopmaster2. No SGA cited, no nodes dropped.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-29536d1af",
+  "group": "N1",
+  "result": "fix",
+  "note": "Statement matches node lem-trf-modification-closed-image-lifting (Orgogozo Lemme 3.2.1) clause by clause: F',S reduced Noetherian, g proper; F is the reduced closed image via IsClosedImmersion+IsReduced+range equality; the redundant factor hypothesis follows from the others and does not narrow the lemma; the blowup is the real glued I.blowupMap with IsNowhereDense I.support and IsModification (its instances follow from IsNoetherian); the F-morphism condition a≫g=gG≫i is equivalent to commuting over F since i is mono; q to pullback i blowupMap is over F, IsFinite and Surjective. Edge cases (empty S, empty F via I=top and G=empty, zero-dimensional) are covered; single universe u, nothing unbound. lean.statement verbatim; proof only sorry; no hollow definitions; no existing declaration found. nt_compile: delivered module rc0 with no diagnostics; a probe showed sorryAx and the expected signature; the fixed module compiles clean in 8.4 s. Fixes: (1) H8: ModificationClosedImageLifting.lean, docstring only, now gives node proof steps 1-8 including the missing Step 3 finite-subcover reduction and its cited nodes, signature unchanged; (2) H11: report.md, placeholder Second reading by N1 replaced with a real reading."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ModificationClosedImageLifting",
+  "declaration": "AlgebraicGeometry.Orgogozo.exists_finite_cover_modified_closedImage",
+  "file": "lean/Sheaf/Paper/ModificationClosedImageLifting.lean",
+  "statement": "theorem exists_finite_cover_modified_closedImage {S F' : Scheme.{u}} [IsReduced S] [IsNoetherian S] [IsReduced F'] [IsNoetherian F'] (g : F' ⟶ S) [IsProper g] (F : Scheme.{u}) (i : F ⟶ S) [IsClosedImmersion i] [IsReduced F] (himage : Set.range i = Set.range g) (factor : ∃ gF : F' ⟶ F, gF ≫ i = g) : ∃ (I : S.IdealSheafData), IsNowhereDense (I.support : Set S) ∧ IsModification I.blowupMap ∧ ∃ (G : Scheme.{u}) (gG : G ⟶ F), ∃ (a : G ⟶ F') (q : G ⟶ pullback i I.blowupMap), a ≫ g = gG ≫ i ∧ q ≫ pullback.fst i I.blowupMap = gG ∧ IsFinite q ∧ Surjective q",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-29536d1af"
  }
 }

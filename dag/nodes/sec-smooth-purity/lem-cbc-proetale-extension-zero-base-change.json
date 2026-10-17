@@ -318,30 +318,23 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-6c0f34837 (reviewer sub-agent of L); spot-checked: I read the whole item, all 8 steps, every cited statement, the master and main-20261015 blueprint statement and proof (they are identical), unit sk-prop-sf-cbc, the chapter record, and Stacks 04J0 (sites-modules l.2369) and 09AE (proetale.tex). Against the base node, only split-owned fields changed: proof, proof_origin, mathlib_searches, split_report and status (unsplit to split). The statement and stmt_deps are byte-identical. There are no new nodes and no unit write. The base was unsplit in both the side tree and the live tree, so re-splitting it is legitimate. Statement and coefficient category: the target is Sh(Y_proet,Lambda) modules for finite commutative Lambda, with the pro-etale def-weil-proetale-inverse-image (the blueprint's uses list points at the etale def-weil-pbc-inverse-image; the DAG's choice is the correct pro-etale one). The map runs g^{-1}j_! -> j'_!g_U^{-1} and nothing is weakened. Step 2: I checked the initial object (T,(s,id)) of I_T by hand; it gives restriction for j and j'. Step 4: a_V comes from the chosen cartesian iso by elementary fibre-product reasoning. Step 5: 04J0 gives j_V^*f_* = f'_*j_U^* with identity sections, so t_{M,V}=M(a_V) in the correct direction. Step 6: I type-checked beta=eps_1 L_1(delta) L_1(eta_2). Its adjunct is the composite unit followed by t^{-1}, i.e. the textbook canonical base-change map, and I verified gamma=beta^{-1} through the uniqueness clause. Steps 7-8: degreewise chain isomorphisms descend through 015F and the localization universal property; prop-weil-pbc-proetale-constant-exact covers an arbitrary g. Accepted all 5 declared tool_uses: lem-weil-proetale-weakly-etale-localization, prop-weil-pbc-proetale-constant-ring-map, lem-weil-pbc-ringed-topoi-module-adjunction, lem-weil-pbc-localize-ringed-site-morphism and prop-weil-pbc-proetale-constant-exact. Each is a generic black box, and the unit cites only sk-def-av-jacobian. No SGA is cited. Duplicate check: the etale nodes lem-cbc-extension-zero-base-change, sbc-prop-extension-by-zero-and-arbitrary-base-change and cor-cbc-derived-extension-zero-base-change; the condensed D_cons node thm-sfb-dc-open-base-change-iso (reverse orientation); and the non-blueprint lem-sfb-abelian-open-extension-base-change (2026-10-17, abelian-valued, reverse orientation). None states the same thing in the same coefficient category, so same_as=[] stands. Edge cases checked: U empty, j=id, g=id, X' empty, Lambda=0, unbounded complexes. No fixes written."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.FiniteOpenBaseChangeNormalized",
-  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.singleBeta",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.StrictTower.moduleSquareG",
-   "AlgebraicGeometry.ProEtale.StrictTower.singleBetaInvApp",
-   "AlgebraicGeometry.ProEtale.StrictTower.singleBetaInvApp_naturality",
-   "AlgebraicGeometry.ProEtale.StrictTower.singleBetaInv",
-   "AlgebraicGeometry.ProEtale.StrictTower.singleBetaInv_isIso",
-   "AlgebraicGeometry.ProEtale.StrictTower.singleBeta"
-  ],
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteOpenBaseChangeNormalized.lean",
-  "statement": "def singleBeta [Finite B] {U' U X' X : Scheme.{u}} (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X) [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g) (hsq : IsPullback a j' j g) : (moduleJ B j).mapDerivedCategory ⋙ (modulePullback B g).mapDerivedCategory ≅ (modulePullback B a).mapDerivedCategory ⋙ (moduleJ B j').mapDerivedCategory",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.ordinaryOpenExtensionBaseChangeIso",
+  "statement": "def ordinaryOpenExtensionBaseChangeIso (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X) [IsOpenImmersion j] [IsOpenImmersion j'] (hsq : IsPullback gU j' j g) : (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategory ⋙ (upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategory ≅ (upperStar (ModuleCat.{u + 1} Λ) gU).mapDerivedCategory ⋙ (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j').mapDerivedCategory",
   "branch": "newtargets-dag",
-  "by": "N4",
-  "date": "2026-10-16",
+  "by": "Q07",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "Section 1(B): importing the recorded legacy UpperLowerStar/OpenImmersion modules together with the current finite-coefficient framework duplicates their public declarations. This module states the same unbounded finite-constant-coefficient open base-change isomorphism in the constant ring-sheaf module coordinates used by the item. Its inverse is precisely the open-unit transpose; the finite fixed-ring sheaf presentation is canonically identified by coefficient realization, so no cartesian case, complex or normalization is lost."
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleDerivedExtensionZeroBaseChange.lean",
+  "note": "Section 1(B): the recorded StrictTower.singleBeta is a strict-tower Modules interface and is not the ordinary pro-etale ModuleCat derived map stated by this dependency. This module states the same canonical map in the ordinary category, as the inverse mate of ProEtale.baseChangeMap for the chosen cartesian square; no arbitrary isomorphism is selected.",
+  "fixed_by": "NT-stage2-cc-503a56d8b"
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-ee18e5df3",
-  "group": "N4",
-  "result": "pass",
-  "note": "Statement, dependencies, source alignment, edge cases, docstrings, canonical constructions, report sections, and full six-file scompile verification passed."
+  "reviewer": "NT-stage2-cc-503a56d8b",
+  "group": "Q07",
+  "result": "fix",
+  "note": "Statement correct clause by clause: Λ finite comm ring (u+1 ModuleCat convention, no case lost), OpenImmersionSquare with arbitrary g, K in D+(U_et) Plus, LHS g^*(c_j)≫e^proet≫j'_!(ρ_h) and RHS ρ_g≫N(e^et)≫c_j' in the right order and orientation. ρ = comparisonUpperStarCompUpperStarIso, rfl-checked equal to the inverse of the recorded supportSiteComparisonCoefficientPullbackIso. c_j is the degreewise openImmersionLowerShriekComparisonUpperStarIso; e^et is the recorded extensionZeroBaseChangeDerivedPlusIso. §1(B) module for lem-cbc-proetale-extension-zero-base-change justified: singleBeta lives on strict-tower Modules, and upstream derivedOpenImmersionLowerShriekBaseChangeIso and the OpenCover helpers fail to import (UpperLowerStar.Iso clash, compile-verified); the delivered map is the same canonical conjugate of ProEtale.baseChangeMap. Fixes: F1 removed sorry'd fixSiteOpenComparison_unit_normalization (verbatim copy of landed openComparison_unit_normalization, now cited in the docstring); F2 removed sorry'd fixSiteIsPullback, inlined IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd; F3 dependency iso rewritten in term mode via conjugateIsoEquiv.symm(asIso baseChangeMap), same data and signature; F4 record override adds declarations and note; docstring proof steps follow the node's six steps. Delivered and fixed modules both compile cleanly with nt_compile; only sorry is the item theorem's proof. Edge cases g=id, empty U, K=0, Λ=0 covered."
  }
 }

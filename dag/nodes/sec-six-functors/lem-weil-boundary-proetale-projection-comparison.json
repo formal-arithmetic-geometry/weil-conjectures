@@ -23,7 +23,8 @@
   "thm-weil-pbc-site-comparison",
   "lem-weil-pbc-ringed-projection-mate-exact",
   "def-weil-pbc-proetale-operations",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-boundary-exceptional-comparison-data"
  ],
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
@@ -441,5 +442,35 @@
   "group": "Q57",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-d58c8a367 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the item, all 8 steps and every cited statement (20 stmt_deps, 19 proof_deps). Sources checked in literature/stacks-project/sites-cohomology.tex: 0B56 equation-projection-formula-map at line 13666 and 0E48 remark-compatible-with-diagram at line 13715, whose omitted verification steps 4-8 write out. Also checked categories.tex 0B65/0DV0 and the master and main-20261015 cor-weil-boundary-duality-discharge proofs; that paragraph does not prove the comparison, so the E7 repair is accurate. The coefficients are the ordinary constant A_{E,n}-module categories on both sites. b is exactly the named mate of lem-weil-pbc-comparison-direct-image-canonical-mate; a closed immersion is affine, hence qcqs, so it applies, and its normalization matches Step 1. The specified transported Hom bijection is the same as the class adjunction of thm-sf-ambient-adjoint-class Step 5 for the identity-open compactification, because lem-sf-class-compact-support-comparison defines c = b^{-1}, so mu^p is the official counit. Step 3 counit computation: traced through the bijection, correct. I recomputed L-flat and R-flat in steps 6-7, including the a_{F_eB} cancellation from the monoidality equation of lem-sfb-ringed-derived-monoidal-comparisons and naturality of t_{C_Z}; they agree. In step 5, finite Tor makes Q bounded, so b_Q is defined. Edge cases checked: Z empty, i=id, B=M=N=0, n=1, and a non-finite-Tor B at n>1. No new nodes, no cycle, no SGA, and no duplicate among the nearest DAG candidates (lem-sfb-etale-proetale-scalar-mate, lem-pur-open-projection-site-transport, lem-sf-proper-open-tensor-compatibility and others). Accepted tool_uses: lem-sf-flat-model, lem-sfb-ringed-derived-monoidal-comparisons and thm-amb-etale-exceptional-adjoint. The other 7 declared tool_uses are on-route and need no declaration. For the maintainer: source.place still says 'returned step 9', but the ancestor now uses the item in step 12; this is a maintainer-owned field and was not edited."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd6e34af9",
+  "group": "Q125",
+  "result": "pass",
+  "note": "I checked every clause of the node against the Lean. The coefficient ring coefficientExtensionRing l E (n+1) covers exactly n>=1; l != p; Z and T are separated finite type over k with i a closed immersion over k; there are no extra proper or Noetherian binders and CompactSpace T is derived. The categories are the fixed-scalar ModuleCat(ULift A) sheaves, with C_W = comparisonUpperStar.mapDerivedCategory (definitionally the recorded siteComparisonDerivedPullbackPlus). G_e is Etale.rightDerivedUpperShriek at ofIsProper i, normalized by the canonical Rf_! = Rf_* isomorphism; G_p is sfFiniteExceptionalFixed. b is the mateEquiv of the actual derived adjunctions applied to the canonical pullback square. homTransport is the node's Hom chain in the node's order. CounitComparison has both constructibility hypotheses; I checked by hand that h(b^-1 >> C_T eps_N) = C_Z G_e(j_N). The projection maps are the canonical rightAdjointProjectionMap maps; the eta-equation and its inverse clause match the node exactly. Edge cases: Z empty, i = id, zero objects, n = 1. Universes follow the project convention. Defs are not hollow, the only sorry is the theorem proof, docstrings and lines are fine, and both statement fields are verbatim. Both new-node and item records follow the field rules. nt_compile --json on both siblings, run twice, gave no diagnostics. Observations, not blocking: F1, directImageMate and pullbackSquare re-present the canonical mate on unbounded categories, because the recorded fixedComparisonDirectImageMatePlus is typed on D+ and the upstream mate is in the L(nu^*) presentation; it is the same canonical map and its invertibility follows from a proved upstream lemma. F2, the pro-etale operations are the fixed-scalar ones, as the recorded dependencies already use. F3, the second reading is the worker's own pass. F4, source.place 'returned step 9' is a maintainer-owned field and was left alone."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BoundaryProEtaleProjectionComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.BoundaryComparison.boundary_proetale_projection_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.tensorObject",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.tensorComparison",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.tensorTargetIso",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.etaleProjection",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.proetaleProjection",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.projectionSourceIso",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.projectionTargetIso",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.ProjectionComparison",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.boundary_proetale_projection_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/BoundaryProEtaleProjectionComparison.lean",
+  "statement": "theorem boundary_proetale_projection_comparison (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) {Z T : Scheme.{u}} (i : Z ⟶ T) [Z.Over (Spec (.of D.k))] [T.Over (Spec (.of D.k))] [LocallyOfFiniteType (Z ↘ Spec (.of D.k))] [QuasiCompact (Z ↘ Spec (.of D.k))] [IsSeparated (Z ↘ Spec (.of D.k))] [LocallyOfFiniteType (T ↘ Spec (.of D.k))] [QuasiCompact (T ↘ Spec (.of D.k))] [IsSeparated (T ↘ Spec (.of D.k))] [i.IsOver (Spec (.of D.k))] [IsClosedImmersion i] : (∀ H : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (coefficients (Padic.coefficientExtensionRing l E (n + 1)))), IsIso ((directImageMate (coefficients (Padic.coefficientExtensionRing l E (n + 1))) i).app H.obj)) ∧ (∀ (H : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (coefficients (Padic.coefficientExtensionRing l E (n + 1))))) (L : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology T) (coefficients (Padic.coefficientExtensionRing l E (n + 1))))), Function.Bijective (homTransport (Padic.coefficientExtensionRing l E (n + 1)) i H L)) ∧ (∀ N : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (coefficients (Padic.coefficientExtensionRing l E (n + 1)))), Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) T N.obj → Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) Z ((etaleExceptional (Padic.coefficientExtensionRing l E (n + 1)) i).obj N.obj) → @CounitComparison _ _ _ _ _ i _ (QuasiCompact.compactSpace_of_compactSpace (T ↘ Spec (.of D.k))) N) ∧ (∀ (B : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (coefficients (Padic.coefficientExtensionRing l E (n + 1))))) (M : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (coefficients (Padic.coefficientExtensionRing l E (n + 1))))), Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) Z B.obj → WeilConjectures.finiteTorConstructibleEtale l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) T M.obj → ProjectionComparison (coefficients (Padic.coefficientExtensionRing l E (n + 1))) i B.obj M.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical ordinary constant-module comparisons. The specified exceptional Hom transport is owned by the cited new definition node. The projection components and tensor comparisons are the named existing canonical constructions; the level n+1 covers exactly the positive integers."
  }
 }

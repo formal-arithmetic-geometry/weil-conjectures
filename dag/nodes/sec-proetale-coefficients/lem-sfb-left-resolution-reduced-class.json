@@ -116,10 +116,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-b9b18364e",
-  "group": "NK",
+  "reviewer": "NT-stage2-cc-862cf0e11",
+  "group": "NA",
   "result": "pass",
-  "note": "Every node clause has a matching Lean binder, none stronger: abelian A; a class F containing a zero object, closed under isomorphisms, binary biproducts (all finite biproducts follow with the zero object) and retracts (= direct summands); P valued in F; ε with epi components. Conclusion: C : Type u with preadditive, zero-object and finite-coproduct structure; ι full, faithful, additive, landing in F; Q preserving zero morphisms; π : Q ⋙ ι ⟶ 𝟭 A with epi components. The separately chosen zmC is forced by Mathlib's Subsingleton (HasZeroMorphisms C) (ZeroMorphisms.lean:105), so it is harmless. Universes u and v are declared, autoImplicit is off, and C : Type u fits the full-subcategory witness. The statement is true via isIdempotentComplete_of_abelian, retract closure and LeftResolution.reduced (Reduced.lean:117-129), and the docstring gives that proof. Edge cases checked: F = zero objects, F = all objects, P(0) ≠ 0. The node record equals the side clone's except for the new lean field; lean.statement is verbatim in the file; the citer lem-sfb-functorial-bounded-above-class-resolution uses exactly these clauses. Gates: no definitions, sorry only, source and blueprint docstrings present, nothing pro-etale, no duplicate. nt_compile.py --json on the snapshot text gave exit code 0 with no errors, and a broken control copy failed with exit code 1."
+  "note": "Statement correct and compiles: every node clause matches the Lean (abelian A; class with zero, closed under iso, binary biproducts and retracts; F-valued P; epi ε; conclusion C : Type u preadditive with zero object and finite coproducts, ι full/faithful/additive into F, Q preserving zero morphisms, π : Q ⋙ ι ⟶ 𝟭 A epi). Separate zmC is harmless (HasZeroMorphisms is a subsingleton). True via isIdempotentComplete_of_abelian and LeftResolution.reduced (Reduced.lean:117-129). Edge cases: F = all objects, F = zero objects, P(0) ≠ 0. Gates: no definitions, sorry only, source and blueprint docstrings, nothing pro-etale, report has both sections. nt_compile --json exit 0 (4.8 s); broken control exit 1. Note: this repeats NK's identical statement already landed in 39e07de026; the only changes are lean.by NK→NA and one docstring sentence; landing would replace NK's attribution and reviewed_lean, and merge_delivery cannot restore by: NK through a fix."
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.LeftResolutionReducedClass",
@@ -127,7 +127,7 @@
   "file": "lean/Sheaf/Algebra/Homology/LeftResolutionReducedClass.lean",
   "statement": "theorem leftResolution_reduced_class (A : Type u) [Category.{v} A] [Abelian A] (F : ObjectProperty A) (P : A ⥤ A) (ε : P ⟶ 𝟭 A) (hF_zero : ∃ Z : A, IsZero Z ∧ F Z) (hF_iso : ∀ {X Y : A}, F X → (X ≅ Y) → F Y) (hF_biproduct : ∀ (X Y : A), F X → F Y → F (X ⊞ Y)) (hF_retract : ∀ {X Y : A} (i : X ⟶ Y) (e : Y ⟶ X), i ≫ e = 𝟙 X → F Y → F X) (hP : ∀ X : A, F (P.obj X)) (hε : ∀ X : A, Epi (ε.app X)) : ∃ (C : Type u) (cC : Category.{v} C) (pC : @Preadditive C cC) (zC : @HasZeroObject C cC) (fcC : @HasFiniteCoproducts C cC) (zmC : @HasZeroMorphisms C cC) (ι : @CategoryTheory.Functor C cC A (inferInstance : Category.{v} A)), @Functor.Full C cC A (inferInstance : Category.{v} A) ι ∧ @Functor.Faithful C cC A (inferInstance : Category.{v} A) ι ∧ @Functor.Additive C A cC (inferInstance : Category.{v} A) pC (inferInstance : Preadditive A) ι ∧ (∀ X : C, F (ι.obj X)) ∧ ∃ (Q : @CategoryTheory.Functor A (inferInstance : Category.{v} A) C cC) (zQ : @Functor.PreservesZeroMorphisms A (inferInstance : Category.{v} A) C cC (inferInstance : HasZeroMorphisms A) zmC Q) (π : @NatTrans A (inferInstance : Category.{v} A) A (inferInstance : Category.{v} A) (Q ⋙ ι) (𝟭 A)), ∀ X : A, Epi (π.app X)",
   "branch": "newtargets-dag",
-  "by": "NK",
+  "by": "NA",
   "date": "2026-10-17",
   "existing": false
  }

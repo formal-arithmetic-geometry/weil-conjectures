@@ -228,5 +228,29 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-392469c1f (reviewer sub-agent of L); spot-checked: I read the whole item (10 steps), the new node lem-coef-frame-source-kan-fibration, the statements of all six cited nodes, the duplicate candidates (lem-cbc-framed-horn-criterion, the reedy-left/simplicial-frame comparisons, reedy-colimit-comparison, cofibration-local-mapping-test, kan-fibration-tower-limit), the citer relative-cut-nerve step 8, and the unit and ancestor. Hovey is not archived, so I checked the steps against the cited DAG statements and the standard content of Hovey 1.1.8, 5.2 and 5.4; the WANTED line stands. No SGA source is used. The item statement is unchanged and true; I tested i=1_O, O=0, Y=1 and empty fibers. Step 4: in Delta M_0=1 and L_0=0, so the fixed degree-0 factorization O->C->C is legitimate, and B is a frame on C. Step 5: I recomputed the U-latching object L_nB amalg_{L_nA} O, including n=1 (C amalg_O C, since the latching category there is disconnected) and n=0; it is a pushout of the relative latching cofibration. Step 6: gluing clause (b) applies, with all six objects cofibrant, both span maps u^n, and components (a^n,1,1). Step 7: A([n]->[0])=a^n, so the strict fiber is exactly {h : h u^n = f a^n}. Step 8: the new lemma's hypotheses hold, and the frame node's strict-pullback clause applies. The new node is true (Hovey 5.4.1/5.4.3 trivial corner, adjointed against Y->1). It is statement-only and self-contained, has the right blueprint from/via, and is not a duplicate: the framed-horn-criterion states its Kan-fibration conclusion only for resolutions it chooses existentially, without A^0=A, and lies in another unit. One gap (C4/E5), repaired: Step 9 said restriction along B->D 'is exactly' the forgetful map, but the frame node is natural only inside one model category and compatible only with left Quillen functors, and the forgetful functor is neither. I rewrote Step 9 to go through the left Quillen F=O amalg - and the derived adjunction: F B is a U-frame on FC with H_U(FB,f)=E, the map FB->D covers the counit (i,1_C), and the triangle identity finishes. I added lem-coef-model-infinity-derived-adjunction to the step's uses; it was already in proof_deps. Same unit throughout, so no tool_uses are needed. There is no cycle, the item is not a target, and no node is dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a26da100c",
+  "group": "NY",
+  "result": "pass",
+  "note": "Read node, both stmt deps, the dependency Lean declarations (CosimplicialFrame, frameHomLarge(Pre/Post), cosimplicial_frame_mapping, homotopyFiber/comma/constantDiagrams), the module, the report, the prior H3 return and the citer relative-cut-nerve step. Every node clause matches: ModelCategory+HasLimits/HasColimits+functorial factorizations as in the dependency; IsCofibrant O; arbitrary cofibrations O->C (full subcategory of Mathlib Under O, all under-morphisms); f with fibrant f.right; inherited model structure with exact iff on the three classes; i^* = frameHomLargePre(restriction i) covering i, degree 0 literally i; hofib over the actual vertex f. The return is repaired: comparison is pinned on both coordinates (bridge = pushout leg B^n->B^n ⊔_{A^n} O, constant path a^n≫f.hom; both endpoint equations checked); full path fiber kept; strict functorial pre/postcomposition naturality on both coordinates with id/comp laws. Statement is true and satisfiable (choose the Reedy-cofibration restriction of DAG step 4). Universes u,v,t independent and consistent; no extra hypotheses; only sorry is the theorem proof; docstrings carry source, blueprint and the 10 steps; lean.statement verbatim; only the item's lean record changed; lines <=100. nt_compile --json clean, 17.9 s. A trial fix adding the import of the newly landed FrameSourceKanFibration fails (non-module file), so omitting it is correct; no fixes given."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModelUndercategoryMappingFiber",
+  "declaration": "CategoryTheory.model_undercategory_mapping_fiber",
+  "file": "lean/Sheaf/CategoryTheory/ModelUndercategoryMappingFiber.lean",
+  "statement": "theorem model_undercategory_mapping_fiber (M : Type u) [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] [MorphismProperty.HasFunctorialFactorization (cofibrations M) (trivialFibrations M)] [MorphismProperty.HasFunctorialFactorization (trivialCofibrations M) (fibrations M)] (O : M) [IsCofibrant O] : ∃ (m : ModelCategory (Under O)), (∀ {a b : Under O} (g : a ⟶ b), (m.categoryWithCofibrations.cofibrations g ↔ Cofibration g.right) ∧ (m.categoryWithFibrations.fibrations g ↔ Fibration g.right) ∧ (m.categoryWithWeakEquivalences.weakEquivalences g ↔ WeakEquivalence g.right)) ∧ Nonempty (ModelUnderMappingData.{u, v, t} M O m)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.ModelUnderCofibrations",
+   "CategoryTheory.ModelUnderMappingData",
+   "CategoryTheory.model_undercategory_mapping_fiber"
+  ],
+  "note": "Repair of H3 at immutable head bdd10f234bc4: a single functorial family of relative pushout frames; comparison specified in every simplicial degree by forgetting and adjoining the constant base path; explicit pre/postcomposition equations on both coordinates, and frame-map identity/composition laws. The theorem asserts that this specified comparison is a weak homotopy equivalence. Only lean changes."
  }
 }

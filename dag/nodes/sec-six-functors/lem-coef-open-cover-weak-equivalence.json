@@ -204,5 +204,23 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-921df80f7 (reviewer sub-agent of L); spot-checked: The mathematics and route are sound, with all five proof steps and the singular-excision node checked against their cited statements and May Ch. 10 §7. Repair required: the new node incorrectly records created.item/group as lem-coef-double-cylinder-weak-equivalence-gluing/Q28, and its blueprint via omits the current item. Its source place also overstated May as an exact source for the singular-complex formulation; the corrected full JSON in fixes/dag/nodes/sec-six-functors/lem-coef-open-cover-singular-excision.json fixes these metadata/source issues.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e80d121d",
+  "group": "N3",
+  "result": "pass",
+  "note": "Signature matches the node clause by clause: arbitrary spaces in independent universes u and v with no extra instances; h : C(X,Y); IsOpen U and IsOpen V; U ∪ V = Set.univ; three restrictPreimage hypotheses and the conclusion each given as a componentsMap bijection plus homotopyGroupMap bijections for every r >= 1 at every basepoint, using the recorded def-cbc-enhanced-diagrams-cones declarations. Empty cases allowed. The same-universe DoubleMappingCylinder.IsWeakEquivalence is unusable (one universe, and citing it would create a cycle); no Mathlib match. Node unchanged except lean; lean.statement verbatim; sorry only; docstrings carry source place, blueprint id and the proof route; no line over 100 chars. nt_compile of the snapshot module: clean in 5.3 s, no warnings. Minor: the proof steps are condensed in the docstring, accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.OpenCoverWeakEquivalence",
+  "declaration": "open_cover_weak_equivalence",
+  "file": "lean/Sheaf/Topology/OpenCoverWeakEquivalence.lean",
+  "statement": "theorem open_cover_weak_equivalence {X : Type u} {Y : Type v} [TopologicalSpace X] [TopologicalSpace Y] (h : C(X, Y)) (U V : Set Y) (hU : IsOpen U) (hV : IsOpen V) (hcover : U ∪ V = Set.univ) (hUeq : Function.Bijective (SSet.Enhanced.componentsMap (h.restrictPreimage U)) ∧ ∀ (r : ℕ), 1 ≤ r → ∀ (x : h ⁻¹' U), Function.Bijective (SSet.Enhanced.homotopyGroupMap (h.restrictPreimage U) r x)) (hVeq : Function.Bijective (SSet.Enhanced.componentsMap (h.restrictPreimage V)) ∧ ∀ (r : ℕ), 1 ≤ r → ∀ (x : h ⁻¹' V), Function.Bijective (SSet.Enhanced.homotopyGroupMap (h.restrictPreimage V) r x)) (hUVequ : Function.Bijective (SSet.Enhanced.componentsMap (h.restrictPreimage (U ∩ V))) ∧ ∀ (r : ℕ), 1 ≤ r → ∀ (x : h ⁻¹' (U ∩ V)), Function.Bijective (SSet.Enhanced.homotopyGroupMap (h.restrictPreimage (U ∩ V)) r x)) : Function.Bijective (SSet.Enhanced.componentsMap h) ∧ ∀ (r : ℕ), 1 ≤ r → ∀ (x : X), Function.Bijective (SSet.Enhanced.homotopyGroupMap h r x)",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

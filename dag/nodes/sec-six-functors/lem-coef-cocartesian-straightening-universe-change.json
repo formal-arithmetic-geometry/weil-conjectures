@@ -2,7 +2,7 @@
  "id": "lem-coef-cocartesian-straightening-universe-change",
  "kind": "statement",
  "title": "Cocartesian straightening and enlargement of the object universe",
- "statement": "Fix Grothendieck universes $\\mathcal U\\in\\mathcal U'\\in\\mathcal U''$ and use quasicategories, coherent functors, functor equivalences and mapping spaces of [def-cbc-enhanced-diagrams-cones], and cocartesian fibrations of [def-coef-infinity-fibrations]. For $\\mathcal W=\\mathcal U,\\mathcal U'$, use the infinity categories $\\operatorname{Cat}_{\\infty,\\mathcal W}$, $\\operatorname{coCart}_{\\mathcal W}(S)$ and straightening equivalences $\\operatorname{St}^{\\mathcal W}_S$ of [lem-coef-cocartesian-straightening], with $\\mathcal W$ as the object universe; form all displayed categories in $\\mathcal U''$. Let $S$ be a $\\mathcal U$-small quasicategory. Viewing a $\\mathcal U$-small quasicategory in $\\mathcal U'$ induces a fully faithful coherent functor $J:\\operatorname{Cat}_{\\infty,\\mathcal U}\\to\\operatorname{Cat}_{\\infty,\\mathcal U'}$ sending each quasicategory and each functor to itself. Likewise let $I_S:\\operatorname{coCart}_{\\mathcal U}(S)\\to\\operatorname{coCart}_{\\mathcal U'}(S)$ view the same simplicial cocartesian fibration and its edge-preserving maps in the larger universe. There is a coherent natural equivalence of functors\n$$\\operatorname{St}^{\\mathcal U'}_S\\circ I_S\\simeq\\operatorname{Fun}(S,J)\\circ\\operatorname{St}^{\\mathcal U}_S,$$\nwhere $\\operatorname{Fun}(S,J)$ is postcomposition by $J$. This includes empty bases and empty fibers.",
+ "statement": "Fix Grothendieck universes \\(\\mathcal U\\in\\mathcal U'\\in\\mathcal U''\\). Let\n\\(S\\) be a \\(\\mathcal U\\)-small quasicategory, let \\(S'\\) be its image in\n\\(\\mathcal U'\\) with its quasicategory structure, and choose witnesses\n\\(P_{\\mathcal U}\\) and \\(P_{\\mathcal U'}\\) of\n[lem-coef-cocartesian-straightening] in the two universes. In the common universe\n\\(\\mathcal U''\\), the canonical viewing maps\n\\(J:\\operatorname{Cat}_{\\infty,\\mathcal U}\\to\\operatorname{Cat}_{\\infty,\\mathcal U'}\\)\nand \\(I_S:\\operatorname{coCart}_{\\mathcal U}(S)\\to\n\\operatorname{coCart}_{\\mathcal U'}(S')\\) are represented by coherent maps which\nare fully faithful for \\(J\\) and preserve the cocartesian viewing data for \\(I_S\\).\nThe ulifted straightening maps from the chosen witnesses admit the canonical\ncomparisons from \\(\\operatorname{ulift}(\\operatorname{Fun}(S,\\operatorname{Cat}_{\\infty,\\mathcal U}))\\)\nand its \\(\\mathcal U'\\)-analogue to the internal-hom objects in \\(\\mathcal U''\\).\nWith these comparisons, postcomposition by \\(J\\) gives a coherent natural\nequivalence\n\\[\n\\operatorname{St}^{\\mathcal U'}_{S'}\\circ I_S\\simeq\n\\operatorname{Fun}(S,J)\\circ \\operatorname{St}^{\\mathcal U}_{S}.\n\\]\nThis assertion is quantified over the quasicategory proofs and the two chosen\nstraightening witnesses, and includes empty bases and empty fibres.",
  "source": {
   "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
   "place": "Theorem 3.2.0.1 and the marked cone construction of section 3.2.1; section 3.3.2, especially the universe enlargement in Remark 3.3.2.3. Universe comparison of the constructions, not a verbatim numbered assertion. Read online; archival copy WANTED in report. No Stacks tag states this quasicategorical comparison."
@@ -254,5 +254,50 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-70dfe8cd0 (reviewer sub-agent of L); spot-checked: I read the whole item, every cited statement, the parent's construction (lem-coef-cocartesian-straightening steps 3-5), the citer lem-coef-small-cocartesian-model, the unit and the chapter. The statement is true and unchanged; I checked it with S empty, empty fibres, S=Delta^0, and empty or terminal A,B. Steps 1, 2, 4, 6 and 8 are correct. I repaired four faults in the corrected item file: (1) Step 3 had a typing slip. It wrote u_W: C[S^op]->I_W, but for the cone theorem with base S^op, C=I_W and phi: C[S^op]->C^op, u_W must be the replacement of C[S]. This matches the parent: I=RC[S], phi=u^op. The same U-small I is now used in both universes, and St^W_S is stated to be the parent's construction. (2) Step 5 applied lem-coef-coherent-diagram-universe-naturality, which is stated only for pattern model categories. I added the trivial pattern (Delta^0,{id},empty) with citations to def-coef-categorical-pattern-fibrancy, lem-coef-categorical-pattern-model-calculus and lem-cbc-equivalence-outer-horn-filling (edges cocartesian over a point are exactly the equivalences), so that M_{P,W} is the absolute marked model and j=J. (3) Step 7 justified compatibility of op with J by naturality of the coherent nerve. That is wrong, because op is not a simplicial functor of the marked model (Fun(A^op,B^op)^~=(Fun(A,B)^~)^op). It now cites lem-coef-cat-infinity-opposite-involution, which states the compatibility with the universe inclusion. (4) Step 9 credited the cone theorem with the contractible choice of the derived unit and counit. It now cites lem-coef-model-infinity-derived-adjunction for the coherent derived unit and counit. proof_deps is recomputed; there are no cycles. Accepted tool use: lem-cbc-equivalence-outer-horn-filling (unit sk-prop-sf-cbc, used as a generic Joyal lemma, with precedent in this unit). There are no new nodes and no duplicates. HTT is not archived; I checked 3.2.0.1, 3.2.1, Remark 3.3.2.3 and 4.2.4.4 against my own knowledge of the text. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4778bd043",
+  "group": "Q07",
+  "result": "pass",
+  "note": "All three corrections from the 52b19e59ace2 RETURN are done: J is fixed on every coherent simplex (ulift objects, evaluation of mapping simplices), I_S is fixed through viewOver (Marked.enlarge plus lifted structure map) and both mapping_iso, and the ulift(ihom) comparisons are fixed by evaluation in every degree. comparison is no longer vacuous. Remaining HEqs have equal types; rfl probes compile. Witnesses taken from the parent Statement; lean.statement verbatim; no hollow defs; sorry only; nine-step docstring; citer lem-coef-small-cocartesian-model holds. nt_compile clean in 20.3 s. Advisory: stage 3 needs uniqueness of straightening for arbitrary witnesses; report.md HTT numbers garbled (cosmetic).",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "Q07 stage 2",
+  "old_statement": "Fix Grothendieck universes $\\mathcal U\\in\\mathcal U'\\in\\mathcal U''$ and use quasicategories, coherent functors, functor equivalences and mapping spaces of [def-cbc-enhanced-diagrams-cones], and cocartesian fibrations of [def-coef-infinity-fibrations]. For $\\mathcal W=\\mathcal U,\\mathcal U'$, use the infinity categories $\\operatorname{Cat}_{\\infty,\\mathcal W}$, $\\operatorname{coCart}_{\\mathcal W}(S)$ and straightening equivalences $\\operatorname{St}^{\\mathcal W}_S$ of [lem-coef-cocartesian-straightening], with $\\mathcal W$ as the object universe; form all displayed categories in $\\mathcal U''$. Let $S$ be a $\\mathcal U$-small quasicategory. Viewing a $\\mathcal U$-small quasicategory in $\\mathcal U'$ induces a fully faithful coherent functor $J:\\operatorname{Cat}_{\\infty,\\mathcal U}\\to\\operatorname{Cat}_{\\infty,\\mathcal U'}$ sending each quasicategory and each functor to itself. Likewise let $I_S:\\operatorname{coCart}_{\\mathcal U}(S)\\to\\operatorname{coCart}_{\\mathcal U'}(S)$ view the same simplicial cocartesian fibration and its edge-preserving maps in the larger universe. There is a coherent natural equivalence of functors\n$$\\operatorname{St}^{\\mathcal U'}_S\\circ I_S\\simeq\\operatorname{Fun}(S,J)\\circ\\operatorname{St}^{\\mathcal U}_S,$$\nwhere $\\operatorname{Fun}(S,J)$ is postcomposition by $J$. This includes empty bases and empty fibers.",
+  "what": "The original Lean statement quantified only over S and hS, while its structure left the small and large relative models and straightening maps as unconstrained existentials. Moreover its J_identity and I_identity clauses asserted HEq with the same element across distinct CatInfinity and coCart types, which is not well-typed as a canonical identity (the types are not definitionally equal). The corrected statement quantifies over the quasicategory proof after ulift and over the two CocartesianStraightening.Statement witnesses, fixes all relative models and straightening maps to their witnesses, and records the canonical ulift(ihom) comparison maps explicitly.",
+  "source": {
+   "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+   "place": "Remark 3.3.2.3 (universe enlargement), Theorem 3.2.0.1 and §3.3.2"
+  },
+  "citers": [
+   {
+    "id": "lem-coef-small-cocartesian-model",
+    "holds": true,
+    "note": "Its use is the universe-compatible small cocartesian presentation; it continues to hold with explicit straightening witnesses and canonical comparison maps."
+   }
+  ]
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CocartesianStraighteningUniverseChange",
+  "declaration": "SSet.Enhanced.CocartesianStraighteningUniverseChange.cocartesian_straightening_universe_change",
+  "declarations": [
+   "SSet.Enhanced.CocartesianStraighteningUniverseChange.SamePathSimplex",
+   "SSet.Enhanced.CocartesianStraighteningUniverseChange.viewOver",
+   "SSet.Enhanced.CocartesianStraighteningUniverseChange.IsCatInfinityViewing",
+   "SSet.Enhanced.CocartesianStraighteningUniverseChange.IsCoCartViewing",
+   "SSet.Enhanced.CocartesianStraighteningUniverseChange.Statement",
+   "SSet.Enhanced.CocartesianStraighteningUniverseChange.cocartesian_straightening_universe_change"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CocartesianStraighteningUniverseChange.lean",
+  "statement": "theorem cocartesian_straightening_universe_change : ∀ (S : SSet.{u}) (hS : Quasicategory S) (hS' : Quasicategory (SSet.uliftFunctor.{max u v, u}.obj S)) (smallData : SSet.Enhanced.CocartesianStraightening.Statement.{u}) (largeData : SSet.Enhanced.CocartesianStraightening.Statement.{max u v}), Nonempty (SSet.Enhanced.CocartesianStraighteningUniverseChange.Statement.{u, v, w} S hS hS' smallData largeData)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned head 52b19e59ace2: J_normalized fixes every coherent simplex by lifted objects and parameterized-map evaluation; I_canonical fixes the entire marked object over the lifted base via viewOver and every sharp mapping simplex through the relative mapping_iso. SamePathSimplex identifies finite subset-path chains in the two object universes. Both internal-hom comparisons now have evaluation equations in every degree, including the double base lift on the large side. Full faithfulness and equivalence properties supplement these normalizations. The chosen straightening witnesses, relative models, main theorem signature and source-based statement correction are retained; the proof docstring now follows all nine DAG proof steps."
  }
 }

@@ -34,7 +34,9 @@
   "def-coef-homotopy-segal-space",
   "lem-coef-segal-inverse-evaluation",
   "lem-coef-segal-equivalence-classifier",
-  "lem-cbc-grothendieck-presheaf-coherent-straightening"
+  "lem-cbc-grothendieck-presheaf-coherent-straightening",
+  "lem-coef-rezk-local-model",
+  "lem-coef-finite-reedy-localization"
  ],
  "proof": [
   {
@@ -206,29 +208,35 @@
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.SegalEquivalenceSubspaceFiltered",
-  "declaration": "SSet.SegalEquivalenceFiltered.segal_equivalence_subspace_filtered",
+  "declaration": "SSet.SegalFiltered.segal_equivalence_subspace_filtered",
   "declarations": [
-   "SSet.SegalEquivalenceFiltered.Presheaves",
-   "SSet.SegalEquivalenceFiltered.IsSegalObject",
-   "SSet.SegalEquivalenceFiltered.walkingIsoObject",
-   "SSet.SegalEquivalenceFiltered.degreeEvaluation",
-   "SSet.SegalEquivalenceFiltered.equivalenceSpaces",
-   "SSet.SegalEquivalenceFiltered.segal_equivalence_subspace_filtered"
+   "SSet.SegalFiltered.level",
+   "SSet.SegalFiltered.endpoint",
+   "SSet.SegalFiltered.pairs",
+   "SSet.SegalFiltered.underlying",
+   "SSet.SegalFiltered.inclusion",
+   "SSet.SegalFiltered.modelPair",
+   "SSet.SegalFiltered.segalObjects",
+   "SSet.SegalFiltered.equivalenceSubspaces",
+   "SSet.SegalFiltered.forgetSubspace",
+   "SSet.SegalFiltered.subspaceLevel",
+   "SSet.SegalFiltered.equivalenceSpace",
+   "SSet.SegalFiltered.segal_equivalence_subspace_filtered"
   ],
   "file": "lean/Sheaf/CategoryTheory/SegalEquivalenceSubspaceFiltered.lean",
-  "statement": "theorem segal_equivalence_subspace_filtered (q : largeNerve.{u + 1, u, 0} SSet.{u} ⟶ CategoryTheory.Spaces.infinityCategory.{u}) (_hq : IsLocalization (fun _ _ f ↦ Enhanced.IsWeakHomotopyEquivalence f) q) (I : SSet.{u + 2}) [Quasicategory I] (_hsmall : Presentability.IsSmall.{u, u + 2} I) (_hfiltered : Presentability.IsKappaFiltered Cardinal.aleph0.{u} I) (F : I ⟶ SSet.uliftFunctor.{u + 2, u + 1}.obj Presheaves.{u}) (c : (Enhanced.coconeCategory F) _⦋0⦌) (_hstage : ∀ i : I _⦋0⦌, IsSegalObject q (F.app _ i).down) (_hapex : IsSegalObject q c.1.1.down) (_hpointwise : ∀ n : ℕ, Enhanced.IsColimiting (F ≫ SSet.uliftFunctor.{u + 2, u + 1}.map (degreeEvaluation n)) (CategoryTheory.Spaces.mappedCocone (SSet.uliftFunctor.{u + 2, u + 1}.map (degreeEvaluation n)) F c)) : Enhanced.IsColimiting (F ≫ equivalenceSpaces q) (CategoryTheory.Spaces.mappedCocone (equivalenceSpaces q) F c)",
+  "statement": "theorem segal_equivalence_subspace_filtered (q : largeNerve.{u + 1, u, 0} SSet.{u} ⟶ RezkLocalModel.Spaces.{u}) (_hq : IsLocalization (fun _ _ f ↦ Enhanced.IsWeakHomotopyEquivalence f) q) : (∃ r : (segalObjects q).toSSet ⟶ (equivalenceSubspaces q).toSSet, Enhanced.IsFunctorEquivalence r ∧ Enhanced.AreNaturallyEquivalent (r ≫ forgetSubspace q) (segalObjects q).ι) ∧ ∀ (I : SSet.{u + 1}) [Quasicategory I], Presentability.IsSmall.{u, u + 1} I → Presentability.IsKappaFiltered Cardinal.aleph0 I → ∀ (F : I ⟶ (equivalenceSubspaces q).toSSet) (c : (Enhanced.coconeCategory F) _⦋0⦌), (∀ n : SimplexCategory, Enhanced.IsColimiting (F ≫ subspaceLevel q n) (CategoryTheory.Spaces.mappedCocone (subspaceLevel q n) F c)) → Enhanced.IsColimiting (F ≫ equivalenceSpace q) (CategoryTheory.Spaces.mappedCocone (equivalenceSpace q) F c)",
   "branch": "newtargets-dag",
-  "by": "NA",
+  "by": "NB",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Universal-property statement of the canonical equivalence-edge comparison, using the existing walking-isomorphism classifier Map(dE,X) ≃ X_eq naturally over X_1. The existing presheafSSet is specialized by an abbreviation; IsSegalObject only expresses its equivalence-saturated existing homotopy-Segal predicate. The coherent equivalence-space functor is the recorded corepresented functor. The conclusion fixes the entire induced cocone, hence the canonical comparison. No completeness or ordinary-index restriction. The ambient u+2 lift permits the corepresented mapping-space functor without restricting small spaces or the u-small filtered quasicategory. All additional statement dependencies are already recorded declarations; no dependency is restated."
+  "note": "Coherent presheaf formulation with the actual invertible-component inclusion, saturated in the category of pairs over degree one. The first clause identifies annotated objects with all Segal objects, so no restriction to strict index diagrams or chosen subspaces is imposed. The final clause is the canonical comparison equivalence expressed by its universal cocone, retaining the map to X_1. Uses the existing non-Reedy homotopy Segal and inverse-component definitions; no statement correction or new independent notion."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-11072761f",
-  "group": "NA",
+  "reviewer": "NT-stage2-cc-a59a7cfde",
+  "group": "NB",
   "result": "pass",
-  "note": "Clause-by-clause match: X_eq is modelled canonically as Map(dE,-) via the landed classifier and inverse-evaluation nodes (Rezk Thm 6.2, no completeness needed); IsSegalObject is a saturated levelwise-Kan Segal representative with no Reedy fibrancy or completeness; filtered, small I with nonemptiness only from filteredness; pointwise colimit in every degree n plus Segal apex; conclusion is that the image cocone is colimiting, equivalent to colim (X_i)_eq -> X_eq being an equivalence. The u+1 target universe is equivalent because the inclusion of spaces preserves u-small colimits, and no universe equality is imposed. The localization map q exists in the recorded framework, so the statement is not vacuous. Node file changed only in lean and stmt_deps; the 5 added stmt_deps are landed and create no cycle; lean.statement is verbatim; no hollow definitions; sorry only in the theorem; docstrings and imports follow the brief. nt_compile --json of the snapshot module: rc 0, no errors or warnings (3.6 s). Minor, not blocking: no Main definitions list in the module docstring."
+  "note": "Statement matches the node clause by clause. Segal objects use the existing homotopy-Segal definition (no completeness or Reedy assumption); the equivalence subspace is the existing invertibleArrows (whole components, two-sided inverses); functoriality is an equivalence between Segal objects and annotated pairs; the index is a small aleph0-filtered quasicategory with no extra conditions; the hypothesis is the pointwise colimit in every degree with a Segal apex; the conclusion is that the image cocone of subspaces is colimiting, i.e. the canonical comparison over X1. The q/IsLocalization parameter is satisfiable by complete_segal_quasicategory_comparison. Edge cases checked: empty spaces, non-complete group nerves, late inverses, non-injective transitions, empty index excluded only by filteredness. Single universe u, nothing unbound. Node delta is only lean and stmt_deps (+4 landed nodes); a dependency-graph search finds no cycle. Recorded statement is verbatim in the file; all 12 declarations exist; no duplicate notion found. No hollow definitions; source and blueprint docstrings present; five proof steps in the docstring; the only sorry is the main theorem. Report has a real Worker report and the standard Second reading stub. nt_compile.py: clean, exit 0 in 5.2 s; the tool was confirmed to report errors with a deliberate failing copy. Remark only: mappedCocone's owner def-coef-infinity-category-of-spaces is not in stmt_deps, which no rule requires."
  }
 }

@@ -13,7 +13,9 @@
   "lem-coef-simplicial-right-fibration-presentation",
   "lem-coef-pinched-cube-latching",
   "lem-coef-coherent-weight-limit-recognition",
-  "lem-coef-infinity-join-cone-calculus"
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-unstraightening-homotopy-descent",
+  "lem-coef-unstraightening-simplex-transport"
  ],
  "proof": [
   {
@@ -250,5 +252,45 @@
   "group": "Q67",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q67-0f63bee80 (reviewer sub-agent of L); spot-checked: Mathematics and route check pass. The node metadata incorrectly lists created.item=lem-coef-right-fibration-section-limit and group=Q117; corrected JSON is in fixes/dag/nodes/sec-six-functors/lem-coef-cone-unit-weighted-evaluation.json with only those fields changed to the Q67 item and group.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bcd7926ab",
+  "group": "NE",
+  "result": "pass",
+  "note": "Read the node and all 7 proof steps, the delivered module, the report and the dependency modules (ConePresheafAdjunction, SimplicialRightFibrationPresentation, UnstraighteningHomotopyDescent, UnstraighteningSimplexTransport, UnstraighteningSimplexPointwise, CoherentWeightLimitRecognition, SpaceTransportClassification) plus the citer RightFibrationSectionLimit. Every clause matches the node: K a quasicategory and F a Kan-valued enriched presheaf with nothing stronger; W=leftObj(1_K); unit built from its simplex family and equal to the adjunction unit; L=mapping W F is Kan; c_F chosen from an exists-unique statement fixing all cone generators in every degree (the descent node's cone_formula with the Q^r max-subset parameter, no fibrant replacement); degree-0 formula c_F(l)=U_K(l)u; full enriched action identity of weighted evaluation; base-operator (arbitrary monotone), parameter-operator and F-naturality clauses; natural fibre isomorphisms to singQ with the weak equivalence and evaluation on the direct edge via the max-subset projection, with no strict inverse claimed. Checked the base-operator, parameter, unit and fibre-vertex identities by hand. Edge cases (empty K, K=Delta0, empty values, n=r=0, degeneracies) covered; single universe u, nothing unbound. lean.statement verbatim; all 19 declarations present; lines at most 97. The two added stmt_deps (descent, simplex transport) occur in the type and create no cycle. No hollow definitions; all theorems sorry with proof docstrings; source and blueprint docstrings on every declaration. New postParameter is the general form of ConeTransport.postLabel, which cannot be applied to W. The worker report is real; the second reading is the accepted 2026-10-17 direct-delivery stub. nt_compile.py --json: exit 0, 6.7 s, no errors or warnings. Minor, not blocking: module docstring lacks a Main definitions list; cone-presheaf-adjunction declarations reach the type through the presentation node's public import and it is listed as a proof dependency; stage-1 created metadata unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ConeUnitWeightedEvaluation",
+  "declaration": "SSet.ConeUnit.cone_unit_weighted_evaluation",
+  "declarations": [
+   "SSet.ConeUnit.weight",
+   "SSet.ConeUnit.simplexToUnit",
+   "SSet.ConeUnit.unitLabel",
+   "SSet.ConeUnit.unitSimplex",
+   "SSet.ConeUnit.unitSimplex_naturality",
+   "SSet.ConeUnit.unit",
+   "SSet.ConeUnit.Sections",
+   "SSet.ConeUnit.sectionLabel",
+   "SSet.ConeUnit.weightedLabel",
+   "SSet.ConeUnit.IsComparison",
+   "SSet.ConeUnit.comparison_existsUnique",
+   "SSet.ConeUnit.comparison",
+   "SSet.ConeUnit.postComponent",
+   "SSet.ConeUnit.postComponent_naturality",
+   "SSet.ConeUnit.postParameter",
+   "SSet.ConeUnit.weightedEvaluation",
+   "SSet.ConeUnit.directWeight",
+   "SSet.ConeUnit.directValue",
+   "SSet.ConeUnit.cone_unit_weighted_evaluation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ConeUnitWeightedEvaluation.lean",
+  "statement": "theorem cone_unit_weighted_evaluation (K : SSet.{u}) [Quasicategory K] (F : ConePresheaf.Presheaf K) (hF : SimplicialRightFibration.IsKanDiagram F) : KanComplex (ConePresheaf.mapping (weight K) F) ∧ IsComparison F (comparison F) ∧ (∃ adj : ConePresheaf.left K ⊣ ConePresheaf.right K, (adj.unit.app (Over.mk (𝟙 K))).left = unit K) ∧ (∀ (ℓ : weight K ⟶ F), ((comparison F).app (op ⦋0⦌) (ConePresheaf.restrictParameter (toUnit Δ[0]) ℓ)).val = Functor.HomObj.ofNatTrans (unit K ≫ ConePresheaf.rightSetMap ℓ)) ∧ (∀ (P : SSet.{u}) (ℓ : ConePresheaf.ParameterMap (weight K) F P) (k l : PinchedCube.rigidification.obj K), (ConePresheaf.action (weight K) k l ▷ P) ≫ weightedEvaluation ℓ l = (α_ _ _ _).hom ≫ (𝟙 _ ⊗ₘ weightedEvaluation ℓ k) ≫ ConePresheaf.action F k l) ∧ (∀ (n r s : SimplexCategory) (ℓ : ConePresheaf.ParameterMap (weight K) F (SSet.stdSimplex.obj n)) (σ : SSet.stdSimplex.obj r ⟶ K) (θ : r ⟶ n) (α : s ⟶ r) (i : Fin (s.len + 1)), HEq (weightedLabel ℓ (SSet.stdSimplex.map α ≫ σ) (α ≫ θ) i) (ConeTransport.pathsOperator α i ≫ weightedLabel ℓ σ θ (α.toOrderHom i))) ∧ (∀ (m n r : SimplexCategory) (β : m ⟶ n) (ℓ : ConePresheaf.ParameterMap (weight K) F (SSet.stdSimplex.obj n)) (σ : SSet.stdSimplex.obj r ⟶ K) (θ : r ⟶ m) (i : Fin (r.len + 1)), weightedLabel (ConePresheaf.restrictParameter (SSet.stdSimplex.map β) ℓ) σ θ i = weightedLabel ℓ σ (θ ≫ β) i) ∧ (∀ (G : ConePresheaf.Presheaf K) (_hG : SimplicialRightFibration.IsKanDiagram G) (b : F ⟶ G) (n : SimplexCategory) (ℓ : ConePresheaf.ParameterMap (weight K) F (SSet.stdSimplex.obj n)), ((comparison G).app (op n) (postParameter b ℓ)).val = ((comparison F).app (op n) ℓ).val.comp (Functor.HomObj.ofNatTrans (ConePresheaf.rightSetMap b))) ∧ (∃ e : ∀ (G : ConePresheaf.Presheaf K) (k : K _⦋0⦌), Enhanced.fiber (ConePresheaf.rightProjection G) k ≅ UnmarkedStraightening.singQ (ConePresheaf.obj G (Straightening.vertex k)), (∀ (G H : ConePresheaf.Presheaf K) (b : G ⟶ H) (k : K _⦋0⦌), Enhanced.fiberMap ((ConePresheaf.right K).map b) k ≫ (e H k).hom = (e G k).hom ≫ UnmarkedStraightening.singQMap (ConePresheaf.component b (Straightening.vertex k))) ∧ (∀ k : K _⦋0⦌, Enhanced.IsWeakHomotopyEquivalence (ConePresheaf.singularComparison (ConePresheaf.obj F (Straightening.vertex k)))) ∧ ∀ (k : K _⦋0⦌) (n : SimplexCategory) (ℓ : ConePresheaf.ParameterMap (weight K) F (SSet.stdSimplex.obj n)), ∃ z : (Enhanced.fiber (ConePresheaf.rightProjection F) k).obj (op n), (pullback.snd (SSet.const (X := Δ[0]) k) (ConePresheaf.rightProjection F)).app (op n) z = sectionLabel ((comparison F).app (op n) ℓ) (SSet.const (X := SSet.stdSimplex.obj n) k) (𝟙 n) ∧ (e F k).hom.app (op n) z = ConePresheaf.pinchedProjection.app n ≫ yonedaEquiv.symm (directValue ℓ k))",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The concrete all-generator presentation of the cone comparison retains whole subset-path maps, their union action and the maximum-subset parameter. The section comparison is selected only from a uniqueness theorem specifying every generator in every degree; the ordinary unit is its actual simplex family. No replacement of W or arbitrary choice of a comparison map."
  }
 }

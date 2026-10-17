@@ -437,17 +437,17 @@
   "file": "lean/Sheaf/Paper/FiniteDirectImageComposition.lean",
   "statement": "def finiteDirectImageComposition (Λ : Type (u + 1)) [CommRing Λ] {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) : (lowerStar (ModuleCat.{u + 1} Λ) (f ≫ g)).rightDerivedFunctor ≅ (lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor ⋙ (lowerStar (ModuleCat.{u + 1} Λ) g).rightDerivedFunctor",
   "branch": "newtargets-dag",
-  "by": "Q24",
-  "date": "2026-10-15",
+  "by": "Q44",
+  "date": "2026-10-17",
   "existing": false,
-  "note": "Finite-level interface for clause (1), the clause used by the item. No recorded Lean interface exists for the node. Specialize the existing canonical unbounded right-derived compositor to actual pro-etale fixed-module direct images; its universal-property unit normalization fixes the comparison. No arbitrary natural isomorphism is chosen. Integral, rational and common-stage operations are not used by this finite-level definition."
+  "note": "Section 1(B): the recorded module imports both retired ProEtale operations and the current finite-coefficient operations transitively, causing duplicate upperStarIsoLowerStarInv declarations when used with the site comparison. Only its six ProEtale import paths are migrated to FiniteCoefficient (OpenImmersion becomes Open). The universal right-derived compositor construction and its mathematical signature are unchanged."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-390f3e863",
-  "group": "Q24",
+  "reviewer": "NT-stage2-cc-541e0efe4",
+  "group": "Q44",
   "result": "pass",
-  "note": "Immutable delivery matches the node and dependencies; edge cases, universes, docstrings, source, and canonical constructions checked. All four files passed dependency-aware scompile.py compilation with server confirmation."
+  "note": "Every hypothesis matches the node and none is stronger: field k, prime l invertible in k, E/Q_l finite, n:ℕ+, separated finite-type k-schemes and maps, the IsProper h ∨ IsProper f disjunction, arbitrary compactifications ch/cf/chf, L in D+. All three conclusions match: the composition square with the recorded compositors (Etale.unboundedEtaleLowerShriekCompIso; originCompositionAmbient), c = symm of compactSupportSiteComparison (b, then P(e)), correct order and direction; the refinement square with the actual def (b) refinement map; the proper case c = b under adjunction-built identity-open identifications. The statement is verbatim. Dependency repairs: cor-cbc-proper-coincidence now states that Ex_! equals the PBC exchange, using the recorded maps (the old record was only a Nonempty iso); the other three modules only migrate imports, plus two def (b) helpers in the owning refinement module. No hollow definitions; sorry only in theorems; docstrings and the 10 proof steps present. nt_compile --json on all 5 files: rc 0, clean. Direct importers: ProjectiveLineFullAdjunction compiles before and after; CompactificationCoherence, CompactCoefficientComposition, FiniteCoefficientDirectImage and EtaleGeometricBiduality fail at baseline from unrelated duplicate-import or DeltaRestriction errors, the same way with the delivery, so no regression. Observations only: the recorded pro-etale compositor and proper/open map are conjugations of the etale ones, so the squares are near-formal (inherited from thm-sf-comp-composition); E : Type (u+1) is a presentation convention, not a restriction."
  }
 }

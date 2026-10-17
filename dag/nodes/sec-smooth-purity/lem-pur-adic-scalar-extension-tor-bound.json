@@ -159,5 +159,25 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-90337ad7d (reviewer sub-agent of L); spot-checked: Read the item and every cited node in full, the main-20261015 lem-coef-integral-finite-extension.proof.md (first paragraph) and master sk-thm-purity-transport Step 2. The statement is true; I tested it on E=F and on Q_l(sqrt l) with e=2, m=3, n=2, where A_{F,3} is not flat over Z/l^2, using K=Z_l and K=Z/l. The delivery has no new nodes. Batch-5 check: step 2 cited lem-coef-finite-free-extension, whose closure reaches lem-trf-adjoint-mate, only for a finite freeness the argument never uses; the blueprint paragraph it follows does not cite it either. I removed the citation (no file still cites it). Step 1 now works at every level m with en>=m and cites the K-flat change of rings it used without citation: lem-pc-kflat-resolution and lem-pur-kflat-change-of-rings, plus associativity along R->S->A_{F,m} = R->A_{E,n}->A_{F,m}. Step 2 tests the Tor amplitude through def-weil-derived-tensor and restriction of scalars, so no flatness is needed. Step 3 now also cites lem-weil-finite-free-completed-scalar-comparison to identify C(K) with the strict-tower extension. proof_deps were recomputed; the statement is unchanged. Tool use to record: lem-pc-kflat-resolution (generic). Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-adic-scalar-extension-tor-bound.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-faa9a5117",
+  "group": "Q108",
+  "result": "fix",
+  "note": "H3 x2 fixed in fixes/: (1) the delivered conclusion `∃ a b` re-chose the interval; the node (and its citer lem-pur-adic-purity-scalar-naturality) requires the SAME [a,b] as the hypothesis on all reductions of K, so the fix adds (a b) and hab : ∀ n, HasProEtaleTorAmplitude of integralDerivedReduction l E W D hl n K in [a,b], and concludes ∀ m with the same a b. (2) C_{F/E,W}(K) is the ordinary derived change of completed rings K⊗^L_R S per the node; the delivery used the strict-tower integralScalarExtension (only isomorphic via the separate sorried comparison theorem); the fix uses the recorded completedDerivedScalarExtension l E L ι W from lem-weil-finite-free-completed-scalar-comparison (already in stmt_deps). Unused IntegralScalarExtension import dropped; docstring carries the node's 3 proof steps. Fixed lean-record statement verified verbatim against the file. nt_compile.py --json: delivered 7.2 s clean, fixed 6.5 s clean. Node fields other than lean unchanged; no hollow defs; only sorry; report has Worker report and Second reading sections; edge cases m=0, E=L, e>1, a=b covered; shared universe u comes from the recorded integralCtfProperty."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurAdicScalarExtensionTorBound",
+  "declaration": "WeilConjectures.purAdicScalarExtensionTorBound",
+  "file": "lean/Sheaf/Paper/PurAdicScalarExtensionTorBound.lean",
+  "statement": "theorem purAdicScalarExtensionTorBound (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (ι : E →ₐ[Padic l] L) (e : ℕ) (he : Ideal.map (integralScalarIntegerInclusion l E L ι) (Ideal.span ({Padic.coefficientExtensionUniformizer l E} : Set (Padic.coefficientExtensionIntegers l E))) = Ideal.span ({Padic.coefficientExtensionUniformizer l L} : Set (Padic.coefficientExtensionIntegers l L)) ^ e) (W : AlgebraicGeometry.Scheme.{u}) (K : completedIntegralDerivedCategory l E W D hl) (hK : integralCtfProperty D l hl E W K) (a b : ℤ) (hab : ∀ n : ℕ, HasProEtaleTorAmplitude W (Padic.coefficientExtensionRing l E (n + 1)) ((integralDerivedReduction l E W D hl n).obj K) a b) : ∀ m : ℕ, HasProEtaleTorAmplitude W (Padic.coefficientExtensionRing l L (m + 1)) ((integralDerivedReduction l L W D hl m).obj ((completedDerivedScalarExtension l E L ι W).obj K)) a b",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Maintainer review fix (§H3): the conclusion now keeps the hypothesis interval [a,b] (the node's 'the same interval'), instead of an existentially re-chosen interval, and C_{F/E,W} is the ordinary derived change of completed coefficient rings completedDerivedScalarExtension (lem-weil-finite-free-completed-scalar-comparison), as the node and its citer lem-pur-adic-purity-scalar-naturality define it, instead of the strict-tower integralScalarExtension.",
+  "fixed_by": "NT-stage2-cc-faa9a5117"
  }
 }

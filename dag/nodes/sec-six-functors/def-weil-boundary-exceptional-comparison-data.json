@@ -1,0 +1,123 @@
+{
+ "id": "def-weil-boundary-exceptional-comparison-data",
+ "kind": "definition",
+ "title": "Specified etale to pro-etale exceptional Hom transport and counit compatibility",
+ "status": "split",
+ "statement": "Let $A$ be a finite commutative ring, $i:Z\\to T$ a proper morphism [def-weil-proper-morphism] with $T$ quasi-compact. Use ordinary constant-$A$ etale and pro-etale module derived categories [def-weil-pbc-derived-categories], [def-weil-pbc-proetale-modules], with $C_W=\\nu_W^*$ the exact derived comparison [def-sf-comparison-derived-pullback]. Write $F_e=Ri_{e,*}$ and $F_p=Ri_{p,*}$ for ordinary derived direct images [def-weil-pbc-proetale-operations]. Use the existing etale exceptional adjoint $G_e=i^\\times$, normalized to $F_e\\dashv G_e$ by the canonical proper forget-supports comparison for the identity-open compactification [def-amb-etale-compact-support], [thm-amb-etale-exceptional-adjoint]. Put $G_p=C_ZG_eR\\nu_{T,*}$, exactly the finite exceptional formula [def-weil-exceptional-inverse-image]. Define $b:C_TF_e\\to F_pC_Z$ to be the adjunction mate of the canonical ordinary pullback square, using the exact/left-derived identifications; its definition includes the ordinary pullback/direct-image counit normalization.\n\nFor $H\\in D^+(Z_e,A)$ and $L\\in D^+(T_p,A)$ define the map\n$$h_{H,L}:\\operatorname{Hom}(F_pC_ZH,L)\\to\\operatorname{Hom}(C_ZH,G_pL)$$\nby first precomposing with $b_H$, then applying the comparison adjunction, then the ordinary exceptional adjunction, then applying $C_Z$ to the resulting morphism. This definition asserts no bijectivity. For $N\\in D^+(T_e,A)$ let $j_N:N\\to R\\nu_{T,*}C_TN$ be the actual comparison unit and let $o_N=C_ZG_e(j_N):C_ZG_eN\\to G_pC_TN$. The existing bounded-below exceptional interface supplies $G_eN\\in D^+(Z_e,A)$.\n\nDefine $\\operatorname{CounitComparison}_i(N)$ to mean that $o_N$ is invertible, that the canonical component $b_{G_eN}$ is an isomorphism, and that there is a morphism $\\mu:F_pC_ZG_eN\\to C_TN$ with\n$$h_{G_eN,C_TN}(\\mu)=o_N,\\qquad \\mu=C_T(\\varepsilon^e_N)\\circ b_{G_eN}^{-1},$$\nwhere $\\varepsilon^e$ is the counit of the specified normalized etale exceptional adjunction. Equivalently the isomorphism used here must have hom exactly the canonical mate component. These are definitions of the Hom map, origin map and compatibility property, not an existence assertion for an ambient pro-etale exceptional adjunction.",
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-sf-comparison-derived-pullback",
+  "def-weil-pbc-proetale-operations",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 0B65 (adjunction mates) and 0DV0 (composition of counits), applied to the comparison and exceptional adjunctions in the boundary-duality ordinary-to-pro-etale Hom chain."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homTransport|CounitComparison",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-17",
+   "verdict": "Generic adjunction/counit ingredients only; no existing specified etale/pro-etale exceptional Hom transport and origin-counit property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical etale proetale Hom transport exceptional adjunction counit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit\", \"CategoryTheory.Adjunction.counitAsIsoOfIso\", \"CategoryTheory.Adjunction.adjunctionOfEquivRight_counit_app\", \"CategoryTheory.Adjunction.mkOfHomEquiv_counit_app\", \"CategoryTheory.ObjectProperty.isColocal_adj_counit_app\", \"CategoryTheory.Adjunction.functorialityCounit\", \"CategoryTheory.Equivalence.toAdjunction_counit\", \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux\"]}",
+   "date": "2026-10-17",
+   "verdict": "Generic adjunction/counit ingredients only; no existing specified etale/pro-etale exceptional Hom transport and origin-counit property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical Hom map etale proetale comparison exceptional adjunction counit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolidCounit\", \"AlgebraicGeometry.ΓSpec.adjunction_counit_app'\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"CompHausLike.LocallyConstant.adjunction_counit\", \"StandardEtalePair.homEquiv_symm_apply\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"StandardEtalePair.homEquiv_apply_coe\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\"]}",
+   "date": "2026-10-17",
+   "verdict": "Generic adjunction/counit ingredients only; no existing specified etale/pro-etale exceptional Hom transport and origin-counit property."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"homTransport|CounitComparison|exceptionalOriginMap\" /home/ubuntu/weil-src-slopmaster2/WeilConjectures and /home/ubuntu/weil-newtargets-shared/lean/Sheaf; blueprint_refs.py search \"Hom transport\"; rg -l \"Hom transport|transported Hom|CounitComparison|boundary-exceptional-comparison\" dag/nodes",
+   "results": "Upstream: no hits. Sheaf: unrelated normalizedDVRCounitComparison, enriched-infinity-presheaf homTransport field and generic affine counit comparisons; none defines this transport. Blueprint search: 0 blueprint nodes match. DAG: the item and related theorem lem-coef-site-closed-counit-transport, whose lean record is absent, as well as unrelated categorical transports; no definition node for these maps.",
+   "date": "2026-10-17",
+   "verdict": "The named functors and generic homEquiv/mateEquiv exist and are reused; the specified composite and its compatibility property need a definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-boundary-proetale-projection-comparison",
+  "date": "2026-10-17",
+  "group": "Q125"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-weil-boundary-duality-discharge",
+   "place": "Ordinary-to-pro-etale realization: the specified exceptional Hom chain and the origin-unit characterization of its transported counit.",
+   "via": [
+    "lem-weil-boundary-proetale-projection-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.BoundaryExceptionalComparisonData",
+  "declaration": "AlgebraicGeometry.ProEtale.BoundaryComparison.CounitComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.coefficients",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.comparison",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.etaleImage",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.proetaleImage",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.pullbackSquare",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.directImageMate",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.etaleExceptional",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.exceptionalAdjunction",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.proetaleExceptional",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.homTransport",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.exceptionalPlus",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.exceptionalOriginMap",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.CounitComparison"
+  ],
+  "file": "lean/Sheaf/Paper/BoundaryExceptionalComparisonData.lean",
+  "statement": "def CounitComparison (A : Type u) [CommRing A] [Finite A] {Z T : Scheme.{u}} (i : Z ⟶ T) [IsProper i] [CompactSpace T] (N : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (coefficients A))) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd6e34af9",
+  "group": "Q125",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd6e34af9",
+  "group": "Q125",
+  "result": "pass",
+  "note": "I checked every clause of the node against the Lean. The coefficient ring coefficientExtensionRing l E (n+1) covers exactly n>=1; l != p; Z and T are separated finite type over k with i a closed immersion over k; there are no extra proper or Noetherian binders and CompactSpace T is derived. The categories are the fixed-scalar ModuleCat(ULift A) sheaves, with C_W = comparisonUpperStar.mapDerivedCategory (definitionally the recorded siteComparisonDerivedPullbackPlus). G_e is Etale.rightDerivedUpperShriek at ofIsProper i, normalized by the canonical Rf_! = Rf_* isomorphism; G_p is sfFiniteExceptionalFixed. b is the mateEquiv of the actual derived adjunctions applied to the canonical pullback square. homTransport is the node's Hom chain in the node's order. CounitComparison has both constructibility hypotheses; I checked by hand that h(b^-1 >> C_T eps_N) = C_Z G_e(j_N). The projection maps are the canonical rightAdjointProjectionMap maps; the eta-equation and its inverse clause match the node exactly. Edge cases: Z empty, i = id, zero objects, n = 1. Universes follow the project convention. Defs are not hollow, the only sorry is the theorem proof, docstrings and lines are fine, and both statement fields are verbatim. Both new-node and item records follow the field rules. nt_compile --json on both siblings, run twice, gave no diagnostics. Observations, not blocking: F1, directImageMate and pullbackSquare re-present the canonical mate on unbounded categories, because the recorded fixedComparisonDirectImageMatePlus is typed on D+ and the upstream mate is in the L(nu^*) presentation; it is the same canonical map and its invertibility follows from a proved upstream lemma. F2, the pro-etale operations are the fixed-scalar ones, as the recorded dependencies already use. F3, the second reading is the worker's own pass. F4, source.place 'returned step 9' is a maintainer-owned field and was left alone."
+ }
+}

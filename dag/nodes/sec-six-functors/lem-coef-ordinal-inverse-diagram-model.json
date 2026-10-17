@@ -8,7 +8,8 @@
   "place": "Definition A.2.9.1 and Proposition A.2.9.19, printed pp.835,841-844 (PDF pp.852,858-861); Example A.2.9.22 and Corollary A.2.9.24(ii), printed pp.845-846 (PDF pp.862-863), specialized to an arbitrary small ordinal with its usual well-order. The construction in the proof of Proposition A.2.9.19 uses the ground functorial factorizations at each stage, giving the functorial version here. Read online 2026-10-18; not archived under literature/. WANTED. No Stacks tag states this model-category result."
  },
  "stmt_deps": [
-  "lem-coef-model-infinity-derived-adjunction"
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-reedy-model-structure"
  ],
  "proof": [
   {
@@ -265,5 +266,28 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-b74e0f268 (reviewer sub-agent of L); spot-checked: I read the item and all ten proof steps in full and checked each step myself. The proof is complete and correct, the statement is unchanged, and I made no repairs. Shape: one commit touching only the item and its report; no new nodes. Compared with the live side DAG and weil-conjectures-sheaf, the statement, stmt_deps and source are byte-identical, so the statement was not weakened. Cited statements read in full: def-weil-pbc-category-colimit; lem-coef-model-infinity-derived-adjunction (only its first paragraph of model and weak-factorization conventions is used); lem-weil-pbc-transfinite-recursion (Mathlib leaf); lem-coef-ordinal-latching-diagram-lifting (any small ordinal, no continuity condition); lem-coef-lifting-class-closure (applied in the opposite category for pullback and composition closure of right classes); lem-coef-factorization-lifting-retracts (both halves). Step checks: Step 2's pullback equations, naturality of a and b, and r_alpha=rho_alpha(b) all hold. In Step 4 the dualization to M^op over theta is correctly oriented: lambda_alpha(p^op)=rho_alpha(p)^op, and the hypothesis is i_alpha lifting against rho_alpha(p). Step 7 is the limit lifting via const(j) over the initial segment gamma, including gamma=0. Step 8 writes q_alpha as the base change of M_alpha q composed with rho_alpha(q). Step 9 is the retract argument giving F∩W = T. Small cases checked: theta=0, 1, 2 and omega+1 (no continuity at the limit stage). Minor wording point, harmless and unchanged: the recursion rule in Step 3 also needs a default value on non-compatible families. Route: every cited statement node is in unit sk-prop-sf-biduality-general; the others are a definition and a Mathlib leaf, so no tool_uses are needed. A transitive-closure check over 642 nodes found no cycle. Blueprint: the ancestor prop-coef-integral-exceptional-adjoint matches; its proof paragraph 2 really is only the derived inverse-limit adjunction, as the new place text says; same_as=[] agrees with my grep. Duplicates: lem-coef-reedy-model-structure (natural-number degrees), lem-coef-direct-wfs-extension (finite direct categories) and lem-coef-combinatorial-injective-diagram-model (combinatorial, no matching description) do not cover the item. Source: HTT A.2.9.1, A.2.9.19, A.2.9.22 and A.2.9.24(ii) is not archived under literature/; it is correctly marked WANTED with proof_origin=agent. I could not open the PDF, so I did not check the page numbers; the statement agrees with the standard Reedy structure on theta^op (objectwise cofibrations, relative matching fibrations), and I checked the proof without relying on the source. No SGA source is used. This is not a target node, so no base-change morphism or coefficient category is involved."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9b96c8a34",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Commit 9b96c8a341 touches only the node, module and report. The node changed only in lean and stmt_deps; stmt_deps gained the landed same-unit lem-coef-reedy-model-structure, with no cycle. lean.statement is verbatim and there is one sorry. Hypotheses equal the model-infinity dependency's conventions (ModelCategory, HasLimits/HasColimits, both HasFunctorialFactorization) plus w-sized limits for θ : Ordinal.{w}, with no universe equation. Index θ = OrderDual θ.ToType, canonically iso to Iio θ with arrows α→β iff β≤α, and covers θ=0. Matching objects and maps are the canonical Reedy.matchingFrom/relativeMatching with N=⊤ (nonidentity outgoing arrows = predecessors β<α). Every clause is present: W and C objectwise via functorCategory, both functorial factorizations, fibrations iff ρ_α∈F, F∩W iff ρ_α∈trivialFibrations, C∩W objectwise, fibrancy iff matchingFrom∈F. No extra assumptions, no hollow definitions, docstrings carry the source, blueprint tag and ten steps. nt_compile: clean, 12.8 s and 5.5 s; axioms are standard plus sorryAx. Minor: the citer uses ord.ToTypeᵒᵖ (iso transport needed at stage 3); proof-only imports retained."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OrdinalInverseDiagramModel",
+  "declaration": "HomotopicalAlgebra.ordinalInverseDiagramModelStructure",
+  "declarations": [
+   "HomotopicalAlgebra.OrdinalInverse.Index",
+   "HomotopicalAlgebra.ordinalInverseDiagramModelStructure"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OrdinalInverseDiagramModel.lean",
+  "statement": "theorem ordinalInverseDiagramModelStructure {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] [HasLimitsOfSize.{w, w} M] [HasColimitsOfSize.{w, w} M] [(cofibrations M).HasFunctorialFactorization (trivialFibrations M)] [(trivialCofibrations M).HasFunctorialFactorization (fibrations M)] {θ : Ordinal.{w}} : ∃ m : ModelCategory (OrdinalInverse.Index θ ⥤ M), m.categoryWithWeakEquivalences.weakEquivalences = (weakEquivalences M).functorCategory (OrdinalInverse.Index θ) ∧ m.categoryWithCofibrations.cofibrations = (cofibrations M).functorCategory (OrdinalInverse.Index θ) ∧ (m.categoryWithCofibrations.cofibrations).HasFunctorialFactorization (m.categoryWithFibrations.fibrations ⊓ m.categoryWithWeakEquivalences.weakEquivalences) ∧ (m.categoryWithCofibrations.cofibrations ⊓ m.categoryWithWeakEquivalences.weakEquivalences).HasFunctorialFactorization m.categoryWithFibrations.fibrations ∧ (∀ {D E : OrdinalInverse.Index θ ⥤ M} (f : D ⟶ E), m.categoryWithFibrations.fibrations f ↔ ∀ α : OrdinalInverse.Index θ, fibrations M (Reedy.relativeMatching (⊤ : MorphismProperty (OrdinalInverse.Index θ)) f α).hom) ∧ (∀ {D E : OrdinalInverse.Index θ ⥤ M} (f : D ⟶ E), (m.categoryWithFibrations.fibrations f ∧ m.categoryWithWeakEquivalences.weakEquivalences f) ↔ ∀ α : OrdinalInverse.Index θ, trivialFibrations M (Reedy.relativeMatching (⊤ : MorphismProperty (OrdinalInverse.Index θ)) f α).hom) ∧ (m.categoryWithCofibrations.cofibrations ⊓ m.categoryWithWeakEquivalences.weakEquivalences = (trivialCofibrations M).functorCategory (OrdinalInverse.Index θ)) ∧ (∀ D : OrdinalInverse.Index θ ⥤ M, m.categoryWithFibrations.fibrations (terminal.from D) ↔ ∀ α : OrdinalInverse.Index θ, fibrations M (Reedy.matchingFrom (⊤ : MorphismProperty (OrdinalInverse.Index θ)) D α))",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned immutable head 84912bba53d9: replaces the True placeholders by the existing Reedy.relativeMatching and Reedy.matchingFrom with negative class top; adds both functorial factorizations and both trivial-class descriptions; supplies all ten proof steps. Uses the small Ordinal.ToType carrier canonically order-isomorphic to the ordinal predecessor subtype, without a natural-number degree or continuity assumption."
  }
 }
