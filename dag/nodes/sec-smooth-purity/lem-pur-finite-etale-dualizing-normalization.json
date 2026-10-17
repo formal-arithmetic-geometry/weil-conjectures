@@ -27,7 +27,8 @@
   "def-pur-co-smoothness",
   "def-sbc-smooth-morphisms",
   "def-weil-etale-morphism",
-  "def-weil-pbc-etale-sum-extension"
+  "def-weil-pbc-etale-sum-extension",
+  "def-exchange-projection"
  ],
  "proof": [
   {
@@ -496,5 +497,64 @@
   "group": "Q152",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-08f329d03 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-pur-etale-horizontal-support-mate, every cited statement, the main-20261015 lem-pur-co-smooth-etale-locality proof Step 1, the ancestor thm-pur-composition-coherence Step 1 and the Stacks tags 03S5/0F4L/03S6/0GKF/0F7J/0F7K (labels checked). The statement correction adds the missing hypothesis that v is étale in (2), since rho_v only exists for étale v; it is a clarification that the parent's use (étale H, J) respects. I rederived every step: the conjugate direction and counit characterization of rho, the theta transpose on termwise representatives, the conjugate of the compositor giving the rho composition law, eta's base-change transpose, sigma^{-1}=Rh'^!(eta)c by naturality, and the double-counit argument giving b=beta. The new node is a genuine étale-horizontal generalization of lem-amb-shriek-open-exchange-adjoint. It does not restate a clause of the item and is not a duplicate; I tested it with f=id, u=id, empty and split degree-2 covers. FIXES: (1) Step 2 and the new node took d_e from lem-asd, while Steps 3-5 use c_e of lem-sfb (directly and through support-map compatibility), and no statement identifies the two. I switched both to lem-sfb's c_e, as the existing lem-pur-co-smooth-etale-locality Step 2 does, and removed lem-asd from proof_deps, stmt_deps and tool_uses. (2) Step 4 now cites lem-weil-pbc-mate-pasting(2). (3) The new node's blueprint.from.place was a copy of its source field; it now names the ancestor's Step 1 sentence. Batch-5: the remaining flagged citations (lem-amb-unbounded-compact-support-comparisons, lem-pur-etale-support-map-compatibility, lem-sfb-quasifinite-compact-support-exact) are six-functor foundations. They reach sec-poincare-duality only through generic lisse-sheaf and stalk-tensor lemmas from the finiteness unit, so they are outside both assumptions and not steps of their proofs. Accepted. All remaining tool_uses are generic tools, accepted.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.FiniteEtaleDualizingNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.finite_etale_dualizing_normalization",
+  "file": "lean/Sheaf/SecSmoothPurity/FiniteEtaleDualizingNormalization.lean",
+  "statement": "theorem finite_etale_dualizing_normalization (P : WeilConjectures.PurityFiniteSetting.{u}) {U X : Scheme.{u}} [U.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (U ↘ Spec (.of P.field.k))] [QuasiCompact (U ↘ Spec (.of P.field.k))] [X.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] (e : U ⟶ X) [e.IsOver (Spec (.of P.field.k))] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] [Etale e] : FiniteEtaleDualizingNormalization P e",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.coefficientFinite",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.coefficientUnit",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.tensorUnitMap",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.compactification",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.exceptional",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.lower",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.counit",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.pull",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.omega",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.tensorMap",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.graphSupportModel",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.support",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.rho",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.eta",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.comp",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.congr",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.sigma",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.sourceEtaleEquation",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.tensorUnitEquation",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.sourceEtale",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.baseChange",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.beta",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.targetUnit",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.exceptionalId",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.pullId",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.domain",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.Laws.Counit",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.Laws.TensorUnit",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.Laws.Identity",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.Laws.Composition",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.Laws.EtaBaseChange",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.Laws.SourceEtale",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.Laws.TargetSigmaIsIso",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.Laws.SmoothBaseChange",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.Laws.OpenRestriction",
+   "AlgebraicGeometry.ProEtale.FiniteEtaleDualizingNormalization",
+   "AlgebraicGeometry.ProEtale.finite_etale_dualizing_normalization"
+  ],
+  "note": "Repair of returned head: drop the def-pur-co-smoothness dependency module and its import, which broke three of its five landed importers through duplicate declarations. The item now imports Sheaf.NumberTheory.Padics.CoefficientExtensionFinite, WeilConjectures.Compactification.NagataCompactification and WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps, defines the local finite coefficient instance using finite_coefficientExtensionRing, and inlines the Nagata compactification body. The normalization statement, equations, hypotheses, and proof docstring are unchanged.",
+  "fixed_by": "NT-stage2-cc-1874f86ba"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1874f86ba",
+  "group": "Q10",
+  "result": "fix",
+  "note": "Re-delivery applies exactly the correction prescribed by run 4073606c5c4e: def-pur-co-smoothness module and node change dropped (node identical to the side clone), the three prescribed imports, local Finite P.Coefficient, inlined Nagata compactification; nothing else changed. Clause check passes: rho is the conjugate of the inverse support comparison, uniquely fixed through etaleSupportMapCompatibility (not hollow); eta is defined; clause (1) holds in the library's tensor order; clause (2) identity/composition with c, eta base change for any w; clause (3) E and sigma from the specified maps, beta = sigma^-1 E^-1 via the inverse-free equation plus TargetSigmaIsIso; open restriction is a genuine equation. No extra hypotheses, one universe u, no absolute separatedness; edge cases covered. check_lean_text reports no failures (statement verbatim, 37 declarations). nt_compile: delivered module clean in 13.0 s and 13.2 s; fixed module clean in 13.3 s. FIX (docstrings only, signature unchanged): the coefficientFinite docstring carried (blueprint: def-pur-co-smoothness) and a vague source place, now this item's tag and source; the stale comparedTensorClause reference in the domain docstring is replaced."
  }
 }
