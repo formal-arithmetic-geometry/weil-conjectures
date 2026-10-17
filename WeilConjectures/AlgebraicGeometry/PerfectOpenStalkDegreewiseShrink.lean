@@ -8,8 +8,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
+public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
+import WeilConjectures.AlgebraicGeometry.OpenStalkRestrictionTransport
 import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkRetractHomEquality
-import WeilConjectures.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
 import Mathlib.Data.Int.Interval
 import Mathlib.AlgebraicGeometry.AffineScheme
 
@@ -85,8 +86,9 @@ support interval of P need checking; outside it the source P.X n is zero.
 Intersect these finitely many neighbourhoods inside W and choose an affine V
 containing x. Restrict the family to V, using transitivity of overMap to regard
 its components as maps between the direct restrictions from U. This gives k
-and all adjacent chain equations. The canonical comparison between the V stalk
-and the W stalk after restriction, composed with e, gives eV. Naturality and
+and all adjacent chain equations. A comparison between the V stalk and the W stalk
+after restriction, transported by `exists_openStalk_restriction_transport`, composes
+with e to the canonical comparison eV. Naturality and
 restriction transitivity give the displayed conjugation formula for k. The
 comparison is natural for every complex, not just P and Q. With an empty support
 interval or rank zero the corresponding equations and maps are unique. This
@@ -98,11 +100,6 @@ theorem exists_affine_perfect_open_stalk_degreewise_shrink
       (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
     (hP : IsStrictlyPerfect X U P)
     (W : X.Opens) (hxW : x ∈ W) (hWU : W ≤ U)
-    (e :
-      (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
-        (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ) ⋙
-      (openModuleStalkFunctor X W ⟨x, hxW⟩).mapHomologicalComplex (.up ℤ) ≅
-      (openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ))
     (g : ∀ n : ℤ,
       (((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
         (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)).obj P).X n ⟶
@@ -117,12 +114,20 @@ theorem exists_affine_perfect_open_stalk_degreewise_shrink
         (((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
           (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)).obj P)).d n (n + 1) ≫
         (openModuleStalkFunctor X W ⟨x, hxW⟩).map (g (n + 1))) :
+    let e : (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
+          (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ) ⋙
+        (openModuleStalkFunctor X W ⟨x, hxW⟩).mapHomologicalComplex (.up ℤ) ≅
+        (openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ) :=
+      Functor.mapHomologicalComplexCompIso
+        (openModuleStalkRestrictionComparison X U W hWU x hxU hxW) (.up ℤ)
     ∃ (V : X.Opens) (hxV : x ∈ V) (_hV : IsAffineOpen V) (_hVW : V ≤ W) (hVU : V ≤ U),
       let R := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
         (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)
       let S := (openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)
       let T := (openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)
-      ∃ (eV : R ⋙ S ≅ T) (k : ∀ n : ℤ, (R.obj P).X n ⟶ (R.obj Q).X n),
+      let eV : R ⋙ S ≅ T := Functor.mapHomologicalComplexCompIso
+        (openModuleStalkRestrictionComparison X U V hVU x hxU hxV) (.up ℤ)
+      ∃ k : ∀ n : ℤ, (R.obj P).X n ⟶ (R.obj Q).X n,
         (∀ n : ℤ, k n ≫ (R.obj Q).d n (n + 1) =
           (R.obj P).d n (n + 1) ≫ k (n + 1)) ∧
         (∀ n : ℤ, (openModuleStalkFunctor X V ⟨x, hxV⟩).map (k n) =
@@ -130,6 +135,7 @@ theorem exists_affine_perfect_open_stalk_degreewise_shrink
             (openModuleStalkFunctor X W ⟨x, hxW⟩).map (g n) ≫
               (e.app Q).hom.f n ≫ (eV.app Q).inv.f n) := by
   classical
+  intro e
   let A := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWU)
   let R := A.mapHomologicalComplex (.up ℤ)
   let f := fun n : ℤ ↦ g n ≫ (R.obj Q).d n (n + 1)
@@ -165,13 +171,20 @@ theorem exists_affine_perfect_open_stalk_degreewise_shrink
     (restriction_comp_iso X U W V hWU hVW) (.up ℤ)
   let C := D.symm
   let k := fun n : ℤ ↦ (C.app P).hom.f n ≫ B.map (g n) ≫ (C.app Q).inv.f n
-  obtain ⟨c⟩ := nonempty_openModuleStalkRestrictionComparison X W V hVW x hxW hxV
+  obtain ⟨c, hc⟩ := exists_openStalk_restriction_transport X U x hxU W hxW hWU
+    (openModuleStalkRestrictionComparison X U W hWU x hxU hxW) V hxV hVW hVU
   let c' := NatIso.mapHomologicalComplex c (.up ℤ)
   let S := (openModuleStalkFunctor X V ⟨x, hxV⟩).mapHomologicalComplex (.up ℤ)
   let eV := Functor.isoWhiskerRight C S ≪≫
     Functor.associator R (B.mapHomologicalComplex (.up ℤ)) S ≪≫
     Functor.isoWhiskerLeft R c' ≪≫ e
-  refine ⟨V, hxV, hV, hVW, hVU, eV, k, ?_, ?_⟩
+  have heV : eV = Functor.mapHomologicalComplexCompIso
+      (openModuleStalkRestrictionComparison X U V hVU x hxU hxV) (.up ℤ) := by
+    ext M n
+    dsimp [eV, c', C, D, e, restriction_comp_iso]
+    simp only [Functor.map_id, Category.id_comp]
+    exact (hc (M.X n)).symm
+  refine ⟨V, hxV, hV, hVW, hVU, k, ?_, ?_⟩
   · intro n
     by_cases hn : n ∈ Finset.Icc a b
     · have heq := restrict_eq_of_le X hZW hVZ (f n) (t n) (hZ n hn)
@@ -203,6 +216,7 @@ theorem exists_affine_perfect_open_stalk_degreewise_shrink
       (ev.mapIso (C.app P)) (ev.mapIso (C.app Q)) (g n)
       (eu.mapIso (e.app P)) (eu.mapIso (e.app Q))
     dsimp [ev, eu] at hc
+    rw [← heV]
     dsimp [eV, c', R, k]
     simp only [Category.assoc] at hc ⊢
     erw [Category.id_comp, Category.id_comp]

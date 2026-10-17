@@ -28,7 +28,7 @@ private theorem pair_square_chart_transport_exists
     {Y Y' Z : Scheme.{u}} (V : Y.OpenCover.{u}) (V' : Y'.OpenCover.{u})
     (α : V'.I₀ → V.I₀) (r : Y' ⟶ Y) (ρ : ∀ d, V'.X d ⟶ V.X (α d))
     (hr : ∀ d, ρ d ≫ V.f (α d) = V'.f d ≫ r)
-    (p : Z ⟶ Y) (p' : Z ⟶ Y') (hp : p' ≫ r = p)
+    (p : Z ⟶ Y) (p' : Z ⟶ Y')
     (A : (d : V.I₀) → (V.X d).Modules)
     (A' : (d : V'.I₀) → (V'.X d).Modules) (M : Z.Modules)
     (c : ∀ d, (Scheme.Modules.pullback (ρ d)).obj (A (α d)) ≅ A' d)
@@ -59,7 +59,7 @@ private theorem pair_square_chart_transport_exists
         (Scheme.Modules.pullback (pullback.snd (V'.f a) (V'.f b))).obj (A' b),
       overlapPairSquare V' A' p'
         ((modulesPseudofunctor.toDescentData (V'.pullback₁ p').f).obj M) ε' a b φ' := by
-  refine ⟨_, overlap_pair_square_chart_transport V V' α r ρ hr p p' hp
+  refine ⟨_, overlap_pair_square_chart_transport V V' α r ρ hr p p'
     A A' M c δ hδf hδv ε ε' hε a b φ hs⟩
 
 /-- A compatible map on one pair stays compatible under refinement of the stage.
@@ -131,7 +131,7 @@ theorem overlap_pair_map_refinement_persistence
     exact pullback.lift_snd _ _ _
   have he := overlap_iterated_comparison_refinement U q q' p p' t h h' N M e
     ρ hρ δ hδf hδv
-  exact pair_square_chart_transport_exists V V' (fun d ↦ d) r ρ hρf p p' hp
+  exact pair_square_chart_transport_exists V V' (fun d ↦ d) r ρ hρf p p'
     A A' M c δ hδf hδv (overlapIteratedComparison U q p t h N M e)
     (overlapIteratedComparison U q' p' t h' N M e) he a b φ hs
 

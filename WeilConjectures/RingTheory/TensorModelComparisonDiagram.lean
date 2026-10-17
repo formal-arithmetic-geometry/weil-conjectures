@@ -122,7 +122,20 @@ private theorem comparison_core
                   let ψ := (b j).toRingHom.comp ((α.app j).hom.comp (d j).symm.toRingHom)
                   (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) B)).toRingHom.comp
                     (ψ.comp Algebra.TensorProduct.includeRight.toRingHom) =
-                    e.toRingHom.comp Algebra.TensorProduct.includeRight.toRingHom) := by
+                    e.toRingHom.comp Algebra.TensorProduct.includeRight.toRingHom) ∧
+                (∀ j : J,
+                  letI := (F.map (homOfLE (hir.trans j.property))).hom.toAlgebra
+                  letI : Algebra (F.obj i : Type v) ↥(colimit F) :=
+                    (colimit.ι F i).hom.toAlgebra
+                  letI := aPs j
+                  letI := aP
+                  let t : F.obj j.val →ₐ[F.obj i] ↥(colimit F) :=
+                    { (colimit.ι F j.val).hom with
+                      commutes' := fun s ↦ ConcreteCategory.congr_hom
+                        (colimit.w F (homOfLE (hir.trans j.property))) s }
+                  (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) A)).toRingHom.comp
+                    (algebraMap P ((F.obj j.val : Type v) ⊗[F.obj i] A)) =
+                    algebraMap P (↥(colimit F) ⊗[F.obj i] A)) := by
   classical
   obtain ⟨r, hir, aPi, μB, hμB, ψ, hψ, hlim⟩ :=
     RingHom.exists_comparison_map_finite_stage F i A B f P Q aP e.toRingHom he
@@ -145,7 +158,7 @@ private theorem comparison_core
       exact ⟨⟨l, j.property.trans hjl⟩, hjl, hkl⟩⟩
     infer_instance
   refine ⟨r, hir, aPs, D, E, α, d, b, cD, cE, g, hD, hE, hfilt, ?_,
-    bLim.symm.bijective.comp (e.bijective.comp dLim.bijective), ?_, hpush, hcompat, ?_⟩
+    bLim.symm.bijective.comp (e.bijective.comp dLim.bijective), ?_, hpush, hcompat, ?_, ?_⟩
   · intro j
     apply CommRingCat.hom_ext
     apply RingHom.ext
@@ -196,6 +209,11 @@ private theorem comparison_core
     change (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) B))
       (b j ((α.app j).hom ((d j).symm (1 ⊗ₜ[P] q)))) = e (1 ⊗ₜ[P] q)
     exact he.symm.trans (hcom.trans (congrArg e hd'))
+  · intro j
+    let := (F.map (homOfLE (hir.trans j.property))).hom.toAlgebra
+    let := aPs j
+    exact (congrArg (fun φ ↦ RingHom.comp φ (algebraMap P _)) (hμs j)).symm.trans
+      (μs j).comp_algebraMap
 
 
 
@@ -285,7 +303,20 @@ theorem exists_tensor_model_comparison_diagram
                   let ψ := (b j).toRingHom.comp ((α.app j).hom.comp (d j).symm.toRingHom)
                   (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) B)).toRingHom.comp
                     (ψ.comp Algebra.TensorProduct.includeRight.toRingHom) =
-                    e.toRingHom.comp Algebra.TensorProduct.includeRight.toRingHom) := by
+                    e.toRingHom.comp Algebra.TensorProduct.includeRight.toRingHom) ∧
+                (∀ j : J,
+                  letI := (F.map (homOfLE (hir.trans j.property))).hom.toAlgebra
+                  letI : Algebra (F.obj i : Type v) (c.pt : Type v) :=
+                    (c.ι.app i).hom.toAlgebra
+                  letI := aPs j
+                  letI := aP
+                  let t : F.obj j.val →ₐ[F.obj i] c.pt :=
+                    { (c.ι.app j.val).hom with
+                      commutes' := fun s ↦ ConcreteCategory.congr_hom
+                        (c.w (homOfLE (hir.trans j.property))) s }
+                  (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) A)).toRingHom.comp
+                    (algebraMap P ((F.obj j.val : Type v) ⊗[F.obj i] A)) =
+                    algebraMap P ((c.pt : Type v) ⊗[F.obj i] A)) := by
   classical
   let : HasColimit F := ⟨⟨⟨c, hc⟩⟩⟩
   let := (colimit.ι F i).hom.toAlgebra
@@ -323,10 +354,43 @@ theorem exists_tensor_model_comparison_diagram
     | tmul r a => simp [XA, XB]
     | add a b ha hb => simpa only [map_add] using congrArg₂ (· + ·) ha hb
   obtain ⟨r, hir, aPs, D, E, α, d, b, cD, cE, g, hD, hE,
-      hfilt, hcomm, hbij, hfp, hpush, hleft, hright⟩ :=
+      hfilt, hcomm, hbij, hfp, hpush, hleft, hright, hcompat⟩ :=
     comparison_core F f P Q aPc ec hec
   refine ⟨r, hir, aPs, D, E, α, d, b, cD, cE, g, hD, hE,
-    hfilt, hcomm, hbij, hfp, hpush, hleft, ?_⟩
+    hfilt, hcomm, hbij, hfp, hpush, hleft, ?_, ?_⟩
+  swap
+  · intro j
+    let := (F.map (homOfLE (hir.trans j.property))).hom.toAlgebra
+    let := aPs j
+    let t : F.obj j.val →ₐ[F.obj i] c.pt :=
+      { (c.ι.app j.val).hom with
+        commutes' := fun s ↦ ConcreteCategory.congr_hom
+          (c.w (homOfLE (hir.trans j.property))) s }
+    let tc : F.obj j.val →ₐ[F.obj i] ↥(colimit F) :=
+      { (colimit.ι F j.val).hom with
+        commutes' := fun s ↦ ConcreteCategory.congr_hom
+          (colimit.w F (homOfLE (hir.trans j.property))) s }
+    have hmapA : XA.toRingHom.comp
+        (Algebra.TensorProduct.map tc (AlgHom.id (F.obj i) A)).toRingHom =
+        (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) A)).toRingHom := by
+      apply RingHom.ext
+      intro z
+      induction z using TensorProduct.induction_on with
+      | zero => simp
+      | add z w hz hw => simpa only [map_add] using congrArg₂ (· + ·) hz hw
+      | tmul s a =>
+        change base (tc s) ⊗ₜ[F.obj i] a = t s ⊗ₜ[F.obj i] a
+        congr 1
+        exact ConcreteCategory.congr_hom
+          (colimit.isoColimitCocone_ι_hom (⟨c, hc⟩ : ColimitCocone F) j.val) s
+    change (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) A)).toRingHom.comp
+        (algebraMap P ((F.obj j.val : Type v) ⊗[F.obj i] A)) =
+      algebraMap P ((c.pt : Type v) ⊗[F.obj i] A)
+    rw [← hmapA, RingHom.comp_assoc]
+    refine (congrArg (fun φ ↦ XA.toRingHom.comp φ) (hcompat j)).trans ?_
+    apply RingHom.ext
+    intro p
+    exact XA.apply_symm_apply _
   intro j
   let := (F.map (homOfLE (hir.trans j.property))).hom.toAlgebra
   let := aPs j

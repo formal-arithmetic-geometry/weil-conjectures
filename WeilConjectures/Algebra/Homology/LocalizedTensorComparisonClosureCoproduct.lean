@@ -149,7 +149,7 @@ theorem localizedTensorComparisonProperty_closure_coproducts
       ((Functor.Monoidal.μIso F (U j) Q).inv ≫ (F.obj (U j) ◁ t)) i
     have (j : I) : IsIso (α j) := hG j (U j) ⟨eU j⟩ (hU j) (m j) i
     obtain ⟨e, d, hsquare⟩ := exists_localizedTensorComparison_direct_sum_square
-      R A B C Q N t hC hQ U hU m mS i
+      R A B C Q N t U m mS i
     have : IsIso (e.hom ≫ (mS.localizedComparison i ≫ HomologicalComplex.homologyMap
         ((Functor.Monoidal.μIso F (∐ U) Q).inv ≫ (F.obj (∐ U) ◁ t)) i)) := by
       rw [← hsquare]

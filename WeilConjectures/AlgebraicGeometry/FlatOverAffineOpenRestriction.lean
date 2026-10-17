@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.IsFlatOver
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
 /-! # Relative flatness after restriction to an affine base chart
@@ -63,18 +64,6 @@ private theorem flatOver_postcomp_iso
   have hh := Module.Flat.trans Γ(T, V.1) Γ(S, V1.1) Γ(G, U.1)
   simpa only [Scheme.Hom.comp_appLE] using hh
 
-private theorem flatOver_of_iso
-    {X S : Scheme.{u}} (f : X ⟶ S) {G H : X.Modules} (eGH : G ≅ H)
-    (hflat : Scheme.Modules.IsFlatOver H f) : Scheme.Modules.IsFlatOver G f := by
-  intro V U e
-  let φ := (f.appLE V.1 U.1 e).hom
-  let : Module Γ(S, V.1) Γ(G, U.1) := Module.compHom _ φ
-  let : Module Γ(S, V.1) Γ(H, U.1) := Module.compHom _ φ
-  have : Module.Flat Γ(S, V.1) Γ(H, U.1) := hflat V U e
-  let E := (ModuleCat.restrictScalars φ).mapIso
-    ((SheafOfModules.evaluation (R := X.ringCatSheaf) (op U.1)).mapIso eGH)
-  exact (Module.Flat.equiv_iff E.toLinearEquiv).mpr (hflat V U e)
-
 /-- The explicitly restricted module remains flat over the spectrum chart of the base.
 Source: Stacks Project, Lemma 29.26.2, Tag 01U4, final assertion.
 (blueprint: lem-pc-flat-over-affine-open-restriction).
@@ -96,7 +85,8 @@ theorem isFlatOver_affineOpenRestriction
     (hflat : Scheme.Modules.IsFlatOver G f) (V : S.affineOpens) :
     Scheme.Modules.IsFlatOver ((schemeOpenRestriction X (f ⁻¹ᵁ V.1)).obj G)
       ((f ∣_ V.1) ≫ V.2.isoSpec.hom) := by
-  apply flatOver_of_iso _ ((Scheme.Modules.overFunctorEquiv (f ⁻¹ᵁ V.1)).app G)
+  refine Scheme.Modules.IsFlatOver.of_iso
+    ((Scheme.Modules.overFunctorEquiv (f ⁻¹ᵁ V.1)).app G).symm ?_
   exact flatOver_postcomp_iso (f ∣_ V.1) V.2.isoSpec.hom _
     (flatOver_morphismRestrict f G hflat V.1)
 

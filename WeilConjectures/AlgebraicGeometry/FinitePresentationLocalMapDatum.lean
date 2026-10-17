@@ -83,10 +83,10 @@ restriction to the limit cover. This is a condition on local components only:
 no global stage map is constructed or asserted here. Further base changes preserve
 all equations. Empty opens and an empty scheme use the unique local maps.
 Finite presentation supplies finite generators and relations; quasi-separatedness
-supplies finite overlap covers. Noetherianity is unnecessary. -/
+supplies finite overlap covers. -/
 theorem exists_finitePresentation_local_map_datum
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
-    (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]
+    (R : I ⥤ CommRingCat.{u})
     (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]
     (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))
     [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] :

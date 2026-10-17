@@ -22,7 +22,9 @@ open scoped TensorProduct
 namespace AlgebraicGeometry
 
 /-- A pushout square between two scalar extensions remains a pushout after another
-scalar extension. No directed diagram or finite-presentation hypothesis is needed.
+scalar extension, with the `P`-structure on `T ⊗[R] A` induced from the given one on
+`S ⊗[R] A` by the transition map. No directed diagram or finite-presentation hypothesis
+is needed.
 
 Source: Stacks Project, Algebra, Tag 02JO (3), final paragraph, base-change step.
 (blueprint: lem-pc-tensor-model-pushout-base-change)
@@ -30,8 +32,8 @@ Source: Stacks Project, Algebra, Tag 02JO (3), final paragraph, base-change step
 Proof:
 1. Put D0 = S tensor_R A, E0 = S tensor_R B, D1 = T tensor_R A, and
    E1 = T tensor_R B. Let mD and mE be the tensor transitions. Their square with
-   id tensor f commutes by induction on tensors. Choose the P-structure on D1
-   through mD and the Q-structure on E1 through mE. The commuting square and the
+   id tensor f commutes by induction on tensors. The P-structure on D1 is the one
+   through mD and the Q-structure on E1 is the one through mE. The commuting square and the
    given P-Q-E0 scalar tower prove the P-Q-E1 scalar tower.
 2. The squares S-T-D0-D1 and S-T-E0-E1 are pushouts: transport the canonical
    tensor pushouts using cancellation of base change. On generators the right
@@ -50,33 +52,32 @@ theorem tensor_model_pushout_base_change
     [CommRing R] [CommRing S] [CommRing T] [CommRing A] [CommRing B]
     [CommRing P] [CommRing Q] [Algebra R S] [Algebra R T]
     [Algebra R A] [Algebra R B] [Algebra P Q]
-    (t : S →ₐ[R] T) (f : A →ₐ[R] B) (q : Q →+* S ⊗[R] B)
+    (t : S →ₐ[R] T) (f : A →ₐ[R] B) (q : Q →+* S ⊗[R] B) (aP : Algebra P (S ⊗[R] A))
     (h : let D := S ⊗[R] A
       let E := S ⊗[R] B
       let d : D →+* E :=
         (Algebra.TensorProduct.map (AlgHom.id S S) f).toRingHom
       letI : Algebra D E := d.toAlgebra
       letI : Algebra Q E := q.toAlgebra
-      ∃ aP : Algebra P D,
-        letI := aP
-        letI : Algebra P E := (d.comp (algebraMap P D)).toAlgebra
-        letI : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl
-        ∃ hPQ : IsScalarTower P Q E,
-          letI := hPQ
-          Algebra.IsPushout P D Q E) :
+      letI : Algebra P E := (d.comp (algebraMap P D)).toAlgebra
+      letI : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl
+      ∃ hPQ : IsScalarTower P Q E,
+        letI := hPQ
+        Algebra.IsPushout P D Q E) :
     let D := T ⊗[R] A
     let E := T ⊗[R] B
     let d : D →+* E := (Algebra.TensorProduct.map (AlgHom.id T T) f).toRingHom
     letI : Algebra D E := d.toAlgebra
     letI : Algebra Q E :=
       ((Algebra.TensorProduct.map t (AlgHom.id R B)).toRingHom.comp q).toAlgebra
-    ∃ aP : Algebra P D,
-      letI := aP
-      letI : Algebra P E := (d.comp (algebraMap P D)).toAlgebra
-      letI : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl
-      ∃ hPQ : IsScalarTower P Q E,
-        letI := hPQ
-        Algebra.IsPushout P D Q E := by
+    letI : Algebra P D :=
+      ((Algebra.TensorProduct.map t (AlgHom.id R A)).toRingHom.comp
+        (algebraMap P (S ⊗[R] A))).toAlgebra
+    letI : Algebra P E := (d.comp (algebraMap P D)).toAlgebra
+    letI : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl
+    ∃ hPQ : IsScalarTower P Q E,
+      letI := hPQ
+      Algebra.IsPushout P D Q E := by
   let D₀ := S ⊗[R] A
   let E₀ := S ⊗[R] B
   let D₁ := T ⊗[R] A
@@ -89,8 +90,7 @@ theorem tensor_model_pushout_base_change
   let mE : E₀ →+* E₁ := (Algebra.TensorProduct.map t (AlgHom.id R B)).toRingHom
   let : Algebra D₀ E₀ := d₀.toAlgebra
   let : Algebra Q E₀ := q.toAlgebra
-  obtain ⟨aP, hPQ, hp⟩ := h
-  let : Algebra P D₀ := aP
+  obtain ⟨hPQ, hp⟩ := h
   let : Algebra P E₀ := (d₀.comp (algebraMap P D₀)).toAlgebra
   let : IsScalarTower P D₀ E₀ := .of_algebraMap_eq fun _ ↦ rfl
   let : IsScalarTower P Q E₀ := hPQ
@@ -122,7 +122,7 @@ theorem tensor_model_pushout_base_change
     rw [hPE]
     change mE (algebraMap P E₀ p) = mE (q (algebraMap P Q p))
     exact congrArg mE (IsScalarTower.algebraMap_apply P Q E₀ p)
-  refine ⟨inferInstance, inferInstance, ?_⟩
+  refine ⟨inferInstance, ?_⟩
   let : Algebra S T := t.toRingHom.toAlgebra
   let : IsScalarTower R S T := .of_algebraMap_eq fun r ↦ (t.commutes r).symm
   let : Algebra S D₁ := Algebra.TensorProduct.leftAlgebra
