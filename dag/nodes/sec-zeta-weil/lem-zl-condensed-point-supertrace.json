@@ -1,0 +1,82 @@
+{
+ "id": "lem-zl-condensed-point-supertrace",
+ "kind": "statement",
+ "title": "Duals and supertraces for finite complexes realized in condensed coefficients",
+ "statement": "Let $\\ell$ be prime, let $k$ be an algebraically closed field of positive prime characteristic $p\\ne\\ell$, put $s=\\operatorname{Spec}k$, and let $E/\\mathbf Q_\\ell$ be a finite extension inside $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-l-adic-numbers, def-weil-l-adic-coefficient-extension, def-weil-affine-spectrum]. Let $\\underline\\Omega=\\operatorname{Profinite.padicAlgClRingObj}(\\ell)$ be the finite-subextension-valued condensed ring of [sk-def-sfb-qlbar-condensed], and put $U_s=p_s^*\\underline\\Omega$, the tensor unit of $\\mathcal D_s=D^b_c(s)[[\\underline\\Omega]]$ [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-bounded-constructible, def-sfb-dc-tensor]. Use the scalar inclusion $E\\to\\Omega$ and its pulled-back coefficient map [def-sfb-subfield-to-qlbar-coefficient-map]. On a bounded finite-dimensional $E$-complex, define $\\rho_{E,s}$ by replacing each term $E^r$, after choosing a basis, by $U_s^{\\oplus r}$, and replacing each differential or chain map matrix by the same matrix acting through $E\\to\\Omega$. Use total tensor products and Koszul symmetry. This construction is independent of bases up to its canonical change-of-basis isomorphisms, sends quasi-isomorphisms to isomorphisms, and defines an exact strong symmetric monoidal functor\n$$\\rho_{E,s}:D^b_{\\mathrm{fd}}(E)\\longrightarrow\\mathcal D_s,$$\nwhere $D^b_{\\mathrm{fd}}(E)$ has the meaning of [def-weil-point-fd-complexes]. It identifies $\\rho_{E,s}(E[0])$ with $U_s$ and satisfies $H^i\\rho_{E,s}(C)\\cong\\rho_{E,s}(H^i(C)[0])$. The latter cohomology module evaluated at the geometric point has underlying vector space $H^i(C)\\otimes_E\\Omega$.\n\nFor every $C\\in D^b_{\\mathrm{fd}}(E)$, $\\rho_{E,s}(C)$ has a right dual in $\\mathcal D_s$, given by $\\rho_{E,s}(R\\operatorname{Hom}_E(C,E))$. Evaluation, coevaluation and the triangle identities are those of the signed finite-free dual complex, interpreted as internal $U_s$-module maps. For every isomorphism $w:P\\xrightarrow{\\sim}\\rho_{E,s}(C)$ in $\\mathcal D_s$ and maps $v:P\\to P$, $f:C\\to C$ such that $w\\circ v=\\rho_{E,s}(f)\\circ w$, $P$ has a right dual and the categorical trace [sk-d-trace] satisfies\n$$\\operatorname{tr}_{\\mathcal D_s}(v)=\\epsilon_E\\left(\\sum_i(-1)^i\\operatorname{Tr}_E(H^i(f)\\mid H^i(C))\\right)\\quad\\text{in }\\operatorname{End}_{\\mathcal D_s}(U_s),$$\nwhere $\\epsilon_E:E\\to\\operatorname{End}_{\\mathcal D_s}(U_s)$ sends $a$ to multiplication by its image in $\\Omega$, and is an injective ring homomorphism. In particular $U_s$ has a right dual and $\\operatorname{tr}(1_{U_s})=\\epsilon_E(1)$. Ordinary traces here are those of [def-weil-endomorphism-trace].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/sk-thm-rationality.proof.md",
+  "place": "First sentence, finite determinant factors: categorical-to-ordinary trace comparison at the coefficient point; agent-formulated comparison obligation, not a verbatim theorem of the blueprint"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-affine-spectrum",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-bounded-constructible",
+  "def-sfb-dc-tensor",
+  "def-sfb-subfield-to-qlbar-coefficient-map",
+  "def-weil-point-fd-complexes",
+  "sk-d-trace",
+  "def-weil-endomorphism-trace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded finite dimensional E complex realized as finite free condensed Q_lbar modules on an algebraically closed point has a right dual and categorical trace equals the alternating cohomology trace",
+   "results": "8 hits; ; top: ['FDRep.instRightRigidCategory', \"LinearMap.trace_eq_contract'\", 'FGModuleCat.rightRigidCategory', 'LinearMap.trace_eq_contract', 'Module.Basis.trace_traceDual_mul', 'LinearMap.trace_eq_contract_apply', \"LinearMap.trace_transpose'\", 'Module.Basis.trace_mul_traceDual']. No theorem for the stated condensed coefficient comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasRightDual",
+   "results": "12 hits; ; top: ['CategoryTheory.HasRightDual', 'CategoryTheory.HasRightDual.rightDual', 'CategoryTheory.RightRigidCategory.mk', 'CategoryTheory.RightRigidCategory.rightDual', 'CategoryTheory.hasRightDualUnit', 'CategoryTheory.HasRightDual.mk', 'CategoryTheory.hasLeftDualRightDual', 'CategoryTheory.hasRightDualLeftDual']. No theorem for the stated condensed coefficient comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Condensed.*(trace|dual)|trace.*Condensed|HasRightDual.*Complex",
+   "results": "0 hits; ; top: []. No theorem for the stated condensed coefficient comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Categorical supertrace and dualizability of finite free complexes over a condensed p adic coefficient ring",
+   "results": "8 hits; ; top: [\"LinearMap.trace_eq_contract'\", 'Module.dual_free', 'Condensed.finFree', 'Condensed.free', 'instAbelianCondensedMod', 'Condensed.freeForgetAdjunction', 'HomotopyCategory.instAdditiveHomologicalComplexQuotient', 'CategoryTheory.ShortComplex.leftHomologyOpIso']. No theorem for the stated condensed coefficient comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong symmetric monoidal realization of perfect complexes over a p adic field in condensed module objects preserves duality and trace",
+   "results": "8 hits; ; top: ['Condensed.profiniteSolid', 'LightCondensed.instSymmetricCategoryLightCondMod', 'LightCondensed.instMonoidalCategoryLightCondMod', 'Condensed.profiniteFree', 'CondensedMod.IsSolid', 'LightCondensed.instMonoidalClosedLightCondMod', 'LightCondensed.instMonoidalLightCondSetLightCondModFree', 'LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology']. No theorem for the stated condensed coefficient comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "sk-thm-rationality",
+  "date": "2026-10-18",
+  "group": "NN"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-thm-rationality",
+ "blueprint": {
+  "from": {
+   "node": "sk-thm-rationality",
+   "place": "First sentence, finite determinant factors: categorical-to-ordinary trace comparison at the coefficient point",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
