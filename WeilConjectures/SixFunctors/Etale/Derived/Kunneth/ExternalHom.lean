@@ -116,6 +116,10 @@ attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint ModuleCat.ha
 attribute [local instance] _root_.DerivedCategory.symmetricCategory
   leftDerivedUpperStarBraidedFunctor
 
+-- As in `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange`: braid étale
+-- sheaves through `Etale.sheafBraidedCategory`, as the generic definitions do.
+attribute [local instance 20000] Etale.sheafBraidedCategory
+
 section Devissage
 
 variable [HasInvertibleExponent Λ (Spec (.of k))]

@@ -202,7 +202,6 @@ noncomputable def boundedConstructibleRationalLowerShriekUpperShriekAdjunction :
   Rationalization.mapAdjunction M
     (boundedConstructibleIntegralLowerShriekUpperShriekAdjunction (I := I) aX aY f hf)
 
-omit [IsAlgClosed k] in
 /-- Blueprint `lem-coef-rational-operations`: Identification with the rational internal Hom and
 exceptional inverse image, the dual formula `Rf_E^! M ≅ 𝔻_{X,E} f^* 𝔻_{Y,E} M`.
 
