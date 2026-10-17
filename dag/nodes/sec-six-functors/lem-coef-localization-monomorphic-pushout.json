@@ -11,9 +11,75 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-universally-localizing-simplicial-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a quasicategory $\\mathcal E$, enlarging the universe so that it and all the simplicial sets are small. For a degreewise pushout $K=B\\amalg_A D$ of simplicial sets, $\\operatorname{Fun}(K,\\mathcal E)$ is the strict pullback $\\operatorname{Fun}(B,\\mathcal E)\\times_{\\operatorname{Fun}(A,\\mathcal E)}\\operatorname{Fun}(D,\\mathcal E)$ of the two restriction maps: in each degree, product with the set $(\\Delta^n)_m$ preserves pushouts of sets, so $K\\times\\Delta^n=(B\\times\\Delta^n)\\amalg_{A\\times\\Delta^n}(D\\times\\Delta^n)$, and a map out of it is exactly a pair of maps agreeing on $A\\times\\Delta^n$, compatibly with all simplicial operators. Apply this to $X=X_0\\amalg_{X_{01}}X_1$ and to $Y=Y_0\\amalg_{Y_{01}}Y_1$. Since $u_0$ and $v_0$ are degreewise injective, the restrictions $\\operatorname{Fun}(X_0,\\mathcal E)\\to\\operatorname{Fun}(X_{01},\\mathcal E)$ and $\\operatorname{Fun}(Y_0,\\mathcal E)\\to\\operatorname{Fun}(Y_{01},\\mathcal E)$ are isofibrations between quasicategories by the restriction clause of [lem-coef-infinity-isofibration-exponentiation]. By [lem-coef-infinity-isofibration-pullback-limit] both strict pullback squares are pullback squares in $\\mathrm{Cat}_\\infty$. (This is the categorical-pushout property of Kerodon Example 4.5.5.12 (01FJ) for the two squares.) No injectivity of $u_1$, $v_1$ or the $p_i$, and no quasicategory hypothesis on the $X_i,Y_i$, is used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01N7",
+    "place": "Proposition 6.3.5.3, hypothesis (a) and the first sentence of the proof (homotopy pullback square of functor categories); Example 4.5.5.12 (01FJ) for the front square, which is what makes condition (1) hold."
+   }
+  },
+  {
+   "text": "For $i=01,0,1$ let $\\mathcal L_i\\subseteq\\operatorname{Fun}(X_i,\\mathcal E)$ be the full subcategory on diagrams carrying every edge of $V_i$ to an equivalence. A full subcategory of a quasicategory is a quasicategory, since an inner horn of dimension at least two contains all vertices of its simplex, so the ambient filler already lies in it. Because $u_0(V_{01})\\subseteq V_0$ and $u_1(V_{01})\\subseteq V_1$, restriction carries $\\mathcal L_0$ and $\\mathcal L_1$ into $\\mathcal L_{01}$, giving a cospan $\\mathcal L_0\\to\\mathcal L_{01}\\leftarrow\\mathcal L_1$. The left map is an isofibration. Inner horns lift by the ambient isofibration of Step 1 and fullness. For an equivalence edge $e:F\\circ u_0\\to G$ of $\\mathcal L_{01}$ with $F\\in\\mathcal L_0$, the ambient isofibration gives an equivalence edge $\\tilde e:F\\to F'$ of $\\operatorname{Fun}(X_0,\\mathcal E)$ restricting to $e$. Its components $\\tilde e_x$ are equivalences by [lem-coef-infinity-pointwise-equivalences]. For $w:x\\to y$ in $V_0$, the square $\\tilde e|_{w\\times\\Delta^1}$ gives $[F'(w)][\\tilde e_x]=[\\tilde e_y][F(w)]$ in $h\\mathcal E$; the other three classes are invertible, so $F'(w)$ is an equivalence edge by the characterization in [lem-coef-infinity-mapping-composition]. Hence $F'\\in\\mathcal L_0$, and by fullness $\\tilde e$ with its inverse witnesses lies in $\\mathcal L_0$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-pointwise-equivalences",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01N7",
+    "place": "Proposition 6.3.5.3, hypotheses (b)-(d) (the inclusions G(W_01) in W_0, H(W_01) in W_1) and the proof step passing to the localized functor categories (via Proposition 3.4.1.16 there)."
+   }
+  },
+  {
+   "text": "Put $W=j_0(V_0)\\cup j_1(V_1)\\subseteq X_1$ and let $\\mathcal L\\subseteq\\operatorname{Fun}(X,\\mathcal E)$ be the full subcategory on diagrams inverting $W$. A diagram $F$ on $X$ inverts $j_i(w)$ exactly when $F\\circ j_i$ inverts $w$, so under the strict identification of Step 1 an object lies in $\\mathcal L$ exactly when its restrictions lie in $\\mathcal L_0$ and $\\mathcal L_1$ (and then its restriction to $X_{01}$ lies in $\\mathcal L_{01}$ by Step 2). Since all these subcategories are full, membership of a simplex is decided by its vertices, so $\\mathcal L=\\mathcal L_0\\times_{\\mathcal L_{01}}\\mathcal L_1$ as simplicial sets, compatibly with the projections. By the isofibration of Step 2 and [lem-coef-infinity-isofibration-pullback-limit], this square is a pullback square in $\\mathrm{Cat}_\\infty$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01N7",
+    "place": "Proposition 6.3.5.3, the edge collection W = H'(W_0) union G'(W_1) and the homotopy pullback of the localized functor categories."
+   }
+  },
+  {
+   "text": "Write $k_i:Y_i\\to Y$ for the structure maps, so $p\\circ j_i=k_i\\circ p_i$. For $G:Y_0\\to\\mathcal E$ one has $(G p_0)u_0=(G v_0)p_{01}$, and similarly for $Y_1$; so the functors $p_i^*$ commute strictly with the restrictions. By the localization hypotheses and [def-coef-universally-localizing-simplicial-map], each $p_i^*:\\operatorname{Fun}(Y_i,\\mathcal E)\\to\\mathcal L_i$ is a functor equivalence. They form a map of cospans, which is an equivalence of cospan diagrams because each component is an equivalence ([lem-coef-infinity-pointwise-equivalences] for the cospan shape in $\\mathrm{Cat}_\\infty$). The induced map of strict pullbacks is $p^*:\\operatorname{Fun}(Y,\\mathcal E)\\to\\mathcal L$, since the $j_i$-restrictions of $G\\circ p$ are $(G k_i)\\circ p_i$; in particular $p^*$ lands in $\\mathcal L$. By Step 1 the square of $\\operatorname{Fun}(Y,\\mathcal E)$ is limiting. Composed with the equivalence of cospans it remains limiting over $\\mathcal L_0\\to\\mathcal L_{01}\\leftarrow\\mathcal L_1$, by the invariance under equivalences of cospan diagrams in [lem-coef-infinity-terminal-pullback-criterion]. By Step 3 the square of $\\mathcal L$ is limiting over the same cospan. Then $p^*$ is a map of cones between two limiting cones. By the naturality of the comparisons in maps of cones in that node, together with the explicit comparison of [lem-coef-infinity-isofibration-pullback-limit], postcomposition $\\operatorname{Fun}(Q,\\operatorname{Fun}(Y,\\mathcal E))^\\simeq\\to\\operatorname{Fun}(Q,\\mathcal L)^\\simeq$ is an equivalence of spaces for every small quasicategory $Q$. With $Q=\\mathcal L$, choose $\\psi$ with $p^*\\psi$ naturally equivalent to $\\mathrm{id}_{\\mathcal L}$. With $Q=\\operatorname{Fun}(Y,\\mathcal E)$, the relation $p^*\\psi p^*\\simeq p^*$ and injectivity on components give $\\psi p^*\\simeq\\mathrm{id}$. So $p^*$ is a functor equivalence onto $\\mathcal L$. Since $W$ does not depend on $\\mathcal E$, [def-coef-universally-localizing-simplicial-map] says $p$ exhibits $Y$ as a localization of $X$ at $j_0(V_0)\\cup j_1(V_1)$.",
+   "uses": [
+    "def-coef-universally-localizing-simplicial-map",
+    "lem-coef-infinity-pointwise-equivalences",
+    "lem-coef-infinity-terminal-pullback-criterion",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01N7",
+    "place": "Proposition 6.3.5.3 proof, Corollary 3.4.1.13 comparison and Proposition 6.3.1.13: implication (1) to (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-universally-localizing-simplicial-map",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-infinity-terminal-pullback-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01N7",
+  "place": "Proposition 6.3.5.3, implication (1) to (2). The front square is categorical by Example 4.5.5.12 (01FJ), realized here by the isofibration and isofibration-pullback nodes. The proof is expanded through strict functor-category pullbacks along isofibrations and edge-inverting full subcategories. Archived source WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,7 +132,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-universal-localization-degenerate-edges",
@@ -100,5 +166,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-localization-monomorphic-pushout",
+  "worker": "stage1",
+  "summary": "Split the specified-edge localization gluing statement using the categorical pushout property of degreewise monomorphic simplicial pushouts and the homotopy-pullback comparison of the three component localization equivalences. No new hypotheses or conclusions were introduced; the existing Mathlib searches and source metadata were retained. Reviewer repair (NB maintainer reader, 2026-10-17): the proposed new categorical-pushout helper node was dropped. It is a two-line consequence of the degreewise functor-category identification, lem-coef-infinity-isofibration-exponentiation and lem-coef-infinity-isofibration-pullback-limit, and Step 1 now carries this argument. The gap in the old Step 3 (identifying the pullback of the edge-inverting cospan with the full subcategory L) is now closed by the isofibration argument of Step 2. Step 4 gives the explicit quasi-inverse.",
+  "blueprint": "Realizes the ancestor proof input Kerodon Proposition 6.3.5.3 (01N7), implication (1) to (2), with the front square categorical by Example 4.5.5.12 (01FJ), at the supporting pushout/localization-gluing place recorded in blueprint.from.place (Kerodon Proposition 6.3.5.4, proof (4) to (1), application of Proposition 6.3.5.3)."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NB-c5c7a1f01",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-c5c7a1f01 (reviewer sub-agent of L); spot-checked: Read the item, the new node, the report and all cited statements in full. Read Kerodon 01N7 (Prop 6.3.5.3: hypotheses (a)-(d), (1)<=>(2)) and 01FJ (Ex 4.5.5.12, §4.5.5) online, because Kerodon is not archived. The item statement is exactly 01N7 (1)=>(2): the back square is categorical by 01FJ since u_0 is injective (this is (a)), and the front square is categorical since v_0 is injective (this gives (1)). The edge inclusions are (b)-(d), and the conclusion is the union of the images of V_0 and V_1. The statement is unchanged and nothing is weakened. Small cases tested: all V_i empty, empty overlap, non-injective u_1, E=pt. Two repairable faults, both fixed. (1) C1-exception/D: the new node lem-coef-categorical-pushout-mono follows in two lines from facts already in the DAG. Fun of a degreewise pushout is the strict pullback (elementary); lem-coef-infinity-isofibration-exponentiation makes restriction along a mono an isofibration; lem-coef-infinity-isofibration-pullback-limit makes a strict pullback along an isofibration a Cat_inf pullback. The sibling lem-coef-universal-localization-pushout step 4 does the same inline, and the node's 'equivalently ... cores' clause was imprecise (B2/B3). I folded it into item Step 1 and dropped the node; nothing else cites it. (2) E5: the old Step 3 identified the Cat_inf pullback of the L-cospan with the full subcategory L without showing that L_0->L_01 is an isofibration. The new Step 2 proves the isofibration: inner horns by fullness; equivalence lifts via lem-coef-infinity-pointwise-equivalences and lem-coef-infinity-mapping-composition. The new Step 3 gives L = L_0 x_{L_01} L_1 strictly and as a Cat_inf pullback. The new Step 4 checks that the p_i^* commute strictly with restriction, uses the cospan-equivalence invariance and cone naturality of lem-coef-infinity-terminal-pullback-criterion, and builds an explicit quasi-inverse by testing with Q. All citations are in unit sk-prop-sf-biduality-general or are definitions, so no tool_uses are needed. A transitive-dependency check finds no cycle, and proof_deps is the union of the uses. No SGA source; no target touched. The corrected item is at fixes/dag/nodes/sec-six-functors/lem-coef-localization-monomorphic-pushout.json; the full checks are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
