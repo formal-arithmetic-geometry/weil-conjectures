@@ -11,9 +11,64 @@
   "lem-coef-sorted-simplicial-algebra-model",
   "lem-coef-simplicial-interval-lifting"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let C_O be the category whose objects are finite lists of labelled pairs from O times O and whose arrows are functors between the corresponding free categories P_alpha that fix O. Because O and every list are small, the arrows are sets, and composition is ordinary functor composition. The free category on the disjoint union of two finite lists is the coproduct of the two free categories in C_O: a functor out of P_(alpha concatenated beta) is uniquely a pair of functors out of P_alpha and P_beta agreeing on the common object set. The empty list gives the discrete category on O, initial in C_O. Passing to T_O=C_O^op therefore makes list concatenation a finite product and the empty list terminal; the one-term list ((x,y)) is the distinguished sort. This also covers an empty O and lists containing loops x=y.",
+   "uses": [
+    "lem-coef-sorted-simplicial-algebra-model",
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0508152",
+    "place": "Bergner, Example 3.5 and Definition 3.6, printed pp.1937-1938; the finite-list free-category construction is the explicit opposite-category presentation of that example."
+   }
+  },
+  {
+   "text": "By the definition of a strict simplicial algebra over a finite-product theory, a model A of T_O is a finite-product-preserving functor to simplicial sets. Its value on a list alpha is consequently canonically the product of its values on the one-term lists in alpha. In C_O, the functor P_(x,z) to P_((x,y),(y,z)) sending its generator to the word e_(y,z) after e_(x,y) induces in T_O a map from the product of the (x,y)- and (y,z)-sorts to the (x,z)-sort; the functors sending a loop generator to an identity induce the unit maps. The equalities of functors expressing associativity and the two unit laws become the corresponding equalities of simplicial maps. Thus the singleton-sort values of A carry exactly the identities and associative simplicial composition of a simplicial category on O.",
+   "uses": [
+    "lem-coef-sorted-simplicial-algebra-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0508152",
+    "place": "Bergner, Example 3.5, Definition 3.6 and the evaluation/free-algebra discussion, printed pp.1937-1938,1942."
+   }
+  },
+  {
+   "text": "Conversely, let B be a simplicial category on O. For a list alpha set A_B(alpha) to the product over its entries (x_j,y_j) of B(x_j,y_j), with the empty product the terminal simplicial set. For a morphism of T_O represented by a functor P_beta to P_alpha fixing O, send a tuple of alpha-arrows to the tuple of beta-arrows obtained by interpreting each generator of P_beta as its finite composable word in the alpha-generators and composing in B. Functoriality of these maps follows from substitution of words, and preservation of concatenation products is immediate. The identity and composition operations recovered in Step 2 are the original ones of B, while starting from A and applying this construction returns A because every morphism in a free category is a unique finite word. Hence the two constructions are inverse on objects.",
+   "uses": [
+    "lem-coef-sorted-simplicial-algebra-model",
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0508152",
+    "place": "Bergner, Example 3.5 and Definition 3.6, printed pp.1937-1938; explicit word-substitution verification for the finite-list presentation."
+   }
+  },
+  {
+   "text": "A morphism of strict T_O-algebras is a natural transformation, hence is determined by its components on the singleton sorts and the naturality squares for the unit and composition maps. These are exactly an identity-on-O simplicial functor between the associated simplicial categories. Conversely every such simplicial functor gives a natural transformation by taking products on finite lists. Therefore the constructions define an equivalence of categories, and evaluation at the distinguished singleton sort is naturally the mapping simplicial set B(x,y). No step uses x different from y or a nonempty object set, so the stated edge cases remain included.",
+   "uses": [
+    "lem-coef-sorted-simplicial-algebra-model",
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0508152",
+    "place": "Bergner, Definition 3.6 and Example 3.5, printed pp.1937-1938; introduction, printed p.1926."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-sorted-simplicial-algebra-model"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://arxiv.org/pdf/math/0508152",
+  "place": "Bergner, Rigidification of algebras over multi-sorted theories, Example 3.5 and Definition 3.6, printed pp.1937-1938, with the finite-list free-category construction and word-substitution verification expanded here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,7 +128,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cone-equivalence-saturation",
@@ -103,5 +158,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cone-sorted-theory-identification",
+  "worker": "stage1",
+  "summary": "Kept the imported statement and supplied a four-step proof: finite-list free categories give the opposite finite-product theory; a strict model yields identities and composition; a fixed-object simplicial category reconstructs the model by interpreting words; and morphisms correspond to identity-on-object simplicial functors. Checked empty O and repeated endpoints. No new nodes were needed because the argument is the explicit construction behind Bergner Example 3.5, while the existing sorted-model and fixed-object nodes supply the ambient notions.",
+  "blueprint": "Realizes the fixed-object sorted-theory input cited in the returned Step 5 of the cone-equivalence-saturation proof, corresponding to the coherent mapping-space foundation in prop-coef-integral-exceptional-adjoint, paragraph 2."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-cbcd80b5c",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-cbcd80b5c (reviewer sub-agent of L); spot-checked: I read the item in full: 4 steps, no new nodes, no tool_uses. Source check: Bergner AGT 6 (2006), arXiv:math/0508152, read from the arXiv PDF (it is not in literature/). Intro p.1926 says product-preserving T_OCat→SSets functors are simplicial categories on O. Def 3.1 is on p.1932, Example 3.5 on p.1937 (T_OCat is the opposite of the free categories on finite graphs with vertex set O, (O×O)-sorted, loops give free monoids) and Def 3.6 on p.1938. The item's ordered-list T_O is equivalent to Bergner's theory and satisfies the definition in lem-coef-sorted-simplicial-algebra-model. The statement is true: T_O(α,-) represents the free category P_α, and Cat_O is finitary monadic over O×O-graphs, so taking models degreewise gives sCat_O. Step checks: coproduct by concatenation and P_∅ initial are correct. The composition map ((x,y),(y,z))→((x,z)) comes from generator↦e2∘e1, and the unit from loop↦id. Word substitution gives functoriality. Natural transformations correspond to simplicial functors fixing O. Edge cases: O empty (T_O terminal, sCat_∅ trivial) and loops x=y are both covered. No cycle; both cited nodes are in the unit; the only citer, cone-equivalence-saturation Step 5, uses exactly this statement. Duplicate search (rg sorted/Lawvere/product-preserving, blueprint_refs) found nothing: the sorted-model, fixed-object-free-calculus and diagonal-nerve nodes are distinct. No SGA cited. Minor points, no fix needed: Step 1 cites interval-lifting without needing it, and Step 3's 'inverse on objects' means up to the canonical product isomorphism. The WANTED archival copy of Bergner is still valid."
  }
 }
