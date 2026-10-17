@@ -83,14 +83,16 @@ private theorem horizontalMateComp_hom_app
     {A B C : Scheme.{u}} (f : A ⟶ B) (g : B ⟶ C) (E : schemeDerivedQCohCategory C) :
     (schemeDerivedQCohProperty A).ι.map ((horizontalMateComp f g).hom.app E) =
       (horizontalMateAmbientComp f g).hom.app E.obj := by
-  simp [horizontalMateComp]
+  rw [horizontalMateComp, Functor.fullyFaithfulCancelRight_hom_app, Functor.map_preimage]
+  rfl
 
 private theorem horizontalMateComp_inv_app
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {A B C : Scheme.{u}} (f : A ⟶ B) (g : B ⟶ C) (E : schemeDerivedQCohCategory C) :
     (schemeDerivedQCohProperty A).ι.map ((horizontalMateComp f g).inv.app E) =
       (horizontalMateAmbientComp f g).inv.app E.obj := by
-  simp [horizontalMateComp]
+  rw [horizontalMateComp, Functor.fullyFaithfulCancelRight_inv_app, Functor.map_preimage]
+  rfl
 
 private theorem cancel_ordinary_comparisons
     {C D : Type*} [Category* C] [Category* D] (Q : C ⥤ D)
