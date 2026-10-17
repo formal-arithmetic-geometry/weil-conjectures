@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.BaseChangeField
+public import WeilConjectures.WeilSheaf.BaseChangeField.Cohomology
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.CohomologyAdicConstant
 public import WeilConjectures.WeilSheaf.Constant
@@ -122,10 +123,13 @@ theorem exists_traceCup_isPerfect (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.o
       ((Nat.card k₀ : PadicAlgCl l) ^ d), T.IsPerfect :=
   sorry
 
-/-- Blueprint `sk-def-weil` (Frobenius-operator convention, `def-weil-frobenius-detailed`): for a
-finite extension `k₀'/k₀` of degree `r`, the cohomology of the base change `X ×_{k₀} k₀'` is
-that of `X`, the geometric Frobenius of `k₀'` corresponding to the `r`-th power `F^r` of the
-geometric Frobenius of `k₀`, since `Frob_{q^r} = Frob_q^r`. -/
+/-- Blueprint `def-weil-frobenius-detailed` (the geometric-Frobenius convention
+`Frob_{q^r} = Frob_q^r`), for the Weil structures of `sk-def-sf-weil-complexes` and the Frobenius
+operators of `def-trf-frobenius-operators`: for a finite extension `k₀'/k₀` of degree `r`, the
+cohomology of the base change `X ×_{k₀} k₀'` is that of `X`, the geometric Frobenius of `k₀'`
+corresponding to the `r`-th power `F^r` of the geometric Frobenius of `k₀`. This is item (6) of
+the proof of `thm-weil-poincare-duality`; see
+`AlgebraicGeometry.WeilSheaf.exists_linearEquiv_cohomology_adicConstant_baseChangeField`. -/
 theorem exists_linearEquiv_cohomology_baseChangeField
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
@@ -135,7 +139,8 @@ theorem exists_linearEquiv_cohomology_baseChangeField
         ((adicConstant k₀ l X).cohomology i).carrier,
       ∀ x, e (((adicConstant k₀' l (X.baseChangeField k₀ k₀')).cohomology i).frobenius x) =
         (((adicConstant k₀ l X).cohomology i).frobeniusEnd ^ Module.finrank k₀ k₀') (e x) :=
-  sorry
+  haveI := fact_ringChar_ne_of_algebra (l := l) k₀ k₀'
+  exists_linearEquiv_cohomology_adicConstant_baseChangeField k₀ l X k₀' i
 
 end Ingredients
 

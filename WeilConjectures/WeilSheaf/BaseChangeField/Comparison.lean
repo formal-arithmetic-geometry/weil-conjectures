@@ -155,7 +155,8 @@ theorem lowerStar_obj_frobeniusPowIso (K : ProEtaleWeilSheaf k₀ l X) (m : ℕ)
   induction m with
   | zero =>
     ext1
-    rw [frobeniusPowIso_zero _ (by rw [pow_zero]; rfl), frobeniusPowIso_zero _ (by rw [pow_zero]; rfl)]
+    rw [frobeniusPowIso_zero _ (by rw [pow_zero]; rfl),
+      frobeniusPowIso_zero _ (by rw [pow_zero]; rfl)]
     simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
     exact (adicLowerStarSquareIso_id _ _ _ (by rw [pow_zero]; rfl) (by rw [pow_zero]; rfl) _
       K.carrier).symm
@@ -167,7 +168,8 @@ theorem lowerStar_obj_frobeniusPowIso (K : ProEtaleWeilSheaf k₀ l X) (m : ℕ)
     simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Functor.mapIso_hom, Functor.map_comp,
       Category.assoc]
     have nat := (adicLowerStarSquareIso l
-      (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ (comp_over φ _))).hom.naturality
+      (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ
+        (comp_over φ _))).hom.naturality
         (K.frobeniusPowIso m).hom
     simp only [Functor.comp_map] at nat
     rw [reassoc_of% nat]
@@ -225,14 +227,14 @@ def transportLowerStarIso :
       have nat := (adicLowerStarSquareIso l hsq).hom.naturality (K.frobeniusPowIso r).hom
       simp only [Functor.comp_map] at nat
       rw [nat]
-      exact reassoc_of% (adicLowerStarSquareIso_cube θ.hom θY.hom
+      exact (reassoc_of% (adicLowerStarSquareIso_cube θ.hom θY.hom
         (Scheme.Hom.geometricFiberMap φ (comp_over φ _))
         (Scheme.Hom.geometricFiberMap φ' (comp_over φ' _)) _ _ _ _ hsq
         (hom_comp_geometricGaloisFrobenius_inv θ r hθ)
         (hom_comp_geometricGaloisFrobenius_inv θY r hθY)
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_pow_inv φ (comp_over φ _) r)
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ' (comp_over φ' _))
-        K.carrier) _))
+        K.carrier)) _))
     (fun f ↦ IsoAlgebra.hom_ext ((adicLowerStarSquareIso l hsq).hom.naturality f.hom.f))
 
 include hsq in
@@ -245,27 +247,52 @@ end Transport
 
 section Constant
 
+set_option maxHeartbeats 800000 in
+-- the iterated Weil structures unfold through several module-object isomorphisms
 variable (k₀ l) in
 /-- The iterated Weil structure of the constant Weil sheaf is the identification
 `(Frᵐ⁻¹)_* ℚ̄_ℓ ≅ ℚ̄_ℓ`. -/
 lemma adicConstant_frobeniusPowIso (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
     (m : ℕ) :
     (adicConstant k₀ l X).frobeniusPowIso m =
-      adicLowerStarUnitIso l ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).symm := by
+      adicLowerStarUnitIso l
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).symm := by
   induction m with
   | zero =>
     ext1
     rw [frobeniusPowIso_zero _ (by rw [pow_zero]; rfl)]
     simp only [Iso.trans_hom, Iso.app_hom]
-    erw [adicLowerStarId_hom_app_unit]
-    exact adicLowerStarCongr_hom_app_comp_adicLowerStarUnitIso_hom _
+    have hid : (adicLowerStarId l _).hom.app (adicConstant k₀ l X).carrier =
+        (adicLowerStarUnitIso l (Iso.refl (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)).hom :=
+      adicLowerStarId_hom_app_unit _
+    have h0 : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).symm).hom =
+        (Iso.refl (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).hom := by
+      rw [pow_zero]
+      rfl
+    have key := adicLowerStarCongr_hom_app_comp_adicLowerStarUnitIso_hom (l := l) h0
+    rw [hid]
+    exact key
   | succ m ih =>
     ext1
     rw [frobeniusPowIso_succ _ _ (by rw [pow_succ, Aut.Aut_mul_def, Iso.trans_inv]), ih]
     simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Functor.mapIso_hom]
-    erw [adicLowerStarUnitIso_comp]
-    simp only [Iso.inv_hom_id_app_assoc]
-    rw [adicLowerStarCongr_hom_app_comp_adicLowerStarUnitIso_hom]
+    have hc : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*ᵃ[l].map
+          (adicLowerStarUnitIso l
+            ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).symm).hom ≫
+          (adicConstant k₀ l X).str.hom =
+        (adicLowerStarComp l ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv
+            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).hom.app
+            (adicConstant k₀ l X).carrier ≫
+          (adicLowerStarUnitIso l
+            (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).symm ≪≫
+              (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)).hom :=
+      adicLowerStarUnitIso_comp ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).symm
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm
+    rw [hc, Iso.inv_hom_id_app_assoc]
+    exact adicLowerStarCongr_hom_app_comp_adicLowerStarUnitIso_hom
+      (e := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (m + 1)).symm)
+      (e' := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).symm ≪≫
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm) _
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   {k₀' : Type u} [Field k₀'] [Finite k₀'] {X' : Scheme.{u}}
@@ -275,23 +302,56 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (hθ : θ.hom ≫ (X' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.hom =
     ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).hom ≫ θ.hom)
 
+include hθ in
+/-- The Weil structure of the transport of the constant Weil sheaf is that of the constant
+Weil sheaf, under `ℚ̄_ℓ ≅ θ_* ℚ̄_ℓ`. -/
+lemma adicLowerStarUnitIso_inv_comp_transport_str :
+    ((X' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.inv)_*ᵃ[l].map
+        (adicLowerStarUnitIso l θ).inv ≫
+      ((transport θ r hθ).obj (adicConstant k₀ l X)).str.hom =
+    (adicLowerStarUnitIso l (X' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.symm).hom ≫
+      (adicLowerStarUnitIso l θ).inv := by
+  have c1 : ((X' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.inv)_*ᵃ[l].map
+        (adicLowerStarUnitIso l θ).hom ≫
+      (adicLowerStarUnitIso l (X' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.symm).hom =
+      (adicLowerStarComp l θ.hom
+          (X' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.inv).hom.app
+          (adicConstant k₀ l X).carrier ≫
+        (adicLowerStarUnitIso l
+          (θ ≪≫ (X' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.symm)).hom :=
+    adicLowerStarUnitIso_comp θ (X' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.symm
+  have c2 : (θ.hom)_*ᵃ[l].map
+        (adicLowerStarUnitIso l
+          ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).symm).hom ≫
+      (adicLowerStarUnitIso l θ).hom =
+      (adicLowerStarComp l ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).inv
+          θ.hom).hom.app (adicConstant k₀ l X).carrier ≫
+        (adicLowerStarUnitIso l
+          (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).symm ≪≫ θ)).hom :=
+    adicLowerStarUnitIso_comp ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).symm θ
+  have c3 : (adicLowerStarCongr l (hom_comp_geometricGaloisFrobenius_inv θ r hθ)).hom.app
+        (adicConstant k₀ l X).carrier ≫
+      (adicLowerStarUnitIso l
+        (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).symm ≪≫ θ)).hom =
+      (adicLowerStarUnitIso l
+        (θ ≪≫ (X' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.symm)).hom :=
+    adicLowerStarCongr_hom_app_comp_adicLowerStarUnitIso_hom
+      (e := θ ≪≫ (X' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.symm)
+      (e' := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).symm ≪≫ θ) _
+  rw [transport_obj_str, adicConstant_frobeniusPowIso, transportCommIso_eq, Iso.eq_comp_inv,
+    ← cancel_epi (((X' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.inv)_*ᵃ[l].map
+      (adicLowerStarUnitIso l θ).hom), c1]
+  simp only [adicLowerStarSquareIso, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom,
+    Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+  rw [← Functor.map_comp_assoc, Iso.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp,
+    c2, Iso.inv_hom_id_app_assoc, c3]
+
 /-- The transport of the constant Weil sheaf `ℚ̄_ℓ` on `X` along `θ` is the constant Weil sheaf
 on `X'`: on underlying sheaves, `ℚ̄_ℓ ≅ θ_* ℚ̄_ℓ`. -/
 def adicConstantTransportIso :
     adicConstant k₀' l X' ≅ (transport θ r hθ).obj (adicConstant k₀ l X) :=
-  IsoAlgebra.isoMk (adicLowerStarUnitIso l θ).symm (by
-    rw [← IsoAlgebra.str_hom, ← IsoAlgebra.str_hom, transport_obj_str,
-      adicConstant_frobeniusPowIso, transportCommIso_eq]
-    change _ = (adicLowerStarUnitIso l _).hom ≫ _
-    rw [← cancel_epi ((X' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.inv)_*ᵃ[l].map
-      (adicLowerStarUnitIso l θ).hom, ← Functor.map_comp_assoc, Iso.symm_hom, Iso.hom_inv_id,
-      Functor.map_id, Category.id_comp, ← cancel_mono (adicLowerStarUnitIso l θ).hom]
-    simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc, Iso.symm_hom,
-      Iso.inv_hom_id, Category.comp_id]
-    erw [adicLowerStarUnitIso_comp, adicLowerStarUnitIso_comp]
-    simp only [adicLowerStarSquareIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-      Category.assoc, Iso.inv_hom_id_app_assoc]
-    rw [adicLowerStarCongr_hom_app_comp_adicLowerStarUnitIso_hom])
+  IsoAlgebra.isoMk (adicLowerStarUnitIso l θ).symm
+    (adicLowerStarUnitIso_inv_comp_transport_str θ r hθ)
 
 lemma adicConstantTransportIso_hom_hom_f :
     (adicConstantTransportIso (l := l) θ r hθ).hom.hom.f = (adicLowerStarUnitIso l θ).inv :=
