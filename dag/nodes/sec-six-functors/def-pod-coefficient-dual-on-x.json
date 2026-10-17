@@ -1,57 +1,141 @@
 {
-  "id": "def-pod-coefficient-dual-on-x",
-  "blueprint": {
-    "is": "def-pod-coefficient-dual-on-x",
-    "from": null,
-    "same_as": null
+ "id": "def-pod-coefficient-dual-on-x",
+ "blueprint": {
+  "is": "def-pod-coefficient-dual-on-x",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Coefficient dual on $X$",
+ "statement": "In the Poincare duality conventions of this chapter [def-pod-conventions] (the fixed setting), let $K\\in D^b_{ctf}(X,\\Lambda)$, with the finite-Tor category of [def-weil-finite-tor-amplitude]. Work on the small pro-etale site of $X$, with the coefficient-stage tensor product and derived internal Hom of [def-weil-derived-pullback-tensor-hom], and the tensor–internal-Hom adjunction of [sk-def-sf-operations] (i). Write $\\Lambda_X$ for the coefficient unit at that stage [def-weil-ordinary-compact-cohomology]: the constant finite-level unit, the completed integral unit, or the corresponding rational/common-stage unit.\n\nThe *coefficient dual* is\n\n$$\nK^\\vee=R\\mathcal Hom_X\\bigl(K,\\Lambda_X\\bigr),\n$$\n\nwith the canonical evaluation\n\n$$\n\\operatorname{ev}_K:K\\otimes^L_{\\Lambda_X}K^\\vee\\longrightarrow\\Lambda_X\n$$\n\nof the tensor–internal-Hom adjunction. At the integral stage $K^\\vee$ lies in $D^b_c(X,\\mathcal O_E)$ by [cor-coef-integral-internal-hom], applied to $K$ and the coefficient object $\\Lambda_X=\\widehat{\\mathcal O}_{E,X}\\in D^b_c(X,\\mathcal O_E)$ [lem-weil-constant-coefficient-objects-constructible]; so the integral tensor product above is defined, and at the rational stage (on integral objects) and at the common stage (at the compositum stage) the pair $(K,\\Lambda_X)$ lies in the domain of the rational and common-stage internal Hom. Explicitly, $\\operatorname{ev}_K$ is the counit of that adjunction (for this $K$) at $\\Lambda_X$, or equivalently the inverse image of $\\operatorname{id}_{K^\\vee}$ under the adjunction bijection\n\n$$\n\\operatorname{Hom}\\bigl(K\\otimes^L_{\\Lambda_X}K^\\vee,\\Lambda_X\\bigr)\n\\cong\n\\operatorname{Hom}\\bigl(K^\\vee,R\\mathcal Hom_X(K,\\Lambda_X)\\bigr).\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/def-pod-coefficient-dual-on-x.md",
+  "place": "node def-pod-coefficient-dual-on-x, order 2245"
+ },
+ "stmt_deps": [
+  "def-pod-conventions",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-pullback-tensor-hom",
+  "sk-def-sf-operations",
+  "def-weil-ordinary-compact-cohomology",
+  "cor-coef-integral-internal-hom",
+  "lem-weil-constant-coefficient-objects-constructible"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The coefficient dual of a complex of modules on the small pro-etale site is the derived internal Hom into the coefficient unit, with evaluation from the tensor Hom adjunction",
+   "results": "LightCondensed.ihomPoints and its apply/symm variants, ihom_map_val_app, and presheaf differential constructions; none states this derived pro-etale coefficient definition.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
-  "kind": "definition",
-  "title": "Coefficient dual on $X$",
-  "statement": "In the Poincare duality conventions of this chapter (the fixed setting),\n$K\\in D^b_{ctf}(X,\\Lambda)$. The *coefficient dual* is\n\n$$\nK^\\vee=R\\mathcal Hom_X\\bigl(K,\\Lambda_X\\bigr),\n$$\n\nwith the canonical evaluation\n\n$$\n\\operatorname{ev}_K:K\\otimes^L_{\\Lambda_X}K^\\vee\\longrightarrow\\Lambda_X\n$$\n\nof the tensor–internal-Hom adjunction.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/def-pod-coefficient-dual-on-x.md",
-    "place": "node def-pod-coefficient-dual-on-x, order 2245"
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.internalHom, CategoryTheory.ihom.ev",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match for this joint query"
   },
-  "stmt_deps": [
-    "def-pod-conventions",
-    "def-weil-geometric-hypotheses"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2245,
-  "blueprint_uses": [
-    "def-pod-conventions",
-    "def-weil-geometric-hypotheses"
-  ],
-  "uses_not_cited": [
-    "def-pod-conventions",
-    "def-weil-geometric-hypotheses"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "grep",
+   "query": "def internalHom|def ev|def uncurry|uncurry_id_eq_ev",
+   "results": "8 hits in CategoryTheory/Monoidal/Closed, including Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:92 (CategoryTheory.ihom.ev), :150 (MonoidalClosed.uncurry), :209 (MonoidalClosed.uncurry_id_eq_ev), :292 (MonoidalClosed.internalHom). Read these definitions and the adjunction at :81.",
+   "date": "2026-10-17",
+   "verdict": "partial: generic closed-category construction and evaluation; no pro-etale derived structure or coefficient-stage identifications"
   },
-  "chapter": "sec-six-functors",
-  "unit": "sk-thm-sf-package",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the Poincare duality conventions of this chapter (the fixed setting), let\n$K\\in D^b_{ctf}(X,\\Lambda)$. The *coefficient dual* is\n\n$$\nK^\\vee=R\\mathcal Hom_X\\bigl(K,\\Lambda_X\\bigr),\n$$\n\nwith the canonical evaluation\n\n$$\n\\operatorname{ev}_K:K\\otimes^L_{\\Lambda_X}K^\\vee\\longrightarrow\\Lambda_X\n$$\n\nof the tensor–internal-Hom adjunction.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leansearch",
+   "query": "Coefficient dual of a derived pro-etale module complex and its tensor internal Hom evaluation into the unit",
+   "results": "8 hits: transpose_dualTensorHom, dualTensorHomEquiv, Module.Dual.eval_apply, Module.Dual.eval, FGModuleCat.FGModuleCatEvaluation, dualTensorHom_apply, dualTensorHom, comp_dualTensorHom.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary linear/module duals, not derived pro-etale complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a monoidal closed category define the dual of an object to be its internal Hom into the tensor unit; the evaluation map is the counit at the unit",
+   "results": "8 hits: CategoryTheory.MonoidalClosed.id, MonoidalClosed.closed, ihom.ev, exp.ev, ihom, exp, MonoidalClosed.uncurry', unitClosed.",
+   "date": "2026-10-17",
+   "verdict": "partial: ihom.ev is exactly the generic counit construction; the full item still needs the specified pro-etale derived categories and operations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.uncurry_id_eq_ev",
+   "results": "1 hit: CategoryTheory.MonoidalClosed.uncurry_id_eq_ev, Mathlib.CategoryTheory.Monoidal.Closed.Basic. Read Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:209.",
+   "date": "2026-10-17",
+   "verdict": "partial: proves the generic identity-transpose description of evaluation, not the full coefficient-stage definition"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedDual|coefficientDual|derivedHom|derivedTensor|MonoidalClosed",
+   "results": "0 hits in Mathlib/CategoryTheory/DerivedCategory.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dual object defined by internal hom to the monoidal identity and evaluation obtained by uncurrying its identity morphism",
+   "results": "8 hits: CategoryTheory.ihom.coev, exp.coev, ihom.ev, exp.ev, ihom.ihom_adjunction_unit, MonoidalClosed.uncurry', MonoidalClosed.id, MonoidalClosed.curry'. Independently read Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:81-93, 144-151, 209-210.",
+   "date": "2026-10-17",
+   "verdict": "partial: ihom.ev gives the abstract counit, but does not construct the specified finite, completed integral, rationalized and common-stage pro-etale operations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ihom.ev",
+   "results": "12 hits, including CategoryTheory.ihom.ev, ihom.ihom_adjunction_counit and MonoidalClosed.uncurry_id_eq_ev. Read Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:81-93, 144-151, 209-210.",
+   "date": "2026-10-17",
+   "verdict": "partial: abstract closed-category evaluation; does not supply the specified completed integral, rationalized and common-stage coefficient operations"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2245,
+ "blueprint_uses": [
+  "def-pod-conventions",
+  "def-weil-geometric-hypotheses"
+ ],
+ "uses_not_cited": [
+  "def-pod-conventions",
+  "def-weil-geometric-hypotheses"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the Poincare duality conventions of this chapter (the fixed setting), let\n$K\\in D^b_{ctf}(X,\\Lambda)$. The *coefficient dual* is\n\n$$\nK^\\vee=R\\mathcal Hom_X\\bigl(K,\\Lambda_X\\bigr),\n$$\n\nwith the canonical evaluation\n\n$$\n\\operatorname{ev}_K:K\\otimes^L_{\\Lambda_X}K^\\vee\\longrightarrow\\Lambda_X\n$$\n\nof the tensor–internal-Hom adjunction.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-pod-coefficient-dual-on-x",
+  "worker": "stage1",
+  "summary": "Split the definition into existing notions only: fixed setting, the pro-etale bounded constructible finite-Tor category, the stage-specific coefficient unit and operations, and the tensor–internal-Hom adjunction. Made the specified canonical evaluation explicit as the counit at the unit, equivalently the transpose of the identity. Preserved every hypothesis and the small pro-etale site; no perfectness or preservation assertion is added. No new nodes. The rejected etale attachment is not reused. Maintainer-reader repair: added the well-definedness theorem cor-coef-integral-internal-hom (with the constructibility of the integral unit, lem-weil-constant-coefficient-objects-constructible), since the integral tensor product and the rational/common-stage internal Hom of def-weil-derived-pullback-tensor-hom are defined only on constructible inputs.",
+  "blueprint": "Realizes both displayed formulas and the final tensor–internal-Hom-adjunction sentence of main-20261015, sec-six-functors/sk-thm-sf-package/def-pod-coefficient-dual-on-x.md. This is a definition, so its one-level split consists of statement dependencies and has no proof steps. The package unit is not itself being realized here."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-22b5f3828",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-22b5f3828 (reviewer sub-agent of L); spot-checked: I read the whole item against main-20261015 sec-six-functors/sk-thm-sf-package/def-pod-coefficient-dual-on-x.md (order 2589; the only change from master 2245 is 'let'), plus the five cited statements in full and the unit and chapter records. The delivery has no new nodes and no proof steps. Both formulas and the domain are faithful, and nothing is weakened. The expansion of ev_K as the counit of sk-def-sf-operations (i) at Lambda_X, i.e. the transpose of id_{K^vee}, is correctly typed and keeps the factor order; I also checked Mathlib Monoidal/Closed/Basic.lean:82, 92, 150, 209 and 292 (generic statement only, no leaf). Fault found (C4/E1): def-weil-derived-pullback-tensor-hom defines the integral tensor only on D^b_c(X,O_E), and the rational and common-stage internal Hom only on pairs whose integral internal Hom is constructible. So K^vee and K tensor K^vee at the O_E, E and Qbar stages need the theorem RHom(K, O_E-hat_X) in D^b_c, which the delivery did not cite. Repair in fixes/dag/nodes/sec-six-functors/def-pod-coefficient-dual-on-x.json: added cor-coef-integral-internal-hom (split, reviewed pass; X separated finite type over k, K and L in D^b_c(X,O_E)) and lem-weil-constant-coefficient-objects-constructible (O_E-hat_X, E_X and Qbar_X are constructible) to stmt_deps, with one sentence in the statement. The read-only cycle traversal is clean, and every cited id exists and is unmerged. Duplicate candidates checked: def-pod-conventions and sk-def-ops give the formula only, without the evaluation; def-sf-coefficient-duality is a point/module notion; lem-pod-coefficient-dual-perfect is a user of this item. Edge cases checked: K=0, K=Lambda_X, shifts, n=1, d=0, nonproper X, and integral torsion K=i_*A_{E,1}. No tool uses. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
