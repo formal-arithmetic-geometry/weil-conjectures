@@ -50,9 +50,33 @@
    }
   },
   {
-   "text": "Construct the abelian-group diagram of Hom(P_n,F) with maps phi -> r_nm composed with phi, and its evaluation cocone. Naturality follows from r_nm(1_m)=1_n. Any colimit element has a representative at a stage. Apply eventual vanishing to a representative in the kernel; colimit.w makes its class zero. The additive zero-kernel criterion proves injectivity. The representative lemma is Mathlib Concrete.colimit_exists_rep, using the filtered-colimit preservation instance for the forgetful functor on AddCommGrpCat; no project module-elementwise lemma is used.",
+   "text": "Prove the affine eventual-vanishing step locally in the target proof, reusing the surviving private ideal_power_evaluation_affine_radical, powers_range, and affine_hom_zero helpers from IdealPowerEvaluationAffineEventuallyZero (its public eventual-vanishing declaration was withdrawn at the upstream sync). Finite generation gives k with J^k in the annihilator of the image of phi. The affine power-range identity and injectivity of the power inclusion put the range of r_{n,n+k} in J^k times Gamma(P_n,V), so the composite vanishes on V. Reuse the proved upstream private Modules.powers_qc to apply affine_hom_zero.",
    "uses": [
-    "lem-weil-pbc-ideal-power-evaluation-eventually-zero",
+    "lem-weil-pbc-ideal-power-evaluation-affine-eventually-zero",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-formal-polynomial-power-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
+   }
+  },
+  {
+   "text": "Choose a finite affine cover by the Mathlib compact-open finite-affine-cover theorem. Take the maximum of the local exponents and n. Cancel monic power inclusions to prove the composition law of r, so the composite remains zero at this common exponent on each cover member. The morphism equality clause of glue_sheaves_of_modules proves global eventual vanishing. This argument is local proof code, not an application of the withdrawn ideal_power_evaluation_eventually_zero declaration.",
+   "uses": [
+    "lem-weil-pbc-formal-polynomial-power-lifts",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM."
+   }
+  },
+  {
+   "text": "Construct the abelian-group diagram Hom(P_n,F), with maps phi -> r_nm composed with phi and the evaluation-at-one cocone; the identity and composition laws follow by cancellation and naturality follows from r_nm(1_m)=1_n. Use Mathlib Concrete.colimit_exists_rep and the locally proved eventual-vanishing statement to show every element of the kernel is zero after transition, hence zero in the colimit. The additive zero-kernel criterion proves injectivity.",
+   "uses": [
     "def-weil-pbc-category-colimit"
    ],
    "elementary": false,
@@ -89,15 +113,21 @@
  "proof_deps": [
   "lem-weil-pbc-ideal-power-complement",
   "lem-weil-pbc-ideal-module-product-stalk",
-  "lem-weil-pbc-ideal-power-evaluation-eventually-zero",
+  "lem-weil-pbc-ideal-power-evaluation-affine-eventually-zero",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-formal-polynomial-power-lifts",
+  "lem-weil-pbc-glue-sheaves-of-modules",
   "def-weil-pbc-category-colimit",
   "lem-weil-pbc-ideal-power-annihilator-system",
   "lem-weil-pbc-ideal-power-quotient-local-lifting"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "agent": "K3",
+  "date": "2026-10-17",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Lemma 01PQ (lemma-sections-over-quasi-compact-open), proof; Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine), proof. Source text read at https://stacks.math.columbia.edu/tag/01PQ and https://stacks.math.columbia.edu/tag/01PM. U1 Lean reduction: explicit diagrams, evaluation cocones, eventual vanishing and lifting; original affine sigma-injectivity statement is not used."
+  "place": "Properties, Lemma 01PQ, finite-affine injectivity and quasi-separated quotient gluing; Lemma 01PM, affine annihilator calculation",
+  "via": "Second reading removed the false sections_over_quasiCompact_open_data split. The target now constructs both Hom diagrams and cocones and proves the colimit properties from stagewise vanishing and quotient lifting. Withdrawn vanishing APIs are replaced by local proofs from surviving affine helpers. No new statement or hole."
  },
  "mathlib_searches": [
   {
@@ -171,13 +201,13 @@
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "X-6b817",
-  "group": "U1",
+  "reviewer": "COMPILER",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T040802-L-3953370",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered Lean against unchanged existing signature, all five DAG records, source proofs, report, clean compilation and axiom audit."
+  "landing": "20261017T003423-L-3315954",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
