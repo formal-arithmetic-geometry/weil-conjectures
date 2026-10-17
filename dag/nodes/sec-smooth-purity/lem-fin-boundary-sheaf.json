@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fin-boundary-sheaf",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Boundary sheaf of an open immersion",
@@ -15,32 +15,86 @@
  "stmt_deps": [
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-scheme-conventions",
-  "sbc-def-coefficient-conventions"
+  "sbc-def-coefficient-conventions",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constructible-complexes"
  ],
  "proof": [
   {
-   "text": "By [thm-fin-open-degree-zero], the sheaf $j_*F$ is\nconstructible. Pull back its finite locally closed partition\nand the finite constant etale trivializations on its parts to\n$Z$. The inverse image of\n[def-weil-pbc-inverse-image] takes a constant finite module\nto the same constant module and commutes with restriction.\nThe pulled-back partition therefore proves constructibility of\n$i^*j_*F$, as defined in\n[def-weil-pbc-constructible-complexes]. No surjectivity of\nrestriction maps between punctured neighbourhoods is needed.",
+   "text": "By [thm-fin-open-degree-zero], applied to the finite-type $k$-scheme $X$, the open immersion $j$ and the constructible module sheaf $F$ over the finite commutative ring $\\Lambda$, the direct image $j_*F$ is constructible on $X$ in the sense of [def-weil-pbc-constructible-complexes]: there is a finite stratification of $X$ by locally closed constructible subschemes on whose strata the inverse image of [def-weil-pbc-inverse-image] is finite locally constant as a sheaf of $\\Lambda$-modules [def-constructible-finite-locally-constant]. Forgetting that the strata are constructible subsets, this says that $j_*F$ is constructible in the sense of [def-constructible-constructible], with values in $\\Lambda$-modules. Apply [prop-constructible-pullback] to the closed immersion $i:Z\\hookrightarrow X$: $i^*(j_*F)$, with the same inverse image functor on module sheaves, is constructible in the sense of [def-constructible-constructible], i.e. $Z$ has a finite stratification by locally closed subschemes on each of which the pullback of $i^*j_*F$ is finite locally constant as a sheaf of $\\Lambda$-modules. It remains to see that these strata are constructible subsets of $Z$, as [def-weil-pbc-constructible-complexes] requires. The scheme $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian, so every nonempty set of closed subsets of $X$ has a minimal element by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. Closed subsets of the closed subset $Z$ are closed in $X$, so the same holds in $Z$, whose underlying space is therefore Noetherian. In a Noetherian space every locally closed subset is constructible ([def-weil-constructible-subset], Stacks Lemma 005L). Hence the stratification of $Z$ consists of locally closed constructible subschemes with finite locally constant restrictions, and $i^*j_*F$ is constructible on $Z_{\\mathrm{et}}$ in the sense of [def-weil-pbc-constructible-complexes].",
    "uses": [
     "thm-fin-open-degree-zero",
+    "prop-constructible-pullback",
     "def-weil-pbc-inverse-image",
-    "def-weil-pbc-constructible-complexes"
+    "def-weil-pbc-constructible-complexes",
+    "def-constructible-finite-locally-constant",
+    "def-constructible-constructible",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "def-weil-constructible-subset"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-boundary-sheaf.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
   "thm-fin-open-degree-zero",
+  "prop-constructible-pullback",
   "def-weil-pbc-inverse-image",
-  "def-weil-pbc-constructible-complexes"
+  "def-weil-pbc-constructible-complexes",
+  "def-constructible-finite-locally-constant",
+  "def-constructible-constructible",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "def-weil-constructible-subset"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-boundary-sheaf.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"constructible\"",
+   "results": "No hits; valid quoted-name Loogle query.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ConstructibleSheaf|constructibleSheaf|constructible.*sheaf",
+   "results": "No hits in the full Mathlib source.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "boundary sheaf inverse image open immersion constructible",
+   "results": "Eight hits about inverse presheaf maps of ringed-space open immersions (including LocallyRingedSpace.IsOpenImmersion.invApp_app_apply and SheafedSpace.IsOpenImmersion.invApp_app); none states constructibility of etale module sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The restriction to a closed complement of the direct image of a constructible finite module etale sheaf under an open immersion over a field is constructible",
+   "results": "Eight hits: Scheme.Hom.isConstructible_image/isLocallyConstructible_image/isConstructible_preimage, Topology.IsConstructible.image_of_isOpenEmbedding/preimage_of_isOpenEmbedding, Topology.IsLocallyConstructible.preimage_of_isOpenEmbedding, Topology.isConstructible_preimage_iff_of_isOpenEmbedding, PrimeSpectrum.isConstructible_comap_image. These concern constructible subsets, not constructible sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of the open immersion pushforward of a constructible sheaf of finite modules to the boundary closed subscheme is constructible",
+   "results": "Eight hits about constructible subsets: Scheme.Hom.isConstructible_image/isConstructible_preimage/isLocallyConstructible_image; Topology.IsConstructible.preimage_of_isOpenEmbedding/image_of_isOpenEmbedding; Topology.IsLocallyConstructible.preimage_of_isOpenEmbedding; Topology.isConstructible_preimage_iff_of_isOpenEmbedding; PrimeSpectrum.isConstructible_comap_C. None is a sheaf constructibility theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -70,5 +124,29 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-fin-boundary-sheaf",
+  "worker": "stage1",
+  "summary": "Audited the imported one-paragraph proof against the current blueprint and the cited DAG statements. Replaced the unsupported assertion that inverse image preserves finite constant trivializations by the existing general pullback-constructibility result prop-constructible-pullback, while retaining the open direct-image theorem and the inverse-image/constructibility definitions. No new node was needed. Maintainer reader (FIX): the step now also checks that the pulled-back strata are constructible subsets of Z (Z is Noetherian), since prop-constructible-pullback concludes constructibility only in the sense of def-constructible-constructible, which does not require constructible strata.",
+  "blueprint": "The single proof step realizes the whole proof paragraph: first constructibility of j_*F by thm-fin-open-degree-zero, then pullback along i by prop-constructible-pullback.",
+  "tool_uses": [
+   {
+    "node": "prop-constructible-pullback",
+    "why": "The boundary argument needs the generic theorem that inverse image along any scheme morphism preserves constructibility; the affine-line/Kummer unit supplies no such general sheaf lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-constructible-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-a6e90f094",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-a6e90f094 (reviewer sub-agent of L); spot-checked: I read the item, the master and main-20261015 blueprint text (identical, no blueprint_update), the unit sk-prop-a1-kummer and the chapter sec-smooth-purity, the statements of all cited nodes and the definitions they rely on, and the slopmaster2 Lean for prop-constructible-pullback (ConstructibleSheaf/Pullback.lean:150-224, Defs.lean:300-335; it has no sorry, works for any concrete Grothendieck abelian value category so it covers Lambda-modules, and its stratification includes constructible strata via Mathlib Scheme.Hom.isConstructible_preimage, FinitePresentation.lean:172). Step 1 checks out: thm-fin-open-degree-zero has exactly the item's hypotheses (finite type over a field, open immersion, constructible module sheaf over a finite commutative ring). Under def-constructible-constant, prop-constructible-pullback applies to Lambda-module sheaves, and its pullback is the same Etale.upperStar functor attached to def-weil-pbc-inverse-image. One fault (C4), now repaired: the node statement of prop-constructible-pullback gives constructibility only in the sense of def-constructible-constructible, which does not require the strata to be constructible subsets. Clause (a) of def-weil-pbc-etale-constructible-sheaf does require it, so the step's claim of 'exactly constructibility in the sense of def-weil-pbc-constructible-complexes' was not supported by the cited statement. The corrected step adds: X is Noetherian (lem-weil-pbc-finite-type-over-noetherian); its closed subsets have the minimal condition (lem-weil-pbc-noetherian-scheme-closed-subsets-minimal), so the closed subset Z is a Noetherian space; in a Noetherian space locally closed subsets are constructible (def-weil-constructible-subset, Stacks 005L). It also cites def-constructible-constructible and def-constructible-finite-locally-constant, and proof_deps equals the union of uses. All the added nodes are Mathlib leaves or definitions, so they raise no route issue and create no cycle. I accept the declared tool_use of prop-constructible-pullback: it is Lean-closed and is the generic pullback that the blueprint's 'pull back the partition' sentence asserts. Edge cases checked: U=X, U empty, F=0, the constant sheaf on A^1 minus 0, and a nontrivial Kummer sheaf. A dag-wide search for boundary-sheaf nodes found no duplicate. No new nodes, no SGA, statement unchanged. Fixed file: fixes/dag/nodes/sec-smooth-purity/lem-fin-boundary-sheaf.json; details in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
