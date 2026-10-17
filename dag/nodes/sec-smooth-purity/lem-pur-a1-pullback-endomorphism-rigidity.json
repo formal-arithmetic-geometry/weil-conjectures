@@ -296,5 +296,27 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-63cd13082 (reviewer sub-agent of L); spot-checked: I read the whole delivery and every cited node. Small cases (empty, disconnected and nonreduced bases, nontrivial monodromy, zero module or ring) all hold. Statement: unchanged, true, and exactly what Step 11 of prop-pur-dnc-family-constancy needs (arbitrary B', finite Lambda=A_{E,n}, fixed-Lambda pro-etale module sheaves). No target is involved, so no base-change morphism is at stake. Sources checked: Stacks 0A3H, whose final paragraph is the stalkwise geometric-fibre argument and matches lem-weil-pbc-etale-connected-fibres-section-compatible, which assumes no flatness or quasi-compactness; and Stacks 099Y (proetale.tex line 4121) for the etale origin of M. Steps: Step 2 meets the hypotheses of origin (b) and derives full faithfulness from the ordinary unit iso. Step 3 uses the identity/composite compatibility of comparison-pullback correctly. Step 4 proves A^1_Omega connected via the dense generic point of a domain, and def-weil-connected-scheme requires nonempty, which holds. Step 5's retraction (id, e_V p_V) argument is valid; lem-weil-pbc-etale-sections-flat-qc-connected-fibres could also be cited, but this is not a fault. Steps 6-8 are correct adjunction calculations. There are no new nodes. Duplicates: lem-pur-lisse-uniqueness and lem-pur-lisse-morphism-rigidity need a finite-type base, and lem-trf-constant-complex-a1-morphism-rigidity is only over an algebraically closed field, so same_as [] is right. I accept all ten tool_uses as generic black boxes; no SGA is cited. FIX: Step 1 equated the tensor-product module pullback of def-weil-proetale-inverse-image with the functor f^*_Lambda of lem-pe-constant-left-module-inverse-image without justification. I added the argument (both ring maps fix constant scalars, so c^f_Lambda is the canonical iso) and added def-weil-proetale-inverse-image to Step 1's uses and to proof_deps. The corrected item is in fixes/dag/nodes/sec-smooth-purity/; details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5658bf163",
+  "group": "N8",
+  "result": "pass",
+  "note": "Clause-by-clause check of proEtale_a1_pullback_endomorphism_rigidity against the node: any S : Scheme.{u}; Λ : Type u, CommRing and Finite only; A^1 = AffineSpace (ULift (Fin 1)) S per the def-sbc-affine-space mathlib_match; e = homOfVector (𝟙 S) (fun _ ↦ 1); modules are proEtaleRingModules over proEtaleConstantRing, with site universes u+1/u kept and no universe equality; p*, e* are sfIntrinsicPullback, the left adjoint of the recorded sfIntrinsicConstantModuleAdjunction, real data via upperStar transport; local constancy is the node's original intrinsic IsLocallyConstantProEtaleModuleSheaf (coverwise, arbitrary module models), publicly kept by the recorded fixed-module module and used by landed consumers; stalk finiteness uses the recorded finiteCoefficientModuleStalkFunctor for all algebraically closed Ω : Type u; the normalization goes through proEtaleAffineLineUnitPullbackIso, a composite of canonical comp⁻¹, eqToIso(homOfVector_over) and id isos with no choice; conclusion h = 𝟙. Edge cases (empty, zero ring/module, disconnected, nonreduced, monodromy) covered. Only sorry; docstrings carry source and blueprint and the 8-step plan; lean.statement verbatim; node diff is only the lean field. nt_compile.py --json on the snapshot file: rc 0, no errors or warnings, 3.3 s and 3.9 s. Report has Worker report and Second reading by N8 sections. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleAffineLineEndomorphismRigidity",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_a1_pullback_endomorphism_rigidity",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleAffineLineUnitPullbackIso",
+   "AlgebraicGeometry.Scheme.proEtale_a1_pullback_endomorphism_rigidity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleAffineLineEndomorphismRigidity.lean",
+  "statement": "theorem proEtale_a1_pullback_endomorphism_rigidity (S : Scheme.{u}) (Λ : Type u) [CommRing Λ] [Finite Λ] (M : proEtaleRingModules S (proEtaleConstantRing S Λ)) (hM : IsLocallyConstantProEtaleModuleSheaf S Λ M) (hfinite : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ S), Finite ((finiteCoefficientModuleStalkFunctor y Λ).obj M)) (h : (sfIntrinsicPullback Λ (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj M ⟶ (sfIntrinsicPullback Λ (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj M) (he : (sfIntrinsicPullback Λ (AffineSpace.homOfVector (𝟙 S) (fun _ : ULift.{u} (Fin 1) ↦ 1))).map h ≫ (proEtaleAffineLineUnitPullbackIso S Λ).hom.app M = (proEtaleAffineLineUnitPullbackIso S Λ).hom.app M) : h = 𝟙 ((sfIntrinsicPullback Λ (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj M)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

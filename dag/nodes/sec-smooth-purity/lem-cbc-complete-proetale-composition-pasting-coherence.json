@@ -268,5 +268,42 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-8dd15c607 (reviewer sub-agent of L); spot-checked: I read the whole delivery, which has no new nodes: the item's statement, all 10 steps, the statement of every cited node, Stacks more-etale 0F7J (lemma-shriek-composition, l.3159ff, including the refinement cube) with its tag-to-label mapping for 0F7C/0F7D/0F7F, and both versions of the thm-cbc-complete-proetale blueprint proof (main-20261015, master l.24). I recomputed each step under the calculus convention gamma_Q: i_!R_r -> R_p k_!. Steps 1-2: J_cM satisfies the calculus finite-origin hypothesis because c_! is exact and commutes with the et/proet and scalar comparisons, and D=R_q gamma_Q J_c is then an isomorphism. Steps 3-6: square A pasted horizontally with T gives (1). T stacked over Q_2 and Q_1 stacked over H have the same outer square (b_1,i_2,r_1,up_1), which gives (2). Naturality gives (3). The four-line expansion gives C_hf D_2=D_1(C_h F_f1)(F_h2 C_f), with the correct direction and types. Steps 7-9: mate-pasting clause 2 and the open-composition law give e_hf. The calculus base-change equation (5) applies to the cartesian base change of Q (U'=U x_Y Y'). Naturality of E_q and gamma_Q' then yields exactly D'G_x, F_h'e_f and e_hF_f. Step 10: H=D_1^{-1}C_hf D_2 is invertible without assuming F_fM has finite origin. Independence and the cocycle come from the sibling refinement-exchange node applied to hf, where C_v=C_hf. The common refinement comes from the compatible-tower node, whose seven refinement equations match the item's. All verticals used are proper and all horizontals quasi-compact open; no qcqs or Noetherian condition is added and g is arbitrary. Edge cases checked: B=0, empty X, identity refinement, identity base change, i=id. The dependency closure does not contain the item, so there is no cycle. Duplicate candidates are not duplicates: lem-sp-coefficient-tower-shriek-calculus (varying O_E coefficients over a field), lem-sp-proper-open-tower-comparison (Noetherian), the sf composition nodes (finite or condensed coefficients over a field). I accept the declared tool use of lem-weil-pbc-extension-by-zero-exact for etale j_! exactness in step 1. No SGA source is cited, and the statement is unchanged and not weakened. Fixes, in a whole corrected item file: (1) step 7 formula (4) had the typo E_qJ_bJ_c, corrected to E_qR_pJ_bJ_c; (2) source.place now gives the label of 0F7C as well as 0F7D.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ddf36e87",
+  "group": "NA",
+  "result": "pass",
+  "note": "Delivery = new module StrictTowerCompositionPasting.lean + node lean field only (other fields identical). Checked clause by clause: D=R_q gamma_Q J_c with jComp/jCongr i_q and rComp/eqToIso p_g (gamma args b,p_Y,p,i, h=isPullback.w.symm); iso clause uses exactly gamma_isIso's per-level ScalarEtaleOrigin hypothesis; CompositionRefinement carries the 7 node equations (extra rfh.hom_g derivable, no cartesian premise); C via rId-normalized identity-left gamma, direction F2->F1; refinement clause D2≫C_hf = H≫D1 types match C_hf D2 = D1(C_h F_f1)(F_h2 C_f); CompositionBaseChange faces force the genuine pulled-back tower and match the calculus base-change inputs; e = exchange then beta; interchange clause direction correct; transport/common-tower theorems match step 10 and the sibling node's stated independence of tower and arrows. Universes are those of the dependencies; no extra instances; statement verbatim; docstrings with tags and blueprint; only sorry proofs; no hollow defs. Stacks labels verified (0F7C/D/F/J). nt_compile: first run timed out on dependency StrictTowerProperOpenCalculus (load); retry clean, item module 6.4 s, no errors or warnings. Non-blocking: second reading was a disclosed self-reread; future sibling node should reuse compositionC."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictTowerCompositionPasting",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.compositionPastingCoherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionF",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionD",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionC",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionE",
+   "AlgebraicGeometry.ProEtale.StrictTower.CompositionRefinement",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionH",
+   "AlgebraicGeometry.ProEtale.StrictTower.CompositionBaseChange",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionEf",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionEh",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionEhf",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionHorizontalE",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionPastingCoherence",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionRefinement_isIso",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionRefinementExchange",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionCommonComparison",
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionCommonCoherence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictTowerCompositionPasting.lean",
+  "statement": "theorem compositionPastingCoherence : (∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ Z) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] (T : Compactification.Triangle f h) [QuasiCompact T.cf.i] [QuasiCompact T.cg.i] [QuasiCompact T.q] (M : Derived B X), (∀ n : ℕ, Nonempty (ScalarEtaleOrigin B X ((ev B X n).obj M))) → IsIso ((compositionD B T).app M)) ∧ (∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ Z) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] (T₁ T₂ : Compactification.Triangle f h) [QuasiCompact T₁.cf.i] [QuasiCompact T₁.cg.i] [QuasiCompact T₁.cfg.i] [QuasiCompact T₁.q] [QuasiCompact T₂.cf.i] [QuasiCompact T₂.cg.i] [QuasiCompact T₂.cfg.i] [QuasiCompact T₂.q] (r : CompositionRefinement T₁ T₂), compositionD B T₂ ≫ compositionC B r.rfh = compositionH B r ≫ compositionD B T₁) ∧ (∀ {X Y Z X' Y' Z' : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ Z) (f' : X' ⟶ Y') (h' : Y' ⟶ Z') [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] (T : Compactification.Triangle f h) (T' : Compactification.Triangle f' h') [QuasiCompact T.cf.i] [QuasiCompact T.cg.i] [QuasiCompact T.q] [QuasiCompact T'.cf.i] [QuasiCompact T'.cg.i] [QuasiCompact T'.q] (x : X' ⟶ X) (y : Y' ⟶ Y) (g : Z' ⟶ Z) (A : CompositionBaseChange T T' x y g), Functor.whiskerRight (compositionD B T) (G B g) ≫ compositionEhf B A = compositionHorizontalE B A ≫ Functor.whiskerLeft (G B x) (compositionD B T'))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The statement is distributed over the canonical F/D/C/E constructions and input-data packages, compositionPastingCoherence (invertibility, refinement, arbitrary-base-change interchange), compositionRefinement_isIso, compositionRefinementExchange, and compositionCommonCoherence (transport and common-refinement independence). CompositionRefinement deliberately does not use the stronger cartesian Triangle.Hom. No statement correction or dependency repair."
  }
 }

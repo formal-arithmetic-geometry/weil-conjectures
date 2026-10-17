@@ -232,5 +232,31 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-4404c492d (reviewer sub-agent of L); spot-checked: I read the item in full: its unchanged statement and all 7 steps. I also read the statement of every cited node (reedy-model-structure, kan-quillen-right-proper, def-weil-pbc-simplicial-set, bisimplicial-diagonal-equivalence and brown-split-factorizations, which is the Mathlib leaf in BrownLemma.lean) and steps 6 and 15 of the parent. Step 1: both naturality equations check, b_l T(B(beta)) = B'(beta) b_n and a^m T S(alpha) = S'(alpha) a^k. Step 2: the Brown leaf needs both ends cofibrant, which TS^m and S'^m are by hypothesis, and two-out-of-three makes u and s trivial cofibrations. Step 3: in Delta^op, J^- is the opposite of the proper injections, so the boundary data is a map C -> M_nB'. Reedy fibrancy makes q_n a fibration, and lifting against the trivial cofibration v gives the filler. The n=0 case holds. The boundary criterion of the Kan node then gives trivial fibrations. Step 4: the contravariant two-out-of-three through J(s)J(p)=1 and J(f)=J(u)J(p) is correct, and J(f) is exactly row m of D' -> E. Step 5: this is the rowwise hypothesis of the diagonal node, in the correct direction. Steps 6-7: the strict squares follow from the m-component of bT(i)=i'const(r) and from associativity. The homotopically-constant hypothesis is kept although unused; that is not a weakening. The chain of dependencies is acyclic. All statement citations are in the same unit and no SGA is cited. No node in the DAG duplicates the item: the zigzag-nerve node states a different result, and cbc-right-resolution-mapping-criterion is off-unit and depends on the parent, so citing it would make a cycle. No new nodes, no fixes, no tool_uses. Hovey is not in literature/, so proof_origin is correctly marked agent and the report files a WANTED line."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22a72b59d",
+  "group": "Q71",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: componentwise w.e. and cofibrancy of a, Reedy fibrancy via the recorded Reedy.rightClass (mono.op matching index = proper faces, M_0 terminal), homotopically constant B', the D/E/D' Hom diagrams via the existing specialResolutionHomDiagram (no cycle), legs h↦T h≫b_n and h'↦a_m≫h', diagonal IsWeakHomotopyEquivalence, vertical maps from H(P,V), const(r), and both strict squares with the right directions. Universes are independent and nothing is unbound; the defs are real, the theorem is sorry, imports and proof-dep imports are correct, lean.statement is verbatim, and only the item's lean field changed. Fault H8: the frameBisimplicialConstMap docstring lacked the source place and blueprint tag; fixed in fixes/FrameBisimplicialSpan.lean (docstring only). nt_compile --json is clean for the delivered and fixed files."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FrameBisimplicialSpan",
+  "declaration": "CategoryTheory.frame_bisimplicial_span",
+  "declarations": [
+   "CategoryTheory.frameBisimplicialLeft",
+   "CategoryTheory.frameBisimplicialRight",
+   "CategoryTheory.frameBisimplicialVertical",
+   "CategoryTheory.frameBisimplicialConstMap",
+   "CategoryTheory.frame_bisimplicial_span"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FrameBisimplicialSpan.lean",
+  "statement": "theorem frame_bisimplicial_span {M : Type u} [Category.{v} M] [ModelCategory M] [HasLimits M] [HasColimits M] {N : Type u'} [Category.{v'} N] [ModelCategory N] [HasLimits N] [HasColimits N] (T : M ⥤ N) (S : SimplexCategory ⥤ M) (B : SimplexCategoryᵒᵖ ⥤ M) (S' : SimplexCategory ⥤ N) (B' : SimplexCategoryᵒᵖ ⥤ N) (a : S ⋙ T ⟶ S') (b : B ⋙ T ⟶ B') (_ha : ∀ m : SimplexCategory, WeakEquivalence (a.app m) ∧ IsCofibrant (T.obj (S.obj m)) ∧ IsCofibrant (S'.obj m)) (_hB' : Reedy.rightClass (monomorphisms SimplexCategory).op (fibrations N) (terminal.from B')) (_hconst : ∀ (n k : SimplexCategoryᵒᵖ) (f : n ⟶ k), WeakEquivalence (B'.map f)) : SSet.Enhanced.IsWeakHomotopyEquivalence (Functor.whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) (frameBisimplicialRight.{v, u', v'} a B')) ∧ ∀ (Y : M) (Z : N) (i : (Functor.const SimplexCategoryᵒᵖ).obj Y ⟶ B) (i' : (Functor.const SimplexCategoryᵒᵖ).obj Z ⟶ B') (r : T.obj Y ⟶ Z), (∀ n : SimplexCategoryᵒᵖ, T.map (i.app n) ≫ b.app n = r ≫ i'.app n) → (frameBisimplicialVertical.{u, v, v'} S i ≫ Functor.whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) (frameBisimplicialLeft T S b) = Functor.whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) (frameBisimplicialLeft T S (frameBisimplicialConstMap T r)) ≫ frameBisimplicialVertical.{u', v', v} (S ⋙ T) i') ∧ (frameBisimplicialVertical.{u', v', v} S' i' ≫ Functor.whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) (frameBisimplicialRight.{v, u', v'} a B') = Functor.whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) (frameBisimplicialRight.{v, u', v'} a ((Functor.const SimplexCategoryᵒᵖ).obj Z)) ≫ frameBisimplicialVertical.{u', v', v} (S ⋙ T) i')",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-22a72b59d"
  }
 }

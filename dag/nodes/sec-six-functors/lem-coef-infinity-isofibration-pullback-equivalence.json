@@ -271,5 +271,23 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-aa6936413 (reviewer sub-agent of L); spot-checked: I read the whole item: unchanged statement, 8 steps, no new nodes. I read the full statements of all 10 cited nodes, plus the proof and review of lem-coef-infinity-isofibration-pullback-limit and the parent's step 3. Source: Kerodon Cor. 4.5.3.34 (03PM), read online. It matches the worker's specialization (rows C->B<-A and C->B<-B, vertical maps id_C, id_B, y, isofibration legs pi). The proof is an agent expansion and is correctly marked by=agent. Step 1: horn filling in A, then lifting against the inner fibration pi, so E is a quasicategory and pi r = y s holds strictly. Step 2: exponentiation with the empty source and an identity isofibration, then core-kan-fibration, gives Kan cores. Step 3: whiskering is a simplicial map, so equivalence edges are preserved. Step 4: I rechecked the triangle (f,0),(f',0),(f',1), i.e. the 2-simplex (s_1 a, 001), and every other edge type; the homotopies stay in the core, so simplicial-homotopy-equivalence-weak applies. Step 5: homotopy-pullback-invariance with a=Y, b=id, c=id; both squares commute and the formula is as stated. Step 6: pullback-limit (it concludes a weak homotopy equivalence) gives J->P(Y,v); path-comparison applies with id_G as the Kan fibration; pj=id and pac=rho_Q; 2-out-of-3 comes from the Kan-Quillen model node. Steps 7-8: Kan Whitehead twice; t=b_C(id_C) and alpha: rt->id_C come from the core edge; edge directions in step 8 are right; triangle calculus turns the class tr->id_E into an equivalence edge. Edge cases: empty A/B/C, pi=id, y=id, discrete sets. The isofibration hypothesis is needed (counterexample in review.md). No cycle (149-node closure). No duplicate: isofibration-base-change needs y to be an isofibration over the base; Joyal nodes state no right properness; the item is not a restatement of pullback-limit. Accepted tool_uses: lem-cbc-simplicial-homotopy-equivalence-weak and lem-cbc-kan-whitehead-inverse, generic tools already recorded elsewhere in sec-six-functors. No SGA. Remark: the inherited item source (HTT 5.3.5.4) is only contextual; the direct source, Kerodon 03PM, is in proof_origin and the report. Not a target node. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e4a19be7b",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Lean signature of SSet.Enhanced.isofibration_pullback_equivalence matches the node clause by clause: SSet.{u} with Quasicategory A B C; y with IsFunctorEquivalence (coherent quasi-inverse, equivalence edges in ihom); pi with IsIsofibration (inner fibration plus source-fixed equivalence-edge lifting, includes quasicategory conditions); Mathlib degreewise pullback; conclusions Quasicategory (pullback y pi), IsFunctorEquivalence (pullback.snd y pi), and the strict equation snd≫pi = fst≫y. No isofibration hypothesis on y, no nonemptiness binder, single universe, autoImplicit false. Edge cases (empty A/B/C, empty C, y not an isofibration) are covered. Node copy changes only lean; lean.statement is verbatim the signature; only sorry is the proof body; no definitions or helpers; source and blueprint docstrings present with the 8-step proof plan; report has Worker report and Second reading by Q103 sections (the latter an author self-check, not blocking). No duplicate in the side tree or Mathlib (isofibration_pullback_limit and isofibration_base_change are different statements). nt_compile.py --json on the snapshot file: rc=0, module 3.2 s, no errors or warnings. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.IsofibrationPullbackEquivalence",
+  "declaration": "SSet.Enhanced.isofibration_pullback_equivalence",
+  "file": "lean/Sheaf/CategoryTheory/IsofibrationPullbackEquivalence.lean",
+  "statement": "theorem isofibration_pullback_equivalence {A B C : SSet.{u}} [Quasicategory A] [Quasicategory B] [Quasicategory C] (y : A ⟶ B) (pi : C ⟶ B) (hy : IsFunctorEquivalence y) (hpi : IsIsofibration pi) : Quasicategory (pullback y pi) ∧ IsFunctorEquivalence (pullback.snd y pi) ∧ pullback.snd y pi ≫ pi = pullback.fst y pi ≫ y",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

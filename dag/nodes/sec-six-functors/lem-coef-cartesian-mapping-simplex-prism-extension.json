@@ -225,5 +225,23 @@
   "group": "Q46",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-37090446f (reviewer sub-agent of L); spot-checked: I read the whole item and all six cited statements, and the statement is true. It also agrees with how the parent lem-coef-cartesian-base-equivalence-invariance uses it in Step 11 (factor as monomorphism then trivial Kan fibration h; build the prism on A_n, equal to h at the final vertex). The statement is unchanged and not weakened. Step 1: {n}^sharp into (Delta^n)^sharp is marked anodyne. It comes from the statement of lem-coef-infinity-marked-initial-vertex ({0}^sharp coanodyne for all n>=0) plus the explicit reversal identification in def-coef-infinity-marked-coanodyne. I matched the generators one by one: inner horns to inner horns; Lambda_0^n with {01} marked to Lambda_n^n with the final edge marked; the Delta^2 generator (iii) maps to itself; Kan complexes stay Kan under op. Step 2 is an elementary gluing: since j is mono, A x Delta^n and A_n x {n} meet exactly in A x {n}, where hj = s. Marked edges of A_n^flat x {n}^sharp are degenerate, hence cartesian. Step 3: k is the pushout product of j^flat and e with the factors swapped, so the pushout-product clause of lem-coef-marked-anodyne-lifting-calculus applies. Step 4: lem-coef-relative-marked-anodyne-calculus gives Y^natural -> (Delta^n)^sharp the right lifting property against marked-anodyne maps for any small base, and restricting the diagonal gives both strict equalities. Edge cases checked: n=0 (k = id, the lift is h), n=1, and A, A_n or Y_n empty. There is no cycle (the closure of 504 nodes does not contain the item). Every cited statement is in the item's own unit, sk-prop-sf-biduality-general; the def-cbc node is a definition, so no tool_uses. No duplicate: I checked the prism and mapping-simplex nodes (last-fiber-pushout, cartesian-simplex-inverse-extension, cbc-invertible-prism-extension, cbc-mapping-simplex-initial-horn-pushout, mapping-simplex-cone-fibers, cartesian-mapping-simplex-presentation, selectively-marked-terminal-cylinder), and none states this or the final-vertex fact. The delivery creates no new nodes and uses no SGA. HTT is not in literature/; the WANTED line and proof_origin=agent are correct. I did not open HTT pp. 184-185 myself, but every inference rests on the cited DAG statements. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46ec46813",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Statement matches node and HTT 3.2.2.11 clause by clause against the exact side declarations: relativeFibration false (cartesian fibration, any base), cartesianNatural, Enhanced.fiber at Fin.last n, flat/sharp/product/productMap/flatMap, and I.rlp for trivial fibration per the recorded Kan-Quillen clause. hfac and the endpoint conclusion are equalities after the monic fiber inclusion. No extra or stronger hypotheses, arbitrary universe u. Edge cases n=0, n=1, empty A/Aₙ/Yₙ and identity j covered. lean.statement verbatim equal to the signature; no definitions, proof is sorry; source and blueprint docstrings and proof steps present; no duplicate in side lean/Sheaf. nt_compile.py --json against the side overlay: rc 0, no errors or warnings, run twice. Non-blocking: report.md text says 'Proposition the project server' where 3.2.2.11/3.1.2.3 were meant; Second reading section is the standard placeholder."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CartesianMappingSimplexPrismExtension",
+  "declaration": "SSet.Marked.cartesian_mapping_simplex_prism_extension",
+  "file": "lean/Sheaf/AlgebraicTopology/CartesianMappingSimplexPrismExtension.lean",
+  "statement": "theorem cartesian_mapping_simplex_prism_extension (n : ℕ) {Y A Aₙ : SSet.{u}} (p : Y ⟶ Δ[n]) (hp : Over.relativeFibration false p) (s : product (flat A) (sharp (Δ[n] : SSet.{u})) ⟶ cartesianNatural p) (hs : s.val ≫ p = snd A (Δ[n] : SSet.{u})) (j : A ⟶ Aₙ) [Mono j] (h : Aₙ ⟶ Enhanced.fiber p (stdSimplex.obj₀Equiv.symm (Fin.last n))) (hh : modelCategoryQuillen.I.rlp h) (hfac : j ≫ h ≫ pullback.snd (SSet.const (X := Δ[0]) (stdSimplex.obj₀Equiv.symm (Fin.last n))) p = lift (𝟙 A) (SSet.const (stdSimplex.obj₀Equiv.symm (Fin.last n))) ≫ s.val) : ∃ s' : product (flat Aₙ) (sharp (Δ[n] : SSet.{u})) ⟶ cartesianNatural p, s'.val ≫ p = snd Aₙ (Δ[n] : SSet.{u}) ∧ productMap (flatMap j) (𝟙 (sharp (Δ[n] : SSet.{u}))) ≫ s' = s ∧ lift (𝟙 Aₙ) (SSet.const (stdSimplex.obj₀Equiv.symm (Fin.last n))) ≫ s'.val = h ≫ pullback.snd (SSet.const (X := Δ[0]) (stdSimplex.obj₀Equiv.symm (Fin.last n))) p",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
