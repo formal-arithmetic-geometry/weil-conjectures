@@ -2,7 +2,7 @@
  "id": "lem-coef-rigidification-identity-action",
  "kind": "statement",
  "title": "The rigidification identity-action cocone is the pinched-resolution comparison",
- "statement": "Use quasicategories, internal functor simplicial sets, right-pinched mapping spaces, realization and weak homotopy equivalences as in [def-cbc-enhanced-diagrams-cones]. Work in fixed universes large enough for all displayed constructions. Let $\\mathcal S$ be the infinity category of Kan complexes in the value universe, as defined in [def-coef-infinity-category-of-spaces]. Let $C$ be a small quasicategory, $a,x$ vertices, $A=\\mathfrak C[C]$, and let $H:C\\to\\mathcal S$ be the specific coherent functor of [def-coef-infinity-category-of-spaces], with $H(z)=\\operatorname{Sing}|A(a,z)|$ and enriched action given by postcomposition after the singular-realization unit. Let $\\eta\\in H(a)$ be the singular vertex of the identity of $A(a,a)$, and put $M_x=\\operatorname{Map}^{R}_C(a,x)$. Apply $H$ to the right-pinch family $M_x\\times\\Delta^1\\to C$ of [lem-coef-infinity-pinch-comparison] and precompose with the constant point $\\eta:*\\to H(a)$. This gives an actual coherent cocone $\\lambda_x:\\Delta_{M_x}*\\to\\Delta_{M_x}H(x)$. Let $e_x:M_x\\to H(x)$ be its point map, up to homotopy, under the constant-diagram equivalence of [lem-coef-space-point-cocone-criterion].\n\nUse the cosimplicial simplicial set $Q$, coend $V(K)=|K|_Q$, natural map $p_K:V(K)\\to K$, and specified map $\\theta_{C,a,x}:V(M_x)\\to A(a,x)$ of [lem-coef-pinched-rigidification-resolution]. Write $u_{a,x}:A(a,x)\\to\\operatorname{Sing}|A(a,x)|$ for the singular-realization unit (the map taking a simplex to its characteristic continuous simplex). In the category obtained from simplicial sets by formally inverting all weak homotopy equivalences, write $[f]$ for the image of a map $f$. The following equality holds:\n$$[e_x]\\,[p_{M_x}]=[u_{a,x}]\\,[\\theta_{C,a,x}].$$\nIn particular, the actual point map $e_x$ is a weak homotopy equivalence. The equality identifies the point map of the displayed action cocone, including all its simplicial parameters, rather than merely agreeing on vertices or connected components. It is natural under maps of $(C,a,x)$ and is unchanged by regarding the same Kan complexes and functors in a containing universe.",
+ "statement": "Use quasicategories, internal functor simplicial sets, right-pinched mapping spaces, realization and weak homotopy equivalences as in [def-cbc-enhanced-diagrams-cones]. Work in fixed universes large enough for all displayed constructions. Let $\\mathcal S$ be the infinity category of Kan complexes in the value universe, as defined in [def-coef-infinity-category-of-spaces]. Let $C$ be a small quasicategory, $a,x$ vertices, $A=\\mathfrak C[C]$, and let $H:C\\to\\mathcal S$ be the specific coherent functor of [def-coef-infinity-category-of-spaces], with $H(z)=\\operatorname{Sing}|A(a,z)|$ and enriched action given by postcomposition after the singular-realization unit. Let $\\eta\\in H(a)$ be the singular vertex of the identity of $A(a,a)$, and put $M_x=\\operatorname{Map}^{R}_C(a,x)$. Apply $H$ to the right-pinch family $M_x\\times\\Delta^1\\to C$ of [lem-coef-infinity-pinch-comparison] and precompose with the constant point $\\eta:*\\to H(a)$. This gives an actual coherent cocone $\\lambda_x:\\Delta_{M_x}*\\to\\Delta_{M_x}H(x)$. Let $e_x:M_x\\to H(x)$ be its point map, up to homotopy, under the constant-diagram equivalence of [lem-coef-space-point-cocone-criterion], specified by the $\\beta$-comparison of [lem-coef-point-family-q-counit-identification]. Thus if $\\gamma_x:M_x\\to U_{\\mathcal S}(*,H(x))$ is the arrow family adjoint to $\\lambda_x$, then $[e_x]=[\\beta_{*,H(x)}]^{-1}[\\gamma_x]$.\n\nUse the cosimplicial simplicial set $Q$, coend $V(K)=|K|_Q$, natural map $p_K:V(K)\\to K$, and specified map $\\theta_{C,a,x}:V(M_x)\\to A(a,x)$ of [lem-coef-pinched-rigidification-resolution]. Write $u_{a,x}:A(a,x)\\to\\operatorname{Sing}|A(a,x)|$ for the singular-realization unit (the map taking a simplex to its characteristic continuous simplex). In the category obtained from simplicial sets by formally inverting all weak homotopy equivalences, write $[f]$ for the image of a map $f$. The following equality holds:\n$$[e_x]\\,[p_{M_x}]=[u_{a,x}]\\,[\\theta_{C,a,x}].$$\nIn particular, the actual point map $e_x$ is a weak homotopy equivalence. The equality identifies the point map of the displayed action cocone, including all its simplicial parameters, rather than merely agreeing on vertices or connected components. It is natural under maps of $(C,a,x)$ and is unchanged by regarding the same Kan complexes and functors in a containing universe.",
  "source": {
   "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
   "place": "Section 2.2.4, opening paragraph before Proposition 2.2.4.1 (printed p. 88): the composite into a locally Kan enriched Hom is the Q-evaluation counit; Section 5.1.3, opening construction (printed pp. 319–320): Sing-realization enriched Hom functor. The identity-action specialization and the precise cocone comparison are expanded by the worker in report.md. Kerodon 038A specifies the universal-element action being identified. No Stacks tag states this comparison; sources read online, archival extracts WANTED."
@@ -12,11 +12,81 @@
   "def-coef-infinity-category-of-spaces",
   "lem-coef-infinity-pinch-comparison",
   "lem-coef-space-point-cocone-criterion",
-  "lem-coef-pinched-rigidification-resolution"
+  "lem-coef-pinched-rigidification-resolution",
+  "lem-coef-point-family-q-counit-identification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Expand the concrete functor H through the enriched category A^{top}. For each n-simplex of M_x, represented by a map J^n to C, the pinched-resolution map theta_{C,a,x} sends the corresponding Q^n-summand to A(a,x). Applying H sends this enriched arrow to postcomposition on A(a,-), followed by the singular-realization unit. Evaluating that postcomposition at the singular vertex eta of the identity of A(a,a) gives, on every q in Q^n, the characteristic singular simplex of theta(q), namely u_{a,x}(theta(q)). The calculation is compatible with all coend face and degeneracy identifications, so the coend action/evaluation map b_x:V(M_x) -> H(x) is the actual simplicial composite u_{a,x} theta_{C,a,x}, not merely a map agreeing on vertices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.4, opening comparison before Proposition 2.2.4.1, specialized to the identity-action summands; the explicit coend calculation is expanded here."
+   }
+  },
+  {
+   "text": "Put $X=H(a)$, $Y=H(x)$, $R=\\operatorname{Map}^R_{\\mathcal S}(X,Y)$, $T=\\operatorname{Fun}(X,Y)$, and let $h:M_x\\to R$ be induced by $H$. The naturality of $j$ in [lem-coef-infinity-pinch-comparison] identifies the $H$-image prism with $jh$. The composition/evaluation clause of [lem-coef-point-family-q-counit-identification], applied to the specified point $\\eta:*\\to X$, therefore gives $[e_x]=[\\operatorname{ev}_\\eta][\\alpha_{X,Y}]^{-1}[h]$ for the normalized point map of the actual action cocone. Naturality of $p$ and the counit equation of that same node give\n$$[e_x][p_{M_x}]=[\\operatorname{ev}_\\eta][\\alpha_{X,Y}]^{-1}[p_R][V(h)]=[\\operatorname{ev}_\\eta][E_{X,Y}][V(h)].$$\nOn the $Q^n$ summand indexed by $\\sigma:J^n\\to C$, $E_{X,Y}V(h)$ is precisely the enriched map obtained by applying the defining enriched functor for $H$ to $\\mathfrak C[\\sigma]$: both evaluate the enriched simplex $H\\sigma$ in $\\mathbf{Kan}$. Evaluation at $\\eta$ is consequently the map $b_x$ calculated in Step 1. Thus the right side is $[b_x]=[u_{a,x}][\\theta_{C,a,x}]$. This uses the Q-counit formula, including the maximum/prism reparametrization, rather than identifying a coend map with an unspecified point-family equivalence.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-point-family-q-counit-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.4 opening enriched Q-evaluation counit formula; Kerodon 06QR and 038A specify the canonical comparison and evaluation at the chosen point."
+   }
+  },
+  {
+   "text": "The weak-equivalence clauses of [lem-coef-pinched-rigidification-resolution] make $p_{M_x}$ and $\\theta_{C,a,x}$ invertible in the formal localization. By [lem-cbc-realization-singular-unit-weak], $u_{a,x}$ is a weak homotopy equivalence for the arbitrary simplicial set $A(a,x)$. The equation from Step 2 therefore makes $[e_x]$ invertible. To detect an actual weak equivalence without assuming saturation, fix any Kan complex $Z$ in the working universe and put $P_Z(B)=\\pi_0^{\\mathrm e}\\operatorname{Fun}(B,Z)$. Precomposition makes $P_Z$ an ordinary contravariant functor. The forward implication of [lem-cbc-realization-weak-equivalence] says exactly that it sends every weak homotopy equivalence to a bijection. By the defining universal property of formal localization, it factors through that localization (contravariantly). Thus invertibility of $[e_x]$ makes $P_Z(e_x)$ a bijection. This holds for every Kan $Z$, so the converse implication of the same criterion proves that $e_x$ is a weak homotopy equivalence. This supplies the needed saturation argument; it uses neither a converse of Kan Whitehead nor any cofibrancy, fibrancy, or nonemptiness assumption on $e_x$.",
+   "uses": [
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-cbc-realization-singular-unit-weak",
+    "lem-cbc-realization-weak-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent deduction in the weak-equivalence localization from the Kan-target realization criterion; independent of the model-localization theorem because its current dependency closure returns to this item."
+   }
+  },
+  {
+   "text": "Naturality follows on each Q^n summand from the naturality clauses for p and theta, from functoriality of the enriched postcomposition action and the singular-realization unit, from naturality of the right-pinch comparison, and from the natural $\\alpha,\\beta,E$ comparisons in [lem-coef-point-family-q-counit-identification]. These maps commute with the coend relations, so the equality and the weak-equivalence conclusion are natural in maps of (C,a,x). Passing to a containing universe leaves the displayed simplicial sets, maps, and weak-equivalence tests unchanged, which proves the final universe-independence clause.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-point-family-q-counit-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.4 naturality of the enriched comparison; the universe and coend-naturality checks are expanded here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-cbc-realization-weak-equivalence",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-pinched-rigidification-resolution",
+  "lem-coef-point-family-q-counit-identification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2: the displayed derived coefficient-adjunction calculation; the identity-action and pinched-resolution compatibility is expanded in this split.",
+  "note": "HTT and Kerodon sources are online only; the concrete parameterized calculation and naturality details are written out in the proof steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,7 +139,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-pointwise-yoneda-evaluation",
@@ -81,7 +151,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, the displayed derived coefficient mapping-complex adjunction: evaluation at an identity extracts the universal map from a representing equivalence before applying the local coherent adjoint criterion. Technical foundation: match the identity-action cocone of the explicitly defined rigidification functor with its pinched-resolution comparison, before extracting a transformation by identity evaluation.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the displayed derived coefficient-adjunction calculation, specifically the identity-action and pinched-resolution compatibility before evaluation.",
    "via": [
     "lem-coef-infinity-pointwise-yoneda-evaluation",
     "lem-coef-infinity-pointwise-adjoint-criterion",
@@ -95,5 +165,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-rigidification-identity-action",
+  "worker": "stage1",
+  "summary": "Repair of both return points: one statement-only supporting node identifies the canonical coherent-nerve point-family comparison with the Q-evaluation counit, including maximum/prism reparametrization. The item now specifies this normalization, and Step 2 derives the equation by naturality and counit evaluation. Step 3 proves saturation using the existing Kan-target realization criterion; the suggested model-localization theorem is circular in the current DAG. The report gives the normalization ambiguity, cycle path, source checks and preserved search evidence.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, the displayed derived coefficient-adjunction calculation: the steps realize the technical identity-action and pinched-resolution compatibility needed before evaluation.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Foundational right-pinched mapping spaces, internal functor simplicial sets and weak homotopy equivalences; formal-localization notation is introduced by the item itself."
+   },
+   {
+    "node": "lem-cbc-realization-singular-unit-weak",
+    "why": "The singular-realization unit is a weak equivalence for the arbitrary simplicial set A(a,x), which need not be Kan."
+   },
+   {
+    "node": "lem-cbc-realization-weak-equivalence",
+    "why": "Its two implications give the independent Kan-target test for saturation in Step 3. The suggested model-localization criterion reaches this item through the coherent localization and pointwise Yoneda infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-realization-singular-unit-weak",
+  "lem-cbc-realization-weak-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-47feae134",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-47feae134 (reviewer sub-agent of L); spot-checked: I read all of the item, the new node lem-coef-point-family-q-counit-identification, all seven cited statements, both consumers, the unit, the chapter and the ancestor paragraph (prop-coef-integral-exceptional-adjoint, paragraph 2). Both previous return points are fixed. (1) The new node supplies R≅Sing_Q Fun(X,Y), which agrees with HTT §2.2.4. It also gives E, the max map q (consistent with pinched-cube-latching), alpha, beta=j alpha, and [E]=[alpha]^{-1}[p_R]; I checked that equation via E V(alpha)=q_T, p≃max(p,q)≃q and naturality of p. The point-precomposition clause gives Step 2's chain [e][p]=[ev_eta][E][V h]=[u][theta]. Step 1 holds by the unit law in A^top. Fixing e_x through beta resolves a real ambiguity (on a discrete two-point target a swap changes the point map); it is not a weakening. Both consumers use e_x exactly as the item specifies it. (2) Step 3 now proves saturation through both directions of lem-cbc-realization-weak-equivalence. My reachability check finds no cycle. The suggested model-localization and coherent-nerve nodes do reach the item again, so they cannot be used. Step 4 follows from naturality of p, theta and u. The new node is a strictly smaller general Kan lemma, not a restatement of the item. It is statement-only, has 7 recorded searches and correct blueprint.from and via. I found no duplicate in the DAG. I accept the two lem-cbc tool_uses as generic tools. FIX: added the missing lean_audit {master: none, slopmaster2: none} to the new node in fixes/. Remark: the report says created.item was 'corrected', but the file correctly still has the parent lem-coef-infinity-pointwise-yoneda-evaluation. HTT and Kerodon are not in literature; WANTED is recorded.; 1 file(s) fixed by the reviewer"
  }
 }
