@@ -162,21 +162,21 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-bc34d6dc3 (reviewer sub-agent of L); spot-checked: Read the complete item, report, dependencies, unit/chapter route, cited sources and exact master target sources. Construction and edge cases check out; no coefficient-category comparison is assumed. Repaired one B5 citation fault by recording Tag 03D6 and Tag 09A5 in split-owned fields. Whole corrected JSON and concrete checks are in fixes/ and review.md; no new nodes or accepted tool_uses.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs",
-  "declaration": "AlgebraicGeometry.ProEtale.lowerStar",
-  "statement": "def lowerStar : Sheaf (Scheme.ProEt.topology Z) A ⥤ Sheaf (Scheme.ProEt.topology Y) A",
-  "branch": "slopmaster2",
-  "by": "NL",
-  "date": "2026-10-16",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleInverseImage",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleConstantModuleDirectImage",
+  "statement": "noncomputable def proEtaleConstantModuleDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (A : Type u) [CommRing A]",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-17",
   "existing": true,
-  "note": "§1(B): the former proEtaleConstantModuleDirectImage is in the SheafOfModules presentation with a Type u coefficient and its lift. The recorded pro-etale site and supported-cohomology interfaces use Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u+1} A) with A : Type (u+1). The existing lowerStar, specialized to ModuleCat.{u+1} A, gives the same underived module direct image in that presentation: precomposition with V ↦ V ×_Y X, with sectionwise A-linear restrictions and morphisms. A section of the constant ring sheaf acts locally by constants; this action is exactly restriction of scalars through the constant-section map rho. No construction, universe equality, or geometric hypothesis is added."
+  "note": "§1(B), H13 repair: lowerStar is the fixed-scalar presentation, whereas this item uses intrinsic constant-ring module sheaves. The previous proposed sfConstantModuleDirectImage rebind incorrectly required [Finite A], which the dependency does not assume. The existing proEtaleConstantModuleDirectImage has only [CommRing A] and defines exactly the intrinsic sectionwise pushforward by SheafOfModules.pushforward along proEtaleBaseChange, restricting scalars through the canonical proEtaleCoefficientDirectImageMap rho. Thus it covers arbitrary commutative rings, including infinite rings, with no added geometric or finiteness hypothesis."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-264f0ccad",
-  "group": "NL",
+  "reviewer": "NT-stage2-Codex-f8cb77ed1",
+  "group": "Q02",
   "result": "pass",
-  "note": "Reviewed immutable statement, all eight dependencies, sources, docstrings, universes, edge cases, and dependency repair. Signature matches verbatim; per-file scompile reproduction passed both checks. No substantive or mechanical faults found."
+  "note": "All binders, conclusion clauses, dependencies, helpers, source alignment, edge cases, docstrings, and intrinsic pro-etale interfaces checked; scompile.py passed in both modes."
  }
 }

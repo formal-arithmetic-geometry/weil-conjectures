@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-relative-cone",
-  "def-coef-infinity-relative-join"
+  "def-coef-infinity-relative-join",
+  "lem-coef-infinity-slice-arrow-equivalence"
  ],
  "proof": [
   {
@@ -265,5 +266,34 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-55f47343d (reviewer sub-agent of L); spot-checked: I read in full the item, the definition statements it cites (def-cbc-enhanced-diagrams-cones, def-coef-infinity-relative-cone, def-coef-infinity-relative-join), the parent lem-coef-infinity-arrow-join-geometry (it uses the item in step 9) and the inherited unit. I read the source online: Kerodon 0302, Prop. 7.3.5.5, the gamma-minus construction. Its rho/rho' formulas are exactly the item's rho/nu with n=r. Kerodon writes the composites in the reverse order, and the item's tau.rho and tau.nu are correctly typed. Kerodon only asserts functoriality and the extension over the cone point, and the item proves both, so proof_origin=agent is right. I rechecked every step. Steps 1-2: the extended operators of L are functorial; rho and nu are monotone (an initial-segment argument) and define simplicial maps. Step 3: target evaluation of the prism equals tau.nu on [0,r], and the final block is constant at c; this covers r=n and r=-1. Steps 4-6: I recomputed the restriction identities, which rest on the fact that k<=r' exactly when alpha(k)<=r; I also checked the case where the whole base block disappears (nu.alpha constant at r+1). Step 7: naturality through the induced relative-join formula. Step 8: the square at e:a->c has values a,a,a,c, sides 1_a and e. Step 9: the apex maps to the constant c. The parent's endpoints follow from the stated formulas (constant epsilon=0 gives T_c, constant epsilon=1 gives T_c^-). My own enumeration covered n,l<=4, all cuts, all monotone epsilon and alpha: 13,241 cases, all passing. There are no new nodes. The duplicate search (rg for 0302, 7.3.5.5, slice cone, prism, right join cone; the fixed-source-prism, collage, cocone-extension and straightening nodes were read) found no duplicate and no restated clause. No cycle, no SGA, no coefficient category or base change, no tool_uses. One fix: stmt_deps gains def-coef-infinity-relative-cone, because the statement uses the join and W=L*Delta^0 defined there (B3); the statement text is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-67969f23d",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Audited node, dependencies, source, Lean module, report sections, edge cases, declarations, universes, and docstrings. Reproduced scompile.py successfully with no errors; no substantive findings or fixes needed. Source checked: [Kerodon 0302](https://kerodon.net/tag/0302)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SliceConePrismSimplicial",
+  "declaration": "SSet.Enhanced.slice_cone_prism_simplicial",
+  "declarations": [
+   "SSet.Enhanced.sliceConeInitial",
+   "SSet.Enhanced.sliceConeNu",
+   "SSet.Enhanced.sliceConeRho",
+   "SSet.Enhanced.sliceConeArrow",
+   "SSet.Enhanced.sliceConeJoinSimplex",
+   "SSet.Enhanced.sliceConeSliceMap",
+   "SSet.Enhanced.IsSliceConePrism",
+   "SSet.Enhanced.slice_cone_prism_simplicial"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SliceConePrismSimplicial.lean",
+  "statement": "theorem slice_cone_prism_simplicial : ∃ G : ∀ (X : SSet.{u}) (c : X _⦋0⦌), Δ[1] ⊗ rightJoinCone (rightVertexSlice X c) ⟶ relativeJoin (evaluation Δ[1] X (stdSimplex.obj₀Equiv.symm 1)) (𝟙 X), (∀ (X : SSet.{u}) (c : X _⦋0⦌), IsSliceConePrism X c (G X c)) ∧ (∀ (X Y : SSet.{u}) (h : X ⟶ Y) (c : X _⦋0⦌) (n : SimplexCategoryᵒᵖ) (ε : (Δ[1] : SSet.{u}).obj n) (w : (rightJoinCone (rightVertexSlice X c)).obj n), ((G Y (h.app _ c)).app n (ε, (orderedJoinFunctor.map (sliceConeSliceMap h c, 𝟙 Δ[0])).app n w)).val = ((orderedJoinFunctor.map (((ihom Δ[1]).map h), h)).app n ((G X c).app n (ε, w)).val.1, (((G X c).app n (ε, w)).val.2.1, h.app n ((G X c).app n (ε, w)).val.2.2)))",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses rightVertexSlice from the already landed slice-arrow node (added to stmt_deps). Helpers give the ordinal formulas, existing join generator insertion, pointed slice map and the exact formula predicate. The single postponed theorem existentially specifies the natural family by all three join summand formulas and both component conditions; no map is chosen from a mere existence theorem."
  }
 }
