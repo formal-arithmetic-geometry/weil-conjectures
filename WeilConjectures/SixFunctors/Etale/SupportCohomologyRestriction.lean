@@ -317,13 +317,16 @@ theorem exists_distTriang_supportRestriction
   let e₁ := (rightDerivedSectionsWithSupportIso A d).app F
   let e₂ := (rightDerivedSectionsWithSupportIso A b).app F
   let e₃ := supportRestrictionIso₃ A b c F
-  refine ⟨e₃.hom ≫ (G.mapTriangle.obj (Triangle.mk _ _ δ)).mor₃ ≫ e₁.inv⟦(1 : ℤ)⟧',
+  refine ⟨e₃.hom ≫ G.map δ ≫ (G.commShiftIso (1 : ℤ)).hom.app _ ≫ e₁.inv⟦(1 : ℤ)⟧',
     isomorphic_distinguished _ (G.map_distinguished _ hδ) _
       (Triangle.isoMk _ _ e₁ e₂ e₃ ?_ ?_ ?_)⟩
   · simp [supportInclusionMap, e₁, e₂]
+    rfl
   · simp [supportRestrictionMap, e₂, e₃]
+    rfl
   · simp only [Triangle.mk_mor₃, assoc, ← Functor.map_comp, Iso.inv_hom_id,
       CategoryTheory.Functor.map_id, comp_id]
+    rfl
 
 end Triangle
 
