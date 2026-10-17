@@ -11,11 +11,92 @@
   "def-pc-scheme",
   "def-pc-fppf-site",
   "def-weil-open-immersion",
-  "def-weil-size-convention"
+  "def-weil-size-convention",
+  "def-pc-finite-locally-free",
+  "def-weil-surjective-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Handle the empty base first. If $S=\\varnothing$, choose the empty Zariski covering and hence no $W_j$ or $T_{j,k}$; every requested condition is vacuous. If $I=\\varnothing$, joint surjectivity in [def-pc-fppf-site] forces $S=\\varnothing$. Thus below assume $S\\ne\\varnothing$. All indexing sets and choices are taken within [def-weil-size-convention].",
+   "uses": [
+    "def-pc-fppf-site",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05WN, statement, empty cases and size convention."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-fppf-etale-finite-free-refinement] to the given small fppf covering, with no hypothesis on quasi-compactness or separatedness of $S$. Write the resulting etale covering as $e_a:S\\prime_a\\to S$, its surjective finite locally free maps as $p_a:V_a\\to S\\prime_a$, and the refinement maps as $r_a:V_a\\to S_{i(a)}$. In particular $f_{i(a)}\\circ r_a=e_a\\circ p_a$.",
+   "uses": [
+    "lem-trf-fppf-etale-finite-free-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05WN, lemma-dominate-fppf, first paragraph; Tag 0DET, lemma-dominate-fppf-etale-locally."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-etale-finite-free-open-refinement] to the jointly surjective etale family $\\{e_a\\}$. This gives $S=\\bigcup_jU_j$, surjective finite locally free $q_j:W_j\\to U_j$, open coverings $W_j=\\bigcup_kW_{j,k}$, and maps $h_{j,k}:W_{j,k}\\to S\\prime_{a(j,k)}$ over $S$. With $u_j:U_j\\hookrightarrow S$ and $\\iota_{j,k}:W_{j,k}\\hookrightarrow W_j$, their defining equality is $e_{a(j,k)}\\circ h_{j,k}=u_j\\circ q_j\\circ\\iota_{j,k}$.",
+   "uses": [
+    "lem-trf-etale-finite-free-open-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05WN, lemma-dominate-fppf, second paragraph, invoking Tag 02LI, remark-topologies."
+   }
+  },
+  {
+   "text": "For each $j,k$, set $a=a(j,k)$ and form $T_{j,k}=V_a\\times_{S\\prime_a}W_{j,k}$ with projections $v_{j,k}:T_{j,k}\\to V_a$ and $t_{j,k}:T_{j,k}\\to W_{j,k}$ using [def-pc-fibre-product]. The equality $p_a\\circ v_{j,k}=h_{j,k}\\circ t_{j,k}$ is the fibre-product relation. The map $t_{j,k}$ is the base change of $p_a$. By [def-pc-finite-locally-free], $p_a$ is finite, flat, and locally of finite presentation. These three properties pass to $t_{j,k}$ by clause (a) of [lem-weil-pbc-finite-morphism-permanence], [lem-weil-pbc-flat-morphism-base-change], and clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], respectively. No qcqs hypothesis is needed for that node's clause (3). Thus $t_{j,k}$ is finite locally free by the same definition. It is surjective by [lem-weil-pbc-surjective-base-change].",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05WN, lemma-dominate-fppf, final sentence; morphisms.tex Tags 01WL, 01U9, 01TS, 01S1 (base-change properties)."
+   }
+  },
+  {
+   "text": "The required factorization through a member of the original covering is the actual morphism $r_a\\circ v_{j,k}:T_{j,k}\\to S_{i(a)}$, not merely a statement about its pointwise image. Indeed, the equalities from Steps 2--4 give $f_{i(a)}\\circ r_a\\circ v_{j,k}=e_a\\circ p_a\\circ v_{j,k}=e_a\\circ h_{j,k}\\circ t_{j,k}=u_j\\circ q_j\\circ\\iota_{j,k}\\circ t_{j,k}$. This is exactly the prescribed composite to $S$. The open covers and first finite locally free maps were supplied in Step 3 and the second finite locally free surjections in Step 4. Their composites are jointly surjective as well: for $s\\in S$, choose $j$ with $s\\in U_j$, then $w\\in W_j$ above $s$, then $k$ with $w\\in W_{j,k}$, and finally a point of $T_{j,k}$ above $w$. Smallness follows from small dependent sums of the indexing sets in the fixed universes [def-weil-size-convention].",
+   "uses": [
+    "def-weil-surjective-morphism",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05WN, lemma-dominate-fppf, final sentence: the projection to V_a gives the refinement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free",
+  "def-pc-fppf-site",
+  "def-weil-size-convention",
+  "def-weil-surjective-morphism",
+  "lem-trf-etale-finite-free-open-refinement",
+  "lem-trf-fppf-etale-finite-free-refinement",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05WN, lemma-dominate-fppf, proof; its cited inputs are Tags 0DET and 02LI."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +125,38 @@
    "results": "0 hits in AlgebraicGeometry.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fppf.*(refin|dominat)|dominat.*fppf|finite.*locally.*free.*cover",
+   "results": "{\"t\": \"2026-10-17T20:40:58Z\", \"tool\": \"grep\", \"query\": \"fppf.*(refin|dominat)|dominat.*fppf|finite.*locally.*free.*cover\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern precoverages, flat epimorphisms and flat descent; none constructs the two-level finite locally free refinement. Semantic queries used two phrasings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A jointly surjective family of flat locally finitely presented morphisms has a finite locally free two level refinement",
+   "results": "{\"t\": \"2026-10-17T20:41:11Z\", \"tool\": \"leansearch\", \"query\": \"A jointly surjective family of flat locally finitely presented morphisms has a finite locally free two level refinement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage\", \"AlgebraicGeometry.Flat.recOn\", \"AlgebraicGeometry.Scheme.JointlySurjective\", \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.JointlySurjective.recOn\", \"AlgebraicGeometry.Scheme.JointlySurjective.mk\"], \"digest\": \"cc62e13a0bdb61d9\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern precoverages, flat epimorphisms and flat descent; none constructs the two-level finite locally free refinement. Semantic queries used two phrasings."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.Surjective",
+   "results": "{\"t\": \"2026-10-17T20:41:11Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, AlgebraicGeometry.Surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.isRegularEpi_of_flat_of_surjective_of_isAffine\", \"AlgebraicGeometry.effectiveEpi_base_of_flat\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfQuasiCompact\"], \"digest\": \"11c437e275a76618\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern precoverages, flat epimorphisms and flat descent; none constructs the two-level finite locally free refinement. Semantic queries used two phrasings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every fppf covering can be refined by two successive finite locally free surjections separated by open coverings",
+   "results": "{\"t\": \"2026-10-17T20:41:15Z\", \"tool\": \"leanfinder\", \"query\": \"Every fppf covering can be refined by two successive finite locally free surjections separated by open coverings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.precoverage\", \"AlgebraicGeometry.Scheme.JointlySurjective\", \"AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage\", \"AlgebraicGeometry.Scheme.instJointlySurjectivePrecoverage\", \"AlgebraicGeometry.Scheme.Cover\", \"AlgebraicGeometry.Scheme.Cover.ulift\", \"AlgebraicGeometry.Scheme.Cover.Over\", \"AlgebraicGeometry.Scheme.Cover.LocallyDirected\"], \"digest\": \"6074f6c277baab8f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern precoverages, flat epimorphisms and flat descent; none constructs the two-level finite locally free refinement. Semantic queries used two phrasings."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-fppf-integral-surjective-refinement",
@@ -59,7 +168,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The auxiliary finite-locally-free refinement used before the integral extensions in the proof of Tag 0CNZ.",
+   "place": "Unit sk-i-curve-zero, proof step 2, normal-cone specialization and its vanishing input: the etale/ph descent chain under lem-trf-local-term-locality, through lem-trf-fppf-integral-surjective-refinement (Tag 0CNZ), whose opening finite-locally-free refinement is Tag 05WN. Tag 05WN, lemma-dominate-fppf: the whole finite-locally-free two-level refinement used at the start of Tag 0CNZ.",
    "via": [
     "lem-trf-fppf-integral-surjective-refinement",
     "lem-trf-fppf-finite-surjective-refinement",
@@ -77,5 +186,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-fppf-local-finite-free-refinement",
+  "worker": "stage1",
+  "summary": "Followed the complete three-paragraph proof of Stacks 05WN. Created exactly the two independent refinement inputs 0DET and 02LI as statement-only nodes; reused existing finite, flat, locally-finite-presentation and surjective base-change results. The item constructs the fibre products and writes the resulting morphism equalities. The statement is unchanged, missing finite-locally-free and surjectivity definition dependencies are added, and empty and small-index cases are explicit.",
+  "blueprint": "Unit sk-i-curve-zero, proof step 2, normal-cone specialization and its vanishing input: the etale/ph descent chain under lem-trf-local-term-locality, through lem-trf-fppf-integral-surjective-refinement (Tag 0CNZ), whose opening finite-locally-free refinement is Tag 05WN. Steps 2 and 3 realize the two cited inputs in the proof of 05WN, and Steps 4 and 5 realize its last fibre-product construction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q60-9f74fc62c",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q60-9f74fc62c (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited DAG statements, unit/chapter route, and Stacks Tags 05WN, 0DET, and 02LI in full. The fibre-product base-change argument, hypotheses, edge cases, searches, blueprint route, and dependency checks are correct; no forbidden SGA, batch-5, or route-pivot machinery appears. Review written to review.md."
  }
 }

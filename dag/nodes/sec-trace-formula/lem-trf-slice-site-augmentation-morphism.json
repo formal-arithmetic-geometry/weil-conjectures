@@ -14,62 +14,146 @@
   "lem-trf-slice-site-total-pseudofunctor",
   "lem-trf-slice-site-total-systems"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the total-site systems equivalence, a sheaf on the total site is a compatible family of component sheaves with transition maps satisfying the identity and composition cocycles. For $G\\in\\mathcal D$, put the component in degree $n$ equal to $a_n^{-1}G$ and use the given coherent identifications $f_\\alpha^{-1}a_q^{-1}G\\cong a_p^{-1}G$ as its transitions. The coherence laws make this a compatible system, hence an object of $\\mathrm{Sh}(\\mathcal E_{\\mathrm{tot}})$.",
+   "uses": [
+    "def-weil-pbc-topos",
+    "def-weil-size-convention",
+    "lem-trf-slice-site-total-pseudofunctor",
+    "lem-trf-slice-site-total-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D70, lemma-augmentation-site, construction of the component inverse images and the total inverse image"
+   }
+  },
+  {
+   "text": "Each $a_n^{-1}$ is an inverse-image functor, so it preserves finite limits. Limits of compatible systems are computed componentwise, with transitions induced by the universal properties; therefore $G\\mapsto(a_n^{-1}G)_n$ preserves finite limits. This is the inverse-image part of the required geometric-morphism datum.",
+   "uses": [
+    "def-weil-pbc-topos",
+    "def-weil-size-convention",
+    "def-trf-geometric-morphism",
+    "lem-trf-slice-site-total-systems"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D70, lemma-augmentation-site, verification that the inverse image is exact"
+   }
+  },
+  {
+   "text": "For a compatible system $F=(F_n,t_\\alpha)$, form the two maps $d_0,d_1:a_{0,*}F_0\\rightrightarrows a_{1,*}F_1$ by applying the two maps $[0]\\to[1]$, inserting the unit into the corresponding inverse-image/direct-image adjunction, and then using the transition of $F$. Let $a_*F$ be their equalizer in $\\mathcal D$. Equalizers exist because $\\mathcal D$ is a topos, and the construction is functorial in maps of compatible systems.",
+   "uses": [
+    "def-weil-pbc-topos",
+    "def-trf-geometric-morphism",
+    "lem-trf-slice-site-total-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D70, lemma-augmentation-site, equalizer definition of the direct image"
+   }
+  },
+  {
+   "text": "The equalizer universal property identifies a map $G\\to a_*F$ with a map $G\\to a_{0,*}F_0$ whose two composites with $d_0,d_1$ agree. By the adjunction $a_0^{-1}\\dashv a_{0,*}$ this is a degree-zero map $a_0^{-1}G\\to F_0$ satisfying the vertex/edge compatibility. For each $n$ and each vertex $[0]\\to[n]$, use the corresponding transition and the coherent identifications to propagate this map to a component map $a_n^{-1}G\\to F_n$. Any two vertices of $[n]$ are the endpoints of an order map $[1]\\to[n]$, so the equalizer condition makes the propagated maps equal. The same coherence then makes them commute with every simplicial operator and satisfy the identity and composition laws. Conversely, a compatible family of component maps restricts in degree zero to a map satisfying the equalizer condition, and the two constructions are inverse and natural in $G$ and $F$.",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "lem-trf-slice-site-total-pseudofunctor",
+    "lem-trf-slice-site-total-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D70, lemma-augmentation-site, the cosimplicial-map argument and the vertex/edge argument"
+   }
+  },
+  {
+   "text": "The natural bijections of the preceding step give $G\\mapsto(a_n^{-1}G)_n$ as a left adjoint to $a_*$. Together with finite-limit preservation from Step 2, this is a geometric morphism in the sense of [def-trf-geometric-morphism], and Step 3 gives the asserted equalizer formula for its right adjoint. The identity and cocycle laws are exactly the coherence laws used in constructing and propagating the component maps.",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "lem-trf-slice-site-total-systems"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D70, conclusion of lemma-augmentation-site"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-topos",
+  "def-weil-size-convention",
+  "def-trf-geometric-morphism",
+  "lem-trf-slice-site-total-pseudofunctor",
+  "lem-trf-slice-site-total-systems"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0D70, lemma-augmentation-site"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "augmentation from the total site of a simplicial site to a base site with equalizer direct image",
-   "results": "{\"t\": \"2026-10-17T19:08:42Z\", \"tool\": \"leanfinder\", \"query\": \"augmentation from the total site of a simplicial site to a base site with equalizer direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.diagramFunctor\", \"CategoryTheory.GrothendieckTopology.diagram\", \"CategoryTheory.GrothendieckTopology.diagramFunctor_obj\", \"CategoryTheory.GrothendieckTopology.plusFunctor\", \"CategoryTheory.GrothendieckTopology.diagram_obj\", \"CategoryTheory.GrothendieckTopology.diagramFunctor_map\", \"CategoryTheory.GrothendieckTopology.plusObj\", \"CategoryTheory.GrothendieckTopology.Cover.index\"], \"digest\": \"d2ba236b8672ef69\"}",
+   "query": "equalizer right adjoint for a coherent augmented simplicial diagram of topoi",
+   "results": "CategoryTheory.LiftRightAdjoint.constructRightAdjointObj; CategoryTheory.SimplicialObject.cechNerveAdjunction; no exact match",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "equalizer, sheaf, simplicial",
-   "results": "{\"t\": \"2026-10-17T19:08:31Z\", \"tool\": \"loogle\", \"query\": \"equalizer, sheaf, simplicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'equalizer'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "CategoryTheory.Limits.equalizer, CategoryTheory.Adjunction, SimplicialObject",
+   "results": "0 hits; unknown identifier SimplicialObject",
    "date": "2026-10-17",
    "verdict": "unavailable"
   },
   {
    "tool": "grep",
-   "query": "equalizer.*simplicial|augmentation.*site|simplicial.*site",
-   "results": "{\"t\": \"2026-10-17T19:08:31Z\", \"tool\": \"grep\", \"query\": \"equalizer.*simplicial|augmentation.*site|simplicial.*site\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "equalizer.*simplicial|augmentation.*site|compatible.*family [CategoryTheory]",
+   "results": "25 hits in unrelated compatible-family and equalizer infrastructure; no augmentation theorem",
    "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "equalizer direct image all compatible systems simplicial topos",
-   "results": "{\"hits\": [\"CategoryTheory.regularTopology.mapToEqualizer\", \"CategoryTheory.regularTopology.MapToEqualizer\", \"CategoryTheory.Equalizer.forkMap\", \"CategoryTheory.Equalizer.firstObjEqFamily\", \"CategoryTheory.regularTopology.mapToEqualizer_eq_comp\", \"CategoryTheory.Equalizer.Sieve.compatible_iff\", \"CategoryTheory.Equalizer.Presieve.compatible_iff\", \"CategoryTheory.Equalizer.Presieve.Arrows.compatible_iff_of_small\"], \"note\": \"\", \"sub\": \"\", \"digest\": \"97159410a1b90b97\"}",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "Equalizer, compatible system, geometric morphism",
-   "results": "{\"hits\": [], \"note\": \"loogle: unknown identifier 'Equalizer'\", \"sub\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-18",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "grep",
-   "query": "equalizer.*compatible|augmentation.*equalizer",
-   "results": "{\"hits\": [\"Mathlib/CategoryTheory/Sites/EqualizerSheafCondition.lean\", \"Mathlib/CategoryTheory/Sites/EqualizerSheafCondition.lean\"], \"note\": \"\", \"sub\": \"\", \"digest\": \"af41b99615e4cd55\"}",
-   "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "equalizer right adjoint for arbitrary compatible systems",
-   "results": "{\"hits\": [\"CategoryTheory.LiftRightAdjoint.constructRightAdjointObj\", \"CategoryTheory.LiftRightAdjoint.constructRightAdjoint\", \"CategoryTheory.Equalizer.Presieve.Arrows.compatible_iff_of_small\", \"CategoryTheory.Limits.equalizer.ι\", \"CategoryTheory.Adjunction.rightAdjointUniq\", \"CategoryTheory.Comonad.ComonadicityInternal.rightAdjointComparison\", \"CategoryTheory.Abelian.hasEqualizers\", \"CategoryTheory.LiftRightAdjoint.unitEqualises\"], \"note\": \"\", \"sub\": \"\", \"digest\": \"ff69853e2afbd0bd\"}",
-   "date": "2026-10-18",
+   "query": "equalizer right adjoint for compatible systems from a simplicial diagram of topoi",
+   "results": "CategoryTheory.LiftRightAdjoint.constructRightAdjointObj; CategoryTheory.Limits.equalizer.ι; no exact match",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatible systems of sheaves on a simplicial site and augmentation inverse image right adjoint",
+   "results": "CategoryTheory.Sheaf.adjunction; CategoryTheory.SimplicialObject.cechNerveAdjunction; no exact match",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Fork.IsLimit.homIso",
+   "results": "CategoryTheory.Limits.Fork.IsLimit.homIso and naturality lemmas; generic equalizer universal property only",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "equalizer|Fork.IsLimit|Adjunction [CategoryTheory/Limits]",
+   "results": "generic equalizer-preservation and adjunction infrastructure; no simplicial augmentation theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "maps into an equalizer are compatible families of maps from inverse images along all simplicial vertices",
+   "results": "CategoryTheory.Equalizer.Presieve.Arrows.compatible_iff_of_small; CategoryTheory.Limits.Fork.IsLimit.homIso; no exact match",
+   "date": "2026-10-17",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-slice-site-simplicial-augmentation",
@@ -80,10 +164,10 @@
  "unit": "sk-i-curve-zero",
  "split_report": {
   "date": "2026-10-18",
-  "item": "lem-trf-slice-site-simplicial-augmentation",
+  "item": "lem-trf-slice-site-augmentation-morphism",
   "worker": "stage1",
-  "summary": "Recast the former augmentation restatement as the generic equalizer adjunction for a coherent augmented simplicial diagram of topoi; the item supplies the slice-site component maps separately.",
-  "blueprint": "Stacks 0D70, lemma-augmentation-site"
+  "summary": "Expanded the generic augmented simplicial-topos statement into the component inverse-image construction, finite-limit check, equalizer direct-image construction, and the vertex/edge proof of the adjunction. No new nodes were needed; all non-elementary inputs are existing setup and compatible-system statements.",
+  "blueprint": "Stacks 0D70, lemma-augmentation-site: component functors and their coherent transitions; equalizer direct image; vertex/edge compatibility argument"
  },
  "blueprint": {
   "from": {
@@ -102,5 +186,13 @@
   },
   "same_as": [],
   "is": null
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q82-63571dd32",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q82-63571dd32 (reviewer sub-agent of L); spot-checked: Mathematics and all five proof steps check against Stacks Tag 0D70; edge cases and cited nodes were reviewed. Repair the incorrect created.item and created.group metadata; corrected DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-slice-site-augmentation-morphism.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
  }
 }

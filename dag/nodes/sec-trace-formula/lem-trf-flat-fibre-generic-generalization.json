@@ -1,0 +1,90 @@
+{
+ "id": "lem-trf-flat-fibre-generic-generalization",
+ "kind": "statement",
+ "title": "Fibre-generic locus of a flat finitely presented morphism is stable under generalization",
+ "statement": "Let $f:X\\to S$ be a flat finitely presented morphism of schemes [def-pc-scheme, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Here finitely presented means locally of finite presentation, quasi-compact and quasi-separated. For $s\\in S$ let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ be the scheme-theoretic fibre [def-pc-scheme-fibre]. Let $G_f\\subseteq |X|$ be the union, over $s\\in S$, of the images of the generic points of the irreducible components of $X_s$ [def-weil-irreducible-components]; a generic point of a closed irreducible subset is a point whose closure is that subset. If $x\\in G_f$ and $x\\in\\overline{\\{x^{\\prime}\\}}$ in $X$, then $x^{\\prime}\\in G_f$.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Lemma 3.5.3, printed pp. 20--21. Primary PDF read online; local archival copy WANTED.",
+  "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat finitely presented morphism of schemes the set of generic points of all fibres is stable under generalization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => GeneralizingMap)\", \"doc\": \"The property of a scheme morphism having an underlying continuous map that is a generalizing map is Zariski-local at the target. Specifically, for any such morphism $ f $ and any Zariski covering siev\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => GeneralizingMap)\", \"doc\": \"The property of a scheme morphism being a generalizing map on the underlying topological spaces is Zariski-local at the source. This means that for any scheme morphism, if its restriction to a Zariski\"}\n  {\"name\": \"RingHom.Flat.generalizingMap_comap\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Flat → GeneralizingMap (PrimeSpectrum.comap f)\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ defined by taking preimages of prime ideals under $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\nRead these signatures. GeneralizingMap lifts generalizations along a flat map; it does not say that points already generic in their fibres remain fibre-generic on generalizing in the source. genericPoints and StableUnderGeneralization are only definitions.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generalization of a minimal point of a fibre of a flat finitely presented scheme morphism is minimal in its own fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.ValuativeCriterion.Existence f → SpecializingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes satisfies the valuative criterion for existence, then $ f $ is a specializing map, meaning that specialization relations in the codomain can be lifted to the do\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"RingHom.Flat.generalizingMap_comap\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Flat → GeneralizingMap (PrimeSpectrum.comap f)\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ defined by taking preimages of prime ideals under $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (AlgebraicGeometry.topologically @SpecializingMap).universally f → AlgebraicGeometry.ValuativeCriterion.Existence f\", \"doc\": \"If a morphism of schemes is universally specializing (topologically), then it satisfies the valuative criterion for existence. Specifically, for any valuative commutative square involving the morphism\"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\nRead these signatures. GeneralizingMap lifts generalizations along a flat map; it does not say that points already generic in their fibres remain fibre-generic on generalizing in the source. genericPoints and StableUnderGeneralization are only definitions.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"genericPoints\"",
+   "results": "[loogle] OK 0 hit(s)\nRead these signatures. GeneralizingMap lifts generalizations along a flat map; it does not say that points already generic in their fibres remain fibre-generic on generalizing in the source. genericPoints and StableUnderGeneralization are only definitions.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "genericPoints.*(Flat|flat)|generi[cz]ation.*(fiber|fibre)|(fiber|fibre).*generi[cz]ation AlgebraicGeometry",
+   "results": "[grep] OK 0 hit(s)\nRead these signatures. GeneralizingMap lifts generalizations along a flat map; it does not say that points already generic in their fibres remain fibre-generic on generalizing in the source. genericPoints and StableUnderGeneralization are only definitions.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fibre generic points of a flat finitely presented morphism of schemes form a subset stable under generalization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"StableUnderGeneralization\", \"module\": \"Mathlib.Topology.Inseparable\", \"type\": \"(s : Set X) : Prop\", \"doc\": \"A set $ s $ is stable under generalization if for any points $ x $ and $ y $, whenever $ y $ specializes to $ x $ (i.e., every neighborhood of $ x $ is a neighborhood of $ y $) and $ x \\\\in s $, then $\"}\n  {\"name\": \"genericPoints\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \": Set α\", \"doc\": \"The set of points $ x $ in a topological space $ \\\\alpha $ such that the closure of the singleton set $ \\\\{x\\\\} $ is an irreducible component of $ \\\\alpha $, i.e., a maximal irreducible closed subset of $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : Scheme\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and a point $y \\\\in Y$, the fiber of $f$ over $y$ is the scheme obtained by taking the fiber product (pullback) of $f$ with the canonical morphism $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] : GeneralizingMap f\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"RingHom.Flat.generalizingMap_comap\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{f : R →+* S} (hf : f.Flat) : GeneralizingMap (comap f)\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ defined by taking preimages of prime ideals under $ f $ is\"}\n  {\"name\": \"IsGenericPoint\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"(x : α) (S : Set α) : Prop\", \"doc\": \"The point $ x $ is a generic point of the set $ S $ if the closure of the singleton set $ \\\\{x\\\\} $ in the topological space is equal to $ S $.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[LocallyOfFinitePresentation f] (hf : GeneralizingMap f) : IsOpenMap f\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) [IsFinite f] (y : Y) : (f ⁻¹' { y }).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a finite morphism of schemes. For any point $y \\\\in Y$, the fiber $f^{-1}(\\\\{y\\\\})$ is a finite set.\"}\nRead these signatures. GeneralizingMap lifts generalizations along a flat map; it does not say that points already generic in their fibres remain fibre-generic on generalizing in the source. genericPoints and StableUnderGeneralization are only definitions.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-modification-fibre-centre-finite",
+  "date": "2026-10-18",
+  "group": "Q66"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Temkin §4.2, Lemmas 4.2.1--4.2.2: the finite Gamma_0 set of residual-transcendence-degree-one fibre-generic centres over closed points; Lemma 4.2.1 and Lemma 4.2.2 invoke Lemma 3.5.3 to control generalizations of fibre-generic points",
+   "via": [
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

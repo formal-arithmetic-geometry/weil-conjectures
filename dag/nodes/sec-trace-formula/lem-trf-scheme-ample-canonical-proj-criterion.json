@@ -2,27 +2,165 @@
  "id": "lem-trf-scheme-ample-canonical-proj-criterion",
  "kind": "statement",
  "title": "Scheme ampleness characterized by the canonical section-algebra Proj map",
- "statement": "Let $f:X\\to T$ be a morphism of schemes [def-pc-scheme] and $L$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. Say $L$ is $f$-ample if its restriction to $f^{-1}(V)$ is ample [def-weil-pbc-ample-invertible-module] for every affine open $V\\subseteq T$. If $L$ is $f$-ample, then $f$ is quasi-compact and separated [def-weil-finite-type-morphism] [def-weil-proper-morphism]. If $f$ is quasi-compact and separated, form the quasi-coherent graded algebra $\\mathcal A=\\bigoplus_{d\\geq0}f_*L^{\\otimes d}$ [def-weil-pbc-graded-sheaf-structures] [def-weil-pbc-quasi-coherent-algebra], the relative Proj $P=\\operatorname{Proj}_T(\\mathcal A)$ [def-nagata-relative-proj], and the evaluation homomorphism $\\psi:f^*\\mathcal A\\to\\bigoplus_{d\\geq0}L^{\\otimes d}$, where $f^*$ is [def-pc-module-pullback] and $f_*N(V)=N(f^{-1}(V))$. Let $U(\\psi)$ and $r_{L,\\psi}$ denote the generation locus and canonical map of [lem-trf-space-line-module-proj-map], interpreted on schemes. Then $L$ is $f$-ample if and only if $U(\\psi)=X$ and $r_{L,\\psi}:X\\to P$ is an open immersion [def-weil-open-immersion].",
+ "statement": "Let $f:X\\to T$ be a quasi-compact morphism of schemes [def-pc-scheme] [def-weil-finite-type-morphism], and $L$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. Say $L$ is $f$-ample if, for every affine open $V\\subseteq T$, $L|_{f^{-1}(V)}$ is ample [def-weil-pbc-ample-invertible-module]; quasi-compactness of $f$ is part of this notion. The following conditions are equivalent: (1) $L$ is $f$-ample; (2) $f$ is quasi-separated [def-weil-quasi-separated-morphism] and, for the canonical graded algebra $\\mathcal A=\\bigoplus_{n\\geq0}f_*L^{\\otimes n}$ [def-weil-pbc-graded-sheaf-structures] [def-weil-pbc-quasi-coherent-algebra], the relative Proj $P=\\operatorname{Proj}_T(\\mathcal A)$ [def-nagata-relative-proj], and the evaluation map $\\psi:f^*\\mathcal A\\to\\bigoplus_{n\\geq0}L^{\\otimes n}$, one has $U(\\psi)=X$ and $r_{L,\\psi}:X\\to P$ is an open immersion [def-weil-open-immersion]. Here $f^*$ is module pullback [def-pc-module-pullback], $f_*N(V)=N(f^{-1}(V))$, and $U(\\psi),r_{L,\\psi}$ are the generation locus and canonical map of [lem-trf-space-line-module-proj-map] on schemes. The algebra and map in (2) are formed only after its quasi-separatedness condition is imposed; the algebra is then quasi-coherent. Equivalently, this algebra is $f_*(\\bigoplus_{n\\geq0}L^{\\otimes n})$ with the grading by tensor degree. Moreover, either condition implies that $f$ is separated [def-weil-proper-morphism].",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
   "place": "Tags 01VH (definition-relatively-ample), 01VI (lemma-relatively-ample-separated), and 01VJ (lemma-characterize-relatively-ample), equivalence of (1) and (5)."
  },
  "stmt_deps": [
   "def-pc-scheme",
+  "def-weil-finite-type-morphism",
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module",
+  "def-weil-quasi-separated-morphism",
   "def-weil-pbc-graded-sheaf-structures",
   "def-weil-pbc-quasi-coherent-algebra",
   "def-nagata-relative-proj",
+  "def-weil-open-immersion",
   "def-pc-module-pullback",
   "lem-trf-space-line-module-proj-map",
-  "def-weil-open-immersion",
-  "def-weil-finite-type-morphism",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume (1). For each affine open $V\\subseteq T$ put $W=f^{-1}(V)$. The sheaf $L|_W$ is ample by hypothesis, so [lem-weil-pbc-ample-scheme-separated] says $W\\to\\operatorname{Spec}\\mathbf Z$ is separated. Apply the cancellation clause of [lem-weil-pbc-separated-cancellation] to $W\\to V\\to\\operatorname{Spec}\\mathbf Z$: the morphism $W\\to V$ is separated. No quasi-separatedness of $f$ was assumed.",
+   "uses": [
+    "lem-weil-pbc-ample-scheme-separated",
+    "lem-weil-pbc-separated-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VI (lemma-relatively-ample-separated), affine reduction; Tag 01VJ, (3) implies (5)"
+   }
+  },
+  {
+   "text": "These affine restrictions imply that $f$ is separated: the opens $W\\times_VW$ cover $X\\times_TX$, and on each of them the diagonal of $f$ is the closed-immersion diagonal of $W\\to V$. Closedness of its image, the identification with that image, and surjectivity of the structure-sheaf map glue on this open cover, exactly the closed-immersion definition [def-weil-closed-immersion]. Thus its diagonal is a closed immersion, the definition of separatedness [def-weil-proper-morphism]. Its inverse image of any affine open is affine, by the affine-quotient clause of [def-weil-closed-immersion], and is therefore quasi-compact. The diagonal is consequently quasi-compact, which is precisely quasi-separatedness [def-weil-quasi-separated-morphism].",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-proper-morphism",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VI, locality of separatedness; Tag 01VJ, separation before pushforward"
+   }
+  },
+  {
+   "text": "Construct the algebra whenever $f$ is quasi-separated, either as just proved under (1), or as explicitly required under (2). Each $L^{\\otimes n}$ is locally free of rank one by a trivialization of $L$ and hence quasi-coherent [def-sc-invertible-module]. The qcqs pushforward theorem [pqf-lem-pushforward-qcoh] applies: quasi-compactness is the standing hypothesis and quasi-separatedness has now been supplied. Thus every $f_*L^{\\otimes n}$ is quasi-coherent, and [lem-weil-pbc-quasi-coherent-module-coproduct-closure] makes their sum quasi-coherent. Tensor multiplication and the unit define its graded algebra structure [def-weil-pbc-graded-sheaf-structures]. For the alternate expression $f_*(\\bigoplus_nL^{\\otimes n})$, the same coproduct-closure node makes the sum upstairs quasi-coherent, so qcqs pushforward makes its image quasi-coherent. For affine $V\\subseteq T$, [lem-weil-pbc-qcqs-morphism-permanence](3) gives qcqs for the base change $W=f^{-1}(V)\\to V$, and [lem-weil-pbc-qcqs-over-affine] gives qcqs for the scheme $W$. Apply [lem-weil-pbc-qcqs-cohomology-direct-sum] with $p=0$ on $W$. The resulting equality of affine sections identifies these two algebras, with the same products. This justifies the exact canonical algebra used in the source.",
+   "uses": [
+    "def-sc-invertible-module",
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "def-weil-pbc-graded-sheaf-structures",
+    "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-qcqs-over-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ, construction of the graded canonical algebra; Schemes Tag 01LC"
+   }
+  },
+  {
+   "text": "The relative Proj exists and restricts over every affine $V\\subseteq T$ to $\\operatorname{Proj}(\\mathcal A(V))$, by [lemma-nagata-relative-proj-exists]. Evaluation sends a local section of $f_*L^{\\otimes n}$ to that same section of $L^{\\otimes n}$, and commutes with tensor products and the unit. Apply [lem-trf-space-line-module-proj-map] to obtain $U(\\psi)$ and its canonical $T$-morphism $r$. Its restriction to each affine base open is the usual scheme canonical morphism for the graded map into the section ring; here that map is the identity $\\mathcal A(V)=\\Gamma_*(f^{-1}(V),L|_{f^{-1}(V)})$. The affine restriction and compatibility clauses are used, not an unsupported flat base-change assertion for a non-qcqs morphism.",
+   "uses": [
+    "lemma-nagata-relative-proj-exists",
+    "lem-trf-space-line-module-proj-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ, (3) implies (5); Constructions Tag 01O9, clause (3)"
+   }
+  },
+  {
+   "text": "Continue under (1). On $W=f^{-1}(V)$ every point has a nonvanishing homogeneous section of $L|_W$ by the ample-sheaf definition [def-weil-pbc-ample-invertible-module]. Such a section generates its rank-one stalk, so this point is in the generation locus of evaluation. The restriction compatibility in [lem-trf-space-line-module-proj-map] therefore gives $U(\\psi)\\cap W=W$ for all affine $V$, and hence $U(\\psi)=X$.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-trf-space-line-module-proj-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ, generation locus in (3) implies (5)"
+   }
+  },
+  {
+   "text": "For each affine $V$, apply [lem-sc-ample-proj-local-chart] to $W=f^{-1}(V)$ and $L|_W$. Its hypotheses hold by (1), and it says the canonical map has preimage $W_s$ of $D_+(s)$ and is an isomorphism $W_s\\to D_+(s)$ whenever $W_s$ is affine. The ample-sheaf definition supplies such affine $W_s$ covering $W$. Thus the canonical map identifies $W$ with the union of these basic opens: the local inverses agree on overlaps because their composites with the same map are identities and these are its full basic-open preimages. By the scheme interpretation and affine restriction in [lem-trf-space-line-module-proj-map], this is exactly $r|_W$. These image opens, as $V$ varies, form an open subset of $P$, and the local inverses glue there. Hence $r:X\\to P$ is an open immersion. This proves (2), including its quasi-separatedness clause from step 2.",
+   "uses": [
+    "lem-sc-ample-proj-local-chart",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-trf-space-line-module-proj-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ, (3) implies (5), using Properties Tags 01PZ and 01Q1"
+   }
+  },
+  {
+   "text": "Conversely assume (2), and fix an affine open $V\\subseteq T$. Put $W=f^{-1}(V)$, $M=L|_W$, and $A=\\mathcal A(V)$. The restriction of $r$ identifies $W$ with an open subscheme $O\\subseteq\\operatorname{Proj}(A)$, by [lemma-nagata-relative-proj-exists] and the affine scheme compatibility of [lem-trf-space-line-module-proj-map]. This open is quasi-compact because $f$ is quasi-compact. The restricted map is the canonical map for $A\\to\\Gamma_*(W,M)$, and its positive-degree sections generate everywhere because $U(\\psi)=X$. Apply [lem-trf-proj-canonical-map-twist-comparison] to get $d>0$ and $r_V^*\\mathcal O_{\\operatorname{Proj}(A)}(dk)\\simeq M^{\\otimes dk}$ for every $k>0$.",
+   "uses": [
+    "lemma-nagata-relative-proj-exists",
+    "lem-trf-space-line-module-proj-map",
+    "lem-trf-proj-canonical-map-twist-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ, (4) implies (1), affine restriction and twist comparison"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-proj-qc-open-twist-ample] to the quasi-compact open $O$: choose $e>0$ so that $\\mathcal O_O(ek)$ is invertible ample for every $k>0$. Use $k=d$ here and $k=e$ in step 7. Then $M^{\\otimes de}$ identifies with the ample sheaf $\\mathcal O_O(de)$ under the isomorphism $W\\simeq O$. The isomorphism transports its sections, nonvanishing opens, and their affineness, so the ample-sheaf definition [def-weil-pbc-ample-invertible-module] gives ampleness of $M^{\\otimes de}$ on $W$. Any section of $(M^{\\otimes de})^{\\otimes n}$ is a section of $M^{\\otimes den}$ with the same nonvanishing open. Since $de>0$, the same affine section cover therefore proves that $M$ is ample. This uses the easy positive-power-to-original direction directly and never assumes $\\mathcal O(1)$ invertible.",
+   "uses": [
+    "lem-trf-proj-qc-open-twist-ample",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ, (4) implies (1); Properties Tags 01Q2 and 01PT"
+   }
+  },
+  {
+   "text": "The preceding argument proves $L|_{f^{-1}(V)}$ ample for every affine open $V\\subseteq T$. Along with the standing quasi-compactness of $f$, this is (1). Applying steps 1 and 2 again gives the additional separatedness conclusion under (2) as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VH (definition-relatively-ample) and Tag 01VJ, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism",
+  "lem-sc-ample-proj-local-chart",
+  "lem-trf-proj-canonical-map-twist-comparison",
+  "lem-trf-proj-qc-open-twist-ample",
+  "lem-trf-space-line-module-proj-map",
+  "lem-weil-pbc-ample-scheme-separated",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-separated-cancellation",
+  "lemma-nagata-relative-proj-exists",
+  "pqf-lem-pushforward-qcoh"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01VH, 01VI, 01VJ, equivalence (1) and (5); forward: derive separation, then qcqs pushforward and affine canonical charts; reverse: (4) implies (1)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +192,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-algebraic-space-ample-local",
@@ -68,6 +206,7 @@
    "node": "lem-trf-local-term-locality",
    "place": "Polarized descent used by the specialization chain below lem-trf-local-term-locality: Scheme ampleness characterized by the canonical section-algebra Proj map. Historical imported ancestry is retained; this helper supplies a step in the section-algebra/Proj proof of the ampleness descent input.",
    "via": [
+    "lem-trf-scheme-ample-canonical-proj-criterion",
     "lem-trf-algebraic-space-ample-local",
     "lem-trf-polarized-scheme-etale-descent",
     "lem-trf-polarized-fine-log-etale-descent",
@@ -83,5 +222,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-scheme-ample-canonical-proj-criterion",
+  "worker": "stage1",
+  "summary": "Repair of returned head e08963f4f6: restored exact quasi-compact-only hypothesis, with quasi-separatedness a clause of condition (2), derived separatedness before qcqs pushforward, cited the existing canonical affine-chart theorem, and corrected the general Proj twisting argument. Two statement-only supporting nodes; no new Lean or compilation.",
+  "blueprint": "Historical ancestor lem-trf-local-term-locality, polarized-descent input through lem-trf-algebraic-space-ample-local: realizes the scheme section-algebra/Proj criterion, with separation before the graded pushforward and affine canonical-map compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ample-scheme-separated",
+    "why": "Absolute ampleness implies separation on each affine inverse image; this is the cited input of source 01VI. No statement in the item unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-separated-cancellation",
+    "why": "Pass from absolute separatedness of W to separatedness over the affine base V. No statement in the item unit supplies this generic tool."
+   },
+   {
+    "node": "pqf-lem-pushforward-qcoh",
+    "why": "The qcqs module direct-image theorem supplies quasi-coherence after separation has been derived. No statement in the item unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "why": "Quasi-coherence of the direct sums defining the section algebras upstairs and downstairs. No statement in the item unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "why": "Its p=0 case on an affine inverse image identifies the two canonical section-algebra expressions. No statement in the item unit supplies this generic tool."
+   },
+   {
+    "node": "lemma-nagata-relative-proj-exists",
+    "why": "Existence and affine restriction of relative Proj are the generic construction used by the unit. No statement in the item unit supplies this generic tool."
+   },
+   {
+    "node": "lem-sc-ample-proj-local-chart",
+    "why": "The absolute canonical section-map chart isomorphisms used by source 01VJ. No statement in the item unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Restrict a qcqs morphism to an affine target and verify its source is a qcqs scheme before applying the p=0 direct-sum theorem; no node in the item unit supplies this general permanence fact."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Restrict a qcqs morphism to an affine target and verify its source is a qcqs scheme before applying the p=0 direct-sum theorem; no node in the item unit supplies this general permanence fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ample-scheme-separated",
+  "lem-weil-pbc-separated-cancellation",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "lemma-nagata-relative-proj-exists",
+  "lem-sc-ample-proj-local-chart",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NL-9abdfc1ea",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-9abdfc1ea (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, all nine proof steps, cited DAG statements, unit route, and Stacks sources 01VH/01VI/01VJ, 01NK/01N8, 01MW/01Q2. Hypotheses, Proj pullbacks, coefficient algebra, edge cases, searches, duplicates, route, and sub-2000-character steps all check. Wrote review.md; no fixes needed."
  }
 }

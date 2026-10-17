@@ -25,9 +25,167 @@
   "def-weil-residue-field",
   "def-kun-transcendence-degree"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-valuation-horizontal-curve-models] with empty marking. Thus $Y$ is a flat finitely presented $T$-curve of pure relative dimension one, and $q_\\eta$ is an isomorphism. Work on one component of $C$. Its finitely many components are disjoint and open: on an affine neighbourhood of an intersection two distinct minimal primes would survive in the local ring, contrary to its being a domain. A finite disjoint closed decomposition is open. The inverse image in $Y$ is integral: its reduced dense open is integral, so its closure is the whole space and the reduced space is irreducible. At the end take the finite disjoint union. By [lem-weil-pbc-finite-type-over-noetherian] and [lem-sc-locnoeth-components-locally-finite], each fibre of any of these curves has finitely many components: the fibre is quasi-compact and Noetherian, and a finite subcover of the locally finite component neighbourhoods meets all components.",
+   "uses": [
+    "lem-trf-valuation-horizontal-curve-models",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-locnoeth-components-locally-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Section 4.2, opening paragraph: reduced modifications are relative curves; componentwise reduction"
+   }
+  },
+  {
+   "text": "For any reduced modification $h:X\\to C$ and a fibre-generic $c\\in C_t$, every point $x\\in h^{-1}(c)$ is fibre-generic in $X_t$. Indeed [lem-sc-closed-irreducible-dimension-trdeg] identifies the residue transcendence degrees over $\\kappa(t)$ of $c$ and of a fibre-generic point with $1$; all points of a pure one-dimensional finite-type fibre have transcendence degree at most $1$, since their closures lie in a one-dimensional component. The embedding $\\kappa(c)\\hookrightarrow\\kappa(x)$ and [lem-kun-transcendence-degree-tower] force the latter degree to be $1$. The closure of $x$ therefore has dimension $1$ and must be a whole component. Hence $h^{-1}(c)$ is finite. By [lem-trf-proper-finite-fibre-finite-near], $h$ is finite over a neighbourhood of $c$; shrink to an affine open of the integral normal $C$. The restriction remains integral and birational, so [lem-trf-finite-birational-normal-iso] makes it an isomorphism.",
+   "uses": [
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-kun-transcendence-degree-tower",
+    "lem-trf-proper-finite-fibre-finite-near",
+    "lem-trf-finite-birational-normal-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.2.1: finite fibres over fibre-generic points and finite birational normal isomorphism"
+   }
+  },
+  {
+   "text": "Let $Z\\subseteq C$ be the reduced closed complement of the largest isomorphism open of $q$. Step 2 shows that $Z_t$ contains no generic point of any component of $C_t$. Since $C_t$ is a Noetherian pure curve, a proper closed subset of each of its finitely many one-dimensional components has dimension at most zero (a positive chain could otherwise be extended by that component to a chain of length at least two). Thus every nonempty $Z_t$ has dimension zero. The closed subscheme $Z$ is of finite type over $T$, because its affine rings are quotients of those of $C$. Now [lem-trf-locally-quasi-finite-relative-dimension-zero] makes $Z\\to T$ locally quasi-finite; finite type and the zero-dimensional finite-type fibres give quasi-finiteness in [pqf-def-quasifinite].",
+   "uses": [
+    "lem-trf-locally-quasi-finite-relative-dimension-zero",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.2.1(ii), modification locus avoids fibre-generic points"
+   }
+  },
+  {
+   "text": "Let $X$ now be any normal curve occurring as a modification, and let $x\\in X$ be fibre-generic. A valuation ring $O$ of its component function field $L$ dominating $\\mathcal O_{X,x}$ exists by [lemma-nagata-local-domain-valuation-dominates], and gives a centred valuation. Step 2, with $X$ as normal target, says that every integral proper birational model $X^{\\prime}\\to X$ is an isomorphism near $x$. Its centre $x^{\\prime}$ therefore has local ring exactly $\\mathcal O_{X,x}\\subseteq L$. Apply [lem-trf-birational-riemann-zariski-neighbourhoods](iii): every $a\\in O$ belongs to an affine neighbourhood ring of such a centre, hence belongs to $\\mathcal O_{X^{\\prime},x^{\\prime}}=\\mathcal O_{X,x}$. The reverse inclusion is domination. Thus $O=\\mathcal O_{X,x}$, and this proves both existence and uniqueness of a centred valuation above every fibre-generic point of a normal modification.",
+   "uses": [
+    "lemma-nagata-local-domain-valuation-dominates",
+    "lem-trf-birational-riemann-zariski-neighbourhoods"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.2.1 and the paragraph following it: fibre-generic local rings are valuation rings"
+   }
+  },
+  {
+   "text": "For this unique valuation ring $O=\\mathcal O_{X,x}$, put $t=f(x)$ and $\\mathfrak p\\subset V$ its corresponding prime. The local structural map $V_{\\mathfrak p}\\to\\mathcal O_{X,x}$ has maximal-ideal contraction $\\mathfrak pV_{\\mathfrak p}$. In fact $O\\cap K=V_{\\mathfrak p}$: if $a\\in K\\setminus V_{\\mathfrak p}$, the valuation property of $V_{\\mathfrak p}$ gives $a^{-1}\\in\\mathfrak pV_{\\mathfrak p}$, so $a^{-1}$ is a nonunit of $O$ and $a\\notin O$. Consequently $\\kappa(O\\cap K)=\\kappa(t)$ and $\\kappa(O)=\\kappa(x)$. By [lem-sc-closed-irreducible-dimension-trdeg] the latter has transcendence degree one over $\\kappa(t)$. This proves the residue assertion for every normal modification, including $C$.",
+   "uses": [
+    "lem-sc-closed-irreducible-dimension-trdeg"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Section 4.2, definition of the residual-transcendence-degree-one subset"
+   }
+  },
+  {
+   "text": "Normalize the integral $Y$ by [lem-trf-valuation-curve-finite-normalization], obtaining a finite surjective $n:M\\to Y$ with $M$ a normal $T$-curve and with the same generic fibre. The composite $M\\to C$ is proper by [lem-weil-pbc-finite-proper] and [lem-weil-pbc-proper-fp-permanence], and is a modification. The proper lifts of each centred valuation through $Y$ and $M$ agree by uniqueness in [lem-trf-birational-riemann-zariski-neighbourhoods]. A point $m$ and its image $y$ have a finite residue-field extension: on a fibre of a finite map the coordinate algebra is finite-dimensional over $\\kappa(y)$, and its residue fields are finite-dimensional quotients. Thus [lem-kun-transcendence-degree-tower] and [lem-sc-closed-irreducible-dimension-trdeg] show that $m$ is fibre-generic exactly when $y$ is. Hence $\\Gamma(M)=\\Gamma(Y)$ and $\\Gamma_0(M)=\\Gamma_0(Y)$. Steps 4--5 for $M$ give the residual transcendence degree assertion for $Y$. For every fibre-generic $y\\in Y$, choose a point of its nonempty finite inverse image in $M$ and use step 4; this also proves the asserted surjectivity of centres for reduced $Y$.",
+   "uses": [
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-trf-birational-riemann-zariski-neighbourhoods",
+    "lem-kun-transcendence-degree-tower",
+    "lem-sc-closed-irreducible-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Section 4.1 normalization; reduced-source extension of Lemma 4.2.2"
+   }
+  },
+  {
+   "text": "There are finitely many $t\\in T$, and each $M_t$ has finitely many components by step 1. Step 4 bijects their generic points with $\\Gamma(M)$. It follows that $\\Gamma(M)$, and therefore its subset $\\Gamma_0(M)=\\Gamma_0(Y)$, is finite. By [lem-trf-flat-fibre-generic-generalization] the fibre-generic locus of $M$ is stable under generalization. Its inverse image under the continuous centre map is $\\Gamma(M)=\\Gamma(Y)$, so this set is also stable under generalization. Step 2 gives $\\Gamma(C)\\subseteq\\Gamma(Y)$, since every valuation with fibre-generic centre on $C$ lifts through an isomorphism neighbourhood. Therefore $\\operatorname{gen}(\\Gamma_0(Y))\\cup\\Gamma(C)\\subseteq\\Gamma(Y)$.",
+   "uses": [
+    "lem-trf-flat-fibre-generic-generalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.2.2, finiteness and the easy inclusion"
+   }
+  },
+  {
+   "text": "For the converse let $\\nu\\in\\Gamma(Y)\\setminus\\Gamma(C)$, with centre $x\\in M_t$, and put $c=q n(x)$. Then $c$ is closed in $C_t$: otherwise it would be a generic point of the pure curve, by [lem-kun-closed-point-field] and [lem-sc-closed-irreducible-dimension-trdeg]. Let $H=\\overline{\\{x\\}}\\subseteq M$ and $B=\\overline{\\{c\\}}\\subseteq C$, with reduced closed-subscheme structures. The closed map $qn$ gives $(qn)(H)=B$: continuity gives containment in $B$, and closedness gives the reverse containment. By [lem-trf-flat-fibre-component-closure-dimension], every nonempty fibre of $H$ is pure of dimension one.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-trf-flat-fibre-component-closure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.2.2, converse inclusion: closures of a contracted fibre component"
+   }
+  },
+  {
+   "text": "Every nonempty fibre of $B$ has dimension zero. To check this at $s$ in its image, use an affine open $W\\subseteq C$ meeting $B_s$. It contains $c$, since $c$ is the generic point of $B$. If $\\mathfrak p\\subset V$ is the prime of $t$, the domain $D=\\Gamma(B\\cap W,\\mathcal O_B)$ is a finite-type algebra containing $V/\\mathfrak p$, and its generic fibre over this valuation domain is the single point $c$ with field $\\kappa(c)$, finite over $\\kappa(t)$ by [lem-kun-closed-point-field]. Localize $V/\\mathfrak p$ at the prime of $s$. Apply [lem-trf-valuation-domain-fibre-dimensions] to the resulting finite-type domain: its generic fibre has dimension zero, so its nonempty closed fibre does too. These affine opens cover $B_s$. This applies the existing dimension theorem to a quotient and a localization of the valuation ring; no Noetherian assumption on $V$ is used.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "lem-trf-valuation-domain-fibre-dimensions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.2.2, the image has zero-dimensional base fibres; Stacks Tag 00QK supplies the point-closure calculation"
+   }
+  },
+  {
+   "text": "Choose the most specialized point $s$ in the nonempty image of $H\\to T$; it exists because $T$ is a finite chain. Its inverse image $H_s$ is closed in $H$: the inverse image of $\\overline{\\{s\\}}$ equals $H_s$ because no stricter specialization occurs in that image. Pick a component $D$ of $H_s$ with generic point $y$. Step 8 gives $\\dim D=1$. Since $D$ is a closed irreducible subset of the pure curve $M_s$, it is also a component of $M_s$. Step 9 says that the image of this irreducible $D$ in $B_s$ is a single point, as a zero-dimensional Noetherian space has only singleton irreducible subsets. Moreover $D$ is closed in $M$, and $qn$ is closed, so this image point is closed in all of $C$. Step 4 now gives a valuation $\\mu=\\mathcal O_{M,y}$ in $\\Gamma_0(Y)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.2.2, choose a last nonempty fibre of the component closure"
+   }
+  },
+  {
+   "text": "The point $x$ generalizes $y$ in $M$, and the two corresponding valuation rings satisfy $\\mathcal O_{M,y}\\subseteq\\mathcal O_{M,x}$; the latter is the localization of the former at the prime corresponding to $x$. The map $\\operatorname{Spec}\\mathcal O_{M,y}\\to M$ therefore restricts on this localization to the centred map for $\\nu$. Lift it to any proper birational model over $C$ using [lem-trf-birational-riemann-zariski-neighbourhoods]. Its restriction is the unique lift of $\\nu$, while its closed point is the centre of $\\mu$. Continuity makes the former centre a generalization of the latter on every model. Since inverse images of opens under these centre maps generate the topology, every neighbourhood of $\\mu$ contains $\\nu$. Thus $\\nu\\in\\operatorname{gen}(\\Gamma_0(Y))$. Together with step 7 this proves the stated equality. The finite disjoint component reduction of step 1 preserves every set and specialization relation used above, completing all clauses.",
+   "uses": [
+    "lem-trf-birational-riemann-zariski-neighbourhoods"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 4.2.2, passage from specialization of fibre-generic centres to specialization of valuations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-valuation-horizontal-curve-models",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-locnoeth-components-locally-finite",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-kun-transcendence-degree-tower",
+  "lem-trf-proper-finite-fibre-finite-near",
+  "lem-trf-finite-birational-normal-iso",
+  "lem-trf-locally-quasi-finite-relative-dimension-zero",
+  "pqf-def-quasifinite",
+  "lemma-nagata-local-domain-valuation-dominates",
+  "lem-trf-birational-riemann-zariski-neighbourhoods",
+  "lem-trf-valuation-curve-finite-normalization",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-trf-flat-fibre-generic-generalization",
+  "lem-kun-closed-point-field",
+  "lem-trf-flat-fibre-component-closure-dimension",
+  "lem-trf-valuation-domain-fibre-dimensions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Lemmas 4.2.1--4.2.2, printed pp. 26--27, read online; expanded proof using Stacks 02UP, 0AB1, 00QK and 0GSJ. Local archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -98,10 +256,45 @@
    "results": "8 hits; top: genericPoints, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.ValuativeCommSq.K, AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, Valued.valuation_isClosedMap, ValuativeTopology.isClosed_closedBall. Read the returned signatures: none gives the finite valuation-centre set, its generalization formula, or the quasi-finite modification locus.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Centred valuations of a modification of a relative curve over a valuation ring with fibre generic centre form a finite set generated by generalizations over closed points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {O : Type u_3} [inst_4 : CommRing O] [inst_5 : IsDomain O] [ValuationRing O] {K : Type u_4}\\n  [inst_7 : Field K] [inst_8 : Algebra O K] [IsFractionRing O K\", \"doc\": \"Let $ O $ be a commutative valuation ring with fraction field $ K $, and let $ \\\\mathcal{A} $ be a graded $ O $-algebra. Given a finite set $ \\\\{x_i\\\\}_{i \\\\in I} $ of homogeneous elements in $ \\\\mathcal{A\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.ValuativeCriterion.Existence f → SpecializingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes satisfies the valuative criterion for existence, then $ f $ is a specializing map, meaning that specialization relations in the codomain can be lifted to the do\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"AlgebraicGeometry.ValuativeCriterion.Existence = (AlgebraicGeometry.topologically @SpecializingMap).universally\", \"doc\": \"The valuative criterion for existence of a scheme morphism is equivalent to the universal property that its underlying continuous map is a specializing map, meaning this property is preserved under al\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.K\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → {f : X ⟶ Y} → AlgebraicGeometry.ValuativeCommSq f → Type u\", \"doc\": \"The fraction field component in the valuative criterion commutative square for a morphism of schemes, representing the field of fractions of a valuation ring in the diagram.\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.existence\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.ValuativeCriterion f → AlgebraicGeometry.ValuativeCriterion.Existence f\", \"doc\": \"If a morphism $ f : X \\\\to Y $ of schemes satisfies the valuative criterion, then it satisfies the valuative criterion for existence, meaning that for every valuative commutative square involving $ f $\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.R\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → {f : X ⟶ Y} → AlgebraicGeometry.ValuativeCommSq f → Type u\", \"doc\": \"For schemes $X$ and $Y$ with a morphism $f: X \\\\to Y$, this function associates to each valuative commutative square involving $f$ a type representing the conditions or data required by the valuative c\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (self : AlgebraicGeometry.ValuativeCommSq f), ValuationRing self.R\", \"doc\": \"For any valuative commutative square involving a morphism of schemes $ f: X \\\\to Y $, the associated ring $ R $ is a valuation ring, meaning it is an integral domain such that for every non-zero elemen\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\nRead these signatures. Valuative criterion and Weierstrass-curve results do not give the Gamma-set formula or the modification-locus assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi finite modification locus and finite exceptional fibre generic valuations of a normal curve over a finite height valuation ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.valuation_Δ_aux\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → { v // v ≤ 1 }\", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and an integral Weierstrass curve $ W $ over $ K $, the valuation at the unique maximal ideal of $ R $ of the discriminant $ \\\\Delta(W) $ \"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [hW : WeierstrassCurve.IsIntegral R W],\\n  ↑(WeierstrassCurve.valuation_Δ_aux R W) =\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and an integral Weierstrass curve $ W $ over $ K $, the valuation of the discriminant $ \\\\Delta(W) $ computed via the auxiliary valuation \"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.minimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → WeierstrassCurve K\", \"doc\": \"Given a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, this function returns the minimal Weierstrass curve equivalent to $ W $ under a variable change. The r\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and a minimal Weierstrass curve $ W $ over $ K $, the curve $ W $ has good reduction if and only if the valuation of its discriminant $ \\\\\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {inst_1 : IsDomain R} {inst_2 : IsDiscreteValuationRing R} {K : Type u_2}\\n  {inst_3 : Field K} {inst_4 : Algebra R K} {inst_5 : IsFractionRing R K} {W : WeierstrassCurve K}\\n  {inst_6 : WeierstrassCurve.IsMinimal R W} [self : WeierstrassCurve.IsGoodReduction R W],\", \"doc\": \"For a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, if $ W $ has good reduction (i.e., is minimal and its coefficients lie in $ R $), then the valuation of \"}\nRead these signatures. Valuative criterion and Weierstrass-curve results do not give the Gamma-set formula or the modification-locus assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ValuationRing\", \"LocallyQuasiFinite\"",
+   "results": "[loogle] OK 0 hit(s)\nRead these signatures. Valuative criterion and Weierstrass-curve results do not give the Gamma-set formula or the modification-locus assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Gamma_0|modification.*locus|generic.*fibre.*valuation AlgebraicGeometry",
+   "results": "[grep] OK 0 hit(s)\nRead these signatures. Valuative criterion and Weierstrass-curve results do not give the Gamma-set formula or the modification-locus assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Temkin finite fibre generic centred valuations of modifications of relative curves over valuation rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Valued.integer.totallyBounded_iff_finite_residueField\", \"module\": \"Mathlib.Topology.Algebra.Valued.LocallyCompact\", \"type\": \"[(Valued.v : Valuation K Γ₀).RankOne] [IsDiscreteValuationRing 𝒪[K]] :\\n  TotallyBounded (Set.univ (α := 𝒪[K])) ↔ Finite 𝓀[K]\", \"doc\": \"For a valued field with a rank one valuation and a discrete valuation ring of integers, the universal set of the ring of integers is totally bounded if and only if the residue field is finite.\"}\n  {\"name\": \"ValuationRing.recOn\", \"module\": \"Mathlib.RingTheory.Valuation.ValuationRing\", \"type\": \"{A : Type u} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsDomain A] →\\n      {motive : ValuationRing A → Sort u_1} →\\n        (t : ValuationRing A) → ([toPreValuationRing : PreValuationRing A] → motive ⋯) → motive t\", \"doc\": \"Given a commutative ring $ A $ that is an integral domain, and a function that assigns to each pre-valuation ring structure on $ A $ an element of a type family over valuation rings, this recursor pro\"}\n  {\"name\": \"ValuationRing.casesOn\", \"module\": \"Mathlib.RingTheory.Valuation.ValuationRing\", \"type\": \"{A : Type u} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsDomain A] →\\n      {motive : ValuationRing A → Sort u_1} →\\n        (t : ValuationRing A) → ([toPreValuationRing : PreValuationRing A] → motive ⋯) → motive t\", \"doc\": \"Given a commutative ring $ A $ that is an integral domain, and a function that assigns to each pre-valuation ring structure on $ A $ an element of a type family over valuation rings, this recursor pro\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (self : AlgebraicGeometry.ValuativeCommSq f), ValuationRing self.R\", \"doc\": \"For any valuative commutative square involving a morphism of schemes $ f: X \\\\to Y $, the associated ring $ R $ is a valuation ring, meaning it is an integral domain such that for every non-zero elemen\"}\n  {\"name\": \"ValuationRing.rec\", \"module\": \"Mathlib.RingTheory.Valuation.ValuationRing\", \"type\": \"{A : Type u} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsDomain A] →\\n      {motive : ValuationRing A → Sort u_1} →\\n        ([toPreValuationRing : PreValuationRing A] → motive ⋯) → (t : ValuationRing A) → motive t\", \"doc\": \"Given a commutative ring $ A $ that is an integral domain, and a function that assigns to each pre-valuation ring structure on $ A $ an element of a type family over valuation rings, this recursor pro\"}\n  {\"name\": \"IsValuativeTopology.continuous_valuation\", \"module\": \"Mathlib.Topology.Algebra.Valued.ValuativeRel\", \"type\": \": Continuous v\", \"doc\": \"The valuation $\\\\nu: R \\\\to \\\\Gamma_0$ is continuous with respect to the valuative topology on $R$ and the topology on $\\\\Gamma_0$ induced by its linear order structure.\"}\n  {\"name\": \"ValuativeRel.SRel\", \"module\": \"Mathlib.RingTheory.Valuation.ValuativeRel.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → [ValuativeRel R] → R → R → Prop\", \"doc\": \"The inductively defined relation on a commutative ring $ R $, constructed to encode valuative criteria or related algebraic properties.\"}\n  {\"name\": \"ValuationSubring.valuation\", \"module\": \"Mathlib.RingTheory.Valuation.ValuationSubring\", \"type\": \": Valuation K A.ValueGroup\", \"doc\": \"The canonical valuation on a field $K$ associated with a valuation subring $A$. It is the quotient map from $K$ to the value group of $A$, which is the quotient of $K$ by the group of units of $A$ (wi\"}\nRead these signatures. Valuative criterion and Weierstrass-curve results do not give the Gamma-set formula or the modification-locus assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-fibre-valuation-domination",
@@ -130,5 +323,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-modification-fibre-centre-finite",
+  "worker": "stage1",
+  "summary": "Retained the complete statement. Expanded Temkin 4.2.1--4.2.2 in eleven steps, including the normal local valuation argument, finite normalization for reduced sources, and the closed-centre specialization argument. Three genuinely smaller statement-only lemmas; no Lean attachment or Mathlib leaf. No change to chapter, unit, or target route.",
+  "blueprint": "Temkin §4.2, Lemmas 4.2.1--4.2.2: the finite Gamma_0 set of residual-transcendence-degree-one fibre-generic centres over closed points; realizes the auxiliary finite-Gamma input in the Temkin branch below the nearby-cycle argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme, field-dimension or valuation-domination tool used to expand Temkin 4.2.1--4.2.2; it does not replace any step of the curve-zero unit route."
+   },
+   {
+    "node": "lem-sc-locnoeth-components-locally-finite",
+    "why": "Generic scheme, field-dimension or valuation-domination tool used to expand Temkin 4.2.1--4.2.2; it does not replace any step of the curve-zero unit route."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Generic scheme, field-dimension or valuation-domination tool used to expand Temkin 4.2.1--4.2.2; it does not replace any step of the curve-zero unit route."
+   },
+   {
+    "node": "lem-kun-transcendence-degree-tower",
+    "why": "Generic scheme, field-dimension or valuation-domination tool used to expand Temkin 4.2.1--4.2.2; it does not replace any step of the curve-zero unit route."
+   },
+   {
+    "node": "lemma-nagata-local-domain-valuation-dominates",
+    "why": "Generic scheme, field-dimension or valuation-domination tool used to expand Temkin 4.2.1--4.2.2; it does not replace any step of the curve-zero unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic scheme, field-dimension or valuation-domination tool used to expand Temkin 4.2.1--4.2.2; it does not replace any step of the curve-zero unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic scheme, field-dimension or valuation-domination tool used to expand Temkin 4.2.1--4.2.2; it does not replace any step of the curve-zero unit route."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic scheme, field-dimension or valuation-domination tool used to expand Temkin 4.2.1--4.2.2; it does not replace any step of the curve-zero unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-locnoeth-components-locally-finite",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-kun-transcendence-degree-tower",
+  "lemma-nagata-local-domain-valuation-dominates",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-kun-closed-point-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q66-7509f5859",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q66-7509f5859 (reviewer sub-agent of L); spot-checked: Reviewed the item, all three new nodes, every cited statement, Temkin §§3.5, 4.1–4.2, and Stacks Tags 02UP, 00QK, and 0AB1. Checked all 11 proof steps, hypotheses, edge cases, duplicates, route constraints, and search metadata. No mathematical or structural repair is required; review written to review.md."
  }
 }
