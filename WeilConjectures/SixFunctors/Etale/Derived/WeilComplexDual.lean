@@ -52,6 +52,7 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X : Scheme.{u}}
 
+omit [Finite Λ] in
 /-- The monoidal unit `Λ_X` of `D(X_ét, Λ)` lies in `Dctf(X, Λ)`: it is the constant sheaf
 placed in degree `0`, with Tor amplitude in `[0, 0]`. -/
 theorem constructibleFiniteTor_unit :
@@ -88,7 +89,7 @@ noncomputable def unit : WeilComplex (ModuleCat.{u + 1} Λ) g where
   obj := ⟨𝟙_ _, constructibleFiniteTor_unit Λ⟩
   frobenius := ObjectProperty.isoMk _ (leftDerivedUpperStarUnitIso _ g.hom)
 
-omit [HasInvertibleExponent Λ X] in
+omit [Finite Λ] [HasInvertibleExponent Λ X] in
 lemma unit_frobenius_hom_hom :
     (unit Λ g).frobenius.hom.hom = (leftDerivedUpperStarUnitIso _ g.hom).hom :=
   rfl

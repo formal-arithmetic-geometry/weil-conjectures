@@ -90,8 +90,8 @@ lemma isIso_ihomComparison_comp_pre {Y K : C} [ExactPairing Y K] (φ : F.obj K �
         MonoidalClosed.curry (φ.inv ▷ _ ≫ μ F K _ ≫ F.map ((ihom.ev K).app (𝟙_ C)) ≫ u) := by
     rw [eq_comm, curry_eq_iff, uncurry_eq, whiskerLeft_ihomComparison_comp_pre_comp_ev]
   have := isIso_ihomUnitTensorToIhom Y K K
-  letI := exactPairingOfIsIso K
-  letI := ExactPairing.map F ((ihom K).obj (𝟙_ C)) K
+  let := exactPairingOfIsIso K
+  let := ExactPairing.map F ((ihom K).obj (𝟙_ C)) K
   have hb : IsPerfectPairing (μ F K _ ≫ F.map ((ihom.ev K).app (𝟙_ C)) ≫ u) := by
     refine ⟨?_⟩
     have h : μ F K _ ≫ F.map ((ihom.ev K).app (𝟙_ C)) ≫ u =
