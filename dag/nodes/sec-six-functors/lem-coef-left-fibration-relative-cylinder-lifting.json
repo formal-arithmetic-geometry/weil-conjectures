@@ -11,9 +11,58 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $e:\\{0\\}=\\Lambda_0^1\\hookrightarrow\\Delta^1$ and let $j:V\\hookrightarrow K\\times\\Delta^1$ be the displayed inclusion. Use the opposite operation in clause (4) of [lem-coef-infinity-relative-cone-equivalence]: $X^{\\mathrm{op}}_n=X_n$, with an operator $\\alpha:[m]\\to[n]$ acting as $\\alpha^r(t)=n-\\alpha(m-t)$. Since $(\\alpha^r)^r=\\alpha$ and reversal respects composition, this is an involutive functor. Its degreewise sets are unchanged; hence it preserves degreewise products and pushout equivalence relations, and preserves degreewise injectivity. The standard-simplex isomorphism $r_n:(\\Delta^n)^{\\mathrm{op}}\\to\\Delta^n$ sends a degree-$m$ simplex $\\beta$ to $\\beta^r(t)=n-\\beta(m-t)$. It carries $(\\Lambda_i^n)^{\\mathrm{op}}$ onto $\\Lambda_{n-i}^n$, since omitted vertices are reversed. In particular it carries $\\{0\\}^{\\mathrm{op}}$ to $\\{1\\}=\\Lambda_1^1$. After $r_1$ and interchanging the two product factors, $j^{\\mathrm{op}}$ becomes exactly\n$$(\\{1\\}\\times K^{\\mathrm{op}})\\amalg_{\\{1\\}\\times A^{\\mathrm{op}}}(\\Delta^1\\times A^{\\mathrm{op}})\\longrightarrow\\Delta^1\\times K^{\\mathrm{op}}.$$\nThe first factor inclusion is a generating right horn and the other is a monomorphism. Thus [lem-coef-infinity-right-anodyne-product] makes this map right anodyne. Its class contains isomorphisms and is closed under composition (a finite transfinite composite), so the isomorphic arrow $j^{\\mathrm{op}}$ is right anodyne as well.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-right-anodyne-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.1.2.7 and the left/right horn duality; the pushout-product identification is written degreewise from the cylinder inclusion."
+   }
+  },
+  {
+   "text": "For $n\\geq1$ and $0<k\\leq n$, reversing a lifting square for $p^{\\mathrm{op}}$ against $\\Lambda_k^n\\hookrightarrow\\Delta^n$ gives a square for $p$ against $\\Lambda_{n-k}^n\\hookrightarrow\\Delta^n$. Here $0\\leq n-k<n$, so [def-coef-infinity-fibrations] and the hypothesis that $p$ is a left fibration give a filler. Reverse this filler back. Hence $p^{\\mathrm{op}}$ is a right fibration on arbitrary simplicial sets. Apply [lem-coef-infinity-right-fibration-exponentiation] to $p^{\\mathrm{op}}$ and $j^{\\mathrm{op}}$. It makes\n$$\\rho:\\operatorname{Fun}((K\\times\\Delta^1)^{\\mathrm{op}},E^{\\mathrm{op}})\\longrightarrow\\operatorname{Fun}((K\\times\\Delta^1)^{\\mathrm{op}},B^{\\mathrm{op}})\\times_{\\operatorname{Fun}(V^{\\mathrm{op}},B^{\\mathrm{op}})}\\operatorname{Fun}(V^{\\mathrm{op}},E^{\\mathrm{op}})$$\na trivial Kan fibration. The equality $pu=h|_V$ says exactly that $(h^{\\mathrm{op}},u^{\\mathrm{op}})$ is a vertex of its target. Vertex surjectivity in [def-weil-pbc-trivial-kan-fibration] gives a vertex $H:(K\\times\\Delta^1)^{\\mathrm{op}}\\to E^{\\mathrm{op}}$ with $p^{\\mathrm{op}}H=h^{\\mathrm{op}}$ and $Hj^{\\mathrm{op}}=u^{\\mathrm{op}}$.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-right-fibration-exponentiation",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.1.2.7, applied to the left horn {0}=Lambda_0^1; equivalently Corollary 2.1.2.10, homotopy extension lifting property."
+   }
+  },
+  {
+   "text": "Take $\\widetilde h=H^{\\mathrm{op}}$ using the strict double-opposite identification of step 1. Reversing the two equalities of step 2 gives $p\\widetilde h=h$ and $\\widetilde h j=u$ exactly. The domain of $j$ is the stated union $V$: in degree $m$ the two subsets $K_m\\times\\{0\\}$ and $A_m\\times(\\Delta^1)_m$ intersect in $A_m\\times\\{0\\}$, so their pushout is their union; these identifications commute with every simplicial operator. Thus the extension fixes all prescribed data. If $K=\\varnothing$ the lift is the unique empty map; if $A=K$, $j$ is the identity and the lift is $u$. If $A=\\varnothing$, step 1 still applies to the monomorphism $\\varnothing\\to K$. Empty $E$ causes no problem: whenever compatible data $(u,h)$ exist they give the target vertex used in step 2. No Kan or quasicategory hypothesis or uniqueness assertion enters.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 2.1.2.10, explicit relative boundary identification and edge cases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-right-anodyne-product",
+  "lem-coef-infinity-right-fibration-exponentiation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Corollary 2.1.2.7 and Corollary 2.1.2.10, expanded by opposite duality and the existing right-anodyne pushout-product/exponential lifting nodes; online source not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -133,10 +182,59 @@
    "results": "{\"t\": \"2026-10-17T04:12:18Z\", \"tool\": \"grep\", \"query\": \"LeftAnodyne|LeftFibration|[Ss]traightening|relative[Nn]erve|RelativeNerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second reader. Read CategoryWithFibrations.lean:40-99 and AnodyneExtensions/Basic.lean:16-46,76-100. These use all-horn Kan fibrations; their lifting statements do not apply to an arbitrary left fibration. Generic model-category lifting has the same missing hypothesis. No one-line specialization supplies the relative left-cylinder lift. The recorded search returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left fibration has the relative homotopy lifting property for the initial endpoint inclusion of the simplicial interval crossed with any monomorphism",
+   "results": "{\"t\": \"2026-10-17T04:43:56Z\", \"tool\": \"leanfinder\", \"query\": \"A left fibration has the relative homotopy lifting property for the initial endpoint inclusion of the simplicial interval crossed with any monomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\"], \"digest\": \"4f045a63e6eec17c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryWithFibrations.lean:35-104 (all-horn Kan fibrations), AnodyneExtensions/PushoutProduct.lean:95-111 (Kan-anodyne), Inner/PushoutProduct.lean:93-109 (inner-anodyne), and ModelCategory/LeftHomotopy.lean:180-186 (requires a model fibration). These give neither one-sided left-fibration cylinder lifting nor a one-line specialization of it. Topological covering-map results concern different objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "LeftFibration, rightAnodyne, pushoutProduct",
+   "results": "{\"t\": \"2026-10-17T04:43:57Z\", \"tool\": \"loogle\", \"query\": \"LeftFibration, rightAnodyne, pushoutProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'LeftFibration'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: Loogle rejected the unknown identifier; this query is not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "left.?fibration|right.?anodyne|pushout.?product",
+   "results": "{\"t\": \"2026-10-17T04:43:57Z\", \"tool\": \"grep\", \"query\": \"left.?fibration|right.?anodyne|pushout.?product\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"928991f4a6e44986\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryWithFibrations.lean:35-104 (all-horn Kan fibrations), AnodyneExtensions/PushoutProduct.lean:95-111 (Kan-anodyne), Inner/PushoutProduct.lean:93-109 (inner-anodyne), and ModelCategory/LeftHomotopy.lean:180-186 (requires a model fibration). These give neither one-sided left-fibration cylinder lifting nor a one-line specialization of it. Topological covering-map results concern different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative cylinder homotopy extension lifting for a simplicial left fibration,",
+   "results": "{\"t\": \"2026-10-17T04:43:57Z\", \"tool\": \"leansearch\", \"query\": \"Relative cylinder homotopy extension lifting for a simplicial left fibration,\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsCoveringMap.liftHomotopyRel\", \"HomotopicalAlgebra.Cylinder.LeftHomotopy.covering_homotopy\", \"IsCoveringMap.liftHomotopy\", \"HomotopicalAlgebra.Precylinder.LeftHomotopy.ctorIdx\", \"HomotopicalAlgebra.RightHomotopyRel.leftHomotopy\", \"HomotopicalAlgebra.Precylinder.LeftHomotopy.refl\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.Cylinder.LeftHomotopy.leftHomotopyRel\"], \"digest\": \"c05b463e30cfa8ea\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryWithFibrations.lean:35-104 (all-horn Kan fibrations), AnodyneExtensions/PushoutProduct.lean:95-111 (Kan-anodyne), Inner/PushoutProduct.lean:93-109 (inner-anodyne), and ModelCategory/LeftHomotopy.lean:180-186 (requires a model fibration). These give neither one-sided left-fibration cylinder lifting nor a one-line specialization of it. Topological covering-map results concern different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pushout product of a left horn inclusion with a simplicial monomorphism has the left lifting property against every left fibration",
+   "results": "{\"t\": \"2026-10-17T04:44:46Z\", \"tool\": \"leanfinder\", \"query\": \"The pushout product of a left horn inclusion with a simplicial monomorphism has the left lifting property against every left fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"bace0e619115fd28\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryWithFibrations.lean:35-104 (all-horn Kan fibrations), AnodyneExtensions/PushoutProduct.lean:95-111 (Kan-anodyne), Inner/PushoutProduct.lean:93-109 (inner-anodyne), and ModelCategory/LeftHomotopy.lean:180-186 (requires a model fibration). These give neither one-sided left-fibration cylinder lifting nor a one-line specialization of it. Topological covering-map results concern different objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "rightAnodyneExtensions, rightFibration",
+   "results": "{\"t\": \"2026-10-17T04:44:46Z\", \"tool\": \"loogle\", \"query\": \"rightAnodyneExtensions, rightFibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'rightAnodyneExtensions'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: Loogle rejected the unknown identifier; this query is not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAnodyneExtensions|rightFibration|leftFibration",
+   "results": "{\"t\": \"2026-10-17T04:44:46Z\", \"tool\": \"grep\", \"query\": \"rightAnodyneExtensions|rightFibration|leftFibration\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryWithFibrations.lean:35-104 (all-horn Kan fibrations), AnodyneExtensions/PushoutProduct.lean:95-111 (Kan-anodyne), Inner/PushoutProduct.lean:93-109 (inner-anodyne), and ModelCategory/LeftHomotopy.lean:180-186 (requires a model fibration). These give neither one-sided left-fibration cylinder lifting nor a one-line specialization of it. Topological covering-map results concern different objects."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-valued-straightening",
@@ -148,7 +246,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction: foundational left-fibration indexing model. Relative cylinder lifting supplies the terminal-fiber contraction used in the ordinary-base straightening comparison.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the relative cylinder lift used to contract the left-fibration model over an ordinary base; this is the left-fibration dual of the right-anodyne pushout-product and exponential lifting input.",
    "via": [
     "lem-coef-space-valued-straightening",
     "lem-coef-kan-relative-nerve-left-fibration",
@@ -162,5 +260,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-left-fibration-relative-cylinder-lifting",
+  "worker": "stage1",
+  "summary": "Kept the exact arbitrary-simplicial-set lifting statement. The proof identifies the relative cylinder inclusion with the opposite of a right-anodyne Cartesian pushout product, applies the existing right-fibration exponential lifting theorem to the opposite left fibration, and reverses the resulting filler. It checks the prescribed boundary, base equality, empty cases, and absence of Kan or quasicategory hypotheses. No new nodes or Lean attachments were found.",
+  "blueprint": "Realizes proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the relative cylinder lift used in the ordinary-base left-fibration contraction, via the left/right horn dual of the finite-shape mapping-complex argument."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-b85111ccb",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-b85111ccb (reviewer sub-agent of L); spot-checked: The delivery is one commit with the item and its report, and no new nodes. Statement: this is the HTT 2.1.2.7/2.1.2.10 lifting property: the pushout product of {0}->Delta^1 with a monomorphism A ⊆ K lifts against any left fibration of arbitrary simplicial sets. I tested it on K empty, A=K, A empty with K a point (which is exactly the Lambda^1_0 lifting in the definition), and E empty. I also checked that the endpoint orientation matters: with the final endpoint the statement fails for the left fibration {1}->Delta^1. The citer, straightening step 5 (K=E arbitrary, A=X_c), uses it within its hypotheses. Step 1: the opposite operation from relative-cone-equivalence clause (4) uses the same reversal formula and is an automorphism of sSet; r_n is simplicial and sends the opposite of Lambda^n_i to Lambda^n_{n-i}, so {0}^op goes to {1}=Lambda^1_1, a right horn. j^op is literally the pushout product in right-anodyne-product with i=Lambda^1_1 and k=A^op->K^op. Closure under isomorphisms and composition covers the isomorphic arrow. Step 2: the horn index ranges reverse correctly, so p^op is a right fibration. The exponentiation node allows arbitrary small simplicial sets. (h^op,u^op) is a target vertex, and vertex surjectivity (Stacks 08NL, simplicial.tex lines 5533-5545) gives an exact lift. Step 3 is genuinely elementary: the pushout equals the union degree by degree, and taking opposites twice returns the original maps. I found no cycle in the transitive closure, and all cited statements are in the same unit, so no tool_uses are needed. I searched the DAG for left-anodyne, cylinder, pushout-product and fibration-exponentiation nodes and found no duplicate. No SGA is used. HTT and Kerodon are online only, so I could not check them from literature/; they are recorded as WANTED, with proof_origin set to agent. No changes made."
  }
 }
