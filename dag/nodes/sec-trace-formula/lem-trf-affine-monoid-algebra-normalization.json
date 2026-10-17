@@ -1,0 +1,75 @@
+{
+ "id": "lem-trf-affine-monoid-algebra-normalization",
+ "kind": "statement",
+ "title": "Integral closure of an affine torsion-free monoid algebra",
+ "statement": "Let $k$ be a field and $P$ a fine commutative monoid, written additively [def-trf-fine-fan-blowup], such that $G=P^{\\mathrm{gp}}$ is torsion free. Put $P^{\\mathrm{sat}}=\\{g\\in G:ng\\in P\\text{ for some integer }n>0\\}$. For a submonoid $Q\\subseteq G$ write $k[Q]=\\bigoplus_{q\\in Q}ke^q$, with multiplication $e^qe^{q'}=e^{q+q'}$. The natural maps embed $k[P]\\subseteq k[P^{\\mathrm{sat}}]\\subseteq k[G]$, all three rings are integral domains, and they have the same fraction field $K=\\operatorname{Frac}(k[G])$. Inside $K$, $k[P^{\\mathrm{sat}}]$ is the integral closure of $k[P]$: it is exactly the set of elements of $K$ satisfying a monic polynomial with coefficients in $k[P]$. Moreover $k[P^{\\mathrm{sat}}]$ is a finite $k[P]$-module and is integrally closed in $K$. The zero-rank case $P=G=\\{0\\}$ and monoids with nontrivial units are allowed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.2.9 and its proof, printed p.104, specialized to S=Spec(k) and F=Spec_mon(P) with torsion-free group completion; finite saturation is 3.1.17 and the finite-map sentence of that proof. No Stacks tag states this monoid-algebra normalization identification."
+ },
+ "stmt_deps": [
+  "def-trf-fine-fan-blowup"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure of a finitely generated torsion free monoid algebra over a field is the algebra of its saturation in its group completion.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ring.instIsIntegrallyClosedNormalClosure\", \"module\": \"Mathlib/RingTheory/NormalClosure\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsDomain R] [inst_3 : IsDomain S]\\n  [inst_4 : Algebra R S] [inst_5 : Module.IsTorsionFree R S] [Module.Finite R S],\\n  IsIntegrallyClosed (Ring.NormalClosure R S)\", \"doc\": \"The integral closure $ T $ of a commutative ring $ S $ in a field $ E $ is integrally closed. That is, every element of $ E $ that is integral over $ T $ is already contained in $ T $.\"}\n  {\"name\": \"completeIntegralClosure\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral\", \"type\": \"(R : Type u_1) → (S : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Subalgebra R S\", \"doc\": \"The subalgebra of $ S $ consisting of all elements that are almost integral over $ R $. This subalgebra is closed under addition and multiplication, and contains the image of $ R $ under the algebra h\"}\n  {\"name\": \"Ring.instFiniteNormalClosure\", \"module\": \"Mathlib/RingTheory/NormalClosure\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsDomain R] [inst_3 : IsDomain S]\\n  [inst_4 : Algebra R S] [inst_5 : Module.IsTorsionFree R S] [Module.Finite R S] [PerfectField (FractionRing R)]\\n  [IsDedekindDomain S], Module.Finite S (Ring.NormalClosure R S)\", \"doc\": \"The integral closure of a commutative ring $ S $ in a field $ E $, consisting of all elements of $ E $ integral over $ S $, forms a commutative ring under the operations inherited from $ E $. This sub\"}\n  {\"name\": \"Ring.instFiniteNormalClosure_1\", \"module\": \"Mathlib/RingTheory/NormalClosure\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsDomain R] [inst_3 : IsDomain S]\\n  [inst_4 : Algebra R S] [inst_5 : Module.IsTorsionFree R S] [Module.Finite R S] [PerfectField (FractionRing R)]\\n  [IsDedekindDomain S], Module.Finite R (Ring.NormalClosure R S)\", \"doc\": \"The integral closure of a commutative ring $ S $ in a field $ E $, consisting of all elements of $ E $ integral over $ S $, is equipped with a canonical $ S $-algebra structure. This means the subalge\"}\n  {\"name\": \"integralClosure_le_completeIntegralClosure\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [IsFractionRing R S],\\n  integralClosure R S ≤ completeIntegralClosure R S\", \"doc\": \"In the context where $ S $ is a fraction ring of $ R $, the integral closure of $ R $ in $ S $ is a subalgebra contained within the almost integral closure of $ R $ in $ S $. This follows from the fac\"}\n  {\"name\": \"Algebra.zariskisMainProperty_iff_exists_saturation_eq_top\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : Ideal S},\\n  Algebra.ZariskisMainProperty R p ↔\\n    ∃ r ∉ p, ∃ (h : IsIntegral R r), (integralClosure R S).saturation (Submonoid.powers r) ⋯ = ⊤\", \"doc\": \"An ideal $\\\\mathfrak{p} \\\\subseteq S$ satisfies Zariski's Main Theorem property over $R$ if and only if there exists an element $r$ in the integral closure of $R$ in $S$ such that $r \\\\notin \\\\mathfrak{p}\"}\n  {\"name\": \"completeIntegralClosure_eq_integralClosure\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [IsNoetherianRing R]\\n  [IsDomain R] [IsFractionRing R S], completeIntegralClosure R S = integralClosure R S\", \"doc\": \"Given a Noetherian domain $ R $ and its fraction ring $ S $, the complete integral closure of $ R $ in $ S $ (the subalgebra of elements almost integral over $ R $) coincides with the integral closure\"}\n  {\"name\": \"Ring.instIsDomainNormalClosure\", \"module\": \"Mathlib/RingTheory/NormalClosure\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsDomain R] [inst_3 : IsDomain S]\\n  [inst_4 : Algebra R S] [inst_5 : Module.IsTorsionFree R S], IsDomain (Ring.NormalClosure R S)\", \"doc\": \"The integral closure of a commutative ring $ S $ in a field $ E $ forms an integral domain under the operations inherited from $ E $. This means it contains no zero divisors, satisfying the domain pro\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read returned types; none identifies the integral closure of an affine monoid algebra with the algebra of its group-completion saturation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization of an affine semigroup ring k[P] equals k[saturation P] inside the fraction field of the group algebra.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"exists_integral_inj_algHom_of_fg\", \"module\": \"Mathlib.RingTheory.NoetherNormalization\", \"type\": \": ∃ s, ∃ g : (MvPolynomial (Fin s) k) →ₐ[k] R, Function.Injective g ∧ g.IsIntegral\", \"doc\": \"For any finitely generated algebra $ R $ over a field $ k $, there exists a natural number $ s $ and an injective algebra homomorphism from the polynomial ring $ k[x_1, \\\\dots, x_s] $ to $ R $ such tha\"}\n  {\"name\": \"Subalgebra.saturation\", \"module\": \"Mathlib.Algebra.Algebra.Subalgebra.Lattice\", \"type\": \"(s : Subalgebra R S) (M : Submonoid S) (H : M ≤ s.toSubmonoid) : Subalgebra R S\", \"doc\": \"Let $R$ be a commutative semiring and $S$ be an $R$-algebra. Let $s$ be a subalgebra of $S$ and $M$ be a submonoid of $S$ that is contained in $s$. The saturation of $s$ with respect to $M$ is the sub\"}\n  {\"name\": \"Polynomial.X_eq_normalize\", \"module\": \"Mathlib.Algebra.Polynomial.FieldDivision\", \"type\": \": (X : Polynomial R) = normalize X\", \"doc\": \"In the polynomial ring $ R[X] $ over a commutative ring $ R $ equipped with a normalization monoid structure, the indeterminate $ X $ satisfies $ X = \\\\text{normalize}(X) $, where normalization refers \"}\n  {\"name\": \"PowerSeries.X_eq_normalizeX\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": (X : k⟦X⟧) = normalize X\", \"doc\": \"The formal variable $ X $ in the ring of formal power series $ k[[X]] $ over a field $ k $ is equal to its normalization, i.e., $ \\\\text{normalize}(X) = X $. This follows because the normalization unit\"}\n  {\"name\": \"Polynomial.instNormalizationMonoid\", \"module\": \"Mathlib.Algebra.Polynomial.FieldDivision\", \"type\": \": NormalizationMonoid R[X]\", \"doc\": \"For any commutative ring $ R $ equipped with a normalization monoid structure, the polynomial ring $ R[X] $ inherits a normalization monoid structure. This structure is defined by normalizing the lead\"}\n  {\"name\": \"IsLocalization.integerNormalization_aeval_eq_zero\", \"module\": \"Mathlib.RingTheory.Localization.Integral\", \"type\": \"[Algebra R R'] [Algebra S R'] [IsScalarTower R S R'] (p : S[X]) {x : R'} (hx : aeval x p = 0) :\\n  aeval x (integerNormalization M p) = 0\", \"doc\": \"Given a polynomial $ p $ over the localization $ S $ of a commutative ring $ R $ at a submonoid $ M $, if the evaluation of $ p $ at an element $ x $ in an $ R $-algebra $ R' $ yields zero ($ \\\\text{ae\"}\n  {\"name\": \"Ideal.normalizationMonoid\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Ideal.Basic\", \"type\": \": NormalizationMonoid (Ideal A)\", \"doc\": \"For any commutative ring $ A $, the semiring of ideals of $ A $ admits a normalization monoid structure defined by setting $\\\\operatorname{normUnit}(I) = 1$ for all ideals $ I $. This follows from the \"}\n  {\"name\": \"IsLocalization.integerNormalization_map_to_map\", \"module\": \"Mathlib.RingTheory.Localization.Integral\", \"type\": \"(p : S[X]) : ∃ b : M, (integerNormalization M p).map (algebraMap R S) = (b : R) • p\", \"doc\": \"For any polynomial $ p \\\\in S[X] $, where $ S $ is the localization of a commutative ring $ R $ at a submonoid $ M $, there exists an element $ b \\\\in M $ such that the image of the integer normalizatio\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read returned types; none identifies the integral closure of an affine monoid algebra with the algebra of its group-completion saturation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"IsIntegrallyClosed\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: read returned types; none identifies the integral closure of an affine monoid algebra with the algebra of its group-completion saturation"
+  },
+  {
+   "tool": "grep",
+   "query": "(MonoidAlgebra|AddMonoidAlgebra).*(integralClosure|IsIntegrallyClosed|IsNormal)|saturat.*monoid.*algebra",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: read returned types; none identifies the integral closure of an affine monoid algebra with the algebra of its group-completion saturation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-toric-monoid-comparison",
+  "date": "2026-10-18",
+  "group": "Q44"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, 3.1.17--3.1.23, Lemmas 3.2.9, 3.2.12 and 3.2.15, Lemma 3.2.17 and Corollary 3.2.18, printed pp.101--105; regular-over-Q application in 3.2.19, p.106. Affine ring input for the toric descent comparison: ILO VIII Lemma 3.2.9, saturation versus normalization, used on each blowup chart in Corollary 3.2.18.",
+   "via": [
+    "lem-trf-toric-monoid-comparison",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

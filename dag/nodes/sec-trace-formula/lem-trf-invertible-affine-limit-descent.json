@@ -2,7 +2,7 @@
  "id": "lem-trf-invertible-affine-limit-descent",
  "kind": "statement",
  "title": "Invertible modules descend along affine transition limits",
- "statement": "Let $I$ be a small nonempty directed set, $(Z_i)_{i\\in I}$ an inverse system of quasi-compact schemes [def-weil-pbc-quasi-compact-scheme] that are quasi-separated [def-weil-quasi-separated-morphism], with affine transition morphisms $q_{ji}:Z_j\\to Z_i$ for $j\\geq i$ [pqf-def-affine-morphism]. Let $Z=\\varprojlim_i Z_i$ with projections $q_i:Z\\to Z_i$ be its limit in the category of schemes [def-pc-scheme, def-weil-pbc-category-colimit]. For every invertible $\\mathcal O_Z$-module $L$ [def-sc-invertible-module], there exist $i\\in I$ and an invertible $\\mathcal O_{Z_i}$-module $L_i$ such that $q_i^*L_i\\cong L$, where $q_i^*$ is the tensor pullback [def-pc-module-pullback].",
+ "statement": "Let $I$ be a small nonempty directed set, $(Z_i)_{i\\in I}$ an inverse system of quasi-compact schemes [def-weil-pbc-quasi-compact-scheme] that are quasi-separated [def-weil-quasi-separated-morphism], with affine transition morphisms $q_{ji}:Z_j\\to Z_i$ for $j\\geq i$ [pqf-def-affine-morphism]. Let $Z=\\varprojlim_i Z_i$ with projections $q_i:Z\\to Z_i$ be its limit in the category of schemes [def-pc-scheme]. Here being a limit means $q_{ji}\\circ q_j=q_i$ for $j\\geq i$, and for every scheme $T$ and family $t_i:T\\to Z_i$ satisfying $q_{ji}\\circ t_j=t_i$ there is a unique morphism $t:T\\to Z$ with $q_i\\circ t=t_i$ for every $i$. For every invertible $\\mathcal O_Z$-module $L$ [def-sc-invertible-module], there exist $i\\in I$ and an invertible $\\mathcal O_{Z_i}$-module $L_i$ such that $q_i^*L_i\\cong L$, where $q_i^*$ is the tensor pullback [def-pc-module-pullback].",
  "source": {
   "document": "literature/stacks-project/limits.tex",
   "place": "Tag 0B8W, lemma-descend-invertible-modules, clause (2)."
@@ -13,12 +13,102 @@
   "def-pc-module-pullback",
   "def-weil-pbc-quasi-compact-scheme",
   "def-weil-quasi-separated-morphism",
-  "pqf-def-affine-morphism",
-  "def-weil-pbc-category-colimit"
+  "pqf-def-affine-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $N=L^\\vee$. By [lem-pc-tensor-dual-invertible], $N$ is invertible and evaluation is an isomorphism $e:L\\otimes N\\xrightarrow{\\sim}\\mathcal O_Z$. Both $L$ and $N$ have finite presentation: by [def-sc-invertible-module] each is locally $\\mathcal O_Z$, which has the finite presentation $0\\to\\mathcal O_Z\\xrightarrow{1}\\mathcal O_Z\\to0$. No finiteness of a chosen trivializing cover is needed here.",
+   "uses": [
+    "lem-pc-tensor-dual-invertible",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0B8W, lemma-descend-invertible-modules, proof of (2), tensor inverse; modules.tex Tag 01CT, lemma-constructions-invertible, clause (2)."
+   }
+  },
+  {
+   "text": "Apply clause (1) of [lem-trf-fp-modules-affine-limit-descent] separately to $L$ and $N$. Choose a common upper bound $i$ of the two indices, and pull both models to $Z_i$; call them $A_i,B_i$. By [lem-pc-tensor-pullback-finite-presentation] these remain finitely presented. The composition isomorphisms of [def-pc-module-pullback] give specified isomorphisms $q_i^*A_i\\cong L$ and $q_i^*B_i\\cong N$. All hypotheses of the descent statement are precisely the assumed small nonempty directed indexing set, qcqs stages, affine transitions and scheme limit; no stage is assumed affine or Noetherian.",
+   "uses": [
+    "lem-trf-fp-modules-affine-limit-descent",
+    "lem-pc-tensor-pullback-finite-presentation",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01ZR, lemma-descend-modules-finite-presentation (1), and 0B8W, lemma-descend-invertible-modules, proof of (2); modules.tex Tag 01BQ for preservation under pullback."
+   }
+  },
+  {
+   "text": "Put $P_i=A_i\\otimes B_i$. This is finitely presented, directly from local presentations. On a common open where $A_i=\\operatorname{coker}(a:\\mathcal O^r\\to\\mathcal O^s)$ and $B_i=\\operatorname{coker}(b:\\mathcal O^t\\to\\mathcal O^u)$, it has presentation\n$$\\mathcal O^{ru}\\oplus\\mathcal O^{st}\\xrightarrow{(a\\otimes1,\\,1\\otimes b)}\\mathcal O^{su}\\longrightarrow P_i\\longrightarrow0.$$\nIndeed, a map out of the displayed cokernel is a bilinear map on the two free generating modules killing each family of relations; it therefore factors uniquely through $A_i\\otimes B_i$. This is the tensor product defined in [def-pur-sheaf-tensor-product], with cokernels as in [def-weil-sheaf-of-modules-category]. Thus the presentation is valid as a sheaf presentation, not a claim that sections of every cokernel are computed without sheafification. Also $\\mathcal O_{Z_i}$ is finitely presented by its rank-one free presentation. This writes out the elementary presentation argument of Modules Tag 01CE(4).",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CE, lemma-tensor-product-permanence (4), explicit presentation in the proof."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-module-pullback-tensor], the chosen model isomorphisms and evaluation define an isomorphism $\\epsilon:q_i^*P_i\\xrightarrow{\\sim}q_i^*\\mathcal O_{Z_i}$. Here $q_i^*\\mathcal O_{Z_i}\\cong\\mathcal O_Z$ is the multiplication isomorphism $\\mathcal O_Z\\otimes_{q_i^{-1}\\mathcal O_{Z_i}}q_i^{-1}\\mathcal O_{Z_i}\\cong\\mathcal O_Z$ from the tensor-pullback definition [def-pc-module-pullback]. Apply clause (2) of [lem-trf-fp-modules-affine-limit-descent] to $\\epsilon$ and separately to $\\epsilon^{-1}$. At a common upper bound $j\\geq i$ their pullbacks are maps $u_j:P_j\\to Q_j$ and $v_j:Q_j\\to P_j$, where $P_j=q_{ji}^*P_i$ and $Q_j=q_{ji}^*\\mathcal O_{Z_i}$. Their limit pullbacks are $\\epsilon$ and $\\epsilon^{-1}$, with the canonical composition identifications; hence $q_j^*(v_j\\circ u_j)=1$ and $q_j^*(u_j\\circ v_j)=1$. The four finite-presentation hypotheses used here are those proved in step 3 and their pullbacks, covered by [lem-pc-tensor-pullback-finite-presentation].",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor",
+    "def-pc-module-pullback",
+    "lem-trf-fp-modules-affine-limit-descent",
+    "lem-pc-tensor-pullback-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0B8W, lemma-descend-invertible-modules, proof of (2), descent of evaluation; Tag 01ZR, lemma-descend-modules-finite-presentation (2); modules.tex Tag 01CD for the tensor comparison."
+   }
+  },
+  {
+   "text": "Apply clause (3) of [lem-trf-fp-modules-affine-limit-descent] to the endomorphism pair $v_j\\circ u_j,1_{P_j}$, and again to $u_j\\circ v_j,1_{Q_j}$. Choose a common upper bound $k\\geq j$ of the two resulting stages. Pullback preserves identities and composition, so both equalities hold at $k$. Thus $u_k$ and $v_k$ are inverse maps and $q_{ki}^*P_i\\cong q_{ki}^*\\mathcal O_{Z_i}\\cong\\mathcal O_{Z_k}$. The source and target modules in both applications are finitely presented by step 3 and [lem-pc-tensor-pullback-finite-presentation]. This is the explicit reason the descended evaluation becomes an isomorphism; invertibility is not assumed to be reflected by a single projection to the limit.",
+   "uses": [
+    "lem-trf-fp-modules-affine-limit-descent",
+    "lem-pc-tensor-pullback-finite-presentation",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0B8W, lemma-descend-invertible-modules, proof of (2), eventual isomorphism; Tag 01ZR, lemma-descend-modules-finite-presentation (3)."
+   }
+  },
+  {
+   "text": "Set $L_k=q_{ki}^*A_i$ and $N_k=q_{ki}^*B_i$. The tensor comparison [lem-weil-pbc-module-pullback-tensor] identifies $L_k\\otimes N_k$ with $q_{ki}^*P_i$, which step 5 identified with $\\mathcal O_{Z_k}$. Apply exactly the tensor-inverse characterization explicitly included in [def-sc-invertible-module]: existence of an $\\mathcal O_{Z_k}$-module $N_k$ with this tensor isomorphism means that $L_k$ is invertible. This uses that characterization, not the invalid assertion that a finitely presented module is already locally free. Finally [def-pc-module-pullback] gives $q_k^*L_k\\cong q_i^*A_i\\cong L$, since $q_{ki}\\circ q_k=q_i$. Taking $k,L_k$ proves the claimed existence.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor",
+    "def-sc-invertible-module",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0B8W, lemma-descend-invertible-modules, final sentence of proof of (2); modules.tex Tags 0B8K, lemma-invertible, and 0B8M, lemma-invertible-is-locally-free-rank-1, as incorporated in def-sc-invertible-module."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-tensor-dual-invertible",
+  "def-sc-invertible-module",
+  "lem-trf-fp-modules-affine-limit-descent",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0B8W, lemma-descend-invertible-modules, proof of (2), using Tag 01ZR. Descend finite-presentation tensor factors directly; finite-local-freeness/flatness descent is unnecessary because the tensor-inverse characterization is already in def-sc-invertible-module. The map, inverse and two identities are all descended explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +151,45 @@
    "results": "[grep] OK 0 hit(s) in Mathlib/AlgebraicGeometry",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf on an inverse limit of quasi compact quasi separated schemes with affine transition maps descends to a finite stage",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern structure-sheaf sections, scheme morphisms, affine opens or limits in a fixed module category, not descent of invertible sheaves to a stage."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Line bundles descend to some stage of a directed inverse limit of qcqs schemes with affine transition morphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ (i : I), CompactSpace (D.obj i)]\\n  [∀ (i : I), QuasiSeparatedSpace (D.obj i)] [IsAffine c.pt] : ∃ i, IsAffine (D.obj i)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, QuasiSeparatedSpace (D.obj i)] (U : c.pt.Opens)\\n  (hU : IsAffineOpen U) : ∃ (i : I) (V : (D.obj i).Opens), IsAffineOpen V ∧ c.π.app i ⁻¹ᵁ V = U\", \"doc\": \"In a cofiltered diagram of quasi-separated schemes with affine transition morphisms, every affine open subset of the limit scheme is the preimage of an affine open subset in some scheme of the diagram\"}\n  {\"name\": \"AlgebraicGeometry.exists_preimage_eq\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (U : c.pt.Opens) (hU : IsCompact (U : Set c.pt)) :\\n  ∃ (i : I) (V : (D.obj i).Opens), IsCompact (V : Set (D.obj i)) ∧ c.π.app i ⁻¹ᵁ V = U\", \"doc\": \"In a cofiltered diagram of schemes with affine transition morphisms, every compact open subset of the limit scheme is the preimage of a compact open subset in some scheme of the diagram.\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (s : Γ(c.pt, ⊤)) [∀ i, CompactSpace (D.obj i)]\\n  [∀ i, QuasiSeparatedSpace (D.obj i)] : ∃ (i : I) (t : Γ(D.obj i, ⊤)), s = (c.π.app i).appTop t\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] {i : I} {U : (D.obj i).Opens} (hU : IsCompact (X := D.obj i) U)\\n  (s t : Γ(D.obj i, U)) (hs : (c.π.app i).app U s = (c.π.app i).app U t) :\\n  ∃ (j : I) (f : j ⟶ i), (D.map f).app U s = (D.map f).app U t\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"AlgebraicGeometry.isBasis_preimage_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] :\\n  TopologicalSpace.Opens.IsBasis {(c.π.app i ⁻¹ᵁ V : c.pt.Opens) | (i : I) (V : (D.obj i).Opens) (_ : IsAffineOpen V)}\", \"doc\": \"Given a cofiltered diagram of schemes where all transition maps are affine morphisms, the collection of preimages of affine open subsets under the projection maps forms a basis for the topology on the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"{I : Type*} [Category* I] {D : I ⥤ Scheme.{u}} (c : Cone D) (hc : IsLimit c) [∀ i, IsAffine (D.obj i)] : IsAffine c.pt\", \"doc\": \"If $\\\\{X_i\\\\}_{i \\\\in I}$ is a diagram of affine schemes indexed by a category $I$, and $c$ is a limit cone over this diagram in the category of schemes, then the apex of the cone $c$ is also an affine s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski\", \"type\": \": IsColimit (cocone X)\", \"doc\": \"For any scheme $X$, the cocone in the category of schemes constructed by composing the inclusion functor from the affine Zariski site of $X$ to its open subsets, the right-opposite presheaf functor, a\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern structure-sheaf sections, scheme morphisms, affine opens or limits in a fixed module category, not descent of invertible sheaves to a stage."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInvertible\", \"IsLimit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern structure-sheaf sections, scheme morphisms, affine opens or limits in a fixed module category, not descent of invertible sheaves to a stage."
+  },
+  {
+   "tool": "grep",
+   "query": "(invertible|line.bundle).*(descen|limit)|(descen|limit).*(invertible|line.bundle)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern structure-sheaf sections, scheme morphisms, affine opens or limits in a fixed module category, not descent of invertible sheaves to a stage."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rank one locally free module on a limit scheme is pulled back from a rank one locally free module on a scheme in the system",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, the cone $ A.c' j $ constructed via the pullback along the affine open immersion $ \\\\mathcal{U}_D(j) \\\\to D\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern structure-sheaf sections, scheme morphisms, affine opens or limits in a fixed module category, not descent of invertible sheaves to a stage."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-ample-neighbourhood",
@@ -92,5 +217,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-invertible-affine-limit-descent",
+  "worker": "stage1",
+  "summary": "Statement kept verbatim. Split into tensor inverse and local finite presentation, general finite-presentation object descent, the elementary finite tensor presentation, lifting evaluation and its inverse, descending both inverse identities, and the tensor-inverse characterization. One new statement-only node records all three clauses of Stacks 01ZR without the Noetherian affine-base restrictions of existing Picard nodes. All searches were executed through msearch.py; no Lean writing or compilation.",
+  "blueprint": "Fibrewise ampleness-to-projectivity input below lem-trf-local-term-locality: in the proof of 0D2S used by lem-trf-proper-fibrewise-ample-projective, descend the chosen line bundle after the proper Noetherian approximation. The split realizes the line-bundle descent ingredient of 0D2S through the tensor-inverse argument of 0B8W(2), preserving the existing ancestry and unit.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-tensor-pullback-finite-presentation",
+    "why": "Generic preservation of finite presentation under arbitrary tensor pullback, needed to move finitely presented models to common upper bounds. No statement in this curve local-term unit supplies this module-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-tensor-pullback-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q13-088a3a139",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-088a3a139 (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked all six steps against Stacks 0B8W, 01ZR and cited module results. Repaired two minor faults: colimit-only definition citations for scheme limits, and nonexistent clause 01CT(4). Corrected whole JSON files and detailed review.md written. No mathematical gap, duplicate, cycle or target weakening found.; 2 file(s) fixed by the reviewer"
  }
 }

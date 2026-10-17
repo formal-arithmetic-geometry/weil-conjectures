@@ -17,55 +17,112 @@
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $q_{i_0}^*L_0$ is ample, the ampleness definition gives, for every point of $Z$, a section of some positive tensor power whose nonvanishing open is affine. Quasi-compactness of $Z$ lets us choose finitely many such sections $s_1,\\ldots,s_m$ (possibly of different powers) whose affine nonvanishing opens $Z_{s_a}$ cover $Z$.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09MT proof, first sentence; Properties, Definition 01PS"
+   }
+  },
+  {
+   "text": "Because $L_0$ is invertible, it is quasi-coherent by [def-sc-invertible-module]. Apply [lem-sc-valuation-limit-qcoh-section-descent] to the tail above $i_0$ with $F_{i_0}=L_0$: for each chosen section $s_a$ there are an index $i_a\\ge i_0$ and a section $s_{a,i_a}$ of the pullback of $L_0$ to $Z_{i_a}$ whose pullback to $Z$ is $s_a$. A common upper bound $i_2$ of the finitely many $i_a$ gives sections $s_{a,i_2}$ on one stage, all pulling back to $s_a$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-sc-valuation-limit-qcoh-section-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09MT proof, invoking Tags 0B8W and 01Z0"
+   }
+  },
+  {
+   "text": "Fix $a$. The principal open $(Z_{i_2})_{s_{a,i_2}}$ has inverse image $Z_{s_a}$ in $Z$, because pullback of a section of an invertible module pulls back its nonvanishing locus. By [lem-weil-pbc-limit-affine-transition], the inverse images of this open form an inverse system with affine transitions and limit $Z_{s_a}$. The latter is affine by Step 1, so [lem-weil-pbc-limit-affine-stage] gives an index $j_a\\ge i_2$ such that $(Z_j)_{s_{a,j}}$ is affine for every $j\\ge j_a$.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-limit-affine-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09MT proof, invoking Lemma 01Z6 (lemma-limit-affine) after descending the sections"
+   }
+  },
+  {
+   "text": "Choose a common upper bound $j_0$ of the finitely many $j_a$. Pulling the sections forward to $Z_{j_0}$ preserves affineness of their principal opens because each transition morphism is affine. Their inverse images in $Z$ still cover $Z$, so the union $W_{j_0}=\\bigcup_a(Z_{j_0})_{s_{a,j_0}}$ has inverse image equal to $Z$. Apply clause (2) of [pqf-lem-limit-qc-open-descends] to the quasi-compact opens $W_{j_0}$ and $Z_{j_0}$, whose inverse images in the limit agree; after increasing to some $j\\ge j_0$ their pullbacks are equal. Thus the finitely many affine principal opens $(Z_j)_{s_{a,j}}$ cover $Z_j$.",
+   "uses": [
+    "pqf-lem-limit-qc-open-descends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09MT proof, final use of Lemma 01YX/lemma-descend-opens"
+   }
+  },
+  {
+   "text": "The module on $Z_j$ is invertible, the sections $s_{a,j}$ have affine nonvanishing opens, and those opens cover the quasi-compact scheme $Z_j$. By the definition of an ample invertible module [def-weil-pbc-ample-invertible-module], its pullback $q_{j i_0}^*L_0$ is ample on $Z_j$.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09MT proof, concluding sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-sc-valuation-limit-qcoh-section-descent",
+  "lem-weil-pbc-limit-affine-stage",
+  "lem-weil-pbc-limit-affine-transition",
+  "pqf-lem-limit-qc-open-descends"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 09MT (lemma-limit-ample), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "An invertible sheaf at a stage of an inverse system of qcqs schemes with affine transition maps is ample at some later stage if ample on the limit",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_map_preimage_le_map_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, given a compact open subset $U$ and an open subset $V$ in some object $i$ such that the preimage of $U$ under the cone's p\"}\n  {\"name\": \"AlgebraicGeometry.exists_map_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each morphism is affine and each object is a compact space, if an open subset $U$ of an object $D(i)$ satisfies $c.\\\\pi_{i}^{-1}(U) = \\\\top$ (the entire space), \"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of quasi-separated schemes with affine transition morphisms, every affine open subset of the limit scheme is the preimage of an affine open subset in some scheme of the diagram\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}",
+   "query": "Ampleness of an invertible sheaf descends from an affine transition inverse limit of quasi-compact quasi-separated schemes to a later stage",
+   "results": "AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine; AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit; AlgebraicGeometry.exists_map_eq_top; no declaration about ample invertible sheaves.",
    "date": "2026-10-18",
-   "verdict": "no match: inspected returned declarations; section/structure-sheaf and affine-open descent, properness locality, and generic descent predicates do not assert this statement for an invertible sheaf. No ampleness declaration in the Mathlib algebraic-geometry source."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Ampleness of a line bundle descends from a filtered inverse limit of schemes to some stage",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] {i : I} {U : (D.obj i).Opens} (hU : IsCompact (X := D.obj i) U)\\n  (s : Γ(D.obj i, U)) (hs : (c.π.app i).app U s = 0) : ∃ (j : I) (f : j ⟶ i), (D.map f).app U s = 0\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ (i : I), CompactSpace (D.obj i)]\\n  [∀ (i : I), QuasiSeparatedSpace (D.obj i)] [IsAffine c.pt] : ∃ i, IsAffine (D.obj i)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, QuasiSeparatedSpace (D.obj i)] (U : c.pt.Opens)\\n  (hU : IsAffineOpen U) : ∃ (i : I) (V : (D.obj i).Opens), IsAffineOpen V ∧ c.π.app i ⁻¹ᵁ V = U\", \"doc\": \"In a cofiltered diagram of quasi-separated schemes with affine transition morphisms, every affine open subset of the limit scheme is the preimage of an affine open subset in some scheme of the diagram\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.compactSpace_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, CompactSpace (D.obj i)] : CompactSpace c.pt\", \"doc\": \"If $ I $ is a cofiltered category and $ D : I \\to \\text{Scheme} $ is a diagram where each object $ D(i) $ is a compact space and each morphism $ D(f) $ is an affine morphism, then the limit of $ D $ (i.\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ i, IsAffine (D.obj i)] (i : I) (s : Γ(D.obj i, ⊤)) (hs : (c.π.app i).appTop s = 0) :\\n  ∃ (j : I) (f : j ⟶ i), (D.map f).appTop s = 0\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[IsCofiltered I] [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ (i : I), CompactSpace (D.obj i)]\\n  [∀ (i : I), QuasiSeparatedSpace (D.obj i)] {J : Type*} (U : J → c.pt.Opens) (hU : IsOpenCover U)\\n  (hU' : ∀ i, IsAffineOpen (U i)) :\\n  ∃ (i : I) (s : Finset J) (V : s → (D.obj i).Opens),\\n    IsOpenCov\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}",
-   "date": "2026-10-18",
-   "verdict": "no match: inspected returned declarations; section/structure-sheaf and affine-open descent, properness locality, and generic descent predicates do not assert this statement for an invertible sheaf. No ampleness declaration in the Mathlib algebraic-geometry source."
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"IsAmple\", \"IsLimit\"",
-   "results": "[loogle] OK 0 hit(s)",
+   "query": "IsAmple, IsLimit, IsAffineHom",
+   "results": "0 hits; service reported unknown identifier 'IsAmple'.",
    "date": "2026-10-18",
-   "verdict": "no match: inspected returned declarations; section/structure-sheaf and affine-open descent, properness locality, and generic descent predicates do not assert this statement for an invertible sheaf. No ampleness declaration in the Mathlib algebraic-geometry source."
+   "verdict": "unavailable"
   },
   {
    "tool": "grep",
-   "query": "ample.*(limit|descen)|(limit|descen).*ample",
-   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Colimits.lean\", \"line\": \"144\", \"text\": \"example (R : Type u) [Ring R] : HasColimits (ModuleCat.{max v u} R) :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Colimits.lean\", \"line\": \"147\", \"text\": \"example (R : Type u) [Ring R] : HasColimits (ModuleCat.{max u v} R) :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Colimits.lean\", \"line\": \"150\", \"text\": \"example (R : Type u) [Ring R] : HasColimits (ModuleCat.{u} R) :=\"}\n  {\"file\": \"Mathlib/Tactic/Translate/Core.lean\", \"line\": \"1012\", \"text\": \"      -- For example in `HasLimitsOfSize`, not all universe levels appear in the type.\"}\n  {\"file\": \"Mathlib/Tactic/Convert.lean\", \"line\": \"42\", \"text\": \"Limiting the depth of recursion can help with this. For example, `convert h using 0` will work\"}\n  {\"file\": \"Mathlib/Topology/Category/UniformSpace.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Monad.Limits  -- shake: keep (used in `example` only)\"}\n  {\"file\": \"Mathlib/Topology/Category/UniformSpace.lean\", \"line\": \"267\", \"text\": \"example [HasLimits.{u} UniformSpaceCat.{u}] : HasLimits.{u} CpltSepUniformSpace.{u} :=\"}\n  {\"file\": \"Mathlib/Topology/Continuous.lean\", \"line\": \"347\", \"text\": \"1. They confuse the elaborator. The following example fails, because of limitations in the\"}\n  {\"file\": \"Mathlib/Topology/Instances/NNReal/Lemmas.lean\", \"line\": \"22\", \"text\": \"of limits and sums in `ℝ≥0` and `ℝ`. For example\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Limits.lean\", \"line\": \"134\", \"text\": \"noncomputable example (E : C ⥤ D) [E.IsEquivalence] (c : Cocone K) (h : IsColimit c) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Limits.lean\", \"line\": \"247\", \"text\": \"noncomputable example (E : D ⥤ C) [E.IsEquivalence] (c : Cone K) (h : IsLimit c) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Enriched/Limits/HasConicalLimits.lean\", \"line\": \"99\", \"text\": \"example (F : J ⥤ C) [HasConicalLimit V F] : HasLimit F := inferInstance\"}\n  {\"file\": \"Mathlib/CategoryTheory/Enriched/Limits/HasConicalLimits.lean\", \"line\": \"133\", \"text\": \"example [HasConicalLimits V C] : HasLimits C := inferInstance\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Pi.lean\", \"line\": \"132\", \"text\": \"As an example, we can use this to construct particular shapes of limits\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Skeleton.lean\", \"line\": \"44\", \"text\": \"example [HasLimits C] : HasLimits (Skeleton C) := by infer_instance\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Skeleton.lean\", \"line\": \"53\", \"text\": \"example [HasColimits C] : HasColimits (Skeleton C) := by infer_instance\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/IntegralEqImproper.lean\", \"line\": \"18\", \"text\": \"`[y, z]`. For example, the integral over `[1, +∞)` is **not** defined to be the limit of\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"line\": \"152\", \"text\": \"example [HasColimitsOfSize.{v₁, max u₁ v₁ v₂ w} ℰ] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"line\": \"322\", \"text\": \"example [HasColimitsOfSize.{v₁, max w u₁ v₁ v₂} ℰ] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Over.lean\", \"line\": \"58\", \"text\": \"example [HasColimits C] : PreservesColimits (forget X) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Over.lean\", \"line\": \"61\", \"text\": \"example : ReflectsColimits (forget X) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Over.lean\", \"line\": \"127\", \"text\": \"example [HasLimits C] : PreservesLimits (forget X) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Over.lean\", \"line\": \"130\", \"text\": \"example : ReflectsLimits (forget X) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/ColimitLimit.lean\", \"line\": \"20\", \"text\": \"The prototypical example, proved in `CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit`,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Limits.lean\", \"line\": \"175\", \"text\": \"example {D : Type w} [Category.{max v u} D] [HasLimits D] :\"}",
+   "query": "IsAmple|ample|lemma-limit-ample [Mathlib/AlgebraicGeometry]",
+   "results": "10 unrelated hits in Mathlib/AlgebraicGeometry; no ampleness declaration.",
    "date": "2026-10-18",
-   "verdict": "no match: inspected returned declarations; section/structure-sheaf and affine-open descent, properness locality, and generic descent predicates do not assert this statement for an invertible sheaf. No ampleness declaration in the Mathlib algebraic-geometry source."
+   "verdict": "no match"
   },
   {
-   "tool": "leanfinder",
-   "query": "A line bundle whose pullback to an affine transition inverse limit is ample has ample pullback to a sufficiently late scheme",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.exists_map_preimage_le_map_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, given a compact open subset $U$ and an open subset $V$ in some object $i$ such that the preimage of $U$ under the cone's p\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_map_preimage_eq_map_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, if two compact open subsets $U$ and $V$ of an object $D(i)$ have equal preimages under the cone projection map $c.\\\\pi.app_\"}\n  {\"name\": \"AlgebraicGeometry.exists_map_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each morphism is affine and each object is a compact space, if an open subset $U$ of an object $D(i)$ satisfies $c.\\\\pi_{i}^{-1}(U) = \\\\top$ (the entire space), \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}",
-   "date": "2026-10-18",
-   "verdict": "no match: inspected returned declarations; section/structure-sheaf and affine-open descent, properness locality, and generic descent predicates do not assert this statement for an invertible sheaf. No ampleness declaration in the Mathlib algebraic-geometry source."
-  },
-  {
-   "tool": "grep",
-   "query": "\\b(IsAmple|[Aa]mple|[Aa]mpleness)\\b",
-   "results": "[grep] OK 0 hit(s) in Mathlib/AlgebraicGeometry",
+   "tool": "leansearch",
+   "query": "An ample invertible sheaf on the inverse limit of qcqs schemes with affine transition maps is ample at some stage",
+   "results": "AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine; AlgebraicGeometry.exists_isAffineOpen_preimage_eq; AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit; AlgebraicGeometry.isBasis_preimage_isAffineOpen; no exact ampleness theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-ample-neighbourhood",
@@ -77,7 +134,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Fibrewise ampleness-to-projectivity input below lem-trf-local-term-locality: 0D2S descends ampleness from the limit fibre to one Noetherian-stage fibre, using 09MT.",
+   "place": "Fibrewise ampleness-to-projectivity input below lem-trf-local-term-locality: the proof of 0D2S descends a finite affine section cover of the ample limit fibre to one stage using Limits Tag 09MT.",
    "via": [
     "lem-trf-ample-neighbourhood",
     "lem-trf-proper-fibrewise-ample-projective",
@@ -93,5 +150,46 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-ample-affine-limit-descent",
+  "worker": "stage1",
+  "summary": "Split Stacks Limits Tag 09MT into five steps: choose a finite affine section cover from ampleness, descend all chosen sections of the fixed invertible module, use affine-transition limits and eventual affineness on each principal open, descend the finite cover to a common stage, and conclude ampleness by definition. Reused existing nodes for quasi-coherent section descent, affine limit stages, affine-transition restrictions, and quasi-compact open descent; no new nodes were needed.",
+  "blueprint": [
+   "proof sentence: “Fibrewise ampleness-to-projectivity input ... descends ampleness from the limit fibre to one Noetherian-stage fibre, using 09MT.”"
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-sc-valuation-limit-qcoh-section-descent",
+    "why": "Step 2 needs the generic quasi-coherent section continuity theorem, which is outside this trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-stage",
+    "why": "Step 3 needs eventual affineness of a limit-affine open, a generic limits result outside this unit."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Step 3 needs the generic restricted affine-transition limit construction, outside this unit."
+   },
+   {
+    "node": "pqf-lem-limit-qc-open-descends",
+    "why": "Step 4 needs eventual equality of quasi-compact opens from equality after passage to the limit, outside this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-valuation-limit-qcoh-section-descent",
+  "lem-weil-pbc-limit-affine-stage",
+  "lem-weil-pbc-limit-affine-transition",
+  "pqf-lem-limit-qc-open-descends"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NY-b87dcad0e",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-b87dcad0e (reviewer sub-agent of L); spot-checked: Read the complete item, report, required stage/coordination files, unit/chapter route, cited node statements, and Stacks Limits Tag 09MT with Situation 01YX and Tags 01Z0, 01Z6, 01Z4. Verified all hypotheses, pullback/module category, five proof steps, restricted qcqs opens, edge cases, source fidelity, route lock, no forbidden SGA or pivot machinery, no long hidden steps, and no new nodes or duplicate issues. Review written to review.md."
  }
 }

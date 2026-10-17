@@ -17,9 +17,165 @@
   "def-pc-scheme-fibre",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $Z_s$ is empty, its underlying-space identification with $f^{-1}(s)$ in [def-pc-scheme-fibre] gives $s\\notin f(Z)$. Properness makes $f(Z)$ closed by [def-weil-proper-morphism]. Choose an affine open neighbourhood $V\\subseteq S\\setminus f(Z)$ of $s$. Then $f^{-1}(V)=\\varnothing$, and the two conditions defining ampleness in [def-weil-pbc-ample-invertible-module] are vacuous (the empty space is quasi-compact). This proves this case. Henceforth suppose $Z_s\\ne\\varnothing$. The fibre structure map $Z_s\\to\\operatorname{Spec}\\kappa(s)$ is proper by [lem-weil-pbc-proper-base-change].",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-proper-morphism",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0D2N, empty-fibre case made explicit; beginning of proof"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-ample-fibre-section-lifting] to obtain $d_0$. Choose an integer $N\\geq\\max(1,d_0)$. By [lem-sc-ample-positive-tensor-power], $L_s^{\\otimes N}$ is ample. The proper fibre map is locally of finite type by the definition of properness. Apply [lem-weil-pbc-ample-very-ample-immersion-affine-base] over the field $\\kappa(s)$ to this invertible module. It gives $a\\geq1$, $r\\geq0$, an immersion $i_s:Z_s\\to\\mathbf P^r_{\\kappa(s)}$, and an isomorphism $i_s^*\\mathcal O(1)\\cong L_s^{\\otimes d}$, where $d=Na\\geq d_0$. Here the polynomial-Proj model and the projective-bundle model, with their twists, are identified as stated in [lem-trf-projective-bundle-quotient-geometry]. Thus no assertion that every large power embeds is needed from the cited immersion node.",
+   "uses": [
+    "lem-trf-ample-fibre-section-lifting",
+    "lem-sc-ample-positive-tensor-power",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0D2N, first paragraph; Tag 01VT, choosing a sufficiently large power via an initial N-th power"
+   }
+  },
+  {
+   "text": "The target projective space is separated over $\\kappa(s)$ by [lem-trf-projective-bundle-quotient-geometry]. Consequently [lem-weil-pbc-proper-to-separated] makes $i_s$ proper, and [lem-weil-pbc-proper-immersion-closed] makes it a closed immersion. The quotient-functor description in [lem-trf-projective-bundle-quotient-geometry], for the free sheaf with $r+1$ basis vectors, associates to $i_s$ the surjection $\\mathcal O_{Z_s}^{r+1}\\twoheadrightarrow L_s^{\\otimes d}$. Denote its coordinate sections by $t_0,\\ldots,t_r$. They generate $L_s^{\\otimes d}$, and their associated projective-space morphism is exactly $i_s$.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-weil-pbc-proper-immersion-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0D2N, first paragraph, including use of Tag 01W6 and projective-space coordinates"
+   }
+  },
+  {
+   "text": "For each $t_j$, apply [lem-trf-ample-fibre-section-lifting] with this same $d\\geq d_0$ and choose a lift $u_j$ over an open neighbourhood $U_j$ of $s$. Intersect the finitely many $U_j$ and then choose an affine open neighbourhood $U=\\operatorname{Spec}A$ inside their intersection. Restrict all $u_j$ to $Z_U=f^{-1}(U)$. These are sections of $L^{\\otimes d}|_{Z_U}$ pulling back to $t_j$. The canonical tensor/pullback identifications, including their action on sections and residue-field values, are [lem-weil-pbc-invertible-pullback-tensor], iterated over the $d$ factors. Properness of $Z_U\\to U$ follows from [lem-weil-pbc-proper-base-change].",
+   "uses": [
+    "lem-trf-ample-fibre-section-lifting",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0D2N, lifting the finitely many sections after shrinking the base"
+   }
+  },
+  {
+   "text": "Put $B=Z_U\\setminus\\bigcup_j(Z_U)_{u_j}$. The nonvanishing loci are open by [lem-weil-pbc-nonvanishing-section-trivializes], so $B$ is closed. On the fibre the $t_j$ generate, hence at each point some $t_j$ is nonzero by [lem-weil-pbc-invertible-generating-sections-fibre]. The residue-field pullback formula of [lem-weil-pbc-invertible-pullback-tensor] shows that a section $u_j$ vanishes at a point of $f^{-1}(s)$ if and only if its fibre restriction does: the residue-field extension is injective. Thus $B$ misses that whole fibre. As $Z_U\\to U$ is proper, its image of $B$ is closed by [def-weil-proper-morphism] and misses $s$. Choose an affine open neighbourhood $U_1$ of $s$ in its complement. Over $Z_{U_1}$ the restricted $u_j$ have no common zero and therefore generate $L^{\\otimes d}$, again by [lem-weil-pbc-invertible-generating-sections-fibre].",
+   "uses": [
+    "lem-weil-pbc-nonvanishing-section-trivializes",
+    "lem-weil-pbc-invertible-generating-sections-fibre",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0D2N, first shrinking using the closed image of the failure-of-generation locus"
+   }
+  },
+  {
+   "text": "The generating tuple yields a surjection $\\mathcal O_{Z_{U_1}}^{r+1}\\twoheadrightarrow L^{\\otimes d}|_{Z_{U_1}}$. Apply [lem-trf-projective-bundle-quotient-geometry] for the free rank-$(r+1)$ sheaf on $U_1$ to obtain $\\varphi:Z_{U_1}\\to P=\\mathbf P^r_{U_1}$ and $\\varphi^*\\mathcal O_P(1)\\cong L^{\\otimes d}|_{Z_{U_1}}$. Its naturality under arbitrary pullback, applied to $\\operatorname{Spec}\\kappa(s)\\to U_1$, identifies its fibre map with $i_s$: the restricted quotient has precisely the sections $t_j$ of Step 3. Properness of $Z_{U_1}\\to U_1$ is [lem-weil-pbc-proper-base-change]. Since $P\\to U_1$ is separated by the same quotient-geometry node, [lem-weil-pbc-proper-to-separated] makes $\\varphi$ proper.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-to-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0D2N, construction of phi and identification of its fibre; properness made explicit"
+   }
+  },
+  {
+   "text": "Write $q:P\\to U_1$ for the projection. For each point $p\\in q^{-1}(s)$ the set $\\varphi^{-1}(p)$ has at most one point. Indeed, the two fibre projections in [def-pc-scheme-fibre] identify $Z_s$ with the topological fibre of $Z_{U_1}\\to U_1$ and $P_s$ with that of $q$; under these identifications $\\varphi$ is $i_s$, which is injective on points by the definition of closed immersion [def-weil-closed-immersion]. Apply [lem-trf-proper-finite-fibre-finite-near] to the proper map $\\varphi$ at each such $p$. It gives an open neighbourhood $W_p\\subseteq P$ on which $\\varphi$ is finite. Set $W=\\bigcup_{p\\in q^{-1}(s)}W_p$. By the finite-morphism clause of [lem-weil-pbc-closed-finite-etale-zariski-local], the restriction $\\varphi^{-1}(W)\\to W$ is finite. This application allows the empty fibre of $\\varphi$ at a point outside the image of $i_s$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-closed-immersion",
+    "lem-trf-proper-finite-fibre-finite-near",
+    "lem-weil-pbc-closed-finite-etale-zariski-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0D2N, final paragraph: finite over a neighbourhood of the whole projective-space fibre; Tag 02UP generalizes the cited 02OH"
+   }
+  },
+  {
+   "text": "The structural map $q:\\mathbf P^r_{U_1}\\to U_1$ is proper by [lemma-nagata-projective-space-base-change-proper], so $q(P\\setminus W)$ is closed by [def-weil-proper-morphism]. Since $W$ contains $q^{-1}(s)$, this closed set misses $s$. Choose an affine open neighbourhood $V$ of $s$ in $U_1\\setminus q(P\\setminus W)$. Then $P_V=q^{-1}(V)\\subseteq W$. The restricted $\\varphi_V:Z_V\\to P_V$ is finite: cover $P_V$ by its intersections with the $W_p$, restrict the finite morphisms there (finiteness on smaller affine opens is part of [def-weil-finite-integral-morphism]), and use [lem-weil-pbc-closed-finite-etale-zariski-local].",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-closed-finite-etale-zariski-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0D2N, final paragraph: second shrinking, using closedness of projective space over the base"
+   }
+  },
+  {
+   "text": "The sections $u_j|_{Z_V}$ still generate $L^{\\otimes d}|_{Z_V}$. Their morphism $\\varphi_V$ is the one given by sections in [def-weil-pbc-morphism-to-projective-space-by-sections], since both are classified by the same quotient in [lem-trf-projective-bundle-quotient-geometry]. Hence [lem-weil-pbc-projective-morphism-chart-preimage] gives $(Z_V)_{u_j}=\\varphi_V^{-1}(D_+(T_j)_V)$. Because $V$ is affine, these standard projective-space charts are affine by [lem-weil-pbc-projective-space-standard-charts]. Because $\\varphi_V$ is finite, its inverse images of these affine charts are affine by [def-weil-finite-integral-morphism]. Finally $Z_V\\to V$ is proper by [lem-weil-pbc-proper-base-change] and therefore quasi-compact by [pqf-lem-proper-basic]; thus $Z_V$ is quasi-compact. The finitely many sections $u_j$ of the positive power $L^{\\otimes d}$ now give an affine nonvanishing cover. This is exactly absolute ampleness of $L|_{Z_V}$ in [def-weil-pbc-ample-invertible-module].",
+   "uses": [
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-weil-pbc-projective-morphism-chart-preimage",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-proper-base-change",
+    "pqf-lem-proper-basic",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0D2N, last sentence: finite pullback ampleness written directly using affine nonvanishing charts"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-weil-proper-morphism",
+  "lem-sc-ample-positive-tensor-power",
+  "lem-trf-ample-fibre-section-lifting",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-trf-proper-finite-fibre-finite-near",
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "lem-weil-pbc-closed-finite-etale-zariski-local",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-weil-pbc-projective-morphism-chart-preimage",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-proper-to-separated",
+  "lemma-nagata-projective-space-base-change-proper",
+  "pqf-lem-proper-basic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0D2N, lemma-ample-in-neighbourhood, complete proof; final absolute ampleness is checked on an affine base by the nonvanishing-chart definition."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +218,45 @@
    "results": "[grep] OK 0 hit(s) in Mathlib/AlgebraicGeometry",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ample|ampleness",
+   "results": "{\"t\": \"2026-10-17T21:03:36Z\", \"tool\": \"grep\", \"query\": \"ample|ampleness\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\"], \"digest\": \"55e63f56f7aeed43\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: only occurrences inside example/examples"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsAmple\"",
+   "results": "{\"t\": \"2026-10-17T21:03:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsProper\\\", \\\"IsAmple\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern structure-sheaf localization, morphism locality, or sheafification/stalk surjectivity; none gives fibre-ample twisting and the required conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(IsAmple|[Aa]mple|[Aa]mpleness)\\b",
+   "results": "{\"t\": \"2026-10-17T21:04:02Z\", \"tool\": \"grep\", \"query\": \"\\\\b(IsAmple|[Aa]mple|[Aa]mpleness)\\\\b\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no ampleness declaration in Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible sheaf ample on a fibre of a proper morphism is ample over some affine open neighbourhood of the point in the Noetherian base",
+   "results": "{\"t\": \"2026-10-17T21:04:03Z\", \"tool\": \"leansearch\", \"query\": \"An invertible sheaf ample on a fibre of a proper morphism is ample over some affine open neighbourhood of the point in the Noetherian base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"AlgebraicGeometry.HasAffineProperty.iff_of_openCover\", \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.to_basicOpen\", \"AlgebraicGeometry.HasAffineProperty.iff_of_iSup_eq_top\", \"AlgebraicGeometry.Scheme.affineBasicOpen\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\"], \"digest\": \"c0879c6b388bfa09\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern structure-sheaf localization, morphism locality, or sheafification/stalk surjectivity; none gives fibre-ample twisting and the required conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper family over a Noetherian scheme a line bundle ample on one fibre is relatively ample in a neighbourhood of the base point",
+   "results": "{\"t\": \"2026-10-17T21:04:05Z\", \"tool\": \"leanfinder\", \"query\": \"For a proper family over a Noetherian scheme a line bundle ample on one fibre is relatively ample in a neighbourhood of the base point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.exists_map_preimage_le_map_preimage\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\"], \"digest\": \"ec2a4fbb590e18dc\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern structure-sheaf localization, morphism locality, or sheafification/stalk surjectivity; none gives fibre-ample twisting and the required conclusion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-ample-neighbourhood",
@@ -93,5 +284,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-noetherian-fibre-ample-neighbourhood",
+  "worker": "stage1",
+  "summary": "Expanded the Noetherian cohomological proof 0D2N into nine steps, separating the single new lifting input 0D2M. Reused the existing immersion, projective-space quotient, finite-neighbourhood and finiteness-locality nodes. Made both proper-image shrinkings, the empty fibre, arbitrarily high exponent choice, and the final absolute affine-chart criterion explicit. The statement is unchanged.",
+  "blueprint": "Realizes the Noetherian input to lem-trf-ample-neighbourhood in the fibrewise-ampleness-to-projectivity branch below lem-trf-local-term-locality; it follows 0D2N and preserves the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-ample-positive-tensor-power",
+    "why": "Generic scheme, invertible-module or projective-space tool used for its stated conclusion in the cohomological 0D2N proof; no statement of this unit supplies this input, and no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "why": "Generic scheme, invertible-module or projective-space tool used for its stated conclusion in the cohomological 0D2N proof; no statement of this unit supplies this input, and no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-generating-sections-fibre",
+    "why": "Generic scheme, invertible-module or projective-space tool used for its stated conclusion in the cohomological 0D2N proof; no statement of this unit supplies this input, and no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic scheme, invertible-module or projective-space tool used for its stated conclusion in the cohomological 0D2N proof; no statement of this unit supplies this input, and no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-nonvanishing-section-trivializes",
+    "why": "Generic scheme, invertible-module or projective-space tool used for its stated conclusion in the cohomological 0D2N proof; no statement of this unit supplies this input, and no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-projective-morphism-chart-preimage",
+    "why": "Generic scheme, invertible-module or projective-space tool used for its stated conclusion in the cohomological 0D2N proof; no statement of this unit supplies this input, and no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic scheme, invertible-module or projective-space tool used for its stated conclusion in the cohomological 0D2N proof; no statement of this unit supplies this input, and no unit step is replaced."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic scheme, invertible-module or projective-space tool used for its stated conclusion in the cohomological 0D2N proof; no statement of this unit supplies this input, and no unit step is replaced."
+   },
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "Generic scheme, invertible-module or projective-space tool used for its stated conclusion in the cohomological 0D2N proof; no statement of this unit supplies this input, and no unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-ample-positive-tensor-power",
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-weil-pbc-projective-morphism-chart-preimage",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lemma-nagata-projective-space-base-change-proper",
+  "pqf-lem-proper-basic"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q22-b9615fec2",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q22-b9615fec2 (reviewer sub-agent of L); spot-checked: Read the prescribed DAG records, item, new lifting node, cited statements, unit/chapter route, and Stacks Tags 0D2M/0D2N. All nine steps match the source with hypotheses checked, edge cases tested, no duplicate or circular split, no route-pivot violation, and no long-step issue. Review written to review.md."
  }
 }
