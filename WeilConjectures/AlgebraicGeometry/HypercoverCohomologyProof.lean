@@ -254,7 +254,7 @@ lemma cmap_surjective (F : Sheaf X.smallEtaleTopology A)
       (V.toSplitEtaleHypercover.totRow (resι I) (resι_d I)) hx
     have ht' := HomologicalComplex.IsCls.map _ (totMap I.cocomplex f) ht
     rw [(HomologicalComplex.IsCls.eq_iff hA _ m (m + 1) (by simp) hm ht').2
-      ⟨-y', by rw [map_neg, hwt, totComplex_d, totMap_f]; abel⟩]
+      ⟨-y', by rw [map_neg, hwt, totComplex_d, totMap_f, sub_sub_cancel_left]⟩]
     rw [← ConcreteCategory.comp_apply, augIso_inv_totMap]
     exact iso_inv_hom_apply hA _ y₀
 
