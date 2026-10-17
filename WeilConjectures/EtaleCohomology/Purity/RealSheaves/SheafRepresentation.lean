@@ -129,7 +129,9 @@ representation:
 
 It is exact, as is any equivalence between these abelian categories
 (`AlgebraicGeometry.WeilGroup.isLisse_shortExact_iff`). -/
-theorem exists_equivalence_isLisse :
+theorem exists_equivalence_isLisse_of_lisseMonodromy
+    (M : ProEtale.LisseMonodromy l (C ↘ Spec (.of K)).geometricFiber K) (B : BasePointData W)
+    (hM : M.IsEquivalenceAt B.t) :
     ∃ e : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse) ≌
         ObjectProperty.FullSubcategory (W.isLisseRep l),
       (∀ (F : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse))
@@ -147,7 +149,12 @@ theorem exists_equivalence_isLisse :
       (∀ F G : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse),
         Nonempty ((e.functor.obj ⟨F.obj.tensorObj G.obj F.property,
             F.property.tensorObj G.property⟩).obj.ρ.Equiv
-          ((e.functor.obj F).obj.ρ.tprod (e.functor.obj G).obj.ρ))) := by
+          ((e.functor.obj F).obj.ρ.tprod (e.functor.obj G).obj.ρ))) ∧
+      ∀ F : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse),
+        ∃ f : (e.functor.obj F).obj.V ≃ₗ[PadicAlgCl l]
+            ProEtale.LisseMonodromy.StalkSpace B.t (F.obj.toLisse F.property),
+          ∀ g v, f ((e.functor.obj F).obj.ρ g v) =
+            fundamentalRep M B.weilMonodromyData F.obj F.property g (f v) := by
   have : ConnectedSpace (C ↘ Spec (.of K)).geometricFiber :=
     GeometricallyConnected.geometrically_connectedSpace (f := C ↘ Spec (.of K))
       (Scheme.specAlgebraicClosure K).hom (C ↘ Spec (.of K)).geometricFiberProj
@@ -157,17 +164,14 @@ theorem exists_equivalence_isLisse :
     inferInstanceAs (Smooth (Limits.pullback.snd _ _))
   have := IsRegular.of_smooth (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure
   have : CompactSpace (C ↘ Spec (.of K)).geometricFiber := inferInstance
-  obtain ⟨M, hM⟩ := ProEtale.exists_lisseMonodromy (l := l)
-    (Y := (C ↘ Spec (.of K)).geometricFiber) (Ω := K)
-  obtain ⟨B⟩ := nonempty_basePointData W
-  obtain ⟨e, he⟩ := exists_equivalence_fundamentalRep M B.weilMonodromyData (hM B.t)
+  obtain ⟨e, he⟩ := exists_equivalence_fundamentalRep M B.weilMonodromyData hM
   choose f hf using he
   set D := B.weilMonodromyData
   have hf' (F : LisseWeilSheaf K l C) (g : W.carrier) (w) :
       (f F).symm (fundamentalRep M D F.obj F.property g w) =
         (e.functor.obj F).obj.ρ g ((f F).symm w) := by
     rw [LinearEquiv.symm_apply_eq, hf, LinearEquiv.apply_symm_apply]
-  refine ⟨e, fun F x ↦ ?_, fun F ↦ ?_, fun F ↦ ?_, fun F G ↦ ?_⟩
+  refine ⟨e, fun F x ↦ ?_, fun F ↦ ?_, fun F ↦ ?_, fun F G ↦ ?_, fun F ↦ ⟨f F, hf F⟩⟩
   · -- the stalk at `x̄`, transported to the base point along a path `π`
     obtain ⟨π⟩ := PreGaloisCategory.nonempty_iso_of_fiberFunctor
       (Scheme.FiniteEtale.fiber ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x))
@@ -210,7 +214,7 @@ theorem exists_equivalence_isLisse :
           Representation.dual_apply, Module.Dual.transpose_apply, hf]
     exact ⟨(fd.trans b).trans dF⟩
   · -- global sections
-    obtain ⟨a, ha⟩ := exists_globalSections_linearEquiv_invariants (M := M) D (hM B.t) F.obj
+    obtain ⟨a, ha⟩ := exists_globalSections_linearEquiv_invariants (M := M) D hM F.obj
       F.property
       W.frobeniusLift W.deg_frobeniusLift
     have hinv (w) : w ∈ Representation.invariants
@@ -246,6 +250,43 @@ theorem exists_equivalence_isLisse :
           (F.property.tensorObj G.property)) :=
       .mk (f _) fun g ↦ LinearMap.ext (hf _ g)
     exact ⟨(fT.trans b).trans (Representation.Equiv.tprodCongr fF.symm fG.symm)⟩
+
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `sk-i-real-sheaves`):
+The lisse sheaf–representation equivalence, for some monodromy of lisse sheaves on the geometric
+curve and some base point data; see
+`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_of_lisseMonodromy` for the properties. -/
+theorem exists_equivalence_isLisse :
+    ∃ e : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse) ≌
+        ObjectProperty.FullSubcategory (W.isLisseRep l),
+      (∀ (F : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse))
+          (x : C.finitePoints),
+        ∃ f : (F.obj.stalk x).carrier ≃ₗ[PadicAlgCl l] (e.functor.obj F).obj.V,
+          ∀ v, f ((F.obj.stalk x).frobenius v) = (e.functor.obj F).obj.ρ (W.frobenius x) (f v)) ∧
+      (∀ F : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse),
+        Nonempty ((e.functor.obj ⟨F.obj.dual F.property, F.property.dual⟩).obj.ρ.Equiv
+          (e.functor.obj F).obj.ρ.dual)) ∧
+      (∀ F : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse),
+        ∃ f : F.obj.globalSections.carrier ≃ₗ[PadicAlgCl l]
+            Representation.invariants ((e.functor.obj F).obj.ρ.comp W.geometric.subtype),
+          ∀ v, (f (F.obj.globalSections.frobenius v) : (e.functor.obj F).obj.V) =
+            (e.functor.obj F).obj.ρ W.frobeniusLift (f v)) ∧
+      (∀ F G : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse),
+        Nonempty ((e.functor.obj ⟨F.obj.tensorObj G.obj F.property,
+            F.property.tensorObj G.property⟩).obj.ρ.Equiv
+          ((e.functor.obj F).obj.ρ.tprod (e.functor.obj G).obj.ρ))) := by
+  have : ConnectedSpace (C ↘ Spec (.of K)).geometricFiber :=
+    GeometricallyConnected.geometrically_connectedSpace (f := C ↘ Spec (.of K))
+      (Scheme.specAlgebraicClosure K).hom (C ↘ Spec (.of K)).geometricFiberProj
+      (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure (IsPullback.of_hasPullback _ _)
+  have : Smooth (C ↘ Spec (.of K)) := SmoothOfRelativeDimension.smooth 1 _
+  have : Smooth (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure :=
+    inferInstanceAs (Smooth (Limits.pullback.snd _ _))
+  have := IsRegular.of_smooth (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure
+  obtain ⟨M, hM⟩ := ProEtale.exists_lisseMonodromy (l := l)
+    (Y := (C ↘ Spec (.of K)).geometricFiber) (Ω := K)
+  obtain ⟨B⟩ := nonempty_basePointData W
+  obtain ⟨e, h₁, h₂, h₃, h₄, -⟩ := exists_equivalence_isLisse_of_lisseMonodromy W l M B (hM B.t)
+  exact ⟨e, h₁, h₂, h₃, h₄⟩
 
 /-- The linear isomorphism underlying an isomorphism of representations. -/
 private noncomputable def repLinearEquivOfIso {k G : Type*} [CommRing k] [Monoid G]
