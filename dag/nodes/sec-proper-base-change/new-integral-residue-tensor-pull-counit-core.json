@@ -1,0 +1,136 @@
+{
+ "id": "new-integral-residue-tensor-pull-counit-core",
+ "kind": "statement",
+ "title": "Middle composite for the residue tensor-pull counit",
+ "statement": "The coefficient-adjusted tensor model composite on X factors through the inverse of the X tensor presentation: the map from the tensor-pull coefficient to the ordinary model equals the inverse presentation followed by the reduction counit, tensor presentation counit, homotopy single comparison and homotopy coefficient comparison.",
+ "stmt_deps": [
+  "def-weil-pbc-integral-residue-tensor-pull-presentation",
+  "new-integral-residue-tensor-model",
+  "new-integral-residue-scalar-counit-model",
+  "new-integral-residue-tensor-presentation",
+  "lem-weil-pbc-integral-reduction-tensor"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15 and proof of Lemma 6.5.9(5), p. 51; middle normalization identity"
+ },
+ "proof": [
+  {
+   "text": "Expand residueExchangeTensorModelTarget and residueExchangeCoefficientPullIso using the fixed exact-F comparison and the ordinary restricted-regular pullback isomorphism.",
+   "uses": [
+    "def-weil-pbc-integral-residue-tensor-pull-presentation",
+    "new-integral-residue-tensor-model",
+    "new-integral-residue-scalar-counit-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use naturality of the tensorator and of the lax map of DerivedCategory.Qh to move the coefficient comparison to the first factor, then apply the defining counit equation of derivedTensorPresentationIso.",
+   "uses": [
+    "new-integral-residue-tensor-presentation",
+    "lem-weil-pbc-integral-reduction-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reassociate the resulting maps to obtain the displayed factorization through the inverse X tensor presentation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integral-residue-tensor-pull-presentation",
+  "new-integral-residue-tensor-model",
+  "new-integral-residue-scalar-counit-model",
+  "new-integral-residue-tensor-presentation",
+  "lem-weil-pbc-integral-reduction-tensor"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B4",
+  "date": "2026-10-17",
+  "document": "Bhatt--Scholze and the existing derived-functor constructions",
+  "place": "Remark 6.8.15 and proof of Lemma 6.5.9(5), p. 51",
+  "note": "Strict intermediate factorization for the target tensor-pull counit identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived tensor model counit compatibility after exact coefficient pullback",
+   "results": "Generic derived tensor and counit lemmas only; no fixed residue tensor-pull identity.",
+   "date": "2026-10-17",
+   "verdict": "No direct theorem; the intermediate statement is needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left derived tensor presentation counit normalization with coefficient comparison",
+   "results": "Generic leftDerivedNatTrans_app and tensor comparison lemmas; no theorem for the fixed residue maps.",
+   "date": "2026-10-17",
+   "verdict": "No direct library theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatTrans_app",
+   "results": "Generic defining equation for left-derived natural transformations.",
+   "date": "2026-10-17",
+   "verdict": "Used in the stated calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullCounit|derivedTensorPresentationIso",
+   "results": "Existing definitions only; no matching fixed identity.",
+   "date": "2026-10-17",
+   "verdict": "New intermediate statement required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "B4",
+  "date": "2026-10-17",
+  "item": "Sheaf.Paper.IntegralResidueTensorPullCounitModel"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-integral-residue-tensor-pull-counit-model",
+   "place": "middle coefficient-adjusted tensor normalization"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueTensorPullCounitCore",
+  "file": "lean/Sheaf/Paper/IntegralResidueTensorPullCounitCore.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorPullCounit_core",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorPullCounit_core"
+  ],
+  "statement": "theorem integralResidue_tensorPullCounit_core {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ)) :\n    let F := (f)^*⟦integralCoeff ℓ E⟧\n    let B := residueExchangeOrdinaryCoefficient ℓ E Y\n    let B' := residueExchangeOrdinaryCoefficient ℓ E X\n    let A := Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)\n    let SX := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (coefficientMap (integralReductionMap ℓ E) X)\n    letI := residueOrdinaryUpperStarMonoidal A f\n    let e : F.obj B ≅ B' :=\n      residueOrdinaryRestrictedRegularPullIso (integralCoeff ℓ E) A\n        (integralReductionMap ℓ E) f\n    let eH : (F.mapHomotopyCategory (.up ℤ)).obj (Functor.tensorModelCoefficient B) ≅\n      Functor.tensorModelCoefficient B' := (F.mapHomotopyCategoryFactors (.up ℤ)).app\n        ((CochainComplex.singleFunctor _ 0).obj B) ≪≫\n      (HomotopyCategory.quotient _ (.up ℤ)).mapIso\n        ((F.mapCochainComplexSingleFunctor 0).app B ≪≫\n          (HomologicalComplex.single _ (.up ℤ) 0).mapIso e)\n    let φX := coefficientMap (integralReductionMap ℓ E) X\n    let H := residueExchangeReduction ℓ E X ⋙ residueExchangeRestriction ℓ E X\n    let εX : DerivedCategory.Qh ⋙ H ⟶\n        (tensorLeft B').mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh := by\n      unfold H B' residueExchangeOrdinaryCoefficient\n        residueExchangeReduction integralReduction residueExchangeRestriction\n      exact Mod.tensorPresentationDerivedCounit φX\n    let M := DerivedCategory.Qh.obj P\n    let a : (residueExchangeUpperStar (integralCoeff ℓ E) f).obj M ⟶\n        DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj P) :=\n      (residueExchangeUpperStarCounit (integralCoeff ℓ E) f).app P\n    let N :=\n      ((curriedTensor (residueExchangeDerived (integralCoeff ℓ E) X)).flip.mapIso\n        (residueExchangeCoefficientPullIso ℓ E f).symm).hom.app\n          ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj M) ≫\n        residueExchangeTensorModelTarget ℓ E f P\n    let R := H.map a ≫\n      εX.app ((F.mapHomotopyCategory (.up ℤ)).obj P) ≫\n      DerivedCategory.Qh.map\n        ((homotopyTensorSingleIso B').inv.app ((F.mapHomotopyCategory (.up ℤ)).obj P) ≫\n          eH.inv ▷ (F.mapHomotopyCategory (.up ℤ)).obj P)\n    N = (residueExchangeTensorIso ℓ E X).inv.app\n      ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj M) ≫ R",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261017T142722-L-3876109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261017T142722-L-3876109",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

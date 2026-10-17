@@ -6,9 +6,7 @@ module
 
 public import Sheaf.Paper.IntegralResidueTensorPullPresentation
 public import Sheaf.Paper.IntegralResidueScalarCounitModel
-import Sheaf.Paper.IntegralReductionTensor
-import Sheaf.Paper.IntegralResidueTensorModel
-import Sheaf.Paper.IntegralResidueTensorPresentation
+import Sheaf.Paper.IntegralResidueTensorPullCounitCore
 
 /-! Normalization of the coefficient-adjusted tensor presentation on X. -/
 
@@ -17,9 +15,11 @@ import Sheaf.Paper.IntegralResidueTensorPresentation
 universe u
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
+
 local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 /-- The tensor-pull presentation followed by its ordinary model comparison is
 its defining tensor-presentation counit, with the ordinary coefficient identified.
@@ -102,5 +102,10 @@ theorem integralResidue_tensorPullCounit_model {X Y : Scheme.{u}} (f : X ⟶ Y)
         ((F.mapHomotopyCategory (.up ℤ)).obj P) ≫
       DerivedCategory.Qh.map
         ((homotopyTensorSingleIso B').inv.app ((F.mapHomotopyCategory (.up ℤ)).obj P) ≫
-          eH.inv ▷ (F.mapHomotopyCategory (.up ℤ)).obj P) := by sorry
+          eH.inv ▷ (F.mapHomotopyCategory (.up ℤ)).obj P) := by
+  dsimp only
+  unfold residueExchangeTensorPullIso
+  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  rw [integralResidue_tensorPullCounit_core ℓ E f P]
+  simp only [Iso.hom_inv_id_app_assoc]
 end AlgebraicGeometry.ProEtale.CondensedRing

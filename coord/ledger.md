@@ -15842,3 +15842,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:16 L: merged deliver/A3/Sheaf.AlgebraicGeometry.EllAdicLocalizingCohomologicalRepresentability (stage 3; reviewer PASS; first push; landing 20261017T141635-L-3672669 (interface); batch 20261017T141632; modules 5; new nodes 4)
 - 14:16 L: merged deliver/C1/Sheaf.AlgebraicGeometry.EllAdicProperLocalizingCoproducts (stage 3; reviewer PASS; first push; landing 20261017T141636-L-3673008 (interface); batch 20261017T141632; modules 3; new nodes 2)
 - 14:16 L: merged deliver/E1/Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound (stage 3; reviewer PASS; after a return; landing 20261017T141636-L-3673336 (proof); batch 20261017T141632; modules 1; new nodes 0)
+- 14:27 L: merged deliver/B4/Sheaf.Paper.IntegralResidueTensorPullCounitModel (stage 3; reviewer PASS; first push; landing 20261017T142722-L-3876109 (interface); batch 20261017T142719; modules 2; new nodes 1)
