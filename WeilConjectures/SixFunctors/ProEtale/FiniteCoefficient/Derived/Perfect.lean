@@ -486,7 +486,6 @@ theorem isLocallyPerfect_of_isDualizable [IsNoetherianRing Λ]
       (isDualizable_leftDerivedUpperStar_obj (g i) hK)
     exact ⟨P, a, b, ha, hb, hP, ⟨e⟩⟩
 
-set_option maxHeartbeats 1000000 in
 -- the kernel checks the instances of the derived projection formula
 set_option maxHeartbeats 1000000 in
 omit [Finite Λ] in
