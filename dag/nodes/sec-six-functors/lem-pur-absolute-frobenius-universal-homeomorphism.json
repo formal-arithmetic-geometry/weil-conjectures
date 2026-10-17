@@ -82,12 +82,14 @@
   }
  ],
  "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.Hom.IsFrobenius.isUniversalHomeomorphism",
-   "AlgebraicGeometry.isUniversalHomeomorphism_le_universally_isHomeomorph"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-17 00:47 UTC for group NM, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: The first proves the absolute q-power Frobenius is a universal homeo"
+  "module": "Sheaf.AlgebraicGeometry.AbsoluteFrobeniusUniversalHomeomorphism",
+  "declaration": "WeilConjectures.FiniteFieldDatum.absoluteFrobenius_isUniversalHomeomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbsoluteFrobeniusUniversalHomeomorphism.lean",
+  "statement": "theorem absoluteFrobenius_isUniversalHomeomorphism (D : WeilConjectures.FiniteFieldDatum.{u}) (T : Scheme.{u}) [T.Over (Spec (CommRingCat.of D.k₀))] : IsUniversalHomeomorphism (T.iterateFrobenius D.prime (D.model_characteristic (T ↘ Spec (CommRingCat.of D.k₀))) D.a)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-17",
+  "existing": false
  },
  "lean_audit": {
   "slopmaster2": {
@@ -117,5 +119,13 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-736f99743",
+  "group": "NO",
+  "result": "pass",
+  "note": "Every clause matches the node: FiniteFieldDatum.{u}; T : Scheme.{u} with [T.Over (Spec k0)] and no finite-type or separatedness hypothesis; the recorded map Scheme.iterateFrobenius with n = D.a (identity on points, s -> s^(p^a) = s^q), whose char-p proof comes from the landed model_characteristic; conclusion IsUniversalHomeomorphism, which upstream proves implies the recorded (topologically IsHomeomorph).universally form (equivalent by Stacks 04DF, and the form used by many landed nodes and by the lead's attachment). Replacing the attach.py existing record is justified: upstream IsFrobenius.isUniversalHomeomorphism needs hF : F.IsFrobenius q, and no upstream or Sheaf lemma gives that for iterateFrobenius, so no existing declaration states the node for the canonical map. Only the node's lean record changed; the record is complete and its statement verbatim; dependency nodes untouched; docstrings carry source, blueprint id and proof sketch; proof is sorry only; report has Worker report and Second reading by NO. Edge cases covered: empty T, zero rings, non-separated T, a = 1, one universe. nt_compile.py on the side overlay: no errors or warnings; #check signature as expected; a deliberate error in a test copy was reported. Minor, no action: model_characteristic belongs to def-weil-relative-frobenius-geometric-fiber (not in stmt_deps) but is only a proof argument."
  }
 }
