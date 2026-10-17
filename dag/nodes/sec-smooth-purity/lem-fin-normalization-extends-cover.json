@@ -82,18 +82,41 @@
    }
   },
   {
-   "text": "For an affine cover $V=\\bigcup_iU_i$, write $U_i=\\operatorname{Spec}B_i$, $N_i=\\nu^{-1}U_i=\\operatorname{Spec}C_i$ and $W_i=f^{-1}U_i=\\operatorname{Spec}D_i$. Step 4 identifies $C_i=D_i$ inside $L$, compatibly with $B_i$. By [def-weil-affine-spectrum] the identity ring maps give inverse isomorphisms $\\phi_i:N_i\\to W_i$ over $U_i$. On a nonempty principal open $D(b)\\subset U_i$ the coordinate rings are $(C_i)_b=(D_i)_b$ inside $L$, using the localization identifications in [def-fin-normalization-extension] and the affine structure sheaf; the restricted comparison is again the identity. To check overlaps without assuming $U_i\\cap U_j$ affine, put $T_{ij}=\\nu^{-1}(U_i\\cap U_j)$. Both $\\phi_i|_{T_{ij}}$ and $\\phi_j|_{T_{ij}}$ land in $W_j$, since they are over $V$. Cover $T_{ij}$ by nonempty affine opens $A$. The scheme $N_i$ is integral because it is isomorphic to the integral open $W_i$ of $P$; identify its function field with $L$ through $\\phi_i$. Thus $\\Gamma(A,\\mathcal O_{N_i})\\to L$ is injective by [lem-sc-integral-scheme-stalks-in-function-field]. Each of the two maps $A\\to W_j=\\operatorname{Spec}D_j$ induces a ring map $D_j\\to\\Gamma(A,\\mathcal O_{N_i})$ whose composite to $L$ is the inclusion $D_j\\subset L$: the generic field maps of both $\\phi_i$ and $\\phi_j$ are the identity, since they extend the identities on $C_i=D_i$ and $C_j=D_j$, whose fraction fields are $L$. Injectivity therefore makes the two ring maps equal, and [def-weil-affine-spectrum] makes the two morphisms $A\\to W_j$ equal. The uniqueness clause of [lem-weil-pbc-scheme-morphism-gluing] gives equality on $T_{ij}$. These equal restricted isomorphisms have equal inverses on $f^{-1}(U_i\\cap U_j)$; empty overlaps require no check. Apply the same gluing node to the $\\phi_i$ followed by $W_i\\hookrightarrow P$, and to their inverses followed by $N_i\\hookrightarrow\\nu^{-1}V$. Their composites are locally identities, so uniqueness gives inverse global morphisms. Their composites to $V$ agree locally and hence globally as well. The resulting isomorphism $\\nu^{-1}V\\cong P$ is over $V$. Finally [lem-weil-pbc-open-preimage-fibre-product], applied to $\\nu:N\\to X$ and $V\\subseteq X$, identifies $\\nu^{-1}V$ with $N\\times_XV$, proving the claimed restriction.",
+   "text": "Choose a cover of $V$ by nonempty affine opens $U_i=\\operatorname{Spec}B_i$. Write $N_i=\\nu^{-1}U_i=\\operatorname{Spec}C_i$ and $W_i=f^{-1}U_i=\\operatorname{Spec}D_i$. Step 4 gives $C_i=D_i$ as $B_i$-subalgebras of $L$. The contravariant spectrum construction [def-weil-affine-spectrum] therefore gives inverse isomorphisms $\\phi_i:N_i\\to W_i$ over $U_i$. Both rings have fraction field $L$ by step 3, so the induced generic field map of $\\phi_i$ is the identity of $L$. The generic identifications for all $N_i$ are compatible: the construction [def-fin-normalization-extension] glues their integral-closure rings by localization inside the same $L$. In particular these identifications induce the same generic map on every nonempty overlap.",
    "uses": [
     "def-weil-affine-spectrum",
-    "def-fin-normalization-extension",
-    "lem-sc-integral-scheme-stalks-in-function-field",
-    "lem-weil-pbc-scheme-morphism-gluing",
-    "lem-weil-pbc-open-preimage-fibre-product"
+    "def-fin-normalization-extension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normalization-extends-cover.md",
     "place": "Proof, sentences beginning \"This identifies the restrictions\" and \"it glues\"; schemes.tex, Tag 01JA and Lemma 01JB (lemma-glue, mapping properties)"
+   }
+  },
+  {
+   "text": "Put $T_{ij}=\\nu^{-1}(U_i\\cap U_j)$. If nonempty, it is an open of the integral scheme $N_i\\cong W_i$, with function field $L$. The canonical generic-stalk morphism $a:\\operatorname{Spec}L\\to T_{ij}$ is scheme-theoretically dominant: on each nonempty open $H\\subset T_{ij}$ the structure-sheaf map to $a_*\\mathcal O_{\\operatorname{Spec}L}$ is the injective generic germ $\\mathcal O(H)\\to L$ of [lem-sc-integral-scheme-stalks-in-function-field]; on the empty open it is the identity of the zero ring. Both restrictions of $\\phi_i$ and $\\phi_j$ land in $W_j$ because they are over $V$, and have the same composite with $W_j\\to U_j$. Their composites with $a$ agree: by step 5 they both correspond to the inclusion $D_j\\hookrightarrow L$ under [def-weil-affine-spectrum]. The map $W_j\\to U_j$ is separated by [lem-weil-pbc-affine-source-morphism-separated], since $W_j$ is affine. Apply [lemma-nagata-ext-scheme-theoretically-dominant-separated] with $T=T_{ij}$, $W=\\operatorname{Spec}L$, $Y=W_j$, $Z=U_j$, and $\\iota=a$. Its conclusion is equality of the overlap restrictions. Empty overlaps have unique maps and need no comparison.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-thm-nagata-sketch-conrad/lemma-nagata-ext-scheme-theoretically-dominant-separated.md",
+    "place": "Statement and proof; applied to the overlap comparison in the item blueprint sentence \"it glues because the identifications are the identity inside the function field\". Affine separatedness: Stacks Tag 01KN (schemes-lemma-affine-separated)."
+   }
+  },
+  {
+   "text": "The equality in step 6 also gives equality of the inverse restrictions on $f^{-1}(U_i\\cap U_j)$, by the inverse identities of the restricted isomorphisms. Apply [lem-weil-pbc-scheme-morphism-gluing] to the maps $N_i\\xrightarrow{\\phi_i}W_i\\hookrightarrow P$ and to the inverse maps $W_i\\to N_i\\hookrightarrow\\nu^{-1}V$. This gives global maps in both directions. On each $N_i$ or $W_i$ their composites are identities, so the uniqueness clause of the same gluing theorem makes them inverse globally. The composites to $V$ agree locally, hence globally by that uniqueness clause. Thus $\\nu^{-1}V\\cong P$ over $V$. Finally [lem-weil-pbc-open-preimage-fibre-product] identifies $\\nu^{-1}V$ with $N\\times_XV$, giving the claimed restriction isomorphism.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-open-preimage-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JB (lemma-glue), mapping properties for the maps and their inverses; Tag 01JR (lemma-open-fibre-product). Realizes the item blueprint sentences \"This identifies the restrictions\" and \"it glues\"."
    }
   }
  ],
@@ -116,6 +139,8 @@
   "lem-sc-integral-scheme-stalks-in-function-field",
   "lem-sc-function-field-sections-glue",
   "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
   "lem-weil-pbc-scheme-morphism-gluing"
  ],
  "proof_origin": {
@@ -182,7 +207,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -213,19 +238,29 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-fin-normalization-extends-cover",
   "worker": "stage1",
-  "summary": "Preserved the statement and expanded the affine integral-closure proof. Supplied Noetherian hypotheses before using normal components, proved dominance before identifying generic residue fields, reused the etale residue-field Mathlib leaf to obtain the finite function-field extension, and made the monic-equation and gluing arguments explicit. No new nodes. Second reading makes overlap equality an explicit comparison of ring maps into one affine target; the spectrum equivalence and injective generic germs justify the check.",
-  "blueprint": "Steps 1-2 justify the first sentence of the imported proof; step 3 justifies its function-field and affine-cover assertions; step 4 proves the integral-closure equality; step 5 realizes the restriction and gluing sentences. The final finiteness and global normality remarks of the imported proof are not clauses of this item and are not needed for its conclusion."
+  "summary": "Dedicated long-step repair: retained the statement, Lean record, searches, and steps 1-4 verbatim. Replaced old step 5 by local spectrum comparisons, an application of the existing closed scheme-theoretically-dominant separated-target extensionality theorem (with all its hypotheses verified), and gluing of the maps and their inverses. No new nodes. Every proof step is below 2000 characters.",
+  "blueprint": "Steps 1-4 retain the existing realization of the normality, finite function-field extension and affine integral-closure sentences. Steps 5-7 realize \"This identifies the restrictions\" and \"it glues because the identifications are the identity inside the function field\" of the unchanged master proof and current main-20261015 proof.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-etale-normal-components",
+    "why": "Generic etale normal-components theorem, used exactly as in the imported first sentence; the unit has no replacement for this normality input."
+   },
+   {
+    "node": "lem-sc-function-field-sections-glue",
+    "why": "Generic rational-section regularity/gluing tool used in step 4 to turn membership in all local rings into a section; it supports the affine integral-closure proof rather than replacing the unit route."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q02-582079739",
-  "group": "Q02",
+  "reviewer": "NT-cc-N7-6b2de569a",
+  "group": "N7",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q02-582079739 (reviewer sub-agent of L); spot-checked: Read the full mathematics, cited statements, source passages, and unit/chapter route. All five steps hold, including the structural field inclusion and gluing over V without separatedness. No new nodes, duplicate replacement, or dependency cycle found. Accept lem-fin-etale-normal-components as a generic tool use. Detailed checks are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-6b2de569a (reviewer sub-agent of L); spot-checked: Read the whole item: statement, stmt_deps, all 7 steps and the split_report. The commit adds no new nodes and changes only the item and its report. Statement, stmt_deps and Lean record are unchanged; steps 1-4 are kept and the long old step 5 is replaced by steps 5-7. proof_deps is exactly the union of the step uses. The 477-node dependency closure does not reach the item, so there is no cycle. Every cited statement checks against its step. Step 1 (01T6, 01OW, finite->proper->finite type) makes X, V and P Noetherian. Step 2: lem-fin-etale-normal-components plus connected=nonempty+connected gives P normal integral. Step 3: the open map gives f(eta_P)=eta_V; W=f^-1(U) is affine with D finite over B; B->D is injective; W->U is etale by base change (01JR, 02GO); 02GL at (0) gives L/K finite separable. Step 4: D is integral over B (00GK); integral elements lie in each integrally closed O_{P,w} inside L, and sections-glue gives C=D. Step 5: Spec gives isomorphisms phi_i over U_i that agree generically through the localization gluing of the definition. Step 6: Spec L -> T_ij is scheme-theoretically dominant, by injective germs on nonempty opens (the Stacks 01RB sense). Both restrictions land in W_j over U_j and agree generically, since both are the generic point of P. W_j->U_j is separated because its source is affine (schemes.tex 4387, 01KN). The Nagata node then applies with all hypotheses met; I checked it against slopmaster2 Separated.lean:344-385, which is sorry-free, so it counts as a tool. No separatedness of X, P or V is used. Step 7: gluing existence and uniqueness for the maps and their inverses, then 01JR. Edge cases: dropping normality, connectedness or finiteness gives counterexamples, so each hypothesis is needed and each is used at a definite step. The z->z^n cover of G_m inside A^1, the degree-one cover, empty overlaps and non-separated X all behave correctly. The blueprint proof is identical in master and main-20261015; steps 5-7 realize 'identifies the restrictions; it glues'. No SGA is cited and this is not a target node. I accept the tool uses lem-fin-etale-normal-components and lem-sc-function-field-sections-glue (Lean-closed). No fixes were needed."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.NormalizationExtendsCover",
@@ -244,5 +279,9 @@
   "group": "NS",
   "result": "pass",
   "note": "Wrote review.md. Audited the immutable module, all eight statement dependencies, sources, report sections, edge cases, universes, and verbatim signature. Single-file scompile.py checks passed for sandbox and library module. No findings or fixes required."
- }
+ },
+ "tool_uses": [
+  "lem-fin-etale-normal-components",
+  "lem-sc-function-field-sections-glue"
+ ]
 }

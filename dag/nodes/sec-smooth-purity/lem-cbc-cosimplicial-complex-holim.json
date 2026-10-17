@@ -29,10 +29,11 @@
  ],
  "proof": [
   {
-   "text": "Use the projective model on unbounded $\\Lambda$-module cochain complexes from [lem-coef-projective-cochain-monoidal-model]. Verify the dg model axiom directly from its cofibration description. For a cofibration $i:A\\to B$ and a fibration $p:X\\to Y$, the Hom comparison is degreewise surjective: split $i$ degreewise, then lift the remaining graded map from its projective cokernel through the degreewise surjection $p$. Its kernel is $\\underline{\\operatorname{Hom}}(\\operatorname{coker}i,\\ker p)$. If $p$ is trivial, $\\ker p$ is acyclic and dg-projectivity of $\\operatorname{coker}i$ makes this kernel acyclic. If $i$ is trivial, its cokernel $Q$ is acyclic and dg-projective; its identity is a boundary in $\\underline{\\operatorname{Hom}}(Q,Q)$, hence $Q$ is contractible and so is its Hom into any complex. Thus the comparison is a trivial fibration in either case. This also proves the axiom over $\\mathbf Z$: the same Hom comparison has the underlying abelian-group complex, with unchanged surjectivity and acyclicity; tensoring and cotensoring by abelian-group complexes have their usual Koszul-sign formulas. To apply [lem-coef-quillen-section-rectification], verify stability with [lem-coef-pointed-model-stability]. For a cofibrant complex $Q$, put $C=\\operatorname{Cone}(1_Q)$ with differential $(b,a)\\mapsto(db+a,-da)$. It is contractible, and $Q\\to C$, $b\\mapsto(b,0)$, is a cofibration: it is split in each degree with dg-projective cokernel $Q[1]$. The pushout $C\\amalg_Q C$ therefore computes $0\\amalg_Q^h0$. In coordinates $(b,a_1,a_2)$ its differential is $(db+a_1+a_2,-da_1,-da_2)$; projection to $a_2$ is a chain map to $Q[1]$ with contractible kernel $C$. A contraction of that kernel is $(b,a_1)\\mapsto(0,b)$; the projection is a quasi-isomorphism by lifting cycles and boundaries across this acyclic kernel. Thus suspension is $[1]$ on the homotopy category, hence an equivalence, as required by the stability criterion. Shifts preserve dg-projectivity since shifting the target Hom complex only reindexes its cohomology. Now apply section rectification to the constant system of these model categories indexed by the small category $\\Delta$, with all transition adjunctions the identity. It gives the objectwise projective model on $\\operatorname{Ch}(\\mathcal P)$, where $\\mathcal P=\\operatorname{Fun}(\\Delta,\\operatorname{Mod}_\\Lambda)$, and identifies its enhanced localization, over evaluation, with $\\operatorname{Fun}(N\\Delta,\\mathbf D(\\Lambda))$. Every object of either projective model is fibrant because maps to zero are degreewise surjective.",
+   "text": "Use the combinatorial projective model on unbounded $\\Lambda$-module cochain complexes from [lem-coef-projective-cochain-monoidal-model]. The tensor/cotensor structures and Hom comparison of [lem-cbc-projective-cochain-dg-compatibility] give its dg-model structure over abelian-group complexes, and [lem-cbc-projective-cochain-suspension] gives stability. Apply [lem-coef-quillen-section-rectification] to the constant system of this stable combinatorial dg model category over the small category $\\Delta$, with identity transition adjunctions and identity coherence maps. Its strict sections are precisely cosimplicial module complexes, equivalently complexes in $\\mathcal P=\\operatorname{Fun}(\\Delta,\\operatorname{Mod}_\\Lambda)$. The cited theorem gives their projective model, with objectwise weak equivalences and fibrations, and identifies its enhanced localization, over evaluation, with $\\operatorname{Fun}(N\\Delta,\\mathbf D(\\Lambda))$. Every object of both projective models is fibrant, since maps to zero are degreewise surjective. These are exactly the model and coherent-diagram identifications used below.",
    "uses": [
     "lem-coef-projective-cochain-monoidal-model",
-    "lem-coef-pointed-model-stability",
+    "lem-cbc-projective-cochain-dg-compatibility",
+    "lem-cbc-projective-cochain-suspension",
     "lem-coef-quillen-section-rectification"
    ],
    "elementary": false,
@@ -110,7 +111,8 @@
  ],
  "proof_deps": [
   "lem-coef-projective-cochain-monoidal-model",
-  "lem-coef-pointed-model-stability",
+  "lem-cbc-projective-cochain-dg-compatibility",
+  "lem-cbc-projective-cochain-suspension",
   "lem-coef-quillen-section-rectification",
   "lem-cbc-presheaf-dg-function-complex",
   "def-weil-size-convention",
@@ -279,7 +281,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-hyperdescent-local-orthogonality",
@@ -292,16 +294,12 @@
   "date": "2026-10-17",
   "item": "lem-cbc-cosimplicial-complex-holim",
   "worker": "stage1",
-  "summary": "Retained the complete unbounded statement. Constructed the free representable resolution of the constant diagram, checked its objectwise contraction, derived its tensor/Hom adjunction, and computed the totalization signs and the actual augmentation transpose. All general inputs are existing nodes; no new nodes or Mathlib leaves. Read Choudhury--Gallauer Lemma 3.19 online; archive remains WANTED.",
+  "summary": "Repaired the dedicated long-step return: extracted the two independent hidden arguments of step 1, dg-model compatibility over abelian groups and the cone calculation identifying suspension with shift, into statement-only searched nodes. Step 1 now applies them before the same section-rectification theorem. Statement, Lean record, proof route and steps 2-7 are unchanged.",
   "blueprint": "Opening 'Choose a compactification c=(j,p)': arbitrary-site hyperdescent foundation, via bounded-below hypersheaf model step 4 and hyperdescent-local-orthogonality step 2. Agent proof of Choudhury--Gallauer, Lemma 3.19 (arXiv:1511.02828v1, printed p. 13), by a free representable resolution; archive WANTED.",
   "tool_uses": [
    {
     "node": "lem-coef-projective-cochain-monoidal-model",
     "why": "General unbounded module-complex model infrastructure; no node of the compact-support unit supplies it."
-   },
-   {
-    "node": "lem-coef-pointed-model-stability",
-    "why": "General suspension criterion to verify the stability input to section rectification."
    },
    {
     "node": "lem-coef-quillen-section-rectification",
@@ -320,12 +318,12 @@
   "lem-coef-model-infinity-derived-adjunction"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q105-1e7f37839",
-  "group": "Q105",
+  "reviewer": "NT-cc-N2-2cc578892",
+  "group": "N2",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-1e7f37839 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and the full statements of the 9 cited nodes. There are no new nodes and the statement is unchanged. Statement checks: D^2=0; the constant case gives M with augmentation m->(m,0,...); unbounded internal degrees need the product total, and it is used. Step 1: I verified the dg axiom (kernel Hom(coker i, ker p); acyclic dg-projective Q is contractible) and stability (homotopy pushout C+_Q C -> Q[1] with contraction (b,a)->(0,b)). Rectification is applied to the constant Delta-system, as in the reviewed lem-cbc-bounded-below-hypersheaf-model. Step 2: the prepend-0 contraction holds in degrees 0 and -1, and the Koszul cross terms cancel. Step 3: P^{-n}=L_[n] on C=Delta^op satisfies the bounded-above free-source clause of lem-cbc-presheaf-dg-function-complex. Step 4: B preserves surjections and trivial fibrations through the acyclic kernel. Step 5: both functors are homotopical; the counit cone plus the cone-calculus criterion gives the coherent limit. Step 6: I recomputed eps(r,n)=(-1)^{rn+n(n-1)/2}; the ratio exponent r+2n-1 gives coface coefficient +1. Step 7: the transpose is nonzero only on P^0 and equals a^0, and delta a^0=0. Accepted tool_uses: lem-coef-projective-cochain-monoidal-model, lem-coef-pointed-model-stability, lem-coef-quillen-section-rectification, lem-coef-model-infinity-derived-adjunction (general model-category tools, three with precedent in sk-prop-sf-cbc nodes). No duplicates: coherent-end, cosimplicial-frame, proetale-hypercover-total (coproduct) and dold-kan checked. No cycle, no SGA. Choudhury-Gallauer Lemma 3.19 is not archived (WANTED), so I could not check the page; the proof does not depend on it and is correctly marked agent-written. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-2cc578892 (reviewer sub-agent of L); spot-checked: I read the item in full (statement and 7 steps), both new nodes, and the full statements of all 8 cited nodes. Step 1 is the repaired long step (about 2572 to 1117 characters). It now applies the projective model, the new dg-compatibility and suspension nodes, and section rectification over the small category Delta with identity transitions; all hypotheses of the rectification node are met. I rechecked steps 2-7: the prepend-0 contraction including degree 0; P^{-n}=L_[n] for C=Delta^op, which fits the bounded-above free-source clause; Quillen-ness from surjections plus acyclic kernels; both functors preserve quasi-isomorphisms, so the counit cone satisfies the cone-calculus limit criterion; signs eps(r,n)=(-1)^{rn+n(n-1)/2} give internal sign (-1)^n and coface coefficient -(-1)^r(-1)^{r-1}=+1; the augmentation is a^0 with delta a^0=0. dg-compatibility node: degreewise surjectivity holds by splitting i and lifting from the projective terms of the cokernel; the kernel is Hom(coker i, ker p), which is acyclic if p is trivial and contractible if i is trivial; this is exactly the rectification node's compatibility axiom over Ch(Ab), and no Z-projectivity of R is needed. Suspension node: d^2=0, the contraction (b,a)->(0,b) works, the pushout differential is correct, and the projection to a2 has contractible kernel C(Q); the pointed-model-stability node then gives Sigma=[1] and stability. Edge cases checked: zero ring, Q=0, Q in degree 0, acyclic Q. Both new nodes are statement-only and self-contained. They are not duplicates: lem-coef-sheaf-flat-model uses the flat model, whose fibrations do not suit step 4; enriched-projective-diagram-model and dg-model-underlying-localization assume the axiom; pointed-model-stability is only the conditional criterion. Neither restates a clause of the item. No cycle, no SGA, no blueprint same_as. Choudhury-Gallauer arXiv:1511.02828 is not archived (WANTED); the item and both new nodes are marked agent-written, and their proofs were checked directly. Accepted tool_uses: lem-coef-projective-cochain-monoidal-model, lem-coef-quillen-section-rectification, lem-coef-model-infinity-derived-adjunction. No fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.CosimplicialComplexHolim",

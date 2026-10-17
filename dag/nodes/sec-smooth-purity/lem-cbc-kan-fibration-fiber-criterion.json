@@ -57,21 +57,33 @@
    }
   },
   {
-   "text": "Conversely assume all vertex fibers are contractible Kan. We first extract an actual contraction of any such fiber $K$. Apply [lem-cbc-kan-mapping-homotopy-invariance] to the realization weak equivalence $u:K\\to\\Delta^0$ and Kan target $K$. Precomposition $U:K=\\operatorname{Fun}(\\Delta^0,K)\\to\\operatorname{Fun}(K,K)$ has a simplicial homotopy inverse $V$, with $UV$ homotopic to the identity. Evaluate that homotopy at the identity map of $K$: this is a simplicial path from the constant map at $k=V(\\mathrm{id}_K)$ to $\\mathrm{id}_K$. Its exponential transpose is $J:K\\times\\Delta^1\\to K$, from the constant map at $k$ to the identity. For every $n\\geq1$ and boundary map $a:\\partial\\Delta^n\\to K$, composition with $J$ gives a path from the constant boundary map at $k$ to $a$ in $\\operatorname{Fun}(\\partial\\Delta^n,K)$. By [lem-cbc-internal-hom-fibration-corner-map] for $\\partial\\Delta^n\\hookrightarrow\\Delta^n$ and $K\\to\\Delta^0$, restriction $\\operatorname{Fun}(\\Delta^n,K)\\to\\operatorname{Fun}(\\partial\\Delta^n,K)$ is Kan. Lift that path starting at the constant simplex at $k$, using its dimension-one horn lifting. The other endpoint fills $a$. In dimension zero, weak contractibility makes $|K|$ nonempty; a representing simplex has a vertex, so an empty boundary also extends.\n\nNow fix a boundary square $a:\\partial\\Delta^n\\to X$, $\\sigma:\\Delta^n\\to Y$ for $p$, with $n\\geq1$. Put $T=\\Delta^n\\times_YX$ and $q:T\\to\\Delta^n$, and let $a'$ be the given boundary section. A horn lift for $q$ is obtained by lifting against $p$ and pairing with its specified bottom coordinate; thus $q$ is Kan. Its fiber $K$ over $0$ is exactly $X_{\\sigma(0)}$. Let $c:\\Delta^n\\times\\Delta^1\\to\\Delta^n$ be induced by the monotone function $c(j,0)=0$, $c(j,1)=j$. Apply [lem-cbc-internal-hom-fibration-corner-map] with $\\varnothing\\hookrightarrow\\partial\\Delta^n$ and $q$: the exponential map $\\operatorname{Fun}(\\partial\\Delta^n,T)\\to\\operatorname{Fun}(\\partial\\Delta^n,\\Delta^n)$ is Kan. Lift the path $c|_{\\partial\\Delta^n\\times\\Delta^1}$ with prescribed final endpoint $a'$, using the other dimension-one horn. This gives $h:\\partial\\Delta^n\\times\\Delta^1\\to T$ over $c$, whose initial endpoint $h_0$ lands in $K$. The fiber extension just proved extends $h_0$ to $v:\\Delta^n\\to K$.\n\nApply the same corner-map theorem with $\\partial\\Delta^n\\hookrightarrow\\Delta^n$ and $q$. The pair $(h,c)$ is a path in its pullback target, and $v$, considered as a map to $T$, lies over its initial endpoint. Lift this path starting at $v$. Its exponential transpose $w:\\Delta^n\\times\\Delta^1\\to T$ satisfies $qw=c$ and $w|_{\\partial\\Delta^n\\times\\Delta^1}=h$. Restricting to time $1$ and projecting to $X$ gives a lift of $\\sigma$ with exactly boundary $a$. For $n=0$, the nonempty fiber supplies a vertex over $\\sigma(0)$ as above. This proves all boundary lifting, precisely the trivial Kan fibration condition of [def-weil-pbc-trivial-kan-fibration]. Neither $T$ nor $Y$ was assumed Kan: only $q$ and the fiber $K$ were used in that sense.",
+   "text": "Assume all vertex fibers are contractible Kan. For any such fiber $K$, apply [lem-cbc-kan-mapping-homotopy-invariance] to $K\\to\\Delta^0$ with target $K$. Precomposition $U:K\\to\\operatorname{Fun}(K,K)$ has a simplicial homotopy inverse $V$. Evaluate the homotopy $UV\\simeq\\mathrm{id}$ at $\\mathrm{id}_K$ and transpose: this gives $J:K\\times\\Delta^1\\to K$ between the constant map at $k=V(\\mathrm{id}_K)$ and $\\mathrm{id}_K$. For $n\\geq1$ and $a:\\partial\\Delta^n\\to K$, restriction of $J$ along $a$ gives an edge between the constant boundary map at $k$ and $a$. By [lem-cbc-internal-hom-fibration-corner-map], applied to $\\partial\\Delta^n\\hookrightarrow\\Delta^n$ and $K\\to\\Delta^0$, restriction $\\operatorname{Fun}(\\Delta^n,K)\\to\\operatorname{Fun}(\\partial\\Delta^n,K)$ is Kan. Its dimension-one horn lifting lifts this edge from the constant simplex at $k$; the other endpoint fills $a$. Either orientation of $J$ works since both one-dimensional horns lift. For $n=0$, weak contractibility gives $|K|\\ne\\varnothing$; a simplex representing a realization point has a vertex, which fills the empty boundary. Thus every map $\\partial\\Delta^n\\to K$ extends to $\\Delta^n$ for all $n\\geq0$.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
-    "def-weil-pbc-trivial-kan-fibration",
     "lem-cbc-kan-mapping-homotopy-invariance",
     "lem-cbc-internal-hom-fibration-corner-map"
    ],
    "elementary": false,
    "source": {
     "document": "https://kerodon.net/tag/03PJ",
-    "place": "Proposition 3.1.7.17 for the fiber contraction, checked with Corollary 3.6.4.3 (03X7) for the realization convention. Agent explicit three-path-lift boundary-filling argument using the exact Mathlib corner-map theorem, PushoutProduct.lean:70-93. It replaces the circular use of Kerodon 01NU through the existing right-fibration node."
+    "place": "Proposition 3.1.7.17; explicit evaluation at the identity and dimension-one lifting through the restriction fibration (Kerodon 00TM; Mathlib PushoutProduct.lean:70-93)."
    }
   },
   {
-   "text": "If $p$ is a trivial Kan fibration, [lem-weil-pbc-trivial-kan-homotopy-equivalence] supplies $g:Y\\to X$ with $pg=1_Y$ and a simplicial homotopy from $1_X$ to $gp$. The identity homotopy on $Y$ supplies the other composite. Applying [lem-cbc-simplicial-homotopy-equivalence-weak] to these maps proves that $p$ is a weak homotopy equivalence. Steps 1-5 give the three-way equivalence for arbitrary Kan fibrations, including non-Kan bases.",
+   "text": "Given a boundary square $a:\\partial\\Delta^n\\to X$, $\\sigma:\\Delta^n\\to Y$ for $p$, put $T=\\Delta^n\\times_YX$ and $q:T\\to\\Delta^n$. Pairing any horn lift for $p$ with its specified simplex coordinate proves that $q$ is Kan. The map $a$ gives a section $a'$ over $\\partial\\Delta^n$. Its fiber over $0$ is $K=X_{\\sigma(0)}$. The monotone function $c(j,0)=0$, $c(j,1)=j$ on $[n]\\times[1]$ induces a simplicial contraction of $\\Delta^n$ from the constant map at $0$ to the identity. Step 4 gives the extension property $\\operatorname{Hom}(\\Delta^n,K)\\to\\operatorname{Hom}(\\partial\\Delta^n,K)$ required by [lem-cbc-kan-contracted-base-section-extension]. Apply that lemma with $L=\\Delta^n$, $C=\\partial\\Delta^n$, $E=T$: the resulting section extends $a'$, and its projection to $X$ fills the original square. This also applies at $n=0$, with empty boundary. Therefore $p$ is a trivial Kan fibration as defined in [def-weil-pbc-trivial-kan-fibration]. No Kan hypothesis on $T$ or $Y$ was used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-kan-contracted-base-section-extension",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean",
+    "place": "Agent application of the extracted contracted-base section-extension lemma to the monotone simplex contraction; preserves the original step-4 route."
+   }
+  },
+  {
+   "text": "If $p$ is a trivial Kan fibration, [lem-weil-pbc-trivial-kan-homotopy-equivalence] supplies $g:Y\\to X$ with $pg=1_Y$ and a simplicial homotopy from $1_X$ to $gp$. The identity homotopy on $Y$ supplies the other composite. Applying [lem-cbc-simplicial-homotopy-equivalence-weak] to these maps proves that $p$ is a weak homotopy equivalence. Steps 1-6 give the three-way equivalence for arbitrary Kan fibrations, including non-Kan bases.",
    "uses": [
     "lem-weil-pbc-trivial-kan-homotopy-equivalence",
     "lem-cbc-simplicial-homotopy-equivalence-weak"
@@ -95,7 +107,7 @@
    }
   },
   {
-   "text": "For $f:A\\to B$ with $A,B$ Kan, the map $P(f)\\to A\\times B$, $(a,\\gamma)\\mapsto(a,\\gamma(1))$, is the pullback of $q$ from step 6 along $(a,b)\\mapsto(f(a),b)$. A horn square for this pullback is solved by the lift for $q$ together with its prescribed $(a,b)$ coordinate. The projection $A\\times B\\to B$ lifts horns by filling their $A$ coordinate in the Kan complex $A$. Given a horn square for their composite, first fill in $A\\times B$ and then lift to $P(f)$. Thus the stated endpoint map $p_f:P(f)\\to B$ is a Kan fibration. Since $B$ is Kan, filling a horn first in $B$ and then lifting shows that $P(f)$ is Kan too.",
+   "text": "For $f:A\\to B$ with $A,B$ Kan, the map $P(f)\\to A\\times B$, $(a,\\gamma)\\mapsto(a,\\gamma(1))$, is the pullback of $q$ from step 7 along $(a,b)\\mapsto(f(a),b)$. A horn square for this pullback is solved by the lift for $q$ together with its prescribed $(a,b)$ coordinate. The projection $A\\times B\\to B$ lifts horns by filling their $A$ coordinate in the Kan complex $A$. Given a horn square for their composite, first fill in $A\\times B$ and then lift to $P(f)$. Thus the stated endpoint map $p_f:P(f)\\to B$ is a Kan fibration. Since $B$ is Kan, filling a horn first in $B$ and then lifting shows that $P(f)$ is Kan too.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones"
    ],
@@ -118,7 +130,7 @@
    }
   },
   {
-   "text": "The equality $p_fi=f$ holds since the final endpoint of the constant path at $f(a)$ is $f(a)$. The two-out-of-three property of weak homotopy equivalences of k-spaces in [lem-coef-topological-serre-model], applied to the continuous maps $|i|$, $|p_f|$ and $|f|$ between realizations (all objects lie in $\\mathcal K$ by the current realization-values clause of [lem-coef-realization-finite-limits]), and step 8 show that $f$ is a weak homotopy equivalence if and only if $p_f$ is. Apply the three-way criterion of steps 1-5 to the Kan fibration $p_f$. Its strict fiber over $b$ is degreewise exactly $A\\times_{B,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,B)\\times_{\\operatorname{ev}_1,B}\\{b\\}$, the homotopy fiber in [def-cbc-enhanced-diagrams-cones]. Hence $f$ is a weak homotopy equivalence exactly when every homotopy fiber is contractible. If $B$ is empty, existence of $f$ forces $A$ and $P(f)$ empty and all conclusions remain valid; otherwise an empty fiber fails contractibility because its component set is empty.",
+   "text": "The equality $p_fi=f$ holds since the final endpoint of the constant path at $f(a)$ is $f(a)$. The two-out-of-three property of weak homotopy equivalences of k-spaces in [lem-coef-topological-serre-model], applied to the continuous maps $|i|$, $|p_f|$ and $|f|$ between realizations (all objects lie in $\\mathcal K$ by the current realization-values clause of [lem-coef-realization-finite-limits]), and step 9 show that $f$ is a weak homotopy equivalence if and only if $p_f$ is. Apply the three-way criterion of steps 1-6 to the Kan fibration $p_f$. Its strict fiber over $b$ is degreewise exactly $A\\times_{B,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,B)\\times_{\\operatorname{ev}_1,B}\\{b\\}$, the homotopy fiber in [def-cbc-enhanced-diagrams-cones]. Hence $f$ is a weak homotopy equivalence exactly when every homotopy fiber is contractible. If $B$ is empty, existence of $f$ forces $A$ and $P(f)$ empty and all conclusions remain valid; otherwise an empty fiber fails contractibility because its component set is empty.",
    "uses": [
     "lem-coef-topological-serre-model",
     "lem-coef-realization-finite-limits",
@@ -135,6 +147,7 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-pbc-trivial-kan-fibration",
   "lem-cbc-internal-hom-fibration-corner-map",
+  "lem-cbc-kan-contracted-base-section-extension",
   "lem-cbc-kan-mapping-homotopy-invariance",
   "lem-cbc-simplicial-homotopy-equivalence-weak",
   "lem-coef-kan-realization-serre",
@@ -148,7 +161,7 @@
   "document": "https://kerodon.net/tag/00ZP",
   "place": "Agent synthesis following Proposition 3.3.7.6 and Example 3.1.8.10 (0101), using existing realization/Serre-sequence and internal-hom corner-map leaf; continuous and simplicial low-degree details are expanded above. Online sources read, archival copies WANTED."
  },
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-enhanced-functor-cone-calculus",
@@ -281,7 +294,7 @@
   "date": "2026-10-17",
   "item": "lem-cbc-kan-fibration-fiber-criterion",
   "worker": "stage1",
-  "summary": "Nine-step split with two new nodes: one statement-only homotopy-invariance theorem and one exact Mathlib internal-hom corner-map leaf. The arbitrary-base criterion uses realized fibers and the Serre sequence. Its boundary-lifting implication is proved by extracting a contraction of each fiber via the existing Kan mapping-homotopy-invariance theorem, filling fiber boundaries by path lifting, then lifting the boundary and simplex contraction paths through explicit corner maps. This avoids the existing right-fibration theorem, whose new proof cites this item and failed the second-reader server preflight. The mapping-path clause uses the same corner-map leaf and an explicit min contraction. No statement changed. Return repair: revalidated every cited statement against the current DAG, including the reviewed realization lemma with its added boundary definition. Step 1 now writes the vertex pullback and its k-ified fiber topology explicitly; step 9 specifies the maps in the k-space two-out-of-three application. The statement and all dependency edges are retained.",
+  "summary": "NJ dedicated long-step repair: preserved the statement, Lean record, route, existing search evidence, and all other arguments. Replaced former step 4 by an explicit fiber-contraction/boundary-filling step citing the existing mapping-invariance and corner-map statements, followed by a short application of the new contracted-base partial-section extension lemma. The new statement-only node isolates the two-stage transport of a prescribed boundary section and intervening fiber extension. There are ten steps, all below 2000 characters. No new Mathlib leaf.",
   "blueprint": "Proof opening: Choose a compactification c=(j,p); the local compact-support-extension and cofiltered-coherent-diagram splits require coherent comparisons of this choice. This is an agent-added foundation, not a WANTED quotation from the blueprint. Current ancestor source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md. The split supplies the coherent-cone foundation required by its opening compactification choice, retaining the same unit and chapter.",
   "tool_uses": [
    {
@@ -319,12 +332,12 @@
   "lem-coef-topological-serre-model"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NR-88554e53b",
-  "group": "NR",
+  "reviewer": "NT-cc-NJ-fdbaca78d",
+  "group": "NJ",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-88554e53b (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and all 8 cited statements in full. Kerodon 00ZP: the arbitrary-base equivalence trivial Kan <=> weak equivalence <=> contractible Kan fibers matches the item's three conditions, and no target is weakened. Kerodon 00UB: the new node is its true forward implication for arbitrary simplicial sets (single cylinder homotopies, either order). Mathlib leaf SSet.fibration_pullbackObjObjπ at PushoutProduct.lean:70-72 is an exact match: Fibration = J.rlp horn lifting including outer horns, Mono = degreewise injective. Steps 1-9 checked: Kan vertex fiber and k-fiber; pi0 via orbit/stabilizer; all pi_n vanish by exactness at every basepoint; step 4's contraction plus three corner-map lifts (monotone c, edge direction harmless, n=0 case); trivial Kan to weak equivalence via section and homotopy; endpoint map Kan; the P(f) pullback/composite argument, which is genuinely elementary; the monotone min homotopy; two-out-of-three in k-spaces with the strict fiber equal to the homotopy fiber; the empty-base cases. The item is not in its own 34-node closure, and none of its 5 citers is in that closure. All 6 declared tool_uses are accepted as generic black boxes. No new node duplicates or restates a clause of the item. Maintainer note: the existing nodes lem-coef-space-kan-fibration-fiber-criterion, lem-coef-space-path-fibration-replacement and lem-coef-space-contractible-fiber-equivalence are special cases or clauses of this item and are candidates for a later merge; proving those clauses in-unit is consistent with C7 and is not a fault. No fixes made. Minor: the item's source.place still mentions Kerodon 3.1.3.1. Review is in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-fdbaca78d (reviewer sub-agent of L); spot-checked: I read the whole repair delivery. It answers the return: the old 3027-character step 4 is now step 4 (1184 chars) plus step 5 (986 chars), and they use one new node, lem-cbc-kan-contracted-base-section-extension. The item statement and its Lean record are unchanged and still match Kerodon 00ZP, 0101 and 0328, with an arbitrary base, ev_0=f(a) and boundary of Delta^0 empty. Step 4: applying lem-cbc-kan-mapping-homotopy-invariance to K->Delta^0 (weak equivalence by the definition of contractible) and evaluating u^*V ~ id at id_K gives a contraction. Restriction Fun(Delta^n,K)->Fun(boundary,K) is Kan by the corner-map leaf with target Delta^0, and lifting one edge fills each boundary map; n=0 follows from |K| nonempty. Step 5: T=Delta^n x_Y X is Kan, its fiber over 0 is the vertex fiber X_sigma(0), and the contraction c(j,0)=0, c(j,1)=j is monotone. The new lemma then gives a section, and projecting it fills the square, including n=0. I proved the new lemma myself: lift c composed with i in Fun(C,E)->Fun(C,L) with final vertex a, extend the initial end inside K, then lift (h,c) through the corner map for i and q. The statement is true, self-contained and statement-only. It restates no clause of the item and duplicates no DAG node: left-fibration cylinder lifting and the lem-coef-space-* criteria are different statements. Its searches cover three valid kinds, its blueprint from/via are correct, and slopmaster2 has no matching declaration. I re-checked steps 1-3 and 6-10 against the Serre, finite-limit and topological-model statements, Stacks 08NS (simplicial.tex:5642), the homotopy-equivalence-weak node and the corner-map leaf (PushoutProduct.lean:70-93). The dependency closure has 53 nodes, there is no cycle, and uses equal proof_deps. The six declared tool_uses are unchanged and accepted. Fix: the new node lacked the required lean_audit field. I wrote a corrected whole file under fixes/dag/nodes/sec-smooth-purity/ with lean_audit none/none. Minor and left unchanged: the item's source.place still mentions Kerodon 3.1.3.1.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicTopology.KanFibrationFiberCriterion",

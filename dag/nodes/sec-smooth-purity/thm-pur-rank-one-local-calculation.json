@@ -114,16 +114,36 @@
    }
   },
   {
-   "text": "For the pro-etale assertion apply [lem-weil-pbc-comparison-global-cohomology] with the finite discrete coefficient ring $A$ to $X$ and $U$. Write $F=A(1)$ and $F_{\\mathrm{pro}}=\\nu_X^*F$. The restriction compatibility [lem-weil-pbc-comparison-pullback] identifies $F_{\\mathrm{pro}}|_U$ with $\\nu_U^*(F|_U)$. Thus the ordinary pro-etale groups have exactly the vanishings computed in steps 1--3, and their degree-zero restriction is the identity under the same labels. The pro-etale support exact sequence supplied by [thm-pur-with-support-exactness] now gives $H^q_Z(X_{\\mathrm{proet}},F_{\\mathrm{pro}})=0$ for $q\\neq2$ and an $A$-linear isomorphism\n$$\n\\partial_{\\mathrm{pro}}:H^1(U_{\\mathrm{proet}},\\nu_U^*F)\\xrightarrow{\\sim}H^2_Z(X_{\\mathrm{proet}},F_{\\mathrm{pro}}).\n$$\nLet $c_U$ denote the ordinary degree-one comparison isomorphism. Naturality of the comparison in the coefficient sheaf makes $c_U$ commute with multiplication by every $a\\in A$, so $c_U$ and $\\tau_{\\mathrm{pro}}=c_U\\tau_A$ are $A$-linear. Define $\\tau_{\\mathrm{pro}}=c_U\\tau_A$ and\n$$\n\\rho_{\\mathrm{pro}}=(\\partial_{\\mathrm{pro}}\\tau_{\\mathrm{pro}})^{-1},\\qquad\nc_Z=\\partial_{\\mathrm{pro}}c_U\\partial_{\\mathrm{et}}^{-1}.\n$$\nThese formulas explicitly give a canonical isomorphism $c_Z$ of the supported degree-two groups with $c_Z\\partial_{\\mathrm{et}}=\\partial_{\\mathrm{pro}}c_U$ and $\\rho_{\\mathrm{pro}}c_Z=\\rho$. In all other degrees both supported groups are zero, so their unique comparison is an isomorphism. The inverse-image class on $U_{\\mathrm{proet}}$ is $c_U\\kappa_A(u)$; its boundary has residue $r\\cdot1_A$ for $u=ct^r$ by the displayed commutative square and step 5. In particular the actual boundary of the coordinate class maps to $1$. This proves the asserted pro-etale calculation and its normalization using only finite discrete $A$-module sheaves. The comparison of supports needed here is constructed directly from the two invertible boundaries; no identification with an exceptional-inverse-image complex is used.",
+   "text": "Put $F=A(1)$ and $F_p=\\nu_X^*F$. Apply [lem-pur-support-comparison-boundary] to $(T,C)=(X,Z)$ over the algebraically closed field $\\Omega$: $X=\\operatorname{Spec}\\Omega[t]$ is separated and finite type over $\\Omega$, $Z=V(t)$ is closed, and $A$ is a finite commutative ring. Thus the lemma applies even when $\\Omega$ is not finite type over the fixed field $k$. The coefficient sheaf is the ordinary finite discrete $A$-module sheaf, in degree zero. Write $c_U$ for its ordinary degree-one comparison and $c_Z$ for its supported degree-two comparison. These are isomorphisms by [lem-weil-pbc-comparison-global-cohomology] and [lem-pur-support-site-comparison], respectively. The boundary compatibility supplied by the new lemma is\n$$c_Z\\partial_{\\mathrm{et}}=\\partial_{\\mathrm{pro}}c_U.$$\nThe same comparisons in every degree transfer the ordinary and supported vanishings of steps 1--4 to the pro-etale site, and transfer the degree-zero restriction map as well.",
    "uses": [
+    "lem-pur-support-comparison-boundary",
     "lem-weil-pbc-comparison-global-cohomology",
-    "lem-weil-pbc-comparison-pullback",
-    "thm-pur-with-support-exactness"
+    "lem-pur-support-site-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.md",
-    "place": "Imported proof final sentence: finite-torsion site transport, including the restriction and boundary maps"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.proof.md",
+    "place": "Final sentence: transport to the pro-etale site, retaining the actual support boundary and its Kummer normalization"
+   }
+  },
+  {
+   "text": "All maps in the boundary square of step 7 are $A$-linear by [lem-pur-support-comparison-boundary]. Solving that square, using the invertible maps already established, gives\n$$\\partial_{\\mathrm{pro}}=c_Z\\partial_{\\mathrm{et}}c_U^{-1},\\qquad c_Z=\\partial_{\\mathrm{pro}}c_U\\partial_{\\mathrm{et}}^{-1}.$$\nSet $\\tau_{\\mathrm{pro}}=c_U\\tau_A$ and $\\rho_{\\mathrm{pro}}=(\\partial_{\\mathrm{pro}}\\tau_{\\mathrm{pro}})^{-1}$. Then\n$$\\rho_{\\mathrm{pro}}c_Z=(\\partial_{\\mathrm{et}}\\tau_A)^{-1}=\\rho.$$\nThis is the original conjugation construction of the supported comparison, now identified with its canonical comparison map.",
+   "uses": [
+    "lem-pur-support-comparison-boundary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.proof.md",
+    "place": "Final sentence: transport to the pro-etale site, retaining the actual support boundary and its Kummer normalization"
+   }
+  },
+  {
+   "text": "The inverse-image coefficient class on the pro-etale site is $c_U\\kappa_A(u)$. Hence the square and the inverse identity in steps 7--8 give\n$$\\rho_{\\mathrm{pro}}\\partial_{\\mathrm{pro}}c_U\\kappa_A(u)=\\rho\\partial_{\\mathrm{et}}\\kappa_A(u)=r\\cdot1_A\\quad(u=ct^r).$$\nFor $u=t$ this value is $1$. The element $c_U\\kappa_A(t)$ is an $A$-basis since $c_U\\tau_A$ is an isomorphism, so its boundary determines $\\rho_{\\mathrm{pro}}$ uniquely. The definitions use no primitive root, and the vanishing in every other supported degree was transferred in step 7. This proves all the pro-etale assertions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.proof.md",
+    "place": "Final sentence: transport to the pro-etale site, retaining the actual support boundary and its Kummer normalization"
    }
   }
  ],
@@ -132,10 +152,11 @@
   "def-weil-size-convention",
   "lem-asd-etale-finite-twist-pullback",
   "lem-pur-affine-punctured-line-algebra",
+  "lem-pur-support-comparison-boundary",
+  "lem-pur-support-site-comparison",
   "lem-sc-kummer-exact",
   "lem-sc-primitive-root",
   "lem-weil-pbc-comparison-global-cohomology",
-  "lem-weil-pbc-comparison-pullback",
   "lem-weil-pbc-constant-sheaf-sections-connected",
   "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
   "lem-weil-pbc-right-derived-universal-delta-functor",
@@ -146,8 +167,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.md",
-  "place": "Imported proof in the DAG record, expanded using the unit coefficient devissage; external Milne and blueprint Markdown unavailable locally"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.proof.md",
+  "place": "Current blueprint proof, expanded by the existing finite-module coefficient induction and the localization-boundary comparison refinement; Milne Sections 9, 14 and 16 read for the curve and support computations."
  },
  "mathlib_searches": [
   {
@@ -205,10 +226,17 @@
    "results": "none; service unavailable: Internal Server Error",
    "date": "2026-10-16",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology supported at the origin of the affine line with finite torsion coefficients is concentrated in degree two with normalized Kummer residue",
+   "results": "{\"t\": \"2026-10-17T07:08:53Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology supported at the origin of the affine line with finite torsion coefficients is concentrated in degree two with normalized Kummer residue\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.FiniteCyclicGroup.groupCohomologyIsoEven\", \"Rep.FiniteCyclicGroup.groupCohomologyπEven_eq_zero_iff\", \"Rep.FiniteCyclicGroup.groupCohomologyπOdd_eq_zero_iff\", \"groupCohomology.H1ofAutOnUnitsUnique\", \"Rep.FiniteCyclicGroup.groupCohomologyIso₀\", \"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"Rep.FiniteCyclicGroup.groupCohomologyπEven_eq_iff\", \"Rep.FiniteCyclicGroup.moduleCatCochainComplex\"], \"digest\": \"0b5ff134ec010bef\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: finite cyclic group cohomology and Galois-unit cocycles, not affine-line supported etale cohomology"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -254,11 +282,11 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "thm-pur-rank-one-local-calculation",
   "worker": "stage1",
-  "summary": "STATEMENT-DISPUTED: repaired the undefined finite exponent and incorrect unit/orbit wording; retained arbitrary n. Expanded the affine and punctured-line computations by finite-module induction before applying the support exact sequence. Removed unsupported divisor/Gysin citations. Gave explicit residue formula and transport of the boundary. No new nodes. Re-audit: simplified pro-etale transport to the two support exact sequences and explicit conjugation of their invertible boundaries, avoiding an unsupported exceptional-inverse-image identification. Final continuation audit: cited the size convention explicitly to satisfy the enough-injectives lemma, and spelled out A-linearity of the support boundary from coefficient functoriality. Returned merge-lock repair: reread every current statement and proof dependency and all seventeen citation quotations; retained the current finite-discrete coefficient categories and finite-free prime base. Explicitly verified R-linearity of the coefficient generator and A-linearity of the pro-etale comparison from coefficient naturality. Repackaging uses the delivery tool against the current DAG baseline, with no new nodes.",
-  "blueprint": "Realizes the imported proof paragraphs 1 and 2: H^0 restriction and affine/punctured-line computation, support exact sequence, normalized residue, and finite-torsion site comparison. The unit Coefficients paragraph supplies the devissage route; its elementary induction is written out here for finite R-modules.",
+  "summary": "Repair of the dedicated NF handoff: retained the statement, Lean record and steps 1--6 verbatim. Replaced the 2009-character non-elementary step 7 by three short steps. The new statement-only lemma isolates compatibility of the canonical site comparisons with the localization connecting boundary; existing support/global comparison nodes supply invertibility. The remaining normalization and conjugation identities are explicit elementary steps. Checked all cited statements, arbitrary nonfree finite coefficients and the current blueprint. No Lean work or compilation.",
+  "blueprint": "Current main-20261015 rank-one local-calculation proof: steps 1--6 retain the H^0, coefficient devissage, support exactness, residue and canonicity arguments; steps 7--9 realize its final pro-etale comparison sentence with a cited localization-boundary compatibility lemma.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-constant-sheaf-sections-connected",
@@ -285,10 +313,6 @@
     "why": "Compares the actual derived global-section objects on the two sites, as required by the imported final sentence."
    },
    {
-    "node": "lem-weil-pbc-comparison-pullback",
-    "why": "Identifies restriction under site comparison, needed to compare support boundaries rather than just abstract groups."
-   },
-   {
     "node": "lem-weil-pbc-site-sheaves-enough-injectives",
     "why": "Verifies the enough-injectives hypothesis when applying naturality of derived connecting maps to the Kummer diagram of abelian etale sheaves in step 2."
    }
@@ -305,12 +329,12 @@
   "lem-weil-pbc-site-sheaves-enough-injectives"
  ],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-N2-d3df045af",
-  "group": "N2",
+  "reviewer": "NT-cc-NF-92b8fe231",
+  "group": "NF",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-d3df045af (reviewer sub-agent of L); spot-checked: Wrote review.md. Checked all seven steps, 25 dependencies, unit/chapter route, Milne and Stacks sources, nonfree coefficient cases, residue normalization, and explicit pro-etale boundary comparison. No new nodes or repairs needed. Recorded an inherited Milne citation-number error in an unchanged dependency."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-92b8fe231 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-pur-support-comparison-boundary, every cited statement, the NF return, the main-20261015 proof, Stacks 09XP (section-cohomology-support: surjective restriction for injectives, triangle, LES) and Milne LEC Thm 9.4, Prop 14.3, Ex 16.3. The statement and steps 1-6 are byte-identical to the side DAG. Only the 2009-character step 7 was replaced, by steps 7-9, each under 2000 characters. Checks: the Kummer level-change square commutes since (z^{l^{N-1}})^l=z^{l^N}. The induction holds for M=0, F_l and non-free A; no freeness of A is used. The support LES gives H^0_Z=H^1_Z=0 and H^q_Z=0 for q>=3. Residue holds for negative r. I verified the algebra rho_pro c_Z = rho and that the pro-etale basis and uniqueness follow. New node: statement-only, self-contained, source tag and label correct, blueprint from=item with via []. It is true for the canonical unit-induced comparison: the chain map between short exact restriction sequences commutes with snake boundaries. Tested on T empty, C empty, C=T and F=0. It is not a duplicate of lem-pur-support-site-comparison, which lacks the boundary square, nor of lem-pur-supported-cup-functoriality (pullback/cup for A(r)). It is applied with k:=Omega: A^1 is separated and of finite type, and the coefficients are ordinary finite A-module sheaves, the same category on both sides. Note for its next split: the proof must use the unit-induced definition of c^C. Accepted the declared generic tool uses (constant-sheaf sections, twist level change, delta-functor naturality, sheafification exactness, LES ladder, global comparison, enough injectives). No SGA, no cycle, target not weakened, no fixes."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",
