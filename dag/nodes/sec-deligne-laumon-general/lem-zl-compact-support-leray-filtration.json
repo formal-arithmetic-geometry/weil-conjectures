@@ -14,7 +14,9 @@
   "def-weil-quasi-separated-morphism",
   "def-weil-weil-sheaf-complex",
   "def-weil-constructible-heart",
-  "def-weil-integral-rational-qbar-compact-support"
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-zl-weil-ind-sheaf-category",
+  "def-zl-weil-compact-support-cohomology"
  ],
  "proof": [
   {
@@ -321,5 +323,26 @@
   "group": "Q54",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-491796799 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the blueprint ancestor and unit, and the sources: Stacks 0F7J and 0G2A(3) in more-etale.tex, and Bhatt–Scholze Def 6.7.6 and Lemma 6.7.7. The statement is unchanged and keeps the qs, nonseparated generality. The exact-couple bidegrees and exactness check out against def-sp-exact-couple. The quadrant vanishing, the half-plane convergence with lower bound 0, the abutment isomorphism c_n, stabilization at r=n+2 and the reindexing G_j=F^{n+1-j} are all correct. The departure from def-weil-pbc-hypercohomology-filtrations and lemma-weil-pbc-hypercohomology-convergence is justified: both are stated for Rf_* of abelian étale complexes. Both new nodes are true and are not duplicates. lem-zl-shriek-composition and prop-functor-package assume separated schemes, thm-sf-comp-composition is finite-level only, and the completed forms in fix-lem-exchanges appear only in its proof. Fixes: (1) E5: the boundary maps and the E_2 identification need the Weil structure of Rf_! to commute with shifts, and no node states this. I added the statement-only node lem-zl-weil-shriek-shift-compatibility, cited it in steps 3 and 4, and wrote out why the truncation triangle is equivariant. (2) C4: step 1 relied on prop-constructible-truncations for Lg^* being an equivalence, which that node does not state. Step 1 now cites lem-weil-isomorphism-derived-pullback and def-weil-derived-pullback-tensor-hom and is marked non-elementary. (3) Form: added merged_into and lean_audit to both delivered new nodes. Batch-5 check: lem-fix-weil-operations reaches lem-pod-integral-pullback-composition, which is general pullback-composition coherence. Neither nt-assume-poincare-duality nor nt-assume-trace-formula gives it, and the step is not part of either proof, so the citation is outside the assumed statements and is accepted. Accepted tool uses: lem-fix-weil-operations, prop-constructible-truncations, lem-weil-heart-short-exact-triangles, lem-sp-derived-couple-exact, thm-sp-half-plane-convergence, lem-weil-isomorphism-derived-pullback.; 4 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4cf4f70b0",
+  "group": "Q153",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: D, l≠p, Ω in universe v; Z₀,Y₀ finite type and qs over k₀; h,g separated finite type; no X₀ hypothesis (source instances derived and Prop-valued); compactifications universally quantified (exist by Nagata) with a choice-independence theorem; finite mono chain with zero start, endpoint ≅ R^n(gh)_!F; per step a+b=n, Mono ι into R^a g_!(R^b h_!F) (h inner), Epi π onto cokernel(φ i); all Weil arrows; no weights. lean.statement verbatim. Only the item's lean/stmt_deps changed; 7 deps identical to side. The two new def nodes give a real canonical construction (IsoAlg of Ind heart, normalized ∃! pullback squares, adjoint j_!/p_*, injective-resolution R^n p_*, representing object along a fully faithful embedding, comparison with sfQbarCompactSupportValue). Not hollow, no pro-étale substitute, no name clashes; lem-fix-weil-operations has no Lean, so §1(A) applies. nt_compile --json on all 3 modules: rc=0, no warnings (26.0/11.7/3.2 s; fixed version 25.1/10.0/3.2 s). FIX: complete replacement fixes/WeilCompactSupportCohomology.lean. Its representability docstring had skipped the crux (Ind-derived direct image = ℓ-adic H^n Rp_*); now 5 steps citing Beilinson/Nori and Kashiwara-Schapira 15.3, plus a pointer from the comparison theorem; docstrings only. Non-blocking: zlIndWeilHeartAbelian taken from Nonempty although upstream IsoAlgebra.abelian/isGrothendieckAbelian exist (not hollow, additive structure is unique); Compactification reaches the item only through a new node and def-weil-proper-morphism is unused; second reading is the author's own (dispatcher forbids sub-agents)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportLerayFiltration",
+  "declaration": "WeilConjectures.exists_compactSupportLerayFiltration",
+  "declarations": [
+   "WeilConjectures.exists_compactSupportLerayFiltration"
+  ],
+  "file": "lean/Sheaf/Paper/CompactSupportLerayFiltration.lean",
+  "statement": "theorem exists_compactSupportLerayFiltration (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (X₀ Z₀ Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Z₀.hom] [QuasiCompact Z₀.hom] [QuasiSeparated Z₀.hom] [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [QuasiSeparated Y₀.hom] (h₀ : X₀ ⟶ Z₀) [IsSeparated h₀.left] [LocallyOfFiniteType h₀.left] [QuasiCompact h₀.left] (g₀ : Z₀ ⟶ Y₀) [IsSeparated g₀.left] [LocallyOfFiniteType g₀.left] [QuasiCompact g₀.left] (ch : Compactification h₀.left) (cg : Compactification g₀.left) (cgh : Compactification (h₀ ≫ g₀).left) (F : zlSourceWeilHeart D l hl Ω h₀) (n : ℕ) : ∃ (m : ℕ) (G : Fin (m + 1) → sfCommonStageWeilSheaf D l hl Y₀ Ω) (φ : ∀ i : Fin m, G i.castSucc ⟶ G i.succ), (∀ i : Fin m, Mono (φ i)) ∧ IsZero (G 0) ∧ Nonempty (G (Fin.last m) ≅ zlCompositeHigherShriek D l hl Ω h₀ g₀ cgh n F) ∧ ∀ i : Fin m, ∃ a b : ℕ, a + b = n ∧ ∃ (S : sfCommonStageWeilSheaf D l hl Y₀ Ω) (ι : S ⟶ zlWeilHigherShriek D l hl Ω g₀ cg a (zlSourceHigherShriek D l hl Ω h₀ ch b F)) (π : S ⟶ cokernel (φ i)), Mono ι ∧ Epi π",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

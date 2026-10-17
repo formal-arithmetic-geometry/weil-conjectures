@@ -19,7 +19,13 @@
  "stmt_deps": [
   "def-weil-finite-coefficient-point",
   "def-weil-finite-tor-amplitude",
-  "def-weil-derived-pullback-tensor-hom"
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-point-fibre-tensor-system",
+  "def-sf-point-fibre-tensor-models",
+  "def-sf-point-fibre-tensor-reduction",
+  "def-sf-point-fibre-tensor-rational-compatibility",
+  "def-sf-point-fibre-tensor-common-stage",
+  "def-sf-point-fibre-tensor-finite-models"
  ],
  "proof": [
   {
@@ -329,5 +335,29 @@
   "lem-pur-integral-operations-scalar-extension",
   "lem-weil-point-sections-scalar-extension",
   "lem-pod-point-sections-derived-reduction"
- ]
+ ],
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f8f3fc7e6",
+  "group": "Q62",
+  "result": "fix",
+  "note": "Read the node, all 9 proof steps, the 3 recorded dependencies (FiniteCoefficientPoint, FiniteTorAmplitude, DerivedPullbackTensorHom, plus IntegralDerivedOperations), the 6 new nodes and all 7 modules in full. Every clause matches: four stages with the recorded categories, tensors and fibres; tensorIso in the node's direction from Functor.Monoidal; prescribed units; associator, unitor and Koszul braiding square; finite source constraints pinned to finiteIntrinsicClosed; canonical K-flat, two-coordinate Roos, localization and every-common-stage normalizations; reduction for all n<=m and scalar squares including identity cases. No added hypothesis and universes kept. Replacing HEq by Eq typechecks except Models:164, whose endpoint equalities are proved by unfold+rfl inside the module, so it is not vacuous. Records: statements verbatim, declaration lists exact, new-node fields valid. nt_compile --json on all 7 modules: rc 0 delivered and with the fix, max 23 s. FIX 1 (H12): def-sf-point-fibre-tensor-system uses perfectTraceCanonicalBraiding from def-trf-categorical-trace; added to stmt_deps and statement citation, no cycle. FIX 2 (H8): three Basic docstrings retagged to the owning node. Non-blocking: thin self-check second reading; no_expose on pointIntegralGoodDerivedObject; existential source monoidal structure at non-finite stages is forced by faithfulness of the fibre."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointFibreDerivedTensor",
+  "declaration": "WeilConjectures.pointFibreDerivedTensor",
+  "declarations": [
+   "WeilConjectures.PointFiniteSourceConstraints",
+   "WeilConjectures.PointIntegralTensorScalarSquare",
+   "WeilConjectures.PointFibreDerivedTensorCanonical",
+   "WeilConjectures.pointFibreDerivedTensor"
+  ],
+  "file": "lean/Sheaf/Paper/PointFibreDerivedTensor.lean",
+  "statement": "theorem pointFibreDerivedTensor (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] : ∃ S : PointFibreDerivedTensorSystem D l hl Ω, Nonempty (PointFibreDerivedTensorCanonical D l hl Ω S)",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-17",
+  "existing": false
+ }
 }
