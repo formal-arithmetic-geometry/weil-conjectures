@@ -15,9 +15,136 @@
   "def-weil-finite-integral-morphism",
   "def-weil-universal-homeomorphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First $V$ also has characteristic $p$: for any open $W\\subseteq X$, the unital ring map $\\mathcal O_X(W)\\to\\mathcal O_V(v^{-1}W)$ sends $p\\cdot1=0$ to $p\\cdot1=0$, and these inverse-image opens cover $V$. Absolute Frobenius commutes with $v$, since on the structure sheaves $v^\\sharp(s^p)=v^\\sharp(s)^p$ and both Frobenii act identically on the underlying spaces. Thus the fibre-product universal property constructs $r=r_{V/X}=(F_V,v)$, with $h\\circ r=F_V$ for $h=\\pi_1:V^{(p/X)}\\to V$.",
+   "uses": [
+    "def-weil-scheme-characteristic-p",
+    "def-weil-absolute-frobenius-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0CC7 (lemma-frobenius-endomorphism-identity) and 0CC9 (definition-relative-frobenius)."
+   }
+  },
+  {
+   "text": "Apply the existing absolute-Frobenius theorem to both $X$ and $V$ with the finite-field datum specialized to $a=1$, $q=p$, $k_0=\\mathbf F_p=\\mathbf Z/p\\mathbf Z$ and an algebraic closure $k$ of $k_0$. This datum exists by the finite-field and algebraic-closure statements cited here. Every characteristic-$p$ scheme $T$ is canonically a $k_0$-scheme: on affine charts the compatible homomorphisms $\\mathbf F_p\\to\\mathcal O_T(U)$ send $\\overline n\\mapsto n\\cdot1$; their spectrum maps agree on overlaps and give $T\\to\\operatorname{Spec}\\mathbf F_p$. The theorem imposes no finite-type or separatedness condition on $T$, and for $a=1$ its absolute $q$-power map is exactly $F_T$. It follows that $F_X$ and $F_V$ are universal homeomorphisms. The auxiliary algebraic closure is only a parameter of the cited theorem: neither scheme is extended to $k$.",
+   "uses": [
+    "lem-pur-absolute-frobenius-universal-homeomorphism",
+    "def-weil-finite-field-fiber",
+    "def-weil-finite-field-q-elements",
+    "def-weil-algebraic-closure",
+    "def-weil-scheme-over-base",
+    "def-weil-absolute-frobenius-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CC8, lemma-frobenius; reuse the existing finite-field formulation with q=p."
+   }
+  },
+  {
+   "text": "The square defining $V^{(p/X)}=V\\times_{X,F_X}X$ makes $h=\\pi_1$ the base change of $F_X$ along $v$. Stability of universal homeomorphisms under arbitrary base change therefore makes $h$ a universal homeomorphism. In particular, both $h$ and $F_V$ are homeomorphisms on their underlying spaces (take the identity base change in the definition).",
+   "uses": [
+    "lem-weil-pbc-universal-homeomorphism-base-change",
+    "def-weil-universal-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CCB, lemma-relative-frobenius, first sentence of the proof."
+   }
+  },
+  {
+   "text": "The underlying homeomorphism $F_V:V\\to V$ identifies $|V|$ with the whole, hence closed, subset of $|V|$. The closed-embedding affineness lemma shows that $F_V$ is affine. Every base change of $F_V$ is a homeomorphism and hence a closed map, so $F_V$ is universally closed by the definition of that property. The equivalence integral = affine + universally closed now shows that $F_V$ is integral. This explicitly proves the integrality needed below from the topological definition of universal homeomorphism.",
+   "uses": [
+    "lem-trf-closed-embedding-affine",
+    "def-weil-universal-homeomorphism",
+    "def-weil-proper-morphism",
+    "pqf-lem-integral-univclosed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 04DF, lemma-universal-homeomorphism, forward implication; its inputs are Tags 04DE (lemma-homeomorphism-affine) and 01WM (lemma-integral-universally-closed)."
+   }
+  },
+  {
+   "text": "Likewise the underlying homeomorphism $h$ has closed image, so the closed-embedding affineness lemma shows that $h$ is affine. Clause (3) of affine-morphism permanence shows that $h$ is separated; this is a relative separatedness assertion about $h$, not an assumption that $V$ or $X$ is a separated scheme. Since $h\\circ r=F_V$ is integral by step 4, integral cancellation with a separated second morphism, applied with $f=r$ and $g=h$, shows that $r$ is integral.",
+   "uses": [
+    "lem-trf-closed-embedding-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-integral-of-comp-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 04DE (lemma-homeomorphism-affine), 01S7 (lemma-affine-separated), and 035D (lemma-finite-permanence), part (2); the algebraic cancellation argument expands the permanence input of Tag 0CCB."
+   }
+  },
+  {
+   "text": "Every base change of $F_V$ is injective because it is a homeomorphism, so $F_V$ is universally injective. For any field $K$ and morphisms $a,b:\\operatorname{Spec}K\\to V$ satisfying $r\\circ a=r\\circ b$, compose with $h$ to obtain $F_V\\circ a=F_V\\circ b$. The field-valued-point criterion for universal injectivity, applied first to $F_V$, gives $a=b$. The same criterion applied to $r$ now proves that $r$ is universally injective. This is a three-line cancellation using the explicit equivalence in the cited radicial-morphism statement; no preservation of fibre products by underlying spaces is assumed.",
+   "uses": [
+    "def-weil-universal-homeomorphism",
+    "def-weil-radicial-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S4, lemma-universally-injective, equivalence of (1) and (2); this is the universally injective component of the permanence input in Tag 0CCB."
+   }
+  },
+  {
+   "text": "To prove surjectivity, let $y$ be any point of $V^{(p/X)}$. Because $F_V$ is a homeomorphism on points, choose $x\\in V$ with $F_V(x)=h(y)$. Then $h(r(x))=F_V(x)=h(y)$; since $h$ is injective on points, $r(x)=y$. Thus $r$ is surjective by the definition. This argument is also valid for the empty scheme, when there is no $y$ to consider.",
+   "uses": [
+    "def-weil-universal-homeomorphism",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0H2M, lemma-permanence-universal-homeomorphism, cancellation case f=h∘g; the point-set surjectivity argument uses only the known homeomorphisms."
+   }
+  },
+  {
+   "text": "We have shown that $r$ is integral (step 5), universally injective (step 6), and surjective (step 7). Apply the existing integral, universally injective, surjective criterion to conclude that every base change of $r$ is a homeomorphism. Hence $r$ is a universal homeomorphism as well as integral, as required. All constructions and cited lemmas allow arbitrary schemes and arbitrary $v$; no finite-type, weakly-etale, quasi-compactness, reducedness or perfection hypothesis was introduced.",
+   "uses": [
+    "lem-pc-integral-radicial-surjective-universal-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 04DF, lemma-universal-homeomorphism, implication (2) ⇒ (1), completing Tag 0CCB."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-scheme-characteristic-p",
+  "def-weil-absolute-frobenius-scheme",
+  "def-pc-fibre-product",
+  "lem-pur-absolute-frobenius-universal-homeomorphism",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-field-q-elements",
+  "def-weil-algebraic-closure",
+  "def-weil-scheme-over-base",
+  "lem-weil-pbc-universal-homeomorphism-base-change",
+  "def-weil-universal-homeomorphism",
+  "lem-trf-closed-embedding-affine",
+  "def-weil-proper-morphism",
+  "pqf-lem-integral-univclosed",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-integral-of-comp-separated",
+  "def-weil-radicial-morphism",
+  "def-weil-surjective-morphism",
+  "lem-pc-integral-radicial-surjective-universal-homeomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0CCB, lemma-relative-frobenius; follows the absolute-Frobenius/base-change/permanence route, expanding cancellation through Tags 04DF, 035D and 01S4 rather than leaving the permanence argument implicit."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,10 +208,150 @@
    "results": "8 hits; AlgebraicGeometry.universallyInjective_eq_diagonal; PerfectionMap; surjective_frobenius; frobenius_inj; AlgebraicGeometry.UniversallyInjective; PerfectRing.ofSurjective; bijective_frobenius; injective_frobenius",
    "date": "2026-10-17",
    "verdict": "no match: general universally-injective infrastructure, ring Frobenius and perfection, and unrelated number-theory hits do not assert the relative scheme Frobenius theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes which is a homeomorphism onto a closed subset of its target is affine",
+   "results": "8 hits; AlgebraicGeometry.IsClosedImmersion.hasAffineProperty; AlgebraicGeometry.IsClosedImmersion.instIsAffineHom; AlgebraicGeometry.isAffineHom_of_isInducing; AlgebraicGeometry.isClosedImmersion_iff_isAffineHom; AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine; AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine; AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine; AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme",
+   "date": "2026-10-17",
+   "verdict": "match for an auxiliary search only: reuse existing lem-trf-closed-embedding-affine, not a match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineHom, IsHomeomorph",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state the relative Frobenius theorem or the combined universal-homeomorphism cancellation claim"
+  },
+  {
+   "tool": "grep",
+   "query": "isAffineHom.*(homeo|closed|embedding)|homeomorph.*affine|homeomorph|isClosedEmbedding",
+   "results": "0 hits; directory Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state the relative Frobenius theorem or the combined universal-homeomorphism cancellation claim"
+  },
+  {
+   "tool": "grep",
+   "query": "isAffineHom_of_isInducing",
+   "results": "1 hits; 245; directory Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+   "date": "2026-10-17",
+   "verdict": "match for an auxiliary search only: reuse existing lem-trf-closed-embedding-affine, not a match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "UniversalHomeomorph|universal homeomorph|universally.*cancel",
+   "results": "0 hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state the relative Frobenius theorem or the combined universal-homeomorphism cancellation claim"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme morphism which is a homeomorphism onto a closed subset is affine",
+   "results": "8 hits; AlgebraicGeometry.IsClosedImmersion.instIsAffineHom; AlgebraicGeometry.IsClosedImmersion; AlgebraicGeometry.isAffineHom_of_isInducing; AlgebraicGeometry.IsClosedImmersion.isClosedEmbedding; AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme; AlgebraicGeometry.IsAffineHom; AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine; AlgebraicGeometry.IsClosedImmersion.hasAffineProperty",
+   "date": "2026-10-17",
+   "verdict": "match for an auxiliary search only: reuse existing lem-trf-closed-embedding-affine, not a match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"universally\", \"cancel\"",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state the relative Frobenius theorem or the combined universal-homeomorphism cancellation claim"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a composite of scheme morphisms h composed with g and the morphism h are universal homeomorphisms then g is a universal homeomorphism",
+   "results": "8 hits; AlgebraicGeometry.UniversallyOpen.instIsStableUnderCompositionScheme; AlgebraicGeometry.universallyClosed_isStableUnderComposition; AlgebraicGeometry.UniversallyOpen.instIsStableUnderCompositionSchemeTopologicallyIsOpenMap; AlgebraicGeometry.universallyInjective_isStableUnderComposition; AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.universallyClosedTypeComp; AlgebraicGeometry.UniversallyOpen.instIsMultiplicativeScheme; AlgebraicGeometry.IsProper.stableUnderComposition",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state the relative Frobenius theorem or the combined universal-homeomorphism cancellation claim"
+  },
+  {
+   "tool": "grep",
+   "query": "isAffineHom_of_isInducing",
+   "results": "3 hits; Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; Mathlib/AlgebraicGeometry/Morphisms/Affine.lean; directory Mathlib/AlgebraicGeometry/Morphisms",
+   "date": "2026-10-17",
+   "verdict": "match for an auxiliary search only: reuse existing lem-trf-closed-embedding-affine, not a match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cancel a universal homeomorphism from the target of a composite of morphisms of schemes",
+   "results": "8 hits; AlgebraicGeometry.Scheme.stalkMap_hom_inv; AlgebraicGeometry.UniversallyClosed.of_comp_surjective; AlgebraicGeometry.Scheme.Hom.comp_app; AlgebraicGeometry.Scheme.Hom.comp_preimage; AlgebraicGeometry.Scheme.comp_app; AlgebraicGeometry.Scheme.Hom.comp_appLE_assoc; AlgebraicGeometry.Scheme.preimage_comp; AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyInjective",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state the relative Frobenius theorem or the combined universal-homeomorphism cancellation claim"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal homeomorphisms of schemes satisfy the two out of three property for a composite",
+   "results": "8 hits; AlgebraicGeometry.UniversallyOpen.instIsStableUnderCompositionScheme; AlgebraicGeometry.universallyClosed_isStableUnderComposition; AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyClosed; AlgebraicGeometry.UniversallyOpen.instIsMultiplicativeScheme; AlgebraicGeometry.universallyInjective_isStableUnderComposition; AlgebraicGeometry.IsLocalIso.instIsMultiplicativeScheme; AlgebraicGeometry.IsPreimmersion.instIsMultiplicativeScheme; AlgebraicGeometry.UniversallyOpen.instCompScheme",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state the relative Frobenius theorem or the combined universal-homeomorphism cancellation claim"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?[Ff]robenius|[Ff]robenius.*[Hh]omeomorph",
+   "results": "0 hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state the relative Frobenius theorem or the combined universal-homeomorphism cancellation claim"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Frobenius is integral and universally bijective without any finite type hypothesis",
+   "results": "8 hits; bijective_frobenius; PerfectRing.bijective_frobenius; injective_frobenius; bijective_iterateFrobenius; frobenius_inj; FiniteField.bijective_frobeniusAlgHom_pow; iterateFrobenius_inj; WittVector.frobenius_bijective",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state the relative Frobenius theorem or the combined universal-homeomorphism cancellation claim"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For morphisms g from X to Y and h from Y to Z, if h and h composed with g are integral universally injective and surjective, then g is integral universally injective and surjective",
+   "results": "8 hits; AlgebraicGeometry.IsIntegralHom.comp_iff; AlgebraicGeometry.IsIntegralHom.instIsStableUnderCompositionScheme; AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme_1; AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme; AlgebraicGeometry.IsIntegralHom.instCompScheme; AlgebraicGeometry.IsIntegralHom.of_comp; AlgebraicGeometry.universallyInjective_isStableUnderComposition; AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyInjective",
+   "date": "2026-10-17",
+   "verdict": "no match for the item or the combined cancellation claim: integral-component candidates already represented by lem-weil-pbc-integral-of-comp-separated"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"homeomorph\"",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state the relative Frobenius theorem or the combined universal-homeomorphism cancellation claim"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"of_comp\", AlgebraicGeometry.IsIntegralHom",
+   "results": "1 hits; AlgebraicGeometry.IsIntegralHom.of_comp",
+   "date": "2026-10-17",
+   "verdict": "no match for the item or the combined cancellation claim: integral-component candidates already represented by lem-weil-pbc-integral-of-comp-separated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative Frobenius morphism of any scheme over a characteristic p scheme is integral and a universal homeomorphism",
+   "results": "8 hits; AlgebraicGeometry.isField_of_universallyClosed; AlgebraicGeometry.isIntegral_appTop_of_universallyClosed; AlgebraicGeometry.IsIntegralHom; AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.IsIntegralHom.instUniversallyClosed; AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom; AlgebraicGeometry.IsIntegralHom.SpecMap_iff; AlgebraicGeometry.AffineSpace.not_isIntegralHom",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state the relative Frobenius theorem or the combined universal-homeomorphism cancellation claim"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism V to X in characteristic p, the map V to V times X over the absolute Frobenius of X is integral and universally bijective",
+   "results": "8 hits; WittVector.frobenius_bijective; AlgebraicGeometry.UniversallyInjective; bijective_frobenius; PerfectRing.bijective_frobenius; AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.FormallyUnramified; AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated; AlgebraicGeometry.IsIntegralHom",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state the relative Frobenius theorem or the combined universal-homeomorphism cancellation claim"
+  },
+  {
+   "tool": "grep",
+   "query": "of_comp|comp_iff",
+   "results": "3 hits; 86; 89; 91; directory Mathlib/AlgebraicGeometry/Morphisms/Integral.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state the relative Frobenius theorem or the combined universal-homeomorphism cancellation claim"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If h and h composed with g are integral universally injective surjective morphisms of schemes then g has all three properties",
+   "results": "8 hits; AlgebraicGeometry.IsIntegralHom.of_comp; RingHom.IsIntegral.tower_bot; AlgebraicGeometry.instSurjectiveCompScheme; AlgebraicGeometry.universallyInjective_isStableUnderComposition; AlgebraicGeometry.Scheme.Hom.injective; AlgebraicGeometry.UniversallyInjective; AlgebraicGeometry.IsIntegralHom.instCompScheme; AlgebraicGeometry.IsIntegralHom.hasAffineProperty",
+   "date": "2026-10-17",
+   "verdict": "no match for the item or the combined cancellation claim: integral-component candidates already represented by lem-weil-pbc-integral-of-comp-separated"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-absolute-frobenius-site",
@@ -101,5 +368,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-relative-frobenius-universal-homeomorphism",
+  "worker": "stage1",
+  "summary": "Checked the arbitrary-scheme statement against Stacks 0CCB and the finite-Frobenius restrictions of the existing Lean theorem. All requisite statements already exist in the DAG: reuse absolute Frobenius at q=p, base change, closed-embedding affineness, affine-separatedness, integral cancellation, the field-valued-point criterion, and the sufficient universal-homeomorphism criterion. The eight steps prove both clauses without adding nodes or hypotheses. Preserved the original statement, source, creation metadata and search history.",
+  "blueprint": "Realizes the ancestor lem-trf-absolute-frobenius-site proof paragraph 2, “It is integral and universally bijective”, through Stacks 0CCB; the original master blueprint gives the affine formula and algebraically closed points there. The current main-20261015 ancestor file retains the site-trivialization statement without this proof paragraph. This node supplies only the geometric input and does not alter the fixed unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-absolute-frobenius-universal-homeomorphism",
+    "why": "General absolute-Frobenius geometric input, used at q=p for arbitrary schemes; its Lean is closed and no node of this unit states that input."
+   },
+   {
+    "node": "lem-weil-pbc-universal-homeomorphism-base-change",
+    "why": "Generic base-change stability for the projection; existing Mathlib leaf."
+   },
+   {
+    "node": "pqf-lem-integral-univclosed",
+    "why": "Generic affine + universally closed criterion needed to prove integrality from the quantified topological notion; existing Mathlib leaf."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Only clause (3), affine morphisms are separated, supplies relative separatedness of the projection; existing Mathlib leaf."
+   },
+   {
+    "node": "lem-weil-pbc-integral-of-comp-separated",
+    "why": "Generic cancellation of integral morphisms against a separated morphism expands the permanence step of Stacks 0CCB; existing Mathlib leaf."
+   },
+   {
+    "node": "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+    "why": "Generic sufficient criterion converts the three properties of the relative Frobenius to the quantified topological notion; existing Lean-closed node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-absolute-frobenius-universal-homeomorphism",
+  "lem-weil-pbc-universal-homeomorphism-base-change",
+  "pqf-lem-integral-univclosed",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-integral-of-comp-separated",
+  "lem-pc-integral-radicial-surjective-universal-homeomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-324fd4378",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-324fd4378 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one item, no new nodes, no fixes. The statement matches Stacks varieties.tex 0CCB/0CC9 (l.7117/7071): fibre product V x_{X,F_X} X, r=(F_V,v), and the condition v F_V = F_X v is in the correct order. Integral and universal homeomorphism are both true for arbitrary schemes. I tested the empty scheme, v=id, F_p[e]/e^2 and an infinite polynomial ring; the last shows r is integral but not finite, as the statement says. Step 2: the specialization q=p of lem-pur-absolute-frobenius-universal-homeomorphism is valid because its closed Lean (slopmaster2 Morphisms/Frobenius.lean:149-168) works for any finite field k and any k-scheme with no finiteness hypothesis. Step 3: pi_1 is the base change of F_X along v. Step 4: 04DE plus universally closed plus 01WM make F_V integral. Step 5: h is affine, hence separated; IsIntegralHom.of_comp with f=r, g=h gives r integral. Step 6: the field-point criterion of 01S4, quoted in def-weil-radicial-morphism, gives universal injectivity. Step 7: point-set surjectivity. Step 8: lem-pc-integral-radicial-surjective-universal-homeomorphism, which is Lean-closed, gives the topological notion. proof_deps equals the union of uses. Every cited node is a definition, a Mathlib leaf or Lean-closed, and I accept the six declared tool_uses. No duplicate: the nearby nodes i-relative-frob, d-relative-frob and lem-trf-scheme-frobenius-finite-radicial assume finite type over a finite field. The parent lem-trf-absolute-frobenius-site uses exactly these two conclusions in its step 2. No SGA is cited and nothing was changed."
  }
 }
