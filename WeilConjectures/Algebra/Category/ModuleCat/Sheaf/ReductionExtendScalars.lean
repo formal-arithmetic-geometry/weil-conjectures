@@ -47,6 +47,8 @@ variable {𝒜 𝒜' : Type*} [Category 𝒜] [Abelian 𝒜] [IsGrothendieckAbel
   {res : 𝒜' ⥤ 𝒜} [res.Additive] [PreservesFiniteLimits res] [PreservesFiniteColimits res]
   {σ : 𝟭 𝒜 ⟶ 𝟭 𝒜} (D : ReductionDatum res σ) [res.Full] [res.Faithful]
 
+omit [Abelian.HasFunctorialFlatResolution 𝒜] [HasDerivedCategory 𝒜] [HasDerivedCategory 𝒜']
+  [res.Additive] [PreservesFiniteLimits res] [PreservesFiniteColimits res] in
 /-- A morphism `F ⟶ res M` factors uniquely through the reduction `F ⟶ res Φ(F)`. -/
 lemma bijective_r_app_comp_map (F : 𝒜) (M : 𝒜') :
     Function.Bijective fun g : D.Φ.obj F ⟶ M ↦ D.r.app F ≫ res.map g := by
@@ -75,6 +77,7 @@ noncomputable def adjunction : D.Φ ⊣ res :=
         exact ((Equiv.ofBijective _ (D.bijective_r_app_comp_map _ _)).apply_symm_apply g).symm
       homEquiv_naturality_right f g := by simp }
 
+set_option linter.unusedSectionVars false in
 @[simp]
 lemma adjunction_unit_app (F : 𝒜) : D.adjunction.unit.app F = D.r.app F := by
   simp [adjunction]
@@ -126,10 +129,13 @@ lemma extendScalarsAdjunction_unit_app (F : Sheaf J (ModuleCat.{u + 1} A)) :
   have h := (extendScalarsAdjunction J f).unit_leftAdjointUniq_hom_app
     (reductionAdjunction J hf ha) F
   have := restrictScalars_full J f hf
-  rw [reductionAdjunction, Functor.ReductionDatum.adjunction_unit_app] at h
-  change _ = (reductionNatTrans J f hf).app F at h
-  rw [← h, Category.assoc, ← Functor.map_comp]
-  simp [extendScalarsIsoReductionFunctor]
+  have h' : (reductionAdjunction J hf ha).unit.app F = (reductionNatTrans J f hf).app F := by
+    rw [reductionAdjunction, Functor.ReductionDatum.adjunction_unit_app]
+    rfl
+  rw [h'] at h
+  unfold extendScalarsIsoReductionFunctor
+  rw [← h, Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app, Functor.map_id]
+  exact (Category.comp_id _).symm
 
 /-- With scalars restricted back to `A`, the extension of scalars of `F` is
 `F ⊗ A ⧸ ker f`. -/
@@ -140,6 +146,7 @@ noncomputable def extendScalarsCompRestrictScalarsIso :
   Functor.isoWhiskerRight (extendScalarsIsoReductionFunctor J hf ha) _ ≪≫
     reductionFunctorCompRestrictScalarsIso J f hf
 
+omit [EssentiallySmall.{u + 1} C] in
 include hf in
 /-- Restriction of scalars along a surjective ring morphism reflects isomorphisms. -/
 lemma reflectsIsomorphisms_restrictScalars : (restrictScalars J f).ReflectsIsomorphisms :=
@@ -182,7 +189,7 @@ noncomputable def extendScalarsReductionDatum :
     exact CochainComplex.quasiIso_map_of_iso_tensorRight _ _
       (extendScalarsCompRestrictScalarsIso J hf ha) φ h₁ h₂
 
-include ha in
+include hf ha in
 /-- With scalars restricted to `A`, tensoring with the extension of scalars `A' ⊗_A P` is
 tensoring with `P`: `Res((A' ⊗_A P) ⊗ M) ≅ Res(A' ⊗_A (P ⊗ Res M)) ≅ (P ⊗ Res M) ⊗ A ⧸ (a)`,
 and `Res M ⊗ A ⧸ (a) ≅ Res(A' ⊗_A Res M) ≅ Res M`. -/
@@ -210,7 +217,7 @@ lemma nonempty_tensorLeft_extendScalars_obj_comp_restrictScalars_iso
     (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight e₂ (tensorLeft P)⟩
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits in
-include ha in
+include hf ha in
 /-- Extension of scalars along a surjective ring morphism with principal kernel preserves flat
 objects. -/
 lemma preservesFlat_extendScalars : (extendScalars J f).PreservesFlat where
