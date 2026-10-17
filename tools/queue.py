@@ -9,7 +9,8 @@ Usage:
 Stages 1 and 2 are read from the DAG by dag_queue.py: the nodes still to split, and the nodes that can be stated
 because every node their statement needs is stated. Stage 3 is read from the Lean code: the targets are the
 library modules imported by lean/TargetsCheck.lean, the active set is their import closure, and the items are
-the active modules that still contain `sorry` or `admit`, in this order:
+the active modules that still contain `sorry` or `admit` and are on the sorry route of an open batch
+(local/sorry-route.json: a sorried declaration some target actually uses; 2026-10-17), in this order:
   1. modules listed in coord/repairs.txt, in file order (proof or definition repairs),
   2. modules containing `STATEMENT-DISPUTED`,
   3. the rest, nearest to a target first (distance = fewest import steps from a target module).
@@ -30,6 +31,7 @@ import leanindex as li  # noqa: E402
 import dag_queue  # noqa: E402
 
 WORK = li.ROOT / "coord"
+STATE = {}   # how stage 3 was selected (route or closure) and the sorried closure modules left out
 
 
 def analyse():
@@ -56,8 +58,20 @@ def stage3(imports, dist, waiting: set[str]):
         for line in rp.read_text().splitlines():
             if line.strip() and not line.lstrip().startswith("#"):
                 repairs.setdefault(line.split()[0], len(repairs))
+    # 2026-10-17: only modules on the sorry route of the open batches (local/sorry-route.json, tools/sorry_route.py) are
+    # items: a module the targets import but whose sorries no target uses is not work. A module changed after the route
+    # was computed stays an item until the next refresh; without a complete route the import closure is used (STATE).
+    import sorry_route
+    route = sorry_route.load()
+    STATE["route"] = "import closure (no complete sorry route)" if route is None else "sorry route"
+    if route is not None:
+        keep = route["route"] | sorry_route.changed_since(route["t"], dist) | set(repairs)
+        STATE["off_route"] = sorted(m for m in dist if m not in keep and li.file_of(m).is_file()
+                                    and li.sorry_count(li.file_of(m).read_text(errors="ignore")))
     items, held = [], []
     for m in dist:
+        if route is not None and m not in keep:
+            continue
         p = li.file_of(m)
         if not p.is_file():
             continue
@@ -93,6 +107,8 @@ def main() -> int:
         print(f"stage 2: {len(s2)} nodes to state" + (f"; not open: " + ", ".join(f"{v} {k}" for k, v in why.items()) if why else ""))
         if dist:
             print(f"stage 3: library modules {len(lib)}; needed by the targets {len(dist)}; outside {len(lib - set(dist))}")
+            print(f"stage 3: items from the {STATE.get('route', 'import closure')}"
+                  + (f"; {len(STATE['off_route'])} sorried modules in the closure are on no target's route (not items)" if STATE.get("off_route") else ""))
             print(f"stage 3: {len(items3)} items (" + ", ".join(f"{k} {sum(1 for x in items3 if x[4] == k)}" for k in ("repair", "disputed", "proof")) + f"); {len(held)} modules waiting for a statement")
             # 2026-10-15 (launcher): held modules are also items since 2026-10-14; adding them again counted them twice.
             ns = sum(x[3] for x in items3)
