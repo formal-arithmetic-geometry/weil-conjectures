@@ -1,73 +1,150 @@
 {
-  "id": "def-trf-scheme-frobenius",
-  "blueprint": {
-    "is": "def-trf-scheme-frobenius",
-    "from": null,
-    "same_as": null
+ "id": "def-trf-scheme-frobenius",
+ "blueprint": {
+  "is": "def-trf-scheme-frobenius",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Scheme and Galois Frobenius of the geometric fiber",
+ "statement": "Fix the global finite-field datum\n$p,a,q,k_0,k$ of [def-weil-finite-field-fiber], where $q=p^a$, let $X_0$ be a\nfinite-type [def-weil-finite-type-morphism]\n$k_0$-scheme, and put $X=X_0\\times_{k_0}k$. Let\n$\\sigma:k\\to k$, $z\\mapsto z^q$, be the arithmetic Frobenius and put\n$\\gamma=\\sigma^{-1}=\\operatorname{Frob}_q$, so that\n$g_\\gamma=\\operatorname{id}_{X_0}\\times\\Spec(\\gamma):X\\to X$ is the\ngeometric-Frobenius automorphism of [def-weil-frobenius-detailed]. The\n$q$-power scheme Frobenius of $X_0$ is the $k_0$-morphism\n$\\Phi_0:X_0\\to X_0$ of [def-weil-relative-frobenius-geometric-fiber], whose affine incarnation on an affine open $\\operatorname{Spec}A_0\\subseteq X_0$ is $a\\mapsto a^q$; its\nbase change\n\n$$\n\\Phi:=\\Phi_0\\times_{k_0}\\operatorname{id}_k:X\\longrightarrow X\n$$\n\nis a $k$-morphism with affine incarnation\n$a\\otimes b\\mapsto a^q\\otimes b$ on $A_0\\otimes_{k_0}k$.\nThe finiteness [def-weil-finite-integral-morphism] and radiciality\n[def-weil-radicial-morphism] of this constructed morphism are the\nassertion of [lem-trf-scheme-frobenius-finite-radicial].\nFor $m\\in\\mathbf Z_{\\geq0}$ write $\\Phi^m$ for the $m$-fold\niterate, and write\n\n$$\ng_\\sigma=\\operatorname{id}_{X_0}\\times\\Spec(\\sigma):X\\longrightarrow X\n$$\n\nfor the arithmetic Galois automorphism. On the\nsmall pro-etale site [def-weil-pbc-proetale-site], the\nderived pullback functors $L\\Phi^m{}^*$ and $Lg_\\gamma^{m*}$ are the\npullbacks along these endomorphisms, with the coefficient-stage conventions of\n[def-weil-derived-pullback-tensor-hom].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/def-trf-scheme-frobenius.md",
+  "place": "node def-trf-scheme-frobenius, order 2071",
+  "note": [
+   "*Recorded in advance* from chapter *The trace formula* of the source."
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-integral-morphism",
+  "def-weil-radicial-morphism",
+  "def-weil-relative-frobenius-geometric-fiber",
+  "def-weil-finite-type-morphism",
+  "lem-trf-scheme-frobenius-finite-radicial"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "scheme and Galois Frobenius of a geometric fiber, q-power scheme Frobenius, geometric Frobenius automorphism",
+   "results": "FiniteField.frobeniusAlgEquivOfAlgebraic (Mathlib/FieldTheory/Finite/Basic), FiniteField.frobeniusAlgEquiv and apply lemmas, and WittVector Frobenius declarations; no scheme-level definition",
+   "date": "2026-10-17",
+   "verdict": "no match; only field/ring/Witt-vector Frobenius"
   },
-  "kind": "definition",
-  "title": "Scheme and Galois Frobenius of the geometric fiber",
-  "statement": "Fix the global finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$, let $X_0$ be a\nfinite-type\n$k_0$-scheme, and put $X=X_0\\times_{k_0}k$. Let\n$\\sigma:k\\to k$, $z\\mapsto z^q$, be the arithmetic Frobenius and put\n$\\gamma=\\sigma^{-1}=\\operatorname{Frob}_q$, so that\n$g_\\gamma=\\operatorname{id}_{X_0}\\times\\Spec(\\gamma):X\\to X$ is the\ngeometric-Frobenius automorphism. The\n$q$-power scheme Frobenius of $X_0$ is the $k_0$-morphism\n$\\Phi_0:X_0\\to X_0$ whose affine incarnation is $a\\mapsto a^q$; its\nbase change\n\n$$\n\\Phi:=\\Phi_0\\times_{k_0}\\operatorname{id}_k:X\\longrightarrow X\n$$\n\nis a $k$-morphism with affine incarnation\n$a\\otimes b\\mapsto a^q\\otimes b$ on $A_0\\otimes_{k_0}k$, and is\nfinite and radicial.\nFor $m\\in\\mathbf Z_{\\geq0}$ write $\\Phi^m$ for the $m$-fold\niterate, and write\n\n$$\ng_\\sigma=\\operatorname{id}_{X_0}\\times\\Spec(\\sigma):X\\longrightarrow X\n$$\n\nfor the arithmetic Galois automorphism. On the\nsmall pro-etale site, the\nderived pullback functors $L\\Phi^m{}^*$ and $Lg_\\gamma^{m*}$ are the\npullbacks along these endomorphisms.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/def-trf-scheme-frobenius.md",
-    "place": "node def-trf-scheme-frobenius, order 2071",
-    "note": [
-      "*Recorded in advance* from chapter *The trace formula* of the source."
-    ]
+  {
+   "tool": "loogle",
+   "query": "Scheme.Hom.geometricGaloisFrobenius, Scheme.Hom.Frobenius, Scheme.Hom.IsFrobenius",
+   "results": "0 hits; loogle reports unknown identifier 'Scheme.Hom.geometricGaloisFrobenius'",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-weil-frobenius-detailed",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2071,
-  "blueprint_uses": [
-    "def-weil-finite-field-fiber",
-    "def-weil-frobenius-detailed",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "uses_not_cited": [
-    "def-weil-finite-field-fiber",
-    "def-weil-frobenius-detailed",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "blueprint_notes": [
-    {
-      "label": "recorded_in_advance",
-      "text": "*Recorded in advance* from chapter *The trace formula* of the source.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "grep",
+   "query": "geometricGaloisFrobenius|Frobenius|IsFrobenius [AlgebraicGeometry]",
+   "results": "0 hits in the searched Mathlib AlgebraicGeometry directory",
+   "date": "2026-10-17",
+   "verdict": "no match for the combined scheme definition"
   },
-  "chapter": "sec-six-functors",
-  "unit": "sk-prop-sf-rf-shriek-preservation",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Fix the global finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$, let $X_0$ be a\nfinite-type\n$k_0$-scheme, and put $X=X_0\\times_{k_0}k$. Let\n$\\sigma:k\\to k$, $z\\mapsto z^q$, be the arithmetic Frobenius and put\n$\\gamma=\\sigma^{-1}=\\operatorname{Frob}_q$, so that\n$g_\\gamma=\\operatorname{id}_{X_0}\\times\\Spec(\\gamma):X\\to X$ is the\ngeometric-Frobenius automorphism. The\n$q$-power scheme Frobenius of $X_0$ is the $k_0$-morphism\n$\\Phi_0:X_0\\to X_0$ whose affine incarnation is $a\\mapsto a^q$; its\nbase change\n\n$$\n\\Phi:=\\Phi_0\\times_{k_0}\\operatorname{id}_k:X\\longrightarrow X\n$$\n\nis a $k$-morphism with affine incarnation\n$a\\otimes b\\mapsto a^q\\otimes b$ on $A_0\\otimes_{k_0}k$, and is\nfinite and radicial.\nFor $m\\in\\mathbf Z_{\\geq0}$ write $\\Phi^m$ for the $m$-fold\niterate, and write\n\n$$\ng_\\sigma=\\operatorname{id}_{X_0}\\times\\Spec(\\sigma):X\\longrightarrow X\n$$\n\nfor the arithmetic Galois automorphism. On the\nsmall pro-etale site, the\nderived pullback functors $L\\Phi^m{}^*$ and $Lg_\\gamma^{m*}$ are the\npullbacks along these endomorphisms.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leansearch",
+   "query": "scheme Frobenius and geometric Galois Frobenius on the base change of a finite type scheme over a finite field",
+   "results": "FiniteField.Extension.frob, LinearMap.frobenius, FiniteField.frobeniusAlgEquivOfAlgebraic and apply lemmas; no scheme-level definition",
+   "date": "2026-10-17",
+   "verdict": "no match; only field/ring/linear Frobenius"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative Frobenius endomorphism of a scheme over a finite field and semilinear Galois automorphism after algebraic closure",
+   "results": "FiniteField.frobeniusAlgEquivOfAlgebraic and related finite-field Frobenius declarations; no scheme-level relative Frobenius",
+   "date": "2026-10-17",
+   "verdict": "no match; field-level constructions only"
+  },
+  {
+   "tool": "loogle",
+   "query": "FiniteField.frobeniusAlgEquiv, FiniteField.frobeniusAlgEquivOfAlgebraic, AlgebraicGeometry.Scheme.Hom.IsFrobenius",
+   "results": "0 hits; loogle reports unknown identifier 'AlgebraicGeometry.Scheme.Hom.IsFrobenius'",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relative[Ff]robenius|absolute[Ff]robenius|geometricGalois|Spec\\.map [AlgebraicGeometry]",
+   "results": "25 Spec.map-related hits, but no relative/absolute/geometric Frobenius declaration in Mathlib AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match; only generic Spec.map infrastructure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "q-power relative Frobenius morphism and semilinear Galois automorphism of a geometric fiber scheme",
+   "results": "FiniteField.Extension.frob, FiniteField.coe_frobeniusAlgEquivOfAlgebraic, LinearMap.frobenius and ring Frobenius declarations; no scheme-level definition",
+   "date": "2026-10-17",
+   "verdict": "no match; only field/ring/linear Frobenius"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2071,
+ "blueprint_uses": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "uses_not_cited": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "blueprint_notes": [
+  {
+   "label": "recorded_in_advance",
+   "text": "*Recorded in advance* from chapter *The trace formula* of the source.",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Fix the global finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$, let $X_0$ be a\nfinite-type\n$k_0$-scheme, and put $X=X_0\\times_{k_0}k$. Let\n$\\sigma:k\\to k$, $z\\mapsto z^q$, be the arithmetic Frobenius and put\n$\\gamma=\\sigma^{-1}=\\operatorname{Frob}_q$, so that\n$g_\\gamma=\\operatorname{id}_{X_0}\\times\\Spec(\\gamma):X\\to X$ is the\ngeometric-Frobenius automorphism. The\n$q$-power scheme Frobenius of $X_0$ is the $k_0$-morphism\n$\\Phi_0:X_0\\to X_0$ whose affine incarnation is $a\\mapsto a^q$; its\nbase change\n\n$$\n\\Phi:=\\Phi_0\\times_{k_0}\\operatorname{id}_k:X\\longrightarrow X\n$$\n\nis a $k$-morphism with affine incarnation\n$a\\otimes b\\mapsto a^q\\otimes b$ on $A_0\\otimes_{k_0}k$, and is\nfinite and radicial.\nFor $m\\in\\mathbf Z_{\\geq0}$ write $\\Phi^m$ for the $m$-fold\niterate, and write\n\n$$\ng_\\sigma=\\operatorname{id}_{X_0}\\times\\Spec(\\sigma):X\\longrightarrow X\n$$\n\nfor the arithmetic Galois automorphism. On the\nsmall pro-etale site, the\nderived pullback functors $L\\Phi^m{}^*$ and $Lg_\\gamma^{m*}$ are the\npullbacks along these endomorphisms.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-trf-scheme-frobenius",
+  "worker": "stage1",
+  "summary": "Repair of returned delivery 8ca3982af5: compared the retained item and all eight dependency records with the returned head and current newtargets-dag; the dependency records have no changed fields. Kept the maps, hypotheses, affine formulas, iterates and coefficient conventions. Explicitly included the missing statement-only finiteness/radiciality lemma in this delivery; the definition names its assertion rather than treating a theorem as definitional. The lemma independently uses the existing relative-Frobenius construction, not this item, so no cycle is introduced. Replaced the generic scheme-property collection by the actual finite-type definition. Searched the full DAG, blueprint, project Lean and Mathlib; recorded the two sorry-free project declarations covering the new lemma as attachment candidates. No Lean or compiler work and no push. Independent second reading added inline references to the already-recorded defining nodes and introduced A_0 at its first affine occurrence; it confirmed the extracted property against the Stacks sources and added fresh Mathlib searches.",
+  "blueprint": "Realizes main-20261015 def-trf-scheme-frobenius (order 2415): all construction and notation clauses are retained. The sentence “and is finite and radicial” is explicitly represented by lem-trf-scheme-frobenius-finite-radicial, supplied in this delivery. This is the required separation of a claim embedded in a definition, not a subdivision of an already stated theorem; the blueprint definition has no proof paragraph."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-1fa8c20f4",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-1fa8c20f4 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full. Item: I compared it clause by clause with main-20261015 def-trf-scheme-frobenius (order 2415) and its blueprint_update. Every clause matches: the datum (prime p, a>=1, q=p^a), finite-type X_0 with no separated or reduced hypothesis, sigma/gamma and g_gamma as in def-weil-frobenius-detailed, Phi=Phi_0 x id_k with the formula a⊗b->a^q⊗b as in def-weil-relative-frobenius-geometric-fiber, iterates, and pullback on the small pro-etale site (def-weil-pbc-proetale-site, def-weil-derived-pullback-tensor-hom, where ell != p makes ell invertible). The embedded claim 'finite and radicial' is correctly moved into a statement node, as stages/1-dag.md §2 requires; this is not D1 relabelling. It creates no cycle: none of the lemma's stmt_deps reaches the item. Replacing the generic collection node def-weil-scheme-morphism-properties with def-weil-finite-type-morphism is fine. The item is not the unit's key node, has no proof, cites no SGA, and changes no target. New node lem-trf-scheme-frobenius-finite-radicial: it carries a statement only, is self-contained, and cites a definition node for every notion. It satisfies B1-B9. I checked its Stacks sources in varieties.tex against tags/tags: 0CCB is lemma-relative-frobenius (l.7117), 0CCD is lemma-relative-frobenius-finite (l.7154), and 0CCG is remark-n-fold-relative-frobenius (l.7254). The statement is true. Over Spec k_0, F^a=id, so Fr^(q) is the a-fold relative Frobenius. That map is a composite of finite universal homeomorphisms with purely inseparable residue fields, and both properties survive base change to k. Only local finite type is used. Small cases pass: k_0[t] (free of rank q over k[t^q]); k_0[eps]/eps^2 (eps->0, still finite and radicial); the doubled-origin line (the non-separated case); the empty scheme. Duplicate check: i-relative-frob/d-relative-frob cite the item (so citing them would make a cycle) and assume separated models. lem-pur-absolute-frobenius-universal-homeomorphism has no finiteness and no scalar extension. Every other Frobenius node is a construction. Mathlib: 11 searches of all three kinds are recorded; none is a match. The Lean candidates IsFrobenius.isFinite_of_isPullback and isUniversalHomeomorphism_of_isPullback (Frobenius.lean 234-246) match, and are correctly left in lean_candidates for the maintainer. No fixes or tool_uses."
+ }
 }
