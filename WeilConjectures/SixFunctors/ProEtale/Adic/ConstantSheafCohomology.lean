@@ -60,14 +60,14 @@ lemma mem_adicLattice {k : Finset (PadicAlgCl l) × ℕ} {x : PadicAlgCl l} :
       x ∈ Submodule.span ℚ_[l] (k.1 : Set (PadicAlgCl l)) ∧ ‖x‖ ≤ (l : ℝ) ^ k.2 := by
   simp [adicLattice, IsUltrametricDist.closedBall_openAddSubgroup]
 
-lemma one_le_l : (1 : ℝ) ≤ l := by
+lemma one_le_prime_cast : (1 : ℝ) ≤ l := by
   exact_mod_cast (Fact.out : l.Prime).one_lt.le
 
 lemma adicLattice_mono {k k' : Finset (PadicAlgCl l) × ℕ} (h : k ≤ k') :
     adicLattice l k ≤ adicLattice l k' := fun x hx ↦ by
   rw [mem_adicLattice] at hx ⊢
   exact ⟨Submodule.span_mono (Finset.coe_subset.2 h.1) hx.1,
-    hx.2.trans (pow_le_pow_right₀ one_le_l h.2)⟩
+    hx.2.trans (pow_le_pow_right₀ one_le_prime_cast h.2)⟩
 
 instance (k : Finset (PadicAlgCl l) × ℕ) : CompactSpace (adicLattice l k) := by
   refine (isCompact_iff_compactSpace (s := (adicLattice l k : Set (PadicAlgCl l)))).mp ?_
@@ -96,7 +96,7 @@ lemma antitone_adicLatticeNbhd (k : Finset (PadicAlgCl l) × ℕ) :
     Antitone (adicLatticeNbhd k) := fun m m' h x hx ↦ by
   rw [mem_adicLatticeNbhd] at hx ⊢
   exact hx.trans (inv_anti₀ (by have := (Fact.out : l.Prime).pos; positivity)
-    (pow_le_pow_right₀ one_le_l h))
+    (pow_le_pow_right₀ one_le_prime_cast h))
 
 lemma isOpen_adicLatticeNbhd (k : Finset (PadicAlgCl l) × ℕ) (m : ℕ) :
     IsOpen (adicLatticeNbhd k m : Set (adicLattice l k)) :=
