@@ -328,5 +328,38 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N7-a3d5f9ec0 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, sources and unit/chapter route. All eight steps check out, including ramified nonflat coefficients, canonical transitions, scheme pullback and uniqueness. No new nodes or target weakening. Accepted all 13 declared tool uses. review.md records the checks and one inherited missing dependency outside this delivery."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b63d6f8c0",
+  "group": "N1",
+  "result": "pass",
+  "note": "Reviewed immutable node, dependencies, source locations, Lean declarations/docstrings, edge cases, route-pivot compliance, and report sections. Reproduced scompile.py successfully for sandbox and library; no substantive findings or fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteTateSiteDescent",
+  "declaration": "AlgebraicGeometry.Scheme.finite_tate_site_descent",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteTateCoefficient",
+   "AlgebraicGeometry.Scheme.finiteTateConstantRestriction",
+   "AlgebraicGeometry.Scheme.finiteTateProSheaf",
+   "AlgebraicGeometry.Scheme.finiteTateProGenerator",
+   "AlgebraicGeometry.Scheme.finiteTateProPowerGenerator",
+   "AlgebraicGeometry.Scheme.finiteTateEtalePowerGenerator",
+   "AlgebraicGeometry.Scheme.finiteTateEtaleRootValue",
+   "AlgebraicGeometry.Scheme.finiteTateLimitRootValue",
+   "AlgebraicGeometry.Scheme.IsFiniteTateSiteComparison",
+   "AlgebraicGeometry.Scheme.IsFiniteTateEtalePullback",
+   "AlgebraicGeometry.Scheme.IsFiniteTateProPullback",
+   "AlgebraicGeometry.Scheme.IsFiniteTateEtaleTransition",
+   "AlgebraicGeometry.Scheme.finite_tate_site_descent"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteTateSiteDescent.lean",
+  "statement": "theorem finite_tate_site_descent : ∃ b : ∀ (T : Scheme.{u}), IsUnit (l : Γ(T, ⊤)) → ∀ (r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ), (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).obj (finiteEtaleTateTwist T (l ^ (r + 1)) _ hA k) ≅ finiteTateProSheaf l E n T k, (∀ (T : Scheme.{u}) (hT : IsUnit (l : Γ(T, ⊤))) (r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ), IsFiniteTateSiteComparison l E n T r hA k (b T hT r hA k)) ∧ (∀ (T T' : Scheme.{u}) (v : T' ⟶ T) (hT : IsUnit (l : Γ(T, ⊤))) (hT' : IsUnit (l : Γ(T', ⊤))) (r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ), ∃ (c : (Etale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) v).obj (finiteEtaleTateTwist T (l ^ (r + 1)) _ hA k) ≅ finiteEtaleTateTwist T' (l ^ (r + 1)) _ hA k) (d : (ProEtale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) v).obj (finiteTateProSheaf l E n T k) ≅ finiteTateProSheaf l E n T' k), IsFiniteTateEtalePullback l E n T v r hA k c ∧ IsFiniteTateProPullback l E n T v k d ∧ (ProEtale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) v).mapIso (b T hT r hA k) ≪≫ d = (ProEtale.comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) v).app (finiteEtaleTateTwist T (l ^ (r + 1)) _ hA k) ≪≫ (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T').mapIso c ≪≫ b T' hT' r hA k) ∧ (∀ (T : Scheme.{u}) (hT : IsUnit (l : Γ(T, ⊤))) (r r' : ℕ) (_h : r ≤ r') (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (hA' : ((l ^ (r' + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ), ∃! t : finiteEtaleTateTwist T (l ^ (r' + 1)) _ hA' k ≅ finiteEtaleTateTwist T (l ^ (r + 1)) _ hA k, IsFiniteTateEtaleTransition l E n T r r' hA hA' k t ∧ (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).mapIso t ≪≫ b T hT r hA k = b T hT r' hA' k) ∧ (∀ (T : Scheme.{u}) (hT : IsUnit (l : Γ(T, ⊤))) (r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ) (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (finiteTateCoefficient l E n))) (alpha : (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).obj G ≅ finiteTateProSheaf l E n T k), ∃! h : finiteEtaleTateTwist T (l ^ (r + 1)) _ hA k ≅ G, (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).mapIso h ≪≫ alpha = b T hT r hA k)",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
