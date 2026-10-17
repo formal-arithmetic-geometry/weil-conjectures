@@ -30,9 +30,182 @@
   "lem-coef-marked-point-cartesian-model",
   "lem-coef-model-infinity-derived-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the slice $\\mathsf M=\\mathrm{sSet}^+_{/\\bar C}$ defined in [def-coef-categorical-pattern-fibrancy], using marked internal Homs from [lem-coef-marked-point-cartesian-model]. Limits are formed on underlying simplicial sets with an edge marked exactly when every projection marks it; colimits are formed on underlying simplicial sets and mark the images of marked edges. Thus all small limits and colimits exist. Every marked object over $\\bar C$ is the filtered union of its subobjects with finitely many nondegenerate simplices and their chosen markings. Maps from such a finite object are determined by finitely many simplex images and marking conditions, and equality of two such maps is witnessed at one common stage; thus its Hom functor preserves filtered colimits. There is a small set of these finite objects over the fixed small base. This proves local finite presentability directly. Monomorphisms are generated as a weakly saturated class $C_0$ by $(\\partial\\Delta^n)^\\flat\\to(\\Delta^n)^\\flat$ over all simplices of $C$, together with $(\\Delta^1)^\\flat\\to(\\Delta^1)^\\sharp$ over the edges of $S$: first attach the missing underlying simplices in skeletal order, then add the remaining markings one at a time. Conversely these maps and their pushouts, transfinite composites and retracts are monomorphisms. Construct the marked Hom explicitly as\n$$\\mathcal H_C(A,B)=B^A\\times_{\\bar C^A}(\\Delta^0)^\\sharp,$$\nwhere the point is the structure map $A\\to\\bar C$. The product/internal-Hom adjunction gives the required enriched-Hom bijection. For a marked $L$, the cotensor is\n$$B^{L}_{C}=B^L\\times_{\\bar C^L}\\bar C,$$\nwith $\\bar C\\to\\bar C^L$ adjoint to projection. Its slice Hom bijection is $\\operatorname{Hom}_{/\\bar C}(A,B_C^L)=\\operatorname{Hom}_{/\\bar C}(A\\times L,B)$. Composition, unit and tensor associativity are induced by evaluation and composition of the maps being represented. The degreewise description of $\\mathcal H_C$ gives precisely the flat simplices and sharp marked edges stated in the item.",
+   "uses": [
+    "def-coef-categorical-pattern-fibrancy",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.0.25 and B.2, proof of B.0.20; explicit marked slice constructions."
+   }
+  },
+  {
+   "text": "Let $J=J_{\\mathfrak P}$ and $\\operatorname{An}_{\\mathfrak P}$ be the concrete generating set and its weakly saturated closure of [lem-coef-pattern-anodyne-lifting-products]. This is a small set even for infinite $K_\\alpha$: its indices are the given small family, the natural numbers, and sets of maps between small simplicial sets. Apply [lem-coef-accessible-small-object-factorization] to $J$ in the locally presentable slice from step 1, and to each terminal arrow $A\\to\\bar C$. Obtain a functor $E$ and natural $\\eta_A:A\\to EA$ in $\\operatorname{An}_{\\mathfrak P}$, with $EA$ lifting against $J$, hence $\\mathfrak P$-fibered. For some regular $\\kappa$, $E$ preserves $\\kappa$-filtered colimits. Indeed the small-object middle functor has this property; the functor $A\\mapsto(A\\to\\bar C)$ preserves these colimits because a filtered category is nonempty and connected, so the colimit of the constant terminal-object diagram is terminal. No claim that $E$ preserves all filtered colimits is made for infinite cones. Here $\\mathfrak P$-fibered has the current four-clause meaning in [def-coef-categorical-pattern-fibrancy]: inner fibration, exactly the cocartesian edges over $S$ marked with the required lifts, a classifying limit diagram for each cone pullback, and a relative limit diagram for every cocartesian section. Both cone requirements are retained when $K_\\alpha$ is empty; no closure or additional marking hypothesis on $S$ is imposed.",
+   "uses": [
+    "lem-coef-pattern-anodyne-lifting-products",
+    "lem-coef-accessible-small-object-factorization",
+    "def-coef-categorical-pattern-fibrancy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.1, B.1.6; proof of B.0.20, replacement construction, with a sufficiently large regular cardinal for arbitrary small cones."
+   }
+  },
+  {
+   "text": "Define $W$ by the sharp mapping test in the statement. By [lem-coef-pattern-anodyne-lifting-products], the test spaces are Kan, and every $\\mathfrak P$-anodyne map belongs to $W$ since its restriction maps are trivial Kan fibrations. Two-out-of-three, isomorphisms and retract closure hold by applying the mapping tests. Naturality of $\\eta$ and two-out-of-three imply $f\\in W$ if and only if $Ef\\in W$. By [lem-coef-pattern-fibered-edge-detection], this is equivalent to every $\\Delta^1$-pullback of $Ef$ being a categorical equivalence.",
+   "uses": [
+    "lem-coef-pattern-anodyne-lifting-products",
+    "lem-coef-pattern-fibered-edge-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.2.1, B.2.2, B.2.4 and the replacement argument in the proof of B.0.20."
+   }
+  },
+  {
+   "text": "To verify accessibility rather than assume it, use [lem-coef-categorical-equivalences-small-generation] and [lem-coef-joyal-filtered-equivalences]: the full replete subcategory $\\mathcal V$ of categorical equivalences in $\\mathsf{sSet}^{[1]}$ is closed under small filtered colimits, and every object of $\\mathcal V$ is a small filtered colimit of arrows from a small set $E_0\\subseteq\\mathcal V$. To pass to the convention of [lem-coef-accessible-arrow-inverse-image], fix an uncountable regular cardinal $\\lambda$. For a small filtered $J$, let $P_J$ be the set of subcategories $J'\\subseteq J$ with fewer than $\\lambda$ morphisms that are themselves filtered. Every set of fewer than $\\lambda$ morphisms of $J$ lies in some $J'\\in P_J$: close it under identities, composites and a chosen cocone for each of its finite subdiagrams, and repeat $\\omega$ times; each round adds fewer than $\\lambda$ morphisms, and a countable union of sets of size less than $\\lambda$ has size less than $\\lambda$ since $\\lambda$ is regular and uncountable. Hence $P_J$, ordered by inclusion, is $\\lambda$-directed and covers $J$, so $\\operatorname{colim}_JX\\cong\\operatorname{colim}_{J'\\in P_J}\\operatorname{colim}_{J'}X$. For $X$ with values in $E_0$, each $\\operatorname{colim}_{J'}X$ lies in $\\mathcal V$ by filtered closure, and these colimits form, up to isomorphism, a small set $E_1$ (diagrams with fewer than $\\lambda$ morphisms in the small set $E_0$). Thus $\\mathcal V$ is closed under $\\lambda$-filtered colimits and generated under them by $E_1$, which is accessibility in exactly the convention of [lem-coef-accessible-arrow-inverse-image]. Define\n$$F(A)=\\coprod_{e\\in C_1}UEA\\times_C\\Delta^1,$$\nwhere $U$ forgets markings. Underlying simplicial sets and pullbacks over a fixed base are computed degreewise; disjoint unions commute with colimits, and pullback of sets over a fixed set commutes with colimits. Thus $F$ preserves the sufficiently filtered colimits preserved by $E$. Its values are coproducts of quasicategories. A map $F(f)$ is a categorical equivalence if and only if every summand is: use [lem-coef-joyal-quasicategory-characterizations](2), taking the coproduct of quasi-inverses in one direction. In the other direction any quasi-inverse of $F(f)$ preserves the summand labels, since its composite with the label-preserving $F(f)$ is naturally equivalent to the identity and no edge connects different summands; restrict it and its inverse homotopies to each summand. For an empty base the coproduct is empty and the test is vacuous, as required. Step 3 now identifies $W=F^{-1}(\\mathcal V)$. Apply [lem-coef-accessible-arrow-inverse-image] with source the slice of step 1, target simplicial sets (generated by finite simplicial sets under filtered colimits), and this $F$. It proves that $W$ is accessible in the ambient arrow category.",
+   "uses": [
+    "lem-coef-categorical-equivalences-small-generation",
+    "lem-coef-joyal-filtered-equivalences",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-accessible-arrow-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of B.0.20, accessibility/perfectness argument using edge pullbacks; sufficiently filtered Smith variant for arbitrary small cones."
+   }
+  },
+  {
+   "text": "For a monomorphism $u:A\\to B$, [lem-coef-pattern-anodyne-lifting-products] says that every $\\operatorname{Map}^\\sharp_C(u,Z)$ is a Kan fibration. Hence $u\\in W$ exactly when each such map lifts all boundary inclusions, by [lem-coef-kan-quillen-right-proper]. By the cotensor bijection of step 1 this is exactly left lifting of $u$ against all\n$$Z_C^{(\\Delta^n)^\\sharp}\\longrightarrow Z_C^{(\\partial\\Delta^n)^\\sharp},\\qquad n\\geq0,\\quad Z\\ \\mathfrak P\\text{-fibered}.$$\nA left lifting class is closed under pushout by extending a square through the pushout, under transfinite composition by extending the lift at each successor stage and taking the prescribed colimit at a limit stage, and under retracts by inclusion and projection of squares. Intersecting with the similarly weakly saturated monomorphisms proves weak saturation of $C_0\\cap W$. This is a statement about these cotensor maps, not an invocation of model axioms for a structure still to be built.",
+   "uses": [
+    "lem-coef-pattern-anodyne-lifting-products",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.14 and the model-recognition argument in B.2; explicit weak saturation via cotensor lifting."
+   }
+  },
+  {
+   "text": "If $p:A\\to B$ lifts all monomorphisms, lifting $\\varnothing\\to B$ gives a section $s:B\\to A$. Lifting\n$$A\\times\\{0,1\\}^\\sharp\\hookrightarrow A\\times(\\Delta^1)^\\sharp$$\nagainst $p$, with endpoints $\\operatorname{id}_A,sp$ and bottom map $p\\operatorname{pr}_A$, gives a marked homotopy between these endpoints over $C$. Thus $p$ has a marked homotopy inverse. Precomposition on every sharp mapping simplicial set gives homotopy inverse maps: transpose the homotopy and use the same $\\Delta^1$ parameter. These induce inverse maps on path components and all homotopy groups, so $p\\in W$. Now [lem-coef-smith-model-recognition] applies: step 1 gives a small generating set and weak saturation of $C_0$, step 5 gives weak saturation of $C_0\\cap W$, step 4 gives accessibility, step 3 gives two-out-of-three, and the preceding lift gives the final hypothesis. Obtain a combinatorial model structure with cofibrations $C_0$, weak equivalences $W$, and fibrations $(C_0\\cap W)^\\square$, with functorial factorizations.",
+   "uses": [
+    "lem-coef-smith-model-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of B.0.20, condition (3) and model recognition; accessible Smith version."
+   }
+  },
+  {
+   "text": "Every generator in $J$ is a monomorphism in $W$ by steps 2-3. Thus a model-fibrant object lifts $J$, and is $\\mathfrak P$-fibered by [lem-coef-pattern-anodyne-lifting-products]. Conversely if $Z$ is $\\mathfrak P$-fibered, every trivial cofibration $u$ induces a Kan fibration on the sharp mapping spaces by that same node and a weak equivalence by the definition of $W$. By [lem-coef-kan-quillen-right-proper] this is a trivial Kan fibration, so is surjective on vertices. Every map from the domain of $u$ therefore extends to its codomain. This says precisely that $Z$ is model-fibrant. All objects are cofibrant, since their initial maps are monomorphisms. Consequently the fibrant-object identification includes all four clauses of [def-coef-categorical-pattern-fibrancy], in particular both its classifying-limit and cocartesian-section relative-limit requirements, with the specified universes and empty cones allowed.",
+   "uses": [
+    "lem-coef-pattern-anodyne-lifting-products",
+    "lem-coef-kan-quillen-right-proper",
+    "def-coef-categorical-pattern-fibrancy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.1.6, B.1.14 and proof of B.0.20, fibrant-object identification."
+   }
+  },
+  {
+   "text": "Consider a pushout of $f:A\\to B$ in $W$ along a monomorphism $A\\to A'$, with pushout $B'$. For each $\\mathfrak P$-fibered $Z$, the tensor in step 1 preserves this pushout, so degreewise the sharp mapping spaces satisfy\n$$\\operatorname{Map}^\\sharp_C(B',Z)=\\operatorname{Map}^\\sharp_C(B,Z)\\times_{\\operatorname{Map}^\\sharp_C(A,Z)}\\operatorname{Map}^\\sharp_C(A',Z).$$\nAll these spaces are Kan, and $\\operatorname{Map}^\\sharp_C(A',Z)\\to\\operatorname{Map}^\\sharp_C(A,Z)$ is a Kan fibration by [lem-coef-pattern-anodyne-lifting-products]. The map $\\operatorname{Map}^\\sharp_C(B,Z)\\to\\operatorname{Map}^\\sharp_C(A,Z)$ is a weak equivalence by $f\\in W$. Pulling this weak equivalence back along that fibration gives $\\operatorname{Map}^\\sharp_C(B',Z)\\to\\operatorname{Map}^\\sharp_C(A',Z)$, which is a weak equivalence by [lem-coef-kan-quillen-right-proper]. Thus $A'\\to B'$ lies in $W$, proving left properness of the constructed model structure.",
+   "uses": [
+    "lem-coef-pattern-anodyne-lifting-products",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.3 and proof of B.0.20, left properness."
+   }
+  },
+  {
+   "text": "We need a product argument for both factors of the marked axiom. First, any $W$-map $g:X\\to Y$ between $\\mathfrak P$-fibered objects has a marked homotopy inverse. In the mapping test with $Z=X$, surjectivity on $\\pi_0$ supplies $h:Y\\to X$ and a path from $hg$ to $1_X$. In the test with $Z=Y$, injectivity on $\\pi_0$ and $(gh)g\\simeq g$ imply $gh\\simeq1_Y$. The spaces are Kan by [lem-coef-pattern-anodyne-lifting-products], so paths may be taken as edges; they are exactly maps with the parameter $(\\Delta^1)^\\sharp$. Conversely such inverse homotopies imply every mapping test is a homotopy equivalence by precomposition. This argument uses neither an underlying unmarked inverse nor vertexwise equivalence alone.",
+   "uses": [
+    "lem-coef-pattern-anodyne-lifting-products"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4, formal equivalence (1) with (2), and Remark B.2.5."
+   }
+  },
+  {
+   "text": "For $f:A\\to B$ in $W$ and any marked simplicial set $L$, the maps $\\eta_A\\times L,\\eta_B\\times L$ are $\\mathfrak P$-anodyne by the product assertion of [lem-coef-pattern-anodyne-lifting-products], with second factor $\\varnothing\\to L$. The map $Ef$ is a $W$-map between fibered objects, so has the inverse homotopies of step 9. Multiplying these homotopies by $L$ gives inverse homotopies for $Ef\\times L$; precomposition shows it lies in $W$. Naturality of $\\eta$ and two-out-of-three now imply $f\\times L\\in W$.\nFor the other factor, take a weak equivalence $j:L\\to L'$ in the point model $\\mathsf K$ of [lem-coef-marked-point-cartesian-model]. Apply the same small-object replacement to the trivial point pattern $\\mathfrak P_0$. Its fibered objects are exactly quasicategories with their equivalences marked: over a point, cocartesian edges are equivalences and there are no cone conditions. The mapping definition of $W$ for this pattern is precisely that of $\\mathsf K$. Thus $E_0j$ has marked inverse homotopies by step 9 for this pattern. For any pattern object $A$, the maps $A\\times\\eta_L,A\\times\\eta_{L'}$ are $\\mathfrak P$-anodyne by the other half of the product assertion (first factor $\\varnothing\\to A$). Multiplying the inverse homotopies of $E_0j$ by $A$ and applying two-out-of-three gives $A\\times j\\in W$.",
+   "uses": [
+    "lem-coef-pattern-anodyne-lifting-products",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark B.2.5, replacement-and-homotopy-inverse proof, specialized to the trivial point pattern."
+   }
+  },
+  {
+   "text": "Let $i:A\\to A'$ and $j:L\\to L'$ be monomorphisms in the pattern and point categories. Their pushout product $k$ is a monomorphism: in each degree its domain is the union of the two indicated subsets of $A'\\times L'$. If $i$ is a weak equivalence, step 10 makes both $i\\times L$ and $i\\times L'$ weak equivalences. The map $A\\times L'\\to\\operatorname{dom}(k)$ is the pushout of $i\\times L$ along the monomorphism $A\\times j$, so is a weak equivalence by step 8. Its composite with $k$ is $i\\times L'$, hence $k\\in W$ by two-out-of-three. If $j$ is a weak equivalence, instead the map $A'\\times L\\to\\operatorname{dom}(k)$ is a pushout of $A\\times j$ along $i\\times L$ and its composite with $k$ is $A'\\times j$; step 10 and left properness give the same conclusion. This proves the full marked pushout-product axiom, including either trivial factor.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark B.2.5; explicit two-pushout calculation."
+   }
+  },
+  {
+   "text": "Translate this to the Hom formulation. For the displayed induced map $t=\\mathcal H_C(i,r)$ and a marked map $j$, the enriched Hom bijection identifies a lifting square $j\\perp t$ with a lifting square $(i\\square j)\\perp r$. If $j$ is a trivial cofibration of $\\mathsf K$, step 11 makes $i\\square j$ a trivial pattern cofibration, so it lifts every pattern fibration $r$ by the model weak factorization systems of [lem-coef-model-infinity-derived-adjunction]. Thus $t$ is a fibration of $\\mathsf K$, by the lifting characterization in [lem-coef-marked-point-cartesian-model]. If $i$ is trivial, the same holds for every point cofibration $j$ by step 11; if $r$ is trivial, $i\\square j$ is a cofibration for every such $j$ and lifts $r$. The other model weak factorization system in $\\mathsf K$ then makes $t$ a trivial fibration in either case. This proves the asserted marked enriched model axiom.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark B.2.5; tensor/Hom lifting adjunction."
+   }
+  },
+  {
+   "text": "Finally apply the simplicial model axiom already present in the point model [lem-coef-marked-point-cartesian-model] with its initial cofibration $\\varnothing\\to(\\Delta^0)^\\sharp$. It says that $K^\\sharp\\to(K')^\\sharp$ is a point cofibration for every simplicial cofibration $K\\to K'$, trivial if the latter is trivial. Step 11 therefore gives the simplicial pushout-product axiom for the pattern tensor $A\\times K^\\sharp$. Its cotensor is $B_C^{K^\\sharp}$ from step 1 and its mapping simplicial set is the sharp mapping object by its defining bijection. The represented composition and unit from step 1 give the enrichment, and [lem-coef-pattern-anodyne-lifting-products] gives the Kan assertion for fibrant targets. The model structure constructed in step 6 is consequently simplicial with exactly the mapping objects and weak-equivalence test stated in the item.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-pattern-anodyne-lifting-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.0.25, proof of B.0.20, simplicial compatibility; Remark B.2.6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-categorical-pattern-fibrancy",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-pattern-anodyne-lifting-products",
+  "lem-coef-accessible-small-object-factorization",
+  "lem-coef-pattern-fibered-edge-detection",
+  "lem-coef-categorical-equivalences-small-generation",
+  "lem-coef-joyal-filtered-equivalences",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-accessible-arrow-inverse-image",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-smith-model-recognition",
+  "lem-coef-model-infinity-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Higher Algebra B.1 and B.2, proof of B.0.20 and Remark B.2.5; sufficiently filtered Smith-recognition variant written out because HA is not archived under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -82,10 +255,59 @@
    "results": "{\"t\": \"2026-10-16T21:56:25Z\", \"tool\": \"grep\", \"query\": \"MarkedSSet|CategoricalPattern|[Pp]attern[Ff]iber|[Pp]attern[Ff]ibr\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: no marked-pattern declarations in the source grep."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A categorical pattern on an infinity category gives a left proper combinatorial model structure on marked simplicial sets enriched over the marked categorical model structure",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithCofibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}\n  {\"name\": \"SSet.QCat\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of the category of simplicial sets consisting of all quasi-categories (simplicial sets where every inner horn admits a filler) and all morphisms between them.\"}\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).Quasicategory\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}\n  {\"name\": \"SSet.modelCategoryQuillen.J\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"CategoryTheory.MorphismProperty SSet\", \"doc\": \"The morphism property in the category of simplicial sets generated by all horn inclusions, defined as the supremum over all dimensions $n$ of the inclusions of the $i$-th horn $\\\\Lambda[n+1, i]$ into t\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm1a\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C],\\n  CategoryTheory.Limits.HasFiniteLimits C\", \"doc\": \"Any model category has finite limits, i.e., it contains all finite limits such as terminal objects, binary products, and pullbacks as part of its defining axioms.\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm1b\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C],\\n  CategoryTheory.Limits.HasFiniteColimits C\", \"doc\": \"Any category equipped with a model category structure (consisting of weak equivalences, fibrations, and cofibrations satisfying the model category axioms) necessarily has all finite colimits.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.fibrations SSet = SSet.modelCategoryQuillen.J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern unmarked simplicial Kan lifting, general model-category axioms, ordinary fibered categories or Cat enrichment of quasicategories. They do not state this marked categorical-pattern result. Read CategoryWithFibrations.lean:38-97, ModelCategory/Basic.lean:49-66, Quasicategory/StrictBicategory.lean:48-69, and AnodyneExtensions/Basic.lean:67-120; the last concerns all unmarked horns, not pattern horn/cone/marking generators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Model category with monomorphism cofibrations and fibrant objects given by cocartesian transport and prescribed limit cones",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithCofibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.fibrations SSet = SSet.modelCategoryQuillen.J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithFibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [(HomotopicalAlgebra.weakEquivalences C).HasTwoOutOfThreePro\", \"doc\": \"In a model category $\\\\mathcal{C}$ with (trivial cofibration, fibration) factorizations, pullbacks, and fibrations stable under composition and base change, if every cofibration $i$ and trivial fibrati\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithFibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [(HomotopicalAlgebra.weakEquivalences C).HasTwoOutOfThreePro\", \"doc\": \"In a model category $\\\\mathcal{C}$ equipped with a (cofibration, trivial fibration) factorization system, pushouts, and cofibrations stable under composition and cobase change, if every trivial cofibra\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibration_iff\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"∀ {X Y : SSet} (f : X ⟶ Y), HomotopicalAlgebra.Fibration f ↔ SSet.modelCategoryQuillen.J.rlp f\", \"doc\": \"A morphism $ f $ in the category of simplicial sets is a fibration in the Quillen model structure if and only if it satisfies the right lifting property with respect to all horn inclusions $ \\\\Lambda[n\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.mk'\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : HomotopicalAlgebra.CategoryWithFibrations C] →\\n      [inst_2 : HomotopicalAlgebra.CategoryWithCofibrations C] →\\n        [inst_3 : HomotopicalAlgebra.CategoryWithWeakEquivalences C] →\\n          [CategoryTheory.Limits.HasFinite\", \"doc\": \"A structure on a category $\\\\mathcal{C}$ defining it as a model category, consisting of three classes of morphisms (fibrations, cofibrations, and weak equivalences) satisfying the axioms: (1) $\\\\mathcal\"}\n  {\"name\": \"HomotopicalAlgebra.BifibrantObject.mk_surjective\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Bifibrant\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasInitial C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  [inst_4 : CategoryTheory.Limits.HasTerminal C] (X : HomotopicalAlgebra.BifibrantO\", \"doc\": \"For any bifibrant object $X$ in the full subcategory of bifibrant objects of a category $\\\\mathcal{C}$, there exists an object $Y$ in $\\\\mathcal{C}$ that is both cofibrant (the unique morphism from the \"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern unmarked simplicial Kan lifting, general model-category axioms, ordinary fibered categories or Cat enrichment of quasicategories. They do not state this marked categorical-pattern result. Read CategoryWithFibrations.lean:38-97, ModelCategory/Basic.lean:49-66, Quasicategory/StrictBicategory.lean:48-69, and AnodyneExtensions/Basic.lean:67-120; the last concerns all unmarked horns, not pattern horn/cone/marking generators."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.ModelCategory",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"HomotopicalAlgebra.ModelCategory\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] : Type (max u v)\", \"doc\": \"A model category is a category equipped with classes of morphisms named cofibrations,\\nfibrations and weak equivalences which satisfy the axioms CM1/CM2/CM3/CM4/CM5\\nof (closed) model categories. \"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.categoryWithCofibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C] : HomotopicalAlgebra.CategoryWithCofibrations C\", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.categoryWithFibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C] : HomotopicalAlgebra.CategoryWithFibrations C\", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C] : HomotopicalAlgebra.CategoryWithWeakEquivalences C\", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm1a\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C] : CategoryTheory.Limits.HasFiniteLimits C\", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm1b\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C] : CategoryTheory.Limits.HasFiniteColimits C\", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm2\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C] : (HomotopicalAlgebra.weakEquivalences C).HasTwoOutOfThreeProperty\", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm3a\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C] : (HomotopicalAlgebra.weakEquivalences C).IsStableUnderRetracts\", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm3b\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C] : (HomotopicalAlgebra.fibrations C).IsStableUnderRetracts\", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm3c\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C] : (HomotopicalAlgebra.cofibrations C).IsStableUnderRetracts\", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm5a\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C] : (HomotopicalAlgebra.trivialCofibrations C).HasFactorization (HomotopicalAlgebra.fibrations C)\", \"doc\": \"\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm5b\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C] : (HomotopicalAlgebra.cofibrations C).HasFactorization (HomotopicalAlgebra.trivialFibrations C)\", \"doc\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern unmarked simplicial Kan lifting, general model-category axioms, ordinary fibered categories or Cat enrichment of quasicategories. They do not state this marked categorical-pattern result. Read CategoryWithFibrations.lean:38-97, ModelCategory/Basic.lean:49-66, Quasicategory/StrictBicategory.lean:48-69, and AnodyneExtensions/Basic.lean:67-120; the last concerns all unmarked horns, not pattern horn/cone/marking generators."
+  },
+  {
+   "tool": "grep",
+   "query": "CategoricalPattern|pattern.anodyne|pattern.fibered|marked.simplicial",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern unmarked simplicial Kan lifting, general model-category axioms, ordinary fibered categories or Cat enrichment of quasicategories. They do not state this marked categorical-pattern result. Read CategoryWithFibrations.lean:38-97, ModelCategory/Basic.lean:49-66, Quasicategory/StrictBicategory.lean:48-69, and AnodyneExtensions/Basic.lean:67-120; the last concerns all unmarked horns, not pattern horn/cone/marking generators."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Categorical pattern model structure on marked simplicial sets over a base with marked enrichment",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialCategory.SimplicialObject\", \"type\": \": EnrichedCategory SSet.{v} (SimplicialObject D)\", \"doc\": \"For any category $ \\\\mathcal{D} $, the category of simplicial objects in $ \\\\mathcal{D} $ is enriched over the category of simplicial sets. This means that the hom-objects between any two simplicial obj\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": CategoryWithCofibrations SSet.{u}\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.fibrations_eq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": fibrations SSet.{u} = J.rlp\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where a morphism is a fibration if and only if it has the right lifting property with respect to all horn inclusi\"}\n  {\"name\": \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \": (fibrations C).IsStableUnderProductsOfShape J\", \"doc\": \"A category equipped with cofibrations, fibrations, and weak equivalences, together with a weak factorization system and stability of fibrations under products, satisfies the axioms of a model category\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \"[hf : Fibration f] {n : ℕ} (i : Fin (n + 2)) : HasLiftingProperty (horn (n + 1) i).ι f\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.modelCategoryQuillen.cofibrations_eq\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": cofibrations SSet.{u} = monomorphisms _\", \"doc\": \"In the category of simplicial sets equipped with the Quillen model structure, the class of cofibrations coincides with the class of monomorphisms.\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.mk'\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Basic\", \"type\": \"[CategoryWithFibrations C] [CategoryWithCofibrations C] [CategoryWithWeakEquivalences C] [HasFiniteLimits C]\\n  [HasFiniteColimits C] [(weakEquivalences C).HasTwoOutOfThreeProperty]\\n  [IsWeakFactorizationSystem (cofibrations C) (trivialFibrations C)]\\n  [IsWeakFactorizationSystem (trivialCofibrations \", \"doc\": \"A structure on a category $\\\\mathcal{C}$ defining it as a model category, consisting of three classes of morphisms (fibrations, cofibrations, and weak equivalences) satisfying the axioms: (1) $\\\\mathcal\"}\n  {\"name\": \"SSet.modelCategoryQuillen.mono_of_cofibration\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \"[Cofibration f] : Mono f\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern unmarked simplicial Kan lifting, general model-category axioms, ordinary fibered categories or Cat enrichment of quasicategories. They do not state this marked categorical-pattern result. Read CategoryWithFibrations.lean:38-97, ModelCategory/Basic.lean:49-66, Quasicategory/StrictBicategory.lean:48-69, and AnodyneExtensions/Basic.lean:67-120; the last concerns all unmarked horns, not pattern horn/cone/marking generators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial set over a marked base with specified limit cones, anodyne extensions and fibrant replacement",
+   "results": "{\"t\": \"2026-10-16T23:03:58Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial set over a marked base with specified limit cones, anodyne extensions and fibrant replacement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Augmented\", \"SSet.QCat\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.J\", \"SSet.KanComplex\", \"SSet.Quasicategory\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal\"], \"digest\": \"d20130c672a0f5e8\"}",
+   "date": "2026-10-17",
+   "verdict": "Second reading: no match. The semantic hits are unmarked horn lifting, ordinary quasicategories, strict Segal objects, generic model homotopy or unmarked subcomplex pushouts; none supplies the marked pattern, its cone constraints, or the edgewise detection statement. Read CategoryWithFibrations.lean:38-97 and StrictBicategory.lean:48-69. The source grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "SSet.*[Mm]arked|[Mm]arkedSimplicial|[Cc]ategorical[Pp]attern|[Ff]ibered.*[Pp]attern",
+   "results": "{\"t\": \"2026-10-16T23:03:56Z\", \"tool\": \"grep\", \"query\": \"SSet.*[Mm]arked|[Mm]arkedSimplicial|[Cc]ategorical[Pp]attern|[Ff]ibered.*[Pp]attern\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "Second reading: no match. The semantic hits are unmarked horn lifting, ordinary quasicategories, strict Segal objects, generic model homotopy or unmarked subcomplex pushouts; none supplies the marked pattern, its cone constraints, or the edgewise detection statement. Read CategoryWithFibrations.lean:38-97 and StrictBicategory.lean:48-69. The source grep has zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-operadic-model-structures",
@@ -105,5 +327,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-categorical-pattern-model-calculus",
+  "worker": "stage1",
+  "summary": "Statement preserved. Supplied 13 proof steps constructing the model by accessible Smith recognition, identifying fibrant objects, proving left properness and deriving both marked pushout-product cases and their Hom and simplicial forms. Added two model-independent categorical-pattern inputs with explicit horn/cone generators and edgewise detection; reused existing accessibility and model-recognition nodes. No Lean declaration attaches. Checked arbitrary small and empty cones, partial markings, and the empty base. Repair of the landing refusal: re-read the current fibrancy definition, explicitly retained all four clauses in steps 2 and 7, and refreshed the exact definition citations against the current DAG.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: the finite-coefficient mapping-complex adjunction before the derived inverse limit; auxiliary construction of the marked operadic models used by lem-coef-marked-operadic-model-structures. These are foundational substeps below the finite-adjunction mapping-complex realization, not a replacement of a unit step.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NO-ced384070",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-ced384070 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. HA (2017) came from the extract already on this server at /tmp/ha_txt/HA.txt (network is blocked for reviewers); I checked it at B.0.19, B.0.20, B.0.21, B.0.25, B.1.1, B.1.6, B.1.8, B.1.9, B.1.13, B.1.14, B.2.1, B.2.2, B.2.4, the proof of B.0.20, and B.2.5/B.2.6. ITEM: the statement is unchanged and true. It is the fully scaled case of B.0.20, with weak equivalences from B.2.1/B.2.6 and the enrichment of B.2.5 with P'=P0. STEPS: I checked all 13 against the cited statements. Step 2: J is small and E is kappa-accessible. Step 3: edge detection is applied only to Ef, between fibered objects. Step 5: C0∩W is an intersection of left-lifting classes through the cotensor. Step 6: the section-plus-homotopy argument checks, all five Smith hypotheses are met, and the model-category conventions agree. Step 7: matches the HA proof. Step 8: the pullback direction is correct. Steps 10-11: P×P0=P by B.1.8, and the cobase changes are right. Steps 12-13: correct. The departure from HA's Bousfield-localization proof, a direct Smith recognition for arbitrary small cones, is valid and below the unit route. FIX: step 4 jumped from 'V is generated under filtered colimits and closed under them' to 'accessible' in the inverse-image node's lambda-filtered convention. I wrote out the regrouping into lambda-small filtered subcategories (lambda uncountable regular), the small set E_1, and closure; uses are unchanged. NEW NODES: lifting-products matches B.1.1 for all seven generators under full scaling, plus B.1.6, B.1.9 with P0, B.1.13 and B.1.14. The printed P0 in B.1.14 is a typo; its proof gives the P-anodyne version, as the node says. Edge-detection matches B.2.4 (1)<=>(3), and the Delta^1 example shows the vertex-only version would be false. Neither new node restates the item. The existing lem-coef-pattern-anodyne-generators (Q87, unsplit) overlaps the first two clauses of the lifting node. It cites the item in its stmt_deps, so the item cannot use it without a cycle. The new node is still needed, and the overlap is noted for that node's future split. There is no cycle (413-node closure), every citation is in the same unit, there are no tool_uses, and no SGA is cited.; 1 file(s) fixed by the reviewer"
  }
 }
