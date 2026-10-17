@@ -67,24 +67,26 @@ lemma of_cokernel [IsCofiltered I] {A' A'' A : I → ModuleCat R} {B' B'' B : Mo
   refine ⟨fun b ↦ ?_, fun i a ha ↦ ?_⟩
   · obtain ⟨b'', rfl⟩ := hsurjB b
     obtain ⟨i, a'', rfl⟩ := h''.1 b''
-    exact ⟨i, (d i).hom a'', by rw [← ConcreteCategory.comp_apply, hd]; rfl⟩
+    exact ⟨i, (d i).hom a'', by rw [← ModuleCat.comp_apply, hd]; rfl⟩
   · obtain ⟨a'', rfl⟩ := hsurj i a
     have h0 : dB.hom ((σ'' i).hom a'') = 0 := by
-      rw [← ConcreteCategory.comp_apply, ← hd]; exact ha
+      rw [← ModuleCat.comp_apply, ← hd]; exact ha
     obtain ⟨z', hz'⟩ := hexB _ h0
     obtain ⟨k, y, rfl⟩ := h'.1 z'
     let m := IsCofiltered.min i k
+    have e1 : (σ'' m).hom ((τ'' (IsCofiltered.minToLeft i k)).hom a'') = (σ'' i).hom a'' := by
+      rw [← ModuleCat.comp_apply, hσ'']
+    have e2 : (σ'' m).hom ((r m).hom ((τ' (IsCofiltered.minToRight i k)).hom y)) =
+        rB.hom ((σ' k).hom y) := by
+      rw [← ModuleCat.comp_apply, hr, ModuleCat.comp_apply, ← ModuleCat.comp_apply (τ' _), hσ']
     have hm : (σ'' m).hom ((τ'' (IsCofiltered.minToLeft i k)).hom a'' -
         (r m).hom ((τ' (IsCofiltered.minToRight i k)).hom y)) = 0 := by
-      rw [map_sub, sub_eq_zero, ← ConcreteCategory.comp_apply, hσ'', ← hz',
-        ← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply, hr,
-        ← Category.assoc, hσ']
-      rfl
+      rw [map_sub, e1, e2, hz', sub_self]
     obtain ⟨l, g, hg⟩ := h''.2 m _ hm
     refine ⟨l, g ≫ IsCofiltered.minToLeft i k, ?_⟩
-    rw [map_sub, sub_eq_zero, ← ConcreteCategory.comp_apply, hτ'',
-      ← ConcreteCategory.comp_apply, ← hrτ, ConcreteCategory.comp_apply] at hg
-    rw [← ConcreteCategory.comp_apply, ← hdτ, ConcreteCategory.comp_apply, hg]
+    rw [map_sub, sub_eq_zero, ← ModuleCat.comp_apply, hτ'',
+      ← ModuleCat.comp_apply, ← hrτ, ModuleCat.comp_apply] at hg
+    rw [← ModuleCat.comp_apply, ← hdτ, ModuleCat.comp_apply, hg]
     exact hrd l _
 
 /-- **Elementwise colimits and kernels.** Let `0 ⟶ A i ⟶ A' i ⟶ A'' i` be exact sequences
@@ -108,18 +110,18 @@ lemma of_kernel {A A' A'' : I → ModuleCat R} {B B' B'' : ModuleCat R}
   refine ⟨fun b ↦ ?_, fun i a ha ↦ ?_⟩
   · obtain ⟨i, a', ha'⟩ := h'.1 (ιB.hom b)
     have h0 : (σ'' i).hom ((r i).hom a') = 0 := by
-      rw [← ConcreteCategory.comp_apply, hr, ConcreteCategory.comp_apply, ha', hrB]
+      rw [← ModuleCat.comp_apply, hr, ModuleCat.comp_apply, ha', hrB]
     obtain ⟨j, f, hf⟩ := h''.2 i _ h0
-    rw [← ConcreteCategory.comp_apply, ← hrτ, ConcreteCategory.comp_apply] at hf
+    rw [← ModuleCat.comp_apply, ← hrτ, ModuleCat.comp_apply] at hf
     obtain ⟨a, ha⟩ := hex j _ hf
     refine ⟨j, a, hιB ?_⟩
-    rw [← ConcreteCategory.comp_apply, ← hι, ConcreteCategory.comp_apply, ha,
-      ← ConcreteCategory.comp_apply, hσ', ha']
+    rw [← ModuleCat.comp_apply, ← hι, ModuleCat.comp_apply, ha,
+      ← ModuleCat.comp_apply, hσ', ha']
   · have h0 : (σ' i).hom ((ι i).hom a) = 0 := by
-      rw [← ConcreteCategory.comp_apply, hι, ConcreteCategory.comp_apply, ha, map_zero]
+      rw [← ModuleCat.comp_apply, hι, ModuleCat.comp_apply, ha, map_zero]
     obtain ⟨j, f, hf⟩ := h'.2 i _ h0
     refine ⟨j, f, hιi j ?_⟩
-    rw [← ConcreteCategory.comp_apply, hιτ, ConcreteCategory.comp_apply, hf, map_zero]
+    rw [← ModuleCat.comp_apply, hιτ, ModuleCat.comp_apply, hf, map_zero]
 
 end IsElementwiseColimit
 
@@ -142,7 +144,7 @@ lemma isElementwiseColimit_of_isColimit {F : Iᵒᵖ ⥤ ModuleCat.{u + 1} Λ} {
   refine ⟨fun b ↦ ?_, fun i a ha ↦ ?_⟩
   · obtain ⟨⟨i⟩, a, rfl⟩ := Concrete.isColimit_exists_rep F hc b
     exact ⟨i, a, rfl⟩
-  · have h : (c.ι.app (op i)).hom a = (c.ι.app (op i)).hom 0 := by rw [ha, map_zero]
+  · have h : (c.ι.app (op i)).hom a = (c.ι.app (op i)).hom 0 := by rw [map_zero]; exact ha
     obtain ⟨⟨k⟩, f, g, hfg⟩ := (Concrete.isColimit_rep_eq_iff_exists F hc a 0).1 h
     refine ⟨k, f.unop, ?_⟩
     simpa using hfg
@@ -185,15 +187,15 @@ noncomputable def isColimitOfIsElementwiseColimit
       obtain ⟨⟨i⟩, a, ha⟩ := Concrete.isColimit_exists_rep _ hc (z₁ - z₂)
       rw [← ha] at hz ⊢
       simp only [Functor.mapCocone_ι_app, colimit.cocone_ι] at hz ⊢
-      rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, colimit.isColimit_desc,
+      erw [← ModuleCat.comp_apply, ← Functor.map_comp, colimit.isColimit_desc,
         colimit.ι_desc] at hz
       obtain ⟨j, f, hf⟩ := (h x).2 i a hz
-      rw [← colimit.w F f.op, Functor.map_comp, ConcreteCategory.comp_apply]
-      erw [hf, map_zero]
+      erw [← colimit.w F f.op, Functor.map_comp, ModuleCat.comp_apply, hf, map_zero]
     · obtain ⟨i, a, rfl⟩ := (h x).1 b
       refine ⟨((X.uliftPointSmallEtale x).sheafFiber.map (colimit.ι F (op i))).hom a, ?_⟩
-      rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, colimit.isColimit_desc,
+      erw [← ModuleCat.comp_apply, ← Functor.map_comp, colimit.isColimit_desc,
         colimit.ι_desc]
+      rfl
   IsColimit.ofPointIso (colimit.isColimit F)
 
 end AlgebraicGeometry.Etale

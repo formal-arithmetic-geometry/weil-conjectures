@@ -43,6 +43,21 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A]
   [HasSmallSiteSheafify A]
 
+omit [HasSmallSiteSheafify A] in
+/-- The base change map for a pushforward tensored with a complex is the transpose of the tensor
+comparison of `Lh^*` followed by `Lh^* M ⊗ᴸ -` applied to
+`AlgebraicGeometry.Etale.tensorBaseChangeCounitApp`. -/
+lemma tensorBaseChangeMap_eq {X' S' T Y : Scheme.{u}} (h : Y ⟶ X') (e : Y ⟶ T)
+    (f' : X' ⟶ S') (g : T ⟶ S') (w : h ≫ f' = e ≫ g)
+    (M : DerivedCategory (Sheaf X'.smallEtaleTopology A))
+    (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
+    tensorBaseChangeMap A h e f' g w M F =
+      (derivedUpperStarLowerStarAdjunction A h).homEquiv _ _
+        (((leftDerivedUpperStarTensorComparison A h).app M).app _ ≫
+          ((-⊗ᴸ-(Y)[A]).obj (L((h)^*[A]).obj M)).map (tensorBaseChangeCounitApp A h e f' g w F)) :=
+  rfl
+
+omit [UpperStarPreservesFlat A] in
 /-- The morphism `Lh^* Lf'^* Rg_* F ⟶ Le^* F` of the base change map for a pushforward tensored
 with a complex is the transpose of the derived base change map `Lf'^* Rg_* F ⟶ Rh_* Le^* F`. -/
 lemma tensorBaseChangeCounitApp_eq {X' S' T Y : Scheme.{u}} (h : Y ⟶ X') (e : Y ⟶ T)

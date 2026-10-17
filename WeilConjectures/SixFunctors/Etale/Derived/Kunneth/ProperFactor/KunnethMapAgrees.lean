@@ -159,10 +159,12 @@ lemma tensorBaseChangeMap_eq_projectionMap (q : W ⟶ X) (r : W ⟶ Y) (aX : X �
         R((q)_*[A]).map (β_ ((L((q)^*[A])).obj M) ((L((r)^*[A])).obj F)).inv := by
   apply ((derivedUpperStarLowerStarAdjunction A q).homEquiv _ _).symm.injective
   rw [tensorBaseChangeMap, Equiv.symm_apply_apply, Adjunction.homEquiv_counit]
+  dsimp only [Functor.comp_obj, Functor.whiskeringLeft₂_obj_obj_obj_obj_obj, Functor.id_obj]
   simp only [Functor.map_comp, Category.assoc, Adjunction.counit_naturality,
     map_rightDerivedLowerStarProjectionMap_comp_counit'_assoc,
     leftDerivedUpperStar_map_braiding_hom_comp_tensorComparison_assoc,
     leftDerivedUpperStarTensorComparison_naturality_right_assoc]
+  done
   congr 1
   simp only [derivedTensor, curriedTensor_map_app, curriedTensor_obj_map]
   rw [← BraidedCategory.braiding_naturality_right_assoc, Iso.hom_inv_id, Category.comp_id,
@@ -203,6 +205,7 @@ lemma kunnethMap_eq_of_isPullback (q : W ⟶ X) (r : W ⟶ Y) (aX : X ⟶ S) (aY
             R((q)_*[A]).map (β_ ((L((q)^*[A])).obj E) ((L((r)^*[A])).obj K)).inv) ≫
         (rightDerivedLowerStarCompIsoOfComp A q aX c hq).hom.app _ := by
   rw [kunnethMap_eq, tensorBaseChangeMap_eq_projectionMap]
+  rfl
 
 /-- The Künneth map is an isomorphism as soon as the projection map of `a_X`, the derived base
 change map of the square and the projection map of `q` are isomorphisms

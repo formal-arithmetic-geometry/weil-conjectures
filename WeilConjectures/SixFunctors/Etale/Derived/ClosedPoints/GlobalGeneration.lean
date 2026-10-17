@@ -126,8 +126,8 @@ theorem isZero_of_isGloballyGenerated {X : Scheme.{u}}
       simp
     rw [hz, Functor.map_zero, zero_comp]
   have : Epi (globalSectionsEvaluation Λ X F) := hF
-  rw [h0] at this
-  exact IsZero.of_epi_zero _ _
+  refine (IsZero.iff_id_eq_zero _).2 ((cancel_epi (globalSectionsEvaluation Λ X F)).1 ?_)
+  rw [h0, zero_comp, comp_zero]
 
 /-- Blueprint `lem-kun-global-generated-stalkwise`: **global generation is stalkwise
 surjectivity.** An étale sheaf `F` of `Λ`-modules is globally generated if and only if its
@@ -188,8 +188,11 @@ lemma epi_upperStar_map_globalSectionsEvaluation {X : Scheme.{u}} {k : Type u} [
   rw [ModuleCat.epi_iff_surjective]
   have hc : Function.Surjective ((terminalSections Λ X).map
       (globalSectionsEvaluation Λ X G ≫ adj.unit.app G)) := by
-    rw [Functor.map_comp, ModuleCat.hom_comp, LinearMap.coe_comp]
-    exact h.comp (surjective_terminalSections_map_globalSectionsEvaluation Λ X G)
+    rw [Functor.map_comp]
+    intro y
+    obtain ⟨x, hx⟩ := h y
+    obtain ⟨w, rfl⟩ := surjective_terminalSections_map_globalSectionsEvaluation Λ X G x
+    exact ⟨w, (ConcreteCategory.comp_apply _ _ w).trans hx⟩
   have hn : globalSectionsEvaluation Λ X G ≫ adj.unit.app G = adj.unit.app _ ≫
       (f)_*[ModuleCat.{u + 1} Λ].map ((f)^*[ModuleCat.{u + 1} Λ].map
         (globalSectionsEvaluation Λ X G)) := adj.unit.naturality _

@@ -164,7 +164,7 @@ lemma transition_comp {α β γ : LimitStage B W} (φ : Hom α β) (ψ : Hom β 
   simp only [Functor.comp_map, Functor.map_comp] at n1 n2 n3
   simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
   rw [reassoc_of% n1, ← reassoc_of% hS]
-  rw [reassoc_of% n2, reassoc_of% n3]
+  rw [reassoc_of% n2, n3]
 
 /-- The identity morphism of a stage. -/
 abbrev Hom.id (α : LimitStage B W) : Hom α α where
@@ -190,10 +190,10 @@ lemma transition_id (α : LimitStage B W) : transition Λ (Hom.id α) = 𝟙 _ :
             (D+((α.w)^*[ModuleCat.{u + 1} Λ]).obj K)) := by
     rw [Etale.baseChange_eq_derivedBaseChangeMapPlus, Etale.derivedBaseChangeMapPlus_id]
     simp
-  rw [transition_app, h3, Category.assoc, ← Functor.map_comp (R+((α.g)_*[ModuleCat.{u + 1} Λ])),
-    h2, CategoryTheory.Functor.map_id, Category.comp_id, Functor.map_comp, reassoc_of% h1]
-  erw [CategoryTheory.Functor.map_id]
-  rfl
+  rw [transition_app, h3]
+  simp only [Category.assoc, ← Functor.map_comp, h2, CategoryTheory.Functor.map_id,
+    Category.comp_id, NatTrans.id_app]
+  exact h1
 
 end LimitStage
 

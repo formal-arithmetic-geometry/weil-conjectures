@@ -286,7 +286,8 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine {K : Type u} [Fie
     ⟨fun i ↦ Algebra.adjoin K (↑(r i) ∪ φ '' ↑(l i)), fun i j hij ↦ Algebra.adjoin_mono
       (Set.union_subset_union (hr hij) (Set.image_mono (hl hij)))⟩
   have hφ (i : Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤))) (x : FB i) : φ x ∈ FC i := by
-    have hx : φ x ∈ (FB i).map φ := Subalgebra.mem_map.2 ⟨x, x.2, rfl⟩
+    have hx : φ x ∈ (Algebra.adjoin K (l i : Set Γ(S', ⊤))).map φ :=
+      Subalgebra.mem_map.2 ⟨x, x.2, rfl⟩
     rw [AlgHom.map_adjoin] at hx
     exact Algebra.adjoin_mono Set.subset_union_right hx
   let ψ : Subalgebra.diagramOfMonotone FB ⟶ Subalgebra.diagramOfMonotone FC :=
@@ -317,11 +318,11 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine {K : Type u} [Fie
   have hS : IsLimit cS :=
     (isLimitOfPreserves Scheme.Spec (Subalgebra.isColimitCoconeOfMonotone FB
       fun x ↦ ⟨{Sum.inl x}, Algebra.subset_adjoin (by simp [l])⟩).op).ofIsoLimit
-      (Cones.ext S'.isoSpec.symm fun i ↦ by simp [cS])
+      (Cone.ext S'.isoSpec.symm fun i ↦ by simp [cS])
   have hT : IsLimit cT :=
     (isLimitOfPreserves Scheme.Spec (Subalgebra.isColimitCoconeOfMonotone FC
       fun x ↦ ⟨{Sum.inr x}, Algebra.subset_adjoin (by simp [r])⟩).op).ofIsoLimit
-      (Cones.ext T.isoSpec.symm fun i ↦ by simp [cT])
+      (Cone.ext T.isoSpec.symm fun i ↦ by simp [cT])
   have hsK : S'.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (algebraMap K Γ(S', ⊤))) = s := by
     have : CommRingCat.ofHom (algebraMap K Γ(S', ⊤)) =
         (Scheme.ΓSpecIso (.of K)).inv ≫ s.appTop := rfl
@@ -340,12 +341,12 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine {K : Type u} [Fie
     (Subalgebra.fg_iff_finiteType _).1 (Subalgebra.fg_adjoin_finset _)
   have hfinC (i : Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤))) : Algebra.FiniteType K (FC i) :=
     (Subalgebra.fg_iff_finiteType _).1 ⟨r i ∪ (l i).image φ, by simp [FC]⟩
-  have (i) : LocallyOfFiniteType (w.app i) :=
+  have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : LocallyOfFiniteType (w.app i) :=
     HasRingHomProperty.Spec_iff.2 (RingHom.finiteType_algebraMap.2 (hfinB i.unop))
-  have (i) : QuasiCompact (w.app i) := inferInstanceAs (QuasiCompact (Spec.map _))
-  have (i) : IsSeparated (g.app i) := inferInstanceAs (IsSeparated (Spec.map _))
-  have (i) : QuasiCompact (g.app i) := inferInstanceAs (QuasiCompact (Spec.map _))
-  have (i) : LocallyOfFiniteType (g.app i) :=
+  have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : QuasiCompact (w.app i) := inferInstanceAs (QuasiCompact (Spec.map _))
+  have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : IsSeparated (g.app i) := inferInstanceAs (IsSeparated (Spec.map _))
+  have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : QuasiCompact (g.app i) := inferInstanceAs (QuasiCompact (Spec.map _))
+  have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : LocallyOfFiniteType (g.app i) :=
     HasRingHomProperty.Spec_iff.2 (RingHom.FiniteType.of_comp_finiteType
       (f := algebraMap K (FB i.unop)) (RingHom.finiteType_algebraMap.2 (hfinC i.unop)))
   have {i j} (f : i ⟶ j) : IsAffineHom (S.map f) := inferInstanceAs (IsAffineHom (Spec.map _))
