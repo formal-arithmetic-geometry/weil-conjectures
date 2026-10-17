@@ -5,8 +5,6 @@ Authors: Nailin Guan
 -/
 module
 
-
-
 public import Mathlib
 public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology
@@ -15,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import WeilConjectures.AlgebraicGeometry.SmoothCurveConstantCoefficientInvariance
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.AlgClosedExtension
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap

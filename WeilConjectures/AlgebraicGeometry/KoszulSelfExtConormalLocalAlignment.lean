@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
@@ -121,7 +121,7 @@ theorem koszulRegularImmersion_self_ext_conormal_local_alignment
     let T := (Scheme.Modules.restrictFunctor V.ι).obj
       ((Scheme.Modules.tensorPullback i).obj G)
     let F := (Scheme.Modules.restrictFunctor V.ι).obj
-      (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf
+      (Scheme.Modules.dual (Scheme.Modules.exteriorPower
         ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n))
     ∀ (W : V.toScheme → V.toScheme.Opens)
       (e : ∀ z : V.toScheme, F.over (W z) ≅ T.over (W z)),

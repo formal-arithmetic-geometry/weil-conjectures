@@ -9,7 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import WeilConjectures.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionExists
-import WeilConjectures.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionUnique
+import WeilConjectures.RingTheory.EtaleResidueTriplesPrimeLocalizationExtensionUnique
 
 /-! # Extension of a single pointed étale cocone leg
 

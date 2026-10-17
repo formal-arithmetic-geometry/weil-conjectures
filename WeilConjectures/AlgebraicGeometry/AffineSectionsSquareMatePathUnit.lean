@@ -419,7 +419,6 @@ attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFu
   canonicalPullbackAdjunction affineGlobalSectionsDerivedIso
 
 -- Profiling found expensive linting of the fixed, nondependent forall binders.
--- Preserve this interface and retain full kernel checking.
 set_option linter.all false in
 set_option cleanup.letToHave false in
 set_option maxHeartbeats 800000 in

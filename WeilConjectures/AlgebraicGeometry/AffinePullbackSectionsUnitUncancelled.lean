@@ -245,7 +245,6 @@ private theorem complex_unit_pasting
     rfl
   simp only [← DA.map_comp_assoc]
   rw [hcancel]
-  -- Apply the homotopy calculation, retaining the final complex transport.
   have hh := congrArg (fun z ↦ (DerivedCategory.quotientCompQhIso E).inv.app
       ((A.mapHomologicalComplex (.up ℤ)).obj K) ≫ z ≫
       U.mapDerivedCategory.map (DB.map ((DerivedCategory.quotientCompQhIso D).hom.app PK))) h₀

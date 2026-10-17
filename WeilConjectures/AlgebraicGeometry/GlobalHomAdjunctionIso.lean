@@ -376,7 +376,6 @@ def schemeHomPullbackAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (Classical.choose_spec exists_derivedPullbackComposition))) f))
 
 set_option linter.unusedSectionVars false in
--- Retain the existing ModuleCat derived-category binder in the public signature.
 /-- The canonical comparison of def-pc-derived-pullback-tensor-comparison is an iso.
 Source: Stacks, Tags 079U and 0B6I (blueprint: lem-pc-global-hom-adjunction).
 Proof: choose K-flat representatives. The canonical module tensor comparison is

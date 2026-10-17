@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
@@ -126,7 +126,7 @@ theorem koszulRegularImmersion_self_ext_conormal_comparison_surjection
     let T := (Scheme.Modules.restrictFunctor V.ι).obj
       ((Scheme.Modules.tensorPullback i).obj G)
     let F := (Scheme.Modules.restrictFunctor V.ι).obj
-      (Scheme.Modules.dual (Scheme.Modules.exteriorSheaf
+      (Scheme.Modules.dual (Scheme.Modules.exteriorPower
         ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) n))
     ∃ φ : F ⟶ T, ∀ z : V.toScheme, Function.Surjective (φ.stalkLinearMap z) := by
   dsimp only

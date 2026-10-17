@@ -90,7 +90,6 @@ private theorem upper_pasting_transport
 
 
 set_option linter.unusedVariables false in
--- Retain the original names of quantified proof binders that do not occur in the conclusion.
 /-- Ordinary base-change compatibility for the canonical comparison lifts.
 Source: Stacks Project, Tag 0ATM, and Tag 08HY.
 (blueprint: lem-sc-rectangle-qcoh-ordinary-compatibility)

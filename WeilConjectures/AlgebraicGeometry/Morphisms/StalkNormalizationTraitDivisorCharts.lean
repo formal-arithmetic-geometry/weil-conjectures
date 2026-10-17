@@ -174,7 +174,6 @@ private theorem smooth_trait_affine_generic_open_over
   exact ⟨β, IsOpenImmersion.isoOfRangeEq_hom_fac _ _ _⟩
 
 
--- The retained generic-section equations are not needed for divisor charts.
 set_option linter.unusedVariables false in
 set_option maxHeartbeats 1000000 in
 -- Elaborating the nested pullbacks and product root algebras exceeds the default budget.
