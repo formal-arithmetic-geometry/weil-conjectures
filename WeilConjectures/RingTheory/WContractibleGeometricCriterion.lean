@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.RingTheory.ProEtale.WLocal
 public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import WeilConjectures.RingTheory.ProEtale.WeaklyEtale
 public import Mathlib.RingTheory.RingHom.FaithfullyFlat
 public import Mathlib.Topology.ExtremallyDisconnected
 import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleIndEtale
