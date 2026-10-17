@@ -71,12 +71,12 @@
    }
   },
   {
-   "text": "We prove completeness of $\\widehat A$ rather than assume that realization commutes with $\\operatorname{Map}(E^1,-)$. Use the notation $I_n,I$ of [lem-coef-algebroid-equivalence-nerve]. There is a commutative square with top row $|I_0(D_\\bullet)|\\to I_0(\\widehat A)$ and bottom row $|I_1(D_\\bullet)|\\to I_1(\\widehat A)$; vertical maps insert identity equivalences. The top row is an equivalence by [lem-coef-algebroid-ff-simplicial-realization]. The left vertical map is also an equivalence: cotensor adjunction and symmetry of products of space-enriched algebroids identify $I_1(A^{E^n})\\simeq I_n(A^{E^1})$, naturally in $n$. Under these identifications the left vertical map is $I(A)\\to I(A^{E^1})$ induced by $A\\to A^{E^1}$. This map is a categorical equivalence by [lem-coef-algebroid-categorical-homotopy], hence fully faithful essentially surjective, and its $I$-map is an equivalence by [lem-coef-algebroid-equivalence-nerve].\n\nTo verify the bottom row, each map $D_m\\to D_n$ induces an equivalence $I(D_m)\\to I(D_n)$. Effectiveness of their equivalence nerves identifies $I_1(D_k)$ with $U(D_k)\\times_{I(D_k)}U(D_k)$. Therefore the naturality squares of $I_1(D_\\bullet)\\to U(D_\\bullet)^2$ are pullbacks. Cartesian geometric descent and preservation of finite products from [lem-coef-space-geometric-descent] give a pullback square $I_1(A)\\to|I_1(D_\\bullet)|$ over $U(A)^2\\to U(\\widehat A)^2$. On fibers over $(x,y)\\in U(A)^2$, its top map is an equivalence; so is $I_1(A)_{x,y}\\to I_1(\\widehat A)_{j_Ax,j_Ay}$, since $j_A$ is fully faithful by step 3 and the nerve lemma preserves these fibers. Two-out-of-three makes the comparison $|I_1(D_\\bullet)|\\to I_1(\\widehat A)$ an equivalence on those fibers. The map $U(A)^2\\to U(\\widehat A)^2$ is surjective on $\\pi_0$ by step 3, so the fiberwise detection clause of geometric descent proves the comparison an equivalence everywhere. Three sides of the first square are now equivalences, so $I_0(\\widehat A)\\to I_1(\\widehat A)$ is an equivalence. By the equivalence proved in step 1, this is completeness in the current equivalence-nerve-realization definition.",
+   "text": "For $D_n=A^{E^n_{\\mathcal S}}$ consider the natural square with top row $|I_0(D_\\bullet)|\\to I_0(\\widehat A)$, bottom row $|I_1(D_\\bullet)|\\to I_1(\\widehat A)$, and vertical maps inserting identities. The top row is an equivalence by [lem-coef-algebroid-ff-simplicial-realization] and the natural identification $I_0\\simeq U$ of [lem-coef-algebroid-equivalence-nerve]. The left vertical map is an equivalence by [lem-coef-algebroid-cotensor-nerve-exchange], with $C=A$ and $p=1$; its compatibility clause identifies exactly this identity-insertion map. For the bottom row apply [lem-coef-algebroid-equivalence-arrow-descent] with $C_\\bullet=D_\\bullet$, $B=\\widehat A$ and the realization cocone: step 2 gives fully faithful essentially surjective structure maps, and step 3 gives fully faithful cocone maps and the object-space realization equivalence. Thus the bottom row is an equivalence. Commutativity and two-out-of-three make $I_0(\\widehat A)\\to I_1(\\widehat A)$ an equivalence. By step 1 this is completeness in [def-coef-complete-algebroid].",
    "uses": [
-    "lem-coef-algebroid-equivalence-nerve",
     "lem-coef-algebroid-ff-simplicial-realization",
-    "lem-coef-algebroid-categorical-homotopy",
-    "lem-coef-space-geometric-descent",
+    "lem-coef-algebroid-equivalence-nerve",
+    "lem-coef-algebroid-cotensor-nerve-exchange",
+    "lem-coef-algebroid-equivalence-arrow-descent",
     "def-coef-complete-algebroid"
    ],
    "elementary": false,
@@ -147,6 +147,8 @@
  "proof_deps": [
   "def-coef-complete-algebroid",
   "lem-coef-algebroid-categorical-homotopy",
+  "lem-coef-algebroid-cotensor-nerve-exchange",
+  "lem-coef-algebroid-equivalence-arrow-descent",
   "lem-coef-algebroid-equivalence-nerve",
   "lem-coef-algebroid-external-product",
   "lem-coef-algebroid-ff-simplicial-realization",
@@ -241,7 +243,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-enriched-category-tensor-calculus",
   "by": "worker",
@@ -253,17 +255,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-algebroid-completion",
   "worker": "stage1",
-  "summary": "NK read Gepner-Haugseng sections 5.1-5.7 online, searched the entire DAG/blueprint and project Lean, and supplied the explicit simplicial cotensor completion proof. Five new statement-only nodes isolate saturation, the equivalence nerve, categorical homotopy, fully faithful simplicial descent, and geometric descent of spaces. Existing algebroid presentability and symmetric localization tools are reused. No target or item statement changes, no Lean work, no new Stacks-based claims. The source empty-set auxiliary error is avoided by stating the nonempty finite-set case only. The fetched delivery base has the updated equivalence-nerve-realization definition of completeness; step 1 derives its equivalence with s-locality by effectiveness, and all quotations use that current definition.",
+  "summary": "Q40 repair of the human return: retained the exact item statement, Lean audit and all other proof steps. Replaced the 2114-character step 4 by a short application of two new statement-only lemmas: coherent cotensor/equivalence-nerve exchange and equivalence-arrow descent for fully faithful simplicial cocones. Both statements were checked against the retained Gepner-Haugseng source and searched against the entire DAG, blueprint, slopmaster2 and Mathlib; authentic interrupted-turn descent searches were read and reused. No new Mathlib leaf, Lean work or route change.",
   "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 invokes coherent finite coefficient mapping-complex adjunction. Along its existing enriched tensor/localization support chain, steps 1-6 realize completion/local equivalences of algebroids and steps 7-9 the monoidal localization needed there. The unit and chapter routes are unchanged.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NK-c4b3429f5",
-  "group": "NK",
+  "reviewer": "NT-cc-Q40-2959e3595",
+  "group": "Q40",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-c4b3429f5 (reviewer sub-agent of L); spot-checked: Read in full against Gepner–Haugseng arXiv:1312.3178v4 (a PDF obtained through WebFetch, then read as text) and the local HTT copy. GH places read: 5.1.11–5.1.17, 5.2.3–5.2.10, 5.3.1–5.3.9, 5.4.2–5.4.8, 5.5.1–5.5.13, Theorem 5.6.2 with its whole proof, 5.6.3–5.6.6, 5.7.14 and 5.7.15. HTT places read: 5.5.4.15, 6.1.2.6(4) and 6.1.3.9(4). The item statement is unchanged and matches GH 5.4.2, 5.6.3, 5.6.4 and 5.7.14–5.7.15; symmetric monoidal V is stronger than GH's E2 assumption. Steps 1–9 follow the Theorem 5.6.2 proof and Corollary 5.6.3, and each cited statement says what the step takes from it. Step 4's completeness square, the cartesian descent and the fibrewise check are explicit and correct. The new nodes are true general preliminaries, statement-only, and neither duplicates nor restatements of the item. Saturation is HTT 5.5.4.15(1),(4). The equivalence nerve is GH 5.1.15/5.1.17/5.2.5/5.3.4–5.3.6/A.5.5. The fully faithful realization lemma was checked independently for space-enriched algebroids (Segal spaces). Geometric descent is HTT 6.1.3.9 with effective groupoids. The categorical-homotopy node's source-error claim is confirmed: the injective case of the GH 5.5.6 proof needs a retraction, which fails for the empty set, so the nonempty restriction is correct and is all the item uses. Every citation is in unit sk-prop-sf-biduality-general, so no tool uses are needed. There is no cycle (40 nodes reachable from the item), no SGA source, and no blueprint duplicate (grep of literature/blueprint). For whoever splits the categorical-homotopy node later: its GH 5.5.13 clause needs complete-iff-s-local, which must come from the nerve and descent lemmas, never from this item. No fixes made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-2959e3595 (reviewer sub-agent of L); spot-checked: I read the item in full, both new nodes, the full statement of every cited node, the unit sk-prop-sf-biduality-general, delivery-errors A–H, the report, and Gepner–Haugseng arXiv:1312.3178v4 Theorem 5.6.2 with its whole proof (text copy /tmp/gh-src-nk/gh.txt, lines 3780–3920). The repair changes only step 4; the statement and steps 1–3 and 5–9 are unchanged, and I reread them against the cited statements. New node lem-coef-algebroid-cotensor-nerve-exchange is true: Map(E^p_V, C^{E^q_S}) ≃ Map(E^p_V ⋄ E^q_S, C), the product algebroid is indiscrete on [p]×[q], and swapping the factors is natural in both directions. The collapse map gives a_p, a categorical equivalence between nonempty finite sets, so I(a_p) is an equivalence. This is GH's exchange ι1 C^{E^n} ≃ ιn C^{E^1} and its left vertical map. New node lem-coef-algebroid-equivalence-arrow-descent is true: full faithfulness makes the I1→U^2 squares pullbacks, HTT 6.1.3.9 gives the realization square, and comparing fibers over the π0-surjective U(C0)^2 through the fully faithful j0 gives |I1(C•)| ≃ I1(B). This is GH's descent argument for a general diagram. I tested both on empty object spaces, p=0 and constant diagrams. Neither node is a restatement of an item clause or a duplicate: I compared the categorical-homotopy, geometric-descent, ff-simplicial-realization, segal-cotensor-evaluation-dk, rezk-local-model and algebroid-object-space-fibration nodes. A dependency walk over both closures finds no cycle. All citations stay in the unit, there are no tool_uses, and no SGA source is used. This is not a target node, so there is no base-change comparison to make. Fix (C4): step 4's top row needs the identification I0 ≃ U, which only lem-coef-algebroid-equivalence-nerve states, and step 4 did not cite it. I added the clause and the citation in fixes/dag/nodes/sec-six-functors/lem-coef-algebroid-completion.json; proof_deps is unchanged.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
