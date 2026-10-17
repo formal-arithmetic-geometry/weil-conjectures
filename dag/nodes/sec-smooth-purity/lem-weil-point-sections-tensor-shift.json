@@ -1,0 +1,79 @@
+{
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-point-fibre-equivalence",
+  "date": "2026-10-17",
+  "group": "Q108"
+ },
+ "id": "lem-weil-point-sections-tensor-shift",
+ "kind": "statement",
+ "title": "Sections-tensor comparison commutes with shifts",
+ "statement": "Fix the global finite-field datum $p,a,q,k_0,k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Qlb$ of $\\Ql=\\mathbf Q_\\ell$, and finite extensions $E\\subseteq L$ of $\\Ql$ inside $\\Qlb$ with valuation rings $\\mathcal O_E\\subseteq\\mathcal O_L$ [def-weil-l-adic-coefficient-extension]. Put $s=\\operatorname{Spec}k$ and $R_F=\\widehat{\\mathcal O}_{F,s}$ for $F=E,L$ [def-weil-completed-integral-coefficients]. Let $K\\in D^b_c(s,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed]. Apply exact sections over the final object of $s_{\\mathrm{proet}}$ termwise, with the canonical constant-value maps $\\mathcal O_F\\to\\Gamma(s,R_F)$ [lem-weil-point-proetale-sections-exact]. Let\n$$\n \\theta_K:\\Gamma(s,K)\\otimes_{\\mathcal O_E}\\mathcal O_L\\longrightarrow\\Gamma(s,K\\otimes^L_{R_E}R_L)\n$$\nbe the canonical sections-tensor comparison specified in [lem-weil-point-sections-scalar-extension], where tensor on the left is ordinary tensor of module complexes and on the right is ordinary derived change of sheaf rings. For every $m\\in\\mathbf Z$, $\\theta_{K[m]}=\\theta_K[m]$ under the standard termwise shift identifications for sections and scalar tensor; these identifications are compatible with zero and successive shifts.\n\nExplicitly, on a K-flat resolution $P\\to K$ with flat terms [lem-pc-kflat-resolution], the representing map in degree $r$ is\n$$\n \\Gamma(s,P^r)\\otimes_{\\mathcal O_E}\\mathcal O_L\\longrightarrow\\Gamma(s,P^r\\otimes_{R_E}R_L),\\qquad a\\otimes b\\longmapsto\\text{the sheaf tensor section }a\\otimes b_s,\n$$\nwhere $b_s\\in R_L(s)$ is the constant section defined by $b$ and the sheaf tensor is [def-pur-sheaf-tensor-product]. These maps form a natural map of complexes, commute with the standard integer shifts, and induce the displayed equality in $D(\\mathcal O_L)$ independently of the chosen resolution.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK (section-tensor-product), sectionwise tensor presheaf and its sheafification. Integer-shift compatibility and descent for the particular sections-tensor comparison are the extracted agent argument for the final display of blueprint def-weil-finite-coefficient-point, not a separate assertion of Tag 03EK."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-pc-kflat-resolution",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sections tensor comparison commutes with shifts",
+   "results": "8 hits: CategoryTheory.TwistShiftData.shift_z_app, CategoryTheory.TwistShiftData.commShift, CategoryTheory.CommShift₂Setup.hε, CategoryTheory.HasShift.shiftMonoidal, CategoryTheory.LocalizerMorphism.natTransCommShift_hom, CategoryTheory.Functor.map_shiftFunctorComm, CategoryTheory.Functor.mapHomologicalComplex_commShiftIso_eq, CategoryTheory.shiftComm_hom_comp",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shift comparisons do not state naturality of this specified sections-tensor map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degreewise tensor map a tensor b to a tensor b commutes with cochain shifts",
+   "results": "8 hits: HomologicalComplex.tensorHom, CochainComplex.HomComplex.Cochain.rightUnshift, CochainComplex.HomComplex.Cochain.rightUnshift_comp, CochainComplex.HomComplex.Cochain.rightUnshift_v, CochainComplex.HomComplex.Cochain.rightShift_v, CochainComplex.HomComplex.Cochain.leftUnshift, CochainComplex.HomComplex.Cochain.δ_rightUnshift, CochainComplex.HomComplex.Cochain.shiftLinearMap_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: generic HomComplex and tensor component formulas only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical sections tensor comparison for sheaves of modules on a ringed site commutes with integer shifts of complexes",
+   "results": "8 hits: CategoryTheory.Functor.commShiftMapCochainComplex, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CochainComplex.shiftEval, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapCochainComplexShiftIso, CochainComplex.mappingCone.shiftIso, CochainComplex.instAdditiveIntShiftFunctor",
+   "date": "2026-10-17",
+   "verdict": "candidate only: generic additive-functor shift isomorphisms; no exact theorem for this sections-tensor natural transformation on the pro-etale point"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapCochainComplexShiftIso",
+   "results": "4 hits: CategoryTheory.Functor.mapCochainComplexShiftIso, CategoryTheory.Functor.mapHomologicalComplex_commShiftIso_eq, CategoryTheory.Functor.mapCochainComplexShiftIso_hom_app_f, CategoryTheory.Functor.mapCochainComplexShiftIso_inv_app_f",
+   "date": "2026-10-17",
+   "verdict": "candidate only: the shift isomorphism of one additive functor, not compatibility of the specified comparison between two functors"
+  },
+  {
+   "tool": "grep",
+   "query": "mapCochainComplexShiftIso|mapHomologicalComplex_commShiftIso",
+   "results": "5 hits: Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean; directory Mathlib/Algebra/Homology",
+   "date": "2026-10-17",
+   "verdict": "candidate only: Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean:247,257,273,275,278 give termwise additive-functor shifts; not the derived sections-tensor comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "Final display proof: the sections-tensor comparison used in the scalar-extension shift compatibility is degreewise and shift-compatible.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

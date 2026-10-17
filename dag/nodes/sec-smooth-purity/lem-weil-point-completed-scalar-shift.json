@@ -1,0 +1,81 @@
+{
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-point-fibre-equivalence",
+  "date": "2026-10-17",
+  "group": "Q108"
+ },
+ "id": "lem-weil-point-completed-scalar-shift",
+ "kind": "statement",
+ "title": "Completed scalar extension comparison commutes with shifts",
+ "statement": "Let $\\ell$ be a prime and $E\\subseteq L$ finite extensions of $\\mathbf Q_\\ell$ with valuation rings $\\mathcal O_E\\subseteq\\mathcal O_L$ and uniformizers $t=\\varpi_E$, $v=\\varpi_L$ [def-weil-l-adic-coefficient-extension]. Let $Y$ be a scheme, with small pro-etale site [def-weil-pbc-proetale-site]. Write $R_F=\\widehat{\\mathcal O}_{F,Y}=\\varprojlim_{j\\geq1}(\\mathcal O_F/\\varpi_F^j)_Y$, $F=E,L$, for its completed coefficient sheaves [def-weil-completed-integral-coefficients], with the canonical map $R_E\\to R_L$. Let $K\\in D(R_E)$ be a derived $t$-complete complex of module sheaves [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category, def-weil-derived-complete]. Write $T_{L/E}K=K\\otimes_{\\mathcal O_E}\\mathcal O_L$ for the strict-tower integral scalar extension [def-weil-integral-scalar-extension] and\n$$\n \\chi_K:K\\otimes^L_{R_E}R_L\\longrightarrow T_{L/E}K\n$$\nfor the canonical quotient-map completion comparison of [lem-weil-finite-free-completed-scalar-comparison]. For every $m\\in\\mathbf Z$, this natural transformation commutes with cochain shift $[m]$.\n\nMore precisely, take a K-flat resolution $P\\to K$ with flat terms [lem-pc-kflat-resolution], put $D(P)=\\prod_{j\\geq1}\\operatorname{Res}^L_j(P\\otimes_{R_E}(\\mathcal O_L/v^j)_Y)$, and let $h_P=1-s_P$ where $s_P$ is induced by the quotient transitions. Here $\\operatorname{Res}^L_j$ is restriction along $R_L\\to(\\mathcal O_L/v^j)_Y$ [def-pc-sheaf-restrict-scalars]. In the reordered cone $C(P)=\\operatorname{Cone}(h_P)[-1]$ with $C(P)^r=D(P)^r\\oplus D(P)^{r-1}$ and differential $(x,y)\\mapsto(dx,-dy-h_Px)$, let $c:P\\otimes_{R_E}R_L\\to D(P)$ be the quotient maps, so that $\\chi_P(z)=(c(z),0)$. The map\n$$\n \\alpha_{m,P}:C(P[m])\\xrightarrow{\\sim}C(P)[m],\\qquad (x,y)\\longmapsto(x,(-1)^m y)\n$$\nis a natural chain isomorphism, compatible with the standard zero-shift and successive-shift identifications, and satisfies $\\alpha_{m,P}\\chi_{P[m]}=\\chi_P[m]$ after identifying $(P[m])\\otimes_{R_E}R_L=(P\\otimes_{R_E}R_L)[m]$. This identity descends to the stated shift compatibility of $\\chi_K$ in $D(R_L)$, independently of the K-flat resolution.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Final equivalence display: shift compatibility needed in its common-stage passage, made explicit by the retained item proof. Coefficient sheaves: Bhatt-Scholze Lemma 6.8.2(1), pp.58-59; strict tower model as in Stacks Tag 070M (derived.tex, lemma-difficulty-K-injectives). The asserted compatibility and sign formula are the extracted agent argument, not assertions of Bhatt-Scholze Lemma 6.8.2."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-derived-complete",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pc-kflat-resolution",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "completion comparison commutes with cochain shifts in the strict inverse limit cone model",
+   "results": "8 hits: CochainComplex.shiftEval, CategoryTheory.Functor.mapCochainComplexShiftIso, CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, CochainComplex.mappingCone.shiftIso, CochainComplex.shiftEval_hom_app, CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv",
+   "date": "2026-10-17",
+   "verdict": "no match: generic cone shifts only; the fixed completed scalar-extension comparison is not stated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from a cochain complex to the mapping cocone of one minus shift on a tower commutes with integer shift",
+   "results": "8 hits: CochainComplex.mappingCone.inl_v_desc_f, CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc, CochainComplex.mappingCone.inl_v_descCochain_v, CochainComplex.mappingCone.inr_f_descCochain_v, CochainComplex.mappingCone.desc_f, CochainComplex.mappingCone.inl_v_descCochain_v_assoc, CochainComplex.mappingCone.descCochain, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom",
+   "date": "2026-10-17",
+   "verdict": "no match: generic mapping-cone component formulas, not the specified tower unit and completed coefficient comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The map into a derived inverse limit given by compatible quotient maps commutes with shifts of cochain complexes",
+   "results": "8 hits: CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CochainComplex.HomComplex.Cochain.shift, CochainComplex.HomComplex.Cocycle.rightUnshift_coe, HomotopyCategory.commShiftQuotient, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.commShiftMapCochainComplex, CochainComplex.HomComplex.Cochain.leftShiftAddEquiv, CochainComplex.HomComplex.Cochain.shiftLinearMap",
+   "date": "2026-10-17",
+   "verdict": "no match: exact-functor derived shifts do not identify the strict completion comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, CategoryTheory.Functor.CommShift",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*shift|shift.*mappingCone",
+   "results": "12 hits: Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean; directory Mathlib/Algebra/Homology",
+   "date": "2026-10-17",
+   "verdict": "candidate only: CochainComplex.mappingCone.shiftIso at Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:347 is a generic cone shift, not the strict completion unit on the ringed site"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "Final display proof: the shift-compatibility argument for the canonical completed scalar-extension comparison in the strict tower cone model.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

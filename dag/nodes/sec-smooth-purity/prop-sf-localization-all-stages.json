@@ -49,22 +49,14 @@
    }
   },
   {
-   "text": "Ambient closed adjoint, constructed before the triangle comparison. Work with either the finite constant ring sheaf $B_X=(A_{E,n})_X$ or the completed ring sheaf $B_X=\\widehat{\\mathcal O}_{E,X}$. The profinite-coefficient inverse-image theorem identifies $i^{-1}B_X=B_Z$ and $j^{-1}B_X=B_U$, with their specified quotient projections. The ringed open-closed theorem applies because $j$ is quasi-compact. It gives exact $i_*,j_!$, $i^{-1}i_*\\cong1$, $j^{-1}i_*=0$, and the ordinary open-closed short exact sequence. The immersion-limit-preservation theorem gives exactness of $i^{-1},j^{-1}$ on these module categories. Write them as $i^*,j^*$ here.\nFor a $B_X$-module sheaf $N$, put $H_N=\\ker(N\\to j_*j^*N)$ and $i^!_0N=i^*H_N$. The open counit $j^*j_*\\to1$ is the identity on the localized site: at an object $V\\to U$ both sides have sections $N(V\\times_XU)=N(V)$. Exact $j^*$ and the triangle identity imply $j^*H_N=0$. The ordinary open-closed sequence for $H_N$ therefore identifies $H_N\\cong i_*i^*H_N$. Every map $i_*P\\to N$ has zero composite with $N\\to j_*j^*N$, since its adjoint lies in $\\operatorname{Hom}(j^*i_*P,j^*N)=0$. Factoring through this kernel and using $i^*\\dashv i_*$ and $i^*i_*\\cong1$ gives $\\operatorname{Hom}(i_*P,N)\\cong\\operatorname{Hom}(P,i^!_0N)$, naturally and coefficient-linearly. The kernel construction is a functor; these bijections make it the sheaf right adjoint.\nEvery additive sheaf functor commutes termwise with the finite sums and differentials in mapping cones, and with shifts, so it is exact on homotopy categories. Take the small skeletons in the project's sheaf universe. The module categories admit functorial degreewise-injective K-injective resolutions. Since $i_*$ is exact, its right adjoint $i^!_0$ preserves K-injectives. The termwise homotopy adjunction and the K-injective Hom calculation thus give $i_*\\dashv Ri^!_0$ on the ambient unbounded derived categories, with $Ri^!_0K=i^!_0I_K$ and the derived counit induced by the sheaf counit. The same argument derives $j_!\\dashv j^*$ and $i^*\\dashv i_*$; the ordinary ringed derived adjunction gives $j^*\\dashv Rj_*$. Exact functors are computed termwise, so the closed counit remains an isomorphism on all complexes. On the open, a K-injective model and exact restriction give $j^*Rj_*\\cong1$ by the section formula above. No supported triangle has been used to obtain these adjoints.",
+   "text": "Ambient adjoints before localization. Work with $B_X=(A_{E,n})_X$ or $B_X=\\widehat{\\mathcal O}_{E,X}$. The coefficient inverse-image theorem identifies the pulled-back rings with $B_Z,B_U$, respecting quotient projections. Since $j$ is quasi-compact by Step 1, [lem-sf-ringed-closed-kernel-adjoint] applies. It constructs $i^!_0N=i^*\\ker(N\\to j_*j^*N)$, its ambient derived right adjoint $Ri^!_0$, and all four adjunctions needed for the unit's Hom argument. In particular $i^*i_*\\cong1$, $j^*Rj_*\\cong1$ and $j^*i_*=0$ on all complexes. Exact immersion pullback and exact closed pushforward are termwise; the exact-functor factorization gives their triangulated structures. The K-injective total-derived theorem gives the exact structure of $Ri^!_0$. None of these inputs uses the supported triangle.",
    "uses": [
+    "lem-sf-ringed-closed-kernel-adjoint",
     "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-weil-pbc-proetale-ringed-open-closed",
     "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-proetale-module-direct-image",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-proetale-ringed-open-closed",
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
+    "lem-weil-pbc-kinjective-total-derived"
    ],
    "elementary": false,
    "source": {
@@ -73,14 +65,11 @@
    }
   },
   {
-   "text": "The prescribed Hom(-,K) comparison. Applying the ringed ordinary open-closed short exact sequence termwise to any complex $M$ gives a natural distinguished triangle $j_!j^*M\\to M\\to i_*i^*M\\to j_!j^*M[1]$. Apply $\\operatorname{Hom}(-,K)$ and all shifts. The adjunctions of Step 2 rewrite its outer terms as\n$$\\operatorname{Hom}(i_*i^*M,K)\\cong\\operatorname{Hom}(i^*M,Ri^!_0K)\\cong\\operatorname{Hom}(M,i_*Ri^!_0K),$$\n$$\\operatorname{Hom}(j_!j^*M,K)\\cong\\operatorname{Hom}(j^*M,j^*K)\\cong\\operatorname{Hom}(M,Rj_*j^*K).$$\nThe induced two maps are composition with the closed exceptional counit $e:A=i_*Ri^!_0K\\to K$ and the open unit $u:K\\to B=Rj_*j^*K$: this follows by substituting the unit/counit formulas for the adjunction bijections and cancelling adjacent unit/counit pairs by the triangle identities. In particular $ue=0$. More generally $\\operatorname{Hom}(i_*P[m],Rj_*Q)=\\operatorname{Hom}(j^*i_*P[m],Q)=0$ for all ambient inputs and shifts.\nComplete the actual counit, not the open unit, to a distinguished triangle $A\\xrightarrow{e}K\\xrightarrow{v}C\\to A[1]$. Hom-out exactness gives a map $\\beta:C\\to B$ with $\\beta v=u$; its ambiguity factors through $A[1]$, whose Hom into $B$ is zero, so this map is unique. Here are the missing details establishing that this comparison is invertible. For $W=i_*P$, composition with $e$ gives a bijection $\\operatorname{Hom}(W,A[r])\\to\\operatorname{Hom}(W,K[r])$ by full faithfulness of $i_*$ and $i_*\\dashv Ri^!_0$. The long Hom sequence of the counit cone gives $\\operatorname{Hom}(W,C[r])=0$, and orthogonality gives $\\operatorname{Hom}(W,B[r])=0$. For $W=j_!Q$, $\\operatorname{Hom}(W,A[r])=\\operatorname{Hom}(Q,j^*A[r])=0$, so $v$ induces a bijection $\\operatorname{Hom}(W,K[r])\\to\\operatorname{Hom}(W,C[r])$. The open adjunction and the invertible open counit show that $u$ induces a bijection $\\operatorname{Hom}(W,K[r])\\to\\operatorname{Hom}(W,B[r])$. Since $\\beta v=u$, $\\operatorname{Hom}(W,\\beta[r])$ is therefore a bijection on both types of outside vertices.\nLet $T$ be a cone of $\\beta$. The Hom sequences of this triangle now give $\\operatorname{Hom}(i_*P,T[r])=\\operatorname{Hom}(j_!Q,T[r])=0$ for every $P,Q,r$. Apply $\\operatorname{Hom}(-,T[r])$ to the ordinary open-closed triangle of an arbitrary $M$: the adjacent groups with $i_*i^*M$ and $j_!j^*M$ are zero, hence $\\operatorname{Hom}(M,T[r])=0$. Taking $M=T,r=0$ makes $1_T=0$, so $T=0$. Hom exactness applied to its triangle makes composition with $\\beta$ a bijection on every Hom group; taking the identities of its source and target constructs a two-sided inverse. Thus $\\beta$ is invertible. Equivalently this proves the unit's natural bijection $\\operatorname{Hom}(M,C[r])\\cong\\operatorname{Hom}(M,Rj_*j^*K[r])$ for every $M,r$, induced by a specified map rather than inferred from abstract exactness. Replace $C$ by $B$ using $\\beta$. This proves the supported triangle with the two prescribed adjunction maps at finite and completed ambient coefficients. Its connecting map is the one transported through this isomorphism.",
+   "text": "The prescribed Hom(-,K) comparison. The ordinary ringed short exact sequence, termwise on $M$, gives the distinguished triangle $j_!j^*M\\to M\\to i_*i^*M\\to(j_!j^*M)[1]$. Apply Hom(-,K) and shifts. The four adjunctions of Step 2 identify its outer groups as\n$$\\operatorname{Hom}(i_*i^*M,K)=\\operatorname{Hom}(i^*M,Ri^!_0K)=\\operatorname{Hom}(M,i_*Ri^!_0K),$$\n$$\\operatorname{Hom}(j_!j^*M,K)=\\operatorname{Hom}(j^*M,j^*K)=\\operatorname{Hom}(M,Rj_*j^*K).$$\nThe maps are induced by the actual exceptional counit $e$ and open unit $u$: substitute the adjunction bijections and cancel the adjacent unit/counit pairs. Complete $e$ to a distinguished triangle. Apply [lem-sf-ordinary-triangle-counit-cone], whose four adjunctions, invertible closed and open counits, vanishing $j^*i_*$, and ordinary triangle have all just been supplied. Its specified comparison from the counit cone to $Rj_*j^*K$ is invertible and preserves $u$. Transport the connecting arrow through that comparison. This proves the ambient supported triangle at both finite and completed coefficients, with the prescribed first two maps. The same lemma gives closed-to-open orthogonality for every input and shift.",
    "uses": [
     "lem-weil-pbc-proetale-ringed-open-closed",
     "lem-weil-pbc-complex-ses-triangle",
-    "lem-weil-pbc-hom-into-triangle-exact",
-    "lem-weil-pbc-hom-out-of-triangle-exact",
-    "def-weil-triangulated-category",
-    "prop-weil-open-closed-recollement-adjunctions"
+    "lem-sf-ordinary-triangle-counit-cone"
    ],
    "elementary": false,
    "source": {
@@ -106,19 +95,19 @@
    }
   },
   {
-   "text": "Integral operations and conservativity of reduction. Put $R=\\mathcal O_E$. The coefficient theorems make $R$ a DVR with finite residue field and each $A_n$ finite; the current perfect-quotient theorem represents the ordinary $R$-module $A_n$ by the augmented finite free resolution $[R\\xrightarrow{\\varpi_E^n}R]\\to A_n[0]$ in degrees $-1,0$, for every $n\\ge1$. Thus it verifies precisely the perfect ordinary-module requirement of the Noetherian adic datum; the DVR and finite-quotient statements supply its remaining ring and finiteness hypotheses (the residue characteristic is $\\ell$). The passage to completed coefficient sheaves uses the separate constant/completion equivalence below, not this ring-module theorem. First identify the ordinary completed-sheaf direct image of Step 2 with the integral direct image in the statement. For $f=i,j$, direct-image/derived-limit commutation applied to the completeness tower gives $Rf_*K\\cong R\\varprojlim_n\\operatorname{Res}_n Rf_{*,n}K_n$, with the specified projection maps; its finite-reduction projection comparisons are isomorphisms. This is exactly the functor and tower of [def-weil-derived-direct-image], by [prop-weil-pbc-direct-image-limits], with the constant/completed equivalence identifying the coefficient conventions. Thus the ordinary direct image along either $j$ or $i$ preserves the derived-complete constructible category and commutes with every finite reduction by the integral direct-image constructibility theorem. Integral pullback preserves that category and has the stated finite reductions by the integral pullback theorem. This uses the completed coefficient sheaf, not the constant discrete $R$-sheaf. The constant/completed comparison identifies the two notions of derived completeness used in these cited interfaces. If $C$ is an integral constructible object with every $C_n=0$, its defining completeness triangle is $C\\to0\\to0\\to C[1]$, so $C=0$. Since the integral constructible category is triangulated and reduction is derived tensor, it follows by taking the cone that a morphism between its objects is an isomorphism whenever all its reductions are isomorphisms.",
+   "text": "Integral operations. Put $R=\\mathcal O_E$. The DVR and finite-quotient theorems and the ordinary augmented resolution $[R\\xrightarrow{\\varpi_E^n}R]\\to A_{E,n}[0]$ from the perfect-quotient theorem verify the Noetherian adic datum, for $n\\ge1$. Apply [prop-weil-pbc-direct-image-limits] to $i,j$: its canonical strict-tower comparison identifies ordinary completed-ring direct image with $R\\varprojlim_n\\operatorname{Res}_nRf_{*,n}K_n$, including finite projection maps and their quotient compatibility. Thus it is precisely the integral direct image in [def-weil-derived-direct-image]. The constant/completion equivalence identifies the two completeness conventions, without identifying their ambient module categories. The integral direct-image constructibility theorem and integral pullback theorem give constructibility and the required uniform bounds. For reduction detection, a complete $C$ whose reductions vanish has defining Roos triangle $C\\to0\\to0\\to C[1]$, hence $C=0$. Apply this to the cone of a morphism: the integral subcategory is triangulated and reduction is exact derived tensor, so isomorphisms are detected by all reductions.",
    "uses": [
     "lem-weil-l-adic-extension-integers-dvr",
     "lem-weil-valued-dvr-finite-quotients",
     "lem-weil-pbc-standard-quotients-perfect",
+    "prop-weil-pbc-direct-image-limits",
+    "def-weil-derived-direct-image",
+    "lem-weil-pbc-constant-completion-equivalence",
     "lem-sf-integral-direct-image-constructible",
     "lem-pur-integral-operations-preserve-constructible",
-    "lem-weil-pbc-constant-completion-equivalence",
     "def-weil-derived-complete",
     "lem-weil-integral-constructible-triangulated",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "prop-weil-pbc-direct-image-limits",
-    "def-weil-derived-direct-image"
+    "def-weil-integral-derived-reduction"
    ],
    "elementary": false,
    "source": {
@@ -127,21 +116,9 @@
    }
   },
   {
-   "text": "Ordinary and completed pullbacks along the immersions agree on derived-complete objects. The immersion-limit-preservation theorem and the coefficient-ring isomorphism make $i^*,j^*$ exact and product-preserving on completed module sheaves. Countable products on these pro-etale module categories are exact, so their derived products are represented termwise. Use the strict-tower derived-limit theorem and its natural Roos model: exact products represent the derived products, so this model is the shifted mapping cone of the termwise map $1-s$. Applying either exact product-preserving inverse image to this model gives the corresponding model of the inverse-image tower, with the same projection maps. This constructs the natural limit comparison; it does not infer a canonical map from a noncanonical choice of cone. For the coefficient comparison put $R=\\mathcal O_E$, $I=(\\varpi_E)$ and $P_n=R/I^n$, with $n\\ge1$. The changed statement [lem-weil-pbc-standard-quotients-perfect] supplies only the ordinary augmented $R$-module resolution $[R\\xrightarrow{\\varpi_E^n}R]\\to P_n[0]$. Apply [lem-weil-pbc-completed-constant-sheaf-reduction] on $X_{\\mathrm{proet}}$: $R$ is Noetherian by Step 1, and every $P_n$ is finite, so $B_X=\\varprojlim_n\\underline{P_n}$ is the completed ring sheaf $R_X$ of the adic datum. That separate theorem sheafifies the ordinary resolution and tensors it with $B_X$; flatness over $\\underline R$ and the canonical reduction comparison give an augmented finite-free $B_X$-resolution $[B_X\\xrightarrow{\\varpi_E^n}B_X]\\to(P_n)_X[0]$. For $m\\ge n$, the map from the $m$-resolution to the $n$-resolution is multiplication by $\\varpi_E^{m-n}$ in degree $-1$ and the identity in degree $0$. It is a chain map since $\\varpi_E^n\\varpi_E^{m-n}=\\varpi_E^m$, and its augmentation is the specified quotient map $P_m\\to P_n$. The same formulas survive sheafification and scalar extension. This obtains the completed-sheaf resolution and its quotient maps without identifying the two ambient coefficient categories. Exact inverse image carries this resolution, its tensor with any complex, and its quotient transition maps to the corresponding resolution on the source (equivalently use the canonical derived tensor/pullback comparison). Consequently $i^*(K_n)\\cong(i^*K)_n$ and $j^*(K_n)\\cong(j^*K)_n$. If $K\\cong R\\varprojlim_n\\operatorname{Res}_nK_n$, this proves the same completeness identity for its ordinary inverse image. It is thus canonically the completed pullback, whose defining derived-limit tower is this tower; the canonical comparisons are its projection comparisons, including the quotient cocycle. The finite pullback-preservation theorem gives constructible reductions in the same uniform cohomological interval. Hence these ordinary pullbacks preserve the precise integral category of the statement. The derived adjunctions of Step 2, restricted to it, agree with the completed adjunctions by their unit/counit mate formulas. In particular integral $j^*Rj_*\\cong1$ and $j^*i_*=0$, and the orthogonality calculation of Step 3 holds on the integral constructible subcategories.",
+   "text": "Ordinary and completed immersion pullbacks. Apply [lem-sf-immersion-completed-pullback-comparison] to $i,j$. Its actual coefficient-ring map is the canonical inverse-image isomorphism, not a general scalar extension. It identifies ordinary inverse image with the specified completed pullback on derived-complete objects, including its completion unit, finite projections and quotient transitions. In particular both inverse images preserve the precise integral constructible category, with the same uniform cohomological intervals. The ambient adjunctions of Step 2 therefore restrict, using the direct-image identifications of Step 5, to the integral operations in the statement. Their unit/counit formulas are the restrictions of the ambient formulas. Consequently $j^*Rj_*\\cong1$, $j^*i_*=0$, and the orthogonality of Step 3 holds in the integral subcategories.",
    "uses": [
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-limit-existence",
-    "prop-weil-pbc-roos-triangle",
-    "def-weil-derived-complete",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lemma-weil-pbc-completed-pullback-reduction",
-    "lem-weil-pbc-pullback-preserves-bounded-constructible",
-    "lem-sbc-completed-operations-linear-natural-exchange",
-    "lem-weil-pbc-standard-quotients-perfect",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    "lem-sf-immersion-completed-pullback-comparison"
    ],
    "elementary": false,
    "source": {
@@ -150,18 +127,16 @@
    }
   },
   {
-   "text": "Integral constructible restriction and finite reductions of the exceptional counit. Apply the counit-cone Hom comparison of Step 3 to an integral constructible $K$. Its middle and open terms are integral constructible by Steps 5-6, and the full integral constructible subcategory is triangulated. Thus $A=i_*Ri^!_0K$ is integral constructible. The closed counit identifies $Ri^!_0K\\cong i^*A$, which is integral constructible by Step 6. Restricting the already constructed ambient adjunction gives $i_*\\dashv Ri^!$ on the integral category. This uses no integral fibre of the open unit.\nLet $T_n=-\\otimes^L_R A_n$. The canonical direct-image projection map is adjoint to counit tensor identity, so the transpose of $T_n\\eta_f$ under the pullback and direct-image reduction comparisons is $1$: explicitly the calculation reduces to $\\varepsilon_f f^*\\circ f^*\\eta_f=1$. Thus reduction carries the actual integral open unit to the finite open unit. Reducing the supported triangle of Step 3 therefore gives a distinguished triangle with middle $K_n$ and the specified map $K_n\\to Rj_{n,*}j_n^*K_n$. Compare the signed rotations with the finite supported triangle, whose first object is $i_{n,*}Ri_n^!K_n$. TR3 with identities on the middle and open objects gives a triangle morphism; two-out-of-three makes its first component invertible. Applying the exact closed pullback and its invertible counit yields $(Ri^!K)_n\\cong Ri_n^!K_n$, preserving the arrow into $K_n$. These comparisons are unique: if $a,a':D\\to F_n=i_{n,*}Ri_n^!K_n$ are two first-component maps with the same composite into $K_n$, Hom-into exactness for the rotated target triangle factors $a-a'$ through $B_n[-1]$, where $B_n=Rj_{n,*}j_n^*K_n$. For a closed source $D$, Step 3 makes this factor zero. To check quotient transitions $A_{E,m}\\twoheadrightarrow A_{E,n}$ with $m\\ge n$, regard the $n$-triangle as an $A_{E,m}$-triangle by exact restriction of scalars. The direct-image/restriction comparison [lem-weil-proetale-direct-image-restriction-of-scalars] identifies its open vertex with $Rj_{m,*}\\operatorname{Res}_{m,n}(j_n^*K_n)$, so the same orthogonality and Hom-into factorization apply in this single category. The two composites to its closed vertex both compose with the closed arrow to the canonical reduction map into $K_n$, because the projection comparisons and the open units are natural. They are therefore equal. Hence all quotient transitions commute, not merely the individual objects.",
+   "text": "Integral restriction and reduction of the exceptional counit. In the ambient supported triangle of Step 3, $K$ and $Rj_*j^*K$ are integral constructible by Steps 5-6. Triangulated closure gives $A=i_*Ri^!_0K$ integral constructible; the invertible closed counit identifies $Ri^!_0K=i^*A$, so Step 6 restricts the ambient adjunction. Let $T_n$ be derived reduction. Under the canonical pullback and direct-image projection comparisons, the transpose of $T_n\\eta_j$ is $T_n(\\varepsilon_jj^*\\circ j^*\\eta_j)=1$. Thus the reduced open map is the finite open unit. The reduced triangle and the finite triangle have identical middle and open vertices and maps. Their first vertices are closed-supported, by the closed direct-image reduction comparison. Closed-to-open orthogonality and [lem-weil-pbc-triangle-morphism-extension] (1)-(2) give the unique triangle morphism with identity middle and open components; [lem-sf-triangle-morphism-iso] makes the closed component invertible. Applying $i_n^*$ gives $(Ri^!K)_n\\cong Ri_n^!K_n$, preserving the exceptional counit. For $m\\ge n$, restrict the $n$-triangle to $A_{E,m}$-coefficients. The direct-image/restriction-of-scalars comparison identifies its open vertex with $Rj_{m,*}\\operatorname{Res}_{m,n}j_n^*K_n$. Orthogonality therefore holds in this single category. Both candidate transition comparisons have the same natural middle and open components, so the uniqueness clause of the triangle-morphism-extension lemma makes them equal. This proves quotient-transition coherence, not just objectwise reduction isomorphisms.",
    "uses": [
     "lem-weil-integral-constructible-triangulated",
     "prop-weil-pbc-direct-image-limits",
     "lemma-weil-pbc-completed-pullback-reduction",
     "lemma-weil-pbc-perfect-projection-formula",
     "lem-weil-pbc-ringed-projection-mate-exact",
-    "def-weil-triangulated-category",
-    "lem-sf-triangle-morphism-iso",
-    "lem-weil-pbc-hom-out-of-triangle-exact",
-    "lem-weil-pbc-hom-into-triangle-exact",
-    "lem-weil-proetale-direct-image-restriction-of-scalars"
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "lem-weil-pbc-triangle-morphism-extension",
+    "lem-sf-triangle-morphism-iso"
    ],
    "elementary": false,
    "source": {
@@ -170,38 +145,33 @@
    }
   },
   {
-   "text": "Identification with the specified exceptional inverse image. At finite level repeat Steps 2-3 on the small etale sites: the existing ambient closed-adjoint theorem supplies the right adjoint, and the ordinary etale open-closed short exact sequence, applied termwise and passed to its derived triangle, supplies the Hom(-,K) comparison with the same two adjunction maps on all complexes. Exact etale inverse image and exact closed direct image extend the closed counit termwise; the open derived counit and closed/open vanishing are those of the open-fully-faithful theorem. Hence every step of the ambient comparison in Step 3 applies, without needing to test an unbounded object using a merely bounded-below input theorem. Its supported object is bounded constructible by open-immersion finiteness, the truncation spectral sequence, the Serre theorem and cohomology exactness, and the exact closed inverse image identifies the adjoint with the closed pullback of that object. The compactification $Z\\xrightarrow{1}Z\\xrightarrow{i}X$ makes compact-support direct image equal to $i_*$. Thus this is the etale exceptional adjoint used in the definition of $Ri_n^!$.\nExact comparison pullback, its scheme-pullback comparison, and the canonical counit-mate direct-image comparison identify the middle and open maps of its triangle with those in Step 3 on the pro-etale side. TR3 on signed rotations and triangle-morphism two-out-of-three identify the first objects, preserving their maps into $K$. Applying $i^*$ identifies the finite exceptional functors and their counits; their adjunctions and units consequently agree. At integral coefficients Step 7 identifies the reductions of the restricted ambient adjoint with these finite exceptional objects, compatibly with the quotient transitions. Its completeness now gives $Ri^!K\\cong R\\varprojlim_n\\operatorname{Res}_nRi_n^!K_n$, precisely the integral definition in the item. All representing Hom bijections here come from the adjunction constructed in Step 2, not from a supported fibre.",
+   "text": "Identification with the specified exceptional inverse image. At finite level [lem-exc-closed-ambient] supplies the ambient etale closed adjoint. The ordinary etale open-closed sequence gives a triangle on all complexes. Exact inverse image, exact closed direct image (a closed immersion is finite), and open full faithfulness supply the four adjunctions and invertible counits, and the shift-compatible right-adjoint theorem gives the closed adjoint its exact structure, so [lem-sf-ordinary-triangle-counit-cone] applies. Open finiteness and the truncation spectral sequence make its open vertex bounded constructible. The cohomology long exact sequence expresses each cohomology sheaf of its first vertex as an extension of a kernel by a cokernel of constructible sheaves; the Serre property gives constructibility, and boundedness follows from the same sequence. Exact $i^*$ and constructible pullback restrict the closed adjoint. The compactification $Z\\xrightarrow1Z\\xrightarrow iX$ gives compact-support direct image $i_*$, hence the adjoint in the exceptional-inverse-image definition.\nFor a finite pro-etale constructible $K$, choose its bounded constructible etale origin. Exact comparison pullback and the canonical direct-image mate identify the middle and open maps of that etale supported triangle with Step 3. Orthogonality and [lem-weil-pbc-triangle-morphism-extension] (1)-(2) give the unique comparison; [lem-sf-triangle-morphism-iso] makes it invertible. Applying $i^*$ identifies the exceptional functors and counits, hence the adjunction units. Step 7 identifies the integral reductions with these finite objects respecting quotient transitions. Completeness gives $Ri^!K\\cong R\\varprojlim_n\\operatorname{Res}_nRi_n^!K_n$, the stated integral definition. The Hom bijections remain those of Step 2.",
    "uses": [
     "lem-exc-closed-ambient",
-    "lem-cbc-open-closed-recollement",
-    "prop-openclosed-lowerstar-fully-faithful",
-    "prop-constructible-pullback",
-    "thm-fin-open-immersion",
-    "thm-sp-truncation-e2",
-    "thm-constructible-serre",
-    "lem-sf-derived-homology-long-exact",
-    "lem-sf-proetale-constructible-origin",
-    "lem-sf-comparison-pullback-exact",
-    "lem-weil-pbc-comparison-pullback",
-    "prop-weil-pbc-comparison-direct-image",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-sf-triangle-morphism-iso",
-    "def-weil-exceptional-inverse-image",
-    "def-compact-support-direct-image-detailed",
-    "prop-sf-closed-immersion-unit",
-    "def-weil-derived-complete",
-    "def-weil-triangulated-category",
-    "lem-weil-pbc-hom-into-triangle-exact",
-    "lem-weil-pbc-hom-out-of-triangle-exact",
     "lem-weil-pbc-open-closed-short-exact",
     "lem-weil-pbc-complex-ses-triangle",
     "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-exc-open-fully-faithful",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-closed-immersion-finite",
     "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "lem-exc-open-fully-faithful",
+    "prop-weil-open-closed-recollement-adjunctions",
+    "lem-sf-ordinary-triangle-counit-cone",
+    "thm-fin-open-immersion",
+    "thm-sp-truncation-e2",
+    "thm-constructible-serre",
+    "prop-constructible-pullback",
+    "def-compact-support-direct-image-detailed",
+    "def-weil-exceptional-inverse-image",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "def-weil-derived-complete",
+    "lem-weil-pbc-triangle-morphism-extension",
+    "lem-sf-triangle-morphism-iso",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-sf-proetale-constructible-origin",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sf-triangulated-right-adjoint"
    ],
    "elementary": false,
    "source": {
@@ -406,74 +376,61 @@
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-valued-dvr-finite-quotients",
   "lem-weil-pbc-standard-quotients-perfect",
+  "lem-sf-ringed-closed-kernel-adjoint",
   "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-proetale-ringed-open-closed",
   "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "lem-weil-proetale-weakly-etale-localization",
-  "def-weil-proetale-module-direct-image",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-proetale-ringed-open-closed",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-kinjective-total-derived",
   "lem-weil-pbc-complex-ses-triangle",
-  "lem-weil-pbc-hom-into-triangle-exact",
-  "lem-weil-pbc-hom-out-of-triangle-exact",
-  "def-weil-triangulated-category",
-  "prop-weil-open-closed-recollement-adjunctions",
+  "lem-sf-ordinary-triangle-counit-cone",
   "lem-weil-pbc-pullback-preserves-bounded-constructible",
   "lem-weil-proetale-dbc-triangulated",
   "prop-sf-closed-unit-all-stages",
   "lem-sf-triangle-two-out-of-three",
   "lem-sf-derived-truncation-triangle",
   "lem-sf-derived-concentrated-single",
-  "lem-sf-integral-direct-image-constructible",
-  "lem-pur-integral-operations-preserve-constructible",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "def-weil-derived-complete",
-  "lem-weil-integral-constructible-triangulated",
   "prop-weil-pbc-direct-image-limits",
   "def-weil-derived-direct-image",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-derived-limit-existence",
-  "prop-weil-pbc-roos-triangle",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-pur-integral-operations-preserve-constructible",
+  "def-weil-derived-complete",
+  "lem-weil-integral-constructible-triangulated",
+  "def-weil-integral-derived-reduction",
+  "lem-sf-immersion-completed-pullback-comparison",
   "lemma-weil-pbc-completed-pullback-reduction",
-  "lem-sbc-completed-operations-linear-natural-exchange",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lemma-weil-pbc-perfect-projection-formula",
-  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-weil-pbc-triangle-morphism-extension",
+  "lem-sf-triangle-morphism-iso",
   "lem-exc-closed-ambient",
-  "lem-cbc-open-closed-recollement",
-  "prop-openclosed-lowerstar-fully-faithful",
-  "prop-constructible-pullback",
-  "lem-sf-derived-homology-long-exact",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "def-weil-exceptional-inverse-image",
-  "def-compact-support-direct-image-detailed",
-  "prop-sf-closed-immersion-unit",
   "lem-weil-pbc-open-closed-short-exact",
   "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-exc-open-fully-faithful",
-  "lem-weil-pbc-closed-immersion-finite",
   "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-exc-open-fully-faithful",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "prop-constructible-pullback",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-exceptional-inverse-image",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-closed-immersion-finite",
   "lem-weil-pbc-adjunction-shift-compatibility-unique",
   "lem-sf-triangulated-right-adjoint",
   "def-weil-pbc-proetale-operations",
   "lem-exc-proetale-closed-exact",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-hom-into-triangle-exact",
   "prop-weil-pbc-rational-transport",
   "def-weil-rationalization-karoubi",
   "lem-weil-pbc-integral-stratified-perfect-characterization",
   "lem-kun-dimension-finite-type",
   "prop-weil-pbc-scalar-extension",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "prop-weil-pbc-descent-functors",
   "thm-weil-pbc-verdier-axioms",
   "def-weil-algebraically-closed-coefficients",
@@ -549,7 +506,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -612,10 +569,10 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-localization",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "prop-sf-localization-all-stages",
   "worker": "stage1",
-  "summary": "C7 repair: restore the fixed unit Hom(-,K) argument on the ordinary open-closed triangle, with the exceptional counit completed first and a specified comparison to Rj_*j^*K proved invertible by Hom tests and the ordinary triangle for every M. Construct the finite/completed closed adjoints from the sheaf kernel and K-injectives; remove both supported-triangle inputs and the integral open-unit fibre construction. Identify completed immersion pullbacks via exact product-preserving inverse image and Roos triangles. Retain the reviewed coefficient-category comparison and all-stage Tor and Weil arguments. Second reading makes the ordinary/completed direct-image identification explicit and corrects the Hom-into uniqueness argument, including finite coefficient restriction in the transition check. Landing-return repair: revalidated the current ordinary-module statement of lem-weil-pbc-standard-quotients-perfect in Steps 1, 5 and 6. Distinguished its augmented ring-module resolution from the completed-sheaf resolution supplied by lem-weil-pbc-completed-constant-sheaf-reduction, with explicit quotient chain maps; refreshed all three verbatim citations against the current DAG.",
+  "summary": "C7 repair: restore the fixed unit Hom(-,K) argument on the ordinary open-closed triangle, with the exceptional counit completed first and a specified comparison to Rj_*j^*K proved invertible by Hom tests and the ordinary triangle for every M. Construct the finite/completed closed adjoints from the sheaf kernel and K-injectives; remove both supported-triangle inputs and the integral open-unit fibre construction. Identify completed immersion pullbacks via exact product-preserving inverse image and Roos triangles. Retain the reviewed coefficient-category comparison and all-stage Tor and Weil arguments. Second reading makes the ordinary/completed direct-image identification explicit and corrects the Hom-into uniqueness argument, including finite coefficient restriction in the transition check. Landing-return repair: revalidated the current ordinary-module statement of lem-weil-pbc-standard-quotients-perfect in Steps 1, 5 and 6. Distinguished its augmented ring-module resolution from the completed-sheaf resolution supplied by lem-weil-pbc-completed-constant-sheaf-reduction, with explicit quotient chain maps; refreshed all three verbatim citations against the current DAG. Q100 repair of the human long-step return: extracted the ringed kernel adjoint, abstract counit-cone argument, ordinary/completed immersion comparison into three statement-only nodes; the orthogonal-triangle comparisons use the existing lem-weil-pbc-triangle-morphism-extension and lem-sf-triangle-morphism-iso. Steps 5 and 8 now apply existing tower and site-comparison theorems and these extracted lemmas. All six flagged steps are shorter than 2000 characters; the other fourteen steps, statement and Lean record are retained.",
   "blueprint": "Unit sk-prop-sf-localization sole step: Step 2 supplies its adjunctions without supported localization; Step 3 applies Hom(-,K) to j_!j^*M -> M -> i_*i^*M, writes both outer adjunction bijections, completes the exceptional counit, and proves the natural cone comparison is an isomorphism for every M using that ordinary triangle. Step 4 records the shift-compatible determination interface. Steps 6–8 restrict the same argument to integral coefficients and identify the specified functors. Step 10 proves the unit uniqueness/naturality paragraph. Steps 1,5,9,11–20 realize the expanded node coefficient, Tor and Weil clauses.",
   "tool_uses": [
    {
@@ -655,48 +612,16 @@
     "why": "Identifies the actual pulled-back finite and completed ring sheaves and their quotient projections, needed before using the ringed recollement and comparing reductions."
    },
    {
-    "node": "lem-weil-pbc-proetale-ringed-open-closed",
-    "why": "Provides the ordinary open-closed short exact sequence and exact sheaf operations for arbitrary ring sheaves, including completed coefficients. Step 3 derives the supported triangle from it by the prescribed Hom(-,K) route; this is the unit sk-prop-sf-open-closed-triangle input, not a supported-localization substitute."
-   },
-   {
     "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
     "why": "Exactness and countable-product preservation of immersion inverse image identify ordinary and completed pullbacks by applying it to Roos triangles; the coefficient ring map is checked to be an isomorphism."
    },
    {
-    "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "Generic interface used in the displayed proof step: The small pro-etale site of a weakly etale X-scheme is the localization of X_proet. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
-   },
-   {
-    "node": "def-weil-proetale-module-direct-image",
-    "why": "Generic Direct image of pro-etale module sheaves interface used with its stated hypotheses in the displayed proof. It supplies only the cited algebraic, derived-category, coefficient or finiteness input; the supported-localization Hom comparison is proved in Step 3."
-   },
-   {
-    "node": "lem-pur-site-restriction-module-adjunction-exact",
-    "why": "Generic Restriction and extension by zero for modules on a localized site interface used with its stated hypotheses in the displayed proof. It supplies only the cited algebraic, derived-category, coefficient or finiteness input; the supported-localization Hom comparison is proved in Step 3."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-projection-mate-exact",
-    "why": "Generic interface used in the displayed proof step: Exactness data for the ringed-topos projection mate. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
-   },
-   {
-    "node": "prop-pur-kinjective-resolutions-exist",
-    "why": "Supplies functorial K-injective resolutions for the small ringed module sites; Step 2 derives the explicitly constructed sheaf closed adjunction."
-   },
-   {
-    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "why": "Generic A right adjoint of an exact functor preserves K-injective complexes interface used with its stated hypotheses in the displayed proof. It supplies only the cited algebraic, derived-category, coefficient or finiteness input; the supported-localization Hom comparison is proved in Step 3."
-   },
-   {
-    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
-    "why": "Generic An adjunction of additive functors induces an adjunction on the homotopy categories of complexes, termwise interface used with its stated hypotheses in the displayed proof. It supplies only the cited algebraic, derived-category, coefficient or finiteness input; the supported-localization Hom comparison is proved in Step 3."
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Provides the ordinary open-closed short exact sequence and exact sheaf operations for arbitrary ring sheaves, including completed coefficients. Step 3 derives the supported triangle from it by the prescribed Hom(-,K) route; this is the unit sk-prop-sf-open-closed-triangle input, not a supported-localization substitute."
    },
    {
     "node": "lem-weil-pbc-kinjective-total-derived",
     "why": "Generic Enough K-injectives compute total right derived functors interface used with its stated hypotheses in the displayed proof. It supplies only the cited algebraic, derived-category, coefficient or finiteness input; the supported-localization Hom comparison is proved in Step 3."
-   },
-   {
-    "node": "prop-weil-open-closed-recollement-adjunctions",
-    "why": "Generic interface used in the displayed proof step: Adjunctions of the open-closed recollement. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
    },
    {
     "node": "lem-weil-pbc-pullback-preserves-bounded-constructible",
@@ -715,6 +640,14 @@
     "why": "Generic interface used in the displayed proof step: Isomorphism on two terms of a distinguished triangle. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
    },
    {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "Generic interface used in the displayed proof step: Direct image, derived limits, and completeness. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic interface used in the displayed proof step: Constant-to-completed coefficients on derived-complete categories. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
+   },
+   {
     "node": "lem-sf-integral-direct-image-constructible",
     "why": "Generic interface used in the displayed proof step: The integral derived direct image of a constructible complex along a finite-type morphism is constructible. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
    },
@@ -723,64 +656,48 @@
     "why": "Generic interface used in the displayed proof step: Integral pullback and completed tensor product preserve constructibility. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
    },
    {
-    "node": "lem-weil-pbc-constant-completion-equivalence",
-    "why": "Generic interface used in the displayed proof step: Constant-to-completed coefficients on derived-complete categories. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
-   },
-   {
-    "node": "def-weil-derived-complete",
-    "why": "Generic Derived complete objects interface used with its stated hypotheses in the displayed proof. It supplies only the cited algebraic, derived-category, coefficient or finiteness input; the supported-localization Hom comparison is proved in Step 3."
-   },
-   {
     "node": "lem-weil-integral-constructible-triangulated",
     "why": "Generic interface used in the displayed proof step: Bounded constructible derived-complete integral complexes form a triangulated subcategory. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
-   },
-   {
-    "node": "lem-weil-proetale-countable-products-exact",
-    "why": "Generic Countable products of pro-etale modules are exact interface used with its stated hypotheses in the displayed proof. It supplies only the cited algebraic, derived-category, coefficient or finiteness input; the supported-localization Hom comparison is proved in Step 3."
-   },
-   {
-    "node": "lem-weil-derived-limit-existence",
-    "why": "Generic Existence and computation of derived limits interface used with its stated hypotheses in the displayed proof. It supplies only the cited algebraic, derived-category, coefficient or finiteness input; the supported-localization Hom comparison is proved in Step 3."
-   },
-   {
-    "node": "prop-weil-pbc-roos-triangle",
-    "why": "Generic Roos triangle and Milnor exact sequence interface used with its stated hypotheses in the displayed proof. It supplies only the cited algebraic, derived-category, coefficient or finiteness input; the supported-localization Hom comparison is proved in Step 3."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic interface used in the displayed proof step: Derived tensor comparison for arbitrary ringed topoi. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
    },
    {
     "node": "lemma-weil-pbc-completed-pullback-reduction",
     "why": "Generic interface used in the displayed proof step: Reduction commutes with completed pullback. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
    },
    {
-    "node": "lem-sbc-completed-operations-linear-natural-exchange",
-    "why": "Generic interface used in the displayed proof step: Linearity and naturality of completed pullback, direct image, and exchange. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
-   },
-   {
-    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "why": "Generic Completed constant coefficients and finite reduction interface supplies exactly the stated sheaf or derived-category input in the displayed step. The supported triangle is still proved by the unit counit-cone Hom(-,K) comparison in Step 3."
-   },
-   {
-    "node": "prop-weil-pbc-direct-image-limits",
-    "why": "Generic interface used in the displayed proof step: Direct image, derived limits, and completeness. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
-   },
-   {
     "node": "lemma-weil-pbc-perfect-projection-formula",
     "why": "Generic interface used in the displayed proof step: Perfect projection formula for reductions. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic interface used in the displayed proof step: Exactness data for the ringed-topos projection mate. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
+   },
+   {
+    "node": "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "why": "Generic Derived pro-etale direct image commutes with restriction of scalars interface used for the explicitly stated operation or comparison in this proof; it does not replace the unit Hom(-,K) route."
    },
    {
     "node": "lem-exc-closed-ambient",
     "why": "Generic interface used in the displayed proof step: Closed-immersion right adjoint before restriction. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
    },
    {
-    "node": "lem-cbc-open-closed-recollement",
-    "why": "Generic interface used in the displayed proof step: Open-closed recollement. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic The open-closed short exact sequence of an etale sheaf interface supplies exactly the stated sheaf or derived-category input in the displayed step. The supported triangle is still proved by the unit counit-cone Hom(-,K) comparison in Step 3."
    },
    {
-    "node": "prop-openclosed-lowerstar-fully-faithful",
-    "why": "Generic interface used in the displayed proof step: $i_*$ is fully faithful. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact interface supplies exactly the stated sheaf or derived-category input in the displayed step. The supported triangle is still proved by the unit counit-cone Hom(-,K) comparison in Step 3."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Generic Exactness of finite direct image interface supplies exactly the stated sheaf or derived-category input in the displayed step. The supported triangle is still proved by the unit counit-cone Hom(-,K) comparison in Step 3."
+   },
+   {
+    "node": "lem-exc-open-fully-faithful",
+    "why": "Generic An open immersion is fully faithful on the derived categories interface supplies exactly the stated sheaf or derived-category input in the displayed step. The supported triangle is still proved by the unit counit-cone Hom(-,K) comparison in Step 3."
+   },
+   {
+    "node": "prop-weil-open-closed-recollement-adjunctions",
+    "why": "Generic interface used in the displayed proof step: Adjunctions of the open-closed recollement. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
    },
    {
     "node": "prop-constructible-pullback",
@@ -795,42 +712,6 @@
     "why": "Generic interface used in the displayed proof step: Canonical derived direct-image comparison is the invertible counit mate. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
    },
    {
-    "node": "def-weil-exceptional-inverse-image",
-    "why": "Generic Exceptional inverse image notation interface used with its stated hypotheses in the displayed proof. It supplies only the cited algebraic, derived-category, coefficient or finiteness input; the supported-localization Hom comparison is proved in Step 3."
-   },
-   {
-    "node": "def-compact-support-direct-image-detailed",
-    "why": "Generic Compactification-independent finite-level direct image interface used with its stated hypotheses in the displayed proof. It supplies only the cited algebraic, derived-category, coefficient or finiteness input; the supported-localization Hom comparison is proved in Step 3."
-   },
-   {
-    "node": "prop-sf-closed-immersion-unit",
-    "why": "Generic interface used in the displayed proof step: The closed-immersion exceptional unit. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
-   },
-   {
-    "node": "lem-weil-pbc-open-closed-short-exact",
-    "why": "Generic The open-closed short exact sequence of an etale sheaf interface supplies exactly the stated sheaf or derived-category input in the displayed step. The supported triangle is still proved by the unit counit-cone Hom(-,K) comparison in Step 3."
-   },
-   {
-    "node": "prop-weil-pbc-inverse-image-modules-exact",
-    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact interface supplies exactly the stated sheaf or derived-category input in the displayed step. The supported triangle is still proved by the unit counit-cone Hom(-,K) comparison in Step 3."
-   },
-   {
-    "node": "lem-exc-open-fully-faithful",
-    "why": "Generic An open immersion is fully faithful on the derived categories interface supplies exactly the stated sheaf or derived-category input in the displayed step. The supported triangle is still proved by the unit counit-cone Hom(-,K) comparison in Step 3."
-   },
-   {
-    "node": "lemma-weil-pbc-finite-direct-image-exact",
-    "why": "Generic Exactness of finite direct image interface supplies exactly the stated sheaf or derived-category input in the displayed step. The supported triangle is still proved by the unit counit-cone Hom(-,K) comparison in Step 3."
-   },
-   {
-    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "why": "Generic Colimits of sheaves of modules and the forgetful functor to abelian sheaves interface supplies exactly the stated sheaf or derived-category input in the displayed step. The supported triangle is still proved by the unit counit-cone Hom(-,K) comparison in Step 3."
-   },
-   {
-    "node": "def-weil-pbc-proetale-operations",
-    "why": "Generic Derived operations on ringed pro-etale topoi interface used with its stated hypotheses in the displayed proof. It supplies only the cited algebraic, derived-category, coefficient or finiteness input; the supported-localization Hom comparison is proved in Step 3."
-   },
-   {
     "node": "lem-exc-proetale-closed-exact",
     "why": "Generic interface used in the displayed proof step: Exactness of closed direct image. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
    },
@@ -839,16 +720,20 @@
     "why": "Generic interface used in the displayed proof step: Functorial transport to a finite field. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
    },
    {
-    "node": "def-weil-rationalization-karoubi",
-    "why": "Generic Rationalization (scalar localization) interface used with its stated hypotheses in the displayed proof. It supplies only the cited algebraic, derived-category, coefficient or finiteness input; the supported-localization Hom comparison is proved in Step 3."
-   },
-   {
     "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
     "why": "Identifies the detailed integral category with the proper-base-change integral category including compatible etale-origin witnesses, under the checked Noetherian finite-dimensional ell-invertible hypotheses, before rational transport and scalar extension."
    },
    {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Step 11 checks finite dimension of the finite-type schemes before invoking the integral coefficient-category characterization; the unit does not give a general dimension theorem."
+   },
+   {
     "node": "prop-weil-pbc-scalar-extension",
     "why": "Generic interface used in the displayed proof step: Compatibility with finite scalar extension. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic interface used in the displayed proof step: Derived tensor comparison for arbitrary ringed topoi. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
    },
    {
     "node": "prop-weil-pbc-descent-functors",
@@ -857,10 +742,6 @@
    {
     "node": "thm-weil-pbc-verdier-axioms",
     "why": "Generic interface used in the displayed proof step: Verdier axioms and stagewise triangulation. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
-   },
-   {
-    "node": "def-weil-algebraically-closed-coefficients",
-    "why": "Generic Algebraically closed coefficient category interface used with its stated hypotheses in the displayed proof. It supplies only the cited algebraic, derived-category, coefficient or finiteness input; the supported-localization Hom comparison is proved in Step 3."
    },
    {
     "node": "lem-exc-residue-tor-test",
@@ -903,16 +784,8 @@
     "why": "Generic interface used in the displayed proof step: Canonical derived direct image comparison for forgotten module coefficients. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
    },
    {
-    "node": "def-weil-finite-field-fiber",
-    "why": "Generic Finite field and geometric fiber interface used with its stated hypotheses in the displayed proof. It supplies only the cited algebraic, derived-category, coefficient or finiteness input; the supported-localization Hom comparison is proved in Step 3."
-   },
-   {
     "node": "lem-sf-projection-finite-constant",
     "why": "Generic interface used in the displayed proof step: The projection formula with a finitely presented constant coefficient. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
-   },
-   {
-    "node": "def-weil-finite-tor-amplitude",
-    "why": "Generic Finite Tor amplitude interface used with its stated hypotheses in the displayed proof. It supplies only the cited algebraic, derived-category, coefficient or finiteness input; the supported-localization Hom comparison is proved in Step 3."
    },
    {
     "node": "lem-weil-finite-ctf-triangulated",
@@ -927,20 +800,12 @@
     "why": "Generic interface used in the displayed proof step: Weil structures on operations and their basic maps. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
    },
    {
-    "node": "def-weil-weil-sheaf-complex",
-    "why": "Generic Weil sheaf and Weil complex interface used with its stated hypotheses in the displayed proof. It supplies only the cited algebraic, derived-category, coefficient or finiteness input; the supported-localization Hom comparison is proved in Step 3."
-   },
-   {
     "node": "lem-weil-pbc-proetale-derived-pullback-composition",
     "why": "Generic interface used in the displayed proof step: Composition of derived pro-etale module pullbacks. It supplies the stated constructibility, derived-category, coefficient-comparison or equivariance tool; it does not replace the supported-localization argument, which is written by the counit-cone Hom comparison in Step 3."
    },
    {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Step 6 uses the exact total derived inverse limit on strict tower complexes and its natural Roos model to construct the projection-compatible comparison for product-preserving inverse image. The unit has no general strict-tower derived-limit theorem."
-   },
-   {
-    "node": "lem-kun-dimension-finite-type",
-    "why": "Step 11 checks finite dimension of the finite-type schemes before invoking the integral coefficient-category characterization; the unit does not give a general dimension theorem."
+    "node": "lem-weil-pbc-triangle-morphism-extension",
+    "why": "Steps 7-8 use BBD 1.1.9 triangle-morphism existence and uniqueness under closed-to-open Hom vanishing. This is the generic triangle comparison needed by the unit Hom argument, not a different localization route."
    }
   ]
  },
@@ -1026,14 +891,15 @@
   "lem-weil-pbc-proetale-derived-pullback-composition",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-kun-dimension-finite-type",
-  "lem-weil-proetale-direct-image-restriction-of-scalars"
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-weil-pbc-triangle-morphism-extension"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q15-2bb38310e",
-  "group": "Q15",
+  "reviewer": "NT-Codex-Q100-f6067f320",
+  "group": "Q100",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q15-2bb38310e (reviewer sub-agent of L); spot-checked: Read all 20 proof steps, the sole new node, cited statements and source passages, and unit/chapter route. Localization, coefficient comparisons, Tor bounds and Weil equivariance pass; exact master coefficient categories and base-change morphisms were checked without accepting seeded comparisons. Corrected only the new leaf’s creation, merge and Lean-audit metadata. Full findings and 81 accepted tool uses are in review.md; corrected JSON is under fixes/dag/nodes/sec-smooth-purity/.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q100-f6067f320 (reviewer sub-agent of L); spot-checked: Read the target, all three new nodes, cited statements, exact master/current blueprint sources, Stacks tags 09AA/09AH/09BM/09BN, and the full unit route. Verified all 20 proof steps, canonical reduction/base-change morphisms, coefficient categories, Tor bounds, Weil equivariance, duplicates, cycles, hypotheses, and edge cases. Review written to review.md; no fixes needed."
  }
 }

@@ -65,10 +65,22 @@
    }
   },
   {
-   "text": "Fix a vertex $x$ of an oriented tree $T$ and a finite signed word $w$. First suppose $T$ is finite. We prove $NZ_w(x,x)$ weakly contractible by induction on the number of edges, using the diagram categories of [def-coef-zigzag-homotopy-calculus]. For the singleton tree every object and arrow of $Z_w(x,x)$ is the constant identity diagram, including when $w$ is empty, so its nerve is a point. Otherwise choose a leaf $l\\ne x$, with neighbour $a$, and let $T'$ be obtained by deleting $l$ and its incident edge. Such a leaf exists: a maximal simple path in a finite tree has two leaf endpoints. Let $i:C_{T'}\\to C_T$ be inclusion and let $r:C_T\\to C_{T'}$ send $l$ to $a$, its incident generating edge to $1_a$, and every other generator to itself. Freeness extends this to a functor, with $ri=1$. If the edge is $l\\to a$, it is the sole nonidentity component of a natural transformation $1\\Rightarrow ir$; if it is $a\\to l$, it defines $ir\\Rightarrow1$. Naturality holds on that edge and on all unchanged generating edges, hence on every path. Applying $i,r$ and this transformation at every vertex of a fixed-word diagram gives functors between $Z_w^{C_{T'}}(x,x)$ and $Z_w^{C_T}(x,x)$, a retraction, and a transformation from one composite to the identity in the stated orientation. All endpoint components are identities because $l\\ne x$; all vertical components lie in the distinguished category $C_T$. By [lem-coef-nerve-natural-homotopy-equivalence], their nerves are homotopy equivalent. Induction proves the finite-tree assertion.\n\nFor arbitrary small $T$, index by the nonempty directed poset of finite subtrees $S\\subseteq T$ containing $x$. The union of two such subtrees is again a finite subtree because they intersect at $x$. For each $S$ the preceding induction gives $NZ^{C_S}_w(x,x)\\to\\Delta^0$ a weak homotopy equivalence. A simplex of $NZ_w$ has finitely many arrows, and every arrow is a finite generating path. All their edges, together with the finitely many paths connecting their vertices to $x$, lie in a finite subtree. Thus $NZ^{C_T}_w(x,x)$ is exactly the degreewise filtered colimit of these nerves; there are no extra identifications because subtree inclusions are faithful and injective on objects. Apply [lem-coef-filtered-colimit-weak-equivalences] to these collapse maps and the constant point diagram. The indexing category is small, nonempty and filtered, so its constant point colimit is a point. Hence $NZ^{C_T}_w(x,x)$ is weakly contractible.",
+   "text": "Fix a vertex $x$ and a finite signed word $w$. First let the oriented tree $T$ be finite. Induct on its number of edges. For the singleton tree the fixed-word category of [def-coef-zigzag-homotopy-calculus] has one object and only its identity, even for the empty word, so its nerve is a point. Otherwise a maximal simple path has two leaf endpoints: an extra neighbour would either extend the path or form a cycle. Choose a leaf $l\\ne x$ and delete it, leaving a tree with one fewer edge. Apply [lem-coef-tree-leaf-zigzag-retraction] with both endpoints $x$. Its functors are a retraction with a natural transformation in one direction between the other composite and the identity. By [lem-coef-nerve-natural-homotopy-equivalence] the two nerves are homotopy equivalent. The induction hypothesis therefore proves that $NZ_w^{C_T}(x,x)$ is weakly contractible.",
    "uses": [
     "def-coef-zigzag-homotopy-calculus",
-    "lem-coef-nerve-natural-homotopy-equivalence",
+    "lem-coef-tree-leaf-zigzag-retraction",
+    "lem-coef-nerve-natural-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 5.8(iii), printed p.25: finite-tree contraction via leaf collapse"
+   }
+  },
+  {
+   "text": "For an arbitrary small oriented tree $T$, [lem-coef-tree-zigzag-finite-subtree-colimit] identifies $NZ_w^{C_T}(x,x)$ with the degreewise colimit over the small nonempty filtered poset $\\mathcal F_x(T)$. Every finite-subtree collapse map $NZ_w^{C_S}(x,x)\\to\\Delta^0$ is a weak homotopy equivalence by the preceding induction. These maps form a natural transformation to the constant point diagram. Apply [lem-coef-filtered-colimit-weak-equivalences]. The colimit of the constant point diagram is a point: every representative is the unique point of some index, and a common upper bound identifies any two representatives. Consequently $NZ_w^{C_T}(x,x)$ is weakly contractible.",
+   "uses": [
+    "lem-coef-tree-zigzag-finite-subtree-colimit",
     "lem-coef-filtered-colimit-weak-equivalences"
    ],
    "elementary": false,
@@ -122,7 +134,9 @@
   "lem-coef-hammock-graph-colimit-presentation",
   "lem-coef-hammock-inverted-arrow-actions",
   "lem-coef-nerve-natural-homotopy-equivalence",
-  "lem-coef-proper-word-colimit-invariance"
+  "lem-coef-proper-word-colimit-invariance",
+  "lem-coef-tree-leaf-zigzag-retraction",
+  "lem-coef-tree-zigzag-finite-subtree-colimit"
  ],
  "proof_origin": {
   "by": "agent",
@@ -216,7 +230,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dk-cofibrant-localization-comparison",
@@ -229,16 +243,16 @@
   "date": "2026-10-17",
   "item": "lem-coef-free-factor-hammock-comparison",
   "worker": "stage1",
-  "summary": "Second reading: four statement-only supports; free-product weak-equivalence preservation reused from the existing fixed-object free calculus; finite rooted-leaf contraction proved directly in Step 4 using the existing nerve-homotopy lemma. Componentwise cover, filtered-subtree and proper-word colimits, endpoint actions and component bijection checked.",
-  "blueprint": "Ancestor proof paragraph 2, displayed derived coefficient adjunction and inverse-limit calculation, via finite-adjunction diagrams and cosimplicial frames: DK Comparison Lemma 2.3 provides the mapping-space localization input. Steps 2–3 implement DK 5.8(i)–(ii); Steps 4–6 give the rooted-leaf induction, filtered-subtree and proper-word colimits, endpoint transport and component argument for DK 5.8(iii)."
+  "summary": "Q14 repair of the returned long Step 4: extracted the leaf-collapse functors and natural transformation, and the finite-subtree filtered-colimit presentation, as two statement-only support nodes. Kept the induction and the application of the existing nerve-homotopy and filtered-weak-equivalence lemmas in two short steps. Statement, Lean record, route and all other proof steps retained verbatim.",
+  "blueprint": "Ancestor proof paragraph 2, displayed derived coefficient adjunction and inverse-limit calculation, via finite-adjunction diagrams and cosimplicial frames: DK Comparison Lemma 2.3 provides the mapping-space localization input. Steps 2–3 implement DK 5.8(i)–(ii); Steps 4–6 give the rooted-leaf induction, filtered-subtree and proper-word colimits, endpoint transport and component argument for DK 5.8(iii). Q14 repair: former Step 4 is now Steps 4–5 and cites two auxiliary nodes for its hidden comparisons; former Steps 5–7 are now Steps 6–8."
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q26-1ccfe4080",
-  "group": "Q26",
+  "reviewer": "NT-Codex-Q14-eca3f6f2e",
+  "group": "Q14",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-1ccfe4080 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps, the 4 new nodes and all 7 cited statements in full. I also read Dwyer–Kan from the recorded PDF (scanned pages read as images, kept in /tmp only): CL 2.3 p.20, Prop 3.1–3.3 pp.20–21, 5.1–5.8 pp.24–25. The new nodes faithfully state DK 3.2 (pushout L^H C=D*L^H W, plus the true ordinary-localization pushout), 5.8(ii) (cover, made precise as a coproduct over the lifts of y), 3.1 (π0 is the ordinary localization, general) and 3.3 (u_*, u^* weak equivalences). The steps follow DK 5.8(i)-(iii). Step 2: the free-product weak-equivalence preservation comes from the last clause of the existing fixed-object free calculus, and the connected-component and empty-O cases are handled. Step 3: I checked the lifting of hammocks myself (endpoint identities force a common source and target lift; identity columns correspond). Step 4: Z_w is unreduced, so the singleton tree gives a point. In the leaf retraction, r fixes x, and eta is 1=>ir or ir=>1 with endpoint components identities. The infinite tree is a filtered union of full subcategories over finite subtrees containing x. Step 5: G(h)=NZ_h by definition, the constant point diagram is proper, and the empty word is initial. Step 6: transport along tree edges in either orientation, then π0 by DK 3.1. Small cases checked: empty O, generator-free D or W, W=C, one arrow, a loop (infinite-line cover). No duplicates in the DAG (checked against the DK 2.4 and 6.2 nodes, the infinity-localization node and the special-hammock nodes). No cycles; the only citer is lem-coef-dk-cofibrant-localization-comparison. All cited nodes are in the same unit, so no tool_uses. Statement unchanged, no SGA. New nodes are statement-only with all three search kinds and correct blueprint.from/via. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-eca3f6f2e (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, and DK source locations. All eight steps are justified; tree supports preserve endpoints and handle infinite trees by finite support. Checked 11,020 small diagrams, duplicates, route, and acyclicity. No corrections or tool_uses needed. Detailed review written to review.md."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.FreeFactorHammockComparison",

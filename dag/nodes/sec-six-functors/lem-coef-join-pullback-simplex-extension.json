@@ -14,9 +14,81 @@
   "def-coef-infinity-relative-cone",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The join $\\Delta^d\\star N(J)$ is the nerve of the ordinary join category $[d]\\star J$: its simplices are exactly an initial monotone string in $[d]$ followed by a string in $J$, with the same restriction operators. The nerve of an ordinary category fills every inner horn by composing the missing consecutive arrows. Hence the join is a quasicategory. Given an inner horn in $V$ and a prescribed simplex in the join over which it lies, lift the horn through the inner fibration $p$; this proves that $V$ is a quasicategory. The displayed map $\\bar\\tau$ is the pair $(\\tau,\\operatorname{id}_{\\Delta^d})$ by construction.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-cone",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3 proof, pp. 340-341; join pullback setup"
+   }
+  },
+  {
+   "text": "A simplex of $V$ whose vertices all lie over the terminal factor $N(J)$ is, degreewise in the join decomposition, a simplex of the pure $N(J)$ summand; conversely every such simplex lies in the inverse image $U$. Thus $U$ is the full subcategory on those vertices. Every vertex of $\\bar\\tau$ lies in the initial $\\Delta^d$ factor, so no vertex lies in $U$. If $\\bar\\tau$ were degenerate, its second coordinate $\\operatorname{id}_{\\Delta^d}$ would be a nonidentity degeneracy of the identity simplex, which is impossible. Therefore $\\bar\\tau$ is nondegenerate even when $\\tau$ or $p\\tau$ is degenerate.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3 proof, p. 340; terminal-factor and lifted-simplex observations"
+   }
+  },
+  {
+   "text": "For each $k$, a $k$-simplex of $V_{\\bar\\tau/}\\times_VU$ is a map $h:\\Delta^d\\star\\Delta^k\\to V$ extending $\\bar\\tau$ whose last-block evaluation lies in $U$. Projecting to the join gives a map $\\gamma:\\Delta^d\\star\\Delta^k\\to\\Delta^d\\star N(J)$ that is the identity on the first block and whose last block lands in $N(J)$. The degreewise join decomposition forces $\\gamma=\\operatorname{id}_{\\Delta^d}\\star\\sigma$ for a unique $\\sigma:\\Delta^k\\to N(J)$. Projecting $h$ to $E$ then gives an extension of $\\tau$ and the equality $ph=g\\circ(\\operatorname{id}_{\\Delta^d}\\star\\sigma)$, hence a $k$-simplex of $L$. Conversely, a pair $(\\sigma,h)$ in the definition of $L$ gives exactly such an $h$ and terminal evaluation in $U$. These mutually inverse correspondences commute with all restrictions, so they define a natural simplicial isomorphism $L\\cong V_{\\bar\\tau/}\\times_VU$, over $N(J)$ and over $U$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-cone",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3 proof, p. 340; identification of the restricted join-pullback slice"
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-relative-coslice-left-fibration] with $\\mathcal C=V$, $\\mathcal D=\\Delta^0$, $q:V\\to\\Delta^0$, $K=\\Delta^d$, $K_0=\\varnothing$, and $f=\\bar\\tau$. The map $q$ is an inner fibration because $V$ is a quasicategory by Step 1. Since $V_{f_0/}=V$ and both coslices of $\\Delta^0$ are $\\Delta^0$, the displayed target $\\mathcal E$ in that lemma identifies with $V$, and its map $\\rho$ is exactly terminal-block evaluation $V_{\\bar\\tau/}\\to V$. Thus this projection is a left fibration. Pull it back along $U\\hookrightarrow V$: a left-horn lifting square for the pullback gives one for the original map over the prescribed simplex in $U$, and pairing the lift with that simplex gives the required lift in the pullback. Also $U$ is a quasicategory: an inner horn in $U$ fills in $V$, and every vertex of the filler belongs to $U$, so fullness from Step 2 puts the filler in $U$. An inner horn in $V_{\\bar\\tau/}\\times_VU$ can therefore be filled by first filling its projection in $U$ and then lifting that filler along the left fibration. Via the isomorphism of Step 3, terminal evaluation $L\\to U$ is a left fibration and $L$ is a quasicategory.",
+   "uses": [
+    "lem-cbc-relative-coslice-left-fibration",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01BZ",
+    "place": "Proposition 4.3.6.8, specialized to q:V -> Delta^0 and K_0 empty; equivalently Corollary 4.3.6.12 (018K) and Proposition 4.3.6.1 (018F). The pullback and full-subcategory horn arguments are written out here."
+   }
+  },
+  {
+   "text": "An $k$-simplex of $N(C)_{p\\tau/}$ is a functor $[d]\\star[k]\\to C$ extending the functor $[d]\\to C$ represented by $p\\tau$. Restriction to the last vertex of $[d]$ gives a functor $\\{d\\}\\star[k]\\to C$. In the inverse direction, compose every arrow from an earlier vertex $i\\le d$ to the last vertex $d$ with the arrows in this restricted functor; the resulting composites are forced, and associativity gives the unique extension on all mixed simplices. These constructions are inverse in every degree and commute with simplicial operators, so restriction induces $N(C)_{p\\tau/}\\cong N(C)_{p\\tau(d)/}$. Under this correspondence the map $\\beta$ is carried to the map induced by $g|_{\\{d\\}\\star N(J)}$, since both are obtained by restricting $g$ along the same last-vertex inclusion. The argument uses only ordinary nerve composition and includes $J=\\varnothing$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 3.1.2.3 proof, p. 341; last-vertex restriction of the base coslice"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-relative-cone",
+  "lem-cbc-relative-coslice-left-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Theorem 3.1.2.3, printed pp. 340-341; generic join-pullback and last-vertex argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +131,38 @@
    "results": "{\"t\": \"2026-10-17T08:44:04Z\", \"tool\": \"leansearch\", \"query\": \"For an inner fibration over an ordinary category nerve, realize a restricted simplex extension category as a join coslice in a pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\", \"CategoryTheory.SimplicialNerve\", \"SSet.Truncated.rightExtensionInclusion\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.stdSimplex\", \"CategoryTheory.SimplicialObject.isCoskeletal_iff\", \"SSet.toTopSimplex\"], \"digest\": \"f7ce2e317911ca84\"}",
    "date": "2026-10-17",
    "verdict": "no match: nerve and strict Segal/coskeletal declarations concern ordinary nerves and truncation, not this restricted extension identification. CategoryTheory.Nerve.quasicategory (Quasicategory/Nerve.lean:32) supplies only the ordinary-nerve subfact."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "join pullback of an inner fibration over a nerve with a simplex extension category and left fibration",
+   "results": "{\"t\": \"2026-10-17T13:15:31Z\", \"tool\": \"leanfinder\", \"query\": \"join pullback of an inner fibration over a nerve with a simplex extension category and left fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Arrow.cechNerve_obj\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.SimplicialObject.augmentedCechNerve_obj_left_obj\", \"CategoryTheory.Arrow.cechNerve_map\", \"CategoryTheory.SimplicialObject.augmentedCechNerve_obj_left_map\"], \"digest\": \"fe9395c41b3f55a1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only ordinary-nerve and strict-Segal declarations; no restricted join-pullback extension theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory, SSet.LeftFibration, SSet.join",
+   "results": "{\"t\": \"2026-10-17T13:15:31Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory, SSet.LeftFibration, SSet.join\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SSet.LeftFibration'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the requested LeftFibration identifier is unknown and no join result was returned"
+  },
+  {
+   "tool": "grep",
+   "query": "Quasicategory.*join|left fibration.*slice",
+   "results": "{\"t\": \"2026-10-17T13:15:31Z\", \"tool\": \"grep\", \"query\": \"Quasicategory.*join|left fibration.*slice\", \"sub\": \"Mathlib\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no Mathlib source declaration matched the join/left-fibration expression"
+  },
+  {
+   "tool": "leansearch",
+   "query": "restricted simplex extension category as a join pullback undercategory of an inner fibration",
+   "results": "{\"t\": \"2026-10-17T13:15:32Z\", \"tool\": \"leansearch\", \"query\": \"restricted simplex extension category as a join pullback undercategory of an inner fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isRightKanExtension\", \"SimplexCategory.instSplitEpiCategory\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SimplexCategory.toTop\", \"SSet.instFinitePullback\", \"SimplicialObject.Splitting.IndexSet.pull\", \"SimplexCategory.toCat\", \"SimplexCategory.instHasStrongEpiMonoFactorisations\"], \"digest\": \"ed86a5c009c607ab\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned strict-Segal, nerve and model-category results, not this assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-family-cell-presentation",
@@ -72,7 +172,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, derived coefficient mapping-complex adjunction before R lim; operadic free extension in the fixed-object rectification chain: the operadic Kan-extension existence and parameter extension used to make the derived adjunction coherent. This prerequisite supplies source-cell presentation for the operadic outer-horn problem. Extracted prerequisite of source-cell presentation, returned proof Step 7: Join-pullback realization of a restricted simplex extension category.",
+   "place": "Proof paragraph 2, derived coefficient mapping-complex adjunction before R lim: generic join-pullback identification used in the source-cell presentation (HA Theorem 3.1.2.3, pp. 340-341).",
    "via": [
     "lem-coef-operadic-family-cell-presentation",
     "lem-coef-operadic-correspondence-kan-filling",
@@ -89,5 +189,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-join-pullback-simplex-extension",
+  "worker": "stage1",
+  "summary": "Read the imported statement and the existing parent use in lem-coef-operadic-family-cell-presentation. No project Lean declaration states this item. I retained the exact hypotheses and conclusions, and wrote a five-step degreewise proof: identify the join pullback as a quasicategory, prove fullness and nondegeneracy, identify the restricted extension simplicial set with the join coslice pullback, obtain the left fibration by the relative coslice lemma, and compute the ordinary-nerve last-vertex isomorphism. No new nodes were needed; all non-elementary input is the existing relative coslice left-fibration node.",
+  "blueprint": "The steps realize the imported prerequisite described in the item blueprint.from.place: the generic join-pullback realization used in the source-cell presentation (HA Theorem 3.1.2.3, pp. 340-341).",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-relative-coslice-left-fibration",
+    "why": "Step 4 uses the generic absolute join-coslice projection V_{tau-bar/} -> V, obtained by q:V -> Delta^0 and K_0 empty. This supplies a general horn-lifting tool, not any geometric or coefficient comparison or replacement of the unit route; the same-unit right-slice lemma has the opposite orientation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-relative-coslice-left-fibration"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q53-264872b31",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q53-264872b31 (reviewer sub-agent of L); spot-checked: Read the item, cited statements, sources and route in full. Corrected Step 4’s coslice specialization and declared the accepted relative-coslice tool use. All 171 finite checks passed; dependency closure is acyclic. Statement unchanged; no new nodes. Details in review.md and corrected JSON under fixes/.; 1 file(s) fixed by the reviewer"
  }
 }

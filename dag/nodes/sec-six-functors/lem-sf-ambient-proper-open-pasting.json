@@ -22,9 +22,172 @@
   "lem-sf-proper-open-projection-mate",
   "def-weil-compactifications-refinements"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First fix the comparisons on module sheaves, before deriving. The direct-image section identifications for a composite are induced by the unique fibre-product isomorphism; the two identifications for three maps coincide because their projections coincide. Taking the uniquely adjunction-compatible inverse-image comparison gives the unital, associative pullback compositor. The module comparison is the explicit one in lem-sf-proetale-tensor-composition-unit: on local tensors it sends $(m\\otimes a)\\otimes b$ to $m\\otimes c_u(a)b$. Its unit equation identifies it with the adjunction comparison, not merely an isomorphism of functors. Constant coefficient identifications are compatible with composition by lem-pur-proetale-constant-ring-composition. In (b) the same formulas commute with every semilinear transition: restriction and multiplication commute with the ring homomorphisms $A_{n+1}\\to A_n$. Thus they are actual maps of systems. Apply the exact-functor localization to these maps on complexes to obtain $d$. The simultaneous models of lem-coef-semilinear-derived-sections identify this construction with the specified system pullbacks.",
+   "uses": [
+    "lem-weil-pbc-site-morphism-composition",
+    "lem-sf-proetale-tensor-composition-unit",
+    "lem-pur-proetale-constant-ring-composition",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CB (lemma-composition-morphisms-sites); module lift: sites-modules.tex Tag 03D3 (lemma-adjoint-push-pull-modules); explicit system extension written here"
+   }
+  },
+  {
+   "text": "For $P_u\\dashv S_u$, use the composite unit and counit of def-weil-pbc-composite-adjunction. The inverse conjugate of $d$ gives $c:S_vS_u\\cong S_{vu}$, carrying these composite units and counits to the canonical ones. For ordinary unbounded derived direct images this is the canonical resolution comparison by lem-sfb-derived-composition-adjunction-normalization; in (b) apply the same exact-left-adjoint argument on the stipulated ringed diagram category, with its adjunctions supplied by lem-coef-semilinear-derived-sections. For open maps the comparison between $J_bJ_j$ and $J_{bj}$ is uniquely determined by the right-adjoint comparison $P_jP_b\\cong P_{bj}$ and its unit equation, by lem-weil-pbc-conjugate-iso-unit-equation. This gives $e$ with precisely the asserted normalization. Both parenthesizations for three maps have the same adjunction transpose, since $d$ is associative and the composite Hom bijection is the same three successive bijections. Injectivity of transposition identifies them; the identity case is identical with one identity Hom bijection. This proves naturality, associativity, unitality and compatibility with the composite adjunction for $c,e$.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E (lemma-derived-pushforward-composition), using derived.tex Tag 09T5 (lemma-derived-adjoint-functors); uniqueness of adjunction comparisons"
+   }
+  },
+  {
+   "text": "The tensor comparison also respects $d$. The monoidal inverse-image comparisons of lem-weil-pbc-left-exact-site-inverse-image-tensor give this first over $\\mathbf Z$. Passing to relative tensor products gives the same equality: after the coefficient identifications a local tensor $x\\otimes y$ is sent by either route to $P_ux\\otimes P_uy$, with any intermediate scalar multiplied into the final scalar. This follows directly from the formula for the module compositor in Step 1 and the balancing relation, so the equality holds on the sheaf tensor products. To derive it take K-flat resolutions with flat terms as in lem-weil-pbc-ringed-topoi-derived-tensor-pullback. Their successive pullbacks remain K-flat with flat terms, and both comparisons are the maps just checked on their total tensor complexes; localization gives $\\mu_{vu}=\\mu_u\\circ P_u(\\mu_v)$ after $d$ and tensor associators. In (b) use K-flat complexes on the ringed diagram site and the simultaneous tensor construction of lem-coef-semilinear-derived-sections. The scalar formula is already an equality of system chain maps, so localization gives the asserted system equality.",
+   "uses": [
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-sf-proetale-tensor-composition-unit",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3 (lemma-adjoint-push-pull-modules); relative tensor balancing and K-flat derivation of the inverse-image tensor comparison"
+   }
+  },
+  {
+   "text": "For a square $Q$, the projection $b:V_W\\to V$ is an open immersion by base change of $i$. Under this identification $V_W$ is the open inverse image $p^{-1}(W)$; since $k_1$ is open and factors through $b$, its factor $s$ is open as well. The map $q$ is separated, being a base change of the separated map $p$. Since $qs=r$ is proper, lem-weil-pbc-proper-over-separated makes $s$ proper. The proper-immersion lemma then makes $s$ closed. Thus $V_W=s(U)\\amalg C$ for the complementary open $C$. Notice that only separatedness of $p$ over $Z$ was used, and no separated structure morphism to $k$ was required. Moreover $q$ is of finite type by finite-type base change from $p$, and $V_W\\to W\\to\\operatorname{Spec}k$ is of finite type by composition, using lem-sfb-finite-type-composition-base-change. This verifies the finite-type hypothesis of the clopen-decomposition node used next.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-immersion-closed",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B-0F7D: open-immersion case; clopenness is the proper-over-separated and proper-immersion factorization underlying the normalization"
+   }
+  },
+  {
+   "text": "We shall check the pasting of $a$ on module sheaves. For the disjoint open cover $V_W=s(U)\\amalg C$, the module equivalence in lem-pur-finite-clopen-derived-decomposition identifies $F$ with $(s^*F,F|_C)$ and $s_!G$ with $(G,0)$. Consequently a map $F\\to s_!G$ is uniquely determined by its restriction $s^*F\\to G$, and the projection $F\\to s_!s^*F$ is $(1,0)$. For semilinear systems apply this sheaf equivalence at every $n$. Its explicit product-of-sections inverse commutes with restriction of scalars, so the equivalence and projection commute with all transition maps. A morphism of systems is a compatible family of component maps; hence the same uniqueness follows in the abelian system category. Combining this with full faithfulness of $b_!$, supplied by the open unit normalization, shows that a module or system map $b_!F\\to k_{1!}G=b_!s_!G$ is uniquely determined by its restriction to $U$. This is a sheaf/system calculation; it makes no assertion that derived evaluation is faithful.",
+   "uses": [
+    "lem-pur-finite-clopen-derived-decomposition",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TS (lemma-mapping-property-glue), specialized to the two disjoint open pieces; elementary extension from the cited module equivalence to semilinear systems"
+   }
+  },
+  {
+   "text": "Construct the sheaf comparison $a_Q$ by the open base-change isomorphism followed by $(1,0)$ in Step 5 and the open/pullback compositors. Its restriction to $U$ is the identity $r^*M\\to r^*M$: the restricted base-change map is the identity under the open units, and so is the projection on the selected component. It is the unique map with this property, since its source is $b_!q^*M$ after open base change and Step 5 applies. All operations in this construction are exact functors, so it gives a chain map on every complex and descends to the unbounded derived categories. The localized open adjunction has the localized unit and counit by lem-sfb-adjunction-localization; therefore the localized open base-change map is exactly the unit-normalized derived $\\beta$ of lem-sf-open-tensor-normalization, not an alternative isomorphism. It follows that the localized $a_Q$ is the intrinsic derived clopen composite in the question. Taking its mate by def-weil-pbc-adjunction-mate gives the displayed formula for $\\Gamma_Q$. The formula is the same $\\alpha,\\gamma$ normalization explicitly specified by lem-sf-proper-open-projection-mate, in both coefficient settings.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-adjunction-localization",
+    "def-weil-pbc-adjunction-mate",
+    "lem-sf-proper-open-projection-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), map normalization; sites-cohomology.tex Tag 07A7 (remark-base-change), proper-adjunction transpose; agent clopen construction in the stated ambient categories"
+   }
+  },
+  {
+   "text": "For vertical pasting, label the rows $U_a\\xrightarrow{j_a}V_a$ for $a=0,1,2$, with proper maps $r_a:U_{a-1}\\to U_a$, $p_a:V_{a-1}\\to V_a$ for $a=1,2$. On module sheaves form\n$$A=(a_{Q_1}P_{r_2})\\circ(P_{p_1}a_{Q_2}):P_{p_1}P_{p_2}J_{j_2}\\longrightarrow J_{j_0}P_{r_1}P_{r_2},$$\nwhere here $P,J$ denote underived exact functors. After restricting along $j_0$, the second factor is the pullback by $r_1$ of $P_{j_1}a_{Q_2}=1$, since $p_1j_0=j_1r_1$; the first factor restricts to $1$ by Step 6. Thus $P_{j_0}A=1$. Identify its source by open base change with $b_{\\rm out,!}q_{\\rm out}^*$ and its target with $b_{\\rm out,!}s_{\\rm out,!}(r_2r_1)^*$. The clopen uniqueness of Step 5 for the outer square identifies $A$ with its intrinsic $a$. This proves the geometric vertical identity before localization, also for system sheaves.",
+   "uses": [
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7C (lemma-shriek-proper-and-open-compose); explicit clopen-normalization verification for the open case"
+   }
+  },
+  {
+   "text": "For horizontal pasting, label the two squares by top opens $k_1:U\\to V$, $k_2:V\\to T$, bottom opens $i_1:W\\to Z$, $i_2:Z\\to Y$, and proper maps $r,p,q$. On module sheaves the pasted map is\n$$B=(J_{k_2}a_{Q_1})\\circ(a_{Q_2}J_{i_1}):P_qJ_{i_2}J_{i_1}\\longrightarrow J_{k_2}J_{k_1}P_r.$$\nRestrict along $k_2k_1$: the factor $a_{Q_2}J_{i_1}$ becomes the identity on $P_pJ_{i_1}$ after restriction to $V$, and the remaining factor becomes $P_{k_1}a_{Q_1}=1$. Hence the restriction of $B$ is identity. As in Step 7 its source is extension from the outer base-changed bottom open and its target is extension from the selected clopen component. Step 5 identifies it with the intrinsic $a$ of the outer square. The identifications here are precisely $e,d$ fixed in Steps 1-2. This proves the horizontal identity as module and system maps.",
+   "uses": [
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7D (lemma-shriek-proper-and-open-compose-horizontal); explicit clopen-normalization verification for the open case"
+   }
+  },
+  {
+   "text": "Apply the exact functors termwise to complexes in Steps 7-8. The localization universal property carries these equalities of natural transformations, their compositions and their compositors to equalities on the whole unbounded derived categories. Step 6 identifies the resulting maps with the intrinsic $a_Q$ there. Apply clause 2 of lem-weil-pbc-mate-pasting to Step 7, with $L_1=P_{r_2}$, $L_3=P_{r_1}$, $L_2=P_{p_2}$, $L_4=P_{p_1}$, $G=J_{j_2}$, $H=J_{j_1}$, $K=J_{j_0}$. It gives\n$$\\Gamma_{Q_2Q_1}=(S_{p_2}\\Gamma_{Q_1})\\circ(\\Gamma_{Q_2}S_{r_1}).$$\nApply clause 1 of the same node to Step 8, with $L_1=P_r,L_2=P_p,L_3=P_q,G=J_{i_1},G_2=J_{i_2},H=J_{k_1},H_2=J_{k_2}$. It gives\n$$\\Gamma_{Q_2Q_1}=(\\Gamma_{Q_2}J_{k_1})\\circ(J_{i_2}\\Gamma_{Q_1}).$$\nThe composite adjunctions are those of def-weil-pbc-composite-adjunction, so inserting $c,d,e$ is justified by Step 2. In (b) these are localizations and adjunction transposes in the system category itself, with the simultaneous models of lem-coef-semilinear-derived-sections. No equality is inferred from equalities of evaluated derived maps.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-composite-adjunction",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7C-0F7D, formal mate forms; sites-cohomology.tex Tags 0E46-0E47 (remark-compose-base-change, remark-compose-base-change-horizontal)"
+   }
+  },
+  {
+   "text": "With identity vertical maps the square has equal horizontal opens, its clopen factor is the identity, and $a_Q$ is the identity on open extension under the units; its proper-adjunction mate is the same identity. With identity horizontal maps the proper maps coincide, $a_Q=1_{P_p}$, and clause 4 of lem-weil-pbc-mate-pasting gives $\\Gamma_Q=1_{S_p}$. For a refinement $u$ the definition gives $uj_1=j_2$, with proper edges $1,u$ and open edges $j_1,j_2$, so it is among the squares already treated. Every intermediate proper/open square in a compatible refinement tower has precisely the hypotheses used in Steps 4-9, hence the same identities apply. The construction used no constructibility, Tor, boundedness, etale-origin, completed coefficient or cartesian-system condition. It constructs natural transformations on the stated categories, without asserting their invertibility.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7C-0F7D, identity cases and applications to compactification refinements"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-sf-proetale-tensor-composition-unit",
+  "lem-pur-proetale-constant-ring-composition",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-coef-semilinear-derived-sections",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-pur-finite-clopen-derived-decomposition",
+  "lem-sf-open-tensor-normalization",
+  "lem-sfb-adjunction-localization",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sf-proper-open-projection-mate",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B-0F7D, open-immersion map construction and composition laws; agent proof on ambient unbounded pro-etale and semilinear ringed diagram categories via clopen restriction uniqueness and mate pasting"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +230,45 @@
    "results": "25 hits: Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Adj.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Adj.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Adj.lean",
    "date": "2026-10-17",
    "verdict": "no match: generic mate pasting does not identify the intrinsic geometric clopen maps or give these coefficient-category realizations"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|conjugateEquiv.*comp [Mathlib/CategoryTheory]",
+   "results": "25 hits: Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Adj.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Adj.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Adj.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply adjunction/pullback composition or clopen topology, not the intrinsic non-Cartesian geometric comparison on both unbounded coefficient categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived extension by zero clopen projection proper open interchange pasting",
+   "results": "8 hits: PrimeSpectrum.isClopen_basicOpen_of_mul_add, TopologicalSpace.Clopens.toOpens, PrimeSpectrum.isClopen_iff_mul_add_zeroLocus, isClopen_of_disjoint_cover_open, TopologicalSpace.Clopens.ext, PrimeSpectrum.mulZeroAddOneEquivClopens, DiscreteQuotient.isClopen_preimage, AlgebraicGeometry.IsProper.instMorphismRestrict",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply adjunction/pullback composition or clopen topology, not the intrinsic non-Cartesian geometric comparison on both unbounded coefficient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "1 hits: CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply adjunction/pullback composition or clopen topology, not the intrinsic non-Cartesian geometric comparison on both unbounded coefficient categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical tensor pullback composition associativity strong monoidal inverse image derived sheaves",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, PresheafOfModules.pullback_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply adjunction/pullback composition or clopen topology, not the intrinsic non-Cartesian geometric comparison on both unbounded coefficient categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper open base change clopen projection maps compose on unbounded derived categories of sheaves",
+   "results": "8 hits: SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.sheafComposeIso_inv_fac, SheafOfModules.pullback_assoc, TopCat.Sheaf.pullbackIso",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits supply adjunction/pullback composition or clopen topology, not the intrinsic non-Cartesian geometric comparison on both unbounded coefficient categories"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-composition-projection-mate",
@@ -89,5 +287,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-ambient-proper-open-pasting",
+  "worker": "stage1",
+  "summary": "Proved the intrinsic geometric a-map pasting by uniqueness on its clopen summand at the module/system level, then localized and took proper-adjunction mates. Checked canonical compositors, tensor coherence and all identity/refinement cases. Reused existing nodes throughout; no new statement nodes.",
+  "blueprint": "fix-prop-projection-formula.proof.md, sentence \"The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]\": supplies ambient proper/open pasting needed for the composition/refinement calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "Generic Composition of morphisms of sites (Stacks 03CB) tool used in the explicit clopen/mate calculation; it does not replace a unit step, and this unit has no separate version of the required general statement."
+   },
+   {
+    "node": "lem-sf-proetale-tensor-composition-unit",
+    "why": "Generic The explicit pro-etale tensor pullback comparison preserves composite adjunction units tool used in the explicit clopen/mate calculation; it does not replace a unit step, and this unit has no separate version of the required general statement."
+   },
+   {
+    "node": "lem-pur-proetale-constant-ring-composition",
+    "why": "Generic Composition of canonical constant-ring maps on pro-etale sites tool used in the explicit clopen/mate calculation; it does not replace a unit step, and this unit has no separate version of the required general statement."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic Derived semilinear sections and coefficient-linear geometric operations tool used in the explicit clopen/mate calculation; it does not replace a unit step, and this unit has no separate version of the required general statement."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic Derived composition preserves the specified adjunction normalization tool used in the explicit clopen/mate calculation; it does not replace a unit step, and this unit has no separate version of the required general statement."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Generic Inverse image induced by a continuous left-exact site functor and its tensor structure tool used in the explicit clopen/mate calculation; it does not replace a unit step, and this unit has no separate version of the required general statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi tool used in the explicit clopen/mate calculation; it does not replace a unit step, and this unit has no separate version of the required general statement."
+   },
+   {
+    "node": "lem-pur-finite-clopen-derived-decomposition",
+    "why": "Generic Finite clopen decomposition of pro-etale derived coefficient categories tool used in the explicit clopen/mate calculation; it does not replace a unit step, and this unit has no separate version of the required general statement."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic Open-extension unit normalization for derived tensor and base change tool used in the explicit clopen/mate calculation; it does not replace a unit step, and this unit has no separate version of the required general statement."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic finite-type stability verifies that the constructed fibre product is a finite-type k-scheme for the clopen-decomposition tool; no unit proof step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-sf-proetale-tensor-composition-unit",
+  "lem-pur-proetale-constant-ring-composition",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-finite-clopen-derived-decomposition",
+  "lem-sf-open-tensor-normalization",
+  "lem-sfb-finite-type-composition-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q17-d872409e1",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q17-d872409e1 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all ten proof steps, every cited node statement, unit/chapter route, blueprint proof, and cited Stacks passages. Checked coefficient categories, base-change and mate normalizations, finite-type/separated/proper hypotheses, vertical and horizontal pasting, identities, refinements, duplicate candidates, Mathlib searches, and edge cases. No mathematical, citation, route, or statement fault found; no fixes required."
  }
 }
