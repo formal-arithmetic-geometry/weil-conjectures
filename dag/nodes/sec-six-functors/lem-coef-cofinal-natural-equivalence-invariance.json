@@ -10,9 +10,67 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose nested universes large enough to contain A, B, the functors and the coherent equivalence, and regard A and B as small in the enlarged universe. The displayed pullback M_b(w) is exactly the coherent comma (b↓w) in [lem-coef-infinity-cofinality-space-test]. Its equivalence of conditions (3) and (4) says that M_b(w) is weakly contractible for every b if and only if colim_{a∈A} H_B(b,w(a)) is contractible for every b. We use this equivalence of universally quantified conditions, without asserting a pointwise comparison of the two objects. The coherent mapping bifunctor H_B and its source-fixed arrow model are supplied by [lem-coef-space-transport-classification]. The containing-universe convention permits this enlargement, and the space test supplies the small space colimits used below.",
+   "uses": [
+    "lem-coef-infinity-cofinality-space-test",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Corollary 4.1.1.10 and Proposition 4.1.1.8, with Theorem 4.1.3.1; the mapping-space proof of invariance under a coherent natural equivalence."
+   }
+  },
+  {
+   "text": "Let η:u⇒v be the equivalence edge in Fun(A,B). By [lem-coef-infinity-pointwise-equivalences], every component η_a:u(a)→v(a) is an equivalence edge of B. Composing the map A×Δ¹→B representing η with the source-fixed coherent mapping functor H_B(b,−):B→S of [lem-coef-space-transport-classification] gives an edge θ of Fun(A,S) between the diagrams a↦H_B(b,u(a)) and a↦H_B(b,v(a)); its component at a is the image H_B(b,η_a), which by the transport classification acts on H_B(b,u(a)) by postcomposition with η_a, including on higher simplices. A simplicial map carries an equivalence edge, together with its two inverse-triangle witnesses, to an equivalence edge, so every component of θ is an equivalence edge of S. By [lem-coef-infinity-pointwise-equivalences] applied in Fun(A,S), θ is an equivalence edge: the two diagrams are coherently naturally equivalent.",
+   "uses": [
+    "lem-coef-infinity-pointwise-equivalences",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Corollary 4.1.1.10 and Proposition 4.1.1.8, with Theorem 4.1.3.1; the mapping-space proof of invariance under a coherent natural equivalence."
+   }
+  },
+  {
+   "text": "Fix b and denote the diagrams in Step 2 by F and G and their coherent equivalence by θ:F→G. Choose an inverse equivalence edge ρ:G→F with its two inverse-triangle witnesses. Take a colimiting cocone λ:F→Δ_A L in S. Compose to get μ=λρ:G→Δ_A L. For any space T, the dual cocone criterion of [lem-cbc-enhanced-functor-cone-calculus] says that Map(L,T)→Map(F,Δ_A T), a↦(Δ_A a)λ, is an equivalence. In the quasicategory Fun(A,S), precomposition with ρ gives Map(F,Δ_A T)→Map(G,Δ_A T); by the associativity and unit homotopies of the canonical composition in [lem-coef-infinity-mapping-composition], precomposition with θ is a homotopy inverse, because θρ and ρθ have the identity component classes. The same associativity homotopy identifies the composite Map(L,T)→Map(F,Δ_A T)→Map(G,Δ_A T) up to homotopy with the cocone test a↦(Δ_A a)μ for μ, so that test is an equivalence and μ is colimiting as well. Thus the same space L is the apex of a colimiting cocone on each diagram. Any chosen colimit of G is equivalent to L: both cocones are initial objects of the same cocone category, whose initial-object full subcategory is a contractible Kan complex by the cited calculus, and the apex projection carries the resulting equivalence edge to an equivalence edge of S. Hence the two colimit spaces are equivalent.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Corollary 4.1.1.10 and Proposition 4.1.1.8, with Theorem 4.1.3.1; the mapping-space proof of invariance under a coherent natural equivalence."
+   }
+  },
+  {
+   "text": "Contractibility of a space is invariant under equivalence. By Step 3, for each b the colimit for u is contractible exactly when the colimit for v is contractible. Thus the universally quantified condition (4) of [lem-coef-infinity-cofinality-space-test] holds for u if and only if it holds for v. Apply the equivalence of conditions (3) and (4) from Step 1 on both sides to conclude the asserted universal weak contractibility of the exact comma simplicial sets.",
+   "uses": [
+    "lem-coef-infinity-cofinality-space-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Corollary 4.1.1.10 and Proposition 4.1.1.8, with Theorem 4.1.3.1; the mapping-space proof of invariance under a coherent natural equivalence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-cofinality-space-test",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-space-transport-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Corollary 4.1.1.10 and Proposition 4.1.1.8, with Theorem 4.1.3.1; mapping-space proof of natural-equivalence invariance."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +106,45 @@
    "results": "{\"t\": \"2026-10-17T08:42:03Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent natural equivalence between infinity functors preserves finality detected by contractibility of arrow comma quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.final_iff_equivalence_comp\", \"CategoryTheory.Functor.final_iff_comp_equivalence\", \"CategoryTheory.Functor.final_of_equivalence_comp\", \"CategoryTheory.Functor.final_comp_equivalence\", \"CategoryTheory.Functor.final_equivalence_comp\", \"CategoryTheory.Functor.final_of_final_costructuredArrowToOver\", \"CategoryTheory.Grothendieck.final_map\", \"CategoryTheory.Grothendieck.final_pre\"], \"digest\": \"79cf4ce4077976c6\"}",
    "date": "2026-10-17",
    "verdict": "no match: CategoryTheory/Limits/Final.lean:162-166 states final_of_natIso and final_natIso_iff only for ordinary categories, with connected ordinary comma categories. Arbitrary quasicategories and weak contractibility of coherent comma simplicial sets are not a one-line specialization. The homotopy-category and nerve hits do not cover coherent finality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cofinality of quasicategory functors is invariant under a coherent natural equivalence, via weakly contractible arrow comma categories",
+   "results": "{\"t\": \"2026-10-17T10:16:31Z\", \"tool\": \"leanfinder\", \"query\": \"Cofinality of quasicategory functors is invariant under a coherent natural equivalence, via weakly contractible arrow comma categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCofiltered.of_equivalence\", \"CategoryTheory.IsCofilteredOrEmpty.of_equivalence\", \"CategoryTheory.CostructuredArrow.isEquivalenceMap₂\", \"CategoryTheory.isCofiltered_costructuredArrow_of_isCofiltered_of_exists\", \"CategoryTheory.CostructuredArrow.mapNatIso\", \"CategoryTheory.Equivalence.precoherent\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"CategoryTheory.Limits.Cocones.functorialityEquivalence_functor\"], \"digest\": \"b9b18d67e2dc761e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary cofiltered categories, costructured arrows, or nerves; none states coherent quasicategorical comma weak contractibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.final, natural equivalence, comma",
+   "results": "{\"t\": \"2026-10-17T10:16:32Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.final, natural equivalence, comma\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Functor.final'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the query was not recognized as a Mathlib identifier and returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "final_of_natIso|final_natIso_iff|weakly contractible|cofinal",
+   "results": "{\"t\": \"2026-10-17T10:16:32Z\", \"tool\": \"grep\", \"query\": \"final_of_natIso|final_natIso_iff|weakly contractible|cofinal\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Indization/IndObject.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\"], \"digest\": \"a64e901a97b6e1e0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib Final.lean has ordinary final_of_natIso/final_natIso_iff only; no coherent quasicategory comma statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofinality of infinity categorical functors is invariant under coherent natural equivalence",
+   "results": "{\"t\": \"2026-10-17T10:16:32Z\", \"tool\": \"leansearch\", \"query\": \"Cofinality of infinity categorical functors is invariant under coherent natural equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCofiltered.of_equivalence\", \"CategoryTheory.Functor.CoconeTypes.isColimit_precompose_iff\", \"CategoryTheory.Limits.HasColimit.isoOfEquivalence\", \"CategoryTheory.Functor.CoconeTypes.IsColimit.precompose\", \"CategoryTheory.Limits.IsColimit.mapCoconeEquiv\", \"CategoryTheory.Functor.CoconeTypes.IsColimitCore.precompose\", \"CategoryTheory.largeCurriedCoyonedaLemma\", \"CategoryTheory.Limits.IsColimit.ofCoconeEquiv\"], \"digest\": \"15d7ec1c7f32cdf5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary-category cofiltered/colimit equivalence declarations, not the coherent quasicategory assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturally equivalent quasicategory functors have equivalent comma mapping space colimits for every target vertex",
+   "results": "{\"t\": \"2026-10-17T10:16:35Z\", \"tool\": \"leanfinder\", \"query\": \"Naturally equivalent quasicategory functors have equivalent comma mapping space colimits for every target vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"CategoryTheory.Limits.IsColimit.ofWhiskerEquivalence\", \"CategoryTheory.Limits.HasColimit.isoOfEquivalence\", \"CategoryTheory.MorphismProperty.colimitsOfShape_eq_of_equivalence\", \"CategoryTheory.Limits.IsColimit.whiskerEquivalenceEquiv\", \"CategoryTheory.Limits.HasColimit.isoOfEquivalence_hom_π\"], \"digest\": \"7074fd20ef646334\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary cofiltered categories, costructured arrows, or nerves; none states coherent quasicategorical comma weak contractibility."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-filtered-cocartesian-section-cofinality",
@@ -63,7 +156,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction infrastructure reached through lem-coef-presentable-infinity-adjoints; HTT Proposition 5.4.4.3, used in the pushout and two-out-of-three parts of Lemma 5.5.4.14 to express diagrams in an accessible functor category as filtered colimits of small compact diagrams. General tool: Filtered coherent sections and cofinal evaluation. Repair extraction: HTT Corollary 4.1.1.10 and Proposition 4.1.1.8, with Theorem 4.1.3.1; mapping-space proof for the exact arrow-comma model extracted from the returned Step 8.",
+   "place": "Repair extraction from the filtered coherent sections argument: HTT Corollary 4.1.1.10 and Proposition 4.1.1.8, with Theorem 4.1.3.1; mapping-space proof for the exact arrow-comma model.",
    "via": [
     "lem-coef-filtered-cocartesian-section-cofinality",
     "lem-coef-accessible-diagram-presentations",
@@ -79,5 +172,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cofinal-natural-equivalence-invariance",
+  "worker": "stage1",
+  "summary": "Split the extracted natural-equivalence invariance argument into four steps. Apply the cofinality space test with its stated universal quantifier in an enlarged universe, transport the coherent equivalence through the mapping bifunctor, compare colimits by explicit inverse-equivalence precomposition in the cocone criterion, and transfer contractibility. Repaired the earlier pointwise reading of the space test and removed its uncited Yoneda invocation. No new nodes; statement unchanged. Maintainer reader (Q136 review): Step 2 now cites the in-unit lem-coef-infinity-pointwise-equivalences for the componentwise criterion; Step 3 cites lem-coef-infinity-mapping-composition for the associativity/unit homotopies of precomposition.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: the filtered coherent sections/cofinal evaluation tool; specifically the repair extraction from HTT Corollary 4.1.1.10, Proposition 4.1.1.8 and Theorem 4.1.3.1 for the exact arrow-comma mapping-space comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Step 3 uses its dual cocone mapping-space criterion for colimiting cocones and the contractibility of the full subcategory of initial objects; no node of unit sk-prop-sf-biduality-general states these general quasicategory facts. The componentwise equivalence criterion is taken from the in-unit lem-coef-infinity-pointwise-equivalences instead."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-f67cb695d",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-f67cb695d (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full: def-cbc-enhanced-diagrams-cones, lem-coef-infinity-cofinality-space-test, lem-coef-space-transport-classification and lem-cbc-enhanced-functor-cone-calculus. I also read the citer's step 10, the unit, and the in-unit candidates. The statement is true and unchanged. M_b(w) is literally the comma of condition (3) of the space test, with the same orientation. Small cases agree: A empty; B empty; a point; a contractible groupoid N(0≅1) with u=0, v=1. N([1]) with u=0, v=1 is not final for u but is final for v, which shows the equivalence hypothesis is needed. No duplicate: cofinal-colimit-restriction covers only composition with functor equivalences. There are no new nodes and no cycle (closures checked by script). Step 1 correctly uses (3)⇔(4) as an equivalence of the universally quantified conditions, after enlarging the universe. Step 4 is elementary. Two repairs are made in fixes/.../lem-coef-cofinal-natural-equivalence-invariance.json. (C7) Step 2 took the componentwise equivalence criterion from the off-route cbc calculus; it now cites the in-unit lem-coef-infinity-pointwise-equivalences, applied both in Fun(A,B) and in Fun(A,S). (C1/C3) Step 3 used, without citation, that precomposition with ρ and θ are mutually inverse, and called the composite 'precisely' the cocone test; both need associativity and unit homotopies. It now cites lem-coef-infinity-mapping-composition, says 'up to homotopy', and adds that the apex projection preserves equivalences. proof_deps are updated. The accepted tool_use is lem-cbc-enhanced-functor-cone-calculus, for step 3 only: the dual cocone criterion and the contractible Kan complex of initial objects. No node of this unit states these, and its why field is updated. HTT is not archived (WANTED); proof_origin is honestly agent. No SGA is used.; 1 file(s) fixed by the reviewer"
  }
 }
