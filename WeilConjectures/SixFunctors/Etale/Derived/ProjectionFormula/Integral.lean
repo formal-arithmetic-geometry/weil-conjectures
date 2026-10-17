@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.TorsionReduction
 
 /-!
 # The projection formula at the integral stage `𝒪_E`
@@ -106,15 +107,19 @@ theorem derivedCompleteIntegral_derivedTensor_rightDerivedLowerShriek (f : X ⟶
       (((derivedTensor 𝐌 Y).obj ((R(f)_![𝐌]).obj K)).obj L) :=
   sorry
 
-/-- Step 3 of blueprint `sk-thm-sf-pf-adic`: the argument of `Rf_!` in the target of the
-projection map is derived complete.
+/-- Step 3 of blueprint `sk-thm-sf-pf-adic`: the target of the projection map is derived
+complete.
 
 If `K` and `L` are bounded constructible, derived complete for `𝔪_E` and of finite Tor
-amplitude, then `K ⊗ᴸ Lf^* L` is derived complete for `𝔪_E`. As for
+amplitude, then `Rf_!(K ⊗ᴸ Lf^* L)` is derived complete for `𝔪_E`. As for
 `AlgebraicGeometry.Etale.derivedCompleteIntegral_derivedTensor_rightDerivedLowerShriek`, the
 blueprint deduces this from the uniform-tower reconstruction
-(`lem-weil-pbc-reconstruction-uniform-tower`). -/
-theorem derivedCompleteIntegral_derivedTensor_leftDerivedUpperStar (f : X ⟶ Y)
+(`lem-weil-pbc-reconstruction-uniform-tower`): the reductions `Rf_!(K_n ⊗ᴸ Lf^* L_n)` are bounded
+constructible of uniformly bounded amplitude. Completeness of `K ⊗ᴸ Lf^* L` alone would not
+suffice: `Rf_!` does not preserve derived completeness in general (an extension by zero `j_!` of a
+product of skyscraper sheaves at closed points accumulating at the boundary is not complete). -/
+theorem derivedCompleteIntegral_rightDerivedLowerShriek_derivedTensor (f : X ⟶ Y)
+    [HasCompactification f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌))
     (hKc : DerivedCategory.boundedConstructible 𝐌 X K)
@@ -123,9 +128,57 @@ theorem derivedCompleteIntegral_derivedTensor_leftDerivedUpperStar (f : X ⟶ Y)
     (hLc : DerivedCategory.boundedConstructible 𝐌 Y L)
     (hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L)
     (hLt : DerivedCategory.finiteTorAmplitude 𝐌 Y L) :
-    _root_.DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E
-      (((derivedTensor 𝐌 X).obj K).obj ((L((f)^*[𝐌])).obj L)) :=
+    _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
+      ((R(f)_![𝐌]).obj (((derivedTensor 𝐌 X).obj K).obj ((L((f)^*[𝐌])).obj L))) :=
   sorry
+
+local instance : IsDomain (Shrink.{u + 1} (PadicAlgCl.integers l E)) :=
+  (PadicAlgCl.shrinkRingEquiv.{w, u} l E).symm.toMulEquiv.isDomain _
+
+local instance : IsPrincipalIdealRing (Shrink.{u + 1} (PadicAlgCl.integers l E)) :=
+  IsPrincipalIdealRing.of_surjective (PadicAlgCl.shrinkRingEquiv.{w, u} l E).toRingHom
+    (PadicAlgCl.shrinkRingEquiv.{w, u} l E).surjective
+
+/-- Some nonzero integer (a power of the residue characteristic) lies in `𝔪_Eⁿ`. -/
+lemma exists_natCast_mem_maximalIdealShrink_pow (n : ℕ) :
+    ∃ N : ℕ, N ≠ 0 ∧
+      (N : Shrink.{u + 1} (PadicAlgCl.integers l E)) ∈ PadicAlgCl.maximalIdealShrink l E ^ n := by
+  let k := IsLocalRing.ResidueField (PadicAlgCl.integers l E)
+  have hp : ringChar k ≠ 0 := CharP.char_ne_zero_of_finite k (ringChar k)
+  have hmem : ((ringChar k : ℕ) : PadicAlgCl.integers l E) ∈
+      IsLocalRing.maximalIdeal (PadicAlgCl.integers l E) := by
+    rw [← IsLocalRing.residue_eq_zero_iff, map_natCast]
+    exact ringChar.Nat.cast_ringChar
+  refine ⟨ringChar k ^ n, pow_ne_zero n hp, ?_⟩
+  rw [Nat.cast_pow]
+  refine Ideal.pow_mem_pow ?_ n
+  have := Ideal.mem_map_of_mem (PadicAlgCl.shrinkRingEquiv.{w, u} l E) hmem
+  rwa [map_natCast] at this
+
+/-- Blueprint `thm-sf-pf-field`: the compatibility with finite reduction, and Steps 1 and 2 of
+`sk-thm-sf-pf-adic`.
+
+If `K` is bounded of finite Tor amplitude and `L` is bounded constructible over `𝒪_E`, the
+reduction `ρ_n(PF_{f, K, L}) = PF_{f, K, L} ⊗ᴸ (𝒪_E/𝔪_Eⁿ)_Y` of the projection map is an
+isomorphism for every `n`. As in the blueprint, `ρ_n(PF_{f, K, L})` is a finite-level projection
+map (`sk-prop-sf-pf-reduction`), which is an isomorphism by the argument of the finite projection
+formula (`sk-thm-sf-pf-finite`): see
+`AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_projectionMap_of_nsmul`. Derived
+completeness is not needed. -/
+theorem isIso_reductionModIdeal_pow_map_projectionMap_of_boundedConstructible
+    (f : X ⟶ Y) [HasCompactification f]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌))
+    (hKc : DerivedCategory.boundedConstructible 𝐌 X K)
+    (hKt : DerivedCategory.finiteTorAmplitude 𝐌 X K)
+    (hLc : DerivedCategory.boundedConstructible 𝐌 Y L) (n : ℕ) :
+    IsIso ((reductionModIdeal _ Y (PadicAlgCl.maximalIdealShrink l E ^ n)).map
+      (((projectionMap 𝐌 f).app K).app L)) := by
+  obtain ⟨ϖ, hϖ, hI⟩ :=
+    PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E
+  obtain ⟨N, hN, hNJ⟩ := exists_natCast_mem_maximalIdealShrink_pow l E n
+  rw [hI] at hNJ ⊢
+  exact isIso_reductionModIdeal_map_projectionMap_of_nsmul hϖ n hN hNJ f K L hKc.1 hKt hLc
 
 /-- Steps 1 and 2 of blueprint `sk-thm-sf-pf-adic`: the reduction of the projection map modulo
 `𝔪_E` is an isomorphism.
@@ -135,7 +188,9 @@ amplitude, then `ρ(PF_{f, K, L})`, the image of the projection map under the re
 `- ⊗ᴸ (𝒪_E/𝔪_E)_Y`, is an isomorphism. In the blueprint, `ρ(PF_{f, K, L})` is identified with the
 finite-level projection map `PF_{f, K₁, L₁}` by the reduction square of
 `sk-prop-sf-pf-reduction`, and the latter is an isomorphism by the finite-level projection
-formula `sk-thm-sf-pf-finite`. -/
+formula `sk-thm-sf-pf-finite`; this is
+`AlgebraicGeometry.Etale.isIso_reductionModIdeal_pow_map_projectionMap_of_boundedConstructible`
+for `n = 1`. -/
 theorem isIso_reductionModIdeal_map_projectionMap_of_derivedCompleteIntegral (f : X ⟶ Y)
     [HasCompactification f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
@@ -147,8 +202,10 @@ theorem isIso_reductionModIdeal_map_projectionMap_of_derivedCompleteIntegral (f 
     (hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L)
     (hLt : DerivedCategory.finiteTorAmplitude 𝐌 Y L) :
     IsIso ((reductionModIdeal _ Y (PadicAlgCl.maximalIdealShrink l E)).map
-      (((projectionMap 𝐌 f).app K).app L)) :=
-  sorry
+      (((projectionMap 𝐌 f).app K).app L)) := by
+  have := isIso_reductionModIdeal_pow_map_projectionMap_of_boundedConstructible l E f K L hKc hKt
+    hLc 1
+  rwa [pow_one] at this
 
 /-- Blueprint `sk-thm-sf-pf-adic`: Projection formula: the derived-complete stage; and its
 detailed node `thm-sf-pf-adic`: Derived-complete reconstruction over `𝒪_E`.
@@ -162,9 +219,8 @@ The proof follows the blueprint: the reduction of the projection map modulo `�
 isomorphism
 (`AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_projectionMap_of_derivedCompleteIntegral`),
 both its source and target are derived complete
-(`AlgebraicGeometry.Etale.derivedCompleteIntegral_derivedTensor_rightDerivedLowerShriek`, and
-`AlgebraicGeometry.Etale.derivedCompleteIntegral_derivedTensor_leftDerivedUpperStar` together
-with `AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedLowerShriek`), and the
+(`AlgebraicGeometry.Etale.derivedCompleteIntegral_derivedTensor_rightDerivedLowerShriek` and
+`AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedLowerShriek_derivedTensor`), and the
 reduction is conservative on derived complete objects
 (`AlgebraicGeometry.Etale.hasProjectionFormula_of_isIso_reductionModIdeal_map`).
 Constructibility is needed for the derived completeness of the two sides: the derived tensor
@@ -182,9 +238,8 @@ theorem hasProjectionFormula_of_derivedCompleteIntegral (f : X ⟶ Y) [HasCompac
   hasProjectionFormula_of_isIso_reductionModIdeal_map l E f K L
     (derivedCompleteIntegral_derivedTensor_rightDerivedLowerShriek l E f K L
       hKc hK hKt hLc hL hLt)
-    (derivedCompleteIntegral_rightDerivedLowerShriek l E f _
-      (derivedCompleteIntegral_derivedTensor_leftDerivedUpperStar l E f K L
-        hKc hK hKt hLc hL hLt))
+    (derivedCompleteIntegral_rightDerivedLowerShriek_derivedTensor l E f K L
+      hKc hK hKt hLc hL hLt)
     (isIso_reductionModIdeal_map_projectionMap_of_derivedCompleteIntegral l E f K L
       hKc hK hKt hLc hL hLt)
 

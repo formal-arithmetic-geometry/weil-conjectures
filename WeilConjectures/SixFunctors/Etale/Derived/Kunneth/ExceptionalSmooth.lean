@@ -52,6 +52,7 @@ lemma boundedConstructibleFiniteTor_of_constructibleFiniteTor {X : Scheme.{u}}
   obtain ⟨hbc, a, b, h⟩ := hK
   exact ⟨hbc, a, b, hasTorAmplitudeIn_of_torAmplitudeIn h⟩
 
+set_option maxHeartbeats 1000000 in
 /-- Smooth purity in tensor form: `Rf^! K ≅ Lf^* K ⊗ᴸ Λ_X(d)[2d]`. -/
 lemma nonempty_iso_rightDerivedUpperShriek_tensor_tateObject [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k] {X Y : Scheme.{u}} {d : ℕ} (f : X ⟶ Y) [IsSeparated f]

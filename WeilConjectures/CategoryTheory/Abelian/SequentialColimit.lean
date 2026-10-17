@@ -97,6 +97,7 @@ noncomputable def partialSumStep (k N : ℕ) : partialSum F k N ⟶ partialSum F
 noncomputable def partialSumFunctor (k : ℕ) : ℕ ⥤ C :=
   Functor.ofSequence (partialSumStep F k)
 
+@[reassoc]
 lemma ι_partialSumFunctor_map (k : ℕ) {N M : ℕ} (h : N ≤ M) (i : ℕ) (hi : i < N + k + 1) :
     biproduct.ι (partialFamily F (N + k)) ⟨i, hi⟩ ≫
         (partialSumFunctor F k).map (homOfLE h) =
@@ -163,8 +164,9 @@ lemma partialSumSubShift_π_zero (N : ℕ) :
   refine biproduct.hom_ext' _ _ fun i ↦ ?_
   obtain ⟨i, hi⟩ := i
   rcases i with _ | i
-  · simp [partialSumSubShift, biproduct.ι_π, Preadditive.sub_comp]
-  · simp [partialSumSubShift, biproduct.ι_π, Preadditive.sub_comp]
+  · simp [partialSumSubShift, Preadditive.sub_comp]
+    rfl
+  · simp [partialSumSubShift, Preadditive.sub_comp]
 
 lemma partialSumSubShift_π_succ (N j : ℕ) (hj : j + 1 < N + 0 + 1) :
     partialSumSubShift F N ≫ biproduct.π (partialFamily F (N + 1)) ⟨j + 1, by omega⟩ =
@@ -174,11 +176,11 @@ lemma partialSumSubShift_π_succ (N j : ℕ) (hj : j + 1 < N + 0 + 1) :
   obtain ⟨i, hi⟩ := i
   by_cases h₁ : i = j + 1
   · subst h₁
-    simp [partialSumSubShift, biproduct.ι_π, Preadditive.sub_comp]
+    simp [partialSumSubShift, Preadditive.sub_comp]
   · by_cases h₂ : i = j
     · subst h₂
-      simp [partialSumSubShift, biproduct.ι_π, Preadditive.sub_comp]
-    · simp [partialSumSubShift, biproduct.ι_π, Preadditive.sub_comp, h₁, h₂]
+      simp [partialSumSubShift, Preadditive.sub_comp]
+    · simp [partialSumSubShift, Preadditive.sub_comp, h₁, h₂]
 
 instance mono_partialSumSubShift (N : ℕ) : Mono (partialSumSubShift F N) where
   right_cancellation {T} g₁ g₂ hg := by
@@ -205,6 +207,8 @@ instance mono_partialSumSubShift (N : ℕ) : Mono (partialSumSubShift F N) where
 end PartialSum
 
 section Abelian
+
+attribute [local instance] Abelian.hasFiniteBiproducts
 
 variable [Abelian C] (F : ℕ ⥤ C) {P : Cofan fun n : ℕ ↦ F.obj n} (hP : IsColimit P)
 

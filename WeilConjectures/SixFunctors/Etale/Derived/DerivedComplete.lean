@@ -163,6 +163,13 @@ theorem derivedComplete_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
   -- complete object are complete by the argument for `Rf_*`, so it suffices that `i^*`
   -- preserves completeness of `Rj_* K`. Should that fail, `Rf_!` on the adic category has to
   -- be defined as the derived completion of `Rg_* j_!`.
+  -- WARNING: as stated (for arbitrary derived complete `K`) this is false. Take
+  -- `j : 𝔾_m ⟶ 𝔸¹` over an algebraically closed field, closed points `x_n ⟶ 0` of `𝔾_m` and
+  -- `K = ∏_n (x_n)_* (Λ/ϖⁿ)`, which is derived complete. Then `Rj_* K` is complete, but the stalk
+  -- of `H⁰(Rj_* K)` at `0` is a quotient of `∏_n Λ/ϖⁿ` by finitely supported sequences, which
+  -- contains a nonzero `ϖ`-divisible system and is not derived complete; so `j_! K` is not.
+  -- The projection formula at the integral stage no longer uses this statement
+  -- (`AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedLowerShriek_derivedTensor`).
   sorry
 
 /-- **The coefficient dual preserves derived completeness.** For a principal ideal `I` of a

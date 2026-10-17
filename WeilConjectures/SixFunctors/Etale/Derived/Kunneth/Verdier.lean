@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalSmooth
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
 
 /-!
@@ -152,7 +151,7 @@ lemma hasCompactification_mapOverBase_id {S X Y : Scheme.{u}} (a : X ⟶ S) (b :
     HasCompactification.comp_of_isProper _ _
   have : HasCompactification (e.hom ≫ pullback.fst a b ≫ ι.inv) :=
     HasCompactification.comp_of_isOpenImmersion _ _
-  refine HasCompactification.of_eq ?_
+  refine HasCompactification.of_eq (f := e.hom ≫ pullback.fst a b ≫ ι.inv) ?_
   rw [← cancel_mono ι.hom]
   simp [e, ι]
 

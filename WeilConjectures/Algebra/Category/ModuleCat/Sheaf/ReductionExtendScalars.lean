@@ -72,13 +72,12 @@ noncomputable def adjunction : D.Φ ⊣ res :=
         dsimp at h
         rw [← reassoc_of% h]
         congr 1
-        exact (Equiv.ofBijective_apply_symm_apply _ _ g).symm
+        exact ((Equiv.ofBijective _ (D.bijective_r_app_comp_map _ _)).apply_symm_apply g).symm
       homEquiv_naturality_right f g := by simp }
 
 @[simp]
 lemma adjunction_unit_app (F : 𝒜) : D.adjunction.unit.app F = D.r.app F := by
-  change D.r.app F ≫ res.map (𝟙 _) = _
-  simp
+  simp [adjunction]
 
 end CategoryTheory.Functor.ReductionDatum
 
@@ -128,6 +127,7 @@ lemma extendScalarsAdjunction_unit_app (F : Sheaf J (ModuleCat.{u + 1} A)) :
     (reductionAdjunction J hf ha) F
   have := restrictScalars_full J f hf
   rw [reductionAdjunction, Functor.ReductionDatum.adjunction_unit_app] at h
+  change _ = (reductionNatTrans J f hf).app F at h
   rw [← h, Category.assoc, ← Functor.map_comp]
   simp [extendScalarsIsoReductionFunctor]
 
@@ -140,11 +140,13 @@ noncomputable def extendScalarsCompRestrictScalarsIso :
   Functor.isoWhiskerRight (extendScalarsIsoReductionFunctor J hf ha) _ ≪≫
     reductionFunctorCompRestrictScalarsIso J f hf
 
+include hf in
 /-- Restriction of scalars along a surjective ring morphism reflects isomorphisms. -/
 lemma reflectsIsomorphisms_restrictScalars : (restrictScalars J f).ReflectsIsomorphisms :=
   have := restrictScalars_full J f hf
   reflectsIsomorphisms_of_full_and_faithful _
 
+include hf in
 /-- The counit `A' ⊗_A M ⟶ M` of extension of scalars is an isomorphism, restriction of scalars
 along a surjective ring morphism being fully faithful. -/
 lemma isIso_extendScalarsAdjunction_counit : IsIso (extendScalarsAdjunction J f).counit :=
@@ -160,7 +162,7 @@ noncomputable def extendScalarsReductionDatum :
   r := (extendScalarsAdjunction J f).unit
   σ_app_obj := smulNatTrans_app_restrictScalars_obj J ha
   σ_comp_r F := by
-    have h₀ : a • 𝟙 ((restrictScalars J f).obj ((extendScalars J f).obj F)) = 0 :=
+    have h₀ : a • 𝟙 ((extendScalars J f ⋙ restrictScalars J f).obj F) = 0 :=
       smulNatTrans_app_restrictScalars_obj J ha _
     change (a • 𝟙 F) ≫ _ = 0
     rw [Linear.smul_comp, Category.id_comp,

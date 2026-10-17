@@ -74,9 +74,8 @@ over `𝒪_E`. Over `E`, the projection map `PF_{f, K, L} : Rf_! K ⊗ᴸ L ⟶ 
 rationalizations of `K` and `L` is the image under the rationalization functor
 `D_comp(Y_ét, 𝒪_E) ⥤ D_comp(Y_ét, E)` of the integral projection map, both of whose sides are
 derived complete
-(`AlgebraicGeometry.Etale.derivedCompleteIntegral_derivedTensor_rightDerivedLowerShriek`,
-`AlgebraicGeometry.Etale.derivedCompleteIntegral_derivedTensor_leftDerivedUpperStar` and
-`AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedLowerShriek`). It is an
+(`AlgebraicGeometry.Etale.derivedCompleteIntegral_derivedTensor_rightDerivedLowerShriek` and
+`AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedLowerShriek_derivedTensor`). It is an
 isomorphism: the integral projection map is one (`sk-thm-sf-pf-adic`) and the rationalization
 functor carries isomorphisms to isomorphisms. -/
 theorem isIso_fromIntegral_map_projectionMap (f : X ⟶ Y) [HasCompactification f]
@@ -93,9 +92,8 @@ theorem isIso_fromIntegral_map_projectionMap (f : X ⟶ Y) [HasCompactification 
         (P := _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E)
         (X := ⟨_, derivedCompleteIntegral_derivedTensor_rightDerivedLowerShriek l E f K L
           hKc hK hKt hLc hL hLt⟩)
-        (Y := ⟨_, derivedCompleteIntegral_rightDerivedLowerShriek l E f _
-          (derivedCompleteIntegral_derivedTensor_leftDerivedUpperStar l E f K L
-            hKc hK hKt hLc hL hLt)⟩)
+        (Y := ⟨_, derivedCompleteIntegral_rightDerivedLowerShriek_derivedTensor l E f K L
+          hKc hK hKt hLc hL hLt⟩)
         (((projectionMap 𝐌 f).app K).app L))) := by
   refine @Functor.map_isIso _ _ _ _ _ _ _ _ ?_
   exact @isIso_of_fully_faithful _ _ _ _
@@ -107,9 +105,10 @@ with finite reduction.
 
 For `K` and `L` bounded constructible, derived complete for `𝔪_E` and of finite Tor amplitude
 over `𝒪_E`, the reduction modulo `𝔪_Eⁿ` of the integral projection map `PF_{f, K, L}`, the
-representative of the projection map over `E`, is an isomorphism for every `n`: the integral
-projection map is an isomorphism (`sk-thm-sf-pf-adic`) and the reduction
-`- ⊗ᴸ (𝒪_E/𝔪_Eⁿ)_Y` is a functor. -/
+representative of the projection map over `E`, is an isomorphism for every `n`: it is a
+finite-level projection map, invertible by the argument of the finite projection formula
+(`AlgebraicGeometry.Etale.isIso_reductionModIdeal_pow_map_projectionMap_of_boundedConstructible`,
+which needs neither derived completeness nor the Tor amplitude of `L`). -/
 theorem isIso_reductionModIdeal_pow_map_projectionMap (f : X ⟶ Y) [HasCompactification f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌))
@@ -121,8 +120,7 @@ theorem isIso_reductionModIdeal_pow_map_projectionMap (f : X ⟶ Y) [HasCompacti
     (hLt : DerivedCategory.finiteTorAmplitude 𝐌 Y L) (n : ℕ) :
     IsIso ((reductionModIdeal _ Y (PadicAlgCl.maximalIdealShrink l E ^ n)).map
       (((projectionMap 𝐌 f).app K).app L)) :=
-  @Functor.map_isIso _ _ _ _ _ _ _ _
-    (hasProjectionFormula_of_derivedCompleteIntegral l E f K L hKc hK hKt hLc hL hLt)
+  isIso_reductionModIdeal_pow_map_projectionMap_of_boundedConstructible l E f K L hKc hKt hLc n
 
 /-- Blueprint `sk-thm-sf-pf-field`: Projection formula: rational and algebraically closed
 stages.
@@ -150,9 +148,8 @@ theorem hasProjectionFormula_field (f : X ⟶ Y) [HasCompactification f]
         (P := _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E)
         (X := ⟨_, derivedCompleteIntegral_derivedTensor_rightDerivedLowerShriek l E f K L
           hKc hK hKt hLc hL hLt⟩)
-        (Y := ⟨_, derivedCompleteIntegral_rightDerivedLowerShriek l E f _
-          (derivedCompleteIntegral_derivedTensor_leftDerivedUpperStar l E f K L
-            hKc hK hKt hLc hL hLt)⟩)
+        (Y := ⟨_, derivedCompleteIntegral_rightDerivedLowerShriek_derivedTensor l E f K L
+          hKc hK hKt hLc hL hLt⟩)
         (((projectionMap 𝐌 f).app K).app L))) ∧
     ∀ n : ℕ, IsIso ((reductionModIdeal _ Y (PadicAlgCl.maximalIdealShrink l E ^ n)).map
       (((projectionMap 𝐌 f).app K).app L)) :=

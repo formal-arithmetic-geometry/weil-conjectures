@@ -157,6 +157,7 @@ theorem isIso_leftDerivedUpperStar_map_projectionMapOfCompactification {X' X Y' 
       ((L((g)^*[A])).obj L)) := h₃
   exact isIso_of_comp_eq key
 
+omit [HasSmallSiteSheafify A] in
 /-- The projection formula at the first two objects of a distinguished triangle gives it at the
 third. -/
 lemma HasProjectionFormulaOfCompactification.obj₃ {X Y : Scheme.{u}} {f : X ⟶ Y}
@@ -166,11 +167,13 @@ lemma HasProjectionFormulaOfCompactification.obj₃ {X Y : Scheme.{u}} {f : X �
     (h₂ : HasProjectionFormulaOfCompactification A c K T.obj₂) :
     HasProjectionFormulaOfCompactification A c K T.obj₃ := by
   let τ : (-⊗ᴸ-(Y)[A]).obj ((Rf_!(c)[A]).obj K) ⟶
-      L((f)^*[A]) ⋙ (-⊗ᴸ-(X)[A]).obj K ⋙ Rf_!(c)[A] := (projectionMapOfCompactification A c).app K
+      (L((f)^*[A]) ⋙ (-⊗ᴸ-(X)[A]).obj K) ⋙ Rf_!(c)[A] :=
+    (projectionMapOfCompactification A c).app K
   have h₁ : IsIso (τ.app T.obj₁) := h₁
   have h₂ : IsIso (τ.app T.obj₂) := h₂
   exact NatTrans.isIso_app_obj₃_of_isIso_app_obj₁₂ τ hT h₁ h₂
 
+omit [HasSmallSiteSheafify A] in
 /-- **Dévissage of the projection formula in the second variable.** If the projection formula
 holds at `(K, F[0])` for every sheaf `F` with a property `P`, it holds at `(K, L)` for every
 bounded `L` whose cohomology sheaves have the property `P`. -/
@@ -184,8 +187,26 @@ lemma HasProjectionFormulaOfCompactification.of_bounded {X Y : Scheme.{u}} {f : 
     (hLP : ∀ n, P ((_root_.DerivedCategory.homologyFunctor _ n).obj L)) :
     HasProjectionFormulaOfCompactification A c K L := by
   let τ : (-⊗ᴸ-(Y)[A]).obj ((Rf_!(c)[A]).obj K) ⟶
-      L((f)^*[A]) ⋙ (-⊗ᴸ-(X)[A]).obj K ⋙ Rf_!(c)[A] := (projectionMapOfCompactification A c).app K
+      (L((f)^*[A]) ⋙ (-⊗ᴸ-(X)[A]).obj K) ⋙ Rf_!(c)[A] :=
+    (projectionMapOfCompactification A c).app K
   exact _root_.DerivedCategory.prop_of_bounded τ.isoLocus P hP L hL hLP
+
+omit [CommRing Λ] in
+private lemma nsmul_id_eq_zero_of_iso {C : Type*} [Category C] [Preadditive C] {P Q : C}
+    (e : P ≅ Q) {N : ℕ} (h : N • 𝟙 Q = 0) : N • 𝟙 P = 0 := by
+  have h2 : e.hom ≫ (N • 𝟙 Q) ≫ e.inv = N • 𝟙 P := by
+    rw [Preadditive.nsmul_comp, Preadditive.comp_nsmul, Category.id_comp, e.hom_inv_id]
+  rw [← h2, h, zero_comp, comp_zero]
+
+omit [CommRing Λ] [Etale.UpperStarPreservesFlat A] [HasSmallSiteSheafify A] in
+/-- An integer killing `K` kills `K ⊗ᴸ M`. -/
+lemma nsmul_id_derivedTensor_obj_obj {X : Scheme.{u}}
+    (K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) {N : ℕ} (hK : N • 𝟙 K = 0) :
+    N • 𝟙 (((-⊗ᴸ-(X)[A]).obj K).obj M) = 0 := by
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf X.smallEtaleTopology A)
+  refine nsmul_id_eq_zero_of_iso (β_ K M) ?_
+  change N • 𝟙 (((-⊗ᴸ-(X)[A]).obj M).obj K) = 0
+  rw [← CategoryTheory.Functor.map_id, ← Functor.map_nsmul, hK, Functor.map_zero]
 
 end General
 
@@ -305,13 +326,6 @@ theorem hasProjectionFormulaOfCompactification_of_isSepClosed [IsPrincipalIdealR
 
 /-! ### Torsion objects -/
 
-omit [CommRing Λ] in
-private lemma nsmul_id_eq_zero_of_iso {C : Type*} [Category C] [Preadditive C] {P Q : C}
-    (e : P ≅ Q) {N : ℕ} (h : N • 𝟙 Q = 0) : N • 𝟙 P = 0 := by
-  have h2 : e.hom ≫ (N • 𝟙 Q) ≫ e.inv = N • 𝟙 P := by
-    rw [Preadditive.nsmul_comp, Preadditive.comp_nsmul, Category.id_comp, e.hom_inv_id]
-  rw [← h2, h, zero_comp, comp_zero]
-
 /-- **The projection formula for torsion objects.** Let `Λ` be a principal ideal domain and `c`
 a compactification of `f : X ⟶ Y`. If `K` is killed by a nonzero integer and bounded below,
 `K ⊗ᴸ Lf^* L` is bounded below and `L` is bounded constructible, the projection formula holds at
@@ -324,14 +338,7 @@ theorem hasProjectionFormulaOfCompactification_of_nsmul_id_eq_zero [IsPrincipalI
     HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L := by
   have : IsProper c.g := c.isProper
   have : IsOpenImmersion c.i := c.isOpenImmersion
-  have hKL : N • 𝟙 (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj
-      (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)) = 0 := by
-    obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
-      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    refine nsmul_id_eq_zero_of_iso (β_ K (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)) ?_
-    change N • 𝟙 (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj
-      (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)).obj K) = 0
-    rw [← CategoryTheory.Functor.map_id, ← Functor.map_nsmul, hK, Functor.map_zero]
+  have hKL := nsmul_id_derivedTensor_obj_obj _ K (L((f)^*[ModuleCat.{u + 1} Λ]).obj L) hK
   have hi : ∀ T : 𝐃(X), N • 𝟙 T = 0 →
       N • 𝟙 (D((c.i)_!open[ModuleCat.{u + 1} Λ]).obj T) = 0 := fun T hT ↦ by
     rw [← CategoryTheory.Functor.map_id, ← Functor.map_nsmul, hT, Functor.map_zero]
@@ -339,10 +346,12 @@ theorem hasProjectionFormulaOfCompactification_of_nsmul_id_eq_zero [IsPrincipalI
     (fun y ↦ ?_) (fun y ↦ ?_) (fun y ↦ ?_)
   · have := (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i).isGE_mapDerivedCategory_obj
       K n₁
-    exact isIso_derivedBaseChangeMap_app_of_nsmul_id_eq_zero _ _ n₁ hN (hi K hK)
+    exact isIso_derivedBaseChangeMap_app_of_nsmul_id_eq_zero
+      (IsPullback.of_hasPullback c.g (Y.algClosurePoint y)) _ n₁ hN (hi K hK)
   · have := (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i).isGE_mapDerivedCategory_obj
       (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)) n₂
-    exact isIso_derivedBaseChangeMap_app_of_nsmul_id_eq_zero _ _ n₂ hN (hi _ hKL)
+    exact isIso_derivedBaseChangeMap_app_of_nsmul_id_eq_zero
+      (IsPullback.of_hasPullback c.g (Y.algClosurePoint y)) _ n₂ hN (hi _ hKL)
   · exact hasProjectionFormulaOfCompactification_of_isSepClosed _ _
       (boundedConstructible_leftDerivedUpperStar _ _ hL)
 

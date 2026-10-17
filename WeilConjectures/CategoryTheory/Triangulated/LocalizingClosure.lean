@@ -103,20 +103,23 @@ lemma localizingClosure_obj (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]
     [∀ J : Type w, PreservesColimitsOfShape (Discrete J) F] {G' : ObjectProperty D}
     (h : ∀ X, G X → localizingClosure.{w} G' (F.obj X)) {X : C}
     (hX : localizingClosure.{w} G X) : localizingClosure.{w} G' (F.obj X) := by
-  refine localizingClosure_induction G (P := fun X ↦ localizingClosure.{w} G' (F.obj X))
-    ⟨⟨⟨0, isZero_zero C, (localizingClosure.{w} G').prop_of_isZero
-      (F.map_isZero (isZero_zero C))⟩, ⟨fun a ↦ ⟨fun Y hY ↦ ?_⟩⟩,
-      ⟨fun T hT h₁ h₃ ↦ ObjectProperty.le_isoClosure _ _
+  let P : ObjectProperty C := fun X ↦ localizingClosure.{w} G' (F.obj X)
+  have hT : P.IsTriangulated :=
+    { exists_zero := ⟨0, isZero_zero C, (localizingClosure.{w} G').prop_of_isZero
+        (F.map_isZero (isZero_zero C))⟩
+      isStableUnderShiftBy := fun a ↦ ⟨fun Y hY ↦
+        (localizingClosure.{w} G').prop_of_iso ((F.commShiftIso a).app Y).symm
+          ((localizingClosure.{w} G').le_shift a _ hY)⟩
+      ext₂' := fun T hT h₁ h₃ ↦ ObjectProperty.le_isoClosure _ _
         ((localizingClosure.{w} G').ext_of_isTriangulatedClosed₂ _
-          (F.map_distinguished T hT) h₁ h₃)⟩⟩,
-      ⟨fun e hY ↦ (localizingClosure.{w} G').prop_of_iso (F.mapIso e) hY⟩,
+          (F.map_distinguished T hT) h₁ h₃) }
+  refine localizingClosure_induction G (P := P)
+    ⟨hT, ⟨fun e hY ↦ (localizingClosure.{w} G').prop_of_iso (F.mapIso e) hY⟩,
       fun {J} Y c hc hY ↦ ?_⟩ h hX
-  · exact (localizingClosure.{w} G').prop_of_iso ((F.commShiftIso a).app Y).symm
-      ((localizingClosure.{w} G').le_shift a _ hY)
-  · have hc' : IsColimit (Cofan.mk (F.obj c.pt) fun j ↦ F.map (c.inj j) :
-        Cofan fun j ↦ F.obj (Y j)) :=
-      isColimitCofanMkObjOfIsColimit F Y (fun j ↦ c.inj j)
-        (IsColimit.ofIsoColimit hc (Cofan.ext (Iso.refl _) (fun _ ↦ by simp)))
-    exact (isLocalizing_localizingClosure G').prop_of_isColimit hc' hY
+  have hc' : IsColimit (Cofan.mk (F.obj c.pt) fun j ↦ F.map (c.inj j) :
+      Cofan fun j ↦ F.obj (Y j)) :=
+    isColimitCofanMkObjOfIsColimit F Y (fun j ↦ c.inj j)
+      (IsColimit.ofIsoColimit hc (Cofan.ext (Iso.refl _) (fun _ ↦ by simp)))
+  exact (isLocalizing_localizingClosure G').prop_of_isColimit hc' hY
 
 end CategoryTheory.ObjectProperty
