@@ -15,9 +15,50 @@
   "def-pc-scheme",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume first that X is geometrically irreducible and let K/k be a field extension, so that X_K is irreducible. The projection X_K -> X is surjective: it is the base change of Spec K -> Spec k along the structure morphism of X, Spec K -> Spec k is surjective by [lem-pc-field-extension-surjective], and surjectivity is stable under base change by [lem-weil-pbc-surjective-base-change]. If U is a nonempty affine open of X, then U_K = U x_k Spec K is the open subscheme of X_K given by the preimage of U (fibre product with an open subscheme), and it is nonempty because U is nonempty and X_K -> X is surjective. A nonempty open of the irreducible space X_K is irreducible, so U_K is irreducible. The affine identification U = Spec Gamma(U,O_X) is an isomorphism of k-schemes for the induced k-algebra structure, so (Spec Gamma(U,O_X))_K is isomorphic to U_K and is irreducible for every K/k; by the definition this is the geometric irreducibility of Spec Gamma(U,O_X). The same argument applied to any nonempty open V of X proves the moreover clause: V_K is a nonempty open of the irreducible scheme X_K, hence irreducible, for every K/k.",
+   "uses": [
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038G, proof of lemma-geometrically-irreducible-local, the sentence identifying affine schemes with their coordinate algebras and the implications (1) implies (2) and the final assertion, lines 1430--1438"
+   }
+  },
+  {
+   "text": "Conversely, suppose every nonempty affine open U of X has Spec Gamma(U,O_X) geometrically irreducible over k. Take the family of all nonempty affine open subschemes of X; it covers X because affine opens form a basis of a scheme, and it is nonempty because X is irreducible, hence nonempty. For a field extension K/k the preimages U_K of these opens under the projection X_K -> X form an open covering of X_K. The identification U = Spec Gamma(U,O_X) of k-schemes gives U_K = Spec(Gamma(U,O_X) tensor_k K), so every U_K is irreducible by the hypothesis. Since X is irreducible, any two nonempty opens U and V meet; the projection X_K -> X is surjective, by [lem-pc-field-extension-surjective] and [lem-weil-pbc-surjective-base-change] as in step 1, so the preimage (U cap V)_K = U_K cap V_K is nonempty. Thus the base-changed covering consists of pairwise intersecting irreducible opens, indexed by a nonempty family.",
+   "uses": [
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038G, proof of lemma-geometrically-irreducible-local, implications (2) implies (3) and (3) supplies the affine open cover, lines 1434--1438"
+   }
+  },
+  {
+   "text": "A space covered by a nonempty family of irreducible opens U_i that pairwise intersect is irreducible. It is nonempty since some U_i is. If it is the union of two closed sets Z_1 and Z_2, each irreducible U_i lies in Z_1 or in Z_2; say U_i lies in Z_1. For any j, U_i cap U_j is a nonempty open of the irreducible space U_j, hence dense in U_j, and it lies in the closed set Z_1, so U_j lies in Z_1; hence the whole space is Z_1. (Mathlib states this as PreirreducibleSpace.of_isOpenCover, Mathlib/Topology/Sets/OpenCover.lean:123.) Applied to the covering of X_K from step 2, X_K is irreducible. This holds for every field extension K/k, so X is geometrically irreducible by the definition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038G, proof of lemma-geometrically-irreducible-local, implication (4) implies (1), lines 1439--1442"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 038G, lemma-geometrically-irreducible-local, proof of implications (1)⇒(2), (2)⇒(3), (4)⇒(1), and the final assertion"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -69,7 +110,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-generic-point-geometric-irreducibility",
@@ -89,5 +130,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-geometric-irreducibility-affine-local",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 038G in varieties.tex, lines 1405--1442, and the current blueprint ancestry. The statement is unchanged. I split the proof into the forward implication plus the open-subscheme assertion, the converse construction of the base-changed affine cover, and the pairwise-intersection criterion. The final criterion is a one-line specialization of the Mathlib theorem PreirreducibleSpace.of_isOpenCover, so no separate DAG node is needed.",
+  "blueprint": "The three steps realize the affine-local criterion paragraph used in lem-zl-bertini-finite-cover-curve: geometric irreducibility implies irreducibility of every affine base change and every nonempty open; conversely the base-changed affine cover is pairwise intersecting and irreducible, and Mathlib's open-cover criterion gives geometric irreducibility.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N4-8258c64a0",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-8258c64a0 (reviewer sub-agent of L); spot-checked: The statement of lem-zl-geometric-irreducibility-affine-local is correct. It is Stacks 038G (varieties.tex lines 1405-1442), conditions (1)<=>(2) plus the moreover clause, restricted to irreducible X. That restriction is a true special case, it is all the parent lem-zl-generic-point-geometric-irreducibility needs, and it weakens no target. Small cases checked: Spec Q(sqrt2)/Q (both sides false), P^1, the line with doubled origin, Spec k[x]/x^2 (all true); the empty scheme is excluded. The proof is mathematically complete, but it had two C1 citation faults, which I repaired in fixes/dag/nodes/sec-deligne-laumon-general/lem-zl-geometric-irreducibility-affine-local.json. (1) Steps 1-2 used surjectivity of X_K->X, which step 1 needs for U_K nonempty, without citing anything. They now cite the existing Mathlib leaves lem-pc-field-extension-surjective and lem-weil-pbc-surjective-base-change (Tag 01S1), are marked non-elementary, and proof_deps is updated to match. This follows the precedent repair of lem-weil-geometrically-connected-check-after-extension. (2) Step 3 quoted Mathlib PreirreducibleSpace.of_isOpenCover by name with no node. I checked the theorem at Topology/Sets/OpenCover.lean:123 and its use is correct. The step now writes out the three-line topological argument and keeps the Mathlib name only as a pointer. All other fields are unchanged. There are no new nodes and no duplicates: rg for 038G, affine-local and pairwise-cover phrasings found only lem-sc-geometrically-irreducible-product, which is a different result. The blueprint from/via fields are correct, there are no SGA citations, and tool_uses is empty.; 1 file(s) fixed by the reviewer"
  }
 }
